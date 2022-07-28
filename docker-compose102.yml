@@ -1,0 +1,68 @@
+version: '3'
+
+networks:
+    laravel102:
+        driver: bridge
+services:
+    nginx:
+        image: nginx:alpine
+        container_name: laravel102_nginx
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "18002:8001"
+        volumes:
+            - ./src:/var/www/app
+            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - php
+            - mysql
+        networks:
+            - laravel102
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: laravel102_phpmyadmin
+        restart: unless-stopped
+        depends_on:
+            - mysql
+        environment:
+            PMA_HOSTS: mysql
+            MYSQL_ROOT_PASSWORD: mysql
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        ports:
+            - 18102:80
+        networks:
+            - laravel102
+
+    mysql:
+        image: mysql
+        container_name: laravel102_mysql
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "13302:3306"
+        volumes:
+            - ./mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: mysql
+            MYSQL_DATABASE: laravel
+            MYSQL_USER: user
+            MYSQL_PASSWORD: user
+        networks:
+            - laravel102
+
+    php:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: laravel102_php
+        restart: unless-stopped
+        tty: true
+        working_dir: /var/www/app
+        volumes:
+            - ./src:/var/www/app
+        ports:
+            - "19002:9000"
+        networks:
+            - laravel102
