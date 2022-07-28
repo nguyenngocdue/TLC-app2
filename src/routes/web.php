@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", function () {
     return view("welcome");
 });
-
 // Auth::routes([
 //     'reset' => false,
 //     'verify' => false,
@@ -28,6 +27,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/mail', [MailController::class, 'index']);
+Route::get('/mail-test', [MailController::class, 'index']);
 
-Route::post('/mail', [MailController::class, 'sendMail'])->name('send_mail');
+Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');

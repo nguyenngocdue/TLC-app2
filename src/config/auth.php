@@ -60,7 +60,6 @@ return [
     */
 
     "providers" => [
-
         "users" => [
             "driver" => "ldap",
             "model" => LdapRecord\Models\ActiveDirectory\User::class,
