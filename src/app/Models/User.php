@@ -20,8 +20,11 @@ class User extends Authenticatable implements LdapAuthenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = ["name", "email", "password", "first_name", "last_name", "title", "employeeid", "phone"];
-
+    protected $fillable = ["name_rendered","full_name","name_suffix","employeeid","first_name",
+    "last_name","address","phone","featured_image","time_keeping_type","user_type","workplace",
+    "category","date_of_birth","first_date","last_date","title","position_prefix","position_1",
+    "position_2","position_3","position_rendered","role","discipline","department","show_on_beta",
+    "resigned","viewpost_uids","leaf_uids","email"];
     /**
      * The attributes that should be hidden for serialization.
      *
