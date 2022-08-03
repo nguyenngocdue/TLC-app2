@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\UploadFileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", function () {
     return view("welcome");
 });
+Route::get('/phpinfo', function () {
+    return phpinfo();
+});
 // Auth::routes([
 //     'reset' => false,
 //     'verify' => false,
@@ -30,3 +34,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/mail-test', [MailController::class, 'index']);
 
 Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
+
+Route::resource('/uploadfiles', UploadFileController::class);
+
+Route::get('/uploadfiles/{id}/download', [UploadFileController::class, 'download'])->name('uploadfiles.download');

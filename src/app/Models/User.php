@@ -46,4 +46,12 @@ class User extends Authenticatable implements LdapAuthenticatable
     // {
     //     return 'my_guid_column';
     // }
+    public function files()
+    {
+        return $this->hasMany(Media::class);
+    }
+    public function medias()
+    {
+        return $this->morphMany(Media::class, 'object');
+    }
 }

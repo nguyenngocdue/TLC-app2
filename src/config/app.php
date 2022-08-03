@@ -175,6 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
+        Brian2694\Toastr\ToastrServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -190,7 +192,7 @@ return [
 
     "aliases" => Facade::defaultAliases()
         ->merge([
-            // ...
+            'Image' => Intervention\Image\Facades\Image::class
         ])
         ->toArray(),
 ];
