@@ -69,6 +69,7 @@ return [
                 'sync_passwords' => false,
                 'sync_attributes' => [
                     'name_rendered' => 'cn',
+                    'full_name' => 'cn',
                     'email' => 'mail',
                     'first_name' => 'sn',
                     'last_name' => 'givenname',
