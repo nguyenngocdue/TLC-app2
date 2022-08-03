@@ -52,7 +52,7 @@ class UploadFileController extends Controller
                 $extension = pathinfo($fileName, PATHINFO_EXTENSION);
                 $fileNameNormal = pathinfo($fileName, PATHINFO_FILENAME);
                 $dt = Carbon::now('Asia/Ho_Chi_Minh');
-                $path = 'media/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
+                $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
                 $path_image = $path . $fileName;
                 Storage::disk('s3')->put($path_image, file_get_contents($file), 'public');
                 $thumbnailImage = Image::make($file);
