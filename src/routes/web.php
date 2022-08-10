@@ -38,3 +38,6 @@ Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail'
 Route::resource('/uploadfiles', UploadFileController::class);
 
 Route::get('/uploadfiles/{id}/download', [UploadFileController::class, 'download'])->name('uploadfiles.download');
+
+
+Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
