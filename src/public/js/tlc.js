@@ -4,23 +4,8 @@ $.ajaxSetup({
   }
 });
 $(document).ready(function () {
-    $('.btn-uploadfiles').click(function(e){
-      var url = $(this).attr('data-url');
-      $('#modal-upload').modal('show');
-      e.preventDefault();
-    });
-    // $('.btn-dowload').click(function(e){
-    //   var url = $(this).attr('data-url');
-    //   $.ajax({
-    //     type: 'get',
-    //     url: url,
-    //     success: function(response) {
-    //       },
-    //       error: function (jqXHR, textStatus, errorThrown) {
-    //       }
-    //   })
-    // });
     $('.btn-delete').click(function(){
+      console.log('hello');
       var url = $(this).attr('data-url');
       var _this = $(this);
       Swal.fire({

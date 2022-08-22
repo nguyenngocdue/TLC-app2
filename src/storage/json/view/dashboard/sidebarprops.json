@@ -1,0 +1,18 @@
+{
+    "user" :{
+        "title":"User",
+        "icon":"nav-icon fas fa-user",
+        "items" : [
+            {"title": "Manage Prop" , "icon":"fas fa-project-diagram", "href":"dashboard/user/manageprop"},
+            {"title": "Manage Line" , "icon":"fas fa-grip-lines", "href":"dashboard/user/managelineprop"}
+        ]
+    },
+    "media" :{ 
+        "title":"Media",
+        "icon":"nav-icon fas fa-photo-video",
+        "items" : [
+            {"title": "Manage Prop" , "icon":"fas fa-project-diagram", "href":"dashboard/media/manageprop"},
+            {"title": "Manage Line" , "icon":"fas fa-grip-lines", "href":"dashboard/media/managelineprop"}
+        ]
+    }
+}

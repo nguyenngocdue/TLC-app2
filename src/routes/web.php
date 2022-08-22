@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\UploadFileController;
+use App\Http\Controllers\User\ManageLineController;
+use App\Http\Controllers\User\ManageUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,12 +20,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", function () {
-    return view("welcome");
-});
-Route::get('/phpinfo', function () {
-    return phpinfo();
-});
 // Auth::routes([
 //     'reset' => false,
 //     'verify' => false,
@@ -29,15 +27,22 @@ Route::get('/phpinfo', function () {
 // ]);
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/mail-test', [MailController::class, 'index']);
-
-Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
-
-Route::resource('/uploadfiles', UploadFileController::class);
-
-Route::get('/uploadfiles/{id}/download', [UploadFileController::class, 'download'])->name('uploadfiles.download');
-
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::group([
+    'prefix' =>'dashboard'
+],function(){
+    Route::group([
+        'middleware' => 'auth'
+    ],function(){
+        Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
+        Route::resource('user/manageprop',ManageUserController::class);
+        Route::resource('user/managelineprop',ManageLineController::class);
+    });
+});
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+
+// Route::get('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
+// Route::post('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
+// Route::get('/dashboard/user/managelineprop', [ManageLineController::class, 'manageLineProp'])->name('user.manageLineProp');
+
+// s

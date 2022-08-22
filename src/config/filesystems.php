@@ -31,7 +31,10 @@ return [
             "driver" => "local",
             "root" => storage_path("app"),
         ],
-
+        "json" => [
+            "driver" => "local",
+            "root" => storage_path("json/user"),
+        ],
         "public" => [
             "driver" => "local",
             "root" => storage_path("app/public"),
