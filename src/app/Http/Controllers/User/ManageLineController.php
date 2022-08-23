@@ -23,7 +23,7 @@ class ManageLineController extends Controller
     public function index()
     {
         $patch = storage_path() . "/json/user/manageline.json";
-        $patchTableName = storage_path() . "/json/user/tablename.json";
+        $patchTableName = storage_path() . "/json/table/user/tablename.json";
         $tableNames = json_decode(file_get_contents($patchTableName), true);
         if( !file_exists($patch)){
             $columnNames = [];
