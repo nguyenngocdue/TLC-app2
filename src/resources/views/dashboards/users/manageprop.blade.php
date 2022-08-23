@@ -24,7 +24,7 @@
       <div class="card-body table-responsive">
         <form action="{{route('manageprop.store')}}" method="POST">
           @csrf
-            <table id="table_run" class="table table-bordered table-striped text-center">
+            <table id="table_manage" class="table table-bordered table-striped text-center">
                 <thead>
                 <tr>
                 <th>No.</th>
@@ -61,8 +61,8 @@
                               <td  >
                                 <input type="text" class="form-control" name="label[]" value="{{$columnLabels[$key]}}">
                               </td>
-                              <td >
-                                <select name="control[]" class="form-control">
+                              <td class="text-center">
+                                <select name="control[]" class="form-control text-center">
                                     <option value="input" 
                                     @if($columnControls[$key] == 'input') 
                                     selected
@@ -85,11 +85,11 @@
                                     @endif>Table</option>
                                   </select>
                               </td>
-                              <td >
-                                <input type="text" class="form-control" name="col_span[]" value="{{$columnColSpans[$key]}}">
+                              <td  style="width: 80px;">
+                                <input  type="text" class="form-control text-center" name="col_span[]" value="{{$columnColSpans[$key]}}">
                               </td>
                               <td >
-                              <select name="new_line[]" class="form-control">
+                              <select name="new_line[]" class="form-control text-center">
                                 <option value="false"
                                 @if($columnNewLines[$key] == 'false') 
                                     selected
@@ -100,9 +100,8 @@
                                 @endif>True</option>
                               </select>
                               </td>
-                              <td class="text-center" style="width: 50px;
-                              vertical-align: middle;">
-                              @if ($colorLines[$key] == 'remove')
+                              <td >
+                              @if ($colorLines[$key] == 'removed')
                               <button class="btn btn-danger btn-delete" data-url="{{ route('manageprop.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
                               @endif
                               </td>
@@ -110,12 +109,11 @@
                         @endforeach
                   @else
                   @foreach($columnNames as $key => $columnName)
-                        <tr >
+                        <tr class="table-line-new">
                             <td >{{$key + 1}}</td>
                             <td >
                                 <input type="text" name="name[]" class="form-control" value="_{{$columnName}}" readonly>
                             </td>
-                            
                             <td style="width: 100px;
                                 vertical-align: middle;">
                                 <input type="text" name="column_name[]" class="form-control" value="{{$columnName}}" readonly>

@@ -22,35 +22,40 @@
         <h3 class="card-title">Manage Prop:<h4 class="card-title" ></h4></h3>
         </div>
       <div class="card-body table-responsive">
-        <form action="{{route('manageprop.store')}}" method="POST">
+        <form action="{{route('managelineprop.store')}}" method="POST">
           @csrf
-            <table id="table_run" class="table table-bordered table-striped text-center"  >
+            <table id="table_manage" class="table table-bordered table-striped text-center">
                 <thead>
                 <tr>
                 <th>No.</th>
-                <th>Table Name</th>
                 <th>Name</th>
+                <th>Table Name</th>
                 <th>Column Name</th>
                 <th>Column Type</th>
                 <th>Label</th>
                 <th>Control</th>
                 <th>Col span</th>
-                <th>New Line </th>
+                <th>New Line</th>
                 <th>Action</th>
                 </tr>
                 </thead>
                 <tbody  id="tbody-run-live">
                   @if (isset($names))
+                  @php
+                      $number = 1;
+                  @endphp
                         @foreach($names as $key => $name)
-                          <tr >
-                              <td >{{$key + 1}}</td>
+                          <tr class="table-line-{{$colorLines[$key]}}">
+                              <td >{{$number}}</td>
+                              @php
+                                $number++;
+                              @endphp
+                              <td >
+                                <input type="text" class="form-control" name="name[]" value="{{$name}}" readonly>
+                              </td>
                               <td >
                                 <input type="text" class="form-control" name="table_name[]" value="{{$columnTableNames[$key]}}" readonly>
                               </td>
-                              <td >
-                                  <input type="text" class="form-control" name="name[]" value="{{$name}}" readonly>
-                              </td>
-                              
                               <td>
                                   <input type="text" class="form-control" name="column_name[]" value="{{$columnNames[$key]}}" readonly>
                               </td>
@@ -60,9 +65,8 @@
                               <td  >
                                 <input type="text" class="form-control" name="label[]" value="{{$columnLabels[$key]}}">
                               </td>
-                              
-                              <td >
-                                <select name="control[]" class="form-control">
+                              <td class="text-center">
+                                <select name="control[]" class="form-control text-center">
                                     <option value="input" 
                                     @if($columnControls[$key] == 'input') 
                                     selected
@@ -85,37 +89,38 @@
                                     @endif>Table</option>
                                   </select>
                               </td>
-                              <td >
-                                <input type="text" class="form-control" name="col_span[]" value="{{$columnColSpans[$key]}}">
+                              <td  style="width: 80px;">
+                                <input  type="text" class="form-control text-center" name="col_span[]" value="{{$columnColSpans[$key]}}">
                               </td>
                               <td >
-                              <select name="new_line[]" class="form-control">
+                              <select name="new_line[]" class="form-control text-center">
                                 <option value="false"
-                                @if($columnWrapModes[$key] == 'false') 
+                                @if($columnNewLines[$key] == 'false') 
                                     selected
                                 @endif>False</option>
                                 <option value="true"
-                                @if($columnWrapModes[$key] == 'true') 
+                                @if($columnNewLines[$key] == 'true') 
                                     selected
                                 @endif>True</option>
                               </select>
                               </td>
-                              <td class="text-center" style="width: 50px;
-                              vertical-align: middle;">
-                              <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                              <td >
+                              @if ($colorLines[$key] == 'removed')
+                              <button class="btn btn-danger btn-delete" data-url="{{ route('managelineprop.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
+                              @endif
                               </td>
                           </tr> 
                         @endforeach
                   @else
                   @foreach($columnNames as $key => $columnName)
-                        <tr >
+                        <tr class="table-line-new">
                             <td >{{$key + 1}}</td>
-                            <td ><input type="text" name="table_name[]" class="form-control" value="{{$columnTableNames[$key]}}" readonly></td>
-
                             <td >
-                                <input type="text" name="name[]" class="form-control" value="_{{$columnName}}" readonly>
+                              <input type="text" name="name[]" class="form-control" value="{{$columnTableNames[$key]}}|{{$columnName}}" readonly>
                             </td>
-                            
+                            <td>
+                              <input type="text" name="table_name[]" class="form-control" value="{{$columnTableNames[$key]}}" readonly>
+                            </td>
                             <td style="width: 100px;
                                 vertical-align: middle;">
                                 <input type="text" name="column_name[]" class="form-control" value="{{$columnName}}" readonly>
@@ -124,7 +129,7 @@
                                 <input type="text" name="column_type[]" class="form-control" value="{{$columnTypes[$key]}}" readonly>
                             </td>
                             <td  >
-                               <input type="text" name="label[]" class="form-control">
+                               <input type="text" name="label[]" class="form-control" value="{{$columnName}}">
                             </td>
                             
                             <td >
@@ -137,7 +142,7 @@
                                 </select>
                             </td>
                             <td >
-                              <input type="text" name="col_span[]" class="form-control">
+                              <input type="text" name="col_span[]" class="form-control" value="12">
                             </td>
                             <td>
                              <select name="new_line[]" class="form-control">
@@ -145,9 +150,10 @@
                               <option value="true">True</option>
                             </select>
                             </td>
-                            <td class="text-center" style="width: 50px;
-                            vertical-align: middle;">
-                            <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                            <td >
+                              @if (isset($colorLines))
+                                <button class="btn btn-danger btn-delete" data-url="{{ route('manageprop.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
+                              @endif
                             </td>
                         </tr> 
                 @endforeach
@@ -155,15 +161,6 @@
                     
                 </tbody>
                 <tfoot >
-                    {{-- <tr >
-                        <th>Create prop</th>
-                        <th>
-                            <input type="text" class="form-control">
-                        </th>
-                        <th>
-                            <button class="btn btn-success">Create <i class="fas fa-plus"></i></button>
-                        </th>
-                    </tr> --}}
                 </tfoot>
             </table>
             <button class="btn btn-primary" type="submit">Update</button>

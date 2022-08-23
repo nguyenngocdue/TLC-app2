@@ -5,9 +5,9 @@ $.ajaxSetup({
 });
 $(document).ready(function () {
     $('.btn-delete').click(function(){
-      console.log('hello');
       var url = $(this).attr('data-url');
       var _this = $(this);
+      console.log(url);
       Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -22,6 +22,7 @@ $(document).ready(function () {
             type: 'delete',
             url: url,
             success: function(response) {
+              console.log(response);
               Swal.fire(
                 'Deleted!',
                 'Your file has been deleted.',
@@ -36,3 +37,14 @@ $(document).ready(function () {
       })
     })
 })
+$(function () {
+  $('#table_manage').DataTable({
+    "paging": false,
+    "lengthChange": true,
+    "searching": true,
+    "ordering": false,
+    "info": false,
+    "autoWidth": true,
+    "responsive": false,
+  });
+});

@@ -29,7 +29,7 @@ class ManageLineController extends Controller
             $columnNames = [];
             $columnTypes = [];
             $columnTableNames = [];
-            foreach($tableNames as $key =>$tableName ){
+            foreach($tableNames as $key => $tableName ){
                 $columnNameTable = Schema::getColumnListing($tableName);
                 foreach ($columnNameTable as $columnName){
                     $type = Schema::getColumnType($tableName, $columnName);
@@ -42,23 +42,59 @@ class ManageLineController extends Controller
         }
         else{
             $dataManageUser = json_decode(file_get_contents($patch), true);
+            $columnTableNames = [];
             $names = [];
             $columnNames = [];
             $columnTypes = [];
             $columnLabels = [];
             $columnControls = [];
             $columnColSpans = [];
-            $columnWrapModes = [];
+            $columnNewLines = [];
+            $colorLines = [];
             foreach ($dataManageUser as $key => $data){
-                array_push($names,$key);
-                array_push($columnNames,$data[0]);
-                array_push($columnTypes,$data[1]);
-                array_push($columnLabels,$data[2]);
-                array_push($columnControls,$data[3]);
-                array_push($columnColSpans,$data[4]);
-                array_push($columnWrapModes,$data[5]);
+                $names[$key] =$key;
+                $columnTableNames[$key] = $data['table_name'];
+                $columnNames[$key] = $data['column_name'];
+                $columnTypes[$key] = $data['column_type'];
+                $columnLabels[$key] = $data['label'];
+                $columnControls[$key] = $data['control'];
+                $columnColSpans[$key] = $data['col_span'];
+                $columnNewLines[$key] = $data['new_line'];
+                $colorLines[$key] = $data['type_line'];
             }
-            return view('dashboards.users.manageprop')->with(compact('names','columnNames','columnTypes','columnLabels','columnControls','columnColSpans','columnWrapModes'));
+            $globalColumnNames = [];
+            foreach($tableNames as $key =>$tableName ){
+                $columnNameTable = Schema::getColumnListing($tableName);
+                foreach($columnNameTable as $columnName){
+                    $globalColumnNames[$key.'|'.$columnName] = $columnName;
+                }
+            }
+            $diff1 = array_diff_key($columnNames,$globalColumnNames);
+            $diff2 = array_diff_key($globalColumnNames,$columnNames);
+            if(empty($diff1) && empty($diff2)){
+                return view('dashboards.users.managelineprop')->with(compact('columnTableNames','names','columnNames','columnTypes','columnLabels','columnControls','columnColSpans','columnNewLines','colorLines'));
+            }else if (empty($diff1)){
+                foreach($diff2 as $key => $value){
+                    $keyTableName = explode('|' , $key);
+                    $names[$key]=$keyTableName[0].'|'.$value;
+                    $columnTableNames[$key]=$keyTableName[0];
+                    $columnNames[$key] = $value;
+                    $type = Schema::getColumnType($tableNames[$keyTableName[0]], $value);
+                    $columnTypes[$key] =$type;
+                    $columnLabels[$key] =$value;
+                    $columnControls[$key] ="input";
+                    $columnColSpans[$key] = "12";
+                    $columnNewLines[$key] = "false";
+                    $colorLines[$key] = "new";
+                }
+                return view('dashboards.users.managelineprop')->with(compact('columnTableNames','names','columnNames','columnTypes','columnLabels','columnControls','columnColSpans','columnNewLines','colorLines'));
+            }else{
+                foreach($diff1 as $key => $value){
+                    $colorLines[$key] = "removed";
+                }
+                return view('dashboards.users.managelineprop')->with(compact('columnTableNames','names','columnNames','columnTypes','columnLabels','columnControls','columnColSpans','columnNewLines','colorLines'));
+            }
+            return view('dashboards.users.managelineprop')->with(compact('columnTableNames','names','columnNames','columnTypes','columnLabels','columnControls','columnColSpans','columnNewLines','colorLines'));
         }
     }
     public function store(Request $request){
@@ -66,12 +102,14 @@ class ManageLineController extends Controller
         $maganeUser = [];
         foreach ($data['name'] as $key => $name){
             $array = [];
-            array_push($array, $data['column_name'][$key]);
-            array_push($array, $data['column_type'][$key]);
-            array_push($array, $data['label'][$key]);
-            array_push($array, $data['control'][$key]);
-            array_push($array, $data['col_span'][$key]);
-            array_push($array, $data['wrap_mode'][$key]);
+            $array['table_name']= $data['table_name'][$key];
+            $array['column_name']= $data['column_name'][$key];
+            $array['column_type']= $data['column_type'][$key];
+            $array['label']= $data['label'][$key];
+            $array['control']= $data['control'][$key];
+            $array['col_span']= $data['col_span'][$key];
+            $array['new_line']= $data['new_line'][$key];
+            $array['type_line']= "default";
             $maganeUser[$name] = $array;
         }
         $jsonManageUser = json_encode($maganeUser);
@@ -81,6 +119,19 @@ class ManageLineController extends Controller
             return back();
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');
+        }
+    }
+    public function destroy($name){
+        $patch = storage_path() . "/json/user/manageline.json";
+        $dataManageUser = json_decode(file_get_contents($patch), true);
+        unset($dataManageUser[$name]);
+        try {
+            Storage::disk('json')->put('manageline.json',json_encode($dataManageUser));
+            Toastr::success('Save file json successfully', 'Save file json');
+            return response()->json(['message' => 'Successfully'],200);
+        } catch (\Throwable $th) {
+            Toastr::warning('$th', 'Save file json');
+            return response()->json(['message' => 'Failed delete'],404);
         }
     }
 }

@@ -27,11 +27,11 @@
   <link rel="stylesheet" href="{{asset('AdminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
   <!-- Bootstrap4 Duallistbox -->
   <link rel="stylesheet" href="{{asset('AdminLTE/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css')}}">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Theme style -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
   <link rel="stylesheet" href="{{asset('css/tlc.css')}}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -173,7 +173,6 @@ to get the desired effect
 <script src="{{asset('AdminLTE/dist/js/demo.js')}}"></script>
 
 {{-- <script src="{{asset('/AdminLTE/dist/js/pages/dashboard3.js')}}"></script> --}}
-<!-- Bootstrap 4 -->
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('AdminLTE/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 
@@ -202,9 +201,11 @@ to get the desired effect
 <script src="{{asset('AdminLTE/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
 {{-- Toastr --}}
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 {!! Toastr::message() !!}
-<script type="" src="{{asset('js/tlc.js')}}"></script>
+<script type="" src="{{asset('js/tlc2.js')}}"></script>
 </body>
 </html>
 

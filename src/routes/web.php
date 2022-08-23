@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MailController;
-use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\User\ManageLineController;
 use App\Http\Controllers\User\ManageUserController;
 use Illuminate\Support\Facades\Auth;
@@ -41,8 +39,7 @@ Route::group([
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 
+
 // Route::get('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
 // Route::post('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
 // Route::get('/dashboard/user/managelineprop', [ManageLineController::class, 'manageLineProp'])->name('user.manageLineProp');
-
-// s

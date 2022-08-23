@@ -63,9 +63,9 @@ class ManageUserController extends Controller
                     $columnNames['_'.$value] = $value;
                     $type = Schema::getColumnType('users', $value);
                     $columnTypes['_'.$value] =$type;
-                    $columnLabels['_'.$value] =null;
+                    $columnLabels['_'.$value] =$value;
                     $columnControls['_'.$value] ="input";
-                    $columnColSpans['_'.$value] = null;
+                    $columnColSpans['_'.$value] = "12";
                     $columnNewLines['_'.$value] = "false";
                     $colorLines['_'.$value] = "new";
                 }
@@ -102,11 +102,16 @@ class ManageUserController extends Controller
         }
     }
     public function destroy($name){
-        dd($name);
         $patch = storage_path() . "/json/user/manage.json";
         $dataManageUser = json_decode(file_get_contents($patch), true);
-
-        
-
+        unset($dataManageUser[$name]);
+        try {
+            Storage::disk('json')->put('manage.json',json_encode($dataManageUser));
+            Toastr::success('Save file json successfully', 'Save file json');
+            return response()->json(['message' => 'Successfully'],200);
+        } catch (\Throwable $th) {
+            Toastr::warning('$th', 'Save file json');
+            return response()->json(['message' => 'Failed delete'],404);
+        }
     }
 }
