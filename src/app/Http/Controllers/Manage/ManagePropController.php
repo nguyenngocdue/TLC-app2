@@ -24,7 +24,7 @@ abstract class ManagePropController extends Controller
     public function index()
     {
         $type = $this->type;
-        $patch = storage_path() . "/json/$type/props.json";
+        $patch = storage_path() . "/json/entities/$type/props.json";
         if (!file_exists($patch)) {
             $columnNames = Schema::getColumnListing($type . 's');
             $columnTypes = [];
@@ -95,7 +95,7 @@ abstract class ManagePropController extends Controller
         }
         $jsonManageUser = json_encode($maganeUser);
         try {
-            Storage::disk('json')->put("{$this->type}/props.json", $jsonManageUser, 'public');
+            Storage::disk('json')->put("entities/{$this->type}/props.json", $jsonManageUser, 'public');
             Toastr::success('Save file json successfully', 'Save file json');
             return back();
         } catch (\Throwable $th) {
@@ -104,11 +104,11 @@ abstract class ManagePropController extends Controller
     }
     public function destroy($name)
     {
-        $patch = storage_path() . "/json/{$this->type}/props.json";
+        $patch = storage_path() . "/json/entities/{$this->type}/props.json";
         $dataManageUser = json_decode(file_get_contents($patch), true);
         unset($dataManageUser[$name]);
         try {
-            Storage::disk('json')->put("{$this->type}/props.json", json_encode($dataManageUser), 'public');
+            Storage::disk('json')->put("entities/{$this->type}/props.json", json_encode($dataManageUser), 'public');
             Toastr::success('Save file json successfully', 'Save file json');
             return response()->json(['message' => 'Successfully'], 200);
         } catch (\Throwable $th) {

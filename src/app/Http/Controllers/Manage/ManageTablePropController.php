@@ -25,7 +25,7 @@ abstract class ManageTablePropController extends Controller
     public function index()
     {
         $type = $this->type;
-        $patch = storage_path() . "/json/$type/tables.json";
+        $patch = storage_path() . "/json/entities/$type/tables.json";
         $patchTableName = storage_path() . "/json/configs/table/$type/tableName.json";
         $tableNames = json_decode(file_get_contents($patchTableName), true);
         if (!file_exists($patch)) {
@@ -118,7 +118,7 @@ abstract class ManageTablePropController extends Controller
         }
         $jsonManageUser = json_encode($maganeUser);
         try {
-            Storage::disk('json')->put("{$this->type}/tables.json", $jsonManageUser, 'public');
+            Storage::disk('json')->put("entities/{$this->type}/tables.json", $jsonManageUser, 'public');
             Toastr::success('Save file json successfully', 'Save file json');
             return back();
         } catch (\Throwable $th) {
@@ -127,11 +127,11 @@ abstract class ManageTablePropController extends Controller
     }
     public function destroy($name)
     {
-        $patch = storage_path() . "/json/{$this->type}/tables.json";
+        $patch = storage_path() . "/json/entities/{$this->type}/tables.json";
         $dataManageUser = json_decode(file_get_contents($patch), true);
         unset($dataManageUser[$name]);
         try {
-            Storage::disk('json')->put("{$this->type}/tables.json", json_encode($dataManageUser), 'public');
+            Storage::disk('json')->put("entities/{$this->type}/tables.json", json_encode($dataManageUser), 'public');
             Toastr::success('Save file json successfully', 'Save file json');
             return response()->json(['message' => 'Successfully'], 200);
         } catch (\Throwable $th) {
