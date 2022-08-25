@@ -51,13 +51,16 @@
                                 $number++;
                               @endphp
                               <td >
-                                <input type="text" class="form-control" name="name[]" value="{{$name}}" readonly>
+                                {{$name}}
+                                <input type="text" class="form-control" name="name[]" value="{{$name}}" readonly hidden>
                               </td>
                               <td >
-                                <input type="text" class="form-control" name="table_name[]" value="{{$columnTableNames[$key]}}" readonly>
+                                {{$columnTableNames[$key]}}
+                                <input type="text" class="form-control" name="table_name[]" value="{{$columnTableNames[$key]}}" readonly hidden>
                               </td>
                               <td>
-                                  <input type="text" class="form-control" name="column_name[]" value="{{$columnNames[$key]}}" readonly>
+                                {{$columnNames[$key]}}
+                                  <input type="text" class="form-control" name="column_name[]" value="{{$columnNames[$key]}}" readonly hidden>
                               </td>
                               <td  >
                                   <input type="text" class="form-control" name="column_type[]" value="{{$columnTypes[$key]}}" readonly>

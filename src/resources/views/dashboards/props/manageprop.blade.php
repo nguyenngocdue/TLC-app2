@@ -50,13 +50,16 @@
                                 $number++;
                               @endphp
                               <td >
-                                  <input type="text" class="form-control" name="name[]" value="{{$name}}" readonly>
+                                {{$name}}
+                                  <input type="text" class="form-control" name="name[]" value="{{$name}}" readonly hidden>
                               </td>
                               <td>
-                                  <input type="text" class="form-control" name="column_name[]" value="{{$columnNames[$key]}}" readonly>
+                                {{$columnNames[$key]}}
+                                  <input type="text" class="form-control" name="column_name[]" value="{{$columnNames[$key]}}" readonly hidden>
                               </td>
                               <td  >
-                                  <input type="text" class="form-control" name="column_type[]" value="{{$columnTypes[$key]}}" readonly>
+                                {{$columnTypes[$key]}}
+                                  <input type="text" class="form-control" name="column_type[]" value="{{$columnTypes[$key]}}" readonly hidden>
                               </td>
                               <td  >
                                 <input type="text" class="form-control" name="label[]" value="{{$columnLabels[$key]}}">
@@ -112,14 +115,16 @@
                         <tr class="table-line-new">
                             <td >{{$key + 1}}</td>
                             <td >
-                                <input type="text" name="name[]" class="form-control" value="_{{$columnName}}" readonly>
+                              _{{$columnName}}
+                                <input type="text" name="name[]" class="form-control" value="_{{$columnName}}" readonly hidden>
                             </td>
-                            <td style="width: 100px;
-                                vertical-align: middle;">
-                                <input type="text" name="column_name[]" class="form-control" value="{{$columnName}}" readonly>
+                            <td >
+                                {{$columnName}}
+                                <input type="text" name="column_name[]" class="form-control" value="{{$columnName}}" readonly hidden>
                             </td>
                             <td  >
-                                <input type="text" name="column_type[]" class="form-control" value="{{$columnTypes[$key]}}" readonly>
+                              {{$columnTypes[$key]}}
+                                <input type="text" name="column_type[]" class="form-control" value="{{$columnTypes[$key]}}" readonly hidden>
                             </td>
                             <td  >
                                <input type="text" name="label[]" class="form-control" value="{{$columnName}}">
