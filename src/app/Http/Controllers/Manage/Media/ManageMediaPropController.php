@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Manage\Media;
 
 use App\Http\Controllers\Manage\ManagePropController;
 
-class ManageMediaController extends ManagePropController
+class ManageMediaPropController extends ManagePropController
 {
     protected $type = 'media';
-    
 }

@@ -1,0 +1,50 @@
+{
+    "user": {
+        "title": "User",
+        "icon": "nav-icon fas fa-user",
+        "items": [
+            {
+                "title": "Manage Prop",
+                "icon": "fas fa-project-diagram",
+                "href": "dashboard/user/user_manageprop"
+            },
+            {
+                "title": "Manage Line",
+                "icon": "fas fa-grip-lines",
+                "href": "dashboard/user/user_managelineprop"
+            }
+        ]
+    },
+    "media": {
+        "title": "Media",
+        "icon": "nav-icon fas fa-photo-video",
+        "items": [
+            {
+                "title": "Manage Prop",
+                "icon": "fas fa-project-diagram",
+                "href": "dashboard/media/media_manageprop"
+            },
+            {
+                "title": "Manage Line",
+                "icon": "fas fa-grip-lines",
+                "href": "dashboard/media/media_managelineprop"
+            }
+        ]
+    },
+    "post": {
+        "title": "Posts",
+        "icon": "nav-icon fas fa-file-alt",
+        "items": [
+            {
+                "title": "Manage Prop",
+                "icon": "fas fa-project-diagram",
+                "href": "dashboard/post/post_manageprop"
+            },
+            {
+                "title": "Manage Line",
+                "icon": "fas fa-grip-lines",
+                "href": "dashboard/post/post_managelineprop"
+            }
+        ]
+    }
+}

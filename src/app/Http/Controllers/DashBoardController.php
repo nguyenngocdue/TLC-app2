@@ -23,7 +23,7 @@ class DashBoardController extends Controller
      */
     public function index()
     {
-        $sideBar = json_decode(file_get_contents(storage_path() . "/json/view/dashboard/sidebarprops.json"),true);
+        // $sideBar = json_decode(file_get_contents(storage_path() . "/json/view/dashboard/sidebarProps.json"), true);
         // foreach($sideBar as $item){
         //     dd($item);
         //     foreach($item as $a){

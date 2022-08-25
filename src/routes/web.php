@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Manage\Media\ManageMediaController;
-use App\Http\Controllers\Manage\Media\ManageMediaLineController;
-use App\Http\Controllers\Manage\User\ManageUserController;
-use App\Http\Controllers\Manage\User\ManageUserLineController;
+use App\Http\Controllers\Manage\Media\ManageMediaPropController;
+use App\Http\Controllers\Manage\Media\ManageMediaTablePropController;
+use App\Http\Controllers\Manage\Post\ManagePostPropController;
+use App\Http\Controllers\Manage\Post\ManagePostTablePropController;
+use App\Http\Controllers\Manage\User\ManageUserPropController;
+use App\Http\Controllers\Manage\User\ManageUserTablePropController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,16 +31,18 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::group([
-    'prefix' =>'dashboard'
-],function(){
+    'prefix' => 'dashboard'
+], function () {
     Route::group([
         'middleware' => 'auth'
-    ],function(){
+    ], function () {
         Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
-        Route::resource('user/user_manageprop',ManageUserController::class);
-        Route::resource('user/user_managelineprop',ManageUserLineController::class);
-        Route::resource('media/media_manageprop',ManageMediaController::class);
-        Route::resource('media/media_managelineprop',ManageMediaLineController::class);
+        Route::resource('user/user_manageprop', ManageUserPropController::class);
+        Route::resource('user/user_managelineprop', ManageUserTablePropController::class);
+        Route::resource('media/media_manageprop', ManageMediaPropController::class);
+        Route::resource('media/media_managelineprop', ManageMediaTablePropController::class);
+        Route::resource('post/post_manageprop', ManagePostPropController::class);
+        Route::resource('post/post_managelineprop', ManagePostTablePropController::class);
     });
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);

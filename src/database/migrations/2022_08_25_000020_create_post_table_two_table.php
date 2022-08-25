@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('iiiiiiii')->unsigned();
+        Schema::create('post_table_two', function (Blueprint $table) {
+            $table->id();
+            $table->string('a');
+            $table->string('b');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('iiiiiiii');
-        });
+        Schema::dropIfExists('post_table_two');
     }
 };
