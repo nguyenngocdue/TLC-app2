@@ -1,29 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Services;
 
-use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
-class ManageLineController extends Controller
+class ManageLinePropService 
 {
-    public function __construct()
+    public function index($nameManage)
     {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        $patch = storage_path() . "/json/user/manageline.json";
-        $patchTableName = storage_path() . "/json/table/user/tablename.json";
+        $patch = storage_path() . "/json/$nameManage/manageline.json";
+        $patchTableName = storage_path() . "/json/table/$nameManage/tablename.json";
         $tableNames = json_decode(file_get_contents($patchTableName), true);
         if( !file_exists($patch)){
             $columnNames = [];
@@ -38,7 +26,7 @@ class ManageLineController extends Controller
                 }
                 $columnNames = array_merge($columnNames, $columnNameTable);
             }
-        return view('dashboards.users.managelineprop')->with(compact('columnTableNames','columnNames','columnTypes'));
+        return ['columnTableNames' => $columnTableNames,'columnNames' => $columnNames,'columnTypes' => $columnTypes];
         }
         else{
             $dataManageUser = json_decode(file_get_contents($patch), true);
@@ -72,7 +60,9 @@ class ManageLineController extends Controller
             $diff1 = array_diff_key($columnNames,$globalColumnNames);
             $diff2 = array_diff_key($globalColumnNames,$columnNames);
             if(empty($diff1) && empty($diff2)){
-                return view('dashboards.users.managelineprop')->with(compact('columnTableNames','names','columnNames','columnTypes','columnLabels','columnControls','columnColSpans','columnNewLines','colorLines'));
+                return ['columnTableNames'=> $columnTableNames,'names' => $names,'columnNames' => $columnNames,'columnTypes' => $columnTypes
+                ,'columnLabels' => $columnLabels,'columnControls' => $columnControls
+                ,'columnColSpans' => $columnColSpans,'columnNewLines' => $columnNewLines,'colorLines' => $colorLines];
             }else if (empty($diff1)){
                 foreach($diff2 as $key => $value){
                     $keyTableName = explode('|' , $key);
@@ -87,17 +77,23 @@ class ManageLineController extends Controller
                     $columnNewLines[$key] = "false";
                     $colorLines[$key] = "new";
                 }
-                return view('dashboards.users.managelineprop')->with(compact('columnTableNames','names','columnNames','columnTypes','columnLabels','columnControls','columnColSpans','columnNewLines','colorLines'));
+                return ['columnTableNames'=> $columnTableNames,'names' => $names,'columnNames' => $columnNames,'columnTypes' => $columnTypes
+                ,'columnLabels' => $columnLabels,'columnControls' => $columnControls
+                ,'columnColSpans' => $columnColSpans,'columnNewLines' => $columnNewLines,'colorLines' => $colorLines];
             }else{
                 foreach($diff1 as $key => $value){
                     $colorLines[$key] = "removed";
                 }
-                return view('dashboards.users.managelineprop')->with(compact('columnTableNames','names','columnNames','columnTypes','columnLabels','columnControls','columnColSpans','columnNewLines','colorLines'));
+                return ['columnTableNames'=> $columnTableNames,'names' => $names,'columnNames' => $columnNames,'columnTypes' => $columnTypes
+                ,'columnLabels' => $columnLabels,'columnControls' => $columnControls
+                ,'columnColSpans' => $columnColSpans,'columnNewLines' => $columnNewLines,'colorLines' => $colorLines];
             }
-            return view('dashboards.users.managelineprop')->with(compact('columnTableNames','names','columnNames','columnTypes','columnLabels','columnControls','columnColSpans','columnNewLines','colorLines'));
+            return ['columnTableNames'=> $columnTableNames,'names' => $names,'columnNames' => $columnNames,'columnTypes' => $columnTypes
+            ,'columnLabels' => $columnLabels,'columnControls' => $columnControls
+            ,'columnColSpans' => $columnColSpans,'columnNewLines' => $columnNewLines,'colorLines' => $colorLines];
         }
     }
-    public function store(Request $request){
+    public function store($request,$manageName){
         $data = $request->input();
         $maganeUser = [];
         foreach ($data['name'] as $key => $name){
@@ -114,24 +110,21 @@ class ManageLineController extends Controller
         }
         $jsonManageUser = json_encode($maganeUser);
         try {
-            Storage::disk('json')->put('manageline.json',$jsonManageUser);
-            Toastr::success('Save file json successfully', 'Save file json');
-            return back();
+            return Storage::disk('json')->put($manageName.'/manageline.json',$jsonManageUser,'public');
         } catch (\Throwable $th) {
-            Toastr::warning($th, 'Save file json');
+            return false;
         }
     }
-    public function destroy($name){
-        $patch = storage_path() . "/json/user/manageline.json";
+    public function destroy($name , $nameManage){
+        $patch = storage_path() . "/json/$nameManage/manageline.json";
         $dataManageUser = json_decode(file_get_contents($patch), true);
         unset($dataManageUser[$name]);
         try {
-            Storage::disk('json')->put('manageline.json',json_encode($dataManageUser));
+            return Storage::disk('json')->put($nameManage.'/manageline.json',json_encode($dataManageUser),'public');
             Toastr::success('Save file json successfully', 'Save file json');
-            return response()->json(['message' => 'Successfully'],200);
         } catch (\Throwable $th) {
-            Toastr::warning('$th', 'Save file json');
-            return response()->json(['message' => 'Failed delete'],404);
+            return false;
         }
     }
+
 }

@@ -106,32 +106,32 @@ to get the desired effect
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul id="listMenus" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                @php
                    $sideBar = json_decode(file_get_contents(storage_path() . "/json/view/dashboard/sidebarprops.json"),true);
                @endphp
                @foreach ($sideBar as $group)
-               <li class="nav-item has-treeview menu-open">
-                <a href="#" class="nav-link active">
-                  <i class="{{$group['icon']}}"></i>
-                  <p>
-                    {{$group['title']}}
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    @foreach ($group['items'] as $item)
-                    <li class="nav-item">
-                        <a href="{{url($item['href'])}}" class="nav-link">
-                          <i class="{{$item['icon']}}"></i>
-                          <p>{{$item['title']}}</p>
-                        </a>
-                      </li>
-                    @endforeach
-                </ul>
-              </li>
+               <li class="nav-item has-treeview menu-close">
+                  <a href="#" class="nav-link">
+                    <i class="{{$group['icon']}}"></i>
+                    <p>
+                      {{$group['title']}}
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      @foreach ($group['items'] as $item)
+                      <li class="nav-item">
+                          <a href="{{url($item['href'])}}" class="nav-link">
+                            <i class="{{$item['icon']}}"></i>
+                            <p>{{$item['title']}}</p>
+                          </a>
+                        </li>
+                      @endforeach
+                  </ul>
+                </li>
                @endforeach
                
 
@@ -205,7 +205,7 @@ to get the desired effect
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 {!! Toastr::message() !!}
-<script type="" src="{{asset('js/tlc2.js')}}"></script>
+<script type="" src="{{asset('js/tlc.js')}}"></script>
 </body>
 </html>
 

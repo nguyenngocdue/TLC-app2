@@ -22,14 +22,13 @@
         <h3 class="card-title">Manage Prop:<h4 class="card-title" ></h4></h3>
         </div>
       <div class="card-body table-responsive">
-        <form action="{{route('managelineprop.store')}}" method="POST">
+        <form action="{{route($type.'_manageprop.store')}}" method="POST">
           @csrf
             <table id="table_manage" class="table table-bordered table-striped text-center">
                 <thead>
                 <tr>
                 <th>No.</th>
                 <th>Name</th>
-                <th>Table Name</th>
                 <th>Column Name</th>
                 <th>Column Type</th>
                 <th>Label</th>
@@ -51,10 +50,7 @@
                                 $number++;
                               @endphp
                               <td >
-                                <input type="text" class="form-control" name="name[]" value="{{$name}}" readonly>
-                              </td>
-                              <td >
-                                <input type="text" class="form-control" name="table_name[]" value="{{$columnTableNames[$key]}}" readonly>
+                                  <input type="text" class="form-control" name="name[]" value="{{$name}}" readonly>
                               </td>
                               <td>
                                   <input type="text" class="form-control" name="column_name[]" value="{{$columnNames[$key]}}" readonly>
@@ -106,7 +102,7 @@
                               </td>
                               <td >
                               @if ($colorLines[$key] == 'removed')
-                              <button class="btn btn-danger btn-delete" data-url="{{ route('managelineprop.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
+                              <button class="btn btn-danger btn-delete" data-url="{{ route($type.'_manageprop.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
                               @endif
                               </td>
                           </tr> 
@@ -116,10 +112,7 @@
                         <tr class="table-line-new">
                             <td >{{$key + 1}}</td>
                             <td >
-                              <input type="text" name="name[]" class="form-control" value="{{$columnTableNames[$key]}}|{{$columnName}}" readonly>
-                            </td>
-                            <td>
-                              <input type="text" name="table_name[]" class="form-control" value="{{$columnTableNames[$key]}}" readonly>
+                                <input type="text" name="name[]" class="form-control" value="_{{$columnName}}" readonly>
                             </td>
                             <td style="width: 100px;
                                 vertical-align: middle;">

@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\User\ManageLineController;
-use App\Http\Controllers\User\ManageUserController;
+use App\Http\Controllers\Manage\Media\ManageMediaController;
+use App\Http\Controllers\Manage\Media\ManageMediaLineController;
+use App\Http\Controllers\Manage\User\ManageUserController;
+use App\Http\Controllers\Manage\User\ManageUserLineController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,8 +35,10 @@ Route::group([
         'middleware' => 'auth'
     ],function(){
         Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
-        Route::resource('user/manageprop',ManageUserController::class);
-        Route::resource('user/managelineprop',ManageLineController::class);
+        Route::resource('user/user_manageprop',ManageUserController::class);
+        Route::resource('user/user_managelineprop',ManageUserLineController::class);
+        Route::resource('media/media_manageprop',ManageMediaController::class);
+        Route::resource('media/media_managelineprop',ManageMediaLineController::class);
     });
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);

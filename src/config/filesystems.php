@@ -33,7 +33,7 @@ return [
         ],
         "json" => [
             "driver" => "local",
-            "root" => storage_path("json/user"),
+            "root" => storage_path("json"),
         ],
         "public" => [
             "driver" => "local",

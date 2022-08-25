@@ -36,6 +36,14 @@ $(document).ready(function () {
         }
       })
     })
+    $("#listMenus li a").click(function(e){
+      if($(this).hasClass('active')){
+        $(this).removeClass('active');
+      }else
+      {
+        $(this).addClass('active');
+      }
+    })
 })
 $(function () {
   $('#table_manage').DataTable({
