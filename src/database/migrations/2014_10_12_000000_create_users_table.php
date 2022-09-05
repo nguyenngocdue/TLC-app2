@@ -43,7 +43,7 @@ return new class extends Migration
             $table->unsignedBigInteger("department")->nullable();
             $table->boolean("show_on_beta")->default(false);
             $table->boolean("resigned")->nullable();
-            $table->string("viewpost_uids")->nullable();
+            $table->string("viewport_uids")->nullable();
             $table->string("leaf_uids")->nullable();
             $table->timestamp("email_verified_at")->nullable();
             $table->string("password");

@@ -1,4 +1,38 @@
 {
+    "users": {
+        "title": "User Management",
+        "icon": "nav-icon fas fa-user",
+        "items": [
+            {
+                "title": "All Users",
+                "icon": "fas fa-users",
+                "href": "dashboard/user/user_renderprop"
+            }
+        ]
+    },
+    "medias": {
+        "title": "Media Management",
+        "icon": "nav-icon fas fa-photo-video",
+        "items": [
+            {
+                "title": "All Media",
+                "icon": "fas fa-users",
+                "href": "dashboard/media/media_renderprop"
+            }
+        ]
+    },
+    "posts": {
+        "title": "Post Management",
+        "icon": "nav-icon fas fa-photo-video",
+        "items": [
+            {
+                "title": "All Post",
+                "icon": "fas fa-users",
+                "href": "dashboard/post/post_renderprop"
+            }
+        ]
+    },
+    "divider": "GGGG",
     "user": {
         "title": "User",
         "icon": "nav-icon fas fa-user",
@@ -6,12 +40,12 @@
             {
                 "title": "Manage Prop",
                 "icon": "fas fa-project-diagram",
-                "href": "dashboard/user/user_manageprop"
+                "href": "propman/user/user_manageprop"
             },
             {
                 "title": "Manage Line",
                 "icon": "fas fa-grip-lines",
-                "href": "dashboard/user/user_managelineprop"
+                "href": "propman/user/user_managelineprop"
             }
         ]
     },
@@ -22,12 +56,12 @@
             {
                 "title": "Manage Prop",
                 "icon": "fas fa-project-diagram",
-                "href": "dashboard/media/media_manageprop"
+                "href": "propman/media/media_manageprop"
             },
             {
                 "title": "Manage Line",
                 "icon": "fas fa-grip-lines",
-                "href": "dashboard/media/media_managelineprop"
+                "href": "propman/media/media_managelineprop"
             }
         ]
     },
@@ -38,23 +72,12 @@
             {
                 "title": "Manage Prop",
                 "icon": "fas fa-project-diagram",
-                "href": "dashboard/post/post_manageprop"
+                "href": "propman/post/post_manageprop"
             },
             {
                 "title": "Manage Line",
                 "icon": "fas fa-grip-lines",
-                "href": "dashboard/post/post_managelineprop"
-            }
-        ]
-    },
-    "users": {
-        "title": "User Manage",
-        "icon": "nav-icon fas fa-user",
-        "items": [
-            {
-                "title": "All Users",
-                "icon": "fas fa-users",
-                "href": "dashboard/user/user_renderprop"
+                "href": "propman/post/post_managelineprop"
             }
         ]
     }
