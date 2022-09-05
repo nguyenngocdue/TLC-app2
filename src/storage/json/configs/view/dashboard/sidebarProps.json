@@ -46,5 +46,16 @@
                 "href": "dashboard/post/post_managelineprop"
             }
         ]
+    },
+    "users": {
+        "title": "User Manage",
+        "icon": "nav-icon fas fa-user",
+        "items": [
+            {
+                "title": "All Users",
+                "icon": "fas fa-users",
+                "href": "dashboard/user/user_renderprop"
+            }
+        ]
     }
 }

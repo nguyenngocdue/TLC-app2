@@ -47,6 +47,7 @@ return new class extends Migration
             $table->string("leaf_uids")->nullable();
             $table->timestamp("email_verified_at")->nullable();
             $table->string("password");
+            $table->json("settings");
             $table->rememberToken();
             $table->timestamps();
         });

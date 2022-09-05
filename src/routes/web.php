@@ -8,6 +8,8 @@ use App\Http\Controllers\Manage\Post\ManagePostPropController;
 use App\Http\Controllers\Manage\Post\ManagePostTablePropController;
 use App\Http\Controllers\Manage\User\ManageUserPropController;
 use App\Http\Controllers\Manage\User\ManageUserTablePropController;
+use App\Http\Controllers\Render\User\RenderUserController;
+use App\Http\Controllers\Render\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +45,9 @@ Route::group([
         Route::resource('media/media_managelineprop', ManageMediaTablePropController::class);
         Route::resource('post/post_manageprop', ManagePostPropController::class);
         Route::resource('post/post_managelineprop', ManagePostTablePropController::class);
+        Route::resource('user/user_renderprop', RenderUserController::class);
+        Route::resource('user/user_manage', UserController::class);
+
     });
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
