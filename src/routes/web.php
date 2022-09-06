@@ -46,6 +46,7 @@ Route::group([
         Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
         Route::resource('user/user_renderprop', RenderUserController::class);
         Route::resource('user/user_manage', DeleteRenderUserController::class);
+        Route::resource('user/user_edit', DeleteRenderUserController::class);
         Route::resource('media/media_renderprop', RenderMediaController::class);
         Route::resource('media/media_manage', DeleteRenderMediaController::class);
         Route::resource('post/post_renderprop', RenderPostController::class);
