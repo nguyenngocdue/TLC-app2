@@ -8,6 +8,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class RenderController extends Controller
 {
     protected $type = "";
@@ -18,12 +19,12 @@ class RenderController extends Controller
         $search = request('search');
         $users = User::search($search)->query(function($q) {
             $q->orderBy('id', 'asc');
-            })->paginate(10);
+        })->paginate(10);
         $patch = storage_path() . "/json/entities/$type/props.json";
         if(!file_exists($patch)){
         }else{
             $data = json_decode(file_get_contents($patch), true);
-        return view('dashboards.render.prop')->with(compact('data','users','type','userLogin','search'));
+            return view('dashboards.render.prop')->with(compact('data','users','type','userLogin','search'));
         }
     }
     public function update(Request $request , $id)
