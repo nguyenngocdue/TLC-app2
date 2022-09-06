@@ -8,22 +8,13 @@ use App\Http\Controllers\Manage\Post\ManagePostPropController;
 use App\Http\Controllers\Manage\Post\ManagePostTablePropController;
 use App\Http\Controllers\Manage\User\ManageUserPropController;
 use App\Http\Controllers\Manage\User\ManageUserTablePropController;
-<<<<<<< HEAD
-use App\Http\Controllers\Render\Media\DeleteRenderMediaController;
-use App\Http\Controllers\Render\Media\RenderMediaController;
-use App\Http\Controllers\Render\Post\RenderPostController;
-use App\Http\Controllers\Render\Post\DeleteRenderPostController;
-use App\Http\Controllers\Render\User\RenderUserController;
-use App\Http\Controllers\Render\User\DeleteRenderUserController;
-use App\Http\Controllers\UserEdit;
-=======
 use App\Http\Controllers\Render\Media\MediaActionRenderController;
 use App\Http\Controllers\Render\Media\MediaRenderController;
 use App\Http\Controllers\Render\Post\PostActionRenderController;
 use App\Http\Controllers\Render\Post\PostRenderController;
+use App\Http\Controllers\Render\User\EditUserActionRenderController;
 use App\Http\Controllers\Render\User\UserActionRenderController;
 use App\Http\Controllers\Render\User\UserRenderController;
->>>>>>> fe3ae4d22c9e53a2a565e8bf0367e5e32ecc92fd
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -55,7 +46,7 @@ Route::group([
         Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
         Route::resource('user/user_renderprop', UserRenderController::class);
         Route::resource('user/user_manage', UserActionRenderController::class);
-        Route::resource('user/user_edit', UserActionRenderController::class);
+        Route::resource('user/user_edit', EditUserActionRenderController::class);
         Route::resource('media/media_renderprop', MediaRenderController::class);
         Route::resource('media/media_manage', MediaActionRenderController::class);
         Route::resource('post/post_renderprop', PostRenderController::class);
@@ -77,12 +68,9 @@ Route::group([
     });
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> cf09d6fd294ddb0c9d0bec0181c3800aab649690
 // Route::get('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
 // Route::post('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
 // Route::get('/dashboard/user/managelineprop', [ManageLineController::class, 'manageLineProp'])->name('user.manageLineProp');
