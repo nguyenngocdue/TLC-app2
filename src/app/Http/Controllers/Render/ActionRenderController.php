@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Render;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 
-class DeleteRenderController extends Controller
+class ActionRenderController extends Controller
 {
     protected $type = '';
     protected $data ;
