@@ -14,6 +14,7 @@ use App\Http\Controllers\Render\Post\RenderPostController;
 use App\Http\Controllers\Render\Post\DeleteRenderPostController;
 use App\Http\Controllers\Render\User\RenderUserController;
 use App\Http\Controllers\Render\User\DeleteRenderUserController;
+use App\Http\Controllers\UserEdit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -67,7 +68,6 @@ Route::group([
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 
-Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 
 
 // Route::get('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
