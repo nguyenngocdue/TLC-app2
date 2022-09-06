@@ -76,6 +76,7 @@ return [
                     'title' => 'title',
                     'employeeid' => 'employeeid',
                     'phone' => 'mobile',
+                    'settings' => [],
                 ],
                 'sync_existing' => [
                     'email' => 'mail',

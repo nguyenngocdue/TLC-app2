@@ -1,0 +1,12 @@
+.table-line-new {
+    background: #00FF7F!important;
+}
+.table-line-removed {
+    background: #FF6A6A!important;
+}
+.hr-custom {
+    margin-top: 0!important;
+    margin-bottom: 0!important;
+    border: 1px!important;
+    border-bottom: 1px solid #fff!important;
+}

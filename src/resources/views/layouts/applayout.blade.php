@@ -32,7 +32,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
   {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-  <link rel="stylesheet" href="{{asset('css/tlc.css')}}">
+  <link rel="stylesheet" href="{{asset('css/tlc2.css')}}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
@@ -129,7 +129,6 @@ to get the desired effect
       </div>
     </nav>
     <!-- /.navbar -->
-
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
@@ -157,30 +156,33 @@ to get the desired effect
             @php
             $sideBar = json_decode(file_get_contents(storage_path() . "/json/configs/view/dashboard/sidebarProps.json"),true);
             @endphp
-            @foreach ($sideBar as $key=>$group)
-            @if ($key === 'divider')
-            <hr />
-            @else
-            <li class="nav-item has-treeview menu-close">
-              <a href="#" class="nav-link">
-                <i class="{{$group['icon']}}"></i>
-                <p>
-                  {{$group['title']}}
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                @foreach ($group['items'] as $item)
-                <li class="nav-item">
-                  <a href="{{url($item['href'])}}" class="nav-link">
+            @foreach ($sideBar as $group)
+            <li class="nav-header has-treeview">{{$group['title']}}</li>
+              @foreach ($group['items'] as $key => $item)
+                <li class="nav-item has-treeview menu-close">
+                  <a href="#" class="nav-link">
                     <i class="{{$item['icon']}}"></i>
-                    <p>{{$item['title']}}</p>
+                    <p>
+                      {{$item['title']}}
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
                   </a>
+                  <ul class="nav nav-treeview">
+                    @foreach ($item['items'] as $value)
+                    <li class="nav-item">
+                      <a href="{{url($value['href'])}}" class="nav-link">
+                        <i class="{{$value['icon']}}"></i>
+                        <p>{{$value['title']}}</p>
+                      </a>
+                    </li>
+                    @endforeach
+                  </ul>
                 </li>
-                @endforeach
-              </ul>
-            </li>
-            @endif
+              @endforeach
+              @if ($group['divider'] === 'true')
+                <hr class="hr-custom"/>
+              @else
+              @endif
             @endforeach
 
 

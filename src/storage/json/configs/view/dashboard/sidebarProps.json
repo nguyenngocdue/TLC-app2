@@ -1,84 +1,113 @@
-{
-    "users": {
-        "title": "User Management",
-        "icon": "nav-icon fas fa-user",
-        "items": [
-            {
-                "title": "All Users",
-                "icon": "fas fa-users",
-                "href": "dashboard/user/user_renderprop"
-            }
-        ]
-    },
-    "medias": {
-        "title": "Media Management",
-        "icon": "nav-icon fas fa-photo-video",
-        "items": [
-            {
-                "title": "All Media",
-                "icon": "fas fa-users",
-                "href": "dashboard/media/media_renderprop"
-            }
-        ]
-    },
-    "posts": {
-        "title": "Post Management",
-        "icon": "nav-icon fas fa-photo-video",
-        "items": [
-            {
-                "title": "All Post",
-                "icon": "fas fa-users",
-                "href": "dashboard/post/post_renderprop"
-            }
-        ]
-    },
-    "divider": "GGGG",
-    "user": {
-        "title": "User",
-        "icon": "nav-icon fas fa-user",
-        "items": [
-            {
-                "title": "Manage Prop",
-                "icon": "fas fa-project-diagram",
-                "href": "propman/user/user_manageprop"
+{   "admin_zone" : {
+       "title" : "Admin Zone",
+       "items" : 
+        {
+            "users": {
+                "title": "User Management",
+                "icon": "nav-icon fas fa-user",
+                "items": [
+                    {
+                        "title": "All Users",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/user/user_renderprop"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/user/user_addnew"
+                    }
+                ]
             },
-            {
-                "title": "Manage Line",
-                "icon": "fas fa-grip-lines",
-                "href": "propman/user/user_managelineprop"
-            }
-        ]
-    },
-    "media": {
-        "title": "Media",
-        "icon": "nav-icon fas fa-photo-video",
-        "items": [
-            {
-                "title": "Manage Prop",
-                "icon": "fas fa-project-diagram",
-                "href": "propman/media/media_manageprop"
+            "medias": {
+                "title": "Media Management",
+                "icon": "nav-icon fas fa-photo-video",
+                "items": [
+                    {
+                        "title": "All Media",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/media/media_renderprop"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/post/post_addnew"
+                    }
+                ]
             },
-            {
-                "title": "Manage Line",
-                "icon": "fas fa-grip-lines",
-                "href": "propman/media/media_managelineprop"
+            "posts": {
+                "title": "Post Management",
+                "icon": "nav-icon fas fa-file-alt",
+                "items": [
+                    {
+                        "title": "All Post",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/post/post_renderprop"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/post/post_addnew"
+                    }
+                ]
             }
-        ]
+        }
+       ,
+        "divider": "true"
     },
-    "post": {
-        "title": "Posts",
-        "icon": "nav-icon fas fa-file-alt",
-        "items": [
+    "developer_zone":{
+        "title": "Developer Zone",
+        "items":
             {
-                "title": "Manage Prop",
-                "icon": "fas fa-project-diagram",
-                "href": "propman/post/post_manageprop"
-            },
-            {
-                "title": "Manage Line",
-                "icon": "fas fa-grip-lines",
-                "href": "propman/post/post_managelineprop"
+                "user": {
+                    "title": "User",
+                    "icon": "nav-icon fas fa-user",
+                    "items": [
+                        {
+                            "title": "Manage Prop",
+                            "icon": "fas fa-project-diagram",
+                            "href": "propman/user/user_manageprop"
+                        },
+                        {
+                            "title": "Manage Line",
+                            "icon": "fas fa-grip-lines",
+                            "href": "propman/user/user_managelineprop"
+                        }
+                    ]
+                },
+                "media": {
+                    "title": "Media",
+                    "icon": "nav-icon fas fa-photo-video",
+                    "items": [
+                        {
+                            "title": "Manage Prop",
+                            "icon": "fas fa-project-diagram",
+                            "href": "propman/media/media_manageprop"
+                        },
+                        {
+                            "title": "Manage Line",
+                            "icon": "fas fa-grip-lines",
+                            "href": "propman/media/media_managelineprop"
+                        }
+                    ]
+                },
+                "post": {
+                    "title": "Posts",
+                    "icon": "nav-icon fas fa-file-alt",
+                    "items": [
+                        {
+                            "title": "Manage Prop",
+                            "icon": "fas fa-project-diagram",
+                            "href": "propman/post/post_manageprop"
+                        },
+                        {
+                            "title": "Manage Line",
+                            "icon": "fas fa-grip-lines",
+                            "href": "propman/post/post_managelineprop"
+                        }
+                    ]
+                }
             }
-        ]
+        ,
+        "divider": "true"
     }
 }
