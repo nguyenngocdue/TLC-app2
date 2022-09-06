@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Render\Media;
 
 use App\Http\Controllers\Render\RenderController;
 
-class RenderMediaController extends RenderController
+class MediaRenderController extends RenderController
 {
     protected $type = 'media';
 }

@@ -42,6 +42,7 @@
                   @if (isset($names))
                   @php
                       $number = 1;
+                      $controls = ['attachment', 'checkbox', 'datetime', 'dropdown', 'number', 'picker_time', 'picker_date', 'picker_month', 'picker_week', 'picker_quater', 'picker_year', 'radio', 'switch', 'text', 'textarea'];
                   @endphp
                         @foreach($names as $key => $name)
                           <tr class="table-line-{{$colorLines[$key]}}">
@@ -66,27 +67,14 @@
                               </td>
                               <td class="text-center">
                                 <select name="control[]" class="form-control text-center">
-                                    <option value="input" 
-                                    @if($columnControls[$key] == 'input') 
-                                    selected
-                                    @endif>Input</option>
-                                    <option value="checkbox"
-                                    @if ($columnControls[$key] == 'checkbox') 
-                                    selected
-                                    @endif>Checkbox</option>
-                                    <option value="radio" 
-                                    @if ($columnControls[$key] == 'radio') 
-                                    selected
-                                    @endif>Radio</option>
-                                    <option value="date"
-                                    @if ($columnControls[$key] == 'date') 
-                                    selected
-                                    @endif>Date</option>
-                                    <option value="table"
-                                    @if ($columnControls[$key] == 'table') 
-                                    selected
-                                    @endif>Table</option>
-                                  </select>
+                                    @foreach($controls as $control)
+                                      @if($columnControls[$key] === $control)
+                                      <option value="{{$control}}" selected >{{ucfirst($control)}}</option>
+                                      @else
+                                        <option value="{{$control}}">{{ucfirst($control)}}</option>
+                                      @endif
+                                    @endforeach
+                                </select>
                               </td>
                               <td  style="width: 80px;">
                                 <input  type="text" class="form-control text-center" name="col_span[]" value="{{$columnColSpans[$key]}}">
@@ -132,12 +120,10 @@
                             
                             <td >
                               <select name="control[]" class="form-control">
-                                  <option value="input">Input</option>
-                                  <option value="checkbox">Checkbox</option>
-                                  <option value="radio">Radio</option>
-                                  <option value="date">Date</option>
-                                  <option value="table">Table</option>
-                                </select>
+                                @foreach($controls as $control)
+                                <option value="{{$control}}">{{ucfirst($control)}}</option>
+                                @endforeach
+                              </select>
                             </td>
                             <td >
                               <input type="text" name="col_span[]" class="form-control" value="12">
