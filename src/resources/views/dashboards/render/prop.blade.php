@@ -75,6 +75,9 @@
                             <button class="btn btn-danger btn-delete-user" data-url="{{ route($type.'_manage.destroy',$user->id) }}"​ type="button"><i class="fas fa-trash"></i></button>
                         </td>
                         @foreach ($data as $key1 => $value)
+                            @if($value['column_name'] === 'id')
+                              <td><a href="{{route($type.'_edit.update',$user[$value['column_name']])}}">{{$user[$value['column_name']]}}</a></td>
+                            @else
                             <td class="{{$key1.'_td'}}">
                               @if (!is_array($user[$value['column_name']]))
                                 {{$user[$value['column_name']]}}
@@ -83,8 +86,8 @@
                                   json_encode($user[$value['column_name']]) 
                                 @endphp
                               @endif
-                                
                             </td>
+                            @endif
                         @endforeach
                     </tr>
                     @endforeach
