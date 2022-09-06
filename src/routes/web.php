@@ -8,12 +8,12 @@ use App\Http\Controllers\Manage\Post\ManagePostPropController;
 use App\Http\Controllers\Manage\Post\ManagePostTablePropController;
 use App\Http\Controllers\Manage\User\ManageUserPropController;
 use App\Http\Controllers\Manage\User\ManageUserTablePropController;
-use App\Http\Controllers\Render\Media\DeleteRenderMediaController;
-use App\Http\Controllers\Render\Media\RenderMediaController;
-use App\Http\Controllers\Render\Post\RenderPostController;
-use App\Http\Controllers\Render\Post\DeleteRenderPostController;
-use App\Http\Controllers\Render\User\RenderUserController;
-use App\Http\Controllers\Render\User\DeleteRenderUserController;
+use App\Http\Controllers\Render\Media\MediaActionRenderController;
+use App\Http\Controllers\Render\Media\MediaRenderController;
+use App\Http\Controllers\Render\Post\PostActionRenderController;
+use App\Http\Controllers\Render\Post\PostRenderController;
+use App\Http\Controllers\Render\User\UserActionRenderController;
+use App\Http\Controllers\Render\User\UserRenderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -43,12 +43,13 @@ Route::group([
         'middleware' => 'auth'
     ], function () {
         Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
-        Route::resource('user/user_renderprop', RenderUserController::class);
-        Route::resource('user/user_manage', DeleteRenderUserController::class);
-        Route::resource('media/media_renderprop', RenderMediaController::class);
-        Route::resource('media/media_manage', DeleteRenderMediaController::class);
-        Route::resource('post/post_renderprop', RenderPostController::class);
-        Route::resource('post/post_manage', DeleteRenderPostController::class);
+        Route::resource('user/user_renderprop', UserRenderController::class);
+        Route::resource('user/user_manage', UserActionRenderController::class);
+        Route::resource('user/user_edit', UserActionRenderController::class);
+        Route::resource('media/media_renderprop', MediaRenderController::class);
+        Route::resource('media/media_manage', MediaActionRenderController::class);
+        Route::resource('post/post_renderprop', PostRenderController::class);
+        Route::resource('post/post_manage', PostActionRenderController::class);
     });
 });
 Route::group([
