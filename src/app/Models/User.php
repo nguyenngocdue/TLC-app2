@@ -62,6 +62,10 @@ class User extends Authenticatable implements LdapAuthenticatable
     {
         return $this->morphMany(Media::class, 'object');
     }
+    public function posts(){
+
+        return $this->hasMany(Post::class,'owner_id','id');
+    }
     public function toSearchableArray()
     {
         return [

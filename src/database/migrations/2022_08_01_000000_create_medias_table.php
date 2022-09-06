@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('url_media');
             $table->string('url_folder');
             $table->string('filename');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('object_id')->nullable();
             $table->string('object_type')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('owner_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Media extends Model
+class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ["url_folder", "url_thumbnail", "url_media", "filename", "owner_id"];
+    protected $fillable = ["title", "content", "owner_id"];
     protected $primaryKey = 'id';
-    protected $table = 'medias';
+    protected $table = 'posts';
 
     public function user()
     {

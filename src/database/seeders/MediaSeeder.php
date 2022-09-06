@@ -2,22 +2,21 @@
 
 namespace Database\Seeders;
 
+use App\Models\Media;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class MediaSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        $this->call([
-            UserSeeder::class,
-            PostSeeder::class,
-            MediaSeeder::class,
-        ]);
+        Media::factory()
+            ->count(50)
+            ->create();
     }
 }
