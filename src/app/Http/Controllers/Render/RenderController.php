@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class RenderController extends Controller
+abstract class RenderController extends Controller
 {
     protected $type = "";
     public function index() {

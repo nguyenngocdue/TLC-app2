@@ -1,50 +1,38 @@
-@extends('layouts.applayout')
+@extends('layouts.app')
 
 @section('content')
-<div class="content-wrapper">
-  <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-        </div><!-- /.col -->
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="/">Dash Board</a></li>
-            <li class="breadcrumb-item active">Manage Prop</li>
-          </ol>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </div>
-  <div class="content">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Manage Prop:<h4 class="card-title" ></h4></h3>
-        </div>
-      <div class="card-body table-responsive">
-        <form action="{{route($type.'_managerelationship.store')}}" method="POST">
-          @csrf
-            <table id="table_manage" class="table table-bordered table-striped text-center">
+<main class="h-full overflow-y-auto">
+  <div class="container grid px-0 mx-auto">
+      <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+              avatars
+      </h4>
+      <form action="{{route($type.'_managerelationship.store')}}" method="POST">
+        @csrf
+        <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
+          <div class="w-full overflow-x-auto">
+            <table id="table_manage" class="w-full whitespace-no-wrap">
                 <thead>
-                <tr>
-                <th>No.</th>
-                <th>Name</th>
-                <th>Column Name</th>
-                <th>Eloquent</th>
-                <th>Param_1</th>
-                <th>Param_2</th>
-                <th>Param_3</th>
-                <th>Param_4</th>
-                <th>Param_5</th>
-                <th>Param_6</th>
-                <th>Label</th>
-                <th>Control</th>
-                <th>Col span</th>
-                <th>New Line</th>
-                <th>Action</th>
+                <tr
+                  class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                >
+                <th class="px-4 py-3">No.</th>
+                <th class="px-4 py-3">Name</th>
+                <th class="px-4 py-3">Column Name</th>
+                <th class="px-4 py-3">Eloquent</th>
+                <th class="px-4 py-3">Param_1</th>
+                <th class="px-4 py-3">Param_2</th>
+                <th class="px-4 py-3">Param_3</th>
+                <th class="px-4 py-3">Param_4</th>
+                <th class="px-4 py-3">Param_5</th>
+                <th class="px-4 py-3">Param_6</th>
+                <th class="px-4 py-3">Label</th>
+                <th class="px-4 py-3">Control</th>
+                <th class="px-4 py-3">Col span</th>
+                <th class="px-4 py-3">New Line</th>
+                <th class="px-4 py-3">Action</th>
                 </tr>
                 </thead>
-                <tbody  id="tbody-run-live">
+                <tbody  class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                   @php
                     $controls = json_decode(file_get_contents(storage_path() . "/json/configs/view/dashboard/props/controls.json"),true)['controls'];
                   @endphp
@@ -53,45 +41,65 @@
                       $number = 1;
                   @endphp
                         @foreach($names as $key => $name)
-                          <tr class="table-line-{{$colorLines[$key]}}">
-                              <td >{{$number}}</td>
+                          <tr class="text-gray-700 dark:text-gray-400 table-line-{{$colorLines[$key]}}">
+                              <td class="px-4 py-3 text-sm">{{$number}}</td>
                               @php
                                 $number++;
                               @endphp
-                              <td >
+                              <td class="px-4 py-3 text-sm">
                                 {{$name}}
-                                  <input type="text" class="form-control" name="name[]" value="{{$name}}" readonly hidden>
+                                  <input type="text" 
+                                  name="name[]" value="{{$name}}" readonly hidden>
                               </td>
-                              <td>
+                              <td class="px-4 py-3 text-sm">
                                 {{$columnNames[$key]}}
-                                  <input type="text" class="form-control" name="column_name[]" value="{{$columnNames[$key]}}" readonly hidden>
+                                  <input type="text" 
+                                  name="column_name[]" value="{{$columnNames[$key]}}" readonly hidden>
                               </td>
-                              <td style="width: 130px">
-                                <input type="text" name="eloquent[]" class="form-control" value="{{$columnEloquents[$key]}}" readonly >
+                              <td class="px-4 py-3 text-sm">
+                                {{$columnEloquents[$key]}}
+                                <input type="text" name="eloquent[]" 
+                                value="{{$columnEloquents[$key]}}" readonly hidden>
                               </td>
-                              <td style="width: 180px">
-                                <input type="text" name="param_1[]" class="form-control" value="{{$columnParam1s[$key]}}" readonly>
+                              <td class="px-4 py-3 text-sm">
+                                {{$columnParam1s[$key]}}
+                                <input type="text" name="param_1[]" 
+                                value="{{$columnParam1s[$key]}}" readonly hidden>
                               </td>
-                              <td style="width: 120px">
-                                <input type="text" name="param_2[]" class="form-control" value="{{$columnParam2s[$key]}}" readonly>
+                              <td class="px-4 py-3 text-sm">
+                                {{$columnParam2s[$key]}}
+                                <input type="text" name="param_2[]" 
+                                value="{{$columnParam2s[$key]}}" readonly hidden>
                               </td>
-                              <td style="width: 120px">
-                                <input type="text" name="param_3[]" class="form-control" value="{{$columnParam3s[$key]}}" readonly>
+                              <td class="px-4 py-3 text-sm">
+                                {{$columnParam3s[$key]}}
+                                <input type="text" name="param_3[]" 
+                                value="{{$columnParam3s[$key]}}" readonly hidden>
                               </td>
-                              <td style="width: 120px">
-                                <input type="text" name="param_4[]" class="form-control" value="{{$columnParam4s[$key]}}" readonly>
+                              <td class="px-4 py-3 text-sm">
+                                {{$columnParam4s[$key]}}
+                                <input type="text" name="param_4[]" 
+                                value="{{$columnParam4s[$key]}}" readonly hidden>
                               </td>
-                              <td style="width: 120px">
-                                <input type="text" name="param_5[]" class="form-control" value="{{$columnParam5s[$key]}}" readonly>
+                              <td class="px-4 py-3 text-sm">
+                                {{$columnParam5s[$key]}}
+                                <input type="text" name="param_5[]" 
+                                value="{{$columnParam5s[$key]}}" readonly hidden>
                               </td>
-                              <td style="width: 120px">
-                                <input type="text" name="param_6[]" class="form-control" value="{{$columnParam6s[$key]}}" readonly>
+                              <td class="px-4 py-3 text-sm">
+                                {{$columnParam6s[$key]}}
+                                <input type="text" name="param_6[]" 
+                                value="{{$columnParam6s[$key]}}" readonly hidden>
                               </td>
-                              <td style="width: 120px">
-                                <input type="text" class="form-control" name="label[]" value="{{$columnLabels[$key]}}">
+                              <td class="px-4 py-3 text-sm">
+                                <input type="text" 
+                                class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
+                                name="label[]" value="{{$columnLabels[$key]}}">
                               </td>
-                              <td class="text-center">
-                                <select name="control[]" class="form-control text-center">
+                              <td class="px-4 py-3 text-sm">
+                                <select name="control[]" 
+                                class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                                >
                                     @foreach($controls as $control)
                                       @if($columnControls[$key] === $control)
                                       <option value="{{$control}}" selected >{{ucfirst($control)}}</option>
@@ -101,81 +109,107 @@
                                     @endforeach
                                 </select>
                               </td>
-                              <td  style="width: 80px;">
-                                <input  type="text" class="form-control text-center" name="col_span[]" value="{{$columnColSpans[$key]}}">
+                              <td  class="px-4 py-3 text-sm">
+                                <input  type="text" 
+                                class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
+                                name="col_span[]" value="{{$columnColSpans[$key]}}">
                               </td>
-                              <td >
-                              <select name="new_line[]" class="form-control text-center">
-                                <option value="false"
-                                @if($columnNewLines[$key] == 'false') 
-                                    selected
-                                @endif>False</option>
-                                <option value="true"
-                                @if($columnNewLines[$key] == 'true') 
-                                    selected
-                                @endif>True</option>
-                              </select>
+                              <td class="px-4 py-3 text-sm">
+                                <select name="new_line[]" 
+                                class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                                >
+                                  <option value="false"
+                                  @if($columnNewLines[$key] == 'false') 
+                                      selected
+                                  @endif>False</option>
+                                  <option value="true"
+                                  @if($columnNewLines[$key] == 'true') 
+                                      selected
+                                  @endif>True</option>
+                                </select>
                               </td>
-                              <td >
-                              @if ($colorLines[$key] == 'removed')
-                              <button class="btn btn-danger btn-delete" data-url="{{ route($type.'_managerelationship.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
-                              @endif
+                              <td class="px-4 py-3 text-sm">
+                                @if ($colorLines[$key] == 'removed')
+                                <button class="btn btn-danger btn-delete" data-url="{{ route($type.'_managerelationship.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
+                                @endif
                               </td>
                           </tr> 
                         @endforeach
                   @else
                   @foreach($columnNames as $key => $columnName)
                         <tr class="table-line-new">
-                            <td >{{$key + 1}}</td>
-                            <td >
+                            <td class="px-4 py-3 text-sm">{{$key + 1}}</td>
+                            <td class="px-4 py-3 text-sm">
                               _{{$columnName}}
-                                <input type="text" name="name[]" class="form-control" value="_{{$columnName}}" readonly hidden>
+                                <input type="text" name="name[]" 
+                                value="_{{$columnName}}" readonly hidden>
                             </td>
-                            <td >
+                            <td class="px-4 py-3 text-sm">
                                 {{$columnName}}
-                                <input type="text" name="column_name[]" class="form-control" value="{{$columnName}}" readonly hidden>
+                                <input type="text" name="column_name[]" 
+                                value="{{$columnName}}" readonly hidden>
                             </td>
-                            <td style="width: 130px">
-                              <input type="text" name="eloquent[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][0]) ? $columnEloquentParams[$columnName][0] : ""}}" readonly>
+                            <td class="px-4 py-3 text-sm">
+                              {{isset($columnEloquentParams[$columnName][0]) ? $columnEloquentParams[$columnName][0] : ""}}
+                              <input type="text" name="eloquent[]" 
+                              value="{{isset($columnEloquentParams[$columnName][0]) ? $columnEloquentParams[$columnName][0] : ""}}" readonly hidden>
                             </td>
-                            <td style="width: 180px">
-                              <input type="text" name="param_1[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][1]) ? $columnEloquentParams[$columnName][1] : ""}}" readonly>
+                            <td class="px-4 py-3 text-sm">
+                              {{isset($columnEloquentParams[$columnName][1]) ? $columnEloquentParams[$columnName][1] : ""}}
+                              <input type="text" name="param_1[]" 
+                              value="{{isset($columnEloquentParams[$columnName][1]) ? $columnEloquentParams[$columnName][1] : ""}}" readonly hidden>
                             </td>
-                            <td style="width: 120px">
-                              <input type="text" name="param_2[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][2]) ? $columnEloquentParams[$columnName][2] : ""}}" readonly>
+                            <td class="px-4 py-3 text-sm">
+                              {{isset($columnEloquentParams[$columnName][2]) ? $columnEloquentParams[$columnName][2] : ""}}
+                              <input type="text" name="param_2[]" 
+                              value="{{isset($columnEloquentParams[$columnName][2]) ? $columnEloquentParams[$columnName][2] : ""}}" readonly hidden>
                             </td>
-                            <td style="width: 120px">
-                              <input type="text" name="param_3[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][3]) ? $columnEloquentParams[$columnName][3] : ""}}" readonly>
+                            <td class="px-4 py-3 text-sm">
+                              {{isset($columnEloquentParams[$columnName][3]) ? $columnEloquentParams[$columnName][3] : ""}}
+                              <input type="text" name="param_3[]" 
+                              value="{{isset($columnEloquentParams[$columnName][3]) ? $columnEloquentParams[$columnName][3] : ""}}" readonly hidden>
                             </td>
-                            <td style="width: 120px">
-                              <input type="text" name="param_4[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][4]) ? $columnEloquentParams[$columnName][4] : ""}}" readonly>
+                            <td class="px-4 py-3 text-sm">
+                              {{isset($columnEloquentParams[$columnName][4]) ? $columnEloquentParams[$columnName][4] : ""}}
+                              <input type="text" name="param_4[]" 
+                              value="{{isset($columnEloquentParams[$columnName][4]) ? $columnEloquentParams[$columnName][4] : ""}}" readonly hidden>
                             </td>
-                            <td style="width: 120px">
-                              <input type="text" name="param_5[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][5]) ? $columnEloquentParams[$columnName][5] : ""}}" readonly>
+                            <td class="px-4 py-3 text-sm">
+                              {{isset($columnEloquentParams[$columnName][5]) ? $columnEloquentParams[$columnName][5] : ""}}
+                              <input type="text" name="param_5[]" 
+                              value="{{isset($columnEloquentParams[$columnName][5]) ? $columnEloquentParams[$columnName][5] : ""}}" readonly hidden>
                             </td>
-                            <td style="width: 120px">
-                              <input type="text" name="param_6[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][6]) ? $columnEloquentParams[$columnName][6] : ""}}" readonly>
+                            <td class="px-4 py-3 text-sm">
+                              {{isset($columnEloquentParams[$columnName][6]) ? $columnEloquentParams[$columnName][6] : ""}}
+                              <input type="text" name="param_6[]" 
+                              value="{{isset($columnEloquentParams[$columnName][6]) ? $columnEloquentParams[$columnName][6] : ""}}" readonly hidden>
                             </td>
-                            <td style="width: 120px">
-                               <input type="text" name="label[]" class="form-control" value="{{ucfirst($columnName)}}" >
+                            <td class="px-4 py-3 text-sm">
+                              <input type="text" name="label[]"
+                              class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
+                              value="{{ucfirst($columnName)}}" >
                             </td>
-                            <td >
-                              <select name="control[]" class="form-control">
+                            <td class="px-4 py-3 text-sm">
+                              <select name="control[]" 
+                              class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1">
                                 @foreach($controls as $control)
                                 <option value="{{$control}}">{{ucfirst($control)}}</option>
                                 @endforeach
                               </select>
                             </td>
-                            <td style="width: 80px;">
-                              <input type="text" name="col_span[]" class="form-control" value="12">
+                            <td class="px-4 py-3 text-sm">
+                              <input type="text" name="col_span[]" 
+                              class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
+                              value="12">
                             </td>
-                            <td>
-                             <select name="new_line[]" class="form-control">
-                               <option value="false">False</option>
-                              <option value="true">True</option>
-                            </select>
+                            <td class="px-4 py-3 text-sm">
+                              <select name="new_line[]" 
+                              class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1">
+                                <option value="false">False</option>
+                                <option value="true">True</option>
+                              </select>
                             </td>
-                            <td >
+                            <td class="px-4 py-3 text-sm">
                               @if (isset($colorLines))
                                 <button class="btn btn-danger btn-delete" data-url="{{ route($type.'_managerelationship.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
                               @endif
@@ -188,12 +222,11 @@
                 <tfoot >
                 </tfoot>
             </table>
-            <button class="btn btn-primary" type="submit">Update</button>
-        </form>
+          </div>
+          <button class="mt-2 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-emerald-500 border border-transparent rounded-lg active:bg-emerald-600 hover:bg-emerald-200 focus:outline-none focus:shadow-outline-purple" type="submit">Update</button>
+        </div>  
+      </form>  
         
-      </div>
-      <!-- /.card-body -->
-    </div>
   </div>
-</div>
+</main>
 @endsection
