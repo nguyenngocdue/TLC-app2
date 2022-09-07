@@ -1,0 +1,19 @@
+{
+    "controls": [
+        "attachment",
+        "checkbox",
+        "datetime",
+        "dropdown",
+        "number",
+        "picker_time",
+        "picker_date",
+        "picker_month",
+        "picker_week",
+        "picker_quater",
+        "picker_year",
+        "radio",
+        "switch",
+        "text",
+        "textarea"
+    ]
+}

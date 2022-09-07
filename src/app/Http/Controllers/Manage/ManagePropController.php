@@ -24,8 +24,8 @@ abstract class ManagePropController extends Controller
     public function index()
     {
         $type = $this->type;
-        $patch = storage_path() . "/json/entities/$type/props.json";
-        if (!file_exists($patch)) {
+        $path = storage_path() . "/json/entities/$type/props.json";
+        if (!file_exists($path)) {
             $columnNames = Schema::getColumnListing($type . 's');
             $columnTypes = [];
             foreach ($columnNames as $columnName) {
@@ -34,7 +34,7 @@ abstract class ManagePropController extends Controller
             }
             return view('dashboards.props.manageprop')->with(compact('type', 'columnNames', 'columnTypes'));
         } else {
-            $dataManageUser = json_decode(file_get_contents($patch), true);
+            $dataManageUser = json_decode(file_get_contents($path), true);
             $names = [];
             $columnNames = [];
             $columnTypes = [];
@@ -104,8 +104,8 @@ abstract class ManagePropController extends Controller
     }
     public function destroy($name)
     {
-        $patch = storage_path() . "/json/entities/{$this->type}/props.json";
-        $dataManageUser = json_decode(file_get_contents($patch), true);
+        $path = storage_path() . "/json/entities/{$this->type}/props.json";
+        $dataManageUser = json_decode(file_get_contents($path), true);
         unset($dataManageUser[$name]);
         try {
             Storage::disk('json')->put("entities/{$this->type}/props.json", json_encode($dataManageUser), 'public');

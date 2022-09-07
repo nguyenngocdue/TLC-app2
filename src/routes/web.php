@@ -3,10 +3,13 @@
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Manage\Media\ManageMediaPropController;
+use App\Http\Controllers\Manage\Media\ManageMediaRelationshipController;
 use App\Http\Controllers\Manage\Media\ManageMediaTablePropController;
 use App\Http\Controllers\Manage\Post\ManagePostPropController;
+use App\Http\Controllers\Manage\Post\ManagePostRelationshipController;
 use App\Http\Controllers\Manage\Post\ManagePostTablePropController;
 use App\Http\Controllers\Manage\User\ManageUserPropController;
+use App\Http\Controllers\Manage\User\ManageUserRelationshipController;
 use App\Http\Controllers\Manage\User\ManageUserTablePropController;
 use App\Http\Controllers\Render\Media\MediaActionRenderController;
 use App\Http\Controllers\Render\Media\MediaRenderController;
@@ -60,10 +63,14 @@ Route::group([
     ], function () {
         Route::resource('user/user_manageprop', ManageUserPropController::class);
         Route::resource('user/user_managelineprop', ManageUserTablePropController::class);
+        Route::resource('user/user_managerelationship', ManageUserRelationshipController::class);
         Route::resource('media/media_manageprop', ManageMediaPropController::class);
         Route::resource('media/media_managelineprop', ManageMediaTablePropController::class);
+        Route::resource('media/media_managerelationship', ManageMediaRelationshipController::class);
         Route::resource('post/post_manageprop', ManagePostPropController::class);
         Route::resource('post/post_managelineprop', ManagePostTablePropController::class);
+        Route::resource('post/post_managerelationship', ManagePostRelationshipController::class);
+
     });
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);

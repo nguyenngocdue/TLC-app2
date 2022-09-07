@@ -22,7 +22,7 @@
         <h3 class="card-title">Manage Prop:<h4 class="card-title" ></h4></h3>
         </div>
       <div class="card-body table-responsive">
-        <form action="{{route($type.'_manageprop.store')}}" method="POST">
+        <form action="{{route($type.'_managerelationship.store')}}" method="POST">
           @csrf
             <table id="table_manage" class="table table-bordered table-striped text-center">
                 <thead>
@@ -30,7 +30,13 @@
                 <th>No.</th>
                 <th>Name</th>
                 <th>Column Name</th>
-                <th>Column Type</th>
+                <th>Eloquent</th>
+                <th>Param_1</th>
+                <th>Param_2</th>
+                <th>Param_3</th>
+                <th>Param_4</th>
+                <th>Param_5</th>
+                <th>Param_6</th>
                 <th>Label</th>
                 <th>Control</th>
                 <th>Col span</th>
@@ -60,11 +66,28 @@
                                 {{$columnNames[$key]}}
                                   <input type="text" class="form-control" name="column_name[]" value="{{$columnNames[$key]}}" readonly hidden>
                               </td>
-                              <td  >
-                                {{$columnTypes[$key]}}
-                                  <input type="text" class="form-control" name="column_type[]" value="{{$columnTypes[$key]}}" readonly hidden>
+                              <td style="width: 130px">
+                                <input type="text" name="eloquent[]" class="form-control" value="{{$columnEloquents[$key]}}" readonly >
                               </td>
-                              <td  >
+                              <td style="width: 180px">
+                                <input type="text" name="param_1[]" class="form-control" value="{{$columnParam1s[$key]}}" readonly>
+                              </td>
+                              <td style="width: 120px">
+                                <input type="text" name="param_2[]" class="form-control" value="{{$columnParam2s[$key]}}" readonly>
+                              </td>
+                              <td style="width: 120px">
+                                <input type="text" name="param_3[]" class="form-control" value="{{$columnParam3s[$key]}}" readonly>
+                              </td>
+                              <td style="width: 120px">
+                                <input type="text" name="param_4[]" class="form-control" value="{{$columnParam4s[$key]}}" readonly>
+                              </td>
+                              <td style="width: 120px">
+                                <input type="text" name="param_5[]" class="form-control" value="{{$columnParam5s[$key]}}" readonly>
+                              </td>
+                              <td style="width: 120px">
+                                <input type="text" name="param_6[]" class="form-control" value="{{$columnParam6s[$key]}}" readonly>
+                              </td>
+                              <td style="width: 120px">
                                 <input type="text" class="form-control" name="label[]" value="{{$columnLabels[$key]}}">
                               </td>
                               <td class="text-center">
@@ -95,7 +118,7 @@
                               </td>
                               <td >
                               @if ($colorLines[$key] == 'removed')
-                              <button class="btn btn-danger btn-delete" data-url="{{ route($type.'_manageprop.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
+                              <button class="btn btn-danger btn-delete" data-url="{{ route($type.'_managerelationship.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
                               @endif
                               </td>
                           </tr> 
@@ -112,14 +135,30 @@
                                 {{$columnName}}
                                 <input type="text" name="column_name[]" class="form-control" value="{{$columnName}}" readonly hidden>
                             </td>
-                            <td  >
-                              {{$columnTypes[$key]}}
-                                <input type="text" name="column_type[]" class="form-control" value="{{$columnTypes[$key]}}" readonly hidden>
+                            <td style="width: 130px">
+                              <input type="text" name="eloquent[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][0]) ? $columnEloquentParams[$columnName][0] : ""}}" readonly>
                             </td>
-                            <td  >
-                               <input type="text" name="label[]" class="form-control" value="{{$columnName}}">
+                            <td style="width: 180px">
+                              <input type="text" name="param_1[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][1]) ? $columnEloquentParams[$columnName][1] : ""}}" readonly>
                             </td>
-                            
+                            <td style="width: 120px">
+                              <input type="text" name="param_2[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][2]) ? $columnEloquentParams[$columnName][2] : ""}}" readonly>
+                            </td>
+                            <td style="width: 120px">
+                              <input type="text" name="param_3[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][3]) ? $columnEloquentParams[$columnName][3] : ""}}" readonly>
+                            </td>
+                            <td style="width: 120px">
+                              <input type="text" name="param_4[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][4]) ? $columnEloquentParams[$columnName][4] : ""}}" readonly>
+                            </td>
+                            <td style="width: 120px">
+                              <input type="text" name="param_5[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][5]) ? $columnEloquentParams[$columnName][5] : ""}}" readonly>
+                            </td>
+                            <td style="width: 120px">
+                              <input type="text" name="param_6[]" class="form-control" value="{{isset($columnEloquentParams[$columnName][6]) ? $columnEloquentParams[$columnName][6] : ""}}" readonly>
+                            </td>
+                            <td style="width: 120px">
+                               <input type="text" name="label[]" class="form-control" value="{{ucfirst($columnName)}}" >
+                            </td>
                             <td >
                               <select name="control[]" class="form-control">
                                 @foreach($controls as $control)
@@ -127,7 +166,7 @@
                                 @endforeach
                               </select>
                             </td>
-                            <td >
+                            <td style="width: 80px;">
                               <input type="text" name="col_span[]" class="form-control" value="12">
                             </td>
                             <td>
@@ -138,7 +177,7 @@
                             </td>
                             <td >
                               @if (isset($colorLines))
-                                <button class="btn btn-danger btn-delete" data-url="{{ route('manageprop.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-danger btn-delete" data-url="{{ route($type.'_managerelationship.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
                               @endif
                             </td>
                         </tr> 

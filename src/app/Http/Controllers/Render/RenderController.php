@@ -19,10 +19,10 @@ class RenderController extends Controller
         $users = User::search($search)->query(function($q) {
             $q->orderBy('id', 'asc');
             })->paginate(10);
-        $patch = storage_path() . "/json/entities/$type/props.json";
-        if(!file_exists($patch)){
+        $path = storage_path() . "/json/entities/$type/props.json";
+        if(!file_exists($path)){
         }else{
-            $data = json_decode(file_get_contents($patch), true);
+            $data = json_decode(file_get_contents($path), true);
         return view('dashboards.render.prop')->with(compact('data','users','type','userLogin','search'));
         }
     }

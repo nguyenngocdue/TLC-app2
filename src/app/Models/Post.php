@@ -12,12 +12,19 @@ class Post extends Model
     protected $primaryKey = 'id';
     protected $table = 'posts';
 
+
+    public $eloquentParams = [
+        "user" => ['belongsTo' , User::class],
+        "object" => ['morphTo']
+    ];
     public function user()
     {
-        return $this->belongsTo(User::class);
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1]);
     }
     public function object()
     {
-        return $this->morphTo();
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}();
     }
 }

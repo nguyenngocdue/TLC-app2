@@ -39,10 +39,12 @@
                 </tr>
                 </thead>
                 <tbody  id="tbody-run-live">
+                  @php
+                    $controls = json_decode(file_get_contents(storage_path() . "/json/configs/view/dashboard/props/controls.json"),true)['controls'];
+                  @endphp
                   @if (isset($names))
                   @php
                       $number = 1;
-                      $controls = ['attachment', 'checkbox', 'datetime', 'dropdown', 'number', 'picker_time', 'picker_date', 'picker_month', 'picker_week', 'picker_quater', 'picker_year', 'radio', 'switch', 'text', 'textarea'];
                   @endphp
                         @foreach($names as $key => $name)
                           <tr class="table-line-{{$colorLines[$key]}}">
@@ -119,7 +121,7 @@
                                 <input type="text" name="column_type[]" class="form-control" value="{{$columnTypes[$key]}}" readonly>
                             </td>
                             <td  >
-                               <input type="text" name="label[]" class="form-control" value="{{$columnName}}">
+                               <input type="text" name="label[]" class="form-control" value="{{ucfirst($columnName)}}">
                             </td>
                             
                             <td >

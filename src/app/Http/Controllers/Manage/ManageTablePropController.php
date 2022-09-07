@@ -25,10 +25,10 @@ abstract class ManageTablePropController extends Controller
     public function index()
     {
         $type = $this->type;
-        $patch = storage_path() . "/json/entities/$type/tables.json";
-        $patchTableName = storage_path() . "/json/configs/table/$type/tableName.json";
-        $tableNames = json_decode(file_get_contents($patchTableName), true);
-        if (!file_exists($patch)) {
+        $path = storage_path() . "/json/entities/$type/tables.json";
+        $pathTableName = storage_path() . "/json/configs/table/$type/tableName.json";
+        $tableNames = json_decode(file_get_contents($pathTableName), true);
+        if (!file_exists($path)) {
             $columnNames = [];
             $columnTypes = [];
             $columnTableNames = [];
@@ -44,7 +44,7 @@ abstract class ManageTablePropController extends Controller
             $type = $this->type;
             return view('dashboards.props.managelineprop')->with(compact('type', 'columnTableNames', 'columnNames', 'columnTypes'));
         } else {
-            $dataManageUser = json_decode(file_get_contents($patch), true);
+            $dataManageUser = json_decode(file_get_contents($path), true);
             $columnTableNames = [];
             $names = [];
             $columnNames = [];
@@ -127,8 +127,8 @@ abstract class ManageTablePropController extends Controller
     }
     public function destroy($name)
     {
-        $patch = storage_path() . "/json/entities/{$this->type}/tables.json";
-        $dataManageUser = json_decode(file_get_contents($patch), true);
+        $path = storage_path() . "/json/entities/{$this->type}/tables.json";
+        $dataManageUser = json_decode(file_get_contents($path), true);
         unset($dataManageUser[$name]);
         try {
             Storage::disk('json')->put("entities/{$this->type}/tables.json", json_encode($dataManageUser), 'public');
