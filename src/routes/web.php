@@ -15,6 +15,7 @@ use App\Http\Controllers\Render\Media\MediaActionRenderController;
 use App\Http\Controllers\Render\Media\MediaRenderController;
 use App\Http\Controllers\Render\Post\PostActionRenderController;
 use App\Http\Controllers\Render\Post\PostRenderController;
+use App\Http\Controllers\Render\User\EditUserActionRenderController;
 use App\Http\Controllers\Render\User\UserActionRenderController;
 use App\Http\Controllers\Render\User\UserRenderController;
 use Illuminate\Support\Facades\Auth;
@@ -48,7 +49,7 @@ Route::group([
         Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
         Route::resource('user/user_renderprop', UserRenderController::class);
         Route::resource('user/user_manage', UserActionRenderController::class);
-        Route::resource('user/user_edit', UserActionRenderController::class);
+        Route::resource('user/user_edit', EditUserActionRenderController::class);
         Route::resource('media/media_renderprop', MediaRenderController::class);
         Route::resource('media/media_manage', MediaActionRenderController::class);
         Route::resource('post/post_renderprop', PostRenderController::class);
@@ -74,6 +75,9 @@ Route::group([
     });
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+
+
+
 // Route::get('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
 // Route::post('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
 // Route::get('/dashboard/user/managelineprop', [ManageLineController::class, 'manageLineProp'])->name('user.manageLineProp');
