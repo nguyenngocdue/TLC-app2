@@ -12,9 +12,10 @@ use App\Http\Controllers\Render\Media\MediaActionRenderController;
 use App\Http\Controllers\Render\Media\MediaRenderController;
 use App\Http\Controllers\Render\Post\PostActionRenderController;
 use App\Http\Controllers\Render\Post\PostRenderController;
-use App\Http\Controllers\Render\User\EditUserActionRenderController;
+use App\Http\Controllers\Render\User\UserEditController;
 use App\Http\Controllers\Render\User\UserActionRenderController;
 use App\Http\Controllers\Render\User\UserRenderController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,11 +47,12 @@ Route::group([
         Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
         Route::resource('user/user_renderprop', UserRenderController::class);
         Route::resource('user/user_manage', UserActionRenderController::class);
-        Route::resource('user/user_edit', EditUserActionRenderController::class);
+        Route::resource('user/user_edit', UserEditController::class);
         Route::resource('media/media_renderprop', MediaRenderController::class);
         Route::resource('media/media_manage', MediaActionRenderController::class);
         Route::resource('post/post_renderprop', PostRenderController::class);
         Route::resource('post/post_manage', PostActionRenderController::class);
+        Route::resource('test', TestController::class);
     });
 });
 Route::group([

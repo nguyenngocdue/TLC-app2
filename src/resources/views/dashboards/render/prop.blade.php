@@ -76,7 +76,6 @@
                         </td>
                         @foreach ($data as $key1 => $value)
                             @if($value['column_name'] === 'id')
-                            {{-- {{dd($type.'_edit.update')}} --}}
                             <td><a href="{{route($type.'_edit.update',$user[$value['column_name']])}}">{{$user[$value['column_name']]}}</a></td>
                             @else
                             <td class="{{$key1.'_td'}}">
