@@ -74,6 +74,9 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1],$p[2],$p[3]);
     }
+    public function get(){
+        
+    }
     public function toSearchableArray()
     {
         return [
