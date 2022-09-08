@@ -13,7 +13,7 @@
         "column_type": "string",
         "label": "email",
         "control": "datetime",
-        "col_span": "12",
+        "col_span": "6",
         "new_line": "false",
         "type_line": "default"
     },
@@ -22,7 +22,7 @@
         "column_type": "string",
         "label": "name_rendered",
         "control": "dropdown",
-        "col_span": "12",
+        "col_span": "6",
         "new_line": "false",
         "type_line": "default"
     },
@@ -40,7 +40,7 @@
         "column_type": "string",
         "label": "name_suffix",
         "control": "attachment",
-        "col_span": "12",
+        "col_span": "6",
         "new_line": "false",
         "type_line": "default"
     },
@@ -49,7 +49,7 @@
         "column_type": "string",
         "label": "employeeid",
         "control": "attachment",
-        "col_span": "12",
+        "col_span": "6",
         "new_line": "false",
         "type_line": "default"
     },
