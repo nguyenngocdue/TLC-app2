@@ -70,12 +70,7 @@
                         </div>
 
                         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
-
-
-
-
-
+                        
                         <div class="columns-1">
                             <div class="grid-rows-1 flex items-center">
                                 <div class="columns-1">
