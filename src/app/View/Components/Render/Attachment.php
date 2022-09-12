@@ -13,7 +13,7 @@ class Attachment extends Component
      * @return void
      */
     public $attachment ,$model, $relationship;
-    public function __construct($attachment,$model , $relationship)
+    public function __construct($attachment,$model,$relationship)
     {
         $this->attachment = $attachment;
         $this->model = $model;

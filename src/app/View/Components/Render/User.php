@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Render;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\View\Component;
 
 class User extends Component
@@ -13,7 +14,6 @@ class User extends Component
      */
     public function __construct()
     {
-        //
     }
 
     /**

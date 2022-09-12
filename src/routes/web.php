@@ -59,7 +59,6 @@ Route::group([
         Route::resource('user/user_manage', UserActionRenderController::class);
         Route::resource('user/user_edit', UserEditController::class);
         Route::resource('media/media_renderprop', MediaRenderController::class);
-        // Route::resource('media/media_edit', MediaEditController::class);
         Route::resource('media/media_manage', MediaActionRenderController::class);
         Route::resource('media/media_edit', MediaEditController::class);
         Route::resource('post/post_renderprop', PostRenderController::class);
@@ -97,9 +96,3 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::get('/mail-test', [MailController::class, 'index']);
 
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
-
-
-
-// Route::get('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
-// Route::post('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
-// Route::get('/dashboard/user/managelineprop', [ManageLineController::class, 'manageLineProp'])->name('user.manageLineProp');

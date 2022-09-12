@@ -15,7 +15,6 @@ class Media extends Model
 
     public $eloquentParams = [
         "user" => ['belongsTo' , User::class,'owner_id'],
-        // "object" => ['morphTo']
     ];
     public function user()
     {
