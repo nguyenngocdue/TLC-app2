@@ -8,19 +8,19 @@ use Laravel\Scout\Searchable;
 
 class Media extends Model
 {
-    use HasFactory,Searchable;
-    protected $fillable = ["url_folder", "url_thumbnail","extension", "url_media", "filename", "owner_id"];
+    use HasFactory, Searchable;
+    protected $fillable = ["url_folder", "url_thumbnail", "extension", "url_media", "filename", "owner_id"];
     protected $primaryKey = 'id';
     protected $table = 'medias';
 
     public $eloquentParams = [
-        "user" => ['belongsTo' , User::class,'owner_id'],
+        "user" => ['belongsTo', User::class, 'owner_id'],
         // "object" => ['morphTo']
     ];
     public function user()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1],$p[2]);
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     // public function object()
     // {
