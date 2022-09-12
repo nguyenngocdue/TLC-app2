@@ -101,7 +101,7 @@
     "_time_keeping_type": {
         "column_name": "time_keeping_type",
         "column_type": "string",
-        "label": "time_keeping_type",
+        "label": "time keeping type",
         "control": "attachment",
         "col_span": "12",
         "new_line": "false",
