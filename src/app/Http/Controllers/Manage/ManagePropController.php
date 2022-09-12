@@ -31,6 +31,7 @@ abstract class ManagePropController extends Controller
                 $typeColumn = Schema::getColumnType($type . 's', $columnName);
                 array_push($columnTypes, $typeColumn);
             }
+            // dd($columnNames);
             return view('dashboards.props.manageprop')->with(compact('type', 'columnNames', 'columnTypes'));
         } else {
             $names = [];

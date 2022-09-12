@@ -86,4 +86,5 @@ class User extends Authenticatable implements LdapAuthenticatable
             'email' => $this->email,
         ];
     }
+
 }
