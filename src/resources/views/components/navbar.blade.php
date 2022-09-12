@@ -5,7 +5,7 @@
         <!-- Mobile hamburger -->
         <button
           class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
-          @click="toggleSideMenu"
+          click="toggleSideMenu"
           aria-label="Menu"
         >
           <svg
@@ -53,7 +53,7 @@
           <li class="flex">
             <button
                 class="rounded-md focus:outline-none focus:shadow-outline-purple"
-                @click="toggleTheme"
+                click="toggleTheme"
                 aria-label="Toggle color mode"
                 >
                   <template x-if="!dark">
@@ -166,7 +166,7 @@
             >
               <img
                 class="object-cover w-8 h-8 rounded-full"
-                src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
+                src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg"
                 alt=""
                 aria-hidden="true"
               />
@@ -178,10 +178,36 @@
                 x-transition:leave-end="opacity-0"
                 @click.away="closeProfileMenu"
                 @keydown.escape="closeProfileMenu"
-                class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
+                class="absolute right-0 w-56 p-4 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
                 aria-label="submenu"
               >
-                <li class="flex">
+                <li>
+                  <div class="flex items-center text-sm">
+                    <!-- Avatar with inset shadow -->
+                    <div
+                      class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
+                    >
+                      <img
+                        class="object-cover w-full h-full rounded-full"
+                        src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg"
+                        alt="img"
+                        loading="lazy"
+                      />
+                      <div
+                        class="absolute inset-0 rounded-full shadow-inner"
+                        aria-hidden="true"
+                      ></div>
+                    </div>
+                    <div>
+                      <p class="font-semibold">{{Auth::user()->name_rendered}}</p>
+                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                        {{Auth::user()->email}}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+                <hr class="my-2">
+                <li class="flex mt-2">
                   <a
                     class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                     href="#"
@@ -229,7 +255,9 @@
                 <li class="flex">
                   <a
                     class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                    href="#"
+                    href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                       document.getElementById('logout-form').submit();"
                   >
                     <svg
                       class="w-4 h-4 mr-3"
@@ -246,6 +274,9 @@
                       ></path>
                     </svg>
                     <span>Log out</span>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                    </form>
                   </a>
                 </li>
               </ul>

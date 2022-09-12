@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('url_media');
             $table->string('url_folder');
             $table->string('filename');
+            $table->string('extension');
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('object_id')->nullable();
             $table->string('object_type')->nullable();

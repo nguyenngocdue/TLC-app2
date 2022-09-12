@@ -4,26 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Media extends Model
 {
-    use HasFactory;
-    protected $fillable = ["url_folder", "url_thumbnail", "url_media", "filename", "owner_id"];
+    use HasFactory,Searchable;
+    protected $fillable = ["url_folder", "url_thumbnail","extension", "url_media", "filename", "owner_id"];
     protected $primaryKey = 'id';
     protected $table = 'medias';
 
     public $eloquentParams = [
-        "user" => ['belongsTo' , User::class],
-        "object" => ['morphTo']
+        "user" => ['belongsTo' , User::class,'owner_id'],
+        // "object" => ['morphTo']
     ];
     public function user()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1]);
+        return $this->{$p[0]}($p[1],$p[2]);
     }
-    public function object()
+    // public function object()
+    // {
+    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}();
+    // }
+    public function toSearchableArray()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}();
+        return [
+            'id' => $this->id,
+            'filename' => $this->title,
+        ];
     }
 }

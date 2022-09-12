@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.applayout')
 
 @section('content')
 <div class="container">
@@ -36,7 +36,7 @@
                                     </td>
                                     <td>{{$file->filename}}</td>
                                     <td>{{$file->url_media}}</td>
-                                    <td>{{$file->user->name}}</td>
+                                    <td>{{$file->user->name_rendered}}</td>
                                     <td>
                                         <div class="btn-group">
                                             <button data-url="{{route('uploadfiles.destroy',$file->id)}}"​ class="btn btn-danger btn-delete"><i class="fas fa-trash">

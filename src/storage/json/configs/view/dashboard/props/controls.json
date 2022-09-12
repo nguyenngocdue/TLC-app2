@@ -1,6 +1,7 @@
 {
     "controls": [
         "attachment",
+        "count",
         "checkbox",
         "datetime",
         "dropdown",

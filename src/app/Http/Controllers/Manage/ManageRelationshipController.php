@@ -17,7 +17,6 @@ abstract class ManageRelationshipController extends Controller
     protected $typeModel = "";
     public function __construct()
     {
-        $this->middleware('auth');
     }
     /**
      * Show the application dashboard.
@@ -29,13 +28,12 @@ abstract class ManageRelationshipController extends Controller
         $type = $this->type;
         $typeModel = $this->typeModel;
         $model = App::make($typeModel);
-        $path = storage_path() . "/json/entities/$type/relationships.json";
-        if (!file_exists($path)) {
+        $dataManage = $this->path();
+        if (!$dataManage) {
             $columnEloquentParams = $model->eloquentParams;
             $columnNames = array_keys($columnEloquentParams);
             return view('dashboards.props.managerelationship')->with(compact('type', 'columnNames','columnEloquentParams'));
         } else {
-            $dataManageUser = json_decode(file_get_contents($path), true);
             $names = [];
             $columnNames = [];
             $columnEloquents = [];
@@ -50,7 +48,7 @@ abstract class ManageRelationshipController extends Controller
             $columnColSpans = [];
             $columnNewLines = [];
             $colorLines = [];
-            foreach ($dataManageUser as $key => $data) {
+            foreach ($dataManage as $key => $data) {
                 $names[$key] = $key;
                 $columnNames[$key] = $data['column_name'];
                 $columnEloquents[$key] = $data['eloquent'];
@@ -71,7 +69,7 @@ abstract class ManageRelationshipController extends Controller
             $diff2 = array_diff($checkData, $columnNames);
             if (empty($diff1) && empty($diff2)) {
                 return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnNames','columnEloquents','columnParam1s','columnParam2s','columnParam3s','columnParam4s','columnParam5s','columnParam6s', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
-            } else if (empty($diff1)) {
+            } else{
                 foreach ($diff2 as $value) {
                     $names['_' . $value] = '_' . $value;
                     $columnNames['_' . $value] = $value;
@@ -88,13 +86,11 @@ abstract class ManageRelationshipController extends Controller
                     $columnNewLines['_' . $value] = "false";
                     $colorLines['_' . $value] = "new";
                 }
-                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnNames','columnEloquents','columnParam1s','columnParam2s','columnParam3s','columnParam4s','columnParam5s','columnParam6s', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
-            } else {
                 foreach ($diff1 as $value) {
                     $colorLines['_' . $value] = "removed";
                 }
-                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnNames', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
-            }
+                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnNames','columnEloquents','columnParam1s','columnParam2s','columnParam3s','columnParam4s','columnParam5s','columnParam6s', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
+            } 
         }
     }
     public function store(Request $request)
@@ -129,8 +125,7 @@ abstract class ManageRelationshipController extends Controller
     }
     public function destroy($name)
     {
-        $path = storage_path() . "/json/entities/{$this->type}/relationships.json";
-        $dataManage = json_decode(file_get_contents($path), true);
+        $dataManage = $this->path();
         unset($dataManage[$name]);
         try {
             Storage::disk('json')->put("entities/{$this->type}/relationships.json", json_encode($dataManage), 'public');
@@ -139,6 +134,15 @@ abstract class ManageRelationshipController extends Controller
         } catch (\Throwable $th) {
             Toastr::warning('$th', 'Save file json');
             return response()->json(['message' => 'Failed delete'], 404);
+        }
+    }
+    protected function path(){
+        $path = storage_path() . "/json/entities/{$this->type}/relationships.json";
+        if(file_exists($path)){
+            $dataManage = json_decode(file_get_contents($path), true);
+            return $dataManage;
+        }else{
+            return false;
         }
     }
 }

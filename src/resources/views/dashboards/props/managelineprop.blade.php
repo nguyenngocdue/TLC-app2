@@ -2,12 +2,19 @@
 @section('content')
   <main class="h-full overflow-y-auto">
     <div class="container grid px-0 mx-auto">
-        <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-                avatars
-        </h4>
+      <div class="flex items-center justify-between p-4 my-4 text-base font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple" 
+      >
+        <div class="flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>
+          <h3>{{ucfirst($type)}}</h3>
+        </div>
+        <span>Manage Table →</span>
+      </div>
         <form action="{{route($type.'_managelineprop.store')}}" method="POST" >
           @csrf
-          <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
+          <div class="w-full mt-2 mb-8 overflow-hidden rounded-lg shadow-sm border">
             <div class="w-full overflow-x-auto">
               <table class="w-full whitespace-no-wrap">
                 <thead>
@@ -65,11 +72,11 @@
                               <td class="px-4 py-3 text-sm">
                                 <input type="text" 
                                 class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
-                                name="label[]" value="{{$columnLabels[$key]}}">
+                                name="label[]" value="{{ucwords(str_replace("_"," ",$columnLabels[$key]))}}">
                               </td>
                               <td class="px-4 py-3 text-sm">
                                 <select name="control[]" 
-                                class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                                class="text-center w-max mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                                 >
                                   @foreach($controls as $control)
                                     @if($columnControls[$key] === $control)
@@ -82,12 +89,12 @@
                               </td>
                               <td class="px-4 py-3 text-sm">
                                 <input  type="text" 
-                                class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
+                                class="text-center max-w-fit mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
                                 name="col_span[]" value="{{$columnColSpans[$key]}}">
                               </td>
                               <td class="px-4 py-3 text-sm">
                               <select name="new_line[]" 
-                              class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1">
+                              class="text-center w-max mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1">
                                 <option value="false"
                                 @if($columnNewLines[$key] == 'false') 
                                     selected
@@ -98,7 +105,7 @@
                                 @endif>True</option>
                               </select>
                               </td>
-                              <td class="px-4 py-3 text-sm">
+                              <td class="px-4 py-3 text-sm text-center">
                               @if ($colorLines[$key] == 'removed')
                               <button class="btn btn-danger btn-delete" data-url="{{ route($type.'_managelineprop.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
                               @endif
@@ -132,12 +139,12 @@
                             <td class="px-4 py-3 text-sm">
                               <input type="text" name="label[]" 
                               class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
-                              value="{{ucfirst($columnName)}}">
+                              value="{{ucwords(str_replace("_"," ",$columnName))}}">
                             </td>
                             
                             <td class="px-4 py-3 text-sm">
                               <select name="control[]" 
-                              class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                              class="text-center w-max mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                               >
                                 @foreach($controls as $control)
                                   <option value="{{$control}}">{{ucfirst($control)}}</option>
@@ -146,18 +153,18 @@
                             </td>
                             <td class="px-4 py-3 text-sm">
                               <input type="text" name="col_span[]" 
-                              class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
+                              class="text-center max-w-fit mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
                               value="12">
                             </td>
                             <td class="px-4 py-3 text-sm">
                             <select name="new_line[]" 
-                            class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                            class="text-center w-max mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                             >
                               <option value="false">False</option>
                               <option value="true">True</option>
                             </select>
                             </td>
-                            <td class="px-4 py-3 text-sm">
+                            <td class="px-4 py-3 text-sm text-center">
                               @if (isset($colorLines))
                                 <button class="btn btn-danger btn-delete" data-url="{{ route($type.'_manageprop.destroy',$name) }}"​ type="button"><i class="fas fa-trash"></i></button>
                               @endif
@@ -168,7 +175,7 @@
                 </tbody>
               </table>
             </div>
-            <button class="mt-2 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-emerald-500 border border-transparent rounded-lg active:bg-emerald-600 hover:bg-emerald-200 focus:outline-none focus:shadow-outline-purple" type="submit">Update</button>
+            <button class="my-2 ml-2 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-emerald-500 border border-transparent rounded-lg active:bg-emerald-600 hover:bg-emerald-200 focus:outline-none focus:shadow-outline-purple" type="submit">Update</button>
           </div>
         </form>
             

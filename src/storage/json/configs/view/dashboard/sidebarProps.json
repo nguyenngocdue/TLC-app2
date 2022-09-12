@@ -31,6 +31,11 @@
                         "title": "Add New",
                         "icon": "fas fa-user",
                         "href": "dashboard/post/post_addnew"
+                    },
+                    {
+                        "title": "Up File New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/post/post_addnew"
                     }
                 ]
             },

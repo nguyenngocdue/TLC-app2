@@ -14,9 +14,7 @@ abstract class ManageTablePropController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
     }
-
     /**
      * Show the application dashboard.
      *
@@ -25,26 +23,22 @@ abstract class ManageTablePropController extends Controller
     public function index()
     {
         $type = $this->type;
-        $path = storage_path() . "/json/entities/$type/tables.json";
-        $pathTableName = storage_path() . "/json/configs/table/$type/tableName.json";
-        $tableNames = json_decode(file_get_contents($pathTableName), true);
-        if (!file_exists($path)) {
+        [$dataManage,$tableNames] = $this->path();
+        if (!$dataManage) {
             $columnNames = [];
             $columnTypes = [];
             $columnTableNames = [];
             foreach ($tableNames as $key => $tableName) {
                 $columnNameTable = Schema::getColumnListing($tableName);
                 foreach ($columnNameTable as $columnName) {
-                    $type = Schema::getColumnType($tableName, $columnName);
-                    array_push($columnTypes, $type);
+                    $typeColumn = Schema::getColumnType($tableName, $columnName);
+                    array_push($columnTypes, $typeColumn);
                     array_push($columnTableNames, $key);
                 }
                 $columnNames = array_merge($columnNames, $columnNameTable);
             }
-            $type = $this->type;
             return view('dashboards.props.managelineprop')->with(compact('type', 'columnTableNames', 'columnNames', 'columnTypes'));
         } else {
-            $dataManageUser = json_decode(file_get_contents($path), true);
             $columnTableNames = [];
             $names = [];
             $columnNames = [];
@@ -54,7 +48,7 @@ abstract class ManageTablePropController extends Controller
             $columnColSpans = [];
             $columnNewLines = [];
             $colorLines = [];
-            foreach ($dataManageUser as $key => $data) {
+            foreach ($dataManage as $key => $data) {
                 $names[$key] = $key;
                 $columnTableNames[$key] = $data['table_name'];
                 $columnNames[$key] = $data['column_name'];
@@ -76,7 +70,7 @@ abstract class ManageTablePropController extends Controller
             $diff2 = array_diff_key($globalColumnNames, $columnNames);
             if (empty($diff1) && empty($diff2)) {
                 return view('dashboards.props.managelineprop')->with(compact('type', 'columnTableNames', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
-            } else if (empty($diff1)) {
+            } else{
                 foreach ($diff2 as $key => $value) {
                     $keyTableName = explode('|', $key);
                     $names[$key] = $keyTableName[0] . '|' . $value;
@@ -90,20 +84,17 @@ abstract class ManageTablePropController extends Controller
                     $columnNewLines[$key] = "false";
                     $colorLines[$key] = "new";
                 }
-                return view('dashboards.props.managelineprop')->with(compact('type', 'columnTableNames', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
-            } else {
                 foreach ($diff1 as $key => $value) {
                     $colorLines[$key] = "removed";
                 }
                 return view('dashboards.props.managelineprop')->with(compact('type', 'columnTableNames', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
             }
-            return view('dashboards.props.managelineprop')->with(compact('type', 'columnTableNames', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
         }
     }
     public function store(Request $request)
     {
         $data = $request->input();
-        $maganeUser = [];
+        $magane = [];
         foreach ($data['name'] as $key => $name) {
             $array = [];
             $array['table_name'] = $data['table_name'][$key];
@@ -114,11 +105,11 @@ abstract class ManageTablePropController extends Controller
             $array['col_span'] = $data['col_span'][$key];
             $array['new_line'] = $data['new_line'][$key];
             $array['type_line'] = "default";
-            $maganeUser[$name] = $array;
+            $magane[$name] = $array;
         }
-        $jsonManageUser = json_encode($maganeUser);
+        $jsonManage = json_encode($magane);
         try {
-            Storage::disk('json')->put("entities/{$this->type}/tables.json", $jsonManageUser, 'public');
+            Storage::disk('json')->put("entities/{$this->type}/tables.json", $jsonManage, 'public');
             Toastr::success('Save file json successfully', 'Save file json');
             return back();
         } catch (\Throwable $th) {
@@ -127,16 +118,26 @@ abstract class ManageTablePropController extends Controller
     }
     public function destroy($name)
     {
-        $path = storage_path() . "/json/entities/{$this->type}/tables.json";
-        $dataManageUser = json_decode(file_get_contents($path), true);
-        unset($dataManageUser[$name]);
+        [$dataManage] = $this->path();
+        unset($dataManage[$name]);
         try {
-            Storage::disk('json')->put("entities/{$this->type}/tables.json", json_encode($dataManageUser), 'public');
+            Storage::disk('json')->put("entities/{$this->type}/tables.json", json_encode($dataManage), 'public');
             Toastr::success('Save file json successfully', 'Save file json');
             return response()->json(['message' => 'Successfully'], 200);
         } catch (\Throwable $th) {
             Toastr::warning('$th', 'Save file json');
             return response()->json(['message' => 'Failed delete'], 404);
+        }
+    }
+    protected function path(){
+        $path = storage_path() . "/json/entities/{$this->type}/tables.json";
+        $pathTableName = storage_path() . "/json/configs/table/{$this->type}/tableName.json";
+        $tableNames = json_decode(file_get_contents($pathTableName), true);
+        if(file_exists($path)){
+            $dataManage = json_decode(file_get_contents($path), true);
+            return [$dataManage,$tableNames];
+        }else{
+            return [false,$tableNames];
         }
     }
 }

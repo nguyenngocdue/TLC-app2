@@ -18,6 +18,7 @@ use App\Http\Controllers\Render\Post\PostRenderController;
 use App\Http\Controllers\Render\User\EditUserActionRenderController;
 use App\Http\Controllers\Render\User\UserActionRenderController;
 use App\Http\Controllers\Render\User\UserRenderController;
+use App\Http\Controllers\UploadFileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -52,8 +53,11 @@ Route::group([
         Route::resource('user/user_edit', EditUserActionRenderController::class);
         Route::resource('media/media_renderprop', MediaRenderController::class);
         Route::resource('media/media_manage', MediaActionRenderController::class);
+        Route::resource('media/media_edit', EditMediaActionRenderController::class);
         Route::resource('post/post_renderprop', PostRenderController::class);
         Route::resource('post/post_manage', PostActionRenderController::class);
+        Route::resource('post/post_edit', EditMediaActionRenderController::class);
+
     });
 });
 Route::group([
@@ -76,7 +80,13 @@ Route::group([
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 
+// Route::get('/mail-test', [MailController::class, 'index']);
 
+// Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
+
+Route::resource('/uploadfiles', UploadFileController::class);
+
+Route::get('/uploadfiles/{id}/download', [UploadFileController::class, 'download'])->name('uploadfiles.download');
 
 // Route::get('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
 // Route::post('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');

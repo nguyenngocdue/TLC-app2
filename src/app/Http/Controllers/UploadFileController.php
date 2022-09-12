@@ -24,7 +24,7 @@ class UploadFileController extends Controller
     public function index()
     {
         $files = Media::all();
-        $path = env('AWS_ENDPOINT', 'http://192.168.100.90:9000') . '/' . env('AWS_BUCKET', 'hello-001') . '/';
+        $path = env('AWS_ENDPOINT', 'http://127.0.0.1:9000') . '/' . env('AWS_BUCKET', 'hello-001') . '/';
         //dd(Storage::disk('s3')->temporaryUrl($files[0]->url_thumbnail, now()->addMinutes(5)));
         return view('uploadfiles.index')->with(compact('files', 'path'));
     }
@@ -55,18 +55,22 @@ class UploadFileController extends Controller
                 $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
                 $path_image = $path . $fileName;
                 Storage::disk('s3')->put($path_image, file_get_contents($file), 'public');
-                $thumbnailImage = Image::make($file);
-                $thumbnailImage->fit(150, 150);
-                $resource = $thumbnailImage->stream();
-                $fileNameThumbnail = $fileNameNormal . '-150x150.' . $extension;
-                $path_thumbnail = $path . $fileNameThumbnail;
-                Storage::disk('s3')->put($path_thumbnail, $resource->__toString(), 'public');
-                $media = Media::create([
+                $imageExtension = ['jpeg','png','jpg','gif','svg'];
+                if(in_array($extension,$imageExtension)){
+                    $thumbnailImage = Image::make($file);
+                    $thumbnailImage->fit(150, 150);
+                    $resource = $thumbnailImage->stream();
+                    $fileNameThumbnail = $fileNameNormal . '-150x150.' . $extension;
+                    $path_thumbnail = $path . $fileNameThumbnail;
+                    Storage::disk('s3')->put($path_thumbnail, $resource->__toString(), 'public');
+                }
+                Media::create([
                     'filename' => basename($path_image),
                     'url_folder' => $path,
                     'url_media' => $path_image,
-                    'url_thumbnail' => $path_thumbnail,
-                    'user_id' => (int)$request->user,
+                    'url_thumbnail' => isset($path_thumbnail) ? $path_thumbnail : "",
+                    'owner_id' => (int)$request->user,
+                    'extension' => $extension,
                 ]);
             }
         }

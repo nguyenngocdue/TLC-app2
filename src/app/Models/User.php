@@ -55,16 +55,17 @@ class User extends Authenticatable implements LdapAuthenticatable
     //     return 'my_guid_column';
     // }
     public $eloquentParams = [
-        "files" => ['hasMany' , Media::class],
-        "medias" => ['morphMany',Media::class, 'object'],
+        // "files" => ['hasMany' , Media::class],
+        // "medias" => ['morphMany',Media::class, 'owner_id','id'],
+        "medias" => ['hasMany',Media::class, 'owner_id','id'],
         "posts" => ['hasMany',Post::class,'owner_id','id'],
     ];
     
-    public function files()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1]);
-    }
+    // public function files()
+    // {
+    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1]);
+    // }
     public function medias()
     {
         $p = $this->eloquentParams[__FUNCTION__];

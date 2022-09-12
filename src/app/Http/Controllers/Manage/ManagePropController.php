@@ -14,7 +14,6 @@ abstract class ManagePropController extends Controller
     protected $type = "";
     public function __construct()
     {
-        $this->middleware('auth');
     }
     /**
      * Show the application dashboard.
@@ -24,8 +23,8 @@ abstract class ManagePropController extends Controller
     public function index()
     {
         $type = $this->type;
-        $path = storage_path() . "/json/entities/$type/props.json";
-        if (!file_exists($path)) {
+        $dataManage = $this->path();
+        if (!$dataManage) {
             $columnNames = Schema::getColumnListing($type . 's');
             $columnTypes = [];
             foreach ($columnNames as $columnName) {
@@ -34,7 +33,6 @@ abstract class ManagePropController extends Controller
             }
             return view('dashboards.props.manageprop')->with(compact('type', 'columnNames', 'columnTypes'));
         } else {
-            $dataManageUser = json_decode(file_get_contents($path), true);
             $names = [];
             $columnNames = [];
             $columnTypes = [];
@@ -43,7 +41,7 @@ abstract class ManagePropController extends Controller
             $columnColSpans = [];
             $columnNewLines = [];
             $colorLines = [];
-            foreach ($dataManageUser as $key => $data) {
+            foreach ($dataManage as $key => $data) {
                 $names[$key] = $key;
                 $columnNames[$key] = $data['column_name'];
                 $columnTypes[$key] = $data['column_type'];
@@ -57,7 +55,7 @@ abstract class ManagePropController extends Controller
             $diff2 = array_diff(Schema::getColumnListing($type . 's'), $columnNames);
             if (empty($diff1) && empty($diff2)) {
                 return view('dashboards.props.manageprop')->with(compact('type', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
-            } else if (empty($diff1)) {
+            } else {
                 foreach ($diff2 as $value) {
                     $names['_' . $value] = '_' . $value;
                     $columnNames['_' . $value] = $value;
@@ -69,19 +67,18 @@ abstract class ManagePropController extends Controller
                     $columnNewLines['_' . $value] = "false";
                     $colorLines['_' . $value] = "new";
                 }
-                return view('dashboards.props.manageprop')->with(compact('type', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
-            } else {
                 foreach ($diff1 as $value) {
                     $colorLines['_' . $value] = "removed";
                 }
                 return view('dashboards.props.manageprop')->with(compact('type', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
             }
+
         }
     }
     public function store(Request $request)
     {
         $data = $request->input();
-        $maganeUser = [];
+        $magane = [];
         foreach ($data['name'] as $key => $name) {
             $array = [];
             $array['column_name'] = $data['column_name'][$key];
@@ -91,11 +88,11 @@ abstract class ManagePropController extends Controller
             $array['col_span'] = $data['col_span'][$key];
             $array['new_line'] = $data['new_line'][$key];
             $array['type_line'] = "default";
-            $maganeUser[$name] = $array;
+            $magane[$name] = $array;
         }
-        $jsonManageUser = json_encode($maganeUser);
+        $jsonManage = json_encode($magane);
         try {
-            Storage::disk('json')->put("entities/{$this->type}/props.json", $jsonManageUser, 'public');
+            Storage::disk('json')->put("entities/{$this->type}/props.json", $jsonManage, 'public');
             Toastr::success('Save file json successfully', 'Save file json');
             return back();
         } catch (\Throwable $th) {
@@ -104,16 +101,24 @@ abstract class ManagePropController extends Controller
     }
     public function destroy($name)
     {
-        $path = storage_path() . "/json/entities/{$this->type}/props.json";
-        $dataManageUser = json_decode(file_get_contents($path), true);
-        unset($dataManageUser[$name]);
+        $dataManage = $this->path();
+        unset($dataManage[$name]);
         try {
-            Storage::disk('json')->put("entities/{$this->type}/props.json", json_encode($dataManageUser), 'public');
+            Storage::disk('json')->put("entities/{$this->type}/props.json", json_encode($dataManage), 'public');
             Toastr::success('Save file json successfully', 'Save file json');
             return response()->json(['message' => 'Successfully'], 200);
         } catch (\Throwable $th) {
             Toastr::warning('$th', 'Save file json');
             return response()->json(['message' => 'Failed delete'], 404);
+        }
+    }
+    protected function path(){
+        $path = storage_path() . "/json/entities/{$this->type}/props.json";
+        if(file_exists($path)){
+            $dataManage = json_decode(file_get_contents($path), true);
+            return $dataManage;
+        }else{
+            return false;
         }
     }
 }
