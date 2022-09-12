@@ -3,7 +3,7 @@
     $sideBar = json_decode(file_get_contents(storage_path() . "/json/configs/view/dashboard/sidebarProps.json"),true);
 @endphp
 <aside
-class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0"
+class="z-20 flex-shrink-0 hidden w-64 bg-white border-r dark:border-primary-darker dark:bg-darker md:block"
 >
 <div class="py-4 text-gray-500 dark:text-gray-400">
   <div class="relative text-center">
@@ -14,12 +14,11 @@ class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-
       <img class="object-cover h-9" src="{{asset('logo/tlc.svg')}}" alt="logo">
     </a>
   </div>
-  
-  <ul class="mt-6">
+  <nav aria-label="Main" class="flex-1 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">
     @foreach($sideBar as $group)
-        <li class="relative px-6 py-3">{{$group['title']}}</li>
+        <div class="relative px-6 py-3">{{$group['title']}}</div>
         @foreach ($group['items'] as $key => $item)
-            <li class="relative px-6 py-3" x-data="{isActive:false , open:false}">
+            <div class="relative px-6 py-3" x-data="{isActive:false , open:false}">
                 <a
                 href="#"
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -48,7 +47,7 @@ class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-
                 <div  
                   role="menu"
                   x-show="open"
-                  class="mt-2 space-y-2 px-7"
+                  class="mt-2 space-y-2"
                   aria-label="Dashboards">
                     @foreach ($item['items'] as $value)
                       <a role="menuitem" class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700" href="{{url($value['href'])}}">
@@ -56,16 +55,14 @@ class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-
                       </a>
                     @endforeach
                 </div>
-            </li>
+            </div>
         @endforeach
         @if ($group['divider'] === 'true')
           <hr class="my-2"/>
         @else
         @endif
     @endforeach
-    
-  </ul>
-  
+  </nav>
 </div>
 </aside>
 <!-- Mobile sidebar -->

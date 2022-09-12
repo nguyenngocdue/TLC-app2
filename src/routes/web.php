@@ -53,11 +53,12 @@ Route::group([
         Route::resource('user/user_edit', EditUserActionRenderController::class);
         Route::resource('media/media_renderprop', MediaRenderController::class);
         Route::resource('media/media_manage', MediaActionRenderController::class);
-        Route::resource('media/media_edit', EditMediaActionRenderController::class);
+        // Route::resource('media/media_edit', EditMediaActionRenderController::class);
         Route::resource('post/post_renderprop', PostRenderController::class);
         Route::resource('post/post_manage', PostActionRenderController::class);
-        Route::resource('post/post_edit', EditMediaActionRenderController::class);
-
+        // Route::resource('post/post_edit', EditMediaActionRenderController::class);
+        Route::resource('/upload/upload_add', UploadFileController::class);
+        Route::get('/upload/{id}/download', [UploadFileController::class, 'download'])->name('upload_add.download');
     });
 });
 Route::group([
@@ -84,9 +85,7 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
 
-Route::resource('/uploadfiles', UploadFileController::class);
 
-Route::get('/uploadfiles/{id}/download', [UploadFileController::class, 'download'])->name('uploadfiles.download');
 
 // Route::get('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
 // Route::post('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
