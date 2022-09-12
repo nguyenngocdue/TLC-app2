@@ -8,35 +8,33 @@
 </head>
 
 <body>
-    <div class=" grid grid-rows-1">
-        <form class="" method='POST' action="{{route('user_edit.update',$values->id)}} ">
+    <div class=" grid grid-rows-1 bg-gray-300">
+        <div class="min-h-screen flex items-center mx-auto py-5">
+        <form class="bg-white p-4 rounded-md" method='POST' action="{{route('user_edit.update',$values->id)}} ">
             @csrf
-            <div class="min-h-screen flex items-center bg-purple-500">
                 <div class="flex-1 max-w-4xl mx-auto">
-                    <div class="grid grid-cols-12 gap-4">
+                    <div class="grid grid-cols-12">
                         @method('PUT')                             
                         @foreach($props as $key => $value)
                             @php
                             $label = $value['label'];
                             $col_span = $value['col_span'];
                             $column_name = $value['column_name'];
-                            // dd($column_name);
                             $value_column_name = $values->{$column_name};
                             $col_span=$value['col_span'];
                             @endphp
-                        {{-- {{dd($value['col_span'])}} --}}
-                        {{-- {!! $col_span === "12" ? --}}
                         <div class='col-span-{{$col_span}}'>
                             <div class='grid grid-row-1 gap-3'>
                                 <div class='grid grid-cols-12 items-center'>
-                                    <div class='col-start-1 col-span-2'>
+                                    <div class='col-start-1 col-span-{{24/$col_span}} text-right'>
                                         <label 
-                                            class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2' 
+                                            class='block tracking-wide text-gray-800 text-xs mb-2 px-3 text-base' 
                                             title='{{$column_name}}'
-                                            >$label:
+                                            >{{$label}}
                                         </label>
                                     </div>
-                                    <div class='col-start-3 col-span-10'>
+                                    
+                                    <div class='col-start-{{24/$col_span + 1}} col-span-10'>
                                         <input 
                                             name='{{$column_name}}' 
                                             class='ppearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
@@ -51,9 +49,9 @@
 
                 </div>
             </div>
+        </form>
     </div>
 
-    </form>
     </div>
 
 </body>
