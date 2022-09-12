@@ -20,6 +20,7 @@
                         $label = $value['label'];
                         $col_span = $value['col_span'];
                         $column_name = $value['column_name'];
+                        $control = $value['control'];
                         $value_column_name = $values->{$column_name};
                         if(is_array($value_column_name)) $value_column_name = 'ARRAY';
                         // dd($value_column_name);
@@ -32,9 +33,22 @@
                                         <label class='block tracking-wide text-gray-800 text-xs mb-2 px-3 text-base' title='{{$column_name}}'>{{$label}}
                                         </label>
                                     </div>
-
+                                    {{-- {{dd($control)}} --}}
                                     <div class='col-start-{{24/$col_span + 1}} col-span-10'>
-                                        <input name='{{$column_name}}' class='ppearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='text' value='{{$value_column_name}}'>
+                                        @switch ($control)
+                                        @case ('text'):
+                                        @yield('text')
+                                        @break
+
+                                        @case ('dropdown'):
+                                        @yield('dropdown')
+                                        @break
+
+                                        @default:
+                                        <span>{{$control}}</span>
+                                        @break;
+                                        @endswitch
+                                        {{-- <input name='{{$column_name}}' class='ppearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='text' value='{{$value_column_name}}'> --}}
                                     </div>
                                 </div>
                             </div>
