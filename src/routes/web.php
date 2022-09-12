@@ -59,12 +59,12 @@ Route::group([
         Route::resource('user/user_manage', UserActionRenderController::class);
         Route::resource('user/user_edit', UserEditController::class);
         Route::resource('media/media_renderprop', MediaRenderController::class);
-        Route::resource('media/media_edit', MediaEditController::class);
+        // Route::resource('media/media_edit', MediaEditController::class);
         Route::resource('media/media_manage', MediaActionRenderController::class);
-        Route::resource('media/media_edit', EditMediaActionRenderController::class);
+        Route::resource('media/media_edit', MediaEditController::class);
         Route::resource('post/post_renderprop', PostRenderController::class);
         Route::resource('post/post_manage', PostActionRenderController::class);
-        Route::resource('post/post_edit', EditMediaActionRenderController::class);
+        Route::resource('post/post_edit', PostEditController::class);
         Route::resource('workplace/workplace_renderprop', WorkplaceRenderController::class);
         Route::resource('workplace/workplace_manage', WorkplaceActionRenderController::class);
         Route::resource('workplace/workplace_edit', EditMediaActionRenderController::class);
@@ -90,7 +90,6 @@ Route::group([
         Route::resource('workplace/workplace_manageprop', ManageWorkplacePropController::class);
         Route::resource('workplace/workplace_managelineprop', ManageWorkplaceTablePropController::class);
         Route::resource('workplace/workplace_managerelationship', ManageWorkplaceRelationshipController::class);
-
     });
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
