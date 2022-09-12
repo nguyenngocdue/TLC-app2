@@ -44,7 +44,7 @@
                 "icon": "nav-icon fas fa-file-alt",
                 "items": [
                     {
-                        "title": "All Post",
+                        "title": "All Posts",
                         "icon": "fas fa-users",
                         "href": "dashboard/post/post_renderprop"
                     },
@@ -52,6 +52,22 @@
                         "title": "Add New",
                         "icon": "fas fa-user",
                         "href": "dashboard/post/post_addnew"
+                    }
+                ]
+            },
+            "workplace": {
+                "title": "Workplace Management",
+                "icon": "nav-icon fas fa-file-alt",
+                "items": [
+                    {
+                        "title": "All Workplaces",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/workplace/workplace_renderprop"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/workplace/workplace_addnew"
                     }
                 ]
             }
@@ -121,6 +137,27 @@
                         "title": "Manage Relationship",
                         "icon": "fas fa-heart",
                         "href": "propman/post/post_managerelationship"
+                    }
+                ]
+            },
+            "workplace": {
+                "title": "Workplaces",
+                "icon": "nav-icon fas fa-building",
+                "items": [
+                    {
+                        "title": "Manage Prop",
+                        "icon": "fas fa-project-diagram",
+                        "href": "propman/workplace/workplace_manageprop"
+                    },
+                    {
+                        "title": "Manage Line",
+                        "icon": "fas fa-grip-lines",
+                        "href": "propman/workplace/workplace_managelineprop"
+                    },
+                    {
+                        "title": "Manage Relationship",
+                        "icon": "fas fa-heart",
+                        "href": "propman/workplace/workplace_managerelationship"
                     }
                 ]
             }

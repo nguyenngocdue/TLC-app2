@@ -59,6 +59,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         // "medias" => ['morphMany',Media::class, 'owner_id','id'],
         "medias" => ['hasMany',Media::class, 'owner_id','id'],
         "posts" => ['hasMany',Post::class,'owner_id','id'],
+        "workplace" => ['hasMany',Post::class,'owner_id','id'],
     ];
     
     // public function files()
@@ -74,6 +75,11 @@ class User extends Authenticatable implements LdapAuthenticatable
     public function posts(){
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1],$p[2],$p[3]);
+    }
+    public function workplaces()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1],$p[2]);
     }
     public function toSearchableArray()
     {

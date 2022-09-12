@@ -1,1 +1,1 @@
-{"_user":{"column_name":"user","eloquent":"belongsTo","param_1":"App\\Models\\User","param_2":null,"param_3":null,"param_4":null,"param_5":null,"param_6":null,"label":"User","control":"attachment","col_span":"12","new_line":"false","type_line":"default"}}
+{"_user":{"column_name":"user","eloquent":"belongsTo","param_1":"App\\Models\\User","param_2":null,"param_3":null,"param_4":null,"param_5":null,"param_6":null,"label":"User","control":"checkbox","col_span":"12","new_line":"false","type_line":"default"}}

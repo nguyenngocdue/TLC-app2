@@ -21,7 +21,6 @@
                 <label for="{{$key}}">{{ltrim($key,'_')}}</label>
                 <input type="checkbox" class="checkbox-toggle" name="{{$key}}" checked>
               </div>
-<<<<<<< HEAD
              @else
               <div class="col-md-2 col-12">
                 <label for="{{$key}}">{{ltrim($key,'_')}}</label>
@@ -41,53 +40,6 @@
           <h3>{{ucfirst($type)}}</h3>
         </div>
         <span>View more →</span>
-=======
-            </form>
-            <table id="table_users" class="table table-bordered table-striped text-center">
-                <thead>
-                <tr>
-                <th>Action</th>
-                @foreach($data as $key => $value)
-                  <th class="{{$key.'_th'}}">{{$value['column_name']}}</th>
-                @endforeach
-                </tr>
-                </thead>
-                <tbody  id="tbody-run-live">
-                  @if (isset($data))
-                    @foreach($users as $key => $user)
-                    <tr>
-                        <td>
-                            <button class="btn btn-danger btn-delete-user" data-url="{{ route($type.'_manage.destroy',$user->id) }}"​ type="button"><i class="fas fa-trash"></i></button>
-                        </td>
-                        @foreach ($data as $key1 => $value)
-                            @if($value['column_name'] === 'id')
-                            <td><a href="{{route($type.'_edit.update',$user[$value['column_name']])}}">{{$user[$value['column_name']]}}</a></td>
-                            @else
-                            <td class="{{$key1.'_td'}}">
-                              @if (!is_array($user[$value['column_name']]))
-                                {{$user[$value['column_name']]}}
-                              @else
-                                @php
-                                  json_encode($user[$value['column_name']]) 
-                                @endphp
-                              @endif
-                            </td>
-                            @endif
-                        @endforeach
-                    </tr>
-                    @endforeach
-                  @endif
-                    
-                </tbody>
-                <tfoot >
-                </tfoot>
-            </table>
-            <nav aria-label="Page navigation">
-              @if(isset($users) && count($users) > 0)
-                {{$users->links('dashboards.pagination.template')}}
-              @endif
-            </nav>
->>>>>>> dev02
       </div>
       <form action="{{route($type.'_renderprop.index')}}" method="GET">
         <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -157,29 +109,7 @@
                           @else
                           <td class="px-4 py-3">
                               @if ($user->{$item['column_name']} != null)
-                                <div class="flex items-center text-sm">
-                                  <!-- Avatar with inset shadow -->
-                                  <div
-                                    class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
-                                  >
-                                    <img
-                                      class="object-cover w-full h-full rounded-full"
-                                      src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg"
-                                      alt="img"
-                                      loading="lazy"
-                                    />
-                                    <div
-                                      class="absolute inset-0 rounded-full shadow-inner"
-                                      aria-hidden="true"
-                                    ></div>
-                                  </div>
-                                  <div>
-                                    <p class="font-semibold">{{($user->{$item['column_name']}->name_rendered)}}</p>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                      {{($user->{$item['column_name']}->email)}}
-                                    </p>
-                                  </div>
-                                </div>
+                                <x-render.user />
                               @else
                                   
                               @endif
