@@ -23,7 +23,7 @@ abstract class ManageTablePropController extends Controller
     public function index()
     {
         $type = $this->type;
-        [$dataManage,$tableNames] = $this->path();
+        [$dataManage, $tableNames] = $this->path();
         if (!$dataManage) {
             $columnNames = [];
             $columnTypes = [];
@@ -70,7 +70,7 @@ abstract class ManageTablePropController extends Controller
             $diff2 = array_diff_key($globalColumnNames, $columnNames);
             if (empty($diff1) && empty($diff2)) {
                 return view('dashboards.props.managelineprop')->with(compact('type', 'columnTableNames', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
-            } else{
+            } else {
                 foreach ($diff2 as $key => $value) {
                     $keyTableName = explode('|', $key);
                     $names[$key] = $keyTableName[0] . '|' . $value;
@@ -129,15 +129,16 @@ abstract class ManageTablePropController extends Controller
             return response()->json(['message' => 'Failed delete'], 404);
         }
     }
-    protected function path(){
+    protected function path()
+    {
         $path = storage_path() . "/json/entities/{$this->type}/tables.json";
         $pathTableName = storage_path() . "/json/configs/table/{$this->type}/tableName.json";
         $tableNames = json_decode(file_get_contents($pathTableName), true);
-        if(file_exists($path)){
+        if (file_exists($path)) {
             $dataManage = json_decode(file_get_contents($path), true);
-            return [$dataManage,$tableNames];
-        }else{
-            return [false,$tableNames];
+            return [$dataManage, $tableNames];
+        } else {
+            return [false, $tableNames];
         }
     }
 }

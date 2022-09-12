@@ -1,7 +1,7 @@
 @component('mail::message')
-# Hello {{ $data['email'] }}
+    # Hello {{ $data['email'] }}
 
-{{ $data['content'] }}
+    {{ $data['content'] }}
 
-Thanks<br>
+    Thanks<br>
 @endcomponent

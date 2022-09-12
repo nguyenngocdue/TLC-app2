@@ -7,6 +7,6 @@ use App\Models\Workplace;
 
 class WorkplaceEditController extends EditController
 {
-   protected $type = "workplace";
+    protected $type = "workplace";
     protected $data = Workplace::class;
 }

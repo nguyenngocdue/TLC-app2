@@ -1,0 +1,3 @@
+{
+    "user": ["belongsTo", "App\\Models\\User", "owner"]
+}

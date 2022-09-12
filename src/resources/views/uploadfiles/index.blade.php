@@ -1,65 +1,69 @@
 @extends('layouts.applayout')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col">
-            <div class="card">
-                <div class="card-header" >
-                    <button type="button" class="btn btn-primary btn-uploadfiles" data-target="#edit" data-toggle="modal"><i class="fas fa-cloud-upload-alt" ></i></button>
-                </div>
-                <div class="card-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Image</th>
-                                <th>Files Name</th>
-                                <th>URL</th>
-                                <th>User Upload File</th>
-                                <th>Edit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php $i=1; @endphp
-                            @forelse ($files as $file)
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <button type="button" class="btn btn-primary btn-uploadfiles" data-target="#edit"
+                            data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i></button>
+                    </div>
+                    <div class="card-body">
+                        <table class="table-striped table">
+                            <thead>
                                 <tr>
-                                    <td>{{$i++;}}</td>
-                                    <td>
-                                        @php
-                                            $url_thumbnail = $path.$file->url_thumbnail;
-                                            $url_media = $path.$file->url_media;
-                                        @endphp
-                                        <a href="{{$url_media}}">
-                                            <img src="{{$url_thumbnail}}" alt="{{$file->filename}}" style="width: 150px; height: 150px;">
-                                        </a>
-                                    </td>
-                                    <td>{{$file->filename}}</td>
-                                    <td>{{$file->url_media}}</td>
-                                    <td>{{$file->user->name_rendered}}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button data-url="{{route('upload_add.destroy',$file->id)}}"​ class="btn btn-danger btn-delete"><i class="fas fa-trash">
-                                            </i></button>
-                                            <form action="{{route('upload_add.download',$file->id)}}" method="GET" >
-                                                <button type="submit" class="btn btn-warning"><i class="fas fa-download"></i></button>
-                                            </form>
-                                        </div>
-                                    </td>
+                                    <th>#</th>
+                                    <th>Image</th>
+                                    <th>Files Name</th>
+                                    <th>URL</th>
+                                    <th>User Upload File</th>
+                                    <th>Edit</th>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5" class="text-center">No products yet!</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @php $i=1; @endphp
+                                @forelse ($files as $file)
+                                    <tr>
+                                        <td>{{ $i++ }}</td>
+                                        <td>
+                                            @php
+                                                $url_thumbnail = $path . $file->url_thumbnail;
+                                                $url_media = $path . $file->url_media;
+                                            @endphp
+                                            <a href="{{ $url_media }}">
+                                                <img src="{{ $url_thumbnail }}" alt="{{ $file->filename }}"
+                                                    style="width: 150px; height: 150px;">
+                                            </a>
+                                        </td>
+                                        <td>{{ $file->filename }}</td>
+                                        <td>{{ $file->url_media }}</td>
+                                        <td>{{ $file->user->name_rendered }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button data-url="{{ route('upload_add.destroy', $file->id) }}"​
+                                                    class="btn btn-danger btn-delete"><i class="fas fa-trash">
+                                                    </i></button>
+                                                <form action="{{ route('upload_add.download', $file->id) }}" method="GET">
+                                                    <button type="submit" class="btn btn-warning"><i
+                                                            class="fas fa-download"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center">No products yet!</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@include('uploadfiles.uploadfile')
+    @include('uploadfiles.uploadfile')
 @endsection
 {{-- <main class="h-full overflow-y-auto">
     <div class="container grid px-0 mx-auto">
@@ -133,7 +137,7 @@
           <span class="col-span-2"></span>
           <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
             <nav aria-label="Table navigation">
-              @if(isset($users) && count($users) > 0)
+              @if (isset($users) && count($users) > 0)
                 {{$users->links('dashboards.pagination.template')}}
               @endif
             </nav> 

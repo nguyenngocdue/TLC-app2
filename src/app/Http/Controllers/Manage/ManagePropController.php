@@ -73,7 +73,6 @@ abstract class ManagePropController extends Controller
                 }
                 return view('dashboards.props.manageprop')->with(compact('type', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
             }
-
         }
     }
     public function store(Request $request)
@@ -113,12 +112,13 @@ abstract class ManagePropController extends Controller
             return response()->json(['message' => 'Failed delete'], 404);
         }
     }
-    protected function path(){
+    protected function path()
+    {
         $path = storage_path() . "/json/entities/{$this->type}/props.json";
-        if(file_exists($path)){
+        if (file_exists($path)) {
             $dataManage = json_decode(file_get_contents($path), true);
             return $dataManage;
-        }else{
+        } else {
             return false;
         }
     }

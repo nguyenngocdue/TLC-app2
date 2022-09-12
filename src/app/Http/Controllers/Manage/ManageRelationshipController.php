@@ -28,11 +28,11 @@ abstract class ManageRelationshipController extends Controller
         $type = $this->type;
         $typeModel = $this->typeModel;
         $model = App::make($typeModel);
+        $columnEloquentParams = $model->eloquentParams;
         $dataManage = $this->path();
         if (!$dataManage) {
-            $columnEloquentParams = $model->eloquentParams;
             $columnNames = array_keys($columnEloquentParams);
-            return view('dashboards.props.managerelationship')->with(compact('type', 'columnNames','columnEloquentParams'));
+            return view('dashboards.props.managerelationship')->with(compact('type', 'columnNames', 'columnEloquentParams'));
         } else {
             $names = [];
             $columnNames = [];
@@ -48,6 +48,7 @@ abstract class ManageRelationshipController extends Controller
             $columnColSpans = [];
             $columnNewLines = [];
             $colorLines = [];
+            $arrayCheck = [];
             foreach ($dataManage as $key => $data) {
                 $names[$key] = $key;
                 $columnNames[$key] = $data['column_name'];
@@ -58,6 +59,7 @@ abstract class ManageRelationshipController extends Controller
                 $columnParam4s[$key] = $data['param_4'];
                 $columnParam5s[$key] = $data['param_5'];
                 $columnParam6s[$key] = $data['param_6'];
+                array_push($arrayCheck, $data['eloquent'], $data['param_1'], $data['param_2'], $data['param_3'], $data['param_4'], $data['param_5'], $data['param_6']);
                 $columnLabels[$key] = $data['label'];
                 $columnControls[$key] = $data['control'];
                 $columnColSpans[$key] = $data['col_span'];
@@ -67,20 +69,28 @@ abstract class ManageRelationshipController extends Controller
             $checkData = array_keys($model->eloquentParams);
             $diff1 = array_diff($columnNames, $checkData);
             $diff2 = array_diff($checkData, $columnNames);
-            if (empty($diff1) && empty($diff2)) {
-                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnNames','columnEloquents','columnParam1s','columnParam2s','columnParam3s','columnParam4s','columnParam5s','columnParam6s', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
-            } else{
+            $diff3 = [];
+            $dataCheck = $model->eloquentParams;
+            foreach ($dataCheck as $key => $value) {
+                $diffCheck = array_diff($value, $arrayCheck);
+                if (count($diffCheck) > 0) {
+                    array_push($diff3, $key);
+                }
+            }
+            if (empty($diff1) && empty($diff2) && empty($diff3)) {
+                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
+            } else {
                 foreach ($diff2 as $value) {
                     $names['_' . $value] = '_' . $value;
                     $columnNames['_' . $value] = $value;
                     $columnLabels['_' . $value] = $value;
-                    $columnEloquents['_' . $value] = "hasOne";
-                    $columnParam1s['_' . $value] = "";
-                    $columnParam2s['_' . $value] = "";
-                    $columnParam3s['_' . $value] = "";
-                    $columnParam4s['_' . $value] = "";
-                    $columnParam5s['_' . $value] = "";
-                    $columnParam6s['_' . $value] = "";
+                    $columnEloquents['_' . $value] = $columnEloquentParams[$value][0] ?? null;
+                    $columnParam1s['_' . $value] = $columnEloquentParams[$value][1] ?? null;
+                    $columnParam2s['_' . $value] = $columnEloquentParams[$value][2] ?? null;
+                    $columnParam3s['_' . $value] = $columnEloquentParams[$value][3] ?? null;
+                    $columnParam4s['_' . $value] = $columnEloquentParams[$value][4] ?? null;
+                    $columnParam5s['_' . $value] = $columnEloquentParams[$value][5] ?? null;
+                    $columnParam6s['_' . $value] = $columnEloquentParams[$value][6] ?? null;
                     $columnControls['_' . $value] = "input";
                     $columnColSpans['_' . $value] = "12";
                     $columnNewLines['_' . $value] = "false";
@@ -89,8 +99,18 @@ abstract class ManageRelationshipController extends Controller
                 foreach ($diff1 as $value) {
                     $colorLines['_' . $value] = "removed";
                 }
-                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnNames','columnEloquents','columnParam1s','columnParam2s','columnParam3s','columnParam4s','columnParam5s','columnParam6s', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
-            } 
+                foreach ($diff3 as $value) {
+                    $columnEloquents['_' . $value] = $columnEloquentParams[$value][0] ?? null;
+                    $columnParam1s['_' . $value] = $columnEloquentParams[$value][1] ?? null;
+                    $columnParam2s['_' . $value] = $columnEloquentParams[$value][2] ?? null;
+                    $columnParam3s['_' . $value] = $columnEloquentParams[$value][3] ?? null;
+                    $columnParam4s['_' . $value] = $columnEloquentParams[$value][4] ?? null;
+                    $columnParam5s['_' . $value] = $columnEloquentParams[$value][5] ?? null;
+                    $columnParam6s['_' . $value] = $columnEloquentParams[$value][6] ?? null;
+                    $colorLines['_' . $value] = "new";
+                }
+                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnControls', 'columnColSpans', 'columnNewLines', 'colorLines'));
+            }
         }
     }
     public function store(Request $request)
@@ -136,13 +156,19 @@ abstract class ManageRelationshipController extends Controller
             return response()->json(['message' => 'Failed delete'], 404);
         }
     }
-    protected function path(){
+    protected function path()
+    {
         $path = storage_path() . "/json/entities/{$this->type}/relationships.json";
-        if(file_exists($path)){
+        if (file_exists($path)) {
             $dataManage = json_decode(file_get_contents($path), true);
             return $dataManage;
-        }else{
+        } else {
             return false;
         }
+    }
+    protected function checkDataUpdate($columnEloquentParams)
+    {
+        $jsonColumnEloquentParams = json_encode($columnEloquentParams);
+        Storage::disk('json')->put("entities/{$this->type}/eloquentParams.json", $jsonColumnEloquentParams, 'public');
     }
 }

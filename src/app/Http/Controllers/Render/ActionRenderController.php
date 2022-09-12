@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\App;
 abstract class ActionRenderController extends Controller
 {
     protected $type = '';
-    protected $typeModel ='' ;
+    protected $typeModel = '';
     public function destroy($id)
     {
         try {

@@ -14,35 +14,36 @@ use Illuminate\Support\Facades\Auth;
 abstract class RenderController extends Controller
 {
     protected $type = "";
-    public function index() {
+    public function index()
+    {
         $type = $this->type;
         $idUser = Auth::guard()->id();
         $userLogin = User::find($idUser);
         $search = request('search');
         $model = $this->typeModel;
         $post = Post::search($search);
-        $users = App::make($model)::search($search)->query(function($q) {
+        $users = App::make($model)::search($search)->query(function ($q) {
             $q->orderBy('id', 'asc');
-            })->paginate(10);
+        })->paginate(10);
         $path = storage_path() . "/json/entities/$type/props.json";
         $path2 = storage_path() . "/json/entities/$type/relationships.json";
-        if(!file_exists($path)){
-        }else{
+        if (!file_exists($path)) {
+        } else {
             $data = json_decode(file_get_contents($path), true);
             $data2 = json_decode(file_get_contents($path2), true);
-        return view('dashboards.render.prop')->with(compact('data','data2','users','type','userLogin','search','model'));
+            return view('dashboards.render.prop')->with(compact('data', 'data2', 'users', 'type', 'userLogin', 'search', 'model'));
         }
     }
-    public function update(Request $request , $id)
+    public function update(Request $request, $id)
     {
         $data = $request->input();
-        $data = array_diff_key($data, ['_token' => '' , '_method' => 'PUT']);
+        $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT']);
         $user = User::find($id);
         $dataDefault = User::find($id)->getAttributes();
         $dataSettings = [];
-        foreach($dataDefault as $key => $value){
-            if(!array_key_exists('_'.$key, $data)){
-                $dataSettings['_'.$key] = $value;
+        foreach ($dataDefault as $key => $value) {
+            if (!array_key_exists('_' . $key, $data)) {
+                $dataSettings['_' . $key] = $value;
             }
         }
         $user->settings = $dataSettings;

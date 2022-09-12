@@ -8,18 +8,19 @@ use Laravel\Scout\Searchable;
 
 class Workplace extends Model
 {
-    use HasFactory,Searchable;
+    use HasFactory, Searchable;
     protected $fillable = ["name", "description"];
     protected $primaryKey = 'id';
     protected $table = 'workplaces';
 
     public $eloquentParams = [
-        "user" => ['belongsTo' , User::class, 'owner_id'],
+        "user" => ['belongsTo', User::class, 'owner_id'],
+        // "abc" => ['belongsTo', User::class, 'owner'],
     ];
     public function user()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1],$p[2]);
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function toSearchableArray()
     {

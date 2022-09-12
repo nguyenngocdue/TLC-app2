@@ -8,6 +8,6 @@ use App\Models\Media;
 
 class MediaEditController extends EditController
 {
-   protected $type = "media";
+    protected $type = "media";
     protected $data = Media::class;
 }

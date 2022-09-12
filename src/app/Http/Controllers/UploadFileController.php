@@ -55,8 +55,8 @@ class UploadFileController extends Controller
                 $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
                 $path_image = $path . $fileName;
                 Storage::disk('s3')->put($path_image, file_get_contents($file), 'public');
-                $imageExtension = ['jpeg','png','jpg','gif','svg'];
-                if(in_array($extension,$imageExtension)){
+                $imageExtension = ['jpeg', 'png', 'jpg', 'gif', 'svg'];
+                if (in_array($extension, $imageExtension)) {
                     $thumbnailImage = Image::make($file);
                     $thumbnailImage->fit(150, 150);
                     $resource = $thumbnailImage->stream();
