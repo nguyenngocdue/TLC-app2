@@ -14,18 +14,19 @@
             <div class="min-h-screen flex items-center bg-purple-500">
                 <div class="flex-1 max-w-4xl mx-auto">
                     <div class="grid grid-cols-12 gap-4">
-                        @method('PUT')
+                        @method('PUT')                             
                         @foreach($props as $key => $value)
+                            @php
+                            $label = $value['label'];
+                            $col_span = $value['col_span'];
+                            $column_name = $value['column_name'];
+                            // dd($column_name);
+                            $value_column_name = $values->{$column_name};
+                            $col_span=$value['col_span'];
+                            @endphp
                         {{-- {{dd($value['col_span'])}} --}}
-                        @php
-                        $label = $value['label'];
-                        $col_span = $value['col_span'];
-                        $column_name = $value['column_name'];
-                        $value_column_name = $values->{$column_name};
-                        $col_span=$value['col_span'];
-                        @endphp
-                        {!! $col_span === "12" ?
-                        "<div class='col-span-12'>
+                        {{-- {!! $col_span === "12" ? --}}
+                        <div class='col-span-{{$col_span}}'>
                             <div class='grid grid-row-1 gap-3'>
                                 <div class='grid grid-cols-12 items-center'>
                                     <div class='col-start-1 col-span-2'>
@@ -37,36 +38,14 @@
                                     </div>
                                     <div class='col-start-3 col-span-10'>
                                         <input 
-                                            name='$column_name' 
+                                            name='{{$column_name}}' 
                                             class='ppearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
                                             type='text' 
-                                            value='$value_column_name'>
+                                            value='{{$value_column_name}}'>
                                     </div>
                                 </div>
                             </div>
-                        </div>" :
-                        "<div class='col-span-6'>
-                            <div class='grid grid-row-1 gap-3'>
-                                <div class='grid grid-cols-12 flex-nowrap items-center'>
-                                    <div class='col-start-1 col-span-2'>
-                                        <label 
-                                            class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2' 
-                                            for='inline-full-name' 
-                                            title='{{$column_name}}'
-                                            >$label:
-                                        </label>
-                                    </div>
-                                    <div class='col-start-5 col-span-10'>
-                                        <input 
-                                            name='$column_name' 
-                                            class='ppearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
-                                            type='text' 
-                                            value='$value_column_name'>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>"
-                        !!}
+                        </div>
                         @endforeach
                     </div>
 

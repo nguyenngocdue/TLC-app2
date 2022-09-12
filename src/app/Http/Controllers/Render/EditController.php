@@ -16,7 +16,7 @@ abstract class EditController extends Controller
         return $props;
     }
 
-    public function show(Request $request, $id){
+    public function show($id){
         $values = $this->data::find($id);
         $props = $this->getProps();
         return view('dashboards.render.edit')->with(compact('props', 'values'));
@@ -26,16 +26,11 @@ abstract class EditController extends Controller
     {
         $data = $this->data::find($id);
         $props = $this->getProps();
-        // request()->validate([
-        //     'email' => 'require',
-        //     'full_name' => 'require'
-        // ]);
         foreach ($props as $value) {
             $key = $value['column_name'];
             $data->{$key} = request($key);
-            // echo( $key." ". request($key)."</br>");
         }
         $data->save();
-        return redirect("dashboard/{$this->type}/{$this->type}_edit/$id");
+        return redirect(route("$this->type._edit.show", $id));
     }
 }

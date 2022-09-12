@@ -58,7 +58,7 @@
         "column_type": "string",
         "label": "first_name",
         "control": "attachment",
-        "col_span": "12",
+        "col_span": "4",
         "new_line": "false",
         "type_line": "default"
     },
@@ -67,7 +67,7 @@
         "column_type": "string",
         "label": "last_name",
         "control": "attachment",
-        "col_span": "12",
+        "col_span": "4",
         "new_line": "false",
         "type_line": "default"
     },
@@ -76,7 +76,7 @@
         "column_type": "string",
         "label": "address",
         "control": "attachment",
-        "col_span": "12",
+        "col_span": "4",
         "new_line": "false",
         "type_line": "default"
     },
