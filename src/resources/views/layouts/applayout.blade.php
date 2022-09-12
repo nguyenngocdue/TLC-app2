@@ -256,7 +256,7 @@ to get the desired effect
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   {!! Toastr::message() !!}
-  <script type="" src="{{asset('js/tlc2.js')}}"></script>
+  <script type="" src="{{asset('js/tlc.js')}}"></script>
 </body>
 
 </html>

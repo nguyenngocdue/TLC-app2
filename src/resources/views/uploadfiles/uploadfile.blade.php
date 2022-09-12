@@ -1,7 +1,7 @@
 <div class="modal fade" id="modal-upload">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="{{route('uploadfiles.store')}}" id="form-upload" method="POST" enctype="multipart/form-data">
+			<form action="{{route('upload_add.store')}}" id="form-upload" method="POST" enctype="multipart/form-data">
                 @csrf
 				<div class="modal-header">
 					<h4 class="modal-title">Select File Upload</h4>

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Render;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 
-class RenderController extends Controller
+abstract class RenderController extends Controller
 {
     protected $type = "";
     public function index() {
@@ -17,14 +19,18 @@ class RenderController extends Controller
         $idUser = Auth::guard()->id();
         $userLogin = User::find($idUser);
         $search = request('search');
-        $users = User::search($search)->query(function($q) {
+        $model = $this->typeModel;
+        $post = Post::search($search);
+        $users = App::make($model)::search($search)->query(function($q) {
             $q->orderBy('id', 'asc');
-        })->paginate(10);
-        $patch = storage_path() . "/json/entities/$type/props.json";
-        if(!file_exists($patch)){
+            })->paginate(10);
+        $path = storage_path() . "/json/entities/$type/props.json";
+        $path2 = storage_path() . "/json/entities/$type/relationships.json";
+        if(!file_exists($path)){
         }else{
-            $data = json_decode(file_get_contents($patch), true);
-            return view('dashboards.render.prop')->with(compact('data','users','type','userLogin','search'));
+            $data = json_decode(file_get_contents($path), true);
+            $data2 = json_decode(file_get_contents($path2), true);
+        return view('dashboards.render.prop')->with(compact('data','data2','users','type','userLogin','search','model'));
         }
     }
     public function update(Request $request , $id)
