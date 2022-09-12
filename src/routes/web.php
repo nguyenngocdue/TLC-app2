@@ -54,12 +54,12 @@ Route::group([
         Route::resource('user/user_manage', UserActionRenderController::class);
         Route::resource('user/user_edit', UserEditController::class);
         Route::resource('media/media_renderprop', MediaRenderController::class);
-        Route::resource('media/media_edit', MediaEditController::class);
+        // Route::resource('media/media_edit', MediaEditController::class);
         Route::resource('media/media_manage', MediaActionRenderController::class);
-        // Route::resource('media/media_edit', EditMediaActionRenderController::class);
+        Route::resource('media/media_edit', MediaEditController::class);
         Route::resource('post/post_renderprop', PostRenderController::class);
         Route::resource('post/post_manage', PostActionRenderController::class);
-        // Route::resource('post/post_edit', EditMediaActionRenderController::class);
+        Route::resource('post/post_edit', PostEditController::class);
         Route::resource('/upload/upload_add', UploadFileController::class);
         Route::get('/upload/{id}/download', [UploadFileController::class, 'download'])->name('upload_add.download');
     });
@@ -79,7 +79,6 @@ Route::group([
         Route::resource('post/post_manageprop', ManagePostPropController::class);
         Route::resource('post/post_managelineprop', ManagePostTablePropController::class);
         Route::resource('post/post_managerelationship', ManagePostRelationshipController::class);
-
     });
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
