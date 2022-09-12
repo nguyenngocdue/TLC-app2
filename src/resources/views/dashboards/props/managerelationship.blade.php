@@ -108,10 +108,16 @@
                                             <td class="px-4 py-3 text-sm">
                                                 <select name="control[]"
                                                     class="mt-1 block w-max w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                    @php
+                                                        $controlIndex;
+                                                    @endphp
                                                     @foreach ($controls as $control)
                                                         @if ($columnControls[$key] === $control)
                                                             <option value="{{ $control }}" selected>
                                                                 {{ ucfirst($control) }}</option>
+                                                            @php
+                                                                $controlIndex = $control;
+                                                            @endphp
                                                         @else
                                                             <option value="{{ $control }}">{{ ucfirst($control) }}
                                                             </option>
@@ -119,6 +125,13 @@
                                                     @endforeach
                                                 </select>
                                             </td>
+                                            @if ($controlIndex === 'column')
+                                                <td class="px-4 py-3 text-sm">
+                                                    <input type="text"
+                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                        name="relationship" value="">
+                                                </td>
+                                            @endif
                                             <td class="px-4 py-3 text-sm">
                                                 <input type="text"
                                                     class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
@@ -148,8 +161,8 @@
                                             <td class="px-4 py-3 text-sm">{{ $key + 1 }}</td>
                                             <td class="px-4 py-3 text-sm">
                                                 _{{ $columnName }}
-                                                <input type="text" name="name[]" value="_{{ $columnName }}" readonly
-                                                    hidden>
+                                                <input type="text" name="name[]" value="_{{ $columnName }}"
+                                                    readonly hidden>
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 {{ $columnName }}
@@ -211,6 +224,9 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                <input type="text" name="relationship" value="">
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 <input type="text" name="col_span[]"

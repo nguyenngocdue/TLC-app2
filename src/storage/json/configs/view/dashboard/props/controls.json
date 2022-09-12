@@ -2,6 +2,7 @@
     "controls": [
         "attachment",
         "count",
+        "column",
         "checkbox",
         "datetime",
         "dropdown",
