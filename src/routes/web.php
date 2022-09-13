@@ -25,6 +25,7 @@ use App\Http\Controllers\Render\User\UserEditController;
 use App\Http\Controllers\Render\User\UserRenderController;
 use App\Http\Controllers\Render\Workplace\WorkplaceActionRenderController;
 use App\Http\Controllers\Render\Workplace\WorkplaceRenderController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UploadFileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -96,3 +97,11 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::get('/mail-test', [MailController::class, 'index']);
 
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
+
+
+
+// Route::get('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
+// Route::post('/dashboard/user/manageprop', [ManageUserController::class, 'manageProp'])->name('user.manageProp');
+// Route::get('/dashboard/user/managelineprop', [ManageLineController::class, 'manageLineProp'])->name('user.manageLineProp');
+
+Route::resource('test', TestController::class);

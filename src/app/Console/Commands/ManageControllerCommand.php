@@ -27,7 +27,7 @@ class ManageControllerCommand extends Command
      */
     public function handle()
     {
-        mkdir(__DIR__.'/')
+        // mkdir(__DIR__.'/')
 
         return 0;
     }

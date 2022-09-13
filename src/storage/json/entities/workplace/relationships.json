@@ -1,1 +1,21 @@
+<<<<<<< HEAD
 {"_user":{"column_name":"user","eloquent":"belongsTo","param_1":"App\\Models\\User","param_2":"owner_id","param_3":null,"param_4":null,"param_5":null,"param_6":null,"label":"User","control":"column","control_param":"name","col_span":"12","new_line":"false","type_line":"default"}}
+=======
+{
+    "_user": {
+        "column_name": "user",
+        "eloquent": "belongsTo",
+        "param_1": "App\\Models\\User",
+        "param_2": "owner_id",
+        "param_3": null,
+        "param_4": null,
+        "param_5": null,
+        "param_6": null,
+        "label": "User",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    }
+}
+>>>>>>> 402373dd4c77825747a671c7dfdd5b51bd123ce2
