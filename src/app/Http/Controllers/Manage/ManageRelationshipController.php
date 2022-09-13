@@ -47,6 +47,7 @@ abstract class ManageRelationshipController extends Controller
             $columnControls = [];
             $columnControlParams = [];
             $columnColSpans = [];
+            $columnHidden = [];
             $columnNewLines = [];
             $colorLines = [];
             $arrayCheck = [];
@@ -65,6 +66,7 @@ abstract class ManageRelationshipController extends Controller
                 $columnControls[$key] = $data['control'];
                 $columnControlParams[$key] = $data['control_param'];
                 $columnColSpans[$key] = $data['col_span'];
+                $columnHidden[$key] = $data['hidden'];
                 $columnNewLines[$key] = $data['new_line'];
                 $colorLines[$key] = $data['type_line'];
             }
@@ -80,7 +82,7 @@ abstract class ManageRelationshipController extends Controller
                 }
             }
             if (empty($diff1) && empty($diff2) && empty($diff3)) {
-                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnControls', 'columnControlParams', 'columnColSpans', 'columnNewLines', 'colorLines'));
+                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnControls', 'columnControlParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
             } else {
                 foreach ($diff2 as $value) {
                     $names['_' . $value] = '_' . $value;
@@ -95,6 +97,7 @@ abstract class ManageRelationshipController extends Controller
                     $columnParam6s['_' . $value] = $columnEloquentParams[$value][6] ?? null;
                     $columnControls['_' . $value] = "input";
                     $columnColSpans['_' . $value] = "12";
+                    $columnHidden['_' . $value] = "false";
                     $columnNewLines['_' . $value] = "false";
                     $colorLines['_' . $value] = "new";
                 }
@@ -111,7 +114,7 @@ abstract class ManageRelationshipController extends Controller
                     $columnParam6s['_' . $value] = $columnEloquentParams[$value][6] ?? null;
                     $colorLines['_' . $value] = "new";
                 }
-                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnControls', 'columnControlParams', 'columnColSpans', 'columnNewLines', 'colorLines'));
+                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnControls', 'columnControlParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
             }
         }
     }
@@ -133,14 +136,19 @@ abstract class ManageRelationshipController extends Controller
             $array['control'] = $data['control'][$key];
             $array['control_param'] = $data['control_param'][$key];
             $array['col_span'] = $data['col_span'][$key];
+            $array['hidden'] = $data['hidden'][$key];
             $array['new_line'] = $data['new_line'][$key];
             $array['type_line'] = "default";
             $magane[$name] = $array;
         }
         $jsonManage = json_encode($magane);
         try {
-            Storage::disk('json')->put("entities/{$this->type}/relationships.json", $jsonManage, 'public');
-            Toastr::success('Save file json successfully', 'Save file json');
+            $output = Storage::disk('json')->put("entities/{$this->type}/relationships.json", $jsonManage, 'public');
+            if ($output) {
+                Toastr::success('Save file json successfully!', 'Save file json');
+            } else {
+                Toastr::warning('Maybe Permission is missing!', 'Save file json failed');
+            }
             return back();
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');
@@ -151,8 +159,12 @@ abstract class ManageRelationshipController extends Controller
         $dataManage = $this->path();
         unset($dataManage[$name]);
         try {
-            Storage::disk('json')->put("entities/{$this->type}/relationships.json", json_encode($dataManage), 'public');
-            Toastr::success('Save file json successfully', 'Save file json');
+            $output = Storage::disk('json')->put("entities/{$this->type}/relationships.json", json_encode($dataManage), 'public');
+            if ($output) {
+                Toastr::success('Save file json successfully!', 'Save file json');
+            } else {
+                Toastr::warning('Maybe Permission is missing!', 'Save file json failed');
+            }
             return response()->json(['message' => 'Successfully'], 200);
         } catch (\Throwable $th) {
             Toastr::warning('$th', 'Save file json');
@@ -168,10 +180,5 @@ abstract class ManageRelationshipController extends Controller
         } else {
             return false;
         }
-    }
-    protected function checkDataUpdate($columnEloquentParams)
-    {
-        $jsonColumnEloquentParams = json_encode($columnEloquentParams);
-        Storage::disk('json')->put("entities/{$this->type}/eloquentParams.json", $jsonColumnEloquentParams, 'public');
     }
 }

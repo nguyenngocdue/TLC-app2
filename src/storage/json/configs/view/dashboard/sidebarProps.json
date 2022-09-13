@@ -78,7 +78,7 @@
         "title": "Developer Zone",
         "items": {
             "user": {
-                "title": "User",
+                "title": "Users",
                 "icon": "nav-icon fas fa-user",
                 "items": [
                     {
