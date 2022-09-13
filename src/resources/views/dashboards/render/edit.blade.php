@@ -5,6 +5,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src={{asset('js/app.js')}}></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/themes/airbnb.min.css">
+    <link rel="stylesheet" href="https://www.tailwindcsscomponent.com/date-and-time-picker#the-description-of-date-and-time-picker-ui-component">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+
+
+
+
 </head>
 
 <body>
@@ -34,7 +44,6 @@
                                         <label class='block tracking-wide text-gray-800 text-xs mb-2 px-3 text-base' title='{{$column_name}}'>{{$label}}
                                         </label>
                                     </div>
-                                    {{-- {{dd($control)}} --}}
                                     <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2'>
                                         @switch ($control)
                                         @case ('text')
@@ -42,9 +51,13 @@
                                         @break
 
                                         @case ('dropdown')
-                                        {{-- {{dd($values->id)}} --}}
                                         <x-controls.dropdown id={{$id}} />
                                         @break
+
+                                        @case('datetime')
+                                        <x-controls.datetime id={{$id}} label={{$label}} />
+                                        @break
+
                                         @default
                                         {{$control}}
                                         @break
@@ -69,7 +82,6 @@
         </form>
     </div>
 
-    </div>
 
 </body>
 

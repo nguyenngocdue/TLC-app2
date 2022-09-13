@@ -1,2 +1,0 @@
-sfsdfsdfsfdtitle
-{{dd($title)}}
