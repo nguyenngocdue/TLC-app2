@@ -11,7 +11,7 @@ class Media extends Model
     use HasFactory, Searchable;
     protected $fillable = ["url_folder", "url_thumbnail", "extension", "url_media", "filename", "owner_id"];
     protected $primaryKey = 'id';
-    protected $table = 'medias';
+    protected $table = 'media';
 
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],

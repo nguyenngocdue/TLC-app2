@@ -7,6 +7,8 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 use function GuzzleHttp\json_decode;
 
 abstract class ManagePropController extends Controller
@@ -25,10 +27,10 @@ abstract class ManagePropController extends Controller
         $type = $this->type;
         $dataManage = $this->path();
         if (!$dataManage) {
-            $columnNames = Schema::getColumnListing($type . 's');
+            $columnNames = Schema::getColumnListing(Str::plural($type));
             $columnTypes = [];
             foreach ($columnNames as $columnName) {
-                $typeColumn = Schema::getColumnType($type . 's', $columnName);
+                $typeColumn = Schema::getColumnType(Str::plural($type), $columnName);
                 array_push($columnTypes, $typeColumn);
             }
             // dd($columnNames);
@@ -54,15 +56,15 @@ abstract class ManagePropController extends Controller
                 $columnNewLines[$key] = $data['new_line'];
                 $colorLines[$key] = $data['type_line'];
             }
-            $diff1 = array_diff($columnNames, Schema::getColumnListing($type . 's'));
-            $diff2 = array_diff(Schema::getColumnListing($type . 's'), $columnNames);
+            $diff1 = array_diff($columnNames, Schema::getColumnListing(Str::plural($type)));
+            $diff2 = array_diff(Schema::getColumnListing(Str::plural($type)), $columnNames);
             if (empty($diff1) && empty($diff2)) {
                 return view('dashboards.props.manageprop')->with(compact('type', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
             } else {
                 foreach ($diff2 as $value) {
                     $names['_' . $value] = '_' . $value;
                     $columnNames['_' . $value] = $value;
-                    $typeColumn = Schema::getColumnType($type . 's', $value);
+                    $typeColumn = Schema::getColumnType(Str::plural($type), $value);
                     $columnTypes['_' . $value] = $typeColumn;
                     $columnLabels['_' . $value] = $value;
                     $columnControls['_' . $value] = "input";
