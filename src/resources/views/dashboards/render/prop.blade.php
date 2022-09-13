@@ -64,12 +64,12 @@
                                 class="border-b bg-gray-50 text-left text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
                                 <th class="px-4 py-3">Action</th>
                                 @foreach ($data as $key => $value)
-                                    @if ($value['hidden'] === 'false')
+                                    @if ($value['hidden'] === null)
                                         <th class="{{ $key . '_th' }} px-4 py-3">{{ $value['label'] }}</th>
                                     @endif
                                 @endforeach
                                 @foreach ($data2 as $key => $value)
-                                    @if ($value['hidden'] === 'false')
+                                    @if ($value['hidden'] === null)
                                         <th class="{{ $key . '_th' }} px-4 py-3">{{ $value['label'] }}</th>
                                     @endif
                                 @endforeach
@@ -86,7 +86,7 @@
                                                 type="button"><i class="fas fa-trash"></i></button>
                                         </td>
                                         @foreach ($data as $key1 => $value)
-                                            @if ($value['hidden'] === 'false')
+                                            @if ($value['hidden'] === null)
                                                 @if ($value['column_name'] === 'id')
                                                     {{-- {{dd($type.'_edit.update')}} --}}
                                                     <td class="px-4 py-3 text-sm">
@@ -108,7 +108,7 @@
                                         @endforeach
                                         @if (isset($data2))
                                             @foreach ($data2 as $key2 => $item)
-                                                @if ($item['hidden'] === 'false')
+                                                @if ($item['hidden'] === null)
                                                     @switch($item['control'])
                                                         @case('')
                                                             <td class="text-center">
