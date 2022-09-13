@@ -12,7 +12,7 @@
         "column_name": "email",
         "column_type": "string",
         "label": "Email",
-        "control": "attachment",
+        "control": "text",
         "col_span": "12",
         "new_line": "false",
         "type_line": "default"
@@ -30,7 +30,7 @@
         "column_name": "full_name",
         "column_type": "string",
         "label": "Full Name",
-        "control": "attachment",
+        "control": "dropdown",
         "col_span": "12",
         "new_line": "false",
         "type_line": "default"
@@ -120,7 +120,7 @@
         "column_name": "workplace",
         "column_type": "bigint",
         "label": "Workplace",
-        "control": "attachment",
+        "control": "dropdown",
         "col_span": "12",
         "new_line": "false",
         "type_line": "default"

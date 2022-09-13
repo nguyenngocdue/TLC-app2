@@ -15,35 +15,43 @@
                 <div class="mx-auto max-w-4xl flex-1">
                     <div class="grid grid-cols-12">
                         @method('PUT')
-                        @foreach ($props as $key => $value)
-                            @php
-                                $label = $value['label'];
-                                $col_span = $value['col_span'];
-                                $column_name = $value['column_name'];
-                                $value_column_name = $values->{$column_name};
-                                if (is_array($value_column_name)) {
-                                    $value_column_name = 'ARRAY';
-                                }
-                                // dd($value_column_name);
-                                $col_span = $value['col_span'];
-                            @endphp
-                            <div class='col-span-{{ $col_span }}'>
-                                <div class='grid-row-1 grid gap-3'>
-                                    <div class='grid grid-cols-12 items-center'>
-                                        <div class='col-span-{{ 24 / $col_span }} col-start-1 text-right'>
-                                            <label class='mb-2 block px-3 text-xs text-base tracking-wide text-gray-800'
-                                                title='{{ $column_name }}'>{{ $label }}
-                                            </label>
-                                        </div>
+                        @foreach($props as $key => $value)
+                        @php
+                        $label = $value['label'];
+                        $col_span = $value['col_span'];
+                        $column_name = $value['column_name'];
+                        $control = $value['control'];
+                        $value_column_name = $values->{$column_name};
+                        if(is_array($value_column_name)) $value_column_name = 'ARRAY';
+                        // dd($value_column_name);
+                        $col_span=$value['col_span'];
+                        @endphp
+                        <div class='col-span-{{$col_span}}'>
+                            <div class='grid grid-row-1 gap-3'>
+                                <div class='grid grid-cols-12 items-center'>
+                                    <div class='col-start-1 col-span-{{24/$col_span}} text-right'>
+                                        <label class='block tracking-wide text-gray-800 text-xs mb-2 px-3 text-base' title='{{$column_name}}'>{{$label}}
+                                        </label>
+                                    </div>
+                                    {{-- {{dd($control)}} --}}
+                                    <div class='col-start-{{24/$col_span + 1}} col-span-10'>
+                                        @switch ($control)
+                                        @case ('text'):
+                                        <x-controls.text columnName={{$column_name}} valColName={{$value_column_name}} />
+                                        @break
 
-                                        <div class='col-start-{{ 24 / $col_span + 1 }} col-span-10'>
-                                            <input name='{{ $column_name }}'
-                                                class='ppearance-none mb-3 block w-full rounded border bg-gray-200 py-3 px-4 leading-tight text-gray-700 focus:bg-white focus:outline-none'
-                                                type='text' value='{{ $value_column_name }}'>
-                                        </div>
+                                        @case ('dropdown'):
+                                        @yield('dropdown')
+                                        @break
+
+                                        @default:
+                                        <span>{{$control}}</span>
+                                        @break;
+                                        @endswitch
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
 
@@ -51,9 +59,7 @@
                 <div class="flex justify-end px-5">
                     <div></div>
                     <div class="">
-                        <button
-                            class="focus:shadow-outline rounded bg-purple-500 py-2 px-4 font-bold text-white shadow hover:bg-purple-400 focus:outline-none"
-                            type="button">
+                        <button class="focus:shadow-outline rounded bg-purple-500 py-2 px-4 font-bold text-white shadow hover:bg-purple-400 focus:outline-none" type="button">
                             Update
                         </button>
                     </div>

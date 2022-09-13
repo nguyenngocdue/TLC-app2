@@ -86,9 +86,7 @@
                         <div class="columns-1">
                             <div class="flex grid-rows-1 items-center">
                                 <div class="columns-1">
-                                    <label
-                                        class="mb-2 block text-right text-xs font-bold uppercase tracking-wide text-gray-700"
-                                        for="grid-last-name">ID 333</label>
+                                    <label class="mb-2 block text-right text-xs font-bold uppercase tracking-wide text-gray-700" for="grid-last-name">ID 333</label>
                                 </div>
                                 {{-- <div class="columns-11"> --}}
                                 <input class="w-full" id="grid-last-name" type="text" placeholder="123">
@@ -99,9 +97,7 @@
                         <div class="columns-2">
                             <div class="flex grid-rows-1 items-center">
                                 <div class="columns-1">
-                                    <label
-                                        class="mb-2 block text-right text-xs font-bold uppercase tracking-wide text-gray-700"
-                                        for="grid-last-name">Email</label>
+                                    <label class="mb-2 block text-right text-xs font-bold uppercase tracking-wide text-gray-700" for="grid-last-name">Email</label>
                                 </div>
                                 <input class="w-full" id="grid-last-name" type="text" placeholder="123">
                                 {{-- <div class="columns-10">
@@ -109,9 +105,7 @@
                             </div>
                             <div class="flex grid-rows-1 items-center">
                                 <div class="columns-1">
-                                    <label
-                                        class="mb-2 block text-right text-xs font-bold uppercase tracking-wide text-gray-700"
-                                        for="grid-last-name">Name</label>
+                                    <label class="mb-2 block text-right text-xs font-bold uppercase tracking-wide text-gray-700" for="grid-last-name">Name</label>
                                 </div>
                                 <input class="w-full" id="grid-last-name" type="text" placeholder="123">
                                 {{-- <div class="columns-10">

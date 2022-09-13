@@ -55,11 +55,14 @@ class User extends Authenticatable implements LdapAuthenticatable
     //     return 'my_guid_column';
     // }
     public $eloquentParams = [
-        "medias" => ['hasMany',Media::class, 'owner_id','id'],
-        "posts" => ['hasMany',Post::class,'owner_id','id'],
-        "workplace" => ['hasMany',Workplace::class,'owner_id','id'],
+        // "files" => ['hasMany' , Media::class],
+        // "medias" => ['morphMany',Media::class, 'owner_id','id'],
+        "medias" => ['hasMany', Media::class, 'owner_id', 'id'],
+        "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
+        // "workplace" => ['hasMany',Post::class,'owner_id','id'],
+        "getWorkplace" => ['belongsTo', Workplace::class, 'workplace'],
     ];
-    
+
     // public function files()
     // {
     //     $p = $this->eloquentParams[__FUNCTION__];
@@ -68,16 +71,17 @@ class User extends Authenticatable implements LdapAuthenticatable
     public function medias()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1],$p[2]);
+        return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function posts(){
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1],$p[2],$p[3]);
-    }
-    public function workplaces()
+    public function posts()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1],$p[2]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3]);
+    }
+    public function getWorkplace()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function toSearchableArray()
     {
@@ -90,5 +94,4 @@ class User extends Authenticatable implements LdapAuthenticatable
             'email' => $this->email,
         ];
     }
-
 }
