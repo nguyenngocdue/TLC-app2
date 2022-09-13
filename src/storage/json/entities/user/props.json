@@ -1,1 +1,353 @@
-{"_address":{"column_name":"address","column_type":"string","label":"Address","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_category":{"column_name":"category","column_type":"string","label":"Category","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_created_at":{"column_name":"created_at","column_type":"datetime","label":"Created At","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_date_of_birth":{"column_name":"date_of_birth","column_type":"date","label":"Date Of Birth","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_department":{"column_name":"department","column_type":"bigint","label":"Department","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_discipline":{"column_name":"discipline","column_type":"bigint","label":"Discipline","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_domain":{"column_name":"domain","column_type":"string","label":"Domain","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_email":{"column_name":"email","column_type":"string","label":"Email","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_email_verified_at":{"column_name":"email_verified_at","column_type":"datetime","label":"Email Verified At","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_employeeid":{"column_name":"employeeid","column_type":"string","label":"Employeeid","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_featured_image":{"column_name":"featured_image","column_type":"bigint","label":"Featured Image","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_first_date":{"column_name":"first_date","column_type":"date","label":"First Date","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_first_name":{"column_name":"first_name","column_type":"string","label":"First Name","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_full_name":{"column_name":"full_name","column_type":"string","label":"Full Name","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_guid":{"column_name":"guid","column_type":"string","label":"Guid","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_id":{"column_name":"id","column_type":"bigint","label":"Id","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_last_date":{"column_name":"last_date","column_type":"date","label":"Last Date","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_last_name":{"column_name":"last_name","column_type":"string","label":"Last Name","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_leaf_uids":{"column_name":"leaf_uids","column_type":"string","label":"Leaf Uids","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_name_rendered":{"column_name":"name_rendered","column_type":"string","label":"Name Rendered","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_name_suffix":{"column_name":"name_suffix","column_type":"string","label":"Name Suffix","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_password":{"column_name":"password","column_type":"string","label":"Password","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_phone":{"column_name":"phone","column_type":"string","label":"Phone","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_position_1":{"column_name":"position_1","column_type":"bigint","label":"Position 1","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_position_2":{"column_name":"position_2","column_type":"bigint","label":"Position 2","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_position_3":{"column_name":"position_3","column_type":"bigint","label":"Position 3","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_position_prefix":{"column_name":"position_prefix","column_type":"bigint","label":"Position Prefix","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_position_rendered":{"column_name":"position_rendered","column_type":"string","label":"Position Rendered","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_remember_token":{"column_name":"remember_token","column_type":"string","label":"Remember Token","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_resigned":{"column_name":"resigned","column_type":"boolean","label":"Resigned","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_role":{"column_name":"role","column_type":"bigint","label":"Role","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_settings":{"column_name":"settings","column_type":"json","label":"Settings","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_show_on_beta":{"column_name":"show_on_beta","column_type":"boolean","label":"Show On Beta","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_time_keeping_type":{"column_name":"time_keeping_type","column_type":"string","label":"Time Keeping Type","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_title":{"column_name":"title","column_type":"string","label":"Title","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_updated_at":{"column_name":"updated_at","column_type":"datetime","label":"Updated At","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_user_type":{"column_name":"user_type","column_type":"string","label":"User Type","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_viewport_uids":{"column_name":"viewport_uids","column_type":"string","label":"Viewport Uids","control":null,"col_span":"12","new_line":"false","type_line":"default"},"_workplace":{"column_name":"workplace","column_type":"bigint","label":"Workplace","control":null,"col_span":"12","new_line":"false","type_line":"default"}}
+{
+    "_id": {
+        "column_name": "id",
+        "column_type": "bigint",
+        "label": "Id",
+        "control": "text",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_email": {
+        "column_name": "email",
+        "column_type": "string",
+        "label": "Email",
+        "control": "text",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_name_rendered": {
+        "column_name": "name_rendered",
+        "column_type": "string",
+        "label": "Name Rendered",
+        "control": "text",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_full_name": {
+        "column_name": "full_name",
+        "column_type": "string",
+        "label": "Full Name",
+        "control": "text",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_name_suffix": {
+        "column_name": "name_suffix",
+        "column_type": "string",
+        "label": "Name Suffix",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_employeeid": {
+        "column_name": "employeeid",
+        "column_type": "string",
+        "label": "Employeeid",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_first_name": {
+        "column_name": "first_name",
+        "column_type": "string",
+        "label": "First Name",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_last_name": {
+        "column_name": "last_name",
+        "column_type": "string",
+        "label": "Last Name",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_address": {
+        "column_name": "address",
+        "column_type": "string",
+        "label": "Address",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_phone": {
+        "column_name": "phone",
+        "column_type": "string",
+        "label": "Phone",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_featured_image": {
+        "column_name": "featured_image",
+        "column_type": "bigint",
+        "label": "Featured Image",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_time_keeping_type": {
+        "column_name": "time_keeping_type",
+        "column_type": "string",
+        "label": "Time Keeping Type",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_user_type": {
+        "column_name": "user_type",
+        "column_type": "string",
+        "label": "User Type",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_workplace": {
+        "column_name": "workplace",
+        "column_type": "bigint",
+        "label": "Workplace",
+        "control": "dropdown",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_category": {
+        "column_name": "category",
+        "column_type": "string",
+        "label": "Category",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_date_of_birth": {
+        "column_name": "date_of_birth",
+        "column_type": "date",
+        "label": "Date Of Birth",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_first_date": {
+        "column_name": "first_date",
+        "column_type": "date",
+        "label": "First Date",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_last_date": {
+        "column_name": "last_date",
+        "column_type": "date",
+        "label": "Last Date",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_title": {
+        "column_name": "title",
+        "column_type": "string",
+        "label": "Title",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_position_prefix": {
+        "column_name": "position_prefix",
+        "column_type": "bigint",
+        "label": "Position Prefix",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_position_1": {
+        "column_name": "position_1",
+        "column_type": "bigint",
+        "label": "Position 1",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_position_2": {
+        "column_name": "position_2",
+        "column_type": "bigint",
+        "label": "Position 2",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_position_3": {
+        "column_name": "position_3",
+        "column_type": "bigint",
+        "label": "Position 3",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_position_rendered": {
+        "column_name": "position_rendered",
+        "column_type": "string",
+        "label": "Position Rendered",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_role": {
+        "column_name": "role",
+        "column_type": "bigint",
+        "label": "Role",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_discipline": {
+        "column_name": "discipline",
+        "column_type": "bigint",
+        "label": "Discipline",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_department": {
+        "column_name": "department",
+        "column_type": "bigint",
+        "label": "Department",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_show_on_beta": {
+        "column_name": "show_on_beta",
+        "column_type": "boolean",
+        "label": "Show On Beta",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_resigned": {
+        "column_name": "resigned",
+        "column_type": "boolean",
+        "label": "Resigned",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_viewport_uids": {
+        "column_name": "viewport_uids",
+        "column_type": "string",
+        "label": "Viewport Uids",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_leaf_uids": {
+        "column_name": "leaf_uids",
+        "column_type": "string",
+        "label": "Leaf Uids",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_email_verified_at": {
+        "column_name": "email_verified_at",
+        "column_type": "datetime",
+        "label": "Email Verified At",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_password": {
+        "column_name": "password",
+        "column_type": "string",
+        "label": "Password",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_settings": {
+        "column_name": "settings",
+        "column_type": "json",
+        "label": "Settings",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_remember_token": {
+        "column_name": "remember_token",
+        "column_type": "string",
+        "label": "Remember Token",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_created_at": {
+        "column_name": "created_at",
+        "column_type": "datetime",
+        "label": "Created At",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_updated_at": {
+        "column_name": "updated_at",
+        "column_type": "datetime",
+        "label": "Updated At",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_guid": {
+        "column_name": "guid",
+        "column_type": "string",
+        "label": "Guid",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    },
+    "_domain": {
+        "column_name": "domain",
+        "column_type": "string",
+        "label": "Domain",
+        "control": "attachment",
+        "col_span": "12",
+        "new_line": "false",
+        "type_line": "default"
+    }
+}

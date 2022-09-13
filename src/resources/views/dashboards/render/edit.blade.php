@@ -23,9 +23,10 @@
                         $control = $value['control'];
                         $value_column_name = $values->{$column_name};
                         if(is_array($value_column_name)) $value_column_name = 'ARRAY';
-                        // dd($value_column_name);
                         $col_span=$value['col_span'];
+                        $id= $values->id;
                         @endphp
+
                         <div class='col-span-{{$col_span}}'>
                             <div class='grid grid-row-1 gap-3'>
                                 <div class='grid grid-cols-12 items-center'>
@@ -34,19 +35,19 @@
                                         </label>
                                     </div>
                                     {{-- {{dd($control)}} --}}
-                                    <div class='col-start-{{24/$col_span + 1}} col-span-10'>
+                                    <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2'>
                                         @switch ($control)
-                                        @case ('text'):
+                                        @case ('text')
                                         <x-controls.text columnName={{$column_name}} valColName={{$value_column_name}} />
                                         @break
 
-                                        @case ('dropdown'):
-                                        @yield('dropdown')
+                                        @case ('dropdown')
+                                        {{-- {{dd($values->id)}} --}}
+                                        <x-controls.dropdown id={{$id}} />
                                         @break
-
-                                        @default:
-                                        <span>{{$control}}</span>
-                                        @break;
+                                        @default
+                                        {{$control}}
+                                        @break
                                         @endswitch
                                     </div>
                                 </div>
