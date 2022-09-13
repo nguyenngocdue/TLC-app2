@@ -3,7 +3,7 @@
         "column_name": "id",
         "column_type": "bigint",
         "label": "Id",
-        "control": "attachment",
+        "control": "text",
         "col_span": "12",
         "new_line": "false",
         "type_line": "default"
@@ -21,7 +21,7 @@
         "column_name": "name_rendered",
         "column_type": "string",
         "label": "Name Rendered",
-        "control": "attachment",
+        "control": "text",
         "col_span": "12",
         "new_line": "false",
         "type_line": "default"
@@ -30,7 +30,7 @@
         "column_name": "full_name",
         "column_type": "string",
         "label": "Full Name",
-        "control": "dropdown",
+        "control": "text",
         "col_span": "12",
         "new_line": "false",
         "type_line": "default"

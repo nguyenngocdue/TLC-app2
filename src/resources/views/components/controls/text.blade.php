@@ -1,6 +1,3 @@
-@props(['a'])
 <div>
-    {{-- {{dd($columnName)}} --}}
-    <input name='{{$columnName}}' class='ppearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='text' value='{{$valColName}}'>
-
+    <input name='{{$columnName}}' class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type='text' value='{{$valColName}}'>
 </div>

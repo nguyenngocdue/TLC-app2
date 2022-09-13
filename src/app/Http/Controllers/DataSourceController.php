@@ -44,11 +44,7 @@ class TestController extends Controller
         $table = ($related)::first()->getTable();
 
         $dataSource = DB::table($table)->select('id', 'name')->get();
-        dd($dataSource);
-
-        return view('test', [
-            'title' => 'Title'
-        ]);
+        return view('dashboards.render.edit')->with(compact('dataSource'));
     }
 
     /**
