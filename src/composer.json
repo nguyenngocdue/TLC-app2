@@ -21,7 +21,8 @@
         "laravel/telescope": "^4.9",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
-        "league/flysystem-aws-s3-v3": "3.0.22"
+        "league/flysystem-aws-s3-v3": "3.0.22",
+        "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
