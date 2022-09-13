@@ -76,13 +76,14 @@
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 <select name="control[]"
-                                                    class="mt-1 block w-max w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
                                                     @foreach ($controls as $control)
                                                         @if ($columnControls[$key] === $control)
-                                                            <option value="{{ $control }}" selected>
+                                                            <option value="{{ $control }}">
                                                                 {{ ucfirst($control) }}</option>
                                                         @else
-                                                            <option value="{{ $control }}">{{ ucfirst($control) }}
+                                                            <option value="{{ $control }}">
+                                                                {{ ucfirst($control) }}
                                                             </option>
                                                         @endif
                                                     @endforeach
@@ -95,7 +96,7 @@
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 <select name="new_line[]"
-                                                    class="mt-1 block w-max w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
                                                     <option value="false"
                                                         @if ($columnNewLines[$key] == 'false') selected @endif>False</option>
                                                     <option value="true"
@@ -144,9 +145,10 @@
 
                                             <td class="px-4 py-3 text-sm">
                                                 <select name="control[]"
-                                                    class="mt-1 block w-max w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
                                                     @foreach ($controls as $control)
-                                                        <option value="{{ $control }}">{{ ucfirst($control) }}
+                                                        <option value="{{ $control }}">
+                                                            {{ ucfirst($control) }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -158,7 +160,7 @@
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 <select name="new_line[]"
-                                                    class="mt-1 block w-max w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                    class="mt-1 block w-max w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
                                                     <option value="false">False</option>
                                                     <option value="true">True</option>
                                                 </select>

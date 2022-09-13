@@ -120,10 +120,21 @@
                                                         </td>
                                                     @break
 
-                                                    <td class="text-center">
-                                                        <x-render.count
-                                                            count="{{ $user->{$item['column_name']} ? $user->{$item['column_name']}->count() : '0' }}" />
-                                                    </td>
+                                                    @case('count')
+                                                        <td class="text-center">
+                                                            <x-render.count
+                                                                count="{{ $user->{$item['column_name']} ? $user->{$item['column_name']}->count() : '0' }}" />
+                                                        </td>
+                                                    @break
+
+                                                    @case('column')
+                                                        <td class="text-center">
+                                                            @php
+                                                                $render = $user->{$item['column_name']}->{$item['control_param']} ?? '';
+                                                            @endphp
+                                                            {{ $render }}
+                                                        </td>
+                                                    @break
 
                                                     @default
                                                         <td class="px-4 py-3">

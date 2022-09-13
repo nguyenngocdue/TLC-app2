@@ -50,7 +50,6 @@ return new class extends Migration
             $table->json("settings");
             $table->rememberToken();
             $table->timestamps();
-
             $table->foreign('workplace')->references('id')->on('workplaces');
         });
     }
