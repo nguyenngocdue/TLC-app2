@@ -9,7 +9,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
 
 abstract class RenderController extends Controller
 {
@@ -27,7 +27,11 @@ abstract class RenderController extends Controller
         })->paginate(10);
         $path = storage_path() . "/json/entities/$type/props.json";
         $path2 = storage_path() . "/json/entities/$type/relationships.json";
-        if (!file_exists($path)) {
+        if (!file_exists($path) || !file_exists($path2)) {
+            Toastr::warning('Please make settings ' . Str::plural($type) . ' before rendering!', 'Please setting ' . Str::plural($type));
+            $data = [];
+            $data2 = [];
+            return view('dashboards.render.prop')->with(compact('data', 'data2', 'users', 'type', 'userLogin', 'search', 'model'));
         } else {
             $data = json_decode(file_get_contents($path), true);
             $data2 = json_decode(file_get_contents($path2), true);
