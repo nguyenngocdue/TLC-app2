@@ -102,29 +102,41 @@
                                         @endforeach
                                         @if (isset($data2))
                                             @foreach ($data2 as $key2 => $item)
-                                                @if ($item['control'] === 'attachment')
-                                                    <td class="text-center">
-                                                        <x-render.attachment attachment="{{ $user->id }}"
-                                                            model="{{ $model }}"
-                                                            relationship="{{ $item['column_name'] }}" />
-                                                    </td>
-                                                @elseif ($item['control'] === 'count')
+                                                @switch($item['control'])
+                                                    @case('')
+                                                        <td class="text-center">
+                                                            <span
+                                                                class="rounded-full bg-yellow-400 px-2 py-1 text-xs font-semibold leading-tight text-red-400 dark:bg-red-500 dark:text-green-100">
+                                                                None-Set
+                                                            </span>
+                                                        </td>
+                                                    @break
+
+                                                    @case('attachment')
+                                                        <td class="text-center">
+                                                            <x-render.attachment attachment="{{ $user->id }}"
+                                                                model="{{ $model }}"
+                                                                relationship="{{ $item['column_name'] }}" />
+                                                        </td>
+                                                    @break
+
                                                     <td class="text-center">
                                                         <x-render.count
                                                             count="{{ $user->{$item['column_name']} ? $user->{$item['column_name']}->count() : '0' }}" />
                                                     </td>
-                                                @else
-                                                    <td class="px-4 py-3">
-                                                        @if ($user->{$item['column_name']} != null)
-                                                            <x-render.user
-                                                                src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg"
-                                                                name_rendered="{{ $user->{$item['column_name']}->name_rendered }}"
-                                                                email="{{ $user->{$item['column_name']}->email }}" />
-                                                        @else
-                                                        @endif
 
-                                                    </td>
-                                                @endif
+                                                    @default
+                                                        <td class="px-4 py-3">
+                                                            @if ($user->{$item['column_name']} != null)
+                                                                <x-render.user
+                                                                    src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg"
+                                                                    name_rendered="{{ $user->{$item['column_name']}->name_rendered }}"
+                                                                    email="{{ $user->{$item['column_name']}->email }}" />
+                                                            @else
+                                                            @endif
+
+                                                        </td>
+                                                @endswitch
                                             @endforeach
                                         @endif
                                     </tr>

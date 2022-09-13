@@ -35,6 +35,7 @@
                                     <th class="px-4 py-3">Param_6</th>
                                     <th class="px-4 py-3">Label</th>
                                     <th class="px-4 py-3">Control</th>
+                                    <th class="px-4 py-3">Control Param</th>
                                     <th class="px-4 py-3">Col span</th>
                                     <th class="px-4 py-3">New Line</th>
                                     <th class="px-4 py-3">Action</th>
@@ -125,13 +126,11 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            @if ($controlIndex === 'column')
-                                                <td class="px-4 py-3 text-sm">
-                                                    <input type="text"
-                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                        name="relationship" value="">
-                                                </td>
-                                            @endif
+                                            <td class="px-4 py-3 text-sm">
+                                                <input type="text"
+                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                    name="control_param[]" value="{{ $columnControlParams[$key] }}">
+                                            </td>
                                             <td class="px-4 py-3 text-sm">
                                                 <input type="text"
                                                     class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
@@ -226,7 +225,9 @@
                                                 </select>
                                             </td>
                                             <td class="px-4 py-3 text-sm">
-                                                <input type="text" name="relationship" value="">
+                                                <input type="text"
+                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                    name="control_param[]" value="">
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 <input type="text" name="col_span[]"
