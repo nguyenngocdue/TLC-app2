@@ -61,13 +61,13 @@
                     <table class="whitespace-no-wrap w-full">
                         <thead>
                             <tr
-                                class="border-b bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
+                                class="border-b bg-gray-50 text-left text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
                                 <th class="px-4 py-3">Action</th>
                                 @foreach ($data as $key => $value)
-                                    <th class="{{ $key . '_th' }} px-4 py-3">{{ $value['column_name'] }}</th>
+                                    <th class="{{ $key . '_th' }} px-4 py-3">{{ $value['label'] }}</th>
                                 @endforeach
                                 @foreach ($data2 as $key => $value)
-                                    <th class="{{ $key . '_th' }} px-4 py-3">{{ $value['column_name'] }}</th>
+                                    <th class="{{ $key . '_th' }} px-4 py-3">{{ $value['label'] }}</th>
                                 @endforeach
                             </tr>
                         </thead>
