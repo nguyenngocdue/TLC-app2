@@ -67,7 +67,7 @@ Route::group([
         Route::resource('post/post_edit', PostEditController::class);
         Route::resource('workplace/workplace_renderprop', WorkplaceRenderController::class);
         Route::resource('workplace/workplace_manage', WorkplaceActionRenderController::class);
-        Route::resource('workplace/workplace_edit', EditMediaActionRenderController::class);
+        Route::resource('workplace/workplace_edit', MediaEditController::class);
         Route::resource('/upload/upload_add', UploadFileController::class);
         Route::get('/upload/{id}/download', [UploadFileController::class, 'download'])->name('upload_add.download');
     });
