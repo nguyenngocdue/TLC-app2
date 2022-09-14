@@ -4,6 +4,24 @@ $.ajaxSetup({
     },
 })
 $(document).ready(function () {
+    $('.btn-edit').click(function (e) {
+        var url = $(this).attr('data-url')
+        console.log(url)
+        $.ajax({
+            type: 'get',
+            url: url,
+            success: function (response) {
+                console.log(response)
+                $('#name_role').val(response.data.name)
+                $('#guard_role').val(response.data.guard_name)
+                $('#form-edit').attr(
+                    'action',
+                    '/admin/roles/' + response.data.id
+                )
+            },
+            error: function (error) {},
+        })
+    })
     $('.btn-delete').click(function () {
         var url = $(this).attr('data-url')
         var _this = $(this)
@@ -22,7 +40,6 @@ $(document).ready(function () {
                     type: 'delete',
                     url: url,
                     success: function (response) {
-                        console.log(response)
                         Swal.fire(
                             'Deleted!',
                             'Your file has been deleted.',
@@ -38,7 +55,6 @@ $(document).ready(function () {
     $('.btn-delete-user').click(function () {
         var url = $(this).attr('data-url')
         var _this = $(this)
-        console.log(url)
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -53,12 +69,7 @@ $(document).ready(function () {
                     type: 'delete',
                     url: url,
                     success: function (response) {
-                        console.log(response)
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        )
+                        Swal.fire('Deleted!', response.message, 'success')
                         setTimeout(location.reload.bind(location), 1000)
                     },
                     error: function (jqXHR, textStatus, errorThrown) {},
@@ -94,17 +105,6 @@ $(document).ready(function () {
         $('#modal-upload').modal('show')
         e.preventDefault()
     })
-    // $('.btn-dowload').click(function(e){
-    //   var url = $(this).attr('data-url');
-    //   $.ajax({
-    //     type: 'get',
-    //     url: url,
-    //     success: function(response) {
-    //       },
-    //       error: function (jqXHR, textStatus, errorThrown) {
-    //       }
-    //   })
-    // });
     $('.btn-delete').click(function () {
         var url = $(this).attr('data-url')
         var _this = $(this)

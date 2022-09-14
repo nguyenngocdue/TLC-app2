@@ -163,5 +163,32 @@
             }
         },
         "divider": "true"
+    },
+    "admin": {
+        "title": "Admin",
+        "items": {
+            "roles": {
+                "title": "Admin",
+                "icon": "nav-icon fas fa-user",
+                "items": [
+                    {
+                        "title": "Roles",
+                        "icon": "fas fa-project-diagram",
+                        "href": "admin/roles"
+                    },
+                    {
+                        "title": "Permissions",
+                        "icon": "fas fa-grip-lines",
+                        "href": "admin/permissions"
+                    },
+                    {
+                        "title": "All",
+                        "icon": "fas fa-heart",
+                        "href": "admin/user"
+                    }
+                ]
+            }
+        },
+        "divider": "true"
     }
 }

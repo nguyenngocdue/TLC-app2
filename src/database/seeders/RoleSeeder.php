@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Workplace;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
-class WorkplaceSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,8 +15,9 @@ class WorkplaceSeeder extends Seeder
      */
     public function run()
     {
-        Workplace::factory()
-            ->count(100)
-            ->create();
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'user']);
+        Role::create(['name' => 'guest']);
+        Role::create(['name' => 'banned']);
     }
 }

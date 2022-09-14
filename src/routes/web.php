@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Features\RoleController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Manage\Media\ManageMediaPropController;
@@ -50,12 +51,11 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::group([
-    'prefix' => 'dashboard'
+    'middleware' => ['auth', 'role:admin']
 ], function () {
     Route::group([
-        'middleware' => 'auth'
+        'prefix' => 'dashboard'
     ], function () {
-        Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
         Route::resource('user/user_renderprop', UserRenderController::class);
         Route::resource('user/user_manage', UserActionRenderController::class);
         Route::resource('user/user_edit', UserEditController::class);
@@ -71,12 +71,8 @@ Route::group([
         Route::resource('/upload/upload_add', UploadFileController::class);
         Route::get('/upload/{id}/download', [UploadFileController::class, 'download'])->name('upload_add.download');
     });
-});
-Route::group([
-    'prefix' => 'propman'
-], function () {
     Route::group([
-        'middleware' => 'auth'
+        'prefix' => 'propman'
     ], function () {
         Route::resource('user/user_manageprop', ManageUserPropController::class);
         Route::resource('user/user_managelineprop', ManageUserTablePropController::class);
@@ -90,6 +86,20 @@ Route::group([
         Route::resource('workplace/workplace_manageprop', ManageWorkplacePropController::class);
         Route::resource('workplace/workplace_managelineprop', ManageWorkplaceTablePropController::class);
         Route::resource('workplace/workplace_managerelationship', ManageWorkplaceRelationshipController::class);
+    });
+    Route::group([
+        'prefix' => 'admin'
+    ], function () {
+        Route::resource('roles', RoleController::class);
+    });
+});
+Route::group([
+    'middleware' => ['auth', 'role:user']
+], function () {
+    Route::group([
+        'prefix' => 'dashboard'
+    ], function () {
+        Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
     });
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);

@@ -13,7 +13,6 @@ class DashBoardController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
     /**
@@ -23,13 +22,6 @@ class DashBoardController extends Controller
      */
     public function index()
     {
-        // $sideBar = json_decode(file_get_contents(storage_path() . "/json/view/dashboard/sidebarProps.json"), true);
-        // foreach($sideBar as $item){
-        //     dd($item);
-        //     foreach($item as $a){
-        //         dd($a);
-        //     }
-        // }
         return view('dashboards.dashboard');
     }
 }
