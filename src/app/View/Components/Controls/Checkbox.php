@@ -6,18 +6,19 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
-class Dropdown extends Component
+class Checkbox extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-
     private $id;
-    public function __construct($id)
+    private $colName;
+    public function __construct($id, $colName)
     {
         $this->id = $id;
+        $this->colName = $colName;
     }
 
     /**
@@ -27,6 +28,7 @@ class Dropdown extends Component
      */
     public function render()
     {
+        $span = 3; //<< 12/6/4/3/2/1
         $relationship =  (object)[
             "_workplace" => [
                 "column_name" => "getWorkplace",
@@ -45,13 +47,14 @@ class Dropdown extends Component
             ]
         ];
 
-
         $column_name = $relationship->{'_workplace'}['column_name'];
         $u = User::first()->eloquentParams;
         $pathTable = $u[$column_name][1];
         $table = ($pathTable)::first()->getTable();
         $dataSource = DB::table($table)->select('id', 'name', 'description')->get();
         $selected = $this->id;
-        return view('components.controls.dropdown')->with(compact('dataSource', 'selected'));
+        $colName = $this->colName;
+
+        return view('components.controls.checkbox')->with(compact('dataSource', 'selected', 'colName', 'span'));
     }
 }

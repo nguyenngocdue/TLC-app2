@@ -26,13 +26,18 @@ abstract class EditController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $this->data::find($id);
+        // dd($request->input());
         $props = $this->getProps();
+        // foreach ($props as $key => $value) {
+        //     $request->validate([$value["column_name"] => $value['validation']]);
+        // }
+
+        $data = $this->data::find($id);
         foreach ($props as $value) {
             $key = $value['column_name'];
             $data->{$key} = request($key);
         }
         $data->save();
-        return redirect(route("$this->type._edit.show", $id));
+        return redirect(route("{$this->type}_edit.show", $id));
     }
 }
