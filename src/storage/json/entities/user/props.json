@@ -353,7 +353,7 @@
         "column_name": "created_at",
         "column_type": "datetime",
         "label": "Created At",
-        "control": "datetime",
+        "control": "picker_date",
         "col_span": "12",
         "hidden": null,
         "new_line": null,

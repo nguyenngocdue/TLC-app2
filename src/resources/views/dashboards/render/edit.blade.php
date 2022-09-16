@@ -11,10 +11,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/themes/airbnb.min.css">
     <link rel="stylesheet" href="https://www.tailwindcsscomponent.com/date-and-time-picker#the-description-of-date-and-time-picker-ui-component">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
-
+    {{-- Multilselect dropdown --}}
     <link rel="stylesheet" href="{{asset('css/customize.css')}}">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
 
 
 </head>
@@ -49,7 +51,10 @@
                                     <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2'>
 
                                         @switch ($control)
-                                        @case ('text')
+                                        {{-- @case ('text')
+                                        <x-controls.text columnName={{$column_name}} valColName={{$value_column_name}} />
+                                        @break --}}
+
                                         @case('picker_time')
                                         @case('picker_date')
                                         @case('picker_month')
@@ -58,6 +63,7 @@
                                         @case('picker_year')
                                         @case('datetime')
                                         <x-controls.text columnName={{$column_name}} valColName={{$value_column_name}} />
+                                        <x-controls.translationtime id={{$id}} control={{$control}} columnName={{$column_name}} />
                                         @break
 
                                         @case ('dropdown')

@@ -1,222 +1,140 @@
-<!-- Dependencies -->
+<select x-cloak id="select">
+    @foreach($dataSource as $key => $value)
+    <option>{{$value->name}}</option>
+    @endforeach
+</select>
 
-<div class="w-full mt-24 max-w-lg">
-    <!-- Start Component -->
-    <div x-data="multiselect(
-        { 
-          items: [
-              { label: 'Magenta', value: '#ff00ff' }, 
-              { label: 'Blue', value:  '#0000FF' }, 
-              { label: 'Green', value: '#00FF00' },
-              { label: 'Red', value: '#FF0000' },
-              { label: 'Yellow', value: '#FFFF00' },
-              { label: 'Gray', value: '#CCC' },
-              { label: 'I am a very long value and will show a maximum of 50 chars!', value: '#FF0F0E' },
-          ],
-          size: 6,
-        })" x-init="onInit" @focusout="handleBlur" class="relative">
-        <!-- Start Item Tags And Input Field -->
-        <div class="flex items-center justify-between px-1 border border-2 rounded-md relative pr-8 bg-white">
-            <ul class="flex flex-wrap items-center w-full">
-                <!-- Tags (Selected) -->
-                <template x-for="(selectedItem, idx) in selectedItems">
-                    <li x-text="shortenedLabel(selectedItem.label, maxTagChars)" @click="removeElementByIdx(idx)" @keyup.backspace="removeElementByIdx(idx)" @keyup.delete="removeElementByIdx(idx)" tabindex="0" class="relative m-1 px-2 py-1.5 border rounded-md cursor-pointer hover:bg-gray-100 after:content-['x'] after:ml-1.5 after:text-red-300 outline-none focus:outline-none ring-0 focus:ring-2 focus:ring-amber-300 ring-inset transition-all"></li>
-                </template>
+<div x-data="dropdown()" x-init="loadOptions()" class="">
+    <input name="workplace" type="hidden" x-bind:value="selectedValues()">
+    <div class="inline-block relative w-64">
+        <div class="flex flex-col items-center relative">
+            <div x-on:click="open" class="w-full">
+                <div class="my-2 p-1 flex border border-gray-200 bg-white rounded">
+                    <div class="flex flex-auto flex-wrap">
+                        <template x-for="(option,index) in selected" :key="options[option].value">
+                            <div class="flex justify-center items-center m-1 font-medium py-1 px-1 bg-white rounded bg-gray-100 border">
+                                <div class="text-xs font-normal leading-none max-w-full flex-initial x-model=" options[option] x-text="options[option].text"></div>
+                                <div class="flex flex-auto flex-row-reverse">
+                                    <div x-on:click.stop="remove(index,option)">
+                                        <svg class="fill-current h-4 w-4 " role="button" viewBox="0 0 20 20">
+                                            <path d="M14.348,14.849c-0.469,0.469-1.229,0.469-1.697,0L10,11.819l-2.651,3.029c-0.469,0.469-1.229,0.469-1.697,0
+                                           c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183
+                                           l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15
+                                           C14.817,13.62,14.817,14.38,14.348,14.849z" />
+                                        </svg>
 
-                <!-- Search Input -->
-                <input x-ref="searchInput" x-model="search" @click="expanded = true" @focusin="expanded = true" @input="expanded = true" @keyup.arrow-down="expanded = true; selectNextItem()" @keyup.arrow-up="expanded = true; selectPrevItem()" @keyup.escape="reset" @keyup.enter="addActiveItem" :placeholder="searchPlaceholder" type="text" class="flex-grow py-2 px-2 mx-1 my-1.5 outline-none focus:outline-none focus:ring-amber-300 focus:ring-2 ring-inset transition-all rounded-md w-24" />
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <div x-show="selected.length == 0" class="flex-1">
+                            <input placeholder="Select a option" class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800" x-bind:value="selectedValues()">
+                        </div>
+                    </div>
+                    <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">
 
-                <!-- Arrow Icon -->
-                <svg @click="expanded = !expanded; expanded && $refs.searchInput.focus()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" stroke-width="0" fill="#ccc" :class="expanded && 'rotate-180'" class="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer focus:outline-none" tabindex="-1">
-                    <path d="M12 17.414 3.293 8.707l1.414-1.414L12 14.586l7.293-7.293 1.414 1.414L12 17.414z" />
-                </svg>
-            </ul>
+                        <button type="button" x-show="isOpen() === true" x-on:click="open" class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
+                            <svg version="1.1" class="fill-current h-4 w-4" viewBox="0 0 20 20">
+                                <path d="M17.418,6.109c0.272-0.268,0.709-0.268,0.979,0s0.271,0.701,0,0.969l-7.908,7.83
+  c-0.27,0.268-0.707,0.268-0.979,0l-7.908-7.83c-0.27-0.268-0.27-0.701,0-0.969c0.271-0.268,0.709-0.268,0.979,0L10,13.25
+  L17.418,6.109z" />
+                            </svg>
+
+                        </button>
+                        <button type="button" x-show="isOpen() === false" @click="close" class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
+                            <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">
+                                <path d="M2.582,13.891c-0.272,0.268-0.709,0.268-0.979,0s-0.271-0.701,0-0.969l7.908-7.83
+  c0.27-0.268,0.707-0.268,0.979,0l7.908,7.83c0.27,0.268,0.27,0.701,0,0.969c-0.271,0.268-0.709,0.268-0.978,0L10,6.75L2.582,13.891z
+  " />
+                            </svg>
+
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full px-4">
+                <div x-show.transition.origin.top="isOpen()" class="absolute shadow top-100 bg-white z-40 w-full left-0 rounded max-h-select" x-on:click.away="close">
+                    <div class="flex flex-col w-full overflow-y-auto h-64">
+                        <template x-for="(option,index) in options" :key="option" class="overflow-auto">
+                            <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-gray-100" @click="select(index,$event)">
+                                <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative">
+                                    <div class="w-full items-center flex justify-between">
+                                        <div class="mx-2 leading-6" x-model="option" x-text="option.text"></div>
+                                        <div x-show="option.selected">
+                                            <svg class="svg-icon" viewBox="0 0 20 20">
+                                                <path fill="none" d="M7.197,16.963H7.195c-0.204,0-0.399-0.083-0.544-0.227l-6.039-6.082c-0.3-0.302-0.297-0.788,0.003-1.087
+              C0.919,9.266,1.404,9.269,1.702,9.57l5.495,5.536L18.221,4.083c0.301-0.301,0.787-0.301,1.087,0c0.301,0.3,0.301,0.787,0,1.087
+              L7.741,16.738C7.596,16.882,7.401,16.963,7.197,16.963z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- End Item Tags And Input Field -->
-
-        <!-- Start Items List -->
-        <template x-if="expanded">
-            <ul x-ref="listBox" class="w-full list-none border border-2 border-t-0 rounded-md focus:outline-none overflow-y-auto outline-none focus:outline-none bg-white absolute left-0 bottom-100" tabindex="0" :style="listBoxStyle">
-                <!-- Item Element -->
-                <template x-if="filteredItems.length">
-                    <template x-for="(filteredItem, idx) in filteredItems">
-                        <li x-text="shortenedLabel(filteredItem.label, maxItemChars)" @click="handleItemClick(filteredItem)" :class="idx === activeIndex && 'bg-amber-200'" :title="filteredItem.label" class="hover:bg-amber-200 cursor-pointer px-2 py-2"></li>
-                    </template>
-                </template>
-                <!-- Empty Text -->
-                <template x-if="!filteredItems.length">
-                    <li x-text="emptyText" class="cursor-pointer px-2 py-2 text-gray-400"></li>
-                </template>
-            </ul>
-        </template>
-        <!-- End Items List -->
     </div>
-    <!-- End Component -->
-    <script>
-        function multiselect(config) {
-            return {
-                items: config.items ? ? [],
-
-                allItems: null,
-
-                selectedItems: null,
-
-                search: config.search ? ? "",
-
-                searchPlaceholder: config.searchPlaceholder ? ? "Type here...",
-
-                expanded: config.expanded ? ? false,
-
-                emptyText: config.emptyText ? ? "No items found...",
-
-                allowDuplicates: config.allowDuplicates ? ? false,
-
-                size: config.size ? ? 4,
-
-                itemHeight: config.itemHeight ? ? 40,
-
-                maxItemChars: config.maxItemChars ? ? 50,
-
-                maxTagChars: config.maxTagChars ? ? 25,
-
-                activeIndex: -1,
-
-                onInit() {
-                    // Set the allItems array since we want to filter later on and keep the original (items) array as reference
-                    this.allItems = [...this.items];
-
-                    this.$watch("filteredItems", (newValues, oldValues) => {
-                        // Reset the activeIndex whenever the filteredItems array changes
-                        if (newValues.length !== oldValues.length) this.activeIndex = -1;
-                    });
-
-                    this.$watch("selectedItems", (newValues, oldValues) => {
-                        if (this.allowDuplicates) return;
-
-                        // Remove already selected items from the items (allItems) array (if allowDuplicates is false)
-                        this.allItems = this.items.filter((item, idx, all) =>
-                            newValues.every((n) => n.value !== item.value)
-                        );
-                    });
-
-                    // Scroll to active element whenever activeIndex changes (if expanded is true and we have a value)
-                    this.$watch("activeIndex", (newValue, oldValue) => {
-                        if (
-                            this.activeIndex == -1 ||
-                            !this.filteredItems[this.activeIndex] ||
-                            !this.expanded
-                        )
-                            return;
-
-                        this.scrollToActiveElement();
-                    });
-
-                    // Check whether there are selected values or not and set them
-                    this.selectedItems = this.items ?
-                        this.items.filter((item) => item.selected) : [];
-                },
-
-                handleBlur(e) {
-                    // If the current active element (relatedTarget) is a child element of the component itself, return
-                    // Note: The current active element must have a tabindex attribute set in order to appear as a relatedTarget
-                    if (this.$el.contains(e.relatedTarget)) {
-                        return;
-                    }
-
-                    this.reset();
-                },
-
-                reset() {
-                    // 1) Clear the search value
-                    this.search = "";
-
-                    // 2) Close the list
-                    this.expanded = false;
-
-                    // 3) Reset the active index
-                    this.activeIndex = -1;
-                },
-
-                handleItemClick(item) {
-                    // 1) Add the item
-                    this.selectedItems.push(item);
-
-                    // 2) Reset the search input
-                    this.search = "";
-
-                    // 3) Keep the focus on the search input
-                    this.$refs.searchInput.focus();
-                },
-
-                selectNextItem() {
-                    if (!this.filteredItems.length) return;
-
-                    // Array count starts at 0, so we abstract 1
-                    if (this.filteredItems.length - 1 == this.activeIndex) {
-                        return (this.activeIndex = 0);
-                    }
-
-                    this.activeIndex++;
-                },
-
-                selectPrevItem() {
-                    if (!this.filteredItems.length) return;
-
-                    if (this.activeIndex == 0 || this.activeIndex == -1)
-                        return (this.activeIndex = this.filteredItems.length - 1);
-
-                    this.activeIndex--;
-                },
-
-                addActiveItem() {
-                    if (!this.filteredItems[this.activeIndex]) return;
-
-                    this.selectedItems.push(this.filteredItems[this.activeIndex]);
-
-                    this.search = "";
-                },
-
-                scrollToActiveElement() {
-                    // Remove the first two child elements since they are <template> tags
-                    const availableListElements = [...this.$refs.listBox.children].slice(
-                        2
-                        , -1
-                    );
-
-                    // Scroll to active <li> element
-                    availableListElements[this.activeIndex].scrollIntoView({
-                        block: "end"
-                    , });
-                },
-
-                removeElementByIdx(itemIdx) {
-                    this.selectedItems.splice(itemIdx, 1);
-
-                    // Focus the input element to keep the blur functionlity
-                    // otherwise @focusout on the root element will not be triggered
-                    if (!this.selectedItems.length) this.$refs.searchInput.focus();
-                },
-
-                shortenedLabel(label, maxChars) {
-                    return !maxChars || label.length <= maxChars ?
-                        label :
-                        `${label.substr(0, maxChars)}...`;
-                },
-
-                get filteredItems() {
-                    return this.allItems.filter((item) =>
-                        item.label.toLowerCase().includes(this.search ? .toLowerCase())
-                    );
-                },
-
-                get listBoxStyle() {
-                    // We add 2 since there is border that takes space
-                    return {
-                        maxHeight: `${this.size * this.itemHeight + 2}px`
-                    , };
-                }
-            , };
-        }
-
-    </script>
 </div>
+<script>
+    function dropdown() {
+        return {
+            options: []
+            , selected: []
+            , show: false
+            , open() {
+                this.show = true
+            }
+            , close() {
+                this.show = false
+            }
+            , isOpen() {
+                return this.show === true
+            }
+            , select(index, event) {
+
+                if (!this.options[index].selected) {
+
+                    this.options[index].selected = true;
+                    this.options[index].element = event.target;
+                    this.selected.push(index);
+
+                } else {
+                    this.selected.splice(this.selected.lastIndexOf(index), 1);
+                    this.options[index].selected = false
+                }
+            }
+            , remove(index, option) {
+                this.options[option].selected = false;
+                this.selected.splice(index, 1);
+
+
+            }
+            , loadOptions() {
+                const options = document.getElementById('select').options;
+                console.log(options)
+                for (let i = 0; i < options.length; i++) {
+                    this.options.push({
+                        value: options[i].value
+                        , text: options[i].innerText
+                        , selected: options[i].getAttribute('selected') != null ? options[i].getAttribute('selected') : false
+                    });
+                }
+
+
+            }
+            , selectedValues() {
+                return this.selected.map((option) => {
+                    console.log("sfsfsfd", this.options[option].value)
+                    return this.options[option].value;
+                })
+            }
+            , myFunctions() {
+                console.log("object")
+            }
+
+        }
+    }
+
+</script>

@@ -26,7 +26,7 @@ abstract class EditController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->input());
+        dd($request->input());
         $props = $this->getProps();
         // foreach ($props as $key => $value) {
         //     $request->validate([$value["column_name"] => $value['validation']]);
