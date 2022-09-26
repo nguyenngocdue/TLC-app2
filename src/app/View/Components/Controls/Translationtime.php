@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
@@ -30,9 +31,22 @@ class Translationtime extends Component
         $control = $this->control;
         $dateTimeInstance = date_create(str_replace('-', '/', $day));
 
+        // dd($dateTimeInstance);
+
+
+
+        if (date_default_timezone_get()) {
+            echo ("default time zone: " . date_default_timezone_get());
+            echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        }
+
+
+
+
+
+
         $dateTime = date_format($dateTimeInstance, "d/m/Y h:i:s");
-        // $exploreDateTime = explode(" ", $dateTime);
-        // dd($exploreDateTime);
+
 
         $week = $dateTimeInstance->format("W");
         $date = $dateTimeInstance->format("d/m/Y");
