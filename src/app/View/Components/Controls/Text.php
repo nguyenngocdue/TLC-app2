@@ -7,19 +7,19 @@ use Illuminate\View\Component;
 class Text extends Component
 {
 
-    private $columnName;
+    private $colName;
     private $valColName;
-    public function __construct($columnName, $valColName)
+    public function __construct($colName, $valColName)
     {
-        $this->columnName = $columnName;
+        $this->colName = $colName;
         $this->valColName = $valColName;
     }
 
 
     public function render()
     {
-        $columnName = $this->columnName;
+        $colName = $this->colName;
         $valColName = $this->valColName;
-        return view('components.controls.text')->with(compact('columnName', 'valColName'));
+        return view('components.controls.text')->with(compact('colName', 'valColName'));
     }
 }

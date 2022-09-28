@@ -35,7 +35,8 @@ abstract class EditController extends Controller
     {
         $values = $this->data::find($id);
         $props = $this->getProps();
-        return view('dashboards.render.edit')->with(compact('props', 'values'));
+        $type = $this->type;
+        return view('dashboards.render.edit')->with(compact('props', 'values', 'type'));
     }
 
 
@@ -49,7 +50,6 @@ abstract class EditController extends Controller
         // foreach ($props as $key => $value) {
         //     $request->validate([$value["column_name"] => $value['validation']]);
         // }
-
         $data = $this->data::find($id);
         foreach ($props as $value) {
             $key = $value['column_name'];

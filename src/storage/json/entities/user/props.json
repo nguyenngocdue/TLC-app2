@@ -13,7 +13,7 @@
         "column_name": "avatar",
         "column_type": "bigint",
         "label": "Avatar",
-        "control": "uploadfile",
+        "control": "upload",
         "col_span": "12",
         "hidden": null,
         "new_line": null,

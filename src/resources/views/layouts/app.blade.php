@@ -13,6 +13,18 @@
     <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script href="{{ asset('js/app.js') }}"></script>
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/themes/airbnb.min.css">
+    <link rel="stylesheet" href="https://www.tailwindcsscomponent.com/date-and-time-picker#the-description-of-date-and-time-picker-ui-component">
+    {{-- Multilselect dropdown --}}
+    <link rel="stylesheet" href="{{asset('css/customize.css')}}">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
 </head>
 
 <body>
@@ -49,49 +61,50 @@
             }
 
             return {
-                dark: getThemeFromLocalStorage(),
-                toggleTheme() {
+                dark: getThemeFromLocalStorage()
+                , toggleTheme() {
                     this.dark = !this.dark
                     setThemeToLocalStorage(this.dark)
-                },
-                isSideMenuOpen: false,
-                toggleSideMenu() {
+                }
+                , isSideMenuOpen: false
+                , toggleSideMenu() {
                     this.isSideMenuOpen = !this.isSideMenuOpen
-                },
-                closeSideMenu() {
+                }
+                , closeSideMenu() {
                     this.isSideMenuOpen = false
-                },
-                isNotificationsMenuOpen: false,
-                toggleNotificationsMenu() {
+                }
+                , isNotificationsMenuOpen: false
+                , toggleNotificationsMenu() {
                     this.isNotificationsMenuOpen = !this.isNotificationsMenuOpen
-                },
-                closeNotificationsMenu() {
+                }
+                , closeNotificationsMenu() {
                     this.isNotificationsMenuOpen = false
-                },
-                isProfileMenuOpen: false,
-                toggleProfileMenu() {
+                }
+                , isProfileMenuOpen: false
+                , toggleProfileMenu() {
                     this.isProfileMenuOpen = !this.isProfileMenuOpen
-                },
-                closeProfileMenu() {
+                }
+                , closeProfileMenu() {
                     this.isProfileMenuOpen = false
-                },
-                isPagesMenuOpen: false,
-                togglePagesMenu() {
+                }
+                , isPagesMenuOpen: false
+                , togglePagesMenu() {
                     this.isPagesMenuOpen = !this.isPagesMenuOpen
                 },
                 // Modal
-                isModalOpen: false,
-                trapCleanup: null,
-                openModal() {
+                isModalOpen: false
+                , trapCleanup: null
+                , openModal() {
                     this.isModalOpen = true
                     this.trapCleanup = focusTrap(document.querySelector('#modal'))
-                },
-                closeModal() {
+                }
+                , closeModal() {
                     this.isModalOpen = false
                     this.trapCleanup()
-                },
-            }
+                }
+            , }
         }
+
     </script>
     <script>
         const setup = () => {
@@ -110,21 +123,21 @@
             };
 
             return {
-                loading: true,
-                isDark: getTheme(),
-                toggleTheme() {
+                loading: true
+                , isDark: getTheme()
+                , toggleTheme() {
                     this.isDark = !this.isDark;
                     setTheme(this.isDark);
-                },
-                setLightTheme() {
+                }
+                , setLightTheme() {
                     this.isDark = false;
                     setTheme(this.isDark);
-                },
-                setDarkTheme() {
+                }
+                , setDarkTheme() {
                     this.isDark = true;
                     setTheme(this.isDark);
-                },
-                watchScreen() {
+                }
+                , watchScreen() {
                     if (window.innerWidth <= 1024) {
                         this.isSidebarOpen = false;
                         this.isSecondSidebarOpen = false;
@@ -132,31 +145,32 @@
                         this.isSidebarOpen = true;
                         this.isSecondSidebarOpen = true;
                     }
-                },
-                isSidebarOpen: window.innerWidth >= 1024 ? true : false,
-                toggleSidbarMenu() {
+                }
+                , isSidebarOpen: window.innerWidth >= 1024 ? true : false
+                , toggleSidbarMenu() {
                     this.isSidebarOpen = !this.isSidebarOpen;
-                },
-                isSecondSidebarOpen: window.innerWidth >= 1024 ? true : false,
-                toggleSecondSidbarColumn() {
+                }
+                , isSecondSidebarOpen: window.innerWidth >= 1024 ? true : false
+                , toggleSecondSidbarColumn() {
                     this.isSecondSidebarOpen = !this.isSecondSidebarOpen;
-                },
-                isSettingsPanelOpen: false,
-                openSettingsPanel() {
+                }
+                , isSettingsPanelOpen: false
+                , openSettingsPanel() {
                     this.isSettingsPanelOpen = true;
                     this.$nextTick(() => {
                         this.$refs.settingsPanel.focus();
                     });
-                },
-                isSearchPanelOpen: false,
-                openSearchPanel() {
+                }
+                , isSearchPanelOpen: false
+                , openSearchPanel() {
                     this.isSearchPanelOpen = true;
                     this.$nextTick(() => {
                         this.$refs.searchInput.focus();
                     });
-                },
-            };
+                }
+            , };
         };
+
     </script>
 </body>
 
