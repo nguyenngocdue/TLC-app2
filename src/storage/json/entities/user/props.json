@@ -9,6 +9,16 @@
         "new_line": null,
         "type_line": "default"
     },
+    "avatar": {
+        "column_name": "avatar",
+        "column_type": "bigint",
+        "label": "Avatar",
+        "control": "uploadfile",
+        "col_span": "12",
+        "hidden": null,
+        "new_line": null,
+        "type_line": "default"
+    },
     "_email": {
         "column_name": "email",
         "column_type": "string",

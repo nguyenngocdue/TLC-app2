@@ -16,15 +16,12 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-
-
-
 </head>
 
 <body>
     <div class="grid grid-rows-1 bg-gray-300">
         <div class="mx-auto flex min-h-screen items-center py-5">
-            <form class="rounded-md bg-white p-4" method='POST' action="{{ route('user_edit.update', $values->id) }} ">
+            <form class="rounded-md bg-white p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route('user_edit.update', $values->id) }} ">
                 @csrf
                 <div class="mx-auto max-w-4xl flex-1">
                     <div class="grid grid-cols-12">
@@ -62,6 +59,7 @@
                                         @case('picker_quater')
                                         @case('picker_year')
                                         @case('datetime')
+                                        @case('text')
                                         <x-controls.text columnName={{$column_name}} valColName={{$value_column_name}} />
                                         <x-controls.translationtime id={{$id}} control={{$control}} columnName={{$column_name}} />
                                         @break
@@ -80,6 +78,10 @@
 
                                         @case ('checkbox')
                                         <x-controls.checkbox id={{$id}} colName={{$column_name}} />
+                                        @break
+
+                                        @case('uploadfile')
+                                        <x-controls.uploadfile id={{$id}} colName={{$column_name}} avatar={{$values['avatar']}} />
                                         @break
 
                                         @default

@@ -35,10 +35,10 @@ class Translationtime extends Component
 
 
 
-        if (date_default_timezone_get()) {
-            echo ("default time zone: " . date_default_timezone_get());
-            echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-        }
+        // if (date_default_timezone_get()) {
+        //     echo ("default time zone: " . date_default_timezone_get());
+        //     echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        // }
 
 
 
