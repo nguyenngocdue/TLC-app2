@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Render;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
 use App\Models\Media;
 use App\Models\User;
@@ -19,9 +20,11 @@ abstract class EditController extends Controller
     protected $type;
     protected $data;
     protected $upload;
-    public function __construct(UploadService $upload)
+    protected $readingFileService;
+    public function __construct(UploadService $upload, ReadingFileService $readingFileService)
     {
         $this->upload = $upload;
+        $this->readingFileService = $readingFileService;
     }
 
     private function getProps()
@@ -34,7 +37,7 @@ abstract class EditController extends Controller
     public function show($id)
     {
         $values = $this->data::find($id);
-        $props = $this->getProps();
+        $props = $this->readingFileService->indexProps($this->type);
         $type = $this->type;
         return view('dashboards.render.edit')->with(compact('props', 'values', 'type'));
     }

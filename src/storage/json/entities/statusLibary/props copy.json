@@ -1,0 +1,26 @@
+{
+    "active": {
+        "name": "Active",
+        "title": "Active",
+        "color": "#a3e635",
+        "rendered": "active"
+    },
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "title": "Approval Rejected",
+        "color": "#1d4ed8",
+        "rendered": "new"
+    },
+    "new": {
+        "name": "new",
+        "title": "New",
+        "color": "#a21caf",
+        "rendered": "new"
+    },
+    "stop": {
+        "name": "",
+        "title": "",
+        "color": "",
+        "rendered": ""
+    }
+}

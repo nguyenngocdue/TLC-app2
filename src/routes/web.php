@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Features\RoleController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Manage\ManageStatusLibrary;
 use App\Http\Controllers\Manage\Media\ManageMediaPropController;
 use App\Http\Controllers\Manage\Media\ManageMediaRelationshipController;
 use App\Http\Controllers\Manage\Media\ManageMediaTablePropController;
@@ -104,6 +105,7 @@ Route::group([
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 
+
 // Route::get('/mail-test', [MailController::class, 'index']);
 
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
@@ -115,3 +117,5 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::get('/dashboard/user/managelineprop', [ManageLineController::class, 'manageLineProp'])->name('user.manageLineProp');
 
 Route::resource('test', TestController::class);
+
+Route::resource('manage/manage_statusLibrary', ManageStatusLibrary::class);
