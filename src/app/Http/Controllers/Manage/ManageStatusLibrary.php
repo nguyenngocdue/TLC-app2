@@ -79,18 +79,16 @@ class ManageStatusLibrary extends Controller
             $array["color"] = $data["color"];
             $manage[$name] = $array;
         }
-
-        foreach ($data['oldName'] as $key => $name) {
-            $array = [];
-            $array["name"] = $data["oldName"][$key];;
-            $array["title"] = $data["oldTitle"][$key];
-            $array["color"] = $data["oldColor"][$key];
-            $manage[$name] = $array;
-            // dd($array, $name);
+        if (isset($data['oldName'])) {
+            foreach ($data['oldName'] as $key => $name) {
+                $array = [];
+                $array["name"] = $data["oldName"][$key];;
+                $array["title"] = $data["oldTitle"][$key];
+                $array["color"] = $data["oldColor"][$key];
+                $manage[$name] = $array;
+                // dd($array, $name);
+            }
         }
-
-
-
         ksort($manage);
         $jsonManage = json_encode(array_merge($manage));
         try {
