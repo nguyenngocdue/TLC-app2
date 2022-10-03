@@ -17,28 +17,28 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         Permission::create(['name' => 'read_media']);
-        Permission::create(['name' => 'edit_media']);
         Permission::create(['name' => 'create_media']);
-        Permission::create(['name' => 'edit_other_media']);
+        Permission::create(['name' => 'edit_media']);
+        Permission::create(['name' => 'edit_others_media']);
         Permission::create(['name' => 'delete_media']);
-        Permission::create(['name' => 'delete_other_media']);
+        Permission::create(['name' => 'delete_others_media']);
         Permission::create(['name' => 'read_post']);
-        Permission::create(['name' => 'edit_post']);
         Permission::create(['name' => 'create_post']);
-        Permission::create(['name' => 'edit_other_post']);
+        Permission::create(['name' => 'edit_post']);
+        Permission::create(['name' => 'edit_others_post']);
         Permission::create(['name' => 'delete_post']);
-        Permission::create(['name' => 'delete_other_post']);
+        Permission::create(['name' => 'delete_others_post']);
         Permission::create(['name' => 'read_workplace']);
-        Permission::create(['name' => 'edit_workplace']);
         Permission::create(['name' => 'create_workplace']);
-        Permission::create(['name' => 'edit_other_workplace']);
+        Permission::create(['name' => 'edit_workplace']);
+        Permission::create(['name' => 'edit_others_workplace']);
         Permission::create(['name' => 'delete_workplace']);
-        Permission::create(['name' => 'delete_other_workplace']);
+        Permission::create(['name' => 'delete_others_workplace']);
         Permission::create(['name' => 'read_user']);
-        Permission::create(['name' => 'edit_user']);
         Permission::create(['name' => 'create_user']);
-        Permission::create(['name' => 'edit_other_user']);
+        Permission::create(['name' => 'edit_user']);
+        Permission::create(['name' => 'edit_others_user']);
         Permission::create(['name' => 'delete_user']);
-        Permission::create(['name' => 'delete_other_user']);
+        Permission::create(['name' => 'delete_others_user']);
     }
 }

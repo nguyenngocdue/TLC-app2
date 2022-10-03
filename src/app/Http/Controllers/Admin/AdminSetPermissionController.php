@@ -21,8 +21,8 @@ class AdminSetPermissionController extends Controller
     {
         $roleSelected = Role::first();
         $selected = $roleSelected->name;
-        [$roles, $entities, $permissions, $permissionsRoles] = $this->getRolePermissions($roleSelected);
-        return view('admin.renderset.permissions.index')->with(compact('roles', 'selected', 'roleSelected', 'entities', 'permissions', 'permissionsRoles'));
+        [$roles, $entities, $removeLastPermissionNames, $permissions, $permissionsRoles] = $this->getRolePermissions($roleSelected);
+        return view('admin.renderset.permissions.index')->with(compact('roles', 'removeLastPermissionNames', 'selected', 'roleSelected', 'entities', 'permissions', 'permissionsRoles'));
     }
 
     /**
@@ -45,8 +45,8 @@ class AdminSetPermissionController extends Controller
     {
         $selected = $request->input('role');
         $roleSelected = Role::findByName($selected);
-        [$roles, $entities, $permissions, $permissionsRoles] = $this->getRolePermissions($roleSelected);
-        return view('admin.renderset.permissions.index')->with(compact('roles', 'selected', 'roleSelected', 'entities', 'permissions', 'permissionsRoles'));
+        [$roles, $entities, $removeLastPermissionNames, $permissions, $permissionsRoles] = $this->getRolePermissions($roleSelected);
+        return view('admin.renderset.permissions.index')->with(compact('roles', 'removeLastPermissionNames', 'selected', 'roleSelected', 'entities', 'permissions', 'permissionsRoles'));
     }
 
     /**
@@ -88,8 +88,8 @@ class AdminSetPermissionController extends Controller
     private function redirectBack($selected)
     {
         $roleSelected = Role::findByName($selected);
-        [$roles, $entities, $permissions, $permissionsRoles] = $this->getRolePermissions($roleSelected);
-        return view('admin.renderset.permissions.index')->with(compact('roles', 'selected', 'roleSelected', 'entities', 'permissions', 'permissionsRoles'));
+        [$roles, $entities, $removeLastPermissionNames, $permissions, $permissionsRoles] = $this->getRolePermissions($roleSelected);
+        return view('admin.renderset.permissions.index')->with(compact('roles', 'removeLastPermissionNames', 'selected', 'roleSelected', 'entities', 'permissions', 'permissionsRoles'));
     }
     /**
      * Update the specified resource in storage.
@@ -143,6 +143,14 @@ class AdminSetPermissionController extends Controller
         $entities = $this->checkHasPermissionModel($models);
         $permissions = Permission::all();
         $permissionsRoles = $roleSelected->permissions;
-        return [$roles, $entities, $permissions, $permissionsRoles];
+        $removeLastPermissionNames = [];
+        foreach ($permissions as $permission) {
+            $arrayPermissionName = explode('_', $permission->name);
+            array_pop($arrayPermissionName);
+            $var = implode(' ', $arrayPermissionName);
+            array_push($removeLastPermissionNames, $var);
+        }
+        $removeLastPermissionNames = array_unique($removeLastPermissionNames);
+        return [$roles, $entities, $removeLastPermissionNames, $permissions, $permissionsRoles];
     }
 }

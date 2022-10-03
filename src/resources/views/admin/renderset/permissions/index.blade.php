@@ -20,7 +20,7 @@
                 <form action="{{ route('setpermissions.store') }}" method="POST">
                     @csrf
                     <select name="role" id="roles" onchange="this.form.submit()"
-                        class="role block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+                        class="role block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                         @foreach ($roles as $role)
                             <option value="{{ $role->name }}"
                                 @isset($roleSelected)
@@ -40,20 +40,17 @@
                             <thead>
                                 <tr
                                     class="border-b bg-gray-50 text-left text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
-                                    <th class="px-4 py-3">ID</th>
-                                    <th class="px-4 py-3 text-center">Read</th>
-                                    <th class="px-4 py-3 text-center">Edit</th>
-                                    <th class="px-4 py-3 text-center">Create</th>
-                                    <th class="px-4 py-3 text-center">Edit Other</th>
-                                    <th class="px-4 py-3 text-center">Delete</th>
-                                    <th class="px-4 py-3 text-center">Delete Other</th>
+                                    <th class="px-4 py-3">Model</th>
+                                    @foreach ($removeLastPermissionNames as $value)
+                                        <th class="px-4 py-3 text-center">{{ Str::headline($value) }}</th>
+                                    @endforeach
                                 </tr>
                             </thead>
                             <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
                                 @foreach ($entities as $entity)
                                     <tr class="text-gray-700 dark:text-gray-400">
                                         <td class="px-4 py-3 text-sm">
-                                            {{ $entity->getTable() }}
+                                            <span class="btn-check-all">{{ $entity->getTable() }}</span>
                                         </td>
                                         @foreach ($permissions as $permission)
                                             @if (str_contains($permission->name, Str::singular($entity->getTable())))
@@ -68,7 +65,7 @@
                                                                 @checked(true)
                                                             @endif @endforeach
                                                         @endisset
-                                                        class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
+                                                        class="check-{{ $entity->getTable() }} h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
                                                 </td>
                                             @elseif (str_contains($permission->name, $entity->getTable()))
                                                 <td class="text-center" title="{{ $permission->name }}">
@@ -82,7 +79,7 @@
                                                             @checked(true)
                                                         @endif @endforeach
                                                     @endisset
-                                                        class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
+                                                        class="check-{{ $entity->getTable() }} h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
                                                 </td>
                                             @endif
                                         @endforeach
@@ -99,24 +96,7 @@
                     </form>
 
                 </div>
-                {{-- <div
-                    class="grid border-t bg-gray-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:grid-cols-9">
-                    <span class="col-span-3 flex items-center">
-                        @if (isset($data) && count($data) > 0)
-                            {{ $data->links('dashboards.pagination.showing') }}
-                        @endif
-                    </span>
-                    <span class="col-span-2"></span>
-                    <span class="col-span-4 mt-2 flex sm:mt-auto sm:justify-end">
-                        <nav aria-label="Table navigation">
-                            @if (isset($data) && count($data) > 0)
-                                {{ $data->links('dashboards.pagination.template') }}
-                            @endif
-                        </nav>
-                    </span>
-                </div> --}}
             </div>
-            {{-- @include('admin.render.edit') --}}
         </div>
     </main>
 @endsection
