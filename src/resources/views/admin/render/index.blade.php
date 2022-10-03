@@ -43,7 +43,7 @@
                     <div>
                         <button type="submit"
                             class="focus:shadow-outline-purple rounded-lg border border-transparent bg-emerald-500 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-emerald-200 focus:outline-none active:bg-emerald-600">Add
-                            {{ Str::of(ucfirst($type))->singular() }}</button>
+                            {{ Str::of(Str::headline($type))->singular() }}</button>
                     </div>
                 </div>
             </form>

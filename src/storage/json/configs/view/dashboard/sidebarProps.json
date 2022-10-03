@@ -172,33 +172,33 @@
                 "icon": "nav-icon fas fa-user",
                 "items": [
                     {
-                        "title": "Role Sets",
-                        "icon": "fas fa-grip-lines",
-                        "href": "admin/role_sets"
-                    },
-                    {
-                        "title": "Roles",
-                        "icon": "fas fa-project-diagram",
-                        "href": "admin/roles"
-                    },
-                    {
                         "title": "Permissions",
-                        "icon": "fas fa-grip-lines",
+                        "icon": "fas fa-user-check",
                         "href": "admin/permissions"
                     },
                     {
+                        "title": "Roles",
+                        "icon": "fas fa-tasks",
+                        "href": "admin/roles"
+                    },
+                    {
+                        "title": "Role Sets",
+                        "icon": "fas fa-boxes",
+                        "href": "admin/role_sets"
+                    },
+                    {
                         "title": "SetPermissions",
-                        "icon": "fas fa-heart",
+                        "icon": "fas fa-key",
                         "href": "admin/setpermissions"
                     },
                     {
                         "title": "SetRoles",
-                        "icon": "fas fa-heart",
+                        "icon": "fas fa-lock",
                         "href": "admin/setroles"
                     },
                     {
                         "title": "SetRoleSets",
-                        "icon": "fas fa-heart",
+                        "icon": "fas fa-user-lock",
                         "href": "admin/setrolesets"
                     }
                 ]
