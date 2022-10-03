@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Permission;
 use App\Models\Role;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
-class AdminController extends Controller
+abstract class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +23,7 @@ class AdminController extends Controller
         $search = request('search');
         $data = App::make($this->model)::search($search)->query(function ($q) {
             $q->orderBy('id', 'asc');
-        })->paginate(10);
+        })->paginate(20);
         return view('admin.render.index')->with(compact('data', 'search', 'type'));
     }
 
@@ -69,8 +70,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::find($id);
-        return response()->json(['data' => $role], 200);
+        $data = App::make($this->model)::find($id);
+        $type = $this->type;
+        return response()->json(['data' => $data, 'type' => $type], 200);
     }
 
     /**
@@ -81,7 +83,6 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-
     {
         $validated = $request->validate($this->validateUpdate);
         try {

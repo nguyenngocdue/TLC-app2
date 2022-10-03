@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\Manage\ManageService;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
@@ -11,9 +12,10 @@ use Illuminate\Support\Facades\Storage;
 abstract class ManageTablePropController extends Controller
 {
     protected $type = "";
-
-    public function __construct()
+    protected $manageService;
+    public function __construct(ManageService $manageService)
     {
+        $this->manageService = $manageService;
     }
     /**
      * Show the application dashboard.
@@ -23,7 +25,7 @@ abstract class ManageTablePropController extends Controller
     public function index()
     {
         $type = $this->type;
-        [$dataManage, $tableNames] = $this->path();
+        [$dataManage, $tableNames] = $this->manageService->pathTable($this->type, 'tables', 'tableName');
         if (!$dataManage) {
             $columnNames = [];
             $columnTypes = [];
@@ -97,7 +99,7 @@ abstract class ManageTablePropController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
-        $magane = [];
+        $manage = [];
         foreach ($data['name'] as $key => $name) {
             $array = [];
             $array['table_name'] = $data['table_name'][$key];
@@ -109,16 +111,10 @@ abstract class ManageTablePropController extends Controller
             $array['hidden'] = $data['hidden'][$key];
             $array['new_line'] = $data['new_line'][$key];
             $array['type_line'] = "default";
-            $magane[$name] = $array;
+            $manage[$name] = $array;
         }
-        $jsonManage = json_encode($magane);
         try {
-            $output = Storage::disk('json')->put("entities/{$this->type}/tables.json", $jsonManage, 'public');
-            if ($output) {
-                Toastr::success('Save file json successfully!', 'Save file json');
-            } else {
-                Toastr::warning('Maybe Permission is missing!', 'Save file json failed');
-            }
+            $this->manageService->checkUploadFile($manage, $this->type, 'tables');
             return back();
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');
@@ -126,31 +122,14 @@ abstract class ManageTablePropController extends Controller
     }
     public function destroy($name)
     {
-        [$dataManage] = $this->path();
+        [$dataManage] = $this->manageService->pathTable($this->type, 'tables', 'tableName');
         unset($dataManage[$name]);
         try {
-            $output = Storage::disk('json')->put("entities/{$this->type}/tables.json", json_encode($dataManage), 'public');
-            if ($output) {
-                Toastr::success('Save file json successfully!', 'Save file json');
-            } else {
-                Toastr::warning('Maybe Permission is missing!', 'Save file json failed');
-            }
+            $this->manageService->checkUploadFile($dataManage, $this->type, 'tables');
             return response()->json(['message' => 'Successfully'], 200);
         } catch (\Throwable $th) {
             Toastr::warning('$th', 'Save file json');
             return response()->json(['message' => 'Failed delete'], 404);
-        }
-    }
-    protected function path()
-    {
-        $path = storage_path() . "/json/entities/{$this->type}/tables.json";
-        $pathTableName = storage_path() . "/json/configs/table/{$this->type}/tableName.json";
-        $tableNames = json_decode(file_get_contents($pathTableName), true);
-        if (file_exists($path)) {
-            $dataManage = json_decode(file_get_contents($path), true);
-            return [$dataManage, $tableNames];
-        } else {
-            return [false, $tableNames];
         }
     }
 }

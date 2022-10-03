@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\RoleSet;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,8 +27,8 @@ class AdminSeeder extends Seeder
                 "email" => 'admin',
                 "email_verified_at" => now(),
                 "settings" => [],
-                "password" => Hash::make('admin'), // password
+                "password" => Hash::make('admin')
             ]
-        )->assignRole('admin');
+        )->assignRoleSet('admin');
     }
 }

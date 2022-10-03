@@ -82,7 +82,7 @@
                                         <td class="px-4 py-3 text-center text-sm">
                                             <button
                                                 class="focus:shadow-outline-gray btn-delete-user rounded-lg px-2 py-2 text-sm font-medium leading-5 text-red-600 focus:outline-none dark:text-red-400"
-                                                data-url="{{ route($type . '_manage.destroy', $user->id) }}"​
+                                                data-url="{{ route($type . '_renderprop.destroy', $user->id) }}"​
                                                 type="button"><i class="fas fa-trash"></i></button>
                                         </td>
                                         @foreach ($data as $key1 => $value)

@@ -66,8 +66,10 @@ class Kernel extends HttpKernel
         "signed" => \Illuminate\Routing\Middleware\ValidateSignature::class,
         "throttle" => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         "verified" => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
-        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
-        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+        'role_set' => \Ndc\Spatiecustom\Middlewares\RoleSetMiddleware::class,
+        'role' => \Ndc\Spatiecustom\Middlewares\RoleMiddleware::class,
+        'permission' => \Ndc\Spatiecustom\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Ndc\Spatiecustom\Middlewares\RoleOrPermissionMiddleware::class,
+        'impersonate' => \App\Http\Middleware\Impersonate::class,
     ];
 }

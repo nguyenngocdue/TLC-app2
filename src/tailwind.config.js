@@ -26,6 +26,7 @@ module.exports = {
         fontFamily: {
             body: [
                 'Inter',
+                'Poppins',
                 'ui-sans-serif',
                 'system-ui',
                 '-apple-system',

@@ -1,0 +1,26 @@
+{
+    "name": "ndc/spatiecustom",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ndc\\Spatiecustom\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ndc\\Spatiecustom\\RoleServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "authors": [
+        {
+            "name": "NgoDinhCanh",
+            "email": "rapidstars97@gmail.com"
+        }
+    ]
+}

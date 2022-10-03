@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,11 +12,11 @@ use LdapRecord\Laravel\Auth\LdapAuthenticatable;
 use LdapRecord\Laravel\Auth\AuthenticatesWithLdap;
 use LdapRecord\Laravel\Auth\HasLdapUser;
 use Laravel\Scout\Searchable;
-use Spatie\Permission\Traits\HasRoles;
+use Ndc\Spatiecustom\Traits\HasRoleSets;
 
 class User extends Authenticatable implements LdapAuthenticatable
 {
-    use Notifiable, AuthenticatesWithLdap, HasLdapUser, HasFactory, HasRoles, Searchable;
+    use Notifiable, AuthenticatesWithLdap, HasLdapUser, HasFactory, HasRoleSets, Searchable, CheckPermissionEntities;
 
     /**
      * The attributes that are mass assignable.
@@ -55,7 +56,6 @@ class User extends Authenticatable implements LdapAuthenticatable
     // {
     //     return 'my_guid_column';
     // }
-    protected $guard_name = 'web';
 
     public $eloquentParams = [
         // "files" => ['hasMany' , Media::class],
@@ -65,7 +65,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         // "workplace" => ['hasMany',Post::class,'owner_id','id'],
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace'],
     ];
-
+    protected $guard_name = 'web';
     // public function files()
     // {
     //     $p = $this->eloquentParams[__FUNCTION__];

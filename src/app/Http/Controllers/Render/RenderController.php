@@ -14,6 +14,14 @@ use Illuminate\Support\Str;
 abstract class RenderController extends Controller
 {
     protected $type = "";
+    protected $typeModel = '';
+    protected $permissionMiddleware;
+    public function __construct()
+    {
+        $this->middleware("permission:{$this->permissionMiddleware['read']}")->only('index');
+        $this->middleware("permission:{$this->permissionMiddleware['edit']}")->only('update');
+        $this->middleware("permission:{$this->permissionMiddleware['delete']}")->only('destroy');
+    }
     public function index()
     {
         $type = $this->type;
@@ -54,5 +62,16 @@ abstract class RenderController extends Controller
         $user->update();
         Toastr::success('Save settings json Users successfully', 'Save file json');
         return redirect()->back();
+    }
+    public function destroy($id)
+    {
+        try {
+            $model = $this->typeModel;
+            $data = App::make($model)->find($id);
+            $data->delete();
+            return response()->json(['message' => 'Delete User Successfully'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => $th], 404);
+        }
     }
 }

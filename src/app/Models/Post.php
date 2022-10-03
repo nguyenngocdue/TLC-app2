@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["title", "content", "owner_id"];
     protected $primaryKey = 'id';
     protected $table = 'posts';

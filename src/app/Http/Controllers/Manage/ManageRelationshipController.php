@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\Manage\ManageService;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -15,8 +16,10 @@ abstract class ManageRelationshipController extends Controller
 {
     protected $type = "";
     protected $typeModel = "";
-    public function __construct()
+    protected $manageService;
+    public function __construct(ManageService $manageService)
     {
+        $this->manageService = $manageService;
     }
     /**
      * Show the application dashboard.
@@ -29,7 +32,7 @@ abstract class ManageRelationshipController extends Controller
         $typeModel = $this->typeModel;
         $model = App::make($typeModel);
         $columnEloquentParams = $model->eloquentParams;
-        $dataManage = $this->path();
+        $dataManage = $this->manageService->path($this->type, 'relationships');
         if (!$dataManage) {
             $columnNames = array_keys($columnEloquentParams);
             return view('dashboards.props.managerelationship')->with(compact('type', 'columnNames', 'columnEloquentParams'));
@@ -121,7 +124,7 @@ abstract class ManageRelationshipController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
-        $magane = [];
+        $manage = [];
         foreach ($data['name'] as $key => $name) {
             $array = [];
             $array['column_name'] = $data['column_name'][$key];
@@ -139,16 +142,10 @@ abstract class ManageRelationshipController extends Controller
             $array['hidden'] = $data['hidden'][$key];
             $array['new_line'] = $data['new_line'][$key];
             $array['type_line'] = "default";
-            $magane[$name] = $array;
+            $manage[$name] = $array;
         }
-        $jsonManage = json_encode($magane);
         try {
-            $output = Storage::disk('json')->put("entities/{$this->type}/relationships.json", $jsonManage, 'public');
-            if ($output) {
-                Toastr::success('Save file json successfully!', 'Save file json');
-            } else {
-                Toastr::warning('Maybe Permission is missing!', 'Save file json failed');
-            }
+            $this->manageService->checkUploadFile($manage, $this->type, 'relationships');
             return back();
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');
@@ -156,29 +153,8 @@ abstract class ManageRelationshipController extends Controller
     }
     public function destroy($name)
     {
-        $dataManage = $this->path();
-        unset($dataManage[$name]);
-        try {
-            $output = Storage::disk('json')->put("entities/{$this->type}/relationships.json", json_encode($dataManage), 'public');
-            if ($output) {
-                Toastr::success('Save file json successfully!', 'Save file json');
-            } else {
-                Toastr::warning('Maybe Permission is missing!', 'Save file json failed');
-            }
-            return response()->json(['message' => 'Successfully'], 200);
-        } catch (\Throwable $th) {
-            Toastr::warning('$th', 'Save file json');
-            return response()->json(['message' => 'Failed delete'], 404);
-        }
-    }
-    protected function path()
-    {
-        $path = storage_path() . "/json/entities/{$this->type}/relationships.json";
-        if (file_exists($path)) {
-            $dataManage = json_decode(file_get_contents($path), true);
-            return $dataManage;
-        } else {
-            return false;
-        }
+        $res = $this->manageService->destroy($name, $this->type, 'relationships');
+        if ($res) return response()->json(['message' => 'Successfully'], 200);
+        return response()->json(['message' => 'Failed delete'], 404);
     }
 }

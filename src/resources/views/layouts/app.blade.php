@@ -29,7 +29,7 @@
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {!! Toastr::message() !!}
-    <script type="text/javascript" src="{{ asset('js/tlc.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/tlc2.js') }}"></script>
     <script type="text/javascript">
         function data() {
             function getThemeFromLocalStorage() {

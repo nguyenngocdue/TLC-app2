@@ -25,11 +25,27 @@ return [
          */
 
         'role' => Spatie\Permission\Models\Role::class,
+        /*
+         * When using the "HasRoles" trait from this package, we need to know which
+         * Eloquent model should be used to retrieve your roles. Of course, it
+         * is often just the "Role" model but you may use whatever you like.
+         *
+         * The model you want to use as a Role model needs to implement the
+         * `Spatie\Permission\Contracts\Role` contract.
+         */
+
+        'role_set' => App\Models\RoleSet::class,
 
     ],
 
     'table_names' => [
+        /*
+         * When using the "HasRoleSets" trait from this package, we need to know which
+         * table should be used to retrieve your roles. We have chosen a basic
+         * default value but you may easily change it to any table you like.
+         */
 
+        'role_sets' => 'role_sets',
         /*
          * When using the "HasRoles" trait from this package, we need to know which
          * table should be used to retrieve your roles. We have chosen a basic
@@ -63,12 +79,27 @@ return [
         'model_has_roles' => 'model_has_roles',
 
         /*
+         * When using the "HasRoleSets" trait from this package, we need to know which
+         * table should be used to retrieve your models roles. We have chosen a
+         * basic default value but you may easily change it to any table you like.
+         */
+
+        'model_has_role_sets' => 'model_has_role_sets',
+
+        /*
          * When using the "HasRoles" trait from this package, we need to know which
          * table should be used to retrieve your roles permissions. We have chosen a
          * basic default value but you may easily change it to any table you like.
          */
 
         'role_has_permissions' => 'role_has_permissions',
+        /*
+         * When using the "HasRoleSets" trait from this package, we need to know which
+         * table should be used to retrieve your roles permissions. We have chosen a
+         * basic default value but you may easily change it to any table you like.
+         */
+
+        'role_set_has_roles' => 'role_set_has_roles',
     ],
 
     'column_names' => [
@@ -76,7 +107,10 @@ return [
          * Change this if you want to name the related pivots other than defaults
          */
         'role_pivot_key' => null, //default 'role_id',
+
         'permission_pivot_key' => null, //default 'permission_id',
+
+        'role_set_pivot_key' => null, //default 'role_set_id',
 
         /*
          * Change this if you want to name the related model primary key other than
@@ -102,6 +136,7 @@ return [
      */
 
     'register_permission_check_method' => true,
+
 
     /*
      * When set to true the package implements teams using the 'team_foreign_key'. If you want

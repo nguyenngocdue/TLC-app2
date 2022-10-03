@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
 class Workplace extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["name", "description"];
     protected $primaryKey = 'id';
     protected $table = 'workplaces';

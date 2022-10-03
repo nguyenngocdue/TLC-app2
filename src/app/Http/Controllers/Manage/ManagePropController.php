@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\Manage\ManageService;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +15,10 @@ use function GuzzleHttp\json_decode;
 abstract class ManagePropController extends Controller
 {
     protected $type = "";
-    public function __construct()
+    protected $manageService;
+    public function __construct(ManageService $manageService)
     {
+        $this->manageService = $manageService;
     }
     /**
      * Show the application dashboard.
@@ -25,7 +28,7 @@ abstract class ManagePropController extends Controller
     public function index()
     {
         $type = $this->type;
-        $dataManage = $this->path();
+        $dataManage = $this->manageService->path($type, 'props');
         if (!$dataManage) {
             $columnNames = Schema::getColumnListing(Str::plural($type));
             $columnTypes = [];
@@ -33,7 +36,6 @@ abstract class ManagePropController extends Controller
                 $typeColumn = Schema::getColumnType(Str::plural($type), $columnName);
                 array_push($columnTypes, $typeColumn);
             }
-            // dd($columnNames);
             return view('dashboards.props.manageprop')->with(compact('type', 'columnNames', 'columnTypes'));
         } else {
             $names = [];
@@ -83,7 +85,7 @@ abstract class ManagePropController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
-        $magane = [];
+        $manage = [];
         foreach ($data['name'] as $key => $name) {
             $array = [];
             $array['column_name'] = $data['column_name'][$key];
@@ -94,16 +96,10 @@ abstract class ManagePropController extends Controller
             $array['hidden'] = $data['hidden'][$key];
             $array['new_line'] = $data['new_line'][$key];
             $array['type_line'] = "default";
-            $magane[$name] = $array;
+            $manage[$name] = $array;
         }
-        $jsonManage = json_encode($magane);
         try {
-            $output = Storage::disk('json')->put("entities/{$this->type}/props.json", $jsonManage, 'public');
-            if ($output) {
-                Toastr::success('Save file json successfully!', 'Save file json');
-            } else {
-                Toastr::warning('Maybe Permission is missing!', 'Save file json failed');
-            }
+            $this->manageService->checkUploadFile($manage, $this->type, 'props');
             return back();
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');
@@ -111,29 +107,8 @@ abstract class ManagePropController extends Controller
     }
     public function destroy($name)
     {
-        $dataManage = $this->path();
-        unset($dataManage[$name]);
-        try {
-            $output = Storage::disk('json')->put("entities/{$this->type}/props.json", json_encode($dataManage), 'public');
-            if ($output) {
-                Toastr::success('Save file json successfully!', 'Save file json');
-            } else {
-                Toastr::warning('Maybe Permission is missing!', 'Save file json failed');
-            }
-            return response()->json(['message' => 'Successfully'], 200);
-        } catch (\Throwable $th) {
-            Toastr::warning('$th', 'Save file json');
-            return response()->json(['message' => 'Failed delete'], 404);
-        }
-    }
-    protected function path()
-    {
-        $path = storage_path() . "/json/entities/{$this->type}/props.json";
-        if (file_exists($path)) {
-            $dataManage = json_decode(file_get_contents($path), true);
-            return $dataManage;
-        } else {
-            return false;
-        }
+        $res = $this->manageService->destroy($name, $this->type, 'props');
+        if ($res) return response()->json(['message' => 'Successfully'], 200);
+        return response()->json(['message' => 'Failed delete'], 404);
     }
 }

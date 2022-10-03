@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
-use Spatie\Permission\Models\Role as ModelsRole;
+use Ndc\Spatiecustom\Models\Role as ModelsRole;
 
 class Role extends ModelsRole
 {

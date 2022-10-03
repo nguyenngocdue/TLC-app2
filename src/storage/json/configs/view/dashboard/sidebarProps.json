@@ -172,6 +172,11 @@
                 "icon": "nav-icon fas fa-user",
                 "items": [
                     {
+                        "title": "Role Sets",
+                        "icon": "fas fa-grip-lines",
+                        "href": "admin/role_sets"
+                    },
+                    {
                         "title": "Roles",
                         "icon": "fas fa-project-diagram",
                         "href": "admin/roles"
@@ -182,9 +187,19 @@
                         "href": "admin/permissions"
                     },
                     {
-                        "title": "All",
+                        "title": "SetPermissions",
                         "icon": "fas fa-heart",
-                        "href": "admin/user"
+                        "href": "admin/setpermissions"
+                    },
+                    {
+                        "title": "SetRoles",
+                        "icon": "fas fa-heart",
+                        "href": "admin/setroles"
+                    },
+                    {
+                        "title": "SetRoleSets",
+                        "icon": "fas fa-heart",
+                        "href": "admin/setrolesets"
                     }
                 ]
             }
