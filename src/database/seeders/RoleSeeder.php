@@ -27,5 +27,9 @@ class RoleSeeder extends Seeder
         Role::create(['name' => 'READ-DATA-WORKPLACES'])->givePermissionTo('read_workplace');
         Role::create(['name' => 'READ-WRITE-DATA-WORKPLACES'])->givePermissionTo(['read_workplace', 'edit_workplace', 'create_workplace', 'edit_other_workplace']);
         Role::create(['name' => 'ADMIN-DATA-WORKPLACES'])->givePermissionTo(['read_workplace', 'edit_workplace', 'create_workplace', 'edit_other_workplace', 'delete_workplace', 'delete_other_workplace']);
+
+        Role::create(['name' => 'READ-DATA-USERS'])->givePermissionTo('read_user');
+        Role::create(['name' => 'READ-WRITE-DATA-USERS'])->givePermissionTo(['read_user', 'edit_user', 'create_user', 'edit_other_user']);
+        Role::create(['name' => 'ADMIN-DATA-USERS'])->givePermissionTo(['read_user', 'edit_user', 'create_user', 'edit_other_user', 'delete_user', 'delete_other_user']);
     }
 }

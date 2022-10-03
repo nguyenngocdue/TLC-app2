@@ -14,6 +14,6 @@ class RoleSetSeeder extends Seeder
      */
     public function run()
     {
-        RoleSet::create(['name' => 'admin'])->giveRoleTo(['ADMIN-DATA-MEDIA', 'ADMIN-DATA-POSTS', 'ADMIN-DATA-WORKPLACES']);
+        RoleSet::create(['name' => 'admin'])->giveRoleTo(['ADMIN-DATA-MEDIA', 'ADMIN-DATA-POSTS', 'ADMIN-DATA-WORKPLACES', 'ADMIN-DATA-USERS']);
     }
 }

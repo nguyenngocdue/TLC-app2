@@ -34,5 +34,11 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'edit_other_workplace']);
         Permission::create(['name' => 'delete_workplace']);
         Permission::create(['name' => 'delete_other_workplace']);
+        Permission::create(['name' => 'read_user']);
+        Permission::create(['name' => 'edit_user']);
+        Permission::create(['name' => 'create_user']);
+        Permission::create(['name' => 'edit_other_user']);
+        Permission::create(['name' => 'delete_user']);
+        Permission::create(['name' => 'delete_other_user']);
     }
 }
