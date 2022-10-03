@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
+        App\Providers\GetColumnTableFacadeServiceProvider::class,
         Brian2694\Toastr\ToastrServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         // Spatie\Permission\PermissionServiceProvider::class,

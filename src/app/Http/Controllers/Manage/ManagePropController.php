@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\GetColumnTable\GetColumnTable;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Manage\ManageService;
 use Brian2694\Toastr\Facades\Toastr;
@@ -30,7 +31,7 @@ abstract class ManagePropController extends Controller
         $type = $this->type;
         $dataManage = $this->manageService->path($type, 'props');
         if (!$dataManage) {
-            $columnNames = Schema::getColumnListing(Str::plural($type));
+            $columnNames = GetColumnTable::getColumnTable(Str::plural($type));
             $columnTypes = [];
             foreach ($columnNames as $columnName) {
                 $typeColumn = Schema::getColumnType(Str::plural($type), $columnName);

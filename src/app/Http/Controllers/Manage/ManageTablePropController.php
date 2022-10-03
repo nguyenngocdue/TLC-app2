@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\GetColumnTable\GetColumnTable;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Manage\ManageService;
 use Brian2694\Toastr\Facades\Toastr;
@@ -31,7 +32,7 @@ abstract class ManageTablePropController extends Controller
             $columnTypes = [];
             $columnTableNames = [];
             foreach ($tableNames as $key => $tableName) {
-                $columnNameTable = Schema::getColumnListing($tableName);
+                $columnNameTable = GetColumnTable::getColumnTable($tableName);
                 foreach ($columnNameTable as $columnName) {
                     $typeColumn = Schema::getColumnType($tableName, $columnName);
                     array_push($columnTypes, $typeColumn);

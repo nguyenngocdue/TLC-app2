@@ -1,1 +1,0 @@
-{"_user":{"column_name":"user","eloquent":"belongsTo","param_1":"App\\Models\\User","param_2":"owner_id","param_3":null,"param_4":null,"param_5":null,"param_6":null,"label":"User","control":null,"control_param":null,"col_span":"12","hidden":null,"new_line":null,"type_line":"default"}}
