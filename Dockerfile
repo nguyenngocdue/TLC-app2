@@ -26,6 +26,13 @@ COPY ./configs/php.ini /usr/local/etc/php/
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 # USER root
+# RUN chmod 775 -R /var/www/app
+# RUN chown www-data:www-data /var/www/app -R
 
-RUN chmod 775 -R /var/www/app
-RUN chown www-data:www-data /var/www/app -R
+RUN addgroup -g 1000 appgroup
+
+RUN adduser -D -u 1000 appuser -G appgroup
+
+RUN chown -R appuser:appgroup /var/www/app
+
+USER appuser
