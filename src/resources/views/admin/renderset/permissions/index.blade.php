@@ -50,7 +50,8 @@
                                 @foreach ($entities as $entity)
                                     <tr class="text-gray-700 dark:text-gray-400">
                                         <td class="px-4 py-3 text-sm">
-                                            <span class="btn-check-all">{{ $entity->getTable() }}</span>
+                                            <span class="cursor-pointer select-all"
+                                                data-model="{{ $entity->getTable() }}">{{ $entity->getTable() }}</span>
                                         </td>
                                         @foreach ($permissions as $permission)
                                             @if (str_contains($permission->name, Str::singular($entity->getTable())))

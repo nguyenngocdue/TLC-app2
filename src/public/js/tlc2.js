@@ -4,25 +4,6 @@ $.ajaxSetup({
     },
 })
 $(document).ready(function () {
-    // $('select.role').change(function () {
-    //     var selected = $('.role option:selected').val()
-    //     var url = $(this).attr('data-url')
-    //     $.ajax({
-    //         type: 'post',
-    //         url: url,
-    //         data: { selected: selected },
-    //         success: function (response) {
-    //             console.log(response)
-    //             // $('#name_role').val(response.data.name)
-    //             // $('#guard_role').val(response.data.guard_name)
-    //             // $('#form-edit').attr(
-    //             //     'action',
-    //             //     '/admin/' + response.type + '/' + response.data.id
-    //             // )
-    //         },
-    //         error: function (error) {},
-    //     })
-    // })
     $('.btn-edit').click(function (e) {
         var url = $(this).attr('data-url')
         console.log(url)
@@ -152,5 +133,14 @@ $(document).ready(function () {
                 })
             }
         })
+    })
+})
+$(document).ready(function () {
+    $('.select-all').click(function () {
+        var model = $(this).attr('data-model')
+        var set_checked = !$('.check-' + model)
+            .first()
+            .is(':checked')
+        $('.check-' + model).prop('checked', set_checked)
     })
 })
