@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Utils\Support\GetColumnTable;
+use App\Utils\Support\GetAllEntities;
 use Illuminate\Support\ServiceProvider;
 
-class GetColumnTableFacadeServiceProvider extends ServiceProvider
+class GetAllEntitiesServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -24,8 +24,8 @@ class GetColumnTableFacadeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->singleton('getColumnTable', function () {
-            return new GetColumnTable();
+        $this->app->singleton('getAllEntities', function () {
+            return new GetAllEntities();
         });
     }
 }

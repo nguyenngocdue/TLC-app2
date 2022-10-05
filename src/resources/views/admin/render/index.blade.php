@@ -47,10 +47,10 @@
                 <form action="{{ route($type . '.index') }}" method="GET">
                     <div class="mt-2 flex">
                         <div class="mr-1 w-12">
-                            <input type="text" name="pageLimit"
+                            <input type="text" name="page_limit"
                                 class="block w-12 rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                                 value="{{ $pageLimit }}">
-                            @error('pageLimit')
+                            @error('page_limit')
                                 <span class="ml-2 text-xs font-light text-red-600" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -98,7 +98,7 @@
                                             </button>
 
                                             <button
-                                                class="focus:shadow-outline-gray btn-delete-user rounded-lg px-2 py-2 text-sm font-medium leading-5 text-red-600 focus:outline-none dark:text-red-400"
+                                                class="focus:shadow-outline-gray btn-delete-render rounded-lg px-2 py-2 text-sm font-medium leading-5 text-red-600 focus:outline-none dark:text-red-400"
                                                 data-url="{{ route($type . '.destroy', $value->id) }}"​ type="button"><i
                                                     class="fas fa-trash"></i></button>
                                         </div>
@@ -131,4 +131,5 @@
             @include('admin.render.edit')
         </div>
     </main>
+    <script src="{{ asset('js/render.js') }}"></script>
 @endsection

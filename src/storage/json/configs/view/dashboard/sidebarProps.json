@@ -5,6 +5,7 @@
             "users": {
                 "title": "User Management",
                 "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/user",
                 "items": [
                     {
                         "title": "All Users",
@@ -21,6 +22,7 @@
             "medias": {
                 "title": "Media Management",
                 "icon": "nav-icon fas fa-photo-video",
+                "href_parent": "dashboard/media",
                 "items": [
                     {
                         "title": "All Media",
@@ -42,6 +44,7 @@
             "posts": {
                 "title": "Post Management",
                 "icon": "nav-icon fas fa-file-alt",
+                "href_parent": "dashboard/post",
                 "items": [
                     {
                         "title": "All Posts",
@@ -58,6 +61,7 @@
             "workplace": {
                 "title": "Workplace Management",
                 "icon": "nav-icon fas fa-file-alt",
+                "href_parent": "dashboard/workplace",
                 "items": [
                     {
                         "title": "All Workplaces",
@@ -80,6 +84,7 @@
             "user": {
                 "title": "Users",
                 "icon": "nav-icon fas fa-user",
+                "href_parent": "propman/user",
                 "items": [
                     {
                         "title": "Manage Prop",
@@ -101,6 +106,7 @@
             "media": {
                 "title": "Media",
                 "icon": "nav-icon fas fa-photo-video",
+                "href_parent": "propman/media",
                 "items": [
                     {
                         "title": "Manage Prop",
@@ -122,6 +128,7 @@
             "post": {
                 "title": "Posts",
                 "icon": "nav-icon fas fa-file-alt",
+                "href_parent": "propman/post",
                 "items": [
                     {
                         "title": "Manage Prop",
@@ -143,6 +150,7 @@
             "workplace": {
                 "title": "Workplaces",
                 "icon": "nav-icon fas fa-building",
+                "href_parent": "propman/workplace",
                 "items": [
                     {
                         "title": "Manage Prop",
@@ -170,6 +178,7 @@
             "roles": {
                 "title": "Admin",
                 "icon": "nav-icon fas fa-user",
+                "href_parent": "admin",
                 "items": [
                     {
                         "title": "Permissions",

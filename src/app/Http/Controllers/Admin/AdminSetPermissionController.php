@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Utils\Support\GetAllEntities;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -112,35 +113,10 @@ class AdminSetPermissionController extends Controller
     public function destroy($id)
     {
     }
-    private function getAvailableModels($model)
-    {
-
-        $models = [];
-        $modelsPath = app_path($model);
-        $modelFiles = File::allFiles($modelsPath);
-        foreach ($modelFiles as $modelFile) {
-            $models[] = 'App\\Models\\' . $modelFile->getFilenameWithoutExtension();
-        }
-
-        return $models;
-    }
-    private function checkHasPermissionModel($entities)
-    {
-        $array = [];
-        foreach ($entities as $entity) {
-            $value = in_array('App\Utils\PermissionTraits\CheckPermissionEntities', class_uses_recursive($entity));
-            if ($value) {
-                $model = App::make($entity);
-                array_push($array, $model);
-            }
-        }
-        return $array;
-    }
     private function getRolePermissions($roleSelected)
     {
         $roles = Role::all();
-        $models = $this->getAvailableModels("Models");
-        $entities = $this->checkHasPermissionModel($models);
+        $entities = GetAllEntities::getAllEntities();
         $permissions = Permission::all();
         $permissionsRoles = $roleSelected->permissions;
         $removeLastPermissionNames = [];

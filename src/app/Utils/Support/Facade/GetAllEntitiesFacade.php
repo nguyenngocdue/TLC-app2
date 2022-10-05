@@ -1,13 +1,13 @@
 <?php
 
-namespace App\GetColumn\Facade;
+namespace App\Utils\Support\Facade;
 
 use Illuminate\Support\Facades\Facade;
 
-class GetColumnTableFacade extends Facade
+class GetAllEntitiesFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'getColumnTable';
+        return 'getAllEntities';
     }
 }

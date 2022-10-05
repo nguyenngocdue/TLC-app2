@@ -186,4 +186,5 @@
 
         </div>
     </main>
+    <script src="{{ asset('js/renderprop.js') }}"></script>
 @endsection

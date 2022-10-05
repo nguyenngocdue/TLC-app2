@@ -16,13 +16,13 @@
             </div>
             <label for="roleSets" class="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-400">Select an
                 option role sets</label>
-            <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <div class="mb-3 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                 <form action="{{ route('setroles.store') }}" method="POST">
                     @csrf
                     <select name="roleSet" id="roleSets" onchange="this.form.submit()"
                         class="role block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                         @foreach ($roleSets as $roleSet)
-                            <option value="{{ $roleSet->name }}"
+                            <option value="{{ $roleSet->name }}" class="p-5"
                                 @isset($roleSetSelected)
                                 {{ $roleSetSelected->name == $roleSet->name ? 'selected' : '' }}
                                 @endisset>
@@ -30,9 +30,8 @@
                         @endforeach
                     </select>
                 </form>
-
             </div>
-            <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border shadow-sm">
+            <div class="mb-8 rounded-lg bg-white px-6 py-4 shadow-md dark:bg-gray-800">
                 <div class="w-full overflow-x-auto">
                     <form action="{{ route('setroles.store2') }}" method="POST">
                         @csrf

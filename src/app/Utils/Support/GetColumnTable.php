@@ -1,6 +1,6 @@
 <?php
 
-namespace App\GetColumnTable;
+namespace App\Utils\Support;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;

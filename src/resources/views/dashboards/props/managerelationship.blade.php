@@ -13,7 +13,7 @@
                     </svg>
                     <span>{{ ucfirst($type) }}</span>
                 </div>
-                <span>Relationship →</span>
+                <span>Relationship -></span>
             </div>
             <form action="{{ route($type . '_managerelationship.store') }}" method="POST">
                 @csrf

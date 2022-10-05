@@ -13,7 +13,7 @@
                     </svg>
                     <span>{{ ucfirst($type) }}</span>
                 </div>
-                <span>Manage Prop →</span>
+                <span>Manage Prop -></span>
             </div>
             <form action="{{ route($type . '_manageprop.store') }}" method="POST">
                 @csrf
