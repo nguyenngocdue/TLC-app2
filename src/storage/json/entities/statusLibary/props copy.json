@@ -1,26 +1,37 @@
 {
-    "active": {
-        "name": "Active",
-        "title": "Active",
-        "color": "#a3e635",
-        "rendered": "active"
-    },
     "approval_rejected": {
         "name": "approval_rejected",
         "title": "Approval Rejected",
-        "color": "#1d4ed8",
-        "rendered": "new"
+        "color": "#0050b3"
+    },
+    "approved": {
+        "name": "approved",
+        "title": "Approved",
+        "color": "#006600"
+    },
+    "confirm_rejected": {
+        "name": "confirm_rejected",
+        "title": "HR Verification Rejected",
+        "color": "#FF4500"
     },
     "new": {
         "name": "new",
         "title": "New",
-        "color": "#a21caf",
-        "rendered": "new"
+        "color": "#FCCB00"
     },
-    "stop": {
-        "name": "",
-        "title": "",
-        "color": "",
-        "rendered": ""
+    "pending": {
+        "name": "pending",
+        "title": "Pending",
+        "color": "#FF00FF"
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "title": "Pending for Approval",
+        "color": "#FF5CA2"
+    },
+    "pending_confirmation": {
+        "name": "pending_confirmation",
+        "title": "HR Verification",
+        "color": "#faad14"
     }
 }

@@ -13,7 +13,11 @@ class ManageStatusLibrary extends Controller
 
 
     protected $readingFileService;
-    protected $type = "statusLibary";
+    protected $type = "status_lib";
+    protected $title = "Status Library";
+    protected $path = "master/status_lib/all_statuses.json";
+
+
     public function __construct(ReadingFileService $readingFileService)
     {
         $this->readingFileService = $readingFileService;
@@ -21,11 +25,14 @@ class ManageStatusLibrary extends Controller
 
     public function index()
     {
-        $props = $this->readingFileService->indexProps($this->type);
+        $props = $this->readingFileService->indexProps($this->type, "all_statuses.json");
+        $error = is_null($props) ? "null" : "";
+        if (is_null($props)) return view('components.render.error')->with(compact('error'));
         //  take a first word of field
         $sign = [];
         foreach ($props as $key => $value) {
-            $sign[] = $key[0];
+            $_key = (string)$key;
+            $sign[] = $_key[0];
         }
         $usign =  array_unique($sign);
         $countsign = array_count_values($sign);
@@ -37,8 +44,9 @@ class ManageStatusLibrary extends Controller
             $libStatus[$value] = array_values($array)[0];
         }
         // dd($libStatus);
+        $type = $this->title;
 
-        return view('statusLibrary')->with(compact('libStatus'));
+        return view('statusLibrary')->with(compact('libStatus', 'type'));
     }
 
 
@@ -92,7 +100,7 @@ class ManageStatusLibrary extends Controller
         ksort($manage);
         $jsonManage = json_encode(array_merge($manage));
         try {
-            $output = Storage::disk('json')->put("entities/$this->type/props.json", $jsonManage, 'public'); // wwhy output has always false value
+            $output = Storage::disk('json')->put($this->path, $jsonManage, 'public'); // wwhy output has always false value
             if ($output) {
                 Toastr::success('Save file json successfully!', 'Save file json');
             } else {

@@ -1,1 +1,12 @@
-{"accounting_verification":{"name":"accounting_verification","title":"Accounting Verification","color":"#66FF33"},"pending_approval":{"name":"pending_approval","title":"Pending for Approval","color":"#FF5CA2"},"pending_confirmation":{"name":"pending_confirmation","title":"HR Verification","color":"#faad14"},"pending":{"name":"pending","title":"Pending","color":"#FF00FF"}}
+{
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "title": "Approval Rejected",
+        "color": "#0050b3"
+    },
+    "confirm_rejected": {
+        "name": "confirm_rejected",
+        "title": "HR Verification Rejected",
+        "color": "#FF4500"
+    }
+}
