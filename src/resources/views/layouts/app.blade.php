@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div class="flex h-screen bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div class="flex bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         <!-- Sidebar -->
         <x-sidebar />
         <div class="flex-0 flex w-full flex-col">

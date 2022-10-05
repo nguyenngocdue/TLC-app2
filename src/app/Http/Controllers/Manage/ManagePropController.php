@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Manage;
 
-use App\GetColumnTable\GetColumnTable;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Manage\ManageService;
+use App\Utils\Support\GetColumnTable;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;

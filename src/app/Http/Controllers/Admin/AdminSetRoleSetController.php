@@ -20,13 +20,15 @@ class AdminSetRoleSetController extends Controller
     public function index()
     {
         $search = request('search');
+        $pageLimit = request('page_limit');
+        if ($pageLimit === null) $pageLimit = 20;
         $users = User::search($search)->query(function ($q) {
             $q->orderBy('id', 'asc');
-        })->paginate(20);
+        })->paginate($pageLimit);
         $roles = Role::all();
         $roleSetFirst = RoleSet::first();
         $roleUsing = $roleSetFirst->roles;
-        return view('admin.renderset.rolesets.index')->with(compact('users', 'search', 'roles', 'roleSetFirst', 'roleUsing'));
+        return view('admin.renderset.rolesets.index')->with(compact('users', 'pageLimit', 'search', 'roles', 'roleSetFirst', 'roleUsing'));
     }
 
     /**

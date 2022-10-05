@@ -28,22 +28,24 @@ abstract class RenderController extends Controller
         $idUser = Auth::guard()->id();
         $userLogin = User::find($idUser);
         $search = request('search');
+        $pageLimit = request('page_limit');
+        if ($pageLimit === null) $pageLimit = 20;
         $model = $this->typeModel;
         $post = Post::search($search);
         $users = App::make($model)::search($search)->query(function ($q) {
             $q->orderBy('id', 'asc');
-        })->paginate(10);
+        })->paginate($pageLimit);
         $path = storage_path() . "/json/entities/$type/props.json";
         $path2 = storage_path() . "/json/entities/$type/relationships.json";
         if (!file_exists($path) || !file_exists($path2)) {
             Toastr::warning('Please make settings ' . Str::plural($type) . ' before rendering!', 'Please setting ' . Str::plural($type));
             $data = [];
             $data2 = [];
-            return view('dashboards.render.prop')->with(compact('data', 'data2', 'users', 'type', 'userLogin', 'search', 'model'));
+            return view('dashboards.render.prop')->with(compact('data', 'data2', 'users', 'pageLimit', 'type', 'userLogin', 'search', 'model'));
         } else {
             $data = json_decode(file_get_contents($path), true);
             $data2 = json_decode(file_get_contents($path2), true);
-            return view('dashboards.render.prop')->with(compact('data', 'data2', 'users', 'type', 'userLogin', 'search', 'model'));
+            return view('dashboards.render.prop')->with(compact('data', 'data2', 'users', 'pageLimit', 'type', 'userLogin', 'search', 'model'));
         }
     }
     public function update(Request $request, $id)

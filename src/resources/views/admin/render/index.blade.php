@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <main class="h-full overflow-y-auto">
+    <main class="h-full">
         <div class="container mx-auto grid px-0">
             <div
                 class="focus:shadow-outline-purple my-4 flex items-center justify-between rounded-lg bg-purple-600 p-3 text-base font-semibold text-purple-100 shadow-md focus:outline-none">
@@ -50,11 +50,6 @@
                             <input type="text" name="page_limit"
                                 class="block w-12 rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                                 value="{{ $pageLimit }}">
-                            @error('page_limit')
-                                <span class="ml-2 text-xs font-light text-red-600" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         <div>
                             <button type="submit"

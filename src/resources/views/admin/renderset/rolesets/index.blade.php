@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <main class="h-full overflow-y-auto">
+    <main class="h-full">
         <div class="container mx-auto grid px-0">
             <div
                 class="focus:shadow-outline-purple my-4 flex items-center justify-between rounded-lg bg-purple-600 p-3 text-base font-semibold text-purple-100 shadow-md focus:outline-none">
@@ -14,19 +14,35 @@
                 </div>
                 <span>View more →</span>
             </div>
-            <form action="{{ route('setrolesets.index') }}" method="GET">
-                <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-                    <div>
-                        <input type="text" name="search"
-                            class="block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                            value="{{ $search }}">
+            <div class="mt-2 grid grid-cols-2 gap-5">
+                <form action="{{ route('setrolesets.index') }}" method="GET">
+                    <div class="mt-2 grid grid-cols-2 gap-5">
+                        <div>
+                            <input type="text" name="search"
+                                class="block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                value="{{ $search }}">
+                        </div>
+                        <div>
+                            <button type="submit"
+                                class="focus:shadow-outline-purple rounded-lg border border-transparent bg-emerald-500 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-emerald-200 focus:outline-none active:bg-emerald-600">Search</button>
+                        </div>
                     </div>
-                    <div>
-                        <button type="submit"
-                            class="focus:shadow-outline-purple rounded-lg border border-transparent bg-emerald-500 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-emerald-200 focus:outline-none active:bg-emerald-600">Search</button>
+                </form>
+                <form action="{{ route('setrolesets.index') }}" method="GET">
+                    <div class="mt-2 flex">
+                        <div class="mr-1 w-12">
+                            <input type="text" name="page_limit"
+                                class="block w-12 rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                value="{{ $pageLimit }}">
+                        </div>
+                        <div>
+                            <button type="submit"
+                                class="focus:shadow-outline-purple rounded-lg border border-transparent bg-emerald-500 px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-emerald-200 focus:outline-none active:bg-emerald-600"><i
+                                    class="fas fa-arrow-right"></i></button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
             <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border shadow-sm">
                 <div class="w-full overflow-x-auto">
                     <table class="whitespace-no-wrap w-full">
@@ -88,15 +104,15 @@
                 <div
                     class="grid border-t bg-gray-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:grid-cols-9">
                     <span class="col-span-3 flex items-center">
-                        @if (isset($data) && count($data) > 0)
-                            {{ $data->links('dashboards.pagination.showing') }}
+                        @if (isset($users) && count($users) > 0)
+                            {{ $users->links('dashboards.pagination.showing') }}
                         @endif
                     </span>
                     <span class="col-span-2"></span>
                     <span class="col-span-4 mt-2 flex sm:mt-auto sm:justify-end">
                         <nav aria-label="Table navigation">
-                            @if (isset($data) && count($data) > 0)
-                                {{ $data->links('dashboards.pagination.template') }}
+                            @if (isset($users) && count($users) > 0)
+                                {{ $users->links('dashboards.pagination.template') }}
                             @endif
                         </nav>
                     </span>
