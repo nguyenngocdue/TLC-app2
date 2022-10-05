@@ -133,10 +133,6 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
 Route::resource('test', TestController::class);
-<<<<<<< HEAD
-Route::get('/lean', [HomeController::class, 'index'])->name('home');
-=======
 
 Route::resource('manage/manage_statusLibrary', ManageStatusLibrary::class);
 Route::resource('manage/status', ManageStatusDoc::class);
->>>>>>> dev02
