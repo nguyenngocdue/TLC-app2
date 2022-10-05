@@ -6,28 +6,20 @@ use Illuminate\View\Component;
 
 class Text extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    private $columnName;
+
+    private $colName;
     private $valColName;
-    public function __construct($columnName, $valColName)
+    public function __construct($colName, $valColName)
     {
-        $this->columnName = $columnName;
+        $this->colName = $colName;
         $this->valColName = $valColName;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
+
     public function render()
     {
-        $columnName = $this->columnName;
+        $colName = $this->colName;
         $valColName = $this->valColName;
-        return view('components.controls.text')->with(compact('columnName', 'valColName'));
+        return view('components.controls.text')->with(compact('colName', 'valColName'));
     }
 }

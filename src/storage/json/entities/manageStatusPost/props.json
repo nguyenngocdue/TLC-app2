@@ -1,0 +1,12 @@
+{
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "title": "Approval Rejected",
+        "color": "#0050b3"
+    },
+    "confirm_rejected": {
+        "name": "confirm_rejected",
+        "title": "HR Verification Rejected",
+        "color": "#FF4500"
+    }
+}

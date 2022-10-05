@@ -46,6 +46,7 @@ class UploadFileController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->input());
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
                 $fileName = $file->getClientOriginalName();
