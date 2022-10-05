@@ -22,13 +22,7 @@ $(document).ready(function () {
             error: function (error) {},
         })
     })
-    $('.select-all').click(function () {
-        var model = $(this).attr('data-model')
-        var set_checked = !$('.check-' + model)
-            .first()
-            .is(':checked')
-        $('.check-' + model).prop('checked', set_checked)
-    })
+
     $('.btn-delete-render').click(function () {
         var url = $(this).attr('data-url')
         var _this = $(this)

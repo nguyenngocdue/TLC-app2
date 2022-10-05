@@ -101,7 +101,7 @@ class AdminSetRoleSetController extends Controller
         }
         $user = User::find($id);
         $user->syncRoleSets($roleSetUpdate);
-        Toastr::success('Update Role Set successfully', 'Set Role Set User');
+        Toastr::success('Sync Role Set successfully', 'Sync Role Set');
         return redirect()->back();
     }
 

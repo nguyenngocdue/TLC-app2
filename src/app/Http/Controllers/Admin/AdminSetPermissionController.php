@@ -8,8 +8,6 @@ use App\Models\Role;
 use App\Utils\Support\GetAllEntities;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\File;
 
 class AdminSetPermissionController extends Controller
 {
@@ -83,6 +81,7 @@ class AdminSetPermissionController extends Controller
         $checkedRequest = $request->input('checked');
         $roleSelected = Role::findByName($roleRequest);
         $roleSelected->syncPermissions($checkedRequest);
+        // Toastr::success('Sync Permissions successfully!', 'Sync Permissions');
         return $this->redirectBack($roleRequest);
     }
 

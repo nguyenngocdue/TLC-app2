@@ -100,4 +100,15 @@
             </div>
         </div>
     </main>
+    <script>
+        $(document).ready(function() {
+            $('.select-all').click(function() {
+                var model = $(this).attr('data-model')
+                var set_checked = !$('.check-' + model)
+                    .first()
+                    .is(':checked')
+                $('.check-' + model).prop('checked', set_checked)
+            })
+        })
+    </script>
 @endsection
