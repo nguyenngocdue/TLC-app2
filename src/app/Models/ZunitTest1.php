@@ -10,11 +10,15 @@ class ZunitTest1 extends Model
     use HasFactory;
     protected $fillable = ["text1", "text2", "dropdown1", "radio1", "boolean1"];
     protected $primaryKey = 'id';
-    protected $table = 'zunit_test_1';
+    protected $table = 'zunit_test_1s';
 
-    public function workplace()
+    public function workplaceDropDown1()
     {
-        return $this->belongsTo(ZunitTest1::class);
+        return $this->belongsTo(Workplace::class, 'dropdown1');
+    }
+    public function workplaceRadio1()
+    {
+        return $this->belongsTo(Workplace::class, 'radio1');
     }
     public function workplaceRel1()
     {

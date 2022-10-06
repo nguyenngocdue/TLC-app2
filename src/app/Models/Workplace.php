@@ -26,7 +26,7 @@ class Workplace extends Model
     }
     public function unitTestDropDown1s()
     {
-        return $this->hasMany(ZunitTest1::class, 'dropdown1');
+        return $this->hasMany(ZunitTest1::class, 'dropdown1', 'id');
     }
 
     public function unitTestRadio1s()
