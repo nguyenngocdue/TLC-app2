@@ -16,6 +16,7 @@ class CreateTableRelationshipCommand extends BaseCommand
      */
     protected $signature = 'ndc:migration {name : The name of the migration}
         {--tables= : The tables=table1,table2}
+        {--rel= : The relationship}
         ';
 
     /**
@@ -64,7 +65,7 @@ class CreateTableRelationshipCommand extends BaseCommand
         $name = Str::snake(trim($this->input->getArgument('name')));
 
         $tables = $this->input->getOption('tables');
-        error_log($tables);
+        $relationship = $this->input->getOption('rel');
         $var = explode(',', $tables);
         $tableOne = $var[0];
         $tableTwo = $var[1];
@@ -75,13 +76,11 @@ class CreateTableRelationshipCommand extends BaseCommand
         // Next, we will attempt to guess the table name if this the migration has
         // "create" in the name. This will allow us to provide a convenient way
         // of creating migrations that create new tables for the application.
-        if (!$tableOne || !$tableTwo) {
-        }
 
         // Now we are ready to write the migration out to disk. Once we've written
         // the migration out, we will dump-autoload for the entire framework to
         // make sure that the migrations are registered by the class loaders.
-        $this->writeMigration($name, $tableOne, $tableTwo);
+        $this->writeMigration($name, $tableOne, $tableTwo, $relationship);
         $this->composer->dumpAutoloads();
     }
 
@@ -93,7 +92,7 @@ class CreateTableRelationshipCommand extends BaseCommand
      * @param  bool  $create
      * @return string
      */
-    protected function writeMigration($name, $tableOne, $tableTwo)
+    protected function writeMigration($name, $tableOne, $tableTwo, $relationship)
     {
         $file = $this->creator->create(
             $name,
@@ -101,7 +100,8 @@ class CreateTableRelationshipCommand extends BaseCommand
             null,
             false,
             $tableOne,
-            $tableTwo
+            $tableTwo,
+            $relationship
         );
 
         $file = pathinfo($file, PATHINFO_FILENAME);

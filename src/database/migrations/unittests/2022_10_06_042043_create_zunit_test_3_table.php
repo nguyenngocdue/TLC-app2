@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('unit_test_3', function (Blueprint $table) {
+        Schema::create('zunit_test_3s', function (Blueprint $table) {
             $table->id();
             $table->dateTime('datetime1')->nullable();
             $table->dateTime('datetime2')->nullable();
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('unit_test_3');
+        Schema::dropIfExists('zunit_test_3s');
     }
 };

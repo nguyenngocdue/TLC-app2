@@ -12,14 +12,27 @@ return new class extends Migration
      *
      * @return void
      */
+     protected function checkRelationShip()
+    {
+        $relationship = '{{relationship}}';
+        if (strlen($relationship) > 1) {
+            $name = md5(Str::plural('{{tableOne}}').'_'.Str::plural('{{tableTwo}}'));
+            $tableName = Str::plural('{{tableOne}}').'_'.Str::plural('{{tableTwo}}').'_'.$relationship ;
+        } else {
+            $name = null;
+            $tableName = Str::plural('{{tableOne}}').'_'.Str::plural('{{tableTwo}}');
+        }
+        return [$tableName,$name];
+    }
     public function up()
     {
-        Schema::create('{{ table }}', function (Blueprint $table) {
+        
+        Schema::create($this->checkRelationShip()[0], function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('{{tableOne}}_id');
             $table->unsignedBigInteger('{{tableTwo}}_id');
             $table->timestamps();
-            $table->unique(['{{tableOne}}_id', '{{tableTwo}}_id']);
+            $table->unique(['{{tableOne}}_id', '{{tableTwo}}_id'],$this->checkRelationShip()[1]);
             $table->foreign('{{tableOne}}_id')->references('id')->on(Str::plural('{{tableOne}}'))->onDelete('cascade');
             $table->foreign('{{tableTwo}}_id')->references('id')->on(Str::plural('{{tableTwo}}'))->onDelete('cascade');
         });
@@ -32,6 +45,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('{{ table }}');
+        Schema::dropIfExists($this->checkRelationShip()[0]);
     }
 };

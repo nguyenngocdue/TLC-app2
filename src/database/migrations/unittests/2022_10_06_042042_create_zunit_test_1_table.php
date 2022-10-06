@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('unit_test_1', function (Blueprint $table) {
+        Schema::create('zunit_test_1s', function (Blueprint $table) {
             $table->id();
             $table->text('text1')->nullable();
             $table->text('text2')->nullable();
             $table->unsignedBigInteger('dropdown1');
-            $table->unsignedBigInteger('checkbox1')->nullable();
             $table->unsignedBigInteger('radio1');
             $table->unsignedBigInteger('boolean1')->nullable();
             $table->foreign('dropdown1')->references('id')->on('workplaces')->onDelete('cascade');
-            $table->foreign('checkbox1')->references('id')->on('workplaces')->onDelete('cascade');
             $table->foreign('radio1')->references('id')->on('workplaces')->onDelete('cascade');
             $table->timestamps();
         });
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('unit_test_1');
+        Schema::dropIfExists('zunit_test_1s');
     }
 };

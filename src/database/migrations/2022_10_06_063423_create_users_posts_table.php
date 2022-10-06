@@ -14,14 +14,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('create_users_workplaces_table', function (Blueprint $table) {
+        Schema::create(Str::plural('user').'_'.Str::plural('post'), function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('workplace_id');
+            $table->unsignedBigInteger('post_id');
             $table->timestamps();
-            $table->unique(['user_id', 'workplace_id']);
+            $table->unique(['user_id', 'post_id']);
             $table->foreign('user_id')->references('id')->on(Str::plural('user'))->onDelete('cascade');
-            $table->foreign('workplace_id')->references('id')->on(Str::plural('workplace'))->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on(Str::plural('post'))->onDelete('cascade');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('create_users_workplaces_table');
+        Schema::dropIfExists(Str::plural('user').'_'.Str::plural('post'));
     }
 };
