@@ -26,7 +26,7 @@ class Translationtime extends Component
         $selected = $this->id;
         $columnName = $this->columnName;
         $currentUser = DB::table('users')->where('id', $selected)->first();
-        $day = $columnName === "created_at" ? $currentUser->created_at : $currentUser->updated_at;
+        $day = $columnName === "created_at" ? $currentUser->created_at : "";
 
         $control = $this->control;
         $dateTimeInstance = date_create(str_replace('-', '/', $day));

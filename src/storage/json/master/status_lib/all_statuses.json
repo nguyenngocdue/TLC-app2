@@ -1,1 +1,42 @@
-{"approval_rejected":{"name":"approval_rejected","title":"Approval Rejected","color":"#0050b3"},"approved":{"name":"approved","title":"Approved","color":"#006600"},"confirm_rejected":{"name":"confirm_rejected","title":"HR Verification Rejected","color":"#99FF00"},"pending_confirmation":{"name":"pending_confirmation","title":"HR Verification","color":"#faad14"}}
+{
+    "A": {
+        "name": "A",
+        "title": null,
+        "color": null
+    },
+    "D": {
+        "name": "D",
+        "title": "pend32222",
+        "color": "#faad14"
+    },
+    "Due": {
+        "name": "Due",
+        "title": "Test",
+        "color": "#006600"
+    },
+    "a": {
+        "name": "a",
+        "title": "pend33333333",
+        "color": "#FF3333"
+    },
+    "b": {
+        "name": "b",
+        "title": "Test",
+        "color": "#15803f"
+    },
+    "c": {
+        "name": "c",
+        "title": "a",
+        "color": "#00AA00"
+    },
+    "d": {
+        "name": "d",
+        "title": "a",
+        "color": "#15803f"
+    },
+    "\u0110\u00e2sdsadasd": {
+        "name": "\u0110\u00e2sdsadasd",
+        "title": "",
+        "color": ""
+    }
+}

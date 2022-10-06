@@ -8,14 +8,12 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ManageStatusDoc extends Controller
+abstract class ManageStatusDocType extends Controller
 {
-    protected $readingFileService;
-    protected $availabeProps = "status_lib";
-    protected $manageStatusPost = "manage_status";
-    protected $product_id;
-    protected $path = "master/manage_status/doc_status.json";
-    protected $title = "Manage Doc Status Type";
+    protected $title;
+    protected $w_file_path;
+    protected $r_file_path;
+    protected $disk = "json";
 
     public function __construct(ReadingFileService $readingFileService)
     {
@@ -23,10 +21,8 @@ class ManageStatusDoc extends Controller
     }
     public function index()
     {
-        $availabeStatus = $this->readingFileService->indexProps($this->availabeProps, "all_statuses.json");
-
-        $arrayStatusDocType = $this->readingFileService->indexProps($this->manageStatusPost, "doc_status.json");
-
+        $availabeStatus = $this->readingFileService->getPath("$this->disk/$this->r_file_path");
+        $arrayStatusDocType = $this->readingFileService->getPath("$this->disk/$this->w_file_path");
 
         // Check orphan status
         $newStatusDocType = [];
@@ -48,14 +44,9 @@ class ManageStatusDoc extends Controller
         }
         $type = $this->title;
 
-        // dd($newAvailabeStatus, $newStatusDocType, $orphanStatusDocType);
+        // dd($newAvailabeStatus, $newStatusDocType);
 
         return view('manageStatusDoc')->with(compact('newAvailabeStatus', 'newStatusDocType', 'type'));
-    }
-
-    public function create()
-    {
-        //
     }
 
 
@@ -65,8 +56,8 @@ class ManageStatusDoc extends Controller
         $typeAction = array_keys(array_slice($data, 1, 2))[0];
 
 
-        $availabeStatus = $this->readingFileService->indexProps($this->availabeProps, "all_statuses.json");
-        $statusDocType = $this->readingFileService->indexProps($this->manageStatusPost, "doc_status.json");
+        $availabeStatus = $this->readingFileService->getPath("$this->disk/$this->r_file_path");
+        $statusDocType = $this->readingFileService->getPath("$this->disk/$this->w_file_path");
 
         switch ($typeAction) {
             case 'add':
@@ -74,7 +65,7 @@ class ManageStatusDoc extends Controller
                 $newProps = array_values(array_merge($statusDocType, [$nameStatus]));
                 $jsonManage = json_encode($newProps);
                 try {
-                    $output = Storage::disk('json')->put($this->path, $jsonManage, 'public'); // wwhy output has always false value
+                    $output = Storage::disk('json')->put($this->w_file_path, $jsonManage, 'public'); // wwhy output has always false value
                     return redirect()->back()->with(compact('nameStatus'));
                 } catch (\Throwable $th) {
                 }
@@ -85,7 +76,7 @@ class ManageStatusDoc extends Controller
                 $jsonManage = json_encode(array_values($newStatusDocType));
 
                 try {
-                    $output = Storage::disk('json')->put($this->path, $jsonManage, 'public'); // wwhy output has always false value
+                    $output = Storage::disk('json')->put($this->w_file_path, $jsonManage, 'public'); // wwhy output has always false value
                     return redirect()->back()->with(compact('nameStatus'));
                 } catch (\Throwable $th) {
                 }
@@ -103,7 +94,7 @@ class ManageStatusDoc extends Controller
                 // dd($docType, $index, $nameStatus);
                 $jsonManage = json_encode(array_values($docType));
                 try {
-                    $output = Storage::disk('json')->put($this->path, $jsonManage, 'public'); // wwhy output has always false value
+                    $output = Storage::disk('json')->put($this->w_file_path, $jsonManage, 'public'); // wwhy output has always false value
                     return redirect()->back();
                 } catch (\Throwable $th) {
                 }
@@ -123,7 +114,7 @@ class ManageStatusDoc extends Controller
                 }
                 $jsonManage = json_encode(array_values($docType));
                 try {
-                    $output = Storage::disk('json')->put($this->path, $jsonManage, 'public'); // wwhy output has always false value
+                    $output = Storage::disk('json')->put($this->w_file_path, $jsonManage, 'public'); // wwhy output has always false value
                     return redirect()->back();
                 } catch (\Throwable $th) {
                 }
@@ -131,27 +122,5 @@ class ManageStatusDoc extends Controller
             default:
                 break;
         }
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-
-    public function edit($id)
-    {
-        //
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }
