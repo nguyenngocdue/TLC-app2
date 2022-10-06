@@ -91,8 +91,8 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
                 </div>
+                @endforeach
             </div>
             <div class="flex justify-left border-t dark:bg-gray-800  px-5">
                 @switch($action)

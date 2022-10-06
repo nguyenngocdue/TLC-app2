@@ -12,73 +12,11 @@ $sideBar = json_decode(file_get_contents(storage_path() . '/json/configs/view/da
         <nav aria-label="Main" class="flex-1 space-y-2 overflow-y-hidden px-2 py-4 hover:overflow-y-auto">
 
             @foreach ($sideBar as $group)
-<<<<<<< HEAD
-                @if ($group['title'] === 'Admin')
-                    @roleset('admin|super-admin')
-                    <div class="relative px-6 py-3">{{ $group['title'] }}</div>
-                    @foreach ($group['items'] as $key => $item)
-                        <div class="relative px-6 py-3" x-data="{ isActive: false, open: {{ Request::is($item['href_parent'] . '/*') ? 'true' : 'false' }} }">
-                            <a href="#"
-                                class="{{ Request::is($item['href_parent'] . '/*') ? 'text-blue-500 hover:text-blue-800' : 'hover:text-gray-800 dark:hover:text-gray-200' }} inline-flex w-full items-center justify-between text-sm font-semibold transition-colors duration-150"
-                                @click="$event.preventDefault(); open = !open" role="button" aria-haspopup="true"
-                                :aria-expanded="(open || isActive) ? 'true' : 'false'">
-                                <span class="inline-flex items-center">
-                                    <i class="{{ $item['icon'] }} h-5 w-5"></i>
-                                    <span class="ml-4">{{ $item['title'] }}</span>
-                                </span>
-                                <svg class="h-4 w-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </a>
-                            <div role="menu" x-show="open" class="mt-2 space-y-2" aria-label="Dashboards">
-                                @foreach ($item['items'] as $value)
-                                    <a role="menuitem"
-                                        class="dark:hover:text-light {{ Request::is($value['href']) ? 'text-blue-500 hover:text-blue-700' : 'text-gray-400 hover:text-gray-700 dark:text-gray-400' }} block rounded-md p-2 text-sm transition-colors duration-200"
-                                        href="{{ url($value['href']) }}">
-                                        <span><i class="{{ $value['icon'] }}"></i> {{ $value['title'] }}</span>
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endforeach
-                    @endroleset
-                @else
-                    <div class="relative px-6 py-3">{{ $group['title'] }}</div>
-                    @foreach ($group['items'] as $key => $item)
-                        <div class="relative px-6 py-3" x-data="{ isActive: false, open: {{ Request::is($item['href_parent'] . '/*') ? 'true' : 'false' }} }">
-                            <a href="#"
-                                class="{{ Request::is($item['href_parent'] . '/*') ? 'text-blue-500 hover:text-blue-800' : 'hover:text-gray-800 dark:hover:text-gray-200' }} inline-flex w-full items-center justify-between text-sm font-semibold transition-colors duration-150"
-                                @click="$event.preventDefault(); open = !open" role="button" aria-haspopup="true"
-                                :aria-expanded="(open || isActive) ? 'true' : 'false'">
-                                <span class="inline-flex items-center">
-                                    <i class="{{ $item['icon'] }} h-5 w-5"></i>
-                                    <span class="ml-4">{{ $item['title'] }}</span>
-                                </span>
-                                <svg class="h-4 w-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </a>
-                            <div role="menu" x-show="open" class="mt-2 space-y-2" aria-label="Dashboards">
-                                @foreach ($item['items'] as $value)
-                                    <a role="menuitem"
-                                        class="{{ Request::is($value['href']) ? 'text-blue-500 hover:text-blue-700' : 'text-gray-400 hover:text-gray-700 dark:text-gray-400' }} dark:hover:text-light block rounded-md p-2 text-sm transition-colors duration-200"
-                                        href="{{ url($value['href']) }}">
-                                        <span><i class="{{ $value['icon'] }}"></i> {{ $value['title'] }}</span>
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-=======
-            @if ($group['title'] === 'Admin')
-            @roleset('admin|super-admin')
-            <div class="relative px-6 py-3">{{ $group['title'] }}</div>
+            @if ($group['title']==='Admin' ) @roleset('admin|super-admin') <div class="relative px-6 py-3">{{ $group['title'] }}
+            </div>
             @foreach ($group['items'] as $key => $item)
-            <div class="relative px-6 py-3" x-data="{ isActive: false, open: false }">
-                <a href="#" class="inline-flex w-full items-center justify-between text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" @click="$event.preventDefault(); open = !open" role="button" aria-haspopup="true" :aria-expanded="(open || isActive) ? 'true' : 'false'">
+            <div class="relative px-6 py-3" x-data="{ isActive: false, open: {{ Request::is($item['href_parent'] . '/*') ? 'true' : 'false' }} }">
+                <a href="#" class="{{ Request::is($item['href_parent'] . '/*') ? 'text-blue-500 hover:text-blue-800' : 'hover:text-gray-800 dark:hover:text-gray-200' }} inline-flex w-full items-center justify-between text-sm font-semibold transition-colors duration-150" @click="$event.preventDefault(); open = !open" role="button" aria-haspopup="true" :aria-expanded="(open || isActive) ? 'true' : 'false'">
                     <span class="inline-flex items-center">
                         <i class="{{ $item['icon'] }} h-5 w-5"></i>
                         <span class="ml-4">{{ $item['title'] }}</span>
@@ -89,7 +27,7 @@ $sideBar = json_decode(file_get_contents(storage_path() . '/json/configs/view/da
                 </a>
                 <div role="menu" x-show="open" class="mt-2 space-y-2" aria-label="Dashboards">
                     @foreach ($item['items'] as $value)
-                    <a role="menuitem" class="dark:hover:text-light block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:text-gray-400" href="{{ url($value['href']) }}">
+                    <a role="menuitem" class="dark:hover:text-light {{ Request::is($value['href']) ? 'text-blue-500 hover:text-blue-700' : 'text-gray-400 hover:text-gray-700 dark:text-gray-400' }} block rounded-md p-2 text-sm transition-colors duration-200" href="{{ url($value['href']) }}">
                         <span><i class="{{ $value['icon'] }}"></i> {{ $value['title'] }}</span>
                     </a>
                     @endforeach
@@ -100,8 +38,8 @@ $sideBar = json_decode(file_get_contents(storage_path() . '/json/configs/view/da
             @else
             <div class="relative px-6 py-3">{{ $group['title'] }}</div>
             @foreach ($group['items'] as $key => $item)
-            <div class="relative px-6 py-3" x-data="{ isActive: false, open: false }">
-                <a href="#" class="inline-flex w-full items-center justify-between text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" @click="$event.preventDefault(); open = !open" role="button" aria-haspopup="true" :aria-expanded="(open || isActive) ? 'true' : 'false'">
+            <div class="relative px-6 py-3" x-data="{ isActive: false, open: {{ Request::is($item['href_parent'] . '/*') ? 'true' : 'false' }} }">
+                <a href="#" class="{{ Request::is($item['href_parent'] . '/*') ? 'text-blue-500 hover:text-blue-800' : 'hover:text-gray-800 dark:hover:text-gray-200' }} inline-flex w-full items-center justify-between text-sm font-semibold transition-colors duration-150" @click="$event.preventDefault(); open = !open" role="button" aria-haspopup="true" :aria-expanded="(open || isActive) ? 'true' : 'false'">
                     <span class="inline-flex items-center">
                         <i class="{{ $item['icon'] }} h-5 w-5"></i>
                         <span class="ml-4">{{ $item['title'] }}</span>
@@ -112,10 +50,9 @@ $sideBar = json_decode(file_get_contents(storage_path() . '/json/configs/view/da
                 </a>
                 <div role="menu" x-show="open" class="mt-2 space-y-2" aria-label="Dashboards">
                     @foreach ($item['items'] as $value)
-                    <a role="menuitem" class="dark:hover:text-light block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:text-gray-400" href="{{ url($value['href']) }}">
+                    <a role="menuitem" class="{{ Request::is($value['href']) ? 'text-blue-500 hover:text-blue-700' : 'text-gray-400 hover:text-gray-700 dark:text-gray-400' }} dark:hover:text-light block rounded-md p-2 text-sm transition-colors duration-200" href="{{ url($value['href']) }}">
                         <span><i class="{{ $value['icon'] }}"></i> {{ $value['title'] }}</span>
                     </a>
->>>>>>> dev02
                     @endforeach
                 </div>
             </div>
