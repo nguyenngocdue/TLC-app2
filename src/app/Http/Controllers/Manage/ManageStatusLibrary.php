@@ -13,10 +13,10 @@ class ManageStatusLibrary extends Controller
 
 
     protected $readingFileService;
-    protected $type = "status_lib";
     protected $title = "Status Library";
-    protected $path = "master/status_lib/all_statuses.json";
-
+    protected $w_file_path = "master/status_lib/all_statuses.json";
+    protected $r_file_path = "master/status_lib/all_statuses.json";
+    protected $disk = "json";
 
     public function __construct(ReadingFileService $readingFileService)
     {
@@ -25,15 +25,11 @@ class ManageStatusLibrary extends Controller
 
     public function index()
     {
-        $props = $this->readingFileService->indexProps($this->type, "all_statuses.json");
-        $error = is_null($props) ? "null" : "";
+        $props = $this->readingFileService->getPath("$this->disk/$this->r_file_path");
+        $error = is_null($props) ? "all_statuses.json file was null" : "";
         if (is_null($props)) return view('components.render.error')->with(compact('error'));
         //  take a first word of field
-        $sign = [];
-        foreach ($props as $key => $value) {
-            $_key = (string)$key;
-            $sign[] = $_key[0];
-        }
+        $sign = array_map(fn ($key) => ((string)$key)[0], array_keys($props));
         $usign =  array_unique($sign);
         $countsign = array_count_values($sign);
 
@@ -43,33 +39,8 @@ class ManageStatusLibrary extends Controller
             array_push($array,  array_slice($props, $key, $countsign[$value]));
             $libStatus[$value] = array_values($array)[0];
         }
-        // dd($libStatus);
         $type = $this->title;
-
         return view('statusLibrary')->with(compact('libStatus', 'type'));
-    }
-
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    public function show($id)
-    {
-        //
-    }
-
-
-    public function edit($id)
-    {
-        //
     }
 
     public function update(Request $request, $id)
@@ -77,30 +48,41 @@ class ManageStatusLibrary extends Controller
 
         $data = $request->input();
 
+        //  Check the same name when you create a new status
+        $oldName = $data['oldName'];
+        $newName = $data['newName'];
+        if (in_array($newName[0], $oldName)) {
+            Toastr::warning('This name already exists', 'Save file json was failed');
+            return back();
+        }
 
-        $manage = [];
-        if (is_null($data["name"][0]) !== true) {
-            $name = $data['name'][0];
+        // Create a status
+        $array1 = [];
+        if (is_null($newName[0]) !== true) {
+            $name = $newName[0];
             $array = [];
             $array["name"] = $name;
-            $array["title"] = $data["title"];
-            $array["color"] = $data["color"];
-            $manage[$name] = $array;
+            $array["title"] = "";
+            $array["color"] = "";
+            $array1[$name] = $array;
         }
+        $array2 = [];
+
         if (isset($data['oldName'])) {
             foreach ($data['oldName'] as $key => $name) {
                 $array = [];
                 $array["name"] = $data["oldName"][$key];;
                 $array["title"] = $data["oldTitle"][$key];
                 $array["color"] = $data["oldColor"][$key];
-                $manage[$name] = $array;
-                // dd($array, $name);
+                $array2[$name] = $array;
             }
         }
-        ksort($manage);
-        $jsonManage = json_encode(array_merge($manage));
+        $allStatuses  = array_merge($array2, $array1);
+        ksort($allStatuses);
+        $jsonManage = json_encode($allStatuses);
+        // dd($data, $array2, $array1, $allStatuses, $jsonManage);
         try {
-            $output = Storage::disk('json')->put($this->path, $jsonManage, 'public'); // wwhy output has always false value
+            $output = Storage::disk('json')->put($this->w_file_path, $jsonManage, 'public');
             if ($output) {
                 Toastr::success('Save file json successfully!', 'Save file json');
             } else {
@@ -110,10 +92,5 @@ class ManageStatusLibrary extends Controller
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');
         }
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }

@@ -8,8 +8,8 @@ use App\Http\Controllers\Admin\Features\RoleController;
 use App\Http\Controllers\Admin\Features\RoleSetController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Manage\ManageStatusDoc;
 use App\Http\Controllers\Manage\ManageStatusLibrary;
+use App\Http\Controllers\Manage\Master\StatusDocType;
 use App\Http\Controllers\Manage\Media\ManageMediaPropController;
 use App\Http\Controllers\Manage\Media\ManageMediaRelationshipController;
 use App\Http\Controllers\Manage\Media\ManageMediaTablePropController;
@@ -26,6 +26,7 @@ use App\Http\Controllers\Render\Media\MediaEditController;
 use App\Http\Controllers\Render\Media\MediaRenderController;
 use App\Http\Controllers\Render\Post\PostEditController;
 use App\Http\Controllers\Render\Post\PostRenderController;
+use App\Http\Controllers\Render\User\UserCreateController;
 use App\Http\Controllers\Render\User\UserEditController;
 use App\Http\Controllers\Render\User\UserRenderController;
 use App\Http\Controllers\Render\Workplace\WorkplaceRenderController;
@@ -59,6 +60,7 @@ Route::group([
         'prefix' => 'dashboard'
     ], function () {
         Route::resource('user/user_renderprop', UserRenderController::class);
+        Route::resource('user/user_addnew', UserCreateController::class);
         Route::resource('user/user_edit', UserEditController::class);
         Route::resource('media/media_renderprop', MediaRenderController::class);
         Route::resource('media/media_edit', MediaEditController::class);
@@ -134,5 +136,5 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
 Route::resource('test', TestController::class);
 
-Route::resource('manage/manage_statusLibrary', ManageStatusLibrary::class);
-Route::resource('manage/status', ManageStatusDoc::class);
+Route::resource('manage/statusLibrary', ManageStatusLibrary::class);
+Route::resource('manage/statusDocType', StatusDocType::class);

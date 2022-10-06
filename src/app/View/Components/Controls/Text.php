@@ -9,10 +9,12 @@ class Text extends Component
 
     private $colName;
     private $valColName;
-    public function __construct($colName, $valColName)
+    private $action;
+    public function __construct($colName, $valColName, $action)
     {
         $this->colName = $colName;
         $this->valColName = $valColName;
+        $this->action = $action;
     }
 
 
@@ -20,6 +22,7 @@ class Text extends Component
     {
         $colName = $this->colName;
         $valColName = $this->valColName;
-        return view('components.controls.text')->with(compact('colName', 'valColName'));
+        $action = $this->action;
+        return view('components.controls.text')->with(compact('colName', 'valColName', 'action'));
     }
 }

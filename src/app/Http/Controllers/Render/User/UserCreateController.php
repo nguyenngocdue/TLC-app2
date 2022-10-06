@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Render\User;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Render\EditController;
 use App\Models\User;
 
-class UserEditController extends EditController
+class UserCreateController extends EditController
 {
     protected $type = "user";
-    protected $action = "edit";
     protected $data = User::class;
+    protected $action = "create";
 }

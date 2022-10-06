@@ -10,56 +10,53 @@
             <span>{{$type}}</span>
         </div>
     </div>
-    <form class="rounded-md bg-white p-4" id="form-upload" method="POST" action="{{route('manage_statusLibrary.update', 1) }}">
+    <form class="rounded-md bg-white p-4" id="form-upload" method="POST" action="{{route('statusLibrary.update', 1) }}">
         @csrf
         @method('PUT')
         <table id="table_manage" class="whitespace-no-wrap w-full table-auto py-10">
             <thead class="text-xs text-gray-700 uppercase bg-gray-400 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th></th>
-                    <th scope="col " class="py-3 px-6 text-base">
+                    <th scope="col " class="py-2 px-6 text-base">
                         Name
                     </th>
-                    <th scope="col" class="py-3 px-6 text-base">
+                    <th scope="col" class="py-2 px-6 text-base">
                         Title
                     </th>
-                    <th scope="col" class="py-3 px-6 text-base">
+                    <th scope="col" class="py-2 px-6 text-base">
                         Color
                     </th>
-                    <th scope="col" class="py-3 px-6 text-base">
+                    <th scope="col" class="py-2 px-6 text-base">
                         Render
                     </th>
                 </tr>
             </thead>
             <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
+                {{-- {{dd($libStatus)}} --}}
                 @foreach($libStatus as $key => $props)
                 <tr class=" text-gray-700 dark:text-gray-400 bg-slate-200">
-                    <td class=" text-3xl flex justify-center">{{$key}}</td>
-                    <td class=" text-3xl flex justify-center"></td>
-                    <td class=" text-3xl flex justify-center"></td>
-                    <td class=" text-3xl flex justify-center"></td>
-                    <td class=" text-3xl flex justify-center"></td>
+                    <td class=" text-2xl flex justify-center">{{$key}}</td>
                 </tr>
                 @foreach($props as $key => $prop)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="text-base py-4 px-6">
+                    <td class="text-base py-2 px-6">
                         <input hidden>
                     </td>
-                    <td class="text-base py-4 px-6 text-center">
+                    <td class="text-base py-2 px-6 text-center">
                         <input readonly name="oldName[]" class="focus:outline-none border-none  bg-white text-center font-bold" value={{$key}}>
                     </td>
-                    <td class="text-base py-4 px-6">
+                    <td class="text-base py-2 px-6">
                         <div class="flex">
-                            <input id="{{"title-".$prop['title'].$key}}" title="Click on here to edit" name="oldTitle[]" class="text-center border-2 border-gray-900 w-full focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm" type="text" value="{{$prop['title']}}">
+                            <input name="oldTitle[]" title="Click on here to edit" class="text-center border-2 border-gray-300 w-full focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm" type="text" value="{{$prop['title']}}">
 
                         </div>
                     </td>
-                    <td class="text-base py-4 px-6 ">
+                    <td class="text-base py-2 px-6 ">
                         <div class="flex">
-                            <input id="{{$prop['color'].$key}}" title="Click on here to edit" name="oldColor[]" class=" border-2  text-center border-gray-700  w-full focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm    bg-[{{$prop['color']}}]" type="text" value="{{$prop['color']}}">
+                            <input title="Click on here to edit" name="oldColor[]" class=" border-2  text-center border-gray-300  w-full focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm    bg-[{{$prop['color']}}]" type="text" value="{{$prop['color']}}">
                         </div>
                     </td>
-                    <td class="text-base py-4 px-6 text-white flex justify-center">
+                    <td class="text-base py-2 px-6 text-white flex justify-center">
                         <span class=" bg-[{{$prop['color']}}]">{{$prop['title']}}</span>
                     </td>
                 </tr>
@@ -68,14 +65,14 @@
                 @endforeach
 
 
-                <tr class=" border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr class=" border-b dark:bg-gray-800">
                     <td class=" ">
                         <button class="focus:shadow-outline rounded bg-emerald-500 block text-white font-bold text-xl text-center px-2" for="createStatus">
                             Create
                         </button>
                     </td>
                     <td class="bg-slate-400 text-base py-2 px-6 ">
-                        <input name="name[]" class="w-full text-center border focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm" id="createStatus" type="text" placeholder="Enter name">
+                        <input name="newName[]" class="w-full text-center border focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm" id="createStatus" type="text" placeholder="Enter name">
                     </td>
                     {{-- <td class=" bg-slate-400 text-base py-2 px-6">
                         <input name="title" class="w-full text-center border focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm" type="text" placeholder="Enter title">
