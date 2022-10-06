@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('{{ table }}', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('{{tableOne}}_id');
+            $table->unsignedBigInteger('{{tableTwo}}_id');
+            $table->timestamps();
+            $table->unique(['{{tableOne}}_id', '{{tableTwo}}_id']);
+            $table->foreign('{{tableOne}}_id')->references('id')->on(Str::plural('{{tableOne}}'))->onDelete('cascade');
+            $table->foreign('{{tableTwo}}_id')->references('id')->on(Str::plural('{{tableTwo}}'))->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('{{ table }}');
+    }
+};

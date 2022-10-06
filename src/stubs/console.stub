@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Console\Commands;
+namespace {{ namespace }};
 
 use Illuminate\Console\Command;
 
-class ManageControllerCommand extends Command
+class {{ class }} extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'ndc:manage {dir}';
+    protected $signature = '{{ command }}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create New Manage Directory {dir} Controller';
+    protected $description = 'Command description';
 
     /**
      * Execute the console command.
@@ -27,8 +27,6 @@ class ManageControllerCommand extends Command
      */
     public function handle()
     {
-        // mkdir(__DIR__.'/')
-
-        return 0;
+        return Command::SUCCESS;
     }
 }
