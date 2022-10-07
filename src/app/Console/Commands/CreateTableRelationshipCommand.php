@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Console\CommandsCreateTableRelationship\MigrationRelationShipCreator;
+use App\Console\CreateTableRelationship\MigrationRelationShipCreator;
 use Illuminate\Database\Console\Migrations\BaseCommand;
 use Illuminate\Support\Composer;
 use Illuminate\Support\Str;
@@ -29,7 +29,6 @@ class CreateTableRelationshipCommand extends BaseCommand
     /**
      * The migration creator instance.
      *
-     * @var \App\Console\CommandsCreateTableRelationship\MigrationRelationShipCreator
      */
     protected $creator;
 

@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ZunitTest1 extends Model
 {
-    use HasFactory;
+    use HasFactory, CheckPermissionEntities;
     protected $fillable = ["text1", "text2", "dropdown1", "radio1", "boolean1"];
     protected $primaryKey = 'id';
     protected $table = 'zunit_test_1s';

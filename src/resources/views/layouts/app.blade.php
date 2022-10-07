@@ -25,7 +25,9 @@
             <x-navbar />
             @yield('content')
         </div>
+        {{-- <x-modalsetting /> --}}
     </div>
+
     <script type="text/javascript" src="{{ asset('js/tlc.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/applayout.js') }}"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>

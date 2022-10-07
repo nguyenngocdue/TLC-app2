@@ -10,9 +10,9 @@ use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Manage\ManageStatusDoc;
 use App\Http\Controllers\Manage\ManageStatusLibrary;
-use App\Http\Controllers\Manage\Media\ManageMediaPropController;
-use App\Http\Controllers\Manage\Media\ManageMediaRelationshipController;
-use App\Http\Controllers\Manage\Media\ManageMediaTablePropController;
+use App\Http\Controllers\Manage\Medium\ManageMediumPropController;
+use App\Http\Controllers\Manage\Medium\ManageMediumRelationshipController;
+use App\Http\Controllers\Manage\Medium\ManageMediumTablePropController;
 use App\Http\Controllers\Manage\Workplace\ManageWorkplacePropController;
 use App\Http\Controllers\Manage\Workplace\ManageWorkplaceRelationshipController;
 use App\Http\Controllers\Manage\Workplace\ManageWorkplaceTablePropController;
@@ -81,12 +81,12 @@ Route::group([
             Route::resource('user_managerelationship', ManageUserRelationshipController::class);
         });
         Route::group([
-            'prefix' => 'media',
+            'prefix' => 'medium',
             'middleware' => 'role:ADMIN-DATA-MEDIA'
         ], function () {
-            Route::resource('media_manageprop', ManageMediaPropController::class);
-            Route::resource('media_managelineprop', ManageMediaTablePropController::class);
-            Route::resource('media_managerelationship', ManageMediaRelationshipController::class);
+            Route::resource('medium_manageprop', ManageMediumPropController::class);
+            Route::resource('medium_managelineprop', ManageMediumTablePropController::class);
+            Route::resource('medium_managerelationship', ManageMediumRelationshipController::class);
         });
         Route::group([
             'prefix' => 'post',
@@ -133,6 +133,5 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
 Route::resource('test', TestController::class);
-
 Route::resource('manage/manage_statusLibrary', ManageStatusLibrary::class);
 Route::resource('manage/status', ManageStatusDoc::class);

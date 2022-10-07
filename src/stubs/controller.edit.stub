@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Http\Controllers\Render\{{nameClass}};
+
+use App\Http\Controllers\Render\EditController;
+use App\Models\{{nameClass}};
+
+class {{nameClass}}EditController extends EditController
+{
+    protected $type = '{{nameModel}}';
+    protected $data = {{nameClass}}::class;
+}

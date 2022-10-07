@@ -12,14 +12,27 @@ return new class extends Migration
      *
      * @return void
      */
+     protected function checkRelationShip()
+    {
+        $relationship = '';
+        if (strlen($relationship) > 1) {
+            $name = md5(Str::plural('user').'_'.Str::plural('post'));
+            $tableName = Str::plural('user').'_'.Str::plural('post').'_'.$relationship ;
+        } else {
+            $name = null;
+            $tableName = Str::plural('user').'_'.Str::plural('post');
+        }
+        return [$tableName,$name];
+    }
     public function up()
     {
-        Schema::create(Str::plural('user').'_'.Str::plural('post'), function (Blueprint $table) {
+        
+        Schema::create($this->checkRelationShip()[0], function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('post_id');
             $table->timestamps();
-            $table->unique(['user_id', 'post_id']);
+            $table->unique(['user_id', 'post_id'],$this->checkRelationShip()[1]);
             $table->foreign('user_id')->references('id')->on(Str::plural('user'))->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on(Str::plural('post'))->onDelete('cascade');
         });
@@ -32,6 +45,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(Str::plural('user').'_'.Str::plural('post'));
+        Schema::dropIfExists($this->checkRelationShip()[0]);
     }
 };

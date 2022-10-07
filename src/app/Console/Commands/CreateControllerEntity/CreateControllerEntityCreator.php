@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Console\CreateTableRelationship;
+namespace App\Console\CreateControllerEntity;
 
 use Closure;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 
-class MigrationRelationShipCreator
+class CreateControllerEntityCreator
 {
     /**
      * The filesystem instance.
@@ -48,112 +48,59 @@ class MigrationRelationShipCreator
      *
      * @param  string  $name
      * @param  string  $path
-     * @param  string|null  $table
      * @param  bool  $create
      * @return string
      *
      * @throws \Exception
      */
-    public function create($name, $path, $table = null, $create = false, $tableOne, $tableTwo, $relationship)
+    public function create($nameClass, $name, $path, $stub)
     {
-        $this->ensureMigrationDoesntAlreadyExist($name, $path);
 
         // First we will get the stub file for the migration, which serves as a type
         // of template for the migration. Once we have those we will populate the
         // various place-holders, save the file, and run the post create event.
-        $stub = $this->getStub($table, $create);
 
-        $path = $this->getPath($name, $path);
+        $path = $this->getPath($nameClass, $path);
 
         $this->files->ensureDirectoryExists(dirname($path));
 
         $this->files->put(
             $path,
-            $this->populateStub($stub, $name, $tableOne, $tableTwo, $relationship)
+            $this->populateStub($stub, $name)
         );
-
+        $this->firePostCreateHooks($nameClass, $path);
         // Next, we will fire any hooks that are supposed to fire after a migration is
         // created. Once that is done we'll be ready to return the full path to the
         // migration file so it can be used however it's needed by the developer.
-        $this->firePostCreateHooks($table, $path);
         return $path;
     }
 
     /**
-     * Ensure that a migration with the given name doesn't already exist.
-     *
-     * @param  string  $name
-     * @param  string  $migrationPath
-     * @return void
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function ensureMigrationDoesntAlreadyExist($name, $migrationPath = null)
-    {
-        if (!empty($migrationPath)) {
-            $migrationFiles = $this->files->glob($migrationPath . '/*.php');
-
-            foreach ($migrationFiles as $migrationFile) {
-                $this->files->requireOnce($migrationFile);
-            }
-        }
-
-        if (class_exists($className = $this->getClassName($name))) {
-            throw new InvalidArgumentException("A {$className} class already exists.");
-        }
-    }
-
-    /**
-     * Get the migration stub file.
-     *
-     * @param  string|null  $table
-     * @param  bool  $create
-     * @return string
-     */
-    protected function getStub($table, $create)
-    {
-        if (is_null($table)) {
-            $stub = $this->files->exists($customPath = $this->customStubPath . '/migrationrelationship.create.stub')
-                ? $customPath
-                : $this->stubPath() . '/migrationrelationship.create.stub';
-        } elseif ($create) {
-            $stub = $this->files->exists($customPath = $this->customStubPath . '/migrationrelationship.create.stub')
-                ? $customPath
-                : $this->stubPath() . '/migrationrelationship.create.stub';
-        } else {
-            $stub = $this->files->exists($customPath = $this->customStubPath . '/migrationrelationship.update.stub')
-                ? $customPath
-                : $this->stubPath() . '/migrationrelationship.update.stub';
-        }
-
-        return $this->files->get($stub);
-    }
-
-    /**
-     * Populate the place-holders in the migration stub.
+     * Populate the place-holders in the controller stub.
      *
      * @param  string  $stub
-     * @param  string|null  $table
+     * @param  string|null  $name
      * @return string
      */
-    protected function populateStub($stub, $table, $tableOne, $tableTwo, $relationship)
+    protected function populateStub($stub, $name)
     {
         // Here we will replace the table place-holders with the table specified by
         // the developer, which is useful for quickly creating a tables creation
         // or update migration from the console instead of typing it manually.
-        if (!is_null($table)) {
+        if (!is_null($name)) {
+            $nameClass = Str::ucfirst($name);
+            $name = strtolower($name);
             $stub = str_replace(
-                ['{{relationship}}', '{{tableOne}}', '{{tableTwo}}'],
-                [$relationship, $tableOne, $tableTwo],
+                ['{{nameClass}}', '{{nameModel}}'],
+                [$nameClass, $name],
                 $stub
             );
         }
-
         return $stub;
     }
 
     /**
-     * Get the class name of a migration name.
+     * Get the class name of a controller name.
      *
      * @param  string  $name
      * @return string
@@ -164,7 +111,7 @@ class MigrationRelationShipCreator
     }
 
     /**
-     * Get the full path to the migration.
+     * Get the full path to the controller.
      *
      * @param  string  $name
      * @param  string  $path
@@ -172,7 +119,7 @@ class MigrationRelationShipCreator
      */
     protected function getPath($name, $path)
     {
-        return $path . '/' . $this->getDatePrefix() . '_' . $name . '.php';
+        return $path . $name . '.php';
     }
 
     /**
@@ -190,7 +137,7 @@ class MigrationRelationShipCreator
     }
 
     /**
-     * Register a post migration create hook.
+     * Register a post controller create hook.
      *
      * @param  \Closure  $callback
      * @return void
@@ -198,16 +145,6 @@ class MigrationRelationShipCreator
     public function afterCreate(Closure $callback)
     {
         $this->postCreate[] = $callback;
-    }
-
-    /**
-     * Get the date prefix for the migration.
-     *
-     * @return string
-     */
-    protected function getDatePrefix()
-    {
-        return date('Y_m_d_His');
     }
 
     /**
@@ -228,5 +165,9 @@ class MigrationRelationShipCreator
     public function getFilesystem()
     {
         return $this->files;
+    }
+    public function getCustomPath()
+    {
+        return $this->customStubPath;
     }
 }

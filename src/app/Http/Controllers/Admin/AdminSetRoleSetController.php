@@ -21,7 +21,7 @@ class AdminSetRoleSetController extends Controller
     {
         $search = request('search');
         $pageLimit = request('page_limit');
-        if ($pageLimit === null) $pageLimit = 20;
+        if ($pageLimit === null) $pageLimit = 10;
         $users = User::search($search)->query(function ($q) {
             $q->orderBy('id', 'asc');
         })->paginate($pageLimit);

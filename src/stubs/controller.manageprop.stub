@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Http\Controllers\Manage\{{nameClass}};
+
+use App\Http\Controllers\Manage\ManagePropController;
+
+class Manage{{nameClass}}PropController extends ManagePropController
+{
+    protected $type = '{{nameModel}}';
+}

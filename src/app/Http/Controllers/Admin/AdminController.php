@@ -22,7 +22,7 @@ abstract class AdminController extends Controller
         $type = $this->type;
         $search = request('search');
         $pageLimit = request('page_limit');
-        if ($pageLimit === null) $pageLimit = 20;
+        if ($pageLimit === null) $pageLimit = 10;
         $data = App::make($this->model)::search($search)->query(function ($q) {
             $q->orderBy('id', 'asc');
         })->paginate($pageLimit);

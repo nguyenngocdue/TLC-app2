@@ -53,4 +53,14 @@ class ManageService
             return false;
         }
     }
+    public function pathConfig($fileName)
+    {
+        $path = storage_path() . "/json/configs/view/dashboard/$fileName.json";
+        if (file_exists($path)) {
+            $dataManage = json_decode(file_get_contents($path), true);
+            return $dataManage;
+        } else {
+            return false;
+        }
+    }
 }

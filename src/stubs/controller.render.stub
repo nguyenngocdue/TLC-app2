@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Http\Controllers\Render\{{nameClass}};
+
+use App\Http\Controllers\Render\RenderController;
+use App\Models\{{nameClass}};
+
+class {{nameClass}}RenderController extends RenderController
+{
+    protected $type = '{{nameModel}}';
+    protected $typeModel = {{nameClass}}::class;
+    protected $permissionMiddleware = [
+        'read' => 'read_{{nameModel}}|edit_{{nameModel}}|edit_other_{{nameModel}}|delete_{{nameModel}}|delete_other_{{nameModel}}',
+        'edit' => 'edit_{{nameModel}}|edit_other_{{nameModel}}',
+        'delete' => 'delete_{{nameModel}}|delete_other_{{nameModel}}'
+    ];
+}

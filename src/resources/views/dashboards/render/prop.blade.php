@@ -2,35 +2,6 @@
 @section('content')
     <main class="h-full overflow-y-auto">
         <div class="container mx-auto grid px-0">
-            {{-- <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-              avatars
-      </h4>
-      <form action="{{route($type.'_renderprop.update',$userLogin->id)}}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="row">
-           @php
-            if(isset($userLogin)){
-              $settingDatas = $userLogin->settings;
-              $dataRender = array_diff_key($data,$settingDatas);
-            }
-           @endphp
-            @foreach ($data as $key => $value)
-             @if (array_key_exists($key, $dataRender))
-              <div class="col-md-2 col-12">
-                <label for="{{$key}}">{{ltrim($key,'_')}}</label>
-                <input type="checkbox" class="checkbox-toggle" name="{{$key}}" checked>
-              </div>
-             @else
-              <div class="col-md-2 col-12">
-                <label for="{{$key}}">{{ltrim($key,'_')}}</label>
-                <input type="checkbox" class="checkbox-toggle" name="{{$key}}">
-              </div>
-             @endif
-            @endforeach
-        </div>
-        <button type="submit" class="btn btn-primary">Apply</button>
-      </form> --}}
             <div
                 class="focus:shadow-outline-purple my-4 flex items-center justify-between rounded-lg bg-purple-600 p-3 text-base font-semibold text-purple-100 shadow-md focus:outline-none">
                 <div class="flex items-center">
