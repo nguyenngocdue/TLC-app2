@@ -13,12 +13,13 @@
     <div class="grid grid-row-1 gap-4 bg-black">
         <div class="grid grid-cols-12 gap-4 text-center">
             <div class="bg-slate-300 col-span-6">
-                <h3 class="py-3 px-6 text-base">All statuses of this doc type</h3>
+                <h3 class="py-3 px-6 text-base bg-slate-500 text-white">All statuses of this doc type</h3>
                 @foreach($newStatusDocType as $key => $prop)
-                <div class="flex justify-end  bg-white border {{empty($prop['bg-orphan']) ? "" : $prop['bg-orphan']}} border-gray-200 w-full text-gray-900 ">
-                    <div class="flex hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-0 focus:bg-gray-200 focus:text-gray-600">
+                {{-- {{dd($newStatusDocType)}} --}}
+                <div class="flex justify-end hover:bg-gray-100  bg-white border {{empty($prop['bg-orphan']) ? "" : $prop['bg-orphan']}} border-gray-200 w-full text-gray-900 ">
+                    <div class="flex hover:bg-gray-100 hover:text-white focus:outline-none focus:ring-0 focus:bg-gray-200 focus:text-gray-600">
                         <span class="p-2 col-span-3 bg-[{{$prop['color']}}]">{{$prop['title']}}</span>
-                        <form id="form-upload" method="POST" , action="{{route('status.store', 1) }}">
+                        <form id="form-upload" method="POST" , action="{{route('statusDocType.store', 1) }}">
                             @csrf
                             <button type="submit" name="move_up" value={{$prop['name']}} class="bg-blue-300 hover:bg-white-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -41,15 +42,14 @@
                 @endforeach
             </div>
             <div class="bg-slate-300 col-span-6">
-                <h3 class="py-3 px-6 text-base">All available statuses</h3>
+                <h3 class="py-3 px-6 text-base bg-slate-500 text-white">All available statuses</h3>
                 @php
                 $nameStatus = isset($nameStatus) ? $nameStatus : "";
                 @endphp
-
                 @foreach($newAvailabeStatus as $key => $prop)
-                <div class="flex justify-start bg-white border border-gray-200 w-full text-gray-900 ">
-                    <div class=" flex hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-0 focus:bg-gray-200 focus:text-gray-600">
-                        <form id="form-upload" method="POST" , action="{{route('status.store', 1) }}">
+                <div class="flex justify-start hover:bg-gray-100 bg-white border border-gray-200 w-full text-gray-900 ">
+                    <div class=" flex hover:bg-gray-100 hover:text-white focus:outline-none focus:ring-0 focus:bg-gray-200 focus:text-gray-600">
+                        <form id="form-upload" method="POST" , action="{{route('statusDocType.store', 1) }}">
                             @csrf
                             <button type="submit" name="add" value={{$prop['name']}} class="bg-blue-300 hover:bg-white-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
