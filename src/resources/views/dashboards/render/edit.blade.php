@@ -22,78 +22,78 @@
     <div class="mx-auto flex min-h-screen items-center py-5">
         <form class="rounded-md bg-gray-50 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? 'user_addnew.store':'user_edit.update', $action === "create" ? 0:$values->id) }} ">
             @csrf
-            <div class="mx-auto max-w-4xl flex-1">
-                <div class="grid grid-cols-12">
-                    @method($action === "create" ? 'POST' : 'PUT')
-                    @foreach($props as $key => $value)
-                    @php
-                    $label = $value['label'];
-                    $col_span = $value['col_span'];
-                    $column_name = $value['column_name'];
-                    $control = $value['control'];
-                    $value_column_name = $action === "create" ? "": $values->{$column_name};
-                    if(is_array($value_column_name)) $value_column_name = 'ARRAY';
-                    $col_span=$value['col_span'];
-                    $id= $action === "create" ? "0": $values->id;
-                    $idAvatar = $action === "create" ? "": $values['avatar'];
-                    $hiddenRow = $action === 'create' && $column_name === 'id'? "hidden":""
-                    @endphp
-                    <div class='col-span-{{$col_span}}'>
-                        <div class='grid grid-row-1 gap-3'>
-                            <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
-                                <div class='col-start-1 col-span-{{24/$col_span}} text-right'>
-                                    <label class='block tracking-wide text-gray-800 mb-2 px-3 text-base' title='{{$column_name}}'>{{$label}}
-                                    </label>
-                                </div>
-                                <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2'>
-                                    @switch ($control)
-                                    @case('picker_time')
-                                    @case('picker_date')
-                                    @case('picker_month')
-                                    @case('picker_week')
-                                    @case('picker_quater')
-                                    @case('picker_year')
-                                    @case('datetime')
-                                    @case('text')
-                                    <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} />
-                                    @switch ($action)
-                                    @case('edit')
-                                    <x-controls.translationtime id={{$id}} control={{$control}} columnName={{$column_name}} />
-                                    @break
-                                    @endswitch
-                                    @break
+            {{-- <div class="mx-auto max-w-4xl flex-1"> --}}
+            <div class="flex flex-col grid-cols-12">
+                @method($action === "create" ? 'POST' : 'PUT')
+                @foreach($props as $key => $value)
+                @php
+                $label = $value['label'];
+                $col_span = $value['col_span'];
+                $column_name = $value['column_name'];
+                $control = $value['control'];
+                $value_column_name = $action === "create" ? "": $values->{$column_name};
+                if(is_array($value_column_name)) $value_column_name = 'ARRAY';
+                $col_span=$value['col_span'];
+                $id= $action === "create" ? "0": $values->id;
+                $idAvatar = $action === "create" ? "": $values['avatar'];
+                $hiddenRow = $action === 'create' && $column_name === 'id'? "hidden":""
+                @endphp
+                <div class='col-span-{{$col_span}}'>
+                    <div class='grid grid-row-1 gap-3'>
+                        <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
+                            <div class='col-start-1 col-span-{{24/$col_span}} text-right'>
+                                <label class='block tracking-wide text-gray-800 mb-2 px-3 text-base' title='{{$column_name}}'>{{$label}}
+                                </label>
+                            </div>
+                            <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2'>
+                                @switch ($control)
+                                @case('picker_time')
+                                @case('picker_date')
+                                @case('picker_month')
+                                @case('picker_week')
+                                @case('picker_quater')
+                                @case('picker_year')
+                                @case('datetime')
+                                @case('text')
+                                <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} />
+                                @switch ($action)
+                                @case('edit')
+                                <x-controls.translationtime id={{$id}} control={{$control}} columnName={{$column_name}} />
+                                @break
+                                @endswitch
+                                @break
 
-                                    @case ('dropdown')
-                                    <x-controls.dropdown id={{$id}} colName={{$column_name}} />
-                                    @break
+                                @case ('dropdown')
+                                <x-controls.dropdown id={{$id}} colName={{$column_name}} />
+                                @break
 
-                                    @case ('radio')
-                                    <x-controls.radio id={{$id}} colName={{$column_name}} />
-                                    @break
+                                @case ('radio')
+                                <x-controls.radio id={{$id}} colName={{$column_name}} />
+                                @break
 
-                                    @case ('tag')
-                                    <x-controls.tag id={{$id}} colName={{$column_name}} />
-                                    @break
+                                @case ('tag')
+                                <x-controls.tag id={{$id}} colName={{$column_name}} />
+                                @break
 
-                                    @case ('checkbox')
-                                    <x-controls.checkbox id={{$id}} colName={{$column_name}} />
-                                    @break
+                                @case ('checkbox')
+                                <x-controls.checkbox id={{$id}} colName={{$column_name}} />
+                                @break
 
-                                    @case('attachment')
-                                    <x-controls.upload id={{$id}} colName={{$column_name}} idAvatar={{$idAvatar}} />
-                                    @break
+                                @case('attachment')
+                                <x-controls.upload id={{$id}} colName={{$column_name}} idAvatar={{$idAvatar}} />
+                                @break
 
-                                    @default
-                                    {{$control}}
-                                    @break
-                                    @endswitch
-                                </div>
+                                @default
+                                {{$control}}
+                                @break
+                                @endswitch
                             </div>
                         </div>
                     </div>
                 </div>
                 @endforeach
             </div>
+            {{-- </div> --}}
             <div class="flex justify-left border-t dark:bg-gray-800  px-5">
                 @switch($action)
                 @case('edit')
