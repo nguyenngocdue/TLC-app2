@@ -76,7 +76,7 @@
                                             @if ($value['hidden'] === null)
                                                 @if ($value['column_name'] === 'id')
                                                     {{-- {{dd($type.'_edit.update')}} --}}
-                                                    <td class="px-4 py-3 text-sm">
+                                                    <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
                                                         <a
                                                             href="{{ route($type . '_edit.update', $user[$value['column_name']]) }}">{{ $user[$value['column_name']] }}</a>
                                                     </td>

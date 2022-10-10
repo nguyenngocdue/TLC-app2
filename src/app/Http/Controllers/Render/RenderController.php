@@ -48,23 +48,7 @@ abstract class RenderController extends Controller
             return view('dashboards.render.prop')->with(compact('data', 'data2', 'users', 'pageLimit', 'type', 'userLogin', 'search', 'model'));
         }
     }
-    public function update(Request $request, $id)
-    {
-        $data = $request->input();
-        $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT']);
-        $user = User::find($id);
-        $dataDefault = User::find($id)->getAttributes();
-        $dataSettings = [];
-        foreach ($dataDefault as $key => $value) {
-            if (!array_key_exists('_' . $key, $data)) {
-                $dataSettings['_' . $key] = $value;
-            }
-        }
-        $user->settings = $dataSettings;
-        $user->update();
-        Toastr::success('Save settings json Users successfully', 'Save file json');
-        return redirect()->back();
-    }
+
     public function destroy($id)
     {
         try {

@@ -87,7 +87,6 @@ abstract class EditController extends Controller
         $emailsDB = $db::all()->pluck('email');
         // $check = in_array($inputData["email"], $emailsDB);
 
-
         $array = [];
         foreach ($inputData as $key => $value) {
             $array[$key] = $value;

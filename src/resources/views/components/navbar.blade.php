@@ -1,4 +1,4 @@
-    <header class="z-10 bg-white py-3 shadow-md dark:bg-gray-800">
+    <header class="fixed z-0 w-[calc(100%-256px)] bg-white py-3 shadow-md dark:bg-gray-800">
         <div
             class="container mx-auto flex h-full items-center justify-between px-6 text-purple-600 dark:text-purple-300">
             <!-- Mobile hamburger -->
@@ -45,7 +45,8 @@
                     </button>
                 </li>
                 <li class="flex">
-                    <button class="focus:shadow-outline-purple rounded-md focus:outline-none" @click="toggleSetting">
+                    <button class="focus:shadow-outline-purple rounded-md focus:outline-none"
+                        onclick="toggleModalSetting('modal-setting-id')">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="h-6 w-6">
                             <path stroke-linecap="round" stroke-linejoin="round"

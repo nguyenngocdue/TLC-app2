@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\Manage\ManageStatusLibrary;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TestController;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\Auth;
@@ -76,6 +77,7 @@ Route::group([
     'middleware' => ['auth']
 ], function () {
     Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
+    Route::put('/{id}', [SettingController::class, 'update'])->name('settingUpdate');
     Route::get('impersonate/user/{id}', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);

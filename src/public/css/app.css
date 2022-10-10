@@ -577,14 +577,29 @@ video {
 .right-0 {
   right: 0px;
 }
-.top-10 {
-  top: 2.5rem;
+.top-8 {
+  top: 2rem;
 }
 .left-0 {
   left: 0px;
 }
-.top-8 {
-  top: 2rem;
+.top-6 {
+  top: 1.5rem;
+}
+.top-10 {
+  top: 2.5rem;
+}
+.top-9 {
+  top: 2.25rem;
+}
+.top-\[34px\] {
+  top: 34px;
+}
+.top-\[35px\] {
+  top: 35px;
+}
+.top-\[32px\] {
+  top: 32px;
 }
 .z-30 {
   z-index: 30;
@@ -813,6 +828,21 @@ video {
 .h-12 {
   height: 3rem;
 }
+.h-24 {
+  height: 6rem;
+}
+.h-14 {
+  height: 3.5rem;
+}
+.h-\[calc\(100\%-256px\)\] {
+  height: calc(100% - 256px);
+}
+.h-\[calc\(100\%-112px\)\] {
+  height: calc(100% - 112px);
+}
+.h-\[calc\(100\%-50px\)\] {
+  height: calc(100% - 50px);
+}
 .max-h-0 {
   max-height: 0px;
 }
@@ -849,8 +879,8 @@ video {
 .w-32 {
   width: 8rem;
 }
-.w-96 {
-  width: 24rem;
+.w-\[550px\] {
+  width: 550px;
 }
 .w-56 {
   width: 14rem;
@@ -861,8 +891,14 @@ video {
 .w-12 {
   width: 3rem;
 }
-.w-\[450px\] {
-  width: 450px;
+.w-\[750px\] {
+  width: 750px;
+}
+.w-\[calc\(100\%-w-64\)\] {
+  width: calc(100% - w-64);
+}
+.w-\[calc\(100\%-256px\)\] {
+  width: calc(100% - 256px);
 }
 .min-w-0 {
   min-width: 0px;
@@ -890,11 +926,14 @@ video {
 .max-w-4xl {
   max-width: 56rem;
 }
-.flex-auto {
-  flex: 1 1 auto;
+.max-w-\[550px\] {
+  max-width: 550px;
 }
 .flex-1 {
   flex: 1 1 0%;
+}
+.flex-auto {
+  flex: 1 1 auto;
 }
 .flex-initial {
   flex: 0 1 auto;
@@ -951,6 +990,9 @@ video {
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
 .grid-rows-1 {
   grid-template-rows: repeat(1, minmax(0, 1fr));
 }
@@ -993,6 +1035,9 @@ video {
 .gap-6 {
   gap: 1.5rem;
 }
+.gap-3 {
+  gap: 0.75rem;
+}
 .gap-5 {
   gap: 1.25rem;
 }
@@ -1002,15 +1047,16 @@ video {
 .gap-16 {
   gap: 4rem;
 }
-.gap-3 {
-  gap: 0.75rem;
-}
 .gap-x-8 {
   -moz-column-gap: 2rem;
        column-gap: 2rem;
 }
 .gap-y-7 {
   row-gap: 1.75rem;
+}
+.gap-x-2 {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
 }
 .space-x-3 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -1054,6 +1100,9 @@ video {
 }
 .overflow-y-hidden {
   overflow-y: hidden;
+}
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 .rounded-lg {
   border-radius: 0.5rem;
@@ -1452,12 +1501,12 @@ video {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
-.text-\[10px\] {
-  font-size: 10px;
-}
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+.text-\[10px\] {
+  font-size: 10px;
 }
 .font-semibold {
   font-weight: 600;
@@ -1775,13 +1824,13 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(37 99 235 / var(--tw-border-opacity));
 }
-.focus\:border-blue-500:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(59 130 246 / var(--tw-border-opacity));
-}
 .focus\:border-purple-300:focus {
   --tw-border-opacity: 1;
   border-color: rgb(216 180 254 / var(--tw-border-opacity));
+}
+.focus\:border-blue-500:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
 }
 .focus\:bg-gray-200:focus {
   --tw-bg-opacity: 1;
@@ -1886,13 +1935,13 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
-.dark .dark\:border-gray-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(107 114 128 / var(--tw-border-opacity));
-}
 .dark .dark\:border-gray-800 {
   --tw-border-opacity: 1;
   border-color: rgb(31 41 55 / var(--tw-border-opacity));
+}
+.dark .dark\:border-gray-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 .dark .dark\:bg-gray-700 {
   --tw-bg-opacity: 1;
@@ -1938,13 +1987,13 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
-.dark .dark\:bg-gray-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(75 85 99 / var(--tw-bg-opacity));
-}
 .dark .dark\:bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+}
+.dark .dark\:bg-gray-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity));
 }
 .dark .dark\:bg-green-200 {
   --tw-bg-opacity: 1;
