@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Http\Services\Manage\ManageService;
-use App\Utils\Support\GetAllEntities;
+use App\Utils\Support\Entities;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -34,7 +34,7 @@ class UpdateSideBarConfigCommand extends Command
         try {
             $data = $this->pathConfig('sidebarProps');
             if (!$data) return;
-            $entities = GetAllEntities::getAllEntities();
+            $entities = Entities::getAll();
             $entitiesTablePlural = [];
             $entitiesTableSingular = [];
             foreach ($entities as $entity) {

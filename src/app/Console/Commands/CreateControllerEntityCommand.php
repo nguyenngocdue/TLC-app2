@@ -65,6 +65,7 @@ class CreateControllerEntityCommand extends Command
             $this->writeController($listName, $name, $render);
             $this->composer->dumpAutoloads();
         } else {
+            $name = Str::plural($name);
             $listName = ["{$name}RenderController", "{$name}EditController"];
             $this->writeController($listName, $name, $render);
             $this->composer->dumpAutoloads();
@@ -88,9 +89,9 @@ class CreateControllerEntityCommand extends Command
     protected function createDirectory($name, $render)
     {
         if (!$render) {
-            error_log($render);
             File::makeDirectory("app/Http/Controllers/Manage/{$name}");
         } else {
+            $name = Str::plural($name);
             File::makeDirectory("app/Http/Controllers/Render/{$name}");
         }
     }
@@ -99,6 +100,7 @@ class CreateControllerEntityCommand extends Command
         if (!$render) {
             return base_path("app/Http/Controllers/Manage/{$name}/");
         }
+        $name = Str::plural($name);
         return base_path("app/Http/Controllers/Render/{$name}/");
         //[$pathManage, $pathRender] = [base_path('app/Http/Controller/Manage'), base_path('app/Http/Controller/Render')];
     }

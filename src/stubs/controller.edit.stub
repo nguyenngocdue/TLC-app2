@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Render\{{nameClass}};
 
 use App\Http\Controllers\Render\EditController;
-use App\Models\{{nameClass}};
+use App\Models\{{nameClassSingular}};
 
 class {{nameClass}}EditController extends EditController
 {
     protected $type = '{{nameModel}}';
-    protected $data = {{nameClass}}::class;
+    protected $data = {{nameClassSingular}}::class;
 }

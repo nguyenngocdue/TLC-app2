@@ -4,12 +4,14 @@ namespace App\Http\Services\Manage;
 
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ManageService
 {
 
     public function checkUploadFile($data, $type, $fileName)
     {
+        $type = Str::plural($type);
         $output = Storage::disk('json')->put("entities/$type/$fileName.json", json_encode($data), 'public');
         if ($output) {
             Toastr::success('Save file json successfully!', 'Save file json');
@@ -21,6 +23,7 @@ class ManageService
     }
     public function path($type, $fileName)
     {
+        $type = Str::plural($type);
         $path = storage_path() . "/json/entities/$type/$fileName.json";
         if (file_exists($path)) {
             $dataManage = json_decode(file_get_contents($path), true);
@@ -31,6 +34,7 @@ class ManageService
     }
     public function pathTable($type, $fileName, $fileTableName)
     {
+        $type = Str::plural($type);
         $path = storage_path() . "/json/entities/$type/$fileName.json";
         $pathTableName = storage_path() . "/json/configs/table/$type/$fileTableName.json";
         $tableNames = json_decode(file_get_contents($pathTableName), true);
@@ -43,6 +47,7 @@ class ManageService
     }
     public function destroy($name, $type, $fileName)
     {
+        $type = Str::plural($type);
         [$dataManage] = $this->path($type, $fileName);
         unset($dataManage[$name]);
         try {

@@ -24,7 +24,7 @@ abstract class RenderController extends Controller
     }
     public function index()
     {
-        $type = $this->type;
+        $type = Str::plural($this->type);
         $idUser = Auth::guard()->id();
         $userLogin = User::find($idUser);
         $search = request('search');

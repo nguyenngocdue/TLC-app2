@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use App\Models\Role;
-use App\Utils\Support\GetAllEntities;
+use App\Utils\Support\Entities;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
@@ -115,7 +115,7 @@ class AdminSetPermissionController extends Controller
     private function getRolePermissions($roleSelected)
     {
         $roles = Role::all();
-        $entities = GetAllEntities::getAllEntities();
+        $entities = Entities::getAll();
         $permissions = Permission::all();
         $permissionsRoles = $roleSelected->permissions;
         $removeLastPermissionNames = [];

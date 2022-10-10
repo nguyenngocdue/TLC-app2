@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\Manage\ManageService;
-use App\Utils\Support\GetColumnTable;
+use App\Utils\Support\Table;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 use function GuzzleHttp\json_decode;
@@ -24,14 +23,13 @@ abstract class ManagePropController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
         $type = $this->type;
         $dataManage = $this->manageService->path($type, 'props');
         if (!$dataManage) {
-            $columnNames = GetColumnTable::getColumnTable(Str::plural($type));
+            $columnNames = Table::getColumn(Str::plural($type));
             $columnTypes = [];
             foreach ($columnNames as $columnName) {
                 $typeColumn = Schema::getColumnType(Str::plural($type), $columnName);

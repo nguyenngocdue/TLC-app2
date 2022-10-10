@@ -90,9 +90,10 @@ class CreateControllerEntityCreator
         if (!is_null($name)) {
             $nameClass = Str::ucfirst($name);
             $name = strtolower($name);
+            $nameClassSingular = Str::singular($nameClass);
             $stub = str_replace(
-                ['{{nameClass}}', '{{nameModel}}'],
-                [$nameClass, $name],
+                ['{{nameClass}}', '{{nameModel}}', '{{nameClassSingular}}'],
+                [$nameClass, $name, $nameClassSingular],
                 $stub
             );
         }
