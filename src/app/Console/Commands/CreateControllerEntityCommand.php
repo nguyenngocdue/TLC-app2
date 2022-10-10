@@ -16,14 +16,14 @@ class CreateControllerEntityCommand extends Command
      * @var string
      */
     protected $signature = 'ndc:controller {name : The name of the controller manage}
-    {--render= : The true create controller render}';
+    {--render : The true create controller render}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Create a new controller file';
 
     /**
      * The migration creator instance.
@@ -59,14 +59,13 @@ class CreateControllerEntityCommand extends Command
     {
         $name = Str::ucfirst(Str::snake(trim($this->input->getArgument('name'))));
         $render = $this->input->getOption('render');
-        error_log($render);
         if (!$render) {
             $listName = ["Manage{$name}PropController", "Manage{$name}RelationshipController", "Manage{$name}TablePropController"];
             $this->writeController($listName, $name, $render);
             $this->composer->dumpAutoloads();
         } else {
             $name = Str::plural($name);
-            $listName = ["{$name}RenderController", "{$name}EditController"];
+            $listName = ["{$name}RenderController", "{$name}EditController", "{$name}CreateController"];
             $this->writeController($listName, $name, $render);
             $this->composer->dumpAutoloads();
         }
@@ -80,7 +79,8 @@ class CreateControllerEntityCommand extends Command
                 $listName[$key],
                 $name,
                 $this->getControllerPath($name, $render),
-                $stub
+                $stub,
+                $render
             );
             $file = pathinfo($file, PATHINFO_FILENAME);
             $this->components->info(sprintf('Created controller [%s].', $file));
@@ -129,7 +129,10 @@ class CreateControllerEntityCommand extends Command
             $stub2 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.edit.stub')
                 ? $customPath
                 : $this->stubPath() . '/controller.edit.stub';
-            $stubs = [$stub1, $stub2];
+            $stub3 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.create.stub')
+                ? $customPath
+                : $this->stubPath() . '/controller.create.stub';
+            $stubs = [$stub1, $stub2, $stub3];
             $result = [];
             foreach ($stubs as $stub) {
                 array_push($result, $this->creator->getFilesystem()->get($stub));

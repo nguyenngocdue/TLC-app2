@@ -7,11 +7,11 @@ use App\Models\Zunit_test_1;
 
 class Zunit_test_1sRenderController extends RenderController
 {
-    protected $type = 'zunit_test_1s';
+    protected $type = 'zunit_test_1';
     protected $typeModel = Zunit_test_1::class;
     protected $permissionMiddleware = [
-        'read' => 'read_zunit_test_1s|edit_zunit_test_1s|edit_other_zunit_test_1s|delete_zunit_test_1s|delete_other_zunit_test_1s',
-        'edit' => 'edit_zunit_test_1s|edit_other_zunit_test_1s',
-        'delete' => 'delete_zunit_test_1s|delete_other_zunit_test_1s'
+        'read' => 'read-zunit_test_1|create-zunit_test_1|edit-zunit_test_1|edit-others-zunit_test_1|delete-zunit_test_1|delete-others-zunit_test_1',
+        'edit' => 'edit-zunit_test_1|edit-others-zunit_test_1',
+        'delete' => 'delete-zunit_test_1|delete-others-zunit_test_1'
     ];
 }

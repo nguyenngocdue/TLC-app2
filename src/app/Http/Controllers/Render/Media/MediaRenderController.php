@@ -10,8 +10,8 @@ class MediaRenderController extends RenderController
     protected $type = 'media';
     protected $typeModel = Media::class;
     protected $permissionMiddleware = [
-        'read' => 'read_media|edit_media|edit_other_media|delete_media|delete_other_media',
-        'edit' => 'edit_media|edit_other_media',
-        'delete' => 'delete_media|delete_other_media'
+        'read' => 'read-media|create-media|edit-media|edit-others-media|delete-media|delete-others-media',
+        'edit' => 'edit-media|edit-others-media',
+        'delete' => 'delete-media|delete-others-media'
     ];
 }

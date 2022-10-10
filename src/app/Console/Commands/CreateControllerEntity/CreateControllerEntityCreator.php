@@ -2,6 +2,8 @@
 
 namespace App\Console\CreateControllerEntity;
 
+use App\Models\Permission;
+use App\Models\Role;
 use Closure;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -53,7 +55,7 @@ class CreateControllerEntityCreator
      *
      * @throws \Exception
      */
-    public function create($nameClass, $name, $path, $stub)
+    public function create($nameClass, $name, $path, $stub, $render)
     {
 
         // First we will get the stub file for the migration, which serves as a type
@@ -66,7 +68,7 @@ class CreateControllerEntityCreator
 
         $this->files->put(
             $path,
-            $this->populateStub($stub, $name)
+            $this->populateStub($stub, $name, $render)
         );
         $this->firePostCreateHooks($nameClass, $path);
         // Next, we will fire any hooks that are supposed to fire after a migration is
@@ -82,21 +84,36 @@ class CreateControllerEntityCreator
      * @param  string|null  $name
      * @return string
      */
-    protected function populateStub($stub, $name)
+    protected function populateStub($stub, $name, $render)
     {
         // Here we will replace the table place-holders with the table specified by
         // the developer, which is useful for quickly creating a tables creation
         // or update migration from the console instead of typing it manually.
         if (!is_null($name)) {
             $nameClass = Str::ucfirst($name);
-            $name = strtolower($name);
             $nameClassSingular = Str::singular($nameClass);
+            $name = Str::singular(strtolower($name));
             $stub = str_replace(
                 ['{{nameClass}}', '{{nameModel}}', '{{nameClassSingular}}'],
                 [$nameClass, $name, $nameClassSingular],
                 $stub
             );
-        }
+            if ($render && !Permission::where('name', "read-$name")->first()) {
+                $result = "read-$name|create-$name|edit-$name|edit-others-$name|delete-$name|delete-others-$name";
+                $permissions = explode('|', $result);
+                foreach ($permissions as $permission) {
+                    try {
+                        Permission::create(['name' => $permission]);
+                    } catch (\Throwable $th) {
+                        return $stub;
+                    }
+                }
+                $nameRole = Str::upper($nameClass);
+                Role::create(['name' => "READ-DATA-$nameRole"])->givePermissionTo("read-$name");
+                Role::create(['name' => "READ-WRITE-DATA-$nameRole"])->givePermissionTo(["read-$name", "edit-$name", "create-$name", "edit-others-$name"]);
+                Role::create(['name' => "ADMIN-DATA-$nameRole"])->givePermissionTo(["read-$name", "edit-$name", "create-$name", "edit-others-$name", "delete_$name", "delete_others_$name"]);
+            }
+        };
         return $stub;
     }
 

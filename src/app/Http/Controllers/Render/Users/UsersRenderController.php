@@ -10,8 +10,8 @@ class UsersRenderController extends RenderController
     protected $type = 'user';
     protected $typeModel = User::class;
     protected $permissionMiddleware = [
-        'read' => 'read_user|edit_user|edit_other_user|delete_user|delete_other_user',
-        'edit' => 'edit_user|edit_other_user',
-        'delete' => 'delete_user|delete_other_user'
+        'read' => 'read-user|create-user|edit-user|edit-others-user|delete-user|delete-others-user',
+        'edit' => 'edit-user|edit-others-user',
+        'delete' => 'delete-user|delete-others-user'
     ];
 }

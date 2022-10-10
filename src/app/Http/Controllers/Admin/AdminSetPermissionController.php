@@ -120,7 +120,7 @@ class AdminSetPermissionController extends Controller
         $permissionsRoles = $roleSelected->permissions;
         $removeLastPermissionNames = [];
         foreach ($permissions as $permission) {
-            $arrayPermissionName = explode('_', $permission->name);
+            $arrayPermissionName = explode('-', $permission->name);
             array_pop($arrayPermissionName);
             $var = implode(' ', $arrayPermissionName);
             array_push($removeLastPermissionNames, $var);

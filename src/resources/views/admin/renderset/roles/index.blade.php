@@ -47,18 +47,17 @@
                                     @if ($last === $value)
                                         <div class="form-check items-center" title="{{ $role->name }}">
                                             <input type="hidden" name="roleSet" value="{{ $selected }}">
-                                            <input type="checkbox" name="checked[]" value="{{ $role->name }}"
-                                                title="{{ $role->name }}"
-                                                @isset($roleUsing)
+                                            <label class="text-sm font-normal text-gray-900 dark:text-gray-400">
+                                                <input type="checkbox" name="checked[]" value="{{ $role->name }}"
+                                                    title="{{ $role->name }}"
+                                                    @isset($roleUsing)
                                                     @foreach ($roleUsing as $item)
                                                         @if ($item->name == $role->name)
                                                             @checked(true)
                                                         @endif
                                                     @endforeach
                                                 @endisset
-                                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
-                                            <label class="text-sm font-normal text-gray-900 dark:text-gray-400"
-                                                for="flexCheckDefault">
+                                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
                                                 {{ $role->name }}
                                             </label>
                                         </div>

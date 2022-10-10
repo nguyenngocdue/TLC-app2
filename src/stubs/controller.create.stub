@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Http\Controllers\Render\{{nameClass}};
+
+use App\Http\Controllers\Render\EditController;
+use App\Models\{{nameClassSingular}};
+
+class {{nameClass}}CreateController extends EditController
+{
+    protected $type = '{{nameModel}}';
+    protected $data = {{nameClassSingular}}::class;
+    protected $action = "create";
+}

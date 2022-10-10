@@ -10,8 +10,8 @@ class {{nameClass}}RenderController extends RenderController
     protected $type = '{{nameModel}}';
     protected $typeModel = {{nameClassSingular}}::class;
     protected $permissionMiddleware = [
-        'read' => 'read_{{nameModel}}|edit_{{nameModel}}|edit_other_{{nameModel}}|delete_{{nameModel}}|delete_other_{{nameModel}}',
-        'edit' => 'edit_{{nameModel}}|edit_other_{{nameModel}}',
-        'delete' => 'delete_{{nameModel}}|delete_other_{{nameModel}}'
+        'read' => 'read-{{nameModel}}|create-{{nameModel}}|edit-{{nameModel}}|edit-others-{{nameModel}}|delete-{{nameModel}}|delete-others-{{nameModel}}',
+        'edit' => 'edit-{{nameModel}}|edit-others-{{nameModel}}',
+        'delete' => 'delete-{{nameModel}}|delete-others-{{nameModel}}'
     ];
 }

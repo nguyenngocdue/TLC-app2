@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Zunit_test_1 extends Model
 {
-    use HasFactory, CheckPermissionEntities;
+    use HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["text1", "text2", "dropdown1", "radio1", "boolean1"];
     protected $primaryKey = 'id';
     protected $table = 'zunit_test_1s';
