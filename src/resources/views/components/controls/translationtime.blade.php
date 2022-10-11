@@ -1,4 +1,5 @@
 <div>
+    {{-- {{dd($dataTime, $control === 'datetime')}} --}}
     @switch($control)
     @case('datetime')
     <p class="text-gray-600 text-xs">{{$dataTime[$control]}}</p>
@@ -23,6 +24,5 @@
     @break
     @default
     @break
-
     @endswitch
 </div>

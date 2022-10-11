@@ -10,11 +10,15 @@ class Text extends Component
     private $colName;
     private $valColName;
     private $action;
-    public function __construct($colName, $valColName, $action)
+    private $strTimeControl;
+    private $control;
+    public function __construct($colName, $valColName, $action, $strTimeControl, $control)
     {
         $this->colName = $colName;
         $this->valColName = $valColName;
         $this->action = $action;
+        $this->strTimeControl = $strTimeControl;
+        $this->control = $control;
     }
 
 
@@ -23,6 +27,8 @@ class Text extends Component
         $colName = $this->colName;
         $valColName = $this->valColName;
         $action = $this->action;
-        return view('components.controls.text')->with(compact('colName', 'valColName', 'action'));
+        $timeControls = $this->strTimeControl;
+        $control = $this->control;
+        return view('components.controls.text')->with(compact('colName', 'valColName', 'action', 'timeControls', 'control'));
     }
 }

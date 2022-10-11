@@ -16,7 +16,6 @@ class Dropdown extends Component
      */
 
     private $id;
-    private $readingFileService;
     private $colName;
     public function __construct($id, ReadingFileService $readingFileService, $colName)
     {
@@ -32,23 +31,6 @@ class Dropdown extends Component
      */
     public function render()
     {
-        // $relationship1 =  (object)[
-        //     "_workplace" => [
-        //         "column_name" => "getWorkplace",
-        //         "eloquent" => "belongsTo",
-        //         "param_1" => "App\\Models\\Workplace",
-        //         "param_2" => "workplace",
-        //         "param_3" => null,
-        //         "param_4" => null,
-        //         "param_5" => null,
-        //         "param_6" => null,
-        //         "label" => "Posts",
-        //         "control" => "count",
-        //         "col_span" => "12",
-        //         "new_line" => "false",
-        //         "type_line" => "default"
-        //     ]
-        // ];
 
         $storage_path = storage_path('/json/entities/user/relationships.json');
         $relationship = json_decode(file_get_contents($storage_path), true);
@@ -63,7 +45,7 @@ class Dropdown extends Component
         $dataSource = DB::table($table)->select('id', 'name', 'description')->get();
         $selected = $this->id;
         $colName = $this->colName;
-        $currentUser = User::find($this->id)->getAttributes();
+        $currentUser = is_null(User::find($this->id)) ? "" : User::find($this->id)->getAttributes();
         return view('components.controls.dropdown')->with(compact('dataSource', 'selected', 'colName', 'currentUser'));
     }
 }

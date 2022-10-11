@@ -42,6 +42,7 @@ class Upload extends Component
         $url_thumbnail = $media['url_thumbnail'];
         $url_media = $media['url_media'];
 
+        // dd($id, $idAvatar);
         return view('components.controls.upload')->with(compact('id', 'colName', 'fileName', 'url_thumbnail', 'url_media', 'path'));
     }
 }

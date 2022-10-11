@@ -12,12 +12,16 @@ class Translationtime extends Component
     private $control;
     private $id;
     private $columnName;
-    public function __construct($columnName, $control, $id)
+    private $valColumnNames;
+    private $timeControls;
+    public function __construct($timeControls, $valColumnNames, $columnName, $control, $id)
     {
 
         $this->control = $control;
         $this->id = $id;
         $this->columnName = $columnName;
+        $this->valColumnNames = $valColumnNames;
+        $this->timeControls = $timeControls;
     }
 
     public function render()
@@ -26,27 +30,24 @@ class Translationtime extends Component
         $selected = $this->id;
         $columnName = $this->columnName;
         $currentUser = DB::table('users')->where('id', $selected)->first();
-        $day = $columnName === "created_at" ? $currentUser->created_at : "";
+
+        $day = '';
+        $valColumnNames = $this->valColumnNames;
+        if (in_array($columnName, $valColumnNames)) {
+            $day = $currentUser->$columnName;
+        }
 
         $control = $this->control;
         $dateTimeInstance = date_create(str_replace('-', '/', $day));
 
         // dd($dateTimeInstance);
 
-
-
         // if (date_default_timezone_get()) {
         //     echo ("default time zone: " . date_default_timezone_get());
         //     echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
         // }
 
-
-
-
-
-
         $dateTime = date_format($dateTimeInstance, "d/m/Y h:i:s");
-
 
         $week = $dateTimeInstance->format("W");
         $date = $dateTimeInstance->format("d/m/Y");
@@ -55,6 +56,8 @@ class Translationtime extends Component
         $monthNumber = date("m", strtotime($month));
         $year =  $dateTimeInstance->format("Y");
         $quater = ceil($monthNumber / 3);
+
+        $timeControls = $this->timeControls;
 
         $dataTime = [
             'datetime' => $dateTime,
@@ -65,9 +68,6 @@ class Translationtime extends Component
             'picker_month' => $monthNumber . '-' . $year,
             'picker_quater' => 'Q' . $quater . '-' . $year,
         ];
-
-
-
 
 
         return view('components.controls.translationtime')->with(compact('dataTime', 'control'));
