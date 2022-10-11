@@ -20,7 +20,11 @@
 </div>
 <div class="grid grid-rows-1 bg-gray-300">
     <div class="mx-auto flex min-h-screen items-center py-5">
-        <form class="rounded-md bg-gray-50 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? 'user_addnew.store':'user_edit.update', $action === "create" ? 0 :$values->id) }} ">
+        {{-- {{dd($type)}} --}}
+        @php
+        $editType = Str::plural($type);
+        @endphp
+        <form class="rounded-md bg-gray-50 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 :$values->id) }} ">
             @csrf
             {{-- <div class="mx-auto max-w-4xl flex-1"> --}}
             <div class="flex flex-col grid-cols-12">
