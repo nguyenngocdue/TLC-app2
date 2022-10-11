@@ -173,5 +173,6 @@
 
         </div>
     </main>
+    <x-modalsetting :type="$type" />
     <script src="{{ asset('js/renderprop.js') }}"></script>
 @endsection

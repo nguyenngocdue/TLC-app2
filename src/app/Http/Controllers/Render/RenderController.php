@@ -60,4 +60,21 @@ abstract class RenderController extends Controller
             return response()->json(['message' => $th], 404);
         }
     }
+    public function update(Request $request, $id)
+    {
+        $data = $request->input();
+        $entity = $request->input('_entity');
+        $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT', '_entity' => '']);
+        $user = User::find($id);
+        $var = $user->settings;
+        $result = [];
+        foreach ($data as $key => $value) {
+            $result['columns'][$key] = $value;
+        }
+        $var[$entity] = $result;
+        $user->settings = $var;
+        $user->update();
+        Toastr::success('Save settings json Users successfully', 'Save file json');
+        return redirect()->back();
+    }
 }

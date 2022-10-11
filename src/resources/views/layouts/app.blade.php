@@ -25,7 +25,7 @@
             <x-navbar />
             @yield('content')
         </div>
-        <x-modalsetting />
+
     </div>
 
     <script type="text/javascript" src="{{ asset('js/tlc.js') }}"></script>
