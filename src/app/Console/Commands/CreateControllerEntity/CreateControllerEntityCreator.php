@@ -111,7 +111,7 @@ class CreateControllerEntityCreator
                 $nameRole = Str::upper($nameClass);
                 Role::create(['name' => "READ-DATA-$nameRole"])->givePermissionTo("read-$name");
                 Role::create(['name' => "READ-WRITE-DATA-$nameRole"])->givePermissionTo(["read-$name", "edit-$name", "create-$name", "edit-others-$name"]);
-                Role::create(['name' => "ADMIN-DATA-$nameRole"])->givePermissionTo(["read-$name", "edit-$name", "create-$name", "edit-others-$name", "delete_$name", "delete_others_$name"]);
+                Role::create(['name' => "ADMIN-DATA-$nameRole"])->givePermissionTo(["read-$name", "edit-$name", "create-$name", "edit-others-$name", "delete-$name", "delete-others-$name"]);
             }
         };
         return $stub;

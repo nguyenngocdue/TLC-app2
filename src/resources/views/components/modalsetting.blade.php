@@ -44,13 +44,14 @@ $entities = App\Utils\Support\Entities::getAll();
                                     <div class="flex flex-col">
                                         <label><input type="checkbox" class="checkbox-toggle"
                                                 name="{{ $entity->getTable() . '|' . $key }}">
-                                            {{ Str::ucfirst(ltrim($key, '_')) }}</label>
+                                            {{ Str::title(Str::ucfirst(Str::replace('_', ' ', ltrim($key, '_')))) }}</label>
                                     </div>
                                 @else
                                     <div class="flex flex-col">
                                         <label><input type="checkbox" class="checkbox-toggle"
                                                 name="{{ $entity->getTable() . '|' . $key }}" checked>
-                                            {{ Str::ucfirst(ltrim($key, '_')) }}</label>
+                                            {{ Str::title(Str::ucfirst(Str::replace('_', ' ', ltrim($key, '_')))) }}
+                                        </label>
                                     </div>
                                 @endif
                             @endforeach
