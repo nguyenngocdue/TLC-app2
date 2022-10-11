@@ -14,6 +14,7 @@ use Spatie\Permission\Contracts\Role;
 trait HasRoleSets
 {
     use HasRoles;
+
     private $roleSetClass;
     public static function bootHasRoleSets()
     {
@@ -25,7 +26,6 @@ trait HasRoleSets
             $model->roleSets()->detach();
         });
     }
-
     public function getRoleSetClass()
     {
         if (!isset($this->roleSetClass)) {
@@ -56,15 +56,7 @@ trait HasRoleSets
             });
     }
 
-    /**
-     * Scope the model query to certain roles only.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string|int|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
-     * @param string $guard
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
+
     public function scopeRoleSet(Builder $query, $roleSets, $guard = null): Builder
     {
         if ($roleSets instanceof Collection) {
@@ -88,13 +80,7 @@ trait HasRoleSets
         });
     }
 
-    /**
-     * Assign the given role to the model.
-     *
-     * @param array|string|int|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection ...$roles
-     *
-     * @return $this
-     */
+
     public function assignRoleSet(...$roleSets)
     {
         $roleSets = collect($roleSets)
@@ -140,11 +126,7 @@ trait HasRoleSets
         return $this;
     }
 
-    /**
-     * Revoke the given role from the model.
-     *
-     * @param string|int|\Spatie\Permission\Contracts\Role $role
-     */
+
     public function removeRoleSet($roleSet)
     {
         $this->roleSets()->detach($this->getStoredRoleSet($roleSet));
@@ -158,13 +140,7 @@ trait HasRoleSets
         return $this;
     }
 
-    /**
-     * Remove all current roles and set the given ones.
-     *
-     * @param  array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection|string|int  ...$roles
-     *
-     * @return $this
-     */
+
     public function syncRoleSets(...$roleSets)
     {
         $this->roleSets()->detach();
@@ -172,13 +148,7 @@ trait HasRoleSets
         return $this->assignRoleSet($roleSets);
     }
 
-    /**
-     * Determine if the model has (one of) the given role(s).
-     *
-     * @param string|int|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
-     * @param string|null $guard
-     * @return bool
-     */
+
     public function hasRoleSet($roleSets, string $guard = null): bool
     {
         if (is_string($roleSets) && false !== strpos($roleSets, '|')) {
@@ -217,27 +187,13 @@ trait HasRoleSets
         return $roleSets->intersect($guard ? $this->roles->where('guard_name', $guard) : $this->roleSets)->isNotEmpty();
     }
 
-    /**
-     * Determine if the model has any of the given role(s).
-     *
-     * Alias to hasRole() but without Guard controls
-     *
-     * @param string|int|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
-     *
-     * @return bool
-     */
+
     public function hasAnyRoleSet(...$roleSets): bool
     {
         return $this->hasRoleSet($roleSets);
     }
 
-    /**
-     * Determine if the model has all of the given role(s).
-     *
-     * @param  string|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection  $roles
-     * @param  string|null  $guard
-     * @return bool
-     */
+
     public function hasAllRoleSets($roleSets, string $guard = null): bool
     {
         if (is_string($roleSets) && false !== strpos($roleSets, '|')) {
@@ -265,13 +221,7 @@ trait HasRoleSets
         ) == $roleSets;
     }
 
-    /**
-     * Determine if the model has exactly all of the given role(s).
-     *
-     * @param  string|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection  $roles
-     * @param  string|null  $guard
-     * @return bool
-     */
+
     public function hasExactRoleSets($roleSets, string $guard = null): bool
     {
         if (is_string($roleSets) && false !== strpos($roleSets, '|')) {
@@ -293,9 +243,7 @@ trait HasRoleSets
         return $this->roleSets->count() == $roleSets->count() && $this->hasAllRoleSets($roleSets, $guard);
     }
 
-    /**
-     * Return all permissions directly coupled to the model.
-     */
+
     public function getDirectRoles(): Collection
     {
         return $this->roles;

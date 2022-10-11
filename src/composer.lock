@@ -114,16 +114,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.238.2",
+            "version": "3.238.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f2a1351b5eb5fe17508cc5c907a786955882b93c"
+                "reference": "14fb64c934614ea5a52c9931189f687f30b6ba3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f2a1351b5eb5fe17508cc5c907a786955882b93c",
-                "reference": "f2a1351b5eb5fe17508cc5c907a786955882b93c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/14fb64c934614ea5a52c9931189f687f30b6ba3b",
+                "reference": "14fb64c934614ea5a52c9931189f687f30b6ba3b",
                 "shasum": ""
             },
             "require": {
@@ -202,9 +202,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.238.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.238.3"
             },
-            "time": "2022-10-06T18:29:40+00:00"
+            "time": "2022-10-07T18:16:40+00:00"
         },
         {
             "name": "brian2694/laravel-toastr",
@@ -401,16 +401,16 @@
         },
         {
             "name": "directorytree/ldaprecord",
-            "version": "v2.17.2",
+            "version": "v2.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DirectoryTree/LdapRecord.git",
-                "reference": "e0ee9d87b4d5a343f7d88bf56a26a1274c87203b"
+                "reference": "f93da388263689e48e92bcc2a2f11a5ddf655f99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DirectoryTree/LdapRecord/zipball/e0ee9d87b4d5a343f7d88bf56a26a1274c87203b",
-                "reference": "e0ee9d87b4d5a343f7d88bf56a26a1274c87203b",
+                "url": "https://api.github.com/repos/DirectoryTree/LdapRecord/zipball/f93da388263689e48e92bcc2a2f11a5ddf655f99",
+                "reference": "f93da388263689e48e92bcc2a2f11a5ddf655f99",
                 "shasum": ""
             },
             "require": {
@@ -471,7 +471,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-09-30T19:39:02+00:00"
+            "time": "2022-10-10T13:21:32+00:00"
         },
         {
             "name": "directorytree/ldaprecord-laravel",

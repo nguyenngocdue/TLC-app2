@@ -19,8 +19,8 @@ abstract class RenderController extends Controller
     public function __construct()
     {
         $this->middleware("permission:{$this->permissionMiddleware['read']}")->only('index');
-        $this->middleware("permission:{$this->permissionMiddleware['edit']}")->only('update');
-        $this->middleware("permission:{$this->permissionMiddleware['delete']}")->only('destroy');
+        $this->middleware("permission:{$this->permissionMiddleware['edit']}")->only('index', 'update');
+        $this->middleware("permission:{$this->permissionMiddleware['delete']}")->only('index', 'update', 'destroy');
     }
     public function index()
     {

@@ -7,6 +7,7 @@ use Ndc\SpatieCustom\RoleRegistrar;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Ndc\Spatiecustom\Contracts\Role as ContractsRole;
 use Ndc\Spatiecustom\Traits\HasRoleSets as TraitsHasRoleSets;
+use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Exceptions\GuardDoesNotMatch;
 use Spatie\Permission\Exceptions\RoleAlreadyExists;
 use Spatie\Permission\Exceptions\RoleDoesNotExist;
@@ -21,6 +22,51 @@ class Role extends Model implements ContractsRole
     use RefreshesPermissionCache;
     use TraitsHasRoleSets;
 
+    public function givePermissionTo(...$permissions)
+    {
+        $permissions = collect($permissions)
+            ->flatten()
+            ->reduce(function ($array, $permission) {
+                if (empty($permission)) {
+                    return $array;
+                }
+
+                $permission = $this->getStoredPermission($permission);
+                if (!$permission instanceof Permission) {
+                    return $array;
+                }
+
+                $this->ensureModelSharesGuard($permission);
+
+                $array[$permission->getKey()] = PermissionRegistrar::$teams && !is_a($this, Role::class) ?
+                    [PermissionRegistrar::$teamsKey => getPermissionsTeamId()] : [];
+
+                return $array;
+            }, []);
+
+        $model = $this->getModel();
+
+        if ($model->exists) {
+            $this->permissions()->sync($permissions, false);
+            $model->load('permissions');
+        } else {
+            $class = \get_class($model);
+
+            $class::saved(
+                function ($object) use ($permissions, $model) {
+                    if ($model->getKey() != $object->getKey()) {
+                        return;
+                    }
+                    $model->permissions()->sync($permissions, false);
+                    $model->load('permissions');
+                }
+            );
+        }
+        if (!is_a($this, get_class(app(PermissionRegistrar::class)->getRoleClass()))) {
+            $this->forgetCachedPermissions();
+        }
+        return $this;
+    }
     public function roleSets(): BelongsToMany
     {
         $relation = $this->morphToMany(
