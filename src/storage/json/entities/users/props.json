@@ -273,7 +273,11 @@
         "column_name": "show_on_beta",
         "column_type": "boolean",
         "label": "Show On Beta",
+<<<<<<< HEAD:src/storage/json/entities/users/props.json
         "control": "switch",
+=======
+        "control": "toggle",
+>>>>>>> dev02:src/storage/json/entities/user/props.json
         "col_span": "12",
         "hidden": null,
         "new_line": null,
@@ -283,7 +287,7 @@
         "column_name": "resigned",
         "column_type": "boolean",
         "label": "Resigned",
-        "control": "switch",
+        "control": "toggle",
         "col_span": "12",
         "hidden": null,
         "new_line": null,
@@ -325,7 +329,11 @@
         "label": "Password",
         "control": "text",
         "col_span": "12",
+<<<<<<< HEAD:src/storage/json/entities/users/props.json
         "hidden": null,
+=======
+        "hidden": "false",
+>>>>>>> dev02:src/storage/json/entities/user/props.json
         "new_line": null,
         "type_line": "default"
     },
@@ -335,7 +343,11 @@
         "label": "Settings",
         "control": "textarea",
         "col_span": "12",
+<<<<<<< HEAD:src/storage/json/entities/users/props.json
         "hidden": null,
+=======
+        "hidden": "false",
+>>>>>>> dev02:src/storage/json/entities/user/props.json
         "new_line": null,
         "type_line": "default"
     },

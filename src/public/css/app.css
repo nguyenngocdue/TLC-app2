@@ -867,12 +867,15 @@ video {
 .w-1\/2 {
   width: 50%;
 }
+<<<<<<< HEAD
 .w-\[750px\] {
   width: 750px;
 }
 .w-\[calc\(100\%-256px\)\] {
   width: calc(100% - 256px);
 }
+=======
+>>>>>>> dev02
 .min-w-0 {
   min-width: 0px;
 }

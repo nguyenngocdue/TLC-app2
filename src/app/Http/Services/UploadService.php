@@ -11,6 +11,9 @@ class UploadService
 {
     public function store($request, $id)
     {
+        $medias = [];
+        $idNewMedia = [];
+        // dd($request);
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
                 $fileName = $file->getClientOriginalName();
@@ -30,7 +33,7 @@ class UploadService
                     $path_thumbnail = $path . $fileNameThumbnail;
                     Storage::disk('s3')->put($path_thumbnail, $resource->__toString(), 'public');
                 }
-                $newMedia = Media::create([
+                array_push($medias, [
                     'filename' => basename($path_image),
                     'url_folder' => $path,
                     'url_media' => $path_image,
@@ -38,9 +41,12 @@ class UploadService
                     'owner_id' => (int)$id,
                     'extension' => $imageFileType,
                 ]);
-
-                return $newMedia['id'];
             }
         }
+        foreach ($medias as $media) {
+            $newMedia = Media::create($media);
+            array_push($idNewMedia, $newMedia['id']);
+        }
+        return $idNewMedia;
     }
 }
