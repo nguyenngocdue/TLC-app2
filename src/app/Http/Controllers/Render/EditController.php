@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
 use App\Models\Media;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use App\Models\User;
 
 
 abstract class EditController extends Controller
@@ -51,22 +52,48 @@ abstract class EditController extends Controller
     public function update(Request $request, $id)
     {
 
-        // dd($request->input());
+        $data = $this->data::find($id);
+        $dataInput = $request->input();
 
 
-        $idMedia = $this->upload->store($request, $id);
-
+        // upload multiple pictures
+        $idMediaArray = $this->upload->store($request, $id);
         $props = $this->getProps();
+        $itemAttachment = [];
+        foreach ($props as $key => $value) {
+            if ($value['control'] === 'attachment') {
+                array_push($itemAttachment, $value['column_name']);
+            }
+        }
+
+        // dd($itemAttachment, $idMediaArray);
+
         // foreach ($props as $key => $value) {
         //     $request->validate([$value["column_name"] => $value['validation']]);
         // }
-        $data = $this->data::find($id);
         foreach ($props as $value) {
             $key = $value['column_name'];
             $data->{$key} = request($key);
         }
-        $data['avatar'] = $idMedia;
+        // chanage value from toggle
+        foreach ($props as $key => $value) {
+            if ($value['control'] === 'toggle') {
+                $item = $value['column_name'];
+                isset($dataInput[$item]) ? $data[$item] = 1 : $data[$item] = 0;
+            };
+        }
+
+
+        foreach ($itemAttachment as $key => $value) {
+            if (count($idMediaArray) > 0 && isset($idMediaArray[$key])) {
+                $data[$value] = $idMediaArray[$key];
+            }
+        }
         $data->save();
+
+
+
+
         return redirect(route("{$this->type}_edit.show", $id));
     }
     public function index()
@@ -78,21 +105,50 @@ abstract class EditController extends Controller
     }
     public function store(Request $request)
     {
-        $inputData = $request->input();
-        unset($inputData['_token']);
-        unset($inputData['_method']);
+
+        $dataInput = $request->input();
+        unset($dataInput['_token']);
+        unset($dataInput['_method']);
         $db = $this->data;
 
         // Check existing email
         $emailsDB = $db::all()->pluck('email');
-        // $check = in_array($inputData["email"], $emailsDB);
-
+        // $check = in_array($dataInput["email"], $emailsDB);
 
         $array = [];
-        foreach ($inputData as $key => $value) {
+        foreach ($dataInput as $key => $value) {
             $array[$key] = $value;
         }
-        $db::create($array);
-        return redirect(route("{$this->type}_edit.show", $id));
+        $newUser = $db::create($array);
+        // dd($newUser);
+        $idNewUser = $newUser->fresh()->id;
+
+
+        // Save picture
+        $idMediaArray = $this->upload->store($request, $idNewUser);
+        // filter fields have "attachment control"
+        $itemAttachment = [];
+        $props = $this->getProps();
+        foreach ($props as $key => $value) {
+            if ($value['control'] === 'attachment') {
+                array_push($itemAttachment, $value['column_name']);
+            }
+        }
+        // push value of picture into database
+        foreach ($itemAttachment as $key => $value) {
+            if (count($idMediaArray) > 0 && isset($idMediaArray[$key])) {
+                $newUser[$value] = $idMediaArray[$key];
+            }
+        }
+
+        // chanage value from toggle
+        foreach ($props as $key => $value) {
+            if ($value['control'] === 'toggle') {
+                $item = $value['column_name'];
+                isset($dataInput[$item]) ? $newUser[$item] = 1 : $newUser[$item] = 0;
+            };
+        }
+
+        return redirect(route("{$this->type}_edit.update", $idNewUser));
     }
 }

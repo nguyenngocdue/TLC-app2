@@ -20,7 +20,7 @@
 </div>
 <div class="grid grid-rows-1 bg-gray-300">
     <div class="mx-auto flex min-h-screen items-center py-5">
-        <form class="rounded-md bg-gray-50 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? 'user_addnew.store':'user_edit.update', $action === "create" ? 0:$values->id) }} ">
+        <form class="rounded-md bg-gray-50 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? 'user_addnew.store':'user_edit.update', $action === "create" ? 0 :$values->id) }} ">
             @csrf
             {{-- <div class="mx-auto max-w-4xl flex-1"> --}}
             <div class="flex flex-col grid-cols-12">
@@ -36,33 +36,40 @@
                 $col_span=$value['col_span'];
                 $id= $action === "create" ? "0": $values->id;
                 $idAvatar = $action === "create" ? "": $values['avatar'];
-                $hiddenRow = $action === 'create' && $column_name === 'id'? "hidden":""
+                $hiddenRow = $action === 'create' && $column_name === 'id'? "hidden":"";
+
+                $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quater','picker_year','datetime'];
+                $valColumnNames = ['date_of_birth', 'first_date', 'last_date', 'created_at', 'updated_at'];
+
+                $visibility = $value['hidden'] === "true" ? 'hidden' : "";
                 @endphp
                 <div class='col-span-{{$col_span}}'>
                     <div class='grid grid-row-1 gap-3'>
-                        <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
+                        <div class='grid grid-cols-12 items-center {{$hiddenRow}} {{$visibility}} '>
                             <div class='col-start-1 col-span-{{24/$col_span}} text-right'>
                                 <label class='block tracking-wide text-gray-800 mb-2 px-3 text-base' title='{{$column_name}}'>{{$label}}
                                 </label>
                             </div>
-                            <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2'>
-                                @switch ($control)
-                                @case('picker_time')
-                                @case('picker_date')
-                                @case('picker_month')
-                                @case('picker_week')
-                                @case('picker_quater')
-                                @case('picker_year')
-                                @case('datetime')
-                                @case('text')
-                                <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} />
-                                @switch ($action)
-                                @case('edit')
-                                <x-controls.translationtime id={{$id}} control={{$control}} columnName={{$column_name}} />
-                                @break
-                                @endswitch
-                                @break
+                            {{-- {{dd($action)}} --}}
 
+                            <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2'>
+                                @if (is_null($control))
+                                <h2 class="text-red-400">{{"Control of this $column_name has not been setted"}}</h2>
+                                @endif
+
+                                @switch ($control)
+                                @case($timeControls[0])
+                                @case($timeControls[1])
+                                @case($timeControls[2])
+                                @case($timeControls[3])
+                                @case($timeControls[4])
+                                @case($timeControls[5])
+                                @case($timeControls[6])
+                                <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
+                                @break
+                                @case('text')
+                                <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
+                                @break
                                 @case ('dropdown')
                                 <x-controls.dropdown id={{$id}} colName={{$column_name}} />
                                 @break
@@ -83,10 +90,27 @@
                                 <x-controls.upload id={{$id}} colName={{$column_name}} idAvatar={{$idAvatar}} />
                                 @break
 
+                                @case('toggle')
+                                <x-controls.toggle id={{$id}} colName={{$column_name}} valColName={{$value_column_name}} />
+                                @break
+
+
                                 @default
                                 {{$control}}
                                 @break
                                 @endswitch
+
+                                @switch ($action)
+                                @case('edit')
+                                <x-controls.translationtime :timeControls="$timeControls" :valColumnNames="$valColumnNames" id={{$id}} control={{$control}} columnName={{$column_name}} />
+                                @break
+
+                                @endswitch
+
+
+
+
+
                             </div>
                         </div>
                     </div>
