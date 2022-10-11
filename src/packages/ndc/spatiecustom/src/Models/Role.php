@@ -2,6 +2,7 @@
 
 namespace Ndc\SpatieCustom\Models;
 
+use App\Models\Role as ModelsRole;
 use Illuminate\Database\Eloquent\Model;
 use Ndc\SpatieCustom\RoleRegistrar;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

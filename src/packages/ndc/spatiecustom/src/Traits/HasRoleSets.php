@@ -118,7 +118,6 @@ trait HasRoleSets
                 }
             );
         }
-
         if (is_a($this, get_class($this->getRoleClass()))) {
             $this->forgetCachedRoles();
         }
@@ -144,7 +143,6 @@ trait HasRoleSets
     public function syncRoleSets(...$roleSets)
     {
         $this->roleSets()->detach();
-
         return $this->assignRoleSet($roleSets);
     }
 

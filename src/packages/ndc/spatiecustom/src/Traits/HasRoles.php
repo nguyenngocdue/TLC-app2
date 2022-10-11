@@ -51,7 +51,6 @@ trait HasRoles
                 }
             );
         }
-
         if (is_a($this, get_class(app(RoleRegistrar::class)->getRoleSetClass()))) {
             //$this->forgetCachedRoleSets();
         }
