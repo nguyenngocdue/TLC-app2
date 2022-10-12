@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('object_id')->nullable();
             $table->string('object_type')->nullable();
-            $table->foreign('owner_id')->references('id')->on('users');
+
             $table->timestamps();
         });
     }

@@ -29,7 +29,7 @@ abstract class RenderController extends Controller
         $userLogin = User::find($idUser);
         $search = request('search');
         $pageLimit = request('page_limit');
-        if ($pageLimit === null) $pageLimit = 20;
+        if ($pageLimit === null) $pageLimit = 10;
         $model = $this->typeModel;
         $post = Post::search($search);
         $users = App::make($model)::search($search)->query(function ($q) {
@@ -59,5 +59,22 @@ abstract class RenderController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['message' => $th], 404);
         }
+    }
+    public function update(Request $request, $id)
+    {
+        $data = $request->input();
+        $entity = $request->input('_entity');
+        $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT', '_entity' => '']);
+        $user = User::find($id);
+        $var = $user->settings;
+        $result = [];
+        foreach ($data as $key => $value) {
+            $result['columns'][$key] = $value;
+        }
+        $var[$entity] = $result;
+        $user->settings = $var;
+        $user->update();
+        Toastr::success('Save settings json Users successfully', 'Save file json');
+        return redirect()->back();
     }
 }

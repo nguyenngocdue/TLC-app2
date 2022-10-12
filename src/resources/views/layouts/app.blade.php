@@ -25,9 +25,10 @@
         <div class="flex-0 flex w-full flex-col">
             <!-- Navbar -->
             <x-navbar />
+            <div class="h-12"></div>
             @yield('content')
         </div>
-        <x-modalsetting />
+
     </div>
 
     <script type="text/javascript" src="{{ asset('js/tlc.js') }}"></script>

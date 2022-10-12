@@ -15,7 +15,7 @@
                 </div>
                 <span>Relationship -></span>
             </div>
-            <form action="{{ route($type . '_managerelationship.store') }}" method="POST">
+            <form action="{{ route($type . '_mngrls.store') }}" method="POST">
                 @csrf
                 <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border shadow-sm">
                     <div class="w-full overflow-x-auto">

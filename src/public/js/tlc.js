@@ -44,18 +44,16 @@ $(document).ready(function () {
     })
     $('.checkbox-toggle').click(function (e) {
         var hideColumn = $(this).attr('name')
-        var result = hideColumn.split('|')[1]
         if ($('.checkbox-toggle').is(':checked')) {
-            $('.' + result + '_th').toggle(this.checked)
-            $('.' + result + '_td').toggle(this.checked)
+            $('.' + hideColumn + '_th').toggle(this.checked)
+            $('.' + hideColumn + '_td').toggle(this.checked)
         }
     })
     $('.checkbox-toggle').each(function (i, e) {
         var hideColumn = $(e).attr('name')
-        var result = hideColumn.split('|')[1]
         if (!$(e).is(':checked')) {
-            $('.' + result + '_th').hide()
-            $('.' + result + '_td').hide()
+            $('.' + hideColumn + '_th').hide()
+            $('.' + hideColumn + '_td').hide()
         }
     })
 })

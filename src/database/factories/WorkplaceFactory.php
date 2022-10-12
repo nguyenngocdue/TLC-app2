@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Workplace>
@@ -19,6 +20,7 @@ class WorkplaceFactory extends Factory
         return [
             'name' => $this->faker->sentence(2),
             'description' => $this->faker->sentence(10),
+            'slug' => Str::slug($this->faker->sentence(10), '-'),
         ];
     }
 }
