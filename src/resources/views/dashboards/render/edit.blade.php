@@ -23,8 +23,10 @@
         {{-- {{dd($type)}} --}}
         @php
         $editType = Str::plural($type);
+        $id = isset($values) ? $values->id : 0;
+        $idAvatar = isset($values['avatar']) ? $values['avatar']: "";
         @endphp
-        <form class="rounded-md bg-gray-50 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 :$values->id) }} ">
+        <form class="rounded-md bg-gray-50 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
             @csrf
             {{-- <div class="mx-auto max-w-4xl flex-1"> --}}
             <div class="flex flex-col grid-cols-12">
@@ -35,11 +37,9 @@
                 $col_span = $value['col_span'];
                 $column_name = $value['column_name'];
                 $control = $value['control'];
-                $value_column_name = $action === "create" ? "": $values->{$column_name};
+                $value_column_name = isset($values) ? $values->{$column_name} : "";
                 if(is_array($value_column_name)) $value_column_name = 'ARRAY';
                 $col_span=$value['col_span'];
-                $id= $action === "create" ? "0": $values->id;
-                $idAvatar = $action === "create" ? "": $values['avatar'];
                 $hiddenRow = $action === 'create' && $column_name === 'id'? "hidden":"";
 
                 $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quater','picker_year','datetime'];
@@ -75,7 +75,7 @@
                                 <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
                                 @break
                                 @case ('dropdown')
-                                <x-controls.dropdown id={{$id}} colName={{$column_name}} />
+                                <x-controls.dropdown id={{$id}} colName={{$column_name}} type={{$type}} />
                                 @break
 
                                 @case ('radio')
@@ -111,10 +111,6 @@
 
                                 @endswitch
 
-
-
-
-
                             </div>
                         </div>
                     </div>
@@ -123,6 +119,7 @@
             </div>
             {{-- </div> --}}
             <div class="flex justify-left border-t dark:bg-gray-800  px-5">
+                {{-- {{dd($type)}} --}}
                 @switch($action)
                 @case('edit')
                 <button type="submit" class="mt-5 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-bold text-white shadow hover:bg-purple-400 focus:outline-none" type="button">

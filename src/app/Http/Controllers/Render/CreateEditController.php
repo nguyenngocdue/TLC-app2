@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 
-abstract class EditController extends Controller
+abstract class CreateEditController extends Controller
 {
 
     protected $type;
@@ -36,12 +36,13 @@ abstract class EditController extends Controller
 
     public function show($id)
     {
-        $values = $this->data::find($id);
+        $currentUser = $this->data::find($id);
         $props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
         $type = Str::plural($this->type);
-        // dd($type);
         $action = $this->action;
-        return view('dashboards.render.edit')->with(compact('props', 'values', 'type', 'action'));
+        $values = $action === "edit" ? $currentUser : [];
+        // dd($type, $action);
+        return view('dashboards.render.edit')->with(compact('props', 'values', 'type', 'action', 'currentUser'));
     }
 
     public function update(Request $request, $id)
@@ -96,7 +97,9 @@ abstract class EditController extends Controller
         $action = $this->action;
         $props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
         $type = $this->type;
-        return view('dashboards.render.edit')->with(compact('props', 'type', 'action'));
+        $values = [];
+
+        return view('dashboards.render.edit')->with(compact('props', 'type', 'action',));
     }
     public function store(Request $request)
     {

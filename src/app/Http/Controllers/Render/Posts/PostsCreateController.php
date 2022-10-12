@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Render\Posts;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Render\CreateEditController;
 use App\Models\Post;
 
-class PostsEditController extends CreateEditController
+class PostsCreateController extends CreateEditController
 {
     protected $type = "post";
     protected $data = Post::class;
-    protected $action = "edit";
+    protected $action = "create";
 }
