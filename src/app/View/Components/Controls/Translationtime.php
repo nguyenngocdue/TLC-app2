@@ -33,7 +33,7 @@ class Translationtime extends Component
 
         $day = '';
         $valColumnNames = $this->valColumnNames;
-        if (in_array($columnName, $valColumnNames)) {
+        if (in_array($columnName, $valColumnNames) && isset($currentUser->$columnName)) {
             $day = $currentUser->$columnName;
         }
 

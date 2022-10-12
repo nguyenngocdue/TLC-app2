@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\{{nameClass}};
 
-use App\Http\Controllers\Render\EditController;
+use App\Http\Controllers\Render\CreateEditController;
 use App\Models\{{nameClassSingular}};
 
-class {{nameClass}}CreateController extends EditController
+class {{nameClass}}CreateController extends CreateEditController
 {
     protected $type = '{{nameModelSingular}}';
     protected $data = {{nameClassSingular}}::class;
