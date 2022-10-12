@@ -25,10 +25,10 @@ return new class extends Migration
             $table->string("address")->nullable();
             $table->string("phone")->nullable();
             $table->unsignedBigInteger("featured_image")->nullable();
-            $table->string("time_keeping_type")->default('none');
-            $table->string("user_type")->nullable();
+            $table->enum("time_keeping_type", ['TSO', 'TSW', 'None'])->default('TSW');
+            $table->unsignedBigInteger("user_type")->nullable();
             $table->unsignedBigInteger("workplace")->nullable();
-            $table->string("category")->nullable();
+            $table->unsignedBigInteger("category")->nullable();
             $table->date("date_of_birth")->nullable();
             $table->date("first_date")->nullable();
             $table->date("last_date")->nullable();
@@ -38,19 +38,19 @@ return new class extends Migration
             $table->unsignedBigInteger("position_2")->nullable();
             $table->unsignedBigInteger("position_3")->nullable();
             $table->string("position_rendered")->default("");
-            $table->unsignedBigInteger("role")->nullable();
             $table->unsignedBigInteger("discipline")->nullable();
             $table->unsignedBigInteger("department")->nullable();
             $table->boolean("show_on_beta")->default(false);
             $table->boolean("resigned")->nullable();
             $table->string("viewport_uids")->nullable();
             $table->string("leaf_uids")->nullable();
+            $table->string("user_id_passport")->nullable();
+            $table->string("user_pin")->nullable();
             $table->timestamp("email_verified_at")->nullable();
             $table->string("password");
             $table->json("settings");
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('workplace')->references('id')->on('workplaces');
         });
     }
 

@@ -16,7 +16,11 @@ return new class extends Migration
         Schema::create('workplaces', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->float('def_publish_holiday_hour')->nullable();
+            $table->text('description');
+            $table->unsignedBigInteger('def_assignee')->nullable();
+            $table->unsignedBigInteger('def_monitors')->nullable();
+            $table->string('slug');
             $table->timestamps();
         });
     }

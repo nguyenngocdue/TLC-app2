@@ -29,7 +29,7 @@ abstract class RenderController extends Controller
         $userLogin = User::find($idUser);
         $search = request('search');
         $pageLimit = request('page_limit');
-        if ($pageLimit === null) $pageLimit = 20;
+        if ($pageLimit === null) $pageLimit = 10;
         $model = $this->typeModel;
         $post = Post::search($search);
         $users = App::make($model)::search($search)->query(function ($q) {

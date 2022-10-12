@@ -60,10 +60,18 @@ class User extends Authenticatable implements LdapAuthenticatable
     public $eloquentParams = [
         // "files" => ['hasMany' , Media::class],
         // "medias" => ['morphMany',Media::class, 'owner_id','id'],
-        "medias" => ['hasMany', Media::class, 'owner_id', 'id'],
+        "media" => ['hasMany', Media::class, 'owner_id', 'id'],
         "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
-        // "workplace" => ['hasMany',Post::class,'owner_id','id'],
+        "userTypes" => ['hasMany', UserType::class, 'user_type'],
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace'],
+        "userTypes" => ['hasMany', UserType::class, 'user_type'],
+        "categories" => ['hasMany', UserCategory::class, 'category'],
+        "positionPres" => ['hasMany', UserPositionPre::class, 'position_prefix'],
+        "position1" => ['hasMany', UserPosition1::class, 'position_1'],
+        "position2" => ['hasMany', UserPosition2::class, 'position_2'],
+        "position3" => ['hasMany', UserPosition3::class, 'position_3'],
+        "disciplines" => ['hasMany', UserDiscipline::class, 'discipline'],
+        "departments" => ['hasMany', Department::class, 'department'],
     ];
     protected $guard_name = 'web';
     // public function files()
@@ -71,7 +79,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     //     $p = $this->eloquentParams[__FUNCTION__];
     //     return $this->{$p[0]}($p[1]);
     // }
-    public function medias()
+    public function media()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -82,6 +90,46 @@ class User extends Authenticatable implements LdapAuthenticatable
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
     public function getWorkplace()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function userTypes()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function categories()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function positionPres()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function position1()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function position2()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function position3()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function disciplines()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function departments()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

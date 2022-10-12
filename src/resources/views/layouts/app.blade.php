@@ -25,6 +25,7 @@
         <div class="flex-0 flex w-full flex-col">
             <!-- Navbar -->
             <x-navbar />
+            <div class="h-12"></div>
             @yield('content')
         </div>
 

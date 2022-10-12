@@ -10,7 +10,7 @@
                     {
                         "title": "All Users",
                         "icon": "fas fa-users",
-                        "href": "dashboard/users/users_renderprop"
+                        "href": "dashboard/users/users_render"
                     },
                     {
                         "title": "Add New",
@@ -27,7 +27,7 @@
                     {
                         "title": "All Media",
                         "icon": "fas fa-users",
-                        "href": "dashboard/media/media_renderprop"
+                        "href": "dashboard/media/media_render"
                     },
                     {
                         "title": "Add New",
@@ -49,7 +49,7 @@
                     {
                         "title": "All Posts",
                         "icon": "fas fa-users",
-                        "href": "dashboard/posts/posts_renderprop"
+                        "href": "dashboard/posts/posts_render"
                     },
                     {
                         "title": "Add New",
@@ -66,7 +66,7 @@
                     {
                         "title": "All Workplaces",
                         "icon": "fas fa-users",
-                        "href": "dashboard/workplaces/workplaces_renderprop"
+                        "href": "dashboard/workplaces/workplaces_render"
                     },
                     {
                         "title": "Add New",
@@ -83,7 +83,7 @@
                     {
                         "title": "All zunit_test_1s",
                         "icon": "fas fa-users",
-                        "href": "dashboard/zunit_test_1s/zunit_test_1s_renderprop"
+                        "href": "dashboard/zunit_test_1s/zunit_test_1s_render"
                     },
                     {
                         "title": "Add New",
@@ -100,7 +100,7 @@
                     {
                         "title": "All zunit_test_3s",
                         "icon": "fas fa-users",
-                        "href": "dashboard/zunit_test_3s/zunit_test_3s_renderprop"
+                        "href": "dashboard/zunit_test_3s/zunit_test_3s_render"
                     },
                     {
                         "title": "Add New",
@@ -123,17 +123,17 @@
                     {
                         "title": "Manage Prop",
                         "icon": "fas fa-project-diagram",
-                        "href": "propman/user/user_manageprop"
+                        "href": "propman/user/user_mngprop"
                     },
                     {
                         "title": "Manage Line",
                         "icon": "fas fa-grip-lines",
-                        "href": "propman/user/user_managelineprop"
+                        "href": "propman/user/user_mnglnprop"
                     },
                     {
                         "title": "Manage Relationship",
                         "icon": "fas fa-heart",
-                        "href": "propman/user/user_managerelationship"
+                        "href": "propman/user/user_mngrls"
                     }
                 ]
             },
@@ -145,17 +145,17 @@
                     {
                         "title": "Manage Prop",
                         "icon": "fas fa-project-diagram",
-                        "href": "propman/medium/medium_manageprop"
+                        "href": "propman/medium/medium_mngprop"
                     },
                     {
                         "title": "Manage Line",
                         "icon": "fas fa-grip-lines",
-                        "href": "propman/medium/medium_managelineprop"
+                        "href": "propman/medium/medium_mnglnprop"
                     },
                     {
                         "title": "Manage Relationship",
                         "icon": "fas fa-heart",
-                        "href": "propman/medium/medium_managerelationship"
+                        "href": "propman/medium/medium_mngrls"
                     }
                 ]
             },
@@ -167,17 +167,17 @@
                     {
                         "title": "Manage Prop",
                         "icon": "fas fa-project-diagram",
-                        "href": "propman/post/post_manageprop"
+                        "href": "propman/post/post_mngprop"
                     },
                     {
                         "title": "Manage Line",
                         "icon": "fas fa-grip-lines",
-                        "href": "propman/post/post_managelineprop"
+                        "href": "propman/post/post_mnglnprop"
                     },
                     {
                         "title": "Manage Relationship",
                         "icon": "fas fa-heart",
-                        "href": "propman/post/post_managerelationship"
+                        "href": "propman/post/post_mngrls"
                     }
                 ]
             },
@@ -189,17 +189,17 @@
                     {
                         "title": "Manage Prop",
                         "icon": "fas fa-project-diagram",
-                        "href": "propman/workplace/workplace_manageprop"
+                        "href": "propman/workplace/workplace_mngprop"
                     },
                     {
                         "title": "Manage Line",
                         "icon": "fas fa-grip-lines",
-                        "href": "propman/workplace/workplace_managelineprop"
+                        "href": "propman/workplace/workplace_mnglnprop"
                     },
                     {
                         "title": "Manage Relationship",
                         "icon": "fas fa-heart",
-                        "href": "propman/workplace/workplace_managerelationship"
+                        "href": "propman/workplace/workplace_mngrls"
                     }
                 ]
             },
@@ -211,17 +211,17 @@
                     {
                         "title": "Manage Prop",
                         "icon": "fas fa-project-diagram",
-                        "href": "propman/zunit_test_1/zunit_test_1_manageprop"
+                        "href": "propman/zunit_test_1/zunit_test_1_mngprop"
                     },
                     {
                         "title": "Manage Line",
                         "icon": "fas fa-grip-lines",
-                        "href": "propman/zunit_test_1/zunit_test_1_managelineprop"
+                        "href": "propman/zunit_test_1/zunit_test_1_mnglnprop"
                     },
                     {
                         "title": "Manage Relationship",
                         "icon": "fas fa-heart",
-                        "href": "propman/zunit_test_1/zunit_test_1_managerelationship"
+                        "href": "propman/zunit_test_1/zunit_test_1_mngrls"
                     }
                 ]
             },
@@ -233,17 +233,17 @@
                     {
                         "title": "Manage Prop",
                         "icon": "fas fa-project-diagram",
-                        "href": "propman/zunit_test_3/zunit_test_3_manageprop"
+                        "href": "propman/zunit_test_3/zunit_test_3_mngprop"
                     },
                     {
                         "title": "Manage Line",
                         "icon": "fas fa-grip-lines",
-                        "href": "propman/zunit_test_3/zunit_test_3_managelineprop"
+                        "href": "propman/zunit_test_3/zunit_test_3_mnglnprop"
                     },
                     {
                         "title": "Manage Relationship",
                         "icon": "fas fa-heart",
-                        "href": "propman/zunit_test_3/zunit_test_3_managerelationship"
+                        "href": "propman/zunit_test_3/zunit_test_3_mngrls"
                     }
                 ]
             }

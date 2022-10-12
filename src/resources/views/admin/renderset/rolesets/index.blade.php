@@ -51,6 +51,7 @@
                                 class="border-b bg-gray-50 text-left text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
                                 <th class="px-4 py-3">ID</th>
                                 <th class="px-4 py-3">Name</th>
+                                <th class="px-4 py-3">Email</th>
                                 <th class="px-4 py-3">Role Set</th>
                                 <th class="px-4 py-3">Role</th>
                                 <th class="px-4 py-3">Action</th>
@@ -66,6 +67,9 @@
                                         {{ $user->name_rendered }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
+                                        {{ $user->email }}
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
                                         @foreach ($user->roleSets as $item)
                                             <span
                                                 class="rounded-full bg-green-100 px-2 py-1 font-semibold leading-tight text-green-700 dark:bg-green-700 dark:text-green-100">
@@ -74,12 +78,15 @@
                                         @endforeach
                                     </td>
                                     <td class="px-4 py-3 text-xs">
-                                        @foreach ($user->getRolesViaRoleSets() as $item)
-                                            <span
-                                                class="rounded-full bg-green-100 px-2 py-1 font-semibold leading-tight text-green-700 dark:bg-green-700 dark:text-green-100">
-                                                {{ $item->name }}
-                                            </span>
-                                        @endforeach
+                                        <div class="grid grid-cols-3 gap-2">
+                                            @foreach ($user->getRolesViaRoleSets() as $item)
+                                                <span
+                                                    class="block w-full rounded-full bg-green-100 px-2 py-1 font-semibold leading-tight text-green-700 dark:bg-green-700 dark:text-green-100">
+                                                    {{ $item->name }}
+                                                </span>
+                                            @endforeach
+                                        </div>
+
                                     </td>
                                     <td class="px-4 py-3 text-sm">
                                         <div class="flex">
@@ -92,7 +99,6 @@
                                                 class="focus:shadow-outline-purple ml-2 rounded-lg border border-transparent bg-sky-500 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-sky-200 focus:outline-none active:bg-sky-600"
                                                 ​type="button">Impersonate</a>
                                         </div>
-
                                     </td>
                                 </tr>
                             @endforeach

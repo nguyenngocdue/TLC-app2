@@ -15,7 +15,7 @@
                 <span>View more →</span>
             </div>
             <div class="mt-2 grid grid-cols-2 gap-5">
-                <form action="{{ route($type . '_renderprop.index') }}" method="GET">
+                <form action="{{ route($type . '_render.index') }}" method="GET">
                     <div class="mt-2 grid grid-cols-2 gap-5">
                         <div>
                             <input type="text" name="search"
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </form>
-                <form action="{{ route($type . '_renderprop.index') }}" method="GET">
+                <form action="{{ route($type . '_render.index') }}" method="GET">
                     <div class="mt-2 flex">
                         <div class="mr-1 w-12">
                             <input type="text" name="page_limit"
@@ -69,7 +69,7 @@
                                         <td class="px-4 py-3 text-center text-sm">
                                             <button
                                                 class="focus:shadow-outline-gray btn-delete-user rounded-lg px-2 py-2 text-sm font-medium leading-5 text-red-600 focus:outline-none dark:text-red-400"
-                                                data-url="{{ route($type . '_renderprop.destroy', $user->id) }}" ​
+                                                data-url="{{ route($type . '_render.destroy', $user->id) }}" ​
                                                 type="button"><i class="fas fa-trash"></i></button>
                                         </td>
                                         @foreach ($data as $key1 => $value)

@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 class Workplace extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = ["name", "description"];
+    protected $fillable = ["name", "description", "def_publish_holiday_hour", "def_assignee", "def_monitors", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'workplaces';
 

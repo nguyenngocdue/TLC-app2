@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PostSeeder::class,
             MediaSeeder::class,
-            WorkplaceSeeder::class,
+            // WorkplaceSeeder::class,
         ]);
     }
 }

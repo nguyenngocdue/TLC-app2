@@ -33,7 +33,7 @@ Route::group([
         foreach ($entities as $entity) {
             $entityName = $entity->getTable();
             $ucfirstName = Str::ucfirst($entityName);
-            Route::resource("$entityName/{$entityName}_renderprop", "App\Http\Controllers\Render\\{$ucfirstName}\\{$ucfirstName}RenderController");
+            Route::resource("$entityName/{$entityName}_render", "App\Http\Controllers\Render\\{$ucfirstName}\\{$ucfirstName}RenderController");
             Route::resource("$entityName/{$entityName}_addnew", "App\Http\Controllers\Render\\{$ucfirstName}\\{$ucfirstName}CreateController");
             Route::resource("$entityName/{$entityName}_edit", "App\Http\Controllers\Render\\{$ucfirstName}\\{$ucfirstName}EditController");
         }
@@ -52,9 +52,9 @@ Route::group([
                 'prefix' => $singular,
                 'middleware' => "role:ADMIN-DATA-$upperCaseName"
             ], function () use ($singular, $ucfirstName) {
-                Route::resource("{$singular}_manageprop", "App\Http\Controllers\Manage\\{$ucfirstName}\\Manage{$ucfirstName}PropController");
-                Route::resource("{$singular}_managelineprop", "App\Http\Controllers\Manage\\{$ucfirstName}\\Manage{$ucfirstName}TablePropController");
-                Route::resource("{$singular}_managerelationship", "App\Http\Controllers\Manage\\{$ucfirstName}\\Manage{$ucfirstName}RelationshipController");
+                Route::resource("{$singular}_mngprop", "App\Http\Controllers\Manage\\{$ucfirstName}\\Manage{$ucfirstName}PropController");
+                Route::resource("{$singular}_mnglnprop", "App\Http\Controllers\Manage\\{$ucfirstName}\\Manage{$ucfirstName}TablePropController");
+                Route::resource("{$singular}_mngrls", "App\Http\Controllers\Manage\\{$ucfirstName}\\Manage{$ucfirstName}RelationshipController");
             });
         }
     });

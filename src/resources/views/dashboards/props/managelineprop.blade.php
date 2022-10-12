@@ -14,7 +14,7 @@
                 </div>
                 <span>Manage Table -></span>
             </div>
-            <form action="{{ route($type . '_managelineprop.store') }}" method="POST">
+            <form action="{{ route($type . '_mnglnprop.store') }}" method="POST">
                 @csrf
                 <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border shadow-sm">
                     <div class="w-full overflow-x-auto">
@@ -116,7 +116,7 @@
                                             <td class="px-4 py-3 text-center text-sm">
                                                 @if ($colorLines[$key] == 'removed')
                                                     <button class="btn btn-danger btn-delete"
-                                                        data-url="{{ route($type . '_managelineprop.destroy', $name) }}"​
+                                                        data-url="{{ route($type . '_mnglnprop.destroy', $name) }}"​
                                                         type="button"><i class="fas fa-trash"></i></button>
                                                 @endif
                                             </td>
@@ -185,7 +185,7 @@
                                             <td class="px-4 py-3 text-center text-sm">
                                                 @if (isset($colorLines))
                                                     <button class="btn btn-danger btn-delete"
-                                                        data-url="{{ route($type . '_manageprop.destroy', $name) }}"​
+                                                        data-url="{{ route($type . '_mnglnprop.destroy', $name) }}"​
                                                         type="button"><i class="fas fa-trash"></i></button>
                                                 @endif
                                             </td>

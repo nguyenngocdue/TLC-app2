@@ -3,7 +3,7 @@
     <div class="relative my-6 mx-auto h-full w-[750px]">
         <!--content-->
         <div class="relative flex h-full w-full flex-col border-0 bg-white shadow-lg outline-none focus:outline-none">
-            <form action="{{ route($type . '_renderprop.update', Auth::id()) }}" method="post" id="form-edit">
+            <form action="{{ route($type . '_render.update', Auth::id()) }}" method="post" id="form-edit">
                 @method('PUT')
                 @csrf
                 <!--header-->
