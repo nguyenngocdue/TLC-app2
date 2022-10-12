@@ -108,6 +108,176 @@
                         "href": "dashboard/zunit_test_3s/zunit_test_3s_addnew"
                     }
                 ]
+            },
+            "departments": {
+                "title": "Departments Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/departments",
+                "items": [
+                    {
+                        "title": "All departments",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/departments/departments_render"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/departments/departments_addnew"
+                    }
+                ]
+            },
+            "user_categories": {
+                "title": "User_categories Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/user_categories",
+                "items": [
+                    {
+                        "title": "All user_categories",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/user_categories/user_categories_render"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/user_categories/user_categories_addnew"
+                    }
+                ]
+            },
+            "user_disciplines": {
+                "title": "User_disciplines Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/user_disciplines",
+                "items": [
+                    {
+                        "title": "All user_disciplines",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/user_disciplines/user_disciplines_render"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/user_disciplines/user_disciplines_addnew"
+                    }
+                ]
+            },
+            "user_position1s": {
+                "title": "User_position1s Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/user_position1s",
+                "items": [
+                    {
+                        "title": "All user_position1s",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/user_position1s/user_position1s_render"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/user_position1s/user_position1s_addnew"
+                    }
+                ]
+            },
+            "user_position2s": {
+                "title": "User_position2s Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/user_position2s",
+                "items": [
+                    {
+                        "title": "All user_position2s",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/user_position2s/user_position2s_render"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/user_position2s/user_position2s_addnew"
+                    }
+                ]
+            },
+            "user_position3s": {
+                "title": "User_position3s Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/user_position3s",
+                "items": [
+                    {
+                        "title": "All user_position3s",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/user_position3s/user_position3s_render"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/user_position3s/user_position3s_addnew"
+                    }
+                ]
+            },
+            "user_position_pres": {
+                "title": "User_position_pres Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/user_position_pres",
+                "items": [
+                    {
+                        "title": "All user_position_pres",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/user_position_pres/user_position_pres_render"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/user_position_pres/user_position_pres_addnew"
+                    }
+                ]
+            },
+            "user_time_keep_types": {
+                "title": "User_time_keep_types Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/user_time_keep_types",
+                "items": [
+                    {
+                        "title": "All user_time_keep_types",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/user_time_keep_types/user_time_keep_types_render"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/user_time_keep_types/user_time_keep_types_addnew"
+                    }
+                ]
+            },
+            "user_types": {
+                "title": "User_types Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/user_types",
+                "items": [
+                    {
+                        "title": "All user_types",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/user_types/user_types_render"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/user_types/user_types_addnew"
+                    }
+                ]
+            },
+            "work_modes": {
+                "title": "Work_modes Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/work_modes",
+                "items": [
+                    {
+                        "title": "All work_modes",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/work_modes/work_modes_render"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/work_modes/work_modes_addnew"
+                    }
+                ]
             }
         },
         "divider": "true"
@@ -244,6 +414,226 @@
                         "title": "Manage Relationship",
                         "icon": "fas fa-heart",
                         "href": "propman/zunit_test_3/zunit_test_3_mngrls"
+                    }
+                ]
+            },
+            "department": {
+                "title": "Department Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "propman/department",
+                "items": [
+                    {
+                        "title": "Manage Prop",
+                        "icon": "fas fa-project-diagram",
+                        "href": "propman/department/department_mngprop"
+                    },
+                    {
+                        "title": "Manage Line",
+                        "icon": "fas fa-grip-lines",
+                        "href": "propman/department/department_mnglnprop"
+                    },
+                    {
+                        "title": "Manage Relationship",
+                        "icon": "fas fa-heart",
+                        "href": "propman/department/department_mngrls"
+                    }
+                ]
+            },
+            "user_category": {
+                "title": "User_category Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "propman/user_category",
+                "items": [
+                    {
+                        "title": "Manage Prop",
+                        "icon": "fas fa-project-diagram",
+                        "href": "propman/user_category/user_category_mngprop"
+                    },
+                    {
+                        "title": "Manage Line",
+                        "icon": "fas fa-grip-lines",
+                        "href": "propman/user_category/user_category_mnglnprop"
+                    },
+                    {
+                        "title": "Manage Relationship",
+                        "icon": "fas fa-heart",
+                        "href": "propman/user_category/user_category_mngrls"
+                    }
+                ]
+            },
+            "user_discipline": {
+                "title": "User_discipline Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "propman/user_discipline",
+                "items": [
+                    {
+                        "title": "Manage Prop",
+                        "icon": "fas fa-project-diagram",
+                        "href": "propman/user_discipline/user_discipline_mngprop"
+                    },
+                    {
+                        "title": "Manage Line",
+                        "icon": "fas fa-grip-lines",
+                        "href": "propman/user_discipline/user_discipline_mnglnprop"
+                    },
+                    {
+                        "title": "Manage Relationship",
+                        "icon": "fas fa-heart",
+                        "href": "propman/user_discipline/user_discipline_mngrls"
+                    }
+                ]
+            },
+            "user_position1": {
+                "title": "User_position1 Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "propman/user_position1",
+                "items": [
+                    {
+                        "title": "Manage Prop",
+                        "icon": "fas fa-project-diagram",
+                        "href": "propman/user_position1/user_position1_mngprop"
+                    },
+                    {
+                        "title": "Manage Line",
+                        "icon": "fas fa-grip-lines",
+                        "href": "propman/user_position1/user_position1_mnglnprop"
+                    },
+                    {
+                        "title": "Manage Relationship",
+                        "icon": "fas fa-heart",
+                        "href": "propman/user_position1/user_position1_mngrls"
+                    }
+                ]
+            },
+            "user_position2": {
+                "title": "User_position2 Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "propman/user_position2",
+                "items": [
+                    {
+                        "title": "Manage Prop",
+                        "icon": "fas fa-project-diagram",
+                        "href": "propman/user_positions_2/user_position2_mngprop"
+                    },
+                    {
+                        "title": "Manage Line",
+                        "icon": "fas fa-grip-lines",
+                        "href": "propman/user_positions_2/user_position2_mnglnprop"
+                    },
+                    {
+                        "title": "Manage Relationship",
+                        "icon": "fas fa-heart",
+                        "href": "propman/user_positions_2/user_position2_mngrls"
+                    }
+                ]
+            },
+            "user_position3": {
+                "title": "User_position3 Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "propman/user_position3",
+                "items": [
+                    {
+                        "title": "Manage Prop",
+                        "icon": "fas fa-project-diagram",
+                        "href": "propman/user_position3/user_position3_mngprop"
+                    },
+                    {
+                        "title": "Manage Line",
+                        "icon": "fas fa-grip-lines",
+                        "href": "propman/user_position3/user_position3_mnglnprop"
+                    },
+                    {
+                        "title": "Manage Relationship",
+                        "icon": "fas fa-heart",
+                        "href": "propman/user_position3/user_position3_mngrls"
+                    }
+                ]
+            },
+            "user_position_pre": {
+                "title": "User_position_pre Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "propman/user_position_pre",
+                "items": [
+                    {
+                        "title": "Manage Prop",
+                        "icon": "fas fa-project-diagram",
+                        "href": "propman/user_position_pre/user_position_pre_mngprop"
+                    },
+                    {
+                        "title": "Manage Line",
+                        "icon": "fas fa-grip-lines",
+                        "href": "propman/user_position_pre/user_position_pre_mnglnprop"
+                    },
+                    {
+                        "title": "Manage Relationship",
+                        "icon": "fas fa-heart",
+                        "href": "propman/user_position_pre/user_position_pre_mngrls"
+                    }
+                ]
+            },
+            "user_time_keep_type": {
+                "title": "User_time_keep_type Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "propman/user_time_keep_type",
+                "items": [
+                    {
+                        "title": "Manage Prop",
+                        "icon": "fas fa-project-diagram",
+                        "href": "propman/user_time_keep_type/user_time_keep_type_mngprop"
+                    },
+                    {
+                        "title": "Manage Line",
+                        "icon": "fas fa-grip-lines",
+                        "href": "propman/user_time_keep_type/user_time_keep_type_mnglnprop"
+                    },
+                    {
+                        "title": "Manage Relationship",
+                        "icon": "fas fa-heart",
+                        "href": "propman/user_time_keep_type/user_time_keep_type_mngrls"
+                    }
+                ]
+            },
+            "user_type": {
+                "title": "User_type Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "propman/user_type",
+                "items": [
+                    {
+                        "title": "Manage Prop",
+                        "icon": "fas fa-project-diagram",
+                        "href": "propman/user_type/user_type_mngprop"
+                    },
+                    {
+                        "title": "Manage Line",
+                        "icon": "fas fa-grip-lines",
+                        "href": "propman/user_type/user_type_mnglnprop"
+                    },
+                    {
+                        "title": "Manage Relationship",
+                        "icon": "fas fa-heart",
+                        "href": "propman/user_type/user_type_mngrls"
+                    }
+                ]
+            },
+            "work_mode": {
+                "title": "Work_mode Management",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "propman/work_mode",
+                "items": [
+                    {
+                        "title": "Manage Prop",
+                        "icon": "fas fa-project-diagram",
+                        "href": "propman/work_mode/work_mode_mngprop"
+                    },
+                    {
+                        "title": "Manage Line",
+                        "icon": "fas fa-grip-lines",
+                        "href": "propman/work_mode/work_mode_mnglnprop"
+                    },
+                    {
+                        "title": "Manage Relationship",
+                        "icon": "fas fa-heart",
+                        "href": "propman/work_mode/work_mode_mngrls"
                     }
                 ]
             }

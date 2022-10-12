@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -25,7 +26,7 @@ return new class extends Migration
             $table->string("address")->nullable();
             $table->string("phone")->nullable();
             $table->unsignedBigInteger("featured_image")->nullable();
-            $table->enum("time_keeping_type", ['TSO', 'TSW', 'None'])->default('TSW');
+            $table->unsignedBigInteger("time_keeping_type")->default(1);
             $table->unsignedBigInteger("user_type")->nullable();
             $table->unsignedBigInteger("workplace")->nullable();
             $table->unsignedBigInteger("category")->nullable();

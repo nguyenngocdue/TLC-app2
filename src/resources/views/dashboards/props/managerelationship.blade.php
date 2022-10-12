@@ -25,10 +25,11 @@
                                     class="border-b bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
                                     <th class="px-4 py-3">No.</th>
                                     <th class="px-4 py-3">Name</th>
-                                    <th class="px-4 py-3">Column Name</th>
+                                    <th class="px-4 py-3">Relationship</th>
                                     <th class="px-4 py-3">Label</th>
                                     <th class="px-4 py-3">Control</th>
                                     <th class="px-4 py-3">Control Param</th>
+                                    <th class="px-4 py-3">Column Name</th>
                                     <th class="px-4 py-3">Col span</th>
                                     <th class="px-4 py-3">Hidden</th>
                                     <th class="px-4 py-3">New Line</th>
@@ -55,9 +56,9 @@
                                                     hidden>
                                             </td>
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $columnNames[$key] }}
-                                                <input type="text" name="column_name[]" value="{{ $columnNames[$key] }}"
-                                                    readonly hidden>
+                                                {{ $columnRelationships[$key] }}
+                                                <input type="text" name="relationship[]"
+                                                    value="{{ $columnRelationships[$key] }}" readonly hidden>
                                                 <input type="text" name="eloquent[]" value="{{ $columnEloquents[$key] }}"
                                                     readonly hidden>
                                                 <input type="text" name="param_1[]" value="{{ $columnParam1s[$key] }}"
@@ -104,6 +105,12 @@
                                                     class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                                                     name="control_param[]" value="{{ $columnControlParams[$key] }}">
                                             </td>
+                                            <td>
+                                                <input type="text"
+                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                    name="column_name[]" value="{{ $columnNames[$key] }}">
+
+                                            </td>
                                             <td class="px-4 py-3 text-sm">
                                                 <input type="text"
                                                     class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
@@ -130,7 +137,7 @@
                                             <td class="px-4 py-3 text-center text-sm">
                                                 @if ($colorLines[$key] == 'removed')
                                                     <button class="btn btn-danger btn-delete"
-                                                        data-url="{{ route($type . '_managerelationship.destroy', $name) }}"​
+                                                        data-url="{{ route($type . '_mngrls.destroy', $name) }}"​
                                                         type="button"><i class="fas fa-trash"></i></button>
                                                 @endif
                                             </td>
@@ -151,44 +158,44 @@
                                         </tr>
                                     @endforeach
                                 @else
-                                    @foreach ($columnNames as $key => $columnName)
+                                    @foreach ($columnRelationships as $key => $columnRelationship)
                                         <tr class="table-line-new">
                                             <td class="px-4 py-3 text-sm">{{ $key + 1 }}</td>
                                             <td class="px-4 py-3 text-sm">
-                                                _{{ $columnName }}
-                                                <input type="text" name="name[]" value="_{{ $columnName }}"
+                                                _{{ $columnRelationship }}
+                                                <input type="text" name="name[]" value="_{{ $columnRelationship }}"
                                                     readonly hidden>
                                             </td>
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $columnName }}
-                                                <input type="text" name="column_name[]" value="{{ $columnName }}"
-                                                    readonly hidden>
+                                                {{ $columnRelationship }}
+                                                <input type="text" name="relationship[]"
+                                                    value="{{ $columnRelationship }}" readonly hidden>
                                                 <input type="text" name="eloquent[]"
-                                                    value="{{ isset($columnEloquentParams[$columnName][0]) ? $columnEloquentParams[$columnName][0] : '' }}"
+                                                    value="{{ isset($columnEloquentParams[$columnRelationship][0]) ? $columnEloquentParams[$columnRelationship][0] : '' }}"
                                                     readonly hidden>
                                                 <input type="text" name="param_1[]"
-                                                    value="{{ isset($columnEloquentParams[$columnName][1]) ? $columnEloquentParams[$columnName][1] : '' }}"
+                                                    value="{{ isset($columnEloquentParams[$columnRelationship][1]) ? $columnEloquentParams[$columnRelationship][1] : '' }}"
                                                     readonly hidden>
                                                 <input type="text" name="param_2[]"
-                                                    value="{{ isset($columnEloquentParams[$columnName][2]) ? $columnEloquentParams[$columnName][2] : '' }}"
+                                                    value="{{ isset($columnEloquentParams[$columnRelationship][2]) ? $columnEloquentParams[$columnRelationship][2] : '' }}"
                                                     readonly hidden>
                                                 <input type="text" name="param_3[]"
-                                                    value="{{ isset($columnEloquentParams[$columnName][3]) ? $columnEloquentParams[$columnName][3] : '' }}"
+                                                    value="{{ isset($columnEloquentParams[$columnRelationship][3]) ? $columnEloquentParams[$columnRelationship][3] : '' }}"
                                                     readonly hidden>
                                                 <input type="text" name="param_4[]"
-                                                    value="{{ isset($columnEloquentParams[$columnName][4]) ? $columnEloquentParams[$columnName][4] : '' }}"
+                                                    value="{{ isset($columnEloquentParams[$columnRelationship][4]) ? $columnEloquentParams[$columnRelationship][4] : '' }}"
                                                     readonly hidden>
                                                 <input type="text" name="param_5[]"
-                                                    value="{{ isset($columnEloquentParams[$columnName][5]) ? $columnEloquentParams[$columnName][5] : '' }}"
+                                                    value="{{ isset($columnEloquentParams[$columnRelationship][5]) ? $columnEloquentParams[$columnRelationship][5] : '' }}"
                                                     readonly hidden>
                                                 <input type="text" name="param_6[]"
-                                                    value="{{ isset($columnEloquentParams[$columnName][6]) ? $columnEloquentParams[$columnName][6] : '' }}"
+                                                    value="{{ isset($columnEloquentParams[$columnRelationship][6]) ? $columnEloquentParams[$columnRelationship][6] : '' }}"
                                                     readonly hidden>
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 <input type="text" name="label[]"
                                                     class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                    value="{{ ucwords(str_replace('_', ' ', $columnName)) }}">
+                                                    value="{{ ucwords(str_replace('_', ' ', $columnRelationship)) }}">
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 <select name="control[]"
@@ -203,6 +210,11 @@
                                                 <input type="text"
                                                     class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                                                     name="control_param[]" value="">
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                <input type="text" name="column_name[]"
+                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                    value="{{ isset($columnEloquentParams[$columnRelationship][2]) ? $columnEloquentParams[$columnRelationship][2] : '' }}">
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 <input type="text" name="col_span[]"
@@ -226,7 +238,7 @@
                                             <td class="px-4 py-3 text-center text-sm">
                                                 @if (isset($colorLines))
                                                     <button class="btn btn-danger btn-delete"
-                                                        data-url="{{ route($type . '_managerelationship.destroy', $name) }}"​
+                                                        data-url="{{ route($type . '_mngrls.destroy', $name) }}"​
                                                         type="button"><i class="fas fa-trash"></i></button>
                                                 @endif
                                             </td>
@@ -236,13 +248,13 @@
                                             <td colspan="8" class="bg-gray-100 py-1">
                                                 @php
                                                     $renderRelationship = [];
-                                                    $var0 = isset($columnEloquentParams[$columnName][0]) ? $columnEloquentParams[$columnName][0] : '';
-                                                    $var1 = isset($columnEloquentParams[$columnName][1]) ? $columnEloquentParams[$columnName][1] : '';
-                                                    $var2 = isset($columnEloquentParams[$columnName][2]) ? $columnEloquentParams[$columnName][2] : '';
-                                                    $var3 = isset($columnEloquentParams[$columnName][3]) ? $columnEloquentParams[$columnName][3] : '';
-                                                    $var4 = isset($columnEloquentParams[$columnName][4]) ? $columnEloquentParams[$columnName][4] : '';
-                                                    $var5 = isset($columnEloquentParams[$columnName][5]) ? $columnEloquentParams[$columnName][5] : '';
-                                                    $var6 = isset($columnEloquentParams[$columnName][6]) ? $columnEloquentParams[$columnName][6] : '';
+                                                    $var0 = isset($columnEloquentParams[$columnRelationship][0]) ? $columnEloquentParams[$columnRelationship][0] : '';
+                                                    $var1 = isset($columnEloquentParams[$columnRelationship][1]) ? $columnEloquentParams[$columnRelationship][1] : '';
+                                                    $var2 = isset($columnEloquentParams[$columnRelationship][2]) ? $columnEloquentParams[$columnRelationship][2] : '';
+                                                    $var3 = isset($columnEloquentParams[$columnRelationship][3]) ? $columnEloquentParams[$columnRelationship][3] : '';
+                                                    $var4 = isset($columnEloquentParams[$columnRelationship][4]) ? $columnEloquentParams[$columnRelationship][4] : '';
+                                                    $var5 = isset($columnEloquentParams[$columnRelationship][5]) ? $columnEloquentParams[$columnRelationship][5] : '';
+                                                    $var6 = isset($columnEloquentParams[$columnRelationship][6]) ? $columnEloquentParams[$columnRelationship][6] : '';
                                                     array_push($renderRelationship, $var0, $var1, $var2, $var3, $var4, $var5, $var6);
                                                     $render = array_filter($renderRelationship, fn($item) => $item);
                                                     $render = join(' | ', $render);

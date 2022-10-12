@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
-class UserPosition3 extends Model
+class User_time_keep_type extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = ["name", "description", "slug"];
+    protected $fillable = ["name"];
     protected $primaryKey = 'id';
-    protected $table = 'user_positions_3';
-
+    protected $table = 'user_time_keep_types';
     public $eloquentParams = [
-        "user" => ['belongsTo', User::class, 'position_3'],
+        "user" => ['belongsTo', User::class, 'time_keeping_type'],
     ];
     public function user()
     {

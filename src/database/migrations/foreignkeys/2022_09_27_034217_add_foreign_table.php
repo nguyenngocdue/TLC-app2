@@ -19,11 +19,12 @@ return new class extends Migration
             $table->foreign('featured_image')->references('id')->on('media')->onDelete('cascade');
             $table->foreign('category')->references('id')->on('user_categories')->onDelete('cascade');
             $table->foreign('position_prefix')->references('id')->on('user_position_pres')->onDelete('cascade');
-            $table->foreign('position_1')->references('id')->on('user_positions_1')->onDelete('cascade');
-            $table->foreign('position_2')->references('id')->on('user_positions_2')->onDelete('cascade');
-            $table->foreign('position_3')->references('id')->on('user_positions_3')->onDelete('cascade');
+            $table->foreign('position_1')->references('id')->on('user_position1s')->onDelete('cascade');
+            $table->foreign('position_2')->references('id')->on('user_position2s')->onDelete('cascade');
+            $table->foreign('position_3')->references('id')->on('user_position3s')->onDelete('cascade');
             $table->foreign('discipline')->references('id')->on('user_disciplines')->onDelete('cascade');
             $table->foreign('department')->references('id')->on('departments')->onDelete('cascade');
+            $table->foreign('time_keeping_type')->references('id')->on('user_time_keep_types')->onDelete('cascade');
         });
         Schema::table('media', function (Blueprint $table) {
             $table->foreign('owner_id')->references('id')->on('users');

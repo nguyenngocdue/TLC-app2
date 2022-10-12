@@ -92,10 +92,11 @@ class CreateControllerEntityCreator
         if (!is_null($name)) {
             $nameClass = Str::ucfirst($name);
             $nameClassSingular = Str::singular($nameClass);
-            $name = Str::singular(strtolower($name));
+            $name = Str::plural(strtolower($name));
+            $nameSingular = Str::singular(strtolower($name));
             $stub = str_replace(
-                ['{{nameClass}}', '{{nameModel}}', '{{nameClassSingular}}'],
-                [$nameClass, $name, $nameClassSingular],
+                ['{{nameClass}}', '{{nameModelSingular}}', '{{nameModel}}', '{{nameClassSingular}}'],
+                [$nameClass, $nameSingular, $name, $nameClassSingular],
                 $stub
             );
             if ($render && !Permission::where('name', "read-$name")->first()) {

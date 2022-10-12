@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Utils\Support\Entities;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AdminSetPermissionController extends Controller
 {

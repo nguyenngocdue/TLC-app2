@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
-class UserType extends Model
+class User_type extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["name", "description", "slug"];

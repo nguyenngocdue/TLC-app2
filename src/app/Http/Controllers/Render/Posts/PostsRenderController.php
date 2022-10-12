@@ -10,8 +10,8 @@ class PostsRenderController extends RenderController
     protected $type = 'post';
     protected $typeModel = Post::class;
     protected $permissionMiddleware = [
-        'read' => 'read-post',
-        'edit' => 'read-post|create-post|edit-post|edit-others-post',
-        'delete' => 'read-post|create-post|edit-post|edit-others-post|delete-post|delete-others-post'
+        'read' => 'read-posts',
+        'edit' => 'read-posts|create-posts|edit-posts|edit-others-posts',
+        'delete' => 'read-posts|create-posts|edit-posts|edit-others-posts|delete-posts|delete-others-posts'
     ];
 }

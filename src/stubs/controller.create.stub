@@ -7,7 +7,7 @@ use App\Models\{{nameClassSingular}};
 
 class {{nameClass}}CreateController extends EditController
 {
-    protected $type = '{{nameModel}}';
+    protected $type = '{{nameModelSingular}}';
     protected $data = {{nameClassSingular}}::class;
     protected $action = "create";
 }

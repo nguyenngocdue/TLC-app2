@@ -7,7 +7,7 @@ use App\Models\{{nameClassSingular}};
 
 class {{nameClass}}RenderController extends RenderController
 {
-    protected $type = '{{nameModel}}';
+    protected $type = '{{nameModelSingular}}';
     protected $typeModel = {{nameClassSingular}}::class;
     protected $permissionMiddleware = [
         'read' => 'read-{{nameModel}}',

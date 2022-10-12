@@ -54,7 +54,11 @@
                                                 data-model="{{ $entity->getTable() }}">{{ $entity->getTable() }}</span>
                                         </td>
                                         @foreach ($permissions as $permission)
-                                            @if (str_contains($permission->name, Str::singular($entity->getTable())))
+                                            @php
+                                                $var = explode('-', $permission->name);
+                                                $lastNamePermission = end($var);
+                                            @endphp
+                                            @if ($lastNamePermission == $entity->getTable())
                                                 <td class="text-center" title="{{ $permission->name }}">
                                                     <input type="hidden" name="role" value="{{ $selected }}">
                                                     <input type="hidden" name="model[]" value="{{ $entity->getTable() }}">
@@ -66,20 +70,6 @@
                                                                 @checked(true)
                                                             @endif @endforeach
                                                         @endisset
-                                                        class="check-{{ $entity->getTable() }} h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
-                                                </td>
-                                            @elseif (str_contains($permission->name, $entity->getTable()))
-                                                <td class="text-center" title="{{ $permission->name }}">
-                                                    <input type="hidden" name="role" value="{{ $selected }}">
-                                                    <input type="hidden" name="model[]" value="{{ $entity->getTable() }}">
-                                                    <input type="checkbox" name="checked[]" value="{{ $permission->name }}"
-                                                        title="{{ $permission->name }}"
-                                                        @isset($permissionsRoles)
-                                                        @foreach ($permissionsRoles as $item)
-                                                        @if ($item->name == $permission->name)
-                                                            @checked(true)
-                                                        @endif @endforeach
-                                                    @endisset
                                                         class="check-{{ $entity->getTable() }} h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
                                                 </td>
                                             @endif

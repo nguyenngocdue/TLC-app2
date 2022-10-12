@@ -7,6 +7,6 @@ use App\Models\{{nameClass}};
 
 class Manage{{nameClass}}RelationshipController extends ManageRelationshipController
 {
-    protected $type = '{{nameModel}}';
+    protected $type = '{{nameModelSingular}}';
     protected $typeModel = {{nameClass}}::class;
 }

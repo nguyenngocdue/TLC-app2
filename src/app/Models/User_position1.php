@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
-class UserCategory extends Model
+class User_position1 extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["name", "description", "slug"];
     protected $primaryKey = 'id';
-    protected $table = 'user_categories';
+    protected $table = 'user_position1s';
     public $eloquentParams = [
-        "user" => ['belongsTo', User::class, 'category'],
+        "user" => ['belongsTo', User::class, 'position_1'],
     ];
     public function user()
     {
