@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Render\CreateEditController;
 use App\Models\Media;
 
-class MediaEditController extends CreateEditController
+class MediaCreateController extends CreateEditController
 {
     protected $type = "media";
     protected $data = Media::class;
-    protected $action = "create";
+    protected $action = "edit";
 }

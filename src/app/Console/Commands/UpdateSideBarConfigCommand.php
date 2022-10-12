@@ -76,14 +76,15 @@ class UpdateSideBarConfigCommand extends Command
 
                                     "title" => "All $value",
                                     "icon" => "fas fa-users",
-                                    "href" => "dashboard/$value/{$value}_renderprop"
+                                    "href" => "dashboard/$value/{$value}_render"
                                 ],
                                 [
 
                                     "title" => "Add New",
                                     "icon" => "fas fa-user",
                                     "href" => "dashboard/$value/{$value}_addnew"
-                                ]
+                                ],
+
                             ]
                         ];
                     $data['admin_zone']['items'][$value] = $var;
@@ -101,19 +102,19 @@ class UpdateSideBarConfigCommand extends Command
 
                                 "title" => "Manage Prop",
                                 "icon" => "fas fa-project-diagram",
-                                "href" => "propman/$value/{$value}_manageprop"
+                                "href" => "propman/$value/{$value}_mngprop"
                             ],
                             [
 
                                 "title" => "Manage Line",
                                 "icon" => "fas fa-grip-lines",
-                                "href" => "propman/$value/{$value}_managelineprop"
+                                "href" => "propman/$value/{$value}_mnglnprop"
                             ],
                             [
 
                                 "title" => "Manage Relationship",
                                 "icon" => "fas fa-heart",
-                                "href" => "propman/$value/{$value}_managerelationship"
+                                "href" => "propman/$value/{$value}_mngrls"
                             ]
                         ]
                     ];

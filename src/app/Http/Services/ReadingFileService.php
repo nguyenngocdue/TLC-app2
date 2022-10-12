@@ -1,6 +1,9 @@
 <?php
 
+
 namespace App\Http\Services;
+
+use Illuminate\Support\Str;
 
 
 class ReadingFileService
@@ -14,7 +17,8 @@ class ReadingFileService
     }
     public function type_getPath($disk, $branch, $type, $nameFile)
     {
-        $storage_path = storage_path("$disk/$branch/$type/$nameFile");
+        $_type = Str::plural($type);
+        $storage_path = storage_path("$disk/$branch/$_type/$nameFile");
         $props = json_decode(file_get_contents($storage_path), true);
         return $props;
     }
