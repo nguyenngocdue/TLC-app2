@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="focus:shadow-outline-purple my-4 flex items-center justify-between rounded-lg bg-purple-600 p-3 text-base font-semibold text-purple-100 shadow-md focus:outline-none">
     <div class="flex items-center">
         <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
@@ -9,23 +10,28 @@
         </svg>
         @switch($action)
         @case('edit')
-        <span>Update a {{ $type }}</span>
+        <span>Update a {{$type}}</span>
         @break
-
         @case('create')
-        <span>Create a {{ $type }}</span>
+        <span>Create a {{$type}}</span>
         @break
         @endswitch
     </div>
 </div>
 <div class="grid grid-rows-1 bg-gray-300">
     <div class="mx-auto flex min-h-screen items-center py-5">
-        <form class="rounded-md bg-gray-50 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === 'create' ? 'user_addnew.store' : 'user_edit.update', $action === 'create' ? 0 : $values->id) }} ">
+        {{-- {{dd($type)}} --}}
+        @php
+        $editType = Str::plural($type);
+        $id = isset($values) ? $values->id : 0;
+        $idAvatar = isset($values['avatar']) ? $values['avatar']: "";
+        @endphp
+        <form class="rounded-md bg-gray-50 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
             @csrf
             {{-- <div class="mx-auto max-w-4xl flex-1"> --}}
-            <div class="flex grid-cols-12 flex-col">
-                @method($action === 'create' ? 'POST' : 'PUT')
-                @foreach ($props as $key => $value)
+            <div class="flex flex-col grid-cols-12">
+                @method($action === "create" ? 'POST' : 'PUT')
+                @foreach($props as $key => $value)
                 @php
                 $label = $value['label'];
                 $col_span = $value['col_span'];
@@ -36,80 +42,73 @@
                 $col_span=$value['col_span'];
                 $hiddenRow = $action === 'create' && $column_name === 'id'? "hidden":"";
 
-                $timeControls = ['picker_time', 'picker_date', 'picker_month', 'picker_week', 'picker_quater', 'picker_year', 'datetime'];
+                $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quater','picker_year','datetime'];
                 $valColumnNames = ['date_of_birth', 'first_date', 'last_date', 'created_at', 'updated_at'];
 
-                $visibility = $value['hidden'] === 'true' ? 'hidden' : '';
+                $visibility = $value['hidden'] === "true" ? 'hidden' : "";
                 @endphp
-                <div class='col-span-{{ $col_span }}'>
-                    <div class='grid-row-1 grid gap-3'>
-                        <div class='{{ $hiddenRow }} {{ $visibility }} grid grid-cols-12 items-center'>
-                            <div class='col-span-{{ 24 / $col_span }} col-start-1 text-right'>
-                                <label class='mb-2 block px-3 text-base tracking-wide text-gray-800' title='{{ $column_name }}'>{{ $label }}
+                <div class='col-span-{{$col_span}}'>
+                    <div class='grid grid-row-1 gap-3'>
+                        <div class='grid grid-cols-12 items-center {{$hiddenRow}} {{$visibility}} '>
+                            <div class='col-start-1 col-span-{{24/$col_span}} text-right'>
+                                <label class='block tracking-wide text-gray-800 mb-2 px-3 text-base' title='{{$column_name}}'>{{$label}}
                                 </label>
                             </div>
                             {{-- {{dd($action)}} --}}
 
-                            <div class='col-start-{{ 24 / $col_span + 1 }} col-span-10 py-2'>
+                            <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2'>
                                 @if (is_null($control))
-                                <h2 class="text-red-400">
-                                    {{ "Control of this $column_name has not been setted" }}</h2>
+                                <h2 class="text-red-400">{{"Control of this $column_name has not been setted"}}</h2>
                                 @endif
 
                                 @switch ($control)
                                 @case($timeControls[0])
                                 @case($timeControls[1])
-
                                 @case($timeControls[2])
                                 @case($timeControls[3])
-
                                 @case($timeControls[4])
                                 @case($timeControls[5])
-
                                 @case($timeControls[6])
-                                <x-controls.text colName={{ $column_name }} valColName={{ $value_column_name }} action={{ $action }} :strTimeControl="$timeControls" control={{ $control }} />
+                                <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
                                 @break
-
                                 @case('text')
-                                <x-controls.text colName={{ $column_name }} valColName={{ $value_column_name }} action={{ $action }} :strTimeControl="$timeControls" control={{ $control }} />
+                                <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
                                 @break
-
                                 @case ('dropdown')
-                                <<<<<<< HEAD <x-controls.dropdown id={{ $id }} colName={{ $column_name }} />
-                                =======
                                 <x-controls.dropdown id={{$id}} colName={{$column_name}} type={{$type}} />
-                                >>>>>>> dev02
                                 @break
 
                                 @case ('radio')
-                                <x-controls.radio id={{ $id }} colName={{ $column_name }} />
+                                <x-controls.radio id={{$id}} colName={{$column_name}} />
                                 @break
 
                                 @case ('tag')
-                                <x-controls.tag id={{ $id }} colName={{ $column_name }} />
+                                <x-controls.tag id={{$id}} colName={{$column_name}} />
                                 @break
 
                                 @case ('checkbox')
-                                <x-controls.checkbox id={{ $id }} colName={{ $column_name }} />
+                                <x-controls.checkbox id={{$id}} colName={{$column_name}} />
                                 @break
 
                                 @case('attachment')
-                                <x-controls.upload id={{ $id }} colName={{ $column_name }} idAvatar={{ $idAvatar }} />
+                                <x-controls.upload id={{$id}} colName={{$column_name}} idAvatar={{$idAvatar}} />
                                 @break
 
                                 @case('toggle')
-                                <x-controls.toggle id={{ $id }} colName={{ $column_name }} valColName={{ $value_column_name }} />
+                                <x-controls.toggle id={{$id}} colName={{$column_name}} valColName={{$value_column_name}} />
                                 @break
 
+
                                 @default
-                                {{ $control }}
+                                {{$control}}
                                 @break
                                 @endswitch
 
                                 @switch ($action)
                                 @case('edit')
-                                <x-controls.translationtime :timeControls="$timeControls" :valColumnNames="$valColumnNames" id={{ $id }} control={{ $control }} columnName={{ $column_name }} />
+                                <x-controls.translationtime :timeControls="$timeControls" :valColumnNames="$valColumnNames" id={{$id}} control={{$control}} columnName={{$column_name}} />
                                 @break
+
                                 @endswitch
 
                             </div>
@@ -119,25 +118,21 @@
                 @endforeach
             </div>
             {{-- </div> --}}
-            <<<<<<< HEAD <div class="justify-left flex border-t px-5 dark:bg-gray-800">
-                =======
-                <div class="flex justify-left border-t dark:bg-gray-800  px-5">
-                    {{-- {{dd($type)}} --}}
-                    >>>>>>> dev02
-                    @switch($action)
-                    @case('edit')
-                    <button type="submit" class="focus:shadow-outline mt-5 rounded bg-emerald-500 py-2 px-4 font-bold text-white shadow hover:bg-purple-400 focus:outline-none" type="button">
-                        Update
-                    </button>
-                    @break
-
-                    @case('create')
-                    <button type="submit" class="focus:shadow-outline mt-5 rounded bg-emerald-500 py-2 px-4 font-bold text-white shadow hover:bg-purple-400 focus:outline-none" type="button">
-                        Create
-                    </button>
-                    @break
-                    @endswitch
-                </div>
+            <div class="flex justify-left border-t dark:bg-gray-800  px-5">
+                {{-- {{dd($type)}} --}}
+                @switch($action)
+                @case('edit')
+                <button type="submit" class="mt-5 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-bold text-white shadow hover:bg-purple-400 focus:outline-none" type="button">
+                    Update
+                </button>
+                @break
+                @case('create')
+                <button type="submit" class="mt-5 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-bold text-white shadow hover:bg-purple-400 focus:outline-none" type="button">
+                    Create
+                </button>
+                @break
+                @endswitch
+            </div>
         </form>
     </div>
 </div>
