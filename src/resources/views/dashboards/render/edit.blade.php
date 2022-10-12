@@ -31,14 +31,10 @@
                 $col_span = $value['col_span'];
                 $column_name = $value['column_name'];
                 $control = $value['control'];
-                $value_column_name = $action === 'create' ? '' : $values->{$column_name};
-                if (is_array($value_column_name)) {
-                $value_column_name = 'ARRAY';
-                }
-                $col_span = $value['col_span'];
-                $id = $action === 'create' ? '0' : $values->id;
-                $idAvatar = $action === 'create' ? '' : $values['avatar'];
-                $hiddenRow = $action === 'create' && $column_name === 'id' ? 'hidden' : '';
+                $value_column_name = isset($values) ? $values->{$column_name} : "";
+                if(is_array($value_column_name)) $value_column_name = 'ARRAY';
+                $col_span=$value['col_span'];
+                $hiddenRow = $action === 'create' && $column_name === 'id'? "hidden":"";
 
                 $timeControls = ['picker_time', 'picker_date', 'picker_month', 'picker_week', 'picker_quater', 'picker_year', 'datetime'];
                 $valColumnNames = ['date_of_birth', 'first_date', 'last_date', 'created_at', 'updated_at'];
@@ -79,7 +75,10 @@
                                 @break
 
                                 @case ('dropdown')
-                                <x-controls.dropdown id={{ $id }} colName={{ $column_name }} />
+                                <<<<<<< HEAD <x-controls.dropdown id={{ $id }} colName={{ $column_name }} />
+                                =======
+                                <x-controls.dropdown id={{$id}} colName={{$column_name}} type={{$type}} />
+                                >>>>>>> dev02
                                 @break
 
                                 @case ('radio')
@@ -113,10 +112,6 @@
                                 @break
                                 @endswitch
 
-
-
-
-
                             </div>
                         </div>
                     </div>
@@ -124,21 +119,25 @@
                 @endforeach
             </div>
             {{-- </div> --}}
-            <div class="justify-left flex border-t px-5 dark:bg-gray-800">
-                @switch($action)
-                @case('edit')
-                <button type="submit" class="focus:shadow-outline mt-5 rounded bg-emerald-500 py-2 px-4 font-bold text-white shadow hover:bg-purple-400 focus:outline-none" type="button">
-                    Update
-                </button>
-                @break
+            <<<<<<< HEAD <div class="justify-left flex border-t px-5 dark:bg-gray-800">
+                =======
+                <div class="flex justify-left border-t dark:bg-gray-800  px-5">
+                    {{-- {{dd($type)}} --}}
+                    >>>>>>> dev02
+                    @switch($action)
+                    @case('edit')
+                    <button type="submit" class="focus:shadow-outline mt-5 rounded bg-emerald-500 py-2 px-4 font-bold text-white shadow hover:bg-purple-400 focus:outline-none" type="button">
+                        Update
+                    </button>
+                    @break
 
-                @case('create')
-                <button type="submit" class="focus:shadow-outline mt-5 rounded bg-emerald-500 py-2 px-4 font-bold text-white shadow hover:bg-purple-400 focus:outline-none" type="button">
-                    Create
-                </button>
-                @break
-                @endswitch
-            </div>
+                    @case('create')
+                    <button type="submit" class="focus:shadow-outline mt-5 rounded bg-emerald-500 py-2 px-4 font-bold text-white shadow hover:bg-purple-400 focus:outline-none" type="button">
+                        Create
+                    </button>
+                    @break
+                    @endswitch
+                </div>
         </form>
     </div>
 </div>

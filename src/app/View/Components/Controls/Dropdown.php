@@ -6,6 +6,7 @@ use App\Http\Services\ReadingFileService;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class Dropdown extends Component
 {
@@ -17,11 +18,13 @@ class Dropdown extends Component
 
     private $id;
     private $colName;
-    public function __construct($id, ReadingFileService $readingFileService, $colName)
+    private $type;
+    public function __construct($id, ReadingFileService $readingFileService, $colName, $type)
     {
         $this->id = $id;
         $this->readingFileService = $readingFileService;
         $this->colName = $colName;
+        $this->type = $type;
     }
 
     /**
@@ -32,8 +35,10 @@ class Dropdown extends Component
     public function render()
     {
 
-        $storage_path = storage_path('/json/entities/user/relationships.json');
+        $type = Str::plural($this->type);
+        $storage_path = storage_path("/json/entities/$type/relationships.json");
         $relationship = json_decode(file_get_contents($storage_path), true);
+
 
         // $column_name = $relationship->{'_user'}['column_name'];
         $column_name = $relationship["_getWorkplace"]["column_name"];
@@ -41,6 +46,7 @@ class Dropdown extends Component
 
         $u = User::first()->eloquentParams;
         $pathTable = $u[$column_name][1];
+        // dd($column_name,);
         $table = ($pathTable)::first()->getTable();
         $dataSource = DB::table($table)->select('id', 'name', 'description')->get();
         $selected = $this->id;
