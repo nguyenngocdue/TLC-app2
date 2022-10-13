@@ -15,10 +15,14 @@ class Radio extends Component
      */
     private $id;
     private $colName;
-    public function __construct($id, $colName)
+    private $tablePath;
+    private $action;
+    public function __construct($id, $colName, $tablePath, $action)
     {
         $this->id = $id;
         $this->colName = $colName;
+        $this->tablePath = $tablePath;
+        $this->action = $action;
     }
 
     /**
@@ -29,33 +33,35 @@ class Radio extends Component
     public function render()
     {
         $span = 4; //<< 12/6/4/3/2/1
-        $relationship =  (object)[
-            "_workplace" => [
-                "column_name" => "getWorkplace",
-                "eloquent" => "belongsTo",
-                "param_1" => "App\\Models\\Workplace",
-                "param_2" => "workplace",
-                "param_3" => null,
-                "param_4" => null,
-                "param_5" => null,
-                "param_6" => null,
-                "label" => "Posts",
-                "control" => "count",
-                "col_span" => "12",
-                "new_line" => "false",
-                "type_line" => "default"
-            ]
-        ];
-
-        $column_name = $relationship->{'_workplace'}['column_name'];
-        $u = User::first()->eloquentParams;
-        $pathTable = $u[$column_name][1];
-        $table = ($pathTable)::first()->getTable();
-        $dataSource = DB::table($table)->select('id', 'name', 'description')->get();
-        $selected = $this->id;
         $colName = $this->colName;
-        $currentUser = DB::table('users')->where('id', $selected)->first();
-        // dd($currentUser->workplace);
-        return view('components.controls.radio')->with(compact('dataSource', 'selected', 'colName', 'currentUser', 'span'));
+
+        $colName = $this->colName;
+        $u = new $this->tablePath();
+        $eloquenParam = $u->eloquentParams;
+
+
+
+        $tableName = [];
+        foreach ($eloquenParam as $key => $value) {
+            // dd($colName, $eloquenParam, $key, $value[2]);
+            if ($value[2] === $colName) {
+                $tableName = $key;
+                break;
+            }
+            // $error =  "Not found " . $colName . " in eloquenParams of " . $u;
+            // return view('components.render.error')->with(compact('error'));
+        }
+
+
+        $pathSourceTable = $eloquenParam[$tableName][1]; // filter name of path source Workplace table
+        $tableName = ($pathSourceTable)::first()->getTable();
+        $dataSource = DB::table($tableName)->select('id', 'name', 'description')->get();
+
+
+        $selected = $this->id;
+        $entityTable = $this->tablePath;
+        $currentEntity = is_null($entityTable::find($this->id)) ? "" : $entityTable::find($this->id)->getAttributes();
+        $action = $this->action;
+        return view('components.controls.radio')->with(compact('dataSource', 'selected', 'colName', 'currentEntity', 'span', 'action'));
     }
 }

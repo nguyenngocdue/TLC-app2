@@ -23,6 +23,7 @@
         {{-- {{dd($type)}} --}}
         @php
         $editType = Str::plural($type);
+        // dd(isset($values), $values);
         $id = isset($values) ? $values->id : 0;
         $idAvatar = isset($values['avatar']) ? $values['avatar']: "";
         @endphp
@@ -74,12 +75,18 @@
                                 @case('text')
                                 <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
                                 @break
+
+                                @case('textarea')
+                                <x-controls.textarea colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
+                                @break
+
+
                                 @case ('dropdown')
-                                <x-controls.dropdown id={{$id}} colName={{$column_name}} type={{$type}} />
+                                <x-controls.dropdown id={{$id}} colName={{$column_name}} type={{$type}} tablePath={{$tablePath}} action={{$action}} />
                                 @break
 
                                 @case ('radio')
-                                <x-controls.radio id={{$id}} colName={{$column_name}} />
+                                <x-controls.radio id={{$id}} colName={{$column_name}} tablePath={{$tablePath}} action={{$action}} />
                                 @break
 
                                 @case ('tag')
@@ -94,7 +101,7 @@
                                 <x-controls.upload id={{$id}} colName={{$column_name}} idAvatar={{$idAvatar}} />
                                 @break
 
-                                @case('toggle')
+                                @case('switch')
                                 <x-controls.toggle id={{$id}} colName={{$column_name}} valColName={{$value_column_name}} />
                                 @break
 
