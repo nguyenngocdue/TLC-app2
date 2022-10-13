@@ -18,7 +18,7 @@
         @endswitch
     </div>
 </div>
-<div class="grid grid-rows-1 bg-gray-300">
+<div class="grid grid-rows-1 bg-gray-100">
     <div class="mx-auto flex min-h-screen items-center py-5">
         {{-- {{dd($type)}} --}}
         @php
@@ -27,7 +27,7 @@
         $id = isset($values) ? $values->id : 0;
         $idAvatar = isset($values['avatar']) ? $values['avatar']: "";
         @endphp
-        <form class="rounded-md bg-gray-50 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
+        <form class="rounded-md bg-gray-300 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
             @csrf
             {{-- <div class="mx-auto max-w-4xl flex-1"> --}}
             <div class="flex flex-col grid-cols-12">
