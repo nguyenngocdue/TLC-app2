@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Work_modes;
 
-use App\Http\Controllers\Render\EditController;
+use App\Http\Controllers\Render\CreateEditController;
 use App\Models\Work_mode;
 
-class Work_modesCreateController extends EditController
+class Work_modesCreateController extends CreateEditController
 {
     protected $type = 'work_mode';
     protected $data = Work_mode::class;

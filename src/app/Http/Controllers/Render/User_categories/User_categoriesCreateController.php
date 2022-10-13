@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\User_categories;
 
-use App\Http\Controllers\Render\EditController;
+use App\Http\Controllers\Render\CreateEditController;
 use App\Models\User_category;
 
-class User_categoriesCreateController extends EditController
+class User_categoriesCreateController extends CreateEditController
 {
     protected $type = 'user_category';
     protected $data = User_category::class;

@@ -43,6 +43,7 @@ abstract class CreateEditController extends Controller
         $type = Str::plural($this->type);
         $action = $this->action;
         $values = $action === "edit" ? $currentUser : [];
+
         $tablePath = $this->data;
 
         // dd($type, $action);
@@ -52,6 +53,7 @@ abstract class CreateEditController extends Controller
     public function update(Request $request, $id)
     {
 
+        // dd(addslashes('What does "yolo" mean?'));
         // dd($request->input());
         $data = $this->data::find($id);
         $dataInput = $request->input();
