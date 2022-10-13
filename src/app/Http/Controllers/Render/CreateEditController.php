@@ -28,7 +28,9 @@ abstract class CreateEditController extends Controller
 
     private function getProps()
     {
-        $path = storage_path("/json/entities/$this->type/props.json");
+        $type = Str::plural($this->type);
+        $path = storage_path("/json/entities/$type/props.json");
+        // dd($path);
         $props = json_decode(file_get_contents($path), true);
         return $props;
     }
@@ -41,13 +43,16 @@ abstract class CreateEditController extends Controller
         $type = Str::plural($this->type);
         $action = $this->action;
         $values = $action === "edit" ? $currentUser : [];
+        $tablePath = $this->data;
+
         // dd($type, $action);
-        return view('dashboards.render.edit')->with(compact('props', 'values', 'type', 'action', 'currentUser'));
+        return view('dashboards.render.edit')->with(compact('props', 'values', 'type', 'action', 'currentUser', 'tablePath'));
     }
 
     public function update(Request $request, $id)
     {
 
+        // dd($request->input());
         $data = $this->data::find($id);
         $dataInput = $request->input();
 
@@ -88,9 +93,8 @@ abstract class CreateEditController extends Controller
         $data->save();
 
 
-
-
-        return redirect(route("{$this->type}_edit.show", $id));
+        $type = Str::plural($this->type);
+        return redirect(route("{$type}_edit.show", $id));
     }
     public function index()
     {
@@ -98,8 +102,8 @@ abstract class CreateEditController extends Controller
         $props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
         $type = $this->type;
         $values = [];
-
-        return view('dashboards.render.edit')->with(compact('props', 'type', 'action',));
+        $tablePath = $this->data;
+        return view('dashboards.render.edit')->with(compact('props', 'type', 'action', 'tablePath'));
     }
     public function store(Request $request)
     {
@@ -146,7 +150,10 @@ abstract class CreateEditController extends Controller
                 isset($dataInput[$item]) ? $newUser[$item] = 1 : $newUser[$item] = 0;
             };
         }
+        $type = Str::plural($this->type);
 
-        return redirect(route("{$this->type}_edit.update", $idNewUser));
+
+
+        return redirect(route("{$type}_edit.update", $idNewUser));
     }
 }
