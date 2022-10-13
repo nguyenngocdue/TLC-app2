@@ -32,13 +32,12 @@ class Radio extends Component
      */
     public function render()
     {
-        $span = 3; //<< 12/6/4/3/2/1
+        $span = 6; //<< 12/6/4/3/2/1
         $colName = $this->colName;
 
         $colName = $this->colName;
         $u = new $this->tablePath();
         $eloquenParam = $u->eloquentParams;
-
 
 
         $tableName = [];
