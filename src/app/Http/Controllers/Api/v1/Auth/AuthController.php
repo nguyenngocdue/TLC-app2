@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Api\v1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use LdapRecord\Laravel\Auth\ListensForLdapBindFailure;
 
 class AuthController extends Controller
@@ -17,22 +16,35 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $this->validateRegister($request);
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'name_rendered' => $request->first_name . " " . $request->last_name,
-            'full_name' => $request->first_name . " " . $request->last_name,
-            'email' => $request->email,
-            'password' =>  bcrypt($request->password),
-            'settings' => []
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255|min:3',
+            'last_name' => 'required|string|max:255|min:3',
+            'email' => 'required|string|min:8|max:255|unique:users',
+            'password' => 'required|string|min:8|max:255|confirmed',
         ]);
-        $token = $user->createToken('tlc_token')->plainTextToken;
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'message' => 'Successfully created user'
-        ], 200);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->messages()
+            ], 200);
+        } else {
+
+            $user = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'name_rendered' => $request->first_name . " " . $request->last_name,
+                'full_name' => $request->first_name . " " . $request->last_name,
+                'email' => $request->email,
+                'password' =>  bcrypt($request->password),
+                'settings' => []
+            ]);
+            $token = $user->createToken('tlc_token')->plainTextToken;
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+                'message' => 'Successfully created user'
+            ], 200);
+        }
     }
     public function login(Request $request)
     {
@@ -116,15 +128,6 @@ class AuthController extends Controller
         $request->validate([
             $this->username() => 'required|string',
             'password' => 'required|string',
-        ]);
-    }
-    protected function validateRegister(Request $request)
-    {
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
         ]);
     }
     /**
