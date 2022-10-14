@@ -65,7 +65,7 @@ class CreateControllerEntityCommand extends Command
             $this->composer->dumpAutoloads();
         } else {
             $name = Str::plural($name);
-            $listName = ["{$name}RenderController", "{$name}CreateEditController", "{$name}CreateController"];
+            $listName = ["{$name}RenderController", "{$name}EditController", "{$name}CreateController"];
             $this->writeController($listName, $name, $render);
             $this->composer->dumpAutoloads();
         }

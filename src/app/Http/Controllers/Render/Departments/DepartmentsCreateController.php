@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Departments;
 
-use App\Http\Controllers\Render\EditController;
+use App\Http\Controllers\Render\CreateEditController;
 use App\Models\Department;
 
-class DepartmentsCreateController extends EditController
+class DepartmentsCreateController extends CreateEditController
 {
     protected $type = 'department';
     protected $data = Department::class;

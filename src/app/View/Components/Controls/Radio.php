@@ -32,14 +32,11 @@ class Radio extends Component
      */
     public function render()
     {
-        $span = 4; //<< 12/6/4/3/2/1
+        $span = 6; //<< 12/6/4/3/2/1
         $colName = $this->colName;
-
         $colName = $this->colName;
         $u = new $this->tablePath();
         $eloquenParam = $u->eloquentParams;
-
-
 
         $tableName = [];
         foreach ($eloquenParam as $key => $value) {
@@ -48,16 +45,15 @@ class Radio extends Component
                 $tableName = $key;
                 break;
             }
-            // $error =  "Not found " . $colName . " in eloquenParams of " . $u;
-            // return view('components.render.error')->with(compact('error'));
         }
-
-
+        if ($tableName === "") {
+            $error =  "Not found ColumnName:'" . $colName . "' in eloquenParams";
+            return view('components.render.error')->with(compact('error'));
+        }
         $pathSourceTable = $eloquenParam[$tableName][1]; // filter name of path source Workplace table
-        $tableName = ($pathSourceTable)::first()->getTable();
+        $insTable = new $pathSourceTable;
+        $tableName = $insTable->getTable();
         $dataSource = DB::table($tableName)->select('id', 'name', 'description')->get();
-
-
         $selected = $this->id;
         $entityTable = $this->tablePath;
         $currentEntity = is_null($entityTable::find($this->id)) ? "" : $entityTable::find($this->id)->getAttributes();

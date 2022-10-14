@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\User_position2s;
 
-use App\Http\Controllers\Render\EditController;
+use App\Http\Controllers\Render\CreateEditController;
 use App\Models\User_position2;
 
-class User_position2sEditController extends EditController
+class User_position2sEditController extends CreateEditController
 {
     protected $type = 'user_position2';
     protected $data = User_position2::class;

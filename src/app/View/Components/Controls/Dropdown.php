@@ -52,7 +52,7 @@ class Dropdown extends Component
             }
         }
         if ($tableName === "") {
-            $error =  "Not found " . $colName . " in eloquenParams of ";
+            $error =  "Not found ColumnName:'" . $colName . "' in eloquenParams";
             return view('components.render.error')->with(compact('error'));
         }
 
@@ -60,13 +60,11 @@ class Dropdown extends Component
 
         $pathSourceTable = $eloquenParam[$tableName][1]; // filter name of path source Workplace table
 
-
-        $tableName = $pathSourceTable::first()->getTable();
+        $insTable = new $pathSourceTable;
+        $tableName = $insTable->getTable();
 
         $dataSource = DB::table($tableName)->select('id', 'name', 'description')->get();
-
         $selected = $this->id;
-        // dd($selected);
         $entityTable = $this->tablePath;
         $currentEntity = is_null($entityTable::find($this->id)) ? "" : $entityTable::find($this->id)->getAttributes();
         $action = $this->action;

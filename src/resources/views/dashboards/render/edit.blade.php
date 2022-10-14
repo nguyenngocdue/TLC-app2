@@ -18,7 +18,7 @@
         @endswitch
     </div>
 </div>
-<div class="grid grid-rows-1 bg-gray-300">
+<div class="grid grid-rows-1 bg-gray-100">
     <div class="mx-auto flex min-h-screen items-center py-5">
         {{-- {{dd($type)}} --}}
         @php
@@ -27,7 +27,7 @@
         $id = isset($values) ? $values->id : 0;
         $idAvatar = isset($values['avatar']) ? $values['avatar']: "";
         @endphp
-        <form class="rounded-md bg-gray-50 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
+        <form class="rounded-md bg-gray-300 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
             @csrf
             {{-- <div class="mx-auto max-w-4xl flex-1"> --}}
             <div class="flex flex-col grid-cols-12">
@@ -42,10 +42,9 @@
                 if(is_array($value_column_name)) $value_column_name = 'ARRAY';
                 $col_span=$value['col_span'];
                 $hiddenRow = $action === 'create' && $column_name === 'id'? "hidden":"";
-
                 $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quater','picker_year','datetime'];
                 $valColumnNames = ['date_of_birth', 'first_date', 'last_date', 'created_at', 'updated_at'];
-
+                // dd($value_column_name);
                 $visibility = $value['hidden'] === "true" ? 'hidden' : "";
                 @endphp
                 <div class='col-span-{{$col_span}}'>
@@ -55,8 +54,6 @@
                                 <label class='block tracking-wide text-gray-800 mb-2 px-3 text-base' title='{{$column_name}}'>{{$label}}
                                 </label>
                             </div>
-                            {{-- {{dd($action)}} --}}
-
                             <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2'>
                                 @if (is_null($control))
                                 <h2 class="text-red-400">{{"Control of this $column_name has not been setted"}}</h2>
@@ -77,7 +74,7 @@
                                 @break
 
                                 @case('textarea')
-                                <x-controls.textarea colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
+                                <x-controls.textarea colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} control={{$control}} />
                                 @break
 
 

@@ -1,6 +1,6 @@
 {
     "_workplaceDropDown1": {
-        "column_name": "workplaceDropDown1",
+        "relationship": "workplaceDropDown1",
         "eloquent": "belongsTo",
         "param_1": "App\\Models\\Workplace",
         "param_2": "dropdown1",
@@ -11,13 +11,14 @@
         "label": "WorkplaceDropDown1",
         "control": null,
         "control_param": null,
+        "column_name": "dropdown1",
         "col_span": "12",
         "hidden": null,
         "new_line": null,
         "type_line": "default"
     },
     "_workplaceRadio1": {
-        "column_name": "workplaceRadio1",
+        "relationship": "workplaceRadio1",
         "eloquent": "belongsTo",
         "param_1": "App\\Models\\Workplace",
         "param_2": "radio1",
@@ -28,13 +29,14 @@
         "label": "WorkplaceRadio1",
         "control": null,
         "control_param": null,
+        "column_name": "radio1",
         "col_span": "12",
         "hidden": null,
         "new_line": null,
         "type_line": "default"
     },
     "_workplaceRel1": {
-        "column_name": "workplaceRel1",
+        "relationship": "workplaceRel1",
         "eloquent": "belongsToMany",
         "param_1": "App\\Models\\Workplace",
         "param_2": "zunit_test_1s_workplaces_rel_1",
@@ -45,13 +47,14 @@
         "label": "WorkplaceRel1",
         "control": null,
         "control_param": null,
+        "column_name": "zunit_test_1s_workplaces_rel_1",
         "col_span": "12",
         "hidden": null,
         "new_line": null,
         "type_line": "default"
     },
     "_workplaceRel2": {
-        "column_name": "workplaceRel2",
+        "relationship": "workplaceRel2",
         "eloquent": "belongsToMany",
         "param_1": "App\\Models\\Workplace",
         "param_2": "zunit_test_1s_workplaces_rel_2",
@@ -62,6 +65,7 @@
         "label": "WorkplaceRel2",
         "control": null,
         "control_param": null,
+        "column_name": "zunit_test_1s_workplaces_rel_2",
         "col_span": "12",
         "hidden": null,
         "new_line": null,
