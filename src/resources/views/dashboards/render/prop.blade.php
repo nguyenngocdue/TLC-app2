@@ -52,12 +52,14 @@
                                 <th class="px-4 py-3">Action</th>
                                 @foreach ($data as $key => $value)
                                     @if ($value['hidden'] === null)
-                                        <th class="{{ $key . '_th' }} px-4 py-3">{{ $value['label'] }}</th>
+                                        <th class="{{ $key . '_th' }} px-4 py-3" title="{{ $value['column_name'] }}">
+                                            {{ $value['label'] }}</th>
                                     @endif
                                 @endforeach
                                 @foreach ($data2 as $key => $value)
                                     @if ($value['hidden'] === null)
-                                        <th class="{{ $key . '_th' }} px-4 py-3">{{ $value['label'] }}</th>
+                                        <th class="{{ $key . '_th' }} px-4 py-3" title="{{ $value['column_name'] }}">
+                                            {{ $value['label'] }}</th>
                                     @endif
                                 @endforeach
                             </tr>
@@ -130,7 +132,7 @@
                                                             </td>
                                                         @break
 
-                                                        @default
+                                                        @case('avatar_name')
                                                             <td class="px-4 py-3">
                                                                 @if ($user->{$item['relationship']} != null)
                                                                     <x-render.user
@@ -139,6 +141,12 @@
                                                                         email="{{ $user->{$item['relationship']}->email }}" />
                                                                 @else
                                                                 @endif
+                                                            </td>
+                                                        @break
+
+                                                        @default
+                                                            <td class="px-4 py-3">
+                                                                {{ $item['control'] }}
                                                             </td>
                                                     @endswitch
                                                 @endif

@@ -2,8 +2,6 @@
     "controls": [
         "",
         "attachment",
-        "count",
-        "column",
         "checkbox",
         "dropdown",
         "number",
@@ -12,11 +10,13 @@
         "picker_date",
         "picker_month",
         "picker_week",
-        "picker_quater",
+        "picker_quarter",
         "picker_year",
         "radio",
         "switch",
+        "tag",
         "text",
-        "textarea"
+        "textarea",
+        "link"
     ]
 }

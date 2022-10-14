@@ -13,16 +13,11 @@ use LdapRecord\Laravel\Auth\ListensForLdapBindFailure;
 
 class AuthController extends Controller
 {
-    use AuthenticatesUsers, ListensForLdapBindFailure;
+    use ListensForLdapBindFailure;
 
     public function register(Request $request)
     {
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        $this->validateRegister($request);
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -33,7 +28,6 @@ class AuthController extends Controller
             'settings' => []
         ]);
         $token = $user->createToken('tlc_token')->plainTextToken;
-
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
@@ -50,15 +44,15 @@ class AuthController extends Controller
         $suffix = '@tlcmodular.com';
         if (str_contains($fields['email'], $suffix)) {
             $this->validateLogin($request);
-            $credentials = [
-                'email' => $fields['email'],
-                'password' => $fields['password'],
-            ];
             if ($this->attemptLogin($request)) {
-                response()->json(['abc' => 'oke']);
+                $user = User::where('email', $request['email'])->first();
+                $token = $user->createToken('tlc_token')->plainTextToken;
+                return response()->json([
+                    'access_token' => $token,
+                    'token_type' => 'Bearer',
+                    'message' => 'Login Successfully'
+                ]);
             }
-
-            return response()->json(['abc' => Auth::attempt(['email' => $fields['email'], 'password' => $fields['password']])]);
         } else {
             $user = User::where('email', $fields['email'])->first();
             if (!$user || !Hash::check($fields['password'], $user->password)) {
@@ -66,7 +60,7 @@ class AuthController extends Controller
                     'message' => 'Login failed'
                 ], 401);
             }
-            $token = $user->createToken('myapptoken')->plainTextToken;
+            $token = $user->createToken('tlc_token')->plainTextToken;
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
@@ -123,5 +117,23 @@ class AuthController extends Controller
             $this->username() => 'required|string',
             'password' => 'required|string',
         ]);
+    }
+    protected function validateRegister(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+    }
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard();
     }
 }

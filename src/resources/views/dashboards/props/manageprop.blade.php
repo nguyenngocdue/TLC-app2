@@ -32,6 +32,7 @@
                                     <th class="px-4 py-3">Col span</th>
                                     <th class="px-4 py-3">Hidden</th>
                                     <th class="px-4 py-3">New Line</th>
+                                    <th class="px-4 py-3">Validation</th>
                                     <th class="px-4 py-3">Action</th>
                                 </tr>
                             </thead>
@@ -107,6 +108,11 @@
                                                         @if ($columnNewLines[$key] === 'true') selected @endif>True</option>
                                                 </select>
                                             </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                <input type="text"
+                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                    name="validation[]" value="{{ $columnValidations[$key] }}">
+                                            </td>
                                             <td class="px-4 py-3 text-center text-sm">
                                                 @if ($colorLines[$key] == 'removed')
                                                     <button class="btn btn-danger btn-delete"
@@ -168,6 +174,11 @@
                                                     <option value=""></option>
                                                     <option value="true">True</option>
                                                 </select>
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                <input type="text"
+                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                    name="validation[]" value="">
                                             </td>
                                             <td class="px-4 py-3 text-center text-sm">
                                                 @if (isset($colorLines))

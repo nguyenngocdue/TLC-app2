@@ -45,6 +45,7 @@ abstract class ManagePropController extends Controller
             $columnColSpans = [];
             $columnHidden = [];
             $columnNewLines = [];
+            $columnValidations = [];
             $colorLines = [];
             foreach ($dataManage as $key => $data) {
                 $names[$key] = $key;
@@ -55,12 +56,13 @@ abstract class ManagePropController extends Controller
                 $columnColSpans[$key] = $data['col_span'];
                 $columnHidden[$key] = $data['hidden'];
                 $columnNewLines[$key] = $data['new_line'];
+                $columnValidations[$key] = $data['validation'];
                 $colorLines[$key] = $data['type_line'];
             }
             $diff1 = array_diff($columnNames, Schema::getColumnListing(Str::plural($type)));
             $diff2 = array_diff(Schema::getColumnListing(Str::plural($type)), $columnNames);
             if (empty($diff1) && empty($diff2)) {
-                return view('dashboards.props.manageprop')->with(compact('type', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
+                return view('dashboards.props.manageprop')->with(compact('type', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnHidden', 'columnNewLines', 'columnValidations', 'colorLines'));
             } else {
                 foreach ($diff2 as $value) {
                     $names['_' . $value] = '_' . $value;
@@ -72,12 +74,13 @@ abstract class ManagePropController extends Controller
                     $columnColSpans['_' . $value] = "12";
                     $columnHidden['_' . $value] = "false";
                     $columnNewLines['_' . $value] = "false";
+                    $columnValidations['_' . $value] = "";
                     $colorLines['_' . $value] = "new";
                 }
                 foreach ($diff1 as $value) {
                     $colorLines['_' . $value] = "removed";
                 }
-                return view('dashboards.props.manageprop')->with(compact('type', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
+                return view('dashboards.props.manageprop')->with(compact('type', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnHidden', 'columnNewLines', 'columnValidations', 'colorLines'));
             }
         }
     }
@@ -95,6 +98,7 @@ abstract class ManagePropController extends Controller
             $array['hidden'] = $data['hidden'][$key];
             $array['new_line'] = $data['new_line'][$key];
             $array['type_line'] = "default";
+            $array['validation'] = "";
             $manage[$name] = $array;
         }
         try {

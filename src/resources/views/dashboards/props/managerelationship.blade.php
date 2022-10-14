@@ -38,7 +38,7 @@
                             </thead>
                             <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
                                 @php
-                                    $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/props/controls.json'), true)['controls'];
+                                    $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/relationships/controls.json'), true)['controls'];
                                 @endphp
                                 @if (isset($names))
                                     @php

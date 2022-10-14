@@ -45,6 +45,9 @@ $sideBar = json_decode(file_get_contents(storage_path() . '/json/configs/view/da
                     @endroleset
                 @else
                     <div class="relative px-6 py-3">{{ $group['title'] }}</div>
+                    @php
+                        sort($group['items']);
+                    @endphp
                     @foreach ($group['items'] as $key => $item)
                         <div class="relative px-6 py-3" x-data="{ isActive: false, open: {{ Request::is($item['href_parent'] . '/*') ? 'true' : 'false' }} }">
                             <a href="#"
