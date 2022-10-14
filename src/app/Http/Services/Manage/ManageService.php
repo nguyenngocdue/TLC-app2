@@ -47,8 +47,7 @@ class ManageService
     }
     public function destroy($name, $type, $fileName)
     {
-        $type = Str::plural($type);
-        [$dataManage] = $this->path($type, $fileName);
+        $dataManage = $this->path($type, $fileName);
         unset($dataManage[$name]);
         try {
             $this->checkUploadFile($dataManage, $type, $fileName);
