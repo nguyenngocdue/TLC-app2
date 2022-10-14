@@ -16,7 +16,7 @@ use Ndc\Spatiecustom\Traits\HasRoleSets;
 
 class User extends Authenticatable implements LdapAuthenticatable
 {
-    use Notifiable, AuthenticatesWithLdap, HasLdapUser, HasFactory, HasRoleSets, Searchable, CheckPermissionEntities;
+    use Notifiable, AuthenticatesWithLdap, HasLdapUser, HasFactory, HasRoleSets, Searchable, CheckPermissionEntities, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
