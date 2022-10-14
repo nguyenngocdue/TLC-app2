@@ -1,28 +1,13 @@
 <div>
-    {{-- {{dd($dataTime, $control === 'datetime')}} --}}
-    @switch($control)
-    @case('datetime')
-    <p class="text-gray-600 text-xs">{{$dataTime[$control]}}</p>
+
+    @if(empty($day) && isset($dataTime[$control]))
+    <p class="text-gray-600 text-xs">00/00/0000</p>
+    @else
+    @foreach($dataTime as $key => $value)
+    @if($key === $control && empty($day)!= true)
+    <p class="text-gray-600 text-xs">{{$value}}</p>
     @break
-    @case('picker_date')
-    <p class="text-gray-600 text-xs">{{$dataTime[$control]}}</p>
-    @break
-    @case('picker_time')
-    <p class="text-gray-600 text-xs">{{$dataTime[$control]}}</p>
-    @break
-    @case('picker_year')
-    <p class="text-gray-600 text-xs">{{$dataTime[$control]}}</p>
-    @break
-    @case('picker_week')
-    <p class="text-gray-600 text-xs">{{$dataTime[$control]}}</p>
-    @break
-    @case('picker_month')
-    <p class="text-gray-600 text-xs">{{$dataTime[$control]}}</p>
-    @break
-    @case('picker_quater')
-    <p class="text-gray-600 text-xs">{{$dataTime[$control]}}</p>
-    @break
-    @default
-    @break
-    @endswitch
+    @endif
+    @endforeach
+    @endif
 </div>

@@ -40,13 +40,6 @@ class Translationtime extends Component
         $control = $this->control;
         $dateTimeInstance = date_create(str_replace('-', '/', $day));
 
-        // dd($dateTimeInstance);
-
-        // if (date_default_timezone_get()) {
-        //     echo ("default time zone: " . date_default_timezone_get());
-        //     echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-        // }
-
         $dateTime = date_format($dateTimeInstance, "d/m/Y h:i:s");
 
         $week = $dateTimeInstance->format("W");
@@ -58,18 +51,15 @@ class Translationtime extends Component
         $quater = ceil($monthNumber / 3);
 
         $timeControls = $this->timeControls;
-
         $dataTime = [
-            'datetime' => $dateTime,
-            'picker_date' => $date,
-            'picker_time' => $time,
-            'picker_year' => $year,
-            'picker_week' => 'W' . $week . '-' . $year,
-            'picker_month' => $monthNumber . '-' . $year,
-            'picker_quater' => 'Q' . $quater . '-' . $year,
+            $timeControls[0] => $time,
+            $timeControls[1] => $date,
+            $timeControls[2] => $monthNumber . '-' . $year,
+            $timeControls[3] => 'W' . $week . '-' . $year,
+            $timeControls[4] => 'Q' . $quater . '-' . $year,
+            $timeControls[5] => $year,
+            $timeControls[6] => $dateTime,
         ];
-
-
-        return view('components.controls.translationtime')->with(compact('dataTime', 'control'));
+        return view('components.controls.translationtime')->with(compact('day', 'dataTime', 'control'));
     }
 }

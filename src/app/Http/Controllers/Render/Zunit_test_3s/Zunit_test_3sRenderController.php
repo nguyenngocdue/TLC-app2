@@ -10,8 +10,8 @@ class Zunit_test_3sRenderController extends RenderController
     protected $type = 'zunit_test_3';
     protected $typeModel = Zunit_test_3::class;
     protected $permissionMiddleware = [
-        'read' => 'read-zunit_test_3',
-        'edit' => 'read-zunit_test_3|create-zunit_test_3|edit-zunit_test_3|edit-others-zunit_test_3',
-        'delete' => 'read-zunit_test_3|create-zunit_test_3|edit-zunit_test_3|edit-others-zunit_test_3|delete-zunit_test_3|delete-others-zunit_test_3'
+        'read' => 'read-zunit_test_3s',
+        'edit' => 'read-zunit_test_3s|create-zunit_test_3s|edit-zunit_test_3s|edit-others-zunit_test_3s',
+        'delete' => 'read-zunit_test_3s|create-zunit_test_3s|edit-zunit_test_3s|edit-others-zunit_test_3s|delete-zunit_test_3s|delete-others-zunit_test_3s'
     ];
 }

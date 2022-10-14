@@ -42,32 +42,30 @@ class Dropdown extends Component
 
         $colName = $this->colName;
         $u = new $this->tablePath();
-        $eloquenParam = $u->eloquentParams;
+        $eloquentParam = $u->eloquentParams;
 
         $tableName = "";
-        foreach ($eloquenParam as $key => $value) {
+        foreach ($eloquentParam as $key => $value) {
             if ($value[2] === $colName) {
                 $tableName = $key;
                 break;
             }
         }
         if ($tableName === "") {
-            $error =  "Not found ColumnName:'" . $colName . "' in eloquenParams";
+            $error =  "Not found ColumnName:'" . $colName . "' in eloquentParams";
             return view('components.render.error')->with(compact('error'));
         }
 
-        // dd($eloquenParam, $tableName, $colName);
-
-        $pathSourceTable = $eloquenParam[$tableName][1]; // filter name of path source Workplace table
+        $pathSourceTable = $eloquentParam[$tableName][1]; // filter name of path source Workplace table
 
         $insTable = new $pathSourceTable;
         $tableName = $insTable->getTable();
-
         $dataSource = DB::table($tableName)->select('id', 'name', 'description')->get();
         $selected = $this->id;
         $entityTable = $this->tablePath;
         $currentEntity = is_null($entityTable::find($this->id)) ? "" : $entityTable::find($this->id)->getAttributes();
         $action = $this->action;
+
         return view('components.controls.dropdown')->with(compact('dataSource', 'selected', 'colName', 'currentEntity', 'tableName', 'action'));
     }
 }

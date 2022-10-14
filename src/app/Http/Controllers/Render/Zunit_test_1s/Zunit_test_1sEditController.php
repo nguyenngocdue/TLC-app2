@@ -9,5 +9,4 @@ class Zunit_test_1sEditController extends CreateEditController
 {
     protected $type = 'zunit_test_1';
     protected $data = Zunit_test_1::class;
-    protected $action = "edit";
 }

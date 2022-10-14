@@ -58,6 +58,6 @@ class Radio extends Component
         $entityTable = $this->tablePath;
         $currentEntity = is_null($entityTable::find($this->id)) ? "" : $entityTable::find($this->id)->getAttributes();
         $action = $this->action;
-        return view('components.controls.radio')->with(compact('dataSource', 'selected', 'colName', 'currentEntity', 'span', 'action'));
+        return view('components.controls.radio')->with(compact('dataSource', 'tableName', 'selected', 'colName', 'currentEntity', 'span', 'action'));
     }
 }

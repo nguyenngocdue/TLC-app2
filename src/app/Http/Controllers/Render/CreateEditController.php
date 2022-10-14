@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
@@ -44,6 +45,8 @@ abstract class CreateEditController extends Controller
         $action = $this->action;
         $values = $action === "edit" ? $currentUser : [];
 
+
+
         $tablePath = $this->data;
 
         // dd($type, $action);
@@ -52,9 +55,6 @@ abstract class CreateEditController extends Controller
 
     public function update(Request $request, $id)
     {
-
-        // dd(addslashes('What does "yolo" mean?'));
-        // dd($request->input());
         $data = $this->data::find($id);
         $dataInput = $request->input();
 
@@ -69,7 +69,6 @@ abstract class CreateEditController extends Controller
             }
         }
 
-        // dd($itemAttachment, $idMediaArray);
 
         // foreach ($props as $key => $value) {
         //     $request->validate([$value["column_name"] => $value['validation']]);
@@ -100,16 +99,17 @@ abstract class CreateEditController extends Controller
     }
     public function index()
     {
+
         $action = $this->action;
         $props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
         $type = $this->type;
         $values = [];
         $tablePath = $this->data;
+
         return view('dashboards.render.edit')->with(compact('props', 'type', 'action', 'tablePath'));
     }
     public function store(Request $request)
     {
-
         $dataInput = $request->input();
         unset($dataInput['_token']);
         unset($dataInput['_method']);
