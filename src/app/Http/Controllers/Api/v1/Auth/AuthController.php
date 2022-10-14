@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Api\v1\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use LdapRecord\Laravel\Auth\ListensForLdapBindFailure;
 
 class AuthController extends Controller
 {
+    use AuthenticatesUsers, ListensForLdapBindFailure;
+
     public function register(Request $request)
     {
         $request->validate([
@@ -25,70 +29,49 @@ class AuthController extends Controller
             'name_rendered' => $request->first_name . " " . $request->last_name,
             'full_name' => $request->first_name . " " . $request->last_name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' =>  bcrypt($request->password),
+            'settings' => []
         ]);
-        $token = $user->createToken('tlc_token')->accessToken;
+        $token = $user->createToken('tlc_token')->plainTextToken;
 
         return response()->json([
-            'token' => $token,
+            'access_token' => $token,
+            'token_type' => 'Bearer',
             'message' => 'Successfully created user'
         ], 200);
     }
     public function login(Request $request)
     {
-        $request->validate([
+        $fields = $request->validate([
             'email' => 'required|string',
             'password' => 'required|string',
             'remember_me' => 'boolean',
         ]);
         $suffix = '@tlcmodular.com';
-        if (str_contains($request->email, $suffix)) {
-            $credentials = array(
-                'samaccountname' => $request->email,
-                'password' => $request->password,
-            );
-            dd(Auth::attempt($credentials));
-            if (!Auth::attempt($credentials)) {
-                return response()->json(['error' => 'Unauthorized'], 401);
-            } else {
-                $user = $request->user();
-                $tokenResult = $user->createToken('tlc_token');
-                $token = $tokenResult->token;
-                if ($request->remember_me) {
-                    $token->expires_at = Carbon::now()->addWeeks(1);
-                }
-                $token->save();
-                return response()->json([
-                    'access_token' => $tokenResult->accessToken,
-                    'token_type' => 'Bearer',
-                    'expires_at' => Carbon::parse(
-                        $tokenResult->token->expires_at
-                    )->toDateTimeString()
-                ]);
+        if (str_contains($fields['email'], $suffix)) {
+            $this->validateLogin($request);
+            $credentials = [
+                'email' => $fields['email'],
+                'password' => $fields['password'],
+            ];
+            if ($this->attemptLogin($request)) {
+                response()->json(['abc' => 'oke']);
             }
+
+            return response()->json(['abc' => Auth::attempt(['email' => $fields['email'], 'password' => $fields['password']])]);
         } else {
-            $credentials = array(
-                'email' => $request->email,
-                'password' => $request->password,
-            );
-            if (!Auth::attempt($credentials)) {
-                return response()->json(['error' => 'Unauthorized'], 401);
-            } else {
-                $user = $request->user();
-                $tokenResult = $user->createToken('tlc_token');
-                $token = $tokenResult->token;
-                if ($request->remember_me) {
-                    $token->expires_at = Carbon::now()->addWeeks(1);
-                }
-                $token->save();
-                return response()->json([
-                    'access_token' => $tokenResult->accessToken,
-                    'token_type' => 'Bearer',
-                    'expires_at' => Carbon::parse(
-                        $tokenResult->token->expires_at
-                    )->toDateTimeString()
-                ]);
+            $user = User::where('email', $fields['email'])->first();
+            if (!$user || !Hash::check($fields['password'], $user->password)) {
+                return response([
+                    'message' => 'Login failed'
+                ], 401);
             }
+            $token = $user->createToken('myapptoken')->plainTextToken;
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+                'message' => 'Login Successfully'
+            ]);
         }
     }
     public function details()
@@ -97,7 +80,7 @@ class AuthController extends Controller
     }
     public function logout(Request $request)
     {
-        $request->user()->token()->revoke();
+        $request->user()->tokens()->delete();
         return response()->json([
             'message' => 'Successfully logged out'
         ], 200);
@@ -107,5 +90,38 @@ class AuthController extends Controller
         return response()->json([
             'user' => $request->user()
         ], 200);
+    }
+    public function email()
+    {
+        return 'email';
+    }
+    protected function credentials(Request $request)
+    {
+        return [
+            'mail' => $request->email,
+            'password' => $request->password,
+            'fallback' => [
+                'email' => $request->email,
+                'password' => $request->password,
+            ],
+        ];
+    }
+    protected function attemptLogin(Request $request)
+    {
+        return $this->guard()->attempt(
+            $this->credentials($request),
+            $request->boolean('remember')
+        );
+    }
+    public function username()
+    {
+        return 'email';
+    }
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+        ]);
     }
 }

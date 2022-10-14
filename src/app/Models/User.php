@@ -64,14 +64,14 @@ class User extends Authenticatable implements LdapAuthenticatable
         "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
         // "userTypes" => ['hasMany', UserType::class, 'user_type'],
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace'],
-        "userTypes" => ['hasMany', User_type::class, 'user_type'],
-        "categories" => ['hasMany', User_category::class, 'category'],
-        "positionPres" => ['hasMany', User_position_pre::class, 'position_prefix'],
-        "position1" => ['hasMany', User_position1::class, 'position_1'],
-        "position2" => ['hasMany', User_position2::class, 'position_2'],
-        "position3" => ['hasMany', User_position3::class, 'position_3'],
-        "disciplines" => ['hasMany', User_discipline::class, 'discipline'],
-        "departments" => ['hasMany', Department::class, 'department'],
+        "userTypes" => ['belongsTo', User_type::class, 'user_type'],
+        "categories" => ['belongsTo', User_category::class, 'category'],
+        "positionPres" => ['belongsTo', User_position_pre::class, 'position_prefix'],
+        "position1" => ['belongsTo', User_position1::class, 'position_1'],
+        "position2" => ['belongsTo', User_position2::class, 'position_2'],
+        "position3" => ['belongsTo', User_position3::class, 'position_3'],
+        "disciplines" => ['belongsTo', User_discipline::class, 'discipline'],
+        "departments" => ['belongsTo', Department::class, 'department'],
     ];
     protected $guard_name = 'web';
     // public function files()

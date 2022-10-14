@@ -14,7 +14,7 @@ class User_category extends Model
     protected $primaryKey = 'id';
     protected $table = 'user_categories';
     public $eloquentParams = [
-        "user" => ['belongsTo', User::class, 'category'],
+        "user" => ['hasMany', User::class, 'category', 'id'],
     ];
     public function user()
     {

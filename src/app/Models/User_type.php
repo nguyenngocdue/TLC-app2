@@ -15,7 +15,7 @@ class User_type extends Model
     protected $table = 'user_types';
 
     public $eloquentParams = [
-        "user" => ['belongsTo', User::class, 'user_type'],
+        "user" => ['hasMany', User::class, 'user_type', 'id'],
     ];
     public function user()
     {

@@ -15,7 +15,7 @@ class User_discipline extends Model
     protected $table = 'user_disciplines';
 
     public $eloquentParams = [
-        "user" => ['belongsTo', User::class, 'discipline'],
+        "user" => ['hasMany', User::class, 'discipline', 'id'],
     ];
     public function user()
     {

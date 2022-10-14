@@ -15,7 +15,7 @@ class User_position_pre extends Model
     protected $table = 'user_position_pres';
 
     public $eloquentParams = [
-        "user" => ['belongsTo', User::class, 'position_prefix'],
+        "user" => ['hasMany', User::class, 'position_prefix', 'id'],
     ];
     public function user()
     {

@@ -16,7 +16,7 @@ class Workplace extends Model
 
     public $eloquentParams = [
         // "user" => ['belongsTo' , User::class, 'owner_id'],
-        "user" => ['hasMany', User::class, 'workplace'],
+        "user" => ['hasMany', User::class, 'workplace', 'id'],
     ];
     public function user()
     {

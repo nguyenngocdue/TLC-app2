@@ -14,7 +14,7 @@ class User_time_keep_type extends Model
     protected $primaryKey = 'id';
     protected $table = 'user_time_keep_types';
     public $eloquentParams = [
-        "user" => ['belongsTo', User::class, 'time_keeping_type'],
+        "user" => ['hasMany', User::class, 'time_keeping_type', 'id'],
     ];
     public function user()
     {
