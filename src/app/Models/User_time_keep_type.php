@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 class User_time_keep_type extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = ["name"];
+    protected $fillable = ["name", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'user_time_keep_types';
     public $eloquentParams = [

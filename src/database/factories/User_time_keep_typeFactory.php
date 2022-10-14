@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Media>
  */
-class UserTimeKeepingTypeFactory extends Factory
+class User_time_keep_typeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,6 +20,7 @@ class UserTimeKeepingTypeFactory extends Factory
     {
         return [
             "name" => 'TSW',
+            "slug" => 'tsw',
         ];
     }
 }

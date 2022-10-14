@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('user_time_keep_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('description')->nullable();
+            $table->string('slug');
             $table->timestamps();
         });
     }

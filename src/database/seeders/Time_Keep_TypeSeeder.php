@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\UserTimeKeepingType;
+use App\Models\User_time_keep_type;
 use Illuminate\Database\Seeder;
 
-class TimeKeepingTypeSeeder extends Seeder
+class Time_Keep_TypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class TimeKeepingTypeSeeder extends Seeder
      */
     public function run()
     {
-        UserTimeKeepingType::factory()
+        User_time_keep_type::factory()
             ->count(1)
             ->create();
     }
