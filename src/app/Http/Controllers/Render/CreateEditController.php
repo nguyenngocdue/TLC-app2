@@ -7,6 +7,7 @@ use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 
@@ -15,12 +16,13 @@ abstract class CreateEditController extends Controller
 
     protected $type;
     protected $data;
+    protected $action;
+
     protected $upload;
     protected $branchName = 'entities';
     protected $disk = 'json';
     protected $r_fileName = 'props.json';
     protected $readingFileService;
-    protected $action;
     public function __construct(UploadService $upload, ReadingFileService $readingFileService)
     {
         $this->upload = $upload;
@@ -43,20 +45,32 @@ abstract class CreateEditController extends Controller
         $props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
         $type = Str::plural($this->type);
         $action = $this->action;
-        $values = $action === "edit" ? $currentUser : [];
+        $values = $action === "create" ? "" : $currentUser;
 
 
 
+        // dd($currentUser->id, $id);
         $tablePath = $this->data;
 
         // dd($type, $action);
-        return view('dashboards.render.edit')->with(compact('props', 'values', 'type', 'action', 'currentUser', 'tablePath'));
+        return view('dashboards.render.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentUser', 'tablePath'));
     }
 
     public function update(Request $request, $id)
     {
+        // dd($request->input());
         $data = $this->data::find($id);
         $dataInput = $request->input();
+
+        // Validation
+        $props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+        $itemsValidation = [];
+        foreach ($props as $key => $value) {
+            if ($value['validation'] != "") {
+                $itemsValidation[$value['column_name']] = "required";
+            }
+        }
+        $request->validate($itemsValidation);
 
 
         // upload multiple pictures
@@ -69,14 +83,12 @@ abstract class CreateEditController extends Controller
             }
         }
 
-
-        // foreach ($props as $key => $value) {
-        //     $request->validate([$value["column_name"] => $value['validation']]);
-        // }
+        // Update dataInput to database
         foreach ($props as $value) {
             $key = $value['column_name'];
             $data->{$key} = request($key);
         }
+
         // chanage value from toggle
         foreach ($props as $key => $value) {
             if ($value['control'] === 'toggle') {
@@ -99,34 +111,49 @@ abstract class CreateEditController extends Controller
     }
     public function index()
     {
-
         $action = $this->action;
         $props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-        $type = $this->type;
-        $values = [];
-        $tablePath = $this->data;
 
-        return view('dashboards.render.edit')->with(compact('props', 'type', 'action', 'tablePath'));
+        if ($props  === false) {
+            $error =  "Please check `$this->r_fileName` file  of `$this->type`";
+            return view('components.render.error')->with(compact('error'));
+        }
+
+        $type = $this->type;
+        $tablePath = $this->data;
+        $values = "";
+
+        return view('dashboards.render.createEdit')->with(compact('props', 'type', 'action', 'tablePath', 'values'));
     }
     public function store(Request $request)
     {
+        $props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+
+        // dd($request->input());
+        // Validation
+        $itemsValidation = [];
+        foreach ($props as $key => $value) {
+            if ($value['validation'] != "") {
+                $itemsValidation[$value['column_name']] = "required";
+            }
+        }
+        // Validation.
+        Validator::make($request->all(), $itemsValidation);
+        $request->validate($itemsValidation);
+
+
         $dataInput = $request->input();
         unset($dataInput['_token']);
         unset($dataInput['_method']);
         $db = $this->data;
 
-        // Check existing email
-        $emailsDB = $db::all()->pluck('email');
-        // $check = in_array($dataInput["email"], $emailsDB);
-
         $array = [];
         foreach ($dataInput as $key => $value) {
             $array[$key] = $value;
         }
+        // dd($array);
         $newUser = $db::create($array);
-        // dd($newUser);
         $idNewUser = $newUser->fresh()->id;
-
 
         // Save picture
         $idMediaArray = $this->upload->store($request, $idNewUser);
@@ -153,8 +180,6 @@ abstract class CreateEditController extends Controller
             };
         }
         $type = Str::plural($this->type);
-
-
 
         return redirect(route("{$type}_edit.update", $idNewUser));
     }

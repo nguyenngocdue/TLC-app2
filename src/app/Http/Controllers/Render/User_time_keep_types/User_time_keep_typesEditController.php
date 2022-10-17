@@ -9,4 +9,5 @@ class User_time_keep_typesEditController extends CreateEditController
 {
     protected $type = 'user_time_keep_type';
     protected $data = User_time_keep_type::class;
+    protected $action = "edit";
 }

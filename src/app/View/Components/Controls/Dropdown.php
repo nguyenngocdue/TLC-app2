@@ -44,27 +44,36 @@ class Dropdown extends Component
         $u = new $this->tablePath();
         $eloquentParam = $u->eloquentParams;
 
-        $tableName = "";
+        $keyNameEloquent = "";
         foreach ($eloquentParam as $key => $value) {
             if ($value[2] === $colName) {
-                $tableName = $key;
+                $keyNameEloquent = $key;
                 break;
             }
         }
-        if ($tableName === "") {
-            $error =  "Not found ColumnName:'" . $colName . "' in eloquentParams";
+        // dd($this->tablePath, $eloquentParam, $tableName, $colName);
+
+        if ($keyNameEloquent === "") {
+            $error =  "Not found ColumnName:'" . $colName . "' in eloquentParams of model folder";
             return view('components.render.error')->with(compact('error'));
         }
 
-        $pathSourceTable = $eloquentParam[$tableName][1]; // filter name of path source Workplace table
+
+        $pathSourceTable = $eloquentParam[$keyNameEloquent][1]; // filter name of path source Workplace table
 
         $insTable = new $pathSourceTable;
         $tableName = $insTable->getTable();
         $dataSource = DB::table($tableName)->select('id', 'name', 'description')->get();
         $selected = $this->id;
+
         $entityTable = $this->tablePath;
         $currentEntity = is_null($entityTable::find($this->id)) ? "" : $entityTable::find($this->id)->getAttributes();
+
+
         $action = $this->action;
+        // dd($tableName, $entityTable, $currentEntity, $this->id);
+
+        // dd($tableName, $pathSourceTable, $tableName, $dataSource);
 
         return view('components.controls.dropdown')->with(compact('dataSource', 'selected', 'colName', 'currentEntity', 'tableName', 'action'));
     }
