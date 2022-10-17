@@ -1,90 +1,90 @@
 {
-    "_id": {
-        "column_name": "id",
-        "column_type": "bigint",
-        "label": "Id",
-        "control": null,
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": ""
-    },
-    "_text1": {
-        "column_name": "text1",
-        "column_type": "text",
-        "label": "Text1",
-        "control": "text",
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": ""
-    },
-    "_text2": {
-        "column_name": "text2",
-        "column_type": "text",
-        "label": "Text2",
-        "control": "text",
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": ""
-    },
-    "_dropdown1": {
-        "column_name": "dropdown1",
-        "column_type": "bigint",
-        "label": "Dropdown1",
-        "control": "dropdown",
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": ""
-    },
-    "_radio1": {
-        "column_name": "radio1",
-        "column_type": "bigint",
-        "label": "Radio1",
-        "control": "radio",
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": ""
-    },
-    "_boolean1": {
-        "column_name": "boolean1",
-        "column_type": "bigint",
-        "label": "Boolean1",
-        "control": "switch",
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": ""
-    },
-    "_created_at": {
-        "column_name": "created_at",
-        "column_type": "datetime",
-        "label": "Created At",
-        "control": "datetime",
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": ""
-    },
-    "_updated_at": {
-        "column_name": "updated_at",
-        "column_type": "datetime",
-        "label": "Updated At",
-        "control": "datetime",
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": ""
-    }
+	"_id": {
+		"column_name": "id",
+		"column_type": "bigint",
+		"label": "Id",
+		"control": "id",
+		"col_span": "12",
+		"hidden": true,
+		"new_line": null,
+		"type_line": "default",
+		"validation": ""
+	},
+	"_text1": {
+		"column_name": "text1",
+		"column_type": "text",
+		"label": "Text1",
+		"control": "text",
+		"col_span": "12",
+		"hidden": null,
+		"new_line": null,
+		"type_line": "default",
+		"validation": ""
+	},
+	"_text2": {
+		"column_name": "text2",
+		"column_type": "text",
+		"label": "Text2",
+		"control": "textarea",
+		"col_span": "12",
+		"hidden": null,
+		"new_line": null,
+		"type_line": "default",
+		"validation": ""
+	},
+	"_dropdown1": {
+		"column_name": "dropdown1",
+		"column_type": "bigint",
+		"label": "Dropdown1",
+		"control": "dropdown",
+		"col_span": "12",
+		"hidden": null,
+		"new_line": null,
+		"type_line": "default",
+		"validation": ""
+	},
+	"_radio1": {
+		"column_name": "radio1",
+		"column_type": "bigint",
+		"label": "Radio1",
+		"control": "radio",
+		"col_span": "12",
+		"hidden": null,
+		"new_line": null,
+		"type_line": "default",
+		"validation": ""
+	},
+	"_boolean1": {
+		"column_name": "boolean1",
+		"column_type": "bigint",
+		"label": "Boolean1",
+		"control": "switch",
+		"col_span": "12",
+		"hidden": null,
+		"new_line": null,
+		"type_line": "default",
+		"validation": ""
+	},
+	"_created_at": {
+		"column_name": "created_at",
+		"column_type": "datetime",
+		"label": "Created At",
+		"control": "picker_datetime",
+		"col_span": "12",
+		"hidden": null,
+		"new_line": null,
+		"type_line": "default",
+		"validation": ""
+	},
+	"_updated_at": {
+		"column_name": "updated_at",
+		"column_type": "datetime",
+		"label": "Updated At",
+		"control": "picker_datetime",
+		"col_span": "12",
+		"hidden": null,
+		"new_line": null,
+		"type_line": "default",
+		"validation": ""
+	}
 }

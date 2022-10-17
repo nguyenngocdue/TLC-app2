@@ -346,7 +346,7 @@
         "label": "Password",
         "control": "text",
         "col_span": "12",
-        "hidden": "true",
+        "hidden": "false",
         "new_line": null,
         "type_line": "default",
         "validation": "required"

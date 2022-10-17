@@ -74,10 +74,13 @@
                                 <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
                                 @break
 
+                                @case('id')
+                                <x-controls.id colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
+                                @break
+
                                 @case('textarea')
                                 <x-controls.textarea colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} control={{$control}} />
                                 @break
-
 
                                 @case ('dropdown')
                                 <x-controls.dropdown id={{$id}} colName={{$column_name}} type={{$type}} tablePath={{$tablePath}} action={{$action}} />
@@ -111,7 +114,7 @@
 
                                 @switch ($action)
                                 @case('edit')
-                                <x-controls.translationtime :timeControls="$timeControls" :valColumnNames="$valColumnNames" id={{$id}} control={{$control}} columnName={{$column_name}} />
+                                <x-controls.translationtime tablePath={{$tablePath}} :timeControls="$timeControls" :valColumnNames="$valColumnNames" id={{$id}} control={{$control}} columnName={{$column_name}} />
                                 @break
 
                                 @endswitch

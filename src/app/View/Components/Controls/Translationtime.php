@@ -14,7 +14,8 @@ class Translationtime extends Component
     private $columnName;
     private $valColumnNames;
     private $timeControls;
-    public function __construct($timeControls, $valColumnNames, $columnName, $control, $id)
+    private $tablePath;
+    public function __construct($timeControls, $valColumnNames, $columnName, $control, $id, $tablePath)
     {
 
         $this->control = $control;
@@ -22,6 +23,7 @@ class Translationtime extends Component
         $this->columnName = $columnName;
         $this->valColumnNames = $valColumnNames;
         $this->timeControls = $timeControls;
+        $this->tablePath = $tablePath;
     }
 
     public function render()
@@ -29,12 +31,16 @@ class Translationtime extends Component
 
         $selected = $this->id;
         $columnName = $this->columnName;
-        $currentUser = DB::table('users')->where('id', $selected)->first();
+
+        // get table's name in database
+        $insTable = new $this->tablePath;
+        $tableName = $insTable->getTable();
+        $currentTable = DB::table($tableName)->where('id', $selected)->first();
 
         $day = '';
         $valColumnNames = $this->valColumnNames;
-        if (in_array($columnName, $valColumnNames) && isset($currentUser->$columnName)) {
-            $day = $currentUser->$columnName;
+        if (in_array($columnName, $valColumnNames) && isset($currentTable->$columnName)) {
+            $day = $currentTable->$columnName;
         }
 
         $control = $this->control;
