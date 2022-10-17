@@ -68,7 +68,7 @@ class UpdateSideBarConfigCommand extends Command
                     $ucfirst = Str::ucfirst($value);
                     $var =
                         [
-                            "title" => "$ucfirst Management",
+                            "title" => "$ucfirst",
                             "icon" => "nav-icon fas fa-user",
                             "href_parent" => "dashboard/$value",
                             "items" => [
@@ -94,7 +94,7 @@ class UpdateSideBarConfigCommand extends Command
                 foreach ($valueDevUpdate as $value) {
                     $ucfirst = Str::ucfirst($value);
                     $var =  [
-                        "title" => "$ucfirst Management",
+                        "title" => "$ucfirst",
                         "icon" => "nav-icon fas fa-user",
                         "href_parent" => "propman/$value",
                         "items" => [
