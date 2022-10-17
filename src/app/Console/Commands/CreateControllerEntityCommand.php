@@ -109,13 +109,13 @@ class CreateControllerEntityCommand extends Command
         if (!$render) {
             $stub1 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.manageprop.stub')
                 ? $customPath
-                : $this->stubPath() . '/controller.manageprop.stub';
+                : $this->stubPath() . '/ndc.controller.manageprop.stub';
             $stub2 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.managerelationship.stub')
                 ? $customPath
-                : $this->stubPath() . '/controller.managerelationship.stub';
+                : $this->stubPath() . '/ndc.controller.managerelationship.stub';
             $stub3 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.managetableprop.stub')
                 ? $customPath
-                : $this->stubPath() . '/controller.managetableprop.stub';
+                : $this->stubPath() . '/ndc.controller.managetableprop.stub';
             $stubs = [$stub1, $stub2, $stub3];
             $result = [];
             foreach ($stubs as $stub) {
@@ -125,13 +125,13 @@ class CreateControllerEntityCommand extends Command
         } else {
             $stub1 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.render.stub')
                 ? $customPath
-                : $this->stubPath() . '/controller.render.stub';
+                : $this->stubPath() . '/ndc.controller.render.stub';
             $stub2 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.edit.stub')
                 ? $customPath
-                : $this->stubPath() . '/controller.edit.stub';
+                : $this->stubPath() . '/ndc.controller.edit.stub';
             $stub3 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.create.stub')
                 ? $customPath
-                : $this->stubPath() . '/controller.create.stub';
+                : $this->stubPath() . '/ndc.controller.create.stub';
             $stubs = [$stub1, $stub2, $stub3];
             $result = [];
             foreach ($stubs as $stub) {

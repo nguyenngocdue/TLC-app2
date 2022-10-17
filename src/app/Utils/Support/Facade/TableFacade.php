@@ -8,6 +8,6 @@ class TableFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'Table';
+        return 'table';
     }
 }

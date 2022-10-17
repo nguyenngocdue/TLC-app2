@@ -113,17 +113,17 @@ class MigrationRelationShipCreator
     protected function getStub($table, $create)
     {
         if (is_null($table)) {
-            $stub = $this->files->exists($customPath = $this->customStubPath . '/migrationrelationship.create.stub')
+            $stub = $this->files->exists($customPath = $this->customStubPath . '/ndc.migrationrelationship.create.stub')
                 ? $customPath
-                : $this->stubPath() . '/migrationrelationship.create.stub';
+                : $this->stubPath() . '/ndc.migrationrelationship.create.stub';
         } elseif ($create) {
-            $stub = $this->files->exists($customPath = $this->customStubPath . '/migrationrelationship.create.stub')
+            $stub = $this->files->exists($customPath = $this->customStubPath . '/ndc.migrationrelationship.create.stub')
                 ? $customPath
-                : $this->stubPath() . '/migrationrelationship.create.stub';
+                : $this->stubPath() . '/ndc.migrationrelationship.create.stub';
         } else {
-            $stub = $this->files->exists($customPath = $this->customStubPath . '/migrationrelationship.update.stub')
+            $stub = $this->files->exists($customPath = $this->customStubPath . '/ndc.migrationrelationship.update.stub')
                 ? $customPath
-                : $this->stubPath() . '/migrationrelationship.update.stub';
+                : $this->stubPath() . '/ndc.migrationrelationship.update.stub';
         }
 
         return $this->files->get($stub);

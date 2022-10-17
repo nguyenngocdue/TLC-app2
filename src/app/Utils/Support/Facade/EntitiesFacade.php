@@ -8,6 +8,6 @@ class EntitiesFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'Entities';
+        return 'entities';
     }
 }

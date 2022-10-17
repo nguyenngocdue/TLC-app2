@@ -24,7 +24,7 @@ class AuthController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status' => false,
+                'success' => false,
                 'message' => $validator->messages()
             ], 200);
         } else {
@@ -40,6 +40,7 @@ class AuthController extends Controller
             ]);
             $token = $user->createToken('tlc_token')->plainTextToken;
             return response()->json([
+                'success' => true,
                 'access_token' => $token,
                 'token_type' => 'Bearer',
                 'message' => 'Successfully created user'
@@ -60,6 +61,7 @@ class AuthController extends Controller
                 $user = User::where('email', $request['email'])->first();
                 $token = $user->createToken('tlc_token')->plainTextToken;
                 return response()->json([
+                    'success' => true,
                     'access_token' => $token,
                     'token_type' => 'Bearer',
                     'message' => 'Login Successfully'
@@ -69,31 +71,42 @@ class AuthController extends Controller
             $user = User::where('email', $fields['email'])->first();
             if (!$user || !Hash::check($fields['password'], $user->password)) {
                 return response([
+                    'success' => false,
                     'message' => 'Login failed'
                 ], 401);
             }
             $token = $user->createToken('tlc_token')->plainTextToken;
             return response()->json([
+                'success' => true,
                 'access_token' => $token,
                 'token_type' => 'Bearer',
                 'message' => 'Login Successfully'
-            ]);
+            ], 200);
         }
     }
     public function details()
     {
-        return response()->json(['user' => auth()->user()], 200);
+        return response()->json(['success' => true, 'user' => auth()->user()], 200);
     }
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
-        return response()->json([
-            'message' => 'Successfully logged out'
-        ], 200);
+        try {
+            $request->user()->tokens()->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfully logged out'
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th
+            ], 401);
+        }
     }
     public function user(Request $request)
     {
         return response()->json([
+            'success' => true,
             'user' => $request->user()
         ], 200);
     }
