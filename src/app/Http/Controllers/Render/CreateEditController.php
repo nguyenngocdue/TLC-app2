@@ -151,10 +151,11 @@ abstract class CreateEditController extends Controller
 		foreach ($dataInput as $key => $value) {
 			$array[$key] = $value;
 		}
-		$newUser = $db::create($array);
-		$idNewUser = $newUser->fresh()->id;
+		$newData = $db::create($array);
 
-		$data = $this->data::find($idNewUser);
+		$idNewData = $newData->id;
+
+		$data = $this->data::find($idNewData);
 		// chanage value from toggle
 		foreach ($props as $key => $value) {
 			if ($value['control'] === 'switch') {
@@ -165,7 +166,7 @@ abstract class CreateEditController extends Controller
 
 
 		// Save picture
-		$idMediaArray = $this->upload->store($request, $idNewUser);
+		$idMediaArray = $this->upload->store($request, $idNewData);
 		// filter fields have "attachment control"
 		$itemAttachment = [];
 		$props = $this->getProps();
@@ -177,7 +178,7 @@ abstract class CreateEditController extends Controller
 		// push value of picture into database
 		foreach ($itemAttachment as $key => $value) {
 			if (count($idMediaArray) > 0 && isset($idMediaArray[$key])) {
-				$newUser[$value] = $idMediaArray[$key];
+				$newData[$value] = $idMediaArray[$key];
 			}
 		}
 
@@ -185,11 +186,11 @@ abstract class CreateEditController extends Controller
 		foreach ($props as $key => $value) {
 			if ($value['control'] === 'toggle') {
 				$item = $value['column_name'];
-				isset($dataInput[$item]) ? $newUser[$item] = 1 : $newUser[$item] = 0;
+				isset($dataInput[$item]) ? $newData[$item] = 1 : $newData[$item] = 0;
 			};
 		}
 		$type = Str::plural($this->type);
 
-		return redirect(route("{$type}_edit.update", $idNewUser));
+		return redirect(route("{$type}_edit.update", $idNewData));
 	}
 }
