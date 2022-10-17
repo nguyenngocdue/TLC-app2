@@ -9,4 +9,5 @@ class Work_modesEditController extends CreateEditController
 {
     protected $type = 'work_mode';
     protected $data = Work_mode::class;
+    protected $action = "edit";
 }

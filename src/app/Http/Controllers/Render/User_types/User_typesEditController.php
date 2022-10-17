@@ -9,4 +9,5 @@ class User_typesEditController extends CreateEditController
 {
     protected $type = 'user_type';
     protected $data = User_type::class;
+    protected $action = "edit";
 }
