@@ -7,10 +7,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_email": {
         "column_name": "email",
@@ -20,10 +18,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": "required"
     },
     "_name_rendered": {
         "column_name": "name_rendered",
@@ -33,10 +29,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": "required"
     },
     "_full_name": {
         "column_name": "full_name",
@@ -46,10 +40,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": "required"
     },
     "_name_suffix": {
         "column_name": "name_suffix",
@@ -59,10 +51,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_employeeid": {
         "column_name": "employeeid",
@@ -72,10 +62,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_first_name": {
         "column_name": "first_name",
@@ -85,10 +73,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": "required"
     },
     "_last_name": {
         "column_name": "last_name",
@@ -98,10 +84,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": "required"
     },
     "_address": {
         "column_name": "address",
@@ -111,10 +95,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_phone": {
         "column_name": "phone",
@@ -124,10 +106,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_featured_image": {
         "column_name": "featured_image",
@@ -137,10 +117,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_time_keeping_type": {
         "column_name": "time_keeping_type",
@@ -150,10 +128,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": "required"
     },
     "_user_type": {
         "column_name": "user_type",
@@ -163,10 +139,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_workplace": {
         "column_name": "workplace",
@@ -176,10 +150,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_category": {
         "column_name": "category",
@@ -189,10 +161,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_date_of_birth": {
         "column_name": "date_of_birth",
@@ -202,10 +172,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_first_date": {
         "column_name": "first_date",
@@ -215,10 +183,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_last_date": {
         "column_name": "last_date",
@@ -228,10 +194,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_title": {
         "column_name": "title",
@@ -241,10 +205,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_position_prefix": {
         "column_name": "position_prefix",
@@ -254,10 +216,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_position_1": {
         "column_name": "position_1",
@@ -267,10 +227,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_position_2": {
         "column_name": "position_2",
@@ -280,10 +238,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_position_3": {
         "column_name": "position_3",
@@ -293,10 +249,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_position_rendered": {
         "column_name": "position_rendered",
@@ -306,10 +260,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": "required"
     },
     "_discipline": {
         "column_name": "discipline",
@@ -319,10 +271,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_department": {
         "column_name": "department",
@@ -332,10 +282,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_show_on_beta": {
         "column_name": "show_on_beta",
@@ -345,10 +293,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": "required"
     },
     "_resigned": {
         "column_name": "resigned",
@@ -358,10 +304,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_viewport_uids": {
         "column_name": "viewport_uids",
@@ -371,10 +315,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_leaf_uids": {
         "column_name": "leaf_uids",
@@ -384,10 +326,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_email_verified_at": {
         "column_name": "email_verified_at",
@@ -397,10 +337,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_password": {
         "column_name": "password",
@@ -410,10 +348,8 @@
         "col_span": "12",
         "hidden": "true",
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": "required"
     },
     "_settings": {
         "column_name": "settings",
@@ -423,10 +359,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": "required"
     },
     "_remember_token": {
         "column_name": "remember_token",
@@ -436,10 +370,8 @@
         "col_span": "12",
         "hidden": "true",
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_created_at": {
         "column_name": "created_at",
@@ -449,10 +381,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_updated_at": {
         "column_name": "updated_at",
@@ -462,10 +392,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_guid": {
         "column_name": "guid",
@@ -475,10 +403,8 @@
         "col_span": "12",
         "hidden": "true",
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_domain": {
         "column_name": "domain",
@@ -488,10 +414,8 @@
         "col_span": "12",
         "hidden": "true",
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_user_id_passport": {
         "column_name": "user_id_passport",
@@ -501,10 +425,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_user_pin": {
         "column_name": "user_pin",
@@ -514,9 +436,7 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     }
 }

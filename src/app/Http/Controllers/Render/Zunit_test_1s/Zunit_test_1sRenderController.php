@@ -7,7 +7,7 @@ use App\Models\Zunit_test_1;
 
 class Zunit_test_1sRenderController extends RenderController
 {
-    protected $type = 'zunit_test_1';
+    protected $type = 'zunit_test_1s';
     protected $typeModel = Zunit_test_1::class;
     protected $permissionMiddleware = [
         'read' => 'read-zunit_test_1s',

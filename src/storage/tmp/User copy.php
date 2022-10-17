@@ -58,23 +58,21 @@ class User extends Authenticatable implements LdapAuthenticatable
     // }
 
     public $eloquentParams = [
-        // "$tableName" => ['hasMany', User_time_keep_type::class, '$colNmae']
-
         // "files" => ['hasMany' , Media::class],
         // "medias" => ['morphMany',Media::class, 'owner_id','id'],
-        "media" => ['hasMany', Media::class, 'owner_id', 'id'],
-        "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
+        "getMedia" => ['hasMany', Media::class, 'owner_id', 'id'],
+        "getPosts" => ['hasMany', Post::class, 'owner_id', 'id'],
         // "userTypes" => ['hasMany', UserType::class, 'user_type'],
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace'],
-        "userTypes" => ['hasMany', User_type::class, 'user_type'],
-        "categories" => ['hasMany', User_category::class, 'category'],
-        "positionPres" => ['hasMany', User_position_pre::class, 'position_prefix'],
-        "position1" => ['hasMany', User_position1::class, 'position_1'],
-        "position2" => ['hasMany', User_position2::class, 'position_2'],
-        "position3" => ['hasMany', User_position3::class, 'position_3'],
-        "disciplines" => ['hasMany', User_discipline::class, 'discipline'],
-        "departments" => ['hasMany', Department::class, 'department'],
-        "time_keep_types" => ['hasMany', User_time_keep_type::class, 'time_keeping_type'],
+        "getUserTypes" => ['hasMany', User_type::class, 'user_type'],
+        "getCategories" => ['hasMany', User_category::class, 'category'],
+        "getPositionPres" => ['hasMany', User_position_pre::class, 'position_prefix'],
+        "getPosition1" => ['hasMany', User_position1::class, 'position_1'],
+        "getPosition2" => ['hasMany', User_position2::class, 'position_2'],
+        "getPosition3" => ['hasMany', User_position3::class, 'position_3'],
+        "getDisciplines" => ['hasMany', User_discipline::class, 'discipline'],
+        "getDepartments" => ['hasMany', Department::class, 'department'],
+        "getTime_keep_type" => ['hasMany', User_time_keep_type::class, 'time_keeping_type'],
     ];
     protected $guard_name = 'web';
     // public function files()
@@ -82,12 +80,12 @@ class User extends Authenticatable implements LdapAuthenticatable
     //     $p = $this->eloquentParams[__FUNCTION__];
     //     return $this->{$p[0]}($p[1]);
     // }
-    public function media()
+    public function getMedia()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function posts()
+    public function getPosts()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
@@ -102,51 +100,47 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function categories()
+    public function getCategories()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function positionPres()
+    public function getPositionPres()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function position1()
+    public function getPosition1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function position2()
+    public function getPosition2()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function position3()
+    public function getPosition3()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function disciplines()
+    public function getDisciplines()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function departments()
+    public function getDepartments()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function time_keep_types()
+    public function getTime_keep_type()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function role()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
+
     public function toSearchableArray()
     {
         return [

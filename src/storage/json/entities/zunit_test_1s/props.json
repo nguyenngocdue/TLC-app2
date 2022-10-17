@@ -7,7 +7,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_text1": {
         "column_name": "text1",
@@ -17,7 +18,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_text2": {
         "column_name": "text2",
@@ -27,7 +29,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_dropdown1": {
         "column_name": "dropdown1",
@@ -37,7 +40,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_radio1": {
         "column_name": "radio1",
@@ -47,7 +51,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_boolean1": {
         "column_name": "boolean1",
@@ -57,7 +62,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_created_at": {
         "column_name": "created_at",
@@ -67,7 +73,8 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     },
     "_updated_at": {
         "column_name": "updated_at",
@@ -77,6 +84,7 @@
         "col_span": "12",
         "hidden": null,
         "new_line": null,
-        "type_line": "default"
+        "type_line": "default",
+        "validation": ""
     }
 }

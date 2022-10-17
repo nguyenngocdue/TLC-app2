@@ -19,7 +19,11 @@ class ReadingFileService
     {
         $_type = Str::plural($type);
         $storage_path = storage_path("$disk/$branch/$_type/$nameFile");
-        $props = json_decode(file_get_contents($storage_path), true);
-        return $props;
+        if (file_exists($storage_path)) {
+            $props = json_decode(file_get_contents($storage_path), true);
+            return $props;
+        } else {
+            return false;
+        }
     }
 }

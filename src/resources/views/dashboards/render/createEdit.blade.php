@@ -24,7 +24,7 @@
         @php
         $editType = Str::plural($type);
         // dd(isset($values), $values);
-        $id = isset($values) ? $values->id : 0;
+        $id = $action === "edit" ? $values->id : "";
         $idAvatar = isset($values['avatar']) ? $values['avatar']: "";
         @endphp
         <form class="rounded-md bg-gray-300 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
@@ -33,7 +33,7 @@
             <div class="flex flex-col grid-cols-12">
                 @method($action === "create" ? 'POST' : 'PUT')
                 @php
-                $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quater','picker_year','datetime'];
+                $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quater','picker_year','picker_datetime'];
                 $valColumnNames = ['date_of_birth', 'first_date', 'last_date', 'created_at', 'updated_at'];
 
                 @endphp
@@ -43,7 +43,7 @@
                 $col_span = $value['col_span'];
                 $column_name = $value['column_name'];
                 $control = $value['control'];
-                $value_column_name = isset($values) ? $values->{$column_name} : "";
+                $value_column_name = $action === "edit" ? $values->{$column_name} : "";
                 if(is_array($value_column_name)) $value_column_name = 'ARRAY';
                 $col_span=$value['col_span'];
                 $hiddenRow = $props[$key]['hidden'] === "true" ? "hidden":"";
