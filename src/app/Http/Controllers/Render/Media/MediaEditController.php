@@ -10,5 +10,5 @@ class MediaEditController extends CreateEditController
 {
     protected $type = "media";
     protected $data = Media::class;
-    protected $action = "create";
+    protected $action = "edit";
 }

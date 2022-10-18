@@ -9,4 +9,5 @@ class DepartmentsEditController extends CreateEditController
 {
     protected $type = 'department';
     protected $data = Department::class;
+    protected $action = "edit";
 }
