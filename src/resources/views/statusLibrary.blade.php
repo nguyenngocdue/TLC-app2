@@ -63,15 +63,11 @@
                 @endforeach
 
                 @endforeach
-
-
                 <tr class=" border-b dark:bg-gray-800">
-                    <td class=" ">
-                        <button class="focus:shadow-outline rounded bg-emerald-500 block text-white font-bold text-xl text-center px-2" for="createStatus">
-                            Create
-                        </button>
+                    <td class="  text-2xl flex justify-center bg-slate-400">
+                        Create
                     </td>
-                    <td class="bg-slate-400 text-base py-2 px-6 ">
+                    <td class="bg-slate-400 text-base px-6 ">
                         <input name="newName[]" class="w-full text-center border focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm" id="createStatus" type="text" placeholder="Enter name">
                     </td>
                     {{-- <td class=" bg-slate-400 text-base py-2 px-6">

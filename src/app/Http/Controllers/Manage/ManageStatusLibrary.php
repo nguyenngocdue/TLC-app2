@@ -49,9 +49,8 @@ class ManageStatusLibrary extends Controller
         $data = $request->input();
 
         //  Check the same name when you create a new status
-        $oldName = $data['oldName'];
         $newName = $data['newName'];
-        if (in_array($newName[0], $oldName)) {
+        if (isset($data['oldName']) && in_array($newName[0], $data['oldName'])) {
             Toastr::warning('This name already exists', 'Save file json was failed');
             return back();
         }
