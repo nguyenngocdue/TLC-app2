@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\Manage\ManageStatusDocType;
 use App\Http\Controllers\Manage\ManageStatusLibrary;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\TestController;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
