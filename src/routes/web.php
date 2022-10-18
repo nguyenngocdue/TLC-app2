@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\Manage\ManageStatusDocType;
 use App\Http\Controllers\Manage\ManageStatusLibrary;
+use App\Http\Controllers\Manage\Master\StatusDocType;
 use App\Http\Controllers\SettingController;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\Auth;
@@ -87,4 +88,4 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::resource('manage/manage_statusLibrary', ManageStatusLibrary::class);
 // Route::resource('manage/status', ManageStatusDoc::class);
 Route::resource('manage/statusLibrary', ManageStatusLibrary::class);
-Route::resource('manage/statusDocType', ManageStatusDocType::class);
+Route::resource('manage/statusDocType', StatusDocType::class);
