@@ -24,7 +24,7 @@ class TableFacadeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->singleton('Table', function () {
+        $this->app->singleton('table', function () {
             return new Table();
         });
     }
