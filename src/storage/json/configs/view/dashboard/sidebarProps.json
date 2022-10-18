@@ -679,6 +679,18 @@
                         "href": "admin\/setrolesets"
                     }
                 ]
+            },
+            "statuses": {
+                "title": "Statuses",
+                "icon": "nav-icon fas fa-database",
+                "href_parent": "statuses",
+                "items": [
+                    {
+                        "title": "Status Library",
+                        "icon": "fas fa-database",
+                        "href": "statuses\/statusLibrary"
+                    }
+                ]
             }
         },
         "divider": "true"

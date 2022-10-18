@@ -58,9 +58,9 @@ abstract class ManagePropController extends Controller
                 $columnColSpans[$key] = $data['col_span'];
                 $columnHidden[$key] = $data['hidden'];
                 $columnNewLines[$key] = $data['new_line'];
-                $columnValidations[$key] = $data['validation'];
-                $columnFrozenLefts[$key] = $data['frozen_left'];
-                $columnFrozenRights[$key] = $data['frozen_right'];
+                $columnValidations[$key] = $data['validation'] ?? "";
+                $columnFrozenLefts[$key] = $data['frozen_left'] ?? "";
+                $columnFrozenRights[$key] = $data['frozen_right'] ?? "";
                 $colorLines[$key] = $data['type_line'];
             }
             $diff1 = array_diff($columnNames, Schema::getColumnListing(Str::plural($type)));
