@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\v1\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,12 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'prefix' => 'v1/auth',
 ], function () {
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('signup', [AuthController::class, 'register']);
+    Route::post('login', [App\Http\Controllers\Api\v1\Auth\AuthController::class, 'login']);
+    Route::post('signup', [App\Http\Controllers\Api\v1\Auth\AuthController::class, 'register']);
+    Route::post('password/email', [App\Http\Controllers\Api\v1\Auth\ForgotPasswordController::class, 'sendResetLinkEmail']);
+    Route::get('password/reset/{token}', [App\Http\Controllers\Api\v1\Auth\ResetPasswordController::class, 'tokenResetPassword']);
+    Route::post('password/reset', [App\Http\Controllers\Api\v1\Auth\ResetPasswordController::class, 'reset']);
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], function () {
-        Route::get('logout', [AuthController::class, 'logout']);
-        Route::get('user', [AuthController::class, 'user']);
+        Route::get('logout', [App\Http\Controllers\Api\v1\Auth\AuthController::class, 'logout']);
+        Route::get('user', [App\Http\Controllers\Api\v1\Auth\AuthController::class, 'user']);
     });
 });

@@ -24,7 +24,7 @@ class EntitiesFacadeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->singleton('Entities', function () {
+        $this->app->singleton('entities', function () {
             return new Entities();
         });
     }
