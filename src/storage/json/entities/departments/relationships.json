@@ -1,15 +1,15 @@
 {
     "_user": {
         "relationship": "user",
-        "eloquent": "belongsTo",
+        "eloquent": "hasMany",
         "param_1": "App\\Models\\User",
         "param_2": "department",
-        "param_3": null,
+        "param_3": "id",
         "param_4": null,
         "param_5": null,
         "param_6": null,
         "label": "User",
-        "control": null,
+        "control": "avatar_name",
         "control_param": null,
         "column_name": "department",
         "col_span": "12",

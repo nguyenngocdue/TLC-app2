@@ -4,6 +4,7 @@
         "attachment",
         "checkbox",
         "dropdown",
+        "id",
         "number",
         "picker_datetime",
         "picker_time",
