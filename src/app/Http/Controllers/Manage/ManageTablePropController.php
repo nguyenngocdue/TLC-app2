@@ -26,7 +26,11 @@ abstract class ManageTablePropController extends Controller
     public function index()
     {
         $type = $this->type;
-        [$dataManage, $tableNames] = $this->manageService->pathTable($this->type, 'tables', 'tableName');
+        try {
+            [$dataManage, $tableNames] = $this->manageService->pathTable($this->type, 'tables', 'tableName');
+        } catch (\Throwable $error) {
+            return view('dashboards.props.error')->with(compact('error'));
+        }
         if (!$dataManage) {
             $columnNames = [];
             $columnTypes = [];

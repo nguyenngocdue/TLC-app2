@@ -35,6 +35,7 @@ class Attachment extends Component
             return view('components.render.attachment')->with(compact('items', 'path'));;
         } else if ($countCheck > 3) {
             $items = $dataModel->all();
+            dd($items);
             $itemShows = array_slice($items, 0, 3);
             $countRemaining =  count($items) - count($itemShows);
             return view('components.render.attachment')->with(compact('items', 'itemShows', 'countRemaining', 'path'));

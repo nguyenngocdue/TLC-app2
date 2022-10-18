@@ -56,9 +56,12 @@
                                             {{ $value['label'] }}</th>
                                     @endif
                                 @endforeach
-                                @foreach ($data2 as $key => $value)
+                                @php
+                                    $data3 = $data2;
+                                @endphp
+                                @foreach ($data3 as $key => $value)
                                     @if ($value['hidden'] === null)
-                                        <th class="{{ $key . '_th' }} px-4 py-3" title="{{ $value['column_name'] }}">
+                                        <th class="{{ $key . '_th' }} px-4 py-3" title="{{ $value['relationship'] }}">
                                             {{ $value['label'] }}</th>
                                     @endif
                                 @endforeach
@@ -77,19 +80,109 @@
                                         @foreach ($data as $key1 => $value)
                                             @if ($value['hidden'] === null)
                                                 @if ($value['column_name'] === 'id')
-                                                    {{-- {{dd($type.'_edit.update')}} --}}
-                                                    <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
-                                                        <a
-                                                            href="{{ route($type . '_edit.update', $user[$value['column_name']]) }}">{{ $user[$value['column_name']] }}</a>
-                                                    </td>
+                                                    @if ($value['control'] === 'id')
+                                                        @php
+                                                            $numberRender = str_pad($user[$value['column_name']], 6, '0', STR_PAD_LEFT);
+                                                            $result = '#' . substr($numberRender, 0, 3) . '.' . substr($numberRender, 3, 6);
+                                                        @endphp
+                                                        <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
+                                                            <a href="{{ route($type . '_edit.update', $user[$value['column_name']]) }}"
+                                                                class="text-sm font-normal text-blue-500">{{ $result }}</a>
+                                                        </td>
+                                                    @else
+                                                        <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
+
+                                                            <a
+                                                                href="{{ route($type . '_edit.update', $user[$value['column_name']]) }}">{{ $user[$value['column_name']] }}</a>
+                                                        </td>
+                                                    @endif
                                                 @else
                                                     <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
                                                         @if (!is_array($user[$value['column_name']]))
+                                                            @if (isset($data2))
+                                                                @foreach ($data2 as $key2 => $item)
+                                                                    @if ($item['param_2'] === $value['column_name'])
+                                                                        @if ($item['hidden'] === null)
+                                                                            @switch($item['control'])
+                                                                                @case('')
+                                                                                    <div
+                                                                                        title="{{ $user[$value['column_name']] }}">
+                                                                                        <p
+                                                                                            class="rounded-md bg-yellow-400 px-2 py-0 text-xs font-semibold leading-tight text-red-400 dark:bg-red-500 dark:text-green-100">
+                                                                                            None Set
+                                                                                        </p>
+                                                                                    </div>
+                                                                                @break
+
+                                                                                @case('attachment')
+                                                                                    @if ($model === 'App\Models\User')
+                                                                                        <div
+                                                                                            title="{{ $user[$value['column_name']] }}">
+
+                                                                                            <x-render.attachment
+                                                                                                attachment="{{ $user->id }}"
+                                                                                                model="{{ $model }}"
+                                                                                                relationship="{{ $item['relationship'] }}" />
+                                                                                        </div>
+                                                                                    @else
+                                                                                        Render Failed
+                                                                                    @endif
+                                                                                @break
+
+                                                                                @case('count')
+                                                                                    <div
+                                                                                        title="{{ $user[$value['column_name']] }}">
+                                                                                        <x-render.count
+                                                                                            count="{{ $user->{$item['relationship']} ? (is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0') : '' }}" />
+                                                                                    </div>
+                                                                                @break
+
+                                                                                @case('column')
+                                                                                    @php
+                                                                                        $render = $user->{$item['relationship']}->{$item['control_param']} ?? '';
+                                                                                    @endphp
+                                                                                    <div
+                                                                                        title="{{ $user[$value['column_name']] }}">
+                                                                                        <span
+                                                                                            class="text-sm">{{ $render }}</span>
+                                                                                    </div>
+                                                                                @break
+
+                                                                                @case('avatar_name')
+                                                                                    @if ($user->{$item['relationship']} != null && is_array($user->{$item['relationship']}))
+                                                                                        <div
+                                                                                            title="{{ $user[$value['column_name']] }}">
+                                                                                            <x-render.user
+                                                                                                src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg"
+                                                                                                name_rendered="{{ $user->{$item['relationship']}->name_rendered }}"
+                                                                                                email="{{ $user->{$item['relationship']}->email }}" />
+                                                                                        </div>
+                                                                                    @else
+                                                                                        @php
+                                                                                            $users = $user->{$item['relationship']};
+                                                                                        @endphp
+                                                                                        <div
+                                                                                            title="{{ $user[$value['column_name']] }}">
+                                                                                            <x-render.users :users="$users" />
+                                                                                        </div>
+                                                                                    @endif
+                                                                                @break
+
+                                                                                @default
+                                                                                    <div
+                                                                                        title="{{ $user[$value['column_name']] }}">
+                                                                                        {{ $item['control'] }}
+                                                                                    </div>
+                                                                            @endswitch
+                                                                            @php
+                                                                                unset($data2[$key2]);
+                                                                            @endphp
+                                                                        @endif
+                                                                    @else
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
                                                             {{ $user[$value['column_name']] }}
-                                                        @else
-                                                            @php
-                                                                json_encode($user[$value['column_name']]);
-                                                            @endphp
                                                         @endif
                                                     </td>
                                                 @endif
@@ -110,16 +203,21 @@
 
                                                         @case('attachment')
                                                             <td class="text-center">
-                                                                <x-render.attachment attachment="{{ $user->id }}"
-                                                                    model="{{ $model }}"
-                                                                    relationship="{{ $item['relationship'] }}" />
+                                                                @if ($model === 'App\Models\User')
+                                                                    <x-render.attachment attachment="{{ $user->id }}"
+                                                                        model="{{ $model }}"
+                                                                        relationship="{{ $item['relationship'] }}" />
+                                                                @else
+                                                                    Render Failed
+                                                                @endif
+
                                                             </td>
                                                         @break
 
                                                         @case('count')
                                                             <td class="text-center">
                                                                 <x-render.count
-                                                                    count="{{ $user->{$item['relationship']} ? $user->{$item['relationship']}->count() : '0' }}" />
+                                                                    count="{{ $user->{$item['relationship']} ? (is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0') : '' }}" />
                                                             </td>
                                                         @break
 
