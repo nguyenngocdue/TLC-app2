@@ -58,14 +58,12 @@ class User extends Authenticatable implements LdapAuthenticatable
     // }
 
     public $eloquentParams = [
-        // "$tableName" => ['hasMany', User_time_keep_type::class, '$colNmae']
-
         // "files" => ['hasMany' , Media::class],
         // "medias" => ['morphMany',Media::class, 'owner_id','id'],
         "media" => ['hasMany', Media::class, 'owner_id', 'id'],
         "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
-        // "userTypes" => ['hasMany', UserType::class, 'user_type'],
-        "getWorkplace" => ['belongsTo', Workplace::class, 'workplace'],
+        "userTypes" => ['belongsTo', UserType::class, 'user_type'],
+        "getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
         "userTypes" => ['belongsTo', User_type::class, 'user_type'],
         "categories" => ['belongsTo', User_category::class, 'category'],
         "positionPres" => ['belongsTo', User_position_pre::class, 'position_prefix'],
@@ -92,7 +90,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
-    public function getWorkplace()
+    public function getWorkplaces()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

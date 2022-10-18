@@ -134,12 +134,16 @@
 
                                                         @case('avatar_name')
                                                             <td class="px-4 py-3">
-                                                                @if ($user->{$item['relationship']} != null)
+                                                                @if ($user->{$item['relationship']} != null && is_array($user->{$item['relationship']}))
                                                                     <x-render.user
                                                                         src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg"
                                                                         name_rendered="{{ $user->{$item['relationship']}->name_rendered }}"
                                                                         email="{{ $user->{$item['relationship']}->email }}" />
                                                                 @else
+                                                                    @php
+                                                                        $users = $user->{$item['relationship']};
+                                                                    @endphp
+                                                                    <x-render.users :users="$users" />
                                                                 @endif
                                                             </td>
                                                         @break

@@ -32,12 +32,6 @@ return new class extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->foreign('owner_id')->references('id')->on('users');
         });
-        Schema::table('user_disciplines', function (Blueprint $table) {
-            $table->foreign('def_assignee')->references('id')->on('users')->onDelete('cascade');
-        });
-        Schema::table('departments', function (Blueprint $table) {
-            $table->foreign('head_of_department')->references('id')->on('users')->onDelete('cascade');
-        });
     }
 
     /**

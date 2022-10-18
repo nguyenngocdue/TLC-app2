@@ -97,6 +97,7 @@ abstract class ManageRelationshipController extends Controller
                     $columnParam5s['_' . $value] = $columnEloquentParams[$value][5] ?? null;
                     $columnParam6s['_' . $value] = $columnEloquentParams[$value][6] ?? null;
                     $columnControls['_' . $value] = "input";
+                    $columnControlParams['_' . $value] = "";
                     $columnNames['_' . $value] = $columnEloquentParams[$value][2] ?? null;
                     $columnColSpans['_' . $value] = "12";
                     $columnHidden['_' . $value] = "false";
@@ -114,6 +115,7 @@ abstract class ManageRelationshipController extends Controller
                     $columnParam4s['_' . $value] = $columnEloquentParams[$value][4] ?? null;
                     $columnParam5s['_' . $value] = $columnEloquentParams[$value][5] ?? null;
                     $columnParam6s['_' . $value] = $columnEloquentParams[$value][6] ?? null;
+                    $columnNames['_' . $value] = $columnEloquentParams[$value][2] ?? null;
                     $colorLines['_' . $value] = "new";
                 }
                 return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnControls', 'columnControlParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
