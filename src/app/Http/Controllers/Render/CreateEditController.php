@@ -110,9 +110,10 @@ abstract class CreateEditController extends Controller
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 
 		if ($props  === false) {
-			$error =  "Please check the `$this->r_fileName` file  of `$this->type` in the $this->branchName folder.";
-			return view('components.render.error')->with(compact('error'));
+			$error =  "`$this->r_fileName` file is missing, \nplease create this file by `manage prop`";
+			return view('components.render.warning')->with(compact('error'));
 		}
+
 
 		$type = $this->type;
 		$tablePath = $this->data;

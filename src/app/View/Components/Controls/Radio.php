@@ -48,7 +48,7 @@ class Radio extends Component
         }
         if ($tableName === "") {
             $error =  "Not found ColumnName:'" . $colName . "' in eloquenParams";
-            return view('components.render.error')->with(compact('error'));
+            return view('components.render.alert')->with(compact('error'));
         }
         $pathSourceTable = $eloquenParam[$tableName][1]; // filter name of path source Workplace table
         $insTable = new $pathSourceTable;

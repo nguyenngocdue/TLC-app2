@@ -55,7 +55,7 @@ class Dropdown extends Component
 
         if ($keyNameEloquent === "") {
             $error =  "Not found ColumnName:'" . $colName . "' in eloquentParams of model folder";
-            return view('components.render.error')->with(compact('error'));
+            return view('components.render.alert')->with(compact('error'));
         }
 
 
