@@ -348,7 +348,7 @@
         "type_line": "default",
         "frozen_left": "",
         "frozen_right": "",
-        "validation": "required"
+        "validation": ""
     },
     "_resigned": {
         "column_name": "resigned",
