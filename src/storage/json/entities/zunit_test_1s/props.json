@@ -19,7 +19,7 @@
 		"hidden": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": ""
+		"validation": "required"
 	},
 	"_text2": {
 		"column_name": "text2",
@@ -41,7 +41,7 @@
 		"hidden": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": ""
+		"validation": "required"
 	},
 	"_radio1": {
 		"column_name": "radio1",
