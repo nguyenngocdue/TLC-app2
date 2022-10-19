@@ -65,9 +65,7 @@ abstract class CreateEditController extends Controller
 		// Validation
 		$itemsValidation = [];
 		foreach ($props as $key => $value) {
-			if ($value['validation'] != "" && $value['control'] != 'switch') {
-				$itemsValidation[$value['column_name']] = "required";
-			}
+			$itemsValidation[$value['column_name']] = $value['validation'];
 		}
 		$request->validate($itemsValidation);
 
@@ -91,7 +89,7 @@ abstract class CreateEditController extends Controller
 		foreach ($props as $key => $value) {
 			if ($value['control'] === 'switch') {
 				$item = $value['column_name'];
-				isset($dataInput[$item]) ? $data[$item] = 1 : $data[$item] = 0;
+				isset($dataInput[$item]) ? $data[$item] = 1 : $data[$item] = null;
 			};
 		}
 
@@ -131,15 +129,14 @@ abstract class CreateEditController extends Controller
 		unset($dataInput['_method']);
 		$db = $this->data;
 
+
 		$itemsValidation = [];
 		foreach ($props as $key => $value) {
-			if ($value['validation'] != "" && $value['control'] != 'switch') {
-				$itemsValidation[$value['column_name']] = "required";
-			}
+			$itemsValidation[$value['column_name']] = $value['validation'];
 		}
 		$request->validate($itemsValidation);
 
-		// get controls are switch - set its value is 0
+		// filter controls which are switch control - set its value is null
 		$witchControls = [];
 		foreach ($props as $key => $value) {
 			if ($value['control'] === "switch") {
@@ -148,9 +145,12 @@ abstract class CreateEditController extends Controller
 		}
 		foreach ($witchControls as $value) {
 			if (isset($dataInput[$value]) === false) {
-				$dataInput[$value] = "0";
+				$dataInput[$value] = null;
 			}
 		}
+
+		// dd($dataInput);
+
 
 		// Save data to database
 		$array = [];

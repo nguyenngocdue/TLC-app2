@@ -454,6 +454,19 @@
         "frozen_right": "",
         "validation": ""
     },
+    "_user_pin": {
+        "column_name": "user_pin",
+        "column_type": "string",
+        "label": "User Pin",
+        "control": "text",
+        "col_span": "12",
+        "hidden": null,
+        "new_line": null,
+        "type_line": "default",
+        "frozen_left": "",
+        "frozen_right": "",
+        "validation": ""
+    },
     "_created_at": {
         "column_name": "created_at",
         "column_type": "datetime",
@@ -500,19 +513,6 @@
         "control": "text",
         "col_span": "12",
         "hidden": "true",
-        "new_line": null,
-        "type_line": "default",
-        "frozen_left": "",
-        "frozen_right": "",
-        "validation": ""
-    },
-    "_user_pin": {
-        "column_name": "user_pin",
-        "column_type": "string",
-        "label": "User Pin",
-        "control": "text",
-        "col_span": "12",
-        "hidden": null,
         "new_line": null,
         "type_line": "default",
         "frozen_left": "",
