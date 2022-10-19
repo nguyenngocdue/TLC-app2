@@ -67,7 +67,7 @@ class Dropdown extends Component
         $tableName = $insTable->getTable();
         $_dataSource = DB::table($tableName)->select('id', 'name', 'description')->get();
         $dataSource = json_decode($_dataSource);
-        array_unshift($dataSource, (object)['id' => null, "name" => "", "description" => ""]);
+        array_unshift($dataSource, (object)['id' => null, "name" => null, "description" => ""]);
 
 
         $entityTable = $this->tablePath;

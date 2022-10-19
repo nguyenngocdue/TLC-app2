@@ -50,12 +50,12 @@ class Translationtime extends Component
         }
 
         $dateTimeInstance = date_create(str_replace('-', '/', $day));
-        $dateTime = date_format($dateTimeInstance, "d/m/Y h:i:s");
+        $dateTime = date_format($dateTimeInstance, "d/m/Y H:i:s");
 
         $week = $dateTimeInstance->format("W");
         $date = $dateTimeInstance->format("d/m/Y");
         $month = $dateTimeInstance->format("M");
-        $time = $dateTimeInstance->format('H:i:s A');
+        $time = $dateTimeInstance->format('H:i:s');
         $monthNumber = date("m", strtotime($month));
         $year =  $dateTimeInstance->format("Y");
         $quater = ceil($monthNumber / 3);

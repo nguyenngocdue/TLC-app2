@@ -131,7 +131,6 @@ abstract class CreateEditController extends Controller
 		unset($dataInput['_method']);
 		$db = $this->data;
 
-
 		$itemsValidation = [];
 		foreach ($props as $key => $value) {
 			if ($value['validation'] != "" && $value['control'] != 'switch') {
