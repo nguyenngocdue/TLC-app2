@@ -41,7 +41,7 @@ return new class extends Migration
             $table->string("position_rendered")->default("");
             $table->unsignedBigInteger("discipline")->nullable();
             $table->unsignedBigInteger("department")->nullable();
-            $table->boolean("show_on_beta")->default(false);
+            $table->boolean("show_on_beta")->nullable(); //->default(false);
             $table->boolean("resigned")->nullable();
             $table->string("viewport_uids")->nullable();
             $table->string("leaf_uids")->nullable();

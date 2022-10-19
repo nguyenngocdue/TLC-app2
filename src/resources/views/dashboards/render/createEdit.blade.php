@@ -33,7 +33,7 @@
             <div class="flex flex-col grid-cols-12">
                 @method($action === "create" ? 'POST' : 'PUT')
                 @php
-                $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quater','picker_year','picker_datetime'];
+                $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quarter','picker_year','picker_datetime'];
                 $valColumnNames = ['date_of_birth', 'first_date', 'last_date', 'created_at', 'updated_at'];
 
                 @endphp
@@ -52,7 +52,7 @@
                     <div class='grid grid-row-1 gap-3'>
                         <div class='grid grid-cols-12 items-center {{$hiddenRow}}  '>
                             <div class='col-start-1 col-span-{{24/$col_span}} text-right'>
-                                <label class='block tracking-wide text-gray-800 mb-2 px-3 text-base' title='{{$column_name}}'>{{$label}}
+                                <label class='block tracking-wide text-gray-800 mb-2 px-3 text-base' title='{{$column_name}} / {{$control}}'>{{$label}}
                                 </label>
                             </div>
                             <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2'>

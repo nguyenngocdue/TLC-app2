@@ -43,6 +43,8 @@ class Dropdown extends Component
         $colName = $this->colName;
         $u = new $this->tablePath();
         $eloquentParam = $u->eloquentParams;
+        $selected = $this->id;
+
 
         $keyNameEloquent = "";
         foreach ($eloquentParam as $key => $value) {
@@ -63,8 +65,10 @@ class Dropdown extends Component
 
         $insTable = new $pathSourceTable;
         $tableName = $insTable->getTable();
-        $dataSource = DB::table($tableName)->select('id', 'name', 'description')->get();
-        $selected = $this->id;
+        $_dataSource = DB::table($tableName)->select('id', 'name', 'description')->get();
+        $dataSource = json_decode($_dataSource);
+        array_unshift($dataSource, (object)['id' => null, "name" => null, "description" => ""]);
+
 
         $entityTable = $this->tablePath;
         $currentEntity = is_null($entityTable::find($this->id)) ? "" : $entityTable::find($this->id)->getAttributes();

@@ -513,17 +513,17 @@
                     {
                         "title": "Manage Prop",
                         "icon": "fas fa-project-diagram",
-                        "href": "propman\/user_positions_2\/user_position2_mngprop"
+                        "href": "propman\/user_position2\/user_position2_mngprop"
                     },
                     {
                         "title": "Manage Line",
                         "icon": "fas fa-grip-lines",
-                        "href": "propman\/user_positions_2\/user_position2_mnglnprop"
+                        "href": "propman\/user_position2\/user_position2_mnglnprop"
                     },
                     {
                         "title": "Manage Relationship",
                         "icon": "fas fa-heart",
-                        "href": "propman\/user_positions_2\/user_position2_mngrls"
+                        "href": "propman\/user_position2\/user_position2_mngrls"
                     }
                 ]
             },

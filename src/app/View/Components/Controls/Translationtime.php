@@ -31,6 +31,10 @@ class Translationtime extends Component
 
         $selected = $this->id;
         $columnName = $this->columnName;
+        $control = $this->control;
+        $timeControls = $this->timeControls;
+
+
 
         // get table's name in database
         $insTable = new $this->tablePath;
@@ -39,24 +43,23 @@ class Translationtime extends Component
 
         $day = '';
         $valColumnNames = $this->valColumnNames;
-        if (in_array($columnName, $valColumnNames) && isset($currentTable->$columnName)) {
+
+        // dd(in_array($columnName, $valColumnNames), $columnName, $valColumnNames);
+        if (in_array($control, $timeControls) && isset($currentTable->$columnName)) {
             $day = $currentTable->$columnName;
         }
 
-        $control = $this->control;
         $dateTimeInstance = date_create(str_replace('-', '/', $day));
-
-        $dateTime = date_format($dateTimeInstance, "d/m/Y h:i:s");
+        $dateTime = date_format($dateTimeInstance, "d/m/Y H:i:s");
 
         $week = $dateTimeInstance->format("W");
         $date = $dateTimeInstance->format("d/m/Y");
         $month = $dateTimeInstance->format("M");
-        $time = $dateTimeInstance->format('H:i:s A');
+        $time = $dateTimeInstance->format('H:i:s');
         $monthNumber = date("m", strtotime($month));
         $year =  $dateTimeInstance->format("Y");
         $quater = ceil($monthNumber / 3);
 
-        $timeControls = $this->timeControls;
         $dataTime = [
             $timeControls[0] => $time,
             $timeControls[1] => $date,
@@ -66,6 +69,8 @@ class Translationtime extends Component
             $timeControls[5] => $year,
             $timeControls[6] => $dateTime,
         ];
+
+        // dd($day, $dataTime);
         return view('components.controls.translationtime')->with(compact('day', 'dataTime', 'control'));
     }
 }

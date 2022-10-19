@@ -30,7 +30,7 @@
 		"hidden": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": ""
+		"validation": "required"
 	},
 	"_dropdown1": {
 		"column_name": "dropdown1",
@@ -41,7 +41,7 @@
 		"hidden": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": ""
+		"validation": "required"
 	},
 	"_radio1": {
 		"column_name": "radio1",
@@ -52,7 +52,7 @@
 		"hidden": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": ""
+		"validation": "required"
 	},
 	"_boolean1": {
 		"column_name": "boolean1",
