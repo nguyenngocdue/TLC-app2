@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Render;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -55,6 +56,7 @@ abstract class CreateEditController extends Controller
 	{
 
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+		$type = Str::plural($this->type);
 		$data = $this->data::find($id);
 		$dataInput = $request->input();
 		unset($dataInput['_token']);
@@ -68,6 +70,9 @@ abstract class CreateEditController extends Controller
 			$itemsValidation[$value['column_name']] = $value['validation'];
 		}
 		$request->validate($itemsValidation);
+
+
+
 
 		// upload multiple pictures
 		$idMediaArray = $this->upload->store($request, $id);
@@ -100,7 +105,7 @@ abstract class CreateEditController extends Controller
 			}
 		}
 		$data->save();
-		$type = Str::plural($this->type);
+		if ($data->save()) Toastr::success('User updated successfully', 'Update User');
 		return redirect(route("{$type}_edit.show", $id));
 	}
 	public function index()
@@ -124,10 +129,13 @@ abstract class CreateEditController extends Controller
 	public function store(Request $request)
 	{
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+		$type = Str::plural($this->type);
 		$dataInput = $request->input();
 		unset($dataInput['_token']);
 		unset($dataInput['_method']);
 		$db = $this->data;
+
+		// dd($dataInput);
 
 
 		$itemsValidation = [];
@@ -159,7 +167,16 @@ abstract class CreateEditController extends Controller
 		}
 		$newData = $db::create($array);
 
+
+
+
+		if ($newData) {
+			Toastr::success('User created successfully', 'Create User');
+		} else {
+			return redirect()->back();
+		}
 		$idNewData = $newData->id;
+
 		// Save picture
 		$idMediaArray = $this->upload->store($request, $idNewData);
 		// filter fields have "attachment control"
