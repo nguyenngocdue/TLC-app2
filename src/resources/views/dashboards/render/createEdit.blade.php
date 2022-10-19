@@ -33,7 +33,7 @@
             <div class="flex flex-col grid-cols-12">
                 @method($action === "create" ? 'POST' : 'PUT')
                 @php
-                $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quater','picker_year','picker_datetime'];
+                $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quarter','picker_year','picker_datetime'];
                 $valColumnNames = ['date_of_birth', 'first_date', 'last_date', 'created_at', 'updated_at'];
 
                 @endphp
