@@ -1,6 +1,7 @@
 @extends('layouts.app')
-
 @section('content')
+
+{{-- {{dd($warningValidator)}} --}}
 
 <div class="focus:shadow-outline-purple my-4 flex items-center justify-between rounded-lg bg-purple-600 p-3 text-base font-semibold text-purple-100 shadow-md focus:outline-none">
     <div class="flex items-center">
@@ -19,7 +20,7 @@
     </div>
 </div>
 <div class="grid grid-rows-1 bg-gray-100">
-    <div class="mx-auto flex min-h-screen items-center py-5">
+    <div class="mx-auto flex flex-col min-h-screen items-center py-5">
         {{-- {{dd($type)}} --}}
         @php
         $editType = Str::plural($type);
@@ -27,6 +28,7 @@
         $id = $action === "edit" ? $values->id : "";
         $idAvatar = isset($values['avatar']) ? $values['avatar']: "";
         @endphp
+        @include('components.render.alertForms')
         <form class="rounded-md bg-gray-300 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
             @csrf
             {{-- <div class="mx-auto max-w-4xl flex-1"> --}}
