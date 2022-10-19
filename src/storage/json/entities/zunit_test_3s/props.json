@@ -128,5 +128,18 @@
         "validation": "",
         "frozen_left": "",
         "frozen_right": ""
+    },
+    "_time_keeping_type": {
+        "column_name": "time_keeping_type",
+        "column_type": "string",
+        "label": "Time Keeping Type",
+        "control": "dropdown",
+        "col_span": "12",
+        "hidden": null,
+        "new_line": null,
+        "type_line": "default",
+        "frozen_left": "",
+        "frozen_right": "",
+        "validation": ""
     }
 }

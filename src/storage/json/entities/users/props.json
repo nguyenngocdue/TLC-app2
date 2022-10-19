@@ -400,7 +400,7 @@
         "type_line": "default",
         "frozen_left": "",
         "frozen_right": "",
-        "validation": ""
+        "validation": "required"
     },
     "_password": {
         "column_name": "password",

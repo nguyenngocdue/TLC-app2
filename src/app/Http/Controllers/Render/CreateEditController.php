@@ -80,6 +80,7 @@ abstract class CreateEditController extends Controller
 			}
 		}
 
+
 		// Update dataInput to database
 		foreach ($dataInput as $key => $value) {
 			// dd($data->{$key});
@@ -157,7 +158,9 @@ abstract class CreateEditController extends Controller
 		foreach ($dataInput as $key => $value) {
 			$array[$key] = $value;
 		}
+		dd($array);
 		$newData = $db::create($array);
+
 		$idNewData = $newData->id;
 		// Save picture
 		$idMediaArray = $this->upload->store($request, $idNewData);
