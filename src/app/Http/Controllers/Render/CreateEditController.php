@@ -158,7 +158,6 @@ abstract class CreateEditController extends Controller
 		foreach ($dataInput as $key => $value) {
 			$array[$key] = $value;
 		}
-		dd($array);
 		$newData = $db::create($array);
 
 		$idNewData = $newData->id;
