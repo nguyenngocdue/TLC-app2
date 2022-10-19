@@ -19,7 +19,7 @@
 		"hidden": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": "required"
+		"validation": ""
 	},
 	"_text2": {
 		"column_name": "text2",
@@ -52,7 +52,7 @@
 		"hidden": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": ""
+		"validation": "required"
 	},
 	"_boolean1": {
 		"column_name": "boolean1",
