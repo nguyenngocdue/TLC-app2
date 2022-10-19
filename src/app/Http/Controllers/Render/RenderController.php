@@ -28,7 +28,7 @@ abstract class RenderController extends Controller
         $idUser = Auth::guard()->id();
         $userLogin = User::find($idUser);
         $search = request('search');
-        $pageLimit = request('page_limit');
+        $pageLimit = $userLogin->settings[$type]['page_limit'] ?? null;
         if ($pageLimit === null) $pageLimit = 10;
         $model = $this->typeModel;
         $post = Post::search($search);
@@ -45,6 +45,34 @@ abstract class RenderController extends Controller
         } else {
             $data = json_decode(file_get_contents($path), true);
             $data2 = json_decode(file_get_contents($path2), true);
+            $filterRenders = array_filter($data, function ($value) {
+                $check = $value['hidden_view_all'] ?? null;
+                return $check !== "true";
+            });
+            $filterRelationships = array_filter($data2, function ($value) {
+                $check = $value['hidden'] ?? null;
+                return $check !== "true";
+            });
+
+            $var = [];
+            foreach ($filterRenders as $key1 => $v1) {
+                foreach ($filterRelationships as $key2 => $v2) {
+                    if ($v1['column_name'] === $v2['param_2']) {
+                        $v1['render'] = 'relationship';
+                        $v1['render_detail'] = $v2;
+                        $filterRenders[$key1] = $v1;
+                        $var[$key2] = $v2;
+                    } else {
+                        if (!isset($v1['render'])) {
+                            $v1['render'] = 'database';
+                            $v1['render_detail'] = null;
+                        }
+                        $filterRenders[$key1] = $v1;
+                    }
+                }
+            }
+            $data = $filterRenders;
+            $data2 = array_diff_key($data2, $var);
             return view('dashboards.render.prop')->with(compact('data', 'data2', 'users', 'pageLimit', 'type', 'userLogin', 'search', 'model'));
         }
     }
@@ -64,12 +92,27 @@ abstract class RenderController extends Controller
     {
         $data = $request->input();
         $entity = $request->input('_entity');
+        if (!$entity) {
+            $page = $request->input('_entity_page');
+            $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT', '_entity_page' => '']);
+            $user = User::find($id);
+            $var = $user->settings;
+            // $result = [];
+            foreach ($data as $key => $value) {
+                $var[$page][$key] = $value;
+            }
+            $user->settings = $var;
+            $user->update();
+            Toastr::success('Save settings Page Limit Users successfully', 'Save file json');
+            return redirect()->back();
+        }
         $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT', '_entity' => '']);
         $user = User::find($id);
         $var = $user->settings;
         $result = [];
         foreach ($data as $key => $value) {
             $result['columns'][$key] = $value;
+            $result['page_limit'] = $var[$entity]['page_limit'];
         }
         $var[$entity] = $result;
         $user->settings = $var;

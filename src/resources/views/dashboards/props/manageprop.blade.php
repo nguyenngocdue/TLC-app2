@@ -30,7 +30,8 @@
                                     <th class="px-4 py-3">Label</th>
                                     <th class="px-4 py-3">Control</th>
                                     <th class="px-4 py-3">Col span</th>
-                                    <th class="px-4 py-3">Hidden</th>
+                                    <th class="px-4 py-3">Hidden View All</th>
+                                    <th class="px-4 py-3">Hidden Edit</th>
                                     <th class="px-4 py-3">New Line</th>
                                     <th class="px-4 py-3">Validation</th>
                                     <th class="px-4 py-3">Frozen Left</th>
@@ -93,12 +94,21 @@
                                                     name="col_span[]" value="{{ $columnColSpans[$key] }}">
                                             </td>
                                             <td class="px-4 py-3 text-sm">
-                                                <select name="hidden[]"
+                                                <select name="hidden_view_all[]"
                                                     class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
                                                     <option value=""
-                                                        @if ($columnHidden[$key] == '') selected @endif></option>
+                                                        @if ($columnHiddenViewAlls[$key] == '') selected @endif></option>
                                                     <option value="true"
-                                                        @if ($columnHidden[$key] === 'true') selected @endif>True</option>
+                                                        @if ($columnHiddenViewAlls[$key] === 'true') selected @endif>True</option>
+                                                </select>
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                <select name="hidden_edit[]"
+                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                    <option value=""
+                                                        @if ($columnHiddenEdits[$key] == '') selected @endif></option>
+                                                    <option value="true"
+                                                        @if ($columnHiddenEdits[$key] === 'true') selected @endif>True</option>
                                                 </select>
                                             </td>
                                             <td class="px-4 py-3 text-sm">
@@ -174,7 +184,14 @@
                                                     value="12">
                                             </td>
                                             <td class="px-4 py-3 text-sm">
-                                                <select name="hidden[]"
+                                                <select name="hidden_view_all[]"
+                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                    <option value=""></option>
+                                                    <option value="true">True</option>
+                                                </select>
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                <select name="hidden_edit[]"
                                                     class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
                                                     <option value=""></option>
                                                     <option value="true">True</option>

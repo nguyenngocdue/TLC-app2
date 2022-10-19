@@ -31,6 +31,10 @@
                     @else
                         @php
                             $dataSetting = json_decode(file_get_contents($pathSetting), true);
+                            $dataSetting = array_filter($dataSetting, function ($value) {
+                                $check = $value['hidden_view_all'] ?? null;
+                                return $check !== 'true';
+                            });
                             $settingDatas = Auth::user()->settings;
                             if (isset($settingDatas[$type]['columns'])) {
                                 $dataRender = array_diff_key($dataSetting, $settingDatas[$type]['columns']);

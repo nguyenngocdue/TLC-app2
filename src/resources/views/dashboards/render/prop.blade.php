@@ -28,9 +28,12 @@
                         </div>
                     </div>
                 </form>
-                <form action="{{ route($type . '_render.index') }}" method="GET">
+                <form action="{{ route($type . '_render.update', Auth::id()) }}" method="post">
+                    @method('PUT')
+                    @csrf
                     <div class="mt-2 flex">
                         <div class="mr-1 w-12">
+                            <input type="hidden" name='_entity_page' value="{{ $type }}">
                             <input type="text" name="page_limit"
                                 class="block w-12 rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                                 value="{{ $pageLimit }}">
@@ -50,25 +53,27 @@
                             <tr
                                 class="border-b bg-gray-50 text-left text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
                                 <th class="px-4 py-3">Action</th>
-                                @foreach ($data as $key => $value)
-                                    @if ($value['hidden'] === null)
+
+                                @isset($data)
+                                    @foreach ($data as $key => $value)
                                         <th class="{{ $key . '_th' }} px-4 py-3" title="{{ $value['column_name'] }}">
                                             {{ $value['label'] }}</th>
-                                    @endif
-                                @endforeach
-                                @php
-                                    $data3 = $data2;
-                                @endphp
-                                @foreach ($data3 as $key => $value)
-                                    @if ($value['hidden'] === null)
-                                        <th class="{{ $key . '_th' }} px-4 py-3" title="{{ $value['relationship'] }}">
-                                            {{ $value['label'] }}</th>
-                                    @endif
-                                @endforeach
+                                    @endforeach
+                                @endisset
+
+                                @isset($data2)
+                                    @foreach ($data2 as $key => $value)
+                                        @if ($value['hidden'] === null)
+                                            <th class="{{ $key . '_th' }} px-4 py-3" title="{{ $value['relationship'] }}">
+                                                {{ $value['label'] }}</th>
+                                        @endif
+                                    @endforeach
+                                @endisset
+
                             </tr>
                         </thead>
                         <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
-                            @if (isset($data))
+                            @isset($data)
                                 @foreach ($users as $key => $user)
                                     <tr class="text-gray-700 dark:text-gray-400">
                                         <td class="px-4 py-3 text-center text-sm">
@@ -78,117 +83,100 @@
                                                 type="button"><i class="fas fa-trash"></i></button>
                                         </td>
                                         @foreach ($data as $key1 => $value)
-                                            @if ($value['hidden'] === null)
-                                                @if ($value['column_name'] === 'id')
-                                                    @if ($value['control'] === 'id')
-                                                        @php
-                                                            $numberRender = str_pad($user[$value['column_name']], 6, '0', STR_PAD_LEFT);
-                                                            $result = '#' . substr($numberRender, 0, 3) . '.' . substr($numberRender, 3, 6);
-                                                        @endphp
-                                                        <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
-                                                            <a href="{{ route($type . '_edit.update', $user[$value['column_name']]) }}"
-                                                                class="text-sm font-normal text-blue-500">{{ $result }}</a>
-                                                        </td>
-                                                    @else
-                                                        <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
-
-                                                            <a
-                                                                href="{{ route($type . '_edit.update', $user[$value['column_name']]) }}">{{ $user[$value['column_name']] }}</a>
-                                                        </td>
-                                                    @endif
+                                            @if ($value['column_name'] === 'id')
+                                                @if ($value['control'] === 'id')
+                                                    @php
+                                                        $numberRender = str_pad($user[$value['column_name']], 6, '0', STR_PAD_LEFT);
+                                                        $result = '#' . substr($numberRender, 0, 3) . '.' . substr($numberRender, 3, 6);
+                                                    @endphp
+                                                    <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
+                                                        <a href="{{ route($type . '_edit.update', $user[$value['column_name']]) }}"
+                                                            class="text-sm font-normal text-blue-500">{{ $result }}</a>
+                                                    </td>
                                                 @else
                                                     <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
-                                                        @if (!is_array($user[$value['column_name']]))
-                                                            @if (isset($data2))
-                                                                @foreach ($data2 as $key2 => $item)
-                                                                    @if ($item['param_2'] === $value['column_name'])
-                                                                        @if ($item['hidden'] === null)
-                                                                            @switch($item['control'])
-                                                                                @case('')
-                                                                                    <div
-                                                                                        title="{{ $user[$value['column_name']] }}">
-                                                                                        <p
-                                                                                            class="rounded-md bg-yellow-400 px-2 py-0 text-xs font-semibold leading-tight text-red-400 dark:bg-red-500 dark:text-green-100">
-                                                                                            None Set
-                                                                                        </p>
-                                                                                    </div>
-                                                                                @break
 
-                                                                                @case('attachment')
-                                                                                    @if ($model === 'App\Models\User')
-                                                                                        <div
-                                                                                            title="{{ $user[$value['column_name']] }}">
-
-                                                                                            <x-render.attachment
-                                                                                                attachment="{{ $user->id }}"
-                                                                                                model="{{ $model }}"
-                                                                                                relationship="{{ $item['relationship'] }}" />
-                                                                                        </div>
-                                                                                    @else
-                                                                                        Render Failed
-                                                                                    @endif
-                                                                                @break
-
-                                                                                @case('count')
-                                                                                    <div
-                                                                                        title="{{ $user[$value['column_name']] }}">
-                                                                                        <x-render.count
-                                                                                            count="{{ $user->{$item['relationship']} ? (is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0') : '' }}" />
-                                                                                    </div>
-                                                                                @break
-
-                                                                                @case('column')
-                                                                                    @php
-                                                                                        $render = $user->{$item['relationship']}->{$item['control_param']} ?? '';
-                                                                                    @endphp
-                                                                                    <div
-                                                                                        title="{{ $user[$value['column_name']] }}">
-                                                                                        <span
-                                                                                            class="text-sm">{{ $render }}</span>
-                                                                                    </div>
-                                                                                @break
-
-                                                                                @case('avatar_name')
-                                                                                    @if ($user->{$item['relationship']} != null && is_array($user->{$item['relationship']}))
-                                                                                        <div
-                                                                                            title="{{ $user[$value['column_name']] }}">
-                                                                                            <x-render.user
-                                                                                                src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg"
-                                                                                                name_rendered="{{ $user->{$item['relationship']}->name_rendered }}"
-                                                                                                email="{{ $user->{$item['relationship']}->email }}" />
-                                                                                        </div>
-                                                                                    @else
-                                                                                        @php
-                                                                                            $users = $user->{$item['relationship']};
-                                                                                        @endphp
-                                                                                        <div
-                                                                                            title="{{ $user[$value['column_name']] }}">
-                                                                                            <x-render.users :users="$users" />
-                                                                                        </div>
-                                                                                    @endif
-                                                                                @break
-
-                                                                                @default
-                                                                                    <div
-                                                                                        title="{{ $user[$value['column_name']] }}">
-                                                                                        {{ $item['control'] }}
-                                                                                    </div>
-                                                                            @endswitch
-                                                                            @php
-                                                                                unset($data2[$key2]);
-                                                                            @endphp
-                                                                        @endif
-                                                                    @else
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
-                                                            {{ $user[$value['column_name']] }}
-                                                        @endif
+                                                        <a
+                                                            href="{{ route($type . '_edit.update', $user[$value['column_name']]) }}">{{ $user[$value['column_name']] }}</a>
                                                     </td>
                                                 @endif
+                                            @else
+                                                <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
+                                                    @if (!is_array($user[$value['column_name']]))
+                                                        @if ($value['render'] === 'relationship')
+                                                            @php
+                                                                $item = $value['render_detail'];
+                                                            @endphp
+                                                            @switch($item['control'])
+                                                                @case('')
+                                                                    <div title="{{ $user[$value['column_name']] }}">
+                                                                        <p
+                                                                            class="rounded-md bg-yellow-400 px-2 py-0 text-xs font-semibold leading-tight text-red-400 dark:bg-red-500 dark:text-green-100">
+                                                                            None Set
+                                                                        </p>
+                                                                    </div>
+                                                                @break
+
+                                                                @case('attachment')
+                                                                    @if ($model === 'App\Models\User')
+                                                                        <div title="{{ $user[$value['column_name']] }}">
+
+                                                                            <x-render.attachment attachment="{{ $user->id }}"
+                                                                                model="{{ $model }}"
+                                                                                relationship="{{ $item['relationship'] }}" />
+                                                                        </div>
+                                                                    @else
+                                                                        Render Failed
+                                                                    @endif
+                                                                @break
+
+                                                                @case('count')
+                                                                    <div title="{{ $user[$value['column_name']] }}">
+                                                                        <x-render.count
+                                                                            count="{{ $user->{$item['relationship']} ? (is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0') : '' }}" />
+                                                                    </div>
+                                                                @break
+
+                                                                @case('column')
+                                                                    @php
+                                                                        $render = $user->{$item['relationship']}->{$item['control_param']} ?? '';
+                                                                    @endphp
+                                                                    <div title="{{ $user[$value['column_name']] }}">
+                                                                        <span class="text-sm">{{ $render }}</span>
+                                                                    </div>
+                                                                @break
+
+                                                                @case('avatar_name')
+                                                                    @if ($user->{$item['relationship']} != null && is_array($user->{$item['relationship']}))
+                                                                        <div title="{{ $user[$value['column_name']] }}">
+                                                                            <x-render.user
+                                                                                src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg"
+                                                                                name_rendered="{{ $user->{$item['relationship']}->name_rendered }}"
+                                                                                email="{{ $user->{$item['relationship']}->email }}" />
+                                                                        </div>
+                                                                    @else
+                                                                        @php
+                                                                            $users = $user->{$item['relationship']};
+                                                                        @endphp
+                                                                        <div title="{{ $user[$value['column_name']] }}">
+                                                                            <x-render.users :users="$users" />
+                                                                        </div>
+                                                                    @endif
+                                                                @break
+
+                                                                @default
+                                                                    <div title="{{ $user[$value['column_name']] }}">
+                                                                        {{ $item['control'] }}
+                                                                    </div>
+                                                            @endswitch
+                                                        @else
+                                                            {{ $user[$value['column_name']] }}
+                                                        @endif
+                                                    @endif
+                                                </td>
                                             @endif
                                         @endforeach
-                                        @if (isset($data2))
+                                        @isset($data2)
                                             @foreach ($data2 as $key2 => $item)
                                                 @if ($item['hidden'] === null)
                                                     @switch($item['control'])
@@ -216,8 +204,10 @@
 
                                                         @case('count')
                                                             <td class="text-center">
-                                                                <x-render.count
-                                                                    count="{{ $user->{$item['relationship']} ? (is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0') : '' }}" />
+                                                                @isset($user->{$item['relationship']})
+                                                                    <x-render.count
+                                                                        count="{{ !is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0' }}" />
+                                                                @endisset()
                                                             </td>
                                                         @break
 
@@ -253,10 +243,10 @@
                                                     @endswitch
                                                 @endif
                                             @endforeach
-                                        @endif
+                                        @endisset
                                     </tr>
                                 @endforeach
-                            @endif
+                            @endisset
                         </tbody>
                         <tfoot>
                         </tfoot>

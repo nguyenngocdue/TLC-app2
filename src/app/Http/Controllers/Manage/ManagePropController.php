@@ -43,7 +43,8 @@ abstract class ManagePropController extends Controller
             $columnLabels = [];
             $columnControls = [];
             $columnColSpans = [];
-            $columnHidden = [];
+            $columnHiddenViewAlls = [];
+            $columnHiddenEdits = [];
             $columnNewLines = [];
             $columnValidations = [];
             $columnFrozenLefts = [];
@@ -56,7 +57,8 @@ abstract class ManagePropController extends Controller
                 $columnLabels[$key] = $data['label'] ?? "";
                 $columnControls[$key] = $data['control'] ?? "";
                 $columnColSpans[$key] = $data['col_span'] ?? "";
-                $columnHidden[$key] = $data['hidden'] ?? "";
+                $columnHiddenViewAlls[$key] = $data['hidden_view_all'] ?? "";
+                $columnHiddenEdits[$key] = $data['hidden_edit'] ?? "";
                 $columnNewLines[$key] = $data['new_line'] ?? "";
                 $columnValidations[$key] = $data['validation'] ?? "";
                 $columnFrozenLefts[$key] = $data['frozen_left'] ?? "";
@@ -74,7 +76,8 @@ abstract class ManagePropController extends Controller
                     'columnLabels',
                     'columnControls',
                     'columnColSpans',
-                    'columnHidden',
+                    'columnHiddenViewAlls',
+                    'columnHiddenEdits',
                     'columnNewLines',
                     'columnValidations',
                     'columnFrozenLefts',
@@ -90,8 +93,9 @@ abstract class ManagePropController extends Controller
                     $columnLabels['_' . $value] = $value;
                     $columnControls['_' . $value] = "input";
                     $columnColSpans['_' . $value] = "12";
-                    $columnHidden['_' . $value] = "false";
-                    $columnNewLines['_' . $value] = "false";
+                    $columnHiddenViewAlls['_' . $value] = "";
+                    $columnHiddenEdits['_' . $value] = "";
+                    $columnNewLines['_' . $value] = "";
                     $columnValidations['_' . $value] = "";
                     $columnFrozenLefts['_' . $value] = "";
                     $columnFrozenRights['_' . $value] = "";
@@ -129,7 +133,8 @@ abstract class ManagePropController extends Controller
             $array['label'] = $data['label'][$key];
             $array['control'] = $data['control'][$key];
             $array['col_span'] = $data['col_span'][$key];
-            $array['hidden'] = $data['hidden'][$key];
+            $array['hidden_view_all'] = $data['hidden_view_all'][$key];
+            $array['hidden_edit'] = $data['hidden_edit'][$key];
             $array['new_line'] = $data['new_line'][$key];
             $array['type_line'] = "default";
             $array['validation'] = "";
