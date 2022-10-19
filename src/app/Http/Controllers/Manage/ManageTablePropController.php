@@ -29,13 +29,18 @@ abstract class ManageTablePropController extends Controller
         try {
             [$dataManage, $tableNames] = $this->manageService->pathTable($this->type, 'tables', 'tableName');
         } catch (\Throwable $error) {
-            return view('dashboards.props.error')->with(compact('error'));
+            $title = 'Warning Settings';
+            $error = 'Setting Manage Table Prop Control json failed!
+            Please fix file controls.json before Run URL.';
+            return view('dashboards.props.error')->with(compact('title', 'error'));
         }
         if (!$dataManage) {
             $columnNames = [];
             $columnTypes = [];
             $columnTableNames = [];
             foreach ($tableNames as $key => $tableName) {
+
+
                 $columnNameTable = Table::getColumn($tableName);
                 foreach ($columnNameTable as $columnName) {
                     $typeColumn = Schema::getColumnType($tableName, $columnName);

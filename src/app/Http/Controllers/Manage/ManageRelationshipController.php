@@ -28,6 +28,12 @@ abstract class ManageRelationshipController extends Controller
         $typeModel = $this->typeModel;
         $model = App::make($typeModel);
         $columnEloquentParams = $model->eloquentParams;
+        if (!$columnEloquentParams) {
+            $title = 'Warning Settings';
+            $error = 'Setting Model Eloquent Param empty!
+            Please fix Model Eloquent Param before Run URL.';
+            return view('dashboards.props.error')->with(compact('title', 'error'));
+        }
         $dataManage = $this->manageService->path($this->type, 'relationships');
         if (!$dataManage) {
             $columnRelationships = array_keys($columnEloquentParams);

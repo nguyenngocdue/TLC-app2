@@ -41,194 +41,203 @@
                             </thead>
                             <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
                                 @php
-                                    $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/props/controls.json'), true)['controls'];
+                                    try {
+                                        $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/props/controls.json'), true)['controls'];
+                                    } catch (\Throwable $th) {
+                                        $errorsLineProp = "Setting Prop Control json fail!
+                                        Please fix file controls.json before Run.";
+                                    }
                                 @endphp
-                                @if (isset($names))
-                                    @php
-                                        $number = 1;
-                                    @endphp
-                                    @foreach ($names as $key => $name)
-                                        <tr class="table-line-{{ $colorLines[$key] }} text-gray-700 dark:text-gray-400">
-                                            <td class="px-4 py-3 text-sm">{{ $number }}</td>
-                                            @php
-                                                $number++;
-                                            @endphp
-                                            <td class="px-4 py-3 text-sm">
-                                                {{ $name }}
-                                                <input type="text" name="name[]" value="{{ $name }}" readonly
-                                                    hidden>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                {{ $columnNames[$key] }}
-                                                <input type="text" name="column_name[]" value="{{ $columnNames[$key] }}"
-                                                    readonly hidden>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                {{ $columnTypes[$key] }}
-                                                <input type="text" name="column_type[]" value="{{ $columnTypes[$key] }}"
-                                                    readonly hidden>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <input type="text"
-                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                    name="label[]"
-                                                    value="{{ ucwords(str_replace('_', ' ', $columnLabels[$key])) }}">
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <select name="control[]"
-                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
-                                                    @foreach ($controls as $control)
-                                                        @if ($columnControls[$key] === $control)
-                                                            <option value="{{ $control }}" selected>
-                                                                {{ ucfirst($control) }}</option>
-                                                        @else
+                                @isset($errorsLineProp)
+                                    <x-render.warningfix title="Warning Settings" warning="{{ $errorsLineProp }}" />
+                                @else
+                                    @isset($names)
+                                        @php
+                                            $number = 1;
+                                        @endphp
+                                        @foreach ($names as $key => $name)
+                                            <tr class="table-line-{{ $colorLines[$key] }} text-gray-700 dark:text-gray-400">
+                                                <td class="px-4 py-3 text-sm">{{ $number }}</td>
+                                                @php
+                                                    $number++;
+                                                @endphp
+                                                <td class="px-4 py-3 text-sm">
+                                                    {{ $name }}
+                                                    <input type="text" name="name[]" value="{{ $name }}" readonly
+                                                        hidden>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    {{ $columnNames[$key] ?? '' }}
+                                                    <input type="text" name="column_name[]"
+                                                        value="{{ $columnNames[$key] ?? '' }}" readonly hidden>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    {{ $columnTypes[$key] ?? '' }}
+                                                    <input type="text" name="column_type[]"
+                                                        value="{{ $columnTypes[$key] ?? '' }}" readonly hidden>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <input type="text"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                        name="label[]"
+                                                        value="{{ ucwords(str_replace('_', ' ', $columnLabels[$key])) }}">
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <select name="control[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                        @foreach ($controls as $control)
+                                                            @if ($columnControls[$key] === $control)
+                                                                <option value="{{ $control }}" selected>
+                                                                    {{ ucfirst($control) }}</option>
+                                                            @else
+                                                                <option value="{{ $control }}">{{ ucfirst($control) }}
+                                                                </option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <input type="text"
+                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                        name="col_span[]" value="{{ $columnColSpans[$key] ?? '' }}">
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <select name="hidden_view_all[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                        <option value="" @if ($columnHiddenViewAlls[$key] == '') selected @endif>
+                                                        </option>
+                                                        <option value="true" @if ($columnHiddenViewAlls[$key] === 'true') selected @endif>
+                                                            True</option>
+                                                    </select>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <select name="hidden_edit[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                        <option value="" @if ($columnHiddenEdits[$key] == '') selected @endif>
+                                                        </option>
+                                                        <option value="true" @if ($columnHiddenEdits[$key] === 'true') selected @endif>
+                                                            True</option>
+                                                    </select>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <select name="new_line[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                        <option value="" @if ($columnNewLines[$key] == '') selected @endif>
+                                                        </option>
+                                                        <option value="true" @if ($columnNewLines[$key] === 'true') selected @endif>
+                                                            True</option>
+                                                    </select>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <input type="text"
+                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                        name="validation[]" value="{{ $columnValidations[$key] ?? '' }}">
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <input type="text"
+                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                        name="frozen_left[]" value="{{ $columnFrozenLefts[$key] ?? '' }}">
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <input type="text"
+                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                        name="frozen_right[]" value="{{ $columnFrozenRights[$key] ?? '' }}">
+                                                </td>
+                                                <td class="px-4 py-3 text-center text-sm">
+                                                    @if ($colorLines[$key] == 'removed')
+                                                        <button class="btn btn-danger btn-delete"
+                                                            data-url="{{ route($type . '_mngprop.destroy', $name) }}"​
+                                                            type="button"><i class="fas fa-trash"></i></button>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        @foreach ($columnNames as $key => $columnName)
+                                            <tr class="table-line-new text-gray-700 dark:text-gray-400">
+                                                <td class="px-4 py-3 text-sm">{{ $key + 1 }}</td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    _{{ $columnName }}
+                                                    <input type="text" name="name[]" class="form-control"
+                                                        value="_{{ $columnName }}" readonly hidden>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    {{ $columnName }}
+                                                    <input type="text" name="column_name[]" class="form-control"
+                                                        value="{{ $columnName }}" readonly hidden>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    {{ $columnTypes[$key] ?? '' }}
+                                                    <input type="text" name="column_type[]" class="form-control"
+                                                        value="{{ $columnTypes[$key] ?? '' }}" readonly hidden>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <input type="text" name="label[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                        value="{{ ucwords(str_replace('_', ' ', $columnName)) }}">
+                                                </td>
+
+                                                <td class="px-4 py-3 text-sm">
+                                                    <select name="control[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                        @foreach ($controls as $control)
                                                             <option value="{{ $control }}">{{ ucfirst($control) }}
                                                             </option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <input type="text"
-                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                    name="col_span[]" value="{{ $columnColSpans[$key] }}">
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <select name="hidden_view_all[]"
-                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
-                                                    <option value=""
-                                                        @if ($columnHiddenViewAlls[$key] == '') selected @endif></option>
-                                                    <option value="true"
-                                                        @if ($columnHiddenViewAlls[$key] === 'true') selected @endif>True</option>
-                                                </select>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <select name="hidden_edit[]"
-                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
-                                                    <option value=""
-                                                        @if ($columnHiddenEdits[$key] == '') selected @endif></option>
-                                                    <option value="true"
-                                                        @if ($columnHiddenEdits[$key] === 'true') selected @endif>True</option>
-                                                </select>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <select name="new_line[]"
-                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
-                                                    <option value=""
-                                                        @if ($columnNewLines[$key] == '') selected @endif></option>
-                                                    <option value="true"
-                                                        @if ($columnNewLines[$key] === 'true') selected @endif>True</option>
-                                                </select>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <input type="text"
-                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                    name="validation[]" value="{{ $columnValidations[$key] }}">
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <input type="text"
-                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                    name="frozen_left[]" value="{{ $columnFrozenLefts[$key] }}">
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <input type="text"
-                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                    name="frozen_right[]" value="{{ $columnFrozenRights[$key] }}">
-                                            </td>
-                                            <td class="px-4 py-3 text-center text-sm">
-                                                @if ($colorLines[$key] == 'removed')
-                                                    <button class="btn btn-danger btn-delete"
-                                                        data-url="{{ route($type . '_mngprop.destroy', $name) }}"​
-                                                        type="button"><i class="fas fa-trash"></i></button>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @else
-                                    @foreach ($columnNames as $key => $columnName)
-                                        <tr class="table-line-new text-gray-700 dark:text-gray-400">
-                                            <td class="px-4 py-3 text-sm">{{ $key + 1 }}</td>
-                                            <td class="px-4 py-3 text-sm">
-                                                _{{ $columnName }}
-                                                <input type="text" name="name[]" class="form-control"
-                                                    value="_{{ $columnName }}" readonly hidden>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                {{ $columnName }}
-                                                <input type="text" name="column_name[]" class="form-control"
-                                                    value="{{ $columnName }}" readonly hidden>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                {{ $columnTypes[$key] }}
-                                                <input type="text" name="column_type[]" class="form-control"
-                                                    value="{{ $columnTypes[$key] }}" readonly hidden>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <input type="text" name="label[]"
-                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                    value="{{ ucwords(str_replace('_', ' ', $columnName)) }}">
-                                            </td>
-
-                                            <td class="px-4 py-3 text-sm">
-                                                <select name="control[]"
-                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
-                                                    @foreach ($controls as $control)
-                                                        <option value="{{ $control }}">{{ ucfirst($control) }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <input type="text" name="col_span[]"
-                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                    value="12">
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <select name="hidden_view_all[]"
-                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
-                                                    <option value=""></option>
-                                                    <option value="true">True</option>
-                                                </select>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <select name="hidden_edit[]"
-                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
-                                                    <option value=""></option>
-                                                    <option value="true">True</option>
-                                                </select>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <select name="new_line[]"
-                                                    class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
-                                                    <option value=""></option>
-                                                    <option value="true">True</option>
-                                                </select>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <input type="text"
-                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                    name="validation[]" value="">
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <input type="text"
-                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                    name="frozen_left[]" value="">
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <input type="text"
-                                                    class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                    name="frozen_right[]" value="">
-                                            </td>
-                                            <td class="px-4 py-3 text-center text-sm">
-                                                @if (isset($colorLines))
-                                                    <button class="btn btn-danger btn-delete"
-                                                        data-url="{{ route('mngprop.destroy', $name) }}"​
-                                                        type="button"><i class="fas fa-trash"></i></button>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <input type="text" name="col_span[]"
+                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                        value="12">
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <select name="hidden_view_all[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                        <option value=""></option>
+                                                        <option value="true">True</option>
+                                                    </select>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <select name="hidden_edit[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                        <option value=""></option>
+                                                        <option value="true">True</option>
+                                                    </select>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <select name="new_line[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                        <option value=""></option>
+                                                        <option value="true">True</option>
+                                                    </select>
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <input type="text"
+                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                        name="validation[]" value="">
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <input type="text"
+                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                        name="frozen_left[]" value="">
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <input type="text"
+                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                                        name="frozen_right[]" value="">
+                                                </td>
+                                                <td class="px-4 py-3 text-center text-sm">
+                                                    @if (isset($colorLines))
+                                                        <button class="btn btn-danger btn-delete"
+                                                            data-url="{{ route('mngprop.destroy', $name) }}"​ type="button"><i
+                                                                class="fas fa-trash"></i></button>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endisset
+                                @endisset
                             </tbody>
                             <tfoot>
                             </tfoot>
