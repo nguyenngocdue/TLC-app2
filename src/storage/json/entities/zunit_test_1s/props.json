@@ -63,7 +63,7 @@
 		"hidden": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": ""
+		"validation": "required"
 	},
 	"_created_at": {
 		"column_name": "created_at",
