@@ -9,7 +9,7 @@
 		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": ""
+		"validation": "required"
 	},
 	"_text1": {
 		"column_name": "text1",

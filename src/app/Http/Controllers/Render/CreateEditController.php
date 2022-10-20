@@ -83,6 +83,7 @@ abstract class CreateEditController extends Controller
 			}
 		}
 
+		dd($dataInput);
 
 		// Update dataInput to database
 		foreach ($dataInput as $key => $value) {
@@ -131,6 +132,7 @@ abstract class CreateEditController extends Controller
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 		$dataInput = $request->input();
+		// $request->except('_token');
 		unset($dataInput['_token']);
 		unset($dataInput['_method']);
 		$db = $this->data;
@@ -157,17 +159,10 @@ abstract class CreateEditController extends Controller
 			}
 		}
 
-		// dd($dataInput);
 
 
 		// Save data to database
-		$array = [];
-		foreach ($dataInput as $key => $value) {
-			$array[$key] = $value;
-		}
-		$newData = $db::create($array);
-
-
+		$newData = $db::create($dataInput);
 
 
 		if ($newData) {
