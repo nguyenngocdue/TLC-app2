@@ -7,7 +7,7 @@
     </label>
     @error($colName)
     <span class="text-xs text-red-400 font-light" role="alert">
-        <strong id="{{$colName}}">{{$message}}</strong>
+        <strong>{{$message}}</strong>
     </span>
     @enderror
 </div>
