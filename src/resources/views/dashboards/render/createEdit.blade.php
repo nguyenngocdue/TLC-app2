@@ -48,11 +48,11 @@
                 $value_column_name = $action === "edit" ? $values->{$column_name} : "";
                 if(is_array($value_column_name)) $value_column_name = 'ARRAY';
                 $col_span=$value['col_span'];
-                $hiddenRow = $props[$key]['hidden'] === "true" ? "hidden":"";
+                $hiddenRow = $props[$key]['hidden_view_all'] === "true" ? "hidden_view_all":"";
                 @endphp
                 <div class='col-span-{{$col_span}}'>
                     <div class='grid grid-row-1 gap-3'>
-                        <div class='grid grid-cols-12 items-center {{$hiddenRow}}  '>
+                        <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
                             <div class='col-start-1 col-span-{{24/$col_span}} text-right'>
                                 <label class='block tracking-wide text-gray-800 mb-2 px-3 text-base' title='{{$column_name}} / {{$control}}'>{{$label}}
                                 </label>
