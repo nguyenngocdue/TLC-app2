@@ -82,9 +82,6 @@ abstract class CreateEditController extends Controller
 				array_push($itemAttachment, $value['column_name']);
 			}
 		}
-
-		dd($dataInput);
-
 		// Update dataInput to database
 		foreach ($dataInput as $key => $value) {
 			// dd($data->{$key});
@@ -117,7 +114,7 @@ abstract class CreateEditController extends Controller
 		if ($props  === false) {
 			$title = "Setting is missing";
 			$error =  "File \"$this->r_fileName\" is missing. <br/>Please create this file by \"manage prop\".";
-			return view('components.render.warning')->with(compact('error', 'title'));
+			return view('components.render.resultWarning')->with(compact('error', 'title'));
 		}
 
 
