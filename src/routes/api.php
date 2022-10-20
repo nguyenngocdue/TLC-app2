@@ -1,6 +1,9 @@
 <?php
 
+use App\Utils\System\Memory;
+use App\Utils\System\Timer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Timer::startTimeCounter();
+Memory::startMemory();
 Route::group([
     'prefix' => 'v1/auth',
 ], function () {
@@ -27,5 +32,21 @@ Route::group([
     ], function () {
         Route::get('logout', [App\Http\Controllers\Api\v1\Auth\AuthController::class, 'logout']);
         Route::get('user', [App\Http\Controllers\Api\v1\Auth\AuthController::class, 'user']);
+    });
+});
+Route::group([
+    'prefix' => 'v1/prod',
+], function () {
+    Route::group([
+        'middleware' => ['auth:sanctum'],
+    ], function () {
+        Route::get('sub_projects', [App\Http\Controllers\Api\v1\Production\ProductionController::class, 'getSubProjects']);
+        Route::get('sub_projects/{id}', [App\Http\Controllers\Api\v1\Production\ProductionController::class, 'getProdOrders']);
+        Route::get('sub_projects/{id1}/prod_orders/{id2}', [App\Http\Controllers\Api\v1\Production\ProductionController::class, 'getProdOrders']);
+        Route::resource("prod_run", App\Http\Controllers\Api\v1\Production\ProductionRunController::class);
+        Route::put("prod_run/stopped/{prod_run_id}", [App\Http\Controllers\Api\v1\Production\ProductionRunController::class, 'stopped'])->name('prod_run.stopped');
+        Route::resource("prod_line", App\Http\Controllers\Api\v1\Production\ProductionRunLineController::class);
+        Route::get("prod_line/duplicate/{id}", [App\Http\Controllers\Api\v1\Production\ProductionRunLineController::class, 'duplicate'])->name('prod_line.duplicate');
+        Route::get("prod_line/{sub_project_id}/{prod_order_id}/{prod_routing_link_id}", [App\Http\Controllers\Api\v1\Production\ProductionRunLineController::class, 'prodLine'])->name('prod_run.live');
     });
 });

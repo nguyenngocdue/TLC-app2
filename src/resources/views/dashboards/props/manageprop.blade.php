@@ -134,14 +134,22 @@
                                                         name="validation[]" value="{{ $columnValidations[$key] ?? '' }}">
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <input type="text"
-                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                        name="frozen_left[]" value="{{ $columnFrozenLefts[$key] ?? '' }}">
+                                                    <select name="frozen_left[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                        <option value="" @if ($columnFrozenLefts[$key] == '') selected @endif>
+                                                        </option>
+                                                        <option value="true" @if ($columnFrozenLefts[$key] === 'true') selected @endif>
+                                                            True</option>
+                                                    </select>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <input type="text"
-                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                        name="frozen_right[]" value="{{ $columnFrozenRights[$key] ?? '' }}">
+                                                    <select name="frozen_right[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                        <option value="" @if ($columnFrozenRights[$key] == '') selected @endif>
+                                                        </option>
+                                                        <option value="true" @if ($columnFrozenRights[$key] === 'true') selected @endif>
+                                                            True</option>
+                                                    </select>
                                                 </td>
                                                 <td class="px-4 py-3 text-center text-sm">
                                                     @if ($colorLines[$key] == 'removed')
@@ -218,14 +226,18 @@
                                                         name="validation[]" value="">
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <input type="text"
-                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                        name="frozen_left[]" value="">
+                                                    <select name="frozen_left[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                        <option value=""></option>
+                                                        <option value="true">True</option>
+                                                    </select>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <input type="text"
-                                                        class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                        name="frozen_right[]" value="">
+                                                    <select name="frozen_right[]"
+                                                        class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
+                                                        <option value=""></option>
+                                                        <option value="true">True</option>
+                                                    </select>
                                                 </td>
                                                 <td class="px-4 py-3 text-center text-sm">
                                                     @if (isset($colorLines))

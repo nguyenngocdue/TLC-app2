@@ -68,7 +68,6 @@
                                         @endif
                                     @endforeach
                                 @endisset
-
                             </tr>
                         </thead>
                         <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
@@ -202,7 +201,10 @@
                                                                             model="{{ $model }}"
                                                                             relationship="{{ $item['relationship'] }}" />
                                                                     @else
-                                                                        Render Failed
+                                                                        <p
+                                                                            class="rounded-md bg-red-300 px-2 py-0 text-xs font-semibold leading-tight text-red-400 dark:bg-red-500 dark:text-green-100">
+                                                                            Render Failed
+                                                                        </p>
                                                                     @endif
 
                                                                 </td>
@@ -214,7 +216,10 @@
                                                                         <x-render.count
                                                                             count="{{ !is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0' }}" />
                                                                     @else
-                                                                        Render Failed
+                                                                        <p
+                                                                            class="rounded-md bg-red-300 px-2 py-0 text-xs font-semibold leading-tight text-red-400 dark:bg-red-500 dark:text-green-100">
+                                                                            Render Failed
+                                                                        </p>
                                                                     @endisset
                                                                 </td>
                                                             @break
@@ -246,7 +251,9 @@
 
                                                             @default
                                                                 <td class="px-4 py-3">
-                                                                    {{ $item['control'] }}
+                                                                    {!! $item['control'] ??
+                                                                        '<p class="rounded-md bg-red-300 px-2 py-0 text-xs font-semibold leading-tight text-red-400 dark:bg-red-500 dark:text-green-100">
+                                                                                                                                                Render Failed </p>' !!}
                                                                 </td>
                                                         @endswitch
                                                     @endif

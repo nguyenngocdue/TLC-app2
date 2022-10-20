@@ -32,6 +32,31 @@ return new class extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->foreign('owner_id')->references('id')->on('users');
         });
+        Schema::table('prod_user_runs', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('prod_run_id')->references('id')->on('prod_lines')->onDelete('cascade')->onUpdate('cascade');
+        });
+        Schema::table('prod_lines', function (Blueprint $table) {
+            $table->foreign('prod_run_id')->references('id')->on('prod_runs');
+        });
+        Schema::table('prod_runs', function (Blueprint $table) {
+            $table->foreign('prod_order_id')->references('id')->on('prod_orders');
+            $table->foreign('prod_routing_link_id')->references('id')->on('prod_routing_links');
+        });
+        Schema::table('prod_orders', function (Blueprint $table) {
+            $table->foreign('sub_project_id')->references('id')->on('sub_projects');
+            $table->foreign('prod_routing_id')->references('id')->on('prod_routings');
+        });
+        Schema::table('prod_routing_details', function (Blueprint $table) {
+            $table->foreign('routing_id')->references('id')->on('prod_routings')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('routing_link_id')->references('id')->on('prod_routing_links')->onDelete('cascade')->onUpdate('cascade');
+        });
+        Schema::table('prod_routing_links', function (Blueprint $table) {
+            $table->foreign('parent')->references('id')->on('prod_disciplines');
+        });
+        Schema::table('sub_projects', function (Blueprint $table) {
+            $table->foreign('sub_project_status_id')->references('id')->on('sub_project_statuses');
+        });
     }
 
     /**

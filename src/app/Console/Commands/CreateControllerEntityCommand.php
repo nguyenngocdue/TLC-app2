@@ -107,13 +107,13 @@ class CreateControllerEntityCommand extends Command
     protected function getStub($render)
     {
         if (!$render) {
-            $stub1 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.manageprop.stub')
+            $stub1 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/ndc.controller.manageprop.stub')
                 ? $customPath
                 : $this->stubPath() . '/ndc.controller.manageprop.stub';
-            $stub2 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.managerelationship.stub')
+            $stub2 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/ndc.controller.managerelationship.stub')
                 ? $customPath
                 : $this->stubPath() . '/ndc.controller.managerelationship.stub';
-            $stub3 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.managetableprop.stub')
+            $stub3 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/ndc.controller.managetableprop.stub')
                 ? $customPath
                 : $this->stubPath() . '/ndc.controller.managetableprop.stub';
             $stubs = [$stub1, $stub2, $stub3];
@@ -123,13 +123,13 @@ class CreateControllerEntityCommand extends Command
             }
             return $result;
         } else {
-            $stub1 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.render.stub')
+            $stub1 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/ndc.controller.render.stub')
                 ? $customPath
                 : $this->stubPath() . '/ndc.controller.render.stub';
-            $stub2 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.edit.stub')
+            $stub2 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/ndc.controller.edit.stub')
                 ? $customPath
                 : $this->stubPath() . '/ndc.controller.edit.stub';
-            $stub3 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/controller.create.stub')
+            $stub3 = $this->creator->getFilesystem()->exists($customPath = $this->creator->getCustomPath() . '/ndc.controller.create.stub')
                 ? $customPath
                 : $this->stubPath() . '/ndc.controller.create.stub';
             $stubs = [$stub1, $stub2, $stub3];

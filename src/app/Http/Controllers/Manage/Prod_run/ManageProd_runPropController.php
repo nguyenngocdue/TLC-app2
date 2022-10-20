@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Http\Controllers\Manage\Prod_run;
+
+use App\Http\Controllers\Manage\ManagePropController;
+
+class ManageProd_runPropController extends ManagePropController
+{
+    protected $type = 'prod_run';
+}
