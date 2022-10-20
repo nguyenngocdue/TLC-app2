@@ -37,7 +37,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
+        "validation": "required",
         "frozen_left": "",
         "frozen_right": ""
     },
@@ -51,7 +51,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
+        "validation": "required",
         "frozen_left": "",
         "frozen_right": ""
     },
@@ -93,7 +93,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
+        "validation": "required",
         "frozen_left": "",
         "frozen_right": ""
     },
@@ -107,7 +107,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
+        "validation": "required",
         "frozen_left": "",
         "frozen_right": ""
     },
@@ -163,7 +163,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
+        "validation": "required",
         "frozen_left": "",
         "frozen_right": ""
     },
@@ -331,7 +331,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
+        "validation": "required",
         "frozen_left": "",
         "frozen_right": ""
     },
@@ -429,7 +429,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
+        "validation": "required",
         "frozen_left": "",
         "frozen_right": ""
     },
@@ -443,7 +443,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
+        "validation": "required",
         "frozen_left": "",
         "frozen_right": ""
     },
@@ -457,7 +457,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
+        "validation": "required",
         "frozen_left": "",
         "frozen_right": ""
     },

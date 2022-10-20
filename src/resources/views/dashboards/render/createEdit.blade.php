@@ -20,6 +20,8 @@
     </div>
 </div>
 <div class="grid grid-rows-1 bg-gray-100">
+
+
     <div class="mx-auto flex flex-col min-h-screen items-center py-5">
         {{-- {{dd($type)}} --}}
         @php
@@ -28,8 +30,8 @@
         $id = $action === "edit" ? $values->id : "";
         $idAvatar = isset($values['avatar']) ? $values['avatar']: "";
         @endphp
-        @include('components.render.alertForms')
-        <form class="rounded-md bg-gray-300 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
+        @include('components.render.alertValidations')
+        <form class="rounded-md bg-gray-50 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
             @csrf
             {{-- <div class="mx-auto max-w-4xl flex-1"> --}}
             <div class="flex flex-col grid-cols-12">
@@ -48,11 +50,11 @@
                 $value_column_name = $action === "edit" ? $values->{$column_name} : "";
                 if(is_array($value_column_name)) $value_column_name = 'ARRAY';
                 $col_span=$value['col_span'];
-                $hiddenRow = $props[$key]['hidden'] === "true" ? "hidden":"";
+                $hiddenRow = $props[$key]['hidden_view_all'] === "true" ? "hidden_view_all":"";
                 @endphp
                 <div class='col-span-{{$col_span}}'>
                     <div class='grid grid-row-1 gap-3'>
-                        <div class='grid grid-cols-12 items-center {{$hiddenRow}}  '>
+                        <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
                             <div class='col-start-1 col-span-{{24/$col_span}} text-right'>
                                 <label class='block tracking-wide text-gray-800 mb-2 px-3 text-base' title='{{$column_name}} / {{$control}}'>{{$label}}
                                 </label>
@@ -61,7 +63,7 @@
                                 @if (is_null($control))
                                 <h2 class="text-red-400">{{"Control of this $column_name has not been set"}}</h2>
                                 @endif
-
+                                <strong class="scroll-mt-20 snap-start" id="{{$column_name}}"></strong>
                                 @switch ($control)
                                 @case($timeControls[0])
                                 @case($timeControls[1])

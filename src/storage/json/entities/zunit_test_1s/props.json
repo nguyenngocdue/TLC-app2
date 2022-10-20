@@ -5,10 +5,11 @@
 		"label": "Id",
 		"control": "id",
 		"col_span": "12",
-		"hidden": true,
+		"hidden_view_all": null,
+		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": ""
+		"validation": "required"
 	},
 	"_text1": {
 		"column_name": "text1",
@@ -16,7 +17,8 @@
 		"label": "Text1",
 		"control": "text",
 		"col_span": "12",
-		"hidden": null,
+		"hidden_view_all": null,
+		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
 		"validation": ""
@@ -27,7 +29,8 @@
 		"label": "Text2",
 		"control": "textarea",
 		"col_span": "12",
-		"hidden": null,
+		"hidden_view_all": null,
+		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
 		"validation": "required"
@@ -38,7 +41,8 @@
 		"label": "Dropdown1",
 		"control": "dropdown",
 		"col_span": "12",
-		"hidden": null,
+		"hidden_view_all": null,
+		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
 		"validation": "required"
@@ -49,7 +53,8 @@
 		"label": "Radio1",
 		"control": "radio",
 		"col_span": "12",
-		"hidden": null,
+		"hidden_view_all": null,
+		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
 		"validation": "required"
@@ -60,7 +65,8 @@
 		"label": "Boolean1",
 		"control": "switch",
 		"col_span": "12",
-		"hidden": null,
+		"hidden_view_all": null,
+		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
 		"validation": "required"
@@ -71,7 +77,8 @@
 		"label": "Created At",
 		"control": "picker_datetime",
 		"col_span": "12",
-		"hidden": null,
+		"hidden_view_all": null,
+		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
 		"validation": ""
@@ -82,7 +89,8 @@
 		"label": "Updated At",
 		"control": "picker_datetime",
 		"col_span": "12",
-		"hidden": null,
+		"hidden_view_all": null,
+		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
 		"validation": ""
