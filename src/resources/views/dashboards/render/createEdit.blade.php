@@ -30,7 +30,7 @@
         $id = $action === "edit" ? $values->id : "";
         $idAvatar = isset($values['avatar']) ? $values['avatar']: "";
         @endphp
-        @include('components.render.alertForms')
+        @include('components.render.alertValidationForms')
         <form class="rounded-md bg-gray-300 p-4" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
             @csrf
             {{-- <div class="mx-auto max-w-4xl flex-1"> --}}
