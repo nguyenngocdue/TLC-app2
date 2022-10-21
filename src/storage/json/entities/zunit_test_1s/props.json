@@ -1,4 +1,28 @@
 {
+	"_checkbox1": {
+		"column_name": "checkbox1",
+		"column_type": "text",
+		"label": "checkbox1",
+		"control": "checkbox",
+		"col_span": "12",
+		"hidden_view_all": null,
+		"hidden_edit": null,
+		"new_line": null,
+		"type_line": "default",
+		"validation": ""
+	},
+	"_checkbox2": {
+		"column_name": "checkbox2",
+		"column_type": "text",
+		"label": "checkbox2",
+		"control": "checkbox",
+		"col_span": "12",
+		"hidden_view_all": null,
+		"hidden_edit": null,
+		"new_line": null,
+		"type_line": "default",
+		"validation": ""
+	},
 	"_id": {
 		"column_name": "id",
 		"column_type": "bigint",
@@ -9,7 +33,7 @@
 		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": "required"
+		"validation": ""
 	},
 	"_text1": {
 		"column_name": "text1",
@@ -33,7 +57,7 @@
 		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": "required"
+		"validation": ""
 	},
 	"_dropdown1": {
 		"column_name": "dropdown1",
@@ -45,7 +69,7 @@
 		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": "required"
+		"validation": ""
 	},
 	"_radio1": {
 		"column_name": "radio1",
@@ -69,7 +93,7 @@
 		"hidden_edit": null,
 		"new_line": null,
 		"type_line": "default",
-		"validation": "required"
+		"validation": ""
 	},
 	"_created_at": {
 		"column_name": "created_at",
