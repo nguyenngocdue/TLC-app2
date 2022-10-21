@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Render;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
+use App\Models\User;
+use App\Models\Zunit_workplaces_rel_1;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -30,39 +32,36 @@ abstract class CreateEditController extends Controller
 		$this->readingFileService = $readingFileService;
 	}
 
-	private function getProps()
-	{
-		$type = Str::plural($this->type);
-		$path = storage_path("/json/entities/$type/props.json");
-		// dd($path);
-		$props = json_decode(file_get_contents($path), true);
-		return $props;
-	}
-
-
 	public function show($id)
 	{
-		$currentUser = $this->data::find($id);
+		$currentElement = $this->data::find($id);
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 		$action = $this->action;
-		$values = $action === "create" ? "" : $currentUser;
+		$values = $action === "create" ? "" : $currentElement;
 
 		$tablePath = $this->data;
-		return view('dashboards.render.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentUser', 'tablePath'));
+
+		$relation = $this->readingFileService->type_getPath($this->disk,  $this->branchName, 'zunit_test_1s', "relationships.json");
+
+		$idsCheckbox = [];
+		foreach ($relation as $key => $value) {
+			if ($value["eloquent"] === "belongsToMany") {
+				$fn = $value['relationship'];
+				$idsCheckbox[$value['control_name']] = json_decode($currentElement->$fn->pluck('id'));
+			}
+		}
+		return view('dashboards.render.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'tablePath', 'idsCheckbox'));
 	}
 
 	public function update(Request $request, $id)
 	{
-
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 		$data = $this->data::find($id);
 		$dataInput = $request->input();
 		unset($dataInput['_token']);
 		unset($dataInput['_method']);
-
-
 
 		// Validation
 		$itemsValidation = [];
@@ -82,10 +81,19 @@ abstract class CreateEditController extends Controller
 				array_push($itemAttachment, $value['column_name']);
 			}
 		}
+
 		// Update dataInput to database
-		foreach ($dataInput as $key => $value) {
-			// dd($data->{$key});
-			$data->{$key} = request($key);
+		$data->fill($dataInput);
+		$data->save();
+		if ($data->save()) Toastr::success('User updated successfully', 'Update User');
+
+		$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $data->getTable(), "relationships.json");
+		foreach ($relationshipFile as $key => $value) {
+			if ($value["eloquent"] === "belongsToMany") {
+				$colNamePivot = isset($dataInput[$value['control_name']]) ?  $dataInput[$value['control_name']] : [];
+				$fn = $value['relationship'];
+				$data->{$fn}()->sync($colNamePivot);
+			}
 		}
 
 		// chanage value from toggle
@@ -102,8 +110,6 @@ abstract class CreateEditController extends Controller
 				$data[$value] = $idMediaArray[$key];
 			}
 		}
-		$data->save();
-		if ($data->save()) Toastr::success('User updated successfully', 'Update User');
 		return redirect(route("{$type}_edit.show", $id));
 	}
 	public function index()
@@ -117,24 +123,22 @@ abstract class CreateEditController extends Controller
 			return view('components.render.resultWarning')->with(compact('error', 'title'));
 		}
 
-
 		$type = $this->type;
 		$tablePath = $this->data;
 		$values = "";
+		$idsCheckbox = [];
 
-		return view('dashboards.render.createEdit')->with(compact('props', 'type', 'action', 'tablePath', 'values'));
+		return view('dashboards.render.createEdit')->with(compact('props', 'type', 'action', 'tablePath', 'values', 'idsCheckbox'));
 	}
 	public function store(Request $request)
 	{
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 		$dataInput = $request->input();
-		// $request->except('_token');
 		unset($dataInput['_token']);
 		unset($dataInput['_method']);
 		$db = $this->data;
 
-		// dd($dataInput);
 
 
 		$itemsValidation = [];
@@ -156,11 +160,24 @@ abstract class CreateEditController extends Controller
 			}
 		}
 
-
-
+		// chanage value from toggle
+		foreach ($props as $key => $value) {
+			if ($value['control'] === 'toggle') {
+				$item = $value['column_name'];
+				isset($dataInput[$item]) ? $newData[$item] = 1 : $newData[$item] = null;
+			};
+		}
 		// Save data to database
 		$newData = $db::create($dataInput);
 
+		$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $newData->getTable(), "relationships.json");
+		foreach ($relationshipFile as $key => $value) {
+			if ($value["eloquent"] === "belongsToMany") {
+				$colNamePivot = isset($dataInput[$value['control_name']]) ? $dataInput[$value['control_name']] : [];
+				$fn = $value['relationship'];
+				$newData->{$fn}()->sync($colNamePivot);
+			}
+		}
 
 		if ($newData) {
 			Toastr::success('User created successfully', 'Create User');
@@ -185,13 +202,6 @@ abstract class CreateEditController extends Controller
 			}
 		}
 
-		// chanage value from toggle
-		foreach ($props as $key => $value) {
-			if ($value['control'] === 'toggle') {
-				$item = $value['column_name'];
-				isset($dataInput[$item]) ? $newData[$item] = 1 : $newData[$item] = 0;
-			};
-		}
 		$type = Str::plural($this->type);
 		return redirect(route("{$type}_edit.update", $idNewData));
 	}

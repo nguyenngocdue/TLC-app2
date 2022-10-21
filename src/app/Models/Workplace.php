@@ -24,6 +24,7 @@ class Workplace extends Model
 
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function unitTestDropDown1s()
     {
         return $this->hasMany(ZunitTest1::class, 'dropdown1');
