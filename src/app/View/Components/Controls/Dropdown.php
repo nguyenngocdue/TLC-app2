@@ -73,11 +73,7 @@ class Dropdown extends Component
         $entityTable = $this->tablePath;
         $currentEntity = is_null($entityTable::find($this->id)) ? "" : $entityTable::find($this->id)->getAttributes();
 
-
         $action = $this->action;
-        // dd($tableName, $entityTable, $currentEntity, $this->id);
-
-        // dd($tableName, $pathSourceTable, $tableName, $dataSource);
 
         return view('components.controls.dropdown')->with(compact('dataSource', 'selected', 'colName', 'currentEntity', 'tableName', 'action'));
     }

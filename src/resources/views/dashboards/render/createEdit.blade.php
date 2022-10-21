@@ -64,6 +64,9 @@
                                 <h2 class="text-red-400">{{"Control of this $column_name has not been set"}}</h2>
                                 @endif
                                 <strong class="scroll-mt-20 snap-start" id="{{$column_name}}"></strong>
+
+                                {{-- {{dd($control)}} --}}
+
                                 @switch ($control)
                                 @case($timeControls[0])
                                 @case($timeControls[1])
@@ -98,16 +101,16 @@
                                 <x-controls.tag id={{$id}} colName={{$column_name}} />
                                 @break
 
-                                @case ('checkbox')
-                                <x-controls.checkbox id={{$id}} colName={{$column_name}} />
-                                @break
-
                                 @case('attachment')
                                 <x-controls.upload id={{$id}} colName={{$column_name}} idAvatar={{$idAvatar}} />
                                 @break
 
                                 @case('switch')
                                 <x-controls.toggle id={{$id}} colName={{$column_name}} valColName={{$value_column_name}} />
+                                @break
+
+                                @case('checkbox')
+                                <x-controls.checkbox id={{$id}} colName={{$column_name}} :idsCheckbox="$idsCheckbox" action={{$action}} />
                                 @break
 
 
@@ -120,14 +123,17 @@
                                 @case('edit')
                                 <x-controls.translationtime tablePath={{$tablePath}} :timeControls="$timeControls" :valColumnNames="$valColumnNames" id={{$id}} control={{$control}} columnName={{$column_name}} />
                                 @break
-
                                 @endswitch
+
+
 
                             </div>
                         </div>
                     </div>
                 </div>
                 @endforeach
+                {{-- <x-controls.checkbox2 id={{$id}} colName={{$column_name}} :idCbxsItem2="$idCbxsItem2" /> --}}
+
             </div>
             {{-- </div> --}}
             <div class="flex justify-left border-t dark:bg-gray-800  px-5">
