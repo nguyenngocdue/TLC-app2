@@ -102,7 +102,7 @@
                                 @break
 
                                 @case('attachment')
-                                <x-controls.uploadfile id={{$id}} colName={{$column_name}} idAvatar={{$idAvatar}} />
+                                <x-controls.uploadfiles id={{$id}} colName={{$column_name}} action={{$action}} tablePath={{$tablePath}} />
                                 @break
 
                                 @case('switch')
@@ -110,7 +110,7 @@
                                 @break
 
                                 @case('checkbox')
-                                <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} />
+                                <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} tablePath={{$tablePath}} />
                                 @break
 
 
