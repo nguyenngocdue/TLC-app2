@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 class Prod_run extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = ["prod_order_id", "prod_routing_link_id", "status_prod", "total_hours", "total_man_hours"];
     protected $primaryKey = 'id';
     protected $table = 'prod_runs';

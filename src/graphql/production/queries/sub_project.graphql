@@ -1,0 +1,44 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    sub_projects: [Sub_project!]! @all
+    sub_project(id: ID @eq): Sub_project @find
+}
+
+type Sub_project {
+    id: ID!
+    name: String!
+    description: String
+    sub_project_status_id: Int!
+    slug: String!
+    created_at: DateTime
+    updated_at: DateTime
+    subProjectStatus: Sub_project_status! @belongsTo
+    productionOrders: [Prod_order!]! @hasMany
+}
+
+input CreateSubProjectInput {
+    name: String!
+    description: String
+    sub_project_status_id: Int!
+    slug: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateSubProjectInput {
+    id: ID!
+    name: String
+    description: String
+    sub_project_status_id: Int
+    slug: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createSubProject(input: CreateSubProjectInput! @spread): Sub_project!
+        @create
+    updateSubProject(input: UpdateSubProjectInput! @spread): Sub_project @update
+    deleteSubProject(id: ID!): Sub_project @delete
+}

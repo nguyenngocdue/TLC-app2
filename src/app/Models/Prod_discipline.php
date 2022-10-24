@@ -11,12 +11,14 @@ class Prod_discipline extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
 
-    protected $fillable = ["id", "name", "description", "slug"];
+    public $fillable = ["id", "name", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'prod_disciplines';
+    public $timestamps = true;
+
 
     public $eloquentParams = [
-        "routingLink" => ['hasMany', Prod_routing_link::class, 'parent'],
+        "routingLink" => ['hasMany', Prod_routing_link::class, 'prod_discipline_id'],
     ];
     public function routingLink()
     {

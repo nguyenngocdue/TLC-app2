@@ -1,0 +1,35 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+
+extend type Query {
+    prod_user_runs: [Prod_user_run!]! @all
+    prod_user_run(id: ID @eq): Prod_user_run @find
+}
+type Prod_user_run {
+    prod_line_id: ID!
+    user_id: ID!
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input CreateProdUserRunInput {
+    prod_line_id: ID!
+    user_id: ID!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateProdUserRunInput {
+    prod_line_id: ID
+    user_id: ID
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createProdUserRun(input: CreateProdUserRunInput! @spread): Prod_user_run!
+        @create
+    updateProdUserRun(input: UpdateProdUserRunInput! @spread): Prod_user_run
+        @update
+    deleteProdUserRun(id: ID!): Prod_user_run @delete
+}

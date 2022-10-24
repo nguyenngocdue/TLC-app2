@@ -34,7 +34,7 @@ return new class extends Migration
         });
         Schema::table('prod_user_runs', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('prod_run_id')->references('id')->on('prod_lines')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('prod_line_id')->references('id')->on('prod_lines')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('prod_lines', function (Blueprint $table) {
             $table->foreign('prod_run_id')->references('id')->on('prod_runs');
@@ -52,7 +52,7 @@ return new class extends Migration
             $table->foreign('routing_link_id')->references('id')->on('prod_routing_links')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('prod_routing_links', function (Blueprint $table) {
-            $table->foreign('parent')->references('id')->on('prod_disciplines');
+            $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
         });
         Schema::table('sub_projects', function (Blueprint $table) {
             $table->foreign('sub_project_status_id')->references('id')->on('sub_project_statuses');

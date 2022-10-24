@@ -112,7 +112,7 @@ abstract class RenderController extends Controller
         $result = [];
         foreach ($data as $key => $value) {
             $result['columns'][$key] = $value;
-            $result['page_limit'] = $var[$entity]['page_limit'];
+            $result['page_limit'] = $var[$entity]['page_limit'] ?? '';
         }
         $var[$entity] = $result;
         $user->settings = $var;

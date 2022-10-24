@@ -1,0 +1,51 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    prod_runs: [Prod_run!]! @all
+    prod_run(id: ID @eq): Prod_run @find
+}
+enum StatusProd {
+    STOPPED
+    RUNNING
+    FINISHED
+}
+type Prod_run {
+    id: ID!
+    prod_order_id: Int!
+    prod_routing_link_id: Int!
+    status_prod: StatusProd!
+    total_hours: Float
+    total_man_hours: Float
+    created_at: DateTime
+    updated_at: DateTime
+    productionOrder: Prod_order! @belongsTo
+    routingLinks: Prod_routing_link! @belongsTo
+    productionRunLines: [Prod_line!]! @hasMany
+}
+
+input CreateProdRunInput {
+    prod_order_id: Int!
+    prod_routing_link_id: Int!
+    status_prod: StatusProd!
+    total_hours: Float
+    total_man_hours: Float
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateProdRunInput {
+    id: ID!
+    prod_order_id: Int
+    prod_routing_link_id: Int
+    status_prod: StatusProd
+    total_hours: Float
+    total_man_hours: Float
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createProdRun(input: CreateProdRunInput! @spread): Prod_run! @create
+    updateProdRun(input: UpdateProdRunInput! @spread): Prod_run @update
+    deleteProdRun(id: ID!): Prod_run @delete
+}

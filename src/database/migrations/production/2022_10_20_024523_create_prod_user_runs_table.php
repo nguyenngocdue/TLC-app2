@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('prod_user_runs', function (Blueprint $table) {
-            $table->unsignedBigInteger('prod_run_id');
+            $table->unsignedBigInteger('prod_line_id');
             $table->unsignedBigInteger('user_id');
-            $table->primary(['prod_run_id', 'user_id']);
+            $table->primary(['prod_line_id', 'user_id']);
             $table->timestamps();
         });
     }

@@ -1,0 +1,4 @@
+#import user.graphql
+#import production/queries/*.graphql
+#import production/mutations/*.graphql
+#import auth/*.graphql

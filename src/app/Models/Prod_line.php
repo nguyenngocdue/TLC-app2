@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 class Prod_line extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = ["prod_run_id", "date", "start", "end", "status"];
     protected $primaryKey = 'id';
     protected $table = 'prod_lines';

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('parent');
+            $table->unsignedBigInteger('prod_discipline_id');
             $table->string('slug')->unique();
             $table->timestamps();
         });

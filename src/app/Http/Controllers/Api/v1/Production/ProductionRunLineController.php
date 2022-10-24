@@ -91,13 +91,13 @@ class ProductionRunLineController extends Controller
             ]);
             foreach ($request->user_ids as $userId) {
                 $prodUserRun = Prod_user_run::create([
-                    'prod_run_id' => $prod_Line->id,
+                    'prod_line_id' => $prod_Line->id,
                     'user_id' => (int)$userId,
                 ]);
             }
-            return ResponseObject::responseSuccess([], null, 'Create Production Run Line Successfully.');
+            return ResponseObject::responseSuccess(['test' => $prodUserRun], null, 'Create Production Run Line Successfully.');
         } catch (\Throwable $th) {
-            return ResponseObject::responseFail('Create Production Run Line Failed.');
+            return ResponseObject::responseFail($th);
         }
     }
 

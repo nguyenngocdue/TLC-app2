@@ -1,0 +1,18 @@
+type GetProdOrdersResponse {
+    prod_orders: [Prod_order!]!
+    sub_project_id: Int
+}
+type GetProdRoutingsResponse {
+    sub_project_id: Int
+    prod_order_id: Int
+    prod_routing_links: [Prod_routing_link!]!
+    prod_disciplines: [Prod_discipline!]!
+}
+extend type Mutation {
+    getAllSubProjects: [Sub_project!]!
+        @field(resolver: "App\\GraphQL\\Mutations\\GetAllSubProjects")
+    getProdOrders(id: Int!): GetProdOrdersResponse!
+        @field(resolver: "App\\GraphQL\\Mutations\\GetProdOrders")
+    getProdRoutings(id1: Int!, id2: Int!): GetProdRoutingsResponse!
+        @field(resolver: "App\\GraphQL\\Mutations\\GetProdRoutings")
+}

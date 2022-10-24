@@ -1,0 +1,32 @@
+type DuplicateProdLineResponse {
+    status: String!
+}
+type ProdLineResponse {
+    users: [User!]
+    skills: [User!]
+    prod_lines: [Prod_line!]
+    prod_line_last: Prod_line!
+    time_now: String
+    prod_order_id: Int
+    prod_routing_link_id: Int
+    prod_run_first: Prod_run!
+    status: String!
+}
+input StoreProdLineInput {
+    prod_run_id: Int!
+    date: Date
+    start: String
+    end: String
+    status: String
+    created_at: DateTime
+    updated_at: DateTime
+    user_ids: [Int!]!
+}
+extend type Mutation {
+    prodLine(prod_order_id: ID!, prod_routing_link_id: ID!): ProdLineResponse!
+        @field(resolver: "App\\GraphQL\\Mutations\\ProdLine")
+    storeProdLine(input: StoreProdLineInput! @spread): String!
+        @field(resolver: "App\\GraphQL\\Mutations\\StoreProdLine")
+    duplicateProdLine(id: ID!): DuplicateProdLineResponse!
+        @field(resolver: "App\\GraphQL\\Mutations\\DuplicateProdLine")
+}

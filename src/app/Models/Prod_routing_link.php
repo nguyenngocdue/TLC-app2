@@ -11,6 +11,7 @@ class Prod_routing_link extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
 
+    public $timestamps = true;
     protected $fillable = ["id", "name", "parent", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'prod_routing_links';
@@ -19,7 +20,7 @@ class Prod_routing_link extends Model
     public $eloquentParams = [
         "routings" => ['belongsToMany', Prod_routing::class, 'routing_details', 'prod_routing_link_id', 'prod_routing_id'],
         "productionRun" => ['hasMany', Prod_run::class, 'prod_routing_link_id'],
-        "discipline" => ['belongsTo', Prod_discipline::class, 'parent'],
+        "discipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
     ];
     public function routings()
     {

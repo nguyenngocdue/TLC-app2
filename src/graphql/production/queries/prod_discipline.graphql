@@ -1,0 +1,17 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    prod_disciplines: [Prod_discipline!]! @all
+    prod_discipline(id: ID @eq): Prod_discipline @find
+}
+
+type Prod_discipline {
+    id: ID!
+    name: String!
+    description: String
+    slug: String!
+    created_at: DateTime
+    updated_at: DateTime
+    routingLink: [Prod_routing_link!]! @hasMany
+}

@@ -1,0 +1,45 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    prod_routing_details: [Prod_routing_detail!]! @all
+    prod_routing_detail(
+        routing_id: ID @eq
+        routing_link_id: ID @eq
+    ): Prod_routing_detail @find
+}
+
+type Prod_routing_detail {
+    routing_id: ID!
+    routing_link_id: ID!
+    target_hours: Float
+    target_man_hours: Float
+    created_at: DateTime
+    updated_at: DateTime
+}
+input CreateProdRoutingDetailInput {
+    routing_id: ID!
+    routing_link_id: ID!
+    target_hours: Float
+    target_man_hours: Float
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateProdRoutingDetailInput {
+    routing_id: ID
+    routing_link_id: ID
+    target_hours: Float
+    target_man_hours: Float
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createProdRoutingDetail(
+        input: CreateProdRoutingDetailInput! @spread
+    ): Prod_routing_detail! @create
+    updateProdRoutingDetail(
+        input: UpdateProdRoutingDetailInput! @spread
+    ): Prod_routing_detail @update
+    deleteProdRoutingDetail(id: ID!): Prod_routing_detail @delete
+}

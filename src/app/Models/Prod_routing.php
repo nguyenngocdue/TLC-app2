@@ -11,6 +11,7 @@ class Prod_routing extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
 
+    public $timestamps = true;
     protected $fillable = ["name", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'prod_routings';

@@ -1,0 +1,42 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    prod_routings: [Prod_routing!]! @all
+    prod_routing(id: ID @eq): Prod_routing @find
+}
+
+type Prod_routing {
+    id: ID!
+    name: String!
+    description: String
+    slug: String!
+    created_at: DateTime
+    updated_at: DateTime
+    routingLinks: [Prod_routing_link!]! @belongsToMany
+    productionOrders: [Prod_order!]! @hasMany
+}
+
+input CreateProdRoutingInput {
+    name: String!
+    description: String
+    slug: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateProdRoutingInput {
+    id: ID!
+    name: String
+    description: String
+    slug: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createProdRouting(input: CreateProdRoutingInput! @spread): Prod_routing!
+        @create
+    updateProdRouting(input: UpdateProdRoutingInput! @spread): Prod_routing
+        @update
+    deleteProdRouting(id: ID!): Prod_routing @delete
+}
