@@ -2,21 +2,17 @@
 
 namespace App\View\Components\Controls;
 
-use App\Models\User;
-use App\Models\Workplace;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
-class Checkbox extends Component
+class Dropdownmulti extends Component
 {
 
-    private $id;
     private $colName;
     private $idItems;
     private $action;
-    public function __construct($id, $colName, $idItems, $action)
+    public function __construct($colName, $idItems, $action)
     {
-        $this->id = $id;
         $this->colName = $colName;
         $this->idItems = $idItems;
         $this->action = $action;
@@ -24,11 +20,11 @@ class Checkbox extends Component
 
     public function render()
     {
-
+        $span = 4; //<< 12/6/4/3/2/1
         $colName = $this->colName;
         $dataSource = DB::table('workplaces')->get();
         $idItems = $this->idItems;
         $action = $this->action;
-        return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idItems', 'action'));
+        return view('components.controls.dropdownmulti')->with(compact('dataSource', 'colName', 'idItems', 'action', 'span'));
     }
 }

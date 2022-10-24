@@ -44,14 +44,14 @@ abstract class CreateEditController extends Controller
 
 		$relation = $this->readingFileService->type_getPath($this->disk,  $this->branchName, 'zunit_test_1s', "relationships.json");
 
-		$idsCheckbox = [];
+		$idItems = [];
 		foreach ($relation as $key => $value) {
 			if ($value["eloquent"] === "belongsToMany") {
 				$fn = $value['relationship'];
-				$idsCheckbox[$value['control_name']] = json_decode($currentElement->$fn->pluck('id'));
+				$idItems[$value['control_name']] = json_decode($currentElement->$fn->pluck('id'));
 			}
 		}
-		return view('dashboards.render.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'tablePath', 'idsCheckbox'));
+		return view('dashboards.render.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'tablePath', 'idItems'));
 	}
 
 	public function update(Request $request, $id)
@@ -126,19 +126,18 @@ abstract class CreateEditController extends Controller
 		$type = $this->type;
 		$tablePath = $this->data;
 		$values = "";
-		$idsCheckbox = [];
+		$idItems = [];
 
-		return view('dashboards.render.createEdit')->with(compact('props', 'type', 'action', 'tablePath', 'values', 'idsCheckbox'));
+		return view('dashboards.render.createEdit')->with(compact('props', 'type', 'action', 'tablePath', 'values', 'idItems'));
 	}
 	public function store(Request $request)
 	{
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
+		$db = $this->data;
 		$dataInput = $request->input();
 		unset($dataInput['_token']);
 		unset($dataInput['_method']);
-		$db = $this->data;
-
 
 
 		$itemsValidation = [];

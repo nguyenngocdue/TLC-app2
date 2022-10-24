@@ -97,8 +97,8 @@
                                 <x-controls.radio id={{$id}} colName={{$column_name}} tablePath={{$tablePath}} action={{$action}} />
                                 @break
 
-                                @case ('tag')
-                                <x-controls.tag id={{$id}} colName={{$column_name}} />
+                                @case ('dropdown_multi')
+                                <x-controls.dropdownmulti colName={{$column_name}} :idItems="$idItems" action={{$action}} />
                                 @break
 
                                 @case('attachment')
@@ -110,7 +110,7 @@
                                 @break
 
                                 @case('checkbox')
-                                <x-controls.checkbox id={{$id}} colName={{$column_name}} :idsCheckbox="$idsCheckbox" action={{$action}} />
+                                <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} />
                                 @break
 
 
