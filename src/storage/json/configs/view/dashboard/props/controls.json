@@ -4,6 +4,7 @@
         "attachment",
         "checkbox",
         "dropdown",
+        "dropdown_multi",
         "id",
         "number",
         "picker_datetime",
@@ -15,7 +16,6 @@
         "picker_year",
         "radio",
         "switch",
-        "tag",
         "text",
         "textarea",
         "link"
