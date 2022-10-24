@@ -10,9 +10,12 @@ type GetProdRoutingsResponse {
 }
 extend type Mutation {
     getAllSubProjects: [Sub_project!]!
+        @guard
         @field(resolver: "App\\GraphQL\\Mutations\\GetAllSubProjects")
     getProdOrders(id: Int!): GetProdOrdersResponse!
+        @guard
         @field(resolver: "App\\GraphQL\\Mutations\\GetProdOrders")
     getProdRoutings(id1: Int!, id2: Int!): GetProdRoutingsResponse!
+        @guard
         @field(resolver: "App\\GraphQL\\Mutations\\GetProdRoutings")
 }

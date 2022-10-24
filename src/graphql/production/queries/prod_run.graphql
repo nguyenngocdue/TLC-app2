@@ -14,7 +14,7 @@ type Prod_run {
     id: ID!
     prod_order_id: Int!
     prod_routing_link_id: Int!
-    status_prod: StatusProd!
+    status_prod: String!
     total_hours: Float
     total_man_hours: Float
     created_at: DateTime
@@ -45,7 +45,7 @@ input UpdateProdRunInput {
 }
 
 extend type Mutation {
-    createProdRun(input: CreateProdRunInput! @spread): Prod_run! @create
-    updateProdRun(input: UpdateProdRunInput! @spread): Prod_run @update
-    deleteProdRun(id: ID!): Prod_run @delete
+    createProdRun(input: CreateProdRunInput! @spread): Prod_run! @guard @create
+    updateProdRun(input: UpdateProdRunInput! @spread): Prod_run @guard @update
+    deleteProdRun(id: ID!): Prod_run @guard @delete
 }

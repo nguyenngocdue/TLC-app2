@@ -40,7 +40,11 @@ input UpdateProdLineInput {
 }
 
 extend type Mutation {
-    createProdLine(input: CreateProdLineInput! @spread): Prod_line! @create
-    updateProdLine(input: UpdateProdLineInput! @spread): Prod_line @update
-    deleteProdLine(id: ID!): Prod_line @delete
+    createProdLine(input: CreateProdLineInput! @spread): Prod_line!
+        @guard
+        @create
+    updateProdLine(input: UpdateProdLineInput! @spread): Prod_line
+        @guard
+        @update
+    deleteProdLine(id: ID!): Prod_line @guard @delete
 }

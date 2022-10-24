@@ -40,9 +40,9 @@ input UpdateProdRoutingLinkInput {
 extend type Mutation {
     createProdRoutingLink(
         input: CreateProdRoutingLinkInput! @spread
-    ): Prod_routing_link! @create
+    ): Prod_routing_link! @guard @create
     updateProdRoutingLink(
-        input: UpdateProdRoutingLinkInput! @spread
+        input: UpdateProdRoutingLinkInput! @guard @spread
     ): Prod_routing_link @update
-    deleteProdRoutingLink(id: ID!): Prod_routing_link @delete
+    deleteProdRoutingLink(id: ID!): Prod_routing_link @guard @delete
 }

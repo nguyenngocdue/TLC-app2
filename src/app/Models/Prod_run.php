@@ -16,20 +16,20 @@ class Prod_run extends Model
     protected $table = 'prod_runs';
 
     public $eloquentParams = [
-        "productionOrder" => ['belongsTo', Prod_order::class],
+        "productionOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],
         "productionRunLines" => ['hasMany', Prod_line::class, 'prod_run_id'],
-        "routingLinks" => ['belongsTo', Prod_routing_link::class],
+        "routingLinks" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
     ];
     public function productionOrder()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1]);
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function routingLinks()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1]);
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function productionRunLines()

@@ -73,6 +73,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "disciplines" => ['belongsTo', User_discipline::class, 'discipline'],
         "departments" => ['belongsTo', Department::class, 'department'],
         "time_keep_types" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
+        "productionRunLines" => ['belongsToMany', Prod_line::class, 'prod_user_runs', 'user_id', 'prod_line_id']
     ];
     protected $guard_name = 'web';
     // public function files()
@@ -144,6 +145,11 @@ class User extends Authenticatable implements LdapAuthenticatable
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function productionRunLines()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('user_id');
     }
     public function toSearchableArray()
     {

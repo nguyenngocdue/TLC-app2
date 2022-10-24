@@ -38,7 +38,10 @@ input UpdateSubProjectInput {
 
 extend type Mutation {
     createSubProject(input: CreateSubProjectInput! @spread): Sub_project!
+        @guard
         @create
-    updateSubProject(input: UpdateSubProjectInput! @spread): Sub_project @update
-    deleteSubProject(id: ID!): Sub_project @delete
+    updateSubProject(input: UpdateSubProjectInput! @spread): Sub_project
+        @guard
+        @update
+    deleteSubProject(id: ID!): Sub_project @guard @delete
 }

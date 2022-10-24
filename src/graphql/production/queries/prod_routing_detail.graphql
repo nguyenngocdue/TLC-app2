@@ -37,9 +37,9 @@ input UpdateProdRoutingDetailInput {
 extend type Mutation {
     createProdRoutingDetail(
         input: CreateProdRoutingDetailInput! @spread
-    ): Prod_routing_detail! @create
+    ): Prod_routing_detail! @guard @create
     updateProdRoutingDetail(
         input: UpdateProdRoutingDetailInput! @spread
-    ): Prod_routing_detail @update
-    deleteProdRoutingDetail(id: ID!): Prod_routing_detail @delete
+    ): Prod_routing_detail @guard @update
+    deleteProdRoutingDetail(id: ID!): Prod_routing_detail @guard @delete
 }

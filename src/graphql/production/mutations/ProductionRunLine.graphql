@@ -24,9 +24,12 @@ input StoreProdLineInput {
 }
 extend type Mutation {
     prodLine(prod_order_id: ID!, prod_routing_link_id: ID!): ProdLineResponse!
+        @guard
         @field(resolver: "App\\GraphQL\\Mutations\\ProdLine")
     storeProdLine(input: StoreProdLineInput! @spread): String!
+        @guard
         @field(resolver: "App\\GraphQL\\Mutations\\StoreProdLine")
     duplicateProdLine(id: ID!): DuplicateProdLineResponse!
+        @guard
         @field(resolver: "App\\GraphQL\\Mutations\\DuplicateProdLine")
 }

@@ -4,7 +4,7 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 extend type Query {
     prod_user_runs: [Prod_user_run!]! @all
-    prod_user_run(id: ID @eq): Prod_user_run @find
+    prod_user_run(prod_line_id: ID @eq, user_id: ID @eq): Prod_user_run @find
 }
 type Prod_user_run {
     prod_line_id: ID!
@@ -28,8 +28,10 @@ input UpdateProdUserRunInput {
 
 extend type Mutation {
     createProdUserRun(input: CreateProdUserRunInput! @spread): Prod_user_run!
+        @guard
         @create
     updateProdUserRun(input: UpdateProdUserRunInput! @spread): Prod_user_run
+        @guard
         @update
-    deleteProdUserRun(id: ID!): Prod_user_run @delete
+    deleteProdUserRun(id: ID!): Prod_user_run @guard @delete
 }

@@ -50,7 +50,11 @@ input UpdateProdOrderInput {
 }
 
 extend type Mutation {
-    createProdOrder(input: CreateProdOrderInput! @spread): Prod_order! @create
-    updateProdOrder(input: UpdateProdOrderInput! @spread): Prod_order @update
-    deleteProdOrder(id: ID!): Prod_order @delete
+    createProdOrder(input: CreateProdOrderInput! @spread): Prod_order!
+        @guard
+        @create
+    updateProdOrder(input: UpdateProdOrderInput! @spread): Prod_order
+        @guard
+        @update
+    deleteProdOrder(id: ID!): Prod_order @guard @delete
 }

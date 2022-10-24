@@ -35,9 +35,9 @@ input UpdateSubProjectStatusInput {
 extend type Mutation {
     createSubProjectStatus(
         input: CreateSubProjectStatusInput! @spread
-    ): Sub_project_status! @create
+    ): Sub_project_status! @guard @create
     updateSubProjectStatus(
         input: UpdateSubProjectStatusInput! @spread
-    ): Sub_project_status @update
-    deleteSubProjectStatus(id: ID!): Sub_project_status @delete
+    ): Sub_project_status @guard @update
+    deleteSubProjectStatus(id: ID!): Sub_project_status @guard @delete
 }

@@ -10,14 +10,14 @@ use Laravel\Scout\Searchable;
 class Prod_line extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
-    public $timestamps = true;
     protected $fillable = ["prod_run_id", "date", "start", "end", "status"];
     protected $primaryKey = 'id';
     protected $table = 'prod_lines';
+    public $timestamps = true;
 
     public $eloquentParams = [
-        "users" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_run_id', 'user_id'],
-        "productionRun" => ['belongsTo', Prod_run::class],
+        "users" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_line_id', 'user_id'],
+        "productionRun" => ['belongsTo', Prod_run::class, 'prod_run_id'],
     ];
     public function users()
     {
@@ -28,6 +28,6 @@ class Prod_line extends Model
     public function productionRun()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1]);
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }
