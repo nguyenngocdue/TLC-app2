@@ -102,7 +102,7 @@
                                 @break
 
                                 @case('attachment')
-                                <x-controls.upload id={{$id}} colName={{$column_name}} idAvatar={{$idAvatar}} />
+                                <x-controls.uploadfile id={{$id}} colName={{$column_name}} idAvatar={{$idAvatar}} />
                                 @break
 
                                 @case('switch')

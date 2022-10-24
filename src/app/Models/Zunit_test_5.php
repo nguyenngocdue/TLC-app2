@@ -13,5 +13,13 @@ class Zunit_test_5 extends Model
     protected $fillable = ["attachment_1", "attachment_2"];
     protected $primaryKey = "id";
     protected $table = "zunit_test_5s";
-    public $eloquentParams = [];
+    public $eloquentParams = [
+        "media" => ['hasMany', Media::class, 'owner_id', 'id'],
+    ];
+
+    public function media()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 }

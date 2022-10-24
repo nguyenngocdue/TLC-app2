@@ -13,7 +13,6 @@ class UploadService
     {
         $medias = [];
         $idNewMedia = [];
-        // dd($request);
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
                 $fileName = $file->getClientOriginalName();
@@ -43,9 +42,11 @@ class UploadService
                 ]);
             }
         }
+
+        dd($medias);
         foreach ($medias as $media) {
             $newMedia = Media::create($media);
-            array_push($idNewMedia, $newMedia['id']);
+            // array_push($idNewMedia, $newMedia['id']);
         }
         return $idNewMedia;
     }

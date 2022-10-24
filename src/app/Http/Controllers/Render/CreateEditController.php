@@ -71,6 +71,15 @@ abstract class CreateEditController extends Controller
 		$request->validate($itemsValidation);
 
 
+		// chanage value from toggle
+		foreach ($props as $key => $value) {
+			if ($value['control'] === 'switch') {
+				$item = $value['column_name'];
+				isset($dataInput[$item]) ? $data[$item] = 1 : $data[$item] = null;
+			};
+		}
+
+
 
 
 		// upload multiple pictures
@@ -87,6 +96,9 @@ abstract class CreateEditController extends Controller
 		$data->save();
 		if ($data->save()) Toastr::success('User updated successfully', 'Update User');
 
+
+
+		// multisection - checkbox
 		$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $data->getTable(), "relationships.json");
 		foreach ($relationshipFile as $key => $value) {
 			if ($value["eloquent"] === "belongsToMany") {
@@ -96,13 +108,7 @@ abstract class CreateEditController extends Controller
 			}
 		}
 
-		// chanage value from toggle
-		foreach ($props as $key => $value) {
-			if ($value['control'] === 'switch') {
-				$item = $value['column_name'];
-				isset($dataInput[$item]) ? $data[$item] = 1 : $data[$item] = null;
-			};
-		}
+
 
 
 		foreach ($itemAttachment as $key => $value) {
@@ -132,10 +138,33 @@ abstract class CreateEditController extends Controller
 	}
 	public function store(Request $request)
 	{
+
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 		$db = $this->data;
 		$dataInput = $request->input();
+
+
+
+		// Save picture
+		$idMediaArray = $this->upload->store($request, 0);
+		// filter fields have "attachment control"
+		// $itemAttachment = [];
+		// foreach ($props as $key => $value) {
+		// 	if ($value['control'] === 'attachment') {
+		// 		array_push($itemAttachment, $value['column_name']);
+		// 	}
+		// }
+
+
+		// // push value of picture into database
+		// foreach ($itemAttachment as $key => $value) {
+		// 	if (count($idMediaArray) > 0 && isset($idMediaArray[$key])) {
+		// 		$newData[$value] = $idMediaArray[$key];
+		// 	}
+		// }
+
+
 		unset($dataInput['_token']);
 		unset($dataInput['_method']);
 
@@ -169,6 +198,7 @@ abstract class CreateEditController extends Controller
 		// Save data to database
 		$newData = $db::create($dataInput);
 
+		// multiselection - checkbox
 		$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $newData->getTable(), "relationships.json");
 		foreach ($relationshipFile as $key => $value) {
 			if ($value["eloquent"] === "belongsToMany") {
@@ -178,6 +208,7 @@ abstract class CreateEditController extends Controller
 			}
 		}
 
+
 		if ($newData) {
 			Toastr::success('User created successfully', 'Create User');
 		} else {
@@ -185,21 +216,6 @@ abstract class CreateEditController extends Controller
 		}
 		$idNewData = $newData->id;
 
-		// Save picture
-		$idMediaArray = $this->upload->store($request, $idNewData);
-		// filter fields have "attachment control"
-		$itemAttachment = [];
-		foreach ($props as $key => $value) {
-			if ($value['control'] === 'attachment') {
-				array_push($itemAttachment, $value['column_name']);
-			}
-		}
-		// push value of picture into database
-		foreach ($itemAttachment as $key => $value) {
-			if (count($idMediaArray) > 0 && isset($idMediaArray[$key])) {
-				$newData[$value] = $idMediaArray[$key];
-			}
-		}
 
 		$type = Str::plural($this->type);
 		return redirect(route("{$type}_edit.update", $idNewData));
