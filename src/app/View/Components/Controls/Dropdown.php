@@ -3,19 +3,12 @@
 namespace App\View\Components\Controls;
 
 use App\Http\Services\ReadingFileService;
-use App\Models\User;
-use App\Models\Zunit_test_1;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
-use Illuminate\Support\Str;
+
 
 class Dropdown extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
 
     private $id;
     private $colName;

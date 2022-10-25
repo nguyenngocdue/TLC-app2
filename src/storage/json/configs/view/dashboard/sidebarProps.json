@@ -448,6 +448,23 @@
                         "href": "dashboard/sub_project_statuses/sub_project_statuses_addnew"
                     }
                 ]
+            },
+            "zunit_test_5s": {
+                "title": "Zunit_test_5s",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/zunit_test_5s",
+                "items": [
+                    {
+                        "title": "All zunit_test_5s",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/zunit_test_5s/zunit_test_5s_render"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/zunit_test_5s/zunit_test_5s_addnew"
+                    }
+                ]
             }
         },
         "divider": "true"
@@ -1024,6 +1041,28 @@
                         "title": "Manage Relationship",
                         "icon": "fas fa-heart",
                         "href": "propman/sub_project_status/sub_project_status_mngrls"
+                    }
+                ]
+            },
+            "zunit_test_5": {
+                "title": "Zunit_test_5",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "propman/zunit_test_5",
+                "items": [
+                    {
+                        "title": "Manage Prop",
+                        "icon": "fas fa-project-diagram",
+                        "href": "propman/zunit_test_5/zunit_test_5_mngprop"
+                    },
+                    {
+                        "title": "Manage Line",
+                        "icon": "fas fa-grip-lines",
+                        "href": "propman/zunit_test_5/zunit_test_5_mnglnprop"
+                    },
+                    {
+                        "title": "Manage Relationship",
+                        "icon": "fas fa-heart",
+                        "href": "propman/zunit_test_5/zunit_test_5_mngrls"
                     }
                 ]
             }

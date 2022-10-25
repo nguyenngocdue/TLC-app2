@@ -2,7 +2,7 @@
     @foreach($dataSource as $key => $data)
     <div class="flex items-center mr-4 col-span-4 ">
         @if ($action === 'edit')
-        <input {{in_array($data->id, $idsCheckbox[$colName]) && $action ? "checked":""}} name="{{$colName}}[]" value="{{$key+1}}" type="checkbox" id='{{1+$key.$data->name}}' class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+        <input {{in_array($data->id, $idItems[$colName]) ? "checked":""}} name="{{$colName}}[]" value="{{$key+1}}" type="checkbox" id='{{1+$key.$data->name}}' class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
         @else
         <input name="{{$colName}}[]" value="{{$key+1}}" type="checkbox" id='{{1+$key.$data->name}}' class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
         @endif
