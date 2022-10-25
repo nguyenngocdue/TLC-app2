@@ -10,14 +10,7 @@ class CurrentUser
 
     public static function isAdmin()
     {
-        $userAuth = Auth::user();
-        if (!$userAuth) {
-            throw UnauthorizedException::notLoggedIn();
-        }
-        if (!$userAuth->hasAnyRoleSet('admin')) {
-            return false;
-        }
-        return true;
+        return self::isRoleSet('admin');
     }
 
     public static function isRoleSet($roleSet)

@@ -177,6 +177,7 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\TableFacadeServiceProvider::class,
         App\Providers\EntitiesFacadeServiceProvider::class,
+        App\Providers\CurrentUserFacadeProvider::class,
         Brian2694\Toastr\ToastrServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         // Spatie\Permission\PermissionServiceProvider::class,
