@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
 class DashBoardController extends Controller
 {
@@ -22,6 +21,7 @@ class DashBoardController extends Controller
      */
     public function index()
     {
+        // $this->setCookieTimeZone();
         return view('dashboards.dashboard');
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Prod_run;
 use App\Models\Prod_user_run;
 use App\Models\User;
 use App\Utils\System\Api\ResponseObject;
+use App\Utils\System\GetSetCookie;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,7 @@ class ProductionRunLineController extends Controller
             $skills = User::orderBy('staff_position', 'DESC')->distinct()->get(['staff_position']);
             $prodLines = Prod_run::find($prodRunFirst->id)->productionRunLives()->get();
             $lastId = Prod_line::orderBy('id', 'DESC')->first();
-            $timeNow = Carbon::now('Asia/Ho_Chi_Minh')->format('H:i:s');
+            $timeNow = Carbon::now()->format('H:i:s');
             return ResponseObject::responseSuccess([
                 'users' => $users,
                 'skills' => $skills,
@@ -81,7 +82,7 @@ class ProductionRunLineController extends Controller
     public function store(Request $request)
     {
         try {
-            $dt = Carbon::now('Asia/Ho_Chi_Minh');
+            $dt = Carbon::now();
             $prod_Line = Prod_line::create([
                 'prod_run_id' => $request->prod_run_id,
                 'date' => $dt->format('Y-m-d'),
@@ -104,7 +105,7 @@ class ProductionRunLineController extends Controller
     public function duplicate($id)
     {
         try {
-            $dt = Carbon::now('Asia/Ho_Chi_Minh');
+            $dt = Carbon::now();
             $prodLine = Prod_line::find($id);
             $newProdLine = $prodLine->replicate();
             $newProdLine->date = $dt->format('Y-m-d');
@@ -162,7 +163,7 @@ class ProductionRunLineController extends Controller
         try {
             $prodLine = Prod_line::find($id);
             if ($prodLine->status == 'running') {
-                $dt = Carbon::now('Asia/Ho_Chi_Minh');
+                $dt = Carbon::now();
                 $prodLine->end = $dt->format('H:i:s');
                 $prodLine->status = 'complete';
                 $prodLine->save();

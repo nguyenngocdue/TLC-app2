@@ -4,6 +4,7 @@ namespace App\GraphQL\Mutations;
 
 use App\Models\Prod_line;
 use App\Models\Prod_user_run;
+use App\Utils\System\GetSetCookie;
 use Carbon\Carbon;
 
 final class StoreProdLine
@@ -15,7 +16,7 @@ final class StoreProdLine
     public function __invoke($_, array $args)
     {
         try {
-            $dt = Carbon::now('Asia/Ho_Chi_Minh');
+            $dt = Carbon::now();
             $prodLine = Prod_line::create([
                 "prod_run_id" => $args['prod_run_id'],
                 "date" => $args['date'] ?? $dt->format('Y-m-d'),

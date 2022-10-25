@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Models\Media;
+use App\Utils\System\GetSetCookie;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -19,7 +20,7 @@ class UploadService
                 $fileName = $file->getClientOriginalName();
                 $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
                 $fileNameNormal = pathinfo($fileName, PATHINFO_FILENAME);
-                $dt = Carbon::now('Asia/Ho_Chi_Minh');
+                $dt = Carbon::now();
                 $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
                 $path_image = $path . $fileName;
                 Storage::disk('s3')->put($path_image, file_get_contents($file), 'public');

@@ -182,6 +182,35 @@
                                     </form>
                                 </a>
                             </li>
+                            @roleset('admin|super-admin')
+                            <hr class="my-2" />
+                            @php
+                                try {
+                                    $hefUserMenu = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/navbarUserMenu.json'), true);
+                                } catch (\Throwable $th) {
+                                    $errorsLineProp = "Setting Nav Bar User Menu json fail!
+                                            Please fix file navbarUserMenu.json before Run.";
+                                }
+                            @endphp
+                            @isset($errorsLineProp)
+                                <li class="flex">
+                                    <a class="inline-flex w-full items-center rounded-md px-2 py-1 text-sm font-semibold text-red-500 transition-colors duration-150 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                                        href="" onclick="event.preventDefault();">
+                                        <span>{{ $errorsLineProp }}</span>
+                                    </a>
+                                </li>
+                            @else
+                                @foreach ($hefUserMenu as $value)
+                                    <li class="flex">
+                                        <a class="inline-flex w-full items-center rounded-md px-2 py-1 text-sm font-semibold transition-colors duration-150 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                                            href="{{ $value['hef'] }}" target="_blank">
+                                            {!! $value['icon'] !!}
+                                            <span>{{ $value['title'] }}</span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @endisset
+                            @endroleset
                         </ul>
                     </template>
                 </li>

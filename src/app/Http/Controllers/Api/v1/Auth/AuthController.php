@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Utils\System\GetSetCookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -60,6 +61,9 @@ class AuthController extends Controller
             if ($this->attemptLogin($request)) {
                 $user = User::where('email', $request['email'])->first();
                 $token = $user->createToken('tlc_token')->plainTextToken;
+                if ($user) {
+                    GetSetCookie::setCookieForever('time_zone', $user->time_zone);
+                }
                 return response()->json([
                     'success' => true,
                     'access_token' => $token,
@@ -75,6 +79,7 @@ class AuthController extends Controller
                     'message' => 'Login failed'
                 ], 401);
             }
+            GetSetCookie::setCookieForever('time_zone', $user->time_zone);
             $token = $user->createToken('tlc_token')->plainTextToken;
             return response()->json([
                 'success' => true,
@@ -91,6 +96,9 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         try {
+            if (GetSetCookie::hasCookie('time_zone')) {
+                GetSetCookie::forgetCookie('time_zone');
+            }
             $request->user()->tokens()->delete();
             return response()->json([
                 'success' => true,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Media;
 use App\Models\User;
+use App\Utils\System\GetSetCookie;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -52,7 +53,7 @@ class UploadFileController extends Controller
                 $fileName = $file->getClientOriginalName();
                 $extension = pathinfo($fileName, PATHINFO_EXTENSION);
                 $fileNameNormal = pathinfo($fileName, PATHINFO_FILENAME);
-                $dt = Carbon::now('Asia/Ho_Chi_Minh');
+                $dt = Carbon::now();
                 $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
                 $path_image = $path . $fileName;
                 Storage::disk('s3')->put($path_image, file_get_contents($file), 'public');
