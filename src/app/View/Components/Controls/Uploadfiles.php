@@ -33,24 +33,26 @@ class Uploadfiles extends Component
         $id = $this->id;
         $colName = $this->colName;
         $action = $this->action;
+
         if ($action === 'create') {
-            $fileName = "";
-            $url_thumbnail = "";
+            $infMedia = [];
+            $cateIdName = [];
             $url_media = "";
-            $path = "";
-            return view('components.controls.uploadfiles')->with(compact('id', 'colName', 'fileName', 'url_thumbnail', 'url_media', 'path', 'action'));
+            return view('components.controls.uploadfiles')->with(compact('action', 'infMedia', 'cateIdName', 'colName', 'path'));
         }
 
+        $newItemModel = $this->tablePath::find($id);
+        $mediaOnModel = $newItemModel->media;
 
-        // get table's name in database
-        $insTable = new $this->tablePath;
-        $tableName = $insTable->getTable();
-        $currentTable = DB::table($tableName)->where('id', $id)->first();
-
-        $media = Media::where('id', $currentTable->$colName)->first();
-        $fileName = $media['filename'];
-        $url_thumbnail = $media['url_thumbnail'];
-        $url_media = $media['url_media'];
-        return view('components.controls.uploadfiles')->with(compact('id', 'colName', 'fileName', 'url_thumbnail', 'url_media', 'path', 'action'));
+        $infMedia = [];
+        foreach ($mediaOnModel as $mediaOnModel) {
+            array_push($infMedia, $mediaOnModel->getAttributes());
+        }
+        $cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
+        $cateIdName = [];
+        foreach ($cateAttachment as $key => $value) {
+            $cateIdName[$value->id] = $value->name;
+        }
+        return view('components.controls.uploadfiles')->with(compact('action', 'infMedia', 'cateIdName', 'colName', 'path'));
     }
 }

@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Render;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
+use App\Models\Media;
 use App\Models\User;
 use App\Models\Zunit_workplaces_rel_1;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -58,6 +60,8 @@ abstract class CreateEditController extends Controller
 
 	public function update(Request $request, $id)
 	{
+
+
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 		$data = $this->data::find($id);
@@ -103,8 +107,9 @@ abstract class CreateEditController extends Controller
 			// Save pictures to Media of database
 			$controlsMedia = $this->upload->store($request, $id);
 			if (count($controlsMedia) > 0) {
-				$data->fill($controlsMedia);
-				$data->save();
+				foreach ($controlsMedia as $key => $value) {
+					$data->media()->save(Media::find($value));
+				}
 			}
 		}
 
@@ -186,8 +191,9 @@ abstract class CreateEditController extends Controller
 				// Save pictures to Media of database
 				$controlsMedia = $this->upload->store($request, $newData->id);
 				if (count($controlsMedia) > 0) {
-					$newData->fill($controlsMedia);
-					$newData->save();
+					foreach ($controlsMedia as $key => $value) {
+						$newData->media()->save(Media::find($value));
+					}
 				}
 			}
 		}

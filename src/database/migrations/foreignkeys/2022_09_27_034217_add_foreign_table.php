@@ -26,9 +26,7 @@ return new class extends Migration
             $table->foreign('department')->references('id')->on('departments')->onDelete('cascade');
             $table->foreign('time_keeping_type')->references('id')->on('user_time_keep_types')->onDelete('cascade');
         });
-        Schema::table('media', function (Blueprint $table) {
-            $table->foreign('owner_id')->references('id')->on('users');
-        });
+
         Schema::table('posts', function (Blueprint $table) {
             $table->foreign('owner_id')->references('id')->on('users');
         });
@@ -57,6 +55,11 @@ return new class extends Migration
         Schema::table('sub_projects', function (Blueprint $table) {
             $table->foreign('sub_project_status_id')->references('id')->on('sub_project_statuses');
         });
+        // Schema::table('mediables', function (Blueprint $table) {
+        //     $table->foreign('media_id')->references('id')->on('media');
+        //     $table->foreign('object_id')->references('id')->on('zunit_test_5s');
+        //     $table->foreign('object_id')->references('id')->on('users');
+        // });
     }
 
     /**

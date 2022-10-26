@@ -114,6 +114,7 @@
         },
         {
             "name": "aws/aws-sdk-php",
+<<<<<<< HEAD
             "version": "3.240.0",
             "source": {
                 "type": "git",
@@ -124,6 +125,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/95186e6a40670196cc2f9f752a38b863aa45a890",
                 "reference": "95186e6a40670196cc2f9f752a38b863aa45a890",
+=======
+            "version": "3.240.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aws/aws-sdk-php.git",
+                "reference": "34c6bf82f337cadf31475c88ca70e8302afc624b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/34c6bf82f337cadf31475c88ca70e8302afc624b",
+                "reference": "34c6bf82f337cadf31475c88ca70e8302afc624b",
+>>>>>>> dev2110v1
                 "shasum": ""
             },
             "require": {
@@ -202,9 +215,15 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.240.0"
             },
             "time": "2022-10-21T20:17:33+00:00"
+=======
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.1"
+            },
+            "time": "2022-10-24T19:03:23+00:00"
+>>>>>>> dev2110v1
         },
         {
             "name": "brian2694/laravel-toastr",
@@ -1842,6 +1861,7 @@
             "time": "2022-05-21T17:30:32+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "laragraph/utils",
             "version": "v1.4.0",
             "source": {
@@ -1909,6 +1929,17 @@
             },
             "dist": {
                 "type": "zip",
+=======
+            "name": "laravel/framework",
+            "version": "v9.36.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "15ce569fd93124e8e2257c24e3ed85b9ef9951d6"
+            },
+            "dist": {
+                "type": "zip",
+>>>>>>> dev2110v1
                 "url": "https://api.github.com/repos/laravel/framework/zipball/15ce569fd93124e8e2257c24e3ed85b9ef9951d6",
                 "reference": "15ce569fd93124e8e2257c24e3ed85b9ef9951d6",
                 "shasum": ""
@@ -3583,6 +3614,7 @@
                 }
             ],
             "time": "2022-10-17T15:20:29+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "nuwave/lighthouse",
@@ -3711,6 +3743,8 @@
                 }
             ],
             "time": "2022-10-21T10:38:15+00:00"
+=======
+>>>>>>> dev2110v1
         },
         {
             "name": "phpoption/phpoption",
@@ -4576,6 +4610,7 @@
             "time": "2022-10-23T02:49:28+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "spatie/regex",
             "version": "3.1.1",
             "source": {
@@ -4648,6 +4683,17 @@
             },
             "dist": {
                 "type": "zip",
+=======
+            "name": "symfony/console",
+            "version": "v6.0.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/console.git",
+                "reference": "1f89cab8d52c84424f798495b3f10342a7b1a070"
+            },
+            "dist": {
+                "type": "zip",
+>>>>>>> dev2110v1
                 "url": "https://api.github.com/repos/symfony/console/zipball/1f89cab8d52c84424f798495b3f10342a7b1a070",
                 "reference": "1f89cab8d52c84424f798495b3f10342a7b1a070",
                 "shasum": ""
@@ -6886,6 +6932,7 @@
                 }
             ],
             "time": "2022-10-07T08:02:12+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "thecodingmachine/safe",
@@ -7025,6 +7072,8 @@
                 "source": "https://github.com/thecodingmachine/safe/tree/v2.4.0"
             },
             "time": "2022-10-07T14:02:17+00:00"
+=======
+>>>>>>> dev2110v1
         },
         {
             "name": "tightenco/collect",

@@ -5,6 +5,8 @@ namespace App\Http\Services;
 use App\Models\Media;
 use App\Utils\System\GetSetCookie;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -12,6 +14,13 @@ class UploadService
 {
     public function store($request, $id)
     {
+
+        $cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
+
+        $cateIdName = [];
+        foreach ($cateAttachment as $key => $value) {
+            $cateIdName[$value->name] = $value->id;
+        }
 
         $filesUpload = $request->files;
         $nameControls = [];
@@ -37,14 +46,16 @@ class UploadService
                 Storage::disk('s3')->put($path_thumbnail, $resource->__toString(), 'public');
             }
             array_push($medias, [
-                'filename' => basename($path_image),
-                'url_folder' => $path,
-                'url_media' => $path_image,
                 'url_thumbnail' => isset($path_thumbnail) ? $path_thumbnail : "",
-                'owner_id' => (int)$id,
+                'url_media' => $path_image,
+                'url_folder' => $path,
+                'filename' => basename($path_image),
                 'extension' => $imageFileType,
+                'category' => $cateIdName[$key],
+                'owner_id' =>  (int)Auth::user()->id,
             ]);
         }
+        // dd($medias);
         foreach ($medias as $key => $media) {
             $newMedia = Media::create($media);
             $controlsMedia[$nameControls[$key]] = $newMedia['id'];
