@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string("name");
             $table->string('attachment_1');
             $table->string('attachment_2');
+            $table->string('attachment_3');
+            $table->string('attachment_4');
+            $table->string('attachment_5');
             $table->timestamps();
         });
     }
