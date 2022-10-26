@@ -41,6 +41,20 @@
         "frozen_left": "",
         "frozen_right": ""
     },
+    "_attachment_3": {
+        "column_name": "attachment_3",
+        "column_type": "string",
+        "label": "Attachment 3",
+        "control": "attachment",
+        "col_span": "12",
+        "hidden_view_all": null,
+        "hidden_edit": null,
+        "new_line": null,
+        "type_line": "default",
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
     "_created_at": {
         "column_name": "created_at",
         "column_type": "datetime",

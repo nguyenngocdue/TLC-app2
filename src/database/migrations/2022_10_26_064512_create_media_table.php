@@ -23,11 +23,10 @@ return new class extends Migration
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('object_id')->nullable();
             $table->string('object_type')->nullable();
-
+            $table->unsignedBigInteger('category');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medias');
+        Schema::dropIfExists('media');
     }
 };
