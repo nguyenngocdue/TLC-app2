@@ -63,7 +63,7 @@ abstract class ManageStatusDocType extends Controller
             case 'add':
                 $nameStatus = $data['add'];
                 $newProps = array_values(array_merge($statusDocType, [$nameStatus]));
-                $jsonManage = json_encode($newProps);
+                $jsonManage = json_encode($newProps, JSON_PRETTY_PRINT);
                 try {
                     $output = Storage::disk('json')->put($this->w_file_path, $jsonManage, 'public'); // wwhy output has always false value
                     return redirect()->back()->with(compact('nameStatus'));
@@ -73,7 +73,7 @@ abstract class ManageStatusDocType extends Controller
             case 'remove':
                 $nameStatus = [$data['remove']];
                 $newStatusDocType = array_diff($statusDocType, $nameStatus);
-                $jsonManage = json_encode(array_values($newStatusDocType));
+                $jsonManage = json_encode(array_values($newStatusDocType), JSON_PRETTY_PRINT);
 
                 try {
                     $output = Storage::disk('json')->put($this->w_file_path, $jsonManage, 'public'); // wwhy output has always false value
@@ -92,7 +92,7 @@ abstract class ManageStatusDocType extends Controller
                     array_push($docType, $nameStatus);
                 }
                 // dd($docType, $index, $nameStatus);
-                $jsonManage = json_encode(array_values($docType));
+                $jsonManage = json_encode(array_values($docType), JSON_PRETTY_PRINT);
                 try {
                     $output = Storage::disk('json')->put($this->w_file_path, $jsonManage, 'public'); // wwhy output has always false value
                     return redirect()->back();
@@ -112,7 +112,7 @@ abstract class ManageStatusDocType extends Controller
                     unset($docType[$index]);
                     array_splice($docType, 0, 0, $nameStatus);
                 }
-                $jsonManage = json_encode(array_values($docType));
+                $jsonManage = json_encode(array_values($docType), JSON_PRETTY_PRINT);
                 try {
                     $output = Storage::disk('json')->put($this->w_file_path, $jsonManage, 'public'); // wwhy output has always false value
                     return redirect()->back();

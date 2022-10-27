@@ -140,7 +140,7 @@ class UpdateSideBarConfigCommand extends Command
     }
     protected function updateConfig($fileName, $data)
     {
-        $output = Storage::disk('json')->put("configs/view/dashboard/$fileName.json", json_encode($data), 'public');
+        $output = Storage::disk('json')->put("configs/view/dashboard/$fileName.json", json_encode($data, JSON_PRETTY_PRINT), 'public');
         if ($output) {
             return true;
         } else {

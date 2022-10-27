@@ -12,7 +12,7 @@ class ManageService
     public function checkUploadFile($data, $type, $fileName)
     {
         $type = Str::plural($type);
-        $output = Storage::disk('json')->put("entities/$type/$fileName.json", json_encode($data), 'public');
+        $output = Storage::disk('json')->put("entities/$type/$fileName.json", json_encode($data, JSON_PRETTY_PRINT), 'public');
         if ($output) {
             Toastr::success('Save file json successfully!', 'Save file json');
             return true;

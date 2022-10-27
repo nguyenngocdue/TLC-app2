@@ -78,7 +78,7 @@ class ManageStatusLibrary extends Controller
         }
         $allStatuses  = array_merge($array2, $array1);
         ksort($allStatuses);
-        $jsonManage = json_encode($allStatuses);
+        $jsonManage = json_encode($allStatuses, JSON_PRETTY_PRINT);
         // dd($data, $array2, $array1, $allStatuses, $jsonManage);
         try {
             $output = Storage::disk('json')->put($this->w_file_path, $jsonManage, 'public');
