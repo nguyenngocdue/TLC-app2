@@ -1,0 +1,20 @@
+{
+    "_routingLink": {
+        "relationship": "routingLink",
+        "eloquent": "hasMany",
+        "param_1": "App\\Models\\Prod_routing_link",
+        "param_2": "prod_discipline_id",
+        "param_3": null,
+        "param_4": null,
+        "param_5": null,
+        "param_6": null,
+        "label": "RoutingLink",
+        "control": "column",
+        "control_param": "name",
+        "column_name": "prod_discipline_id",
+        "col_span": "12",
+        "hidden": null,
+        "new_line": null,
+        "type_line": "default"
+    }
+}
