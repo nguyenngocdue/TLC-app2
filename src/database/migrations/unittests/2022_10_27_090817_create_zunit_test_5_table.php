@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('zunit_test_5s', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string('attachment_1');
-            $table->string('attachment_2');
-            $table->string('attachment_3');
-            $table->string('attachment_4');
-            $table->string('attachment_5');
+            $table->string("name")->nullable();
+            $table->string('attachment_1')->nullable();
+            $table->string('attachment_2')->nullable();
+            $table->string('attachment_3')->nullable();
+            $table->string('attachment_4')->nullable();
+            $table->string('attachment_5')->nullable();
             $table->timestamps();
         });
     }

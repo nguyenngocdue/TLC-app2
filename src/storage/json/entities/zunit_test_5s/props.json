@@ -9,23 +9,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null
-    },
-    "_name": {
-        "column_name": "name",
-        "column_type": "string",
-        "label": "Name",
-        "control": "text",
-        "col_span": "12",
-        "hidden_view_all": null,
-        "hidden_edit": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_attachment_1": {
         "column_name": "attachment_1",
@@ -37,9 +23,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_attachment_2": {
         "column_name": "attachment_2",
@@ -51,9 +37,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_attachment_3": {
         "column_name": "attachment_3",
@@ -65,37 +51,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null
-    },
-    "_attachment_4": {
-        "column_name": "attachment_4",
-        "column_type": "string",
-        "label": "Attachment 4",
-        "control": "attachment",
-        "col_span": "12",
-        "hidden_view_all": null,
-        "hidden_edit": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null
-    },
-    "_attachment_5": {
-        "column_name": "attachment_5",
-        "column_type": "string",
-        "label": "Attachment 5",
-        "control": "attachment",
-        "col_span": "12",
-        "hidden_view_all": null,
-        "hidden_edit": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_created_at": {
         "column_name": "created_at",
@@ -107,9 +65,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_updated_at": {
         "column_name": "updated_at",
@@ -121,8 +79,22 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_name": {
+        "column_name": "name",
+        "column_type": "string",
+        "label": "Name",
+        "control": "text",
+        "col_span": "12",
+        "hidden_view_all": null,
+        "hidden_edit": null,
+        "new_line": null,
+        "type_line": "default",
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
     }
 }
