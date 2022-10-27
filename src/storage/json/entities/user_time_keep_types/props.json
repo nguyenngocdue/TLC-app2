@@ -1,1 +1,86 @@
-{"_id":{"column_name":"id","column_type":"bigint","label":"Id","control":"id","col_span":"12","hidden":null,"new_line":null,"type_line":"default","validation":"","frozen_left":"","frozen_right":""},"_name":{"column_name":"name","column_type":"string","label":"Name","control":"text","col_span":"12","hidden":null,"new_line":null,"type_line":"default","validation":"","frozen_left":"","frozen_right":""},"_description":{"column_name":"description","column_type":"text","label":"Description","control":"textarea","col_span":"12","hidden":null,"new_line":null,"type_line":"default","validation":"","frozen_left":"","frozen_right":""},"_slug":{"column_name":"slug","column_type":"string","label":"Slug","control":"text","col_span":"12","hidden":null,"new_line":null,"type_line":"default","validation":"","frozen_left":"","frozen_right":""},"_created_at":{"column_name":"created_at","column_type":"datetime","label":"Created At","control":"picker_datetime","col_span":"12","hidden":null,"new_line":null,"type_line":"default","validation":"","frozen_left":"","frozen_right":""},"_updated_at":{"column_name":"updated_at","column_type":"datetime","label":"Updated At","control":"picker_datetime","col_span":"12","hidden":null,"new_line":null,"type_line":"default","validation":"","frozen_left":"","frozen_right":""}}
+{
+    "_id": {
+        "column_name": "id",
+        "column_type": "bigint",
+        "label": "Id",
+        "control": "id",
+        "col_span": "12",
+        "hidden_view_all": null,
+        "hidden_edit": null,
+        "new_line": null,
+        "type_line": "default",
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_name": {
+        "column_name": "name",
+        "column_type": "string",
+        "label": "Name",
+        "control": "text",
+        "col_span": "12",
+        "hidden_view_all": null,
+        "hidden_edit": null,
+        "new_line": null,
+        "type_line": "default",
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_description": {
+        "column_name": "description",
+        "column_type": "text",
+        "label": "Description",
+        "control": "textarea",
+        "col_span": "12",
+        "hidden_view_all": "true",
+        "hidden_edit": null,
+        "new_line": null,
+        "type_line": "default",
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_slug": {
+        "column_name": "slug",
+        "column_type": "string",
+        "label": "Slug",
+        "control": "text",
+        "col_span": "12",
+        "hidden_view_all": null,
+        "hidden_edit": null,
+        "new_line": null,
+        "type_line": "default",
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_created_at": {
+        "column_name": "created_at",
+        "column_type": "datetime",
+        "label": "Created At",
+        "control": "picker_datetime",
+        "col_span": "12",
+        "hidden_view_all": "true",
+        "hidden_edit": null,
+        "new_line": null,
+        "type_line": "default",
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_updated_at": {
+        "column_name": "updated_at",
+        "column_type": "datetime",
+        "label": "Updated At",
+        "control": "picker_datetime",
+        "col_span": "12",
+        "hidden_view_all": "true",
+        "hidden_edit": null,
+        "new_line": null,
+        "type_line": "default",
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    }
+}
