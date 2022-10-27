@@ -9,9 +9,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_email": {
         "column_name": "email",
@@ -23,9 +23,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "frozen_left": "",
-        "frozen_right": "",
-        "validation": "required|email|unique:users"
+        "validation": "required|email|unique:users",
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_name_rendered": {
         "column_name": "name_rendered",
@@ -38,8 +38,8 @@
         "new_line": null,
         "type_line": "default",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_full_name": {
         "column_name": "full_name",
@@ -52,8 +52,8 @@
         "new_line": null,
         "type_line": "default",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_name_suffix": {
         "column_name": "name_suffix",
@@ -65,9 +65,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_employeeid": {
         "column_name": "employeeid",
@@ -79,9 +79,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_first_name": {
         "column_name": "first_name",
@@ -94,8 +94,8 @@
         "new_line": null,
         "type_line": "default",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_last_name": {
         "column_name": "last_name",
@@ -108,8 +108,8 @@
         "new_line": null,
         "type_line": "default",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_address": {
         "column_name": "address",
@@ -121,9 +121,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_phone": {
         "column_name": "phone",
@@ -135,9 +135,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_featured_image": {
         "column_name": "featured_image",
@@ -149,9 +149,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_time_keeping_type": {
         "column_name": "time_keeping_type",
@@ -164,8 +164,8 @@
         "new_line": null,
         "type_line": "default",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_user_type": {
         "column_name": "user_type",
@@ -177,9 +177,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_workplace": {
         "column_name": "workplace",
@@ -191,9 +191,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_category": {
         "column_name": "category",
@@ -205,9 +205,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_date_of_birth": {
         "column_name": "date_of_birth",
@@ -219,9 +219,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_first_date": {
         "column_name": "first_date",
@@ -233,9 +233,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_last_date": {
         "column_name": "last_date",
@@ -247,9 +247,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_title": {
         "column_name": "title",
@@ -261,9 +261,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_position_prefix": {
         "column_name": "position_prefix",
@@ -275,9 +275,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_position_1": {
         "column_name": "position_1",
@@ -289,9 +289,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_position_2": {
         "column_name": "position_2",
@@ -303,9 +303,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_position_3": {
         "column_name": "position_3",
@@ -317,9 +317,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_position_rendered": {
         "column_name": "position_rendered",
@@ -332,8 +332,8 @@
         "new_line": null,
         "type_line": "default",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_discipline": {
         "column_name": "discipline",
@@ -345,9 +345,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_department": {
         "column_name": "department",
@@ -359,9 +359,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_show_on_beta": {
         "column_name": "show_on_beta",
@@ -373,9 +373,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_resigned": {
         "column_name": "resigned",
@@ -387,9 +387,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_viewport_uids": {
         "column_name": "viewport_uids",
@@ -401,9 +401,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_leaf_uids": {
         "column_name": "leaf_uids",
@@ -415,9 +415,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_email_verified_at": {
         "column_name": "email_verified_at",
@@ -425,13 +425,13 @@
         "label": "Email Verified At",
         "control": "picker_datetime",
         "col_span": "12",
-        "hidden_view_all": null,
+        "hidden_view_all": "true",
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_password": {
         "column_name": "password",
@@ -439,13 +439,13 @@
         "label": "Password",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": null,
+        "hidden_view_all": "true",
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_settings": {
         "column_name": "settings",
@@ -453,13 +453,13 @@
         "label": "Settings",
         "control": "textarea",
         "col_span": "12",
-        "hidden_view_all": null,
+        "hidden_view_all": "true",
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_remember_token": {
         "column_name": "remember_token",
@@ -467,13 +467,13 @@
         "label": "Remember Token",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": null,
+        "hidden_view_all": "true",
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_created_at": {
         "column_name": "created_at",
@@ -481,13 +481,13 @@
         "label": "Created At",
         "control": "picker_datetime",
         "col_span": "12",
-        "hidden_view_all": null,
+        "hidden_view_all": "true",
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_updated_at": {
         "column_name": "updated_at",
@@ -495,13 +495,13 @@
         "label": "Updated At",
         "control": "picker_datetime",
         "col_span": "12",
-        "hidden_view_all": null,
+        "hidden_view_all": "true",
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_guid": {
         "column_name": "guid",
@@ -509,13 +509,13 @@
         "label": "Guid",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": null,
+        "hidden_view_all": "true",
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_domain": {
         "column_name": "domain",
@@ -523,13 +523,13 @@
         "label": "Domain",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": null,
+        "hidden_view_all": "true",
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_user_id_passport": {
         "column_name": "user_id_passport",
@@ -537,13 +537,13 @@
         "label": "User Id Passport",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": null,
+        "hidden_view_all": "true",
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_user_pin": {
         "column_name": "user_pin",
@@ -551,12 +551,26 @@
         "label": "User Pin",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": null,
+        "hidden_view_all": "true",
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
+    },
+    "_time_zone": {
+        "column_name": "time_zone",
+        "column_type": "string",
+        "label": "Time Zone",
+        "control": "text",
+        "col_span": "12",
+        "hidden_view_all": "true",
+        "hidden_edit": null,
+        "new_line": null,
+        "type_line": "default",
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     }
 }

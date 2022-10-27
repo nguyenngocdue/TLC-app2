@@ -138,9 +138,9 @@ abstract class ManagePropController extends Controller
             $array['hidden_edit'] = $data['hidden_edit'][$key];
             $array['new_line'] = $data['new_line'][$key];
             $array['type_line'] = "default";
-            $array['validation'] = "";
-            $array['frozen_left'] = "";
-            $array['frozen_right'] = "";
+            $array['validation'] = $data['validation'][$key];
+            $array['frozen_left'] = $data['frozen_left'][$key];
+            $array['frozen_right'] = $data['frozen_right'][$key];
             $manage[$name] = $array;
         }
         try {
