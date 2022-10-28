@@ -35,16 +35,29 @@ abstract class RenderController extends Controller
         $users = App::make($model)::search($search)->query(function ($q) {
             $q->orderBy('id', 'asc');
         })->paginate($pageLimit);
-        $path = storage_path() . "/json/entities/$type/props.json";
-        $path2 = storage_path() . "/json/entities/$type/relationships.json";
-        if (!file_exists($path) || !file_exists($path2)) {
-            Toastr::warning('Please make settings ' . Str::plural($type) . ' before rendering!', 'Please setting ' . Str::plural($type));
-            $data = [];
-            $data2 = [];
-            return view('dashboards.render.prop')->with(compact('data', 'data2', 'users', 'pageLimit', 'type', 'userLogin', 'search', 'model'));
+        $propsPath = storage_path() . "/json/entities/$type/props.json";
+        $relPath = storage_path() . "/json/entities/$type/relationships.json";
+        if (!file_exists($propsPath) || !file_exists($relPath)) {
+            $messages = [];
+            if (!file_exists($propsPath)) {
+                $messages[] = [
+                    'title' => 'PROPS.JSON',
+                    'href' => Str::singular($type) . "_mngprop.index",
+                ];
+            }
+            if (!file_exists($relPath)) {
+                $messages[] = [
+                    'title' => 'RELATIONSHIPS.JSON',
+                    'href' => Str::singular($type) . "_mngrls.index",
+                ];
+            }
+            return view('dashboards.render.prop')->with(compact('type', 'messages'));
+            // $data = [];
+            // $data2 = [];
+            // return view('dashboards.render.prop')->with(compact('data', 'data2', 'users', 'pageLimit', 'type', 'userLogin', 'search', 'model'));
         } else {
-            $data = json_decode(file_get_contents($path), true);
-            $data2 = json_decode(file_get_contents($path2), true);
+            $data = json_decode(file_get_contents($propsPath), true);
+            $data2 = json_decode(file_get_contents($relPath), true);
             $filterRenders = array_filter($data, function ($value) {
                 $check = $value['hidden_view_all'] ?? null;
                 return $check !== "true";
