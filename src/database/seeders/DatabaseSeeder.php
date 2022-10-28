@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             UserSeeder::class,
             PostSeeder::class,
-            MediaSeeder::class,
+            // MediaSeeder::class,
             // WorkplaceSeeder::class,
         ]);
     }
