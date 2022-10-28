@@ -64,9 +64,6 @@
                                 <h2 class="text-red-400">{{"Control of this $column_name has not been set"}}</h2>
                                 @endif
                                 <strong class="scroll-mt-20 snap-start" id="{{$column_name}}"></strong>
-
-                                {{-- {{dd($control)}} --}}
-
                                 @switch ($control)
                                 @case($timeControls[0])
                                 @case($timeControls[1])
@@ -110,7 +107,7 @@
                                 @break
 
                                 @case('checkbox')
-                                <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} tablePath={{$tablePath}} />
+                                <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} />
                                 @break
 
 

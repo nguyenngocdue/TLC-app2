@@ -61,11 +61,10 @@ abstract class CreateEditController extends Controller
 	public function update(Request $request, $id)
 	{
 
-
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
-		$data = $this->data::find($id);
 		$dataInput = $request->input();
+
 		unset($dataInput['_token']);
 		unset($dataInput['_method']);
 
@@ -77,6 +76,7 @@ abstract class CreateEditController extends Controller
 		$request->validate($itemsValidation);
 
 
+		$data = $this->data::find($id);
 		// chanage value from toggle
 		foreach ($props as $key => $value) {
 			if ($value['control'] === 'switch') {
@@ -85,7 +85,7 @@ abstract class CreateEditController extends Controller
 			};
 		}
 
-		// Update dataInput to database
+		// Save data to database
 		$data->fill($dataInput);
 		$data->save();
 		if ($data->save()) Toastr::success('User updated successfully', 'Update User');
@@ -103,18 +103,19 @@ abstract class CreateEditController extends Controller
 			}
 		}
 
+		// Save pictures to Media of database
 		if (count($request->files) > 0) {
-			// Save pictures to Media of database
 			$controlsMedia = $this->upload->store($request, $id);
 			if (count($controlsMedia) > 0) {
 				foreach ($controlsMedia as $key => $value) {
-					$data->media()->save(Media::find($value));
+					$data->media()->save(Media::find($key));
 				}
 			}
 		}
 
 		return redirect(route("{$type}_edit.show", $id));
 	}
+
 	public function index()
 	{
 		$action = $this->action;
@@ -130,26 +131,25 @@ abstract class CreateEditController extends Controller
 		$tablePath = $this->data;
 		$values = "";
 		$idItems = [];
-
 		return view('dashboards.render.createEdit')->with(compact('props', 'type', 'action', 'tablePath', 'values', 'idItems'));
 	}
 	public function store(Request $request)
 	{
-
+		// dd($request->files);
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
-		$db = $this->data;
 		$dataInput = $request->input();
 
 		unset($dataInput['_token']);
 		unset($dataInput['_method']);
 
-
+		// Validation
 		$itemsValidation = [];
 		foreach ($props as $key => $value) {
 			$itemsValidation[$value['column_name']] = $value['validation'];
 		}
 		$request->validate($itemsValidation);
+
 
 		// filter controls which are switch control - set its value is null
 		$witchControls = [];
@@ -171,12 +171,15 @@ abstract class CreateEditController extends Controller
 				isset($dataInput[$item]) ? $newData[$item] = 1 : $newData[$item] = null;
 			};
 		}
+
+
 		// Save data to database
-		$newData = $db::create($dataInput);
+		$data = $this->data;
+		$newData = $data::create($dataInput);
 
 
+		// multiselection - checkbox
 		if (isset($newData)) {
-			// multiselection - checkbox
 			$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $newData->getTable(), "relationships.json");
 			if ($relationshipFile) {
 				foreach ($relationshipFile as $key => $value) {
@@ -187,12 +190,12 @@ abstract class CreateEditController extends Controller
 					}
 				}
 			}
+			// Save pictures to Media of database
 			if (count($request->files) > 0) {
-				// Save pictures to Media of database
 				$controlsMedia = $this->upload->store($request, $newData->id);
 				if (count($controlsMedia) > 0) {
 					foreach ($controlsMedia as $key => $value) {
-						$newData->media()->save(Media::find($value));
+						$newData->media()->save(Media::find($key));
 					}
 				}
 			}
