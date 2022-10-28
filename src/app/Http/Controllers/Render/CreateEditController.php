@@ -71,7 +71,7 @@ abstract class CreateEditController extends Controller
 		// Validation
 		$itemsValidation = [];
 		foreach ($props as $key => $value) {
-			$itemsValidation[$value['column_name']] = $value['validation'];
+			$itemsValidation[$value['column_name']] = is_null($value['validation']) ? "" : $value['validation'];
 		}
 		$request->validate($itemsValidation);
 
@@ -146,7 +146,7 @@ abstract class CreateEditController extends Controller
 		// Validation
 		$itemsValidation = [];
 		foreach ($props as $key => $value) {
-			$itemsValidation[$value['column_name']] = $value['validation'];
+			$itemsValidation[$value['column_name']] = is_null($value['validation']) ? "" : $value['validation'];
 		}
 		$request->validate($itemsValidation);
 

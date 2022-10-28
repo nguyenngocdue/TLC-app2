@@ -18,11 +18,14 @@ class RoleSetSeeder extends Seeder
     {
         try {
             $entities = Entities::getALl();
+            $names = [];
             foreach ($entities as $entity) {
                 $name = $entity->getTable();
-                $nameUpper = Str::upper($name);
+                $names[] = Str::upper($name);
             }
-            RoleSet::create(['name' => 'admin'])->giveRoleTo(['ADMIN-DATA-MEDIA', 'ADMIN-DATA-POSTS', 'ADMIN-DATA-WORKPLACES', 'ADMIN-DATA-USERS']);
+            $roles = array_map(fn ($item) => "ADMIN-DATA-$item", $names);
+            RoleSet::create(['name' => 'admin'])->giveRoleTo([$roles]);
+            // RoleSet::create(['name' => 'admin'])->giveRoleTo(['ADMIN-DATA-MEDIA', 'ADMIN-DATA-POSTS', 'ADMIN-DATA-WORKPLACES', 'ADMIN-DATA-USERS']);
         } catch (\Throwable $th) {
             throw $th;
         }
