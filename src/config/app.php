@@ -183,6 +183,7 @@ return [
         // Spatie\Permission\PermissionServiceProvider::class,
         Ndc\Spatiecustom\RoleServiceProvider::class,
         Ndc\Spatiecustom\PermissionServiceProvider::class,
+        App\Providers\MigrationsServiceProvider::class,
     ],
 
     /*

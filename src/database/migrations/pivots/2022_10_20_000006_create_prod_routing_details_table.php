@@ -20,6 +20,9 @@ return new class extends Migration
             $table->double('target_man_hours')->nullable();
             $table->primary(['routing_id', 'routing_link_id']);
             $table->timestamps();
+
+            $table->foreign('routing_id')->references('id')->on('prod_routings')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('routing_link_id')->references('id')->on('prod_routing_links')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -12,27 +12,27 @@ return new class extends Migration
      *
      * @return void
      */
-     protected function checkRelationShip()
+    protected function checkRelationShip()
     {
         $relationship = 'rel_1';
         if (strlen($relationship) > 1) {
-            $name = md5(Str::plural('user').'_'.Str::plural('user_discipline'));
-            $tableName = Str::plural('user').'_'.Str::plural('user_discipline').'_'.$relationship ;
+            $name = md5(Str::plural('user') . '_' . Str::plural('user_discipline'));
+            $tableName = Str::plural('user') . '_' . Str::plural('user_discipline') . '_' . $relationship;
         } else {
             $name = null;
-            $tableName = Str::plural('user').'_'.Str::plural('user_discipline');
+            $tableName = Str::plural('user') . '_' . Str::plural('user_discipline');
         }
-        return [$tableName,$name];
+        return [$tableName, $name];
     }
     public function up()
     {
-        
+
         Schema::create($this->checkRelationShip()[0], function (Blueprint $table) {
-            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('user_discipline_id');
             $table->timestamps();
-            $table->unique(['user_id', 'user_discipline_id'],$this->checkRelationShip()[1]);
+            $table->primary(['user_id', 'user_discipline_id']);
+
             $table->foreign('user_id')->references('id')->on(Str::plural('user'))->onDelete('cascade');
             $table->foreign('user_discipline_id')->references('id')->on(Str::plural('user_discipline'))->onDelete('cascade');
         });
