@@ -16,18 +16,20 @@ class UploadService
     public function store($request, $id)
     {
 
-        $cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
-
         $cateIdName = [];
-        foreach ($cateAttachment as $key => $value) {
-            $cateIdName[$value->name] = $value->id;
+        try {
+            $cateAttachment = DB::table('media_categoriess')->select('id', 'name')->get();
+            foreach ($cateAttachment as $key => $value) {
+                $cateIdName[$value->name] = $value->id;
+            }
+        } catch (\Exception $e) {
+            return  $e;
         }
 
         $filesUpload = $request->files;
         $nameControls = [];
         $medias = [];
         $controlsMedia = [];
-
         foreach ($filesUpload as $key => $files) {
             array_push($nameControls, $key);
             foreach ($files as $file) {

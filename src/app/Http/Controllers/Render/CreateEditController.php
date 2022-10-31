@@ -121,10 +121,13 @@ abstract class CreateEditController extends Controller
 		// Save pictures to Media of database
 		if (count($request->files) > 0) {
 			$controlsMedia = $this->upload->store($request, $id);
-			if (count($controlsMedia) > 0) {
-				foreach ($controlsMedia as $key => $value) {
-					$data->media()->save(Media::find($key));
-				}
+			if ($controlsMedia->getMessage()) {
+				$title = "Not find item";
+				$error = $controlsMedia->getMessage();
+				return view('components.render.resultWarning')->with(compact('error', 'title'));
+			}
+			foreach ($controlsMedia as $key => $value) {
+				$data->media()->save(Media::find($key));
 			}
 		}
 
