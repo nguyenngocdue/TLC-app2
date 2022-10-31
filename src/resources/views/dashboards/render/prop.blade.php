@@ -155,7 +155,7 @@
 
                                                                         @case('column')
                                                                             @php
-                                                                                $render = $user->{$item['relationship']}->{$item['control_param']} ?? '';
+                                                                                $render = $user->{$item['relationship']}->{$item['renderer_param']} ?? '';
                                                                             @endphp
                                                                             <div title="{{ $user[$value['column_name']] }}">
                                                                                 <span class="text-sm">{{ $render }}</span>
@@ -182,7 +182,7 @@
 
                                                                         @default
                                                                             <div title="{{ $user[$value['column_name']] }}">
-                                                                                {{ $item['control'] }}
+                                                                                {{ $item['renderer'] }}
                                                                             </div>
                                                                     @endswitch
                                                                 @else
@@ -238,7 +238,7 @@
                                                                 @case('column')
                                                                     <td class="text-center">
                                                                         @php
-                                                                            $render = $user->{$item['relationship']}->{$item['control_param']} ?? '';
+                                                                            $render = $user->{$item['relationship']}->{$item['renderer_param']} ?? '';
                                                                         @endphp
                                                                         <span class="text-sm">{{ $render }}</span>
                                                                     </td>
@@ -264,7 +264,7 @@
                                                                     <td class="px-4 py-3">
                                                                         {!! $item['renderer'] ??
                                                                             '<p class="rounded-md bg-red-300 px-2 py-0 text-xs font-semibold leading-tight text-red-400 dark:bg-red-500 dark:text-green-100">
-                                                                                                                                                                                                                                                            Render Failed </p>' !!}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Render Failed </p>' !!}
                                                                     </td>
                                                             @endswitch
                                                         @endif
