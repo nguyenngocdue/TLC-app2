@@ -14,9 +14,9 @@ class Media extends Model
     protected $primaryKey = 'id';
     protected $table = 'media';
 
-    // public $eloquentParams = [
-    //     "user" => ['belongsTo', User::class, 'owner_id'],
-    // ];
+    public $eloquentParams = [
+        // "user" => ['belongsTo', User::class, 'owner_id'],
+    ];
     // public function user()
     // {
     //     $p = $this->eloquentParams[__FUNCTION__];

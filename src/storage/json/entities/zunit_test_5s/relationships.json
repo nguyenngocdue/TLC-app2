@@ -1,0 +1,20 @@
+{
+    "_media": {
+        "relationship": "media",
+        "eloquent": "morphMany",
+        "param_1": "App\\Models\\Media",
+        "param_2": "mediable",
+        "param_3": "object_type",
+        "param_4": "object_id",
+        "param_5": null,
+        "param_6": null,
+        "label": "Media",
+        "renderer": null,
+        "renderer_param": null,
+        "column_name": "mediable",
+        "col_span": "12",
+        "hidden": null,
+        "new_line": null,
+        "type_line": "default"
+    }
+}

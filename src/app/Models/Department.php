@@ -15,7 +15,7 @@ class Department extends Model
     protected $table = 'departments';
 
     public $eloquentParams = [
-        "user" => ['hasMany', User::class, 'department', 'id'],
+        "user" => ['hasMany', User::class, 'department'],
     ];
     public function user()
     {

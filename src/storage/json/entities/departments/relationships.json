@@ -1,1 +1,20 @@
-{"_user":{"relationship":"user","eloquent":"hasMany","param_1":"App\\Models\\User","param_2":"department","param_3":"id","param_4":null,"param_5":null,"param_6":null,"label":"User","control":"count","control_param":null,"column_name":"department","col_span":"12","hidden":null,"new_line":null,"type_line":"default"}}
+{
+    "_head_of_department": {
+        "relationship": "head_of_department",
+        "eloquent": "belongsTo",
+        "param_1": "App\\Models\\User",
+        "param_2": "head_of_department",
+        "param_3": null,
+        "param_4": null,
+        "param_5": null,
+        "param_6": null,
+        "label": "Head Of Department",
+        "renderer": "count",
+        "renderer_param": null,
+        "control_name": null,
+        "col_span": "12",
+        "hidden": null,
+        "new_line": null,
+        "type_line": "default"
+    }
+}
