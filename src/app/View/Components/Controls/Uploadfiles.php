@@ -34,12 +34,25 @@ class Uploadfiles extends Component
         $colName = $this->colName;
         $action = $this->action;
 
+        $cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
+        $cateIdName = [];
+        foreach ($cateAttachment as $key => $value) {
+            $cateIdName[$value->id] = $value->name;
+        }
+        if (!isset(array_flip($cateIdName)[$colName])) {
+            $error = "Not found $colName in media_categories";
+            return view('components.render.alert')->with(compact('error'));
+        }
+
+
         if ($action === 'create') {
             $infMedia = [];
             $cateIdName = [];
             $url_media = "";
             return view('components.controls.uploadfiles')->with(compact('action', 'infMedia', 'cateIdName', 'colName', 'path'));
         }
+
+
 
         $newItemModel = $this->tablePath::find($id);
         $mediaOnModel = $newItemModel->media;
@@ -48,11 +61,9 @@ class Uploadfiles extends Component
         foreach ($mediaOnModel as $mediaOnModel) {
             array_push($infMedia, $mediaOnModel->getAttributes());
         }
-        $cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
-        $cateIdName = [];
-        foreach ($cateAttachment as $key => $value) {
-            $cateIdName[$value->id] = $value->name;
-        }
+
+
+
         return view('components.controls.uploadfiles')->with(compact('action', 'infMedia', 'cateIdName', 'colName', 'path'));
     }
 }

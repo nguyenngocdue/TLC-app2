@@ -77,9 +77,6 @@ abstract class CreateEditController extends Controller
 			}
 		}
 
-
-
-
 		unset($dataInput['_token']);
 		unset($dataInput['_method']);
 
@@ -103,7 +100,7 @@ abstract class CreateEditController extends Controller
 		// Save data to database
 		$data->fill($dataInput);
 		$data->save();
-		if ($data->save()) Toastr::success('User updated successfully', 'Update User');
+		if ($data->save()) Toastr::success("$this->type updated successfully", "Update $this->type");
 
 
 		// multisection - checkbox
@@ -121,10 +118,9 @@ abstract class CreateEditController extends Controller
 		// Save pictures to Media of database
 		if (count($request->files) > 0) {
 			$controlsMedia = $this->upload->store($request, $id);
-			if ($controlsMedia->getMessage()) {
-				$title = "Not find item";
+			if (!is_array($controlsMedia)) {
 				$error = $controlsMedia->getMessage();
-				return view('components.render.resultWarning')->with(compact('error', 'title'));
+				Toastr::error("$this->type updated failed", $error);
 			}
 			foreach ($controlsMedia as $key => $value) {
 				$data->media()->save(Media::find($key));
@@ -196,9 +192,9 @@ abstract class CreateEditController extends Controller
 		$newData = $data::create($dataInput);
 
 
-		// multiselection - checkbox
 		if (isset($newData)) {
 			$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $newData->getTable(), "relationships.json");
+			// multiselection - checkbox
 			if ($relationshipFile) {
 				foreach ($relationshipFile as $key => $value) {
 					if ($value["eloquent"] === "belongsToMany") {
@@ -211,6 +207,11 @@ abstract class CreateEditController extends Controller
 			// Save pictures to Media of database
 			if (count($request->files) > 0) {
 				$controlsMedia = $this->upload->store($request, $newData->id);
+				if (!is_array($controlsMedia)) {
+					$title = "Not find item";
+					$error = $controlsMedia->getMessage();
+					return view('components.render.resultWarning')->with(compact('error', 'title'));
+				}
 				if (count($controlsMedia) > 0) {
 					foreach ($controlsMedia as $key => $value) {
 						$newData->media()->save(Media::find($key));
@@ -220,12 +221,11 @@ abstract class CreateEditController extends Controller
 		}
 
 		if ($newData) {
-			Toastr::success('User created successfully', 'Create User');
+			Toastr::success("$this->type created successfully", "Create $this->type");
 		} else {
 			return redirect()->back();
 		}
 		$idNewData = $newData->id;
-
 
 		$type = Str::plural($this->type);
 		return redirect(route("{$type}_edit.update", $idNewData));
