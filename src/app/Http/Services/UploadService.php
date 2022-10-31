@@ -48,6 +48,7 @@ class UploadService
                     $path_thumbnail = $path . $fileNameThumbnail;
                     Storage::disk('s3')->put($path_thumbnail, $resource->__toString(), 'public');
                 }
+
                 array_push($medias, [
                     'url_thumbnail' => isset($path_thumbnail) ? $path_thumbnail : "",
                     'url_media' => $path_image,
