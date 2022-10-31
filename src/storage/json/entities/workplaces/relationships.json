@@ -11,7 +11,7 @@
         "label": "User",
         "renderer": "count",
         "renderer_param": null,
-        "column_name": "workplace",
+        "control_name": null,
         "col_span": "12",
         "hidden": null,
         "new_line": null,
