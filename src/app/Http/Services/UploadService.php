@@ -28,9 +28,9 @@ class UploadService
         $medias = [];
         $controlsMedia = [];
 
-        foreach ($filesUpload as $k => $files) {
-            array_push($nameControls, $k);
-            foreach ($files as $key => $file) {
+        foreach ($filesUpload as $key => $files) {
+            array_push($nameControls, $key);
+            foreach ($files as $file) {
                 $fileName = $file->getClientOriginalName();
                 $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
                 $fileNameNormal = pathinfo($fileName, PATHINFO_FILENAME);
@@ -54,7 +54,7 @@ class UploadService
                     'url_folder' => $path,
                     'filename' => basename($path_image),
                     'extension' => $imageFileType,
-                    'category' => $cateIdName[$k],
+                    'category' => $cateIdName[$key],
                     'owner_id' =>  (int)Auth::user()->id,
                 ]);
             }
