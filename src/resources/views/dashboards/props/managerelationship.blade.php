@@ -27,9 +27,9 @@
                                     <th class="px-4 py-3">Name</th>
                                     <th class="px-4 py-3">Relationship</th>
                                     <th class="px-4 py-3">Label</th>
-                                    <th class="px-4 py-3">Control</th>
-                                    <th class="px-4 py-3">Control Param</th>
-                                    <th class="px-4 py-3">Column Name</th>
+                                    <th class="px-4 py-3">Renderer</th>
+                                    <th class="px-4 py-3">Renderer Param</th>
+                                    <th class="px-4 py-3">Control Name</th>
                                     <th class="px-4 py-3">Col span</th>
                                     <th class="px-4 py-3">Hidden</th>
                                     <th class="px-4 py-3">New Line</th>
@@ -39,10 +39,10 @@
                             <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
                                 @php
                                     try {
-                                        $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/relationships/controls.json'), true)['controls'];
+                                        $renderers = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/relationships/renderers.json'), true)['renderers'];
                                     } catch (\Throwable $th) {
                                         $errorsLineProp = "Setting Relationship Control json fail!
-                                        Please fix file controls.json before Run.";
+                                        Please fix file renderers.json before Run.";
                                     }
                                 @endphp
                                 @isset($errorsLineProp)
@@ -89,21 +89,21 @@
                                                         value="{{ ucwords(str_replace('_', ' ', $columnLabels[$key])) }}">
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <select name="control[]"
+                                                    <select name="renderer[]"
                                                         class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
                                                         @php
-                                                            $controlIndex;
+                                                            $rendererIndex;
                                                         @endphp
-                                                        @foreach ($controls as $control)
-                                                            @if ($columnControls[$key] === $control)
-                                                                <option value="{{ $control }}" selected>
-                                                                    {{ ucfirst($control) }}
+                                                        @foreach ($renderers as $renderer)
+                                                            @if ($columnRenderers[$key] === $renderer)
+                                                                <option value="{{ $renderer }}" selected>
+                                                                    {{ ucfirst($renderer) }}
                                                                 </option>
                                                                 @php
-                                                                    $controlIndex = $control;
+                                                                    $rendererIndex = $renderer;
                                                                 @endphp
                                                             @else
-                                                                <option value="{{ $control }}">{{ ucfirst($control) }}
+                                                                <option value="{{ $renderer }}">{{ ucfirst($renderer) }}
                                                                 </option>
                                                             @endif
                                                         @endforeach
@@ -112,12 +112,12 @@
                                                 <td class="px-4 py-3 text-sm">
                                                     <input type="text"
                                                         class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                        name="control_param[]" value="{{ $columnControlParams[$key] ?? '' }}">
+                                                        name="renderer_param[]" value="{{ $columnRendererParams[$key] ?? '' }}">
                                                 </td>
                                                 <td>
                                                     <input type="text"
                                                         class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                        name="column_name[]" value="{{ $columnNames[$key] ?? '' }}">
+                                                        name="control_name[]" value="{{ $columnControlNames[$key] ?? '' }}">
 
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
@@ -207,10 +207,10 @@
                                                         value="{{ ucwords(str_replace('_', ' ', $columnRelationship)) }}">
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <select name="control[]"
+                                                    <select name="renderer[]"
                                                         class="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-left placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm">
-                                                        @foreach ($controls as $control)
-                                                            <option value="{{ $control }}">{{ ucfirst($control) }}
+                                                        @foreach ($renderers as $renderer)
+                                                            <option value="{{ $renderer }}">{{ ucfirst($renderer) }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -218,12 +218,12 @@
                                                 <td class="px-4 py-3 text-sm">
                                                     <input type="text"
                                                         class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                        name="control_param[]" value="">
+                                                        name="renderer_param[]" value="">
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <input type="text" name="column_name[]"
+                                                    <input type="text" name="control_name[]"
                                                         class="mt-1 block w-full max-w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-center placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                                                        value="{{ isset($columnEloquentParams[$columnRelationship][2]) ? $columnEloquentParams[$columnRelationship][2] : '' }}">
+                                                        value="">
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
                                                     <input type="text" name="col_span[]"

@@ -49,9 +49,9 @@ abstract class ManageRelationshipController extends Controller
             $columnParam5s = [];
             $columnParam6s = [];
             $columnLabels = [];
-            $columnControls = [];
-            $columnControlParams = [];
-            $columnNames = [];
+            $columnRenderers = [];
+            $columnRendererParams = [];
+            $columnControlNames = [];
             $columnColSpans = [];
             $columnHidden = [];
             $columnNewLines = [];
@@ -69,9 +69,9 @@ abstract class ManageRelationshipController extends Controller
                 $columnParam6s[$key] = $data['param_6'] ?? "";
                 array_push($arrayCheck, $data['eloquent'], $data['param_1'], $data['param_2'], $data['param_3'], $data['param_4'], $data['param_5'], $data['param_6']);
                 $columnLabels[$key] = $data['label'] ?? "";
-                $columnControls[$key] = $data['control'] ?? "";
-                $columnControlParams[$key] = $data['control_param'] ?? "";
-                $columnNames[$key] = $data['column_name'] ?? "";
+                $columnRenderers[$key] = $data['renderer'] ?? "";
+                $columnRendererParams[$key] = $data['renderer_param'] ?? "";
+                $columnControlNames[$key] = $data['control_name'] ?? "";
                 $columnColSpans[$key] = $data['col_span'] ?? "";
                 $columnHidden[$key] = $data['hidden'] ?? "";
                 $columnNewLines[$key] = $data['new_line'] ?? "";
@@ -89,7 +89,7 @@ abstract class ManageRelationshipController extends Controller
                 }
             }
             if (empty($diff1) && empty($diff2) && empty($diff3)) {
-                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnControls', 'columnControlParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
+                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnControlNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnRenderers', 'columnRendererParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
             } else {
                 foreach ($diff2 as $value) {
                     $names['_' . $value] = '_' . $value;
@@ -102,9 +102,9 @@ abstract class ManageRelationshipController extends Controller
                     $columnParam4s['_' . $value] = $columnEloquentParams[$value][4] ?? null;
                     $columnParam5s['_' . $value] = $columnEloquentParams[$value][5] ?? null;
                     $columnParam6s['_' . $value] = $columnEloquentParams[$value][6] ?? null;
-                    $columnControls['_' . $value] = "input";
-                    $columnControlParams['_' . $value] = "";
-                    $columnNames['_' . $value] = $columnEloquentParams[$value][2] ?? null;
+                    $columnRenderers['_' . $value] = "";
+                    $columnRendererParams['_' . $value] = "";
+                    $columnControlNames['_' . $value] = "";
                     $columnColSpans['_' . $value] = "12";
                     $columnHidden['_' . $value] = "false";
                     $columnNewLines['_' . $value] = "false";
@@ -121,10 +121,10 @@ abstract class ManageRelationshipController extends Controller
                     $columnParam4s['_' . $value] = $columnEloquentParams[$value][4] ?? null;
                     $columnParam5s['_' . $value] = $columnEloquentParams[$value][5] ?? null;
                     $columnParam6s['_' . $value] = $columnEloquentParams[$value][6] ?? null;
-                    $columnNames['_' . $value] = $columnEloquentParams[$value][2] ?? null;
+                    $columnControlNames['_' . $value] = "";
                     $colorLines['_' . $value] = "new";
                 }
-                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnControls', 'columnControlParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
+                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnControlNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnRenderers', 'columnRendererParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
             }
         }
     }
@@ -143,9 +143,9 @@ abstract class ManageRelationshipController extends Controller
             $array['param_5'] = $data['param_5'][$key];
             $array['param_6'] = $data['param_6'][$key];
             $array['label'] = $data['label'][$key];
-            $array['control'] = $data['control'][$key];
-            $array['control_param'] = $data['control_param'][$key];
-            $array['column_name'] = $data['column_name'][$key];
+            $array['renderer'] = $data['renderer'][$key];
+            $array['renderer_param'] = $data['renderer_param'][$key];
+            $array['control_name'] = $data['control_name'][$key];
             $array['col_span'] = $data['col_span'][$key];
             $array['hidden'] = $data['hidden'][$key];
             $array['new_line'] = $data['new_line'][$key];
