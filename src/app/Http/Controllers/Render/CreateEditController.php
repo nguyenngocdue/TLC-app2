@@ -9,6 +9,7 @@ use App\Models\Media;
 use App\Models\User;
 use App\Models\Zunit_workplaces_rel_1;
 use Brian2694\Toastr\Facades\Toastr;
+use GraphQL\Executor\Values;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -64,6 +65,20 @@ abstract class CreateEditController extends Controller
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 		$dataInput = $request->input();
+
+		$cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
+		foreach ($cateAttachment as $key => $value) {
+			if (isset($dataInput[$value->name . "_deleted"])) {
+				$idsDelete =  explode(',', $dataInput[$value->name . "_deleted"]);
+				foreach ($idsDelete as $value) {
+					$media = Media::find($value);
+					is_null($media) ? "" : $media->delete();
+				}
+			}
+		}
+
+
+
 
 		unset($dataInput['_token']);
 		unset($dataInput['_method']);
