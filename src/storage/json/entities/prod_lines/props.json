@@ -9,23 +9,23 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_prod_run_id": {
         "column_name": "prod_run_id",
         "column_type": "bigint",
         "label": "Prod Run Id",
-        "control": "dropdown",
+        "control": "text",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_date": {
         "column_name": "date",
@@ -37,9 +37,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_start": {
         "column_name": "start",
@@ -51,9 +51,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_end": {
         "column_name": "end",
@@ -65,9 +65,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_status": {
         "column_name": "status",
@@ -79,9 +79,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_created_at": {
         "column_name": "created_at",
@@ -93,9 +93,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_updated_at": {
         "column_name": "updated_at",
@@ -107,8 +107,8 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     }
 }

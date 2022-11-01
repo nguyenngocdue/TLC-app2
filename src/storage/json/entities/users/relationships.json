@@ -9,7 +9,7 @@
         "param_5": null,
         "param_6": null,
         "label": "Media",
-        "renderer": "avatar_name",
+        "renderer": "attachment",
         "renderer_param": null,
         "control_name": null,
         "col_span": "12",
