@@ -10,7 +10,7 @@
         "param_6": null,
         "label": "User",
         "renderer": "column",
-        "renderer_param": "name_rendered",
+        "renderer_param": "name",
         "column_name": "owner_id",
         "col_span": "12",
         "hidden": null,

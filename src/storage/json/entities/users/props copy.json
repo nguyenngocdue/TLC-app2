@@ -21,8 +21,8 @@
 		"type_line": "default",
 		"validation": "required"
 	},
-	"_name_rendered": {
-		"column_name": "name_rendered",
+	"_name": {
+		"column_name": "name",
 		"column_type": "string",
 		"label": "Name Rendered",
 		"control": "text",

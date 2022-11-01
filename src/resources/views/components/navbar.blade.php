@@ -100,7 +100,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <p class="font-medium">{{ Auth::user()->name_rendered }}</p>
+                                        <p class="font-medium">{{ Auth::user()->name }}</p>
                                         <p class="text-[10px] text-gray-600 dark:text-gray-400">
                                             {{ Auth::user()->email }}
                                         </p>

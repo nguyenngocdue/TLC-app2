@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
                 "first_name" => '',
                 "last_name" => '',
                 "full_name" => 'admin',
-                "name_rendered" => 'admin',
+                "name" => 'admin',
                 "email" => 'admin',
                 "email_verified_at" => now(),
                 "settings" => [],

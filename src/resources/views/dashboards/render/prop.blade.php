@@ -147,7 +147,7 @@
                                 @case('avatar_name')
                                 @if ($user->{$item['relationship']} != null && is_array($user->{$item['relationship']}))
                                 <div title="{{ $user[$value['column_name']] }}">
-                                    <x-render.user src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg" name_rendered="{{ $user->{$item['relationship']}->name_rendered }}" email="{{ $user->{$item['relationship']}->email }}" />
+                                    <x-render.user src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg" name="{{ $user->{$item['relationship']}->name }}" email="{{ $user->{$item['relationship']}->email }}" />
                                 </div>
                                 @else
                                 @php
@@ -220,7 +220,7 @@
                             @case('avatar_name')
                             <td class="px-4 py-3">
                                 @if ($user->{$item['relationship']} != null && is_array($user->{$item['relationship']}))
-                                <x-render.user src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg" name_rendered="{{ $user->{$item['relationship']}->name_rendered }}" email="{{ $user->{$item['relationship']}->email }}" />
+                                <x-render.user src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg" name="{{ $user->{$item['relationship']}->name }}" email="{{ $user->{$item['relationship']}->email }}" />
                                 @else
                                 @php
                                 $users = $user->{$item['relationship']};

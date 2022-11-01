@@ -24,7 +24,7 @@ class User extends Authenticatable implements LdapAuthenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        "name_rendered", "full_name", "name_suffix", "employeeid", "first_name",
+        "name", "full_name", "name_suffix", "employeeid", "first_name",
         "last_name", "address", "phone", "featured_image", "time_keeping_type", "user_type", "workplace",
         "category", "date_of_birth", "first_date", "last_date", "title", "position_prefix", "position_1",
         "position_2", "position_3", "position_rendered", "role", "discipline", "department", "show_on_beta",
@@ -156,7 +156,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         return [
             'id' => $this->id,
             'full_name' => $this->full_name,
-            'name_rendered' => $this->name_rendered,
+            'name' => $this->name,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,

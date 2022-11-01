@@ -19,11 +19,9 @@
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet"
-        href="{{ asset('AdminLTE/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
     <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet"
-        href="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/select2/css/select2.min.css') }}">
 
@@ -56,8 +54,7 @@ to get the desired effect
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="/" class="nav-link">Home</a>
@@ -70,8 +67,7 @@ to get the desired effect
             <!-- SEARCH FORM -->
             <form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                        aria-label="Search">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
                             <i class="fas fa-search"></i>
@@ -80,64 +76,56 @@ to get the desired effect
                 </div>
             </form>
             <!-- Right navbar links -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="{{ __('Toggle navigation') }}">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span
-                                class="flag-icon flag-icon-{{ Config::get('languages')[App::getLocale()]['flag-icon'] }}"></span>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="flag-icon flag-icon-{{ Config::get('languages')[App::getLocale()]['flag-icon'] }}"></span>
                             {{ Config::get('languages')[App::getLocale()]['display'] }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             @foreach (Config::get('languages') as $lang => $language)
-                                @if ($lang != App::getLocale())
-                                    <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"><span
-                                            class="flag-icon flag-icon-{{ $language['flag-icon'] }}"></span>
-                                        {{ $language['display'] }}</a>
-                                @endif
+                            @if ($lang != App::getLocale())
+                            <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"><span class="flag-icon flag-icon-{{ $language['flag-icon'] }}"></span>
+                                {{ $language['display'] }}</a>
+                            @endif
                             @endforeach
                         </div>
                     </li>
                     <!-- Authentication Links -->
                     @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
+                    @if (Route::has('login'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                    @endif
+                    @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                    @endif
                     @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name_rendered }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                        document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt"></i>
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                                <i class="fas fa-sign-out-alt"></i>
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
                     @endguest
                     <li class="nav-item">
-                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"
-                            role="button"><i class="fas fa-th-large"></i></a>
+                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i class="fas fa-th-large"></i></a>
                     </li>
                 </ul>
             </div>
@@ -155,8 +143,7 @@ to get the desired effect
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel d-flex mt-3 mb-3 pb-3">
                     <div class="image">
-                        <img src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg"
-                            class="img-circle elevation-2" alt="User Image">
+                        <img src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="https://www.linkedin.com/in/ngo-dinh-canh-588839220/" class="d-block">Ngo Dinh
@@ -166,40 +153,39 @@ to get the desired effect
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul id="listMenus" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
-                        role="menu" data-accordion="false">
+                    <ul id="listMenus" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         @php
-                            $sideBar = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/sidebarProps.json'), true);
+                        $sideBar = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/sidebarProps.json'), true);
                         @endphp
                         @foreach ($sideBar as $group)
-                            <li class="nav-header has-treeview">{{ $group['title'] }}</li>
-                            @foreach ($group['items'] as $key => $item)
-                                <li class="nav-item has-treeview menu-close">
-                                    <a href="#" class="nav-link">
-                                        <i class="{{ $item['icon'] }}"></i>
-                                        <p>
-                                            {{ $item['title'] }}
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
+                        <li class="nav-header has-treeview">{{ $group['title'] }}</li>
+                        @foreach ($group['items'] as $key => $item)
+                        <li class="nav-item has-treeview menu-close">
+                            <a href="#" class="nav-link">
+                                <i class="{{ $item['icon'] }}"></i>
+                                <p>
+                                    {{ $item['title'] }}
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                @foreach ($item['items'] as $value)
+                                <li class="nav-item">
+                                    <a href="{{ url($value['href']) }}" class="nav-link">
+                                        <i class="{{ $value['icon'] }}"></i>
+                                        <p>{{ $value['title'] }}</p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        @foreach ($item['items'] as $value)
-                                            <li class="nav-item">
-                                                <a href="{{ url($value['href']) }}" class="nav-link">
-                                                    <i class="{{ $value['icon'] }}"></i>
-                                                    <p>{{ $value['title'] }}</p>
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
                                 </li>
-                            @endforeach
-                            @if ($group['divider'] === 'true')
-                                <hr class="hr-custom" />
-                            @else
-                            @endif
+                                @endforeach
+                            </ul>
+                        </li>
+                        @endforeach
+                        @if ($group['divider'] === 'true')
+                        <hr class="hr-custom" />
+                        @else
+                        @endif
                         @endforeach
 
 

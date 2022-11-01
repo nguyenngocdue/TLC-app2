@@ -9,7 +9,7 @@ type Query {
 type User {
     id: ID!
     email: String!
-    name_rendered: String!
+    name: String!
     full_name: String!
     name_suffix: String
     employeeid: Int
@@ -50,7 +50,7 @@ type User {
 }
 input CreateUserInput {
     email: String! @rules(apply: ["email", "unique:users,email"])
-    name_rendered: String!
+    name: String!
     full_name: String!
     name_suffix: String
     employeeid: Int
@@ -91,7 +91,7 @@ input CreateUserInput {
 input UpdateUserInput {
     id: ID!
     email: String @rules(apply: ["email", "unique:users,email"])
-    name_rendered: String
+    name: String
     full_name: String
     name_suffix: String
     employeeid: Int
