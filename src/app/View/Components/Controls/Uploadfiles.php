@@ -53,7 +53,6 @@ class Uploadfiles extends Component
         }
 
 
-
         $newItemModel = $this->tablePath::find($id);
         $mediaOnModel = $newItemModel->media;
 
@@ -62,8 +61,12 @@ class Uploadfiles extends Component
             array_push($infMedia, $mediaOnModel->getAttributes());
         }
 
+        $attachHasMedia = [];
+        foreach ($infMedia as $media) {
+            $cat = $media['category'];
+            $attachHasMedia[$cateIdName[$cat]][] = $media;
+        }
 
-
-        return view('components.controls.uploadfiles')->with(compact('action', 'infMedia', 'cateIdName', 'colName', 'path'));
+        return view('components.controls.uploadfiles')->with(compact('action', 'attachHasMedia', 'cateIdName', 'colName', 'path'));
     }
 }
