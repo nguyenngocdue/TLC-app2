@@ -10,7 +10,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/users/users_render"
+                        "href": "dashboard/users/users_viewall"
                     },
                     {
                         "title": "Add New",
@@ -27,7 +27,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/media/media_render"
+                        "href": "dashboard/media/media_viewall"
                     },
                     {
                         "title": "Add New",
@@ -49,7 +49,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/posts/posts_render"
+                        "href": "dashboard/posts/posts_viewall"
                     },
                     {
                         "title": "Add New",
@@ -66,7 +66,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/workplaces/workplaces_render"
+                        "href": "dashboard/workplaces/workplaces_viewall"
                     },
                     {
                         "title": "Add New",
@@ -83,7 +83,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/zunit_test_1s/zunit_test_1s_render"
+                        "href": "dashboard/zunit_test_1s/zunit_test_1s_viewall"
                     },
                     {
                         "title": "Add New",
@@ -100,7 +100,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/zunit_test_3s/zunit_test_3s_render"
+                        "href": "dashboard/zunit_test_3s/zunit_test_3s_viewall"
                     },
                     {
                         "title": "Add New",
@@ -117,7 +117,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/departments/departments_render"
+                        "href": "dashboard/departments/departments_viewall"
                     },
                     {
                         "title": "Add New",
@@ -134,7 +134,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/user_categories/user_categories_render"
+                        "href": "dashboard/user_categories/user_categories_viewall"
                     },
                     {
                         "title": "Add New",
@@ -151,7 +151,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/user_disciplines/user_disciplines_render"
+                        "href": "dashboard/user_disciplines/user_disciplines_viewall"
                     },
                     {
                         "title": "Add New",
@@ -168,7 +168,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/user_position1s/user_position1s_render"
+                        "href": "dashboard/user_position1s/user_position1s_viewall"
                     },
                     {
                         "title": "Add New",
@@ -185,7 +185,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/user_position2s/user_position2s_render"
+                        "href": "dashboard/user_position2s/user_position2s_viewall"
                     },
                     {
                         "title": "Add New",
@@ -202,7 +202,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/user_position3s/user_position3s_render"
+                        "href": "dashboard/user_position3s/user_position3s_viewall"
                     },
                     {
                         "title": "Add New",
@@ -219,7 +219,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/user_position_pres/user_position_pres_render"
+                        "href": "dashboard/user_position_pres/user_position_pres_viewall"
                     },
                     {
                         "title": "Add New",
@@ -236,7 +236,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/user_time_keep_types/user_time_keep_types_render"
+                        "href": "dashboard/user_time_keep_types/user_time_keep_types_viewall"
                     },
                     {
                         "title": "Add New",
@@ -253,7 +253,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/user_types/user_types_render"
+                        "href": "dashboard/user_types/user_types_viewall"
                     },
                     {
                         "title": "Add New",
@@ -270,7 +270,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/work_modes/work_modes_render"
+                        "href": "dashboard/work_modes/work_modes_viewall"
                     },
                     {
                         "title": "Add New",
@@ -287,7 +287,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/prod_disciplines/prod_disciplines_render"
+                        "href": "dashboard/prod_disciplines/prod_disciplines_viewall"
                     },
                     {
                         "title": "Add New",
@@ -304,7 +304,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/prod_lines/prod_lines_render"
+                        "href": "dashboard/prod_lines/prod_lines_viewall"
                     },
                     {
                         "title": "Add New",
@@ -321,7 +321,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/prod_orders/prod_orders_render"
+                        "href": "dashboard/prod_orders/prod_orders_viewall"
                     },
                     {
                         "title": "Add New",
@@ -338,7 +338,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/prod_routings/prod_routings_render"
+                        "href": "dashboard/prod_routings/prod_routings_viewall"
                     },
                     {
                         "title": "Add New",
@@ -355,7 +355,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/prod_routing_details/prod_routing_details_render"
+                        "href": "dashboard/prod_routing_details/prod_routing_details_viewall"
                     },
                     {
                         "title": "Add New",
@@ -372,7 +372,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/prod_routing_links/prod_routing_links_render"
+                        "href": "dashboard/prod_routing_links/prod_routing_links_viewall"
                     },
                     {
                         "title": "Add New",
@@ -389,7 +389,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/prod_runs/prod_runs_render"
+                        "href": "dashboard/prod_runs/prod_runs_viewall"
                     },
                     {
                         "title": "Add New",
@@ -406,7 +406,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/prod_user_runs/prod_user_runs_render"
+                        "href": "dashboard/prod_user_runs/prod_user_runs_viewall"
                     },
                     {
                         "title": "Add New",
@@ -423,7 +423,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/sub_projects/sub_projects_render"
+                        "href": "dashboard/sub_projects/sub_projects_viewall"
                     },
                     {
                         "title": "Add New",
@@ -440,7 +440,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/sub_project_statuses/sub_project_statuses_render"
+                        "href": "dashboard/sub_project_statuses/sub_project_statuses_viewall"
                     },
                     {
                         "title": "Add New",
@@ -457,7 +457,7 @@
                     {
                         "title": "View All",
                         "icon": "fas fa-users",
-                        "href": "dashboard/zunit_test_5s/zunit_test_5s_render"
+                        "href": "dashboard/zunit_test_5s/zunit_test_5s_viewall"
                     },
                     {
                         "title": "Add New",

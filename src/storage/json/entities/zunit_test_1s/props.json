@@ -16,7 +16,7 @@
     "_text1": {
         "column_name": "text1",
         "column_type": "text",
-        "label": "Text1",
+        "label": "Title",
         "control": "text",
         "col_span": "12",
         "hidden_view_all": null,
@@ -30,7 +30,7 @@
     "_text2": {
         "column_name": "text2",
         "column_type": "text",
-        "label": "Text2",
+        "label": "Description",
         "control": "textarea",
         "col_span": "12",
         "hidden_view_all": null,
@@ -44,7 +44,7 @@
     "_dropdown1": {
         "column_name": "dropdown1",
         "column_type": "bigint",
-        "label": "Dropdown1",
+        "label": "Dropdown",
         "control": "dropdown",
         "col_span": "12",
         "hidden_view_all": null,
@@ -58,7 +58,7 @@
     "_radio1": {
         "column_name": "radio1",
         "column_type": "bigint",
-        "label": "Radio1",
+        "label": "Radio",
         "control": "radio",
         "col_span": "12",
         "hidden_view_all": null,
@@ -72,14 +72,14 @@
     "_checkbox1": {
         "column_name": "checkbox1",
         "column_type": "text",
-        "label": "Checkbox1",
+        "label": "Checkbox",
         "control": "checkbox",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": null,
+        "validation": "required",
         "frozen_left": null,
         "frozen_right": null
     },
@@ -100,7 +100,7 @@
     "_boolean1": {
         "column_name": "boolean1",
         "column_type": "bigint",
-        "label": "Boolean1",
+        "label": "Boolean",
         "control": "switch",
         "col_span": "12",
         "hidden_view_all": null,

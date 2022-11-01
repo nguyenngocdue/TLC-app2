@@ -23,7 +23,7 @@
         @endisset
         @empty($messages)
         <div class="mt-2 grid grid-cols-2 gap-5">
-            <form action="{{ route($type . '_render.index') }}" method="GET">
+            <form action="{{ route($type . '_viewall.index') }}" method="GET">
                 <div class="mt-2 grid grid-cols-2 gap-5">
                     <div>
                         <input type="text" name="search" class="block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm" value="{{ $search }}">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </form>
-            <form action="{{ route($type . '_render.update', Auth::id()) }}" method="post">
+            <form action="{{ route($type . '_viewall.update', Auth::id()) }}" method="post">
                 @method('PUT')
                 @csrf
                 <div class="mt-2 flex">
@@ -80,7 +80,7 @@
                         @foreach ($users as $key => $user)
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3 text-center text-sm">
-                                <button class="focus:shadow-outline-gray btn-delete-user rounded-lg px-2 py-2 text-sm font-medium leading-5 text-red-600 focus:outline-none dark:text-red-400" data-url="{{ route($type . '_render.destroy', $user->id) }}" ​ type="button"><i class="fas fa-trash"></i></button>
+                                <button class="focus:shadow-outline-gray btn-delete-user rounded-lg px-2 py-2 text-sm font-medium leading-5 text-red-600 focus:outline-none dark:text-red-400" data-url="{{ route($type . '_viewall.destroy', $user->id) }}" ​ type="button"><i class="fas fa-trash"></i></button>
                             </td>
                             @foreach ($data as $key1 => $value)
                             @if ($value['column_name'] === 'id')

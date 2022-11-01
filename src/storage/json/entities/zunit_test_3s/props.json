@@ -9,107 +9,107 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_datetime1": {
         "column_name": "datetime1",
         "column_type": "datetime",
-        "label": "Datetime1",
+        "label": "Date time",
         "control": "picker_datetime",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_datetime2": {
         "column_name": "datetime2",
         "column_type": "datetime",
-        "label": "Datetime2",
+        "label": "Time",
         "control": "picker_time",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_datetime3": {
         "column_name": "datetime3",
         "column_type": "datetime",
-        "label": "Datetime3",
+        "label": "Date",
         "control": "picker_date",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_datetime4": {
         "column_name": "datetime4",
         "column_type": "datetime",
-        "label": "Datetime4",
+        "label": "Month",
         "control": "picker_month",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_datetime5": {
         "column_name": "datetime5",
         "column_type": "datetime",
-        "label": "Datetime5",
+        "label": "Week",
         "control": "picker_week",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_datetime6": {
         "column_name": "datetime6",
         "column_type": "datetime",
-        "label": "Datetime6",
+        "label": "Quarter",
         "control": "picker_quarter",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_datetime7": {
         "column_name": "datetime7",
         "column_type": "datetime",
-        "label": "Datetime7",
+        "label": "Year",
         "control": "picker_year",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_created_at": {
         "column_name": "created_at",
@@ -121,9 +121,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_updated_at": {
         "column_name": "updated_at",
@@ -135,22 +135,22 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_time_keeping_type": {
         "column_name": "time_keeping_type",
         "column_type": "string",
-        "label": "Warning (Column name)",
+        "label": "Warning (Column Name)",
         "control": "dropdown",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "frozen_left": "",
-        "frozen_right": "",
-        "validation": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     }
 }

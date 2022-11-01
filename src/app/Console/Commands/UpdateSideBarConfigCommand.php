@@ -76,7 +76,7 @@ class UpdateSideBarConfigCommand extends Command
 
                                     "title" => "View All",
                                     "icon" => "fas fa-users",
-                                    "href" => "dashboard/$value/{$value}_render"
+                                    "href" => "dashboard/$value/{$value}_viewall"
                                 ],
                                 [
 
