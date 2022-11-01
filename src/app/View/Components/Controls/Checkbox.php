@@ -13,10 +13,11 @@ class Checkbox extends Component
 
     public function render()
     {
+        $span = 6;
         $colName = $this->colName;
         $dataSource = DB::table('workplaces')->get();
         $idItems = $this->idItems;
         $action = $this->action;
-        return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idItems', 'action'));
+        return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idItems', 'action', 'span'));
     }
 }
