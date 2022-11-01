@@ -2,39 +2,23 @@
 
 namespace App\View\Components\Controls;
 
-use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Translationtime extends Component
 {
 
-    private $control;
-    private $id;
-    private $columnName;
-    private $valColumnNames;
-    private $timeControls;
-    private $tablePath;
-    public function __construct($timeControls, $valColumnNames, $columnName, $control, $id, $tablePath)
-    {
 
-        $this->control = $control;
-        $this->id = $id;
-        $this->columnName = $columnName;
-        $this->valColumnNames = $valColumnNames;
-        $this->timeControls = $timeControls;
-        $this->tablePath = $tablePath;
+    public function __construct(private $timeControls, private $valColumnNames, private $columnName, private $control, private $id, private $tablePath)
+    {
     }
 
     public function render()
     {
-
         $selected = $this->id;
         $columnName = $this->columnName;
         $control = $this->control;
         $timeControls = $this->timeControls;
-
-
 
         // get table's name in database
         $insTable = new $this->tablePath;

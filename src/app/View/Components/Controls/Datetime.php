@@ -7,25 +7,10 @@ use Illuminate\View\Component;
 
 class Datetime extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    private $id;
-    private $label;
-
-    public function __construct($id, $label)
+    public function __construct(private $id, private $label)
     {
-        $this->id = $id;
-        $this->label = $label;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
     public function render()
     {
         $id = $this->id;

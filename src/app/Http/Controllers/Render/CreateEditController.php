@@ -6,32 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
 use App\Models\Media;
-use App\Models\User;
-use App\Models\Zunit_workplaces_rel_1;
 use Brian2694\Toastr\Facades\Toastr;
-use GraphQL\Executor\Values;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
 
 abstract class CreateEditController extends Controller
 {
-
 	protected $type;
 	protected $data;
 	protected $action;
-
-	protected $upload;
 	protected $branchName = 'entities';
 	protected $disk = 'json';
 	protected $r_fileName = 'props.json';
-	protected $readingFileService;
-	public function __construct(UploadService $upload, ReadingFileService $readingFileService)
+	public function __construct(protected UploadService $upload, protected ReadingFileService $readingFileService)
 	{
-		$this->upload = $upload;
 		$this->readingFileService = $readingFileService;
 	}
 
@@ -63,7 +52,6 @@ abstract class CreateEditController extends Controller
 
 	public function update(Request $request, $id)
 	{
-
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 		$dataInput = $request->input();
@@ -89,7 +77,6 @@ abstract class CreateEditController extends Controller
 		}
 		$request->validate($itemsValidation);
 
-
 		$data = $this->data::find($id);
 		// chanage value from toggle
 		foreach ($props as $key => $value) {
@@ -103,7 +90,6 @@ abstract class CreateEditController extends Controller
 		$data->fill($dataInput);
 		$data->save();
 		if ($data->save()) Toastr::success("$this->type updated successfully", "Update $this->type");
-
 
 		// multisection - checkbox
 		$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $data->getTable(), "relationships.json");
@@ -151,12 +137,9 @@ abstract class CreateEditController extends Controller
 	}
 	public function store(Request $request)
 	{
-		// dd($request->files);
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 		$dataInput = $request->input();
-
-		// dd($dataInput);
 
 		unset($dataInput['_token']);
 		unset($dataInput['_method']);
@@ -167,7 +150,6 @@ abstract class CreateEditController extends Controller
 			$itemsValidation[$value['column_name']] = is_null($value['validation']) ? "" : $value['validation'];
 		}
 		$request->validate($itemsValidation);
-
 
 		// filter controls which are switch control - set its value is null
 		$witchControls = [];
@@ -190,11 +172,9 @@ abstract class CreateEditController extends Controller
 			};
 		}
 
-
 		// Save data to database
 		$data = $this->data;
 		$newData = $data::create($dataInput);
-
 
 		if (isset($newData)) {
 			$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $newData->getTable(), "relationships.json");

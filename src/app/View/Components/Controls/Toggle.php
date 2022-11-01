@@ -6,13 +6,12 @@ use Illuminate\View\Component;
 
 class Toggle extends Component
 {
-    private $colName;
-    private $valColName;
-    public function __construct($colName, $valColName)
+    public function __construct(private $colName, private $valColName)
     {
         $this->colName = $colName;
         $this->valColName = $valColName;
     }
+
     public function render()
     {
         $colName = $this->colName;
