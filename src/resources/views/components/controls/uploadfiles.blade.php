@@ -1,8 +1,10 @@
 <div class="flex flex-col">
     @if ($action === "edit")
-    <div class="grid grid-cols-5 gap-4 mb-1 p-1 {{count($infMedia) > 0 ? "bg-white border rounded-lg border-gray-300 " : "hidden"}}">
-        @foreach($infMedia as $key => $media)
-        @if ($colName === $cateIdName[[$media['category']][0]])
+    <div class="grid grid-cols-5 gap-4 mb-1 p-1 bg-white border rounded-lg ">
+        @if(isset($attachHasMedia[$colName]))
+        @foreach($attachHasMedia as $key => $attach)
+        @if ($key === $colName )
+        @foreach($attach as $media)
         <div class=" relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg border-gray-300 group/item overflow-hidden bg-white ">
             <span>
                 <img class="border  border-gray-300 rounded-md h-full w-full object-cover hover:bg-slate-100" src="{{ $path.$media['url_thumbnail']}}" alt="{{$media['filename']}}" />
@@ -20,15 +22,18 @@
                 </svg>
             </span>
             <div class=" invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible   before:absolute before:-inset-1  before:bg-[#00000080]">
-                <a title="{{$media['filename']}}" href="{{$path.$media['url_media']}}" target='_blank' class="hover:underline text-blue-600 dark:text-blue-500 px-2 absolute  top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-xs text-center w-full">{{$media['filename']}}
-                </a>
+                <a title="{{$media['filename']}}" href="{{$path.$media['url_media']}}" target='_blank' class="hover:underline text-blue-600 dark:text-blue-500 px-2 absolute  top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-xs text-center w-full">{{$media['filename']}}</a>
                 <button type="button" onclick="updateTextbox({{$media['id']}}, '{{$colName}}_deleted')" class="absolute bottom-[10%] text-[25px]">
                     <i class=" text-[#d11a2a] fas fa-trash  cursor-pointer"></i>
                 </button>
             </div>
         </div>
+        @endforeach
         @endif
         @endforeach
+        @else
+        <span class="block w-full text-sm text-blue-500 p-2.5   dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">No file selected</span>
+        @endif
     </div>
     <input id="{{$colName}}_deleted" name="{{$colName}}_deleted" type="hidden" value="" class=' p-2.5  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type='text'>
 
