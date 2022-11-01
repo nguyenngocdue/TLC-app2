@@ -1,32 +1,4 @@
 {
-    "_checkbox1": {
-        "column_name": "checkbox1",
-        "column_type": "text",
-        "label": "Checkbox1",
-        "control": "checkbox",
-        "col_span": "12",
-        "hidden_view_all": null,
-        "hidden_edit": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null
-    },
-    "_checkbox2": {
-        "column_name": "checkbox2",
-        "column_type": "text",
-        "label": "Checkbox2",
-        "control": "checkbox",
-        "col_span": "12",
-        "hidden_view_all": null,
-        "hidden_edit": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null
-    },
     "_id": {
         "column_name": "id",
         "column_type": "bigint",
@@ -94,6 +66,34 @@
         "new_line": null,
         "type_line": "default",
         "validation": "required",
+        "frozen_left": null,
+        "frozen_right": null
+    },
+    "_checkbox1": {
+        "column_name": "checkbox1",
+        "column_type": "text",
+        "label": "Checkbox1",
+        "control": "checkbox",
+        "col_span": "12",
+        "hidden_view_all": null,
+        "hidden_edit": null,
+        "new_line": null,
+        "type_line": "default",
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
+    },
+    "_checkbox2": {
+        "column_name": "checkbox2",
+        "column_type": "text",
+        "label": "Dropdown (Multiple)",
+        "control": "dropdown_multi",
+        "col_span": "12",
+        "hidden_view_all": null,
+        "hidden_edit": null,
+        "new_line": null,
+        "type_line": "default",
+        "validation": null,
         "frozen_left": null,
         "frozen_right": null
     },

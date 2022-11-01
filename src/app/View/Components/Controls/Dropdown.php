@@ -3,6 +3,8 @@
 namespace App\View\Components\Controls;
 
 use App\Http\Services\ReadingFileService;
+use App\Utils\System\Timer;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
@@ -58,7 +60,11 @@ class Dropdown extends Component
 
         $insTable = new $pathSourceTable;
         $tableName = $insTable->getTable();
-        $_dataSource = DB::table($tableName)->select('id', 'name', 'description')->get();
+        try {
+            $_dataSource = DB::table($tableName)->select('id', 'name', 'description')->get();
+        } catch (Exception $e) {
+            $_dataSource = DB::table($tableName)->select('id', 'name')->get();
+        }
         $dataSource = json_decode($_dataSource);
         array_unshift($dataSource, (object)['id' => null, "name" => null, "description" => ""]);
 
