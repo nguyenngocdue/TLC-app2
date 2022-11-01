@@ -56,6 +56,8 @@ abstract class CreateEditController extends Controller
 				}
 			}
 		}
+
+		// dd($idItems);
 		return view('dashboards.render.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'tablePath', 'idItems'));
 	}
 
