@@ -4,11 +4,11 @@
         @foreach($dataSource as $key => $data)
         <div class="items-center bg-white-50 col-span-{{$span}} flex align-center ">
             @if($action === 'create')
-            <input id="{{$key}}" type="radio" value="{{old($colName,$key+1)}}" name="{{$colName}}" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <input id="{{$key}}" type="radio" value="{{old($colName,$key+1)}}" name="{{$colName}}" title="{{isset($data->description) ? "$data->description (#$data->id)" : "" }}" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             @else
-            <input id="{{$key}}" {{$currentEntity[$colName]*1 === $key*1+1 ? "checked":""}} type="radio" value="{{old($colName,$key+1)}}" name="{{$colName}}" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <input id="{{$key}}" {{$currentEntity[$colName]*1 === $key*1+1 ? "checked":""}} type="radio" value="{{old($colName,$key+1)}}" name="{{$colName}}" title="{{isset($data->description) ? "$data->description (#$data->id)" : "" }}" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             @endif
-            <label for="{{$key}}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{$data->name}}</label>
+            <label for="{{$key}}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" title="{{isset($data->description) ? "$data->description (#$data->id)" : "" }}">{{$data->name}}</label>
         </div>
         @endforeach
     </div>

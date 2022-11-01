@@ -53,7 +53,7 @@ class Radio extends Component
         $pathSourceTable = $eloquenParam[$tableName][1]; // filter name of path source Workplace table
         $insTable = new $pathSourceTable;
         $tableName = $insTable->getTable();
-        $dataSource = DB::table($tableName)->select('id', 'name', 'description')->get();
+        $dataSource = DB::table($tableName)->get();
         $selected = $this->id;
         $entityTable = $this->tablePath;
         $currentEntity = is_null($entityTable::find($this->id)) ? "" : $entityTable::find($this->id)->getAttributes();
