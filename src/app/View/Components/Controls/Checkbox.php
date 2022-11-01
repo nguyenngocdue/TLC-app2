@@ -2,29 +2,17 @@
 
 namespace App\View\Components\Controls;
 
-use App\Models\User;
-use App\Models\Workplace;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Checkbox extends Component
 {
-
-    private $id;
-    private $colName;
-    private $idItems;
-    private $action;
-    public function __construct($id, $colName, $idItems, $action)
+    public function __construct(private $id, private  $colName, private  $idItems, private  $action)
     {
-        $this->id = $id;
-        $this->colName = $colName;
-        $this->idItems = $idItems;
-        $this->action = $action;
     }
 
     public function render()
     {
-
         $colName = $this->colName;
         $dataSource = DB::table('workplaces')->get();
         $idItems = $this->idItems;

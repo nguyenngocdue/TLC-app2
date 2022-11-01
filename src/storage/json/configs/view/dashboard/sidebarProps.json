@@ -8,7 +8,7 @@
                 "href_parent": "dashboard/users",
                 "items": [
                     {
-                        "title": "All Users",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/users/users_render"
                     },
@@ -25,7 +25,7 @@
                 "href_parent": "dashboard/media",
                 "items": [
                     {
-                        "title": "All Media",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/media/media_render"
                     },
@@ -47,7 +47,7 @@
                 "href_parent": "dashboard/posts",
                 "items": [
                     {
-                        "title": "All Posts",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/posts/posts_render"
                     },
@@ -64,7 +64,7 @@
                 "href_parent": "dashboard/workplaces",
                 "items": [
                     {
-                        "title": "All Workplaces",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/workplaces/workplaces_render"
                     },
@@ -81,7 +81,7 @@
                 "href_parent": "dashboard/zunit_test_1s",
                 "items": [
                     {
-                        "title": "All zunit_test_1s",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/zunit_test_1s/zunit_test_1s_render"
                     },
@@ -98,7 +98,7 @@
                 "href_parent": "dashboard/zunit_test_3s",
                 "items": [
                     {
-                        "title": "All zunit_test_3s",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/zunit_test_3s/zunit_test_3s_render"
                     },
@@ -115,7 +115,7 @@
                 "href_parent": "dashboard/departments",
                 "items": [
                     {
-                        "title": "All departments",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/departments/departments_render"
                     },
@@ -132,7 +132,7 @@
                 "href_parent": "dashboard/user_categories",
                 "items": [
                     {
-                        "title": "All user_categories",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/user_categories/user_categories_render"
                     },
@@ -149,7 +149,7 @@
                 "href_parent": "dashboard/user_disciplines",
                 "items": [
                     {
-                        "title": "All user_disciplines",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/user_disciplines/user_disciplines_render"
                     },
@@ -166,7 +166,7 @@
                 "href_parent": "dashboard/user_position1s",
                 "items": [
                     {
-                        "title": "All user_position1s",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/user_position1s/user_position1s_render"
                     },
@@ -183,7 +183,7 @@
                 "href_parent": "dashboard/user_position2s",
                 "items": [
                     {
-                        "title": "All user_position2s",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/user_position2s/user_position2s_render"
                     },
@@ -200,7 +200,7 @@
                 "href_parent": "dashboard/user_position3s",
                 "items": [
                     {
-                        "title": "All user_position3s",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/user_position3s/user_position3s_render"
                     },
@@ -217,7 +217,7 @@
                 "href_parent": "dashboard/user_position_pres",
                 "items": [
                     {
-                        "title": "All user_position_pres",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/user_position_pres/user_position_pres_render"
                     },
@@ -234,7 +234,7 @@
                 "href_parent": "dashboard/user_time_keep_types",
                 "items": [
                     {
-                        "title": "All user_time_keep_types",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/user_time_keep_types/user_time_keep_types_render"
                     },
@@ -251,7 +251,7 @@
                 "href_parent": "dashboard/user_types",
                 "items": [
                     {
-                        "title": "All user_types",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/user_types/user_types_render"
                     },
@@ -268,7 +268,7 @@
                 "href_parent": "dashboard/work_modes",
                 "items": [
                     {
-                        "title": "All work_modes",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/work_modes/work_modes_render"
                     },
@@ -285,7 +285,7 @@
                 "href_parent": "dashboard/prod_disciplines",
                 "items": [
                     {
-                        "title": "All prod_disciplines",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/prod_disciplines/prod_disciplines_render"
                     },
@@ -302,7 +302,7 @@
                 "href_parent": "dashboard/prod_lines",
                 "items": [
                     {
-                        "title": "All prod_lines",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/prod_lines/prod_lines_render"
                     },
@@ -319,7 +319,7 @@
                 "href_parent": "dashboard/prod_orders",
                 "items": [
                     {
-                        "title": "All prod_orders",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/prod_orders/prod_orders_render"
                     },
@@ -336,7 +336,7 @@
                 "href_parent": "dashboard/prod_routings",
                 "items": [
                     {
-                        "title": "All prod_routings",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/prod_routings/prod_routings_render"
                     },
@@ -353,7 +353,7 @@
                 "href_parent": "dashboard/prod_routing_details",
                 "items": [
                     {
-                        "title": "All prod_routing_details",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/prod_routing_details/prod_routing_details_render"
                     },
@@ -370,7 +370,7 @@
                 "href_parent": "dashboard/prod_routing_links",
                 "items": [
                     {
-                        "title": "All prod_routing_links",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/prod_routing_links/prod_routing_links_render"
                     },
@@ -387,7 +387,7 @@
                 "href_parent": "dashboard/prod_runs",
                 "items": [
                     {
-                        "title": "All prod_runs",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/prod_runs/prod_runs_render"
                     },
@@ -404,7 +404,7 @@
                 "href_parent": "dashboard/prod_user_runs",
                 "items": [
                     {
-                        "title": "All prod_user_runs",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/prod_user_runs/prod_user_runs_render"
                     },
@@ -421,7 +421,7 @@
                 "href_parent": "dashboard/sub_projects",
                 "items": [
                     {
-                        "title": "All sub_projects",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/sub_projects/sub_projects_render"
                     },
@@ -438,7 +438,7 @@
                 "href_parent": "dashboard/sub_project_statuses",
                 "items": [
                     {
-                        "title": "All sub_project_statuses",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/sub_project_statuses/sub_project_statuses_render"
                     },
@@ -455,7 +455,7 @@
                 "href_parent": "dashboard/zunit_test_5s",
                 "items": [
                     {
-                        "title": "All zunit_test_5s",
+                        "title": "View All",
                         "icon": "fas fa-users",
                         "href": "dashboard/zunit_test_5s/zunit_test_5s_render"
                     },

@@ -7,11 +7,8 @@ use Illuminate\Support\Str;
 
 class Breadcrumb extends Component
 {
-
-    private $type;
-    public function __construct($type)
+    public function __construct(private $type)
     {
-        $this->type = $type;
     }
 
     public function render()
