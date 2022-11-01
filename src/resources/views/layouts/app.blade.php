@@ -29,6 +29,7 @@
             @yield('content')
         </div>
 
+
     </div>
 
     <script type="text/javascript" src="{{ asset('js/tlc.js') }}"></script>

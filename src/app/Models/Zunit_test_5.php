@@ -14,7 +14,7 @@ class Zunit_test_5 extends Model
     protected $primaryKey = "id";
     protected $table = "zunit_test_5s";
     public $eloquentParams = [
-        //     "media" => ['hasMany', Media::class, 'owner_id', 'id'],
+        "media" => ['hasMany', Media::class, 'owner_id', 'id'],
     ];
 
     // public function media()

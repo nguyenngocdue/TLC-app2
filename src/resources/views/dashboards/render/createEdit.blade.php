@@ -19,8 +19,10 @@
         @endswitch
     </div>
 </div>
-<div class="grid grid-rows-1 bg-gray-100">
 
+
+<x-controls.breadcrumb type={{$type}} />
+<div class="grid grid-rows-1 bg-gray-100">
 
     <div class="mx-auto flex flex-col min-h-screen items-center py-5">
         {{-- {{dd($type)}} --}}
