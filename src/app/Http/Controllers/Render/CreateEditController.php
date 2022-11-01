@@ -156,6 +156,8 @@ abstract class CreateEditController extends Controller
 		$type = Str::plural($this->type);
 		$dataInput = $request->input();
 
+		// dd($dataInput);
+
 		unset($dataInput['_token']);
 		unset($dataInput['_method']);
 
