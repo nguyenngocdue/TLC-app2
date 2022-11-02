@@ -90,12 +90,12 @@
                             $result = '#' . substr($numberRender, 0, 3) . '.' . substr($numberRender, 3, 6);
                             @endphp
                             <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
-                                <a href="{{ route($type . '_edit.update', $user[$value['column_name']]) }}" class="text-sm font-normal text-blue-500">{{ $result }}</a>
+                                <a href="{{ route($type . '_edit.edit', $user[$value['column_name']]) }}" class="text-sm font-normal text-blue-500">{{ $result }}</a>
                             </td>
                             @else
                             <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
 
-                                <a href="{{ route($type . '_edit.update', $user[$value['column_name']]) }}">{{ $user[$value['column_name']] }}</a>
+                                <a href="{{ route($type . '_edit.edit', $user[$value['column_name']]) }}">{{ $user[$value['column_name']] }}</a>
                             </td>
                             @endif
                             @else

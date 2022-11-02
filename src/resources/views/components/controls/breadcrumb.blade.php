@@ -6,7 +6,7 @@
     </li>
     <li>
         <span>
-            <a class="text-blue-500 hover:text-gray-400" href="{{ route($type . '_addnew.store') }}"> Add New</a>
+            <a class="text-blue-500 hover:text-gray-400" href="{{ route($type . '_addnew.create') }}"> Add New</a>
         </span>
         <span class="px-2"> / </span>
     </li>
