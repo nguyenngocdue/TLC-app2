@@ -9,4 +9,6 @@ class {{nameClass}}EditController extends CreateEditController
 {
     protected $type = '{{nameModelSingular}}';
     protected $data = {{nameClassSingular}}::class;
+    protected $action = "edit";
+
 }

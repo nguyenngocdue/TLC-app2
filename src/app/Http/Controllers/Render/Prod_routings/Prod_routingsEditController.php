@@ -9,4 +9,5 @@ class Prod_routingsEditController extends CreateEditController
 {
     protected $type = 'prod_routing';
     protected $data = Prod_routing::class;
+    protected $action = "edit";
 }

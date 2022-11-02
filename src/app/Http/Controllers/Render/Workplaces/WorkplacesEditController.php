@@ -8,6 +8,6 @@ use App\Models\Workplace;
 class WorkplacesEditController extends CreateEditController
 {
     protected $type = "workplace";
-    protected $action = "edit";
     protected $data = Workplace::class;
+    protected $action = "edit";
 }

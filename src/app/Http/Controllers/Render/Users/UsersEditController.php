@@ -8,6 +8,6 @@ use App\Models\User;
 class UsersEditController extends CreateEditController
 {
     protected $type = "user";
-    protected $action = "edit";
     protected $data = User::class;
+    protected $action = "edit";
 }

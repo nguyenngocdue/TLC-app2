@@ -9,4 +9,5 @@ class Prod_runsEditController extends CreateEditController
 {
     protected $type = 'prod_run';
     protected $data = Prod_run::class;
+    protected $action = "edit";
 }

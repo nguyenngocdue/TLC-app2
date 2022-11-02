@@ -9,4 +9,5 @@ class User_position_presEditController extends CreateEditController
 {
     protected $type = 'user_position_pre';
     protected $data = User_position_pre::class;
+    protected $action = "edit";
 }

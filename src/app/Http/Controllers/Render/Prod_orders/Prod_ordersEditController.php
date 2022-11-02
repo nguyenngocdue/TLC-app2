@@ -9,4 +9,5 @@ class Prod_ordersEditController extends CreateEditController
 {
     protected $type = 'prod_order';
     protected $data = Prod_order::class;
+    protected $action = "edit";
 }

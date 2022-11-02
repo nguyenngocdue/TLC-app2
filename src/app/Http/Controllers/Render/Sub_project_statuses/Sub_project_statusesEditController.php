@@ -9,4 +9,5 @@ class Sub_project_statusesEditController extends CreateEditController
 {
     protected $type = 'sub_project_status';
     protected $data = Sub_project_status::class;
+    protected $action = "edit";
 }

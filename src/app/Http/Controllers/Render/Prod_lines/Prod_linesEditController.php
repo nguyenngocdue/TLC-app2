@@ -9,4 +9,5 @@ class Prod_linesEditController extends CreateEditController
 {
     protected $type = 'prod_line';
     protected $data = Prod_line::class;
+    protected $action = "edit";
 }

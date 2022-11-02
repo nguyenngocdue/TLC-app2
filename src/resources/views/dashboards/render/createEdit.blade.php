@@ -148,6 +148,9 @@
                     Create
                 </button>
                 @break
+                @default
+                <span>Unknown action "{{$action}}"</span>
+                @break
                 @endswitch
             </div>
         </form>

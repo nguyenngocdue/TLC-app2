@@ -9,4 +9,5 @@ class Prod_disciplinesEditController extends CreateEditController
 {
     protected $type = 'prod_discipline';
     protected $data = Prod_discipline::class;
+    protected $action = "edit";
 }

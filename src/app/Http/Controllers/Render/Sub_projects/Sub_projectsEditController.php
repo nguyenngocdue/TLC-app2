@@ -9,4 +9,5 @@ class Sub_projectsEditController extends CreateEditController
 {
     protected $type = 'sub_project';
     protected $data = Sub_project::class;
+    protected $action = "edit";
 }

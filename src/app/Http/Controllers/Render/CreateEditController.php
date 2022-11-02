@@ -26,6 +26,7 @@ abstract class CreateEditController extends Controller
 
 	public function show($id)
 	{
+
 		$currentElement = $this->data::find($id);
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
@@ -121,6 +122,8 @@ abstract class CreateEditController extends Controller
 	public function index()
 	{
 		$action = $this->action;
+
+
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 
 		if ($props  === false) {

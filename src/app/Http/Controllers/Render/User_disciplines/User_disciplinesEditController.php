@@ -9,4 +9,5 @@ class User_disciplinesEditController extends CreateEditController
 {
     protected $type = 'user_discipline';
     protected $data = User_discipline::class;
+    protected $action = "edit";
 }
