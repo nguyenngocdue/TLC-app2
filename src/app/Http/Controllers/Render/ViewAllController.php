@@ -51,10 +51,7 @@ abstract class ViewAllController extends Controller
                     'href' => Str::singular($type) . "_mngrls.index",
                 ];
             }
-            return view('dashboards.render.prop')->with(compact('type', 'messages'));
-            // $data = [];
-            // $data2 = [];
-            // return view('dashboards.render.prop')->with(compact('data', 'data2', 'users', 'pageLimit', 'type', 'userLogin', 'search', 'model'));
+            return view('dashboards.pages.viewAll')->with(compact('type', 'messages'));
         } else {
             $data = json_decode(file_get_contents($propsPath), true);
             $filterRenders = array_filter($data, function ($value) {
@@ -85,7 +82,7 @@ abstract class ViewAllController extends Controller
             // dd($filterRenders);
             $data = $filterRenders;
             $data2 = array_diff_key($data2, $var);
-            return view('dashboards.render.prop')->with(compact('data', 'data2', 'users', 'pageLimit', 'type', 'userLogin', 'search', 'model'));
+            return view('dashboards.pages.viewAll')->with(compact('data', 'data2', 'users', 'pageLimit', 'type', 'userLogin', 'search', 'model'));
         }
     }
 

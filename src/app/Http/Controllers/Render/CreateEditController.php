@@ -38,7 +38,7 @@ abstract class CreateEditController extends Controller
 		$tablePath = $this->data;
 		$values = "";
 		$idItems = [];
-		return view('dashboards.render.createEdit')->with(compact('props', 'type', 'action', 'tablePath', 'values', 'idItems'));
+		return view('dashboards.pages.createEdit')->with(compact('props', 'type', 'action', 'tablePath', 'values', 'idItems'));
 	}
 
 	public function edit($id)
@@ -63,7 +63,7 @@ abstract class CreateEditController extends Controller
 		}
 
 		// dd($idItems);
-		return view('dashboards.render.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'tablePath', 'idItems'));
+		return view('dashboards.pages.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'tablePath', 'idItems'));
 	}
 
 	public function update(Request $request, $id)

@@ -16,14 +16,14 @@
     "_datetime1": {
         "column_name": "datetime1",
         "column_type": "datetime",
-        "label": "Date time",
+        "label": "Date Time",
         "control": "picker_datetime",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": null,
+        "validation": "date_format:Y-m-d H:i:s",
         "frozen_left": null,
         "frozen_right": null
     },

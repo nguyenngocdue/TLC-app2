@@ -23,7 +23,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": null,
+        "validation": "required",
         "frozen_left": null,
         "frozen_right": null
     },
@@ -58,14 +58,14 @@
     "_attachment_3": {
         "column_name": "attachment_3",
         "column_type": "string",
-        "label": "Image Attachment",
+        "label": "Attachment 3",
         "control": "attachment",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "image",
+        "validation": null,
         "frozen_left": null,
         "frozen_right": null
     },
