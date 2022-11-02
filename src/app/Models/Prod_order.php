@@ -21,9 +21,9 @@ class Prod_order extends Model
     ];
 
     public $eloquentParams = [
+        "productionRuns" => ['hasMany', Prod_run::class, 'prod_order_id'],
         "subProject" => ['belongsTo', Sub_project::class],
         "routing" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
-        "productionRuns" => ['hasMany', Prod_run::class, 'prod_order_id'],
     ];
     public function subProject()
     {
