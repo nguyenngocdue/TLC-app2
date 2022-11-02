@@ -21,7 +21,7 @@ class ProductionRunController extends Controller
             $prodRun = Prod_run::create([
                 'prod_order_id' => $prodOrderId,
                 'prod_routing_link_id' => $prodRoutingLinkId,
-                'status_prod' => 'running',
+                'status' => 'running',
             ]);
             return ResponseObject::responseSuccess([
                 'sub_project_id' => $subProjectId,
@@ -37,7 +37,7 @@ class ProductionRunController extends Controller
     {
         try {
             $prodRun = Prod_run::find($id);
-            $prodRun->status_prod = 'finished';
+            $prodRun->status = 'finished';
             $prodRun->total_hours = $request->total_hours;
             $prodRun->total_man_hours = $request->total_man_hours;
             $prodRun->save();
@@ -50,7 +50,7 @@ class ProductionRunController extends Controller
     {
         try {
             $prodRun = Prod_run::find($id);
-            $prodRun->status_prod = 'stopped';
+            $prodRun->status = 'stopped';
             $prodRun->total_hours = $request->total_hours;
             $prodRun->total_man_hours = $request->total_man_hours;
             $prodRun->save();
