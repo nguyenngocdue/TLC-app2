@@ -21,7 +21,7 @@ class Dropdown extends Component
 
         $keyNameEloquent = "";
         foreach ($eloquentParam as $key => $value) {
-            if (isset($value[$colName])) {
+            if (isset(array_flip($value)[$colName])) {
                 $keyNameEloquent = $key;
                 break;
             }
