@@ -21,7 +21,6 @@ abstract class CreateEditController extends Controller
 	protected $r_fileName = 'props.json';
 	public function __construct(protected UploadService $upload, protected ReadingFileService $readingFileService)
 	{
-		$this->readingFileService = $readingFileService;
 	}
 
 	public function create()
