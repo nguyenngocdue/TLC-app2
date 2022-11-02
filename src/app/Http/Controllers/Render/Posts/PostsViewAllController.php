@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Posts;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Post;
 
-class PostsRenderController extends RenderController
+class PostsViewAllController extends ViewAllController
 {
     protected $type = 'post';
     protected $typeModel = Post::class;

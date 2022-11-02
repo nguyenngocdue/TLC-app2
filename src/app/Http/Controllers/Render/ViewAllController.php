@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-abstract class RenderController extends Controller
+abstract class ViewAllController extends Controller
 {
     protected $type = "";
     protected $typeModel = '';

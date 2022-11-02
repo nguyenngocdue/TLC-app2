@@ -34,7 +34,7 @@ Route::group([
         foreach ($entities as $entity) {
             $entityName = $entity->getTable();
             $ucfirstName = Str::ucfirst($entityName);
-            Route::resource("$entityName/{$entityName}_viewall", "App\Http\Controllers\Render\\{$ucfirstName}\\{$ucfirstName}RenderController");
+            Route::resource("$entityName/{$entityName}_viewall", "App\Http\Controllers\Render\\{$ucfirstName}\\{$ucfirstName}ViewAllController");
             Route::resource("$entityName/{$entityName}_addnew", "App\Http\Controllers\Render\\{$ucfirstName}\\{$ucfirstName}CreateController");
             Route::resource("$entityName/{$entityName}_edit", "App\Http\Controllers\Render\\{$ucfirstName}\\{$ucfirstName}EditController");
         }

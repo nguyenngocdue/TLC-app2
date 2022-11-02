@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\{{nameClass}};
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\{{nameClassSingular}};
 
-class {{nameClass}}RenderController extends RenderController
+class {{nameClass}}ViewAllController extends ViewAllController
 {
     protected $type = '{{nameModelSingular}}';
     protected $typeModel = {{nameClassSingular}}::class;

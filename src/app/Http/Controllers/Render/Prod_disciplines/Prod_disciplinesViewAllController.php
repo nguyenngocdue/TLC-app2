@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Prod_disciplines;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Prod_discipline;
 
-class Prod_disciplinesRenderController extends RenderController
+class Prod_disciplinesViewAllController extends ViewAllController
 {
     protected $type = 'prod_discipline';
     protected $typeModel = Prod_discipline::class;

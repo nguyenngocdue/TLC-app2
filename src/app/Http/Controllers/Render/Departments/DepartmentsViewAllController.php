@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Departments;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Department;
 
-class DepartmentsRenderController extends RenderController
+class DepartmentsViewAllController extends ViewAllController
 {
     protected $type = 'department';
     protected $typeModel = Department::class;

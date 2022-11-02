@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\User_disciplines;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\User_discipline;
 
-class User_disciplinesRenderController extends RenderController
+class User_disciplinesViewAllController extends ViewAllController
 {
     protected $type = 'user_discipline';
     protected $typeModel = User_discipline::class;

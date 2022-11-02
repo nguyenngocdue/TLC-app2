@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Sub_projects;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Sub_project;
 
-class Sub_projectsRenderController extends RenderController
+class Sub_projectsViewAllController extends ViewAllController
 {
     protected $type = 'sub_project';
     protected $typeModel = Sub_project::class;

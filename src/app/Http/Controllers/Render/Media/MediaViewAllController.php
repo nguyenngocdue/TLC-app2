@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Media;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Media;
 
-class MediaRenderController extends RenderController
+class MediaViewAllController extends ViewAllController
 {
     protected $type = 'media';
     protected $typeModel = Media::class;

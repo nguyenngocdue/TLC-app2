@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\User_categories;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\User_category;
 
-class User_categoriesRenderController extends RenderController
+class User_categoriesViewAllController extends ViewAllController
 {
     protected $type = 'user_category';
     protected $typeModel = User_category::class;

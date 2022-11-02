@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Workplaces;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Workplace;
 
-class WorkplacesRenderController extends RenderController
+class WorkplacesViewAllController extends ViewAllController
 {
     protected $type = 'workplace';
     protected $typeModel = Workplace::class;
