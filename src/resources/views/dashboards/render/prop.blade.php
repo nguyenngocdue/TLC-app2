@@ -197,7 +197,7 @@
                             @break
 
                             @case('count')
-                            <td class="text-center">
+                            <td>
                                 @isset($user->{$item['relationship']})
                                 <x-render.count count="{{ !is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0' }}" />
                                 @else

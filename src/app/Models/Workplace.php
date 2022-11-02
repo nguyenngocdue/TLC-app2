@@ -19,11 +19,12 @@ class Workplace extends Model
 
     public $eloquentParams = [
         "user" => ['hasMany', User::class, 'workplace'],
+        // "def_assignee" => ['hasMany'],
+        // "def_monitors" => ['belongsToMany', User::class, 'def_monitors'],
     ];
     public function user()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
