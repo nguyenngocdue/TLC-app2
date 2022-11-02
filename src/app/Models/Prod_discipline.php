@@ -15,7 +15,9 @@ class Prod_discipline extends Model
     protected $primaryKey = 'id';
     protected $table = 'prod_disciplines';
     public $timestamps = true;
-
+    protected $with = [
+        'routingLink',
+    ];
 
     public $eloquentParams = [
         "routingLink" => ['hasMany', Prod_routing_link::class, 'prod_discipline_id'],

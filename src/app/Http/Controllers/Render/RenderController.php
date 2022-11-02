@@ -25,8 +25,8 @@ abstract class RenderController extends Controller
     public function index()
     {
         $type = Str::plural($this->type);
-        $idUser = Auth::guard()->id();
-        $userLogin = User::find($idUser);
+        // $idUser = Auth::guard()->id();
+        $userLogin = Auth::user(); //User::find($idUser);
         $search = request('search');
         $pageLimit = $userLogin->settings[$type]['page_limit'] ?? null;
         if ($pageLimit === null) $pageLimit = 10;

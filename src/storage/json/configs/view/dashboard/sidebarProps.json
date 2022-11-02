@@ -347,23 +347,6 @@
                     }
                 ]
             },
-            "prod_routing_details": {
-                "title": "Prod_routing_details",
-                "icon": "nav-icon fas fa-user",
-                "href_parent": "dashboard/prod_routing_details",
-                "items": [
-                    {
-                        "title": "View All",
-                        "icon": "fas fa-users",
-                        "href": "dashboard/prod_routing_details/prod_routing_details_viewall"
-                    },
-                    {
-                        "title": "Add New",
-                        "icon": "fas fa-user",
-                        "href": "dashboard/prod_routing_details/prod_routing_details_addnew"
-                    }
-                ]
-            },
             "prod_routing_links": {
                 "title": "Prod_routing_links",
                 "icon": "nav-icon fas fa-user",
@@ -395,23 +378,6 @@
                         "title": "Add New",
                         "icon": "fas fa-user",
                         "href": "dashboard/prod_runs/prod_runs_addnew"
-                    }
-                ]
-            },
-            "prod_user_runs": {
-                "title": "Prod_user_runs",
-                "icon": "nav-icon fas fa-user",
-                "href_parent": "dashboard/prod_user_runs",
-                "items": [
-                    {
-                        "title": "View All",
-                        "icon": "fas fa-users",
-                        "href": "dashboard/prod_user_runs/prod_user_runs_viewall"
-                    },
-                    {
-                        "title": "Add New",
-                        "icon": "fas fa-user",
-                        "href": "dashboard/prod_user_runs/prod_user_runs_addnew"
                     }
                 ]
             },
@@ -909,28 +875,6 @@
                         "title": "Manage Relationship",
                         "icon": "fas fa-heart",
                         "href": "propman/prod_routing/prod_routing_mngrls"
-                    }
-                ]
-            },
-            "prod_routing_detail": {
-                "title": "Prod_routing_detail",
-                "icon": "nav-icon fas fa-user",
-                "href_parent": "propman/prod_routing_detail",
-                "items": [
-                    {
-                        "title": "Manage Prop",
-                        "icon": "fas fa-project-diagram",
-                        "href": "propman/prod_routing_detail/prod_routing_detail_mngprop"
-                    },
-                    {
-                        "title": "Manage Line",
-                        "icon": "fas fa-grip-lines",
-                        "href": "propman/prod_routing_detail/prod_routing_detail_mnglnprop"
-                    },
-                    {
-                        "title": "Manage Relationship",
-                        "icon": "fas fa-heart",
-                        "href": "propman/prod_routing_detail/prod_routing_detail_mngrls"
                     }
                 ]
             },

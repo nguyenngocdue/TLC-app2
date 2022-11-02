@@ -13,4 +13,5 @@ class Work_mode extends Model
     protected $fillable = ["name", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'work_modes';
+    public $eloquentParams = [];
 }

@@ -14,6 +14,11 @@ class Prod_order extends Model
     protected $fillable = ["id", "slug", "production_name", "production", "compliance", "description", "quantity", "prod_sub_project_id", "prod_routing_id"];
     protected $primaryKey = 'id';
     protected $table = 'prod_orders';
+    protected $with = [
+        "subProject",
+        "routing",
+        "productionRuns",
+    ];
 
     public $eloquentParams = [
         "subProject" => ['belongsTo', Sub_project::class],

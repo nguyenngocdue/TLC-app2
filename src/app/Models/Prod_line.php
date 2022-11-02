@@ -14,6 +14,10 @@ class Prod_line extends Model
     protected $primaryKey = 'id';
     protected $table = 'prod_lines';
     public $timestamps = true;
+    protected $with = [
+        'users',
+        'productionRun',
+    ];
 
     public $eloquentParams = [
         "users" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_line_id', 'user_id'],

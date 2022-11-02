@@ -13,6 +13,9 @@ class User_type extends Model
     protected $fillable = ["name", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'user_types';
+    protected $with = [
+        'user',
+    ];
 
     public $eloquentParams = [
         "user" => ['hasMany', User::class, 'user_type', 'id'],

@@ -13,7 +13,9 @@ class Department extends Model
     protected $fillable = ["name", "description", "head_of_department", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'departments';
-
+    protected $with = [
+        'user',
+    ];
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'head_of_department'],
     ];

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -37,6 +36,22 @@ class User extends Authenticatable implements LdapAuthenticatable
      */
     protected $hidden = ["password", "remember_token"];
 
+    protected $with = [
+        // "media",
+        // "posts",
+        // "getWorkplaces",
+        // "userTypes",
+        // "categories",
+        // "positionPres",
+        // "position1",
+        // "position2",
+        // "position3",
+        // "disciplines",
+        // "departments",
+        // "time_keep_types",
+        // "productionRunLines",
+    ];
+
     /**
      * The attributes that should be cast.
      *
@@ -58,11 +73,8 @@ class User extends Authenticatable implements LdapAuthenticatable
     // }
 
     public $eloquentParams = [
-        // "files" => ['hasMany' , Media::class],
-        // "medias" => ['morphMany',Media::class, 'owner_id','id'],
         "media" => ['hasMany', Media::class, 'owner_id', 'id'],
         "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
-        "userTypes" => ['belongsTo', UserType::class, 'user_type'],
         "getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
         "userTypes" => ['belongsTo', User_type::class, 'user_type'],
         "categories" => ['belongsTo', User_category::class, 'category'],
@@ -76,11 +88,6 @@ class User extends Authenticatable implements LdapAuthenticatable
         "productionRunLines" => ['belongsToMany', Prod_line::class, 'prod_user_runs', 'user_id', 'prod_line_id']
     ];
     protected $guard_name = 'web';
-    // public function files()
-    // {
-    //     $p = $this->eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1]);
-    // }
     public function media()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -96,7 +103,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getUserTypes()
+    public function userTypes()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
