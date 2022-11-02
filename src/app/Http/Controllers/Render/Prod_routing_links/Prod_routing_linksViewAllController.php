@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Prod_routing_links;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Prod_routing_link;
 
-class Prod_routing_linksRenderController extends RenderController
+class Prod_routing_linksViewAllController extends ViewAllController
 {
     protected $type = 'prod_routing_link';
     protected $typeModel = Prod_routing_link::class;

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Media_categories;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Media_category;
 
-class Media_categoriesRenderController extends RenderController
+class Media_categoriesViewAllController extends ViewAllController
 {
     protected $type = 'media_category';
     protected $typeModel = Media_category::class;

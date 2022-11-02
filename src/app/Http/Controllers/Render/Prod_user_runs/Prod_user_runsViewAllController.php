@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Prod_user_runs;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Prod_user_run;
 
-class Prod_user_runsRenderController extends RenderController
+class Prod_user_runsViewAllController extends ViewAllController
 {
     protected $type = 'prod_user_run';
     protected $typeModel = Prod_user_run::class;

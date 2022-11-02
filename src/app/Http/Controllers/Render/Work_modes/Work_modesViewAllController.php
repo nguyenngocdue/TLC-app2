@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Work_modes;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Work_mode;
 
-class Work_modesRenderController extends RenderController
+class Work_modesViewAllController extends ViewAllController
 {
     protected $type = 'work_mode';
     protected $typeModel = Work_mode::class;

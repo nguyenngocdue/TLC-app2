@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Users;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\User;
 
-class UsersRenderController extends RenderController
+class UsersViewAllController extends ViewAllController
 {
     protected $type = 'user';
     protected $typeModel = User::class;

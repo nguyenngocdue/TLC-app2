@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Prod_orders;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Prod_order;
 
-class Prod_ordersRenderController extends RenderController
+class Prod_ordersViewAllController extends ViewAllController
 {
     protected $type = 'prod_order';
     protected $typeModel = Prod_order::class;

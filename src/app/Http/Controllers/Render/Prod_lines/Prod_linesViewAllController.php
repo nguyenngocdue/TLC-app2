@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Prod_lines;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Prod_line;
 
-class Prod_linesRenderController extends RenderController
+class Prod_linesViewAllController extends ViewAllController
 {
     protected $type = 'prod_line';
     protected $typeModel = Prod_line::class;

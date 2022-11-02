@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\User_position3s;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\User_position3;
 
-class User_position3sRenderController extends RenderController
+class User_position3sViewAllController extends ViewAllController
 {
     protected $type = 'user_position3';
     protected $typeModel = User_position3::class;

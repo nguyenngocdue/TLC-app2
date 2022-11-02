@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Render\Zunit_test_5s;
 
-use App\Http\Controllers\Render\RenderController;
+use App\Http\Controllers\Render\ViewAllController;
 use App\Models\Zunit_test_5;
 
-class Zunit_test_5sRenderController extends RenderController
+class Zunit_test_5sViewAllController extends ViewAllController
 {
     protected $type = 'zunit_test_5';
     protected $typeModel = Zunit_test_5::class;
