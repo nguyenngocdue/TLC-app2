@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('prod_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('production_name');
+            $table->string('name');
             $table->string('slug')->unique();
             $table->string('production');
             $table->string('compliance');

@@ -12,7 +12,7 @@ final class GetProdOrders
      */
     public function __invoke($_, array $args)
     {
-        $prodOrders = Sub_project::find($args['id'])->productionOrders()->orderBy('production_name', 'ASC')->get();
+        $prodOrders = Sub_project::find($args['id'])->productionOrders()->orderBy('name', 'ASC')->get();
         return [
             'prod_orders' => $prodOrders,
             'sub_project_id' => $args['id']

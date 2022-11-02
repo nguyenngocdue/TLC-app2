@@ -27,7 +27,7 @@ class ProductionController extends Controller
     {
         try {
             $subProjectId = $id;
-            $prodOrders = Sub_project::find($id)->productionOrders()->orderBy('production_name', 'ASC')->get();
+            $prodOrders = Sub_project::find($id)->productionOrders()->orderBy('name', 'ASC')->get();
             return ResponseObject::responseSuccess(
                 ['prod_orders' => $prodOrders, 'sub_project_id' => $subProjectId],
                 null,

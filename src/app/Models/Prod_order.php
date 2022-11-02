@@ -11,7 +11,7 @@ class Prod_order extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
     public $timestamps = true;
-    protected $fillable = ["id", "slug", "production_name", "production", "compliance", "description", "quantity", "prod_sub_project_id", "prod_routing_id"];
+    protected $fillable = ["id", "slug", "name", "production", "compliance", "description", "quantity", "prod_sub_project_id", "prod_routing_id"];
     protected $primaryKey = 'id';
     protected $table = 'prod_orders';
     protected $with = [
