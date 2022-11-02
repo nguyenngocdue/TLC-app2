@@ -13,10 +13,10 @@
         "frozen_left": "",
         "frozen_right": ""
     },
-    "_production_name": {
-        "column_name": "production_name",
+    "_name": {
+        "column_name": "name",
         "column_type": "string",
-        "label": "Production Name",
+        "label": "Name",
         "control": "text",
         "col_span": "12",
         "hidden_view_all": null,
