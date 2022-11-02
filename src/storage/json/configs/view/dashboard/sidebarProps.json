@@ -15,7 +15,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/users/users_addnew"
+                        "href": "dashboard/users/users_addnew/create"
                     }
                 ]
             },
@@ -32,7 +32,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/media/media_addnew"
+                        "href": "dashboard/media/media_addnew/create"
                     },
                     {
                         "title": "Up File New",
@@ -54,7 +54,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/posts/posts_addnew"
+                        "href": "dashboard/posts/posts_addnew/create"
                     }
                 ]
             },
@@ -71,7 +71,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/workplaces/workplaces_addnew"
+                        "href": "dashboard/workplaces/workplaces_addnew/create"
                     }
                 ]
             },
@@ -88,7 +88,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/zunit_test_1s/zunit_test_1s_addnew"
+                        "href": "dashboard/zunit_test_1s/zunit_test_1s_addnew/create"
                     }
                 ]
             },
@@ -105,7 +105,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/zunit_test_3s/zunit_test_3s_addnew"
+                        "href": "dashboard/zunit_test_3s/zunit_test_3s_addnew/create"
                     }
                 ]
             },
@@ -122,7 +122,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/departments/departments_addnew"
+                        "href": "dashboard/departments/departments_addnew/create"
                     }
                 ]
             },
@@ -139,7 +139,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/user_categories/user_categories_addnew"
+                        "href": "dashboard/user_categories/user_categories_addnew/create"
                     }
                 ]
             },
@@ -156,7 +156,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/user_disciplines/user_disciplines_addnew"
+                        "href": "dashboard/user_disciplines/user_disciplines_addnew/create"
                     }
                 ]
             },
@@ -173,7 +173,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/user_position1s/user_position1s_addnew"
+                        "href": "dashboard/user_position1s/user_position1s_addnew/create"
                     }
                 ]
             },
@@ -190,7 +190,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/user_position2s/user_position2s_addnew"
+                        "href": "dashboard/user_position2s/user_position2s_addnew/create"
                     }
                 ]
             },
@@ -207,7 +207,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/user_position3s/user_position3s_addnew"
+                        "href": "dashboard/user_position3s/user_position3s_addnew/create"
                     }
                 ]
             },
@@ -224,7 +224,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/user_position_pres/user_position_pres_addnew"
+                        "href": "dashboard/user_position_pres/user_position_pres_addnew/create"
                     }
                 ]
             },
@@ -241,7 +241,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/user_time_keep_types/user_time_keep_types_addnew"
+                        "href": "dashboard/user_time_keep_types/user_time_keep_types_addnew/create"
                     }
                 ]
             },
@@ -258,7 +258,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/user_types/user_types_addnew"
+                        "href": "dashboard/user_types/user_types_addnew/create"
                     }
                 ]
             },
@@ -275,7 +275,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/work_modes/work_modes_addnew"
+                        "href": "dashboard/work_modes/work_modes_addnew/create"
                     }
                 ]
             },
@@ -292,7 +292,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/prod_disciplines/prod_disciplines_addnew"
+                        "href": "dashboard/prod_disciplines/prod_disciplines_addnew/create"
                     }
                 ]
             },
@@ -309,7 +309,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/prod_lines/prod_lines_addnew"
+                        "href": "dashboard/prod_lines/prod_lines_addnew/create"
                     }
                 ]
             },
@@ -326,7 +326,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/prod_orders/prod_orders_addnew"
+                        "href": "dashboard/prod_orders/prod_orders_addnew/create"
                     }
                 ]
             },
@@ -343,7 +343,24 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/prod_routings/prod_routings_addnew"
+                        "href": "dashboard/prod_routings/prod_routings_addnew/create"
+                    }
+                ]
+            },
+            "prod_routing_details": {
+                "title": "Prod_routing_details",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/prod_routing_details",
+                "items": [
+                    {
+                        "title": "View All",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/prod_routing_details/prod_routing_details_viewall"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/prod_routing_details/prod_routing_details_addnew/create"
                     }
                 ]
             },
@@ -360,7 +377,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/prod_routing_links/prod_routing_links_addnew"
+                        "href": "dashboard/prod_routing_links/prod_routing_links_addnew/create"
                     }
                 ]
             },
@@ -377,7 +394,24 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/prod_runs/prod_runs_addnew"
+                        "href": "dashboard/prod_runs/prod_runs_addnew/create"
+                    }
+                ]
+            },
+            "prod_user_runs": {
+                "title": "Prod_user_runs",
+                "icon": "nav-icon fas fa-user",
+                "href_parent": "dashboard/prod_user_runs",
+                "items": [
+                    {
+                        "title": "View All",
+                        "icon": "fas fa-users",
+                        "href": "dashboard/prod_user_runs/prod_user_runs_viewall"
+                    },
+                    {
+                        "title": "Add New",
+                        "icon": "fas fa-user",
+                        "href": "dashboard/prod_user_runs/prod_user_runs_addnew/create"
                     }
                 ]
             },
@@ -394,7 +428,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/sub_projects/sub_projects_addnew"
+                        "href": "dashboard/sub_projects/sub_projects_addnew/create"
                     }
                 ]
             },
@@ -411,7 +445,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/sub_project_statuses/sub_project_statuses_addnew"
+                        "href": "dashboard/sub_project_statuses/sub_project_statuses_addnew/create"
                     }
                 ]
             },
@@ -428,7 +462,7 @@
                     {
                         "title": "Add New",
                         "icon": "fas fa-user",
-                        "href": "dashboard/zunit_test_5s/zunit_test_5s_addnew"
+                        "href": "dashboard/zunit_test_5s/zunit_test_5s_addnew/create"
                     }
                 ]
             }

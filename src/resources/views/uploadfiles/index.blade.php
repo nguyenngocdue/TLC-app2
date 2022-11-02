@@ -36,7 +36,7 @@
                                 </td>
                                 <td>{{ $file->filename }}</td>
                                 <td>{{ $file->url_media }}</td>
-                                <td>{{ $file->user->name }}</td>
+                                {{-- <td>{{ $file->user->name }}</td> --}}
                                 <td>
                                     <div class="btn-group">
                                         <button data-url="{{ route('upload_add.destroy', $file->id) }}" ​ class="btn btn-danger btn-delete"><i class="fas fa-trash">

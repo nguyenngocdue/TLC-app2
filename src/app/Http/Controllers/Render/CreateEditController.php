@@ -24,9 +24,26 @@ abstract class CreateEditController extends Controller
 		$this->readingFileService = $readingFileService;
 	}
 
-	public function show($id)
+	public function create()
 	{
+		$action = $this->action;
+		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 
+		if ($props  === false) {
+			$title = "Setting is missing";
+			$error =  "File \"$this->r_fileName\" is missing. <br/>Please create this file by \"manage prop\".";
+			return view('components.render.resultWarning')->with(compact('error', 'title'));
+		}
+
+		$type = $this->type;
+		$tablePath = $this->data;
+		$values = "";
+		$idItems = [];
+		return view('dashboards.render.createEdit')->with(compact('props', 'type', 'action', 'tablePath', 'values', 'idItems'));
+	}
+
+	public function edit($id)
+	{
 		$currentElement = $this->data::find($id);
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
@@ -34,7 +51,6 @@ abstract class CreateEditController extends Controller
 		$values = $action === "create" ? "" : $currentElement;
 
 		$tablePath = $this->data;
-
 
 		$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $currentElement->getTable(), "relationships.json");
 		$idItems = [];
@@ -116,28 +132,9 @@ abstract class CreateEditController extends Controller
 			}
 		}
 
-		return redirect(route("{$type}_edit.show", $id));
+		return redirect(route("{$type}_edit.edit", $id));
 	}
 
-	public function index()
-	{
-		$action = $this->action;
-
-
-		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-
-		if ($props  === false) {
-			$title = "Setting is missing";
-			$error =  "File \"$this->r_fileName\" is missing. <br/>Please create this file by \"manage prop\".";
-			return view('components.render.resultWarning')->with(compact('error', 'title'));
-		}
-
-		$type = $this->type;
-		$tablePath = $this->data;
-		$values = "";
-		$idItems = [];
-		return view('dashboards.render.createEdit')->with(compact('props', 'type', 'action', 'tablePath', 'values', 'idItems'));
-	}
 	public function store(Request $request)
 	{
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
@@ -215,6 +212,6 @@ abstract class CreateEditController extends Controller
 		$idNewData = $newData->id;
 
 		$type = Str::plural($this->type);
-		return redirect(route("{$type}_edit.update", $idNewData));
+		return redirect(route("{$type}_edit.edit", $idNewData));
 	}
 }

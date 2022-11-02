@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Render\Media;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Render\CreateEditController;
 use App\Models\Media;
 
