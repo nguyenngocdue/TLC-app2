@@ -9,7 +9,7 @@ class Entities
 {
     private static $singleton = null;
 
-    public static function getALl()
+    public static function getAll()
     {
         if (!static::$singleton) {
             static::$singleton = static::getAllExpensive();

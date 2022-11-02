@@ -17,7 +17,7 @@ class RoleSetSeeder extends Seeder
     public function run()
     {
         try {
-            $entities = Entities::getALl();
+            $entities = Entities::getAll();
             $names = [];
             foreach ($entities as $entity) {
                 $name = $entity->getTable();
