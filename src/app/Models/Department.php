@@ -15,9 +15,9 @@ class Department extends Model
     protected $table = 'departments';
 
     public $eloquentParams = [
-        "head_of_department" => ['belongsTo', User::class, 'head_of_department'],
+        "user" => ['belongsTo', User::class, 'head_of_department'],
     ];
-    public function head_of_department()
+    public function user()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

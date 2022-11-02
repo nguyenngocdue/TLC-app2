@@ -1,6 +1,6 @@
 {
-    "_head_of_department": {
-        "relationship": "head_of_department",
+    "_user": {
+        "relationship": "user",
         "eloquent": "belongsTo",
         "param_1": "App\\Models\\User",
         "param_2": "head_of_department",
@@ -8,8 +8,8 @@
         "param_4": null,
         "param_5": null,
         "param_6": null,
-        "label": "Head Of Department",
-        "renderer": "count",
+        "label": "User",
+        "renderer": "column",
         "renderer_param": "name",
         "control_name": null,
         "col_span": "12",

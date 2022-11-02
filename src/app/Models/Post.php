@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 class Post extends Model
 {
     use HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = ["title", "content", "owner_id"];
+    protected $fillable = ["name", "content", "owner_id"];
     protected $primaryKey = 'id';
     protected $table = 'posts';
 
@@ -32,7 +32,7 @@ class Post extends Model
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
+            'name' => $this->name,
         ];
     }
 }

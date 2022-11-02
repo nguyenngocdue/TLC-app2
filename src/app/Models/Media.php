@@ -15,13 +15,13 @@ class Media extends Model
     protected $table = 'media';
 
     public $eloquentParams = [
-        // "user" => ['belongsTo', User::class, 'owner_id'],
+        "user" => ['belongsTo', User::class, 'owner_id'],
     ];
-    // public function user()
-    // {
-    //     $p = $this->eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1], $p[2]);
-    // }
+    public function user()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     // public function toSearchableArray()
     // {
