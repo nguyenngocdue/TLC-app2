@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <main class="h-full">
-    <div class="container mx-auto grid px-0">
+    <div class="container mx-auto grid px-6">
         <div class="focus:shadow-outline-purple my-4 flex items-center justify-between rounded-lg bg-purple-600 p-3 text-base font-semibold text-purple-100 shadow-md focus:outline-none">
             <div class="flex items-center">
                 <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
@@ -48,30 +48,30 @@
             </form>
         </div>
 
-        <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border shadow-sm">
+        <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border shadow-sm bg-white dark:bg-gray-800">
             <div class="w-full overflow-x-auto">
                 <table class="whitespace-no-wrap w-full">
                     <thead>
-                        <tr class="border-b bg-gray-50 text-left text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
-                            <th class="px-4 py-3">ID</th>
-                            <th class="px-4 py-3">Name</th>
-                            <th class="px-4 py-3">Gruard Name</th>
-                            <th class="px-4 py-3">Action</th>
+                        <tr class="border-b text-center bg-gray-50 text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
+                            <th class="px-4 py-3 ">ID</th>
+                            <th class="px-4 py-3 ">Name</th>
+                            <th class="px-4 py-3 ">Gruard Name</th>
+                            <th class="px-4 py-3 ">Action</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
                         @foreach ($data as $value)
                         <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3 text-sm">
+                            <td class="px-4 py-3 text-center text-sm">
                                 {{ $value->id }}
                             </td>
-                            <td class="px-4 py-3 text-sm">
+                            <td class="px-4 py-3 text-center text-sm">
                                 {{ $value->name }}
                             </td>
-                            <td class="px-4 py-3 text-sm" s>
+                            <td class="px-4 py-3 text-center text-sm" s>
                                 {{ $value->guard_name }}
                             </td>
-                            <td class="px-4 py-3 text-sm">
+                            <td class="px-4 py-3 text-center text-sm">
                                 <div class="flex">
                                     <button data-url="{{ route($type . '.edit', $value->id) }}" class="btn-edit focus:shadow-outline-gray rounded-lg px-2 py-2 text-sm font-medium leading-5 text-red-600 focus:outline-none dark:text-red-400" type="button" onclick="toggleModal('modal-id')">
                                         <i class="fas fa-edit"></i>
@@ -88,7 +88,7 @@
                     </tfoot>
                 </table>
             </div>
-            <div class="grid border-t bg-gray-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:grid-cols-9">
+            <div class="grid border-t bg-gray-50 px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:grid-cols-9">
                 <span class="col-span-3 flex items-center">
                     @if (isset($data) && count($data) > 0)
                     {{ $data->links('dashboards.pagination.showing') }}

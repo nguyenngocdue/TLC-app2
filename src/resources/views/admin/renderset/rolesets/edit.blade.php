@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <main class="h-full overflow-y-auto">
-    <div class="container mx-auto grid px-0">
+    <div class="container mx-auto grid px-6">
         <div class="focus:shadow-outline-purple my-4 flex items-center justify-between rounded-lg bg-purple-600 p-3 text-base font-semibold text-purple-100 shadow-md focus:outline-none">
             <div class="flex items-center">
                 <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
@@ -12,7 +12,7 @@
             </div>
             <a href="{{ route('setrolesets.index') }}">Back <- </span>
         </div>
-        <div class="mb-8 rounded-lg bg-white px-4 py-3 shadow-md dark:bg-gray-800">
+        <div class="mb-8 rounded-lg bg-white px-4 py-3 text-center shadow-md dark:bg-gray-800">
             <label for="roleSets" class="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-400">Select an
                 option Role Set</label>
             <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -31,7 +31,7 @@
                         </option>
                         @endforeach
                     </select>
-                    <button class="focus:shadow-outline-purple my-2 ml-2 rounded-lg border border-transparent bg-emerald-500 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-emerald-200 focus:outline-none active:bg-emerald-600" type="submit">Save Change</button>
+                    <button class="focus:shadow-outline-purple my-2 ml-2 rounded-lg border border-transparent bg-emerald-500 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-purple-400 focus:outline-none active:bg-emerald-600" type="submit">Save Change</button>
                 </form>
             </div>
         </div>

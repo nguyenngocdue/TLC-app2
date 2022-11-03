@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <main class="h-full">
-    <div class="container mx-auto grid px-0">
+    <div class="container mx-auto grid px-6">
         <div class="focus:shadow-outline-purple my-4 flex items-center justify-between rounded-lg bg-purple-600 p-3 text-base font-semibold text-purple-100 shadow-md focus:outline-none">
             <div class="flex items-center">
                 <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
@@ -34,11 +34,11 @@
                 </div>
             </form>
         </div>
-        <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border shadow-sm">
+        <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border shadow-sm bg-white dark:bg-gray-800 ">
             <div class="w-full overflow-x-auto">
                 <table class="whitespace-no-wrap w-full">
                     <thead>
-                        <tr class="border-b bg-gray-50 text-left text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
+                        <tr class="border-b text-center bg-gray-50 text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
                             <th class="px-4 py-3">ID</th>
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Email</th>
@@ -50,23 +50,23 @@
                     <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
                         @foreach ($users as $user)
                         <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3 text-sm">
+                            <td class="px-4 py-3 text-center text-sm">
                                 {{ $user->id }}
                             </td>
-                            <td class="px-4 py-3 text-sm">
+                            <td class="px-4 py-3 text-center text-sm">
                                 {{ $user->name }}
                             </td>
-                            <td class="px-4 py-3 text-sm">
+                            <td class="px-4 py-3 text-center text-sm">
                                 {{ $user->email }}
                             </td>
-                            <td class="px-4 py-3 text-sm">
+                            <td class="px-4 py-3 text-center text-sm">
                                 @foreach ($user->roleSets as $item)
                                 <span class="rounded-full bg-green-100 px-2 py-1 font-semibold leading-tight text-green-700 dark:bg-green-700 dark:text-green-100">
                                     {{ $item->name }}
                                 </span>
                                 @endforeach
                             </td>
-                            <td class="px-4 py-3 text-xs">
+                            <td class="px-4 py-3 text-center text-xs">
                                 <div class="grid grid-cols-3 gap-2">
                                     @foreach ($user->getRolesViaRoleSets() as $item)
                                     <span class="block w-full rounded-full bg-green-100 px-2 py-1 font-semibold leading-tight text-green-700 dark:bg-green-700 dark:text-green-100">
@@ -76,7 +76,7 @@
                                 </div>
 
                             </td>
-                            <td class="px-4 py-3 text-sm">
+                            <td class="px-4 py-3 text-center text-sm">
                                 <div class="flex">
                                     <a href="{{ route('setrolesets.edit', $user->id) }}" class="focus:shadow-outline-purple rounded-lg border border-transparent bg-emerald-500 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-emerald-200 focus:outline-none active:bg-emerald-600" type="button">
                                         Role Set
@@ -91,7 +91,7 @@
                     </tfoot>
                 </table>
             </div>
-            <div class="grid border-t bg-gray-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:grid-cols-9">
+            <div class="grid border-t bg-gray-50 px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:grid-cols-9">
                 <span class="col-span-3 flex items-center">
                     @if (isset($users) && count($users) > 0)
                     {{ $users->links('dashboards.pagination.showing') }}
