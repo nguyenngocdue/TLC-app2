@@ -163,7 +163,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "required",
+        "validation": null,
         "frozen_left": null,
         "frozen_right": null
     },
@@ -429,7 +429,7 @@
         "hidden_edit": "true",
         "new_line": null,
         "type_line": "default",
-        "validation": "required",
+        "validation": null,
         "frozen_left": null,
         "frozen_right": null
     },
@@ -443,7 +443,7 @@
         "hidden_edit": "true",
         "new_line": null,
         "type_line": "default",
-        "validation": "required",
+        "validation": null,
         "frozen_left": null,
         "frozen_right": null
     },
@@ -457,7 +457,7 @@
         "hidden_edit": "true",
         "new_line": null,
         "type_line": "default",
-        "validation": "required",
+        "validation": null,
         "frozen_left": null,
         "frozen_right": null
     },

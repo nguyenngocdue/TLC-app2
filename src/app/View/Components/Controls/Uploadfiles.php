@@ -26,7 +26,7 @@ class Uploadfiles extends Component
         if (!isset(array_flip($cateIdName)[$colName])) {
             $message = "Not found $colName in media_categories";
             $type = "warning";
-            return view('components.feedback.alert')->with(compact('message', $type));
+            return view('components.feedback.alert')->with(compact('message', 'type'));
         }
         if ($action === 'create') {
             $infMedia = [];
