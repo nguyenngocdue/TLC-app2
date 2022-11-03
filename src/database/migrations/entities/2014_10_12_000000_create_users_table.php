@@ -48,7 +48,8 @@ return new class extends Migration
             $table->string("user_id_passport")->nullable();
             $table->string("user_pin")->nullable();
             $table->timestamp("email_verified_at")->nullable();
-            $table->string("password");
+            $table->string("provider")->nullable();
+            $table->string("password")->nullable();
             $table->string("time_zone")->nullable();
             $table->json("settings");
             $table->rememberToken();
