@@ -54,7 +54,7 @@
                                         <label class='text-gray-700 dark:text-gray-400  px-3 block text-base' title='{{$column_name}} / {{$control}}'>{{$label}}
                                         </label>
                                     </div>
-                                    <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2'>
+                                    <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2 text-left'>
                                         @if (is_null($control))
                                         <h2 class="text-red-400">{{"Control of this $column_name has not been set"}}</h2>
                                         @endif

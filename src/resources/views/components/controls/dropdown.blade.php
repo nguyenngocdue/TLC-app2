@@ -1,5 +1,6 @@
 @php
-$selected = (!is_null(old($colName))) ? old($colName) * 1 : isset($currentEntity[$colName]) && $currentEntity[$colName] * 1;
+$idEntity = isset($currentEntity[$colName]) ? $currentEntity[$colName]*1 : null;
+$selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
 @endphp
 
 @if(count($dataSource) <= 1) <p class=' bg-white border border-gray-300 text-blue-400 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>Please check data of "{{$tableName}}" tbale</p>
