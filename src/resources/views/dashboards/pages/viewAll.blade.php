@@ -75,7 +75,7 @@
                     <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
                         @isset($data)
                         @if (isset($users) && !count($users) > 0)
-                        <x-render.info title="Infomation Data" info="Data empty" />
+                        <x-feedback.alert title="Infomation Data" message="Data empty" />
                         @else
                         @foreach ($users as $key => $user)
                         <tr class="text-gray-700 dark:text-gray-400">
@@ -118,7 +118,7 @@
                                 @if ($model === 'App\Models\User')
                                 <div title="{{ $user[$value['column_name']] }}">
 
-                                    <x-render.attachment attachment="{{ $user->id }}" model="{{ $model }}" relationship="{{ $item['relationship'] }}" />
+                                    <x-renderer.attachment attachment="{{ $user->id }}" model="{{ $model }}" relationship="{{ $item['relationship'] }}" />
                                 </div>
                                 @else
                                 Render Failed
@@ -128,7 +128,7 @@
                                 @case('count')
                                 <div title="{{ $user[$value['column_name']] }}">
                                     @isset($user->{$item['relationship']})
-                                    <x-render.count count="{{ !is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0' }}" />
+                                    <x-renderer.count count="{{ !is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0' }}" />
                                     @else
                                     Render Failed
                                     @endisset
@@ -147,14 +147,14 @@
                                 @case('avatar_name')
                                 @if ($user->{$item['relationship']} != null && is_array($user->{$item['relationship']}))
                                 <div title="{{ $user[$value['column_name']] }}">
-                                    <x-render.user src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg" name="{{ $user->{$item['relationship']}->name }}" email="{{ $user->{$item['relationship']}->email }}" />
+                                    <x-renderer.user src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg" name="{{ $user->{$item['relationship']}->name }}" email="{{ $user->{$item['relationship']}->email }}" />
                                 </div>
                                 @else
                                 @php
                                 $users = $user->{$item['relationship']};
                                 @endphp
                                 <div title="{{ $user[$value['column_name']] }}">
-                                    <x-render.users :users="$users" />
+                                    <x-renderer.users :users="$users" />
                                 </div>
                                 @endif
                                 @break
@@ -186,7 +186,7 @@
                             @case('attachment')
                             <td class="text-center">
                                 @if ($model === 'App\Models\User')
-                                <x-render.attachment attachment="{{ $user->id }}" model="{{ $model }}" relationship="{{ $item['relationship'] }}" />
+                                <x-renderer.attachment attachment="{{ $user->id }}" model="{{ $model }}" relationship="{{ $item['relationship'] }}" />
                                 @else
                                 <p class="rounded-md bg-red-300 px-2 py-0 text-xs font-semibold leading-tight text-red-400 dark:bg-red-500 dark:text-green-100">
                                     Render Failed
@@ -199,7 +199,7 @@
                             @case('count')
                             <td>
                                 @isset($user->{$item['relationship']})
-                                <x-render.count count="{{ !is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0' }}" />
+                                <x-renderer.count count="{{ !is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0' }}" />
                                 @else
                                 <p class="rounded-md bg-red-300 px-2 py-0 text-xs font-semibold leading-tight text-red-400 dark:bg-red-500 dark:text-green-100">
                                     Render Failed
@@ -220,12 +220,12 @@
                             @case('avatar_name')
                             <td class="px-4 py-3">
                                 @if ($user->{$item['relationship']} != null && is_array($user->{$item['relationship']}))
-                                <x-render.user src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg" name="{{ $user->{$item['relationship']}->name }}" email="{{ $user->{$item['relationship']}->email }}" />
+                                <x-renderer.user src="https://wp.tlcmodular.com/wp-content/uploads/2022/07/bfdc18a057769428cd67-150x150.jpg" name="{{ $user->{$item['relationship']}->name }}" email="{{ $user->{$item['relationship']}->email }}" />
                                 @else
                                 @php
                                 $users = $user->{$item['relationship']};
                                 @endphp
-                                <x-render.users :users="$users" />
+                                <x-renderer.users :users="$users" />
                                 @endif
                             </td>
                             @break

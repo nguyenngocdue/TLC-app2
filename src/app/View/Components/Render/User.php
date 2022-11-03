@@ -23,6 +23,6 @@ class User extends Component
      */
     public function render()
     {
-        return view('components.render.user');
+        return view('components.renderer.user');
     }
 }

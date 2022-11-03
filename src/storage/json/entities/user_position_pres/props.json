@@ -9,9 +9,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_name": {
         "column_name": "name",
@@ -23,9 +23,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": "required",
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_description": {
         "column_name": "description",
@@ -33,13 +33,13 @@
         "label": "Description",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": "true",
+        "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_slug": {
         "column_name": "slug",
@@ -47,13 +47,13 @@
         "label": "Slug",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": "true",
+        "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": "required",
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_created_at": {
         "column_name": "created_at",
@@ -65,9 +65,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_updated_at": {
         "column_name": "updated_at",
@@ -79,8 +79,8 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     }
 }

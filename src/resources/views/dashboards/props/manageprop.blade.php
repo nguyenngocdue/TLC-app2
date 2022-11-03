@@ -47,7 +47,7 @@
                             }
                             @endphp
                             @isset($errorsLineProp)
-                            <x-render.warningfix title="Warning Settings" warning="{{ $errorsLineProp }}" />
+                            <x-feedback.alert title="Warning Settings" message="{{ $errorsLineProp }}" />
                             @else
                             @isset($names)
                             @php
@@ -79,7 +79,8 @@
                                         @foreach ($controls as $control)
                                         @if ($columnControls[$key] === $control)
                                         <option value="{{ $control }}" selected>
-                                            {{ ucfirst($control) }}</option>
+                                            {{ ucfirst($control) }}
+                                        </option>
                                         @else
                                         <option value="{{ $control }}">{{ ucfirst($control) }}
                                         </option>

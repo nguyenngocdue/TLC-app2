@@ -44,7 +44,7 @@
                             }
                             @endphp
                             @isset($errorsLineProp)
-                            <x-render.warningfix title="Warning Settings" warning="{{ $errorsLineProp }}" />
+                            <x-feedback.alert title="Warning Settings" message="{{ $errorsLineProp }}" />
                             @else
                             @isset($names)
                             @php
