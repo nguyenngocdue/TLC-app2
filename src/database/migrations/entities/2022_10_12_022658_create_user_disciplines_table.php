@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('def_assignee')->nullable();
             $table->unsignedBigInteger('def_monitors')->nullable();
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

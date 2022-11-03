@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('name');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('head_of_department')->nullable();
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

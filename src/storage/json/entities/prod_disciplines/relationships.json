@@ -11,7 +11,7 @@
         "label": "RoutingLink",
         "renderer": "count",
         "renderer_param": "name",
-        "column_name": "prod_discipline_id",
+        "control_name": null,
         "col_span": "12",
         "hidden": null,
         "new_line": null,
