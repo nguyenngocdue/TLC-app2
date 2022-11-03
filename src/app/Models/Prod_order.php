@@ -15,17 +15,17 @@ class Prod_order extends Model
     protected $primaryKey = 'id';
     protected $table = 'prod_orders';
     protected $with = [
-        "sub_project_id",
+        "subProject",
         "routing",
         "productionRuns",
     ];
 
     public $eloquentParams = [
         "productionRuns" => ['hasMany', Prod_run::class, 'prod_order_id'],
-        "sub_project_id" => ['belongsTo', Sub_project::class],
+        "subProject" => ['belongsTo', Sub_project::class],
         "routing" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
     ];
-    public function sub_project_id()
+    public function subProject()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1]);
