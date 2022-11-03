@@ -7,11 +7,6 @@ use Illuminate\View\Component;
 
 class Attachment extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
     public $attachment, $model, $relationship;
     public function __construct($attachment, $model, $relationship)
     {
@@ -20,16 +15,11 @@ class Attachment extends Component
         $this->relationship = $relationship;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
     public function render()
     {
         $dataModel = App::make($this->model)::find($this->attachment)->{$this->relationship};
         $countCheck = $dataModel->count();
-        $path = env('AWS_ENDPOINT', 'http://192.168.100.100:9000') . '/' . env('AWS_BUCKET', 'hello-001') . '/';
+        $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         if ($countCheck == 0) {
             $items = $dataModel->all();
             return view('components.renderer.attachment')->with(compact('items', 'path'));;

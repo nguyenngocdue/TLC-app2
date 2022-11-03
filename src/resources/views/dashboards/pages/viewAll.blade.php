@@ -124,7 +124,7 @@
                                 @case('count')
                                 <div title="{{ $user[$value['column_name']] }}">
                                     @isset($user->{$item['relationship']})
-                                    <x-renderer.count count="{{ !is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0' }}" />
+                                    <x-renderer.tag value="{{ !is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0' }} items" />
                                     @else
                                     Render Failed
                                     @endisset
@@ -195,7 +195,7 @@
                             @case('count')
                             <td>
                                 @isset($user->{$item['relationship']})
-                                <x-renderer.count count="{{ !is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0' }}" />
+                                <x-renderer.tag value="{{ !is_array($user->{$item['relationship']}) ? $user->{$item['relationship']}->count() : '0' }} items" />
                                 @else
                                 <p class="rounded-md bg-red-300 px-2 py-0 text-xs font-semibold leading-tight text-red-400 dark:bg-red-500 dark:text-green-100">
                                     Render Failed
