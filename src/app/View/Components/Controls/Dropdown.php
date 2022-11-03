@@ -29,8 +29,9 @@ class Dropdown extends Component
         // dd($this->tablePath, $eloquentParam, $tableName, $colName);
 
         if ($keyNameEloquent === "") {
-            $error =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in Model).";
-            return view('components.feedback.alert')->with(compact('error'));
+            $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in Model).";
+            $type = 'warning';
+            return view('components.feedback.alert')->with(compact('message', 'type'));
         }
         $pathSourceTable = $eloquentParam[$keyNameEloquent][1]; // filter name of path source Workplace table
         $insTable = new $pathSourceTable;

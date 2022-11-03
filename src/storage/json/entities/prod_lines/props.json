@@ -17,7 +17,7 @@
         "column_name": "prod_run_id",
         "column_type": "bigint",
         "label": "Prod Run Id",
-        "control": "text",
+        "control": "dropdown",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
