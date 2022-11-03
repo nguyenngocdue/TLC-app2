@@ -23,16 +23,16 @@ $svg = '<svg class="m-1" viewBox="64 64 896 896" focusable="false" data-icon="cl
 break;
 case "info":
 default:
-$type = "info";
+$type = $title = "info";
 $class = "text-blue-700 border-blue-300 bg-blue-50 dark:bg-blue-200";
 $svg = '<svg class="m-1" viewBox="64 64 896 896" focusable="false" data-icon="info-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true">
     <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm32 664c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V456c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272zm-32-344a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"></path>
 </svg>';
 break;
 }
-$title = ucfirst($type);
+$title = ucfirst($title);
 @endphp
-<div class="flex text-sm p-4 mb-4 border rounded-lg {{$class}}" role="alert">
+<div class="flex text-sm p-4 border rounded-lg {{$class}}" role="alert">
     {!!$svg!!}
     <span class="sr-only">{{$title}}</span>
     <div>

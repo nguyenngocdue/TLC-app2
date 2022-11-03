@@ -109,9 +109,7 @@
                                         <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} />
                                         @break
                                         @default
-                                        <div class="p-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
-                                            <span class="font-medium">Control:</span><strong>{{$control}}</strong> not available
-                                        </div>
+                                        <x-feedback.alert type="warning" title="Control" message="[{{$control}}] is not available" />
                                         @break
                                         @endswitch
 
