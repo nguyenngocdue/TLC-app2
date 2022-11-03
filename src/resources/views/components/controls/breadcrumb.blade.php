@@ -1,4 +1,4 @@
-<ol class="flex pl-2 text-[#00000073] ">
+<ol class="flex text-[#00000073] ">
     <li><span>
             <a class="text-blue-500 hover:text-gray-400" href="{{ route($type . '_viewall.index') }}">View All</a>
         </span>

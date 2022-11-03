@@ -9,9 +9,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_name": {
         "column_name": "name",
@@ -23,9 +23,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": "required",
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_description": {
         "column_name": "description",
@@ -37,9 +37,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_def_assignee": {
         "column_name": "def_assignee",
@@ -51,9 +51,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_def_monitors": {
         "column_name": "def_monitors",
@@ -65,9 +65,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_slug": {
         "column_name": "slug",
@@ -79,9 +79,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": "required",
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_created_at": {
         "column_name": "created_at",
@@ -93,9 +93,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_updated_at": {
         "column_name": "updated_at",
@@ -107,8 +107,8 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     }
 }

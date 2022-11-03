@@ -31,7 +31,7 @@
         "column_name": "description",
         "column_type": "text",
         "label": "Description",
-        "control": "textarea",
+        "control": "text",
         "col_span": "12",
         "hidden_view_all": "true",
         "hidden_edit": null,

@@ -23,6 +23,6 @@ class Error extends Component
      */
     public function render()
     {
-        return view('components.render.alert');
+        return view('components.feedback.alert');
     }
 }

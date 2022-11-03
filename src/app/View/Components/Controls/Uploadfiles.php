@@ -24,8 +24,9 @@ class Uploadfiles extends Component
             $cateIdName[$value->id] = $value->name;
         }
         if (!isset(array_flip($cateIdName)[$colName])) {
-            $error = "Not found $colName in media_categories";
-            return view('components.render.alert')->with(compact('error'));
+            $message = "Not found $colName in media_categories";
+            $type = "warning";
+            return view('components.feedback.alert')->with(compact('message', 'type'));
         }
         if ($action === 'create') {
             $infMedia = [];

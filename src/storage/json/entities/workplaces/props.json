@@ -73,7 +73,7 @@
         "column_name": "def_publish_holiday_hour",
         "column_type": "float",
         "label": "Def Publish Holiday Hour",
-        "control": "dropdown",
+        "control": "text",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,

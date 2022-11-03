@@ -22,6 +22,6 @@ class Count extends Component
      */
     public function render()
     {
-        return view('components.render.count');
+        return view('components.renderer.count');
     }
 }

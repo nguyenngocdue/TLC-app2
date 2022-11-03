@@ -1,5 +1,6 @@
 @props(['attachment', 'model', 'relationship'])
 
+@isset($items)
 @if (count($items) == 0)
 <span class="rounded-full bg-green-100 px-2 py-1 text-xs font-semibold leading-tight text-green-700 dark:bg-green-700 dark:text-green-100">
     {{ count($items) }} items
@@ -59,5 +60,6 @@
     <span class="mt-2 rounded-full bg-green-100 px-2 py-1 text-xs font-semibold leading-tight text-green-700 dark:bg-green-700 dark:text-green-100">
         {{ $countRemaining }} more
     </span>
+    @endif
     @endif
     @endif

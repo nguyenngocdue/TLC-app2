@@ -9,23 +9,23 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_name": {
         "column_name": "name",
         "column_type": "string",
-        "label": "Name",
+        "label": "Production Priority No",
         "control": "text",
         "col_span": "12",
         "hidden_view_all": null,
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_quantity": {
         "column_name": "quantity",
@@ -37,9 +37,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_slug": {
         "column_name": "slug",
@@ -51,9 +51,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_production": {
         "column_name": "production",
@@ -65,9 +65,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": "required",
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_compliance": {
         "column_name": "compliance",
@@ -79,9 +79,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": "required",
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_description": {
         "column_name": "description",
@@ -93,9 +93,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_sub_project_id": {
         "column_name": "sub_project_id",
@@ -107,9 +107,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_prod_routing_id": {
         "column_name": "prod_routing_id",
@@ -121,9 +121,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": "required",
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_created_at": {
         "column_name": "created_at",
@@ -135,9 +135,9 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     },
     "_updated_at": {
         "column_name": "updated_at",
@@ -149,8 +149,8 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "validation": null,
+        "frozen_left": null,
+        "frozen_right": null
     }
 }
