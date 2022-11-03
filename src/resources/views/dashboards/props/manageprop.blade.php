@@ -13,7 +13,7 @@
             </div>
             <span>Manage Prop -></span>
         </div>
-        <x-controls.breadcrumb type={{$type}} />
+        <x-navigation.breadcrumb type={{$type}} />
         <form action="{{ route($type . '_mngprop.store') }}" method="POST">
             @csrf
             <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border shadow-sm bg-white dark:bg-gray-800 ">

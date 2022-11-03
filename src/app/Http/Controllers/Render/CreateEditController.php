@@ -30,8 +30,9 @@ abstract class CreateEditController extends Controller
 
 		if ($props  === false) {
 			$title = "Setting is missing";
-			$error =  "File \"$this->r_fileName\" is missing. <br/>Please create this file by \"manage prop\".";
-			return view('components.render.resultWarning')->with(compact('error', 'title'));
+			$type = 'warning';
+			$message =  "File \"$this->r_fileName\" is missing. <br/>Please create this file by \"manage prop\".";
+			return view('components.feedback.result')->with(compact('message', 'title', 'type'));
 		}
 
 		$type = $this->type;
@@ -192,8 +193,9 @@ abstract class CreateEditController extends Controller
 				$controlsMedia = $this->upload->store($request, $newData->id);
 				if (!is_array($controlsMedia)) {
 					$title = "Not find item";
-					$error = $controlsMedia->getMessage();
-					return view('components.render.resultWarning')->with(compact('error', 'title'));
+					$message = $controlsMedia->getMessage();
+					$type = "warning";
+					return view('components.feedback.result')->with(compact('message', 'title', 'type'));
 				}
 				if (count($controlsMedia) > 0) {
 					foreach ($controlsMedia as $key => $value) {

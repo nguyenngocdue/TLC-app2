@@ -5,7 +5,7 @@ namespace App\View\Components\Controls;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
-class Translationtime extends Component
+class Localtime extends Component
 {
 
 
@@ -55,6 +55,6 @@ class Translationtime extends Component
         ];
 
         // dd($day, $dataTime);
-        return view('components.controls.translationtime')->with(compact('day', 'dataTime', 'control'));
+        return view('components.controls.localtime')->with(compact('day', 'dataTime', 'control'));
     }
 }

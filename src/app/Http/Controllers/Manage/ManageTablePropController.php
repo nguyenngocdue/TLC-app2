@@ -30,9 +30,10 @@ abstract class ManageTablePropController extends Controller
             [$dataManage, $tableNames] = $this->manageService->pathTable($this->type, 'tables', 'tableName');
         } catch (\Throwable $error) {
             $title = 'Warning Settings';
-            $error = 'Setting Manage Table Prop Control json failed!
+            $message = 'Setting Manage Table Prop Control json failed!
             Please fix file controls.json before Run URL.';
-            return view('dashboards.props.error')->with(compact('title', 'error'));
+            $type = 'warning';
+            return view('components.feedback.result')->with(compact('title', 'message', 'type'));
         }
         if (!$dataManage) {
             $columnNames = [];

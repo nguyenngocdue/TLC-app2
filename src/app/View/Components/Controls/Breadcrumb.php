@@ -14,6 +14,6 @@ class Breadcrumb extends Component
     public function render()
     {
         $type = Str::plural($this->type);
-        return view('components.controls.breadcrumb')->with(compact('type'));
+        return view('components.navigation.breadcrumb')->with(compact('type'));
     }
 }

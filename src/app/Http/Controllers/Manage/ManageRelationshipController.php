@@ -30,8 +30,9 @@ abstract class ManageRelationshipController extends Controller
         $columnEloquentParams = $model->eloquentParams;
         if (!isset($columnEloquentParams)) {
             $title = 'Warning Settings';
-            $error = 'Eloquent Param is empty!';
-            return view('dashboards.props.error')->with(compact('title', 'error'));
+            $message = 'Eloquent Param is empty!';
+            $type = 'warning';
+            return view('components.feedback.result')->with(compact('title', 'message', 'type'));
         }
         $dataManage = $this->manageService->path($this->type, 'relationships');
         if (!$dataManage) {
