@@ -5,3 +5,9 @@
     @endif
     @endforeach
 </div>
+
+@error($colName)
+<span class="text-xs text-red-400 font-light" role="alert">
+    <strong>{{$message}}</strong>
+</span>
+@enderror

@@ -15,7 +15,7 @@
             </div>
             <span>View more →</span>
         </div>
-        <x-navigation.breadcrumb type={{$type}} />
+        <x-controls.breadcrumb type={{$type}} />
         <div class="grid grid-rows-1  bg-gray-100">
             <div class="w-full mx-auto flex flex-col min-h-screen items-center py-5">
                 {{-- {{dd($type)}} --}}
@@ -46,12 +46,15 @@
                         if(is_array($value_column_name)) $value_column_name = 'ARRAY';
                         $col_span=$value['col_span'];
                         $hiddenRow = $props[$key]['hidden_view_all'] === "true" ? "hidden_view_all":"";
+                        $checkValidation = !is_null($value['validation']) ? true : false;
                         @endphp
+
                         <div class='col-span-{{$col_span}}'>
                             <div class='grid grid-row-1 gap-3'>
                                 <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
                                     <div class='col-start-1 col-span-{{24/$col_span}} text-right'>
                                         <label class='text-gray-700 dark:text-gray-400  px-3 block text-base' title='{{$column_name}} / {{$control}}'>{{$label}}
+                                            {!!$checkValidation ? "<span class='text-red-400'>*</span>" : "" !!}
                                         </label>
                                     </div>
                                     <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2 text-left'>
@@ -104,6 +107,11 @@
                                         @case('checkbox')
                                         <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} />
                                         @break
+
+                                        @case('number')
+                                        <x-controls.number colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
+                                        @break
+
                                         @default
                                         <x-feedback.alert type="warning" title="Control" message="[{{$control}}] is not available" />
                                         @break
@@ -111,7 +119,7 @@
 
                                         @switch ($action)
                                         @case('edit')
-                                        <x-controls.localtime tablePath={{$tablePath}} :timeControls="$timeControls" :valColumnNames="$valColumnNames" id={{$id}} control={{$control}} columnName={{$column_name}} />
+                                        <x-controls.localtime tablePath={{$tablePath}} :timeControls="$timeControls" :valColumnNames="$valColumnNames" id={{$id}} control={{$control}} colName={{$column_name}} />
                                         @break
                                         @endswitch
                                     </div>

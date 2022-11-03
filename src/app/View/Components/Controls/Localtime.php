@@ -9,14 +9,14 @@ class Localtime extends Component
 {
 
 
-    public function __construct(private $timeControls, private $valColumnNames, private $columnName, private $control, private $id, private $tablePath)
+    public function __construct(private $timeControls, private $valColumnNames, private $control, private $id, private $tablePath, private $colName)
     {
     }
 
     public function render()
     {
         $selected = $this->id;
-        $columnName = $this->columnName;
+        $colName = $this->colName;
         $control = $this->control;
         $timeControls = $this->timeControls;
 
@@ -28,9 +28,9 @@ class Localtime extends Component
         $day = '';
         $valColumnNames = $this->valColumnNames;
 
-        // dd(in_array($columnName, $valColumnNames), $columnName, $valColumnNames);
-        if (in_array($control, $timeControls) && isset($currentTable->$columnName)) {
-            $day = $currentTable->$columnName;
+        // dd(in_array($colName, $valColumnNames), $colName, $valColumnNames);
+        if (in_array($control, $timeControls) && isset($currentTable->$colName)) {
+            $day = $currentTable->$colName;
         }
 
         $dateTimeInstance = date_create(str_replace('-', '/', $day));
@@ -55,6 +55,6 @@ class Localtime extends Component
         ];
 
         // dd($day, $dataTime);
-        return view('components.controls.localtime')->with(compact('day', 'dataTime', 'control'));
+        return view('components.controls.localtime')->with(compact('day', 'dataTime', 'control', 'colName'));
     }
 }
