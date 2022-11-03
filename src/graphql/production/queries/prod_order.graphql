@@ -8,7 +8,7 @@ extend type Query {
 
 type Prod_order {
     id: ID!
-    production_name: String!
+    name: String!
     slug: String!
     production: String!
     compliance: String!
@@ -24,7 +24,7 @@ type Prod_order {
 }
 
 input CreateProdOrderInput {
-    production_name: String!
+    name: String!
     slug: String!
     production: String!
     compliance: String!
@@ -37,7 +37,7 @@ input CreateProdOrderInput {
 }
 input UpdateProdOrderInput {
     id: ID!
-    production_name: String
+    name: String
     slug: String
     production: String
     compliance: String
