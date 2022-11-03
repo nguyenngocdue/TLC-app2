@@ -24,14 +24,15 @@ final class DuplicateProdLine
             $newProdLine->end = null;
             $newProdLine->status = $prodLine->status;
             $newProdLine->save();
-            $prodUserRuns = Prod_user_run::where('prod_line_id', $args['id'])->get();
-            foreach ($prodUserRuns as $prodUserRun) {
-                $newProdUserRun = $prodUserRun->replicate();
-                $newProdUserRun->prod_line_id = $newProdLine->id;
-                $newProdUserRun->save();
+            $userIds = [];
+            foreach ($prodLine->users as $user) {
+                array_push($userIds, $user->id);
+            }
+            if (!empty($userIds)) {
+                $newProdLine->users()->attach($userIds);
             }
             return [
-                'status' => 'Duplicate Production Run Line Successfully.'
+                'status' => 'Duplicate Production Run Line Successfully.',
             ];
         } catch (\Throwable $th) {
             return [

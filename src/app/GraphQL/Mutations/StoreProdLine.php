@@ -27,12 +27,7 @@ final class StoreProdLine
                 "updated_at" => $args["updated_at"] ?? null,
             ]);
             if (is_array($args['user_ids'])) {
-                foreach ($args['user_ids'] as $userId) {
-                    $prodUserRun = new Prod_user_run();
-                    $prodUserRun->prod_line_id = $prodLine->id;
-                    $prodUserRun->user_id = (int)$userId;
-                    $prodUserRun->save();
-                }
+                $prodLine->users()->attach($args['user_ids']);
             }
             return 'Complete Create Prod Line and add User to Prod Line Successfully';
         } catch (\Throwable $th) {

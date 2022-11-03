@@ -5,16 +5,11 @@ extend type Query {
     prod_runs: [Prod_run!]! @all
     prod_run(id: ID @eq): Prod_run @find
 }
-enum StatusProd {
-    STOPPED
-    RUNNING
-    FINISHED
-}
 type Prod_run {
     id: ID!
     prod_order_id: Int!
     prod_routing_link_id: Int!
-    status_prod: String!
+    status: String!
     total_hours: Float
     total_man_hours: Float
     created_at: DateTime
@@ -27,7 +22,7 @@ type Prod_run {
 input CreateProdRunInput {
     prod_order_id: Int!
     prod_routing_link_id: Int!
-    status_prod: StatusProd!
+    status: String!
     total_hours: Float
     total_man_hours: Float
     created_at: DateTime
@@ -37,7 +32,7 @@ input UpdateProdRunInput {
     id: ID!
     prod_order_id: Int
     prod_routing_link_id: Int
-    status_prod: StatusProd
+    status: String
     total_hours: Float
     total_man_hours: Float
     created_at: DateTime

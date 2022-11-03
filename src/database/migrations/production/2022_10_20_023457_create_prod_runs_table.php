@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('prod_order_id');
             $table->unsignedBigInteger('prod_routing_link_id');
             $table->unique(['prod_order_id', 'prod_routing_link_id']);
-            // $table->enum('status', ['stopped', 'running', 'finished']);
             $table->string('status');
             $table->double('total_hours')->nullable();
             $table->double('total_man_hours')->nullable();
