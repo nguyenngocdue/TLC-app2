@@ -15,11 +15,12 @@
     <script href="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://windmill-dashboard.vercel.app/assets/css/tailwind.output.css">
 
 </head>
 
 <body>
-    <div class="flex bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div class=" flex bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         <!-- Sidebar -->
         <x-sidebar />
         <div class="flex-0 flex w-full flex-col">
