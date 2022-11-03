@@ -69,9 +69,9 @@ abstract class CreateEditController extends Controller
 
 	public function update(Request $request, $id)
 	{
+		$dataInput = $request->except(['_token', '_method', 'created_at', 'updated_at']);
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
-		$dataInput = $request->input();
 
 		$cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
 		foreach ($cateAttachment as $key => $value) {
@@ -83,9 +83,6 @@ abstract class CreateEditController extends Controller
 				}
 			}
 		}
-
-		unset($dataInput['_token']);
-		unset($dataInput['_method']);
 
 		// Validation
 		$itemsValidation = [];
@@ -137,12 +134,9 @@ abstract class CreateEditController extends Controller
 
 	public function store(Request $request)
 	{
+		$dataInput = $request->except(['_token', '_method', 'created_at', 'updated_at']);
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
-		$dataInput = $request->input();
-
-		unset($dataInput['_token']);
-		unset($dataInput['_method']);
 
 		// Validation
 		$itemsValidation = [];

@@ -6,3 +6,8 @@
     <option class="py-1  border-gray-200 border-b " {{ $selected ? "selected":""}} value="{{$key+1}}" title="{{isset($data->description) ? "$data->description (#$data->id)" : "" }}">{{$data->name}}</option>
     @endforeach
 </select>
+@error($colName)
+<span class="text-xs text-red-400 font-light" role="alert">
+    <strong>{{$message}}</strong>
+</span>
+@enderror

@@ -8,7 +8,7 @@
             </div>
             <span>View more →</span>
         </div>
-        <x-navigation.breadcrumb type={{$type}} />
+        <x-controls.breadcrumb type={{$type}} />
         @isset($messages)
         <div class="m-auto mt-[15%] mb-4 rounded-lg border border-yellow-300 bg-yellow-50 p-4 dark:bg-yellow-200">
             @foreach ($messages as $message)
