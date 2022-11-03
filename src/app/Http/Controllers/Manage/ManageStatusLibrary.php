@@ -27,7 +27,7 @@ class ManageStatusLibrary extends Controller
     {
         $props = $this->readingFileService->getPath("$this->disk/$this->r_file_path");
         $error = is_null($props) ? "all_statuses.json file was null" : "";
-        if (is_null($props)) return view('components.render.alert')->with(compact('error'));
+        if (is_null($props)) return view('components.feedback.alert')->with(compact('error'));
         //  take a first word of field
         $sign = array_map(fn ($key) => ((string)$key)[0], array_keys($props));
         $usign =  array_unique($sign);

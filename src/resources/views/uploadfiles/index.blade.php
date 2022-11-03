@@ -81,20 +81,20 @@
         <table class="w-full whitespace-no-wrap">
             <thead>
                 <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                    <th class="px-4 py-3">#</th>
-                    <th class="px-4 py-3">Image</th>
-                    <th class="px-4 py-3">Files Name</th>
-                    <th class="px-4 py-3">URL</th>
-                    <th class="px-4 py-3">User Upload File</th>
-                    <th class="px-4 py-3">Edit</th>
+                    <th class="px-4 py-3 text-center">#</th>
+                    <th class="px-4 py-3 text-center">Image</th>
+                    <th class="px-4 py-3 text-center">Files Name</th>
+                    <th class="px-4 py-3 text-center">URL</th>
+                    <th class="px-4 py-3 text-center">User Upload File</th>
+                    <th class="px-4 py-3 text-center">Edit</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                 @php $i=1; @endphp
                 @forelse ($files as $file)
                 <tr class="text-gray-700 dark:text-gray-400">
-                    <td class="px-4 py-3 text-sm">{{$i++;}}</td>
-                    <td class="px-4 py-3 text-sm">
+                    <td class="px-4 py-3 text-center text-sm">{{$i++;}}</td>
+                    <td class="px-4 py-3 text-center text-sm">
                         @php
                         $url_thumbnail = $path.$file->url_thumbnail;
                         $url_media = $path.$file->url_media;
@@ -103,10 +103,10 @@
                             <img src="{{$url_thumbnail}}" alt="{{$file->filename}}" style="width: 150px; height: 150px;">
                         </a>
                     </td>
-                    <td class="px-4 py-3 text-sm">{{$file->filename}}</td>
-                    <td class="px-4 py-3 text-sm">{{$file->url_media}}</td>
-                    <td class="px-4 py-3 text-sm">{{$file->user->name}}</td>
-                    <td class="px-4 py-3 text-sm">
+                    <td class="px-4 py-3 text-center text-sm">{{$file->filename}}</td>
+                    <td class="px-4 py-3 text-center text-sm">{{$file->url_media}}</td>
+                    <td class="px-4 py-3 text-center text-sm">{{$file->user->name}}</td>
+                    <td class="px-4 py-3 text-center text-sm">
                         <div class="">
                             <button data-url="{{route('upload_add.destroy',$file->id)}}" ​ class="px-2 py-2 text-sm font-medium leading-5 text-red-600 rounded-lg dark:text-red-400 focus:outline-none focus:shadow-outline-gray btn-delete"><i class="fas fa-trash">
                                 </i></button>
@@ -124,7 +124,7 @@
             </tbody>
         </table>
     </div>
-    <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+    <div class="grid px-4 py-3 text-center text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
         <span class="flex items-center col-span-3">
             Showing 21-30 of 100
         </span>

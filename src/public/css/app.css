@@ -927,6 +927,9 @@ video {
 .cursor-pointer {
   cursor: pointer;
 }
+.cursor-default {
+  cursor: default;
+}
 .select-all {
   -webkit-user-select: all;
      -moz-user-select: all;
@@ -1123,6 +1126,9 @@ video {
 }
 .border-r-0 {
   border-right-width: 0px;
+}
+.border-t-2 {
+  border-top-width: 2px;
 }
 .border-solid {
   border-style: solid;
@@ -1911,6 +1917,10 @@ video {
 .focus\:border-blue-500:focus {
   --tw-border-opacity: 1;
   border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+.focus\:border-purple-400:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(192 132 252 / var(--tw-border-opacity));
 }
 .focus\:bg-gray-200:focus {
   --tw-bg-opacity: 1;
