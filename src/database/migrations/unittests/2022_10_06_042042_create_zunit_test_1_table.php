@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->text('text1')->nullable();
             $table->text('text2')->nullable();
-            $table->unsignedBigInteger('dropdown1');
-            $table->unsignedBigInteger('radio1');
+            $table->text('text3')->nullable();
+            $table->unsignedBigInteger('dropdown1')->nullable();
+            $table->unsignedBigInteger('radio1')->nullable();
             $table->unsignedBigInteger('boolean1')->nullable();
             $table->foreign('dropdown1')->references('id')->on('workplaces')->onDelete('cascade');
             $table->foreign('radio1')->references('id')->on('workplaces')->onDelete('cascade');
