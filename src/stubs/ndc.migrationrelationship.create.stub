@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 return new class extends Migration
@@ -31,7 +32,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('{{tableOne}}_id');
             $table->unsignedBigInteger('{{tableTwo}}_id');
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
             $table->unique(['{{tableOne}}_id', '{{tableTwo}}_id'],$this->checkRelationShip()[1]);
             $table->foreign('{{tableOne}}_id')->references('id')->on(Str::plural('{{tableOne}}'))->onDelete('cascade');
             $table->foreign('{{tableTwo}}_id')->references('id')->on(Str::plural('{{tableTwo}}'))->onDelete('cascade');
