@@ -8,8 +8,6 @@ class Toggle extends Component
 {
     public function __construct(private $colName, private $valColName)
     {
-        $this->colName = $colName;
-        $this->valColName = $valColName;
     }
 
     public function render()

@@ -8,10 +8,6 @@ class Textarea extends Component
 {
     public function __construct(private $colName, private $valColName, private $action, private $control)
     {
-        $this->colName = $colName;
-        $this->valColName = $valColName;
-        $this->action = $action;
-        $this->control = $control;
     }
 
     public function render()

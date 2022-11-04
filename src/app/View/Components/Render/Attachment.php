@@ -7,12 +7,8 @@ use Illuminate\View\Component;
 
 class Attachment extends Component
 {
-    public $attachment, $model, $relationship;
-    public function __construct($attachment, $model, $relationship)
+    public function __construct(private $attachment, private $model, private $relationship)
     {
-        $this->attachment = $attachment;
-        $this->model = $model;
-        $this->relationship = $relationship;
     }
 
     public function render()

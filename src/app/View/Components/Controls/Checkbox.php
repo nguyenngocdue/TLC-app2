@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 
 class Checkbox extends Component
 {
-    public function __construct(private $id, private  $colName, private  $idItems, private  $action)
+    public function __construct(private $id, private $colName, private $idItems, private $action)
     {
     }
 

@@ -6,11 +6,6 @@ use Illuminate\View\Component;
 
 class Warning extends Component
 {
-    public function __construct()
-    {
-        //
-    }
-
     public function render()
     {
         return view('components.controls.warning');

@@ -12,13 +12,13 @@
     </li>
     <li>
         <span>
-            <a class="text-blue-500 hover:text-gray-400" href="{{ route(Str::singular($type) . '_mngprop.index')}}"> Props</a>
+            <a class="text-blue-500 hover:text-gray-400" href="{{ route($singular . '_mngprop.index')}}"> Props</a>
         </span>
         <span class="px-2"> / </span>
     </li>
     <li>
         <span class="">
-            <a class="text-blue-500 hover:text-gray-400" href="{{ route(Str::singular($type) .'_mngrls.index') }}"> Relationships</a>
+            <a class="text-blue-500 hover:text-gray-400" href="{{ route($singular .'_mngrls.index') }}"> Relationships</a>
         </span>
     </li>
 </ol>
