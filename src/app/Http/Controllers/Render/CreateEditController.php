@@ -67,68 +67,103 @@ abstract class CreateEditController extends Controller
 		return view('dashboards.pages.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'tablePath', 'idItems'));
 	}
 
-	public function update(Request $request, $id)
+	private function _validate($props, $request)
 	{
-		$dataInput = $request->except(['_token', '_method', 'created_at', 'updated_at']);
-		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$type = Str::plural($this->type);
+		// Validation
+		$itemsValidation = [];
+		foreach ($props as $value) {
+			$itemsValidation[$value['column_name']] = is_null($value['validation']) ? "" : $value['validation'];
+		}
+		$request->validate($itemsValidation);
+	}
 
+	private function deleteMediaIfNeeded($dataInput)
+	{
 		$cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
-		foreach ($cateAttachment as $key => $value) {
+		foreach ($cateAttachment as $value) {
 			if (isset($dataInput[$value->name . "_deleted"])) {
-				$idsDelete =  explode(',', $dataInput[$value->name . "_deleted"]);
+				$idsDelete = explode(',', $dataInput[$value->name . "_deleted"]);
 				foreach ($idsDelete as $value) {
 					$media = Media::find($value);
 					is_null($media) ? "" : $media->delete();
 				}
 			}
 		}
+	}
 
-		// Validation
-		$itemsValidation = [];
-		foreach ($props as $key => $value) {
-			$itemsValidation[$value['column_name']] = is_null($value['validation']) ? "" : $value['validation'];
+	private function handleToggle($method, $props, &$dataInput)
+	{
+		switch ($method) {
+			case 'store':
+				// filter controls which are switch control - set its value is null
+				$switchControls = array_filter($props, fn ($prop) => $prop['control'] === 'switch');
+				$switchControls = array_values(array_map(fn ($item) => $item['column_name'], $switchControls));
+				// dd($switchControls);
+				foreach ($switchControls as $switch) {
+					$dataInput[$switch] = !isset($dataInput[$switch]) ? null : $dataInput[$switch];
+				}
+				break;
+			case 'update':
+				foreach ($props as $value) {
+					if ($value['control'] === 'switch') {
+						$item = $value['column_name'];
+						isset($dataInput[$item]) ? $data[$item] = 1 : $data[$item] = null;
+					};
+				}
+				break;
 		}
-		$request->validate($itemsValidation);
+	}
 
-		$data = $this->data::find($id);
-		// chanage value from toggle
-		foreach ($props as $key => $value) {
-			if ($value['control'] === 'switch') {
-				$item = $value['column_name'];
-				isset($dataInput[$item]) ? $data[$item] = 1 : $data[$item] = null;
-			};
-		}
-
-		// Save data to database
-		$data->fill($dataInput);
-		$data->save();
-		if ($data->save()) Toastr::success("$this->type updated successfully", "Update $this->type");
-
-		// multisection - checkbox
+	private function syncManyToManyRelationship($data, $dataInput)
+	{
 		$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $data->getTable(), "relationships.json");
 		if ($relationshipFile) {
-			foreach ($relationshipFile as $key => $value) {
+			foreach ($relationshipFile as $value) {
 				if ($value["eloquent"] === "belongsToMany") {
-					$colNamePivot = isset($dataInput[$value['control_name']]) ?  $dataInput[$value['control_name']] : [];
+					$colNamePivots = isset($dataInput[$value['control_name']]) ?  $dataInput[$value['control_name']] : [];
 					$fn = $value['relationship'];
-					$data->{$fn}()->sync($colNamePivot);
+					$data->{$fn}()->sync($colNamePivots);
 				}
 			}
 		}
+	}
 
-		// Save pictures to Media of database
+	private function handleUpload($request, $data)
+	{
 		if (count($request->files) > 0) {
-			$controlsMedia = $this->upload->store($request, $id);
+			$controlsMedia = $this->upload->store($request, $data->id);
 			if (!is_array($controlsMedia)) {
-				$error = $controlsMedia->getMessage();
-				Toastr::error("$this->type updated failed", $error);
+				$title = "Not find item";
+				$message = $controlsMedia->getMessage();
+				$type = "warning";
+				return view('components.feedback.result')->with(compact('message', 'title', 'type'));
 			}
-			foreach ($controlsMedia as $key => $value) {
-				$data->media()->save(Media::find($key));
+			if (count($controlsMedia) > 0) {
+				foreach ($controlsMedia as $key => $value) {
+					$data->media()->save(Media::find($key));
+				}
 			}
 		}
+	}
 
+	public function update(Request $request, $id)
+	{
+		$dataInput = $request->except(['_token', '_method', 'created_at', 'updated_at']);
+		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+		$type = Str::plural($this->type);
+
+		$this->deleteMediaIfNeeded($dataInput);
+		$this->_validate($props, $request);
+		$this->handleToggle('update', $props, $dataInput);
+
+		$data = $this->data::find($id);
+		$data->fill($dataInput);
+		$data->save();
+
+		$this->syncManyToManyRelationship($data, $dataInput);
+		$this->handleUpload($request, $data);
+
+		if ($data->save()) Toastr::success("$this->type updated successfully", "Update $this->type");
 		return redirect(route("{$type}_edit.edit", $id));
 	}
 
@@ -138,75 +173,17 @@ abstract class CreateEditController extends Controller
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 
-		// Validation
-		$itemsValidation = [];
-		foreach ($props as $key => $value) {
-			$itemsValidation[$value['column_name']] = is_null($value['validation']) ? "" : $value['validation'];
-		}
-		$request->validate($itemsValidation);
+		// $this->deleteMediaIfNeeded($dataInput);
+		$this->_validate($props, $request);
+		$this->handleToggle('store', $props, $dataInput);
 
-		// filter controls which are switch control - set its value is null
-		$witchControls = [];
-		foreach ($props as $key => $value) {
-			if ($value['control'] === "switch") {
-				array_push($witchControls, $value['column_name']);
-			}
-		}
-		foreach ($witchControls as $value) {
-			if (isset($dataInput[$value]) === false) {
-				$dataInput[$value] = null;
-			}
-		}
+		$data = $this->data::create($dataInput);
 
-		// chanage value from toggle
-		foreach ($props as $key => $value) {
-			if ($value['control'] === 'toggle') {
-				$item = $value['column_name'];
-				isset($dataInput[$item]) ? $newData[$item] = 1 : $newData[$item] = null;
-			};
-		}
-
-		// Save data to database
-		$data = $this->data;
-		$newData = $data::create($dataInput);
-
-		if (isset($newData)) {
-			$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $newData->getTable(), "relationships.json");
-			// multiselection - checkbox
-			if ($relationshipFile) {
-				foreach ($relationshipFile as $key => $value) {
-					if ($value["eloquent"] === "belongsToMany") {
-						$colNamePivot = isset($dataInput[$value['control_name']]) ? $dataInput[$value['control_name']] : [];
-						$fn = $value['relationship'];
-						$newData->{$fn}()->sync($colNamePivot);
-					}
-				}
-			}
-			// Save pictures to Media of database
-			if (count($request->files) > 0) {
-				$controlsMedia = $this->upload->store($request, $newData->id);
-				if (!is_array($controlsMedia)) {
-					$title = "Not find item";
-					$message = $controlsMedia->getMessage();
-					$type = "warning";
-					return view('components.feedback.result')->with(compact('message', 'title', 'type'));
-				}
-				if (count($controlsMedia) > 0) {
-					foreach ($controlsMedia as $key => $value) {
-						$newData->media()->save(Media::find($key));
-					}
-				}
-			}
-		}
-
-		if ($newData) {
+		if (isset($data)) {
+			$this->syncManyToManyRelationship($data, $dataInput);
+			$this->handleUpload($request, $data);
 			Toastr::success("$this->type created successfully", "Create $this->type");
-		} else {
-			return redirect()->back();
 		}
-		$idNewData = $newData->id;
-
-		$type = Str::plural($this->type);
-		return redirect(route("{$type}_edit.edit", $idNewData));
+		return redirect(route("{$type}_edit.edit", $data->id));
 	}
 }
