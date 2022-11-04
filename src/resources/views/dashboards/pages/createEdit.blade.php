@@ -44,9 +44,10 @@
                         $control = $value['control'];
                         $value_column_name = $action === "edit" ? $values->{$column_name} : "";
                         if(is_array($value_column_name)) $value_column_name = 'ARRAY';
-                        $col_span=$value['col_span'];
+                        $col_span = $value['col_span'];
                         $hiddenRow = $props[$key]['hidden_view_all'] === "true" ? "hidden_view_all":"";
-                        $checkValidation = !is_null($value['validation']) ? true : false;
+
+                        $isRequired = in_array("required", explode("|",$value['validation']));
                         @endphp
 
                         <div class='col-span-{{$col_span}}'>
@@ -54,14 +55,17 @@
                                 <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
                                     <div class='col-start-1 col-span-{{24/$col_span}} text-right'>
                                         <label class='text-gray-700 dark:text-gray-400  px-3 block text-base' title='{{$column_name}} / {{$control}}'>{{$label}}
-                                            {!!$checkValidation ? "<span class='text-red-400'>*</span>" : "" !!}
+                                            {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
                                         </label>
                                     </div>
                                     <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2 text-left'>
                                         @if (is_null($control))
                                         <h2 class="text-red-400">{{"Control of this $column_name has not been set"}}</h2>
                                         @endif
+
+                                        <!-- Invisible anchor for scrolling when users click on validation fail message -->
                                         <strong class="scroll-mt-20 snap-start" id="{{$column_name}}"></strong>
+
                                         @switch ($control)
                                         @case($timeControls[0])
                                         @case($timeControls[1])
@@ -72,6 +76,7 @@
                                         @case($timeControls[6])
                                         <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
                                         @break
+
                                         @case('text')
                                         <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
                                         @break

@@ -134,7 +134,7 @@
                                             True</option>
                                     </select>
                                 </td>
-                                <td class="px-4 py-3 text-center text-center text-sm">
+                                <td class="px-4 py-3 text-center text-sm">
                                     @if ($colorLines[$key] == 'removed')
                                     <button class="btn btn-danger btn-delete" data-url="{{ route($type . '_mngprop.destroy', $name) }}" ​ type="button"><i class="fas fa-trash"></i></button>
                                     @endif
@@ -205,7 +205,7 @@
                                         <option value="true">True</option>
                                     </select>
                                 </td>
-                                <td class="px-4 py-3 text-center text-center text-sm">
+                                <td class="px-4 py-3 text-center text-sm">
                                     @if (isset($colorLines))
                                     <button class="btn btn-danger btn-delete" data-url="{{ route('mngprop.destroy', $name) }}" ​ type="button"><i class="fas fa-trash"></i></button>
                                     @endif

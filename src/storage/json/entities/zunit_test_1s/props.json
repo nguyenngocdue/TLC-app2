@@ -23,7 +23,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": null,
+        "validation": "",
         "frozen_left": null,
         "frozen_right": null
     },
@@ -93,7 +93,7 @@
         "hidden_edit": null,
         "new_line": null,
         "type_line": "default",
-        "validation": null,
+        "validation": "required",
         "frozen_left": null,
         "frozen_right": null
     },
