@@ -62,16 +62,16 @@
                     <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
                         @foreach ($data as $value)
                         <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3 text-center text-sm">
+                            <td class="px-4 py-3  text-sm">
                                 {{ $value->id }}
                             </td>
-                            <td class="px-4 py-3 text-center text-sm">
+                            <td class="px-4 py-3 text-sm">
                                 {{ $value->name }}
                             </td>
-                            <td class="px-4 py-3 text-center text-sm" s>
+                            <td class="px-4 py-3 text-sm" s>
                                 {{ $value->guard_name }}
                             </td>
-                            <td class="px-4 py-3 text-center text-sm">
+                            <td class="px-4 py-3 text-sm">
                                 <div class="flex">
                                     <button data-url="{{ route($type . '.edit', $value->id) }}" class="btn-edit focus:shadow-outline-gray rounded-lg px-2 py-2 text-sm font-medium leading-5 text-red-600 focus:outline-none dark:text-red-400" type="button" onclick="toggleModal('modal-id')">
                                         <i class="fas fa-edit"></i>

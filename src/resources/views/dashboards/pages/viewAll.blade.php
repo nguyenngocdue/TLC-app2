@@ -75,7 +75,7 @@
                         @else
                         @foreach ($users as $key => $user)
                         <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3 text-center text-center text-sm">
+                            <td class="px-4 py-3 text-sm">
                                 <button class="focus:shadow-outline-gray btn-delete-user rounded-lg px-2 py-2 text-sm font-medium leading-5 text-red-600 focus:outline-none dark:text-red-400" data-url="{{ route($type . '_viewall.destroy', $user->id) }}" ​ type="button"><i class="fas fa-trash"></i></button>
                             </td>
                             @foreach ($data as $key1 => $value)
@@ -85,17 +85,17 @@
                             $numberRender = str_pad($user[$value['column_name']], 6, '0', STR_PAD_LEFT);
                             $result = '#' . substr($numberRender, 0, 3) . '.' . substr($numberRender, 3, 6);
                             @endphp
-                            <td class="{{ $key1 . '_td' }} px-4 py-3 text-center text-sm">
+                            <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
                                 <a href="{{ route($type . '_edit.edit', $user[$value['column_name']]) }}" class="text-sm font-normal text-blue-500">{{ $result }}</a>
                             </td>
                             @else
-                            <td class="{{ $key1 . '_td' }} px-4 py-3 text-center text-sm">
+                            <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
 
                                 <a href="{{ route($type . '_edit.edit', $user[$value['column_name']]) }}">{{ $user[$value['column_name']] }}</a>
                             </td>
                             @endif
                             @else
-                            <td class="{{ $key1 . '_td' }} px-4 py-3 text-center text-sm">
+                            <td class="{{ $key1 . '_td' }} px-4 py-3 text-sm">
                                 @if (!is_array($user[$value['column_name']]))
                                 @if ($value['render'] === 'relationship')
                                 @php
