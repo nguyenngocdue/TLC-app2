@@ -17,8 +17,8 @@ class Zunit_test_1 extends Model
     public $eloquentParams = [
         "workplaceDropDown1" => ['belongsTo', Workplace::class, 'dropdown1'],
         "workplaceRadio1" => ['belongsTo', Workplace::class, 'radio1'],
-        "workplaceRel1" => ['belongsToMany', Workplace::class, 'zunit_test_1s_workplaces_rel_1', 'zunit_test_1_id', 'workplace_id'],
-        "workplaceRel2" => ['belongsToMany', Workplace::class, 'zunit_test_1s_workplaces_rel_2', 'zunit_test_1_id', 'workplace_id'],
+        "workplaceRel1" => ['belongsToMany', Workplace::class, 'zunit_test_1s_workplaces_rel_1', 'zunit_test_1_id', 'workplace_id', 'checkbox1'],
+        "workplaceRel2" => ['belongsToMany', Workplace::class, 'zunit_test_1s_workplaces_rel_2', 'zunit_test_1_id', 'workplace_id', 'checkbox2'],
     ];
     public function workplaceDropDown1()
     {

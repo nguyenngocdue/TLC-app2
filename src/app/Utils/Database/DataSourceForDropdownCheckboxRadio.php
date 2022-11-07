@@ -1,9 +1,12 @@
 <?php
 
-class DatasourceForDropdownCheckboxRadio
+// namespace App\Utils\Database;
+
+// class DatasourceForDropdownCheckboxRadio
+// {
+function GetFromDB()
 {
-    public static function GetFromDB()
-    {
-        return [];
-    }
+    dd("fsdfsfsdfsdfsf");
+    return [];
 }
+// }

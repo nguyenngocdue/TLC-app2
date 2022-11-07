@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 
 class Uploadfiles extends Component
 {
-    public function __construct(private $id, private $colName, private $action, private $tablePath)
+    public function __construct(private $id, private $colName, private $action, private $tablePath, private $labelName)
     {
     }
 
@@ -17,6 +17,7 @@ class Uploadfiles extends Component
         $id = $this->id;
         $colName = $this->colName;
         $action = $this->action;
+        $labelName = $this->labelName;
 
         $cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
         $cateIdName = [];
@@ -32,7 +33,8 @@ class Uploadfiles extends Component
             $infMedia = [];
             $cateIdName = [];
             $url_media = "";
-            return view('components.controls.uploadfiles')->with(compact('action', 'infMedia', 'cateIdName', 'colName', 'path'));
+            $labelName = "";
+            return view('components.controls.uploadfiles')->with(compact('action', 'infMedia', 'cateIdName', 'colName', 'path', "labelName"));
         }
         $newItemModel = $this->tablePath::find($id);
         $mediaOnModel = $newItemModel->media;
@@ -48,6 +50,6 @@ class Uploadfiles extends Component
             $attachHasMedia[$cateIdName[$cat]][] = $media;
         }
 
-        return view('components.controls.uploadfiles')->with(compact('action', 'attachHasMedia', 'cateIdName', 'colName', 'path'));
+        return view('components.controls.uploadfiles')->with(compact('action', 'attachHasMedia', 'cateIdName', 'colName', 'path', 'labelName'));
     }
 }

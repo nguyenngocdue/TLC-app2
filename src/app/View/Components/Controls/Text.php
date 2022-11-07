@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 class Text extends Component
 {
 
-    public function __construct(private $colName, private $valColName, private $action, private $strTimeControl, private $control)
+    public function __construct(private $colName, private $valColName, private $action, private $strTimeControl, private $control, private $labelName)
     {
     }
 
@@ -18,6 +18,7 @@ class Text extends Component
         $action = $this->action;
         $timeControls = $this->strTimeControl;
         $control = $this->control;
-        return view('components.controls.text')->with(compact('colName', 'valColName', 'action', 'timeControls', 'control'));
+        $labelName = $this->labelName;
+        return view('components.controls.text')->with(compact('colName', 'valColName', 'action', 'timeControls', 'control', 'labelName'));
     }
 }

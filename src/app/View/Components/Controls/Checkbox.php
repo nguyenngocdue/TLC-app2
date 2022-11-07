@@ -2,22 +2,32 @@
 
 namespace App\View\Components\Controls;
 
+use App\Helpers\Helper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Checkbox extends Component
 {
-    public function __construct(private $id, private $colName, private $idItems, private $action)
+    public function __construct(private $id, private $colName, private $idItems, private $action, private $tablePath, private $labelName)
     {
     }
 
     public function render()
     {
+
         $span = 6;
-        $colName = $this->colName;
-        $dataSource = DB::table('workplaces')->get();
-        $idItems = $this->idItems;
         $action = $this->action;
-        return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idItems', 'action', 'span'));
+        $colName = $this->colName;
+        $idItems = $this->idItems;
+        $labelName = $this->labelName;
+
+
+        $dataSource = Helper::getDatasource($this->id, new $this->tablePath, $colName);
+        if (!is_array($dataSource)) {
+            $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in Model).";
+            $type = 'warning';
+            return view('components.feedback.alert')->with(compact('message', 'type'));
+        }
+        return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idItems', 'action', 'span', 'labelName'));
     }
 }

@@ -10,6 +10,8 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+
 
 abstract class CreateEditController extends Controller
 {
@@ -63,16 +65,14 @@ abstract class CreateEditController extends Controller
 			}
 		}
 
-		// dd($idItems);
 		return view('dashboards.pages.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'tablePath', 'idItems'));
 	}
 
 	private function _validate($props, $request)
 	{
-		// Validation
 		$itemsValidation = [];
 		foreach ($props as $value) {
-			$itemsValidation[$value['column_name']] = is_null($value['validation']) ? "" : $value['validation'];
+			is_null($value['validation']) ? "" : $itemsValidation[$value['column_name']] = $value['validation'];
 		}
 		$request->validate($itemsValidation);
 	}
@@ -149,6 +149,7 @@ abstract class CreateEditController extends Controller
 	public function update(Request $request, $id)
 	{
 		$dataInput = $request->except(['_token', '_method', 'created_at', 'updated_at']);
+
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 

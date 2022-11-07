@@ -15,20 +15,18 @@
             </div>
             <span>View more →</span>
         </div>
+
         <x-controls.breadcrumb type={{$type}} />
         <div class="grid grid-rows-1  bg-gray-100">
             <div class="w-full mx-auto flex flex-col min-h-screen items-center py-5">
-                {{-- {{dd($type)}} --}}
                 @php
                 $editType = Str::plural($type);
-                // dd(isset($values), $values);
+                $labelValidation = "";
                 $id = $action === "edit" ? $values->id : "";
-                $idAvatar = isset($values['avatar']) ? $values['avatar']: "";
                 @endphp
-                @include('components.feedback.alertValidations')
+                <x-controls.headeralertvalidation :strProps="$props" />
                 <form class="w-full p-4 z-0 px-4 py-3 text-center mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
                     @csrf
-                    {{-- <div class="mx-auto max-w-4xl flex-1"> --}}
                     <div class="flex flex-col grid-cols-12">
                         @method($action === "create" ? 'POST' : 'PUT')
                         @php
@@ -74,47 +72,47 @@
                                         @case($timeControls[4])
                                         @case($timeControls[5])
                                         @case($timeControls[6])
-                                        <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
+                                        <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} labelName={{$label}} />
                                         @break
 
                                         @case('text')
-                                        <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
+                                        <x-controls.text colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} labelName={{$label}} />
                                         @break
 
                                         @case('id')
-                                        <x-controls.id colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
+                                        <x-controls.id colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} labelName={{$label}} />
                                         @break
 
                                         @case('textarea')
-                                        <x-controls.textarea colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} control={{$control}} />
+                                        <x-controls.textarea colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} control={{$control}} labelName={{$label}} />
                                         @break
 
                                         @case ('dropdown')
-                                        <x-controls.dropdown id={{$id}} colName={{$column_name}} type={{$type}} tablePath={{$tablePath}} action={{$action}} />
+                                        <x-controls.dropdown id={{$id}} colName={{$column_name}} type={{$type}} tablePath={{$tablePath}} action={{$action}} labelName={{$label}} />
                                         @break
 
                                         @case ('radio')
-                                        <x-controls.radio id={{$id}} colName={{$column_name}} tablePath={{$tablePath}} action={{$action}} />
+                                        <x-controls.radio id={{$id}} colName={{$column_name}} tablePath={{$tablePath}} action={{$action}} labelName={{$label}} />
                                         @break
 
                                         @case ('dropdown_multi')
-                                        <x-controls.dropdownmulti colName={{$column_name}} :idItems="$idItems" action={{$action}} />
+                                        <x-controls.dropdownmulti colName={{$column_name}} :idItems="$idItems" action={{$action}} tablePath={{$tablePath}} labelName={{$label}} />
                                         @break
 
                                         @case('attachment')
-                                        <x-controls.uploadfiles id={{$id}} colName={{$column_name}} action={{$action}} tablePath={{$tablePath}} />
+                                        <x-controls.uploadfiles id={{$id}} colName={{$column_name}} action={{$action}} tablePath={{$tablePath}} labelName={{$label}} />
                                         @break
 
                                         @case('switch')
-                                        <x-controls.toggle id={{$id}} colName={{$column_name}} valColName={{$value_column_name}} />
+                                        <x-controls.toggle id={{$id}} colName={{$column_name}} valColName={{$value_column_name}} labelName={{$label}} />
                                         @break
 
                                         @case('checkbox')
-                                        <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} />
+                                        <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} tablePath={{$tablePath}} labelName={{$label}} />
                                         @break
 
                                         @case('number')
-                                        <x-controls.number colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} />
+                                        <x-controls.number colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} labelName={{$label}} />
                                         @break
 
                                         @default

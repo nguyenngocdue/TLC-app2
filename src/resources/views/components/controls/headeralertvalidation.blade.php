@@ -8,13 +8,16 @@
         @php
         $outErrors = json_decode($errors->default);
         $colNameErrors = (array)$outErrors;
-        // dd($colNameErrors);
         @endphp
         <span class="font-medium">Error: The operation failed.</span>
         <ul class="mt-1.5 ml-4 text-red-700 list-disc list-inside">
             @foreach($colNameErrors as $key => $value)
             <li>
-                <a href="#{{$key}}" title="{{$key}}">{{$value[0]}}</a>
+                @foreach($props as $keyProps => $prop)
+                @if ($prop['column_name']=== $key)
+                <a href="#{{$key}}" title="{{$key}}">{{str_replace($key, "[".$prop['label']."]", $value[0])}}</a>
+                @endif
+                @endforeach
             </li>
             @endforeach
         </ul>

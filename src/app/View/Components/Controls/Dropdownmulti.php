@@ -2,22 +2,31 @@
 
 namespace App\View\Components\Controls;
 
-use Illuminate\Support\Facades\DB;
+use App\Helpers\Helper;
 use Illuminate\View\Component;
 
 class Dropdownmulti extends Component
 {
-    public function __construct(private $colName, private $idItems, private $action)
+    public function __construct(private $colName, private $idItems, private $action, private $tablePath, private $labelName)
     {
     }
 
     public function render()
     {
-        $span = 4; //<< 12/6/4/3/2/1
-        $colName = $this->colName;
-        $dataSource = DB::table('workplaces')->get();
-        $idItems = $this->idItems;
+        $span = 6;
         $action = $this->action;
-        return view('components.controls.dropdownmulti')->with(compact('dataSource', 'colName', 'idItems', 'action', 'span'));
+        $colName = $this->colName;
+        $idItems = $this->idItems;
+        $labelName = $this->labelName;
+
+
+        $dataSource = Helper::getDatasource(0,  new  $this->tablePath, $colName);
+        if (!is_array($dataSource)) {
+            $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in Model).";
+            $type = 'warning';
+            return view('components.feedback.alert')->with(compact('message', 'type'));
+        }
+
+        return view('components.controls.dropdownmulti')->with(compact('dataSource', 'colName', 'idItems', 'action', 'span', 'labelName'));
     }
 }
