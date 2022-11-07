@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\DB;
 
 class Helper
 {
-    public static function getDatasource($id = 0, $modelPath, $colName)
+    public static function getDatasource($modelPath, $colName)
     {
-        $eloquentParam = $modelPath->eloquentParams;
-        // dd($eloquentParam, $colName);
+        $instance = new $modelPath;
+        $eloquentParam = $instance->eloquentParams;
         $keyNameEloquent = "";
         foreach ($eloquentParam as $key => $value) {
-            if (isset(array_flip($value)[$colName])) {
+            if (in_array($colName, $value)) {
                 $keyNameEloquent = $key;
                 break;
             }
@@ -22,9 +22,7 @@ class Helper
         $insTableSource = new $pathTableSource;
         $tableName = $insTableSource->getTable();
         $_dataSource = DB::table($tableName)->orderBy('name')->get();
-        $currentEntity = is_null($modelPath::find($id)) ? "" : $modelPath::find($id)->getAttributes();
-        $dataSource = [$tableName => json_decode($_dataSource), 'currentEntity' => $currentEntity];
-
+        $dataSource = [$tableName => $_dataSource];
         return $dataSource;
     }
 

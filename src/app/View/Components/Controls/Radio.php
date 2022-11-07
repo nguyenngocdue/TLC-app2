@@ -18,14 +18,17 @@ class Radio extends Component
         $action = $this->action;
         $colName = $this->colName;
         $labelName = $this->labelName;
+        $modelPath = $this->tablePath;
 
-        $dataSource = Helper::getDatasource($this->id, new  $this->tablePath, $colName);
-        if (!is_array($dataSource)) {
+        $dataSource = Helper::getDatasource($modelPath, $colName);
+        $currentEntity = is_null($modelPath::find($this->id)) ? "" : $modelPath::find($this->id)->getAttributes();
+
+        if (is_null($dataSource)) {
             $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in Model).";
             $type = 'warning';
             return view('components.feedback.alert')->with(compact('message', 'type'));
         }
 
-        return view('components.controls.radio')->with(compact('dataSource', 'colName', 'span', 'action', 'labelName'));
+        return view('components.controls.radio')->with(compact('dataSource', 'currentEntity', 'colName', 'span', 'action', 'labelName'));
     }
 }

@@ -122,7 +122,7 @@
 
                                         @switch ($action)
                                         @case('edit')
-                                        <x-controls.localtime tablePath={{$tablePath}} :timeControls="$timeControls" :valColumnNames="$valColumnNames" id={{$id}} control={{$control}} colName={{$column_name}} />
+                                        <x-controls.localtime tablePath={{$tablePath}} :timeControls="$timeControls" :valColumnNames="$valColumnNames" id={{$id}} control={{$control}} colName={{$column_name}} labelName={{$label}} />
                                         @break
                                         @endswitch
                                     </div>

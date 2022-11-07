@@ -18,10 +18,11 @@ class Dropdownmulti extends Component
         $colName = $this->colName;
         $idItems = $this->idItems;
         $labelName = $this->labelName;
+        $modelPath = $this->tablePath;
 
+        $dataSource = Helper::getDatasource($modelPath, $colName);
 
-        $dataSource = Helper::getDatasource(0,  new  $this->tablePath, $colName);
-        if (!is_array($dataSource)) {
+        if (is_null($dataSource)) {
             $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in Model).";
             $type = 'warning';
             return view('components.feedback.alert')->with(compact('message', 'type'));
