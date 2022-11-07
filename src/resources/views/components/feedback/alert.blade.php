@@ -1,7 +1,5 @@
+@props(['type' => 'info', 'message' => '[Message] is missing', 'title' => 'title'])
 @php
-$type = $type ?? "info";
-$message = $message ?? "[Message] is missing";
-$title = $title ?? $type;
 switch($type){
 case "success":
 $class = "text-green-700 border-green-300 bg-green-50 dark:bg-green-200";

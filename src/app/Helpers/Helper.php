@@ -30,7 +30,7 @@ class Helper
 
     public static function customMessageValidation($message, $colName, $labelName)
     {
-        $newMessage = str_replace($colName, strtolower("[" . $labelName . "]"), $message);
+        $newMessage = str_replace($colName, ("<strong>" . $labelName . "</strong>"), $message);
         return $newMessage;
     }
 }

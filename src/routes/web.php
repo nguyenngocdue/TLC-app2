@@ -1,13 +1,12 @@
 <?php
 
+use App\Http\Controllers\ComponentLib;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Manage\ManageStatusDocType;
 use App\Http\Controllers\Manage\ManageStatusLibrary;
 use App\Http\Controllers\Manage\Master\StatusDocType;
 use App\Http\Controllers\SettingController;
 use App\Utils\Support\Entities;
-use App\Utils\System\GetSetCookie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -90,3 +89,5 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 Route::resource('statuses/statusLibrary', ManageStatusLibrary::class);
 Route::resource('manage/statusDocType', StatusDocType::class);
 Route::resource('/abc', HomeController::class);
+
+Route::get('components', [ComponentLib::class, 'index']);

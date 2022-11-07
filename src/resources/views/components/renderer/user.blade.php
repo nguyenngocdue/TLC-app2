@@ -6,7 +6,7 @@
         <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
     </div>
     <div>
-        <p class="font-semibold">{{ $name }}</p>
+        <p class="font-semibold">{{ $name }} </p>
         <p class="text-xs text-gray-600 dark:text-gray-400">
             {{ $email }}
         </p>

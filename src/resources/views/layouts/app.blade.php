@@ -3,10 +3,12 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="The master layout G4T">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/fontawesome-free/css/all.min.css') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
@@ -15,8 +17,7 @@
     <script href="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://windmill-dashboard.vercel.app/assets/css/tailwind.output.css">
-
+    <!-- <link rel="stylesheet" href="https://windmill-dashboard.vercel.app/assets/css/tailwind.output.css"> -->
 </head>
 
 <body>
@@ -29,8 +30,6 @@
             <div class="h-12"></div>
             @yield('content')
         </div>
-
-
     </div>
 
     <script type="text/javascript" src="{{ asset('js/tlc.js') }}"></script>

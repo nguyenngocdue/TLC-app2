@@ -14,7 +14,7 @@ class CreatePermissionAndRoleCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'ndc:permission {name : The name of the entity}';
+    protected $signature = 'ndc:permission {name: The name of the entity}';
 
     /**
      * The console command description.
