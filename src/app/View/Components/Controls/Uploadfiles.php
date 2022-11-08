@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Models\Media;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
@@ -13,6 +14,8 @@ class Uploadfiles extends Component
 
     public function render()
     {
+
+
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $id = $this->id;
         $colName = $this->colName;
@@ -30,11 +33,15 @@ class Uploadfiles extends Component
             return view('components.feedback.alert')->with(compact('message', 'type'));
         }
         if ($action === 'create') {
-            $infMedia = [];
-            $cateIdName = [];
-            $url_media = "";
-            $labelName = "";
-            return view('components.controls.uploadfiles')->with(compact('action', 'infMedia', 'cateIdName', 'colName', 'path', "labelName"));
+            $mediaUploaded = session('mediaUploaded') ?? [];
+            // dd($mediaUploaded);
+            $attachHasMedia = [];
+            foreach ($mediaUploaded as $key => $attach) {
+                if (!is_null(Media::find($key * 1))) {
+                    $attachHasMedia[$attach][] = Media::find($key * 1)->getAttributes();
+                }
+            }
+            return view('components.controls.uploadfiles')->with(compact('action', 'attachHasMedia', 'colName', 'path', "labelName"));
         }
         $newItemModel = $this->tablePath::find($id);
         $mediaOnModel = $newItemModel->media;
@@ -50,6 +57,30 @@ class Uploadfiles extends Component
             $attachHasMedia[$cateIdName[$cat]][] = $media;
         }
 
-        return view('components.controls.uploadfiles')->with(compact('action', 'attachHasMedia', 'cateIdName', 'colName', 'path', 'labelName'));
+
+
+        $mediaUploaded = session('mediaUploaded') ?? [];
+        $attachFaildUpload = [];
+        foreach ($mediaUploaded as $key => $attach) {
+            if (!is_null(Media::find($key * 1))) {
+                $attachFaildUpload[$attach][] = Media::find($key * 1)->getAttributes();
+            }
+        }
+        // session(['mediaUploaded' => []]);
+
+
+        foreach ($attachFaildUpload as $key => $media) {
+            // dd($attachHasMedia, $attachFaildUpload, $key);
+            if (isset($attachHasMedia[$key])) {
+                array_push($attachHasMedia[$key], ...$media);
+            } else {
+                $attachHasMedia + $attachFaildUpload;
+                break;
+            }
+        }
+
+        // dd($attachHasMedia, $attachFaildUpload);
+
+        return view('components.controls.uploadfiles')->with(compact('action', 'attachHasMedia', 'colName', 'path', 'labelName'));
     }
 }

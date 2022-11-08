@@ -27,6 +27,7 @@ abstract class CreateEditController extends Controller
 
 	public function create()
 	{
+		// session(['mediaUploaded' => []]);
 		$action = $this->action;
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 
@@ -77,20 +78,6 @@ abstract class CreateEditController extends Controller
 		$request->validate($itemsValidation);
 	}
 
-	private function deleteMediaIfNeeded($dataInput)
-	{
-		$cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
-		foreach ($cateAttachment as $value) {
-			if (isset($dataInput[$value->name . "_deleted"])) {
-				$idsDelete = explode(',', $dataInput[$value->name . "_deleted"]);
-				foreach ($idsDelete as $value) {
-					$media = Media::find($value);
-					is_null($media) ? "" : $media->delete();
-				}
-			}
-		}
-	}
-
 	private function handleToggle($method, $props, &$dataInput)
 	{
 		switch ($method) {
@@ -114,7 +101,7 @@ abstract class CreateEditController extends Controller
 		}
 	}
 
-	private function syncManyToManyRelationship($data, $dataInput)
+	private function syncManyToManyRelationship($data, $dataInput) //checkBox
 	{
 		$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $data->getTable(), "relationships.json");
 		if ($relationshipFile) {
@@ -128,23 +115,7 @@ abstract class CreateEditController extends Controller
 		}
 	}
 
-	private function handleUpload($request, $data)
-	{
-		if (count($request->files) > 0) {
-			$controlsMedia = $this->upload->store($request, $data->id);
-			if (!is_array($controlsMedia)) {
-				$title = "Not find item";
-				$message = $controlsMedia->getMessage();
-				$type = "warning";
-				return view('components.feedback.result')->with(compact('message', 'title', 'type'));
-			}
-			if (count($controlsMedia) > 0) {
-				foreach ($controlsMedia as $key => $value) {
-					$data->media()->save(Media::find($key));
-				}
-			}
-		}
-	}
+
 
 	public function update(Request $request, $id)
 	{
@@ -154,19 +125,69 @@ abstract class CreateEditController extends Controller
 		$type = Str::plural($this->type);
 
 		$this->deleteMediaIfNeeded($dataInput);
-		$this->_validate($props, $request);
-		$this->handleToggle('update', $props, $dataInput);
 
 		$data = $this->data::find($id);
+
+
+
+		$itemsValidation = [];
+		foreach ($props as $value) {
+			is_null($value['validation']) ? "" : $itemsValidation[$value['column_name']] = $value['validation'];
+		}
+
+		$validator =  Validator::make($request->all(), $itemsValidation);
+		if ($validator->fails()) {
+			$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
+
+			$mediaUploaded = session('mediaUploaded');
+			$_mediaUploaded = $this->handleUpload($request) + $mediaUploaded; // save old value of media were uploaded
+			foreach ($keyMediaDel as $key => $value) {
+				unset($_mediaUploaded[$value]);
+			}
+			session(['mediaUploaded' => $_mediaUploaded]);
+
+			$saveMediaFialUpload = $this->handleUpload($request);
+			if (count($saveMediaFialUpload) > 0) {
+				foreach ($saveMediaFialUpload as $key => $value) {
+					$data->media()->save(Media::find($key));
+				}
+				session(['mediaUploaded' => []]);
+			}
+		}
+
+
+		$this->_validate($props, $request);
+
+		$this->handleToggle('update', $props, $dataInput);
+
 		$data->fill($dataInput);
 		$data->save();
 
-		$this->syncManyToManyRelationship($data, $dataInput);
-		$this->handleUpload($request, $data);
+
+		if ($data->save()) {
+			$this->syncManyToManyRelationship($data, $dataInput);
+			$mediaUploaded = session('mediaUploaded');
+			if (count($mediaUploaded) > 0) {
+				foreach ($mediaUploaded as $key => $value) {
+					$data->media()->save(Media::find($key));
+				}
+				// reset session of mediaUploaded
+				session(['mediaUploaded' => []]);
+			}
+			$controlsMedia = $this->handleUpload($request);
+			if (count($controlsMedia) > 0) {
+				foreach ($controlsMedia as $key => $value) {
+					$data->media()->save(Media::find($key));
+				}
+				// reset session of mediaUploaded
+				session(['mediaUploaded' => []]);
+			}
+		}
 
 		if ($data->save()) Toastr::success("$this->type updated successfully", "Update $this->type");
 		return redirect(route("{$type}_edit.edit", $id));
 	}
+
 
 	public function store(Request $request)
 	{
@@ -174,17 +195,94 @@ abstract class CreateEditController extends Controller
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 
+		$dataInputHasAttachment = array_filter($dataInput, fn ($item) => is_array($item));
+		$dataInputNotAttachMent =  array_filter($dataInput, fn ($item) => !is_array($item));
+
 		// $this->deleteMediaIfNeeded($dataInput);
+
+		$itemsValidation = [];
+		foreach ($props as $value) {
+			is_null($value['validation']) ? "" : $itemsValidation[$value['column_name']] = $value['validation'];
+		}
+
+
+
+		$validator =  Validator::make($request->all(), $itemsValidation);
+		if ($validator->fails()) {
+			$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
+
+			$mediaUploaded = session('mediaUploaded');
+			$_mediaUploaded = $this->handleUpload($request) + $mediaUploaded; // save old value of media were uploaded
+			foreach ($keyMediaDel as $key => $value) {
+				unset($_mediaUploaded[$value]);
+			}
+			session(['mediaUploaded' => $_mediaUploaded]);
+		} else {
+			$mediaUploaded = session('mediaUploaded');
+			$_mediaUploaded = $this->handleUpload($request) + $mediaUploaded; // save old value of media were uploaded
+			session(['mediaUploaded' => $_mediaUploaded]);
+		}
+
+
+
+
+
 		$this->_validate($props, $request);
 		$this->handleToggle('store', $props, $dataInput);
 
-		$data = $this->data::create($dataInput);
+
+
+		$data = $this->data::create($dataInputNotAttachMent);
 
 		if (isset($data)) {
-			$this->syncManyToManyRelationship($data, $dataInput);
-			$this->handleUpload($request, $data);
+			// Checkbox
+			$this->syncManyToManyRelationship($data, $dataInputHasAttachment);
 			Toastr::success("$this->type created successfully", "Create $this->type");
+
+			$mediaUploaded = session('mediaUploaded');
+			if (count($mediaUploaded) > 0) {
+				foreach ($mediaUploaded as $key => $value) {
+					$data->media()->save(Media::find($key));
+				}
+				// reset session of mediaUploaded
+				session(['mediaUploaded' => []]);
+			}
 		}
+
 		return redirect(route("{$type}_edit.edit", $data->id));
+	}
+
+	private function handleUpload($request)
+	{
+		if (count($request->files) > 0) {
+			$controlsMedia = $this->upload->store($request);
+			// dd($controlsMedia);
+			if (!is_array($controlsMedia)) {
+				$title = "Not find item";
+				$message = $controlsMedia->getMessage();
+				$type = "warning";
+				return view('components.feedback.result')->with(compact('message', 'title', 'type'));
+			}
+			return $controlsMedia;
+		} else {
+			return session('mediaUploaded');
+		}
+	}
+
+	private function deleteMediaIfNeeded($dataInput)
+	{
+		$cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
+		$keyMediaDel = [];
+		foreach ($cateAttachment as $value) {
+			if (isset($dataInput[$value->name . "_deleted"])) {
+				$idsDelete = explode(',', $dataInput[$value->name . "_deleted"]);
+				foreach ($idsDelete as $value) {
+					$media = Media::find($value);
+					is_null($media) ? "" : $media->delete();
+					$keyMediaDel[] = $value;
+				}
+			}
+		}
+		return $keyMediaDel;
 	}
 }
