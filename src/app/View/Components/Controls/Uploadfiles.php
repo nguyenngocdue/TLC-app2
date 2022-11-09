@@ -33,10 +33,10 @@ class Uploadfiles extends Component
             return view('components.feedback.alert')->with(compact('message', 'type'));
         }
         if ($action === 'create') {
-            $mediaUploaded = session('mediaUploaded') ?? [];
-            // dd($mediaUploaded);
+            $colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
+            // dd($colNameMediaUploaded);
             $attachHasMedia = [];
-            foreach ($mediaUploaded as $key => $attach) {
+            foreach ($colNameMediaUploaded as $key => $attach) {
                 if (!is_null(Media::find($key * 1))) {
                     $attachHasMedia[$attach][] = Media::find($key * 1)->getAttributes();
                 }
@@ -59,14 +59,14 @@ class Uploadfiles extends Component
 
 
 
-        $mediaUploaded = session('mediaUploaded') ?? [];
+        $colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
         $attachFaildUpload = [];
-        foreach ($mediaUploaded as $key => $attach) {
+        foreach ($colNameMediaUploaded as $key => $attach) {
             if (!is_null(Media::find($key * 1))) {
                 $attachFaildUpload[$attach][] = Media::find($key * 1)->getAttributes();
             }
         }
-        // session(['mediaUploaded' => []]);
+        // session(['colNameMediaUploaded' => []]);
 
 
         foreach ($attachFaildUpload as $key => $media) {

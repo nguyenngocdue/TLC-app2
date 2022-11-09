@@ -27,7 +27,7 @@ abstract class CreateEditController extends Controller
 
 	public function create()
 	{
-		// session(['mediaUploaded' => []]);
+		// session(['controlMediaUploaded' => []]);
 		$action = $this->action;
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 
@@ -67,6 +67,63 @@ abstract class CreateEditController extends Controller
 		}
 
 		return view('dashboards.pages.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'tablePath', 'idItems'));
+	}
+
+
+	public function update(Request $request, $id)
+	{
+		$dataInput = $request->except(['_token', '_method', 'created_at', 'updated_at']);
+
+		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+		$type = Str::plural($this->type);
+
+		$this->deleteMediaIfNeeded($dataInput);
+
+		$data = $this->data::find($id);
+
+		$this->saveMediaValidator('update', $request, $dataInput, $data, $props);
+
+		$this->_validate($props, $request);
+
+		$this->handleToggle('update', $props, $dataInput);
+
+		$data->fill($dataInput);
+		$data->save();
+
+
+		if ($data->save()) {
+			$this->syncManyToManyRelationship($data, $dataInput);
+		}
+
+		if ($data->save()) Toastr::success("$this->type updated successfully", "Update $this->type");
+		return redirect(route("{$type}_edit.edit", $id));
+	}
+
+
+	public function store(Request $request)
+	{
+		$dataInput = $request->except(['_token', '_method', 'created_at', 'updated_at']);
+		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+		$type = Str::plural($this->type);
+
+		$dataInputHasAttachment = array_filter($dataInput, fn ($item) => is_array($item));
+		$dataInputNotAttachMent =  array_filter($dataInput, fn ($item) => !is_array($item));
+
+		$this->saveMediaValidator('store', $request, $dataInput, null, $props);
+
+
+		$this->_validate($props, $request);
+		$this->handleToggle('store', $props, $dataInput);
+
+		$data = $this->data::create($dataInputNotAttachMent);
+
+		if (isset($data)) {
+			$this->syncManyToManyRelationship($data, $dataInputHasAttachment); // Check box
+			$colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
+			$this->getSetParentMedia($data, $colNameMediaUploaded);
+			Toastr::success("$this->type created successfully", "Create $this->type");
+		}
+		return redirect(route("{$type}_edit.edit", $data->id));
 	}
 
 	private function _validate($props, $request)
@@ -115,157 +172,19 @@ abstract class CreateEditController extends Controller
 		}
 	}
 
-
-
-	public function update(Request $request, $id)
-	{
-		$dataInput = $request->except(['_token', '_method', 'created_at', 'updated_at']);
-
-		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$type = Str::plural($this->type);
-
-		$this->deleteMediaIfNeeded($dataInput);
-
-		$data = $this->data::find($id);
-
-
-
-		$itemsValidation = [];
-		foreach ($props as $value) {
-			is_null($value['validation']) ? "" : $itemsValidation[$value['column_name']] = $value['validation'];
-		}
-
-		$validator =  Validator::make($request->all(), $itemsValidation);
-		if ($validator->fails()) {
-			$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
-
-			$mediaUploaded = session('mediaUploaded');
-			$_mediaUploaded = $this->handleUpload($request) + $mediaUploaded; // save old value of media were uploaded
-			foreach ($keyMediaDel as $key => $value) {
-				unset($_mediaUploaded[$value]);
-			}
-			session(['mediaUploaded' => $_mediaUploaded]);
-
-			$saveMediaFialUpload = $this->handleUpload($request);
-			if (count($saveMediaFialUpload) > 0) {
-				foreach ($saveMediaFialUpload as $key => $value) {
-					$data->media()->save(Media::find($key));
-				}
-				session(['mediaUploaded' => []]);
-			}
-		}
-
-
-		$this->_validate($props, $request);
-
-		$this->handleToggle('update', $props, $dataInput);
-
-		$data->fill($dataInput);
-		$data->save();
-
-
-		if ($data->save()) {
-			$this->syncManyToManyRelationship($data, $dataInput);
-			$mediaUploaded = session('mediaUploaded');
-			if (count($mediaUploaded) > 0) {
-				foreach ($mediaUploaded as $key => $value) {
-					$data->media()->save(Media::find($key));
-				}
-				// reset session of mediaUploaded
-				session(['mediaUploaded' => []]);
-			}
-			$controlsMedia = $this->handleUpload($request);
-			if (count($controlsMedia) > 0) {
-				foreach ($controlsMedia as $key => $value) {
-					$data->media()->save(Media::find($key));
-				}
-				// reset session of mediaUploaded
-				session(['mediaUploaded' => []]);
-			}
-		}
-
-		if ($data->save()) Toastr::success("$this->type updated successfully", "Update $this->type");
-		return redirect(route("{$type}_edit.edit", $id));
-	}
-
-
-	public function store(Request $request)
-	{
-		$dataInput = $request->except(['_token', '_method', 'created_at', 'updated_at']);
-		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$type = Str::plural($this->type);
-
-		$dataInputHasAttachment = array_filter($dataInput, fn ($item) => is_array($item));
-		$dataInputNotAttachMent =  array_filter($dataInput, fn ($item) => !is_array($item));
-
-		// $this->deleteMediaIfNeeded($dataInput);
-
-		$itemsValidation = [];
-		foreach ($props as $value) {
-			is_null($value['validation']) ? "" : $itemsValidation[$value['column_name']] = $value['validation'];
-		}
-
-
-
-		$validator =  Validator::make($request->all(), $itemsValidation);
-		if ($validator->fails()) {
-			$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
-
-			$mediaUploaded = session('mediaUploaded');
-			$_mediaUploaded = $this->handleUpload($request) + $mediaUploaded; // save old value of media were uploaded
-			foreach ($keyMediaDel as $key => $value) {
-				unset($_mediaUploaded[$value]);
-			}
-			session(['mediaUploaded' => $_mediaUploaded]);
-		} else {
-			$mediaUploaded = session('mediaUploaded');
-			$_mediaUploaded = $this->handleUpload($request) + $mediaUploaded; // save old value of media were uploaded
-			session(['mediaUploaded' => $_mediaUploaded]);
-		}
-
-
-
-
-
-		$this->_validate($props, $request);
-		$this->handleToggle('store', $props, $dataInput);
-
-
-
-		$data = $this->data::create($dataInputNotAttachMent);
-
-		if (isset($data)) {
-			// Checkbox
-			$this->syncManyToManyRelationship($data, $dataInputHasAttachment);
-			Toastr::success("$this->type created successfully", "Create $this->type");
-
-			$mediaUploaded = session('mediaUploaded');
-			if (count($mediaUploaded) > 0) {
-				foreach ($mediaUploaded as $key => $value) {
-					$data->media()->save(Media::find($key));
-				}
-				// reset session of mediaUploaded
-				session(['mediaUploaded' => []]);
-			}
-		}
-
-		return redirect(route("{$type}_edit.edit", $data->id));
-	}
-
 	private function handleUpload($request)
 	{
 		if (count($request->files) > 0) {
-			$controlsMedia = $this->upload->store($request);
-			// dd($controlsMedia);
-			if (!is_array($controlsMedia)) {
+			$colNameMedia = $this->upload->store($request);
+			if (!is_array($colNameMedia)) {
 				$title = "Not find item";
-				$message = $controlsMedia->getMessage();
+				$message = $colNameMedia->getMessage();
 				$type = "warning";
 				return view('components.feedback.result')->with(compact('message', 'title', 'type'));
 			}
-			return $controlsMedia;
+			return $colNameMedia;
 		} else {
-			return session('mediaUploaded');
+			return session('colNameMediaUploaded');
 		}
 	}
 
@@ -284,5 +203,68 @@ abstract class CreateEditController extends Controller
 			}
 		}
 		return $keyMediaDel;
+	}
+	private function getSetParentMedia($data, $colNameMedia)
+	{
+		if (!is_null($data) && count($colNameMedia) > 0) {
+			foreach ($colNameMedia as $key => $value) {
+				$data->media()->save(Media::find($key));
+			}
+			session(['colNameMediaUploaded' => []]);
+		}
+	}
+	private function saveMediaValidator($action, $request, $dataInput, $data = [], $props)
+	{
+		$itemsValidation = [];
+		foreach ($props as $value) {
+			is_null($value['validation']) ? "" : $itemsValidation[$value['column_name']] = $value['validation'];
+		}
+		$validator =  Validator::make($request->all(), $itemsValidation);
+
+		$colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
+
+		switch ($action) {
+			case 'update':
+				if ($validator->fails()) {
+					$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
+					$colNameMediaUploaded = $this->handleUpload($request);
+
+					$_colNameMediaUploaded =  $colNameMediaUploaded + $colNameMediaUploaded; // save old value of media were uploaded
+					foreach ($keyMediaDel as $value) {
+						unset($_colNameMediaUploaded[$value]);
+					}
+					session(['colNameMediaUploaded' => $_colNameMediaUploaded]);
+
+					$this->getSetParentMedia($data, $colNameMediaUploaded);
+				} else {
+					// after validations were successful
+					$this->getSetParentMedia($data, $colNameMediaUploaded);
+
+					// validations were successful at the first time
+					$colNameMedia = $this->handleUpload($request);
+					$this->getSetParentMedia($data, $colNameMedia);
+				}
+				break;
+			case 'store':
+				if ($validator->fails()) {
+					$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
+					$_colNameMediaUploaded = $this->handleUpload($request) + $colNameMediaUploaded; // save old value of media were uploaded
+
+
+					foreach ($keyMediaDel as $value) {
+						unset($_colNameMediaUploaded[$value]);
+					}
+					session(['colNameMediaUploaded' => $_colNameMediaUploaded]);
+				} else {
+					// validations were successful at the first time
+					$_colNameMediaUploaded = $this->handleUpload($request); // save old value of media were uploaded
+					session(['colNameMediaUploaded' => $_colNameMediaUploaded]);
+				}
+				break;
+
+			default:
+				# code...
+				break;
+		}
 	}
 }
