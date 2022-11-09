@@ -14,6 +14,10 @@ class DashBoardController extends Controller
     {
     }
 
+    public function getType()
+    {
+        return "dashboard";
+    }
     /**
      * Show the application dashboard.
      *

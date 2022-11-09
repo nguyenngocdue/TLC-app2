@@ -1,4 +1,7 @@
 @extends('layouts.app')
+
+@section('title', 'MMM')
+
 @section('content')
 <main class="h-full overflow-y-auto">
     <div class="container mx-auto grid px-6">
@@ -42,7 +45,7 @@
                             }
                             @endphp
                             @isset($errorsLineProp)
-                            <x-render.warningfix title="Warning Settings" warning="{{ $errorsLineProp }}" />
+                            <x-feedback.alert title="Warning Settings" message="{{ $errorsLineProp }}" />
                             @else
                             @isset($names)
                             @php

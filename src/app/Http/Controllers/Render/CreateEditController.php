@@ -25,6 +25,11 @@ abstract class CreateEditController extends Controller
 	{
 	}
 
+	public function getType()
+	{
+		return $this->type;
+	}
+
 	public function create()
 	{
 		$action = $this->action;

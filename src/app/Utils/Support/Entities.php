@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\File;
 class Entities
 {
     private static $singleton = null;
+    private static $singletonTables = null;
+
+    public static function getAllTables()
+    {
+        if (!static::$singletonTables) static::$singletonTables = array_map(fn ($entity) => $entity->getTable(), static::getAll());
+        return static::$singletonTables;
+    }
 
     public static function getAll()
     {

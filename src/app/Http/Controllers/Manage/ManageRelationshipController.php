@@ -17,6 +17,10 @@ abstract class ManageRelationshipController extends Controller
     {
         $this->manageService = $manageService;
     }
+    public function getType()
+    {
+        return $this->type;
+    }
     /**
      * Show the application dashboard.
      *

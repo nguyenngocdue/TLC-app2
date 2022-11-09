@@ -8,8 +8,9 @@ class Helper
 {
     public static function getDatasource($modelPath, $colName)
     {
-        $instance = new $modelPath;
+        $instance = new $modelPath();
         $eloquentParam = $instance->eloquentParams;
+
         $keyNameEloquent = "";
         foreach ($eloquentParam as $key => $value) {
             if (in_array($colName, $value)) {
@@ -18,11 +19,14 @@ class Helper
             }
         }
         if ($keyNameEloquent === "") return $colName;
+
         $pathTableSource = $eloquentParam[$keyNameEloquent][1];
-        $insTableSource = new $pathTableSource;
+        $insTableSource = new $pathTableSource();
         $tableName = $insTableSource->getTable();
+
         $_dataSource = DB::table($tableName)->orderBy('name')->get();
         $dataSource = [$tableName => $_dataSource];
+
         return $dataSource;
     }
 

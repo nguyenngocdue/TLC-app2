@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
-use function GuzzleHttp\json_decode;
-
 abstract class ManagePropController extends Controller
 {
     protected $type = "";
@@ -20,10 +18,10 @@ abstract class ManagePropController extends Controller
     {
         $this->manageService = $manageService;
     }
-    /**
-     * Show the application dashboard.
-     *
-     */
+    public function getType()
+    {
+        return $this->type;
+    }
     public function index()
     {
         $type = $this->type;

@@ -1,3 +1,9 @@
+<!-- FOR ALERT -->
+<span class="text-green-700 border-green-300 bg-green-50 dark:bg-green-200"></span>
+<span class="text-blue-700 border-blue-300 bg-blue-50 dark:bg-blue-200"></span>
+<span class="text-red-700 border-red-300 bg-red-50 dark:bg-red-200"></span>
+<span class="text-yellow-700 border-yellow-300 bg-yellow-50 dark:bg-yellow-200"></span>
+<!-- FOR TAGS -->
 <span class="text-slate-100 bg-slate-100"></span>
 <span class="text-slate-700 bg-slate-700"></span>
 <span class="text-zinc-100 bg-zinc-100"></span>

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Console\CreateControllerEntity\CreateControllerEntityCreator;
 use App\Console\CreateTableRelationship\MigrationRelationShipCreator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,5 +36,9 @@ class AppServiceProvider extends ServiceProvider
             ->give(function ($app) {
                 return $app->basePath('stubs');
             });
+
+        Str::macro('pretty', function (string $value) {
+            return Str::title(Str::replace("_", " ", $value));
+        });
     }
 }
