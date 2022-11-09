@@ -13,7 +13,7 @@ use PhpParser\JsonDecoder;
 
 class UploadService
 {
-    public function store($request, $id)
+    public function store($request)
     {
 
         $cateIdName = [];
@@ -25,7 +25,7 @@ class UploadService
             $filesUpload = $request->files;
             $nameControls = [];
             $medias = [];
-            $controlsMedia = [];
+            $colNameMedia = [];
             foreach ($filesUpload as $key => $files) {
                 array_push($nameControls, $key);
                 try {
@@ -62,12 +62,14 @@ class UploadService
                     return $e;
                 }
             }
+
             $flip_cateIdName = array_flip($cateIdName);
             foreach ($medias as $key => $media) {
                 $newMedia = Media::create($media);
-                $controlsMedia[$newMedia['id']] = $flip_cateIdName[$media['category']];   // [id-media = "attachment-name"]
+                $colNameMedia[$newMedia['id']] = $flip_cateIdName[$media['category']];   // [id-media = "attachment-name"]
             }
-            return $controlsMedia;
+            // dd($colNameMedia);
+            return $colNameMedia;
         } catch (\Exception $e) {
             return  $e;
         }

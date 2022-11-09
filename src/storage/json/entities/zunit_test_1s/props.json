@@ -41,20 +41,6 @@
         "frozen_left": null,
         "frozen_right": null
     },
-    "_text3": {
-        "column_name": "text3",
-        "column_type": "text",
-        "label": "Number",
-        "control": "number",
-        "col_span": "12",
-        "hidden_view_all": null,
-        "hidden_edit": null,
-        "new_line": null,
-        "type_line": "default",
-        "validation": null,
-        "frozen_left": null,
-        "frozen_right": null
-    },
     "_dropdown1": {
         "column_name": "dropdown1",
         "column_type": "bigint",
