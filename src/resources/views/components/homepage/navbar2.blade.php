@@ -11,6 +11,9 @@
             <li class="relative">
                 <x-homepage.menunotification></x-homepage.menunotification>
             </li-->
+            <li class="flex">
+                <x-homepage.settinggear></x-homepage.settinggear>
+            </li>
             <li class="relative">
                 <x-homepage.menuprofile></x-homepage.menuprofile>
             </li>

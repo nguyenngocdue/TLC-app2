@@ -74,8 +74,59 @@ abstract class ViewAllController extends Controller
         $search = request('search');
         $users = $this->getDataSource($pageLimit, $search);
         $columns = $this->getColumns($type);
-        $dataSource = $users;
-        return view('dashboards.pages.viewAll2')->with(compact('pageLimit', 'type', 'search', 'columns', 'dataSource'));
+        // Log::info($columns);
+
+        $propsPath = storage_path() . "/json/entities/$type/props.json";
+        $relPath = storage_path() . "/json/entities/$type/relationships.json";
+        if (!file_exists($propsPath) || !file_exists($relPath)) {
+            $messages = [];
+            if (!file_exists($propsPath)) {
+                $messages[] = [
+                    'title' => 'PROPS.JSON',
+                    'href' => Str::singular($type) . "_mngprop.index",
+                ];
+            }
+            if (!file_exists($relPath)) {
+                $messages[] = [
+                    'title' => 'RELATIONSHIPS.JSON',
+                    'href' => Str::singular($type) . "_mngrls.index",
+                ];
+            }
+            return view('dashboards.pages.viewAll2')->with(compact('type', 'messages'));
+        } else {
+            $data = json_decode(file_get_contents($propsPath), true);
+            $filterRenders = array_filter($data, function ($value) {
+                $check = $value['hidden_view_all'] ?? null;
+                return $check !== "true";
+            });
+
+            $data2 = json_decode(file_get_contents($relPath), true);
+            $filterRelationships = array_filter($data2, function ($value) {
+                $check = $value['hidden'] ?? null;
+                return $check !== "true";
+            });
+
+            $var = [];
+            foreach ($filterRenders as $key1 => $v1) {
+                $filterRenders[$key1] = $v1;
+                $filterRenders[$key1]['render'] = 'database';
+                $filterRenders[$key1]['render_detail'] = null;
+                foreach ($filterRelationships as $key2 => $v2) {
+                    if ($v1['column_name'] === $v2['param_2']) {
+                        $filterRenders[$key1]['render'] = 'relationship';
+                        $filterRenders[$key1]['render_detail'] = $v2;
+                        $var[$key2] = $v2;
+                    }
+                    // $filterRenders[$key1] = $v1;
+                }
+            }
+            // dd($filterRenders);
+            $data = $filterRenders;
+            $data2 = array_diff_key($data2, $var);
+            $dataSource = $users;
+
+            return view('dashboards.pages.viewAll2')->with(compact('data', 'data2', 'users', 'pageLimit', 'type', 'search', 'columns', 'dataSource'));
+        }
     }
 
     public function destroy($id)

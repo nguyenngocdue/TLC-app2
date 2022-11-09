@@ -103,7 +103,7 @@
                         </div>
                         <ul class="flex items-center flex-shrink-0 space-x-6">
                             <li class="relative">
-                                <x-controls.breadcrumb type={{$type}} />
+                                <x-controls.breadcrumb />
                             </li>
                         </ul>
                     </div>
@@ -113,7 +113,7 @@
         </div>
 
         <script type="text/javascript" src="{{ asset('js/tlc.js') }}"></script>
-        <!-- <script type="text/javascript" src="{{ asset('js/applayout.js') }}"></script> -->
+        <script type="text/javascript" src="{{ asset('js/applayout.js') }}"></script>
         <script src="{{ asset('/windmill_assets/js/init-alpine1.js')}}"></script>
         <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

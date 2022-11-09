@@ -13,7 +13,7 @@ class Table extends Component
    *
    * @return void
    */
-  public function __construct(private $columns = [], private $dataSource = [])
+  public function __construct(private $columns = [], private $dataSource)
   {
     // Log::info($columns);
     // Log::info($dataSource);
@@ -27,24 +27,16 @@ class Table extends Component
     return Blade::render($output);
   }
 
-  private function makeColumn($column)
+  private function makeColumn($column, $key)
   {
     $render = $column['render'] ?? "_";
-    return "<th class='px-4 py-3' title=\"{$column['dataIndex']} / {$render}\">{$column['title']}</th>";
+    return "<th class='{$column['dataIndex']}_th px-4 py-3' title=\"{$column['dataIndex']} / {$render}\">{$column['title']}</th>";
   }
 
-  /**
-   * Get the view / contents that represent the component.
-   *
-   * @return \Illuminate\Contracts\View\View|\Closure|string
-   */
-  public function render()
+  private function makeTrTd($columns, $dataSource)
   {
-    $columns = $this->columns;
-    $columnsRendered = join("", array_map(fn ($column) => $this->makeColumn($column), $columns));
-
     $trs = [];
-    $dataSource = $this->dataSource;
+
     if (sizeof($dataSource) > 0) {
       foreach ($dataSource as $dataLine) {
         $tds = [];
@@ -64,6 +56,28 @@ class Table extends Component
       $trtd = "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
     }
 
-    return view("components.renderer.table")->with(compact('columnsRendered', 'trtd'));
+    return $trtd;
+  }
+  /**
+   * Get the view / contents that represent the component.
+   *
+   * @return \Illuminate\Contracts\View\View|\Closure|string
+   */
+  public function render()
+  {
+    $columns = $this->columns;
+    $dataSource = $this->dataSource;
+    $columnsRendered = [];
+    array_walk($columns, function ($column, $key) use (&$columnsRendered) {
+      $columnsRendered[] = $this->makeColumn($column, $key);
+    });
+    $columnsRendered = join("", $columnsRendered);
+    $trtd = $this->makeTrTd($columns, $dataSource);
+
+    // if (isset($users) && count($users) > 0) 
+    $showing = is_array($dataSource) ? "" : $dataSource->links('dashboards.pagination.showing');
+    $pagination = is_array($dataSource) ? "" : $dataSource->links('dashboards.pagination.template');
+
+    return view("components.renderer.table")->with(compact('columnsRendered', 'trtd', 'showing', 'pagination'));
   }
 }
