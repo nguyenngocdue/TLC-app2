@@ -9,6 +9,7 @@ use App\Models\Media;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
@@ -202,6 +203,8 @@ abstract class CreateEditController extends Controller
 				$idsDelete = explode(',', $dataInput[$value->name . "_deleted"]);
 				foreach ($idsDelete as $value) {
 					$media = Media::find($value);
+					Storage::disk('s3')->delete($media->getAttributes()['url_thumbnail']);
+					Storage::disk('s3')->delete($media->getAttributes()['url_media']);
 					is_null($media) ? "" : $media->delete();
 					$keyMediaDel[] = $value;
 				}

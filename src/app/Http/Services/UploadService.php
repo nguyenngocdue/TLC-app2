@@ -2,14 +2,15 @@
 
 namespace App\Http\Services;
 
+use App\Helpers\Helper;
 use App\Models\Media;
-use App\Utils\System\GetSetCookie;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use PhpParser\JsonDecoder;
+use Illuminate\Support\Str;
+
 
 class UploadService
 {
@@ -30,21 +31,27 @@ class UploadService
                 array_push($nameControls, $key);
                 try {
                     foreach ($files as $file) {
-                        $fileName = $file->getClientOriginalName();
+
+                        $fileName = Helper::customSlugData($file, 'media', 'filename', $medias);
+
                         $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
                         $fileNameNormal = pathinfo($fileName, PATHINFO_FILENAME);
+
                         $dt = Carbon::now('Asia/Ho_Chi_Minh');
                         $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
                         $path_image = $path . $fileName;
-                        Storage::disk('s3')->put($path_image, file_get_contents($file), 'public');
-                        $imageFileTypeFrame = ['jpeg', 'png', 'jpg', 'gif', 'svg'];
 
+                        $save = Storage::disk('s3')->put($path_image, file_get_contents($file), 'public');
+                        // dd($fileNameNormal, $save, file_get_contents($file), $path_image);
+
+                        $imageFileTypeFrame = ['jpeg', 'png', 'jpg', 'gif', 'svg'];
                         if (in_array($imageFileType, $imageFileTypeFrame)) {
                             $thumbnailImage = Image::make($file);
                             $thumbnailImage->fit(150, 150);
                             $resource = $thumbnailImage->stream();
                             $fileNameThumbnail = $fileNameNormal . '-150x150.' . $imageFileType;
                             $path_thumbnail = $path . $fileNameThumbnail;
+                            // dd($fileName);
                             Storage::disk('s3')->put($path_thumbnail, $resource->__toString(), 'public');
                         }
 
@@ -63,6 +70,7 @@ class UploadService
                 }
             }
 
+            // dd($medias);
             $flip_cateIdName = array_flip($cateIdName);
             foreach ($medias as $key => $media) {
                 $newMedia = Media::create($media);
