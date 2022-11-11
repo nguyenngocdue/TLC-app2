@@ -96,7 +96,7 @@
                                         @break
 
                                         @case ('dropdown_multi')
-                                        <x-controls.dropdownmulti colName={{$column_name}} :idItems="$idItems" action={{$action}} tablePath={{$tablePath}} labelName={{$label}} />
+                                        <x-controls.dropdownmulti colName={{$column_name}} :idItems="$idItems" action={{$action}} tablePath={{$tablePath}} labelName={{$label}} type={{$type}} />
                                         @break
 
                                         @case('attachment')
@@ -108,7 +108,7 @@
                                         @break
 
                                         @case('checkbox')
-                                        <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} tablePath={{$tablePath}} labelName={{$label}} />
+                                        <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} tablePath={{$tablePath}} labelName={{$label}} type={{$type}} />
                                         @break
 
                                         @case('number')

@@ -8,7 +8,7 @@ use Illuminate\View\Component;
 
 class Checkbox extends Component
 {
-    public function __construct(private $id, private $colName, private $idItems, private $action, private $tablePath, private $labelName)
+    public function __construct(private $id, private $colName, private $idItems, private $action, private $tablePath, private $labelName, private $type)
     {
     }
 
@@ -21,8 +21,9 @@ class Checkbox extends Component
         $idItems = $this->idItems;
         $labelName = $this->labelName;
         $modelPath = $this->tablePath;
+        $type = $this->type;
 
-        $dataSource = Helper::getDatasource($modelPath, $colName);
+        $dataSource = Helper::getDatasource($modelPath, $colName, $type);
 
         if (is_null($dataSource)) {
             $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in Model).";
