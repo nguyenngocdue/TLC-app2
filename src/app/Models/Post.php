@@ -13,9 +13,9 @@ class Post extends Model
     protected $fillable = ["name", "content", "owner_id"];
     protected $primaryKey = 'id';
     protected $table = 'posts';
-    protected $with = [
-        'user',
-    ];
+    // protected $with = [
+    //     'user',
+    // ];
 
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],

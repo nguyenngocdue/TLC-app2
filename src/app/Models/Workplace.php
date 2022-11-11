@@ -13,9 +13,9 @@ class Workplace extends Model
     protected $fillable = ["name", "description", "def_publish_holiday_hour", "def_assignee", "def_monitors", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'workplaces';
-    protected $with = [
-        'user',
-    ];
+    // protected $with = [
+    //     'user',
+    // ];
 
     public $eloquentParams = [
         "user" => ['hasMany', User::class, 'workplace'],

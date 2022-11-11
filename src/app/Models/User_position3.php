@@ -13,9 +13,9 @@ class User_position3 extends Model
     protected $fillable = ["name", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'user_position3s';
-    protected $with = [
-        'user',
-    ];
+    // protected $with = [
+    //     'user',
+    // ];
 
     public $eloquentParams = [
         "user" => ['hasMany', User::class, 'position_3', 'id'],

@@ -14,11 +14,11 @@ class Prod_order extends Model
     protected $fillable = ["id", "slug", "name", "production", "compliance", "description", "quantity", "prod_sub_project_id", "prod_routing_id"];
     protected $primaryKey = 'id';
     protected $table = 'prod_orders';
-    protected $with = [
-        "subProject",
-        "routing",
-        "productionRuns",
-    ];
+    // protected $with = [
+    //     "subProject",
+    //     "routing",
+    //     "productionRuns",
+    // ];
 
     public $eloquentParams = [
         "productionRuns" => ['hasMany', Prod_run::class, 'prod_order_id'],

@@ -37,21 +37,21 @@ class User extends Authenticatable implements LdapAuthenticatable
     protected $hidden = ["password", "remember_token"];
 
     protected $touches = [];
-    protected $with = [
-        // "media",
-        // "posts",
-        // "getWorkplaces",
-        // "userTypes",
-        // "categories",
-        // "positionPres",
-        // "position1",
-        // "position2",
-        // "position3",
-        // "disciplines",
-        // "departments",
-        // "time_keep_types",
-        // "productionRunLines",
-    ];
+    // protected $with = [
+    // "media",
+    // "posts",
+    // "getWorkplaces",
+    // "userTypes",
+    // "categories",
+    // "positionPres",
+    // "position1",
+    // "position2",
+    // "position3",
+    // "disciplines",
+    // "departments",
+    // "time_keep_types",
+    // "productionRunLines",
+    // ];
 
     /**
      * The attributes that should be cast.

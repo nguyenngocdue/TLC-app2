@@ -13,9 +13,9 @@ class Media extends Model
     protected $fillable = ["url_folder", "url_thumbnail", "extension", "url_media", "filename", "category", "owner_id"];
     protected $primaryKey = 'id';
     protected $table = 'media';
-    protected $with = [
-        'user',
-    ];
+    // protected $with = [
+    //     'user',
+    // ];
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],
     ];

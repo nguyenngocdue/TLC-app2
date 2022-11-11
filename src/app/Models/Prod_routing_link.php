@@ -15,11 +15,11 @@ class Prod_routing_link extends Model
     protected $fillable = ["id", "name", "parent", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'prod_routing_links';
-    protected $with = [
-        // "routings",
-        // "productionRun",
-        // "discipline",
-    ];
+    // protected $with = [
+    // "routings",
+    // "productionRun",
+    // "discipline",
+    // ];
 
     public $eloquentParams = [
         "routings" => ['belongsToMany', Prod_routing::class, 'prod_routing_details', 'routing_link_id', 'routing_id'],

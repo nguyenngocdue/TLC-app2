@@ -173,7 +173,8 @@ abstract class ManagePropController extends Controller
         foreach ($data['name'] as $key => $name) {
             $array = [];
             foreach ($columns as $column) {
-                $array[$column['dataIndex']] = $data[$column['dataIndex']][$key];
+                $value = $data[$column['dataIndex']][$key] ?? "";
+                $array[$column['dataIndex']] = $value;
             }
             $result[$name] = $array;
         }

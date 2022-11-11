@@ -13,9 +13,9 @@ class User_category extends Model
     protected $fillable = ["name", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'user_categories';
-    protected $with = [
-        'user',
-    ];
+    // protected $with = [
+    //     'user',
+    // ];
     public $eloquentParams = [
         "user" => ['hasMany', User::class, 'category', 'id'],
     ];

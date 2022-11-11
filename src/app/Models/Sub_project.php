@@ -14,10 +14,10 @@ class Sub_project extends Model
     protected $fillable = ["id", "name", "description", "sub_project_status_id", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'sub_projects';
-    protected $with = [
-        // "productionOrders",
-        // "subProjectStatus",
-    ];
+    // protected $with = [
+    // "productionOrders",
+    // "subProjectStatus",
+    // ];
 
     public $eloquentParams = [
         "productionOrders" => ['hasMany', Prod_order::class],

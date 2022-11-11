@@ -13,9 +13,9 @@ class Sub_project_status extends Model
     protected $fillable = ["id", "name", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'sub_project_statuses';
-    protected $with = [
-        "subProjects",
-    ];
+    // protected $with = [
+    //     "subProjects",
+    // ];
 
     public $eloquentParams = [
         "subProjects" => ['hasMany', Sub_project::class, 'sub_project_status_id'],
