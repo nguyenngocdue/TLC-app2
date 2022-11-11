@@ -66,6 +66,12 @@ abstract class ManageRelationshipController extends Controller
                 "render" => "text",
             ],
             [
+                "title" => "Control Name",
+                "dataIndex" => "control_name",
+                "editable" => true,
+                "render" => "text",
+            ],
+            [
                 "title" => "Col Span",
                 "dataIndex" => "col_span",
                 "editable" => true,
