@@ -1,3 +1,10 @@
+<!--FOR TABLE -->
+<span class="bg-green-400 "></span>
+<span class="bg-red-400 "></span>
+<span class="hover:bg-green-100 "></span>
+<span class="hover:bg-gray-100 "></span>
+<span class="hover:bg-gray-200 "></span>
+<span class="hover:bg-red-100 "></span>
 <!-- FOR ALERT -->
 <span class="text-green-700 border-green-300 bg-green-50 dark:bg-green-200"></span>
 <span class="text-blue-700 border-blue-300 bg-blue-50 dark:bg-blue-200"></span>

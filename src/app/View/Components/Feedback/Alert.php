@@ -11,8 +11,12 @@ class Alert extends Component
      *
      * @return void
      */
-    public function __construct(private $type = "info", private $title = "Untitled", private $message = "[Message] is missing.")
-    {
+    public function __construct(
+        private $type = "info",
+        private $title = null,
+        private $message = "[Message] is missing.",
+        private $class = ""
+    ) {
         //
     }
 
@@ -24,8 +28,9 @@ class Alert extends Component
     public function render()
     {
         $type = $this->type;
-        $title = $this->title;
+        $title = $this->title ?? $this->type;
         $message = $this->message;
+        $class = $this->class;
         switch ($type) {
             case "success":
                 $class = "text-green-700 border-green-300 bg-green-50 dark:bg-green-200";

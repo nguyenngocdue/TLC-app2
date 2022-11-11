@@ -59,6 +59,7 @@ abstract class ViewAllController extends Controller
             if (in_array($prop['control'], $allowControls)) $output['render'] = $prop['control'];
             return $output;
         }
+
         $propsPath = storage_path() . "/json/entities/$type/props.json";
         if (!file_exists($propsPath)) return false;
         $props = json_decode(file_get_contents($propsPath), true);

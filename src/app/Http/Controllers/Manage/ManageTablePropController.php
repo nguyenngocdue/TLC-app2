@@ -46,7 +46,7 @@ abstract class ManageTablePropController extends Controller
             foreach ($tableNames as $key => $tableName) {
 
 
-                $columnNameTable = Table::getColumn($tableName);
+                $columnNameTable = Table::getColumnNames($tableName);
                 foreach ($columnNameTable as $columnName) {
                     $typeColumn = Schema::getColumnType($tableName, $columnName);
                     array_push($columnTypes, $typeColumn);

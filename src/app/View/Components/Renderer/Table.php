@@ -13,48 +13,67 @@ class Table extends Component
    *
    * @return void
    */
-  public function __construct(private $columns = [], private $dataSource)
+  public function __construct(private $columns = [], private $dataSource = null, private $showNo = false)
   {
     // Log::info($columns);
     // Log::info($dataSource);
   }
 
-  private function applyRender($render, $rawData, $attributes, $dataLine)
+  private function applyRender($render, $rawData, $column, $dataLine)
   {
+    $editable = ($column['editable'] ?? false) ? ".editable" : "";
+    $name = ($column['dataIndex'] ?? false) ? "name='{$column['dataIndex']}[]'" : "";
+    $attributes = $column['attributes'] ?? [];
+    $dataSource = $column['dataSource'] ?? [["title" => "", "value" => ""], ["title" => "True", "value" => "true"]];
+    $dataSourceRender = $dataSource ? ':dataSource=\'$dataSource\'' : "";
+
     array_walk($attributes, fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "");
-    $attributeRendered =  join(" ", $attributes);
-    $output = "<x-renderer.{$render} $attributeRendered>$rawData</x-renderer.{$render}>";
-    return Blade::render($output);
+    $attributeRendered = trim(join(" ", $attributes));
+    $output = "<x-renderer{$editable}.{$render} $name $attributeRendered $dataSourceRender>$rawData</x-renderer{$editable}.{$render}>";
+    // if ($editable) Log::info($output);
+    return Blade::render($output, ['dataSource' => $dataSource]);
   }
 
-  private function makeColumn($column, $key)
+  private function makeColumn($column)
   {
     $render = $column['render'] ?? "_";
-    return "<th class='{$column['dataIndex']}_th px-4 py-3' title=\"{$column['dataIndex']} / {$render}\">{$column['title']}</th>";
+    $dataIndex = $column['dataIndex'];
+    $title = $column['title'];
+    return "<th class='{$dataIndex}_th px-4 py-3' title=\"{$dataIndex} / {$render}\">{$title}</th>";
   }
 
   private function makeTrTd($columns, $dataSource)
   {
     $trs = [];
+    $colspan = sizeof($columns);
 
-    if (sizeof($dataSource) > 0) {
-      foreach ($dataSource as $dataLine) {
-        $tds = [];
-        foreach ($columns as $column) {
-          $dataIndex = $column['dataIndex'];
-          $render = $column['render'] ?? false;
-          $attributes = $column['attributes'] ?? [];
-          $rawData = $dataLine[$dataIndex] ?? ""; //"<strong>$dataIndex</strong> not found";
-          $rendered = $render ? $this->applyRender($render, $rawData, $attributes, $dataLine) : $rawData;
-          $tds[] = "<td class='px-4 py-3'>" . $rendered . "</td>";
+    if (is_null($dataSource)) return "<tr><td colspan=$colspan>" . Blade::render("<x-feedback.alert type='error' message='DataSource attribute is missing.' />") . "</td></tr>";
+    if (empty($dataSource)) return "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
+
+    foreach ($dataSource as $no => $dataLine) {
+      $tds = [];
+      foreach ($columns as $column) {
+        $render = $column['render'] ?? false;
+        switch ($render) {
+          case  'no.':
+            $rendered = $no + 1;
+            break;
+          default:
+            $dataIndex = $column['dataIndex'];
+            $rawData = $dataLine[$dataIndex] ?? ""; //"<strong>$dataIndex</strong> not found";
+            $rendered = $render ? $this->applyRender($render, $rawData, $column, $dataLine) : $rawData;
+            break;
         }
-        $trs[] = "<tr class='text-gray-700 dark:text-gray-400'>" . join("", $tds) . "</tr>";
+        $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
+        $tds[] = "<td class='px-1 py-1 $align'>" . $rendered . "</td>";
       }
-      $trtd = join("", $trs);
-    } else {
-      $colspan = sizeof($columns);
-      $trtd = "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
+      $bgClass = ($dataLine['row_color'] ?? false) ? "bg-" . $dataLine['row_color'] . "-400" : "";
+      $trs[] = "<tr class='hover:bg-gray-100 $bgClass text-gray-700 dark:text-gray-400'>" . join("", $tds) . "</tr>";
+      if (isset($dataLine['rowDescription'])) {
+        $trs[] = "<tr class='bg-gray-100 '><td class='p-2 text-xs text-gray-600' colspan=$colspan>{$dataLine['rowDescription']}</td></tr>";
+      }
     }
+    $trtd = join("", $trs);
 
     return $trtd;
   }
@@ -66,6 +85,15 @@ class Table extends Component
   public function render()
   {
     $columns = $this->columns;
+    if (!is_array($columns)) return Blade::render("<x-feedback.alert type='error' message='Props file is missing.' />");
+    if (empty($columns)) return Blade::render("<x-feedback.alert type='error' message='Columns attribute is missing or empty.' />");
+
+    // Log::info($this->showNo);
+    if ($this->showNo) {
+      array_unshift($columns, ["title" => "No.", "render" => "no.", "dataIndex" => "auto.no.", 'align' => 'center']);
+      // Log::info($columns);
+    }
+
     $dataSource = $this->dataSource;
     $columnsRendered = [];
     array_walk($columns, function ($column, $key) use (&$columnsRendered) {
@@ -74,9 +102,12 @@ class Table extends Component
     $columnsRendered = join("", $columnsRendered);
     $trtd = $this->makeTrTd($columns, $dataSource);
 
-    // if (isset($users) && count($users) > 0) 
-    $showing = is_array($dataSource) ? "" : $dataSource->links('dashboards.pagination.showing');
-    $pagination = is_array($dataSource) ? "" : $dataSource->links('dashboards.pagination.template');
+    $showing = "";
+    $pagination = "";
+    if (is_object($dataSource) && !empty($dataSource)) {
+      $showing =  $dataSource->links('dashboards.pagination.showing');
+      $pagination =  $dataSource->links('dashboards.pagination.template');
+    }
 
     return view("components.renderer.table")->with(compact('columnsRendered', 'trtd', 'showing', 'pagination'));
   }

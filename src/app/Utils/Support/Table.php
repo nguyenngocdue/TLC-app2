@@ -2,21 +2,44 @@
 
 namespace App\Utils\Support;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class Table
 {
-    private static $singleton = [];
+    private static $singletonNames = [];
+    private static $singletonTypes = [];
 
-    public static function getColumn($tableName)
+    public static function getColumnTypes($tableName)
     {
-        if (!isset(static::$singleton[$tableName]) || !static::$singleton[$tableName]) {
-            static::$singleton[$tableName] = static::getColumnExpensive($tableName);
+        if (!isset(static::$singletonTypes[$tableName]) || !static::$singletonTypes[$tableName]) {
+            static::$singletonTypes[$tableName] = static::getColumnTypesExpensive($tableName);
         }
-        return static::$singleton[$tableName];
+        return static::$singletonTypes[$tableName];
     }
-    private static function getColumnExpensive($tableName)
+
+    private static function getColumnTypesExpensive($tableName)
+    {
+        $columnNames = self::getColumnNames($tableName);
+
+        $columnTypes = [];
+        foreach ($columnNames as $columnName) {
+            $typeColumn = Schema::getColumnType(Str::plural($tableName), $columnName);
+            $columnTypes[] = $typeColumn;
+        }
+        return $columnTypes;
+    }
+
+    public static function getColumnNames($tableName)
+    {
+        if (!isset(static::$singletonNames[$tableName]) || !static::$singletonNames[$tableName]) {
+            static::$singletonNames[$tableName] = static::getColumnNamesExpensive($tableName);
+        }
+        return static::$singletonNames[$tableName];
+    }
+
+    private static function getColumnNamesExpensive($tableName)
     {
         $data = DB::select("Select COLUMN_NAME from information_schema.COLUMNS where TABLE_SCHEMA = '" . env('DB_DATABASE', "laravel") . "' and TABLE_NAME = '" . $tableName . "' ORDER BY ORDINAL_POSITION ASC");
         $result = [];

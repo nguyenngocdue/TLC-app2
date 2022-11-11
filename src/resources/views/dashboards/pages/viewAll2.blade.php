@@ -20,11 +20,8 @@
         <x-pages.goto-box type="{{$type}}" page-limit="{{$pageLimit}}"></x-pages.goto-box>
     </div>
 </div>
-<div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border shadow-sm bg-white dark:bg-gray-800 ">
-    <div class="w-full overflow-x-auto">
-        <x-renderer.table :columns="$columns" :dataSource="$dataSource" />
-    </div>
-</div>
+
+<x-renderer.table :columns="$columns" :dataSource="$dataSource" />
 @endempty
 
 <x-modalsetting :type="$type" />
