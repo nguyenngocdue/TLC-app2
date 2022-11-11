@@ -107,8 +107,6 @@ abstract class ManageRelationshipController extends Controller
                 "relationship" => $elqValue[0],
                 "rowDescription" => $rowDescription,
             ];
-            dump($elqName);
-            dump($elqValue);
         }
 
         return $result;
