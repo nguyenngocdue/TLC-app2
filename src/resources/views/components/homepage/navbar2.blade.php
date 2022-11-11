@@ -5,14 +5,14 @@
             <!-- <x-homepage.searchinput></x-homepage.searchinput> -->
         </div>
         <ul class="flex items-center flex-shrink-0 space-x-6">
-            <!--li class="flex">
+            <!-- <li class="flex">
                 <x-homepage.themetoggle></x-homepage.themetoggle>
+            </li> -->
+            <li class="flex">
+                <x-homepage.settinggear></x-homepage.settinggear>
             </li>
             <li class="relative">
                 <x-homepage.menunotification></x-homepage.menunotification>
-            </li-->
-            <li class="flex">
-                <x-homepage.settinggear></x-homepage.settinggear>
             </li>
             <li class="relative">
                 <x-homepage.menuprofile></x-homepage.menuprofile>

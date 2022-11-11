@@ -2,6 +2,6 @@
     {!!$svg!!}
     <span class="sr-only">{{$title}}</span>
     <div>
-        <span class="font-medium">{{$title}}: {{$message}}</span>
+        <span class="font-medium">{{$title}}: {!!$message!!}</span>
     </div>
 </div>
