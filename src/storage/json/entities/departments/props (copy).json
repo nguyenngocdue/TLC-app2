@@ -13,7 +13,7 @@
         "frozen_left": null,
         "frozen_right": null
     },
-    "_name1": {
+    "_name": {
         "column_name": "name",
         "column_type": "text",
         "label": "Name",

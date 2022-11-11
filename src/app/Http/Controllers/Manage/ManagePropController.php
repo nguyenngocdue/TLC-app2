@@ -110,7 +110,7 @@ abstract class ManagePropController extends Controller
         ];
     }
 
-    private function makeBlankPropObject($type)
+    private function makeBlankResultObject($type)
     {
         $columnNames = Table::getColumnNames(Str::plural($type));
         $columnTypes = Table::getColumnTypes(Str::plural($type));
@@ -137,15 +137,14 @@ abstract class ManagePropController extends Controller
 
     private function getDataSource($type)
     {
-        $result = $this->makeBlankPropObject($type);
-        $propsJson = $this->manageService->path($type, 'props');
-        [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $propsJson);
+        $result = $this->makeBlankResultObject($type);
+        $json = $this->manageService->path($type, 'props');
+        [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
 
-        if ($propsJson) {
-            foreach ($propsJson as $key => $columns) {
-                foreach ($columns as $column => $value) {
-                    $result[$key][$column] = $value;
-                }
+        foreach ($json as $key => $columns) {
+            $result[$key]["name"] = $key;
+            foreach ($columns as $column => $value) {
+                $result[$key][$column] = $value;
             }
         }
 

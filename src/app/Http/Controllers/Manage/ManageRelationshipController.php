@@ -7,6 +7,8 @@ use App\Http\Services\Manage\ManageService;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 abstract class ManageRelationshipController extends Controller
 {
@@ -17,18 +19,75 @@ abstract class ManageRelationshipController extends Controller
     {
         $this->manageService = $manageService;
     }
+
     public function getType()
     {
         return $this->type;
     }
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+
+    private function getColumns()
     {
-        $type = $this->type;
+        $controls0 = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/relationships/renderers.json'), true)['renderers'];
+        $controls = array_map(fn ($control) => ["title" => Str::pretty($control), "value" => $control], $controls0);
+        return [
+            [
+                "title" => "Action",
+                "dataIndex" => "action",
+            ],
+            [
+                "title" => "Name",
+                "dataIndex" => "name",
+                "render" => "read-only-text",
+                "editable" => true,
+            ],
+            [
+                "title" => "Relationship",
+                "dataIndex" => "relationship",
+                "render" => "read-only-text",
+                "editable" => true,
+            ],
+            // [
+            //     "title" => "Label",
+            //     "dataIndex" => "label",
+            //     "render" => "text",
+            //     "editable" => true,
+            // ],
+            [
+                "title" => "Renderer",
+                "dataIndex" => "renderer",
+                "editable" => true,
+                "render" => "dropdown",
+                "dataSource" => $controls,
+            ],
+            [
+                "title" => "Renderer Param",
+                "dataIndex" => "renderer_param",
+                "editable" => true,
+                "render" => "text",
+            ],
+            [
+                "title" => "Col Span",
+                "dataIndex" => "col_span",
+                "editable" => true,
+                "render" => "number",
+            ],
+            [
+                "title" => "Hidden View All",
+                "dataIndex" => "hidden_view_all",
+                "editable" => true,
+                "render" => "dropdown",
+            ],
+            [
+                "title" => "Hidden Edit",
+                "dataIndex" => "hidden_edit",
+                "editable" => true,
+                "render" => "dropdown",
+            ],
+        ];
+    }
+
+    private function makeBlankResultObject()
+    {
         $typeModel = $this->typeModel;
         $model = App::make($typeModel);
         $columnEloquentParams = $model->eloquentParams;
@@ -38,99 +97,154 @@ abstract class ManageRelationshipController extends Controller
             $type = 'warning';
             return view('components.feedback.result')->with(compact('title', 'message', 'type'));
         }
-        $dataManage = $this->manageService->path($this->type, 'relationships');
-        if (!$dataManage) {
-            $columnRelationships = array_keys($columnEloquentParams);
-            return view('dashboards.props.managerelationship')->with(compact('type', 'columnRelationships', 'columnEloquentParams'));
-        } else {
-            $names = [];
-            $columnRelationships = [];
-            $columnEloquents = [];
-            $columnParam1s = [];
-            $columnParam2s = [];
-            $columnParam3s = [];
-            $columnParam4s = [];
-            $columnParam5s = [];
-            $columnParam6s = [];
-            $columnLabels = [];
-            $columnRenderers = [];
-            $columnRendererParams = [];
-            $columnControlNames = [];
-            $columnColSpans = [];
-            $columnHidden = [];
-            $columnNewLines = [];
-            $colorLines = [];
-            $arrayCheck = [];
-            foreach ($dataManage as $key => $data) {
-                $names[$key] = $key;
-                $columnRelationships[$key] = $data['relationship'] ?? "";
-                $columnEloquents[$key] = $data['eloquent'] ?? "";
-                $columnParam1s[$key] = $data['param_1'] ?? "";
-                $columnParam2s[$key] = $data['param_2'] ?? "";
-                $columnParam3s[$key] = $data['param_3'] ?? "";
-                $columnParam4s[$key] = $data['param_4'] ?? "";
-                $columnParam5s[$key] = $data['param_5'] ?? "";
-                $columnParam6s[$key] = $data['param_6'] ?? "";
-                array_push($arrayCheck, $data['eloquent'], $data['param_1'], $data['param_2'], $data['param_3'], $data['param_4'], $data['param_5'], $data['param_6']);
-                $columnLabels[$key] = $data['label'] ?? "";
-                $columnRenderers[$key] = $data['renderer'] ?? "";
-                $columnRendererParams[$key] = $data['renderer_param'] ?? "";
-                $columnControlNames[$key] = $data['control_name'] ?? "";
-                $columnColSpans[$key] = $data['col_span'] ?? "";
-                $columnHidden[$key] = $data['hidden'] ?? "";
-                $columnNewLines[$key] = $data['new_line'] ?? "";
-                $colorLines[$key] = $data['type_line'] ?? "";
-            }
-            $checkData = array_keys($model->eloquentParams);
-            $diff1 = array_diff($columnRelationships, $checkData);
-            $diff2 = array_diff($checkData, $columnRelationships);
-            $diff3 = [];
-            $dataCheck = $model->eloquentParams;
-            foreach ($dataCheck as $key => $value) {
-                $diffCheck = array_diff($value, $arrayCheck);
-                if (count($diffCheck) > 0) {
-                    array_push($diff3, $key);
-                }
-            }
-            if (empty($diff1) && empty($diff2) && empty($diff3)) {
-                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnControlNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnRenderers', 'columnRendererParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
-            } else {
-                foreach ($diff2 as $value) {
-                    $names['_' . $value] = '_' . $value;
-                    $columnRelationships['_' . $value] = $value;
-                    $columnLabels['_' . $value] = $value;
-                    $columnEloquents['_' . $value] = $columnEloquentParams[$value][0] ?? null;
-                    $columnParam1s['_' . $value] = $columnEloquentParams[$value][1] ?? null;
-                    $columnParam2s['_' . $value] = $columnEloquentParams[$value][2] ?? null;
-                    $columnParam3s['_' . $value] = $columnEloquentParams[$value][3] ?? null;
-                    $columnParam4s['_' . $value] = $columnEloquentParams[$value][4] ?? null;
-                    $columnParam5s['_' . $value] = $columnEloquentParams[$value][5] ?? null;
-                    $columnParam6s['_' . $value] = $columnEloquentParams[$value][6] ?? null;
-                    $columnRenderers['_' . $value] = "";
-                    $columnRendererParams['_' . $value] = "";
-                    $columnControlNames['_' . $value] = "";
-                    $columnColSpans['_' . $value] = "12";
-                    $columnHidden['_' . $value] = "false";
-                    $columnNewLines['_' . $value] = "false";
-                    $colorLines['_' . $value] = "new";
-                }
-                foreach ($diff1 as $value) {
-                    $colorLines['_' . $value] = "removed";
-                }
-                foreach ($diff3 as $value) {
-                    $columnEloquents['_' . $value] = $columnEloquentParams[$value][0] ?? null;
-                    $columnParam1s['_' . $value] = $columnEloquentParams[$value][1] ?? null;
-                    $columnParam2s['_' . $value] = $columnEloquentParams[$value][2] ?? null;
-                    $columnParam3s['_' . $value] = $columnEloquentParams[$value][3] ?? null;
-                    $columnParam4s['_' . $value] = $columnEloquentParams[$value][4] ?? null;
-                    $columnParam5s['_' . $value] = $columnEloquentParams[$value][5] ?? null;
-                    $columnParam6s['_' . $value] = $columnEloquentParams[$value][6] ?? null;
-                    $columnControlNames['_' . $value] = "";
-                    $colorLines['_' . $value] = "new";
-                }
-                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnControlNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnRenderers', 'columnRendererParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
+
+        $result = [];
+        foreach ($columnEloquentParams as $elqName => $elqValue) {
+            $rowDescription = join(" | ", $elqValue);
+            $result["_$elqName"] = [
+                "name" => "_$elqName",
+                "eloquent" => $elqName,
+                "relationship" => $elqValue[0],
+                "rowDescription" => $rowDescription,
+            ];
+            dump($elqName);
+            dump($elqValue);
+        }
+
+        return $result;
+    }
+
+    private function addGreenAndRedColor($a, $b)
+    {
+        $toBeGreen = array_diff_key($a, $b);
+        $toBeRed = array_diff_key($b, $a);
+
+        return [$toBeGreen, $toBeRed];
+    }
+
+    private function getDataSource($type)
+    {
+        $result = $this->makeBlankResultObject($type);
+        $json = $this->manageService->path($type, 'relationships');
+        [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
+
+        foreach ($json as $key => $columns) {
+            $result[$key]["name"] = $key;
+            foreach ($columns as $column => $value) {
+                $result[$key][$column] = $value;
             }
         }
+
+        foreach (array_keys($toBeGreen) as $key) $result[$key]['row_color'] = "green";
+        foreach (array_keys($toBeRed) as $key) $result[$key]['row_color'] = "red";
+
+        return $result;
+    }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        $type = $this->type;
+        $columns = $this->getColumns();
+        $dataSourceWithKey = $this->getDataSource($type);
+        $dataSource = array_values($dataSourceWithKey);
+        return view('dashboards.props.manageprop')->with(compact('type', 'columns', 'dataSource'));
+
+        // if (!$dataManage) {
+        //     $columnRelationships = array_keys($columnEloquentParams);
+        //     return view('dashboards.props.managerelationship')->with(compact('type', 'columnRelationships', 'columnEloquentParams'));
+        // } else {
+        //     $names = [];
+        //     $columnRelationships = [];
+        //     $columnEloquents = [];
+        //     $columnParam1s = [];
+        //     $columnParam2s = [];
+        //     $columnParam3s = [];
+        //     $columnParam4s = [];
+        //     $columnParam5s = [];
+        //     $columnParam6s = [];
+        //     $columnLabels = [];
+        //     $columnRenderers = [];
+        //     $columnRendererParams = [];
+        //     $columnControlNames = [];
+        //     $columnColSpans = [];
+        //     $columnHidden = [];
+        //     $columnNewLines = [];
+        //     $colorLines = [];
+        //     $arrayCheck = [];
+        //     foreach ($dataManage as $key => $data) {
+        //         $names[$key] = $key;
+        //         $columnRelationships[$key] = $data['relationship'] ?? "";
+        //         $columnEloquents[$key] = $data['eloquent'] ?? "";
+        //         $columnParam1s[$key] = $data['param_1'] ?? "";
+        //         $columnParam2s[$key] = $data['param_2'] ?? "";
+        //         $columnParam3s[$key] = $data['param_3'] ?? "";
+        //         $columnParam4s[$key] = $data['param_4'] ?? "";
+        //         $columnParam5s[$key] = $data['param_5'] ?? "";
+        //         $columnParam6s[$key] = $data['param_6'] ?? "";
+        //         array_push($arrayCheck, $data['eloquent'], $data['param_1'], $data['param_2'], $data['param_3'], $data['param_4'], $data['param_5'], $data['param_6']);
+        //         $columnLabels[$key] = $data['label'] ?? "";
+        //         $columnRenderers[$key] = $data['renderer'] ?? "";
+        //         $columnRendererParams[$key] = $data['renderer_param'] ?? "";
+        //         $columnControlNames[$key] = $data['control_name'] ?? "";
+        //         $columnColSpans[$key] = $data['col_span'] ?? "";
+        //         $columnHidden[$key] = $data['hidden'] ?? "";
+        //         $columnNewLines[$key] = $data['new_line'] ?? "";
+        //         $colorLines[$key] = $data['type_line'] ?? "";
+        //     }
+        //     $checkData = array_keys($model->eloquentParams);
+        //     $diff1 = array_diff($columnRelationships, $checkData);
+        //     $diff2 = array_diff($checkData, $columnRelationships);
+        //     $diff3 = [];
+        //     $dataCheck = $model->eloquentParams;
+        //     foreach ($dataCheck as $key => $value) {
+        //         $diffCheck = array_diff($value, $arrayCheck);
+        //         if (count($diffCheck) > 0) {
+        //             array_push($diff3, $key);
+        //         }
+        //     }
+        //     if (empty($diff1) && empty($diff2) && empty($diff3)) {
+        //         return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnControlNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnRenderers', 'columnRendererParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
+        //     } else {
+        //         foreach ($diff2 as $value) {
+        //             $names['_' . $value] = '_' . $value;
+        //             $columnRelationships['_' . $value] = $value;
+        //             $columnLabels['_' . $value] = $value;
+        //             $columnEloquents['_' . $value] = $columnEloquentParams[$value][0] ?? null;
+        //             $columnParam1s['_' . $value] = $columnEloquentParams[$value][1] ?? null;
+        //             $columnParam2s['_' . $value] = $columnEloquentParams[$value][2] ?? null;
+        //             $columnParam3s['_' . $value] = $columnEloquentParams[$value][3] ?? null;
+        //             $columnParam4s['_' . $value] = $columnEloquentParams[$value][4] ?? null;
+        //             $columnParam5s['_' . $value] = $columnEloquentParams[$value][5] ?? null;
+        //             $columnParam6s['_' . $value] = $columnEloquentParams[$value][6] ?? null;
+        //             $columnRenderers['_' . $value] = "";
+        //             $columnRendererParams['_' . $value] = "";
+        //             $columnControlNames['_' . $value] = "";
+        //             $columnColSpans['_' . $value] = "12";
+        //             $columnHidden['_' . $value] = "false";
+        //             $columnNewLines['_' . $value] = "false";
+        //             $colorLines['_' . $value] = "new";
+        //         }
+        //         foreach ($diff1 as $value) {
+        //             $colorLines['_' . $value] = "removed";
+        //         }
+        //         foreach ($diff3 as $value) {
+        //             $columnEloquents['_' . $value] = $columnEloquentParams[$value][0] ?? null;
+        //             $columnParam1s['_' . $value] = $columnEloquentParams[$value][1] ?? null;
+        //             $columnParam2s['_' . $value] = $columnEloquentParams[$value][2] ?? null;
+        //             $columnParam3s['_' . $value] = $columnEloquentParams[$value][3] ?? null;
+        //             $columnParam4s['_' . $value] = $columnEloquentParams[$value][4] ?? null;
+        //             $columnParam5s['_' . $value] = $columnEloquentParams[$value][5] ?? null;
+        //             $columnParam6s['_' . $value] = $columnEloquentParams[$value][6] ?? null;
+        //             $columnControlNames['_' . $value] = "";
+        //             $colorLines['_' . $value] = "new";
+        //         }
+        //         return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnControlNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnRenderers', 'columnRendererParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
+        //     }
+        // }
     }
     public function store(Request $request)
     {
