@@ -32,7 +32,7 @@ class UploadService
                 try {
                     foreach ($files as $file) {
 
-                        $fileName = Helper::customSlugData($file, 'media', 'filename', $medias);
+                        $fileName = Helper::customSlugData($file, 'media', null, $medias);
 
                         $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
                         $fileNameNormal = pathinfo($fileName, PATHINFO_FILENAME);

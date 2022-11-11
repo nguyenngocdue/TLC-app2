@@ -33,7 +33,7 @@ abstract class CreateEditController extends Controller
 
 	public function create()
 	{
-		// session(['controlMediaUploaded' => []]);
+		// session(['colNameMediaUploaded' => []]);
 		$action = $this->action;
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 
