@@ -74,7 +74,7 @@ class Uploadfiles extends Component
             if (isset($attachHasMedia[$key])) {
                 array_push($attachHasMedia[$key], ...$media);
             } else {
-                $attachHasMedia + $attachFaildUpload;
+                $attachHasMedia += $attachFaildUpload;
                 break;
             }
         }

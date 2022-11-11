@@ -1,10 +1,11 @@
 <div class="flex flex-col">
     @if ($action === "edit" || $action === "create")
     <div class="grid grid-cols-5 gap-4 mb-1 p-1 bg-white border rounded-lg ">
+        {{-- @dd($attachHasMedia) --}}
         @if(isset($attachHasMedia[$colName]))
-        @foreach($attachHasMedia as $key => $attach)
+        @foreach($attachHasMedia as $key => $attachs)
         @if ($key === $colName )
-        @foreach($attach as $media)
+        @foreach($attachs as $media)
         <div class=" relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg border-gray-300 group/item overflow-hidden bg-white ">
             <span>
                 <img class="border  border-gray-300 rounded-md h-full w-full object-cover hover:bg-slate-100" src="{{ $path.$media['url_thumbnail']}}" alt="{{$media['filename']}}" />

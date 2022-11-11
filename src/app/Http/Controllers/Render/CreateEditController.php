@@ -112,11 +112,11 @@ abstract class CreateEditController extends Controller
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 		$type = Str::plural($this->type);
 
+
 		$dataInputHasAttachment = array_filter($dataInput, fn ($item) => is_array($item));
 		$dataInputNotAttachMent =  array_filter($dataInput, fn ($item) => !is_array($item));
 
-		$this->saveMediaValidator('store', $request, $dataInput, null, $props);
-
+		$mediaValidator = $this->saveMediaValidator('store', $request, $dataInput, null, $props);
 
 		$this->_validate($props, $request);
 		$this->handleToggle('store', $props, $dataInput);
@@ -126,7 +126,8 @@ abstract class CreateEditController extends Controller
 		if (isset($data)) {
 			$this->syncManyToManyRelationship($data, $dataInputHasAttachment); // Check box
 			$colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
-			$this->getSetParentMedia($data, $colNameMediaUploaded);
+			// dd($colNameMediaUploaded);
+			$mediaValidator ? $this->getSetParentMedia($data, $colNameMediaUploaded) : false;
 			Toastr::success("$this->type created successfully", "Create $this->type");
 		}
 		return redirect(route("{$type}_edit.edit", $data->id));
@@ -223,56 +224,60 @@ abstract class CreateEditController extends Controller
 	}
 	private function saveMediaValidator($action, $request, $dataInput, $data = [], $props)
 	{
-		$itemsValidation = [];
-		foreach ($props as $value) {
-			is_null($value['validation']) ? "" : $itemsValidation[$value['column_name']] = $value['validation'];
-		}
-		$validator =  Validator::make($request->all(), $itemsValidation);
+		if (!isset($request->input()['attachment_1_deleted']) && count($request->input()) <= 0) {
+			return false;
+		} else { // only run when controls is attachment
+			foreach ($props as $value) {
+				is_null($value['validation']) ? "" : $itemsValidation[$value['column_name']] = $value['validation'];
+			}
+			$validator =  Validator::make($request->all(), $itemsValidation);
 
-		$colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
+			$colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
 
-		switch ($action) {
-			case 'update':
-				if ($validator->fails()) {
-					$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
-					$colNameMediaUploaded = $this->handleUpload($request);
+			switch ($action) {
+				case 'update':
+					if ($validator->fails()) {
+						$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
+						$colNameMediaUploaded = $this->handleUpload($request);
 
-					$_colNameMediaUploaded =  $colNameMediaUploaded + $colNameMediaUploaded; // save old value of media were uploaded
-					foreach ($keyMediaDel as $value) {
-						unset($_colNameMediaUploaded[$value]);
+						$_colNameMediaUploaded =  $colNameMediaUploaded + $colNameMediaUploaded; // save old value of media were uploaded
+						foreach ($keyMediaDel as $value) {
+							unset($_colNameMediaUploaded[$value]);
+						}
+						session(['colNameMediaUploaded' => $_colNameMediaUploaded]);
+
+						$this->getSetParentMedia($data, $colNameMediaUploaded);
+					} else {
+						// after validations were successful
+						$this->getSetParentMedia($data, $colNameMediaUploaded);
+
+						// validations were successful at the first time
+						$colNameMedia = $this->handleUpload($request);
+						$this->getSetParentMedia($data, $colNameMedia);
 					}
-					session(['colNameMediaUploaded' => $_colNameMediaUploaded]);
-
-					$this->getSetParentMedia($data, $colNameMediaUploaded);
-				} else {
-					// after validations were successful
-					$this->getSetParentMedia($data, $colNameMediaUploaded);
-
-					// validations were successful at the first time
-					$colNameMedia = $this->handleUpload($request);
-					$this->getSetParentMedia($data, $colNameMedia);
-				}
-				break;
-			case 'store':
-				if ($validator->fails()) {
-					$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
-					$_colNameMediaUploaded = $this->handleUpload($request) + $colNameMediaUploaded; // save old value of media were uploaded
+					break;
+				case 'store':
+					if ($validator->fails()) {
+						$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
+						$_colNameMediaUploaded = $this->handleUpload($request) + $colNameMediaUploaded; // save old value of media were uploaded
 
 
-					foreach ($keyMediaDel as $value) {
-						unset($_colNameMediaUploaded[$value]);
+						foreach ($keyMediaDel as $value) {
+							unset($_colNameMediaUploaded[$value]);
+						}
+						session(['colNameMediaUploaded' => $_colNameMediaUploaded]);
+					} else {
+						// validations were successful at the first time
+
+						$_colNameMediaUploaded = $this->handleUpload($request); // save old value of media were uploaded
+						session(['colNameMediaUploaded' => $_colNameMediaUploaded]);
 					}
-					session(['colNameMediaUploaded' => $_colNameMediaUploaded]);
-				} else {
-					// validations were successful at the first time
-					$_colNameMediaUploaded = $this->handleUpload($request); // save old value of media were uploaded
-					session(['colNameMediaUploaded' => $_colNameMediaUploaded]);
-				}
-				break;
+					break;
 
-			default:
-				# code...
-				break;
+				default:
+					break;
+			}
+			return true;
 		}
 	}
 }
