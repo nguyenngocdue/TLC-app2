@@ -22,11 +22,15 @@ input StoreProdLineInput {
     updated_at: DateTime
     user_ids: [Int!]!
 }
+type StoreProdLineResponse {
+    id: Int!
+    status: String!
+}
 extend type Mutation {
     prodLine(prod_order_id: ID!, prod_routing_link_id: ID!): ProdLineResponse!
         @guard
         @field(resolver: "App\\GraphQL\\Mutations\\ProdLine")
-    storeProdLine(input: StoreProdLineInput! @spread): String!
+    storeProdLine(input: StoreProdLineInput! @spread): StoreProdLineResponse!
         @guard
         @field(resolver: "App\\GraphQL\\Mutations\\StoreProdLine")
     duplicateProdLine(id: ID!): DuplicateProdLineResponse!

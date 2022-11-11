@@ -29,7 +29,10 @@ final class StoreProdLine
             if (is_array($args['user_ids'])) {
                 $prodLine->users()->attach($args['user_ids']);
             }
-            return 'Complete Create Prod Line and add User to Prod Line Successfully';
+            return [
+                'id' => $prodLine->id,
+                'status' => 'Complete Create Prod Line and add User to Prod Line Successfully'
+            ];
         } catch (\Throwable $th) {
             return $th;
         }

@@ -2,8 +2,8 @@ scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 extend type Query {
-    prod_orders: [Prod_order!]! @all
-    prod_order(id: ID @eq): Prod_order @find
+    prod_orders: [Prod_order!]! @all @guard
+    prod_order(id: ID @eq): Prod_order @find @guard
 }
 
 type Prod_order {

@@ -2,8 +2,8 @@ scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 extend type Query {
-    sub_project_statuses: [Sub_project_status!]! @all
-    sub_project_status(id: ID @eq): Sub_project_status @find
+    sub_project_statuses: [Sub_project_status!]! @all @guard
+    sub_project_status(id: ID @eq): Sub_project_status @find @guard
 }
 
 type Sub_project_status {

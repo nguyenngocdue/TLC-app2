@@ -41,6 +41,7 @@ Route::group([
         'middleware' => ['auth:sanctum'],
     ], function () {
         Route::get('sub_projects', [App\Http\Controllers\Api\v1\Production\ProductionController::class, 'getSubProjects']);
+        Route::get('prod_line/data', [App\Http\Controllers\Api\v1\Production\ProductionController::class, 'getDataProductionLine']);
         Route::get('sub_projects/{id}', [App\Http\Controllers\Api\v1\Production\ProductionController::class, 'getProdOrders']);
         Route::get('sub_projects/{id1}/prod_orders/{id2}', [App\Http\Controllers\Api\v1\Production\ProductionController::class, 'getProdOrders']);
         Route::resource("prod_run", App\Http\Controllers\Api\v1\Production\ProductionRunController::class);

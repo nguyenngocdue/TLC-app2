@@ -7,6 +7,7 @@ use App\Models\Prod_discipline;
 use App\Models\Prod_order;
 use App\Models\Sub_project;
 use App\Utils\System\Api\ResponseObject;
+use Illuminate\Support\Facades\DB;
 
 class ProductionController extends Controller
 {
@@ -54,6 +55,18 @@ class ProductionController extends Controller
             ], null, 'Get Routing Links and Disciplines from Prod Orders Successfully.');
         } catch (\Throwable $th) {
             return ResponseObject::responseFail('Get Routing Links and Disciplines from Prod Orders Failed.');
+        }
+    }
+    public function getDataProductionLine()
+    {
+        try {
+            $usersUsing = DB::table('users')->where('resigned', '0')->orderBy('id', 'DESC')->get();
+            $usersPosition = DB::table('users')->orderBy('position_rendered', 'DESC')->distinct()->get(['position_rendered']);
+            return ResponseObject::responseSuccess([
+                'usersUsing' => $usersUsing,
+            ], ['usersPosition' => $usersPosition,], 'Get All Users Using from Users Successfully.');
+        } catch (\Throwable $th) {
+            return ResponseObject::responseFail('Get All Users Using from Users Failed.');
         }
     }
 }

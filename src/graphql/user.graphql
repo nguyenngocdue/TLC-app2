@@ -3,8 +3,8 @@ scalar DateTime
 scalar JSON @scalar(class: "MLL\\GraphQLScalars\\JSON")
 
 type Query {
-    users: [User!]! @all
-    user(id: ID @eq): User @find
+    users: [User!]! @all @guard
+    user(id: ID @eq): User @find @guard
 }
 type User {
     id: ID!
@@ -133,4 +133,7 @@ extend type Mutation {
     createUser(input: CreateUserInput! @spread): User! @guard @create
     updateUser(input: UpdateUserInput! @spread): User @guard @update
     deleteUser(id: ID!): User @guard @delete
+    usersUsing: [User!]!
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\UsersUsing")
 }

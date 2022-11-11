@@ -1,0 +1,5 @@
+extend type Mutation {
+    positionDistinct: [User!]!
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\PositionDistinct")
+}

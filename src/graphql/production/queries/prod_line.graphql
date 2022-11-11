@@ -3,8 +3,8 @@ scalar DateTime
 scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 extend type Query {
-    prod_lines: [Prod_line!]! @all
-    prod_line(id: ID @eq): Prod_line @find
+    prod_lines: [Prod_line!]! @all @guard
+    prod_line(id: ID @eq): Prod_line @find @guard
 }
 type Prod_line {
     id: ID!

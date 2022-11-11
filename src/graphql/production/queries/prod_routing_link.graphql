@@ -2,8 +2,8 @@ scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 extend type Query {
-    prod_routing_links: [Prod_routing_link!]! @all
-    prod_routing_link(id: ID @eq): Prod_routing_link @find
+    prod_routing_links: [Prod_routing_link!]! @all @guard
+    prod_routing_link(id: ID @eq): Prod_routing_link @find @guard
 }
 
 type Prod_routing_link {
