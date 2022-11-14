@@ -123,6 +123,7 @@ abstract class ManagePropController extends Controller
                 "column_name" => $value,
                 "column_type" => $columnTypes[$key],
                 "label" => Str::pretty($value),
+                "col_span" => 12,
             ];
         }
         return $result;

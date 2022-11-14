@@ -13,4 +13,6 @@ class Media_category extends Model
     protected $fillable = ["name", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'media_categories';
+
+    public $eloquentParams = [];
 }

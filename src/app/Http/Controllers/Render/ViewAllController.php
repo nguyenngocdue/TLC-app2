@@ -75,6 +75,7 @@ abstract class ViewAllController extends Controller
         // Log::info($rawDataSource);
         $eloquentParams = App::make($this->typeModel)->eloquentParams;
         $path = storage_path() . "/json/entities/{$this->type}/relationships.json";
+        if (!file_exists($path)) return false;
         $json = json_decode(file_get_contents($path), true);
         // Log::info($json);
 
