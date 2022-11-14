@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\Media_categories;
 
 use App\Http\Controllers\Manage\ManagePropController;
+use App\Models\Media_categories;
 
 class ManageMedia_categoriesPropController extends ManagePropController
 {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\Zunit_test_1;
 
 use App\Http\Controllers\Manage\ManageTablePropController;
+use App\Models\Zunit_test_1;
 
 class ManageZunit_test_1TablePropController extends ManageTablePropController
 {

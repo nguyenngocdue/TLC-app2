@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\User_category;
 
 use App\Http\Controllers\Manage\ManagePropController;
+use App\Models\User_category;
 
 class ManageUser_categoryPropController extends ManagePropController
 {

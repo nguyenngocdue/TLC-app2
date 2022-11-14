@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\User_position_pre;
 
 use App\Http\Controllers\Manage\ManagePropController;
+use App\Models\User_position_pre;
 
 class ManageUser_position_prePropController extends ManagePropController
 {

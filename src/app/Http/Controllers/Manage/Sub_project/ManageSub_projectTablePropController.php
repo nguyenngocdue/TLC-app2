@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\Sub_project;
 
 use App\Http\Controllers\Manage\ManageTablePropController;
+use App\Models\Sub_project;
 
 class ManageSub_projectTablePropController extends ManageTablePropController
 {

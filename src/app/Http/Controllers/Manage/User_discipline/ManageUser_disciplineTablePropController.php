@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\User_discipline;
 
 use App\Http\Controllers\Manage\ManageTablePropController;
+use App\Models\User_discipline;
 
 class ManageUser_disciplineTablePropController extends ManageTablePropController
 {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\Prod_run;
 
 use App\Http\Controllers\Manage\ManagePropController;
+use App\Models\Prod_run;
 
 class ManageProd_runPropController extends ManagePropController
 {

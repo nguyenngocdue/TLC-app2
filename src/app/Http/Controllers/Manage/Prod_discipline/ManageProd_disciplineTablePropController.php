@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\Prod_discipline;
 
 use App\Http\Controllers\Manage\ManageTablePropController;
+use App\Models\Prod_discipline;
 
 class ManageProd_disciplineTablePropController extends ManageTablePropController
 {
