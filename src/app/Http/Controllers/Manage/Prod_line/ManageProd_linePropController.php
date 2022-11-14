@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\Prod_line;
 
 use App\Http\Controllers\Manage\ManagePropController;
+use App\Models\Prod_line;
 
 class ManageProd_linePropController extends ManagePropController
 {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\Prod_run;
 
 use App\Http\Controllers\Manage\ManageTablePropController;
+use App\Models\Prod_run;
 
 class ManageProd_runTablePropController extends ManageTablePropController
 {

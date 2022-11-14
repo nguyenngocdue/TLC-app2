@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\Prod_routing_link;
 
 use App\Http\Controllers\Manage\ManageTablePropController;
+use App\Models\Prod_routing_link;
 
 class ManageProd_routing_linkTablePropController extends ManageTablePropController
 {

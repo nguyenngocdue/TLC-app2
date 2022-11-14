@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\Work_mode;
 
 use App\Http\Controllers\Manage\ManagePropController;
+use App\Models\Work_mode;
 
 class ManageWork_modePropController extends ManagePropController
 {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage\Prod_routing;
 
 use App\Http\Controllers\Manage\ManagePropController;
+use App\Models\Prod_routing;
 
 class ManageProd_routingPropController extends ManagePropController
 {
