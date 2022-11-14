@@ -8,6 +8,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -69,13 +70,16 @@ abstract class ViewAllController extends Controller
         return $result;
     }
 
-    private function renderMeaningful(&$columns, $rawDataSource)
+    private function attachRendererIntoColumn(&$columns)
     {
         // Log::info($columns);
         // Log::info($rawDataSource);
         $eloquentParams = App::make($this->typeModel)->eloquentParams;
-        $path = storage_path() . "/json/entities/{$this->type}/relationships.json";
-        if (!file_exists($path)) return false;
+        // Log::info($eloquentParams);
+
+        $typePlural = Str::plural($this->type);
+        $path = storage_path() . "/json/entities/{$typePlural}/relationships.json";
+        if (!file_exists($path)) return Blade::render("<x-feedback.result message='Relationship is missing' type='warning' />");
         $json = json_decode(file_get_contents($path), true);
         // Log::info($json);
 
@@ -84,7 +88,7 @@ abstract class ViewAllController extends Controller
             if (isset($eloquentParams[$dataIndex])) {
                 $relationship = $eloquentParams[$dataIndex][0];
                 // Log::info($dataIndex . " " . $relationship);
-                if ($relationship === 'belongsToMany') {
+                if (in_array($relationship, ['belongsToMany', 'belongsTo'])) {
                     $relationshipJson = $json["_{$dataIndex}"];
                     // Log::info($relationshipJson);
                     $column['renderer'] = $relationshipJson['renderer'];
@@ -92,7 +96,28 @@ abstract class ViewAllController extends Controller
                 }
             }
         }
-        return $rawDataSource;
+        return true;
+    }
+
+    private function attachEloquentNameIntoColumn(&$columns)
+    {
+        $eloquentParams = App::make($this->typeModel)->eloquentParams;
+
+        $eloquent = [];
+        foreach ($eloquentParams as $key => $eloquentParam) {
+            if (in_array($eloquentParam[0], ['belongsTo'])) {
+                $eloquent[$eloquentParam[2]] = $key;
+            }
+        }
+        // Log::info($eloquent);
+        // Log::info($columns);
+
+        $keys = array_keys($eloquent);
+        foreach ($columns as &$column) {
+            if (in_array($column['dataIndex'], $keys)) {
+                $column['dataIndex'] = $eloquent[$column['dataIndex']];
+            }
+        }
     }
 
     public function index()
@@ -102,9 +127,11 @@ abstract class ViewAllController extends Controller
 
         $pageLimit = $this->getPageLimit();
         $search = request('search');
-        $rawDataSource = $this->getDataSource($pageLimit, $search);
+        $dataSource = $this->getDataSource($pageLimit, $search);
 
-        $dataSource = $this->renderMeaningful($columns, $rawDataSource);
+        $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
+        $result = $this->attachRendererIntoColumn($columns);
+        if ($result !== true) return $result;
         // Log::info($columns);
 
         return view('dashboards.pages.viewAll2')->with(compact('pageLimit', 'type', 'search', 'columns', 'dataSource'));
