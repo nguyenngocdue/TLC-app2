@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManagePropController;
 class ManagePostPropController extends ManagePropController
 {
     protected $type = 'post';
+    protected $typeModel = Post::class;
 }

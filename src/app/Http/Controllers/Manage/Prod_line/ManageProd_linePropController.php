@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManagePropController;
 class ManageProd_linePropController extends ManagePropController
 {
     protected $type = 'prod_line';
+    protected $typeModel = Prod_line::class;
 }

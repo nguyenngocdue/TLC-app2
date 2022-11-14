@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManageTablePropController;
 class ManageUser_categoryTablePropController extends ManageTablePropController
 {
     protected $type = 'user_category';
+    protected $typeModel = User_category::class;
 }

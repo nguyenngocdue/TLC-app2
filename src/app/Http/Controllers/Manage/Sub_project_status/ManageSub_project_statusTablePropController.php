@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManageTablePropController;
 class ManageSub_project_statusTablePropController extends ManageTablePropController
 {
     protected $type = 'sub_project_status';
+    protected $typeModel = Sub_project_status::class;
 }

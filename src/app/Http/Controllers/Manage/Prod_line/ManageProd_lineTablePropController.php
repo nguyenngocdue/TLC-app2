@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManageTablePropController;
 class ManageProd_lineTablePropController extends ManageTablePropController
 {
     protected $type = 'prod_line';
+    protected $typeModel = Prod_line::class;
 }
