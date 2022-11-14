@@ -24,27 +24,17 @@
         "relationship": "workplaceRel1",
         "renderer": "count",
         "renderer_param": "name",
-        "control_name": "checkbox1",
+        "control_name": "ELQ(workplaceRel1)",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": ""
     },
     "_workplaceRel2": {
         "name": "_workplaceRel2",
-        "relationship": "belongsToMany",
-        "renderer": "",
-        "renderer_param": "",
-        "control_name": "",
-        "col_span": "",
-        "hidden_view_all": "",
-        "hidden_edit": ""
-    },
-    "_workplaceRel3": {
-        "name": "_workplaceRel3",
         "relationship": "workplaceRel2",
         "renderer": "count",
         "renderer_param": "name",
-        "control_name": "checkbox2",
+        "control_name": "ELQ(workplaceRel2)",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": ""
