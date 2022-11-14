@@ -68,14 +68,43 @@ abstract class ViewAllController extends Controller
         return $result;
     }
 
+    private function renderMeaningful(&$columns, $rawDataSource)
+    {
+        // Log::info($columns);
+        // Log::info($rawDataSource);
+        $eloquentParams = App::make($this->typeModel)->eloquentParams;
+        $path = storage_path() . "/json/entities/{$this->type}/relationships.json";
+        $json = json_decode(file_get_contents($path), true);
+        // Log::info($json);
+
+        foreach ($columns as &$column) {
+            $dataIndex = $column['dataIndex'];
+            if (isset($eloquentParams[$dataIndex])) {
+                $relationship = $eloquentParams[$dataIndex][0];
+                // Log::info($dataIndex . " " . $relationship);
+                if ($relationship === 'belongsToMany') {
+                    $relationshipJson = $json["_{$dataIndex}"];
+                    // Log::info($relationshipJson);
+                    $column['renderer'] = $relationshipJson['renderer'];
+                    $column['rendererParam'] = $relationshipJson['renderer_param'];
+                }
+            }
+        }
+        return $rawDataSource;
+    }
+
     public function index()
     {
         $type = Str::plural($this->type);
+        $columns = $this->getColumns($type);
+
         $pageLimit = $this->getPageLimit();
         $search = request('search');
-        $users = $this->getDataSource($pageLimit, $search);
-        $columns = $this->getColumns($type);
-        $dataSource = $users;
+        $rawDataSource = $this->getDataSource($pageLimit, $search);
+
+        $dataSource = $this->renderMeaningful($columns, $rawDataSource);
+        // Log::info($columns);
+
         return view('dashboards.pages.viewAll2')->with(compact('pageLimit', 'type', 'search', 'columns', 'dataSource'));
     }
 

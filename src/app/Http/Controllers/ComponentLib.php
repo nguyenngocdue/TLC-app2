@@ -11,19 +11,19 @@ class ComponentLib extends Controller
         $tableColumns = [
             [
                 "title" => 'ID', "dataIndex" => "id",
-                "render" => "id",
+                "renderer" => "id",
                 "align" => "center",
             ],
             [
                 "title" => 'Client', "dataIndex" => "client",
-                "render" => "avatar-name", "attributes" => ['title' => 'client', 'description' => 'amount', 'avatar' => 'avatar']
+                "renderer" => "avatar-name", "attributes" => ['title' => 'client', 'description' => 'amount', 'avatar' => 'avatar']
             ],
             [
                 "title" => 'Amount', "dataIndex" => "amount",
             ],
             [
                 "title" => 'Status', "dataIndex" => "status",
-                "render" => "tag", "attributes" => ['color' => 'color']
+                "renderer" => "tag", "attributes" => ['color' => 'color']
             ],
             [
                 "title" => 'Date', "dataIndex" => "date",
@@ -34,12 +34,12 @@ class ComponentLib extends Controller
             [
                 "title" => 'ID',
                 "dataIndex" => "id",
-                "render" => "id",
+                "renderer" => "id",
             ],
             [
                 "title" => 'Client',
                 "dataIndex" => "client",
-                "render" => "dropdown",
+                "renderer" => "dropdown",
                 "editable" => true,
                 "dataSource" => [
                     ["title" => "", "value" => ""],
@@ -53,13 +53,13 @@ class ComponentLib extends Controller
             [
                 "title" => 'Amount',
                 "dataIndex" => "amount",
-                "render" => "number",
+                "renderer" => "number",
                 "editable" => true,
             ],
             [
                 "title" => 'Status',
                 "dataIndex" => "status",
-                "render" => "dropdown",
+                "renderer" => "dropdown",
                 "editable" => true,
                 "dataSource" => [
                     ["title" => "", "value" => "",],
@@ -72,7 +72,7 @@ class ComponentLib extends Controller
             [
                 "title" => 'Date',
                 "dataIndex" => "date",
-                "render" => "text",
+                "renderer" => "text",
                 "editable" => true,
             ],
         ];

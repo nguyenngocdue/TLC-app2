@@ -17,13 +17,13 @@
         "name": "_workplaceRel1",
         "relationship": "workplaceRel1",
         "renderer": "count",
-        "renderer_param": "name",
+        "renderer_param": "name1",
         "control_name": "workplaceRel1"
     },
     "_workplaceRel2": {
         "name": "_workplaceRel2",
         "relationship": "workplaceRel2",
-        "renderer": "count",
+        "renderer": "column",
         "renderer_param": "name",
         "control_name": "workplaceRel2"
     }

@@ -37,58 +37,34 @@ abstract class ManageRelationshipController extends Controller
             [
                 "title" => "Name",
                 "dataIndex" => "name",
-                "render" => "read-only-text",
+                "renderer" => "read-only-text",
                 "editable" => true,
             ],
             [
                 "title" => "Relationship",
                 "dataIndex" => "relationship",
-                "render" => "read-only-text",
+                "renderer" => "read-only-text",
                 "editable" => true,
             ],
-            // [
-            //     "title" => "Label",
-            //     "dataIndex" => "label",
-            //     "render" => "text",
-            //     "editable" => true,
-            // ],
             [
                 "title" => "Renderer",
                 "dataIndex" => "renderer",
                 "editable" => true,
-                "render" => "dropdown",
+                "renderer" => "dropdown",
                 "dataSource" => $controls,
             ],
             [
                 "title" => "Renderer Param",
                 "dataIndex" => "renderer_param",
                 "editable" => true,
-                "render" => "text",
+                "renderer" => "text",
             ],
             [
                 "title" => "Control Name",
                 "dataIndex" => "control_name",
                 "editable" => true,
-                "render" => "text",
+                "renderer" => "text",
             ],
-            // [
-            //     "title" => "Col Span",
-            //     "dataIndex" => "col_span",
-            //     "editable" => true,
-            //     "render" => "number",
-            // ],
-            // [
-            //     "title" => "Hidden View All",
-            //     "dataIndex" => "hidden_view_all",
-            //     "editable" => true,
-            //     "render" => "dropdown",
-            // ],
-            // [
-            //     "title" => "Hidden Edit",
-            //     "dataIndex" => "hidden_edit",
-            //     "editable" => true,
-            //     "render" => "dropdown",
-            // ],
         ];
     }
 
