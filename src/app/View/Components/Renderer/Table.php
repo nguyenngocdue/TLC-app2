@@ -23,6 +23,7 @@ class Table extends Component
   {
     $editable = ($column['editable'] ?? false) ? ".editable" : "";
     $name = ($column['dataIndex'] ?? false) ? "name='{$column['dataIndex']}[]'" : "";
+    $type = ($column['type'] ?? false) ? "type='{$column['type']}'" : "";
     $rendererParam = ($column['rendererParam'] ?? false) ? "rendererParam='{$column['rendererParam']}'" : "";
     $attributes = $column['attributes'] ?? [];
     $dataSource = $column['dataSource'] ?? [["title" => "", "value" => ""], ["title" => "True", "value" => "true"]];
@@ -30,8 +31,9 @@ class Table extends Component
 
     array_walk($attributes, fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "");
     $attributeRendered = trim(join(" ", $attributes));
-    $output = "<x-renderer{$editable}.{$renderer} $name $attributeRendered $dataSourceRender $rendererParam>$rawData</x-renderer{$editable}.{$renderer}>";
+    $output = "<x-renderer{$editable}.{$renderer} $name $attributeRendered $type $dataSourceRender $rendererParam>$rawData</x-renderer{$editable}.{$renderer}>";
     // if ($editable) Log::info($output);
+    // Log::info($output);
     return Blade::render($output, ['dataSource' => $dataSource]);
   }
 

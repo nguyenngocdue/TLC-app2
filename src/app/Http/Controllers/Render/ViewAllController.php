@@ -49,14 +49,15 @@ abstract class ViewAllController extends Controller
 
     private function getColumns($type)
     {
-        function createObject($prop)
+        function createObject($prop, $type)
         {
             $allowControls = ['id', 'avatar-name'];
             $output = [
                 'title' => $prop['label'],
                 'dataIndex' => $prop['column_name'],
             ];
-            if (in_array($prop['control'], $allowControls)) $output['render'] = $prop['control'];
+            if ($prop['control'] === 'id') $output['type'] = $type;
+            if (in_array($prop['control'], $allowControls)) $output['renderer'] = $prop['control'];
             return $output;
         }
 
@@ -64,7 +65,7 @@ abstract class ViewAllController extends Controller
         if (!file_exists($propsPath)) return false;
         $props = json_decode(file_get_contents($propsPath), true);
         $props = array_filter($props, fn ($prop) => !$prop['hidden_view_all']);
-        $result = array_values(array_map(fn ($prop) => createObject($prop), $props));
+        $result = array_values(array_map(fn ($prop) => createObject($prop, $type), $props));
         return $result;
     }
 
