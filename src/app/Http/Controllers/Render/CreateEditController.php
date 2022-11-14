@@ -265,7 +265,7 @@ abstract class CreateEditController extends Controller
 				case 'store':
 					if ($validator->fails()) {
 						$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
-						$_colNameMediaUploaded = $this->handleUpload($request) + $colNameMediaUploaded; // save old value of media were uploaded
+						$_colNameMediaUploaded = $this->handleUpload($request) ?? [] + $colNameMediaUploaded; // save old value of media were uploaded
 
 
 						foreach ($keyMediaDel as $value) {
