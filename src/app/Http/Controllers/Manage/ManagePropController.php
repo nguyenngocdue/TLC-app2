@@ -128,7 +128,7 @@ abstract class ManagePropController extends Controller
         return $result;
     }
 
-    private function getRelationshipProps()
+    private function getMany2ManyProps()
     {
         $columnEloquentParams = App::make($this->typeModel)->eloquentParams;
 
@@ -137,8 +137,8 @@ abstract class ManagePropController extends Controller
             if ($elqValue[0] !== 'belongsToMany') continue;
             $result["_$elqName"] = [
                 "name" => "_$elqName",
-                "column_name" => "ELQ($elqName)",
-                // "relationship" => "E(" . $elqName . ")",
+                "column_name" => "$elqName",
+                "column_type" => "ELQ(M2M)",
             ];
         }
 
@@ -156,7 +156,7 @@ abstract class ManagePropController extends Controller
     private function getDataSource()
     {
         $result0 = $this->makeBlankResultObject();
-        $result1 = $this->getRelationshipProps();
+        $result1 = $this->getMany2ManyProps();
         $result = array_merge($result0, $result1);
         $json = $this->manageService->path($this->type, 'props');
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
@@ -164,6 +164,8 @@ abstract class ManagePropController extends Controller
         foreach ($json as $key => $columns) {
             $result[$key]["name"] = $key;
             foreach ($columns as $column => $value) {
+                //Ignore some JSON fields by the truth in Blank Result Object
+                if (in_array($column, ['column_name', 'column_type'])) continue;
                 $result[$key][$column] = $value;
             }
         }

@@ -27,7 +27,8 @@ class Checkbox extends Component
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
             $message =  "Not found control_name \"" . $colName . "\" in  Manage Relationships.";
             $type = 'warning';
-            return view('components.feedback.alert')->with(compact('message', 'type'));
+            return "<x-feedback.alert message='$message' type='$type' />";
+            // return view('components.feedback.alert')->with(compact('message', 'type'));
         }
         return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idItems', 'action', 'span', 'labelName'));
     }
