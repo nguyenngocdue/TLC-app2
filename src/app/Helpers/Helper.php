@@ -28,8 +28,8 @@ class Helper
                     $pathTableSource =  $eloquentParam[$value['relationship']][1] ?? [];
                     return Helper::getDataFromPathModel($pathTableSource);
                 }
-                return $colName;
             }
+            return $colName;
         }
 
         $keyNameEloquent = "";
