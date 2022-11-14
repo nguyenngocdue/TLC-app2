@@ -37,58 +37,34 @@ abstract class ManageRelationshipController extends Controller
             [
                 "title" => "Name",
                 "dataIndex" => "name",
-                "render" => "read-only-text",
+                "renderer" => "read-only-text",
                 "editable" => true,
             ],
             [
                 "title" => "Relationship",
                 "dataIndex" => "relationship",
-                "render" => "read-only-text",
+                "renderer" => "read-only-text",
                 "editable" => true,
             ],
-            // [
-            //     "title" => "Label",
-            //     "dataIndex" => "label",
-            //     "render" => "text",
-            //     "editable" => true,
-            // ],
             [
                 "title" => "Renderer",
                 "dataIndex" => "renderer",
                 "editable" => true,
-                "render" => "dropdown",
+                "renderer" => "dropdown",
                 "dataSource" => $controls,
             ],
             [
                 "title" => "Renderer Param",
                 "dataIndex" => "renderer_param",
                 "editable" => true,
-                "render" => "text",
+                "renderer" => "text",
             ],
             [
                 "title" => "Control Name",
                 "dataIndex" => "control_name",
                 "editable" => true,
-                "render" => "text",
+                "renderer" => "text",
             ],
-            // [
-            //     "title" => "Col Span",
-            //     "dataIndex" => "col_span",
-            //     "editable" => true,
-            //     "render" => "number",
-            // ],
-            // [
-            //     "title" => "Hidden View All",
-            //     "dataIndex" => "hidden_view_all",
-            //     "editable" => true,
-            //     "render" => "dropdown",
-            // ],
-            // [
-            //     "title" => "Hidden Edit",
-            //     "dataIndex" => "hidden_edit",
-            //     "editable" => true,
-            //     "render" => "dropdown",
-            // ],
         ];
     }
 
@@ -162,40 +138,17 @@ abstract class ManageRelationshipController extends Controller
         $columns = $this->getColumns();
         $columns = array_filter($columns, fn ($column) => !in_array($column['dataIndex'], ['color', 'action']));
 
-        foreach ($data['name'] as $key => $name) {
-            $array = [];
-            foreach ($columns as $column) {
-                $value = $data[$column['dataIndex']][$key] ?? "";
-                $array[$column['dataIndex']] = $value;
+        if (isset($data['name'])) { //<< This to trigger to create a json file with an empty array
+            foreach ($data['name'] as $key => $name) {
+                $array = [];
+                foreach ($columns as $column) {
+                    $value = $data[$column['dataIndex']][$key] ?? "";
+                    $array[$column['dataIndex']] = $value;
+                }
+                $result[$name] = $array;
             }
-            $result[$name] = $array;
         }
 
-
-        // if (isset($data['name'])) {
-        //     foreach ($data['name'] as $key => $name) {
-        //         $array = [];
-        //         $array['relationship'] = $data['relationship'][$key];
-        //         $array['eloquent'] = $data['eloquent'][$key];
-        //         $array['param_1'] = $data['param_1'][$key];
-        //         $array['param_2'] = $data['param_2'][$key];
-        //         $array['param_3'] = $data['param_3'][$key];
-        //         $array['param_4'] = $data['param_4'][$key];
-        //         $array['param_5'] = $data['param_5'][$key];
-        //         $array['param_6'] = $data['param_6'][$key];
-        //         $array['label'] = $data['label'][$key];
-        //         $array['renderer'] = $data['renderer'][$key];
-        //         $array['renderer_param'] = $data['renderer_param'][$key];
-        //         $array['control_name'] = $data['control_name'][$key];
-        //         $array['col_span'] = $data['col_span'][$key];
-        //         $array['hidden'] = $data['hidden'][$key];
-        //         $array['new_line'] = $data['new_line'][$key];
-        //         $array['type_line'] = "default";
-        //         $result[$name] = $array;
-        //     }
-        // } else {
-        //     $result = (object)[];
-        // }
         try {
             $this->manageService->checkUploadFile($result, $this->type, 'relationships');
             return back();

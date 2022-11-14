@@ -8,6 +8,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -49,14 +50,15 @@ abstract class ViewAllController extends Controller
 
     private function getColumns($type)
     {
-        function createObject($prop)
+        function createObject($prop, $type)
         {
             $allowControls = ['id', 'avatar-name'];
             $output = [
                 'title' => $prop['label'],
                 'dataIndex' => $prop['column_name'],
             ];
-            if (in_array($prop['control'], $allowControls)) $output['render'] = $prop['control'];
+            if ($prop['control'] === 'id') $output['type'] = $type;
+            if (in_array($prop['control'], $allowControls)) $output['renderer'] = $prop['control'];
             return $output;
         }
 
@@ -64,18 +66,74 @@ abstract class ViewAllController extends Controller
         if (!file_exists($propsPath)) return false;
         $props = json_decode(file_get_contents($propsPath), true);
         $props = array_filter($props, fn ($prop) => !$prop['hidden_view_all']);
-        $result = array_values(array_map(fn ($prop) => createObject($prop), $props));
+        $result = array_values(array_map(fn ($prop) => createObject($prop, $type), $props));
         return $result;
+    }
+
+    private function attachRendererIntoColumn(&$columns)
+    {
+        // Log::info($columns);
+        // Log::info($rawDataSource);
+        $eloquentParams = App::make($this->typeModel)->eloquentParams;
+        // Log::info($eloquentParams);
+
+        $typePlural = Str::plural($this->type);
+        $path = storage_path() . "/json/entities/{$typePlural}/relationships.json";
+        if (!file_exists($path)) return Blade::render("<x-feedback.result message='Relationship is missing' type='warning' />");
+        $json = json_decode(file_get_contents($path), true);
+        // Log::info($json);
+
+        foreach ($columns as &$column) {
+            $dataIndex = $column['dataIndex'];
+            if (isset($eloquentParams[$dataIndex])) {
+                $relationship = $eloquentParams[$dataIndex][0];
+                // Log::info($dataIndex . " " . $relationship);
+                if (in_array($relationship, ['belongsToMany', 'belongsTo'])) {
+                    $relationshipJson = $json["_{$dataIndex}"];
+                    // Log::info($relationshipJson);
+                    $column['renderer'] = $relationshipJson['renderer'];
+                    $column['rendererParam'] = $relationshipJson['renderer_param'];
+                }
+            }
+        }
+        return true;
+    }
+
+    private function attachEloquentNameIntoColumn(&$columns)
+    {
+        $eloquentParams = App::make($this->typeModel)->eloquentParams;
+
+        $eloquent = [];
+        foreach ($eloquentParams as $key => $eloquentParam) {
+            if (in_array($eloquentParam[0], ['belongsTo'])) {
+                $eloquent[$eloquentParam[2]] = $key;
+            }
+        }
+        // Log::info($eloquent);
+        // Log::info($columns);
+
+        $keys = array_keys($eloquent);
+        foreach ($columns as &$column) {
+            if (in_array($column['dataIndex'], $keys)) {
+                $column['dataIndex'] = $eloquent[$column['dataIndex']];
+            }
+        }
     }
 
     public function index()
     {
         $type = Str::plural($this->type);
+        $columns = $this->getColumns($type);
+
         $pageLimit = $this->getPageLimit();
         $search = request('search');
-        $users = $this->getDataSource($pageLimit, $search);
-        $columns = $this->getColumns($type);
-        $dataSource = $users;
+        $dataSource = $this->getDataSource($pageLimit, $search);
+
+        $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
+        $result = $this->attachRendererIntoColumn($columns);
+        if ($result !== true) return $result;
+        // Log::info($columns);
+
         return view('dashboards.pages.viewAll2')->with(compact('pageLimit', 'type', 'search', 'columns', 'dataSource'));
     }
 

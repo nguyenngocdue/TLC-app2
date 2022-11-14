@@ -1,38 +1,16 @@
 {
     "_user": {
+        "name": "_user",
         "relationship": "user",
-        "eloquent": "belongsTo",
-        "param_1": "App\\Models\\User",
-        "param_2": "head_of_department",
-        "param_3": null,
-        "param_4": null,
-        "param_5": null,
-        "param_6": null,
-        "label": "User",
         "renderer": "column",
         "renderer_param": "name",
-        "control_name": null,
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default"
+        "control_name": ""
     },
     "_Users_Count": {
+        "name": "_Users_Count",
         "relationship": "Users_Count",
-        "eloquent": "hasMany",
-        "param_1": "App\\Models\\User",
-        "param_2": "department",
-        "param_3": null,
-        "param_4": null,
-        "param_5": null,
-        "param_6": null,
-        "label": "Users Count",
         "renderer": "count",
-        "renderer_param": null,
-        "control_name": null,
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default"
+        "renderer_param": "",
+        "control_name": ""
     }
 }
