@@ -7,12 +7,14 @@ use App\Http\Services\Manage\ManageService;
 use App\Utils\Support\Table;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 abstract class ManagePropController extends Controller
 {
     protected $type = "";
+    protected $typeModel = "";
     protected $manageService;
     public function __construct(ManageService $manageService)
     {
@@ -109,10 +111,10 @@ abstract class ManagePropController extends Controller
         ];
     }
 
-    private function makeBlankResultObject($type)
+    private function makeBlankResultObject()
     {
-        $columnNames = Table::getColumnNames(Str::plural($type));
-        $columnTypes = Table::getColumnTypes(Str::plural($type));
+        $columnNames = Table::getColumnNames(Str::plural($this->type));
+        $columnTypes = Table::getColumnTypes(Str::plural($this->type));
 
         $result = [];
         foreach ($columnNames as $key => $value) {
@@ -126,6 +128,23 @@ abstract class ManagePropController extends Controller
         return $result;
     }
 
+    private function getRelationshipProps()
+    {
+        $columnEloquentParams = App::make($this->typeModel)->eloquentParams;
+
+        $result = [];
+        foreach ($columnEloquentParams as $elqName => $elqValue) {
+            if ($elqValue[0] !== 'belongsToMany') continue;
+            $result["_$elqName"] = [
+                "name" => "_$elqName",
+                "column_name" => "ELQ($elqName)",
+                // "relationship" => "E(" . $elqName . ")",
+            ];
+        }
+
+        return $result;
+    }
+
     private function addGreenAndRedColor($a, $b)
     {
         $toBeGreen = array_diff_key($a, $b);
@@ -134,10 +153,12 @@ abstract class ManagePropController extends Controller
         return [$toBeGreen, $toBeRed];
     }
 
-    private function getDataSource($type)
+    private function getDataSource()
     {
-        $result = $this->makeBlankResultObject($type);
-        $json = $this->manageService->path($type, 'props');
+        $result0 = $this->makeBlankResultObject();
+        $result1 = $this->getRelationshipProps();
+        $result = array_merge($result0, $result1);
+        $json = $this->manageService->path($this->type, 'props');
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
 
         foreach ($json as $key => $columns) {
@@ -157,7 +178,7 @@ abstract class ManagePropController extends Controller
     {
         $type = $this->type;
         $columns = $this->getColumns();
-        $dataSourceWithKey = $this->getDataSource($type);
+        $dataSourceWithKey = $this->getDataSource();
         $dataSource = array_values($dataSourceWithKey);
         return view('dashboards.props.manageprop')->with(compact('type', 'columns', 'dataSource'));
     }

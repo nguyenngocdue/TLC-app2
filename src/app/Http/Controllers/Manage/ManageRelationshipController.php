@@ -94,15 +94,13 @@ abstract class ManageRelationshipController extends Controller
 
     private function makeBlankResultObject()
     {
-        $typeModel = $this->typeModel;
-        $model = App::make($typeModel);
-        $columnEloquentParams = $model->eloquentParams;
-        if (!isset($columnEloquentParams)) {
-            $title = 'Warning Settings';
-            $message = 'Eloquent Param is empty!';
-            $type = 'warning';
-            return view('components.feedback.result')->with(compact('title', 'message', 'type'));
-        }
+        $columnEloquentParams = App::make($this->typeModel)->eloquentParams;
+        // if (!isset($columnEloquentParams)) {
+        //     $title = 'Warning Settings';
+        //     $message = 'Eloquent Param is empty!';
+        //     $type = 'warning';
+        //     return view('components.feedback.result')->with(compact('title', 'message', 'type'));
+        // }
 
         $result = [];
         foreach ($columnEloquentParams as $elqName => $elqValue) {
