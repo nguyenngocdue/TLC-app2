@@ -165,7 +165,7 @@ abstract class CreateEditController extends Controller
 		if ($relationshipFile) {
 			foreach ($relationshipFile as $value) {
 				if ($value["eloquent"] === "belongsToMany") {
-					$colNamePivots = isset($dataInput[$value['control_name']]) ?  $dataInput[$value['control_name']] : [];
+					$colNamePivots = isset($dataInput[$value['control_name']]) ?? [];
 					$fn = $value['relationship'];
 					$data->{$fn}()->sync($colNamePivots);
 				}
@@ -251,7 +251,7 @@ abstract class CreateEditController extends Controller
 			case 'store':
 				if ($validator->fails()) {
 					$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
-					$_colNameMediaUploaded = $this->handleUpload($request) + $colNameMediaUploaded; // save old value of media were uploaded
+					$_colNameMediaUploaded = $this->handleUpload($request) ?? [] + $colNameMediaUploaded; // save old value of media were uploaded
 
 
 					foreach ($keyMediaDel as $value) {

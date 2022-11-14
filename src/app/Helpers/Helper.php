@@ -48,7 +48,7 @@ class Helper
         return $newMessage;
     }
 
-    public static function customSlugData($file, $tableName, $orderColName, $medias)
+    public static function customizeSlugData($file, $tableName, $orderColName, $medias)
     {
 
 
