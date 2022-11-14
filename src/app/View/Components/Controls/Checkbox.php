@@ -24,9 +24,8 @@ class Checkbox extends Component
         $type = $this->type;
 
         $dataSource = Helper::getDatasource($modelPath, $colName, $type);
-
-        if (is_null($dataSource)) {
-            $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in Model).";
+        if (is_null($dataSource) || gettype($dataSource) === 'string') {
+            $message =  "Not found control_name \"" . $colName . "\" in  Manage Relationships.";
             $type = 'warning';
             return view('components.feedback.alert')->with(compact('message', 'type'));
         }

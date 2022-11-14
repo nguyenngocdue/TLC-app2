@@ -17,18 +17,20 @@ class Helper
 
     public static function getDatasource($modelPath, $colName, $type = null)
     {
-        if (!is_null($type)) {
-            $relationship = json_decode(file_get_contents("/var/www/app/storage/json/entities/$type/relationships.json"), true);
-            foreach ($relationship as $key => $value) {
-                if ($value['control_name'] === $colName) {
-                    $pathTableSource = $value['param_1'];
-                    return Helper::getDataFromPathModel($pathTableSource);
-                }
-            }
-        }
 
         $instance = new $modelPath;
         $eloquentParam = $instance->eloquentParams;
+
+        if (!is_null($type)) {
+            $relationship = json_decode(file_get_contents("/var/www/app/storage/json/entities/$type/relationships.json"), true);
+            foreach ($relationship as $value) {
+                if ($value['control_name'] === $colName) {
+                    $pathTableSource =  $eloquentParam[$value['relationship']][1] ?? [];
+                    return Helper::getDataFromPathModel($pathTableSource);
+                }
+                return $colName;
+            }
+        }
 
         $keyNameEloquent = "";
         foreach ($eloquentParam as $key => $value) {
@@ -37,7 +39,6 @@ class Helper
                 break;
             }
         }
-
         if ($keyNameEloquent === "") return $colName;
 
         $pathTableSource = $eloquentParam[$keyNameEloquent][1];
@@ -50,7 +51,7 @@ class Helper
         return $newMessage;
     }
 
-    public static function customizeSlugData($file, $tableName, $orderColName, $medias)
+    public static function customizeSlugData($file, $tableName, $medias)
     {
         $dataSource = json_decode(DB::table($tableName)->select('filename', 'extension')->get(), true);
         $data = array_map(fn ($item) => array_values($item)[0], $dataSource) ?? [];
