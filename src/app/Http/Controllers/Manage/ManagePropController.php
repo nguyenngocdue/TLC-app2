@@ -9,7 +9,6 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use PDO;
 
 abstract class ManagePropController extends Controller
 {

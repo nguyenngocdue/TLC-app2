@@ -155,7 +155,7 @@ abstract class ManageRelationshipController extends Controller
         $columns = $this->getColumns();
         $dataSourceWithKey = $this->getDataSource($type);
         $dataSource = array_values($dataSourceWithKey);
-        return view('dashboards.props.manageprop')->with(compact('type', 'columns', 'dataSource'));
+        return view('dashboards.props.managerelationship')->with(compact('type', 'columns', 'dataSource'));
 
         // if (!$dataManage) {
         //     $columnRelationships = array_keys($columnEloquentParams);
@@ -253,33 +253,46 @@ abstract class ManageRelationshipController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
-        $manage = [];
-        if (isset($data['name'])) {
-            foreach ($data['name'] as $key => $name) {
-                $array = [];
-                $array['relationship'] = $data['relationship'][$key];
-                $array['eloquent'] = $data['eloquent'][$key];
-                $array['param_1'] = $data['param_1'][$key];
-                $array['param_2'] = $data['param_2'][$key];
-                $array['param_3'] = $data['param_3'][$key];
-                $array['param_4'] = $data['param_4'][$key];
-                $array['param_5'] = $data['param_5'][$key];
-                $array['param_6'] = $data['param_6'][$key];
-                $array['label'] = $data['label'][$key];
-                $array['renderer'] = $data['renderer'][$key];
-                $array['renderer_param'] = $data['renderer_param'][$key];
-                $array['control_name'] = $data['control_name'][$key];
-                $array['col_span'] = $data['col_span'][$key];
-                $array['hidden'] = $data['hidden'][$key];
-                $array['new_line'] = $data['new_line'][$key];
-                $array['type_line'] = "default";
-                $manage[$name] = $array;
+        $result = [];
+        $columns = $this->getColumns();
+        $columns = array_filter($columns, fn ($column) => !in_array($column['dataIndex'], ['color', 'action']));
+
+        foreach ($data['name'] as $key => $name) {
+            $array = [];
+            foreach ($columns as $column) {
+                $value = $data[$column['dataIndex']][$key] ?? "";
+                $array[$column['dataIndex']] = $value;
             }
-        } else {
-            $manage = (object)[];
+            $result[$name] = $array;
         }
+
+
+        // if (isset($data['name'])) {
+        //     foreach ($data['name'] as $key => $name) {
+        //         $array = [];
+        //         $array['relationship'] = $data['relationship'][$key];
+        //         $array['eloquent'] = $data['eloquent'][$key];
+        //         $array['param_1'] = $data['param_1'][$key];
+        //         $array['param_2'] = $data['param_2'][$key];
+        //         $array['param_3'] = $data['param_3'][$key];
+        //         $array['param_4'] = $data['param_4'][$key];
+        //         $array['param_5'] = $data['param_5'][$key];
+        //         $array['param_6'] = $data['param_6'][$key];
+        //         $array['label'] = $data['label'][$key];
+        //         $array['renderer'] = $data['renderer'][$key];
+        //         $array['renderer_param'] = $data['renderer_param'][$key];
+        //         $array['control_name'] = $data['control_name'][$key];
+        //         $array['col_span'] = $data['col_span'][$key];
+        //         $array['hidden'] = $data['hidden'][$key];
+        //         $array['new_line'] = $data['new_line'][$key];
+        //         $array['type_line'] = "default";
+        //         $result[$name] = $array;
+        //     }
+        // } else {
+        //     $result = (object)[];
+        // }
         try {
-            $this->manageService->checkUploadFile($manage, $this->type, 'relationships');
+            $this->manageService->checkUploadFile($result, $this->type, 'relationships');
             return back();
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');
