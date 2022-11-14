@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManagePropController;
 class ManageZunit_test_3PropController extends ManagePropController
 {
     protected $type = 'zunit_test_3';
+    protected $typeModel = Zunit_test_3::class;
 }

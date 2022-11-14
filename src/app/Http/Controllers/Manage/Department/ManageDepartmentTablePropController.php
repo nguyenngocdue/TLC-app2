@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManageTablePropController;
 class ManageDepartmentTablePropController extends ManageTablePropController
 {
     protected $type = 'department';
+    protected $typeModel = Department::class;
 }

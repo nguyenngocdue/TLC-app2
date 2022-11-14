@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManageTablePropController;
 class ManageMedia_categoryTablePropController extends ManageTablePropController
 {
     protected $type = 'media_category';
+    protected $typeModel = Media_category::class;
 }

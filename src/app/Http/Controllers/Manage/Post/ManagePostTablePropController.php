@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManageTablePropController;
 class ManagePostTablePropController extends ManageTablePropController
 {
     protected $type = 'post';
+    protected $typeModel = Post::class;
 }

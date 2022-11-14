@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManagePropController;
 class ManageWorkplacePropController extends ManagePropController
 {
     protected $type = 'workplace';
+    protected $typeModel = Workplace::class;
 }

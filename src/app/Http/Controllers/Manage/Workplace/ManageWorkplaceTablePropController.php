@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManageTablePropController;
 class ManageWorkplaceTablePropController extends ManageTablePropController
 {
     protected $type = 'workplace';
+    protected $typeModel = Workplace::class;
 }

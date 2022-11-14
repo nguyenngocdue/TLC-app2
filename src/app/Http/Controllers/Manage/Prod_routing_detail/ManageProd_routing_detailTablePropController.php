@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManageTablePropController;
 class ManageProd_routing_detailTablePropController extends ManageTablePropController
 {
     protected $type = 'prod_routing_detail';
+    protected $typeModel = Prod_routing_detail::class;
 }

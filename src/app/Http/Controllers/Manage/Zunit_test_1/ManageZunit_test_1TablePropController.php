@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManageTablePropController;
 class ManageZunit_test_1TablePropController extends ManageTablePropController
 {
     protected $type = 'zunit_test_1';
+    protected $typeModel = Zunit_test_1::class;
 }

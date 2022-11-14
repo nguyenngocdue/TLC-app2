@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManageTablePropController;
 class ManageUser_position_preTablePropController extends ManageTablePropController
 {
     protected $type = 'user_position_pre';
+    protected $typeModel = User_position_pre::class;
 }

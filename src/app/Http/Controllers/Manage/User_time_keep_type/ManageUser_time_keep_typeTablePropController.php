@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManageTablePropController;
 class ManageUser_time_keep_typeTablePropController extends ManageTablePropController
 {
     protected $type = 'user_time_keep_type';
+    protected $typeModel = User_time_keep_type::class;
 }

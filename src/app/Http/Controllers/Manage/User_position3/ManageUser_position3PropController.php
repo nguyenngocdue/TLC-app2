@@ -7,4 +7,5 @@ use App\Http\Controllers\Manage\ManagePropController;
 class ManageUser_position3PropController extends ManagePropController
 {
     protected $type = 'user_position3';
+    protected $typeModel = User_position3::class;
 }
