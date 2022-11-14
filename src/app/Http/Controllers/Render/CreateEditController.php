@@ -25,11 +25,11 @@ abstract class CreateEditController extends Controller
 	public function __construct(protected UploadService $upload, protected ReadingFileService $readingFileService)
 	{
 	}
-
 	public function getType()
 	{
 		return $this->type;
 	}
+
 
 	public function create()
 	{
@@ -61,17 +61,7 @@ abstract class CreateEditController extends Controller
 
 		$tablePath = $this->data;
 
-		$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $currentElement->getTable(), "relationships.json");
-		$idItems = [];
-		if ($relationshipFile) {
-			foreach ($relationshipFile as $key => $value) {
-				if ($value["eloquent"] === "belongsToMany") {
-					$fn = $value['relationship'];
-					$idItems[$value['control_name']] = json_decode($currentElement->$fn->pluck('id'));
-				}
-			}
-		}
-
+		$idItems = $this->syncManyToManyRelationship($tablePath, [], $action, $currentElement);
 		return view('dashboards.pages.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'tablePath', 'idItems'));
 	}
 
@@ -98,7 +88,7 @@ abstract class CreateEditController extends Controller
 
 
 		if ($data->save()) {
-			$this->syncManyToManyRelationship($data, $dataInput);
+			$this->syncManyToManyRelationship($data, $dataInput, 'update', []);
 		}
 
 		if ($data->save()) Toastr::success("$this->type updated successfully", "Update $this->type");
@@ -124,9 +114,9 @@ abstract class CreateEditController extends Controller
 		$data = $this->data::create($dataInputNotAttachMent);
 
 		if (isset($data)) {
-			$this->syncManyToManyRelationship($data, $dataInputHasAttachment); // Check box
+			$this->syncManyToManyRelationship($data, $dataInputHasAttachment, 'store', null); // Check box
 			$colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
-			// dd($colNameMediaUploaded);
+
 			$mediaValidator ? $this->getSetParentMedia($data, $colNameMediaUploaded) : false;
 			Toastr::success("$this->type created successfully", "Create $this->type");
 		}
@@ -165,17 +155,32 @@ abstract class CreateEditController extends Controller
 		}
 	}
 
-	private function syncManyToManyRelationship($data, $dataInput) //checkBox
+	private function syncManyToManyRelationship($data = null, $dataInput = [], $action, $currentElement) //checkBox
 	{
-		$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $data->getTable(), "relationships.json");
-		if ($relationshipFile) {
-			foreach ($relationshipFile as $value) {
-				if ($value["eloquent"] === "belongsToMany") {
-					$colNamePivots = isset($dataInput[$value['control_name']]) ?? [];
-					$fn = $value['relationship'];
-					$data->{$fn}()->sync($colNamePivots);
+		$instance = new $this->data;
+		$eloquentParams = $instance->eloquentParams;
+		$relationshipFile = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $instance->getTable(), "relationships.json");
+
+		if ($eloquentParams) {
+			$idItems = [];
+			foreach ($eloquentParams as $fn => $value) {
+				if ($value[0] === "belongsToMany") {
+					$colNamePivots = "";
+					foreach ($relationshipFile as $value) {
+						if ($value['relationship'] === $fn) {
+							if ($action === "update" || $action === "store") {
+								$colNamePivots = $dataInput[$value['control_name']] ?? [];
+								$data->{$fn}()->sync($colNamePivots);
+								break;
+							}
+							if ($action === "edit") {
+								$idItems[$value['control_name']] = json_decode($currentElement->$fn->pluck('id'));
+							}
+						}
+					}
 				}
 			}
+			return $idItems;
 		}
 	}
 
@@ -227,6 +232,7 @@ abstract class CreateEditController extends Controller
 		if (!isset($request->input()['attachment_1_deleted']) && count($request->input()) <= 0) {
 			return false;
 		} else { // only run when controls is attachment
+			$itemsValidation = [];
 			foreach ($props as $value) {
 				is_null($value['validation']) ? "" : $itemsValidation[$value['column_name']] = $value['validation'];
 			}

@@ -107,7 +107,6 @@ class Helper
     public static function getMaxNumberMediaName($data, $strSearch, $file, $extensionFile)
     {
         $itemHasFileName = "";
-
         foreach ($data as $value) {
             if (str_contains($value, $strSearch) && str_contains($value, $extensionFile)) {
                 $itemHasFileName = $value;
