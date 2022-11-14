@@ -6,9 +6,28 @@ use Illuminate\Support\Facades\DB;
 
 class Helper
 {
-    public static function getDatasource($modelPath, $colName)
+    public static function getDataFromPathModel($modelPath)
     {
-        $instance = new $modelPath();
+        $insTableSource = new $modelPath();
+        $tableName = $insTableSource->getTable();
+        $_dataSource = DB::table($tableName)->orderBy('name')->get();
+        $dataSource = [$tableName => $_dataSource];
+        return  $dataSource;
+    }
+
+    public static function getDatasource($modelPath, $colName, $type = null)
+    {
+        if (!is_null($type)) {
+            $relationship = json_decode(file_get_contents("/var/www/app/storage/json/entities/$type/relationships.json"), true);
+            foreach ($relationship as $key => $value) {
+                if ($value['control_name'] === $colName) {
+                    $pathTableSource = $value['param_1'];
+                    return Helper::getDataFromPathModel($pathTableSource);
+                }
+            }
+        }
+
+        $instance = new $modelPath;
         $eloquentParam = $instance->eloquentParams;
 
         $keyNameEloquent = "";
@@ -18,16 +37,11 @@ class Helper
                 break;
             }
         }
+
         if ($keyNameEloquent === "") return $colName;
 
         $pathTableSource = $eloquentParam[$keyNameEloquent][1];
-        $insTableSource = new $pathTableSource();
-        $tableName = $insTableSource->getTable();
-
-        $_dataSource = DB::table($tableName)->orderBy('name')->get();
-        $dataSource = [$tableName => $_dataSource];
-
-        return $dataSource;
+        return Helper::getDataFromPathModel($pathTableSource);
     }
 
     public static function customMessageValidation($message, $colName, $labelName)
@@ -36,9 +50,7 @@ class Helper
         return $newMessage;
     }
 
-
-
-    public static function customSlugData($file, $tableName, $orderColName, $medias)
+    public static function customizeSlugData($file, $tableName, $orderColName, $medias)
     {
         $dataSource = json_decode(DB::table($tableName)->select('filename', 'extension')->get(), true);
         $data = array_map(fn ($item) => array_values($item)[0], $dataSource) ?? [];

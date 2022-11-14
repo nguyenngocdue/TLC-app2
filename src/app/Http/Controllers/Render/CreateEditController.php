@@ -171,7 +171,7 @@ abstract class CreateEditController extends Controller
 		if ($relationshipFile) {
 			foreach ($relationshipFile as $value) {
 				if ($value["eloquent"] === "belongsToMany") {
-					$colNamePivots = isset($dataInput[$value['control_name']]) ?  $dataInput[$value['control_name']] : [];
+					$colNamePivots = isset($dataInput[$value['control_name']]) ?? [];
 					$fn = $value['relationship'];
 					$data->{$fn}()->sync($colNamePivots);
 				}
