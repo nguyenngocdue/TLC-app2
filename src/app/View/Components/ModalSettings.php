@@ -28,18 +28,16 @@ class ModalSettings extends Component
         $path = storage_path() . "/json/entities/$this->type/props.json";
         $props = json_decode(file_get_contents($path), true);
 
-        $allColumns = array_filter($props, fn ($prop) => isset($prop['hidden_view_all']) && $prop['hidden_view_all'] === 'true');
+        $allColumns = array_filter($props, fn ($prop) => isset($prop['hidden_view_all']) && $prop['hidden_view_all'] !== 'true');
 
         $settings = CurrentUser::getSettings();
-        $columnLimit = $settings[$this->type]['columns'] ?? false;
-
-        // dd($columnLimit);
-        if ($columnLimit) $allColumns = array_diff_key($allColumns, $columnLimit);
-        // dd($allColumns);
+        $selected = $settings[$this->type]['columns'] ?? [];
 
         return view('components.modal-settings', [
             'type' => $this->type,
             'title' => $this->title,
+            'allColumns' => $allColumns,
+            'selected' => $selected,
         ]);
     }
 }
