@@ -6,10 +6,12 @@ use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Illuminate\Notifications\Notifiable;
+
 
 class Prod_order extends Model
 {
-    use HasFactory, Searchable, CheckPermissionEntities;
+    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     public $timestamps = true;
     protected $fillable = ["id", "slug", "name", "production", "compliance", "description", "quantity", "prod_sub_project_id", "prod_routing_id"];
     protected $primaryKey = 'id';

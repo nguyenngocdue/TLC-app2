@@ -6,10 +6,12 @@ use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Illuminate\Notifications\Notifiable;
+
 
 class Prod_run extends Model
 {
-    use HasFactory, Searchable, CheckPermissionEntities;
+    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     public $timestamps = true;
     protected $fillable = ["prod_order_id", "prod_routing_link_id", "status", "total_hours", "total_man_hours"];
     protected $primaryKey = 'id';

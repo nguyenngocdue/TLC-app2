@@ -5,11 +5,12 @@ namespace App\Models;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
 class Workplace extends Model
 {
-    use HasFactory, Searchable, CheckPermissionEntities;
+    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["name", "description", "def_publish_holiday_hour", "def_assignee", "def_monitors", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'workplaces';

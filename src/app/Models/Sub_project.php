@@ -6,10 +6,12 @@ use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Illuminate\Notifications\Notifiable;
+
 
 class Sub_project extends Model
 {
-    use HasFactory, Searchable, CheckPermissionEntities;
+    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     public $timestamps = false;
     protected $fillable = ["id", "name", "description", "sub_project_status_id", "slug"];
     protected $primaryKey = 'id';
