@@ -6,7 +6,8 @@
 </button>
 <template x-if="isNotificationsMenuOpen">
     <ul x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.away="closeNotificationsMenu" @keydown.escape="closeNotificationsMenu" class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700">
-        @foreach($dataCountNotification as $key => $value)
+        <p class="font-bold">Notification</p>
+        @forelse($dataCountNotification as $key => $value)
         <li class="flex">
             <a class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="#">
                 <span>{{Str::modelToPretty($key)}}</span>
@@ -15,6 +16,17 @@
                 </span>
             </a>
         </li>
-        @endforeach
+        @empty
+
+        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+            <div class="flex  items-center ">
+                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" /></svg></div>
+                <p class="text-sm">No notifications.</p>
+                <div>
+                </div>
+            </div>
+        </div>
+        @endforelse()
     </ul>
 </template>
