@@ -7,6 +7,10 @@ use Ndc\Spatiecustom\Exceptions\UnauthorizedException;
 
 class CurrentUser
 {
+    public static function getSettings()
+    {
+        return Auth::user()->settings;
+    }
 
     public static function isAdmin()
     {

@@ -1,6 +1,8 @@
 @php
 $valDataSource = array_values($dataSource)[0];
+// dd($idItems, $colName)
 @endphp
+
 <select multiple name="{{$colName}}[]" id="countries" class=" min-h-[150px] max-h-[200px] border bg-white border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
     @foreach($valDataSource as $key => $data)
     @php

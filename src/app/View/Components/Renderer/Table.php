@@ -15,31 +15,38 @@ class Table extends Component
    */
   public function __construct(private $columns = [], private $dataSource = null, private $showNo = false)
   {
-    // Log::info($columns);
-    // Log::info($dataSource);
   }
 
-  private function applyRender($render, $rawData, $column, $dataLine)
+  private function applyRender($renderer, $rawData, $column, $dataLine)
   {
     $editable = ($column['editable'] ?? false) ? ".editable" : "";
     $name = ($column['dataIndex'] ?? false) ? "name='{$column['dataIndex']}[]'" : "";
+    $type = ($column['type'] ?? false) ? "type='{$column['type']}'" : "";
+    $rendererParam = ($column['rendererParam'] ?? false) ? "rendererParam='{$column['rendererParam']}'" : "";
     $attributes = $column['attributes'] ?? [];
     $dataSource = $column['dataSource'] ?? [["title" => "", "value" => ""], ["title" => "True", "value" => "true"]];
+    $columnRender = $column ? ':column=\'$column\'' : "";
     $dataSourceRender = $dataSource ? ':dataSource=\'$dataSource\'' : "";
+    $dataLineRender = $dataLine ? ':dataLine=\'$dataLine\'' : "";
 
     array_walk($attributes, fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "");
     $attributeRendered = trim(join(" ", $attributes));
-    $output = "<x-renderer{$editable}.{$render} $name $attributeRendered $dataSourceRender>$rawData</x-renderer{$editable}.{$render}>";
+    $output = "<x-renderer{$editable}.{$renderer} $name $attributeRendered $type $dataSourceRender $dataLineRender $columnRender $rendererParam>$rawData</x-renderer{$editable}.{$renderer}>";
     // if ($editable) Log::info($output);
-    return Blade::render($output, ['dataSource' => $dataSource]);
+    // Log::info($output);
+    return Blade::render($output, [
+      'dataSource' => $dataSource,
+      'column' => $column,
+      'dataLine' => $dataLine,
+    ]);
   }
 
   private function makeColumn($column)
   {
-    $render = $column['render'] ?? "_";
+    $renderer = $column['renderer'] ?? "_";
     $dataIndex = $column['dataIndex'];
     $title = $column['title'];
-    return "<th class='{$dataIndex}_th px-4 py-3' title=\"{$dataIndex} / {$render}\">{$title}</th>";
+    return "<th class='{$dataIndex}_th px-4 py-3' title=\"{$dataIndex} / {$renderer}\">{$title}</th>";
   }
 
   private function makeTrTd($columns, $dataSource)
@@ -48,20 +55,20 @@ class Table extends Component
     $colspan = sizeof($columns);
 
     if (is_null($dataSource)) return "<tr><td colspan=$colspan>" . Blade::render("<x-feedback.alert type='error' message='DataSource attribute is missing.' />") . "</td></tr>";
-    if (empty($dataSource)) return "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
+    if (empty($dataSource) || (is_object($dataSource) && empty($dataSource->items()))) return "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
 
     foreach ($dataSource as $no => $dataLine) {
       $tds = [];
       foreach ($columns as $column) {
-        $render = $column['render'] ?? false;
-        switch ($render) {
+        $renderer = $column['renderer'] ?? false;
+        switch ($renderer) {
           case  'no.':
             $rendered = $no + 1;
             break;
           default:
             $dataIndex = $column['dataIndex'];
             $rawData = $dataLine[$dataIndex] ?? ""; //"<strong>$dataIndex</strong> not found";
-            $rendered = $render ? $this->applyRender($render, $rawData, $column, $dataLine) : $rawData;
+            $rendered = $renderer ? $this->applyRender($renderer, $rawData, $column, $dataLine) : $rawData;
             break;
         }
         $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
@@ -90,11 +97,12 @@ class Table extends Component
 
     // Log::info($this->showNo);
     if ($this->showNo) {
-      array_unshift($columns, ["title" => "No.", "render" => "no.", "dataIndex" => "auto.no.", 'align' => 'center']);
+      array_unshift($columns, ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center']);
       // Log::info($columns);
     }
 
     $dataSource = $this->dataSource;
+    // Log::info($dataSource);
     $columnsRendered = [];
     array_walk($columns, function ($column, $key) use (&$columnsRendered) {
       $columnsRendered[] = $this->makeColumn($column, $key);
@@ -109,6 +117,6 @@ class Table extends Component
       $pagination =  $dataSource->links('dashboards.pagination.template');
     }
 
-    return view("components.renderer.table")->with(compact('columnsRendered', 'trtd', 'showing', 'pagination'));
+    return view("components.renderer.table")->with(compact('columnsRendered', 'trtd', 'showing', 'pagination', 'columns', 'dataSource'));
   }
 }

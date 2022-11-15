@@ -5,11 +5,12 @@ namespace App\Models;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
 class Zunit_test_1 extends Model
 {
-    use HasFactory, Searchable, CheckPermissionEntities;
+    use Notifiable,  HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["text1", "text2", "text3", "dropdown1", "radio1", "boolean1"];
     protected $primaryKey = 'id';
     protected $table = 'zunit_test_1s';
@@ -17,8 +18,8 @@ class Zunit_test_1 extends Model
     public $eloquentParams = [
         "workplaceDropDown1" => ['belongsTo', Workplace::class, 'dropdown1'],
         "workplaceRadio1" => ['belongsTo', Workplace::class, 'radio1'],
-        "workplaceRel1" => ['belongsToMany', Workplace::class, 'zunit_test_1s_workplaces_rel_1', 'zunit_test_1_id', 'workplace_id', 'checkbox1'],
-        "workplaceRel2" => ['belongsToMany', Workplace::class, 'zunit_test_1s_workplaces_rel_2', 'zunit_test_1_id', 'workplace_id', 'checkbox2'],
+        "workplaceRel1" => ['belongsToMany', Workplace::class, 'zunit_test_1s_workplaces_rel_1', 'zunit_test_1_id', 'workplace_id'],
+        "workplaceRel2" => ['belongsToMany', Workplace::class, 'zunit_test_1s_workplaces_rel_2', 'zunit_test_1_id', 'workplace_id'],
     ];
     public function workplaceDropDown1()
     {

@@ -29,3 +29,16 @@
         </div>
     </div>
 </div>
+
+@if(env("ENV_OF_FORTUNE"))
+@roleset('admin')
+<div x-show="open" class="grid grid-cols-2 gap-4  ">
+    @dump($columns)
+    <div>
+        @dump(is_object($dataSource) ? "DataSource is OBJECT" : "DataSource is ARRAY")
+        @dump(is_object($dataSource) ? $dataSource->items(): $dataSource)
+    </div>
+</div>
+<br />
+@endroleset
+@endif

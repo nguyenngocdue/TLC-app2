@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 
 class Dropdownmulti extends Component
 {
-    public function __construct(private $colName, private $idItems, private $action, private $tablePath, private $labelName)
+    public function __construct(private $colName, private $idItems, private $action, private $tablePath, private $labelName, private $type)
     {
     }
 
@@ -19,15 +19,14 @@ class Dropdownmulti extends Component
         $idItems = $this->idItems;
         $labelName = $this->labelName;
         $modelPath = $this->tablePath;
+        $type = $this->type;
 
-        $dataSource = Helper::getDatasource($modelPath, $colName);
-
-        if (is_null($dataSource)) {
-            $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in Model).";
+        $dataSource = Helper::getDatasource($modelPath, $colName, $type);
+        if (is_null($dataSource) || gettype($dataSource) === 'string') {
+            $message =  "Not found control_name \"" . $colName . "\" in  Manage Relationships.";
             $type = 'warning';
-            return view('components.feedback.alert')->with(compact('message', 'type'));
+            return "<x-feedback.alert message='{{$message}}' type='{{$type}}' />";
         }
-
         return view('components.controls.dropdownmulti')->with(compact('dataSource', 'colName', 'idItems', 'action', 'span', 'labelName'));
     }
 }

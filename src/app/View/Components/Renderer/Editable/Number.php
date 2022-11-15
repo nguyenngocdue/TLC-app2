@@ -14,8 +14,6 @@ class Number extends Component
      */
     public function __construct(private $name = "", private $placeholder = "")
     {
-        //
-        // Log::info($this->name);
     }
 
     /**

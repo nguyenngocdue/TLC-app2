@@ -1,13 +1,15 @@
 @extends('layouts.app')
 
-@section('title', Str::pretty( $action))
+@section("title", Str::pretty($action))
 
 @section('content')
+
 @php
 $editType = Str::plural($type);
 $labelValidation = "";
 $id = $action === "edit" ? $values->id : "";
 @endphp
+
 <x-controls.headeralertvalidation :strProps="$props" />
 <form class="w-full p-4 z-0 px-4 py-3 text-center mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'_addnew.store': $editType.'_edit.update', $action === "create" ? 0 : $id )}} ">
     @csrf
@@ -80,7 +82,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case ('dropdown_multi')
-                        <x-controls.dropdownmulti colName={{$column_name}} :idItems="$idItems" action={{$action}} tablePath={{$tablePath}} labelName={{$label}} />
+                        <x-controls.dropdownmulti colName={{$column_name}} :idItems="$idItems" action={{$action}} tablePath={{$tablePath}} labelName={{$label}} type={{$type}} />
                         @break
 
                         @case('attachment')
@@ -92,7 +94,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case('checkbox')
-                        <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} tablePath={{$tablePath}} labelName={{$label}} />
+                        <x-controls.checkbox id={{$id}} colName={{$column_name}} :idItems="$idItems" action={{$action}} tablePath={{$tablePath}} labelName={{$label}} type={{$type}} />
                         @break
 
                         @case('number')

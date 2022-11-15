@@ -74,7 +74,6 @@ abstract class ViewAllController extends Controller
         $search = request('search');
         $users = $this->getDataSource($pageLimit, $search);
         $columns = $this->getColumns($type);
-        // Log::info($columns);
 
         $propsPath = storage_path() . "/json/entities/$type/props.json";
         $relPath = storage_path() . "/json/entities/$type/relationships.json";

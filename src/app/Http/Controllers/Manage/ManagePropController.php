@@ -7,13 +7,14 @@ use App\Http\Services\Manage\ManageService;
 use App\Utils\Support\Table;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use PDO;
 
 abstract class ManagePropController extends Controller
 {
     protected $type = "";
+    protected $typeModel = "";
     protected $manageService;
     public function __construct(ManageService $manageService)
     {
@@ -36,84 +37,84 @@ abstract class ManagePropController extends Controller
             [
                 "title" => "Name",
                 "dataIndex" => "name",
-                "render" => "read-only-text",
+                "renderer" => "read-only-text",
                 "editable" => true,
             ],
             [
                 "title" => "Column Name",
                 "dataIndex" => "column_name",
-                "render" => "read-only-text",
+                "renderer" => "read-only-text",
                 "editable" => true,
             ],
             [
                 "title" => "Column Type",
                 "dataIndex" => "column_type",
-                "render" => "read-only-text",
+                "renderer" => "read-only-text",
                 "editable" => true,
             ],
             [
                 "title" => "Label",
                 "dataIndex" => "label",
-                "render" => "text",
+                "renderer" => "text",
                 "editable" => true,
             ],
             [
                 "title" => "Control",
                 "dataIndex" => "control",
                 "editable" => true,
-                "render" => "dropdown",
+                "renderer" => "dropdown",
                 "dataSource" => $controls,
             ],
             [
                 "title" => "Col Span",
                 "dataIndex" => "col_span",
                 "editable" => true,
-                "render" => "number",
+                "renderer" => "number",
             ],
             [
                 "title" => "Hidden View All",
                 "dataIndex" => "hidden_view_all",
                 "editable" => true,
-                "render" => "dropdown",
+                "renderer" => "dropdown",
             ],
             [
                 "title" => "Hidden Edit",
                 "dataIndex" => "hidden_edit",
                 "editable" => true,
-                "render" => "dropdown",
+                "renderer" => "dropdown",
             ],
             [
                 "title" => "New Line",
                 "dataIndex" => "new_line",
                 "editable" => true,
-                "render" => "dropdown",
+                "renderer" => "dropdown",
             ],
             [
                 "title" => "Validation",
                 "dataIndex" => "validation",
                 "editable" => true,
-                "render" => "text",
+                "renderer" => "text",
             ],
             [
                 "title" => "Frozen Left",
                 "dataIndex" => "frozen_left",
                 "editable" => true,
-                "render" => "dropdown",
+                "renderer" => "dropdown",
             ],
             [
                 "title" => "Frozen Right",
                 "dataIndex" => "frozen_right",
                 "editable" => true,
-                "render" => "dropdown",
+                "renderer" => "dropdown",
             ],
 
         ];
     }
 
-    private function makeBlankResultObject($type)
+    private function makeBlankResultObject()
     {
-        $columnNames = Table::getColumnNames(Str::plural($type));
-        $columnTypes = Table::getColumnTypes(Str::plural($type));
+        $columnNames = Table::getColumnNames(Str::plural($this->type));
+        $columnTypes = Table::getColumnTypes(Str::plural($this->type));
 
         $result = [];
         foreach ($columnNames as $key => $value) {
@@ -122,8 +123,36 @@ abstract class ManagePropController extends Controller
                 "column_name" => $value,
                 "column_type" => $columnTypes[$key],
                 "label" => Str::pretty($value),
+                "col_span" => 12,
             ];
         }
+        return $result;
+    }
+
+    private function getMany2ManyProps()
+    {
+        $columnEloquentParams = App::make($this->typeModel)->eloquentParams;
+
+        $result = [];
+        foreach ($columnEloquentParams as $elqName => $elqValue) {
+            if ($elqValue[0] === 'belongsToMany') {
+                $result["_$elqName"] = [
+                    "name" => "_$elqName",
+                    "column_name" => "$elqName",
+                    "column_type" => "ELQ(belongsToMany)",
+                    "col_span" => 12,
+                ];
+            }
+            if ($elqValue[0] === 'hasMany') {
+                $result["_$elqName"] = [
+                    "name" => "_$elqName",
+                    "column_name" => "$elqName",
+                    "column_type" => "ELQ(hasMany)",
+                    "col_span" => 12,
+                ];
+            }
+        }
+
         return $result;
     }
 
@@ -135,15 +164,19 @@ abstract class ManagePropController extends Controller
         return [$toBeGreen, $toBeRed];
     }
 
-    private function getDataSource($type)
+    private function getDataSource()
     {
-        $result = $this->makeBlankResultObject($type);
-        $json = $this->manageService->path($type, 'props');
+        $result0 = $this->makeBlankResultObject();
+        $result1 = $this->getMany2ManyProps();
+        $result = array_merge($result0, $result1);
+        $json = $this->manageService->path($this->type, 'props');
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
 
         foreach ($json as $key => $columns) {
             $result[$key]["name"] = $key;
             foreach ($columns as $column => $value) {
+                //Ignore some JSON fields by the truth in Blank Result Object
+                if (in_array($column, ['column_name', 'column_type'])) continue;
                 $result[$key][$column] = $value;
             }
         }
@@ -158,7 +191,7 @@ abstract class ManagePropController extends Controller
     {
         $type = $this->type;
         $columns = $this->getColumns();
-        $dataSourceWithKey = $this->getDataSource($type);
+        $dataSourceWithKey = $this->getDataSource();
         $dataSource = array_values($dataSourceWithKey);
         return view('dashboards.props.manageprop')->with(compact('type', 'columns', 'dataSource'));
     }

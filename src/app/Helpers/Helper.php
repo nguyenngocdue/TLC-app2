@@ -6,10 +6,31 @@ use Illuminate\Support\Facades\DB;
 
 class Helper
 {
-    public static function getDatasource($modelPath, $colName)
+    public static function getDataFromPathModel($modelPath)
     {
-        $instance = new $modelPath();
+        $insTableSource = new $modelPath();
+        $tableName = $insTableSource->getTable();
+        $_dataSource = DB::table($tableName)->orderBy('name')->get();
+        $dataSource = [$tableName => $_dataSource];
+        return  $dataSource;
+    }
+
+    public static function getDatasource($modelPath, $colName, $type = null)
+    {
+
+        $instance = new $modelPath;
         $eloquentParam = $instance->eloquentParams;
+
+        if (!is_null($type)) {
+            $relationship = json_decode(file_get_contents("/var/www/app/storage/json/entities/$type/relationships.json"), true);
+            foreach ($relationship as $value) {
+                if ($value['control_name'] === $colName) {
+                    $pathTableSource =  $eloquentParam[$value['relationship']][1] ?? [];
+                    return Helper::getDataFromPathModel($pathTableSource);
+                }
+            }
+            return $colName;
+        }
 
         $keyNameEloquent = "";
         foreach ($eloquentParam as $key => $value) {
@@ -21,13 +42,7 @@ class Helper
         if ($keyNameEloquent === "") return $colName;
 
         $pathTableSource = $eloquentParam[$keyNameEloquent][1];
-        $insTableSource = new $pathTableSource();
-        $tableName = $insTableSource->getTable();
-
-        $_dataSource = DB::table($tableName)->orderBy('name')->get();
-        $dataSource = [$tableName => $_dataSource];
-
-        return $dataSource;
+        return Helper::getDataFromPathModel($pathTableSource);
     }
 
     public static function customMessageValidation($message, $colName, $labelName)
@@ -36,9 +51,7 @@ class Helper
         return $newMessage;
     }
 
-
-
-    public static function customSlugData($file, $tableName, $orderColName, $medias)
+    public static function customizeSlugData($file, $tableName, $medias)
     {
         $dataSource = json_decode(DB::table($tableName)->select('filename', 'extension')->get(), true);
         $data = array_map(fn ($item) => array_values($item)[0], $dataSource) ?? [];
@@ -94,7 +107,6 @@ class Helper
     public static function getMaxNumberMediaName($data, $strSearch, $file, $extensionFile)
     {
         $itemHasFileName = "";
-
         foreach ($data as $value) {
             if (str_contains($value, $strSearch) && str_contains($value, $extensionFile)) {
                 $itemHasFileName = $value;

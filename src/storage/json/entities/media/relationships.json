@@ -1,20 +1,16 @@
 {
     "_user": {
+        "name": "_user",
         "relationship": "user",
-        "eloquent": "belongsTo",
-        "param_1": "App\\Models\\User",
-        "param_2": "owner_id",
-        "param_3": null,
-        "param_4": null,
-        "param_5": null,
-        "param_6": null,
-        "label": "User",
         "renderer": "column",
         "renderer_param": "name",
-        "control_name": null,
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default"
+        "control_name": ""
+    },
+    "_category": {
+        "name": "_category",
+        "relationship": "belongsTo",
+        "renderer": "column",
+        "renderer_param": "name",
+        "control_name": ""
     }
 }
