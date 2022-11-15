@@ -2,8 +2,8 @@
     "_user": {
         "name": "_user",
         "relationship": "user",
-        "renderer": "column",
-        "renderer_param": "name",
+        "renderer": "avatar_name",
+        "renderer_param": "",
         "control_name": ""
     },
     "_Users_Count": {

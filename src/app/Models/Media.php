@@ -18,6 +18,7 @@ class Media extends Model
     // ];
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],
+        // "category" => ['belongsTo', Media_category::class, 'category'],
     ];
     public function user()
     {
@@ -32,10 +33,6 @@ class Media extends Model
             'filename' => $this->title,
         ];
     }
-
-    /**
-     * Get the parent mediable model (post or video).
-     */
 
     public function mediable()
     {

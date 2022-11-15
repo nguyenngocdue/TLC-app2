@@ -15,8 +15,6 @@ class Table extends Component
    */
   public function __construct(private $columns = [], private $dataSource = null, private $showNo = false)
   {
-    // Log::info($columns);
-    // Log::info($dataSource);
   }
 
   private function applyRender($renderer, $rawData, $column, $dataLine)
@@ -27,14 +25,20 @@ class Table extends Component
     $rendererParam = ($column['rendererParam'] ?? false) ? "rendererParam='{$column['rendererParam']}'" : "";
     $attributes = $column['attributes'] ?? [];
     $dataSource = $column['dataSource'] ?? [["title" => "", "value" => ""], ["title" => "True", "value" => "true"]];
+    $columnRender = $column ? ':column=\'$column\'' : "";
     $dataSourceRender = $dataSource ? ':dataSource=\'$dataSource\'' : "";
+    $dataLineRender = $dataLine ? ':dataLine=\'$dataLine\'' : "";
 
     array_walk($attributes, fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "");
     $attributeRendered = trim(join(" ", $attributes));
-    $output = "<x-renderer{$editable}.{$renderer} $name $attributeRendered $type $dataSourceRender $rendererParam>$rawData</x-renderer{$editable}.{$renderer}>";
+    $output = "<x-renderer{$editable}.{$renderer} $name $attributeRendered $type $dataSourceRender $dataLineRender $columnRender $rendererParam>$rawData</x-renderer{$editable}.{$renderer}>";
     // if ($editable) Log::info($output);
     // Log::info($output);
-    return Blade::render($output, ['dataSource' => $dataSource]);
+    return Blade::render($output, [
+      'dataSource' => $dataSource,
+      'column' => $column,
+      'dataLine' => $dataLine,
+    ]);
   }
 
   private function makeColumn($column)
@@ -51,7 +55,7 @@ class Table extends Component
     $colspan = sizeof($columns);
 
     if (is_null($dataSource)) return "<tr><td colspan=$colspan>" . Blade::render("<x-feedback.alert type='error' message='DataSource attribute is missing.' />") . "</td></tr>";
-    if (empty($dataSource)) return "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
+    if (empty($dataSource) || (is_object($dataSource) && empty($dataSource->items()))) return "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
 
     foreach ($dataSource as $no => $dataLine) {
       $tds = [];
@@ -98,6 +102,7 @@ class Table extends Component
     }
 
     $dataSource = $this->dataSource;
+    // Log::info($dataSource);
     $columnsRendered = [];
     array_walk($columns, function ($column, $key) use (&$columnsRendered) {
       $columnsRendered[] = $this->makeColumn($column, $key);

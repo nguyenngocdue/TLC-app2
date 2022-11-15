@@ -6,6 +6,13 @@
 <x-renderer.card title="Feedback">
     <div class="grid gap-6 mb-8 md:grid-cols-2">
         <x-renderer.card title="Placeholder">
+            AvatarName with Attributes
+            <x-renderer.avatar-name title="Fortune Truong" description="Software Engineer">?</x-renderer.avatar-name>
+            AvatarName with Slot
+            <x-renderer.avatar-name>{"name":"Thuc Vo", "position_rendered":"Software Tester"}</x-renderer.avatar-name>
+            Empty attribute
+            <x-renderer.avatar-name>?</x-renderer.avatar-name>
+
         </x-renderer.card>
 
         <x-renderer.card title="Controls">

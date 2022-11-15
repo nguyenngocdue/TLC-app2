@@ -1,3 +1,13 @@
+@if(strlen($slot)>0)
+
+@php
+$json = json_decode($slot);
+foreach ( explode(",", $rendererParam) as $param) {
+$pairs = explode("=", $param);
+if($json)${$pairs[0]} = $json->{$pairs[1]};
+}
+
+@endphp
 <div class="flex items-center text-sm">
     <!-- Avatar with inset shadow -->
     <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -11,3 +21,5 @@
         </p>
     </div>
 </div>
+
+@endif
