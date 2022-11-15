@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Manage\ManageStatusLibrary;
 use App\Http\Controllers\Manage\Master\StatusDocType;
 use App\Http\Controllers\SettingController;
+use App\Notifications\CreatePostSuccess;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -91,3 +92,9 @@ Route::resource('manage/statusDocType', StatusDocType::class);
 Route::resource('/abc', HomeController::class);
 
 Route::get('components', [ComponentLib::class, 'index']);
+
+// Route::get('/test', function () {
+//     $user = App\Models\User::first();
+//     $user->notify(new CreatePostSuccess);
+//     return 'Done';
+// });
