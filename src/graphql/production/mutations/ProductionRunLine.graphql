@@ -1,4 +1,5 @@
 type DuplicateProdLineResponse {
+    id: Int!
     status: String!
 }
 type ProdLineResponse {

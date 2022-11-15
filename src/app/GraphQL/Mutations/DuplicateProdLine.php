@@ -32,6 +32,7 @@ final class DuplicateProdLine
                 $newProdLine->users()->attach($userIds);
             }
             return [
+                'id' => $newProdLine->id,
                 'status' => 'Duplicate Production Run Line Successfully.',
             ];
         } catch (\Throwable $th) {

@@ -29,7 +29,7 @@ class Prod_routing_link extends Model
     public function routings()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('target_hours', 'target_man_hours');
     }
 
     public function productionRun()
