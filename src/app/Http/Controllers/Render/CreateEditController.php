@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Render;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
+use App\Models\Department;
 use App\Models\Media;
+use App\Notifications\PostNotification;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -112,6 +115,10 @@ abstract class CreateEditController extends Controller
 		$this->handleToggle('store', $props, $dataInput);
 
 		$data = $this->data::create($dataInputNotAttachMent);
+
+		// Notifications
+		Notification::send($data, new PostNotification($data->id));
+
 
 		if (isset($data)) {
 			$this->syncManyToManyRelationship($data, $dataInputHasAttachment, 'store', null); // Check box
