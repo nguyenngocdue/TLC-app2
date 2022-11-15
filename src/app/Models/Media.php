@@ -18,7 +18,7 @@ class Media extends Model
     // ];
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],
-        // "category" => ['belongsTo', Media_category::class, 'category'],
+        "category" => ['belongsTo', Media_category::class, 'category'],
     ];
     public function user()
     {

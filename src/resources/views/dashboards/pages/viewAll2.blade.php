@@ -21,10 +21,10 @@
     </div>
 </div>
 
-<x-renderer.table :columns="$columns" :dataSource="$dataSource" />
+<x-renderer.table showNo="true" :columns=" $columns" :dataSource="$dataSource" />
 @endempty
 
-<x-modalsetting :type="$type" />
+<x-modalSettings type="{{$type}}" />
 <script src="{{ asset('js/renderprop.js') }}"></script>
 
 @endsection

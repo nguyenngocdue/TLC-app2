@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Render;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Utils\Support\CurrentUser;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -30,13 +31,13 @@ abstract class ViewAllController extends Controller
         return $this->type;
     }
 
-    private function getPageLimit()
+    private function getUserSettings()
     {
         $type = Str::plural($this->type);
-        $userLogin = Auth::user(); //User::find($idUser);
-        $pageLimit = $userLogin->settings[$type]['page_limit'] ?? null;
-        if ($pageLimit === null) $pageLimit = 10;
-        return $pageLimit;
+        $settings = CurrentUser::getSettings();
+        $pageLimit = $settings[$type]['page_limit'] ?? 10;
+        $columnLimit = $settings[$type]['columns'] ?? null;
+        return [$pageLimit, $columnLimit];
     }
 
     private function getDataSource($pageLimit, $search)
@@ -48,17 +49,21 @@ abstract class ViewAllController extends Controller
         return $result;
     }
 
-    private function getColumns($type)
+    private function getColumns($type, $columnLimit)
     {
         function createObject($prop, $type)
         {
-            $allowControls = ['id', 'avatar-name'];
             $output = [
                 'title' => $prop['label'],
                 'dataIndex' => $prop['column_name'],
             ];
-            if ($prop['control'] === 'id') $output['type'] = $type;
-            if (in_array($prop['control'], $allowControls)) $output['renderer'] = $prop['control'];
+
+            //Attach type to generate hyperlink
+            if ($prop['control'] === 'id') {
+                $output['type'] = $type;
+                $output['renderer'] = 'id';
+            }
+
             return $output;
         }
 
@@ -66,6 +71,13 @@ abstract class ViewAllController extends Controller
         if (!file_exists($propsPath)) return false;
         $props = json_decode(file_get_contents($propsPath), true);
         $props = array_filter($props, fn ($prop) => !$prop['hidden_view_all']);
+        // dump($columnLimit);
+        if ($columnLimit) {
+            $allows = array_keys($columnLimit);
+            $props = array_filter($props, fn ($prop) => in_array($prop['name'], $allows));
+            // dump($allows);
+            // dump($props);
+        }
         $result = array_values(array_map(fn ($prop) => createObject($prop, $type), $props));
         return $result;
     }
@@ -88,7 +100,7 @@ abstract class ViewAllController extends Controller
             if (isset($eloquentParams[$dataIndex])) {
                 $relationship = $eloquentParams[$dataIndex][0];
                 // Log::info($dataIndex . " " . $relationship);
-                if (in_array($relationship, ['belongsToMany', 'belongsTo'])) {
+                if (in_array($relationship, ['belongsToMany', 'belongsTo', 'hasMany'])) {
                     $relationshipJson = $json["_{$dataIndex}"];
                     // Log::info($relationshipJson);
                     $column['renderer'] = $relationshipJson['renderer'];
@@ -122,10 +134,12 @@ abstract class ViewAllController extends Controller
 
     public function index()
     {
-        $type = Str::plural($this->type);
-        $columns = $this->getColumns($type);
+        [$pageLimit, $columnLimit] = $this->getUserSettings();
+        // Log::info($columnLimit);
 
-        $pageLimit = $this->getPageLimit();
+        $type = Str::plural($this->type);
+        $columns = $this->getColumns($type, $columnLimit);
+
         $search = request('search');
         $dataSource = $this->getDataSource($pageLimit, $search);
 

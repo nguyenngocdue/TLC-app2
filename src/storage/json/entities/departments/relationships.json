@@ -8,7 +8,7 @@
     },
     "_Users_Count": {
         "name": "_Users_Count",
-        "relationship": "Users_Count",
+        "relationship": "hasMany",
         "renderer": "count",
         "renderer_param": "",
         "control_name": ""

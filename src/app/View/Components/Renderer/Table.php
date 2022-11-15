@@ -117,6 +117,6 @@ class Table extends Component
       $pagination =  $dataSource->links('dashboards.pagination.template');
     }
 
-    return view("components.renderer.table")->with(compact('columnsRendered', 'trtd', 'showing', 'pagination'));
+    return view("components.renderer.table")->with(compact('columnsRendered', 'trtd', 'showing', 'pagination', 'columns', 'dataSource'));
   }
 }

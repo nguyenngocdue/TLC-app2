@@ -80,7 +80,7 @@ class ComponentLib extends Controller
         $tableDataSource = [
             [
                 "id" => 1001, "client" => "Empty Avatar", "amount" => 1213.45, "status" => "approved", "color" => "green", "date" => "26/10/2022",
-                "rowDescription" => "This is an example of or rowDescription",
+                "rowDescription" => "This is an example of a rowDescription",
             ],
             [
                 "avatar" => "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ",

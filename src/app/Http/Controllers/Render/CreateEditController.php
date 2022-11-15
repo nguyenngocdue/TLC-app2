@@ -7,7 +7,7 @@ use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
 use App\Models\Department;
 use App\Models\Media;
-use App\Notifications\PostNotification;
+use App\Notifications\CreateNewNotification;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -117,7 +117,7 @@ abstract class CreateEditController extends Controller
 		$data = $this->data::create($dataInputNotAttachMent);
 
 		// Notifications
-		Notification::send($data, new PostNotification($data->id));
+		Notification::send($data, new CreateNewNotification($data->id));
 
 
 		if (isset($data)) {
