@@ -16,8 +16,8 @@
     "_workplaceRel1": {
         "name": "_workplaceRel1",
         "relationship": "workplaceRel1",
-        "renderer": "count",
-        "renderer_param": "name1",
+        "renderer": "column",
+        "renderer_param": "name",
         "control_name": "workplaceRel1"
     },
     "_workplaceRel2": {

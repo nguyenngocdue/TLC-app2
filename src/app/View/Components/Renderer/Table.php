@@ -17,25 +17,36 @@ class Table extends Component
   {
   }
 
-  private function applyRender($renderer, $rawData, $column, $dataLine)
+  private function getAttributeRendered($column, $dataLine)
   {
-    $editable = ($column['editable'] ?? false) ? ".editable" : "";
-    $name = ($column['dataIndex'] ?? false) ? "name='{$column['dataIndex']}[]'" : "";
-    $type = ($column['type'] ?? false) ? "type='{$column['type']}'" : "";
-    $rendererParam = ($column['rendererParam'] ?? false) ? "rendererParam='{$column['rendererParam']}'" : "";
     $attributes = $column['attributes'] ?? [];
-    $dataSource = $column['dataSource'] ?? [["title" => "", "value" => ""], ["title" => "True", "value" => "true"]];
-    $columnRender = $column ? ':column=\'$column\'' : "";
-    $dataSourceRender = $dataSource ? ':dataSource=\'$dataSource\'' : "";
-    $dataLineRender = $dataLine ? ':dataLine=\'$dataLine\'' : "";
-
     array_walk($attributes, fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "");
     $attributeRendered = trim(join(" ", $attributes));
-    $output = "<x-renderer{$editable}.{$renderer} $name $attributeRendered $type $dataSourceRender $dataLineRender $columnRender $rendererParam>$rawData</x-renderer{$editable}.{$renderer}>";
+    return $attributeRendered;
+  }
+
+  private function applyRender($renderer, $rawData, $column, $dataLine)
+  {
+    $name = isset($column['dataIndex']) ? "name='{$column['dataIndex']}[]'" : "";
+    $attributeRender = $this->getAttributeRendered($column, $dataLine);
+    $typeRender = isset($column['type']) ? "type='{$column['type']}'" : "";
+
+    $cbbDataSource = $column['cbbDataSource'] ?? [["title" => "", "value" => ""], ["title" => "True", "value" => "true"]];
+    $cbbDataSourceRender = $cbbDataSource ? ':cbbDataSource=\'$cbbDataSource\'' : "";
+    $dataLineRender = $dataLine ? ':dataLine=\'$dataLine\'' : "";
+    $columnRender = $column ? ':column=\'$column\'' : "";
+    $rendererParam = isset($column['rendererParam']) ? "rendererParam='{$column['rendererParam']}'" : "";
+
+    $attributes = "$name $attributeRender $typeRender $cbbDataSourceRender $dataLineRender $columnRender $rendererParam";
+
+    $editable = isset($column['editable']) ? ".editable" : "";
+    $tagName = "x-renderer{$editable}.{$renderer}";
+
+    $output = "<$tagName $attributes>$rawData</$tagName>";
     // if ($editable) Log::info($output);
     // Log::info($output);
     return Blade::render($output, [
-      'dataSource' => $dataSource,
+      'cbbDataSource' => $cbbDataSource,
       'column' => $column,
       'dataLine' => $dataLine,
     ]);
@@ -96,10 +107,7 @@ class Table extends Component
     if (empty($columns)) return Blade::render("<x-feedback.alert type='error' message='Columns attribute is missing or empty.' />");
 
     // Log::info($this->showNo);
-    if ($this->showNo) {
-      array_unshift($columns, ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center']);
-      // Log::info($columns);
-    }
+    if ($this->showNo) array_unshift($columns, ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center']);
 
     $dataSource = $this->dataSource;
     // Log::info($dataSource);

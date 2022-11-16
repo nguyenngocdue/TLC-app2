@@ -2,12 +2,12 @@
     "_user": {
         "name": "_user",
         "relationship": "user",
-        "renderer": "column",
+        "renderer": "avatar_name",
         "renderer_param": "name",
         "control_name": ""
     },
-    "_category": {
-        "name": "_category",
+    "_category1": {
+        "name": "_category1",
         "relationship": "belongsTo",
         "renderer": "column",
         "renderer_param": "name",

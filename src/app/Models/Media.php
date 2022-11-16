@@ -20,9 +20,16 @@ class Media extends Model
     // ];
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],
-        "category" => ['belongsTo', Media_category::class, 'category'],
+        "category1" => ['belongsTo', Media_category::class, 'category'],
     ];
+
     public function user()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function category1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

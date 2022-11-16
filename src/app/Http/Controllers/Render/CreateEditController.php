@@ -227,7 +227,7 @@ abstract class CreateEditController extends Controller
 	}
 	private function getSetParentMedia($data, $colNameMedia)
 	{
-		if (!is_null($data) && count($colNameMedia) > 0) {
+		if (!is_null($data) && (!is_null($colNameMedia)) && count($colNameMedia) > 0) {
 			foreach ($colNameMedia as $key => $value) {
 				$data->media()->save(Media::find($key));
 			}
@@ -236,7 +236,7 @@ abstract class CreateEditController extends Controller
 	}
 	private function saveMediaValidator($action, $request, $dataInput, $data = [], $props)
 	{
-		if (!isset($request->input()['attachment_1_deleted']) && count($request->input()) <= 0) {
+		if (!isset($dataInput['attachment_1_deleted'])) {
 			return false;
 		} else { // only run when controls is attachment
 			$itemsValidation = [];

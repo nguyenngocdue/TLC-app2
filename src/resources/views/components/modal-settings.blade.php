@@ -21,8 +21,8 @@
         </div>
         <div class="flex h-14 items-center justify-end rounded-b border-t border-solid border-slate-200 p-2">
             <!--button class="background-transparent mr-1 mb-1 px-6 py-2 text-sm font-bold uppercase text-red-500 outline-none transition-all duration-150 ease-linear focus:outline-none" type="button" onclick="toggleModalSetting('modal-setting-id')">
-                Close
-            </button-->
+            Close
+        </button-->
             <button class="mr-1 mb-1 rounded bg-emerald-500 p-3 text-sm font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none active:bg-emerald-600" type="submit" onclick="toggleModalSetting('modal-setting-id')">
                 Update
             </button>

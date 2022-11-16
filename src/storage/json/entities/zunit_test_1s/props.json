@@ -34,7 +34,7 @@
         "label": "Description",
         "control": "textarea",
         "col_span": "12",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
@@ -128,7 +128,7 @@
     "_workplaceRel1": {
         "name": "_workplaceRel1",
         "column_name": "workplaceRel1",
-        "column_type": "ELQ(M2M)",
+        "column_type": "ELQ(belongsToMany)",
         "label": "Checkbox",
         "control": "checkbox",
         "col_span": "12",
@@ -142,7 +142,7 @@
     "_workplaceRel2": {
         "name": "_workplaceRel2",
         "column_name": "workplaceRel2",
-        "column_type": "ELQ(M2M)",
+        "column_type": "ELQ(belongsToMany)",
         "label": "Dropdown (Multiple)",
         "control": "dropdown_multi",
         "col_span": "12",

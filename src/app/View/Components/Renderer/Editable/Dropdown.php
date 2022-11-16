@@ -12,7 +12,7 @@ class Dropdown extends Component
      *
      * @return void
      */
-    public function __construct(private $name = "", private $dataSource = [])
+    public function __construct(private $name = "", private $cbbDataSource = [])
     {
         //
         // dump($dataSource);
@@ -27,7 +27,7 @@ class Dropdown extends Component
     {
         return view('components.renderer.editable.dropdown', [
             'name' => $this->name,
-            'dataSource' => $this->dataSource,
+            'cbbDataSource' => $this->cbbDataSource,
         ]);
     }
 }

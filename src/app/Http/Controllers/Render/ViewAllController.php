@@ -59,9 +59,20 @@ abstract class ViewAllController extends Controller
             ];
 
             //Attach type to generate hyperlink
-            if ($prop['control'] === 'id') {
-                $output['type'] = $type;
-                $output['renderer'] = 'id';
+            switch ($prop['control']) {
+                case 'id':
+                    $output['type'] = $type;
+                    $output['renderer'] = 'id';
+                    break;
+                case 'switch':
+                    $output['align'] = "center";
+                    $output['renderer'] = "toggle";
+                    break;
+                case "number":
+                    $output['align'] = "right";
+                    break;
+                default:
+                    break;
             }
 
             return $output;

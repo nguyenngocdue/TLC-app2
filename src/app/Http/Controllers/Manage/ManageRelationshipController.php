@@ -51,7 +51,7 @@ abstract class ManageRelationshipController extends Controller
                 "dataIndex" => "renderer",
                 "editable" => true,
                 "renderer" => "dropdown",
-                "dataSource" => $controls,
+                "cbbDataSource" => $controls,
             ],
             [
                 "title" => "Renderer Param",

@@ -22,6 +22,7 @@
 </div>
 
 <x-renderer.table showNo="true" :columns=" $columns" :dataSource="$dataSource" />
+<br />
 @endempty
 
 <x-modalSettings type="{{$type}}" />

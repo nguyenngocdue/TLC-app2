@@ -63,7 +63,7 @@ abstract class ManagePropController extends Controller
                 "dataIndex" => "control",
                 "editable" => true,
                 "renderer" => "dropdown",
-                "dataSource" => $controls,
+                "cbbDataSource" => $controls,
             ],
             [
                 "title" => "Col Span",
