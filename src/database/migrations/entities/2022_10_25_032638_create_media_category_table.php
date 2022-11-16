@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('media_categories', function (Blueprint $table) {
             $table->id();
             $table->text('name');
-            $table->text('descriptions');
+            $table->text('description');
             $table->string('slug')->unique();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;

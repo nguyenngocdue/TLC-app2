@@ -24,11 +24,11 @@ class SidebarAdminItems
                         'href' =>  "/dashboard/admin/roles",
                     ],
                     [
-                        'title' => "-",
-                    ],
-                    [
                         'title' => "Role Sets",
                         'href' => "/dashboard/admin/role_sets",
+                    ],
+                    [
+                        'title' => "-",
                     ],
                     [
                         'title' => "Set Permissions",
