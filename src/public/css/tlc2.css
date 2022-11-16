@@ -1,15 +1,18 @@
 .table-line-new {
     background: #00ff7f !important;
 }
+
 .table-line-removed {
     background: #ff6a6a !important;
 }
+
 .hr-custom {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     border: 1px !important;
     border-bottom: 1px solid #fff !important;
 }
+
 .modal {
     display: none;
     position: fixed;

@@ -29,6 +29,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/customize.css') }}">
     <script href="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
 
@@ -39,6 +40,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer=""></script>
     <script src="./windmill_assets/js/charts-lines.js" defer=""></script>
     <script src="./windmill_assets/js/charts-pie.js" defer=""></script>
+
+
+    {{-- Select2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <style type="text/css">
         /* Chart.js */
         @keyframes chartjs-render-animation {
@@ -85,6 +92,7 @@
             left: 0;
             top: 0
         }
+
     </style>
 </head>
 

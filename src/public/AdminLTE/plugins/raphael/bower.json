@@ -6,13 +6,18 @@
     "eve-raphael": "0.5.0"
   },
   "devDependencies": {
-    "requirejs": "2.3.2"
+    "requirejs": "2.3.2",
+    "select2": "~4.0"
   },
   "moduleType": [
     "amd",
     "globals"
   ],
-  "keywords": ["svg", "vml", "javascript"],
+  "keywords": [
+    "svg",
+    "vml",
+    "javascript"
+  ],
   "authors": [
     "Dmitry Baranovskiy"
   ],
