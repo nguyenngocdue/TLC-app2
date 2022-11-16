@@ -5,21 +5,6 @@ extend type Query {
     prod_routing_links: [Prod_routing_link!]! @all @guard
     prod_routing_link(id: ID @eq): Prod_routing_link @find @guard
 }
-type ProdRoutingAndPivot {
-    id: ID!
-    name: String!
-    description: String
-    slug: String!
-    created_at: DateTime
-    updated_at: DateTime
-    routingLinks: [Prod_routing_link!]! @belongsToMany
-    productionOrders: [Prod_order!]! @hasMany
-    pivot: RoutingDetailPivot
-}
-type RoutingDetailPivot {
-    target_hours: Float
-    target_man_hours: Float
-}
 
 type Prod_routing_link {
     id: ID!
