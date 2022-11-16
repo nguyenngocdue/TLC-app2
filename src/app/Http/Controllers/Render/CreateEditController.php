@@ -84,9 +84,9 @@ abstract class CreateEditController extends Controller
 
 		$this->_validate($props, $request);
 
-		$this->handleToggle('update', $props, $dataInput);
+		$newDataInput = $this->handleToggle('update', $props, $dataInput);
 
-		$data->fill($dataInput);
+		$data->fill($newDataInput);
 		$data->save();
 
 
@@ -106,24 +106,24 @@ abstract class CreateEditController extends Controller
 		$type = Str::plural($this->type);
 
 
-		$dataInputHasAttachment = array_filter($dataInput, fn ($item) => is_array($item));
-		$dataInputNotAttachMent =  array_filter($dataInput, fn ($item) => !is_array($item));
+
 
 		$mediaValidator = $this->saveMediaValidator('store', $request, $dataInput, null, $props);
 
-
-
 		$this->_validate($props, $request);
-		$this->handleToggle('store', $props, $dataInput);
+		$newDataInput = $this->handleToggle('store', $props, $dataInput);
 
-		$data = $this->data::create($dataInputNotAttachMent);
+		$newDataInputHasAttachment = array_filter($newDataInput, fn ($item) => is_array($item));
+		$newDataInputNotAttachMent =  array_filter($newDataInput, fn ($item) => !is_array($item));
+
+		$data = $this->data::create($newDataInputNotAttachMent);
 
 		// Notifications
 		Notification::send($data, new CreateNewNotification($data->id));
 
 
 		if (isset($data)) {
-			$this->syncManyToManyRelationship($data, $dataInputHasAttachment, 'store', null); // Check box
+			$this->syncManyToManyRelationship($data, $newDataInputHasAttachment, 'store', null); // Check box
 			$colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
 
 			$mediaValidator ? $this->getSetParentMedia($data, $colNameMediaUploaded) : false;
@@ -157,11 +157,12 @@ abstract class CreateEditController extends Controller
 				foreach ($props as $value) {
 					if ($value['control'] === 'switch') {
 						$item = $value['column_name'];
-						isset($dataInput[$item]) ? $data[$item] = 1 : $data[$item] = null;
+						isset($dataInput[$item]) ? $dataInput[$item] = 1 : $dataInput[$item] = null;
 					};
 				}
 				break;
 		}
+		return $dataInput;
 	}
 
 	private function syncManyToManyRelationship($data = null, $dataInput = [], $action, $currentElement) //checkBox
