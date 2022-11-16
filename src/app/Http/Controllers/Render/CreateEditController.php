@@ -111,6 +111,8 @@ abstract class CreateEditController extends Controller
 
 		$mediaValidator = $this->saveMediaValidator('store', $request, $dataInput, null, $props);
 
+
+
 		$this->_validate($props, $request);
 		$this->handleToggle('store', $props, $dataInput);
 
@@ -236,6 +238,7 @@ abstract class CreateEditController extends Controller
 	}
 	private function saveMediaValidator($action, $request, $dataInput, $data = [], $props)
 	{
+		dd($dataInput);
 		if (!isset($dataInput['attachment_1_deleted'])) {
 			return false;
 		} else { // only run when controls is attachment
@@ -246,6 +249,7 @@ abstract class CreateEditController extends Controller
 			$validator =  Validator::make($request->all(), $itemsValidation);
 
 			$colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
+
 
 			switch ($action) {
 				case 'update':
@@ -273,7 +277,6 @@ abstract class CreateEditController extends Controller
 					if ($validator->fails()) {
 						$keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
 						$_colNameMediaUploaded = $this->handleUpload($request) ?? [] + $colNameMediaUploaded; // save old value of media were uploaded
-
 
 						foreach ($keyMediaDel as $value) {
 							unset($_colNameMediaUploaded[$value]);

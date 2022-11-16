@@ -1,0 +1,45 @@
+[x-cloak] {
+    display: none;
+}
+
+.svg-icon {
+    width: 1em;
+    height: 1em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+    fill: #333;
+}
+
+.svg-icon circle {
+    stroke: #4691f6;
+    stroke-width: 1;
+}
+
+
+.select2-selection.select2-selection--multiple {
+    padding: 10px !important;
+    border: 1px solid rgb(209 213 219) !important;
+    border-radius: 0.5rem !important;
+}
+
+.select2-search__field {
+    margin: 0 !important;
+}
+
+span.select2-selection.select2-selection--single {
+    padding: 10px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgb(209 213 219);
+    border-radius: 0.5rem;
+
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding: 0 !important;
+    font-size: 14px !important;
+}

@@ -29,7 +29,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/customize.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/customizeSelect2.css') }}">
     <script href="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
 
