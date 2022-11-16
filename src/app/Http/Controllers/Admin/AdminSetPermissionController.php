@@ -6,15 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Utils\Support\Entities;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class AdminSetPermissionController extends Controller
 {
     public function getType()
     {
-        return "dashboard";
+        return "permission";
     }
     /**
      * Display a listing of the resource.

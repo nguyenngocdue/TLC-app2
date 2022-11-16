@@ -22,12 +22,12 @@ class SidebarEntityItems
                 [
                     'title' => "View All",
                     'href' => route("{$table}_viewall.index"),
-                    'isActive' => random_int(0, 1),
+                    // 'isActive' => random_int(0, 1),
                 ],
                 [
                     'title' => "Add New",
                     'href' => route("{$table}_addnew.create"),
-                    'isActive' => random_int(0, 1),
+                    // 'isActive' => random_int(0, 1),
                 ],
                 [
                     'title' => "-",
@@ -35,12 +35,12 @@ class SidebarEntityItems
                 [
                     'title' => "Manage Props",
                     'href' => route("{$singular}_mngprop.index"),
-                    'isActive' => random_int(0, 1),
+                    // 'isActive' => random_int(0, 1),
                 ],
                 [
                     'title' => "Manage Relationships",
                     'href' => route("{$singular}_mngrls.index"),
-                    'isActive' => random_int(0, 1),
+                    // 'isActive' => random_int(0, 1),
                 ],
                 // [
                 //     'title' => "Manage Tables",

@@ -14,9 +14,9 @@ class Breadcrumb extends Component
 
     public function render()
     {
-        $type = CurrentRoute::getTypePlural(); // Str::plural($this->type);
-        if (in_array($type, ['dashboards'])) return "";
-        $singular = Str::singular($type);
+        $type = CurrentRoute::getTypePlural();
+        $singular = CurrentRoute::getTypeSingular();
+        if (in_array($singular, ['dashboard', 'permission'])) return "";
         return view('components.navigation.breadcrumb')->with(compact('type', 'singular'));
     }
 }

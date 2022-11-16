@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Set RoleSet (to Users)')
+@section('title', 'Set Rolesets to Users')
 @section('content')
 <main class="h-full">
     <div class="container mx-auto grid px-6">

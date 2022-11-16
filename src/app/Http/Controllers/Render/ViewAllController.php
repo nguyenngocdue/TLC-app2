@@ -179,12 +179,10 @@ abstract class ViewAllController extends Controller
         $data = $request->input();
         $entity = $request->input('_entity');
         if (!$entity) {
-            $page
-                = $request->input('_entity_page');
+            $page = $request->input('_entity_page');
             $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT', '_entity_page' => '']);
             $user = User::find($id);
             $var = $user->settings;
-            // $result = [];
             foreach ($data as $key => $value) {
                 $var[$page][$key] = $value;
             }
