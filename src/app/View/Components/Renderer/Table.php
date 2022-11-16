@@ -69,13 +69,14 @@ class Table extends Component
     if (empty($dataSource) || (is_object($dataSource) && empty($dataSource->items()))) return "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
 
     $columnCount = count($columns);
+    $start = $dataSource->perPage() * ($dataSource->currentPage() - 1);
     foreach ($dataSource as $no => $dataLine) {
       $tds = [];
       foreach ($columns as $index => $column) {
         $renderer = $column['renderer'] ?? false;
         switch ($renderer) {
           case  'no.':
-            $rendered = $no + 1;
+            $rendered = $start + $no + 1;
             break;
           default:
             $dataIndex = $column['dataIndex'];

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Permission;
-use App\Models\Role;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -13,7 +11,7 @@ abstract class AdminController extends Controller
 {
     public function getType()
     {
-        return "dashboard";
+        return "permission";
     }
     /**
      * Display a listing of the resource.

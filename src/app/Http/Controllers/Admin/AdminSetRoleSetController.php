@@ -14,7 +14,7 @@ class AdminSetRoleSetController extends Controller
 {
     public function getType()
     {
-        return "dashboard";
+        return "permission";
     }
     /**
      * Display a listing of the resource.
@@ -124,6 +124,6 @@ class AdminSetRoleSetController extends Controller
         if ($user) {
             Session::put('impersonate', $user->id);
         }
-        return redirect('/admin/setrolesets');
+        return redirect('dashboard/admin/setrolesets');
     }
 }

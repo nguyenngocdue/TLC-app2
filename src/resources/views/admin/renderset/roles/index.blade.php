@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Set Roles (to RoleSet)')
+@section('title', 'Set Roles to Rolesets')
 @section('content')
 <main class="h-full overflow-y-auto">
     <div class="container mx-auto grid px-6">

@@ -2,18 +2,22 @@
 
 namespace App\View\Components\Homepage;
 
+use App\Utils\Support\CurrentRoute;
+use Illuminate\Support\Str;
+
 class SidebarAdminItems
 {
     public static function getAll($svg)
     {
-        // return [];
+        $currentType = CurrentRoute::getTypeSingular();
+        $isActive = ($currentType === 'permission');
 
         return [
             [
                 "title" => "Permission",
                 "type" => "ppppp",
                 "icon" => $svg['modals'],
-                "isActive" => false, //$isActive,
+                "isActive" => $isActive,
                 "children" => [
                     [
                         'title' => "Permissions",
@@ -24,22 +28,22 @@ class SidebarAdminItems
                         'href' =>  "/dashboard/admin/roles",
                     ],
                     [
-                        'title' => "Role Sets",
+                        'title' => "Rolesets",
                         'href' => "/dashboard/admin/role_sets",
                     ],
                     [
                         'title' => "-",
                     ],
                     [
-                        'title' => "Set Permissions",
+                        'title' => "Set Permissions to Roles",
                         'href' => "/dashboard/admin/setpermissions",
                     ],
                     [
-                        'title' => "Set Roles",
+                        'title' => "Set Roles to Rolesets",
                         'href' => "/dashboard/admin/setroles",
                     ],
                     [
-                        'title' => "Set RoleSets",
+                        'title' => "Set Rolesets to Users",
                         'href' => "/dashboard/admin/setrolesets",
                     ],
                 ],
