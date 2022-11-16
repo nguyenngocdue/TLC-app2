@@ -21,7 +21,7 @@
             Number
             <x-renderer.editable.number name="number1">2606.1988</x-renderer.editable.number>
             Dropdown
-            <x-renderer.editable.dropdown name="dropdown1" :dataSource='[["title"=>"", "value"=>""],["title"=>"True", "value"=>"true"]]'>true</x-renderer.editable.dropdown>
+            <x-renderer.editable.dropdown name="dropdown1" :cbbDataSource='[["title"=>"", "value"=>""],["title"=>"True", "value"=>"true"]]'>true</x-renderer.editable.dropdown>
         </x-renderer.card>
 
         <x-renderer.card title="Tables">

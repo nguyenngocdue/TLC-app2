@@ -12,7 +12,7 @@ if($json)${$pairs[0]} = $json->{$pairs[1]};
     <!-- Avatar with inset shadow -->
     <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
         <img class="object-cover w-full h-full rounded-full" src={{$avatar}} alt="" loading="lazy">
-        <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+        <div class="absolute inset-0 rounded-full" aria-hidden="true"></div>
     </div>
     <div>
         <p class="font-semibold">{{$title}}</p>

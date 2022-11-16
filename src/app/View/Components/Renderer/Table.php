@@ -68,9 +68,10 @@ class Table extends Component
     if (is_null($dataSource)) return "<tr><td colspan=$colspan>" . Blade::render("<x-feedback.alert type='error' message='DataSource attribute is missing.' />") . "</td></tr>";
     if (empty($dataSource) || (is_object($dataSource) && empty($dataSource->items()))) return "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
 
+    $columnCount = count($columns);
     foreach ($dataSource as $no => $dataLine) {
       $tds = [];
-      foreach ($columns as $column) {
+      foreach ($columns as $index => $column) {
         $renderer = $column['renderer'] ?? false;
         switch ($renderer) {
           case  'no.':
@@ -83,7 +84,8 @@ class Table extends Component
             break;
         }
         $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
-        $tds[] = "<td class='px-1 py-1 $align'>" . $rendered . "</td>";
+        $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
+        $tds[] = "<td class='px-1 py-1 $borderRight $align'>" . $rendered . "</td>";
       }
       $bgClass = ($dataLine['row_color'] ?? false) ? "bg-" . $dataLine['row_color'] . "-400" : "";
       $trs[] = "<tr class='hover:bg-gray-100 $bgClass text-gray-700 dark:text-gray-400'>" . join("", $tds) . "</tr>";
