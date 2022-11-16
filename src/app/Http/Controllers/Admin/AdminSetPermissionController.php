@@ -12,6 +12,10 @@ use Illuminate\Support\Str;
 
 class AdminSetPermissionController extends Controller
 {
+    public function getType()
+    {
+        return "dashboard";
+    }
     /**
      * Display a listing of the resource.
      *

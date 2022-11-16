@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Session;
 
 class AdminSetRoleSetController extends Controller
 {
+    public function getType()
+    {
+        return "dashboard";
+    }
     /**
      * Display a listing of the resource.
      *

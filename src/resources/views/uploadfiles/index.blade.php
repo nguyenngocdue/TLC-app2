@@ -71,7 +71,7 @@
             </svg>
             <h3>{{ucfirst($type)}}</h3>
 </div>
-<span>View more →</span>
+<span>View more 777777→</span>
 </div>
 <div class="card-header">
     <button type="button" class="btn btn-primary btn-uploadfiles" data-target="#edit" data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i></button>
@@ -132,7 +132,7 @@
         <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
             <nav aria-label="Table navigation">
                 @if (isset($users) && count($users) > 0)
-                {{$users->links('dashboards.pagination.template')}}
+                {{$users->links('dashboards.pagination.pagination')}}
                 @endif
             </nav>
         </span>

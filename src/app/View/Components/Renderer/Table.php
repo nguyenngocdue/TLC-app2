@@ -124,7 +124,7 @@ class Table extends Component
     $pagination = "";
     if (is_object($dataSource) && !empty($dataSource)) {
       $showing =  $dataSource->links('dashboards.pagination.showing');
-      $pagination =  $dataSource->links('dashboards.pagination.template');
+      $pagination =  $dataSource->links('dashboards.pagination.pagination');
     }
 
     return view("components.renderer.table")->with(compact('columnsRendered', 'trtd', 'showing', 'pagination', 'columns', 'dataSource'));

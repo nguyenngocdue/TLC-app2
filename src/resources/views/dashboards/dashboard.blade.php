@@ -12,7 +12,7 @@
         </svg>
         <span>Star this project on GitHub</span>
     </div>
-    <span>View more &RightArrow;</span>
+    <span>View more 1111 &RightArrow;</span>
 </a>
 <!-- Cards -->
 <div class="mb-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">

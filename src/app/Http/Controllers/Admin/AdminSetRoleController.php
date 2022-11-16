@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\File;
 
 class AdminSetRoleController extends Controller
 {
+    public function getType()
+    {
+        return "dashboard";
+    }
     /**
      * Display a listing of the resource.
      *

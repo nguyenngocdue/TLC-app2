@@ -260,7 +260,7 @@
                 <span class="col-span-4 mt-2 flex sm:mt-auto sm:justify-end">
                     <nav aria-label="Table navigation">
                         @if (isset($users) && count($users) > 0)
-                        {{ $users->links('dashboards.pagination.template') }}
+                        {{ $users->links('dashboards.pagination.pagination') }}
                         @endif
                     </nav>
                 </span>

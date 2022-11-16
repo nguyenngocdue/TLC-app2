@@ -1,3 +1,9 @@
 {
-    "renderers": ["", "attachment", "count", "column", "avatar_name"]
+    "renderers": [
+        "",
+        "attachment",
+        "count",
+        "column",
+        "avatar_name"
+    ]
 }

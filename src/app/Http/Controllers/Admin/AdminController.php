@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\App;
 
 abstract class AdminController extends Controller
 {
+    public function getType()
+    {
+        return "dashboard";
+    }
     /**
      * Display a listing of the resource.
      *

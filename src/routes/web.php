@@ -60,7 +60,7 @@ Route::group([
         }
     });
     Route::group([
-        'prefix' => 'admin',
+        'prefix' => 'dashboard/admin',
         'middleware' => ['role_set:admin']
     ], function () {
         Route::resource('roles', App\Http\Controllers\Admin\Features\RoleController::class);

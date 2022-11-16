@@ -2,9 +2,6 @@
 
 namespace App\View\Components\Homepage;
 
-use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\Entities;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Sidebar2 extends Component
@@ -15,53 +12,10 @@ class Sidebar2 extends Component
         // 'cards' => '<svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>',
         // 'chart' => '<svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>',
         // 'clicked' => '<svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>',
-        // 'modals' => '<svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>',
+        'modals' => '<svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>',
         // 'lines' => '<svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>',
         // 'layout' => '<svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>',
     ];
-
-    private function itemMaker($table)
-    {
-        $currentType = CurrentRoute::getTypeSingular();
-        $singular = Str::singular($table);
-        $isActive = ($currentType === $singular);
-        return [
-            "title" => Str::pretty($table),
-            "type" => $singular,
-            "icon" => $this->svg['form'],
-            "isActive" => $isActive,
-            "children" => [
-                [
-                    'title' => "View All",
-                    'href' => route("{$table}_viewall.index"),
-                    'isActive' => random_int(0, 1),
-                ],
-                [
-                    'title' => "Add New",
-                    'href' => route("{$table}_addnew.create"),
-                    'isActive' => random_int(0, 1),
-                ],
-                [
-                    'title' => "-",
-                ],
-                [
-                    'title' => "Manage Props",
-                    'href' => route("{$singular}_mngprop.index"),
-                    'isActive' => random_int(0, 1),
-                ],
-                [
-                    'title' => "Manage Tables",
-                    'href' => route("{$singular}_mnglnprop.index"),
-                    'isActive' => random_int(0, 1),
-                ],
-                [
-                    'title' => "Manage Relationships",
-                    'href' => route("{$singular}_mngrls.index"),
-                    'isActive' => random_int(0, 1),
-                ],
-            ],
-        ];
-    }
     /**
      * Get the view / contents that represent the component.
      *
@@ -69,8 +23,9 @@ class Sidebar2 extends Component
      */
     public function render()
     {
-        $tables = Entities::getAllTables();
-        $items = array_map(fn ($table) => $this->itemMaker($table), $tables);
+        $entityItems = SidebarEntityItems::getAll($this->svg);
+        $adminItems = SidebarAdminItems::getAll($this->svg);
+        $items = [...$entityItems, ...$adminItems];
         return view('components.homepage.sidebar2')->with(compact('items'));
     }
 }
