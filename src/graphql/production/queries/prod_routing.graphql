@@ -5,7 +5,12 @@ extend type Query {
     prod_routings: [Prod_routing!]! @all @guard
     prod_routing(id: ID @eq): Prod_routing @find @guard
 }
-
+type Prod_routing_linkProd_routingPivot {
+    routing_id: Int!
+    routing_link_id: Int!
+    target_hours: Float!
+    target_man_hours: Float!
+}
 type Prod_routing {
     id: ID!
     name: String!
@@ -15,6 +20,7 @@ type Prod_routing {
     updated_at: DateTime
     routingLinks: [Prod_routing_link!]! @belongsToMany
     productionOrders: [Prod_order!]! @hasMany
+    pivot: Prod_routing_linkProd_routingPivot
 }
 
 input CreateProdRoutingInput {

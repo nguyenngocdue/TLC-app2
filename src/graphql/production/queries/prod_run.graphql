@@ -5,7 +5,7 @@ extend type Query {
     prod_runs: [Prod_run!]! @all @guard
     prod_run(id: ID @eq): Prod_run @find @guard
     prod_run_two_id(
-        prod_order_id: Int
+        prod_order_id: Int @eq
         prod_routing_link_id: Int @eq
     ): Prod_run @find @guard
 }
