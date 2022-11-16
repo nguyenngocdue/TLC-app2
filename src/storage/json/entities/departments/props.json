@@ -55,20 +55,6 @@
         "frozen_left": "",
         "frozen_right": ""
     },
-    "_head_of_department2": {
-        "name": "_head_of_department",
-        "column_name": "head_of_department",
-        "column_type": "bigint",
-        "label": "Head Of Department",
-        "control": "dropdown",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
-    },
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
