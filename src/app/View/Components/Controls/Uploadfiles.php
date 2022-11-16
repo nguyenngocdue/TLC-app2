@@ -35,7 +35,6 @@ class Uploadfiles extends Component
         if ($action === 'create') {
             session(['colNameMediaUploaded' => []]);
             $colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
-            // dd($colNameMediaUploaded);
             $attachHasMedia = [];
             foreach ($colNameMediaUploaded as $key => $attach) {
                 if (!is_null(Media::find($key * 1))) {
