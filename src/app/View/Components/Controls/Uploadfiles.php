@@ -33,6 +33,7 @@ class Uploadfiles extends Component
             return view('components.feedback.alert')->with(compact('message', 'type'));
         }
         if ($action === 'create') {
+            session(['colNameMediaUploaded' => []]);
             $colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
             // dd($colNameMediaUploaded);
             $attachHasMedia = [];
