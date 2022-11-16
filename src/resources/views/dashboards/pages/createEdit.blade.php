@@ -29,7 +29,7 @@ $id = $action === "edit" ? $values->id : "";
         $value_column_name = $action === "edit" ? $values->{$column_name} : "";
         if(is_array($value_column_name)) $value_column_name = 'ARRAY';
         $col_span = $value['col_span'];
-        $hiddenRow = $props[$key]['hidden_view_all'] === true ? "hidden":"";
+        $hiddenRow = $props[$key]['hidden_edit'] === true ? "hidden":"";
 
         $isRequired = in_array("required", explode("|",$value['validation']));
         @endphp
