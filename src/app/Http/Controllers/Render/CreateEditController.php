@@ -71,7 +71,10 @@ abstract class CreateEditController extends Controller
 		$type = Str::plural($this->type);
 
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$hasAttachment = $this->saveMediaValidator('store', $request, $dataInput, null, $props);
+
+		$idsMediaDeleted = $this->deleteMediaIfNeeded($dataInput);
+
+		$hasAttachment = $this->saveMediaValidator('store', $request, $dataInput, null, $idsMediaDeleted);
 
 		$this->_validate($props, $request);
 
@@ -84,7 +87,6 @@ abstract class CreateEditController extends Controller
 
 		// Notifications
 		Notification::send($data, new CreateNewNotification($data->id));
-
 
 		if (isset($data)) {
 			$this->syncManyToManyRelationship($data, $newDataInputHasAttachment); // Check box
@@ -107,7 +109,7 @@ abstract class CreateEditController extends Controller
 
 		$data = $this->data::find($id);
 
-		$this->saveMediaValidator('update', $request, $dataInput, $data, $props);
+		$this->saveMediaValidator('update', $request, $dataInput, $data);
 
 		$this->_validate($props, $request);
 

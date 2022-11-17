@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Render;
 
+use App\Helpers\Helper;
 use App\Models\Media;
 use App\Utils\Constant;
 use Illuminate\Support\Facades\DB;
@@ -57,51 +58,39 @@ trait CreateEditControllerMedia
 
 
 
-    private function saveMediaValidator($action, $request, $dataInput, $data = [], $props)
+    private function saveMediaValidator($action, $request, $dataInput, $data = [], $idsMediaDeleted = [])
     {
         $hasAttachment = str_contains(array_keys($dataInput)[2], '_deleted');
         if (!$hasAttachment) return false;
-
-        $itemValidations = [];
-        foreach ($props as $value) {
-            if (!is_null($value['validation'])) $itemValidations[$value['column_name']] = $value['validation'];
-        }
-        $validator = Validator::make($request->all(), $itemValidations);
-
         $uploadedIdColumnName0 = session(Constant::ORPHAN_MEDIA) ?? [];
-
         switch ($action) {
-            case 'update':
-                if ($validator->fails()) {
-                    $keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
-                    $uploadedIdColumnName1 = $this->handleUpload($request);
-
-                    $_colNameMediaUploaded = $uploadedIdColumnName0 + $uploadedIdColumnName1; // save old value of media were uploaded
-                    foreach ($keyMediaDel as $value) {
-                        unset($_colNameMediaUploaded[$value]);
-                    }
-                    session([Constant::ORPHAN_MEDIA => $_colNameMediaUploaded]);
-                } else {
-                    $uploadedIdColumnName1 = $this->handleUpload($request);
-                    $this->setMediaParent($data, $uploadedIdColumnName1);
-                }
-                $this->setMediaParent($data, $uploadedIdColumnName0);
-                break;
             case 'store':
-                if ($validator->fails()) {
-                    $keyMediaDel = $this->deleteMediaIfNeeded($dataInput);
-                    $_colNameMediaUploaded = $this->handleUpload($request) + $uploadedIdColumnName0; // save old value of media were uploaded
+                $uploadedIdColumnName1 = $this->handleUpload($request);
+                if (count($idsMediaDeleted) > 0) {
+                    $_colNameMediaUploaded = $uploadedIdColumnName1 + $uploadedIdColumnName0; // save old value of media were uploaded
+                    Helper::removeItemsByKeysArray($_colNameMediaUploaded, $idsMediaDeleted);
 
-                    foreach ($keyMediaDel as $value) {
-                        unset($_colNameMediaUploaded[$value]);
-                    }
-                    session([Constant::ORPHAN_MEDIA => $_colNameMediaUploaded]);
-                } else {
-                    // validations were successful at the first time
-
-                    $_colNameMediaUploaded = $this->handleUpload($request); // save old value of media were uploaded
                     session([Constant::ORPHAN_MEDIA => $_colNameMediaUploaded]);
                 }
+
+                $newSession = $uploadedIdColumnName1 + session(Constant::ORPHAN_MEDIA);
+
+                session([Constant::ORPHAN_MEDIA => $newSession]);
+                break;
+
+            case 'update':
+                $uploadedIdColumnName1 = $this->handleUpload($request);
+                if (count($idsMediaDeleted) > 0) {
+                    $_colNameMediaUploaded = $uploadedIdColumnName1 + $uploadedIdColumnName0; // save old value of media were uploaded
+                    Helper::removeItemsByKeysArray($_colNameMediaUploaded, $idsMediaDeleted);
+
+                    session([Constant::ORPHAN_MEDIA => $_colNameMediaUploaded]);
+                }
+
+                $newSession = $uploadedIdColumnName1 + session(Constant::ORPHAN_MEDIA);
+
+
+                $this->setMediaParent($data, $newSession);
                 break;
 
             default:
