@@ -23,6 +23,11 @@ class ManageStatusLibrary extends Controller
         $this->readingFileService = $readingFileService;
     }
 
+    public function getType()
+    {
+        return "status";
+    }
+
     public function index()
     {
         $props = $this->readingFileService->getPath("$this->disk/$this->r_file_path");

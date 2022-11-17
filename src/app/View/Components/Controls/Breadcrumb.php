@@ -16,7 +16,7 @@ class Breadcrumb extends Component
     {
         $type = CurrentRoute::getTypePlural();
         $singular = CurrentRoute::getTypeSingular();
-        if (in_array($singular, ['dashboard', 'permission'])) return "";
+        if (in_array($singular, ['dashboard', 'permission', 'status'])) return "";
         return view('components.navigation.breadcrumb')->with(compact('type', 'singular'));
     }
 }
