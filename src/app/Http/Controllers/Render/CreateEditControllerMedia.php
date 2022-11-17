@@ -7,7 +7,6 @@ use App\Models\Media;
 use App\Utils\Constant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 
 trait CreateEditControllerMedia
 {
@@ -26,11 +25,15 @@ trait CreateEditControllerMedia
         return session(Constant::ORPHAN_MEDIA) ?? [];
     }
 
-    private function setMediaParent($data, $uploadedIdColumnNames)
+    private function setMediaParent($data, $uploadedIdColumnNames, $colNamehasAttachment = [])
     {
         if (!is_null($data) && (!is_null($uploadedIdColumnNames)) && count($uploadedIdColumnNames) > 0) {
             foreach (array_keys($uploadedIdColumnNames) as $key) {
-                $data->media()->save(Media::find($key));
+                if (!is_null(Media::find($key))) {
+                    $data->media()->save(Media::find($key));
+                    // Update filed
+
+                }
             }
             session([Constant::ORPHAN_MEDIA => []]);
         }
@@ -56,25 +59,27 @@ trait CreateEditControllerMedia
         return $keyMediaDel;
     }
 
-    private function saveMediaValidator($action, $request, $dataInput, $data = [], $idsMediaDeleted = [])
+    private function saveMediaValidator($action, $request, $dataInput, $data = [], $idsMediaDeleted = [], $colNamehasAttachment = [])
     {
-        $hasAttachment = str_contains(array_keys($dataInput)[2], '_deleted');
-        if (!$hasAttachment) return false;
-        $uploadedIdColumnName0 = session(Constant::ORPHAN_MEDIA) ?? [];
+        foreach (array_keys($dataInput) as $key) {
+            if (str_contains($key, '_deleted')) {
+                $uploadedIdColumnName0 = session(Constant::ORPHAN_MEDIA) ?? [];
 
-        $uploadedIdColumnName1 = $this->handleUpload($request);
-        if (count($idsMediaDeleted) > 0) {
-            $_colNameMediaUploaded = $uploadedIdColumnName1 + $uploadedIdColumnName0; // save old value of media were uploaded
-            $newColNameMediaUploaed = Helper::removeItemsByKeysArray($_colNameMediaUploaded, $idsMediaDeleted);
-            session([Constant::ORPHAN_MEDIA => $newColNameMediaUploaed]);
-            return true;
+                $uploadedIdColumnName1 = $this->handleUpload($request);
+                if (count($idsMediaDeleted) > 0) {
+                    $_colNameMediaUploaded = $uploadedIdColumnName1 + $uploadedIdColumnName0; // save old value of media were uploaded
+                    $newColNameMediaUploaed = Helper::removeItemsByKeysArray($_colNameMediaUploaded, $idsMediaDeleted);
+                    session([Constant::ORPHAN_MEDIA => $newColNameMediaUploaed]);
+                    return true;
+                }
+                $oldSession = session(Constant::ORPHAN_MEDIA) ?? [];
+                session([Constant::ORPHAN_MEDIA => $oldSession + $uploadedIdColumnName1]);
+                if ($action === 'update') {
+                    $this->setMediaParent($data, session(Constant::ORPHAN_MEDIA), $colNamehasAttachment);
+                }
+                return true;
+            }
         }
-        $oldSession = session(Constant::ORPHAN_MEDIA) ?? [];
-        session([Constant::ORPHAN_MEDIA => $oldSession + $uploadedIdColumnName1]);
-
-        if ($action === 'update') {
-            $this->setMediaParent($data, session(Constant::ORPHAN_MEDIA));
-        }
-        return true;
+        return false;
     }
 }

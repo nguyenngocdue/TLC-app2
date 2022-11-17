@@ -135,4 +135,10 @@ class Helper
         }
         return $originaleArray;
     }
+    public static function getColNamebyControls($props, $nameCotrol)
+    {
+        $colNamebyControls = array_filter($props, fn ($prop) => $prop['control'] === $nameCotrol);
+        $colNamebyControls = array_values(array_map(fn ($item) => $item['column_name'], $colNamebyControls));
+        return $colNamebyControls;
+    }
 }
