@@ -27,7 +27,7 @@ $id = $action === "edit" ? $values->id : "";
         $column_name = $value['column_name'];
         $control = $value['control'];
         $value_column_name = $action === "edit" ? $values->{$column_name} : "";
-        if(is_array($value_column_name)) $value_column_name = 'ARRAY';
+
         $col_span = $value['col_span'];
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
 

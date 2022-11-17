@@ -31,7 +31,10 @@ class ModalSettings extends Component
         $allColumns = array_filter($props, fn ($prop) => isset($prop['hidden_view_all']) && $prop['hidden_view_all'] !== 'true');
 
         $settings = CurrentUser::getSettings();
-        $selected = $settings[$this->type]['columns'] ?? [];
+
+        //If the setting array has not been set, it means this is the 1st time user accessing this module
+        //Therefore all columns must be selected
+        $selected = $settings[$this->type]['columns'] ?? $allColumns;
 
         return view('components.modal-settings', [
             'type' => $this->type,
