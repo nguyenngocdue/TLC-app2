@@ -3,6 +3,7 @@
 namespace App\View\Components\Controls;
 
 use App\Models\Media;
+use App\Utils\Constant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
@@ -33,7 +34,7 @@ class Uploadfiles extends Component
             return view('components.feedback.alert')->with(compact('message', 'type'));
         }
         if ($action === 'create') {
-            $colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
+            $colNameMediaUploaded = session(Constant::ORPHAN_MEDIA) ?? [];
             $attachHasMedia = [];
             foreach ($colNameMediaUploaded as $key => $attach) {
                 if (!is_null(Media::find($key * 1))) {
@@ -58,14 +59,14 @@ class Uploadfiles extends Component
 
 
 
-        $colNameMediaUploaded = session('colNameMediaUploaded') ?? [];
+        $colNameMediaUploaded = session(Constant::ORPHAN_MEDIA) ?? [];
         $attachFaildUpload = [];
         foreach ($colNameMediaUploaded as $key => $attach) {
             if (!is_null(Media::find($key * 1))) {
                 $attachFaildUpload[$attach][] = Media::find($key * 1)->getAttributes();
             }
         }
-        // session(['colNameMediaUploaded' => []]);
+        // session([Constant::ORPHAN_MEDIA => []]);
 
 
         foreach ($attachFaildUpload as $key => $media) {
