@@ -1,20 +1,9 @@
 {
     "_media": {
+        "name": "_media",
         "relationship": "media",
-        "eloquent": "hasMany",
-        "param_1": "App\\Models\\Media",
-        "param_2": "owner_id",
-        "param_3": "id",
-        "param_4": null,
-        "param_5": null,
-        "param_6": null,
-        "label": "Media",
-        "renderer": null,
-        "renderer_param": null,
-        "control_name": null,
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default"
+        "renderer": "attachment",
+        "renderer_param": "",
+        "control_name": ""
     }
 }
