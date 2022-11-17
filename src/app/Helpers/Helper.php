@@ -133,5 +133,6 @@ class Helper
         foreach ($keysArray as $value) {
             unset($originaleArray[$value]);
         }
+        return $originaleArray;
     }
 }
