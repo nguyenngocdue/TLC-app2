@@ -71,6 +71,18 @@ abstract class ViewAllController extends Controller
                 case "number":
                     $output['align'] = "right";
                     break;
+                case "picker_datetime":
+                case "picker_date":
+                case "picker_time":
+                case "picker_month":
+                case "picker_week":
+                case "picker_quarter":
+                case "picker_year":
+                case "picker_datetime":
+                    $output['align'] = "center";
+                    $output['renderer'] = "date-time";
+                    $output['rendererParam'] = $prop['control'];
+                    break;
                 default:
                     break;
             }
