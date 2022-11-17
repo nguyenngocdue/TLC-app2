@@ -128,4 +128,11 @@ class Helper
         }
         return false;
     }
+    public static function removeItemsByKeysArray($originaleArray, $keysArray)
+    {
+        foreach ($keysArray as $value) {
+            unset($originaleArray[$value]);
+        }
+        return $originaleArray;
+    }
 }
