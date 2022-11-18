@@ -89,7 +89,7 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::resource('manage/status', ManageStatusDoc::class);
 Route::resource('statuses/statusLibrary', ManageStatusLibrary::class);
 
-Route::resource('dashboard/workflow/statuses', ManageStatuses::class)->only('index', 'store');
+Route::resource('dashboard/workflow/statuses', ManageStatuses::class)->only('index', 'store', 'create');
 
 Route::resource('manage/statusDocType', StatusDocType::class);
 Route::resource('/abc', HomeController::class);

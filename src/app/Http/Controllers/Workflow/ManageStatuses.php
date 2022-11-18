@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ManageStatuses extends Controller
 {
@@ -55,7 +56,7 @@ class ManageStatuses extends Controller
         $path = "workflow/statuses.json";
         $pathFrom = storage_path('json/' . $path);
         $json = json_decode(file_get_contents($pathFrom, true), true);
-        return array_values($json);
+        return $json;
     }
 
     private function distributeArrayToObject($array)
@@ -74,9 +75,6 @@ class ManageStatuses extends Controller
     private function setDataSource($dataSource)
     {
         $path = "workflow/statuses.json";
-        $dataSource = (array)$dataSource->all();
-        unset($dataSource["_token"]);
-        $dataSource = $this->distributeArrayToObject($dataSource);
         // Log::info($dataSource);
         $str = json_encode($dataSource, JSON_PRETTY_PRINT);
         Storage::disk('json')->put($path, $str);
@@ -85,14 +83,31 @@ class ManageStatuses extends Controller
     public function index()
     {
         $columns = $this->getColumns();
-        $dataSource = $this->getDataSource();
+        $dataSource = array_values($this->getDataSource());
+
         return view("workflow/manage-statuses")->with(compact('columns', 'dataSource'));
     }
 
     public function store(Request $request)
     {
-        $this->setDataSource($request);
-        // return $this->index();
+        $dataSource = (array)$request->all();
+        unset($dataSource["_token"]);
+        $dataSource = $this->distributeArrayToObject($dataSource);
+        // dd($dataSource);
+        $this->setDataSource($dataSource);
+        return redirect()->back();
+    }
+
+    public function create(Request $request)
+    {
+        $name = $request->input('name')[0];
+        $names = explode("|", $name);
+        $newItems = [];
+        foreach ($names as $name) $newItems[$name] = ['name' => $name, 'title' => Str::headline($name)];
+
+        $dataSource = $this->getDataSource()  + $newItems;
+        // dd($dataSource);
+        $this->setDataSource($dataSource);
         return redirect()->back();
     }
 }
