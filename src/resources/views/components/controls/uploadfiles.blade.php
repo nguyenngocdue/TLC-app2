@@ -36,10 +36,10 @@
         <span class="block w-full text-sm text-blue-500 p-2.5   dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">No file selected</span>
         @endif
     </div>
-    <input id="{{$colName}}_deleted" name="{{$colName}}_deleted" type="hidden" value="" class=' p-2.5  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type='text'>
+    <input id="{{$colName}}_deleted" name="{{$colName}}_deleted" {{-- type="hidden" --}} value="" class=' p-2.5  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type='text'>
     <input multiple class="  block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " id="multiple_files" type="file" name="{{$colName}}[]">
     @else
-    <input id="{{$colName}}_deleted" name="{{$colName}}_deleted" type="hidden" value="" class=' p-2.5  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type='text'>
+    <input id="{{$colName}}_deleted" name="{{$colName}}_deleted" {{-- type="hidden" --}} value="" class=' p-2.5  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type='text'>
     <input multiple class="  block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " id="multiple_files" type="file" name="{{$colName}}[]">
     @endif
 </div>

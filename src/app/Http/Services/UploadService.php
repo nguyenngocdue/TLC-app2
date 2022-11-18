@@ -77,7 +77,6 @@ class UploadService
                 $colNameMedia[$newMedia['id']] = $flip_cateIdName[$media['category']];   // [id-media = "attachment-name"]
             }
 
-            dd($colNameMedia);
             return $colNameMedia;
         } catch (\Exception $e) {
             return  $e;
