@@ -72,6 +72,8 @@ Route::group([
         Route::post('setroles/syncroles', [App\Http\Controllers\Admin\AdminSetRoleController::class, 'store2'])->name('setroles.store2');
         Route::resource('setrolesets', App\Http\Controllers\Admin\AdminSetRoleSetController::class);
         Route::post('setrolesets/syncrolesets', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'store2'])->name('setrolesets.store2');
+
+        Route::resource('permissions2', App\Http\Controllers\Permission\Permission::class);
     });
 });
 Route::group([
@@ -87,7 +89,7 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::resource('test', TestController::class);
 // Route::resource('manage/manage_statusLibrary', ManageStatusLibrary::class);
 // Route::resource('manage/status', ManageStatusDoc::class);
-Route::resource('statuses/statusLibrary', ManageStatusLibrary::class);
+// Route::resource('statuses/statusLibrary', ManageStatusLibrary::class);
 
 Route::resource('dashboard/workflow/statuses', ManageStatuses::class)->only('index', 'store', 'create');
 

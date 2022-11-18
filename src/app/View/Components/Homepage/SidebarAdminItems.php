@@ -20,6 +20,10 @@ class SidebarAdminItems
                     'href' => "/dashboard/admin/permissions",
                 ],
                 [
+                    'title' => "Permissions 2",
+                    'href' => "/dashboard/admin/permissions2",
+                ],
+                [
                     'title' => "Roles",
                     'href' =>  "/dashboard/admin/roles",
                 ],

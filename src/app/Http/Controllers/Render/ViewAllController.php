@@ -43,9 +43,9 @@ abstract class ViewAllController extends Controller
     private function getDataSource($pageLimit, $search)
     {
         $model = $this->typeModel;
-        $result = App::make($model)::search($search)->query(function ($q) {
-            $q->orderBy('id', 'asc');
-        })->paginate($pageLimit);
+        $result = App::make($model)::search($search)
+            ->query(fn ($q) => $q->orderBy('id', 'asc'))
+            ->paginate($pageLimit);
         return $result;
     }
 
@@ -63,6 +63,7 @@ abstract class ViewAllController extends Controller
                 case 'id':
                     $output['type'] = $type;
                     $output['renderer'] = 'id';
+                    $output['align'] = 'center';
                     break;
                 case 'switch':
                     $output['align'] = "center";
@@ -118,16 +119,18 @@ abstract class ViewAllController extends Controller
         $json = json_decode(file_get_contents($path), true);
         // Log::info($json);
 
-        foreach ($columns as &$column) {
-            $dataIndex = $column['dataIndex'];
-            if (isset($eloquentParams[$dataIndex])) {
-                $relationship = $eloquentParams[$dataIndex][0];
-                // Log::info($dataIndex . " " . $relationship);
-                if (in_array($relationship, ['belongsToMany', 'belongsTo', 'hasMany'])) {
-                    $relationshipJson = $json["_{$dataIndex}"];
-                    // Log::info($relationshipJson);
-                    $column['renderer'] = $relationshipJson['renderer'];
-                    $column['rendererParam'] = $relationshipJson['renderer_param'];
+        if (is_array($columns)) {
+            foreach ($columns as &$column) {
+                $dataIndex = $column['dataIndex'];
+                if (isset($eloquentParams[$dataIndex])) {
+                    $relationship = $eloquentParams[$dataIndex][0];
+                    // Log::info($dataIndex . " " . $relationship);
+                    if (in_array($relationship, ['belongsToMany', 'belongsTo', 'hasMany'])) {
+                        $relationshipJson = $json["_{$dataIndex}"];
+                        // Log::info($relationshipJson);
+                        $column['renderer'] = $relationshipJson['renderer'];
+                        $column['rendererParam'] = $relationshipJson['renderer_param'];
+                    }
                 }
             }
         }
@@ -148,9 +151,11 @@ abstract class ViewAllController extends Controller
         // Log::info($columns);
 
         $keys = array_keys($eloquent);
-        foreach ($columns as &$column) {
-            if (in_array($column['dataIndex'], $keys)) {
-                $column['dataIndex'] = $eloquent[$column['dataIndex']];
+        if (is_array($columns)) {
+            foreach ($columns as &$column) {
+                if (in_array($column['dataIndex'], $keys)) {
+                    $column['dataIndex'] = $eloquent[$column['dataIndex']];
+                }
             }
         }
     }
