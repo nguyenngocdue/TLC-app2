@@ -30,78 +30,65 @@ abstract class ManagePropController extends Controller
         $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/props/controls.json'), true)['controls'];
         return [
             [
-                "title" => "Action",
                 "dataIndex" => "action",
             ],
             [
-                "title" => "Name",
                 "dataIndex" => "name",
                 "renderer" => "read-only-text",
                 "editable" => true,
             ],
             [
-                "title" => "Column Name",
                 "dataIndex" => "column_name",
                 "renderer" => "read-only-text",
                 "editable" => true,
             ],
             [
-                "title" => "Column Type",
                 "dataIndex" => "column_type",
                 "renderer" => "read-only-text",
                 "editable" => true,
             ],
             [
-                "title" => "Label",
                 "dataIndex" => "label",
                 "renderer" => "text",
                 "editable" => true,
             ],
             [
-                "title" => "Control",
                 "dataIndex" => "control",
                 "editable" => true,
                 "renderer" => "dropdown",
                 "cbbDataSource" => $controls,
             ],
             [
-                "title" => "Col Span",
                 "dataIndex" => "col_span",
                 "editable" => true,
                 "renderer" => "number",
             ],
             [
-                "title" => "Hidden View All",
                 "dataIndex" => "hidden_view_all",
                 "editable" => true,
                 "renderer" => "dropdown",
             ],
             [
-                "title" => "Hidden Edit",
                 "dataIndex" => "hidden_edit",
                 "editable" => true,
                 "renderer" => "dropdown",
             ],
             [
-                "title" => "New Line",
                 "dataIndex" => "new_line",
                 "editable" => true,
                 "renderer" => "dropdown",
             ],
             [
-                "title" => "Validation",
                 "dataIndex" => "validation",
                 "editable" => true,
                 "renderer" => "text",
             ],
             [
-                "title" => "Frozen Left",
                 "dataIndex" => "frozen_left",
                 "editable" => true,
                 "renderer" => "dropdown",
             ],
             [
-                "title" => "Frozen Right",
                 "dataIndex" => "frozen_right",
                 "editable" => true,
                 "renderer" => "dropdown",

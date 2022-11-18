@@ -23,19 +23,16 @@ class ManageStatuses extends Controller
     {
         return   [
             [
-                'title' => "Name",
                 'dataIndex' => "name",
                 "renderer"  => 'read-only-text',
                 'editable' => true,
             ],
             [
-                'title' => "Title",
                 'dataIndex' => "title",
                 'renderer' => 'text',
                 'editable' => true,
             ],
             [
-                'title' => "Color",
                 'dataIndex' => "color",
                 'renderer' => 'dropdown',
                 'editable' => true,
@@ -43,7 +40,6 @@ class ManageStatuses extends Controller
                 "sortBy" => "value",
             ],
             [
-                'title' => "Rendered",
                 'dataIndex' => "rendered",
                 'renderer' => 'formatter',
                 'formatterName' => 'statusColorRendered',

@@ -4,11 +4,6 @@
         "title": "Assigned",
         "color": "amber"
     },
-    "assigned1": {
-        "name": "assigned1",
-        "title": "Assigned 1",
-        "color": "amber"
-    },
     "closed": {
         "name": "closed",
         "title": "Closed",

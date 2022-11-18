@@ -3,7 +3,6 @@
 namespace App\View\Components\Homepage;
 
 use App\Utils\Support\CurrentRoute;
-use Illuminate\Support\Str;
 
 class SidebarAdminItems
 {
@@ -49,7 +48,7 @@ class SidebarAdminItems
 
     private static function getWorkflow($currentType, $svg)
     {
-        $isActive = ($currentType === 'permission');
+        $isActive = ($currentType === 'workflow');
         return [
             "title" => "Workflows",
             // "type" => "ppppp",

@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Table extends Component
@@ -65,7 +66,7 @@ class Table extends Component
   {
     $renderer = $column['renderer'] ?? "_";
     $dataIndex = $column['dataIndex'];
-    $title = $column['title'];
+    $title = $column['title'] ?? Str::headline($column['dataIndex']);
     return "<th class='{$dataIndex}_th px-4 py-3' title=\"{$dataIndex} / {$renderer}\">{$title}</th>";
   }
 
