@@ -25,14 +25,12 @@ trait CreateEditControllerMedia
         return session(Constant::ORPHAN_MEDIA) ?? [];
     }
 
-    private function setMediaParent($data, $uploadedIdColumnNames, $colNamehasAttachment = [])
+    private function setMediaParent($data, $uploadedIdColumnNames)
     {
         if (!is_null($data) && (!is_null($uploadedIdColumnNames)) && count($uploadedIdColumnNames) > 0) {
             foreach (array_keys($uploadedIdColumnNames) as $key) {
                 if (!is_null(Media::find($key))) {
                     $data->media()->save(Media::find($key));
-                    // Update filed
-
                 }
             }
             session([Constant::ORPHAN_MEDIA => []]);
@@ -59,7 +57,7 @@ trait CreateEditControllerMedia
         return $keyMediaDel;
     }
 
-    private function saveMediaValidator($action, $request, $dataInput, $data = [], $idsMediaDeleted = [], $colNamehasAttachment = [])
+    private function saveMediaValidator($action, $request, $dataInput, $data = [], $idsMediaDeleted = [])
     {
         foreach (array_keys($dataInput) as $key) {
             if (str_contains($key, '_deleted')) {
@@ -75,7 +73,7 @@ trait CreateEditControllerMedia
                 $oldSession = session(Constant::ORPHAN_MEDIA) ?? [];
                 session([Constant::ORPHAN_MEDIA => $oldSession + $uploadedIdColumnName1]);
                 if ($action === 'update') {
-                    $this->setMediaParent($data, session(Constant::ORPHAN_MEDIA), $colNamehasAttachment);
+                    $this->setMediaParent($data, session(Constant::ORPHAN_MEDIA));
                 }
                 return true;
             }
