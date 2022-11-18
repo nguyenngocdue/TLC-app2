@@ -1,0 +1,22 @@
+{
+    "assigned": {
+        "name": "assigned",
+        "title": "Assigned",
+        "color": "amber"
+    },
+    "closed": {
+        "name": "closed",
+        "title": "Closed",
+        "color": "gray"
+    },
+    "new": {
+        "name": "new",
+        "title": "New",
+        "color": "green"
+    },
+    "rejected": {
+        "name": "rejected",
+        "title": "Rejected",
+        "color": "red"
+    }
+}

@@ -1,6 +1,9 @@
 <div class="mt-6"></div>
 <ul>
     @foreach($items as $item)
+    @if($item === '-')
+    <hr />
+    @else
     <li class="relative px-6 py-3" x-data="{opening: 0, active: {{$item['isActive'] ? 1 : 0}},}">
         @if($item['isActive'])
         <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
@@ -41,5 +44,11 @@
         </a>
         @endif
     </li>
+    @endif
     @endforeach
 </ul>
+<br />
+<br />
+<br />
+<br />
+<br />

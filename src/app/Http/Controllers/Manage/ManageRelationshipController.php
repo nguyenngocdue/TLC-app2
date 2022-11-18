@@ -27,8 +27,8 @@ abstract class ManageRelationshipController extends Controller
 
     private function getColumns()
     {
-        $controls0 = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/relationships/renderers.json'), true)['renderers'];
-        $controls = array_map(fn ($control) => ["title" => Str::pretty($control), "value" => $control], $controls0);
+        $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/relationships/renderers.json'), true)['renderers'];
+        // $controls = array_map(fn ($control) => ["value" => $control], $controls0);
         return [
             [
                 "title" => "Action",

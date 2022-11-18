@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Manage\ManageStatusLibrary;
 use App\Http\Controllers\Manage\Master\StatusDocType;
 use App\Http\Controllers\SettingController;
-use App\Notifications\CreatePostSuccess;
+use App\Http\Controllers\Workflow\ManageStatuses;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -88,6 +88,9 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::resource('manage/manage_statusLibrary', ManageStatusLibrary::class);
 // Route::resource('manage/status', ManageStatusDoc::class);
 Route::resource('statuses/statusLibrary', ManageStatusLibrary::class);
+
+Route::resource('dashboard/workflow/statuses', ManageStatuses::class)->only('index', 'store');
+
 Route::resource('manage/statusDocType', StatusDocType::class);
 Route::resource('/abc', HomeController::class);
 

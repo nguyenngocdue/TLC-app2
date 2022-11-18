@@ -27,8 +27,7 @@ abstract class ManagePropController extends Controller
 
     private function getColumns()
     {
-        $controls0 = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/props/controls.json'), true)['controls'];
-        $controls = array_map(fn ($control) => ["title" => Str::pretty($control), "value" => $control], $controls0);
+        $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/props/controls.json'), true)['controls'];
         return [
             [
                 "title" => "Action",

@@ -31,13 +31,14 @@ class Table extends Component
     $attributeRender = $this->getAttributeRendered($column, $dataLine);
     $typeRender = isset($column['type']) ? "type='{$column['type']}'" : "";
 
-    $cbbDataSource = $column['cbbDataSource'] ?? [["title" => "", "value" => ""], ["title" => "True", "value" => "true"]];
+    $cbbDataSource = $column['cbbDataSource'] ?? ["", "true"];
     $cbbDataSourceRender = $cbbDataSource ? ':cbbDataSource=\'$cbbDataSource\'' : "";
     $dataLineRender = $dataLine ? ':dataLine=\'$dataLine\'' : "";
     $columnRender = $column ? ':column=\'$column\'' : "";
     $rendererParam = isset($column['rendererParam']) ? "rendererParam='{$column['rendererParam']}'" : "";
+    $formatterName = isset($column['formatterName']) ? "formatterName='{$column['formatterName']}'" : "";
 
-    $attributes = "$name $attributeRender $typeRender $cbbDataSourceRender $dataLineRender $columnRender $rendererParam";
+    $attributes = "$name $attributeRender $typeRender $cbbDataSourceRender $dataLineRender $columnRender $rendererParam $formatterName";
 
     $editable = isset($column['editable']) ? ".editable" : "";
     $tagName = "x-renderer{$editable}.{$renderer}";
@@ -45,6 +46,7 @@ class Table extends Component
     $output = "<$tagName $attributes>$rawData</$tagName>";
     // if ($editable) Log::info($output);
     // Log::info($output);
+    // Log::info($column);
     return Blade::render($output, [
       'cbbDataSource' => $cbbDataSource,
       'column' => $column,
@@ -77,6 +79,7 @@ class Table extends Component
         $renderer = $column['renderer'] ?? false;
         switch ($renderer) {
           case  'no.':
+            // dd($start, $no);
             $rendered = $start + $no + 1;
             break;
           default:

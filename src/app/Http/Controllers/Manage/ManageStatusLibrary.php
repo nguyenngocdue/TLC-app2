@@ -25,7 +25,7 @@ class ManageStatusLibrary extends Controller
 
     public function getType()
     {
-        return "status";
+        return "workflow";
     }
 
     public function index()

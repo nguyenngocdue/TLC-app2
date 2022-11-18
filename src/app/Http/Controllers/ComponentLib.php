@@ -46,14 +46,7 @@ class ComponentLib extends Controller
                 "dataIndex" => "client",
                 "renderer" => "dropdown",
                 "editable" => true,
-                "cbbDataSource" => [
-                    ["title" => "", "value" => ""],
-                    ["title" => "Hans", "value" => "Hans"],
-                    ["title" => "Jolina", "value" => "Jolina"],
-                    ["title" => "Sarah", "value" => "Sarah"],
-                    ["title" => "Rulia", "value" => "Rulia"],
-                    ["title" => "Dave", "value" => "Dave"],
-                ],
+                "cbbDataSource" => ["", "Hans", "Jolina", "Sarah", "Rulia", "Dave"],
             ],
             [
                 "title" => 'Logged In',
@@ -72,13 +65,7 @@ class ComponentLib extends Controller
                 "dataIndex" => "status",
                 "renderer" => "dropdown",
                 "editable" => true,
-                "cbbDataSource" => [
-                    ["title" => "", "value" => "",],
-                    ["title" => "Approved", "value" => "approved",],
-                    ["title" => "Pending", "value" => "pending",],
-                    ["title" => "Rejected", "value" => "rejected",],
-                    ["title" => "Expired", "value" => "expired",],
-                ],
+                "cbbDataSource" => ["", "approved", "pending", "rejected", "expired"],
             ],
             [
                 "title" => 'Date',
