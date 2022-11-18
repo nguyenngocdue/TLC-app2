@@ -89,11 +89,16 @@ class User extends Authenticatable implements LdapAuthenticatable
         "productionRunLines" => ['belongsToMany', Prod_line::class, 'prod_user_runs', 'user_id', 'prod_line_id']
     ];
     protected $guard_name = 'web';
+    // public function media()
+    // {
+    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
     public function media()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->morphMany(Media::class, 'mediable', 'object_type', 'object_id');
     }
+
     public function posts()
     {
         $p = $this->eloquentParams[__FUNCTION__];

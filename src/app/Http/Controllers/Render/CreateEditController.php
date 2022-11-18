@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Render;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
@@ -34,6 +35,7 @@ abstract class CreateEditController extends Controller
 
 	public function create()
 	{
+		// session([Constant::ORPHAN_MEDIA => []]);
 		$action = $this->action;
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 
@@ -83,33 +85,41 @@ abstract class CreateEditController extends Controller
 		$newDataInputHasAttachment = array_filter($newDataInput, fn ($item) => is_array($item));
 		$newDataInputNotAttachMent = array_filter($newDataInput, fn ($item) => !is_array($item));
 
-		$data = $this->data::create($newDataInputNotAttachMent);
+		try {
+			$data = $this->data::create($newDataInputNotAttachMent);
+			// Notifications
+			Notification::send($data, new CreateNewNotification($data->id));
 
-		// Notifications
-		Notification::send($data, new CreateNewNotification($data->id));
+			if (isset($data)) {
+				$this->syncManyToManyRelationship($data, $newDataInputHasAttachment); // Check box
+				$colNameMediaUploaded = session(Constant::ORPHAN_MEDIA) ?? [];
 
-		if (isset($data)) {
-			$this->syncManyToManyRelationship($data, $newDataInputHasAttachment); // Check box
-			$colNameMediaUploaded = session(Constant::ORPHAN_MEDIA) ?? [];
-
-			if ($hasAttachment) $this->setMediaParent($data, $colNameMediaUploaded);
-			Toastr::success("$this->type created successfully", "Create $this->type");
-		}
-		return redirect(route("{$type}_edit.edit", $data->id));
+				if ($hasAttachment) $this->setMediaParent($data, $colNameMediaUploaded);
+				Toastr::success("$this->type created successfully", "Create $this->type");
+			}
+			return redirect(route("{$type}_edit.edit", $data->id));
+		} catch (\Exception $e) {
+			dd($e->getMessage());
+		};
 	}
 
 	public function update(Request $request, $id)
 	{
-		$dataInput = $request->except(['_token', '_method', 'created_at', 'updated_at']);
 
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+		$colNamehasAttachment = Helper::getColNamebyControls($props, 'attachment');
+		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamehasAttachment);
+		$dataInput = $request->except($arrayExcept);
+
+
 		$type = Str::plural($this->type);
 
 		$this->deleteMediaIfNeeded($dataInput);
 
 		$data = $this->data::find($id);
 
-		$this->saveMediaValidator('update', $request, $dataInput, $data);
+		$this->saveMediaValidator('update', $request, $dataInput, $data, [], $colNamehasAttachment);
+
 
 		$this->_validate($props, $request);
 
