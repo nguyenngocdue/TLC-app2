@@ -13,7 +13,7 @@ class Dropdown extends Component
      *
      * @return void
      */
-    public function __construct(private $name = "", private $cbbDataSource = [], private $column = [])
+    public function __construct(private $name = "", private $cbbDataSource = [], private $sortBy = false)
     {
         //
         // dump($dataSource);
@@ -28,7 +28,6 @@ class Dropdown extends Component
             if (!isset($option['title'])) $option['title'] = Str::headline($option['value']);
         }
 
-        $sortBy = $column['sortBy'] ?? false;
         if ($sortBy) usort($dataSource, fn ($a, $b) => $a[$sortBy] <=> $b[$sortBy]);
 
         $this->cbbDataSource = $dataSource;

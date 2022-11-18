@@ -13,8 +13,12 @@ class Table extends Component
    *
    * @return void
    */
-  public function __construct(private $columns = [], private $dataSource = null, private $showNo = false)
-  {
+  public function __construct(
+    private $columns = [],
+    private $dataSource = null,
+    private $showNo = false,
+    private $groupBy = false,
+  ) {
   }
 
   private function getAttributeRendered($column, $dataLine)
@@ -30,6 +34,7 @@ class Table extends Component
     $name = isset($column['dataIndex']) ? "name='{$column['dataIndex']}[]'" : "";
     $attributeRender = $this->getAttributeRendered($column, $dataLine);
     $typeRender = isset($column['type']) ? "type='{$column['type']}'" : "";
+    $sortByRender = isset($column['sortBy']) ? "sortBy='{$column['sortBy']}'" : "";
 
     $cbbDataSource = $column['cbbDataSource'] ?? ["", "true"];
     $cbbDataSourceRender = $cbbDataSource ? ':cbbDataSource=\'$cbbDataSource\'' : "";
@@ -38,7 +43,9 @@ class Table extends Component
     $rendererParam = isset($column['rendererParam']) ? "rendererParam='{$column['rendererParam']}'" : "";
     $formatterName = isset($column['formatterName']) ? "formatterName='{$column['formatterName']}'" : "";
 
-    $attributes = "$name $attributeRender $typeRender $cbbDataSourceRender $dataLineRender $columnRender $rendererParam $formatterName";
+    $attributes = "$name $attributeRender $typeRender $cbbDataSourceRender ";
+    $attributes .= "$dataLineRender $columnRender $rendererParam $formatterName ";
+    $attributes .= "$sortByRender ";
 
     $editable = isset($column['editable']) ? ".editable" : "";
     $tagName = "x-renderer{$editable}.{$renderer}";
@@ -62,6 +69,30 @@ class Table extends Component
     return "<th class='{$dataIndex}_th px-4 py-3' title=\"{$dataIndex} / {$renderer}\">{$title}</th>";
   }
 
+  private function makeTd($columns, $dataLine, $columnCount, $no)
+  {
+    $tds = [];
+    foreach ($columns as $index => $column) {
+      $renderer = $column['renderer'] ?? false;
+      switch ($renderer) {
+        case  'no.':
+          // dd($start, $no);
+          $rendered = $no;
+          break;
+        default:
+          $dataIndex = $column['dataIndex'];
+          $rawData = $dataLine[$dataIndex] ?? ""; //"<strong>$dataIndex</strong> not found";
+          $rendered = $renderer ? $this->applyRender($renderer, $rawData, $column, $dataLine) : $rawData;
+          $rendered = is_array($rendered) ? count($rendered) . " items" : $rendered;
+          break;
+      }
+      $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
+      $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
+      $tds[] = "<td class='px-1 py-1 $borderRight $align'>" . $rendered . "</td>";
+    }
+    return $tds;
+  }
+
   private function makeTrTd($columns, $dataSource)
   {
     $trs = [];
@@ -71,29 +102,24 @@ class Table extends Component
     if (empty($dataSource) || (is_object($dataSource) && empty($dataSource->items()))) return "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
 
     $columnCount = count($columns);
-
     $start = is_object($dataSource) ?  $dataSource->perPage() * ($dataSource->currentPage() - 1) : 0;
+    if ($this->groupBy) usort($dataSource, fn ($a, $b) => strcasecmp($a[$this->groupBy], $b[$this->groupBy]));
+
+    $lastIndex = "anything";
     foreach ($dataSource as $no => $dataLine) {
-      $tds = [];
-      foreach ($columns as $index => $column) {
-        $renderer = $column['renderer'] ?? false;
-        switch ($renderer) {
-          case  'no.':
-            // dd($start, $no);
-            $rendered = $start + $no + 1;
-            break;
-          default:
-            $dataIndex = $column['dataIndex'];
-            $rawData = $dataLine[$dataIndex] ?? ""; //"<strong>$dataIndex</strong> not found";
-            $rendered = $renderer ? $this->applyRender($renderer, $rawData, $column, $dataLine) : $rawData;
-            break;
+      $tds = $this->makeTd($columns, $dataLine, $columnCount, $start + $no + 1);
+
+      if ($this->groupBy) {
+        $index = strtoupper($dataLine[$this->groupBy][0]);
+        if ($index !== $lastIndex) {
+          $lastIndex = $index;
+          $trs[] = "<tr class='bg-gray-100 '><td class='p-2 text-lg font-bold text-gray-600' colspan=$colspan>{$index}</td></tr>";
         }
-        $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
-        $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
-        $tds[] = "<td class='px-1 py-1 $borderRight $align'>" . $rendered . "</td>";
       }
+
       $bgClass = ($dataLine['row_color'] ?? false) ? "bg-" . $dataLine['row_color'] . "-400" : "";
       $trs[] = "<tr class='hover:bg-gray-100 $bgClass text-gray-700 dark:text-gray-400'>" . join("", $tds) . "</tr>";
+
       if (isset($dataLine['rowDescription'])) {
         $trs[] = "<tr class='bg-gray-100 '><td class='p-2 text-xs text-gray-600' colspan=$colspan>{$dataLine['rowDescription']}</td></tr>";
       }

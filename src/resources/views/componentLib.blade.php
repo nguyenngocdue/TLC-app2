@@ -22,6 +22,8 @@
             <x-renderer.editable.number name="number1">2606.1988</x-renderer.editable.number>
             Dropdown
             <x-renderer.editable.dropdown name="dropdown1" :cbbDataSource='["", "true"]'>true</x-renderer.editable.dropdown>
+            Dropdown with sortBy
+            <x-renderer.editable.dropdown name="dropdown2" :cbbDataSource='["3", "2", "1"]' sortBy='value'>true</x-renderer.editable.dropdown>
         </x-renderer.card>
 
         <x-renderer.card title="Tables">
@@ -30,7 +32,11 @@
             </x-renderer.card>
             <br />
             <x-renderer.card title="Table with Data and No.">
-                <x-renderer.table showNo="{{true}}" :columns="$tableColumns" :dataSource="$tableDataSource" />
+                <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNo="{{true}}" />
+            </x-renderer.card>
+            <br />
+            <x-renderer.card title="Table with Data and No. and GroupBy">
+                <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNo="{{true}}" groupBy="client" />
             </x-renderer.card>
             <br />
             <x-renderer.card title="Empty Table">
