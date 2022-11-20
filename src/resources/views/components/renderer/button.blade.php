@@ -1,3 +1,3 @@
-<button type="button" class="{{$className}}">
+<button type="{{$htmlType}}" class="{{$className}}">
     {{$slot}}
 </button>

@@ -58,7 +58,7 @@
                 <form action="" method="GET">
                     @csrf
                     <x-renderer.table showNo={{true}} :columns="$tableEditableColumns" :dataSource="$tableDataSource" />
-                    <x-renderer.button>Update</x-renderer.button>
+                    <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
                 </form>
             </x-renderer.card>
         </x-renderer.card>

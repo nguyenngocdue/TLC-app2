@@ -87,6 +87,14 @@ class Permission extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        $name = $request->input('name')[0];
+        $names = explode("|", $name);
+        foreach ($names as $name) App::make($this->model)::create(['name' => $name]);
+        return redirect()->back();
+    }
+
     public function update(Request $request, $id)
     {
         $object = App::make($this->model)::where('id', $id)->get()[0];

@@ -11,7 +11,7 @@ class Button extends Component
      *
      * @return void
      */
-    public function __construct(private $type = "light", private $outline = false)
+    public function __construct(private $type = "light", private $outline = false, private $htmlType = 'button')
     {
         // dd($this->type);
     }
@@ -76,6 +76,7 @@ class Button extends Component
         return view('components.renderer.button', [
             // 'label' => $this->label,
             'className' => $this->outline ? $this->getClassOutline() : $this->getClass(),
+            'htmlType' => $this->htmlType,
         ]);
     }
 }

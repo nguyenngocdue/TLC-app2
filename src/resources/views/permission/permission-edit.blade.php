@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Permissions')
+@section('title', 'Permissions #'.$id)
 @section('content')
 
 
@@ -7,7 +7,7 @@
     @csrf
     @method('PUT')
     <x-renderer.table :columns="$columns" :dataSource="$dataSource" />
-    <x-renderer.button type="primary">Update</x-renderer.button>
+    <x-renderer.button type="primary" htmlType='submit'>Update</x-renderer.button>
 </form>
 
 @endsection
