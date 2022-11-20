@@ -4,16 +4,17 @@ namespace App\View\Components\Dashboards;
 
 use Illuminate\View\Component;
 
-class GotoBox extends Component
+class PerPage extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private $type = '', private $action = '', private $pageLimit = '')
     {
         //
+        // dd("In perpage");
     }
 
     /**
@@ -23,6 +24,10 @@ class GotoBox extends Component
      */
     public function render()
     {
-        return view('components.dashboards.goto-box');
+        return view('components.form.per-page', [
+            'type' => $this->type,
+            'action' => $this->action,
+            'pageLimit' => $this->pageLimit,
+        ]);
     }
 }

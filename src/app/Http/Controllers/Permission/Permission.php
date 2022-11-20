@@ -97,6 +97,18 @@ class Permission extends Controller
 
     public function update(Request $request, $id)
     {
+        // $entity = $request->input('_entity');
+        // $perPage = $request->input('_entity_page');
+        // if ($perPage) {
+        //     dd($entity, $perPage);
+        //     $user = User::find($id);
+        //     $var = $user->settings;
+        //     $var['permissions2']['perPage'] = $perPage;
+        //     $user->settings = $var;
+        //     $user->update();
+        //     return redirect(route('permissions2.index'));
+        // }
+
         $object = App::make($this->model)::where('id', $id)->get()[0];
         $data = $request->input();
         unset($data["_token"]);

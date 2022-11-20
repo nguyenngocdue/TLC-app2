@@ -4,16 +4,18 @@ namespace App\View\Components\Dashboards\pages;
 
 use Illuminate\View\Component;
 
-class Searchbox extends Component
+class Search extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private $action = '')
     {
         //
+        // dd($this->action);
+        // dd("Searchbox");
     }
 
     /**
@@ -23,6 +25,8 @@ class Searchbox extends Component
      */
     public function render()
     {
-        return view('components.dashboards.pages.search-box');
+        return view('components.form.search', [
+            'action' => $this->action,
+        ]);
     }
 }

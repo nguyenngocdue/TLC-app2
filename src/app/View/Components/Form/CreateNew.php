@@ -14,7 +14,7 @@ class CreateNew extends Component
      */
     public function __construct(private $action = "", private $method = "GET", private $footer = "")
     {
-
+        // dd("Create New");
         $this->columns = [
             [
                 'title' => 'Name',

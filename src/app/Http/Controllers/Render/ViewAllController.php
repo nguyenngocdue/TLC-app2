@@ -40,9 +40,10 @@ abstract class ViewAllController extends Controller
         return [$pageLimit, $columnLimit];
     }
 
-    private function getDataSource($pageLimit, $search)
+    private function getDataSource($pageLimit)
     {
         $model = $this->typeModel;
+        $search = request('search');
         $result = App::make($model)::search($search)
             ->query(fn ($q) => $q->orderBy('id', 'asc'))
             ->paginate($pageLimit);
@@ -167,16 +168,14 @@ abstract class ViewAllController extends Controller
 
         $type = Str::plural($this->type);
         $columns = $this->getColumns($type, $columnLimit);
-
-        $search = request('search');
-        $dataSource = $this->getDataSource($pageLimit, $search);
+        $dataSource = $this->getDataSource($pageLimit);
 
         $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
         $result = $this->attachRendererIntoColumn($columns);
         if ($result !== true) return $result;
         // Log::info($columns);
 
-        return view('dashboards.pages.viewAll2')->with(compact('pageLimit', 'type', 'search', 'columns', 'dataSource'));
+        return view('dashboards.pages.viewAll2')->with(compact('pageLimit', 'type', 'columns', 'dataSource'));
     }
 
     public function destroy($id)
