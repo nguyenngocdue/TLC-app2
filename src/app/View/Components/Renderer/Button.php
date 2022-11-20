@@ -18,12 +18,12 @@ class Button extends Component
 
     private function getClass()
     {
-        $defaultClass = "inline-block px-2.5 py-2.5 my-1 font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out ";
+        $defaultClass = "inline-block px-2.5 py-2.5 my-1 font-medium text-sm leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out ";
         switch ($this->type) {
             case "primary":
-                return $defaultClass . "bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg";
-            case "secondary":
                 return $defaultClass . "bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg";
+            case "secondary":
+                return $defaultClass . "bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg";
             case "success":
                 return $defaultClass . "bg-green-500 text-white shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none active:bg-green-700 active:shadow-lg";
             case "danger":
@@ -44,12 +44,12 @@ class Button extends Component
 
     private function getClassOutline()
     {
-        $defaultClass = "my-1 inline-block px-2.5 py-2 border-2 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:ring-0 transition duration-150 ease-in-out ";
+        $defaultClass = "my-1 inline-block px-2.5 py-2 border-2 font-medium text-sm leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:ring-0 transition duration-150 ease-in-out ";
         switch ($this->type) {
             case "primary":
-                return $defaultClass . "border-blue-600 text-blue-600";
-            case "secondary":
                 return $defaultClass . "border-purple-600 text-purple-600";
+            case "secondary":
+                return $defaultClass . "border-blue-600 text-blue-600";
             case "success":
                 return $defaultClass . "border-green-500 text-green-500";
             case "danger":

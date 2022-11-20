@@ -7,7 +7,7 @@
     @csrf
     @method('PUT')
     <x-renderer.table :columns="$columns" :dataSource="$dataSource" />
-    <x-renderer.button>Update</x-renderer.button>
+    <x-renderer.button type="primary">Update</x-renderer.button>
 </form>
 
 @endsection

@@ -6,6 +6,6 @@
 <form action="{{ route($type . '_mngrls.store') }}" method="POST">
     @csrf
     <x-renderer.table showNo={{true}} :columns="$columns" :dataSource="$dataSource" />
-    <x-renderer.button>Update</x-renderer.button>
+    <x-renderer.button type="primary">Update</x-renderer.button>
 </form>
 @endsection

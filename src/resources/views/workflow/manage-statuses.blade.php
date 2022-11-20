@@ -14,6 +14,7 @@ $columns1 = [
 'dataIndex' => 'action',
 'renderer' => 'button',
 'align' => 'center',
+'type'=>'primary'
 ],
 ];
 $dataSource1 = [
@@ -28,7 +29,7 @@ $dataSource1 = [
 <form method="post">
     @csrf
     <x-renderer.table showNo=true groupBy="name" :columns="$columns" :dataSource="$dataSource"></x-renderer.table>
-    <x-renderer.button>Update</x-renderer.button>
+    <x-renderer.button type="primary">Update</x-renderer.button>
 </form>
 <br />
 <hr />
