@@ -4,7 +4,9 @@ namespace App\View\Components\Renderer;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
+use ReflectionClass;
 
 class Table extends Component
 {
@@ -14,7 +16,7 @@ class Table extends Component
    * @return void
    */
   public function __construct(
-    private $columns = [],
+    private $columns = null,
     private $dataSource = null,
     private $showNo = false,
     private $groupBy = false,
@@ -65,7 +67,7 @@ class Table extends Component
   {
     $renderer = $column['renderer'] ?? "_";
     $dataIndex = $column['dataIndex'];
-    $title = $column['title'];
+    $title = $column['title'] ?? Str::headline($column['dataIndex']);
     return "<th class='{$dataIndex}_th px-4 py-3' title=\"{$dataIndex} / {$renderer}\">{$title}</th>";
   }
 
@@ -93,17 +95,39 @@ class Table extends Component
     return $tds;
   }
 
+  private function smartGetItems($dataSource)
+  {
+    if (is_null($dataSource)) return null;
+    if (is_array($dataSource)) return $dataSource;
+    $reflect = new ReflectionClass($dataSource);
+    // dd($reflect->getShortName());
+    switch ($reflect->getShortName()) {
+      case 'Collection':
+        return $dataSource->all();
+      case 'LengthAwarePaginator':
+        return $dataSource->items();
+      default:
+        break;
+    }
+    return $dataSource->items();
+  }
+
   private function makeTrTd($columns, $dataSource)
   {
     $trs = [];
     $colspan = sizeof($columns);
 
+    $items = $this->smartGetItems($dataSource);
+
     if (is_null($dataSource)) return "<tr><td colspan=$colspan>" . Blade::render("<x-feedback.alert type='error' message='DataSource attribute is missing.' />") . "</td></tr>";
-    if (empty($dataSource) || (is_object($dataSource) && empty($dataSource->items()))) return "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
+    if (empty($dataSource) || (is_object($dataSource) && empty($items))) return "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
 
     $columnCount = count($columns);
-    $start = is_object($dataSource) ?  $dataSource->perPage() * ($dataSource->currentPage() - 1) : 0;
-    if ($this->groupBy) usort($dataSource, fn ($a, $b) => strcasecmp($a[$this->groupBy], $b[$this->groupBy]));
+    $start = (is_object($dataSource) && method_exists($dataSource, 'items')) ?  $dataSource->perPage() * ($dataSource->currentPage() - 1) : 0;
+    if ($this->groupBy) {
+      if (is_object($dataSource)) $dataSource = $items;
+      usort($dataSource, fn ($a, $b) => strcasecmp($a[$this->groupBy], $b[$this->groupBy]));
+    }
 
     $lastIndex = "anything";
     foreach ($dataSource as $no => $dataLine) {
@@ -136,8 +160,9 @@ class Table extends Component
   public function render()
   {
     $columns = $this->columns;
+    if (is_null($columns)) return Blade::render("<x-feedback.alert type='error' message='Columns attribute is missing.' />");
     if (!is_array($columns)) return Blade::render("<x-feedback.alert type='error' message='Props file is missing.' />");
-    if (empty($columns)) return Blade::render("<x-feedback.alert type='error' message='Columns attribute is missing or empty.' />");
+    if (empty($columns)) return Blade::render("<x-feedback.alert type='error' message='Columns attribute is empty.' />");
 
     // Log::info($this->showNo);
     if ($this->showNo) array_unshift($columns, ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center']);
@@ -153,9 +178,10 @@ class Table extends Component
 
     $showing = "";
     $pagination = "";
-    if (is_object($dataSource) && !empty($dataSource)) {
-      $showing =  $dataSource->links('dashboards.pagination.showing');
-      $pagination =  $dataSource->links('dashboards.pagination.pagination');
+    // dump($dataSource);
+    if (is_object($dataSource) && method_exists($dataSource, 'links') && !empty($dataSource)) {
+      $showing = $dataSource->links('dashboards.pagination.showing');
+      $pagination = $dataSource->links('dashboards.pagination.pagination');
     }
 
     return view("components.renderer.table")->with(compact('columnsRendered', 'trtd', 'showing', 'pagination', 'columns', 'dataSource'));

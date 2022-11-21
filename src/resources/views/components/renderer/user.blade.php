@@ -1,4 +1,6 @@
 @props(['src', 'name', 'email'])
+
+THIS IS DELETED
 <div class="flex items-center text-sm">
     <!-- Avatar with inset shadow -->
     <div class="relative mr-3 hidden h-8 w-8 rounded-full md:block">

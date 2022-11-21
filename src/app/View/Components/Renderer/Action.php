@@ -1,19 +1,20 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\Renderer;
 
 use Illuminate\View\Component;
 
-class Button extends Component
+class Action extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private $dataLine)
     {
         //
+        // dd($this->dataLine);
     }
 
     /**
@@ -23,8 +24,9 @@ class Button extends Component
      */
     public function render()
     {
-        return view('components.controls.button', [
-            // 'label' => $this->label,
+        $id = $this->dataLine['id'];
+        return view('components.renderer.action', [
+            'id' => $id,
         ]);
     }
 }

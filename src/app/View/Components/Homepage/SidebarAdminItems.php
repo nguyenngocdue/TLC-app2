@@ -3,7 +3,6 @@
 namespace App\View\Components\Homepage;
 
 use App\Utils\Support\CurrentRoute;
-use Illuminate\Support\Str;
 
 class SidebarAdminItems
 {
@@ -19,6 +18,10 @@ class SidebarAdminItems
                 [
                     'title' => "Permissions",
                     'href' => "/dashboard/admin/permissions",
+                ],
+                [
+                    'title' => "Permissions 2",
+                    'href' => "/dashboard/admin/permissions2",
                 ],
                 [
                     'title' => "Roles",
@@ -49,7 +52,7 @@ class SidebarAdminItems
 
     private static function getWorkflow($currentType, $svg)
     {
-        $isActive = ($currentType === 'permission');
+        $isActive = ($currentType === 'workflow');
         return [
             "title" => "Workflows",
             // "type" => "ppppp",

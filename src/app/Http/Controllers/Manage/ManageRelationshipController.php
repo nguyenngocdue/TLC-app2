@@ -31,36 +31,30 @@ abstract class ManageRelationshipController extends Controller
         // $controls = array_map(fn ($control) => ["value" => $control], $controls0);
         return [
             [
-                "title" => "Action",
                 "dataIndex" => "action",
             ],
             [
-                "title" => "Name",
                 "dataIndex" => "name",
                 "renderer" => "read-only-text",
                 "editable" => true,
             ],
             [
-                "title" => "Relationship",
                 "dataIndex" => "relationship",
                 "renderer" => "read-only-text",
                 "editable" => true,
             ],
             [
-                "title" => "Renderer",
                 "dataIndex" => "renderer",
                 "editable" => true,
                 "renderer" => "dropdown",
                 "cbbDataSource" => $controls,
             ],
             [
-                "title" => "Renderer Param",
                 "dataIndex" => "renderer_param",
                 "editable" => true,
                 "renderer" => "text",
             ],
             [
-                "title" => "Control Name",
                 "dataIndex" => "control_name",
                 "editable" => true,
                 "renderer" => "text",

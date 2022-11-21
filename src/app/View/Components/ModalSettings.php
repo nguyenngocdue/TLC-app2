@@ -26,6 +26,7 @@ class ModalSettings extends Component
     public function render()
     {
         $path = storage_path() . "/json/entities/$this->type/props.json";
+        if (!file_exists($path)) return "File not found when rendering ModalSettings";
         $props = json_decode(file_get_contents($path), true);
 
         $allColumns = array_filter($props, fn ($prop) => isset($prop['hidden_view_all']) && $prop['hidden_view_all'] !== 'true');

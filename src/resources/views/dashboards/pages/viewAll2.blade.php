@@ -15,9 +15,11 @@
 
 @empty($messages)
 <div class="grid grid-cols-2 gap-5">
-    <x-pages.search-box type="{{$type}}" search="{{$search}}"></x-pages.search-box>
+    <x-form.search action="{{ route($type . '_viewall.index') }}">
+    </x-form.search>
     <div class="grid justify-items-end">
-        <x-pages.goto-box type="{{$type}}" page-limit="{{$pageLimit}}"></x-pages.goto-box>
+        <x-form.per-page type="{{$type}}" action="{{ route($type . '_viewall.update', Auth::id()) }}" page-limit="{{$pageLimit}}">
+        </x-form.per-page>
     </div>
 </div>
 

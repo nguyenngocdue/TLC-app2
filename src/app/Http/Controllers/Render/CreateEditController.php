@@ -10,8 +10,10 @@ use App\Notifications\CreateNewNotification;
 use App\Utils\Constant;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Unique;
 
 abstract class CreateEditController extends Controller
 {
@@ -69,10 +71,13 @@ abstract class CreateEditController extends Controller
 
 	public function store(Request $request)
 	{
-		$dataInput = $request->except(['_token', '_method', 'created_at', 'updated_at']);
+		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+		$colNamehasAttachment = Helper::getColNamebyControls($props, 'attachment');
+		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamehasAttachment);
+		$dataInput = $request->except($arrayExcept);
 		$type = Str::plural($this->type);
 
-		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+
 
 		$idsMediaDeleted = $this->deleteMediaIfNeeded($dataInput);
 
@@ -83,18 +88,21 @@ abstract class CreateEditController extends Controller
 		$newDataInput = $this->handleToggle('store', $props, $dataInput);
 
 		$newDataInputHasAttachment = array_filter($newDataInput, fn ($item) => is_array($item));
-		$newDataInputNotAttachMent = array_filter($newDataInput, fn ($item) => !is_array($item));
+		$newDataInputNotAttachment = array_filter($newDataInput, fn ($item) => !is_array($item));
 
 		try {
-			$data = $this->data::create($newDataInputNotAttachMent);
-			// Notifications
+			$data = $this->data::create($newDataInputNotAttachment);
 			Notification::send($data, new CreateNewNotification($data->id));
 
 			if (isset($data)) {
+
 				$this->syncManyToManyRelationship($data, $newDataInputHasAttachment); // Check box
 				$colNameMediaUploaded = session(Constant::ORPHAN_MEDIA) ?? [];
 
 				if ($hasAttachment) $this->setMediaParent($data, $colNameMediaUploaded);
+
+				$_data = $this->data::find($data->id);
+				$this->updateIdsMediaToFieldsDB($_data, $colNamehasAttachment);
 				Toastr::success("$this->type created successfully", "Create $this->type");
 			}
 			return redirect(route("{$type}_edit.edit", $data->id));
@@ -118,8 +126,9 @@ abstract class CreateEditController extends Controller
 
 		$data = $this->data::find($id);
 
-		$this->saveMediaValidator('update', $request, $dataInput, $data, [], $colNamehasAttachment);
+		$this->saveMediaValidator('update', $request, $dataInput, $data, []);
 
+		$this->updateIdsMediaToFieldsDB($data, $colNamehasAttachment);
 
 		$this->_validate($props, $request);
 
@@ -156,5 +165,34 @@ abstract class CreateEditController extends Controller
 		}
 
 		return $dataInput;
+	}
+	public function updateIdsMediaToFieldsDB($data, $colNamehasAttachment)
+	{
+
+		$dbMorphManyMedia = json_decode($data->media()->select('id', 'category')->get(), true);
+		$media_cateTb = json_decode(DB::table('media_categories')->select('id', 'name')->get(), true);
+		$ids_names_cateMedia = array_combine((array_column($media_cateTb, 'id')), (array_column($media_cateTb, 'name')));
+
+		$ids_names_cateTb = array_combine((array_column($dbMorphManyMedia, 'id')), (array_column($dbMorphManyMedia, 'category')));
+
+		$idsHasAttachMent = array_values(array_unique($ids_names_cateTb));
+		$names_val_fileds = [];
+		foreach ($ids_names_cateTb as $key => $value) {
+			foreach ($idsHasAttachMent as $cate) {
+				if ($value === $cate) {
+					$names_val_fileds[$ids_names_cateMedia[$cate]][] = $key;
+					break;
+				}
+			}
+		}
+
+		$valFileds = array_map(fn ($item) => $item = implode(",", $item), $names_val_fileds);
+		foreach ($colNamehasAttachment as $attach) {
+			if (!isset($valFileds[$attach])) {
+				$valFileds[$attach] = null;
+			}
+		}
+		$data->fill($valFileds);
+		$data->save();
 	}
 }

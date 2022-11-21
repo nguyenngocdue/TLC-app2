@@ -35,7 +35,7 @@
                 <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNo="{{true}}" />
             </x-renderer.card>
             <br />
-            <x-renderer.card title="Table with Data and No. and GroupBy">
+            <x-renderer.card title="Table with Data and No. and GroupBy (Case Insensitive)">
                 <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNo="{{true}}" groupBy="client" />
             </x-renderer.card>
             <br />
@@ -58,7 +58,7 @@
                 <form action="" method="GET">
                     @csrf
                     <x-renderer.table showNo={{true}} :columns="$tableEditableColumns" :dataSource="$tableDataSource" />
-                    <x-controls.button>Update</x-controls.button>
+                    <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
                 </form>
             </x-renderer.card>
         </x-renderer.card>
@@ -96,6 +96,27 @@
             <x-renderer.tag></x-renderer.tag>
         </x-renderer.card>
 
+        <x-renderer.card title="Buttons">
+            <x-renderer.button type="primary">Primary</x-renderer.button>
+            <x-renderer.button type="secondary">secondary</x-renderer.button>
+            <x-renderer.button type="default">default</x-renderer.button>
+            <x-renderer.button type="success">success</x-renderer.button>
+            <x-renderer.button type="danger">danger</x-renderer.button>
+            <x-renderer.button type="warning">warning</x-renderer.button>
+            <x-renderer.button type="info">info</x-renderer.button>
+            <x-renderer.button type="dark">dark</x-renderer.button>
+            <x-renderer.button type="link">link</x-renderer.button>
+            <br />
+            <br />
+            <x-renderer.button outline=true type="primary">Primary</x-renderer.button>
+            <x-renderer.button outline=true type="secondary">secondary</x-renderer.button>
+            <x-renderer.button outline=true type="default">default</x-renderer.button>
+            <x-renderer.button outline=true type="success">success</x-renderer.button>
+            <x-renderer.button outline=true type="danger">danger</x-renderer.button>
+            <x-renderer.button outline=true type="warning">warning</x-renderer.button>
+            <x-renderer.button outline=true type="info">info</x-renderer.button>
+            <x-renderer.button outline=true type="dark">dark</x-renderer.button>
+        </x-renderer.card>
         <x-renderer.card title="Alerts">
             <x-feedback.alert type="success" message="Hello Success"></x-feedback.alert>
             <x-feedback.alert type="info" message="Hello Info"></x-feedback.alert>

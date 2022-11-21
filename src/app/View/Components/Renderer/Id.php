@@ -31,7 +31,10 @@ class Id extends Component
             // dd($data["attributes"]);
             $numberRender = str_pad($id, 6, '0', STR_PAD_LEFT);
             $result = '#' . substr($numberRender, 0, 3) . '.' . substr($numberRender, 3, 6);
-            $route_name = "{$type}_edit.edit";
+
+            $route_name = ($type === 'permissions2') ? "permissions2.edit" : "{$type}_edit.edit";
+
+
             $route_exits =  (Route::has($route_name));
 
             $href =  $route_exits ? route($route_name, $id) : "#";

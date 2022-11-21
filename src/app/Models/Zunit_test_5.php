@@ -11,7 +11,7 @@ use Laravel\Scout\Searchable;
 class Zunit_test_5 extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = ["name", "attachment_1", "attachment_2", "attachment_3"];
+    protected $fillable = ["name", "attachment_1", "attachment_2", "attachment_3", "attachment_4", "attachment_5"];
     protected $primaryKey = "id";
     protected $table = "zunit_test_5s";
     public $eloquentParams = [

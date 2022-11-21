@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Formatter extends Component
@@ -17,8 +18,8 @@ class Formatter extends Component
 
     function statusColorRendered()
     {
-        $title = $this->dataLine['title'];
-        $color = $this->dataLine['color'];
+        $title = $this->dataLine['title'] ?? "";
+        $color = $this->dataLine['color'] ?? "";
         return "<x-renderer.tag color='$color'>$title</x-renderer.tag>";
     }
 
