@@ -51,7 +51,7 @@ class Helper
         return $newMessage;
     }
 
-    public static function customizeSlugData($file, $tableName, $medias)
+    public static function customizeSlugData($file, $tableName, $media)
     {
         $dataSource = json_decode(DB::table($tableName)->select('filename', 'extension')->get(), true);
         $data = array_map(fn ($item) => array_values($item)[0], $dataSource) ?? [];
@@ -61,15 +61,15 @@ class Helper
         $fileName =  $file->getClientOriginalName();
         $extensionFile = $file->getClientOriginalExtension();
 
-        $mediaNames = array_map(fn ($item) => $item['filename'], $medias);
+        $mediaNames = array_map(fn ($item) => $item['filename'], $media);
 
         $separateFileName = array_keys(Helper::getName_NumericalOrderMedia($fileName))[0];
         $isValueInData = Helper::isValueInData($data, $dataExtension, $separateFileName, $extensionFile);
 
         if (in_array($fileName, $data) || in_array($fileName, $mediaNames)  || $isValueInData) {
 
-            $maxValOnDB =  Helper::getMaxNumberMediaName($data, $separateFileName, $fileName, $extensionFile);
-            $max_ValOnTemp =  Helper::getMaxNumberMediaName($mediaNames, $separateFileName, $fileName, $extensionFile);
+            $maxValOnDB =  Helper::getMaxNumberMediaName($data, $fileName, $extensionFile);
+            $max_ValOnTemp =  Helper::getMaxNumberMediaName($mediaNames, $fileName, $extensionFile);
             $fileNameNumberMax = array_values($maxValOnDB)[0] > array_values($max_ValOnTemp)[0] ? $maxValOnDB : $max_ValOnTemp;
 
             $fileName =  array_keys($fileNameNumberMax)[0] . '-' . array_values($fileNameNumberMax)[0] + 1 . '.' . $extensionFile;
@@ -104,20 +104,31 @@ class Helper
         return [$strName => 0];
     }
 
-    public static function getMaxNumberMediaName($data, $strSearch, $file, $extensionFile)
+    public static function getMaxNumberMediaName($data, $file, $extensionFile)
     {
-        $itemHasFileName = "";
+        $idx2 = Helper::indexCharacterInString('.', $file);
+        $fname = substr($file, 0,  $idx2);
+
+        $array = [];
         foreach ($data as $value) {
-            if (str_contains($value, $strSearch) && str_contains($value, $extensionFile)) {
-                $itemHasFileName = $value;
+            $separateName = Helper::getName_NumericalOrderMedia($value);
+            $idx = Helper::indexCharacterInString('.', $value);
+            $valExtension = substr($value, $idx + 1, strlen($value) - $idx);
+
+            if ((string)array_keys($separateName)[0] === $fname && $valExtension === $extensionFile) {
+                $array[] = $value;
             }
         }
-        if ($itemHasFileName === "") {
-            $itemHasFileName = $file;
+
+        $names = Helper::getMaxName($array, $file);
+        if ($names === "") {
+            $names = $file;
         };
-        $fileName_number_max =  Helper::getName_NumericalOrderMedia($itemHasFileName);
+
+        $fileName_number_max =  Helper::getName_NumericalOrderMedia($names);
         return $fileName_number_max;
     }
+
 
     public static function isValueInData($data1, $data2, $strSearch, $extensionFile)
     {
@@ -140,5 +151,18 @@ class Helper
         $colNamebyControls = array_filter($props, fn ($prop) => $prop['control'] === $nameCotrol);
         $colNamebyControls = array_values(array_map(fn ($item) => $item['column_name'], $colNamebyControls));
         return $colNamebyControls;
+    }
+    public static function getMaxName($objNames, $file)
+    {
+        $itemHasFileName = '';
+        foreach ($objNames as $value) {
+            $maxName = 0;
+            $separateName = Helper::getName_NumericalOrderMedia($value);
+            if ((int)array_values($separateName)[0] > $maxName) {
+                $maxName = (int)array_values($separateName)[0];
+                $itemHasFileName = $value;
+            }
+        }
+        return $itemHasFileName;
     }
 }
