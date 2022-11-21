@@ -69,9 +69,9 @@ class UploadService
                 }
             }
 
-            // dd($tempMedia);
             $flip_cateIdName = array_flip($cateIdName);
             foreach ($tempMedia as $key => $media) {
+                // dd($tempMedia);
                 $newMedia = Media::create($media);
                 $colNameMedia[$newMedia['id']] = $flip_cateIdName[$media['category']];   // [id-media = "attachment-name"]
             }
