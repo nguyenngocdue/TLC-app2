@@ -14,12 +14,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prod_routing_links', function (Blueprint $table) {
+        Schema::create('erp_routing_links', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('slug')->unique();
-            $table->unsignedBigInteger('prod_discipline_id');
+            $table->string('slug');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prod_routing_links');
+        Schema::dropIfExists('erp_routing_links');
     }
 };
