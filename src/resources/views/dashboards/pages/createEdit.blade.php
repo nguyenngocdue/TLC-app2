@@ -37,12 +37,12 @@ $id = $action === "edit" ? $values->id : "";
         <div class='col-span-{{$col_span}}'>
             <div class='grid grid-row-1 gap-3'>
                 <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
-                    <div class='col-start-1 col-span-{{24/$col_span}} text-right'>
+                    <div class='col-start-1 col-span-{{24/$col_span}} {{$value['new_line'] ? "col-span-12 text-left" : "text-right" }} '>
                         <label class='text-gray-700 dark:text-gray-400  px-3 block text-base' title='{{$column_name}} / {{$control}}'>{{$label}}
                             {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
                         </label>
                     </div>
-                    <div class='col-start-{{24/$col_span + 1}} col-span-10 py-2 text-left'>
+                    <div class='col-start-{{24/$col_span + 1}} col-span-10  {{$value['new_line'] ? "col-span-12" : "" }}   py-2 text-left'>
                         @if (is_null($control))
                         <h2 class="text-red-400">{{"Control of this $column_name has not been set"}}</h2>
                         @endif

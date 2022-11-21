@@ -6,9 +6,9 @@
     @foreach($dataTime as $key => $value)
     @if($key === $control && empty($day)!= true)
     <p class="text-gray-600 text-xs pl-2.5 text-left pt-0.5">{{$value}}</p>
+    @include('components.feedback.alertValidation')
     @break
     @endif
     @endforeach
     @endif
 </div>
-@include('components.feedback.alertValidation')
