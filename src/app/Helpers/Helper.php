@@ -66,8 +66,7 @@ class Helper
         $separateFileName = array_keys(Helper::getName_NumericalOrderMedia($fileName))[0];
         $isValueInData = Helper::isValueInData($data, $dataExtension, $separateFileName, $extensionFile);
 
-        if (in_array($fileName, $data) || in_array($fileName, $mediaNames)  || $isValueInData) {
-
+        if (in_array($fileName, $mediaNames)  || $isValueInData) {
             $maxValOnDB =  Helper::getMaxNumberMediaName($data, $fileName, $extensionFile);
             $max_ValOnTemp =  Helper::getMaxNumberMediaName($mediaNames, $fileName, $extensionFile);
             $fileNameNumberMax = array_values($maxValOnDB)[0] > array_values($max_ValOnTemp)[0] ? $maxValOnDB : $max_ValOnTemp;
@@ -104,28 +103,23 @@ class Helper
         return [$strName => 0];
     }
 
-    public static function getMaxNumberMediaName($data, $file, $extensionFile)
+    public static function getMaxNumberMediaName($data, $fileName, $extensionFile)
     {
-        $idx2 = Helper::indexCharacterInString('.', $file);
-        $fname = substr($file, 0,  $idx2);
+        $idx = Helper::indexCharacterInString('.', $fileName);
+        $fname = substr($fileName, 0,  $idx);
 
-        $array = [];
+        $similarNames = [];
         foreach ($data as $value) {
             $separateName = Helper::getName_NumericalOrderMedia($value);
-            $idx = Helper::indexCharacterInString('.', $value);
-            $valExtension = substr($value, $idx + 1, strlen($value) - $idx);
-
+            $_idx = Helper::indexCharacterInString('.', $value);
+            $valExtension = substr($value, $_idx + 1, strlen($value) - $_idx);
             if ((string)array_keys($separateName)[0] === $fname && $valExtension === $extensionFile) {
-                $array[] = $value;
+                $similarNames[] = $value;
             }
         }
+        $fileName = Helper::getMaxName($similarNames, $fileName);
 
-        $names = Helper::getMaxName($array, $file);
-        if ($names === "") {
-            $names = $file;
-        };
-
-        $fileName_number_max =  Helper::getName_NumericalOrderMedia($names);
+        $fileName_number_max =  Helper::getName_NumericalOrderMedia($fileName);
         return $fileName_number_max;
     }
 
@@ -152,17 +146,17 @@ class Helper
         $colNamebyControls = array_values(array_map(fn ($item) => $item['column_name'], $colNamebyControls));
         return $colNamebyControls;
     }
-    public static function getMaxName($objNames, $file)
+    public static function getMaxName($objNames, $fileName)
     {
-        $itemHasFileName = '';
+        $_fileName = $fileName;
         foreach ($objNames as $value) {
             $maxName = 0;
             $separateName = Helper::getName_NumericalOrderMedia($value);
             if ((int)array_values($separateName)[0] > $maxName) {
                 $maxName = (int)array_values($separateName)[0];
-                $itemHasFileName = $value;
+                $_fileName = $value;
             }
         }
-        return $itemHasFileName;
+        return $_fileName;
     }
 }
