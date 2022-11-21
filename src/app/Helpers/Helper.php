@@ -51,7 +51,7 @@ class Helper
         return $newMessage;
     }
 
-    public static function customizeSlugData($file, $tableName, $medias)
+    public static function customizeSlugData($file, $tableName, $media)
     {
         $dataSource = json_decode(DB::table($tableName)->select('filename', 'extension')->get(), true);
         $data = array_map(fn ($item) => array_values($item)[0], $dataSource) ?? [];
@@ -61,7 +61,7 @@ class Helper
         $fileName =  $file->getClientOriginalName();
         $extensionFile = $file->getClientOriginalExtension();
 
-        $mediaNames = array_map(fn ($item) => $item['filename'], $medias);
+        $mediaNames = array_map(fn ($item) => $item['filename'], $media);
 
         $separateFileName = array_keys(Helper::getName_NumericalOrderMedia($fileName))[0];
         $isValueInData = Helper::isValueInData($data, $dataExtension, $separateFileName, $extensionFile);
