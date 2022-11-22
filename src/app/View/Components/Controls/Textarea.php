@@ -13,7 +13,7 @@ class Textarea extends Component
     public function render()
     {
         $colName = $this->colName;
-        $valColName = str_replace("&quot;", '\"', $this->valColName);
+        $valColName = $this->valColName === "" ? '' : json_encode(str_replace("&quot;", '\"', $this->valColName));
         $action = $this->action;
         $control = $this->control;
         $labelName = $this->labelName;
