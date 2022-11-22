@@ -97,12 +97,12 @@ abstract class CreateEditController extends Controller
 			if (isset($data)) {
 
 				$this->syncManyToManyRelationship($data, $newDataInputHasAttachment); // Check box
-				$colNameMediaUploaded = session(Constant::ORPHAN_MEDIA) ?? [];
+				if ($hasAttachment) {
+					$this->setMediaParent($data, $colNamehasAttachment);
+					$_data = $this->data::find($data->id);
+					$this->updateIdsMediaToFieldsDB($_data, $colNamehasAttachment);
+				}
 
-				if ($hasAttachment) $this->setMediaParent($data, $colNameMediaUploaded);
-
-				$_data = $this->data::find($data->id);
-				$this->updateIdsMediaToFieldsDB($_data, $colNamehasAttachment);
 				Toastr::success("$this->type created successfully", "Create $this->type");
 			}
 			return redirect(route("{$type}_edit.edit", $data->id));
@@ -126,9 +126,8 @@ abstract class CreateEditController extends Controller
 
 		$data = $this->data::find($id);
 
-		$this->saveMediaValidator('update', $request, $dataInput, $data, []);
-
-		$this->updateIdsMediaToFieldsDB($data, $colNamehasAttachment);
+		$hasAttachment = $this->saveMediaValidator('update', $request, $dataInput, $data, $colNamehasAttachment);
+		if ($hasAttachment) $$this->updateIdsMediaToFieldsDB($data, $colNamehasAttachment);
 
 		$this->_validate($props, $request);
 

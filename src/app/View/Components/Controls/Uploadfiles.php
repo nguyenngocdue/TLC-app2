@@ -15,27 +15,38 @@ class Uploadfiles extends Component
 
     public function render()
     {
-
-        $dataMedia = json_decode(DB::table('media')->where([['owner_id', '=', 1], ['object_id', '=', null], ['object_type', '=', null]])->select('id', 'category')->get(), true);
-        $media_cateTb = json_decode(DB::table('media_categories')->select('id', 'name')->get(), true);
-        $ids_names_cateMedia = array_combine((array_column($media_cateTb, 'id')), (array_column($media_cateTb, 'name')));
-        $ids_names_cateTb = array_combine((array_column($dataMedia, 'id')), (array_column($dataMedia, 'category')));
-        $idsHasAttachMent = array_values(array_unique($ids_names_cateTb));
-        $attachHasMedia = [];
-        foreach ($ids_names_cateTb as $key => $value) {
-            foreach ($idsHasAttachMent as $cate) {
-                if ($value === $cate) {
-                    $ele = (array) DB::table('media')->find($key);
-                    $attachHasMedia[$ids_names_cateMedia[$cate]][] = $ele;
-                    break;
-                }
-            }
-        }
-
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $colName = $this->colName;
         $action = $this->action;
         $labelName = $this->labelName;
+        $id = $this->id;
+
+        $media_cateTb = json_decode(DB::table('media_categories')->select('id', 'name')->get(), true);
+        $ids_names_media_cateTb = array_combine((array_column($media_cateTb, 'id')), (array_column($media_cateTb, 'name')));
+
+        $mediaDB = json_decode(DB::table('media')->where([['owner_id', '=', 1], ['object_id', '!=', null], ['object_type', '!=', null]])->select('id', 'category', 'object_id')->get(), true);
+        $orphanMediaDB = json_decode(DB::table('media')->where([['owner_id', '=', 1], ['object_id', '=', null], ['object_type', '=', null]])->select('id', 'category', 'object_id')->get(), true);
+
+        $_mediaDB = $action === 'create' ? [] : $mediaDB;
+
+        $mergeMediaDB  = array_merge($_mediaDB, $orphanMediaDB);
+        // dd($mergeMediaDB);
+
+        $attachHasMedia = [];
+        foreach ($mergeMediaDB as $key => $value) {
+            if ($colName ===  $ids_names_media_cateTb[$value['category']]) {
+                if (!is_null($value['object_id']) && $id != "") {
+                    if ($id * 1 === $value['object_id']) {
+                        $ele = (array) DB::table('media')->find($value['id']);
+                        $attachHasMedia[$colName][] = $ele;
+                    }
+                }
+            }
+            if ($action === 'create' && $colName ===  $ids_names_media_cateTb[$value['category']]) {
+                $ele = (array) DB::table('media')->find($value['id']);
+                $attachHasMedia[$colName][] = $ele;
+            }
+        }
         return view('components.controls.uploadfiles')->with(compact('action', 'attachHasMedia', 'colName', 'path', 'labelName'));
     }
 }
