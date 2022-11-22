@@ -16,10 +16,11 @@ class MediaCategorySeeder extends Seeder
     public function run()
     {
         //
-        Media_category::create(['name' => 'attachment_1', 'descriptions' => '', 'slug' => 'attachment_1']);
-        Media_category::create(['name' => 'attachment_2', 'descriptions' => '', 'slug' => 'attachment_2']);
-        Media_category::create(['name' => 'attachment_3', 'descriptions' => '', 'slug' => 'attachment_3']);
-        Media_category::create(['name' => 'attachment_4', 'descriptions' => '', 'slug' => 'attachment_4']);
-        Media_category::create(['name' => 'attachment_5', 'descriptions' => '', 'slug' => 'attachment_5']);
+        Media_category::create(['name' => 'attachment_1', 'description' => '', 'slug' => 'attachment_1']);
+        Media_category::create(['name' => 'attachment_2', 'description' => '', 'slug' => 'attachment_2']);
+        Media_category::create(['name' => 'attachment_3', 'description' => '', 'slug' => 'attachment_3']);
+        Media_category::create(['name' => 'attachment_4', 'description' => '', 'slug' => 'attachment_4']);
+        Media_category::create(['name' => 'attachment_5', 'description' => '', 'slug' => 'attachment_5']);
+        Media_category::create(['name' => 'featured_image', 'description' => '', 'slug' => 'featured_image']);
     }
 }
