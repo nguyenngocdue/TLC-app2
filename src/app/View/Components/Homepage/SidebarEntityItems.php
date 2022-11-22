@@ -42,7 +42,7 @@ class SidebarEntityItems
                 ],
                 ['title' => '-'],
                 [
-                    'title' => "Manage Status",
+                    'title' => "Manage Statuses",
                     'href' => route("{$singular}_mngstt.index"),
                 ],
                 // [
