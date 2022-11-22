@@ -67,10 +67,10 @@ trait CreateEditControllerMedia
     {
         foreach (array_keys($dataInput) as $key) {
             if (str_contains($key, '_deleted')) {
+                $this->handleUpload($request);
                 if ($action === 'update') {
                     $this->setMediaParent($data, $colNamehasAttachment);
                 }
-                $this->handleUpload($request);
                 return true;
             }
         }

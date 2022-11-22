@@ -127,7 +127,8 @@ abstract class CreateEditController extends Controller
 		$data = $this->data::find($id);
 
 		$hasAttachment = $this->saveMediaValidator('update', $request, $dataInput, $data, $colNamehasAttachment);
-		if ($hasAttachment) $$this->updateIdsMediaToFieldsDB($data, $colNamehasAttachment);
+
+		if ($hasAttachment) $this->updateIdsMediaToFieldsDB($data, $colNamehasAttachment);
 
 		$this->_validate($props, $request);
 
@@ -167,12 +168,10 @@ abstract class CreateEditController extends Controller
 	}
 	public function updateIdsMediaToFieldsDB($data, $colNamehasAttachment)
 	{
-
 		$dbMorphManyMedia = json_decode($data->media()->select('id', 'category')->get(), true);
 		$media_cateTb = json_decode(DB::table('media_categories')->select('id', 'name')->get(), true);
-		$ids_names_cateMedia = array_combine((array_column($media_cateTb, 'id')), (array_column($media_cateTb, 'name')));
-
-		$ids_names_cateTb = array_combine((array_column($dbMorphManyMedia, 'id')), (array_column($dbMorphManyMedia, 'category')));
+		$ids_names_cateMedia = array_column($media_cateTb, 'name', 'id');
+		$ids_names_cateTb = array_column($dbMorphManyMedia, 'category', 'id');
 
 		$idsHasAttachMent = array_values(array_unique($ids_names_cateTb));
 		$names_val_fileds = [];
