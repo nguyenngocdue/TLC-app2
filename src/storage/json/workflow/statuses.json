@@ -4,24 +4,34 @@
         "title": "Assigned",
         "color": "amber"
     },
-    "assigned1": {
-        "name": "assigned1",
-        "title": "Assigned 123",
-        "color": "amber"
-    },
     "closed": {
         "name": "closed",
         "title": "Closed",
         "color": "gray"
+    },
+    "finished": {
+        "name": "finished",
+        "title": "Finished",
+        "color": "green"
     },
     "new": {
         "name": "new",
         "title": "New",
         "color": "green"
     },
+    "onhold": {
+        "name": "onhold",
+        "title": "On Hold",
+        "color": "orange"
+    },
     "rejected": {
         "name": "rejected",
         "title": "Rejected",
+        "color": "red"
+    },
+    "stopped": {
+        "name": "stopped",
+        "title": "Stopped",
         "color": "red"
     }
 }
