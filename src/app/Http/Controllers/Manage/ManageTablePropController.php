@@ -54,7 +54,7 @@ abstract class ManageTablePropController extends Controller
                 }
                 $columnNames = array_merge($columnNames, $columnNameTable);
             }
-            return view('dashboards.props.managelineprop')->with(compact('type', 'columnTableNames', 'columnNames', 'columnTypes'));
+            return view('dashboards.pages.managelineprop')->with(compact('type', 'columnTableNames', 'columnNames', 'columnTypes'));
         } else {
             $columnTableNames = [];
             $names = [];
@@ -88,7 +88,7 @@ abstract class ManageTablePropController extends Controller
             $diff1 = array_diff_key($columnNames, $globalColumnNames);
             $diff2 = array_diff_key($globalColumnNames, $columnNames);
             if (empty($diff1) && empty($diff2)) {
-                return view('dashboards.props.managelineprop')->with(compact('type', 'columnTableNames', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
+                return view('dashboards.pages.managelineprop')->with(compact('type', 'columnTableNames', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
             } else {
                 foreach ($diff2 as $key => $value) {
                     $keyTableName = explode('|', $key);
@@ -107,7 +107,7 @@ abstract class ManageTablePropController extends Controller
                 foreach ($diff1 as $key => $value) {
                     $colorLines[$key] = "removed";
                 }
-                return view('dashboards.props.managelineprop')->with(compact('type', 'columnTableNames', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
+                return view('dashboards.pages.managelineprop')->with(compact('type', 'columnTableNames', 'names', 'columnNames', 'columnTypes', 'columnLabels', 'columnControls', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
             }
         }
     }

@@ -29,9 +29,7 @@ class SidebarEntityItems
                     'href' => route("{$table}_addnew.create"),
                     // 'isActive' => random_int(0, 1),
                 ],
-                [
-                    'title' => "-",
-                ],
+                ['title' => "-",],
                 [
                     'title' => "Manage Props",
                     'href' => route("{$singular}_mngprop.index"),
@@ -41,6 +39,11 @@ class SidebarEntityItems
                     'title' => "Manage Relationships",
                     'href' => route("{$singular}_mngrls.index"),
                     // 'isActive' => random_int(0, 1),
+                ],
+                ['title' => '-'],
+                [
+                    'title' => "Manage Status",
+                    'href' => route("{$singular}_mngstt.index"),
                 ],
                 // [
                 //     'title' => "Manage Tables",

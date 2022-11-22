@@ -179,7 +179,7 @@ abstract class ManagePropController extends Controller
         $columns = $this->getColumns();
         $dataSourceWithKey = $this->getDataSource();
         $dataSource = array_values($dataSourceWithKey);
-        return view('dashboards.props.manageprop')->with(compact('type', 'columns', 'dataSource'));
+        return view('dashboards.pages.manageprop')->with(compact('type', 'columns', 'dataSource'));
     }
 
     public function store(Request $request)

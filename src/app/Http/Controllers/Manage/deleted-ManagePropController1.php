@@ -33,7 +33,7 @@ abstract class ManagePropController extends Controller
                 $typeColumn = Schema::getColumnType(Str::plural($type), $columnName);
                 array_push($columnTypes, $typeColumn);
             }
-            return view('dashboards.props.manageprop')->with(compact('type', 'columnNames', 'columnTypes'));
+            return view('dashboards.pages.manageprop')->with(compact('type', 'columnNames', 'columnTypes'));
         } else {
             $names = [];
             $columnNames = [];
@@ -66,7 +66,7 @@ abstract class ManagePropController extends Controller
             $diff1 = array_diff($columnNames, Schema::getColumnListing(Str::plural($type)));
             $diff2 = array_diff(Schema::getColumnListing(Str::plural($type)), $columnNames);
             if (empty($diff1) && empty($diff2)) {
-                return view('dashboards.props.manageprop')->with(compact(
+                return view('dashboards.pages.manageprop')->with(compact(
                     'type',
                     'names',
                     'columnNames',
@@ -102,7 +102,7 @@ abstract class ManagePropController extends Controller
                 foreach ($diff1 as $value) {
                     $colorLines['_' . $value] = "removed";
                 }
-                return view('dashboards.props.manageprop')->with(compact(
+                return view('dashboards.pages.manageprop')->with(compact(
                     'type',
                     'names',
                     'columnNames',
