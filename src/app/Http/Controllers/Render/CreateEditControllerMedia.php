@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Render;
 use App\Helpers\Helper;
 use App\Models\Media;
 use App\Utils\Constant;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,7 +28,8 @@ trait CreateEditControllerMedia
 
     private function setMediaParent($data, $colNamehasAttachment)
     {
-        $uploadedIdColumnNames = json_decode(DB::table('media')->where([['owner_id', '=', 1], ['object_id', '=', null], ['object_type', '=', null]])->select('id', 'category')->get(), true);
+        $owner_id =  (int)Auth::user()->id;
+        $uploadedIdColumnNames = json_decode(DB::table('media')->where([['owner_id', '=', $owner_id], ['object_id', '=', null], ['object_type', '=', null]])->select('id', 'category')->get(), true);
         $ids_idCates_media =  array_column($uploadedIdColumnNames, 'category', 'id');
 
         $media_cateTb = json_decode(DB::table('media_categories')->select('id', 'name')->get(), true);
