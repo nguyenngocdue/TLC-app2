@@ -3,7 +3,6 @@
 use App\Http\Controllers\ComponentLib;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Manage\ManageStatusLibrary;
 use App\Http\Controllers\Manage\Master\StatusDocType;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Workflow\ManageStatuses;
@@ -88,13 +87,14 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::get('/mail-test', [MailController::class, 'index']);
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
 // Route::resource('test', TestController::class);
+
 // Route::resource('manage/manage_statusLibrary', ManageStatusLibrary::class);
 // Route::resource('manage/status', ManageStatusDoc::class);
 // Route::resource('statuses/statusLibrary', ManageStatusLibrary::class);
+// Route::resource('manage/statusDocType', StatusDocType::class);
 
 Route::resource('dashboard/workflow/statuses', ManageStatuses::class)->only('index', 'store', 'create');
 
-Route::resource('manage/statusDocType', StatusDocType::class);
 Route::resource('/abc', HomeController::class);
 
 Route::get('components', [ComponentLib::class, 'index']);
