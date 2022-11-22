@@ -54,8 +54,8 @@
         <div class="flex flex-col flex-1 w-full">
             <x-homepage.navbar2 />
             <main class="h-full overflow-y-auto">
-                <div class="container mx-auto grid px-6">
-                    <div class="container flex items-center justify-between h-full mx-auto text-purple-600 dark:text-purple-300">
+                <div class="container1 mx-auto grid px-6">
+                    <div class="container1 flex items-center justify-between h-full mx-auto1 text-purple-600 dark:text-purple-300">
                         <div class="flex justify-cen1ter flex-1 lg:mr-32">
                             <x-renderer.heading>@yield('title', 'Untitled')</x-renderer.heading>
                         </div>

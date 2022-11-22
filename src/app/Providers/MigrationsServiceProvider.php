@@ -29,6 +29,7 @@ class MigrationsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom($path . "unittests");
 
         $this->loadMigrationsFrom($path . "pivots");
+        $this->loadMigrationsFrom($path . "thirdparty");
         // $this->loadMigrationsFrom($path . "foreignkeys");
     }
 }

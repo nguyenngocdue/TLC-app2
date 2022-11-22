@@ -815,9 +815,6 @@ video {
 .h-9 {
   height: 2.25rem;
 }
-.h-screen {
-  height: 100vh;
-}
 .max-h-\[200px\] {
   max-height: 200px;
 }
@@ -863,6 +860,9 @@ video {
 .w-\[750px\] {
   width: 750px;
 }
+.w-screen {
+  width: 100vw;
+}
 .w-12 {
   width: 3rem;
 }
@@ -886,6 +886,13 @@ video {
 }
 .w-80 {
   width: 20rem;
+}
+.w-11\/12 {
+  width: 91.666667%;
+}
+.w-max {
+  width: -moz-max-content;
+  width: max-content;
 }
 .min-w-0 {
   min-width: 0px;
