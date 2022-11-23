@@ -4,16 +4,22 @@ namespace App\Utils\Support;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class Entities
 {
     private static $singleton = null;
     private static $singletonTables = null;
 
-    public static function getAllTables()
+    public static function getAllPluralNames()
     {
         if (!static::$singletonTables) static::$singletonTables = array_map(fn ($entity) => $entity->getTable(), static::getAll());
         return static::$singletonTables;
+    }
+
+    public static function getAllSingularNames()
+    {
+        return array_map(fn ($name) => Str::singular($name), self::getAllPluralNames());
     }
 
     public static function getAll()

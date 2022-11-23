@@ -56,7 +56,7 @@ class SidebarEntityItems
 
     public static function getAll($svg)
     {
-        $tables = Entities::getAllTables();
+        $tables = Entities::getAllPluralNames();
         $items = array_map(fn ($table) => self::maker($table, $svg), $tables);
         return $items;
     }

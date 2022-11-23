@@ -7,6 +7,6 @@ use App\Models\Department;
 
 class StatusController extends ManageStatusController
 {
-    protected $type = "department";
+    protected $type = 'department';
     protected $typeModel = Department::class;
 }
