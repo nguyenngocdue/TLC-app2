@@ -14,7 +14,8 @@ class Textarea extends Component
     {
         $colName = $this->colName;
         $colType = $this->colType;
-        $array = json_decode($this->valColName, true);
+
+        $array = gettype($this->valColName) === "array" ? $this->valColName : json_decode($this->valColName, true);
         $_valColName = $colType === 'json' ? json_encode($array, JSON_PRETTY_PRINT) : $this->valColName;
 
         $valColName = $_valColName === "\"\"" ? "" : $_valColName;
