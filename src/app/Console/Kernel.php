@@ -4,7 +4,6 @@ namespace App\Console;
 
 use App\Console\Commands\CreateControllerEntityCommand;
 use App\Console\Commands\CreateTableRelationshipCommand;
-use App\Console\Commands\UpdateSideBarConfigCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -34,7 +33,6 @@ class Kernel extends ConsoleKernel
     }
     protected $commands = [
         CreateTableRelationshipCommand::class,
-        UpdateSideBarConfigCommand::class,
         CreateControllerEntityCommand::class
     ];
 }
