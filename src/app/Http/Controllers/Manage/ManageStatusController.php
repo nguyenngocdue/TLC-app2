@@ -53,9 +53,9 @@ abstract class ManageStatusController extends Controller
         foreach ($dataSource0 as &$line) {
             $value = $line['name'];
             $line['action'] = Blade::render("<div>
-                <x-renderer.button htmlType='submit' name='button' value='up,$value'><i class='fa fa-arrow-up'></i></x-renderer.button>
-                <x-renderer.button htmlType='submit' name='button' value='down,$value'><i class='fa fa-arrow-down'></i></x-renderer.button>
-                <x-renderer.button htmlType='submit' name='button' value='right,$value' type='primary' ><i class='fa fa-arrow-right'></i></x-renderer.button>
+                <x-renderer.button htmlType='submit' name='button' size='xs' value='up,$value'><i class='fa fa-arrow-up'></i></x-renderer.button>
+                <x-renderer.button htmlType='submit' name='button' size='xs' value='down,$value'><i class='fa fa-arrow-down'></i></x-renderer.button>
+                <x-renderer.button htmlType='submit' name='button' size='xs' value='right,$value' type='primary' ><i class='fa fa-arrow-right'></i></x-renderer.button>
             </div>
             ");
         }
@@ -64,7 +64,7 @@ abstract class ManageStatusController extends Controller
         foreach ($dataSource1 as &$line) {
             $value = $line['name'];
             $line['action'] = Blade::render("<div>
-                <x-renderer.button htmlType='submit' name='button' value='left,$value' type='primary' ><i class='fa fa-arrow-left'></i></x-renderer.button>
+                <x-renderer.button htmlType='submit' name='button' size='xs' value='left,$value' type='primary' ><i class='fa fa-arrow-left'></i></x-renderer.button>
             </div>
             ");
         }

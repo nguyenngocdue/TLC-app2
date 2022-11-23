@@ -11,14 +11,15 @@ class Button extends Component
      *
      * @return void
      */
-    public function __construct(private $name = '', private $type = "light", private $outline = false, private $htmlType = 'button', private $value = '')
+    public function __construct(private $size = 'sm', private $name = '', private $type = "light", private $outline = false, private $htmlType = 'button', private $value = '')
     {
         // dd($this->type);
     }
 
-    private function getClass()
+    private function getClass($className)
     {
-        $defaultClass = "inline-block px-2.5 py-2.5 font-medium text-sm leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out ";
+
+        $defaultClass = "$className inline-block font-medium text-{$this->size} leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out ";
         switch ($this->type) {
             case "primary":
                 return $defaultClass . "bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg";
@@ -42,9 +43,9 @@ class Button extends Component
         }
     }
 
-    private function getClassOutline()
+    private function getClassOutline($className)
     {
-        $defaultClass = "inline-block px-2.5 py-2 border-2 font-medium text-sm leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:ring-0 transition duration-150 ease-in-out ";
+        $defaultClass = "$className inline-block border-2 font-medium text-{$this->size} leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:ring-0 transition duration-150 ease-in-out ";
         switch ($this->type) {
             case "primary":
                 return $defaultClass . "border-purple-600 text-purple-600";
@@ -73,9 +74,19 @@ class Button extends Component
      */
     public function render()
     {
+
+        switch ($this->size) {
+            case 'xs':
+                $className = "px-1.5 py-1 ";
+                break;
+            default:
+            case 'sm':
+                $className = "px-2.5 py-2 ";
+                break;
+        }
         return view('components.renderer.button', [
             // 'label' => $this->label,
-            'className' => $this->outline ? $this->getClassOutline() : $this->getClass(),
+            'className' => $this->outline ? $this->getClassOutline($className) : $this->getClass($className),
             'htmlType' => $this->htmlType,
             'value' => $this->value,
             'name' => $this->name,

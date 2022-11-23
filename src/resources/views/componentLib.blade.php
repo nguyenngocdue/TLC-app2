@@ -38,6 +38,18 @@
             <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive)">
                 <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="client" />
             </x-renderer.card>
+
+        </x-renderer.card>
+
+        <x-renderer.card title="Editable Tables">
+            <x-renderer.card title="Table with Data">
+                @dump($_GET)
+                <form action="" method="GET">
+                    @csrf
+                    <x-renderer.table showNo={{true}} :columns="$tableEditableColumns" :dataSource="$tableDataSource" />
+                    <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
+                </form>
+            </x-renderer.card>
             <br />
             <x-renderer.card title="Empty Table">
                 <x-renderer.table :columns="$tableColumns" :dataSource="[]" />
@@ -49,17 +61,6 @@
             <br />
             <x-renderer.card title="Missing DataSource">
                 <x-renderer.table :columns="$tableColumns" />
-            </x-renderer.card>
-        </x-renderer.card>
-
-        <x-renderer.card title="Editable Tables">
-            <x-renderer.card title="Table with Data">
-                @dump($_GET)
-                <form action="" method="GET">
-                    @csrf
-                    <x-renderer.table showNo={{true}} :columns="$tableEditableColumns" :dataSource="$tableDataSource" />
-                    <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
-                </form>
             </x-renderer.card>
         </x-renderer.card>
 
@@ -116,6 +117,27 @@
             <x-renderer.button outline=true type="warning">warning</x-renderer.button>
             <x-renderer.button outline=true type="info">info</x-renderer.button>
             <x-renderer.button outline=true type="dark">dark</x-renderer.button>
+            <br />
+            <br />
+            <x-renderer.button size="xs" type="primary">Primary</x-renderer.button>
+            <x-renderer.button size="xs" type="secondary">secondary</x-renderer.button>
+            <x-renderer.button size="xs" type="default">default</x-renderer.button>
+            <x-renderer.button size="xs" type="success">success</x-renderer.button>
+            <x-renderer.button size="xs" type="danger">danger</x-renderer.button>
+            <x-renderer.button size="xs" type="warning">warning</x-renderer.button>
+            <x-renderer.button size="xs" type="info">info</x-renderer.button>
+            <x-renderer.button size="xs" type="dark">dark</x-renderer.button>
+            <x-renderer.button size="xs" type="link">link</x-renderer.button>
+            <br />
+            <br />
+            <x-renderer.button size="xs" outline=true type="primary">Primary</x-renderer.button>
+            <x-renderer.button size="xs" outline=true type="secondary">secondary</x-renderer.button>
+            <x-renderer.button size="xs" outline=true type="default">default</x-renderer.button>
+            <x-renderer.button size="xs" outline=true type="success">success</x-renderer.button>
+            <x-renderer.button size="xs" outline=true type="danger">danger</x-renderer.button>
+            <x-renderer.button size="xs" outline=true type="warning">warning</x-renderer.button>
+            <x-renderer.button size="xs" outline=true type="info">info</x-renderer.button>
+            <x-renderer.button size="xs" outline=true type="dark">dark</x-renderer.button>
         </x-renderer.card>
         <x-renderer.card title="Alerts">
             <x-feedback.alert type="success" message="Hello Success"></x-feedback.alert>
@@ -127,7 +149,11 @@
             Empty attributes:
             <x-feedback.alert />
         </x-renderer.card>
+        <x-renderer.card title="Tabs">
+            <x-navigation.tabs>
 
+            </x-navigation.tabs>
+        </x-renderer.card>
     </div>
 </x-renderer.card>
 

@@ -8,6 +8,7 @@ use App\Utils\Support\Table;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -31,6 +32,7 @@ abstract class ManagePropController extends Controller
         return [
             [
                 "dataIndex" => "action",
+                "align" => "center",
             ],
             [
                 "dataIndex" => "name",
@@ -165,6 +167,12 @@ abstract class ManagePropController extends Controller
                 if (in_array($column, ['column_name', 'column_type'])) continue;
                 $result[$key][$column] = $value;
             }
+            // if (!Str::startsWith($columns['column_type'], "ELQ(")) {
+            // $result[$key]['action'] = Blade::render("<div class='whitespace-nowrap'>
+            //     <x-renderer.button htmlType='submit' name='button' size='xs' value='up,$key'><i class='fa fa-arrow-up'></i></x-renderer.button>
+            //     <x-renderer.button htmlType='submit' name='button' size='xs' value='down,$key'><i class='fa fa-arrow-down'></i></x-renderer.button>
+            // </div>");
+            // }
         }
 
         foreach (array_keys($toBeGreen) as $key) $result[$key]['row_color'] = "green";

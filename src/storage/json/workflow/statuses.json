@@ -147,7 +147,7 @@
     "review_rejected": {
         "name": "review_rejected",
         "title": "Review Rejected",
-        "color": "blue"
+        "color": "red"
     },
     "reviewed": {
         "name": "reviewed",
@@ -167,7 +167,7 @@
     "revised_rejected": {
         "name": "revised_rejected",
         "title": "Revised Rejected",
-        "color": "blue"
+        "color": "red"
     },
     "stopped": {
         "name": "stopped",
@@ -177,7 +177,7 @@
     "submission_rejected": {
         "name": "submission_rejected",
         "title": "Submission Rejected",
-        "color": "purple"
+        "color": "red"
     },
     "submitted": {
         "name": "submitted",
@@ -187,6 +187,6 @@
     "verified_rejected": {
         "name": "verified_rejected",
         "title": "Verified Rejected",
-        "color": "blue"
+        "color": "red"
     }
 }
