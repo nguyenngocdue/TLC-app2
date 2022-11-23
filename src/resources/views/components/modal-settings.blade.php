@@ -1,4 +1,4 @@
-<form action="{{ route($type . '_viewall.update', Auth::id()) }}" method="post" id="form-edit">
+<form action="{{ route('updateUserSettings') }}" method="post">
     @method('PUT')
     @csrf
     <x-feedback.modal title="{{$title}}" type="{{$type}}">
@@ -6,6 +6,7 @@
             <label class="py-5 text-lg font-semibold text-black">Columns</label>
             <div class="grid grid-cols-4 gap-x-2">
                 <input type="hidden" name='_entity' value="{{ $type }}">
+                <input type="hidden" name='action' value="updateGear">
                 @forelse ($allColumns as $key => $value)
                 <div class="flex flex-col">
                     <label>

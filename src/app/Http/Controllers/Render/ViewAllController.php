@@ -190,35 +190,35 @@ abstract class ViewAllController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
-    {
-        $data = $request->input();
-        $entity = $request->input('_entity');
-        if (!$entity) {
-            $page = $request->input('_entity_page');
-            $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT', '_entity_page' => '']);
-            $user = User::find($id);
-            $var = $user->settings;
-            foreach ($data as $key => $value) {
-                $var[$page][$key] = $value;
-            }
-            $user->settings = $var;
-            $user->update();
-            Toastr::success('Save settings Page Limit Users successfully', 'Save file json');
-            return redirect()->back();
-        }
-        $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT', '_entity' => '']);
-        $user = User::find($id);
-        $var = $user->settings;
-        $result = [];
-        foreach ($data as $key => $value) {
-            $result['columns'][$key] = $value;
-            $result['page_limit'] = $var[$entity]['page_limit'] ?? '';
-        }
-        $var[$entity] = $result;
-        $user->settings = $var;
-        $user->update();
-        Toastr::success('Save settings json Users successfully', 'Save file json');
-        return redirect()->back();
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     $data = $request->input();
+    //     $entity = $request->input('_entity');
+    //     if (!$entity) {
+    //         $page = $request->input('_entity_page');
+    //         $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT', '_entity_page' => '']);
+    //         $user = User::find($id);
+    //         $var = $user->settings;
+    //         foreach ($data as $key => $value) {
+    //             $var[$page][$key] = $value;
+    //         }
+    //         $user->settings = $var;
+    //         $user->update();
+    //         Toastr::success('Save settings Page Limit Users successfully', 'Save file json');
+    //         return redirect()->back();
+    //     }
+    //     $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT', '_entity' => '']);
+    //     $user = User::find($id);
+    //     $var = $user->settings;
+    //     $result = [];
+    //     foreach ($data as $key => $value) {
+    //         $result['columns'][$key] = $value;
+    //         $result['page_limit'] = $var[$entity]['page_limit'] ?? '';
+    //     }
+    //     $var[$entity] = $result;
+    //     $user->settings = $var;
+    //     $user->update();
+    //     Toastr::success('Save settings json Users successfully', 'Save file json');
+    //     return redirect()->back();
+    // }
 }
