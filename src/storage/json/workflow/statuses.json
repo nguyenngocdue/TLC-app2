@@ -1,4 +1,24 @@
 {
+    "active": {
+        "name": "active",
+        "title": "Active",
+        "color": "lime"
+    },
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "title": "Approval Rejected",
+        "color": "orange"
+    },
+    "approved": {
+        "name": "approved",
+        "title": "Approved",
+        "color": "green"
+    },
+    "assign_rejected": {
+        "name": "assign_rejected",
+        "title": "Assign Rejected",
+        "color": "orange"
+    },
     "assigned": {
         "name": "assigned",
         "title": "Assigned",
@@ -9,29 +29,164 @@
         "title": "Closed",
         "color": "gray"
     },
+    "confirm_rejected": {
+        "name": "confirm_rejected",
+        "title": "Confirm Rejected",
+        "color": "orange"
+    },
+    "draft": {
+        "name": "draft",
+        "title": "Draft",
+        "color": "rose"
+    },
+    "endorse_rejected": {
+        "name": "endorse_rejected",
+        "title": "Endorse Rejected",
+        "color": "orange"
+    },
     "finished": {
         "name": "finished",
         "title": "Finished",
         "color": "green"
+    },
+    "future": {
+        "name": "future",
+        "title": "Future",
+        "color": "purple"
+    },
+    "in_progress": {
+        "name": "in_progress",
+        "title": "In Progress",
+        "color": "blue"
+    },
+    "inactive": {
+        "name": "inactive",
+        "title": "Inactive",
+        "color": "pink"
+    },
+    "inspected": {
+        "name": "inspected",
+        "title": "Inspected",
+        "color": "pink"
+    },
+    "inspection_rejected": {
+        "name": "inspection_rejected",
+        "title": "Inspection Rejected",
+        "color": "orange"
     },
     "new": {
         "name": "new",
         "title": "New",
         "color": "green"
     },
-    "onhold": {
-        "name": "onhold",
+    "obsoleted": {
+        "name": "obsoleted",
+        "title": "Obsoleted",
+        "color": "fuchsia"
+    },
+    "on_hold": {
+        "name": "on_hold",
         "title": "On Hold",
+        "color": "pink"
+    },
+    "pending": {
+        "name": "pending",
+        "title": "Pending",
+        "color": "amber"
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "title": "Pending Approval",
+        "color": "pink"
+    },
+    "pending_confirmation": {
+        "name": "pending_confirmation",
+        "title": "Pending Confirmation",
         "color": "orange"
+    },
+    "pending_endorsed": {
+        "name": "pending_endorsed",
+        "title": "Pending Endorsed",
+        "color": "orange"
+    },
+    "pending_received": {
+        "name": "pending_received",
+        "title": "Pending Received",
+        "color": "orange"
+    },
+    "pending_review": {
+        "name": "pending_review",
+        "title": "Pending Review",
+        "color": "amber"
+    },
+    "pending_verified": {
+        "name": "pending_verified",
+        "title": "Pending Verified",
+        "color": "emerald"
+    },
+    "publish": {
+        "name": "publish",
+        "title": "Publish",
+        "color": "green"
     },
     "rejected": {
         "name": "rejected",
         "title": "Rejected",
         "color": "red"
     },
+    "reopen": {
+        "name": "reopen",
+        "title": "Reopen",
+        "color": "pink"
+    },
+    "resolved": {
+        "name": "resolved",
+        "title": "Resolved",
+        "color": "green"
+    },
+    "review_rejected": {
+        "name": "review_rejected",
+        "title": "Review Rejected",
+        "color": "blue"
+    },
+    "reviewed": {
+        "name": "reviewed",
+        "title": "Reviewed",
+        "color": "amber"
+    },
+    "revised": {
+        "name": "revised",
+        "title": "Revised",
+        "color": "amber"
+    },
+    "revised_approval": {
+        "name": "revised_approval",
+        "title": "Revised Approval",
+        "color": "red"
+    },
+    "revised_rejected": {
+        "name": "revised_rejected",
+        "title": "Revised Rejected",
+        "color": "blue"
+    },
     "stopped": {
         "name": "stopped",
         "title": "Stopped",
         "color": "red"
+    },
+    "submission_rejected": {
+        "name": "submission_rejected",
+        "title": "Submission Rejected",
+        "color": "purple"
+    },
+    "submitted": {
+        "name": "submitted",
+        "title": "Submitted",
+        "color": "cyan"
+    },
+    "verified_rejected": {
+        "name": "verified_rejected",
+        "title": "Verified Rejected",
+        "color": "blue"
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Manage\{{nameClass}};
 
 use App\Http\Controllers\Manage\ManageTablePropController;
+use App\Models\{{nameClass}};
 
-class Manage{{nameClass}}TablePropController extends ManageTablePropController
+class TablePropController extends ManageTablePropController
 {
     protected $type = '{{nameModelSingular}}';
+    protected $typeModel = {{nameClass}}::class;
 }

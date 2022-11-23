@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Manage\{{nameClass}};
 
 use App\Http\Controllers\Manage\ManagePropController;
+use App\Models\{{nameClass}};
 
-class Manage{{nameClass}}PropController extends ManagePropController
+class PropController extends ManagePropController
 {
     protected $type = '{{nameModelSingular}}';
+    protected $typeModel = {{nameClass}}::class;
 }
