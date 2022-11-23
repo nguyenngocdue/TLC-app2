@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Manage\{{nameClass}};
 use App\Http\Controllers\Manage\ManageRelationshipController;
 use App\Models\{{nameClass}};
 
-class Manage{{nameClass}}RelationshipController extends ManageRelationshipController
+class RelationshipController extends ManageRelationshipController
 {
     protected $type = '{{nameModelSingular}}';
     protected $typeModel = {{nameClass}}::class;
