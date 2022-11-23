@@ -10,6 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -20,7 +21,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -30,6 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        dd(Str::slug('MEP/ARC 1st Fix, Vent duct & Fire Pipe (ceiling).'));
         return view('home');
     }
 }

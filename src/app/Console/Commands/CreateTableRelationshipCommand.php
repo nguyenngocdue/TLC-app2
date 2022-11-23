@@ -61,10 +61,10 @@ class CreateTableRelationshipCommand extends BaseCommand
         // It's possible for the developer to specify the tables to modify in this
         // schema operation. The developer may also specify if this table needs
         // to be freshly created so we can create the appropriate migrations.
-        $name = Str::snake(trim($this->input->getArgument('name')));
+        $name = Str::snake(trim($this->getArgument('name')));
 
-        $tables = $this->input->getOption('tables');
-        $relationship = $this->input->getOption('rel');
+        $tables = $this->getOption('tables');
+        $relationship = $this->getOption('rel');
         $var = explode(',', $tables);
         $tableOne = $var[0];
         $tableTwo = $var[1];

@@ -86,7 +86,7 @@ Route::group([
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 // Route::get('/mail-test', [MailController::class, 'index']);
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
-// Route::resource('test', TestController::class);
+Route::resource('test', HomeController::class);
 // Route::resource('manage/manage_statusLibrary', ManageStatusLibrary::class);
 // Route::resource('manage/status', ManageStatusDoc::class);
 // Route::resource('statuses/statusLibrary', ManageStatusLibrary::class);

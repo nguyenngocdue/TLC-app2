@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Services\Manage\ManageService;
 use App\Utils\Support\Entities;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
