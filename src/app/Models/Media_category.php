@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 class Media_category extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = ["name", "descriptions", "slug"];
+    protected $fillable = ["name", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'media_categories';
 

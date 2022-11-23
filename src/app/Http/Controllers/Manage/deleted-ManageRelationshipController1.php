@@ -41,7 +41,7 @@ abstract class ManageRelationshipController extends Controller
         $dataManage = $this->manageService->path($this->type, 'relationships');
         if (!$dataManage) {
             $columnRelationships = array_keys($columnEloquentParams);
-            return view('dashboards.props.managerelationship')->with(compact('type', 'columnRelationships', 'columnEloquentParams'));
+            return view('dashboards.pages.managerelationship')->with(compact('type', 'columnRelationships', 'columnEloquentParams'));
         } else {
             $names = [];
             $columnRelationships = [];
@@ -93,7 +93,7 @@ abstract class ManageRelationshipController extends Controller
                 }
             }
             if (empty($diff1) && empty($diff2) && empty($diff3)) {
-                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnControlNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnRenderers', 'columnRendererParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
+                return view('dashboards.pages.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnControlNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnRenderers', 'columnRendererParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
             } else {
                 foreach ($diff2 as $value) {
                     $names['_' . $value] = '_' . $value;
@@ -128,7 +128,7 @@ abstract class ManageRelationshipController extends Controller
                     $columnControlNames['_' . $value] = "";
                     $colorLines['_' . $value] = "new";
                 }
-                return view('dashboards.props.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnControlNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnRenderers', 'columnRendererParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
+                return view('dashboards.pages.managerelationship')->with(compact('type', 'names', 'columnRelationships', 'columnControlNames', 'columnEloquents', 'columnParam1s', 'columnParam2s', 'columnParam3s', 'columnParam4s', 'columnParam5s', 'columnParam6s', 'columnLabels', 'columnRenderers', 'columnRendererParams', 'columnColSpans', 'columnHidden', 'columnNewLines', 'colorLines'));
             }
         }
     }

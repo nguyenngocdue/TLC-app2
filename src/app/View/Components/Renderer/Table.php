@@ -19,7 +19,9 @@ class Table extends Component
     private $columns = null,
     private $dataSource = null,
     private $showNo = false,
+    private $showNoR = false,
     private $groupBy = false,
+    private $footer = "",
   ) {
   }
 
@@ -166,6 +168,7 @@ class Table extends Component
 
     // Log::info($this->showNo);
     if ($this->showNo) array_unshift($columns, ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center']);
+    if ($this->showNoR) array_push($columns, ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center']);
 
     $dataSource = $this->dataSource;
     // Log::info($dataSource);
@@ -184,6 +187,7 @@ class Table extends Component
       $pagination = $dataSource->links('dashboards.pagination.pagination');
     }
 
-    return view("components.renderer.table")->with(compact('columnsRendered', 'trtd', 'showing', 'pagination', 'columns', 'dataSource'));
+    $footer = $this->footer;
+    return view("components.renderer.table")->with(compact('columnsRendered', 'trtd', 'showing', 'pagination', 'columns', 'dataSource', 'footer'));
   }
 }

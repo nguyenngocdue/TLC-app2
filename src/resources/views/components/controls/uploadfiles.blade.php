@@ -23,7 +23,7 @@
                 </svg>
             </span>
             <div class=" invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible   before:absolute before:-inset-1  before:bg-[#00000080]">
-                <a title="{{$media['filename']}}" href="{{$path.$media['url_media']}}" target='_blank' class="hover:underline text-blue-600 dark:text-blue-500 px-2 absolute  top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-xs text-center w-full">{{$media['filename']}}</a>
+                <a title="{{$media['filename']}}" href="{{$path.$media['url_media']}}" target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">{{$media['filename']}}</a>
                 <button type="button" onclick="updateTextbox({{$media['id']}}, '{{$colName}}_deleted')" class="w-10 h-10  m-auto  hover:bg-slate-300 rounded-full  absolute bottom-[10%] text-[25px]">
                     <i class=" text-[#d11a2a] fas fa-trash  cursor-pointer"></i>
                 </button>

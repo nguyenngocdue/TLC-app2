@@ -35,8 +35,8 @@
                 <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNo="{{true}}" />
             </x-renderer.card>
             <br />
-            <x-renderer.card title="Table with Data and No. and GroupBy (Case Insensitive)">
-                <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNo="{{true}}" groupBy="client" />
+            <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive)">
+                <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="client" />
             </x-renderer.card>
             <br />
             <x-renderer.card title="Empty Table">

@@ -6,4 +6,6 @@
     <a class="text-blue-500 hover:text-gray-400" href="{{ route($singular . '_mngprop.index')}}">Props</a>
     <span class="px-1">/</span>
     <a class="text-blue-500 hover:text-gray-400" href="{{ route($singular .'_mngrls.index') }}">Relationships</a>
+    <span class="px-1">/</span>
+    <a class="text-blue-500 hover:text-gray-400" href="{{ route($singular .'_mngstt.index') }}">Statuses</a>
 </ol>

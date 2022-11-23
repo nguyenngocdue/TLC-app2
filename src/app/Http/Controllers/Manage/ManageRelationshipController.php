@@ -123,7 +123,7 @@ abstract class ManageRelationshipController extends Controller
         $columns = $this->getColumns();
         $dataSourceWithKey = $this->getDataSource($type);
         $dataSource = array_values($dataSourceWithKey);
-        return view('dashboards.props.managerelationship')->with(compact('type', 'columns', 'dataSource'));
+        return view('dashboards.pages.managerelationship')->with(compact('type', 'columns', 'dataSource'));
     }
     public function store(Request $request)
     {

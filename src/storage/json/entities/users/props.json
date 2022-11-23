@@ -1,4 +1,18 @@
 {
+    "_settings": {
+        "name": "_settings",
+        "column_name": "settings",
+        "column_type": "json",
+        "label": "Settings",
+        "control": "textarea",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
     "_id": {
         "name": "_id",
         "column_name": "id",
@@ -467,20 +481,6 @@
         "column_type": "string",
         "label": "Password",
         "control": "text",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
-    },
-    "_settings": {
-        "name": "_settings",
-        "column_name": "settings",
-        "column_type": "json",
-        "label": "Settings",
-        "control": "textarea",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",

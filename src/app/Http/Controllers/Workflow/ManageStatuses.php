@@ -47,14 +47,6 @@ class ManageStatuses extends Controller
         ];
     }
 
-    private function getDataSource()
-    {
-        $path = "workflow/statuses.json";
-        $pathFrom = storage_path('json/' . $path);
-        $json = json_decode(file_get_contents($pathFrom, true), true);
-        return $json;
-    }
-
     private function distributeArrayToObject($array)
     {
         $result = [];
@@ -68,18 +60,10 @@ class ManageStatuses extends Controller
         return $result;
     }
 
-    private function setDataSource($dataSource)
-    {
-        $path = "workflow/statuses.json";
-        // Log::info($dataSource);
-        $str = json_encode($dataSource, JSON_PRETTY_PRINT);
-        Storage::disk('json')->put($path, $str);
-    }
-
     public function index()
     {
         $columns = $this->getColumns();
-        $dataSource = array_values($this->getDataSource());
+        $dataSource = array_values(Statuses::getAll());
 
         return view("workflow/manage-statuses")->with(compact('columns', 'dataSource'));
     }
@@ -90,7 +74,7 @@ class ManageStatuses extends Controller
         unset($dataSource["_token"]);
         $dataSource = $this->distributeArrayToObject($dataSource);
         // dd($dataSource);
-        $this->setDataSource($dataSource);
+        Statuses::setAll($dataSource);
         return redirect()->back();
     }
 
@@ -101,9 +85,9 @@ class ManageStatuses extends Controller
         $newItems = [];
         foreach ($names as $name) $newItems[$name] = ['name' => $name, 'title' => Str::headline($name)];
 
-        $dataSource = $this->getDataSource()  + $newItems;
+        $dataSource = Statuses::getAll()  + $newItems;
         // dd($dataSource);
-        $this->setDataSource($dataSource);
+        Statuses::setAll($dataSource);
         return redirect()->back();
     }
 }

@@ -25,14 +25,13 @@ class UploadService
             }
             $filesUpload = $request->files;
             $nameControls = [];
-            $medias = [];
+            $tempMedia = [];
             $colNameMedia = [];
             foreach ($filesUpload as $key => $files) {
                 array_push($nameControls, $key);
                 try {
                     foreach ($files as $file) {
-
-                        $fileName = Helper::customizeSlugData($file, 'media', $medias);
+                        $fileName = Helper::customizeSlugData($file, 'media', $tempMedia);
 
                         $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
                         $fileNameNormal = pathinfo($fileName, PATHINFO_FILENAME);
@@ -55,7 +54,7 @@ class UploadService
                             Storage::disk('s3')->put($path_thumbnail, $resource->__toString(), 'public');
                         }
 
-                        array_push($medias, [
+                        array_push($tempMedia, [
                             'url_thumbnail' => isset($path_thumbnail) ? $path_thumbnail : "",
                             'url_media' => $path_image,
                             'url_folder' => $path,
@@ -70,9 +69,9 @@ class UploadService
                 }
             }
 
-            // dd($medias);
             $flip_cateIdName = array_flip($cateIdName);
-            foreach ($medias as $key => $media) {
+            foreach ($tempMedia as $key => $media) {
+                // dd($tempMedia);
                 $newMedia = Media::create($media);
                 $colNameMedia[$newMedia['id']] = $flip_cateIdName[$media['category']];   // [id-media = "attachment-name"]
             }

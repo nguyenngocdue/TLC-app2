@@ -26,6 +26,11 @@
                     </nav>
                 </span>
             </div>
+            @if($footer)
+            <div class='grid1 px-4 py-3 text-xs font-semibold tracking-wide text-blue-500 border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800'>
+                {!! $footer !!}
+            </div>
+            @endif
         </div>
     </div>
 </div>

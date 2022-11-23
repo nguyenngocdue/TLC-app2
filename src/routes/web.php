@@ -56,6 +56,7 @@ Route::group([
                 Route::resource("{$singular}_mngprop", "App\Http\Controllers\Manage\\{$ucfirstName}\\Manage{$ucfirstName}PropController");
                 Route::resource("{$singular}_mnglnprop", "App\Http\Controllers\Manage\\{$ucfirstName}\\Manage{$ucfirstName}TablePropController");
                 Route::resource("{$singular}_mngrls", "App\Http\Controllers\Manage\\{$ucfirstName}\\Manage{$ucfirstName}RelationshipController");
+                Route::resource("{$singular}_mngstt", "App\Http\Controllers\Manage\\{$ucfirstName}\\Manage{$ucfirstName}StatusController");
             });
         }
     });
