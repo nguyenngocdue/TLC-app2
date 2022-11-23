@@ -3,9 +3,8 @@
 use App\Http\Controllers\ComponentLib;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Manage\ManageStatusLibrary;
 use App\Http\Controllers\Manage\Master\StatusDocType;
-use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\ManageStatuses;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\Auth;
@@ -81,7 +80,7 @@ Route::group([
     'middleware' => ['auth']
 ], function () {
     Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
-    Route::put('/{id}', [SettingController::class, 'update'])->name('settingUpdate');
+    Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::get('impersonate/user/{id}', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
 });
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
@@ -98,6 +97,7 @@ Route::resource('manage/statusDocType', StatusDocType::class);
 Route::resource('/abc', HomeController::class);
 
 Route::get('components', [ComponentLib::class, 'index']);
+
 
 // Route::get('/test', function () {
 //     $user = App\Models\User::first();

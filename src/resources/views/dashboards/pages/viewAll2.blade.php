@@ -18,7 +18,7 @@
     <x-form.search action="{{ route($type . '_viewall.index') }}">
     </x-form.search>
     <div class="grid justify-items-end">
-        <x-form.per-page type="{{$type}}" action="{{ route($type . '_viewall.update', Auth::id()) }}" page-limit="{{$pageLimit}}">
+        <x-form.per-page type="{{$type}}" action="{{ route('updateUserSettings') }}" page-limit="{{$pageLimit}}">
         </x-form.per-page>
     </div>
 </div>
