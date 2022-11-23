@@ -72,7 +72,9 @@ abstract class CreateEditController extends Controller
 	public function store(Request $request)
 	{
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$colNamehasAttachment = Helper::getColNamebyControls($props, 'attachment');
+		$colNamehasAttachment = Helper::getColNamesbyCondition($props, 'control', 'column_type', 'attachment', 'string');
+		$colNamehasTextarea = Helper::getColNamesbyCondition($props, 'control', 'column_type', 'textarea', 'json');
+
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamehasAttachment);
 		$dataInput = $request->except($arrayExcept);
 		$type = Str::plural($this->type);
@@ -86,6 +88,7 @@ abstract class CreateEditController extends Controller
 		$this->_validate($props, $request);
 
 		$newDataInput = $this->handleToggle('store', $props, $dataInput);
+		if (count($colNamehasTextarea) > 0) $newDataInput = $this->modifyValueTextArea($colNamehasTextarea, $newDataInput);
 
 		$newDataInputHasAttachment = array_filter($newDataInput, fn ($item) => is_array($item));
 		$newDataInputNotAttachment = array_filter($newDataInput, fn ($item) => !is_array($item));
@@ -115,10 +118,11 @@ abstract class CreateEditController extends Controller
 	{
 
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$colNamehasAttachment = Helper::getColNamebyControls($props, 'attachment');
+		$colNamehasAttachment = Helper::getColNamesbyCondition($props, 'control', 'column_type', 'attachment', 'string');
+		$colNamehasTextarea = Helper::getColNamesbyCondition($props, 'control', 'column_type', 'textarea', 'json');
+
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamehasAttachment);
 		$dataInput = $request->except($arrayExcept);
-
 
 		$type = Str::plural($this->type);
 
@@ -133,6 +137,8 @@ abstract class CreateEditController extends Controller
 		$this->_validate($props, $request);
 
 		$newDataInput = $this->handleToggle('update', $props, $dataInput);
+
+		$newDataInput = $this->modifyValueTextArea($colNamehasTextarea, $newDataInput);
 
 		$data->fill($newDataInput);
 		$data->save();
@@ -192,5 +198,14 @@ abstract class CreateEditController extends Controller
 		}
 		$data->fill($valFileds);
 		$data->save();
+	}
+	public function modifyValueTextArea($colNamehasTextarea, $newDataInput)
+	{
+		$newTextAreas = [];
+		foreach ($colNamehasTextarea as $_colName) {
+			$object = $newDataInput[$_colName];
+			$newTextAreas[$_colName] = json_decode(preg_replace("/\r|\n/", "", $object));
+		}
+		return array_replace($newDataInput, $newTextAreas);
 	}
 }

@@ -25,8 +25,10 @@ $id = $action === "edit" ? $values->id : "";
         $label = $value['label'];
         $col_span = $value['col_span'];
         $column_name = $value['column_name'];
+        $column_type = $value['column_type'];
         $control = $value['control'];
         $value_column_name = $action === "edit" ? $values->{$column_name} :'';
+        // dd($values->getAttributes()['settings']);
 
         $col_span = $value['col_span'];
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
@@ -70,7 +72,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case('textarea')
-                        <x-controls.textarea colName={{$column_name}} :valColName="$value_column_name" action={{$action}} control={{$control}} labelName={{$label}} />
+                        <x-controls.textarea colName={{$column_name}} colType={{$column_type}} :valColName="$value_column_name" action={{$action}} control={{$control}} labelName={{$label}} />
                         @break
 
                         @case ('dropdown')

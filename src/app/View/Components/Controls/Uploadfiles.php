@@ -32,7 +32,6 @@ class Uploadfiles extends Component
         $_mediaDB = $action === 'create' ? [] : $mediaDB;
 
         $mergeMediaDB  = array_merge($_mediaDB, $orphanMediaDB);
-        // dd($mergeMediaDB);
 
         $attachHasMedia = [];
         foreach ($mergeMediaDB as $key => $value) {
