@@ -14,9 +14,11 @@ class Textarea extends Component
     {
         $colName = $this->colName;
         $colType = $this->colType;
-        $_valColName = $colType === 'json' ? json_encode($this->valColName, JSON_PRETTY_PRINT) : $this->valColName;
+        $array = json_decode($this->valColName, true);
+        $_valColName = $colType === 'json' ? json_encode($array, JSON_PRETTY_PRINT) : $this->valColName;
 
         $valColName = $_valColName === "\"\"" ? "" : $_valColName;
+        // dd($_valColName, $colType, $this->valColName);
         $action = $this->action;
         $control = $this->control;
         return view('components.controls.textarea')->with(compact('colName', 'valColName', 'action', 'control'));

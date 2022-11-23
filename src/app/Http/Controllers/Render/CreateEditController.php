@@ -138,7 +138,7 @@ abstract class CreateEditController extends Controller
 
 		$newDataInput = $this->handleToggle('update', $props, $dataInput);
 
-		$newDataInput = $this->modifyValueTextArea($colNamehasTextarea, $newDataInput);
+		if (count($colNamehasTextarea) > 0) $newDataInput = $this->modifyValueTextArea($colNamehasTextarea, $newDataInput);
 
 		$data->fill($newDataInput);
 		$data->save();
