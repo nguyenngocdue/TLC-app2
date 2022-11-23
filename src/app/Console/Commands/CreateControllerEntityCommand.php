@@ -15,8 +15,8 @@ class CreateControllerEntityCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'ndc:controller {name: The name of the controller manage}
-    {--render: The true create controller render}';
+    protected $signature = 'ndc:controller {name : The name of the controller manage}
+    {--render : The true create controller render}';
 
     /**
      * The console command description.

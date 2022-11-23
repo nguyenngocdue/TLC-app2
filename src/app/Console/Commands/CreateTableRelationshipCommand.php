@@ -14,9 +14,9 @@ class CreateTableRelationshipCommand extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'ndc:migration {name: The name of the migration}
-        {--tables: The tables=table1,table2}
-        {--rel: The relationship}
+    protected $signature = 'ndc:migration {name : The name of the migration}
+        {--tables : The tables=table1,table2}
+        {--rel : The relationship}
         ';
 
     /**
