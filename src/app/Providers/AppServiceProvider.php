@@ -44,5 +44,8 @@ class AppServiceProvider extends ServiceProvider
         Str::macro('modelToPretty', function (string $string) {
             return Str::pretty(App::make($string)->getTable());
         });
+        Str::macro('same', function (string $string) {
+            return $string;
+        });
     }
 }

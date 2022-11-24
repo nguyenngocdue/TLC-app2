@@ -13,10 +13,11 @@ class Dropdown extends Component
      *
      * @return void
      */
-    public function __construct(private $name = "", private $cbbDataSource = [], private $sortBy = false)
+    public function __construct(private $name = "", private $cbbDataSource = [], private $sortBy = false, private $strFn = false)
     {
         //
         // dump($dataSource);
+        // dump($this->strFn);
         $dataSource = $this->cbbDataSource;
         // Log::info($this->column);
         //Convert ["v1", "v2"] to [["value" => "v1"], ["value" => "v2"]]
@@ -25,7 +26,11 @@ class Dropdown extends Component
         // Log::info($dataSource);
         foreach ($dataSource as &$option) {
             // Log::info($option);
-            if (!isset($option['title'])) $option['title'] = Str::headline($option['value']);
+            if (!isset($option['title'])) {
+                $strFn = $strFn ? $strFn : "headline";
+                // $option['title'] = Str::headline($option['value']);
+                $option['title'] = Str::{$strFn}($option['value']);
+            }
         }
 
         if ($sortBy) usort($dataSource, fn ($a, $b) => $a[$sortBy] <=> $b[$sortBy]);

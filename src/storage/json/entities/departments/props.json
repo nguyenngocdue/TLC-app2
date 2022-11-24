@@ -10,8 +10,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_name": {
         "name": "_name",
@@ -24,13 +23,12 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "column_type": "string",
+        "column_type": "text",
         "label": "Description",
         "control": "textarea",
         "col_span": "12",
@@ -38,8 +36,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_head_of_department": {
         "name": "_head_of_department",
@@ -52,8 +49,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_slug": {
         "name": "_slug",
@@ -66,8 +62,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": "*.slugify_by_name"
     },
     "_created_at": {
         "name": "_created_at",
@@ -80,8 +75,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -94,8 +88,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_Users_Count": {
         "name": "_Users_Count",
@@ -108,7 +101,6 @@
         "hidden_edit": "true",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     }
 }

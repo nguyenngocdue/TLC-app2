@@ -28,7 +28,7 @@ class Table extends Component
   private function getAttributeRendered($column, $dataLine)
   {
     $attributes = $column['attributes'] ?? [];
-    array_walk($attributes, fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "");
+    array_walk($attributes, fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "$key='$value'");
     $attributeRendered = trim(join(" ", $attributes));
     return $attributeRendered;
   }

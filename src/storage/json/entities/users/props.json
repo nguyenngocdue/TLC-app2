@@ -10,8 +10,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_email": {
         "name": "_email",
@@ -24,8 +23,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_name": {
         "name": "_name",
@@ -38,8 +36,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_full_name": {
         "name": "_full_name",
@@ -52,8 +49,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_name_suffix": {
         "name": "_name_suffix",
@@ -66,8 +62,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_employeeid": {
         "name": "_employeeid",
@@ -80,8 +75,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_first_name": {
         "name": "_first_name",
@@ -94,8 +88,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_last_name": {
         "name": "_last_name",
@@ -108,8 +101,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_address": {
         "name": "_address",
@@ -122,8 +114,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_phone": {
         "name": "_phone",
@@ -136,8 +127,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_featured_image": {
         "name": "_featured_image",
@@ -150,8 +140,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_time_keeping_type": {
         "name": "_time_keeping_type",
@@ -164,8 +153,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_user_type": {
         "name": "_user_type",
@@ -178,8 +166,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_workplace": {
         "name": "_workplace",
@@ -192,8 +179,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_category": {
         "name": "_category",
@@ -206,8 +192,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_date_of_birth": {
         "name": "_date_of_birth",
@@ -220,8 +205,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_first_date": {
         "name": "_first_date",
@@ -234,8 +218,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_last_date": {
         "name": "_last_date",
@@ -248,8 +231,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_title": {
         "name": "_title",
@@ -262,8 +244,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_position_prefix": {
         "name": "_position_prefix",
@@ -276,8 +257,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_position_1": {
         "name": "_position_1",
@@ -290,8 +270,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_position_2": {
         "name": "_position_2",
@@ -304,8 +283,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_position_3": {
         "name": "_position_3",
@@ -318,8 +296,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_position_rendered": {
         "name": "_position_rendered",
@@ -332,8 +309,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": "user.position_rendered"
     },
     "_discipline": {
         "name": "_discipline",
@@ -346,8 +322,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_department": {
         "name": "_department",
@@ -360,8 +335,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_show_on_beta": {
         "name": "_show_on_beta",
@@ -374,8 +348,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_resigned": {
         "name": "_resigned",
@@ -388,8 +361,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_viewport_uids": {
         "name": "_viewport_uids",
@@ -402,8 +374,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_leaf_uids": {
         "name": "_leaf_uids",
@@ -416,8 +387,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_user_id_passport": {
         "name": "_user_id_passport",
@@ -430,8 +400,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_user_pin": {
         "name": "_user_pin",
@@ -444,8 +413,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_email_verified_at": {
         "name": "_email_verified_at",
@@ -458,8 +426,7 @@
         "hidden_edit": "true",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_provider": {
         "name": "_provider",
@@ -472,8 +439,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_password": {
         "name": "_password",
@@ -486,8 +452,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_time_zone": {
         "name": "_time_zone",
@@ -500,8 +465,7 @@
         "hidden_edit": "true",
         "new_line": "",
         "validation": "",
-        "frozen_left": "true",
-        "frozen_right": ""
+        "formular": ""
     },
     "_settings": {
         "name": "_settings",
@@ -514,8 +478,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "json",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_remember_token": {
         "name": "_remember_token",
@@ -528,8 +491,7 @@
         "hidden_edit": "true",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -542,8 +504,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -556,8 +517,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_guid": {
         "name": "_guid",
@@ -570,8 +530,7 @@
         "hidden_edit": "true",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_domain": {
         "name": "_domain",
@@ -584,8 +543,7 @@
         "hidden_edit": "true",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_media": {
         "name": "_media",
@@ -598,8 +556,7 @@
         "hidden_edit": "true",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_posts": {
         "name": "_posts",
@@ -612,8 +569,7 @@
         "hidden_edit": "true",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_productionRunLines": {
         "name": "_productionRunLines",
@@ -626,7 +582,6 @@
         "hidden_edit": "true",
         "new_line": "",
         "validation": "",
-        "frozen_left": "true",
-        "frozen_right": ""
+        "formular": ""
     }
 }

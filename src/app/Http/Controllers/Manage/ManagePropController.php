@@ -86,15 +86,30 @@ abstract class ManagePropController extends Controller
                 "renderer" => "text",
             ],
             [
-                "dataIndex" => "frozen_left",
+                "dataIndex" => "formular",
                 "editable" => true,
                 "renderer" => "dropdown",
+                "cbbDataSource" => [
+                    '',
+                    'all-concat_name_with_123',
+                    'all-slugify_by_name',
+                    'user-position_rendered',
+                    '(not-yet)wir-name_rendered',
+                    '(not-yet)format_production',
+                    '(not-yet)format_compliance',
+                ],
+                "attributes" => ['strFn' => 'same'],
             ],
-            [
-                "dataIndex" => "frozen_right",
-                "editable" => true,
-                "renderer" => "dropdown",
-            ],
+            // [
+            //     "dataIndex" => "frozen_left",
+            //     "editable" => true,
+            //     "renderer" => "dropdown",
+            // ],
+            // [
+            //     "dataIndex" => "frozen_right",
+            //     "editable" => true,
+            //     "renderer" => "dropdown",
+            // ],
 
         ];
     }
