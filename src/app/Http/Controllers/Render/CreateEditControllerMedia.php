@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Render;
 
 use App\Helpers\Helper;
-use App\Models\Media;
+use App\Models\Attachment;
 use App\Utils\Constant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +29,7 @@ trait CreateEditControllerMedia
     private function setMediaParent($data, $colNamehasAttachment)
     {
         $owner_id =  (int)Auth::user()->id;
-        $uploadedIdColumnNames = json_decode(DB::table('media')->where([['owner_id', '=', $owner_id], ['object_id', '=', null], ['object_type', '=', null]])->select('id', 'category')->get(), true);
+        $uploadedIdColumnNames = json_decode(DB::table('attachments')->where([['owner_id', '=', $owner_id], ['object_id', '=', null], ['object_type', '=', null]])->select('id', 'category')->get(), true);
         $ids_idCates_media =  array_column($uploadedIdColumnNames, 'category', 'id');
 
         $media_cateTb = json_decode(DB::table('media_categories')->select('id', 'name')->get(), true);
@@ -38,8 +38,8 @@ trait CreateEditControllerMedia
         if (!is_null($data) && (!is_null($uploadedIdColumnNames)) && count($uploadedIdColumnNames) > 0) {
             foreach ($ids_idCates_media as $key => $value) {
                 if (in_array($ids_names_mediaCateTb[$value], $colNamehasAttachment)) {
-                    if (!is_null(Media::find($key))) {
-                        $data->media()->save(Media::find($key));
+                    if (!is_null(Attachment::find($key))) {
+                        $data->media()->save(Attachment::find($key));
                     }
                 }
             }
@@ -54,7 +54,7 @@ trait CreateEditControllerMedia
             if (isset($dataInput[$value->name . "_deleted"])) {
                 $idsDelete = explode(',', $dataInput[$value->name . "_deleted"]);
                 foreach ($idsDelete as $value) {
-                    $media = Media::find($value);
+                    $media = Attachment::find($value);
                     Storage::disk('s3')->delete($media->getAttributes()['url_thumbnail']);
                     Storage::disk('s3')->delete($media->getAttributes()['url_media']);
                     is_null($media) ? "" : $media->delete();

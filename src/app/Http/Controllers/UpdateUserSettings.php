@@ -23,7 +23,7 @@ class UpdateUserSettings extends Controller
     {
         $all = $request->all();
         $type = $all['_entity'];
-        $toBeInserted = array_diff_key($all, ['_method', '_token', '_entity', 'action']);
+        $toBeInserted = array_diff_key($all, array_flip(['_method', '_token', '_entity', 'action']));
         $settings[$type]['columns'] = $toBeInserted;
         return $settings;
     }
