@@ -1,18 +1,4 @@
 {
-    "_settings": {
-        "name": "_settings",
-        "column_name": "settings",
-        "column_type": "json",
-        "label": "Settings",
-        "control": "textarea",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
-    },
     "_id": {
         "name": "_id",
         "column_name": "id",
@@ -475,6 +461,20 @@
         "frozen_left": "",
         "frozen_right": ""
     },
+    "_provider": {
+        "name": "_provider",
+        "column_name": "provider",
+        "column_type": "string",
+        "label": "Provider",
+        "control": "",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
     "_password": {
         "name": "_password",
         "column_name": "password",
@@ -486,6 +486,34 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_time_zone": {
+        "name": "_time_zone",
+        "column_name": "time_zone",
+        "column_type": "string",
+        "label": "Time Zone",
+        "control": "text",
+        "col_span": "12",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "new_line": "",
+        "validation": "",
+        "frozen_left": "true",
+        "frozen_right": ""
+    },
+    "_settings": {
+        "name": "_settings",
+        "column_name": "settings",
+        "column_type": "json",
+        "label": "Settings",
+        "control": "textarea",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "json",
         "frozen_left": "",
         "frozen_right": ""
     },
@@ -595,20 +623,6 @@
         "control": "",
         "col_span": "12",
         "hidden_view_all": "",
-        "hidden_edit": "true",
-        "new_line": "",
-        "validation": "",
-        "frozen_left": "true",
-        "frozen_right": ""
-    },
-    "_time_zone": {
-        "name": "_time_zone",
-        "column_name": "",
-        "column_type": "",
-        "label": "Time Zone",
-        "control": "text",
-        "col_span": "12",
-        "hidden_view_all": "true",
         "hidden_edit": "true",
         "new_line": "",
         "validation": "",

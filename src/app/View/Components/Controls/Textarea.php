@@ -21,6 +21,7 @@ class Textarea extends Component
         $valColName = $_valColName === 'null' ? "" : $_valColName;
         $action = $this->action;
         $control = $this->control;
-        return view('components.controls.textarea')->with(compact('colName', 'valColName', 'action', 'control'));
+        $labelName = $this->labelName;
+        return view('components.controls.textarea')->with(compact('colName', 'valColName', 'action', 'control', 'labelName'));
     }
 }
