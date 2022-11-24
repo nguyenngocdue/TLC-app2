@@ -34,6 +34,7 @@ $id = $action === "edit" ? $values->id : "";
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
 
         $isRequired = in_array("required", explode("|",$value['validation']));
+        $iconJson = $column_type === 'json' ? App\Utils\ConstantSVG::ICON_SVG : "";
         @endphp
 
         <div class='col-span-{{$col_span}}'>
@@ -42,7 +43,10 @@ $id = $action === "edit" ? $values->id : "";
                     <div class='col-start-1 col-span-{{24/$col_span}} {{$value['new_line'] ? "col-span-12 text-left" : "text-right" }} '>
                         <label class='text-gray-700 dark:text-gray-400  px-3 block text-base' title='{{$column_name}} / {{$control}}'>{{$label}}
                             {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
-                        </label>
+                            <br />
+                            <span class="items-end">
+                                {!!$iconJson!!}
+                            </span>
                     </div>
                     <div class='col-start-{{24/$col_span + 1}} col-span-10  {{$value['new_line'] ? "col-span-12" : "" }}   py-2 text-left'>
                         @if (is_null($control))
