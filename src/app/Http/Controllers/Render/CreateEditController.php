@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Render;
 
+use App\Events\CreateEventEntity;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
@@ -71,9 +72,10 @@ abstract class CreateEditController extends Controller
 
 	public function store(Request $request)
 	{
+
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$colNamehasAttachment = Helper::getColNamesbyCondition($props, 'control', 'column_type', 'attachment', 'string');
-		$colNamehasTextarea = Helper::getColNamesbyCondition($props, 'control', 'column_type', 'textarea', 'json');
+		$colNamehasAttachment = Helper::getColNamesbyCondition($props, 'control', 'column_type', 'attachment', 'string', 'type1');
+		$colNamehasTextarea = Helper::getColNamesbyCondition($props, 'control', 'column_type', 'textarea', 'json', 'type1');
 
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamehasAttachment);
 		$dataInput = $request->except($arrayExcept);
@@ -95,12 +97,14 @@ abstract class CreateEditController extends Controller
 			$data = $this->data::create($newDataInputNotAttachment);
 			Notification::send($data, new CreateNewNotification($data->id));
 
+			$_data = $this->data::find($data->id);
+			event(new CreateEventEntity([$_data, $props]));
+
 			if (isset($data)) {
 
 				$this->syncManyToManyRelationship($data, $newDataInputHasAttachment); // Check box
 				if ($hasAttachment) {
 					$this->setMediaParent($data, $colNamehasAttachment);
-					$_data = $this->data::find($data->id);
 					$this->updateIdsMediaToFieldsDB($_data, $colNamehasAttachment);
 				}
 
@@ -128,6 +132,8 @@ abstract class CreateEditController extends Controller
 
 		$data = $this->data::find($id);
 
+
+
 		$hasAttachment = $this->saveMediaValidator('update', $request, $dataInput, $data, $colNamehasAttachment);
 
 		if ($hasAttachment) $this->updateIdsMediaToFieldsDB($data, $colNamehasAttachment);
@@ -140,6 +146,8 @@ abstract class CreateEditController extends Controller
 
 		$data->fill($newDataInput);
 		$data->save();
+
+		event(new CreateEventEntity([$data, $props]));
 
 
 		if ($data->save()) {
