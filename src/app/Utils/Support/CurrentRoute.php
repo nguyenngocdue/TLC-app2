@@ -15,7 +15,6 @@ class CurrentRoute
     public static function getTypeSingular()
     {
         $type = Route::current()->getController()->getType();
-        // $type = $type === 'media' ? 'medium' : $type;
         return Str::singular($type);
     }
 
