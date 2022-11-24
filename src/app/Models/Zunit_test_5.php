@@ -15,7 +15,7 @@ class Zunit_test_5 extends Model
     protected $primaryKey = "id";
     protected $table = "zunit_test_5s";
     public $eloquentParams = [
-        "media" => ['hasMany', Media::class, 'owner_id', 'id'],
+        "media" => ['hasMany', Attachment::class, 'owner_id', 'id'],
     ];
 
     // public function media()
@@ -29,6 +29,6 @@ class Zunit_test_5 extends Model
      */
     public function media()
     {
-        return $this->morphMany(Media::class, 'mediable', 'object_type', 'object_id');
+        return $this->morphMany(Attachment::class, 'mediable', 'object_type', 'object_id');
     }
 }

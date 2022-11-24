@@ -3,7 +3,7 @@
 namespace App\Http\Services;
 
 use App\Helpers\Helper;
-use App\Models\Media;
+use App\Models\Attachment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,10 +16,9 @@ class UploadService
 {
     public function store($request)
     {
-
         $cateIdName = [];
         try {
-            $cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
+            $cateAttachment = DB::table('attachment_categories')->select('id', 'name')->get();
             foreach ($cateAttachment as $key => $value) {
                 $cateIdName[$value->name] = $value->id;
             }
@@ -31,7 +30,7 @@ class UploadService
                 array_push($nameControls, $key);
                 try {
                     foreach ($files as $file) {
-                        $fileName = Helper::customizeSlugData($file, 'media', $tempMedia);
+                        $fileName = Helper::customizeSlugData($file, 'attachments', $tempMedia);
 
                         $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
                         $fileNameNormal = pathinfo($fileName, PATHINFO_FILENAME);
@@ -72,7 +71,7 @@ class UploadService
             $flip_cateIdName = array_flip($cateIdName);
             foreach ($tempMedia as $key => $media) {
                 // dd($tempMedia);
-                $newMedia = Media::create($media);
+                $newMedia = Attachment::create($media);
                 $colNameMedia[$newMedia['id']] = $flip_cateIdName[$media['category']];   // [id-media = "attachment-name"]
             }
 

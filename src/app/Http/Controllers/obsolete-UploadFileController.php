@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Media;
+use App\Models\Attachment;
 use App\Models\User;
 use App\Utils\System\GetSetCookie;
 use Carbon\Carbon;
@@ -24,7 +24,7 @@ class UploadFileController extends Controller
      */
     public function index()
     {
-        $files = Media::all();
+        $files = Attachment::all();
         $path = env('AWS_ENDPOINT', 'http://127.0.0.1:9000') . '/' . env('AWS_BUCKET', 'hello-001') . '/';
         //dd(Storage::disk('s3')->temporaryUrl($files[0]->url_thumbnail, now()->addMinutes(5)));
         return view('uploadfiles.index')->with(compact('files', 'path'));
@@ -65,7 +65,7 @@ class UploadFileController extends Controller
                     $path_thumbnail = $path . $fileNameThumbnail;
                     Storage::disk('s3')->put($path_thumbnail, $resource->__toString(), 'public');
                 }
-                Media::create([
+                Attachment::create([
                     'filename' => basename($path_image),
                     'url_folder' => $path,
                     'url_media' => $path_image,
@@ -122,7 +122,7 @@ class UploadFileController extends Controller
      */
     public function destroy($id)
     {
-        $file = Media::find($id);
+        $file = Attachment::find($id);
         Storage::cloud()->delete($file->url_media);
         Storage::cloud()->delete($file->url_thumbnail);
         Storage::cloud()->delete($file->url_folder);
@@ -133,7 +133,7 @@ class UploadFileController extends Controller
 
     public function download($id)
     {
-        $attachment = Media::find($id);
+        $attachment = Attachment::find($id);
         $extension = explode('.', $attachment->filename);
         $headers = [
             'Content-Type'        => 'application/' . $extension[1],

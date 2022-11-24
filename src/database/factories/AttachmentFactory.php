@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Media>
  */
-class MediaFactory extends Factory
+class AttachmentFactory extends Factory
 {
     /**
      * Define the model's default state.

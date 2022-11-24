@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Media;
+use App\Models\Attachment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class MediaSeeder extends Seeder
+class AttachmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class MediaSeeder extends Seeder
      */
     public function run()
     {
-        Media::factory()
+        Attachment::factory()
             ->count(50)
             ->create();
     }

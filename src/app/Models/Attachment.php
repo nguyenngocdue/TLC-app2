@@ -8,19 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Illuminate\Notifications\Notifiable;
 
-
-class Media extends Model
+class Attachment extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["url_folder", "url_thumbnail", "extension", "url_media", "filename", "category", "owner_id"];
     protected $primaryKey = 'id';
-    protected $table = 'media';
+    protected $table = 'attachments';
     // protected $with = [
     //     'user',
     // ];
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],
-        "category1" => ['belongsTo', Media_category::class, 'category'],
+        "category1" => ['belongsTo', Attachment_category::class, 'category'],
     ];
 
     public function user()

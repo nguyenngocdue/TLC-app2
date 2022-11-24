@@ -74,7 +74,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     // }
 
     public $eloquentParams = [
-        "media" => ['hasMany', Media::class, 'owner_id', 'id'],
+        "media" => ['hasMany', Attachment::class, 'owner_id', 'id'],
         "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
         "getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
         "userTypes" => ['belongsTo', User_type::class, 'user_type'],
@@ -96,7 +96,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     // }
     public function media()
     {
-        return $this->morphMany(Media::class, 'mediable', 'object_type', 'object_id');
+        return $this->morphMany(Attachment::class, 'mediable', 'object_type', 'object_id');
     }
 
     public function posts()
