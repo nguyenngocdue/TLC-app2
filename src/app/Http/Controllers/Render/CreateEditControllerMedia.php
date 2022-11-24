@@ -32,7 +32,7 @@ trait CreateEditControllerMedia
         $uploadedIdColumnNames = json_decode(DB::table('attachments')->where([['owner_id', '=', $owner_id], ['object_id', '=', null], ['object_type', '=', null]])->select('id', 'category')->get(), true);
         $ids_idCates_media =  array_column($uploadedIdColumnNames, 'category', 'id');
 
-        $media_cateTb = json_decode(DB::table('media_categories')->select('id', 'name')->get(), true);
+        $media_cateTb = json_decode(DB::table('attachment_categories')->select('id', 'name')->get(), true);
         $ids_names_mediaCateTb = array_column($media_cateTb, 'name', 'id');
 
         if (!is_null($data) && (!is_null($uploadedIdColumnNames)) && count($uploadedIdColumnNames) > 0) {
@@ -48,7 +48,7 @@ trait CreateEditControllerMedia
 
     private function deleteMediaIfNeeded($dataInput)
     {
-        $cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
+        $cateAttachment = DB::table('attachment_categories')->select('id', 'name')->get();
         $keyMediaDel = [];
         foreach ($cateAttachment as $value) {
             if (isset($dataInput[$value->name . "_deleted"])) {

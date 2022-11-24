@@ -21,7 +21,7 @@ class Uploadfiles extends Component
         $id = $this->id;
         $owner_id =  (int)Auth::user()->id;
 
-        $media_cateTb = json_decode(DB::table('media_categories')->select('id', 'name')->get(), true);
+        $media_cateTb = json_decode(DB::table('attachment_categories')->select('id', 'name')->get(), true);
         $ids_names_media_cateTb = array_combine((array_column($media_cateTb, 'id')), (array_column($media_cateTb, 'name')));
 
         $mediaDB = json_decode(DB::table('attachments')->where([['owner_id', '=',  $owner_id], ['object_id', '!=', null], ['object_type', '!=', null]])->select('id', 'category', 'object_id')->get(), true);

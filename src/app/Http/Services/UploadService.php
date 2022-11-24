@@ -18,7 +18,7 @@ class UploadService
     {
         $cateIdName = [];
         try {
-            $cateAttachment = DB::table('media_categories')->select('id', 'name')->get();
+            $cateAttachment = DB::table('attachment_categories')->select('id', 'name')->get();
             foreach ($cateAttachment as $key => $value) {
                 $cateIdName[$value->name] = $value->id;
             }

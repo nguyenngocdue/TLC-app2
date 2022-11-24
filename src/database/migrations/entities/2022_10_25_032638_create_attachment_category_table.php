@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('media_categories', function (Blueprint $table) {
+        Schema::create('attachment_categories', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->text('description');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('media_categories');
+        Schema::dropIfExists('attachment_categories');
     }
 };

@@ -19,7 +19,7 @@ class Attachment extends Model
     // ];
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],
-        "category1" => ['belongsTo', Media_category::class, 'category'],
+        "category1" => ['belongsTo', Attachment_category::class, 'category'],
     ];
 
     public function user()

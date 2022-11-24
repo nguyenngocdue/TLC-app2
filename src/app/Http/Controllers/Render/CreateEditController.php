@@ -175,7 +175,7 @@ abstract class CreateEditController extends Controller
 	public function updateIdsMediaToFieldsDB($data, $colNamehasAttachment)
 	{
 		$dbMorphManyMedia = json_decode($data->media()->select('id', 'category')->get(), true);
-		$media_cateTb = json_decode(DB::table('media_categories')->select('id', 'name')->get(), true);
+		$media_cateTb = json_decode(DB::table('attachment_categories')->select('id', 'name')->get(), true);
 		$ids_names_cateMedia = array_column($media_cateTb, 'name', 'id');
 		$ids_names_cateTb = array_column($dbMorphManyMedia, 'category', 'id');
 
