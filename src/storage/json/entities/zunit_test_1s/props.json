@@ -10,8 +10,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_text1": {
         "name": "_text1",
@@ -24,8 +23,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_text2": {
         "name": "_text2",
@@ -38,8 +36,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": "all-concat_name_with_123"
     },
     "_text3": {
         "name": "_text3",
@@ -52,8 +49,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_dropdown1": {
         "name": "_dropdown1",
@@ -66,8 +62,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_radio1": {
         "name": "_radio1",
@@ -80,8 +75,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_boolean1": {
         "name": "_boolean1",
@@ -94,8 +88,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -108,8 +101,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -122,8 +114,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_workplaceRel1": {
         "name": "_workplaceRel1",
@@ -136,8 +127,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     },
     "_workplaceRel2": {
         "name": "_workplaceRel2",
@@ -150,7 +140,6 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formular": ""
     }
 }

@@ -140,11 +140,20 @@ class Helper
         }
         return $originaleArray;
     }
-    public static function getColNamesbyCondition($props, $nameCotrol, $nameType = "", $valnameControl = "", $valNameType = "")
+    public static function getColNamesbyCondition($props, $nameCotrol, $nameType = "column_type", $valnameControl = "", $valNameType = "", $typeCheck = 'type1')
     {
-        $colNamebyControls = array_filter($props, fn ($prop) => $prop[$nameCotrol] === $valnameControl && $prop[$nameType] === $valNameType);
-        $colNamebyControls = array_values(array_map(fn ($item) => $item['column_name'], $colNamebyControls));
-        return $colNamebyControls;
+        switch ($typeCheck) {
+            case ('type1'): {
+                    $type = array_filter($props, fn ($prop) => $prop[$nameCotrol] === $valnameControl && $prop[$nameType] === $valNameType);
+                    $colNamebyControls = array_values(array_map(fn ($item) => $item['column_name'], $type));
+                    return $colNamebyControls;
+                }
+            case ('type2'): {
+                    $type = array_filter($props, fn ($prop) => $prop[$nameCotrol] != '');
+                    $colNamebyControls = array_values(array_map(fn ($item) => $item, $type));
+                    return $colNamebyControls;
+                }
+        }
     }
     public static function getMaxName($objNames, $fileName)
     {
