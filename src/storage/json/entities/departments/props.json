@@ -36,7 +36,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formular": ""
+        "formular": "all-concat_name_with_123"
     },
     "_head_of_department": {
         "name": "_head_of_department",
@@ -62,7 +62,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "formular": "*.slugify_by_name"
+        "formular": "all-slugify_by_name"
     },
     "_created_at": {
         "name": "_created_at",
