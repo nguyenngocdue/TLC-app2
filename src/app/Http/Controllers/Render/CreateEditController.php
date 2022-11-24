@@ -79,8 +79,6 @@ abstract class CreateEditController extends Controller
 		$dataInput = $request->except($arrayExcept);
 		$type = Str::plural($this->type);
 
-
-
 		$idsMediaDeleted = $this->deleteMediaIfNeeded($dataInput);
 
 		$hasAttachment = $this->saveMediaValidator('store', $request, $dataInput, null, $idsMediaDeleted);

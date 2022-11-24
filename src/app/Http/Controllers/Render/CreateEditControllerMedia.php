@@ -38,8 +38,8 @@ trait CreateEditControllerMedia
         if (!is_null($data) && (!is_null($uploadedIdColumnNames)) && count($uploadedIdColumnNames) > 0) {
             foreach ($ids_idCates_media as $key => $value) {
                 if (in_array($ids_names_mediaCateTb[$value], $colNamehasAttachment)) {
-                    if (!is_null(Attachment::find($key))) {
-                        $data->media()->save(Attachment::find($key));
+                    if (!is_null($db = Attachment::find($key))) {
+                        $data->media()->save($db);
                     }
                 }
             }
