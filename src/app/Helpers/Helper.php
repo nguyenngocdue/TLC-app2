@@ -103,7 +103,7 @@ class Helper
         return [$strName => 0];
     }
 
-    public static function getMaxNumberMediaName($data, $fileName, $extensionFile)
+    public static function getMaxNumberMediaName($data, $fileName, $extensionFile = '')
     {
         $idx = Helper::indexCharacterInString('.', $fileName);
         $fname = substr($fileName, 0,  $idx);
@@ -140,7 +140,7 @@ class Helper
         }
         return $originaleArray;
     }
-    public static function getColNamesbyCondition($props, $nameCotrol, $nameType = "column_type", $valnameControl = "", $valNameType = "", $typeCheck = 'type1')
+    public static function getColNamesbyConditions($props, $nameCotrol, $nameType = "column_type", $valnameControl = "", $valNameType = "", $typeCheck = 'type1')
     {
         switch ($typeCheck) {
             case ('type1'): {
@@ -167,5 +167,57 @@ class Helper
             }
         }
         return $_fileName;
+    }
+
+    public static function getTheSameNamesInDB($dataDBbySlug, $name)
+    {
+        $arrayNames = [];
+        $index = Helper::indexCharacterInString('-', $name);
+        $nameInput = $name;
+        if ($index) {
+            $nameInput = substr($name, 0,  $index);
+        }
+
+        foreach ($dataDBbySlug as $name) {
+            if (str_contains($name, $nameInput)) {
+                $nameExtend = substr($name, strlen($nameInput) + 1, strlen($name) - strlen($nameInput));
+                if ($index && $nameExtend === '') {
+                    $arrayNames[] = $name;
+                }
+                if (is_numeric($nameExtend)) {
+                    $arrayNames[] = $name;
+                }
+            }
+        }
+        return $arrayNames;
+    }
+
+    public static function getMaxNumberName($similarNames, $nameInput)
+    {
+        $maxNumber = 0;
+        $index = Helper::indexCharacterInString('-', $nameInput);
+        foreach ($similarNames as $name) {
+            $_maxNumber = (int)substr($name,  $index >= 0 ? $index + 1 : strlen($nameInput) + 1, strlen($name) - $index);
+            if ($_maxNumber > $maxNumber) {
+                $maxNumber = $_maxNumber;
+            }
+        }
+        // dd(substr($nameInput, 0, $index), $maxNumber);
+        if ($index < 0) return  [$nameInput => $maxNumber];
+        return [substr($nameInput, 0, $index) => $maxNumber];
+    }
+
+    public static function slugNameToSaveDB($nameInput, $dataDBbyName)
+    {
+        if (!in_array($nameInput, $dataDBbyName)) {
+            return ['slug' => $nameInput];
+        };
+        $similarNames =  Helper::getTheSameNamesInDB($dataDBbyName, $nameInput);
+
+        if ($similarNames) {
+            $nanme_maxId =  Helper::getMaxNumberName($similarNames, $nameInput);
+            $newNameArray = ['slug' => array_keys($nanme_maxId)[0] . '-' . array_values($nanme_maxId)[0] + 1];
+            return $newNameArray;
+        }
     }
 }

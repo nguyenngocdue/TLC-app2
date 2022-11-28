@@ -91,8 +91,8 @@ abstract class ManagePropController extends Controller
                 "renderer" => "dropdown",
                 "cbbDataSource" => [
                     '',
-                    'all-concat_name_with_123',
-                    'all-slugify_by_name',
+                    'All_ConcatNameWith123',
+                    'All_SlugifyByName',
                     'user-position_rendered',
                     '(not-yet)wir-name_rendered',
                     '(not-yet)format_production',

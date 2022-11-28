@@ -4,16 +4,16 @@ namespace App\View\Components\Formular;
 
 use App\Helpers\Helper;
 
-class Allconcat_name_with_123
+class All_ConcatNameWith123
 {
-    public static function Allconcat_name_with_123($event)
+    public static function All_ConcatNameWith123($event)
     {
         $instanceDB = $event->dataEvent[0];
         $dataDB = $instanceDB->getAttributes();
+        if (!isset($dataDB['name'])) return false;
         $props = $event->dataEvent[1];
 
-
-        $colNamehasFormular = Helper::getColNamesbyCondition($props, 'formular', null, null, null, 'type2');
+        $colNamehasFormular = Helper::getColNamesbyConditions($props, 'formular', null, null, null, 'type2');
         // dd($colNamehasFormular);
 
         $text = "123";
@@ -22,8 +22,7 @@ class Allconcat_name_with_123
         $newDataInput = [];
         foreach ($colNamehasFormular as $value) {
             if ($value['formular'] === 'all-concat_name_with_123') {
-                $formularName = $valNameField . $text;
-                $newDataInput[$value['column_name']] = $formularName;
+                $newDataInput[$value['column_name']] = $valNameField . $text;
             }
         }
         $newDataInput = array_replace($dataDB, $newDataInput);
