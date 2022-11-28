@@ -21,7 +21,7 @@ class All_ConcatNameWith123
 
         $newDataInput = [];
         foreach ($colNamehasFormular as $value) {
-            if ($value['formular'] === 'all-concat_name_with_123') {
+            if ($value['formular'] === 'All_ConcatNameWith123') {
                 $newDataInput[$value['column_name']] = $valNameField . $text;
             }
         }
