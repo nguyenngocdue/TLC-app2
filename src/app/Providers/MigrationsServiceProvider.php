@@ -24,12 +24,15 @@ class MigrationsServiceProvider extends ServiceProvider
     public function boot()
     {
         $path = "database/migrations/";
-        $this->loadMigrationsFrom($path . "thirdparties");
-        $this->loadMigrationsFrom($path . "entities");
-        $this->loadMigrationsFrom($path . "production");
-        $this->loadMigrationsFrom($path . "unittests");
+        $this->loadMigrationsFrom($path . "thirdParties");
+        $this->loadMigrationsFrom($path . "unitTests");
+
+        $this->loadMigrationsFrom($path . "entities/global");
+        $this->loadMigrationsFrom($path . "entities/user");
+        $this->loadMigrationsFrom($path . "entities/production");
+        $this->loadMigrationsFrom($path . "entities/qaqc");
 
         $this->loadMigrationsFrom($path . "pivots");
-        // $this->loadMigrationsFrom($path . "foreignkeys");
+        // $this->loadMigrationsFrom($path . "foreignKeys");
     }
 }
