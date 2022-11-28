@@ -36,7 +36,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formular": "all-concat_name_with_123"
+        "formular": "All_ConcatNameWith123"
     },
     "_head_of_department": {
         "name": "_head_of_department",
@@ -61,8 +61,8 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "required",
-        "formular": "all-slugify_by_name"
+        "validation": "",
+        "formular": "All_SlugifyByName"
     },
     "_created_at": {
         "name": "_created_at",

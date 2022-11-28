@@ -74,8 +74,8 @@ abstract class CreateEditController extends Controller
 	{
 
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$colNamehasAttachment = Helper::getColNamesbyCondition($props, 'control', 'column_type', 'attachment', 'string', 'type1');
-		$colNamehasTextarea = Helper::getColNamesbyCondition($props, 'control', 'column_type', 'textarea', 'json', 'type1');
+		$colNamehasAttachment = Helper::getColNamesbyConditions($props, 'control', 'column_type', 'attachment', 'string', 'type1');
+		$colNamehasTextarea = Helper::getColNamesbyConditions($props, 'control', 'column_type', 'textarea', 'json', 'type1');
 
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamehasAttachment);
 		$dataInput = $request->except($arrayExcept);
@@ -120,8 +120,8 @@ abstract class CreateEditController extends Controller
 	{
 
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$colNamehasAttachment = Helper::getColNamesbyCondition($props, 'control', 'column_type', 'attachment', 'string');
-		$colNamehasTextarea = Helper::getColNamesbyCondition($props, 'control', 'column_type', 'textarea', 'json');
+		$colNamehasAttachment = Helper::getColNamesbyConditions($props, 'control', 'column_type', 'attachment', 'string');
+		$colNamehasTextarea = Helper::getColNamesbyConditions($props, 'control', 'column_type', 'textarea', 'json');
 
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamehasAttachment);
 		$dataInput = $request->except($arrayExcept);

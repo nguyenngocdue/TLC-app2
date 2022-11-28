@@ -3,11 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\CreateEventEntity;
-use App\View\Components\Formular\Allconcat_name_with_123;
+use App\View\Components\Formular\All_ConcatNameWith123;
+use App\View\Components\Formular\All_SlugifyByName;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
-class ShouldUpdateFieldsListener
+class ShouldUpdateFieldsListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -27,6 +27,7 @@ class ShouldUpdateFieldsListener
      */
     public function handle(CreateEventEntity $event)
     {
-        Allconcat_name_with_123::Allconcat_name_with_123($event);
+        All_ConcatNameWith123::All_ConcatNameWith123($event);
+        All_SlugifyByName::All_SlugifyByName($event);
     }
 }
