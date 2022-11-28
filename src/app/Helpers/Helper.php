@@ -171,7 +171,7 @@ class Helper
 
     public static function getTheSameNamesInDB($dataDBbySlug, $name)
     {
-        // dd($dataDBbySlug, $nameInput);
+        // dd($dataDBbySlug, $name);
         $index = Helper::indexCharacterInString('-', $name);
         $tailName = substr($name, $index + 1, strlen($name) - $index);
         $nameInput = is_numeric($tailName) ? substr($name, 0, $index) : $name;
@@ -195,6 +195,7 @@ class Helper
 
     public static function getMaxNumberName($similarNames, $nameInput)
     {
+        // dd($similarNames);
         $name_maxNumber = [];
         $maxNumber = 0;
         foreach ($similarNames as $name) {
@@ -202,13 +203,11 @@ class Helper
             $_maxNumber = (int)substr($name,  $index >= 0 ? $index + 1 : strlen($nameInput) + 1, strlen($name) - $index);
             if (is_numeric($_maxNumber) &&  $_maxNumber > $maxNumber) {
                 $name_maxNumber = [substr($name, 0, $index) => $_maxNumber];
-                // dd($maxNumber);
             }
         }
         // dd($name_maxNumber);
-        if (array_values($name_maxNumber)[0] > 0) return  $name_maxNumber;
-        // dd(substr($nameInput, 0, $index));
-        return [$nameInput => $maxNumber];
+        if (!count($name_maxNumber)) return [$nameInput => $maxNumber];
+        return  $name_maxNumber;
     }
 
     public static function slugNameToSaveDB($nameInput, $dataDBbyName)
