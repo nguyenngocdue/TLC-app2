@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Render;
 
-use App\Events\CreateEventEntity;
+use App\Events\EntityCreatedEvent;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
@@ -74,10 +74,10 @@ abstract class CreateEditController extends Controller
 	{
 
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$colNamehasAttachment = Helper::getColNamesbyConditions($props, 'control', 'column_type', 'attachment', 'string', 'type1');
-		$colNamehasTextarea = Helper::getColNamesbyConditions($props, 'control', 'column_type', 'textarea', 'json', 'type1');
+		$colNameHasAttachment = Helper::getColNamesByConditions($props, 'control', 'column_type', 'attachment', 'string', 'type1');
+		$colNameHasTextarea = Helper::getColNamesByConditions($props, 'control', 'column_type', 'textarea', 'json', 'type1');
 
-		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamehasAttachment);
+		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNameHasAttachment);
 		$dataInput = $request->except($arrayExcept);
 		$type = Str::plural($this->type);
 
@@ -88,7 +88,7 @@ abstract class CreateEditController extends Controller
 		$this->_validate($props, $request);
 
 		$newDataInput = $this->handleToggle('store', $props, $dataInput);
-		if (count($colNamehasTextarea) > 0) $newDataInput = $this->modifyValueTextArea($colNamehasTextarea, $newDataInput);
+		if (count($colNameHasTextarea) > 0) $newDataInput = $this->modifyValueTextArea($colNameHasTextarea, $newDataInput);
 
 		$newDataInputHasAttachment = array_filter($newDataInput, fn ($item) => is_array($item));
 		$newDataInputNotAttachment = array_filter($newDataInput, fn ($item) => !is_array($item));
@@ -98,14 +98,14 @@ abstract class CreateEditController extends Controller
 			Notification::send($data, new CreateNewNotification($data->id));
 
 			$_data = $this->data::find($data->id);
-			event(new CreateEventEntity([$_data, $props]));
+			event(new EntityCreatedEvent([$_data, $props]));
 
 			if (isset($data)) {
 
 				$this->syncManyToManyRelationship($data, $newDataInputHasAttachment); // Check box
 				if ($hasAttachment) {
-					$this->setMediaParent($data, $colNamehasAttachment);
-					$this->updateIdsMediaToFieldsDB($_data, $colNamehasAttachment);
+					$this->setMediaParent($data, $colNameHasAttachment);
+					$this->updateIdsMediaToFieldsDB($_data, $colNameHasAttachment);
 				}
 
 				Toastr::success("$this->type created successfully", "Create $this->type");
@@ -120,10 +120,10 @@ abstract class CreateEditController extends Controller
 	{
 
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$colNamehasAttachment = Helper::getColNamesbyConditions($props, 'control', 'column_type', 'attachment', 'string');
-		$colNamehasTextarea = Helper::getColNamesbyConditions($props, 'control', 'column_type', 'textarea', 'json');
+		$colNameHasAttachment = Helper::getColNamesByConditions($props, 'control', 'column_type', 'attachment', 'string');
+		$colNameHasTextarea = Helper::getColNamesByConditions($props, 'control', 'column_type', 'textarea', 'json');
 
-		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamehasAttachment);
+		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNameHasAttachment);
 		$dataInput = $request->except($arrayExcept);
 
 		$type = Str::plural($this->type);
@@ -134,20 +134,20 @@ abstract class CreateEditController extends Controller
 
 
 
-		$hasAttachment = $this->saveMediaValidator('update', $request, $dataInput, $data, $colNamehasAttachment);
+		$hasAttachment = $this->saveMediaValidator('update', $request, $dataInput, $data, $colNameHasAttachment);
 
-		if ($hasAttachment) $this->updateIdsMediaToFieldsDB($data, $colNamehasAttachment);
+		if ($hasAttachment) $this->updateIdsMediaToFieldsDB($data, $colNameHasAttachment);
 
 		$this->_validate($props, $request);
 
 		$newDataInput = $this->handleToggle('update', $props, $dataInput);
 
-		if (count($colNamehasTextarea) > 0) $newDataInput = $this->modifyValueTextArea($colNamehasTextarea, $newDataInput);
+		if (count($colNameHasTextarea) > 0) $newDataInput = $this->modifyValueTextArea($colNameHasTextarea, $newDataInput);
 
 		$data->fill($newDataInput);
 		$data->save();
 
-		event(new CreateEventEntity([$data, $props]));
+		event(new EntityCreatedEvent([$data, $props]));
 
 
 		if ($data->save()) {
@@ -178,7 +178,7 @@ abstract class CreateEditController extends Controller
 
 		return $dataInput;
 	}
-	public function updateIdsMediaToFieldsDB($data, $colNamehasAttachment)
+	public function updateIdsMediaToFieldsDB($data, $colNameHasAttachment)
 	{
 		$dbMorphManyMedia = json_decode($data->media()->select('id', 'category')->get(), true);
 		$media_cateTb = json_decode(DB::table('attachment_categories')->select('id', 'name')->get(), true);
@@ -186,29 +186,29 @@ abstract class CreateEditController extends Controller
 		$ids_names_cateTb = array_column($dbMorphManyMedia, 'category', 'id');
 
 		$idsHasAttachMent = array_values(array_unique($ids_names_cateTb));
-		$names_val_fileds = [];
+		$names_val_fields = [];
 		foreach ($ids_names_cateTb as $key => $value) {
 			foreach ($idsHasAttachMent as $cate) {
 				if ($value === $cate) {
-					$names_val_fileds[$ids_names_cateMedia[$cate]][] = $key;
+					$names_val_fields[$ids_names_cateMedia[$cate]][] = $key;
 					break;
 				}
 			}
 		}
 
-		$valFileds = array_map(fn ($item) => $item = implode(",", $item), $names_val_fileds);
-		foreach ($colNamehasAttachment as $attach) {
-			if (!isset($valFileds[$attach])) {
-				$valFileds[$attach] = null;
+		$valFields = array_map(fn ($item) => $item = implode(",", $item), $names_val_fields);
+		foreach ($colNameHasAttachment as $attach) {
+			if (!isset($valFields[$attach])) {
+				$valFields[$attach] = null;
 			}
 		}
-		$data->fill($valFileds);
+		$data->fill($valFields);
 		$data->save();
 	}
-	public function modifyValueTextArea($colNamehasTextarea, $newDataInput)
+	public function modifyValueTextArea($colNameHasTextarea, $newDataInput)
 	{
 		$newTextAreas = [];
-		foreach ($colNamehasTextarea as $_colName) {
+		foreach ($colNameHasTextarea as $_colName) {
 			$object = $newDataInput[$_colName];
 			$newTextAreas[$_colName] = json_decode(preg_replace("/\r|\n/", "", $object));
 		}

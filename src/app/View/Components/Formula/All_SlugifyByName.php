@@ -16,11 +16,11 @@ class All_SlugifyByName
         if (!isset($dataDB['name']) && !isset($dataDB['slug'])) return false;
 
         $props = $event->dataEvent[1];
-        $colNamehasFormula = Helper::getColNamesbyConditions($props, 'formula', null, null, null, 'type2');
+        $colNameHasFormula = Helper::getColNamesByConditions($props, 'formula', null, null, null, 'type2');
 
         $newNameArray  = [];
         $dataDBbySlug = array_column(json_decode(DB::table($instanceDB->getTable())->where([['id', '!=', $dataDB['id']]])->select('id', 'slug')->get(), true),  'slug', 'id');
-        foreach ($colNamehasFormula as $value) {
+        foreach ($colNameHasFormula as $value) {
             if ($value['formula'] === 'All_SlugifyByName') {
                 $content = is_null($dataDB['slug']) ? Str::slug($dataDB['name']) : Str::slug($dataDB['slug']);
                 $newNameArray = Helper::slugNameToSaveDB($content, $dataDBbySlug);

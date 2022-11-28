@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\CreateEventEntity;
+use App\Events\EntityCreatedEvent;
 use App\Listeners\ShouldUpdateFieldsListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -18,7 +18,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         Registered::class => [SendEmailVerificationNotification::class],
-        CreateEventEntity::class => [ShouldUpdateFieldsListener::class],
+        EntityCreatedEvent::class => [ShouldUpdateFieldsListener::class],
     ];
 
     /**

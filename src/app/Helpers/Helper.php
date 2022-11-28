@@ -133,25 +133,25 @@ class Helper
         }
         return false;
     }
-    public static function removeItemsByKeysArray($originaleArray, $keysArray)
+    public static function removeItemsByKeysArray($originalArray, $keysArray)
     {
         foreach ($keysArray as $value) {
-            unset($originaleArray[$value]);
+            unset($originalArray[$value]);
         }
-        return $originaleArray;
+        return $originalArray;
     }
-    public static function getColNamesbyConditions($props, $nameCotrol, $nameType = "column_type", $valnameControl = "", $valNameType = "", $typeCheck = 'type1')
+    public static function getColNamesByConditions($props, $nameControl, $nameType = "column_type", $valNameControl = "", $valNameType = "", $typeCheck = 'type1')
     {
         switch ($typeCheck) {
             case ('type1'): {
-                    $type = array_filter($props, fn ($prop) => $prop[$nameCotrol] === $valnameControl && $prop[$nameType] === $valNameType);
-                    $colNamebyControls = array_values(array_map(fn ($item) => $item['column_name'], $type));
-                    return $colNamebyControls;
+                    $type = array_filter($props, fn ($prop) => $prop[$nameControl] === $valNameControl && $prop[$nameType] === $valNameType);
+                    $colNameByControls = array_values(array_map(fn ($item) => $item['column_name'], $type));
+                    return $colNameByControls;
                 }
             case ('type2'): {
-                    $type = array_filter($props, fn ($prop) => $prop[$nameCotrol] != '');
-                    $colNamebyControls = array_values(array_map(fn ($item) => $item, $type));
-                    return $colNamebyControls;
+                    $type = array_filter($props, fn ($prop) => $prop[$nameControl] != '');
+                    $colNameByControls = array_values(array_map(fn ($item) => $item, $type));
+                    return $colNameByControls;
                 }
         }
     }
@@ -216,8 +216,8 @@ class Helper
         $similarNames =  Helper::getTheSameNamesInDB($dataDBbyName, $nameInput);
 
         if ($similarNames) {
-            $nanme_maxId =  Helper::getMaxNumberName($similarNames, $nameInput);
-            $newNameArray = ['slug' => array_keys($nanme_maxId)[0] . '-' . array_values($nanme_maxId)[0] + 1];
+            $name_maxId =  Helper::getMaxNumberName($similarNames, $nameInput);
+            $newNameArray = ['slug' => array_keys($name_maxId)[0] . '-' . array_values($name_maxId)[0] + 1];
             return $newNameArray;
         }
     }

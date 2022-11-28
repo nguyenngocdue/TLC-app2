@@ -13,14 +13,14 @@ class All_ConcatNameWith123
         if (!isset($dataDB['name'])) return false;
         $props = $event->dataEvent[1];
 
-        $colNamehasFormula = Helper::getColNamesbyConditions($props, 'formula', null, null, null, 'type2');
-        // dd($colNamehasFormula);
+        $colNameHasFormula = Helper::getColNamesByConditions($props, 'formula', null, null, null, 'type2');
+        // dd($colNameHasFormula);
 
         $text = "123";
         $valNameField = $dataDB['name'];
 
         $newDataInput = [];
-        foreach ($colNamehasFormula as $value) {
+        foreach ($colNameHasFormula as $value) {
             if ($value['formula'] === 'All_ConcatNameWith123') {
                 $newDataInput[$value['column_name']] = $valNameField . $text;
             }
