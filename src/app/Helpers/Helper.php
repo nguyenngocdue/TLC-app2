@@ -171,39 +171,40 @@ class Helper
 
     public static function getTheSameNamesInDB($dataDBbySlug, $name)
     {
-        $arrayNames = [];
+        // dd($dataDBbySlug, $nameInput);
         $index = Helper::indexCharacterInString('-', $name);
-        $nameInput = $name;
-        if ($index) {
-            $nameInput = substr($name, 0,  $index);
-        }
+        $tailName = substr($name, $index + 1, strlen($name) - $index);
+        $nameInput = is_numeric($tailName) ? substr($name, 0, $index) : $name;
+        // dd($nameInput, $tailName);
 
-        foreach ($dataDBbySlug as $name) {
-            if (str_contains($name, $nameInput)) {
-                $nameExtend = substr($name, strlen($nameInput) + 1, strlen($name) - strlen($nameInput));
-                if ($index && $nameExtend === '') {
-                    $arrayNames[] = $name;
+        $arrayNames = [];
+        foreach ($dataDBbySlug as $valName) {
+            if (str_contains($valName, $nameInput)) {
+                $nameExtend = substr($valName, strlen($nameInput) + 1, strlen($valName) - strlen($nameInput));
+                if ($nameExtend === '') {
+                    $arrayNames[] = $valName;
                 }
                 if (is_numeric($nameExtend)) {
-                    $arrayNames[] = $name;
+                    $arrayNames[] = $valName;
                 }
             }
         }
+        // dd($arrayNames);
         return $arrayNames;
     }
 
     public static function getMaxNumberName($similarNames, $nameInput)
     {
         $maxNumber = 0;
-        $index = Helper::indexCharacterInString('-', $nameInput);
         foreach ($similarNames as $name) {
+            $index = Helper::indexCharacterInString('-', $name);
             $_maxNumber = (int)substr($name,  $index >= 0 ? $index + 1 : strlen($nameInput) + 1, strlen($name) - $index);
-            if ($_maxNumber > $maxNumber) {
+            if (is_numeric($_maxNumber) &&  $_maxNumber > $maxNumber) {
                 $maxNumber = $_maxNumber;
             }
         }
-        // dd(substr($nameInput, 0, $index), $maxNumber);
-        if ($index < 0) return  [$nameInput => $maxNumber];
+        // dd($maxNumber, $similarNames);
+        if (!$maxNumber) return  [$nameInput => $maxNumber];
         return [substr($nameInput, 0, $index) => $maxNumber];
     }
 
@@ -216,6 +217,7 @@ class Helper
 
         if ($similarNames) {
             $nanme_maxId =  Helper::getMaxNumberName($similarNames, $nameInput);
+            // dd($nanme_maxId);
             $newNameArray = ['slug' => array_keys($nanme_maxId)[0] . '-' . array_values($nanme_maxId)[0] + 1];
             return $newNameArray;
         }

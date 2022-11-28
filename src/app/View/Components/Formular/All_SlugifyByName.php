@@ -4,6 +4,8 @@ namespace App\View\Components\Formular;
 
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 class All_SlugifyByName
 {
@@ -20,7 +22,8 @@ class All_SlugifyByName
         $dataDBbySlug = array_column(json_decode(DB::table($instanceDB->getTable())->where([['id', '!=', $dataDB['id']]])->select('id', 'slug')->get(), true),  'slug', 'id');
         foreach ($colNamehasFormular as $value) {
             if ($value['formular'] === 'All_SlugifyByName') {
-                $newNameArray = is_null($dataDB['slug']) ? Helper::slugNameToSaveDB($dataDB['name'], $dataDBbySlug) : Helper::slugNameToSaveDB($dataDB['slug'], $dataDBbySlug);
+                $content = is_null($dataDB['slug']) ? Str::slug($dataDB['name']) : Str::slug($dataDB['slug']);
+                $newNameArray = Helper::slugNameToSaveDB($content, $dataDBbySlug);
             }
         }
 
