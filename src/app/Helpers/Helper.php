@@ -203,8 +203,8 @@ class Helper
                 $maxNumber = $_maxNumber;
             }
         }
-        // dd($maxNumber, $similarNames);
-        if (!$maxNumber) return  [$nameInput => $maxNumber];
+        // dd($maxNumber, $similarNames, $nameInput);
+        if ($maxNumber > 0) return  [$nameInput => $maxNumber];
         return [substr($nameInput, 0, $index) => $maxNumber];
     }
 
