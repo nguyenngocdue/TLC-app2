@@ -195,17 +195,20 @@ class Helper
 
     public static function getMaxNumberName($similarNames, $nameInput)
     {
+        $name_maxNumber = [];
         $maxNumber = 0;
         foreach ($similarNames as $name) {
             $index = Helper::indexCharacterInString('-', $name);
             $_maxNumber = (int)substr($name,  $index >= 0 ? $index + 1 : strlen($nameInput) + 1, strlen($name) - $index);
             if (is_numeric($_maxNumber) &&  $_maxNumber > $maxNumber) {
-                $maxNumber = $_maxNumber;
+                $name_maxNumber = [substr($name, 0, $index) => $_maxNumber];
+                // dd($maxNumber);
             }
         }
-        // dd($maxNumber, $similarNames, $nameInput);
-        if ($maxNumber > 0) return  [$nameInput => $maxNumber];
-        return [substr($nameInput, 0, $index) => $maxNumber];
+        // dd($name_maxNumber);
+        if (array_values($name_maxNumber)[0] > 0) return  $name_maxNumber;
+        // dd(substr($nameInput, 0, $index));
+        return [$nameInput => $maxNumber];
     }
 
     public static function slugNameToSaveDB($nameInput, $dataDBbyName)
