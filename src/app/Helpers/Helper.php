@@ -195,7 +195,6 @@ class Helper
 
     public static function getMaxNumberName($similarNames, $nameInput)
     {
-        // dd($similarNames);
         $name_maxNumber = [];
         $maxNumber = 0;
         foreach ($similarNames as $name) {
@@ -205,7 +204,6 @@ class Helper
                 $name_maxNumber = [substr($name, 0, $index) => $_maxNumber];
             }
         }
-        // dd($name_maxNumber);
         if (!count($name_maxNumber)) return [$nameInput => $maxNumber];
         return  $name_maxNumber;
     }
@@ -219,7 +217,6 @@ class Helper
 
         if ($similarNames) {
             $nanme_maxId =  Helper::getMaxNumberName($similarNames, $nameInput);
-            // dd($nanme_maxId);
             $newNameArray = ['slug' => array_keys($nanme_maxId)[0] . '-' . array_values($nanme_maxId)[0] + 1];
             return $newNameArray;
         }

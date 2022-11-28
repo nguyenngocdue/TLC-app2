@@ -86,7 +86,7 @@ abstract class ManagePropController extends Controller
                 "renderer" => "text",
             ],
             [
-                "dataIndex" => "formular",
+                "dataIndex" => "formula",
                 "editable" => true,
                 "renderer" => "dropdown",
                 "cbbDataSource" => [

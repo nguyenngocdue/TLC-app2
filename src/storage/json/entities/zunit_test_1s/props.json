@@ -10,7 +10,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formular": ""
+        "formula": ""
     },
     "_text1": {
         "name": "_text1",
@@ -23,7 +23,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formular": ""
+        "formula": ""
     },
     "_text2": {
         "name": "_text2",
@@ -36,7 +36,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formular": "all-concat_name_with_123"
+        "formula": "All_ConcatNameWith123"
     },
     "_text3": {
         "name": "_text3",
@@ -49,7 +49,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formular": ""
+        "formula": ""
     },
     "_dropdown1": {
         "name": "_dropdown1",
@@ -62,7 +62,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formular": ""
+        "formula": ""
     },
     "_radio1": {
         "name": "_radio1",
@@ -75,7 +75,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "formular": ""
+        "formula": ""
     },
     "_boolean1": {
         "name": "_boolean1",
@@ -88,7 +88,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formular": ""
+        "formula": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -101,7 +101,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formular": ""
+        "formula": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -114,7 +114,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formular": ""
+        "formula": ""
     },
     "_workplaceRel1": {
         "name": "_workplaceRel1",
@@ -127,7 +127,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "formular": ""
+        "formula": ""
     },
     "_workplaceRel2": {
         "name": "_workplaceRel2",
@@ -140,6 +140,6 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "formular": ""
+        "formula": ""
     }
 }

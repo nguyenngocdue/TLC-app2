@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Formular;
+namespace App\View\Components\Formula;
 
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\DB;
@@ -16,12 +16,12 @@ class All_SlugifyByName
         if (!isset($dataDB['name']) && !isset($dataDB['slug'])) return false;
 
         $props = $event->dataEvent[1];
-        $colNamehasFormular = Helper::getColNamesbyConditions($props, 'formular', null, null, null, 'type2');
+        $colNamehasFormula = Helper::getColNamesbyConditions($props, 'formula', null, null, null, 'type2');
 
         $newNameArray  = [];
         $dataDBbySlug = array_column(json_decode(DB::table($instanceDB->getTable())->where([['id', '!=', $dataDB['id']]])->select('id', 'slug')->get(), true),  'slug', 'id');
-        foreach ($colNamehasFormular as $value) {
-            if ($value['formular'] === 'All_SlugifyByName') {
+        foreach ($colNamehasFormula as $value) {
+            if ($value['formula'] === 'All_SlugifyByName') {
                 $content = is_null($dataDB['slug']) ? Str::slug($dataDB['name']) : Str::slug($dataDB['slug']);
                 $newNameArray = Helper::slugNameToSaveDB($content, $dataDBbySlug);
             }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Formular;
+namespace App\View\Components\Formula;
 
 use App\Helpers\Helper;
 
@@ -13,15 +13,15 @@ class All_ConcatNameWith123
         if (!isset($dataDB['name'])) return false;
         $props = $event->dataEvent[1];
 
-        $colNamehasFormular = Helper::getColNamesbyConditions($props, 'formular', null, null, null, 'type2');
-        // dd($colNamehasFormular);
+        $colNamehasFormula = Helper::getColNamesbyConditions($props, 'formula', null, null, null, 'type2');
+        // dd($colNamehasFormula);
 
         $text = "123";
         $valNameField = $dataDB['name'];
 
         $newDataInput = [];
-        foreach ($colNamehasFormular as $value) {
-            if ($value['formular'] === 'All_ConcatNameWith123') {
+        foreach ($colNamehasFormula as $value) {
+            if ($value['formula'] === 'All_ConcatNameWith123') {
                 $newDataInput[$value['column_name']] = $valNameField . $text;
             }
         }
