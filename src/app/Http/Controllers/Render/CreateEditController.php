@@ -100,7 +100,8 @@ abstract class CreateEditController extends Controller
 			Notification::send($data, new CreateNewNotification($data->id));
 
 			$_data = $this->data::find($data->id);
-			event(new EntityCreatedEvent([$_data, $props]));
+			event(new EntityCreatedEvent(['id' => $data->id, 'type' => $this->type]));
+			// event(new EntityCreatedEvent([$_data, $props]));
 
 			if (isset($data)) {
 
@@ -151,7 +152,8 @@ abstract class CreateEditController extends Controller
 		$data->fill($newDataInput);
 		$data->save();
 
-		event(new EntityCreatedEvent([$data, $props]));
+		event(new EntityCreatedEvent(['id' => $data->id, 'type' => $this->type]));
+		// event(new EntityCreatedEvent([$data, $props]));
 
 
 		if ($data->save()) {

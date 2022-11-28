@@ -27,7 +27,7 @@ class ShouldUpdateFieldsListener implements ShouldQueue
      */
     public function handle(EntityCreatedEvent $event)
     {
-        All_ConcatNameWith123::All_ConcatNameWith123($event);
-        All_SlugifyByName::All_SlugifyByName($event);
+        // All_ConcatNameWith123::All_ConcatNameWith123($event);
+        // All_SlugifyByName::All_SlugifyByName($event);
     }
 }
