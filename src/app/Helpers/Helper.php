@@ -140,21 +140,20 @@ class Helper
         }
         return $originalArray;
     }
-    public static function getColNamesByConditions($props, $nameControl, $nameType = "column_type", $valNameControl = "", $valNameType = "", $typeCheck = 'type1')
+    public static function getColNamesByControlAndColumnType($props, $control, $columnType)
     {
-        switch ($typeCheck) {
-            case ('type1'): {
-                    $type = array_filter($props, fn ($prop) => $prop[$nameControl] === $valNameControl && $prop[$nameType] === $valNameType);
-                    $colNameByControls = array_values(array_map(fn ($item) => $item['column_name'], $type));
-                    return $colNameByControls;
-                }
-            case ('type2'): {
-                    $type = array_filter($props, fn ($prop) => $prop[$nameControl] != '');
-                    $colNameByControls = array_values(array_map(fn ($item) => $item, $type));
-                    return $colNameByControls;
-                }
-        }
+        $props = array_filter($props, fn ($prop) => $prop['control'] === $control && $prop['column_type'] === $columnType);
+        $colNameByControls = array_values(array_map(fn ($item) => $item['column_name'], $props));
+        return $colNameByControls;
     }
+
+    public static function getColNamesValueNotEmpty($props, $controlName)
+    {
+        $props = array_filter($props, fn ($prop) => $prop[$controlName] != '');
+        $colNameByControls = array_values(array_map(fn ($item) => $item, $props));
+        return $colNameByControls;
+    }
+
     public static function getMaxName($objNames, $fileName)
     {
         $_fileName = $fileName;

@@ -74,8 +74,10 @@ abstract class CreateEditController extends Controller
 	{
 
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$colNameHasAttachment = Helper::getColNamesByConditions($props, 'control', 'column_type', 'attachment', 'string', 'type1');
-		$colNameHasTextarea = Helper::getColNamesByConditions($props, 'control', 'column_type', 'textarea', 'json', 'type1');
+		// $colNameHasAttachment = Helper::getColNamesByConditions($props, 'control', 'column_type', 'attachment', 'string', 'type1');
+		// $colNameHasTextarea = Helper::getColNamesByConditions($props, 'control', 'column_type', 'textarea', 'json', 'type1');
+		$colNameHasAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
+		$colNameHasTextarea  = Helper::getColNamesByControlAndColumnType($props, 'textarea', 'json');
 
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNameHasAttachment);
 		$dataInput = $request->except($arrayExcept);
@@ -120,8 +122,10 @@ abstract class CreateEditController extends Controller
 	{
 
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$colNameHasAttachment = Helper::getColNamesByConditions($props, 'control', 'column_type', 'attachment', 'string');
-		$colNameHasTextarea = Helper::getColNamesByConditions($props, 'control', 'column_type', 'textarea', 'json');
+		// $colNameHasAttachment = Helper::getColNamesByConditions($props, 'control', 'column_type', 'attachment', 'string');
+		// $colNameHasTextarea = Helper::getColNamesByConditions($props, 'control', 'column_type', 'textarea', 'json');
+		$colNameHasAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
+		$colNameHasTextarea  = Helper::getColNamesByControlAndColumnType($props, 'textarea', 'json');
 
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNameHasAttachment);
 		$dataInput = $request->except($arrayExcept);
