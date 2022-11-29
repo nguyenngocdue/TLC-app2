@@ -8,7 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
 use App\Notifications\CreateNewNotification;
+use App\Notifications\EditNotification;
 use Brian2694\Toastr\Facades\Toastr;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -36,7 +38,6 @@ abstract class CreateEditController extends Controller
 
 	public function create()
 	{
-		// session([Constant::ORPHAN_MEDIA => []]);
 		$action = $this->action;
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
 
@@ -70,94 +71,88 @@ abstract class CreateEditController extends Controller
 
 	public function store(Request $request)
 	{
-
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$colNameHasAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
-		$colNameHasTextarea  = Helper::getColNamesByControlAndColumnType($props, 'textarea', 'json');
 
-		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNameHasAttachment);
+		$colNamesHaveAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
+		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamesHaveAttachment);
 		$dataInput = $request->except($arrayExcept);
-		$type = Str::plural($this->type);
 
-		$idsMediaDeleted = $this->deleteMediaIfNeeded($dataInput);
-
-		$hasAttachment = $this->saveMediaValidator('store', $request, $dataInput, null, $idsMediaDeleted);
+		$deletedMediaIds = $this->deleteMediaIfNeeded($dataInput);
+		$hasAttachment = $this->saveMedia('store', $request, $dataInput, null, $deletedMediaIds);
 
 		$this->_validate($props, $request);
 
 		$newDataInput = $this->handleToggle('store', $props, $dataInput);
-		if (count($colNameHasTextarea) > 0) $newDataInput = $this->modifyValueTextArea($colNameHasTextarea, $newDataInput);
+		$newDataInput = $this->handleTextArea($props, $newDataInput);
 
 		$newDataInputHasAttachment = array_filter($newDataInput, fn ($item) => is_array($item));
 		$newDataInputNotAttachment = array_filter($newDataInput, fn ($item) => !is_array($item));
 
 		try {
-
-
-
 			$data = $this->data::create($newDataInputNotAttachment);
+			$_data = $this->data::find($data->id);
+
+			event(new EntityCreatedEvent(['id' => $data->id, 'type' => $this->type]));
 			Notification::send($data, new CreateNewNotification($data->id));
 
-			$_data = $this->data::find($data->id);
-			event(new EntityCreatedEvent(['id' => $data->id, 'type' => $this->type]));
-
 			if (isset($data)) {
-
 				$this->syncManyToManyRelationship($data, $newDataInputHasAttachment); // Check box
+
 				if ($hasAttachment) {
-					$this->setMediaParent($data, $colNameHasAttachment);
-					$this->updateIdsMediaToFieldsDB($_data, $colNameHasAttachment);
+					$this->setMediaParent($data, $colNamesHaveAttachment);
+					$this->updateMediaIdsToDBFields($_data, $colNamesHaveAttachment);
 				}
 
 				Toastr::success("$this->type created successfully", "Create $this->type");
 			}
+
+			$type = Str::plural($this->type);
 			return redirect(route("{$type}_edit.edit", $data->id));
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			dd($e->getMessage());
 		};
 	}
 
 	public function update(Request $request, $id)
 	{
-
+		$data = $this->data::find($id);
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		$colNameHasAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
-		$colNameHasTextarea  = Helper::getColNamesByControlAndColumnType($props, 'textarea', 'json');
 
-		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNameHasAttachment);
+		$colNamesHaveAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
+		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamesHaveAttachment);
 		$dataInput = $request->except($arrayExcept);
 
-		$type = Str::plural($this->type);
-
 		$this->deleteMediaIfNeeded($dataInput);
-
-		$data = $this->data::find($id);
-
-
-
-		$hasAttachment = $this->saveMediaValidator('update', $request, $dataInput, $data, $colNameHasAttachment);
-
-		if ($hasAttachment) $this->updateIdsMediaToFieldsDB($data, $colNameHasAttachment);
+		$hasAttachment = $this->saveMedia('update', $request, $dataInput, $data, $colNamesHaveAttachment);
 
 		$this->_validate($props, $request);
 
 		$newDataInput = $this->handleToggle('update', $props, $dataInput);
+		$newDataInput = $this->handleTextArea($props, $newDataInput);
 
-		if (count($colNameHasTextarea) > 0) $newDataInput = $this->modifyValueTextArea($colNameHasTextarea, $newDataInput);
+		try {
+			$data->fill($newDataInput);
+			$isSaved = $data->save();
 
-		$data->fill($newDataInput);
-		$data->save();
+			event(new EntityCreatedEvent(['id' => $data->id, 'type' => $this->type]));
+			Notification::send($data, new EditNotification($data->id));
 
-		event(new EntityCreatedEvent(['id' => $data->id, 'type' => $this->type]));
-		// event(new EntityCreatedEvent([$data, $props]));
+			if ($isSaved) {
+				$this->syncManyToManyRelationship($data, $dataInput);
 
+				if ($hasAttachment) {
+					//set Media Parent is in saveMedia
+					$this->updateMediaIdsToDBFields($data, $colNamesHaveAttachment);
+				}
 
-		if ($data->save()) {
-			$this->syncManyToManyRelationship($data, $dataInput);
+				Toastr::success("$this->type updated successfully", "Update $this->type");
+			}
+
+			$type = Str::plural($this->type);
+			return redirect(route("{$type}_edit.edit", $id));
+		} catch (Exception $e) {
+			dd($e->getMessage());
 		}
-
-		if ($data->save()) Toastr::success("$this->type updated successfully", "Update $this->type");
-		return redirect(route("{$type}_edit.edit", $id));
 	}
 
 	private function _validate($props, $request)
@@ -180,7 +175,15 @@ abstract class CreateEditController extends Controller
 
 		return $dataInput;
 	}
-	public function updateIdsMediaToFieldsDB($data, $colNameHasAttachment)
+
+	private function handleTextArea($props, $newDataInput)
+	{
+		$colNameHasTextarea  = Helper::getColNamesByControlAndColumnType($props, 'textarea', 'json');
+		if (count($colNameHasTextarea) > 0) $newDataInput = $this->modifyValueTextArea($colNameHasTextarea, $newDataInput);
+		return $newDataInput;
+	}
+
+	private function updateMediaIdsToDBFields($data, $colNamesHaveAttachment)
 	{
 		$dbMorphManyMedia = json_decode($data->media()->select('id', 'category')->get(), true);
 		$media_cateTb = json_decode(DB::table('attachment_categories')->select('id', 'name')->get(), true);
@@ -199,7 +202,7 @@ abstract class CreateEditController extends Controller
 		}
 
 		$valFields = array_map(fn ($item) => $item = implode(",", $item), $names_val_fields);
-		foreach ($colNameHasAttachment as $attach) {
+		foreach ($colNamesHaveAttachment as $attach) {
 			if (!isset($valFields[$attach])) {
 				$valFields[$attach] = null;
 			}
@@ -207,7 +210,8 @@ abstract class CreateEditController extends Controller
 		$data->fill($valFields);
 		$data->save();
 	}
-	public function modifyValueTextArea($colNameHasTextarea, $newDataInput)
+
+	private function modifyValueTextArea($colNameHasTextarea, $newDataInput)
 	{
 		$newTextAreas = [];
 		foreach ($colNameHasTextarea as $_colName) {

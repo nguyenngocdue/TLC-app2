@@ -10,8 +10,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_name": {
         "name": "_name",
@@ -24,8 +23,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_attachment_1": {
         "name": "_attachment_1",
@@ -38,8 +36,7 @@
         "hidden_edit": "",
         "new_line": "true",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_attachment_2": {
         "name": "_attachment_2",
@@ -52,8 +49,7 @@
         "hidden_edit": "",
         "new_line": "true",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_attachment_3": {
         "name": "_attachment_3",
@@ -66,8 +62,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_attachment_4": {
         "name": "_attachment_4",
@@ -80,8 +75,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_attachment_5": {
         "name": "_attachment_5",
@@ -94,8 +88,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -108,8 +101,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -122,8 +114,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_media": {
         "name": "_media",
@@ -136,7 +127,6 @@
         "hidden_edit": "true",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     }
 }

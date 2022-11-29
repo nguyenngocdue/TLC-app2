@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 class Helper
 {
-    public static function getDataFromPathModel($modelPath)
+    private static function getDataFromPathModel($modelPath)
     {
         $insTableSource = new $modelPath();
         $tableName = $insTableSource->getTable();
@@ -17,7 +17,6 @@ class Helper
 
     public static function getDataSource($modelPath, $colName, $type = null)
     {
-
         $instance = new $modelPath;
         $eloquentParam = $instance->eloquentParams;
 
@@ -77,7 +76,7 @@ class Helper
         return $fileName;
     }
 
-    public static function indexCharacterInString($strSearch, $str, $ofs = 0)
+    private static function indexCharacterInString($strSearch, $str, $ofs = 0)
     {
         while (($pos = strpos($str, $strSearch, $ofs)) !== false) {
             $ofs = $pos + 1;
@@ -85,7 +84,7 @@ class Helper
         return $ofs - 1;
     }
 
-    public static function getName_NumericalOrderMedia($fileName)
+    private static function getName_NumericalOrderMedia($fileName)
     {
         $idx1 = Helper::indexCharacterInString('-', $fileName);
         $idx2 = Helper::indexCharacterInString('.', $fileName);
@@ -103,7 +102,7 @@ class Helper
         return [$strName => 0];
     }
 
-    public static function getMaxNumberMediaName($data, $fileName, $extensionFile = '')
+    private static function getMaxNumberMediaName($data, $fileName, $extensionFile = '')
     {
         $idx = Helper::indexCharacterInString('.', $fileName);
         $fname = substr($fileName, 0,  $idx);
@@ -123,8 +122,7 @@ class Helper
         return $fileName_number_max;
     }
 
-
-    public static function isValueInData($data1, $data2, $strSearch, $extensionFile)
+    private static function isValueInData($data1, $data2, $strSearch, $extensionFile)
     {
         foreach ($data1 as $key => $value) {
             if (str_contains($value, $strSearch) && str_contains($data2[$key], $extensionFile)) {
@@ -133,13 +131,15 @@ class Helper
         }
         return false;
     }
-    public static function removeItemsByKeysArray($originalArray, $keysArray)
-    {
-        foreach ($keysArray as $value) {
-            unset($originalArray[$value]);
-        }
-        return $originalArray;
-    }
+
+    // public static function removeItemsByKeysArray($originalArray, $keysArray)
+    // {
+    //     foreach ($keysArray as $value) {
+    //         unset($originalArray[$value]);
+    //     }
+    //     return $originalArray;
+    // }
+
     public static function getColNamesByControlAndColumnType($props, $control, $columnType)
     {
         $props = array_filter($props, fn ($prop) => $prop['control'] === $control && $prop['column_type'] === $columnType);
@@ -147,21 +147,21 @@ class Helper
         return $colNameByControls;
     }
 
-    public static function getValColNamesValueNotEmpty($props, $controlName)
-    {
-        $props = array_filter($props, fn ($prop) => $prop[$controlName] != '');
-        $colNameByControls = array_values(array_map(fn ($item) => $item[$controlName], $props));
-        return $colNameByControls;
-    }
+    // public static function getValColNamesValueNotEmpty($props, $controlName)
+    // {
+    //     $props = array_filter($props, fn ($prop) => $prop[$controlName] != '');
+    //     $colNameByControls = array_values(array_map(fn ($item) => $item[$controlName], $props));
+    //     return $colNameByControls;
+    // }
 
-    public static function getColNamesValueNotEmpty($props, $controlName)
-    {
-        $props = array_filter($props, fn ($prop) => $prop[$controlName] != '');
-        $colNameByControls = array_values(array_map(fn ($item) => $item, $props));
-        return $colNameByControls;
-    }
+    // public static function getColNamesValueNotEmpty($props, $controlName)
+    // {
+    //     $props = array_filter($props, fn ($prop) => $prop[$controlName] != '');
+    //     $colNameByControls = array_values(array_map(fn ($item) => $item, $props));
+    //     return $colNameByControls;
+    // }
 
-    public static function getMaxName($objNames, $fileName)
+    private static function getMaxName($objNames, $fileName)
     {
         $_fileName = $fileName;
         foreach ($objNames as $value) {
@@ -175,7 +175,7 @@ class Helper
         return $_fileName;
     }
 
-    public static function getTheSameNamesInDB($dataDBbySlug, $name)
+    private static function getTheSameNamesInDB($dataDBbySlug, $name)
     {
         // dd($dataDBbySlug, $name);
         $index = Helper::indexCharacterInString('-', $name);

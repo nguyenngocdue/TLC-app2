@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CreateNewNotification extends Notification
+class EditNotification extends Notification
 {
     use Queueable;
 
@@ -29,7 +29,7 @@ class CreateNewNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast'];
+        return ['mail'];
     }
 
     /**
@@ -55,7 +55,7 @@ class CreateNewNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' =>  $this->id
+            //
         ];
     }
 }
