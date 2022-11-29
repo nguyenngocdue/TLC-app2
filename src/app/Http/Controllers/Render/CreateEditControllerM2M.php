@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Render;
 
+use App\Utils\Support\Relationships;
+
 trait CreateEditControllerM2M
 {
     private function getRelationships()
     {
         $instance = new $this->data;
         $eloquentParams = $instance->eloquentParams;
-        $relationships = $this->readingFileService->type_getPath($this->disk,  $this->branchName, $instance->getTable(), "relationships.json");
+        $relationships = Relationships::getAllOf($this->type);
         return [$relationships, $eloquentParams];
     }
 

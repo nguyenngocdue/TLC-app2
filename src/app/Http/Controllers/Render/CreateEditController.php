@@ -9,6 +9,7 @@ use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
 use App\Notifications\CreateNewNotification;
 use App\Notifications\EditNotification;
+use App\Utils\Support\Props;
 use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ abstract class CreateEditController extends Controller
 {
 	use CreateEditControllerM2M;
 	use CreateEditControllerMedia;
+	use CreateEditFormula;
 
 	protected $type;
 	protected $data;
@@ -39,7 +41,7 @@ abstract class CreateEditController extends Controller
 	public function create()
 	{
 		$action = $this->action;
-		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+		$props = Props::getAllOf($this->type);
 
 		if ($props  === false) {
 			$title = "Setting is missing";
@@ -58,7 +60,7 @@ abstract class CreateEditController extends Controller
 	public function edit($id)
 	{
 		$currentElement = $this->data::find($id);
-		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+		$props = Props::getAllOf($this->type);
 		$type = Str::plural($this->type);
 		$action = $this->action;
 		$values = $action === "create" ? "" : $currentElement;
@@ -71,7 +73,7 @@ abstract class CreateEditController extends Controller
 
 	public function store(Request $request)
 	{
-		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+		$props = Props::getAllOf($this->type);
 
 		$colNamesHaveAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamesHaveAttachment);
@@ -80,6 +82,8 @@ abstract class CreateEditController extends Controller
 		$deletedMediaIds = $this->deleteMediaIfNeeded($dataInput);
 		$hasAttachment = $this->saveMedia('store', $request, $dataInput, null, $deletedMediaIds);
 
+		$dataInput = $this->apply_formula($dataInput, $this->type);
+		$request->merge($this->apply_formula($dataInput, $this->type));
 		$this->_validate($props, $request);
 
 		$newDataInput = $this->handleToggle('store', $props, $dataInput);
@@ -116,7 +120,7 @@ abstract class CreateEditController extends Controller
 	public function update(Request $request, $id)
 	{
 		$data = $this->data::find($id);
-		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
+		$props = Props::getAllOf($this->type);
 
 		$colNamesHaveAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamesHaveAttachment);
@@ -125,6 +129,8 @@ abstract class CreateEditController extends Controller
 		$this->deleteMediaIfNeeded($dataInput);
 		$hasAttachment = $this->saveMedia('update', $request, $dataInput, $data, $colNamesHaveAttachment);
 
+		$dataInput = $this->apply_formula($dataInput, $this->type);
+		$request->merge($dataInput);
 		$this->_validate($props, $request);
 
 		$newDataInput = $this->handleToggle('update', $props, $dataInput);
@@ -155,7 +161,7 @@ abstract class CreateEditController extends Controller
 		}
 	}
 
-	private function _validate($props, $request)
+	private function _validate($props, Request $request)
 	{
 		$itemValidations = [];
 		foreach ($props as $value) {
