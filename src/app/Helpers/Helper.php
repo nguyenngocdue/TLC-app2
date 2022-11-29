@@ -147,6 +147,13 @@ class Helper
         return $colNameByControls;
     }
 
+    public static function getValColNamesValueNotEmpty($props, $controlName)
+    {
+        $props = array_filter($props, fn ($prop) => $prop[$controlName] != '');
+        $colNameByControls = array_values(array_map(fn ($item) => $item[$controlName], $props));
+        return $colNameByControls;
+    }
+
     public static function getColNamesValueNotEmpty($props, $controlName)
     {
         $props = array_filter($props, fn ($prop) => $prop[$controlName] != '');

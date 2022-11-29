@@ -8,13 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
 use App\Notifications\CreateNewNotification;
-use App\Utils\Constant;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\Unique;
 
 abstract class CreateEditController extends Controller
 {
@@ -74,8 +72,6 @@ abstract class CreateEditController extends Controller
 	{
 
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		// $colNameHasAttachment = Helper::getColNamesByConditions($props, 'control', 'column_type', 'attachment', 'string', 'type1');
-		// $colNameHasTextarea = Helper::getColNamesByConditions($props, 'control', 'column_type', 'textarea', 'json', 'type1');
 		$colNameHasAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
 		$colNameHasTextarea  = Helper::getColNamesByControlAndColumnType($props, 'textarea', 'json');
 
@@ -96,12 +92,14 @@ abstract class CreateEditController extends Controller
 		$newDataInputNotAttachment = array_filter($newDataInput, fn ($item) => !is_array($item));
 
 		try {
+
+
+
 			$data = $this->data::create($newDataInputNotAttachment);
 			Notification::send($data, new CreateNewNotification($data->id));
 
 			$_data = $this->data::find($data->id);
 			event(new EntityCreatedEvent(['id' => $data->id, 'type' => $this->type]));
-			// event(new EntityCreatedEvent([$_data, $props]));
 
 			if (isset($data)) {
 
@@ -123,8 +121,6 @@ abstract class CreateEditController extends Controller
 	{
 
 		$props = $this->readingFileService->type_getPath($this->disk, $this->branchName, $this->type, $this->r_fileName);
-		// $colNameHasAttachment = Helper::getColNamesByConditions($props, 'control', 'column_type', 'attachment', 'string');
-		// $colNameHasTextarea = Helper::getColNamesByConditions($props, 'control', 'column_type', 'textarea', 'json');
 		$colNameHasAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
 		$colNameHasTextarea  = Helper::getColNamesByControlAndColumnType($props, 'textarea', 'json');
 

@@ -9,31 +9,13 @@ use Illuminate\Support\Str;
 
 class All_SlugifyByName
 {
-    public static function All_SlugifyByName($event)
+    public static function All_SlugifyByName($type, $itemDB)
     {
-        $instanceDB = $event->dataEvent[0];
-        $dataDB = $instanceDB->getAttributes();
-        if (!isset($dataDB['name']) && !isset($dataDB['slug'])) return false;
 
-        $props = $event->dataEvent[1];
-        // $colNameHasFormula = Helper::getColNamesByConditions($props, 'formula', null, null, null, 'type2');
-        $colNameHasFormula = Helper::getColNamesValueNotEmpty($props, 'formula');
-
-        $newNameArray  = [];
-        $dataDBbySlug = array_column(json_decode(DB::table($instanceDB->getTable())->where([['id', '!=', $dataDB['id']]])->select('id', 'slug')->get(), true),  'slug', 'id');
-        foreach ($colNameHasFormula as $value) {
-            if ($value['formula'] === 'All_SlugifyByName') {
-                $content = is_null($dataDB['slug']) ? Str::slug($dataDB['name']) : Str::slug($dataDB['slug']);
-                $newNameArray = Helper::slugNameToSaveDB($content, $dataDBbySlug);
-            }
-        }
-
-        if (count($newNameArray)) {
-            $newDataInput = array_replace($dataDB, $newNameArray);
-            unset($newDataInput['created_at']);
-            unset($newDataInput['updated_at']);
-            $instanceDB->fill($newDataInput);
-            $instanceDB->save();
-        }
+        $newValueArray  = [];
+        $valSlugDB = array_column(json_decode(DB::table(Str::plural($type))->where([['id', '!=', $itemDB['id']]])->select('id', 'slug')->get(), true),  'slug', 'id');
+        $content = is_null($itemDB['slug']) ? Str::slug($itemDB['name']) : Str::slug($itemDB['slug']);
+        $newValueArray = Helper::slugNameToSaveDB($content, $valSlugDB);
+        return $newValueArray;
     }
 }
