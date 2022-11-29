@@ -24,15 +24,35 @@
         "title": "Assigned",
         "color": "amber"
     },
+    "cancelled": {
+        "name": "cancelled",
+        "title": "Cancelled",
+        "color": "red"
+    },
     "closed": {
         "name": "closed",
         "title": "Closed",
         "color": "gray"
     },
+    "concept": {
+        "name": "concept",
+        "title": "BD\/Concept",
+        "color": "cyan"
+    },
     "confirm_rejected": {
         "name": "confirm_rejected",
         "title": "Confirm Rejected",
         "color": "orange"
+    },
+    "construction_site": {
+        "name": "construction_site",
+        "title": "Construction Site",
+        "color": "purple"
+    },
+    "design": {
+        "name": "design",
+        "title": "Design",
+        "color": "blue"
     },
     "draft": {
         "name": "draft",
@@ -72,6 +92,11 @@
     "inspection_rejected": {
         "name": "inspection_rejected",
         "title": "Inspection Rejected",
+        "color": "orange"
+    },
+    "manufacturing": {
+        "name": "manufacturing",
+        "title": "Manufacturing",
         "color": "orange"
     },
     "new": {
@@ -169,6 +194,11 @@
         "title": "Revised Rejected",
         "color": "red"
     },
+    "start": {
+        "name": "start",
+        "title": "Start",
+        "color": "cyan"
+    },
     "stopped": {
         "name": "stopped",
         "title": "Stopped",
@@ -183,6 +213,11 @@
         "name": "submitted",
         "title": "Submitted",
         "color": "cyan"
+    },
+    "timesheet_only": {
+        "name": "timesheet_only",
+        "title": "Timesheet Only",
+        "color": "amber"
     },
     "verified_rejected": {
         "name": "verified_rejected",

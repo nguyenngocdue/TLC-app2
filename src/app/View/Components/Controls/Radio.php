@@ -20,7 +20,7 @@ class Radio extends Component
         $labelName = $this->labelName;
         $modelPath = $this->tablePath;
 
-        $dataSource = Helper::getDatasource($modelPath, $colName);
+        $dataSource = Helper::getDataSource($modelPath, $colName);
         $currentEntity = is_null($modelPath::find($this->id)) ? "" : $modelPath::find($this->id)->getAttributes();
 
         if (is_null($dataSource) || gettype($dataSource) === 'string') {

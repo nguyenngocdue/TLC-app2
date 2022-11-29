@@ -2,17 +2,10 @@
 
 namespace App\View\Components\Formula;
 
-use App\Helpers\Helper;
-
 class All_ConcatNameWith123
 {
-    public static function All_ConcatNameWith123($colNameHasFormula,  $concatStr,  $itemDB)
+    public function __invoke($name)
     {
-        $newDataInput = [];
-        foreach ($colNameHasFormula as $value) {
-            $newDataInput[$value['column_name']] = $itemDB['name'] . $concatStr;
-        }
-        // dd($newDataInput);
-        return $newDataInput;
+        return $name . "123";
     }
 }

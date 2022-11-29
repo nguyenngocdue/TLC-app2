@@ -6,16 +6,22 @@ use App\Helpers\Helper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-
 class All_SlugifyByName
 {
-    public static function All_SlugifyByName($type, $itemDB)
+    private function getListOfSlugFromDB($type, $id)
     {
+        $table = DB::table(Str::plural($type));
+        $collection = $table->where([['id', '!=', $id]])->select('id', 'slug')->get();
+        $json = json_decode($collection, true);
+        $valSlugDB = array_column($json,  'slug', 'id');
+        return $valSlugDB;
+    }
 
-        $newValueArray  = [];
-        $valSlugDB = array_column(json_decode(DB::table(Str::plural($type))->where([['id', '!=', $itemDB['id']]])->select('id', 'slug')->get(), true),  'slug', 'id');
-        $content = is_null($itemDB['slug']) ? Str::slug($itemDB['name']) : Str::slug($itemDB['slug']);
-        $newValueArray = Helper::slugNameToSaveDB($content, $valSlugDB);
-        return $newValueArray;
+    public function __invoke($value, $type, $id)
+    {
+        $value = Str::slug($value);
+        $slugList = $this->getListOfSlugFromDB($type, $id);
+        $result = Helper::slugNameToBeSaved($value, $slugList);
+        return $result;
     }
 }

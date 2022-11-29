@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\EntityCreatedEvent;
-use App\Helpers\Helper;
 use App\Http\Services\ReadingFileService;
 use App\View\Components\Formula\All_ConcatNameWith123;
 use App\View\Components\Formula\All_SlugifyByName;
@@ -13,16 +12,6 @@ use Illuminate\Support\Str;
 
 class ShouldUpdateFieldsListener implements ShouldQueue
 {
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
     /**
      * Handle the event.
      *
@@ -36,26 +25,24 @@ class ShouldUpdateFieldsListener implements ShouldQueue
 
         $instanceDB = DB::table(Str::plural($type))->where('id', $id);
         $itemDB = json_decode($instanceDB->get(), true)[0];
-        if (!isset($itemDB['name'])) return false;
+        $itemDB['name'] = $itemDB['name'] ?? "";
 
         $props = ReadingFileService::type_getPath('json', 'entities', $type, 'props.json');
-        $valColNameHasFormula = Helper::getValColNamesValueNotEmpty($props, 'formula');
 
-        foreach ($valColNameHasFormula as $value) {
-            switch ($value) {
-                case 'All_SlugifyByName':
-                    $newValueArray = All_SlugifyByName::All_SlugifyByName($type, $itemDB);
-                    $instanceDB->update($newValueArray);
+        foreach ($props as $prop) {
+            if ($prop['formula'] === '') continue;
+            switch ($prop['formula']) {
+                case "All_ConcatNameWith123":
+                    $value = (new All_ConcatNameWith123())($itemDB['name']);
                     break;
-
-                case 'All_ConcatNameWith123':
-                    $concatStr = 123;
-                    $props = Helper::getColNamesValueNotEmpty($props, 'formula');
-                    $colNameHasFormula = array_filter($props, fn ($item) => $item['formula'] === $value);
-                    $newValueArray = All_ConcatNameWith123::All_ConcatNameWith123($colNameHasFormula, $concatStr, $itemDB);
-                    $instanceDB->update($newValueArray);
+                case "All_SlugifyByName":
+                    $name = $itemDB['slug'] ?? $itemDB['name'];
+                    $value = (new All_SlugifyByName())($name, $type, $itemDB['id']);
+                    break;
+                default:
                     break;
             }
+            $instanceDB->update([$prop['column_name'] => $value]);
         }
     }
 }

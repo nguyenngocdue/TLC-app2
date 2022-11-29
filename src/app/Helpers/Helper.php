@@ -15,7 +15,7 @@ class Helper
         return  $dataSource;
     }
 
-    public static function getDatasource($modelPath, $colName, $type = null)
+    public static function getDataSource($modelPath, $colName, $type = null)
     {
 
         $instance = new $modelPath;
@@ -199,32 +199,26 @@ class Helper
         return $arrayNames;
     }
 
-    public static function getMaxNumberName($similarNames, $nameInput)
+    private static function getMaxNumberName($similarNames, $nameInput)
     {
-        $name_maxNumber = [];
         $maxNumber = 0;
         foreach ($similarNames as $name) {
             $index = Helper::indexCharacterInString('-', $name);
-            $_maxNumber = (int)substr($name,  $index >= 0 ? $index + 1 : strlen($nameInput) + 1, strlen($name) - $index);
-            if (is_numeric($_maxNumber) &&  $_maxNumber > $maxNumber) {
-                $name_maxNumber = [substr($name, 0, $index) => $_maxNumber];
+            $temp = (int)substr($name,  $index >= 0 ? $index + 1 : strlen($nameInput) + 1, strlen($name) - $index);
+            if (is_numeric($temp) &&  $temp > $maxNumber) {
+                $maxNumber = $temp;
             }
         }
-        if (!count($name_maxNumber)) return [$nameInput => $maxNumber];
-        return  $name_maxNumber;
+        return $maxNumber;
     }
 
-    public static function slugNameToSaveDB($nameInput, $dataDBbyName)
+    public static function slugNameToBeSaved($nameInput, $dataDBbyName)
     {
-        if (!in_array($nameInput, $dataDBbyName)) {
-            return ['slug' => $nameInput];
-        };
-        $similarNames =  Helper::getTheSameNamesInDB($dataDBbyName, $nameInput);
+        if (!in_array($nameInput, $dataDBbyName)) return $nameInput;
 
-        if ($similarNames) {
-            $name_maxId =  Helper::getMaxNumberName($similarNames, $nameInput);
-            $newNameArray = ['slug' => array_keys($name_maxId)[0] . '-' . array_values($name_maxId)[0] + 1];
-            return $newNameArray;
-        }
+        $similarNames =  Helper::getTheSameNamesInDB($dataDBbyName, $nameInput);
+        $max =  Helper::getMaxNumberName($similarNames, $nameInput) + 1;
+        $result = "$nameInput-$max";
+        return $result;
     }
 }
