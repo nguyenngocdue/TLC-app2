@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('control');
-
             $table->unique(['prod_routing_id', 'wir_description_id']);
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
