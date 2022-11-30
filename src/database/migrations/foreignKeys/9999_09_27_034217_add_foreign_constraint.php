@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('workplace')->references('id')->on('workplaces')->onDelete('cascade');
             $table->foreign('user_type')->references('id')->on('user_types')->onDelete('cascade');
-            $table->foreign('featured_image')->references('id')->on('attachments')->onDelete('cascade');
+            // $table->foreign('featured_image')->references('id')->on('attachments')->onDelete('cascade');
             $table->foreign('category')->references('id')->on('user_categories')->onDelete('cascade');
             $table->foreign('position_prefix')->references('id')->on('user_position_pres')->onDelete('cascade');
             $table->foreign('position_1')->references('id')->on('user_position1s')->onDelete('cascade');

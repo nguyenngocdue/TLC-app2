@@ -26,7 +26,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "name", "full_name", "name_suffix", "employeeid", "first_name",
         "last_name", "address", "phone", "featured_image", "time_keeping_type", "user_type", "workplace",
         "category", "date_of_birth", "first_date", "last_date", "title", "position_prefix", "position_1",
-        "position_2", "position_3", "position_rendered", "role", "discipline", "department", "show_on_beta",
+        "position_2", "position_3", "position_rendered", "discipline", "department", "show_on_beta",
         "resigned", "viewport_uids", "leaf_uids", 'email_verified_at', "email", "password", "settings", "provider", "user_id_passport", "user_pin",
     ];
     /**
@@ -150,11 +150,6 @@ class User extends Authenticatable implements LdapAuthenticatable
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function time_keep_types()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function role()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
