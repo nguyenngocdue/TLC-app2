@@ -28,6 +28,7 @@
 
         <x-renderer.card title="Tables">
             <x-renderer.card title="Table with Data">
+                In dataSource: rowDescription="This is an example of a rowDescription"
                 <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" />
             </x-renderer.card>
             <br />

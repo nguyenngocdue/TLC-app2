@@ -130,7 +130,7 @@ abstract class ViewAllController extends Controller
                         $relationshipJson = $json["_{$dataIndex}"];
                         // Log::info($relationshipJson);
                         $column['renderer'] = $relationshipJson['renderer_view_all'] ?? "";
-                        $column['rendererParam'] = $relationshipJson['renderer_param_view_all'] ?? "";
+                        $column['rendererParam'] = $relationshipJson['renderer_view_all_param'] ?? "";
                     }
                 }
             }
