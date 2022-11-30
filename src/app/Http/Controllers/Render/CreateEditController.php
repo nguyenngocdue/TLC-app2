@@ -83,7 +83,7 @@ abstract class CreateEditController extends Controller
 		$hasAttachment = $this->saveMedia('store', $request, $dataInput, null, $deletedMediaIds);
 
 		$dataInput = $this->apply_formula($dataInput, $this->type);
-		$request->merge($this->apply_formula($dataInput, $this->type));
+		$request->merge($dataInput);
 		$this->_validate($props, $request);
 
 		$newDataInput = $this->handleToggle('store', $props, $dataInput);
