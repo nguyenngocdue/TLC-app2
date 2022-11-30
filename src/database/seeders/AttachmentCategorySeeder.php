@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Attachment_category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class MediaCategorySeeder extends Seeder
+class AttachmentCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +14,6 @@ class MediaCategorySeeder extends Seeder
      */
     public function run()
     {
-        //
         Attachment_category::create(['name' => 'attachment_1', 'description' => '', 'slug' => 'attachment_1']);
         Attachment_category::create(['name' => 'attachment_2', 'description' => '', 'slug' => 'attachment_2']);
         Attachment_category::create(['name' => 'attachment_3', 'description' => '', 'slug' => 'attachment_3']);
