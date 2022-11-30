@@ -257,7 +257,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formula": "user-position_rendered"
+        "formula": ""
     },
     "_position_1": {
         "name": "_position_1",
@@ -309,7 +309,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "formula": ""
+        "formula": "User_PositionRendered"
     },
     "_discipline": {
         "name": "_discipline",
@@ -428,19 +428,6 @@
         "validation": "",
         "formula": ""
     },
-    "_provider": {
-        "name": "_provider",
-        "column_name": "provider",
-        "column_type": "string",
-        "label": "Provider",
-        "control": "",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
     "_password": {
         "name": "_password",
         "column_name": "password",
@@ -450,19 +437,6 @@
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
-    "_time_zone": {
-        "name": "_time_zone",
-        "column_name": "time_zone",
-        "column_type": "string",
-        "label": "Time Zone",
-        "control": "text",
-        "col_span": "12",
-        "hidden_view_all": "true",
-        "hidden_edit": "true",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -579,6 +553,32 @@
         "control": "",
         "col_span": "12",
         "hidden_view_all": "",
+        "hidden_edit": "true",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_provider": {
+        "name": "_provider",
+        "column_name": "",
+        "column_type": "",
+        "label": "Provider",
+        "control": "",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_time_zone": {
+        "name": "_time_zone",
+        "column_name": "",
+        "column_type": "",
+        "label": "Time Zone",
+        "control": "text",
+        "col_span": "12",
+        "hidden_view_all": "true",
         "hidden_edit": "true",
         "new_line": "",
         "validation": "",
