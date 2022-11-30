@@ -2,8 +2,13 @@
     "renderers": [
         "",
         "attachment",
-        "count",
+        "avatar_name",
         "column",
-        "avatar_name"
+        "count"
+    ],
+    "edit": [
+        "",
+        "many_icons",
+        "many_lines"
     ]
 }

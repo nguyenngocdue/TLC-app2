@@ -22,7 +22,7 @@ class Localtime extends Component
         $labelName = $this->labelName;
 
 
-        // get table's name in database
+        // get database table name
         $insTable = new $this->tablePath;
         $tableName = $insTable->getTable();
         $currentTable = DB::table($tableName)->where('id', $selected)->first();

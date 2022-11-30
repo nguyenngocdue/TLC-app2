@@ -27,8 +27,9 @@ abstract class ManageRelationshipController extends Controller
 
     private function getColumns()
     {
-        $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/relationships/renderers.json'), true)['renderers'];
-        // $controls = array_map(fn ($control) => ["value" => $control], $controls0);
+        $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/relationships/renderers.json'), true);
+        $viewAllControls = $controls['renderers'];
+        $editControls = $controls['edit'];
         return [
             [
                 "dataIndex" => "action",
@@ -44,13 +45,24 @@ abstract class ManageRelationshipController extends Controller
                 "editable" => true,
             ],
             [
-                "dataIndex" => "renderer",
+                "dataIndex" => "renderer_view_all",
                 "editable" => true,
                 "renderer" => "dropdown",
-                "cbbDataSource" => $controls,
+                "cbbDataSource" => $viewAllControls,
             ],
             [
-                "dataIndex" => "renderer_param",
+                "dataIndex" => "renderer_view_all_param",
+                "editable" => true,
+                "renderer" => "text",
+            ],
+            [
+                "dataIndex" => "renderer_edit",
+                "editable" => true,
+                "renderer" => "dropdown",
+                "cbbDataSource" => $editControls,
+            ],
+            [
+                "dataIndex" => "renderer_edit_param",
                 "editable" => true,
                 "renderer" => "text",
             ],
