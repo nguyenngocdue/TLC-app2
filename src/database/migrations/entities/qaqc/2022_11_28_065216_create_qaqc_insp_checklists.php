@@ -16,9 +16,6 @@ return new class extends Migration
     {
         Schema::create('qaqc_insp_checklists', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('prod_routing_id');
-            // $table->unsignedBigInteger('qaqc_insp_master');
-
             $table->unsignedBigInteger('prod_order_id');
             $table->unsignedBigInteger('wir_description_id');
 
