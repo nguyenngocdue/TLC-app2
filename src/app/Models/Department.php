@@ -22,6 +22,7 @@ class Department extends Model
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'head_of_department'],
         "Users_Count" => ['hasMany', User::class, 'department'],
+        "Users_Count2" => ['hasMany', User::class, 'department'],
     ];
     public function user()
     {
@@ -29,6 +30,11 @@ class Department extends Model
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function Users_Count()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function Users_Count2()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

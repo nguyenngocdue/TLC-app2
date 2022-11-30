@@ -107,6 +107,10 @@ $id = $action === "edit" ? $values->id : "";
                         @case('number')
                         <x-controls.number colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} labelName={{$label}} />
                         @break
+                        
+                        @case('z_test')
+                        {{ $values->Users_Count[0] }}
+                        @break
 
                         @default
                         <x-feedback.alert type="warning" title="Control" message="[{{$control}}] is not available" />

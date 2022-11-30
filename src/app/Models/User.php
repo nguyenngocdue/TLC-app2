@@ -164,6 +164,23 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('user_id');
     }
+    public function getManyIconParams()
+    {
+        return [
+            'id' => 'id',
+            'type' => 'user',
+            'title' => 'name',
+            'description' => 'position_rendered',
+        ];
+    }
+    public function getManyLineParams()
+    {
+        return [
+            ['dataIndex' => 'id'],
+            ['dataIndex' => 'name'],
+            ['dataIndex' => 'position_rendered']
+        ];
+    }
     public function toSearchableArray()
     {
         return [
