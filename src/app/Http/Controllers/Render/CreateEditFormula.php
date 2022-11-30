@@ -27,8 +27,8 @@ trait CreateEditFormula
                     $value = (new All_SlugifyByName())($name, $type, $item['id']);
                     break;
                 case "User_PositionRendered":
-                    $ids_tableNames = ['user_position_pres' => $item['position_prefix'], 'user_position1s' => $item['position_1'],  'user_position2s' => $item['position_2'],  'user_position3s' => $item['position_3']];
-                    $arrayValues = Helper::getValueByIdAndTableFromDB($ids_tableNames);
+                    $arrayIdsTableNames = ['user_position_pres' => $item['position_prefix'], 'user_position1s' => $item['position_1'],  'user_position2s' => $item['position_2'],  'user_position3s' => $item['position_3']];
+                    $arrayValues = Helper::getValueByIdAndTableFromDB($arrayIdsTableNames);
                     $value = (new User_PositionRendered())($arrayValues);
                     break;
                 default:
