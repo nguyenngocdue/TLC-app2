@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->float('def_publish_holiday_hour')->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('def_assignee')->nullable();
             $table->unsignedBigInteger('def_monitors')->nullable();
             $table->string('slug')->unique();

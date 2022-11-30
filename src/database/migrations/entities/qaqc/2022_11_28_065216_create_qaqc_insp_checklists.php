@@ -14,11 +14,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attachment_categories', function (Blueprint $table) {
+        Schema::create('qaqc_insp_checklists', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
+            // $table->unsignedBigInteger('prod_routing_id');
+            // $table->unsignedBigInteger('qaqc_insp_master');
+
+            $table->unsignedBigInteger('prod_order_id');
+            $table->unsignedBigInteger('wir_description_id');
+
+            $table->string('name');
             $table->text('description')->nullable();
-            $table->string('slug')->unique();
+            $table->unsignedBigInteger('owner_id');
+
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
@@ -31,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attachment_categories');
+        Schema::dropIfExists('qaqc_insp_checklists');
     }
 };
