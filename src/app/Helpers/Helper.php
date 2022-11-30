@@ -221,13 +221,14 @@ class Helper
         $result = "$nameInput-$max";
         return $result;
     }
-    public static function getValueByIdAndTableFromDB($arrayIdsTableNames)
-    {
-        $arrayValues = [];
-        foreach ($arrayIdsTableNames as $tableName => $idItem) {
-            $data = DB::table($tableName)->where('id', $idItem)->select('name')->get();
-            $arrayValues[] = implode(array_column(json_decode($data, true), 'name'));
-        }
-        return $arrayValues;
-    }
+
+    // public static function getValueByIdAndTableFromDB($arrayIdsTableNames)
+    // {
+    //     $arrayValues = [];
+    //     foreach ($arrayIdsTableNames as $tableName => $idItem) {
+    //         $data = DB::table($tableName)->where('id', $idItem)->select('name')->get();
+    //         $arrayValues[] = implode(array_column(json_decode($data, true), 'name'));
+    //     }
+    //     return $arrayValues;
+    // }
 }

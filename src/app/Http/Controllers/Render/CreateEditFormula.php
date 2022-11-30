@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers\Render;
 
-use App\Helpers\Helper;
+use App\Models\User;
 use App\Utils\Support\Props;
 use App\View\Components\Formula\All_ConcatNameWith123;
 use App\View\Components\Formula\All_SlugifyByName;
 use App\View\Components\Formula\User_PositionRendered;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 trait CreateEditFormula
 {
     private function apply_formula($item, $type)
     {
         $props = Props::getAllOf($type);
+        $id = $item['id'];
 
         foreach ($props as $prop) {
             if ($prop['formula'] === '') continue;
@@ -24,12 +23,15 @@ trait CreateEditFormula
                     break;
                 case "All_SlugifyByName":
                     $name = $item['slug'] ?? $item['name'];
-                    $value = (new All_SlugifyByName())($name, $type, $item['id']);
+                    $value = (new All_SlugifyByName())($name, $type, $id);
                     break;
                 case "User_PositionRendered":
-                    $arrayIdsTableNames = ['user_position_pres' => $item['position_prefix'], 'user_position1s' => $item['position_1'],  'user_position2s' => $item['position_2'],  'user_position3s' => $item['position_3']];
-                    $arrayValues = Helper::getValueByIdAndTableFromDB($arrayIdsTableNames);
-                    $value = (new User_PositionRendered())($arrayValues);
+                    $user = User::find($id);
+                    $position_pres = ($user->positionPres) ? $user->positionPres->name : "";
+                    $position_1 = ($user->position1) ? $user->position1->name : "";
+                    $position_2 = ($user->position2) ? $user->position2->name : "";
+                    $position_3 = ($user->position3) ? $user->position3->name : "";
+                    $value = (new User_PositionRendered())($position_pres, $position_1, $position_2, $position_3);
                     break;
                 default:
                     break;
