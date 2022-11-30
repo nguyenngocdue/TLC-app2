@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        dd(Str::slug('MEP/ARC 1st Fix, Vent duct & Fire Pipe (ceiling).'));
+        dd(CurrentUser::getPermissions());
         return view('home');
     }
 }
