@@ -104,8 +104,8 @@ abstract class CreateEditController extends Controller
 			if (isset($data)) {
 				$this->syncManyToManyRelationship($data, $newDataInputHasAttachment); // Check box
 
-				// event(new SendEmailItemCreated(['id' => $data->id, 'type' => $this->type]));
-
+				// $event = event(new SendEmailItemCreated(['id' => $data->id, 'type' => $this->type]));
+				// dd($event);
 				if ($hasAttachment) {
 					$this->setMediaParent($data, $colNamesHaveAttachment);
 					$this->updateMediaIdsToDBFields($_data, $colNamesHaveAttachment);

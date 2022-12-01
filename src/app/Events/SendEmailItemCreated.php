@@ -24,7 +24,6 @@ class SendEmailItemCreated
     public function __construct($dataEvent)
     {
         $this->dataEvent = $dataEvent;
-        dd($dataEvent);
     }
 
     /**
