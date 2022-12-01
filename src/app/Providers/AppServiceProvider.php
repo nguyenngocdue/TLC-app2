@@ -47,5 +47,13 @@ class AppServiceProvider extends ServiceProvider
         Str::macro('same', function (string $string) {
             return $string;
         });
+        Str::macro('limitWords', function (string $str, $count) {
+            $i = $c = 0;
+            while ($i < strlen($str)) {
+                if ($str[$i] === ' ' && ++$c === $count) return substr($str, 0, $i) . " ...";
+                $i++;
+            }
+            return $str;
+        });
     }
 }

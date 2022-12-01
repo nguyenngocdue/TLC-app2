@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
             RoleSetSeeder::class,
             AdminSeeder::class,
             AttachmentCategorySeeder::class,
+            PostSeeder::class,
 
             // UserSeeder::class,
-            // PostSeeder::class,
             // MediaSeeder::class,
             // WorkplaceSeeder::class,
         ]);
