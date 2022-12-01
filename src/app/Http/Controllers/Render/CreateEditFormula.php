@@ -27,6 +27,10 @@ trait CreateEditFormula
                     break;
                 case "User_PositionRendered":
                     $user = User::find($id);
+                    if (is_null($user)) {
+                        $value = "";
+                        break;
+                    }
                     $position_pres = ($user->positionPres) ? $user->positionPres->name : "";
                     $position_1 = ($user->position1) ? $user->position1->name : "";
                     $position_2 = ($user->position2) ? $user->position2->name : "";

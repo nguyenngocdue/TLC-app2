@@ -96,6 +96,7 @@ abstract class CreateEditController extends Controller
 			$data = $this->data::create($newDataInputNotAttachment);
 			$_data = $this->data::find($data->id);
 
+
 			event(new EntityCreatedEvent(['id' => $data->id, 'type' => $this->type]));
 			Notification::send($data, new CreateNewNotification($data->id));
 
