@@ -30,23 +30,32 @@ class Relationship extends Component
         $type = $this->type;
         $id = $this->id;
         $colSpan = $this->colSpan / 2;
+        $action = $this->action;
 
-
-        $itemDB = $modelPath::find($id);
-        $relationship = Relationships::getAllOf($this->type);
-
-        foreach ($relationship as $value) {
-            if ($colName === $value['control_name']) {
-                $relatedItems = $itemDB->$colName->all();
-                switch ($value['renderer_edit_param']) {
-                    case 'getManyIconParams':
-                        return view('components.controls.manyIconParams')->with(compact('relatedItems', 'colSpan'));
-                    case 'getManyLineParams':
-                        return view('components.controls.manyLineParams')->with(compact('relatedItems', 'colSpan'));
-                    default:
-                        break;
+        if ($action === 'edit') {
+            $itemDB = $modelPath::find($id);
+            $relationship = Relationships::getAllOf($this->type);
+            foreach ($relationship as $value) {
+                if ($colName === $value['control_name']) {
+                    $dataSource = $itemDB->$colName->all();
+                    if (count($dataSource) <= 0) {
+                        $message =  "There is no item to be found";
+                        $type = 'warning';
+                        return "<x-feedback.alert message='{{$message}}' type='{{$type}}' />";
+                    };
+                    switch ($value['renderer_edit_param']) {
+                        case 'getManyIconParams':
+                            return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan'));
+                        case 'getManyLineParams':
+                            return view('components.controls.manyLineParams')->with(compact('dataSource', 'colSpan'));
+                        default:
+                            break;
+                    }
                 }
             }
         }
+        $message =  "Only show items on the update form";
+        $type = 'warning';
+        return "<x-feedback.alert message='{{$message}}' type='{{$type}}' />";
     }
 }

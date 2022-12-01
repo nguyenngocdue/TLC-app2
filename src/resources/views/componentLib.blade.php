@@ -28,7 +28,6 @@
 
         <x-renderer.card title="Tables">
             <x-renderer.card title="Table with Data">
-                @dump($tableColumns)
                 <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" />
             </x-renderer.card>
             <br />
