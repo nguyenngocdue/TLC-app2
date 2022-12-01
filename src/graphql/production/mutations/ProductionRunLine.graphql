@@ -5,8 +5,8 @@ type DuplicateProdLineResponse {
 type ProdLineResponse {
     users: [User!]
     skills: [User!]
-    prod_lines: [Prod_line!]
-    prod_line_last: Prod_line!
+    prod_run_lines: [Prod_run_line!]
+    prod_run_line_last: Prod_run_line!
     time_now: String
     prod_order_id: Int
     prod_routing_link_id: Int

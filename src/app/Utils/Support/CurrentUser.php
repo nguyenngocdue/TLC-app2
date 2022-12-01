@@ -19,6 +19,13 @@ class CurrentUser
         }
         return $userAuth;
     }
+    private static function checkLoginUser($userAuth)
+    {
+        if (!$userAuth) {
+            $userAuth = static::checkAuth();
+        }
+        return $userAuth;
+    }
 
     public static function isAdmin()
     {
@@ -36,24 +43,24 @@ class CurrentUser
         }
         return true;
     }
-    public static function getRoleSet()
+    public static function getRoleSet($userAuth = null)
     {
-        $userAuth = static::checkAuth();
-        $roleSets = $userAuth->roleSets[0]?->name;
+        $userAuth = static::checkLoginUser($userAuth);
+        $roleSets = $userAuth->roleSets[0]->name ?? null;
         return $roleSets;
     }
-    public static function getRoles($getCollectionRole = true)
+    public static function getRoles($userAuth = null, $getCollectionRole = true)
     {
-        $userAuth = static::checkAuth();
+        $userAuth = static::checkLoginUser($userAuth);
         $roles = $userAuth->getRolesViaRoleSets();
         if ($getCollectionRole) {
             return $roles->map(fn ($item) => $item->name)->all();
         }
         return $roles;
     }
-    public static function getPermissions()
+    public static function getPermissions($userAuth = null)
     {
-        $permissions = static::getRoles(false)
+        $permissions = static::getRoles($userAuth, false)
             ->map(
                 fn ($role) => $role->permissions
                     ->map(fn ($item) => $item->name)->toArray()

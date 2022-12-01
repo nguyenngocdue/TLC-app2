@@ -32,7 +32,7 @@ return new class extends Migration
             $table->foreign('owner_id')->references('id')->on('users');
         });
         //************** PRODUCTION MODULE **************/
-        Schema::table('prod_lines', function (Blueprint $table) {
+        Schema::table('prod_run_lines', function (Blueprint $table) {
             $table->foreign('prod_run_id')->references('id')->on('prod_runs');
         });
         Schema::table('prod_runs', function (Blueprint $table) {

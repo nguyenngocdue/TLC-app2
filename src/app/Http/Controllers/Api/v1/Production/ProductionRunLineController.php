@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Production;
 
 use App\Http\Controllers\Controller;
-use App\Models\Prod_line;
+use App\Models\Prod_run_line;
 use App\Models\Prod_run;
 use App\Models\Prod_user_run;
 use App\Models\User;
@@ -27,12 +27,12 @@ class ProductionRunLineController extends Controller
             $users = User::orderBy('id', 'DESC')->get();
             $skills = User::orderBy('staff_position', 'DESC')->distinct()->get(['staff_position']);
             $prodLines = Prod_run::find($prodRunFirst->id)->productionRunLives()->get();
-            $lastId = Prod_line::orderBy('id', 'DESC')->first();
+            $lastId = Prod_run_line::orderBy('id', 'DESC')->first();
             $timeNow = Carbon::now()->format('H:i:s');
             return ResponseObject::responseSuccess([
                 'users' => $users,
                 'skills' => $skills,
-                'prod_lines' => $prodLines,
+                'prod_run_lines' => $prodLines,
                 'lastId' => $lastId,
                 'time_now' => $timeNow,
                 'prod_order_id' => $prod_order_id,
@@ -83,7 +83,7 @@ class ProductionRunLineController extends Controller
     {
         try {
             $dt = Carbon::now();
-            $prod_Line = Prod_line::create([
+            $prodRunLine = Prod_run_line::create([
                 'prod_run_id' => $request->prod_run_id,
                 'date' => $dt->format('Y-m-d'),
                 'start' => $dt->format('H:i:s'),
@@ -91,8 +91,8 @@ class ProductionRunLineController extends Controller
 
             ]);
             foreach ($request->user_ids as $userId) {
-                $prodUserRun = Prod_user_run::create([
-                    'prod_line_id' => $prod_Line->id,
+                $prodUserRun = Prod_run_line::create([
+                    'prod_run_line_id' => $prodRunLine->id,
                     'user_id' => (int)$userId,
                 ]);
             }
@@ -104,25 +104,25 @@ class ProductionRunLineController extends Controller
 
     public function duplicate($id)
     {
-        try {
-            $dt = Carbon::now();
-            $prodLine = Prod_line::find($id);
-            $newProdLine = $prodLine->replicate();
-            $newProdLine->date = $dt->format('Y-m-d');
-            $newProdLine->start = $dt->format('H:i:s');
-            $newProdLine->end = null;
-            $newProdLine->status = 'running';
-            $newProdLine->save();
-            $prodUserRuns = Prod_user_run::where('prod_run_id', $id)->get();
-            foreach ($prodUserRuns as $prodUserRun) {
-                $newProdUserRun = $prodUserRun->replicate();
-                $newProdUserRun->run_id = $newProdLine->id;
-                $newProdUserRun->save();
-            }
-            return ResponseObject::responseSuccess([], null, 'Duplicate Production Run Line Successfully.');
-        } catch (\Throwable $th) {
-            return ResponseObject::responseFail('Duplicate Production Run Line Failed.');
-        }
+        // try {
+        //     $dt = Carbon::now();
+        //     $prodLine = Prod_run_line::find($id);
+        //     $newProdLine = $prodLine->replicate();
+        //     $newProdLine->date = $dt->format('Y-m-d');
+        //     $newProdLine->start = $dt->format('H:i:s');
+        //     $newProdLine->end = null;
+        //     $newProdLine->status = 'running';
+        //     $newProdLine->save();
+        //     $prodUserRuns = Prod_user_run::where('prod_run_id', $id)->get();
+        //     foreach ($prodUserRuns as $prodUserRun) {
+        //         $newProdUserRun = $prodUserRun->replicate();
+        //         $newProdUserRun->run_id = $newProdLine->id;
+        //         $newProdUserRun->save();
+        //     }
+        //     return ResponseObject::responseSuccess([], null, 'Duplicate Production Run Line Successfully.');
+        // } catch (\Throwable $th) {
+        //     return ResponseObject::responseFail('Duplicate Production Run Line Failed.');
+        // }
     }
     /**
      * Display the specified resource.
@@ -144,8 +144,8 @@ class ProductionRunLineController extends Controller
     public function edit(Request $request, $id)
     {
         try {
-            $prodLine = Prod_line::find($id);
-            return ResponseObject::responseSuccess(['prod_line' => $prodLine], null, 'Get Production Run Line Successfully.');
+            $prodRunLine = Prod_run_line::find($id);
+            return ResponseObject::responseSuccess(['prod_run_line' => $prodRunLine], null, 'Get Production Run Line Successfully.');
         } catch (\Throwable $th) {
             return ResponseObject::responseFail('Get Production Run Line Failed.');
         }
@@ -161,16 +161,16 @@ class ProductionRunLineController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $prodLine = Prod_line::find($id);
-            if ($prodLine->status == 'running') {
+            $prodRunLine = Prod_run_line::find($id);
+            if ($prodRunLine->status == 'running') {
                 $dt = Carbon::now();
-                $prodLine->end = $dt->format('H:i:s');
-                $prodLine->status = 'complete';
-                $prodLine->save();
+                $prodRunLine->end = $dt->format('H:i:s');
+                $prodRunLine->status = 'complete';
+                $prodRunLine->save();
                 return ResponseObject::responseSuccess([], null, 'Pause Production Run Complete!');
             } else {
-                $prodLine = Prod_line::find($id)->update($request->all());
-                return ResponseObject::responseSuccess(['prod_line' => $prodLine, 'request' => $request->all(), 'prod_line_id' => $id], null, 'Update Production Run Complete');
+                $prodRunLine = Prod_run_line::find($id)->update($request->all());
+                return ResponseObject::responseSuccess(['prod_run_line' => $prodRunLine, 'request' => $request->all(), 'prod_run_line_id' => $id], null, 'Update Production Run Complete');
             }
         } catch (\Throwable $th) {
             return ResponseObject::responseFail('Update Production Run Failed.');
@@ -185,7 +185,7 @@ class ProductionRunLineController extends Controller
     public function destroy($id)
     {
         try {
-            Prod_line::find($id)->delete();
+            Prod_run_line::find($id)->delete();
             return ResponseObject::responseSuccess([], null, 'Remove Production Run Line Successfully.');
         } catch (\Throwable $th) {
             return ResponseObject::responseFail('Remove Production Run Line Failed.');

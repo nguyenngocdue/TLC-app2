@@ -86,7 +86,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "disciplines" => ['belongsTo', User_discipline::class, 'discipline'],
         "departments" => ['belongsTo', Department::class, 'department'],
         "time_keep_types" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
-        "productionRunLines" => ['belongsToMany', Prod_line::class, 'prod_user_runs', 'user_id', 'prod_line_id']
+        "productionRunLines" => ['belongsToMany', Prod_run_line::class, 'prod_user_runs', 'user_id', 'prod_run_line_id']
     ];
     protected $guard_name = 'web';
     // public function media()

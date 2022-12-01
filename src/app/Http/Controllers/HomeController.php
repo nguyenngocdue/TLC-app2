@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\GetSetCookie;
 use Carbon\Carbon;
@@ -31,7 +32,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // $user = User::where('email', 'admin')->first();
+        // GetSetCookie::setCookieForever('time_zone', $user->time_zone);
+        // $token = $user->createToken('tlc_token')->plainTextToken;
+
         dd(CurrentUser::getPermissions());
-        return view('home');
+        // dump(User::where('email', 'admin')->first());
+        // dump(CurrentUser::getRoles());
+        // dd(CurrentUser::getRoles(User::where('email', 'admin')->first()));
+        // return response()->json([
+        //     'user' => $user,
+        // ]);
     }
 }

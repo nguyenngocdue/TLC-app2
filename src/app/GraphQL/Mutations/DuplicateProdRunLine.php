@@ -2,12 +2,10 @@
 
 namespace App\GraphQL\Mutations;
 
-use App\Models\Prod_line;
-use App\Models\Prod_user_run;
-use App\Utils\System\GetSetCookie;
+use App\Models\Prod_run_line;
 use Carbon\Carbon;
 
-final class DuplicateProdLine
+final class DuplicateProdRunLine
 {
     /**
      * @param  null  $_
@@ -17,7 +15,7 @@ final class DuplicateProdLine
     {
         try {
             $dt = Carbon::now();
-            $prodLine = Prod_line::find($args['id']);
+            $prodLine = Prod_run_line::find($args['id']);
             $newProdLine = $prodLine->replicate();
             $newProdLine->date = $dt->format('Y-m-d');
             $newProdLine->start = $dt->format('H:i:s');

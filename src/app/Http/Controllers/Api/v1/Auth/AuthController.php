@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\v1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Utils\Support\CurrentUser;
+use App\Utils\System\Api\ResponseObject;
 use App\Utils\System\GetSetCookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,16 +42,12 @@ class AuthController extends Controller
                 'settings' => []
             ]);
             $token = $user->createToken('tlc_token')->plainTextToken;
-            return response()->json([
-                'success' => true,
-                'access_token' => $token,
-                'token_type' => 'Bearer',
-                'message' => 'Successfully created user'
-            ], 200);
+            return ResponseObject::responseTokenAndUser($token, clone $user, $user, 'Login Successfully');
         }
     }
     public function login(Request $request)
     {
+
         $fields = $request->validate([
             'email' => 'required|string',
             'password' => 'required|string',
@@ -64,14 +62,10 @@ class AuthController extends Controller
                 if ($user) {
                     GetSetCookie::setCookieForever('time_zone', $user->time_zone);
                 }
-                return response()->json([
-                    'success' => true,
-                    'access_token' => $token,
-                    'token_type' => 'Bearer',
-                    'message' => 'Login Successfully'
-                ]);
+                return ResponseObject::responseTokenAndUser($token, clone $user, $user, 'Login Successfully');
             }
         } else {
+
             $user = User::where('email', $fields['email'])->first();
             if (!$user || !Hash::check($fields['password'], $user->password)) {
                 return response([
@@ -81,12 +75,8 @@ class AuthController extends Controller
             }
             GetSetCookie::setCookieForever('time_zone', $user->time_zone);
             $token = $user->createToken('tlc_token')->plainTextToken;
-            return response()->json([
-                'success' => true,
-                'access_token' => $token,
-                'token_type' => 'Bearer',
-                'message' => 'Login Successfully'
-            ], 200);
+
+            return ResponseObject::responseTokenAndUser($token, clone $user, $user, 'Login Successfully');
         }
     }
     public function details()

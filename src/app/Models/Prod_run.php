@@ -25,7 +25,7 @@ class Prod_run extends Model
 
     public $eloquentParams = [
         "productionOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],
-        "productionRunLines" => ['hasMany', Prod_line::class, 'prod_run_id'],
+        "productionRunLines" => ['hasMany', Prod_run_line::class, 'prod_run_id'],
         "routingLinks" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
     ];
     public function productionOrder()

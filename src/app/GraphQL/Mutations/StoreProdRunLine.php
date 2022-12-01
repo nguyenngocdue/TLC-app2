@@ -2,12 +2,10 @@
 
 namespace App\GraphQL\Mutations;
 
-use App\Models\Prod_line;
-use App\Models\Prod_user_run;
-use App\Utils\System\GetSetCookie;
+use App\Models\Prod_run_line;
 use Carbon\Carbon;
 
-final class StoreProdLine
+final class StoreProdRunLine
 {
     /**
      * @param  null  $_
@@ -17,7 +15,7 @@ final class StoreProdLine
     {
         try {
             $dt = Carbon::now();
-            $prodLine = Prod_line::create([
+            $prodLine = Prod_run_line::create([
                 "prod_run_id" => $args['prod_run_id'],
                 "date" => $args['date'] ?? $dt->format('Y-m-d'),
                 "start" => $args['start'] ?? $dt->format('H:i:s'),

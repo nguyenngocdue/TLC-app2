@@ -15,14 +15,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('prod_user_runs', function (Blueprint $table) {
-            $table->unsignedBigInteger('prod_line_id');
+            $table->unsignedBigInteger('prod_run_line_id');
             $table->unsignedBigInteger('user_id');
-            $table->primary(['prod_line_id', 'user_id']);
+            $table->primary(['prod_run_line_id', 'user_id']);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('prod_line_id')->references('id')->on('prod_lines')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('prod_run_line_id')->references('id')->on('prod_run_lines')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

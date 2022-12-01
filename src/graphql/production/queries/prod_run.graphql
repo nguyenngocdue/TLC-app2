@@ -20,7 +20,7 @@ type Prod_run {
     updated_at: DateTime
     productionOrder: Prod_order! @belongsTo
     routingLinks: Prod_routing_link! @belongsTo
-    productionRunLines: [Prod_line!]! @hasMany
+    productionRunLines: [Prod_run_line!]! @hasMany
 }
 
 input CreateProdRunInput {

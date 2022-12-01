@@ -2,6 +2,7 @@
 
 namespace App\Utils\System\Api;
 
+use App\Utils\Support\CurrentUser;
 use App\Utils\System\Memory;
 use App\Utils\System\Timer;
 
@@ -25,5 +26,19 @@ class ResponseObject
             'success' => false,
             'message' => $message
         ], $code);
+    }
+
+    public static function responseTokenAndUser($token = null, $userDefault = null, $user = null, $message = '', $code = 200)
+    {
+        return response()->json([
+            'success' => true,
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'user' => $userDefault,
+            'userRoleSet' =>  CurrentUser::getRoleSet($user),
+            'userRoles' => CurrentUser::getRoles($user),
+            'userPermissions' =>  CurrentUser::getPermissions($user),
+            'message' => $message
+        ], 200);
     }
 }

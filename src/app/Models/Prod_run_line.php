@@ -9,12 +9,12 @@ use Laravel\Scout\Searchable;
 use Illuminate\Notifications\Notifiable;
 
 
-class Prod_line extends Model
+class Prod_run_line extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["prod_run_id", "date", "start", "end", "status"];
     protected $primaryKey = 'id';
-    protected $table = 'prod_lines';
+    protected $table = 'prod_run_lines';
     public $timestamps = true;
     // protected $with = [
     //     'users',
@@ -22,7 +22,7 @@ class Prod_line extends Model
     // ];
 
     public $eloquentParams = [
-        "users" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_line_id', 'user_id'],
+        "users" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_run_line_id', 'user_id'],
         "productionRun" => ['belongsTo', Prod_run::class, 'prod_run_id'],
     ];
     public function users()
