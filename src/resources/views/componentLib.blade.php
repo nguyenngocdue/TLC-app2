@@ -28,6 +28,7 @@
 
         <x-renderer.card title="Tables">
             <x-renderer.card title="Table with Data">
+                @dump($tableColumns)
                 <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" />
             </x-renderer.card>
             <br />
@@ -156,6 +157,9 @@
             <x-navigation.tabs>
 
             </x-navigation.tabs>
+        </x-renderer.card>
+        <x-renderer.card title="Switch">
+            <x-renderer.switch color="bg-blue-900" content="Yellow" />
         </x-renderer.card>
     </div>
 </x-renderer.card>

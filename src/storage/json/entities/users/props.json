@@ -132,7 +132,7 @@
     "_featured_image": {
         "name": "_featured_image",
         "column_name": "featured_image",
-        "column_type": "bigint",
+        "column_type": "string",
         "label": "Featured Image",
         "control": "attachment",
         "col_span": "12",

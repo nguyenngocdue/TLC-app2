@@ -27,6 +27,7 @@ $id = $action === "edit" ? $values->id : "";
         $column_name = $value['column_name'];
         $column_type = $value['column_type'];
         $control = $value['control'];
+        $colSpan = $value['col_span'];
         $value_column_name = $action === "edit" ? $values->{$column_name} :'';
         // dd($values->getAttributes()['settings']);
 
@@ -107,9 +108,9 @@ $id = $action === "edit" ? $values->id : "";
                         @case('number')
                         <x-controls.number colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} labelName={{$label}} />
                         @break
-                        
-                        @case('z_test')
-                        {{ $values->Users_Count[0] }}
+
+                        @case('relationship')
+                        <x-controls.relationship id={{$id}} type={{$type}} colName={{$column_name}} tablePath={{$tablePath}} action={{$action}} colSpan={{$col_span}} />
                         @break
 
                         @default

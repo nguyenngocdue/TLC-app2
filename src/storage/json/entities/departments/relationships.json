@@ -15,7 +15,7 @@
         "renderer_view_all_param": "",
         "renderer_edit": "many_icons",
         "renderer_edit_param": "getManyIconParams",
-        "control_name": ""
+        "control_name": "Users_Count"
     },
     "_Users_Count2": {
         "name": "_Users_Count2",
@@ -24,6 +24,6 @@
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
-        "control_name": ""
+        "control_name": "Users_Count2"
     }
 }
