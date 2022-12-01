@@ -158,6 +158,9 @@
 
             </x-navigation.tabs>
         </x-renderer.card>
+        <x-renderer.card title="Switch">
+            <x-renderer.switch color="bg-blue-900" content="Yellow" />
+        </x-renderer.card>
     </div>
 </x-renderer.card>
 

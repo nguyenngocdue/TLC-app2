@@ -10,13 +10,25 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
+    },
+    "_title": {
+        "name": "_title",
+        "column_name": "title",
+        "column_type": "string",
+        "label": "Title",
+        "control": "",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "column_type": "string",
+        "column_type": "text",
         "label": "Name",
         "control": "text",
         "col_span": "12",
@@ -24,8 +36,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_content": {
         "name": "_content",
@@ -38,8 +49,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -52,8 +62,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -66,8 +75,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -80,7 +88,19 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
+    },
+    "_settings": {
+        "name": "_settings",
+        "column_name": "settings",
+        "column_type": "json",
+        "label": "Settings",
+        "control": "",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
     }
 }
