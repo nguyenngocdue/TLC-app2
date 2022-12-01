@@ -47,7 +47,24 @@ class Relationship extends Component
                         case 'getManyIconParams':
                             return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan'));
                         case 'getManyLineParams':
-                            return view('components.controls.manyLineParams')->with(compact('dataSource', 'colSpan'));
+                            $tableColumns = [
+                                ['title' => 'ID', "dataIndex" => "id", "renderer" => "id"],
+                                [
+                                    'title' => 'Name', "dataIndex" => "name",
+                                    "renderer" => "avatar-name",
+                                    "attributes" => ['title' => 'name', 'description' => 'position_rendered']
+                                ],
+                                ['title' => 'Position Rendered', "dataIndex" => "position_rendered"]
+                            ];
+
+                            $tableDataSource = array_map(fn ($item) => [
+                                'id' => $item['id'],
+                                'name' => $item['name'],
+                                'position_rendered' => $item['position_rendered']
+                            ], $dataSource);
+                            // dump($tableDataSource);
+
+                            return view('components.controls.manyLineParams')->with(compact('tableColumns', 'tableDataSource'));
                         default:
                             break;
                     }
