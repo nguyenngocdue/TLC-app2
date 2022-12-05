@@ -38,6 +38,7 @@ class Relationship extends Component
             foreach ($relationship as $value) {
                 if ($colName === $value['control_name']) {
                     $dataSource = $itemDB->$colName->all();
+                    $typeDB =  $dataSource[0]->getTable() ?? "";
                     if (count($dataSource) <= 0) {
                         $message =  "There is no item to be found";
                         $type = 'warning';
@@ -48,7 +49,7 @@ class Relationship extends Component
                             return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan'));
                         case 'getManyLineParams':
                             $tableColumns = [
-                                ['title' => 'ID', "dataIndex" => "id", "renderer" => "id", 'type' => 'user'],
+                                ['title' => 'ID', "dataIndex" => "id", "renderer" => "id", 'type' => $typeDB],
                                 ['title' => 'Name', "dataIndex" => "name"],
                                 ['title' => 'Position Rendered', "dataIndex" => "position_rendered"]
                             ];
