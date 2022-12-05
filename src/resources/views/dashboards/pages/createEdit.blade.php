@@ -110,7 +110,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case('relationship')
-                        <x-controls.relationship id={{$id}} type={{$type}} colName={{$column_name}} action={{$action}} colSpan={{$col_span}} />
+                        <x-controls.relationship id={{$id}} type={{$type}} colName={{$column_name}} tablePath={{$tablePath}} action={{$action}} colSpan={{$col_span}} />
                         @break
 
                         @default
