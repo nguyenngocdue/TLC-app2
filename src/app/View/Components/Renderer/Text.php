@@ -26,7 +26,9 @@ class Text extends Component
     {
         return function (array $data) {
             $str = $data['slot'];
-            return Str::limitWords($str, 10);
+            $str = Str::limitWords($str, 10);
+            if (strlen($str) > 50) $str = substr($str, 0, 50) . " ...";
+            return $str;
         };
     }
 }

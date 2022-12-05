@@ -22,7 +22,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_description": {
@@ -30,12 +30,12 @@
         "column_name": "description",
         "column_type": "text",
         "label": "Description",
-        "control": "text",
+        "control": "textarea",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_created_at": {
@@ -45,7 +45,7 @@
         "label": "Created At",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
@@ -58,7 +58,7 @@
         "label": "Updated At",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
