@@ -85,6 +85,10 @@ abstract class ViewAllController extends Controller
                     $output['renderer'] = "date-time";
                     $output['rendererParam'] = $prop['control'];
                     break;
+                case "text":
+                case "textarea":
+                    $output['renderer'] = "text";
+                    break;
                 default:
                     break;
             }

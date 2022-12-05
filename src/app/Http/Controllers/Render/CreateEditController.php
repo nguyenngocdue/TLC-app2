@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Render;
 
 use App\Events\EntityCreatedEvent;
+use App\Events\SendEmailItemCreated;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
@@ -103,6 +104,8 @@ abstract class CreateEditController extends Controller
 			if (isset($data)) {
 				$this->syncManyToManyRelationship($data, $newDataInputHasAttachment); // Check box
 
+				// $event = event(new SendEmailItemCreated(['id' => $data->id, 'type' => $this->type]));
+				// dd($event);
 				if ($hasAttachment) {
 					$this->setMediaParent($data, $colNamesHaveAttachment);
 					$this->updateMediaIdsToDBFields($_data, $colNamesHaveAttachment);

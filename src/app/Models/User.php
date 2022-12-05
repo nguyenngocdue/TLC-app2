@@ -6,6 +6,7 @@ use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
 use Laravel\Sanctum\HasApiTokens;
 use LdapRecord\Laravel\Auth\LdapAuthenticatable;
 use LdapRecord\Laravel\Auth\AuthenticatesWithLdap;
@@ -173,12 +174,13 @@ class User extends Authenticatable implements LdapAuthenticatable
             'type' => 'user',
             'title' => 'name',
             'description' => 'position_rendered',
+            'colspan' => 3,
         ];
     }
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id'],
+            ['dataIndex' => 'id', "renderer" => "id", 'type' => 'users',],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'position_rendered']
         ];

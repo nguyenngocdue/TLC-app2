@@ -1,4 +1,4 @@
-<div class="my-2 w-full overflow-hidden rounded-lg border  shadow-sm bg-white dark:bg-gray-800 ">
+<div class="my-2 w-full overflow-hidden rounded-lg border border-gray-300 sha1dow-sm bg-white dark:bg-gray-800 ">
     <div class="w-full overflow-x-auto">
         <div class='w-full overflow-hidden rounded-lg shadow-xs'>
             <div class='table-au1to table-fix1ed w-full overflow-x-auto h-fu1ll max-h-160'>

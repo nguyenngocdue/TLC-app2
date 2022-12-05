@@ -14,15 +14,16 @@ trait CreateEditFormula
     {
         $props = Props::getAllOf($type);
         $id = $item['id'];
+        $name = $item['name'] ?? "";
 
         foreach ($props as $prop) {
             if ($prop['formula'] === '') continue;
             switch ($prop['formula']) {
                 case "All_ConcatNameWith123":
-                    $value = (new All_ConcatNameWith123())($item['name']);
+                    $value = (new All_ConcatNameWith123())($name);
                     break;
                 case "All_SlugifyByName":
-                    $name = $item['slug'] ?? $item['name'];
+                    $name = $item['slug'] ?? $name;
                     $value = (new All_SlugifyByName())($name, $type, $id);
                     break;
                 case "User_PositionRendered":

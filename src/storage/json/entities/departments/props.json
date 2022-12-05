@@ -86,7 +86,7 @@
         "col_span": "12",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     },
@@ -95,11 +95,11 @@
         "column_name": "Users_Count",
         "column_type": "ELQ(hasMany)",
         "label": "User count",
-        "control": "relationship",
+        "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     },
@@ -108,11 +108,11 @@
         "column_name": "Users_Count2",
         "column_type": "ELQ(hasMany)",
         "label": "User count 2",
-        "control": "relationship",
+        "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     }
