@@ -1,0 +1,48 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    qaqc_insp_master_lists: [Qaqc_insp_master_list!]! @all @guard
+    qaqc_insp_master_list(id: ID @eq): Qaqc_insp_master_list @find @guard
+}
+type Qaqc_insp_master_list {
+    id: ID!
+    prod_routing_id: ID!
+    wir_description_id: ID!
+    name: String!
+    description: String!
+    control: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input CreateQAQCInspMasterListInput {
+    id: ID!
+    prod_routing_id: ID!
+    wir_description_id: ID!
+    name: String!
+    description: String!
+    control: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateQAQCInspMasterListInput {
+    id: ID!
+    prod_routing_id: ID
+    wir_description_id: ID
+    name: String
+    description: String
+    control: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createQAQCInspMasterList(
+        input: CreateQAQCInspMasterListInput! @spread
+    ): Qaqc_insp_master_list! @guard @create
+    updateQAQCInspMasterList(
+        input: UpdateQAQCInspMasterListInput! @spread
+    ): Qaqc_insp_master_list @guard @update
+    deleteQAQCInspMasterList(id: ID!): Qaqc_insp_master_list @guard @delete
+}

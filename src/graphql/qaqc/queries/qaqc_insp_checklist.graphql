@@ -1,0 +1,51 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    qaqc_insp_checklists: [Qaqc_insp_checklist!]! @all @guard
+    qaqc_insp_checklist(id: ID @eq): Qaqc_insp_checklist @find @guard
+}
+type Qaqc_insp_checklist {
+    id: ID!
+    prod_order_id: ID!
+    wir_description_id: ID!
+    name: String!
+    description: String!
+    owner_id: ID!
+    user: User! @belongsTo
+    prodOrder: Prod_order! @belongsTo
+    qaqcInspChecklistLines: [Qaqc_insp_checklist_line!]! @hasMany
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input CreateQAQCInspChecklistInput {
+    id: ID!
+    prod_order_id: ID!
+    wir_description_id: ID!
+    name: String!
+    description: String!
+    owner_id: ID!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateQAQCInspChecklistInput {
+    id: ID!
+    prod_order_id: ID
+    wir_description_id: ID
+    name: String
+    description: String
+    owner_id: ID
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createQAQCInspChecklist(
+        input: CreateQAQCInspChecklistInput! @spread
+    ): Qaqc_insp_checklist! @guard @create
+    updateQAQCInspChecklist(
+        input: UpdateQAQCInspChecklistInput! @spread
+    ): Qaqc_insp_checklist @guard @update
+    deleteQAQCInspChecklist(id: ID!): Qaqc_insp_checklist @guard @delete
+}
