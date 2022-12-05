@@ -1,1 +1,1 @@
-<x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNo="{{true}}" />
+<x-renderer.table :columns="$columns" :dataSource="$dataSource" showNo="{{true}}" />

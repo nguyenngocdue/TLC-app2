@@ -2,9 +2,8 @@
 
 namespace App\View\Components\Controls;
 
-use App\Utils\Support\Props;
 use App\Utils\Support\Relationships;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Relationship extends Component
@@ -29,45 +28,29 @@ class Relationship extends Component
         $modelPath = $this->tablePath;
         $type = $this->type;
         $id = $this->id;
-        $colSpan = $this->colSpan / 2;
+        $colSpan = $this->colSpan; // / 2;
         $action = $this->action;
 
-        if ($action === 'edit') {
-            $itemDB = $modelPath::find($id);
-            $relationship = Relationships::getAllOf($this->type);
-            foreach ($relationship as $value) {
-                if ($colName === $value['control_name']) {
-                    $dataSource = $itemDB->$colName->all();
-                    $typeDB =  $dataSource[0]->getTable() ?? "";
-                    if (count($dataSource) <= 0) {
-                        $message =  "There is no item to be found";
-                        $type = 'warning';
-                        return "<x-feedback.alert message='{{$message}}' type='{{$type}}' />";
-                    };
-                    switch ($value['renderer_edit_param']) {
-                        case 'getManyIconParams':
-                            return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan'));
-                        case 'getManyLineParams':
-                            $tableColumns = [
-                                ['title' => 'ID', "dataIndex" => "id", "renderer" => "id", 'type' => $typeDB],
-                                ['title' => 'Name', "dataIndex" => "name"],
-                                ['title' => 'Position Rendered', "dataIndex" => "position_rendered"]
-                            ];
+        if ($action !== 'edit') return "<x-feedback.alert message='Only show items on the update form' type='warning' />";
 
-                            $tableDataSource = array_map(fn ($item) => [
-                                'id' => $item['id'],
-                                'name' => $item['name'],
-                                'position_rendered' => $item['position_rendered']
-                            ], $dataSource);
-                            return view('components.controls.manyLineParams')->with(compact('tableColumns', 'tableDataSource'));
-                        default:
-                            break;
-                    }
-                }
+        $itemDB = $modelPath::find($id);
+        $relationship = Relationships::getAllOf($this->type);
+
+        foreach ($relationship as $value) {
+            if ($colName !== $value['control_name']) continue;
+            $dataSource = $itemDB->$colName->all();
+            $typeDB =  $dataSource[0]->getTable() ?? "";
+            if (count($dataSource) <= 0) return "<x-feedback.alert message='There is no item to be found' type='warning' />";
+            switch ($value['renderer_edit_param']) {
+                case 'getManyIconParams':
+                    return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan'));
+                case 'getManyLineParams':
+                    $x = "App\\Models\\" . Str::singular($typeDB);
+                    $columns = (new $x)->getManyLineParams();
+                    return view('components.controls.manyLineParams')->with(compact('columns', 'dataSource'));
+                default:
+                    return "Unknown renderer_edit_param [{$value['renderer_edit_param']}]";
             }
         }
-        $message =  "Only show items on the update form";
-        $type = 'warning';
-        return "<x-feedback.alert message='{{$message}}' type='{{$type}}' />";
     }
 }
