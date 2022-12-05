@@ -44,9 +44,10 @@ class RelationshipRenderer extends Component
             switch ($value['renderer_edit_param']) {
                 case 'getManyIconParams':
                     $colSpan = (new $ins)->getManyIconParams()['colspan'];
-                    return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan'));
+                    return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan', 'typeDB'));
                 case 'getManyLineParams':
                     $columns = (new $ins)->getManyLineParams();
+                    $columns[0] = array_merge($columns[0], ['type' => $typeDB]);
                     return view('components.controls.manyLineParams')->with(compact('columns', 'dataSource'));
                 default:
                     return "Unknown renderer_edit_param [{$value['renderer_edit_param']}]";
