@@ -15,6 +15,6 @@ class Qaqc_insp_chklst_line extends Model
     protected $table = "qaqc_insp_chklst_lines";
 
     public $eloquentParams = [
-        "valueDetails" => ["belongsTo",]
+        // "valueDetails" => ["belongsTo", ]
     ];
 }

@@ -1,29 +1,29 @@
 {
     "_user": {
         "name": "_user",
-        "relationship": "user",
+        "relationship": "belongsTo",
         "renderer_view_all": "avatar_name",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": ""
     },
-    "_Users_Count": {
-        "name": "_Users_Count",
-        "relationship": "hasMany",
-        "renderer_view_all": "count",
-        "renderer_view_all_param": "",
-        "renderer_edit": "many_icons",
+    "_prodOrder": {
+        "name": "_prodOrder",
+        "relationship": "belongsTo",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "production",
+        "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": "Users_Count"
+        "control_name": ""
     },
-    "_Users_Count2": {
-        "name": "_Users_Count2",
+    "_qaqcInspChklstLines": {
+        "name": "_qaqcInspChklstLines",
         "relationship": "hasMany",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "",
-        "control_name": "Users_Count2"
+        "control_name": "qaqcInspChklstLines"
     }
 }
