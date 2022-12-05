@@ -77,8 +77,8 @@ abstract class CreateEditController extends Controller
 		$props = Props::getAllOf($this->type);
 
 		$colNamesHaveAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
-		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamesHaveAttachment);
-		$dataInput = $request->except($arrayExcept);
+		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at', 'id'], $colNamesHaveAttachment);
+		$dataInput =  array_merge(['id' => null], $request->except($arrayExcept));
 
 		$deletedMediaIds = $this->deleteMediaIfNeeded($dataInput);
 		$hasAttachment = $this->saveMedia('store', $request, $dataInput, null, $deletedMediaIds);
