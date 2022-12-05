@@ -14,10 +14,10 @@ class CreateTableRelationshipCommand extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'ndc:migration {name : The name of the migration}
-        {--tables : The tables=table1,table2}
-        {--rel : The relationship}
-        ';
+    protected $signature = 'ndc:migration
+        {name : The name of the migration}
+        {--tables= : The tables=table1,table2}
+        {--rel= : The relationship}';
 
     /**
      * The console command description.
@@ -61,10 +61,11 @@ class CreateTableRelationshipCommand extends BaseCommand
         // It's possible for the developer to specify the tables to modify in this
         // schema operation. The developer may also specify if this table needs
         // to be freshly created so we can create the appropriate migrations.
-        $name = Str::snake(trim($this->getArgument('name')));
+        $name = Str::snake(trim($this->input->getArgument('name')));
 
-        $tables = $this->getOption('tables');
-        $relationship = $this->getOption('rel');
+        $tables = $this->input->getOption('tables');
+        error_log($tables);
+        $relationship = $this->input->getOption('rel');
         $var = explode(',', $tables);
         $tableOne = $var[0];
         $tableTwo = $var[1];

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('control');
             $table->text('value');
-            $table->unsignedBigInteger('qaqc_insp_value_detail_id')->nullable();
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;

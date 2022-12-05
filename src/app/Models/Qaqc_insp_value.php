@@ -8,13 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
-class Qaqc_insp_value_detail extends Model
+class Qaqc_insp_value extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["id", "name", "description"];
-    protected $table = "qaqc_insp_value_details";
+    protected $table = "qaqc_insp_values";
 
-    public $eloquentParams = [
-        "valueDetails" => ["hasMany", Qaqc_insp_chklst_line::class, 'value_detail_id']
-    ];
+    public $eloquentParams = [];
 }
