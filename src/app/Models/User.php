@@ -171,7 +171,6 @@ class User extends Authenticatable implements LdapAuthenticatable
     {
         return [
             'id' => 'id',
-            'type' => 'user',
             'title' => 'name',
             'description' => 'position_rendered',
             'colspan' => 3,
@@ -180,7 +179,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id', "renderer" => "id", 'type' => 'users',],
+            ['dataIndex' => 'id', "renderer" => "id"],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'position_rendered']
         ];
