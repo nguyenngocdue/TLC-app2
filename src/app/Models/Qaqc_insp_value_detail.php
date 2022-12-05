@@ -15,6 +15,6 @@ class Qaqc_insp_value_detail extends Model
     protected $table = "qaqc_insp_value_details";
 
     public $eloquentParams = [
-        "valueDetails" => ["hasMany", Qaqc_insp_checklist_line::class, 'value_detail_id']
+        "valueDetails" => ["hasMany", Qaqc_insp_chklst_line::class, 'value_detail_id']
     ];
 }

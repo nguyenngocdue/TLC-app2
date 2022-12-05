@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
-class Qaqc_insp_checklist extends Model
+class Qaqc_insp_chklst extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["id", "prod_order_id", "wir_description_id", "name", "description", "owner_id"];
-    protected $table = "qaqc_insp_checklists";
+    protected $table = "qaqc_insp_chklsts";
 
     public $eloquentParams = [
         "user" => ["belongsTo", User::class, "owner_id"],
         "prodOrder" => ["belongsTo", Prod_order::class, "prod_order_id"],
-        "qaqcInspChecklistLines" => ["hasMany", Qaqc_insp_checklist_line::class, "qaqc_insp_checklist_id"],
+        "qaqcInspChklstLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_id"],
     ];
     public function user()
     {
@@ -29,7 +29,7 @@ class Qaqc_insp_checklist extends Model
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function qaqcInspChecklistLines()
+    public function qaqcInspChklstLines()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

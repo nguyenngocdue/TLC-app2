@@ -14,9 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('qaqc_insp_checklist_lines', function (Blueprint $table) {
+        Schema::create('qaqc_insp_chklst_lines', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('qaqc_insp_checklist_id');
+            $table->unsignedBigInteger('qaqc_insp_chklst_id');
             $table->unsignedBigInteger('qaqc_insp_master_id');
             $table->string('name');
             $table->text('description')->nullable();
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qaqc_insp_checklist_lines');
+        Schema::dropIfExists('qaqc_insp_chklst_lines');
     }
 };

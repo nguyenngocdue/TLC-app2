@@ -20,5 +20,7 @@ class AttachmentCategorySeeder extends Seeder
         Attachment_category::create(['name' => 'attachment_4', 'description' => '', 'slug' => 'attachment_4']);
         Attachment_category::create(['name' => 'attachment_5', 'description' => '', 'slug' => 'attachment_5']);
         Attachment_category::create(['name' => 'featured_image', 'description' => '', 'slug' => 'featured_image']);
+        Attachment_category::create(['name' => 'insp_photos', 'description' => '', 'slug' => 'insp_photos']);
+        Attachment_category::create(['name' => 'insp_fail_photos', 'description' => '', 'slug' => 'insp_fail_photos']);
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('qaqc_insp_checklists', function (Blueprint $table) {
+        Schema::create('qaqc_insp_chklsts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('prod_order_id');
             $table->unsignedBigInteger('wir_description_id');
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qaqc_insp_checklists');
+        Schema::dropIfExists('qaqc_insp_chklsts');
     }
 };

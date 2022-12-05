@@ -11,17 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 $entities = Entities::getAll();
 Auth::routes();
 Route::group([
@@ -33,9 +22,10 @@ Route::group([
         foreach ($entities as $entity) {
             $entityName = $entity->getTable();
             $ucfirstName = Str::ucfirst($entityName);
-            Route::resource("$entityName/{$entityName}_viewall", "App\Http\Controllers\Render\\{$ucfirstName}\\{$ucfirstName}ViewAllController");
-            Route::resource("$entityName/{$entityName}_addnew", "App\Http\Controllers\Render\\{$ucfirstName}\\{$ucfirstName}CreateController");
-            Route::resource("$entityName/{$entityName}_edit", "App\Http\Controllers\Render\\{$ucfirstName}\\{$ucfirstName}EditController");
+            $path = "App\\Http\\Controllers\\Render\\{$ucfirstName}\\{$ucfirstName}";
+            Route::resource("$entityName/{$entityName}_viewall", "{$path}ViewAllController");
+            Route::resource("$entityName/{$entityName}_addnew", "{$path}CreateController");
+            Route::resource("$entityName/{$entityName}_edit", "{$path}EditController");
         }
         Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
         Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');

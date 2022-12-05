@@ -57,13 +57,13 @@ return new class extends Migration
             $table->foreign('prod_routing_id')->references('id')->on('prod_routings')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('wir_description_id')->references('id')->on('wir_descriptions')->onDelete('cascade')->onUpdate('cascade');
         });
-        Schema::table('qaqc_insp_checklists', function (Blueprint $table) {
+        Schema::table('qaqc_insp_chklsts', function (Blueprint $table) {
             $table->foreign('prod_order_id')->references('id')->on('prod_orders')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('wir_description_id')->references('id')->on('wir_descriptions')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
-        Schema::table('qaqc_insp_checklist_lines', function (Blueprint $table) {
-            $table->foreign('qaqc_insp_checklist_id')->references('id')->on('qaqc_insp_checklists')->onDelete('cascade')->onUpdate('cascade');
+        Schema::table('qaqc_insp_chklst_lines', function (Blueprint $table) {
+            $table->foreign('qaqc_insp_chklst_id')->references('id')->on('qaqc_insp_chklsts')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('qaqc_insp_master_id')->references('id')->on('qaqc_insp_master_lists')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('qaqc_insp_value_detail_id')->references('id')->on('qaqc_insp_value_details')->onDelete('cascade')->onUpdate('cascade');
         });

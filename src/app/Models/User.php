@@ -88,7 +88,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "departments" => ['belongsTo', Department::class, 'department'],
         "time_keep_types" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
         "productionRunLines" => ['belongsToMany', Prod_run_line::class, 'prod_user_runs', 'user_id', 'prod_run_line_id'],
-        "qaqcInspChecklists" => ['belongsTo', Qaqc_insp_checklist::class, 'owner_id']
+        "qaqcInspChklsts" => ['belongsTo', Qaqc_insp_chklst::class, 'owner_id']
     ];
     protected $guard_name = 'web';
     // public function media()
@@ -162,7 +162,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('user_id');
     }
 
-    public function qaqcInspChecklists()
+    public function qaqcInspChklsts()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
