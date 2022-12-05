@@ -6,7 +6,7 @@ use App\Utils\Support\Relationships;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
-class Relationship extends Component
+class RelationshipRenderer extends Component
 {
     /**
      * Create a new component instance.

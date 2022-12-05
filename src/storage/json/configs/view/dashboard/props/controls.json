@@ -15,7 +15,7 @@
         "picker_quarter",
         "picker_year",
         "radio",
-        "relationship",
+        "relationship_renderer",
         "switch",
         "text",
         "textarea",

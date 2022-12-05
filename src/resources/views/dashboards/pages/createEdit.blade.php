@@ -109,8 +109,8 @@ $id = $action === "edit" ? $values->id : "";
                         <x-controls.number colName={{$column_name}} valColName={{$value_column_name}} action={{$action}} :strTimeControl="$timeControls" control={{$control}} labelName={{$label}} />
                         @break
 
-                        @case('relationship')
-                        <x-controls.relationship id={{$id}} type={{$type}} colName={{$column_name}} tablePath={{$tablePath}} action={{$action}} colSpan={{$col_span}} />
+                        @case('relationship_renderer')
+                        <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$column_name}} tablePath={{$tablePath}} action={{$action}} colSpan={{$col_span}} />
                         @break
 
                         @default
