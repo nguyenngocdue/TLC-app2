@@ -16,7 +16,8 @@ class ComponentLib extends Controller
             ],
             [
                 "title" => 'Client', "dataIndex" => "client",
-                "renderer" => "avatar-name", "attributes" => ['title' => 'client', 'description' => 'amount', 'avatar' => 'avatar']
+                "renderer" => "avatar-name",
+                "attributes" => ['title' => 'client', 'description' => 'amount', 'avatar' => 'avatar']
             ],
             [
                 "title" => 'Logged In',

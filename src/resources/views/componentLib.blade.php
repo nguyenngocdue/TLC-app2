@@ -5,11 +5,11 @@
 <br />
 <x-renderer.card title="Feedback">
     <div class="grid gap-6 mb-8 md:grid-cols-2">
-        <x-renderer.card title="Placeholder">
+        <x-renderer.card title="AvatarName">
             AvatarName with Attributes
-            <x-renderer.avatar-name title="Fortune Truong" description="Software Engineer">?</x-renderer.avatar-name>
+            <x-renderer.avatar-name title="Fortune Truong" description="Software Engineer" href="http://www.google.com">?</x-renderer.avatar-name>
             AvatarName with Slot
-            <x-renderer.avatar-name>{"name":"Thuc Vo", "position_rendered":"Software Tester"}</x-renderer.avatar-name>
+            <x-renderer.avatar-name>{"name":"Thuc Vo", "position_rendered":"Software Tester","href":"http://www.google.com"}</x-renderer.avatar-name>
             Empty attribute
             <x-renderer.avatar-name>?</x-renderer.avatar-name>
 
