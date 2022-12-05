@@ -1,0 +1,42 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    wir_descriptions: [Wir_description!]! @all @guard
+    wir_description(id: ID @eq): Wir_description @find @guard
+}
+type Wir_description {
+    id: ID!
+    name: String!
+    description: String!
+    slug: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input CreateWirDescriptionInput {
+    id: ID!
+    name: String!
+    description: String!
+    slug: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateWirDescriptionInput {
+    id: ID!
+    name: String
+    description: String
+    slug: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createWirDescription(
+        input: CreateWirDescriptionInput! @spread
+    ): Wir_description! @guard @create
+    updateWirDescription(
+        input: UpdateWirDescriptionInput! @spread
+    ): Wir_description @guard @update
+    deleteWirDescription(id: ID!): Wir_description @guard @delete
+}

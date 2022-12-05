@@ -26,6 +26,7 @@ class Prod_order extends Model
         "productionRuns" => ['hasMany', Prod_run::class, 'prod_order_id'],
         "subProject" => ['belongsTo', Sub_project::class],
         "routing" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
+        "qaqcInspChecklists" => ['hasMany', Qaqc_insp_checklist::class, 'prod_order_id'],
     ];
     public function subProject()
     {
@@ -40,6 +41,11 @@ class Prod_order extends Model
     }
 
     public function productionRuns()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function qaqcInspChecklists()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

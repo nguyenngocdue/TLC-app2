@@ -14,5 +14,13 @@ class Wir_description extends Model
     protected $fillable = ["name", 'description', 'slug'];
     protected $table = "wir_descriptions";
 
-    public $eloquentParams = [];
+    public $eloquentParams = [
+        "prodRoutingDetails" => ["hasMany", Prod_routing_detail::class, "wir_description_id",]
+    ];
+
+    public function prodRoutingDetails()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 }
