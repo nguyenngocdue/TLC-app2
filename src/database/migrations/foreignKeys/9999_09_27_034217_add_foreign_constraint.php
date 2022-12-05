@@ -65,7 +65,6 @@ return new class extends Migration
         Schema::table('qaqc_insp_chklst_lines', function (Blueprint $table) {
             $table->foreign('qaqc_insp_chklst_id')->references('id')->on('qaqc_insp_chklsts')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('qaqc_insp_master_id')->references('id')->on('qaqc_insp_master_lists')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('qaqc_insp_value_detail_id')->references('id')->on('qaqc_insp_value_details')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
