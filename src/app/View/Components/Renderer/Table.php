@@ -86,8 +86,8 @@ class Table extends Component
         default:
           $dataIndex = $column['dataIndex'];
           $rawData = $dataLine[$dataIndex] ?? ""; //"<strong>$dataIndex</strong> not found";
+          $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
           $rendered = $renderer ? $this->applyRender($renderer, $rawData, $column, $dataLine) : $rawData;
-          $rendered = is_array($rendered) ? count($rendered) . " items" : $rendered;
           break;
       }
       $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
