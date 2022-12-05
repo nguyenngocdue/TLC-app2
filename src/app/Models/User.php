@@ -167,7 +167,7 @@ class User extends Authenticatable implements LdapAuthenticatable
             'type' => 'user',
             'title' => 'name',
             'description' => 'position_rendered',
-            'colspan' => 6,
+            'colspan' => 4,
         ];
     }
     public function getManyLineParams()
