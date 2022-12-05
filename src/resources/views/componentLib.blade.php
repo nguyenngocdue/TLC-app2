@@ -41,6 +41,7 @@
             <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive)">
                 showNoR= { { true } }
                 groupBy="client"
+
                 <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="client" />
             </x-renderer.card>
         </x-renderer.card>
