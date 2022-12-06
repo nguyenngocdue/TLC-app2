@@ -10,8 +10,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_name": {
         "name": "_name",
@@ -24,8 +23,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_description": {
         "name": "_description",
@@ -38,8 +36,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_slug": {
         "name": "_slug",
@@ -52,8 +49,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": "All_SlugifyByName"
     },
     "_created_at": {
         "name": "_created_at",
@@ -66,8 +62,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -80,7 +75,6 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     }
 }

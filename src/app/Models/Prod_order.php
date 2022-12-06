@@ -13,7 +13,10 @@ class Prod_order extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     public $timestamps = true;
-    protected $fillable = ["id", "slug", "name", "production", "compliance", "description", "quantity", "prod_sub_project_id", "prod_routing_id"];
+    protected $fillable = [
+        "id", "slug", "name", "production", "compliance", "description", "quantity",
+        "sub_project_id", "prod_routing_id"
+    ];
     protected $primaryKey = 'id';
     protected $table = 'prod_orders';
     // protected $with = [
@@ -24,7 +27,7 @@ class Prod_order extends Model
 
     public $eloquentParams = [
         "productionRuns" => ['hasMany', Prod_run::class, 'prod_order_id'],
-        "subProject" => ['belongsTo', Sub_project::class],
+        "subProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "routing" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
         "qaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'prod_order_id'],
     ];

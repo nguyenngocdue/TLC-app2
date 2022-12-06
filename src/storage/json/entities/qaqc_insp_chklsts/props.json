@@ -12,32 +12,6 @@
         "validation": "",
         "formula": ""
     },
-    "_prod_order_id": {
-        "name": "_prod_order_id",
-        "column_name": "prod_order_id",
-        "column_type": "bigint",
-        "label": "Prod Order Id",
-        "control": "text",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
-    },
-    "_wir_description_id": {
-        "name": "_wir_description_id",
-        "column_name": "wir_description_id",
-        "column_type": "bigint",
-        "label": "Wir Description Id",
-        "control": "text",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
-    },
     "_name": {
         "name": "_name",
         "column_name": "name",
@@ -58,10 +32,36 @@
         "label": "Description",
         "control": "textarea",
         "col_span": "12",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "column_type": "string",
+        "label": "Slug",
+        "control": "text",
+        "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
+        "formula": "All_SlugifyByName"
+    },
+    "_prod_order_id": {
+        "name": "_prod_order_id",
+        "column_name": "prod_order_id",
+        "column_type": "bigint",
+        "label": "Prod Order Id",
+        "control": "dropdown",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "required",
         "formula": ""
     },
     "_owner_id": {
@@ -77,6 +77,19 @@
         "validation": "required",
         "formula": ""
     },
+    "_consent_number": {
+        "name": "_consent_number",
+        "column_name": "consent_number",
+        "column_type": "string",
+        "label": "Consent Number",
+        "control": "text",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -84,7 +97,7 @@
         "label": "Created At",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
@@ -97,7 +110,7 @@
         "label": "Updated At",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
