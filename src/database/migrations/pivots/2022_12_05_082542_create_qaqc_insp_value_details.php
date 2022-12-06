@@ -18,18 +18,19 @@ return new class extends Migration
         $relationship = 'rel_1';
         if (strlen($relationship) > 1) {
             $name = md5(Str::plural('qaqc_insp_chklst_line') . '_' . Str::plural('qaqc_insp_value'));
-            $tableName = Str::plural('qaqc_insp_chklst_line') . '_' . Str::plural('qaqc_insp_value') . '_' . $relationship;
+            // $tableName = Str::plural('qaqc_insp_chklst_line') . '_' . Str::plural('qaqc_insp_value') . '_' . $relationship;
         } else {
             $name = null;
-            $tableName = Str::plural('qaqc_insp_chklst_line') . '_' . Str::plural('qaqc_insp_value');
+            // $tableName = Str::plural('qaqc_insp_chklst_line') . '_' . Str::plural('qaqc_insp_value');
         }
+        $tableName = "qaqc_insp_value_details";
         return [$tableName, $name];
     }
     public function up()
     {
 
         Schema::create($this->checkRelationShip()[0], function (Blueprint $table) {
-            $table->id();
+            // $table->id();
             $table->unsignedBigInteger('qaqc_insp_chklst_line_id');
             $table->unsignedBigInteger('qaqc_insp_value_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

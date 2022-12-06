@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             AttachmentCategorySeeder::class,
             PostSeeder::class,
 
+            Qaqc_insp_chklst_groupSeeder::class,
+
             // UserSeeder::class,
             // MediaSeeder::class,
             // WorkplaceSeeder::class,

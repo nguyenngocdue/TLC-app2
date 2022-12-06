@@ -1,0 +1,11 @@
+{
+    "_parent": {
+        "name": "_parent",
+        "relationship": "belongsTo",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control_name": "parent"
+    }
+}

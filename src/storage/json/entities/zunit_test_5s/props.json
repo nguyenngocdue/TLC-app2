@@ -34,7 +34,7 @@
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "true",
+        "new_line": "",
         "validation": "",
         "formula": ""
     },
@@ -47,7 +47,7 @@
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "true",
+        "new_line": "",
         "validation": "",
         "formula": ""
     },
@@ -121,7 +121,7 @@
         "column_name": "media",
         "column_type": "ELQ(hasMany)",
         "label": "Thumbnail",
-        "control": "relationship",
+        "control": "",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "true",
