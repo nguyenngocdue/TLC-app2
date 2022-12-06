@@ -12,7 +12,7 @@ class CommentRenderer extends Component
      *
      * @return void
      */
-    public function __construct(private $id, private $type, private $colName, private $tablePath, private $action)
+    public function __construct(private $id, private $type, private $colName = '', private $tablePath, private $action)
     {
         //
     }
@@ -26,7 +26,9 @@ class CommentRenderer extends Component
     {
         $name = $this->colName;
         $type = $this->type;
+        $colName = $this->colName;
+        // dd($colName);
         // dump($currentUser);
-        return view('components.controls.comment-renderer')->with(compact('name', 'type'));
+        return view('components.controls.comment-renderer')->with(compact('name', 'type', 'colName'));
     }
 }

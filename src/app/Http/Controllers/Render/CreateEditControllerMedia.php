@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Render;
 
 use App\Helpers\Helper;
 use App\Models\Attachment;
+use App\Models\Comment;
 use App\Utils\Constant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -77,5 +78,24 @@ trait CreateEditControllerMedia
             }
         }
         return false;
+    }
+
+
+    private function saveComments($action, $request, $dataInput)
+    {
+        // dump($dataInput);
+        $commentCatesDB = DB::table('comment_categories')->select("id", 'name')->get();
+        $json = json_decode($commentCatesDB, true);
+        $nameIdsDB = array_column($json, 'id', 'name');
+        foreach ($dataInput['content'] as $key => $content) {
+            $x = Comment::create(
+                [
+                    'content' => $content,
+                    'owner_id' => (int)$dataInput['owner_id'],
+                    'category' => $nameIdsDB[$dataInput['category'][$key]]
+                ]
+            );
+        }
+        // dd($nameIdsDB);
     }
 }

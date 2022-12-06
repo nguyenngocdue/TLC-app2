@@ -11,8 +11,10 @@ use Laravel\Scout\Searchable;
 class Comment extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = [];
+    protected $fillable = ['content', 'owner_id', 'category'];
     protected $table = "comments";
+    protected $primaryKey = 'id';
+
 
     public $eloquentParams = [];
 }

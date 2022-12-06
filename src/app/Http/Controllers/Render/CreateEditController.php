@@ -80,6 +80,10 @@ abstract class CreateEditController extends Controller
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at', 'id'], $colNamesHaveAttachment);
 		$dataInput =  array_merge(['id' => null], $request->except($arrayExcept));
 
+		$this->saveComments('store', $request, $dataInput);
+		dd($dataInput);
+
+
 		$deletedMediaIds = $this->deleteMediaIfNeeded($dataInput);
 		$hasAttachment = $this->saveMedia('store', $request, $dataInput, null, $deletedMediaIds);
 

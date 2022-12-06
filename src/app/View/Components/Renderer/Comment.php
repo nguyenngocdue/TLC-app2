@@ -32,6 +32,7 @@ class Comment extends Component
         $name = $this->name;
         $type = $this->type;
         $readonly = $this->readonly;
-        return view('components.renderer.comment')->with(compact('name', 'type', 'readonly', 'ownerDB'));
+        $colName = $this->colName;
+        return view('components.renderer.comment')->with(compact('name', 'type', 'readonly', 'ownerDB', 'colName'));
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->text('text');
+            $table->text('content');
             $table->unsignedBigInteger(('owner_id'));
             $table->unsignedBigInteger('object_id')->nullable();
             $table->string('object_type');
