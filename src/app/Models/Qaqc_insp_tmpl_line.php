@@ -8,28 +8,32 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
-class Qaqc_insp_chklst extends Model
+class Qaqc_insp_tmpl_line extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = ["id", "prod_order_id", "name", "description", "owner_id", "slug", "consent_number"];
-    protected $table = "qaqc_insp_chklsts";
+    protected $fillable = [
+        "id", "name", "description", "control_type",
+        "qaqc_insp_tmpl_id", "qaqc_insp_chklst_sheet_id", "qaqc_insp_chklst_group_id",
+    ];
+    protected $table = "qaqc_insp_tmpl_lines";
 
     public $eloquentParams = [
-        "user" => ["belongsTo", User::class, "owner_id"],
-        "prodOrder" => ["belongsTo", Prod_order::class, "prod_order_id"],
-        "qaqcInspChklstLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_id"],
+        "getTemplate" => ["belongsTo", Qaqc_insp_tmpl::class, "qaqc_insp_tmpl_id"],
+        "getSheet" => ["belongsTo", Qaqc_insp_chklst_sheet::class, "qaqc_insp_chklst_sheet_id"],
+        "getGroup" => ["belongsTo", Qaqc_insp_chklst_group::class, "qaqc_insp_chklst_group_id"],
     ];
-    public function user()
+
+    public function getTemplate()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function prodOrder()
+    public function getSheet()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function qaqcInspChklstLines()
+    public function getGroup()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

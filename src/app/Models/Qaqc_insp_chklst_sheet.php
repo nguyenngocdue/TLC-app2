@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
-class Qaqc_insp_master_list extends Model
+class Qaqc_insp_chklst_sheet extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = ["id", "prod_routing_id", "wir_description_id", "name", "description", "control"];
-    protected $table = "qaqc_insp_master_lists";
+    protected $fillable = ["id", "name", "description", "slug"];
+    protected $table = "qaqc_insp_chklst_sheets";
 
     public $eloquentParams = [];
 }
