@@ -2,8 +2,8 @@
     "_getChklst": {
         "name": "_getChklst",
         "relationship": "belongsTo",
-        "renderer_view_all": "",
-        "renderer_view_all_param": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": ""
@@ -11,8 +11,8 @@
     "_getSheet": {
         "name": "_getSheet",
         "relationship": "belongsTo",
-        "renderer_view_all": "",
-        "renderer_view_all_param": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "description",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": ""
@@ -20,8 +20,8 @@
     "_getGroup": {
         "name": "_getGroup",
         "relationship": "belongsTo",
-        "renderer_view_all": "",
-        "renderer_view_all_param": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "description",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": ""

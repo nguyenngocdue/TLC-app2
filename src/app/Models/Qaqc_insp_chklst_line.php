@@ -38,4 +38,16 @@ class Qaqc_insp_chklst_line extends Model
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public function getManyLineParams()
+    {
+        return [
+            ['dataIndex' => 'id', "renderer" => "id", "align" => "center", "type" => "qaqc_insp_chklst_lines"],
+            ['dataIndex' => 'getChklst', 'title' => "Checklist", 'renderer' => "column", "rendererParam" => "description"],
+            ['dataIndex' => 'getSheet', 'title' => "Sheet", 'renderer' => "column", "rendererParam" => "description"],
+            ['dataIndex' => 'getGroup', "title" => "Group", 'renderer' => "column", "rendererParam" => "description"],
+            ['dataIndex' => 'name'],
+            ['dataIndex' => 'description'],
+            ['dataIndex' => 'control_type'],
+        ];
+    }
 }

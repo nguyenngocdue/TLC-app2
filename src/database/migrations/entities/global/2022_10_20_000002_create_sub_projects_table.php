@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('sub_projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('sub_project_status_id');
             $table->string('slug')->unique();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

@@ -125,7 +125,7 @@
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     }

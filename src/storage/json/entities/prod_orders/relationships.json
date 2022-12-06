@@ -2,17 +2,17 @@
     "_productionRuns": {
         "name": "_productionRuns",
         "relationship": "productionRuns",
-        "renderer_view_all": "",
+        "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "control_name": "productionRuns"
     },
     "_subProject": {
         "name": "_subProject",
         "relationship": "subProject",
-        "renderer_view_all": "",
-        "renderer_view_all_param": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": ""
@@ -20,8 +20,8 @@
     "_routing": {
         "name": "_routing",
         "relationship": "routing",
-        "renderer_view_all": "",
-        "renderer_view_all_param": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": ""
@@ -29,10 +29,10 @@
     "_qaqcInspChklsts": {
         "name": "_qaqcInspChklsts",
         "relationship": "hasMany",
-        "renderer_view_all": "",
+        "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "control_name": "qaqcInspChklsts"
     }
 }
