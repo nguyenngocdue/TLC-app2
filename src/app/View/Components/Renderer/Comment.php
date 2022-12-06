@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class Comment extends Component
@@ -11,9 +12,13 @@ class Comment extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
+    public function __construct(
+        private $name = '',
+        private $type = '',
+        private $id = '',
+        private $readonly = '',
+        private $colName = '',
+    ) {
     }
 
     /**
@@ -23,6 +28,10 @@ class Comment extends Component
      */
     public function render()
     {
-        return view('components.renderer.comment');
+        $ownerDB = Auth::user();
+        $name = $this->name;
+        $type = $this->type;
+        $readonly = $this->readonly;
+        return view('components.renderer.comment')->with(compact('name', 'type', 'readonly', 'ownerDB'));
     }
 }

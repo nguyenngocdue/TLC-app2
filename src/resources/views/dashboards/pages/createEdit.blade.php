@@ -114,6 +114,10 @@ $id = $action === "edit" ? $values->id : "";
                         <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$column_name}} tablePath={{$tablePath}} action={{$action}} colSpan={{$col_span}} />
                         @break
 
+                        @case('comment')
+                        <x-controls.comment-renderer id={{$id}} type={{$type}} colName={{$column_name}} tablePath={{$tablePath}} action={{$action}} colSpan={{$col_span}} />
+                        @break
+
                         @default
                         <x-feedback.alert type="warning" title="Control" message="[{{$control}}] is not available" />
                         @break
