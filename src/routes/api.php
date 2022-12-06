@@ -52,6 +52,15 @@ Route::group([
     });
 });
 Route::group([
+    'prefix' => 'v1/qaqc',
+], function () {
+    Route::group([
+        'middleware' => ['auth:sanctum'],
+    ], function () {
+        Route::post('upload_file', [App\Http\Controllers\Api\v1\qaqc\UploadFileQaqc::class, 'uploadFileQaqc']);
+    });
+});
+Route::group([
     'prefix' => 'v1/login',
 ], function () {
     Route::get('google', [App\Http\Controllers\Api\v1\Auth\SocialiteAuthController::class, 'redirectToGoogle']);

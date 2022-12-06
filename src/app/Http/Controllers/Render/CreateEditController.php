@@ -75,11 +75,10 @@ abstract class CreateEditController extends Controller
 	public function store(Request $request)
 	{
 		$props = Props::getAllOf($this->type);
-
 		$colNamesHaveAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamesHaveAttachment);
 		$dataInput = $request->except($arrayExcept);
-
+		dd($dataInput);
 		$deletedMediaIds = $this->deleteMediaIfNeeded($dataInput);
 		$hasAttachment = $this->saveMedia('store', $request, $dataInput, null, $deletedMediaIds);
 
@@ -199,7 +198,6 @@ abstract class CreateEditController extends Controller
 		$media_cateTb = json_decode(DB::table('attachment_categories')->select('id', 'name')->get(), true);
 		$ids_names_cateMedia = array_column($media_cateTb, 'name', 'id');
 		$ids_names_cateTb = array_column($dbMorphManyMedia, 'category', 'id');
-
 		$idsHasAttachMent = array_values(array_unique($ids_names_cateTb));
 		$names_val_fields = [];
 		foreach ($ids_names_cateTb as $key => $value) {

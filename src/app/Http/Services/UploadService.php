@@ -34,7 +34,6 @@ class UploadService
 
                         $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
                         $fileNameNormal = pathinfo($fileName, PATHINFO_FILENAME);
-
                         $dt = Carbon::now('Asia/Ho_Chi_Minh');
                         $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
                         $path_image = $path . $fileName;
@@ -70,11 +69,11 @@ class UploadService
 
             $flip_cateIdName = array_flip($cateIdName);
             foreach ($tempMedia as $key => $media) {
-                // dd($tempMedia);
+
                 $newMedia = Attachment::create($media);
                 $colNameMedia[$newMedia['id']] = $flip_cateIdName[$media['category']];   // [id-media = "attachment-name"]
             }
-
+            dd($colNameMedia);
             return $colNameMedia;
         } catch (\Exception $e) {
             return  $e;

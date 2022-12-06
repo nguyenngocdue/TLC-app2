@@ -10,6 +10,6 @@ final class UploadFileQaqc
      */
     public function __invoke($_, array $args)
     {
-        // TODO implement the resolver
+        $file = $args['file'];
     }
 }
