@@ -6,8 +6,8 @@ extend type Query {
     prod_routing(id: ID @eq): Prod_routing @find @guard
 }
 type Prod_routing_linkProd_routingPivot {
-    routing_id: Int!
-    routing_link_id: Int!
+    prod_routing_id: Int!
+    prod_routing_link_id: Int!
     target_hours: Float!
     target_man_hours: Float!
 }
