@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('qaqc_insp_chklst_sheets', function (Blueprint $table) {
+        Schema::create('qaqc_insp_sheets', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qaqc_insp_chklst_sheets');
+        Schema::dropIfExists('qaqc_insp_sheets');
     }
 };

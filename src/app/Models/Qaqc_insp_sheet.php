@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
-class Qaqc_insp_chklst_sheet extends Model
+class Qaqc_insp_sheet extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["id", "name", "description", "slug"];
-    protected $table = "qaqc_insp_chklst_sheets";
+    protected $table = "qaqc_insp_sheets";
 
     public $eloquentParams = [
-        "getTemplateLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_chklst_sheet_id"],
+        "getTemplateLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_sheet_id"],
     ];
 
     public function getTemplateLines()

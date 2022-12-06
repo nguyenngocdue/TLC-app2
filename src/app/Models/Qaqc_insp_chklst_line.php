@@ -13,14 +13,14 @@ class Qaqc_insp_chklst_line extends Model
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = [
         "id", "name", "description", "control_type", "value",
-        "qaqc_insp_chklst_id", "qaqc_insp_chklst_sheet_id", "qaqc_insp_chklst_group_id",
+        "qaqc_insp_chklst_id", "qaqc_insp_sheet_id", "1aqc_insp_group_id",
     ];
     protected $table = "qaqc_insp_chklst_lines";
 
     public $eloquentParams = [
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, "qaqc_insp_chklst_id"],
-        "getSheet" => ["belongsTo", Qaqc_insp_chklst_sheet::class, "qaqc_insp_chklst_sheet_id"],
-        "getGroup" => ["belongsTo", Qaqc_insp_chklst_group::class, "qaqc_insp_chklst_group_id"],
+        "getSheet" => ["belongsTo", Qaqc_insp_sheet::class, "qaqc_insp_sheet_id"],
+        "getGroup" => ["belongsTo", Qaqc_insp_group::class, "qaqc_insp_group_id"],
     ];
 
     public function getChklst()

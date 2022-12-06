@@ -13,14 +13,14 @@ class Qaqc_insp_tmpl_line extends Model
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = [
         "id", "name", "description", "control_type",
-        "qaqc_insp_tmpl_id", "qaqc_insp_chklst_sheet_id", "qaqc_insp_chklst_group_id",
+        "qaqc_insp_tmpl_id", "qaqc_insp_sheet_id", "qaqc_insp_group_id",
     ];
     protected $table = "qaqc_insp_tmpl_lines";
 
     public $eloquentParams = [
         "getTemplate" => ["belongsTo", Qaqc_insp_tmpl::class, "qaqc_insp_tmpl_id"],
-        "getSheet" => ["belongsTo", Qaqc_insp_chklst_sheet::class, "qaqc_insp_chklst_sheet_id"],
-        "getGroup" => ["belongsTo", Qaqc_insp_chklst_group::class, "qaqc_insp_chklst_group_id"],
+        "getSheet" => ["belongsTo", Qaqc_insp_sheet::class, "qaqc_insp_sheet_id"],
+        "getGroup" => ["belongsTo", Qaqc_insp_group::class, "qaqc_insp_group_id"],
     ];
 
     public function getTemplate()

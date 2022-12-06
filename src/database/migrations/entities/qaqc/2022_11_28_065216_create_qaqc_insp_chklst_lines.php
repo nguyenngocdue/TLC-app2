@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('control_type');
             $table->text('value');
             $table->unsignedBigInteger('qaqc_insp_chklst_id');
-            $table->unsignedBigInteger('qaqc_insp_chklst_sheet_id');
-            $table->unsignedBigInteger('qaqc_insp_chklst_group_id');
+            $table->unsignedBigInteger('qaqc_insp_sheet_id');
+            $table->unsignedBigInteger('qaqc_insp_group_id');
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;

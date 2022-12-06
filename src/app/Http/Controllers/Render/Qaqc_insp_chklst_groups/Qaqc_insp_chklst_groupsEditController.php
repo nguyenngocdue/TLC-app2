@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Render\Qaqc_insp_chklst_groups;
+namespace App\Http\Controllers\Render\Qaqc_insp_groups;
 
 use App\Http\Controllers\Render\CreateEditController;
-use App\Models\Qaqc_insp_chklst_group;
+use App\Models\Qaqc_insp_group;
 
-class Qaqc_insp_chklst_groupsEditController extends CreateEditController
+class Qaqc_insp_groupsEditController extends CreateEditController
 {
-    protected $type = 'qaqc_insp_chklst_group';
-    protected $data = Qaqc_insp_chklst_group::class;
+    protected $type = 'qaqc_insp_group';
+    protected $data = Qaqc_insp_group::class;
     protected $action = "edit";
-
 }
