@@ -54,9 +54,9 @@ class RelationshipRenderer extends Component
                 $colSpan = $columns['colspan'] ?? 6;
                 return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan', 'typeDB'));
             case "many_lines":
-                return view('components.controls.manyLineParams')->with(compact('columns', 'dataSource'));
+                return view('components.controls.manyLineParams')->with(compact('columns', 'dataSource', 'fn'));
             default:
-                return "Unknown renderer_edit [$renderer_edit] in Relationship Screen";
+                return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
         }
     }
 }

@@ -1,11 +1,11 @@
 {
-    "_getParent": {
-        "name": "_getParent",
-        "relationship": "belongsTo",
-        "renderer_view_all": "column",
+    "_getTemplateLines": {
+        "name": "_getTemplateLines",
+        "relationship": "hasMany",
+        "renderer_view_all": "count",
         "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control_name": ""
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control_name": "getTemplateLines"
     }
 }

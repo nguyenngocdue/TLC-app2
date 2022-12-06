@@ -41,7 +41,8 @@ class Qaqc_insp_tmpl_line extends Model
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id', "renderer" => "id", "type" => "qaqc_insp_tmpl_lines"],
+            ['dataIndex' => 'id', "renderer" => "id", "align" => "center", "type" => "qaqc_insp_tmpl_lines"],
+            ['dataIndex' => 'getTemplate', 'title' => "Template", 'renderer' => "column", "rendererParam" => "description"],
             ['dataIndex' => 'getSheet', 'title' => "Sheet", 'renderer' => "column", "rendererParam" => "description"],
             ['dataIndex' => 'getGroup', "title" => "Group", 'renderer' => "column", "rendererParam" => "description"],
             ['dataIndex' => 'name'],

@@ -14,5 +14,13 @@ class Qaqc_insp_chklst_sheet extends Model
     protected $fillable = ["id", "name", "description", "slug"];
     protected $table = "qaqc_insp_chklst_sheets";
 
-    public $eloquentParams = [];
+    public $eloquentParams = [
+        "getTemplateLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_chklst_sheet_id"],
+    ];
+
+    public function getTemplateLines()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 }

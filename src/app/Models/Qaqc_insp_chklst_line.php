@@ -21,7 +21,6 @@ class Qaqc_insp_chklst_line extends Model
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, "qaqc_insp_chklst_id"],
         "getSheet" => ["belongsTo", Qaqc_insp_chklst_sheet::class, "qaqc_insp_chklst_sheet_id"],
         "getGroup" => ["belongsTo", Qaqc_insp_chklst_group::class, "qaqc_insp_chklst_group_id"],
-        // "hasDetails" => ["belongsToMany", Qaqc_insp_value],
     ];
 
     public function getChklst()
