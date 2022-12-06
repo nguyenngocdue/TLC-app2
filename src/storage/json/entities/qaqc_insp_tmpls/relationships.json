@@ -2,9 +2,18 @@
     "_getLines": {
         "name": "_getLines",
         "relationship": "hasMany",
-        "renderer_view_all": "",
-        "renderer_view_all_param": "",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "description",
         "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control_name": "getLines"
+    },
+    "_getProdRouting": {
+        "name": "_getProdRouting",
+        "relationship": "belongsTo",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": ""
     }

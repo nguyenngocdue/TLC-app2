@@ -18,7 +18,8 @@ class CreateNewNotification extends Notification
      */
     public function __construct($id)
     {
-        $this->id = $id;
+        // $this->id = $id;
+        // $this->object_id = $id;
     }
 
     /**
@@ -54,6 +55,6 @@ class CreateNewNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        return [];
+        return [$notifiable];
     }
 }

@@ -30,32 +30,33 @@ class RelationshipRenderer extends Component
         $id = $this->id;
         $action = $this->action;
 
+        if ($action !== 'edit') return "";
+
         $itemDB = $modelPath::find($id);
         $relationship = Relationships::getAllOf($this->type);
-        if ($action === 'edit') {
-            foreach ($relationship as $value) {
-                if ($colName !== $value['control_name']) continue;
-                $dataSource = $itemDB->$colName->all();
-                if (count($dataSource) <= 0) return "<x-feedback.alert message='There is no item to be found' type='warning' />";
-                $typeDB =  $dataSource[0]->getTable() ?? "";
-                $ins = "App\\Models\\" . Str::singular($typeDB);
-                $renderer_edit = $value['renderer_edit'];
-                $fn = $value['renderer_edit_param'];
-                if ($fn === '') {
-                    $columns = [["dataIndex" => 'id', "renderer" => "id", "type" => $typeDB, "align" => "center"], ["dataIndex" => 'name']];
-                } else {
-                    $columns =  (new $ins)->$fn();
-                }
-                switch ($renderer_edit) {
-                    case "many_icons":
-                        $colSpan = $columns['colspan'] ?? 6;
-                        return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan', 'typeDB'));
-                    case "many_lines":
-                        return view('components.controls.manyLineParams')->with(compact('columns', 'dataSource'));
-                    default:
-                        return "Unknown renderer_edit [$renderer_edit]";
-                }
-            }
+
+        $theValue = array_filter($relationship, fn ($value) => $value['control_name'] === $colName);
+        if (empty($theValue)) return "<x-feedback.alert message='Column [$colName] can not be found in control_name of Relationship screen.' type='warning' />";
+        $value = $theValue["_" . $colName];
+        $dataSource = $itemDB->$colName->all();
+        if (count($dataSource) <= 0) return "<x-feedback.alert message='There is no item to be found' type='warning' />";
+        $typeDB =  $dataSource[0]->getTable() ?? "";
+        $ins = "App\\Models\\" . Str::singular($typeDB);
+
+        $fn = $value['renderer_edit_param'];
+        $columns = ($fn === '')
+            ? [["dataIndex" => 'id', "renderer" => "id", "type" => $typeDB, "align" => "center"], ["dataIndex" => 'name']]
+            : (new $ins)->$fn();
+
+        $renderer_edit = $value['renderer_edit'];
+        switch ($renderer_edit) {
+            case "many_icons":
+                $colSpan = $columns['colspan'] ?? 6;
+                return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan', 'typeDB'));
+            case "many_lines":
+                return view('components.controls.manyLineParams')->with(compact('columns', 'dataSource'));
+            default:
+                return "Unknown renderer_edit [$renderer_edit] in Relationship Screen";
         }
     }
 }

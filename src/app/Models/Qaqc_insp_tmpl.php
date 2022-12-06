@@ -16,10 +16,15 @@ class Qaqc_insp_tmpl extends Model
 
     public $eloquentParams = [
         "getLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_tmpl_id"],
-        // "getProdRouting" => [],
+        "getProdRouting" => ["belongsTo", Prod_routing::class, "prod_routing_id"],
     ];
 
     public function getLines()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getProdRouting()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

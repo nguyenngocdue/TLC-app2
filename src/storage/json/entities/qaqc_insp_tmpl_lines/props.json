@@ -22,7 +22,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_description": {
@@ -48,7 +48,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_qaqc_insp_tmpl_id": {
@@ -56,12 +56,12 @@
         "column_name": "qaqc_insp_tmpl_id",
         "column_type": "bigint",
         "label": "Qaqc Insp Tmpl Id",
-        "control": "text",
+        "control": "dropdown",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_qaqc_insp_chklst_sheet_id": {
@@ -69,12 +69,12 @@
         "column_name": "qaqc_insp_chklst_sheet_id",
         "column_type": "bigint",
         "label": "Qaqc Insp Chklst Sheet Id",
-        "control": "text",
+        "control": "dropdown",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_qaqc_insp_chklst_group_id": {
@@ -82,12 +82,12 @@
         "column_name": "qaqc_insp_chklst_group_id",
         "column_type": "bigint",
         "label": "Qaqc Insp Chklst Group Id",
-        "control": "text",
+        "control": "dropdown",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_created_at": {

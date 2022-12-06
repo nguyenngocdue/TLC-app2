@@ -56,7 +56,7 @@
         "column_name": "prod_routing_id",
         "column_type": "bigint",
         "label": "Prod Routing Id",
-        "control": "text",
+        "control": "dropdown",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -99,7 +99,7 @@
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     }

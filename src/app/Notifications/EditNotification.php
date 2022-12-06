@@ -18,7 +18,7 @@ class EditNotification extends Notification
      */
     public function __construct($id)
     {
-        $this->id = $id;
+        // $this->id = $id;
     }
 
     /**
@@ -54,6 +54,6 @@ class EditNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        return [];
+        return [$notifiable];
     }
 }
