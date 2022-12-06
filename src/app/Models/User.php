@@ -179,7 +179,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id', "renderer" => "id"],
+            ['dataIndex' => 'id', "renderer" => "id", "type" => "users"],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'position_rendered']
         ];

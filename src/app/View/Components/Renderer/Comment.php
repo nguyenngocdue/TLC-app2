@@ -2,10 +2,9 @@
 
 namespace App\View\Components\Renderer;
 
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
-class Text extends Component
+class Comment extends Component
 {
     /**
      * Create a new component instance.
@@ -24,11 +23,6 @@ class Text extends Component
      */
     public function render()
     {
-        return function (array $data) {
-            $str = $data['slot'];
-            $str = Str::limitWords($str, 10);
-            if (strlen($str) > 50) $str = substr($str, 0, 50) . " ...";
-            return $str;
-        };
+        return view('components.renderer.comment');
     }
 }
