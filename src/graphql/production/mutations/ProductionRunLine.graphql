@@ -35,7 +35,7 @@ extend type Mutation {
         @guard
         @field(resolver: "App\\GraphQL\\Mutations\\ProdRunLine")
     storeProdRunLine(
-        input: StoreProdLineInput! @spread
+        input: StoreProdRunLineInput! @spread
     ): StoreProdRunLineResponse!
         @guard
         @field(resolver: "App\\GraphQL\\Mutations\\StoreProdRunLine")
