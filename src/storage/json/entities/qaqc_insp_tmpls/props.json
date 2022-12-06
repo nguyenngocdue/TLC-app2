@@ -22,7 +22,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
         "formula": ""
     },
     "_description": {
@@ -35,7 +35,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
         "formula": ""
     },
     "_slug": {
@@ -51,12 +51,25 @@
         "validation": "",
         "formula": "All_SlugifyByName"
     },
+    "_prod_routing_id": {
+        "name": "_prod_routing_id",
+        "column_name": "prod_routing_id",
+        "column_type": "bigint",
+        "label": "Prod Routing Id",
+        "control": "text",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
         "column_type": "datetime",
         "label": "Created At",
-        "control": "text",
+        "control": "picker_datetime",
         "col_span": "12",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -69,9 +82,22 @@
         "column_name": "updated_at",
         "column_type": "datetime",
         "label": "Updated At",
-        "control": "text",
+        "control": "picker_datetime",
         "col_span": "12",
         "hidden_view_all": "true",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "column_type": "ELQ(hasMany)",
+        "label": "Lines",
+        "control": "relationship_renderer",
+        "col_span": "12",
+        "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",

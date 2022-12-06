@@ -15,7 +15,7 @@ class Qaqc_insp_tmpl extends Model
     protected $table = "qaqc_insp_tmpls";
 
     public $eloquentParams = [
-        "getLines" => ["belongsTo", Qaqc_insp_tmpl_line::class, "qaqc_insp_tmpl_id"],
+        "getLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_tmpl_id"],
         // "getProdRouting" => [],
     ];
 

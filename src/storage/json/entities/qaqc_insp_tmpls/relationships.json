@@ -1,0 +1,11 @@
+{
+    "_getLines": {
+        "name": "_getLines",
+        "relationship": "hasMany",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "",
+        "control_name": ""
+    }
+}
