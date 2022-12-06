@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('qaqc_insp_chklst_groups', function (Blueprint $table) {
+        Schema::create('qaqc_insp_chklst_sheets', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
@@ -23,8 +23,6 @@ return new class extends Migration
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
-
-            // $table->foreign('parent')->references('id')->on('qaqc_insp_chklst_groups');
         });
     }
 
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qaqc_insp_chklst_groups');
+        Schema::dropIfExists('qaqc_insp_chklst_sheets');
     }
 };

@@ -14,14 +14,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('qaqc_insp_chklst_lines', function (Blueprint $table) {
+        Schema::create('qaqc_insp_tmpl_lines', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('qaqc_insp_chklst_id');
-            $table->unsignedBigInteger('qaqc_insp_master_id');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('control');
-            $table->text('value');
+            $table->string('control_type');
+            $table->unsignedBigInteger('qaqc_insp_tmpl_id');
+            $table->unsignedBigInteger('qaqc_insp_chklst_sheet_id');
+            $table->unsignedBigInteger('qaqc_insp_chklst_group_id');
+            // $table->unsignedBigInteger('prod_routing_id');
+            // $table->unsignedBigInteger('wir_description_id');
+            // $table->unique(['prod_routing_id', 'wir_description_id']);
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
@@ -35,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qaqc_insp_chklst_lines');
+        Schema::dropIfExists('qaqc_insp_tmpl_lines');
     }
 };

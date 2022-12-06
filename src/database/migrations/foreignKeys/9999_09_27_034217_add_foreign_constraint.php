@@ -53,18 +53,23 @@ return new class extends Migration
             $table->foreign('erp_routing_link_id')->references('id')->on('erp_routing_links')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('wir_description_id')->references('id')->on('wir_descriptions')->onDelete('cascade')->onUpdate('cascade');
         });
-        Schema::table('qaqc_insp_master_lists', function (Blueprint $table) {
+        //************** QAQC INSP MODULE **************/
+        Schema::table('qaqc_insp_tmpls', function (Blueprint $table) {
             $table->foreign('prod_routing_id')->references('id')->on('prod_routings')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('wir_description_id')->references('id')->on('wir_descriptions')->onDelete('cascade')->onUpdate('cascade');
+        });
+        Schema::table('qaqc_insp_tmpl_lines', function (Blueprint $table) {
+            $table->foreign('qaqc_insp_tmpl_id')->references('id')->on('qaqc_insp_tmpls')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('qaqc_insp_chklst_sheet_id')->references('id')->on('qaqc_insp_chklst_sheets')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('qaqc_insp_chklst_group_id')->references('id')->on('qaqc_insp_chklst_groups')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('qaqc_insp_chklsts', function (Blueprint $table) {
             $table->foreign('prod_order_id')->references('id')->on('prod_orders')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('wir_description_id')->references('id')->on('wir_descriptions')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('qaqc_insp_chklst_lines', function (Blueprint $table) {
             $table->foreign('qaqc_insp_chklst_id')->references('id')->on('qaqc_insp_chklsts')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('qaqc_insp_master_id')->references('id')->on('qaqc_insp_master_lists')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('qaqc_insp_chklst_sheet_id')->references('id')->on('qaqc_insp_chklst_sheets')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('qaqc_insp_chklst_group_id')->references('id')->on('qaqc_insp_chklst_groups')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
