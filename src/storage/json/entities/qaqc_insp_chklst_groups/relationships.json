@@ -1,11 +1,11 @@
 {
-    "_parent": {
-        "name": "_parent",
+    "_getParent": {
+        "name": "_getParent",
         "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": "parent"
+        "control_name": ""
     }
 }
