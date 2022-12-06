@@ -6,8 +6,8 @@
 <x-renderer.card title="Feedback">
     <div class="grid gap-6 mb-8 md:grid-cols-2">
         <x-renderer.card title="Comments">
-            <x-renderer.comment name="component" type="department" id="1">
-                
+            <x-renderer.comment name="component" type="department" id="1" readonly={{true}}>
+
             </x-renderer.comment>
         </x-renderer.card>
         <x-renderer.card title="Place Holder"></x-renderer.card>
