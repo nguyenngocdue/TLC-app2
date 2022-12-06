@@ -21,6 +21,7 @@ class UploadFileQaqc extends Controller
     {
         if ($request->hasFile('files')) {
         }
+        emptyString()
         return response()->json(["abc" => Auth::user()->id]);
     }
 }

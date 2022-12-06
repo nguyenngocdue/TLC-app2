@@ -54,7 +54,7 @@ class MigrationRelationShipCreator
      *
      * @throws \Exception
      */
-    public function create($name, $path, $table = null, $create = false, $tableOne, $tableTwo, $relationship)
+    public function create($name, $path, $table = null, $create = false, $tableOne, $tableTwo, $tableName, $relationship)
     {
         $this->ensureMigrationDoesntAlreadyExist($name, $path);
 
@@ -69,7 +69,7 @@ class MigrationRelationShipCreator
 
         $this->files->put(
             $path,
-            $this->populateStub($stub, $name, $tableOne, $tableTwo, $relationship)
+            $this->populateStub($stub, $name, $tableOne, $tableTwo, $tableName, $relationship)
         );
 
         // Next, we will fire any hooks that are supposed to fire after a migration is
@@ -136,12 +136,20 @@ class MigrationRelationShipCreator
      * @param  string|null  $table
      * @return string
      */
-    protected function populateStub($stub, $table, $tableOne, $tableTwo, $relationship)
+    protected function populateStub($stub, $table, $tableOne, $tableTwo, $tableName, $relationship)
     {
         // Here we will replace the table place-holders with the table specified by
         // the developer, which is useful for quickly creating a tables creation
         // or update migration from the console instead of typing it manually.
         if (!is_null($table)) {
+            if ($tableName) {
+                $stub = str_replace(
+                    ['{{relationship}}', '{{tableOne}}', '{{tableTwo}}', '{{tableName}}'],
+                    [$relationship, $tableOne, $tableTwo, $tableName],
+                    $stub
+                );
+                return $stub;
+            }
             $stub = str_replace(
                 ['{{relationship}}', '{{tableOne}}', '{{tableTwo}}'],
                 [$relationship, $tableOne, $tableTwo],

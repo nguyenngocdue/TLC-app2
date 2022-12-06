@@ -16,12 +16,13 @@ return new class extends Migration
      protected function checkRelationShip()
     {
         $relationship = '{{relationship}}';
+        $tableName = '{{tableName}}';
         if (strlen($relationship) > 1) {
             $name = md5(Str::plural('{{tableOne}}').'_'.Str::plural('{{tableTwo}}'));
-            $tableName = Str::plural('{{tableOne}}').'_'.Str::plural('{{tableTwo}}').'_'.$relationship ;
+            $tableName = empty($tableName) ? Str::plural('{{tableOne}}').'_'.Str::plural('{{tableTwo}}').'_'.$relationship : $tableName;
         } else {
             $name = null;
-            $tableName = Str::plural('{{tableOne}}').'_'.Str::plural('{{tableTwo}}');
+            $tableName = empty($tableName) ? Str::plural('{{tableOne}}').'_'.Str::plural('{{tableTwo}}') : $tableName;
         }
         return [$tableName,$name];
     }

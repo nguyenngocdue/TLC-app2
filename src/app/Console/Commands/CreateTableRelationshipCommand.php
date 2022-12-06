@@ -17,6 +17,7 @@ class CreateTableRelationshipCommand extends BaseCommand
     protected $signature = 'ndc:migration
         {name : The name of the migration}
         {--tables= : The tables=table1,table2}
+        {--table= : The name of table }
         {--rel= : The relationship}';
 
     /**
@@ -64,7 +65,7 @@ class CreateTableRelationshipCommand extends BaseCommand
         $name = Str::snake(trim($this->input->getArgument('name')));
 
         $tables = $this->input->getOption('tables');
-        error_log($tables);
+        $tableName = $this->input->getOption('table');
         $relationship = $this->input->getOption('rel');
         $var = explode(',', $tables);
         $tableOne = $var[0];
@@ -80,7 +81,8 @@ class CreateTableRelationshipCommand extends BaseCommand
         // Now we are ready to write the migration out to disk. Once we've written
         // the migration out, we will dump-autoload for the entire framework to
         // make sure that the migrations are registered by the class loaders.
-        $this->writeMigration($name, $tableOne, $tableTwo, $relationship);
+
+        $this->writeMigration($name, $tableOne, $tableTwo, $tableName, $relationship);
         $this->composer->dumpAutoloads();
     }
 
@@ -92,7 +94,7 @@ class CreateTableRelationshipCommand extends BaseCommand
      * @param  bool  $create
      * @return string
      */
-    protected function writeMigration($name, $tableOne, $tableTwo, $relationship)
+    protected function writeMigration($name, $tableOne, $tableTwo, $tableName, $relationship)
     {
         $file = $this->creator->create(
             $name,
@@ -101,6 +103,7 @@ class CreateTableRelationshipCommand extends BaseCommand
             false,
             $tableOne,
             $tableTwo,
+            $tableName,
             $relationship
         );
 
