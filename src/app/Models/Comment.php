@@ -14,5 +14,13 @@ class Comment extends Model
     protected $fillable = [];
     protected $table = "comments";
 
-    public $eloquentParams = [];
+    public $eloquentParams = [
+        "user" => ["belongsTo", User::class, "owner_id"],
+    ];
+
+    public function user()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 }

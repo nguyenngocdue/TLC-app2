@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Render;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Utils\Support\CurrentUser;
-use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Http\Request;
+use App\Utils\Support\Props;
+use App\Utils\Support\Relationships;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -96,9 +93,10 @@ abstract class ViewAllController extends Controller
             return $output;
         }
 
-        $propsPath = storage_path() . "/json/entities/$type/props.json";
-        if (!file_exists($propsPath)) return false;
-        $props = json_decode(file_get_contents($propsPath), true);
+        $props = Props::getAllOf($type);
+        // $propsPath = storage_path() . "/json/entities/$type/props.json";
+        // if (!file_exists($propsPath)) return false;
+        // $props = json_decode(file_get_contents($propsPath), true);
         $props = array_filter($props, fn ($prop) => !$prop['hidden_view_all']);
         // dump($columnLimit);
         if ($columnLimit) {
@@ -118,12 +116,7 @@ abstract class ViewAllController extends Controller
         $eloquentParams = App::make($this->typeModel)->eloquentParams;
         // Log::info($eloquentParams);
 
-        $typePlural = Str::plural($this->type);
-        $path = storage_path() . "/json/entities/{$typePlural}/relationships.json";
-        if (!file_exists($path)) return Blade::render("<x-feedback.result message='Relationship is missing' type='warning' />");
-        $json = json_decode(file_get_contents($path), true);
-        // Log::info($json);
-
+        $json = Relationships::getAllOf($this->type);
         if (is_array($columns)) {
             foreach ($columns as &$column) {
                 $dataIndex = $column['dataIndex'];

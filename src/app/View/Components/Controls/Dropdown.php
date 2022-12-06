@@ -22,9 +22,8 @@ class Dropdown extends Component
         $currentEntity = is_null($modelPath::find($this->id)) ? "" : $modelPath::find($this->id)->getAttributes();
 
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
-            $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in Model).";
-            $type = 'warning';
-            return "<x-feedback.alert message='{{$message}}' type='{{$type}}' />";
+            $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in $modelPath Model).";
+            return "<x-feedback.alert message='{$message}' type='warning' />";
         }
         return view('components.controls.dropdown')->with(compact('dataSource', 'colName', 'action', 'labelName', 'currentEntity'));
     }

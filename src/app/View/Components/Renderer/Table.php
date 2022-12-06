@@ -162,9 +162,9 @@ class Table extends Component
   public function render()
   {
     $columns = $this->columns;
-    if (is_null($columns)) return Blade::render("<x-feedback.alert type='error' message='Columns attribute is missing.' />");
-    if (!is_array($columns)) return Blade::render("<x-feedback.alert type='error' message='Props file is missing.' />");
-    if (empty($columns)) return Blade::render("<x-feedback.alert type='error' message='Columns attribute is empty.' />");
+    if (is_null($columns)) return Blade::render("<x-feedback.alert type='warning' message='Columns attribute is missing.' />");
+    if (!is_array($columns)) return Blade::render("<x-feedback.alert type='warning' message='Props file is missing.' />");
+    if (empty($columns)) return Blade::render("<x-feedback.alert type='warning' message='Columns attribute is empty.' />");
 
     // Log::info($this->showNo);
     if ($this->showNo) array_unshift($columns, ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center']);
