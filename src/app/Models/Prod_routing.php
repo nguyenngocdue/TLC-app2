@@ -23,10 +23,10 @@ class Prod_routing extends Model
     // ];
 
     public $eloquentParams = [
-        "routingLinks" => ['belongsToMany', Prod_routing_link::class, 'prod_routing_details', 'prod_routing_id', 'prod_routing_link_id'],
+        "prodRoutingLinks" => ['belongsToMany', Prod_routing_link::class, 'prod_routing_details', 'prod_routing_id', 'prod_routing_link_id'],
         "prodOrders" => ['hasMany', Prod_order::class],
     ];
-    public function routingLinks()
+    public function prodRoutingLinks()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);

@@ -1,4 +1,4 @@
-type DuplicateProdLineResponse {
+type DuplicateProdRunLineResponse {
     id: Int!
     status: String!
 }

@@ -35,6 +35,7 @@ final class DuplicateProdRunLine
             ];
         } catch (\Throwable $th) {
             return [
+                'id' => null,
                 'status' => $th
             ];
         }

@@ -19,7 +19,7 @@ type Prod_order {
     created_at: DateTime
     updated_at: DateTime
     subProject: Sub_project! @belongsTo
-    routing: Prod_routing! @belongsTo
+    prodRouting: Prod_routing! @belongsTo
     prodRuns: [Prod_run!]! @hasMany
     qaqcInspChklsts: [Qaqc_insp_checklist!]! @hasMany
 }

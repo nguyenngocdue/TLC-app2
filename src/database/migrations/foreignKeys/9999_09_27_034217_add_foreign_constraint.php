@@ -70,6 +70,10 @@ return new class extends Migration
             $table->foreign('qaqc_insp_chklst_id')->references('id')->on('qaqc_insp_chklsts')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('qaqc_insp_sheet_id')->references('id')->on('qaqc_insp_sheets')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('qaqc_insp_group_id')->references('id')->on('qaqc_insp_groups')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('qaqc_insp_control_value_id')->references('id')->on('qaqc_insp_control_values')->onDelete('cascade')->onUpdate('cascade');
+        });
+        Schema::table('qaqc_insp_values', function (Blueprint $table) {
+            $table->foreign('qaqc_insp_control_value_id')->references('id')->on('qaqc_insp_control_values')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
