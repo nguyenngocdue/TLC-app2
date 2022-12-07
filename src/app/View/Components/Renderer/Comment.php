@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Comment extends Component
@@ -16,8 +17,9 @@ class Comment extends Component
         private $name = '',
         private $type = '',
         private $id = '',
-        private $readonly = '',
-        private $colName = '',
+        private $readonly = true,
+        private $dataComment = [],
+        private $action = 'create',
     ) {
     }
 
@@ -32,7 +34,25 @@ class Comment extends Component
         $name = $this->name;
         $type = $this->type;
         $readonly = $this->readonly;
-        $colName = $this->colName;
-        return view('components.renderer.comment')->with(compact('name', 'type', 'readonly', 'ownerDB', 'colName'));
+        $dataComment = $this->dataComment;
+        $action = $this->action;
+        // dd($dataComment);
+
+
+        $commentCatesDB = DB::table('comment_categories')->select("id", 'name')->get();
+        $json = json_decode($commentCatesDB, true);
+        $nameIdsDB = array_column($json, 'name', 'id');
+
+        $array = [];
+        foreach ($dataComment as $value) {
+            $array[$nameIdsDB[$value['category']]] = [
+                'content' => $value['content'],
+                'created_at' => $value['created_at'],
+                'updated_at' => $value['updated_at']
+            ];
+        }
+        $dataComment = $array;
+        // dd($dataComment, $name);
+        return view('components.renderer.comment')->with(compact('name', 'type', 'readonly', 'ownerDB', 'dataComment', 'action'));
     }
 }

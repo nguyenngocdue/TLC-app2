@@ -79,23 +79,4 @@ trait CreateEditControllerMedia
         }
         return false;
     }
-
-
-    private function saveComments($action, $request, $dataInput)
-    {
-        // dump($dataInput);
-        $commentCatesDB = DB::table('comment_categories')->select("id", 'name')->get();
-        $json = json_decode($commentCatesDB, true);
-        $nameIdsDB = array_column($json, 'id', 'name');
-        foreach ($dataInput['content'] as $key => $content) {
-            $x = Comment::create(
-                [
-                    'content' => $content,
-                    'owner_id' => (int)$dataInput['owner_id'],
-                    'category' => $nameIdsDB[$dataInput['category'][$key]]
-                ]
-            );
-        }
-        // dd($nameIdsDB);
-    }
 }

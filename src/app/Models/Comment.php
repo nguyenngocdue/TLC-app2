@@ -17,4 +17,9 @@ class Comment extends Model
 
 
     public $eloquentParams = [];
+
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
 }

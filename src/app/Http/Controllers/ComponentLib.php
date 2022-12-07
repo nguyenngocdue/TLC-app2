@@ -114,6 +114,15 @@ class ComponentLib extends Controller
             ],
         ];
 
-        return view('componentLib')->with(compact('tableColumns', 'tableEditableColumns', 'tableDataSource'));
+        $dataComment = [
+            [
+                'category' => 6,
+                'content' => 'How are you',
+                'created_at' => '2020-12-12',
+                'updated_at' => '2020-12-12'
+            ]
+        ];
+
+        return view('componentLib')->with(compact('tableColumns', 'tableEditableColumns', 'tableDataSource', 'dataComment'));
     }
 }

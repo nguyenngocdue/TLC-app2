@@ -14,13 +14,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('zunit_test_7s', function (Blueprint $table) {
             $table->id();
-            $table->text('content');
-            $table->unsignedBigInteger(('owner_id'));
-            $table->unsignedBigInteger('object_id')->nullable();
-            $table->string('object_type');
-            $table->unsignedBigInteger('category');
+            $table->text('text');
+            $table->text('comment_1')->nullable();
+            $table->text('comment_2')->nullable();
+            $table->text('comment_3')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('zunit_test_7s');
     }
 };

@@ -8,7 +8,7 @@
         <x-renderer.card title="">
             @dump($_GET)
             <form action="" method="GET">
-                <x-renderer.comment name="component" type="department" id="1" readonly={{true}}></x-renderer.comment>
+                <x-renderer.comment name="comment_1" type="department" id="1" readonly={{true}} :dataComment="$dataComment"></x-renderer.comment>
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
             </form>
         </x-renderer.card>

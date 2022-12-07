@@ -2,7 +2,9 @@
 
 namespace App\View\Components\Controls;
 
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class CommentRenderer extends Component
@@ -12,9 +14,13 @@ class CommentRenderer extends Component
      *
      * @return void
      */
-    public function __construct(private $id, private $type, private $colName = '', private $tablePath, private $action)
-    {
-        //
+    public function __construct(
+        private $id,
+        private $type,
+        private $colName = '',
+        private $tablePath,
+        private $action,
+    ) {
     }
 
     /**
@@ -24,11 +30,15 @@ class CommentRenderer extends Component
      */
     public function render()
     {
+        $id = $this->id;
         $name = $this->colName;
         $type = $this->type;
-        $colName = $this->colName;
-        // dd($colName);
-        // dump($currentUser);
-        return view('components.controls.comment-renderer')->with(compact('name', 'type', 'colName'));
+        $action = $this->action;
+
+        $tableName = (new Comment)->getTable();
+        $db = DB::table($tableName)->where('commentable_id', $this->id)->get();
+        $dataComment = json_decode($db, true);
+        // dump($dataComment, $name);
+        return view('components.controls.comment-renderer')->with(compact('name', 'type', 'dataComment', 'id', 'action'));
     }
 }
