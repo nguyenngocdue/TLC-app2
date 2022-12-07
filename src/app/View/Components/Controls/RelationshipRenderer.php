@@ -41,12 +41,14 @@ class RelationshipRenderer extends Component
         $dataSource = $itemDB->$colName->all();
         if (count($dataSource) <= 0) return "<x-feedback.alert message='There is no item to be found' type='warning' />";
         $typeDB =  $dataSource[0]->getTable() ?? "";
-        $ins = "App\\Models\\" . Str::singular($typeDB);
+        $model = "App\\Models\\" . Str::singular($typeDB);
+        $instance = new $model;
 
         $fn = $value['renderer_edit_param'];
+        if (!method_exists($instance, $fn))  $fn = '';
         $columns = ($fn === '')
             ? [["dataIndex" => 'id', "renderer" => "id", "type" => $typeDB, "align" => "center"], ["dataIndex" => 'name']]
-            : (new $ins)->$fn();
+            : $instance->$fn();
 
         $renderer_edit = $value['renderer_edit'];
         switch ($renderer_edit) {

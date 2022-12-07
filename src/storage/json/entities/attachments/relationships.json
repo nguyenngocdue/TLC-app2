@@ -2,15 +2,19 @@
     "_user": {
         "name": "_user",
         "relationship": "user",
-        "renderer": "avatar_name",
-        "renderer_param": "name",
+        "renderer_view_all": "avatar_name",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
         "control_name": ""
     },
-    "_category1": {
-        "name": "_category1",
+    "_getCategory": {
+        "name": "_getCategory",
         "relationship": "belongsTo",
-        "renderer": "column",
-        "renderer_param": "name",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
         "control_name": ""
     }
 }

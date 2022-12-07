@@ -19,7 +19,7 @@ class Attachment extends Model
     // ];
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],
-        "category1" => ['belongsTo', Attachment_category::class, 'category'],
+        "getCategory" => ['belongsTo', Attachment_category::class, 'category'],
     ];
 
     public function user()
@@ -28,7 +28,7 @@ class Attachment extends Model
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function category1()
+    public function getCategory()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

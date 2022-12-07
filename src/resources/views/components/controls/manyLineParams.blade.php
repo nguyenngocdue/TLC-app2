@@ -2,5 +2,5 @@
     :columns="$columns" 
     :dataSource="$dataSource" 
     showNo="{{true}}" 
-    footer="{{$fn ? '' : '(Default column settings loaded)'}}"
+    footer="{{$fn === '' ? '(Default column settings loaded)' : ''}}"
 />

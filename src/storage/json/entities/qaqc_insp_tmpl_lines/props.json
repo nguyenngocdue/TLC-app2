@@ -64,9 +64,9 @@
         "validation": "required",
         "formula": ""
     },
-    "_qaqc_insp_chklst_sheet_id": {
-        "name": "_qaqc_insp_chklst_sheet_id",
-        "column_name": "qaqc_insp_chklst_sheet_id",
+    "_qaqc_insp_sheet_id": {
+        "name": "_qaqc_insp_sheet_id",
+        "column_name": "qaqc_insp_sheet_id",
         "column_type": "bigint",
         "label": "Sheet",
         "control": "dropdown",
@@ -77,9 +77,9 @@
         "validation": "required",
         "formula": ""
     },
-    "_qaqc_insp_chklst_group_id": {
-        "name": "_qaqc_insp_chklst_group_id",
-        "column_name": "qaqc_insp_chklst_group_id",
+    "_qaqc_insp_group_id": {
+        "name": "_qaqc_insp_group_id",
+        "column_name": "qaqc_insp_group_id",
         "column_type": "bigint",
         "label": "Group",
         "control": "dropdown",

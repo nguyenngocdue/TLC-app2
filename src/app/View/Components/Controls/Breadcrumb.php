@@ -17,6 +17,14 @@ class Breadcrumb extends Component
         $type = CurrentRoute::getTypePlural();
         $singular = CurrentRoute::getTypeSingular();
         if (in_array($singular, ['dashboard', 'permission', 'workflow'])) return "";
-        return view('components.navigation.breadcrumb')->with(compact('type', 'singular'));
+
+        $model = "App\\Models\\" . Str::ucfirst($singular);
+        $first = $model::first();
+        $first_id = $first ? $first->id : null;
+
+        $latest = $model::latest()->first();
+        $latest_id = $latest ? $latest->id : null;
+
+        return view('components.navigation.breadcrumb')->with(compact('type', 'singular', 'first_id', 'latest_id'));
     }
 }

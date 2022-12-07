@@ -35,7 +35,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
         "formula": ""
     },
     "_slug": {
@@ -48,7 +48,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
         "formula": "All_SlugifyByName"
     },
     "_created_at": {

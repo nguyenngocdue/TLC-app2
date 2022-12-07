@@ -22,7 +22,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_description": {
@@ -81,12 +81,12 @@
         "name": "_prodRoutingDetails",
         "column_name": "prodRoutingDetails",
         "column_type": "ELQ(hasMany)",
-        "label": "",
-        "control": "",
+        "label": "Routing Detail",
+        "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     }
