@@ -64,6 +64,19 @@
         "validation": "required",
         "formula": ""
     },
+    "_qaqc_insp_control_value_id": {
+        "name": "_qaqc_insp_control_value_id",
+        "column_name": "qaqc_insp_control_value_id",
+        "column_type": "bigint",
+        "label": "Control Value",
+        "control": "radio",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "required",
+        "formula": ""
+    },
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
         "column_name": "qaqc_insp_chklst_id",
@@ -87,7 +100,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_qaqc_insp_group_id": {
@@ -100,7 +113,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_created_at": {
@@ -124,6 +137,32 @@
         "control": "text",
         "col_span": "12",
         "hidden_view_all": "true",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_getFailDetail": {
+        "name": "_getFailDetail",
+        "column_name": "getFailDetail",
+        "column_type": "ELQ(belongsToMany)",
+        "label": "Fail Value",
+        "control": "checkbox",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_getOnHoldDetail": {
+        "name": "_getOnHoldDetail",
+        "column_name": "getOnHoldDetail",
+        "column_type": "ELQ(belongsToMany)",
+        "label": "On Hold Value",
+        "control": "checkbox",
+        "col_span": "12",
+        "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",

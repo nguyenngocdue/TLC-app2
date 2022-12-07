@@ -2,7 +2,9 @@
 
 namespace App\Helpers;
 
+use App\Utils\Support\Relationships;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Helper
 {
@@ -21,10 +23,12 @@ class Helper
         $eloquentParam = $instance->eloquentParams;
 
         if (!is_null($type)) {
-            $relationship = json_decode(file_get_contents("/var/www/app/storage/json/entities/$type/relationships.json"), true);
+            // $relationship = json_decode(file_get_contents("/var/www/app/storage/json/entities/$type/relationships.json"), true);
+            $relationship = Relationships::getAllOf($type);
             foreach ($relationship as $value) {
                 if ($value['control_name'] === $colName) {
-                    $pathTableSource =  $eloquentParam[$value['relationship']][1] ?? [];
+                    $pathTableSource =  $eloquentParam[$value['control_name']][1] ?? "";
+                    // $pathTableSource =  $eloquentParam[$value['relationship']][1] ?? [];
                     return Helper::getDataFromPathModel($pathTableSource);
                 }
             }

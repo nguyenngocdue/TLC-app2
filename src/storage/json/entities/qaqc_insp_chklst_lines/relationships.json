@@ -25,5 +25,32 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": ""
+    },
+    "_getControlValue": {
+        "name": "_getControlValue",
+        "relationship": "belongsTo",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control_name": ""
+    },
+    "_getFailDetail": {
+        "name": "_getFailDetail",
+        "relationship": "belongsToMany",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control_name": "getFailDetail"
+    },
+    "_getOnHoldDetail": {
+        "name": "_getOnHoldDetail",
+        "relationship": "belongsToMany",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control_name": "getOnHoldDetail"
     }
 }

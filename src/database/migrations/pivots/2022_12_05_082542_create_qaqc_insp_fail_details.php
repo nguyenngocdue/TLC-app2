@@ -23,7 +23,7 @@ return new class extends Migration
             $name = null;
             // $tableName = Str::plural('qaqc_insp_chklst_line') . '_' . Str::plural('qaqc_insp_value');
         }
-        $tableName = "qaqc_insp_value_details";
+        $tableName = "qaqc_insp_fail_details";
         return [$tableName, $name];
     }
     public function up()
