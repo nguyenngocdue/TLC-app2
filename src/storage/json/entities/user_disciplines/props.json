@@ -107,12 +107,12 @@
         "name": "_user",
         "column_name": "user",
         "column_type": "ELQ(hasMany)",
-        "label": "",
-        "control": "",
+        "label": "Users",
+        "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     }

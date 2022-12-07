@@ -114,6 +114,17 @@ class ComponentLib extends Controller
             ],
         ];
 
-        return view('componentLib')->with(compact('tableColumns', 'tableEditableColumns', 'tableDataSource'));
+        $gridDataSource = array_map(fn ($item) => [
+            'name' => $item['client'],
+            'avatar' => $item['avatar'] ?? null,
+            'position_rendered' => $item['amount'],
+        ], $tableDataSource);
+
+        return view('componentLib', [
+            'tableColumns' => $tableColumns,
+            'tableEditableColumns' => $tableEditableColumns,
+            'tableDataSource' => $tableDataSource,
+            'gridDataSource' => $gridDataSource,
+        ]);
     }
 }

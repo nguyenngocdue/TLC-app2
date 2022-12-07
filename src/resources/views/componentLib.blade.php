@@ -10,15 +10,26 @@
 
             </x-renderer.comment>
         </x-renderer.card>
-        <x-renderer.card title="Place Holder"></x-renderer.card>
+        <x-renderer.card title="Grids">
+            Grid colSpan=4 itemRenderer=x-renderer.avatar-name
+            <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name"></x-renderer.grid>
+            <br/>
+            Grid colSpan=4 itemRenderer=x-renderer.avatar-name groupBy=name
+            <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name" groupBy="name"></x-renderer.grid>
+        </x-renderer.card>
 
         <x-renderer.card title="AvatarName">
             AvatarName with Attributes
-            <x-renderer.avatar-name title="Fortune Truong" description="Software Engineer" href="http://www.google.com">?</x-renderer.avatar-name>
+            <x-renderer.avatar-name title="Fortune Truong" description="Software Engineer" href="http://www.google.com"></x-renderer.avatar-name>
             AvatarName with Slot
-            <x-renderer.avatar-name>{"name":"Thuc Vo", "position_rendered":"Software Tester","href":"http://www.google.com"}</x-renderer.avatar-name>
+            <x-renderer.avatar-name>{
+                "name":"Thuc Vo", 
+                "position_rendered":"Software Tester",
+                "href":"http://www.google.com",
+                "avatar":"https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+            }</x-renderer.avatar-name>
             Empty attribute
-            <x-renderer.avatar-name>?</x-renderer.avatar-name>
+            <x-renderer.avatar-name></x-renderer.avatar-name>
 
         </x-renderer.card>
 
@@ -31,6 +42,8 @@
             <x-renderer.editable.dropdown name="dropdown1" :cbbDataSource='["", "true"]'>true</x-renderer.editable.dropdown>
             Dropdown with sortBy='value'
             <x-renderer.editable.dropdown name="dropdown2" :cbbDataSource='["3", "2", "1"]' sortBy='value'>true</x-renderer.editable.dropdown>
+            Toggle
+            <x-renderer.switch color="bg-blue-900" content="My text here" />
         </x-renderer.card>
 
         <x-renderer.card title="Tables">
@@ -165,9 +178,6 @@
             <x-navigation.tabs>
 
             </x-navigation.tabs>
-        </x-renderer.card>
-        <x-renderer.card title="Switch">
-            <x-renderer.switch color="bg-blue-900" content="Yellow" />
         </x-renderer.card>
     </div>
 </x-renderer.card>

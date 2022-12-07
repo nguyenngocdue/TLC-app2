@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\Manage\ManageService;
+use App\Utils\Support\Relationships;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -77,13 +78,6 @@ abstract class ManageRelationshipController extends Controller
     private function makeBlankResultObject()
     {
         $columnEloquentParams = App::make($this->typeModel)->eloquentParams;
-        // if (!isset($columnEloquentParams)) {
-        //     $title = 'Warning Settings';
-        //     $message = 'Eloquent Param is empty!';
-        //     $type = 'warning';
-        //     return view('components.feedback.result')->with(compact('title', 'message', 'type'));
-        // }
-
         $result = [];
         foreach ($columnEloquentParams as $elqName => $elqValue) {
             $rowDescription = join(" | ", $elqValue);
@@ -106,10 +100,22 @@ abstract class ManageRelationshipController extends Controller
         return [$toBeGreen, $toBeRed];
     }
 
+    private function renewColumn(&$a, $b, $column)
+    {
+        foreach (array_keys($a) as $key) {
+            $updatedValue = $b[$key][$column];
+            if ($a[$key][$column] != $updatedValue) {
+                $a[$key][$column] = $updatedValue;
+                $a[$key]['row_color'] = 'blue';
+            }
+        }
+    }
+
     private function getDataSource($type)
     {
         $result = $this->makeBlankResultObject($type);
-        $json = $this->manageService->path($type, 'relationships');
+        $json = Relationships::getAllOf($type);
+        $this->renewColumn($json, $result, 'relationship');
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
 
         foreach ($json as $key => $columns) {

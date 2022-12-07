@@ -53,8 +53,9 @@ class RelationshipRenderer extends Component
         $renderer_edit = $value['renderer_edit'];
         switch ($renderer_edit) {
             case "many_icons":
-                $colSpan = $columns['colspan'] ?? 6;
-                return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan', 'typeDB'));
+                $colSpan = $columns['colspan'] ?? 3;
+                foreach ($dataSource as &$item) $item['href'] = route($typeDB . '_edit.edit', $item->id);
+                return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan'));
             case "many_lines":
                 return view('components.controls.manyLineParams')->with(compact('columns', 'dataSource', 'fn'));
             default:

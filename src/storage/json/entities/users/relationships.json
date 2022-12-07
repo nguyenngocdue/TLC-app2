@@ -1,7 +1,7 @@
 {
     "_media": {
         "name": "_media",
-        "relationship": "media",
+        "relationship": "hasMany",
         "renderer_view_all": "attachment",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -10,7 +10,7 @@
     },
     "_posts": {
         "name": "_posts",
-        "relationship": "posts",
+        "relationship": "hasMany",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -19,7 +19,7 @@
     },
     "_getWorkplaces": {
         "name": "_getWorkplaces",
-        "relationship": "getWorkplaces",
+        "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -28,7 +28,7 @@
     },
     "_userTypes": {
         "name": "_userTypes",
-        "relationship": "userTypes",
+        "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -37,7 +37,7 @@
     },
     "_categories": {
         "name": "_categories",
-        "relationship": "categories",
+        "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -46,7 +46,7 @@
     },
     "_positionPres": {
         "name": "_positionPres",
-        "relationship": "positionPres",
+        "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -55,7 +55,7 @@
     },
     "_position1": {
         "name": "_position1",
-        "relationship": "position1",
+        "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -64,7 +64,7 @@
     },
     "_position2": {
         "name": "_position2",
-        "relationship": "position2",
+        "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -73,7 +73,7 @@
     },
     "_position3": {
         "name": "_position3",
-        "relationship": "position3",
+        "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -82,7 +82,7 @@
     },
     "_disciplines": {
         "name": "_disciplines",
-        "relationship": "disciplines",
+        "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -91,7 +91,7 @@
     },
     "_departments": {
         "name": "_departments",
-        "relationship": "departments",
+        "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -100,7 +100,7 @@
     },
     "_time_keep_types": {
         "name": "_time_keep_types",
-        "relationship": "time_keep_types",
+        "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -109,8 +109,17 @@
     },
     "_productionRunLines": {
         "name": "_productionRunLines",
-        "relationship": "productionRunLines",
+        "relationship": "belongsToMany",
         "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control_name": ""
+    },
+    "_qaqcInspChklsts": {
+        "name": "_qaqcInspChklsts",
+        "relationship": "belongsTo",
+        "renderer_view_all": "",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",

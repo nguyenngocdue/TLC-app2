@@ -1,1 +1,11 @@
-{}
+{
+    "_user": {
+        "name": "_user",
+        "relationship": "hasMany",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_icons",
+        "renderer_edit_param": "",
+        "control_name": "user"
+    }
+}

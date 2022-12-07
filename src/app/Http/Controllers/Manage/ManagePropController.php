@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\Manage\ManageService;
+use App\Utils\Support\Props;
 use App\Utils\Support\Table;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -160,12 +160,24 @@ abstract class ManagePropController extends Controller
         return [$toBeGreen, $toBeRed];
     }
 
+    private function renewColumn(&$a, $b, $column)
+    {
+        foreach (array_keys($a) as $key) {
+            $updatedValue = $b[$key][$column];
+            if ($a[$key][$column] != $updatedValue) {
+                $a[$key][$column] = $updatedValue;
+                $a[$key]['row_color'] = 'blue';
+            }
+        }
+    }
+
     private function getDataSource()
     {
         $result0 = $this->makeBlankResultObject();
         $result1 = $this->getMany2ManyProps();
         $result = array_merge($result0, $result1);
-        $json = $this->manageService->path($this->type, 'props');
+        $json = Props::getAllOf($this->type);
+        $this->renewColumn($json, $result, 'column_type');
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
 
         foreach ($json as $key => $columns) {
