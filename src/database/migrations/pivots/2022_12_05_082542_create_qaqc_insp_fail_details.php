@@ -36,8 +36,8 @@ return new class extends Migration
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
             $table->unique(['qaqc_insp_chklst_line_id', 'qaqc_insp_value_id'], $this->checkRelationShip()[1]);
-            $table->foreign('qaqc_insp_chklst_line_id', "qaqc_insp_chklst_line_id")->references('id')->on(Str::plural('qaqc_insp_chklst_lines'))->onDelete('cascade');
-            $table->foreign('qaqc_insp_value_id', "qaqc_insp_value_id")->references('id')->on(Str::plural('qaqc_insp_values'))->onDelete('cascade');
+            $table->foreign('qaqc_insp_chklst_line_id', "qaqc_insp_fail_id")->references('id')->on(Str::plural('qaqc_insp_chklst_lines'))->onDelete('cascade');
+            $table->foreign('qaqc_insp_value_id', "qaqc_insp_value_fail_id")->references('id')->on(Str::plural('qaqc_insp_values'))->onDelete('cascade');
         });
     }
 
