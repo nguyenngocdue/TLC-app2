@@ -3,13 +3,14 @@
     $lastIndex = "anything";
     @endphp
     @foreach ($items as $item)
-    
     @php
-        if($groupBy && is_array($item)){
-            $index = strtoupper($item[$groupBy][0]);
-            if ($index !== $lastIndex) {
-                $lastIndex = $index;
-                echo "<div class='col-span-12 flex'><span class='text-lg font-bold text-gray-600'>$index</span></div>";
+        if($groupBy){
+            if(is_array($item) || is_object($item)){
+                $index = strtoupper($item[$groupBy][0]);
+                if ($index !== $lastIndex) {
+                    $lastIndex = $index;
+                    echo "<div class='col-span-12 flex'><span class='text-lg font-bold text-gray-600'>$index</span></div>";
+                }
             }
         }
         $itemStr = is_array($item)? json_encode($item) : $item;
@@ -17,7 +18,9 @@
     @endphp
     
     <div class="bg-white-50 col-span-{{$colSpan}} flex align-center ">
-       <{{$itemRenderer}}>{!!$itemStr!!}</{{$itemRenderer}}>
+        <x-renderer.avatar-name>{!!$itemStr!!}</x-renderer.avatar-name>
+        {{-- The following line is find with component test, but buggy with manyIconParams --}}
+        {{-- <{{$itemRenderer}}>{!!$itemStr!!}</{{$itemRenderer}}> --}}
     </div>
     @endforeach
 </div>

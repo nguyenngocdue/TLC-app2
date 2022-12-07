@@ -11,22 +11,16 @@
             </x-renderer.comment>
         </x-renderer.card>
         <x-renderer.card title="Grids">
-            Grid colSpan=2 itemRenderer=p
-            <x-renderer.grid colSpan="2" :items="['A','B','C','D','E','F','G','H']" itemRenderer="p" >
-            </x-renderer.grid>
-            <br/>
             Grid colSpan=4 itemRenderer=x-renderer.avatar-name
-            <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name">
-            </x-renderer.grid>
+            <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name"></x-renderer.grid>
             <br/>
             Grid colSpan=4 itemRenderer=x-renderer.avatar-name groupBy=name
-            <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name" groupBy="name">
-            </x-renderer.grid>
+            <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name" groupBy="name"></x-renderer.grid>
         </x-renderer.card>
 
         <x-renderer.card title="AvatarName">
             AvatarName with Attributes
-            <x-renderer.avatar-name title="Fortune Truong" description="Software Engineer" href="http://www.google.com">?</x-renderer.avatar-name>
+            <x-renderer.avatar-name title="Fortune Truong" description="Software Engineer" href="http://www.google.com"></x-renderer.avatar-name>
             AvatarName with Slot
             <x-renderer.avatar-name>{
                 "name":"Thuc Vo", 
@@ -35,7 +29,7 @@
                 "avatar":"https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
             }</x-renderer.avatar-name>
             Empty attribute
-            <x-renderer.avatar-name>?</x-renderer.avatar-name>
+            <x-renderer.avatar-name></x-renderer.avatar-name>
 
         </x-renderer.card>
 
