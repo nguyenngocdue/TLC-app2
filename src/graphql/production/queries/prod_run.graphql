@@ -18,9 +18,9 @@ type Prod_run {
     total_man_hours: Float
     created_at: DateTime
     updated_at: DateTime
-    productionOrder: Prod_order! @belongsTo
-    routingLinks: Prod_routing_link! @belongsTo
-    productionRunLines: [Prod_run_line!]! @hasMany
+    prodOrder: Prod_order! @belongsTo
+    prodRoutingLinks: Prod_routing_link! @belongsTo
+    prodRunLines: [Prod_run_line!]! @hasMany
 }
 
 input CreateProdRunInput {

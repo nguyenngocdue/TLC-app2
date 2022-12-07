@@ -16,6 +16,10 @@ type Prod_routing_detail {
     target_man_hours: Float
     created_at: DateTime
     updated_at: DateTime
+    prodRouting: Prod_routing! @belongsTo
+    prodRoutingLink: Prod_routing_link! @belongsTo
+    erpRoutingLink: Erp_routing_link! @belongsTo
+    wirDescription: Wir_description! @belongsTo
 }
 input CreateProdRoutingDetailInput {
     routing_id: ID!

@@ -1,0 +1,43 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    qaqc_insp_groups: [Qaqc_insp_group!]! @all @guard
+    qaqc_insp_group(id: ID @eq): Qaqc_insp_group @find @guard
+}
+type Qaqc_insp_group {
+    id: ID!
+    name: String!
+    description: String!
+    slug: String!
+    created_at: DateTime
+    updated_at: DateTime
+    getTemplateLines: [Qaqc_insp_tmpl_line!]! @hasMany
+}
+
+input CreateQAQCInspGroupInput {
+    id: ID!
+    name: String!
+    description: String!
+    slug: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateQAQCInspGroupInput {
+    id: ID!
+    name: String
+    description: String
+    slug: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createQAQCInspGroup(
+        input: CreateQAQCInspGroupInput! @spread
+    ): Qaqc_insp_group! @guard @create
+    updateQAQCInspGroup(
+        input: UpdateQAQCInspGroupInput! @spread
+    ): Qaqc_insp_group @guard @update
+    deleteQAQCInspGroup(id: ID!): Qaqc_insp_group @guard @delete
+}

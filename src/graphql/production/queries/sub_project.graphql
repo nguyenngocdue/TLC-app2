@@ -15,7 +15,7 @@ type Sub_project {
     created_at: DateTime
     updated_at: DateTime
     subProjectStatus: Sub_project_status! @belongsTo
-    productionOrders: [Prod_order!]! @hasMany
+    prodOrders: [Prod_order!]! @hasMany
 }
 
 input CreateSubProjectInput {

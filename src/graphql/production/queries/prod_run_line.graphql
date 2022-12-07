@@ -16,7 +16,7 @@ type Prod_run_line {
     created_at: DateTime
     updated_at: DateTime
     users: [User!]! @belongsToMany
-    productionRun: Prod_run! @belongsTo
+    prodRun: Prod_run! @belongsTo
 }
 
 input CreateProdRunLineInput {

@@ -23,7 +23,7 @@ class Prod_run_line extends Model
 
     public $eloquentParams = [
         "users" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_run_line_id', 'user_id'],
-        "productionRun" => ['belongsTo', Prod_run::class, 'prod_run_id'],
+        "prodRun" => ['belongsTo', Prod_run::class, 'prod_run_id'],
     ];
     public function users()
     {
@@ -31,7 +31,7 @@ class Prod_run_line extends Model
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('user_id');
     }
 
-    public function productionRun()
+    public function prodRun()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

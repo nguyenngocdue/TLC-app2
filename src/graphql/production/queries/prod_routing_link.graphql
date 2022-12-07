@@ -15,7 +15,7 @@ type Prod_routing_link {
     created_at: DateTime
     updated_at: DateTime
     routings: [Prod_routing!]! @belongsToMany
-    productionRun: [Prod_run!]! @hasMany
+    prodRun: [Prod_run!]! @hasMany
     discipline: Prod_discipline! @belongsTo
 }
 

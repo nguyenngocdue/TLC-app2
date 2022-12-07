@@ -22,10 +22,10 @@ class Sub_project extends Model
     // ];
 
     public $eloquentParams = [
-        "productionOrders" => ['hasMany', Prod_order::class],
+        "prodOrders" => ['hasMany', Prod_order::class],
         "subProjectStatus" => ['belongsTo', Sub_project_status::class, 'sub_project_status_id'],
     ];
-    public function productionOrders()
+    public function prodOrders()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1]);

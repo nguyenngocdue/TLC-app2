@@ -1,0 +1,53 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    qaqc_insp_tmpls: [Qaqc_insp_tmpl!]! @all @guard
+    qaqc_insp_tmp(id: ID @eq): Qaqc_insp_tmpl @find @guard
+}
+type Qaqc_insp_tmpl {
+    id: ID!
+    prod_routing_id: ID!
+    name: String!
+    description: String!
+    slug: String!
+    getLines: [Qaqc_insp_tmpl_line!]! @hasMany
+    getProdRouting: Prod_routing! @belongsTo
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input CreateQAQCInspTmplInput {
+    id: ID!
+    prod_order_id: ID!
+    name: String!
+    description: String!
+    owner_id: ID!
+    slug: String!
+    consent_number: int!
+    progress: float!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateQAQCInspTmplInput {
+    id: ID!
+    prod_order_id: ID
+    name: String
+    description: String
+    owner_id: ID
+    slug: String
+    consent_number: int
+    progress: float
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createQAQCInspTmpl(
+        input: CreateQAQCInspTmplInput! @spread
+    ): Qaqc_insp_tmpl! @guard @create
+    updateQAQCInspTmpl(input: UpdateQAQCInspTmplInput! @spread): Qaqc_insp_tmpl
+        @guard
+        @update
+    deleteQAQCInspTmpl(id: ID!): Qaqc_insp_tmpl @guard @delete
+}

@@ -1,0 +1,57 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    qaqc_insp_chklsts: [Qaqc_insp_checklist!]! @all @guard
+    qaqc_insp_chklst(id: ID @eq): Qaqc_insp_checklist @find @guard
+}
+type Qaqc_insp_chklst {
+    id: ID!
+    prod_order_id: ID!
+    name: String!
+    description: String!
+    owner_id: ID!
+    slug: String!
+    consent_number: int!
+    progress: float!
+    user: User! @belongsTo
+    prodOrder: Prod_order! @belongsTo
+    qaqcInspChklstLines: [Qaqc_insp_checklist_line!]! @hasMany
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input CreateQAQCInspChklstInput {
+    id: ID!
+    prod_order_id: ID!
+    name: String!
+    description: String!
+    owner_id: ID!
+    slug: String!
+    consent_number: int!
+    progress: float!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateQAQCInspChklstInput {
+    id: ID!
+    prod_order_id: ID
+    name: String
+    description: String
+    owner_id: ID
+    slug: String
+    consent_number: int
+    progress: float
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createQAQCInspChklst(
+        input: CreateQAQCInspChklstInput! @spread
+    ): Qaqc_insp_chklst! @guard @create
+    updateQAQCInspChklst(
+        input: UpdateQAQCInspChklstInput! @spread
+    ): Qaqc_insp_chklst @guard @update
+    deleteQAQCInspChklst(id: ID!): Qaqc_insp_chklst @guard @delete
+}

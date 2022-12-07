@@ -26,7 +26,7 @@ class Prod_order extends Model
     // ];
 
     public $eloquentParams = [
-        "productionRuns" => ['hasMany', Prod_run::class, 'prod_order_id'],
+        "prodRuns" => ['hasMany', Prod_run::class, 'prod_order_id'],
         "subProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "routing" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
         "qaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'prod_order_id'],
@@ -43,7 +43,7 @@ class Prod_order extends Model
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function productionRuns()
+    public function prodRuns()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
