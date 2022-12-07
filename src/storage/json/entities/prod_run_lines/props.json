@@ -12,25 +12,12 @@
         "validation": "",
         "formula": ""
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
-        "column_type": "string",
-        "label": "Name",
-        "control": "text",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
-    },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
-        "column_type": "text",
-        "label": "Description",
-        "control": "textarea",
+    "_prod_run_id": {
+        "name": "_prod_run_id",
+        "column_name": "prod_run_id",
+        "column_type": "bigint",
+        "label": "Prod Run Id",
+        "control": "dropdown",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -38,18 +25,57 @@
         "validation": "",
         "formula": ""
     },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
+    "_date": {
+        "name": "_date",
+        "column_name": "date",
+        "column_type": "date",
+        "label": "Date",
+        "control": "picker_date",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_start": {
+        "name": "_start",
+        "column_name": "start",
+        "column_type": "time",
+        "label": "Start",
+        "control": "picker_time",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_end": {
+        "name": "_end",
+        "column_name": "end",
+        "column_type": "time",
+        "label": "End",
+        "control": "picker_time",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
         "column_type": "string",
-        "label": "Slug",
+        "label": "Status",
         "control": "text",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formula": "All_SlugifyByName"
+        "formula": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -77,24 +103,11 @@
         "validation": "",
         "formula": ""
     },
-    "_routingLinks": {
-        "name": "_routingLinks",
-        "column_name": "routingLinks",
+    "_users": {
+        "name": "_users",
+        "column_name": "users",
         "column_type": "ELQ(belongsToMany)",
-        "label": "Routing Links",
-        "control": "relationship_renderer",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "true",
-        "validation": "",
-        "formula": ""
-    },
-    "_productionOrders": {
-        "name": "_productionOrders",
-        "column_name": "productionOrders",
-        "column_type": "ELQ(hasMany)",
-        "label": "Production Orders",
+        "label": "Users",
         "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",

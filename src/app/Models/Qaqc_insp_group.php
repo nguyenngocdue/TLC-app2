@@ -15,7 +15,7 @@ class Qaqc_insp_group extends Model
     protected $table = "qaqc_insp_groups";
 
     public $eloquentParams = [
-        "getTemplateLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_sheet_id"],
+        "getTemplateLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_group_id"],
     ];
 
     public function getTemplateLines()

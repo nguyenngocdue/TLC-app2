@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('slug');
+            $table->float('progress')->default(0);
 
             $table->unsignedBigInteger('prod_order_id');
             $table->unsignedBigInteger('owner_id');

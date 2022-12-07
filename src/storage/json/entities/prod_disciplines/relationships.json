@@ -1,20 +1,11 @@
 {
     "_routingLink": {
-        "relationship": "routingLink",
-        "eloquent": "hasMany",
-        "param_1": "App\\Models\\Prod_routing_link",
-        "param_2": "prod_discipline_id",
-        "param_3": null,
-        "param_4": null,
-        "param_5": null,
-        "param_6": null,
-        "label": "RoutingLink",
-        "renderer": "count",
-        "renderer_param": "name",
-        "control_name": null,
-        "col_span": "12",
-        "hidden": null,
-        "new_line": null,
-        "type_line": "default"
+        "name": "_routingLink",
+        "relationship": "hasMany",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "",
+        "control_name": "routingLink"
     }
 }

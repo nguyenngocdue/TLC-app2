@@ -4,8 +4,8 @@
         "relationship": "productionRuns",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
         "control_name": "productionRuns"
     },
     "_subProject": {
@@ -31,8 +31,8 @@
         "relationship": "hasMany",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
         "control_name": "qaqcInspChklsts"
     }
 }

@@ -24,25 +24,36 @@ class Prod_run extends Model
     // ];
 
     public $eloquentParams = [
-        "productionOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],
-        "productionRunLines" => ['hasMany', Prod_run_line::class, 'prod_run_id'],
-        "routingLinks" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
+        "prodOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],
+        "prodRunLines" => ['hasMany', Prod_run_line::class, 'prod_run_id'],
+        "prodRoutingLinks" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
     ];
-    public function productionOrder()
+    public function prodOrder()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function routingLinks()
+    public function prodRoutingLinks()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function productionRunLines()
+    public function prodRunLines()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getManyLineParams()
+    {
+        return [
+            ["dataIndex" => "id", "renderer" => "id", "type" => "prod_runs"],
+            ["dataIndex" => "prodRoutingLinks", "renderer" => "column", "rendererParam" => "name"],
+            ["dataIndex" => "total_hours", "align" => "right"],
+            ["dataIndex" => "total_man_hours", "align" => "right"],
+            ["dataIndex" => "status", "renderer" => "tag"],
+        ];
     }
 }

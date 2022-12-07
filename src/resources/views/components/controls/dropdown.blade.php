@@ -8,7 +8,13 @@ $valDataSource = array_values($dataSource)[0];
     <select name='{{$colName}}' id="select-dropdown-{{$colName}}" class=" form-select  bg-white border border-gray-300  text-sm rounded-lg block  mt-1  focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
         <option class="py-10" value="" selected>Select your option...</option>
         @foreach($valDataSource as $data)
-        <option class="py-1" value="{{$data->id}}" {{$selected  === $data->id * 1 ? "selected" : ""}} title="{{isset($data->description) ? "$data->description (#$data->id)" : "" }}" data-bs-toggle="tooltip">{{$data->name}}</option>
+        
+        @php
+            $title = isset($data->description) ? "$data->description (#$data->id)" : "" ;
+            $label = $data->name." (#".$data->id.")";
+        @endphp
+
+        <option class="py-1" value="{{$data->id}}" @selected($selected  === $data->id * 1) title="{{$title}}" data-bs-toggle="tooltip">{{$label}}</option>
         @endforeach
     </select>
     @endif
