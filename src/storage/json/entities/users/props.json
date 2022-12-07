@@ -204,7 +204,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
         "formula": ""
     },
     "_first_date": {

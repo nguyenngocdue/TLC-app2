@@ -53,7 +53,7 @@ class RelationshipRenderer extends Component
         $renderer_edit = $value['renderer_edit'];
         switch ($renderer_edit) {
             case "many_icons":
-                $colSpan = $columns['colspan'] ?? 6;
+                $colSpan = $columns['colspan'] ?? 3;
                 return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan', 'typeDB'));
             case "many_lines":
                 return view('components.controls.manyLineParams')->with(compact('columns', 'dataSource', 'fn'));

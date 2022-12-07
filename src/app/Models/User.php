@@ -173,6 +173,8 @@ class User extends Authenticatable implements LdapAuthenticatable
             'id' => 'id',
             'title' => 'name',
             'description' => 'position_rendered',
+            'disabled' => 'resigned',
+            'groupBy' => 'name',
             'colspan' => 3,
         ];
     }
