@@ -6,6 +6,7 @@ foreach ( explode(",", $rendererParam) as $param) {
     $pairs = explode("=", $param);
     if($json) ${$pairs[0]} = $json->{$pairs[1]} ?? "";
 }
+$avatar = $avatar ? $avatar : "https://cdn.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.webp";
 @endphp
 
 <div class="flex items-center text-sm">

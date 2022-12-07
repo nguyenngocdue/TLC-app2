@@ -25,7 +25,7 @@ class AvatarName extends Component
         $description = $this->description;
         $avatar = $this->avatar;
         $href = $this->href;
-        $rendererParam = "title=name,description=position_rendered,href=href";
+        $rendererParam = "title=name,description=position_rendered,href=href,avatar=avatar";
 
         return view('components.renderer.avatar-name')->with(compact('title', 'description', 'avatar', 'rendererParam', 'href'));
     }
