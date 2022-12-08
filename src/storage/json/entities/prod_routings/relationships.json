@@ -1,20 +1,20 @@
 {
-    "_routingLinks": {
-        "name": "_routingLinks",
+    "_prodRoutingLinks": {
+        "name": "_prodRoutingLinks",
         "relationship": "belongsToMany",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
-        "control_name": "routingLinks"
+        "control_name": "prodRoutingLinks"
     },
-    "_productionOrders": {
-        "name": "_productionOrders",
+    "_prodOrders": {
+        "name": "_prodOrders",
         "relationship": "hasMany",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
-        "control_name": "productionOrders"
+        "control_name": "prodOrders"
     }
 }

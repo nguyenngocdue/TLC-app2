@@ -90,9 +90,9 @@
         "validation": "",
         "formula": ""
     },
-    "_routings": {
-        "name": "_routings",
-        "column_name": "routings",
+    "_prodRoutings": {
+        "name": "_prodRoutings",
+        "column_name": "prodRoutings",
         "column_type": "ELQ(belongsToMany)",
         "label": "Routing",
         "control": "relationship_renderer",
@@ -103,9 +103,9 @@
         "validation": "",
         "formula": ""
     },
-    "_productionRun": {
-        "name": "_productionRun",
-        "column_name": "productionRun",
+    "_prodRun": {
+        "name": "_prodRun",
+        "column_name": "prodRun",
         "column_type": "ELQ(hasMany)",
         "label": "Production Run",
         "control": "relationship_renderer",

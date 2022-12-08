@@ -17,24 +17,26 @@ class Helper
         return  $dataSource;
     }
 
-    public static function getDataSource($modelPath, $colName, $type = null)
+    public static function getDataSourceWithType($modelPath, $colName, $type)
     {
         $instance = new $modelPath;
         $eloquentParam = $instance->eloquentParams;
 
-        if (!is_null($type)) {
-            // $relationship = json_decode(file_get_contents("/var/www/app/storage/json/entities/$type/relationships.json"), true);
-            $relationship = Relationships::getAllOf($type);
-            foreach ($relationship as $value) {
-                if ($value['control_name'] === $colName) {
-                    $pathTableSource =  $eloquentParam[$value['control_name']][1] ?? "";
-                    // $pathTableSource =  $eloquentParam[$value['relationship']][1] ?? [];
-                    return Helper::getDataFromPathModel($pathTableSource);
-                }
+        $relationship = Relationships::getAllOf($type);
+        foreach ($relationship as $value) {
+            if ($value['control_name'] === $colName) {
+                $pathTableSource =  $eloquentParam[$value['control_name']][1] ?? "";
+                // $pathTableSource =  $eloquentParam[$value['relationship']][1] ?? [];
+                return Helper::getDataFromPathModel($pathTableSource);
             }
-            return $colName;
         }
+        return $colName;
+    }
 
+    public static function getDataSource($modelPath, $colName)
+    {
+        $instance = new $modelPath;
+        $eloquentParam = $instance->eloquentParams;
         $keyNameEloquent = "";
         foreach ($eloquentParam as $key => $value) {
             if (in_array($colName, $value)) {

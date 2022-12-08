@@ -94,7 +94,7 @@
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
         "column_type": "bigint",
-        "label": "Sub Project Id",
+        "label": "Sub Project",
         "control": "dropdown",
         "col_span": "12",
         "hidden_view_all": "",
@@ -107,7 +107,7 @@
         "name": "_prod_routing_id",
         "column_name": "prod_routing_id",
         "column_type": "bigint",
-        "label": "Prod Routing Id",
+        "label": "Prod Routing",
         "control": "dropdown",
         "col_span": "12",
         "hidden_view_all": "",
@@ -142,9 +142,9 @@
         "validation": "",
         "formula": ""
     },
-    "_productionRuns": {
-        "name": "_productionRuns",
-        "column_name": "productionRuns",
+    "_prodRuns": {
+        "name": "_prodRuns",
+        "column_name": "prodRuns",
         "column_type": "ELQ(hasMany)",
         "label": "Runs",
         "control": "relationship_renderer",

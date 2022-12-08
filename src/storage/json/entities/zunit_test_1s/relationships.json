@@ -2,8 +2,8 @@
     "_workplaceDropDown1": {
         "name": "_workplaceDropDown1",
         "relationship": "belongsTo",
-        "renderer_view_all": "",
-        "renderer_view_all_param": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": ""
@@ -11,8 +11,8 @@
     "_workplaceRadio1": {
         "name": "_workplaceRadio1",
         "relationship": "belongsTo",
-        "renderer_view_all": "",
-        "renderer_view_all_param": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": ""
@@ -20,8 +20,8 @@
     "_workplaceRel1": {
         "name": "_workplaceRel1",
         "relationship": "belongsToMany",
-        "renderer_view_all": "",
-        "renderer_view_all_param": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": "workplaceRel1"
@@ -29,8 +29,8 @@
     "_workplaceRel2": {
         "name": "_workplaceRel2",
         "relationship": "belongsToMany",
-        "renderer_view_all": "",
-        "renderer_view_all_param": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": "workplaceRel2"

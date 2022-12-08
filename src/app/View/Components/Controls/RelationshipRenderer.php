@@ -38,8 +38,9 @@ class RelationshipRenderer extends Component
         $theValue = array_filter($relationship, fn ($value) => $value['control_name'] === $colName);
         if (empty($theValue)) return "<x-feedback.alert message='Column [$colName] can not be found in control_name of Relationship screen.' type='warning' />";
         $value = $theValue["_" . $colName];
+        if (is_null($itemDB->$colName)) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";
         $dataSource = $itemDB->$colName->all();
-        if (count($dataSource) <= 0) return "<x-feedback.alert message='There is no item to be found' type='warning' />";
+        if (count($dataSource) <= 0) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";
         $typeDB =  $dataSource[0]->getTable() ?? "";
         $model = "App\\Models\\" . Str::singular($typeDB);
         $instance = new $model;

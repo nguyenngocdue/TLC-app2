@@ -51,6 +51,19 @@
         "validation": "",
         "formula": "All_SlugifyByName"
     },
+    "_progress": {
+        "name": "_progress",
+        "column_name": "progress",
+        "column_type": "float",
+        "label": "Progress (%)",
+        "control": "number",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
     "_prod_order_id": {
         "name": "_prod_order_id",
         "column_name": "prod_order_id",

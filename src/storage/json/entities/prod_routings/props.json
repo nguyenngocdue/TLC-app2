@@ -77,9 +77,9 @@
         "validation": "",
         "formula": ""
     },
-    "_routingLinks": {
-        "name": "_routingLinks",
-        "column_name": "routingLinks",
+    "_prodRoutingLinks": {
+        "name": "_prodRoutingLinks",
+        "column_name": "prodRoutingLinks",
         "column_type": "ELQ(belongsToMany)",
         "label": "Routing Links",
         "control": "relationship_renderer",
@@ -90,9 +90,9 @@
         "validation": "",
         "formula": ""
     },
-    "_productionOrders": {
-        "name": "_productionOrders",
-        "column_name": "productionOrders",
+    "_prodOrders": {
+        "name": "_prodOrders",
+        "column_name": "prodOrders",
         "column_type": "ELQ(hasMany)",
         "label": "Production Orders",
         "control": "relationship_renderer",

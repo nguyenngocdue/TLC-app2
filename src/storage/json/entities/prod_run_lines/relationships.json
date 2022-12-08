@@ -8,8 +8,8 @@
         "renderer_edit_param": "",
         "control_name": ""
     },
-    "_productionRun": {
-        "name": "_productionRun",
+    "_prodRun": {
+        "name": "_prodRun",
         "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "id",
