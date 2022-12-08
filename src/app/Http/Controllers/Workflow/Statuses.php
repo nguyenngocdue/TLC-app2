@@ -30,10 +30,12 @@ class Statuses
 
     private static function _getFor($entityType)
     {
-        $cacheKey = "statuses_of_$entityType";
+        $singular = Str::singular($entityType);
+        $plural = Str::plural($entityType);
+        $cacheKey = "statuses_of_$singular";
         $result = [];
         if (!Cache::has($cacheKey)) {
-            $path = "entities/$entityType/statuses.json";
+            $path = "entities/$plural/statuses.json";
             $pathFrom = storage_path('json/' . $path);
             if (!file_exists($pathFrom)) $result = [];
             else $result = json_decode(file_get_contents($pathFrom, true), true);
@@ -44,9 +46,11 @@ class Statuses
 
     private static function setFor($entityType, $dataSource)
     {
-        $path = "entities/$entityType/statuses.json";
+        $singular = Str::singular($entityType);
+        $plural = Str::plural($entityType);
+        $path = "entities/$plural/statuses.json";
         $str = json_encode($dataSource, JSON_PRETTY_PRINT);
-        Cache::forget("statuses_of_$entityType");
+        Cache::forget("statuses_of_$singular");
         return Storage::disk('json')->put($path, $str);
     }
 
