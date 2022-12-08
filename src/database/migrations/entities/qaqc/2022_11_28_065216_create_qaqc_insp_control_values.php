@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('qaqc_insp_control_values', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('group');
+            $table->unsignedBigInteger('control_group');
             $table->string('name');
             $table->string('description');
 

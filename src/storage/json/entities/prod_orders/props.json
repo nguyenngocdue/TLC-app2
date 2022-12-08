@@ -38,6 +38,19 @@
         "validation": "",
         "formula": "All_SlugifyByName"
     },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "column_type": "string",
+        "label": "Status",
+        "control": "status",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
     "_production": {
         "name": "_production",
         "column_name": "production",

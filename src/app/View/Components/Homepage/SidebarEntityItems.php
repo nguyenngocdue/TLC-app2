@@ -4,6 +4,8 @@ namespace App\View\Components\Homepage;
 
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Entities;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class SidebarEntityItems
@@ -13,7 +15,7 @@ class SidebarEntityItems
         $currentType = CurrentRoute::getTypeSingular();
         $singular = Str::singular($table);
         $isActive = ($currentType === $singular);
-        return [
+        $result = [
             "title" => Str::pretty($table),
             "type" => $singular,
             "icon" => $svg['form'],
@@ -22,36 +24,40 @@ class SidebarEntityItems
                 [
                     'title' => "View All",
                     'href' => route("{$table}_viewall.index"),
-                    // 'isActive' => random_int(0, 1),
                 ],
                 [
                     'title' => "Add New",
                     'href' => route("{$table}_addnew.create"),
-                    // 'isActive' => random_int(0, 1),
                 ],
                 ['title' => "-",],
                 [
                     'title' => "Manage Props",
                     'href' => route("{$singular}_mngprop.index"),
-                    // 'isActive' => random_int(0, 1),
                 ],
                 [
                     'title' => "Manage Relationships",
                     'href' => route("{$singular}_mngrls.index"),
-                    // 'isActive' => random_int(0, 1),
                 ],
-                ['title' => '-'],
-                [
-                    'title' => "Manage Statuses",
-                    'href' => route("{$singular}_mngstt.index"),
-                ],
+                // ['title' => '-'],
                 // [
-                //     'title' => "Manage Tables",
-                //     'href' => route("{$singular}_mnglnprop.index"),
-                //     'isActive' => random_int(0, 1),
+                //     'title' => "Manage Statuses",
+                //     'href' => route("{$singular}_mngstt.index"),
                 // ],
             ],
         ];
+
+        $modelPath = "App\\Models\\" . Str::ucfirst($singular);
+        $model = App::make($modelPath);
+
+        if (method_exists($model, "transitionTo")) {
+            $result['children'][] =  ['title' => '-'];
+            $result['children'][] =  [
+                'title' => "Manage Statuses",
+                'href' => route("{$singular}_mngstt.index"),
+            ];
+        }
+
+        return $result;
     }
 
     public static function getAll($svg)

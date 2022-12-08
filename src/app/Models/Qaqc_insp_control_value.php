@@ -11,7 +11,7 @@ use Laravel\Scout\Searchable;
 class Qaqc_insp_control_value extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = ["id", "group", "name", "description"];
+    protected $fillable = ["id", "control_group", "name", "description"];
     protected $table = "qaqc_insp_control_values";
 
     public $eloquentParams = [];
