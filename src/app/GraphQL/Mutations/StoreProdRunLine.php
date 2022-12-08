@@ -20,7 +20,6 @@ final class StoreProdRunLine
                 "date" => $args['date'] ?? $dt->format('Y-m-d'),
                 "start" => $args['start'] ?? $dt->format('H:i:s'),
                 "end" => $args['end'] ?? null,
-                "status" => $args["status"] ?? "running",
                 "created_at" => $args["created_at"] ?? null,
                 "updated_at" => $args["updated_at"] ?? null,
             ]);

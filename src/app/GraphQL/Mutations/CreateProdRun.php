@@ -1,0 +1,29 @@
+<?php
+
+namespace App\GraphQL\Mutations;
+
+use App\Models\Prod_run;
+
+final class CreateProdRun
+{
+    /**
+     * @param  null  $_
+     * @param  array{}  $args
+     */
+    public function __invoke($_, array $args)
+    {
+        try {
+            $prodRun = Prod_run::create(
+                [
+                    'prod_order_id' => $args['prod_order_id'],
+                    'prod_routing_link_id' => $args['prod_routing_link_id'],
+                    'status' => $args['status'],
+                ]
+            );
+            $prodRun->transitionTo($args['status']);
+            return $prodRun;
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+}

@@ -20,7 +20,6 @@ final class DuplicateProdRunLine
             $newProdLine->date = $dt->format('Y-m-d');
             $newProdLine->start = $dt->format('H:i:s');
             $newProdLine->end = null;
-            $newProdLine->status = 'running';
             $newProdLine->save();
             $userIds = [];
             foreach ($prodLine->users as $user) {
