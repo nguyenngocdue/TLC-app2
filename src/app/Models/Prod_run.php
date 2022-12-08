@@ -17,11 +17,7 @@ class Prod_run extends Model
     protected $fillable = ["prod_order_id", "prod_routing_link_id", "status", "total_hours", "total_man_hours"];
     protected $primaryKey = 'id';
     protected $table = 'prod_runs';
-    // protected $with = [
-    // "productionOrder",
-    // "productionRunLines",
-    // "routingLinks",
-    // ];
+    public $nameless = true;
 
     public $eloquentParams = [
         "prodOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],

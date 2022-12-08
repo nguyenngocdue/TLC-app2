@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Utils\Support\Relationships;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -10,11 +11,14 @@ class Helper
 {
     private static function getDataFromPathModel($modelPath)
     {
+        $model = App::make($modelPath);
+        $nameless = ($model->nameless);
+
         $insTableSource = new $modelPath();
         $tableName = $insTableSource->getTable();
-        $_dataSource = DB::table($tableName)->orderBy('name')->get();
-        $dataSource = [$tableName => $_dataSource];
-        return  $dataSource;
+        $table = DB::table($tableName);
+        $dataSource =  $nameless ? $table->get() : $table->orderBy('name')->get();
+        return [$tableName => $dataSource];
     }
 
     public static function getDataSourceWithType($modelPath, $colName, $type)

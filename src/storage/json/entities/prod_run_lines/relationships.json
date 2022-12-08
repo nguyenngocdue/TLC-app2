@@ -4,9 +4,9 @@
         "relationship": "belongsToMany",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
-        "renderer_edit": "",
+        "renderer_edit": "many_icons",
         "renderer_edit_param": "",
-        "control_name": ""
+        "control_name": "users"
     },
     "_prodRun": {
         "name": "_prodRun",

@@ -42,7 +42,7 @@ abstract class ViewAllController extends Controller
         $model = $this->typeModel;
         $search = request('search');
         $result = App::make($model)::search($search)
-            ->query(fn ($q) => $q->orderBy('id', 'asc'))
+            ->query(fn ($q) => $q->orderBy('updated_at', 'desc'))
             ->paginate($pageLimit);
         return $result;
     }

@@ -11,7 +11,7 @@ $valDataSource = array_values($dataSource)[0];
         
         @php
             $title = isset($data->description) ? "$data->description (#$data->id)" : "" ;
-            $label = $data->name." (#".$data->id.")";
+            $label = ($data->name ?? "Nameless")." (#".$data->id.")";
         @endphp
 
         <option class="py-1" value="{{$data->id}}" @selected($selected  === $data->id * 1) title="{{$title}}" data-bs-toggle="tooltip">{{$label}}</option>
