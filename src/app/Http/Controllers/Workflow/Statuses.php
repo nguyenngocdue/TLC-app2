@@ -2,33 +2,50 @@
 
 namespace App\Http\Controllers\Workflow;
 
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Statuses
 {
+    public static function render($status)
+    {
+        $statuses = self::getAll();
+        // dump($status);
+        $color = isset($statuses[$status]) ? $statuses[$status]['color'] : 'black';
+        $title = isset($statuses[$status]) ? $statuses[$status]['title'] : $status;
+        // dd($color, $title);
+        $rendered = Blade::render("<x-renderer.tag color='$color'>$title</x-renderer.tag>");
+        // dd($rendered);
+        return $rendered;
+    }
+
+    private static $statuses_path = "workflow/statuses.json";
     public static function getAll()
     {
-        $path = "workflow/statuses.json";
-        $pathFrom = storage_path('json/' . $path);
+        $pathFrom = storage_path('json/' . self::$statuses_path);
         $json = json_decode(file_get_contents($pathFrom, true), true);
         return $json;
     }
 
     public static function setAll($dataSource)
     {
-        $path = "workflow/statuses.json";
-        // Log::info($dataSource);
         $str = json_encode($dataSource, JSON_PRETTY_PRINT);
-        Storage::disk('json')->put($path, $str);
+        Storage::disk('json')->put(self::$statuses_path, $str);
     }
 
-    public static function getFor($entityType)
+    private static function _getFor($entityType)
     {
         $path = "entities/$entityType/statuses.json";
         $pathFrom = storage_path('json/' . $path);
         if (!file_exists($pathFrom)) return [];
-        $json = json_decode(file_get_contents($pathFrom, true), true);
+        return json_decode(file_get_contents($pathFrom, true), true);
+    }
+
+    public static function getFor($entityType)
+    {
+        $json = self::_getFor($entityType);
 
         $allStatuses = self::getAll();
         //<< When filter, the order is the order of the allStatus, not the form order
@@ -48,11 +65,8 @@ class Statuses
 
     public static function move($direction, $entityType, $name)
     {
-        // dd($direction, $entityType, $name);
         $entityType = Str::plural($entityType);
-        $path = "entities/$entityType/statuses.json";
-        $pathFrom = storage_path('json/' . $path);
-        $json = (file_exists($pathFrom)) ? json_decode(file_get_contents($pathFrom, true), true) : [];
+        $json = self::_getFor($entityType);
 
         $index = array_search($name, $json);
         // dump($direction, $name, $index, $json);

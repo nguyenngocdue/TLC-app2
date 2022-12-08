@@ -49,7 +49,7 @@ class Prod_run extends Model
             ["dataIndex" => "prodRoutingLinks", "renderer" => "column", "rendererParam" => "name"],
             ["dataIndex" => "total_hours", "align" => "right"],
             ["dataIndex" => "total_man_hours", "align" => "right"],
-            ["dataIndex" => "status", "renderer" => "tag"],
+            ["dataIndex" => "status", "renderer" => "status"],
         ];
     }
 }

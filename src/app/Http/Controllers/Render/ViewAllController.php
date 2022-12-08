@@ -94,16 +94,10 @@ abstract class ViewAllController extends Controller
         }
 
         $props = Props::getAllOf($type);
-        // $propsPath = storage_path() . "/json/entities/$type/props.json";
-        // if (!file_exists($propsPath)) return false;
-        // $props = json_decode(file_get_contents($propsPath), true);
         $props = array_filter($props, fn ($prop) => !$prop['hidden_view_all']);
-        // dump($columnLimit);
         if ($columnLimit) {
             $allows = array_keys($columnLimit);
             $props = array_filter($props, fn ($prop) => in_array($prop['name'], $allows));
-            // dump($allows);
-            // dump($props);
         }
         $result = array_values(array_map(fn ($prop) => createObject($prop, $type), $props));
         return $result;
