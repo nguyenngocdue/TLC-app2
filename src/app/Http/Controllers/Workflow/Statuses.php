@@ -3,44 +3,51 @@
 namespace App\Http\Controllers\Workflow;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Statuses
 {
-    public static function render($status)
-    {
-        $statuses = self::getAll();
-        // dump($status);
-        $color = isset($statuses[$status]) ? $statuses[$status]['color'] : 'black';
-        $title = isset($statuses[$status]) ? $statuses[$status]['title'] : $status;
-        // dd($color, $title);
-        $rendered = Blade::render("<x-renderer.tag color='$color'>$title</x-renderer.tag>");
-        // dd($rendered);
-        return $rendered;
-    }
-
     private static $statuses_path = "workflow/statuses.json";
     public static function getAll()
     {
-        $pathFrom = storage_path('json/' . self::$statuses_path);
-        $json = json_decode(file_get_contents($pathFrom, true), true);
-        return $json;
+        if (!Cache::has('statuses_of_the_app')) {
+            $pathFrom = storage_path('json/' . self::$statuses_path);
+            $json = json_decode(file_get_contents($pathFrom, true), true);
+            Cache::rememberForever('statuses_of_the_app', fn () => $json);
+        }
+        return Cache::get('statuses_of_the_app');
     }
 
     public static function setAll($dataSource)
     {
         $str = json_encode($dataSource, JSON_PRETTY_PRINT);
-        Storage::disk('json')->put(self::$statuses_path, $str);
+        Cache::forget('statuses_of_the_app');
+        return Storage::disk('json')->put(self::$statuses_path, $str);
     }
 
     private static function _getFor($entityType)
     {
+        $cacheKey = "statuses_of_$entityType";
+        $result = [];
+        if (!Cache::has($cacheKey)) {
+            $path = "entities/$entityType/statuses.json";
+            $pathFrom = storage_path('json/' . $path);
+            if (!file_exists($pathFrom)) $result = [];
+            else $result = json_decode(file_get_contents($pathFrom, true), true);
+            Cache::rememberForever($cacheKey, fn () => $result);
+        }
+        return Cache::get($cacheKey);
+    }
+
+    private static function setFor($entityType, $dataSource)
+    {
         $path = "entities/$entityType/statuses.json";
-        $pathFrom = storage_path('json/' . $path);
-        if (!file_exists($pathFrom)) return [];
-        return json_decode(file_get_contents($pathFrom, true), true);
+        $str = json_encode($dataSource, JSON_PRETTY_PRINT);
+        Cache::forget("statuses_of_$entityType");
+        return Storage::disk('json')->put($path, $str);
     }
 
     public static function getFor($entityType)
@@ -54,13 +61,6 @@ class Statuses
         foreach ($json as $status) $result[$status] = $allStatuses[$status];
 
         return $result;
-    }
-
-    private static function setFor($entityType, $dataSource)
-    {
-        $path = "entities/$entityType/statuses.json";
-        $str = json_encode($dataSource, JSON_PRETTY_PRINT);
-        return Storage::disk('json')->put($path, $str);
     }
 
     public static function move($direction, $entityType, $name)

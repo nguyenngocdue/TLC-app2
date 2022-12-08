@@ -86,6 +86,10 @@ abstract class ViewAllController extends Controller
                 case "textarea":
                     $output['renderer'] = "text";
                     break;
+                case "status":
+                    $output['renderer'] = "status";
+                    $output['align'] = 'center';
+                    break;
                 default:
                     break;
             }

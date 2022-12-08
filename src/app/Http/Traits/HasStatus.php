@@ -2,24 +2,41 @@
 
 namespace App\Http\Traits;
 
+use App\Events\StatusEnteredEvent;
+use App\Events\StatusLeavingEvent;
+use App\Http\Controllers\Workflow\Statuses;
+use Exception;
+
 trait HasStatus
 {
     function getAvailableStatuses()
     {
-        return ['finished', 'stopped', 'running'];
+        $plural = $this->getTable();
+        $statuses = Statuses::getFor($plural);
+        return array_keys($statuses);
     }
 
     function transitionTo($newStatus)
     {
-        if (!in_array($newStatus, $this->getAvailableStatuses())) {
-            echo "The new status $newStatus is not available for this Model.";
-            return false;
+        $available = $this->getAvailableStatuses();
+        if (!in_array($newStatus, $available)) {
+            throw new Exception("The status [$newStatus] is not available for this Model. Availabilities are [" . join(", ", $available) . "]");
         }
 
-        echo "#" . $this->id . " from " . $this->status . " to -> $newStatus";
+        $eventData = [
+            'type' => $this->getTable(),
+            'id' => $this->id,
+            'old_status' => $this->status,
+            'new_status' => $newStatus,
+        ];
+
+        event(new StatusLeavingEvent($eventData));
 
         $this->status = $newStatus;
-        $this->save();
+        $savedSuccessfully = $this->save();
+        if ($savedSuccessfully) {
+            event(new StatusEnteredEvent($eventData));
+        }
         return true;
     }
 }

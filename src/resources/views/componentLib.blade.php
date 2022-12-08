@@ -42,13 +42,15 @@
             <x-renderer.editable.dropdown name="dropdown1" :cbbDataSource='["", "true"]'>true</x-renderer.editable.dropdown>
             Dropdown with sortBy='value'
             <x-renderer.editable.dropdown name="dropdown2" :cbbDataSource='["3", "2", "1"]' sortBy='value'>true</x-renderer.editable.dropdown>
-            Toggle
-            <x-renderer.switch color="bg-blue-900" content="My text here" />
             Status
+            <br/>
             <x-renderer.status>unknown_status</x-renderer.status><br/>
             <x-renderer.status>new</x-renderer.status><br/>
             <x-renderer.status>assigned</x-renderer.status><br/>
             <x-renderer.status>closed</x-renderer.status><br/>
+            <br/>
+            Toggle
+            <x-renderer.switch color="bg-blue-900" content="My text here" />
             
         </x-renderer.card>
 

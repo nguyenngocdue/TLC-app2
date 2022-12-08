@@ -17,6 +17,7 @@
         "radio",
         "relationship_renderer",
         "switch",
+        "status",
         "text",
         "textarea",
         "link"

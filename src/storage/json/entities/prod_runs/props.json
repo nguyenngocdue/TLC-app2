@@ -43,7 +43,7 @@
         "column_name": "status",
         "column_type": "string",
         "label": "Status",
-        "control": "text",
+        "control": "status",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
