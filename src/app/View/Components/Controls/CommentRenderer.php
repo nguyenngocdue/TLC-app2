@@ -35,10 +35,18 @@ class CommentRenderer extends Component
         $type = $this->type;
         $action = $this->action;
 
-        $tableName = (new Comment)->getTable();
-        $db = DB::table($tableName)->where('commentable_id', $this->id)->get();
-        $dataComment = json_decode($db, true);
-        // dump($dataComment, $name);
+        $commentCateDB = DB::table('comment_categories')->select('id', 'name')->get();
+        $commentCateDB =  $commentCateDB->toArray();
+        $nameIdsDB = array_column($commentCateDB, 'id', 'name');
+        $idCate = $nameIdsDB[$name];
+
+        $db = DB::table('comments')->where([['commentable_id', '=', $id], ['category', '=', $idCate]])->get();
+
+        $dateTimeInstance = date_create();
+        $time = date_format($dateTimeInstance, "d/m/Y H:i:s");
+        $tempDB = ['content' => '', 'created_at' => $time, 'updated_at' => ''];
+
+        $dataComment = json_decode($db, true)[0] ?? $tempDB;
         return view('components.controls.comment-renderer')->with(compact('name', 'type', 'dataComment', 'id', 'action'));
     }
 }

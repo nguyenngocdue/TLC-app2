@@ -36,23 +36,19 @@ class Comment extends Component
         $readonly = $this->readonly;
         $dataComment = $this->dataComment;
         $action = $this->action;
-        // dd($dataComment);
 
 
         $commentCatesDB = DB::table('comment_categories')->select("id", 'name')->get();
-        $json = json_decode($commentCatesDB, true);
-        $nameIdsDB = array_column($json, 'name', 'id');
+        $nameIdsDB = array_column(json_decode($commentCatesDB, true), 'name', 'id');
+        // dd($dataComment);
 
-        $array = [];
-        foreach ($dataComment as $value) {
-            $array[$nameIdsDB[$value['category']]] = [
-                'content' => $value['content'],
-                'created_at' => $value['created_at'],
-                'updated_at' => $value['updated_at']
-            ];
-        }
-        $dataComment = $array;
-        // dd($dataComment, $name);
+        $dataComment = [
+            'content' => $dataComment['content'],
+            'created_at' => $dataComment['created_at'],
+            'updated_at' => $dataComment['updated_at']
+
+        ];
+        dump($dataComment);
         return view('components.renderer.comment')->with(compact('name', 'type', 'readonly', 'ownerDB', 'dataComment', 'action'));
     }
 }

@@ -80,20 +80,17 @@ abstract class CreateEditController extends Controller
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at', 'id'], $colNamesHaveAttachment);
 		$dataInput =  array_merge(['id' => null], $request->except($arrayExcept));
 
-
-
-
 		$deletedMediaIds = $this->deleteMediaIfNeeded($dataInput);
 		$hasAttachment = $this->saveMedia('store', $request, $dataInput, null, $deletedMediaIds);
 
 		$dataInput = $this->apply_formula($dataInput, $this->type);
+
+		// dd($dataInput);
 		$request->merge($dataInput);
 		$this->_validate($props, $request);
 
+		$idsComment = $this->saveAndGetIdsComments($dataInput);
 
-		if (isset($dataInput['category'])) {
-			$idsComment = $this->saveAndGetIdsComments($dataInput);
-		}
 
 		$newDataInput = $this->handleToggle('store', $props, $dataInput);
 		$newDataInput = $this->handleTextArea($props, $newDataInput);
@@ -107,9 +104,7 @@ abstract class CreateEditController extends Controller
 			$data = $this->data::create($newDataInputNotAttachment);
 			$_data = $this->data::find($data->id);
 
-			if (isset($dataInput['category'])) {
-				$this->setCommentsParent($idsComment, $data);
-			}
+			$this->setCommentsParent($idsComment, $data);
 
 
 			event(new EntityCreatedEvent(['id' => $data->id, 'type' => $this->type]));
@@ -155,10 +150,10 @@ abstract class CreateEditController extends Controller
 		$newDataInput = $this->handleToggle('update', $props, $dataInput);
 		$newDataInput = $this->handleTextArea($props, $newDataInput);
 
-		if (isset($dataInput['category'])) {
-			$updated_at = $request->input()['created_at'];
-			$this->updateComments($newDataInput, $data, $updated_at);
-		};
+
+		$updated_at = $request->input()['created_at'];
+		$this->updateComment($newDataInput, $data, $updated_at);
+
 
 		// dump($updated_at);
 

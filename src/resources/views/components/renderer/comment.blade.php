@@ -1,11 +1,8 @@
 @php
-$content = $dataComment[$name]['content'] ??'';
-// dd($content,$dataComment, $name);
-$date = $action === 'create' ? $dataComment[$name]['created_at'] ?? '' : $dataComment[$name]['updated_at'] ?? '';
+$content = $dataComment['content'] ??'';
+$date = $action === 'create' ? $dataComment['created_at'] ?? '' : $dataComment['updated_at'] ?? '';
 $timestamp = strtotime($date);
-
-$dateTimeInstance = date_create();
-$time = $action === 'create' ? date_format($dateTimeInstance, "d/m/Y H:i:s") : date("d/m/Y H:i:s", $timestamp);
+$time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
 @endphp
 <x-renderer.card>
     <div class="grid grid-cols-12 gap-2 flex-nowrap ">
@@ -13,7 +10,6 @@ $time = $action === 'create' ? date_format($dateTimeInstance, "d/m/Y H:i:s") : d
             <div class="border rounded-lg w-full border-gray-300 p-0.5 ">
                 <x-renderer.avatar-name title="{{$ownerDB->name}}" description="{{$ownerDB->position_rendered}}" href="http://www.google.com">?</x-renderer.avatar-name>
                 <input name="owner_id" value="{{$ownerDB->id}}" class='hidden bg-white border border-gray-300 text-gray-900  rounded-lg  p-2.5   dark:placeholder-gray-400   w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input' type='text'>
-                <input name="category[]" value="{{$name}}" class='hidden bg-white border border-gray-300 text-gray-900  rounded-lg  p-2.5   dark:placeholder-gray-400   w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input' type='text'>
             </div>
         </div>
 
@@ -34,6 +30,6 @@ $time = $action === 'create' ? date_format($dateTimeInstance, "d/m/Y H:i:s") : d
     </div>
     <div class="pt-2">
         <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comment</label>
-        <textarea name="content[]" rows="10" class="bg-white border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Type here...">{{old('content', $content) }}</textarea>
+        <textarea name="hasComment_{{$name}}" rows="10" class="bg-white border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Type here...">{{old('hasComment_'.$name, $content) }}</textarea>
     </div>
 </x-renderer.card>
