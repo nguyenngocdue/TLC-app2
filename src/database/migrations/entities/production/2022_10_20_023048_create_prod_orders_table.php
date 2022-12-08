@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
+            $table->string('status')->nullable();
             $table->string('production');
             $table->string('compliance');
             $table->text('description')->nullable();

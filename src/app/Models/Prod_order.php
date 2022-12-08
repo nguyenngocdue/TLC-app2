@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Traits\HasStatus;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,10 +12,10 @@ use Illuminate\Notifications\Notifiable;
 
 class Prod_order extends Model
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
+    use Notifiable, HasFactory, Searchable, CheckPermissionEntities, HasStatus;
     public $timestamps = true;
     protected $fillable = [
-        "id", "slug", "name", "production", "compliance", "description", "quantity",
+        "id", "slug", "name", "status", "production", "compliance", "description", "quantity",
         "sub_project_id", "prod_routing_id"
     ];
     protected $primaryKey = 'id';

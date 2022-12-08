@@ -70,9 +70,8 @@ class SidebarAdminItems
     public static function getAll($svg)
     {
         $currentType = CurrentRoute::getTypeSingular();
-        return [
-            self::getPermission($currentType, $svg),
-            self::getWorkflow($currentType, $svg),
-        ];
+        $result[] = self::getPermission($currentType, $svg);
+        $result[] = self::getWorkflow($currentType, $svg);
+        return $result;
     }
 }

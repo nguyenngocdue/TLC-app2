@@ -46,9 +46,6 @@ return new class extends Migration
         Schema::table('prod_routing_links', function (Blueprint $table) {
             $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
         });
-        Schema::table('sub_projects', function (Blueprint $table) {
-            $table->foreign('sub_project_status_id')->references('id')->on('sub_project_statuses');
-        });
         Schema::table('prod_routing_details', function (Blueprint $table) {
             $table->foreign('erp_routing_link_id')->references('id')->on('erp_routing_links')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('wir_description_id')->references('id')->on('wir_descriptions')->onDelete('cascade')->onUpdate('cascade');

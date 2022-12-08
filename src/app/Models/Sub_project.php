@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Traits\HasStatus;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,28 +12,18 @@ use Illuminate\Notifications\Notifiable;
 
 class Sub_project extends Model
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
+    use Notifiable, HasFactory, Searchable, CheckPermissionEntities, HasStatus;
     public $timestamps = false;
-    protected $fillable = ["id", "name", "description", "sub_project_status_id", "slug"];
+    protected $fillable = ["id", "name", "description", "slug", "status"];
     protected $primaryKey = 'id';
     protected $table = 'sub_projects';
-    // protected $with = [
-    // "productionOrders",
-    // "subProjectStatus",
-    // ];
 
     public $eloquentParams = [
         "prodOrders" => ['hasMany', Prod_order::class],
-        "subProjectStatus" => ['belongsTo', Sub_project_status::class, 'sub_project_status_id'],
     ];
     public function prodOrders()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1]);
-    }
-    public function subProjectStatus()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

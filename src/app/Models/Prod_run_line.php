@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 class Prod_run_line extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = ["prod_run_id", "date", "start", "end", "status"];
+    protected $fillable = ["prod_run_id", "date", "start", "end"];
     protected $primaryKey = 'id';
     protected $table = 'prod_run_lines';
     public $timestamps = true;

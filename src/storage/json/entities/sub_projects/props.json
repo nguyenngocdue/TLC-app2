@@ -28,7 +28,7 @@
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "column_type": "string",
+        "column_type": "text",
         "label": "Description",
         "control": "textarea",
         "col_span": "12",
@@ -36,19 +36,6 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formula": ""
-    },
-    "_sub_project_status_id": {
-        "name": "_sub_project_status_id",
-        "column_name": "sub_project_status_id",
-        "column_type": "bigint",
-        "label": "Sub Project Status Id",
-        "control": "dropdown",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
         "formula": ""
     },
     "_slug": {
@@ -63,6 +50,19 @@
         "new_line": "",
         "validation": "",
         "formula": "All_SlugifyByName"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "column_type": "string",
+        "label": "Status",
+        "control": "status",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -90,16 +90,16 @@
         "validation": "",
         "formula": ""
     },
-    "_productionOrders": {
-        "name": "_productionOrders",
-        "column_name": "productionOrders",
+    "_prodOrders": {
+        "name": "_prodOrders",
+        "column_name": "prodOrders",
         "column_type": "ELQ(hasMany)",
-        "label": "",
-        "control": "",
+        "label": "Prod Orders",
+        "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     }
