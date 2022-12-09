@@ -120,11 +120,21 @@ class ComponentLib extends Controller
             'position_rendered' => $item['amount'],
         ], $tableDataSource);
 
+
+        $dataComment = [
+            'owner_id' => 4,
+            'content' => 'How are you',
+            'created_at' => '08/12/2022 09:20:02',
+            'updated_at' => '08/12/2022 09:20:02'
+        ];
+
+
         return view('componentLib', [
             'tableColumns' => $tableColumns,
             'tableEditableColumns' => $tableEditableColumns,
             'tableDataSource' => $tableDataSource,
             'gridDataSource' => $gridDataSource,
+            'dataComment' => $dataComment,
         ]);
     }
 }
