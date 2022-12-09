@@ -17,9 +17,9 @@
                 @if ($prop['column_name']=== $colName)
                 {{-- @dump($colNameErrors) --}}
                 @php
-                $textSearch = str_contains($colName, '_') ? str_replace('_', ' ', $colName) : $colName;
+                $strSearch = str_contains($colName, '_') ? str_replace('_', ' ', $colName) : $colName;
                 @endphp
-                <a href="#{{$colName}}" title="{{$colName}}">{{str_replace($textSearch, "[".$prop['label']."]", $value[0])}}</a>
+                <a href="#{{$colName}}" title="{{$colName}}">{{str_replace($strSearch, "[".$prop['label']."]", $value[0])}}</a>
                 @endif
                 @endforeach
             </li>
