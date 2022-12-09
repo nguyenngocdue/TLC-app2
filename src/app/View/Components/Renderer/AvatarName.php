@@ -11,7 +11,7 @@ class AvatarName extends Component
         private $title = "No Name",
         private $description = "",
         private $avatar = "",
-        private $rendererParam = '',
+        // private $rendererParam = '',
         private $dataLine = [],
         private $href = "",
     ) {

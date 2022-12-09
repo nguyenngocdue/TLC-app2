@@ -11,8 +11,10 @@ class Column extends Component
      *
      * @return void
      */
-    public function __construct(private $rendererParam = '', private $name = '')
-    {
+    public function __construct(
+        private $rendererParam = '',
+        private $name = '',
+    ) {
         // dd($this->renderer_param);
         // dump($this->rendererParam);
     }
