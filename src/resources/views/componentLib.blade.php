@@ -4,19 +4,20 @@
 <br />
 <br />
 <x-renderer.card title="Feedback">
-    <div class="grid gap-6 mb-8 md:grid-cols-2">
-        <x-renderer.card title="">
+    <div class="grid gap-6 mb-8 md:grid-cols-2 ">
+        <x-renderer.card title="Comment">
             @dump($_GET)
             <form action="" method="GET">
-                <x-renderer.comment name="comment_1" type="department" id="1" readonly={{true}} :dataComment="$dataComment"></x-renderer.comment>
-                <x-renderer.comment name="comment_1" type="department" id="1" readonly={{false}} :dataComment="$dataComment"></x-renderer.comment>
+                <x-renderer.comment name="comment_1" type="department" id="1" readonly={{true}} :dataComment="$dataComment" btnAttach={{false}}></x-renderer.comment>
+                <x-renderer.comment name="comment_1" type="department" id="1" readonly={{false}} :dataComment="$dataComment" btnAttach={{true}}></x-renderer.comment>
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
             </form>
         </x-renderer.card>
+
         <x-renderer.card title="Grids">
             Grid colSpan=4 itemRenderer=x-renderer.avatar-name
             <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name"></x-renderer.grid>
-            <br/>
+            <br />
             Grid colSpan=4 itemRenderer=x-renderer.avatar-name groupBy=name
             <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name" groupBy="name"></x-renderer.grid>
         </x-renderer.card>
@@ -26,11 +27,11 @@
             <x-renderer.avatar-name title="Fortune Truong" description="Software Engineer" href="http://www.google.com"></x-renderer.avatar-name>
             AvatarName with Slot
             <x-renderer.avatar-name>{
-                "name":"Thuc Vo", 
+                "name":"Thuc Vo",
                 "position_rendered":"Software Tester",
                 "href":"http://www.google.com",
                 "avatar":"https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-            }</x-renderer.avatar-name>
+                }</x-renderer.avatar-name>
             Empty attribute
             <x-renderer.avatar-name></x-renderer.avatar-name>
 
@@ -46,15 +47,15 @@
             Dropdown with sortBy='value'
             <x-renderer.editable.dropdown name="dropdown2" :cbbDataSource='["3", "2", "1"]' sortBy='value'>true</x-renderer.editable.dropdown>
             Status
-            <br/>
-            <x-renderer.status>unknown_status</x-renderer.status><br/>
-            <x-renderer.status>new</x-renderer.status><br/>
-            <x-renderer.status>assigned</x-renderer.status><br/>
-            <x-renderer.status>closed</x-renderer.status><br/>
-            <br/>
+            <br />
+            <x-renderer.status>unknown_status</x-renderer.status><br />
+            <x-renderer.status>new</x-renderer.status><br />
+            <x-renderer.status>assigned</x-renderer.status><br />
+            <x-renderer.status>closed</x-renderer.status><br />
+            <br />
             Toggle
             <x-renderer.switch color="bg-blue-900" content="My text here" />
-            
+
         </x-renderer.card>
 
         <x-renderer.card title="Tables">

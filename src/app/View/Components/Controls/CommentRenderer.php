@@ -23,6 +23,7 @@ class CommentRenderer extends Component
         private $colName = '',
         private $action,
         private $readonly = true,
+        private $label = ''
     ) {
     }
 
@@ -37,6 +38,8 @@ class CommentRenderer extends Component
         $name = $this->colName;
         $type = $this->type;
         $action = $this->action;
+        $label = $this->label;
+
 
         $idNameCatesDB = Helper::getDataDbByName('comment_categories', 'id', 'name');
 
@@ -48,6 +51,7 @@ class CommentRenderer extends Component
                 "owner_id" => Auth::user()->id,
                 "created_at" => date_format(date_create(), "d/m/Y H:i:s"),
                 'readonly' => false,
+                'btnAttach' => true,
             ]
         ];
 
@@ -70,6 +74,13 @@ class CommentRenderer extends Component
             $dataComment = array_merge($array, $dataComment);
         }
         // dump($dataComment);
-        return view('components.controls.comment-renderer')->with(compact('name', 'type', 'dataComment', 'id', 'action'));
+        return view('components.controls.comment-renderer', [
+            "id" => $id,
+            "name" => $name,
+            "type" => $type,
+            'label' => $label,
+            "action" => $action,
+            "dataComment" => $dataComment,
+        ]);
     }
 }

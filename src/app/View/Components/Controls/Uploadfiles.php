@@ -8,7 +8,7 @@ use Illuminate\View\Component;
 
 class Uploadfiles extends Component
 {
-    public function __construct(private $id, private $colName, private $action, private $tablePath, private $labelName)
+    public function __construct(private $id, private $colName, private $action, private $labelName)
     {
     }
 

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Render;
 
-use App\Helpers\Helper;
+
 use App\Models\Attachment;
-use App\Models\Comment;
-use App\Utils\Constant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -16,6 +14,7 @@ trait CreateEditControllerMedia
     {
         if (count($request->files) > 0) {
             $uploadedIdColumnNames = $this->uploadService->store($request);
+            // dd($uploadedIdColumnNames);
             if (!is_array($uploadedIdColumnNames)) {
                 $title = "Not find item";
                 $message = $uploadedIdColumnNames->getMessage();
@@ -24,7 +23,7 @@ trait CreateEditControllerMedia
             }
             return $uploadedIdColumnNames;
         }
-        return session(Constant::ORPHAN_MEDIA) ?? [];
+        return [];
     }
 
     private function setMediaParent($data, $colNamesHaveAttachment)

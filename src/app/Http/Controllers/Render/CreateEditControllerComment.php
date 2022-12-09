@@ -43,6 +43,7 @@ trait CreateEditControllerComment
     private function addComment($newDataInput, $data)
     {
         $idsComment = $this->saveAndGetIdsComments($newDataInput);
+
         $this->setCommentsParent($idsComment, $data);
     }
 }

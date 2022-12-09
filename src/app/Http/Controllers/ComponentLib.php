@@ -122,6 +122,7 @@ class ComponentLib extends Controller
 
 
         $dataComment = [
+            'id' => "",
             'owner_id' => 632,
             'content' => 'How are you',
             'created_at' => '08/12/2022 09:20:02',
