@@ -6,6 +6,7 @@
     "Laravel",
     "migrationrelationship",
     "onhold",
+    "Renderable",
     "tmpls",
     "Toastr"
   ]

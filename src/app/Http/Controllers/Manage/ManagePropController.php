@@ -9,6 +9,7 @@ use App\Utils\Support\Table;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -114,7 +115,7 @@ abstract class ManagePropController extends Controller
         ];
     }
 
-    private function makeBlankResultObject()
+    private function makeBlankDefaultObject()
     {
         $columnNames = Table::getColumnNames(Str::plural($this->type));
         $columnTypes = Table::getColumnTypes(Str::plural($this->type));
@@ -132,7 +133,7 @@ abstract class ManagePropController extends Controller
         return $result;
     }
 
-    private function getMany2ManyProps()
+    private function getRenderableRelationships()
     {
         $columnEloquentParams = App::make($this->typeModel)->eloquentParams;
 
@@ -169,6 +170,7 @@ abstract class ManagePropController extends Controller
     private function renewColumn(&$a, $b, $column)
     {
         foreach (array_keys($a) as $key) {
+            if (!isset($b[$key])) continue;
             $updatedValue = $b[$key][$column];
             if ($a[$key][$column] != $updatedValue) {
                 $a[$key][$column] = $updatedValue;
@@ -179,32 +181,36 @@ abstract class ManagePropController extends Controller
 
     private function getDataSource()
     {
-        $result0 = $this->makeBlankResultObject();
-        $result1 = $this->getMany2ManyProps();
+        $result0 = $this->makeBlankDefaultObject();
+        $result1 = $this->getRenderableRelationships();
         $result = array_merge($result0, $result1);
+
         $json = Props::getAllOf($this->type);
+
         $this->renewColumn($json, $result, 'column_type');
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
 
-        foreach ($json as $key => $columns) {
-            $result[$key]["name"] = $key;
+        foreach ($result as $key => $columns) {
             foreach ($columns as $column => $value) {
-                //Ignore some JSON fields by the truth in Blank Result Object
-                if (in_array($column, ['column_name', 'column_type'])) continue;
-                $result[$key][$column] = $value;
+                //Keep label of JSON file
+                if (in_array($column, ['label', 'col_span'])) continue;
+                $json[$key][$column] = $value;
             }
-            // if (!Str::startsWith($columns['column_type'], "ELQ(")) {
-            // $result[$key]['action'] = Blade::render("<div class='whitespace-nowrap'>
-            //     <x-renderer.button htmlType='submit' name='button' size='xs' value='up,$key'><i class='fa fa-arrow-up'></i></x-renderer.button>
-            //     <x-renderer.button htmlType='submit' name='button' size='xs' value='down,$key'><i class='fa fa-arrow-down'></i></x-renderer.button>
-            // </div>");
-            // }
         }
 
-        foreach (array_keys($toBeGreen) as $key) $result[$key]['row_color'] = "green";
-        foreach (array_keys($toBeRed) as $key) $result[$key]['row_color'] = "red";
+        foreach (array_keys($toBeGreen) as $key) $json[$key]['row_color'] = "green";
+        foreach (array_keys($toBeRed) as $key) $json[$key]['row_color'] = "red";
 
-        return $result;
+        foreach ($json as $key => $columns) {
+            if (isset($columns['row_color']) && $columns['row_color'] === "green") continue;
+            $json[$key]['action'] = Blade::render("<div class='whitespace-nowrap'>
+                    <x-renderer.button htmlType='submit' name='button' size='xs' value='up,$key'><i class='fa fa-arrow-up'></i></x-renderer.button>
+                    <x-renderer.button htmlType='submit' name='button' size='xs' value='down,$key'><i class='fa fa-arrow-down'></i></x-renderer.button>
+                </div>");
+        }
+
+
+        return $json;
     }
 
     public function index()

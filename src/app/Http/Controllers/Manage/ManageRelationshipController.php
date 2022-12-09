@@ -75,7 +75,7 @@ abstract class ManageRelationshipController extends Controller
         ];
     }
 
-    private function makeBlankResultObject()
+    private function makeBlankDefaultObject()
     {
         $columnEloquentParams = App::make($this->typeModel)->eloquentParams;
         $result = [];
@@ -103,6 +103,7 @@ abstract class ManageRelationshipController extends Controller
     private function renewColumn(&$a, $b, $column)
     {
         foreach (array_keys($a) as $key) {
+            if (!isset($b[$key])) continue;
             $updatedValue = $b[$key][$column];
             if ($a[$key][$column] != $updatedValue) {
                 $a[$key][$column] = $updatedValue;
@@ -113,7 +114,7 @@ abstract class ManageRelationshipController extends Controller
 
     private function getDataSource($type)
     {
-        $result = $this->makeBlankResultObject($type);
+        $result = $this->makeBlankDefaultObject($type);
         $json = Relationships::getAllOf($type);
         $this->renewColumn($json, $result, 'relationship');
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
