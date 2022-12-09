@@ -22,7 +22,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_comment_1": {
@@ -30,12 +30,12 @@
         "column_name": "comment_1",
         "column_type": "text",
         "label": "Comment 1",
-        "control": "textarea",
+        "control": "comment",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_comment_2": {
@@ -43,7 +43,7 @@
         "column_name": "comment_2",
         "column_type": "text",
         "label": "Comment 2",
-        "control": "textarea",
+        "control": "comment",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -56,12 +56,12 @@
         "column_name": "comment_3",
         "column_type": "text",
         "label": "Comment 3",
-        "control": "textarea",
+        "control": "comment",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_created_at": {
@@ -71,8 +71,8 @@
         "label": "Created At",
         "control": "picker_date",
         "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -84,8 +84,8 @@
         "label": "Updated At",
         "control": "picker_date",
         "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
         "new_line": "",
         "validation": "",
         "formula": ""

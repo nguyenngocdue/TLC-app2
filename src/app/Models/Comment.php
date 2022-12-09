@@ -11,16 +11,15 @@ use Laravel\Scout\Searchable;
 class Comment extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = [];
+    protected $fillable = ['content', 'owner_id', 'category'];
     protected $table = "comments";
+    protected $primaryKey = 'id';
 
-    public $eloquentParams = [
-        "user" => ["belongsTo", User::class, "owner_id"],
-    ];
 
-    public function user()
+    public $eloquentParams = [];
+
+    public function commentable()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->morphTo();
     }
 }
