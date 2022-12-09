@@ -46,5 +46,10 @@ extend type Mutation {
     updateProdRunLine(input: UpdateProdRunLineInput! @spread): Prod_run_line
         @guard
         @update
+    updateProdRunLineEvent(
+        input: UpdateProdRunLineInput! @spread
+    ): Prod_run_line
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\UpdateProdRunLineEvent")
     deleteProdRunLine(id: ID!): Prod_run_line @guard @delete
 }

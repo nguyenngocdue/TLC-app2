@@ -10,11 +10,10 @@ type Sub_project {
     id: ID!
     name: String!
     description: String
-    sub_project_status_id: Int!
     slug: String!
+    status: String!
     created_at: DateTime
     updated_at: DateTime
-    subProjectStatus: Sub_project_status! @belongsTo
     prodOrders: [Prod_order!]! @hasMany
 }
 
