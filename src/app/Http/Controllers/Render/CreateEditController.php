@@ -143,7 +143,9 @@ abstract class CreateEditController extends Controller
 		$hasAttachment = $this->saveMedia('update', $request, $dataInput, $data, $colNamesHaveAttachment);
 
 		$dataInput = $this->apply_formula($dataInput, $this->type);
-		$request->merge($dataInput);
+
+		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');
+		$request->merge($dataInput + $comments);
 		$this->_validate($props, $request);
 
 		$newDataInput = $this->handleToggle('update', $props, $dataInput);

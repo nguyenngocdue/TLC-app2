@@ -35,7 +35,6 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
         </div>
     </div>
     <div class="pt-2">
-        <textarea name="hasComment_{{$name}}" rows="4" @readonly($data['readonly']) class=" {{$data['readonly'] ? 'bg-gray-200' : 'bg-white'}} border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Type here...">{{old('hasComment_'.$name, $content) }}</textarea>
-        {{-- <textarea name="{{$name}}" class='hidden'>{{old($name, $content) }}</textarea> --}}
+        <textarea name="hasComment_{{$name}}" rows="4" @readonly($data['readonly']) class=" {{$data['readonly'] ? 'bg-gray-200' : 'bg-white'}} border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Type here...">{{old('hasComment_'.$name, $content) ?? $content }}</textarea>
     </div>
 </x-renderer.card>
