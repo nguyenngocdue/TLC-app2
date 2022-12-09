@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Manage\ManageService;
 use App\Utils\Support\Relationships;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -15,10 +14,8 @@ abstract class ManageRelationshipController extends Controller
 {
     protected $type = "";
     protected $typeModel = "";
-    protected $manageService;
-    public function __construct(ManageService $manageService)
+    public function __construct()
     {
-        $this->manageService = $manageService;
     }
 
     public function getType()
@@ -163,16 +160,10 @@ abstract class ManageRelationshipController extends Controller
         }
 
         try {
-            $this->manageService->checkUploadFile($result, $this->type, 'relationships');
+            Relationships::setAllOf($this->type, $result);
             return back();
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');
         }
-    }
-    public function destroy($name)
-    {
-        $res = $this->manageService->destroy($name, $this->type, 'relationships');
-        if ($res) return response()->json(['message' => 'Successfully'], 200);
-        return response()->json(['message' => 'Failed delete'], 404);
     }
 }

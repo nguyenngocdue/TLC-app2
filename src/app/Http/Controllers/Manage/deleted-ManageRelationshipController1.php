@@ -161,7 +161,7 @@ abstract class ManageRelationshipController extends Controller
             $manage = (object)[];
         }
         try {
-            $this->manageService->checkUploadFile($manage, $this->type, 'relationships');
+            $this->manageService->saveJsonFile($manage, $this->type, 'relationships');
             return back();
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');

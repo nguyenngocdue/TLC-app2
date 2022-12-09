@@ -129,7 +129,7 @@ abstract class ManageTablePropController extends Controller
             $manage[$name] = $array;
         }
         try {
-            $this->manageService->checkUploadFile($manage, $this->type, 'tables');
+            $this->manageService->saveJsonFile($manage, $this->type, 'tables');
             return back();
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');
@@ -140,7 +140,7 @@ abstract class ManageTablePropController extends Controller
         [$dataManage] = $this->manageService->pathTable($this->type, 'tables', 'tableName');
         unset($dataManage[$name]);
         try {
-            $this->manageService->checkUploadFile($dataManage, $this->type, 'tables');
+            $this->manageService->saveJsonFile($dataManage, $this->type, 'tables');
             return response()->json(['message' => 'Successfully'], 200);
         } catch (\Throwable $th) {
             Toastr::warning('$th', 'Save file json');

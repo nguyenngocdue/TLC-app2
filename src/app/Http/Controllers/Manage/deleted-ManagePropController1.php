@@ -143,7 +143,7 @@ abstract class ManagePropController extends Controller
             $manage[$name] = $array;
         }
         try {
-            $this->manageService->checkUploadFile($manage, $this->type, 'props');
+            $this->manageService->saveJsonFile($manage, $this->type, 'props');
             return back();
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Manage\ManageService;
 use App\Utils\Support\Props;
 use App\Utils\Support\Table;
 use Brian2694\Toastr\Facades\Toastr;
@@ -17,11 +16,10 @@ abstract class ManagePropController extends Controller
 {
     protected $type = "";
     protected $typeModel = "";
-    protected $manageService;
-    public function __construct(ManageService $manageService)
+    public function __construct()
     {
-        $this->manageService = $manageService;
     }
+
     public function getType()
     {
         return $this->type;
@@ -204,9 +202,9 @@ abstract class ManagePropController extends Controller
         foreach ($json as $key => $columns) {
             if (isset($columns['row_color']) && $columns['row_color'] === "green") continue;
             $json[$key]['action'] = Blade::render("<div class='whitespace-nowrap'>
-                    <x-renderer.button htmlType='submit' name='button' size='xs' value='up,$key'><i class='fa fa-arrow-up'></i></x-renderer.button>
-                    <x-renderer.button htmlType='submit' name='button' size='xs' value='down,$key'><i class='fa fa-arrow-down'></i></x-renderer.button>
-                </div>");
+                <x-renderer.button htmlType='submit' name='button' size='xs' value='up,$key'><i class='fa fa-arrow-up'></i></x-renderer.button>
+                <x-renderer.button htmlType='submit' name='button' size='xs' value='down,$key'><i class='fa fa-arrow-down'></i></x-renderer.button>
+            </div>");
         }
 
 
@@ -225,6 +223,7 @@ abstract class ManagePropController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
+        Log::info($data);
         $result = [];
         $columns = $this->getColumns();
         $columns = array_filter($columns, fn ($column) => !in_array($column['dataIndex'], ['color', 'action']));
@@ -238,16 +237,10 @@ abstract class ManagePropController extends Controller
             $result[$name] = $array;
         }
         try {
-            $this->manageService->checkUploadFile($result, $this->type, 'props');
+            Props::setAllOf($this->type, $result);
             return back();
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');
         }
-    }
-    public function destroy($name)
-    {
-        $res = $this->manageService->destroy($name, $this->type, 'props');
-        if ($res) return response()->json(['message' => 'Successfully'], 200);
-        return response()->json(['message' => 'Failed delete'], 404);
     }
 }
