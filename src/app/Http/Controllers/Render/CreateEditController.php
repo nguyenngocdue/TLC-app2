@@ -97,7 +97,6 @@ abstract class CreateEditController extends Controller
 		$newDataInputHasAttachment = array_filter($newDataInput, fn ($item) => is_array($item));
 		$newDataInputNotAttachment = array_filter($newDataInput, fn ($item) => !is_array($item));
 		// dd($newDataInputNotAttachment);
-		// dd($dataInput);
 
 		try {
 			$data = $this->data::create($newDataInputNotAttachment);

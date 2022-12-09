@@ -20,8 +20,10 @@ trait CreateEditControllerComment
                 $item = Comment::Create(
                     [
                         'content' => $value,
+                        'position_rendered' => $dataInput['position_rendered'],
                         'owner_id' => (int)$dataInput['owner_id'],
-                        'category' => $nameIdsDB[$cateName]
+                        'category' => $nameIdsDB[$cateName],
+
                     ]
                 );
                 $ids[] = $item->id;
