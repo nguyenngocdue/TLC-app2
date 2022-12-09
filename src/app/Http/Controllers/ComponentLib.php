@@ -115,9 +115,10 @@ class ComponentLib extends Controller
         ];
 
         $dataComment = [
+            'owner_id' => 4,
             'content' => 'How are you',
-            'created_at' => '2020-12-12',
-            'updated_at' => '2020-12-12'
+            'created_at' => '08/12/2022 09:20:02',
+            'updated_at' => '08/12/2022 09:20:02'
         ];
 
         return view('componentLib')->with(compact('tableColumns', 'tableEditableColumns', 'tableDataSource', 'dataComment'));

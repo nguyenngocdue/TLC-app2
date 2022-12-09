@@ -115,7 +115,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case('comment')
-                        <x-controls.comment-renderer id={{$id}} type={{$type}} colName={{$column_name}} tablePath={{$tablePath}} action={{$action}} colSpan={{$col_span}} />
+                        <x-controls.comment-renderer id={{$id}} type={{$type}} colName={{$column_name}} action={{$action}} colSpan={{$col_span}} />
                         @break
 
                         @default

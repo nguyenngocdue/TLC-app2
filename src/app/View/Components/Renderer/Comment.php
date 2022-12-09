@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
@@ -18,6 +19,7 @@ class Comment extends Component
         private $type = '',
         private $id = '',
         private $readonly = true,
+        private $required = false,
         private $dataComment = [],
         private $action = 'create',
     ) {
@@ -30,25 +32,13 @@ class Comment extends Component
      */
     public function render()
     {
-        $ownerDB = Auth::user();
         $name = $this->name;
         $type = $this->type;
-        $readonly = $this->readonly;
-        $dataComment = $this->dataComment;
         $action = $this->action;
 
-
-        $commentCatesDB = DB::table('comment_categories')->select("id", 'name')->get();
-        $nameIdsDB = array_column(json_decode($commentCatesDB, true), 'name', 'id');
-        // dd($dataComment);
-
-        $dataComment = [
-            'content' => $dataComment['content'],
-            'created_at' => $dataComment['created_at'],
-            'updated_at' => $dataComment['updated_at']
-
-        ];
-        dump($dataComment);
-        return view('components.renderer.comment')->with(compact('name', 'type', 'readonly', 'ownerDB', 'dataComment', 'action'));
+        $data = $this->dataComment + ['readonly' => $this->readonly];
+        $user = User::find($data['owner_id']);
+        // dump($data);
+        return view('components.renderer.comment')->with(compact('name', 'type', 'data', 'action', 'user'));
     }
 }

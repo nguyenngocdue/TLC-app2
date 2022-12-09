@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class Helper
 {
@@ -231,4 +232,29 @@ class Helper
     //     }
     //     return $arrayValues;
     // }
+
+    public static function getDataDbByName($tableName, $keyCol = '', $valueCol = '')
+    {
+        $dataDB = DB::table($tableName)->get();
+        $result = array_column($dataDB->toArray(), $valueCol, $keyCol);
+        return $result;
+    }
+
+    public static function getDataModelByName($modelName, $id,  $keyCol = '', $valueCol = '')
+    {
+        $modelPath = "App\\Models\\" . Str::singular($modelName);
+        $result = $modelPath::find($id)->pluck($keyCol, $valueCol)->toArray();
+        return $result;
+    }
+    public static function getAndChangeKeyItemsContainString($dataInput, $strSearch)
+    {
+        $newItems = [];
+        foreach ($dataInput as $key => $value) {
+            if (str_contains($key, $strSearch)) {
+                $newKey = str_replace($strSearch, '', $key);
+                $newItems[$newKey] = $value;
+            }
+        }
+        return $newItems;
+    }
 }

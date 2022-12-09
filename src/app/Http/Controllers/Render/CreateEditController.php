@@ -85,8 +85,8 @@ abstract class CreateEditController extends Controller
 
 		$dataInput = $this->apply_formula($dataInput, $this->type);
 
-		// dd($dataInput);
-		$request->merge($dataInput);
+		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');
+		$request->merge($dataInput + $comments);
 		$this->_validate($props, $request);
 
 		$idsComment = $this->saveAndGetIdsComments($dataInput);
@@ -150,12 +150,7 @@ abstract class CreateEditController extends Controller
 		$newDataInput = $this->handleToggle('update', $props, $dataInput);
 		$newDataInput = $this->handleTextArea($props, $newDataInput);
 
-
-		$updated_at = $request->input()['created_at'];
-		$this->updateComment($newDataInput, $data, $updated_at);
-
-
-		// dump($updated_at);
+		$this->addComment($newDataInput, $data);
 
 		try {
 			$data->fill($newDataInput);

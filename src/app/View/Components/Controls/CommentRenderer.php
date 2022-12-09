@@ -2,10 +2,13 @@
 
 namespace App\View\Components\Controls;
 
+use App\Helpers\Helper;
 use App\Models\Comment;
+use App\Models\Zunit_test_7;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class CommentRenderer extends Component
 {
@@ -18,8 +21,8 @@ class CommentRenderer extends Component
         private $id,
         private $type,
         private $colName = '',
-        private $tablePath,
         private $action,
+        private $readonly = true,
     ) {
     }
 
@@ -35,18 +38,36 @@ class CommentRenderer extends Component
         $type = $this->type;
         $action = $this->action;
 
-        $commentCateDB = DB::table('comment_categories')->select('id', 'name')->get();
-        $commentCateDB =  $commentCateDB->toArray();
-        $nameIdsDB = array_column($commentCateDB, 'id', 'name');
-        $idCate = $nameIdsDB[$name];
+        $idNameCatesDB = Helper::getDataDbByName('comment_categories', 'id', 'name');
 
-        $db = DB::table('comments')->where([['commentable_id', '=', $id], ['category', '=', $idCate]])->get();
 
-        $dateTimeInstance = date_create();
-        $time = date_format($dateTimeInstance, "d/m/Y H:i:s");
-        $tempDB = ['content' => '', 'created_at' => $time, 'updated_at' => ''];
+        $dataComment = [
+            [
+                "content" => "",
+                "owner_id" => Auth::user()->id,
+                "created_at" => date_format(date_create(), "d/m/Y H:i:s"),
+                'readonly' => false,
+            ]
+        ];
 
-        $dataComment = json_decode($db, true)[0] ?? $tempDB;
+        if ($action === 'edit') {
+            $array = [];
+            $modelPath = "App\\Models\\" . Str::singular($type);
+            $allCommentsUser = $modelPath::find($id)->comments()->get();
+            $idCateCommentsUser = $allCommentsUser->pluck('category', 'id')->toArray();
+
+            foreach ($idCateCommentsUser as $id => $keyCate) {
+                if ($name === $idNameCatesDB[$keyCate]) {
+                    foreach ($allCommentsUser->toArray() as $value) {
+                        if ($value['id'] * 1 === $id * 1) {
+                            $array[] = $value;
+                        }
+                    }
+                }
+            }
+            // add an empty comment component
+            $dataComment = array_merge($array, $dataComment);
+        }
         return view('components.controls.comment-renderer')->with(compact('name', 'type', 'dataComment', 'id', 'action'));
     }
 }
