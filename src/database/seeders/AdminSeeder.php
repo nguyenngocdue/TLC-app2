@@ -27,6 +27,7 @@ class AdminSeeder extends Seeder
                 "email" => 'admin',
                 "email_verified_at" => now(),
                 "settings" => [],
+                "position_rendered" => "The Master Administrator",
                 "password" => Hash::make('admin')
             ]
         )->assignRoleSet('admin');

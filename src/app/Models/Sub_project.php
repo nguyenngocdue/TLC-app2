@@ -26,4 +26,11 @@ class Sub_project extends Model
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1]);
     }
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+    }
 }

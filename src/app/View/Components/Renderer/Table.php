@@ -28,15 +28,21 @@ class Table extends Component
   private function getAttributeRendered($column, $dataLine)
   {
     $attributes = $column['attributes'] ?? [];
-    array_walk($attributes, fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "$key='$value'");
+    array_walk($column['attributes'], fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "$key='$value'");
     $attributeRendered = trim(join(" ", $attributes));
     return $attributeRendered;
+  }
+
+  private function getRendererParams($column)
+  {
+    $str = (is_array($column['rendererParam'])) ? json_encode($column['rendererParam']) : $column['rendererParam'];
+    return "rendererParam='$str'";
   }
 
   private function applyRender($renderer, $rawData, $column, $dataLine)
   {
     $name = isset($column['dataIndex']) ? "name='{$column['dataIndex']}[]'" : "";
-    $attributeRender = $this->getAttributeRendered($column, $dataLine);
+    $attributeRender = isset($column['attributes']) ? $this->getAttributeRendered($column, $dataLine) : "";
     $typeRender = isset($column['type']) ? "type='{$column['type']}'" : "";
     $sortByRender = isset($column['sortBy']) ? "sortBy='{$column['sortBy']}'" : "";
 
@@ -44,7 +50,7 @@ class Table extends Component
     $cbbDataSourceRender = $cbbDataSource ? ':cbbDataSource=\'$cbbDataSource\'' : "";
     $dataLineRender = $dataLine ? ':dataLine=\'$dataLine\'' : "";
     $columnRender = $column ? ':column=\'$column\'' : "";
-    $rendererParam = isset($column['rendererParam']) ? "rendererParam='{$column['rendererParam']}'" : "";
+    $rendererParam = isset($column['rendererParam']) ? $this->getRendererParams($column) : "";
     $formatterName = isset($column['formatterName']) ? "formatterName='{$column['formatterName']}'" : "";
 
     $attributes = "$name $attributeRender $typeRender $cbbDataSourceRender ";

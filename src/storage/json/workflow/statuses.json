@@ -194,11 +194,6 @@
         "title": "Revised Rejected",
         "color": "red"
     },
-    "start": {
-        "name": "start",
-        "title": "Start",
-        "color": "cyan"
-    },
     "stopped": {
         "name": "stopped",
         "title": "Stopped",
