@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Mutations;
 
+use App\Events\ProdRunUpdatedEvent;
 use App\Models\Prod_run_line;
 use Carbon\Carbon;
 
@@ -26,6 +27,7 @@ final class StoreProdRunLine
             if (is_array($args['user_ids'])) {
                 $prodLine->users()->attach($args['user_ids']);
             }
+            event(new ProdRunUpdatedEvent());
             return [
                 'id' => $prodLine->id,
                 'status' => 'Complete Create Prod Line and add User to Prod Line Successfully'

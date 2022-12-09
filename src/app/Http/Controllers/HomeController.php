@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Workflow\Statuses;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\GetSetCookie;
@@ -35,8 +36,8 @@ class HomeController extends Controller
         // $user = User::where('email', 'admin')->first();
         // GetSetCookie::setCookieForever('time_zone', $user->time_zone);
         // $token = $user->createToken('tlc_token')->plainTextToken;
-
-        dd(CurrentUser::getPermissions());
+        dd(array_values(Statuses::getFor('sub_projects')));
+        dd(array_values(array_map(fn ($value) => $value['title'], Statuses::getFor('sub_project'))));
         // dump(User::where('email', 'admin')->first());
         // dump(CurrentUser::getRoles());
         // dd(CurrentUser::getRoles(User::where('email', 'admin')->first()));
