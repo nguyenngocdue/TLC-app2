@@ -43,6 +43,7 @@ class CommentRenderer extends Component
 
         $dataComment = [
             [
+                "id" => "",
                 "content" => "",
                 "owner_id" => Auth::user()->id,
                 "created_at" => date_format(date_create(), "d/m/Y H:i:s"),
@@ -68,6 +69,7 @@ class CommentRenderer extends Component
             // add an empty comment component
             $dataComment = array_merge($array, $dataComment);
         }
+        // dump($dataComment);
         return view('components.controls.comment-renderer')->with(compact('name', 'type', 'dataComment', 'id', 'action'));
     }
 }
