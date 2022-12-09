@@ -5,10 +5,13 @@
 <br />
 <x-renderer.card title="Feedback">
     <div class="grid gap-6 mb-8 md:grid-cols-2">
-        <x-renderer.card title="Comments">
-            <x-renderer.comment name="component" type="department" id="1" readonly={{true}}>
-
-            </x-renderer.comment>
+        <x-renderer.card title="">
+            @dump($_GET)
+            <form action="" method="GET">
+                <x-renderer.comment name="comment_1" type="department" id="1" readonly={{true}} :dataComment="$dataComment"></x-renderer.comment>
+                <x-renderer.comment name="comment_1" type="department" id="1" readonly={{false}} :dataComment="$dataComment"></x-renderer.comment>
+                <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
+            </form>
         </x-renderer.card>
         <x-renderer.card title="Grids">
             Grid colSpan=4 itemRenderer=x-renderer.avatar-name

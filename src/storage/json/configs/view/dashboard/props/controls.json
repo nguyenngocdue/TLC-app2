@@ -2,6 +2,7 @@
     "controls": [
         "",
         "attachment",
+        "comment",
         "checkbox",
         "dropdown",
         "dropdown_multi",

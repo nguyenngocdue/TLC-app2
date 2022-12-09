@@ -55,6 +55,8 @@ class CreateNewNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        return [$notifiable];
+        return [
+            // 'id' =>  $this->id
+        ];
     }
 }

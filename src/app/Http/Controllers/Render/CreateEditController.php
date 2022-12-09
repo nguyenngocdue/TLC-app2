@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Render;
 
 use App\Events\EntityCreatedEvent;
-use App\Events\SendEmailItemCreated;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
@@ -22,6 +21,7 @@ abstract class CreateEditController extends Controller
 {
 	use CreateEditControllerM2M;
 	use CreateEditControllerMedia;
+	use CreateEditControllerComment;
 	use CreateEditFormula;
 
 	protected $type;
@@ -83,22 +83,31 @@ abstract class CreateEditController extends Controller
 		$hasAttachment = $this->saveMedia('store', $request, $dataInput, null, $deletedMediaIds);
 
 		$dataInput = $this->apply_formula($dataInput, $this->type);
-		$request->merge($dataInput);
+
+		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');
+		$request->merge($dataInput + $comments);
 		$this->_validate($props, $request);
+
+		$idsComment = $this->saveAndGetIdsComments($dataInput);
+
 
 		$newDataInput = $this->handleToggle('store', $props, $dataInput);
 		$newDataInput = $this->handleTextArea($props, $newDataInput);
 
 		$newDataInputHasAttachment = array_filter($newDataInput, fn ($item) => is_array($item));
 		$newDataInputNotAttachment = array_filter($newDataInput, fn ($item) => !is_array($item));
+		// dd($newDataInputNotAttachment);
+		// dd($dataInput);
 
 		try {
 			$data = $this->data::create($newDataInputNotAttachment);
 			$_data = $this->data::find($data->id);
 
+			$this->setCommentsParent($idsComment, $data);
+
 
 			event(new EntityCreatedEvent(['id' => $data->id, 'type' => $this->type]));
-			Notification::send($data, new CreateNewNotification($data->id));
+			// Notification::send($data, new CreateNewNotification($data->id));
 
 			if (isset($data)) {
 				$this->syncManyToManyRelationship($data, $newDataInputHasAttachment); // Check box
@@ -125,6 +134,7 @@ abstract class CreateEditController extends Controller
 		$data = $this->data::find($id);
 		$props = Props::getAllOf($this->type);
 
+		// dd($request->all());
 		$colNamesHaveAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamesHaveAttachment);
 		$dataInput = $request->except($arrayExcept);
@@ -138,6 +148,8 @@ abstract class CreateEditController extends Controller
 
 		$newDataInput = $this->handleToggle('update', $props, $dataInput);
 		$newDataInput = $this->handleTextArea($props, $newDataInput);
+
+		$this->addComment($newDataInput, $data);
 
 		try {
 			$data->fill($newDataInput);

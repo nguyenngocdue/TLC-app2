@@ -22,9 +22,14 @@ class DatabaseSeeder extends Seeder
             AttachmentCategorySeeder::class,
             PostSeeder::class,
 
+
             // UserSeeder::class,
             // MediaSeeder::class,
             // WorkplaceSeeder::class,
+
+            CommentSeeder::class,
+            CommentCategorySeeder::class,
+
         ]);
     }
 }
