@@ -25,5 +25,23 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": ""
+    },
+    "_prodRoutingDetails": {
+        "name": "_prodRoutingDetails",
+        "relationship": "hasMany",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control_name": ""
+    },
+    "_prodRouting": {
+        "name": "_prodRouting",
+        "relationship": "hasOne",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "id",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control_name": ""
     }
 }
