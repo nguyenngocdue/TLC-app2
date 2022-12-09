@@ -40,7 +40,8 @@ class Pivot2 extends Component
         [$param1, $operator, $param111] = $json->conditions[0];
         if (str_contains($param1, ".")) {
             [$param1a, $param1b] = explode(".", $param1);
-            $value1 =  $this->dataLine->$param1a->$param1b;
+
+            $value1 =  ($this->dataLine->$param1a) ? $this->dataLine->$param1a->$param1b : "NULL";
         } else {
             $value1 =  $this->dataLine->$param1;
         }
@@ -48,7 +49,7 @@ class Pivot2 extends Component
         [$param1, $operator, $param222] = $json->conditions[1];
         if (str_contains($param1, ".")) {
             [$param1a, $param1b] = explode(".", $param1);
-            $value2 =  $this->dataLine->$param1a->$param1b;
+            $value2 =  ($this->dataLine->$param1a) ? $this->dataLine->$param1a->$param1b : "NULL";
         } else {
             $value2 =  $this->dataLine->$param1;
         }

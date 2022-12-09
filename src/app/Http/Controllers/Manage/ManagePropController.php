@@ -138,7 +138,13 @@ abstract class ManagePropController extends Controller
 
         $result = [];
         foreach ($columnEloquentParams as $elqName => $elqValue) {
-            if (in_array($elqValue[0], ["belongsToMany", "hasMany"])) {
+            if (in_array($elqValue[0], [
+                "belongsToMany",
+                "hasMany",
+                "hasOne",
+                "belongsToMany",
+                "hasManyThrough",
+            ])) {
                 $result["_$elqName"] = [
                     "name" => "_$elqName",
                     "column_name" => "$elqName",

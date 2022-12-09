@@ -23,8 +23,7 @@ class Prod_run extends Model
         "prodOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],
         "prodRunLines" => ['hasMany', Prod_run_line::class, 'prod_run_id'],
         "prodRoutingLinks" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
-        "prodRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_id", "prod_routing_id"],
-        "prodRouting" => ['hasOne', Prod_order::class, "id",],
+        "prodRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
     ];
     public function prodOrder()
     {
@@ -44,42 +43,43 @@ class Prod_run extends Model
     public function prodRoutingDetails()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function prodRouting()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
     public function getManyLineParams()
     {
         return [
             ["dataIndex" => "id", "renderer" => "id", "type" => "prod_runs", "align" => "center"],
             ["dataIndex" => "prodOrder", "title" => "Prod Order Id", "renderer" => "column", "rendererParam" => "id"],
-            ["dataIndex" => "prodRouting", "title" => "Routing Id", "renderer" => "column", "rendererParam" => "id"],
+            ["dataIndex" => "prodOrder", "title" => "Routing Id", "renderer" => "column", "rendererParam" => "prod_routing_id"],
             ["dataIndex" => "prodRoutingLinks", "renderer" => "column", "rendererParam" => "id"],
+            ["dataIndex" => "total_hours", "align" => "right"],
+            ["dataIndex" => "total_man_hours", "title" => "Total ManHours", "align" => "right"],
             [
-                "dataIndex" => "prodRoutingDetails", "align" => "right", "renderer" => "pivot2",
+                "dataIndex" => "prodRoutingDetails",
+                "title" => "Target Hours",
+                "align" => "right",
+                "renderer" => "pivot2",
                 "rendererParam" => [
                     "column" => 'target_hours',
                     "conditions" => [
-                        ["prodRouting.id", "=", "prod_routing_id"],
+                        ["prodOrder.prod_routing_id", "=", "prod_routing_id"],
                         ["prod_routing_link_id", "=", "prod_routing_link_id"],
                     ],
                 ],
             ],
             [
-                "dataIndex" => "prodRoutingDetails", "align" => "right", "renderer" => "pivot2",
+                "dataIndex" => "prodRoutingDetails",
+                "title" => "Target ManHours",
+                "align" => "right",
+                "renderer" => "pivot2",
                 "rendererParam" => [
                     "column" => "target_man_hours",
                     "conditions" => [
-                        ["prodRouting.id", "=", "prod_routing_id"],
+                        ["prodOrder.prod_routing_id", "=", "prod_routing_id"],
                         ["prod_routing_link_id", "=", "prod_routing_link_id"],
                     ],
                 ],
             ],
-            ["dataIndex" => "total_hours", "align" => "right"],
-            ["dataIndex" => "total_man_hours", "align" => "right"],
             ["dataIndex" => "status", "renderer" => "status", "align" => "center"],
         ];
     }

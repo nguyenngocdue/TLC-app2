@@ -85,7 +85,7 @@
         "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",
-        "hidden_edit": "",
+        "hidden_edit": "true",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -95,6 +95,19 @@
         "column_name": "prodOrders",
         "column_type": "ELQ(hasMany)",
         "label": "Production Orders",
+        "control": "relationship_renderer",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "true",
+        "new_line": "true",
+        "validation": "",
+        "formula": ""
+    },
+    "_prodRuns": {
+        "name": "_prodRuns",
+        "column_name": "prodRuns",
+        "column_type": "ELQ(hasManyThrough)",
+        "label": "Prod Runs",
         "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",

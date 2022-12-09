@@ -115,5 +115,31 @@
         "new_line": "true",
         "validation": "",
         "formula": ""
+    },
+    "_prodRoutingDetails": {
+        "name": "_prodRoutingDetails",
+        "column_name": "prodRoutingDetails",
+        "column_type": "ELQ(hasMany)",
+        "label": "Prod Routing Details",
+        "control": "relationship_renderer",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "true",
+        "validation": "",
+        "formula": ""
+    },
+    "_prodRouting": {
+        "name": "_prodRouting",
+        "column_name": "prodRouting",
+        "column_type": "ELQ(hasOne)",
+        "label": "Prod Routing",
+        "control": "relationship_renderer",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
     }
 }

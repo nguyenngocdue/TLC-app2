@@ -16,5 +16,14 @@
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
         "control_name": "prodOrders"
+    },
+    "_prodRuns": {
+        "name": "_prodRuns",
+        "relationship": "hasManyThrough",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control_name": "prodRuns"
     }
 }

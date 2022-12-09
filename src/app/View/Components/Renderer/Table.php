@@ -28,7 +28,7 @@ class Table extends Component
   private function getAttributeRendered($column, $dataLine)
   {
     $attributes = $column['attributes'] ?? [];
-    array_walk($column['attributes'], fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "$key='$value'");
+    array_walk($attributes, fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "$key='$value'");
     $attributeRendered = trim(join(" ", $attributes));
     return $attributeRendered;
   }
@@ -42,7 +42,8 @@ class Table extends Component
   private function applyRender($renderer, $rawData, $column, $dataLine)
   {
     $name = isset($column['dataIndex']) ? "name='{$column['dataIndex']}[]'" : "";
-    $attributeRender = isset($column['attributes']) ? $this->getAttributeRendered($column, $dataLine) : "";
+    // $attributeRender = isset($column['attributes']) ? $this->getAttributeRendered($column, $dataLine) : "";
+    $attributeRender = $this->getAttributeRendered($column, $dataLine);
     $typeRender = isset($column['type']) ? "type='{$column['type']}'" : "";
     $sortByRender = isset($column['sortBy']) ? "sortBy='{$column['sortBy']}'" : "";
 
