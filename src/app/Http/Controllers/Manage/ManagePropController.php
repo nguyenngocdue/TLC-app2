@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Manage;
 use App\Http\Controllers\Controller;
 use App\Utils\Support\Props;
 use App\Utils\Support\Table;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
@@ -223,24 +222,9 @@ abstract class ManagePropController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
-        Log::info($data);
-        $result = [];
-        $columns = $this->getColumns();
-        $columns = array_filter($columns, fn ($column) => !in_array($column['dataIndex'], ['color', 'action']));
-
-        foreach ($data['name'] as $key => $name) {
-            $array = [];
-            foreach ($columns as $column) {
-                $value = $data[$column['dataIndex']][$key] ?? "";
-                $array[$column['dataIndex']] = $value;
-            }
-            $result[$name] = $array;
-        }
-        try {
-            Props::setAllOf($this->type, $result);
-            return back();
-        } catch (\Throwable $th) {
-            Toastr::warning($th, 'Save file json');
-        }
+        $columns = array_filter($this->getColumns(), fn ($column) => !in_array($column['dataIndex'], ['action']));
+        $result = Props::convertHttpObjectToJson($data, $columns);
+        Props::setAllOf($this->type, $result);
+        return back();
     }
 }

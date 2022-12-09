@@ -2,15 +2,15 @@
 
 namespace App\Utils\Support;
 
-class Relationships
+class Relationships extends JsonGetSet
 {
     public static function getAllOf($type)
     {
-        return JsonGetSet::getAllOf($type, "relationships.json");
+        return self::_getAllOf($type, "relationships.json");
     }
 
     public static function setAllOf($type, $data)
     {
-        return JsonGetSet::setAllOf($type, $data, "relationships.json");
+        return self::_setAllOf($type, $data, "relationships.json");
     }
 }

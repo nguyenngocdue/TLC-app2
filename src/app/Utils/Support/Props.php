@@ -2,15 +2,15 @@
 
 namespace App\Utils\Support;
 
-class Props
+class Props extends JsonGetSet
 {
     public static function getAllOf($type)
     {
-        return JsonGetSet::getAllOf($type, "props.json");
+        return self::_getAllOf($type, "props.json");
     }
 
     public static function setAllOf($type, $data)
     {
-        return JsonGetSet::setAllOf($type, $data, "props.json");
+        return self::_setAllOf($type, $data, "props.json");
     }
 }

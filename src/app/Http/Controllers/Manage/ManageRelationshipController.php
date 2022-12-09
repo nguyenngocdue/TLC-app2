@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
 use App\Utils\Support\Relationships;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 abstract class ManageRelationshipController extends Controller
 {
@@ -141,29 +139,13 @@ abstract class ManageRelationshipController extends Controller
         $dataSource = array_values($dataSourceWithKey);
         return view('dashboards.pages.managerelationship')->with(compact('type', 'columns', 'dataSource'));
     }
+
     public function store(Request $request)
     {
         $data = $request->input();
-        $result = [];
-        $columns = $this->getColumns();
-        $columns = array_filter($columns, fn ($column) => !in_array($column['dataIndex'], ['color', 'action']));
-
-        if (isset($data['name'])) { //<< This to trigger to create a json file with an empty array
-            foreach ($data['name'] as $key => $name) {
-                $array = [];
-                foreach ($columns as $column) {
-                    $value = $data[$column['dataIndex']][$key] ?? "";
-                    $array[$column['dataIndex']] = $value;
-                }
-                $result[$name] = $array;
-            }
-        }
-
-        try {
-            Relationships::setAllOf($this->type, $result);
-            return back();
-        } catch (\Throwable $th) {
-            Toastr::warning($th, 'Save file json');
-        }
+        $columns = array_filter($this->getColumns(), fn ($column) => !in_array($column['dataIndex'], ['action']));
+        $result = Relationships::convertHttpObjectToJson($data, $columns);
+        Relationships::setAllOf($this->type, $result);
+        return back();
     }
 }
