@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Utils\Support\Relationships;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class Helper
 {

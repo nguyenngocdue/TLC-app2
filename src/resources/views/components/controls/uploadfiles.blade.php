@@ -1,4 +1,4 @@
-{{-- @dd($colName) --}}
+{{-- @dd($action); --}}
 <div class="flex flex-col">
     @if ($action === "edit" || $action === "create")
     <div class="grid grid-cols-5 gap-4 mb-1 p-1 bg-white border rounded-lg ">
@@ -41,7 +41,7 @@
     <input multiple class="  block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " id="multiple_files" type="file" name="{{$colName}}[]">
     @else
     <input id="{{$colName}}_deleted" name="{{$colName}}_deleted" type="hidden" value="" class=' p-2.5  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type='text'>
-    <input multiple class="  block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " id="multiple_files" type="file" name="{{$colName}}[]">
+    <input multiple class="block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " id="multiple_files" type="file" name="{{$colName}}[]">
     @endif
 </div>
 @include('components.feedback.alertValidation')

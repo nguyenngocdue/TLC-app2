@@ -46,6 +46,7 @@ trait CreateEditControllerMedia
         }
     }
 
+
     private function deleteMediaIfNeeded($dataInput)
     {
         $cateAttachment = DB::table('attachment_categories')->select('id', 'name')->get();
@@ -65,17 +66,13 @@ trait CreateEditControllerMedia
         return $keyMediaDel;
     }
 
-    private function saveMedia($action, $request, $dataInput, $data = [], $colNamesHaveAttachment)
+    private function saveAndGetIdsMedia($request, $dataInput)
     {
         foreach (array_keys($dataInput) as $key) {
             if (str_contains($key, '_deleted')) {
-                $this->handleUpload($request);
-                if ($action === 'update') {
-                    $this->setMediaParent($data, $colNamesHaveAttachment);
-                }
-                return true;
+                return $this->handleUpload($request);
             }
         }
-        return false;
+        return [];
     }
 }
