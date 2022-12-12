@@ -84,6 +84,8 @@ abstract class CreateEditController extends Controller
 
 		$dataInput = $this->apply_formula($dataInput, $this->type);
 
+		// dd($dataInput);
+
 		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');
 		$request->merge($dataInput + $comments);
 		$this->_validate($props, $request);
@@ -145,6 +147,11 @@ abstract class CreateEditController extends Controller
 		$this->setMediaParent($data, $colNamesHaveAttachment);
 
 		$dataInput = $this->apply_formula($dataInput, $this->type);
+
+		$this->delComments($dataInput);
+
+		// dd($dataInput);
+
 
 		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');
 		$request->merge($dataInput + $comments);

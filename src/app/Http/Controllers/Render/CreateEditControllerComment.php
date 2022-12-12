@@ -58,4 +58,20 @@ trait CreateEditControllerComment
             }
         }
     }
+    public function delComments($dataInput)
+    {
+        foreach ($dataInput as $key => $value) {
+            if (str_contains($key, 'comment__deleted_')) {
+                $itemComment = Comment::find($value * 1);
+                if (!is_null($itemComment)) {
+                    // dd($itemComment);
+                    $idsAtt = $itemComment->media()->pluck('id');
+                    foreach ($idsAtt as $id) {
+                        $delItem = $itemComment->delete();
+                        Attachment::find($id)->delete();
+                    }
+                }
+            }
+        }
+    }
 }
