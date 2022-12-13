@@ -21,7 +21,7 @@ type Prod_order {
     subProject: Sub_project! @belongsTo
     prodRouting: Prod_routing! @belongsTo
     prodRuns: [Prod_run!]! @hasMany
-    qaqcInspChklsts: [Qaqc_insp_checklist!]! @hasMany
+    qaqcInspChklsts: [Qaqc_insp_chklst!]! @hasMany
 }
 
 input CreateProdOrderInput {
