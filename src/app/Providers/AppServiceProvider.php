@@ -40,10 +40,6 @@ class AppServiceProvider extends ServiceProvider
                 return $app->basePath('stubs');
             });
 
-        //TODO: Remove this pretty macro, replaced by headline
-        Str::macro('pretty', function (string $value) {
-            return Str::title(Str::replace("_", " ", $value));
-        });
         Str::macro('modelToPretty', function (string $string) {
             return Str::headline(App::make($string)->getTable());
         });

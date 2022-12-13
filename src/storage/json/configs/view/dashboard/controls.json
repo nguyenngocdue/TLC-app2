@@ -36,11 +36,11 @@
         "many_lines"
     ],
     "eloquents": [
+        "belongsTo",
         "belongsToMany",
         "hasMany",
-        "hasOne",
-        "belongsToMany",
         "hasManyThrough",
+        "hasOne",
         "morphTo"
     ]
 }

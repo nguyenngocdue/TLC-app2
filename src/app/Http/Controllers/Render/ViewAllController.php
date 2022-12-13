@@ -119,19 +119,16 @@ abstract class ViewAllController extends Controller
         if (is_array($columns)) {
             foreach ($columns as &$column) {
                 $dataIndex = $column['dataIndex'];
-                if (isset($eloquentParams[$dataIndex])) {
-                    $relationship = $eloquentParams[$dataIndex][0];
-                    // Log::info($dataIndex . " " . $relationship);
-                    if (in_array($relationship, JsonControls::getEloquents())) {
-                        $relationshipJson = $json["_{$dataIndex}"];
-                        // Log::info($relationshipJson);
-                        $column['renderer'] = $relationshipJson['renderer_view_all'] ?? "";
-                        $column['rendererParam'] = $relationshipJson['renderer_view_all_param'] ?? "";
-                    }
+                if (!isset($eloquentParams[$dataIndex])) continue; //<<Id, Name, Slug...
+                $relationship = $eloquentParams[$dataIndex][0];
+                $allows = JsonControls::getEloquents();
+                if (in_array($relationship, $allows)) {
+                    $relationshipJson = $json["_{$dataIndex}"];
+                    $column['renderer'] = $relationshipJson['renderer_view_all'] ?? "";
+                    $column['rendererParam'] = $relationshipJson['renderer_view_all_param'] ?? "";
                 }
             }
         }
-        return true;
     }
 
     private function attachEloquentNameIntoColumn(&$columns)
@@ -167,8 +164,8 @@ abstract class ViewAllController extends Controller
         $dataSource = $this->getDataSource($pageLimit);
 
         $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
-        $result = $this->attachRendererIntoColumn($columns);
-        if ($result !== true) return $result;
+        $this->attachRendererIntoColumn($columns);
+
         // Log::info($columns);
 
         return view('dashboards.pages.viewAll2')->with(compact('pageLimit', 'type', 'columns', 'dataSource'));
