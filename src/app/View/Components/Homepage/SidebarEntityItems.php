@@ -16,7 +16,7 @@ class SidebarEntityItems
         $singular = Str::singular($table);
         $isActive = ($currentType === $singular);
         $result = [
-            "title" => Str::pretty($table),
+            "title" => Str::headline($table),
             "type" => $singular,
             "icon" => $svg['form'],
             "isActive" => $isActive,

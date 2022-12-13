@@ -11,8 +11,14 @@ class Button extends Component
      *
      * @return void
      */
-    public function __construct(private $size = 'sm', private $name = '', private $type = "light", private $outline = false, private $htmlType = 'button', private $value = '')
-    {
+    public function __construct(
+        private $size = 'sm',
+        private $name = '',
+        private $type = "light",
+        private $outline = false,
+        private $htmlType = 'button',
+        private $value = '',
+    ) {
         // dd($this->type);
     }
 

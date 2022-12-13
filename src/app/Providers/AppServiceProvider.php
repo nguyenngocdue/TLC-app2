@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -39,11 +40,12 @@ class AppServiceProvider extends ServiceProvider
                 return $app->basePath('stubs');
             });
 
+        //TODO: Remove this pretty macro, replaced by headline
         Str::macro('pretty', function (string $value) {
             return Str::title(Str::replace("_", " ", $value));
         });
         Str::macro('modelToPretty', function (string $string) {
-            return Str::pretty(App::make($string)->getTable());
+            return Str::headline(App::make($string)->getTable());
         });
         Str::macro('same', function (string $string) {
             return $string;
@@ -87,6 +89,11 @@ class AppServiceProvider extends ServiceProvider
                 case "right":
                     if (!is_null($name)) {
                         $json = array_filter($json, fn ($name0) => $name !== $name0);
+                    }
+                    break;
+                case "right_by_name":
+                    if (!is_null($name)) {
+                        $json = array_filter($json, fn ($item) => $name !== $item['name']);
                     }
                     break;
             }

@@ -9,7 +9,7 @@ class CurrentRoute
 {
     public static function getTypePluralPretty()
     {
-        return Str::pretty(self::getTypePlural());
+        return Str::headline(self::getTypePlural());
     }
 
     public static function getTypeSingular()

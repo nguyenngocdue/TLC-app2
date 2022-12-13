@@ -11,7 +11,7 @@
                 <div class="flex flex-col">
                     <label>
                         <input type="checkbox" class="checkbox-toggle" name="{{ $key }}" @checked(array_key_exists($key, $selected))>
-                        {{ Str::pretty(trim($key, "_")) }}
+                        {{ Str::headline(trim($key, "_")) }}
                         </input>
                     </label>
                 </div>
