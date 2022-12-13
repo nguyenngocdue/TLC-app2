@@ -224,6 +224,10 @@ abstract class ManagePropController extends Controller
         $data = $request->input();
         $columns = array_filter($this->getColumns(), fn ($column) => !in_array($column['dataIndex'], ['action']));
         $result = Props::convertHttpObjectToJson($data, $columns);
+        if ($request->input('button')) {
+            [$direction, $name] = explode(",", $request->input('button'));
+            Props::move($result, $direction, $name);
+        }
         Props::setAllOf($this->type, $result);
         return back();
     }
