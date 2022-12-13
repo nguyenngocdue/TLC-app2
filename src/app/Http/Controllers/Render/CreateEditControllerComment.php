@@ -13,7 +13,7 @@ trait CreateEditControllerComment
 
     private function saveAndGetIdsComments($dataInput)
     {
-        dump($dataInput);
+        // dump($dataInput);
         $commentCatesDB = DB::table('attachment_categories')->select("id", 'name')->get();
         $json = json_decode($commentCatesDB, true);
         $nameIdsDB = array_column($json, 'id', 'name');
