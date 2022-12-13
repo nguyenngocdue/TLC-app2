@@ -23,6 +23,7 @@ class CommentRenderer extends Component
         private $colName = '',
         private $action,
         private $readonly = true,
+        private $labelName = ''
     ) {
     }
 
@@ -37,9 +38,9 @@ class CommentRenderer extends Component
         $name = $this->colName;
         $type = $this->type;
         $action = $this->action;
+        $labelName = $this->labelName;
 
-        $idNameCatesDB = Helper::getDataDbByName('comment_categories', 'id', 'name');
-
+        $idNameCatesDB = Helper::getDataDbByName('attachment_categories', 'id', 'name');
 
         $dataComment = [
             [
@@ -48,6 +49,7 @@ class CommentRenderer extends Component
                 "owner_id" => Auth::user()->id,
                 "created_at" => date_format(date_create(), "d/m/Y H:i:s"),
                 'readonly' => false,
+                'btnUpload' => true,
             ]
         ];
 
@@ -57,10 +59,11 @@ class CommentRenderer extends Component
             $allCommentsUser = $modelPath::find($id)->comments()->get();
             $idCateCommentsUser = $allCommentsUser->pluck('category', 'id')->toArray();
 
-            foreach ($idCateCommentsUser as $id => $keyCate) {
+            foreach ($idCateCommentsUser as $idComment => $keyCate) {
+                // dump($id, $dataComment);
                 if ($name === $idNameCatesDB[$keyCate]) {
                     foreach ($allCommentsUser->toArray() as $value) {
-                        if ($value['id'] * 1 === $id * 1) {
+                        if ($value['id'] * 1 === $idComment * 1) {
                             $array[] = $value;
                         }
                     }
@@ -70,6 +73,13 @@ class CommentRenderer extends Component
             $dataComment = array_merge($array, $dataComment);
         }
         // dump($dataComment);
-        return view('components.controls.comment-renderer')->with(compact('name', 'type', 'dataComment', 'id', 'action'));
+        return view('components.controls.comment-renderer', [
+            "id" => $id,
+            "name" => $name,
+            "type" => $type,
+            'labelName' => $labelName,
+            "action" => $action,
+            "dataComment" => $dataComment,
+        ]);
     }
 }
