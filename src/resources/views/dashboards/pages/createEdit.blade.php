@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section("title", Str::pretty($action))
+@section("title", Str::headline($action))
 
 @section('content')
 

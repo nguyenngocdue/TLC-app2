@@ -5,6 +5,13 @@
 <br />
 <x-renderer.card title="Feedback">
     <div class="grid gap-6 mb-8 md:grid-cols-2 ">
+
+        <x-renderer.card title="Attachment">
+            <x-renderer.smart-attachment readonly={{false}} destroyable={{true}} attCategory="1" showToBeDeleted={{true}} :attachmentData="$attachmentData" />
+            {{-- <x-renderer.smart-attachment readonly={{true}} destroyable={{false}} attCategory="1" showToBeDeleted={{false}} :attachmentData="$attachmentData" /> --}}
+        </x-renderer.card>
+
+
         <x-renderer.card title="Comment">
             @dump($_GET)
             <form action="" method="GET">
