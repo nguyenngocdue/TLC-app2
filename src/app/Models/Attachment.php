@@ -14,12 +14,11 @@ class Attachment extends Model
     protected $fillable = ["url_folder", "url_thumbnail", "extension", "url_media", "filename", "category", "owner_id"];
     protected $primaryKey = 'id';
     protected $table = 'attachments';
-    // protected $with = [
-    //     'user',
-    // ];
+
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],
         "getCategory" => ['belongsTo', Attachment_category::class, 'category'],
+        "mediable" => ['morphTo'],
     ];
 
     public function user()
@@ -34,16 +33,17 @@ class Attachment extends Model
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function mediable()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}();
+    }
+
     public function toSearchableArray()
     {
         return [
             'id' => $this->id,
             'filename' => $this->title,
         ];
-    }
-
-    public function mediable()
-    {
-        return $this->morphTo();
     }
 }

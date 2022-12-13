@@ -17,20 +17,13 @@ class Zunit_test_5 extends Model
     public $menuTitle = "UT05 (Attachments)";
 
     public $eloquentParams = [
-        "media" => ['hasMany', Attachment::class, 'owner_id', 'id'],
+        "media" => ['morphMany', Attachment::class, 'mediable', 'object_type', 'object_id'],
     ];
 
-    // public function media()
-    // {
-    //     $p = $this->eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1], $p[2]);
-    // }
-
-    /**
-     * Get all of the media for the user.
-     */
     public function media()
     {
-        return $this->morphMany(Attachment::class, 'mediable', 'object_type', 'object_id');
+        // return $this->morphMany(Attachment::class, 'mediable', 'object_type', 'object_id');
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4], $p[5]);
     }
 }

@@ -15,12 +15,28 @@ class Comment extends Model
     protected $table = "comments";
     protected $primaryKey = 'id';
 
+    public $eloquentParams = [
+        "commentable" => ['morphTo'],
+        "user" => ['belongsTo', User::class, 'owner_id'],
+        "getCategory" => ['belongsTo', Comment_category::class, 'category'],
+    ];
 
-    public $eloquentParams = [];
+    public function user()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getCategory()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function commentable()
     {
-        return $this->morphTo();
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}();
     }
     // filter all media from a comment
     public function media()

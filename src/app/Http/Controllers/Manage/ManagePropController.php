@@ -187,10 +187,10 @@ abstract class ManagePropController extends Controller
         foreach ($result as $key => $columns) {
             foreach ($columns as $column => $value) {
                 //Make sure this only happen with current rows, not new rows
-                if (isset($json[$key]['row_color']) && $json[$key]['row_color'] !== "green") {
-                    //Keep label of JSON file
-                    if (in_array($column, ['label', 'col_span'])) continue;
-                }
+                // if (isset($json[$key]['row_color']) && $json[$key]['row_color'] !== "green") {
+                //Keep label of JSON file
+                if (in_array($column, ['label', 'col_span'])) continue;
+                // }
                 $json[$key][$column] = $value;
             }
         }
