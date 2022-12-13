@@ -137,7 +137,7 @@ abstract class ManagePropController extends Controller
 
         $result = [];
         foreach ($columnEloquentParams as $elqName => $elqValue) {
-            if (in_array($elqValue[0], JsonControls::getEloquents())) {
+            if (in_array($elqValue[0], JsonControls::getManagePropEloquents())) {
                 $result["_$elqName"] = [
                     "name" => "_$elqName",
                     "column_name" => "$elqName",

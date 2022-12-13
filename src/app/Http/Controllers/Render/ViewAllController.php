@@ -121,7 +121,7 @@ abstract class ViewAllController extends Controller
                 $dataIndex = $column['dataIndex'];
                 if (!isset($eloquentParams[$dataIndex])) continue; //<<Id, Name, Slug...
                 $relationship = $eloquentParams[$dataIndex][0];
-                $allows = JsonControls::getEloquents();
+                $allows = JsonControls::getViewAllEloquents();
                 if (in_array($relationship, $allows)) {
                     $relationshipJson = $json["_{$dataIndex}"];
                     $column['renderer'] = $relationshipJson['renderer_view_all'] ?? "";

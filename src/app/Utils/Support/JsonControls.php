@@ -12,9 +12,14 @@ class JsonControls
         return $json;
     }
 
-    public static function getEloquents()
+    public static function getViewAllEloquents()
     {
-        return self::getAll()['eloquents'];
+        return self::getAll()['view_all_eloquents'];
+    }
+
+    public static function getManagePropEloquents()
+    {
+        return self::getAll()['manage_prop_eloquents'];
     }
 
     public static function getControls()

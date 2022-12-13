@@ -35,12 +35,19 @@
         "many_icons",
         "many_lines"
     ],
-    "eloquents": [
-        "belongsTo",
+    "manage_prop_eloquents": [
         "belongsToMany",
         "hasMany",
-        "hasManyThrough",
         "hasOne",
+        "hasManyThrough",
         "morphTo"
+    ],
+    "view_all_eloquents": [
+        "belongsToMany",
+        "hasMany",
+        "hasOne",
+        "hasManyThrough",
+        "morphTo",
+        "belongsTo"
     ]
 }
