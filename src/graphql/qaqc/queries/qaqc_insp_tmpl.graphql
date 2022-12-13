@@ -3,7 +3,7 @@ scalar DateTime
 
 extend type Query {
     qaqc_insp_tmpls: [Qaqc_insp_tmpl!]! @all @guard
-    qaqc_insp_tmp(id: ID @eq): Qaqc_insp_tmpl @find @guard
+    qaqc_insp_tmpl(id: ID @eq): Qaqc_insp_tmpl @find @guard
 }
 type Qaqc_insp_tmpl {
     id: ID!

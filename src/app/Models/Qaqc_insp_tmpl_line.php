@@ -13,7 +13,7 @@ class Qaqc_insp_tmpl_line extends Model
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = [
         "id", "name", "description", "control_type",
-        "qaqc_insp_tmpl_id", "qaqc_insp_sheet_id", "qaqc_insp_group_id",
+        "qaqc_insp_tmpl_id", "qaqc_insp_sheet_id", "qaqc_insp_group_id", "qaqc_insp_control_group_id",
     ];
     protected $table = "qaqc_insp_tmpl_lines";
 

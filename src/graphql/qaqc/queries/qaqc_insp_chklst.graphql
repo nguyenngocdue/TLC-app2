@@ -2,8 +2,8 @@ scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 extend type Query {
-    qaqc_insp_chklsts: [Qaqc_insp_checklist!]! @all @guard
-    qaqc_insp_chklst(id: ID @eq): Qaqc_insp_checklist @find @guard
+    qaqc_insp_chklsts: [Qaqc_insp_chklst!]! @all @guard
+    qaqc_insp_chklst(id: ID @eq): Qaqc_insp_chklst @find @guard
 }
 type Qaqc_insp_chklst {
     id: ID!
@@ -12,11 +12,11 @@ type Qaqc_insp_chklst {
     description: String!
     owner_id: ID!
     slug: String!
-    consent_number: int!
-    progress: float!
+    consent_number: Int
+    progress: Float
     user: User! @belongsTo
     prodOrder: Prod_order! @belongsTo
-    qaqcInspChklstLines: [Qaqc_insp_checklist_line!]! @hasMany
+    qaqcInspChklstLines: [Qaqc_insp_chklst_line!]! @hasMany
     created_at: DateTime
     updated_at: DateTime
 }

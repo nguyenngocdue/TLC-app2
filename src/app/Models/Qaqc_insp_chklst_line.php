@@ -14,7 +14,7 @@ class Qaqc_insp_chklst_line extends Model
     protected $fillable = [
         "id", "name", "description", "control_type", "value",
         "qaqc_insp_chklst_id", "qaqc_insp_sheet_id", "qaqc_insp_group_id",
-        "qaqc_insp_control_value_id",
+        "qaqc_insp_control_value_id", "qaqc_insp_control_group_id",
     ];
     protected $table = "qaqc_insp_chklst_lines";
 
