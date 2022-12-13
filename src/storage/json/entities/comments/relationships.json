@@ -1,1 +1,29 @@
-[]
+{
+    "_commentable": {
+        "name": "_commentable",
+        "relationship": "morphTo",
+        "renderer_view_all": "link_morph_to",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control_name": ""
+    },
+    "_user": {
+        "name": "_user",
+        "relationship": "belongsTo",
+        "renderer_view_all": "avatar_name",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control_name": ""
+    },
+    "_getCategory": {
+        "name": "_getCategory",
+        "relationship": "belongsTo",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control_name": ""
+    }
+}

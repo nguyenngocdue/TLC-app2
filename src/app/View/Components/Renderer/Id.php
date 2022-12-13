@@ -2,8 +2,8 @@
 
 namespace App\View\Components\Renderer;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Id extends Component
@@ -29,18 +29,15 @@ class Id extends Component
             $id = $data["slot"];
             $type = $data["attributes"]["type"];
             // dd($data["attributes"]);
-            $numberRender = str_pad($id, 6, '0', STR_PAD_LEFT);
-            $result = '#' . substr($numberRender, 0, 3) . '.' . substr($numberRender, 3, 6);
+            $idStr = Str::makeId($id);
 
             $route_name = ($type === 'permissions2') ? "permissions2.edit" : "{$type}_edit.edit";
-
-
             $route_exits =  (Route::has($route_name));
 
             $href =  $route_exits ? route($route_name, $id) : "#";
             $color =  $route_exits ? "blue" : "red";
 
-            return "<a href='$href' class='text-{$color}-500'>$result</a>";
+            return "<a href='$href' class='text-{$color}-500'>$idStr</a>";
         };
     }
 }
