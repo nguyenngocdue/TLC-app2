@@ -49,7 +49,7 @@ class CommentRenderer extends Component
                 "owner_id" => Auth::user()->id,
                 "created_at" => date_format(date_create(), "d/m/Y H:i:s"),
                 'readonly' => false,
-                'btnAtt' => true,
+                'btnUpload' => true,
             ]
         ];
 

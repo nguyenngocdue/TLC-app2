@@ -64,10 +64,9 @@ trait CreateEditControllerComment
             if (str_contains($key, 'comment__deleted_')) {
                 $itemComment = Comment::find($value * 1);
                 if (!is_null($itemComment)) {
-                    // dd($itemComment);
                     $idsAtt = $itemComment->media()->pluck('id');
+                    $delItem = $itemComment->delete();
                     foreach ($idsAtt as $id) {
-                        $delItem = $itemComment->delete();
                         Attachment::find($id)->delete();
                     }
                 }

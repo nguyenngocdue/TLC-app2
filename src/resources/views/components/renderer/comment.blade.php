@@ -1,6 +1,5 @@
 @php
 $content = $data['content'] ??'';
-// dump($content);
 $authorName = $user->name;
 $position = $user->position_rendered;
 
@@ -9,7 +8,7 @@ $timestamp = strtotime($date);
 $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
 @endphp
 
-<x-renderer.card style="bg-gray-250  py-3 border-gray-300 rounded-lg mt-2 shadow-md">
+<x-renderer.card style="bg-gray-250  border-gray-300 rounded-lg shadow-md">
     <div class="grid grid-cols-12 gap-2 flex-nowrap ">
         <div class="col-span-4">
             <div class="border bg-gray-300  rounded-lg w-full border-gray-300 p-1 ">
@@ -37,13 +36,17 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
     </div>
 
     <div class="mt-2 rounded-lg border border-gray-300 overflow-hidden">
+        {{-- @dump($content, $action) --}}
+        {{-- @if(!isset($data['btnUpload']) && $content) --}}
         <textarea name="hasComment_{{$name}}" rows="2" @readonly($data['readonly']) class=" {{$data['readonly'] ? 'bg-white' : 'bg-white'}}  text-gray-900  p-2.5 dark:placeholder-gray-400 block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Type here...">{{old('hasComment_'.$name, $content) ?? $content }}</textarea>
+        {{-- @endif --}}
         <x-renderer.show-attachment :dataAttachment="$dataAttachment" />
     </div>
+
     @if($action == 'create')
     <x-controls.uploadfiles id="{{$id}}" colName="{{$name}}" action="{{$action}}" labelName="{{$labelName}}" />
     @else
-    {{-- @dump($showBtnAtt) --}}
-    {!! $showBtnAtt!!}
+    {!! $showbtnUpload!!}
     @endif
+
 </x-renderer.card>
