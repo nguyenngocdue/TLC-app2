@@ -21,4 +21,9 @@ class Zunit_test_7 extends Model
     {
         return $this->morphMany(Comment::class, 'commentable', 'commentable_type', 'commentable_id');
     }
+
+    public function media()
+    {
+        return $this->morphMany(Attachment::class, 'mediable', 'object_type', 'object_id');
+    }
 }

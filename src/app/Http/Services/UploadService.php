@@ -16,12 +16,10 @@ class UploadService
 {
     public function store($request)
     {
-        $cateIdName = [];
+
+        // dd($request);
         try {
-            $cateAttachment = DB::table('attachment_categories')->select('id', 'name')->get();
-            foreach ($cateAttachment as $key => $value) {
-                $cateIdName[$value->name] = $value->id;
-            }
+            $id_name_cate = Helper::getDataDbByName('attachment_categories', 'name', 'id');
             $filesUpload = $request->files;
             $nameControls = [];
             $tempMedia = [];
@@ -38,7 +36,7 @@ class UploadService
                         $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
                         $path_image = $path . $fileName;
 
-                        $save = Storage::disk('s3')->put($path_image, file_get_contents($file), 'public');
+                        Storage::disk('s3')->put($path_image, file_get_contents($file), 'public');
                         // dd($fileNameNormal, $save, file_get_contents($file), $path_image);
 
                         $imageFileTypeFrame = ['jpeg', 'png', 'jpg', 'gif', 'svg'];
@@ -52,26 +50,29 @@ class UploadService
                             Storage::disk('s3')->put($path_thumbnail, $resource->__toString(), 'public');
                         }
 
+                        // dd($id_name_cate[$key);
                         array_push($tempMedia, [
                             'url_thumbnail' => isset($path_thumbnail) ? $path_thumbnail : "",
                             'url_media' => $path_image,
                             'url_folder' => $path,
                             'filename' => basename($path_image),
                             'extension' => $imageFileType,
-                            'category' => $cateIdName[$key],
+                            'category' => $id_name_cate[$key],
                             'owner_id' =>  (int)Auth::user()->id,
                         ]);
                     }
                 } catch (\Exception $e) {
+                    dd($e->getMessage());
                     return $e;
                 }
             }
 
-            $flip_cateIdName = array_flip($cateIdName);
+            // dd($tempMedia);
             foreach ($tempMedia as $key => $media) {
 
+                $flip_name_id_cate = array_flip($id_name_cate);
                 $newMedia = Attachment::create($media);
-                $colNameMedia[$newMedia['id']] = $flip_cateIdName[$media['category']];   // [id-media = "attachment-name"]
+                $colNameMedia[$newMedia['id']] = $flip_name_id_cate[$media['category']];   // [id-media = "attachment-name"]
             }
             // dd($colNameMedia);
             return $colNameMedia;

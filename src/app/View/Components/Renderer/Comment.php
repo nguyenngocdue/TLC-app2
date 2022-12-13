@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Models\Comment as ModelsComment;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,8 @@ class Comment extends Component
         private $required = false,
         private $dataComment = [],
         private $action = 'create',
+        private $labelName = '',
+        private $btnUpload = false,
     ) {
     }
 
@@ -35,10 +38,22 @@ class Comment extends Component
         $name = $this->name;
         $type = $this->type;
         $action = $this->action;
-
+        $id = $this->id;
         $data = $this->dataComment + ['readonly' => $this->readonly];
         $user = User::find($data['owner_id']);
+        $labelName = $this->labelName;
+
+
+        $commentUser = ModelsComment::find($data['id']);
+
+        $dataAttachment = [];
+        if (!is_null($commentUser)) {
+            $dataAttachment = $commentUser->media()->get()->toArray();
+        }
+
+        $showbtnUpload = $this->btnUpload  ? "<x-controls.uploadfiles id={$id} colName={$name} action={$action} labelName={$this->labelName} />" : "";
+        // dump($this->btnUpload, $showbtnUpload);
         // dump($data);
-        return view('components.renderer.comment')->with(compact('name', 'type', 'data', 'action', 'user'));
+        return view('components.renderer.comment')->with(compact('labelName', 'id', 'name', 'type', 'data', 'action', 'user', 'showbtnUpload', 'dataAttachment'));
     }
 }

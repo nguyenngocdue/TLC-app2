@@ -22,4 +22,9 @@ class Comment extends Model
     {
         return $this->morphTo();
     }
+    // filter all media from a comment
+    public function media()
+    {
+        return $this->morphMany(Attachment::class, 'mediable', 'object_type', 'object_id');
+    }
 }
