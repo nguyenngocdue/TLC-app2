@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
+use App\Utils\Support\JsonControls;
 use App\Utils\Support\Props;
 use App\Utils\Support\Table;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ abstract class ManagePropController extends Controller
 
     private function getColumns()
     {
-        $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/props/controls.json'), true)['controls'];
+        $controls = JsonControls::getControls();
         return [
             [
                 "dataIndex" => "action",
@@ -123,7 +124,7 @@ abstract class ManagePropController extends Controller
                 "name" => "_$value",
                 "column_name" => $value,
                 "column_type" => $columnTypes[$key],
-                "label" => Str::pretty($value),
+                "label" => Str::headline($value),
                 "col_span" => 12,
             ];
         }
@@ -136,13 +137,7 @@ abstract class ManagePropController extends Controller
 
         $result = [];
         foreach ($columnEloquentParams as $elqName => $elqValue) {
-            if (in_array($elqValue[0], [
-                "belongsToMany",
-                "hasMany",
-                "hasOne",
-                "belongsToMany",
-                "hasManyThrough",
-            ])) {
+            if (in_array($elqValue[0], JsonControls::getManagePropEloquents())) {
                 $result["_$elqName"] = [
                     "name" => "_$elqName",
                     "column_name" => "$elqName",
@@ -186,26 +181,28 @@ abstract class ManagePropController extends Controller
 
         $this->renewColumn($json, $result, 'column_type');
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
+        foreach (array_keys($toBeGreen) as $key) $json[$key]['row_color'] = "green";
+        foreach (array_keys($toBeRed) as $key) $json[$key]['row_color'] = "red";
 
         foreach ($result as $key => $columns) {
             foreach ($columns as $column => $value) {
-                //Keep label of JSON file
-                if (in_array($column, ['label', 'col_span'])) continue;
+                //Make sure this only happen with current rows, not new rows
+                if (isset($json[$key]['row_color']) && $json[$key]['row_color'] !== "green") {
+                    //Keep label of JSON file
+                    if (in_array($column, ['label', 'col_span'])) continue;
+                }
                 $json[$key][$column] = $value;
             }
         }
-
-        foreach (array_keys($toBeGreen) as $key) $json[$key]['row_color'] = "green";
-        foreach (array_keys($toBeRed) as $key) $json[$key]['row_color'] = "red";
 
         foreach ($json as $key => $columns) {
             if (isset($columns['row_color']) && $columns['row_color'] === "green") continue;
             $json[$key]['action'] = Blade::render("<div class='whitespace-nowrap'>
                 <x-renderer.button htmlType='submit' name='button' size='xs' value='up,$key'><i class='fa fa-arrow-up'></i></x-renderer.button>
                 <x-renderer.button htmlType='submit' name='button' size='xs' value='down,$key'><i class='fa fa-arrow-down'></i></x-renderer.button>
+                <x-renderer.button htmlType='submit' name='button' size='xs' value='right_by_name,$key' type='danger' outline=true><i class='fa fa-trash'></i></x-renderer.button>
             </div>");
         }
-
 
         return $json;
     }
@@ -224,6 +221,10 @@ abstract class ManagePropController extends Controller
         $data = $request->input();
         $columns = array_filter($this->getColumns(), fn ($column) => !in_array($column['dataIndex'], ['action']));
         $result = Props::convertHttpObjectToJson($data, $columns);
+        if ($request->input('button')) {
+            [$direction, $name] = explode(",", $request->input('button'));
+            Props::move($result, $direction, $name);
+        }
         Props::setAllOf($this->type, $result);
         return back();
     }

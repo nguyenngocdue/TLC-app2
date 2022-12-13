@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Workflow;
 
-use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -73,37 +72,7 @@ class Statuses
         $json = self::_getFor($entityType);
 
         $index = array_search($name, $json);
-        // dump($direction, $name, $index, $json);
-        switch ($direction) {
-            case "up":
-                if ($index === 0) {
-                    $value = $json[0];
-                    unset($json[0]);
-                    array_push($json, $value);
-                } else {
-                    $tmp = $json[$index - 1];
-                    $json[$index - 1] = $json[$index];
-                    $json[$index] = $tmp;
-                }
-                break;
-            case "down":
-                if ($index === sizeof($json) - 1) {
-                    $value = array_pop($json);
-                    array_unshift($json, $value);
-                } else {
-                    $tmp = $json[$index + 1];
-                    $json[$index + 1] = $json[$index];
-                    $json[$index] = $tmp;
-                }
-                break;
-            case "left":
-                array_push($json, $name);
-                break;
-            case "right":
-                $json = array_filter($json, fn ($name0) => $name !== $name0);
-                break;
-        }
-        // dd($direction, $json);
+        $json = Arr::moveDirection($json, $direction, $index, $name);
         return self::setFor($entityType, array_values($json));
     }
 }

@@ -1,7 +1,7 @@
 {
     "_user": {
         "name": "_user",
-        "relationship": "user",
+        "relationship": "belongsTo",
         "renderer_view_all": "avatar_name",
         "renderer_view_all_param": "",
         "renderer_edit": "",

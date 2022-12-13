@@ -122,10 +122,74 @@ class ComponentLib extends Controller
 
 
         $dataComment = [
+            'id' => "",
             'owner_id' => 632,
             'content' => 'How are you',
             'created_at' => '08/12/2022 09:20:02',
             'updated_at' => '08/12/2022 09:20:02'
+        ];
+
+        $attachmentData = [
+            "attachment_1" => [
+                [
+                    "id" => 259,
+                    "url_thumbnail" => "dev-due001/2022/12/1-150x150.jpg",
+                    "url_media" => "dev-due001/2022/12/1.jpg",
+                    "url_folder" => "dev-due001/2022/12/",
+                    "filename" => "1.jpg",
+                    "extension" => "jpg",
+                    "owner_id" => 1,
+                    "object_id" => 3,
+                    "object_type" => "App\Models\Zunit_test_5",
+                    "category" => 1,
+                    "created_at" => "2022-12-13 03:18:39",
+                    "updated_at" => "2022-12-13 03:18:39",
+                ],
+                [
+                    "id" => 261,
+                    "url_thumbnail" => "dev-due001/2022/12/4-1-150x150.jpeg",
+                    "url_media" => "dev-due001/2022/12/4-1.jpeg",
+                    "url_folder" => "dev-due001/2022/12/",
+                    "filename" => "4-1.jpeg",
+                    "extension" => "jpeg",
+                    "owner_id" => 1,
+                    "object_id" => 3,
+                    "object_type" => "App\Models\Zunit_test_5",
+                    "category" => 1,
+                    "created_at" => "2022-12-13 03:46:08",
+                    "updated_at" => "2022-12-13 03:46:08",
+                ],
+                [
+                    "id" => 262,
+                    "url_thumbnail" => "dev-due001/2022/12/3-150x150.jpeg",
+                    "url_media" => "dev-due001/2022/12/3.jpeg",
+                    "url_folder" => "dev-due001/2022/12/",
+                    "filename" => "3.jpeg",
+                    "extension" => "jpeg",
+                    "owner_id" => 1,
+                    "object_id" => 3,
+                    "object_type" => "App\Models\Zunit_test_5",
+                    "category" => 1,
+                    "created_at" => "2022-12-13 03:46:08",
+                    "updated_at" => "2022-12-13 03:46:08",
+                ]
+            ],
+            "attachment_2" => [[
+                [
+                    "id" => 260,
+                    "url_thumbnail" => "dev-due001/2022/12/2-150x150.jpg",
+                    "url_media" => "dev-due001/2022/12/2.jpg",
+                    "url_folder" => "dev-due001/2022/12/",
+                    "filename" => "2.jpg",
+                    "extension" => "jpg",
+                    "owner_id" => 1,
+                    "object_id" => 3,
+                    "object_type" => "App\Models\Zunit_test_5",
+                    "category" => 2,
+                    "created_at" => "2022-12-13 03:18:39",
+                    "updated_at" => "2022-12-13 03:18:39",
+                ]
+            ]]
         ];
 
 
@@ -135,6 +199,7 @@ class ComponentLib extends Controller
             'tableDataSource' => $tableDataSource,
             'gridDataSource' => $gridDataSource,
             'dataComment' => $dataComment,
+            'attachmentData' => $attachmentData,
         ]);
     }
 }

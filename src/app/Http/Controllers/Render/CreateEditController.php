@@ -80,15 +80,18 @@ abstract class CreateEditController extends Controller
 		$dataInput =  array_merge(['id' => null], $request->except($arrayExcept));
 
 		$deletedMediaIds = $this->deleteMediaIfNeeded($dataInput);
-		$hasAttachment = $this->saveMedia('store', $request, $dataInput, null, $deletedMediaIds);
+		$idsMedia = $this->saveAndGetIdsMedia($request, $dataInput);
 
 		$dataInput = $this->apply_formula($dataInput, $this->type);
+
+		// dd($dataInput);
 
 		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');
 		$request->merge($dataInput + $comments);
 		$this->_validate($props, $request);
 
 		$idsComment = $this->saveAndGetIdsComments($dataInput);
+		$this->setMediaCommentsParent($idsComment, $idsMedia);
 
 
 		$newDataInput = $this->handleToggle('store', $props, $dataInput);
@@ -113,7 +116,7 @@ abstract class CreateEditController extends Controller
 
 				// $event = event(new SendEmailItemCreated(['id' => $data->id, 'type' => $this->type]));
 				// dd($event);
-				if ($hasAttachment) {
+				if ($idsMedia) {
 					$this->setMediaParent($data, $colNamesHaveAttachment);
 					$this->updateMediaIdsToDBFields($_data, $colNamesHaveAttachment);
 				}
@@ -139,9 +142,16 @@ abstract class CreateEditController extends Controller
 		$dataInput = $request->except($arrayExcept);
 
 		$this->deleteMediaIfNeeded($dataInput);
-		$hasAttachment = $this->saveMedia('update', $request, $dataInput, $data, $colNamesHaveAttachment);
+		// dd($dataInput);
+		$idsMedia = $this->saveAndGetIdsMedia($request, $dataInput);
+		$this->setMediaParent($data, $colNamesHaveAttachment);
 
 		$dataInput = $this->apply_formula($dataInput, $this->type);
+
+		$this->delComments($dataInput);
+
+		// dd($dataInput);
+
 
 		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');
 		$request->merge($dataInput + $comments);
@@ -150,7 +160,11 @@ abstract class CreateEditController extends Controller
 		$newDataInput = $this->handleToggle('update', $props, $dataInput);
 		$newDataInput = $this->handleTextArea($props, $newDataInput);
 
-		$this->addComment($newDataInput, $data);
+		$idsComment = $this->saveAndGetIdsComments($newDataInput);
+		$this->setCommentsParent($idsComment, $data);
+		$this->setMediaCommentsParent($idsComment, $idsMedia);
+
+		// dd($idsComment);
 
 		try {
 			$data->fill($newDataInput);
@@ -162,7 +176,7 @@ abstract class CreateEditController extends Controller
 			if ($isSaved) {
 				$this->syncManyToManyRelationship($data, $dataInput);
 
-				if ($hasAttachment) {
+				if ($idsMedia) {
 					//set Media Parent is in saveMedia
 					$this->updateMediaIdsToDBFields($data, $colNamesHaveAttachment);
 				}

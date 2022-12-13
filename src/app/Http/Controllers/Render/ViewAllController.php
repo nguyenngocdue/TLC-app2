@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Render;
 
 use App\Http\Controllers\Controller;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\JsonControls;
 use App\Utils\Support\Props;
 use App\Utils\Support\Relationships;
 use Illuminate\Support\Facades\App;
@@ -118,25 +119,16 @@ abstract class ViewAllController extends Controller
         if (is_array($columns)) {
             foreach ($columns as &$column) {
                 $dataIndex = $column['dataIndex'];
-                if (isset($eloquentParams[$dataIndex])) {
-                    $relationship = $eloquentParams[$dataIndex][0];
-                    // Log::info($dataIndex . " " . $relationship);
-                    if (in_array($relationship, [
-                        "belongsToMany",
-                        "belongsTo",
-                        "hasMany",
-                        "hasOne",
-                        "hasManyThrough",
-                    ])) {
-                        $relationshipJson = $json["_{$dataIndex}"];
-                        // Log::info($relationshipJson);
-                        $column['renderer'] = $relationshipJson['renderer_view_all'] ?? "";
-                        $column['rendererParam'] = $relationshipJson['renderer_view_all_param'] ?? "";
-                    }
+                if (!isset($eloquentParams[$dataIndex])) continue; //<<Id, Name, Slug...
+                $relationship = $eloquentParams[$dataIndex][0];
+                $allows = JsonControls::getViewAllEloquents();
+                if (in_array($relationship, $allows)) {
+                    $relationshipJson = $json["_{$dataIndex}"];
+                    $column['renderer'] = $relationshipJson['renderer_view_all'] ?? "";
+                    $column['rendererParam'] = $relationshipJson['renderer_view_all_param'] ?? "";
                 }
             }
         }
-        return true;
     }
 
     private function attachEloquentNameIntoColumn(&$columns)
@@ -172,8 +164,8 @@ abstract class ViewAllController extends Controller
         $dataSource = $this->getDataSource($pageLimit);
 
         $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
-        $result = $this->attachRendererIntoColumn($columns);
-        if ($result !== true) return $result;
+        $this->attachRendererIntoColumn($columns);
+
         // Log::info($columns);
 
         return view('dashboards.pages.viewAll2')->with(compact('pageLimit', 'type', 'columns', 'dataSource'));

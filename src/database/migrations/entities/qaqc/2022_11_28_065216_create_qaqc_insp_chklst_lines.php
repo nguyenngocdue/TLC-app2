@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('qaqc_insp_chklst_id');
             $table->unsignedBigInteger('qaqc_insp_sheet_id');
             $table->unsignedBigInteger('qaqc_insp_group_id');
-            $table->unsignedBigInteger('qaqc_insp_control_group_id')->nullable();
+            $table->unsignedBigInteger('qaqc_insp_control_group_id');
 
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

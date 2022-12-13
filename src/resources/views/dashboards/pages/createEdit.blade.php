@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section("title", Str::pretty($action))
+@section("title", Str::headline($action))
 
 @section('content')
 
@@ -95,7 +95,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case('attachment')
-                        <x-controls.uploadfiles id={{$id}} colName={{$column_name}} action={{$action}} tablePath={{$tablePath}} labelName={{$label}} />
+                        <x-controls.uploadfiles id={{$id}} colName={{$column_name}} action={{$action}} labelName={{$label}} />
                         @break
 
                         @case('switch')
@@ -115,7 +115,8 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case('comment')
-                        <x-controls.comment-renderer id={{$id}} type={{$type}} colName={{$column_name}} action={{$action}} colSpan={{$col_span}} />
+                        {{-- @dump($label) --}}
+                        <x-controls.comment-renderer id={{$id}} type={{$type}} colName={{$column_name}} action={{$action}} colSpan={{$col_span}} labelName={{$label}} />
                         @break
 
                         @default

@@ -27,7 +27,7 @@ services:
       - mysql
     environment:
       PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_ROOT_PASSWORD: LNIBsCP9Gj7xF4d3
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
     ports:
@@ -46,10 +46,10 @@ services:
       - ./mysql:/var/lib/mysql
     # user: 1000:1000
     environment:
-      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_ROOT_PASSWORD: LNIBsCP9Gj7xF4d3
       MYSQL_DATABASE: laravel
-      MYSQL_USER: user
-      MYSQL_PASSWORD: user
+      MYSQL_USER: tlc_app_2
+      MYSQL_PASSWORD: DLTedTfrVzYbrYv9
     networks:
       - laravel302
 

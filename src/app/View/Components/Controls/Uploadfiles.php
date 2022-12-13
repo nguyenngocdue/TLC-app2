@@ -8,7 +8,7 @@ use Illuminate\View\Component;
 
 class Uploadfiles extends Component
 {
-    public function __construct(private $id, private $colName, private $action, private $tablePath, private $labelName)
+    public function __construct(private $id, private $colName, private $action, private $labelName)
     {
     }
 
@@ -46,6 +46,8 @@ class Uploadfiles extends Component
                 $attachHasMedia[$colName][] = $ele;
             }
         }
-        return view('components.controls.uploadfiles')->with(compact('action', 'attachHasMedia', 'colName', 'path', 'labelName'));
+        $showToBeDeleted = env('APP_ENV') === 'local';
+        // dump($showToBeDeleted);
+        return view('components.controls.uploadfiles')->with(compact('action', 'attachHasMedia', 'colName', 'labelName', 'showToBeDeleted', 'path'));
     }
 }

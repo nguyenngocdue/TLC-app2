@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
+use App\Utils\Support\JsonControls;
 use App\Utils\Support\Relationships;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -23,13 +24,12 @@ abstract class ManageRelationshipController extends Controller
 
     private function getColumns()
     {
-        $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/relationships/renderers.json'), true);
-        $viewAllControls = $controls['renderers'];
-        $editControls = $controls['edit'];
+        $viewAllControls = JsonControls::getRendererViewAll();
+        $editControls = JsonControls::getRendererEdit();
         return [
-            [
-                "dataIndex" => "action",
-            ],
+            // [
+            //     "dataIndex" => "action",
+            // ],
             [
                 "dataIndex" => "name",
                 "renderer" => "read-only-text",
