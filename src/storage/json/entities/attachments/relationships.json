@@ -1,7 +1,7 @@
 {
     "_user": {
         "name": "_user",
-        "relationship": "user",
+        "relationship": "belongsTo",
         "renderer_view_all": "avatar_name",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -13,6 +13,15 @@
         "relationship": "belongsTo",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control_name": ""
+    },
+    "_mediable": {
+        "name": "_mediable",
+        "relationship": "morphTo",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control_name": ""

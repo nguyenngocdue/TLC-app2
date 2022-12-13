@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Render;
 
 use App\Http\Controllers\Controller;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\JsonControls;
 use App\Utils\Support\Props;
 use App\Utils\Support\Relationships;
 use Illuminate\Support\Facades\App;
@@ -121,13 +122,7 @@ abstract class ViewAllController extends Controller
                 if (isset($eloquentParams[$dataIndex])) {
                     $relationship = $eloquentParams[$dataIndex][0];
                     // Log::info($dataIndex . " " . $relationship);
-                    if (in_array($relationship, [
-                        "belongsToMany",
-                        "belongsTo",
-                        "hasMany",
-                        "hasOne",
-                        "hasManyThrough",
-                    ])) {
+                    if (in_array($relationship, JsonControls::getEloquents())) {
                         $relationshipJson = $json["_{$dataIndex}"];
                         // Log::info($relationshipJson);
                         $column['renderer'] = $relationshipJson['renderer_view_all'] ?? "";

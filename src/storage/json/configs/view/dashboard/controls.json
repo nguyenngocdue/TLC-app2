@@ -22,5 +22,25 @@
         "text",
         "textarea",
         "link"
+    ],
+    "renderer_view_all": [
+        "",
+        "attachment",
+        "avatar_name",
+        "column",
+        "count"
+    ],
+    "renderer_edit": [
+        "",
+        "many_icons",
+        "many_lines"
+    ],
+    "eloquents": [
+        "belongsToMany",
+        "hasMany",
+        "hasOne",
+        "belongsToMany",
+        "hasManyThrough",
+        "morphTo"
     ]
 }

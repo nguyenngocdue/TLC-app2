@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
+use App\Utils\Support\JsonControls;
 use App\Utils\Support\Props;
 use App\Utils\Support\Table;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ abstract class ManagePropController extends Controller
 
     private function getColumns()
     {
-        $controls = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/props/controls.json'), true)['controls'];
+        $controls = JsonControls::getControls();
         return [
             [
                 "dataIndex" => "action",
@@ -136,13 +137,7 @@ abstract class ManagePropController extends Controller
 
         $result = [];
         foreach ($columnEloquentParams as $elqName => $elqValue) {
-            if (in_array($elqValue[0], [
-                "belongsToMany",
-                "hasMany",
-                "hasOne",
-                "belongsToMany",
-                "hasManyThrough",
-            ])) {
+            if (in_array($elqValue[0], JsonControls::getEloquents())) {
                 $result["_$elqName"] = [
                     "name" => "_$elqName",
                     "column_name" => "$elqName",

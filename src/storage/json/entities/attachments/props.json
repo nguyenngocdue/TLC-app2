@@ -10,8 +10,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_url_thumbnail": {
         "name": "_url_thumbnail",
@@ -24,8 +23,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_url_media": {
         "name": "_url_media",
@@ -38,8 +36,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_url_folder": {
         "name": "_url_folder",
@@ -52,8 +49,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_filename": {
         "name": "_filename",
@@ -66,8 +62,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_extension": {
         "name": "_extension",
@@ -80,8 +75,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -94,8 +88,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_object_id": {
         "name": "_object_id",
@@ -104,12 +97,11 @@
         "label": "Object Id",
         "control": "number",
         "col_span": "12",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_object_type": {
         "name": "_object_type",
@@ -118,12 +110,11 @@
         "label": "Object Type",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_category": {
         "name": "_category",
@@ -136,8 +127,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -150,8 +140,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -164,7 +153,6 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "frozen_left": "",
-        "frozen_right": ""
+        "formula": ""
     }
 }
