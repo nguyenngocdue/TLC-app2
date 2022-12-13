@@ -46,6 +46,8 @@ class Uploadfiles extends Component
                 $attachHasMedia[$colName][] = $ele;
             }
         }
-        return view('components.controls.uploadfiles')->with(compact('action', 'attachHasMedia', 'colName', 'path', 'labelName'));
+        $showToBeDeleted = env('APP_ENV') === 'local';
+        // dump($showToBeDeleted);
+        return view('components.controls.uploadfiles')->with(compact('action', 'attachHasMedia', 'colName', 'labelName', 'showToBeDeleted', 'path'));
     }
 }

@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer;
 
 use App\Models\Comment as ModelsComment;
 use App\Models\User;
+use App\Utils\Constant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
@@ -25,6 +26,8 @@ class Comment extends Component
         private $action = 'create',
         private $labelName = '',
         private $btnUpload = false,
+        private $showToBeDeleted = false,
+        private $path = Constant::PATH,
     ) {
     }
 
@@ -42,18 +45,20 @@ class Comment extends Component
         $data = $this->dataComment + ['readonly' => $this->readonly];
         $user = User::find($data['owner_id']);
         $labelName = $this->labelName;
+        $path = $this->path;
 
 
         $commentUser = ModelsComment::find($data['id']);
 
-        $dataAttachment = [];
+        $attachmentData = [];
         if (!is_null($commentUser)) {
-            $dataAttachment = $commentUser->media()->get()->toArray();
+            $attachmentData = [$name => $commentUser->media()->get()->toArray()];
         }
 
         $showbtnUpload = $this->btnUpload  ? "<x-controls.uploadfiles id={$id} colName={$name} action={$action} labelName={$this->labelName} />" : "";
-        // dump($this->btnUpload, $showbtnUpload);
-        // dump($data);
-        return view('components.renderer.comment')->with(compact('labelName', 'id', 'name', 'type', 'data', 'action', 'user', 'showbtnUpload', 'dataAttachment'));
+
+        // dump($attachmentData);
+        $showToBeDeleted = $this->showToBeDeleted;
+        return view('components.renderer.comment')->with(compact('labelName', 'id', 'name', 'type', 'data', 'action', 'user', 'showbtnUpload', 'attachmentData', 'showToBeDeleted', 'path'));
     }
 }
