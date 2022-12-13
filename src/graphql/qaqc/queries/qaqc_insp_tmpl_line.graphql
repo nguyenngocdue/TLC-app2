@@ -13,6 +13,7 @@ type Qaqc_insp_tmpl_line {
     qaqc_insp_tmpl_id: ID!
     qaqc_insp_sheet_id: ID!
     qaqc_insp_group_id: ID!
+    qaqc_insp_control_group_id: ID
     getTemplate: Qaqc_insp_tmpl! @belongsTo
     getSheet: Qaqc_insp_sheet! @belongsTo
     getGroup: Qaqc_insp_group! @belongsTo
@@ -28,6 +29,7 @@ input CreateQAQCInspTmplLineInput {
     qaqc_insp_tmpl_id: ID!
     qaqc_insp_sheet_id: ID!
     qaqc_insp_group_id: ID!
+    qaqc_insp_control_group_id: ID!
     created_at: DateTime
     updated_at: DateTime
 }
@@ -39,6 +41,7 @@ input UpdateQAQCInspTmplLineInput {
     qaqc_insp_tmpl_id: ID
     qaqc_insp_sheet_id: ID
     qaqc_insp_group_id: ID
+    qaqc_insp_control_group_id: ID
     created_at: DateTime
     updated_at: DateTime
 }

@@ -57,7 +57,7 @@ Route::group([
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], function () {
-        Route::post('upload_file', [App\Http\Controllers\Api\v1\qaqc\UploadFileQaqc::class, 'uploadFileQaqc']);
+        Route::post('upload_file', [App\Http\Controllers\Api\v1\UploadFile::class, 'upload']);
     });
 });
 Route::group([

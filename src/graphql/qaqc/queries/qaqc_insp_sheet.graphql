@@ -13,6 +13,7 @@ type Qaqc_insp_sheet {
     created_at: DateTime
     updated_at: DateTime
     getTemplateLines: [Qaqc_insp_tmpl_line!]! @hasMany
+    getChklstLines: [Qaqc_insp_chklst_line!]! @hasMany
 }
 
 input CreateQAQCInspSheetInput {

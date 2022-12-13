@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('qaqc_insp_tmpl_id');
             $table->unsignedBigInteger('qaqc_insp_sheet_id');
             $table->unsignedBigInteger('qaqc_insp_group_id');
-            $table->unsignedBigInteger('qaqc_insp_control_group_id');
+            $table->unsignedBigInteger('qaqc_insp_control_group_id')->nullable();
             // $table->unsignedBigInteger('prod_routing_id');
             // $table->unsignedBigInteger('wir_description_id');
             // $table->unique(['prod_routing_id', 'wir_description_id']);

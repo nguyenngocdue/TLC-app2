@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Workflow\Statuses;
+use App\Models\Qaqc_insp_chklst;
+use App\Models\Qaqc_insp_chklst_line;
+use App\Models\Qaqc_insp_tmpl;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\GetSetCookie;
@@ -10,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
@@ -36,7 +40,29 @@ class HomeController extends Controller
         // $user = User::where('email', 'admin')->first();
         // GetSetCookie::setCookieForever('time_zone', $user->time_zone);
         // $token = $user->createToken('tlc_token')->plainTextToken;
-        dd(array_values(Statuses::getFor('sub_projects')));
+        $array = array(
+            'abc' => [
+                1, 2, 3
+            ],
+            'friends' => [
+                'Chris',
+                'Jim',
+                'Lynn',
+                'Jeff',
+                'Joanna',
+            ],
+            'websites' => [
+                'Search' => 'Google',
+                'Social' => 'Facebook',
+                'New' => 'NY Times'
+            ],
+
+
+        );
+        // dump(array_merge($array['websites'], $array['friends']));
+        dd(array_shift($array));
+        dump(array_pop($array));
+        dd($array);
         dd(array_values(array_map(fn ($value) => $value['title'], Statuses::getFor('sub_project'))));
         // dump(User::where('email', 'admin')->first());
         // dump(CurrentUser::getRoles());

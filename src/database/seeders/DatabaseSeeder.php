@@ -27,8 +27,8 @@ class DatabaseSeeder extends Seeder
             // MediaSeeder::class,
             // WorkplaceSeeder::class,
 
-            CommentSeeder::class,
-            CommentCategorySeeder::class,
+            // CommentSeeder::class,
+            // CommentCategorySeeder::class,
 
         ]);
     }
