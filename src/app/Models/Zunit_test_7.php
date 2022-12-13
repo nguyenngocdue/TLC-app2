@@ -13,6 +13,7 @@ class Zunit_test_7 extends Model
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ['text', 'comment_1', 'comment_2', 'comment_3'];
     protected $table = "zunit_test_7s";
+    public $menuTitle = "UT07 (Comments)";
 
     public $eloquentParams = [];
 

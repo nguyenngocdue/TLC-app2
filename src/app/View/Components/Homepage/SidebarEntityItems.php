@@ -15,8 +15,12 @@ class SidebarEntityItems
         $currentType = CurrentRoute::getTypeSingular();
         $singular = Str::singular($table);
         $isActive = ($currentType === $singular);
+
+        $modelPath = "App\\Models\\" . Str::ucfirst($singular);
+        $model = App::make($modelPath);
+
         $result = [
-            "title" => Str::headline($table),
+            "title" => $model->menuTitle ?? Str::headline($table),
             "type" => $singular,
             "icon" => $svg['form'],
             "isActive" => $isActive,
@@ -45,9 +49,6 @@ class SidebarEntityItems
                 // ],
             ],
         ];
-
-        $modelPath = "App\\Models\\" . Str::ucfirst($singular);
-        $model = App::make($modelPath);
 
         if (method_exists($model, "transitionTo")) {
             $result['children'][] =  ['title' => '-'];

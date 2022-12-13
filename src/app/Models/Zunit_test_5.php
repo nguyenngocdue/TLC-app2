@@ -14,6 +14,8 @@ class Zunit_test_5 extends Model
     protected $fillable = ["name", "attachment_1", "attachment_2", "attachment_3", "attachment_4", "attachment_5"];
     protected $primaryKey = "id";
     protected $table = "zunit_test_5s";
+    public $menuTitle = "UT05 (Attachments)";
+
     public $eloquentParams = [
         "media" => ['hasMany', Attachment::class, 'owner_id', 'id'],
     ];
