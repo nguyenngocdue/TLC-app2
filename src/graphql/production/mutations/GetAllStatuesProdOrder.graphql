@@ -1,0 +1,5 @@
+extend type Mutation {
+    getAllStatuesProdOrder: [String!]!
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\GetAllStatuesProdOrder")
+}
