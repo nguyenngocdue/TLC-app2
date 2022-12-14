@@ -16,7 +16,6 @@ class SmartAttachment extends Component
         private $colName = 'attachment_1',
         private $action = 'edit',
         private $labelName = '',
-        private $path = Constant::PATH,
         private $attachmentData = [],
     ) {
         //
@@ -25,6 +24,8 @@ class SmartAttachment extends Component
     public function render()
     {
         // dump($this->attachmentData);
+        // dump($this->destroyable);
+        $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         return view('components.renderer.smart-attachment', [
             'readonly' => $this->readonly,
             'destroyable' => $this->destroyable,
@@ -33,7 +34,7 @@ class SmartAttachment extends Component
             'colName' => $this->colName,
             'action' => $this->action,
             'labelName' =>  $this->labelName,
-            'path' => $this->path,
+            'path' => $path,
             'attachmentData' => $this->attachmentData,
         ]);
     }

@@ -25,9 +25,8 @@ class Comment extends Component
         private $dataComment = [],
         private $action = 'create',
         private $labelName = '',
-        private $btnUpload = false,
         private $showToBeDeleted = false,
-        private $path = Constant::PATH,
+        private $destroyable = false,
     ) {
     }
 
@@ -42,11 +41,10 @@ class Comment extends Component
         $type = $this->type;
         $action = $this->action;
         $id = $this->id;
-        $data = $this->dataComment + ['readonly' => $this->readonly];
+        $data = $this->dataComment + ['readonly' => (bool)$this->readonly];
         $user = User::find($data['owner_id']);
         $labelName = $this->labelName;
-        $path = $this->path;
-
+        $destroyable = $this->destroyable;
 
         $commentUser = ModelsComment::find($data['id']);
 
@@ -54,11 +52,8 @@ class Comment extends Component
         if (!is_null($commentUser)) {
             $attachmentData = [$name => $commentUser->media()->get()->toArray()];
         }
-
-        $showbtnUpload = $this->btnUpload  ? "<x-controls.uploadfiles id={$id} colName={$name} action={$action} labelName={$this->labelName} />" : "";
-
-        // dump($attachmentData);
         $showToBeDeleted = $this->showToBeDeleted;
-        return view('components.renderer.comment')->with(compact('labelName', 'id', 'name', 'type', 'data', 'action', 'user', 'showbtnUpload', 'attachmentData', 'showToBeDeleted', 'path'));
+        // dump('DataComment', $data);
+        return view('components.renderer.comment')->with(compact('labelName', 'id', 'name', 'type', 'data', 'action', 'user', 'attachmentData', 'showToBeDeleted', 'destroyable'));
     }
 }
