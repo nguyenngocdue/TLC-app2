@@ -28,6 +28,15 @@
             Grid colSpan=4 itemRenderer=x-renderer.avatar-name groupBy=name
             <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name" groupBy="name"></x-renderer.grid>
         </x-renderer.card>
+        
+        <x-renderer.card title="Images">
+            <x-renderer.image title='A customizable title'></x-renderer.image>
+            <x-renderer.image w=40 title='Width: 40'></x-renderer.image>
+            <x-renderer.image w=60 title='Width: 60'></x-renderer.image>
+            <x-renderer.image w=80 title='Width: 80'></x-renderer.image>
+            With HREF
+            <x-renderer.image title='Go to Google' href='http://www.google.com'></x-renderer.image>
+        </x-renderer.card>
 
         <x-renderer.card title="AvatarName">
             AvatarName with Attributes
@@ -41,7 +50,6 @@
                 }</x-renderer.avatar-name>
             Empty attribute
             <x-renderer.avatar-name></x-renderer.avatar-name>
-
         </x-renderer.card>
 
         <x-renderer.card title="Controls">
