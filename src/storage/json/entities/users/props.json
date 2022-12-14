@@ -545,19 +545,6 @@
         "validation": "",
         "formula": ""
     },
-    "_media": {
-        "name": "_media",
-        "column_name": "media",
-        "column_type": "ELQ(hasMany)",
-        "label": "Media",
-        "control": "",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "true",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
     "_posts": {
         "name": "_posts",
         "column_name": "posts",
@@ -580,6 +567,19 @@
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "true",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_mediable": {
+        "name": "_mediable",
+        "column_name": "mediable",
+        "column_type": "ELQ(morphMany)",
+        "label": "Attachments",
+        "control": "relationship_renderer",
+        "col_span": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""

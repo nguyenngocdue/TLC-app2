@@ -1,1 +1,11 @@
-[]
+{
+    "_comments": {
+        "name": "_comments",
+        "relationship": "morphMany",
+        "renderer_view_all": "link_morph_to",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control_name": ""
+    }
+}

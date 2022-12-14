@@ -42,7 +42,8 @@
         "hasMany",
         "hasOne",
         "hasManyThrough",
-        "morphTo"
+        "morphTo",
+        "morphMany"
     ],
     "view_all_eloquents": [
         "belongsToMany",

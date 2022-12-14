@@ -15,12 +15,16 @@ class Zunit_test_7 extends Model
     protected $table = "zunit_test_7s";
     public $menuTitle = "UT07 (Comments)";
 
-    public $eloquentParams = [];
+    public $eloquentParams = [
+        "comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+    ];
 
 
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable', 'commentable_type', 'commentable_id');
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        // return $this->morphMany(Comment::class, 'commentable', 'commentable_type', 'commentable_id');
     }
 
     public function media()

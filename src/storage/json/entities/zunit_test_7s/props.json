@@ -89,5 +89,18 @@
         "new_line": "",
         "validation": "",
         "formula": ""
+    },
+    "_comments": {
+        "name": "_comments",
+        "column_name": "comments",
+        "column_type": "ELQ(morphMany)",
+        "label": "Comments",
+        "control": "",
+        "col_span": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
     }
 }

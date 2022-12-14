@@ -24,6 +24,6 @@ class Zunit_test_5 extends Model
     {
         // return $this->morphMany(Attachment::class, 'mediable', 'object_type', 'object_id');
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4], $p[5]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
 }

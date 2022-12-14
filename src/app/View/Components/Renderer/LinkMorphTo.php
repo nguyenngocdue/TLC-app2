@@ -31,12 +31,15 @@ class LinkMorphTo extends Component
         $dataLine = $this->dataLine;
         $ableStr = $this->column['dataIndex'];
         $able = $dataLine->$ableStr;
-        $table = $able->getTable();
-        $id = $able->id;
-        // dump($table);
-        // dump("$able $table");
-        $href = route($table . "_edit.edit", $id);
-        $idStr = Str::makeId($id);
-        return "<a class='text-blue-500' href='$href'>$idStr($table)</a>";
+        if (!is_null($able)) {
+            $table = $able->getTable();
+            $id = $able->id;
+            // dump($table);
+            // dump("$able $table");
+            $href = route($table . "_edit.edit", $id);
+            $idStr = Str::makeId($id);
+            return "<a class='text-blue-500' href='$href'>$idStr($table)</a>";
+        }
+        // return "XYZ";
     }
 }
