@@ -21,7 +21,7 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
                     </div>
                 </div>
                 <div class="col-span-3">
-                    <input name='position_rendered' value="{{$position}}" class='bg-white  border border-gray-300 text-gray-900  rounded-lg  p-2.5   dark:placeholder-gray-400  block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input' type='text'>
+                    <input name='position_rendered' value="{{$position}}" class='bg-white bg-inherit  border border-gray-300 text-gray-900  rounded-lg  p-2.5   dark:placeholder-gray-400  block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input' type='text'>
                 </div>
 
                 <div class="col-span-3">
