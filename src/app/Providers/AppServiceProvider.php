@@ -51,12 +51,13 @@ class AppServiceProvider extends ServiceProvider
             $result = '#' . substr($numberRender, 0, 3) . '.' . substr($numberRender, 3, 6);
             return $result;
         });
-        Str::macro('limitWords', function (string $str, $count) {
+        Str::macro('limitWords', function (string $str, $count, $maxLen = 50) {
             $i = $c = 0;
             while ($i < strlen($str)) {
                 if ($str[$i] === ' ' && ++$c === $count) return substr($str, 0, $i) . " ...";
                 $i++;
             }
+            if (strlen($str) > $maxLen) $str = substr($str, 0, $maxLen) . " ...";
             return $str;
         });
         Arr::macro('moveDirection', function ($json, $direction, $index, $name = null) {
