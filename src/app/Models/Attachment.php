@@ -18,7 +18,7 @@ class Attachment extends Model
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],
         "getCategory" => ['belongsTo', Attachment_category::class, 'category'],
-        "mediable" => ['morphTo'],
+        "mediable" => ['morphTo', 'mediable', 'object_type', 'object_id'],
     ];
 
     public function user()
@@ -36,7 +36,7 @@ class Attachment extends Model
     public function mediable()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}();
+        return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
 
     public function toSearchableArray()

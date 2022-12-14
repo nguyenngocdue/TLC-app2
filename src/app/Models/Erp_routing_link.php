@@ -17,6 +17,7 @@ class Erp_routing_link extends Model
     public $eloquentParams = [
         "prodRoutingDetails" => ["hasMany", Prod_routing_detail::class, "erp_routing_link_id"]
     ];
+
     public function prodRoutingDetails()
     {
         $p = $this->eloquentParams[__FUNCTION__];

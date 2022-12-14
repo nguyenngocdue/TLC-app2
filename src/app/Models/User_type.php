@@ -8,20 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Illuminate\Notifications\Notifiable;
 
-
 class User_type extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["name", "description", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'user_types';
-    // protected $with = [
-    //     'user',
-    // ];
 
     public $eloquentParams = [
         "user" => ['hasMany', User::class, 'user_type', 'id'],
     ];
+
     public function user()
     {
         $p = $this->eloquentParams[__FUNCTION__];

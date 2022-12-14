@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Illuminate\Notifications\Notifiable;
 
-
 class Sub_project extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities, HasStatus;
@@ -21,11 +20,13 @@ class Sub_project extends Model
     public $eloquentParams = [
         "prodOrders" => ['hasMany', Prod_order::class],
     ];
+
     public function prodOrders()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1]);
     }
+
     public function toSearchableArray()
     {
         return [

@@ -38,21 +38,6 @@ class User extends Authenticatable implements LdapAuthenticatable
     protected $hidden = ["password", "remember_token"];
 
     protected $touches = [];
-    // protected $with = [
-    // "media",
-    // "posts",
-    // "getWorkplaces",
-    // "userTypes",
-    // "categories",
-    // "positionPres",
-    // "position1",
-    // "position2",
-    // "position3",
-    // "disciplines",
-    // "departments",
-    // "time_keep_types",
-    // "productionRunLines",
-    // ];
 
     /**
      * The attributes that should be cast.
@@ -76,7 +61,6 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     public $eloquentParams = [
         "mediable" => ['morphMany', Attachment::class, 'mediable', 'object_type', 'object_id'],
-        // "media" => ['hasMany', Attachment::class, 'owner_id', 'id'],
         "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
         "getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
         "userTypes" => ['belongsTo', User_type::class, 'user_type'],
@@ -97,7 +81,6 @@ class User extends Authenticatable implements LdapAuthenticatable
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-        // return $this->morphMany(Attachment::class, 'mediable', 'object_type', 'object_id');
     }
 
     public function posts()

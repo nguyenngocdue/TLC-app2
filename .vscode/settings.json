@@ -11,6 +11,7 @@
     "onhold",
     "Renderable",
     "tmpls",
-    "Toastr"
+    "Toastr",
+    "zunit"
   ]
 }

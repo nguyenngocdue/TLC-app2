@@ -11,7 +11,10 @@ use Laravel\Scout\Searchable;
 class Prod_routing_detail extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
-    protected $fillable = ["prod_routing_id", "prod_routing_link_id", "erp_routing_id", "wir_description_id", "target_hours", "target_man_hours"];
+    protected $fillable = [
+        "prod_routing_id", "prod_routing_link_id", "erp_routing_id",
+        "wir_description_id", "target_hours", "target_man_hours",
+    ];
     protected $table = "prod_routing_details";
 
     public $eloquentParams = [
@@ -26,16 +29,19 @@ class Prod_routing_detail extends Model
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function prodRoutingLink()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function erpRoutingLink()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function wirDescription()
     {
         $p = $this->eloquentParams[__FUNCTION__];

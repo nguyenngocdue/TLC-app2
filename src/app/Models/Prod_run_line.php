@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Illuminate\Notifications\Notifiable;
 
-
 class Prod_run_line extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
@@ -21,6 +20,7 @@ class Prod_run_line extends Model
         "users" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_run_line_id', 'user_id'],
         "prodRun" => ['belongsTo', Prod_run::class, 'prod_run_id'],
     ];
+
     public function users()
     {
         $p = $this->eloquentParams[__FUNCTION__];

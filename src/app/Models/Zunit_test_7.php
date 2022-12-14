@@ -19,12 +19,10 @@ class Zunit_test_7 extends Model
         "comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
 
-
     public function comments()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-        // return $this->morphMany(Comment::class, 'commentable', 'commentable_type', 'commentable_id');
     }
 
     public function media()

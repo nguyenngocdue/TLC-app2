@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Illuminate\Notifications\Notifiable;
 
-
 class Prod_order extends Model
 {
     use Notifiable, HasFactory, Searchable, CheckPermissionEntities, HasStatus;
@@ -20,11 +19,6 @@ class Prod_order extends Model
     ];
     protected $primaryKey = 'id';
     protected $table = 'prod_orders';
-    // protected $with = [
-    //     "subProject",
-    //     "routing",
-    //     "productionRuns",
-    // ];
 
     public $eloquentParams = [
         "prodRuns" => ['hasMany', Prod_run::class, 'prod_order_id'],
@@ -32,6 +26,7 @@ class Prod_order extends Model
         "prodRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
         "qaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'prod_order_id'],
     ];
+
     public function subProject()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -49,6 +44,7 @@ class Prod_order extends Model
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function qaqcInspChklsts()
     {
         $p = $this->eloquentParams[__FUNCTION__];
