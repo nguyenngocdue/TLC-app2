@@ -24,7 +24,6 @@ $id = $action === "edit" ? $values->id : "";
         @php
         if ($action === "create" && $value['control'] === 'relationship_renderer') continue;
         $label = $value['label'];
-        $col_span = $value['col_span'];
         $column_name = $value['column_name'];
         $column_type = $value['column_type'];
         $control = $value['control'];
@@ -32,7 +31,7 @@ $id = $action === "edit" ? $values->id : "";
         $value_column_name = $action === "edit" ? $values->{$column_name} :'';
         // dd($values->getAttributes()['settings']);
 
-        $col_span = $value['col_span'];
+        $col_span = $value['col_span'] === '' ? 1 : $value['col_span']*1;
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
 
         $isRequired = in_array("required", explode("|",$value['validation']));

@@ -142,7 +142,6 @@ abstract class CreateEditController extends Controller
 		$dataInput = $request->except($arrayExcept);
 
 		$this->deleteMediaIfNeeded($dataInput);
-		// dd($dataInput);
 		$idsMedia = $this->saveAndGetIdsMedia($request, $dataInput);
 		$this->setMediaParent($data, $colNamesHaveAttachment);
 
@@ -160,6 +159,7 @@ abstract class CreateEditController extends Controller
 		$newDataInput = $this->handleToggle('update', $props, $dataInput);
 		$newDataInput = $this->handleTextArea($props, $newDataInput);
 
+		// dd($dataInput);
 		$idsComment = $this->saveAndGetIdsComments($newDataInput);
 		$this->setCommentsParent($idsComment, $data);
 		$this->setMediaCommentsParent($idsComment, $idsMedia);
