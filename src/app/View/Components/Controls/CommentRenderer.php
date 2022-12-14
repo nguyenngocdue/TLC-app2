@@ -23,7 +23,8 @@ class CommentRenderer extends Component
         private $colName = '',
         private $action,
         private $readonly = true,
-        private $labelName = ''
+        private $labelName = '',
+        private $destroyable = true,
     ) {
     }
 
@@ -39,6 +40,7 @@ class CommentRenderer extends Component
         $type = $this->type;
         $action = $this->action;
         $labelName = $this->labelName;
+        $showToBeDeleted =  env('APP_ENV')  === 'local';
 
         $idNameCatesDB = Helper::getDataDbByName('attachment_categories', 'id', 'name');
 
@@ -49,7 +51,6 @@ class CommentRenderer extends Component
                 "owner_id" => Auth::user()->id,
                 "created_at" => date_format(date_create(), "d/m/Y H:i:s"),
                 'readonly' => false,
-                'btnUpload' => true,
             ]
         ];
 
@@ -73,6 +74,7 @@ class CommentRenderer extends Component
             $dataComment = array_merge($array, $dataComment);
         }
         // dump($dataComment);
+        // dump($this->destroyable);
         return view('components.controls.comment-renderer', [
             "id" => $id,
             "name" => $name,
@@ -80,6 +82,8 @@ class CommentRenderer extends Component
             'labelName' => $labelName,
             "action" => $action,
             "dataComment" => $dataComment,
+            'destroyable' => $this->destroyable,
+            'showToBeDeleted' => $showToBeDeleted,
         ]);
     }
 }

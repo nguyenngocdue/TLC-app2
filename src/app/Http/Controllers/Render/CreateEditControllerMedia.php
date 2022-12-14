@@ -52,8 +52,10 @@ trait CreateEditControllerMedia
         $cateAttachment = DB::table('attachment_categories')->select('id', 'name')->get();
         $keyMediaDel = [];
         foreach ($cateAttachment as $value) {
-            if (isset($dataInput[$value->name . "_deleted"])) {
-                $idsDelete = explode(',', $dataInput[$value->name . "_deleted"]);
+            if (isset($dataInput["attachment_deleted_" . $value->name])) {
+                // dd($dataInput, $value->name);
+                $idsDelete = explode(',', $dataInput["attachment_deleted_" . $value->name]);
+                // dd($value->name, $idsDelete);
                 foreach ($idsDelete as $value) {
                     $media = Attachment::find($value);
                     Storage::disk('s3')->delete($media->getAttributes()['url_thumbnail']);
@@ -68,8 +70,9 @@ trait CreateEditControllerMedia
 
     private function saveAndGetIdsMedia($request, $dataInput)
     {
+        // dd($dataInput);
         foreach (array_keys($dataInput) as $key) {
-            if (str_contains($key, '_deleted')) {
+            if (str_contains($key, 'attachment_deleted_')) {
                 return $this->handleUpload($request);
             }
         }

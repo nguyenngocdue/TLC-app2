@@ -1,13 +1,13 @@
+{{-- @dump($attachmentData, $colName) --}}
 <div class="flex flex-col">
     @if ($action === "edit" || $action === "create")
-    <div class="grid grid-cols-5 gap-4 mb-1 p-1 bg-white border rounded-lg ">
+    <div class="grid grid-cols-5 gap-4 mb-1 p-1 ">
         @if(isset($attachmentData[$colName]))
         @foreach($attachmentData as $key => $attachs)
-
         @if ($key === $colName )
         @foreach($attachs as $media)
-
-        <div name='{{$attCategory}}' class=" relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg border-gray-300 group/item overflow-hidden bg-white ">
+        {{-- @dd($media) --}}
+        <div name='{{$attCategory}}' class=" relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg border-gray-300 group/item overflow-hidden  bg-inherit ">
             <span>
                 <img class="border  border-gray-300 rounded-md h-full w-full object-cover hover:bg-slate-100" src="{{ $path.$media['url_thumbnail']}}" alt="{{$media['filename']}}" />
                 <svg fill="#d11a2a" id="showpic_deleted_{{$media['id']}}" class="hidden absolute  top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 105.16 122.88">
@@ -25,40 +25,32 @@
             </span>
             <div class=" invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible   before:absolute before:-inset-1  before:bg-[#00000080]">
                 <a title="{{$media['filename']}}" href="{{$path.$media['url_media']}}" target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">{{$media['filename']}}</a>
-
-                {{-- @dump($readonly) --}}
+                {{-- @dump($media, $colName) --}}
                 @if($destroyable)
-                <button type="button" onclick="updateTextbox({{$media['id']}}, '{{$colName}}_deleted')" class="w-10 h-10  m-auto  hover:bg-slate-300 rounded-full  absolute bottom-[10%] text-[25px]">
+                <button type="button" onclick="updateTxtboxAttachment({{$media['id']}}, 'attachment_deleted_{{$colName}}')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
                     <i class=" text-[#d11a2a] fas fa-trash  cursor-pointer"></i>
                 </button>
                 @endif
-
             </div>
         </div>
         @endforeach
         @endif
         @endforeach
         @else
-        <span class="block w-full text-sm text-blue-500 p-2.5   dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">No file selected</span>
+        {{-- <span class="block w-full text-sm text-blue-500 p-2.5   dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">No file selected</span> --}}
         @endif
     </div>
     @endif
-
-    @if($showToBeDeleted)
-    <input id="{{$colName}}_deleted" name="{{$colName}}_deleted" {{-- type="hidden" --}} value="" class=' p-2.5  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type='text'>
-    @endif
-
-    @if(!$readonly)
-    <input multiple class="block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " id="multiple_files" type="file" name="{{$colName}}[]">
-    @endif
-
+    <input id="attachment_deleted_{{$colName}}" name="attachment_deleted_{{$colName}}" type="text" value="" class=' {{ $showToBeDeleted ? '' : 'hidden'}} p-2.5  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type='text'>
+    <input name="{{$colName}}[]" multiple id="multiple_files" type="file" class="{{$readonly ? 'hidden' : ''}} block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 ">
 </div>
 @include('components.feedback.alertValidation')
 
 <script type="text/javascript">
     var objColName = {};
 
-    function updateTextbox(id, colName) {
+    function updateTxtboxAttachment(id, colName) {
+        console.log(colName, id, 123)
         var binIcon = document.getElementById("showpic_deleted_" + id)
 
         if (!Object.keys(objColName).includes(colName)) {
