@@ -28,7 +28,7 @@ class SmartAttachment extends Component
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         return view('components.renderer.smart-attachment', [
             'readonly' => $this->readonly,
-            'destroyable' => $this->destroyable,
+            'destroyable' => (bool)$this->destroyable,
             'attCategory' => $this->attCategory,
             'showToBeDeleted' => $this->showToBeDeleted,
             'colName' => $this->colName,

@@ -12,7 +12,7 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
 <div id="fillColor_{{$data['id']}}" class="p-4 bg-gray-250 border rounded-lg shadow-md">
     {{-- @dump($data, $destroyable) --}}
     <div class="grid grid-cols-12 gap-2 flex-nowrap ">
-        <div class="col-span-{{$destroyable ? "11": "12"}} flex-nowrap ">
+        <div class="col-span-11 flex-nowrap ">
             <div class="grid grid-cols-12 gap-2 flex-nowrap ">
                 <div class="col-span-4">
                     <div class="border bg-[#f5f5f5]  rounded-lg w-full border-gray-300 p-1 ">
@@ -46,7 +46,7 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
         </div>
         @if($destroyable)
         <div class="col-span-1 m-auto text-center ">
-            <button type="button" onclick="updateTextbox({{$data['id']}}, 'comment__deleted_{{$data['id']}}')" class=" w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
+            <button type="button" onclick="updateTxtboxComment({{$data['id']}}, 'comment__deleted_{{$data['id']}}')" class=" w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
                 <i class=" text-[#d11a2a] fas fa-trash  cursor-pointer"></i>
             </button>
             <input id="comment__deleted_{{$data['id']}}" name="comment__deleted_{{$data['id']}}" value="" class=' {{$showToBeDeleted ? "" : "hidden"}} p-2.5 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type='text'>
@@ -60,7 +60,7 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
 <script type="text/javascript">
     var objColName = {};
 
-    function updateTextbox(id, commentDel) {
+    function updateTxtboxComment(id, commentDel) {
 
         var fillColor = document.getElementById("fillColor_" + id)
         console.log(fillColor)
