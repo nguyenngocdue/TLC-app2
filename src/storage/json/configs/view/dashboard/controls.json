@@ -22,15 +22,15 @@
         "status",
         "text",
         "textarea",
-        "link"
+        "thumbnail"
     ],
     "renderer_view_all": [
         "",
-        "attachment",
         "avatar_name",
         "column",
         "count",
-        "link_morph_to"
+        "link_morph_to",
+        "thumbnail"
     ],
     "renderer_edit": [
         "",
@@ -51,6 +51,7 @@
         "hasOne",
         "hasManyThrough",
         "morphTo",
+        "morphMany",
         "belongsTo"
     ]
 }

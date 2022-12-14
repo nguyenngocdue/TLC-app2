@@ -2,7 +2,7 @@
     "_media": {
         "name": "_media",
         "relationship": "morphMany",
-        "renderer_view_all": "",
+        "renderer_view_all": "thumbnail",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",

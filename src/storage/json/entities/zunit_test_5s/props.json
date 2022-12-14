@@ -119,9 +119,9 @@
     "_media": {
         "name": "_media",
         "column_name": "media",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "ELQ(morphMany)",
         "label": "Thumbnail",
-        "control": "",
+        "control": "thumbnail",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "true",

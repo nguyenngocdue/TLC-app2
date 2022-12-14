@@ -1,0 +1,38 @@
+<?php
+
+namespace App\View\Components\Renderer;
+
+use Illuminate\View\Component;
+
+class Image extends Component
+{
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+    public function __construct(
+        private $src = 'https://yt3.ggpht.com/yti/AJo0G0mGVpeYCc76oGrml6uLrfwfVriSPfY0s1cF11FJOw=s108-c-k-c0x00ffffff-no-rj',
+        private $href = null,
+        private $w = null,
+        private $h = null,
+        private $title = null,
+    ) {
+        //
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
+     */
+    public function render()
+    {
+        $w = $this->w ? "width='$this->w'" : "";
+        $h = $this->h ? "height='$this->h'" : "";
+        $title = $this->title ? "title='$this->title'" : "";
+        $img = "<img $title $w $h class='rounded-lg object-cover border mr-1' src='$this->src'/>";
+        if ($this->href) $img = "<a class='' href='$this->href'>$img</a>";
+        return $img;
+    }
+}
