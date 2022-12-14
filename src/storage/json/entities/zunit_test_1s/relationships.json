@@ -2,37 +2,45 @@
     "_workplaceDropDown1": {
         "name": "_workplaceDropDown1",
         "relationship": "belongsTo",
+        "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": ""
     },
     "_workplaceRadio1": {
         "name": "_workplaceRadio1",
         "relationship": "belongsTo",
+        "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "qaqc_insp_control_group_id",
+        "filter_values": "1"
     },
     "_workplaceRel1": {
         "name": "_workplaceRel1",
         "relationship": "belongsToMany",
+        "control_name": "workplaceRel1",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": "workplaceRel1"
+        "filter_columns": "",
+        "filter_values": ""
     },
     "_workplaceRel2": {
         "name": "_workplaceRel2",
         "relationship": "belongsToMany",
+        "control_name": "workplaceRel2",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": "workplaceRel2"
+        "filter_columns": "",
+        "filter_values": ""
     }
 }

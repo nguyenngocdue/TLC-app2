@@ -41,6 +41,11 @@ abstract class ManageRelationshipController extends Controller
                 "editable" => true,
             ],
             [
+                "dataIndex" => "control_name",
+                "editable" => true,
+                "renderer" => "text",
+            ],
+            [
                 "dataIndex" => "renderer_view_all",
                 "editable" => true,
                 "renderer" => "dropdown",
@@ -63,7 +68,12 @@ abstract class ManageRelationshipController extends Controller
                 "renderer" => "text",
             ],
             [
-                "dataIndex" => "control_name",
+                "dataIndex" => "filter_columns",
+                "editable" => true,
+                "renderer" => "text",
+            ],
+            [
+                "dataIndex" => "filter_values",
                 "editable" => true,
                 "renderer" => "text",
             ],

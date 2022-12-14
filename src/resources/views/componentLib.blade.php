@@ -6,9 +6,14 @@
 <x-renderer.card title="Feedback">
     <div class="grid gap-6 mb-8 md:grid-cols-2 ">
 
-        <x-renderer.card title="Attachment">
-            <x-renderer.smart-attachment readonly={{true}} destroyable={{true}} attCategory="1" showToBeDeleted={{true}} :attachmentData="$attachmentData" />
-            <x-renderer.smart-attachment readonly={{false}} destroyable={{false}} attCategory="1" showToBeDeleted={{false}} :attachmentData="$attachmentData" />
+        <x-renderer.card title="Attachments">
+            <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }">
+                <x-renderer.smart-attachment readonly={{true}} destroyable={{true}} attCategory="1" showToBeDeleted={{true}} :attachmentData="$attachmentData" />
+            </x-renderer.card>
+            <br/>
+            <x-renderer.card title="readonly = { { false} }, destroyable = { { false} }, showToBeDeleted = { { false} } ">
+                <x-renderer.smart-attachment readonly={{false}} destroyable={{false}} attCategory="1" showToBeDeleted={{false}} :attachmentData="$attachmentData" />
+            </x-renderer.card>
         </x-renderer.card>
 
 

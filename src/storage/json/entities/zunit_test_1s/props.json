@@ -51,6 +51,19 @@
         "validation": "",
         "formula": ""
     },
+    "_boolean1": {
+        "name": "_boolean1",
+        "column_name": "boolean1",
+        "column_type": "bigint",
+        "label": "Boolean",
+        "control": "switch",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
     "_dropdown1": {
         "name": "_dropdown1",
         "column_name": "dropdown1",
@@ -77,17 +90,30 @@
         "validation": "required",
         "formula": ""
     },
-    "_boolean1": {
-        "name": "_boolean1",
-        "column_name": "boolean1",
-        "column_type": "bigint",
-        "label": "Boolean",
-        "control": "switch",
+    "_workplaceRel2": {
+        "name": "_workplaceRel2",
+        "column_name": "workplaceRel2",
+        "column_type": "ELQ(belongsToMany)",
+        "label": "Dropdown (Multiple)",
+        "control": "dropdown_multi",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
+        "formula": ""
+    },
+    "_workplaceRel1": {
+        "name": "_workplaceRel1",
+        "column_name": "workplaceRel1",
+        "column_type": "ELQ(belongsToMany)",
+        "label": "Checkbox",
+        "control": "checkbox",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "required",
         "formula": ""
     },
     "_created_at": {
@@ -114,32 +140,6 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formula": ""
-    },
-    "_workplaceRel1": {
-        "name": "_workplaceRel1",
-        "column_name": "workplaceRel1",
-        "column_type": "ELQ(belongsToMany)",
-        "label": "Checkbox",
-        "control": "checkbox",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
-    },
-    "_workplaceRel2": {
-        "name": "_workplaceRel2",
-        "column_name": "workplaceRel2",
-        "column_type": "ELQ(belongsToMany)",
-        "label": "Dropdown (Multiple)",
-        "control": "dropdown_multi",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
         "formula": ""
     }
 }
