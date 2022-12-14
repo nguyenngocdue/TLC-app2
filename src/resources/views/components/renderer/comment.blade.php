@@ -11,7 +11,7 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
 
 <div id="fillColor_{{$data['id']}}" class="p-4 bg-gray-250 border rounded-lg shadow-md">
     {{-- @dump($data, $destroyable) --}}
-    <div class="grid grid-cols-12 gap-2 flex-nowrap ">
+    <div class="grid grid-cols-12 gap-2 flex-nowrap group/item ">
         <div class="col-span-11 flex-nowrap ">
             <div class="grid grid-cols-12 gap-2 flex-nowrap ">
                 <div class="col-span-4">
@@ -45,7 +45,7 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
             </div>
         </div>
         @if($destroyable)
-        <div class="col-span-1 m-auto text-center ">
+        <div class="col-span-1 m-auto text-center invisible group-hover/item:visible  ">
             <button type="button" onclick="updateTxtboxComment({{$data['id']}}, 'comment__deleted_{{$data['id']}}')" class=" w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
                 <i class=" text-[#d11a2a] fas fa-trash  cursor-pointer"></i>
             </button>
@@ -55,6 +55,8 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
 
     </div>
 </div>
+
+{{-- @include('components.feedback.alertValidation') --}}
 
 
 <script type="text/javascript">

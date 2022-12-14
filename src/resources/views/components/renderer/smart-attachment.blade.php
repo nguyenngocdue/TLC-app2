@@ -1,7 +1,7 @@
 {{-- @dump($attachmentData, $colName) --}}
 <div class="flex flex-col">
     @if ($action === "edit" || $action === "create")
-    <div class="grid grid-cols-5 gap-4 mb-1 p-1 ">
+    <div class="grid grid-cols-5 gap-4 mb-1 p-1  {{count($attachmentData) < 1 ? "hidden" : ""}}">
         @if(isset($attachmentData[$colName]))
         @foreach($attachmentData as $key => $attachs)
         @if ($key === $colName )
@@ -42,7 +42,7 @@
     </div>
     @endif
     <input id="attachment_deleted_{{$colName}}" name="attachment_deleted_{{$colName}}" type="text" value="" class=' {{ $showToBeDeleted ? '' : 'hidden'}} p-2.5  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type='text'>
-    <input name="{{$colName}}[]" multiple id="multiple_files" type="file" class="{{$readonly ? 'hidden' : ''}} block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 ">
+    <input name="{{$colName}}[]" multiple id="multiple_files" type="file" class="{{$readonly ? 'hidden' : ''}} block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-white cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 ">
 </div>
 @include('components.feedback.alertValidation')
 
