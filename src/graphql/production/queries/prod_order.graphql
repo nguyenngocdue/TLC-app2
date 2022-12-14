@@ -14,6 +14,7 @@ type Prod_order {
     compliance: String!
     description: String
     quantity: Int
+    status: String
     sub_project_id: Int!
     prod_routing_id: Int
     created_at: DateTime
@@ -31,6 +32,7 @@ input CreateProdOrderInput {
     compliance: String!
     description: String
     quantity: Int
+    status: String
     sub_project_id: Int!
     prod_routing_id: Int
     created_at: DateTime
@@ -44,6 +46,7 @@ input UpdateProdOrderInput {
     compliance: String
     description: String
     quantity: Int
+    status: String
     sub_project_id: Int
     prod_routing_id: Int
     created_at: DateTime

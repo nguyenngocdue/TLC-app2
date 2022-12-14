@@ -15,7 +15,7 @@ class Prod_order extends Model
     public $timestamps = true;
     protected $fillable = [
         "id", "slug", "name", "status", "production", "compliance", "description", "quantity",
-        "sub_project_id", "prod_routing_id"
+        "sub_project_id", "prod_routing_id", "status"
     ];
     protected $primaryKey = 'id';
     protected $table = 'prod_orders';
