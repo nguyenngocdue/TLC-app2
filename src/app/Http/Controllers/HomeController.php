@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Workflow\Statuses;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_line;
+use App\Models\Qaqc_insp_sheet;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
@@ -59,6 +60,7 @@ class HomeController extends Controller
 
 
         );
+        dd(Qaqc_insp_sheet::find(1)->getChklstLines->where('qaqc_insp_chklst_id', 1));
         // dump(array_merge($array['websites'], $array['friends']));
         dd(array_shift($array));
         dump(array_pop($array));
