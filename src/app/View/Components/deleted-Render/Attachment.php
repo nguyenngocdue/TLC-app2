@@ -11,6 +11,7 @@ class Attachment extends Component
     {
     }
 
+
     public function render()
     {
         $dataModel = App::make($this->model)::find($this->attachment)->{$this->relationship};
