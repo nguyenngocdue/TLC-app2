@@ -1,0 +1,90 @@
+{
+    "_radioYesNo": {
+        "name": "_radioYesNo",
+        "relationship": "belongsTo",
+        "control_name": "Radio_Yes\/No",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "qaqc_insp_control_group_id",
+        "filter_values": "1"
+    },
+    "_radioPassFail": {
+        "name": "_radioPassFail",
+        "relationship": "belongsTo",
+        "control_name": "Radio_Pass\/Fail",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "qaqc_insp_control_group_id",
+        "filter_values": "2"
+    },
+    "_dropdownYesNo": {
+        "name": "_dropdownYesNo",
+        "relationship": "belongsTo",
+        "control_name": "Dropdown_Yes\/No",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "qaqc_insp_control_group_id",
+        "filter_values": "1"
+    },
+    "_dropdownPassFail": {
+        "name": "_dropdownPassFail",
+        "relationship": "belongsTo",
+        "control_name": "Dropdown_Pass\/Fail",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "qaqc_insp_control_group_id",
+        "filter_values": "2"
+    },
+    "_checkboxYesNo": {
+        "name": "_checkboxYesNo",
+        "relationship": "belongsToMany",
+        "control_name": "checkboxYesNo",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "qaqc_insp_control_group_id",
+        "filter_values": "1"
+    },
+    "_checkboxPassFail": {
+        "name": "_checkboxPassFail",
+        "relationship": "belongsToMany",
+        "control_name": "checkboxPassFail",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "qaqc_insp_control_group_id",
+        "filter_values": "2"
+    },
+    "_dropdownMultiYesNo": {
+        "name": "_dropdownMultiYesNo",
+        "relationship": "belongsToMany",
+        "control_name": "dropdownMultiYesNo",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "qaqc_insp_control_group_id",
+        "filter_values": "1"
+    },
+    "_dropdownMultiPassFail": {
+        "name": "_dropdownMultiPassFail",
+        "relationship": "belongsToMany",
+        "control_name": "dropdownMultiPassFail",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "qaqc_insp_control_group_id",
+        "filter_values": "2"
+    }
+}

@@ -17,8 +17,9 @@ class Dropdown extends Component
         $colName = $this->colName;
         $labelName = $this->labelName;
         $modelPath = $this->tablePath;
+        $type = $this->type;
 
-        $dataSource = Helper::getDataSource($modelPath, $colName);
+        $dataSource = Helper::getDataSource($modelPath, $colName, $type);
         $currentEntity = is_null($modelPath::find($this->id)) ? "" : $modelPath::find($this->id)->getAttributes();
 
         if (is_null($dataSource) || gettype($dataSource) === 'string') {

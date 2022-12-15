@@ -21,10 +21,6 @@ return new class extends Migration
             $table->unsignedBigInteger('Radio_Pass/Fail');
             $table->unsignedBigInteger('Dropdown_Yes/No');
             $table->unsignedBigInteger('Dropdown_Pass/Fail');
-            $table->unsignedBigInteger('Checkbox_Yes/No');
-            $table->unsignedBigInteger('Checkbox_Pass/Fail');
-            $table->unsignedBigInteger('Dropdown-multi_Yes/No');
-            $table->unsignedBigInteger('Dropdown-multi_Pass/Fail');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
