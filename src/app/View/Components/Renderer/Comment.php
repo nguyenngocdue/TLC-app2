@@ -41,13 +41,20 @@ class Comment extends Component
         $type = $this->type;
         $action = $this->action;
         $id = $this->id;
-        $data = $this->dataComment + ['readonly' => (bool)$this->readonly];
-        $user = User::find($data['owner_id']);
         $labelName = $this->labelName;
         $destroyable = $this->destroyable;
+        $tempData =
+            [
+                "id" => 0,
+                "content" => "Not found data",
+                "owner_id" => Auth::user()->id,
+                "created_at" => date_format(date_create(), "d/m/Y H:i:s"),
+                'readonly' => false,
+            ];
+        $data = !count($this->dataComment) ? $tempData : $this->dataComment + ['readonly' => (bool)$this->readonly];
+        $user =  User::find($data['owner_id']);
 
         $commentUser = ModelsComment::find($data['id']);
-
         $attachmentData = [];
         if (!is_null($commentUser)) {
             $attachmentData = [$name => $commentUser->media()->get()->toArray()];

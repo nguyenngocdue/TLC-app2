@@ -84,7 +84,7 @@ abstract class CreateEditController extends Controller
 
 		$dataInput = $this->apply_formula($dataInput, $this->type);
 
-		// dd($dataInput);
+		dump($dataInput);
 
 		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');
 		$request->merge($dataInput + $comments);
@@ -140,6 +140,7 @@ abstract class CreateEditController extends Controller
 		$colNamesHaveAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamesHaveAttachment);
 		$dataInput = $request->except($arrayExcept);
+		// dd($dataInput);
 
 		$this->deleteMediaIfNeeded($dataInput);
 		$idsMedia = $this->saveAndGetIdsMedia($request, $dataInput);
@@ -149,7 +150,6 @@ abstract class CreateEditController extends Controller
 
 		$this->delComments($dataInput);
 
-		// dd($dataInput);
 
 
 		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');

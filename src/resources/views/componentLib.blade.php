@@ -7,24 +7,42 @@
     <div class="grid gap-6 mb-8 md:grid-cols-2 ">
 
         <x-renderer.card title="Attachments">
-            <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }">
-                <x-renderer.smart-attachment readonly={{true}} destroyable={{true}} attCategory="1" showToBeDeleted={{true}} :attachmentData="$attachmentData" />
-            </x-renderer.card>
-            <br/>
-            <x-renderer.card title="readonly = { { false} }, destroyable = { { false} }, showToBeDeleted = { { false} } ">
-                <x-renderer.smart-attachment readonly={{false}} destroyable={{false}} attCategory="1" showToBeDeleted={{false}} :attachmentData="$attachmentData" />
-            </x-renderer.card>
+            @dump($_GET)
+            <form action="" method="GET">
+                <x-renderer.card title="attachmentData = [[]], not entering other attributes.  ">
+                    <x-renderer.smart-attachment :attachmentData="[]" />
+                </x-renderer.card>
+                <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }">
+                    <x-renderer.smart-attachment readonly={{true}} destroyable={{true}} showToBeDeleted={{true}} :attachmentData="$attachmentData" />
+                </x-renderer.card>
+                <br />
+                <x-renderer.card title="readonly = { { false} }, destroyable = { { false} }, showToBeDeleted = { { false} } attCategory=attachment_2 ">
+                    <x-renderer.smart-attachment readonly={{false}} destroyable={{false}} attCategory="attachment_2" showToBeDeleted={{false}} :attachmentData="$attachmentData" />
+                </x-renderer.card>
+                <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
+            </form>
         </x-renderer.card>
 
 
         <x-renderer.card title="Comment">
             @dump($_GET)
             <form action="" method="GET">
-                <x-renderer.comment name="comment_1" type="department" id="1" readonly={{true}} :dataComment="$dataComment" destroyable={{true}} showToBeDeleted={{true}}></x-renderer.comment>
-                <x-renderer.comment name="comment_2" type="department" id="1" readonly={{false}} :dataComment="$dataComment"></x-renderer.comment>
+                <x-renderer.card title="dataComment=[], not entering other attributes.">
+                    <x-renderer.comment :dataComment="[]"></x-renderer.comment>
+                </x-renderer.card>
+                <br />
+                <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }">
+                    <x-renderer.comment readonly={{true}} destroyable={{true}} showToBeDeleted={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment"></x-renderer.comment>
+                </x-renderer.card>
+                <br />
+                <x-renderer.card title="readonly={ {false} }, destroyable={ {false} }, showToBeDeleted={ {false} }">
+                    <x-renderer.comment readonly={{false}} destroyable={{false}} showToBeDeleted={{false}} name="comment_2" type="department" id="1" :dataComment="$dataComment"></x-renderer.comment>
+                </x-renderer.card>
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
             </form>
         </x-renderer.card>
+
+
 
         <x-renderer.card title="Grids">
             Grid colSpan=4 itemRenderer=x-renderer.avatar-name
@@ -33,7 +51,7 @@
             Grid colSpan=4 itemRenderer=x-renderer.avatar-name groupBy=name
             <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name" groupBy="name"></x-renderer.grid>
         </x-renderer.card>
-        
+
         <x-renderer.card title="Images">
             <x-renderer.image title='A customizable title'></x-renderer.image>
             <x-renderer.image w=40 title='Width: 40'></x-renderer.image>
