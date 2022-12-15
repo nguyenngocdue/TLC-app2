@@ -12,11 +12,11 @@
         "validation": "",
         "formula": ""
     },
-    "_text": {
-        "name": "_text",
-        "column_name": "text",
+    "_content": {
+        "name": "_content",
+        "column_name": "content",
         "column_type": "text",
-        "label": "Text",
+        "label": "Content",
         "control": "text",
         "col_span": "12",
         "hidden_view_all": "",

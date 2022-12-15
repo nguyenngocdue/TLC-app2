@@ -11,9 +11,8 @@ class SmartAttachment extends Component
     public function __construct(
         private  $readonly = false,
         private $destroyable = false,
-        private $attCategory = '',
+        private $attCategory = 'attachment_1',
         private $showToBeDeleted = false,
-        private $colName = 'attachment_1',
         private $action = 'edit',
         private $labelName = '',
         private $attachmentData = [],
@@ -31,7 +30,6 @@ class SmartAttachment extends Component
             'destroyable' => (bool)$this->destroyable,
             'attCategory' => $this->attCategory,
             'showToBeDeleted' => $this->showToBeDeleted,
-            'colName' => $this->colName,
             'action' => $this->action,
             'labelName' =>  $this->labelName,
             'path' => $path,

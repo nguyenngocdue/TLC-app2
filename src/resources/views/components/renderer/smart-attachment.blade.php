@@ -2,11 +2,12 @@
 <div class="flex flex-col">
     @if ($action === "edit" || $action === "create")
     <div class="grid grid-cols-5 gap-4 mb-1 p-1  {{count($attachmentData) < 1 ? "hidden" : ""}}">
-        @if(isset($attachmentData[$colName]))
+        @if(isset($attachmentData[$attCategory]))
         @foreach($attachmentData as $key => $attachs)
-        @if ($key === $colName )
+        @if ($key === $attCategory )
         @foreach($attachs as $media)
-        {{-- @dd($media) --}}
+        {{-- @dd($attachs, $media) --}}
+        {{-- @dump($media, $attCategory) --}}
         <div name='{{$attCategory}}' class=" relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg border-gray-300 group/item overflow-hidden  bg-inherit ">
             <span>
                 <img class="border  border-gray-300 rounded-md h-full w-full object-cover hover:bg-slate-100" src="{{ $path.$media['url_thumbnail']}}" alt="{{$media['filename']}}" />
@@ -25,9 +26,9 @@
             </span>
             <div class=" invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible   before:absolute before:-inset-1  before:bg-[#00000080]">
                 <a title="{{$media['filename']}}" href="{{$path.$media['url_media']}}" target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">{{$media['filename']}}</a>
-                {{-- @dump($media, $colName) --}}
+                {{-- @dump($media, $attCategory) --}}
                 @if($destroyable)
-                <button type="button" onclick="updateTxtboxAttachment({{$media['id']}}, 'attachment_deleted_{{$colName}}')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
+                <button type="button" onclick="updateTxtboxAttachment({{$media['id']}}, 'attachment_deleted_{{$attCategory}}')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
                     <i class=" text-[#d11a2a] fas fa-trash  cursor-pointer"></i>
                 </button>
                 @endif
@@ -41,33 +42,33 @@
         @endif
     </div>
     @endif
-    <input id="attachment_deleted_{{$colName}}" name="attachment_deleted_{{$colName}}" type="text" value="" class=' {{ $showToBeDeleted ? '' : 'hidden'}} p-2.5  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type='text'>
-    <input name="{{$colName}}[]" multiple id="multiple_files" type="file" class="{{$readonly ? 'hidden' : ''}} block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-white cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 ">
+    <input id="attachment_deleted_{{$attCategory}}" name="attachment_deleted_{{$attCategory}}" type="text" value="" readonly class=' {{ $showToBeDeleted ? '' : 'hidden'}} p-2.5   bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray ' type='text'>
+    <input name="{{$attCategory}}[]" multiple id="multiple_files" type="file" class="{{$readonly ? 'hidden' : ''}} block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-white cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 ">
 </div>
-@include('components.feedback.alertValidation')
+{{-- @include('components.feedback.alertValidation') --}}
 
 <script type="text/javascript">
     var objColName = {};
 
-    function updateTxtboxAttachment(id, colName) {
-        console.log(colName, id, 123)
+    function updateTxtboxAttachment(id, attCategory) {
+        console.log(attCategory, id, 123)
         var binIcon = document.getElementById("showpic_deleted_" + id)
 
-        if (!Object.keys(objColName).includes(colName)) {
-            objColName[colName] = []
-            objColName[colName].push(id)
+        if (!Object.keys(objColName).includes(attCategory)) {
+            objColName[attCategory] = []
+            objColName[attCategory].push(id)
             binIcon.classList.remove("hidden")
         } else {
-            if (objColName[colName].includes(id)) {
-                const index = objColName[colName].indexOf(id);
-                objColName[colName].splice(index, 1)
+            if (objColName[attCategory].includes(id)) {
+                const index = objColName[attCategory].indexOf(id);
+                objColName[attCategory].splice(index, 1)
                 binIcon.classList.toggle("hidden")
             } else {
-                objColName[colName].push(id)
+                objColName[attCategory].push(id)
                 binIcon.classList.remove("hidden")
             }
         }
-        document.getElementById(colName).value = objColName[colName]
+        document.getElementById(attCategory).value = objColName[attCategory]
     }
 
 </script>
