@@ -27,6 +27,7 @@ class Comment extends Component
         private $labelName = '',
         private $showToBeDeleted = false,
         private $destroyable = false,
+        private $attachmentData = [],
     ) {
     }
 
@@ -55,12 +56,14 @@ class Comment extends Component
         $user =  User::find($data['owner_id']);
 
         $commentUser = ModelsComment::find($data['id']);
-        $attachmentData = [];
-        if (!is_null($commentUser)) {
+        $attachmentData = $this->attachmentData;
+        if (!is_null($commentUser) && count($attachmentData) === 0) {
             $attachmentData = [$name => $commentUser->media()->get()->toArray()];
         }
         $showToBeDeleted = $this->showToBeDeleted;
         // dump('DataComment', $data);
+        // dump($attachmentData);
+        // dd($attachmentData);
         return view('components.renderer.comment')->with(compact('labelName', 'id', 'name', 'type', 'data', 'action', 'user', 'attachmentData', 'showToBeDeleted', 'destroyable'));
     }
 }

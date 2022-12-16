@@ -167,7 +167,7 @@ abstract class CreateEditController extends Controller
 		$this->setMediaCommentsParent($idsComment, $idsMedia);;
 
 
-		$this->setStatus($newDataInput);
+		$this->setStatus($newDataInput, null);
 		try {
 			$data->fill($newDataInput);
 			$isSaved = $data->save();

@@ -38,6 +38,12 @@
                 <x-renderer.card title="readonly={ {false} }, destroyable={ {false} }, showToBeDeleted={ {false} }">
                     <x-renderer.comment readonly={{false}} destroyable={{false}} showToBeDeleted={{false}} name="comment_2" type="department" id="1" :dataComment="$dataComment"></x-renderer.comment>
                 </x-renderer.card>
+                <br />
+                <x-renderer.card title=" showToBeDeleted={ {false} }, destroyable={ {true} }, attachmentData={ {$attachmentData} }">
+                    <x-renderer.comment showToBeDeleted={{false}} destroyable={{true}} name="attachment_1" type="department" id="1" :dataComment="$dataComment" :attachmentData="$attachmentData"></x-renderer.comment>
+                </x-renderer.card>
+
+
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
             </form>
         </x-renderer.card>

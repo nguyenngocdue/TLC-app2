@@ -40,8 +40,9 @@ trait HasStatus
         }
         return true;
     }
-    private function setStatus($valueInput, $data)
+    private function setStatus($valueInput, $data = null)
     {
+        if (!isset($valueInput['status'])) return false;
         $statusCurrent = $valueInput['status'];
         $item = Helper::getItemModel($this->type, $valueInput['id'] ?? $data->id);
         if ($statusCurrent === $item->status) return false;

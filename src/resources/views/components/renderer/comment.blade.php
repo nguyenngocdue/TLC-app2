@@ -13,6 +13,7 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
 
 <div id="fillColor_{{$data['id']}}" class="p-4 bg-gray-250 border rounded-lg shadow-md ">
     {{-- @dump($data, $destroyable) --}}
+    {{-- @dump($attachmentData, $name); --}}
     <div class="grid grid-cols-12 gap-2 flex-nowrap">
         <div class="col-span-4">
             <div id="fillColor_{{$data['id']}}" class="border bg-[#f5f5f5] bg-inherit   rounded-lg w-full border-gray-300 p-1 ">
