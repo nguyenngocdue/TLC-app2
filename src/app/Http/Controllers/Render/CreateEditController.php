@@ -7,6 +7,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
+use App\Http\Traits\HasStatus;
 use App\Notifications\CreateNewNotification;
 use App\Notifications\EditNotification;
 use App\Utils\Support\Props;
@@ -23,6 +24,7 @@ abstract class CreateEditController extends Controller
 	use CreateEditControllerMedia;
 	use CreateEditControllerComment;
 	use CreateEditFormula;
+	use HasStatus;
 
 	protected $type;
 	protected $data;
@@ -102,22 +104,24 @@ abstract class CreateEditController extends Controller
 		// dd($newDataInputNotAttachment);
 
 		try {
-			$data = $this->data::create($newDataInputNotAttachment);
-			$_data = $this->data::find($data->id);
+			$newItem = $this->data::create($newDataInputNotAttachment);
+			$this->setStatus($newDataInput, $newItem);
 
-			$this->setCommentsParent($idsComment, $data);
+			$_data = $this->data::find($newItem->id);
+
+			$this->setCommentsParent($idsComment, $newItem);
 
 
-			event(new EntityCreatedEvent(['id' => $data->id, 'type' => $this->type]));
-			// Notification::send($data, new CreateNewNotification($data->id));
+			event(new EntityCreatedEvent(['id' => $newItem->id, 'type' => $this->type]));
+			Notification::send($newItem, new CreateNewNotification($newItem->id));
 
-			if (isset($data)) {
-				$this->syncManyToManyRelationship($data, $newDataInputHasAttachment); // Check box
+			if (isset($newItem)) {
+				$this->syncManyToManyRelationship($newItem, $newDataInputHasAttachment); // Check box
 
 				// $event = event(new SendEmailItemCreated(['id' => $data->id, 'type' => $this->type]));
 				// dd($event);
 				if ($idsMedia) {
-					$this->setMediaParent($data, $colNamesHaveAttachment);
+					$this->setMediaParent($newItem, $colNamesHaveAttachment);
 					$this->updateMediaIdsToDBFields($_data, $colNamesHaveAttachment);
 				}
 
@@ -125,7 +129,7 @@ abstract class CreateEditController extends Controller
 			}
 
 			$type = Str::plural($this->type);
-			return redirect(route("{$type}_edit.edit", $data->id));
+			return redirect(route("{$type}_edit.edit", $newItem->id));
 		} catch (Exception $e) {
 			dd($e->getMessage());
 		};
@@ -150,8 +154,6 @@ abstract class CreateEditController extends Controller
 
 		$this->delComments($dataInput);
 
-
-
 		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');
 		$request->merge($dataInput + $comments);
 		$this->_validate($props, $request);
@@ -162,10 +164,10 @@ abstract class CreateEditController extends Controller
 		// dd($dataInput);
 		$idsComment = $this->saveAndGetIdsComments($newDataInput);
 		$this->setCommentsParent($idsComment, $data);
-		$this->setMediaCommentsParent($idsComment, $idsMedia);
+		$this->setMediaCommentsParent($idsComment, $idsMedia);;
 
-		// dd($idsComment);
 
+		$this->setStatus($newDataInput);
 		try {
 			$data->fill($newDataInput);
 			$isSaved = $data->save();

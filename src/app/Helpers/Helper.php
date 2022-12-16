@@ -265,4 +265,12 @@ class Helper
         }
         return $newItems;
     }
+    public  static function getItemModel($type, $id = '', $fnName = '')
+    {
+        // dd($type, $id);
+        $modelPath = "App\\Models\\" . Str::singular($type);
+        if (!$id) return  App::make($modelPath);
+        $allItems = $fnName ? $modelPath::find($id)->{$fnName}()->get() : $modelPath::find($id)->first();
+        return $allItems;
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Traits;
 
 use App\Events\StatusEnteredEvent;
 use App\Events\StatusLeavingEvent;
+use App\Helpers\Helper;
 use App\Http\Controllers\Workflow\Statuses;
 use Exception;
 
@@ -38,5 +39,12 @@ trait HasStatus
             event(new StatusEnteredEvent($eventData));
         }
         return true;
+    }
+    private function setStatus($valueInput, $data)
+    {
+        $statusCurrent = $valueInput['status'];
+        $item = Helper::getItemModel($this->type, $valueInput['id'] ?? $data->id);
+        if ($statusCurrent === $item->status) return false;
+        return $item->transitionTo($statusCurrent);
     }
 }

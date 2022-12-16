@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Helpers\Helper;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
@@ -16,24 +17,22 @@ class ControlStatus extends Component
     public function __construct(
         private $type,
         private $colName,
+        private $id,
+        private $action
     ) {
         //
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
     public function render()
     {
-        $type = Str::ucfirst(Str::singular($this->type));
-        $model = App::make("App\\Models\\$type");
+        $model = Helper::getItemModel($this->type);
         if (!method_exists($model, "transitionTo")) return "<x-feedback.alert type='warning' message='This model needs to use HasStatus trait.'></x-feedback.alert>";
         $cbb = $model->getAvailableStatuses();
+        $currentStatus = $this->action === 'edit' ? $model::find($this->id)->first()->status : '';
         return view("components.controls.control-status", [
             'options' => $cbb,
             'colName' => $this->colName,
+            'currentStatus' => $currentStatus,
         ]);
     }
 }
