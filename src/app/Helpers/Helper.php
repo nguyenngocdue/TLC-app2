@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class Helper
 {
-    private static function getDataFromPathModel($modelPath)
+    private static function getDataFromPathModel($modelPath, $byFilters = [])
     {
         $model = App::make($modelPath);
         $nameless = ($model->nameless);
@@ -17,30 +17,18 @@ class Helper
         $insTableSource = new $modelPath();
         $tableName = $insTableSource->getTable();
         $table = DB::table($tableName);
+        if (count($byFilters)) {
+            return [$tableName =>  $table->where($byFilters)->get()];
+        }
         $dataSource =  $nameless ? $table->get() : $table->orderBy('name')->get();
         return [$tableName => $dataSource];
     }
 
-    public static function getDataSourceWithType($modelPath, $colName, $type)
+    public static function getDataSource($modelPath, $colName, $type)
     {
         $instance = new $modelPath;
         $eloquentParam = $instance->eloquentParams;
 
-        $relationship = Relationships::getAllOf($type);
-        foreach ($relationship as $value) {
-            if ($value['control_name'] === $colName) {
-                $pathTableSource =  $eloquentParam[$value['control_name']][1] ?? "";
-                // $pathTableSource =  $eloquentParam[$value['relationship']][1] ?? [];
-                return Helper::getDataFromPathModel($pathTableSource);
-            }
-        }
-        return $colName;
-    }
-
-    public static function getDataSource($modelPath, $colName)
-    {
-        $instance = new $modelPath;
-        $eloquentParam = $instance->eloquentParams;
         $keyNameEloquent = "";
         foreach ($eloquentParam as $key => $value) {
             if (in_array($colName, $value)) {
@@ -48,11 +36,22 @@ class Helper
                 break;
             }
         }
-        if ($keyNameEloquent === "") return $colName;
+        $relationship = Relationships::getAllOf($type);
+        $elementRel = array_values(array_filter($relationship, fn ($item) => $item['control_name'] === $colName))[0] ?? [];
 
+        $byFilters = [];
+        if (isset($elementRel['filter_columns']) && $elementRel['filter_columns'] && $elementRel['filter_values']) {
+            $byFilters = [$elementRel['filter_columns'] => $elementRel['filter_values']];
+        }
+
+        if ($keyNameEloquent === "") {
+            $pathTableSource =  $eloquentParam[$elementRel['control_name']][1] ?? "";
+            return Helper::getDataFromPathModel($pathTableSource, $byFilters);
+        }
         $pathTableSource = $eloquentParam[$keyNameEloquent][1];
-        return Helper::getDataFromPathModel($pathTableSource);
+        return Helper::getDataFromPathModel($pathTableSource, $byFilters) ?? $colName;
     }
+
 
     public static function customMessageValidation($message, $colName, $labelName)
     {

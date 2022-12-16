@@ -23,7 +23,7 @@ class Checkbox extends Component
         $modelPath = $this->tablePath;
         $type = $this->type;
 
-        $dataSource = Helper::getDataSourceWithType($modelPath, $colName, $type);
+        $dataSource = Helper::getDataSource($modelPath, $colName, $type);
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
             $message =  "Not found control_name \"" . $colName . "\" in  Manage Relationships.";
             return "<x-feedback.alert message='$message' type='warning' />";

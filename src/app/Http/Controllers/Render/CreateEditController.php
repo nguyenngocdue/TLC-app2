@@ -84,7 +84,7 @@ abstract class CreateEditController extends Controller
 
 		$dataInput = $this->apply_formula($dataInput, $this->type);
 
-		dump($dataInput);
+		// dump($dataInput);
 
 		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');
 		$request->merge($dataInput + $comments);

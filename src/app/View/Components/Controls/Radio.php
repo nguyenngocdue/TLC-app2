@@ -8,7 +8,7 @@ use Illuminate\View\Component;
 
 class Radio extends Component
 {
-    public function __construct(private $id, private $colName, private $tablePath, private $action, private $labelName)
+    public function __construct(private $id, private $colName, private $type, private $tablePath, private $action, private $labelName)
     {
     }
 
@@ -19,8 +19,10 @@ class Radio extends Component
         $colName = $this->colName;
         $labelName = $this->labelName;
         $modelPath = $this->tablePath;
+        $type = $this->type;
 
-        $dataSource = Helper::getDataSource($modelPath, $colName);
+        $dataSource = Helper::getDataSource($modelPath, $colName, $type);
+        // dump($dataSource);
         $currentEntity = is_null($modelPath::find($this->id)) ? "" : $modelPath::find($this->id)->getAttributes();
 
         if (is_null($dataSource) || gettype($dataSource) === 'string') {

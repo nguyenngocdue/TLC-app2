@@ -86,7 +86,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case ('radio')
-                        <x-controls.radio id={{$id}} colName={{$column_name}} tablePath={{$tablePath}} action={{$action}} labelName={{$label}} />
+                        <x-controls.radio id={{$id}} colName={{$column_name}} type={{$type}} tablePath={{$tablePath}} action={{$action}} labelName={{$label}} />
                         @break
 
                         @case ('dropdown_multi')
