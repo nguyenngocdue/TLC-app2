@@ -143,10 +143,12 @@ class Table extends Component
       $tds = $this->makeTd($columns, $dataLine, $columnCount, $start + $no + 1);
 
       if ($this->groupBy) {
-        $index = strtoupper($dataLine[$this->groupBy][0]);
-        if ($index !== $lastIndex) {
-          $lastIndex = $index;
-          $trs[] = "<tr class='bg-gray-100 '><td class='p-2 text-lg font-bold text-gray-600' colspan=$colspan>{$index}</td></tr>";
+        if (isset($dataLine[$this->groupBy][0])) { //<< this to make sure an item with empty name doesn't crash the app
+          $index = strtoupper($dataLine[$this->groupBy][0]);
+          if ($index !== $lastIndex) {
+            $lastIndex = $index;
+            $trs[] = "<tr class='bg-gray-100 '><td class='p-2 text-lg font-bold text-gray-600' colspan=$colspan>{$index}</td></tr>";
+          }
         }
       }
 

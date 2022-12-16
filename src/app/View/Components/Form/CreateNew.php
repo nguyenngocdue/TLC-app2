@@ -12,8 +12,11 @@ class CreateNew extends Component
      *
      * @return void
      */
-    public function __construct(private $action = "", private $method = "GET", private $footer = "")
-    {
+    public function __construct(
+        private $action = "",
+        private $method = "GET",
+        private $footer = "Pipe is allowed. E.G.: name1|name2|name3|...",
+    ) {
         // dd("Create New");
         $this->columns = [
             [
@@ -27,7 +30,8 @@ class CreateNew extends Component
                 'dataIndex' => 'action',
                 'renderer' => 'button',
                 'align' => 'center',
-                'type' => 'primary'
+                'type' => 'primary',
+                'attributes' => ['htmlType'  => 'submit'],
             ],
         ];
         $this->dataSource = [

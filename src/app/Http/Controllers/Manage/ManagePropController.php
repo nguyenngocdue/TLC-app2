@@ -183,6 +183,7 @@ abstract class ManagePropController extends Controller
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
         foreach (array_keys($toBeGreen) as $key) $json[$key]['row_color'] = "green";
         foreach (array_keys($toBeRed) as $key) $json[$key]['row_color'] = "red";
+        foreach ($json as &$line) if ($line['column_type'] === 'static') $line['row_color'] = "grey";
 
         foreach ($result as $key => $columns) {
             foreach ($columns as $column => $value) {
@@ -213,7 +214,8 @@ abstract class ManagePropController extends Controller
         $columns = $this->getColumns();
         $dataSourceWithKey = $this->getDataSource();
         $dataSource = array_values($dataSourceWithKey);
-        return view('dashboards.pages.manageprop')->with(compact('type', 'columns', 'dataSource'));
+        $route = route($type . '_mngprop.store');
+        return view('dashboards.pages.manageprop')->with(compact('type', 'columns', 'dataSource', 'route'));
     }
 
     public function store(Request $request)
@@ -223,9 +225,30 @@ abstract class ManagePropController extends Controller
         $result = Props::convertHttpObjectToJson($data, $columns);
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));
+            // Log::info($direction . " " . $name);
             Props::move($result, $direction, $name);
         }
         Props::setAllOf($this->type, $result);
         return back();
+    }
+
+    public function create(Request $request)
+    {
+        $name = $request->input('name')[0];
+        $names = explode("|", $name);
+        $newItems = [];
+        foreach ($names as $name) $newItems[$name] = [
+            'name' => "_" . $name,
+            'column_name' => $name,
+            'column_type' => 'static',
+            'title' => Str::headline($name),
+            'label' => Str::headline($name),
+            'col_span' => 12,
+        ];
+        // dump($newItems);
+
+        $dataSource = Props::getAllOf($this->type) + $newItems;
+        Props::setAllOf($this->type, $dataSource);
+        return redirect()->back();
     }
 }
