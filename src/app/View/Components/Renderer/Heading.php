@@ -11,8 +11,9 @@ class Heading extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $level = 6,
+    ) {
         //
     }
 
@@ -23,6 +24,22 @@ class Heading extends Component
      */
     public function render()
     {
-        return view('components.renderer.heading');
+        return function (array $data) {
+            $font = "";
+            $size = 6 - $this->level;
+            $h = "h$size";
+            $textSize = $size . "xl";
+            if ($size === 1) $textSize = "xl";
+            if ($size === 0) {
+                $textSize = "base";
+            } else {
+                $font = "font-medium";
+            }
+
+            $class = "$font leading-tight text-{$textSize} text-black my-2";
+            $slot = $data['slot'];
+            return "<$h class='$class'>$slot</$h>";
+        };
+        // return view('components.renderer.heading');
     }
 }

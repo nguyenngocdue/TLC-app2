@@ -1,4 +1,4 @@
-<x-renderer.heading>Create New</x-renderer.heading>
+<x-renderer.heading level=3>Create New</x-renderer.heading>
 <form action="{{$action}}" method="{{$method0}}" class="grid grid-cols-3">
     @csrf
     @method($method)

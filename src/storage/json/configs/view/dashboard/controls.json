@@ -27,7 +27,8 @@
         "z_h2",
         "z_h3",
         "z_h4",
-        "z_text"
+        "z_h5",
+        "z_h6_base"
     ],
     "renderer_view_all": [
         "",

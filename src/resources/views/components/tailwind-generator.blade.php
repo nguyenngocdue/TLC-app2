@@ -1,3 +1,11 @@
+<span class="bg-amber-400"></span>
+<!-- FOR HEADING -->
+<h1 class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600">Tailwind Elements</h1>
+<h2 class="font-medium leading-tight text-4xl mt-0 mb-2 text-blue-600">Tailwind Elements</h2>
+<h3 class="font-medium leading-tight text-3xl mt-0 mb-2 text-blue-600">Tailwind Elements</h3>
+<h4 class="font-medium leading-tight text-2xl mt-0 mb-2 text-blue-600">Tailwind Elements</h4>
+<h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-blue-600">Tailwind Elements</h5>
+<h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">Tailwind Elements</h6>
 <!-- FOR BUTTON -->
 <div class="my-1 px-1.5 py-1 ">
     <button type="button" class="inline-block px-2.5 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Primary</button>
