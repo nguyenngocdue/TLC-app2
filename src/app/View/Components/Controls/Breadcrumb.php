@@ -25,6 +25,16 @@ class Breadcrumb extends Component
         $latest = $model::latest()->first();
         $latest_id = $latest ? $latest->id : null;
 
-        return view('components.navigation.breadcrumb')->with(compact('type', 'singular', 'first_id', 'latest_id'));
+        $links = [['href' => route($type . '_viewall.index'), 'title' => 'View All',]];
+        if ($first_id) {
+            $links[] = ['href' => route($type . '_edit.edit', $first_id), 'title' => 'View First',];
+            $links[] = ['href' => route($type . '_edit.edit', $latest_id), 'title' => 'View Latest',];
+        }
+        $links[] = ['href' => route($type . '_addnew.create'), 'title' => 'Add New',];
+        $links[] = ['href' => route($singular . '_mngprop.index'), 'title' => 'Props',];
+        $links[] = ['href' => route($singular . '_mngrls.index'), 'title' => 'Relationships',];
+        $links[] = ['href' =>  route($singular . '_mngstt.index'), 'title' => 'Statuses',];
+
+        return view('components.navigation.breadcrumb')->with(compact('links'));
     }
 }
