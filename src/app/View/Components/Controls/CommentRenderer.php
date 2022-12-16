@@ -41,9 +41,21 @@ class CommentRenderer extends Component
         $action = $this->action;
         $labelName = $this->labelName;
         $showToBeDeleted =  env('APP_ENV')  === 'local';
+        $owner_id = Auth::user()->id;
 
         $idNameCatesDB = Helper::getDataDbByName('attachment_categories', 'id', 'name');
+        $orphanAttachmentDB = json_decode(DB::table('attachments')->where([['owner_id', '=',  $owner_id], ['object_id', '=', null], ['object_type', '=', null]])->select('id', 'category', 'object_id')->get(), true);
 
+        $attachmentData = [];
+        foreach ($orphanAttachmentDB as $attach) {
+            if ($idNameCatesDB[$attach['category']] === $name) {
+                $ele = (array)DB::table('attachments')->find($attach['id']);
+                $attachmentData[$name][] = $ele;
+            }
+        }
+
+
+        // dump($attachmentData);
         $dataComment = [
             [
                 "id" => "",
@@ -84,6 +96,7 @@ class CommentRenderer extends Component
             "dataComment" => $dataComment,
             'destroyable' => $this->destroyable,
             'showToBeDeleted' => $showToBeDeleted,
+            'attachmentData' => $attachmentData
         ]);
     }
 }

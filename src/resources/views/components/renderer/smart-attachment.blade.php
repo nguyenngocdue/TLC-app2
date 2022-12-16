@@ -1,14 +1,14 @@
-{{-- @dump($attachmentData, $colName) --}}
+{{-- @dump($attachmentData, $categoryName) --}}
 <div class="flex flex-col">
     @if ($action === "edit" || $action === "create")
     <div class="grid grid-cols-5 gap-4 mb-1 p-1  {{count($attachmentData) < 1 ? "hidden" : ""}}">
-        @if(isset($attachmentData[$attCategory]))
+        @if(isset($attachmentData[$categoryName]))
         @foreach($attachmentData as $key => $attachs)
-        @if ($key === $attCategory )
+        @if ($key === $categoryName )
         @foreach($attachs as $media)
-        {{-- @dd($attachs, $media) --}}
-        {{-- @dump($media, $attCategory) --}}
-        <div name='{{$attCategory}}' class=" relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg border-gray-300 group/item overflow-hidden  bg-inherit ">
+        {{-- @dump($attachs, $media) --}}
+        {{-- @dump($media, $categoryName) --}}
+        <div name='{{$categoryName}}' class=" relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg border-gray-300 group/item overflow-hidden  bg-inherit ">
             <span>
                 <img class="border  border-gray-300 rounded-md h-full w-full object-cover hover:bg-slate-100" src="{{ $path.$media['url_thumbnail']}}" alt="{{$media['filename']}}" />
                 <svg fill="#d11a2a" id="showpic_deleted_{{$media['id']}}" class="hidden absolute  top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 105.16 122.88">
@@ -26,9 +26,9 @@
             </span>
             <div class=" invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible   before:absolute before:-inset-1  before:bg-[#00000080]">
                 <a title="{{$media['filename']}}" href="{{$path.$media['url_media']}}" target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">{{$media['filename']}}</a>
-                {{-- @dump($media, $attCategory) --}}
+                {{-- @dump($media, $categoryName) --}}
                 @if($destroyable)
-                <button type="button" onclick="updateTxtboxAttachment({{$media['id']}}, 'attachment_deleted_{{$attCategory}}')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
+                <button type="button" onclick="updateTxtboxAttachment({{$media['id']}}, 'attachment_deleted_{{$categoryName}}')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
                     <i class=" text-[#d11a2a] fas fa-trash  cursor-pointer"></i>
                 </button>
                 @endif
@@ -42,33 +42,34 @@
         @endif
     </div>
     @endif
-    <input id="attachment_deleted_{{$attCategory}}" name="attachment_deleted_{{$attCategory}}" type="text" value="" readonly class=' {{ $showToBeDeleted ? '' : 'hidden'}} p-2.5   bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray ' type='text'>
-    <input name="{{$attCategory}}[]" multiple id="multiple_files" type="file" class="{{$readonly ? 'hidden' : ''}} block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-white cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 ">
+    {{-- @dd($categoryName) --}}
+    <input id="attachment_deleted_{{$categoryName}}" name="attachment_deleted_{{$categoryName}}" type="text" value="" readonly class=' {{ $showToBeDeleted ? '' : 'hidden'}} p-2.5   bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
+    <input name="{{$categoryName}}[]" multiple id="multiple_files" type="file" class="{{$readonly ? 'hidden' : ''}} block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-white cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 ">
 </div>
 {{-- @include('components.feedback.alertValidation') --}}
 
 <script type="text/javascript">
     var objColName = {};
 
-    function updateTxtboxAttachment(id, attCategory) {
-        console.log(attCategory, id, 123)
+    function updateTxtboxAttachment(id, categoryName) {
+        console.log(categoryName, id, 123)
         var binIcon = document.getElementById("showpic_deleted_" + id)
 
-        if (!Object.keys(objColName).includes(attCategory)) {
-            objColName[attCategory] = []
-            objColName[attCategory].push(id)
+        if (!Object.keys(objColName).includes(categoryName)) {
+            objColName[categoryName] = []
+            objColName[categoryName].push(id)
             binIcon.classList.remove("hidden")
         } else {
-            if (objColName[attCategory].includes(id)) {
-                const index = objColName[attCategory].indexOf(id);
-                objColName[attCategory].splice(index, 1)
+            if (objColName[categoryName].includes(id)) {
+                const index = objColName[categoryName].indexOf(id);
+                objColName[categoryName].splice(index, 1)
                 binIcon.classList.toggle("hidden")
             } else {
-                objColName[attCategory].push(id)
+                objColName[categoryName].push(id)
                 binIcon.classList.remove("hidden")
             }
         }
-        document.getElementById(attCategory).value = objColName[attCategory]
+        document.getElementById(categoryName).value = objColName[categoryName]
     }
 
 </script>

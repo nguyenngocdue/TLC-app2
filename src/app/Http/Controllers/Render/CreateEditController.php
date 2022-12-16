@@ -81,14 +81,15 @@ abstract class CreateEditController extends Controller
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at', 'id'], $colNamesHaveAttachment);
 		$dataInput =  array_merge(['id' => null], $request->except($arrayExcept));
 
+		// dd($request->all());
 		$deletedMediaIds = $this->deleteMediaIfNeeded($dataInput);
 		$idsMedia = $this->saveAndGetIdsMedia($request, $dataInput);
 
+		// dd($idsMedia);
 		$dataInput = $this->apply_formula($dataInput, $this->type);
 
-		// dump($dataInput);
 
-		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');
+		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'newComment_');
 		$request->merge($dataInput + $comments);
 		$this->_validate($props, $request);
 
@@ -154,7 +155,7 @@ abstract class CreateEditController extends Controller
 
 		$this->delComments($dataInput);
 
-		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'hasComment_');
+		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'newComment_');
 		$request->merge($dataInput + $comments);
 		$this->_validate($props, $request);
 
@@ -167,7 +168,7 @@ abstract class CreateEditController extends Controller
 		$this->setMediaCommentsParent($idsComment, $idsMedia);;
 
 
-		$this->setStatus($newDataInput);
+		$this->setStatus($newDataInput, null);
 		try {
 			$data->fill($newDataInput);
 			$isSaved = $data->save();

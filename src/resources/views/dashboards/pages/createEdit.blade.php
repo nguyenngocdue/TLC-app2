@@ -94,7 +94,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case('attachment')
-                        <x-controls.uploadfiles id={{$id}} colName={{$column_name}} action={{$action}} labelName={{$label}} />
+                        <x-controls.uploadfiles id={{$id}} colName={{$column_name}} action={{$action}} labelName={{$label}} type={{$type}} />
                         @break
 
                         @case('switch')

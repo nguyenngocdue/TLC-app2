@@ -13,15 +13,13 @@ trait CreateEditControllerComment
 
     private function saveAndGetIdsComments($dataInput)
     {
-        // dump($dataInput);
-        $commentCatesDB = DB::table('attachment_categories')->select("id", 'name')->get();
-        $json = json_decode($commentCatesDB, true);
-        $nameIdsDB = array_column($json, 'id', 'name');
+        $nameIdsDB = Helper::getDataDbByName('attachment_categories', 'name', 'id');
+        dump($nameIdsDB);
         $ids = [];
         foreach ($dataInput as $key => $value) {
             // dd($value);
-            if (str_contains($key, 'hasComment')) {
-                $cateName = str_replace('hasComment_', '', $key);
+            if (str_contains($key, 'newComment_')) {
+                $cateName = str_replace('newComment_', '', $key);
                 // dd($key, $cateName, $dataInput[$cateName]);
                 if (!is_null($value) || isset($dataInput[$cateName]) && count($dataInput[$cateName]) > 0) {
                     $item = Comment::Create(
@@ -61,7 +59,7 @@ trait CreateEditControllerComment
     public function delComments($dataInput)
     {
         foreach ($dataInput as $key => $value) {
-            if (str_contains($key, 'comment__deleted_')) {
+            if (str_contains($key, 'comment_deleted_')) {
                 $itemComment = Comment::find($value * 1);
                 if (!is_null($itemComment)) {
                     $idsAtt = $itemComment->media()->pluck('id');
