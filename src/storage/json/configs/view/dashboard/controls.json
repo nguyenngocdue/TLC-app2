@@ -28,7 +28,9 @@
         "z_h3",
         "z_h4",
         "z_h5",
-        "z_h6_base"
+        "z_h6_base",
+        "z_divider",
+        "z_page_break"
     ],
     "renderer_view_all": [
         "",

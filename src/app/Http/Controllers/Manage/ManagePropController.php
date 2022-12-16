@@ -183,7 +183,7 @@ abstract class ManagePropController extends Controller
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
         foreach (array_keys($toBeGreen) as $key) $json[$key]['row_color'] = "green";
         foreach (array_keys($toBeRed) as $key) $json[$key]['row_color'] = "red";
-        foreach ($json as &$line) if ($line['column_type'] === 'static') $line['row_color'] = "amber";
+        foreach ($json as &$line) if (isset($line['column_type']) && $line['column_type'] === 'static') $line['row_color'] = "amber";
 
         foreach ($result as $key => $columns) {
             foreach ($columns as $column => $value) {
