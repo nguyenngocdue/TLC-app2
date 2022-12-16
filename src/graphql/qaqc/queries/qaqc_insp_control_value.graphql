@@ -12,6 +12,7 @@ type Qaqc_insp_control_value {
     qaqc_insp_control_group_id: ID!
     created_at: DateTime
     updated_at: DateTime
+    getValues: [Qaqc_insp_value!]! @hasMany
 }
 
 input CreateQAQCInspControlValueInput {

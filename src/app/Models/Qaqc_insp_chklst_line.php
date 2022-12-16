@@ -22,6 +22,7 @@ class Qaqc_insp_chklst_line extends Model
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, "qaqc_insp_chklst_id"],
         "getSheet" => ["belongsTo", Qaqc_insp_sheet::class, "qaqc_insp_sheet_id"],
         "getGroup" => ["belongsTo", Qaqc_insp_group::class, "qaqc_insp_group_id"],
+        "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],
         "getControlValue" => ["belongsTo", Qaqc_insp_control_value::class, "qaqc_insp_control_value_id"],
         "getFailDetail" => ["belongsToMany", Qaqc_insp_value::class, "qaqc_insp_fail_details", 'qaqc_insp_chklst_line_id', 'qaqc_insp_value_id'],
         "getOnHoldDetail" => ["belongsToMany", Qaqc_insp_value::class, "qaqc_insp_onhold_details", 'qaqc_insp_chklst_line_id', 'qaqc_insp_value_id'],
@@ -38,6 +39,11 @@ class Qaqc_insp_chklst_line extends Model
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getGroup()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getControlGroup()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

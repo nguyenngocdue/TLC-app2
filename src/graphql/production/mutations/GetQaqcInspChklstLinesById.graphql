@@ -1,0 +1,8 @@
+extend type Mutation {
+    getQaqcInspChklstLinesById(
+        qaqc_insp_sheet_id: ID!
+        qaqc_insp_chklst_id: ID!
+    ): [Qaqc_insp_chklst_line!]!
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\GetQaqcInspChklstLinesById")
+}

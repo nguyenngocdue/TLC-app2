@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('control_type');
-            $table->unsignedBigInteger('qaqc_insp_control_value_id')->nullable();
             $table->unsignedBigInteger('qaqc_insp_chklst_id');
             $table->unsignedBigInteger('qaqc_insp_sheet_id');
             $table->unsignedBigInteger('qaqc_insp_group_id');
-            $table->unsignedBigInteger('qaqc_insp_control_group_id');
+            $table->unsignedBigInteger('qaqc_insp_control_value_id')->nullable();
+            $table->unsignedBigInteger('qaqc_insp_control_group_id')->nullable();
 
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

@@ -60,7 +60,7 @@ class HomeController extends Controller
 
 
         );
-        dd(Qaqc_insp_sheet::find(1)->getChklstLines->where('qaqc_insp_chklst_id', 1));
+        dd(Qaqc_insp_sheet::find(1)->getChklstLines->where('qaqc_insp_chklst_id', 1)->groupBy('qaqc_insp_group_id'));
         // dump(array_merge($array['websites'], $array['friends']));
         dd(array_shift($array));
         dump(array_pop($array));

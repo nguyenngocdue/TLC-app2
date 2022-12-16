@@ -14,5 +14,12 @@ class Qaqc_insp_control_value extends Model
     protected $fillable = ["id", "control_group", "name", "description"];
     protected $table = "qaqc_insp_control_values";
 
-    public $eloquentParams = [];
+    public $eloquentParams = [
+        "getValues" => ["hasMany", Qaqc_insp_value::class, "qaqc_insp_control_value_id"],
+    ];
+    public function getValues()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 }

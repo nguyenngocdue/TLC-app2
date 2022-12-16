@@ -10,14 +10,15 @@ type Qaqc_insp_chklst_line {
     qaqc_insp_chklst_id: ID!
     qaqc_insp_sheet_id: ID!
     qaqc_insp_group_id: ID!
-    qaqc_insp_control_value_id: ID!
-    qaqc_insp_control_group_id: ID!
+    qaqc_insp_control_value_id: ID
+    qaqc_insp_control_group_id: ID
     name: String!
     description: String!
     control_type: String!
     getChklst: Qaqc_insp_chklst! @belongsTo
     getSheet: Qaqc_insp_sheet! @belongsTo
     getGroup: Qaqc_insp_group! @belongsTo
+    getControlGroup: Qaqc_insp_control_group @belongsTo
     created_at: DateTime
     updated_at: DateTime
 }
