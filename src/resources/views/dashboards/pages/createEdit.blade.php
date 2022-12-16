@@ -118,6 +118,10 @@ $id = $action === "edit" ? $values->id : "";
                         <x-controls.comment-renderer id={{$id}} type={{$type}} colName={{$column_name}} action={{$action}} colSpan={{$col_span}} labelName={{$label}} />
                         @break
 
+                        @case('status')
+                        <x-controls.control-status type={{$type}} colName={{$column_name}}/>
+                        @break
+
                         @default
                         <x-feedback.alert type="warning" title="Control" message="[{{$control}}] is not available" />
                         @break

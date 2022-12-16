@@ -2,37 +2,45 @@
     "_prodOrder": {
         "name": "_prodOrder",
         "relationship": "belongsTo",
+        "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": ""
     },
     "_prodRunLines": {
         "name": "_prodRunLines",
         "relationship": "hasMany",
+        "control_name": "prodRunLines",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
-        "control_name": "prodRunLines"
+        "filter_columns": "",
+        "filter_values": ""
     },
     "_prodRoutingLinks": {
         "name": "_prodRoutingLinks",
         "relationship": "belongsTo",
+        "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": ""
     },
     "_prodRoutingDetails": {
         "name": "_prodRoutingDetails",
         "relationship": "hasMany",
+        "control_name": "prodRoutingDetails",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
-        "renderer_edit": "",
+        "renderer_edit": "many_lines",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": ""
     }
 }
