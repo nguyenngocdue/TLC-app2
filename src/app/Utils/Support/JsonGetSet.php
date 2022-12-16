@@ -11,6 +11,7 @@ class JsonGetSet
 {
     public static function convertHttpObjectToJson($data, $columns)
     {
+        if (!isset($data['name'])) return [];
         foreach ($data['name'] as $key => $name) {
             $array = [];
             foreach ($columns as $column) {

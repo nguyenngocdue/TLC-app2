@@ -32,6 +32,7 @@ class ModalSettings extends Component
         // $props = json_decode(file_get_contents($path), true);
 
         $allColumns = array_filter($props, fn ($prop) => isset($prop['hidden_view_all']) && $prop['hidden_view_all'] !== 'true');
+        $allColumns = array_filter($props, fn ($prop) => $prop['column_type'] !== 'static');
 
         $settings = CurrentUser::getSettings();
 

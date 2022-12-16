@@ -100,6 +100,7 @@ abstract class ViewAllController extends Controller
 
         $props = Props::getAllOf($type);
         $props = array_filter($props, fn ($prop) => !$prop['hidden_view_all']);
+        $props = array_filter($props, fn ($prop) => $prop['column_type'] !== 'static');
         if ($columnLimit) {
             $allows = array_keys($columnLimit);
             $props = array_filter($props, fn ($prop) => in_array($prop['name'], $allows));
