@@ -22,7 +22,12 @@
         "status",
         "text",
         "textarea",
-        "thumbnail"
+        "thumbnail",
+        "z_h1",
+        "z_h2",
+        "z_h3",
+        "z_h4",
+        "z_text"
     ],
     "renderer_view_all": [
         "",

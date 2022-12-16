@@ -63,8 +63,9 @@ class ManageStatuses extends Controller
     {
         $columns = $this->getColumns();
         $dataSource = array_values(Statuses::getAll());
+        $route = ("statuses");
 
-        return view("workflow/manage-statuses")->with(compact('columns', 'dataSource'));
+        return view("workflow/manage-statuses")->with(compact('columns', 'dataSource', 'route'));
     }
 
     public function store(Request $request)
