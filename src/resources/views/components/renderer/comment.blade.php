@@ -5,6 +5,7 @@ $position = $user->position_rendered;
 $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
 $isReadOnly = $data['readonly'];
 $isEmptyContent = $content === '';
+$isDestroyable = $action === 'create';
 
 $date = $action === 'create' ? $data['created_at'] : $data['updated_at'] ?? '';
 $timestamp = strtotime($date);
@@ -41,16 +42,16 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
         {{-- @dump($destroyable) --}}
         @if($destroyable)
         <div class="col-span-1 m-auto text-center  ">
-            <button type="button" onclick="updateTxtboxComment({{$data['id']}}, 'comment__deleted_{{$data['id']}}')" class=" w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
+            <button type="button" onclick="updateTxtboxComment({{$data['id']}}, 'comment_deleted_{{$data['id']}}')" class=" w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
                 <i class=" text-[#d11a2a] fas fa-trash  cursor-pointer"></i>
             </button>
-            <input id="comment__deleted_{{$data['id']}}" name="comment__deleted_{{$data['id']}}" readonly value="" class=' {{$showToBeDeleted ? "" : "hidden"}}  p-2.5 w-full   bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray ' type='text'>
+            <input id="comment_deleted_{{$data['id']}}" name="comment_deleted_{{$data['id']}}" readonly value="" class=' {{$showToBeDeleted ? "" : "hidden"}}  p-2.5 w-full   bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray ' type='text'>
         </div>
         @endif
 
         <div class="col-span-12 mt-2 rounded-lg border border-gray-300 overflow-hidden">
-            <textarea name="hasComment_{{$name}}" id="fillColor_{{$data['id']}}" rows="2" @readonly($data['readonly']) placeholder="{{$isReadOnly ? '': 'Type here...'}}" class=" {{$isReadOnly && $isEmptyContent  ? 'bg-white hidden ' : ''}} bg-inherit resize-none  text-gray-900  p-2.5 dark:placeholder-gray-400 block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">{{old('hasComment_'.$name, $content) ?? $content }}</textarea>
-            <x-renderer.smart-attachment readonly="{{$data['readonly']}}" destroyable={{false}} attCategory={{$name}} :attachmentData="$attachmentData" colName={{$name}} action={{$action}} labelName={{$labelName}} path={{$path}} />
+            <textarea name="newComment_{{$name}}" id="fillColor_{{$data['id']}}" rows="2" @readonly($data['readonly']) placeholder="{{$isReadOnly ? '': 'Type here...'}}" class=" {{$isReadOnly && $isEmptyContent  ? 'bg-white hidden ' : ''}} bg-inherit resize-none  text-gray-900  p-2.5 dark:placeholder-gray-400 block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">{{old('newComment_'.$name, $content) ?? $content }}</textarea>
+            <x-renderer.smart-attachment readonly="{{$data['readonly']}}" destroyable={{$isDestroyable}} categoryName={{$name}} :attachmentData="$attachmentData" action={{$action}} labelName={{$labelName}} path={{$path}} />
         </div>
     </div>
 </div>

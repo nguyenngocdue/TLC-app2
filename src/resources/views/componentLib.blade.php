@@ -16,8 +16,8 @@
                     <x-renderer.smart-attachment readonly={{true}} destroyable={{true}} showToBeDeleted={{true}} :attachmentData="$attachmentData" />
                 </x-renderer.card>
                 <br />
-                <x-renderer.card title="readonly = { { false} }, destroyable = { { false} }, showToBeDeleted = { { false} } attCategory=attachment_2 ">
-                    <x-renderer.smart-attachment readonly={{false}} destroyable={{false}} attCategory="attachment_2" showToBeDeleted={{false}} :attachmentData="$attachmentData" />
+                <x-renderer.card title="readonly = { { false} }, destroyable = { { false} }, showToBeDeleted = { { false} }, categoryName={ {comment_1} } ">
+                    <x-renderer.smart-attachment readonly={{false}} destroyable={{false}} categoryName="comment_1" showToBeDeleted={{false}} :attachmentData="$attachmentData" />
                 </x-renderer.card>
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
             </form>
@@ -28,22 +28,32 @@
             @dump($_GET)
             <form action="" method="GET">
                 <x-renderer.card title="dataComment=[], not entering other attributes.">
-                    <x-renderer.comment :dataComment="[]"></x-renderer.comment>
+                    <x-renderer.comment :dataComment="[]" />
                 </x-renderer.card>
-                <br />
-                <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }">
-                    <x-renderer.comment readonly={{true}} destroyable={{true}} showToBeDeleted={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment"></x-renderer.comment>
+                <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
+            </form>
+            <br />
+            @dump($_GET)
+            <form action="" method="GET">
+                <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }, name={ {comment_1} }">
+                    <x-renderer.comment readonly={{true}} destroyable={{true}} showToBeDeleted={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment" />
                 </x-renderer.card>
-                <br />
-                <x-renderer.card title="readonly={ {false} }, destroyable={ {false} }, showToBeDeleted={ {false} }">
-                    <x-renderer.comment readonly={{false}} destroyable={{false}} showToBeDeleted={{false}} name="comment_2" type="department" id="1" :dataComment="$dataComment"></x-renderer.comment>
+                <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
+            </form>
+            <br />
+            @dump($_GET)
+            <form action="" method="GET">
+                <x-renderer.card title="readonly={ {false} }, destroyable={ {false} }, showToBeDeleted={ {false} } name={ {comment_1} }">
+                    <x-renderer.comment readonly={{false}} destroyable={{false}} showToBeDeleted={{false}} name="comment_1" type="department" id="1" :dataComment="$dataComment" />
                 </x-renderer.card>
-                <br />
-                <x-renderer.card title=" showToBeDeleted={ {false} }, destroyable={ {true} }, attachmentData={ {$attachmentData} }">
-                    <x-renderer.comment showToBeDeleted={{false}} destroyable={{true}} name="attachment_1" type="department" id="1" :dataComment="$dataComment" :attachmentData="$attachmentData"></x-renderer.comment>
+                <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
+            </form>
+            <br />
+            @dump($_GET)
+            <form action="" method="GET">
+                <x-renderer.card title=" showToBeDeleted={ {false} }, destroyable={ {true} }, attachmentData={ {$attachmentData} } name={ {comment_1} }">
+                    <x-renderer.comment showToBeDeleted={{false}} destroyable={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment" :attachmentData="$attachmentData" />
                 </x-renderer.card>
-
-
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
             </form>
         </x-renderer.card>

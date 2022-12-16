@@ -49,18 +49,21 @@ trait CreateEditControllerMedia
 
     private function deleteMediaIfNeeded($dataInput)
     {
+
         $cateAttachment = DB::table('attachment_categories')->select('id', 'name')->get();
         $keyMediaDel = [];
         foreach ($cateAttachment as $value) {
+            // dd($dataInput, $cateAttachment);
             if (isset($dataInput["attachment_deleted_" . $value->name])) {
                 // dd($dataInput, $value->name);
                 $idsDelete = explode(',', $dataInput["attachment_deleted_" . $value->name]);
                 // dd($value->name, $idsDelete);
                 foreach ($idsDelete as $value) {
-                    $media = Attachment::find($value);
-                    Storage::disk('s3')->delete($media->getAttributes()['url_thumbnail']);
-                    Storage::disk('s3')->delete($media->getAttributes()['url_media']);
-                    is_null($media) ? "" : $media->delete();
+                    $attachments = Attachment::find($value);
+                    // dd($attachments);
+                    Storage::disk('s3')->delete($attachments->getAttributes()['url_thumbnail']);
+                    Storage::disk('s3')->delete($attachments->getAttributes()['url_media']);
+                    is_null($attachments) ? "" : $attachments->delete();
                     $keyMediaDel[] = $value;
                 }
             }

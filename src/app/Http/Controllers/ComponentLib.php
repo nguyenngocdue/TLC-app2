@@ -130,7 +130,7 @@ class ComponentLib extends Controller
         ];
 
         $attachmentData = [
-            "attachment_1" => [
+            "comment_1" => [
                 [
                     "id" => 315,
                     "url_thumbnail" => "dev-due001/2022/12/a1-150x150.jpg",
@@ -174,7 +174,7 @@ class ComponentLib extends Controller
                     "updated_at" => "2022-12-14T06:46:48.000000Z",
                 ]
             ],
-            "attachment_2" => [
+            "comment_2" => [
                 [
                     "id" => 318,
                     "url_thumbnail" => "dev-due001/2022/12/a4-150x150.jpeg",

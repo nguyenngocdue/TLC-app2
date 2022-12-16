@@ -46,8 +46,8 @@ class Comment extends Component
         $destroyable = $this->destroyable;
         $tempData =
             [
-                "id" => 0,
-                "content" => "Not found data",
+                "id" => '##',
+                "content" => "",
                 "owner_id" => Auth::user()->id,
                 "created_at" => date_format(date_create(), "d/m/Y H:i:s"),
                 'readonly' => false,
