@@ -23,9 +23,9 @@ Route::group([
             $entityName = $entity->getTable();
             $ucfirstName = Str::ucfirst($entityName);
             $path = "App\\Http\\Controllers\\Render\\{$ucfirstName}\\{$ucfirstName}";
-            Route::resource("$entityName/{$entityName}_viewall", "{$path}ViewAllController");
-            Route::resource("$entityName/{$entityName}_addnew", "{$path}CreateController");
-            Route::resource("$entityName/{$entityName}_edit", "{$path}EditController");
+            Route::resource("{$entityName}", "{$path}ViewAllController")->only('index');
+            Route::resource("{$entityName}", "{$path}CreateController")->only('create', 'store');
+            Route::resource("{$entityName}", "{$path}EditController")->only('edit', 'update');
         }
         Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
         Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');

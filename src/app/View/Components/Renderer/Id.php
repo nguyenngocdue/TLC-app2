@@ -31,7 +31,7 @@ class Id extends Component
             // dd($data["attributes"]);
             $idStr = Str::makeId($id);
 
-            $route_name = ($type === 'permissions2') ? "permissions2.edit" : "{$type}_edit.edit";
+            $route_name = ($type === 'permissions2') ? "permissions2.edit" : "{$type}.edit";
             $route_exits =  (Route::has($route_name));
 
             $href =  $route_exits ? route($route_name, $id) : "#";

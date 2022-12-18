@@ -15,7 +15,7 @@
 
 @empty($messages)
 <div class="grid grid-cols-2 gap-5">
-    <x-form.search action="{{ route($type . '_viewall.index') }}">
+    <x-form.search action="{{ route($type . '.index') }}">
     </x-form.search>
     <div class="grid justify-items-end">
         <x-form.per-page type="{{$type}}" action="{{ route('updateUserSettings') }}" page-limit="{{$pageLimit}}">

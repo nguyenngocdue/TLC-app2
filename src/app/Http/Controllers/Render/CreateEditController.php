@@ -130,7 +130,7 @@ abstract class CreateEditController extends Controller
 			}
 
 			$type = Str::plural($this->type);
-			return redirect(route("{$type}_edit.edit", $newItem->id));
+			return redirect(route("{$type}.edit", $newItem->id));
 		} catch (Exception $e) {
 			dd($e->getMessage());
 		};
@@ -188,7 +188,7 @@ abstract class CreateEditController extends Controller
 			}
 
 			$type = Str::plural($this->type);
-			return redirect(route("{$type}_edit.edit", $id));
+			return redirect(route("{$type}.edit", $id));
 		} catch (Exception $e) {
 			dd($e->getMessage());
 		}

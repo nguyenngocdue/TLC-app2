@@ -27,11 +27,11 @@ class SidebarEntityItems
             "children" => [
                 [
                     'title' => "View All",
-                    'href' => route("{$table}_viewall.index"),
+                    'href' => route("{$table}.index"),
                 ],
                 [
                     'title' => "Add New",
-                    'href' => route("{$table}_addnew.create"),
+                    'href' => route("{$table}.create"),
                 ],
                 ['title' => "-",],
                 [
