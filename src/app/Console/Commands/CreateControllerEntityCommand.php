@@ -64,7 +64,6 @@ class CreateControllerEntityCommand extends Command
                 "PropController",
                 "RelationshipController",
                 "StatusController",
-                "TablePropController",
             ];
         } else {
             $name = Str::plural($name);
@@ -119,7 +118,6 @@ class CreateControllerEntityCommand extends Command
                 '/ndc.controller.manageprop.stub',
                 '/ndc.controller.managerelationship.stub',
                 '/ndc.controller.managestatus.stub',
-                '/ndc.controller.managetableprop.stub',
             ];
         } else {
             $sources = [

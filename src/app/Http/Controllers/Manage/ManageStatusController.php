@@ -84,6 +84,6 @@ abstract class ManageStatusController extends Controller
             [$direction, $name] = explode(",", $request->input('button'));
             Statuses::move($direction, $type, $name);
         }
-        return redirect(route($type . '_mngstt.index'));
+        return redirect(route($type . '_stt.index'));
     }
 }

@@ -3,11 +3,11 @@
 use App\Http\Controllers\ComponentLib;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Manage\Master\StatusDocType;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\ManageStatuses;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -27,11 +27,11 @@ Route::group([
             Route::resource("{$entityName}", "{$path}CreateController")->only('create', 'store');
             Route::resource("{$entityName}", "{$path}EditController")->only('edit', 'update');
         }
-        Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
-        Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');
+        // Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
+        // Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');
     });
     Route::group([
-        'prefix' => 'propman'
+        'prefix' => 'config'
     ], function () use ($entities) {
         foreach ($entities as $entity) {
             $entityName = $entity->getTable();
@@ -39,13 +39,13 @@ Route::group([
             $ucfirstName = Str::ucfirst($singular);
             $upperCaseName = Str::upper($entityName);
             Route::group([
-                'prefix' => $singular,
                 'middleware' => "role:ADMIN-DATA-$upperCaseName"
             ], function () use ($singular, $ucfirstName) {
-                Route::resource("{$singular}_mngprop", "App\Http\Controllers\Manage\\{$ucfirstName}\\PropController");
-                // Route::resource("{$singular}_mnglnprop", "App\Http\Controllers\Manage\\{$ucfirstName}\\TablePropController");
-                Route::resource("{$singular}_mngrls", "App\Http\Controllers\Manage\\{$ucfirstName}\\RelationshipController");
-                Route::resource("{$singular}_mngstt", "App\Http\Controllers\Manage\\{$ucfirstName}\\StatusController");
+                $path = "App\Http\Controllers\Manage\\{$ucfirstName}";
+
+                Route::resource("{$singular}_prop", "$path\\PropController")->only('index', 'create', 'store');
+                Route::resource("{$singular}_rel", "$path\\RelationshipController")->only('index', 'store');
+                Route::resource("{$singular}_stt", "$path\\StatusController")->only('index', 'create', 'store');
             });
         }
     });
@@ -66,6 +66,7 @@ Route::group([
         Route::resource('permissions2', App\Http\Controllers\Permission\Permission::class);
     });
 });
+
 Route::group([
     'middleware' => ['auth']
 ], function () {
@@ -73,24 +74,11 @@ Route::group([
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::get('impersonate/user/{id}', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
 });
+
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 // Route::get('/mail-test', [MailController::class, 'index']);
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
 Route::resource('test', HomeController::class);
-// Route::resource('manage/manage_statusLibrary', ManageStatusLibrary::class);
-// Route::resource('manage/status', ManageStatusDoc::class);
-// Route::resource('statuses/statusLibrary', ManageStatusLibrary::class);
-
 Route::resource('dashboard/workflow/statuses', ManageStatuses::class)->only('index', 'store', 'create');
-
-Route::resource('manage/statusDocType', StatusDocType::class);
 Route::resource('/abc', HomeController::class);
-
 Route::get('components', [ComponentLib::class, 'index']);
-
-
-// Route::get('/test', function () {
-//     $user = App\Models\User::first();
-//     $user->notify(new CreatePostSuccess);
-//     return 'Done';
-// });

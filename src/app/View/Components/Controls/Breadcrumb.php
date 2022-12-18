@@ -31,9 +31,9 @@ class Breadcrumb extends Component
             $links[] = ['href' => route($type . '.edit', $latest_id), 'title' => 'View Latest',];
         }
         $links[] = ['href' => route($type . '.create'), 'title' => 'Add New',];
-        $links[] = ['href' => route($singular . '_mngprop.index'), 'title' => 'Props',];
-        $links[] = ['href' => route($singular . '_mngrls.index'), 'title' => 'Relationships',];
-        $links[] = ['href' =>  route($singular . '_mngstt.index'), 'title' => 'Statuses',];
+        $links[] = ['href' => route($singular . '_prop.index'), 'title' => 'Props',];
+        $links[] = ['href' => route($singular . '_rel.index'), 'title' => 'Relationships',];
+        $links[] = ['href' =>  route($singular . '_stt.index'), 'title' => 'Statuses',];
 
         return view('components.navigation.breadcrumb')->with(compact('links'));
     }

@@ -14,7 +14,7 @@
     <span>Relationship -></span>
 </div>
 <x-controls.breadcrumb type={{$type}} />
-<form action="{{ route($type . '_mngrls.store') }}" method="POST">
+<form action="{{ route($type . '_rel.store') }}" method="POST">
     @csrf
     <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border shadow-sm bg-white dark:bg-gray-800 ">
         <div class="w-full overflow-x-auto">
@@ -122,7 +122,7 @@
                         </td>
                         <td class="px-4 py-3 text-center text-sm">
                             @if ($colorLines[$key] == 'removed')
-                            <button class="btn btn-danger btn-delete" data-url="{{ route($type . '_mngrls.destroy', $name) }}" ​ type="button"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-danger btn-delete" data-url="{{ route($type . '_rel.destroy', $name) }}" ​ type="button"><i class="fas fa-trash"></i></button>
                             @endif
                         </td>
                     </tr>
@@ -194,7 +194,7 @@
                         </td>
                         <td class="px-4 py-3 text-center text-sm">
                             @isset($colorLines)
-                            <button class="btn btn-danger btn-delete" data-url="{{ route($type . '_mngrls.destroy', $name) }}" ​ type="button"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-danger btn-delete" data-url="{{ route($type . '_rel.destroy', $name) }}" ​ type="button"><i class="fas fa-trash"></i></button>
                             @endisset
                         </td>
                     </tr>

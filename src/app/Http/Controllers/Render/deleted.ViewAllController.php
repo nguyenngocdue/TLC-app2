@@ -82,13 +82,13 @@ abstract class ViewAllController extends Controller
             if (!file_exists($propsPath)) {
                 $messages[] = [
                     'title' => 'PROPS.JSON',
-                    'href' => Str::singular($type) . "_mngprop.index",
+                    'href' => Str::singular($type) . "_prop.index",
                 ];
             }
             if (!file_exists($relPath)) {
                 $messages[] = [
                     'title' => 'RELATIONSHIPS.JSON',
-                    'href' => Str::singular($type) . "_mngrls.index",
+                    'href' => Str::singular($type) . "_rel.index",
                 ];
             }
             return view('dashboards.pages.viewAll2')->with(compact('type', 'messages'));

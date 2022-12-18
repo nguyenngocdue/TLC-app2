@@ -3,7 +3,7 @@
 @section('title', 'Manage Props')
 
 @section('content')
-<form action="{{ route($type . '_mngprop.store') }}" method="POST">
+<form action="{{ route($type . '_prop.store') }}" method="POST">
     @csrf
     <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border shadow-sm bg-white dark:bg-gray-800 ">
         <div class="w-full overflow-x-auto">
@@ -126,7 +126,7 @@
                         </td>
                         <td class="px-4 py-3 text-center text-sm">
                             @if ($colorLines[$key] == 'removed')
-                            <button class="btn btn-danger btn-delete" data-url="{{ route($type . '_mngprop.destroy', $name) }}" ​ type="button"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-danger btn-delete" data-url="{{ route($type . '_prop.destroy', $name) }}" ​ type="button"><i class="fas fa-trash"></i></button>
                             @endif
                         </td>
                     </tr>

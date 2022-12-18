@@ -214,7 +214,7 @@ abstract class ManagePropController extends Controller
         $columns = $this->getColumns();
         $dataSourceWithKey = $this->getDataSource();
         $dataSource = array_values($dataSourceWithKey);
-        $route = route($type . '_mngprop.store');
+        $route = route($type . '_prop.store');
         return view('dashboards.pages.manageprop')->with(compact('type', 'columns', 'dataSource', 'route'));
     }
 

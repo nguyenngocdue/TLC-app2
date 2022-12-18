@@ -36,17 +36,12 @@ class SidebarEntityItems
                 ['title' => "-",],
                 [
                     'title' => "Manage Props",
-                    'href' => route("{$singular}_mngprop.index"),
+                    'href' => route("{$singular}_prop.index"),
                 ],
                 [
                     'title' => "Manage Relationships",
-                    'href' => route("{$singular}_mngrls.index"),
+                    'href' => route("{$singular}_rel.index"),
                 ],
-                // ['title' => '-'],
-                // [
-                //     'title' => "Manage Statuses",
-                //     'href' => route("{$singular}_mngstt.index"),
-                // ],
             ],
         ];
 
@@ -54,7 +49,7 @@ class SidebarEntityItems
             $result['children'][] =  ['title' => '-'];
             $result['children'][] =  [
                 'title' => "Manage Statuses",
-                'href' => route("{$singular}_mngstt.index"),
+                'href' => route("{$singular}_stt.index"),
             ];
         }
 
