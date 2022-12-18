@@ -21,8 +21,9 @@ Route::group([
     ], function () use ($entities) {
         foreach ($entities as $entity) {
             $entityName = $entity->getTable();
-            $ucfirstName = Str::ucfirst($entityName);
-            $path = "App\\Http\\Controllers\\Render\\{$ucfirstName}\\{$ucfirstName}";
+            $singular = Str::singular($entityName);
+            $ucfirstName = Str::ucfirst($singular);
+            $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
             Route::resource("{$entityName}", "{$path}ViewAllController")->only('index');
             Route::resource("{$entityName}", "{$path}CreateController")->only('create', 'store');
             Route::resource("{$entityName}", "{$path}EditController")->only('edit', 'update');
@@ -37,15 +38,14 @@ Route::group([
             $entityName = $entity->getTable();
             $singular = Str::singular($entityName);
             $ucfirstName = Str::ucfirst($singular);
-            $upperCaseName = Str::upper($entityName);
             Route::group([
-                'middleware' => "role:ADMIN-DATA-$upperCaseName"
+                'middleware' => "role:ADMIN-DATA-" . Str::upper($entityName),
             ], function () use ($singular, $ucfirstName) {
-                $path = "App\Http\Controllers\Manage\\{$ucfirstName}";
+                $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
 
-                Route::resource("{$singular}_prop", "$path\\PropController")->only('index', 'create', 'store');
-                Route::resource("{$singular}_rel", "$path\\RelationshipController")->only('index', 'store');
-                Route::resource("{$singular}_stt", "$path\\StatusController")->only('index', 'create', 'store');
+                Route::resource("{$singular}_prop", "{$path}PropController")->only('index', 'create', 'store');
+                Route::resource("{$singular}_rel", "{$path}RelationshipController")->only('index', 'store');
+                Route::resource("{$singular}_stt", "{$path}StatusController")->only('index', 'create', 'store');
             });
         }
     });

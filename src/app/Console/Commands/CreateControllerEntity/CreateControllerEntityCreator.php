@@ -55,7 +55,7 @@ class CreateControllerEntityCreator
      *
      * @throws \Exception
      */
-    public function create($nameClass, $name, $path, $stub, $render)
+    public function create($nameClass, $name, $path, $stub)
     {
 
         // First we will get the stub file for the migration, which serves as a type
@@ -68,7 +68,7 @@ class CreateControllerEntityCreator
 
         $this->files->put(
             $path,
-            $this->populateStub($stub, $name, $render)
+            $this->populateStub($stub, $name)
         );
         $this->firePostCreateHooks($nameClass, $path);
         // Next, we will fire any hooks that are supposed to fire after a migration is
@@ -84,7 +84,7 @@ class CreateControllerEntityCreator
      * @param  string|null  $name
      * @return string
      */
-    protected function populateStub($stub, $name, $render)
+    protected function populateStub($stub, $name)
     {
         // Here we will replace the table place-holders with the table specified by
         // the developer, which is useful for quickly creating a tables creation
@@ -99,7 +99,7 @@ class CreateControllerEntityCreator
                 [$nameClass, $nameSingular, $name, $nameClassSingular],
                 $stub
             );
-            if ($render && !Permission::where('name', "read-$name")->first()) {
+            if (!Permission::where('name', "read-$name")->first()) {
                 $result = "read-$name|create-$name|edit-$name|edit-others-$name|delete-$name|delete-others-$name";
                 $permissions = explode('|', $result);
                 foreach ($permissions as $permission) {

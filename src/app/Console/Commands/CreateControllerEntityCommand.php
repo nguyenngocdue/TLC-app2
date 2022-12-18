@@ -58,74 +58,53 @@ class CreateControllerEntityCommand extends Command
     public function handle()
     {
         $name = Str::ucfirst(Str::snake(trim($this->input->getArgument('name'))));
-        $render = $this->input->getOption('render');
-        if (!$render) {
-            $listName = [
-                "PropController",
-                "RelationshipController",
-                "StatusController",
-            ];
-        } else {
-            $name = Str::plural($name);
-            $listName = [
-                "{$name}ViewAllController",
-                "{$name}EditController",
-                "{$name}CreateController"
-            ];
-        }
-        $this->writeController($listName, $name, $render);
+        // $render = $this->input->getOption('render');
+        $listName = [
+            "PropController",
+            "RelationshipController",
+            "StatusController",
+            "ViewAllController",
+            "EditController",
+            "CreateController"
+        ];
+        $this->writeController($listName, $name);
         $this->composer->dumpAutoloads();
     }
-    protected function writeController($listName, $name, $render)
+    protected function writeController($listName, $name)
     {
-        $this->createDirectory($name, $render);
-        $stubs = $this->getStub($render);
+        $this->createDirectory($name);
+        $stubs = $this->getStub();
         foreach ($stubs as $key => $stub) {
             $file = $this->creator->create(
                 $listName[$key],
                 $name,
-                $this->getControllerPath($name, $render),
+                $this->getControllerPath($name),
                 $stub,
-                $render
             );
             $file = pathinfo($file, PATHINFO_FILENAME);
             $this->components->info(sprintf('Created controller [%s].', $file));
         }
     }
-    protected function createDirectory($name, $render)
+    protected function getControllerPath($name)
     {
-        if (!$render) {
-            $folder_name = "app/Http/Controllers/Manage/{$name}";
-        } else {
-            $name = Str::plural($name);
-            $folder_name = "app/Http/Controllers/Render/{$name}";
-        }
+        return base_path("app/Http/Controllers/Entities/{$name}/");
+    }
+    protected function createDirectory($name)
+    {
+        $folder_name = self::getControllerPath($name);
         error_log("\nFolder to create controllers: $folder_name");
         if (!file_exists($folder_name)) File::makeDirectory($folder_name);
     }
-    protected function getControllerPath($name, $render)
+    protected function getStub()
     {
-        if (!$render) {
-            return base_path("app/Http/Controllers/Manage/{$name}/");
-        }
-        $name = Str::plural($name);
-        return base_path("app/Http/Controllers/Render/{$name}/");
-    }
-    protected function getStub($render)
-    {
-        if (!$render) {
-            $sources = [
-                '/ndc.controller.manageprop.stub',
-                '/ndc.controller.managerelationship.stub',
-                '/ndc.controller.managestatus.stub',
-            ];
-        } else {
-            $sources = [
-                '/ndc.controller.render.stub',
-                '/ndc.controller.edit.stub',
-                '/ndc.controller.create.stub',
-            ];
-        }
+        $sources = [
+            '/ndc.controller.manageprop.stub',
+            '/ndc.controller.managerelationship.stub',
+            '/ndc.controller.managestatus.stub',
+            '/ndc.controller.render.stub',
+            '/ndc.controller.edit.stub',
+            '/ndc.controller.create.stub',
+        ];
         $creator = $this->creator;
         foreach ($sources as $stubname) {
             $customPath = $creator->getCustomPath() . $stubname;

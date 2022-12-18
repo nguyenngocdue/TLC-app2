@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Manage\{{nameClass}};
+namespace App\Http\Controllers\Entities\{{nameClass}};
 
-use App\Http\Controllers\Manage\ManageStatusController;
+use App\Http\Controllers\Entities\AbstractStatusController;
 use App\Models\{{nameClass}};
 
-class StatusController extends ManageStatusController
+class StatusController extends AbstractStatusController
 {
     protected $type = '{{nameModelSingular}}';
     protected $typeModel = {{nameClass}}::class;
