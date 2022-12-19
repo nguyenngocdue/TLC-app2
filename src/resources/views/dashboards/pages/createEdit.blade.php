@@ -115,7 +115,7 @@ $id = $action === "edit" ? $values->id : "";
 
                         @case('comment')
                         {{-- @dump($label) --}}
-                        <x-controls.comment-renderer id={{$id}} type={{$type}} colName={{$column_name}} action={{$action}} colSpan={{$col_span}} labelName={{$label}} />
+                        <x-controls.comment-group id={{$id}} type={{$type}} colName={{$column_name}} action={{$action}} colSpan={{$col_span}} labelName={{$label}} />
                         @break
 
                         @case('status')

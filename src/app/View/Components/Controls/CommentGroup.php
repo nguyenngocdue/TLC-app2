@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
-class CommentRenderer extends Component
+class CommentGroup extends Component
 {
     /**
      * Create a new component instance.
@@ -87,7 +87,7 @@ class CommentRenderer extends Component
         }
         // dump($dataComment);
         // dump($this->destroyable);
-        return view('components.controls.comment-renderer', [
+        return view('components.controls.comment-group', [
             "id" => $id,
             "name" => $name,
             "type" => $type,
