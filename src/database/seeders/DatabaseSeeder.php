@@ -19,17 +19,11 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             RoleSetSeeder::class,
             AdminSeeder::class,
-            AttachmentCategorySeeder::class,
+            FieldSeeder::class,
             PostSeeder::class,
 
-
-            // UserSeeder::class,
-            // MediaSeeder::class,
-            // WorkplaceSeeder::class,
-
-            // CommentSeeder::class,
-            // CommentCategorySeeder::class,
-
+            //To be removed:
+            AttachmentCategorySeeder::class,
         ]);
     }
 }

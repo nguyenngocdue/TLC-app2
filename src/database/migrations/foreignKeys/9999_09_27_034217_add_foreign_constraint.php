@@ -13,6 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
+        //************** SYSTEM MODULE **************/
+        Schema::table('terms', function (Blueprint $table) {
+            $table->foreign('field_id')->references('id')->on('fields')->onDelete('cascade');
+        });
+        Schema::table('many_to_many', function (Blueprint $table) {
+            $table->foreign('field_id')->references('id')->on('fields')->onDelete('cascade');
+        });
         //************** USER MODULE **************/
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('workplace')->references('id')->on('workplaces')->onDelete('cascade');
