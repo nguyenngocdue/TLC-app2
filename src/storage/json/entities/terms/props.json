@@ -51,12 +51,12 @@
         "validation": "",
         "formula": "All_SlugifyByName"
     },
-    "_field_name": {
-        "name": "_field_name",
-        "column_name": "field_name",
-        "column_type": "string",
+    "_field_id": {
+        "name": "_field_id",
+        "column_name": "field_id",
+        "column_type": "bigint",
         "label": "Field Name",
-        "control": "text",
+        "control": "dropdown",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
