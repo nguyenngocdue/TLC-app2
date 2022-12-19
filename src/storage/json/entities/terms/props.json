@@ -1,0 +1,93 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "column_type": "bigint",
+        "label": "Id",
+        "control": "id",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "column_type": "string",
+        "label": "Name",
+        "control": "text",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "required",
+        "formula": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "column_type": "text",
+        "label": "Description",
+        "control": "textarea",
+        "col_span": "12",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "column_type": "string",
+        "label": "Slug",
+        "control": "text",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": "All_SlugifyByName"
+    },
+    "_field_name": {
+        "name": "_field_name",
+        "column_name": "field_name",
+        "column_type": "string",
+        "label": "Field Name",
+        "control": "text",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "required",
+        "formula": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "column_type": "datetime",
+        "label": "Create At",
+        "control": "picker_datetime",
+        "col_span": "12",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "column_type": "datetime",
+        "label": "Updated At",
+        "control": "picker_datetime",
+        "col_span": "12",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    }
+}
