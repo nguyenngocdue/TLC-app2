@@ -45,7 +45,7 @@ class Helper
         }
 
         if ($keyNameEloquent === "") {
-            $pathTableSource =  $eloquentParam[$elementRel['control_name']][1] ?? "";
+            $pathTableSource =  $eloquentParam[$elementRel['control_name']][1] ?? "11111";
             return Helper::getDataFromPathModel($pathTableSource, $byFilters);
         }
         $pathTableSource = $eloquentParam[$keyNameEloquent][1];

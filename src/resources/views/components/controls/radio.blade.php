@@ -3,7 +3,7 @@ $idEntity = isset($currentEntity[$colName]) ? $currentEntity[$colName]*1 : null;
 $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
 $valDataSource = array_values($dataSource)[0];
 @endphp
-@if(count($valDataSource) <= 0) <p class=' bg-white border border-gray-300 text-blue-400 text-sm rounded-lg p-2.5 '>The data source of "{{array_keys($dataSource)[0]}}" table can be empty</p>
+@if(count($valDataSource) <= 0) <p class=' bg-white border border-gray-300 text-blue-400 text-sm rounded-lg p-2.5 '>Table "{{array_keys($dataSource)[0]}}" is empty</p>
     @else
     <div class="grid grid-cols-12  gap-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg f=  w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ">
         @foreach($valDataSource as $key => $data)
