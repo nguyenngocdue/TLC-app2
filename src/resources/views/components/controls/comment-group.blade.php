@@ -4,7 +4,7 @@
         @php
         $destroyable = $value['id'] !== '';
         @endphp
-        <x-renderer.comment destroyable={{$destroyable}} labelName="{{$labelName}}" btnUpload="{{$value['btnUpload'] ?? false}}" name="{{$name}}" type="{{$type}}" id="{{$id}}" :dataComment="$value" action={{$action}} readonly={{true}} showToBeDeleted={{$showToBeDeleted}} :attachmentData="$attachmentData"></x-renderer.comment>
+        <x-renderer.comment destroyable={{$destroyable}} label="{{$label}}" btnUpload="{{$value['btnUpload'] ?? false}}" name="{{$name}}" type="{{$type}}" id="{{$id}}" :dataComment="$value" action={{$action}} readonly={{true}} showToBeDeleted={{$showToBeDeleted}} :attachmentData="$attachmentData"></x-renderer.comment>
     </div>
     @endforeach
 </x-renderer.card>

@@ -9,7 +9,7 @@ class Localtime extends Component
 {
 
 
-    public function __construct(private $timeControls, private $control, private $id, private $tablePath, private $colName, private $z)
+    public function __construct(private $timeControls, private $control, private $id, private $modelPath, private $colName, private $label)
     {
     }
 
@@ -19,11 +19,11 @@ class Localtime extends Component
         $colName = $this->colName;
         $control = $this->control;
         $timeControls = $this->timeControls;
-        $labelName = $this->labelName;
+        $label = $this->label;
 
 
         // get database table name
-        $insTable = new $this->tablePath;
+        $insTable = new $this->modelPath;
         $tableName = $insTable->getTable();
         $currentTable = DB::table($tableName)->where('id', $selected)->first();
 
@@ -53,6 +53,6 @@ class Localtime extends Component
             $timeControls[6] => $dateTime,
         ];
 
-        return view('components.controls.localtime')->with(compact('day', 'dataTime', 'control', 'colName', 'labelName'));
+        return view('components.controls.localtime')->with(compact('day', 'dataTime', 'control', 'colName', 'label'));
     }
 }

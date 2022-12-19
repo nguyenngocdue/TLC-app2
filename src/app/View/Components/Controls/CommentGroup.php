@@ -23,7 +23,7 @@ class CommentGroup extends Component
         private $colName = '',
         private $action,
         private $readonly = true,
-        private $labelName = '',
+        private $label = '',
         private $destroyable = true,
     ) {
     }
@@ -39,7 +39,7 @@ class CommentGroup extends Component
         $name = $this->colName;
         $type = $this->type;
         $action = $this->action;
-        $labelName = $this->labelName;
+        $label = $this->label;
         $showToBeDeleted =  env('APP_ENV')  === 'local';
         $owner_id = Auth::user()->id;
 
@@ -88,7 +88,7 @@ class CommentGroup extends Component
             "id" => $id,
             "name" => $name,
             "type" => $type,
-            'labelName' => $labelName,
+            'label' => $label,
             "action" => $action,
             "dataComment" => $dataComment,
             'destroyable' => $this->destroyable,

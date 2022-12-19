@@ -118,7 +118,7 @@ $id = $action === "edit" ? $values->id : "";
 
                         @switch ($action)
                         @case('edit')
-                        <x-controls.localtime id={{$id}} control={{$control}} modelPath={{$modelPath}} :timeControls="$timeControls" :valDate="$valDate" label={{$label}} />
+                        <x-controls.localtime id={{$id}} control={{$control}} colName={{$columnName}} modelPath={{$modelPath}} :timeControls="$timeControls" label={{$label}} />
                         @break
                         @endswitch
                     </div>
