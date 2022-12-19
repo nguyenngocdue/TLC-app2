@@ -18,7 +18,7 @@
         "picker_year",
         "radio",
         "relationship_renderer",
-        "switch",
+        "toggle",
         "status",
         "text",
         "textarea",
