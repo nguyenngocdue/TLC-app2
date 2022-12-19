@@ -48,7 +48,7 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
 
         <div class="col-span-12 mt-2 rounded-lg border border-gray-300 overflow-hidden   ">
             <textarea name="newComment_{{$name}}" rows="2" @readonly($data['readonly']) placeholder="{{$isReadOnly ? '': 'Type here...'}}" class=" {{$isReadOnly && $isEmptyContent  ? 'bg-white hidden ' : ''}} bg-inherit resize-none  text-gray-900  p-2.5 dark:placeholder-gray-400 block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray">{{old('newComment_'.$name, $content) ?? $content }}</textarea>
-            <x-renderer.smart-attachment readonly="{{$data['readonly']}}" destroyable={{$isDestroyable}} categoryName={{$name}} :attachmentData="$attachmentData" action={{$action}} labelName={{$labelName}} path={{$path}} />
+            <x-renderer.attachment readonly="{{$data['readonly']}}" destroyable={{$isDestroyable}} categoryName={{$name}} :attachmentData="$attachmentData" action={{$action}} labelName={{$labelName}} path={{$path}} />
         </div>
     </div>
 </div>

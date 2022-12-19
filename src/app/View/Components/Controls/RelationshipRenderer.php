@@ -13,7 +13,7 @@ class RelationshipRenderer extends Component
      *
      * @return void
      */
-    public function __construct(private $id, private $type, private $colName, private $tablePath, private $action)
+    public function __construct(private $id, private $type, private $colName, private $modelPath, private $action)
     {
     }
 
@@ -25,7 +25,7 @@ class RelationshipRenderer extends Component
     public function render()
     {
         $colName = $this->colName;
-        $modelPath = $this->tablePath;
+        $modelPath = $this->modelPath;
         $type = $this->type;
         $id = $this->id;
         $action = $this->action;

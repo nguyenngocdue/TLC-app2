@@ -73,7 +73,6 @@ class CommentGroup extends Component
             $idCateCommentsUser = $allCommentsUser->pluck('category', 'id')->toArray();
 
             foreach ($idCateCommentsUser as $idComment => $keyCate) {
-                // dump($id, $dataComment);
                 if ($name === $idNameCatesDB[$keyCate]) {
                     foreach ($allCommentsUser->toArray() as $value) {
                         if ($value['id'] * 1 === $idComment * 1) {
@@ -85,8 +84,6 @@ class CommentGroup extends Component
             // add an empty comment component
             $dataComment = array_merge($array, $dataComment);
         }
-        // dump($dataComment);
-        // dump($this->destroyable);
         return view('components.controls.comment-group', [
             "id" => $id,
             "name" => $name,

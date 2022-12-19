@@ -9,7 +9,7 @@ class Localtime extends Component
 {
 
 
-    public function __construct(private $timeControls, private $valColumnNames, private $control, private $id, private $tablePath, private $colName, private $labelName)
+    public function __construct(private $timeControls, private $control, private $id, private $tablePath, private $colName, private $z)
     {
     }
 
@@ -28,7 +28,7 @@ class Localtime extends Component
         $currentTable = DB::table($tableName)->where('id', $selected)->first();
 
         $day = '';
-        $valColumnNames = $this->valColumnNames;
+
 
         if (in_array($control, $timeControls) && isset($currentTable->$colName)) $day = $currentTable->$colName;
 

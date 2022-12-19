@@ -7,18 +7,17 @@ use Illuminate\View\Component;
 class Number extends Component
 {
 
-    public function __construct(private $colName, private $valColName, private $action, private $strTimeControl, private $control, private $labelName)
+    public function __construct(private $colName, private $value, private $action, private $control, private $label)
     {
     }
 
     public function render()
     {
         $colName = $this->colName;
-        $valColName = $this->valColName;
+        $value = $this->value;
         $action = $this->action;
-        $timeControls = $this->strTimeControl;
         $control = $this->control;
-        $labelName = $this->labelName;
-        return view('components.controls.number')->with(compact('colName', 'valColName', 'action', 'timeControls', 'control', 'labelName'));
+        $label = $this->label;
+        return view('components.controls.number')->with(compact('colName', 'value', 'action', 'control', 'label'));
     }
 }

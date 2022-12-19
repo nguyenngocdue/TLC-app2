@@ -54,10 +54,10 @@ abstract class AbstractCreateEditController extends Controller
 		}
 
 		$type = $this->type;
-		$tablePath = $this->data;
+		$modelPath = $this->data;
 		$values = "";
 		$idItems = [];
-		return view('dashboards.pages.createEdit')->with(compact('props', 'type', 'action', 'tablePath', 'values', 'idItems'));
+		return view('dashboards.pages.createEdit')->with(compact('props', 'type', 'action', 'modelPath', 'values', 'idItems'));
 	}
 
 	public function edit($id)
@@ -68,10 +68,10 @@ abstract class AbstractCreateEditController extends Controller
 		$action = $this->action;
 		$values = $action === "create" ? "" : $currentElement;
 
-		$tablePath = $this->data;
+		$modelPath = $this->data;
 
 		$idItems = $this->getManyToManyRelationship($currentElement);
-		return view('dashboards.pages.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'tablePath', 'idItems'));
+		return view('dashboards.pages.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'modelPath', 'idItems'));
 	}
 
 	public function store(Request $request)
