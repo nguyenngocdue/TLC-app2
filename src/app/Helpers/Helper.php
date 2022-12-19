@@ -29,22 +29,26 @@ class Helper
         $instance = new $modelPath;
         $eloquentParam = $instance->eloquentParams;
 
+
+        $relationship = Relationships::getAllOf($type);
+        // dump($colName);
+        $elementRel = array_values(array_filter($relationship, fn ($item) => $item['control_name'] === $colName))[0] ?? [];
+
         $keyNameEloquent = "";
         foreach ($eloquentParam as $key => $value) {
+            // dd($colName, $value);
             if (in_array($colName, $value)) {
                 $keyNameEloquent = $key;
                 break;
             }
         }
-        $relationship = Relationships::getAllOf($type);
-        $elementRel = array_values(array_filter($relationship, fn ($item) => $item['control_name'] === $colName))[0] ?? [];
-
         $byFilters = [];
         if (isset($elementRel['filter_columns']) && $elementRel['filter_columns'] && $elementRel['filter_values']) {
             $byFilters = [$elementRel['filter_columns'] => $elementRel['filter_values']];
         }
 
         if ($keyNameEloquent === "") {
+            // dd($elementRel);
             $pathTableSource =  $eloquentParam[$elementRel['control_name']][1] ?? "11111";
             return Helper::getDataFromPathModel($pathTableSource, $byFilters);
             $pathTableSource =  $eloquentParam[$elementRel['control_name']][1] ?? "";

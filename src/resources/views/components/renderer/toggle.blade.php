@@ -1,6 +1,7 @@
-@if('1'===($slot->__toString()))
-<svg class="w-5 h-5 m-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64">
-    <path d="M32,2C15.431,2,2,15.432,2,32c0,16.568,13.432,30,30,30c16.568,0,30-13.432,30-30C62,15.432,48.568,2,32,2z M25.025,50
-	l-0.02-0.02L24.988,50L11,35.6l7.029-7.164l6.977,7.184l21-21.619L53,21.199L25.025,50z" fill="#43a047" />
-</svg>
-@endif
+<div>
+    <label class="inline-flex relative items-center mr-5 cursor-pointer">
+        <input type="checkbox" value="" class="sr-only peer" checked>
+        <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:{{$color}} dark:peer-focus:ring-yellow-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:{{$color}}"></div>
+        {!!$content ? "<span class='ml-3 text-sm font-medium text-gray-900 dark:text-gray-300'>$content</span>" : "" !!}
+    </label>
+</div>
