@@ -2,7 +2,7 @@
     "_radioYesNo": {
         "name": "_radioYesNo",
         "relationship": "belongsTo",
-        "control_name": "radio_yes_no",
+        "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -13,7 +13,7 @@
     "_radioPassFail": {
         "name": "_radioPassFail",
         "relationship": "belongsTo",
-        "control_name": "radio_pass_fail",
+        "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -24,7 +24,7 @@
     "_dropdownYesNo": {
         "name": "_dropdownYesNo",
         "relationship": "belongsTo",
-        "control_name": "dropdown_yes_no",
+        "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -35,7 +35,7 @@
     "_dropdownPassFail": {
         "name": "_dropdownPassFail",
         "relationship": "belongsTo",
-        "control_name": "dropdown_pass_fail",
+        "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
