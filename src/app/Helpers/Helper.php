@@ -46,10 +46,10 @@ class Helper
 
         if ($keyNameEloquent === "") {
             $pathTableSource =  $eloquentParam[$elementRel['control_name']][1] ?? "";
-            return Helper::getDataFromPathModel($pathTableSource, $byFilters);
+            return Helper::getDataFromPathModel($pathTableSource, $byFilters) ?? [];
         }
         $pathTableSource = $eloquentParam[$keyNameEloquent][1];
-        return Helper::getDataFromPathModel($pathTableSource, $byFilters) ?? $colName;
+        return Helper::getDataFromPathModel($pathTableSource, $byFilters) ?? [];
     }
 
 
@@ -265,12 +265,17 @@ class Helper
         }
         return $newItems;
     }
-    public  static function getItemModel($type, $id = '', $fnName = '')
+
+
+    public  static function getItemModel($type, $id = '')
     {
-        // dd($type, $id);
         $modelPath = "App\\Models\\" . Str::singular($type);
         if (!$id) return  App::make($modelPath);
-        $allItems = $fnName ? $modelPath::find($id)->{$fnName}()->get() : $modelPath::find($id)->first();
-        return $allItems;
+        return $modelPath::find($id)->get();
+    }
+    public  static function getItemModelByFn($type, $id = '', $fnName = '')
+    {
+        $modelPath = "App\\Models\\" . Str::singular($type);
+        return $modelPath::find($id)->{$fnName}()->get();
     }
 }

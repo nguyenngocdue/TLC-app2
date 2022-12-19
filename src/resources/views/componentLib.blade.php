@@ -18,14 +18,14 @@
             @dump($_GET)
             <form action="" method="GET">
                 <x-renderer.card title="attachmentData = [[]], not entering other attributes.  ">
-                    <x-renderer.smart-attachment :attachmentData="[]" />
+                    <x-renderer.attachment :attachmentData="[]" />
                 </x-renderer.card>
                 <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }">
-                    <x-renderer.smart-attachment readonly={{true}} destroyable={{true}} showToBeDeleted={{true}} :attachmentData="$attachmentData" />
+                    <x-renderer.attachment readonly={{true}} destroyable={{true}} showToBeDeleted={{true}} :attachmentData="$attachmentData" />
                 </x-renderer.card>
                 <br />
                 <x-renderer.card title="readonly = { { false} }, destroyable = { { false} }, showToBeDeleted = { { false} }, categoryName={ {attachment_2} } ">
-                    <x-renderer.smart-attachment readonly={{false}} destroyable={{false}} categoryName="attachment_2" showToBeDeleted={{false}} :attachmentData="$attachmentData" />
+                    <x-renderer.attachment readonly={{false}} destroyable={{false}} categoryName="attachment_2" showToBeDeleted={{false}} :attachmentData="$attachmentData" />
                 </x-renderer.card>
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
             </form>
