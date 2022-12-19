@@ -191,7 +191,7 @@ class ComponentLib extends Controller
                 ]
             ]
         ];
-
+        $attachmentData['attachment_2'] = $attachmentData['comment_1'];
 
         return view('componentLib', [
             'tableColumns' => $tableColumns,
