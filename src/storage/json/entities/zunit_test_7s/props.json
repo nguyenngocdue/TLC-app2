@@ -35,7 +35,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_comment_2": {
@@ -97,7 +97,7 @@
         "label": "Comments",
         "control": "",
         "col_span": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",

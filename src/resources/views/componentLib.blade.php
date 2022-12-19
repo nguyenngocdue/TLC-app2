@@ -59,8 +59,8 @@
             <br />
             @dump($_GET)
             <form action="" method="GET">
-                <x-renderer.card title=" showToBeDeleted={ {false} }, destroyable={ {true} }, attachmentData={ {$attachmentData} } name={ {comment_1} }">
-                    <x-renderer.comment showToBeDeleted={{false}} destroyable={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment" :attachmentData="$attachmentData" />
+                <x-renderer.card title="readonly={ {false} } showToBeDeleted={ {false} }, destroyable={ {true} }, attachmentData={ {$attachmentData} } name={ {comment_1} }">
+                    <x-renderer.comment readonly={{false}} showToBeDeleted={{false}} destroyable={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment" :attachmentData="$attachmentData" />
                 </x-renderer.card>
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
             </form>
