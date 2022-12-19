@@ -1,7 +1,7 @@
 <div>
     <select name="status" id="select-dropdown-{{$colName}}" class="w-full">
         @foreach($options as $option)
-        <option value="{{$option}}" @selected($currentStatus===$option)>{{Str::headline( $option)}}</option>
+        <option value="{{$option}}" @selected($value===$option)>{{Str::headline( $option)}}</option>
         @endforeach
     </select>
 </div>

@@ -18,9 +18,13 @@ class ControlStatus extends Component
         private $type,
         private $colName,
         private $id,
-        private $action
+        private $action,
+        private $tablePath,
     ) {
         //
+        $modelPath = $this->tablePath;
+        $model = $modelPath::find($this->id);
+        $this->value = is_null($model) ? "new" : $model->status;
     }
 
     public function render()
@@ -28,11 +32,11 @@ class ControlStatus extends Component
         $model = Helper::getItemModel($this->type);
         if (!method_exists($model, "transitionTo")) return "<x-feedback.alert type='warning' message='This model needs to use HasStatus trait.'></x-feedback.alert>";
         $cbb = $model->getAvailableStatuses();
-        $currentStatus = $this->action === 'edit' ? $model::find($this->id)->first()->status : '';
+        // $currentStatus = $this->action === 'edit' ? $model::find($this->id)->first()->status : '';
         return view("components.controls.control-status", [
             'options' => $cbb,
             'colName' => $this->colName,
-            'currentStatus' => $currentStatus,
+            'value' => $this->value,
         ]);
     }
 }

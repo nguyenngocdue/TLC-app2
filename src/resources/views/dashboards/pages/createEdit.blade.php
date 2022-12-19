@@ -119,7 +119,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case('status')
-                        <x-controls.control-status type={{$type}} colName={{$column_name}} id={{$id}} action={{$action}} />
+                        <x-controls.control-status type={{$type}} colName={{$column_name}} id={{$id}} action={{$action}} tablePath={{$tablePath}} />
                         @break
 
                         @default
