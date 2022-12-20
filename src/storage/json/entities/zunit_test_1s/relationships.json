@@ -42,5 +42,27 @@
         "renderer_edit_param": "",
         "filter_columns": "",
         "filter_values": ""
+    },
+    "_checkbox()": {
+        "name": "_checkbox()",
+        "relationship": "getCheckedByField",
+        "control_name": "checkbox()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": ""
+    },
+    "_dropdownMulti()": {
+        "name": "_dropdownMulti()",
+        "relationship": "getCheckedByField",
+        "control_name": "dropdownMulti()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": ""
     }
 }

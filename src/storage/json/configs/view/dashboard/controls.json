@@ -9,6 +9,8 @@
         "id",
         "link_morph_to",
         "number",
+        "new_checkbox",
+        "new_dropdown_multi",
         "picker_datetime",
         "picker_time",
         "picker_date",
@@ -61,5 +63,11 @@
         "morphTo",
         "morphMany",
         "belongsTo"
+    ],
+    "manage_prop_oracies": [
+        "getCheckedByField"
+    ],
+    "view_all_oracies": [
+        "getCheckedByField"
     ]
 }

@@ -57,14 +57,14 @@ abstract class AbstractViewAllController extends Controller
                 'dataIndex' => $prop['column_name'],
             ];
 
-            //Attach type to generate hyperlink
             switch ($prop['control']) {
                 case 'id':
+                    //Attach type to generate hyperlink
                     $output['type'] = $type;
                     $output['renderer'] = 'id';
                     $output['align'] = 'center';
                     break;
-                case 'switch':
+                case 'toggle':
                     $output['align'] = "center";
                     $output['renderer'] = "toggle";
                     break;
@@ -113,16 +113,25 @@ abstract class AbstractViewAllController extends Controller
     {
         // Log::info($columns);
         // Log::info($rawDataSource);
-        $eloquentParams = App::make($this->typeModel)->eloquentParams;
+        $model = App::make($this->typeModel);
+        $eloquentParams = $model->eloquentParams;
+        $oracyParams = $model->oracyParams;
         // Log::info($eloquentParams);
 
         $json = Relationships::getAllOf($this->type);
         if (is_array($columns)) {
             foreach ($columns as &$column) {
                 $dataIndex = $column['dataIndex'];
-                if (!isset($eloquentParams[$dataIndex])) continue; //<<Id, Name, Slug...
-                $relationship = $eloquentParams[$dataIndex][0];
-                $allows = JsonControls::getViewAllEloquents();
+                if (!isset($eloquentParams[$dataIndex]) && !isset($oracyParams[$dataIndex])) continue; //<<Id, Name, Slug...
+
+                if (isset($eloquentParams[$dataIndex])) {
+                    $relationship = $eloquentParams[$dataIndex][0];
+                    $allows = JsonControls::getViewAllEloquents();
+                } elseif (isset($oracyParams[$dataIndex])) {
+                    $relationship = $oracyParams[$dataIndex][0];
+                    $allows = JsonControls::getViewAllOracies();
+                }
+
                 if (in_array($relationship, $allows)) {
                     $relationshipJson = $json["_{$dataIndex}"];
                     $column['renderer'] = $relationshipJson['renderer_view_all'] ?? "";

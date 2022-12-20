@@ -93,7 +93,7 @@
     "_workplaceRel1": {
         "name": "_workplaceRel1",
         "column_name": "workplaceRel1",
-        "column_type": "ELQ(belongsToMany)",
+        "column_type": "eloquent_prop",
         "label": "Checkbox",
         "control": "checkbox",
         "col_span": "12",
@@ -106,7 +106,7 @@
     "_workplaceRel2": {
         "name": "_workplaceRel2",
         "column_name": "workplaceRel2",
-        "column_type": "ELQ(belongsToMany)",
+        "column_type": "eloquent_prop",
         "label": "Dropdown (Multiple)",
         "control": "dropdown_multi",
         "col_span": "12",
@@ -114,6 +114,32 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
+        "formula": ""
+    },
+    "_checkbox()": {
+        "name": "_checkbox()",
+        "column_name": "checkbox()",
+        "column_type": "oracy_prop",
+        "label": "Checkbox",
+        "control": "new_checkbox",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_dropdownMulti()": {
+        "name": "_dropdownMulti()",
+        "column_name": "dropdownMulti()",
+        "column_type": "oracy_prop",
+        "label": "Dropdown Multi",
+        "control": "new_dropdown_multi",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
         "formula": ""
     },
     "_created_at": {

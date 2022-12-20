@@ -2,45 +2,45 @@
     "_radioYesNo": {
         "name": "_radioYesNo",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "radio_yes_no",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "filter_columns": "",
+        "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "1"
     },
     "_radioPassFail": {
         "name": "_radioPassFail",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "radio_pass_fail",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "filter_columns": "",
+        "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "2"
     },
     "_dropdownYesNo": {
         "name": "_dropdownYesNo",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "dropdown_yes_no",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "filter_columns": "",
+        "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "1"
     },
     "_dropdownPassFail": {
         "name": "_dropdownPassFail",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "dropdown_pass_fail",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "filter_columns": "",
+        "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "2"
     },
     "_checkboxYesNo": {

@@ -133,15 +133,25 @@ abstract class AbstractPropController extends Controller
 
     private function getRenderableRelationships()
     {
-        $columnEloquentParams = App::make($this->typeModel)->eloquentParams;
+        $model = App::make($this->typeModel);
+        $eloquentParams = $model->eloquentParams;
+        $oracyParams = $model->oracyParams;
+        $columnParams = $eloquentParams + $oracyParams;
+        // Log::info($columnParams);
+
+        $propEloquent = JsonControls::getManagePropEloquents();
+        $allows =  [...$propEloquent, ...JsonControls::getManagePropOracies()];
+        // Log::info($allows);
 
         $result = [];
-        foreach ($columnEloquentParams as $elqName => $elqValue) {
-            if (in_array($elqValue[0], JsonControls::getManagePropEloquents())) {
+        foreach ($columnParams as $elqName => $elqValue) {
+            if (in_array($elqValue[0], $allows)) {
+                $column_type = in_array($elqValue[0], $propEloquent) ? "eloquent_prop" : "oracy_prop";
                 $result["_$elqName"] = [
                     "name" => "_$elqName",
                     "column_name" => "$elqName",
-                    "column_type" => "ELQ(" . $elqValue[0] . ")",
+                    "column_type" => $column_type,
+                    // "column_type" => "ELQ(" . $elqValue[0] . ")",
                     "label" => Str::headline($elqName),
                     "col_span" => 12,
                 ];
@@ -180,10 +190,13 @@ abstract class AbstractPropController extends Controller
         $json = Props::getAllOf($this->type);
 
         $this->renewColumn($json, $result, 'column_type');
+        // Log::info($result);
+        // Log::info($json);
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
         foreach (array_keys($toBeGreen) as $key) $json[$key]['row_color'] = "green";
         foreach (array_keys($toBeRed) as $key) $json[$key]['row_color'] = "red";
         foreach ($json as &$line) if (isset($line['column_type']) && $line['column_type'] === 'static') $line['row_color'] = "amber";
+        // foreach ($json as &$line) if (isset($line['column_type']) && $line['column_type'] === 'oracy_prop') $line['row_color'] = "";
 
         foreach ($result as $key => $columns) {
             foreach ($columns as $column => $value) {

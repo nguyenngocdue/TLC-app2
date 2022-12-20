@@ -83,6 +83,7 @@ class Table extends Component
   private function makeTd($columns, $dataLine, $columnCount, $no)
   {
     $tds = [];
+    // Log::info($columns);
     foreach ($columns as $index => $column) {
       $renderer = $column['renderer'] ?? false;
       switch ($renderer) {
@@ -92,9 +93,18 @@ class Table extends Component
           break;
         default:
           $dataIndex = $column['dataIndex'];
-          $rawData = $dataLine[$dataIndex] ?? ""; //"<strong>$dataIndex</strong> not found";
+          if (str_contains($dataIndex, "()")) {
+            $fn = substr($dataIndex, 0, strlen($dataIndex) - strlen("()"));
+            $rawData = $dataLine->$fn() ?? ""; //this is to execute the getCheckedByField function
+          } else {
+            $rawData = $dataLine[$dataIndex] ?? "";
+          }
           $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
-          $rendered = $renderer ? $this->applyRender($renderer, $rawData, $column, $dataLine) : $rawData;
+          $rendered = $renderer
+            // ? "A" 
+            // : "B";
+            ? $this->applyRender($renderer, $rawData, $column, $dataLine)
+            : $rawData;
           break;
       }
       $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";

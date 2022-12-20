@@ -82,9 +82,13 @@ abstract class AbstractRelationshipController extends Controller
 
     private function makeBlankDefaultObject()
     {
-        $columnEloquentParams = App::make($this->typeModel)->eloquentParams;
+        $model = App::make($this->typeModel);
+        $eloquentParams = $model->eloquentParams;
+        $oracyParams = $model->oracyParams;
+        $columnParams = $eloquentParams + $oracyParams;
+
         $result = [];
-        foreach ($columnEloquentParams as $elqName => $elqValue) {
+        foreach ($columnParams as $elqName => $elqValue) {
             $rowDescription = join(" | ", $elqValue);
             $result["_$elqName"] = [
                 "name" => "_$elqName",
