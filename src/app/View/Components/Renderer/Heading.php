@@ -27,7 +27,7 @@ class Heading extends Component
         return function (array $data) {
             $font = "";
             $size = 6 - $this->level;
-            $h = "h$size";
+            $h = "h" . $this->level;
             $textSize = $size . "xl";
             if ($size === 1) $textSize = "xl";
             if ($size === 0) {

@@ -35,7 +35,7 @@ trait HasCheckbox
     function getChecked()
     {
         $result0 = DB::table('many_to_many')->where('doc_type', $this::class)->where('doc_id', $this->id)->get();
-        if ($result0->count() == 0) return [];
+        if ($result0->count() == 0) return new Collection([]);
 
         $ids = $result0->pluck('term_id');
         $modelPath = $result0->pluck('term_type')[0];

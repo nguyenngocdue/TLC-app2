@@ -2,15 +2,10 @@
 
 namespace App\Models;
 
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Scout\Searchable;
+use App\BigThink\ModelExtended;
 
-class Prod_routing_detail extends Model
+class Prod_routing_detail extends ModelExtended
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = [
         "prod_routing_id", "prod_routing_link_id", "erp_routing_id",
         "wir_description_id", "target_hours", "target_man_hours",

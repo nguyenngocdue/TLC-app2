@@ -2,15 +2,10 @@
 
 namespace App\Models;
 
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Scout\Searchable;
+use App\BigThink\ModelExtended;
 
-class Zunit_test_7 extends Model
+class Zunit_test_7 extends ModelExtended
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ['content', 'comment_1', 'comment_2', 'comment_3'];
     protected $table = "zunit_test_7s";
     public $menuTitle = "UT07 (Comments)";

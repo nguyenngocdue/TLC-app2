@@ -2,16 +2,10 @@
 
 namespace App\Models;
 
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
-use Illuminate\Notifications\Notifiable;
+use App\BigThink\ModelExtended;
 
-class Prod_routing_link extends Model
+class Prod_routing_link extends ModelExtended
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
-
     public $timestamps = true;
     protected $fillable = ["id", "name", "parent", "description", "slug"];
     protected $primaryKey = 'id';

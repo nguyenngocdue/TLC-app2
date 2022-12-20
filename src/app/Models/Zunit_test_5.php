@@ -2,15 +2,10 @@
 
 namespace App\Models;
 
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Scout\Searchable;
+use App\BigThink\ModelExtended;
 
-class Zunit_test_5 extends Model
+class Zunit_test_5 extends ModelExtended
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["name", "attachment_1", "attachment_2", "attachment_3", "attachment_4", "attachment_5"];
     protected $primaryKey = "id";
     protected $table = "zunit_test_5s";

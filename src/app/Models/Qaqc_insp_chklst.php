@@ -2,15 +2,10 @@
 
 namespace App\Models;
 
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Scout\Searchable;
+use App\BigThink\ModelExtended;
 
-class Qaqc_insp_chklst extends Model
+class Qaqc_insp_chklst extends ModelExtended
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["id", "prod_order_id", "name", "description", "owner_id", "slug", "consent_number", "progress"];
     protected $table = "qaqc_insp_chklsts";
 

@@ -2,15 +2,10 @@
 
 namespace App\Models;
 
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Scout\Searchable;
+use App\BigThink\ModelExtended;
 
-class Zunit_test_2 extends Model
+class Zunit_test_2 extends ModelExtended
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ['content', 'radio_yes_no', 'radio_pass_fail', 'dropdown_yes_no', 'dropdown_pass_fail'];
     protected $table = "zunit_test_2s";
     public $menuTitle = "UT02 (Dropdown/Checkbox)";

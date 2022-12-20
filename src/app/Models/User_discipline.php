@@ -2,15 +2,10 @@
 
 namespace App\Models;
 
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
-use Illuminate\Notifications\Notifiable;
+use App\BigThink\ModelExtended;
 
-class User_discipline extends Model
+class User_discipline extends ModelExtended
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["name", "description", "def_assignee", "def_monitors", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'user_disciplines';

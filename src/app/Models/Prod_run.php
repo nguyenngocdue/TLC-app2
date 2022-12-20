@@ -2,16 +2,12 @@
 
 namespace App\Models;
 
+use App\BigThink\ModelExtended;
 use App\Http\Traits\HasStatus;
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
-use Illuminate\Notifications\Notifiable;
 
-class Prod_run extends Model
+class Prod_run extends ModelExtended
 {
-    use HasStatus, Notifiable, HasFactory, Searchable, CheckPermissionEntities;
+    use HasStatus;
     public $timestamps = true;
     protected $fillable = ["prod_order_id", "prod_routing_link_id", "status", "total_hours", "total_man_hours"];
     protected $primaryKey = 'id';

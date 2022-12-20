@@ -2,16 +2,12 @@
 
 namespace App\Models;
 
+use App\BigThink\ModelExtended;
 use App\Http\Traits\HasStatus;
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
-use Illuminate\Notifications\Notifiable;
 
-class Prod_order extends Model
+class Prod_order extends ModelExtended
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities, HasStatus;
+    use HasStatus;
     public $timestamps = true;
     protected $fillable = [
         "id", "slug", "name", "status", "production", "compliance", "description", "quantity",
@@ -49,12 +45,5 @@ class Prod_order extends Model
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function toSearchableArray()
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-        ];
     }
 }

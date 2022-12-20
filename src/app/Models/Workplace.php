@@ -2,15 +2,10 @@
 
 namespace App\Models;
 
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Scout\Searchable;
+use App\BigThink\ModelExtended;
 
-class Workplace extends Model
+class Workplace extends ModelExtended
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["name", "description", "def_publish_holiday_hour", "def_assignee", "def_monitors", "slug"];
     protected $primaryKey = 'id';
     protected $table = 'workplaces';
@@ -40,13 +35,5 @@ class Workplace extends Model
     public function unitTestDropDown2()
     {
         return $this->belongsToMany(ZunitTest1::class, 'zunit_test_1s_workplaces_rel_2', 'zunit_test_1_id', 'workplace_id');
-    }
-
-    public function toSearchableArray()
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-        ];
     }
 }

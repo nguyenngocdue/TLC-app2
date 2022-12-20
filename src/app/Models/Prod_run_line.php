@@ -2,15 +2,10 @@
 
 namespace App\Models;
 
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
-use Illuminate\Notifications\Notifiable;
+use App\BigThink\ModelExtended;
 
-class Prod_run_line extends Model
+class Prod_run_line extends ModelExtended
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ["prod_run_id", "date", "start", "end"];
     protected $primaryKey = 'id';
     protected $table = 'prod_run_lines';

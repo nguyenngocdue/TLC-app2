@@ -58,7 +58,7 @@
         "label": "Filename",
         "control": "text",
         "col_span": "12",
-        "hidden_view_all": "true",
+        "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
@@ -158,7 +158,7 @@
     "_mediable": {
         "name": "_mediable",
         "column_name": "mediable",
-        "column_type": "ELQ(morphTo)",
+        "column_type": "eloquent_prop",
         "label": "Parent",
         "control": "link_morph_to",
         "col_span": "12",

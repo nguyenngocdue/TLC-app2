@@ -2,17 +2,14 @@
 
 namespace {{ namespace }};
 
+use App\BigThink\ModelExtended;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Scout\Searchable;
 
-class {{ class }} extends Model
+class {{ class }} extends ModelExtended
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
+    use Notifiable, HasFactory, CheckPermissionEntities;
     protected $fillable = [];
     protected $table = "";
-
-    public $eloquentParams = [];
 }
