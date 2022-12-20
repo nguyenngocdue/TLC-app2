@@ -40,66 +40,8 @@ class AppServiceProvider extends ServiceProvider
                 return $app->basePath('stubs');
             });
 
-        Str::macro('modelToPretty', function (string $string) {
-            return Str::headline(App::make($string)->getTable());
-        });
-        Str::macro('same', function (string $string) {
-            return $string;
-        });
-        Str::macro('makeId', function (string $id) {
-            $numberRender = str_pad($id, 6, '0', STR_PAD_LEFT);
-            $result = '#' . substr($numberRender, 0, 3) . '.' . substr($numberRender, 3, 6);
-            return $result;
-        });
-        Str::macro('limitWords', function (string $str, $count, $maxLen = 50) {
-            $i = $c = 0;
-            while ($i < strlen($str)) {
-                if ($str[$i] === ' ' && ++$c === $count) return substr($str, 0, $i) . " ...";
-                $i++;
-            }
-            if (strlen($str) > $maxLen) $str = substr($str, 0, $maxLen) . " ...";
-            return $str;
-        });
-        Arr::macro('moveDirection', function ($json, $direction, $index, $name = null) {
-            switch ($direction) {
-                case "up":
-                    if ($index === 0) {
-                        $value = $json[0];
-                        unset($json[0]);
-                        array_push($json, $value);
-                    } else {
-                        $tmp = $json[$index - 1];
-                        $json[$index - 1] = $json[$index];
-                        $json[$index] = $tmp;
-                    }
-                    break;
-                case "down":
-                    if ($index === sizeof($json) - 1) {
-                        $value = array_pop($json);
-                        array_unshift($json, $value);
-                    } else {
-                        $tmp = $json[$index + 1];
-                        $json[$index + 1] = $json[$index];
-                        $json[$index] = $tmp;
-                    }
-                    break;
-                case "left":
-                    if (!is_null($name)) {
-                        array_push($json, $name);
-                    }
-                    break;
-                case "right":
-                    if (!is_null($name)) {
-                        $json = array_filter($json, fn ($name0) => $name !== $name0);
-                    }
-                    break;
-                case "right_by_name":
-                    if (!is_null($name)) {
-                        $json = array_filter($json, fn ($item) => $name !== $item['name']);
-                    }
-                    break;
-            }
-            return $json;
-        });
+
+        include_once(__DIR__ . "/Macro/Str.php");
+        include_once(__DIR__ . "/Macro/Arr.php");
     }
 }
