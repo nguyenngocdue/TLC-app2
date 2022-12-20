@@ -3,13 +3,9 @@
 namespace {{ namespace }};
 
 use App\BigThink\ModelExtended;
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Notifications\Notifiable;
 
 class {{ class }} extends ModelExtended
 {
-    use Notifiable, HasFactory, CheckPermissionEntities;
     protected $fillable = [];
     protected $table = "";
 }
