@@ -42,41 +42,39 @@ $id = $action === "edit" ? $values->id : "";
             <div class='grid grid-row-1 gap-3'>
 
                 <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
+                    @if($columnType === 'static')
                     <div class='col-span-{{$col_span}} text-left'>
-                        @if($columnType === 'static')
                         @switch($control)
+                        @case('z_page_break')
+                        <div style='page-break-after:always !important '>-------</div>
                         @case('z_h1')
-                        <x-renderer.heading level=1>Heading Level 1</x-renderer.heading>
+                        <x-renderer.heading level=1>{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h2')
-                        <x-renderer.heading level=2>Heading Level 2</x-renderer.heading>
+                        <x-renderer.heading level=2>{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h3')
-                        <x-renderer.heading level=3>Heading Level 3</x-renderer.heading>
+                        <x-renderer.heading level=3>{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h4')
-                        <x-renderer.heading level=4>Heading Level 4</x-renderer.heading>
+                        <x-renderer.heading level=4>{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h5')
-                        <x-renderer.heading level=5>Heading Level 5</x-renderer.heading>
+                        <x-renderer.heading level=5>{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h6_base')
-                        <x-renderer.heading>Heading Level 6 - base</x-renderer.heading>
+                        <x-renderer.heading>{{$label}}</x-renderer.heading>
                         @break
                         @case('z_divider')
                         <x-renderer.divider />
                         @break
-                        @case('z_page_break')
-                        @break
+
                         @default
                         <x-feedback.alert type="warning" title="Control" message="[{{$control}}] is not available" />
                         @break
                         @endswitch
-                        @endif
                     </div>
-                </div>
-
-                <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
+                    @else
                     <div class='col-start-1 col-span-{{24/$col_span}} {{$val['new_line'] === 'true' ? "col-span-12 text-left" : "text-right" }} '>
                         <label class='text-gray-700 dark:text-gray-400  px-3 block text-base' title='{{$columnName}} / {{$control}}'>{{$label}}
                             {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
@@ -155,7 +153,9 @@ $id = $action === "edit" ? $values->id : "";
                         @break
                         @endswitch
                     </div>
+                    @endif
                 </div>
+
             </div>
         </div>
         @endforeach

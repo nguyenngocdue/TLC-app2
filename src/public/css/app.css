@@ -995,6 +995,18 @@ video {
 .list-none {
   list-style-type: none;
 }
+.break-before-column {
+  -moz-column-break-before: column;
+       break-before: column;
+}
+.break-after-all {
+  -moz-column-break-after: all;
+       break-after: all;
+}
+.break-after-page {
+  -moz-column-break-after: page;
+       break-after: page;
+}
 .grid-cols-12 {
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
