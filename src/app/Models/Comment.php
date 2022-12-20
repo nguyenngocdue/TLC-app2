@@ -2,15 +2,10 @@
 
 namespace App\Models;
 
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Scout\Searchable;
+use App\BigThink\ModelExtended;
 
-class Comment extends Model
+class Comment extends ModelExtended
 {
-    use Notifiable, HasFactory, Searchable, CheckPermissionEntities;
     protected $fillable = ['content', 'position_rendered', 'owner_id', 'category'];
     protected $table = "comments";
     protected $primaryKey = 'id';

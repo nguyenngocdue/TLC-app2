@@ -75,6 +75,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "productionRunLines" => ['belongsToMany', Prod_run_line::class, 'prod_user_runs', 'user_id', 'prod_run_line_id'],
         "qaqcInspChklsts" => ['belongsTo', Qaqc_insp_chklst::class, 'owner_id']
     ];
+    public $oracyParams = [];
     protected $guard_name = 'web';
 
     public function mediable()
