@@ -8,8 +8,8 @@ $valDataSource = array_values($dataSource)[0];
         @php
         $selected = is_null(old($colName)) ? isset($idItems[$colName]) && in_array($data->id, $idItems[$colName]) : in_array($data->id, old($colName));
         @endphp
-        <input {{ $selected ? "checked":""}} name="{{$colName}}[]" value="{{$data->id}}" type="checkbox" id='{{$colName.$data->name}}' title="{{isset($data->description) ? "$data->description (#$data->id)" : "" }}" class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-        <label for='{{$colName.$data->name}}' id='{{$key.$data->name}}' class=" ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" title="{{isset($data->description) ? "$data->description (#$data->id)" : "" }}">{{$data->name}}</label>
+        <input {{ $selected ? "checked":""}} name="{{$colName}}[]" value="{{$data->id}}" type="checkbox" id='{{$label.$data->name}}' title="{{isset($data->description) ? "$data->description (#$data->id)" : "" }}" class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+        <label for='{{$label.$data->name}}' class=" ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" title="{{isset($data->description) ? "$data->description (#$data->id)" : "" }}">{{$data->name}}</label>
     </div>
     @endforeach
 </div>

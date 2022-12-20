@@ -63,7 +63,6 @@ $id = $action === "edit" ? $values->id : "";
                         @case('z_h6_base')
                         <x-renderer.heading>Heading Level 6 - base</x-renderer.heading>
                         @break
-
                         @case('z_divider')
                         <x-renderer.divider />
                         @break

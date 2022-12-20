@@ -14,7 +14,6 @@ trait CreateEditControllerComment
     private function saveAndGetIdsComments($dataInput)
     {
         $nameIdsDB = Helper::getDataDbByName('attachment_categories', 'name', 'id');
-        dump($nameIdsDB);
         $ids = [];
         foreach ($dataInput as $key => $value) {
             // dd($value);

@@ -277,11 +277,16 @@ class Helper
     {
         $modelPath = "App\\Models\\" . Str::singular($type);
         if (!$id) return  App::make($modelPath);
-        return $modelPath::find($id)->get();
+        return $modelPath::find($id);
     }
     public  static function getItemModelByFn($type, $id = '', $fnName = '')
     {
         $modelPath = "App\\Models\\" . Str::singular($type);
         return $modelPath::find($id)->{$fnName}()->get();
     }
+    // public  static function getAttributesItemInModel($type, $id = '')
+    // {
+    //     $modelPath = "App\\Models\\" . Str::singular($type);
+    //     return $modelPath::find($id);
+    // }
 }

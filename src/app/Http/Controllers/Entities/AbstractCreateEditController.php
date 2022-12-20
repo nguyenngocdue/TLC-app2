@@ -206,11 +206,11 @@ abstract class AbstractCreateEditController extends Controller
 
 	private function handleToggle($method, $props, &$dataInput)
 	{
-		$switchControls = array_filter($props, fn ($prop) => $prop['control'] === 'switch');
-		$switchControls = array_values(array_map(fn ($item) => $item['column_name'], $switchControls));
-		// dd($switchControls);
-		foreach ($switchControls as $switch) {
-			$dataInput[$switch] = isset($dataInput[$switch]) ? ($method === 'store' ? $dataInput[$switch] : 1)  : null;
+		$toggleControls = array_filter($props, fn ($prop) => $prop['control'] === 'toggle');
+		$toggleControls = array_values(array_map(fn ($item) => $item['column_name'], $toggleControls));
+		// dd($toggleControls);
+		foreach ($toggleControls as $toggle) {
+			$dataInput[$toggle] = isset($dataInput[$toggle]) ? ($method === 'store' ? $dataInput[$toggle] : 1)  : null;
 		}
 
 		return $dataInput;

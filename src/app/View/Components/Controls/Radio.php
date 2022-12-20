@@ -29,7 +29,6 @@ class Radio extends Component
 
         $dataSource = Helper::getDataSource($modelPath, $colName, $type);
         $currentEntity = Helper::getItemModel($this->type, $this->id) ?? [];
-
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
             $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in $modelPath Model).";
             return "<x-feedback.alert message='$message' type='warning' />";
