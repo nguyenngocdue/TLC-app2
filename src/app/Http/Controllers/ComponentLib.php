@@ -23,6 +23,7 @@ class ComponentLib extends Controller
                 "title" => 'Logged In',
                 "dataIndex" => "loggedIn",
                 "renderer" => "toggle",
+                "align" => "center",
             ],
             [
                 "title" => 'Amount', "dataIndex" => "amount",
@@ -53,6 +54,7 @@ class ComponentLib extends Controller
                 "title" => 'Logged In',
                 "dataIndex" => "loggedIn",
                 "renderer" => "toggle",
+                "align" => "center",
                 // "editable" => true,
             ],
             [

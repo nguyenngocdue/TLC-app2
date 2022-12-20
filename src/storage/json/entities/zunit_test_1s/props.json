@@ -56,7 +56,7 @@
         "column_name": "boolean1",
         "column_type": "bigint",
         "label": "Boolean",
-        "control": "switch",
+        "control": "toggle",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",

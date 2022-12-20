@@ -23,8 +23,9 @@ abstract class AbstractCreateEditController extends Controller
 	use CreateEditControllerM2M;
 	use CreateEditControllerMedia;
 	use CreateEditControllerComment;
+	use CreateEditControllerStatus;
 	use CreateEditFormula;
-	use HasStatus;
+	// use HasStatus;
 
 	protected $type;
 	protected $data;

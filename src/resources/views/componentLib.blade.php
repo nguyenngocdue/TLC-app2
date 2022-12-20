@@ -115,8 +115,12 @@
             <x-renderer.status>assigned</x-renderer.status><br />
             <x-renderer.status>closed</x-renderer.status><br />
             <br />
-            Toggle
-            <x-renderer.switch color="bg-blue-900" content="My text here" />
+            Toggle FALSE
+            <x-controls.toggle colName='hello' value=0 label="hello"></x-controls.toggle>
+            <br/>
+            Toggle TRUE
+            <x-controls.toggle colName='hello' value=1 label="hello"></x-controls.toggle>
+            <br/>
 
         </x-renderer.card>
 
