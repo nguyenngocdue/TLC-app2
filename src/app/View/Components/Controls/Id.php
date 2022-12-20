@@ -6,8 +6,13 @@ use Illuminate\View\Component;
 
 class Id extends Component
 {
-    public function __construct(private $colName, private $value, private $action, private $control, private $label)
-    {
+    public function __construct(
+        private $colName,
+        private $value,
+        private $action,
+        private $control,
+        private $label,
+    ) {
     }
 
     public function render()

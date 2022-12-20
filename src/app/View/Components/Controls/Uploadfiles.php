@@ -11,8 +11,13 @@ use Illuminate\Support\Str;
 
 class Uploadfiles extends Component
 {
-    public function __construct(private $id, private $colName, private $action, private $label, private $type)
-    {
+    public function __construct(
+        private $id,
+        private $colName,
+        private $action,
+        private $label,
+        private $type,
+    ) {
     }
 
     public function render()

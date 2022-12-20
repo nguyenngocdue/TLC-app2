@@ -8,8 +8,15 @@ use Illuminate\View\Component;
 
 class Checkbox extends Component
 {
-    public function __construct(private $id, private $colName, private $idItems, private $action, private $modelPath, private $label, private $type)
-    {
+    public function __construct(
+        private $id,
+        private $colName,
+        private $idItems,
+        private $action,
+        private $modelPath,
+        private $label,
+        private $type,
+    ) {
     }
 
     public function render()

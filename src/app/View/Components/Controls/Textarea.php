@@ -6,8 +6,14 @@ use Illuminate\View\Component;
 
 class Textarea extends Component
 {
-    public function __construct(private $colName, private $value, private $action, private $control, private $label, private $colType)
-    {
+    public function __construct(
+        private $colName,
+        private $value,
+        private $action,
+        private $control,
+        private $label,
+        private $colType,
+    ) {
     }
 
     public function render()

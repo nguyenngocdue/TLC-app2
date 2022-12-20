@@ -7,8 +7,14 @@ use Illuminate\View\Component;
 
 class Dropdownmulti extends Component
 {
-    public function __construct(private $colName, private $idItems, private $action, private $modelPath, private $label, private $type)
-    {
+    public function __construct(
+        private $colName,
+        private $idItems,
+        private $action,
+        private $modelPath,
+        private $label,
+        private $type,
+    ) {
     }
 
     public function render()

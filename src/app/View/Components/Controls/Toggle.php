@@ -6,8 +6,11 @@ use Illuminate\View\Component;
 
 class Toggle extends Component
 {
-    public function __construct(private $colName, private $value, private $label)
-    {
+    public function __construct(
+        private $colName,
+        private $value,
+        private $label,
+    ) {
     }
 
     public function render()

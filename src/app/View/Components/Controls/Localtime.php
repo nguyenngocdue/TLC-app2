@@ -9,8 +9,14 @@ class Localtime extends Component
 {
 
 
-    public function __construct(private $timeControls, private $control, private $id, private $modelPath, private $colName, private $label)
-    {
+    public function __construct(
+        private $timeControls,
+        private $control,
+        private $id,
+        private $modelPath,
+        private $colName,
+        private $label,
+    ) {
     }
 
     public function render()

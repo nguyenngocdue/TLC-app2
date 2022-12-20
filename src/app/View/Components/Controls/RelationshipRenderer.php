@@ -13,8 +13,13 @@ class RelationshipRenderer extends Component
      *
      * @return void
      */
-    public function __construct(private $id, private $type, private $colName, private $modelPath, private $action)
-    {
+    public function __construct(
+        private $id,
+        private $type,
+        private $colName,
+        private $modelPath,
+        private $action,
+    ) {
     }
 
     /**
