@@ -11,7 +11,7 @@ $id = $action === "edit" ? $values->id : "";
 @endphp
 
 <x-controls.headeralertvalidation :strProps="$props" />
-<form class="w-full p-4 z-0 px-4 py-3 text-center mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? 0 : $id )}} ">
+<form class="w-full p-4 z-0 px-4 py-3 text-center mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? 0 : $id )}} ">
     @csrf
     <div class="flex flex-col grid-cols-12">
         @method($action === "create" ? 'POST' : 'PUT')
@@ -40,6 +40,43 @@ $id = $action === "edit" ? $values->id : "";
 
         <div class='col-span-{{$col_span}}'>
             <div class='grid grid-row-1 gap-3'>
+
+                <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
+                    <div class='col-span-{{$col_span}} text-left'>
+                        @if($columnType === 'static')
+                        @switch($control)
+                        @case('z_h1')
+                        <x-renderer.heading level=1>Heading Level 1</x-renderer.heading>
+                        @break
+                        @case('z_h2')
+                        <x-renderer.heading level=2>Heading Level 2</x-renderer.heading>
+                        @break
+                        @case('z_h3')
+                        <x-renderer.heading level=3>Heading Level 3</x-renderer.heading>
+                        @break
+                        @case('z_h4')
+                        <x-renderer.heading level=4>Heading Level 4</x-renderer.heading>
+                        @break
+                        @case('z_h5')
+                        <x-renderer.heading level=5>Heading Level 5</x-renderer.heading>
+                        @break
+                        @case('z_h6_base')
+                        <x-renderer.heading>Heading Level 6 - base</x-renderer.heading>
+                        @break
+
+                        @case('z_divider')
+                        <x-renderer.divider />
+                        @break
+                        @case('z_page_break')
+                        @break
+                        @default
+                        <x-feedback.alert type="warning" title="Control" message="[{{$control}}] is not available" />
+                        @break
+                        @endswitch
+                        @endif
+                    </div>
+                </div>
+
                 <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
                     <div class='col-start-1 col-span-{{24/$col_span}} {{$val['new_line'] === 'true' ? "col-span-12 text-left" : "text-right" }} '>
                         <label class='text-gray-700 dark:text-gray-400  px-3 block text-base' title='{{$columnName}} / {{$control}}'>{{$label}}
@@ -98,21 +135,18 @@ $id = $action === "edit" ? $values->id : "";
                         @case('number')
                         <x-controls.number colName={{$columnName}} value={{$value}} action={{$action}} control={{$control}} label={{$label}} />
                         @break
-
                         @case('relationship_renderer')
                         <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} action={{$action}} colSpan={{$col_span}} />
                         @break
-
                         @case('comment')
                         <x-controls.comment-group id={{$id}} type={{$type}} colName={{$columnName}} action={{$action}} label={{$label}} colSpan={{$col_span}} />
                         @break
-
                         @case('status')
                         <x-controls.control-status type={{$type}} colName={{$columnName}} id={{$id}} action={{$action}} modelPath={{$modelPath}} />
                         @break
 
                         @default
-                        {{-- <x-feedback.alert type="warning" title="Control" message="[{{$control}}] is not available" /> --}}
+                        <x-feedback.alert type="warning" title="Control" message="[{{$control}}] is not available" />
                         @break
                         @endswitch
 
