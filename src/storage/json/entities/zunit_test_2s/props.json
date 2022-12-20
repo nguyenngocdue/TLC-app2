@@ -80,7 +80,7 @@
     "_checkboxYesNo": {
         "name": "_checkboxYesNo",
         "column_name": "checkboxYesNo",
-        "column_type": "ELQ(belongsToMany)",
+        "column_type": "eloquent_prop",
         "label": "Checkbox Yes\/No",
         "control": "checkbox",
         "col_span": "12",
@@ -93,7 +93,7 @@
     "_checkboxPassFail": {
         "name": "_checkboxPassFail",
         "column_name": "checkboxPassFail",
-        "column_type": "ELQ(belongsToMany)",
+        "column_type": "eloquent_prop",
         "label": "Checkbox Pass\/Fail",
         "control": "checkbox",
         "col_span": "12",
@@ -106,7 +106,7 @@
     "_dropdownMultiYesNo": {
         "name": "_dropdownMultiYesNo",
         "column_name": "dropdownMultiYesNo",
-        "column_type": "ELQ(belongsToMany)",
+        "column_type": "eloquent_prop",
         "label": "Dropdown (Multi) Yes\/No",
         "control": "dropdown_multi",
         "col_span": "12",
@@ -119,7 +119,7 @@
     "_dropdownMultiPassFail": {
         "name": "_dropdownMultiPassFail",
         "column_name": "dropdownMultiPassFail",
-        "column_type": "ELQ(belongsToMany)",
+        "column_type": "eloquent_prop",
         "label": "Dropdown (Multi) Pass\/Fail",
         "control": "dropdown_multi",
         "col_span": "12",

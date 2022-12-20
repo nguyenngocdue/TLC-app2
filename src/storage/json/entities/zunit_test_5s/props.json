@@ -119,7 +119,7 @@
     "_media": {
         "name": "_media",
         "column_name": "media",
-        "column_type": "ELQ(morphMany)",
+        "column_type": "eloquent_prop",
         "label": "Thumbnail",
         "control": "thumbnail",
         "col_span": "12",

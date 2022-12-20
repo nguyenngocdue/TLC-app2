@@ -548,7 +548,7 @@
     "_posts": {
         "name": "_posts",
         "column_name": "posts",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "Posts",
         "control": "",
         "col_span": "12",
@@ -561,7 +561,7 @@
     "_productionRunLines": {
         "name": "_productionRunLines",
         "column_name": "productionRunLines",
-        "column_type": "ELQ(belongsToMany)",
+        "column_type": "eloquent_prop",
         "label": "Prod Lines",
         "control": "",
         "col_span": "12",
@@ -574,7 +574,7 @@
     "_mediable": {
         "name": "_mediable",
         "column_name": "mediable",
-        "column_type": "ELQ(morphMany)",
+        "column_type": "eloquent_prop",
         "label": "Attachments",
         "control": "relationship_renderer",
         "col_span": "",

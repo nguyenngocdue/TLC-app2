@@ -119,7 +119,7 @@
     "_user": {
         "name": "_user",
         "column_name": "user",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "Users",
         "control": "relationship_renderer",
         "col_span": "12",

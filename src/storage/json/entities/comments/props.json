@@ -54,7 +54,7 @@
     "_commentable": {
         "name": "_commentable",
         "column_name": "commentable",
-        "column_type": "ELQ(morphTo)",
+        "column_type": "eloquent_prop",
         "label": "Parent",
         "control": "link_morph_to",
         "col_span": "12",

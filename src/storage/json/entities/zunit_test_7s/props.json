@@ -93,7 +93,7 @@
     "_comments": {
         "name": "_comments",
         "column_name": "comments",
-        "column_type": "ELQ(morphMany)",
+        "column_type": "eloquent_prop",
         "label": "Comments",
         "control": "",
         "col_span": "",

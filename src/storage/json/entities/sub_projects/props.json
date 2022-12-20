@@ -93,7 +93,7 @@
     "_prodOrders": {
         "name": "_prodOrders",
         "column_name": "prodOrders",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "Prod Orders",
         "control": "relationship_renderer",
         "col_span": "12",

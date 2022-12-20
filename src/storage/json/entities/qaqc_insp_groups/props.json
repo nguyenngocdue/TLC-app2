@@ -80,7 +80,7 @@
     "_getTemplateLines": {
         "name": "_getTemplateLines",
         "column_name": "getTemplateLines",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "Template Lines",
         "control": "relationship_renderer",
         "col_span": "12",

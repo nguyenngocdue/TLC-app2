@@ -106,7 +106,7 @@
     "_prodRunLines": {
         "name": "_prodRunLines",
         "column_name": "prodRunLines",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "Production Run Lines",
         "control": "relationship_renderer",
         "col_span": "12",
@@ -119,7 +119,7 @@
     "_prodRoutingDetails": {
         "name": "_prodRoutingDetails",
         "column_name": "prodRoutingDetails",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "Prod Routing Details",
         "control": "relationship_renderer",
         "col_span": "12",

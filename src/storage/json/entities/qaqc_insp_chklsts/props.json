@@ -132,7 +132,7 @@
     "_qaqcInspChklstLines": {
         "name": "_qaqcInspChklstLines",
         "column_name": "qaqcInspChklstLines",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "CheckList Lines",
         "control": "relationship_renderer",
         "col_span": "12",

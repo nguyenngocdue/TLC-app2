@@ -80,7 +80,7 @@
     "_prodRoutingLinks": {
         "name": "_prodRoutingLinks",
         "column_name": "prodRoutingLinks",
-        "column_type": "ELQ(belongsToMany)",
+        "column_type": "eloquent_prop",
         "label": "Routing Links",
         "control": "relationship_renderer",
         "col_span": "12",
@@ -93,7 +93,7 @@
     "_prodOrders": {
         "name": "_prodOrders",
         "column_name": "prodOrders",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "Production Orders",
         "control": "relationship_renderer",
         "col_span": "12",
@@ -106,7 +106,7 @@
     "_prodRuns": {
         "name": "_prodRuns",
         "column_name": "prodRuns",
-        "column_type": "ELQ(hasManyThrough)",
+        "column_type": "eloquent_prop",
         "label": "Prod Runs",
         "control": "relationship_renderer",
         "col_span": "12",

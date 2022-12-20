@@ -93,7 +93,7 @@
     "_Users_Count": {
         "name": "_Users_Count",
         "column_name": "Users_Count",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "User count",
         "control": "relationship_renderer",
         "col_span": "12",
@@ -106,7 +106,7 @@
     "_Users_Count2": {
         "name": "_Users_Count2",
         "column_name": "Users_Count2",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "User count 2",
         "control": "relationship_renderer",
         "col_span": "12",

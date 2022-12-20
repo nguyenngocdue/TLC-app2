@@ -93,7 +93,7 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "Lines",
         "control": "relationship_renderer",
         "col_span": "12",

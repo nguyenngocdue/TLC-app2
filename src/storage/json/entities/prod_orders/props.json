@@ -158,7 +158,7 @@
     "_prodRuns": {
         "name": "_prodRuns",
         "column_name": "prodRuns",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "Runs",
         "control": "relationship_renderer",
         "col_span": "12",
@@ -171,7 +171,7 @@
     "_qaqcInspChklsts": {
         "name": "_qaqcInspChklsts",
         "column_name": "qaqcInspChklsts",
-        "column_type": "ELQ(hasMany)",
+        "column_type": "eloquent_prop",
         "label": "Inspection Checklist",
         "control": "relationship_renderer",
         "col_span": "12",
