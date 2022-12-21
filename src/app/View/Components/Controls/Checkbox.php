@@ -12,7 +12,6 @@ class Checkbox extends Component
     public function __construct(
         private $id,
         private $colName,
-        private $idItems,
         private $action,
         private $modelPath,
         private $label,
@@ -26,24 +25,20 @@ class Checkbox extends Component
         $span = 6;
         $action = $this->action;
         $colName = $this->colName;
-        $idItems = $this->idItems;
         $label = $this->label;
         $modelPath = $this->modelPath;
         $type = $this->type;
 
-        // $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
 
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
-        $dataSource = 'App\\Models\\Zunit_test_1'::find($this->id)->getCheckedByField($allFields[$colName], '');
-        // dd($db->toArray());
 
-
-
-
+        $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
+        $idsChecked = 'App\\Models\\Zunit_test_1'::find($this->id)->getCheckedByField($allFields[$colName], '')->pluck('id')->toArray();
+        dd($idsChecked);
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
             $message =  "Not found control_name \"" . $colName . "\" in  Manage Relationships.";
             return "<x-feedback.alert message='$message' type='warning' />";
         }
-        return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idItems', 'action', 'span', 'label'));
+        return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
     }
 }
