@@ -5,8 +5,13 @@ namespace App\View\Components\Controls;
 use App\Helpers\Helper;
 use Illuminate\View\Component;
 
-class Dropdownmulti extends Component
+class DropdownMulti extends Component
 {
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
     public function __construct(
         private $colName,
         private $idItems,
@@ -14,9 +19,16 @@ class Dropdownmulti extends Component
         private $modelPath,
         private $label,
         private $type,
+
     ) {
+        //
     }
 
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
+     */
     public function render()
     {
         $span = 6;
@@ -27,11 +39,11 @@ class Dropdownmulti extends Component
         $modelPath = $this->modelPath;
         $type = $this->type;
 
-        $dataSource = Helper::getDataSource($modelPath, $colName, $type);
+        $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
             $message =  "Not found control_name \"" . $colName . "\" in  Manage Relationships.";
             return "<x-feedback.alert message='$message' type='warning' />";
         }
-        return view('components.controls.dropdownmulti')->with(compact('dataSource', 'colName', 'idItems', 'action', 'span', 'label'));
+        return view('components.controls.dropdown-multi')->with(compact('dataSource', 'colName', 'idItems', 'action', 'span', 'label'));
     }
 }

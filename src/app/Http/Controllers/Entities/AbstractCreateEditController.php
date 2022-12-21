@@ -101,12 +101,12 @@ abstract class AbstractCreateEditController extends Controller
 		$newDataInput = $this->handleToggle('store', $props, $dataInput);
 		$newDataInput = $this->handleTextArea($props, $newDataInput);
 
-		$newDataInputHasAttachment = array_filter($newDataInput, fn ($item) => is_array($item));
-		$newDataInputNotAttachment = array_filter($newDataInput, fn ($item) => !is_array($item));
-		// dd($newDataInputNotAttachment);
+		$newDataInputHasArray = array_filter($newDataInput, fn ($item) => is_array($item));
+		$newDataInputNotArray = array_filter($newDataInput, fn ($item) => !is_array($item));
+		// dd($newDataInputNotArray);
 
 		try {
-			$newItem = $this->data::create($newDataInputNotAttachment);
+			$newItem = $this->data::create($newDataInputNotArray);
 			$this->setStatus($newDataInput, $newItem);
 
 			$_data = $this->data::find($newItem->id);
@@ -118,10 +118,13 @@ abstract class AbstractCreateEditController extends Controller
 			Notification::send($newItem, new CreateNewNotification($newItem->id));
 
 			if (isset($newItem)) {
-				$this->syncManyToManyRelationship($newItem, $newDataInputHasAttachment); // Check box
+				$this->syncManyToManyToDB($newItem, $newDataInputHasArray); // Check box
+
+				// $this->syncManyToManyRelationship($newItem, $newDataInputHasArray); // Check box
 
 				// $event = event(new SendEmailItemCreated(['id' => $data->id, 'type' => $this->type]));
 				// dd($event);
+
 				if ($idsMedia) {
 					$this->setMediaParent($newItem, $colNamesHaveAttachment);
 					$this->updateMediaIdsToDBFields($_data, $colNamesHaveAttachment);

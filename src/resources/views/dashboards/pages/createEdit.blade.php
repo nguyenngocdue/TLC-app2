@@ -117,18 +117,22 @@ $id = $action === "edit" ? $values->id : "";
                         @case ('radio')
                         <x-controls.radio id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
                         @break
+
                         @case ('dropdown_multi')
-                        <x-controls.dropdownmulti colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} :idItems="$idItems" />
+                        <x-controls.dropdown-multi colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} :idItems="$idItems" />
                         @break
+
                         @case('attachment')
                         <x-controls.uploadfiles id={{$id}} colName={{$columnName}} action={{$action}} label={{$label}} type={{$type}} />
                         @break
                         @case('toggle')
                         <x-controls.toggle id={{$id}} colName={{$columnName}} value={{$value}} label={{$label}} />
                         @break
+
                         @case('checkbox')
                         <x-controls.checkbox id={{$id}} colName={{$columnName}} :idItems="$idItems" action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
                         @break
+
                         @case('number')
                         <x-controls.number colName={{$columnName}} value={{$value}} action={{$action}} control={{$control}} label={{$label}} />
                         @break

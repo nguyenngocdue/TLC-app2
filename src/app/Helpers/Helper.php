@@ -24,38 +24,43 @@ class Helper
         return [$tableName => $dataSource];
     }
 
+
+    private static function filterConditionsInRel($type, $colName)
+    {
+        $relationship = Relationships::getAllOf($type);
+        $elementRel = array_values(array_filter($relationship, fn ($item) => $item['control_name'] === $colName))[0] ?? [];
+        $byFilters = [];
+        if (isset($elementRel['filter_columns']) && $elementRel['filter_columns'] && $elementRel['filter_values']) {
+            $byFilters = [$elementRel['filter_columns'] => $elementRel['filter_values']];
+        }
+        return $byFilters;
+    }
+
     public static function getDataSource($modelPath, $colName, $type)
     {
         $instance = new $modelPath;
         $eloquentParam = $instance->eloquentParams;
-
-
-        $relationship = Relationships::getAllOf($type);
-        // dump($colName);
-        $elementRel = array_values(array_filter($relationship, fn ($item) => $item['control_name'] === $colName))[0] ?? [];
-
         $keyNameEloquent = "";
         foreach ($eloquentParam as $key => $value) {
-            // dd($colName, $value);
             if (in_array($colName, $value)) {
                 $keyNameEloquent = $key;
                 break;
             }
         }
-        $byFilters = [];
-        if (isset($elementRel['filter_columns']) && $elementRel['filter_columns'] && $elementRel['filter_values']) {
-            $byFilters = [$elementRel['filter_columns'] => $elementRel['filter_values']];
-        }
+        $byFilters = Helper::filterConditionsInRel($type, $colName);
+        $termModelPath = $eloquentParam[$keyNameEloquent][1];
+        return Helper::getDataFromPathModel($termModelPath, $byFilters) ?? [];
+    }
 
-        if ($keyNameEloquent === "") {
-            // dd($elementRel);
-            $pathTableSource =  $eloquentParam[$elementRel['control_name']][1] ?? "11111";
-            return Helper::getDataFromPathModel($pathTableSource, $byFilters);
-            $pathTableSource =  $eloquentParam[$elementRel['control_name']][1] ?? "";
-            return Helper::getDataFromPathModel($pathTableSource, $byFilters) ?? [];
-        }
-        $pathTableSource = $eloquentParam[$keyNameEloquent][1];
-        return Helper::getDataFromPathModel($pathTableSource, $byFilters) ?? [];
+    public static function getDataSourceByManyToMany($modelPath, $colName, $type)
+    {
+        $instance = new $modelPath;
+        $oracyParams = $instance->oracyParams;
+
+        $valEloquentByColName = isset($oracyParams[$colName]) ? $oracyParams[$colName] : [];
+        $termModelPath = $valEloquentByColName[1] ?? "oracyParams";
+        $byFilters = Helper::filterConditionsInRel($type, $colName);
+        return Helper::getDataFromPathModel($termModelPath, $byFilters);
     }
 
 

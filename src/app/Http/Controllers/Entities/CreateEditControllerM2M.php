@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities;
 
+use App\Helpers\Helper;
 use App\Utils\Support\Relationships;
 
 trait CreateEditControllerM2M
@@ -17,6 +18,7 @@ trait CreateEditControllerM2M
     private function syncManyToManyRelationship($data = null, $dataInput = []) //checkBox
     {
         [$relationships, $eloquentParams] = $this->getRelationships();
+        dd($data, $dataInput, $relationships, $eloquentParams);
 
         if ($eloquentParams) {
             $itemIds = [];
@@ -35,6 +37,25 @@ trait CreateEditControllerM2M
             return $itemIds;
         }
     }
+
+
+    private function syncManyToManyToDB($data, $dataInput)
+    {;
+        $allFields = Helper::getDataDbByName('fields', 'name', 'id');
+
+        foreach ($dataInput as $key => $value) {
+
+            $termModelPath = $data->oracyParams[$key][1];
+            $data->syncCheck($allFields[$key], $termModelPath, $value);
+        }
+    }
+
+
+
+
+
+
+
 
     private function getManyToManyRelationship($currentElement) //checkBox
     {
