@@ -25,9 +25,9 @@
         "validation": "required",
         "formula": ""
     },
-    "_radio_yes_no": {
-        "name": "_radio_yes_no",
-        "column_name": "radio_yes_no",
+    "_radioYesNo": {
+        "name": "_radioYesNo",
+        "column_name": "radioYesNo",
         "column_type": "bigint",
         "label": "Radio Yes\/No",
         "control": "radio",
@@ -38,9 +38,9 @@
         "validation": "required",
         "formula": ""
     },
-    "_radio_pass_fail": {
-        "name": "_radio_pass_fail",
-        "column_name": "radio_pass_fail",
+    "_radioPassFail": {
+        "name": "_radioPassFail",
+        "column_name": "radioPassFail",
         "column_type": "bigint",
         "label": "Radio Pass\/Fail",
         "control": "radio",
@@ -51,9 +51,9 @@
         "validation": "required",
         "formula": ""
     },
-    "_dropdown_yes_no": {
-        "name": "_dropdown_yes_no",
-        "column_name": "dropdown_yes_no",
+    "_dropdownYesNo": {
+        "name": "_dropdownYesNo",
+        "column_name": "dropdownYesNo",
         "column_type": "bigint",
         "label": "Dropdown Yes\/No",
         "control": "dropdown",
@@ -64,9 +64,9 @@
         "validation": "required",
         "formula": ""
     },
-    "_dropdown_pass_fail": {
-        "name": "_dropdown_pass_fail",
-        "column_name": "dropdown_pass_fail",
+    "_dropdownPassFail": {
+        "name": "_dropdownPassFail",
+        "column_name": "dropdownPassFail",
         "column_type": "bigint",
         "label": "Dropdown Pass\/Fail",
         "control": "dropdown",

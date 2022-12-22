@@ -28,11 +28,13 @@ class Radio extends Component
         $type = $this->type;
 
         $dataSource = Helper::getDataSource($modelPath, $colName, $type);
+
         $currentEntity = Helper::getItemModel($this->type, $this->id) ?? [];
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
             $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in $modelPath Model).";
             return "<x-feedback.alert message='$message' type='warning' />";
         }
+        // dd($dataSource, $currentEntity);
         return view('components.controls.radio')->with(compact('dataSource', 'currentEntity', 'colName', 'span', 'action', 'label'));
     }
 }

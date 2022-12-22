@@ -13,6 +13,7 @@ class Helper
     {
         $model = App::make($modelPath);
         $nameless = ($model->nameless);
+        // dd($model);
 
         $insTableSource = new $modelPath();
         $tableName = $insTableSource->getTable();
