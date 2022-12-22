@@ -85,9 +85,10 @@ trait HasCheckbox
     function detachCheck($fieldNameOrId, $termModelPath, array $ids)
     {
         $fieldId = $this->guessFieldId($fieldNameOrId);
-        $idsAssoc = Arr::toAssoc($ids);
+        $idsAssoc = Arr::toAssoc($ids); //[1,2,3]
         $toBeDetached = array_keys($idsAssoc);
         $count = 0;
+        // dump($toBeDetached, $idsAssoc);
         foreach ($toBeDetached as $id) {
             $count += DB::table('many_to_many')
                 ->where("field_id", $fieldId)
@@ -121,9 +122,10 @@ trait HasCheckbox
         $toBeDeletedList = array_values(array_diff($currentIds, $toBeSynced));
 
         //This section is to handle sync for ids have Assoc.
-        $toBeKeptList = array_diff(array_diff($currentIds, $toBeAddedList), $toBeDeletedList);
-        $toBeAddedList += $toBeKeptList;
-        $toBeDeletedList += $toBeKeptList;
+        // $toBeKeptList = array_diff(array_diff($currentIds, $toBeAddedList), $toBeDeletedList);
+        // $toBeAddedList += $toBeKeptList;
+        // $toBeDeletedList += $toBeKeptList;
+        // dd($toBeAddedList);
 
         //This section is to enrich the to be added list
         $arrAssoc = Arr::toAssoc($ids);
@@ -131,9 +133,11 @@ trait HasCheckbox
         foreach ($toBeAddedList as $id) $toBeAddedListEnriched[$id] = $arrAssoc[$id];
 
         $count = 0;
+        // dd('tobeDel', $arrAssoc, $toBeAddedList, $toBeAddedListEnriched);
         $count += $this->detachCheck($fieldId, $termModelPath, $toBeDeletedList);
+        // dd($arrAssoc, "DEl", $toBeDeletedList, $toBeAddedListEnriched);
         //Detach must be before attach to make sure the Kept array is removed
         $count += $this->attachCheck($fieldId, $termModelPath, $toBeAddedListEnriched);
-        return $count - 2 * sizeof($toBeKeptList);
+        return $count - 2 * sizeof($toBeAddedList);
     }
 }

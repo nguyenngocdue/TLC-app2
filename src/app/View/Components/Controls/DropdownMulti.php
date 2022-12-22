@@ -41,7 +41,8 @@ class DropdownMulti extends Component
         $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
 
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
-        $idsChecked = $modelPath::find($this->id)->getCheckedByField($allFields[$colName], '')->pluck('id')->toArray();
+
+        $idsChecked = is_null($item =  $modelPath::find($this->id)->getCheckedByField($allFields[$colName], '')) ? [] : $item->pluck('id')->toArray();
 
 
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
