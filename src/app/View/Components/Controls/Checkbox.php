@@ -31,10 +31,10 @@ class Checkbox extends Component
 
 
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
-
         $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
-        $idsChecked = 'App\\Models\\Zunit_test_1'::find($this->id)->getCheckedByField($allFields[$colName], '')->pluck('id')->toArray();
-        dd($idsChecked);
+
+        $idsChecked = $modelPath::find($this->id)->getCheckedByField($allFields[$colName], '')->pluck('id')->toArray();
+
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
             $message =  "Not found control_name \"" . $colName . "\" in  Manage Relationships.";
             return "<x-feedback.alert message='$message' type='warning' />";

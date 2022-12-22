@@ -181,7 +181,7 @@ abstract class AbstractCreateEditController extends Controller
 			Notification::send($data, new EditNotification($data->id));
 
 			if ($isSaved) {
-				$this->syncManyToManyRelationship($data, $dataInput);
+				$this->syncManyToManyToDB($data, $dataInput); // Check box
 
 				if ($idsMedia) {
 					//set Media Parent is in saveMedia

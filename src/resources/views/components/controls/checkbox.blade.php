@@ -5,7 +5,7 @@ $valDataSource = array_values($dataSource)[0];
     @foreach($valDataSource as $data)
     <div class="items-cent1er bg-white-50 col-span-{{$span}} flex align-center ">
         @php
-        $selected = is_null(old($colName)) ? isset($idsChecked[$colName]) && in_array($data->id, $idsChecked[$colName]) : in_array($data->id, old($colName));
+        $selected = is_null(old($colName)) ? isset($idsChecked) && in_array($data->id, $idsChecked) : in_array($data->id, old($colName));
         @endphp
         <input {{ $selected ? "checked":""}} name="{{$colName}}[]" value="{{$data->id}}" type="checkbox" id='{{$label.$data->name}}' title="{{isset($data->description) ? "$data->description (#$data->id)" : "" }}" class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
         <label for='{{$label.$data->name}}' class=" ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" title="{{isset($data->description) ? "$data->description (#$data->id)" : "" }}">{{$data->name}}</label>

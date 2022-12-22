@@ -119,7 +119,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case ('dropdown_multi')
-                        <x-controls.dropdown-multi colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} :idItems="$idItems" />
+                        <x-controls.dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
                         @break
 
                         @case('attachment')
@@ -130,7 +130,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case('checkbox')
-                        <x-controls.checkbox id={{$id}} colName={{$columnName}} :idItems="$idItems" action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
+                        <x-controls.checkbox id={{$id}} colName={{$columnName}} action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
                         @break
 
                         @case('number')

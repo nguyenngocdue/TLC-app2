@@ -40,20 +40,21 @@ trait CreateEditControllerM2M
 
 
     private function syncManyToManyToDB($data, $dataInput)
-    {;
+    {
+
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
+        $newDataInputHasArray = array_filter($dataInput, fn ($item) => is_array($item));
 
-        foreach ($dataInput as $key => $value) {
 
+        foreach ($newDataInputHasArray as $key => $value) {
             $termModelPath = $data->oracyParams[$key][1];
+
+
+
+            // $data->attachCheck($allFields[$key], $termModelPath, $value);
             $data->syncCheck($allFields[$key], $termModelPath, $value);
         }
     }
-
-
-
-
-
 
 
 
