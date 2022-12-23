@@ -117,10 +117,10 @@
             <br />
             Toggle FALSE
             <x-controls.toggle colName='hello' value=0 label="hello"></x-controls.toggle>
-            <br/>
+            <br />
             Toggle TRUE
             <x-controls.toggle colName='hello' value=1 label="hello"></x-controls.toggle>
-            <br/>
+            <br />
 
         </x-renderer.card>
 
@@ -253,9 +253,13 @@
             <x-feedback.alert />
         </x-renderer.card>
         <x-renderer.card title="Tabs">
-            <x-navigation.tabs>
-
-            </x-navigation.tabs>
+            <x-renderer.card title="Tab 1">
+                <x-navigation.tabs></x-navigation.tabs>
+            </x-renderer.card>
+            <br />
+            <x-renderer.card title="Tab 2">
+                <x-navigation.tabs-2></x-navigation.tabs-2>
+            </x-renderer.card>
         </x-renderer.card>
     </div>
 </x-renderer.card>
