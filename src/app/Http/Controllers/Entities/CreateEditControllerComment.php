@@ -13,7 +13,7 @@ trait CreateEditControllerComment
 
     private function saveAndGetIdsComments($dataInput)
     {
-        $nameIdsDB = Helper::getDataDbByName('field', 'name', 'id');
+        $nameIdsDB = Helper::getDataDbByName('fields', 'name', 'id');
         $ids = [];
         foreach ($dataInput as $key => $value) {
             // dd($value);
@@ -37,7 +37,7 @@ trait CreateEditControllerComment
     }
     private function setMediaCommentsParent($idsComment, $id_ColNameMedia)
     {
-        $idsNamesAttDB = Helper::getDataDbByName('field', 'id', 'name');
+        $idsNamesAttDB = Helper::getDataDbByName('fields', 'id', 'name');
         foreach ($idsComment as $id) {
             $comment = Comment::find($id);
             foreach ($id_ColNameMedia as $key => $value) {
