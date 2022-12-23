@@ -21,45 +21,23 @@
         "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "1"
     },
-    "_workplaceRel1": {
-        "name": "_workplaceRel1",
-        "relationship": "belongsToMany",
-        "control_name": "workplaceRel1",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "",
-        "filter_values": ""
-    },
-    "_workplaceRel2": {
-        "name": "_workplaceRel2",
-        "relationship": "belongsToMany",
-        "control_name": "workplaceRel2",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "",
-        "filter_values": ""
-    },
-    "_checkbox()": {
-        "name": "_checkbox()",
+    "_checkbox": {
+        "name": "_checkbox",
         "relationship": "getCheckedByField",
-        "control_name": "checkbox()",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "control_name": "",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
         "filter_values": ""
     },
-    "_dropdownMulti()": {
-        "name": "_dropdownMulti()",
+    "_dropdownMulti": {
+        "name": "_dropdownMulti",
         "relationship": "getCheckedByField",
-        "control_name": "dropdownMulti()",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "control_name": "",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
