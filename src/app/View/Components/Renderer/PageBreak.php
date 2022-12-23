@@ -23,7 +23,6 @@ class PageBreak extends Component
      */
     public function render()
     {
-        return "<div style='page-break-after:always '></div>
-        ";
+        return "<div style='page-break-after:always '></div>";
     }
 }
