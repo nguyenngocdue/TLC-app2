@@ -21,6 +21,7 @@ trait HasCheckbox
             dump("Create a record in table Field with name as [$fieldNameOrId]");
             dd($e->getMessage());
         }
+
         return $fieldId;
     }
 
@@ -29,11 +30,14 @@ trait HasCheckbox
         $fieldId = $this->guessFieldId($fieldNameOrId);
         $dataSource = $this->getChecked();
         $result = $dataSource->filter(fn ($item) => $item['field_id'] === $fieldId)->values();
+        // dd($fieldId, $dataSource, $result);
+        // dd($fieldNameOrId, $fieldId, $dataSource, $result);
         return $result;
     }
 
     function getChecked()
     {
+        // dd($this->id);
         $result0 = DB::table('many_to_many')->where('doc_type', $this::class)->where('doc_id', $this->id)->get();
         if ($result0->count() == 0) return new Collection([]);
 

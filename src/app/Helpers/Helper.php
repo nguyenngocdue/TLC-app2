@@ -6,6 +6,7 @@ use App\Utils\Support\Relationships;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Exception;
 
 class Helper
 {
@@ -39,18 +40,22 @@ class Helper
 
     public static function getDataSource($modelPath, $colName, $type)
     {
-        $instance = new $modelPath;
-        $eloquentParam = $instance->eloquentParams;
-        $keyNameEloquent = "";
-        foreach ($eloquentParam as $key => $value) {
-            if (in_array($colName, $value)) {
-                $keyNameEloquent = $key;
-                break;
+        try {
+            $instance = new $modelPath;
+            $eloquentParam = $instance->eloquentParams;
+            $keyNameEloquent = "";
+            foreach ($eloquentParam as $key => $value) {
+                if (in_array($colName, $value)) {
+                    $keyNameEloquent = $key;
+                    break;
+                }
             }
+            $byFilters = Helper::filterConditionsInRel($type, $colName);
+            $termModelPath = $eloquentParam[$keyNameEloquent][1];
+            return Helper::getDataFromPathModel($termModelPath, $byFilters) ?? [];
+        } catch (Exception $e) {
+            dd($e->getMessage());
         }
-        $byFilters = Helper::filterConditionsInRel($type, $colName);
-        $termModelPath = $eloquentParam[$keyNameEloquent][1];
-        return Helper::getDataFromPathModel($termModelPath, $byFilters) ?? [];
     }
 
     public static function getDataSourceByManyToMany($modelPath, $colName, $type)
@@ -281,9 +286,13 @@ class Helper
 
     public  static function getItemModel($type, $id = '')
     {
-        $modelPath = "App\\Models\\" . Str::singular($type);
-        if (!$id) return  App::make($modelPath);
-        return $modelPath::find($id);
+        try {
+            $modelPath = "App\\Models\\" . Str::singular($type);
+            if (!$id) return  [];
+            return $modelPath::find($id);
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
     }
     public  static function getItemModelByFn($type, $id = '', $fnName = '')
     {

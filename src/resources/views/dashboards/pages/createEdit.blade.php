@@ -17,7 +17,6 @@ $id = $action === "edit" ? $values->id : "";
         @method($action === "create" ? 'POST' : 'PUT')
         @php
         $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quarter','picker_year','picker_datetime'];
-
         @endphp
         @foreach($props as $key => $val)
         @php
@@ -27,6 +26,7 @@ $id = $action === "edit" ? $values->id : "";
         $columnName = $val['column_name'];
         $columnType = $val['column_type'];
         $control = $val['control'];
+
         $colSpan = $val['col_span'];
         $value = $action === "edit" ? $values->{$columnName} :'';
         // dd($values->getAttributes()['settings']);
@@ -37,7 +37,6 @@ $id = $action === "edit" ? $values->id : "";
         $isRequired = in_array("required", explode("|",$val['validation']));
         $iconJson = $columnType === 'json' ? App\Utils\ConstantSVG::ICON_SVG : "";
         @endphp
-
         <div class='col-span-{{$col_span}}'>
             <div class='grid grid-row-1 gap-3'>
 
@@ -128,7 +127,6 @@ $id = $action === "edit" ? $values->id : "";
                         @case('toggle')
                         <x-controls.toggle id={{$id}} colName={{$columnName}} value={{$value}} label={{$label}} />
                         @break
-
                         @case('checkbox')
                         <x-controls.checkbox id={{$id}} colName={{$columnName}} action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
                         @break

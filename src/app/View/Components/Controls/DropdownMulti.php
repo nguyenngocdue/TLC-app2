@@ -38,17 +38,15 @@ class DropdownMulti extends Component
         $modelPath = $this->modelPath;
         $type = $this->type;
 
-        $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
 
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
+        if (!isset($allFields[$colName])) return "<x-feedback.alert message='Not found control_name \"$colName\" in  Fields.' type='warning' />";
+        $idsChecked = is_null($item =  $modelPath::find($this->id)) ? [] : $item->getCheckedByField($allFields[$colName], '')->pluck('id')->toArray();
 
-        $idsChecked = is_null($item =  $modelPath::find($this->id)->getCheckedByField($allFields[$colName], '')) ? [] : $item->pluck('id')->toArray();
+        $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
+        if (is_null($dataSource) || gettype($dataSource) === 'string') return "<x-feedback.alert message='Not found control_name \"$colName\" in  Fields.' type='warning' />";
 
-
-        if (is_null($dataSource) || gettype($dataSource) === 'string') {
-            $message =  "Not found control_name \"" . $colName . "\" in  Manage Relationships.";
-            return "<x-feedback.alert message='$message' type='warning' />";
-        }
+        // dd($dataSource);
         return view('components.controls.dropdown-multi')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
     }
 }

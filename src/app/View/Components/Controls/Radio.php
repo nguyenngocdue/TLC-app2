@@ -34,7 +34,6 @@ class Radio extends Component
             $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in $modelPath Model).";
             return "<x-feedback.alert message='$message' type='warning' />";
         }
-        // dd($dataSource, $currentEntity);
         return view('components.controls.radio')->with(compact('dataSource', 'currentEntity', 'colName', 'span', 'action', 'label'));
     }
 }

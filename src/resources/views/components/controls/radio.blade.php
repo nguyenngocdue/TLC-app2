@@ -1,6 +1,5 @@
 @php
-// $idEntity = isset($currentEntity[$colName]) ? $currentEntity[$colName]*1 : null;
-dd( isset($currentEntity[$colName]));
+$idEntity = isset($currentEntity[$colName]) ? $currentEntity[$colName]*1 : null;
 $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
 $valDataSource = array_values($dataSource)[0];
 @endphp

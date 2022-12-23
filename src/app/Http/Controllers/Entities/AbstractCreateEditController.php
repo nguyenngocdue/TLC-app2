@@ -72,6 +72,7 @@ abstract class AbstractCreateEditController extends Controller
 		$modelPath = $this->data;
 
 		$idItems = $this->getManyToManyRelationship($currentElement);
+		// dd(123);
 		return view('dashboards.pages.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'modelPath', 'idItems'));
 	}
 

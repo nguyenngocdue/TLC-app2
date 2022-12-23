@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
+use App\Http\Traits\HasCheckbox;
 
 class Zunit_test_2 extends ModelExtended
 {
-    protected $fillable = ['content', 'radio_yes_no', 'radio_pass_fail', 'dropdown_yes_no', 'dropdown_pass_fail'];
+    use HasCheckbox;
+    protected $fillable = ['content', 'radioYesNo', 'radioPassFail', 'dropdownYesNo', 'dropdownPassFail'];
     protected $table = "zunit_test_2s";
     public $menuTitle = "UT02 (Dropdown/Checkbox)";
 
@@ -19,10 +21,6 @@ class Zunit_test_2 extends ModelExtended
     ];
 
     public $oracyParams = [
-        // "radioYesNo" => ["getCheckedByField", Qaqc_insp_control_value::class],
-        // "radioPassFail" => ["getCheckedByField", Qaqc_insp_control_value::class],
-        // "dropdownYesNo" => ["getCheckedByField", Qaqc_insp_control_value::class],
-        // "dropdownPassFail" => ["getCheckedByField", Qaqc_insp_control_value::class],
         "checkboxYesNo" => ["getCheckedByField", Qaqc_insp_control_value::class],
         "checkboxPassFail" => ["getCheckedByField", Qaqc_insp_control_value::class],
         "dropdownMultiYesNo" => ["getCheckedByField", Qaqc_insp_control_value::class],
@@ -49,24 +47,27 @@ class Zunit_test_2 extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
+
     public function checkboxYesNo()
     {
-        $p = $this->eloquentParams[__FUNCTION__ . "()"];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        $p = $this->oracyParams[__FUNCTION__];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
+
     public function checkboxPassFail()
     {
-        $p = $this->eloquentParams[__FUNCTION__ . "()"];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        $p = $this->oracyParams[__FUNCTION__];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function dropdownMultiYesNo()
     {
-        $p = $this->eloquentParams[__FUNCTION__ . "()"];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        $p = $this->oracyParams[__FUNCTION__];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function dropdownMultiPassFail()
     {
-        $p = $this->eloquentParams[__FUNCTION__ . "()"];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        $p = $this->oracyParams[__FUNCTION__];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

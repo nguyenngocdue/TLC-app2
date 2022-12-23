@@ -30,15 +30,13 @@ class Checkbox extends Component
         $type = $this->type;
 
 
+
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
+        if (!isset($allFields[$colName])) return "<x-feedback.alert message='Not found control_name \"$colName\" in  Fields.' type='warning' />";
+        $idsChecked = is_null($item =  $modelPath::find($this->id)) ? [] : $item->getCheckedByField($allFields[$colName], '')->pluck('id')->toArray();
+
         $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
-
-        $idsChecked = is_null($item =  $modelPath::find($this->id)->getCheckedByField($allFields[$colName], '')) ? [] : $item->pluck('id')->toArray();
-
-        if (is_null($dataSource) || gettype($dataSource) === 'string') {
-            $message =  "Not found control_name \"" . $colName . "\" in  Manage Relationships.";
-            return "<x-feedback.alert message='$message' type='warning' />";
-        }
+        if (is_null($dataSource) || gettype($dataSource) === 'string') return "<x-feedback.alert message='Not found control_name \"$colName\" in  Fields.' type='warning' />";
         return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
     }
 }
