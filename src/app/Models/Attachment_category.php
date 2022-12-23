@@ -8,7 +8,7 @@ class Attachment_category extends ModelExtended
 {
     protected $fillable = ["name", "description", "slug"];
     protected $primaryKey = 'id';
-    protected $table = 'attachment_categories';
+    protected $table = 'fields';
 
     public $eloquentParams = [];
 }

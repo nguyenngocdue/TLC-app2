@@ -299,6 +299,7 @@ class Helper
         $modelPath = "App\\Models\\" . Str::singular($type);
         return $modelPath::find($id)->{$fnName}()->get();
     }
+
     // public  static function getAttributesItemInModel($type, $id = '')
     // {
     //     $modelPath = "App\\Models\\" . Str::singular($type);

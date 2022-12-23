@@ -19,7 +19,7 @@ class UploadService
 
         // dd($request);
         try {
-            $id_name_cate = Helper::getDataDbByName('attachment_categories', 'name', 'id');
+            $id_name_cate = Helper::getDataDbByName('fields', 'name', 'id');
             $filesUpload = $request->files;
             $nameControls = [];
             $tempMedia = [];

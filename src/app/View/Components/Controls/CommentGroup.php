@@ -43,7 +43,7 @@ class CommentGroup extends Component
         $showToBeDeleted =  env('APP_ENV')  === 'local';
         $owner_id = Auth::user()->id;
 
-        $idNameCatesDB = Helper::getDataDbByName('attachment_categories', 'id', 'name');
+        $idNameCatesDB = Helper::getDataDbByName('fields', 'id', 'name');
         $orphanAttachmentDB = json_decode(DB::table('attachments')->where([['owner_id', '=',  $owner_id], ['object_id', '=', null], ['object_type', '=', null]])->select('id', 'category', 'object_id')->get(), true);
 
         $attachmentData = [];
