@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             PostSeeder::class,
 
             //To be removed:
-            AttachmentCategorySeeder::class,
+            // AttachmentCategorySeeder::class,
         ]);
     }
 }

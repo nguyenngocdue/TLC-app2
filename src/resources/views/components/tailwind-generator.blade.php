@@ -1,3 +1,15 @@
+<!-- CREATE - EDIT -->
+<span class="col-span-1"></span>
+<span class="col-span-2"></span>
+<span class="col-span-3"></span>
+<span class="col-span-4"></span>
+<span class="col-span-5"></span>
+<span class="col-span-6"></span>
+<span class="col-span-7"></span>
+<span class="col-span-8"></span>
+<span class="col-span-9"></span>
+<span class="col-span-10"></span>
+<!--  -->
 <span class="bg-amber-400"></span>
 <!-- FOR HEADING -->
 <h1 class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600">Tailwind Elements</h1>

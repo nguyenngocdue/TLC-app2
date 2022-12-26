@@ -22,7 +22,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_slug": {
@@ -159,7 +159,7 @@
         "name": "_prodRuns",
         "column_name": "prodRuns",
         "column_type": "eloquent_prop",
-        "label": "Runs",
+        "label": "Production Runs",
         "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",
@@ -172,7 +172,7 @@
         "name": "_qaqcInspChklsts",
         "column_name": "qaqcInspChklsts",
         "column_type": "eloquent_prop",
-        "label": "Inspection Checklist",
+        "label": "Inspection Checklists",
         "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",

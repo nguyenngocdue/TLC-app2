@@ -81,7 +81,7 @@
         "name": "_routingLink",
         "column_name": "routingLink",
         "column_type": "eloquent_prop",
-        "label": "Routing Link",
+        "label": "Routing Links",
         "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",

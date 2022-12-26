@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Prod_routing_detail extends ModelExtended
 {
     protected $fillable = [
-        "id", "prod_routing_id", "prod_routing_link_id", "erp_routing_id",
+        "id", "prod_routing_id", "prod_routing_link_id", "erp_routing_link_id",
         "wir_description_id", "target_hours", "target_man_hours",
     ];
     protected $table = "prod_routing_details";

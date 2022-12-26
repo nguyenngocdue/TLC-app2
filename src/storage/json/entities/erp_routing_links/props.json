@@ -81,7 +81,7 @@
         "name": "_prodRoutingDetails",
         "column_name": "prodRoutingDetails",
         "column_type": "eloquent_prop",
-        "label": "Routing Detail",
+        "label": "Routing Details",
         "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",
