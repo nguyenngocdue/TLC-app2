@@ -26,6 +26,7 @@ class Prod_routing extends ModelExtended
     public function prodOrders()
     {
         $p = $this->eloquentParams[__FUNCTION__];
+        // dd($this, $this->hasMany(Prod_order::class)->paginate(15)->all());
         return $this->{$p[0]}($p[1]);
     }
 

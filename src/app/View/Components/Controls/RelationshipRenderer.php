@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Models\Prod_routing;
 use App\Utils\Support\Relationships;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
@@ -37,14 +38,21 @@ class RelationshipRenderer extends Component
 
         if ($action !== 'edit') return "";
 
-        $itemDB = $modelPath::find($id);
+
         $relationship = Relationships::getAllOf($this->type);
 
         $theValue = array_filter($relationship, fn ($value) => $value['control_name'] === $colName);
         if (empty($theValue)) return "<x-feedback.alert message='Column [$colName] can not be found in control_name of Relationship screen.' type='warning' />";
         $value = $theValue["_" . $colName];
+
+        $itemDB = $modelPath::find($id);
         if (is_null($itemDB->$colName)) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";
-        $dataSource = $itemDB->$colName->all();
+
+        $eloquentParam = $itemDB->eloquentParams[$colName];
+        $relation = $modelPath::find($id)->{$eloquentParam[0]}($eloquentParam[1]);
+        $dataSource = $relation->getQuery()->paginate(5)->all();
+
+
         if (count($dataSource) <= 0) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";
         $typeDB =  $dataSource[0]->getTable() ?? "";
         $model = "App\\Models\\" . Str::singular($typeDB);
