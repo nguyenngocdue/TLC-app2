@@ -72,7 +72,9 @@ class Helper
 
     public static function customMessageValidation($message, $colName, $labelName)
     {
-        $newMessage = str_replace($colName, ("<strong>" . $labelName . "</strong>"), $message);
+        $idx = strpos($message, 'field'); // index of "field" word in message
+        $strSearch = substr($message, 4, $idx - 4);
+        $newMessage = str_replace($strSearch, ("<strong>" . $labelName . " " . "</strong>"), $message);
         return $newMessage;
     }
 
@@ -102,7 +104,7 @@ class Helper
         return $fileName;
     }
 
-    private static function indexCharacterInString($strSearch, $str, $ofs = 0)
+    public static function indexCharacterInString($strSearch, $str, $ofs = 0)
     {
         while (($pos = strpos($str, $strSearch, $ofs)) !== false) {
             $ofs = $pos + 1;
