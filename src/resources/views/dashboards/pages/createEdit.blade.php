@@ -119,11 +119,6 @@ $id = $action === "edit" ? $values->id : "";
                         <x-controls.radio id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
                         @break
 
-                        {{-- @case ('dropdown_multi')
-                        <x-controls.dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
-                        @break --}}
-
-
                         @case ('new_dropdown_multi')
                         <x-controls.new-dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
                         @break
