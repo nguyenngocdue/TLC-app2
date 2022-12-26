@@ -21,10 +21,10 @@
         "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "1"
     },
-    "_newcheckbox()": {
-        "name": "_newcheckbox()",
+    "_newCheckbox()": {
+        "name": "_newCheckbox()",
         "relationship": "getCheckedByField",
-        "control_name": "newcheckbox()",
+        "control_name": "newCheckbox()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -32,10 +32,10 @@
         "filter_columns": "",
         "filter_values": ""
     },
-    "_newdropdownMulti()": {
-        "name": "_newdropdownMulti()",
+    "_newDropdownMulti()": {
+        "name": "_newDropdownMulti()",
         "relationship": "getCheckedByField",
-        "control_name": "newdropdownMulti()",
+        "control_name": "newDropdownMulti()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

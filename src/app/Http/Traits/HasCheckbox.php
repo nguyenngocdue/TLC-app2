@@ -108,6 +108,9 @@ trait HasCheckbox
     //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [1,2,3=>["def"=>345]])
     //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [1,2,4=>["def"=>465]])
     //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [1,2,4=>["def"=>789]])
+
+    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [2,3])
+    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [2,3,5])
     function syncCheck($fieldNameOrId, $termModelPath, array $ids)
     {
         $fieldId = $this->guessFieldId($fieldNameOrId);
@@ -126,9 +129,9 @@ trait HasCheckbox
         $toBeDeletedList = array_values(array_diff($currentIds, $toBeSynced));
 
         //This section is to handle sync for ids have Assoc.
-        // $toBeKeptList = array_diff(array_diff($currentIds, $toBeAddedList), $toBeDeletedList);
-        // $toBeAddedList += $toBeKeptList;
-        // $toBeDeletedList += $toBeKeptList;
+        $toBeKeptList = array_diff(array_diff($currentIds, $toBeDeletedList), $toBeAddedList);
+        array_push($toBeAddedList, ...$toBeKeptList);
+        array_push($toBeDeletedList, ...$toBeKeptList);
         // dd($toBeAddedList);
 
         //This section is to enrich the to be added list
@@ -142,6 +145,6 @@ trait HasCheckbox
         // dd($arrAssoc, "DEl", $toBeDeletedList, $toBeAddedListEnriched);
         //Detach must be before attach to make sure the Kept array is removed
         $count += $this->attachCheck($fieldId, $termModelPath, $toBeAddedListEnriched);
-        return $count - 2 * sizeof($toBeAddedList);
+        return $count - 2 * sizeof($toBeKeptList);
     }
 }

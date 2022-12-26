@@ -31,19 +31,18 @@ class Zunit_test_1 extends ModelExtended
 
 
     public $oracyParams = [
-        "newcheckbox()" => ["getCheckedByField", Workplace::class],
-        "newdropdownMulti()" => ["getCheckedByField", Workplace::class],
+        "newCheckbox()" => ["getCheckedByField", Workplace::class],
+        "newDropdownMulti()" => ["getCheckedByField", Workplace::class],
     ];
 
-    public function newcheckbox()
+    public function newCheckbox()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    public function newdropdownMulti()
+    public function newDropdownMulti()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
-
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

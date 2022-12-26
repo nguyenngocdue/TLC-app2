@@ -20,10 +20,10 @@ class Zunit_test_2 extends ModelExtended
 
 
     public $eloquentParams = [
-        "radioYesNo" => ['belongsTo', Qaqc_insp_control_value::class, 'radioYesNo'],
-        "radioPassFail" => ['belongsTo', Qaqc_insp_control_value::class, 'radioPassFail'],
-        "dropdownYesNo" => ['belongsTo', Qaqc_insp_control_value::class, 'dropdownYesNo'],
-        "dropdownPassFail" => ['belongsTo', Qaqc_insp_control_value::class, 'dropdownPassFail'],
+        "radioYesNo" => ['belongsTo', Qaqc_insp_control_value::class, 'radio_yes_no'],
+        "radioPassFail" => ['belongsTo', Qaqc_insp_control_value::class, 'radio_pass_fail'],
+        "dropdownYesNo" => ['belongsTo', Qaqc_insp_control_value::class, 'dropdown_yes_no'],
+        "dropdownPassFail" => ['belongsTo', Qaqc_insp_control_value::class, 'dropdown_pass_fail'],
     ];
 
     public $oracyParams = [

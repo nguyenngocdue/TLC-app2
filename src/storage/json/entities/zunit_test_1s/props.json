@@ -12,19 +12,6 @@
         "validation": "",
         "formula": ""
     },
-    "_newdropdownMulti()": {
-        "name": "_newdropdownMulti()",
-        "column_name": "newdropdownMulti()",
-        "column_type": "oracy_prop",
-        "label": "New Dropdown Multi",
-        "control": "new_dropdown_multi",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
-    },
     "_text1": {
         "name": "_text1",
         "column_name": "text1",
@@ -35,7 +22,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_text2": {
@@ -44,11 +31,11 @@
         "column_type": "text",
         "label": "Description",
         "control": "textarea",
-        "col_span": "12",
+        "col_span": "4",
         "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
         "formula": "All_ConcatNameWith123"
     },
     "_text3": {
@@ -57,11 +44,11 @@
         "column_type": "text",
         "label": "Number",
         "control": "number",
-        "col_span": "12",
+        "col_span": "4",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
         "formula": ""
     },
     "_boolean1": {
@@ -70,11 +57,11 @@
         "column_type": "bigint",
         "label": "Boolean",
         "control": "toggle",
-        "col_span": "12",
+        "col_span": "4",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
         "formula": ""
     },
     "_dropdown1": {
@@ -83,11 +70,24 @@
         "column_type": "bigint",
         "label": "Dropdown",
         "control": "dropdown",
-        "col_span": "12",
+        "col_span": "6",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
+        "formula": ""
+    },
+    "_newDropdownMulti()": {
+        "name": "_newDropdownMulti()",
+        "column_name": "newDropdownMulti()",
+        "column_type": "oracy_prop",
+        "label": "New Dropdown Multi",
+        "control": "new_dropdown_multi",
+        "col_span": "6",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
         "formula": ""
     },
     "_radio1": {
@@ -96,24 +96,24 @@
         "column_type": "bigint",
         "label": "Radio",
         "control": "radio",
-        "col_span": "12",
+        "col_span": "6",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
         "formula": ""
     },
-    "_newcheckbox()": {
-        "name": "_newcheckbox()",
-        "column_name": "newcheckbox()",
+    "_newCheckbox()": {
+        "name": "_newCheckbox()",
+        "column_name": "newCheckbox()",
         "column_type": "oracy_prop",
         "label": "New CheckboxYesNo",
         "control": "new_checkbox",
-        "col_span": "12",
+        "col_span": "6",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
         "formula": ""
     },
     "_created_at": {
