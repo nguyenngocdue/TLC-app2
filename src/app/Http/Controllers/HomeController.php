@@ -60,12 +60,43 @@ class HomeController extends Controller
 
 
         );
-        dd(Qaqc_insp_sheet::find(1)->getChklstLines->where('qaqc_insp_chklst_id', 1)->groupBy('qaqc_insp_group_id'));
+        function quickSort($array)
+        {
+            $length = count($array);
+
+            // Return if the array is empty or has only one element
+            if ($length <= 1) {
+                return $array;
+            }
+
+            // Select the pivot element
+            $pivot = $array[0];
+
+            // Initialize the left and right arrays
+            $left = $right = array();
+
+            // Partition the array into left and right subarrays
+            for ($i = 1; $i < $length; $i++) {
+                if ($array[$i] < $pivot) {
+                    $left[] = $array[$i];
+                } else {
+                    $right[] = $array[$i];
+                }
+            }
+
+            // Recursively sort the left and right subarrays
+            $left = quickSort($left);
+            $right = quickSort($right);
+
+            // Concatenate the left array, the pivot element, and the right array
+            return array_merge($left, array($pivot), $right);
+        }
+
+        // Example usage
+        $array = array(3, 4, 2, 1, 6, 5);
+        $sortedArray = quickSort($array);
+        dd($sortedArray);
         // dump(array_merge($array['websites'], $array['friends']));
-        dd(array_shift($array));
-        dump(array_pop($array));
-        dd($array);
-        dd(array_values(array_map(fn ($value) => $value['title'], Statuses::getFor('sub_project'))));
         // dump(User::where('email', 'admin')->first());
         // dump(CurrentUser::getRoles());
         // dd(CurrentUser::getRoles(User::where('email', 'admin')->first()));
