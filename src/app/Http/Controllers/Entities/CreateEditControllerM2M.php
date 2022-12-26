@@ -45,11 +45,12 @@ trait CreateEditControllerM2M
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
         $newDataInputHasArray = array_filter($dataInput, fn ($item) => is_array($item));
 
-
         foreach ($newDataInputHasArray as $key => $value) {
+            $valueInt = array_map(fn ($i) => $i * 1, $value);
+
             $termModelPath = $data->oracyParams[$key][1];
             $fixFieldName = str_replace('()', '', $key);
-            $data->syncCheck($allFields[$fixFieldName], $termModelPath, $value);
+            $data->syncCheck($allFields[$fixFieldName], $termModelPath, $valueInt);
         }
     }
 
