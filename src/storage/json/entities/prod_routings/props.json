@@ -85,7 +85,7 @@
         "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",
-        "hidden_edit": "true",
+        "hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -98,7 +98,7 @@
         "control": "relationship_renderer",
         "col_span": "12",
         "hidden_view_all": "",
-        "hidden_edit": "true",
+        "hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""

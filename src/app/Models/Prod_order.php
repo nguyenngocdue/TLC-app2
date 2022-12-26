@@ -46,4 +46,14 @@ class Prod_order extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
+    public function getManyLineParams()
+    {
+        return [
+            ['dataIndex' => 'id', 'renderer' => 'id', 'type' => 'prod_run_lines', 'align' => 'center'],
+            ['dataIndex' => 'name', 'title' => 'Priority'],
+            ['dataIndex' => 'production', 'title' => 'Production Name'],
+            ['dataIndex' => 'compliance', 'title' => 'Compliance Name'],
+        ];
+    }
 }
