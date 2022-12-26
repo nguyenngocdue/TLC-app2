@@ -77,9 +77,9 @@
         "validation": "",
         "formula": ""
     },
-    "_newdropdownMulti()": {
-        "name": "_newdropdownMulti()",
-        "column_name": "newdropdownMulti()",
+    "_newDropdownMulti()": {
+        "name": "_newDropdownMulti()",
+        "column_name": "newDropdownMulti()",
         "column_type": "oracy_prop",
         "label": "New Dropdown Multi",
         "control": "new_dropdown_multi",
@@ -103,9 +103,9 @@
         "validation": "",
         "formula": ""
     },
-    "_newcheckbox()": {
-        "name": "_newcheckbox()",
-        "column_name": "newcheckbox()",
+    "_newCheckbox()": {
+        "name": "_newCheckbox()",
+        "column_name": "newCheckbox()",
         "column_type": "oracy_prop",
         "label": "New CheckboxYesNo",
         "control": "new_checkbox",
