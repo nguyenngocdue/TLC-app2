@@ -103,12 +103,12 @@
         "validation": "required",
         "formula": ""
     },
-    "_checkbox()": {
-        "name": "_checkbox()",
-        "column_name": "checkbox()",
-        "column_type": "oracy_prop",
+    "_checkbox": {
+        "name": "_checkbox",
+        "column_name": "checkbox",
+        "column_type": "",
         "label": "Checkbox",
-        "control": "new_checkbox",
+        "control": "checkbox",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
