@@ -43,10 +43,10 @@
         "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "2"
     },
-    "_checkboxYesNo": {
-        "name": "_checkboxYesNo",
+    "_checkboxYesNo()": {
+        "name": "_checkboxYesNo()",
         "relationship": "getCheckedByField",
-        "control_name": "checkboxYesNo",
+        "control_name": "checkboxYesNo()",
         "renderer_view_all": "",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -54,10 +54,10 @@
         "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "1"
     },
-    "_checkboxPassFail": {
-        "name": "_checkboxPassFail",
+    "_checkboxPassFail()": {
+        "name": "_checkboxPassFail()",
         "relationship": "getCheckedByField",
-        "control_name": "checkboxPassFail",
+        "control_name": "checkboxPassFail()",
         "renderer_view_all": "",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -65,10 +65,10 @@
         "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "2"
     },
-    "_dropdownMultiYesNo": {
-        "name": "_dropdownMultiYesNo",
+    "_dropdownMultiYesNo()": {
+        "name": "_dropdownMultiYesNo()",
         "relationship": "getCheckedByField",
-        "control_name": "dropdownMultiYesNo",
+        "control_name": "dropdownMultiYesNo()",
         "renderer_view_all": "",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -76,10 +76,10 @@
         "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "1"
     },
-    "_dropdownMultiPassFail": {
-        "name": "_dropdownMultiPassFail",
+    "_dropdownMultiPassFail()": {
+        "name": "_dropdownMultiPassFail()",
         "relationship": "getCheckedByField",
-        "control_name": "dropdownMultiPassFail",
+        "control_name": "dropdownMultiPassFail()",
         "renderer_view_all": "",
         "renderer_view_all_param": "",
         "renderer_edit": "",

@@ -90,19 +90,6 @@
         "validation": "required",
         "formula": ""
     },
-    "_workplaceRel1": {
-        "name": "_workplaceRel1",
-        "column_name": "workplaceRel1",
-        "column_type": "eloquent_prop",
-        "label": "Checkbox",
-        "control": "checkbox",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
-    },
     "_newdropdownMulti()": {
         "name": "_newdropdownMulti()",
         "column_name": "newdropdownMulti()",
@@ -120,7 +107,7 @@
         "name": "_newcheckbox()",
         "column_name": "newcheckbox()",
         "column_type": "oracy_prop",
-        "label": "CheckboxYesNo",
+        "label": "New CheckboxYesNo",
         "control": "new_checkbox",
         "col_span": "12",
         "hidden_view_all": "",
