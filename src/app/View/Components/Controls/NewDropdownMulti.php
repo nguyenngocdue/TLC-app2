@@ -29,8 +29,6 @@ class NewDropdownMulti extends Component
         $type = $this->type;
 
 
-
-
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
         $fixColName = str_replace('()', '', $colName);
         if (!isset($allFields[$fixColName])) return "<x-feedback.alert message='Not found control_name \"$fixColName\" in  Fields.' type='warning' />";
