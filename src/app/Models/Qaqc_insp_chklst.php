@@ -33,7 +33,7 @@ class Qaqc_insp_chklst extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ["dataIndex" => "id", "renderer" => "id", "type" => "prod_runs"],
+            ["dataIndex" => "id", "renderer" => "id", "type" => "qaqc_insp_chklsts"],
             ["dataIndex" => "name"],
             ["dataIndex" => "progress"],
         ];

@@ -1,0 +1,46 @@
+{
+    "_prodRouting": {
+        "name": "_prodRouting",
+        "relationship": "belongsTo",
+        "control_name": "prodRouting",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": ""
+    },
+    "_prodRoutingLink": {
+        "name": "_prodRoutingLink",
+        "relationship": "belongsTo",
+        "control_name": "prodRoutingLink",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": ""
+    },
+    "_erpRoutingLink": {
+        "name": "_erpRoutingLink",
+        "relationship": "belongsTo",
+        "control_name": "erpRoutingLink",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": ""
+    },
+    "_wirDescription": {
+        "name": "_wirDescription",
+        "relationship": "belongsTo",
+        "control_name": "wirDescription",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": ""
+    }
+}

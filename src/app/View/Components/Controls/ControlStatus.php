@@ -19,11 +19,10 @@ class ControlStatus extends Component
         private $colName,
         private $id,
         private $action,
-        private $tablePath,
+        private $modelPath,
     ) {
         //
-        $modelPath = $this->tablePath;
-        $model = $modelPath::find($this->id);
+        $model = ($this->modelPath)::find($this->id);
         $this->value = is_null($model) ? "new" : $model->status;
     }
 
