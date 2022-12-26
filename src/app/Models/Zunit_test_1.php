@@ -23,12 +23,13 @@ class Zunit_test_1 extends ModelExtended
     ];
     public function checkbox()
     {
-        $p = $this->oracyParams[__FUNCTION__];
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function dropdownMulti()
     {
-        $p = $this->oracyParams[__FUNCTION__];
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
