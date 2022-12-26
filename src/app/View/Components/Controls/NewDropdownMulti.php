@@ -3,19 +3,18 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
-use App\Models\Zunit_test_1;
 use Illuminate\View\Component;
 
-class Checkbox extends Component
+class NewDropdownMulti extends Component
 {
 
     public function __construct(
-        private $id,
         private $colName,
         private $action,
         private $modelPath,
         private $label,
         private $type,
+        private $id,
     ) {
         //
     }
@@ -31,12 +30,14 @@ class Checkbox extends Component
 
 
 
+
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
-        if (!isset($allFields[$colName])) return "<x-feedback.alert message='Not found control_name \"$colName\" in  Fields.' type='warning' />";
-        $idsChecked = is_null($item =  $modelPath::find($this->id)) ? [] : $item->getCheckedByField($allFields[$colName], '')->pluck('id')->toArray();
+        $fixColName = str_replace('()', '', $colName);
+        if (!isset($allFields[$fixColName])) return "<x-feedback.alert message='Not found control_name \"$fixColName\" in  Fields.' type='warning' />";
+        $idsChecked = is_null($item =  $modelPath::find($this->id)) ? [] : $item->getCheckedByField($allFields[$fixColName], '')->pluck('id')->toArray();
 
         $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
         if (is_null($dataSource) || gettype($dataSource) === 'string') return "<x-feedback.alert message='Not found control_name \"$colName\" in  Fields.' type='warning' />";
-        return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
+        return view('components.controls.new-dropdown-multi')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
     }
 }

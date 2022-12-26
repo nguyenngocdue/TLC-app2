@@ -90,12 +90,12 @@
         "validation": "required",
         "formula": ""
     },
-    "_checkbox": {
-        "name": "_checkbox",
-        "column_name": "checkbox",
+    "_newdropdownMulti()": {
+        "name": "_newdropdownMulti()",
+        "column_name": "newdropdownMulti()",
         "column_type": "oracy_prop",
-        "label": "CheckboxYesNo",
-        "control": "checkbox",
+        "label": "New Dropdown Multi",
+        "control": "new_dropdown_multi",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -103,12 +103,12 @@
         "validation": "",
         "formula": ""
     },
-    "_dropdownMulti": {
-        "name": "_dropdownMulti",
-        "column_name": "dropdownMulti",
+    "_newcheckbox()": {
+        "name": "_newcheckbox()",
+        "column_name": "newcheckbox()",
         "column_type": "oracy_prop",
-        "label": "Dropdown Multi",
-        "control": "dropdown_multi",
+        "label": "CheckboxYesNo",
+        "control": "new_checkbox",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",

@@ -48,15 +48,10 @@ trait CreateEditControllerM2M
 
         foreach ($newDataInputHasArray as $key => $value) {
             $termModelPath = $data->oracyParams[$key][1];
-
-
-
-            // $data->attachCheck($allFields[$key], $termModelPath, $value);
-            $data->syncCheck($allFields[$key], $termModelPath, $value);
+            $fixFieldName = str_replace('()', '', $key);
+            $data->syncCheck($allFields[$fixFieldName], $termModelPath, $value);
         }
     }
-
-
 
     private function getManyToManyRelationship($currentElement) //checkBox
     {

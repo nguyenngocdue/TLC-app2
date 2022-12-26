@@ -5,7 +5,7 @@ namespace App\View\Components\Controls;
 use App\Helpers\Helper;
 use Illuminate\View\Component;
 
-class DropdownMulti extends Component
+class NewCheckbox extends Component
 {
     /**
      * Create a new component instance.
@@ -13,12 +13,12 @@ class DropdownMulti extends Component
      * @return void
      */
     public function __construct(
+        private $id,
         private $colName,
         private $action,
         private $modelPath,
         private $label,
         private $type,
-        private $id,
 
     ) {
         //
@@ -39,14 +39,15 @@ class DropdownMulti extends Component
         $type = $this->type;
 
 
+
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
-        if (!isset($allFields[$colName])) return "<x-feedback.alert message='Not found control_name \"$colName\" in  Fields.' type='warning' />";
-        $idsChecked = is_null($item =  $modelPath::find($this->id)) ? [] : $item->getCheckedByField($allFields[$colName], '')->pluck('id')->toArray();
+        $keyColName = str_replace('()', '', $colName);
+        if (!isset($allFields[$keyColName])) return "<x-feedback.alert message='Not found control_name \"$keyColName\" in  Fields.' type='warning' />";
+        $idsChecked = is_null($item =  $modelPath::find($this->id)) ? [] : $item->getCheckedByField($allFields[$keyColName], '')->pluck('id')->toArray();
 
         $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
         if (is_null($dataSource) || gettype($dataSource) === 'string') return "<x-feedback.alert message='Not found control_name \"$colName\" in  Fields.' type='warning' />";
 
-        // dd($dataSource);
-        return view('components.controls.dropdown-multi')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
+        return view('components.controls.new-checkbox')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
     }
 }

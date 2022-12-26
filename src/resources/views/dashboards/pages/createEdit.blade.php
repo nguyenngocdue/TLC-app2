@@ -119,8 +119,13 @@ $id = $action === "edit" ? $values->id : "";
                         <x-controls.radio id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
                         @break
 
-                        @case ('dropdown_multi')
+                        {{-- @case ('dropdown_multi')
                         <x-controls.dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
+                        @break --}}
+
+
+                        @case ('new_dropdown_multi')
+                        <x-controls.new-dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
                         @break
 
                         @case('attachment')
@@ -129,9 +134,16 @@ $id = $action === "edit" ? $values->id : "";
                         @case('toggle')
                         <x-controls.toggle id={{$id}} colName={{$columnName}} value={{$value}} label={{$label}} />
                         @break
-                        @case('checkbox')
-                        <x-controls.checkbox id={{$id}} colName={{$columnName}} action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
+
+                        @case('new_checkbox')
+                        <x-controls.new-checkbox id={{$id}} colName={{$columnName}} action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
                         @break
+                        {{-- @case('checkbox') --}}
+                        {{-- <x-controls.checkbox id={{$id}} colName={{$columnName}} action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} /> --}}
+                        {{-- @break --}}
+
+
+
 
                         @case('number')
                         <x-controls.number colName={{$columnName}} value={{$value}} action={{$action}} control={{$control}} label={{$label}} />
