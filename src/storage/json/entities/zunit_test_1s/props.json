@@ -90,6 +90,32 @@
         "validation": "required",
         "formula": ""
     },
+    "_workplaceRel1": {
+        "name": "_workplaceRel1",
+        "column_name": "workplaceRel1",
+        "column_type": "eloquent_prop",
+        "label": "Checkbox",
+        "control": "checkbox",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "required",
+        "formula": ""
+    },
+    "_checkbox()": {
+        "name": "_checkbox()",
+        "column_name": "checkbox()",
+        "column_type": "oracy_prop",
+        "label": "Checkbox",
+        "control": "new_checkbox",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
     "_newdropdownMulti()": {
         "name": "_newdropdownMulti()",
         "column_name": "newdropdownMulti()",
