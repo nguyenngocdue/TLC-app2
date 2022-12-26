@@ -28,7 +28,7 @@ class ControlStatus extends Component
 
     public function render()
     {
-        $model = Helper::getItemModel($this->type);
+        $model = Helper::getItemModel($this->type, $this->id);
         if (!method_exists($model, "transitionTo")) return "<x-feedback.alert type='warning' message='This model needs to use HasStatus trait.'></x-feedback.alert>";
         $cbb = $model->getAvailableStatuses();
         // $currentStatus = $this->action === 'edit' ? $model::find($this->id)->first()->status : '';

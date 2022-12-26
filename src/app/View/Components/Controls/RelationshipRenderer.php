@@ -48,9 +48,13 @@ class RelationshipRenderer extends Component
         $itemDB = $modelPath::find($id);
         if (is_null($itemDB->$colName)) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";
 
+        // $dataSource = $itemDB->$colName->all();
+
         $eloquentParam = $itemDB->eloquentParams[$colName];
-        $relation = $modelPath::find($id)->{$eloquentParam[0]}($eloquentParam[1]);
-        $dataSource = $relation->getQuery()->paginate(5)->all();
+        if (isset($eloquentParam[2])) $relation = $itemDB->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
+        elseif (isset($eloquentParam[1])) $relation = $itemDB->{$eloquentParam[0]}($eloquentParam[1]);
+        elseif (isset($eloquentParam[0])) $relation = $itemDB->{$eloquentParam[0]}();
+        $dataSource = $relation->getQuery()->paginate(10)->all();
 
 
         if (count($dataSource) <= 0) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";

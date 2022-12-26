@@ -286,11 +286,10 @@ class Helper
     }
 
 
-    public  static function getItemModel($type, $id = '')
+    public  static function getItemModel($type, $id)
     {
         try {
             $modelPath = "App\\Models\\" . Str::singular($type);
-            if (!$id) return  [];
             return $modelPath::find($id);
         } catch (Exception $e) {
             dd($e->getMessage());
