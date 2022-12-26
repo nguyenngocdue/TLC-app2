@@ -77,6 +77,11 @@ abstract class AbstractRelationshipController extends Controller
                 "editable" => true,
                 "renderer" => "text",
             ],
+            [
+                "dataIndex" => "radio_checkbox_colspan",
+                "editable" => true,
+                "renderer" => "text",
+            ],
         ];
     }
 
