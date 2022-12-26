@@ -10,6 +10,13 @@
 <span class="col-span-9"></span>
 <span class="col-span-10"></span>
 <!--  -->
+
+<!-- Divide -->
+<span class=" translate-x-[16px]"> </span>
+<span class=" translate-x-[-16px]"> </span>
+<!--  -->
+
+
 <span class="bg-amber-400"></span>
 <!-- FOR HEADING -->
 <h1 class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600">Tailwind Elements</h1>

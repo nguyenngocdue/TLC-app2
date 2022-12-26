@@ -17,9 +17,12 @@
                 @if ($prop['column_name']=== $colName)
                 {{-- @dump($colNameErrors) --}}
                 @php
-                $strSearch = str_contains($colName, '_') ? str_replace('_', ' ', $colName) : $colName;
+                // $strSearch = str_contains($colName, '_') ? str_replace('_', ' ', $colName) : $colName;
+                $message = $value[0];
+                $idx = strpos($message, 'field'); // index of "field" word in message
+                $strSearch = substr($message, 4, $idx - 4);
                 @endphp
-                <a href="#{{$colName}}" title="{{$colName}}">{{str_replace($strSearch, "[".$prop['label']."]", $value[0])}}</a>
+                <a href="#{{$colName}}" title="{{$colName}}">{{str_replace($strSearch, "[".$prop['label']."] ", $message)}}</a>
                 @endif
                 @endforeach
             </li>

@@ -10,10 +10,10 @@ class Zunit_test_2 extends ModelExtended
     use HasCheckbox;
     protected $fillable = [
         'content',
-        'radioYesNo',
-        'radioPassFail',
-        'dropdownYesNo',
-        'dropdownPassFail',
+        'radio_yes_no',
+        'radio_pass_fail',
+        'dropdown_yes_no',
+        'dropdown_pass_fail',
     ];
     protected $table = "zunit_test_2s";
     public $menuTitle = "UT02 (Dropdown/Checkbox)";

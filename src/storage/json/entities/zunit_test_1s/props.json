@@ -12,6 +12,19 @@
         "validation": "",
         "formula": ""
     },
+    "_newdropdownMulti()": {
+        "name": "_newdropdownMulti()",
+        "column_name": "newdropdownMulti()",
+        "column_type": "oracy_prop",
+        "label": "New Dropdown Multi",
+        "control": "new_dropdown_multi",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "required",
+        "formula": ""
+    },
     "_text1": {
         "name": "_text1",
         "column_name": "text1",
@@ -35,7 +48,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": "All_ConcatNameWith123"
     },
     "_text3": {
@@ -48,7 +61,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_boolean1": {
@@ -61,7 +74,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_dropdown1": {
@@ -74,7 +87,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_radio1": {
@@ -87,20 +100,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
-    "_newdropdownMulti()": {
-        "name": "_newdropdownMulti()",
-        "column_name": "newdropdownMulti()",
-        "column_type": "oracy_prop",
-        "label": "New Dropdown Multi",
-        "control": "new_dropdown_multi",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_newcheckbox()": {
@@ -113,7 +113,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_created_at": {
