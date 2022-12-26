@@ -92,7 +92,7 @@
     },
     "_checkbox": {
         "name": "_checkbox",
-        "column_name": "checkbox()",
+        "column_name": "checkbox",
         "column_type": "oracy_prop",
         "label": "CheckboxYesNo",
         "control": "checkbox",
@@ -105,7 +105,7 @@
     },
     "_dropdownMulti": {
         "name": "_dropdownMulti",
-        "column_name": "dropdownMulti()",
+        "column_name": "dropdownMulti",
         "column_type": "oracy_prop",
         "label": "Dropdown Multi",
         "control": "dropdown_multi",

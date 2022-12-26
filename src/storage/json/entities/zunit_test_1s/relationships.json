@@ -24,7 +24,7 @@
     "_checkbox": {
         "name": "_checkbox",
         "relationship": "getCheckedByField",
-        "control_name": "checkbox()",
+        "control_name": "checkbox",
         "renderer_view_all": "",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -35,7 +35,7 @@
     "_dropdownMulti": {
         "name": "_dropdownMulti",
         "relationship": "getCheckedByField",
-        "control_name": "dropdownMulti()",
+        "control_name": "dropdownMulti",
         "renderer_view_all": "",
         "renderer_view_all_param": "",
         "renderer_edit": "",
