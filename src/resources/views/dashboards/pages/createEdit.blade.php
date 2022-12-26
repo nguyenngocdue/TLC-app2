@@ -42,10 +42,10 @@ $id = $action === "edit" ? $values->id : "";
 
                 <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
                     @if($columnType === 'static')
-                    <div class='col-span-{{$col_span}} text-left'>
+                    <div class='col-span-12 text-left'>
                         @switch($control)
                         @case('z_page_break')
-                        <div style='page-break-after:always !important '>-------</div>
+                        <div style='page-break-after:always !important' class="text-center text-gray-300">---Page break---</div>
                         @case('z_h1')
                         <x-renderer.heading level=1>{{$label}}</x-renderer.heading>
                         @break
@@ -83,9 +83,7 @@ $id = $action === "edit" ? $values->id : "";
                             </span>
                         </label>
                     </div>
-                    @php
-                    @endphp
-                    <div class=' col-start-{{24/$col_span+1}} col-span-{{12 - 24/$col_span}}  {{$val['new_line'] === 'true' ? "col-span-12" : "" }}  py-2 text-left'>
+                    <div class=' col-start-{{24/$col_span+1}}   {{$val['new_line'] === 'true' ? "col-span-12" : "col-span-".(12 - 24/$col_span)}}  py-2 text-left'>
                         @if (is_null($control))
                         <h2 class=" text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                         @endif
@@ -133,11 +131,6 @@ $id = $action === "edit" ? $values->id : "";
                         @case('new_checkbox')
                         <x-controls.new-checkbox id={{$id}} colName={{$columnName}} action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
                         @break
-                        {{-- @case('checkbox') --}}
-                        {{-- <x-controls.checkbox id={{$id}} colName={{$columnName}} action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} /> --}}
-                        {{-- @break --}}
-
-
 
 
                         @case('number')

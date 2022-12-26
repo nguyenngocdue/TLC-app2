@@ -21,7 +21,7 @@
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     },
@@ -111,6 +111,19 @@
         "control": "picker_date",
         "col_span": "12",
         "hidden_view_all": "true",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_position_rendered": {
+        "name": "_position_rendered",
+        "column_name": "position_rendered",
+        "column_type": "text",
+        "label": "",
+        "control": "",
+        "col_span": "",
+        "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
