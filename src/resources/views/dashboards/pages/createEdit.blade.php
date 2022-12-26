@@ -83,7 +83,9 @@ $id = $action === "edit" ? $values->id : "";
                             </span>
                         </label>
                     </div>
-                    <div class=' col-start-{{24/$col_span+1}} col-end-13   {{$val['new_line'] === 'true' ? "col-span-12" : "" }}  py-2 text-left'>
+                    @php
+                    @endphp
+                    <div class=' col-start-{{24/$col_span+1}} col-span-{{12 - 24/$col_span}}  {{$val['new_line'] === 'true' ? "col-span-12" : "" }}  py-2 text-left'>
                         @if (is_null($control))
                         <h2 class=" text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                         @endif
