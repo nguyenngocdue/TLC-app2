@@ -17,21 +17,6 @@ class Zunit_test_1 extends ModelExtended
         "workplaceDropDown1" => ['belongsTo', Workplace::class, 'dropdown1'],
         "workplaceRadio1" => ['belongsTo', Workplace::class, 'radio1'],
     ];
-    public $oracyParams = [
-        "newcheckbox()" => ["getCheckedByField", Workplace::class],
-        "newdropdownMulti()" => ["getCheckedByField", Workplace::class],
-    ];
-    public function newcheckbox()
-    {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
-    public function newdropdownMulti()
-    {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
-
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
 
     public function workplaceDropDown1()
     {
@@ -42,5 +27,23 @@ class Zunit_test_1 extends ModelExtended
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+
+    public $oracyParams = [
+        "newcheckbox()" => ["getCheckedByField", Workplace::class],
+        "newdropdownMulti()" => ["getCheckedByField", Workplace::class],
+    ];
+
+    public function newcheckbox()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function newdropdownMulti()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }
