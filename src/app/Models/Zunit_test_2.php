@@ -21,10 +21,10 @@ class Zunit_test_2 extends ModelExtended
     ];
 
     public $oracyParams = [
-        "checkboxYesNo" => ["getCheckedByField", Qaqc_insp_control_value::class],
-        "checkboxPassFail" => ["getCheckedByField", Qaqc_insp_control_value::class],
-        "dropdownMultiYesNo" => ["getCheckedByField", Qaqc_insp_control_value::class],
-        "dropdownMultiPassFail" => ["getCheckedByField", Qaqc_insp_control_value::class],
+        "checkboxYesNo()" => ["getCheckedByField", Qaqc_insp_control_value::class],
+        "checkboxPassFail()" => ["getCheckedByField", Qaqc_insp_control_value::class],
+        "dropdownMultiYesNo()" => ["getCheckedByField", Qaqc_insp_control_value::class],
+        "dropdownMultiPassFail()" => ["getCheckedByField", Qaqc_insp_control_value::class],
     ];
 
     public function radioYesNo()
@@ -51,23 +51,23 @@ class Zunit_test_2 extends ModelExtended
 
     public function checkboxYesNo()
     {
-        $p = $this->oracyParams[__FUNCTION__];
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
     public function checkboxPassFail()
     {
-        $p = $this->oracyParams[__FUNCTION__];
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function dropdownMultiYesNo()
     {
-        $p = $this->oracyParams[__FUNCTION__];
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function dropdownMultiPassFail()
     {
-        $p = $this->oracyParams[__FUNCTION__];
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }
