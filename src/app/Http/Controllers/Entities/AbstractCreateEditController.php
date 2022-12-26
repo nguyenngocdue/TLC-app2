@@ -72,6 +72,7 @@ abstract class AbstractCreateEditController extends Controller
 		$modelPath = $this->data;
 
 		$idItems = $this->getManyToManyRelationship($currentElement);
+		// dd(123);
 		return view('dashboards.pages.createEdit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'modelPath', 'idItems'));
 	}
 
@@ -101,12 +102,12 @@ abstract class AbstractCreateEditController extends Controller
 		$newDataInput = $this->handleToggle('store', $props, $dataInput);
 		$newDataInput = $this->handleTextArea($props, $newDataInput);
 
-		$newDataInputHasAttachment = array_filter($newDataInput, fn ($item) => is_array($item));
-		$newDataInputNotAttachment = array_filter($newDataInput, fn ($item) => !is_array($item));
-		// dd($newDataInputNotAttachment);
+		$newDataInputHasArray = array_filter($newDataInput, fn ($item) => is_array($item));
+		$newDataInputNotArray = array_filter($newDataInput, fn ($item) => !is_array($item));
+		// dd($newDataInputNotArray);
 
 		try {
-			$newItem = $this->data::create($newDataInputNotAttachment);
+			$newItem = $this->data::create($newDataInputNotArray);
 			$this->setStatus($newDataInput, $newItem);
 
 			$_data = $this->data::find($newItem->id);
@@ -118,10 +119,13 @@ abstract class AbstractCreateEditController extends Controller
 			Notification::send($newItem, new CreateNewNotification($newItem->id));
 
 			if (isset($newItem)) {
-				$this->syncManyToManyRelationship($newItem, $newDataInputHasAttachment); // Check box
+				$this->syncManyToManyToDB($newItem, $newDataInputHasArray); // Check box
+
+				// $this->syncManyToManyRelationship($newItem, $newDataInputHasArray); // Check box
 
 				// $event = event(new SendEmailItemCreated(['id' => $data->id, 'type' => $this->type]));
 				// dd($event);
+
 				if ($idsMedia) {
 					$this->setMediaParent($newItem, $colNamesHaveAttachment);
 					$this->updateMediaIdsToDBFields($_data, $colNamesHaveAttachment);
@@ -178,7 +182,7 @@ abstract class AbstractCreateEditController extends Controller
 			Notification::send($data, new EditNotification($data->id));
 
 			if ($isSaved) {
-				$this->syncManyToManyRelationship($data, $dataInput);
+				$this->syncManyToManyToDB($data, $dataInput); // Check box
 
 				if ($idsMedia) {
 					//set Media Parent is in saveMedia
@@ -225,16 +229,19 @@ abstract class AbstractCreateEditController extends Controller
 
 	private function updateMediaIdsToDBFields($data, $colNamesHaveAttachment)
 	{
-		$dbMorphManyMedia = json_decode($data->media()->select('id', 'category')->get(), true);
-		$media_cateTb = json_decode(DB::table('attachment_categories')->select('id', 'name')->get(), true);
-		$ids_names_cateMedia = array_column($media_cateTb, 'name', 'id');
-		$ids_names_cateTb = array_column($dbMorphManyMedia, 'category', 'id');
-		$idsHasAttachMent = array_values(array_unique($ids_names_cateTb));
+		$morphManyMediaUser = $data->media()->select('id', 'category')->get()->toArray();
+		$media_cateTb = DB::table('fields')->select('id', 'name')->get()->toArray();
+
+		$ids_names_cateMediaDB = array_column($media_cateTb, 'name', 'id');
+		$idsMedia_idsCateName_User = array_column($morphManyMediaUser, 'category', 'id');
+
+		$idsHasAttachMent = array_values(array_unique($idsMedia_idsCateName_User));
+
 		$names_val_fields = [];
-		foreach ($ids_names_cateTb as $key => $value) {
+		foreach ($idsMedia_idsCateName_User as $key => $value) {
 			foreach ($idsHasAttachMent as $cate) {
 				if ($value === $cate) {
-					$names_val_fields[$ids_names_cateMedia[$cate]][] = $key;
+					$names_val_fields[$ids_names_cateMediaDB[$cate]][] = $key;
 					break;
 				}
 			}

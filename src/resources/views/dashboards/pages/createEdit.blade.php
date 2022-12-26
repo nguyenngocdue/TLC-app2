@@ -13,11 +13,10 @@ $id = $action === "edit" ? $values->id : "";
 <x-controls.headeralertvalidation :strProps="$props" />
 <form class="w-full p-4 z-0 px-4 py-3 text-center mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? 0 : $id )}} ">
     @csrf
-    <div class="flex flex-col grid-cols-12">
+    <div class=" grid grid-cols-12">
         @method($action === "create" ? 'POST' : 'PUT')
         @php
         $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quarter','picker_year','picker_datetime'];
-
         @endphp
         @foreach($props as $key => $val)
         @php
@@ -27,6 +26,7 @@ $id = $action === "edit" ? $values->id : "";
         $columnName = $val['column_name'];
         $columnType = $val['column_type'];
         $control = $val['control'];
+
         $colSpan = $val['col_span'];
         $value = $action === "edit" ? $values->{$columnName} :'';
         // dd($values->getAttributes()['settings']);
@@ -37,8 +37,7 @@ $id = $action === "edit" ? $values->id : "";
         $isRequired = in_array("required", explode("|",$val['validation']));
         $iconJson = $columnType === 'json' ? App\Utils\ConstantSVG::ICON_SVG : "";
         @endphp
-
-        <div class='col-span-{{$col_span}}'>
+        <div class='col-span-{{$col_span}} grid'>
             <div class='grid grid-row-1 gap-3'>
 
                 <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
@@ -75,7 +74,7 @@ $id = $action === "edit" ? $values->id : "";
                         @endswitch
                     </div>
                     @else
-                    <div class='col-start-1 col-span-{{24/$col_span}} {{$val['new_line'] === 'true' ? "col-span-12 text-left" : "text-right" }} '>
+                    <div class='col-span-{{24/$col_span}} col-start-1 {{$val['new_line'] === 'true' ? "col-span-12 text-left" : "text-right" }} '>
                         <label class='text-gray-700 dark:text-gray-400  px-3 block text-base' title='{{$columnName}} / {{$control}}'>{{$label}}
                             {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
                             <br />
@@ -84,7 +83,9 @@ $id = $action === "edit" ? $values->id : "";
                             </span>
                         </label>
                     </div>
-                    <div class='col-start-{{24/$col_span + 1}}   {{$val['new_line'] === 'true' ? "col-span-12" : "col-span-10 " }}   py-2 text-left'>
+                    @php
+                    @endphp
+                    <div class=' col-start-{{24/$col_span+1}} col-span-{{12 - 24/$col_span}}  {{$val['new_line'] === 'true' ? "col-span-12" : "" }}  py-2 text-left'>
                         @if (is_null($control))
                         <h2 class=" text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                         @endif
@@ -117,18 +118,28 @@ $id = $action === "edit" ? $values->id : "";
                         @case ('radio')
                         <x-controls.radio id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
                         @break
-                        @case ('dropdown_multi')
-                        <x-controls.dropdownmulti colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} :idItems="$idItems" />
+
+                        @case ('new_dropdown_multi')
+                        <x-controls.new-dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
                         @break
+
                         @case('attachment')
                         <x-controls.uploadfiles id={{$id}} colName={{$columnName}} action={{$action}} label={{$label}} type={{$type}} />
                         @break
                         @case('toggle')
                         <x-controls.toggle id={{$id}} colName={{$columnName}} value={{$value}} label={{$label}} />
                         @break
-                        @case('checkbox')
-                        <x-controls.checkbox id={{$id}} colName={{$columnName}} :idItems="$idItems" action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
+
+                        @case('new_checkbox')
+                        <x-controls.new-checkbox id={{$id}} colName={{$columnName}} action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
                         @break
+                        {{-- @case('checkbox') --}}
+                        {{-- <x-controls.checkbox id={{$id}} colName={{$columnName}} action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} /> --}}
+                        {{-- @break --}}
+
+
+
+
                         @case('number')
                         <x-controls.number colName={{$columnName}} value={{$value}} action={{$action}} control={{$control}} label={{$label}} />
                         @break

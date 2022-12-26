@@ -28,6 +28,7 @@ class Radio extends Component
         $type = $this->type;
 
         $dataSource = Helper::getDataSource($modelPath, $colName, $type);
+
         $currentEntity = Helper::getItemModel($this->type, $this->id) ?? [];
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
             $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in $modelPath Model).";

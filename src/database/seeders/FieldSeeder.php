@@ -14,11 +14,13 @@ class FieldSeeder extends Seeder
      */
     public function run()
     {
-        Field::create(['name' => 'attachment_1', 'slug' => 'attachment_1']);
-        Field::create(['name' => 'attachment_2', 'slug' => 'attachment_2']);
-        Field::create(['name' => 'attachment_3', 'slug' => 'attachment_3']);
-        Field::create(['name' => 'attachment_4', 'slug' => 'attachment_4']);
-        Field::create(['name' => 'attachment_5', 'slug' => 'attachment_5']);
+
+        Field::create(['name' => 'attachment_1', 'description' => '', 'slug' => 'attachment_1']);
+        Field::create(['name' => 'attachment_2', 'description' => '', 'slug' => 'attachment_2']);
+        Field::create(['name' => 'attachment_3', 'description' => '', 'slug' => 'attachment_3']);
+        Field::create(['name' => 'attachment_4', 'description' => '', 'slug' => 'attachment_4']);
+        Field::create(['name' => 'attachment_5', 'description' => '', 'slug' => 'attachment_5']);
+
         Field::create(['name' => 'comment_1', 'slug' => 'comment_1']);
         Field::create(['name' => 'comment_2', 'slug' => 'comment_2']);
         Field::create(['name' => 'comment_3', 'slug' => 'comment_3']);
@@ -35,5 +37,7 @@ class FieldSeeder extends Seeder
         Field::create(['name' => 'dropdownMultiPassFail', 'slug' => 'dropdownMultiPassFail']);
         Field::create(['name' => 'checkbox', 'slug' => 'checkbox']);
         Field::create(['name' => 'dropdownMulti', 'slug' => 'dropdownMulti']);
+        Field::create(['name' => 'newcheckbox', 'slug' => 'newcheckbox']);
+        Field::create(['name' => 'newdropdownMulti', 'slug' => 'newdropdownMulti']);
     }
 }

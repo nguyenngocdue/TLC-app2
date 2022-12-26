@@ -25,9 +25,9 @@
         "validation": "required",
         "formula": ""
     },
-    "_radio_yes_no": {
-        "name": "_radio_yes_no",
-        "column_name": "radio_yes_no",
+    "_radioYesNo": {
+        "name": "_radioYesNo",
+        "column_name": "radioYesNo",
         "column_type": "bigint",
         "label": "Radio Yes\/No",
         "control": "radio",
@@ -38,9 +38,9 @@
         "validation": "required",
         "formula": ""
     },
-    "_radio_pass_fail": {
-        "name": "_radio_pass_fail",
-        "column_name": "radio_pass_fail",
+    "_radioPassFail": {
+        "name": "_radioPassFail",
+        "column_name": "radioPassFail",
         "column_type": "bigint",
         "label": "Radio Pass\/Fail",
         "control": "radio",
@@ -51,9 +51,9 @@
         "validation": "required",
         "formula": ""
     },
-    "_dropdown_yes_no": {
-        "name": "_dropdown_yes_no",
-        "column_name": "dropdown_yes_no",
+    "_dropdownYesNo": {
+        "name": "_dropdownYesNo",
+        "column_name": "dropdownYesNo",
         "column_type": "bigint",
         "label": "Dropdown Yes\/No",
         "control": "dropdown",
@@ -64,9 +64,9 @@
         "validation": "required",
         "formula": ""
     },
-    "_dropdown_pass_fail": {
-        "name": "_dropdown_pass_fail",
-        "column_name": "dropdown_pass_fail",
+    "_dropdownPassFail": {
+        "name": "_dropdownPassFail",
+        "column_name": "dropdownPassFail",
         "column_type": "bigint",
         "label": "Dropdown Pass\/Fail",
         "control": "dropdown",
@@ -75,58 +75,6 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "required",
-        "formula": ""
-    },
-    "_checkboxYesNo": {
-        "name": "_checkboxYesNo",
-        "column_name": "checkboxYesNo",
-        "column_type": "eloquent_prop",
-        "label": "Checkbox Yes\/No",
-        "control": "checkbox",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
-    "_checkboxPassFail": {
-        "name": "_checkboxPassFail",
-        "column_name": "checkboxPassFail",
-        "column_type": "eloquent_prop",
-        "label": "Checkbox Pass\/Fail",
-        "control": "checkbox",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
-    "_dropdownMultiYesNo": {
-        "name": "_dropdownMultiYesNo",
-        "column_name": "dropdownMultiYesNo",
-        "column_type": "eloquent_prop",
-        "label": "Dropdown (Multi) Yes\/No",
-        "control": "dropdown_multi",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
-    "_dropdownMultiPassFail": {
-        "name": "_dropdownMultiPassFail",
-        "column_name": "dropdownMultiPassFail",
-        "column_type": "eloquent_prop",
-        "label": "Dropdown (Multi) Pass\/Fail",
-        "control": "dropdown_multi",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
         "formula": ""
     },
     "_created_at": {
@@ -151,6 +99,58 @@
         "col_span": "12",
         "hidden_view_all": "true",
         "hidden_edit": "true",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_checkboxYesNo()": {
+        "name": "_checkboxYesNo()",
+        "column_name": "checkboxYesNo()",
+        "column_type": "oracy_prop",
+        "label": "CheckboxYesNo",
+        "control": "new_checkbox",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_checkboxPassFail()": {
+        "name": "_checkboxPassFail()",
+        "column_name": "checkboxPassFail()",
+        "column_type": "oracy_prop",
+        "label": "CheckboxPassFail",
+        "control": "new_checkbox",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_dropdownMultiYesNo()": {
+        "name": "_dropdownMultiYesNo()",
+        "column_name": "dropdownMultiYesNo()",
+        "column_type": "oracy_prop",
+        "label": "DropdownMultiYesNo",
+        "control": "new_dropdown_multi",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_dropdownMultiPassFail()": {
+        "name": "_dropdownMultiPassFail()",
+        "column_name": "dropdownMultiPassFail()",
+        "column_type": "oracy_prop",
+        "label": "DropdownMultiPassFail",
+        "control": "new_dropdown_multi",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""

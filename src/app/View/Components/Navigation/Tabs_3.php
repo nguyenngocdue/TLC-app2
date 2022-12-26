@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Navigation;
 
 use Illuminate\View\Component;
 
-class PageBreak extends Component
+class Tabs_2 extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class PageBreak extends Component
      */
     public function render()
     {
-        return "<div style='page-break-after:always '></div>";
+        return view('components.navigation.tabs-3');
     }
 }

@@ -6,6 +6,7 @@ use App\Utils\Support\Relationships;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Exception;
 
 class Helper
 {
@@ -13,6 +14,7 @@ class Helper
     {
         $model = App::make($modelPath);
         $nameless = ($model->nameless);
+        // dd($model);
 
         $insTableSource = new $modelPath();
         $tableName = $insTableSource->getTable();
@@ -24,38 +26,47 @@ class Helper
         return [$tableName => $dataSource];
     }
 
-    public static function getDataSource($modelPath, $colName, $type)
+
+    private static function filterConditionsInRel($type, $colName)
     {
-        $instance = new $modelPath;
-        $eloquentParam = $instance->eloquentParams;
-
-
         $relationship = Relationships::getAllOf($type);
-        // dump($colName);
         $elementRel = array_values(array_filter($relationship, fn ($item) => $item['control_name'] === $colName))[0] ?? [];
-
-        $keyNameEloquent = "";
-        foreach ($eloquentParam as $key => $value) {
-            // dd($colName, $value);
-            if (in_array($colName, $value)) {
-                $keyNameEloquent = $key;
-                break;
-            }
-        }
         $byFilters = [];
         if (isset($elementRel['filter_columns']) && $elementRel['filter_columns'] && $elementRel['filter_values']) {
             $byFilters = [$elementRel['filter_columns'] => $elementRel['filter_values']];
         }
+        return $byFilters;
+    }
 
-        if ($keyNameEloquent === "") {
-            // dd($elementRel);
-            $pathTableSource =  $eloquentParam[$elementRel['control_name']][1] ?? "11111";
-            return Helper::getDataFromPathModel($pathTableSource, $byFilters);
-            $pathTableSource =  $eloquentParam[$elementRel['control_name']][1] ?? "";
-            return Helper::getDataFromPathModel($pathTableSource, $byFilters) ?? [];
+    public static function getDataSource($modelPath, $colName, $type)
+    {
+        try {
+            $instance = new $modelPath;
+            $eloquentParam = $instance->eloquentParams;
+            $keyNameEloquent = "";
+            foreach ($eloquentParam as $key => $value) {
+                if (in_array($colName, $value)) {
+                    $keyNameEloquent = $key;
+                    break;
+                }
+            }
+            $byFilters = Helper::filterConditionsInRel($type, $colName);
+            $termModelPath = $eloquentParam[$keyNameEloquent][1];
+            return Helper::getDataFromPathModel($termModelPath, $byFilters) ?? [];
+        } catch (Exception $e) {
+            dd($e->getMessage());
         }
-        $pathTableSource = $eloquentParam[$keyNameEloquent][1];
-        return Helper::getDataFromPathModel($pathTableSource, $byFilters) ?? [];
+    }
+
+    public static function getDataSourceByManyToMany($modelPath, $colName, $type)
+    {
+        $instance = new $modelPath;
+        $oracyParams = $instance->oracyParams;
+
+        $valEloquentByColName = isset($oracyParams[$colName]) ? $oracyParams[$colName] : [];
+        $termModelPath = $valEloquentByColName[1] ?? "oracyParams";
+        $byFilters = Helper::filterConditionsInRel($type, $colName);
+        return Helper::getDataFromPathModel($termModelPath, $byFilters);
     }
 
 
@@ -275,15 +286,20 @@ class Helper
 
     public  static function getItemModel($type, $id = '')
     {
-        $modelPath = "App\\Models\\" . Str::singular($type);
-        if (!$id) return  App::make($modelPath);
-        return $modelPath::find($id);
+        try {
+            $modelPath = "App\\Models\\" . Str::singular($type);
+            if (!$id) return  [];
+            return $modelPath::find($id);
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
     }
     public  static function getItemModelByFn($type, $id = '', $fnName = '')
     {
         $modelPath = "App\\Models\\" . Str::singular($type);
         return $modelPath::find($id)->{$fnName}()->get();
     }
+
     // public  static function getAttributesItemInModel($type, $id = '')
     // {
     //     $modelPath = "App\\Models\\" . Str::singular($type);

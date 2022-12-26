@@ -69,7 +69,7 @@
         "column_name": "h3a",
         "column_type": "static",
         "label": "",
-        "control": "z_page_break",
+        "control": "z_divider",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",
