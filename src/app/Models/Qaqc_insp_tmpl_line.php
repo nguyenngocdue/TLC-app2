@@ -52,9 +52,10 @@ class Qaqc_insp_tmpl_line extends ModelExtended
             ['dataIndex' => 'getTemplate', 'title' => "Template", 'renderer' => "column", "rendererParam" => "description"],
             ['dataIndex' => 'getSheet', 'title' => "Sheet", 'renderer' => "column", "rendererParam" => "description"],
             ['dataIndex' => 'getGroup', "title" => "Group", 'renderer' => "column", "rendererParam" => "description"],
+            ['dataIndex' => 'getControlType', "title" => "Control Type", 'renderer' => "column", "rendererParam" => "name"],
+            ['dataIndex' => 'getControlGroup', "title" => "Control Group", 'renderer' => "column", "rendererParam" => "name"],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'description'],
-            ['dataIndex' => 'control_type'],
         ];
     }
 }
