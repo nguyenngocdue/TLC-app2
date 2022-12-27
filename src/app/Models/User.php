@@ -152,13 +152,13 @@ class User extends Authenticatable implements LdapAuthenticatable
     }
     public function getManyIconParams()
     {
+
         return [
             'id' => 'id',
             'title' => 'name',
             'description' => 'position_rendered',
             'disabled' => 'resigned',
             'groupBy' => 'name',
-            'colspan' => 3,
         ];
     }
     public function getManyLineParams()

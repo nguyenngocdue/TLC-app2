@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Helpers\Helper;
 use App\Models\Prod_routing;
 use App\Utils\Support\Relationships;
 use Illuminate\Support\Str;
@@ -71,7 +72,7 @@ class RelationshipRenderer extends Component
         $renderer_edit = $value['renderer_edit'];
         switch ($renderer_edit) {
             case "many_icons":
-                $colSpan = $columns['colspan'] ?? 3;
+                $colSpan =  Helper::getColSpan($colName, $type);
                 foreach ($dataSource as &$item) $item['href'] = route($typeDB . '.edit', $item->id);
                 return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan'));
             case "many_lines":

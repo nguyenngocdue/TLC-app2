@@ -2,28 +2,37 @@
     "_user": {
         "name": "_user",
         "relationship": "belongsTo",
+        "control_name": "",
         "renderer_view_all": "avatar_name",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
     "_Users_Count": {
         "name": "_Users_Count",
         "relationship": "hasMany",
+        "control_name": "Users_Count",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_icons",
-        "renderer_edit_param": "",
-        "control_name": "Users_Count"
+        "renderer_edit_param": "getManyIconParams",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "2"
     },
     "_Users_Count2": {
         "name": "_Users_Count2",
         "relationship": "hasMany",
+        "control_name": "Users_Count2",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "",
-        "control_name": "Users_Count2"
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }

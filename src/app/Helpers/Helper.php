@@ -14,12 +14,13 @@ class Helper
     {
         $model = App::make($modelPath);
         $nameless = ($model->nameless);
-        // dd($model);
 
         $insTableSource = new $modelPath();
         $tableName = $insTableSource->getTable();
         $table = DB::table($tableName);
+        // dump($tableName);
         if (count($byFilters)) {
+            // dd($tableName, $byFilters);
             return [$tableName =>  $table->where($byFilters)->get()];
         }
         $dataSource =  $nameless ? $table->get() : $table->orderBy('name')->get();
@@ -29,8 +30,8 @@ class Helper
 
     private static function filterConditionsInRel($type, $colName)
     {
-        $relationship = Relationships::getAllOf($type);
-        $elementRel = array_values(array_filter($relationship, fn ($item) => $item['control_name'] === $colName))[0] ?? [];
+        $relationships = Relationships::getAllOf($type);
+        $elementRel = array_values(array_filter($relationships, fn ($item) => $item['control_name'] === $colName))[0] ?? [];
         $byFilters = [];
         if (isset($elementRel['filter_columns']) && $elementRel['filter_columns'] && $elementRel['filter_values']) {
             $byFilters = [$elementRel['filter_columns'] => $elementRel['filter_values']];
@@ -52,6 +53,8 @@ class Helper
             }
             $byFilters = Helper::filterConditionsInRel($type, $colName);
             $termModelPath = $eloquentParam[$keyNameEloquent][1];
+            // dump($termModelPath);
+
             return Helper::getDataFromPathModel($termModelPath, $byFilters) ?? [];
         } catch (Exception $e) {
             dd($e->getMessage());
@@ -267,12 +270,12 @@ class Helper
         return $result;
     }
 
-    public static function getDataModelByName($modelName, $id,  $keyCol = '', $valueCol = '')
-    {
-        $modelPath = "App\\Models\\" . Str::singular($modelName);
-        $result = $modelPath::find($id)->pluck($keyCol, $valueCol)->toArray();
-        return $result;
-    }
+    // public static function getDataModelByName($modelName, $id,  $keyCol = '', $valueCol = '')
+    // {
+    //     $modelPath = "App\\Models\\" . Str::singular($modelName);
+    //     $result = $modelPath::find($id)->pluck($keyCol, $valueCol)->toArray();
+    //     return $result;
+    // }
     public static function getAndChangeKeyItemsContainString($dataInput, $strSearch)
     {
         $newItems = [];
@@ -295,15 +298,16 @@ class Helper
             dd($e->getMessage());
         }
     }
-    public  static function getItemModelByFn($type, $id = '', $fnName = '')
-    {
-        $modelPath = "App\\Models\\" . Str::singular($type);
-        return $modelPath::find($id)->{$fnName}()->get();
-    }
-
-    // public  static function getAttributesItemInModel($type, $id = '')
+    // public  static function getItemModelByFn($type, $id = '', $fnName = '')
     // {
     //     $modelPath = "App\\Models\\" . Str::singular($type);
-    //     return $modelPath::find($id);
+    //     return $modelPath::find($id)->{$fnName}()->get();
     // }
+
+    public static function getColSpan($colName, $type)
+    {
+        $relationships = Relationships::getAllOf($type);
+        $elementRel = array_values(array_filter($relationships, fn ($item) => $item['control_name'] === $colName))[0] ?? [];
+        return (count($elementRel) && $tempSpan = $elementRel["radio_checkbox_colspan"]) ? $tempSpan : 3;
+    }
 }

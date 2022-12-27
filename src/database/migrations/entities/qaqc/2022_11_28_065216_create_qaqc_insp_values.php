@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->unsignedBigInteger('qaqc_insp_control_value_id');
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

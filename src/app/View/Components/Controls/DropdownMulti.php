@@ -5,7 +5,7 @@ namespace App\View\Components\Controls;
 use App\Helpers\Helper;
 use Illuminate\View\Component;
 
-class NewDropdownMulti extends Component
+class DropdownMulti extends Component
 {
 
     public function __construct(
@@ -36,6 +36,6 @@ class NewDropdownMulti extends Component
 
         $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
         if (is_null($dataSource) || gettype($dataSource) === 'string') return "<x-feedback.alert message='Not found record \"$colName\" in Fields.' type='warning' />";
-        return view('components.controls.new-dropdown-multi')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
+        return view('components.controls.dropdown-multi')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
     }
 }

@@ -8,7 +8,8 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
-        "filter_values": ""
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
     "_workplaceRadio1": {
         "name": "_workplaceRadio1",
@@ -19,28 +20,31 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "qaqc_insp_control_group_id",
-        "filter_values": "1"
+        "filter_values": "2",
+        "radio_checkbox_colspan": "3"
     },
-    "_newCheckbox()": {
-        "name": "_newCheckbox()",
+    "_checkbox()": {
+        "name": "_checkbox()",
         "relationship": "getCheckedByField",
-        "control_name": "newCheckbox()",
+        "control_name": "checkbox()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
-        "filter_values": ""
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
-    "_newDropdownMulti()": {
-        "name": "_newDropdownMulti()",
+    "_dropdownMulti()": {
+        "name": "_dropdownMulti()",
         "relationship": "getCheckedByField",
-        "control_name": "newDropdownMulti()",
+        "control_name": "dropdownMulti()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
-        "filter_values": ""
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }
