@@ -34,4 +34,13 @@ class Prod_routing_link extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
+    public function getManyLineParams()
+    {
+        return [
+            ['dataIndex' => 'id', 'renderer' => 'id', 'align' => 'center', 'type' => 'prod_routings'],
+            ['dataIndex' => 'name'],
+            ['dataIndex' => 'discipline', 'title' => 'Discipline', 'renderer' => 'column', 'rendererParam' => 'name'],
+        ];
+    }
 }

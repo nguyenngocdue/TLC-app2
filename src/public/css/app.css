@@ -628,6 +628,12 @@ video {
 .m-0\.5 {
   margin: 0.125rem;
 }
+.m-2 {
+  margin: 0.5rem;
+}
+.m-5 {
+  margin: 1.25rem;
+}
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -2257,6 +2263,14 @@ video {
 .py-0 {
   padding-top: 0px;
   padding-bottom: 0px;
+}
+.px-0\.5 {
+  padding-left: 0.125rem;
+  padding-right: 0.125rem;
+}
+.py-0\.5 {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
 }
 .pt-12 {
   padding-top: 3rem;
