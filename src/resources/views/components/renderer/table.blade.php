@@ -7,7 +7,10 @@
             </div>
             @endif
             <div class='table-au1to table-fix1ed w-full overflow-x-auto h-fu1ll max-h-160'>
-                <table class='w-full whitespace-no-wrap text-sm '>
+                <table class='w-full whitespace-no-wrap text-sm ' style="table-layout: auto">
+                    <colgroup>
+                        {!! $colgroup  !!}                        
+                    </colgroup>
                     <thead class="sticky top-0">
                         <tr class='text-xs font-semibold tracking-wide text-center text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800'>
                             {!! $columnsRendered !!}

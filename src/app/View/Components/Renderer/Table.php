@@ -132,6 +132,21 @@ class Table extends Component
     return $dataSource->items();
   }
 
+  private function makeColGroup($columns)
+  {
+    $result = [];
+    foreach ($columns as $column) {
+      $name = $column['dataIndex'];
+      if (isset($column['width'])) {
+        $w = $column['width'];
+        $result[] = "<col style='width: {$w}px' name='$name'>";
+      } else {
+        $result[] = "<col name='$name'>";
+      }
+    }
+    return join("", $result);
+  }
+
   private function makeTrTd($columns, $dataSource)
   {
     $trs = [];
@@ -209,6 +224,18 @@ class Table extends Component
 
     $footer = $this->footer;
     $header = $this->header;
-    return view("components.renderer.table")->with(compact('columnsRendered', 'trtd', 'showing', 'pagination', 'columns', 'dataSource', 'header', 'footer'));
+    $colgroup = $this->makeColGroup($columns);
+
+    return view("components.renderer.table")->with(compact(
+      'columnsRendered',
+      'trtd',
+      'showing',
+      'pagination',
+      'columns',
+      'dataSource',
+      'header',
+      'footer',
+      'colgroup',
+    ));
   }
 }

@@ -38,6 +38,7 @@ abstract class AbstractPropController extends Controller
                 "align" => "center",
                 "renderer" => "text",
                 "editable" => true,
+                "width" => 10,
             ],
             [
                 "dataIndex" => "name",
@@ -69,21 +70,25 @@ abstract class AbstractPropController extends Controller
                 "dataIndex" => "col_span",
                 "editable" => true,
                 "renderer" => "number",
+                'width' => 10,
             ],
             [
                 "dataIndex" => "hidden_view_all",
                 "editable" => true,
                 "renderer" => "dropdown",
+                'width' => 10,
             ],
             [
                 "dataIndex" => "hidden_edit",
                 "editable" => true,
                 "renderer" => "dropdown",
+                'width' => 10,
             ],
             [
                 "dataIndex" => "new_line",
                 "editable" => true,
                 "renderer" => "dropdown",
+                'width' => 10,
             ],
             [
                 "dataIndex" => "validation",
