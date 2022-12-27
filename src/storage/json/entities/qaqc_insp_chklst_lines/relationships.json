@@ -50,73 +50,28 @@
     "_getControlValue": {
         "name": "_getControlValue",
         "relationship": "belongsTo",
-        "control_name": "qaqc_insp_control_value_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "filter_columns": "qaqc_insp_control_group_id",
-        "filter_values": "2",
-        "radio_checkbox_colspan": ""
+        "control_name": ""
     },
-    "_getControlType": {
-        "name": "_getControlType",
-        "relationship": "belongsTo",
-        "control_name": "",
+    "_getFailDetail": {
+        "name": "_getFailDetail",
+        "relationship": "belongsToMany",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "control_name": "getFailDetail"
     },
-    "_getNoOfYesNo()": {
-        "name": "_getNoOfYesNo()",
-        "relationship": "getCheckedByField",
-        "control_name": "getNoOfYesNo()",
+    "_getOnHoldDetail": {
+        "name": "_getOnHoldDetail",
+        "relationship": "belongsToMany",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "filter_columns": "qaqc_insp_control_value_id",
-        "filter_values": "2",
-        "radio_checkbox_colspan": ""
-    },
-    "_getOnHoldOfYesNo()": {
-        "name": "_getOnHoldOfYesNo()",
-        "relationship": "getCheckedByField",
-        "control_name": "getOnHoldOfYesNo()",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "qaqc_insp_control_value_id",
-        "filter_values": "4",
-        "radio_checkbox_colspan": ""
-    },
-    "_getFailedOfPassFail()": {
-        "name": "_getFailedOfPassFail()",
-        "relationship": "getCheckedByField",
-        "control_name": "getFailedOfPassFail()",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "qaqc_insp_control_value_id",
-        "filter_values": "6",
-        "radio_checkbox_colspan": ""
-    },
-    "_getOnHoldOfPassFail()": {
-        "name": "_getOnHoldOfPassFail()",
-        "relationship": "getCheckedByField",
-        "control_name": "getOnHoldOfPassFail()",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "qaqc_insp_control_value_id",
-        "filter_values": "8",
-        "radio_checkbox_colspan": ""
+        "control_name": "getOnHoldDetail"
     }
 }
