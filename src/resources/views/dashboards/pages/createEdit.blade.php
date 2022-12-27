@@ -45,7 +45,7 @@ $id = $action === "edit" ? $values->id : "";
                     <div class='col-span-12 text-left'>
                         @switch($control)
                         @case('z_page_break')
-                        <div style='page-break-after:always !important' class="text-center text-gray-300">---Page break---</div>
+                        <x-renderer.page-break />
                         @case('z_h1')
                         <x-renderer.heading level=1>{{$label}}</x-renderer.heading>
                         @break
@@ -117,8 +117,8 @@ $id = $action === "edit" ? $values->id : "";
                         <x-controls.radio id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
                         @break
 
-                        @case ('new_dropdown_multi')
-                        <x-controls.new-dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
+                        @case ('dropdown_multi')
+                        <x-controls.dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
                         @break
 
                         @case('attachment')
@@ -128,8 +128,8 @@ $id = $action === "edit" ? $values->id : "";
                         <x-controls.toggle id={{$id}} colName={{$columnName}} value={{$value}} label={{$label}} />
                         @break
 
-                        @case('new_checkbox')
-                        <x-controls.new-checkbox id={{$id}} colName={{$columnName}} action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
+                        @case('checkbox')
+                        <x-controls.checkbox id={{$id}} colName={{$columnName}} action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
                         @break
 
 
