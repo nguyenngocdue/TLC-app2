@@ -34,6 +34,12 @@ abstract class AbstractPropController extends Controller
                 "align" => "center",
             ],
             [
+                "dataIndex" => "move_to",
+                "align" => "center",
+                "renderer" => "text",
+                "editable" => true,
+            ],
+            [
                 "dataIndex" => "name",
                 "renderer" => "read-only-text",
                 "editable" => true,
@@ -99,17 +105,6 @@ abstract class AbstractPropController extends Controller
                 ],
                 "attributes" => ['strFn' => 'same'],
             ],
-            // [
-            //     "dataIndex" => "frozen_left",
-            //     "editable" => true,
-            //     "renderer" => "dropdown",
-            // ],
-            // [
-            //     "dataIndex" => "frozen_right",
-            //     "editable" => true,
-            //     "renderer" => "dropdown",
-            // ],
-
         ];
     }
 
@@ -234,13 +229,23 @@ abstract class AbstractPropController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
+        // Log::info($data);
         $columns = array_filter($this->getColumns(), fn ($column) => !in_array($column['dataIndex'], ['action']));
         $result = Props::convertHttpObjectToJson($data, $columns);
+        // dd($result);
+        foreach ($result as $key => $line) {
+            if (isset($line['move_to']) && is_numeric($line['move_to'])) {
+                Props::moveTo($result, $line['move_to'] - 1, $key);
+            }
+        }
+        foreach ($result as &$line) unset($line['move_to']);
+        // dd($result);
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));
             // Log::info($direction . " " . $name);
             Props::move($result, $direction, $name);
         }
+        // dd($result);
         Props::setAllOf($this->type, $result);
         return back();
     }

@@ -13,6 +13,12 @@ Arr::macro('toAssoc', function (array $array) {
     }
     return $result;
 });
+Arr::macro('moveTo', function ($json, $index, $newIndex) {
+    $value = $json[$index];
+    unset($json[$index]);
+    array_splice($json, $newIndex, 0, [$value]);
+    return $json;
+});
 Arr::macro('moveDirection', function ($json, $direction, $index, $name = null) {
     switch ($direction) {
         case "up":

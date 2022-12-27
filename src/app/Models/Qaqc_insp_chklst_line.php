@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
+use App\Http\Traits\HasCheckbox;
 
 class Qaqc_insp_chklst_line extends ModelExtended
 {
+    use HasCheckbox;
     protected $fillable = [
         "id", "name", "description", "control_type", "value",
         "qaqc_insp_chklst_id", "qaqc_insp_sheet_id", "qaqc_insp_group_id",
@@ -22,6 +24,22 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "getFailDetail" => ["belongsToMany", Qaqc_insp_value::class, "qaqc_insp_fail_details", 'qaqc_insp_chklst_line_id', 'qaqc_insp_value_id'],
         "getOnHoldDetail" => ["belongsToMany", Qaqc_insp_value::class, "qaqc_insp_onhold_details", 'qaqc_insp_chklst_line_id', 'qaqc_insp_value_id'],
     ];
+
+    public $oracyParams = [
+        "getOnHold()" => ["getCheckedByField", Qaqc_insp_value::class],
+        "getFailed()" => ["getCheckedByField", Qaqc_insp_value::class],
+    ];
+
+    public function getOnHold()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function getFailed()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
 
     public function getChklst()
     {
