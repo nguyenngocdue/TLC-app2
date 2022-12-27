@@ -14,14 +14,14 @@
     "_workplaceRadio1": {
         "name": "_workplaceRadio1",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "radio1",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": "2"
+        "radio_checkbox_colspan": "4"
     },
     "_checkbox()": {
         "name": "_checkbox()",
@@ -33,7 +33,7 @@
         "renderer_edit_param": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": "2"
+        "radio_checkbox_colspan": "4"
     },
     "_dropdownMulti()": {
         "name": "_dropdownMulti()",
