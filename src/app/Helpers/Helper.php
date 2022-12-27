@@ -270,12 +270,12 @@ class Helper
         return $result;
     }
 
-    public static function getDataModelByName($modelName, $id,  $keyCol = '', $valueCol = '')
-    {
-        $modelPath = "App\\Models\\" . Str::singular($modelName);
-        $result = $modelPath::find($id)->pluck($keyCol, $valueCol)->toArray();
-        return $result;
-    }
+    // public static function getDataModelByName($modelName, $id,  $keyCol = '', $valueCol = '')
+    // {
+    //     $modelPath = "App\\Models\\" . Str::singular($modelName);
+    //     $result = $modelPath::find($id)->pluck($keyCol, $valueCol)->toArray();
+    //     return $result;
+    // }
     public static function getAndChangeKeyItemsContainString($dataInput, $strSearch)
     {
         $newItems = [];
@@ -298,13 +298,13 @@ class Helper
             dd($e->getMessage());
         }
     }
-    public  static function getItemModelByFn($type, $id = '', $fnName = '')
-    {
-        $modelPath = "App\\Models\\" . Str::singular($type);
-        return $modelPath::find($id)->{$fnName}()->get();
-    }
+    // public  static function getItemModelByFn($type, $id = '', $fnName = '')
+    // {
+    //     $modelPath = "App\\Models\\" . Str::singular($type);
+    //     return $modelPath::find($id)->{$fnName}()->get();
+    // }
 
-    public static function setColSpan($colName, $type)
+    public static function getColSpan($colName, $type)
     {
         $relationships = Relationships::getAllOf($type);
         $elementRel = array_values(array_filter($relationships, fn ($item) => $item['control_name'] === $colName))[0] ?? [];

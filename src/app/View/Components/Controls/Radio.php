@@ -35,7 +35,7 @@ class Radio extends Component
             return "<x-feedback.alert message='$message' type='warning' />";
         }
 
-        $span = Helper::setColSpan($colName, $type);
+        $span = Helper::getColSpan($colName, $type);
         return view('components.controls.radio')->with(compact('dataSource', 'currentEntity', 'colName', 'span', 'action', 'label'));
     }
 }
