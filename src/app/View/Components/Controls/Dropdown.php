@@ -32,6 +32,7 @@ class Dropdown extends Component
             $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in $modelPath Model).";
             return "<x-feedback.alert message='{$message}' type='warning' />";
         }
+
         return view('components.controls.dropdown')->with(compact('dataSource', 'colName', 'action', 'label', 'currentEntity'));
     }
 }
