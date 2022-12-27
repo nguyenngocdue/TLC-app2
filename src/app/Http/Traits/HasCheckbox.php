@@ -25,7 +25,7 @@ trait HasCheckbox
         return $fieldId;
     }
 
-    function getCheckedByField($fieldNameOrId, $related)
+    function getCheckedByField($fieldNameOrId, $related = "")
     {
         $fieldId = $this->guessFieldId($fieldNameOrId);
         $dataSource = $this->getChecked();
