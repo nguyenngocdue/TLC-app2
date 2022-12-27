@@ -133,7 +133,9 @@ abstract class AbstractViewAllController extends Controller
                 }
 
                 if (in_array($relationship, $allows)) {
+                    // dd($json, $dataIndex, $json["_{$dataIndex}"]);
                     $relationshipJson = $json["_{$dataIndex}"];
+                    // dump($relationshipJson);
                     $column['renderer'] = $relationshipJson['renderer_view_all'] ?? "";
                     $column['rendererParam'] = $relationshipJson['renderer_view_all_param'] ?? "";
                 }

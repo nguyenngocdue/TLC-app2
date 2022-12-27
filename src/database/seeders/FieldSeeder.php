@@ -37,7 +37,5 @@ class FieldSeeder extends Seeder
         Field::create(['name' => 'dropdownMultiPassFail', 'slug' => 'dropdownMultiPassFail']);
         Field::create(['name' => 'checkbox', 'slug' => 'checkbox']);
         Field::create(['name' => 'dropdownMulti', 'slug' => 'dropdownMulti']);
-        Field::create(['name' => 'newCheckbox', 'slug' => 'newCheckbox']);
-        Field::create(['name' => 'newDropdownMulti', 'slug' => 'newDropdownMulti']);
     }
 }

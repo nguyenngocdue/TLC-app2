@@ -3,6 +3,7 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
+use App\Utils\Support\Relationships;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
@@ -20,7 +21,6 @@ class Radio extends Component
 
     public function render()
     {
-        $span = 6;
         $action = $this->action;
         $colName = $this->colName;
         $label = $this->label;
@@ -28,12 +28,14 @@ class Radio extends Component
         $type = $this->type;
 
         $dataSource = Helper::getDataSource($modelPath, $colName, $type);
-
+        // dd($dataSource);
         $currentEntity = Helper::getItemModel($this->type, $this->id) ?? [];
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
             $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in $modelPath Model).";
             return "<x-feedback.alert message='$message' type='warning' />";
         }
+
+        $span = Helper::setColSpan($colName, $type);
         return view('components.controls.radio')->with(compact('dataSource', 'currentEntity', 'colName', 'span', 'action', 'label'));
     }
 }
