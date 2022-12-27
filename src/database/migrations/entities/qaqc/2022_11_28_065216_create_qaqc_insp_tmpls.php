@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->unsignedBigInteger('prod_routing_id');
             // $table->unsignedBigInteger('wir_description_id');
             // $table->unique(['prod_routing_id', 'wir_description_id']);

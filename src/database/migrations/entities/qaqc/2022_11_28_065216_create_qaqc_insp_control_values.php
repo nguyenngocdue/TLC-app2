@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('qaqc_insp_control_values', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('qaqc_insp_control_group_id');
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
