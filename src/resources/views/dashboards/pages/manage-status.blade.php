@@ -12,7 +12,10 @@
     </form>
     <form method="post">
         @csrf
-        <x-renderer.table :columns="$columns1" :dataSource="$dataSource1" showNoR=true groupBy="title" footer="<a href='/dashboard/workflow/statuses'>Create more Statuses</a>"></x-renderer.table>
+        <x-renderer.table :columns="$columns1" :dataSource="$dataSource1" showNoR=true groupBy="title" 
+        header="<a href='/dashboard/workflow/statuses'>Manage Statuses</a>"
+        footer="<a href='/dashboard/workflow/statuses'>Manage Statuses</a>"
+        ></x-renderer.table>
     </form>
 </div>
 @endsection

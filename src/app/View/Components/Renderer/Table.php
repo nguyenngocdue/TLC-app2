@@ -21,6 +21,7 @@ class Table extends Component
     private $showNo = false,
     private $showNoR = false,
     private $groupBy = false,
+    private $header = "",
     private $footer = "",
   ) {
   }
@@ -109,7 +110,7 @@ class Table extends Component
       }
       $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
       $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
-      $tds[] = "<td class='px-1 py-1 $borderRight $align'>" . $rendered . "</td>";
+      $tds[] = "<td class='px-0.5 py-0.5 $borderRight $align'>" . $rendered . "</td>";
     }
     return $tds;
   }
@@ -129,6 +130,21 @@ class Table extends Component
         break;
     }
     return $dataSource->items();
+  }
+
+  private function makeColGroup($columns)
+  {
+    $result = [];
+    foreach ($columns as $column) {
+      $name = $column['dataIndex'];
+      if (isset($column['width'])) {
+        $w = $column['width'];
+        $result[] = "<col style='width: {$w}px' name='$name'>";
+      } else {
+        $result[] = "<col name='$name'>";
+      }
+    }
+    return join("", $result);
   }
 
   private function makeTrTd($columns, $dataSource)
@@ -207,6 +223,19 @@ class Table extends Component
     }
 
     $footer = $this->footer;
-    return view("components.renderer.table")->with(compact('columnsRendered', 'trtd', 'showing', 'pagination', 'columns', 'dataSource', 'footer'));
+    $header = $this->header;
+    $colgroup = $this->makeColGroup($columns);
+
+    return view("components.renderer.table")->with(compact(
+      'columnsRendered',
+      'trtd',
+      'showing',
+      'pagination',
+      'columns',
+      'dataSource',
+      'header',
+      'footer',
+      'colgroup',
+    ));
   }
 }

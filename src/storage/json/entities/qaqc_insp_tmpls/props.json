@@ -64,6 +64,19 @@
         "validation": "required",
         "formula": ""
     },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "column_type": "eloquent_prop",
+        "label": "Template Lines",
+        "control": "relationship_renderer",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "true",
+        "validation": "",
+        "formula": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -87,19 +100,6 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
-        "column_type": "eloquent_prop",
-        "label": "Lines",
-        "control": "relationship_renderer",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "true",
         "validation": "",
         "formula": ""
     }

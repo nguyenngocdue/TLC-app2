@@ -2,221 +2,265 @@
     "active": {
         "name": "active",
         "title": "Active",
-        "color": "lime"
+        "color": "lime",
+        "color_index": "800"
     },
     "approval_rejected": {
         "name": "approval_rejected",
         "title": "Approval Rejected",
-        "color": "orange"
+        "color": "orange",
+        "color_index": "200"
     },
     "approved": {
         "name": "approved",
         "title": "Approved",
-        "color": "green"
+        "color": "green",
+        "color_index": "200"
     },
     "assign_rejected": {
         "name": "assign_rejected",
         "title": "Assign Rejected",
-        "color": "orange"
+        "color": "orange",
+        "color_index": "200"
     },
     "assigned": {
         "name": "assigned",
         "title": "Assigned",
-        "color": "amber"
+        "color": "amber",
+        "color_index": "200"
     },
     "cancelled": {
         "name": "cancelled",
         "title": "Cancelled",
-        "color": "red"
+        "color": "red",
+        "color_index": "200"
     },
     "closed": {
         "name": "closed",
         "title": "Closed",
-        "color": "gray"
+        "color": "gray",
+        "color_index": "200"
     },
     "concept": {
         "name": "concept",
         "title": "BD\/Concept",
-        "color": "cyan"
+        "color": "cyan",
+        "color_index": "200"
     },
     "confirm_rejected": {
         "name": "confirm_rejected",
         "title": "Confirm Rejected",
-        "color": "orange"
+        "color": "orange",
+        "color_index": "200"
     },
     "construction_site": {
         "name": "construction_site",
         "title": "Construction Site",
-        "color": "purple"
+        "color": "purple",
+        "color_index": "200"
     },
     "design": {
         "name": "design",
         "title": "Design",
-        "color": "blue"
+        "color": "blue",
+        "color_index": "200"
     },
     "draft": {
         "name": "draft",
         "title": "Draft",
-        "color": "rose"
+        "color": "rose",
+        "color_index": "200"
     },
     "endorse_rejected": {
         "name": "endorse_rejected",
         "title": "Endorse Rejected",
-        "color": "orange"
+        "color": "orange",
+        "color_index": "200"
     },
     "finished": {
         "name": "finished",
         "title": "Finished",
-        "color": "green"
+        "color": "green",
+        "color_index": "200"
     },
     "future": {
         "name": "future",
         "title": "Future",
-        "color": "purple"
+        "color": "purple",
+        "color_index": "200"
     },
     "in_progress": {
         "name": "in_progress",
         "title": "In Progress",
-        "color": "blue"
+        "color": "blue",
+        "color_index": "200"
     },
     "inactive": {
         "name": "inactive",
         "title": "Inactive",
-        "color": "pink"
+        "color": "pink",
+        "color_index": "200"
     },
     "inspected": {
         "name": "inspected",
         "title": "Inspected",
-        "color": "pink"
+        "color": "pink",
+        "color_index": "200"
     },
     "inspection_rejected": {
         "name": "inspection_rejected",
         "title": "Inspection Rejected",
-        "color": "orange"
+        "color": "orange",
+        "color_index": "200"
     },
     "manufacturing": {
         "name": "manufacturing",
         "title": "Manufacturing",
-        "color": "orange"
+        "color": "orange",
+        "color_index": "200"
     },
     "new": {
         "name": "new",
         "title": "New",
-        "color": "lime"
+        "color": "lime",
+        "color_index": "200"
     },
     "obsoleted": {
         "name": "obsoleted",
         "title": "Obsoleted",
-        "color": "fuchsia"
+        "color": "fuchsia",
+        "color_index": "200"
     },
     "on_hold": {
         "name": "on_hold",
         "title": "On Hold",
-        "color": "pink"
+        "color": "pink",
+        "color_index": "200"
     },
     "pending": {
         "name": "pending",
         "title": "Pending",
-        "color": "amber"
+        "color": "amber",
+        "color_index": "200"
     },
     "pending_approval": {
         "name": "pending_approval",
         "title": "Pending Approval",
-        "color": "pink"
+        "color": "pink",
+        "color_index": "200"
     },
     "pending_confirmation": {
         "name": "pending_confirmation",
         "title": "Pending Confirmation",
-        "color": "orange"
+        "color": "orange",
+        "color_index": "200"
     },
     "pending_endorsed": {
         "name": "pending_endorsed",
         "title": "Pending Endorsed",
-        "color": "orange"
+        "color": "orange",
+        "color_index": "200"
     },
     "pending_received": {
         "name": "pending_received",
         "title": "Pending Received",
-        "color": "orange"
+        "color": "orange",
+        "color_index": "200"
     },
     "pending_review": {
         "name": "pending_review",
         "title": "Pending Review",
-        "color": "amber"
+        "color": "amber",
+        "color_index": "200"
     },
     "pending_verified": {
         "name": "pending_verified",
         "title": "Pending Verified",
-        "color": "emerald"
+        "color": "emerald",
+        "color_index": "200"
     },
     "publish": {
         "name": "publish",
         "title": "Publish",
-        "color": "green"
+        "color": "green",
+        "color_index": "200"
     },
     "rejected": {
         "name": "rejected",
         "title": "Rejected",
-        "color": "red"
+        "color": "red",
+        "color_index": "200"
     },
     "reopen": {
         "name": "reopen",
         "title": "Reopen",
-        "color": "pink"
+        "color": "pink",
+        "color_index": "200"
     },
     "resolved": {
         "name": "resolved",
         "title": "Resolved",
-        "color": "green"
+        "color": "green",
+        "color_index": "200"
     },
     "review_rejected": {
         "name": "review_rejected",
         "title": "Review Rejected",
-        "color": "red"
+        "color": "red",
+        "color_index": "200"
     },
     "reviewed": {
         "name": "reviewed",
         "title": "Reviewed",
-        "color": "amber"
+        "color": "amber",
+        "color_index": "200"
     },
     "revised": {
         "name": "revised",
         "title": "Revised",
-        "color": "amber"
+        "color": "amber",
+        "color_index": "200"
     },
     "revised_approval": {
         "name": "revised_approval",
         "title": "Revised Approval",
-        "color": "red"
+        "color": "red",
+        "color_index": "200"
     },
     "revised_rejected": {
         "name": "revised_rejected",
         "title": "Revised Rejected",
-        "color": "red"
+        "color": "red",
+        "color_index": "200"
     },
     "stopped": {
         "name": "stopped",
         "title": "Stopped",
-        "color": "red"
+        "color": "red",
+        "color_index": "200"
     },
     "submission_rejected": {
         "name": "submission_rejected",
         "title": "Submission Rejected",
-        "color": "red"
+        "color": "red",
+        "color_index": "200"
     },
     "submitted": {
         "name": "submitted",
         "title": "Submitted",
-        "color": "cyan"
+        "color": "cyan",
+        "color_index": "200"
     },
     "timesheet_only": {
         "name": "timesheet_only",
         "title": "Timesheet Only",
-        "color": "amber"
+        "color": "amber",
+        "color_index": "200"
     },
     "verified_rejected": {
         "name": "verified_rejected",
         "title": "Verified Rejected",
-        "color": "red"
+        "color": "red",
+        "color_index": "200"
     }
 }

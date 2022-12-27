@@ -128,18 +128,5 @@
         "new_line": "",
         "validation": "",
         "formula": ""
-    },
-    "_time_keeping_type": {
-        "name": "_time_keeping_type",
-        "column_name": "",
-        "column_type": "",
-        "label": "Warning (Column Name)",
-        "control": "dropdown",
-        "col_span": "12",
-        "hidden_view_all": "true",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
     }
 }
