@@ -5,4 +5,6 @@
 #import wir/mutations/*.graphql
 #import qaqc/queries/*.graphql
 #import qaqc/mutations/*.graphql
+#import system/mutations/*.graphql
+#import system/queries/*.graphql
 #import auth/*.graphql

@@ -46,7 +46,7 @@ class CloneTemplateToCheckListCommand extends Command
                 Qaqc_insp_chklst_line::create([
                     'name' => $qaqcInspTmplLine->name,
                     'description' => $qaqcInspTmplLine->description,
-                    'control_type' => $qaqcInspTmplLine->control_type,
+                    'control_type_id' => $qaqcInspTmplLine->control_type_id,
                     'qaqc_insp_chklst_id' => $idQaqcInspChklst,
                     'qaqc_insp_sheet_id' => $qaqcInspTmplLine->qaqc_insp_sheet_id,
                     'qaqc_insp_group_id' => $qaqcInspTmplLine->qaqc_insp_group_id,

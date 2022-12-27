@@ -1,0 +1,42 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    control_type: [Control_type!]! @all @guard
+    control_types(id: ID @eq): Control_type @find @guard
+}
+type Control_type {
+    id: ID!
+    name: String!
+    description: String!
+    slug: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input CreateControlTypeInput {
+    id: ID!
+    name: String!
+    description: String!
+    slug: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateControlTypeInput {
+    id: ID!
+    name: String
+    description: String
+    slug: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createControlType(input: CreateControlTypeInput! @spread): Control_type!
+        @guard
+        @create
+    updateControlType(input: UpdateControlTypeInput! @spread): Control_type
+        @guard
+        @update
+    deleteControlType(id: ID!): Control_type @guard @delete
+}
