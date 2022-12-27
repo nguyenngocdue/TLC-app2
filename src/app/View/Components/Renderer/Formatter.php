@@ -20,7 +20,9 @@ class Formatter extends Component
     {
         $title = $this->dataLine['title'] ?? "";
         $color = $this->dataLine['color'] ?? "";
-        return "<x-renderer.tag color='$color'>$title</x-renderer.tag>";
+        $colorIndex = $this->dataLine['color_index'] ?? "";
+        $colorIndex = ($colorIndex) ? "colorIndex='$colorIndex'"  : "";
+        return "<x-renderer.tag color='$color' $colorIndex>$title</x-renderer.tag>";
     }
 
     /**

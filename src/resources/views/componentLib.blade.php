@@ -168,7 +168,9 @@
         </x-renderer.card>
 
         <x-renderer.card title="Tags">
-            <x-renderer.tag color="slate">slate</x-renderer.tag><span></span>
+            <x-renderer.table showNo=true :columns="$tagColumns" :dataSource="$tagDataSource"/>
+
+            <x-renderer.tag color="slate" colorIndex=900>slate</x-renderer.tag><span></span>
             <x-renderer.tag color="zinc">zinc</x-renderer.tag><span></span>
             <x-renderer.tag color="neutral">neutral</x-renderer.tag><span></span>
             <x-renderer.tag color="stone">stone</x-renderer.tag><span></span>

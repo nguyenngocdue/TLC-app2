@@ -1,6 +1,11 @@
 <div class="my-2 w-full overflow-hidden rounded-lg border border-gray-300 sha1dow-sm bg-white dark:bg-gray-800 ">
     <div class="w-full overflow-x-auto">
         <div class='w-full overflow-hidden rounded-lg shadow-xs'>
+            @if($header)
+            <div class='grid1 px-4 py-3 text-xs font-semibold tracking-wide text-blue-500 border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800'>
+                {!! $header !!}
+            </div>
+            @endif
             <div class='table-au1to table-fix1ed w-full overflow-x-auto h-fu1ll max-h-160'>
                 <table class='w-full whitespace-no-wrap text-sm '>
                     <thead class="sticky top-0">

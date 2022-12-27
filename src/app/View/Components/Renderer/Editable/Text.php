@@ -12,8 +12,11 @@ class Text extends Component
      *
      * @return void
      */
-    public function __construct(private $name = "", private $placeholder = "")
-    {
+    public function __construct(
+        private $name = "",
+        private $placeholder = "",
+        // private $width = null,
+    ) {
     }
 
     /**
@@ -27,6 +30,7 @@ class Text extends Component
             'placeholder' => $this->placeholder,
             'name' => $this->name,
             'type' => 'text',
+            // 'width' => $this->width,
         ]);
     }
 }

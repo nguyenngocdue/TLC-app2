@@ -21,7 +21,7 @@ abstract class AbstractStatusController extends Controller
             [
                 'title' => "Current Statuses",
                 'dataIndex' => "title",
-                "renderer" => "tag", "attributes" => ['color' => 'color'],
+                "renderer" => "tag", "attributes" => ['color' => 'color', 'colorIndex' => 'color_index'],
                 'align' => 'right',
             ],
             [
@@ -41,7 +41,7 @@ abstract class AbstractStatusController extends Controller
             [
                 'title' => "Available Statuses",
                 'dataIndex' => "title",
-                "renderer" => "tag", "attributes" => ['color' => 'color'],
+                "renderer" => "tag", "attributes" => ['color' => 'color', 'colorIndex' => 'color_index'],
             ],
         ];
     }
