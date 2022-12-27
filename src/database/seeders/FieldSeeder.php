@@ -15,20 +15,22 @@ class FieldSeeder extends Seeder
     public function run()
     {
 
-        Field::create(['name' => 'attachment_1', 'description' => '', 'slug' => 'attachment_1']);
-        Field::create(['name' => 'attachment_2', 'description' => '', 'slug' => 'attachment_2']);
-        Field::create(['name' => 'attachment_3', 'description' => '', 'slug' => 'attachment_3']);
-        Field::create(['name' => 'attachment_4', 'description' => '', 'slug' => 'attachment_4']);
-        Field::create(['name' => 'attachment_5', 'description' => '', 'slug' => 'attachment_5']);
+        Field::create(['name' => 'attachment_1', 'slug' => 'attachment_1']);
+        Field::create(['name' => 'attachment_2', 'slug' => 'attachment_2']);
+        Field::create(['name' => 'attachment_3', 'slug' => 'attachment_3']);
+        Field::create(['name' => 'attachment_4', 'slug' => 'attachment_4']);
+        Field::create(['name' => 'attachment_5', 'slug' => 'attachment_5']);
 
         Field::create(['name' => 'comment_1', 'slug' => 'comment_1']);
         Field::create(['name' => 'comment_2', 'slug' => 'comment_2']);
         Field::create(['name' => 'comment_3', 'slug' => 'comment_3']);
         Field::create(['name' => 'comment_4', 'slug' => 'comment_4']);
         Field::create(['name' => 'comment_5', 'slug' => 'comment_5']);
+
         Field::create(['name' => 'featured_image', 'slug' => 'featured_image']);
         Field::create(['name' => 'insp_photos', 'slug' => 'insp_photos']);
         Field::create(['name' => 'insp_fail_photos', 'slug' => 'insp_fail_photos']);
+
         Field::create(['name' => 'workplaceRel1', 'slug' => 'workplaceRel1']);
         Field::create(['name' => 'workplaceRel2', 'slug' => 'workplaceRel2']);
         Field::create(['name' => 'checkboxYesNo', 'slug' => 'checkboxYesNo']);
@@ -38,7 +40,10 @@ class FieldSeeder extends Seeder
         Field::create(['name' => 'checkbox', 'slug' => 'checkbox']);
         Field::create(['name' => 'dropdownMulti', 'slug' => 'dropdownMulti']);
         Field::create(['name' => 'newCheckbox', 'slug' => 'newCheckbox']);
-        Field::create(['name' => 'getOnHold', 'slug' => 'getOnHold']);
-        Field::create(['name' => 'getFailed', 'slug' => 'getFailed']);
+
+        Field::create(['name' => 'getNoOfYesNo', 'slug' => 'getNoOfYesNo']);
+        Field::create(['name' => 'getOnHoldOfYesNo', 'slug' => 'getOnHoldOfYesNo']);
+        Field::create(['name' => 'getFailedOfPassFail', 'slug' => 'getFailedOfPassFail']);
+        Field::create(['name' => 'getOnHoldOfPassFail', 'slug' => 'getOnHoldOfPassFail']);
     }
 }

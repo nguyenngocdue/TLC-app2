@@ -26,9 +26,9 @@ class PageBreak extends Component
     public function render()
     {
         return "<div style='page-break-after:always !important ' class='text-center align-middle w-full h-6 relative'>
-                    <div class=' w-full h-full top-0 z-0  absolute bg-gray-100 translate-x-[-$this->x] '></div>
-                    <div class=' w-full h-full top-0 z-0 absolute bg-gray-100 translate-x-[$this->x] '></div>
-                    <span class='absolute text-gray-300'>---Page break---</span>
+                    <div class=' w-full h-full top-0 z-0  absolute bg-gray-100 translate-x-[-16px] '></div>
+                    <div class=' w-full h-full top-0 z-0 absolute bg-gray-100 translate-x-[16px] '></div>
+                    <span class='absolute text-black-300 font-thin text-lg '>— ✄ — ✄ — ✄ —</span>
                     </div>";
     }
 }

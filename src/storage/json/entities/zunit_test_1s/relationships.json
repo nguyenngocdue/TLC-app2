@@ -19,9 +19,9 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "filter_columns": "qaqc_insp_control_group_id",
-        "filter_values": "2",
-        "radio_checkbox_colspan": "3"
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "2"
     },
     "_checkbox()": {
         "name": "_checkbox()",
@@ -33,7 +33,7 @@
         "renderer_edit_param": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "2"
     },
     "_dropdownMulti()": {
         "name": "_dropdownMulti()",

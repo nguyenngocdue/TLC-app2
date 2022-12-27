@@ -28,7 +28,7 @@ class JsonGetSet
         $type = Str::plural($type);
         $path = storage_path() . "/json/entities/$type/$filename";
         if (!file_exists($path)) {
-            Log::error("$path not found");
+            // Log::error("$path not found");
             return [];
         }
         return json_decode(file_get_contents($path), true);

@@ -9,7 +9,7 @@
         "renderer_edit_param": "",
         "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "2",
-        "radio_checkbox_colspan": "6"
+        "radio_checkbox_colspan": "3"
     },
     "_radioPassFail": {
         "name": "_radioPassFail",
@@ -21,7 +21,7 @@
         "renderer_edit_param": "",
         "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "2",
-        "radio_checkbox_colspan": "6"
+        "radio_checkbox_colspan": "3"
     },
     "_dropdownYesNo": {
         "name": "_dropdownYesNo",
@@ -57,7 +57,7 @@
         "renderer_edit_param": "",
         "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "1",
-        "radio_checkbox_colspan": "6"
+        "radio_checkbox_colspan": "3"
     },
     "_checkboxPassFail()": {
         "name": "_checkboxPassFail()",
@@ -69,7 +69,7 @@
         "renderer_edit_param": "",
         "filter_columns": "qaqc_insp_control_group_id",
         "filter_values": "2",
-        "radio_checkbox_colspan": "6"
+        "radio_checkbox_colspan": "3"
     },
     "_dropdownMultiYesNo()": {
         "name": "_dropdownMultiYesNo()",

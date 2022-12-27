@@ -57,6 +57,8 @@ class Helper
 
             return Helper::getDataFromPathModel($termModelPath, $byFilters) ?? [];
         } catch (Exception $e) {
+            dump($colName);
+            dump($eloquentParam);
             dd($e->getMessage());
         }
     }

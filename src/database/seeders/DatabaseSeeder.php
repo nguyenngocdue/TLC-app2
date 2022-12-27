@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             FieldSeeder::class,
             PostSeeder::class,
+            ControlTypeSeeder::class,
 
             //To be removed:
             // AttachmentCategorySeeder::class,

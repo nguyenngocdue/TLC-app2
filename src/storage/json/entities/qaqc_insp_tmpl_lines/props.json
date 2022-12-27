@@ -38,19 +38,6 @@
         "validation": "",
         "formula": ""
     },
-    "_control_type": {
-        "name": "_control_type",
-        "column_name": "control_type",
-        "column_type": "string",
-        "label": "Control Type",
-        "control": "text",
-        "col_span": "12",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
-    },
     "_qaqc_insp_tmpl_id": {
         "name": "_qaqc_insp_tmpl_id",
         "column_name": "qaqc_insp_tmpl_id",
@@ -111,6 +98,32 @@
         "control": "picker_datetime",
         "col_span": "12",
         "hidden_view_all": "true",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_control_type_id": {
+        "name": "_control_type_id",
+        "column_name": "control_type_id",
+        "column_type": "bigint",
+        "label": "Control Type",
+        "control": "dropdown",
+        "col_span": "12",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_qaqc_insp_control_group_id": {
+        "name": "_qaqc_insp_control_group_id",
+        "column_name": "qaqc_insp_control_group_id",
+        "column_type": "bigint",
+        "label": "Control Group",
+        "control": "dropdown",
+        "col_span": "12",
+        "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",

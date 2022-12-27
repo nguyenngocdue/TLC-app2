@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('control_type');
+            $table->unsignedBigInteger('control_type_id');
             $table->unsignedBigInteger('qaqc_insp_tmpl_id');
             $table->unsignedBigInteger('qaqc_insp_sheet_id');
             $table->unsignedBigInteger('qaqc_insp_group_id');

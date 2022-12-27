@@ -9,7 +9,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
 {
     use HasCheckbox;
     protected $fillable = [
-        "id", "name", "description", "control_type", "value",
+        "id", "name", "description", "control_type_id", "value",
         "qaqc_insp_chklst_id", "qaqc_insp_sheet_id", "qaqc_insp_group_id",
         "qaqc_insp_control_value_id", "qaqc_insp_control_group_id",
     ];
@@ -21,21 +21,32 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "getGroup" => ["belongsTo", Qaqc_insp_group::class, "qaqc_insp_group_id"],
         "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],
         "getControlValue" => ["belongsTo", Qaqc_insp_control_value::class, "qaqc_insp_control_value_id"],
-        "getFailDetail" => ["belongsToMany", Qaqc_insp_value::class, "qaqc_insp_fail_details", 'qaqc_insp_chklst_line_id', 'qaqc_insp_value_id'],
-        "getOnHoldDetail" => ["belongsToMany", Qaqc_insp_value::class, "qaqc_insp_onhold_details", 'qaqc_insp_chklst_line_id', 'qaqc_insp_value_id'],
+        "getControlType" => ["belongsTo", Control_type::class, "control_type_id"],
     ];
 
     public $oracyParams = [
-        "getOnHold()" => ["getCheckedByField", Qaqc_insp_value::class],
-        "getFailed()" => ["getCheckedByField", Qaqc_insp_value::class],
+        "getNoOfYesNo()" => ["getCheckedByField", Qaqc_insp_value::class],
+        "getOnHoldOfYesNo()" => ["getCheckedByField", Qaqc_insp_value::class],
+        "getFailedOfPassFail()" => ["getCheckedByField", Qaqc_insp_value::class],
+        "getOnHoldOfPassFail()" => ["getCheckedByField", Qaqc_insp_value::class],
     ];
 
-    public function getOnHold()
+    public function getNoOfYesNo()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    public function getFailed()
+    public function getOnHoldOfYesNo()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function getFailedOfPassFail()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function getOnHoldOfPassFail()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
@@ -61,20 +72,15 @@ class Qaqc_insp_chklst_line extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getControlValue()
+    public function getControlType()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getFailDetail()
+    public function getControlValue()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-    }
-    public function getOnHoldDetail()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getManyLineParams()
     {
