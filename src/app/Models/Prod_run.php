@@ -65,14 +65,14 @@ class Prod_run extends ModelExtended
         return [
             ["dataIndex" => "id", "renderer" => "id", "type" => "prod_runs", "align" => "center"],
             ["dataIndex" => "prodOrder", "title" => "Prod Order Id", "renderer" => "column", "rendererParam" => "id"],
-            ["dataIndex" => "prodOrder", "title" => "Routing Id", "renderer" => "column", "rendererParam" => "prod_routing_id"],
-            ["dataIndex" => "prodRoutingLinks", "renderer" => "column", "rendererParam" => "id"],
-            ["dataIndex" => "prodRoutingLinks", "renderer" => "column", "rendererParam" => "name"],
+            ["dataIndex" => "prodOrder", "title" => "Routing Id (*)", "renderer" => "column", "rendererParam" => "prod_routing_id"],
+            ["dataIndex" => "prodRoutingLinks", "title" => "Prod Routing ID", "renderer" => "column", "rendererParam" => "id"],
+            ["dataIndex" => "prodRoutingLinks",  "title" => "Prod Routing Name (*)", "renderer" => "column", "rendererParam" => "name"],
 
             ["dataIndex" => "total_hours", "align" => "right"],
             ["dataIndex" => "total_man_hours", "title" => "Total ManHours", "align" => "right"],
             ["dataIndex" => "prodRoutingDetails", "title" => "Target Hours", "align" => "right", "renderer" => "column", "rendererParam" => "target_hours"],
-            ["dataIndex" => "prodRoutingDetails", "title" => "Target ManHours", "align" => "right", "renderer" => "column", "rendererParam" => "target_man_hours"],
+            ["dataIndex" => "prodRoutingDetails", "title" => "Target ManHours (*)", "align" => "right", "renderer" => "column", "rendererParam" => "target_man_hours"],
             ["dataIndex" => "status", "renderer" => "status", "align" => "center"],
         ];
     }
