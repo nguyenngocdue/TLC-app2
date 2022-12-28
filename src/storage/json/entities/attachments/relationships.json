@@ -2,28 +2,37 @@
     "_user": {
         "name": "_user",
         "relationship": "belongsTo",
+        "control_name": "",
         "renderer_view_all": "avatar_name",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
     "_getCategory": {
         "name": "_getCategory",
         "relationship": "belongsTo",
+        "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
     "_mediable": {
         "name": "_mediable",
         "relationship": "morphTo",
+        "control_name": "",
         "renderer_view_all": "link_morph_to",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }

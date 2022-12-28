@@ -4,7 +4,7 @@ namespace App\View\Components\Renderer;
 
 use Illuminate\View\Component;
 
-class Thumbnail extends Component
+class Thumbnails extends Component
 {
     /**
      * Create a new component instance.
@@ -25,8 +25,15 @@ class Thumbnail extends Component
     public function render()
     {
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
-        $url = $path . $this->cell;
-        $imgStr = "<x-renderer.image w=64 title='{$this->cell}' src='{$url}' href='{$url}'></x-renderer.image>";
+        $cell = json_decode($this->cell);
+        // dd($cell);
+        $result = array_map(fn ($item) => [
+            'url_thumbnail' => $path . $item->url_thumbnail,
+            'url_media' => $path . $item->url_media,
+            'filename' => $item->filename,
+        ], $cell);
+        $imgs = array_map(fn ($item) => "<x-renderer.image w=64 title='{$item['filename']}' src='{$item['url_thumbnail']}' href='{$item['url_media']}'></x-renderer.image>", $result);
+        $imgStr = join(" ", $imgs);
         return "<div class='flex flex-row'>$imgStr</div>";
     }
 }

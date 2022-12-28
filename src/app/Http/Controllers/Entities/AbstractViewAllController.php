@@ -60,13 +60,13 @@ abstract class AbstractViewAllController extends Controller
             switch ($prop['control']) {
                 case 'id':
                     //Attach type to generate hyperlink
-                    $output['type'] = $type;
                     $output['renderer'] = 'id';
                     $output['align'] = 'center';
+                    $output['type'] = $type;
                     break;
                 case 'toggle':
-                    $output['align'] = "center";
                     $output['renderer'] = "toggle";
+                    $output['align'] = "center";
                     break;
                 case "number":
                     $output['align'] = "right";
@@ -79,8 +79,8 @@ abstract class AbstractViewAllController extends Controller
                 case "picker_quarter":
                 case "picker_year":
                 case "picker_datetime":
-                    $output['align'] = "center";
                     $output['renderer'] = "date-time";
+                    $output['align'] = "center";
                     $output['rendererParam'] = $prop['control'];
                     break;
                 case "text":
@@ -90,6 +90,9 @@ abstract class AbstractViewAllController extends Controller
                 case "status":
                     $output['renderer'] = "status";
                     $output['align'] = 'center';
+                    break;
+                case "thumbnail":
+                    $output['renderer'] = "thumbnail";
                     break;
                 default:
                     break;

@@ -52,11 +52,12 @@ class Table extends Component
     $cbbDataSourceRender = $cbbDataSource ? ':cbbDataSource=\'$cbbDataSource\'' : "";
     $dataLineRender = $dataLine ? ':dataLine=\'$dataLine\'' : "";
     $columnRender = $column ? ':column=\'$column\'' : "";
+    $cellRender = ':cell=\'$cell\'';
     $rendererParam = isset($column['rendererParam']) ? $this->getRendererParams($column) : "";
     $formatterName = isset($column['formatterName']) ? "formatterName='{$column['formatterName']}'" : "";
 
     $attributes = "$name $attributeRender $typeRender $cbbDataSourceRender ";
-    $attributes .= "$dataLineRender $columnRender $rendererParam $formatterName ";
+    $attributes .= "$dataLineRender $columnRender $cellRender $rendererParam $formatterName ";
     $attributes .= "$sortByRender ";
 
     $editable = isset($column['editable']) ? ".editable" : "";
@@ -66,10 +67,12 @@ class Table extends Component
     // if ($editable) Log::info($output);
     // Log::info($output);
     // Log::info($column);
+    $cell = $dataLine[$column['dataIndex']] ?? "No dataIndex for " . $column['dataIndex'];
     return Blade::render($output, [
       'cbbDataSource' => $cbbDataSource,
       'column' => $column,
       'dataLine' => $dataLine,
+      'cell' => $cell,
     ]);
   }
 

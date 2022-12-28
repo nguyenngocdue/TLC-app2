@@ -43,9 +43,9 @@
     </div>
 </div>
 
-@if(env("ENV_OF_FORTUNE"))
+@if(env("ENV_OF_FORTUNE1"))
 @roleset('admin')
-<div x-show="open" class="grid grid-cols-2 gap-4  ">
+<div x-show="open" class="grid grid-cols-3 gap-4  ">
     @dump($columns)
     <div>
         @dump(is_object($dataSource) ? "DataSource is OBJECT" : "DataSource is ARRAY")

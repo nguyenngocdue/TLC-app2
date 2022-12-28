@@ -12,8 +12,9 @@ class Text extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $cell,
+    ) {
         //
     }
 
@@ -24,10 +25,8 @@ class Text extends Component
      */
     public function render()
     {
-        return function (array $data) {
-            $str = $data['slot'];
-            $str = Str::limitWords($str, 10);
-            return $str;
-        };
+        $str = $this->cell;
+        $str = Str::limitWords($str, 10);
+        return $str;
     }
 }

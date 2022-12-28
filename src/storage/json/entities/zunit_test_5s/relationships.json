@@ -2,10 +2,13 @@
     "_media": {
         "name": "_media",
         "relationship": "morphMany",
-        "renderer_view_all": "thumbnail",
+        "control_name": "",
+        "renderer_view_all": "thumbnails",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }

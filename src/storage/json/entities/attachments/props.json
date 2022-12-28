@@ -17,7 +17,7 @@
         "column_name": "url_thumbnail",
         "column_type": "string",
         "label": "Url Thumbnail",
-        "control": "text",
+        "control": "thumbnail",
         "col_span": "12",
         "hidden_view_all": "",
         "hidden_edit": "",

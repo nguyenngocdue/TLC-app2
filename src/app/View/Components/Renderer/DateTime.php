@@ -28,7 +28,9 @@ class DateTime extends Component
     {
         $dataIndex = $this->column['dataIndex'];
         $rawData = $this->dataLine->{$dataIndex};
+        if (is_null($rawData)) return ""; //<< This to render empty string on ViewAll screen
         $timestamp = strtotime($rawData);
+
         switch ($this->rendererParam) {
             case "picker_datetime":
                 return date("d/m/Y H:i:s", $timestamp);

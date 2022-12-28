@@ -32,7 +32,7 @@ class Image extends Component
         $h = $this->h ? "height='$this->h'" : "";
         $title = $this->title ? "title='$this->title'" : "";
         $img = "<img $title $w $h class='rounded-lg object-cover border mr-1' src='$this->src'/>";
-        if ($this->href) $img = "<a class='' href='$this->href'>$img</a>";
+        if ($this->href) $img = "<a class='' target='_blank' href='$this->href'>$img</a>";
         return $img;
     }
 }
