@@ -3,6 +3,8 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Dropdown extends Component
@@ -33,6 +35,10 @@ class Dropdown extends Component
             return "<x-feedback.alert message='{$message}' type='warning' />";
         }
 
-        return view('components.controls.dropdown')->with(compact('dataSource', 'colName', 'action', 'label', 'currentEntity'));
+
+
+
+        $dataUsers = DB::table('users')->get()->toArray();
+        return view('components.controls.dropdown')->with(compact('dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataUsers'));
     }
 }

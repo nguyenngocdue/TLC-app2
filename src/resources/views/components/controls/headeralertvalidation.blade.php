@@ -21,6 +21,7 @@
                 $message = $value[0];
                 $idx = strpos($message, 'field'); // index of "field" word in message
                 $strSearch = substr($message, 4, $idx - 4);
+                // dump($message , $prop, $strSearch);
                 @endphp
                 <a href="#{{$colName}}" title="{{$colName}}">{{str_replace($strSearch, "[".$prop['label']."] ", $message)}}</a>
                 @endif
