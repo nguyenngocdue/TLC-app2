@@ -14,9 +14,8 @@ class Column extends Component
     public function __construct(
         private $rendererParam = '',
         private $name = '',
+        // private $cell,
     ) {
-        // dd($this->renderer_param);
-        // dump($this->rendererParam);
     }
 
     /**
@@ -26,8 +25,22 @@ class Column extends Component
      */
     public function render()
     {
-        // return $this->renderer_param;
+        // return $this->rendererParam;
         if ($this->rendererParam === '') return "renderer_param ?";
+        // $rendererParam = $this->rendererParam;
+        // $slot = ($this->cell);
+        // $result = [];
+        // //$fault = false;
+        // $json = json_decode($slot);
+        // if (!is_array($json)) $json = [$json];
+        // foreach ($json as $item) {
+        //     if (!isset($item->$rendererParam)) {
+        //         //$fault = true;
+        //         break;
+        //     }
+        //     $result[] = "<span title='#{$item->id}'>" . $item->$rendererParam . "</span>";
+        // }
+        // echo join(", ", $result);
         return view('components.renderer.column', [
             'rendererParam' => $this->rendererParam,
         ]);

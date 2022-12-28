@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\BigThink\ModelExtended;
 use App\Http\Traits\HasStatus;
+use Illuminate\Support\Facades\Log;
 
 class Prod_run extends ModelExtended
 {
@@ -39,10 +40,24 @@ class Prod_run extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    // public function prodRoutingDetails()
+    // {
+    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2], $p[3]);
+    // }
+
     public function prodRoutingDetails()
     {
+        $prodOrder = $this->prodOrder;
+        $prod_routing_id = $prodOrder->prod_routing_id;
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3]);
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3]);
+        $sql = $relation
+            ->getQuery()
+            ->where('prod_routing_id', $prod_routing_id)
+            ->toSql();
+        // Log::info($sql);
+        return $relation;
     }
 
     public function getManyLineParams()
@@ -54,32 +69,8 @@ class Prod_run extends ModelExtended
             ["dataIndex" => "prodRoutingLinks", "renderer" => "column", "rendererParam" => "id"],
             ["dataIndex" => "total_hours", "align" => "right"],
             ["dataIndex" => "total_man_hours", "title" => "Total ManHours", "align" => "right"],
-            [
-                "dataIndex" => "prodRoutingDetails",
-                "title" => "Target Hours",
-                "align" => "right",
-                "renderer" => "pivot2",
-                "rendererParam" => [
-                    "column" => 'target_hours',
-                    "conditions" => [
-                        ["prodOrder.prod_routing_id", "=", "prod_routing_id"],
-                        ["prod_routing_link_id", "=", "prod_routing_link_id"],
-                    ],
-                ],
-            ],
-            [
-                "dataIndex" => "prodRoutingDetails",
-                "title" => "Target ManHours",
-                "align" => "right",
-                "renderer" => "pivot2",
-                "rendererParam" => [
-                    "column" => "target_man_hours",
-                    "conditions" => [
-                        ["prodOrder.prod_routing_id", "=", "prod_routing_id"],
-                        ["prod_routing_link_id", "=", "prod_routing_link_id"],
-                    ],
-                ],
-            ],
+            ["dataIndex" => "prodRoutingDetails", "title" => "Target Hours", "align" => "right", "renderer" => "column", "rendererParam" => "target_hours"],
+            ["dataIndex" => "prodRoutingDetails", "title" => "Target ManHours", "align" => "right", "renderer" => "column", "rendererParam" => "target_man_hours"],
             ["dataIndex" => "status", "renderer" => "status", "align" => "center"],
         ];
     }
