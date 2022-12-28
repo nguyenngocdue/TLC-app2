@@ -142,7 +142,7 @@ class Table extends Component
       $name = $column['dataIndex'];
       if (isset($column['width'])) {
         $w = $column['width'];
-        $result[] = "<col style='width: {$w}px' name='$name'>";
+        $result[] = "<col name='$name' style='width: {$w}px'>";
       } else {
         $result[] = "<col name='$name'>";
       }
@@ -205,8 +205,9 @@ class Table extends Component
     if (empty($columns)) return Blade::render("<x-feedback.alert type='warning' message='Columns attribute is empty.' />");
 
     // Log::info($this->showNo);
-    if ($this->showNo) array_unshift($columns, ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center']);
-    if ($this->showNoR) array_push($columns, ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center']);
+    $columnNo = ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center', "width" => '10'];
+    if ($this->showNo) array_unshift($columns, $columnNo);
+    if ($this->showNoR) array_push($columns, $columnNo);
 
     $dataSource = $this->dataSource;
     // Log::info($dataSource);

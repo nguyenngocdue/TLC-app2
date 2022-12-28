@@ -56,6 +56,7 @@ abstract class AbstractViewAllController extends Controller
                 'title' => $prop['label'],
                 'dataIndex' => $prop['column_name'],
             ];
+            if (isset($prop['width']) && $prop['width']) $output['width'] = $prop['width'];
 
             switch ($prop['control']) {
                 case 'id':
@@ -109,6 +110,7 @@ abstract class AbstractViewAllController extends Controller
             $props = array_filter($props, fn ($prop) => in_array($prop['name'], $allows));
         }
         $result = array_values(array_map(fn ($prop) => createObject($prop, $type), $props));
+        // Log::info($result);
         return $result;
     }
 
