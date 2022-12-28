@@ -48,6 +48,6 @@ class Checkbox extends Component
         if (is_null($dataSource) || gettype($dataSource) === 'string') return "<x-feedback.alert message='Not found record \"$colName\" in  Fields.' type='warning' />";
 
         $span = Helper::getColSpan($colName, $type);
-        return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
+        return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label', 'listensJson'));
     }
 }

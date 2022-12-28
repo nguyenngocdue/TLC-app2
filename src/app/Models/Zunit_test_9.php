@@ -11,19 +11,19 @@ class Zunit_test_9 extends ModelExtended
     public $menuTitle = "UT09 (Basic Event)";
 
     public $eloquentParams = [
-        "workplaceDropDown1" => ['belongsTo', Workplace::class, 'department_1'],
-        "workplaceRadio1" => ['belongsTo', Workplace::class, 'department_2'],
+        "department1" => ['belongsTo', Department::class, 'department_1'],
+        "user1" => ['belongsTo', Department::class, 'user_1'],
+        "department2" => ['belongsTo', Department::class, 'department_2'],
+        "user2" => ['belongsTo', Department::class, 'user_2'],
         "category" => ['belongsTo', Workplace::class, 'category'],
-        "head_of_department" => ['belongsTo', Workplace::class, 'head_of_department'],
-        "user" => ['belongsTo', Workplace::class, 'user']
     ];
 
-    public function workplaceDropDown1()
+    public function department1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function workplaceRadio1()
+    public function department2()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -34,12 +34,12 @@ class Zunit_test_9 extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function head_of_department()
+    public function user1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function user()
+    public function user2()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

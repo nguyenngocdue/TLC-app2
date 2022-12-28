@@ -25,32 +25,6 @@
         "validation": "",
         "formula": ""
     },
-    "_department_1": {
-        "name": "_department_1",
-        "column_name": "department_1",
-        "column_type": "string",
-        "label": "Department 1",
-        "control": "dropdown",
-        "col_span": "6",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
-    "_user": {
-        "name": "_user",
-        "column_name": "user",
-        "column_type": "string",
-        "label": "User",
-        "control": "dropdown",
-        "col_span": "6",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
     "_department_2": {
         "name": "_department_2",
         "column_name": "department_2",
@@ -64,11 +38,37 @@
         "validation": "",
         "formula": ""
     },
-    "_head_of_department": {
-        "name": "_head_of_department",
-        "column_name": "head_of_department",
+    "_user_2": {
+        "name": "_user_2",
+        "column_name": "user_2",
         "column_type": "string",
-        "label": "Head_of_department",
+        "label": "HOD",
+        "control": "dropdown",
+        "col_span": "6",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_department_1": {
+        "name": "_department_1",
+        "column_name": "department_1",
+        "column_type": "string",
+        "label": "Department 1",
+        "control": "dropdown",
+        "col_span": "6",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_user_1": {
+        "name": "_user_1",
+        "column_name": "user_1",
+        "column_type": "string",
+        "label": "User",
         "control": "dropdown",
         "col_span": "6",
         "hidden_view_all": "",

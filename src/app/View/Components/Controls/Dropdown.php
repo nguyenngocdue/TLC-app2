@@ -4,6 +4,7 @@ namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
 use App\Models\User;
+use App\Utils\Support\Listeners;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
@@ -36,9 +37,8 @@ class Dropdown extends Component
         }
 
 
-
-
         $dataUsers = DB::table('users')->get()->toArray();
-        return view('components.controls.dropdown')->with(compact('dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataUsers'));
+        $listenersJson = Listeners::getAllOf($type);
+        return view('components.controls.dropdown')->with(compact('dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataUsers', 'listenersJson'));
     }
 }
