@@ -69,7 +69,7 @@ class Table extends Component
     // if ($editable) Log::info($output);
     // Log::info($output);
     // Log::info($column);
-    $cell = $dataLine[$column['dataIndex']] ?? "No dataIndex for " . $column['dataIndex'];
+    $cell = $dataLine[$column['dataIndex']] ?? "No dataIndex for " . $column['dataIndex']; //No dataIndex for is used in Thumbnail
     return Blade::render($output, [
       'cbbDataSource' => $cbbDataSource,
       'column' => $column,

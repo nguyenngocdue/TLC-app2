@@ -33,7 +33,7 @@ abstract class AbstractViewAllController extends Controller
     {
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
-        $pageLimit = $settings[$type]['page_limit'] ?? 10;
+        $pageLimit = $settings[$type]['page_limit'] ?? 20;
         $columnLimit = $settings[$type]['columns'] ?? null;
         return [$pageLimit, $columnLimit];
     }

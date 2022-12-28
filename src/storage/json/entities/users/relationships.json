@@ -11,6 +11,18 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_avatar": {
+        "name": "_avatar",
+        "relationship": "morphOne",
+        "control_name": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "url_thumbnail",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_posts": {
         "name": "_posts",
         "relationship": "hasMany",

@@ -61,6 +61,7 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     public $eloquentParams = [
         "media" => ['morphMany', Attachment::class, 'mediable', 'object_type', 'object_id'],
+        "avatar" => ['morphOne', Attachment::class, 'mediable', 'object_type', 'object_id'],
         "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
         "getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
         "userTypes" => ['belongsTo', User_type::class, 'user_type'],
@@ -73,7 +74,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "departments" => ['belongsTo', Department::class, 'department'],
         "time_keep_types" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
         "productionRunLines" => ['belongsToMany', Prod_run_line::class, 'prod_user_runs', 'user_id', 'prod_run_line_id'],
-        "qaqcInspChklsts" => ['belongsTo', Qaqc_insp_chklst::class, 'owner_id']
+        "qaqcInspChklsts" => ['belongsTo', Qaqc_insp_chklst::class, 'owner_id'],
     ];
     public $oracyParams = [];
     protected $guard_name = 'web';
@@ -83,7 +84,11 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
-
+    public function avatar()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->latestOfMany();
+    }
     public function posts()
     {
         $p = $this->eloquentParams[__FUNCTION__];

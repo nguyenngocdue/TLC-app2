@@ -34,6 +34,6 @@ class Thumbnails extends Component
         ], $cell);
         $imgs = array_map(fn ($item) => "<x-renderer.image w=64 title='{$item['filename']}' src='{$item['url_thumbnail']}' href='{$item['url_media']}'></x-renderer.image>", $result);
         $imgStr = join(" ", $imgs);
-        return "<div class='flex flex-row'>$imgStr</div>";
+        return "<div class='flex flex-row' component='thumbnails'>$imgStr</div>";
     }
 }
