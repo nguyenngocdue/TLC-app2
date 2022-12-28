@@ -39,7 +39,7 @@ class LinkMorphTo extends Component
             // dump("$able $table");
             $href = route($table . ".edit", $id);
             $idStr = Str::makeId($id);
-            return "<a class='text-blue-500' href='$href' title='$idStr ($table)'>$name</a>";
+            return "<a class='text-blue-500' href='$href' title='$idStr ($table)'>$name<br/>($table)</a>";
         }
         // return "XYZ";
     }

@@ -113,7 +113,7 @@ class Table extends Component
       }
       $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
       $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
-      $tds[] = "<td class='px-0.5 py-0.5 $borderRight $align'>" . $rendered . "</td>";
+      $tds[] = "<td class='px-1 py-1 $borderRight $align'>" . $rendered . "</td>";
     }
     return $tds;
   }

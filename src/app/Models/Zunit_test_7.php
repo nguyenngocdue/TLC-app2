@@ -12,6 +12,7 @@ class Zunit_test_7 extends ModelExtended
 
     public $eloquentParams = [
         "comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "media" => ['morphMany', Attachment::class, 'mediable', 'object_type', 'object_id'],
     ];
 
     public function comments()
@@ -22,6 +23,8 @@ class Zunit_test_7 extends ModelExtended
 
     public function media()
     {
-        return $this->morphMany(Attachment::class, 'mediable', 'object_type', 'object_id');
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        // return $this->morphMany(Attachment::class, 'mediable', 'object_type', 'object_id');
     }
 }
