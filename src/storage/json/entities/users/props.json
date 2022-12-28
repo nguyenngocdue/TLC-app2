@@ -571,12 +571,12 @@
         "validation": "",
         "formula": ""
     },
-    "_mediable": {
-        "name": "_mediable",
-        "column_name": "mediable",
+    "_media": {
+        "name": "_media",
+        "column_name": "media",
         "column_type": "eloquent_prop",
         "label": "Attachments",
-        "control": "relationship_renderer",
+        "control": "",
         "col_span": "",
         "hidden_view_all": "",
         "hidden_edit": "",

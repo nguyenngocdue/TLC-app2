@@ -60,7 +60,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     // }
 
     public $eloquentParams = [
-        "mediable" => ['morphMany', Attachment::class, 'mediable', 'object_type', 'object_id'],
+        "media" => ['morphMany', Attachment::class, 'mediable', 'object_type', 'object_id'],
         "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
         "getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
         "userTypes" => ['belongsTo', User_type::class, 'user_type'],
@@ -78,7 +78,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     public $oracyParams = [];
     protected $guard_name = 'web';
 
-    public function mediable()
+    public function media()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
