@@ -3,7 +3,6 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
-use App\Models\Prod_routing;
 use App\Utils\Support\Relationships;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
@@ -22,6 +21,16 @@ class RelationshipRenderer extends Component
         private $modelPath,
         private $action,
     ) {
+    }
+
+    private function getDataSource($itemDB, $colName)
+    {
+        $eloquentParam = $itemDB->eloquentParams[$colName];
+        if (isset($eloquentParam[2])) $relation = $itemDB->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
+        elseif (isset($eloquentParam[1])) $relation = $itemDB->{$eloquentParam[0]}($eloquentParam[1]);
+        elseif (isset($eloquentParam[0])) $relation = $itemDB->{$eloquentParam[0]}();
+
+        return $relation->getQuery()->paginate(10, ['*'], $colName);
     }
 
     /**
@@ -50,13 +59,7 @@ class RelationshipRenderer extends Component
         if (is_null($itemDB->$colName)) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";
 
         // $dataSource = $itemDB->$colName->all();
-
-        $eloquentParam = $itemDB->eloquentParams[$colName];
-        if (isset($eloquentParam[2])) $relation = $itemDB->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
-        elseif (isset($eloquentParam[1])) $relation = $itemDB->{$eloquentParam[0]}($eloquentParam[1]);
-        elseif (isset($eloquentParam[0])) $relation = $itemDB->{$eloquentParam[0]}();
-        $dataSource = $relation->getQuery()->paginate(10)->all();
-
+        $dataSource = $this->getDataSource($itemDB, $colName);
 
         if (count($dataSource) <= 0) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";
         $typeDB =  $dataSource[0]->getTable() ?? "";

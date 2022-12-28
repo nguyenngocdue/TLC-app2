@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -23,6 +24,7 @@ class Table extends Component
     private $groupBy = false,
     private $header = "",
     private $footer = "",
+    private Request $request,
   ) {
   }
 
@@ -222,7 +224,8 @@ class Table extends Component
     $pagination = "";
     // dump($dataSource);
     if (is_object($dataSource) && method_exists($dataSource, 'links') && !empty($dataSource)) {
-      $showing = $dataSource->links('dashboards.pagination.showing');
+
+      $showing = $dataSource->appends($this->request->toArray())->links('dashboards.pagination.showing');
       $pagination = $dataSource->links('dashboards.pagination.pagination');
     }
 
