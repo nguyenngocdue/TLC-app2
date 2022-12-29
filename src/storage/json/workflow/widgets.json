@@ -1,62 +1,7 @@
 {
-    "users_1": {
-        "name": "users_1",
-        "table_a": "users",
-        "table_b": "workplaces",
-        "key_a": "workplace",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
-    },
-    "users_2": {
-        "name": "users_2",
-        "table_a": "users",
-        "table_b": "user_categories",
-        "key_a": "category",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
-    },
-    "users_3": {
-        "name": "users_3",
-        "table_a": "users",
-        "table_b": "user_types",
-        "key_a": "user_type",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
-    },
-    "users_4": {
-        "name": "users_4",
-        "table_a": "users",
-        "table_b": "user_position1s",
-        "key_a": "position_1",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
-    },
-    "users_5": {
-        "name": "users_5",
-        "table_a": "users",
-        "table_b": "user_position2s",
-        "key_a": "position_2",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
-    },
-    "users_6": {
-        "name": "users_6",
-        "table_a": "users",
-        "table_b": "user_disciplines",
-        "key_a": "discipline",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
-    },
-    "users_7": {
-        "name": "users_7",
-        "table_a": "users",
-        "table_b": "departments",
-        "key_a": "department",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
-    },
     "prod_8": {
         "name": "prod_8",
+        "fn": "sqlForeignKey",
         "table_a": "prod_orders",
         "table_b": "sub_projects",
         "key_a": "sub_project_id",
@@ -65,10 +10,74 @@
     },
     "prod_9": {
         "name": "prod_9",
+        "fn": "sqlForeignKey",
         "table_a": "prod_orders",
         "table_b": "prod_routings",
         "key_a": "prod_routing_id",
         "key_b": "id",
         "global_filter": null
+    },
+    "users_1": {
+        "name": "users_1",
+        "fn": "sqlForeignKey",
+        "table_a": "users",
+        "table_b": "workplaces",
+        "key_a": "workplace",
+        "key_b": "id",
+        "global_filter": "a.resigned != true"
+    },
+    "users_2": {
+        "name": "users_2",
+        "fn": "sqlForeignKey",
+        "table_a": "users",
+        "table_b": "user_categories",
+        "key_a": "category",
+        "key_b": "id",
+        "global_filter": "a.resigned != true"
+    },
+    "users_3": {
+        "name": "users_3",
+        "fn": "sqlForeignKey",
+        "table_a": "users",
+        "table_b": "user_types",
+        "key_a": "user_type",
+        "key_b": "id",
+        "global_filter": "a.resigned != true"
+    },
+    "users_4": {
+        "name": "users_4",
+        "fn": "sqlForeignKey",
+        "table_a": "users",
+        "table_b": "user_position1s",
+        "key_a": "position_1",
+        "key_b": "id",
+        "global_filter": "a.resigned != true"
+    },
+    "users_5": {
+        "name": "users_5",
+        "fn": "sqlForeignKey",
+        "table_a": "users",
+        "table_b": "user_position2s",
+        "key_a": "position_2",
+        "key_b": "id",
+        "global_filter": "a.resigned != true"
+    },
+    "users_6": {
+        "name": "users_6",
+        "fn": "sqlForeignKey",
+        "table_a": "users",
+        "table_b": "user_disciplines",
+        "key_a": "discipline",
+        "key_b": "id",
+        "global_filter": "a.resigned != true"
+    },
+    "users_7": {
+        "name": "users_7",
+        "fn": "sqlForeignKey",
+        "table_a": "users",
+        "table_b": "departments",
+        "key_a": "department",
+        "key_b": "id",
+        "global_filter": "a.resigned != true"
     }
 }

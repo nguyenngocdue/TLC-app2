@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\BigThink\MetaForChart;
+use App\BigThink\TraitMenuTitle;
+use App\BigThink\TraitMetaForChart;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,7 +26,8 @@ class User extends Authenticatable implements LdapAuthenticatable
     use Searchable;
     use CheckPermissionEntities;
     use HasApiTokens;
-    use MetaForChart;
+    use TraitMetaForChart;
+    use TraitMenuTitle;
 
     /**
      * The attributes that are mass assignable.

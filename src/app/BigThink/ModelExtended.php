@@ -14,7 +14,8 @@ class ModelExtended extends Model
     use Notifiable;
     use HasFactory;
     use CheckPermissionEntities;
-    use MetaForChart;
+    use TraitMetaForChart;
+    use TraitMenuTitle;
 
     public $eloquentParams = [];
     public $oracyParams = [];

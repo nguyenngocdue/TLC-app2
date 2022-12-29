@@ -1,26 +1,9 @@
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark } " class="scroll-smooth" x-data="data()" lang="en">
 
-<!--head>
-    <meta charset="utf-8">
-    <meta name="The master layout G4T">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/fontawesome-free/css/all.min.css') }}">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-    <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}">
-    <script href="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head-->
-
 <head>
     <meta charset="UTF-8">
+    <meta name="The master layout G4T">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name') }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -33,13 +16,14 @@
     <script href="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
 
-    <link rel="stylesheet" href="./windmill_assets/css/tailwind.output.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer=""></script>
-    <!-- <script src="./windmill_assets/js/init-alpine1.js"></script> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer=""></script>
-    <script src="./windmill_assets/js/charts-lines.js" defer=""></script>
-    <script src="./windmill_assets/js/charts-pie.js" defer=""></script>
+    <script src="./windmill_assets/js/init-alpine1.js"></script>
+    {{-- <link rel="stylesheet" href="./windmill_assets/css/tailwind.output.css"> --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.1/Chart.min.css"> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.1/Chart.min.js" defer=""></script> --}}
+    {{-- <script src="./windmill_assets/js/charts-lines.js" defer=""></script>  --}}
+    {{-- <script src="./windmill_assets/js/charts-pie.js" defer=""></script> --}}
 
     <!-- <link href="{{ asset('css/charts.css') }}" rel="stylesheet"> -->
 

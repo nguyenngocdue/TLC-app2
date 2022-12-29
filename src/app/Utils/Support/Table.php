@@ -2,6 +2,8 @@
 
 namespace App\Utils\Support;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -10,6 +12,13 @@ class Table
 {
     private static $singletonNames = [];
     private static $singletonTypes = [];
+
+
+    public static function fromNameToModel($tableName): Model
+    {
+        $modelName = Str::singular($tableName);
+        return App::make("App\\Models\\$modelName");
+    }
 
     public static function getColumnTypes($tableName)
     {

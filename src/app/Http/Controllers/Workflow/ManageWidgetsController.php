@@ -17,6 +17,13 @@ class ManageWidgetsController extends AbstractManageLibController
                 'editable' => true,
             ],
             [
+                'dataIndex' => "fn",
+                'renderer' => 'dropdown',
+                'editable' => true,
+                'cbbDataSource' => ['', 'sqlForeignKey'],
+                "properties" => ['strFn' => 'same'],
+            ],
+            [
                 'dataIndex' => "table_a",
                 'renderer' => 'text',
                 'editable' => true,

@@ -301,7 +301,7 @@
     "_comment_1": {
         "name": "_comment_1",
         "column_name": "comment_1",
-        "column_type": "static",
+        "column_type": "text",
         "label": "Comment by Clinic",
         "control": "comment",
         "col_span": "12",

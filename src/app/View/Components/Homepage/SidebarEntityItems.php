@@ -20,7 +20,7 @@ class SidebarEntityItems
         $model = App::make($modelPath);
 
         $result = [
-            "title" => $model->menuTitle ?? Str::headline($table),
+            "title" => $model->getMenuTitle(),
             "type" => $singular,
             "icon" => $svg['form'],
             "isActive" => $isActive,
