@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\BigThink\MetaForChart;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +17,15 @@ use Ndc\Spatiecustom\Traits\HasRoleSets;
 
 class User extends Authenticatable implements LdapAuthenticatable
 {
-    use Notifiable, AuthenticatesWithLdap, HasLdapUser, HasFactory, HasRoleSets, Searchable, CheckPermissionEntities, HasApiTokens;
+    use Notifiable;
+    use AuthenticatesWithLdap;
+    use HasLdapUser;
+    use HasFactory;
+    use HasRoleSets;
+    use Searchable;
+    use CheckPermissionEntities;
+    use HasApiTokens;
+    use MetaForChart;
 
     /**
      * The attributes that are mass assignable.

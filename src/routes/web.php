@@ -4,7 +4,7 @@ use App\Http\Controllers\ComponentLib;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UpdateUserSettings;
-use App\Http\Controllers\Workflow\ManageStatuses;
+use App\Http\Controllers\Workflow\ManageStatusesController;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -79,6 +79,6 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::get('/mail-test', [MailController::class, 'index']);
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
 Route::resource('test', HomeController::class);
-Route::resource('dashboard/workflow/statuses', ManageStatuses::class)->only('index', 'store', 'create');
+Route::resource('dashboard/workflow/manageStatuses', ManageStatusesController::class)->only('index', 'store', 'create');
 Route::resource('/abc', HomeController::class);
 Route::get('components', [ComponentLib::class, 'index']);

@@ -10,7 +10,11 @@ use Laravel\Scout\Searchable;
 
 class ModelExtended extends Model
 {
-    use Searchable, Notifiable, HasFactory, CheckPermissionEntities;
+    use Searchable;
+    use Notifiable;
+    use HasFactory;
+    use CheckPermissionEntities;
+    use MetaForChart;
 
     public $eloquentParams = [];
     public $oracyParams = [];

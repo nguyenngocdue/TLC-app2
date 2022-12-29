@@ -61,7 +61,7 @@ class SidebarAdminItems
             "children" => [
                 [
                     'title' => "Status Library",
-                    'href' => "/dashboard/workflow/statuses",
+                    'href' => "/dashboard/workflow/manageStatuses",
                 ],
             ],
         ];
