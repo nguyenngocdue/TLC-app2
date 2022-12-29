@@ -35,8 +35,8 @@ trait MetaForChart
         // $result = $this->sqlForeignKey("users", "user_disciplines", "discipline", "id", "a.resigned != true");
         // $result = $this->sqlForeignKey("users", "departments", "department", "id", "a.resigned != true");
 
-        $result = $this->sqlForeignKey("prod_orders", "sub_projects", "sub_project_id");
-        $result = $this->sqlForeignKey("prod_orders", "prod_routings", "prod_routing_id");
+        $result = $this->sqlForeignKey("prod_orders", "sub_projects");
+        $result = $this->sqlForeignKey("prod_orders", "prod_routings");
 
         return $result;
         return [

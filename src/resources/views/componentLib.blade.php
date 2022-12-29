@@ -5,7 +5,14 @@
 <br />
 <x-renderer.card title="Feedback">
     <div class="grid gap-6 mb-8 md:grid-cols-2 ">
-
+        <x-renderer.card title="Widgets">
+            <div class="mb-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                <x-renderer.report.widget title="Total Clients" figure="1234"></x-renderer.report.widget>
+                <x-renderer.report.widget title="Account balance" figure="$ 46,760.89"></x-renderer.report.widget>
+                <x-renderer.report.widget title="New sales" figure="376"></x-renderer.report.widget>
+                <x-renderer.report.widget title="Pending contacts" figure="35"></x-renderer.report.widget>
+            </div>
+        </x-renderer.card>
         <x-renderer.card title="Typography">
             <x-renderer.heading level=1>Heading Level 1</x-renderer.heading>
             <x-renderer.heading level=2>Heading Level 2</x-renderer.heading>

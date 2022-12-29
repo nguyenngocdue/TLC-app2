@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Workflow\Statuses;
+use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
@@ -49,7 +49,7 @@ abstract class AbstractStatusController extends Controller
     public function index()
     {
         $plural = Str::plural($this->type);
-        $dataSource0 = Statuses::getFor($plural);
+        $dataSource0 = LibStatuses::getFor($plural);
         foreach ($dataSource0 as &$line) {
             $value = $line['name'];
             $line['action'] = Blade::render("<div>
@@ -59,7 +59,7 @@ abstract class AbstractStatusController extends Controller
             </div>
             ");
         }
-        $dataSource1 = Statuses::getAll();
+        $dataSource1 = LibStatuses::getAll();
         $dataSource1 = array_diff_key($dataSource1, $dataSource0);
         foreach ($dataSource1 as &$line) {
             $value = $line['name'];
@@ -82,7 +82,7 @@ abstract class AbstractStatusController extends Controller
         $type = $this->getType();
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));
-            Statuses::move($direction, $type, $name);
+            LibStatuses::move($direction, $type, $name);
         }
         return redirect(route($type . '_stt.index'));
     }

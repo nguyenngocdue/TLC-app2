@@ -63,6 +63,10 @@ class SidebarAdminItems
                     'title' => "Status Library",
                     'href' => "/dashboard/workflow/manageStatuses",
                 ],
+                [
+                    'title' => "Widget Library",
+                    'href' => "/dashboard/workflow/manageWidgets",
+                ],
             ],
         ];
     }

@@ -5,7 +5,7 @@ namespace App\Http\Traits;
 use App\Events\StatusEnteredEvent;
 use App\Events\StatusLeavingEvent;
 use App\Helpers\Helper;
-use App\Http\Controllers\Workflow\Statuses;
+use App\Http\Controllers\Workflow\LibStatuses;
 use Exception;
 
 trait HasStatus
@@ -13,7 +13,7 @@ trait HasStatus
     function getAvailableStatuses()
     {
         $plural = $this->getTable();
-        $statuses = Statuses::getFor($plural);
+        $statuses = LibStatuses::getFor($plural);
         return array_keys($statuses);
     }
 

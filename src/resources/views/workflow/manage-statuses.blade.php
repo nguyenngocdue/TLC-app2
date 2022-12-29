@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Manage Statuses')
+@section('title', $title)
 
 @section('content')
 <form action="{{$route}}" method="post">

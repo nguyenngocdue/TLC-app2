@@ -7,34 +7,40 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class Statuses
+class AbstractLib
 {
-    private static $statuses_path = "workflow/statuses.json";
+    protected static $key = "abstract_lib";
+    private static function getJsonPath()
+    {
+        return "workflow/" . static::$key . ".json";
+    }
+
     public static function getAll()
     {
-        if (!Cache::has('statuses_of_the_app')) {
-            $pathFrom = storage_path('json/' . self::$statuses_path);
+        if (!Cache::has(static::$key . '_of_the_app')) {
+            $pathFrom = storage_path('json/' . static::getJsonPath());
+            if (!file_exists($pathFrom)) file_put_contents($pathFrom, "{}");
             $json = json_decode(file_get_contents($pathFrom, true), true);
-            Cache::rememberForever('statuses_of_the_app', fn () => $json);
+            Cache::rememberForever(static::$key . '_of_the_app', fn () => $json);
         }
-        return Cache::get('statuses_of_the_app');
+        return Cache::get(static::$key . '_of_the_app');
     }
 
     public static function setAll($dataSource)
     {
         $str = json_encode($dataSource, JSON_PRETTY_PRINT);
-        Cache::forget('statuses_of_the_app');
-        return Storage::disk('json')->put(self::$statuses_path, $str);
+        Cache::forget(static::$key . '_of_the_app');
+        return Storage::disk('json')->put(static::getJsonPath(), $str);
     }
 
     private static function _getFor($entityType)
     {
         $singular = Str::singular($entityType);
         $plural = Str::plural($entityType);
-        $cacheKey = "statuses_of_$singular";
+        $cacheKey = static::$key . "_of_$singular";
         $result = [];
         if (!Cache::has($cacheKey)) {
-            $path = "entities/$plural/statuses.json";
+            $path = "entities/$plural/" . static::$key . ".json";
             $pathFrom = storage_path('json/' . $path);
             if (!file_exists($pathFrom)) $result = [];
             else $result = json_decode(file_get_contents($pathFrom, true), true);
@@ -47,17 +53,17 @@ class Statuses
     {
         $singular = Str::singular($entityType);
         $plural = Str::plural($entityType);
-        $path = "entities/$plural/statuses.json";
+        $path = "entities/$plural/" . static::$key . ".json";
         $str = json_encode($dataSource, JSON_PRETTY_PRINT);
-        Cache::forget("statuses_of_$singular");
+        Cache::forget(static::$key . "_of_$singular");
         return Storage::disk('json')->put($path, $str);
     }
 
     public static function getFor($entityType)
     {
-        $json = self::_getFor($entityType);
+        $json = static::_getFor($entityType);
 
-        $allStatuses = self::getAll();
+        $allStatuses = static::getAll();
         //<< When filter, the order is the order of the allStatus, not the form order
         // $result = array_filter($allStatuses, fn ($status) => in_array($status, $json), ARRAY_FILTER_USE_KEY);
         $result = [];
@@ -69,10 +75,10 @@ class Statuses
     public static function move($direction, $entityType, $name)
     {
         $entityType = Str::plural($entityType);
-        $json = self::_getFor($entityType);
+        $json = static::_getFor($entityType);
 
         $index = array_search($name, $json);
         $json = Arr::moveDirection($json, $direction, $index, $name);
-        return self::setFor($entityType, array_values($json));
+        return static::setFor($entityType, array_values($json));
     }
 }
