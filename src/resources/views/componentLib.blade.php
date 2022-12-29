@@ -43,7 +43,7 @@
             <br />
             @dump($_GET)
             <form action="" method="GET">
-                <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }, name={ {comment_1} }">
+                <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }, name={ { comment_1 } }">
                     <x-renderer.comment readonly={{true}} destroyable={{true}} showToBeDeleted={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment" />
                 </x-renderer.card>
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
@@ -51,7 +51,7 @@
             <br />
             @dump($_GET)
             <form action="" method="GET">
-                <x-renderer.card title="readonly={ {false} }, destroyable={ {false} }, showToBeDeleted={ {false} } name={ {comment_1} }">
+                <x-renderer.card title="readonly={ { false } }, destroyable={ { false } }, showToBeDeleted={ { false } } name={ { comment_1 } }">
                     <x-renderer.comment readonly={{false}} destroyable={{false}} showToBeDeleted={{false}} name="comment_1" type="department" id="1" :dataComment="$dataComment" />
                 </x-renderer.card>
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
@@ -59,7 +59,7 @@
             <br />
             @dump($_GET)
             <form action="" method="GET">
-                <x-renderer.card title="readonly={ {false} } showToBeDeleted={ {false} }, destroyable={ {true} }, attachmentData={ {$attachmentData} } name={ {comment_1} }">
+                <x-renderer.card title="readonly={ { false } } showToBeDeleted={ { false } }, destroyable={ { true } }, attachmentData={ { $attachmentData } } name={ { comment_1 } }">
                     <x-renderer.comment readonly={{false}} showToBeDeleted={{false}} destroyable={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment" :attachmentData="$attachmentData" />
                 </x-renderer.card>
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
@@ -87,16 +87,31 @@
 
         <x-renderer.card title="AvatarName">
             AvatarName with Attributes
-            <x-renderer.avatar-name title="Fortune Truong" description="Software Engineer" href="http://www.google.com"></x-renderer.avatar-name>
+            <x-renderer.avatar-name 
+                title="Fortune Truong" 
+                description="Software Engineer" 
+                href="http://www.google.com"
+            ></x-renderer.avatar-name>
+            <br/>
             AvatarName with Slot
             <x-renderer.avatar-name>{
                 "name":"Thuc Vo",
                 "position_rendered":"Software Tester",
                 "href":"http://www.google.com",
                 "avatar":"https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                }</x-renderer.avatar-name>
+            }</x-renderer.avatar-name>
+            <br/>
+            AvatarName with gray= { { true } } 
+            <x-renderer.avatar-name 
+                title="Fortune Truong" 
+                description="Software Engineer" 
+                href="http://www.google.com"
+                gray='true'
+            ></x-renderer.avatar-name>
+            <br/>
             Empty attribute
             <x-renderer.avatar-name></x-renderer.avatar-name>
+            <br/>
         </x-renderer.card>
 
         <x-renderer.card title="Controls">

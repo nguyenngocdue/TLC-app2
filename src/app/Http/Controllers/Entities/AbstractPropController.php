@@ -114,7 +114,7 @@ abstract class AbstractPropController extends Controller
                     '(not-yet)format_production',
                     '(not-yet)format_compliance',
                 ],
-                "attributes" => ['strFn' => 'same'],
+                "properties" => ['strFn' => 'same'],
             ],
         ];
     }

@@ -16,7 +16,7 @@ $time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
     <div class="grid grid-cols-12 gap-2 flex-nowrap">
         <div class="col-span-4">
             <div class="border cursor-pointer bg-[#f5f5f5] thumbs rounded-lg w-full border-gray-300 p-1 focus:border-purple-400 focus:outline-none  ">
-                <x-renderer.avatar-name title="{{$authorName}}" href="http://www.google.com">?</x-renderer.avatar-name>
+                <x-renderer.avatar-name title="{{$authorName}}"></x-renderer.avatar-name>
                 <input name="owner_id" value="{{Auth::user()->id}}" class='hidden' type='text'>
             </div>
         </div>

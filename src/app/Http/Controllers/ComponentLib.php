@@ -17,7 +17,7 @@ class ComponentLib extends Controller
             [
                 "title" => 'Client', "dataIndex" => "client",
                 "renderer" => "avatar-name",
-                "attributes" => ['title' => 'client', 'description' => 'amount', 'avatar' => 'avatar']
+                "attributes" => ['title' => 'client', 'description' => 'amount', 'avatar' => 'avatar', 'gray' => 'disabled']
             ],
             [
                 "title" => 'Logged In',
@@ -93,6 +93,7 @@ class ComponentLib extends Controller
                 "avatar" => "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6",
                 "id" => 3003, "client" => "Helen", "amount" => 123.45, "status" => "pending", "color" => "orange", "date" => "07/10/2022",
                 "loggedIn" => true,
+                "disabled" => true,
             ],
             [
                 "avatar" => "https://images.unsplash.com/photo-1551069613-1904dbdcda11?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ",
@@ -153,6 +154,7 @@ class ComponentLib extends Controller
             'name' => $item['client'],
             'avatar' => $item['avatar'] ?? null,
             'position_rendered' => $item['amount'],
+            'gray' => $item['disabled'] ?? false,
         ], $tableDataSource);
 
 

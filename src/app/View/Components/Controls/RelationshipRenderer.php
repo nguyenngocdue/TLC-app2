@@ -77,7 +77,10 @@ class RelationshipRenderer extends Component
         switch ($renderer_edit) {
             case "many_icons":
                 $colSpan =  Helper::getColSpan($colName, $type);
-                foreach ($dataSource as &$item) $item['href'] = route($typeDB . '.edit', $item->id);
+                foreach ($dataSource as &$item) {
+                    $item['href'] = route($typeDB . '.edit', $item->id);
+                    $item['gray'] = $item['resigned'];
+                }
                 $dataSource = $dataSource->all(); // Force LengthAwarePaginator to Array
                 return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan'));
             case "many_lines":

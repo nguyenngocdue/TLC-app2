@@ -14,6 +14,7 @@ class AvatarName extends Component
         // private $rendererParam = '',
         private $dataLine = [],
         private $href = "",
+        private $gray = false,
     ) {
         $src = "https://cdn.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.webp";
         $this->avatar = (!$this->avatar || $this->avatar === 'avatar') ? $src : $this->avatar;
@@ -21,12 +22,14 @@ class AvatarName extends Component
 
     public function render()
     {
-        $title = $this->title;
-        $description = $this->description;
-        $avatar = $this->avatar;
-        $href = $this->href;
-        $rendererParam = "title=name,description=position_rendered,href=href,avatar=avatar";
-
-        return view('components.renderer.avatar-name')->with(compact('title', 'description', 'avatar', 'rendererParam', 'href'));
+        $rendererParam = "title=name,description=position_rendered,href=href,avatar=avatar,gray=gray";
+        return view('components.renderer.avatar-name', [
+            'title' => $this->title,
+            'description' => $this->description,
+            'avatar' => $this->avatar,
+            'rendererParam' => $rendererParam,
+            'href' => $this->href,
+            'gray' => $this->gray,
+        ]);
     }
 }
