@@ -23,14 +23,14 @@ class RelationshipRenderer extends Component
     ) {
     }
 
-    private function getDataSource($itemDB, $colName)
+    private function getDataSource($itemDB, $colName, $showAll = false)
     {
         $eloquentParam = $itemDB->eloquentParams[$colName];
         if (isset($eloquentParam[2])) $relation = $itemDB->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
         elseif (isset($eloquentParam[1])) $relation = $itemDB->{$eloquentParam[0]}($eloquentParam[1]);
         elseif (isset($eloquentParam[0])) $relation = $itemDB->{$eloquentParam[0]}();
-
-        return $relation->getQuery()->paginate(10, ['*'], $colName);
+        $perPage = $showAll ? 10000 : 10;
+        return $relation->getQuery()->paginate($perPage, ['*'], $colName);
     }
 
     /**
@@ -59,7 +59,9 @@ class RelationshipRenderer extends Component
         if (is_null($itemDB->$colName)) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";
 
         // $dataSource = $itemDB->$colName->all();
-        $dataSource = $this->getDataSource($itemDB, $colName);
+        $renderer_edit = $value['renderer_edit'];
+        $showAll = $renderer_edit === "many_icons";
+        $dataSource = $this->getDataSource($itemDB, $colName, $showAll);
 
         if (count($dataSource) <= 0) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";
         $typeDB =  $dataSource[0]->getTable() ?? "";
@@ -72,11 +74,11 @@ class RelationshipRenderer extends Component
             ? [["dataIndex" => 'id', "renderer" => "id", "type" => $typeDB, "align" => "center"], ["dataIndex" => 'name']]
             : $instance->$fn();
 
-        $renderer_edit = $value['renderer_edit'];
         switch ($renderer_edit) {
             case "many_icons":
                 $colSpan =  Helper::getColSpan($colName, $type);
                 foreach ($dataSource as &$item) $item['href'] = route($typeDB . '.edit', $item->id);
+                $dataSource = $dataSource->all(); // Force LengthAwarePaginator to Array
                 return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan'));
             case "many_lines":
                 return view('components.controls.manyLineParams')->with(compact('columns', 'dataSource', 'fn'));
