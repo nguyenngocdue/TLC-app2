@@ -58,6 +58,7 @@ Route::group([
         'middleware' => ['auth:sanctum'],
     ], function () {
         Route::post('upload_file', [App\Http\Controllers\Api\v1\UploadFile::class, 'upload']);
+        Route::post('submit_form', [App\Http\Controllers\Api\v1\qaqc\SubmitFormController::class, 'submit']);
     });
 });
 Route::group([
