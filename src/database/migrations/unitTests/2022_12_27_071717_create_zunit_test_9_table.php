@@ -18,10 +18,11 @@ return new class extends Migration
             $table->id();
             $table->text('content')->nullable();
             $table->string('department_1')->nullable();
-            $table->string('head_of_department')->nullable();
             $table->string('department_2')->nullable();
-            $table->string('user')->nullable();
             $table->string('category')->nullable();
+            $table->string('user_1')->nullable();
+            $table->string('user_2')->nullable();
+            $table->string('user_3')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
