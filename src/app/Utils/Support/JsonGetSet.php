@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 
 class JsonGetSet
 {
+    protected static $filename = "";
     public static function convertHttpObjectToJson($data, $columns)
     {
         if (!isset($data['name'])) return [];
@@ -23,8 +24,9 @@ class JsonGetSet
         return $result;
     }
 
-    protected static function _getAllOf($type, $filename)
+    public static function getAllOf($type)
     {
+        $filename = static::$filename;
         $type = Str::plural($type);
         $path = storage_path() . "/json/entities/$type/$filename";
         if (!file_exists($path)) {
@@ -34,8 +36,9 @@ class JsonGetSet
         return json_decode(file_get_contents($path), true);
     }
 
-    protected static function _setAllOf($type, $data, $filename)
+    public static function setAllOf($type, $data)
     {
+        $filename = static::$filename;
         try {
             $type = Str::plural($type);
             $path = "entities/$type/$filename";
