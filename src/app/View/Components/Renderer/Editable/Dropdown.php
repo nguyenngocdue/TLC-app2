@@ -22,7 +22,7 @@ class Dropdown extends Component
         // Log::info($this->column);
         //Convert ["v1", "v2"] to [["value" => "v1"], ["value" => "v2"]]
         if (!is_array($dataSource[0])) $dataSource = array_map(fn ($item) => ["value" => $item], $dataSource);
-        //Conver ["value" => "v1"] to [""title" => "V1", "value" => "v1"]
+        //Convert ["value" => "v1"] to ["title" => "V1", "value" => "v1"]
         // Log::info($dataSource);
         foreach ($dataSource as &$option) {
             // Log::info($option);

@@ -37,6 +37,7 @@ class Dropdown extends Component
             return "<x-feedback.alert message='{$message}' type='warning' />";
         }
 
+        //TODO: load dynamic table, not only user
         $dataUsers = DB::table('users')->get()->toArray();
         $listenersJson = Listeners::getAllOf($type);
         $dataListenTo = [];
