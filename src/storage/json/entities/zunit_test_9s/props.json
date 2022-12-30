@@ -103,6 +103,32 @@
         "validation": "",
         "formula": ""
     },
+    "_sub_project": {
+        "name": "_sub_project",
+        "column_name": "sub_project",
+        "column_type": "string",
+        "label": "Sub-Project",
+        "control": "dropdown",
+        "col_span": "6",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_prod_order_1": {
+        "name": "_prod_order_1",
+        "column_name": "prod_order_1",
+        "column_type": "string",
+        "label": "Production Order",
+        "control": "dropdown",
+        "col_span": "6",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",

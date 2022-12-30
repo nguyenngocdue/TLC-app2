@@ -25,72 +25,78 @@ $colNameListenJson = array_column($listenersJson,'column_name');
     @endif
 
     {{-- If dropdown has listeners --}}
-    @if(in_array($colName, $colNameListenJson)) 
-        @php
-            //TODO: Change to array_search
-            $listenerItem = array_values(array_filter($listenersJson, fn($item) => $item['column_name'] === $colName));
-            $strIdname = "-target";
-            $targetName = $listenerItem[0]['target'].$strIdname;
-        @endphp
-        <select name='{{$colName}}' id="{{$targetName}}" class=" bg-white border border-gray-300  text-sm rounded-lg block  mt-1  focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
-            <option class="py-10" value="" selected>Select your option...</option>
-        </select>
-        <script type="text/javascript">
-            $("#{{$targetName}}").select2({
-                placeholder: "Please select"
-                , allowClear: true
-            });
-            dataUsers = @json($dataUsers);
-            selected = @json($selected);
-            //TODO: render ONCE
-            k = @json($dataListenTo);
+    @if(in_array($colName, $colNameListenJson))
+    @php
+    $listenerItem = [];
+    foreach ($listenersJson as $value) {
+    if (array_search($colName,array_values($value))){
+    $listenerItem = $value;
+    break;
+    }
+    };
+    $strIdname = "-trigger";
+    $triggerName = $listenerItem['triggers'].$strIdname;
+    @endphp
+    <select name='{{$colName}}' id="{{$triggerName}}" class=" bg-white border border-gray-300  text-sm rounded-lg block  mt-1  focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+        <option class="py-10" value="" selected>Select your option...</option>
+    </select>
 
-            strHtmlListener = dataUsers.map((item, index) => {
-                checkSelected = selected === item.id ? "selected" : "";
-                return ` <option ${checkSelected} value=${item.id}>${item.full_name}</option>`
-            })
+    @once
+    <script>
+        let k1 = @json($dataListenTrigger);
+        let k2 = @json($dataListenToField);
+        let dataListenTrigger = @json($dataListenTrigger);
 
-            eleListeners = document.getElementById("{{ $targetName }}");
-            if (eleListeners !== null) eleListeners.innerHTML += strHtmlListener;
+    </script>
+    @endonce
 
-            function onChangeItem(value, colName, valDataSource) {
-                //TODO: Render ONCE
-                listenersJson = @json($listenersJson);
-                colName = colName.getAttribute("name");
-                objListener = Object.values(listenersJson).find((item) => item.target === colName)
+    <script type="text/javascript">
+        $("#{{$triggerName}}").select2({
+            placeholder: "Please select"
+            , allowClear: true
+        });
 
-                fieldNameTarget = objListener.listen_target
-                listenTo = objListener.listen_to
-                column_name = objListener.column_name
+        strHtmlListener = dataListenTrigger["{{$colName}}"].map((item, index) => {
+            checkSelected = @json($selected) === item.id ? "selected" : "";
+            return ` <option ${checkSelected} value=${item.id}>${item.name}</option>`
+        })
 
-                // {listen_target,listen_to,column_name} = objListener
+        eleTriggers = document.getElementById("{{ $triggerName }}");
+        if (eleTriggers !== null) eleTriggers.innerHTML += strHtmlListener;
 
-                dataListenTo = Object.values(k[listenTo]);
+        function onChangeItem(value, colName, valDataSource) {
 
-                //TODO: change var name to Filter result
-                usersRender = [];
-                if (listenTo === column_name) {
-                    usersRender = dataListenTo.filter(ele => {
-                        return ele[fieldNameTarget] === value;
-                    })
-                } else {
-                    dataListenTo.forEach(ele => {
-                        if (ele.id === value) {
-                            idUserListener = ele[fieldNameTarget];
-                            usersRender = dataUsers.filter(u => u.id === idUserListener);
-                        }
-                    })
-                }
-                strHtmlRender = usersRender.map((item, index) => {
-                    return ` <option value="${item.id}">${item.full_name}</option>`
+            colName = colName.getAttribute("name");
+            objListener = Object.values(@json($listenersJson)).find((item) => item.triggers === colName)
+            fieldNameTrigger = objListener.listen_to_attrs;
+            listenToFied = objListener.listen_to_fields;
+            column_name = objListener.column_name;
+
+
+            dataListenTo = Object.values(k2[listenToFied]);
+
+            dataRender = [];
+            if (listenToFied === column_name) {
+                dataRender = dataListenTo.filter(ele => {
+                    return ele[fieldNameTrigger] === value;
                 })
-                let eles = document.getElementById(colName + "{{$strIdname}}");
-                //TODO: maybe remove head option
-                let headOption = listenTo !== column_name ? [] : [`<option class="py-10" value="" selected>Select your option...</option>`]
-                eles.innerHTML = strHtmlRender + headOption;
+            } else {
+                dataListenTo.forEach(ele => {
+                    if (ele.id === value) {
+                        idUserListener = ele[fieldNameTrigger];
+                        dataRender = k1[column_name].filter(u => u.id === idUserListener);
+                    }
+                })
             }
+            strHtmlRender = dataRender.map((item, index) => {
+                return ` <option value="${item.id}">${item.full_name}</option>`
+            })
+            let eles = document.getElementById(colName + "{{$strIdname}}");
+            let headOption = listenToFied !== column_name ? [] : [`<option class="py-10" value="" selected>Select your option...</option>`]
+            eles.innerHTML = strHtmlRender + headOption;
+        }
 
-        </script>
+    </script>
     @endif
 
 

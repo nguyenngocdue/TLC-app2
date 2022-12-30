@@ -5,10 +5,7 @@
         "action": "reduce",
         "triggers": "department_1",
         "listen_to_fields": "department_1",
-        "listen_to_attrs": "head_of_department",
-        "target": "department_1",
-        "listen_to": "department_1",
-        "listen_target": "head_of_department"
+        "listen_to_attrs": "head_of_department"
     },
     "_user_2": {
         "name": "_user_2",
@@ -16,10 +13,7 @@
         "action": "reduce",
         "triggers": "department_2",
         "listen_to_fields": "user_2",
-        "listen_to_attrs": "department",
-        "target": "department_2",
-        "listen_to": "user_2",
-        "listen_target": "department"
+        "listen_to_attrs": "department"
     },
     "_user_3": {
         "name": "_user_3",
@@ -27,10 +21,7 @@
         "action": "reduce",
         "triggers": "category",
         "listen_to_fields": "user_3",
-        "listen_to_attrs": "category",
-        "target": "category",
-        "listen_to": "user_3",
-        "listen_target": "category"
+        "listen_to_attrs": "category"
     },
     "_prod_order_1": {
         "name": "_prod_order_1",
@@ -38,9 +29,6 @@
         "action": "reduce",
         "triggers": "sub_project_1",
         "listen_to_fields": "prod_order_1",
-        "listen_to_attrs": "sub_project_id",
-        "target": "sub_project_1",
-        "listen_to": "prod_order_1",
-        "listen_target": "sub_project_id"
+        "listen_to_attrs": "sub_project_id"
     }
 }

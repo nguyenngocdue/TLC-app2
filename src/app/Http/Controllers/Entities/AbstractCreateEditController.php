@@ -128,7 +128,7 @@ abstract class AbstractCreateEditController extends Controller
 
 				if ($idsMedia) {
 					$this->setMediaParent($newItem, $colNamesHaveAttachment);
-					$this->updateMediaIdsToDBFields($_data, $colNamesHaveAttachment);
+					// $this->updateMediaIdsToDBFields($_data, $colNamesHaveAttachment);
 				}
 
 				Toastr::success("$this->type created successfully", "Create $this->type");
@@ -184,11 +184,10 @@ abstract class AbstractCreateEditController extends Controller
 			if ($isSaved) {
 				$this->syncManyToManyToDB($data, $dataInput); // Check box
 
-				if ($idsMedia) {
-					//set Media Parent is in saveMedia
-					$this->updateMediaIdsToDBFields($data, $colNamesHaveAttachment);
-				}
-
+				// if ($idsMedia) {
+				// 	//set Media Parent is in saveMedia
+				// 	// $this->updateMediaIdsToDBFields($data, $colNamesHaveAttachment);
+				// }
 				Toastr::success("$this->type updated successfully", "Update $this->type");
 			}
 
@@ -227,35 +226,35 @@ abstract class AbstractCreateEditController extends Controller
 		return $newDataInput;
 	}
 
-	private function updateMediaIdsToDBFields($data, $colNamesHaveAttachment)
-	{
-		$morphManyMediaUser = $data->media()->select('id', 'category')->get()->toArray();
-		$media_cateTb = DB::table('fields')->select('id', 'name')->get()->toArray();
+	// private function updateMediaIdsToDBFields($data, $colNamesHaveAttachment)
+	// {
+	// 	$morphManyMediaUser = $data->media()->select('id', 'category')->get()->toArray();
+	// 	$media_cateTb = DB::table('fields')->select('id', 'name')->get()->toArray();
 
-		$ids_names_cateMediaDB = array_column($media_cateTb, 'name', 'id');
-		$idsMedia_idsCateName_User = array_column($morphManyMediaUser, 'category', 'id');
+	// 	$ids_names_cateMediaDB = array_column($media_cateTb, 'name', 'id');
+	// 	$idsMedia_idsCateName_User = array_column($morphManyMediaUser, 'category', 'id');
 
-		$idsHasAttachMent = array_values(array_unique($idsMedia_idsCateName_User));
+	// 	$idsHasAttachMent = array_values(array_unique($idsMedia_idsCateName_User));
 
-		$names_val_fields = [];
-		foreach ($idsMedia_idsCateName_User as $key => $value) {
-			foreach ($idsHasAttachMent as $cate) {
-				if ($value === $cate) {
-					$names_val_fields[$ids_names_cateMediaDB[$cate]][] = $key;
-					break;
-				}
-			}
-		}
+	// 	$names_val_fields = [];
+	// 	foreach ($idsMedia_idsCateName_User as $key => $value) {
+	// 		foreach ($idsHasAttachMent as $cate) {
+	// 			if ($value === $cate) {
+	// 				$names_val_fields[$ids_names_cateMediaDB[$cate]][] = $key;
+	// 				break;
+	// 			}
+	// 		}
+	// 	}
 
-		$valFields = array_map(fn ($item) => $item = implode(",", $item), $names_val_fields);
-		foreach ($colNamesHaveAttachment as $attach) {
-			if (!isset($valFields[$attach])) {
-				$valFields[$attach] = null;
-			}
-		}
-		$data->fill($valFields);
-		$data->save();
-	}
+	// 	$valFields = array_map(fn ($item) => $item = implode(",", $item), $names_val_fields);
+	// 	foreach ($colNamesHaveAttachment as $attach) {
+	// 		if (!isset($valFields[$attach])) {
+	// 			$valFields[$attach] = null;
+	// 		}
+	// 	}
+	// 	$data->fill($valFields);
+	// 	$data->save();
+	// }
 
 	private function modifyValueTextArea($colNameHasTextarea, $newDataInput)
 	{
