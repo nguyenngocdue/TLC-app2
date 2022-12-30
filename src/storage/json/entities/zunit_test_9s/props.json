@@ -77,8 +77,8 @@
         "validation": "",
         "formula": ""
     },
-    "_category": {
-        "name": "_category",
+    "_get_category": {
+        "name": "_get_category",
         "column_name": "category",
         "column_type": "string",
         "label": "Category",
