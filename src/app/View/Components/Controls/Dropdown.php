@@ -3,6 +3,10 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
+use App\Models\User;
+use App\Models\Zunit_test_9;
+use App\Utils\Support\Listeners;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Dropdown extends Component
@@ -32,6 +36,15 @@ class Dropdown extends Component
             $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in $modelPath Model).";
             return "<x-feedback.alert message='{$message}' type='warning' />";
         }
-        return view('components.controls.dropdown')->with(compact('dataSource', 'colName', 'action', 'label', 'currentEntity'));
+
+        $dataUsers = DB::table('users')->get()->toArray();
+        $listenersJson = Listeners::getAllOf($type);
+        $dataListenTo = [];
+        foreach ($listenersJson as $value) {
+            $listen_to = $value['listen_to'];
+            $val = Helper::getDataSource($modelPath, $listen_to, $type);
+            $dataListenTo[$listen_to] = array_values($val)[0];
+        };
+        return view('components.controls.dropdown')->with(compact('dataListenTo', 'dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataUsers', 'listenersJson'));
     }
 }

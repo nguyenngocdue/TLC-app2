@@ -1,20 +1,26 @@
 {
     "_user_1": {
         "name": "_user_1",
+        "column_name": "user_1",
         "action": "reduce",
         "target": "department_1",
-        "listen_to": "department_1.head_of_department"
+        "listen_to": "department_1",
+        "listen_target": "head_of_department"
     },
     "_user_2": {
         "name": "_user_2",
+        "column_name": "user_2",
         "action": "reduce",
         "target": "department_2",
-        "listen_to": "user_2.department"
+        "listen_to": "user_2",
+        "listen_target": "department"
     },
     "_user_3": {
         "name": "_user_3",
+        "column_name": "user_3",
         "action": "reduce",
-        "target": "category_3",
-        "listen_to": "user_3.category"
+        "target": "category",
+        "listen_to": "user_3",
+        "listen_target": "category"
     }
 }
