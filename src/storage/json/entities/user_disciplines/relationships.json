@@ -1,11 +1,38 @@
 {
-    "_user": {
-        "name": "_user",
+    "_users": {
+        "name": "_users",
         "relationship": "hasMany",
+        "control_name": "users",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_icons",
         "renderer_edit_param": "getManyIconParams",
-        "control_name": "user"
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getAssignee": {
+        "name": "_getAssignee",
+        "relationship": "belongsTo",
+        "control_name": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getDefMonitors()": {
+        "name": "_getDefMonitors()",
+        "relationship": "getCheckedByField",
+        "control_name": "getDefMonitors()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }

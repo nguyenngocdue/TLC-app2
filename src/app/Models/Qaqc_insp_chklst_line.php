@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
-use App\Http\Traits\HasCheckbox;
 
 class Qaqc_insp_chklst_line extends ModelExtended
 {
-    use HasCheckbox;
     protected $fillable = [
         "id", "name", "description", "control_type_id", "value",
         "qaqc_insp_chklst_id", "qaqc_insp_sheet_id", "qaqc_insp_group_id",

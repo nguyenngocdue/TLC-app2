@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
-use App\Http\Traits\HasCheckbox;
 
 class Zunit_test_2 extends ModelExtended
 {
-    use HasCheckbox;
     protected $fillable = [
         'content',
         'radio_yes_no',

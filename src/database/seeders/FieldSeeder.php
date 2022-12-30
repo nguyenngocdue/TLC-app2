@@ -30,20 +30,22 @@ class FieldSeeder extends Seeder
         Field::create(['name' => 'featured_image', 'slug' => 'featured_image']);
         Field::create(['name' => 'insp_photos', 'slug' => 'insp_photos']);
         Field::create(['name' => 'insp_fail_photos', 'slug' => 'insp_fail_photos']);
-
         Field::create(['name' => 'workplaceRel1', 'slug' => 'workplaceRel1']);
         Field::create(['name' => 'workplaceRel2', 'slug' => 'workplaceRel2']);
+
         Field::create(['name' => 'checkboxYesNo', 'slug' => 'checkboxYesNo']);
         Field::create(['name' => 'checkboxPassFail', 'slug' => 'checkboxPassFail']);
         Field::create(['name' => 'dropdownMultiYesNo', 'slug' => 'dropdownMultiYesNo']);
         Field::create(['name' => 'dropdownMultiPassFail', 'slug' => 'dropdownMultiPassFail']);
         Field::create(['name' => 'checkbox', 'slug' => 'checkbox']);
+
         Field::create(['name' => 'dropdownMulti', 'slug' => 'dropdownMulti']);
         Field::create(['name' => 'newCheckbox', 'slug' => 'newCheckbox']);
-
         Field::create(['name' => 'getNoOfYesNo', 'slug' => 'getNoOfYesNo']);
         Field::create(['name' => 'getOnHoldOfYesNo', 'slug' => 'getOnHoldOfYesNo']);
         Field::create(['name' => 'getFailedOfPassFail', 'slug' => 'getFailedOfPassFail']);
+
         Field::create(['name' => 'getOnHoldOfPassFail', 'slug' => 'getOnHoldOfPassFail']);
+        Field::create(['name' => 'getDefMonitors', 'slug' => 'getDefMonitors']);
     }
 }

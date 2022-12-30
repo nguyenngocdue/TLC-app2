@@ -5,4 +5,4 @@
     $str = Str::of('item')->plural($count);
     $str = $count. " " . $str;
 @endphp
-<x-renderer.tag>{{$str}}</x-renderer.tag>
+<div class="text-center"><x-renderer.tag>{{$str}}</x-renderer.tag></div>

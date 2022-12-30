@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
-use App\Http\Traits\HasCheckbox;
 
 class Zunit_test_1 extends ModelExtended
 {
-    use HasCheckbox;
     protected $fillable = ["text1", "text2", "text3", "dropdown1", "radio1", "boolean1"];
     protected $primaryKey = 'id';
     protected $table = 'zunit_test_1s';

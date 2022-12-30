@@ -2,6 +2,7 @@
 
 namespace App\BigThink;
 
+use App\Http\Traits\HasCheckbox;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,7 @@ class ModelExtended extends Model
     use CheckPermissionEntities;
     use TraitMetaForChart;
     use TraitMenuTitle;
+    use HasCheckbox;
 
     public $eloquentParams = [];
     public $oracyParams = [];
