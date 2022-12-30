@@ -27,7 +27,7 @@ class Radio extends Component
         $modelPath = $this->modelPath;
         $type = $this->type;
 
-        $dataSource = Helper::getDataSource($modelPath, $colName, $type);
+        $dataSource = Helper::getDataSourceHasKeyTableName($modelPath, $colName, $type);
         // dd($dataSource);
         $currentEntity = Helper::getItemModel($this->type, $this->id) ?? [];
         if (is_null($dataSource) || gettype($dataSource) === 'string') {

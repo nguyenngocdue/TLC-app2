@@ -10,7 +10,7 @@ use Exception;
 
 class Helper
 {
-    private static function getDataFromPathModel($modelPath, $byFilters = [])
+    private static function getDataFromPathModelHasKeyTableName($modelPath, $byFilters = [])
     {
         $model = App::make($modelPath);
         $nameless = ($model->nameless);
@@ -28,6 +28,23 @@ class Helper
     }
 
 
+    private static function getDataFromPathModel($modelPath, $byFilters = [])
+    {
+        $model = App::make($modelPath);
+        $nameless = ($model->nameless);
+        $insTableSource = new $modelPath();
+        $tableName = $insTableSource->getTable();
+        $table = DB::table($tableName);
+        // dump($tableName);
+        if (count($byFilters)) {
+            // dd($tableName, $byFilters);
+            return [$tableName =>  $table->where($byFilters)->get()];
+        }
+        $dataSource =  $nameless ? $table->get() : $table->orderBy('name')->get();
+        return $dataSource;
+    }
+
+
     private static function filterConditionsInRel($type, $colName)
     {
         $relationships = Relationships::getAllOf($type);
@@ -37,6 +54,31 @@ class Helper
             $byFilters = [$elementRel['filter_columns'] => $elementRel['filter_values']];
         }
         return $byFilters;
+    }
+
+    public static function getDataSourceHasKeyTableName($modelPath, $colName, $type)
+    {
+        try {
+            // dd($colName);
+            $instance = new $modelPath;
+            $eloquentParam = $instance->eloquentParams;
+            $keyNameEloquent = "";
+            foreach ($eloquentParam as $key => $value) {
+                if (in_array($colName, $value)) {
+                    $keyNameEloquent = $key;
+                    break;
+                }
+            }
+            $byFilters = Helper::filterConditionsInRel($type, $colName);
+            $termModelPath = $eloquentParam[$keyNameEloquent][1];
+            // dump($termModelPath);
+
+            return Helper::getDataFromPathModelHasKeyTableName($termModelPath, $byFilters) ?? [];
+        } catch (Exception $e) {
+            dump($colName);
+            dump($eloquentParam);
+            dd($e->getMessage());
+        }
     }
 
     public static function getDataSource($modelPath, $colName, $type)
@@ -63,6 +105,9 @@ class Helper
             dd($e->getMessage());
         }
     }
+
+
+
 
     public static function getDataSourceByManyToMany($modelPath, $colName, $type)
     {

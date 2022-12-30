@@ -29,7 +29,7 @@ class Dropdown extends Component
         $modelPath = $this->modelPath;
         $type = $this->type;
 
-        $dataSource = Helper::getDataSource($modelPath, $colName, $type);
+        $dataSource = Helper::getDataSourceHasKeyTableName($modelPath, $colName, $type);
         $currentEntity = Helper::getItemModel($this->type, $this->id) ?? [];
 
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
@@ -37,15 +37,21 @@ class Dropdown extends Component
             return "<x-feedback.alert message='{$message}' type='warning' />";
         }
 
-        //TODO: load dynamic table, not only user
-        $dataUsers = DB::table('users')->get()->toArray();
         $listenersJson = Listeners::getAllOf($type);
-        $dataListenTo = [];
+        $dataListenTrigger = $this->getDataFromListenersJson('column_name', $listenersJson, $modelPath, $type);
+        $dataListenToField = $this->getDataFromListenersJson('listen_to_fields', $listenersJson, $modelPath, $type);
+
+        return view('components.controls.dropdown')->with(compact('dataListenToField', 'dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
+    }
+
+    public function getDataFromListenersJson($keyName = 'column_name', $listenersJson, $modelPath, $type)
+    {
+        $dataTarget = [];
         foreach ($listenersJson as $value) {
-            $listen_to = $value['listen_to'];
+            $listen_to = $value[$keyName];
             $val = Helper::getDataSource($modelPath, $listen_to, $type);
-            $dataListenTo[$listen_to] = array_values($val)[0];
+            $dataTarget[$listen_to] = $val->toArray();
         };
-        return view('components.controls.dropdown')->with(compact('dataListenTo', 'dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataUsers', 'listenersJson'));
+        return $dataTarget;
     }
 }

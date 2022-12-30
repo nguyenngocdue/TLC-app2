@@ -45,12 +45,31 @@ trait CreateEditControllerM2M
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
         $newDataInputHasArray = array_filter($dataInput, fn ($item) => is_array($item));
 
+
+        $array = $newDataInputHasArray;
         foreach ($newDataInputHasArray as $key => $value) {
+            $keyColName = str_replace('delAll', '', $key);
+            $isCheckMark = isset($newDataInputHasArray[$keyColName]);
+            if ($isCheckMark) {
+                unset($array[$keyColName . 'delAll']);
+            }
+        }
+
+        foreach ($array as $key => $value) {
             $valueInt = array_map(fn ($i) => $i * 1, $value);
 
-            $termModelPath = $data->oracyParams[$key][1];
-            $fixFieldName = str_replace('()', '', $key);
-            $data->syncCheck($allFields[$fixFieldName], $termModelPath, $valueInt);
+            $keyColName = str_replace('delAll', '', $key);
+            $isCheckMark = isset($newDataInputHasArray[$keyColName]);
+
+            if ($isCheckMark || !str_contains($key, 'delAll')) {
+                $termModelPath = $data->oracyParams[$key][1];
+                $fixFieldName = str_replace('()', '', $key);
+                $data->syncCheck($allFields[$fixFieldName], $termModelPath, $valueInt);
+            } else {
+                $termModelPath = $data->oracyParams[$keyColName][1];
+                $fixFieldName = str_replace('()', '', $keyColName);
+                $data->detachCheck($allFields[$fixFieldName], $termModelPath, $valueInt);
+            }
         }
     }
 
