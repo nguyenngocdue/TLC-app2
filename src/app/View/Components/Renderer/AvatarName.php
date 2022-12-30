@@ -16,7 +16,7 @@ class AvatarName extends Component
         private $href = "",
         private $gray = false,
     ) {
-        $src = "https://cdn.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.webp";
+        $src = "/images/avatar.jpg";
         $this->avatar = (!$this->avatar || $this->avatar === 'avatar') ? $src : $this->avatar;
     }
 

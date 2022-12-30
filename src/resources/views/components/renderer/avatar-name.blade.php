@@ -9,7 +9,7 @@ foreach ( explode(",", $rendererParam) as $param) {
 @endif
 
 @php
-$avatar = $avatar ? $avatar : "https://cdn.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.webp";
+$avatar = $avatar ? $avatar : "/images/avatar.jpg";
 $bg_gray = $gray ? "bg-gray-300":"";
 $txt_gray = $gray ? "text-gray-600" : "";
 @endphp
