@@ -20,6 +20,12 @@ return new class extends Migration
         Schema::table('many_to_many', function (Blueprint $table) {
             $table->foreign('field_id')->references('id')->on('fields')->onDelete('cascade');
         });
+        Schema::table('comments', function (Blueprint $table) {
+            $table->foreign('category')->references('id')->on('fields')->onDelete('cascade');
+        });
+        Schema::table('attachments', function (Blueprint $table) {
+            $table->foreign('category')->references('id')->on('fields')->onDelete('cascade');
+        });
         //************** USER MODULE **************/
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('workplace')->references('id')->on('workplaces')->onDelete('cascade');

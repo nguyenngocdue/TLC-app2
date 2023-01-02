@@ -111,6 +111,7 @@ trait HasCheckbox
 
     //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [2,3])
     //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [2,3,5])
+    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [])
     function syncCheck($fieldNameOrId, $termModelPath, array $ids)
     {
         $fieldId = $this->guessFieldId($fieldNameOrId);

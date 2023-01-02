@@ -24,11 +24,11 @@ return new class extends Migration
             $table->double('number_injured_person');
             $table->double('number_involved_person');
             $table->text('issue_description');
-            $table->boolean('accident_book_entry');
-            $table->dateTime('time_in_hospital');
-            $table->dateTime('time_out_hospital');
+            $table->boolean('accident_book_entry')->nullable();
+            $table->dateTime('time_in_hospital')->nullable();
+            $table->dateTime('time_out_hospital')->nullable();
 
-            $table->text('investigation_finding');
+            $table->text('investigation_finding')->nullable();
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;

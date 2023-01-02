@@ -38,7 +38,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_issue_datetime": {
@@ -52,7 +52,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_injured_person": {
@@ -66,7 +66,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_line_manager": {
@@ -80,7 +80,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_report_person": {
@@ -94,7 +94,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_number_injured_person": {
@@ -108,7 +108,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_number_involved_person": {
@@ -122,7 +122,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_divider1": {
@@ -164,7 +164,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "true",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_divider2": {
@@ -324,7 +324,35 @@
     "_comment_1": {
         "name": "_comment_1",
         "column_name": "comment_1",
-        "column_type": "static",
+        "column_type": "text",
+        "label": "Comment by Clinic",
+        "control": "comment",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "true",
+        "validation": "",
+        "formula": ""
+    },
+    "_comment_2": {
+        "name": "_comment_2",
+        "column_name": "comment_2",
+        "column_type": "text",
+        "label": "Comment by Clinic",
+        "control": "comment",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "true",
+        "validation": "",
+        "formula": ""
+    },
+    "_comment_3": {
+        "name": "_comment_3",
+        "column_name": "comment_3",
+        "column_type": "text",
         "label": "Comment by Clinic",
         "control": "comment",
         "col_span": "12",
@@ -608,6 +636,20 @@
         "label": "",
         "control": "z_h5",
         "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_comments": {
+        "name": "_comments",
+        "column_name": "comments",
+        "column_type": "eloquent_prop",
+        "label": "Comments",
+        "control": "",
+        "col_span": "",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
