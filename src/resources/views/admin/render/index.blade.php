@@ -115,5 +115,6 @@
             @include('admin.render.edit')
         </div>
     </main>
-    <script src="{{ asset('js/render.js') }}"></script>
+    <script src="{{ asset('js/edit-delete-permission.js') }}"></script>
+    {{-- render.blade --}}
 @endsection

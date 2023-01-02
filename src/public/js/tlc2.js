@@ -4,14 +4,10 @@
 //     },
 // })
 // $(document).ready(function () {
-//     $('.btn-uploadfiles').click(function (e) {
-//         var url = $(this).attr('data-url')
-//         $('#modal-upload').modal('show')
-//         e.preventDefault()
-//     })
 //     $('.btn-delete').click(function () {
 //         var url = $(this).attr('data-url')
 //         var _this = $(this)
+//         console.log(url)
 //         Swal.fire({
 //             title: 'Are you sure?',
 //             text: "You won't be able to revert this!",
@@ -33,9 +29,31 @@
 //                         )
 //                         setTimeout(location.reload.bind(location), 1000)
 //                     },
-//                     error: function (jqXHR, textStatus, errorThrown) {},
+//                     error: function (jqXHR, textStatus, errorThrown) { },
 //                 })
 //             }
 //         })
+//     })
+
+//     $('#listMenus li a').click(function (e) {
+//         if ($(this).hasClass('active')) {
+//             $(this).removeClass('active')
+//         } else {
+//             $(this).addClass('active')
+//         }
+//     })
+//     $('.checkbox-toggle').click(function (e) {
+//         var hideColumn = $(this).attr('name')
+//         if ($('.checkbox-toggle').is(':checked')) {
+//             $('.' + hideColumn + '_th').toggle(this.checked)
+//             $('.' + hideColumn + '_td').toggle(this.checked)
+//         }
+//     })
+//     $('.checkbox-toggle').each(function (i, e) {
+//         var hideColumn = $(e).attr('name')
+//         if (!$(e).is(':checked')) {
+//             $('.' + hideColumn + '_th').hide()
+//             $('.' + hideColumn + '_td').hide()
+//         }
 //     })
 // })

@@ -11,5 +11,5 @@
 <body>
     @yield('content')
 </body>
-
+appauth.blade.php
 </html>

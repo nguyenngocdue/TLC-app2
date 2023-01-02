@@ -16,5 +16,5 @@
 <body>
     @yield('content')
 </body>
-
+applean.blade.php
 </html>

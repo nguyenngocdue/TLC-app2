@@ -19,7 +19,7 @@ $(document).ready(function () {
                     '/admin/' + response.type + '/' + response.data.id
                 )
             },
-            error: function (error) {},
+            error: function (error) { },
         })
     })
 
@@ -43,7 +43,7 @@ $(document).ready(function () {
                         Swal.fire('Deleted!', response.message, 'success')
                         setTimeout(location.reload.bind(location), 1000)
                     },
-                    error: function (jqXHR, textStatus, errorThrown) {},
+                    error: function (jqXHR, textStatus, errorThrown) { },
                 })
             }
         })
