@@ -40,7 +40,6 @@ class Dropdown extends Component
         $listenersJson = Listeners::getAllOf($type);
         $dataListenTrigger = $this->getDataFromListenersJson('column_name', $listenersJson, $modelPath, $type);
         $dataListenToField = $this->getDataFromListenersJson('listen_to_fields', $listenersJson, $modelPath, $type);
-
         return view('components.controls.dropdown')->with(compact('dataListenToField', 'dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
     }
 
