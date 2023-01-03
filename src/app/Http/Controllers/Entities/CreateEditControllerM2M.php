@@ -41,11 +41,9 @@ trait CreateEditControllerM2M
 
     private function syncManyToManyToDB($data, $dataInput)
     {
-
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
-        $newDataInputIsArray = array_filter($dataInput, fn ($item) => is_array($item));
 
-
+        $newDataInputIsArray = array_filter($dataInput, fn ($item) => is_array($item) && gettype(array_values($item)[0]) !== 'object');
         $array = $newDataInputIsArray;
 
         foreach ($newDataInputIsArray as $key => $value) {
@@ -59,7 +57,6 @@ trait CreateEditControllerM2M
         //** Censored */
         foreach ($array as $key => $value) {
             $valueInt = array_map(fn ($i) => $i * 1, $value);
-
             $keyColName = str_replace('delAll', '', $key);
 
             if (isset($array[$keyColName]) || !str_contains($key, 'delAll')) {
