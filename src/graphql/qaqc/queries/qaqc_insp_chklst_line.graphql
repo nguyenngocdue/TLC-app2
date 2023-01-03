@@ -15,6 +15,7 @@ type Qaqc_insp_chklst_line {
     qaqc_insp_control_group_id: ID
     name: String!
     description: String!
+    value: String
     getControlType: Control_type! @belongsTo
     getChklst: Qaqc_insp_chklst! @belongsTo
     getSheet: Qaqc_insp_sheet! @belongsTo
