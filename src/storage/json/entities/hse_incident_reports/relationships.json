@@ -57,7 +57,7 @@
         "renderer_edit_param": "",
         "filter_columns": "field_id",
         "filter_values": "101",
-        "radio_checkbox_colspan": "4"
+        "radio_checkbox_colspan": "3"
     },
     "_natureOfInjury()": {
         "name": "_natureOfInjury()",
@@ -93,7 +93,7 @@
         "renderer_edit_param": "",
         "filter_columns": "field_id",
         "filter_values": "104",
-        "radio_checkbox_colspan": "4"
+        "radio_checkbox_colspan": "3"
     },
     "_causeOfIssue()": {
         "name": "_causeOfIssue()",
