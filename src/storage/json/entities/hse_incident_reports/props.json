@@ -27,20 +27,6 @@
         "validation": "",
         "formula": ""
     },
-    "_issue_location": {
-        "name": "_issue_location",
-        "column_name": "issue_location",
-        "column_type": "string",
-        "label": "Location of Issue",
-        "control": "text",
-        "col_span": "12",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
-    },
     "_issue_datetime": {
         "name": "_issue_datetime",
         "column_name": "issue_datetime",
@@ -298,20 +284,6 @@
         "column_name": "treatmentInstruction()",
         "column_type": "oracy_prop",
         "label": "Instruction to Injured Person",
-        "control": "checkbox",
-        "col_span": "12",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "true",
-        "validation": "",
-        "formula": ""
-    },
-    "_accidentClassification()": {
-        "name": "_accidentClassification()",
-        "column_name": "accidentClassification()",
-        "column_type": "oracy_prop",
-        "label": "Accident Classification",
         "control": "checkbox",
         "col_span": "12",
         "width": "",

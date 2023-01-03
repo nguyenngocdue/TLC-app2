@@ -8,7 +8,7 @@ class Hse_incident_report extends ModelExtended
 {
     public $menuTitle = "HSE Incident Reports";
     protected $fillable = [
-        'id', 'issue_location', 'issue_datetime', 'injured_person', 'line_manager', 'report_person',
+        'id', 'issue_location_id', 'issue_datetime', 'injured_person', 'line_manager', 'report_person',
         'number_injured_person', 'number_involved_person', 'issue_description',
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
     ];
@@ -25,7 +25,7 @@ class Hse_incident_report extends ModelExtended
         "mainAffectedPart()" => ["getCheckedByField", Term::class],
         "natureOfInjury()" => ["getCheckedByField", Term::class],
         "treatmentInstruction()" => ["getCheckedByField", Term::class],
-        "accidentClassification()" => ["getCheckedByField", Term::class],
+        // "accidentClassification()" => ["getCheckedByField", Term::class],
         "causeOfIssue()" => ["getCheckedByField", Term::class],
         "activityLeadToIssue()" => ["getCheckedByField", Term::class],
         "immediateCause()" => ["getCheckedByField", Term::class],
@@ -68,11 +68,11 @@ class Hse_incident_report extends ModelExtended
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    public function accidentClassification()
-    {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
+    // public function accidentClassification()
+    // {
+    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    // }
     public function causeOfIssue()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
