@@ -1,10 +1,6 @@
-@php
-$valDataSource = array_values($dataSource)[0];
-$ids = array_column($valDataSource->toArray(), 'id');
-// dump($ids);
-@endphp
+{{-- @dd($dataSource); --}}
 <div class="grid grid-cols-12  gap-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-    @foreach($valDataSource as $data)
+    @foreach($dataSource as $data)
     <div class="items-cent1er bg-white-50 col-span-{{$span}} flex align-center ">
         @php
         $selected = is_null(old($colName)) ? isset($idsChecked) && in_array($data->id, $idsChecked) : in_array($data->id, old($colName));

@@ -28,6 +28,7 @@ trait CreateEditControllerMedia
 
     private function setMediaParent($data, $colNamesHaveAttachment)
     {
+        // dd($data);
         $owner_id =  (int)Auth::user()->id;
         $uploadedIdColumnNames = json_decode(DB::table('attachments')->where([['owner_id', '=', $owner_id], ['object_id', '=', null], ['object_type', '=', null]])->select('id', 'category')->get(), true);
         $ids_idCates_media =  array_column($uploadedIdColumnNames, 'category', 'id');

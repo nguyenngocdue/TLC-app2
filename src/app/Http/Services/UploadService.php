@@ -17,7 +17,7 @@ class UploadService
     public function store($request)
     {
 
-        // dd($request);
+        // dd($request->files);
         try {
             $id_name_cate = Helper::getDataDbByName('fields', 'name', 'id');
             $filesUpload = $request->files;

@@ -38,7 +38,7 @@ class Helper
         // dump($tableName);
         if (count($byFilters)) {
             // dd($tableName, $byFilters);
-            return [$tableName =>  $table->where($byFilters)->get()];
+            return $table->where($byFilters)->get();
         }
         $dataSource =  $nameless ? $table->get() : $table->orderBy('name')->get();
         return $dataSource;

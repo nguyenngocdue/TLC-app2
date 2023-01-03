@@ -45,6 +45,7 @@ class Checkbox extends Component
         $idsChecked = is_null($item =  $modelPath::find($this->id)) ? [] : $item->getCheckedByField($allFields[$keyColName], '')->pluck('id')->toArray();
 
         $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
+
         if (is_null($dataSource) || gettype($dataSource) === 'string') return "<x-feedback.alert message='Not found record \"$colName\" in  Fields.' type='warning' />";
 
         $span = Helper::getColSpan($colName, $type);

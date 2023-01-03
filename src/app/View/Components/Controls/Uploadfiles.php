@@ -36,13 +36,22 @@ class Uploadfiles extends Component
 
         $_mediaDB = $action === 'create' ? [] : $mediaDB;
         $mergeMediaDB  = array_merge($_mediaDB, $orphanAttachmentDB);
+
         $attachmentData = [];
         foreach ($mergeMediaDB as $attach) {
-            if ($idNameCatesDB[$attach['category']] === $name) {
-                $ele = (array)DB::table('attachments')->find($attach['id']);
-                $attachmentData[$name][] = $ele;
+            $ele = (array)DB::table('attachments')->find($attach['id']);
+            $checkName = $idNameCatesDB[$attach['category']] === $name;
+            if ($id) {
+                if ($checkName && $id * 1 === $attach['object_id']) {
+                    $attachmentData[$name][] = $ele;
+                }
+            } else {
+                if ($checkName) {
+                    $attachmentData[$name][] = $ele;
+                }
             }
         }
+
         $showToBeDeleted = env('APP_ENV') === 'local';
         return view('components.controls.uploadfiles')->with(compact('action', 'attachmentData', 'name', 'label', 'showToBeDeleted', 'path'));
     }

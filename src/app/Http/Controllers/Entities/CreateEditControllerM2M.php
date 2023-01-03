@@ -41,36 +41,32 @@ trait CreateEditControllerM2M
 
     private function syncManyToManyToDB($data, $dataInput)
     {
-
         $allFields = Helper::getDataDbByName('fields', 'name', 'id');
-        $newDataInputHasArray = array_filter($dataInput, fn ($item) => is_array($item));
 
+        $newDataInputIsArray = array_filter($dataInput, fn ($item) => is_array($item) && gettype(array_values($item)[0]) !== 'object');
+        $array = $newDataInputIsArray;
 
-        $array = $newDataInputHasArray;
-        foreach ($newDataInputHasArray as $key => $value) {
+        foreach ($newDataInputIsArray as $key => $value) {
             $keyColName = str_replace('delAll', '', $key);
-            $isCheckMark = isset($newDataInputHasArray[$keyColName]);
-            if ($isCheckMark) {
+            $hasCheck = isset($newDataInputIsArray[$keyColName]);
+            if ($hasCheck) {
                 unset($array[$keyColName . 'delAll']);
             }
         }
 
-
         //** Censored */
         foreach ($array as $key => $value) {
             $valueInt = array_map(fn ($i) => $i * 1, $value);
-
             $keyColName = str_replace('delAll', '', $key);
-            $isCheckMark = isset($newDataInputHasArray[$keyColName]);
 
-            if ($isCheckMark || !str_contains($key, 'delAll')) {
+            if (isset($array[$keyColName]) || !str_contains($key, 'delAll')) {
                 $termModelPath = $data->oracyParams[$key][1];
-                $fixFieldName = str_replace('()', '', $key);
-                $data->syncCheck($allFields[$fixFieldName], $termModelPath, $valueInt);
+                $fieldName = str_replace('()', '', $key);
+                $data->syncCheck($allFields[$fieldName], $termModelPath, $valueInt);
             } else {
                 $termModelPath = $data->oracyParams[$keyColName][1];
-                $fixFieldName = str_replace('()', '', $keyColName);
-                $data->detachCheck($allFields[$fixFieldName], $termModelPath, $valueInt);
+                $fieldName = str_replace('()', '', $keyColName);
+                $data->detachCheck($allFields[$fieldName], $termModelPath, $valueInt);
             }
         }
     }
