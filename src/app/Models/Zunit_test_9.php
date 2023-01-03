@@ -20,8 +20,11 @@ class Zunit_test_9 extends ModelExtended
         "getCategory" => ['belongsTo', User_category::class, 'category'],
         "user3" => ['belongsTo', User::class, 'user_3'],
 
-        "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project'],
+        "getSubProject1" => ['belongsTo', Sub_project::class, 'sub_project_1'],
         "getProdOrder1" => ['belongsTo', Prod_order::class, 'prod_order_1'],
+
+        "getProdRouting1" => ['belongsTo', Prod_routing::class, 'prod_routing_1'],
+
 
     ];
 
@@ -55,12 +58,17 @@ class Zunit_test_9 extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getSubProject()
+    public function getSubProject1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getProdOrder1()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getProdRouting1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

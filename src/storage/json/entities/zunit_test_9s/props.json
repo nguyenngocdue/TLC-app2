@@ -105,7 +105,7 @@
     },
     "_sub_project": {
         "name": "_sub_project",
-        "column_name": "sub_project",
+        "column_name": "sub_project_1",
         "column_type": "string",
         "label": "Sub-Project",
         "control": "dropdown",
