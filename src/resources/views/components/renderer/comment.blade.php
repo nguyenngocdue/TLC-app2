@@ -8,8 +8,7 @@ $isEmptyContent = $content === '';
 $isDestroyable = $action === 'create';
 
 $date = $action === 'create' ? $data['created_at'] : $data['updated_at'] ?? '';
-$timestamp = strtotime($date);
-$time = $action === 'create' ? $date : date("d/m/Y H:i:s", $timestamp);
+$time = $date ? date("d/m/Y H:i:s", strtotime($date)) : date("d/m/Y H:i:s");
 @endphp
 
 <div id="fillColor_{{$data['id']}}" class="p-4 bg-gray-250  border rounded-lg shadow-md ">
