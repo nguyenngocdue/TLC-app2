@@ -187,6 +187,16 @@ abstract class AbstractPropController extends Controller
         }
     }
 
+    private function handleMoveTo(&$result)
+    {
+        foreach ($result as $key => $line) {
+            if (isset($line['move_to']) && is_numeric($line['move_to'])) {
+                Props::moveTo($result, $line['move_to'] - 1, $key);
+            }
+        }
+        foreach ($result as &$line) unset($line['move_to']);
+    }
+
     private function getDataSource()
     {
         $result0 = $this->makeBlankDefaultObject();
@@ -244,12 +254,13 @@ abstract class AbstractPropController extends Controller
         $columns = array_filter($this->getColumns(), fn ($column) => !in_array($column['dataIndex'], ['action']));
         $result = Props::convertHttpObjectToJson($data, $columns);
         // dd($result);
-        foreach ($result as $key => $line) {
-            if (isset($line['move_to']) && is_numeric($line['move_to'])) {
-                Props::moveTo($result, $line['move_to'] - 1, $key);
-            }
-        }
-        foreach ($result as &$line) unset($line['move_to']);
+        $this->handleMoveTo($result);
+        // foreach ($result as $key => $line) {
+        //     if (isset($line['move_to']) && is_numeric($line['move_to'])) {
+        //         Props::moveTo($result, $line['move_to'] - 1, $key);
+        //     }
+        // }
+        // foreach ($result as &$line) unset($line['move_to']);
         // dd($result);
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));

@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -53,5 +54,24 @@ class JsonGetSet
         } catch (\Throwable $th) {
             Toastr::warning($th, 'Save file json');
         }
+    }
+
+    public static function move(&$json, $direction, $key)
+    {
+        $json = array_values($json);
+        for ($index = 0; $index < sizeof($json); $index++) if ($json[$index]['name'] === $key) break;
+        $json = Arr::moveDirection($json, $direction, $index, $key);
+        $json = Arr::keyBy($json, "name");
+    }
+
+    public static function moveTo(&$json, $newIndex, $key)
+    {
+        // dump($newIndex . " - " . $key);
+        $json = array_values($json);
+        // dump($json);
+        for ($index = 0; $index < sizeof($json); $index++) if ($json[$index]['name'] === $key) break;
+        $json = Arr::moveTo($json, $index, $newIndex);
+        // dump($json);
+        $json = Arr::keyBy($json, "name");
     }
 }
