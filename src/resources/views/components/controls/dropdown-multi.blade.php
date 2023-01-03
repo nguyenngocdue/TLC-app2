@@ -14,7 +14,6 @@ $editColName = str_replace('()', '', $colName);
     <option selected value="{{$data->id}}">{{$data->name}}</option>
     @endforeach
 </select>
-
 @include('components.feedback.alertValidation')
 
 <script type="text/javascript">

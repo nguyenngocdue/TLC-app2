@@ -87,6 +87,7 @@ abstract class AbstractCreateEditController extends Controller
 		$deletedMediaIds = $this->deleteMediaIfNeeded($dataInput);
 		$idsMedia = $this->saveAndGetIdsMedia($request, $dataInput);
 
+
 		// dd($idsMedia);
 		$dataInput = $this->apply_formula($dataInput, $this->type);
 
@@ -126,10 +127,8 @@ abstract class AbstractCreateEditController extends Controller
 				// $event = event(new SendEmailItemCreated(['id' => $data->id, 'type' => $this->type]));
 				// dd($event);
 
-				if ($idsMedia) {
-					$this->setMediaParent($newItem, $colNamesHaveAttachment);
-					// $this->updateMediaIdsToDBFields($_data, $colNamesHaveAttachment);
-				}
+				$this->setMediaParent($newItem, $colNamesHaveAttachment);
+				// $this->updateMediaIdsToDBFields($_data, $colNamesHaveAttachment);
 
 				Toastr::success("$this->type created successfully", "Create $this->type");
 			}
@@ -215,7 +214,6 @@ abstract class AbstractCreateEditController extends Controller
 		foreach ($toggleControls as $toggle) {
 			$dataInput[$toggle] = isset($dataInput[$toggle]) ? ($method === 'store' ? $dataInput[$toggle] : 1)  : null;
 		}
-
 		return $dataInput;
 	}
 
