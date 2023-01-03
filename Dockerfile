@@ -31,4 +31,4 @@ RUN adduser -D -u 1000 ndc -G ndcgp
 
 RUN chown -R ndc:ndcgp /var/www/app
 
-USER ndc
+# USER ndc
