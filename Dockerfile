@@ -30,6 +30,6 @@ RUN addgroup -g 1000 ndcgp
 RUN adduser -D -u 1000 ndc -G ndcgp
 
 # run this line manually by root accout
-# RUN chown -R ndc:ndcgp /var/www/app
+RUN chown -R ndc:ndcgp /var/www/app
 
-# USER ndc
+USER ndc
