@@ -50,13 +50,16 @@ $colNameListenJson = array_column($listenersJson,'column_name');
     </script>
     @endonce
 
+
+
     <script type="text/javascript">
         $("#{{$idDomListener}}").select2({
             placeholder: "Please select"
             , allowClear: true
         });
-        // console.log(k1, k1["{{$colName}}"]);
-        strHtmlListener = k1["{{$colName}}"].map((item, index) => {
+        indexName = "{{$colName}}".includes('user') ? "users" : "{{$colName}}";
+
+        strHtmlListener = k1[indexName].map((item, index) => {
             checkSelected = @json($selected) === item.id ? "selected" : "";
             return ` <option ${checkSelected} value=${item.id}>${item.name}</option>`
         })
@@ -73,8 +76,11 @@ $colNameListenJson = array_column($listenersJson,'column_name');
             listenToFied = objListener.listen_to_fields;
             column_name = objListener.column_name;
 
-            dataListenTo = Object.values(k2[listenToFied]);
-            // console.log('dataListenTo', listenToAttr);
+
+            usersfield = listenToFied.includes('user') ? "users" : listenToFied;
+            dataListenTo = Object.values(k2[usersfield]);
+            // console.log('dataListenTo', dataListenTo, listenToFied, column_name);
+
             itemsDB = [];
             if (listenToFied === column_name) {
                 itemsDB = dataListenTo.filter(ele => {
@@ -84,7 +90,8 @@ $colNameListenJson = array_column($listenersJson,'column_name');
                 dataListenTo.forEach(ele => {
                     if (ele.id === value) {
                         idListener = ele[listenToAttr];
-                        itemsDB = k1[column_name].filter(u => u.id === idListener);
+                        key = column_name.includes('user') ? "users" : column_name;
+                        itemsDB = k1[key].filter(u => u.id === idListener);
                     }
                 })
             }
