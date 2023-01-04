@@ -42,7 +42,7 @@ trait CreateEditControllerComment
             $comment = Comment::find($id);
             foreach ($id_ColNameMedia as $key => $value) {
                 if ($value === $idsNamesAttDB[$comment->category]) {
-                    $comment->media()->save(Attachment::find($key));
+                    $comment->attachment()->save(Attachment::find($key));
                 }
             }
         }
@@ -61,7 +61,7 @@ trait CreateEditControllerComment
             if (str_contains($key, 'comment_deleted_')) {
                 $itemComment = Comment::find($value * 1);
                 if (!is_null($itemComment)) {
-                    $idsAtt = $itemComment->media()->pluck('id');
+                    $idsAtt = $itemComment->attachment()->pluck('id');
                     $delItem = $itemComment->delete();
                     foreach ($idsAtt as $id) {
                         Attachment::find($id)->delete();

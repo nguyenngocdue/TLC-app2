@@ -58,7 +58,7 @@ class Comment extends Component
         $commentUser = ModelsComment::find($data['id']);
         $attachmentData = $this->attachmentData;
         if (!is_null($commentUser) && count($attachmentData) === 0) {
-            $attachmentData = [$name => $commentUser->media()->get()->toArray()];
+            $attachmentData = [$name => $commentUser->attachment()->get()->toArray()];
         }
         $showToBeDeleted = $this->showToBeDeleted;
         // dump('DataComment', $data);

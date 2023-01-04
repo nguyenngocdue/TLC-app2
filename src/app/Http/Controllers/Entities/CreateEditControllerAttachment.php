@@ -40,7 +40,7 @@ trait CreateEditControllerAttachment
             foreach ($ids_idCates_media as $key => $value) {
                 if (in_array($ids_names_mediaCateTb[$value], $colNamesHaveAttachment)) {
                     if (!is_null($db = Attachment::find($key))) {
-                        $data->media()->save($db);
+                        $data->attachment()->save($db);
                     }
                 }
             }
