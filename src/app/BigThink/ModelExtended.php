@@ -31,4 +31,10 @@ class ModelExtended extends Model
             // 'slug' => $this->slug,
         ];
     }
+
+    //This static function is useful when a model is needed to get table name but data also is empty
+    public static function getTableName()
+    {
+        return (new static())->getTable();
+    }
 }

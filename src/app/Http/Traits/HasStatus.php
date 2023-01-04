@@ -4,22 +4,21 @@ namespace App\Http\Traits;
 
 use App\Events\StatusEnteredEvent;
 use App\Events\StatusLeavingEvent;
-use App\Helpers\Helper;
 use App\Http\Controllers\Workflow\LibStatuses;
 use Exception;
 
 trait HasStatus
 {
-    function getAvailableStatuses()
+    static function getAvailableStatuses()
     {
-        $plural = $this->getTable();
+        $plural = static::getTableName();
         $statuses = LibStatuses::getFor($plural);
         return array_keys($statuses);
     }
 
     function transitionTo($newStatus)
     {
-        $available = $this->getAvailableStatuses();
+        $available = $this::getAvailableStatuses();
         if (!in_array($newStatus, $available)) {
             throw new Exception("The status [$newStatus] is not available for this Model. Availabilities are [" . join(", ", $available) . "]");
         }

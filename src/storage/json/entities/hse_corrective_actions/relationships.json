@@ -1,0 +1,38 @@
+{
+    "_getHseIncidentReport": {
+        "name": "_getHseIncidentReport",
+        "relationship": "belongsTo",
+        "control_name": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getWorkArea": {
+        "name": "_getWorkArea",
+        "relationship": "belongsTo",
+        "control_name": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getAssignee": {
+        "name": "_getAssignee",
+        "relationship": "belongsTo",
+        "control_name": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    }
+}
