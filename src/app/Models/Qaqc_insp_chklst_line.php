@@ -8,14 +8,14 @@ class Qaqc_insp_chklst_line extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "control_type_id", "value",
-        "qaqc_insp_chklst_id", "qaqc_insp_sheet_id", "qaqc_insp_group_id",
+        "qaqc_insp_chklst_id", "qaqc_insp_chklst_sht_id", "qaqc_insp_group_id",
         "qaqc_insp_control_value_id", "qaqc_insp_control_group_id",
     ];
     protected $table = "qaqc_insp_chklst_lines";
 
     public $eloquentParams = [
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, "qaqc_insp_chklst_id"],
-        "getSheet" => ["belongsTo", Qaqc_insp_sheet::class, "qaqc_insp_sheet_id"],
+        "getSheet" => ["belongsTo", Qaqc_insp_sheet::class, "qaqc_insp_chklst_sht_id"],
         "getGroup" => ["belongsTo", Qaqc_insp_group::class, "qaqc_insp_group_id"],
         "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],
         "getControlValue" => ["belongsTo", Qaqc_insp_control_value::class, "qaqc_insp_control_value_id"],

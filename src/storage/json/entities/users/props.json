@@ -629,9 +629,9 @@
         "validation": "",
         "formula": ""
     },
-    "_media": {
-        "name": "_media",
-        "column_name": "media",
+    "_attachment": {
+        "name": "_attachment",
+        "column_name": "attachment",
         "column_type": "eloquent_prop",
         "label": "Attachments",
         "control": "",
