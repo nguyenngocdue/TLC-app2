@@ -6,7 +6,7 @@ use App\Events\ProdSequenceUpdatedEvent;
 use App\Models\Prod_run;
 use Carbon\Carbon;
 
-final class StoreProdRunLine
+final class StoreProdRun
 {
     /**
      * @param  null  $_
