@@ -36,6 +36,7 @@ trait CreateEditControllerAttachment
         $media_cateTb = json_decode(DB::table('fields')->select('id', 'name')->get(), true);
         $ids_names_mediaCateTb = array_column($media_cateTb, 'name', 'id');
 
+        // dd($colNamesHaveAttachment);
         if (!is_null($data) && (!is_null($uploadedIdColumnNames)) && count($uploadedIdColumnNames) > 0) {
             foreach ($ids_idCates_media as $key => $value) {
                 if (in_array($ids_names_mediaCateTb[$value], $colNamesHaveAttachment)) {
