@@ -615,11 +615,11 @@
         "validation": "",
         "formula": ""
     },
-    "_productionRunLines": {
-        "name": "_productionRunLines",
-        "column_name": "productionRunLines",
+    "_productionRuns": {
+        "name": "_productionRuns",
+        "column_name": "productionRuns",
         "column_type": "eloquent_prop",
-        "label": "Prod Lines",
+        "label": "Prod Runs",
         "control": "",
         "col_span": "12",
         "width": "",
@@ -629,9 +629,9 @@
         "validation": "",
         "formula": ""
     },
-    "_media": {
-        "name": "_media",
-        "column_name": "media",
+    "_attachment": {
+        "name": "_attachment",
+        "column_name": "attachment",
         "column_type": "eloquent_prop",
         "label": "Attachments",
         "control": "",

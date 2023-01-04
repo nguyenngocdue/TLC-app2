@@ -14,7 +14,7 @@ class Prod_routing extends ModelExtended
     public $eloquentParams = [
         "prodRoutingLinks" => ['belongsToMany', Prod_routing_link::class, 'prod_routing_details', 'prod_routing_id', 'prod_routing_link_id'],
         "prodOrders" => ['hasMany', Prod_order::class],
-        "prodRuns" => ["hasManyThrough", Prod_run::class, Prod_order::class],
+        "prodSequences" => ["hasManyThrough", Prod_sequence::class, Prod_order::class],
     ];
 
     public function prodRoutingLinks()
@@ -29,7 +29,7 @@ class Prod_routing extends ModelExtended
         return $this->{$p[0]}($p[1]);
     }
 
-    public function prodRuns()
+    public function prodSequences()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

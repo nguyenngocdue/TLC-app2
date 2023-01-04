@@ -38,7 +38,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_head_of_department": {

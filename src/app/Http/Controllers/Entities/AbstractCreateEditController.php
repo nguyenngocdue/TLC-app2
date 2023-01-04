@@ -77,7 +77,7 @@ abstract class AbstractCreateEditController extends Controller
 	public function store(Request $request)
 	{
 		$props = Props::getAllOf($this->type);
-		$colNamesHaveAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
+		$colNamesHaveAttachment = Helper::getColNamesByControl($props, 'attachment');
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at', 'id'], $colNamesHaveAttachment);
 		$dataInput =  array_merge(['id' => null], $request->except($arrayExcept));
 
@@ -144,7 +144,7 @@ abstract class AbstractCreateEditController extends Controller
 		$props = Props::getAllOf($this->type);
 
 		// dd($request->all());
-		$colNamesHaveAttachment = Helper::getColNamesByControlAndColumnType($props, 'attachment', 'string');
+		$colNamesHaveAttachment = Helper::getColNamesByControl($props, 'attachment');
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at'], $colNamesHaveAttachment);
 		$dataInput = $request->except($arrayExcept);
 		// dd($dataInput);
@@ -224,7 +224,7 @@ abstract class AbstractCreateEditController extends Controller
 
 	// private function updateMediaIdsToDBFields($data, $colNamesHaveAttachment)
 	// {
-	// 	$morphManyMediaUser = $data->media()->select('id', 'category')->get()->toArray();
+	// 	$morphManyMediaUser = $data->attachment()->select('id', 'category')->get()->toArray();
 	// 	$media_cateTb = DB::table('fields')->select('id', 'name')->get()->toArray();
 
 	// 	$ids_names_cateMediaDB = array_column($media_cateTb, 'name', 'id');

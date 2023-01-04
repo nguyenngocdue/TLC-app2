@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Zunit_test_9 extends ModelExtended
 {
-    protected $fillable = ['content', 'department_1', 'department_2', 'category', 'sub_project',  'user_1', 'user_2', 'user_3', 'prod_order_1'];
+    protected $fillable = ['content', 'department_1', 'department_2', 'category_id', 'sub_project_1',  'user_1', 'user_2', 'user_3', 'prod_order_1'];
     protected $table = "zunit_test_9s";
     public $menuTitle = "UT09 (Basic Event)";
 
@@ -17,15 +17,11 @@ class Zunit_test_9 extends ModelExtended
         "department2" => ['belongsTo', Department::class, 'department_2'],
         "user2" => ['belongsTo', User::class, 'user_2'],
 
-        "getCategory" => ['belongsTo', User_category::class, 'category'],
+        "category" => ['belongsTo', User_category::class, 'category_id'],
         "user3" => ['belongsTo', User::class, 'user_3'],
 
         "getSubProject1" => ['belongsTo', Sub_project::class, 'sub_project_1'],
         "getProdOrder1" => ['belongsTo', Prod_order::class, 'prod_order_1'],
-
-        "getProdRouting1" => ['belongsTo', Prod_routing::class, 'prod_routing_1'],
-
-
     ];
 
     public function department1()
@@ -53,7 +49,7 @@ class Zunit_test_9 extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getCategory()
+    public function category()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -64,11 +60,6 @@ class Zunit_test_9 extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getProdOrder1()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getProdRouting1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

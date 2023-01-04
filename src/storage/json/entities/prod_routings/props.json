@@ -111,11 +111,11 @@
         "validation": "",
         "formula": ""
     },
-    "_prodRuns": {
-        "name": "_prodRuns",
-        "column_name": "prodRuns",
+    "_prodSequences": {
+        "name": "_prodSequences",
+        "column_name": "prodSequences",
         "column_type": "eloquent_prop",
-        "label": "Prod Runs",
+        "label": "Production Sequences",
         "control": "relationship_renderer",
         "col_span": "12",
         "width": "",

@@ -22,15 +22,13 @@ $id = $action === "edit" ? $values->id : "";
         @php
         if ($action === "create" && $val['control'] === 'relationship_renderer') continue;
         $label = $val['label'];
-
         $columnName = $val['column_name'];
         $columnType = $val['column_type'];
         $control = $val['control'];
 
         $colSpan = $val['col_span'];
         $value = $action === "edit" ? $values->{$columnName} :'';
-        // dd($values->getAttributes()['settings']);
-
+        $title = $columnName." / ".$control ;
         $col_span = $val['col_span'] === '' ? 1 : $val['col_span']*1;
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
 
@@ -47,35 +45,35 @@ $id = $action === "edit" ? $values->id : "";
                         @case('z_page_break')
                         <x-renderer.page-break />
                         @case('z_h1')
-                        <x-renderer.heading level=1>{{$label}}</x-renderer.heading>
+                        <x-renderer.heading title="{{$title}}" level=1>{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h2')
-                        <x-renderer.heading level=2>{{$label}}</x-renderer.heading>
+                        <x-renderer.heading title="{{$title}}" level=2>{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h3')
-                        <x-renderer.heading level=3>{{$label}}</x-renderer.heading>
+                        <x-renderer.heading title="{{$title}}" level=3>{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h4')
-                        <x-renderer.heading level=4>{{$label}}</x-renderer.heading>
+                        <x-renderer.heading title="{{$title}}" level=4>{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h5')
-                        <x-renderer.heading level=5>{{$label}}</x-renderer.heading>
+                        <x-renderer.heading title="{{$title}}" level=5>{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h6_base')
-                        <x-renderer.heading>{{$label}}</x-renderer.heading>
+                        <x-renderer.heading title="{{$title}}">{{$label}}</x-renderer.heading>
                         @break
                         @case('z_divider')
                         <x-renderer.divider />
                         @break
 
                         @default
-                        <x-feedback.alert type="warning" title="Control" message="[{{$control}}] is not available" />
+                        <x-feedback.alert type="warning" title="{{$title}}" message="[{{$control}}] is not available" />
                         @break
                         @endswitch
                     </div>
                     @else
                     <div class='col-span-{{24/$col_span}} col-start-1 {{$val['new_line'] === 'true' ? "col-span-12 text-left" : "text-right" }} '>
-                        <label class='text-gray-700 dark:text-gray-400  px-3 block text-base' title='{{$columnName}} / {{$control}}'>{{$label}}
+                        <label class='text-gray-700 dark:text-gray-400  px-3 block text-base' title='{{$title}}'>{{$label}}
                             {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
                             <br />
                             <span class="flex justify-end">

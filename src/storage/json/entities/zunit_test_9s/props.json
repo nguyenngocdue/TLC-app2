@@ -77,9 +77,9 @@
         "validation": "",
         "formula": ""
     },
-    "_get_category": {
-        "name": "_get_category",
-        "column_name": "category",
+    "_category_id": {
+        "name": "_category_id",
+        "column_name": "category_id",
         "column_type": "string",
         "label": "Category",
         "control": "dropdown",

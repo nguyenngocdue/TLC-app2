@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\BigThink\TraitMenuTitle;
 use App\BigThink\TraitMetaForChart;
+use App\BigThink\TraitMorphManyByFieldName;
+use App\Http\Traits\HasAttachments;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -28,6 +30,9 @@ class User extends Authenticatable implements LdapAuthenticatable
     use HasApiTokens;
     use TraitMetaForChart;
     use TraitMenuTitle;
+    use TraitMorphManyByFieldName;
+    use HasAttachments;
+
 
     /**
      * The attributes that are mass assignable.
@@ -71,7 +76,6 @@ class User extends Authenticatable implements LdapAuthenticatable
     // }
 
     public $eloquentParams = [
-        "attachment" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "avatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
         "getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
@@ -84,17 +88,12 @@ class User extends Authenticatable implements LdapAuthenticatable
         "disciplines" => ['belongsTo', User_discipline::class, 'discipline'],
         "departments" => ['belongsTo', Department::class, 'department'],
         "time_keep_types" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
-        "productionRunLines" => ['belongsToMany', Prod_run_line::class, 'prod_user_runs', 'user_id', 'prod_run_line_id'],
+        "productionRuns" => ['belongsToMany', Prod_run::class, 'prod_user_runs', 'user_id', 'prod_run_id'],
         "qaqcInspChklsts" => ['belongsTo', Qaqc_insp_chklst::class, 'owner_id'],
     ];
     public $oracyParams = [];
     protected $guard_name = 'web';
 
-    public function attachment()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-    }
     public function avatar()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -155,7 +154,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function productionRunLines()
+    public function productionRuns()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('user_id');

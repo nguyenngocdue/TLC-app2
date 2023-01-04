@@ -19,7 +19,7 @@
         "name": "_user_3",
         "column_name": "user_3",
         "action": "reduce",
-        "triggers": "category",
+        "triggers": "category_id",
         "listen_to_fields": "user_3",
         "listen_to_attrs": "category"
     },

@@ -15,12 +15,11 @@ $colNameListenJson = array_column($listenersJson,'column_name');
         @php
         $title = isset($data->description) ? "$data->description (#$data->id)" : "" ;
         $idStr = Str::makeId($data->id, true);
-        $label = ($data->name ?? "Nameless")." ($idStr)";
+        $_label = ($data->name ?? "Nameless")." ($idStr)";
         @endphp
-        <option class="py-1" value="{{$data->id}}" @selected($selected===$data->id * 1) title="{{$title}}" data-bs-toggle="tooltip">{{$label}}</option>
+        <option class="py-1" value="{{$data->id}}" @selected($selected===$data->id * 1) title="{{$title}}" data-bs-toggle="tooltip">{{$_label}}</option>
         @endforeach
     </select>
-    {{-- @dump($label); --}}
     @endif
     @endif
 
@@ -34,8 +33,8 @@ $colNameListenJson = array_column($listenersJson,'column_name');
     break;
     }
     };
-    $listenerName = $listenerItem['name'];
-    $idDomListener = $listenerItem['triggers'].$listenerName;
+    $idDomListener = $listenerItem['triggers'].$listenerItem['column_name'];
+    // dump($listenerItem, $listenerName, $idDomListener);
     @endphp
     <select name='{{$colName}}' id="{{$idDomListener}}" class=" bg-white border border-gray-300  text-sm rounded-lg block  mt-1  focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
         <option class="py-10" value="" selected>Select your option...</option>
@@ -51,13 +50,16 @@ $colNameListenJson = array_column($listenersJson,'column_name');
     </script>
     @endonce
 
+
+
     <script type="text/javascript">
         $("#{{$idDomListener}}").select2({
             placeholder: "Please select"
             , allowClear: true
         });
-        // console.log(k1, k1["{{$colName}}"]);
-        strHtmlListener = k1["{{$colName}}"].map((item, index) => {
+        indexName = "{{$colName}}".includes('user') ? "users" : "{{$colName}}";
+
+        strHtmlListener = k1[indexName].map((item, index) => {
             checkSelected = @json($selected) === item.id ? "selected" : "";
             return ` <option ${checkSelected} value=${item.id}>${item.name}</option>`
         })
@@ -74,8 +76,11 @@ $colNameListenJson = array_column($listenersJson,'column_name');
             listenToFied = objListener.listen_to_fields;
             column_name = objListener.column_name;
 
-            dataListenTo = Object.values(k2[listenToFied]);
-            // console.log('dataListenTo', listenToAttr);
+
+            usersfield = listenToFied.includes('user') ? "users" : listenToFied;
+            dataListenTo = Object.values(k2[usersfield]);
+            // console.log('dataListenTo', dataListenTo, listenToFied, column_name);
+
             itemsDB = [];
             if (listenToFied === column_name) {
                 itemsDB = dataListenTo.filter(ele => {
@@ -85,15 +90,15 @@ $colNameListenJson = array_column($listenersJson,'column_name');
                 dataListenTo.forEach(ele => {
                     if (ele.id === value) {
                         idListener = ele[listenToAttr];
-                        itemsDB = k1[column_name].filter(u => u.id === idListener);
+                        key = column_name.includes('user') ? "users" : column_name;
+                        itemsDB = k1[key].filter(u => u.id === idListener);
                     }
                 })
             }
             strHtmlRender = itemsDB.map((item, index) => {
                 return ` <option value="${item.id}">${item.name}</option>`
             })
-            console.log(itemsDB, colName + "{{$listenerName}}");
-            let eles = document.getElementById(colName + "{{$listenerName}}");
+            let eles = document.getElementById(colName + column_name);
             let headOption = listenToFied !== column_name ? [] : [`<option class="py-10" value="" selected>Select your option...</option>`]
             eles.innerHTML = strHtmlRender + headOption;
         }

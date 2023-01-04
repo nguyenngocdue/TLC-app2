@@ -9,6 +9,8 @@ use App\Utils\Support\Listeners;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
+use function PHPUnit\Framework\once;
+
 class Dropdown extends Component
 {
     public function __construct(
@@ -26,6 +28,7 @@ class Dropdown extends Component
         $action = $this->action;
         $colName = $this->colName;
         $label = $this->label;
+
         $modelPath = $this->modelPath;
         $type = $this->type;
 
@@ -37,9 +40,11 @@ class Dropdown extends Component
             return "<x-feedback.alert message='{$message}' type='warning' />";
         }
 
+
         $listenersJson = Listeners::getAllOf($type);
         $dataListenTrigger = $this->getDataFromListenersJson('column_name', $listenersJson, $modelPath, $type);
         $dataListenToField = $this->getDataFromListenersJson('listen_to_fields', $listenersJson, $modelPath, $type);
+
         return view('components.controls.dropdown')->with(compact('dataListenToField', 'dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
     }
 
@@ -48,8 +53,11 @@ class Dropdown extends Component
         $dataTarget = [];
         foreach ($listenersJson as $value) {
             $listen_to = $value[$keyName];
-            $val = Helper::getDataSource($modelPath, $listen_to, $type);
-            $dataTarget[$listen_to] = $val->toArray();
+            if (str_contains($listen_to, 'user')) {
+                $dataTarget['users'] = DB::table('users')->get()->toArray();
+            } else {
+                $dataTarget[$listen_to] = Helper::getDataSource($modelPath, $listen_to, $type)->toArray();
+            }
         };
         return $dataTarget;
     }

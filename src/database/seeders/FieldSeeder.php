@@ -3,10 +3,54 @@
 namespace Database\Seeders;
 
 use App\Models\Field;
+use Exception;
 use Illuminate\Database\Seeder;
 
 class FieldSeeder extends Seeder
 {
+    public static function getIdFromFieldName($fieldName)
+    {
+        return Field::where('name', $fieldName)->firstOrFail()->id;
+        // $dataSource = self::dataSource();
+        // if (!isset($dataSource[$fieldName])) throw new Exception("Field $fieldName not found in " . __FILE__);
+        // return $dataSource[$fieldName];
+    }
+
+    private static function dataSource()
+    {
+        return [
+            'attachment_1' => 1,
+            'attachment_2' => 2,
+            'attachment_3' => 3,
+            'attachment_4' => 4,
+            'attachment_5' => 5,
+            'comment_1' => 6,
+            'comment_2' => 7,
+            'comment_3' => 8,
+            'comment_4' => 9,
+            'comment_5' => 10,
+            'featured_image' => 11,
+            'insp_photos' => 12,
+            'insp_fail_photos' => 13,
+            'workplaceRel1' => 14,
+            'workplaceRel2' => 15,
+            'checkboxYesNo' => 16,
+            'checkboxPassFail' => 17,
+            'dropdownMultiYesNo' => 18,
+            'dropdownMultiPassFail' => 19,
+            'checkbox' => 20,
+            'dropdownMulti' => 21,
+            'newCheckbox' => 22,
+            'getNoOfYesNo' => 23,
+            'getOnHoldOfYesNo' => 24,
+            'getFailedOfPassFail' => 25,
+            'getOnHoldOfPassFail' => 26,
+            'getDefMonitors' => 27,
+            'comment_by_clinic' => 28,
+            'comment_by_line_manager' => 29,
+            'comment_by_general_manager' => 30,
+        ];
+    }
     /**
      * Run the database seeds.
      *
@@ -14,38 +58,8 @@ class FieldSeeder extends Seeder
      */
     public function run()
     {
-
-        Field::create(['name' => 'attachment_1', 'slug' => 'attachment_1']);
-        Field::create(['name' => 'attachment_2', 'slug' => 'attachment_2']);
-        Field::create(['name' => 'attachment_3', 'slug' => 'attachment_3']);
-        Field::create(['name' => 'attachment_4', 'slug' => 'attachment_4']);
-        Field::create(['name' => 'attachment_5', 'slug' => 'attachment_5']);
-
-        Field::create(['name' => 'comment_1', 'slug' => 'comment_1']);
-        Field::create(['name' => 'comment_2', 'slug' => 'comment_2']);
-        Field::create(['name' => 'comment_3', 'slug' => 'comment_3']);
-        Field::create(['name' => 'comment_4', 'slug' => 'comment_4']);
-        Field::create(['name' => 'comment_5', 'slug' => 'comment_5']);
-
-        Field::create(['name' => 'featured_image', 'slug' => 'featured_image']);
-        Field::create(['name' => 'insp_photos', 'slug' => 'insp_photos']);
-        Field::create(['name' => 'insp_fail_photos', 'slug' => 'insp_fail_photos']);
-        Field::create(['name' => 'workplaceRel1', 'slug' => 'workplaceRel1']);
-        Field::create(['name' => 'workplaceRel2', 'slug' => 'workplaceRel2']);
-
-        Field::create(['name' => 'checkboxYesNo', 'slug' => 'checkboxYesNo']);
-        Field::create(['name' => 'checkboxPassFail', 'slug' => 'checkboxPassFail']);
-        Field::create(['name' => 'dropdownMultiYesNo', 'slug' => 'dropdownMultiYesNo']);
-        Field::create(['name' => 'dropdownMultiPassFail', 'slug' => 'dropdownMultiPassFail']);
-        Field::create(['name' => 'checkbox', 'slug' => 'checkbox']);
-
-        Field::create(['name' => 'dropdownMulti', 'slug' => 'dropdownMulti']);
-        Field::create(['name' => 'newCheckbox', 'slug' => 'newCheckbox']);
-        Field::create(['name' => 'getNoOfYesNo', 'slug' => 'getNoOfYesNo']);
-        Field::create(['name' => 'getOnHoldOfYesNo', 'slug' => 'getOnHoldOfYesNo']);
-        Field::create(['name' => 'getFailedOfPassFail', 'slug' => 'getFailedOfPassFail']);
-
-        Field::create(['name' => 'getOnHoldOfPassFail', 'slug' => 'getOnHoldOfPassFail']);
-        Field::create(['name' => 'getDefMonitors', 'slug' => 'getDefMonitors']);
+        foreach (self::dataSource() as $key => $id) {
+            Field::create(['id' => $id, 'name' => $key, 'slug' => $key]);
+        }
     }
 }

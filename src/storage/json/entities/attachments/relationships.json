@@ -23,8 +23,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_mediable": {
-        "name": "_mediable",
+    "_attachable": {
+        "name": "_attachable",
         "relationship": "morphTo",
         "control_name": "",
         "renderer_view_all": "link_morph_to",

@@ -17,6 +17,7 @@ class Image extends Component
         private $w = null,
         private $h = null,
         private $title = null,
+        private $text = null,
     ) {
         //
     }

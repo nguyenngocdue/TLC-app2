@@ -27,11 +27,11 @@
         "validation": "required",
         "formula": ""
     },
-    "_def_publish_holiday_hour": {
-        "name": "_def_publish_holiday_hour",
-        "column_name": "def_publish_holiday_hour",
+    "_standard_working_hour": {
+        "name": "_standard_working_hour",
+        "column_name": "standard_working_hour",
         "column_type": "float",
-        "label": "Def Publish Holiday Hour",
+        "label": "Standard Working Hour",
         "control": "text",
         "col_span": "12",
         "width": "",

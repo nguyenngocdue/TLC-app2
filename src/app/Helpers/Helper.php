@@ -121,7 +121,7 @@ class Helper
     }
 
 
-    public static function customMessageValidation($message, $colName, $labelName)
+    public static function customMessageValidation($message, $labelName)
     {
         $idx = strpos($message, 'field'); // index of "field" word in message
         $strSearch = substr($message, 4, $idx - 4);
@@ -222,6 +222,13 @@ class Helper
     public static function getColNamesByControlAndColumnType($props, $control, $columnType)
     {
         $props = array_filter($props, fn ($prop) => $prop['control'] === $control && $prop['column_type'] === $columnType);
+        $colNameByControls = array_values(array_map(fn ($item) => $item['column_name'], $props));
+        return $colNameByControls;
+    }
+
+    public static function getColNamesByControl($props, $control)
+    {
+        $props = array_filter($props, fn ($prop) => $prop['control'] === $control);
         $colNameByControls = array_values(array_map(fn ($item) => $item['column_name'], $props));
         return $colNameByControls;
     }

@@ -25,22 +25,9 @@
         "validation": "required",
         "formula": ""
     },
-    "_qaqc_insp_chklst_id": {
-        "name": "_qaqc_insp_chklst_id",
-        "column_name": "qaqc_insp_chklst_id",
-        "column_type": "bigint",
-        "label": "Insp Checklist",
-        "control": "dropdown",
-        "col_span": "4",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
-    },
-    "_qaqc_insp_sheet_id": {
-        "name": "_qaqc_insp_sheet_id",
-        "column_name": "qaqc_insp_sheet_id",
+    "_qaqc_insp_chklst_sht_id": {
+        "name": "_qaqc_insp_chklst_sht_id",
+        "column_name": "qaqc_insp_chklst_sht_id",
         "column_type": "bigint",
         "label": "Sheet",
         "control": "dropdown",

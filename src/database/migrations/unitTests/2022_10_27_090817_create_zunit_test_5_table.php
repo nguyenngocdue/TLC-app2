@@ -17,11 +17,6 @@ return new class extends Migration
         Schema::create('zunit_test_5s', function (Blueprint $table) {
             $table->id();
             $table->string("name")->nullable();
-            $table->string('attachment_1')->nullable();
-            $table->string('attachment_2')->nullable();
-            $table->string('attachment_3')->nullable();
-            $table->string('attachment_4')->nullable();
-            $table->string('attachment_5')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
