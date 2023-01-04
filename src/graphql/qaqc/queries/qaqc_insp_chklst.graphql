@@ -16,7 +16,7 @@ type Qaqc_insp_chklst {
     progress: Float
     user: User! @belongsTo
     prodOrder: Prod_order! @belongsTo
-    qaqcInspChklstLines: [Qaqc_insp_chklst_line!]! @hasMany
+    getSheets: [Qaqc_insp_chklst_sht!]! @hasMany
     created_at: DateTime
     updated_at: DateTime
 }

@@ -9,9 +9,8 @@ type Qaqc_insp_tmpl_line {
     id: ID!
     name: String!
     description: String!
-    control_type: String!
-    qaqc_insp_tmpl_id: ID!
-    qaqc_insp_sheet_id: ID!
+    control_type_id: ID!
+    qaqc_insp_tmpl_run_id: ID!
     qaqc_insp_group_id: ID!
     qaqc_insp_control_group_id: ID
     getTemplate: Qaqc_insp_tmpl! @belongsTo
@@ -25,9 +24,8 @@ input CreateQAQCInspTmplLineInput {
     id: ID!
     name: String!
     description: String!
-    control_type: String!
-    qaqc_insp_tmpl_id: ID!
-    qaqc_insp_sheet_id: ID!
+    control_type_id: ID!
+    qaqc_insp_tmpl_run_id: ID!
     qaqc_insp_group_id: ID!
     qaqc_insp_control_group_id: ID!
     created_at: DateTime
@@ -37,9 +35,8 @@ input UpdateQAQCInspTmplLineInput {
     id: ID!
     name: String
     description: String
-    control_type: String
-    qaqc_insp_tmpl_id: ID
-    qaqc_insp_sheet_id: ID
+    control_type_id: ID
+    qaqc_insp_tmpl_run_id: ID
     qaqc_insp_group_id: ID
     qaqc_insp_control_group_id: ID
     created_at: DateTime

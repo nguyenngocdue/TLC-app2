@@ -12,7 +12,7 @@ class Qaqc_insp_chklst extends ModelExtended
     public $eloquentParams = [
         "user" => ["belongsTo", User::class, "owner_id"],
         "prodOrder" => ["belongsTo", Prod_order::class, "prod_order_id"],
-        "qaqcInspChklstLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_id"],
+        "getSheets" => ["hasMany", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_id"],
     ];
     public function user()
     {
@@ -24,7 +24,7 @@ class Qaqc_insp_chklst extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function qaqcInspChklstLines()
+    public function getSheets()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

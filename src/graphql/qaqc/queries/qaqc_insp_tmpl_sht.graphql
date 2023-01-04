@@ -13,7 +13,7 @@ type Qaqc_insp_tmpl_sht {
     qaqc_insp_tmpl_id: int!
     created_at: DateTime
     updated_at: DateTime
-    getTemplateLines: [Qaqc_insp_tmpl_line!]! @hasMany
+    getRuns: [Qaqc_insp_tmpl_run!]! @hasMany
 }
 
 input CreateQAQCInspTmplSheetInput {

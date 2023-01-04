@@ -11,7 +11,7 @@ type Qaqc_insp_tmpl {
     name: String!
     description: String!
     slug: String!
-    getLines: [Qaqc_insp_tmpl_line!]! @hasMany
+    getSheets: [Qaqc_insp_tmpl_sht!]! @hasMany
     getProdRouting: Prod_routing! @belongsTo
     created_at: DateTime
     updated_at: DateTime
