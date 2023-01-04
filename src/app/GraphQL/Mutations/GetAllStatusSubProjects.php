@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Mutations;
 
-use App\Http\Controllers\Workflow\Statuses;
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Sub_project;
 
 final class GetAllStatusSubProjects
@@ -14,7 +14,7 @@ final class GetAllStatusSubProjects
     public function __invoke($_, array $args)
     {
         try {
-            return array_keys(Statuses::getFor('sub_project'));
+            return array_keys(LibStatuses::getFor('sub_project'));
         } catch (\Throwable $th) {
             return $th;
         }

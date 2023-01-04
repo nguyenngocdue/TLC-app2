@@ -7,6 +7,7 @@ use App\Utils\Support\JsonControls;
 use App\Utils\Support\Relationships;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 
 abstract class AbstractRelationshipController extends Controller
@@ -27,9 +28,10 @@ abstract class AbstractRelationshipController extends Controller
         $viewAllControls = JsonControls::getRendererViewAll();
         $editControls = JsonControls::getRendererEdit();
         return [
-            // [
-            //     "dataIndex" => "action",
-            // ],
+            [
+                "dataIndex" => "action",
+                "align" => "center",
+            ],
             [
                 "dataIndex" => "name",
                 "renderer" => "read-only-text",
@@ -143,6 +145,15 @@ abstract class AbstractRelationshipController extends Controller
         foreach (array_keys($toBeGreen) as $key) $result[$key]['row_color'] = "green";
         foreach (array_keys($toBeRed) as $key) $result[$key]['row_color'] = "red";
 
+        foreach ($result as $key => $columns) {
+            if (!isset($columns['row_color']) || $columns['row_color'] === "green") continue;
+            // <x-renderer.button htmlType='submit' name='button' size='xs' value='up,$key'><i class='fa fa-arrow-up'></i></x-renderer.button>
+            // <x-renderer.button htmlType='submit' name='button' size='xs' value='down,$key'><i class='fa fa-arrow-down'></i></x-renderer.button>
+            $result[$key]['action'] = Blade::render("<div class='whitespace-nowrap'>
+                <x-renderer.button htmlType='submit' name='button' size='xs' value='right_by_name,$key' type='danger' outline=true><i class='fa fa-trash'></i></x-renderer.button>
+            </div>");
+        }
+
         return $result;
     }
     /**
@@ -164,7 +175,13 @@ abstract class AbstractRelationshipController extends Controller
         $data = $request->input();
         $columns = array_filter($this->getColumns(), fn ($column) => !in_array($column['dataIndex'], ['action']));
         $result = Relationships::convertHttpObjectToJson($data, $columns);
+        if ($request->input('button')) {
+            [$direction, $name] = explode(",", $request->input('button'));
+            // Log::info($direction . " " . $name);
+            Relationships::move($result, $direction, $name);
+        }
         Relationships::setAllOf($this->type, $result);
+
         return back();
     }
 }

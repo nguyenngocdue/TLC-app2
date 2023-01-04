@@ -47,6 +47,18 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getWorkArea": {
+        "name": "_getWorkArea",
+        "relationship": "belongsTo",
+        "control_name": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_mainAffectedPart()": {
         "name": "_mainAffectedPart()",
         "relationship": "getCheckedByField",
@@ -81,18 +93,6 @@
         "renderer_edit_param": "",
         "filter_columns": "field_id",
         "filter_values": "103",
-        "radio_checkbox_colspan": "3"
-    },
-    "_accidentClassification()": {
-        "name": "_accidentClassification()",
-        "relationship": "getCheckedByField",
-        "control_name": "accidentClassification()",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "field_id",
-        "filter_values": "104",
         "radio_checkbox_colspan": "3"
     },
     "_causeOfIssue()": {
