@@ -321,34 +321,6 @@
         "validation": "",
         "formula": ""
     },
-    "_comment_2": {
-        "name": "_comment_2",
-        "column_name": "comment_2",
-        "column_type": "text",
-        "label": "Comment by Clinic",
-        "control": "comment",
-        "col_span": "12",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "true",
-        "validation": "",
-        "formula": ""
-    },
-    "_comment_3": {
-        "name": "_comment_3",
-        "column_name": "comment_3",
-        "column_type": "text",
-        "label": "Comment by Clinic",
-        "control": "comment",
-        "col_span": "12",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "true",
-        "validation": "",
-        "formula": ""
-    },
     "_divider8": {
         "name": "_divider8",
         "column_name": "divider8",
@@ -559,6 +531,20 @@
         "validation": "",
         "formula": ""
     },
+    "_comment_2": {
+        "name": "_comment_2",
+        "column_name": "comment_2",
+        "column_type": "text",
+        "label": "Comment by Witnesses",
+        "control": "comment",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "true",
+        "validation": "",
+        "formula": ""
+    },
     "_h3a": {
         "name": "_h3a",
         "column_name": "h3a",
@@ -573,6 +559,20 @@
         "validation": "",
         "formula": ""
     },
+    "_comment_3": {
+        "name": "_comment_3",
+        "column_name": "comment_3",
+        "column_type": "text",
+        "label": "Comment by Line Manager",
+        "control": "comment",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "true",
+        "validation": "",
+        "formula": ""
+    },
     "_h4a": {
         "name": "_h4a",
         "column_name": "h4a",
@@ -584,6 +584,20 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_comment_4": {
+        "name": "_comment_4",
+        "column_name": "comment_4",
+        "column_type": "static",
+        "label": "Comment by General Manager\/HSE Manager",
+        "control": "comment",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     },
