@@ -2,13 +2,11 @@
 
 namespace App\View\Components\Controls;
 
-use App\Helpers\Helper;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class ControlStatus extends Component
 {
+    private $value;
     /**
      * Create a new component instance.
      *
@@ -28,10 +26,8 @@ class ControlStatus extends Component
 
     public function render()
     {
-        $model = Helper::getItemModel($this->type, $this->id);
-        if (!method_exists($model, "transitionTo")) return "<x-feedback.alert type='warning' message='This model needs to use HasStatus trait.'></x-feedback.alert>";
-        $cbb = $model->getAvailableStatuses();
-        // $currentStatus = $this->action === 'edit' ? $model::find($this->id)->first()->status : '';
+        if (!method_exists($this->modelPath, "getAvailableStatuses")) return "<x-feedback.alert type='warning' message='This model needs to use HasStatus trait.'></x-feedback.alert>";
+        $cbb = $this->modelPath::getAvailableStatuses();
         return view("components.controls.control-status", [
             'options' => $cbb,
             'colName' => $this->colName,

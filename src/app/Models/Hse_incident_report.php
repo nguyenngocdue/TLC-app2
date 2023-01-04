@@ -13,6 +13,7 @@ class Hse_incident_report extends ModelExtended
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
     ];
     protected $table = "hse_incident_reports";
+    public $nameless = true;
 
     public $eloquentParams = [
         "comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],

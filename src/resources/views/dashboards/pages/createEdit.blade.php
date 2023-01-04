@@ -38,9 +38,9 @@ $id = $action === "edit" ? $values->id : "";
         $iconJson = $columnType === 'json' ? App\Utils\ConstantSVG::ICON_SVG : "";
         @endphp
         <div class='col-span-{{$col_span}} grid'>
-            <div class='grid grid-row-1 gap-3'>
+            <div class='grid grid-row-1'>
 
-                <div class='grid grid-cols-12 items-center {{$hiddenRow}}'>
+                <div class='grid grid-cols-12 items-center {{$hiddenRow}} '>
                     @if($columnType === 'static')
                     <div class='col-span-12 text-left'>
                         @switch($control)

@@ -7,21 +7,19 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
-use App\Http\Traits\HasStatus;
 use App\Notifications\CreateNewNotification;
 use App\Notifications\EditNotification;
 use App\Utils\Support\Props;
 use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
 abstract class AbstractCreateEditController extends Controller
 {
 	use CreateEditControllerM2M;
-	use CreateEditControllerMedia;
+	use CreateEditControllerAttachment;
 	use CreateEditControllerComment;
 	use CreateEditControllerStatus;
 	use CreateEditFormula;
