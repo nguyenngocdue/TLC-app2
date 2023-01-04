@@ -8,7 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
-final class ProdRunLine
+final class ProdRun
 {
     /**
      * @param  null  $_

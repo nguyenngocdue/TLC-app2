@@ -167,9 +167,9 @@
         "validation": "",
         "formula": ""
     },
-    "_mediable": {
-        "name": "_mediable",
-        "column_name": "mediable",
+    "_attachable": {
+        "name": "_attachable",
+        "column_name": "attachable",
         "column_type": "eloquent_prop",
         "label": "Parent",
         "control": "link_morph_to",

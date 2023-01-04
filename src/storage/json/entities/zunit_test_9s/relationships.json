@@ -47,12 +47,12 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getCategory": {
-        "name": "_getCategory",
+    "_category": {
+        "name": "_category",
         "relationship": "belongsTo",
         "control_name": "",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
@@ -71,12 +71,12 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getSubProject": {
-        "name": "_getSubProject",
+    "_getSubProject1": {
+        "name": "_getSubProject1",
         "relationship": "belongsTo",
         "control_name": "",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",

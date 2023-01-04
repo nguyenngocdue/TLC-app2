@@ -1,6 +1,6 @@
 {
-    "_media": {
-        "name": "_media",
+    "_attachment": {
+        "name": "_attachment",
         "relationship": "morphMany",
         "control_name": "",
         "renderer_view_all": "thumbnails",
