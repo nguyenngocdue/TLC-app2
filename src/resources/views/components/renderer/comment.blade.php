@@ -13,38 +13,44 @@ $time = $date ? date("d/m/Y H:i:s", strtotime($date)) : date("d/m/Y H:i:s");
 
 <div id="fillColor_{{$data['id']}}" class="p-4 bg-gray-250  border rounded-lg shadow-md ">
     <div class="grid grid-cols-12 gap-2 flex-nowrap">
-        <div class="col-span-4">
-            <div class="border cursor-pointer bg-[#f5f5f5] thumbs rounded-lg w-full border-gray-300 p-1 focus:border-purple-400 focus:outline-none  ">
-                <x-renderer.avatar-name title="{{$authorName}}"></x-renderer.avatar-name>
-                <input name="owner_id" value="{{Auth::user()->id}}" class='hidden' type='text'>
-            </div>
-        </div>
-        <div class="col-span-3 ">
-            <input name='position_rendered' value="{{$position}}" readonly class='bg-[#f5f5f5] border border-gray-300 text-gray-900  rounded-lg  p-2.5  dark:placeholder-gray-400  block w-full text-sm  focus:border-purple-400 focus:outline-none ' type='text'>
-        </div>
-
-        <div class="col-span-3">
-            <div class="relative   ">
-                <div class="flex absolute  inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-                    </svg>
+        <div class=" grid col-span-10  text-center flex-nowrap">
+            <div class="grid grid-cols-12 gap-4 ">
+                <div class="col-span-4">
+                    <div class="border cursor-pointer bg-[#f5f5f5] thumbs rounded-lg w-full border-gray-300 p-1 focus:border-purple-400 focus:outline-none  ">
+                        <x-renderer.avatar-name title="{{$authorName}}"></x-renderer.avatar-name>
+                        <input name="owner_id" value="{{Auth::user()->id}}" class='hidden' type='text'>
+                    </div>
                 </div>
-                <input datepicker type="text" value="{{$time}}" readonly class="bg-[#f5f5f5] border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none block w-full pl-10 p-2.5" placeholder="">
+                <div class="col-span-4 ">
+                    <input name='position_rendered' value="{{$position}}" readonly class='bg-[#f5f5f5] border border-gray-300 text-gray-900  rounded-lg  p-2.5  dark:placeholder-gray-400  block w-full text-sm  focus:border-purple-400 focus:outline-none ' type='text'>
+                </div>
+
+                <div class="col-span-4">
+                    <div class="relative   ">
+                        <div class="flex absolute  inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <input datepicker type="text" value="{{$time}}" readonly class="bg-[#f5f5f5] border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none block w-full pl-10 p-2.5" placeholder="">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-span-1">
-            <input value="#{{$data['id']}}" readonly class='bg-[#f5f5f5]  text-center  border border-gray-300 text-gray-900  rounded-lg  p-2.5   dark:placeholder-gray-400  block w-full text-sm   focus:border-purple-400 focus:outline-none  ' type='text'>
-        </div>
-        @if($destroyable)
-        <div class="col-span-1 m-auto text-center  ">
-            <button type="button" onclick="updateTxtboxComment({{$data['id']}}, 'comment_deleted_{{$data['id']}}')" class=" w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
-                <i class=" text-[#d11a2a] fas fa-trash  cursor-pointer"></i>
-            </button>
-            <input id="comment_deleted_{{$data['id']}}" name="comment_deleted_{{$data['id']}}" readonly value="" class=' {{$showToBeDeleted ? "" : "hidden"}}  p-2.5 w-full   bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray ' type='text'>
-        </div>
-        @endif
 
+        <div class="col-span-2  text-center flex">
+            <div class="col-span-1 flex-1 ">
+                <input value="#{{$data['id']}}" readonly class='bg-[#f5f5f5]  text-center  border border-gray-300 text-gray-900  rounded-lg  p-2.5   dark:placeholder-gray-400  block w-full text-sm   focus:border-purple-400 focus:outline-none  ' type='text'>
+            </div>
+            @if($destroyable)
+            <div class=" m-auto text-center flex-1   ">
+                <button type="button" onclick="updateTxtboxComment({{$data['id']}}, 'comment_deleted_{{$data['id']}}')" class=" w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
+                    <i class=" text-[#d11a2a] fas fa-trash  cursor-pointer"></i>
+                </button>
+                <input id="comment_deleted_{{$data['id']}}" name="comment_deleted_{{$data['id']}}" readonly value="" class=' {{$showToBeDeleted ? "" : "hidden"}}  p-2.5 w-full   bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray ' type='text'>
+            </div>
+            @endif
+        </div>
         <div class="col-span-12 mt-2 rounded-lg border border-gray-300 overflow-hidden   ">
             <textarea name="newComment_{{$name}}" rows="2" @readonly($data['readonly']) placeholder="{{$isReadOnly ? '': 'Type here...'}}" class=" {{$isReadOnly && $isEmptyContent  ? 'bg-white hidden ' : ''}} bg-inherit resize-none  text-gray-900  p-2.5 dark:placeholder-gray-400 block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray">{{old('newComment_'.$name, $content) ?? $content }}</textarea>
             <x-renderer.attachment readonly="{{$data['readonly']}}" destroyable={{$isDestroyable}} categoryName={{$name}} :attachmentData="$attachmentData" action={{$action}} labelName={{$labelName}} path={{$path}} />
