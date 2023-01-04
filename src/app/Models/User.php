@@ -84,7 +84,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "disciplines" => ['belongsTo', User_discipline::class, 'discipline'],
         "departments" => ['belongsTo', Department::class, 'department'],
         "time_keep_types" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
-        "productionRunLines" => ['belongsToMany', Prod_run_line::class, 'prod_user_runs', 'user_id', 'prod_run_line_id'],
+        "productionRuns" => ['belongsToMany', Prod_run::class, 'prod_user_runs', 'user_id', 'prod_run_id'],
         "qaqcInspChklsts" => ['belongsTo', Qaqc_insp_chklst::class, 'owner_id'],
     ];
     public $oracyParams = [];
@@ -155,7 +155,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function productionRunLines()
+    public function productionRuns()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('user_id');
@@ -196,5 +196,17 @@ class User extends Authenticatable implements LdapAuthenticatable
             'last_name' => $this->last_name,
             'email' => $this->email,
         ];
+    }
+
+    public function attachment1()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        $sql = $relation
+            ->getQuery()
+            ->where('category', 11)
+            ->toSql();
+        Log::info($sql);
+        return $relation;
     }
 }

@@ -13,7 +13,7 @@ class Prod_routing_link extends ModelExtended
 
     public $eloquentParams = [
         "prodRoutings" => ['belongsToMany', Prod_routing::class, 'prod_routing_details', 'prod_routing_link_id', 'prod_routing_id'],
-        "prodRun" => ['hasMany', Prod_run::class, 'prod_routing_link_id'],
+        "prodSequence" => ['hasMany', Prod_sequence::class, 'prod_routing_link_id'],
         "discipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
     ];
 
@@ -23,7 +23,7 @@ class Prod_routing_link extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('target_hours', 'target_man_hours');
     }
 
-    public function prodRun()
+    public function prodSequence()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -17,7 +17,7 @@ class Prod_order extends ModelExtended
     protected $table = 'prod_orders';
 
     public $eloquentParams = [
-        "prodRuns" => ['hasMany', Prod_run::class, 'prod_order_id'],
+        "prodSequences" => ['hasMany', Prod_sequence::class, 'prod_order_id'],
         "subProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "prodRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
         "qaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'prod_order_id'],
@@ -35,7 +35,7 @@ class Prod_order extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function prodRuns()
+    public function prodSequences()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -50,7 +50,7 @@ class Prod_order extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id', 'renderer' => 'id', 'type' => 'prod_run_lines', 'align' => 'center'],
+            ['dataIndex' => 'id', 'renderer' => 'id', 'type' => 'prod_orders', 'align' => 'center'],
             ['dataIndex' => 'name', 'title' => 'Priority'],
             ['dataIndex' => 'production', 'title' => 'Production Name'],
             ['dataIndex' => 'compliance', 'title' => 'Compliance Name'],
