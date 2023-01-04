@@ -24,7 +24,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_slug": {
@@ -39,7 +39,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formula": ""
+        "formula": "All_SlugifyByName"
     },
     "_hse_incident_report_id": {
         "name": "_hse_incident_report_id",
@@ -52,7 +52,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_priority_id": {
@@ -66,7 +66,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_work_area_id": {
@@ -80,7 +80,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_description": {
@@ -164,7 +164,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_created_at": {
