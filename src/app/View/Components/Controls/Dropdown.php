@@ -26,6 +26,7 @@ class Dropdown extends Component
         $action = $this->action;
         $colName = $this->colName;
         $label = $this->label;
+
         $modelPath = $this->modelPath;
         $type = $this->type;
 

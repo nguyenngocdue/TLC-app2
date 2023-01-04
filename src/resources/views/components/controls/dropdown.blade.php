@@ -15,12 +15,11 @@ $colNameListenJson = array_column($listenersJson,'column_name');
         @php
         $title = isset($data->description) ? "$data->description (#$data->id)" : "" ;
         $idStr = Str::makeId($data->id, true);
-        $label = ($data->name ?? "Nameless")." ($idStr)";
+        $_label = ($data->name ?? "Nameless")." ($idStr)";
         @endphp
-        <option class="py-1" value="{{$data->id}}" @selected($selected===$data->id * 1) title="{{$title}}" data-bs-toggle="tooltip">{{$label}}</option>
+        <option class="py-1" value="{{$data->id}}" @selected($selected===$data->id * 1) title="{{$title}}" data-bs-toggle="tooltip">{{$_label}}</option>
         @endforeach
     </select>
-    {{-- @dump($label); --}}
     @endif
     @endif
 

@@ -121,7 +121,7 @@ class Helper
     }
 
 
-    public static function customMessageValidation($message, $colName, $labelName)
+    public static function customMessageValidation($message, $labelName)
     {
         $idx = strpos($message, 'field'); // index of "field" word in message
         $strSearch = substr($message, 4, $idx - 4);

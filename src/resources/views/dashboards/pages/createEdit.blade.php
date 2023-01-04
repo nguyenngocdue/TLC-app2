@@ -22,7 +22,6 @@ $id = $action === "edit" ? $values->id : "";
         @php
         if ($action === "create" && $val['control'] === 'relationship_renderer') continue;
         $label = $val['label'];
-
         $columnName = $val['column_name'];
         $columnType = $val['column_type'];
         $control = $val['control'];
