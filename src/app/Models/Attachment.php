@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Attachment extends ModelExtended
 {
-    protected $fillable = ["url_folder", "url_thumbnail", "extension", "url_media", "filename", "category", "owner_id"];
+    protected $fillable = ["url_folder", "url_thumbnail", "extension", "url_media", "filename", "category", "owner_id", 'object_id', 'object_type'];
     protected $primaryKey = 'id';
     protected $table = 'attachments';
 
