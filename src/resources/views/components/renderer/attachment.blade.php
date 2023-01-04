@@ -1,6 +1,6 @@
-<div class="flex flex-col">
+<div class="flex flex-col container mx-auto ">
     @if ($action === "edit" || $action === "create")
-    <div class="grid grid-cols-5 gap-4 mb-1 p-1  {{count($attachmentData) < 1 ? "hidden" : ""}}">
+    <div class=" grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-4 mb-1 p-1  {{count($attachmentData) < 1 ? "hidden" : ""}}">
         @if(isset($attachmentData[$categoryName]))
         @foreach($attachmentData as $key => $attachs)
         @if ($key === $categoryName )
@@ -36,7 +36,7 @@
         @endif
     </div>
     @endif
-    <input id="attachment_deleted_{{$categoryName}}" name="attachment_deleted_{{$categoryName}}" type="text" value="" readonly class=' {{ $showToBeDeleted ? '' : 'hidden'}} p-2.5   bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
+    <input id="attachment_deleted_{{$categoryName}}" name="attachment_deleted_{{$categoryName}}" type="text" value="" readonly class=' {{ $showToBeDeleted ? '' : 'hidden'}} p-2.5   bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
     <input name="{{$categoryName}}[]" multiple id="multiple_files" type="file" class="{{$readonly ? 'hidden' : ''}} block w-full text-sm text-gray-900  p-2.5 rounded-lg bg-white border  border-white cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 ">
 </div>
 {{-- @include('components.feedback.alertValidation') --}}

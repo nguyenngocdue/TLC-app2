@@ -224,7 +224,7 @@ abstract class AbstractCreateEditController extends Controller
 
 	// private function updateMediaIdsToDBFields($data, $colNamesHaveAttachment)
 	// {
-	// 	$morphManyMediaUser = $data->media()->select('id', 'category')->get()->toArray();
+	// 	$morphManyMediaUser = $data->attachment()->select('id', 'category')->get()->toArray();
 	// 	$media_cateTb = DB::table('fields')->select('id', 'name')->get()->toArray();
 
 	// 	$ids_names_cateMediaDB = array_column($media_cateTb, 'name', 'id');

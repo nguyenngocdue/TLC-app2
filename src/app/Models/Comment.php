@@ -34,7 +34,7 @@ class Comment extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
     // filter all media from a comment
-    public function media()
+    public function attachment()
     {
         return $this->morphMany(Attachment::class, 'attachable', 'object_type', 'object_id');
     }
