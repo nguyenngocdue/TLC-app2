@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('department_1')->nullable();
             $table->string('department_2')->nullable();
             $table->string('category_id')->nullable();
-            $table->string('sub_project')->nullable();
+            $table->string('sub_project_1')->nullable();
             $table->string('user_1')->nullable();
             $table->string('user_2')->nullable();
             $table->string('user_3')->nullable();

@@ -33,8 +33,8 @@ $colNameListenJson = array_column($listenersJson,'column_name');
     break;
     }
     };
-    $listenerName = $listenerItem['name'];
-    $idDomListener = $listenerItem['triggers'].$listenerName;
+    $idDomListener = $listenerItem['triggers'].$listenerItem['column_name'];
+    // dump($listenerItem, $listenerName, $idDomListener);
     @endphp
     <select name='{{$colName}}' id="{{$idDomListener}}" class=" bg-white border border-gray-300  text-sm rounded-lg block  mt-1  focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
         <option class="py-10" value="" selected>Select your option...</option>
@@ -91,8 +91,7 @@ $colNameListenJson = array_column($listenersJson,'column_name');
             strHtmlRender = itemsDB.map((item, index) => {
                 return ` <option value="${item.id}">${item.name}</option>`
             })
-            console.log(itemsDB, colName + "{{$listenerName}}");
-            let eles = document.getElementById(colName + "{{$listenerName}}");
+            let eles = document.getElementById(colName + column_name);
             let headOption = listenToFied !== column_name ? [] : [`<option class="py-10" value="" selected>Select your option...</option>`]
             eles.innerHTML = strHtmlRender + headOption;
         }

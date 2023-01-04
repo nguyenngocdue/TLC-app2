@@ -14,7 +14,7 @@ class Zunit_test_5 extends ModelExtended
 
     public $eloquentParams = [
         "attachment" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
-        "attachment1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        // "attachment1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public function attachment()
