@@ -2,10 +2,10 @@
 
 namespace App\GraphQL\Mutations;
 
-use App\Models\Prod_run_line;
+use App\Models\Prod_run;
 use Carbon\Carbon;
 
-final class DuplicateProdRunLine
+final class DuplicateProdRun
 {
     /**
      * @param  null  $_
@@ -15,7 +15,7 @@ final class DuplicateProdRunLine
     {
         try {
             $dt = Carbon::now();
-            $prodLine = Prod_run_line::find($args['id']);
+            $prodLine = Prod_run::find($args['id']);
             $newProdLine = $prodLine->replicate();
             $newProdLine->date = $dt->format('Y-m-d');
             $newProdLine->start = $dt->format('H:i:s');
@@ -30,7 +30,7 @@ final class DuplicateProdRunLine
             }
             return [
                 'id' => $newProdLine->id,
-                'status' => 'Duplicate Production Run Line Successfully.',
+                'status' => 'Duplicate Production Run Successfully.',
             ];
         } catch (\Throwable $th) {
             return [

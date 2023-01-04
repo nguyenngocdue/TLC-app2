@@ -2,8 +2,8 @@
 
 namespace App\GraphQL\Mutations;
 
-use App\Events\ProdRunUpdatedEvent;
-use App\Models\Prod_run_line;
+use App\Events\ProdSequenceUpdatedEvent;
+use App\Models\Prod_run;
 use Carbon\Carbon;
 
 final class StoreProdRunLine
@@ -16,8 +16,8 @@ final class StoreProdRunLine
     {
         try {
             $dt = Carbon::now();
-            $prodLine = Prod_run_line::create([
-                "prod_run_id" => $args['prod_run_id'],
+            $prodRun = Prod_run::create([
+                "prod_sequence_id" => $args['prod_sequence_id'],
                 "date" => $args['date'] ?? $dt->format('Y-m-d'),
                 "start" => $args['start'] ?? $dt->format('H:i:s'),
                 "end" => $args['end'] ?? null,
@@ -25,11 +25,11 @@ final class StoreProdRunLine
                 "updated_at" => $args["updated_at"] ?? null,
             ]);
             if (is_array($args['user_ids'])) {
-                $prodLine->users()->attach($args['user_ids']);
+                $prodRun->users()->attach($args['user_ids']);
             }
-            event(new ProdRunUpdatedEvent());
+            event(new ProdSequenceUpdatedEvent());
             return [
-                'id' => $prodLine->id,
+                'id' => $prodRun->id,
                 'status' => 'Complete Create Prod Line and add User to Prod Line Successfully'
             ];
         } catch (\Throwable $th) {

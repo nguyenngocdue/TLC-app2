@@ -1,59 +1,49 @@
 scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 extend type Query {
     prod_runs: [Prod_run!]! @all @guard
     prod_run(id: ID @eq): Prod_run @find @guard
-    prod_run_two_id(
-        prod_order_id: Int @eq
-        prod_routing_link_id: Int @eq
-    ): Prod_run @find @guard
 }
 type Prod_run {
     id: ID!
-    prod_order_id: Int!
-    prod_routing_link_id: Int!
+    prod_run_id: Int!
+    date: Date!
+    start: String!
+    end: String
     status: String!
-    total_hours: Float
-    total_man_hours: Float
     created_at: DateTime
     updated_at: DateTime
-    prodOrder: Prod_order! @belongsTo
-    prodRoutingLinks: Prod_routing_link! @belongsTo
-    prodRunLines: [Prod_run_line!]! @hasMany
+    users: [User!]! @belongsToMany
+    prodRun: Prod_run! @belongsTo
 }
 
 input CreateProdRunInput {
-    prod_order_id: Int!
-    prod_routing_link_id: Int!
+    prod_run_id: Int!
+    date: Date!
+    start: String!
+    end: String
     status: String!
-    total_hours: Float
-    total_man_hours: Float
     created_at: DateTime
     updated_at: DateTime
 }
 input UpdateProdRunInput {
     id: ID!
-    prod_order_id: Int
-    prod_routing_link_id: Int
+    prod_run_id: Int
+    date: Date
+    start: String
+    end: String
     status: String
-    total_hours: Float
-    total_man_hours: Float
     created_at: DateTime
     updated_at: DateTime
 }
 
-type StoreProdRunLineResponse {
-    status: String!
-}
 extend type Mutation {
     createProdRun(input: CreateProdRunInput! @spread): Prod_run! @guard @create
     updateProdRun(input: UpdateProdRunInput! @spread): Prod_run @guard @update
-    createProdRunTransactionTo(input: CreateProdRunInput! @spread): Prod_run
+    updateProdRunEvent(input: UpdateProdRunInput! @spread): Prod_run
         @guard
-        @field(resolver: "App\\GraphQL\\Mutations\\CreateProdRun")
-    updateProdRunTransactionTo(input: UpdateProdRunInput! @spread): Prod_run
-        @guard
-        @field(resolver: "App\\GraphQL\\Mutations\\UpdateProdRun")
+        @field(resolver: "App\\GraphQL\\Mutations\\UpdateProdRunEvent")
     deleteProdRun(id: ID!): Prod_run @guard @delete
 }

@@ -14,12 +14,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prod_run_lines', function (Blueprint $table) {
+        Schema::create('qaqc_insp_tmpl_shts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('prod_run_id');
-            $table->date('date');
-            $table->time('start');
-            $table->time('end')->nullable();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->string('slug')->unique();
+            $table->unsignedBigInteger('qaqc_insp_tmpl_id');
+
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prod_run_lines');
+        Schema::dropIfExists('qaqc_insp_tmpl_sht');
     }
 };

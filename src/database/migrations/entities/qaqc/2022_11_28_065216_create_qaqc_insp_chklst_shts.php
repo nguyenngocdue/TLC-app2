@@ -14,14 +14,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prod_runs', function (Blueprint $table) {
+        Schema::create('qaqc_insp_chklst_shts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('prod_order_id');
-            $table->unsignedBigInteger('prod_routing_link_id');
-            $table->unique(['prod_order_id', 'prod_routing_link_id']);
-            $table->string('status')->nullable();
-            $table->double('total_hours')->nullable();
-            $table->double('total_man_hours')->nullable();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->string('slug')->unique();
+            $table->unsignedBigInteger('qaqc_insp_chklst_id');
+
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prod_runs');
+        Schema::dropIfExists('qaqc_insp_chklst_sht');
     }
 };

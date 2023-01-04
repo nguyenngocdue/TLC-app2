@@ -19,13 +19,10 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('control_type_id');
-            $table->unsignedBigInteger('qaqc_insp_tmpl_id');
-            $table->unsignedBigInteger('qaqc_insp_sheet_id');
+            // $table->unsignedBigInteger('qaqc_insp_tmpl_id');
+            $table->unsignedBigInteger('qaqc_insp_tmpl_sht_id');
             $table->unsignedBigInteger('qaqc_insp_group_id');
             $table->unsignedBigInteger('qaqc_insp_control_group_id')->nullable();
-            // $table->unsignedBigInteger('prod_routing_id');
-            // $table->unsignedBigInteger('wir_description_id');
-            // $table->unique(['prod_routing_id', 'wir_description_id']);
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;

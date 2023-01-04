@@ -1,0 +1,46 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    qaqc_insp_tmpl_shts: [Qaqc_insp_tmpl_sht!]! @all @guard
+    qaqc_insp_tmpl_sht(id: ID @eq): Qaqc_insp_tmpl_sht @find @guard
+}
+type Qaqc_insp_tmpl_sht {
+    id: ID!
+    name: String!
+    description: String!
+    slug: String!
+    qaqc_insp_tmpl_id: int!
+    created_at: DateTime
+    updated_at: DateTime
+    getTemplateLines: [Qaqc_insp_tmpl_line!]! @hasMany
+}
+
+input CreateQAQCInspTmplSheetInput {
+    id: ID!
+    name: String!
+    description: String!
+    slug: String!
+    qaqc_insp_tmpl_id: int!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateQAQCInspTmplSheetInput {
+    id: ID!
+    name: String
+    description: String
+    slug: String
+    qaqc_insp_tmpl_id: int
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createQAQCInspTmplSheet(
+        input: CreateQAQCInspTmplSheetInput! @spread
+    ): Qaqc_insp_tmpl_sht! @guard @create
+    updateQAQCInspTmplSheet(
+        input: UpdateQAQCInspTmplSheetInput! @spread
+    ): Qaqc_insp_tmpl_sht @guard @update
+    deleteQAQCInspTmplSheet(id: ID!): Qaqc_insp_tmpl_sht @guard @delete
+}

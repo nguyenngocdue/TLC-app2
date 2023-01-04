@@ -45,10 +45,10 @@ return new class extends Migration
             $table->foreign('owner_id')->references('id')->on('users');
         });
         //************** PRODUCTION MODULE **************/
-        Schema::table('prod_run_lines', function (Blueprint $table) {
-            $table->foreign('prod_run_id')->references('id')->on('prod_runs');
-        });
         Schema::table('prod_runs', function (Blueprint $table) {
+            $table->foreign('prod_sequence_id')->references('id')->on('prod_sequences');
+        });
+        Schema::table('prod_sequences', function (Blueprint $table) {
             $table->foreign('prod_order_id')->references('id')->on('prod_orders');
             $table->foreign('prod_routing_link_id')->references('id')->on('prod_routing_links');
         });
@@ -68,8 +68,8 @@ return new class extends Migration
             $table->foreign('prod_routing_id')->references('id')->on('prod_routings')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('qaqc_insp_tmpl_lines', function (Blueprint $table) {
-            $table->foreign('qaqc_insp_tmpl_id')->references('id')->on('qaqc_insp_tmpls')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('qaqc_insp_sheet_id')->references('id')->on('qaqc_insp_sheets')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign('qaqc_insp_tmpl_id')->references('id')->on('qaqc_insp_tmpls')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('qaqc_insp_tmpl_sht_id')->references('id')->on('qaqc_insp_tmpl_shts')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('qaqc_insp_group_id')->references('id')->on('qaqc_insp_groups')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('qaqc_insp_control_group_id')->references('id')->on('qaqc_insp_control_groups')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('control_type_id')->references('id')->on('control_types')->onDelete('cascade')->onUpdate('cascade');
@@ -79,8 +79,8 @@ return new class extends Migration
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('qaqc_insp_chklst_lines', function (Blueprint $table) {
-            $table->foreign('qaqc_insp_chklst_id')->references('id')->on('qaqc_insp_chklsts')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('qaqc_insp_sheet_id')->references('id')->on('qaqc_insp_sheets')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign('qaqc_insp_chklst_id')->references('id')->on('qaqc_insp_chklsts')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('qaqc_insp_chklst_sht_id')->references('id')->on('qaqc_insp_chklst_shts')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('qaqc_insp_group_id')->references('id')->on('qaqc_insp_groups')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('qaqc_insp_control_group_id')->references('id')->on('qaqc_insp_control_groups')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('qaqc_insp_control_value_id')->references('id')->on('qaqc_insp_control_values')->onDelete('cascade')->onUpdate('cascade');
@@ -91,6 +91,12 @@ return new class extends Migration
         });
         Schema::table('qaqc_insp_control_values', function (Blueprint $table) {
             $table->foreign('qaqc_insp_control_group_id')->references('id')->on('qaqc_insp_control_groups')->onDelete('cascade')->onUpdate('cascade');
+        });
+        Schema::table('qaqc_insp_tmpl_shts', function (Blueprint $table) {
+            $table->foreign('qaqc_insp_tmpl_id')->references('id')->on('qaqc_insp_tmpls')->onDelete('cascade')->onUpdate('cascade');
+        });
+        Schema::table('qaqc_insp_chklst_shts', function (Blueprint $table) {
+            $table->foreign('qaqc_insp_chklst_id')->references('id')->on('qaqc_insp_chklsts')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
