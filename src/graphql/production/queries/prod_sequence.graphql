@@ -1,0 +1,63 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    prod_sequences: [Prod_sequence!]! @all @guard
+    prod_sequence(id: ID @eq): Prod_sequence @find @guard
+    prod_sequence_two_id(
+        prod_order_id: Int @eq
+        prod_routing_link_id: Int @eq
+    ): Prod_sequence @find @guard
+}
+type Prod_sequence {
+    id: ID!
+    prod_order_id: Int!
+    prod_routing_link_id: Int!
+    status: String!
+    total_hours: Float
+    total_man_hours: Float
+    created_at: DateTime
+    updated_at: DateTime
+    prodOrder: Prod_order! @belongsTo
+    prodRoutingLinks: Prod_routing_link! @belongsTo
+    prodRuns: [Prod_run!]! @hasMany
+}
+
+input CreateProdSequenceInput {
+    prod_order_id: Int!
+    prod_routing_link_id: Int!
+    status: String!
+    total_hours: Float
+    total_man_hours: Float
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateProdSequenceInput {
+    id: ID!
+    prod_order_id: Int
+    prod_routing_link_id: Int
+    status: String
+    total_hours: Float
+    total_man_hours: Float
+    created_at: DateTime
+    updated_at: DateTime
+}
+extend type Mutation {
+    createProdSequence(input: CreateProdSequenceInput! @spread): Prod_sequence!
+        @guard
+        @create
+    updateProdSequence(input: UpdateProdSequenceInput! @spread): Prod_sequence
+        @guard
+        @update
+    createProdSequenceTransactionTo(
+        input: CreateProdSequenceInput! @spread
+    ): Prod_sequence
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\CreateProdSequence")
+    updateProdSequenceTransactionTo(
+        input: UpdateProdSequenceInput! @spread
+    ): Prod_sequence
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\UpdateProdSequence")
+    deleteProdSequence(id: ID!): Prod_sequence @guard @delete
+}

@@ -14,13 +14,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('qaqc_insp_sheets', function (Blueprint $table) {
+        Schema::create('prod_sequences', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('slug')->unique();
-            // $table->unsignedBigInteger('parent')->nullable();
-
+            $table->unsignedBigInteger('prod_order_id');
+            $table->unsignedBigInteger('prod_routing_link_id');
+            $table->unique(['prod_order_id', 'prod_routing_link_id']);
+            $table->string('status')->nullable();
+            $table->double('total_hours')->nullable();
+            $table->double('total_man_hours')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qaqc_insp_sheets');
+        Schema::dropIfExists('prod_sequences');
     }
 };

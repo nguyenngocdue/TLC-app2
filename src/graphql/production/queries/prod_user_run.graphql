@@ -4,25 +4,25 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 extend type Query {
     prod_user_runs: [Prod_user_run!]! @all @guard
-    prod_user_run(prod_run_line_id: ID @eq, user_id: ID @eq): Prod_user_run
+    prod_user_run(prod_run_id: ID @eq, user_id: ID @eq): Prod_user_run
         @find
         @guard
 }
 type Prod_user_run {
-    prod_run_line_id: ID!
+    prod_run_id: ID!
     user_id: ID!
     created_at: DateTime
     updated_at: DateTime
 }
 
 input CreateProdUserRunInput {
-    prod_run_line_id: ID!
+    prod_run_id: ID!
     user_id: ID!
     created_at: DateTime
     updated_at: DateTime
 }
 input UpdateProdUserRunInput {
-    prod_run_line_id: ID
+    prod_run_id: ID
     user_id: ID
     created_at: DateTime
     updated_at: DateTime

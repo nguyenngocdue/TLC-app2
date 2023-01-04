@@ -2,9 +2,9 @@
 
 namespace App\GraphQL\Mutations;
 
-use App\Models\Prod_run;
+use App\Models\Prod_sequence;
 
-final class CreateProdRun
+final class CreateProdSequence
 {
     /**
      * @param  null  $_
@@ -13,7 +13,7 @@ final class CreateProdRun
     public function __invoke($_, array $args)
     {
         try {
-            $prodRun = Prod_run::create(
+            $prodRun = Prod_sequence::create(
                 [
                     'prod_order_id' => $args['prod_order_id'],
                     'prod_routing_link_id' => $args['prod_routing_link_id'],

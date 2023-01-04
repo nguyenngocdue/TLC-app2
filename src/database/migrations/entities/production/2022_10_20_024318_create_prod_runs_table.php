@@ -14,15 +14,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prod_user_runs', function (Blueprint $table) {
-            $table->unsignedBigInteger('prod_run_id');
-            $table->unsignedBigInteger('user_id');
-            $table->primary(['prod_run_id', 'user_id']);
+        Schema::create('prod_runs', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('prod_sequence_id');
+            $table->date('date');
+            $table->time('start');
+            $table->time('end')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('prod_run_id')->references('id')->on('prod_runs')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prod_user_runs');
+        Schema::dropIfExists('prod_runs');
     }
 };
