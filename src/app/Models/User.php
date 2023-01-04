@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\BigThink\TraitMenuTitle;
 use App\BigThink\TraitMetaForChart;
+use App\BigThink\TraitMorphManyByFieldName;
+use App\Http\Traits\HasAttachments;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -28,6 +30,9 @@ class User extends Authenticatable implements LdapAuthenticatable
     use HasApiTokens;
     use TraitMetaForChart;
     use TraitMenuTitle;
+    use TraitMorphManyByFieldName;
+    use HasAttachments;
+
 
     /**
      * The attributes that are mass assignable.
@@ -71,7 +76,6 @@ class User extends Authenticatable implements LdapAuthenticatable
     // }
 
     public $eloquentParams = [
-        "attachment" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "avatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
         "getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
@@ -90,11 +94,6 @@ class User extends Authenticatable implements LdapAuthenticatable
     public $oracyParams = [];
     protected $guard_name = 'web';
 
-    public function attachment()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-    }
     public function avatar()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -196,17 +195,5 @@ class User extends Authenticatable implements LdapAuthenticatable
             'last_name' => $this->last_name,
             'email' => $this->email,
         ];
-    }
-
-    public function attachment1()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-        $sql = $relation
-            ->getQuery()
-            ->where('category', 11)
-            ->toSql();
-        Log::info($sql);
-        return $relation;
     }
 }

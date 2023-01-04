@@ -1,6 +1,54 @@
 {
-    "_attachment": {
-        "name": "_attachment",
+    "_attachment_1": {
+        "name": "_attachment_1",
+        "relationship": "morphMany",
+        "control_name": "",
+        "renderer_view_all": "thumbnails",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_attachment_2": {
+        "name": "_attachment_2",
+        "relationship": "morphMany",
+        "control_name": "",
+        "renderer_view_all": "thumbnails",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_attachment_3": {
+        "name": "_attachment_3",
+        "relationship": "morphMany",
+        "control_name": "",
+        "renderer_view_all": "thumbnails",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_attachment_4": {
+        "name": "_attachment_4",
+        "relationship": "morphMany",
+        "control_name": "",
+        "renderer_view_all": "thumbnails",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_attachment_5": {
+        "name": "_attachment_5",
         "relationship": "morphMany",
         "control_name": "",
         "renderer_view_all": "thumbnails",

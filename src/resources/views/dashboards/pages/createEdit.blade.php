@@ -28,7 +28,7 @@ $id = $action === "edit" ? $values->id : "";
 
         $colSpan = $val['col_span'];
         $value = $action === "edit" ? $values->{$columnName} :'';
-        $title = $columnName."\\".$control ;
+        $title = $columnName." / ".$control ;
         $col_span = $val['col_span'] === '' ? 1 : $val['col_span']*1;
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
 

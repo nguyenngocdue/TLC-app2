@@ -38,7 +38,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_issue_datetime": {
@@ -200,7 +200,7 @@
         "column_name": "accident_book_entry",
         "column_type": "boolean",
         "label": "Accident Book Entry",
-        "control": "text",
+        "control": "toggle",
         "col_span": "4",
         "width": "",
         "hidden_view_all": "",
@@ -307,10 +307,10 @@
         "validation": "",
         "formula": ""
     },
-    "_comment_1": {
-        "name": "_comment_1",
-        "column_name": "comment_1",
-        "column_type": "text",
+    "_comment_by_clinic": {
+        "name": "_comment_by_clinic",
+        "column_name": "comment_by_clinic",
+        "column_type": "eloquent_prop",
         "label": "Comment by Clinic",
         "control": "comment",
         "col_span": "12",
@@ -531,20 +531,6 @@
         "validation": "",
         "formula": ""
     },
-    "_comment_2": {
-        "name": "_comment_2",
-        "column_name": "comment_2",
-        "column_type": "text",
-        "label": "Comment by Witnesses",
-        "control": "comment",
-        "col_span": "12",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "true",
-        "validation": "",
-        "formula": ""
-    },
     "_h3a": {
         "name": "_h3a",
         "column_name": "h3a",
@@ -559,10 +545,10 @@
         "validation": "",
         "formula": ""
     },
-    "_comment_3": {
-        "name": "_comment_3",
-        "column_name": "comment_3",
-        "column_type": "text",
+    "_comment_by_line_manager": {
+        "name": "_comment_by_line_manager",
+        "column_name": "comment_by_line_manager",
+        "column_type": "eloquent_prop",
         "label": "Comment by Line Manager",
         "control": "comment",
         "col_span": "12",
@@ -587,10 +573,10 @@
         "validation": "",
         "formula": ""
     },
-    "_comment_4": {
-        "name": "_comment_4",
-        "column_name": "comment_4",
-        "column_type": "static",
+    "_comment_by_general_manager": {
+        "name": "_comment_by_general_manager",
+        "column_name": "comment_by_general_manager",
+        "column_type": "eloquent_prop",
         "label": "Comment by General Manager\/HSE Manager",
         "control": "comment",
         "col_span": "12",
@@ -636,20 +622,6 @@
         "label": "",
         "control": "z_h5",
         "col_span": "12",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
-    "_comments": {
-        "name": "_comments",
-        "column_name": "comments",
-        "column_type": "eloquent_prop",
-        "label": "",
-        "control": "",
-        "col_span": "",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",

@@ -26,6 +26,7 @@ class Thumbnails extends Component
     {
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $cell = json_decode($this->cell);
+        if (is_null($cell)) return "";
         // dd($cell);
         $result = array_map(fn ($item) => [
             'url_thumbnail' => $path . $item->url_thumbnail,

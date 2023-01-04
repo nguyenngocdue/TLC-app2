@@ -1,6 +1,30 @@
 {
-    "_comments": {
-        "name": "_comments",
+    "_comment_by_clinic": {
+        "name": "_comment_by_clinic",
+        "relationship": "morphMany",
+        "control_name": "",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_comment_by_line_manager": {
+        "name": "_comment_by_line_manager",
+        "relationship": "morphMany",
+        "control_name": "",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_comment_by_general_manager": {
+        "name": "_comment_by_general_manager",
         "relationship": "morphMany",
         "control_name": "",
         "renderer_view_all": "count",
@@ -104,7 +128,7 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "field_id",
-        "filter_values": "105",
+        "filter_values": "104",
         "radio_checkbox_colspan": "3"
     },
     "_activityLeadToIssue()": {
@@ -116,7 +140,7 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "field_id",
-        "filter_values": "106",
+        "filter_values": "105",
         "radio_checkbox_colspan": "3"
     },
     "_immediateCause()": {
@@ -128,7 +152,7 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "field_id",
-        "filter_values": "107",
+        "filter_values": "106",
         "radio_checkbox_colspan": "3"
     },
     "_issueRootCause()": {
@@ -140,7 +164,7 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "field_id",
-        "filter_values": "108",
+        "filter_values": "107",
         "radio_checkbox_colspan": "3"
     }
 }

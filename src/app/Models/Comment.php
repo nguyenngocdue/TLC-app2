@@ -33,9 +33,4 @@ class Comment extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
-    // filter all media from a comment
-    public function attachment()
-    {
-        return $this->morphMany(Attachment::class, 'attachable', 'object_type', 'object_id');
-    }
 }

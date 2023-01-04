@@ -16,7 +16,9 @@ class Hse_incident_report extends ModelExtended
     public $nameless = true;
 
     public $eloquentParams = [
-        "comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "comment_by_clinic" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "comment_by_line_manager" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "comment_by_general_manager" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         'getInjuredPerson' => ["belongsTo", User::class, 'injured_person'],
         'getLineManager' => ["belongsTo", User::class, 'line_manager'],
         'getReportPerson' => ["belongsTo", User::class, 'report_person'],
@@ -34,10 +36,23 @@ class Hse_incident_report extends ModelExtended
         "issueRootCause()" => ["getCheckedByField", Term::class],
     ];
 
-    public function comments()
+    public function comment_by_clinic()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function comment_by_line_manager()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function comment_by_general_manager()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
     public function getInjuredPerson()
     {
@@ -75,11 +90,6 @@ class Hse_incident_report extends ModelExtended
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    // public function accidentClassification()
-    // {
-    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
     public function causeOfIssue()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
