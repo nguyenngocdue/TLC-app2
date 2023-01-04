@@ -42,7 +42,7 @@
     <body>
         <div class=" flex bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
             <x-homepage.sidebar2 />
-            <div class="flex flex-col flex-1 w-full">
+            <div class="flex flex-col flex-1 w-full bg-gray-100">
                 <x-homepage.navbar2 />
                 <main class="h-full overflow-y-auto">
                     <div class="container1 mx-auto grid px-6">

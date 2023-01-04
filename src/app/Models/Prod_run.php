@@ -13,7 +13,7 @@ class Prod_run extends ModelExtended
 
     public $eloquentParams = [
         "users" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_sequence_id', 'user_id'],
-        "prodSequence" => ['belongsTo', Prod_run::class, 'prod_sequence_id'],
+        "prodSequence" => ['belongsTo', Prod_sequence::class, 'prod_sequence_id'],
     ];
 
     public function users()

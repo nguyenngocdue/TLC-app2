@@ -155,8 +155,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_productionRunLines": {
-        "name": "_productionRunLines",
+    "_productionRuns": {
+        "name": "_productionRuns",
         "relationship": "belongsToMany",
         "control_name": "",
         "renderer_view_all": "count",
