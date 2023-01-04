@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ComponentLib;
-use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\WelcomeController;
@@ -72,7 +72,7 @@ Route::group([
 Route::group([
     'middleware' => ['auth']
 ], function () {
-    Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::get('impersonate/user/{id}', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
 });

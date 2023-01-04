@@ -5,7 +5,11 @@
 @section('content')
 
 <div class="mb-8 grid gap-6 md:grid-cols-2 xl:grid-cols-2">
-    <x-renderer.report.widget />
+    @foreach($allWidgets as $widget)
+    <x-renderer.card title="{{$widget['title_a']}} - {{$widget['title_b']}}">
+        <x-renderer.report.widget :metric="$widget['metric']" />
+    </x-renderer.card>
+    @endforeach
 </div>
 
 

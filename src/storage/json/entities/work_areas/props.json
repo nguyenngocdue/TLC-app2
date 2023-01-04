@@ -24,7 +24,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_description": {
@@ -35,7 +35,7 @@
         "control": "textarea",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
@@ -53,7 +53,7 @@
         "hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formula": ""
+        "formula": "All_SlugifyByName"
     },
     "_created_at": {
         "name": "_created_at",

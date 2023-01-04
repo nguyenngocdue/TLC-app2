@@ -1,20 +1,8 @@
 {
-    "_prodRoutings": {
-        "name": "_prodRoutings",
-        "relationship": "belongsToMany",
-        "control_name": "prodRoutings",
-        "renderer_view_all": "count",
-        "renderer_view_all_param": "",
-        "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_prodSequence": {
-        "name": "_prodSequence",
+    "_getValues": {
+        "name": "_getValues",
         "relationship": "hasMany",
-        "control_name": "prodSequence",
+        "control_name": "getValues",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
@@ -23,10 +11,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_discipline": {
-        "name": "_discipline",
+    "_getControlGroup": {
+        "name": "_getControlGroup",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "getControlGroup",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

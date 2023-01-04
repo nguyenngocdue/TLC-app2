@@ -6,7 +6,7 @@
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_icons",
-        "renderer_edit_param": "",
+        "renderer_edit_param": "getManyIconParams",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "2"
@@ -14,7 +14,7 @@
     "_getAssignee": {
         "name": "_getAssignee",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "getAssignee",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -26,7 +26,7 @@
     "_getDefMonitors()": {
         "name": "_getDefMonitors()",
         "relationship": "getCheckedByField",
-        "control_name": "",
+        "control_name": "getDefMonitors()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

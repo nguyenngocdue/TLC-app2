@@ -2,12 +2,13 @@
     "_getField": {
         "name": "_getField",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "getField",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
-        "filter_values": ""
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }

@@ -11,8 +11,9 @@ class Widget extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $metric,
+    ) {
         //
     }
 
@@ -23,6 +24,9 @@ class Widget extends Component
      */
     public function render()
     {
-        return view('components.renderer.report.widget');
+        return view(
+            'components.renderer.report.widget',
+            ['metric' => $this->metric]
+        );
     }
 }

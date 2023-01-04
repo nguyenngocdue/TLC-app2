@@ -28,9 +28,7 @@
                     @if($child['title'] === '-')
                     <hr />
                     @else
-                    <!-- <div class="focus:shadow-outline-purple flex items-center justify-between rounded-lg bg-purple-600 text-base font-semibold text-purple-100 shadow-md focus:outline-none"> -->
                     <a class="px-2 w-full" href={{$child['href']}}>{{$child['title']}}</a>
-                    <!-- </div> -->
                     @endif
                 </li>
                 @endforeach

@@ -2,9 +2,11 @@
 
 namespace App\BigThink;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use stdClass;
 
 trait TraitMetaForChart
 {
@@ -33,8 +35,33 @@ trait TraitMetaForChart
         return DB::select($sql);
     }
 
+    function makeOthers($dataSource)
+    {
+        $values = array_map(fn ($item) => $item->metric_count, $dataSource);
+        // dump($values);
+        $median = Arr::median($values);
+        $result = [];
+        $other = (object)(['metric_id' => 99999, 'metric_name' => "Others", 'metric_count' => 0, 'descriptions' => []]);
+        foreach ($dataSource as $item) {
+            if ($item->metric_count > $median) {
+                $result[] = $item;
+            } else {
+                $other->metric_count += $item->metric_count;
+                $other->descriptions[] = $item->metric_name;
+            }
+        }
+        if ($other->metric_count > 0) {
+            $other->descriptions = join(", ", $other->descriptions);
+            $result[] = $other;
+        }
+
+        return $result;
+    }
+
     function getMetaForChart($fn, $params)
     {
-        return $this->{$fn}($params);
+        $result = $this->{$fn}($params);
+        $result = $this->makeOthers($result);
+        return $result;
     }
 }

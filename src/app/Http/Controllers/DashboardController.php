@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Workflow\LibWidgets;
 use App\Utils\Support\Table;
 
-class DashBoardController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -48,6 +48,9 @@ class DashBoardController extends Controller
         $allWidgets = array_map(fn ($widget) => array_merge($this->a($widget), $widget), $allWidgets);
 
         // dump($allWidgets);
-        return view('dashboards.dashboard');
+        return view(
+            'dashboards.dashboard',
+            ['allWidgets' => $allWidgets]
+        );
     }
 }

@@ -1,12 +1,12 @@
 {
-    "_user": {
-        "name": "_user",
+    "_getTemplateLines": {
+        "name": "_getTemplateLines",
         "relationship": "hasMany",
-        "control_name": "user",
+        "control_name": "getTemplateLines",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
-        "renderer_edit": "many_icons",
-        "renderer_edit_param": "getManyIconParams",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
