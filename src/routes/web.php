@@ -4,6 +4,7 @@ use App\Http\Controllers\ComponentLib;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UpdateUserSettings;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Workflow\ManageStatusesController;
 use App\Http\Controllers\Workflow\ManageWidgetsController;
 use App\Utils\Support\Entities;
@@ -79,12 +80,12 @@ Route::group([
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 // Route::get('/mail-test', [MailController::class, 'index']);
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
-Route::resource('test', HomeController::class);
+Route::get('test', [HomeController::class, 'index']);
+Route::get('welcome', [WelcomeController::class, 'index']);
 Route::group([
     'prefix' => 'dashboard/workflow',
 ], function () {
     Route::resource('manageStatuses', ManageStatusesController::class)->only('index', 'store', 'create');
     Route::resource('manageWidgets', ManageWidgetsController::class)->only('index', 'store', 'create');
 });
-Route::resource('/abc', HomeController::class);
 Route::get('components', [ComponentLib::class, 'index']);
