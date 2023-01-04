@@ -12,10 +12,10 @@ class Zunit_test_5 extends ModelExtended
     public $menuTitle = "UT05 (Attachments)";
 
     public $eloquentParams = [
-        "media" => ['morphMany', Attachment::class, 'mediable', 'object_type', 'object_id'],
+        "attachment" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
-    public function media()
+    public function attachment()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);

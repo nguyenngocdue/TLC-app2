@@ -13,7 +13,7 @@ class Attachment extends ModelExtended
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],
         "getCategory" => ['belongsTo', Field::class, 'category'],
-        "mediable" => ['morphTo', 'mediable', 'object_type', 'object_id'],
+        "attachable" => ['morphTo', 'attachable', 'object_type', 'object_id'],
     ];
 
     public function user()
@@ -28,7 +28,7 @@ class Attachment extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function mediable()
+    public function attachable()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);

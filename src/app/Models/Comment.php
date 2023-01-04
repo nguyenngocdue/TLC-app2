@@ -36,6 +36,6 @@ class Comment extends ModelExtended
     // filter all media from a comment
     public function media()
     {
-        return $this->morphMany(Attachment::class, 'mediable', 'object_type', 'object_id');
+        return $this->morphMany(Attachment::class, 'attachable', 'object_type', 'object_id');
     }
 }
