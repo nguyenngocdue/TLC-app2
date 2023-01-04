@@ -226,6 +226,13 @@ class Helper
         return $colNameByControls;
     }
 
+    public static function getColNamesByControl($props, $control)
+    {
+        $props = array_filter($props, fn ($prop) => $prop['control'] === $control);
+        $colNameByControls = array_values(array_map(fn ($item) => $item['column_name'], $props));
+        return $colNameByControls;
+    }
+
     // public static function getValColNamesValueNotEmpty($props, $controlName)
     // {
     //     $props = array_filter($props, fn ($prop) => $prop[$controlName] != '');
