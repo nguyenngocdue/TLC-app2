@@ -58,6 +58,16 @@ class UploadFile extends Controller
             return response()->json($th);
         }
     }
+    /**
+     * createThumbnailGiveImage
+     *
+     * @param  mixed $imageFileType Type of image file
+     * @param  mixed $file Image file
+     * @param  mixed $fileName Name Image file
+     * @param  mixed $path Link Path image file
+     * @param  mixed $imageFileTypeFrame Type target image file type
+     * @return void
+     */
     private function createThumbnailGiveImage($imageFileType, $file, $fileName, $path, $imageFileTypeFrame = ['jpeg', 'png', 'jpg', 'gif', 'svg'])
     {
         $fileNameNormal = pathinfo($fileName, PATHINFO_FILENAME);
@@ -71,6 +81,12 @@ class UploadFile extends Controller
         }
         return $pathThumbnail;
     }
+    /**
+     * createAttachment
+     *
+     * @param  mixed $attachments 
+     * @return void
+     */
     private function createAttachment($attachments)
     {
         foreach ($attachments as $attachment) {
