@@ -12,9 +12,20 @@ class ManageWidgetsController extends AbstractManageLibController
     {
         return   [
             [
+                "dataIndex" => "action",
+                "align" => "center",
+            ],
+            [
                 'dataIndex' => "name",
                 "renderer"  => 'read-only-text',
                 'editable' => true,
+            ],
+            [
+                'dataIndex' => "chart_type",
+                "renderer"  => 'dropdown',
+                'editable' => true,
+                'cbbDataSource' => ['', 'line', 'bar', 'pie', 'doughnut'],
+                'sortBy' => 'value',
             ],
             [
                 'dataIndex' => "fn",

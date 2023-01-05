@@ -4,13 +4,20 @@
 
 @section('content')
 
-<div class="mb-8 grid gap-6 md:grid-cols-2 xl:grid-cols-2">
+<div class="mb-8 grid gap-6 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1">
     @foreach($allWidgets as $widget)
     @php
         $title = $widget['title_a']." - ".$widget['title_b'];
     @endphp
     <x-renderer.card title="{{$title}}">
-        <x-renderer.report.widget key="{{md5($title)}}" :meta="$widget['meta']" :metric="$widget['metric']" />
+        <x-renderer.report.widget 
+        key="{{md5($title)}}" 
+        title="Total {{$widget['title_a']}}"
+        figure="{{$widget['meta']['max']}}"
+        chartType="{{$widget['chartType']}}"
+        :meta="$widget['meta']" 
+        :metric="$widget['metric']" 
+        />
     </x-renderer.card>
     @endforeach
 </div>

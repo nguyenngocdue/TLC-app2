@@ -42,16 +42,21 @@ trait TraitMetaForChart
         $median = Arr::median($values);
         $result = [];
         $other = (object)(['metric_id' => 99999, 'metric_name' => "Others", 'metric_count' => 0,]);
-        foreach ($dataSource as $item) {
-            if ($item->metric_count > $median) {
-                $result[] = $item;
-            } else {
-                $other->metric_count += $item->metric_count;
-                $descriptions[] = $item->metric_name;
+        if (count($dataSource) > 10) {
+            foreach ($dataSource as $item) {
+                if ($item->metric_count > $median) {
+                    $result[] = $item;
+                } else {
+                    $other->metric_count += $item->metric_count;
+                    $descriptions[] = $item->metric_name;
+                }
             }
+        } else {
+            $result = $dataSource;
         }
         if ($other->metric_count > 0) {
-            $other->metric_name = "Others: " . join(", ", $descriptions);
+            $other->metric_name = "Others";
+            // $other->metric_name = "Others: " . join(", ", $descriptions);
             $result[] = $other;
         }
 
@@ -78,6 +83,7 @@ trait TraitMetaForChart
         return [
             'meta' => $meta,
             'metric' => $result,
+            'chartType' => $params['chart_type'],
         ];
     }
 }

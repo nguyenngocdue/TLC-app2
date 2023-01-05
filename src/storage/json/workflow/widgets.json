@@ -1,6 +1,7 @@
 {
     "prod_8": {
         "name": "prod_8",
+        "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "prod_orders",
         "table_b": "sub_projects",
@@ -10,6 +11,7 @@
     },
     "prod_9": {
         "name": "prod_9",
+        "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "prod_orders",
         "table_b": "prod_routings",
@@ -19,6 +21,7 @@
     },
     "users_1": {
         "name": "users_1",
+        "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
         "table_b": "workplaces",
@@ -28,6 +31,7 @@
     },
     "users_2": {
         "name": "users_2",
+        "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
         "table_b": "user_categories",
@@ -37,6 +41,7 @@
     },
     "users_3": {
         "name": "users_3",
+        "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
         "table_b": "user_types",
@@ -46,6 +51,7 @@
     },
     "users_4": {
         "name": "users_4",
+        "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
         "table_b": "user_position1s",
@@ -55,6 +61,7 @@
     },
     "users_5": {
         "name": "users_5",
+        "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
         "table_b": "user_position2s",
@@ -64,6 +71,7 @@
     },
     "users_6": {
         "name": "users_6",
+        "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
         "table_b": "user_disciplines",
@@ -73,6 +81,7 @@
     },
     "users_7": {
         "name": "users_7",
+        "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
         "table_b": "departments",
