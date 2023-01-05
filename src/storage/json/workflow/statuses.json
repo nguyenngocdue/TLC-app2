@@ -77,6 +77,12 @@
         "color": "orange",
         "color_index": "200"
     },
+    "failed": {
+        "name": "failed",
+        "title": "Failed",
+        "color": "red",
+        "color_index": "300"
+    },
     "finished": {
         "name": "finished",
         "title": "Finished",
@@ -135,6 +141,12 @@
         "name": "on_hold",
         "title": "On Hold",
         "color": "pink",
+        "color_index": "200"
+    },
+    "passed": {
+        "name": "passed",
+        "title": "Passed",
+        "color": "cyan",
         "color_index": "200"
     },
     "pending": {

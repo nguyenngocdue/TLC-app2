@@ -1,5 +1,15 @@
 @php
-$userMenu = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/navbarUserMenu.json'), true);
+$userMenuStr = file_get_contents(storage_path() . '/json/configs/view/dashboard/navbarUserMenu.json');
+switch(env('APP_ENV')){
+    case "production": $app = 'app2.tlcmodular.com'; $phpmyadmin="192.168.100.100:18102"; break;
+    case "testing": $app = 'beta2.tlcmodular.com'; $phpmyadmin="192.168.100.100:28102"; break;
+    case "local": default: $app = 'localhost:38002'; $phpmyadmin="localhost:38102"; break;
+}
+// $userMenuStr = str_replace("{{hostname}}", $hostname, $userMenuStr);
+$userMenuStr = str_replace("{{app}}", $app, $userMenuStr);
+$userMenuStr = str_replace("{{phpmyadmin}}", $phpmyadmin, $userMenuStr);
+
+$userMenu = json_decode($userMenuStr, true);
 @endphp
 
 <button class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none" @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account" aria-haspopup="true">

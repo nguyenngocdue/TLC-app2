@@ -53,6 +53,7 @@ abstract class AbstractManageLibController extends Controller
         unset($dataSource["_token"]);
         $dataSource = $this->distributeArrayToObject($dataSource);
         // dd($dataSource);
+        // dd("Saving to " . $this->libraryClass);
         $this->libraryClass::setAll($dataSource);
         return redirect()->back();
     }

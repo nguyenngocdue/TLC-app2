@@ -16,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('hse_incident_reports', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->unsignedBigInteger('work_area_id');
             $table->dateTime('issue_datetime');
             $table->unsignedBigInteger('injured_person');

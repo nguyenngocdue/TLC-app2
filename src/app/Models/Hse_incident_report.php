@@ -8,7 +8,7 @@ class Hse_incident_report extends ModelExtended
 {
     public $menuTitle = "HSE Incident Reports";
     protected $fillable = [
-        'id', 'work_area_id', 'issue_datetime', 'injured_person', 'line_manager', 'report_person',
+        'id', 'name', 'work_area_id', 'issue_datetime', 'injured_person', 'line_manager', 'report_person',
         'number_injured_person', 'number_involved_person', 'issue_description',
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
     ];
@@ -23,19 +23,33 @@ class Hse_incident_report extends ModelExtended
         'getLineManager' => ["belongsTo", User::class, 'line_manager'],
         'getReportPerson' => ["belongsTo", User::class, 'report_person'],
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
+        'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],
+        "attachment_1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "attachment_2" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public $oracyParams = [
         "mainAffectedPart()" => ["getCheckedByField", Term::class],
         "natureOfInjury()" => ["getCheckedByField", Term::class],
         "treatmentInstruction()" => ["getCheckedByField", Term::class],
-        // "accidentClassification()" => ["getCheckedByField", Term::class],
         "causeOfIssue()" => ["getCheckedByField", Term::class],
         "activityLeadToIssue()" => ["getCheckedByField", Term::class],
         "immediateCause()" => ["getCheckedByField", Term::class],
         "issueRootCause()" => ["getCheckedByField", Term::class],
     ];
 
+    public function attachment_1()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function attachment_2()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
     public function comment_by_clinic()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -70,6 +84,11 @@ class Hse_incident_report extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getWorkArea()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getCorrectiveActions()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

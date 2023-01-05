@@ -11,11 +11,8 @@ class Widget extends Component
      *
      * @return void
      */
-    public function __construct(
-        private $meta = [],
-        private $metric = [],
-        private $key = "",
-    ) {
+    public function __construct()
+    {
         //
     }
 
@@ -28,11 +25,6 @@ class Widget extends Component
     {
         return view(
             'components.renderer.report.widget',
-            [
-                'key' => $this->key,
-                'meta' => $this->meta,
-                'metric' => $this->metric,
-            ]
         );
     }
 }

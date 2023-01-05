@@ -17,6 +17,18 @@ class ManageWidgetsController extends AbstractManageLibController
                 'editable' => true,
             ],
             [
+                'dataIndex' => "hidden",
+                "renderer"  => 'dropdown',
+                'editable' => true,
+            ],
+            [
+                'dataIndex' => "chart_type",
+                "renderer"  => 'dropdown',
+                'editable' => true,
+                'cbbDataSource' => ['', 'line', 'bar', 'pie', 'doughnut'],
+                'sortBy' => 'value',
+            ],
+            [
                 'dataIndex' => "fn",
                 'renderer' => 'dropdown',
                 'editable' => true,

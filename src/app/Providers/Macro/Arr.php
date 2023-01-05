@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Arr;
 
-Arr::macro('median', function ($arr) {
+Arr::macro('median', function ($arr, $greater = 1) {
     if ($arr) {
+        $arr = array_filter($arr, fn ($item) => $item > $greater);
         $count = count($arr);
         sort($arr);
         $mid = floor(($count - 1) / 2);

@@ -22,4 +22,3 @@ Homestead.json
 .phpunit.result.cache
 
 mysql/
-src/dockersh

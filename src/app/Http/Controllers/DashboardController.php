@@ -37,6 +37,8 @@ class DashboardController extends Controller
             "title_b" => $model_b->getMenuTitle(),
             "meta" => $meta_and_metric['meta'],
             "metric" => $meta_and_metric['metric'],
+            "chartType" => $meta_and_metric['chartType'],
+            "hidden" => $meta_and_metric['hidden'],
         ];
     }
     /**
@@ -48,6 +50,7 @@ class DashboardController extends Controller
     {
         $allWidgets = LibWidgets::getAll();
         $allWidgets = array_map(fn ($widget) => array_merge($this->a($widget), $widget), $allWidgets);
+        $allWidgets = array_filter($allWidgets, fn ($widget) => !$widget['hidden']);
 
         // dump($allWidgets);
         return view(
