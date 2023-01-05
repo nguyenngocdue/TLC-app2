@@ -6,8 +6,11 @@
 
 <div class="mb-8 grid gap-6 md:grid-cols-2 xl:grid-cols-2">
     @foreach($allWidgets as $widget)
-    <x-renderer.card title="{{$widget['title_a']}} - {{$widget['title_b']}}">
-        <x-renderer.report.widget :metric="$widget['metric']" />
+    @php
+        $title = $widget['title_a']." - ".$widget['title_b'];
+    @endphp
+    <x-renderer.card title="{{$title}}">
+        <x-renderer.report.widget key="{{md5($title)}}" :meta="$widget['meta']" :metric="$widget['metric']" />
     </x-renderer.card>
     @endforeach
 </div>

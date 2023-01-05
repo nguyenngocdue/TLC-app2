@@ -21,6 +21,8 @@
         <x-renderer.avatar-name>{!!$itemStr!!}</x-renderer.avatar-name>
         {{-- The following line is find with component test, but buggy with manyIconParams --}}
         {{-- <{{$itemRenderer}}>{!!$itemStr!!}</{{$itemRenderer}}> --}}
+        {{-- try this --}}
+        {{-- <x-dynamic-component :component="$componentName" class="mt-4" /> --}}
     </div>
     @endforeach
 </div>

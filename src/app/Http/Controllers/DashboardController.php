@@ -31,10 +31,12 @@ class DashboardController extends Controller
         // $global_filter = $widget['global_filter'];
         $model_a = Table::fromNameToModel($table_a);
         $model_b = Table::fromNameToModel($table_b);
+        $meta_and_metric = $model_a->getMetaForChart($fn, $widget);
         return [
             "title_a" => $model_a->getMenuTitle(),
             "title_b" => $model_b->getMenuTitle(),
-            "metric" => $model_a->getMetaForChart($fn, $widget),
+            "meta" => $meta_and_metric['meta'],
+            "metric" => $meta_and_metric['metric'],
         ];
     }
     /**

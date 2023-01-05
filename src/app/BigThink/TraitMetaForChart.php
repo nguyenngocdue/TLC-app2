@@ -41,27 +41,43 @@ trait TraitMetaForChart
         // dump($values);
         $median = Arr::median($values);
         $result = [];
-        $other = (object)(['metric_id' => 99999, 'metric_name' => "Others", 'metric_count' => 0, 'descriptions' => []]);
+        $other = (object)(['metric_id' => 99999, 'metric_name' => "Others", 'metric_count' => 0,]);
         foreach ($dataSource as $item) {
             if ($item->metric_count > $median) {
                 $result[] = $item;
             } else {
                 $other->metric_count += $item->metric_count;
-                $other->descriptions[] = $item->metric_name;
+                $descriptions[] = $item->metric_name;
             }
         }
         if ($other->metric_count > 0) {
-            $other->descriptions = join(", ", $other->descriptions);
+            $other->metric_name = "Others: " . join(", ", $descriptions);
             $result[] = $other;
         }
 
         return $result;
     }
 
+    function makeMeta($metric)
+    {
+        return [
+            'labels' => '[' . join(", ", array_map(fn ($item) =>  "'" . $item->metric_name . "'", $metric)) . ']',
+            'numbers' => '[' . join(", ", array_map(fn ($item) =>  $item->metric_count, $metric)) . ']',
+            'max' => array_sum(array_map(fn ($item) =>  $item->metric_count, $metric)),
+            'count' => count($metric),
+
+        ];
+    }
+
     function getMetaForChart($fn, $params)
     {
         $result = $this->{$fn}($params);
         $result = $this->makeOthers($result);
-        return $result;
+
+        $meta = $this->makeMeta($result);
+        return [
+            'meta' => $meta,
+            'metric' => $result,
+        ];
     }
 }
