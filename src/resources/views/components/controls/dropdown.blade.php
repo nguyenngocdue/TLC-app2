@@ -5,7 +5,7 @@ $valDataSource = array_values($dataSource)[0];
 $colNameListenJson = array_column($listenersJson,'column_name');
 // dump($colName , $colNameListenJson, $listenersJson);
 @endphp
-@if(count($valDataSource) <= 0) <p class=' bg-white border border-gray-300 text-blue-400 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>Table "{{array_keys($dataSource)[0]}}" is empty.</p>
+@if(count($valDataSource) <= 0) <p class=' bg-white border border-gray-300 text-orange-400 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>DataSource is empty ("{{array_keys($dataSource)[0]}}").</p>
     @else
     @if(!in_array($colName, $colNameListenJson))
     <select name='{{$colName}}' id="select-dropdown-{{$colName}}" onchange="onChangeItem(value*1, {{$colName}}, {{$valDataSource}})" class="  bg-white border border-gray-300  text-sm rounded-lg block  mt-1  focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">

@@ -1,7 +1,7 @@
 @php
 $editColName = str_replace('()', '', $colName);
 @endphp
-@if(count($dataSource->toArray()) <= 0) <p class=' bg-white border border-gray-300 text-blue-400 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>Data source reference is empty.</p>
+@if(count($dataSource->toArray()) <= 0) <p class=' bg-white border border-gray-300 text-orange-400 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>DataSource is empty.</p>
     @else
     <select multiple="multiple" name="{{$colName}}[]" id="select-dropdowm-multi-{{$editColName}}" class="min-h-[150px] max-h-[200px] border bg-white border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         @foreach($dataSource as $key => $data)
