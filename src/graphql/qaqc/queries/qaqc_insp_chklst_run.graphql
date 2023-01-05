@@ -1,0 +1,46 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    qaqc_insp_chklst_runs: [Qaqc_insp_chklst_run!]! @all @guard
+    qaqc_insp_chklst_run(id: ID @eq): Qaqc_insp_chklst_run @find @guard
+}
+type Qaqc_insp_chklst_run {
+    id: ID!
+    name: String!
+    description: String!
+    slug: String!
+    qaqc_insp_chklst_sht_id: ID!
+    created_at: DateTime
+    updated_at: DateTime
+    getLines: [Qaqc_insp_chklst_line!]! @hasMany
+}
+
+input CreateQAQCInspChklstRunInput {
+    id: ID!
+    name: String!
+    description: String!
+    slug: String!
+    qaqc_insp_chklst_sht_id: ID!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateQAQCInspChklstRunInput {
+    id: ID!
+    name: String
+    description: String
+    slug: String
+    qaqc_insp_chklst_sht_id: ID
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createQAQCInspChklstRun(
+        input: CreateQAQCInspChklstRunInput! @spread
+    ): Qaqc_insp_chklst_run! @guard @create
+    updateQAQCInspChklstRun(
+        input: UpdateQAQCInspChklstRunInput! @spread
+    ): Qaqc_insp_chklst_run @guard @update
+    deleteQAQCInspChklstRun(id: ID!): Qaqc_insp_chklst_run @guard @delete
+}

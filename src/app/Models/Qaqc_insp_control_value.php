@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_insp_control_value extends ModelExtended
 {
-    protected $fillable = ["id", "control_group", "name", "description"];
+    protected $fillable = ["id", "control_group", "name", "description", 'qaqc_insp_control_group_id'];
     protected $table = "qaqc_insp_control_values";
 
     public $eloquentParams = [

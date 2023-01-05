@@ -20,8 +20,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('control_type_id');
             $table->text('value')->nullable();
-            // $table->unsignedBigInteger('qaqc_insp_chklst_id');
-            $table->unsignedBigInteger('qaqc_insp_chklst_sht_id');
+            // $table->unsignedBigInteger('qaqc_insp_chklst_sht_id');
+            $table->unsignedBigInteger('qaqc_insp_chklst_run_id');
             $table->unsignedBigInteger('qaqc_insp_group_id');
             $table->unsignedBigInteger('qaqc_insp_control_value_id')->nullable();
             $table->unsignedBigInteger('qaqc_insp_control_group_id')->nullable();

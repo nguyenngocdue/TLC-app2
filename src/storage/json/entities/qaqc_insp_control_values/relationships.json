@@ -1,0 +1,26 @@
+{
+    "_getValues": {
+        "name": "_getValues",
+        "relationship": "hasMany",
+        "control_name": "getValues",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getControlGroup": {
+        "name": "_getControlGroup",
+        "relationship": "belongsTo",
+        "control_name": "getControlGroup",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    }
+}

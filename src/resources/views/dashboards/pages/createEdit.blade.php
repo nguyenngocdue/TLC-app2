@@ -86,7 +86,7 @@ $id = $action === "edit" ? $values->id : "";
                         <h2 class=" text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                         @endif
 
-                        <!-- Invisible anchor for scrolling when users click on validation fail message -->
+                        {{-- Invisible anchor for scrolling when users click on validation fail message --}}
                         <strong class="scroll-mt-20 snap-start" id="{{$columnName}}"></strong>
 
                         @switch ($control)

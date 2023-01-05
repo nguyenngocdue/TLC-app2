@@ -6,14 +6,14 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_insp_chklst_sht extends ModelExtended
 {
-    protected $fillable = ["id", "name", "description", "slug", "qaqc_insp_chklst_sht_id"];
+    protected $fillable = ["id", "name", "description", "slug", "qaqc_insp_chklst_id"];
     protected $table = "qaqc_insp_chklst_shts";
 
     public $eloquentParams = [
-        "getChklstLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_sht_id"],
+        "getRuns" => ["hasMany", Qaqc_insp_chklst_run::class, "qaqc_insp_chklst_sht_id"],
     ];
 
-    public function getChklstLines()
+    public function getRuns()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -4,20 +4,24 @@ namespace App\Console\Commands;
 
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_line;
+use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
+use App\Console\Commands\Traits\CloneRunTrait;
+use App\Models\Qaqc_insp_chklst_run;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
 class CloneTemplateToCheckListCommand extends Command
 {
+    use CloneRunTrait;
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
     protected $signature = 'ndc:clone 
-    {--idTmpl= : ID template Qaqc_insp_tmpls }
-    {--idChklst= : ID Qaqc_insp_chklst}';
+    {--idT= : ID template Qaqc_insp_tmpls }
+    {--idC= : ID Qaqc_insp_chklst}';
 
     /**
      * The console command description.
@@ -33,26 +37,29 @@ class CloneTemplateToCheckListCommand extends Command
      */
     public function handle()
     {
-        $idQaqcInspTmpl = $this->input->getOption('idTmpl');
-        $idQaqcInspChklst = $this->input->getOption('idChklst');
+        $idQaqcInspTmpl = $this->input->getOption('idT');
+        $idQaqcInspChklst = $this->input->getOption('idC');
         $qaqcInspTmpl = Qaqc_insp_tmpl::find($idQaqcInspTmpl);
         if (!Qaqc_insp_chklst::find($idQaqcInspChklst)) {
             $this->info("Qaqc_insp_chklst ID:{$idQaqcInspChklst} doesn't exist");
             return Command::FAILURE;
         }
-        $qaqcInspTmplLines = $qaqcInspTmpl->getLines;
         try {
-            foreach ($qaqcInspTmplLines as $qaqcInspTmplLine) {
-                Qaqc_insp_chklst_line::create([
-                    'name' => $qaqcInspTmplLine->name,
-                    'description' => $qaqcInspTmplLine->description,
-                    'control_type_id' => $qaqcInspTmplLine->control_type_id,
-                    'qaqc_insp_chklst_id' => $idQaqcInspChklst,
-                    'qaqc_insp_sheet_id' => $qaqcInspTmplLine->qaqc_insp_sheet_id,
-                    'qaqc_insp_group_id' => $qaqcInspTmplLine->qaqc_insp_group_id,
-                    'qaqc_insp_control_value_id' => null,
-                    'qaqc_insp_control_group_id' => $qaqcInspTmplLine->qaqc_insp_control_group_id,
-                ]);
+            $qaqcInspTmplSheets = $qaqcInspTmpl->getSheets;
+            if (count($qaqcInspTmplSheets) > 0) {
+                foreach ($qaqcInspTmplSheets as $qaqcInspTmplSheet) {
+                    $qaqcInspChklstSht = Qaqc_insp_chklst_sht::create([
+                        'name' => $qaqcInspTmplSheet->name,
+                        'description' => $qaqcInspTmplSheet->description,
+                        'slug' => $qaqcInspTmplSheet->slug,
+                        'qaqc_insp_chklst_id' => $idQaqcInspChklst,
+                    ]);
+                    $qaqcInspTmplRun = $qaqcInspTmplSheet->getRuns[0];
+                    $qaqcInspChklstRun = Qaqc_insp_chklst_run::create([
+                        'qaqc_insp_chklst_sht_id' => $qaqcInspTmplRun->id,
+                    ]);
+                    $this->cloneRun($qaqcInspTmplRun, $qaqcInspChklstRun->id);
+                }
             }
             $this->info("Clone Qaqc_insp_tmpl ID:{$idQaqcInspTmpl} to Qaqc_insp_chklst ID : {$idQaqcInspChklst} Successfully");
             return Command::SUCCESS;

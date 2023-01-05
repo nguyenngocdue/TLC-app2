@@ -14,7 +14,7 @@ type ProdRunResponse {
     status: String!
 }
 input StoreProdRunInput {
-    prod_run_id: Int!
+    prod_sequence_id: Int!
     date: Date
     start: String
     end: String

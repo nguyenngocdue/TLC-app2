@@ -8,7 +8,7 @@ extend type Query {
 }
 type Prod_run {
     id: ID!
-    prod_run_id: Int!
+    prod_sequence_id: Int!
     date: Date!
     start: String!
     end: String
@@ -20,7 +20,7 @@ type Prod_run {
 }
 
 input CreateProdRunInput {
-    prod_run_id: Int!
+    prod_sequence_id: Int
     date: Date!
     start: String!
     end: String
@@ -30,7 +30,7 @@ input CreateProdRunInput {
 }
 input UpdateProdRunInput {
     id: ID!
-    prod_run_id: Int
+    prod_sequence_id: Int
     date: Date
     start: String
     end: String

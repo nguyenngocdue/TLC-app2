@@ -2,6 +2,15 @@
 
 use Illuminate\Support\Arr;
 
+Arr::macro('median', function ($arr) {
+    if ($arr) {
+        $count = count($arr);
+        sort($arr);
+        $mid = floor(($count - 1) / 2);
+        return ($arr[$mid] + $arr[$mid + 1 - $count % 2]) / 2;
+    }
+    return 0;
+});
 Arr::macro('toAssoc', function (array $array) {
     // [1, 2, 3] => ['1' => 1, '2' => 2, '3' => 3]
     // [1 => ['a' => 9], 2, 3] => ['1' => ['a' => 9], '2' => 2, '3' => 3]

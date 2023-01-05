@@ -8,18 +8,20 @@
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
         "filter_columns": "",
-        "filter_values": ""
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
-    "_prodRun": {
-        "name": "_prodRun",
+    "_prodSequence": {
+        "name": "_prodSequence",
         "relationship": "hasMany",
-        "control_name": "prodRun",
+        "control_name": "prodSequence",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
         "filter_columns": "",
-        "filter_values": ""
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
     "_discipline": {
         "name": "_discipline",
@@ -30,6 +32,7 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
-        "filter_values": ""
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }

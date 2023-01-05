@@ -10,10 +10,10 @@ type Qaqc_insp_chklst_sht {
     name: String!
     description: String!
     slug: String!
-    qaqc_insp_chklst_id: int!
+    qaqc_insp_chklst_id: ID!
     created_at: DateTime
     updated_at: DateTime
-    getChklstLines: [Qaqc_insp_chklst_line!]! @hasMany
+    getRuns: [Qaqc_insp_chklst_run!]! @hasMany
 }
 
 input CreateQAQCInspChklstSheetInput {
@@ -21,7 +21,7 @@ input CreateQAQCInspChklstSheetInput {
     name: String!
     description: String!
     slug: String!
-    qaqc_insp_chklst_id: int!
+    qaqc_insp_chklst_id: ID!
     created_at: DateTime
     updated_at: DateTime
 }
@@ -30,7 +30,7 @@ input UpdateQAQCInspChklstSheetInput {
     name: String
     description: String
     slug: String
-    qaqc_insp_chklst_id: int
+    qaqc_insp_chklst_id: ID
     created_at: DateTime
     updated_at: DateTime
 }

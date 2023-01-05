@@ -4,7 +4,7 @@
         <div class="py-4 text-gray-500 dark:text-gray-400">
             <x-homepage.logo />
             <x-homepage.mainmenu :items="$items" />
-            <!-- <x-homepage.actionbutton /> -->
+            {{-- <x-homepage.actionbutton /> --}}
         </div>
     </aside>
     <!-- Mobile sidebar -->
@@ -14,7 +14,7 @@
         <div class="py-4 text-gray-500 dark:text-gray-400">
             <x-homepage.logo />
             <x-homepage.mainmenu :items="$items" />
-            <!-- <x-homepage.actionbutton /> -->
+            {{-- <x-homepage.actionbutton /> --}}
         </div>
     </aside>
 </div>

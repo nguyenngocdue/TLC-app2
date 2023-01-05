@@ -1,0 +1,26 @@
+{
+    "_getChklstLines": {
+        "name": "_getChklstLines",
+        "relationship": "hasMany",
+        "control_name": "getChklstLines",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getControlValues": {
+        "name": "_getControlValues",
+        "relationship": "hasMany",
+        "control_name": "getControlValues",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    }
+}

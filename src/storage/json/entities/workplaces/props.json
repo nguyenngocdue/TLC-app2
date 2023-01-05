@@ -32,13 +32,13 @@
         "column_name": "standard_working_hour",
         "column_type": "float",
         "label": "Standard Working Hour",
-        "control": "text",
+        "control": "number",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_description": {

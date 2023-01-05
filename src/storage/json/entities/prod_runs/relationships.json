@@ -2,19 +2,25 @@
     "_users": {
         "name": "_users",
         "relationship": "belongsToMany",
+        "control_name": "users",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_icons",
         "renderer_edit_param": "",
-        "control_name": "users"
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
     "_prodSequence": {
         "name": "_prodSequence",
         "relationship": "belongsTo",
+        "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "id",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }

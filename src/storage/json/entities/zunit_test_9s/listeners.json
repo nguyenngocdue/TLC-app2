@@ -27,7 +27,7 @@
         "name": "_prod_order_1",
         "column_name": "prod_order_1",
         "action": "reduce",
-        "triggers": "sub_project_1",
+        "triggers": "sub_project",
         "listen_to_fields": "prod_order_1",
         "listen_to_attrs": "sub_project_id"
     }

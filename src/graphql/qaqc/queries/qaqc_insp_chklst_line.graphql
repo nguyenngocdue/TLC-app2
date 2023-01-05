@@ -7,8 +7,7 @@ extend type Query {
 }
 type Qaqc_insp_chklst_line {
     id: ID!
-    qaqc_insp_chklst_id: ID!
-    qaqc_insp_sheet_id: ID!
+    qaqc_insp_chklst_run_id: ID!
     qaqc_insp_group_id: ID!
     control_type_id: ID!
     qaqc_insp_control_value_id: ID
@@ -17,8 +16,7 @@ type Qaqc_insp_chklst_line {
     description: String!
     value: String
     getControlType: Control_type! @belongsTo
-    getChklst: Qaqc_insp_chklst! @belongsTo
-    getSheet: Qaqc_insp_sheet! @belongsTo
+    getRun: Qaqc_insp_chklst_run! @belongsTo
     getGroup: Qaqc_insp_group! @belongsTo
     getControlGroup: Qaqc_insp_control_group @belongsTo
     getControlValue: Qaqc_insp_control_value @belongsTo
@@ -32,28 +30,27 @@ type Qaqc_insp_chklst_line {
 
 input CreateQAQCInspChkLstLineInput {
     id: ID!
-    qaqc_insp_chklst_id: ID!
-    qaqc_insp_sheet_id: ID!
+    qaqc_insp_chklst_run_id: ID!
     qaqc_insp_group_id: ID!
     qaqc_insp_control_value_id: ID!
     qaqc_insp_control_group_id: ID!
     name: String!
     description: String!
-    control_type: String!
+    control_type_id: ID!
     value: String!
     created_at: DateTime
     updated_at: DateTime
 }
 input UpdateQAQCInspChkLstLineInput {
     id: ID!
-    qaqc_insp_chklst_id: ID
+    qaqc_insp_chklst_run_id: ID
     qaqc_insp_sheet_id: ID
     qaqc_insp_group_id: ID
     qaqc_insp_control_value_id: ID!
     qaqc_insp_control_group_id: ID!
     name: String
     description: String
-    control_type: String
+    control_type_id: ID
     value: String
     created_at: DateTime
     updated_at: DateTime
