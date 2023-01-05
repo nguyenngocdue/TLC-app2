@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Workflow\Statuses;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_line;
+use App\Models\Qaqc_insp_chklst_run;
 use App\Models\Qaqc_insp_sheet;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\User;
@@ -13,6 +14,7 @@ use App\Utils\System\GetSetCookie;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -60,42 +62,60 @@ class HomeController extends Controller
 
 
         );
-        function quickSort($array)
-        {
-            $length = count($array);
+        // function quickSort($array)
+        // {
+        //     $length = count($array);
 
-            // Return if the array is empty or has only one element
-            if ($length <= 1) {
-                return $array;
-            }
+        //     // Return if the array is empty or has only one element
+        //     if ($length <= 1) {
+        //         return $array;
+        //     }
 
-            // Select the pivot element
-            $pivot = $array[0];
+        //     // Select the pivot element
+        //     $pivot = $array[0];
 
-            // Initialize the left and right arrays
-            $left = $right = array();
+        //     // Initialize the left and right arrays
+        //     $left = $right = array();
 
-            // Partition the array into left and right subarrays
-            for ($i = 1; $i < $length; $i++) {
-                if ($array[$i] < $pivot) {
-                    $left[] = $array[$i];
-                } else {
-                    $right[] = $array[$i];
-                }
-            }
+        //     // Partition the array into left and right subarrays
+        //     for ($i = 1; $i < $length; $i++) {
+        //         if ($array[$i] < $pivot) {
+        //             $left[] = $array[$i];
+        //         } else {
+        //             $right[] = $array[$i];
+        //         }
+        //     }
 
-            // Recursively sort the left and right subarrays
-            $left = quickSort($left);
-            $right = quickSort($right);
+        //     // Recursively sort the left and right subarrays
+        //     $left = quickSort($left);
+        //     $right = quickSort($right);
 
-            // Concatenate the left array, the pivot element, and the right array
-            return array_merge($left, array($pivot), $right);
+        //     // Concatenate the left array, the pivot element, and the right array
+        //     return array_merge($left, array($pivot), $right);
+        // }
+
+        // // Example usage
+        // $array = array(3, 4, 2, 1, 6, 5);
+        // $sortedArray = quickSort($array);
+        // dd($sortedArray);
+        $arrayIdFail = [2, 6];
+        $arrayIdOnHold = [4, 8];
+        $model = Qaqc_insp_chklst_run::find(41);
+        $qaqcInspChklstLines = $model->getLines;
+        dd($model->getLines);
+        $arrayControlValueId = [];
+        foreach ($qaqcInspChklstLines as $qaqcInspChklstLine) {
+            array_push($arrayControlValueId, $qaqcInspChklstLine['qaqc_insp_control_value_id']);
         }
-
-        // Example usage
-        $array = array(3, 4, 2, 1, 6, 5);
-        $sortedArray = quickSort($array);
-        dd($sortedArray);
+        dd($arrayControlValueId);
+        if (Arr::containsEach($arrayIdFail, $arrayControlValueId)) {
+            $status = 'fail';
+        } else if (!Arr::containsEach($arrayIdFail, $arrayControlValueId) && Arr::containsEach($arrayIdOnHold, $arrayControlValueId)) {
+            $status = 'on_hold';
+        } else {
+            $status = 'new';
+        }
+        dd($status);
         // dump(array_merge($array['websites'], $array['friends']));
         // dump(User::where('email', 'admin')->first());
         // dump(CurrentUser::getRoles());

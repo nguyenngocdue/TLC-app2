@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers\Api\v1\qaqc;
 
+use App\Events\UpdateStatusChklstRunEvent;
 use App\Http\Controllers\Controller;
-use App\Models\Prod_run_line;
-use App\Models\Prod_run;
-use App\Models\Prod_user_run;
 use App\Models\Qaqc_insp_chklst_line;
 use App\Models\Qaqc_insp_control_value;
-use App\Models\User;
-use App\Utils\System\Api\ResponseObject;
-use App\Utils\System\GetSetCookie;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class SubmitFormController extends Controller
 {
@@ -24,10 +19,11 @@ class SubmitFormController extends Controller
     public function submit(Request $request)
     {
         try {
+            $idRunSubmit = $request->input('id');
             $submitLines = $request->input('submitLines');
             if (isset($submitLines) && count($submitLines) > 0) {
                 foreach ($submitLines as $value) {
-                    $model = Qaqc_insp_chklst_line::find($value['id']);
+                    $model = Qaqc_insp_chklst_line::find((int)$value['id']);
                     $model->update([
                         'value' => $value['value'],
                         'qaqc_insp_control_value_id' => $value['controlValueId'],
@@ -39,10 +35,18 @@ class SubmitFormController extends Controller
                     }
                 }
             }
+            try {
+                $idNewRun = Artisan::call('ndc:cloneRun', ['--idRun' => $idRunSubmit]);
+            } catch (\Throwable $th) {
+                return response()->json('Artisan command call failed');
+            }
+            if ($idNewRun != 1) {
+                event(new UpdateStatusChklstRunEvent($idNewRun));
+            }
+            return response()->json('Successfully');
         } catch (\Throwable $th) {
-            //throw $th;
+            return response()->json($th);
         }
-        return response()->json('oke');
     }
 
     private function getFunctionOracyCheckbox($controlValueId, $controlGroupId = 1)

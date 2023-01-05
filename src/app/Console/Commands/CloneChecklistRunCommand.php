@@ -39,9 +39,9 @@ class CloneChecklistRunCommand extends Command
         try {
             $newQaqcInspChklstRun = $qaqcInspChklstRun->replicate();
             $newQaqcInspChklstRun->save();
-            $this->cloneRun($newQaqcInspChklstRun);
+            $this->cloneRun($qaqcInspChklstRun, $newQaqcInspChklstRun);
             $this->info("Clone Qaqc_insp_chklst_run ID:{$qaqcInspChklstRun->id} Successfully");
-            return Command::SUCCESS;
+            return $newQaqcInspChklstRun->id;
         } catch (\Throwable $th) {
             $this->error("Error $th");
             return Command::FAILURE;

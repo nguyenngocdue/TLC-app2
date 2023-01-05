@@ -69,3 +69,11 @@ Arr::macro('moveDirection', function ($json, $direction, $index, $name = null) {
     }
     return $json;
 });
+Arr::macro('containsEach', function ($arrayCheck, $arrayIndex) {
+    foreach ($arrayCheck as $value) {
+        if (in_array($value, $arrayIndex)) {
+            return true;
+        }
+    }
+    return false;
+});
