@@ -42,22 +42,18 @@ class Dropdown extends Component
 
 
         $listenersJson = Listeners::getAllOf($type);
-        $dataListenTrigger = $this->getDataFromListenersJson('column_name', $listenersJson, $modelPath, $type);
-        $dataListenToField = $this->getDataFromListenersJson('listen_to_fields', $listenersJson, $modelPath, $type);
+        $dataListenTrigger = $this->getDataTrigger($modelPath, $colName); // k
 
-        return view('components.controls.dropdown')->with(compact('dataListenToField', 'dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
+        return view('components.controls.dropdown')->with(compact('dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
     }
 
-    public function getDataFromListenersJson($keyName = 'column_name', $listenersJson, $modelPath, $type)
+    public function getDataTrigger($modelPath, $colName)
     {
         $dataTarget = [];
-        foreach ($listenersJson as $value) {
-            $listen_to = $value[$keyName];
-            if (str_contains($listen_to, 'user')) {
-                $dataTarget['users'] = DB::table('users')->get()->toArray();
-            } else {
-                $dataTarget[$listen_to] = Helper::getDataSource($modelPath, $listen_to, $type)->toArray();
-            }
+        $instance = new $modelPath;
+        $modelPaths_colNames =  (array_column(array_values($instance->eloquentParams), 2, 1));
+        foreach ($modelPaths_colNames as $modelPath => $value) {
+            $dataTarget[$value] = Helper::getDataFromPathModel($modelPath)->toArray();
         };
         return $dataTarget;
     }
