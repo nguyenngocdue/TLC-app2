@@ -1,10 +1,11 @@
 @php
 $userMenuStr = file_get_contents(storage_path() . '/json/configs/view/dashboard/navbarUserMenu.json');
 switch(env('APP_ENV')){
-    case "production": $app_port = 18002; $phpmyadmin=18102; break;
-    case "testing": $app_port = 28002; $phpmyadmin=28102; break;
-    case "local": default: $app_port = 38002; $phpmyadmin=38102; break;
+    case "production": $hostname = 'app2.tlcmodular.com'; $app_port = 18002; $phpmyadmin=18102; break;
+    case "testing": $hostname = 'beta2.tlcmodular.com'; $app_port = 28002; $phpmyadmin=28102; break;
+    case "local": default: $hostname = 'localhost'; $app_port = 38002; $phpmyadmin=38102; break;
 }
+$userMenuStr = str_replace("{{hostname}}", $hostname, $userMenuStr);
 $userMenuStr = str_replace("{{app_port}}", $app_port, $userMenuStr);
 $userMenuStr = str_replace("{{phpmyadmin}}", $phpmyadmin, $userMenuStr);
 
