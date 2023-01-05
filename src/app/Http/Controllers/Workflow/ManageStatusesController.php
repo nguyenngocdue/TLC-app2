@@ -6,7 +6,7 @@ class ManageStatusesController extends AbstractManageLibController
 {
     protected $title = "Manage Statuses";
     protected $libraryClass = LibStatuses::class;
-    protected $route = "manageWidgets";
+    protected $route = "manageStatuses";
 
     protected function getColumns()
     {
