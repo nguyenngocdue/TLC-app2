@@ -1,5 +1,14 @@
 @php
-$userMenu = json_decode(file_get_contents(storage_path() . '/json/configs/view/dashboard/navbarUserMenu.json'), true);
+$userMenuStr = file_get_contents(storage_path() . '/json/configs/view/dashboard/navbarUserMenu.json');
+switch(env('APP_ENV')){
+    case "production": $app_port = 18002; $phpmyadmin=18102; break;
+    case "testing": $app_port = 28002; $phpmyadmin=28102; break;
+    case "local": default: $app_port = 38002; $phpmyadmin=38102; break;
+}
+$userMenuStr = str_replace("{{app_port}}", $app_port, $userMenuStr);
+$userMenuStr = str_replace("{{phpmyadmin}}", $phpmyadmin, $userMenuStr);
+
+$userMenu = json_decode($userMenuStr, true);
 @endphp
 
 <button class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none" @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account" aria-haspopup="true">
