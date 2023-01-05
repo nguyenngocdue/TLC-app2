@@ -12,7 +12,7 @@ class Widget extends Component
      * @return void
      */
     public function __construct(
-        private $metric,
+        private $metric = [],
     ) {
         //
     }
