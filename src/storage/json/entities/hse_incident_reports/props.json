@@ -179,6 +179,21 @@
         "validation": "required",
         "formula": ""
     },
+    "_attachment_1": {
+        "name": "_attachment_1",
+        "column_name": "attachment_1",
+        "column_type": "eloquent_prop",
+        "label": "Attached Incident Doc",
+        "control": "attachment",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "label_hidden_edit": "",
+        "new_line": "true",
+        "validation": "",
+        "formula": ""
+    },
     "_divider2": {
         "name": "_divider2",
         "column_name": "divider2",
@@ -560,6 +575,21 @@
         "column_type": "text",
         "label": "",
         "control": "textarea",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "label_hidden_edit": "",
+        "new_line": "true",
+        "validation": "",
+        "formula": ""
+    },
+    "_attachment_2": {
+        "name": "_attachment_2",
+        "column_name": "attachment_2",
+        "column_type": "eloquent_prop",
+        "label": "Attached Witness Docs",
+        "control": "attachment",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "true",
