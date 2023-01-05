@@ -38,8 +38,8 @@ class CloneChecklistRunCommand extends Command
         }
         try {
             $newQaqcInspChklstRun = $qaqcInspChklstRun->replicate();
-            dd($newQaqcInspChklstRun->id);
-            // $this->cloneRun($newQaqcInspChklstRun);
+            $newQaqcInspChklstRun->save();
+            $this->cloneRun($newQaqcInspChklstRun);
             $this->info("Clone Qaqc_insp_chklst_run ID:{$qaqcInspChklstRun->id} Successfully");
             return Command::SUCCESS;
         } catch (\Throwable $th) {

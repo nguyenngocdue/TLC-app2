@@ -23,7 +23,6 @@ return new class extends Migration
             $table->float('progress')->nullable();
 
             $table->unsignedBigInteger('prod_order_id');
-            $table->unsignedBigInteger('owner_id');
             $table->string('consent_number')->nullable();
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

@@ -14,7 +14,6 @@ type Qaqc_insp_chklst {
     slug: String!
     consent_number: Int
     progress: Float
-    user: User! @belongsTo
     prodOrder: Prod_order! @belongsTo
     getSheets: [Qaqc_insp_chklst_sht!]! @hasMany
     created_at: DateTime
