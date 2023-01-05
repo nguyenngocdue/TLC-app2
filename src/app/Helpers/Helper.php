@@ -28,7 +28,7 @@ class Helper
     }
 
 
-    private static function getDataFromPathModel($modelPath, $byFilters = [])
+    public static function getDataFromPathModel($modelPath, $byFilters = [])
     {
         $model = App::make($modelPath);
         $nameless = ($model->nameless);
@@ -81,6 +81,24 @@ class Helper
             dd($e->getMessage());
         }
     }
+
+
+    // public static function getTableNames($modelPath, $colName)
+    // {
+    //     $instance = new $modelPath;
+    //     $eloquentParam = $instance->eloquentParams;
+    //     $keyNameEloquent = "";
+    //     foreach ($eloquentParam as $key => $value) {
+    //         if (in_array($colName, $value)) {
+    //             $keyNameEloquent = $key;
+    //             break;
+    //         }
+    //     }
+    //     $termModelPath = $eloquentParam[$keyNameEloquent][1];
+    //     $insTableSource = new $termModelPath();
+    //     $tableNames = $insTableSource->getTable();
+    //     return $tableNames;
+    // }
 
     public static function getDataSource($modelPath, $colName, $type)
     {
