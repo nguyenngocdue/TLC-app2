@@ -83,6 +83,18 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getCorrectiveActions": {
+        "name": "_getCorrectiveActions",
+        "relationship": "hasMany",
+        "control_name": "getCorrectiveActions",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_attachment_1": {
         "name": "_attachment_1",
         "relationship": "morphMany",
