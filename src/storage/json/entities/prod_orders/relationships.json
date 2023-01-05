@@ -10,6 +10,7 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
+        "control_name": "prodSequences"
     },
     "_subProject": {
         "name": "_subProject",

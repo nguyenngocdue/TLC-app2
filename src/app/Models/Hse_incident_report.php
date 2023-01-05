@@ -23,6 +23,7 @@ class Hse_incident_report extends ModelExtended
         'getLineManager' => ["belongsTo", User::class, 'line_manager'],
         'getReportPerson' => ["belongsTo", User::class, 'report_person'],
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
+        'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],
         "attachment_1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_2" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
@@ -83,6 +84,11 @@ class Hse_incident_report extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getWorkArea()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getCorrectiveActions()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

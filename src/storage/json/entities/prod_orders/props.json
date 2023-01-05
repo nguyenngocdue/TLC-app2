@@ -183,7 +183,7 @@
         "name": "_prodSequences",
         "column_name": "prodSequences",
         "column_type": "eloquent_prop",
-        "label": "Prod Sequence",
+        "label": "Production Sequences",
         "control": "relationship_renderer",
         "col_span": "12",
         "width": "",
