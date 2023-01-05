@@ -38,7 +38,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": "All_ConcatNameWith123"
     },
     "_text3": {

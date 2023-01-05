@@ -28,9 +28,9 @@ $colNameListenJson = array_column($listenersJson,'column_name');
     @php
     $listenerItem = [];
     foreach ($listenersJson as $value) {
-    if (array_search($colName,array_values($value))){
-    $listenerItem = $value;
-    break;
+        if (array_search($colName,array_values($value))){
+        $listenerItem = $value;
+        break;
     }
     };
     $idDomListener = $listenerItem['triggers'].$listenerItem['column_name'];
@@ -41,7 +41,16 @@ $colNameListenJson = array_column($listenersJson,'column_name');
     </select>
 
     @once
+    
     <script>
+        const dataSource = [
+            {id:1, title: "Hello", suffix: "#123", disabled: true},
+            {id:1, title: "Hello", suffix: "#123"},
+            {id:1, title: "Hello", suffix: "#123"},
+        ]
+        const Dropdown = ({id, name, dataSource, selected, onChange}) => {
+
+        }
         // get values from model
         let k1 = @json($dataListenTrigger);
         let k2 = @json($dataListenToField);
@@ -49,8 +58,6 @@ $colNameListenJson = array_column($listenersJson,'column_name');
 
     </script>
     @endonce
-
-
 
     <script type="text/javascript">
         $("#{{$idDomListener}}").select2({
@@ -72,24 +79,21 @@ $colNameListenJson = array_column($listenersJson,'column_name');
             colName = colName.getAttribute("name");
             objListener = Object.values(listenersJson).find((item) => item.triggers === colName);
             // console.log('objListener', listenersJson, colName)
-            listenToAttr = objListener.listen_to_attrs;
-            listenToFied = objListener.listen_to_fields;
-            column_name = objListener.column_name;
+            const {listen_to_attrs,listen_to_fields,column_name } =  objListener
 
-
-            usersfield = listenToFied.includes('user') ? "users" : listenToFied;
+            usersfield = listen_to_fields.includes('user') ? "users" : listen_to_fields;
             dataListenTo = Object.values(k2[usersfield]);
-            // console.log('dataListenTo', dataListenTo, listenToFied, column_name);
+            // console.log('dataListenTo', dataListenTo, listen_to_fields, column_name);
 
             itemsDB = [];
-            if (listenToFied === column_name) {
+            if (listen_to_fields === column_name) {
                 itemsDB = dataListenTo.filter(ele => {
-                    return ele[listenToAttr] === value;
+                    return ele[listen_to_attrs] === value;
                 })
             } else {
                 dataListenTo.forEach(ele => {
                     if (ele.id === value) {
-                        idListener = ele[listenToAttr];
+                        idListener = ele[listen_to_attrs];
                         key = column_name.includes('user') ? "users" : column_name;
                         itemsDB = k1[key].filter(u => u.id === idListener);
                     }
@@ -99,7 +103,7 @@ $colNameListenJson = array_column($listenersJson,'column_name');
                 return ` <option value="${item.id}">${item.name}</option>`
             })
             let eles = document.getElementById(colName + column_name);
-            let headOption = listenToFied !== column_name ? [] : [`<option class="py-10" value="" selected>Select your option...</option>`]
+            let headOption = listen_to_fields !== column_name ? [] : [`<option class="py-10" value="" selected>Select your option...</option>`]
             eles.innerHTML = strHtmlRender + headOption;
         }
 

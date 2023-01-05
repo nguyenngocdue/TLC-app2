@@ -97,20 +97,6 @@
         "validation": "",
         "formula": "All_SlugifyByName"
     },
-    "_user": {
-        "name": "_user",
-        "column_name": "user",
-        "column_type": "eloquent_prop",
-        "label": "Users",
-        "control": "relationship_renderer",
-        "col_span": "12",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "new_line": "true",
-        "validation": "",
-        "formula": ""
-    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -136,6 +122,20 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_user": {
+        "name": "_user",
+        "column_name": "user",
+        "column_type": "eloquent_prop",
+        "label": "Users",
+        "control": "relationship_renderer",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     }
