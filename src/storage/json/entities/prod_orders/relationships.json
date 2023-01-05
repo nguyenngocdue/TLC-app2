@@ -1,38 +1,50 @@
 {
-    "_prodRuns": {
-        "name": "_prodRuns",
+    "_prodSequences": {
+        "name": "_prodSequences",
         "relationship": "hasMany",
+        "control_name": "prodSequences",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
-        "control_name": "prodRuns"
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
     "_subProject": {
         "name": "_subProject",
         "relationship": "belongsTo",
+        "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
     "_prodRouting": {
         "name": "_prodRouting",
         "relationship": "belongsTo",
+        "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
     "_qaqcInspChklsts": {
         "name": "_qaqcInspChklsts",
         "relationship": "hasMany",
+        "control_name": "qaqcInspChklsts",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
-        "control_name": "qaqcInspChklsts"
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }
