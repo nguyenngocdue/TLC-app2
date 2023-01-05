@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Zunit_test_9 extends ModelExtended
 {
-    protected $fillable = ['content', 'department_1', 'department_2', 'category_id', 'sub_project',  'user_1', 'user_2', 'user_3', 'prod_order_1'];
+    protected $fillable = ['content', 'department_1', 'department_2', 'category_id', 'sub_project_1',  'user_1', 'user_2', 'user_3', 'prod_order_1'];
     protected $table = "zunit_test_9s";
     public $menuTitle = "UT09 (Basic Event)";
 
@@ -20,7 +20,7 @@ class Zunit_test_9 extends ModelExtended
         "category" => ['belongsTo', User_category::class, 'category_id'],
         "user3" => ['belongsTo', User::class, 'user_3'],
 
-        "getSubProject1" => ['belongsTo', Sub_project::class, 'sub_project'],
+        "getSubProject1" => ['belongsTo', Sub_project::class, 'sub_project_1'],
         "getProdOrder1" => ['belongsTo', Prod_order::class, 'prod_order_1'],
     ];
 
