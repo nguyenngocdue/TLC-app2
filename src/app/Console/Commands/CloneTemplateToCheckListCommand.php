@@ -58,7 +58,7 @@ class CloneTemplateToCheckListCommand extends Command
                     $qaqcInspChklstRun = Qaqc_insp_chklst_run::create([
                         'qaqc_insp_chklst_sht_id' => $qaqcInspTmplRun->id,
                     ]);
-                    $this->cloneRun($qaqcInspTmplRun, $qaqcInspChklstRun->id);
+                    $this->cloneRun($qaqcInspTmplRun, null, $qaqcInspChklstRun->id);
                 }
             }
             $this->info("Clone Qaqc_insp_tmpl ID:{$idQaqcInspTmpl} to Qaqc_insp_chklst ID : {$idQaqcInspChklst} Successfully");
