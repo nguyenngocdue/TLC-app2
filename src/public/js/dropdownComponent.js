@@ -1,4 +1,5 @@
-function getFieldNameInK(name, array) {
+function getEntityName(name, array) {
+    // console.log(name, array)
     let _name = name.substring(0, name.indexOf("_"));
     const fieldName = array.find((item) => {
         if (item.includes(_name)) {
@@ -18,7 +19,7 @@ const onChangedItem = (value, colName) => {
         , column_name
     } = objListener
 
-    let fieldName = getFieldNameInK(listen_to_fields, arrayKeysK);
+    let fieldName = getEntityName(listen_to_fields, arrayKeysK);
     let dataListenTo = k[fieldName];
     itemsDB = [];
     // console.log(dataListenTo, listen_to_fields, column_name);
@@ -30,7 +31,7 @@ const onChangedItem = (value, colName) => {
         dataListenTo.forEach(ele => {
             if (ele.id === value) {
                 idListener = ele[listen_to_attrs];
-                let _fieldName = getFieldNameInK(column_name, arrayKeysK);
+                let _fieldName = getEntityName(column_name, arrayKeysK);
                 itemsDB = k[_fieldName].filter(u => u.id === idListener);
             }
         })
@@ -43,20 +44,20 @@ const onChangedItem = (value, colName) => {
     eles.innerHTML = strHtmlRender + headOption;
 }
 
-function renderSelect({ name }) {
+function renderSelect({ id, name }) {
     const strHTML = ` 
-    <select name='${name}' id="select-dropdown-${name}" onchange="onChangedItem(value*1, ${name})" class=" bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+    <select name='${name}' id="${id}" onchange="onChangedItem(value*1, ${name})" class=" bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
         <option class="py-10" value="" selected>Select your option...</option>
     </select>`;
 
     eleTriggers = document.getElementById('add-' + name);
     if (eleTriggers !== null) eleTriggers.innerHTML += strHTML;
-    return eleTriggers;
+    // return eleTriggers;
 }
 
 
-function dropdownComponent({ idDOM, name, dataSource, selected }) {
-    renderSelect({ name });
+function dropdownComponent({ id, name, dataSource, selected }) {
+    renderSelect({ id, name });
 
     strHtmlTrigger = dataSource.map((item, index) => {
         checkSelected = selected * 1 === item.id * 1 || dataSource.length < 1 ? "selected" : "";
@@ -69,7 +70,7 @@ function dropdownComponent({ idDOM, name, dataSource, selected }) {
 
     eleTriggers = document.getElementById("select-dropdown-" + name);
     if (eleTriggers !== null) eleTriggers.innerHTML += strHtmlTrigger;
-    return eleTriggers;
+    // return eleTriggers;
 
 }
 

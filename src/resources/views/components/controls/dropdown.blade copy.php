@@ -27,7 +27,7 @@ $colNameListenJson = array_column($listenersJson,'column_name');
     var selected = "{{$selected}}";
 
     var arrayKeysK = Object.keys(k1);
-    var fieldName = getFieldNameInK(name, arrayKeysK);
+    var fieldName = getEntityName(name, arrayKeysK);
     var firstDropDownRender = dropdownComponent(idDOM, name, k1[fieldName], selecte);
 
 
@@ -40,7 +40,7 @@ $colNameListenJson = array_column($listenersJson,'column_name');
             column_name
         } = objListener
 
-        var fieldName = getFieldNameInK(listen_to_fields, arrayKeysK);
+        var fieldName = getEntityName(listen_to_fields, arrayKeysK);
         var dataListenTo = k1[fieldName];
         itemsDB = [];
         // console.log(dataListenTo, listen_to_fields, column_name);
@@ -52,7 +52,7 @@ $colNameListenJson = array_column($listenersJson,'column_name');
             dataListenTo.forEach(ele => {
                 if (ele.id === value) {
                     idListener = ele[listen_to_attrs];
-                    var _fieldName = getFieldNameInK(column_name, arrayKeysK);
+                    var _fieldName = getEntityName(column_name, arrayKeysK);
                     itemsDB = k1[_fieldName].filter(u => u.id === idListener);
                 }
             })

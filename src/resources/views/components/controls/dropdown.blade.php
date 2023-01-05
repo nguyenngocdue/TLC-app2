@@ -19,12 +19,12 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
 
 <script type="text/javascript">
     var name = "{{$colName}}";
-    var idDOM = "select-dropdown-" + "{{$colName}}";
+    var id = "select-dropdown-" + "{{$colName}}";
     var selected = "{{$selected}}";
 
-    var fieldName = getFieldNameInK(name, arrayKeysK);
+    var fieldName = getEntityName(name, arrayKeysK);
     dropdownComponent({
-        idDOM
+        id
         , name
         , dataSource: k[fieldName]
         , selected
