@@ -12,12 +12,13 @@ class ManageWidgetsController extends AbstractManageLibController
     {
         return   [
             [
-                "dataIndex" => "action",
-                "align" => "center",
-            ],
-            [
                 'dataIndex' => "name",
                 "renderer"  => 'read-only-text',
+                'editable' => true,
+            ],
+            [
+                'dataIndex' => "hidden",
+                "renderer"  => 'dropdown',
                 'editable' => true,
             ],
             [

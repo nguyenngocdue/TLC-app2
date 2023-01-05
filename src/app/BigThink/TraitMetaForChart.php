@@ -84,6 +84,7 @@ trait TraitMetaForChart
             'meta' => $meta,
             'metric' => $result,
             'chartType' => $params['chart_type'],
+            'hidden' => $params['hidden'],
         ];
     }
 }

@@ -4,15 +4,18 @@ namespace App\View\Components\Renderer\Report;
 
 use Illuminate\View\Component;
 
-class Widget extends Component
+class Chart extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $meta = [],
+        private $metric = [],
+        private $key = "",
+    ) {
         //
     }
 
@@ -24,7 +27,12 @@ class Widget extends Component
     public function render()
     {
         return view(
-            'components.renderer.report.widget',
+            'components.renderer.report.chart',
+            [
+                'key' => $this->key,
+                'meta' => $this->meta,
+                'metric' => $this->metric,
+            ]
         );
     }
 }

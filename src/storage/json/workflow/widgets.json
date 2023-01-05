@@ -1,6 +1,7 @@
 {
     "prod_8": {
         "name": "prod_8",
+        "hidden": null,
         "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "prod_orders",
@@ -11,6 +12,7 @@
     },
     "prod_9": {
         "name": "prod_9",
+        "hidden": null,
         "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "prod_orders",
@@ -21,6 +23,7 @@
     },
     "users_1": {
         "name": "users_1",
+        "hidden": null,
         "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
@@ -31,6 +34,7 @@
     },
     "users_2": {
         "name": "users_2",
+        "hidden": null,
         "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
@@ -41,6 +45,7 @@
     },
     "users_3": {
         "name": "users_3",
+        "hidden": null,
         "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
@@ -51,6 +56,7 @@
     },
     "users_4": {
         "name": "users_4",
+        "hidden": "true",
         "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
@@ -61,6 +67,7 @@
     },
     "users_5": {
         "name": "users_5",
+        "hidden": "true",
         "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
@@ -71,6 +78,7 @@
     },
     "users_6": {
         "name": "users_6",
+        "hidden": "true",
         "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",
@@ -81,6 +89,7 @@
     },
     "users_7": {
         "name": "users_7",
+        "hidden": null,
         "chart_type": "doughnut",
         "fn": "sqlForeignKey",
         "table_a": "users",

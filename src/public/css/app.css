@@ -4092,4 +4092,10 @@ video {
     padding: 0px;
   }
 }
+@media (min-width: 1536px) {
+
+  .\32xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
 
