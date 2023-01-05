@@ -91,6 +91,12 @@ abstract class AbstractPropController extends Controller
                 'width' => 10,
             ],
             [
+                "dataIndex" => "label_hidden_edit",
+                "editable" => true,
+                "renderer" => "dropdown",
+                'width' => 10,
+            ],
+            [
                 "dataIndex" => "new_line",
                 "editable" => true,
                 "renderer" => "dropdown",

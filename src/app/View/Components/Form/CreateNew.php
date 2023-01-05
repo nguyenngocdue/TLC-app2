@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 
 class CreateNew extends Component
 {
+    private $columns, $dataSource;
     /**
      * Create a new component instance.
      *
@@ -31,7 +32,7 @@ class CreateNew extends Component
                 'renderer' => 'button',
                 'align' => 'center',
                 'type' => 'primary',
-                'attributes' => ['htmlType'  => 'submit'],
+                'properties' => ['htmlType'  => 'submit'],
             ],
         ];
         $this->dataSource = [

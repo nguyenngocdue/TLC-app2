@@ -9,6 +9,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "true",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -23,6 +24,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -37,6 +39,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -51,6 +54,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -65,6 +69,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -79,6 +84,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -93,6 +99,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -101,12 +108,13 @@
         "name": "_number_injured_person",
         "column_name": "number_injured_person",
         "column_type": "float",
-        "label": "Number of Persons Injured",
+        "label": "No. Persons Injured",
         "control": "number",
         "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -115,12 +123,13 @@
         "name": "_number_involved_person",
         "column_name": "number_involved_person",
         "column_type": "float",
-        "label": "Number of Persons Involved",
+        "label": "No. Persons Involved",
         "control": "number",
         "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -135,6 +144,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -149,6 +159,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -157,12 +168,13 @@
         "name": "_issue_description",
         "column_name": "issue_description",
         "column_type": "text",
-        "label": "",
+        "label": "1.1 Description of Issue",
         "control": "textarea",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "required",
         "formula": ""
@@ -177,6 +189,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -191,6 +204,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -203,8 +217,9 @@
         "control": "toggle",
         "col_span": "4",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -217,8 +232,9 @@
         "control": "picker_datetime",
         "col_span": "4",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -231,8 +247,9 @@
         "control": "picker_datetime",
         "col_span": "4",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -247,6 +264,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -261,6 +279,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -273,8 +292,9 @@
         "control": "checkbox",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -287,8 +307,9 @@
         "control": "checkbox",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -301,8 +322,9 @@
         "control": "checkbox",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -315,8 +337,9 @@
         "control": "comment",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -331,6 +354,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -345,6 +369,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -357,8 +382,9 @@
         "control": "checkbox",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -373,6 +399,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -387,6 +414,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -399,8 +427,9 @@
         "control": "checkbox",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -415,6 +444,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -429,6 +459,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -441,8 +472,9 @@
         "control": "checkbox",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -457,6 +489,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -471,6 +504,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -479,12 +513,13 @@
         "name": "_issueRootCause()",
         "column_name": "issueRootCause()",
         "column_type": "oracy_prop",
-        "label": "",
+        "label": "2.3 Root Cause",
         "control": "checkbox",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -499,6 +534,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -513,6 +549,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -525,8 +562,9 @@
         "control": "textarea",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -541,6 +579,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -553,8 +592,9 @@
         "control": "comment",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -569,6 +609,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -581,8 +622,9 @@
         "control": "comment",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""
@@ -595,8 +637,9 @@
         "control": "picker_datetime",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -609,8 +652,9 @@
         "control": "picker_datetime",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -625,6 +669,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
