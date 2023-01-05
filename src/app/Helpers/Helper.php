@@ -45,6 +45,7 @@ class Helper
     }
 
 
+
     private static function filterConditionsInRel($type, $colName)
     {
         $relationships = Relationships::getAllOf($type);

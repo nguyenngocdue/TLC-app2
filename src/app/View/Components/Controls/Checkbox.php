@@ -46,6 +46,8 @@ class Checkbox extends Component
 
         $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
 
+
+
         if (is_null($dataSource) || gettype($dataSource) === 'string') return "<x-feedback.alert message='Not found record \"$colName\" in  Fields.' type='warning' />";
 
         $span = Helper::getColSpan($colName, $type);
