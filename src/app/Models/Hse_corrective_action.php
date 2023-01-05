@@ -36,4 +36,20 @@ class Hse_corrective_action extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
+    public function getManyLineParams()
+    {
+        return [
+            ['dataIndex' => 'id', 'renderer' => 'id', 'type' => 'hse_corrective_actions', 'align' => 'center'],
+            ['dataIndex' => 'name', 'title' => 'Name'],
+            ['dataIndex' => 'priority_id', 'title' => 'Priority ID'],
+            ['dataIndex' => 'getWorkArea', 'title' => 'Work Area', 'renderer' => 'column', 'rendererParam' => 'name'],
+            ['dataIndex' => 'description'],
+            ['dataIndex' => 'getAssignee', 'title' => 'Assignee', 'renderer' => 'column', 'rendererParam' => 'name'],
+            ['dataIndex' => 'opened_date'],
+            ['dataIndex' => 'closed_date'],
+            ['dataIndex' => 'status', "renderer" => "status", "align" => "center"],
+            ['dataIndex' => 'unsafe_action_type_id', 'title' => 'Unsafe Action Type'],
+        ];
+    }
 }
