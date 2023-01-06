@@ -31,7 +31,7 @@ class FieldSeeder extends Seeder
             'comment_5' => 10,
             'featured_image' => 11,
             'insp_photos' => 12,
-            'insp_fail_photos' => 13,
+            // 'insp_fail_photos' => 13,
             'workplaceRel1' => 14,
             'workplaceRel2' => 15,
             'checkboxYesNo' => 16,

@@ -26,6 +26,9 @@ return new class extends Migration
         Schema::table('attachments', function (Blueprint $table) {
             $table->foreign('category')->references('id')->on('fields')->onDelete('cascade');
         });
+        Schema::table('public_holidays', function (Blueprint $table) {
+            $table->foreign('workplace_id')->references('id')->on('workplaces')->onDelete('cascade');
+        });
         //************** USER MODULE **************/
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('workplace')->references('id')->on('workplaces')->onDelete('cascade');
