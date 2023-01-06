@@ -60,6 +60,7 @@ $time = $date ? date("d/m/Y H:i:s", strtotime($date)) : date("d/m/Y H:i:s");
 
 {{-- @include('components.feedback.alertValidation') --}}
 
+@once
 <script type="text/javascript">
     var objColName = {};
 
@@ -88,3 +89,4 @@ $time = $date ? date("d/m/Y H:i:s", strtotime($date)) : date("d/m/Y H:i:s");
     }
 
 </script>
+@endonce

@@ -41,7 +41,7 @@
 </div>
 {{-- @include('components.feedback.alertValidation') --}}
 
-
+@once
 <script type="text/javascript">
     var objColName = {};
 
@@ -67,3 +67,4 @@
     }
 
 </script>
+@endonce
