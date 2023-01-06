@@ -20,6 +20,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],
         "getControlValue" => ["belongsTo", Qaqc_insp_control_value::class, "qaqc_insp_control_value_id"],
         "getControlType" => ["belongsTo", Control_type::class, "control_type_id"],
+        "attachments" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public $oracyParams = [
@@ -29,6 +30,12 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "getOnHoldOfPassFail()" => ["getCheckedByField", Qaqc_insp_value::class],
     ];
 
+    public function attachments()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, 'insp_photos', 'category');
+    }
     public function getNoOfYesNo()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];

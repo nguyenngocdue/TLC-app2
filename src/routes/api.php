@@ -57,7 +57,9 @@ Route::group([
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], function () {
-        Route::post('upload_file', [App\Http\Controllers\Api\v1\UploadFile::class, 'upload']);
+        Route::post('upload_file', [App\Http\Controllers\Api\v1\FileController::class, 'upload']);
+        Route::post('delete_file', [App\Http\Controllers\Api\v1\FileController::class, 'delete']);
+        Route::post('edit_file', [App\Http\Controllers\Api\v1\FileController::class, 'edit']);
         Route::post('submit_form', [App\Http\Controllers\Api\v1\qaqc\SubmitFormController::class, 'submit']);
     });
 });

@@ -1,0 +1,59 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    attachment: [Attachment!]! @all @guard
+    attachments(id: ID @eq): Attachment @find @guard
+}
+type Attachment {
+    id: ID!
+    url_thumbnail: String!
+    url_media: String!
+    url_folder: String!
+    filename: String!
+    extension: String!
+    owner_id: String!
+    object_id: String!
+    object_type: String!
+    category: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input CreateAttachmentInput {
+    id: ID!
+    url_thumbnail: String!
+    url_media: String!
+    url_folder: String!
+    filename: String!
+    extension: String!
+    owner_id: String!
+    object_id: String!
+    object_type: String!
+    category: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateAttachmentInput {
+    url_thumbnail: String
+    url_media: String
+    url_folder: String
+    filename: String
+    extension: String
+    owner_id: String
+    object_id: String
+    object_type: String
+    category: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createAttachment(input: CreateAttachmentInput! @spread): Attachment!
+        @guard
+        @create
+    updateAttachment(input: UpdateAttachmentInput! @spread): Attachment
+        @guard
+        @update
+    deleteAttachment(id: ID!): Attachment @guard @delete
+}

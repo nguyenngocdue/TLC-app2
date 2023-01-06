@@ -13,7 +13,7 @@ trait CloneRunTrait
      * @param  mixed $idSheet 
      * @return void
      */
-    public function cloneRun($modelRun, $newModelRun = null, $idRun = null)
+    public function cloneRunLine($modelRun, $newModelRun = null, $idRun = null)
     {
         $qaqcInspTmplLines = $modelRun->getLines;
         if (count($qaqcInspTmplLines) > 0) {
