@@ -8,6 +8,7 @@ class Hse_incident_report extends ModelExtended
 {
     public $menuTitle = "HSE Incident Reports";
     protected $fillable = [
+        'incident_doc_type_id', 'incident_doc_sub_type_id',
         'id', 'name', 'work_area_id', 'issue_datetime', 'injured_person', 'line_manager', 'report_person',
         'number_injured_person', 'number_involved_person', 'issue_description',
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
@@ -26,6 +27,8 @@ class Hse_incident_report extends ModelExtended
         'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],
         "attachment_1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_2" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "getDocType" => ['belongsTo', Term::class, 'incident_doc_type_id'],
+        "getDocSubType" => ['belongsTo', Term::class, 'incident_doc_sub_type_id'],
     ];
 
     public $oracyParams = [
@@ -89,6 +92,16 @@ class Hse_incident_report extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getCorrectiveActions()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getDocType()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getDocSubType()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
