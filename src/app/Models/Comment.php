@@ -9,6 +9,7 @@ class Comment extends ModelExtended
     protected $fillable = ['content', 'position_rendered', 'owner_id', 'category'];
     protected $table = "comments";
     protected $primaryKey = 'id';
+    public $nameless = true;
 
     public $eloquentParams = [
         "commentable" => ['morphTo', 'commentable', 'commentable_type', 'commentable_id'],
