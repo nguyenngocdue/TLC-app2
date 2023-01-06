@@ -11,9 +11,16 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
 
     public $eloquentParams = [
         "getRuns" => ["hasMany", Qaqc_insp_tmpl_run::class, "qaqc_insp_tmpl_sht_id"],
+        "getTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, 'qaqc_insp_tmpl_id'],
     ];
 
     public function getRuns()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getTmpl()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
