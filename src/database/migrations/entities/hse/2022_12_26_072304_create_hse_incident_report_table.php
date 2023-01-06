@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('work_area_id');
             $table->dateTime('issue_datetime');
+            $table->unsignedBigInteger('incident_doc_type_id');
+            $table->unsignedBigInteger('incident_doc_sub_type_id');
             $table->unsignedBigInteger('injured_person');
             $table->unsignedBigInteger('line_manager');
             $table->unsignedBigInteger('report_person');

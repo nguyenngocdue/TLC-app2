@@ -8,6 +8,7 @@ class Hse_incident_report extends ModelExtended
 {
     public $menuTitle = "HSE Incident Reports";
     protected $fillable = [
+        'incident_doc_type_id', 'incident_doc_sub_type_id',
         'id', 'name', 'work_area_id', 'issue_datetime', 'injured_person', 'line_manager', 'report_person',
         'number_injured_person', 'number_involved_person', 'issue_description',
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
