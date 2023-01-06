@@ -8,7 +8,9 @@ const onChangedItem = (value, colName) => {
         , column_name
     } = objListener
 
-    let dataListenTo = k[k2[listen_to_fields]];
+    console.log(listen_to_fields);
+    let dataListenTo = k[k2[listen_to_fields]][listen_to_fields];
+    // console.log(dataListenTo);
     itemsDB = [];
     // console.log(dataListenTo, listen_to_fields, column_name);
     if (listen_to_fields === column_name) {
@@ -19,7 +21,7 @@ const onChangedItem = (value, colName) => {
         dataListenTo.forEach(ele => {
             if (ele.id === value) {
                 idListener = ele[listen_to_attrs];
-                itemsDB = k[k2[column_name]].filter(u => u.id === idListener);
+                itemsDB = k[k2[column_name]][column_name].filter(u => u.id === idListener);
             }
         })
     }
