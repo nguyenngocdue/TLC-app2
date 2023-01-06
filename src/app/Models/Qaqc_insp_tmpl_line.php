@@ -7,8 +7,8 @@ use App\BigThink\ModelExtended;
 class Qaqc_insp_tmpl_line extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "control_type_id",
-        "qaqc_insp_run_id", "qaqc_insp_group_id", "qaqc_insp_control_group_id",
+        "id", "name", "description", "control_type_id", "qaqc_insp_tmpl_run_id",
+        "qaqc_insp_group_id", "qaqc_insp_control_group_id",
     ];
     protected $table = "qaqc_insp_tmpl_lines";
 
