@@ -30,6 +30,7 @@ class Helper
 
     public static function getDataFromPathModel($modelPath, $byFilters = [])
     {
+        // dd($modelPath, $byFilters);
         $model = App::make($modelPath);
         $nameless = ($model->nameless);
         $insTableSource = new $modelPath();
@@ -41,12 +42,37 @@ class Helper
             return $table->where($byFilters)->get();
         }
         $dataSource =  $nameless ? $table->get() : $table->orderBy('name')->get();
+        // die($dataSource);
+        return $dataSource;
+    }
+
+
+    public static function getDataFromPathModelDropdown($modelPath, $colName, $type)
+    {
+        // dump($colName);
+        $model = App::make($modelPath);
+        $nameless = ($model->nameless);
+        $insTableSource = new $modelPath();
+        $tableName = $insTableSource->getTable();
+        $table = DB::table($tableName);
+
+        $byFilters = Helper::filterConditionsInRel($type, $colName);
+        if (count($byFilters)) {
+            // dump($tableName, $colName, $byFilters);
+            return $table->where($byFilters)->get();
+        }
+        $dataSource =  $nameless ? $table->get() : $table->orderBy('name')->get();
+        // dd($dataSource);
         return $dataSource;
     }
 
 
 
-    private static function filterConditionsInRel($type, $colName)
+
+
+
+
+    public static function filterConditionsInRel($type, $colName)
     {
         $relationships = Relationships::getAllOf($type);
         $elementRel = array_values(array_filter($relationships, fn ($item) => $item['control_name'] === $colName))[0] ?? [];
@@ -103,7 +129,7 @@ class Helper
     public static function getDataSource($modelPath, $colName, $type)
     {
         try {
-            // dd($colName);
+            // dd($colName, $modelPath);
             $instance = new $modelPath;
             $eloquentParam = $instance->eloquentParams;
             $keyNameEloquent = "";
@@ -115,7 +141,8 @@ class Helper
             }
             $byFilters = Helper::filterConditionsInRel($type, $colName);
             $termModelPath = $eloquentParam[$keyNameEloquent][1];
-            // dump($termModelPath);
+            // dd($byFilters);
+            // die($colName);
 
             return Helper::getDataFromPathModel($termModelPath, $byFilters) ?? [];
         } catch (Exception $e) {
@@ -124,7 +151,6 @@ class Helper
             dd($e->getMessage());
         }
     }
-
 
 
 

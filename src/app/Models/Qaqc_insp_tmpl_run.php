@@ -12,9 +12,15 @@ class Qaqc_insp_tmpl_run extends ModelExtended
 
     public $eloquentParams = [
         "getLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_tmpl_run_id"],
+        "getSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, "qaqc_insp_tmpl_sht_id"],
     ];
 
     public function getLines()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getSheet()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

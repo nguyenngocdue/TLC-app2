@@ -1,6 +1,8 @@
 @php
 $idEntity = isset($currentEntity[$colName]) ? $currentEntity[$colName]*1 : null;
 $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
+// dd($dataSource);
+// dd($dataListenTrigger);
 @endphp
 
 <div id="add-{{$colName}}">
@@ -25,7 +27,7 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
     dropdownComponent({
         id
         , name
-        , dataSource: k[k2[name]]
+        , dataSource: k[k2[name]][name]
         , selected
     });
 

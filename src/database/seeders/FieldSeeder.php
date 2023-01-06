@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Field;
-use Exception;
 use Illuminate\Database\Seeder;
 
 class FieldSeeder extends Seeder
@@ -11,9 +10,6 @@ class FieldSeeder extends Seeder
     public static function getIdFromFieldName($fieldName)
     {
         return Field::where('name', $fieldName)->firstOrFail()->id;
-        // $dataSource = self::dataSource();
-        // if (!isset($dataSource[$fieldName])) throw new Exception("Field $fieldName not found in " . __FILE__);
-        // return $dataSource[$fieldName];
     }
 
     private static function dataSource()
@@ -31,7 +27,7 @@ class FieldSeeder extends Seeder
             'comment_5' => 10,
             'featured_image' => 11,
             'insp_photos' => 12,
-            'insp_fail_photos' => 13,
+            // 'insp_fail_photos' => 13,
             'workplaceRel1' => 14,
             'workplaceRel2' => 15,
             'checkboxYesNo' => 16,
