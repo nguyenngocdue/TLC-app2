@@ -23,3 +23,8 @@ Str::macro('limitWords', function (string $str, $count, $maxLen = 50) {
     if (strlen($str) > $maxLen) $str = substr($str, 0, $maxLen) . " ...";
     return $str;
 });
+
+Str::macro('getEntityNameFromModelPath', function ($modelPaths) {
+    $str =  str_replace('\\', '/', $modelPaths);
+    return basename($str);
+});

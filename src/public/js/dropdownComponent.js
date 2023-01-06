@@ -1,14 +1,3 @@
-function getEntityName(name, array) {
-    // console.log(name, array)
-    let _name = name.substring(0, name.indexOf("_"));
-    const fieldName = array.find((item) => {
-        if (item.includes(_name)) {
-            return item;
-        }
-    })
-    return fieldName;
-}
-
 const onChangedItem = (value, colName) => {
     colName = colName.getAttribute("name");
     objListener = Object.values(listenersJson).find((item) => item.triggers === colName);
@@ -19,8 +8,7 @@ const onChangedItem = (value, colName) => {
         , column_name
     } = objListener
 
-    let fieldName = getEntityName(listen_to_fields, arrayKeysK);
-    let dataListenTo = k[fieldName];
+    let dataListenTo = k[k2[listen_to_fields]];
     itemsDB = [];
     // console.log(dataListenTo, listen_to_fields, column_name);
     if (listen_to_fields === column_name) {
@@ -31,8 +19,7 @@ const onChangedItem = (value, colName) => {
         dataListenTo.forEach(ele => {
             if (ele.id === value) {
                 idListener = ele[listen_to_attrs];
-                let _fieldName = getEntityName(column_name, arrayKeysK);
-                itemsDB = k[_fieldName].filter(u => u.id === idListener);
+                itemsDB = k[k2[column_name]].filter(u => u.id === idListener);
             }
         })
     }
@@ -45,6 +32,7 @@ const onChangedItem = (value, colName) => {
 }
 
 function renderSelect({ id, name }) {
+    // console.log('renderSelect', id)
     const strHTML = ` 
     <select name='${name}' id="${id}" onchange="onChangedItem(value*1, ${name})" class=" bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
         <option class="py-10" value="" selected>Select your option...</option>
@@ -52,14 +40,14 @@ function renderSelect({ id, name }) {
 
     eleTriggers = document.getElementById('add-' + name);
     if (eleTriggers !== null) eleTriggers.innerHTML += strHTML;
-    // return eleTriggers;
+
 }
 
 
 function dropdownComponent({ id, name, dataSource, selected }) {
     renderSelect({ id, name });
-
-    strHtmlTrigger = dataSource.map((item, index) => {
+    // console.log('renderOption', id);
+    strHtmlTrigger = dataSource.map(item => {
         checkSelected = selected * 1 === item.id * 1 || dataSource.length < 1 ? "selected" : "";
         return `
                 <option ${checkSelected} value=${item.id}>
@@ -70,8 +58,6 @@ function dropdownComponent({ id, name, dataSource, selected }) {
 
     eleTriggers = document.getElementById("select-dropdown-" + name);
     if (eleTriggers !== null) eleTriggers.innerHTML += strHtmlTrigger;
-    // return eleTriggers;
-
 }
 
 

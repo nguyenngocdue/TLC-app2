@@ -5,11 +5,12 @@ namespace App\View\Components\Controls;
 use App\Helpers\Helper;
 use App\Models\User;
 use App\Models\Zunit_test_9;
+use App\Utils\Support\Entities;
 use App\Utils\Support\Listeners;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
-
-use function PHPUnit\Framework\once;
+use Illuminate\Support\Str;
 
 class Dropdown extends Component
 {
@@ -42,19 +43,40 @@ class Dropdown extends Component
 
 
         $listenersJson = Listeners::getAllOf($type);
-        $dataListenTrigger = $this->getDataTrigger($modelPath, $colName); // k
+        $instance = new $modelPath;
+        $eloquentParams = array_values($instance->eloquentParams);
+        $_colNames =  array_column($eloquentParams, 2);
+        $modelPaths_colNames =  (array_column($eloquentParams, 2, 1));
+        $colNames_modelPaths =  (array_column($eloquentParams, 1, 2));
 
-        return view('components.controls.dropdown')->with(compact('dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
+        $dataListenTrigger = $this->triggerDataModel($modelPaths_colNames, $_colNames, $colName); // k
+        $colNames_ModelNames = $this->indexColNamesForModels($colNames_modelPaths, $_colNames, $colName); // k2
+
+        return view('components.controls.dropdown')->with(compact('colNames_ModelNames', 'dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
     }
 
-    public function getDataTrigger($modelPath, $colName)
+
+    public function triggerDataModel($modelPaths_colNames, $_colNames, $colName)
     {
-        $dataTarget = [];
-        $instance = new $modelPath;
-        $modelPaths_colNames =  (array_column(array_values($instance->eloquentParams), 2, 1));
-        foreach ($modelPaths_colNames as $modelPath => $value) {
-            $dataTarget[$value] = Helper::getDataFromPathModel($modelPath)->toArray();
+        $result = [];
+        foreach (array_keys($modelPaths_colNames) as $modelPath) {
+            if (in_array($colName, $_colNames)) {
+                $entityName = Str::getEntityNameFromModelPath($modelPath);
+                $result[$entityName] = Helper::getDataFromPathModel($modelPath)->toArray();
+            }
         };
-        return $dataTarget;
+        return $result;
+    }
+
+    public function indexColNamesForModels($colNames_modelPaths, $_colNames, $colName)
+    {
+        $result = [];
+        foreach ($colNames_modelPaths as $colName => $modelPath) {
+            if (in_array($colName, $_colNames)) {
+                $entityName = Str::getEntityNameFromModelPath($modelPath);
+                $result[$colName] = $entityName;
+            }
+        };
+        return $result;
     }
 }

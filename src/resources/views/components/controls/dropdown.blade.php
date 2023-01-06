@@ -11,7 +11,7 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
 @once
 <script>
     let k = @json($dataListenTrigger);
-    let arrayKeysK = Object.keys(k);
+    let k2 = @json($colNames_ModelNames);
     let listenersJson = @json($listenersJson);
 
 </script>
@@ -22,11 +22,10 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
     var id = "select-dropdown-" + "{{$colName}}";
     var selected = "{{$selected}}";
 
-    var fieldName = getEntityName(name, arrayKeysK);
     dropdownComponent({
         id
         , name
-        , dataSource: k[fieldName]
+        , dataSource: k[k2[name]]
         , selected
     });
 
