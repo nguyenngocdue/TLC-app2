@@ -7,12 +7,10 @@ use App\Models\User;
 use App\Models\Zunit_test_9;
 use App\Utils\Support\Entities;
 use App\Utils\Support\Listeners;
-use App\Utils\Support\Props;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
-
 
 class Dropdown extends Component
 {
@@ -35,56 +33,60 @@ class Dropdown extends Component
         $modelPath = $this->modelPath;
         $type = $this->type;
 
-        $dataSource = Helper::getDataSourceHasKeyTableName($modelPath, $colName, $type);
+        $dataSource = Helper::getDataSource($modelPath, $colName, $type);
         $currentEntity = Helper::getItemModel($this->type, $this->id) ?? [];
+        // Log::info($colName, $dataSource);
+
+
+
 
         if (is_null($dataSource) || gettype($dataSource) === 'string') {
             $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in $modelPath Model).";
             return "<x-feedback.alert message='{$message}' type='warning' />";
         }
-        // dump($type);
 
 
         $listenersJson = Listeners::getAllOf($type);
-
         $instance = new $modelPath;
         $eloquentParams = array_values($instance->eloquentParams);
+        $_colNames =  array_column($eloquentParams, 2);
+
+        $modelPaths_colNames =  (array_column($eloquentParams, 2, 1));
         $colNames_modelPaths =  (array_column($eloquentParams, 1, 2));
+        $colNames_ModelNames = $this->indexColNamesForModels($colNames_modelPaths, $_colNames, $colName); // k2
+        // dump($colNames_ModelNames);
 
-        $props = Props::getAllOf($type);
-        $colNamesHaveDropdown = Helper::getColNamesByControl($props, 'dropdown');
-
-
-
-        $dataListenTrigger = [];
-        $dataListenTrigger += $this->triggerDataModel($colNames_modelPaths, $colNamesHaveDropdown, $type); // k
-        $colNames_ModelNames = $this->indexColNamesAndModels($colNames_modelPaths, $colNamesHaveDropdown); //k2
+        $dataListenTrigger = $this->triggerDataModel($modelPaths_colNames, $_colNames, $colName, $type, $colNames_ModelNames); // k
+        // Log::info($dataSource);
+        // dump($dataSource);
 
         return view('components.controls.dropdown')->with(compact('colNames_ModelNames', 'dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
     }
 
 
-
-    public function triggerDataModel($colNames_modelPaths, $colNamesHaveDropdown, $type)
+    public function triggerDataModel($modelPaths_colNames, $_colNames, $colName, $type, $colNames_ModelNames)
     {
         $result = [];
-        foreach ($colNames_modelPaths as $colNameKey => $modelPath) {
-            if (in_array($colNameKey, $colNamesHaveDropdown)) {
-                $entityName = Str::getEntityNameFromModelPath($modelPath);
-                $result[$entityName][$colNameKey] = Helper::getDataFromPathModelDropdown($modelPath, $colNameKey, $type)->toArray();
-            }
+        dump($modelPaths_colNames, $colNames_ModelNames);
+        foreach (array_keys($modelPaths_colNames) as $modelPath) {
+            $entityName = Str::getEntityNameFromModelPath($modelPath);
+
+            $tableName = Str::plural(strtolower($colNames_ModelNames[$colName]));
+
+            dump($entityName);
+            $result[$colNames_ModelNames[$colName]] = Helper::getDataSourceDropDown($tableName, $colName, $type);
         };
         return $result;
     }
 
-    public function indexColNamesAndModels($colNames_modelPaths, $colNamesHaveDropdown)
+    public function indexColNamesForModels($colNames_modelPaths, $_colNames, $colName)
     {
         $result = [];
         foreach ($colNames_modelPaths as $colName => $modelPath) {
-            if (in_array($colName, $colNamesHaveDropdown)) {
-                $entityName = Str::getEntityNameFromModelPath($modelPath);
-                $result[$colName] = $entityName;
-            }
+            // if (in_array($colName, $_colNames)) {
+            $entityName = Str::getEntityNameFromModelPath($modelPath);
+            $result[$colName] = $entityName;
+            // }
         };
         return $result;
     }
