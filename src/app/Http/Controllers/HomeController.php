@@ -98,24 +98,28 @@ class HomeController extends Controller
         // $array = array(3, 4, 2, 1, 6, 5);
         // $sortedArray = quickSort($array);
         // dd($sortedArray);
-        $arrayIdFail = [2, 6];
-        $arrayIdOnHold = [4, 8];
-        $model = Qaqc_insp_chklst_run::find(41);
-        $qaqcInspChklstLines = $model->getLines;
-        dd($model->getLines);
-        $arrayControlValueId = [];
-        foreach ($qaqcInspChklstLines as $qaqcInspChklstLine) {
-            array_push($arrayControlValueId, $qaqcInspChklstLine['qaqc_insp_control_value_id']);
-        }
-        dd($arrayControlValueId);
-        if (Arr::containsEach($arrayIdFail, $arrayControlValueId)) {
-            $status = 'fail';
-        } else if (!Arr::containsEach($arrayIdFail, $arrayControlValueId) && Arr::containsEach($arrayIdOnHold, $arrayControlValueId)) {
-            $status = 'on_hold';
-        } else {
-            $status = 'new';
-        }
-        dd($status);
+        // $arrayIdFail = [2, 6];
+        // $arrayIdOnHold = [4, 8];
+        // $model = Qaqc_insp_chklst_run::find(57);
+        // $qaqcInspChklstLines = $model->getLines;
+        // $arrayControlValueId = [];
+        // foreach ($qaqcInspChklstLines as $qaqcInspChklstLine) {
+        //     array_push($arrayControlValueId, $qaqcInspChklstLine['qaqc_insp_control_value_id']);
+        // }
+        // if (Arr::containsEach($arrayIdFail, $arrayControlValueId)) {
+        //     $status = 'fail';
+        // } else if (
+        //     !Arr::containsEach($arrayIdFail, $arrayControlValueId) &&
+        //     Arr::containsEach($arrayIdOnHold, $arrayControlValueId)
+        // ) {
+        //     $status = 'on_hold';
+        // } else {
+        //     $status = 'new';
+        // }
+        // try {
+        //     dd($model);
+        // } catch (\Throwable $th) {
+        // }
         // dump(array_merge($array['websites'], $array['friends']));
         // dump(User::where('email', 'admin')->first());
         // dump(CurrentUser::getRoles());

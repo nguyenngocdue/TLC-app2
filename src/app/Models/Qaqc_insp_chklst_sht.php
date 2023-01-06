@@ -16,6 +16,11 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     public function getRuns()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        $relation = $this->{$p[0]}($p[1], $p[2]);
+        $sql = $relation
+            ->getQuery()
+            ->orderBy('created_at', 'DESC')
+            ->toSql();
+        return $relation;
     }
 }

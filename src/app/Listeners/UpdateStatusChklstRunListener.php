@@ -46,12 +46,8 @@ class UpdateStatusChklstRunListener
         ) {
             $status = 'on_hold';
         } else {
-            $status = 'new';
+            $status = 'pass';
         }
-        try {
-            $model->update(['status' => $status]);
-        } catch (\Throwable $th) {
-            Log::info($th);
-        }
+        $model->update(['status' => $status]);
     }
 }

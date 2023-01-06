@@ -9,7 +9,7 @@ class Qaqc_insp_chklst_run extends ModelExtended
 {
     use HasStatus;
 
-    protected $fillable = ["id", "name", "description", "slug", "qaqc_insp_chklst_sht_id"];
+    protected $fillable = ["id", "name", "description", "slug", "qaqc_insp_chklst_sht_id", "status", "progress", "owner_id"];
     protected $table = "qaqc_insp_chklst_runs";
     public $nameless = true;
 

@@ -20,6 +20,7 @@ class SubmitFormController extends Controller
     {
         try {
             $idRunSubmit = $request->input('id');
+            $ownerId = $request->input('ownerId');
             $submitLines = $request->input('submitLines');
             if (isset($submitLines) && count($submitLines) > 0) {
                 foreach ($submitLines as $value) {
@@ -36,16 +37,14 @@ class SubmitFormController extends Controller
                 }
             }
             try {
-                $idNewRun = Artisan::call('ndc:cloneRun', ['--idRun' => $idRunSubmit]);
+                Artisan::call('ndc:cloneRun', ['--idRun' => $idRunSubmit]);
             } catch (\Throwable $th) {
                 return response()->json('Artisan command call failed');
             }
-            if ($idNewRun != 1) {
-                event(new UpdateStatusChklstRunEvent($idNewRun));
-            }
+            event(new UpdateStatusChklstRunEvent($idRunSubmit));
             return response()->json('Successfully');
         } catch (\Throwable $th) {
-            return response()->json($th);
+            return response()->json($th->__toString());
         }
     }
 
@@ -54,9 +53,9 @@ class SubmitFormController extends Controller
         $modelControlValue = Qaqc_insp_control_value::find($controlValueId);
         $nameControlValue = $modelControlValue->name;
         if ($modelControlValue->getControlGroup->id == $controlGroupId) {
-            $nameControlValue == 'No' ?  $filedName = 'getNoOfYesNo' : 'getOnHoldOfYesNo';
+            $filedName = $nameControlValue == 'No' ? 'getNoOfYesNo' : 'getOnHoldOfYesNo';
         } else {
-            $nameControlValue == 'Fail' ?  $filedName = 'getFailedOfPassFail' : 'getOnHoldOfPassFail';
+            $filedName = $nameControlValue == 'Fail' ?  'getFailedOfPassFail' : 'getOnHoldOfPassFail';
         }
         return $filedName;
     }
