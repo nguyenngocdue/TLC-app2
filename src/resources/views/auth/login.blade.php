@@ -4,7 +4,7 @@
     <section class="bg-gray-50 dark:bg-gray-900">
         <div class="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
             <a href="#" class="mb-0 flex items-center text-2xl font-semibold text-gray-900 dark:text-white">
-                <img class="mr-2 h-32 w-32" src="{{ asset('logo/tlc.svg') }}" alt="logo">
+                <img class="mr-2 w-32" src="{{ asset('logo/tlc.png') }}" alt="logo">
 
             </a>
             <div

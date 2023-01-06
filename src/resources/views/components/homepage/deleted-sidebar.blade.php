@@ -15,7 +15,7 @@ $error = '<span class="ml-5 flex text-sm text-red-500">Setting Side Bar Prop jso
     <div class="py-4 text-gray-500 dark:text-gray-400">
         <div class="relative text-center">
             <a class="inline-flex text-lg font-bold text-gray-800 dark:text-gray-200" href="/">
-                <img class="h-9 object-cover" src="{{ asset('logo/tlc.svg') }}" alt="logo">
+                <img class="h-9 object-cover" src="{{ asset('logo/tlc.png') }}" alt="logo">
             </a>
         </div>
         <nav aria-label="Main" class="flex-1 space-y-2 overflow-y-hidden px-2 py-4 hover:overflow-y-auto">
