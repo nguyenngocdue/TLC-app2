@@ -77,11 +77,6 @@ function dropdownComponent({ id, name, dataSource, selected, disabled = false, t
 
     };
 
-    if (name === 'user_1') {
-        console.log(selected, dataSource)
-
-    }
-
     // Render data source
     strHtmlTrigger = dataSource.map(item => {
         let checkSelected = selected * 1 === item.id * 1 || dataSource.length < 2 ? "selected" : "";
