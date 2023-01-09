@@ -173,6 +173,10 @@ class Helper
         $newMessage = str_replace($strSearch, ("<strong>" . $labelName . " " . "</strong>"), $message);
         return $newMessage;
     }
+    public static function getFileNameNormal($file)
+    {
+        return $file->getClientOriginalName();
+    }
 
     public static function customizeSlugData($file, $tableName, $media)
     {

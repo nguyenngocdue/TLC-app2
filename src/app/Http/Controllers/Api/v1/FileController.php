@@ -18,106 +18,42 @@ class FileController extends Controller
 
     public function upload(Request $request)
     {
-        try {
-            $modelName = $request->modelName;
-            $modelId = $request->modelId;
-            $nameIdFields = Helper::getDataDbByName('fields', 'name', 'id');
-            $filesUpload = $request->files;
-            $attachments = [];
-            foreach ($filesUpload as $key => $files) {
-                try {
-                    foreach ($files as $file) {
-                        $fileName = Helper::customizeSlugData($file, 'attachments', $attachments);
-                        $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
-                        $dt = Carbon::now('Asia/Ho_Chi_Minh');
-                        $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
-                        $pathImage = $path . $fileName;
-                        Storage::disk('s3')->put($pathImage, file_get_contents($file), 'public');
-                        $pathThumbnail = $this->createThumbnailGiveImage($imageFileType, $file, $fileName, $path);
-                        array_push($attachments, [
-                            'url_thumbnail' => isset($pathThumbnail) ? $pathThumbnail : "",
-                            'url_media' => $pathImage,
-                            'url_folder' => $path,
-                            'filename' => basename($pathImage),
-                            'extension' => $imageFileType,
-                            'category' => $nameIdFields[$key],
-                            'owner_id' =>  (int)Auth::user()->id,
-                            'object_id' => (int)$modelId,
-                            'object_type' => $modelName,
-                        ]);
-                    }
-                    $this->createAttachment($attachments);
-                    return response()->json('Completed');
-                } catch (\Exception $e) {
-                    return response()->json($e);
-                }
-            }
-        } catch (\Throwable $th) {
-            return response()->json($th);
-        }
+        $res = $this->uploadFile($request);
+        return response()->json($res);
     }
 
     public function edit(Request $request)
     {
         if (is_null($request->attachmentId)) {
-            try {
-                $modelName = $request->modelName;
-                $modelId = $request->modelId;
-                $nameIdFields = Helper::getDataDbByName('fields', 'name', 'id');
+            $res = $this->uploadFile($request);
+            return response()->json($res);
+        } else {
+            $attachmentId = $request->attachmentId;
+            $attachment = Attachment::find($attachmentId);
+            if ($attachment) {
+                Storage::disk('s3')->delete($attachment->getAttributes()['url_thumbnail']);
+                Storage::disk('s3')->delete($attachment->getAttributes()['url_media']);
                 $filesUpload = $request->files;
-                $attachments = [];
-                foreach ($filesUpload as $key => $files) {
+                foreach ($filesUpload as $files) {
                     try {
                         foreach ($files as $file) {
-                            $fileName = Helper::customizeSlugData($file, 'attachments', $attachments);
+                            $fileName = Helper::getFileNameNormal($file);
                             $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
                             $dt = Carbon::now('Asia/Ho_Chi_Minh');
                             $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
                             $pathImage = $path . $fileName;
                             Storage::disk('s3')->put($pathImage, file_get_contents($file), 'public');
-                            $pathThumbnail = $this->createThumbnailGiveImage($imageFileType, $file, $fileName, $path);
-                            array_push($attachments, [
-                                'url_thumbnail' => isset($pathThumbnail) ? $pathThumbnail : "",
-                                'url_media' => $pathImage,
-                                'url_folder' => $path,
-                                'filename' => basename($pathImage),
-                                'extension' => $imageFileType,
-                                'category' => $nameIdFields[$key],
-                                'owner_id' =>  (int)Auth::user()->id,
-                                'object_id' => (int)$modelId,
-                                'object_type' => $modelName,
-                            ]);
+                            $this->createThumbnailGiveImage($imageFileType, $file, $fileName, $path);
                         }
-                        $this->createAttachment($attachments);
                         return response()->json('Completed');
                     } catch (\Exception $e) {
                         return response()->json($e);
                     }
                 }
-            } catch (\Throwable $th) {
-                return response()->json($th);
-            }
-        } else {
-            $attachmentId = $request->attachmentId;
-            $attachment = Attachment::find($attachmentId);
-            Storage::disk('s3')->delete($attachment->getAttributes()['url_thumbnail']);
-            Storage::disk('s3')->delete($attachment->getAttributes()['url_media']);
-            $filesUpload = $request->files;
-            foreach ($filesUpload as $key => $files) {
-                try {
-                    foreach ($files as $file) {
-                        $fileName = Helper::customizeSlugData($file, 'attachments', []);
-                        $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
-                        $dt = Carbon::now('Asia/Ho_Chi_Minh');
-                        $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
-                        $pathImage = $path . $fileName;
-                        Storage::disk('s3')->put($pathImage, file_get_contents($file), 'public');
-                        $this->createThumbnailGiveImage($imageFileType, $file, $fileName, $path);
-                    }
-                    return response()->json('Completed');
-                } catch (\Exception $e) {
-                    return response()->json($e);
-                }
+            } else {
+                return response()->json([
+                    'message' => 'Attachment does not exist'
+                ]);
             }
         }
     }
@@ -127,7 +63,10 @@ class FileController extends Controller
         $attachment = Attachment::find($attachmentId);
         Storage::disk('s3')->delete($attachment->getAttributes()['url_thumbnail']);
         Storage::disk('s3')->delete($attachment->getAttributes()['url_media']);
-        return response()->json('Successfully');
+        $attachment->delete();
+        return response()->json([
+            'message' => 'Deleted successfully',
+        ]);
     }
     /**
      * createThumbnailGiveImage
@@ -162,6 +101,52 @@ class FileController extends Controller
     {
         foreach ($attachments as $attachment) {
             Attachment::create($attachment);
+        }
+    }
+    private function uploadFile($request)
+    {
+        try {
+            $modelName = $request->modelName;
+            $modelId = $request->modelId;
+            $nameIdFields = Helper::getDataDbByName('fields', 'name', 'id');
+            $filesUpload = $request->files;
+            $attachments = [];
+            foreach ($filesUpload as $key => $files) {
+                try {
+                    foreach ($files as $file) {
+                        $fileName = Helper::customizeSlugData($file, 'attachments', $attachments);
+                        $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
+                        $dt = Carbon::now('Asia/Ho_Chi_Minh');
+                        $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
+                        $pathImage = $path . $fileName;
+                        Storage::disk('s3')->put($pathImage, file_get_contents($file), 'public');
+                        $pathThumbnail = $this->createThumbnailGiveImage($imageFileType, $file, $fileName, $path);
+                        array_push($attachments, [
+                            'url_thumbnail' => isset($pathThumbnail) ? $pathThumbnail : "",
+                            'url_media' => $pathImage,
+                            'url_folder' => $path,
+                            'filename' => basename($pathImage),
+                            'extension' => $imageFileType,
+                            'category' => $nameIdFields[$key],
+                            'owner_id' =>  (int)Auth::user()->id,
+                            'object_id' => (int)$modelId,
+                            'object_type' => $modelName,
+                        ]);
+                    }
+                    $this->createAttachment($attachments);
+                    return [
+                        'message' => 'Successfully',
+                    ];
+                } catch (\Exception $e) {
+                    return [
+                        'message' => $e->getMessage(),
+                    ];
+                }
+            }
+        } catch (\Throwable $th) {
+            return [
+                'message' => $th,
+            ];
         }
     }
 }
