@@ -7,7 +7,7 @@ use App\Models\Prod_routing;
 use App\Models\Prod_sequence;
 use Illuminate\Console\Command;
 
-class Test extends Command
+class RefreshPOCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -57,6 +57,7 @@ class Test extends Command
                 'status' => 'new',
             ]);
         }
+        $this->info("Created " . count($toBeAdded) . " new Prod Sequences.");
 
         foreach ($createdProdSequence as $item) {
             if (in_array($item->prod_routing_link_id, $toBeObsolete)) {
@@ -64,6 +65,7 @@ class Test extends Command
                 $ps->transitionTo('obsolete');
             }
         }
+        $this->info("Transitioned " . count($toBeObsolete) . " Prod Sequences to Obsolete.");
     }
 
     /**
