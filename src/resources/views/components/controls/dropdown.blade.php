@@ -44,7 +44,6 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
         }
 
         var text = state.text.split('#@#')
-        console.log(text)
         var $state = $(
             `<div class="flex justify-between px-1">
                 <span>${text[0]}</span><span>${text[1]}</span>
@@ -59,5 +58,11 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
         , allowClear: true
         , templateResult: formatState
     });
+
+    // Show items when edit status
+    var eleSelected = document.getElementById("select2-select-dropdown-{{$colName}}-container");
+    var value = eleSelected.innerText;
+    var newValue = value.substring(0, value.indexOf('#@#'))
+    eleSelected.innerHTML = newValue;
 
 </script>
