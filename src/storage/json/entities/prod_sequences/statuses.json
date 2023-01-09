@@ -3,5 +3,6 @@
     "in_progress",
     "on_hold",
     "finished",
-    "cancelled"
+    "cancelled",
+    "obsolete"
 ]

@@ -18,8 +18,8 @@ return new class extends Migration
                 view_prl.*, 
                 ps.total_hours,
                 ps.total_man_hours,
-                ps.expected_started_at, 
-                ps.expected_finished_at
+                ps.expected_start_at, 
+                ps.expected_finish_at
             FROM 
                 views_full_prod_routing_link view_prl
                 , prod_sequences ps
