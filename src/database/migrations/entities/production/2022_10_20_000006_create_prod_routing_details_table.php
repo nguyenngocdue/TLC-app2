@@ -16,11 +16,11 @@ return new class extends Migration
     {
         Schema::create('prod_routing_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('priority')->nullable();
             $table->unsignedBigInteger('prod_routing_id');
             $table->unsignedBigInteger('prod_routing_link_id');
             $table->unsignedBigInteger('erp_routing_link_id');
             $table->unsignedBigInteger('wir_description_id');
+            $table->integer('priority')->nullable();
             $table->double('target_hours')->nullable();
             $table->double('target_man_hours')->nullable();
 

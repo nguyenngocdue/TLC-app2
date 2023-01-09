@@ -14,6 +14,7 @@ class Prod_sequence extends ModelExtended
         "prod_order_id", "prod_routing_link_id",
         "status", "total_hours", "total_man_hours",
         "expected_start_at", "expected_finish_at",
+        "priority",
     ];
     protected $primaryKey = 'id';
     protected $table = 'prod_sequences';
