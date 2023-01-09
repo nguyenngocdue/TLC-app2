@@ -119,6 +119,36 @@
         "validation": "required",
         "formula": ""
     },
+    "_incident_doc_type_id": {
+        "name": "_incident_doc_type_id",
+        "column_name": "incident_doc_type_id",
+        "column_type": "bigint",
+        "label": "Issue Category",
+        "control": "dropdown",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "label_hidden_edit": "",
+        "new_line": "",
+        "validation": "required",
+        "formula": ""
+    },
+    "_incident_doc_sub_type_id": {
+        "name": "_incident_doc_sub_type_id",
+        "column_name": "incident_doc_sub_type_id",
+        "column_type": "bigint",
+        "label": "Issue Sub-Category",
+        "control": "dropdown",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "label_hidden_edit": "",
+        "new_line": "",
+        "validation": "required",
+        "formula": ""
+    },
     "_number_injured_person": {
         "name": "_number_injured_person",
         "column_name": "number_injured_person",

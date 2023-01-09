@@ -6,6 +6,28 @@ use App\BigThink\ModelExtended;
 
 class Public_holiday extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'years', 'workplace_id', 'ph_date', 'ph_hours'];
+    protected $fillable = ['id', 'name', 'year', 'workplace_id', 'ph_date', 'ph_hours'];
     protected $table = "public_holidays";
+
+    public $eloquentParams = [
+        "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
+    ];
+
+    public function getWorkplace()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getManyLineParams()
+    {
+        return [
+            ["dataIndex" => 'id', 'renderer' => 'id', 'type' => 'public_holidays', 'align' => 'center'],
+            ['dataIndex' => 'getWorkplace', 'title' => 'Workplace', 'renderer' => 'column', 'rendererParam' => 'name'],
+            ['dataIndex' => 'year'],
+            ['dataIndex' => 'name'],
+            ['dataIndex' => 'ph_date'],
+            ['dataIndex' => 'ph_hours'],
+        ];
+    }
 }

@@ -1,0 +1,14 @@
+{
+    "_getWorkplace": {
+        "name": "_getWorkplace",
+        "relationship": "belongsTo",
+        "control_name": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    }
+}

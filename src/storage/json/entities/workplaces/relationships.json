@@ -23,6 +23,18 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getPublicHolidays": {
+        "name": "_getPublicHolidays",
+        "relationship": "hasMany",
+        "control_name": "getPublicHolidays",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getDefMonitors()": {
         "name": "_getDefMonitors()",
         "relationship": "getCheckedByField",

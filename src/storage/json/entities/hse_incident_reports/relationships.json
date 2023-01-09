@@ -119,6 +119,30 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getDocType": {
+        "name": "_getDocType",
+        "relationship": "belongsTo",
+        "control_name": "incident_doc_type_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "field_id",
+        "filter_values": "108",
+        "radio_checkbox_colspan": ""
+    },
+    "_getDocSubType": {
+        "name": "_getDocSubType",
+        "relationship": "belongsTo",
+        "control_name": "incident_doc_sub_type_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "field_id",
+        "filter_values": "109",
+        "radio_checkbox_colspan": ""
+    },
     "_mainAffectedPart()": {
         "name": "_mainAffectedPart()",
         "relationship": "getCheckedByField",

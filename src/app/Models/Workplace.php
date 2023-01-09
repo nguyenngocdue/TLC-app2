@@ -13,6 +13,7 @@ class Workplace extends ModelExtended
     public $eloquentParams = [
         "user" => ['hasMany', User::class, 'workplace'],
         "getAssignee" => ["belongsTo", User::class, 'def_assignee'],
+        "getPublicHolidays" => ["hasMany", Public_holiday::class, 'workplace_id'],
     ];
     public $oracyParams = [
         "getDefMonitors()" => ["getCheckedByField", User::class],
@@ -29,6 +30,12 @@ class Workplace extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public function getPublicHolidays()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
     public function getDefMonitors()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];

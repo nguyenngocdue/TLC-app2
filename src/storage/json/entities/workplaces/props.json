@@ -9,6 +9,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -23,6 +24,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -37,6 +39,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -51,6 +54,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -65,6 +69,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -79,6 +84,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -93,6 +99,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": "All_SlugifyByName"
@@ -107,6 +114,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -121,6 +129,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -135,6 +144,22 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
+        "new_line": "true",
+        "validation": "",
+        "formula": ""
+    },
+    "_getPublicHolidays": {
+        "name": "_getPublicHolidays",
+        "column_name": "getPublicHolidays",
+        "column_type": "eloquent_prop",
+        "label": "Public Holidays",
+        "control": "relationship_renderer",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "true",
         "validation": "",
         "formula": ""

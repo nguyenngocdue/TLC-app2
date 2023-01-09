@@ -1,34 +1,22 @@
 {
-    "_getTemplate": {
-        "name": "_getTemplate",
-        "relationship": "belongsTo",
-        "control_name": "",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_getSheet": {
-        "name": "_getSheet",
-        "relationship": "belongsTo",
-        "control_name": "",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "description",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_getGroup": {
         "name": "_getGroup",
         "relationship": "belongsTo",
         "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "description",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getRun": {
+        "name": "_getRun",
+        "relationship": "belongsTo",
+        "control_name": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",

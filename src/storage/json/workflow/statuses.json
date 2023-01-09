@@ -131,9 +131,9 @@
         "color": "lime",
         "color_index": "200"
     },
-    "obsoleted": {
-        "name": "obsoleted",
-        "title": "Obsoleted",
+    "obsolete": {
+        "name": "obsolete",
+        "title": "Obsolete",
         "color": "fuchsia",
         "color_index": "200"
     },

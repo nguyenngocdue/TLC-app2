@@ -10,7 +10,12 @@ class Prod_sequence extends ModelExtended
 {
     use HasStatus;
     public $timestamps = true;
-    protected $fillable = ["prod_order_id", "prod_routing_link_id", "status", "total_hours", "total_man_hours"];
+    protected $fillable = [
+        "prod_order_id", "prod_routing_link_id",
+        "status", "total_hours", "total_man_hours",
+        "expected_start_at", "expected_finish_at",
+        "priority",
+    ];
     protected $primaryKey = 'id';
     protected $table = 'prod_sequences';
     public $nameless = true;
@@ -68,6 +73,9 @@ class Prod_sequence extends ModelExtended
             ["dataIndex" => "prodOrder", "title" => "Routing Id (*)", "renderer" => "column", "rendererParam" => "prod_routing_id"],
             ["dataIndex" => "prodRoutingLinks", "title" => "Prod Routing ID", "renderer" => "column", "rendererParam" => "id"],
             ["dataIndex" => "prodRoutingLinks",  "title" => "Prod Routing Name (*)", "renderer" => "column", "rendererParam" => "name"],
+
+            ["dataIndex" => "expected_start_at", "align" => "right"],
+            ["dataIndex" => "expected_finish_at", "align" => "right"],
 
             ["dataIndex" => "total_hours", "align" => "right"],
             ["dataIndex" => "total_man_hours", "title" => "Total ManHours", "align" => "right"],

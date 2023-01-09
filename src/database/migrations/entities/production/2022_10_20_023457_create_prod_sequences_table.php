@@ -20,8 +20,11 @@ return new class extends Migration
             $table->unsignedBigInteger('prod_routing_link_id');
             $table->unique(['prod_order_id', 'prod_routing_link_id']);
             $table->string('status')->nullable();
+            $table->integer('priority')->nullable();
             $table->double('total_hours')->nullable();
             $table->double('total_man_hours')->nullable();
+            $table->dateTime('expected_start_at')->nullable();
+            $table->dateTime('expected_finish_at')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
