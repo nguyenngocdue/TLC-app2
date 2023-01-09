@@ -3,6 +3,7 @@ $idEntity = isset($currentEntity[$colName]) ? $currentEntity[$colName]*1 : null;
 $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
 // dd($dataSource);
 // dd($dataListenTrigger);
+
 @endphp
 
 <div id="add-{{$colName}}">
@@ -15,6 +16,9 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
     let k = @json($dataListenTrigger);
     let k2 = @json($colNames_ModelNames);
     let listenersJson = @json($listenersJson);
+    let idEntities = {}
+    let triggers_colNames = @json($triggers_colNames);
+    let colNamesListener = Object.values(listenersJson).map((item) => item.column_name);
 
 </script>
 @endonce
@@ -23,6 +27,7 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
     var name = "{{$colName}}";
     var id = "select-dropdown-" + "{{$colName}}";
     var selected = "{{$selected}}";
+    idEntities[name] = "{{$idEntity}}" * 1
 
     dropdownComponent({
         id
@@ -31,7 +36,7 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
         , selected
         , disabled: false
         , title_field_name: "name"
-        , disabled_field_name: false
+        , disabled_field_name: "resigned"
     });
 
 </script>
@@ -44,9 +49,10 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
         }
 
         var text = state.text.split('#@#')
+        var addText = text[1] ? '' + text[1] : '';
         var $state = $(
             `<div class="flex justify-between px-1">
-                <span>${text[0]}</span><span>${text[1]}</span>
+                <span>${text[0]}</span><span>${addText}</span>
             </div>
             `
         );
@@ -60,9 +66,6 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
     });
 
     // Show items when edit status
-    var eleSelected = document.getElementById("select2-select-dropdown-{{$colName}}-container");
-    var value = eleSelected.innerText;
-    var newValue = value.substring(0, value.indexOf('#@#'))
-    eleSelected.innerHTML = newValue;
+    fixValueElement("{{$colName}}")
 
 </script>

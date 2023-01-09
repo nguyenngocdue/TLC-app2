@@ -60,7 +60,9 @@ class Dropdown extends Component
         $dataListenTrigger += $this->triggerDataModel($colNames_modelPaths, $colNamesHaveDropdown, $type); // k
         $colNames_ModelNames = $this->indexColNamesAndModels($colNames_modelPaths, $colNamesHaveDropdown); //k2
 
-        return view('components.controls.dropdown')->with(compact('colNames_ModelNames', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
+        $triggers_colNames = array_column($listenersJson, 'triggers', 'column_name');
+
+        return view('components.controls.dropdown')->with(compact('triggers_colNames', 'colNames_ModelNames', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
     }
 
 

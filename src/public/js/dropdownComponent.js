@@ -30,6 +30,7 @@ const onChangedItem = (value, colName) => {
     let eles = document.getElementById("select-dropdown-" + column_name);
     let headOption = listen_to_fields !== column_name ? [] : [`<option class="py-10" value="" selected>Select your option...</option>`]
     eles.innerHTML = strHtmlRender + headOption;
+    fixValueElement(colName)
 }
 
 function renderSelect({ id, name, disabled }) {
@@ -45,12 +46,41 @@ function renderSelect({ id, name, disabled }) {
 }
 
 
-function dropdownComponent({ id, name, dataSource, selected, disabled = false, title_field_name = 'name', disabled_field_name = false }) {
+function dropdownComponent({ id, name, dataSource, selected, disabled = false, title_field_name = 'name', disabled_field_name }) {
     renderSelect({ id, name, disabled });
+
+    // Reduce data source when in edit mode
+    objListener = Object.values(listenersJson).find((item) => item.column_name === name);
+    if (typeof objListener !== 'undefined' && selected !== "") {
+        const {
+            listen_to_attrs
+            , listen_to_fields
+        } = objListener
+
+        if (colNamesListener.includes(name)) {
+            itemsDB = [];
+            var idTrigger = idEntities[triggers_colNames[name]]
+            if (listen_to_fields === name) {
+                itemsDB = dataSource.filter(ele => {
+                    if (typeof [triggers_colNames[name]] !== 'undefined') {
+                        if (typeof idTrigger !== 'undefined') {
+                            return ele[listen_to_attrs] === idTrigger;
+                        }
+                    }
+                })
+            } else {
+                itemsDB = [dataSource.find(ele => ele.id === idTrigger)]
+            }
+            dataSource = itemsDB
+        }
+
+    };
+
+    // Render data source
     strHtmlTrigger = dataSource.map(item => {
-        let checkSelected = selected * 1 === item.id * 1 || dataSource.length < 1 ? "selected" : "";
-        let title = disabled_field_name ? '' : item[title_field_name];
-        let disabledLine = item.status === 'new' ? 'disabled' : '';
+        let checkSelected = selected * 1 === item.id * 1 || dataSource.length < 2 ? "selected" : "";
+        let title = item[title_field_name];
+        let disabledLine = item[disabled_field_name] ? 'disabled' : '';
         return `
                 <option ${checkSelected} value=${item.id}   title="${title}" ${disabledLine} >
                         ${item.name}#@#${item.id}        
@@ -59,6 +89,13 @@ function dropdownComponent({ id, name, dataSource, selected, disabled = false, t
 
     eleTriggers = document.getElementById("select-dropdown-" + name);
     if (eleTriggers !== null) eleTriggers.innerHTML += strHtmlTrigger;
+}
+
+function fixValueElement(colName) {
+    var eleSelected = document.getElementById("select2-select-dropdown-" + colName + "-container");
+    var value = eleSelected.innerText;
+    var newValue = value.substring(0, value.indexOf('#@#'))
+    eleSelected.innerHTML = newValue;
 }
 
 
