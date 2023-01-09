@@ -37,7 +37,7 @@ class SubmitFormController extends Controller
                 }
             }
             try {
-                Artisan::call('ndc:cloneRun', ['--idRun' => $idRunSubmit]);
+                Artisan::call('ndc:cloneRun', ['--idRun' => $idRunSubmit, '--ownerId' => $ownerId]);
             } catch (\Throwable $th) {
                 return response()->json('Artisan command call failed');
             }

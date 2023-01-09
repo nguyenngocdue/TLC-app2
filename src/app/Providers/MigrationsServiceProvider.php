@@ -36,5 +36,6 @@ class MigrationsServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom($path . "pivots");
         $this->loadMigrationsFrom($path . "foreignKeys");
+        $this->loadMigrationsFrom($path . "views");
     }
 }
