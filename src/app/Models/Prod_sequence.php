@@ -10,7 +10,11 @@ class Prod_sequence extends ModelExtended
 {
     use HasStatus;
     public $timestamps = true;
-    protected $fillable = ["prod_order_id", "prod_routing_link_id", "status", "total_hours", "total_man_hours"];
+    protected $fillable = [
+        "prod_order_id", "prod_routing_link_id",
+        "status", "total_hours", "total_man_hours",
+        "expected_started_at", "expected_finished_at",
+    ];
     protected $primaryKey = 'id';
     protected $table = 'prod_sequences';
     public $nameless = true;

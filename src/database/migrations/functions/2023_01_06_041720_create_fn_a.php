@@ -14,18 +14,17 @@ return new class extends Migration
     {
         DB::statement("CREATE OR REPLACE VIEW views_full_prod_sequence AS
         (
-            SELECT 
-                view_prl.*, 
-                ps.total_hours,
-                ps.total_man_hours,
-                ps.expected_started_at, 
-                ps.expected_finished_at
-            FROM 
-                views_full_prod_routing_link view_prl
-                , prod_sequences ps
+            SELECT the_date 
+            FROM view_mon2sat_2023_2033 v
             WHERE 1=1
-                AND po_id = ps.id
-            ORDER BY `po_id` ASC
+                AND the_date >= DATE_ADD('2023-02-01 00:00:00', INTERVAL FLOOR(8/8) DAY)
+                AND v.the_date NOT IN (
+                        SELECT ph_date 
+                        FROM public_holidays ph 
+                        WHERE ph.workplace_id=2
+                    )
+            ORDER BY the_date
+            LIMIT 1
         )");
     }
 
