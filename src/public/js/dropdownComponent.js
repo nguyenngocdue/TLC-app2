@@ -51,7 +51,7 @@ function dropdownComponent({ id, name, dataSource, selected, disabled = false, t
 
     // Reduce data source when in edit mode
     objListener = Object.values(listenersJson).find((item) => item.column_name === name);
-    if (typeof objListener !== 'undefined' && selected !== "") {
+    if (typeof objListener !== 'undefined' && action === 'edit') {
         const {
             listen_to_attrs
             , listen_to_fields

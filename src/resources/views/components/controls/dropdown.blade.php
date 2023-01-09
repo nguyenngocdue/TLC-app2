@@ -19,6 +19,7 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
     let idEntities = {}
     let triggers_colNames = @json($triggers_colNames);
     let colNamesListener = Object.values(listenersJson).map((item) => item.column_name);
+    let action = "{{$action}}"
 
 </script>
 @endonce
@@ -27,7 +28,7 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
     var name = "{{$colName}}";
     var id = "select-dropdown-" + "{{$colName}}";
     var selected = "{{$selected}}";
-    idEntities[name] = "{{$idEntity}}" * 1
+    idEntities[name] = "{{$idEntity}}" * 1;
 
     dropdownComponent({
         id
