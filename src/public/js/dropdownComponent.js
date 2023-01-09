@@ -8,7 +8,6 @@ const onChangedItem = (value, colName) => {
         , column_name
     } = objListener
 
-    console.log(listen_to_fields);
     let dataListenTo = k[k2[listen_to_fields]][listen_to_fields];
     // console.log(dataListenTo);
     itemsDB = [];
@@ -33,10 +32,10 @@ const onChangedItem = (value, colName) => {
     eles.innerHTML = strHtmlRender + headOption;
 }
 
-function renderSelect({ id, name }) {
-    // console.log('renderSelect', id)
+function renderSelect({ id, name, disabled }) {
+    let disabledSelect = disabled ? 'disabled' : '';
     const strHTML = ` 
-    <select name='${name}' id="${id}" onchange="onChangedItem(value*1, ${name})" class=" bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+    <select name='${name}' id="${id}" onchange="onChangedItem(value*1, ${name})" ${disabledSelect} class=" js-example-basic-multiple bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
         <option class="py-10" value="" selected>Select your option...</option>
     </select>`;
 
@@ -46,15 +45,15 @@ function renderSelect({ id, name }) {
 }
 
 
-function dropdownComponent({ id, name, dataSource, selected }) {
-    renderSelect({ id, name });
-    // console.log('renderOption', id);
+function dropdownComponent({ id, name, dataSource, selected, disabled = false, title_field_name = 'name', disabled_field_name = false }) {
+    renderSelect({ id, name, disabled });
     strHtmlTrigger = dataSource.map(item => {
-        checkSelected = selected * 1 === item.id * 1 || dataSource.length < 1 ? "selected" : "";
+        let checkSelected = selected * 1 === item.id * 1 || dataSource.length < 1 ? "selected" : "";
+        let title = disabled_field_name ? '' : item[title_field_name];
+        let disabledLine = item.status === 'new' ? 'disabled' : '';
         return `
-                <option ${checkSelected} value=${item.id}>
-                        <span>prefix: ${item.name}</span>
-                        <span>suffix: ${item.id}</span>            
+                <option ${checkSelected} value=${item.id}   title="${title}" ${disabledLine} >
+                        ${item.name}#@#${item.id}        
                 </option>
     `})
 

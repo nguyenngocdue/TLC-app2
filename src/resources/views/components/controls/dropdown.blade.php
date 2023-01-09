@@ -29,15 +29,40 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
         , name
         , dataSource: k[k2[name]][name]
         , selected
+        , disabled: false
+        , title_field_name: "name"
+        , disabled_field_name: false
     });
 
 </script>
 
 
 <script type="text/javascript">
+    function formatState(state) {
+        if (!state.id) {
+            return state.text;
+        }
+
+        var text = state.text.split('#@#')
+        var $state = $(
+            `<div class="flex justify-between px-1">
+                <span>${text[0]}</span><span>${text[1]}</span>
+            </div>
+            `
+        );
+        return $state;
+    };
+
     $('#select-dropdown-{{$colName}}').select2({
         placeholder: "Please select"
         , allowClear: true
+        , templateResult: formatState
     });
+
+    // Show items when edit status
+    var eleSelected = document.getElementById("select2-select-dropdown-{{$colName}}-container");
+    var value = eleSelected.innerText;
+    var newValue = value.substring(0, value.indexOf('#@#'))
+    eleSelected.innerHTML = newValue;
 
 </script>

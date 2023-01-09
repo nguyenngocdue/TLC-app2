@@ -35,13 +35,13 @@ class Dropdown extends Component
         $modelPath = $this->modelPath;
         $type = $this->type;
 
-        $dataSource = Helper::getDataSourceHasKeyTableName($modelPath, $colName, $type);
         $currentEntity = Helper::getItemModel($this->type, $this->id) ?? [];
+        // $dataSource = Helper::getDataSourceHasKeyTableName($modelPath, $colName, $type);
 
-        if (is_null($dataSource) || gettype($dataSource) === 'string') {
-            $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in $modelPath Model).";
-            return "<x-feedback.alert message='{$message}' type='warning' />";
-        }
+        // if (is_null($dataSource) || gettype($dataSource) === 'string') {
+        //     $message =  "Not found ColumnName \"" . $colName . "\" in eloquentParams (in $modelPath Model).";
+        //     return "<x-feedback.alert message='{$message}' type='warning' />";
+        // }
         // dump($type);
 
 
@@ -60,7 +60,7 @@ class Dropdown extends Component
         $dataListenTrigger += $this->triggerDataModel($colNames_modelPaths, $colNamesHaveDropdown, $type); // k
         $colNames_ModelNames = $this->indexColNamesAndModels($colNames_modelPaths, $colNamesHaveDropdown); //k2
 
-        return view('components.controls.dropdown')->with(compact('colNames_ModelNames', 'dataSource', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
+        return view('components.controls.dropdown')->with(compact('colNames_ModelNames', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
     }
 
 
