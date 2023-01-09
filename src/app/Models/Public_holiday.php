@@ -18,4 +18,16 @@ class Public_holiday extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
+    public function getManyLineParams()
+    {
+        return [
+            ["dataIndex" => 'id', 'renderer' => 'id', 'type' => 'public_holidays', 'align' => 'center'],
+            ['dataIndex' => 'getWorkplace', 'title' => 'Workplace', 'renderer' => 'column', 'rendererParam' => 'name'],
+            ['dataIndex' => 'year'],
+            ['dataIndex' => 'name'],
+            ['dataIndex' => 'ph_date'],
+            ['dataIndex' => 'ph_hours'],
+        ];
+    }
 }
