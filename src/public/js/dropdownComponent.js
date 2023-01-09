@@ -69,12 +69,18 @@ function dropdownComponent({ id, name, dataSource, selected, disabled = false, t
                     }
                 })
             } else {
-                itemsDB = [dataSource.find(ele => ele.id === idTrigger)]
+                // console.log()
+                itemsDB = [dataSource.find(ele => ele.id === selected * 1)]
             }
             dataSource = itemsDB
         }
 
     };
+
+    if (name === 'user_1') {
+        console.log(selected, dataSource)
+
+    }
 
     // Render data source
     strHtmlTrigger = dataSource.map(item => {
