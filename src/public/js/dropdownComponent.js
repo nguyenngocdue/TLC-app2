@@ -2,7 +2,6 @@ const onChangedItem = (value, colName) => {
     colName = colName.getAttribute("name");
     objListener = Object.values(listenersJson).find((item) => item.triggers === colName);
     if (typeof objListener === 'undefined') {
-        // console.log(colName)
         fixValueElement(colName)
         return false
     };
@@ -26,7 +25,7 @@ const onChangedItem = (value, colName) => {
             }
         })
     }
-    strHtmlRender = itemsDB.map((item, index) => {
+    strHtmlRender = itemsDB.map((item) => {
         return ` <option value="${item.id}">${item.name}</option>`
     })
     // console.log(itemsDB)
@@ -40,14 +39,11 @@ const onChangedItem = (value, colName) => {
 
 const renderSelect = ({ id, name, disabled }) => {
     let disabledSelect = disabled ? 'disabled' : '';
-    // console.log(name)
     let strHTML = ` 
     <select name='${name}' id="${id}" onchange="onChangedItem(value*1, ${name})" ${disabledSelect} class=" js-example-basic-multiple bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
         <option class="py-10" value="" selected >Select your option...</option>
     </select>`;
-
     eleTriggers = document.getElementById('add-' + name);
-    // console.log(strHTML);
     if (eleTriggers !== null) eleTriggers.innerHTML += strHTML;
 
 }
@@ -61,7 +57,7 @@ const dropdownComponent = ({ id, name, dataSource, selected, disabled = false, t
         dataSource = onLoadItem({ name, objListener, dataSource })
 
     };
-    // console.log(dataSource);
+    console.log(dataSource);
     renderHTML({ dataSource, selected, name, title_field_name, disabled_field_name })
 }
 
@@ -73,7 +69,8 @@ const onLoadItem = ({ name, objListener, dataSource }) => {
     } = objListener
     if (colNamesListener.includes(name)) {
         itemsDB = [];
-        var idTrigger = colNames_idCurrentValue[triggers_colNames[name]]
+        var idTrigger = colNames_idsCurrentValue[triggers_colNames[name]]
+        console.log(idTrigger)
 
         if (listen_to_fields === name) {
             itemsDB = dataSource.filter(ele => {
