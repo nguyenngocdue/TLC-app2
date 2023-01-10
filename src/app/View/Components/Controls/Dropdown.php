@@ -8,6 +8,8 @@ use App\Models\Zunit_test_9;
 use App\Utils\Support\Entities;
 use App\Utils\Support\Listeners;
 use App\Utils\Support\Props;
+use App\Utils\Support\Relationships;
+use Illuminate\Database\Eloquent\Factories\Relationship;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
@@ -65,22 +67,10 @@ class Dropdown extends Component
 
         $triggers_colNames = array_column($listenersJson, 'triggers', 'column_name');
 
-        return view('components.controls.dropdown')->with(compact('triggers_colNames', 'colNames_ModelNames', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
+        $byFilter = Helper::filterConditionsInRel($type, $colName);
+
+        return view('components.controls.dropdown')->with(compact('byFilter', 'triggers_colNames', 'colNames_ModelNames', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
     }
-
-
-
-    // public function triggerDataModel($colNames_modelPaths, $colNamesHaveDropdown, $type)
-    // {
-    //     $result = [];
-    //     foreach ($colNames_modelPaths as $colNameKey => $modelPath) {
-    //         if (in_array($colNameKey, $colNamesHaveDropdown)) {
-    //             $entityName = Str::getEntityNameFromModelPath($modelPath);
-    //             $result[$entityName][$colNameKey] = Helper::getDataFromPathModelDropdown($modelPath, $colNameKey, $type)->toArray();
-    //         }
-    //     };
-    //     return $result;
-    // }
 
 
     public function triggerDataModel($modelPaths_colNames, $_colNames, $colName)
