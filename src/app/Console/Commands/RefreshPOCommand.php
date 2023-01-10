@@ -5,7 +5,9 @@ namespace App\Console\Commands;
 use App\Models\Prod_order;
 use App\Models\Prod_routing;
 use App\Models\Prod_sequence;
+use App\Utils\WorkingShift;
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 
 class RefreshPOCommand extends Command
 {
@@ -25,6 +27,50 @@ class RefreshPOCommand extends Command
      */
     protected $description = 'Recalculate expected_started_at and expected_finished_at of production_sequences Table';
 
+    private function index(Collection $prodSequence, Collection $prodRoutingDetail, $prod_routing_id)
+    {
+        $index = [];
+        foreach ($prodRoutingDetail as $item) {
+            $index[$item->prod_routing_id . "-" . $item->prod_routing_link_id] = $item;
+        }
+
+        $result = [];
+        /** @var Prod_sequence $item */
+        foreach ($prodSequence as $item) {
+            $value = $index[$prod_routing_id . "-" . $item->prod_routing_link_id];
+            $result[$item->prod_order_id . "+" . $item->prod_routing_link_id] = $value;
+        }
+
+        return $result;
+    }
+
+    private function makeData(Prod_order $po, Prod_routing $pr, $started_at)
+    {
+        $prodSequence = $po->prodSequences()->orderBy('priority')->orderBy('prod_routing_link_id')->get();
+        $prodRoutingDetail = $pr->prodRoutingDetails()->orderBy('priority')->orderBy('prod_routing_link_id')->get();
+        $prod_routing_id = $po->prod_routing_id;
+        $indexer = $this->index($prodSequence, $prodRoutingDetail, $prod_routing_id);
+        // var_dump(array_keys($indexer));
+
+        $workdays = WorkingShift::getWorkdays($started_at);
+        var_dump("WORKDAYS: " . join(", ", $workdays));
+
+        $end = $started_at;
+        foreach ($prodSequence as $ps) {
+            $key = $ps->prod_order_id . "+" . $ps->prod_routing_link_id;
+            $routingDetails = $indexer[$key];
+            $target_hours = $routingDetails->target_hours;
+
+            $start = $end;
+            $end = WorkingShift::getNextWorkingDateTime($start, $target_hours, $workdays);
+            // var_dump($ps->id . " - " . $start . " -> " . $end . ". Target Hours: " . $target_hours);
+
+            $ps->expected_start_at = $start;
+            $ps->expected_finish_at = $end;
+            $ps->save();
+        }
+    }
+
     private function refresh($po_id)
     {
         $this->info("Refreshing PO with id=$po_id");
@@ -36,25 +82,28 @@ class RefreshPOCommand extends Command
         $this->info("Production Order name: " . $po->name . ", start at: " . $started_at);
         $this->info("Production Routing name: " . $pr->name);
 
-        $createdProdSequence = $po->prodSequences;
-        $currentIds = $createdProdSequence->pluck('prod_routing_link_id')->toArray();
-        // var_dump(join(", ", $currentIds));
+        $createdProdSequence = $po->prodSequences()->orderBy('priority')->orderBy('prod_routing_link_id')->get();
+        $currentIds = $createdProdSequence->pluck('priority', 'prod_routing_link_id',)->toArray();
+        // var_dump($createdProdSequence);
+        // var_dump($currentIds);
 
-        $allProdRoutingLinks = $pr->prodRoutingLinks;
-        $allIds = $allProdRoutingLinks->pluck('id')->toArray();
-        // var_dump(join(", ", $allIds));
+        $allProdRoutingDetails = $pr->prodRoutingDetails()->orderBy('priority')->orderBy('prod_routing_link_id')->get();
+        $allIds = $allProdRoutingDetails->pluck('priority', 'prod_routing_link_id',)->toArray();
+        // var_dump($allProdRoutingDetails);
+        // var_dump($allIds);
 
-        $toBeAdded = array_diff($allIds, $currentIds);
-        $toBeObsolete = array_diff($currentIds, $allIds);
+        $toBeAdded = array_diff_key($allIds, $currentIds);
+        $toBeObsolete = array_diff_key($currentIds, $allIds);
 
-        // var_dump(join(", ", $toBeAdded));
-        // var_dump(join(", ", $toBeObsolete));
+        // var_dump("toBeAdded", join(", ", array_keys($toBeAdded)));
+        // var_dump("toBeObsolete", join(", ", array_keys($toBeObsolete)));
 
-        foreach ($toBeAdded as $id) {
+        foreach ($toBeAdded as $id => $priority) {
             Prod_sequence::create([
                 'prod_order_id' => $po_id,
                 'prod_routing_link_id' => $id,
                 'status' => 'new',
+                'priority' => $priority,
             ]);
         }
         $this->info("Created " . count($toBeAdded) . " new Prod Sequences.");
@@ -66,6 +115,8 @@ class RefreshPOCommand extends Command
             }
         }
         $this->info("Transitioned " . count($toBeObsolete) . " Prod Sequences to Obsolete.");
+
+        $this->makeData($po, $pr, $started_at);
     }
 
     /**
