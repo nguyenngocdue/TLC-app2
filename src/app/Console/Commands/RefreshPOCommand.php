@@ -53,9 +53,10 @@ class RefreshPOCommand extends Command
         // var_dump(array_keys($indexer));
 
         $workdays = WorkingShift::getWorkdays($started_at);
-        var_dump("WORKDAYS: " . join(", ", $workdays));
+        // var_dump("WORKDAYS: " . join(", ", $workdays));
 
         $end = $started_at;
+        $updatedCount = 0;
         foreach ($prodSequence as $ps) {
             $key = $ps->prod_order_id . "+" . $ps->prod_routing_link_id;
             $routingDetails = $indexer[$key];
@@ -67,15 +68,23 @@ class RefreshPOCommand extends Command
 
             $ps->expected_start_at = $start;
             $ps->expected_finish_at = $end;
+            $ps->priority = $routingDetails->priority;
             $ps->save();
+            $updatedCount++;
         }
+
+        return $updatedCount;
     }
 
     private function refresh($po_id)
     {
-        $this->info("Refreshing PO with id=$po_id");
+        $this->info("Refreshing PO #$po_id");
         /** @var Prod_order $po */
         $po = Prod_order::find($po_id);
+        if (is_null($po)) {
+            $this->error("PO #$po_id NOT FOUND.");
+            return false;
+        }
         /** @var Prod_routing $pr */
         $pr = Prod_routing::find($po->prod_routing_id);
         $started_at = $po->started_at;
@@ -95,15 +104,16 @@ class RefreshPOCommand extends Command
         $toBeAdded = array_diff_key($allIds, $currentIds);
         $toBeObsolete = array_diff_key($currentIds, $allIds);
 
+        // var_dump("toBeAdded", $toBeAdded);
         // var_dump("toBeAdded", join(", ", array_keys($toBeAdded)));
         // var_dump("toBeObsolete", join(", ", array_keys($toBeObsolete)));
 
-        foreach ($toBeAdded as $id => $priority) {
+        foreach (array_keys($toBeAdded) as $id) {
             Prod_sequence::create([
                 'prod_order_id' => $po_id,
                 'prod_routing_link_id' => $id,
                 'status' => 'new',
-                'priority' => $priority,
+                // 'priority' => $priority, //<< This already run in makeData
             ]);
         }
         $this->info("Created " . count($toBeAdded) . " new Prod Sequences.");
@@ -116,7 +126,9 @@ class RefreshPOCommand extends Command
         }
         $this->info("Transitioned " . count($toBeObsolete) . " Prod Sequences to Obsolete.");
 
-        $this->makeData($po, $pr, $started_at);
+        $po->refresh();
+        $updated = $this->makeData($po, $pr, $started_at);
+        $this->info("Updated $updated Prod Sequence timelines and priorities.");
     }
 
     /**
