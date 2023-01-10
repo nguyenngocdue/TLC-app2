@@ -53,11 +53,14 @@ class Dropdown extends Component
 
         $props = Props::getAllOf($type);
         $colNamesHaveDropdown = Helper::getColNamesByControl($props, 'dropdown');
+        $instance = new $modelPath;
+        $eloquentParams = array_values($instance->eloquentParams);
+        $_colNames =  array_column($eloquentParams, 2);
+        $modelPaths_colNames =  (array_column($eloquentParams, 2, 1));
+        $colNames_modelPaths =  (array_column($eloquentParams, 1, 2));
 
 
-
-        $dataListenTrigger = [];
-        $dataListenTrigger += $this->triggerDataModel($colNames_modelPaths, $colNamesHaveDropdown, $type); // k
+        $dataListenTrigger = $this->triggerDataModel($modelPaths_colNames, $_colNames, $colName); // k
         $colNames_ModelNames = $this->indexColNamesAndModels($colNames_modelPaths, $colNamesHaveDropdown); //k2
 
         $triggers_colNames = array_column($listenersJson, 'triggers', 'column_name');
@@ -67,13 +70,26 @@ class Dropdown extends Component
 
 
 
-    public function triggerDataModel($colNames_modelPaths, $colNamesHaveDropdown, $type)
+    // public function triggerDataModel($colNames_modelPaths, $colNamesHaveDropdown, $type)
+    // {
+    //     $result = [];
+    //     foreach ($colNames_modelPaths as $colNameKey => $modelPath) {
+    //         if (in_array($colNameKey, $colNamesHaveDropdown)) {
+    //             $entityName = Str::getEntityNameFromModelPath($modelPath);
+    //             $result[$entityName][$colNameKey] = Helper::getDataFromPathModelDropdown($modelPath, $colNameKey, $type)->toArray();
+    //         }
+    //     };
+    //     return $result;
+    // }
+
+
+    public function triggerDataModel($modelPaths_colNames, $_colNames, $colName)
     {
         $result = [];
-        foreach ($colNames_modelPaths as $colNameKey => $modelPath) {
-            if (in_array($colNameKey, $colNamesHaveDropdown)) {
+        foreach (array_keys($modelPaths_colNames) as $modelPath) {
+            if (in_array($colName, $_colNames)) {
                 $entityName = Str::getEntityNameFromModelPath($modelPath);
-                $result[$entityName][$colNameKey] = Helper::getDataFromPathModelDropdown($modelPath, $colNameKey, $type)->toArray();
+                $result[$entityName] = Helper::getDataFromPathModel($modelPath)->toArray();
             }
         };
         return $result;
