@@ -2,10 +2,10 @@ scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 extend type Query {
-    attachment: [Attachment!]! @all @guard
-    attachments(id: ID @eq): Attachment @find @guard
+    insp_photo: [InspPhoto!]! @all @guard
+    insp_photos(id: ID @eq): InspPhoto @find @guard
 }
-type Attachment {
+type InspPhoto {
     id: ID!
     url_thumbnail: String!
     url_media: String!
@@ -20,7 +20,7 @@ type Attachment {
     updated_at: DateTime
 }
 
-input CreateAttachmentInput {
+input CreateInspPhotoInput {
     id: ID!
     url_thumbnail: String!
     url_media: String!
@@ -34,7 +34,7 @@ input CreateAttachmentInput {
     created_at: DateTime
     updated_at: DateTime
 }
-input UpdateAttachmentInput {
+input UpdateInspPhotoInput {
     url_thumbnail: String
     url_media: String
     url_folder: String
@@ -49,11 +49,11 @@ input UpdateAttachmentInput {
 }
 
 extend type Mutation {
-    createAttachment(input: CreateAttachmentInput! @spread): Attachment!
+    createInspPhoto(input: CreateInspPhotoInput! @spread): InspPhoto!
         @guard
         @create
-    updateAttachment(input: UpdateAttachmentInput! @spread): Attachment
+    updateInspPhoto(input: UpdateInspPhotoInput! @spread): InspPhoto
         @guard
         @update
-    deleteAttachment(id: ID!): Attachment @guard @delete
+    deleteInspPhoto(id: ID!): InspPhoto @guard @delete
 }

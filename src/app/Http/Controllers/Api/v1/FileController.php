@@ -24,11 +24,11 @@ class FileController extends Controller
 
     public function edit(Request $request)
     {
-        if (is_null($request->attachmentId)) {
+        if (is_null($request->inspPhotoId)) {
             $res = $this->uploadFile($request);
             return response()->json($res);
         } else {
-            $attachmentId = $request->attachmentId;
+            $attachmentId = $request->inspPhotoId;
             $attachment = Attachment::find($attachmentId);
             if ($attachment) {
                 Storage::disk('s3')->delete($attachment->getAttributes()['url_thumbnail']);
