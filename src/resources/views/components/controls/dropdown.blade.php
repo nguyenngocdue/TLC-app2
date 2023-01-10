@@ -29,6 +29,12 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
     var selected = "{{$selected}}";
     colNames_idsCurrentValue[name] = "{{$idEntity}}" * 1;
     var dataSource = k[k2[name]];
+    
+    const filterColumn = "";
+    const filterValue = "";
+    dataSource.filter()
+    const onChangeItem = () => {}
+    const onLoadItem = () => {}
 
     dropdownComponent({
         id
@@ -38,6 +44,8 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
         , disabled: false
         , title_field_name: "name"
         , disabled_field_name: "resigned"
+        , onChange: onChangeItem
+        , onLoad: onLoadItem
     });
 
 </script>
@@ -67,6 +75,7 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
     });
 
     // Show items when edit status
+    //In onLoad
     fixValueElement("{{$colName}}")
 
 </script>
