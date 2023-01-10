@@ -35,7 +35,6 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
     var newDataSource = filterColumn.length && filterValue.length ? dataSource.filter(item => item[filterColumn] * 1 === filterValue * 1) : dataSource;
 
     var onChangedItems = (value, colName) => {
-        console.log(value)
         colName = colName.getAttribute("name");
         objListener = Object.values(listenersJson).find((item) => item.triggers === colName);
         if (typeof objListener === 'undefined') {
