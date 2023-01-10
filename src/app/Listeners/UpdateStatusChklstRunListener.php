@@ -35,8 +35,13 @@ class UpdateStatusChklstRunListener
         $model = Qaqc_insp_chklst_run::find($event->idChklstRun);
         $qaqcInspChklstLines = $model->getLines;
         $arrayControlValueId = [];
+        $totalLines = count($qaqcInspChklstLines);
+        $count = 0;
         foreach ($qaqcInspChklstLines as $qaqcInspChklstLine) {
             array_push($arrayControlValueId, $qaqcInspChklstLine['qaqc_insp_control_value_id']);
+            if ($qaqcInspChklstLine['qaqc_insp_control_value_id'] != null || $qaqcInspChklstLine['value'] != null) {
+                $count++;
+            }
         }
         if (Arr::containsEach($arrayIdFail, $arrayControlValueId)) {
             $status = 'fail';
@@ -48,6 +53,10 @@ class UpdateStatusChklstRunListener
         } else {
             $status = 'pass';
         }
-        $model->update(['status' => $status]);
+        $progress = ($count / $totalLines) * 100;
+        $model->update([
+            'status' => $status,
+            'progress' => $progress
+        ]);
     }
 }
