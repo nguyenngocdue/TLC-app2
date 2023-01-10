@@ -1,0 +1,14 @@
+{
+    "_getRuns": {
+        "name": "_getRuns",
+        "relationship": "hasMany",
+        "control_name": "getRuns",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    }
+}

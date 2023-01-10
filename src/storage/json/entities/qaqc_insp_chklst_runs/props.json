@@ -3,7 +3,7 @@
         "name": "_id",
         "column_name": "id",
         "column_type": "bigint",
-        "label": "Id",
+        "label": "ID",
         "control": "id",
         "col_span": "12",
         "width": "",
@@ -44,11 +44,26 @@
         "validation": "",
         "formula": ""
     },
-    "_control_type_id": {
-        "name": "_control_type_id",
-        "column_name": "control_type_id",
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "column_type": "string",
+        "label": "Slug",
+        "control": "text",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "label_hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": "All_SlugifyByName"
+    },
+    "_qaqc_insp_chklst_sht_id": {
+        "name": "_qaqc_insp_chklst_sht_id",
+        "column_name": "qaqc_insp_chklst_sht_id",
         "column_type": "bigint",
-        "label": "Control Type",
+        "label": "QAQC Inspection Checklist Sheet ID",
         "control": "dropdown",
         "col_span": "12",
         "width": "",
@@ -59,11 +74,11 @@
         "validation": "required",
         "formula": ""
     },
-    "_qaqc_insp_tmpl_run_id": {
-        "name": "_qaqc_insp_tmpl_run_id",
-        "column_name": "qaqc_insp_tmpl_run_id",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "column_type": "bigint",
-        "label": "Template Run",
+        "label": "Owner ID",
         "control": "dropdown",
         "col_span": "12",
         "width": "",
@@ -74,34 +89,34 @@
         "validation": "required",
         "formula": ""
     },
-    "_qaqc_insp_group_id": {
-        "name": "_qaqc_insp_group_id",
-        "column_name": "qaqc_insp_group_id",
-        "column_type": "bigint",
-        "label": "Group",
-        "control": "dropdown",
+    "_progress": {
+        "name": "_progress",
+        "column_name": "progress",
+        "column_type": "float",
+        "label": "Progress (%)",
+        "control": "text",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
         "label_hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
         "formula": ""
     },
-    "_qaqc_insp_control_group_id": {
-        "name": "_qaqc_insp_control_group_id",
-        "column_name": "qaqc_insp_control_group_id",
-        "column_type": "bigint",
-        "label": "Control Group",
-        "control": "dropdown",
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "column_type": "string",
+        "label": "Status",
+        "control": "text",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
         "label_hidden_edit": "",
         "new_line": "",
-        "validation": "required",
+        "validation": "",
         "formula": ""
     },
     "_created_at": {
@@ -131,6 +146,21 @@
         "hidden_edit": "",
         "label_hidden_edit": "",
         "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "column_type": "eloquent_prop",
+        "label": "QAQC Inspection Checklist Lines",
+        "control": "relationship_renderer",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "label_hidden_edit": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     }

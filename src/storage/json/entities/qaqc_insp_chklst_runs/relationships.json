@@ -1,20 +1,20 @@
 {
-    "_prodOrder": {
-        "name": "_prodOrder",
+    "_user": {
+        "name": "_user",
         "relationship": "belongsTo",
         "control_name": "",
         "renderer_view_all": "column",
-        "renderer_view_all_param": "production",
+        "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getSheets": {
-        "name": "_getSheets",
+    "_getLines": {
+        "name": "_getLines",
         "relationship": "hasMany",
-        "control_name": "getSheets",
+        "control_name": "getLines",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",

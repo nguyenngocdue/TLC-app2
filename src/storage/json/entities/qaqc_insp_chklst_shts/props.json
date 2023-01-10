@@ -9,6 +9,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -23,8 +24,9 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
-        "validation": "",
+        "validation": "required",
         "formula": ""
     },
     "_description": {
@@ -37,6 +39,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -51,9 +54,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
-        "formula": ""
+        "formula": "All_SlugifyByName"
     },
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
@@ -65,8 +69,9 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "true",
-        "validation": "",
+        "label_hidden_edit": "",
+        "new_line": "",
+        "validation": "required",
         "formula": ""
     },
     "_created_at": {
@@ -77,8 +82,9 @@
         "control": "picker_datetime",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -91,23 +97,25 @@
         "control": "picker_datetime",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
     },
-    "_getChklstLines": {
-        "name": "_getChklstLines",
-        "column_name": "getChklstLines",
+    "_getRuns": {
+        "name": "_getRuns",
+        "column_name": "getRuns",
         "column_type": "eloquent_prop",
-        "label": "",
-        "control": "",
-        "col_span": "",
+        "label": "QAQC Inspection Checklist Runs",
+        "control": "relationship_renderer",
+        "col_span": "12",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
+        "label_hidden_edit": "",
+        "new_line": "true",
         "validation": "",
         "formula": ""
     }

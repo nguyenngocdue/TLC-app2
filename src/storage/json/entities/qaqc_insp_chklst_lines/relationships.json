@@ -1,34 +1,22 @@
 {
-    "_getChklst": {
-        "name": "_getChklst",
-        "relationship": "belongsTo",
-        "control_name": "",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_getSheet": {
-        "name": "_getSheet",
-        "relationship": "belongsTo",
-        "control_name": "",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "description",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_getGroup": {
         "name": "_getGroup",
         "relationship": "belongsTo",
         "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "description",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getRun": {
+        "name": "_getRun",
+        "relationship": "belongsTo",
+        "control_name": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
@@ -65,6 +53,18 @@
         "control_name": "",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_attachments": {
+        "name": "_attachments",
+        "relationship": "morphMany",
+        "control_name": "",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
@@ -117,6 +117,30 @@
         "renderer_edit_param": "",
         "filter_columns": "qaqc_insp_control_value_id",
         "filter_values": "8",
+        "radio_checkbox_colspan": ""
+    },
+    "_getChklst": {
+        "name": "_getChklst",
+        "relationship": "belongsTo",
+        "control_name": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getSheet": {
+        "name": "_getSheet",
+        "relationship": "belongsTo",
+        "control_name": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "description",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
         "radio_checkbox_colspan": ""
     }
 }
