@@ -64,7 +64,7 @@
         "column_name": "qaqc_insp_chklst_id",
         "column_type": "bigint",
         "label": "QAQC Inspection Checklist ID",
-        "control": "relationship_renderer",
+        "control": "dropdown",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "",

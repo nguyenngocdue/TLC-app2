@@ -194,6 +194,21 @@
         "validation": "",
         "formula": ""
     },
+    "_insp_photos": {
+        "name": "_insp_photos",
+        "column_name": "insp_photos",
+        "column_type": "eloquent_prop",
+        "label": "Inspection Photos",
+        "control": "attachment",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "label_hidden_edit": "",
+        "new_line": "",
+        "validation": "",
+        "formula": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -218,21 +233,6 @@
         "col_span": "12",
         "width": "",
         "hidden_view_all": "true",
-        "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
-    "_attachments": {
-        "name": "_attachments",
-        "column_name": "attachments",
-        "column_type": "eloquent_prop",
-        "label": "",
-        "control": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
         "hidden_edit": "",
         "label_hidden_edit": "",
         "new_line": "",

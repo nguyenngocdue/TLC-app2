@@ -2,13 +2,14 @@
     "_prodOrder": {
         "name": "_prodOrder",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "prodOrder",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
-        "filter_values": ""
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
     "_prodRuns": {
         "name": "_prodRuns",
@@ -19,18 +20,20 @@
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
         "filter_columns": "",
-        "filter_values": ""
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
     "_prodRoutingLinks": {
         "name": "_prodRoutingLinks",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "prodRoutingLinks",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
-        "filter_values": ""
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     },
     "_prodRoutingDetails": {
         "name": "_prodRoutingDetails",
@@ -41,6 +44,7 @@
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
         "filter_columns": "",
-        "filter_values": ""
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }
