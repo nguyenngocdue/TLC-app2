@@ -9,7 +9,7 @@ type Qaqc_insp_chklst {
     id: ID!
     prod_order_id: ID!
     name: String!
-    description: String!
+    description: String
     owner_id: ID!
     slug: String!
     consent_number: Int
