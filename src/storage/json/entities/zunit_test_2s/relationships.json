@@ -8,7 +8,7 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "qaqc_insp_control_group_id",
-        "filter_values": "2",
+        "filter_values": "1",
         "radio_checkbox_colspan": "3"
     },
     "_radioPassFail": {
