@@ -28,11 +28,12 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
     var id = "select-dropdown-" + "{{$colName}}";
     var selected = "{{$selected}}";
     colNames_idsCurrentValue[name] = "{{$idEntity}}" * 1;
+    var dataSource = k[k2[name]];
 
     dropdownComponent({
         id
         , name
-        , dataSource: k[k2[name]]
+        , dataSource
         , selected
         , disabled: false
         , title_field_name: "name"

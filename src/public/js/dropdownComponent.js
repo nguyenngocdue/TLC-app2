@@ -52,37 +52,37 @@ const renderSelect = ({ id, name, disabled }) => {
 const dropdownComponent = ({ id, name, dataSource, selected, disabled = false, title_field_name = 'name', disabled_field_name }) => {
     renderSelect({ id, name, disabled });
     // Reduce data source when in edit mode
-    objListener = Object.values(listenersJson).find((item) => item.column_name === name);
-    if (typeof objListener !== 'undefined' && selected !== '') {
-        dataSource = onLoadItem({ name, objListener, dataSource })
-
-    };
-    console.log(dataSource);
+    dataSource = onLoadItems({ name, dataSource })
     renderHTML({ dataSource, selected, name, title_field_name, disabled_field_name })
 }
 
 
-const onLoadItem = ({ name, objListener, dataSource }) => {
-    const {
-        listen_to_attrs
-        , listen_to_fields
-    } = objListener
-    if (colNamesListener.includes(name)) {
-        itemsDB = [];
-        var idTrigger = colNames_idsCurrentValue[triggers_colNames[name]]
-        console.log(idTrigger)
+const onLoadItems = ({ name, dataSource }) => {
+    objListener = Object.values(listenersJson).find((item) => item.column_name === name);
+    if (typeof objListener !== 'undefined' && selected !== '') {
+        const {
+            listen_to_attrs
+            , listen_to_fields
+        } = objListener
+        if (colNamesListener.includes(name)) {
+            itemsDB = [];
+            var idTrigger = colNames_idsCurrentValue[triggers_colNames[name]]
 
-        if (listen_to_fields === name) {
-            itemsDB = dataSource.filter(ele => {
-                if (typeof idTrigger !== 'undefined') {
-                    return ele[listen_to_attrs] === idTrigger;
-                }
-            })
-        } else {
-            itemsDB = [dataSource.find(ele => ele.id === selected * 1)]
+            if (listen_to_fields === name) {
+                itemsDB = dataSource.filter(ele => {
+                    if (typeof idTrigger !== 'undefined') {
+                        return ele[listen_to_attrs] === idTrigger;
+                    }
+                })
+            } else {
+                itemsDB = [dataSource.find(ele => ele.id === selected * 1)]
+            }
+            return itemsDB;
         }
-        return itemsDB
-    }
+
+    };
+    return dataSource;
+
 
 }
 
