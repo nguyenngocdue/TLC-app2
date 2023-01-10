@@ -11,6 +11,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
 
     public $eloquentParams = [
         "getRuns" => ["hasMany", Qaqc_insp_chklst_run::class, "qaqc_insp_chklst_sht_id"],
+        "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
     ];
 
     public function getRuns()
@@ -22,5 +23,11 @@ class Qaqc_insp_chklst_sht extends ModelExtended
             ->orderBy('created_at', 'DESC')
             ->toSql();
         return $relation;
+    }
+
+    public function getChklst()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }
