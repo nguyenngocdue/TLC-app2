@@ -28,7 +28,6 @@ trait CloneRunTrait
                     'qaqc_insp_group_id' => $qaqcInspTmplLine->qaqc_insp_group_id,
                     'qaqc_insp_control_value_id' => $newModelRun ? $qaqcInspTmplLine->qaqc_insp_control_value_id : null,
                     'qaqc_insp_control_group_id' => $qaqcInspTmplLine->qaqc_insp_control_group_id,
-                    'value' => $newModelRun ? $qaqcInspTmplLine->value : null,
                 ]);
                 if ($arrayValueCheckbox) {
                     if ($arrayValueCheckbox[$key]) {
