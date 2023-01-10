@@ -24,7 +24,7 @@ type Qaqc_insp_chklst_line {
     getOnHoldOfYesNo: [Qaqc_insp_value] @oracy
     getFailedOfPassFail: [Qaqc_insp_value] @oracy
     getOnHoldOfPassFail: [Qaqc_insp_value] @oracy
-    inspPhotos: [InspPhoto]! @morphMany
+    insp_photos: [InspPhoto]! @morphMany
     created_at: DateTime
     updated_at: DateTime
 }
