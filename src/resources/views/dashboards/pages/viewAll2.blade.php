@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('title', App\Utils\Support\CurrentRoute::getTypePluralPretty())
+@section('title', $title )
+{{-- @section('title', App\Utils\Support\CurrentRoute::getTypePluralPretty() ) --}}
+
 
 @section('content')
 

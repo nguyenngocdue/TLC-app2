@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Props;
@@ -183,9 +184,10 @@ abstract class AbstractViewAllController extends Controller
         $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
         $this->attachRendererIntoColumn($columns);
 
+        $title = LibApps::getFor($type)['title'];
         // Log::info($columns);
 
-        return view('dashboards.pages.viewAll2')->with(compact('pageLimit', 'type', 'columns', 'dataSource'));
+        return view('dashboards.pages.viewAll2')->with(compact('title', 'pageLimit', 'type', 'columns', 'dataSource'));
     }
 
     public function destroy($id)

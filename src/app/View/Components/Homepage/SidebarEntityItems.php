@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Homepage;
 
+use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\App;
