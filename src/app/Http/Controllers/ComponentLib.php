@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Log;
 
 class ComponentLib extends Controller
 {
+    function getType()
+    {
+        return "dashboard";
+    }
+
     public function index()
     {
         $tableColumns = [
@@ -85,32 +90,33 @@ class ComponentLib extends Controller
                 "loggedIn" => true,
             ],
             [
-                "avatar" => "/images/Hans.jpeg",
+                "avatar" => "/images/hans.jpeg",
                 "id" => 2002, "client" => "Hans", "amount" => 863.45, "status" => "abc", "date" => "06/10/2022",
                 "loggedIn" => false,
             ],
             [
-                "avatar" => "/images/Helen",
+                "avatar" => "/images/helen.jpeg",
                 "id" => 3003, "client" => "Helen", "amount" => 123.45, "status" => "pending", "color" => "orange", "date" => "07/10/2022",
                 "loggedIn" => true,
                 "disabled" => true,
             ],
             [
-                "avatar" => "/images/sarah",
+                "avatar" => "/images/sarah.jpeg",
                 "id" => 4004, "client" => "sarah", "amount" => 456.45, "status" => "rejected", "color" => "red", "date" => "08/10/2022",
                 "loggedIn" => false,
             ],
             [
-                "avatar" => "/images/Sandy",
+                "avatar" => "/images/Sandy.jpeg",
                 "id" => 5005, "client" => "Sandy", "amount" => 789.45, "status" => "expired", "color" => "gray", "date" => "09/10/2022",
                 "loggedIn" => 1,
             ],
             [
-                "avatar" => "/images/Travis",
+                "avatar" => "/images/avatar.jpg",
                 "id" => 6006, "client" => "Eva", "amount" => 1011.45, "status" => "approved", "color" => "green", "date" => "16/10/2022",
                 "loggedIn" => 0,
             ],
             [
+                "avatar" => "/images/Travis.jpeg",
                 "id" => 6006, "client" => "Travis", "amount" => 1011.45, "status" => "approved", "color" => "green", "date" => "16/10/2022",
                 "loggedIn" => 0,
             ],
@@ -169,11 +175,11 @@ class ComponentLib extends Controller
             "comment_1" => [
                 [
                     "id" => 315,
-                    "url_thumbnail" => "dev-due001/2022/12/a1-150x150.jpg",
-                    "url_media" => "dev-due001/2022/12/a1.jpg",
-                    "url_folder" => "dev-due001/2022/12/",
-                    "filename" => "a1.jpg",
-                    "extension" => "jpg",
+                    "url_thumbnail" => "avatars/01087-150x150.png",
+                    "url_media" => "avatars/01087.png",
+                    "url_folder" => "avatars",
+                    "filename" => "01087.png",
+                    "extension" => "png",
                     "owner_id" => 1,
                     "object_id" => 157,
                     "object_type" => "App\Models\Comment",
@@ -183,10 +189,10 @@ class ComponentLib extends Controller
                 ],
                 [
                     "id" => 316,
-                    "url_thumbnail" => "dev-due001/2022/12/a2-150x150.jpg",
-                    "url_media" => "dev-due001/2022/12/a2.jpg",
-                    "url_folder" => "dev-due001/2022/12/",
-                    "filename" => "a2.jpg",
+                    "url_thumbnail" => "avatars/00080-150x150.jpg",
+                    "url_media" => "avatars/00080.jpg",
+                    "url_folder" => "avatars",
+                    "filename" => "00080.jpg",
                     "extension" => "jpg",
                     "owner_id" => 1,
                     "object_id" => 157,
@@ -197,11 +203,11 @@ class ComponentLib extends Controller
                 ],
                 [
                     "id" => 317,
-                    "url_thumbnail" => "dev-due001/2022/12/a3-150x150.jpeg",
-                    "url_media" => "dev-due001/2022/12/a3.jpeg",
-                    "url_folder" => "dev-due001/2022/12/",
-                    "filename" => "a3.jpeg",
-                    "extension" => "jpeg",
+                    "url_thumbnail" => "avatars/01031-150x150.png",
+                    "url_media" => "avatars/01031.png",
+                    "url_folder" => "avatars/",
+                    "filename" => "01031.png",
+                    "extension" => "png",
                     "owner_id" => 1,
                     "object_id" => 157,
                     "object_type" => "App\Models\Comment",

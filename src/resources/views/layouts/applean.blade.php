@@ -1,16 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html :class="{ 'theme-dark': dark } " class="scroll-smooth" x-data="data()" lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script href="{{ asset('js/app.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/fontawesome-free/css/all.min.css') }}">
+    <meta charset="UTF-8">
+    <meta name="The master layout G4T">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ config('app.name') }}</title>
 
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/fonts.google.Inter.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/customizeSelect2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    
+    <script src="{{ asset('js/alpine.min.js') }}"></script>
+    <script src="{{ asset('windmill_assets/js/init-alpine1.js') }}"></script>
+    <script src="{{ asset('js/focus-trap.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
+    <script src="{{ asset('js/select2.min.js') }}"></script>
+    <script src="{{ asset('js/tlc2.js') }}"></script>
+    <script src="{{ asset('js/dropdownComponent.js') }}"></script>
+    <script src="{{ asset('js/applayout.js') }}"></script>
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
 </head>
 
 <body>

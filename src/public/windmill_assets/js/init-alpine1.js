@@ -55,15 +55,32 @@ function data() {
         //     console.log(type, this.openingMenu)
         // },
         // Modal
-        isModalOpen: false,
+        // isModalOpen: false,
         trapCleanup: null,
-        openModal() {
-            this.isModalOpen = true
+        // openModal() {
+        //     this.isModalOpen = true
+        //     this.trapCleanup = focusTrap(document.querySelector('#modal'))
+        // },
+        // closeModal() {
+        //     this.isModalOpen = false
+        //     this.trapCleanup()
+        // },
+
+        //ModalArray
+        isModalOpenArray: {},
+        openModal(id) {
+            // console.log("Open called")
+            this.isModalOpenArray[id] = true
             this.trapCleanup = focusTrap(document.querySelector('#modal'))
+            document.getElementById(id).classList.toggle('hidden')
+            document.getElementById(id).classList.toggle('flex')
         },
-        closeModal() {
-            this.isModalOpen = false
+        closeModal(id) {
+            // console.log("Close called")
+            this.isModalOpenArray[id] = false
             this.trapCleanup()
+            document.getElementById(id).classList.toggle('hidden')
+            document.getElementById(id).classList.toggle('flex')
         },
     }
 }

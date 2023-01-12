@@ -11,6 +11,14 @@
                 <x-renderer.report.widget title="Total Clients" figure="1234"/>
                 <x-renderer.report.widget title="Account balance" figure="$ 46,760.89"/>
                 <x-renderer.report.widget title="Pending contacts" figure="35"/>
+                <button @click="openModal('modal1')" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    Open Modal 1
+                </button>
+                <button @click="openModal('modal2')" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    Open Modal 2
+                </button>
+                <x-feedback.modal1 id="modal1"/>
+                <x-feedback.modal1 id="modal2"/>
             </div>
         </x-renderer.card>
         <x-renderer.card title="Typography">
@@ -105,7 +113,6 @@
                 "name":"Thuc Vo",
                 "position_rendered":"Software Tester",
                 "href":"http://www.google.com",
-                "avatar":"/images/Travis"
             }</x-renderer.avatar-name>
             <br/>
             AvatarName with gray= { { true } } 
@@ -277,6 +284,7 @@
             <x-feedback.alert />
         </x-renderer.card>
 
+        {{--
         <x-renderer.card title="Tabs">
             <x-renderer.card title="Tab 1">
                 <x-navigation.tabs></x-navigation.tabs>
@@ -304,6 +312,7 @@
                 <x-renderer.breadcrumb type="slash"></x-renderer.breadcrumb>
             </x-renderer.card>
         </x-renderer.card>
+        --}}
     </div>
 </x-renderer.card>
 

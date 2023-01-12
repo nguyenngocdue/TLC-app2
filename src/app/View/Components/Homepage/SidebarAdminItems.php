@@ -67,6 +67,10 @@ class SidebarAdminItems
                     'title' => "Widget Library",
                     'href' => "/dashboard/workflow/manageWidgets",
                 ],
+                [
+                    'title' => "App Library",
+                    'href' => "/dashboard/workflow/manageApps",
+                ],
             ],
         ];
     }
