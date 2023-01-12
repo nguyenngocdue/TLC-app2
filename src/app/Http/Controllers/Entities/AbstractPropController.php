@@ -250,7 +250,7 @@ abstract class AbstractPropController extends Controller
         $dataSourceWithKey = $this->getDataSource();
         $dataSource = array_values($dataSourceWithKey);
         $route = route($type . '_prop.store');
-        return view('dashboards.pages.manageprop')->with(compact('type', 'columns', 'dataSource', 'route'));
+        return view('dashboards.pages.manage-prop')->with(compact('type', 'columns', 'dataSource', 'route'));
     }
 
     public function store(Request $request)
