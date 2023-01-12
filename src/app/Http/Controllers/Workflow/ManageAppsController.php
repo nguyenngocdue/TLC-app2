@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Workflow;
 
+use App\Utils\Support\JsonControls;
+
 class ManageAppsController extends AbstractManageLibController
 {
     protected $title = "Manage Apps";
@@ -10,6 +12,8 @@ class ManageAppsController extends AbstractManageLibController
 
     protected function getColumns()
     {
+        $packages = JsonControls::getPackages();
+        $subPackages = JsonControls::getSubPackages();
         return   [
             [
                 'dataIndex' => "name",
@@ -25,16 +29,17 @@ class ManageAppsController extends AbstractManageLibController
                 'dataIndex' => "package",
                 'renderer' => 'dropdown',
                 'editable' => true,
-                "cbbDataSource" => [
-                    ['value' => '', 'title' => ''],
-                    ['value' => 'hr_&_admin', 'title' => 'HR & Admin'],
-                    ['value' => 'project_management', 'title' => 'Project Management'],
-                    ['value' => 'compliance', 'title' => 'Compliance'],
-                    ['value' => 'operation', 'title' => 'Operation'],
-                    ['value' => 'system', 'title' => 'System'],
-                    ['value' => 'unit_test', 'title' => 'Unit Test'],
-                ],
+                "cbbDataSource" => $packages,
                 // "sortBy" => "value",
+                "properties" => ["strFn" => "appTitle"],
+            ],
+            [
+                'dataIndex' => "sub_package",
+                'renderer' => 'dropdown',
+                'editable' => true,
+                "cbbDataSource" => $subPackages,
+                "sortBy" => "value",
+                "properties" => ["strFn" => "appTitle"],
             ],
             [
                 'dataIndex' => 'title',

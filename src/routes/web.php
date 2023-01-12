@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppMenuController;
 use App\Http\Controllers\ComponentLib;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -83,6 +84,7 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
 Route::get('test', [HomeController::class, 'index']);
 Route::get('welcome', [WelcomeController::class, 'index']);
+Route::get('app-menu', [AppMenuController::class, 'index']);
 Route::group([
     'prefix' => 'dashboard/workflow',
 ], function () {

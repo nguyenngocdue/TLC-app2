@@ -3,6 +3,15 @@
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
+Str::macro('appTitle', function (string $s) {
+    $s = Str::headline($s);
+    $s = str_ireplace(
+        ['hr', 'erp', 'wir', 'hse', 'esg', 'scm', 'qaqc', 'dev', 'kpi', 'qs'],
+        ['HR', 'ERP', 'WIR', 'HSE', 'ESG', 'SCM', 'QAQC', 'DEV', 'KPI', 'QS'],
+        $s
+    );
+    return $s;
+});
 Str::macro('modelToPretty', function (string $string) {
     return Str::headline(App::make($string)->getTable());
 });

@@ -22,6 +22,15 @@ class JsonControls
         return self::getAll()['view_all_oracies'];
     }
 
+    public static function getPackages()
+    {
+        return self::getAll()['packages'];
+    }
+    public static function getSubPackages()
+    {
+        return self::getAll()['sub_packages'];
+    }
+
     public static function getManagePropEloquents()
     {
         return self::getAll()['manage_prop_eloquents'];

@@ -1,7 +1,34 @@
 <?php
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
+Arr::macro('groupByToChildren', function ($arr, $col1, $col2 = null) {
+    $result = [];
+    foreach ($arr as $key => $item) {
+        if (is_null($col2)) {
+            $result[$item[$col1]]['title'] =  Str::appTitle($item[$col1]);
+            $result[$item[$col1]]["children"][$key] = $item;
+        } else {
+            $result[$item[$col1]]['title'] =  Str::appTitle($item[$col1]);
+            $result[$item[$col1]]["children"][$item[$col2]]["title"] =  Str::appTitle($item[$col2]);
+            $item['title'] = Str::appTitle($item['title']);
+            $result[$item[$col1]]["children"][$item[$col2]]["children"][$key] = $item;
+        }
+    }
+    return $result;
+});
+Arr::macro('groupBy', function ($arr, $col1, $col2 = null) {
+    $result = [];
+    foreach ($arr as $key => $item) {
+        if (is_null($col2)) {
+            $result[$item[$col1]][$key] = $item;
+        } else {
+            $result[$item[$col1]][$item[$col2]][$key] = $item;
+        }
+    }
+    return $result;
+});
 Arr::macro('median', function ($arr, $greater = 1) {
     if ($arr) {
         $arr = array_filter($arr, fn ($item) => $item > $greater);

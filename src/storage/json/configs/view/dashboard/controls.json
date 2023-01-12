@@ -68,5 +68,36 @@
     ],
     "view_all_oracies": [
         "getCheckedByField"
+    ],
+    "packages": [
+        "",
+        "hr_&_admin",
+        "finance",
+        "project_management",
+        "operation",
+        "compliance",
+        "system",
+        "unit_test"
+    ],
+    "sub_packages": [
+        "",
+        "commercial",
+        "project_management",
+        "design",
+        "qs",
+        "scm",
+        "warehouse",
+        "production",
+        "qaqc",
+        "on_site",
+        "hse",
+        "esg",
+        "audit",
+        "certifications",
+        "kpi",
+        "user",
+        "unit_test",
+        "system_admin",
+        "dev_admin"
     ]
 }
