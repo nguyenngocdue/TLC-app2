@@ -17,8 +17,16 @@
                 <button @click="openModal('modal2')" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     Open Modal 2
                 </button>
-                <x-feedback.modal1 id="modal1"/>
-                <x-feedback.modal1 id="modal2"/>
+                <x-feedback.modal1 id="modal1" title="Hello 1" content="What is this"/>
+                <x-feedback.modal1 id="modal2" title="Hello 2" content="I am good"/>
+                <button @click="openModal('modal3')" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    Open Modal Extended 3
+                </button>
+                <button @click="openModal('modal4')" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    Open Modal Extended 4
+                </button>
+                <x-feedback.modal-extended id="modal3" title="Hello 3" content="What is this"/>
+                <x-feedback.modal-extended id="modal4" title="Hello 4" content="I am good"/>
             </div>
         </x-renderer.card>
         <x-renderer.card title="Typography">

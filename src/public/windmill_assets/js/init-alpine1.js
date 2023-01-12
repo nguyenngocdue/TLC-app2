@@ -69,18 +69,21 @@ function data() {
         //ModalArray
         isModalOpenArray: {},
         openModal(id) {
-            // console.log("Open called")
+            // console.log("Open [" + id + "] called")
             this.isModalOpenArray[id] = true
+            // console.log("Open [" + id + "] called1")
             this.trapCleanup = focusTrap(document.querySelector('#modal'))
-            document.getElementById(id).classList.toggle('hidden')
-            document.getElementById(id).classList.toggle('flex')
+            // console.log("Open [" + id + "] called2")
+            document.getElementById(id).classList.remove('hidden')
+            // console.log("Open [" + id + "] called3")
+            document.getElementById(id).classList.add('flex')
         },
         closeModal(id) {
-            // console.log("Close called")
+            // console.log("Close [" + id + "] called")
             this.isModalOpenArray[id] = false
             this.trapCleanup()
-            document.getElementById(id).classList.toggle('hidden')
-            document.getElementById(id).classList.toggle('flex')
+            document.getElementById(id).classList.add('hidden')
+            document.getElementById(id).classList.remove('flex')
         },
     }
 }
