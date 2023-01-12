@@ -8,7 +8,6 @@ class Zunit_test_7 extends ModelExtended
 {
     protected $fillable = ['content', 'comment_1', 'comment_2', 'comment_3'];
     protected $table = "zunit_test_7s";
-    public $menuTitle = "UT07 (Comments)";
 
     public $eloquentParams = [
         "comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],

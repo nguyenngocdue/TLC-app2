@@ -8,7 +8,6 @@ class Zunit_test_9 extends ModelExtended
 {
     protected $fillable = ['content', 'department_1', 'department_2', 'category_id', 'sub_project_1',  'user_1', 'user_2', 'user_3', 'prod_order_1'];
     protected $table = "zunit_test_9s";
-    public $menuTitle = "UT09 (Basic Event)";
 
     public $eloquentParams = [
         "department1" => ['belongsTo', Department::class, 'department_1'],

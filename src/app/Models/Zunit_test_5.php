@@ -10,7 +10,6 @@ class Zunit_test_5 extends ModelExtended
     protected $fillable = ["id", "name"];
     protected $primaryKey = "id";
     protected $table = "zunit_test_5s";
-    public $menuTitle = "UT05 (Attachments)";
 
     public $eloquentParams = [
         // "attachment" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],

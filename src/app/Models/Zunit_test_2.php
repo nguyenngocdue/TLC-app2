@@ -14,8 +14,6 @@ class Zunit_test_2 extends ModelExtended
         'dropdown_pass_fail',
     ];
     protected $table = "zunit_test_2s";
-    public $menuTitle = "UT02 (Dropdown/Checkbox)";
-
 
     public $eloquentParams = [
         "radioYesNo" => ['belongsTo', Qaqc_insp_control_value::class, 'radio_yes_no'],
