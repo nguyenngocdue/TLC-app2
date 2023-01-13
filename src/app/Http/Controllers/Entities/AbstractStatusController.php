@@ -12,7 +12,7 @@ abstract class AbstractStatusController extends Controller
 {
     protected $type;
     protected $typeModel = "";
-    protected $title = "Manage Status1";
+    protected $title = "Manage Status";
 
     public function getType()
     {

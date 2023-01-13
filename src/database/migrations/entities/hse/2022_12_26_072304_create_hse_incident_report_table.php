@@ -30,6 +30,7 @@ return new class extends Migration
             $table->boolean('accident_book_entry')->nullable();
             $table->dateTime('time_in_hospital')->nullable();
             $table->dateTime('time_out_hospital')->nullable();
+            $table->float('lost_days')->nullable();
 
             $table->text('investigation_finding')->nullable();
 

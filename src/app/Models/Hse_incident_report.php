@@ -11,6 +11,7 @@ class Hse_incident_report extends ModelExtended
         'id', 'name', 'work_area_id', 'issue_datetime', 'injured_person', 'line_manager', 'report_person',
         'number_injured_person', 'number_involved_person', 'issue_description',
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
+        'lost_days',
     ];
     protected $table = "hse_incident_reports";
     public $nameless = true;
