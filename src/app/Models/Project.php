@@ -5,25 +5,25 @@ namespace App\Models;
 use App\BigThink\ModelExtended;
 use App\Http\Traits\HasStatus;
 
-class Sub_project extends ModelExtended
+class Project extends ModelExtended
 {
     use HasStatus;
     public $timestamps = false;
     protected $fillable = ["id", "name", "description", "slug", "status"];
     protected $primaryKey = 'id';
-    protected $table = 'sub_projects';
+    protected $table = 'projects';
 
     public $eloquentParams = [
-        "prodOrders" => ['hasMany', Prod_order::class],
-        "getProject" => ['belongsTo', Project::class, "project_id"],
+        // "prodOrders" => ['hasMany', Prod_order::class],
+        "getSubProjects" => ['hasMany', Sub_project::class, "project_id"], 
     ];
 
-    public function prodOrders()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1]);
-    }
-    public function getProject()
+    // public function prodOrders()
+    // {
+    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1]);
+    // }
+    public function getSubProjects()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
