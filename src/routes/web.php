@@ -50,6 +50,7 @@ Route::group([
                 Route::resource("{$singular}_prop", "{$path}PropController")->only('index', 'create', 'store');
                 Route::resource("{$singular}_rel", "{$path}RelationshipController")->only('index', 'store');
                 Route::resource("{$singular}_stt", "{$path}StatusController")->only('index', 'create', 'store');
+                Route::resource("{$singular}_ltn", "{$path}ListenerController")->only('index', 'create', 'store');
             });
         }
     });

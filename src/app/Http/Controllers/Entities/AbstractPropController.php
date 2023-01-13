@@ -16,6 +16,8 @@ abstract class AbstractPropController extends Controller
 {
     protected $type = "";
     protected $typeModel = "";
+    protected $title = "Manage Props";
+
     public function __construct()
     {
     }
@@ -245,35 +247,25 @@ abstract class AbstractPropController extends Controller
 
     public function index()
     {
-        $type = $this->type;
-        $columns = $this->getColumns();
-        $dataSourceWithKey = $this->getDataSource();
-        $dataSource = array_values($dataSourceWithKey);
-        $route = route($type . '_prop.store');
-        return view('dashboards.pages.manage-prop')->with(compact('type', 'columns', 'dataSource', 'route'));
+        return view('dashboards.pages.manage-prop', [
+            'title' => $this->title,
+            'type' => $this->type,
+            'route' => route($this->type . '_prop.store'),
+            'columns' => $this->getColumns(),
+            'dataSource' => array_values($this->getDataSource()),
+        ]);
     }
 
     public function store(Request $request)
     {
         $data = $request->input();
-        // Log::info($data);
         $columns = array_filter($this->getColumns(), fn ($column) => !in_array($column['dataIndex'], ['action']));
         $result = Props::convertHttpObjectToJson($data, $columns);
-        // dd($result);
         $this->handleMoveTo($result);
-        // foreach ($result as $key => $line) {
-        //     if (isset($line['move_to']) && is_numeric($line['move_to'])) {
-        //         Props::moveTo($result, $line['move_to'] - 1, $key);
-        //     }
-        // }
-        // foreach ($result as &$line) unset($line['move_to']);
-        // dd($result);
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));
-            // Log::info($direction . " " . $name);
             Props::move($result, $direction, $name);
         }
-        // dd($result);
         Props::setAllOf($this->type, $result);
         return back();
     }
@@ -295,6 +287,6 @@ abstract class AbstractPropController extends Controller
 
         $dataSource = Props::getAllOf($this->type) + $newItems;
         Props::setAllOf($this->type, $dataSource);
-        return redirect()->back();
+        return back();
     }
 }

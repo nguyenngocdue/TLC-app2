@@ -10,6 +10,10 @@ use Illuminate\Support\Str;
 
 abstract class AbstractStatusController extends Controller
 {
+    protected $type;
+    protected $typeModel = "";
+    protected $title = "Manage Status1";
+
     public function getType()
     {
         return $this->type;
@@ -70,6 +74,8 @@ abstract class AbstractStatusController extends Controller
         }
 
         return view("dashboards.pages.manage-status", [
+            'title' => $this->title,
+            'route' => route($this->type . '_stt.store'),
             'columns0' => $this->getColumns0(),
             'dataSource0' => array_values($dataSource0),
             'columns1' => $this->getColumns1(),
@@ -79,11 +85,10 @@ abstract class AbstractStatusController extends Controller
 
     public function store(Request $request)
     {
-        $type = $this->getType();
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));
-            LibStatuses::move($direction, $type, $name);
+            LibStatuses::move($direction, $this->type, $name);
         }
-        return redirect(route($type . '_stt.index'));
+        return back();
     }
 }

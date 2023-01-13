@@ -14,6 +14,8 @@ abstract class AbstractRelationshipController extends Controller
 {
     protected $type = "";
     protected $typeModel = "";
+    protected $title = "Manage Relationships";
+
     public function __construct()
     {
     }
@@ -163,11 +165,13 @@ abstract class AbstractRelationshipController extends Controller
      */
     public function index()
     {
-        $type = $this->type;
-        $columns = $this->getColumns();
-        $dataSourceWithKey = $this->getDataSource($type);
-        $dataSource = array_values($dataSourceWithKey);
-        return view('dashboards.pages.manage-relationship')->with(compact('type', 'columns', 'dataSource'));
+        return view('dashboards.pages.manage-relationship', [
+            'title' => $this->title,
+            'type' => $this->type,
+            'route' => route($this->type . '_rel.store'),
+            'columns' => $this->getColumns(),
+            'dataSource' => array_values($this->getDataSource($this->type)),
+        ]);
     }
 
     public function store(Request $request)
@@ -177,11 +181,9 @@ abstract class AbstractRelationshipController extends Controller
         $result = Relationships::convertHttpObjectToJson($data, $columns);
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));
-            // Log::info($direction . " " . $name);
             Relationships::move($result, $direction, $name);
         }
         Relationships::setAllOf($this->type, $result);
-
         return back();
     }
 }
