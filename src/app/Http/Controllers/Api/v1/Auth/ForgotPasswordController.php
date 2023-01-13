@@ -19,7 +19,7 @@ class ForgotPasswordController extends Controller
         if (str_contains($request->email, $suffix)) {
             return response()->json([
                 'success' => true,
-                'message' => 'Please reset your password email by changing email password'
+                'message' => 'Please reset password via TLC password portal.'
             ], 200);
         } else {
             Config::set(
