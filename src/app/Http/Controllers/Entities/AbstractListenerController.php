@@ -3,17 +3,14 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\Listeners;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Str;
 
 abstract class AbstractListenerController extends Controller
 {
     protected $type = "";
     protected $typeModel = "";
-    protected $title = "Manage Listener";
+    protected $title = "Manage Listeners";
 
     public function getType()
     {

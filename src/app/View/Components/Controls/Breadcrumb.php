@@ -33,6 +33,7 @@ class Breadcrumb extends Component
         $links[] = ['href' => route($type . '.create'), 'title' => 'Add New',];
         $links[] = ['href' => route($singular . '_prop.index'), 'title' => 'Props',];
         $links[] = ['href' => route($singular . '_rel.index'), 'title' => 'Relationships',];
+        $links[] = ['href' =>  route($singular . '_ltn.index'), 'title' => 'Listeners',];
         $links[] = ['href' =>  route($singular . '_stt.index'), 'title' => 'Statuses',];
 
         return view('components.navigation.breadcrumb')->with(compact('links'));
