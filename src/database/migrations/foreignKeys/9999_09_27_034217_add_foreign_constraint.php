@@ -29,6 +29,10 @@ return new class extends Migration
         Schema::table('public_holidays', function (Blueprint $table) {
             $table->foreign('workplace_id')->references('id')->on('workplaces')->onDelete('cascade');
         });
+        //************** GLOBAL MODULE **************/
+        Schema::table('sub_projects', function (Blueprint $table) {
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+        });
         //************** USER MODULE **************/
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('workplace')->references('id')->on('workplaces')->onDelete('cascade');

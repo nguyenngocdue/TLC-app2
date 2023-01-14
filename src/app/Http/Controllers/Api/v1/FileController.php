@@ -18,6 +18,7 @@ class FileController extends Controller
 
     public function upload(Request $request)
     {
+
         $res = $this->uploadFile($request);
         return response()->json($res);
     }
