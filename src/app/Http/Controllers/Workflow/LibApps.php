@@ -12,8 +12,8 @@ class LibApps extends AbstractLib
     {
         $allApps = static::getAll();
         $singular = Str::singular($entityType);
+        if (!isset($allApps[$singular])) return ['title' => Str::upper("$singular is missing in LibApps")];
         $item = $allApps[$singular];
-        // $item['title'] = Str::appTitle($item['title']);
         return $item;
     }
 }

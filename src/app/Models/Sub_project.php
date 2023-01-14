@@ -9,7 +9,7 @@ class Sub_project extends ModelExtended
 {
     use HasStatus;
     public $timestamps = false;
-    protected $fillable = ["id", "name", "description", "slug", "status"];
+    protected $fillable = ["id", "name", "description", "slug", "status", "project_id"];
     protected $primaryKey = 'id';
     protected $table = 'sub_projects';
 

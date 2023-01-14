@@ -111,6 +111,13 @@
         "sub_package": "production",
         "title": "Prod Sequences"
     },
+    "project": {
+        "name": "project",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "project_management",
+        "title": "Projects"
+    },
     "public_holiday": {
         "name": "public_holiday",
         "hidden": null,

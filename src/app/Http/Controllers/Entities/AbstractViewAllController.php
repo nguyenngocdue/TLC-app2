@@ -8,6 +8,7 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Props;
 use App\Utils\Support\Relationships;
+use Exception;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -140,10 +141,14 @@ abstract class AbstractViewAllController extends Controller
 
                 if (in_array($relationship, $allows)) {
                     // dd($json, $dataIndex, $json["_{$dataIndex}"]);
-                    $relationshipJson = $json["_{$dataIndex}"];
-                    // dump($relationshipJson);
-                    $column['renderer'] = $relationshipJson['renderer_view_all'] ?? "";
-                    $column['rendererParam'] = $relationshipJson['renderer_view_all_param'] ?? "";
+                    if (!isset($json["_{$dataIndex}"])) {
+                        throw new Exception("Please create [$dataIndex] in Relationships View");
+                    } else {
+                        $relationshipJson = $json["_{$dataIndex}"];
+                        // dump($relationshipJson);
+                        $column['renderer'] = $relationshipJson['renderer_view_all'] ?? "";
+                        $column['rendererParam'] = $relationshipJson['renderer_view_all_param'] ?? "";
+                    }
                 }
             }
         }
