@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
-use App\Http\Traits\HasStatus;
 
 class Project extends ModelExtended
 {
-    use HasStatus;
     public $timestamps = false;
     protected $fillable = ["id", "name", "description", "slug", "status"];
     protected $primaryKey = 'id';
@@ -15,7 +13,7 @@ class Project extends ModelExtended
 
     public $eloquentParams = [
         // "prodOrders" => ['hasMany', Prod_order::class],
-        "getSubProjects" => ['hasMany', Sub_project::class, "project_id"], 
+        "getSubProjects" => ['hasMany', Sub_project::class, "project_id"],
     ];
 
     // public function prodOrders()

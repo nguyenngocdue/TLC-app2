@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
-use App\Http\Traits\HasStatus;
 
 class Prod_order extends ModelExtended
 {
-    use HasStatus;
     public $timestamps = true;
     protected $fillable = [
         "id", "slug", "name", "status", "production", "compliance", "description", "quantity",

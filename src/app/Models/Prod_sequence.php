@@ -3,12 +3,10 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
-use App\Http\Traits\HasStatus;
 use Illuminate\Support\Facades\Log;
 
 class Prod_sequence extends ModelExtended
 {
-    use HasStatus;
     public $timestamps = true;
     protected $fillable = [
         "prod_order_id", "prod_routing_link_id",

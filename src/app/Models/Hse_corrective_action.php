@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
-use App\Http\Traits\HasStatus;
 
 class Hse_corrective_action extends ModelExtended
 {
-    use HasStatus;
     protected $fillable = [
         'id', 'name', 'description', 'slug', 'hse_incident_report_id', 'priority_id', 'work_area_id',
         'assignee', 'opened_date', 'closed_date', 'status', 'unsafe_action_type_id',

@@ -5,6 +5,7 @@ namespace App\BigThink;
 use App\Http\Traits\HasAttachments;
 use App\Http\Traits\HasCheckbox;
 use App\Http\Traits\HasComments;
+use App\Http\Traits\HasStatus;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,8 @@ class ModelExtended extends Model
     use Searchable;
     use Notifiable;
     use HasFactory;
+
+    use HasStatus;
     use HasCheckbox;
     use HasComments;
     use HasAttachments;
