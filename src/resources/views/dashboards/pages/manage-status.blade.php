@@ -10,8 +10,8 @@
     <form action="{{$route}}" method="POST">
         @csrf
         <x-renderer.table :columns="$columns1" :dataSource="$dataSource1" showNoR=true groupBy="title" 
-        header="<a href='{{$route}}'>Manage Statuses</a>"
-        footer="<a href='{{$route}}'>Manage Statuses</a>"
+        header="<a href='{{$routeManage}}'>Manage Statuses</a>"
+        footer="<a href='{{$routeManage}}'>Manage Statuses</a>"
         ></x-renderer.table>
     </form>
 </div>

@@ -76,6 +76,8 @@ abstract class AbstractStatusController extends Controller
         return view("dashboards.pages.manage-status", [
             'title' => $this->title,
             'route' => route($this->type . '_stt.store'),
+            'routeManage' => route("manageStatuses.index"),
+
             'columns0' => $this->getColumns0(),
             'dataSource0' => array_values($dataSource0),
             'columns1' => $this->getColumns1(),

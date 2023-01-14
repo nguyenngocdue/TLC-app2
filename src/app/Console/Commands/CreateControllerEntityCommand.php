@@ -63,6 +63,8 @@ class CreateControllerEntityCommand extends Command
             "PropController",
             "RelationshipController",
             "StatusController",
+            "ListenerController",
+
             "ViewAllController",
             "EditController",
             "CreateController"
@@ -98,17 +100,19 @@ class CreateControllerEntityCommand extends Command
     protected function getStub()
     {
         $sources = [
-            '/ndc.controller.manageprop.stub',
-            '/ndc.controller.managerelationship.stub',
-            '/ndc.controller.managestatus.stub',
+            '/ndc.controller.manage-prop.stub',
+            '/ndc.controller.manage-relationship.stub',
+            '/ndc.controller.manage-status.stub',
+            '/ndc.controller.manage-listener.stub',
+
             '/ndc.controller.render.stub',
             '/ndc.controller.edit.stub',
             '/ndc.controller.create.stub',
         ];
         $creator = $this->creator;
-        foreach ($sources as $stubname) {
-            $customPath = $creator->getCustomPath() . $stubname;
-            $stub = $creator->getFilesystem()->exists($customPath) ? $customPath : $this->stubPath() . $stubname;
+        foreach ($sources as $stubName) {
+            $customPath = $creator->getCustomPath() . $stubName;
+            $stub = $creator->getFilesystem()->exists($customPath) ? $customPath : $this->stubPath() . $stubName;
             $result[] = $creator->getFilesystem()->get($stub);
         }
         return $result;
