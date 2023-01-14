@@ -48,10 +48,8 @@ class SidebarEntityItems
 
         if (method_exists($model, "transitionTo")) {
             $result['children'][] =  ['title' => '-'];
-            $result['children'][] =  [
-                'title' => "Manage Statuses",
-                'href' => route("{$singular}_stt.index"),
-            ];
+            $result['children'][] =  ['title' => "Manage Statuses", 'href' => route("{$singular}_stt.index"),];
+            $result['children'][] =  ['title' => "Manage Listeners", 'href' => route("{$singular}_ltn.index"),];
         }
 
         return $result;

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Workflow\LibWidgets;
-use App\Utils\Support\Table;
+use App\Utils\Support\DBTable;
 
 class DashboardController extends Controller
 {
@@ -29,8 +29,8 @@ class DashboardController extends Controller
         // $key_a = $widget['key_a'];
         // $key_b = $widget['key_b'];
         // $global_filter = $widget['global_filter'];
-        $model_a = Table::fromNameToModel($table_a);
-        $model_b = Table::fromNameToModel($table_b);
+        $model_a = DBTable::fromNameToModel($table_a);
+        $model_b = DBTable::fromNameToModel($table_b);
         $meta_and_metric = $model_a->getMetaForChart($fn, $widget);
         return [
             "title_a" => $model_a->getMenuTitle(),

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
-class Table
+class DBTable
 {
     private static $singletonNames = [];
     private static $singletonTypes = [];
@@ -50,6 +50,7 @@ class Table
 
     private static function getColumnNamesExpensive($tableName)
     {
+        $tableName = Str::plural($tableName);
         $data = DB::select("Select COLUMN_NAME from information_schema.COLUMNS where TABLE_SCHEMA = '" . env('DB_DATABASE', "laravel") . "' and TABLE_NAME = '" . $tableName . "' ORDER BY ORDINAL_POSITION ASC");
         $result = [];
         foreach ($data as $value) {

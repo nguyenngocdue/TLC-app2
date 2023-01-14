@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
+use App\Utils\Support\DBTable;
 use App\Utils\Support\Listeners;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,9 @@ abstract class AbstractListenerController extends Controller
 
     private function getColumns()
     {
+        $columns = DBTable::getColumnNames($this->type);
+        $columns = array_merge([""], $columns);
+        // dump($columns);
         return [
             [
                 "dataIndex" => "name",
@@ -27,18 +31,24 @@ abstract class AbstractListenerController extends Controller
             ],
             [
                 "dataIndex" => "column_name",
-                "renderer" => "text",
+                "renderer" => "dropdown",
                 "editable" => true,
+                "cbbDataSource" => $columns,
+                "properties" => ["strFn" => 'same'],
             ],
             [
                 "dataIndex" => "action",
-                "renderer" => "text",
+                "renderer" => "dropdown",
                 "editable" => true,
+                "cbbDataSource" => ['', 'reduce', 'assign', 'dot', 'aggregate', 'expression', 'date_offset', 'number_to_words'],
+                "properties" => ["strFn" => 'same'],
             ],
             [
                 "dataIndex" => "triggers",
                 "renderer" => "text",
                 "editable" => true,
+                // "cbbDataSource" => $columns,
+                // "properties" => ["strFn" => 'same'],
             ],
             [
                 "dataIndex" => "listen_to_fields",

@@ -17,6 +17,7 @@ class Table extends Component
    * @return void
    */
   public function __construct(
+    private Request $request,
     private $columns = null,
     private $dataSource = null,
     private $showNo = false,
@@ -24,7 +25,6 @@ class Table extends Component
     private $groupBy = false,
     private $header = "",
     private $footer = "",
-    private Request $request,
   ) {
   }
 

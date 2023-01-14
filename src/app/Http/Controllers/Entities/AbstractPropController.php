@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Entities;
 use App\Http\Controllers\Controller;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Props;
-use App\Utils\Support\Table;
+use App\Utils\Support\DBTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
@@ -129,8 +129,8 @@ abstract class AbstractPropController extends Controller
 
     private function makeBlankDefaultObject()
     {
-        $columnNames = Table::getColumnNames(Str::plural($this->type));
-        $columnTypes = Table::getColumnTypes(Str::plural($this->type));
+        $columnNames = DBTable::getColumnNames(Str::plural($this->type));
+        $columnTypes = DBTable::getColumnTypes(Str::plural($this->type));
 
         $result = [];
         foreach ($columnNames as $key => $value) {
