@@ -2282,6 +2282,9 @@ video {
 .text-right {
   text-align: right;
 }
+.text-end {
+  text-align: end;
+}
 .align-baseline {
   vertical-align: baseline;
 }
