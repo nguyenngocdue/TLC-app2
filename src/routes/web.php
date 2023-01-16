@@ -30,7 +30,7 @@ Route::group([
             $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
             Route::resource("{$entityName}", "{$path}ViewAllController")->only('index');
             Route::resource("{$entityName}", "{$path}CreateController")->only('create', 'store');
-            Route::resource("{$entityName}", "{$path}EditController")->only('edit', 'update');
+            Route::resource("{$entityName}", "{$path}EditController")->only('edit', 'update', 'show');
         }
         // Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
         // Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');

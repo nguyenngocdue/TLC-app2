@@ -14,7 +14,7 @@ class Attachment extends ModelExtended
     public $eloquentParams = [
         "user" => ['belongsTo', User::class, 'owner_id'],
         "getCategory" => ['belongsTo', Field::class, 'category'],
-        "attachable" => ['morphTo', 'attachable', 'object_type', 'object_id'],
+        "attachable" => ['morphTo', Attachment::class, 'object_type', 'object_id'],
     ];
 
     public function user()

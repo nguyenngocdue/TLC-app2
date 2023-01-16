@@ -59,6 +59,97 @@ abstract class AbstractCreateEditController extends Controller
 		return view('dashboards.pages.createEdit')->with(compact('props', 'type', 'action', 'modelPath', 'values', 'idItems'));
 	}
 
+	public function show($id)
+	{
+		$action = $this->action;
+		$props = Props::getAllOf($this->type);
+
+
+		$modelPath = new $this->data;
+
+
+		$data = [];
+
+		$ins = new $modelPath();
+		$eloquentParams = $ins->eloquentParams;
+		$colName_keyEloquent = [];
+		foreach ($eloquentParams as $key => $value) {
+			$colName_keyEloquent[$value[2]] =  $key;
+		}
+
+
+		// getDataFromModel
+		$dataContent = [];
+		$dataOnModel = $modelPath::find($id);
+		foreach ($props as $key => $prop) {
+			$colName = $prop['column_name'];
+			if (isset($colName_keyEloquent[$colName])) {
+				$dataContent[$colName] = $dataOnModel->{$colName_keyEloquent[$colName]}->name;
+			} else {
+				if ($prop['column_type'] !== 'static') {
+					$dataContent[$colName] = $dataOnModel->{$colName};
+				}
+			}
+		}
+
+		// definitions heading in props
+		$valueProps =  array_values($props);
+		$indexHeading = [];
+		foreach ($valueProps as $key => $value) {
+			if ($value['column_type'] === 'static') {
+				$indexHeading[] = $key;
+			}
+		};
+		// dd($indexHeading);
+		$indexProps = [];
+		if (!empty($indexHeading)) {
+			$indexProps = array_slice($valueProps, 0, $indexHeading[0]);
+			foreach ($indexHeading as $key => $val) {
+				if ($key + 1 < count($indexHeading)) {
+					$len = $indexHeading[$key + 1] - $indexHeading[$key];
+					$indexProps[] = array_slice($valueProps, $val, $len);
+					// dump(count($indexHeading));
+				} else {
+					$len = count($valueProps) -  $indexHeading[$key];
+					$indexProps[] = array_slice($valueProps, $val, $len);
+				}
+			}
+		} else {
+			$indexProps = $valueProps;
+		};
+
+		// Arrangement data
+		$dataSource = [];
+		foreach ($indexProps as $key => $prop) {
+			if (isset($prop[0])) {
+				$p = $prop[0];
+				$array = [];
+				$array['label'] = $p['label'];
+				$array['column_name'] = $p['column_name'];
+				$array['control'] = $p['control'];
+				$array['col_span'] = $p['col_span'];
+				$array['new_line'] = $p['new_line'];
+				$array['children'] = array_slice($prop, 1, count($prop) - 1);
+				$dataSource[$p['column_name']] = $array;
+			} else {
+				$array = [];
+				$array['label'] = "";
+				$array['column_name'] = $prop['column_name'];
+				$array['control'] = $prop['control'];
+				$array['col_span'] = $prop['col_span'];
+				$array['new_line'] = $prop['new_line'];
+				$array['children'] = $prop;
+				$dataSource[$prop['column_name']] = $array;
+			}
+		}
+		// dd($dataSource, $dataContent);
+		// dd($dataSource);
+
+		return view('dashboards.pages.show')->with(compact('dataSource', 'dataContent'));
+	}
+
+
+
 	public function edit($id)
 	{
 		$currentElement = $this->data::find($id);

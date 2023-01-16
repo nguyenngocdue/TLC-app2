@@ -9,9 +9,13 @@ $editType = Str::plural($type);
 $labelValidation = "";
 $id = $action === "edit" ? $values->id : "";
 @endphp
+@if ($action === "edit")
+
+<a class="text-blue-500 hover:text-gray-400" href="{{ route($editType.'.show', $id) }}">show</a></li>
+@endif
 
 <x-controls.headeralertvalidation :strProps="$props" />
-<form class="w-full p-4 z-0 px-4 py-3 text-center mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? 0 : $id )}} ">
+<form class="w-full mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? 0 : $id )}} ">
     @csrf
     <div class=" grid grid-cols-12">
         @method($action === "create" ? 'POST' : 'PUT')
