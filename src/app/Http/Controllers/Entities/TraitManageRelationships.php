@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Entities;
 
-use App\Http\Controllers\Controller;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Relationships;
 use Illuminate\Http\Request;
@@ -10,22 +9,9 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 
-abstract class AbstractRelationshipController extends Controller
+trait TraitManageRelationships
 {
-    protected $type = "";
-    protected $typeModel = "";
-    protected $title = "Manage Relationships";
-
-    public function __construct()
-    {
-    }
-
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    private function getColumns()
+    private function getColumnsRelationship()
     {
         $viewAllControls = JsonControls::getRendererViewAll();
         $editControls = JsonControls::getRendererEdit();
@@ -89,7 +75,7 @@ abstract class AbstractRelationshipController extends Controller
         ];
     }
 
-    private function makeBlankDefaultObject()
+    private function makeBlankDefaultObjectRelationship()
     {
         $model = App::make($this->typeModel);
         $eloquentParams = $model->eloquentParams;
@@ -110,7 +96,7 @@ abstract class AbstractRelationshipController extends Controller
         return $result;
     }
 
-    private function addGreenAndRedColor($a, $b)
+    private function addGreenAndRedColorRelationship($a, $b)
     {
         $toBeGreen = array_diff_key($a, $b);
         $toBeRed = array_diff_key($b, $a);
@@ -118,7 +104,7 @@ abstract class AbstractRelationshipController extends Controller
         return [$toBeGreen, $toBeRed];
     }
 
-    private function renewColumn(&$a, $b, $column)
+    private function renewColumnRelationship(&$a, $b, $column)
     {
         foreach (array_keys($a) as $key) {
             if (!isset($b[$key])) continue;
@@ -130,12 +116,12 @@ abstract class AbstractRelationshipController extends Controller
         }
     }
 
-    private function getDataSource($type)
+    private function getDataSourceRelationship($type)
     {
-        $result = $this->makeBlankDefaultObject($type);
+        $result = $this->makeBlankDefaultObjectRelationship($type);
         $json = Relationships::getAllOf($type);
-        $this->renewColumn($json, $result, 'relationship');
-        [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
+        $this->renewColumnRelationship($json, $result, 'relationship');
+        [$toBeGreen, $toBeRed] = $this->addGreenAndRedColorRelationship($result, $json);
 
         foreach ($json as $key => $columns) {
             $result[$key]["name"] = $key;
@@ -163,21 +149,21 @@ abstract class AbstractRelationshipController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function indexRelationship(Request $request)
     {
         return view('dashboards.pages.manage-relationship', [
-            'title' => $this->title,
+            'title' => $this->getTitle($request),
             'type' => $this->type,
             'route' => route($this->type . '_rls.store'),
-            'columns' => $this->getColumns(),
-            'dataSource' => array_values($this->getDataSource($this->type)),
+            'columns' => $this->getColumnsRelationship(),
+            'dataSource' => array_values($this->getDataSourceRelationship($this->type)),
         ]);
     }
 
-    public function store(Request $request)
+    public function storeRelationship(Request $request)
     {
         $data = $request->input();
-        $columns = array_filter($this->getColumns(), fn ($column) => !in_array($column['dataIndex'], ['action']));
+        $columns = array_filter($this->getColumnsRelationship(), fn ($column) => !in_array($column['dataIndex'], ['action']));
         $result = Relationships::convertHttpObjectToJson($data, $columns);
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));

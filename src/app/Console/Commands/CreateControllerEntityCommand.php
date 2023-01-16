@@ -60,10 +60,7 @@ class CreateControllerEntityCommand extends Command
         $name = Str::ucfirst(Str::snake(trim($this->input->getArgument('name'))));
         // $render = $this->input->getOption('render');
         $listName = [
-            "PropController",
-            "RelationshipController",
-            "StatusController",
-            "ListenerController",
+            "ManageController",
 
             "ViewAllController",
             "EditController",
@@ -100,10 +97,7 @@ class CreateControllerEntityCommand extends Command
     protected function getStub()
     {
         $sources = [
-            '/ndc.controller.manage-prop.stub',
-            '/ndc.controller.manage-relationship.stub',
-            '/ndc.controller.manage-status.stub',
-            '/ndc.controller.manage-listener.stub',
+            '/ndc.controller.manage.stub',
 
             '/ndc.controller.render.stub',
             '/ndc.controller.edit.stub',

@@ -37,11 +37,11 @@ class SidebarEntityItems
                 ['title' => "-",],
                 [
                     'title' => "Manage Props",
-                    'href' => route("{$singular}_prop.index"),
+                    'href' => route("{$singular}_prp.index"),
                 ],
                 [
                     'title' => "Manage Relationships",
-                    'href' => route("{$singular}_rel.index"),
+                    'href' => route("{$singular}_rls.index"),
                 ],
             ],
         ];
