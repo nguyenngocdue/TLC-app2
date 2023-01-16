@@ -32,7 +32,7 @@
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "ErP Routing Links"
+        "title": "ERP Routing Links"
     },
     "field": {
         "name": "field",
@@ -46,14 +46,14 @@
         "hidden": null,
         "package": "compliance",
         "sub_package": "hse",
-        "title": "Hse Corrective Actions"
+        "title": "HSE Corrective Actions"
     },
     "hse_incident_report": {
         "name": "hse_incident_report",
         "hidden": null,
         "package": "compliance",
         "sub_package": "hse",
-        "title": "Hse Incident Reports"
+        "title": "HSE Incident Reports"
     },
     "post": {
         "name": "post",
@@ -130,84 +130,84 @@
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Qaqc Insp Chklsts"
+        "title": "QAQC Insp Chklsts"
     },
     "qaqc_insp_chklst_line": {
         "name": "qaqc_insp_chklst_line",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Qaqc Insp Chklst Lines"
+        "title": "QAQC Insp Chklst Lines"
     },
     "qaqc_insp_chklst_run": {
         "name": "qaqc_insp_chklst_run",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Qaqc Insp Chklst Runs"
+        "title": "QAQC Insp Chklst Runs"
     },
     "qaqc_insp_chklst_sht": {
         "name": "qaqc_insp_chklst_sht",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Qaqc Insp Chklst Shts"
+        "title": "QAQC Insp Chklst Shts"
     },
     "qaqc_insp_control_group": {
         "name": "qaqc_insp_control_group",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Qaqc Insp Control Groups"
+        "title": "QAQC Insp Control Groups"
     },
     "qaqc_insp_control_value": {
         "name": "qaqc_insp_control_value",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Qaqc Insp Control Values"
+        "title": "QAQC Insp Control Values"
     },
     "qaqc_insp_group": {
         "name": "qaqc_insp_group",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Qaqc Insp Groups"
+        "title": "QAQC Insp Groups"
     },
     "qaqc_insp_tmpl": {
         "name": "qaqc_insp_tmpl",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Qaqc Insp Tmpls"
+        "title": "QAQC Insp Tmpls"
     },
     "qaqc_insp_tmpl_line": {
         "name": "qaqc_insp_tmpl_line",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Qaqc Insp Tmpl Lines"
+        "title": "QAQC Insp Tmpl Lines"
     },
     "qaqc_insp_tmpl_run": {
         "name": "qaqc_insp_tmpl_run",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Qaqc Insp Tmpl Runs"
+        "title": "QAQC Insp Tmpl Runs"
     },
     "qaqc_insp_tmpl_sht": {
         "name": "qaqc_insp_tmpl_sht",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Qaqc Insp Tmpl Shts"
+        "title": "QAQC Insp Tmpl Shts"
     },
     "qaqc_insp_value": {
         "name": "qaqc_insp_value",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Qaqc Insp Values"
+        "title": "QAQC Insp Values"
     },
     "sub_project": {
         "name": "sub_project",
@@ -291,7 +291,7 @@
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Wir Descriptions"
+        "title": "WIR Descriptions"
     },
     "work_area": {
         "name": "work_area",
@@ -319,48 +319,48 @@
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "Zunit Test 1 (Basic Controls)"
+        "title": "UT01 (Basic Controls)"
     },
     "zunit_test_2": {
         "name": "zunit_test_2",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "Zunit Test 2 (Dropdown\/Checkbox)"
+        "title": "UT02 (Dropdown\/Checkbox)"
     },
     "zunit_test_3": {
         "name": "zunit_test_3",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "Zunit Test 3 (DateTime Controls)"
+        "title": "UT03 (DateTime Controls)"
     },
     "zunit_test_4": {
         "name": "zunit_test_4",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "Zunit Test 4 (Static Typography)"
+        "title": "UT04 (Static Typography)"
     },
     "zunit_test_5": {
         "name": "zunit_test_5",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "Zunit Test 5 (Attachments)"
+        "title": "UT05 (Attachments)"
     },
     "zunit_test_7": {
         "name": "zunit_test_7",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "Zunit Test 7 (Comments)"
+        "title": "UT07 (Comments)"
     },
     "zunit_test_9": {
         "name": "zunit_test_9",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "Zunit Test 9 (Basic Events)"
+        "title": "UT09 (Basic Events)"
     }
 }
