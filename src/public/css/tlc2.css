@@ -58,4 +58,14 @@
     .no-print {
       display: none !important;
     }
+
+    .only-print{
+        display: block;
+    }
+}
+
+@media screen {
+    .only-print{
+        display: none;
+    }
 }
