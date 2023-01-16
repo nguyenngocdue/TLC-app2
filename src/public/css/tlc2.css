@@ -54,4 +54,18 @@
         /* page-break-inside: avoid; */
         page-break-before: always;
     }
+
+    .no-print {
+      display: none !important;
+    }
+
+    .only-print{
+        display: block;
+    }
+}
+
+@media screen {
+    .only-print{
+        display: none;
+    }
 }

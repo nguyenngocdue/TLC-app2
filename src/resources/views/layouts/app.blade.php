@@ -36,7 +36,7 @@
             <x-homepage.navbar2 />
             <main class="h-full overflow-y-auto">
                 <div class="container1 mx-auto grid px-6">
-                    <div class="container1 flex items-center justify-between h-full mx-auto1 text-purple-600 dark:text-purple-300">
+                    <div class="no-print container1 flex items-center justify-between h-full mx-auto1 text-purple-600 dark:text-purple-300">
                         <div class="flex justify-cen1ter flex-1 lg:mr-32">
                             <x-renderer.heading level=3>@yield('title', 'Untitled')</x-renderer.heading>
                         </div>
@@ -45,6 +45,9 @@
                                 <x-controls.breadcrumb />
                             </li>
                         </ul>
+                    </div>
+                    <div class="only-print">
+                        TLC LOGO HERE
                     </div>
                     @yield('content')
                 </div>

@@ -1,4 +1,4 @@
-<div class="flex h-full bg-gray-50 dark:bg-gray-900 overflow-hidden" :class="{ 'overflow-hidden': isSideMenuOpen }">
+<div class="no-print flex h-full bg-gray-50 dark:bg-gray-900 overflow-hidden" :class="{ 'overflow-hidden': isSideMenuOpen }">
     <!-- Desktop sidebar -->
     <aside class="z-20 hidden w-80 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
         <div class="py-4 text-gray-500 dark:text-gray-400">
