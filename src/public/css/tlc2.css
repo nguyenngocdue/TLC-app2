@@ -54,4 +54,8 @@
         /* page-break-inside: avoid; */
         page-break-before: always;
     }
+
+    .no-print {
+      display: none !important;
+    }
 }
