@@ -33,7 +33,8 @@ class User extends Authenticatable implements LdapAuthenticatable
     use TraitMenuTitle;
     use TraitMorphManyByFieldName;
     use HasAttachments;
-    use HasStatus;
+    use HasStatus; 
+    // 123
 
     /**
      * The attributes that are mass assignable.
