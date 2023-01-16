@@ -11,7 +11,7 @@
     $control = $prop['control'];
     @endphp
     @if($control !== "z_divider")
-    <x-renderer.descriptions heading={{$heading}} :items="$props" :dataContent="$dataContent" />
+    <x-renderer.descriptions heading={{$heading}} control={{$control}} :items="$props" :dataContent="$dataContent" />
     @endif
     @endforeach
 </div>
