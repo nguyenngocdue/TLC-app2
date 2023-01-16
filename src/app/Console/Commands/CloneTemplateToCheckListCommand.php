@@ -48,17 +48,13 @@ class CloneTemplateToCheckListCommand extends Command
             $qaqcInspTmplSheets = $qaqcInspTmpl->getSheets;
             if (count($qaqcInspTmplSheets) > 0) {
                 foreach ($qaqcInspTmplSheets as $qaqcInspTmplSheet) {
-                    $qaqcInspChklstSht = Qaqc_insp_chklst_sht::create([
+                    Qaqc_insp_chklst_sht::create([
                         'name' => $qaqcInspTmplSheet->name,
                         'description' => $qaqcInspTmplSheet->description,
                         'slug' => $qaqcInspTmplSheet->slug,
                         'qaqc_insp_chklst_id' => $idQaqcInspChklst,
+                        'qaqc_insp_tmpl_sht_id' => $qaqcInspTmplSheet->id
                     ]);
-                    $qaqcInspTmplRun = $qaqcInspTmplSheet->getRuns[0];
-                    $qaqcInspChklstRun = Qaqc_insp_chklst_run::create([
-                        'qaqc_insp_chklst_sht_id' => $qaqcInspTmplRun->id,
-                    ]);
-                    $this->cloneRunLine($qaqcInspTmplRun, null, $qaqcInspChklstRun->id);
                 }
             }
             $this->info("Clone Qaqc_insp_tmpl ID:{$idQaqcInspTmpl} to Qaqc_insp_chklst ID : {$idQaqcInspChklst} Successfully");

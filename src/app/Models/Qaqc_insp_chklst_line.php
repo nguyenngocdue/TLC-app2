@@ -25,10 +25,10 @@ class Qaqc_insp_chklst_line extends ModelExtended
     ];
 
     public $oracyParams = [
-        "getNoOfYesNo()" => ["getCheckedByField", Qaqc_insp_value::class],
-        "getOnHoldOfYesNo()" => ["getCheckedByField", Qaqc_insp_value::class],
-        "getFailedOfPassFail()" => ["getCheckedByField", Qaqc_insp_value::class],
-        "getOnHoldOfPassFail()" => ["getCheckedByField", Qaqc_insp_value::class],
+        // "getNoOfYesNo()" => ["getCheckedByField", Qaqc_insp_value::class],
+        // "getOnHoldOfYesNo()" => ["getCheckedByField", Qaqc_insp_value::class],
+        // "getFailedOfPassFail()" => ["getCheckedByField", Qaqc_insp_value::class],
+        // "getOnHoldOfPassFail()" => ["getCheckedByField", Qaqc_insp_value::class],
     ];
 
     public function insp_photos()
@@ -37,26 +37,26 @@ class Qaqc_insp_chklst_line extends ModelExtended
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    public function getNoOfYesNo()
-    {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
-    public function getOnHoldOfYesNo()
-    {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
-    public function getFailedOfPassFail()
-    {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
-    public function getOnHoldOfPassFail()
-    {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
+    // public function getNoOfYesNo()
+    // {
+    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    // }
+    // public function getOnHoldOfYesNo()
+    // {
+    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    // }
+    // public function getFailedOfPassFail()
+    // {
+    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    // }
+    // public function getOnHoldOfPassFail()
+    // {
+    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    // }
     public function getGroup()
     {
         $p = $this->eloquentParams[__FUNCTION__];

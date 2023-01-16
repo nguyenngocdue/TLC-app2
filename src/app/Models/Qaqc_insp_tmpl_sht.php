@@ -10,11 +10,11 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
     protected $table = "qaqc_insp_tmpl_shts";
 
     public $eloquentParams = [
-        "getRuns" => ["hasMany", Qaqc_insp_tmpl_run::class, "qaqc_insp_tmpl_sht_id"],
         "getTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, 'qaqc_insp_tmpl_id'],
+        "getLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_tmpl_sht_id"],
     ];
 
-    public function getRuns()
+    public function getLines()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

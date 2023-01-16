@@ -6,12 +6,13 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_insp_chklst_sht extends ModelExtended
 {
-    protected $fillable = ["id", "name", "description", "slug", "qaqc_insp_chklst_id"];
+    protected $fillable = ["id", "name", "description", "slug", "qaqc_insp_chklst_id", "qaqc_insp_tmpl_sht_id"];
     protected $table = "qaqc_insp_chklst_shts";
 
     public $eloquentParams = [
         "getRuns" => ["hasMany", Qaqc_insp_chklst_run::class, "qaqc_insp_chklst_sht_id"],
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
+        "getSheetTmpl" => ["belongsTo", Qaqc_insp_tmpl_sht::class, 'qaqc_insp_tmpl_sht_id'],
     ];
 
     public function getRuns()
@@ -26,6 +27,11 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     }
 
     public function getChklst()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getSheetTmpl()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

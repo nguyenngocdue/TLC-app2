@@ -13,15 +13,13 @@ class Qaqc_insp_tmpl_line extends ModelExtended
     protected $table = "qaqc_insp_tmpl_lines";
 
     public $eloquentParams = [
-        // "getTemplate" => ["belongsTo", Qaqc_insp_tmpl::class, "qaqc_insp_tmpl_id"],
-        // "getSheet" => ["belongsTo", Qaqc_insp_sheet::class, "qaqc_insp_sheet_id"],
         "getGroup" => ["belongsTo", Qaqc_insp_group::class, "qaqc_insp_group_id"],
-        "getRun" => ["belongsTo", Qaqc_insp_tmpl_run::class, "qaqc_insp_tmpl_run_id"],
+        "getSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, "qaqc_insp_tmpl_sht_id"],
         "getControlType" => ["belongsTo", Control_type::class, "control_type_id"],
         "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],
     ];
 
-    public function getRun()
+    public function getSheet()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

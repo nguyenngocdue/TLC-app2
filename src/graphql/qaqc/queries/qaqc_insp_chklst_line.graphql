@@ -20,10 +20,10 @@ type Qaqc_insp_chklst_line {
     getGroup: Qaqc_insp_group! @belongsTo
     getControlGroup: Qaqc_insp_control_group @belongsTo
     getControlValue: Qaqc_insp_control_value @belongsTo
-    getNoOfYesNo: [Qaqc_insp_value] @oracy
-    getOnHoldOfYesNo: [Qaqc_insp_value] @oracy
-    getFailedOfPassFail: [Qaqc_insp_value] @oracy
-    getOnHoldOfPassFail: [Qaqc_insp_value] @oracy
+    # getNoOfYesNo: [Qaqc_insp_value] @oracy
+    # getOnHoldOfYesNo: [Qaqc_insp_value] @oracy
+    # getFailedOfPassFail: [Qaqc_insp_value] @oracy
+    # getOnHoldOfPassFail: [Qaqc_insp_value] @oracy
     insp_photos: [InspPhoto]! @morphMany
     created_at: DateTime
     updated_at: DateTime

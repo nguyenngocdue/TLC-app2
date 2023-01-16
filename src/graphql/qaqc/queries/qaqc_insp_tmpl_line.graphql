@@ -13,9 +13,12 @@ type Qaqc_insp_tmpl_line {
     qaqc_insp_tmpl_run_id: ID!
     qaqc_insp_group_id: ID!
     qaqc_insp_control_group_id: ID
+    getControlType: Control_type! @belongsTo
     getTemplate: Qaqc_insp_tmpl! @belongsTo
     getSheet: Qaqc_insp_sheet! @belongsTo
     getGroup: Qaqc_insp_group! @belongsTo
+    getControlGroup: Qaqc_insp_control_group @belongsTo
+    getControlValue: Qaqc_insp_control_value @belongsTo
     created_at: DateTime
     updated_at: DateTime
 }

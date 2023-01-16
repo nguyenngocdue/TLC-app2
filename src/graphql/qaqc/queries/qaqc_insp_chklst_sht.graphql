@@ -14,6 +14,7 @@ type Qaqc_insp_chklst_sht {
     created_at: DateTime
     updated_at: DateTime
     getRuns: [Qaqc_insp_chklst_run!]! @hasMany
+    getTmplSheet: Qaqc_insp_tmpl_sht! @belongsTo
 }
 
 input CreateQAQCInspChklstSheetInput {
