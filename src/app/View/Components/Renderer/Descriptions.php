@@ -12,7 +12,6 @@ class Descriptions extends Component
      * @return void
      */
     public function __construct(
-        private $heading,
         private $items,
         private $dataContent,
         private $control
@@ -27,10 +26,10 @@ class Descriptions extends Component
      */
     public function render()
     {
-        $heading = $this->heading;
+
         $items = $this->items;
         $dataContent = $this->dataContent;
         $control = $this->control;
-        return view('components.renderer.descriptions')->with(compact('heading', 'items', 'dataContent', 'control'));
+        return view('components.renderer.descriptions')->with(compact('items', 'dataContent', 'control'));
     }
 }

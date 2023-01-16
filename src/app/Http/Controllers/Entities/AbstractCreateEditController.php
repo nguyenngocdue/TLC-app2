@@ -138,7 +138,7 @@ abstract class AbstractCreateEditController extends Controller
 				$array['control'] = $prop['control'];
 				$array['col_span'] = $prop['col_span'];
 				$array['new_line'] = $prop['new_line'];
-				$array['children'] = $prop;
+				$array['children'] = [$prop];
 				$dataSource[$prop['column_name']] = $array;
 			}
 		}

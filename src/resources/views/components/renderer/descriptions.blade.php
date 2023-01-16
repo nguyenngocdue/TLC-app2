@@ -1,5 +1,10 @@
-@if(isset($items[0]))
+{{-- @dd($items) --}}
+@if(isset($items['children'][0]))
 <div class='grid grid-cols-12 items-center'>
+    @php
+    $heading = $items['label'];
+    $control = $items['control'];
+    @endphp
     <div class='col-span-12 text-left'>
         @switch($control)
         @case('z_page_break')
@@ -22,14 +27,14 @@
         @case('z_h6_base')
         <x-renderer.heading>{{$heading}}</x-renderer.heading>
         @break
-        @default
+        {{-- @default
         <x-feedback.alert type="warning" message="[{{$control}}] is not available" />
-        @break
+        @break --}}
         @endswitch
     </div>
 </div>
 <div class='grid grid-cols-12'>
-    @foreach($items as $key => $item)
+    @foreach($items['children'] as $key => $item)
     @php
     $x = $dataContent[$item['column_name']];
     $contents = $item['control'] === 'attachment' ? $x ->toArray() : $x;
@@ -37,17 +42,7 @@
     $colSpan = $item['col_span'];
     $colName = $item['column_name'];
     @endphp
-
     <x-renderer.show-item label={{$label}} colName={{$colName}} colSpan={{$colSpan}} :contents="$contents" />
     @endforeach
-</div>
-@else
-<div class='grid grid-cols-12 border'>
-    @php
-    $x = $dataContent[$items['column_name']];
-    $contents = $items['control'] === 'attachment' ? $x ->toArray() : $x;
-    $colName = $items['column_name'];
-    @endphp
-    <x-renderer.show-item label="{{$items['label']}}" colName={{$colName}} colSpan="{{$items['col_span']}}" :contents="$contents" />
 </div>
 @endif
