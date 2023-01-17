@@ -33,6 +33,16 @@ class Pill extends Component
         $links[] = ['href' => route($singular . '_ltn.index'), 'disabled' => strpos($as, '_ltn.') !== false, 'title' => 'Listeners',];
         $links[] = ['href' => route($singular . '_stt.index'), 'disabled' => strpos($as, '_stt.') !== false, 'title' => 'Statuses',];
 
+        $links[] = ['href' => route($singular . '_stt.index'), 'disabled' => strpos($as, '_stt1.') !== false, 'title' => 'Transitions',];
+        $links[] = ['href' => route($singular . '_stt.index'), 'disabled' => strpos($as, '_stt2.') !== false, 'title' => 'Ball In Court',];
+        $links[] = ['href' => route($singular . '_stt.index'), 'disabled' => strpos($as, '_stt3.') !== false, 'title' => 'Action Buttons',];
+        $links[] = ['href' => route($singular . '_stt.index'), 'disabled' => strpos($as, '_stt4.') !== false, 'title' => 'Settings',];
+
+        $links[] = ['href' => route($singular . '_stt.index'), 'disabled' => strpos($as, '_stt5.') !== false, 'title' => 'Visibilities',];
+        $links[] = ['href' => route($singular . '_stt.index'), 'disabled' => strpos($as, '_stt6.') !== false, 'title' => 'In Between',];
+        $links[] = ['href' => route($singular . '_stt.index'), 'disabled' => strpos($as, '_stt7.') !== false, 'title' => 'Capabilities',];
+        $links[] = ['href' => route($singular . '_stt.index'), 'disabled' => strpos($as, '_stt8.') !== false, 'title' => 'Default Values',];
+
         return view('components.navigation.pill')->with(compact('links'));
     }
 }
