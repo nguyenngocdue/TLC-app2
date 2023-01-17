@@ -64,10 +64,7 @@ abstract class AbstractCreateEditController extends Controller
 		$action = $this->action;
 		$props = Props::getAllOf($this->type);
 
-
 		$modelPath = new $this->data;
-
-
 		$data = [];
 
 		$ins = new $modelPath();
@@ -77,17 +74,16 @@ abstract class AbstractCreateEditController extends Controller
 			$colName_keyEloquent[$value[2]] =  $key;
 		}
 
-
 		// getDataFromModel
-		$dataContent = [];
+		$dataSource = [];
 		$dataOnModel = $modelPath::find($id);
 		foreach ($props as $key => $prop) {
 			$colName = $prop['column_name'];
 			if (isset($colName_keyEloquent[$colName])) {
-				$dataContent[$colName] = $dataOnModel->{$colName_keyEloquent[$colName]}->name;
+				$dataSource[$colName] = $dataOnModel->{$colName_keyEloquent[$colName]}->name;
 			} else {
 				if ($prop['column_type'] !== 'static') {
-					$dataContent[$colName] = $dataOnModel->{$colName};
+					$dataSource[$colName] = $dataOnModel->{$colName};
 				}
 			}
 		}
@@ -119,7 +115,7 @@ abstract class AbstractCreateEditController extends Controller
 		};
 
 		// Arrangement data
-		$dataSource = [];
+		$props = [];
 		foreach ($indexProps as $key => $prop) {
 			if (isset($prop[0])) {
 				$p = $prop[0];
@@ -130,7 +126,7 @@ abstract class AbstractCreateEditController extends Controller
 				$array['col_span'] = $p['col_span'];
 				$array['new_line'] = $p['new_line'];
 				$array['children'] = array_slice($prop, 1, count($prop) - 1);
-				$dataSource[$p['column_name']] = $array;
+				$props[$p['column_name']] = $array;
 			} else {
 				$array = [];
 				$array['label'] = "";
@@ -139,15 +135,14 @@ abstract class AbstractCreateEditController extends Controller
 				$array['col_span'] = $prop['col_span'];
 				$array['new_line'] = $prop['new_line'];
 				$array['children'] = [$prop];
-				$dataSource[$prop['column_name']] = $array;
+				$props[$prop['column_name']] = $array;
 			}
 		}
-		// dd($dataSource, $dataContent);
-		// dd($dataSource);
+		// dd($props, $dataSource);
+		// dd($props);
 
-		return view('dashboards.pages.show')->with(compact('dataSource', 'dataContent'));
+		return view('dashboards.pages.show')->with(compact('props', 'dataSource'));
 	}
-
 
 
 	public function edit($id)

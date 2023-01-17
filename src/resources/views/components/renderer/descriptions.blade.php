@@ -1,9 +1,9 @@
 {{-- @dd($items) --}}
-@if(isset($items['children'][0]))
+@if(isset($prop['children'][0]))
 <div class='grid grid-cols-12 items-center'>
     @php
-    $heading = $items['label'];
-    $control = $items['control'];
+    $heading = $prop['label'];
+    $control = $prop['control'];
     @endphp
     <div class='col-span-12 text-left'>
         @switch($control)
@@ -34,13 +34,13 @@
     </div>
 </div>
 <div class='grid grid-cols-12'>
-    @foreach($items['children'] as $key => $item)
+    @foreach($prop['children'] as $prp)
     @php
-    $x = $dataContent[$item['column_name']];
-    $contents = $item['control'] === 'attachment' ? $x ->toArray() : $x;
-    $label = $item['label'];
-    $colSpan = $item['col_span'];
-    $colName = $item['column_name'];
+    $x = $items[$prp['column_name']];
+    $contents = $prp['control'] === 'attachment' ? $x ->toArray() : $x;
+    $label = $prp['label'];
+    $colSpan = $prp['col_span'];
+    $colName = $prp['column_name'];
     @endphp
     <x-renderer.show-item label={{$label}} colName={{$colName}} colSpan={{$colSpan}} :contents="$contents" />
     @endforeach
