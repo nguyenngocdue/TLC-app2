@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Entities;
 use App\Events\EntityCreatedEvent;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Services\ReadingFileService;
 use App\Http\Services\UploadService;
 use App\Notifications\CreateNewNotification;
 use App\Notifications\EditNotification;
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Props;
 use Brian2694\Toastr\Facades\Toastr;
 use Exception;
@@ -26,12 +26,12 @@ abstract class AbstractCreateEditController extends Controller
 
 	protected $type;
 	protected $data;
-	protected $action;
 	protected $branchName = 'entities';
 	protected $disk = 'json';
 	protected $r_fileName = 'props.json';
-	public function __construct(protected UploadService $uploadService, protected ReadingFileService $readingFileService)
-	{
+	public function __construct(
+		protected UploadService $uploadService,
+	) {
 	}
 
 	public function getType()
@@ -41,7 +41,7 @@ abstract class AbstractCreateEditController extends Controller
 
 	public function create()
 	{
-		$action = $this->action;
+		$action = CurrentRoute::getControllerAction();
 		$props = Props::getAllOf($this->type);
 
 		if ($props  === false) {
@@ -60,7 +60,7 @@ abstract class AbstractCreateEditController extends Controller
 
 	public function show($id)
 	{
-		$action = $this->action;
+		$action = CurrentRoute::getControllerAction();
 		$props = Props::getAllOf($this->type);
 
 		$modelPath = new $this->data;
@@ -149,7 +149,7 @@ abstract class AbstractCreateEditController extends Controller
 		$currentElement = $this->data::find($id);
 		$props = Props::getAllOf($this->type);
 		$type = Str::plural($this->type);
-		$action = $this->action;
+		$action = CurrentRoute::getControllerAction();
 		$values = $action === "create" ? "" : $currentElement;
 
 		$modelPath = $this->data;

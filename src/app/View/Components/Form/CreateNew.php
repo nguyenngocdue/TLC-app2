@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Form;
 
+use App\Utils\Support\CurrentRoute;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
@@ -14,7 +15,6 @@ class CreateNew extends Component
      * @return void
      */
     public function __construct(
-        private $action = "",
         private $method = "GET",
         private $footer = "Pipe is allowed. E.G.: name1|name2|name3|...",
     ) {
@@ -63,7 +63,7 @@ class CreateNew extends Component
     public function render()
     {
         return view('components.form.create-new', [
-            'action' => $this->action,
+            'action' => CurrentRoute::getControllerAction(),
             'method' => $this->method,
             'method0' => $this->getMethod0(),
             'footer' => $this->footer,

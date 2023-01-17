@@ -101,51 +101,51 @@ $id = $action === "edit" ? $values->id : "";
                         @case($timeControls[4])
                         @case($timeControls[5])
                         @case($timeControls[6])
-                        <x-controls.text colName={{$columnName}} value={{$value}} action={{$action}} control={{$control}} label={{$label}} :strTimeControl="$timeControls" />
+                        <x-controls.text colName={{$columnName}} value={{$value}} control={{$control}} label={{$label}} :strTimeControl="$timeControls" />
                         @break
                         @case('text')
-                        <x-controls.text colName={{$columnName}} value={{$value}} action={{$action}} control={{$control}} label={{$label}} :strTimeControl="$timeControls" />
+                        <x-controls.text colName={{$columnName}} value={{$value}} control={{$control}} label={{$label}} :strTimeControl="$timeControls" />
                         @break
                         @case('id')
-                        <x-controls.id colName={{$columnName}} value={{$value}} action={{$action}} control={{$control}} label={{$label}} />
+                        <x-controls.id colName={{$columnName}} value={{$value}} control={{$control}} label={{$label}} />
                         @break
                         @case('textarea')
-                        <x-controls.textarea colName={{$columnName}} :value="$value" action={{$action}} control={{$control}} label={{$label}} colType={{$columnType}} />
+                        <x-controls.textarea colName={{$columnName}} :value="$value" control={{$control}} label={{$label}} colType={{$columnType}} />
                         @break
                         @case ('dropdown')
-                        <x-controls.dropdown id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
+                        <x-controls.dropdown id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
                         @break
                         @case ('radio')
-                        <x-controls.radio id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
+                        <x-controls.radio id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
                         @break
 
                         @case ('dropdown_multi')
-                        <x-controls.dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} action={{$action}} label={{$label}} />
+                        <x-controls.dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
                         @break
 
                         @case('attachment')
-                        <x-controls.uploadfiles id={{$id}} colName={{$columnName}} action={{$action}} label={{$label}} type={{$type}} />
+                        <x-controls.upload-files id={{$id}} colName={{$columnName}} label={{$label}} type={{$type}} />
                         @break
                         @case('toggle')
                         <x-controls.toggle id={{$id}} colName={{$columnName}} value={{$value}} label={{$label}} />
                         @break
 
                         @case('checkbox')
-                        <x-controls.checkbox id={{$id}} colName={{$columnName}} action={{$action}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
+                        <x-controls.checkbox id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
                         @break
 
 
                         @case('number')
-                        <x-controls.number colName={{$columnName}} value={{$value}} action={{$action}} control={{$control}} label={{$label}} />
+                        <x-controls.number colName={{$columnName}} value={{$value}} control={{$control}} label={{$label}} />
                         @break
                         @case('relationship_renderer')
-                        <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} action={{$action}} colSpan={{$col_span}} />
+                        <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} colSpan={{$col_span}} />
                         @break
                         @case('comment')
-                        <x-controls.comment-group id={{$id}} type={{$type}} colName={{$columnName}} action={{$action}} label={{$label}} colSpan={{$col_span}} />
+                        <x-controls.comment-group id={{$id}} type={{$type}} colName={{$columnName}} label={{$label}} colSpan={{$col_span}} />
                         @break
                         @case('status')
-                        <x-controls.control-status type={{$type}} colName={{$columnName}} id={{$id}} action={{$action}} modelPath={{$modelPath}} />
+                        <x-controls.control-status type={{$type}} colName={{$columnName}} id={{$id}} modelPath={{$modelPath}} />
                         @break
 
                         @default

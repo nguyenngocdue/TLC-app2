@@ -12,7 +12,7 @@
                 <x-renderer.show-item label="Status" colName="hello" colSpan=6 :contents="456"/>
             </div>
             <br/>
-            <x-renderer.descriptions control='111' :items="['a','b']" :dataContent="['a','b']"></x-renderer.descriptions>
+            <x-renderer.descriptions control='111' :prop="['a','b']" :items="['a','b']"></x-renderer.descriptions>
             <div class="mb-8 grid gap-6 md:grid-cols-2 xl:grid-cols-2">
                 <x-renderer.report.widget/>
                 <x-renderer.report.widget title="Total Clients" figure="1234"/>
@@ -299,7 +299,7 @@
             <x-feedback.alert />
         </x-renderer.card>
 
-        {{--
+      
         <x-renderer.card title="Tabs">
             <x-renderer.card title="Tab 1">
                 <x-navigation.tabs></x-navigation.tabs>
@@ -313,21 +313,6 @@
                 <x-navigation.tabs-3></x-navigation.tabs-3>
             </x-renderer.card>
         </x-renderer.card>
-
-        <x-renderer.card title="Breadcrumbs">
-            <x-renderer.card>
-                <x-renderer.breadcrumb type=""></x-renderer.breadcrumb>
-            </x-renderer.card>
-            <br />
-            <x-renderer.card title='type="icon"'>
-                <x-renderer.breadcrumb type="icon"></x-renderer.breadcrumb>
-            </x-renderer.card>
-            <br />
-            <x-renderer.card title='type="slash"'>
-                <x-renderer.breadcrumb type="slash"></x-renderer.breadcrumb>
-            </x-renderer.card>
-        </x-renderer.card>
-        --}}
     </div>
 </x-renderer.card>
 

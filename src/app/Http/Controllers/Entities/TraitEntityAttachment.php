@@ -16,7 +16,7 @@ trait TraitEntityAttachment
             $uploadedIdColumnNames = $this->uploadService->store($request);
             // dd($uploadedIdColumnNames);
             if (!is_array($uploadedIdColumnNames)) {
-                $title = "Not find item";
+                $title = "Not found item";
                 $message = $uploadedIdColumnNames->getMessage();
                 $type = "warning";
                 return view('components.feedback.result')->with(compact('message', 'title', 'type'));

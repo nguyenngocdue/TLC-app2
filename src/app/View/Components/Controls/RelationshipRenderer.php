@@ -3,6 +3,7 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Relationships;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
@@ -44,7 +45,7 @@ class RelationshipRenderer extends Component
         $modelPath = $this->modelPath;
         $type = $this->type;
         $id = $this->id;
-        $action = $this->action;
+        $action = CurrentRoute::getControllerAction();
 
         if ($action !== 'edit') return "";
 

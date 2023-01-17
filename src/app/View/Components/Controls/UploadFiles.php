@@ -3,18 +3,16 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
+use App\Utils\Support\CurrentRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
-use Illuminate\Support\Str;
 
-
-class Uploadfiles extends Component
+class UploadFiles extends Component
 {
     public function __construct(
         private $id,
         private $colName,
-        private $action,
         private $label,
         private $type,
     ) {
@@ -24,7 +22,7 @@ class Uploadfiles extends Component
     {
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $name = $this->colName;
-        $action = $this->action;
+        $action = CurrentRoute::getControllerAction();
         $label = $this->label;
         $id = $this->id;
         $owner_id =  (int)Auth::user()->id;
@@ -53,6 +51,6 @@ class Uploadfiles extends Component
         }
 
         $showToBeDeleted = env('APP_ENV') === 'local';
-        return view('components.controls.uploadfiles')->with(compact('action', 'attachmentData', 'name', 'label', 'showToBeDeleted', 'path'));
+        return view('components.controls.upload-files')->with(compact('action', 'attachmentData', 'name', 'label', 'showToBeDeleted', 'path'));
     }
 }

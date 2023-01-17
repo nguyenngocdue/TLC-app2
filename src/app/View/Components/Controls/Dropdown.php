@@ -3,18 +3,11 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
-use App\Models\User;
-use App\Models\Zunit_test_9;
-use App\Utils\Support\Entities;
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Listeners;
 use App\Utils\Support\Props;
-use App\Utils\Support\Relationships;
-use Illuminate\Database\Eloquent\Factories\Relationship;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
-
 
 class Dropdown extends Component
 {
@@ -23,14 +16,13 @@ class Dropdown extends Component
         private $colName,
         private $type,
         private $modelPath,
-        private $action,
         private $label,
     ) {
     }
 
     public function render()
     {
-        $action = $this->action;
+        $action = CurrentRoute::getControllerAction();
         $colName = $this->colName;
         $label = $this->label;
 

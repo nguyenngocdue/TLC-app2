@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
-use App\Utils\Constant;
+use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 
 class Attachment extends Component
@@ -13,7 +13,6 @@ class Attachment extends Component
         private $destroyable = false,
         private $categoryName = 'attachment_1',
         private $showToBeDeleted = false,
-        private $action = 'edit',
         private $label = '',
         private $attachmentData = [],
     ) {
@@ -30,7 +29,7 @@ class Attachment extends Component
             'destroyable' => (bool)$this->destroyable,
             'categoryName' => $this->categoryName,
             'showToBeDeleted' => $this->showToBeDeleted,
-            'action' => $this->action,
+            'action' => CurrentRoute::getControllerAction(),
             'label' =>  $this->label,
             'path' => $path,
             'attachmentData' => $this->attachmentData,

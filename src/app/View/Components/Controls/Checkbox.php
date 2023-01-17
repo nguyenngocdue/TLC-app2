@@ -3,6 +3,7 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
+use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 
 class Checkbox extends Component
@@ -15,7 +16,6 @@ class Checkbox extends Component
     public function __construct(
         private $id,
         private $colName,
-        private $action,
         private $modelPath,
         private $label,
         private $type,
@@ -31,7 +31,7 @@ class Checkbox extends Component
      */
     public function render()
     {
-        $action = $this->action;
+        $action = CurrentRoute::getControllerAction();
         $colName = $this->colName;
         $label = $this->label;
         $modelPath = $this->modelPath;

@@ -3,6 +3,7 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
+use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 
 class DropdownMulti extends Component
@@ -10,7 +11,6 @@ class DropdownMulti extends Component
 
     public function __construct(
         private $colName,
-        private $action,
         private $modelPath,
         private $label,
         private $type,
@@ -22,7 +22,7 @@ class DropdownMulti extends Component
     public function render()
     {
         $span = 6;
-        $action = $this->action;
+        $action = CurrentRoute::getControllerAction();
         $colName = $this->colName;
         $label = $this->label;
         $modelPath = $this->modelPath;

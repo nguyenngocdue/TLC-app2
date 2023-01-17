@@ -22,4 +22,10 @@ class CurrentRoute
     {
         return Str::plural(self::getTypeSingular());
     }
+
+    public static function getControllerAction()
+    {
+        $controller = Route::current()->action['controller'];
+        return substr($controller, strpos($controller, '@') + 1);
+    }
 }
