@@ -8,7 +8,7 @@ use App\Models\Attachment_category;
 use App\Models\Comment;
 use Illuminate\Support\Facades\DB;
 
-trait CreateEditControllerComment
+trait TraitEntityComment
 {
 
     private function saveAndGetIdsComments($dataInput)

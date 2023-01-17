@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Entities;
 use App\Helpers\Helper;
 use App\Utils\Support\Relationships;
 
-trait CreateEditControllerM2M
+trait TraitEntityM2M
 {
     private function getRelationships()
     {

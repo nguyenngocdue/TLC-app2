@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Entities;
 use App\Helpers\Helper;
 
 
-trait CreateEditControllerStatus
+trait TraitEntityStatus
 {
     private function setStatus($valueInput, $data = null)
     {

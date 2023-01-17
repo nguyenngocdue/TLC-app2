@@ -8,7 +8,7 @@ use App\View\Components\Formula\All_ConcatNameWith123;
 use App\View\Components\Formula\All_SlugifyByName;
 use App\View\Components\Formula\User_PositionRendered;
 
-trait CreateEditFormula
+trait TraitEntityFormula
 {
     private function apply_formula($item, $type)
     {

@@ -3,12 +3,12 @@
 namespace App\Listeners;
 
 use App\Events\EntityCreatedEvent;
-use App\Http\Controllers\Entities\CreateEditFormula;
+use App\Http\Controllers\Entities\TraitEntityFormula;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ShouldUpdateFieldsListener implements ShouldQueue
 {
-    use CreateEditFormula;
+    use TraitEntityFormula;
     /**
      * Handle the event.
      *

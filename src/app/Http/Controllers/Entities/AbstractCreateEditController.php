@@ -18,12 +18,11 @@ use Illuminate\Support\Str;
 
 abstract class AbstractCreateEditController extends Controller
 {
-	use CreateEditControllerM2M;
-	use CreateEditControllerAttachment;
-	use CreateEditControllerComment;
-	use CreateEditControllerStatus;
-	use CreateEditFormula;
-	// use HasStatus;
+	use TraitEntityM2M;
+	use TraitEntityAttachment;
+	use TraitEntityComment;
+	use TraitEntityStatus;
+	use TraitEntityFormula;
 
 	protected $type;
 	protected $data;
