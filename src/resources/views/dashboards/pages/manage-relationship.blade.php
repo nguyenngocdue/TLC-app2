@@ -1,7 +1,8 @@
 @extends('layouts.app')
-@section('title', $title)
+@section('title', 'Manage Json')
 
 @section('content')
+<x-navigation.pill />
 <form action="{{$route}}" method="POST">
     @csrf
     <x-renderer.table showNo={{true}} :columns="$columns" :dataSource="$dataSource" />

@@ -274,9 +274,5 @@
         "title": "Verified Rejected",
         "color": "red",
         "color_index": "200"
-    },
-    "zzz": {
-        "name": "zzz",
-        "title": "Zzz"
     }
 }

@@ -25,7 +25,13 @@ class CurrentRoute
 
     public static function getControllerAction()
     {
-        $controller = Route::current()->action['controller'];
-        return substr($controller, strpos($controller, '@') + 1);
+        $result = Route::current()->action['controller'];
+        return substr($result, strpos($result, '@') + 1);
+    }
+
+    public static function getControllerAs()
+    {
+        $result = Route::current()->action['as'];
+        return $result;
     }
 }

@@ -1,7 +1,8 @@
 @extends('layouts.app')
-@section('title', $title)
+@section('title', 'Manage Json')
 
 @section('content')
+<x-navigation.pill />
 <div class="grid grid-cols-2 gap-5">
     <form action="{{$route}}" method="POST">
         @csrf

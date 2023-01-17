@@ -1,7 +1,8 @@
 @extends('layouts.app')
-@section('title', $title)
+@section('title', 'Manage Json')
 
 @section('content')
+<x-navigation.pill />
 <form action="{{$route}}" method="POST">
     @csrf
     <button class="hidden" title="This button is to avoid a bug when change label and press enter."></button>

@@ -42,7 +42,7 @@
                         </div>
                         <ul class="flex items-center flex-shrink-0 space-x-6">
                             <li class="relative">
-                                <x-controls.breadcrumb />
+                                <x-navigation.breadcrumb />
                             </li>
                         </ul>
                     </div>
