@@ -25,7 +25,7 @@ class Tabs extends Component
     public function render()
     {
         if (is_null($this->tabs)) return "Tab Data is NULL";
-        if (sizeof($this->tabs) > 0) $defaultTabKey = $this->tabs[0]['key'];
+        $defaultTabKey = (sizeof($this->tabs) > 0) ? $this->tabs[0]['key'] : '';
         return view('components.navigation.tabs', [
             'tabId' => md5(microtime(true)),
             'tabs' => $this->tabs,

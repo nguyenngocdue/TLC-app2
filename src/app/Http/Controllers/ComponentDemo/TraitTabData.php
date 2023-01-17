@@ -29,19 +29,24 @@ trait TraitTabData
     {
         return [
             [
-                'label' => 'New',
-                'key' => 'new',
-                'children' => "Content 01 - New",
+                'label' => 'Props',
+                'key' => 'Props',
+                'children' => "Content 01 - Props",
             ],
             [
-                'label' => 'Assigned',
-                'key' => 'assigned',
-                'children' => "Content 02 - Assigned",
+                'label' => 'Relationships',
+                'key' => 'Relationships',
+                'children' => "Content 02 - Relationships",
             ],
             [
-                'label' => 'Inspected',
-                'key' => 'inspected',
-                'children' => "Content 03 - Inspected",
+                'label' => 'Listeners',
+                'key' => 'Listeners',
+                'children' => "Content 03 - Listeners",
+            ],
+            [
+                'label' => 'Statuses',
+                'key' => 'Statuses',
+                'children' => "Content 03 - Statuses",
             ],
         ];
     }
