@@ -19,9 +19,7 @@ abstract class AbstractEntityCRUDController extends Controller
 
 	protected $type;
 	protected $data;
-	protected $branchName = 'entities';
-	protected $disk = 'json';
-	protected $r_fileName = 'props.json';
+
 	public function __construct(
 		protected UploadService $uploadService,
 	) {

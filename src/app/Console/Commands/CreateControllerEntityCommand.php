@@ -62,7 +62,7 @@ class CreateControllerEntityCommand extends Command
         $listName = [
             "ViewAllController",
             "EntityCRUDController",
-            "ManageController",
+            "ManageJsonController",
         ];
         $this->writeController($listName, $name);
         $this->composer->dumpAutoloads();
@@ -97,7 +97,7 @@ class CreateControllerEntityCommand extends Command
         $sources = [
             '/ndc.controller.entityViewAll.stub',
             '/ndc.controller.entityCRUD.stub',
-            '/ndc.controller.manage.stub',
+            '/ndc.controller.manage-json.stub',
         ];
         $creator = $this->creator;
         foreach ($sources as $stubName) {

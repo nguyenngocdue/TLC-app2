@@ -46,11 +46,11 @@ Route::group([
             ], function () use ($singular, $ucfirstName) {
                 $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
 
-                Route::resource("{$singular}_prp", "{$path}ManageController")->only('index', 'store', 'create');
-                Route::resource("{$singular}_rls", "{$path}ManageController")->only('index', 'store');
+                Route::resource("{$singular}_prp", "{$path}ManageJsonController")->only('index', 'store', 'create');
+                Route::resource("{$singular}_rls", "{$path}ManageJsonController")->only('index', 'store');
 
-                Route::resource("{$singular}_ltn", "{$path}ManageController")->only('index', 'store', 'create');
-                Route::resource("{$singular}_stt", "{$path}ManageController")->only('index', 'store');
+                Route::resource("{$singular}_ltn", "{$path}ManageJsonController")->only('index', 'store', 'create');
+                Route::resource("{$singular}_stt", "{$path}ManageJsonController")->only('index', 'store');
             });
         }
     });
