@@ -9,6 +9,7 @@ class ComponentDemo
     use TraitGridData;
     use TraitTableData;
     use TraitTagData;
+    use TraitTabData;
 
     function getType()
     {
@@ -18,7 +19,7 @@ class ComponentDemo
     public function index()
     {
         $tableDataSource = $this->getTableDataSource();
-        return view('component-lib', [
+        return view('component-demo', [
             'tableColumns' => $this->getTableColumns(),
             'tableEditableColumns' => $this->getTableEditableColumns(),
             'tableDataSource' => $tableDataSource,
@@ -27,6 +28,8 @@ class ComponentDemo
             'attachmentData' => $this->getAttachmentData(),
             'tagColumns' => $this->getTagColumns(),
             'tagDataSource' => $this->getTagDataSource(),
+            'tabData1' => $this->getTab1(),
+            'tabData2' => $this->getTab2(),
         ]);
     }
 }

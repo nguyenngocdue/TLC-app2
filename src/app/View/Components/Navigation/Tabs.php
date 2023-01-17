@@ -11,8 +11,9 @@ class Tabs extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $tabs = [],
+    ) {
         //
     }
 
@@ -23,27 +24,12 @@ class Tabs extends Component
      */
     public function render()
     {
-        $tabs = [
-            [
-                'label' => 'Tab 1',
-                'key' => 'tab-1',
-                'children' => "Content 01",
-            ],
-            [
-                'label' => 'Tab 2',
-                'key' => 'tab-2',
-                'children' => "Content 02",
-            ],
-            [
-                'label' => 'Tab 3',
-                'key' => 'tab-3',
-                'children' => "Content 03",
-            ],
-        ];
+        if (is_null($this->tabs)) return "Tab Data is NULL";
+        if (sizeof($this->tabs) > 0) $defaultTabKey = $this->tabs[0]['key'];
         return view('components.navigation.tabs', [
-            'tabs' => $tabs,
-            'defaultTabKey' => 'tab-1',
             'tabId' => md5(microtime(true)),
+            'tabs' => $this->tabs,
+            'defaultTabKey' => $defaultTabKey,
         ]);
     }
 }
