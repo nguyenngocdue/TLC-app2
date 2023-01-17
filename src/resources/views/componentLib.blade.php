@@ -7,12 +7,12 @@
     <div class="grid gap-6 mb-8 md:grid-cols-2 ">
         <x-renderer.card title="Widgets">
             <div class ="grid grid-cols-12">
-                <x-renderer.show-item label="Name" colName="hello" colSpan=12 :contents="123"/>
-                <x-renderer.show-item label="Age" colName="hello" colSpan=6 :contents="60"/>
-                <x-renderer.show-item label="Status" colName="hello" colSpan=6 :contents="456"/>
+                <x-renderer.description label="Name" colName="hello" colSpan=12 :contents="123"/>
+                <x-renderer.description label="Age" colName="hello" colSpan=6 :contents="60"/>
+                <x-renderer.description label="Status" colName="hello" colSpan=6 :contents="456"/>
             </div>
             <br/>
-            <x-renderer.descriptions control='111' :prop="['a','b']" :items="['a','b']"></x-renderer.descriptions>
+            <x-renderer.description-group control='111' :prop="['a','b']" :items="['a','b']" />
             <div class="mb-8 grid gap-6 md:grid-cols-2 xl:grid-cols-2">
                 <x-renderer.report.widget/>
                 <x-renderer.report.widget title="Total Clients" figure="1234"/>

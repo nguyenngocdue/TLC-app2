@@ -42,7 +42,7 @@
     $colSpan = $prp['col_span'];
     $colName = $prp['column_name'];
     @endphp
-    <x-renderer.show-item label={{$label}} colName={{$colName}} colSpan={{$colSpan}} :contents="$contents" />
+    <x-renderer.description label={{$label}} colName={{$colName}} colSpan={{$colSpan}} :contents="$contents" />
     @endforeach
 </div>
 @endif

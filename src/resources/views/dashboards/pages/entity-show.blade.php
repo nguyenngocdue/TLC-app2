@@ -7,7 +7,7 @@
     $control = $prop['control'];
     @endphp
     @if($control !== "z_divider")
-    <x-renderer.descriptions control={{$control}} :prop="$prop" :items="$dataSource" />
+    <x-renderer.description-group control={{$control}} :prop="$prop" :items="$dataSource" />
     @endif
     @endforeach
 </div>

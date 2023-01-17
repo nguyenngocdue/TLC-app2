@@ -4,7 +4,7 @@ namespace App\View\Components\Renderer;
 
 use Illuminate\View\Component;
 
-class ShowItem extends Component
+class Description extends Component
 {
     /**
      * Create a new component instance.

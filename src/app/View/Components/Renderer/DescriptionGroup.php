@@ -4,7 +4,7 @@ namespace App\View\Components\Renderer;
 
 use Illuminate\View\Component;
 
-class Descriptions extends Component
+class DescriptionGroup extends Component
 {
     /**
      * Create a new component instance.
@@ -30,6 +30,6 @@ class Descriptions extends Component
         $items = $this->items;
         $prop = $this->prop;
         $control = $this->control;
-        return view('components.renderer.descriptions')->with(compact('items', 'prop', 'control'));
+        return view('components.renderer.description-group')->with(compact('items', 'prop', 'control'));
     }
 }

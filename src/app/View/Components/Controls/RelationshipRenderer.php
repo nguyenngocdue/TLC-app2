@@ -20,7 +20,6 @@ class RelationshipRenderer extends Component
         private $type,
         private $colName,
         private $modelPath,
-        private $action,
     ) {
     }
 

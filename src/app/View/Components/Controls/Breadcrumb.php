@@ -25,17 +25,20 @@ class Breadcrumb extends Component
         $latest = $model::latest()->first();
         $latest_id = $latest ? $latest->id : null;
 
-        $links = [['href' => route($type . '.index'), 'title' => 'View All',]];
+        $linkCrud = [];
         if ($first_id) {
-            $links[] = ['href' => route($type . '.edit', $first_id), 'title' => 'View First',];
-            $links[] = ['href' => route($type . '.edit', $latest_id), 'title' => 'View Latest',];
+            $linkCrud[] = ['href' => route($type . '.edit', $first_id), 'title' => 'View First',];
+            $linkCrud[] = ['href' => route($type . '.edit', $latest_id), 'title' => 'View Latest',];
         }
-        $links[] = ['href' => route($type . '.create'), 'title' => 'Add New',];
-        $links[] = ['href' => route($singular . '_prp.index'), 'title' => 'Props',];
-        $links[] = ['href' => route($singular . '_rls.index'), 'title' => 'Relationships',];
-        $links[] = ['href' =>  route($singular . '_ltn.index'), 'title' => 'Listeners',];
-        $links[] = ['href' =>  route($singular . '_stt.index'), 'title' => 'Statuses',];
+        $linkCrud[] = ['href' => route($type . '.index'), 'title' => 'View All',];
+        $linkCrud[] = ['href' => route($type . '.create'), 'title' => 'Add New',];
 
-        return view('components.navigation.breadcrumb')->with(compact('links'));
+        $linkManageJson = [];
+        $linkManageJson[] = ['href' => route($singular . '_prp.index'), 'title' => 'Props',];
+        $linkManageJson[] = ['href' => route($singular . '_rls.index'), 'title' => 'Relationships',];
+        $linkManageJson[] = ['href' =>  route($singular . '_ltn.index'), 'title' => 'Listeners',];
+        $linkManageJson[] = ['href' =>  route($singular . '_stt.index'), 'title' => 'Statuses',];
+
+        return view('components.navigation.breadcrumb')->with(compact('linkCrud', 'linkManageJson'));
     }
 }

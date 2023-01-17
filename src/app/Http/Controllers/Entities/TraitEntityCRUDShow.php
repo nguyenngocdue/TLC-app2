@@ -89,6 +89,6 @@ trait TraitEntityCRUDShow
 		// dd($props, $dataSource);
 		// dd($props);
 
-		return view('dashboards.pages.show')->with(compact('props', 'dataSource'));
+		return view('dashboards.pages.entity-show')->with(compact('props', 'dataSource'));
 	}
 }
