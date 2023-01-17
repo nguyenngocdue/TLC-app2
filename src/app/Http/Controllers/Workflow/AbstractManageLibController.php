@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Workflow;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -38,7 +39,8 @@ abstract class AbstractManageLibController extends Controller
     public function getDataSource()
     {
         $result = array_values($this->libraryClass::getAll());
-        foreach ($result as $key => &$value) {
+        foreach ($result as &$value) {
+            $key = $value['name'];
             $value['action'] = Blade::render("<div class='whitespace-nowrap'>
             <x-renderer.button htmlType='submit' name='button' size='xs' value='right_by_name,$key' type='danger' outline=true><i class='fa fa-trash'></i></x-renderer.button>
         </div>");
@@ -58,12 +60,10 @@ abstract class AbstractManageLibController extends Controller
 
     private function delete($button, $dataSource)
     {
-        [$action, $index] = explode(",", $button);
-        $dataSource = array_values($dataSource);
-        if ($action === 'right_by_name') unset($dataSource[$index]);
-        $newDataSource = [];
-        foreach ($dataSource as $item)  $newDataSource[$item['name']] = $item;
-        return $newDataSource;
+        [$direction, $key] = explode(",", $button);
+        $dataSource = Arr::moveDirection($dataSource, $direction, null, $key);
+        $dataSource = Arr::keyBy($dataSource, "name");
+        return $dataSource;
     }
 
     public function store(Request $request)
@@ -74,7 +74,9 @@ abstract class AbstractManageLibController extends Controller
         unset($dataSource["button"]);
 
         $dataSource = $this->distributeArrayToObject($dataSource);
-        $dataSource = $this->delete($button, $dataSource);
+        if ($request->input('button')) {
+            $dataSource = $this->delete($button, $dataSource);
+        }
 
         $this->libraryClass::setAll($dataSource);
         return redirect()->back();

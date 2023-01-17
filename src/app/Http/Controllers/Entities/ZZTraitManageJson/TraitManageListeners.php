@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 use App\Utils\Support\DBTable;
 use App\Utils\Support\Listeners;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 
 trait TraitManageListeners
 {
@@ -14,6 +15,10 @@ trait TraitManageListeners
         $columns = array_merge([""], $columns);
         // dump($columns);
         return [
+            [
+                "dataIndex" => "action",
+                "align" => "center",
+            ],
             [
                 "dataIndex" => "name",
                 "renderer" => "read-only-text",
@@ -27,7 +32,7 @@ trait TraitManageListeners
                 "properties" => ["strFn" => 'same'],
             ],
             [
-                "dataIndex" => "action",
+                "dataIndex" => "listen_action",
                 "renderer" => "dropdown",
                 "editable" => true,
                 "cbbDataSource" => ['', 'reduce', 'assign', 'dot', 'aggregate', 'expression', 'date_offset', 'number_to_words'],
@@ -58,6 +63,11 @@ trait TraitManageListeners
     {
         $dataSource = Listeners::getAllOf($this->type);
         // dump($dataSource);
+        foreach ($dataSource as $key => &$item) {
+            $item['action'] = Blade::render("<div class='whitespace-nowrap'>
+            <x-renderer.button htmlType='submit' name='button' size='xs' value='right_by_name,$key' type='danger' outline=true><i class='fa fa-trash'></i></x-renderer.button>
+        </div>");
+        }
 
         return view("dashboards.pages.manage-listener", [
             'title' => $this->getTitle($request),
@@ -71,7 +81,7 @@ trait TraitManageListeners
     public function storeListener(Request $request)
     {
         $data = $request->input();
-        $columns = array_filter($this->getColumnsListener(), fn ($column) => !in_array($column['dataIndex'], []));
+        $columns = array_filter($this->getColumnsListener(), fn ($column) => !in_array($column['dataIndex'], ['action']));
         $result = Listeners::convertHttpObjectToJson($data, $columns);
         // $this->handleMoveTo($result);
         if ($request->input('button')) {
