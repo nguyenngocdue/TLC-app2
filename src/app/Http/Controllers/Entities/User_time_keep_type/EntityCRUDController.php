@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Http\Controllers\Entities\User_time_keep_type;
+
+use App\Http\Controllers\Entities\AbstractEntityCRUDController;
+use App\Models\User_time_keep_type;
+
+class EntityCRUDController extends AbstractEntityCRUDController
+{
+    protected $type = 'user_time_keep_type';
+    protected $data = User_time_keep_type::class;
+}
