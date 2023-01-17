@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageListeners;
+use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageProps;
+use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageRelationships;
+use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageStatuses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

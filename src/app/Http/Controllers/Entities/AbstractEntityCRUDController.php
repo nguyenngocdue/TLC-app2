@@ -3,6 +3,14 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAttachment;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityComment;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDCreateEdit;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShow;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStoreUpdate;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityM2M;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityStatus;
 use App\Http\Services\UploadService;
 
 abstract class AbstractEntityCRUDController extends Controller

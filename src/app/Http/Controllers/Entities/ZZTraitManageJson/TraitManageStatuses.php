@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Entities;
+namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\Http\Request;

@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Entities;
+namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Helpers\Helper;
 use App\Models\Attachment;
-use App\Models\Attachment_category;
 use App\Models\Comment;
-use Illuminate\Support\Facades\DB;
 
 trait TraitEntityComment
 {

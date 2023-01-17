@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Entities;
+namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Helpers\Helper;
 
