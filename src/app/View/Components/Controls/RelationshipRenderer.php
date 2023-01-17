@@ -82,9 +82,9 @@ class RelationshipRenderer extends Component
                     $item['gray'] = $item['resigned'];
                 }
                 $dataSource = $dataSource->all(); // Force LengthAwarePaginator to Array
-                return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan'));
+                return view('components.controls.many-icon-params')->with(compact('dataSource', 'colSpan'));
             case "many_lines":
-                return view('components.controls.manyLineParams')->with(compact('columns', 'dataSource', 'fn'));
+                return view('components.controls.many-line-params')->with(compact('columns', 'dataSource', 'fn'));
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
         }

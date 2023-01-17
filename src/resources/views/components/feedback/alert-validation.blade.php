@@ -1,5 +1,5 @@
 @error($colName)
-{{-- @section('alertValidation') --}}
+{{-- @section('alert-validation') --}}
 @php
 $customMes = App\Helpers\Helper::customMessageValidation($message, $label);
 @endphp

@@ -1,0 +1,124 @@
+<?php
+
+namespace App\Http\Controllers\ComponentDemo;
+
+trait TraitTableData
+{
+    public function getTableColumns()
+    {
+        return [
+            [
+                "title" => 'ID', "dataIndex" => "id",
+                "renderer" => "id",
+                "align" => "center",
+            ],
+            [
+                "title" => 'Client', "dataIndex" => "client",
+                "renderer" => "avatar-name",
+                "attributes" => ['title' => 'client', 'description' => 'amount', 'avatar' => 'avatar', 'gray' => 'disabled']
+            ],
+            [
+                "title" => 'Logged In',
+                "dataIndex" => "loggedIn",
+                "renderer" => "toggle",
+                "align" => "center",
+            ],
+            [
+                "title" => 'Amount', "dataIndex" => "amount",
+            ],
+            [
+                "title" => 'Status', "dataIndex" => "status",
+                "renderer" => "tag", "attributes" => ['color' => 'color']
+            ],
+            [
+                "title" => 'Date', "dataIndex" => "date",
+            ],
+        ];
+    }
+
+    public function getTableEditableColumns()
+    {
+        return [
+            [
+                "title" => 'ID',
+                "dataIndex" => "id",
+                "renderer" => "id",
+            ],
+            [
+                "title" => 'Client',
+                "dataIndex" => "client",
+                "renderer" => "dropdown",
+                "editable" => true,
+                "cbbDataSource" => ["", "Hans", "Helen", "sarah", "Sandy", "Eva", "Travis"],
+            ],
+            [
+                "title" => 'Logged In',
+                "dataIndex" => "loggedIn",
+                "renderer" => "toggle",
+                "align" => "center",
+                // "editable" => true,
+            ],
+            [
+                "title" => 'Amount',
+                "dataIndex" => "amount",
+                "renderer" => "number",
+                "editable" => true,
+            ],
+            [
+                "title" => 'Status',
+                "dataIndex" => "status",
+                "renderer" => "dropdown",
+                "editable" => true,
+                "cbbDataSource" => ["", "approved", "pending", "rejected", "expired"],
+            ],
+            [
+                "title" => 'Date',
+                "dataIndex" => "date",
+                "renderer" => "text",
+                "editable" => true,
+            ],
+        ];
+    }
+
+    public function getTableDataSource()
+    {
+        return [
+            [
+                "id" => 1001, "client" => "Empty Avatar", "amount" => 1213.45, "status" => "approved", "color" => "green", "date" => "26/10/2022",
+                "rowDescription" => "This is an example of a rowDescription",
+                "loggedIn" => true,
+            ],
+            [
+                "avatar" => "/images/hans.jpeg",
+                "id" => 2002, "client" => "Hans", "amount" => 863.45, "status" => "abc", "date" => "06/10/2022",
+                "loggedIn" => false,
+            ],
+            [
+                "avatar" => "/images/helen.jpeg",
+                "id" => 3003, "client" => "Helen", "amount" => 123.45, "status" => "pending", "color" => "orange", "date" => "07/10/2022",
+                "loggedIn" => true,
+                "disabled" => true,
+            ],
+            [
+                "avatar" => "/images/sarah.jpeg",
+                "id" => 4004, "client" => "sarah", "amount" => 456.45, "status" => "rejected", "color" => "red", "date" => "08/10/2022",
+                "loggedIn" => false,
+            ],
+            [
+                "avatar" => "/images/Sandy.jpeg",
+                "id" => 5005, "client" => "Sandy", "amount" => 789.45, "status" => "expired", "color" => "gray", "date" => "09/10/2022",
+                "loggedIn" => 1,
+            ],
+            [
+                "avatar" => "/images/avatar.jpg",
+                "id" => 6006, "client" => "Eva", "amount" => 1011.45, "status" => "approved", "color" => "green", "date" => "16/10/2022",
+                "loggedIn" => 0,
+            ],
+            [
+                "avatar" => "/images/Travis.jpeg",
+                "id" => 6006, "client" => "Travis", "amount" => 1011.45, "status" => "approved", "color" => "green", "date" => "16/10/2022",
+                "loggedIn" => 0,
+            ],
+        ];
+    }
+}

@@ -23,6 +23,27 @@ class Tabs extends Component
      */
     public function render()
     {
-        return view('components.navigation.tabs');
+        $tabs = [
+            [
+                'label' => 'Tab 1',
+                'key' => 'tab-1',
+                'children' => "Content 01",
+            ],
+            [
+                'label' => 'Tab 2',
+                'key' => 'tab-2',
+                'children' => "Content 02",
+            ],
+            [
+                'label' => 'Tab 3',
+                'key' => 'tab-3',
+                'children' => "Content 03",
+            ],
+        ];
+        return view('components.navigation.tabs', [
+            'tabs' => $tabs,
+            'defaultTabKey' => 'tab-1',
+            'tabId' => md5(microtime(true)),
+        ]);
     }
 }

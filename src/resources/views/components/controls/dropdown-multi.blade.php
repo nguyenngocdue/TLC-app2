@@ -17,7 +17,7 @@ $editColName = str_replace('()', '', $colName);
         @endforeach
     </select>
     @endif
-    @include('components.feedback.alertValidation')
+    @include('components.feedback.alert-validation')
 
     <script type="text/javascript">
         $('#select-dropdowm-multi-{{$editColName}}').select2({

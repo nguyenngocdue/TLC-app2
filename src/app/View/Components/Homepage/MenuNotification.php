@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
-class Menunotification extends Component
+class MenuNotification extends Component
 {
     /**
      * Create a new component instance.
@@ -32,6 +32,6 @@ class Menunotification extends Component
             $modeHasNotification[$key] = $value["notifiable_type"];
         }
         $dataCountNotification = array_count_values($modeHasNotification);
-        return view('components.homepage.menunotification')->with(compact('dataCountNotification'));
+        return view('components.homepage.menu-notification')->with(compact('dataCountNotification'));
     }
 }

@@ -1,0 +1,75 @@
+<?php
+
+namespace App\Http\Controllers\ComponentDemo;
+
+trait TraitAttachmentData
+{
+    function getAttachmentData()
+    {
+        $attachmentData = [
+            "comment_1" => [
+                [
+                    "id" => 315,
+                    "url_thumbnail" => "avatars/01087-150x150.png",
+                    "url_media" => "avatars/01087.png",
+                    "url_folder" => "avatars",
+                    "filename" => "01087.png",
+                    "extension" => "png",
+                    "owner_id" => 1,
+                    "object_id" => 157,
+                    "object_type" => "App\Models\Comment",
+                    "category" => 9,
+                    "created_at" => "2022-12-14T06:46:48.000000Z",
+                    "updated_at" => "2022-12-14T06:46:48.000000Z",
+                ],
+                [
+                    "id" => 316,
+                    "url_thumbnail" => "avatars/00080-150x150.jpg",
+                    "url_media" => "avatars/00080.jpg",
+                    "url_folder" => "avatars",
+                    "filename" => "00080.jpg",
+                    "extension" => "jpg",
+                    "owner_id" => 1,
+                    "object_id" => 157,
+                    "object_type" => "App\Models\Comment",
+                    "category" => 9,
+                    "created_at" => "2022-12-14T06:46:48.000000Z",
+                    "updated_at" => "2022-12-14T06:46:48.000000Z",
+                ],
+                [
+                    "id" => 317,
+                    "url_thumbnail" => "avatars/01031-150x150.png",
+                    "url_media" => "avatars/01031.png",
+                    "url_folder" => "avatars/",
+                    "filename" => "01031.png",
+                    "extension" => "png",
+                    "owner_id" => 1,
+                    "object_id" => 157,
+                    "object_type" => "App\Models\Comment",
+                    "category" => 9,
+                    "created_at" => "2022-12-14T06:46:48.000000Z",
+                    "updated_at" => "2022-12-14T06:46:48.000000Z",
+                ]
+            ],
+            "comment_2" => [
+                [
+                    "id" => 318,
+                    "url_thumbnail" => "dev-due001/2022/12/a4-150x150.jpeg",
+                    "url_media" => "dev-due001/2022/12/a4.jpeg",
+                    "url_folder" => "dev-due001/2022/12/",
+                    "filename" => "a4.jpeg",
+                    "extension" => "jpeg",
+                    "owner_id" => 1,
+                    "object_id" => 158,
+                    "object_type" => "App\Models\Comment",
+                    "category" => 10,
+                    "created_at" => "2022-12-14T06:46:48.000000Z",
+                    "updated_at" => "2022-12-14T06:46:48.000000Z",
+                ]
+            ]
+        ];
+        $attachmentData['attachment_2'] = $attachmentData['comment_1'];
+
+        return $attachmentData;
+    }
+}

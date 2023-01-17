@@ -4,7 +4,7 @@ namespace App\View\Components\Controls;
 
 use Illuminate\View\Component;
 
-class Headeralertvalidation extends Component
+class HeaderAlertValidation extends Component
 {
     /**
      * Create a new component instance.
@@ -20,6 +20,6 @@ class Headeralertvalidation extends Component
     {
 
         $props = $this->strProps;
-        return view('components.controls.headeralertvalidation')->with(compact('props'));
+        return view('components.controls.header-alert-validation')->with(compact('props'));
     }
 }

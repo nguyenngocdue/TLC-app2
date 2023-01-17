@@ -60,7 +60,7 @@ $time = $date ? date("d/m/Y H:i:s", strtotime($date)) : date("d/m/Y H:i:s");
     </div>
 </div>
 
-{{-- @include('components.feedback.alertValidation') --}}
+{{-- @include('components.feedback.alert-validation') --}}
 
 @once
 <script type="text/javascript">

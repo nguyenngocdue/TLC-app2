@@ -9,7 +9,7 @@ $selected = is_null(old($colName)) ? $idEntity : old($colName) * 1;
 <div id="add-{{$colName}}">
 </div>
 
-@include('components.feedback.alertValidation')
+@include('components.feedback.alert-validation')
 
 @once
 <script>

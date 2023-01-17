@@ -302,16 +302,21 @@
       
         <x-renderer.card title="Tabs">
             <x-renderer.card title="Tab 1">
-                <x-navigation.tabs></x-navigation.tabs>
+                <x-navigation.tabs />
+            </x-renderer.card>
+            
+            <x-renderer.card title="Tab 2">
+                <x-navigation.tabs />
+            </x-renderer.card>
+            {{-- <br />
+            <x-renderer.card title="Tab 1">
+                <x-navigation.tabs-1 />
             </x-renderer.card>
             <br />
             <x-renderer.card title="Tab 2">
-                <x-navigation.tabs-2></x-navigation.tabs-2>
+                <x-navigation.tabs-2 />
             </x-renderer.card>
-            <br />
-            <x-renderer.card title="Tab 3">
-                <x-navigation.tabs-3></x-navigation.tabs-3>
-            </x-renderer.card>
+            --}}
         </x-renderer.card>
     </div>
 </x-renderer.card>

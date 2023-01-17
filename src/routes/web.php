@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppMenuController;
-use App\Http\Controllers\ComponentLib;
+use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UpdateUserSettings;
@@ -93,4 +93,4 @@ Route::group([
     Route::resource('manageWidgets', ManageWidgetsController::class)->only('index', 'store', 'create');
     Route::resource('manageApps', ManageAppsController::class)->only('index', 'store', 'create');
 });
-Route::get('components', [ComponentLib::class, 'index']);
+Route::get('components', [ComponentDemo::class, 'index']);

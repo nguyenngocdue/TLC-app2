@@ -1,86 +1,48 @@
-<div class="flex flex-wrap" id="tabs-id">
-    <div class="w-full">
-        <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
-            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-pink-600" onclick="changeAtiveTab(event,'tab-profile')">
-                    <i class="fas fa-space-shuttle text-base mr-1"></i> Profile
-                </a>
-            </li>
-            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-pink-600 bg-white" onclick="changeAtiveTab(event,'tab-settings')">
-                    <i class="fas fa-cog text-base mr-1"></i> Settings
-                </a>
-            </li>
-            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-pink-600 bg-white" onclick="changeAtiveTab(event,'tab-options')">
-                    <i class="fas fa-briefcase text-base mr-1"></i> Options
-                </a>
-            </li>
-        </ul>
-        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-            <div class="px-4 py-5 flex-auto">
-                <div class="tab-content tab-space">
-                    <div class="block" id="tab-profile">
-                        <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate B2C users
-                            after installed base benefits.
-                            <br />
-                            <br />
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI.
-                        </p>
-                    </div>
-                    <div class="hidden" id="tab-settings">
-                        <p>
-                            Completely synergize resource taxing relationships via
-                            premier niche markets. Professionally cultivate one-to-one
-                            customer service with robust ideas.
-                            <br />
-                            <br />
-                            Dynamically innovate resource-leveling customer service for
-                            state of the art customer service.
-                        </p>
-                    </div>
-                    <div class="hidden" id="tab-options">
-                        <p>
-                            Efficiently unleash cross-media information without
-                            cross-media value. Quickly maximize timely deliverables for
-                            real-time schemas.
-                            <br />
-                            <br />
-                            Dramatically maintain clicks-and-mortar solutions
-                            without functional solutions.
-                        </p>
-                    </div>
-                </div>
-            </div>
+<div class="rounded border w-full mx-auto mt-4">
+    <!-- Tabs -->
+    <ul id="tabs-{{$tabId}}" class="inline-flex pt-2 px-1 w-full border-b">
+        @foreach($tabs as $tab)
+        @php
+        $className = ($tab['key'] === $defaultTabKey) ? "bg-white border-t border-r border-l -mb-px" : "";
+        @endphp
+        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t {{$className}}"><a href="#{{$tab['key']}}">{{$tab['label']}}</a></li>
+        @endforeach
+    </ul>
+
+    <!-- Tab Contents -->
+    <div id="tab-contents-{{$tabId}}">
+        @foreach($tabs as $tab)
+        @php
+        $className = ($tab['key'] === $defaultTabKey) ? "" : "hidden";
+        @endphp 
+        <div id="{{$tab['key']}}" class="p-4 {{$className}}">
+            {{$tab['children']}}
         </div>
+        @endforeach
     </div>
 </div>
-<script type="text/javascript">
-    function changeAtiveTab(event, tabID) {
-        let element = event.target;
-        while (element.nodeName !== "A") {
-            element = element.parentNode;
-        }
-        ulElement = element.parentNode.parentNode;
-        aElements = ulElement.querySelectorAll("li > a");
-        tabContents = document.getElementById("tabs-id").querySelectorAll(".tab-content > div");
-        for (let i = 0; i < aElements.length; i++) {
-            aElements[i].classList.remove("text-white");
-            aElements[i].classList.remove("bg-pink-600");
-            aElements[i].classList.add("text-pink-600");
-            aElements[i].classList.add("bg-white");
-            tabContents[i].classList.add("hidden");
-            tabContents[i].classList.remove("block");
-        }
-        element.classList.remove("text-pink-600");
-        element.classList.remove("bg-white");
-        element.classList.add("text-white");
-        element.classList.add("bg-pink-600");
-        document.getElementById(tabID).classList.remove("hidden");
-        document.getElementById(tabID).classList.add("block");
-    }
 
+@once
+<script type="text/javascript">
+const initTab = (tabId) => {
+    let tabsContainer = document.querySelector("#tabs-" + tabId);
+    let tabTogglers = tabsContainer.querySelectorAll("#tabs-" + tabId + " a");
+    tabTogglers.forEach(function(toggler) {
+        toggler.addEventListener("click", function(e) {
+            e.preventDefault();
+            let tabName = this.getAttribute("href");
+            let tabContents = document.querySelector("#tab-contents-" + tabId);
+            for (let i = 0; i < tabContents.children.length; i++) {
+                tabTogglers[i].parentElement.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+                tabContents.children[i].classList.remove("hidden");
+                if ("#" + tabContents.children[i].id === tabName) continue;
+                tabContents.children[i].classList.add("hidden");
+            }
+            e.target.parentElement.classList.add("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+        });
+    });
+}
 </script>
+@endonce
+
+<script>initTab('{{$tabId}}');</script>

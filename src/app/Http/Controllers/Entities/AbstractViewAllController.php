@@ -192,7 +192,7 @@ abstract class AbstractViewAllController extends Controller
         $title = LibApps::getFor($type)['title'];
         // Log::info($columns);
 
-        return view('dashboards.pages.viewAll2')->with(compact('title', 'pageLimit', 'type', 'columns', 'dataSource'));
+        return view('dashboards.pages.entity-view-all')->with(compact('title', 'pageLimit', 'type', 'columns', 'dataSource'));
     }
 
     public function destroy($id)

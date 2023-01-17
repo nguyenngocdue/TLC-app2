@@ -14,7 +14,7 @@ $id = $action === "edit" ? $values->id : "";
 <a class="text-blue-500 hover:text-gray-400" href="{{ route($editType.'.show', $id) }}">show</a></li>
 @endif
 
-<x-controls.headeralertvalidation :strProps="$props" />
+<x-controls.header-alert-validation :strProps="$props" />
 <form class="w-full mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? 0 : $id )}} ">
     @csrf
     <div class=" grid grid-cols-12">
