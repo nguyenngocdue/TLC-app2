@@ -1,0 +1,142 @@
+<?php
+
+namespace App\Http\Controllers\Api\v1\qaqc;
+
+use App\Console\Commands\Traits\CloneRunTrait;
+use App\Events\UpdateStatusChklstRunEvent;
+use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
+use App\Models\Attachment;
+use App\Models\Qaqc_insp_chklst_line;
+use App\Models\Qaqc_insp_chklst_run;
+use App\Models\Qaqc_insp_chklst_sht;
+use Carbon\Carbon;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
+class SubmitFormAndUploadFileController extends Controller
+{
+    use CloneRunTrait;
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function submitAndUploadFile(Request $request)
+    {
+        try {
+            $transactionId = $request->transactionId;
+            $ownerId = $request->ownerId;
+            $sheetId = $request->sheetId;
+            $name = $request->name;
+            $description = $request->description;
+            $controlGroupId = $request->controlGroupId;
+            $controlTypeId = $request->controlTypeId;
+            $controlValueId = $request->controlValueId;
+            $groupId = $request->groupId;
+            $value = $request->value;
+            if (!(cache('transactionId') === $transactionId)) {
+                cache(['transactionId' => $transactionId], 10);
+                $qaqcInspChklstRun = Qaqc_insp_chklst_run::create([
+                    'owner_id' => $ownerId,
+                    'qaqc_insp_chklst_sht_id' => $sheetId,
+                ]);
+                cache(['qaqcInspChklstRunId' => $qaqcInspChklstRun->id], 10);
+                $qaqcInspChklstLine = Qaqc_insp_chklst_line::create([
+                    'name' => $name,
+                    'description' => $description,
+                    'control_type_id' => $controlTypeId,
+                    'value' => $value,
+                    'qaqc_insp_group_id' => $groupId,
+                    'qaqc_insp_chklst_run_id' => $qaqcInspChklstRun->id,
+                    'qaqc_insp_control_value_id' => $controlValueId,
+                    'qaqc_insp_control_group_id' => $controlGroupId,
+                ]);
+                $this->uploadFile($request, $qaqcInspChklstLine->id);
+                return response()->json('Successfully');
+            } else {
+                $qaqcRunId = cache('qaqcInspChklstRunId');
+                $qaqcInspChklstLine = Qaqc_insp_chklst_line::create([
+                    'name' => $name,
+                    'description' => $description,
+                    'control_type_id' => $controlTypeId,
+                    'value' => $value,
+                    'qaqc_insp_group_id' => $groupId,
+                    'qaqc_insp_chklst_run_id' => $qaqcRunId,
+                    'qaqc_insp_control_value_id' => $controlValueId,
+                    'qaqc_insp_control_group_id' => $controlGroupId,
+                ]);
+                $this->uploadFile($request, $qaqcInspChklstLine->id);
+                return response()->json('Successfully');
+            }
+
+            return response()->json($request->sheetId);
+        } catch (\Throwable $th) {
+            return response()->json($th);
+        }
+    }
+    private function uploadFile($request, $modelId, $modelName = 'App\\Models\\Qaqc_insp_chklst_line')
+    {
+        try {
+            $nameIdFields = Helper::getDataDbByName('fields', 'name', 'id');
+            $filesUpload = $request->files;
+            $attachments = [];
+            foreach ($filesUpload as $key => $files) {
+                try {
+                    foreach ($files as $file) {
+                        $fileName = Helper::customizeSlugData($file, 'attachments', $attachments);
+                        $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
+                        $dt = Carbon::now('Asia/Ho_Chi_Minh');
+                        $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
+                        $pathImage = $path . $fileName;
+                        Storage::disk('s3')->put($pathImage, file_get_contents($file), 'public');
+                        $pathThumbnail = $this->createThumbnailGiveImage($imageFileType, $file, $fileName, $path);
+                        array_push($attachments, [
+                            'url_thumbnail' => isset($pathThumbnail) ? $pathThumbnail : "",
+                            'url_media' => $pathImage,
+                            'url_folder' => $path,
+                            'filename' => basename($pathImage),
+                            'extension' => $imageFileType,
+                            'category' => $nameIdFields[$key],
+                            'owner_id' =>  (int)Auth::user()->id,
+                            'object_id' => (int)$modelId,
+                            'object_type' => $modelName,
+                        ]);
+                    }
+                    $this->createAttachment($attachments);
+                } catch (\Exception $e) {
+                }
+            }
+        } catch (\Throwable $th) {
+        }
+    }
+    private function createThumbnailGiveImage($imageFileType, $file, $fileName, $path, $imageFileTypeFrame = ['jpeg', 'png', 'jpg', 'gif', 'svg'])
+    {
+        $fileNameNormal = pathinfo($fileName, PATHINFO_FILENAME);
+        if (in_array($imageFileType, $imageFileTypeFrame)) {
+            $thumbnailImage = Image::make($file);
+            $thumbnailImage->fit(150, 150);
+            $resource = $thumbnailImage->stream();
+            $fileNameThumbnail = $fileNameNormal . '-150x150.' . $imageFileType;
+            $pathThumbnail = $path . $fileNameThumbnail;
+            Storage::disk('s3')->put($pathThumbnail, $resource->__toString(), 'public');
+        }
+        return $pathThumbnail;
+    }
+    /**
+     * createAttachment
+     *
+     * @param  mixed $attachments 
+     * @return void
+     */
+    private function createAttachment($attachments)
+    {
+        foreach ($attachments as $attachment) {
+            Attachment::create($attachment);
+        }
+    }
+}
