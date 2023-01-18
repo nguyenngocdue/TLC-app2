@@ -50,7 +50,7 @@ abstract class AbstractManageLibController extends Controller
 
     public function index()
     {
-        return view("workflow/manage-library", [
+        return view("dashboards.pages.manage-library", [
             'columns' => $this->getColumns(),
             'dataSource' => $this->getDataSource(),
             'route' => $this->route,

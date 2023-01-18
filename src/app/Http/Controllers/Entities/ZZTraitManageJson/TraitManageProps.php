@@ -13,10 +13,6 @@ use Illuminate\Support\Str;
 
 trait TraitManageProps
 {
-    // protected $type = "";
-    // protected $typeModel = "";
-    // protected $title = "Manage Props";
-
     private function getColumnsProp()
     {
         $controls = JsonControls::getControls();
@@ -72,26 +68,30 @@ trait TraitManageProps
             ],
             [
                 "dataIndex" => "hidden_view_all",
+                "align" => "center",
                 "editable" => true,
-                "renderer" => "dropdown",
+                "renderer" => "checkbox",
                 'width' => 10,
             ],
             [
                 "dataIndex" => "hidden_edit",
+                "align" => "center",
                 "editable" => true,
-                "renderer" => "dropdown",
+                "renderer" => "checkbox",
                 'width' => 10,
             ],
             [
                 "dataIndex" => "label_hidden_edit",
+                "align" => "center",
                 "editable" => true,
-                "renderer" => "dropdown",
+                "renderer" => "checkbox",
                 'width' => 10,
             ],
             [
                 "dataIndex" => "new_line",
+                "align" => "center",
                 "editable" => true,
-                "renderer" => "dropdown",
+                "renderer" => "checkbox",
                 'width' => 10,
             ],
             [
@@ -155,7 +155,6 @@ trait TraitManageProps
                     "name" => "_$elqName",
                     "column_name" => "$elqName",
                     "column_type" => $column_type,
-                    // "column_type" => "ELQ(" . $elqValue[0] . ")",
                     "label" => Str::headline($elqName),
                     "col_span" => 12,
                 ];
@@ -250,7 +249,9 @@ trait TraitManageProps
     {
         $data = $request->input();
         $columns = array_filter($this->getColumnsProp(), fn ($column) => !in_array($column['dataIndex'], ['action']));
+        // dump($data);
         $result = Props::convertHttpObjectToJson($data, $columns);
+        // dump($result);
         $this->handleMoveTo($result);
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));

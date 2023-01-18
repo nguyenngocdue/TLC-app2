@@ -36,7 +36,7 @@ class Table extends Component
     return $attributeRendered;
   }
 
-  private function getPropertyRendered($column, $dataLine)
+  private function getPropertyRendered($column)
   {
     $properties = $column['properties'] ?? [];
     array_walk($properties, fn (&$value, $key) => $value = "$key='$value'");
@@ -50,17 +50,17 @@ class Table extends Component
     return "rendererParam='$str'";
   }
 
-  private function applyRender($renderer, $rawData, $column, $dataLine)
+  private function applyRender($renderer, $rawData, $column, $dataLine, $index)
   {
-    $name = isset($column['dataIndex']) ? "name='{$column['dataIndex']}[]'" : "";
-    // $attributeRender = isset($column['attributes']) ? $this->getAttributeRendered($column, $dataLine) : "";
+    $name = isset($column['dataIndex']) ? "name='{$column['dataIndex']}[$index]'" : "";
     $attributeRender = $this->getAttributeRendered($column, $dataLine);
     $propertyRender = $this->getPropertyRendered($column, $dataLine);
     $typeRender = isset($column['type']) ? "type='{$column['type']}'" : "";
     $sortByRender = isset($column['sortBy']) ? "sortBy='{$column['sortBy']}'" : "";
 
+    $needCbbDataSource = isset($column['renderer']) && in_array($column['renderer'], ['dropdown']);
     $cbbDataSource = $column['cbbDataSource'] ?? ["", "true"];
-    $cbbDataSourceRender = $cbbDataSource ? ':cbbDataSource=\'$cbbDataSource\'' : "";
+    $cbbDataSourceRender = $needCbbDataSource ? ':cbbDataSource=\'$cbbDataSource\'' : "";
     $dataLineRender = $dataLine ? ':dataLine=\'$dataLine\'' : "";
     $columnRender = $column ? ':column=\'$column\'' : "";
     $cellRender = ':cell=\'$cell\'';
@@ -70,6 +70,7 @@ class Table extends Component
     $attributes = "$name $attributeRender $propertyRender $typeRender $cbbDataSourceRender ";
     $attributes .= "$dataLineRender $columnRender $cellRender $rendererParam $formatterName ";
     $attributes .= "$sortByRender ";
+    $attributes = Str::of($attributes)->replaceMatches('/ {2,}/', ' '); //<< Remove double+ space
 
     $editable = isset($column['editable']) ? ".editable" : "";
     $tagName = "x-renderer{$editable}.{$renderer}";
@@ -78,13 +79,11 @@ class Table extends Component
     // if ($editable) Log::info($output);
     // Log::info($output);
     // Log::info($column);
-    $cell = $dataLine[$column['dataIndex']] ?? "No dataIndex for " . $column['dataIndex']; //No dataIndex for is used in Thumbnail
-    return Blade::render($output, [
-      'cbbDataSource' => $cbbDataSource,
-      'column' => $column,
-      'dataLine' => $dataLine,
-      'cell' => $cell,
-    ]);
+    $cell = $dataLine[$column['dataIndex']] ?? "No dataIndex for " . $column['dataIndex']; //This is for Thumbnail
+    $params = ['column' => $column, 'dataLine' => $dataLine, 'cell' => $cell,];
+    if ($needCbbDataSource) $params['cbbDataSource'] = $cbbDataSource;
+    $blade = Blade::render($output, $params);
+    return $blade;
   }
 
   private function makeColumn($column)
@@ -95,7 +94,7 @@ class Table extends Component
     return "<th class='{$dataIndex}_th px-4 py-3' title=\"{$dataIndex} / {$renderer}\">{$title}</th>";
   }
 
-  private function makeTd($columns, $dataLine, $columnCount, $no)
+  private function makeTd($columns, $dataLine, $columnCount, $no, $dataLineIndex)
   {
     $tds = [];
     // Log::info($columns);
@@ -118,7 +117,7 @@ class Table extends Component
           $rendered = $renderer
             // ? "A" 
             // : "B";
-            ? $this->applyRender($renderer, $rawData, $column, $dataLine)
+            ? $this->applyRender($renderer, $rawData, $column, $dataLine, $dataLineIndex)
             : $rawData;
           break;
       }
@@ -180,7 +179,7 @@ class Table extends Component
 
     $lastIndex = "anything";
     foreach ($dataSource as $no => $dataLine) {
-      $tds = $this->makeTd($columns, $dataLine, $columnCount, $start + $no + 1);
+      $tds = $this->makeTd($columns, $dataLine, $columnCount, $start + $no + 1, $no);
 
       if ($this->groupBy) {
         if (isset($dataLine[$this->groupBy][0])) { //<< this to make sure an item with empty name doesn't crash the app

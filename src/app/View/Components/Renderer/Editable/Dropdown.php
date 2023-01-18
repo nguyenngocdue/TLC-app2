@@ -13,8 +13,12 @@ class Dropdown extends Component
      *
      * @return void
      */
-    public function __construct(private $name = "", private $cbbDataSource = [], private $sortBy = false, private $strFn = false)
-    {
+    public function __construct(
+        private $name = "",
+        private $cbbDataSource = [],
+        private $sortBy = false,
+        private $strFn = false,
+    ) {
         //
         // dump($dataSource);
         // dump($this->strFn);
