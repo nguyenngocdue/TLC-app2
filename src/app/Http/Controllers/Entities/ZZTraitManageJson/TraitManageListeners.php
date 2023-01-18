@@ -101,7 +101,6 @@ trait TraitManageListeners
             'name' => "_" . $name,
             'column_name' => $name,
         ];
-
         $dataSource = Listeners::getAllOf($this->type) + $newItems;
         Listeners::setAllOf($this->type, $dataSource);
         return back();

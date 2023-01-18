@@ -10,7 +10,7 @@
 </form>
 <br />
 <hr />
-<x-form.create-new action="{{$route}}/create"/>
+{{-- <x-form.create-new action="{{$route}}/create"/> --}}
 <br />
 <br />
 <br />

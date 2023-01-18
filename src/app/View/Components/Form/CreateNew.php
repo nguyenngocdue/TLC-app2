@@ -15,6 +15,7 @@ class CreateNew extends Component
      * @return void
      */
     public function __construct(
+        private $action = "",
         private $method = "GET",
         private $footer = "Pipe is allowed. E.G.: name1|name2|name3|...",
     ) {
@@ -63,7 +64,7 @@ class CreateNew extends Component
     public function render()
     {
         return view('components.form.create-new', [
-            'action' => CurrentRoute::getControllerAction(),
+            'action' => $this->action,
             'method' => $this->method,
             'method0' => $this->getMethod0(),
             'footer' => $this->footer,
