@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageActionButtons;
 use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageListeners;
 use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageProps;
 use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageRelationships;
@@ -18,6 +19,7 @@ class Pages
     const Relationship = "Relationship";
     const Status = "Status";
     const Transition = "Transition";
+    const ActionButton = "ActionButton";
 }
 
 abstract class AbstractManageJsonController extends Controller
@@ -27,6 +29,7 @@ abstract class AbstractManageJsonController extends Controller
     use TraitManageStatuses;
     use TraitManageRelationships;
     use TraitManageTransitions;
+    use TraitManageActionButtons;
 
     protected $type = "";
     protected $typeModel = "";
@@ -37,6 +40,7 @@ abstract class AbstractManageJsonController extends Controller
         "_stt" => Pages::Status,
         "_rls" => Pages::Relationship,
         "_tst" => Pages::Transition,
+        "_atb" => Pages::ActionButton,
     ];
 
     public function getType()

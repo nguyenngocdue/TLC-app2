@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\Support\ActionButtons;
 use App\Utils\Support\Transitions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-trait TraitManageTransitions
+trait TraitManageActionButtons
 {
-    private function getColumnsTransition()
+    private function getColumnsActionButton()
     {
-        $firstColumn = [
+        $columns = [
             [
                 "dataIndex" => 'name',
                 'renderer' => 'status',
@@ -25,27 +26,24 @@ trait TraitManageTransitions
                 'align' => 'center',
                 'title' => 'Key',
             ],
+            [
+                "dataIndex" => 'label',
+                'renderer' => 'text',
+                'editable' => true,
+            ],
+            [
+                "dataIndex" => 'tooltip',
+                'renderer' => 'text',
+                'editable' => true,
+            ],
         ];
-
-        $allStatuses = LibStatuses::getFor($this->type);
-        // dump($allStatuses);
-        $columns = array_map(fn ($i) => [
-            "dataIndex" => $i['name'],
-            'renderer' => 'checkbox',
-            'editable' => true,
-            'align' => 'center',
-            'title' => $i['title'],
-        ], $allStatuses);
-        $columns = array_merge($firstColumn, $columns);
-        // dump($columns);
         return $columns;
     }
 
-    private function getDataSourceTransition()
+    private function getDataSourceActionButton()
     {
         $allStatuses = LibStatuses::getFor($this->type);
-        $dataInJson = Transitions::getAllOf($this->type);
-        // dump($dataInJson);
+        $dataInJson = ActionButtons::getAllOf($this->type);
         $result = [];
         foreach ($allStatuses as $status) {
             $name = $status['name'];
@@ -55,6 +53,9 @@ trait TraitManageTransitions
                 $result[] = ['name' => $name];
             }
         }
+        // dump($allStatuses);
+        // dump($dataInJson);
+        // dump($result);
         return $result;
     }
 
@@ -63,27 +64,27 @@ trait TraitManageTransitions
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function indexTransition(Request $request)
+    public function indexActionButton(Request $request)
     {
-        return view('dashboards.pages.manage-transition', [
+        return view('dashboards.pages.manage-action-button', [
             'title' => $this->getTitle($request),
             'type' => $this->type,
-            'route' => route($this->type . '_tst.store'),
-            'columns' => $this->getColumnsTransition(),
-            'dataSource' => array_values($this->getDataSourceTransition($this->type)),
+            'route' => route($this->type . '_atb.store'),
+            'columns' => $this->getColumnsActionButton(),
+            'dataSource' => array_values($this->getDataSourceActionButton($this->type)),
         ]);
     }
 
-    public function storeTransition(Request $request)
+    public function storeActionButton(Request $request)
     {
         $data = $request->input();
-        $columns = array_filter($this->getColumnsTransition(), fn ($column) => !in_array($column['dataIndex'], ['action']));
-        $result = Transitions::convertHttpObjectToJson($data, $columns);
+        $columns = array_filter($this->getColumnsActionButton(), fn ($column) => !in_array($column['dataIndex'], ['action']));
+        $result = ActionButtons::convertHttpObjectToJson($data, $columns);
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));
-            Transitions::move($result, $direction, $name);
+            ActionButtons::move($result, $direction, $name);
         }
-        Transitions::setAllOf($this->type, $result);
+        ActionButtons::setAllOf($this->type, $result);
         return back();
     }
 }
