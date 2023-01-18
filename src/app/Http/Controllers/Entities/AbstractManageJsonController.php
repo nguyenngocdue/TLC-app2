@@ -7,6 +7,7 @@ use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageListeners;
 use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageProps;
 use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageRelationships;
 use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageStatuses;
+use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageTransitions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -16,6 +17,7 @@ class Pages
     const Listener = "Listener";
     const Relationship = "Relationship";
     const Status = "Status";
+    const Transition = "Transition";
 }
 
 abstract class AbstractManageJsonController extends Controller
@@ -24,9 +26,18 @@ abstract class AbstractManageJsonController extends Controller
     use TraitManageProps;
     use TraitManageStatuses;
     use TraitManageRelationships;
+    use TraitManageTransitions;
 
     protected $type = "";
     protected $typeModel = "";
+
+    private $list = [
+        "_prp" => Pages::Prop,
+        "_ltn" => Pages::Listener,
+        "_stt" => Pages::Status,
+        "_rls" => Pages::Relationship,
+        "_tst" => Pages::Transition,
+    ];
 
     public function getType()
     {
@@ -36,10 +47,7 @@ abstract class AbstractManageJsonController extends Controller
     protected function getPage(Request $request)
     {
         $pathInfo = $request->getPathInfo();
-        if (strpos($pathInfo, "_prp")) return Pages::Prop;
-        if (strpos($pathInfo, "_ltn")) return Pages::Listener;
-        if (strpos($pathInfo, "_stt")) return Pages::Status;
-        if (strpos($pathInfo, "_rls")) return Pages::Relationship;
+        foreach ($this->list as $key => $value) if (strpos($pathInfo, $key)) return $value;
         return "Unknown pathInfo $pathInfo";
     }
 
@@ -51,51 +59,24 @@ abstract class AbstractManageJsonController extends Controller
     public function index(Request $request)
     {
         $page = $this->getPage($request);
-        switch ($page) {
-            case Pages::Prop:
-                return $this->indexProp($request);
-            case Pages::Relationship:
-                return $this->indexRelationship($request);
-            case Pages::Listener:
-                return $this->indexListener($request);
-            case Pages::Status:
-                return $this->indexStatus($request);
-            default:
-                dd($page);
-        }
+        if (in_array($page, $this->list))
+            return $this->{"index{$page}"}($request);
+        dd($page);
     }
 
     public function create(Request $request)
     {
         $page = $this->getPage($request);
-        switch ($page) {
-            case Pages::Prop:
-                return $this->createProp($request);
-            case Pages::Relationship:
-                return $this->createRelationship($request);
-            case Pages::Listener:
-                return $this->createListener($request);
-            case Pages::Status:
-                return $this->createStatus($request);
-            default:
-                dd($page);
-        }
+        if (in_array($page, $this->list))
+            return $this->{"create{$page}"}($request);
+        dd($page);
     }
 
     public function store(Request $request)
     {
         $page = $this->getPage($request);
-        switch ($page) {
-            case Pages::Prop:
-                return $this->storeProp($request);
-            case Pages::Relationship:
-                return $this->storeRelationship($request);
-            case Pages::Listener:
-                return $this->storeListener($request);
-            case Pages::Status:
-                return $this->storeStatus($request);
-            default:
-                dd($page);
-        }
+        if (in_array($page, $this->list))
+            return $this->{"store{$page}"}($request);
+        dd($page);
     }
 }
