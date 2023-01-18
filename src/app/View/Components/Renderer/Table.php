@@ -195,7 +195,8 @@ class Table extends Component
       $trs[] = "<tr class='hover:bg-gray-100 $bgClass text-gray-700 dark:text-gray-400'>" . join("", $tds) . "</tr>";
 
       if (isset($dataLine['rowDescription'])) {
-        $trs[] = "<tr class='bg-gray-100 '><td class='p-2 text-xs text-gray-600' colspan=$colspan>{$dataLine['rowDescription']}</td></tr>";
+        $colspan_minus_1 = $colspan - 1;
+        $trs[] = "<tr class='bg-gray-100 '><td></td><td class='p-2 text-xs text-gray-600' colspan=$colspan_minus_1>{$dataLine['rowDescription']}</td></tr>";
       }
     }
     $trtd = join("", $trs);

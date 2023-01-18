@@ -18,11 +18,12 @@ trait TraitManage_Obj
         ]);
     }
 
-    function storeObj(Request $request, string $jsonGetSet, $key)
+    function storeObj(Request $request, string $jsonGetSet, $key, array $excluded = [])
     {
         $obj = $this->pages[$key];
         $data = $request->input();
-        $columns = array_filter($this->{"getColumns$obj"}(), fn ($column) => !in_array($column['dataIndex'], ['action']));
+        $excluded = ['action', ...$excluded,];
+        $columns = array_filter($this->{"getColumns$obj"}(), fn ($column) => !in_array($column['dataIndex'], $excluded));
         $result = $jsonGetSet::convertHttpObjectToJson($data, $columns);
         $this->handleMoveTo($result);
         if ($request->input('button')) {
