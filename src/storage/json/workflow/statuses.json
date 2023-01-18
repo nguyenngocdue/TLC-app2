@@ -155,8 +155,8 @@
         "color": "amber",
         "color_index": "200"
     },
-    "pending_acknowledgement": {
-        "name": "pending_acknowledgement",
+    "pending_ack": {
+        "name": "pending_ack",
         "title": "Pending Acknowledgement",
         "color": "orange",
         "color_index": "800"

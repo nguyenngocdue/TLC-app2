@@ -35,6 +35,7 @@ trait TraitManageTransitions
             'editable' => true,
             'align' => 'center',
             'title' => $i['title'],
+            'width' => 100,
         ], $allStatuses);
         $columns = array_merge($firstColumn, $columns);
         // dump($columns);

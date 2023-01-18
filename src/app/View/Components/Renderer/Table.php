@@ -98,7 +98,7 @@ class Table extends Component
   {
     $tds = [];
     // Log::info($columns);
-    foreach ($columns as $index => $column) {
+    foreach (array_values($columns) as $index => $column) {
       $renderer = $column['renderer'] ?? false;
       switch ($renderer) {
         case  'no.':

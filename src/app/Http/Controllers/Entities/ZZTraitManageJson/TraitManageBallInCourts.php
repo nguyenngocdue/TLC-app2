@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\BallInCourts;
+use App\Utils\Support\Transitions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -18,6 +19,7 @@ trait TraitManageBallInCourts
                 'renderer' => 'status',
                 'align' => 'center',
                 'title' => 'Name',
+                'width' => 10,
             ],
             [
                 "dataIndex" => 'name',
@@ -25,22 +27,22 @@ trait TraitManageBallInCourts
                 'editable' => true,
                 'align' => 'center',
                 'title' => 'Key',
+                'width' => 10,
             ],
             [
                 "dataIndex" => 'ball-in-court',
                 'renderer' => 'dropdown',
                 'editable' => true,
-                "cbbDataSource" => ['', 'creator', 'assignee_1', 'assignee_2', 'assignee_3', 'assignee_4', 'assignee_5', 'assignee_6', 'assignee_7', 'assignee_8', 'assignee_9',],
-                // 'align' => 'center',
-                // 'title' => 'Key',
+                "cbbDataSource" => ['', 'creator', 'asgn_1', 'asgn_2', 'asgn_3', 'asgn_4', 'asgn_5', 'asgn_6', 'asgn_7', 'asgn_8', 'asgn_9',],
+                'width' => 10,
             ],
         ];
         $columns = array_map(fn ($i) => [
             'dataIndex' => $i['name'],
-            'renderer' => 'checkbox',
-            'editable' => true,
+            'renderer' => 'text',
             'align' => 'center',
             'width' => 10,
+            'title' => $i['title'],
         ], $allStatuses);
         return array_merge($firstColumns, $columns);
     }
@@ -50,17 +52,35 @@ trait TraitManageBallInCourts
         $allStatuses = LibStatuses::getFor($this->type);
         $dataInJson = BallInCourts::getAllOf($this->type);
         $result = [];
-        foreach ($allStatuses as $status) {
-            $name = $status['name'];
+        $workflow0 = Transitions::getAllOf($this->type);
+        // dump($workflow0);
+        $bic = BallInCourts::getAllOf($this->type);
+        // dump($bic);
+        foreach ($allStatuses as $status1) {
+            $name = $status1['name'];
             if (isset($dataInJson[$name])) {
-                $result[] = $dataInJson[$name];
+                $newItem = $dataInJson[$name];
             } else {
-                $result[] = ['name' => $name];
+                $newItem = ['name' => $name];
             }
+            $workflow = $workflow0[$name];
+            unset($workflow['name']);
+            $workflowArray = [];
+            foreach ($workflow as $k => $v) {
+                if ($v) $workflowArray[] = $k;
+            }
+            // dump($workflow);
+            // dump($workflowArray);
+            foreach (array_keys($allStatuses) as $status2) {
+                if (is_array($workflow) && in_array($status2, $workflowArray)) {
+                    $a1 = $bic[$name]['ball-in-court'];
+                    $a2 = $bic[$status2]['ball-in-court'];
+                    $newItem[$status2] = "$a1 -> $a2";
+                }
+            }
+
+            $result[] = $newItem;
         }
-        // dump($allStatuses);
-        // dump($dataInJson);
-        // dump($result);
         return $result;
     }
 
