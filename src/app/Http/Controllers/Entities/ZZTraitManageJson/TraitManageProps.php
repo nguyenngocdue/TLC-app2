@@ -236,33 +236,17 @@ trait TraitManageProps
 
     public function indexProp(Request $request)
     {
-        return view('dashboards.pages.manage-prop', [
-            'title' => $this->getTitle($request),
-            'type' => $this->type,
-            'route' => route($this->type . '_prp.store'),
-            'columns' => $this->getColumnsProp(),
-            'dataSource' => array_values($this->getDataSourceProp()),
-        ]);
+        return $this->indexObj($request, "dashboards.pages.manage-prop", '_prp');
     }
 
     public function storeProp(Request $request)
     {
-        $data = $request->input();
-        $columns = array_filter($this->getColumnsProp(), fn ($column) => !in_array($column['dataIndex'], ['action']));
-        // dump($data);
-        $result = Props::convertHttpObjectToJson($data, $columns);
-        // dump($result);
-        $this->handleMoveTo($result);
-        if ($request->input('button')) {
-            [$direction, $name] = explode(",", $request->input('button'));
-            Props::move($result, $direction, $name);
-        }
-        Props::setAllOf($this->type, $result);
-        return back();
+        return $this->storeObj($request, Props::class, '_prp');
     }
 
     public function createProp(Request $request)
     {
+        // $this->createObj($request, Props::class);
         $name = $request->input('name')[0];
         $names = explode("|", $name);
         $newItems = [];

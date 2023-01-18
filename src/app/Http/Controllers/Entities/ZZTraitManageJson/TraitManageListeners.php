@@ -42,8 +42,6 @@ trait TraitManageListeners
                 "dataIndex" => "triggers",
                 "renderer" => "text",
                 "editable" => true,
-                // "cbbDataSource" => $columns,
-                // "properties" => ["strFn" => 'same'],
             ],
             [
                 "dataIndex" => "listen_to_fields",
@@ -59,7 +57,7 @@ trait TraitManageListeners
         ];
     }
 
-    public function indexListener(Request $request)
+    private function getDataSourceListener()
     {
         $dataSource = Listeners::getAllOf($this->type);
         // dump($dataSource);
@@ -68,41 +66,21 @@ trait TraitManageListeners
             <x-renderer.button htmlType='submit' name='button' size='xs' value='right_by_name,$key' type='danger' outline=true><i class='fa fa-trash'></i></x-renderer.button>
         </div>");
         }
+        return $dataSource;
+    }
 
-        return view("dashboards.pages.manage-listener", [
-            'title' => $this->getTitle($request),
-            'type' => $this->type,
-            'route' => route($this->type . '_ltn.store'),
-            'columns' => $this->getColumnsListener(),
-            'dataSource' => array_values($dataSource),
-        ]);
+    public function indexListener(Request $request)
+    {
+        return $this->indexObj($request, "dashboards.pages.manage-listener", '_ltn');
     }
 
     public function storeListener(Request $request)
     {
-        $data = $request->input();
-        $columns = array_filter($this->getColumnsListener(), fn ($column) => !in_array($column['dataIndex'], ['action']));
-        $result = Listeners::convertHttpObjectToJson($data, $columns);
-        // $this->handleMoveTo($result);
-        if ($request->input('button')) {
-            [$direction, $name] = explode(",", $request->input('button'));
-            Listeners::move($result, $direction, $name);
-        }
-        Listeners::setAllOf($this->type, $result);
-        return back();
+        return $this->storeObj($request, Listeners::class, '_ltn');
     }
 
     public function createListener(Request $request)
     {
-        $name = $request->input('name')[0];
-        $names = explode("|", $name);
-        $newItems = [];
-        foreach ($names as $name) $newItems[$name] = [
-            'name' => "_" . $name,
-            'column_name' => $name,
-        ];
-        $dataSource = Listeners::getAllOf($this->type) + $newItems;
-        Listeners::setAllOf($this->type, $dataSource);
-        return back();
+        return $this->createObj($request, Listeners::class);
     }
 }

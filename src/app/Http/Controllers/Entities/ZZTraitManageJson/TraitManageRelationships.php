@@ -116,10 +116,10 @@ trait TraitManageRelationships
         }
     }
 
-    private function getDataSourceRelationship($type)
+    private function getDataSourceRelationship()
     {
-        $result = $this->makeBlankDefaultObjectRelationship($type);
-        $json = Relationships::getAllOf($type);
+        $result = $this->makeBlankDefaultObjectRelationship($this->type);
+        $json = Relationships::getAllOf($this->type);
         $this->renewColumnRelationship($json, $result, 'relationship');
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColorRelationship($result, $json);
 
@@ -144,32 +144,14 @@ trait TraitManageRelationships
 
         return $result;
     }
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+
     public function indexRelationship(Request $request)
     {
-        return view('dashboards.pages.manage-relationship', [
-            'title' => $this->getTitle($request),
-            'type' => $this->type,
-            'route' => route($this->type . '_rls.store'),
-            'columns' => $this->getColumnsRelationship(),
-            'dataSource' => array_values($this->getDataSourceRelationship($this->type)),
-        ]);
+        return $this->indexObj($request, "dashboards.pages.manage-relationship", '_rls');
     }
 
     public function storeRelationship(Request $request)
     {
-        $data = $request->input();
-        $columns = array_filter($this->getColumnsRelationship(), fn ($column) => !in_array($column['dataIndex'], ['action']));
-        $result = Relationships::convertHttpObjectToJson($data, $columns);
-        if ($request->input('button')) {
-            [$direction, $name] = explode(",", $request->input('button'));
-            Relationships::move($result, $direction, $name);
-        }
-        Relationships::setAllOf($this->type, $result);
-        return back();
+        return $this->storeObj($request, Relationships::class, '_rls');
     }
 }

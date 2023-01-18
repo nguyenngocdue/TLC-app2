@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManage_Obj;
 use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageActionButtons;
 use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageListeners;
 use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageProps;
@@ -24,6 +25,8 @@ class Pages
 
 abstract class AbstractManageJsonController extends Controller
 {
+    use TraitManage_Obj; //<< The Parent Trait
+
     use TraitManageListeners;
     use TraitManageProps;
     use TraitManageStatuses;
@@ -34,7 +37,7 @@ abstract class AbstractManageJsonController extends Controller
     protected $type = "";
     protected $typeModel = "";
 
-    private $list = [
+    private $pages = [
         "_prp" => Pages::Prop,
         "_ltn" => Pages::Listener,
         "_stt" => Pages::Status,
@@ -51,7 +54,7 @@ abstract class AbstractManageJsonController extends Controller
     protected function getPage(Request $request)
     {
         $pathInfo = $request->getPathInfo();
-        foreach ($this->list as $key => $value) if (strpos($pathInfo, $key)) return $value;
+        foreach ($this->pages as $key => $value) if (strpos($pathInfo, $key)) return $value;
         return "Unknown pathInfo $pathInfo";
     }
 
@@ -63,24 +66,21 @@ abstract class AbstractManageJsonController extends Controller
     public function index(Request $request)
     {
         $page = $this->getPage($request);
-        if (in_array($page, $this->list))
-            return $this->{"index{$page}"}($request);
+        if (in_array($page, $this->pages)) return $this->{"index{$page}"}($request);
         dd($page);
     }
 
     public function create(Request $request)
     {
         $page = $this->getPage($request);
-        if (in_array($page, $this->list))
-            return $this->{"create{$page}"}($request);
+        if (in_array($page, $this->pages)) return $this->{"create{$page}"}($request);
         dd($page);
     }
 
     public function store(Request $request)
     {
         $page = $this->getPage($request);
-        if (in_array($page, $this->list))
-            return $this->{"store{$page}"}($request);
+        if (in_array($page, $this->pages)) return $this->{"store{$page}"}($request);
         dd($page);
     }
 }

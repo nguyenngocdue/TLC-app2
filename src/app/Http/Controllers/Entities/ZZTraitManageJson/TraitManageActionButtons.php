@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\ActionButtons;
-use App\Utils\Support\Transitions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -59,32 +58,13 @@ trait TraitManageActionButtons
         return $result;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function indexActionButton(Request $request)
     {
-        return view('dashboards.pages.manage-action-button', [
-            'title' => $this->getTitle($request),
-            'type' => $this->type,
-            'route' => route($this->type . '_atb.store'),
-            'columns' => $this->getColumnsActionButton(),
-            'dataSource' => array_values($this->getDataSourceActionButton($this->type)),
-        ]);
+        return $this->indexObj($request, "dashboards.pages.manage-action-button", '_atb');
     }
 
     public function storeActionButton(Request $request)
     {
-        $data = $request->input();
-        $columns = array_filter($this->getColumnsActionButton(), fn ($column) => !in_array($column['dataIndex'], ['action']));
-        $result = ActionButtons::convertHttpObjectToJson($data, $columns);
-        if ($request->input('button')) {
-            [$direction, $name] = explode(",", $request->input('button'));
-            ActionButtons::move($result, $direction, $name);
-        }
-        ActionButtons::setAllOf($this->type, $result);
-        return back();
+        return $this->storeObj($request, ActionButtons::class, '_atb');
     }
 }

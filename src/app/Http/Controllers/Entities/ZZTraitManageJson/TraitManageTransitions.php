@@ -58,32 +58,13 @@ trait TraitManageTransitions
         return $result;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function indexTransition(Request $request)
     {
-        return view('dashboards.pages.manage-transition', [
-            'title' => $this->getTitle($request),
-            'type' => $this->type,
-            'route' => route($this->type . '_tst.store'),
-            'columns' => $this->getColumnsTransition(),
-            'dataSource' => array_values($this->getDataSourceTransition($this->type)),
-        ]);
+        return $this->indexObj($request, "dashboards.pages.manage-transition", '_tst');
     }
 
     public function storeTransition(Request $request)
     {
-        $data = $request->input();
-        $columns = array_filter($this->getColumnsTransition(), fn ($column) => !in_array($column['dataIndex'], ['action']));
-        $result = Transitions::convertHttpObjectToJson($data, $columns);
-        if ($request->input('button')) {
-            [$direction, $name] = explode(",", $request->input('button'));
-            Transitions::move($result, $direction, $name);
-        }
-        Transitions::setAllOf($this->type, $result);
-        return back();
+        return $this->storeObj($request, Transitions::class, '_tst');
     }
 }
