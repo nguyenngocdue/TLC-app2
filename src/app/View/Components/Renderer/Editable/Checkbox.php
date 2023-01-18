@@ -27,6 +27,8 @@ class Checkbox extends Component
         return view('components.renderer.editable.checkbox', [
             'name' => $this->name,
             'value' => $this->cell === 'true',
+            'disabled' => $this->cell === 'disabled',
+            'invisible' => ($this->cell === 'invisible') ? "invisible" : "",
         ]);
     }
 }

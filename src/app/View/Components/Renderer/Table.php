@@ -88,7 +88,7 @@ class Table extends Component
 
   private function makeColumn($column)
   {
-    $renderer = $column['renderer'] ?? "_";
+    $renderer = $column['renderer'] ?? "_no_renderer_";
     $dataIndex = $column['dataIndex'];
     $title = $column['title'] ?? Str::headline($column['dataIndex']);
     return "<th class='{$dataIndex}_th px-4 py-3' title=\"{$dataIndex} / {$renderer}\">{$title}</th>";

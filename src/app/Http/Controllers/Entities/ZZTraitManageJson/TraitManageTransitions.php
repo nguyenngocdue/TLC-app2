@@ -51,10 +51,12 @@ trait TraitManageTransitions
         foreach ($allStatuses as $status) {
             $name = $status['name'];
             if (isset($dataInJson[$name])) {
-                $result[] = $dataInJson[$name];
+                $newItem = $dataInJson[$name];
             } else {
-                $result[] = ['name' => $name];
+                $newItem = ['name' => $name];
             }
+            $newItem[$name] = 'invisible';
+            $result[] = $newItem;
         }
         return $result;
     }
