@@ -1,0 +1,110 @@
+{
+    "new": {
+        "name": "new",
+        "new": "",
+        "pending_endorsed": "true",
+        "endorse_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_acknowledgement": "",
+        "active": ""
+    },
+    "pending_endorsed": {
+        "name": "pending_endorsed",
+        "new": "",
+        "pending_endorsed": "",
+        "endorse_rejected": "true",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_acknowledgement": "",
+        "active": ""
+    },
+    "endorse_rejected": {
+        "name": "endorse_rejected",
+        "new": "",
+        "pending_endorsed": "true",
+        "endorse_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_acknowledgement": "",
+        "active": ""
+    },
+    "pending_review": {
+        "name": "pending_review",
+        "new": "",
+        "pending_endorsed": "",
+        "endorse_rejected": "",
+        "pending_review": "",
+        "review_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "",
+        "pending_acknowledgement": "",
+        "active": ""
+    },
+    "review_rejected": {
+        "name": "review_rejected",
+        "new": "",
+        "pending_endorsed": "",
+        "endorse_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_acknowledgement": "",
+        "active": ""
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "new": "",
+        "pending_endorsed": "",
+        "endorse_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_acknowledgement": "true",
+        "active": ""
+    },
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "new": "",
+        "pending_endorsed": "",
+        "endorse_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "true",
+        "approval_rejected": "",
+        "pending_acknowledgement": "",
+        "active": ""
+    },
+    "pending_acknowledgement": {
+        "name": "pending_acknowledgement",
+        "new": "",
+        "pending_endorsed": "",
+        "endorse_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_acknowledgement": "",
+        "active": "true"
+    },
+    "active": {
+        "name": "active",
+        "new": "",
+        "pending_endorsed": "",
+        "endorse_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_acknowledgement": "",
+        "active": ""
+    }
+}

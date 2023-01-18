@@ -155,6 +155,12 @@
         "color": "amber",
         "color_index": "200"
     },
+    "pending_acknowledgement": {
+        "name": "pending_acknowledgement",
+        "title": "Pending Acknowledgement",
+        "color": "orange",
+        "color_index": "800"
+    },
     "pending_approval": {
         "name": "pending_approval",
         "title": "Pending Approval",

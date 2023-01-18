@@ -69,9 +69,11 @@ abstract class AbstractManageLibController extends Controller
     public function store(Request $request)
     {
         $dataSource = (array)$request->all();
-        $button = $dataSource['button'];
         unset($dataSource["_token"]);
-        unset($dataSource["button"]);
+        if (isset($dataSource['button'])) {
+            $button = $dataSource['button'];
+            unset($dataSource["button"]);
+        }
 
         $dataSource = $this->distributeArrayToObject($dataSource);
         if ($request->input('button')) {
