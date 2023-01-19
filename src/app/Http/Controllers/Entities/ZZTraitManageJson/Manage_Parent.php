@@ -5,35 +5,8 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 
-class Pages
-{
-    const Prop = "Prop";
-    const Listener = "Listener";
-    const Relationship = "Relationship";
-    const Status = "Status";
-    const Transition = "Transition";
-    const ActionButton = "ActionButton";
-    const Setting = "Setting";
-    const BallInCourt = "BallInCourt";
-    const Visibility = "Visibility";
-    const UnitTest = "UnitTest";
-}
-
 abstract class Manage_Parent
 {
-    private $pages = [
-        "_prp" => Pages::Prop,
-        "_ltn" => Pages::Listener,
-        "_stt" => Pages::Status,
-        "_rls" => Pages::Relationship,
-        "_tst" => Pages::Transition,
-        "_atb" => Pages::ActionButton,
-        "_stn" => Pages::Setting,
-        "_bic" => Pages::BallInCourt,
-        "_vsb" => Pages::Visibility,
-        "_unt" => Pages::UnitTest,
-    ];
-
     protected $viewName;
     protected $routeKey;
     protected $jsonGetSet;
@@ -93,7 +66,6 @@ abstract class Manage_Parent
     function store(Request $request)
     {
         $jsonGetSet = $this->jsonGetSet;
-        $obj = $this->pages[$this->routeKey];
         $data = $request->input();
 
         //Make up the columns
