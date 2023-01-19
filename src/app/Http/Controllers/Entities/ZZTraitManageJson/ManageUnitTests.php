@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Utils\Support\Json\UnitTests;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class ManageUnitTests extends Manage_Parent
@@ -11,6 +10,7 @@ class ManageUnitTests extends Manage_Parent
     protected $viewName = "dashboards.pages.manage-unit-test";
     protected $routeKey = "_unt";
     protected $jsonGetSet = UnitTests::class;
+    // protected $excludedColumnsFromStoring = ['description'];
 
     protected function getColumns()
     {

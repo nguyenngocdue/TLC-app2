@@ -48,17 +48,17 @@ Route::group([
 
                 Route::resource("{$singular}_prp", "{$path}ManageJsonController")->only('index', 'store', 'create');
                 Route::resource("{$singular}_rls", "{$path}ManageJsonController")->only('index', 'store');
-
                 Route::resource("{$singular}_ltn", "{$path}ManageJsonController")->only('index', 'store', 'create');
                 Route::resource("{$singular}_stt", "{$path}ManageJsonController")->only('index', 'store');
-
                 Route::resource("{$singular}_tst", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_atb", "{$path}ManageJsonController")->only('index', 'store');
-
                 Route::resource("{$singular}_stn", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_bic", "{$path}ManageJsonController")->only('index', 'store');
 
-                Route::resource("{$singular}_vsb", "{$path}ManageJsonController")->only('index', 'store', 'create');
+                Route::resource("{$singular}_vsb", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_rol", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_rqr", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_hdn", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_unt", "{$path}ManageJsonController")->only('index', 'store', 'create');
             });
         }

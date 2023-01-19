@@ -84,7 +84,21 @@ class ManageProps extends Manage_Parent
                 'width' => 10,
             ],
             [
-                "dataIndex" => "label_hidden_edit",
+                "dataIndex" => "hidden_label",
+                "align" => "center",
+                "editable" => true,
+                "renderer" => "checkbox",
+                'width' => 10,
+            ],
+            [
+                "dataIndex" => "hidden_filter",
+                "align" => "center",
+                "editable" => true,
+                "renderer" => "checkbox",
+                'width' => 10,
+            ],
+            [
+                "dataIndex" => "hidden_print",
                 "align" => "center",
                 "editable" => true,
                 "renderer" => "checkbox",

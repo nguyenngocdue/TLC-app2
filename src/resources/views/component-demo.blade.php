@@ -102,7 +102,7 @@
             Grid colSpan=4 itemRenderer=x-renderer.avatar-name
             <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name"></x-renderer.grid>
             <br />
-            Grid colSpan=4 itemRenderer=x-renderer.avatar-name groupBy=name
+            Grid colSpan=4 itemRenderer=x-renderer.avatar-name groupBy=name 
             <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name" groupBy="name"></x-renderer.grid>
         </x-renderer.card>
 
@@ -182,7 +182,7 @@
 
             <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive)">
                 showNoR= { { true } }
-                groupBy="client"
+                groupBy="client" groupByLength=1
 
                 <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="client" />
             </x-renderer.card>

@@ -23,6 +23,7 @@ class Table extends Component
     private $showNo = false,
     private $showNoR = false,
     private $groupBy = false,
+    private $groupByLength = 1,
     private $header = "",
     private $footer = "",
   ) {
@@ -183,7 +184,7 @@ class Table extends Component
 
       if ($this->groupBy) {
         if (isset($dataLine[$this->groupBy][0])) { //<< this to make sure an item with empty name doesn't crash the app
-          $index = strtoupper($dataLine[$this->groupBy][0]);
+          $index = strtoupper(substr($dataLine[$this->groupBy], 0, $this->groupByLength));
           if ($index !== $lastIndex) {
             $lastIndex = $index;
             $trs[] = "<tr class='bg-gray-100 '><td class='p-2 text-lg font-bold text-gray-600' colspan=$colspan>{$index}</td></tr>";

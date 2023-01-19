@@ -18,8 +18,12 @@ class Pages
     const ActionButton = "ActionButton";
     const Setting = "Setting";
     const BallInCourt = "BallInCourt";
-    const Visibility = "Visibility";
     const UnitTest = "UnitTest";
+
+    const VisibleProp = "VVisibleProp";
+    const ReadOnlyProp = "VReadOnlyProp";
+    const RequiredProp = "VRequiredProp";
+    const HiddenProp = "VHiddenProp";
 }
 
 abstract class AbstractManageJsonController extends Controller
@@ -36,8 +40,12 @@ abstract class AbstractManageJsonController extends Controller
         "_atb" => Pages::ActionButton,
         "_stn" => Pages::Setting,
         "_bic" => Pages::BallInCourt,
-        "_vsb" => Pages::Visibility,
         "_unt" => Pages::UnitTest,
+
+        "_vsb" => Pages::VisibleProp,
+        "_rol" => Pages::ReadOnlyProp,
+        "_rqr" => Pages::RequiredProp,
+        "_hdn" => Pages::HiddenProp,
     ];
 
     public function getType(Request $request = null)
