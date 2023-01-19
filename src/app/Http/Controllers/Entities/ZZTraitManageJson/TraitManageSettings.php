@@ -29,6 +29,7 @@ trait TraitManageSettings
             'renderer' => 'checkbox',
             'editable' => true,
             'align' => 'center',
+            'title' => $i['title'],
         ], $allStatuses);
         return array_merge($firstColumns, $columns);
     }

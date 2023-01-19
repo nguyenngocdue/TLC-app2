@@ -14,7 +14,7 @@
     },
     "pending_endorsed": {
         "name": "pending_endorsed",
-        "ball-in-court": "asgn_1",
+        "ball-in-court": "assignee_1",
         "new": "",
         "pending_endorsed": "",
         "endorse_rejected": "",
@@ -40,7 +40,7 @@
     },
     "pending_review": {
         "name": "pending_review",
-        "ball-in-court": "asgn_2",
+        "ball-in-court": "assignee_2",
         "new": "",
         "pending_endorsed": "",
         "endorse_rejected": "",
@@ -53,7 +53,7 @@
     },
     "review_rejected": {
         "name": "review_rejected",
-        "ball-in-court": "asgn_1",
+        "ball-in-court": "assignee_1",
         "new": "",
         "pending_endorsed": "",
         "endorse_rejected": "",
@@ -66,7 +66,7 @@
     },
     "pending_approval": {
         "name": "pending_approval",
-        "ball-in-court": "asgn_1",
+        "ball-in-court": "assignee_1",
         "new": "",
         "pending_endorsed": "",
         "endorse_rejected": "",
@@ -79,7 +79,7 @@
     },
     "approval_rejected": {
         "name": "approval_rejected",
-        "ball-in-court": "asgn_2",
+        "ball-in-court": "assignee_2",
         "new": "",
         "pending_endorsed": "",
         "endorse_rejected": "",
@@ -92,7 +92,7 @@
     },
     "pending_ack": {
         "name": "pending_ack",
-        "ball-in-court": "asgn_3",
+        "ball-in-court": "assignee_3",
         "new": "",
         "pending_endorsed": "",
         "endorse_rejected": "",
@@ -105,7 +105,7 @@
     },
     "active": {
         "name": "active",
-        "ball-in-court": "asgn_2",
+        "ball-in-court": "assignee_2",
         "new": "",
         "pending_endorsed": "",
         "endorse_rejected": "",

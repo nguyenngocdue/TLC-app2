@@ -33,7 +33,7 @@ trait TraitManageBallInCourts
                 "dataIndex" => 'ball-in-court',
                 'renderer' => 'dropdown',
                 'editable' => true,
-                "cbbDataSource" => ['', 'creator', 'asgn_1', 'asgn_2', 'asgn_3', 'asgn_4', 'asgn_5', 'asgn_6', 'asgn_7', 'asgn_8', 'asgn_9',],
+                "cbbDataSource" => ['', 'creator', 'assignee_1', 'assignee_2', 'assignee_3', 'assignee_4', 'assignee_5', 'assignee_6', 'assignee_7', 'assignee_8', 'assignee_9',],
                 'width' => 10,
             ],
         ];

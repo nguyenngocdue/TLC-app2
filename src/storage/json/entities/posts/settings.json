@@ -1,0 +1,62 @@
+{
+    "new": {
+        "name": "new",
+        "new": "true",
+        "pending_endorsed": "",
+        "endorse_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": "true"
+    },
+    "read-only": {
+        "name": "read-only",
+        "new": "",
+        "pending_endorsed": "true",
+        "endorse_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "true",
+        "active": ""
+    },
+    "hide-save-btn": {
+        "name": "hide-save-btn",
+        "new": "",
+        "pending_endorsed": "",
+        "endorse_rejected": "true",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
+    },
+    "closed": {
+        "name": "closed",
+        "new": "",
+        "pending_endorsed": "",
+        "endorse_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "true",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
+    "post_closed": {
+        "name": "post_closed",
+        "new": "",
+        "pending_endorsed": "",
+        "endorse_rejected": "",
+        "pending_review": "",
+        "review_rejected": "true",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    }
+}
