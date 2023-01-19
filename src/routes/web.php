@@ -57,6 +57,9 @@ Route::group([
 
                 Route::resource("{$singular}_stn", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_bic", "{$path}ManageJsonController")->only('index', 'store');
+
+                Route::resource("{$singular}_vsb", "{$path}ManageJsonController")->only('index', 'store', 'create');
+                Route::resource("{$singular}_unt", "{$path}ManageJsonController")->only('index', 'store', 'create');
             });
         }
     });

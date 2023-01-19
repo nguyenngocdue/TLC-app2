@@ -224,11 +224,7 @@ trait TraitManageProps
 
         foreach ($json as $key => $columns) {
             if (isset($columns['row_color']) && $columns['row_color'] === "green") continue;
-            $json[$key]['action'] = Blade::render("<div class='whitespace-nowrap'>
-                <x-renderer.button htmlType='submit' name='button' size='xs' value='up,$key'><i class='fa fa-arrow-up'></i></x-renderer.button>
-                <x-renderer.button htmlType='submit' name='button' size='xs' value='down,$key'><i class='fa fa-arrow-down'></i></x-renderer.button>
-                <x-renderer.button htmlType='submit' name='button' size='xs' value='right_by_name,$key' type='danger' outline=true><i class='fa fa-trash'></i></x-renderer.button>
-            </div>");
+            $this->attachActionButtons($json, $key, ['up', 'down', 'right_by_name']);
         }
 
         return $json;

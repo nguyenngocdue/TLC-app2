@@ -63,19 +63,21 @@ trait TraitManageBallInCourts
             } else {
                 $newItem = ['name' => $name];
             }
-            $workflow = $workflow0[$name];
-            unset($workflow['name']);
-            $workflowArray = [];
-            foreach ($workflow as $k => $v) {
-                if ($v) $workflowArray[] = $k;
-            }
-            // dump($workflow);
-            // dump($workflowArray);
-            foreach (array_keys($allStatuses) as $status2) {
-                if (is_array($workflow) && in_array($status2, $workflowArray)) {
-                    $a1 = $bic[$name]['ball-in-court'];
-                    $a2 = $bic[$status2]['ball-in-court'];
-                    $newItem[$status2] = "$a1 -> $a2";
+            if (isset($workflow0[$name])) {
+                $workflow = $workflow0[$name];
+                unset($workflow['name']);
+                $workflowArray = [];
+                foreach ($workflow as $k => $v) {
+                    if ($v) $workflowArray[] = $k;
+                }
+                // dump($workflow);
+                // dump($workflowArray);
+                foreach (array_keys($allStatuses) as $status2) {
+                    if (is_array($workflow) && in_array($status2, $workflowArray)) {
+                        $a1 = $bic[$name]['ball-in-court'];
+                        $a2 = $bic[$status2]['ball-in-court'];
+                        $newItem[$status2] = "$a1 -> $a2";
+                    }
                 }
             }
 

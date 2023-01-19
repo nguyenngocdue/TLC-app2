@@ -60,11 +60,8 @@ trait TraitManageListeners
     private function getDataSourceListener()
     {
         $dataSource = Listeners::getAllOf($this->type);
-        // dump($dataSource);
-        foreach ($dataSource as $key => &$item) {
-            $item['action'] = Blade::render("<div class='whitespace-nowrap'>
-            <x-renderer.button htmlType='submit' name='button' size='xs' value='right_by_name,$key' type='danger' outline=true><i class='fa fa-trash'></i></x-renderer.button>
-        </div>");
+        foreach (array_keys($dataSource) as $key) {
+            $this->attachActionButtons($dataSource, $key, ['right_by_name']);
         }
         return $dataSource;
     }

@@ -47,14 +47,12 @@ trait TraitManageActionButtons
         foreach ($allStatuses as $status) {
             $name = $status['name'];
             if (isset($dataInJson[$name])) {
-                $result[] = $dataInJson[$name];
+                $newItem = $dataInJson[$name];
             } else {
-                $result[] = ['name' => $name];
+                $newItem = ['name' => $name];
             }
+            $result[] = $newItem;
         }
-        // dump($allStatuses);
-        // dump($dataInJson);
-        // dump($result);
         return $result;
     }
 

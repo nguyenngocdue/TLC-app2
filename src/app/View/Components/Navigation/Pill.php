@@ -38,10 +38,13 @@ class Pill extends Component
         $links[] = ['href' => route($singular . '_atb.index'), 'disabled' => strpos($as, '_atb.') !== false, 'title' => 'Action Buttons',];
         $links[] = ['href' => route($singular . '_stn.index'), 'disabled' => strpos($as, '_stn.') !== false, 'title' => 'Settings',];
 
-        $links[] = ['href' => route($singular . '_prp.index'), 'disabled' => strpos($as, '_stt5.') !== false, 'title' => 'Visibilities',];
+        $links[] = ['href' => route($singular . '_vsb.index'), 'disabled' => strpos($as, '_vsb.') !== false, 'title' => 'Visibilities',];
         $links[] = ['href' => route($singular . '_prp.index'), 'disabled' => strpos($as, '_stt6.') !== false, 'title' => 'In Between',];
         $links[] = ['href' => route($singular . '_prp.index'), 'disabled' => strpos($as, '_stt7.') !== false, 'title' => 'Capabilities',];
         $links[] = ['href' => route($singular . '_prp.index'), 'disabled' => strpos($as, '_stt8.') !== false, 'title' => 'Default Values',];
+
+
+        $links[] = ['href' => route($singular . '_unt.index'), 'disabled' => strpos($as, '_unt.') !== false, 'title' => 'Unit Tests',];
 
         return view('components.navigation.pill')->with(compact('links'));
     }

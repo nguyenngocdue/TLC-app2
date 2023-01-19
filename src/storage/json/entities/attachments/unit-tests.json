@@ -1,0 +1,26 @@
+{
+    "_ngo": {
+        "name": "_ngo",
+        "column_name": "ngo",
+        "text_value": "a",
+        "number_value": "1",
+        "checkbox": "",
+        "dropdown": "value_1"
+    },
+    "_dinh": {
+        "name": "_dinh",
+        "column_name": "dinh",
+        "text_value": "b",
+        "number_value": "2",
+        "checkbox": "true",
+        "dropdown": "value_2"
+    },
+    "_canh": {
+        "name": "_canh",
+        "column_name": "canh",
+        "text_value": "c",
+        "number_value": "3",
+        "checkbox": "",
+        "dropdown": "value_3"
+    }
+}
