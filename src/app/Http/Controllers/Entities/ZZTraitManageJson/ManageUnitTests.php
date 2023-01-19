@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
-use App\Utils\Support\UnitTests;
+use App\Utils\Support\Json\UnitTests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 

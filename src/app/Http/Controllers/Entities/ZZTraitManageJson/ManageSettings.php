@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
-use App\Utils\Support\Settings;
+use App\Utils\Support\Json\Settings;
 use Illuminate\Support\Facades\Log;
 
 class ManageSettings extends Manage_Parent

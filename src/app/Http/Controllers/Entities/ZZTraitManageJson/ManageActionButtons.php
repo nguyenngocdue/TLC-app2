@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
-use App\Utils\Support\ActionButtons;
+use App\Utils\Support\Json\ActionButtons;
 use Illuminate\Support\Facades\Log;
 
 class ManageActionButtons extends Manage_Parent

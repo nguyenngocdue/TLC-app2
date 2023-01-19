@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Helpers\Helper;
-use App\Utils\Support\Relationships;
+use App\Utils\Support\Json\Relationships;
 
 trait TraitEntityM2M
 {

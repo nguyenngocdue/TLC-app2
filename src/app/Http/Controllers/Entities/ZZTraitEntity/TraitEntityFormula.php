@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Models\User;
-use App\Utils\Support\Props;
+use App\Utils\Support\Json\Props;
 use App\View\Components\Formula\All_ConcatNameWith123;
 use App\View\Components\Formula\All_SlugifyByName;
 use App\View\Components\Formula\User_PositionRendered;

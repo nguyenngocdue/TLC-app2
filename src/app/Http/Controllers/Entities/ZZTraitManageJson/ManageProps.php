@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Utils\Support\JsonControls;
-use App\Utils\Support\Props;
+use App\Utils\Support\Json\Props;
 use App\Utils\Support\DBTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;

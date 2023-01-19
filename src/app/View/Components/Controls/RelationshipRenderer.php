@@ -4,7 +4,7 @@ namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\Relationships;
+use App\Utils\Support\Json\Relationships;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 

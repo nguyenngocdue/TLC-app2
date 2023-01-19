@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
-use App\Utils\Support\Visibilities;
+use App\Utils\Support\Json\Visibilities;
 use Illuminate\Support\Facades\Log;
 
 class ManageVisibilities extends Manage_Parent

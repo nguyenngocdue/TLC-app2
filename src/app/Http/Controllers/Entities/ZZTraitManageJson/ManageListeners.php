@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Utils\Support\DBTable;
-use App\Utils\Support\Listeners;
+use App\Utils\Support\Json\Listeners;
 
 class ManageListeners extends Manage_Parent
 {

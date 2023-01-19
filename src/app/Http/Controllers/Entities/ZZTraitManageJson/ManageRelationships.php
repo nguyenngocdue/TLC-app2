@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Utils\Support\JsonControls;
-use App\Utils\Support\Relationships;
+use App\Utils\Support\Json\Relationships;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils\Support;
+namespace App\Utils\Support\Json;
 
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Arr;

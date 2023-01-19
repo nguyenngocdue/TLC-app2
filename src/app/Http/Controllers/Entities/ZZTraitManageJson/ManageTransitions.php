@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
-use App\Utils\Support\Transitions;
+use App\Utils\Support\Json\Transitions;
 use Illuminate\Support\Facades\Log;
 
 class ManageTransitions extends Manage_Parent

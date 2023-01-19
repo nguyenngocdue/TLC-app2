@@ -4,8 +4,8 @@ namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\Listeners;
-use App\Utils\Support\Props;
+use App\Utils\Support\Json\Listeners;
+use App\Utils\Support\Json\Props;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 

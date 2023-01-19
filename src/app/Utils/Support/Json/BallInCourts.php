@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils\Support;
+namespace App\Utils\Support\Json;
 
 class BallInCourts extends JsonGetSet
 {

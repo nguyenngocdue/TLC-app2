@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\Props;
+use App\Utils\Support\Json\Props;
 use Illuminate\Support\Str;
 
 trait TraitEntityCRUDCreateEdit

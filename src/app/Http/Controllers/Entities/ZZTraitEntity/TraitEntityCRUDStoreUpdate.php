@@ -6,7 +6,7 @@ use App\Events\EntityCreatedEvent;
 use App\Helpers\Helper;
 use App\Notifications\CreateNewNotification;
 use App\Notifications\EditNotification;
-use App\Utils\Support\Props;
+use App\Utils\Support\Json\Props;
 use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 use Illuminate\Http\Request;
