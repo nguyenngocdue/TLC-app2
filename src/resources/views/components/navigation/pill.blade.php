@@ -1,4 +1,4 @@
-<div class="flex flex-col flex-wrap mb-4 space-y-4 md:flex-row md:items-end md:space-x-1">
+<div class="flex flex-col flex-wrap m1b-4 space-y-2 md:flex-row md:items-end md:space-x-1">
     @foreach($links as $link)
     @php
         $className = ($link['disabled']) ? "opacity-50 cursor-not-allowed" : "active:bg-purple-600 hover:bg-purple-700 focus:shadow-outline-purple";
@@ -11,7 +11,7 @@
             </a>
             @endforeach
 </div>
-<div class="flex flex-col flex-wrap mb-4 space-y-4 md:flex-row md:items-end md:space-x-1">
+<div class="flex flex-col flex-wrap m1b-4 space-y-2 md:flex-row md:items-end md:space-x-1">
     @foreach($links1 as $link)
     @php
         $className = ($link['disabled']) ? "opacity-50 cursor-not-allowed" : "active:bg-purple-600 hover:bg-purple-700 focus:shadow-outline-purple";

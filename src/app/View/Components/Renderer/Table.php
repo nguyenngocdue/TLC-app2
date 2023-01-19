@@ -26,6 +26,7 @@ class Table extends Component
     private $groupByLength = 1,
     private $header = "",
     private $footer = "",
+    private $maxH = 40,
   ) {
   }
 
@@ -241,6 +242,7 @@ class Table extends Component
 
     $footer = $this->footer;
     $header = $this->header;
+    $maxH = $this->maxH;
     $colgroup = $this->makeColGroup($columns);
 
     return view("components.renderer.table")->with(compact(
@@ -253,6 +255,7 @@ class Table extends Component
       'header',
       'footer',
       'colgroup',
+      'maxH',
     ));
   }
 }
