@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Utils\Support\DBTable;
 use App\Utils\Support\Listeners;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Blade;
 
-trait TraitManageListeners
+class ManageListeners extends Manage_Parent
 {
-    private function getColumnsListener()
+    protected $viewName = "dashboards.pages.manage-listener";
+    protected $routeKey = "_ltn";
+    protected $jsonGetSet = Listeners::class;
+
+    protected function getColumns()
     {
         $columns = DBTable::getColumnNames($this->type);
         $columns = array_merge([""], $columns);
@@ -57,27 +59,12 @@ trait TraitManageListeners
         ];
     }
 
-    private function getDataSourceListener()
+    protected function getDataSource()
     {
         $dataSource = Listeners::getAllOf($this->type);
         foreach (array_keys($dataSource) as $key) {
             $this->attachActionButtons($dataSource, $key, ['right_by_name']);
         }
         return $dataSource;
-    }
-
-    public function indexListener(Request $request)
-    {
-        return $this->indexObj($request, "dashboards.pages.manage-listener", '_ltn');
-    }
-
-    public function storeListener(Request $request)
-    {
-        return $this->storeObj($request, Listeners::class, '_ltn');
-    }
-
-    public function createListener(Request $request)
-    {
-        return $this->createObj($request, Listeners::class);
     }
 }

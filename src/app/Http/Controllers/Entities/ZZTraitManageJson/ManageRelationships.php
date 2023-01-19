@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Relationships;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 
-trait TraitManageRelationships
+class ManageRelationships extends Manage_Parent
 {
-    private function getColumnsRelationship()
+    protected $viewName = "dashboards.pages.manage-relationship";
+    protected $routeKey = "_rls";
+    protected $jsonGetSet = Relationships::class;
+
+    protected function getColumns()
     {
         $viewAllControls = JsonControls::getRendererViewAll();
         $editControls = JsonControls::getRendererEdit();
@@ -75,7 +77,7 @@ trait TraitManageRelationships
         ];
     }
 
-    private function makeBlankDefaultObjectRelationship()
+    private function makeBlankDefaultObject()
     {
         $model = App::make($this->typeModel);
         $eloquentParams = $model->eloquentParams;
@@ -96,7 +98,7 @@ trait TraitManageRelationships
         return $result;
     }
 
-    private function addGreenAndRedColorRelationship($a, $b)
+    private function addGreenAndRedColor($a, $b)
     {
         $toBeGreen = array_diff_key($a, $b);
         $toBeRed = array_diff_key($b, $a);
@@ -104,7 +106,7 @@ trait TraitManageRelationships
         return [$toBeGreen, $toBeRed];
     }
 
-    private function renewColumnRelationship(&$a, $b, $column)
+    private function renewColumn(&$a, $b, $column)
     {
         foreach (array_keys($a) as $key) {
             if (!isset($b[$key])) continue;
@@ -116,12 +118,12 @@ trait TraitManageRelationships
         }
     }
 
-    private function getDataSourceRelationship()
+    protected function getDataSource()
     {
-        $result = $this->makeBlankDefaultObjectRelationship($this->type);
+        $result = $this->makeBlankDefaultObject($this->type);
         $json = Relationships::getAllOf($this->type);
-        $this->renewColumnRelationship($json, $result, 'relationship');
-        [$toBeGreen, $toBeRed] = $this->addGreenAndRedColorRelationship($result, $json);
+        $this->renewColumn($json, $result, 'relationship');
+        [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
 
         foreach ($json as $key => $columns) {
             $result[$key]["name"] = $key;
@@ -139,15 +141,5 @@ trait TraitManageRelationships
         }
 
         return $result;
-    }
-
-    public function indexRelationship(Request $request)
-    {
-        return $this->indexObj($request, "dashboards.pages.manage-relationship", '_rls');
-    }
-
-    public function storeRelationship(Request $request)
-    {
-        return $this->storeObj($request, Relationships::class, '_rls');
     }
 }

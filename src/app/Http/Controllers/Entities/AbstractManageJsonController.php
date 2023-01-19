@@ -3,18 +3,9 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManage_Obj;
-use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageActionButtons;
-use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageBallInCourts;
-use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageListeners;
-use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageProps;
-use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageRelationships;
-use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageSettings;
-use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageStatuses;
-use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageTransitions;
-use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageVisibilities;
-use App\Http\Controllers\Entities\ZZTraitManageJson\TraitManageUnitTests;
+use App\Http\Controllers\Entities\ZZTraitManageJson\Manage_Parent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
 
 class Pages
@@ -33,19 +24,6 @@ class Pages
 
 abstract class AbstractManageJsonController extends Controller
 {
-    use TraitManage_Obj; //<< The Parent Trait
-
-    use TraitManageListeners;
-    use TraitManageProps;
-    use TraitManageStatuses;
-    use TraitManageRelationships;
-    use TraitManageTransitions;
-    use TraitManageActionButtons;
-    use TraitManageSettings;
-    use TraitManageBallInCourts;
-    use TraitManageVisibilities;
-    use TraitManageUnitTests;
-
     protected $type = "";
     protected $typeModel = "";
 
@@ -62,9 +40,14 @@ abstract class AbstractManageJsonController extends Controller
         "_unt" => Pages::UnitTest,
     ];
 
-    public function getType()
+    public function getType(Request $request = null)
     {
-        return $this->type;
+        if (is_null($request)) return $this->type;
+        $pathInfo = $request->getPathInfo();
+        $path = substr($pathInfo, strpos($pathInfo, "/", 1) + 1); // /config/attachment_prp => attachment_prp
+        $path = substr($path, 0, strpos($path, "_", 1)); // attachment_prp => attachment
+        // dd($path);
+        return $path;
     }
 
     protected function getPage(Request $request)
@@ -79,24 +62,50 @@ abstract class AbstractManageJsonController extends Controller
         return "Manage " . Str::plural($this->getPage($request));
     }
 
-    public function index(Request $request)
+    private function getInstance(Request $request)
     {
         $page = $this->getPage($request);
-        if (in_array($page, $this->pages)) return $this->{"index{$page}"}($request);
-        dd($page);
+        if (!in_array($page, $this->pages)) dd($page);
+        $className = __NAMESPACE__ . "\\ZZTraitManageJson\\Manage" . Str::plural($page);
+        $type = $this->getType($request);
+        $typeModel = "App\\Models\\$type";
+        /** @var Manage_Parent $instance */
+        $instance = new $className($type, $typeModel);
+        return $instance;
+    }
+
+    public function index(Request $request)
+    {
+        return $this->getInstance($request)->index($request);
     }
 
     public function create(Request $request)
     {
-        $page = $this->getPage($request);
-        if (in_array($page, $this->pages)) return $this->{"create{$page}"}($request);
-        dd($page);
+        return $this->getInstance($request)->create($request);
     }
 
     public function store(Request $request)
     {
-        $page = $this->getPage($request);
-        if (in_array($page, $this->pages)) return $this->{"store{$page}"}($request);
-        dd($page);
+        return $this->getInstance($request)->store($request);
+    }
+
+    function attachActionButtons(&$dataSource, $key, array $buttons)
+    {
+        $results = [];
+        foreach ($buttons as $button) {
+            switch ($button) {
+                case "up":
+                    $results[] = "<x-renderer.button htmlType='submit' name='button' size='xs' value='up,$key'><i class='fa fa-arrow-up'></i></x-renderer.button>";
+                    break;
+                case "down":
+                    $results[] = "<x-renderer.button htmlType='submit' name='button' size='xs' value='down,$key'><i class='fa fa-arrow-down'></i></x-renderer.button>";
+                    break;
+                case "right_by_name":
+                    $results[] = "<x-renderer.button htmlType='submit' name='button' size='xs' value='right_by_name,$key' type='danger' outline=true><i class='fa fa-trash'></i></x-renderer.button>";
+                    break;
+            }
+        }
+        $result = join(" ", $results);
+        $dataSource[$key]['action'] = Blade::render("<div class='whitespace-nowrap'>$result</div>");
     }
 }

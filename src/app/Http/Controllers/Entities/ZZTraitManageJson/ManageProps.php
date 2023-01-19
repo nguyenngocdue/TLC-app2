@@ -7,13 +7,16 @@ use App\Utils\Support\Props;
 use App\Utils\Support\DBTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-trait TraitManageProps
+class ManageProps extends Manage_Parent
 {
-    private function getColumnsProp()
+    protected $viewName = "dashboards.pages.manage-prop";
+    protected $routeKey = "_prp";
+    protected $jsonGetSet = Props::class;
+
+    protected function getColumns()
     {
         $controls = JsonControls::getControls();
         return [
@@ -117,7 +120,7 @@ trait TraitManageProps
         ];
     }
 
-    private function makeBlankDefaultObjectProp()
+    private function makeBlankDefaultObject()
     {
         $columnNames = DBTable::getColumnNames(Str::plural($this->type));
         $columnTypes = DBTable::getColumnTypes(Str::plural($this->type));
@@ -164,7 +167,7 @@ trait TraitManageProps
         return $result;
     }
 
-    private function addGreenAndRedColorProp($a, $b)
+    private function addGreenAndRedColor($a, $b)
     {
         $toBeGreen = array_diff_key($a, $b);
         $toBeRed = array_diff_key($b, $a);
@@ -172,7 +175,7 @@ trait TraitManageProps
         return [$toBeGreen, $toBeRed];
     }
 
-    private function renewColumnProp(&$a, $b, $column)
+    private function renewColumn(&$a, $b, $column)
     {
         foreach (array_keys($a) as $key) {
             if (!isset($b[$key])) continue;
@@ -184,28 +187,18 @@ trait TraitManageProps
         }
     }
 
-    private function handleMoveTo(&$result)
+    protected function getDataSource()
     {
-        foreach ($result as $key => $line) {
-            if (isset($line['move_to']) && is_numeric($line['move_to'])) {
-                Props::moveTo($result, $line['move_to'] - 1, $key);
-            }
-        }
-        foreach ($result as &$line) unset($line['move_to']);
-    }
-
-    private function getDataSourceProp()
-    {
-        $result0 = $this->makeBlankDefaultObjectProp();
+        $result0 = $this->makeBlankDefaultObject();
         $result1 = $this->getRenderableRelationships();
         $result = array_merge($result0, $result1);
 
         $json = Props::getAllOf($this->type);
 
-        $this->renewColumnProp($json, $result, 'column_type');
+        $this->renewColumn($json, $result, 'column_type');
         // Log::info($result);
         // Log::info($json);
-        [$toBeGreen, $toBeRed] = $this->addGreenAndRedColorProp($result, $json);
+        [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
         foreach (array_keys($toBeGreen) as $key) $json[$key]['row_color'] = "green";
         foreach (array_keys($toBeRed) as $key) $json[$key]['row_color'] = "red";
         foreach ($json as &$line) if (isset($line['column_type']) && $line['column_type'] === 'static') $line['row_color'] = "amber";
@@ -230,19 +223,8 @@ trait TraitManageProps
         return $json;
     }
 
-    public function indexProp(Request $request)
+    public function create(Request $request)
     {
-        return $this->indexObj($request, "dashboards.pages.manage-prop", '_prp');
-    }
-
-    public function storeProp(Request $request)
-    {
-        return $this->storeObj($request, Props::class, '_prp');
-    }
-
-    public function createProp(Request $request)
-    {
-        // $this->createObj($request, Props::class);
         $name = $request->input('name')[0];
         $names = explode("|", $name);
         $newItems = [];
@@ -256,8 +238,8 @@ trait TraitManageProps
         ];
         // dump($newItems);
 
-        $dataSource = Props::getAllOf($this->type) + $newItems;
-        Props::setAllOf($this->type, $dataSource);
+        $dataSource = $this->jsonGetSet::getAllOf($this->type) + $newItems;
+        $this->jsonGetSet::setAllOf($this->type, $dataSource);
         return back();
     }
 }

@@ -6,9 +6,13 @@ use App\Utils\Support\UnitTests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-trait TraitManageUnitTests
+class ManageUnitTests extends Manage_Parent
 {
-    private function getColumnsUnitTest()
+    protected $viewName = "dashboards.pages.manage-unit-test";
+    protected $routeKey = "_unt";
+    protected $jsonGetSet = UnitTests::class;
+
+    protected function getColumns()
     {
         $columns = [
             [
@@ -58,7 +62,7 @@ trait TraitManageUnitTests
         return $columns;
     }
 
-    private function getDataSourceUnitTest()
+    protected function getDataSource()
     {
         $dataInJson = UnitTests::getAllOf($this->type);
         foreach ($dataInJson as $key => $columns) {
@@ -66,20 +70,5 @@ trait TraitManageUnitTests
             $this->attachActionButtons($dataInJson, $key, ['up', 'down', 'right_by_name']);
         }
         return $dataInJson;
-    }
-
-    public function indexUnitTest(Request $request)
-    {
-        return $this->indexObj($request, "dashboards.pages.manage-unit-test", '_unt');
-    }
-
-    public function storeUnitTest(Request $request)
-    {
-        return $this->storeObj($request, UnitTests::class, '_unt');
-    }
-
-    public function createUnitTest(Request $request)
-    {
-        return $this->createObj($request, UnitTests::class);
     }
 }

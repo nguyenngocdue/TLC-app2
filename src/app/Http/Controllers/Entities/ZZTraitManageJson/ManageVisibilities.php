@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\Visibilities;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-trait TraitManageVisibilities
+class ManageVisibilities extends Manage_Parent
 {
-    private function getColumnsVisibility()
+    protected $viewName = "dashboards.pages.manage-visibility";
+    protected $routeKey = "_vsb";
+    protected $jsonGetSet = Visibilities::class;
+
+    protected function getColumns()
     {
         $allStatuses = LibStatuses::getFor($this->type);
         $firstColumns = [
@@ -39,24 +42,9 @@ trait TraitManageVisibilities
         return array_merge($firstColumns, $columns);
     }
 
-    private function getDataSourceVisibility()
+    protected function getDataSource()
     {
         $dataInJson = Visibilities::getAllOf($this->type);
         return $dataInJson;
-    }
-
-    public function indexVisibility(Request $request)
-    {
-        return $this->indexObj($request, "dashboards.pages.manage-visibility", '_vsb');
-    }
-
-    public function storeVisibility(Request $request)
-    {
-        return $this->storeObj($request, Visibilities::class, '_vsb');
-    }
-
-    public function createVisibility(Request $request)
-    {
-        return $this->createObj($request, Visibilities::class);
     }
 }

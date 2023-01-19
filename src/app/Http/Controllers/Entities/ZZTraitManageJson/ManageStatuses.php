@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
 
-trait TraitManageStatuses
+class ManageStatuses extends Manage_Parent
 {
-    private function getColumns0Status()
+    protected function getColumns()
     {
         return [
             [
@@ -26,7 +26,23 @@ trait TraitManageStatuses
         ];
     }
 
-    private function getColumns1Status()
+    protected function getDataSource()
+    {
+        $plural = Str::plural($this->type);
+        $dataSource0 = LibStatuses::getFor($plural);
+        foreach ($dataSource0 as &$line) {
+            $value = $line['name'];
+            $line['action'] = Blade::render("<div>
+                <x-renderer.button htmlType='submit' name='button' size='xs' value='up,$value'><i class='fa fa-arrow-up'></i></x-renderer.button>
+                <x-renderer.button htmlType='submit' name='button' size='xs' value='down,$value'><i class='fa fa-arrow-down'></i></x-renderer.button>
+                <x-renderer.button htmlType='submit' name='button' size='xs' value='right,$value' type='primary' ><i class='fa fa-arrow-right'></i></x-renderer.button>
+            </div>
+            ");
+        }
+        return $dataSource0;
+    }
+
+    private function getColumnsRight()
     {
         return [
             [
@@ -40,19 +56,8 @@ trait TraitManageStatuses
         ];
     }
 
-    public function indexStatus(Request $request)
+    private function getDataSourceRight($dataSource0)
     {
-        $plural = Str::plural($this->type);
-        $dataSource0 = LibStatuses::getFor($plural);
-        foreach ($dataSource0 as &$line) {
-            $value = $line['name'];
-            $line['action'] = Blade::render("<div>
-                <x-renderer.button htmlType='submit' name='button' size='xs' value='up,$value'><i class='fa fa-arrow-up'></i></x-renderer.button>
-                <x-renderer.button htmlType='submit' name='button' size='xs' value='down,$value'><i class='fa fa-arrow-down'></i></x-renderer.button>
-                <x-renderer.button htmlType='submit' name='button' size='xs' value='right,$value' type='primary' ><i class='fa fa-arrow-right'></i></x-renderer.button>
-            </div>
-            ");
-        }
         $dataSource1 = LibStatuses::getAll();
         $dataSource1 = array_diff_key($dataSource1, $dataSource0);
         foreach ($dataSource1 as &$line) {
@@ -62,20 +67,28 @@ trait TraitManageStatuses
             </div>
             ");
         }
+        return $dataSource1;
+    }
+
+    public function index(Request $request)
+    {
+        $dataSource0 = $this->getDataSource();
+        $dataSource1 = $this->getDataSourceRight($dataSource0);
 
         return view("dashboards.pages.manage-status", [
-            'title' => $this->getTitle($request),
+            // 'title' => $this->getTitle($request),
+            'title' => 'ABCDEF',
             'route' => route($this->type . '_stt.store'),
             'routeManage' => route("manageStatuses.index"),
 
-            'columns0' => $this->getColumns0Status(),
+            'columns0' => $this->getColumns(),
             'dataSource0' => array_values($dataSource0),
-            'columns1' => $this->getColumns1Status(),
+            'columns1' => $this->getColumnsRight(),
             'dataSource1' => array_values($dataSource1),
         ]);
     }
 
-    public function storeStatus(Request $request)
+    public function store(Request $request)
     {
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));

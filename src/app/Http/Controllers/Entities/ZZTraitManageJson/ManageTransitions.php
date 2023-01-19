@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
-use App\Utils\Support\ActionButtons;
-use Illuminate\Http\Request;
+use App\Utils\Support\Transitions;
 use Illuminate\Support\Facades\Log;
 
-trait TraitManageActionButtons
+class ManageTransitions extends Manage_Parent
 {
-    private function getColumnsActionButton()
+    protected $viewName = "dashboards.pages.manage-transition";
+    protected $routeKey = "_tst";
+    protected $jsonGetSet = Transitions::class;
+
+    protected function getColumns()
     {
-        $columns = [
+        $firstColumn = [
             [
                 "dataIndex" => 'name',
                 'renderer' => 'status',
@@ -25,24 +28,28 @@ trait TraitManageActionButtons
                 'align' => 'center',
                 'title' => 'Key',
             ],
-            [
-                "dataIndex" => 'label',
-                'renderer' => 'text',
-                'editable' => true,
-            ],
-            [
-                "dataIndex" => 'tooltip',
-                'renderer' => 'text',
-                'editable' => true,
-            ],
         ];
+
+        $allStatuses = LibStatuses::getFor($this->type);
+        // dump($allStatuses);
+        $columns = array_map(fn ($i) => [
+            "dataIndex" => $i['name'],
+            'renderer' => 'checkbox',
+            'editable' => true,
+            'align' => 'center',
+            'title' => $i['title'],
+            'width' => 100,
+        ], $allStatuses);
+        $columns = array_merge($firstColumn, $columns);
+        // dump($columns);
         return $columns;
     }
 
-    private function getDataSourceActionButton()
+    protected function getDataSource()
     {
         $allStatuses = LibStatuses::getFor($this->type);
-        $dataInJson = ActionButtons::getAllOf($this->type);
+        $dataInJson = Transitions::getAllOf($this->type);
+        // dump($dataInJson);
         $result = [];
         foreach ($allStatuses as $status) {
             $name = $status['name'];
@@ -51,18 +58,9 @@ trait TraitManageActionButtons
             } else {
                 $newItem = ['name' => $name];
             }
+            $newItem[$name] = 'invisible';
             $result[] = $newItem;
         }
         return $result;
-    }
-
-    public function indexActionButton(Request $request)
-    {
-        return $this->indexObj($request, "dashboards.pages.manage-action-button", '_atb');
-    }
-
-    public function storeActionButton(Request $request)
-    {
-        return $this->storeObj($request, ActionButtons::class, '_atb');
     }
 }

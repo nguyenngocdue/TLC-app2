@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\Settings;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-trait TraitManageSettings
+class ManageSettings extends Manage_Parent
 {
-    private function getColumnsSetting()
+    protected $viewName = "dashboards.pages.manage-setting";
+    protected $routeKey = "_stn";
+    protected $jsonGetSet = Settings::class;
+    protected $excludedColumnsFromStoring = ['description'];
+
+    protected function getColumns()
     {
         $allStatuses = LibStatuses::getFor($this->type);
         $firstColumns = [
@@ -34,9 +38,8 @@ trait TraitManageSettings
         return array_merge($firstColumns, $columns);
     }
 
-    private function getDataSourceSetting()
+    protected function getDataSource()
     {
-        // $allStatuses = LibStatuses::getFor($this->type);
         $settings = [
             [
                 'description' => 'Status to which a new document is set',
@@ -77,15 +80,5 @@ trait TraitManageSettings
             $result[] = $newItem;
         }
         return $result;
-    }
-
-    public function indexSetting(Request $request)
-    {
-        return $this->indexObj($request, "dashboards.pages.manage-setting", '_stn');
-    }
-
-    public function storeSetting(Request $request)
-    {
-        return $this->storeObj($request, Settings::class, '_stn', ['description']);
     }
 }
