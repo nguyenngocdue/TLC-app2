@@ -14,6 +14,10 @@ abstract class Manage_Parent
 
     protected abstract function getColumns();
     protected abstract function getDataSource();
+    protected function getDataHeader()
+    {
+        return [];
+    }
 
     function __construct(
         protected $type,
@@ -50,6 +54,7 @@ abstract class Manage_Parent
             'route' => route($this->type . $this->routeKey . '.store'),
             'columns' => $this->getColumns(),
             'dataSource' => array_values($this->getDataSource()),
+            'dataHeader' => $this->getDataHeader(),
         ]);
     }
 

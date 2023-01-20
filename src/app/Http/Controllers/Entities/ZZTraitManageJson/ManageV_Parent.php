@@ -55,9 +55,14 @@ class ManageV_Parent extends Manage_Parent
         $dataInJson = $this->jsonGetSet::getAllOf($this->type);
         // dump($dataInJson);
         $isNotVisibleProps = $this->jsonGetSet !== VisibleProps::class;
+
         $allStatuses = array_keys(LibStatuses::getFor($this->type));
         $allStatusesStr = "[" . join(", ", array_map(fn ($i) => '"' . $i . '"', $allStatuses)) . "]";
-        echo "<script>const statuses = $allStatusesStr; const k_checked = {}; const k_current = {};</script>";
+        $allIdsStr = "[" . join(", ", array_keys(array_values($allProps))) . "]";
+        $javascript = "const statuses = $allStatusesStr; const ids = $allIdsStr; ";
+        $javascript .= "let k_horizon_mode = {}; let k_horizon_value = {};";
+        $javascript .= "let k_vertical_mode = {}; let k_vertical_value = {};";
+        echo "<script>$javascript</script>";
         // dump($allStatuses);
         if ($isNotVisibleProps) {
             $visibleProps = VisibleProps::getAllOf($this->type);
@@ -76,7 +81,7 @@ class ManageV_Parent extends Manage_Parent
                     'column_name' => $prop['column_name'],
                 ];
             }
-            $newItem['toggle'] = Blade::render("<x-renderer.button htmlType='button' size='xs' onClick='toggleVParent($index)'>Toggle</x-renderer.button>");
+            $newItem['toggle'] = Blade::render("<x-renderer.button htmlType='button' size='xs' onClick='toggleVParent_Horizon($index)'>Toggle</x-renderer.button>");
             $newItem['label'] =  $prop['label'];
 
             if ($isNotVisibleProps) {
@@ -89,6 +94,18 @@ class ManageV_Parent extends Manage_Parent
             $result[] = $newItem;
             $index++;
         }
+        return $result;
+    }
+
+    protected function getDataHeader()
+    {
+        $allStatuses = array_keys(LibStatuses::getFor($this->type));
+        $result = [];
+        foreach ($allStatuses as $status) {
+            $button = "<x-renderer.button htmlType='button' size='xs' value='xxx' onClick='toggleVParent_Vertical(\"$status\")'>Toggle</x-renderer.button>";
+            $result[$status] = Blade::render($button);
+        }
+        // Log::info($result);
         return $result;
     }
 }
