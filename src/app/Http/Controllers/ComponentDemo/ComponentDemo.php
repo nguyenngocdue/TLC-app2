@@ -22,6 +22,7 @@ class ComponentDemo
         return view('component-demo', [
             'tableColumns' => $this->getTableColumns(),
             'tableEditableColumns' => $this->getTableEditableColumns(),
+            'tableDataHeader' => $this->getTableDataHeader(),
             'tableDataSource' => $tableDataSource,
             'gridDataSource' => $this->getGridData($tableDataSource),
             'dataComment' => $this->getCommendData(),

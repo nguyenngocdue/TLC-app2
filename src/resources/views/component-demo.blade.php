@@ -174,9 +174,9 @@
                 <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" />
             </x-renderer.card>
             <br />
-            <x-renderer.card title="Table with Data and No.">
+            <x-renderer.card title="Table with Data and No. and dataHeader">
                 showNo= { { true } }
-                <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNo="{{true}}" />
+                <x-renderer.table :columns="$tableColumns" :dataHeader="$tableDataHeader" :dataSource="$tableDataSource" showNo="{{true}}" />
             </x-renderer.card>
             <br />
 

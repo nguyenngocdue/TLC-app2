@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\ComponentDemo;
 
+use Illuminate\Support\Facades\Blade;
+
 trait TraitTableData
 {
     public function getTableColumns()
@@ -77,6 +79,15 @@ trait TraitTableData
                 "renderer" => "text",
                 "editable" => true,
             ],
+        ];
+    }
+
+    public function getTableDataHeader()
+    {
+        $onClick = "console.log(\"Hello\")";
+        $btn = "<x-renderer.button htmlType='button' size='xs' value='xxx' onClick='$onClick'>Hello in console</x-renderer.button>";
+        return [
+            'client' => Blade::render($btn),
         ];
     }
 
