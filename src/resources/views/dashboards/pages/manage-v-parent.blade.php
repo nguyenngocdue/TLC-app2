@@ -15,3 +15,31 @@
 <br />
 <br />
 @endsection
+
+@once
+<script>
+    function toggleVParent(id){
+        if(k_checked[id] === undefined){
+            k_current[id] = {}
+            for(let i = 0; i < statuses.length; i++){
+                const x = document.getElementsByName(statuses[i]+'['+id+']')[0]
+                if(x !== undefined){
+                    k_current[id][statuses[i]] = x.checked
+                }
+            }
+        }
+        // console.log(id, statuses, k_current) 123
+        k_checked[id] = (k_checked[id] === undefined) ? 0 : (k_checked[id]+1) % 3
+        // console.log(k_checked[id]);
+        for(let i = 0; i < statuses.length; i++){
+            const x = document.getElementsByName(statuses[i]+'['+id+']')[0]
+            if(x !== undefined){
+                if(k_checked[id] === 0) x.checked = 1
+                if(k_checked[id] === 1) x.checked = 0
+                if(k_checked[id] === 2) x.checked = k_current[id][statuses[i]]
+                // console.log(x)
+            }
+        }
+    }
+</script>
+@endonce

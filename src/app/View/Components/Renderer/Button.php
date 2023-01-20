@@ -18,6 +18,7 @@ class Button extends Component
         private $outline = false,
         private $htmlType = 'button',
         private $value = '',
+        private $onClick = '',
     ) {
         // dd($this->type);
     }
@@ -96,6 +97,7 @@ class Button extends Component
             'htmlType' => $this->htmlType,
             'value' => $this->value,
             'name' => $this->name,
+            'onClick' => $this->onClick,
         ]);
     }
 }
