@@ -17,7 +17,7 @@ use LdapRecord\Laravel\Auth\LdapAuthenticatable;
 use LdapRecord\Laravel\Auth\AuthenticatesWithLdap;
 use LdapRecord\Laravel\Auth\HasLdapUser;
 use Laravel\Scout\Searchable;
-use Ndc\Spatiecustom\Traits\HasRoleSets;
+use Ndc\SpatieCustom\Traits\HasRoleSets;
 
 class User extends Authenticatable implements LdapAuthenticatable
 {
@@ -33,7 +33,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     use TraitMenuTitle;
     use TraitMorphManyByFieldName;
     use HasAttachments;
-    use HasStatus; 
+    use HasStatus;
     // 123
 
     /**

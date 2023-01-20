@@ -1,10 +1,10 @@
 <?php
 
-namespace Ndc\Spatiecustom\Traits;
+namespace Ndc\SpatieCustom\Traits;
 
-use Ndc\Spatiecustom\Contracts\Role as ContractsRole;
-use Ndc\Spatiecustom\Contracts\RoleSet;
-use Ndc\Spatiecustom\RoleRegistrar;
+use Ndc\SpatieCustom\Contracts\Role as ContractsRole;
+use Ndc\SpatieCustom\Contracts\RoleSet;
+use Ndc\SpatieCustom\RoleRegistrar;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Arr;

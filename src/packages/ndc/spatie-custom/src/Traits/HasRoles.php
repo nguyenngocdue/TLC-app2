@@ -1,9 +1,9 @@
 <?php
 
-namespace Ndc\Spatiecustom\Traits;
+namespace Ndc\SpatieCustom\Traits;
 
 use Illuminate\Support\Collection;
-use Ndc\Spatiecustom\RoleRegistrar;
+use Ndc\SpatieCustom\RoleRegistrar;
 use Spatie\Permission\Contracts\Role;
 use Spatie\Permission\Traits\HasRoles as TraitsHasRoles;
 

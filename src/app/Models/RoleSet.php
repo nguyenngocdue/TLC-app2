@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Laravel\Scout\Searchable;
-use Ndc\Spatiecustom\Models\RoleSet as ModelsRoleSet;
+use Ndc\SpatieCustom\Models\RoleSet as ModelsRoleSet;
 
 class RoleSet extends ModelsRoleSet
 {

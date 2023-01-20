@@ -1,6 +1,6 @@
 <?php
 
-namespace Ndc\Spatiecustom\Exceptions;
+namespace Ndc\SpatieCustom\Exceptions;
 
 use Spatie\Permission\Exceptions\UnauthorizedException as ExceptionsUnauthorizedException;
 

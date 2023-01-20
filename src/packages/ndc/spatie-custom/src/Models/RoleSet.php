@@ -1,13 +1,13 @@
 <?php
 
-namespace Ndc\Spatiecustom\Models;
+namespace Ndc\SpatieCustom\Models;
 
-use Ndc\Spatiecustom\Traits\HasRoles;
-use Ndc\Spatiecustom\Traits\RefreshesRoleCache;
+use Ndc\SpatieCustom\Traits\HasRoles;
+use Ndc\SpatieCustom\Traits\RefreshesRoleCache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Ndc\Spatiecustom\Contracts\RoleSet as ContractsRoleSet;
-use Ndc\Spatiecustom\RoleRegistrar;
+use Ndc\SpatieCustom\Contracts\RoleSet as ContractsRoleSet;
+use Ndc\SpatieCustom\RoleRegistrar;
 use Spatie\Permission\Exceptions\GuardDoesNotMatch;
 use Spatie\Permission\Exceptions\RoleAlreadyExists;
 use Spatie\Permission\Exceptions\RoleDoesNotExist;

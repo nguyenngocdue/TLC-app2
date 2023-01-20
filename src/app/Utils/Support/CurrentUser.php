@@ -3,7 +3,7 @@
 namespace App\Utils\Support;
 
 use Illuminate\Support\Facades\Auth;
-use Ndc\Spatiecustom\Exceptions\UnauthorizedException;
+use Ndc\SpatieCustom\Exceptions\UnauthorizedException;
 
 class CurrentUser
 {

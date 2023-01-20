@@ -1,10 +1,10 @@
 <?php
 
-namespace Ndc\Spatiecustom\Middlewares;
+namespace Ndc\SpatieCustom\Middlewares;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Ndc\Spatiecustom\Exceptions\UnauthorizedException;
+use Ndc\SpatieCustom\Exceptions\UnauthorizedException;
 
 class RoleSetMiddleware
 {

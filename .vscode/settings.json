@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
     "asgn",
+    "Authorizable",
     "chklst",
     "Chklsts",
     "colspan",
@@ -9,6 +10,7 @@
     "endsection",
     "Laravel",
     "mediable",
+    "Middlewares",
     "migrationrelationship",
     "onhold",
     "oracies",
@@ -17,6 +19,7 @@
     "Renderable",
     "sats",
     "shts",
+    "Spatie",
     "tmpl",
     "tmpls",
     "Toastr",

@@ -1,8 +1,8 @@
 <?php
 
-namespace Ndc\Spatiecustom\Traits;
+namespace Ndc\SpatieCustom\Traits;
 
-use Ndc\Spatiecustom\RoleRegistrar;
+use Ndc\SpatieCustom\RoleRegistrar;
 
 trait RefreshesRoleCache
 {

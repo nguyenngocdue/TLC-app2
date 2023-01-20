@@ -1,6 +1,6 @@
 <?php
 
-namespace Ndc\Spatiecustom\Contracts;
+namespace Ndc\SpatieCustom\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 

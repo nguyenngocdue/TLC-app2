@@ -1,6 +1,6 @@
 <?php
 
-namespace Ndc\Spatiecustom\Traits;
+namespace Ndc\SpatieCustom\Traits;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;

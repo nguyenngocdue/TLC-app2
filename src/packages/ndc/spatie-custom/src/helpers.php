@@ -7,7 +7,7 @@ if (!function_exists('setRolesTeamId')) {
      */
     function setRolesTeamId($id)
     {
-        app(\Ndc\Spatiecustom\RoleRegistrar::class)->setRolesTeamId($id);
+        app(\Ndc\SpatieCustom\RoleRegistrar::class)->setRolesTeamId($id);
     }
 }
 
@@ -17,6 +17,6 @@ if (!function_exists('getRolesTeamId')) {
      */
     function getRolesTeamId()
     {
-        return app(\Ndc\Spatiecustom\RoleRegistrar::class)->getRolesTeamId();
+        return app(\Ndc\SpatieCustom\RoleRegistrar::class)->getRolesTeamId();
     }
 }

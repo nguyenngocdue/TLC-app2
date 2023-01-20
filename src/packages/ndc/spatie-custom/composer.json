@@ -1,9 +1,9 @@
 {
-    "name": "ndc/spatiecustom",
+    "name": "ndc/spatie-custom",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Ndc\\Spatiecustom\\": "src/"
+            "Ndc\\SpatieCustom\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -12,7 +12,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Ndc\\Spatiecustom\\RoleServiceProvider"
+                "Ndc\\SpatieCustom\\RoleServiceProvider"
             ],
             "aliases": {}
         }

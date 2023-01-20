@@ -1,13 +1,13 @@
 <?php
 
-namespace Ndc\Spatiecustom;
+namespace Ndc\SpatieCustom;
 
 use Illuminate\Routing\Route;
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
-use Ndc\Spatiecustom\Contracts\RoleSet as RoleSetContract;
-use Ndc\Spatiecustom\Contracts\Role as RoleContract;
+use Ndc\SpatieCustom\Contracts\RoleSet as RoleSetContract;
+use Ndc\SpatieCustom\Contracts\Role as RoleContract;
 
 class RoleServiceProvider extends ServiceProvider
 {

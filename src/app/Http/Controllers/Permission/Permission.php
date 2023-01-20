@@ -32,6 +32,7 @@ class Permission extends Controller
             [
                 'dataIndex' => 'id',
                 'renderer' => 'id',
+                'align' => 'center',
                 'type' => 'permissions2',
             ],
             [

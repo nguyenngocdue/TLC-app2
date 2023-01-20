@@ -1,8 +1,8 @@
 <?php
 
-namespace Ndc\Spatiecustom;
+namespace Ndc\SpatieCustom;
 
-use Ndc\Spatiecustom\Contracts\RoleSet;
+use Ndc\SpatieCustom\Contracts\RoleSet;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Access\Gate;
