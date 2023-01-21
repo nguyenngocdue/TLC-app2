@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Models\User;
-use App\Utils\Support\Json\Props;
+use App\Utils\Support\Json\DefaultValues;
 use App\View\Components\Formula\All_ConcatNameWith123;
 use App\View\Components\Formula\All_SlugifyByName;
 use App\View\Components\Formula\User_PositionRendered;
@@ -12,11 +12,11 @@ trait TraitEntityFormula
 {
     private function apply_formula($item, $type)
     {
-        $props = Props::getAllOf($type);
+        $defaultValues = DefaultValues::getAllOf($type);
         $id = $item['id'];
         $name = $item['name'] ?? "";
 
-        foreach ($props as $prop) {
+        foreach ($defaultValues as $prop) {
             if ($prop['formula'] === '') continue;
             switch ($prop['formula']) {
                 case "All_ConcatNameWith123":

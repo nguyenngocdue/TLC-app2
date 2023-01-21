@@ -112,26 +112,6 @@ class ManageProps extends Manage_Parent
                 "renderer" => "checkbox",
                 'width' => 10,
             ],
-            [
-                "dataIndex" => "validation",
-                "editable" => true,
-                "renderer" => "text",
-            ],
-            [
-                "dataIndex" => "formula",
-                "editable" => true,
-                "renderer" => "dropdown",
-                "cbbDataSource" => [
-                    '',
-                    'All_ConcatNameWith123',
-                    'All_SlugifyByName',
-                    'User_PositionRendered',
-                    '(not-yet)Wir_NameRendered',
-                    '(not-yet)format_production',
-                    '(not-yet)format_compliance',
-                ],
-                "properties" => ['strFn' => 'same'],
-            ],
         ];
     }
 

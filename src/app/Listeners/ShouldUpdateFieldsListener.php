@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\EntityCreatedEvent;
-use App\Http\Controllers\Entities\TraitEntityFormula;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ShouldUpdateFieldsListener implements ShouldQueue

@@ -25,6 +25,8 @@ $id = $action === "edit" ? $values->id : "";
         @foreach($props as $key => $val)
         @php
         if ($action === "create" && $val['control'] === 'relationship_renderer') continue;
+        $defaultValue = $defaultValues[$key];
+
         $label = $val['label'];
         $columnName = $val['column_name'];
         $columnType = $val['column_type'];
@@ -36,7 +38,7 @@ $id = $action === "edit" ? $values->id : "";
         $col_span = $val['col_span'] === '' ? 1 : $val['col_span']*1;
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
 
-        $isRequired = in_array("required", explode("|",$val['validation']));
+        $isRequired = in_array("required", explode("|", $defaultValue['validation']));
         $iconJson = $columnType === 'json' ? App\Utils\ConstantSVG::ICON_SVG : "";
         @endphp
         <div class='col-span-{{$col_span}} grid'>

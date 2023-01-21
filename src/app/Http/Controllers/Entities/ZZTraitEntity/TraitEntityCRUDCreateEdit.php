@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\Json\DefaultValues;
 use App\Utils\Support\Json\Props;
 use Illuminate\Support\Str;
 
@@ -12,18 +13,20 @@ trait TraitEntityCRUDCreateEdit
 	{
 		$action = CurrentRoute::getControllerAction();
 		$props = Props::getAllOf($this->type);
+		$defaultValues = DefaultValues::getAllOf($this->type);
 
 		$type = $this->type;
 		$modelPath = $this->data;
 		$values = "";
 		$idItems = [];
-		return view('dashboards.pages.entity-create-edit')->with(compact('props', 'type', 'action', 'modelPath', 'values', 'idItems'));
+		return view('dashboards.pages.entity-create-edit')->with(compact('props', 'defaultValues', 'type', 'action', 'modelPath', 'values', 'idItems'));
 	}
 
 	public function edit($id)
 	{
 		$currentElement = $this->data::find($id);
 		$props = Props::getAllOf($this->type);
+		$defaultValues = DefaultValues::getAllOf($this->type);
 		$type = Str::plural($this->type);
 		$action = CurrentRoute::getControllerAction();
 		$values = $action === "create" ? "" : $currentElement;
@@ -31,6 +34,6 @@ trait TraitEntityCRUDCreateEdit
 		$modelPath = $this->data;
 
 		$idItems = $this->getManyToManyRelationship($currentElement);
-		return view('dashboards.pages.entity-create-edit')->with(compact('props', 'values', 'type', 'action', 'currentElement', 'modelPath', 'idItems'));
+		return view('dashboards.pages.entity-create-edit')->with(compact('props', 'defaultValues', 'values', 'type', 'action', 'currentElement', 'modelPath', 'idItems'));
 	}
 }

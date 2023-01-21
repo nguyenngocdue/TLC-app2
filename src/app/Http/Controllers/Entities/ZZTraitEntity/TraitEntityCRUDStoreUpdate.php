@@ -6,6 +6,7 @@ use App\Events\EntityCreatedEvent;
 use App\Helpers\Helper;
 use App\Notifications\CreateNewNotification;
 use App\Notifications\EditNotification;
+use App\Utils\Support\Json\DefaultValues;
 use App\Utils\Support\Json\Props;
 use Brian2694\Toastr\Facades\Toastr;
 use Exception;
@@ -18,6 +19,7 @@ trait TraitEntityCRUDStoreUpdate
 	public function store(Request $request)
 	{
 		$props = Props::getAllOf($this->type);
+		$defaultValues = DefaultValues::getAllOf($this->type);
 		$colNamesHaveAttachment = Helper::getColNamesByControl($props, 'attachment');
 		$arrayExcept = array_merge(['_token', '_method', 'created_at', 'updated_at', 'id'], $colNamesHaveAttachment);
 		$dataInput =  array_merge(['id' => null], $request->except($arrayExcept));
@@ -33,7 +35,7 @@ trait TraitEntityCRUDStoreUpdate
 
 		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'newComment_');
 		$request->merge($dataInput + $comments);
-		$this->_validate($props, $request);
+		$this->_validate($defaultValues, $request);
 
 		$idsComment = $this->saveAndGetIdsComments($dataInput);
 		$this->setMediaCommentsParent($idsComment, $idsMedia);
@@ -83,6 +85,7 @@ trait TraitEntityCRUDStoreUpdate
 	{
 		$data = $this->data::find($id);
 		$props = Props::getAllOf($this->type);
+		$defaultValues = DefaultValues::getAllOf($this->type);
 
 		// dd($request->all());
 		$colNamesHaveAttachment = Helper::getColNamesByControl($props, 'attachment');
@@ -100,7 +103,7 @@ trait TraitEntityCRUDStoreUpdate
 
 		$comments = Helper::getAndChangeKeyItemsContainString($dataInput, 'newComment_');
 		$request->merge($dataInput + $comments);
-		$this->_validate($props, $request);
+		$this->_validate($defaultValues, $request);
 
 		$newDataInput = $this->handleToggle('update', $props, $dataInput);
 		$newDataInput = $this->handleTextArea($props, $newDataInput);
@@ -136,10 +139,10 @@ trait TraitEntityCRUDStoreUpdate
 		}
 	}
 
-	private function _validate($props, Request $request)
+	private function _validate($default_values, Request $request)
 	{
 		$itemValidations = [];
-		foreach ($props as $value) {
+		foreach ($default_values as $value) {
 			if (!is_null($value['validation'])) $itemValidations[$value['column_name']] = $value['validation'];
 		}
 		$request->validate($itemValidations);
