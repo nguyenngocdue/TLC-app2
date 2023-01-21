@@ -1,0 +1,119 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "active": "true",
+        "approval_rejected": "",
+        "approved": "",
+        "assign_rejected": "",
+        "assigned": ""
+    },
+    "_url_thumbnail": {
+        "name": "_url_thumbnail",
+        "column_name": "url_thumbnail",
+        "active": "",
+        "approval_rejected": "true",
+        "approved": "",
+        "assign_rejected": "",
+        "assigned": ""
+    },
+    "_url_media": {
+        "name": "_url_media",
+        "column_name": "url_media",
+        "active": "",
+        "approval_rejected": "",
+        "approved": "true",
+        "assign_rejected": "",
+        "assigned": ""
+    },
+    "_url_folder": {
+        "name": "_url_folder",
+        "column_name": "url_folder",
+        "active": "",
+        "approval_rejected": "",
+        "approved": "",
+        "assign_rejected": "true",
+        "assigned": ""
+    },
+    "_filename": {
+        "name": "_filename",
+        "column_name": "filename",
+        "active": "",
+        "approval_rejected": "",
+        "approved": "",
+        "assign_rejected": "",
+        "assigned": "true"
+    },
+    "_extension": {
+        "name": "_extension",
+        "column_name": "extension",
+        "active": "",
+        "approval_rejected": "",
+        "approved": "",
+        "assign_rejected": "true",
+        "assigned": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "active": "",
+        "approval_rejected": "",
+        "approved": "true",
+        "assign_rejected": "",
+        "assigned": ""
+    },
+    "_object_id": {
+        "name": "_object_id",
+        "column_name": "object_id",
+        "active": "",
+        "approval_rejected": "true",
+        "approved": "",
+        "assign_rejected": "",
+        "assigned": ""
+    },
+    "_object_type": {
+        "name": "_object_type",
+        "column_name": "object_type",
+        "active": "true",
+        "approval_rejected": "",
+        "approved": "",
+        "assign_rejected": "",
+        "assigned": ""
+    },
+    "_category": {
+        "name": "_category",
+        "column_name": "category",
+        "active": "",
+        "approval_rejected": "true",
+        "approved": "",
+        "assign_rejected": "",
+        "assigned": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "active": "",
+        "approval_rejected": "",
+        "approved": "true",
+        "assign_rejected": "",
+        "assigned": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "active": "",
+        "approval_rejected": "",
+        "approved": "",
+        "assign_rejected": "true",
+        "assigned": ""
+    },
+    "_attachable": {
+        "name": "_attachable",
+        "column_name": "attachable",
+        "active": "",
+        "approval_rejected": "",
+        "approved": "",
+        "assign_rejected": "",
+        "assigned": "true"
+    }
+}

@@ -19,16 +19,16 @@ class SidebarAdminItems
                     'title' => "Permissions",
                     'href' => "/dashboard/admin/permissions",
                 ],
-                [
-                    'title' => "Permissions 2",
-                    'href' => "/dashboard/admin/permissions2",
-                ],
+                // [
+                //     'title' => "Permissions 2",
+                //     'href' => "/dashboard/admin/permissions2",
+                // ],
                 [
                     'title' => "Roles",
                     'href' =>  "/dashboard/admin/roles",
                 ],
                 [
-                    'title' => "Rolesets",
+                    'title' => "RoleSets",
                     'href' => "/dashboard/admin/role_sets",
                 ],
                 [
@@ -39,11 +39,11 @@ class SidebarAdminItems
                     'href' => "/dashboard/admin/setpermissions",
                 ],
                 [
-                    'title' => "Set Roles to Rolesets",
+                    'title' => "Set Roles to RoleSets",
                     'href' => "/dashboard/admin/setroles",
                 ],
                 [
-                    'title' => "Set Rolesets to Users",
+                    'title' => "Set RoleSets to Users",
                     'href' => "/dashboard/admin/setrolesets",
                 ],
             ],

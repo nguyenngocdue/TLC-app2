@@ -1,1 +1,7 @@
-[]
+[
+    "active",
+    "approval_rejected",
+    "approved",
+    "assign_rejected",
+    "assigned"
+]

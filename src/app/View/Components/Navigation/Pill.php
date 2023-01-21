@@ -48,6 +48,8 @@ class Pill extends Component
         $links1[] = ['href' => route($singular . '_rol.index'), 'disabled' => strpos($as, '_rol.') !== false, 'title' => 'Read-Only',];
         $links1[] = ['href' => route($singular . '_rqr.index'), 'disabled' => strpos($as, '_rqr.') !== false, 'title' => 'Required',];
         $links1[] = ['href' => route($singular . '_hdn.index'), 'disabled' => strpos($as, '_hdn.') !== false, 'title' => 'Hidden',];
+        $links1[] = ['href' => route($singular . '_rol-exc.index'), 'disabled' => strpos($as, '_rol-exc.') !== false, 'title' => 'Read-Only Exception',];
+        $links1[] = ['href' => route($singular . '_hdn-exc.index'), 'disabled' => strpos($as, '_hdn-exc.') !== false, 'title' => 'Hidden Exception',];
 
 
         return view('components.navigation.pill')->with(compact('links', 'links1'));

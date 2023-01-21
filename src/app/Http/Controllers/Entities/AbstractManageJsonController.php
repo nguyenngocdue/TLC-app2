@@ -24,6 +24,9 @@ class Pages
     const ReadOnlyProp = "VReadOnlyProp";
     const RequiredProp = "VRequiredProp";
     const HiddenProp = "VHiddenProp";
+
+    const ReadOnlyExcProp = "VReadOnlyExcProp";
+    const HiddenExcProp = "VHiddenExcProp";
 }
 
 abstract class AbstractManageJsonController extends Controller
@@ -46,22 +49,27 @@ abstract class AbstractManageJsonController extends Controller
         "_rol" => Pages::ReadOnlyProp,
         "_rqr" => Pages::RequiredProp,
         "_hdn" => Pages::HiddenProp,
+
+        "_rol-exc" => Pages::ReadOnlyExcProp,
+        "_hdn-exc" => Pages::HiddenExcProp,
     ];
 
     public function getType(Request $request = null)
     {
         if (is_null($request)) return $this->type;
         $pathInfo = $request->getPathInfo();
-        $path = substr($pathInfo, strpos($pathInfo, "/", 1) + 1); // /config/attachment_prp => attachment_prp
-        $path = substr($path, 0, strpos($path, "_", 1)); // attachment_prp => attachment
-        // dd($path);
+        $path = substr($pathInfo, strrpos($pathInfo, "/") + 1); // /config/attachment_prp => attachment_prp
+        $path = substr($path, 0, strrpos($path, "_")); // attachment_prp => attachment
         return $path;
     }
 
     protected function getPage(Request $request)
     {
         $pathInfo = $request->getPathInfo();
-        foreach ($this->pages as $key => $value) if (strpos($pathInfo, $key)) return $value;
+        // foreach ($this->pages as $key => $value) if (strpos($pathInfo, $key)) return $value;
+        $path = substr($pathInfo, strrpos($pathInfo, "/") + 1); // /config/attachment_prp => attachment_prp
+        $path = substr($path, strrpos($path, "_")); // attachment_prp-abc => _prp-abc
+        if (isset($this->pages[$path])) return $this->pages[$path];
         return "Unknown pathInfo $pathInfo";
     }
 
@@ -79,6 +87,7 @@ abstract class AbstractManageJsonController extends Controller
         $typeModel = "App\\Models\\$type";
         /** @var Manage_Parent $instance */
         $instance = new $className($type, $typeModel);
+        // dump($page, $className, $type, $typeModel);
         return $instance;
     }
 

@@ -16,6 +16,58 @@ class RoleSetSeeder extends Seeder
      */
     public function run()
     {
+        $roleSets = [
+            "acct_manager",
+            "acct_manager_nz",
+            "acct_member",
+            "acct_member_nz",
+            "bd_manager",
+            "bd_member",
+            "cpl_manager_nz",
+            "cpl_member",
+            "dc_ho",
+            "dc_manager",
+            "dc_ws",
+            "des_manager",
+            "des_member",
+            "dir",
+            "dir_nz",
+            "fac_admin",
+            "fin_member_nz",
+            "guest",
+            "hr_manager",
+            "hr_member",
+            "hr_member_nz",
+            "hse_manager",
+            "hse_member",
+            "it_manager",
+            "it_member",
+            "mgr_assistant_nz",
+            "newcomer",
+            "pln_admin",
+            "prod_manager",
+            "prod_member",
+            "prod_manager_nz",
+            "prod_member_nz",
+            "proc_manager",
+            "proc_member",
+            "proc_member_nz",
+            "proj_manager",
+            "proj_manager_nz",
+            "proj_member",
+            "proj_member_nz",
+            "qaqc_manager",
+            "qaqc_member",
+            "qs_manager",
+            "qs_member",
+            "qs_member_nz",
+            "supreme_manage",
+            "whs_manager",
+            "whs_member",
+            "worker",
+        ];
+        foreach ($roleSets as $roleSet) RoleSet::create(['name' => $roleSet]);
+
         try {
             $entities = Entities::getAll();
             $names = [];
@@ -25,7 +77,6 @@ class RoleSetSeeder extends Seeder
             }
             $roles = array_map(fn ($item) => "ADMIN-DATA-$item", $names);
             RoleSet::create(['name' => 'admin'])->giveRoleTo([$roles]);
-            // RoleSet::create(['name' => 'admin'])->giveRoleTo(['ADMIN-DATA-MEDIA', 'ADMIN-DATA-POSTS', 'ADMIN-DATA-WORKPLACES', 'ADMIN-DATA-USERS']);
         } catch (\Throwable $th) {
             throw $th;
         }

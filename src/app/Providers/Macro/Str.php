@@ -6,10 +6,23 @@ use Illuminate\Support\Str;
 Str::macro('appTitle', function (string $s) {
     $s = Str::headline($s);
     $s = str_ireplace(
-        ['hr', 'erp', 'wir', 'hse', 'esg', 'scm', 'qaqc', 'dev', 'kpi', 'qs'],
-        ['HR', 'ERP', 'WIR', 'HSE', 'ESG', 'SCM', 'QAQC', 'DEV', 'KPI', 'QS'],
+        ['hr', 'erp', 'wir', 'hse', 'esg', 'scm', 'qaqc', 'dev', 'kpi', 'qs', 'nz', 'dc', 'it', 'qa', 'qc', 'bd', 'prod'],
+        ['HR', 'ERP', 'WIR', 'HSE', 'ESG', 'SCM', 'QAQC', 'DEV', 'KPI', 'QS', 'NZ', 'DC', 'IT', 'QA', 'QC', 'BD', 'PROD'],
         $s
     );
+
+    $s = str_ireplace(
+        ['acct', 'cpl', 'dir', 'fac', 'des', 'fin', 'mgr', 'pln', 'proc', 'proj', 'whs'],
+        ['Accounting', 'Compliance', 'Director', 'Factory', 'Design', 'Finance', 'Manager', 'Planning', 'Procurement', 'Project', 'warehouse'],
+        $s
+    );
+
+    // $s = preg_replace(
+    //     ['/\Dev\b/u', '/\Nz\b/u'],
+    //     ['DEV', 'NZ'],
+    //     $s
+    // );
+
     return $s;
 });
 Str::macro('modelToPretty', function (string $string) {

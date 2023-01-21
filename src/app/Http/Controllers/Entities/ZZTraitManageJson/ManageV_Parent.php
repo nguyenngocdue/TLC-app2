@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
-use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\Support\Json\HiddenProps;
 use App\Utils\Support\Json\Props;
+use App\Utils\Support\Json\ReadOnlyProps;
+use App\Utils\Support\Json\RequiredProps;
 use App\Utils\Support\Json\VisibleProps;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 
-class ManageV_Parent extends Manage_Parent
+abstract class ManageV_Parent extends Manage_Parent
 {
     protected $viewName = "dashboards.pages.manage-v-parent";
     protected $excludedColumnsFromStoring = ['label', 'toggle'];
+
+    abstract protected function getColumnSource();
 
     protected function getColumns()
     {
@@ -37,7 +41,7 @@ class ManageV_Parent extends Manage_Parent
             ],
         ];
 
-        $allStatuses = LibStatuses::getFor($this->type);
+        $allStatuses = $this->getColumnSource();
         $columns = array_map(fn ($i) => [
             'dataIndex' => $i['name'],
             'renderer' => 'checkbox',
@@ -54,9 +58,9 @@ class ManageV_Parent extends Manage_Parent
         $allProps = Props::getAllOf($this->type);
         $dataInJson = $this->jsonGetSet::getAllOf($this->type);
         // dump($dataInJson);
-        $isNotVisibleProps = $this->jsonGetSet !== VisibleProps::class;
+        $isNotVisibleProps = in_array($this->jsonGetSet, [HiddenProps::class, ReadOnlyProps::class, RequiredProps::class]);
 
-        $allStatuses = array_keys(LibStatuses::getFor($this->type));
+        $allStatuses = array_keys($this->getColumnSource());
         $allStatusesStr = "[" . join(", ", array_map(fn ($i) => '"' . $i . '"', $allStatuses)) . "]";
         $allIdsStr = "[" . join(", ", array_keys(array_values($allProps))) . "]";
         $javascript = "const statuses = $allStatusesStr; const ids = $allIdsStr; ";
@@ -64,10 +68,7 @@ class ManageV_Parent extends Manage_Parent
         $javascript .= "let k_vertical_mode = {}; let k_vertical_value = {};";
         echo "<script>$javascript</script>";
         // dump($allStatuses);
-        if ($isNotVisibleProps) {
-            $visibleProps = VisibleProps::getAllOf($this->type);
-            // dump($visibleProps);
-        }
+        if ($isNotVisibleProps) $visibleProps = VisibleProps::getAllOf($this->type);
 
         $result = [];
         $index = 0;
@@ -99,7 +100,7 @@ class ManageV_Parent extends Manage_Parent
 
     protected function getDataHeader()
     {
-        $allStatuses = array_keys(LibStatuses::getFor($this->type));
+        $allStatuses = array_keys($this->getColumnSource());
         $result = [];
         foreach ($allStatuses as $status) {
             $button = "<x-renderer.button htmlType='button' size='xs' value='xxx' onClick='toggleVParent_Vertical(\"$status\")'>Toggle</x-renderer.button>";
