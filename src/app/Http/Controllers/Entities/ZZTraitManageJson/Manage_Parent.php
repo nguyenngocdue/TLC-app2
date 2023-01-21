@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
+use App\Utils\Support\Json\SuperProps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 
@@ -86,6 +87,7 @@ abstract class Manage_Parent
             $jsonGetSet::move($result, $direction, $name);
         }
         $jsonGetSet::setAllOf($this->type, $result);
+        SuperProps::invalidateCache($this->type);
         return back();
     }
 
@@ -100,6 +102,7 @@ abstract class Manage_Parent
         ];
         $dataSource = $this->jsonGetSet::getAllOf($this->type) + $newItems;
         $this->jsonGetSet::setAllOf($this->type, $dataSource);
+        SuperProps::invalidateCache($this->type);
         return back();
     }
 }

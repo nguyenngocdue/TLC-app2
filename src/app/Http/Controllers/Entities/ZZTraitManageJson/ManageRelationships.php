@@ -86,7 +86,7 @@ class ManageRelationships extends Manage_Parent
 
         $result = [];
         foreach ($columnParams as $elqName => $elqValue) {
-            $rowDescription = join(" | ", $elqValue);
+            $rowDescription = "$elqName => " . join(" | ", $elqValue);
             $result["_$elqName"] = [
                 "name" => "_$elqName",
                 "eloquent" => $elqName,

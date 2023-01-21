@@ -32,6 +32,11 @@ class ManageDefaultValues extends Manage_Parent
                 // "editable" => true,
             ],
             [
+                "dataIndex" => "default_value",
+                "renderer" => "text",
+                "editable" => true,
+            ],
+            [
                 "dataIndex" => "validation",
                 "editable" => true,
                 "renderer" => "text",
@@ -62,11 +67,6 @@ class ManageDefaultValues extends Manage_Parent
                 "editable" => true,
             ],
             [
-                "dataIndex" => "default_value",
-                "renderer" => "text",
-                "editable" => true,
-            ],
-            [
                 "dataIndex" => "control_extra",
                 "renderer" => "text",
                 "editable" => true,
@@ -86,10 +86,10 @@ class ManageDefaultValues extends Manage_Parent
             } else {
                 $newItem = [
                     'name' => $name,
-                    'label' => $prop['label'],
                     'column_name' => $prop['column_name'],
                 ];
             }
+            $newItem['label'] = $prop['label'];
             if (isset($prop['column_type']) && $prop['column_type'] === 'static') $newItem['row_color'] = "amber";
             $result[] = $newItem;
         }
