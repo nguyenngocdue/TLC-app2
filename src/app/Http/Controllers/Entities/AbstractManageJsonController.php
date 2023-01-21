@@ -27,6 +27,7 @@ class Pages
 
     const ReadOnlyExcProp = "VReadOnlyExcProp";
     const HiddenExcProp = "VHiddenExcProp";
+    const Capability = "Capability";
 }
 
 abstract class AbstractManageJsonController extends Controller
@@ -52,6 +53,8 @@ abstract class AbstractManageJsonController extends Controller
 
         "_rol-exc" => Pages::ReadOnlyExcProp,
         "_hdn-exc" => Pages::HiddenExcProp,
+
+        "_cpb" => Pages::Capability,
     ];
 
     public function getType(Request $request = null)

@@ -42,7 +42,7 @@ class RoleSetSeeder extends Seeder
             "hse_member",
             "it_manager",
             "it_member",
-            "mgr_assistant_nz",
+            "mgr_asst_nz",
             "newcomer",
             "pln_admin",
             "prod_manager",
