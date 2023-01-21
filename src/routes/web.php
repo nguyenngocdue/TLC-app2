@@ -47,6 +47,7 @@ Route::group([
                 $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
 
                 Route::resource("{$singular}_prp", "{$path}ManageJsonController")->only('index', 'store', 'create');
+                Route::resource("{$singular}_dfv", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_rls", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_ltn", "{$path}ManageJsonController")->only('index', 'store', 'create');
                 Route::resource("{$singular}_stt", "{$path}ManageJsonController")->only('index', 'store');

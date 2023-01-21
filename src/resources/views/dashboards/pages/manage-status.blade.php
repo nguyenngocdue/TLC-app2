@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Manage Json')
+@section('title', 'Manage Workflow')
 
 @section('content')
 <x-navigation.pill />

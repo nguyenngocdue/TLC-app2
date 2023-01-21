@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 class Pages
 {
     const Prop = "Prop";
+    const DefaultValue = "DefaultValue";
     const Listener = "Listener";
     const Relationship = "Relationship";
     const Status = "Status";
@@ -37,6 +38,7 @@ abstract class AbstractManageJsonController extends Controller
 
     private $pages = [
         "_prp" => Pages::Prop,
+        "_dfv" => Pages::DefaultValue,
         "_ltn" => Pages::Listener,
         "_stt" => Pages::Status,
         "_rls" => Pages::Relationship,
@@ -61,8 +63,8 @@ abstract class AbstractManageJsonController extends Controller
     {
         if (is_null($request)) return $this->type;
         $pathInfo = $request->getPathInfo();
-        $path = substr($pathInfo, strrpos($pathInfo, "/") + 1); // /config/attachment_prp => attachment_prp
-        $path = substr($path, 0, strrpos($path, "_")); // attachment_prp => attachment
+        $path = substr($pathInfo, strrpos($pathInfo, "/") + 1); // /config/attachment_abc => attachment_abc
+        $path = substr($path, 0, strrpos($path, "_")); // attachment_abc => attachment
         return $path;
     }
 
@@ -70,8 +72,8 @@ abstract class AbstractManageJsonController extends Controller
     {
         $pathInfo = $request->getPathInfo();
         // foreach ($this->pages as $key => $value) if (strpos($pathInfo, $key)) return $value;
-        $path = substr($pathInfo, strrpos($pathInfo, "/") + 1); // /config/attachment_prp => attachment_prp
-        $path = substr($path, strrpos($path, "_")); // attachment_prp-abc => _prp-abc
+        $path = substr($pathInfo, strrpos($pathInfo, "/") + 1); // /config/attachment_abc => attachment_abc
+        $path = substr($path, strrpos($path, "_")); // attachment_abc-def => _abc-def
         if (isset($this->pages[$path])) return $this->pages[$path];
         return "Unknown pathInfo $pathInfo";
     }

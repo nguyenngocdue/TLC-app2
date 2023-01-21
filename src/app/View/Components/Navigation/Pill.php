@@ -29,6 +29,7 @@ class Pill extends Component
 
         $links = [];
         $links[] = ['href' => route($singular . '_prp.index'), 'disabled' => strpos($as, '_prp.') !== false, 'title' => 'Props',];
+        $links[] = ['href' => route($singular . '_dfv.index'), 'disabled' => strpos($as, '_dfv.') !== false, 'title' => 'Default Values',];
         $links[] = ['href' => route($singular . '_rls.index'), 'disabled' => strpos($as, '_rls.') !== false, 'title' => 'Relationships',];
         $links[] = ['href' => route($singular . '_ltn.index'), 'disabled' => strpos($as, '_ltn.') !== false, 'title' => 'Listeners',];
         $links[] = ['href' => route($singular . '_stt.index'), 'disabled' => strpos($as, '_stt.') !== false, 'title' => 'Statuses',];
@@ -39,7 +40,6 @@ class Pill extends Component
         $links[] = ['href' => route($singular . '_stn.index'), 'disabled' => strpos($as, '_stn.') !== false, 'title' => 'Settings',];
 
         $links[] = ['href' => route($singular . '_prp.index'), 'disabled' => strpos($as, '_stt6.') !== false, 'title' => 'In Between',];
-        $links[] = ['href' => route($singular . '_prp.index'), 'disabled' => strpos($as, '_stt8.') !== false, 'title' => 'Default Values',];
 
         $links1 = [];
         $links1[] = ['href' => route($singular . '_vsb.index'), 'disabled' => strpos($as, '_vsb.') !== false, 'title' => 'Visible',];
