@@ -41,7 +41,6 @@ class Pill extends Component
         $links[] = ['href' => route($singular . '_prp.index'), 'disabled' => strpos($as, '_stt6.') !== false, 'title' => 'In Between',];
         $links[] = ['href' => route($singular . '_prp.index'), 'disabled' => strpos($as, '_stt7.') !== false, 'title' => 'Capabilities',];
         $links[] = ['href' => route($singular . '_prp.index'), 'disabled' => strpos($as, '_stt8.') !== false, 'title' => 'Default Values',];
-        $links[] = ['href' => route($singular . '_unt.index'), 'disabled' => strpos($as, '_unt.') !== false, 'title' => 'Unit Tests',];
 
         $links1 = [];
         $links1[] = ['href' => route($singular . '_vsb.index'), 'disabled' => strpos($as, '_vsb.') !== false, 'title' => 'Visible',];
@@ -50,6 +49,7 @@ class Pill extends Component
         $links1[] = ['href' => route($singular . '_hdn.index'), 'disabled' => strpos($as, '_hdn.') !== false, 'title' => 'Hidden',];
         $links1[] = ['href' => route($singular . '_rol-exc.index'), 'disabled' => strpos($as, '_rol-exc.') !== false, 'title' => 'Read-Only Exception',];
         $links1[] = ['href' => route($singular . '_hdn-exc.index'), 'disabled' => strpos($as, '_hdn-exc.') !== false, 'title' => 'Hidden Exception',];
+        $links1[] = ['href' => route($singular . '_unt.index'), 'disabled' => strpos($as, '_unt.') !== false, 'title' => 'Unit Tests',];
 
 
         return view('components.navigation.pill')->with(compact('links', 'links1'));

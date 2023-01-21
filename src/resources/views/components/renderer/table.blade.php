@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 @isset($headerRendered)
-                <thead class="sticky top-0 z-10">
+                <thead class="sticky top-{{$headerTop}} z-10">
                     <tr class='text-xs font-semibold tracking-wide text-center text-gray-500 border-b dark:border-gray-700 bg-gray-100 dark:text-gray-400 dark:bg-gray-800'>
                         {!! $headerRendered !!}
                     </tr>

@@ -14,6 +14,7 @@ abstract class ManageV_Parent extends Manage_Parent
 {
     protected $viewName = "dashboards.pages.manage-v-parent";
     protected $excludedColumnsFromStoring = ['label', 'toggle'];
+    protected $headerTop = 9;
 
     abstract protected function getColumnSource();
 
@@ -24,20 +25,24 @@ abstract class ManageV_Parent extends Manage_Parent
                 "dataIndex" => 'name',
                 'renderer' => 'read-only-text',
                 'editable' => true,
+                'fixed' => 'left',
             ],
             [
                 "dataIndex" => 'column_name',
                 'renderer' => 'read-only-text',
                 'editable' => true,
+                // 'fixed' => 'left',
             ],
             [
                 "dataIndex" => 'label',
                 'renderer' => 'read-only-text',
                 'editable' => true,
+                // 'fixed' => 'left',
             ],
             [
                 "dataIndex" => 'toggle',
                 'width' => 10,
+                // 'fixed' => 'right',
             ],
         ];
 

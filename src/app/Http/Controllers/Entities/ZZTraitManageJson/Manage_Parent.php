@@ -11,6 +11,7 @@ abstract class Manage_Parent
     protected $routeKey;
     protected $jsonGetSet;
     protected $excludedColumnsFromStoring = [];
+    protected $headerTop = 0;
 
     protected abstract function getColumns();
     protected abstract function getDataSource();
@@ -55,6 +56,7 @@ abstract class Manage_Parent
             'columns' => $this->getColumns(),
             'dataSource' => array_values($this->getDataSource()),
             'dataHeader' => $this->getDataHeader(),
+            'headerTop' => $this->headerTop,
         ]);
     }
 
