@@ -95,6 +95,7 @@ abstract class ManageV_Parent extends Manage_Parent
                 }
             }
 
+            if (isset($prop['column_type']) && $prop['column_type'] === 'static') $newItem['row_color'] = "amber";
             $result[] = $newItem;
             $index++;
         }

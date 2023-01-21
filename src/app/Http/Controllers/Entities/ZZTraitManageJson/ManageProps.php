@@ -68,6 +68,7 @@ class ManageProps extends Manage_Parent
                 "editable" => true,
                 "renderer" => "number",
                 'width' => 10,
+                'title' => "Width (px)",
             ],
             [
                 "dataIndex" => "hidden_view_all",

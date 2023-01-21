@@ -1,0 +1,123 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_standard_working_hour": {
+        "name": "_standard_working_hour",
+        "column_name": "standard_working_hour",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_def_assignee": {
+        "name": "_def_assignee",
+        "column_name": "def_assignee",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_getDefMonitors()": {
+        "name": "_getDefMonitors()",
+        "column_name": "getDefMonitors()",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "label": "",
+        "validation": "",
+        "formula": "All_SlugifyByName",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_user": {
+        "name": "_user",
+        "column_name": "user",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_getPublicHolidays": {
+        "name": "_getPublicHolidays",
+        "column_name": "getPublicHolidays",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    }
+}

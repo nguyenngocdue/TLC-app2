@@ -1,0 +1,112 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_datetime1": {
+        "name": "_datetime1",
+        "column_name": "datetime1",
+        "label": "",
+        "validation": "date_format:Y-m-d H:i:s",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_datetime2": {
+        "name": "_datetime2",
+        "column_name": "datetime2",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_datetime3": {
+        "name": "_datetime3",
+        "column_name": "datetime3",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_datetime4": {
+        "name": "_datetime4",
+        "column_name": "datetime4",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_datetime5": {
+        "name": "_datetime5",
+        "column_name": "datetime5",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_datetime6": {
+        "name": "_datetime6",
+        "column_name": "datetime6",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_datetime7": {
+        "name": "_datetime7",
+        "column_name": "datetime7",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    }
+}

@@ -1,0 +1,134 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_content": {
+        "name": "_content",
+        "column_name": "content",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_radio_yes_no": {
+        "name": "_radio_yes_no",
+        "column_name": "radio_yes_no",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_radio_pass_fail": {
+        "name": "_radio_pass_fail",
+        "column_name": "radio_pass_fail",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_dropdown_yes_no": {
+        "name": "_dropdown_yes_no",
+        "column_name": "dropdown_yes_no",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_dropdown_pass_fail": {
+        "name": "_dropdown_pass_fail",
+        "column_name": "dropdown_pass_fail",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_checkboxYesNo()": {
+        "name": "_checkboxYesNo()",
+        "column_name": "checkboxYesNo()",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_checkboxPassFail()": {
+        "name": "_checkboxPassFail()",
+        "column_name": "checkboxPassFail()",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_dropdownMultiYesNo()": {
+        "name": "_dropdownMultiYesNo()",
+        "column_name": "dropdownMultiYesNo()",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_dropdownMultiPassFail()": {
+        "name": "_dropdownMultiPassFail()",
+        "column_name": "dropdownMultiPassFail()",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    }
+}
