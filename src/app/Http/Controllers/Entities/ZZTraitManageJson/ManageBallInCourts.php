@@ -73,7 +73,7 @@ class ManageBallInCourts extends Manage_Parent
                 foreach ($workflow as $k => $v) {
                     if ($v) $workflowArray[] = $k;
                 }
-                dump($workflow);
+                // dump($workflow);
                 // dump($workflowArray);
                 foreach (array_keys($allStatuses) as $status2) {
                     if (is_array($workflow) && in_array($status2, $workflowArray)) {

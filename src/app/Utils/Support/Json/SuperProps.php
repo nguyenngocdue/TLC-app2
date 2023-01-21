@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class SuperProps
 {
     private static $result = [];
-    private static function attachRelationship(&$allProps, $type)
+    private static function makeRelationshipObject($type)
     {
         $allRelationship = Relationships::getAllOf($type);
         // dump("RELATIONSHIP");
@@ -22,8 +22,13 @@ class SuperProps
         foreach ($allRelationship as $key => $rls) {
             switch ($rls['relationship']) {
                 case 'belongsTo': //"getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
-                    $column_name = $eloquentParams[substr($key, 1)][2];
-                    $result[$column_name] = $rls;
+                    $eloquentKey = substr($key, 1);
+                    if (isset($eloquentParams[$eloquentKey][2])) {
+                        $column_name = $eloquentParams[$eloquentKey][2];
+                        $result["_" . $column_name] = $rls;
+                    } else {
+                        static::$result['problems']['orphan_relationships'][] = "Key $eloquentKey not found in EloquentParams";
+                    }
                     break;
                 case 'hasMany': //"posts" => ['hasMany', Post::class, 'owner_id', 'id'],
                 case 'belongsToMany': //"prodRoutings" => ['belongsToMany', Prod_routing::class, 'prod_routing_details', 'prod_routing_link_id', 'prod_routing_id'],
@@ -33,52 +38,70 @@ class SuperProps
                 case "morphMany": //"comment_by_clinic" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
                 case 'getCheckedByField': // "mainAffectedPart()" => ["getCheckedByField", Term::class],
                     $column_name = substr($key, 1);
-                    $result[$column_name] = $rls;
+                    $result["_" . $column_name] = $rls;
                     break;
                     // case 'hasOne':
                 default:
-                    static::$result['problems']['orphan_relationships'][] = $rls['name'] . " - " . $rls['relationship'];
+                    static::$result['problems']['unknown_relationships'][] = $rls['relationship'] . " - " . $rls['name'];
                     break;
             }
         }
-        // dump("RESULT");
-        // dump($result);
-        foreach ($allProps as $key => &$prop) {
-            $column_name = $prop['column_name'];
+        return $result;
+    }
+
+    private static function attachJson($external_name, &$allProps, $externals)
+    {
+        foreach ($externals as $column_name => $value) {
             // dump($column_name);
-            if (isset($result[$column_name])) {
-                $prop['relationship'] = $result[$column_name];
+            $allProps[$column_name][$external_name] = [];
+            if (isset($allProps[$column_name])) {
+                foreach ($value as $k => $v) $allProps[$column_name][$external_name][$k] = $v;
+            } else {
+                static::$result['problems']["orphan_$external_name"][] = "Column name not found $column_name - " . $value['name'];
             }
         }
     }
 
-    private static function attachDefaultValues(&$allProps, $type)
+    private static function makeCheckbox($dataSource)
     {
-        $allDefaultValues = DefaultValues::getAllOf($type);
-        foreach ($allProps as $key => &$prop) {
-            if (isset($allDefaultValues[$key])) {
-                $defaultValues = $allDefaultValues[$key];
-                foreach ($defaultValues as $a => $defaultValue) {
-                    $prop[$a] = $defaultValue;
-                }
+        // unset($dataSource['name']);
+        // unset($dataSource['column_name']);
+        $result = [];
+        // dump($dataSource);
+        foreach ($dataSource as $key => $value) {
+            unset($value['name']);
+            unset($value['column_name']);
+            $items = [];
+            foreach ($value as $k => $v) {
+                if ($v === 'true') $items[] = $k;
             }
+            $result[$key] = $items;
         }
+        // dump($result);
+        return $result;
     }
 
     private static function readProps($type)
     {
         $allProps = Props::getAllOf($type);
-        static::attachDefaultValues($allProps, $type);
-        static::attachRelationship($allProps, $type);
+        static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
+        static::attachJson("default-values", $allProps, DefaultValues::getAllOf($type));
+        static::attachJson("relationships", $allProps, static::makeRelationshipObject($type));
+        static::attachJson("visible", $allProps, static::makeCheckbox(VisibleProps::getAllOf($type)));
+        static::attachJson("hidden", $allProps, static::makeCheckbox(HiddenProps::getAllOf($type)));
+        static::attachJson("required", $allProps,  static::makeCheckbox(RequiredProps::getAllOf($type)));
+        static::attachJson("read-only", $allProps, static::makeCheckbox(ReadOnlyProps::getAllOf($type)));
+        static::attachJson("hidden-exc", $allProps, static::makeCheckbox(HiddenExcProps::getAllOf($type)));
+        static::attachJson("read-only-exc", $allProps, static::makeCheckbox(ReadOnlyExcProps::getAllOf($type)));
         return $allProps;
     }
 
     private static function make($type)
     {
+        static::$result['problems'] = [];
         static::$result['type'] = $type;
         static::$result['plural'] = Str::plural($type);
         static::$result['props'] = static::readProps($type);
-        static::$result['problems'] = [];
         return static::$result;
     }
 
