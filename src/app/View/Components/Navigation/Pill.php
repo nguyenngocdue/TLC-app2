@@ -8,10 +8,6 @@ use Illuminate\Support\Str;
 
 class Pill extends Component
 {
-    public function __construct()
-    {
-    }
-
     public function render()
     {
         $type = CurrentRoute::getTypePlural();
@@ -38,8 +34,7 @@ class Pill extends Component
         $links[] = ['href' => route($singular . '_bic.index'), 'disabled' => strpos($as, '_bic.') !== false, 'title' => 'Ball In Court',];
         $links[] = ['href' => route($singular . '_atb.index'), 'disabled' => strpos($as, '_atb.') !== false, 'title' => 'Action Buttons',];
         $links[] = ['href' => route($singular . '_dfn.index'), 'disabled' => strpos($as, '_dfn.') !== false, 'title' => 'Definitions',];
-
-        $links[] = ['href' => route($singular . '_prp.index'), 'disabled' => strpos($as, '_stt6.') !== false, 'title' => 'In Between',];
+        $links[] = ['href' => route($singular . '_itm.index'), 'disabled' => strpos($as, '_itm.') !== false, 'title' => 'Intermediate Props',];
 
         $links1 = [];
         $links1[] = ['href' => route($singular . '_vsb.index'), 'disabled' => strpos($as, '_vsb.') !== false, 'title' => 'Visible',];
@@ -50,6 +45,7 @@ class Pill extends Component
         $links1[] = ['href' => route($singular . '_rol-wl.index'), 'disabled' => strpos($as, '_rol-wl.') !== false, 'title' => 'Read-Only WhiteList',];
         $links1[] = ['href' => route($singular . '_rqr-wl.index'), 'disabled' => strpos($as, '_rqr-wl.') !== false, 'title' => 'Required WhiteList',];
         $links1[] = ['href' => route($singular . '_hdn-wl.index'), 'disabled' => strpos($as, '_hdn-wl.') !== false, 'title' => 'Hidden WhiteList',];
+
         $links1[] = ['href' => route($singular . '_cpb.index'), 'disabled' => strpos($as, '_cpb.') !== false, 'title' => 'Capabilities',];
         $links1[] = ['href' => route($singular . '_unt.index'), 'disabled' => strpos($as, '_unt.') !== false, 'title' => 'Unit Tests',];
 

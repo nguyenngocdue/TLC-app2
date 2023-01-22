@@ -18,8 +18,8 @@ class Pages
     const Transition = "Transition";
     const ActionButton = "ActionButton";
     const Definition = "Definition";
+    const IntermediateProp = "IntermediateProp";
     const BallInCourt = "BallInCourt";
-    const UnitTest = "UnitTest";
 
     const VisibleProp = "VVisibleProp";
     const ReadOnlyProp = "VReadOnlyProp";
@@ -30,7 +30,9 @@ class Pages
     const ReadOnlyWLProp = "VReadOnlyWLProp";
     const RequiredWLProp = "VRequiredWLProp";
     const HiddenWLProp = "VHiddenWLProp";
+
     const Capability = "Capability";
+    const UnitTest = "UnitTest";
 }
 
 abstract class AbstractManageJsonController extends Controller
@@ -47,8 +49,8 @@ abstract class AbstractManageJsonController extends Controller
         "_tst" => Pages::Transition,
         "_atb" => Pages::ActionButton,
         "_dfn" => Pages::Definition,
+        "_itm" => Pages::IntermediateProp,
         "_bic" => Pages::BallInCourt,
-        "_unt" => Pages::UnitTest,
 
         "_vsb" => Pages::VisibleProp,
         "_rol" => Pages::ReadOnlyProp,
@@ -61,6 +63,7 @@ abstract class AbstractManageJsonController extends Controller
         "_hdn-wl" => Pages::HiddenWLProp,
 
         "_cpb" => Pages::Capability,
+        "_unt" => Pages::UnitTest,
     ];
 
     public function getType(Request $request = null)

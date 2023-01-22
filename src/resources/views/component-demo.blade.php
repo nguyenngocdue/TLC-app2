@@ -152,6 +152,9 @@
             <x-renderer.editable.dropdown name="dropdown1" :cbbDataSource='["", "true"]'>true</x-renderer.editable.dropdown>
             Dropdown with sortBy='value'
             <x-renderer.editable.dropdown name="dropdown2" :cbbDataSource='["3", "2", "1"]' sortBy='value'>true</x-renderer.editable.dropdown>
+            Dropdown with cbbDS (Dynamic cbbDataSource loaded from CELL as {'value' => selected, 'cbbDS' => ['', 'a','b',c']})
+            @dump($dropdownCell)
+            <x-renderer.editable.dropdown name="dropdown2" :cell="$dropdownCell"></x-renderer.editable.dropdown>
             Status
             <br />
             <x-renderer.status>unknown_status</x-renderer.status><br />

@@ -20,6 +20,7 @@ class ComponentDemo
     {
         $tableDataSource = $this->getTableDataSource();
         return view('component-demo', [
+            'dropdownCell' => ["value" => "b", "cbbDS" => ["", "a", "b", "c"]],
             'tableColumns' => $this->getTableColumns(),
             'tableEditableColumns' => $this->getTableEditableColumns(),
             'tableDataHeader' => $this->getTableDataHeader(),

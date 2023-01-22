@@ -121,11 +121,25 @@ class SuperProps
         return $allStatuses;
     }
 
+    private static function readIntermediate($type)
+    {
+        $result = [];
+        $data = IntermediateProps::getAllOf($type);
+        foreach ($data as $key => $value) {
+            unset($value['name']);
+            unset($value['column_name']);
+            foreach ($value as $k => $v) {
+                if ($v) $result[$k][$v][] = $key;
+            }
+        }
+        return $result;
+    }
+
     private static function readSettings($type)
     {
-        $a = [];
-        static::attachJson("definitions", $a, static::makeCheckbox(Definitions::getAllOf($type)));
-        return $a;
+        $result = [];
+        static::attachJson("definitions", $result, static::makeCheckbox(Definitions::getAllOf($type)));
+        return $result;
     }
 
     private static function make($type)
@@ -135,13 +149,14 @@ class SuperProps
         static::$result['plural'] = Str::plural($type);
         static::$result['props'] = static::readProps($type);
         static::$result['statuses'] = static::readStatuses($type);
+        static::$result['intermediate'] = static::readIntermediate($type);
         static::$result['settings'] = static::readSettings($type);
         return static::$result;
     }
 
     public static function getFor($type)
     {
-        return static::make($type);
+        // return static::make($type);
         $key = "super_prop_$type";
         if (!Cache::has($key)) {
             Cache::rememberForever($key, fn () => static::make($type));

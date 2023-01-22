@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class ManageBallInCourts extends Manage_Parent
 {
-    protected $viewName = "dashboards.pages.manage-setting";
+    protected $viewName = "dashboards.pages.manage-ball-in-court";
     protected $routeKey = "_bic";
     protected $jsonGetSet = BallInCourts::class;
     protected $storingWhiteList = ['name', 'ball-in-court'];
