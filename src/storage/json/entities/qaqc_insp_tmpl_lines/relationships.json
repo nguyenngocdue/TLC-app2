@@ -2,7 +2,7 @@
     "_getGroup": {
         "name": "_getGroup",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "qaqc_insp_group_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "description",
         "renderer_edit": "",
@@ -11,10 +11,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getRun": {
-        "name": "_getRun",
+    "_getSheet": {
+        "name": "_getSheet",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "qaqc_insp_tmpl_sht_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -26,7 +26,7 @@
     "_getControlType": {
         "name": "_getControlType",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "control_type_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -38,7 +38,7 @@
     "_getControlGroup": {
         "name": "_getControlGroup",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "qaqc_insp_control_group_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

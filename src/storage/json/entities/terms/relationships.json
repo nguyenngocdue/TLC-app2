@@ -2,7 +2,7 @@
     "_getField": {
         "name": "_getField",
         "relationship": "belongsTo",
-        "control_name": "getField",
+        "control_name": "field_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

@@ -11,8 +11,12 @@ class ReadOnlyText extends Component
      *
      * @return void
      */
-    public function __construct(private $name = "", private $placeholder = "")
-    {
+    public function __construct(
+        private $name = "",
+        private $placeholder = "",
+        private $cell = '',
+        private $align = 'left',
+    ) {
         //
     }
 
@@ -23,10 +27,20 @@ class ReadOnlyText extends Component
      */
     public function render()
     {
-        return view('components.renderer.editable.text', [
+        if (is_array($this->cell)) {
+            $value = $this->cell['value'];
+            $title = $this->cell['title'];
+        } else {
+            $value = $this->cell;
+            $title = $this->cell;
+        }
+        return view('components.renderer.editable.read-only-text', [
             'type' => "hidden",
             "name" => $this->name,
             "placeholder" => $this->placeholder,
+            'value' => $value,
+            'title' => $title,
+            'align' => $this->align,
         ]);
     }
 }

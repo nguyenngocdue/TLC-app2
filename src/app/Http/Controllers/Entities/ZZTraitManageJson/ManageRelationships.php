@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 
 class ManageRelationships extends Manage_Parent
 {
+    use TraitPropAndRelationship;
+
     protected $viewName = "dashboards.pages.manage-relationship";
     protected $routeKey = "_rls";
     protected $jsonGetSet = Relationships::class;
@@ -34,8 +36,8 @@ class ManageRelationships extends Manage_Parent
             ],
             [
                 "dataIndex" => "control_name",
+                "renderer" => "read-only-text",
                 "editable" => true,
-                "renderer" => "text",
             ],
             [
                 "dataIndex" => "renderer_view_all",
@@ -91,6 +93,7 @@ class ManageRelationships extends Manage_Parent
                 "name" => "_$elqName",
                 "eloquent" => $elqName,
                 "relationship" => $elqValue[0],
+                'control_name' => Relationships::getColumnName("_" . $elqName,  $elqValue[0], $columnParams),
                 "rowDescription" => $rowDescription,
             ];
         }
@@ -98,31 +101,12 @@ class ManageRelationships extends Manage_Parent
         return $result;
     }
 
-    private function addGreenAndRedColor($a, $b)
-    {
-        $toBeGreen = array_diff_key($a, $b);
-        $toBeRed = array_diff_key($b, $a);
-
-        return [$toBeGreen, $toBeRed];
-    }
-
-    private function renewColumn(&$a, $b, $column)
-    {
-        foreach (array_keys($a) as $key) {
-            if (!isset($b[$key])) continue;
-            $updatedValue = $b[$key][$column];
-            if ($a[$key][$column] != $updatedValue) {
-                $a[$key][$column] = $updatedValue;
-                $a[$key]['row_color'] = 'blue';
-            }
-        }
-    }
-
     protected function getDataSource()
     {
-        $result = $this->makeBlankDefaultObject($this->type);
         $json = Relationships::getAllOf($this->type);
+        $result = $this->makeBlankDefaultObject($this->type);
         $this->renewColumn($json, $result, 'relationship');
+        $this->renewColumn($json, $result, 'control_name');
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
 
         foreach ($json as $key => $columns) {
@@ -135,11 +119,7 @@ class ManageRelationships extends Manage_Parent
         foreach (array_keys($toBeGreen) as $key) $result[$key]['row_color'] = "green";
         foreach (array_keys($toBeRed) as $key) $result[$key]['row_color'] = "red";
 
-        foreach ($result as $key => $columns) {
-            if (isset($columns['row_color']) && $columns['row_color'] === "green") continue;
-            $this->attachActionButtons($result, $key, ['right_by_name']);
-        }
-
+        $this->attachButtons($result, ['right_by_name']);
         return $result;
     }
 }

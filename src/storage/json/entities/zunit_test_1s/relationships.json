@@ -2,7 +2,7 @@
     "_workplaceDropDown1": {
         "name": "_workplaceDropDown1",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "dropdown1",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

@@ -37,6 +37,7 @@ class SidebarEntityItems
                 ['title' => "-",],
                 [
                     'title' => "Manage Workflow",
+                    // 'href' => route("{$singular}_rls.index"),
                     'href' => route("{$singular}_prp.index"),
                 ],
             ],

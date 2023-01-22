@@ -2,7 +2,6 @@
 
 namespace App\Utils\Support\Json;
 
-use App\BigThink\ModelExtended;
 use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
@@ -14,50 +13,26 @@ class SuperProps
     private static function makeRelationshipObject($type)
     {
         $allRelationship = Relationships::getAllOf($type);
-        // dump("RELATIONSHIP");
-        // dump($allRelationship);
-        /** @var ModelExtended $instance */
-        $instance = new ("App\\Models\\$type");
-        $eloquentParams = $instance->eloquentParams;
         $result = [];
-
         foreach ($allRelationship as $key => $rls) {
-            switch ($rls['relationship']) {
-                case 'belongsTo': //"getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
-                    $eloquentKey = substr($key, 1);
-                    if (isset($eloquentParams[$eloquentKey][2])) {
-                        $column_name = $eloquentParams[$eloquentKey][2];
-                        $result["_" . $column_name] = $rls;
-                    } else {
-                        static::$result['problems']['orphan_relationships'][] = "Key $eloquentKey not found in EloquentParams";
-                    }
-                    break;
-                case 'hasMany': //"posts" => ['hasMany', Post::class, 'owner_id', 'id'],
-                case 'belongsToMany': //"prodRoutings" => ['belongsToMany', Prod_routing::class, 'prod_routing_details', 'prod_routing_link_id', 'prod_routing_id'],
-                case 'hasManyThrough': // "prodSequences" => ["hasManyThrough", Prod_sequence::class, Prod_order::class],
-                case "morphTo": //"attachable" => ['morphTo', Attachment::class, 'object_type', 'object_id'],
-                case "morphOne": //"avatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
-                case "morphMany": //"comment_by_clinic" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-                case 'getCheckedByField': // "mainAffectedPart()" => ["getCheckedByField", Term::class],
-                    $column_name = substr($key, 1);
-                    $result["_" . $column_name] = $rls;
-                    break;
-                    // case 'hasOne':
-                default:
-                    static::$result['problems']['unknown_relationships'][] = $rls['relationship'] . " - " . $rls['name'];
-                    break;
-            }
+            $column_name = $rls['control_name'];
+            $result["_" . $column_name] = $rls;
         }
         return $result;
     }
 
     private static function attachJson($external_name, &$allProps, $externals)
     {
+        foreach (array_keys($allProps) as $column_name) {
+            $allProps[$column_name][$external_name] = [];
+        }
         foreach ($externals as $column_name => $value) {
             // dump($column_name);
-            $allProps[$column_name][$external_name] = [];
             if (isset($allProps[$column_name])) {
-                foreach ($value as $k => $v) $allProps[$column_name][$external_name][$k] = $v;
+                foreach ($value as $k => $v) {
+                    if (in_array($k, ['name', 'column_name'])) continue;
+                    $allProps[$column_name][$external_name][$k] = $v;
+                }
             } else {
                 static::$result['problems']["orphan_$external_name"][] = "Column name not found $column_name - " . $value['name'];
             }

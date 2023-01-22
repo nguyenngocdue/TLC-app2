@@ -2,7 +2,7 @@
     "_getControlValue": {
         "name": "_getControlValue",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "qaqc_insp_control_value_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

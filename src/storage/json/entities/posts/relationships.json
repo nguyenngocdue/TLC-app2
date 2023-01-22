@@ -1,11 +1,14 @@
 {
     "_user": {
         "name": "_user",
-        "relationship": "user",
+        "relationship": "belongsTo",
+        "control_name": "owner_id",
         "renderer_view_all": "avatar_name",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control_name": ""
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }
