@@ -9,10 +9,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_name": {
         "name": "_name",
@@ -24,10 +24,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_standard_working_hour": {
         "name": "_standard_working_hour",
@@ -39,10 +39,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_description": {
         "name": "_description",
@@ -54,10 +54,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_def_assignee": {
         "name": "_def_assignee",
@@ -69,10 +69,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_getDefMonitors()": {
         "name": "_getDefMonitors()",
@@ -84,10 +84,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_slug": {
         "name": "_slug",
@@ -99,10 +99,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": "All_SlugifyByName"
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -114,10 +114,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -129,10 +129,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_user": {
         "name": "_user",
@@ -144,10 +144,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "true",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": "true"
     },
     "_getPublicHolidays": {
         "name": "_getPublicHolidays",
@@ -159,9 +159,9 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "true",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": "true"
     }
 }

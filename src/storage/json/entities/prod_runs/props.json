@@ -9,9 +9,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_prod_sequence_id": {
         "name": "_prod_sequence_id",
@@ -23,9 +24,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_date": {
         "name": "_date",
@@ -37,9 +39,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_start": {
         "name": "_start",
@@ -51,9 +54,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_end": {
         "name": "_end",
@@ -65,9 +69,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -79,9 +84,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -93,9 +99,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_users": {
         "name": "_users",
@@ -107,8 +114,9 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "true",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": "true"
     }
 }

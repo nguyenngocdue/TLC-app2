@@ -70,20 +70,22 @@ class ManageIntermediateProps extends Manage_Parent
                 ];
             }
             $newItem['label'] =  $prop['label'];
-            $visibleProp = $visibleProps[$name];
-            unset($visibleProp['name']);
-            unset($visibleProp['column_name']);
-            foreach ($visibleProp as $status => $true_or_false) {
-                if ($true_or_false !== 'true') {
-                    $newItem[$status] = 'invisible';
-                } else {
-                    $cbbDS = [];
-                    $cbbDS[] = "";
-                    foreach ($visibleProp as $k => $v) if ($v === 'true' && $k !== $status) $cbbDS[] = $k;
-                    $newItem[$status] = [
-                        'value' => $newItem[$status] ?? "",
-                        'cbbDS' => $cbbDS,
-                    ];
+            if (isset($visibleProps[$name])) {
+                $visibleProp = $visibleProps[$name];
+                unset($visibleProp['name']);
+                unset($visibleProp['column_name']);
+                foreach ($visibleProp as $status => $true_or_false) {
+                    if ($true_or_false !== 'true') {
+                        $newItem[$status] = 'invisible';
+                    } else {
+                        $cbbDS = [];
+                        $cbbDS[] = "";
+                        foreach ($visibleProp as $k => $v) if ($v === 'true' && $k !== $status) $cbbDS[] = $k;
+                        $newItem[$status] = [
+                            'value' => $newItem[$status] ?? "",
+                            'cbbDS' => $cbbDS,
+                        ];
+                    }
                 }
             }
 

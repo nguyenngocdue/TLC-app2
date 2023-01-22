@@ -6,11 +6,13 @@
         "label": "Id",
         "control": "id",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_datetime1": {
         "name": "_datetime1",
@@ -19,11 +21,13 @@
         "label": "Date Time",
         "control": "picker_datetime",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "date_format:Y-m-d H:i:s",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_datetime2": {
         "name": "_datetime2",
@@ -32,11 +36,13 @@
         "label": "Time",
         "control": "picker_time",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_datetime3": {
         "name": "_datetime3",
@@ -45,11 +51,13 @@
         "label": "Date",
         "control": "picker_date",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_datetime4": {
         "name": "_datetime4",
@@ -58,11 +66,13 @@
         "label": "Month",
         "control": "picker_month",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_datetime5": {
         "name": "_datetime5",
@@ -71,11 +81,13 @@
         "label": "Week",
         "control": "picker_week",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_datetime6": {
         "name": "_datetime6",
@@ -84,11 +96,13 @@
         "label": "Quarter",
         "control": "picker_quarter",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_datetime7": {
         "name": "_datetime7",
@@ -97,11 +111,13 @@
         "label": "Year",
         "control": "picker_year",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -110,11 +126,13 @@
         "label": "Created At",
         "control": "picker_datetime",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -123,10 +141,12 @@
         "label": "Updated At",
         "control": "picker_datetime",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     }
 }

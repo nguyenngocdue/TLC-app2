@@ -6,11 +6,13 @@
         "label": "Id",
         "control": "id",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_content": {
         "name": "_content",
@@ -19,11 +21,13 @@
         "label": "Content",
         "control": "textarea",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_commentable_id": {
         "name": "_commentable_id",
@@ -32,11 +36,13 @@
         "label": "Commentable Id",
         "control": "text",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_commentable_type": {
         "name": "_commentable_type",
@@ -45,11 +51,13 @@
         "label": "Commentable Type",
         "control": "text",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_commentable": {
         "name": "_commentable",
@@ -58,11 +66,13 @@
         "label": "Parent",
         "control": "link_morph_to",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_category": {
         "name": "_category",
@@ -71,11 +81,13 @@
         "label": "Category",
         "control": "dropdown",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -84,11 +96,13 @@
         "label": "Owner Id",
         "control": "dropdown",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -97,11 +111,13 @@
         "label": "Created At",
         "control": "picker_date",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -110,11 +126,13 @@
         "label": "Updated At",
         "control": "picker_date",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_position_rendered": {
         "name": "_position_rendered",
@@ -123,10 +141,12 @@
         "label": "Position",
         "control": "text",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     }
 }

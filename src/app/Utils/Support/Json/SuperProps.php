@@ -4,6 +4,7 @@ namespace App\Utils\Support\Json;
 
 use App\BigThink\ModelExtended;
 use App\Http\Controllers\Workflow\LibStatuses;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
@@ -65,10 +66,7 @@ class SuperProps
 
     private static function makeCheckbox($dataSource)
     {
-        // unset($dataSource['name']);
-        // unset($dataSource['column_name']);
         $result = [];
-        // dump($dataSource);
         foreach ($dataSource as $key => $value) {
             unset($value['name']);
             unset($value['column_name']);
@@ -78,13 +76,11 @@ class SuperProps
             }
             $result[$key] = $items;
         }
-        // dump($result);
         return $result;
     }
 
     private static function makeFromWhiteList($dataSource)
     {
-        // dump($dataSource);
         $result = [];
         foreach ($dataSource as $key => $value) {
             unset($value['name']);
@@ -103,11 +99,15 @@ class SuperProps
         static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
         static::attachJson("default-values", $allProps, DefaultValues::getAllOf($type));
         static::attachJson("relationships", $allProps, static::makeRelationshipObject($type));
+
         static::attachJson("visible-props", $allProps, static::makeCheckbox(VisibleProps::getAllOf($type)));
         static::attachJson("hidden-props", $allProps, static::makeCheckbox(HiddenProps::getAllOf($type)));
         static::attachJson("required-props", $allProps,  static::makeCheckbox(RequiredProps::getAllOf($type)));
         static::attachJson("read-only-props", $allProps, static::makeCheckbox(ReadOnlyProps::getAllOf($type)));
+
+        static::attachJson("visible-wl-role-sets", $allProps, static::makeCheckbox(VisibleWLProps::getAllOf($type)));
         static::attachJson("hidden-wl-role-sets", $allProps, static::makeCheckbox(HiddenWLProps::getAllOf($type)));
+        static::attachJson("required-wl-role-sets", $allProps,  static::makeCheckbox(RequiredWLProps::getAllOf($type)));
         static::attachJson("read-only-wl-role-sets", $allProps, static::makeCheckbox(ReadOnlyWLProps::getAllOf($type)));
         return $allProps;
     }
@@ -156,7 +156,7 @@ class SuperProps
 
     public static function getFor($type)
     {
-        // return static::make($type);
+        if (App::isLocal()) return static::make($type);
         $key = "super_prop_$type";
         if (!Cache::has($key)) {
             Cache::rememberForever($key, fn () => static::make($type));
@@ -166,6 +166,7 @@ class SuperProps
 
     public static function invalidateCache($type)
     {
+        if (App::isLocal()) return;
         $key = "super_prop_$type";
         Cache::forget($key);
     }

@@ -6,11 +6,13 @@
         "label": "id",
         "control": "id",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_content": {
         "name": "_content",
@@ -19,11 +21,13 @@
         "label": "Content",
         "control": "text",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_radio_yes_no": {
         "name": "_radio_yes_no",
@@ -32,11 +36,13 @@
         "label": "Radio Yes\/No",
         "control": "radio",
         "col_span": "6",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_radio_pass_fail": {
         "name": "_radio_pass_fail",
@@ -45,11 +51,13 @@
         "label": "Radio Pass\/Fail",
         "control": "radio",
         "col_span": "6",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_dropdown_yes_no": {
         "name": "_dropdown_yes_no",
@@ -58,11 +66,13 @@
         "label": "Dropdown Yes\/No",
         "control": "dropdown",
         "col_span": "6",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_dropdown_pass_fail": {
         "name": "_dropdown_pass_fail",
@@ -71,11 +81,13 @@
         "label": "Dropdown Pass\/Fail",
         "control": "dropdown",
         "col_span": "6",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -84,11 +96,13 @@
         "label": "created_at",
         "control": "picker_datetime",
         "col_span": "6",
+        "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -97,11 +111,13 @@
         "label": "updated_at",
         "control": "picker_datetime",
         "col_span": "6",
+        "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_checkboxYesNo()": {
         "name": "_checkboxYesNo()",
@@ -110,11 +126,13 @@
         "label": "CheckboxYesNo",
         "control": "checkbox",
         "col_span": "6",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_checkboxPassFail()": {
         "name": "_checkboxPassFail()",
@@ -123,11 +141,13 @@
         "label": "CheckboxPassFail",
         "control": "checkbox",
         "col_span": "6",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_dropdownMultiYesNo()": {
         "name": "_dropdownMultiYesNo()",
@@ -136,11 +156,13 @@
         "label": "DropdownMultiYesNo",
         "control": "dropdown_multi",
         "col_span": "6",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_dropdownMultiPassFail()": {
         "name": "_dropdownMultiPassFail()",
@@ -149,10 +171,12 @@
         "label": "DropdownMultiPassFail",
         "control": "dropdown_multi",
         "col_span": "6",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     }
 }
