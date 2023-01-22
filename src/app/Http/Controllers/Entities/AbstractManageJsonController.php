@@ -17,7 +17,7 @@ class Pages
     const Status = "Status";
     const Transition = "Transition";
     const ActionButton = "ActionButton";
-    const Setting = "Setting";
+    const Definition = "Definition";
     const BallInCourt = "BallInCourt";
     const UnitTest = "UnitTest";
 
@@ -46,7 +46,7 @@ abstract class AbstractManageJsonController extends Controller
         "_rls" => Pages::Relationship,
         "_tst" => Pages::Transition,
         "_atb" => Pages::ActionButton,
-        "_stn" => Pages::Setting,
+        "_dfn" => Pages::Definition,
         "_bic" => Pages::BallInCourt,
         "_unt" => Pages::UnitTest,
 

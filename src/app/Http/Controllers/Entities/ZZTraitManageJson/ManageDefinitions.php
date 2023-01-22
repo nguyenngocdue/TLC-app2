@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
-use App\Utils\Support\Json\Settings;
+use App\Utils\Support\Json\Definitions;
 use Illuminate\Support\Facades\Log;
 
-class ManageSettings extends Manage_Parent
+class ManageDefinitions extends Manage_Parent
 {
-    protected $viewName = "dashboards.pages.manage-setting";
-    protected $routeKey = "_stn";
-    protected $jsonGetSet = Settings::class;
+    protected $viewName = "dashboards.pages.manage-definition";
+    protected $routeKey = "_dfn";
+    protected $jsonGetSet = Definitions::class;
     protected $storingBlackList = ['description'];
 
     protected function getColumns()
@@ -65,7 +65,7 @@ class ManageSettings extends Manage_Parent
                 'rowDescription' => 'Stop rt_la_remaining from realtime',
             ],
         ];
-        $dataInJson = Settings::getAllOf($this->type);
+        $dataInJson = Definitions::getAllOf($this->type);
         $result = [];
         foreach ($settings as $setting) {
             $name = $setting['name'];
