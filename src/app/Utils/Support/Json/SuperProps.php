@@ -3,6 +3,7 @@
 namespace App\Utils\Support\Json;
 
 use App\BigThink\ModelExtended;
+use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
@@ -81,19 +82,50 @@ class SuperProps
         return $result;
     }
 
+    private static function makeFromWhiteList($dataSource)
+    {
+        // dump($dataSource);
+        $result = [];
+        foreach ($dataSource as $key => $value) {
+            unset($value['name']);
+            $items = [];
+            foreach ($value as $k => $v) {
+                $items[$k] = $v;
+            }
+            $result[$key] = $items;
+        }
+        return $result;
+    }
+
     private static function readProps($type)
     {
         $allProps = Props::getAllOf($type);
         static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
         static::attachJson("default-values", $allProps, DefaultValues::getAllOf($type));
         static::attachJson("relationships", $allProps, static::makeRelationshipObject($type));
-        static::attachJson("visible", $allProps, static::makeCheckbox(VisibleProps::getAllOf($type)));
-        static::attachJson("hidden", $allProps, static::makeCheckbox(HiddenProps::getAllOf($type)));
-        static::attachJson("required", $allProps,  static::makeCheckbox(RequiredProps::getAllOf($type)));
-        static::attachJson("read-only", $allProps, static::makeCheckbox(ReadOnlyProps::getAllOf($type)));
-        static::attachJson("hidden-exc", $allProps, static::makeCheckbox(HiddenExcProps::getAllOf($type)));
-        static::attachJson("read-only-exc", $allProps, static::makeCheckbox(ReadOnlyExcProps::getAllOf($type)));
+        static::attachJson("visible-props", $allProps, static::makeCheckbox(VisibleProps::getAllOf($type)));
+        static::attachJson("hidden-props", $allProps, static::makeCheckbox(HiddenProps::getAllOf($type)));
+        static::attachJson("required-props", $allProps,  static::makeCheckbox(RequiredProps::getAllOf($type)));
+        static::attachJson("read-only-props", $allProps, static::makeCheckbox(ReadOnlyProps::getAllOf($type)));
+        static::attachJson("hidden-wl-role-sets", $allProps, static::makeCheckbox(HiddenWLProps::getAllOf($type)));
+        static::attachJson("read-only-wl-role-sets", $allProps, static::makeCheckbox(ReadOnlyWLProps::getAllOf($type)));
         return $allProps;
+    }
+
+    private static function readStatuses($type)
+    {
+        $allStatuses = LibStatuses::getFor($type);
+        static::attachJson("transitions", $allStatuses, static::makeCheckbox(Transitions::getAllOf($type)));
+        static::attachJson("ball-in-courts", $allStatuses, static::makeFromWhiteList(BallInCourts::getAllOf($type)));
+        static::attachJson("action-buttons", $allStatuses, static::makeFromWhiteList(ActionButtons::getAllOf($type)));
+        return $allStatuses;
+    }
+
+    private static function readSettings($type)
+    {
+        $a = [];
+        static::attachJson("settings", $a, static::makeCheckbox(Settings::getAllOf($type)));
+        return $a;
     }
 
     private static function make($type)
@@ -102,6 +134,8 @@ class SuperProps
         static::$result['type'] = $type;
         static::$result['plural'] = Str::plural($type);
         static::$result['props'] = static::readProps($type);
+        static::$result['statuses'] = static::readStatuses($type);
+        static::$result['settings'] = static::readSettings($type);
         return static::$result;
     }
 

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 abstract class ManageV_Parent extends Manage_Parent
 {
     protected $viewName = "dashboards.pages.manage-v-parent";
-    protected $excludedColumnsFromStoring = ['label', 'toggle'];
+    protected $storingBlackList = ['label', 'toggle'];
     protected $headerTop = 9;
 
     abstract protected function getColumnSource();

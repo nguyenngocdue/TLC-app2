@@ -11,7 +11,7 @@ class ManageSettings extends Manage_Parent
     protected $viewName = "dashboards.pages.manage-setting";
     protected $routeKey = "_stn";
     protected $jsonGetSet = Settings::class;
-    protected $excludedColumnsFromStoring = ['description'];
+    protected $storingBlackList = ['description'];
 
     protected function getColumns()
     {

@@ -11,7 +11,8 @@ abstract class Manage_Parent
     protected $viewName;
     protected $routeKey;
     protected $jsonGetSet;
-    protected $excludedColumnsFromStoring = [];
+    protected $storingWhiteList = [];
+    protected $storingBlackList = [];
     protected $headerTop = 0;
 
     protected abstract function getColumns();
@@ -78,7 +79,12 @@ abstract class Manage_Parent
 
         //Make up the columns
         $columns = $this->getColumns();
-        $columns = array_filter($columns, fn ($column) => !in_array($column['dataIndex'], ['action', ...$this->excludedColumnsFromStoring,]));
+        //Remove all things in blacklist
+        $columns = array_filter($columns, fn ($column) => !in_array($column['dataIndex'], ['action', ...$this->storingBlackList,]));
+        //Remove all things NOT in whitelist
+        if (sizeof($this->storingWhiteList) > 0) {
+            $columns = array_filter($columns, fn ($column) => in_array($column['dataIndex'], $this->storingWhiteList));
+        }
 
         $result = $jsonGetSet::convertHttpObjectToJson($data, $columns);
         $this->handleMoveTo($result, $jsonGetSet);

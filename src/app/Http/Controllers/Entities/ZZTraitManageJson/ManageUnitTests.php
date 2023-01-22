@@ -10,7 +10,7 @@ class ManageUnitTests extends Manage_Parent
     protected $viewName = "dashboards.pages.manage-unit-test";
     protected $routeKey = "_unt";
     protected $jsonGetSet = UnitTests::class;
-    // protected $excludedColumnsFromStoring = ['description'];
+    // protected $storingBlackList = ['description'];
 
     protected function getColumns()
     {

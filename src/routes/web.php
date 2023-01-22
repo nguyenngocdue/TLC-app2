@@ -60,8 +60,8 @@ Route::group([
                 Route::resource("{$singular}_rol", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_rqr", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_hdn", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_rol-exc", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_hdn-exc", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_rol-wl", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_hdn-wl", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_cpb", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_unt", "{$path}ManageJsonController")->only('index', 'store', 'create');
             });
