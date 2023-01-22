@@ -26,7 +26,9 @@ class Pages
     const RequiredProp = "VRequiredProp";
     const HiddenProp = "VHiddenProp";
 
+    const VisibleWLProp = "VVisibleWLProp";
     const ReadOnlyWLProp = "VReadOnlyWLProp";
+    const RequiredWLProp = "VRequiredWLProp";
     const HiddenWLProp = "VHiddenWLProp";
     const Capability = "Capability";
 }
@@ -53,7 +55,9 @@ abstract class AbstractManageJsonController extends Controller
         "_rqr" => Pages::RequiredProp,
         "_hdn" => Pages::HiddenProp,
 
+        "_vsb-wl" => Pages::VisibleWLProp,
         "_rol-wl" => Pages::ReadOnlyWLProp,
+        "_rqr-wl" => Pages::RequiredWLProp,
         "_hdn-wl" => Pages::HiddenWLProp,
 
         "_cpb" => Pages::Capability,

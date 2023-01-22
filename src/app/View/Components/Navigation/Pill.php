@@ -46,7 +46,9 @@ class Pill extends Component
         $links1[] = ['href' => route($singular . '_rol.index'), 'disabled' => strpos($as, '_rol.') !== false, 'title' => 'Read-Only',];
         $links1[] = ['href' => route($singular . '_rqr.index'), 'disabled' => strpos($as, '_rqr.') !== false, 'title' => 'Required',];
         $links1[] = ['href' => route($singular . '_hdn.index'), 'disabled' => strpos($as, '_hdn.') !== false, 'title' => 'Hidden',];
+        $links1[] = ['href' => route($singular . '_vsb-wl.index'), 'disabled' => strpos($as, '_vsb-wl.') !== false, 'title' => 'Visible WhiteList',];
         $links1[] = ['href' => route($singular . '_rol-wl.index'), 'disabled' => strpos($as, '_rol-wl.') !== false, 'title' => 'Read-Only WhiteList',];
+        $links1[] = ['href' => route($singular . '_rqr-wl.index'), 'disabled' => strpos($as, '_rqr-wl.') !== false, 'title' => 'Required WhiteList',];
         $links1[] = ['href' => route($singular . '_hdn-wl.index'), 'disabled' => strpos($as, '_hdn-wl.') !== false, 'title' => 'Hidden WhiteList',];
         $links1[] = ['href' => route($singular . '_cpb.index'), 'disabled' => strpos($as, '_cpb.') !== false, 'title' => 'Capabilities',];
         $links1[] = ['href' => route($singular . '_unt.index'), 'disabled' => strpos($as, '_unt.') !== false, 'title' => 'Unit Tests',];
