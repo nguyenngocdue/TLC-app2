@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="The master layout G4T">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name') }}</title>
+    <title>@yield('topTitle', 'Applean') - {{ config('app.name') }}</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/fontawesome-free/css/all.min.css') }}">

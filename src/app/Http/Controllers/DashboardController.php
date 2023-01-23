@@ -55,7 +55,9 @@ class DashboardController extends Controller
         // dump($allWidgets);
         return view(
             'dashboards.dashboard',
-            ['allWidgets' => $allWidgets]
+            [
+                'allWidgets' => $allWidgets,
+            ]
         );
     }
 }

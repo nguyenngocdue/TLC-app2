@@ -55,6 +55,7 @@ abstract class AbstractManageLibController extends Controller
             'dataSource' => $this->getDataSource(),
             'route' => $this->route,
             'title' => $this->title,
+            'type' => 'Workflow',
         ]);
     }
 

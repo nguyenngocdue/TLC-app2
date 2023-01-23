@@ -1,4 +1,7 @@
 @extends('layouts.applean')
+
+@section('topTitle', 'Component Demo')
+
 @section('content')
 
 <br />
