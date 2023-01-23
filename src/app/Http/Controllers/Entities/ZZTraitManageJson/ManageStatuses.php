@@ -77,6 +77,7 @@ class ManageStatuses extends Manage_Parent
 
         return view("dashboards.pages.manage-status", [
             'title' => 'Manage Workflows',
+            'type' => $this->type,
             'route' => route($this->type . '_stt.store'),
             'routeManage' => route("manageStatuses.index"),
 

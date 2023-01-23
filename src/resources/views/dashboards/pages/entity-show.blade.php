@@ -1,4 +1,8 @@
 @extends('layouts.app')
+
+@section('topTitle', Str::headline(Str::plural($type)) )
+@section('title', "View All" )
+
 @section('content')
 {{-- @dd($dataSource) --}}
 <div class=" mb-8 bg-white border px-3 py-3">

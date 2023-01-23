@@ -85,7 +85,7 @@ trait TraitTableData
     public function getTableDataHeader()
     {
         $onClick = "console.log(\"Hello\")";
-        $button = "<x-renderer.button htmlType='button' size='xs' value='xxx' onClick='$onClick'>Hello in console</x-renderer.button>";
+        $button = "<x-renderer.button size='xs' value='xxx' onClick='$onClick'>Hello in console</x-renderer.button>";
         return [
             'client' => Blade::render($button),
         ];

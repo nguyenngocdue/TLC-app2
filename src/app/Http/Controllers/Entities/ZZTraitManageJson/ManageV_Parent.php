@@ -85,7 +85,7 @@ abstract class ManageV_Parent extends Manage_Parent
                     'column_name' => $prop['column_name'],
                 ];
             }
-            $newItem['toggle'] = Blade::render("<x-renderer.button htmlType='button' size='xs' onClick='toggleVParent_Horizon($index)'>Tg</x-renderer.button>");
+            $newItem['toggle'] = Blade::render("<x-renderer.button size='xs' onClick='toggleVParent_Horizon($index)'>Tg</x-renderer.button>");
             $newItem['label'] =  $prop['label'];
 
             if ($isNotVisibleProps) {
@@ -107,7 +107,7 @@ abstract class ManageV_Parent extends Manage_Parent
         $allStatuses = array_keys($this->getColumnSource());
         $result = [];
         foreach ($allStatuses as $status) {
-            $button = "<x-renderer.button htmlType='button' size='xs' value='xxx' onClick='toggleVParent_Vertical(\"$status\")'>Tg</x-renderer.button>";
+            $button = "<x-renderer.button size='xs' value='xxx' onClick='toggleVParent_Vertical(\"$status\")'>Tg</x-renderer.button>";
             $result[$status] = Blade::render($button);
         }
         // Log::info($result);

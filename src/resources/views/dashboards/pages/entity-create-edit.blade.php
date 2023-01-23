@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section("title", Str::headline($action))
+@section('topTitle', Str::headline(Str::plural($type)))
+@section('title', Str::headline($action)) 
 
 @section('content')
 

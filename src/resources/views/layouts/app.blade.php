@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="The master layout G4T">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name') }}</title>
+    <title>@yield('topTitle', 'Untitled') - @yield('title', 'Untitled') - {{ config('app.name') }}</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/fontawesome-free/css/all.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/fontawesome-free/css/all.min.css') }}"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    {{-- <link rel="stylesheet" href="{{ asset('css/fa6.2.1.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/fonts.google.Inter.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}">
@@ -33,7 +36,7 @@
     <div class=" flex bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         <x-homepage.sidebar2 />
         <div class="flex flex-col flex-1 w-full bg-gray-100">
-            <x-homepage.navbar2 />
+            <x-homepage.navbar2/>
             <main class="h-full overflow-y-auto">
                 <div class="container1 mx-auto grid px-6">
                     <div class="no-print container1 flex items-center justify-between h-full mx-auto1 text-purple-600 dark:text-purple-300">

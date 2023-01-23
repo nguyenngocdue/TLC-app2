@@ -1,4 +1,6 @@
 @extends('layouts.app')
+
+@section('topTitle', Str::headline(Str::plural($type)))
 @section('title', 'Manage Workflow')
 
 @section('content')
