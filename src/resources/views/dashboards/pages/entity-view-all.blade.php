@@ -4,11 +4,9 @@
 @section('content')
 
 <div class="grid grid-cols-2 gap-5">
-    <x-form.search action="{{ route($type . '.index') }}">
-    </x-form.search>
+    <x-form.search route="{{ route($type . '.index') }}" title="{{$searchTitle}}" />
     <div class="grid justify-items-end">
-        <x-form.per-page type="{{$type}}" action="{{ route('updateUserSettings') }}" page-limit="{{$pageLimit}}">
-        </x-form.per-page>
+        <x-form.per-page type="{{$type}}" route="{{ route('updateUserSettings') }}" page-limit="{{$pageLimit}}" />
     </div>
 </div>
 

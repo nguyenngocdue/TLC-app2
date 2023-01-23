@@ -11,10 +11,12 @@ class PerPage extends Component
      *
      * @return void
      */
-    public function __construct(private $type = '', private $action = '', private $pageLimit = '')
-    {
+    public function __construct(
+        private $type = '',
+        private $route = '',
+        private $pageLimit = '',
+    ) {
         //
-        // dd("In perpage");
     }
 
     /**
@@ -26,7 +28,7 @@ class PerPage extends Component
     {
         return view('components.form.per-page', [
             'type' => $this->type,
-            'action' => $this->action,
+            'route' => $this->route,
             'pageLimit' => $this->pageLimit,
         ]);
     }
