@@ -81,7 +81,7 @@
             <br />
             @dump($_GET)
             <form action="" method="GET">
-                <x-renderer.card title="readonly={ { false } }, destroyable={ { false } }, showToBeDeleted={ { false } } name={ { comment_1 } }">
+                <x-renderer.card title="readonly={ { false } }, destroyable={ { false } }, showToBeDeleted={ { false } }, name={ { comment_1 } }">
                     <x-renderer.comment readonly={{false}} destroyable={{false}} showToBeDeleted={{false}} name="comment_1" type="department" id="1" :dataComment="$dataComment" />
                 </x-renderer.card>
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
@@ -89,7 +89,7 @@
             <br />
             @dump($_GET)
             <form action="" method="GET">
-                <x-renderer.card title="readonly={ { false } } showToBeDeleted={ { false } }, destroyable={ { true } }, attachmentData={ { $attachmentData } } name={ { comment_1 } }">
+                <x-renderer.card title="readonly={ { false } }, destroyable={ { true } }, showToBeDeleted={ { false } }, name={ { comment_1 } }, attachmentData={ { $attachmentData } } ">
                     <x-renderer.comment readonly={{false}} showToBeDeleted={{false}} destroyable={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment" :attachmentData="$attachmentData" />
                 </x-renderer.card>
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>

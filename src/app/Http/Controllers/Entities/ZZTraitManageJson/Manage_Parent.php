@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
+use App\Utils\Support\Json\JsonGetSet;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
@@ -10,6 +11,7 @@ abstract class Manage_Parent
 {
     protected $viewName;
     protected $routeKey;
+    /** @var JsonGetSet $jsonGetSet */
     protected $jsonGetSet;
     protected $storingWhiteList = [];
     protected $storingBlackList = [];
@@ -51,8 +53,7 @@ abstract class Manage_Parent
     function index(Request $request)
     {
         return view($this->viewName, [
-            'title' => "ABCDEF",
-            // 'title' => $this->getTitle($request),
+            'title' => "Manage Workflows",
             'type' => $this->type,
             'route' => route($this->type . $this->routeKey . '.store'),
             'columns' => $this->getColumns(),

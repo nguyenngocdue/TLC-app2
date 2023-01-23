@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Traits;
+namespace App\BigThink;
 
 use App\Models\Comment;
 

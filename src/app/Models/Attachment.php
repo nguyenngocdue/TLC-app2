@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\BigThink\HasProperties;
 use App\BigThink\ModelExtended;
 
 class Attachment extends ModelExtended
 {
+    use HasProperties;
+
     protected $fillable = ["url_folder", "url_thumbnail", "extension", "url_media", "filename", "category", "owner_id", 'object_id', 'object_type'];
     protected $primaryKey = 'id';
     protected $table = 'attachments';

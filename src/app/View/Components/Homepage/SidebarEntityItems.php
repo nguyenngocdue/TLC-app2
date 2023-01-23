@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Homepage;
 
-use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\App;
@@ -36,12 +35,16 @@ class SidebarEntityItems
                 ],
                 ['title' => "-",],
                 [
-                    'title' => "Manage Workflow",
-                    // 'href' => route("{$singular}_rls.index"),
+                    'title' => "Manage Workflows",
                     'href' => route("{$singular}_prp.index"),
                 ],
             ],
         ];
+
+        if (method_exists($model, "getProperties")) {
+            $result['children'][] =  ['title' => "Manage Properties", 'href' => route("{$singular}_ppt.index"),];
+        }
+
         return $result;
     }
 

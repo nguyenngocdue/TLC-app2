@@ -76,8 +76,7 @@ class ManageStatuses extends Manage_Parent
         $dataSource1 = $this->getDataSourceRight($dataSource0);
 
         return view("dashboards.pages.manage-status", [
-            // 'title' => $this->getTitle($request),
-            'title' => 'ABCDEF',
+            'title' => 'Manage Workflows',
             'route' => route($this->type . '_stt.store'),
             'routeManage' => route("manageStatuses.index"),
 

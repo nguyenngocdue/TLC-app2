@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 
 class Pages
 {
+    const Property = "Property";
     const Prop = "Prop";
     const DefaultValue = "DefaultValue";
     const Listener = "Listener";
@@ -41,6 +42,7 @@ abstract class AbstractManageJsonController extends Controller
     protected $typeModel = "";
 
     private $pages = [
+        "_ppt" => Pages::Property,
         "_prp" => Pages::Prop,
         "_dfv" => Pages::DefaultValue,
         "_ltn" => Pages::Listener,
@@ -66,11 +68,21 @@ abstract class AbstractManageJsonController extends Controller
         "_unt" => Pages::UnitTest,
     ];
 
+    private function getPathInfoWithoutCreate(Request $request)
+    {
+        $pathInfo = $request->getPathInfo();
+        // /config/attachment_abc/create => attachment_abc
+        $posOfCreate = strrpos($pathInfo, "/create");
+        if ($posOfCreate !== false) $pathInfo = substr($pathInfo, 0, $posOfCreate);
+        // /config/attachment_abc => attachment_abc
+        $path = substr($pathInfo, strrpos($pathInfo, "/") + 1);
+        return $path;
+    }
+
     public function getType(Request $request = null)
     {
         if (is_null($request)) return $this->type;
-        $pathInfo = $request->getPathInfo();
-        $path = substr($pathInfo, strrpos($pathInfo, "/") + 1); // /config/attachment_abc => attachment_abc
+        $path = $this->getPathInfoWithoutCreate($request);
         $path = substr($path, 0, strrpos($path, "_")); // attachment_abc => attachment
         return $path;
     }
@@ -78,11 +90,10 @@ abstract class AbstractManageJsonController extends Controller
     protected function getPage(Request $request)
     {
         $pathInfo = $request->getPathInfo();
-        // foreach ($this->pages as $key => $value) if (strpos($pathInfo, $key)) return $value;
-        $path = substr($pathInfo, strrpos($pathInfo, "/") + 1); // /config/attachment_abc => attachment_abc
-        $path = substr($path, strrpos($path, "_")); // attachment_abc-def => _abc-def
+        $path = $this->getPathInfoWithoutCreate($request);
+        $path = substr($path, strrpos($path, "_"));
         if (isset($this->pages[$path])) return $this->pages[$path];
-        return "Unknown pathInfo $pathInfo";
+        return "Unknown pathInfo $pathInfo, key $path";
     }
 
     protected function getTitle(Request $request)

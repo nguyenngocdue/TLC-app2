@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\BigThink\HasProperties;
 use App\BigThink\ModelExtended;
 
 class Comment extends ModelExtended
 {
+    use HasProperties;
+
     protected $fillable = ['content', 'position_rendered', 'owner_id', 'category'];
     protected $table = "comments";
     protected $primaryKey = 'id';
