@@ -4,9 +4,9 @@
         <div class="flex flex-1 lg:mr-32">
             <b>@yield('topTitle', 'Untitled')</b>
         </div>
-        <div class="flex justify-center flex-1 lg:mr-32">            
-           {{--  <x-homepage.search-input></x-homepage.search-input> --}}
-        </div>
+        {{-- <div class="flex justify-center flex-1 lg:mr-32">            
+            <x-homepage.search-input></x-homepage.search-input>
+        </div> --}}
         <ul class="flex items-center flex-shrink-0 space-x-6">
             {{-- <li class="flex">
                 <x-homepage.theme-toggle></x-homepage.theme-toggle>

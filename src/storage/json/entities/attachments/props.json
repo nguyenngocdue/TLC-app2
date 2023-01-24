@@ -3,7 +3,7 @@
         "name": "_id",
         "column_name": "id",
         "column_type": "bigint",
-        "label": "Id",
+        "label": "ID",
         "control": "id",
         "col_span": "12",
         "width": "",

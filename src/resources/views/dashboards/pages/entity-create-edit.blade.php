@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('topTitle', Str::headline(Str::plural($type)))
-@section('title', Str::headline($action)) 
+@section('topTitle', Str::appTitle($type))
+@section('title', $title )
 
 @section('content')
 
@@ -40,7 +40,7 @@ $id = $action === "edit" ? $values->id : "";
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
 
         $isRequired = in_array("required", explode("|", $defaultValue['validation']));
-        $iconJson = $columnType === 'json' ? App\Utils\ConstantSVG::ICON_SVG : "";
+        $iconJson = $columnType === 'json' ? App\Utils\ConstantSVG::ICON_JSON : "";
         @endphp
         <div class='col-span-{{$col_span}} grid'>
             <div class='grid grid-row-1'>

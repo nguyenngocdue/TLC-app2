@@ -16,7 +16,6 @@ class ControlStatus extends Component
         private $type,
         private $colName,
         private $id,
-        private $action,
         private $modelPath,
     ) {
         //

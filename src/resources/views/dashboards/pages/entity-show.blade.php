@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('topTitle', Str::headline(Str::plural($type)) )
-@section('title', "View All" )
+@section('topTitle', Str::appTitle($type) )
+@section('title', "Show" )
 
 @section('content')
 {{-- @dd($dataSource) --}}
