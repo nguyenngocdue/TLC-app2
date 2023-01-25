@@ -8,20 +8,37 @@ trait TraitTabData
 {
     function getTab1()
     {
-        $results[] = "<x-renderer.button htmlType='submit' name='button' size='xs' value='right_by_name,1' type='danger' outline=true><i class='fa fa-trash'></i></x-renderer.button>";
-        $result = join("", $results);
-        $a = "<div class='whitespace-nowrap'>$result</div>";
         return [
             [
-                'label' => 'Tab 1',
-                'children' => Blade::render($a),
+                'label' => 'Static',
+                'children' => "Content 01",
             ],
             [
-                'label' => 'Tab 2',
+                'label' => 'Data Display',
                 'children' => "Content 02",
             ],
             [
-                'label' => 'Tab 3',
+                'label' => 'Data Entry',
+                'children' => "Content 03",
+            ],
+            [
+                'label' => 'Attachments',
+                'children' => "Content 03",
+            ],
+            [
+                'label' => 'Comments',
+                'children' => "Content 03",
+            ],
+            [
+                'label' => 'Editable Tables',
+                'children' => "Content 03",
+            ],
+            [
+                'label' => 'Navigation',
+                'children' => "Content 03",
+            ],
+            [
+                'label' => 'Feedbacks',
                 'children' => "Content 03",
             ],
         ];

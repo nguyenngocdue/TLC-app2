@@ -4,16 +4,16 @@
 
 
 <!-- CREATE - EDIT -->
-<span class="col-span-1"></span>
-<span class="col-span-2"></span>
-<span class="col-span-3"></span>
-<span class="col-span-4"></span>
-<span class="col-span-5"></span>
-<span class="col-span-6"></span>
-<span class="col-span-7"></span>
-<span class="col-span-8"></span>
-<span class="col-span-9"></span>
-<span class="col-span-10"></span>
+<span class="mx-1 col-span-1"></span>
+<span class="mx-2 col-span-2"></span>
+<span class="mx-3 col-span-3"></span>
+<span class="mx-4 col-span-4"></span>
+<span class="mx-5 col-span-5"></span>
+<span class="mx-6 col-span-6"></span>
+<span class="mx-7 col-span-7"></span>
+<span class="mx-8 col-span-8"></span>
+<span class="mx-9 col-span-9"></span>
+<span class="mx-10 col-span-10"></span>
 <!--  -->
 
 <!-- Divide -->
