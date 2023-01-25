@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class SidebarEntityItems
 {
-    private static function maker($table, $svg)
+    private static function maker($table)
     {
         $currentType = CurrentRoute::getTypeSingular();
         $singular = Str::singular($table);
@@ -22,7 +22,7 @@ class SidebarEntityItems
         $result = [
             "title" => $model->getMenuTitle(),
             "type" => $singular,
-            "icon" => $svg['form'],
+            "icon" => $isActive ? "fa-duotone fa-folder-open" : "fa-duotone fa-folder",
             "isActive" => $isActive,
             "children" => [
                 [
@@ -48,10 +48,10 @@ class SidebarEntityItems
         return $result;
     }
 
-    public static function getAll($svg)
+    public static function getAll()
     {
         $tables = Entities::getAllPluralNames();
-        $items = array_map(fn ($table) => self::maker($table, $svg), $tables);
+        $items = array_map(fn ($table) => self::maker($table), $tables);
         return $items;
     }
 }

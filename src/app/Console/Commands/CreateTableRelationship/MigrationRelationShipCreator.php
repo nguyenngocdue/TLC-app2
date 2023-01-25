@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\CreateTableRelationship;
+namespace App\Console\Commands\CreateTableRelationship;
 
 use Closure;
 use Illuminate\Filesystem\Filesystem;

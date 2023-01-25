@@ -32,6 +32,7 @@ class WelcomeController extends Controller
         // dump(SuperProps::getFor('zunit_test_1'));
         // dump(SuperProps::getFor('zunit_test_2'));
         // dump(SuperProps::getFor('zunit_test_9'));
+
         return view(
             'welcome',
             []

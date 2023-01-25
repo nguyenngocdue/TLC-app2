@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Console\CreateTableRelationship\MigrationRelationShipCreator;
+use App\Console\Commands\CreateTableRelationship\MigrationRelationShipCreator;
 use Illuminate\Database\Console\Migrations\BaseCommand;
 use Illuminate\Support\Composer;
 use Illuminate\Support\Str;

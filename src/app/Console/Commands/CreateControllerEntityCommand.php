@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Console\CreateControllerEntity\CreateControllerEntityCreator;
+use App\Console\Commands\CreateControllerEntity\CreateControllerEntityCreator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\File;
@@ -28,7 +28,7 @@ class CreateControllerEntityCommand extends Command
     /**
      * The migration creator instance.
      *
-     * @var \App\Console\CreateControllerEntity\CreateControllerEntityCreator
+     * @var \App\Console\Commands\CreateControllerEntity\CreateControllerEntityCreator
      */
     protected $creator;
 

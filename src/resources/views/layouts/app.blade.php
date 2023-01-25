@@ -7,11 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('topTitle', 'Untitled') - @yield('title', 'Untitled') - {{ config('app.name') }}</title>
 
+    <link rel="stylesheet" href="{{ asset('vendor/font-awesome-pro-6/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/fontawesome-free/css/all.min.css') }}"> --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    {{-- <link rel="stylesheet" href="{{ asset('css/fa6.2.1.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/fonts.google.Inter.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}">

@@ -6,13 +6,13 @@ use App\Utils\Support\CurrentRoute;
 
 class SidebarAdminItems
 {
-    private static function getPermission($currentType, $svg)
+    private static function getPermission($currentType)
     {
         $isActive = ($currentType === 'permission');
         return [
             "title" => "Permissions",
             // "type" => "ppppp",
-            "icon" => $svg['modals'],
+            "icon" => "fa-duotone fa-dice-d20",
             "isActive" => $isActive,
             "children" => [
                 [
@@ -50,13 +50,13 @@ class SidebarAdminItems
         ];
     }
 
-    private static function getWorkflow($currentType, $svg)
+    private static function getWorkflow($currentType)
     {
         $isActive = ($currentType === 'workflow');
         return [
             "title" => "Workflows",
             // "type" => "ppppp",
-            "icon" => $svg['layout'],
+            "icon" => "fa-duotone fa-bars-staggered",
             "isActive" => $isActive,
             "children" => [
                 [
@@ -75,11 +75,11 @@ class SidebarAdminItems
         ];
     }
 
-    public static function getAll($svg)
+    public static function getAll()
     {
         $currentType = CurrentRoute::getTypeSingular();
-        $result[] = self::getPermission($currentType, $svg);
-        $result[] = self::getWorkflow($currentType, $svg);
+        $result[] = self::getPermission($currentType);
+        $result[] = self::getWorkflow($currentType);
         return $result;
     }
 }

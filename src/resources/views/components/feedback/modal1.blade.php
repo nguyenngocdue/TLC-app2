@@ -29,7 +29,7 @@
   <!-- Remove header if you don't want a close icon. Use modal body to place modal tile. -->
   <header class="flex justify-end">
     <button
-      class="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-300 rounded dark:hover:text-gray-200 hover: hover:text-gray-700"
+      class="inline-flex items-center justify-center w-6 h-6  transition-colors duration-300 rounded dark:hover:text-gray-200 hover: hover:text-gray-700"
       aria-label="close"
       @click="closeModal('{{$id}}')"
     >{!! $closeIcon !!}</button>

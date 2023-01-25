@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Console\CreateControllerEntity\CreateControllerEntityCreator;
-use App\Console\CreateTableRelationship\MigrationRelationShipCreator;
+use App\Console\Commands\CreateControllerEntity\CreateControllerEntityCreator;
+use App\Console\Commands\CreateTableRelationship\MigrationRelationShipCreator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
