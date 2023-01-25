@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Workflow\LibApps;
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\Props;
@@ -203,7 +203,7 @@ abstract class AbstractViewAllController extends Controller
         $searchableArray = App::make($this->typeModel)->toSearchableArray();
 
         return view('dashboards.pages.entity-view-all', [
-            'title' => LibApps::getFor($type)['title'],
+            'topTitle' => CurrentRoute::getTitleOf($this->type),
             'pageLimit' => $pageLimit,
             'type' => $type,
             'columns' => $columns,

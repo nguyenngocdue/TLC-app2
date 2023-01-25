@@ -19,4 +19,10 @@ class Zunit_test_7 extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
+
+    public function attachment()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+    }
 }

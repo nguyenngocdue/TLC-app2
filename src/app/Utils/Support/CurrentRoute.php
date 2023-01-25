@@ -2,6 +2,7 @@
 
 namespace App\Utils\Support;
 
+use App\Http\Controllers\Workflow\LibApps;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -33,5 +34,10 @@ class CurrentRoute
     {
         $result = Route::current()->action['as'];
         return $result;
+    }
+
+    public static function getTitleOf($type)
+    {
+        return LibApps::getFor($type)['title'];
     }
 }

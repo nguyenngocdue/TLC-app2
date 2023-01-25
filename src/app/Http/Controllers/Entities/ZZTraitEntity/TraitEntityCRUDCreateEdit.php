@@ -20,7 +20,8 @@ trait TraitEntityCRUDCreateEdit
 		$values = "";
 		$idItems = [];
 		$title = "Add New";
-		return view('dashboards.pages.entity-create-edit')->with(compact('props', 'defaultValues', 'type', 'action', 'modelPath', 'values', 'idItems', 'title'));
+		$topTitle = CurrentRoute::getTitleOf($this->type);
+		return view('dashboards.pages.entity-create-edit')->with(compact('props', 'defaultValues', 'type', 'action', 'modelPath', 'values', 'idItems', 'title', 'topTitle'));
 	}
 
 	public function edit($id)
@@ -36,6 +37,7 @@ trait TraitEntityCRUDCreateEdit
 
 		$idItems = $this->getManyToManyRelationship($currentElement);
 		$title = "Edit";
-		return view('dashboards.pages.entity-create-edit')->with(compact('props', 'defaultValues', 'values', 'type', 'action', 'currentElement', 'modelPath', 'idItems', 'title'));
+		$topTitle = CurrentRoute::getTitleOf($this->type);
+		return view('dashboards.pages.entity-create-edit')->with(compact('props', 'defaultValues', 'values', 'type', 'action', 'currentElement', 'modelPath', 'idItems', 'title', 'topTitle'));
 	}
 }

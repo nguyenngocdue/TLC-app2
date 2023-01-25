@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\JsonGetSet;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\Http\Request;
@@ -54,6 +55,7 @@ abstract class Manage_Parent
     {
         return view($this->viewName, [
             'title' => "Manage Workflows",
+            'topTitle' => CurrentRoute::getTitleOf($this->type),
             'type' => $this->type,
             'route' => route($this->type . $this->routeKey . '.store'),
             'columns' => $this->getColumns(),

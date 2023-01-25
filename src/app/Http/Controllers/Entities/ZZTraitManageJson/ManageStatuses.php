@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\Support\CurrentRoute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
@@ -77,6 +78,7 @@ class ManageStatuses extends Manage_Parent
 
         return view("dashboards.pages.manage-status", [
             'title' => 'Manage Workflows',
+            'topTitle' => CurrentRoute::getTitleOf($this->type),
             'type' => $this->type,
             'route' => route($this->type . '_stt.store'),
             'routeManage' => route("manageStatuses.index"),

@@ -50,11 +50,12 @@ class MenuProfile extends Component
     public function render()
     {
         $user = CurrentUser::get();
+        $avatar = $user->avatar ? $user->avatar->url_thumbnail : "";
 
         return view('components.homepage.menu-profile', [
             'userMenu' => $this->getUserMenu(),
             'user' => $user,
-            'avatar' => env("AWS_ENDPOINT") . '/' . env("AWS_BUCKET") . '/' . $user->avatar->url_thumbnail,
+            'avatar' => env("AWS_ENDPOINT") . '/' . env("AWS_BUCKET") . '/' . $avatar,
         ]);
     }
 }

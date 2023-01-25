@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('topTitle', Str::appTitle($type))
+@section('topTitle', $topTitle)
 @section('title', $title )
 
 @section('content')
@@ -26,7 +26,7 @@ $id = $action === "edit" ? $values->id : "";
         @foreach($props as $key => $val)
         @php
         if ($action === "create" && $val['control'] === 'relationship_renderer') continue;
-        $defaultValue = $defaultValues[$key];
+        $defaultValue = $defaultValues[$key] ?? [];
 
         $label = $val['label'];
         $columnName = $val['column_name'];
@@ -39,7 +39,7 @@ $id = $action === "edit" ? $values->id : "";
         $col_span = $val['col_span'] === '' ? 1 : $val['col_span']*1;
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
 
-        $isRequired = in_array("required", explode("|", $defaultValue['validation']));
+        $isRequired = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
         $iconJson = $columnType === 'json' ?'<i class="fa-duotone fa-brackets-curly"></i>' : "";
         @endphp
         <div class='col-span-{{$col_span}} grid'>
