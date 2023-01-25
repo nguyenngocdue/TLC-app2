@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('topTitle', 'Applean') - {{ config('app.name') }}</title>
 
-    <link rel="stylesheet" href="{{ asset('font-awesome-6-pro-main/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/font-awesome-pro-6/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fonts.google.Inter.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">

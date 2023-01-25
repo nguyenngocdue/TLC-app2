@@ -1,7 +1,7 @@
 {
     "php_admin": {
         "title": "PhpMyAdmin",
-        "hef": "http://{{phpmyadmin}}/",
+        "hef": "http://{{phpMyAdmin}}/",
         "icon_fa": "fa-duotone fa-database"
     },
     "telescope": {

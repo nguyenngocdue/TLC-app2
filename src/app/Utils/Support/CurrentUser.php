@@ -67,4 +67,8 @@ class CurrentUser
             )->collapse()->all();
         return $permissions;
     }
+    public static function get()
+    {
+        return Auth::user();
+    }
 }
