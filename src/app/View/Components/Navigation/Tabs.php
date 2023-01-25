@@ -3,6 +3,7 @@
 namespace App\View\Components\Navigation;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class Tabs extends Component
 {
@@ -25,7 +26,11 @@ class Tabs extends Component
     public function render()
     {
         if (is_null($this->tabs)) return "Tab Data is NULL";
-        $defaultTabKey = (sizeof($this->tabs) > 0) ? $this->tabs[0]['key'] : '';
+        if (sizeof($this->tabs) <= 0) return "Tab Data is an empty array";
+
+        foreach ($this->tabs as &$tab) $tab['key'] = Str::snake($tab['label']);
+
+        $defaultTabKey = $this->tabs[0]['key'];
         return view('components.navigation.tabs', [
             'tabId' => md5(microtime(true)),
             'tabs' => $this->tabs,

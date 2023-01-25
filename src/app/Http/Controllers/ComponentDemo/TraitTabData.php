@@ -2,24 +2,26 @@
 
 namespace App\Http\Controllers\ComponentDemo;
 
+use Illuminate\Support\Facades\Blade;
+
 trait TraitTabData
 {
     function getTab1()
     {
+        $results[] = "<x-renderer.button htmlType='submit' name='button' size='xs' value='right_by_name,1' type='danger' outline=true><i class='fa fa-trash'></i></x-renderer.button>";
+        $result = join("", $results);
+        $a = "<div class='whitespace-nowrap'>$result</div>";
         return [
             [
                 'label' => 'Tab 1',
-                'key' => 'tab-1',
-                'children' => "Content 01",
+                'children' => Blade::render($a),
             ],
             [
                 'label' => 'Tab 2',
-                'key' => 'tab-2',
                 'children' => "Content 02",
             ],
             [
                 'label' => 'Tab 3',
-                'key' => 'tab-3',
                 'children' => "Content 03",
             ],
         ];
@@ -30,22 +32,18 @@ trait TraitTabData
         return [
             [
                 'label' => 'Props',
-                'key' => 'Props',
                 'children' => "Content 01 - Props",
             ],
             [
                 'label' => 'Relationships',
-                'key' => 'Relationships',
                 'children' => "Content 02 - Relationships",
             ],
             [
                 'label' => 'Listeners',
-                'key' => 'Listeners',
                 'children' => "Content 03 - Listeners",
             ],
             [
                 'label' => 'Statuses',
-                'key' => 'Statuses',
                 'children' => "Content 03 - Statuses",
             ],
         ];

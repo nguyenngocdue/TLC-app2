@@ -11,8 +11,10 @@ class Card extends Component
      *
      * @return void
      */
-    public function __construct(private $style = 'bg-white', private $idHtml = '')
-    {
+    public function __construct(
+        private $style = 'bg-white',
+        private $idHtml = '',
+    ) {
     }
 
     /**

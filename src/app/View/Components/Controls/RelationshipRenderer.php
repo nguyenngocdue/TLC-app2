@@ -33,6 +33,12 @@ class RelationshipRenderer extends Component
         return $relation->getQuery()->paginate($perPage, ['*'], $colName);
     }
 
+    private function getModelOfEloquentParam($itemDB, $colName,)
+    {
+        $eloquentParam = $itemDB->eloquentParams[$colName];
+        return $eloquentParam[1];
+    }
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -62,16 +68,17 @@ class RelationshipRenderer extends Component
         $renderer_edit = $value['renderer_edit'];
         $showAll = $renderer_edit === "many_icons";
         $dataSource = $this->getDataSource($itemDB, $colName, $showAll);
-
-        if (count($dataSource) <= 0) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";
-        $typeDB =  $dataSource[0]->getTable() ?? "";
-        $model = "App\\Models\\" . Str::singular($typeDB);
-        $instance = new $model;
+        $smallModel = $this->getModelOfEloquentParam($itemDB, $colName);
+        $instance = new $smallModel;
 
         $fn = $value['renderer_edit_param'];
         if (!method_exists($instance, $fn))  $fn = '';
+        $typeDB =  (count($dataSource) <= 0 && $dataSource[0]) ? $dataSource[0]->getTable() : "";
         $columns = ($fn === '')
-            ? [["dataIndex" => 'id', "renderer" => "id", "type" => $typeDB, "align" => "center"], ["dataIndex" => 'name']]
+            ? [
+                ["dataIndex" => 'id', "renderer" => "id", "type" => $typeDB, "align" => "center"],
+                ["dataIndex" => 'name'],
+            ]
             : $instance->$fn();
 
         switch ($renderer_edit) {

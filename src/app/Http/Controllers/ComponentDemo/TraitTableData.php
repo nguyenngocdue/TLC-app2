@@ -10,12 +10,14 @@ trait TraitTableData
     {
         return [
             [
-                "title" => 'ID', "dataIndex" => "id",
+                "title" => 'ID',
+                "dataIndex" => "id",
                 "renderer" => "id",
                 "align" => "center",
             ],
             [
-                "title" => 'Client', "dataIndex" => "client",
+                "title" => 'Client',
+                "dataIndex" => "client",
                 "renderer" => "avatar-name",
                 "attributes" => ['title' => 'client', 'description' => 'amount', 'avatar' => 'avatar', 'gray' => 'disabled']
             ],
@@ -26,14 +28,20 @@ trait TraitTableData
                 "align" => "center",
             ],
             [
-                "title" => 'Amount', "dataIndex" => "amount",
+                "title" => 'Amount',
+                "dataIndex" => "amount",
+                "align" => "right",
             ],
             [
-                "title" => 'Status', "dataIndex" => "status",
-                "renderer" => "tag", "attributes" => ['color' => 'color']
+                "title" => 'Status',
+                "dataIndex" => "status",
+                "renderer" => "tag",
+                "attributes" => ['color' => 'color'],
+                'align' => 'center',
             ],
             [
-                "title" => 'Date', "dataIndex" => "date",
+                "title" => 'Date',
+                "dataIndex" => "date",
             ],
         ];
     }
@@ -56,9 +64,9 @@ trait TraitTableData
             [
                 "title" => 'Logged In',
                 "dataIndex" => "loggedIn",
-                "renderer" => "toggle",
+                "renderer" => "checkbox",
                 "align" => "center",
-                // "editable" => true,
+                "editable" => true,
             ],
             [
                 "title" => 'Amount',

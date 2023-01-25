@@ -16,7 +16,7 @@
         $className = ($tab['key'] === $defaultTabKey) ? "" : "hidden";
         @endphp 
         <div id="{{$tab['key']}}" class="p-4 {{$className}}">
-            {{$tab['children']}}
+            {!! $tab['children'] !!}
         </div>
         @endforeach
     </div>
