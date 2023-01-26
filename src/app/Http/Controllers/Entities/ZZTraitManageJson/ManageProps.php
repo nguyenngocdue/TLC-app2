@@ -59,6 +59,12 @@ class ManageProps extends Manage_Parent
                 "cbbDataSource" => $controls,
             ],
             [
+                "dataIndex" => "align",
+                "editable" => true,
+                "renderer" => "dropdown",
+                "cbbDataSource" => [''],
+            ],
+            [
                 "dataIndex" => "col_span",
                 "editable" => true,
                 "renderer" => "number",
@@ -176,11 +182,20 @@ class ManageProps extends Manage_Parent
         foreach (array_keys($toBeRed) as $key) $json[$key]['row_color'] = "red";
         foreach ($json as &$line) if (isset($line['column_type']) && $line['column_type'] === 'static') $line['row_color'] = "amber";
 
-        foreach ($result as $key => $columns) {
-            foreach ($columns as $column => $value) {
+        foreach ($result as $key => $rows) {
+            foreach ($rows as $column => $value) {
                 //Keep values of JSON file
                 if (in_array($column, ['label', 'col_span'])) continue;
                 $json[$key][$column] = $value;
+            }
+        }
+
+        foreach ($json as $key => &$prop) {
+            $column_type = $prop['column_type'];
+            if ($column_type === 'static') {
+                $prop['align'] = ['value' => $prop['align'] ?? '', 'cbbDS' => ['', 'center', 'right']];
+            } else {
+                $prop['align'] = 'invisible';
             }
         }
 

@@ -31,6 +31,7 @@ $id = $action === "edit" ? $values->id : "";
         $label = $val['label'];
         $columnName = $val['column_name'];
         $columnType = $val['column_type'];
+        $align = $val['align'] ?? 'left';
         $control = $val['control'];
 
         $colSpan = $val['col_span'];
@@ -52,22 +53,22 @@ $id = $action === "edit" ? $values->id : "";
                         @case('z_page_break')
                         <x-renderer.page-break />
                         @case('z_h1')
-                        <x-renderer.heading title="{{$title}}" level=1>{{$label}}</x-renderer.heading>
+                        <x-renderer.heading title="{{$title}}" level=1 align="{{$align}}">{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h2')
-                        <x-renderer.heading title="{{$title}}" level=2>{{$label}}</x-renderer.heading>
+                        <x-renderer.heading title="{{$title}}" level=2 align="{{$align}}">{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h3')
-                        <x-renderer.heading title="{{$title}}" level=3>{{$label}}</x-renderer.heading>
+                        <x-renderer.heading title="{{$title}}" level=3 align="{{$align}}">{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h4')
-                        <x-renderer.heading title="{{$title}}" level=4>{{$label}}</x-renderer.heading>
+                        <x-renderer.heading title="{{$title}}" level=4 align="{{$align}}">{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h5')
-                        <x-renderer.heading title="{{$title}}" level=5>{{$label}}</x-renderer.heading>
+                        <x-renderer.heading title="{{$title}}" level=5 align="{{$align}}">{{$label}}</x-renderer.heading>
                         @break
                         @case('z_h6_base')
-                        <x-renderer.heading title="{{$title}}">{{$label}}</x-renderer.heading>
+                        <x-renderer.heading title="{{$title}}" align="{{$align}}">{{$label}}</x-renderer.heading>
                         @break
                         @case('z_divider')
                         <x-renderer.divider />

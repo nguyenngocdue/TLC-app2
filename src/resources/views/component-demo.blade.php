@@ -3,9 +3,7 @@
 
 @section('content')
 
-<center>
-    <x-renderer.heading level=3><a href="/components">Components</a></x-renderer.heading>
-</center>
+<x-renderer.heading level=3 align='center'><a href="/components">Components</a></x-renderer.heading>
 
 <x-renderer.card class="mx-5">
     <!-- Tabs -->

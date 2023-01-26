@@ -35,8 +35,7 @@ trait TraitTableData
             [
                 "title" => 'Status',
                 "dataIndex" => "status",
-                "renderer" => "tag",
-                "attributes" => ['color' => 'color'],
+                "renderer" => "status",
                 'align' => 'center',
             ],
             [
@@ -53,6 +52,7 @@ trait TraitTableData
                 "title" => 'ID',
                 "dataIndex" => "id",
                 "renderer" => "id",
+                'align' => 'center',
             ],
             [
                 "title" => 'Client',
