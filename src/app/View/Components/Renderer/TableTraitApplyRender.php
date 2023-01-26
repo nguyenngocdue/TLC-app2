@@ -31,7 +31,8 @@ trait TableTraitApplyRender
 
     private function applyRender($renderer, $rawData, $column, $dataLine, $index)
     {
-        $name = isset($column['dataIndex']) ? "name='{$column['dataIndex']}[$index]'" : "";
+        $tableName = $this->tableName;
+        $name = isset($column['dataIndex']) ? "name='{$tableName}[{$column['dataIndex']}][$index]'" : "";
         $attributeRender = $this->getAttributeRendered($column, $dataLine);
         $propertyRender = $this->getPropertyRendered($column, $dataLine);
         $typeRender = isset($column['type']) ? "type='{$column['type']}'" : "";

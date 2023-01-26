@@ -4,7 +4,7 @@
 @section('content')
 
 <center>
-    <x-renderer.heading level=3>Components</x-renderer.heading>
+    <x-renderer.heading level=3><a href="/components">Components</a></x-renderer.heading>
 </center>
 
 <x-renderer.card class="mx-5">

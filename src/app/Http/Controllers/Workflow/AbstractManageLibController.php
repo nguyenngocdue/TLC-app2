@@ -77,7 +77,8 @@ abstract class AbstractManageLibController extends Controller
             unset($dataSource["button"]);
         }
 
-        $dataSource = $this->distributeArrayToObject($dataSource);
+        $table00 = $dataSource['table00'];
+        $dataSource = $this->distributeArrayToObject($table00);
         if ($request->input('button')) {
             $dataSource = $this->delete($button, $dataSource);
         }
@@ -88,7 +89,8 @@ abstract class AbstractManageLibController extends Controller
 
     public function create(Request $request)
     {
-        $name = $request->input('name')[0];
+        $table00 = $request->input('table00');
+        $name = $table00['name'][0];
         $names = explode("|", $name);
         $newItems = [];
         foreach ($names as $name) $newItems[$name] = ['name' => $name, 'title' => Str::headline($name)];

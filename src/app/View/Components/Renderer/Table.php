@@ -5,9 +5,7 @@ namespace App\View\Components\Renderer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
-use ReflectionClass;
 
 class Table extends Component
 {
@@ -17,6 +15,7 @@ class Table extends Component
 
   public function __construct(
     private Request $request,
+    private $tableName = 'table00',
     private $columns = null,
     private $dataSource = null,
     private $dataHeader = null,

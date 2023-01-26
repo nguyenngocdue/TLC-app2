@@ -79,6 +79,7 @@ abstract class Manage_Parent
     {
         $jsonGetSet = $this->jsonGetSet;
         $data = $request->input();
+        $table00 = $data['table00'];
 
         //Make up the columns
         $columns = $this->getColumns();
@@ -89,7 +90,7 @@ abstract class Manage_Parent
             $columns = array_filter($columns, fn ($column) => in_array($column['dataIndex'], $this->storingWhiteList));
         }
 
-        $result = $jsonGetSet::convertHttpObjectToJson($data, $columns);
+        $result = $jsonGetSet::convertHttpObjectToJson($table00, $columns);
         $this->handleMoveTo($result, $jsonGetSet);
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));
@@ -102,7 +103,8 @@ abstract class Manage_Parent
 
     function create(Request $request)
     {
-        $name = $request->input('name')[0];
+        $table00 = $request->input('table00');
+        $name = $table00['name'][0];
         $names = explode("|", $name);
         $newItems = [];
         foreach ($names as $name) $newItems[$name] = [
