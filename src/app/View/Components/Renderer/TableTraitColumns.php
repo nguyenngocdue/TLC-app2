@@ -49,7 +49,7 @@ trait TableTraitColumns
 
     private function makeThHeader($columns, $dataHeader)
     {
-        if (is_null($dataHeader)) return null;
+        if (is_null($dataHeader)) return "";
         $th = [];
         foreach ($columns as $column) {
             if (isset($dataHeader[$column['dataIndex']])) $th[] = "<th class='py-1'>" . $dataHeader[$column['dataIndex']] . "</th>";

@@ -21,7 +21,10 @@
 @once
 <script>
     let toggleVParentMode = "";
-    const getCheckboxElement = (status, id) => document.getElementsByName(status+'['+id+']')[0]
+    const getCheckboxElement = (status, id) => {
+        let name = 'table00['+status+']['+id+']'
+        return document.getElementsByName(name)[0]
+    }
 
     function storeMatrixToVariable(){
         k_horizon_mode = {}

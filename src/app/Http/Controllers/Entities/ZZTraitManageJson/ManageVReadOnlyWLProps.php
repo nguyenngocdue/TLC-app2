@@ -10,6 +10,8 @@ class ManageVReadOnlyWLProps extends ManageV_Parent
     protected $routeKey = "_rol-wl";
     protected $jsonGetSet = ReadOnlyWLProps::class;
     protected $headerTop = 16;
+    protected $showToggleColumn = false;
+    protected $showToggleRow = false;
 
     protected function getColumnSource()
     {

@@ -15,6 +15,8 @@ abstract class ManageV_Parent extends Manage_Parent
     protected $viewName = "dashboards.pages.manage-v-parent";
     protected $storingBlackList = ['label', 'toggle'];
     protected $headerTop = 9;
+    protected $showToggleColumn = true;
+    protected $showToggleRow = true;
 
     abstract protected function getColumnSource();
 
@@ -37,11 +39,12 @@ abstract class ManageV_Parent extends Manage_Parent
                 'editable' => true,
                 'align' => "right",
             ],
-            [
-                "dataIndex" => 'toggle',
-                'width' => 10,
-                'align' => 'center',
-            ],
+
+        ];
+        if ($this->showToggleColumn) $firstColumns[] =    [
+            "dataIndex" => 'toggle',
+            'width' => 10,
+            'align' => 'center',
         ];
 
         $allStatuses = $this->getColumnSource();
@@ -85,7 +88,7 @@ abstract class ManageV_Parent extends Manage_Parent
                     'column_name' => $prop['column_name'],
                 ];
             }
-            $newItem['toggle'] = Blade::render("<x-renderer.button size='xs' onClick='toggleVParent_Horizon($index)'>Tg</x-renderer.button>");
+            if ($this->showToggleColumn) $newItem['toggle'] = Blade::render("<x-renderer.button size='xs' onClick='toggleVParent_Horizon($index)'>Tg</x-renderer.button>");
             $newItem['label'] =  $prop['label'];
 
             if ($isNotVisibleProps) {
@@ -104,6 +107,7 @@ abstract class ManageV_Parent extends Manage_Parent
 
     protected function getDataHeader()
     {
+        if (!$this->showToggleRow) return null;
         $allStatuses = array_keys($this->getColumnSource());
         $result = [];
         foreach ($allStatuses as $status) {
