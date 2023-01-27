@@ -393,7 +393,7 @@
         "name": "_comment_by_clinic",
         "column_name": "comment_by_clinic",
         "column_type": "eloquent_prop",
-        "label": "Comment by Clinic",
+        "label": "Comment by Internal Clinic",
         "control": "comment",
         "col_span": "12",
         "width": "",

@@ -1,16 +1,4 @@
 {
-    "_attachment": {
-        "name": "_attachment",
-        "relationship": "morphMany",
-        "control_name": "",
-        "renderer_view_all": "thumbnails",
-        "renderer_view_all_param": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_avatar": {
         "name": "_avatar",
         "relationship": "morphOne",
@@ -171,7 +159,7 @@
         "name": "_qaqcInspChklsts",
         "relationship": "belongsTo",
         "control_name": "",
-        "renderer_view_all": "",
+        "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",

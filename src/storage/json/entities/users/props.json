@@ -9,6 +9,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -23,6 +24,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "true",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -37,6 +39,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -49,8 +52,9 @@
         "control": "text",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -65,6 +69,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -79,6 +84,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -93,6 +99,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -105,8 +112,9 @@
         "control": "text",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -119,8 +127,9 @@
         "control": "text",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -133,8 +142,9 @@
         "control": "text",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -147,8 +157,9 @@
         "control": "text",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -161,8 +172,9 @@
         "control": "attachment",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -175,8 +187,9 @@
         "control": "dropdown",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -189,8 +202,9 @@
         "control": "dropdown",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -205,6 +219,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -217,8 +232,9 @@
         "control": "dropdown",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -231,8 +247,9 @@
         "control": "picker_date",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -245,8 +262,9 @@
         "control": "picker_date",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -259,8 +277,9 @@
         "control": "picker_date",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -273,8 +292,9 @@
         "control": "text",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -289,6 +309,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -303,6 +324,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -317,6 +339,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -331,6 +354,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -339,12 +363,13 @@
         "name": "_position_rendered",
         "column_name": "position_rendered",
         "column_type": "string",
-        "label": "Position Rendered",
+        "label": "Position",
         "control": "text",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": "User_PositionRendered"
@@ -357,8 +382,9 @@
         "control": "dropdown",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -373,6 +399,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "required",
         "formula": ""
@@ -385,8 +412,9 @@
         "control": "toggle",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -401,6 +429,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -413,8 +442,9 @@
         "control": "text",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -427,8 +457,9 @@
         "control": "text",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -443,6 +474,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -457,6 +489,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -471,6 +504,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -483,8 +517,9 @@
         "control": "text",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -499,6 +534,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -513,6 +549,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -525,8 +562,9 @@
         "control": "textarea",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "json",
         "formula": ""
@@ -541,6 +579,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -555,6 +594,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -569,6 +609,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -583,6 +624,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -597,6 +639,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -606,11 +649,12 @@
         "column_name": "posts",
         "column_type": "eloquent_prop",
         "label": "Posts",
-        "control": "",
+        "control": "relationship_renderer",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "true",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
@@ -620,25 +664,12 @@
         "column_name": "productionRuns",
         "column_type": "eloquent_prop",
         "label": "Prod Runs",
-        "control": "",
+        "control": "relationship_renderer",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "true",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
-    },
-    "_attachment": {
-        "name": "_attachment",
-        "column_name": "attachment",
-        "column_type": "eloquent_prop",
-        "label": "Attachments",
-        "control": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
+        "label_hidden_edit": "",
         "new_line": "",
         "validation": "",
         "formula": ""
