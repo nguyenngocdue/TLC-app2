@@ -91,9 +91,16 @@ class User extends Authenticatable implements LdapAuthenticatable
         "time_keep_types" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
         "productionRuns" => ['belongsToMany', Prod_run::class, 'prod_user_runs', 'user_id', 'prod_run_id'],
         "qaqcInspChklsts" => ['belongsTo', Qaqc_insp_chklst::class, 'owner_id'],
+        "getRoleSet" => ['morphToMany', RoleSet::class, 'model', 'model_has_role_sets'],
     ];
     public $oracyParams = [];
     protected $guard_name = 'web';
+
+    public function getRoleSet()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2], $p[3]);
+    }
 
     public function avatar()
     {
