@@ -60,6 +60,7 @@ class ManageProps extends Manage_Parent
             ],
             [
                 "dataIndex" => "align",
+                'title' => "Align (Static Only)",
                 "editable" => true,
                 "renderer" => "dropdown",
                 "cbbDataSource" => [''],

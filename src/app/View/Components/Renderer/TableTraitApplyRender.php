@@ -52,7 +52,7 @@ trait TableTraitApplyRender
         $attributes .= "$sortByRender ";
         $attributes = Str::of($attributes)->replaceMatches('/ {2,}/', ' '); //<< Remove double+ space
 
-        $editable = isset($column['editable']) ? ".editable" : "";
+        $editable = (isset($column['editable']) && $column['editable'] == true) ? ".editable" : "";
         $tagName = "x-renderer{$editable}.{$renderer}";
 
         $output = "<$tagName $attributes>$rawData</$tagName>";

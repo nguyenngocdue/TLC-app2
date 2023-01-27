@@ -102,7 +102,7 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::get('/mail-test', [MailController::class, 'index']);
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
 Route::get('test', [HomeController::class, 'index']);
-Route::get('welcome', [WelcomeController::class, 'index']);
+Route::resource('welcome', WelcomeController::class)->only('index', 'store');
 Route::get('app-menu', [AppMenuController::class, 'index']);
 Route::group([
     'prefix' => 'dashboard/workflow',
