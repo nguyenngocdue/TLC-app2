@@ -2,7 +2,7 @@
     "_getGroup": {
         "name": "_getGroup",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "qaqc_insp_group_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "description",
         "renderer_edit": "",
@@ -14,7 +14,7 @@
     "_getRun": {
         "name": "_getRun",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "qaqc_insp_chklst_run_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -26,7 +26,7 @@
     "_getControlGroup": {
         "name": "_getControlGroup",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "qaqc_insp_control_group_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -50,7 +50,7 @@
     "_getControlType": {
         "name": "_getControlType",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "control_type_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -62,61 +62,13 @@
     "_insp_photos": {
         "name": "_insp_photos",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "insp_photos",
         "renderer_view_all": "",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_getNoOfYesNo()": {
-        "name": "_getNoOfYesNo()",
-        "relationship": "getCheckedByField",
-        "control_name": "getNoOfYesNo()",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "qaqc_insp_control_value_id",
-        "filter_values": "2",
-        "radio_checkbox_colspan": ""
-    },
-    "_getOnHoldOfYesNo()": {
-        "name": "_getOnHoldOfYesNo()",
-        "relationship": "getCheckedByField",
-        "control_name": "getOnHoldOfYesNo()",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "qaqc_insp_control_value_id",
-        "filter_values": "4",
-        "radio_checkbox_colspan": ""
-    },
-    "_getFailedOfPassFail()": {
-        "name": "_getFailedOfPassFail()",
-        "relationship": "getCheckedByField",
-        "control_name": "getFailedOfPassFail()",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "qaqc_insp_control_value_id",
-        "filter_values": "6",
-        "radio_checkbox_colspan": ""
-    },
-    "_getOnHoldOfPassFail()": {
-        "name": "_getOnHoldOfPassFail()",
-        "relationship": "getCheckedByField",
-        "control_name": "getOnHoldOfPassFail()",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "qaqc_insp_control_value_id",
-        "filter_values": "8",
         "radio_checkbox_colspan": ""
     }
 }

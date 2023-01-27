@@ -3,16 +3,16 @@
         "name": "_id",
         "column_name": "id",
         "column_type": "bigint",
-        "label": "Id",
+        "label": "ID",
         "control": "id",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_url_thumbnail": {
         "name": "_url_thumbnail",
@@ -24,10 +24,10 @@
         "width": "10",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_url_media": {
         "name": "_url_media",
@@ -39,10 +39,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_url_folder": {
         "name": "_url_folder",
@@ -54,10 +54,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_filename": {
         "name": "_filename",
@@ -69,10 +69,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_extension": {
         "name": "_extension",
@@ -84,10 +84,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -99,10 +99,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_object_id": {
         "name": "_object_id",
@@ -114,10 +114,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_object_type": {
         "name": "_object_type",
@@ -129,10 +129,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_category": {
         "name": "_category",
@@ -144,10 +144,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -159,10 +159,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -174,10 +174,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_attachable": {
         "name": "_attachable",
@@ -189,9 +189,9 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     }
 }

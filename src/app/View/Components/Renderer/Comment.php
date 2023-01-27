@@ -5,6 +5,7 @@ namespace App\View\Components\Renderer;
 use App\Models\Comment as ModelsComment;
 use App\Models\User;
 use App\Utils\Constant;
+use App\Utils\Support\CurrentRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
@@ -23,7 +24,6 @@ class Comment extends Component
         private $readonly = true,
         private $required = false,
         private $dataComment = [],
-        private $action = 'create',
         private $labelName = '',
         private $showToBeDeleted = false,
         private $destroyable = false,
@@ -40,7 +40,7 @@ class Comment extends Component
     {
         $name = $this->name;
         $type = $this->type;
-        $action = $this->action;
+        $action = CurrentRoute::getControllerAction();
         $id = $this->id;
         $labelName = $this->labelName;
         $destroyable = $this->destroyable;

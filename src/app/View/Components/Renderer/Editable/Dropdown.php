@@ -8,34 +8,36 @@ use Illuminate\View\Component;
 
 class Dropdown extends Component
 {
+    private $selected;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(private $name = "", private $cbbDataSource = [], private $sortBy = false, private $strFn = false)
+    public function __construct(
+        private $name = "",
+        private $cbbDataSource = [],
+        private $sortBy = false,
+        private $strFn = false,
+        private $cell = null,
+    ) {
+    }
+
+    private function makeDataSource()
     {
-        //
-        // dump($dataSource);
-        // dump($this->strFn);
         $dataSource = $this->cbbDataSource;
-        // Log::info($this->column);
         //Convert ["v1", "v2"] to [["value" => "v1"], ["value" => "v2"]]
         if (!is_array($dataSource[0])) $dataSource = array_map(fn ($item) => ["value" => $item], $dataSource);
         //Convert ["value" => "v1"] to ["title" => "V1", "value" => "v1"]
-        // Log::info($dataSource);
         foreach ($dataSource as &$option) {
             // Log::info($option);
             if (!isset($option['title'])) {
-                $strFn = $strFn ? $strFn : "headline";
-                // $option['title'] = Str::headline($option['value']);
+                $strFn = $this->strFn ? $this->strFn : "headline";
                 $option['title'] = Str::{$strFn}($option['value']);
             }
         }
-
-        if ($sortBy) usort($dataSource, fn ($a, $b) => $a[$sortBy] <=> $b[$sortBy]);
-
-        $this->cbbDataSource = $dataSource;
+        if ($this->sortBy) usort($dataSource, fn ($a, $b) => $a[$this->sortBy] <=> $b[$this->sortBy]);
+        return $dataSource;
     }
 
     /**
@@ -45,10 +47,20 @@ class Dropdown extends Component
      */
     public function render()
     {
+        if ($this->cell === 'invisible') return "";
+        // dump($this->cell);
+        if (is_array($this->cell)) {
+            $this->selected = $this->cell['value'] ?? null;
+            $this->cbbDataSource = $this->cell['cbbDS'] ?? [];
+        } else {
+            $this->selected = $this->cell;
+        }
+        $dataSource = $this->makeDataSource();
         // var_dump($this->column);
         return view('components.renderer.editable.dropdown', [
             'name' => $this->name,
-            'cbbDataSource' => $this->cbbDataSource,
+            'cbbDataSource' => $dataSource,
+            'selected' => $this->selected,
         ]);
     }
 }

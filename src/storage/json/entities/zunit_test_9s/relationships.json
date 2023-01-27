@@ -2,7 +2,7 @@
     "_department1": {
         "name": "_department1",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "department_1",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -14,7 +14,7 @@
     "_user1": {
         "name": "_user1",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "user_1",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -26,7 +26,7 @@
     "_department2": {
         "name": "_department2",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "department_2",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -38,7 +38,7 @@
     "_user2": {
         "name": "_user2",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "user_2",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -50,7 +50,7 @@
     "_category": {
         "name": "_category",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "category_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -62,7 +62,7 @@
     "_user3": {
         "name": "_user3",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "user_3",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -74,7 +74,7 @@
     "_getSubProject1": {
         "name": "_getSubProject1",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "sub_project_1",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -86,7 +86,7 @@
     "_getProdOrder1": {
         "name": "_getProdOrder1",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "prod_order_1",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

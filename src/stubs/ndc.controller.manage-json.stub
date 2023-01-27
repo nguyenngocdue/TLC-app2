@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Http\Controllers\Entities\{{nameClass}};
+
+use App\Http\Controllers\Entities\AbstractManageJsonController;
+use App\Models\{{nameClass}};
+
+class ManageJsonController extends AbstractManageJsonController
+{
+    protected $type = '{{nameModelSingular}}';
+    protected $typeModel = {{nameClass}}::class;
+}

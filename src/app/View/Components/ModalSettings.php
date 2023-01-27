@@ -3,7 +3,7 @@
 namespace App\View\Components;
 
 use App\Utils\Support\CurrentUser;
-use App\Utils\Support\Props;
+use App\Utils\Support\Json\Props;
 use Illuminate\View\Component;
 
 class ModalSettings extends Component

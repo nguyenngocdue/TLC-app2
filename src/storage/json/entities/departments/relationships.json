@@ -2,7 +2,7 @@
     "_user": {
         "name": "_user",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "head_of_department",
         "renderer_view_all": "avatar_name",
         "renderer_view_all_param": "",
         "renderer_edit": "",

@@ -3,8 +3,7 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
-use App\Models\Comment;
-use App\Models\Zunit_test_7;
+use App\Utils\Support\CurrentRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
@@ -21,7 +20,6 @@ class CommentGroup extends Component
         private $id,
         private $type,
         private $colName = '',
-        private $action,
         private $readonly = true,
         private $label = '',
         private $destroyable = true,
@@ -38,7 +36,7 @@ class CommentGroup extends Component
         $id = $this->id;
         $name = $this->colName;
         $type = $this->type;
-        $action = $this->action;
+        $action = CurrentRoute::getControllerAction();
         $label = $this->label;
         $showToBeDeleted =  env('APP_ENV')  === 'local';
         $owner_id = Auth::user()->id;

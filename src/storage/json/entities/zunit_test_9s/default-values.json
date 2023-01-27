@@ -1,0 +1,134 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_content": {
+        "name": "_content",
+        "column_name": "content",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_department_1": {
+        "name": "_department_1",
+        "column_name": "department_1",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_user_1": {
+        "name": "_user_1",
+        "column_name": "user_1",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_department_2": {
+        "name": "_department_2",
+        "column_name": "department_2",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_user_2": {
+        "name": "_user_2",
+        "column_name": "user_2",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_category_id": {
+        "name": "_category_id",
+        "column_name": "category_id",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_user_3": {
+        "name": "_user_3",
+        "column_name": "user_3",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_sub_project_1": {
+        "name": "_sub_project_1",
+        "column_name": "sub_project_1",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_prod_order_1": {
+        "name": "_prod_order_1",
+        "column_name": "prod_order_1",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    }
+}

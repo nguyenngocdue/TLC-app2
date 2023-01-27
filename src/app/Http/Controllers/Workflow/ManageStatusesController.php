@@ -12,6 +12,10 @@ class ManageStatusesController extends AbstractManageLibController
     {
         return   [
             [
+                "dataIndex" => "action",
+                "align" => "center",
+            ],
+            [
                 'dataIndex' => "name",
                 "renderer"  => 'read-only-text',
                 'editable' => true,

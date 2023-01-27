@@ -1,0 +1,90 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_prod_sequence_id": {
+        "name": "_prod_sequence_id",
+        "column_name": "prod_sequence_id",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_date": {
+        "name": "_date",
+        "column_name": "date",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_start": {
+        "name": "_start",
+        "column_name": "start",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_end": {
+        "name": "_end",
+        "column_name": "end",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    },
+    "_users": {
+        "name": "_users",
+        "column_name": "users",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": ""
+    }
+}

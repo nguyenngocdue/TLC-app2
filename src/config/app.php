@@ -181,8 +181,8 @@ return [
         Brian2694\Toastr\ToastrServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         // Spatie\Permission\PermissionServiceProvider::class,
-        Ndc\Spatiecustom\RoleServiceProvider::class,
-        Ndc\Spatiecustom\PermissionServiceProvider::class,
+        Ndc\SpatieCustom\RoleServiceProvider::class,
+        Ndc\SpatieCustom\PermissionServiceProvider::class,
         App\Providers\MigrationsServiceProvider::class,
     ],
 

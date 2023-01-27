@@ -3,16 +3,16 @@
         "name": "_id",
         "column_name": "id",
         "column_type": "bigint",
-        "label": "Id",
+        "label": "ID",
         "control": "id",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_name": {
         "name": "_name",
@@ -24,10 +24,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_description": {
         "name": "_description",
@@ -39,10 +39,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_slug": {
         "name": "_slug",
@@ -54,10 +54,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": "All_SlugifyByName"
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_prod_routing_id": {
         "name": "_prod_routing_id",
@@ -69,10 +69,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -84,10 +84,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -99,10 +99,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_getSheets": {
         "name": "_getSheets",
@@ -114,9 +114,9 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "true",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": "true"
     }
 }

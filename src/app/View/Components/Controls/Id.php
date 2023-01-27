@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 
 class Id extends Component
@@ -9,7 +10,6 @@ class Id extends Component
     public function __construct(
         private $colName,
         private $value,
-        private $action,
         private $control,
         private $label,
     ) {
@@ -19,7 +19,7 @@ class Id extends Component
     {
         $colName = $this->colName;
         $value = $this->value;
-        $action = $this->action;
+        $action = CurrentRoute::getControllerAction();
         $control = $this->control;
         $label = $this->label;
         return view('components.controls.id')->with(compact('colName', 'value', 'action', 'control', 'label'));

@@ -3,7 +3,8 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
-use App\Utils\Support\Relationships;
+use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\Json\Relationships;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
@@ -19,7 +20,6 @@ class RelationshipRenderer extends Component
         private $type,
         private $colName,
         private $modelPath,
-        private $action,
     ) {
     }
 
@@ -33,6 +33,12 @@ class RelationshipRenderer extends Component
         return $relation->getQuery()->paginate($perPage, ['*'], $colName);
     }
 
+    private function getModelOfEloquentParam($itemDB, $colName,)
+    {
+        $eloquentParam = $itemDB->eloquentParams[$colName];
+        return $eloquentParam[1];
+    }
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -44,7 +50,7 @@ class RelationshipRenderer extends Component
         $modelPath = $this->modelPath;
         $type = $this->type;
         $id = $this->id;
-        $action = $this->action;
+        $action = CurrentRoute::getControllerAction();
 
         if ($action !== 'edit') return "";
 
@@ -62,16 +68,17 @@ class RelationshipRenderer extends Component
         $renderer_edit = $value['renderer_edit'];
         $showAll = $renderer_edit === "many_icons";
         $dataSource = $this->getDataSource($itemDB, $colName, $showAll);
-
-        if (count($dataSource) <= 0) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";
-        $typeDB =  $dataSource[0]->getTable() ?? "";
-        $model = "App\\Models\\" . Str::singular($typeDB);
-        $instance = new $model;
+        $smallModel = $this->getModelOfEloquentParam($itemDB, $colName);
+        $instance = new $smallModel;
 
         $fn = $value['renderer_edit_param'];
         if (!method_exists($instance, $fn))  $fn = '';
+        $typeDB =  (count($dataSource) <= 0 && $dataSource[0]) ? $dataSource[0]->getTable() : "";
         $columns = ($fn === '')
-            ? [["dataIndex" => 'id', "renderer" => "id", "type" => $typeDB, "align" => "center"], ["dataIndex" => 'name']]
+            ? [
+                ["dataIndex" => 'id', "renderer" => "id", "type" => $typeDB, "align" => "center"],
+                ["dataIndex" => 'name'],
+            ]
             : $instance->$fn();
 
         switch ($renderer_edit) {
@@ -82,9 +89,9 @@ class RelationshipRenderer extends Component
                     $item['gray'] = $item['resigned'];
                 }
                 $dataSource = $dataSource->all(); // Force LengthAwarePaginator to Array
-                return view('components.controls.manyIconParams')->with(compact('dataSource', 'colSpan'));
+                return view('components.controls.many-icon-params')->with(compact('dataSource', 'colSpan'));
             case "many_lines":
-                return view('components.controls.manyLineParams')->with(compact('columns', 'dataSource', 'fn'));
+                return view('components.controls.many-line-params')->with(compact('columns', 'dataSource', 'fn'));
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
         }

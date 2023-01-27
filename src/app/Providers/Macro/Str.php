@@ -4,12 +4,18 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 Str::macro('appTitle', function (string $s) {
+    $s = Str::plural($s);
     $s = Str::headline($s);
-    $s = str_ireplace(
-        ['hr', 'erp', 'wir', 'hse', 'esg', 'scm', 'qaqc', 'dev', 'kpi', 'qs'],
-        ['HR', 'ERP', 'WIR', 'HSE', 'ESG', 'SCM', 'QAQC', 'DEV', 'KPI', 'QS'],
-        $s
-    );
+
+    $sources = ['hr', 'erp', 'wir', 'hse', 'esg', 'scm', 'qaqc', 'dev', 'kpi', 'qs', 'nz', 'dc', 'it', 'qa', 'qc', 'bd', 'prod', 'ho', 'ws'];
+    $sources = array_map(fn ($i) => '/\b' . $i . '\b/', $sources);
+    $target = ['HR', 'ERP', 'WIR', 'HSE', 'ESG', 'SCM', 'QAQC', 'DEV', 'KPI', 'QS', 'NZ', 'DC', 'IT', 'QA', 'QC', 'BD', 'PROD', 'HO', 'WS'];
+    $s = preg_replace($sources, $target, $s);
+
+    $sources = ['acct', 'cpl', 'dir', 'fac', 'des', 'fin', 'mgr', 'pln', 'proc', 'proj', 'whs', 'asst'];
+    $sources = array_map(fn ($i) => '/\b' . $i . '\b/u', $sources);
+    $target =  ['Accounting', 'Compliance', 'Director', 'Factory', 'Design', 'Finance', 'Manager', 'Planning', 'Procurement', 'Project', 'Warehouse', 'Assistant'];
+    $s = preg_replace($sources, $target, $s);
     return $s;
 });
 Str::macro('modelToPretty', function (string $string) {

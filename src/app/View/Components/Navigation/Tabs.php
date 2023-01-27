@@ -3,6 +3,7 @@
 namespace App\View\Components\Navigation;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class Tabs extends Component
 {
@@ -11,8 +12,9 @@ class Tabs extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $tabs = [],
+    ) {
         //
     }
 
@@ -23,6 +25,16 @@ class Tabs extends Component
      */
     public function render()
     {
-        return view('components.navigation.tabs');
+        if (is_null($this->tabs)) return "Tab Data is NULL";
+        if (sizeof($this->tabs) <= 0) return "Tab Data is an empty array";
+
+        foreach ($this->tabs as &$tab) $tab['key'] = Str::snake($tab['label']);
+
+        $defaultTabKey = $this->tabs[0]['key'];
+        return view('components.navigation.tabs', [
+            'tabId' => md5(microtime(true)),
+            'tabs' => $this->tabs,
+            'defaultTabKey' => $defaultTabKey,
+        ]);
     }
 }

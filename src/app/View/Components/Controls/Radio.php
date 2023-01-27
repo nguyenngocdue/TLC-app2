@@ -3,8 +3,7 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
-use App\Utils\Support\Relationships;
-use Illuminate\Support\Facades\DB;
+use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 
 class Radio extends Component
@@ -14,14 +13,13 @@ class Radio extends Component
         private $colName,
         private $type,
         private $modelPath,
-        private $action,
         private $label,
     ) {
     }
 
     public function render()
     {
-        $action = $this->action;
+        $action = CurrentRoute::getControllerAction();
         $colName = $this->colName;
         $label = $this->label;
         $modelPath = $this->modelPath;

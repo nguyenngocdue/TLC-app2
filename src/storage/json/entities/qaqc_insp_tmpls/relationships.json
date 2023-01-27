@@ -14,7 +14,7 @@
     "_getProdRouting": {
         "name": "_getProdRouting",
         "relationship": "belongsTo",
-        "control_name": "getProdRouting",
+        "control_name": "prod_routing_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

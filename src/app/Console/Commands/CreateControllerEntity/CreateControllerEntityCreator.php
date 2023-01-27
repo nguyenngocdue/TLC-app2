@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\CreateControllerEntity;
+namespace App\Console\Commands\CreateControllerEntity;
 
 use App\Models\Permission;
 use App\Models\Role;

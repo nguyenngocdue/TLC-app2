@@ -2,7 +2,7 @@
     "_getHseIncidentReport": {
         "name": "_getHseIncidentReport",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "hse_incident_report_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "id",
         "renderer_edit": "",
@@ -14,7 +14,7 @@
     "_getWorkArea": {
         "name": "_getWorkArea",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "work_area_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -26,7 +26,7 @@
     "_getAssignee": {
         "name": "_getAssignee",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "assignee",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

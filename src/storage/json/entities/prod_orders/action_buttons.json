@@ -1,0 +1,27 @@
+{
+    "new": {
+        "name": "new",
+        "label": "a",
+        "tooltip": ""
+    },
+    "in_progress": {
+        "name": "in_progress",
+        "label": "b",
+        "tooltip": ""
+    },
+    "on_hold": {
+        "name": "on_hold",
+        "label": "",
+        "tooltip": ""
+    },
+    "finished": {
+        "name": "finished",
+        "label": "",
+        "tooltip": ""
+    },
+    "cancelled": {
+        "name": "cancelled",
+        "label": "",
+        "tooltip": ""
+    }
+}

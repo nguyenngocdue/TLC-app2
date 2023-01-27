@@ -12,7 +12,7 @@ class Image extends Component
      * @return void
      */
     public function __construct(
-        private $src = 'https://yt3.ggpht.com/yti/AJo0G0mGVpeYCc76oGrml6uLrfwfVriSPfY0s1cF11FJOw=s108-c-k-c0x00ffffff-no-rj',
+        private $src = '/images/helen.jpeg',
         private $href = null,
         private $w = null,
         private $h = null,

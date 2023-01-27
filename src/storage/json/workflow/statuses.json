@@ -155,6 +155,12 @@
         "color": "amber",
         "color_index": "200"
     },
+    "pending_ack": {
+        "name": "pending_ack",
+        "title": "Pending Acknowledgement",
+        "color": "orange",
+        "color_index": "800"
+    },
     "pending_approval": {
         "name": "pending_approval",
         "title": "Pending Approval",
@@ -274,9 +280,5 @@
         "title": "Verified Rejected",
         "color": "red",
         "color_index": "200"
-    },
-    "zzz": {
-        "name": "zzz",
-        "title": "Zzz"
     }
 }

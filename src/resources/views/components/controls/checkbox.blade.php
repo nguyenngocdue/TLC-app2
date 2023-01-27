@@ -12,5 +12,5 @@
         </div>
         @endforeach
     </div>
-    @include('components.feedback.alertValidation')
+    @include('components.feedback.alert-validation')
     @endif

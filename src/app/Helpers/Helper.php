@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use App\Utils\Support\Relationships;
+use App\Utils\Support\Json\Relationships;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;

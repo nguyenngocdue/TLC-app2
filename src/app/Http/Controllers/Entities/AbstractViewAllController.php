@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Workflow\LibApps;
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
-use App\Utils\Support\Props;
-use App\Utils\Support\Relationships;
+use App\Utils\Support\Json\Props;
+use App\Utils\Support\Json\Relationships;
 use Exception;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
@@ -62,10 +62,15 @@ abstract class AbstractViewAllController extends Controller
 
             switch ($prop['control']) {
                 case 'id':
-                    //Attach type to generate hyperlink
                     $output['renderer'] = 'id';
                     $output['align'] = 'center';
                     $output['type'] = $type;
+                    break;
+                case 'qr_code':
+                    $output['renderer'] = 'qr-code';
+                    $output['align'] = 'center';
+                    $output['type'] = $type;
+                    $output['width'] = 10;
                     break;
                 case 'toggle':
                     $output['renderer'] = "toggle";
@@ -111,6 +116,12 @@ abstract class AbstractViewAllController extends Controller
             $allows = array_keys($columnLimit);
             $props = array_filter($props, fn ($prop) => in_array($prop['name'], $allows));
         }
+        $qrCodeColumn = [
+            'label' => "QR Code",
+            'column_name' => 'id',
+            'control' => 'qr_code',
+        ];
+        array_splice($props, 1, 0, [$qrCodeColumn]);
         $result = array_values(array_map(fn ($prop) => createObject($prop, $type), $props));
         // Log::info($result);
         return $result;
@@ -189,10 +200,16 @@ abstract class AbstractViewAllController extends Controller
         $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
         $this->attachRendererIntoColumn($columns);
 
-        $title = LibApps::getFor($type)['title'];
-        // Log::info($columns);
+        $searchableArray = App::make($this->typeModel)->toSearchableArray();
 
-        return view('dashboards.pages.viewAll2')->with(compact('title', 'pageLimit', 'type', 'columns', 'dataSource'));
+        return view('dashboards.pages.entity-view-all', [
+            'topTitle' => CurrentRoute::getTitleOf($this->type),
+            'pageLimit' => $pageLimit,
+            'type' => $type,
+            'columns' => $columns,
+            'dataSource' => $dataSource,
+            'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
+        ]);
     }
 
     public function destroy($id)
@@ -206,36 +223,4 @@ abstract class AbstractViewAllController extends Controller
             return response()->json(['message' => $th], 404);
         }
     }
-
-    // public function update(Request $request, $id)
-    // {
-    //     $data = $request->input();
-    //     $entity = $request->input('_entity');
-    //     if (!$entity) {
-    //         $page = $request->input('_entity_page');
-    //         $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT', '_entity_page' => '']);
-    //         $user = User::find($id);
-    //         $var = $user->settings;
-    //         foreach ($data as $key => $value) {
-    //             $var[$page][$key] = $value;
-    //         }
-    //         $user->settings = $var;
-    //         $user->update();
-    //         Toastr::success('Save settings Page Limit Users successfully', 'Save file json');
-    //         return redirect()->back();
-    //     }
-    //     $data = array_diff_key($data, ['_token' => '', '_method' => 'PUT', '_entity' => '']);
-    //     $user = User::find($id);
-    //     $var = $user->settings;
-    //     $result = [];
-    //     foreach ($data as $key => $value) {
-    //         $result['columns'][$key] = $value;
-    //         $result['page_limit'] = $var[$entity]['page_limit'] ?? '';
-    //     }
-    //     $var[$entity] = $result;
-    //     $user->settings = $var;
-    //     $user->update();
-    //     Toastr::success('Save settings json Users successfully', 'Save file json');
-    //     return redirect()->back();
-    // }
 }

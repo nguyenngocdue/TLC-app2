@@ -9,9 +9,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_name": {
         "name": "_name",
@@ -23,9 +24,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_slug": {
         "name": "_slug",
@@ -37,9 +39,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": "All_SlugifyByName"
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_hse_incident_report_id": {
         "name": "_hse_incident_report_id",
@@ -51,9 +54,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_priority_id": {
         "name": "_priority_id",
@@ -65,9 +69,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_work_area_id": {
         "name": "_work_area_id",
@@ -79,9 +84,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_description": {
         "name": "_description",
@@ -93,9 +99,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_assignee": {
         "name": "_assignee",
@@ -107,9 +114,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_opened_date": {
         "name": "_opened_date",
@@ -121,9 +129,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_closed_date": {
         "name": "_closed_date",
@@ -135,9 +144,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_status": {
         "name": "_status",
@@ -149,9 +159,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_unsafe_action_type_id": {
         "name": "_unsafe_action_type_id",
@@ -163,9 +174,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -177,9 +189,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -191,8 +204,9 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     }
 }

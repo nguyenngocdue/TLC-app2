@@ -2,12 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\RoleSet;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class AdminSeeder extends Seeder
 {
@@ -20,8 +17,8 @@ class AdminSeeder extends Seeder
     {
         User::create(
             [
-                "first_name" => '',
-                "last_name" => '',
+                "first_name" => 'Admin',
+                "last_name" => 'Super',
                 "full_name" => 'admin',
                 "name" => 'admin',
                 "email" => 'admin',

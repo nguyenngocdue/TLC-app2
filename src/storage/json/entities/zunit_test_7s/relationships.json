@@ -2,7 +2,7 @@
     "_comments": {
         "name": "_comments",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "comments",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -14,7 +14,7 @@
     "_attachment": {
         "name": "_attachment",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "attachment",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "",

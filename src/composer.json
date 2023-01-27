@@ -8,9 +8,16 @@
     ],
     "license": "MIT",
     "repositories": {
-        "spatiecustom": {
+        "spatie-custom": {
             "type": "path",
-            "url": "packages/ndc/spatiecustom",
+            "url": "packages/ndc/spatie-custom",
+            "options": {
+                "symlink": true
+            }
+        },
+        "font-beauty": {
+            "type": "path",
+            "url": "packages/fortune/font-beauty",
             "options": {
                 "symlink": true
             }
@@ -34,7 +41,8 @@
         "league/flysystem-aws-s3-v3": "3.0.22",
         "mll-lab/graphql-php-scalars": "^5.4",
         "mll-lab/laravel-graphql-playground": "^2.6",
-        "ndc/spatiecustom": "@dev",
+        "ndc/spatie-custom": "@dev",
+        "fortune/font-beauty": "@dev",
         "nuwave/lighthouse": "^5.61",
         "spatie/laravel-permission": "^5.5"
     },

@@ -1,0 +1,42 @@
+{
+    "new": {
+        "name": "new",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "in_progress": {
+        "name": "in_progress",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "on_hold": {
+        "name": "on_hold",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "finished": {
+        "name": "finished",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "cancelled": {
+        "name": "cancelled",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    }
+}

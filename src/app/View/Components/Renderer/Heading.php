@@ -13,7 +13,8 @@ class Heading extends Component
      */
     public function __construct(
         private $level = 6,
-        private $title = ''
+        private $title = '',
+        private $align = 'left',
     ) {
         //
     }
@@ -37,7 +38,7 @@ class Heading extends Component
                 $font = "font-medium";
             }
 
-            $class = "$font leading-tight text-{$textSize} text-black my-2";
+            $class = "$font leading-tight text-{$textSize} text-black my-2 text-{$this->align}";
             $slot = $data['slot'];
             return "<$h class='$class' title='$this->title'>$slot</$h>";
         };

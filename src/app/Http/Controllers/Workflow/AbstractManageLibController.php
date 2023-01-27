@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Workflow;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -12,10 +14,6 @@ abstract class AbstractManageLibController extends Controller
     protected $title = "Manage {Library}";
     protected $libraryClass = AbstractLib::class;
     protected $route = "manage{Library}";
-
-    public function __construct()
-    {
-    }
 
     public function getType()
     {
@@ -28,6 +26,7 @@ abstract class AbstractManageLibController extends Controller
     {
         $result = [];
         foreach ($array as $index => $attributes) {
+            // if (in_array($index, ['button'])) continue;
             foreach ($attributes as $key => $value) {
                 $name = $array['name'][$key];
                 $result[$name][$index] = $value;
@@ -37,30 +36,61 @@ abstract class AbstractManageLibController extends Controller
         return $result;
     }
 
+    public function getDataSource()
+    {
+        $result = array_values($this->libraryClass::getAll());
+        foreach ($result as &$value) {
+            $key = $value['name'];
+            $value['action'] = Blade::render("<div class='whitespace-nowrap'>
+            <x-renderer.button htmlType='submit' name='button' size='xs' value='right_by_name,$key' type='danger' outline=true><i class='fa fa-trash'></i></x-renderer.button>
+        </div>");
+        }
+        return $result;
+    }
+
     public function index()
     {
-        $columns = $this->getColumns();
-        $dataSource = array_values($this->libraryClass::getAll());
-        $route = $this->route;
-        $title = $this->title;
+        return view("dashboards.pages.manage-library", [
+            'columns' => $this->getColumns(),
+            'dataSource' => $this->getDataSource(),
+            'route' => $this->route,
+            'title' => '',
+            'topTitle' => $this->title,
+            'type' => 'Workflow',
+        ]);
+    }
 
-        return view("workflow/manage-statuses")->with(compact('title', 'columns', 'dataSource', 'route'));
+    private function delete($button, $dataSource)
+    {
+        [$direction, $key] = explode(",", $button);
+        $dataSource = Arr::moveDirection($dataSource, $direction, null, $key);
+        $dataSource = Arr::keyBy($dataSource, "name");
+        return $dataSource;
     }
 
     public function store(Request $request)
     {
         $dataSource = (array)$request->all();
         unset($dataSource["_token"]);
-        $dataSource = $this->distributeArrayToObject($dataSource);
-        // dd($dataSource);
-        // dd("Saving to " . $this->libraryClass);
+        if (isset($dataSource['button'])) {
+            $button = $dataSource['button'];
+            unset($dataSource["button"]);
+        }
+
+        $table00 = $dataSource['table00'];
+        $dataSource = $this->distributeArrayToObject($table00);
+        if ($request->input('button')) {
+            $dataSource = $this->delete($button, $dataSource);
+        }
+
         $this->libraryClass::setAll($dataSource);
         return redirect()->back();
     }
 
     public function create(Request $request)
     {
-        $name = $request->input('name')[0];
+        $table00 = $request->input('table00');
+        $name = $table00['name'][0];
         $names = explode("|", $name);
         $newItems = [];
         foreach ($names as $name) $newItems[$name] = ['name' => $name, 'title' => Str::headline($name)];

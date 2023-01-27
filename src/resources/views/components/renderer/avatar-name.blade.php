@@ -21,9 +21,9 @@ $txt_gray = $gray ? "text-gray-600" : "";
     </span>
     <span>
         @if($href)
-        <a class="font-semibold {{$txt_gray}}" href="{{$href}}">{{$title}}</a>
+        <a class="font-semibold text-left {{$txt_gray}}" href="{{$href}}">{{$title}}</a>
         @else
-        <p class="font-semibold {{$txt_gray}}">{{$title}}</p>
+        <p class="font-semibold text-left {{$txt_gray}}">{{$title}}</p>
         @endif
 
         <p class="text-xs text-gray-600 dark:text-gray-400 ">

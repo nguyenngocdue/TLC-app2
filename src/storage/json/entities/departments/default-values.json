@@ -1,0 +1,101 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "label": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "label": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": "",
+        "validation": "required",
+        "formula": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "label": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": "",
+        "validation": "required",
+        "formula": ""
+    },
+    "_head_of_department": {
+        "name": "_head_of_department",
+        "column_name": "head_of_department",
+        "label": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "label": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": "",
+        "validation": "",
+        "formula": "All_SlugifyByName"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_Users_Count": {
+        "name": "_Users_Count",
+        "column_name": "Users_Count",
+        "label": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": "",
+        "validation": "",
+        "formula": ""
+    },
+    "_Users_Count2": {
+        "name": "_Users_Count2",
+        "column_name": "Users_Count2",
+        "label": "",
+        "label_extra": "",
+        "placeholder": "",
+        "default_value": "",
+        "control_extra": "",
+        "validation": "",
+        "formula": ""
+    }
+}

@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Http\Controllers\Entities\{{nameClass}};
+
+use App\Http\Controllers\Entities\AbstractEntityCRUDController;
+use App\Models\{{nameClassSingular}};
+
+class EntityCRUDController extends AbstractEntityCRUDController
+{
+    protected $type = '{{nameModelSingular}}';
+    protected $data = {{nameClassSingular}}::class;
+}

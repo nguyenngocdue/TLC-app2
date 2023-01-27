@@ -6,7 +6,7 @@
                 {!! $header !!}
             </div>
         @endif    
-        <div class="table-wrp overflow-x-auto block max-h-[40rem]">
+        <div class="table-wrp overflow-x-auto block max-h-[{{$maxH}}rem]">
             <table class='w-full whitespace-no-wrap text-sm ' style="table-layout: auto">
                 <colgroup>
                     {!! $colgroup  !!}                        
@@ -16,8 +16,15 @@
                         {!! $columnsRendered !!}
                     </tr>
                 </thead>
+                @isset($headerRendered)
+                <thead class="sticky top-{{$headerTop}} z-10">
+                    <tr class='text-xs font-semibold tracking-wide text-center text-gray-500 border-b dark:border-gray-700 bg-gray-100 dark:text-gray-400 dark:bg-gray-800'>
+                        {!! $headerRendered !!}
+                    </tr>
+                </thead>
+                @endisset
                 <tbody class='bg-white divide-y dark:divide-gray-700 dark:bg-gray-800'>
-                    {!! $trtd !!}
+                    {!! $tr_td !!}
                 </tbody>
                 <tfoot>
                 </tfoot>

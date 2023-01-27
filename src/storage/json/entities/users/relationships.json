@@ -2,7 +2,7 @@
     "_avatar": {
         "name": "_avatar",
         "relationship": "morphOne",
-        "control_name": "",
+        "control_name": "avatar",
         "renderer_view_all": "column",
         "renderer_view_all_param": "url_thumbnail",
         "renderer_edit": "",
@@ -14,7 +14,7 @@
     "_posts": {
         "name": "_posts",
         "relationship": "hasMany",
-        "control_name": "",
+        "control_name": "posts",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -26,7 +26,7 @@
     "_getWorkplaces": {
         "name": "_getWorkplaces",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "workplace",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -38,7 +38,7 @@
     "_userTypes": {
         "name": "_userTypes",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "user_type",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -50,7 +50,7 @@
     "_categories": {
         "name": "_categories",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "category",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -62,7 +62,7 @@
     "_positionPres": {
         "name": "_positionPres",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "position_prefix",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -74,7 +74,7 @@
     "_position1": {
         "name": "_position1",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "position_1",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -86,7 +86,7 @@
     "_position2": {
         "name": "_position2",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "position_2",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -98,7 +98,7 @@
     "_position3": {
         "name": "_position3",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "position_3",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -110,7 +110,7 @@
     "_disciplines": {
         "name": "_disciplines",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "discipline",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -122,7 +122,7 @@
     "_departments": {
         "name": "_departments",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "department",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -134,7 +134,7 @@
     "_time_keep_types": {
         "name": "_time_keep_types",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "time_keeping_type",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -146,7 +146,7 @@
     "_productionRuns": {
         "name": "_productionRuns",
         "relationship": "belongsToMany",
-        "control_name": "",
+        "control_name": "productionRuns",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -158,8 +158,8 @@
     "_qaqcInspChklsts": {
         "name": "_qaqcInspChklsts",
         "relationship": "belongsTo",
-        "control_name": "",
-        "renderer_view_all": "count",
+        "control_name": "owner_id",
+        "renderer_view_all": "",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",

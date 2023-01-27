@@ -14,4 +14,4 @@ $valDataSource = array_values($dataSource)[0];
         @endforeach
     </div>
     @endif
-    @include('components.feedback.alertValidation')
+    @include('components.feedback.alert-validation')

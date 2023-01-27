@@ -2,7 +2,7 @@
     "_comment_by_clinic": {
         "name": "_comment_by_clinic",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "comment_by_clinic",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -14,7 +14,7 @@
     "_comment_by_line_manager": {
         "name": "_comment_by_line_manager",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "comment_by_line_manager",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -26,7 +26,7 @@
     "_comment_by_general_manager": {
         "name": "_comment_by_general_manager",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "comment_by_general_manager",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -38,7 +38,7 @@
     "_getInjuredPerson": {
         "name": "_getInjuredPerson",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "injured_person",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -50,7 +50,7 @@
     "_getLineManager": {
         "name": "_getLineManager",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "line_manager",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -62,7 +62,7 @@
     "_getReportPerson": {
         "name": "_getReportPerson",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "report_person",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -74,7 +74,7 @@
     "_getWorkArea": {
         "name": "_getWorkArea",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "work_area_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -98,7 +98,7 @@
     "_attachment_1": {
         "name": "_attachment_1",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "attachment_1",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
@@ -110,7 +110,7 @@
     "_attachment_2": {
         "name": "_attachment_2",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "attachment_2",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",

@@ -1,0 +1,24 @@
+{
+    "name": "fortune/font-beauty",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Fortune\\FontBeauty\\": "src/"
+        },
+        "files": []
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Fortune\\FontBeauty\\FontBeautyServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "authors": [
+        {
+            "name": "Fortune Truong",
+            "email": "fortune.truong@gmail.com"
+        }
+    ]
+}

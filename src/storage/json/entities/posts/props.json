@@ -3,14 +3,16 @@
         "name": "_id",
         "column_name": "id",
         "column_type": "bigint",
-        "label": "Id",
+        "label": "ID",
         "control": "id",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_name": {
         "name": "_name",
@@ -19,11 +21,13 @@
         "label": "Name",
         "control": "text",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_content": {
         "name": "_content",
@@ -32,11 +36,13 @@
         "label": "Content",
         "control": "textarea",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -45,11 +51,13 @@
         "label": "Owner Id",
         "control": "dropdown",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -58,11 +66,13 @@
         "label": "Created At",
         "control": "picker_datetime",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -71,10 +81,12 @@
         "label": "Updated At",
         "control": "picker_datetime",
         "col_span": "12",
+        "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     }
 }

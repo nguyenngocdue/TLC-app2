@@ -10,8 +10,8 @@ type Prod_order {
     id: ID!
     name: String!
     slug: String!
-    production: String!
-    compliance: String!
+    production_name: String!
+    compliance_name: String!
     description: String
     quantity: Int
     status: String
@@ -28,8 +28,8 @@ type Prod_order {
 input CreateProdOrderInput {
     name: String!
     slug: String!
-    production: String!
-    compliance: String!
+    production_name: String!
+    compliance_name: String!
     description: String
     quantity: Int
     status: String
@@ -42,8 +42,8 @@ input UpdateProdOrderInput {
     id: ID!
     name: String
     slug: String
-    production: String
-    compliance: String
+    production_name: String
+    compliance_name: String
     description: String
     quantity: Int
     status: String

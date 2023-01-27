@@ -6,29 +6,29 @@ use App\Utils\Support\CurrentRoute;
 
 class SidebarAdminItems
 {
-    private static function getPermission($currentType, $svg)
+    private static function getPermission($currentType)
     {
         $isActive = ($currentType === 'permission');
         return [
             "title" => "Permissions",
             // "type" => "ppppp",
-            "icon" => $svg['modals'],
+            "icon" => "fa-duotone fa-dice-d20",
             "isActive" => $isActive,
             "children" => [
                 [
                     'title' => "Permissions",
                     'href' => "/dashboard/admin/permissions",
                 ],
-                [
-                    'title' => "Permissions 2",
-                    'href' => "/dashboard/admin/permissions2",
-                ],
+                // [
+                //     'title' => "Permissions 2",
+                //     'href' => "/dashboard/admin/permissions2",
+                // ],
                 [
                     'title' => "Roles",
                     'href' =>  "/dashboard/admin/roles",
                 ],
                 [
-                    'title' => "Rolesets",
+                    'title' => "RoleSets",
                     'href' => "/dashboard/admin/role_sets",
                 ],
                 [
@@ -39,24 +39,24 @@ class SidebarAdminItems
                     'href' => "/dashboard/admin/setpermissions",
                 ],
                 [
-                    'title' => "Set Roles to Rolesets",
+                    'title' => "Set Roles to RoleSets",
                     'href' => "/dashboard/admin/setroles",
                 ],
                 [
-                    'title' => "Set Rolesets to Users",
+                    'title' => "Set RoleSets to Users",
                     'href' => "/dashboard/admin/setrolesets",
                 ],
             ],
         ];
     }
 
-    private static function getWorkflow($currentType, $svg)
+    private static function getWorkflow($currentType)
     {
         $isActive = ($currentType === 'workflow');
         return [
             "title" => "Workflows",
             // "type" => "ppppp",
-            "icon" => $svg['layout'],
+            "icon" => "fa-duotone fa-bars-staggered",
             "isActive" => $isActive,
             "children" => [
                 [
@@ -75,11 +75,11 @@ class SidebarAdminItems
         ];
     }
 
-    public static function getAll($svg)
+    public static function getAll()
     {
         $currentType = CurrentRoute::getTypeSingular();
-        $result[] = self::getPermission($currentType, $svg);
-        $result[] = self::getWorkflow($currentType, $svg);
+        $result[] = self::getPermission($currentType);
+        $result[] = self::getWorkflow($currentType);
         return $result;
     }
 }

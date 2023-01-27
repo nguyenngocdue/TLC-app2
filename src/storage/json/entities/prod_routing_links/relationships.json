@@ -26,7 +26,7 @@
     "_discipline": {
         "name": "_discipline",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "prod_discipline_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

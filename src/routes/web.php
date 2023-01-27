@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppMenuController;
-use App\Http\Controllers\ComponentLib;
+use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UpdateUserSettings;
@@ -29,8 +29,7 @@ Route::group([
             $ucfirstName = Str::ucfirst($singular);
             $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
             Route::resource("{$entityName}", "{$path}ViewAllController")->only('index');
-            Route::resource("{$entityName}", "{$path}CreateController")->only('create', 'store');
-            Route::resource("{$entityName}", "{$path}EditController")->only('edit', 'update', 'show');
+            Route::resource("{$entityName}", "{$path}EntityCRUDController")->only('create', 'store', 'edit', 'update', 'show');
         }
         // Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
         // Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');
@@ -47,11 +46,29 @@ Route::group([
             ], function () use ($singular, $ucfirstName) {
                 $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
 
-                Route::resource("{$singular}_prp", "{$path}ManageController")->only('index', 'store', 'create');
-                Route::resource("{$singular}_rls", "{$path}ManageController")->only('index', 'store');
+                Route::resource("{$singular}_ppt", "{$path}ManageJsonController")->only('index', 'store', 'create');
 
-                Route::resource("{$singular}_ltn", "{$path}ManageController")->only('index', 'store', 'create');
-                Route::resource("{$singular}_stt", "{$path}ManageController")->only('index', 'store');
+                Route::resource("{$singular}_prp", "{$path}ManageJsonController")->only('index', 'store', 'create');
+                Route::resource("{$singular}_dfv", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_rls", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_ltn", "{$path}ManageJsonController")->only('index', 'store', 'create');
+                Route::resource("{$singular}_stt", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_tst", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_atb", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_dfn", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_itm", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_bic", "{$path}ManageJsonController")->only('index', 'store');
+
+                Route::resource("{$singular}_vsb", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_rol", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_rqr", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_hdn", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_vsb-wl", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_rol-wl", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_rqr-wl", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_hdn-wl", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_cpb", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_unt", "{$path}ManageJsonController")->only('index', 'store', 'create');
             });
         }
     });
@@ -94,4 +111,4 @@ Route::group([
     Route::resource('manageWidgets', ManageWidgetsController::class)->only('index', 'store', 'create');
     Route::resource('manageApps', ManageAppsController::class)->only('index', 'store', 'create');
 });
-Route::get('components', [ComponentLib::class, 'index']);
+Route::get('components', [ComponentDemo::class, 'index']);

@@ -9,10 +9,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_name": {
         "name": "_name",
@@ -24,10 +24,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_year": {
         "name": "_year",
@@ -39,10 +39,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_workplace_id": {
         "name": "_workplace_id",
@@ -54,10 +54,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_ph_date": {
         "name": "_ph_date",
@@ -69,25 +69,25 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_ph_hours": {
         "name": "_ph_hours",
         "column_name": "ph_hours",
-        "column_type": "integer",
+        "column_type": "float",
         "label": "Working Hours",
         "control": "number",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -99,10 +99,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "true",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -114,9 +114,9 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "true",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Dashboards\pages;
+namespace App\View\Components\Form;
 
 use Illuminate\View\Component;
 
@@ -11,11 +11,10 @@ class Search extends Component
      *
      * @return void
      */
-    public function __construct(private $action = '')
-    {
-        //
-        // dd($this->action);
-        // dd("Searchbox");
+    public function __construct(
+        private $route = '',
+        private $title = '',
+    ) {
     }
 
     /**
@@ -26,7 +25,8 @@ class Search extends Component
     public function render()
     {
         return view('components.form.search', [
-            'action' => $this->action,
+            'route' => $this->route,
+            'title' => $this->title,
         ]);
     }
 }

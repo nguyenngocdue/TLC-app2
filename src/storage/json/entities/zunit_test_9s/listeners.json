@@ -2,7 +2,7 @@
     "_user_1": {
         "name": "_user_1",
         "column_name": "user_1",
-        "action": "reduce",
+        "listen_action": "reduce",
         "triggers": "department_1",
         "listen_to_fields": "department_1",
         "listen_to_attrs": "head_of_department"
@@ -10,7 +10,7 @@
     "_user_2": {
         "name": "_user_2",
         "column_name": "user_2",
-        "action": "reduce",
+        "listen_action": "reduce",
         "triggers": "department_2",
         "listen_to_fields": "user_2",
         "listen_to_attrs": "department"
@@ -18,7 +18,7 @@
     "_user_3": {
         "name": "_user_3",
         "column_name": "user_3",
-        "action": "reduce",
+        "listen_action": "reduce",
         "triggers": "category_id",
         "listen_to_fields": "user_3",
         "listen_to_attrs": "category"
@@ -26,7 +26,7 @@
     "_prod_order_1": {
         "name": "_prod_order_1",
         "column_name": "prod_order_1",
-        "action": "reduce",
+        "listen_action": "reduce",
         "triggers": "sub_project_1",
         "listen_to_fields": "prod_order_1",
         "listen_to_attrs": "sub_project_id"

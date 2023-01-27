@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Http\Controllers\Entities\ZZTraitManageJson;
+
+use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\Support\Json\ActionButtons;
+use Illuminate\Support\Facades\Log;
+
+class ManageActionButtons extends Manage_Parent
+{
+    protected $viewName = "dashboards.pages.manage-action-button";
+    protected $routeKey = "_atb";
+    protected $jsonGetSet = ActionButtons::class;
+
+    protected function getColumns()
+    {
+        $columns = [
+            [
+                "dataIndex" => 'name',
+                'renderer' => 'status',
+                'align' => 'center',
+                'title' => 'Name',
+            ],
+            [
+                "dataIndex" => 'name',
+                'renderer' => 'read-only-text',
+                'editable' => true,
+                'align' => 'center',
+                'title' => 'Key',
+            ],
+            [
+                "dataIndex" => 'label',
+                'renderer' => 'text',
+                'editable' => true,
+            ],
+            [
+                "dataIndex" => 'tooltip',
+                'renderer' => 'text',
+                'editable' => true,
+            ],
+        ];
+        return $columns;
+    }
+
+    protected function getDataSource()
+    {
+        $allStatuses = LibStatuses::getFor($this->type);
+        $dataInJson = ActionButtons::getAllOf($this->type);
+        $result = [];
+        foreach ($allStatuses as $status) {
+            $name = $status['name'];
+            if (isset($dataInJson[$name])) {
+                $newItem = $dataInJson[$name];
+            } else {
+                $newItem = ['name' => $name];
+            }
+            $result[] = $newItem;
+        }
+        return $result;
+    }
+}

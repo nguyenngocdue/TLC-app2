@@ -1,0 +1,54 @@
+<div class="grid gap-6 mb-8 md:grid-cols-2 ">
+    <x-renderer.card title="Attachments">
+        @dump($_GET)
+        <form action="" method="GET">
+            <x-renderer.card title="attachmentData = [[]], not entering other attributes.  ">
+                <x-renderer.attachment :attachmentData="[]" />
+            </x-renderer.card>
+            <br/>
+            <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }">
+                <x-renderer.attachment readonly={{true}} destroyable={{true}} showToBeDeleted={{true}} :attachmentData="$attachmentData" />
+            </x-renderer.card>
+            <br />
+            <x-renderer.card title="readonly = { { false} }, destroyable = { { false} }, showToBeDeleted = { { false} }, categoryName={ {attachment_2} } ">
+                <x-renderer.attachment readonly={{false}} destroyable={{false}} categoryName="attachment_2" showToBeDeleted={{false}} :attachmentData="$attachmentData" />
+            </x-renderer.card>
+            <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
+        </form>
+    </x-renderer.card>
+
+
+    <x-renderer.card title="Comments">
+        @dump($_GET)
+        <form action="" method="GET">
+            <x-renderer.card title="dataComment=[], not entering other attributes.">
+                <x-renderer.comment :dataComment="[]" />
+            </x-renderer.card>
+            <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
+        </form>
+        <br />
+        @dump($_GET)
+        <form action="" method="GET">
+            <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }, name={ { comment_1 } }">
+                <x-renderer.comment readonly={{true}} destroyable={{true}} showToBeDeleted={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment" />
+            </x-renderer.card>
+            <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
+        </form>
+        <br />
+        @dump($_GET)
+        <form action="" method="GET">
+            <x-renderer.card title="readonly={ { false } }, destroyable={ { false } }, showToBeDeleted={ { false } }, name={ { comment_1 } }">
+                <x-renderer.comment readonly={{false}} destroyable={{false}} showToBeDeleted={{false}} name="comment_1" type="department" id="1" :dataComment="$dataComment" />
+            </x-renderer.card>
+            <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
+        </form>
+        <br />
+        @dump($_GET)
+        <form action="" method="GET">
+            <x-renderer.card title="readonly={ { false } }, destroyable={ { true } }, showToBeDeleted={ { false } }, name={ { comment_1 } }, attachmentData={ { $attachmentData } } ">
+                <x-renderer.comment readonly={{false}} showToBeDeleted={{false}} destroyable={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment" :attachmentData="$attachmentData" />
+            </x-renderer.card>
+            <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
+        </form>
+    </x-renderer.card>
+</div>

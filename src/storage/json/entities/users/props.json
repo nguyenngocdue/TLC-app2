@@ -1,18 +1,19 @@
+
 {
     "_id": {
         "name": "_id",
         "column_name": "id",
         "column_type": "bigint",
-        "label": "Id",
+        "label": "ID",
         "control": "id",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_avatar": {
         "name": "_avatar",
@@ -24,10 +25,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "true",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_email": {
         "name": "_email",
@@ -39,10 +40,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_name": {
         "name": "_name",
@@ -54,10 +55,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_full_name": {
         "name": "_full_name",
@@ -69,10 +70,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_name_suffix": {
         "name": "_name_suffix",
@@ -84,10 +85,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_employeeid": {
         "name": "_employeeid",
@@ -99,10 +100,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_first_name": {
         "name": "_first_name",
@@ -114,10 +115,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_last_name": {
         "name": "_last_name",
@@ -129,10 +130,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_address": {
         "name": "_address",
@@ -144,10 +145,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_phone": {
         "name": "_phone",
@@ -159,10 +160,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_featured_image": {
         "name": "_featured_image",
@@ -174,10 +175,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_time_keeping_type": {
         "name": "_time_keeping_type",
@@ -189,10 +190,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_user_type": {
         "name": "_user_type",
@@ -204,10 +205,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_workplace": {
         "name": "_workplace",
@@ -219,10 +220,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_category": {
         "name": "_category",
@@ -234,10 +235,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_date_of_birth": {
         "name": "_date_of_birth",
@@ -249,10 +250,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_first_date": {
         "name": "_first_date",
@@ -264,10 +265,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_last_date": {
         "name": "_last_date",
@@ -279,10 +280,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_title": {
         "name": "_title",
@@ -294,10 +295,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_position_prefix": {
         "name": "_position_prefix",
@@ -309,10 +310,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_position_1": {
         "name": "_position_1",
@@ -324,10 +325,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_position_2": {
         "name": "_position_2",
@@ -339,10 +340,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_position_3": {
         "name": "_position_3",
@@ -354,10 +355,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_position_rendered": {
         "name": "_position_rendered",
@@ -369,10 +370,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": "User_PositionRendered"
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_discipline": {
         "name": "_discipline",
@@ -384,10 +385,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_department": {
         "name": "_department",
@@ -399,10 +400,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "required",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_show_on_beta": {
         "name": "_show_on_beta",
@@ -414,10 +415,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_resigned": {
         "name": "_resigned",
@@ -429,10 +430,10 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_viewport_uids": {
         "name": "_viewport_uids",
@@ -444,10 +445,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_leaf_uids": {
         "name": "_leaf_uids",
@@ -459,10 +460,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_user_id_passport": {
         "name": "_user_id_passport",
@@ -474,10 +475,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_user_pin": {
         "name": "_user_pin",
@@ -489,10 +490,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_email_verified_at": {
         "name": "_email_verified_at",
@@ -504,10 +505,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_provider": {
         "name": "_provider",
@@ -519,10 +520,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_password": {
         "name": "_password",
@@ -534,10 +535,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_time_zone": {
         "name": "_time_zone",
@@ -549,10 +550,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_settings": {
         "name": "_settings",
@@ -564,10 +565,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "json",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_remember_token": {
         "name": "_remember_token",
@@ -579,10 +580,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -594,10 +595,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -609,10 +610,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_guid": {
         "name": "_guid",
@@ -624,10 +625,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_domain": {
         "name": "_domain",
@@ -639,10 +640,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_posts": {
         "name": "_posts",
@@ -654,10 +655,10 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     },
     "_productionRuns": {
         "name": "_productionRuns",
@@ -669,9 +670,9 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "true",
-        "label_hidden_edit": "",
-        "new_line": "",
-        "validation": "",
-        "formula": ""
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     }
 }

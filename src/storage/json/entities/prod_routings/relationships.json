@@ -34,5 +34,17 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
+    },
+    "_prodRoutingDetails": {
+        "name": "_prodRoutingDetails",
+        "relationship": "hasMany",
+        "control_name": "prodRoutingDetails",
+        "renderer_view_all": "",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }

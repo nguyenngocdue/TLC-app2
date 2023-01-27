@@ -1,4 +1,4 @@
-<form action="{{$action}}" method="post">
+<form action="{{$route}}" method="post">
     @method('PUT')
     @csrf
     <div class="mt-2 flex">

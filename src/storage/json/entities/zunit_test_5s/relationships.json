@@ -2,7 +2,7 @@
     "_attachment_1": {
         "name": "_attachment_1",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "attachment_1",
         "renderer_view_all": "thumbnails",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -14,7 +14,7 @@
     "_attachment_2": {
         "name": "_attachment_2",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "attachment_2",
         "renderer_view_all": "thumbnails",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -26,7 +26,7 @@
     "_attachment_3": {
         "name": "_attachment_3",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "attachment_3",
         "renderer_view_all": "thumbnails",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -38,7 +38,7 @@
     "_attachment_4": {
         "name": "_attachment_4",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "attachment_4",
         "renderer_view_all": "thumbnails",
         "renderer_view_all_param": "",
         "renderer_edit": "",
@@ -50,7 +50,7 @@
     "_attachment_5": {
         "name": "_attachment_5",
         "relationship": "morphMany",
-        "control_name": "",
+        "control_name": "attachment_5",
         "renderer_view_all": "thumbnails",
         "renderer_view_all_param": "",
         "renderer_edit": "",

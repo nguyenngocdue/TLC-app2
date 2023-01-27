@@ -15,6 +15,7 @@ type Qaqc_insp_chklst_line {
     name: String!
     description: String!
     value: String
+    value_on_hold: String
     getControlType: Control_type! @belongsTo
     getRun: Qaqc_insp_chklst_run! @belongsTo
     getGroup: Qaqc_insp_group! @belongsTo

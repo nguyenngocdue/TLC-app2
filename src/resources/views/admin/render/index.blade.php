@@ -1,5 +1,8 @@
 @extends('layouts.app')
+
+@section('topTitle', 'Permission Library')
 @section('title', Str::headline($type))
+
 @section('content')
     <main class="h-full">
         <div class="container mx-auto grid px-6">

@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Homepage;
 
-use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\App;
@@ -11,7 +10,7 @@ use Illuminate\Support\Str;
 
 class SidebarEntityItems
 {
-    private static function maker($table, $svg)
+    private static function maker($table)
     {
         $currentType = CurrentRoute::getTypeSingular();
         $singular = Str::singular($table);
@@ -23,7 +22,7 @@ class SidebarEntityItems
         $result = [
             "title" => $model->getMenuTitle(),
             "type" => $singular,
-            "icon" => $svg['form'],
+            "icon" => $isActive ? "fa-duotone fa-folder-open" : "fa-duotone fa-folder",
             "isActive" => $isActive,
             "children" => [
                 [
@@ -36,29 +35,23 @@ class SidebarEntityItems
                 ],
                 ['title' => "-",],
                 [
-                    'title' => "Manage Props",
+                    'title' => "Manage Workflows",
                     'href' => route("{$singular}_prp.index"),
-                ],
-                [
-                    'title' => "Manage Relationships",
-                    'href' => route("{$singular}_rls.index"),
                 ],
             ],
         ];
 
-        if (method_exists($model, "transitionTo")) {
-            $result['children'][] =  ['title' => '-'];
-            $result['children'][] =  ['title' => "Manage Statuses", 'href' => route("{$singular}_stt.index"),];
-            $result['children'][] =  ['title' => "Manage Listeners", 'href' => route("{$singular}_ltn.index"),];
+        if (method_exists($model, "getProperties")) {
+            $result['children'][] =  ['title' => "Manage Properties", 'href' => route("{$singular}_ppt.index"),];
         }
 
         return $result;
     }
 
-    public static function getAll($svg)
+    public static function getAll()
     {
         $tables = Entities::getAllPluralNames();
-        $items = array_map(fn ($table) => self::maker($table, $svg), $tables);
+        $items = array_map(fn ($table) => self::maker($table), $tables);
         return $items;
     }
 }

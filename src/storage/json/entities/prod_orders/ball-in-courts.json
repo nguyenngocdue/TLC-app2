@@ -1,0 +1,47 @@
+{
+    "new": {
+        "name": "new",
+        "ball-in-court": "creator",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "in_progress": {
+        "name": "in_progress",
+        "ball-in-court": "assignee_1",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "on_hold": {
+        "name": "on_hold",
+        "ball-in-court": "assignee_2",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "finished": {
+        "name": "finished",
+        "ball-in-court": "assignee_3",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "cancelled": {
+        "name": "cancelled",
+        "ball-in-court": "assignee_4",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    }
+}

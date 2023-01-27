@@ -8,7 +8,7 @@ class Prod_order extends ModelExtended
 {
     public $timestamps = true;
     protected $fillable = [
-        "id", "slug", "name", "status", "production", "compliance", "description", "quantity",
+        "id", "slug", "name", "status", "production_name", "compliance_name", "description", "quantity",
         "sub_project_id", "prod_routing_id", "status"
     ];
     protected $primaryKey = 'id';
@@ -50,8 +50,8 @@ class Prod_order extends ModelExtended
         return [
             ['dataIndex' => 'id', 'renderer' => 'id', 'type' => 'prod_orders', 'align' => 'center'],
             ['dataIndex' => 'name', 'title' => 'Priority'],
-            ['dataIndex' => 'production', 'title' => 'Production Name'],
-            ['dataIndex' => 'compliance', 'title' => 'Compliance Name'],
+            ['dataIndex' => 'production_name'],
+            ['dataIndex' => 'compliance_name'],
         ];
     }
 }

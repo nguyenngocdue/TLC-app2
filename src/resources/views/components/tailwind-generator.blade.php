@@ -1,17 +1,19 @@
 <!-- OPTION -->
 <option disabled></option>
 
+
+
 <!-- CREATE - EDIT -->
-<span class="col-span-1"></span>
-<span class="col-span-2"></span>
-<span class="col-span-3"></span>
-<span class="col-span-4"></span>
-<span class="col-span-5"></span>
-<span class="col-span-6"></span>
-<span class="col-span-7"></span>
-<span class="col-span-8"></span>
-<span class="col-span-9"></span>
-<span class="col-span-10"></span>
+<span class="mx-1 col-span-1"></span>
+<span class="mx-2 col-span-2"></span>
+<span class="mx-3 col-span-3"></span>
+<span class="mx-4 col-span-4"></span>
+<span class="mx-5 col-span-5"></span>
+<span class="mx-6 col-span-6"></span>
+<span class="mx-7 col-span-7"></span>
+<span class="mx-8 col-span-8"></span>
+<span class="mx-9 col-span-9"></span>
+<span class="mx-10 col-span-10"></span>
 <!--  -->
 
 <!-- Divide -->
@@ -62,6 +64,37 @@
 <span class="hover:bg-gray-100 "></span>
 <span class="hover:bg-gray-200 "></span>
 <span class="hover:bg-red-100 "></span>
+
+<span class="top-0"></span>
+<span class="top-1"></span>
+<span class="top-2"></span>
+<span class="top-3"></span>
+<span class="top-4"></span>
+<span class="top-5"></span>
+<span class="top-6"></span>
+<span class="top-7"></span>
+<span class="top-8"></span>
+<span class="top-9"></span>
+<span class="top-10"></span>
+<span class="top-11"></span>
+<span class="top-12"></span>
+<span class="top-14"></span>
+<span class="top-16"></span>
+<span class="top-20"></span>
+
+<span class="max-h-[30rem] "></span>
+<span class="max-h-[31rem] "></span>
+<span class="max-h-[32rem] "></span>
+<span class="max-h-[33rem] "></span>
+<span class="max-h-[34rem] "></span>
+<span class="max-h-[35rem] "></span>
+<span class="max-h-[35rem] "></span>
+<span class="max-h-[36rem] "></span>
+<span class="max-h-[37rem] "></span>
+<span class="max-h-[38rem] "></span>
+<span class="max-h-[40rem] "></span>
+<span class="max-h-[45rem] "></span>
+<span class="max-h-[50rem] "></span>
 <!-- FOR ALERT -->
 <span class="text-green-700 border-green-300 bg-green-50 dark:bg-green-200"></span>
 <span class="text-blue-700 border-blue-300 bg-blue-50 dark:bg-blue-200"></span>

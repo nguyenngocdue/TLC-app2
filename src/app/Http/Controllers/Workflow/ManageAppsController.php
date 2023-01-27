@@ -16,6 +16,10 @@ class ManageAppsController extends AbstractManageLibController
         $subPackages = JsonControls::getSubPackages();
         return   [
             [
+                "dataIndex" => "action",
+                "align" => "center",
+            ],
+            [
                 'dataIndex' => "name",
                 "renderer"  => 'read-only-text',
                 'editable' => true,

@@ -14,7 +14,7 @@
     "_getControlGroup": {
         "name": "_getControlGroup",
         "relationship": "belongsTo",
-        "control_name": "getControlGroup",
+        "control_name": "qaqc_insp_control_group_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

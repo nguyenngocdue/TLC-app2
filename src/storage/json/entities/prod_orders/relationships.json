@@ -14,7 +14,7 @@
     "_subProject": {
         "name": "_subProject",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "sub_project_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -26,7 +26,7 @@
     "_prodRouting": {
         "name": "_prodRouting",
         "relationship": "belongsTo",
-        "control_name": "",
+        "control_name": "prod_routing_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

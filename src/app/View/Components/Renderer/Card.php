@@ -11,8 +11,11 @@ class Card extends Component
      *
      * @return void
      */
-    public function __construct(private $style = 'bg-white', private $idHtml = '')
-    {
+    public function __construct(
+        private $style = 'bg-white',
+        private $class = '',
+        private $idHtml = '',
+    ) {
     }
 
     /**
@@ -28,7 +31,8 @@ class Card extends Component
             $items = isset($data['attributes']["items"]) ? join("", $data['attributes']["items"]) : $data["slot"];
             $title = $data['attributes']["title"];
             $description = $data['attributes']["description"] ?? "";
-            return "<div id='$this->idHtml' class='break-normal min-w-0 p-4  border rounded-lg shadow-xs $this->style' >" .
+            $class = $this->class;
+            return "<div id='$this->idHtml' class='break-normal min-w-0 p-4 border rounded-lg shadow-xs $this->style $class' >" .
                 (($title) ? "<h4 class='mb-4 font-semibold text-gray-600 dark:text-gray-300'>{$title} </h4>" : "") .
                 "<p class='text-gray-600 dark:text-gray-400'>
                     $description

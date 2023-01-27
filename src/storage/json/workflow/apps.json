@@ -188,13 +188,6 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Tmpl Lines"
     },
-    "qaqc_insp_tmpl_run": {
-        "name": "qaqc_insp_tmpl_run",
-        "hidden": null,
-        "package": "project_management",
-        "sub_package": "qaqc",
-        "title": "QAQC Insp Tmpl Runs"
-    },
     "qaqc_insp_tmpl_sht": {
         "name": "qaqc_insp_tmpl_sht",
         "hidden": null,

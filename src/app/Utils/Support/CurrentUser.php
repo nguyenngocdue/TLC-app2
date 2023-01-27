@@ -3,7 +3,7 @@
 namespace App\Utils\Support;
 
 use Illuminate\Support\Facades\Auth;
-use Ndc\Spatiecustom\Exceptions\UnauthorizedException;
+use Ndc\SpatieCustom\Exceptions\UnauthorizedException;
 
 class CurrentUser
 {
@@ -66,5 +66,9 @@ class CurrentUser
                     ->map(fn ($item) => $item->name)->toArray()
             )->collapse()->all();
         return $permissions;
+    }
+    public static function get()
+    {
+        return Auth::user();
     }
 }

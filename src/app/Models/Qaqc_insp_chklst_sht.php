@@ -12,7 +12,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     public $eloquentParams = [
         "getRuns" => ["hasMany", Qaqc_insp_chklst_run::class, "qaqc_insp_chklst_sht_id"],
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
-        "getSheetTmpl" => ["belongsTo", Qaqc_insp_tmpl_sht::class, 'qaqc_insp_tmpl_sht_id'],
+        "getTmplSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, 'qaqc_insp_tmpl_sht_id'],
     ];
 
     public function getRuns()
@@ -31,7 +31,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getSheetTmpl()
+    public function getTmplSheet()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
