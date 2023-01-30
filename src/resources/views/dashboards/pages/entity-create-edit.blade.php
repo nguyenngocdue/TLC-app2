@@ -45,7 +45,6 @@ $id = $action === "edit" ? $values->id : "";
         @endphp
         <div class='col-span-{{$col_span}} grid'>
             <div class='grid grid-row-1'>
-
                 <div class='grid grid-cols-12 items-center {{$hiddenRow}} '>
                     @if($columnType === 'static')
                     <div class='col-span-12 text-left'>
@@ -89,9 +88,9 @@ $id = $action === "edit" ? $values->id : "";
                             </span>
                         </label>
                     </div>
-                    <div class=' col-start-{{24/$col_span+1}}   {{$val['new_line'] === 'true' ? "col-span-12" : "col-span-".(12 - 24/$col_span)}}  py-2 text-left'>
+                    <div class='col-start-{{24/$col_span+1}} {{$val['new_line'] === 'true' ? "col-span-12" : "col-span-".(12 - 24/$col_span)}} py-2 text-left'>
                         @if (is_null($control))
-                        <h2 class=" text-red-400">{{"Control of this $columnName has not been set"}}</h2>
+                        <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                         @endif
 
                         {{-- Invisible anchor for scrolling when users click on validation fail message --}}
@@ -105,48 +104,51 @@ $id = $action === "edit" ? $values->id : "";
                         @case($timeControls[4])
                         @case($timeControls[5])
                         @case($timeControls[6])
-                        <x-controls.text colName={{$columnName}} value={{$value}} control={{$control}} label={{$label}} :strTimeControl="$timeControls" />
-                        @break
-                        @case('text')
-                        <x-controls.text colName={{$columnName}} value={{$value}} control={{$control}} label={{$label}} :strTimeControl="$timeControls" />
+                        <x-controls.date-time name={{$columnName}} value={{$value}} />
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('id')
-                        <x-controls.id colName={{$columnName}} value={{$value}} control={{$control}} label={{$label}} />
+                        <x-controls.id name={{$columnName}} value="{{$action === 'edit' ? $value : 'to be generated'}}" />
+                        @break
+                        @case('text')
+                        <x-controls.text name={{$columnName}} value={{$value}} />
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                        @break
+                        @case('number')
+                        <x-controls.number name={{$columnName}} value={{$value}} />
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('textarea')
-                        <x-controls.textarea colName={{$columnName}} :value="$value" control={{$control}} label={{$label}} colType={{$columnType}} />
+                        <x-controls.textarea name={{$columnName}} :value="$value" colType={{$columnType}} />
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
+                        @case('toggle')
+                        <x-controls.toggle name={{$columnName}} value={{$value}} />
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                        @break
+                       
                         @case ('dropdown')
                         <x-controls.dropdown id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
                         @break
                         @case ('radio')
                         <x-controls.radio id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
                         @break
-
                         @case ('dropdown_multi')
                         <x-controls.dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
+                        @break
+                        @case('checkbox')
+                        <x-controls.checkbox id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
                         @break
 
                         @case('attachment')
                         <x-controls.upload-files id={{$id}} colName={{$columnName}} label={{$label}} type={{$type}} />
                         @break
-                        @case('toggle')
-                        <x-controls.toggle id={{$id}} colName={{$columnName}} value={{$value}} label={{$label}} />
-                        @break
-
-                        @case('checkbox')
-                        <x-controls.checkbox id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
-                        @break
-
-
-                        @case('number')
-                        <x-controls.number colName={{$columnName}} value={{$value}} control={{$control}} label={{$label}} />
-                        @break
-                        @case('relationship_renderer')
-                        <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} colSpan={{$col_span}} />
-                        @break
                         @case('comment')
                         <x-controls.comment-group id={{$id}} type={{$type}} colName={{$columnName}} label={{$label}} colSpan={{$col_span}} />
+                        @break
+
+                        @case('relationship_renderer')
+                        <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} colSpan={{$col_span}} />
                         @break
                         @case('status')
                         <x-controls.control-status type={{$type}} colName={{$columnName}} id={{$id}} modelPath={{$modelPath}} />
@@ -169,17 +171,17 @@ $id = $action === "edit" ? $values->id : "";
             </div>
         </div>
         @endforeach
-
+        
     </div>
-    <div class="flex justify-left border-t-2 dark:bg-gray-800  px-5">
+    <div class="flex justify-left border-t-2 dark:bg-gray-800 px-5">
         @switch($action)
         @case('edit')
-        <button type="submit" class="mt-4 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-bold text-white shadow hover:bg-purple-400 focus:outline-none" type="button">
+        <button type="submit" class="mt-4 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-bold text-white hover:bg-purple-400 focus:outline-none">
             Update
         </button>
         @break
         @case('create')
-        <button type="submit" class="mt-4  shadow-lg focus:shadow-outline  rounded bg-emerald-500 py-2 px-4 font-bold text-white hover:bg-purple-400 focus:outline-none" type="button">
+        <button type="submit" class="mt-4 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-bold text-white hover:bg-purple-400 focus:outline-none">
             Create
         </button>
         @break

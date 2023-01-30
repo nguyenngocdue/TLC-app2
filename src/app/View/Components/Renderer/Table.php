@@ -27,6 +27,9 @@ class Table extends Component
     private $header = "",
     private $footer = "",
     private $maxH = 40,
+    //Editable MODE
+    private $model = null,
+    // private $editable = false,
   ) {
   }
 
@@ -40,7 +43,7 @@ class Table extends Component
     $columns = $this->columns;
     if (is_null($columns)) return Blade::render("<x-feedback.alert type='warning' message='Columns attribute is missing.' />");
     if (!is_array($columns)) return Blade::render("<x-feedback.alert type='warning' message='Props file is missing.' />");
-    if (empty($columns)) return Blade::render("<x-feedback.alert type='warning' message='Columns attribute is empty.' />");
+    if (empty($columns)) return Blade::render("<x-feedback.alert type='warning' message='Columns attribute is an empty array.' />");
 
     $columns = $this->makeNoColumn($columns);
     $dataSource = $this->dataSource;

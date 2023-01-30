@@ -13,8 +13,9 @@ class Id extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $name = '',
+    ) {
         //
     }
 
@@ -28,16 +29,19 @@ class Id extends Component
         return function (array $data) {
             $id = $data["slot"];
             $type = $data["attributes"]["type"];
+            $name = $this->name;
             // dd($data["attributes"]);
             $idStr = Str::makeId($id);
 
-            $route_name = ($type === 'permissions2') ? "permissions2.edit" : "{$type}.edit";
+            $route_name = "{$type}.edit";
             $route_exits =  (Route::has($route_name));
 
             $href =  $route_exits ? route($route_name, $id) : "#";
             $color =  $route_exits ? "blue" : "red";
 
-            return "<a href='$href' class='text-{$color}-500'>$idStr</a>";
+            $a = "<a href='$href' class='text-{$color}-500'>$idStr</a>";
+            $hiddenInput = "<input type='hidden' value='$id' name='$name' />";
+            return $a . $hiddenInput;
         };
     }
 }

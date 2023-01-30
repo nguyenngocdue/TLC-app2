@@ -2,10 +2,12 @@
 
 namespace App\View\Components\Controls;
 
+use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 
-class Toggle extends Component
+class DateTime extends Component
 {
+
     public function __construct(
         private $name,
         private $value,
@@ -16,6 +18,7 @@ class Toggle extends Component
     {
         $name = $this->name;
         $value = $this->value;
-        return view('components.controls.toggle')->with(compact('name', 'value'));
+        $placeholder = "YYYY-MM-DD";
+        return view('components.controls.text')->with(compact('name', 'value', 'placeholder'));
     }
 }

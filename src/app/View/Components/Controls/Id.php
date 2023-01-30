@@ -8,20 +8,15 @@ use Illuminate\View\Component;
 class Id extends Component
 {
     public function __construct(
-        private $colName,
+        private $name,
         private $value,
-        private $control,
-        private $label,
     ) {
     }
 
     public function render()
     {
-        $colName = $this->colName;
+        $name = $this->name;
         $value = $this->value;
-        $action = CurrentRoute::getControllerAction();
-        $control = $this->control;
-        $label = $this->label;
-        return view('components.controls.id')->with(compact('colName', 'value', 'action', 'control', 'label'));
+        return view('components.controls.id')->with(compact('name', 'value'));
     }
 }
