@@ -265,6 +265,13 @@
         "sub_package": "user",
         "title": "User Position Pre"
     },
+    "user_team": {
+        "name": "user_team",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "user",
+        "title": "User Teams"
+    },
     "user_time_keep_type": {
         "name": "user_time_keep_type",
         "hidden": null,
