@@ -26,6 +26,9 @@ class RelationshipRenderer extends Component
     private function getDataSource($itemDB, $colName, $showAll = false)
     {
         $eloquentParam = $itemDB->eloquentParams[$colName];
+        //TODO: This is to prevent from a crash
+        if ($eloquentParam[0] === 'morphToMany') return [];
+
         if (isset($eloquentParam[2])) $relation = $itemDB->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
         elseif (isset($eloquentParam[1])) $relation = $itemDB->{$eloquentParam[0]}($eloquentParam[1]);
         elseif (isset($eloquentParam[0])) $relation = $itemDB->{$eloquentParam[0]}();
@@ -73,7 +76,7 @@ class RelationshipRenderer extends Component
 
         $fn = $value['renderer_edit_param'];
         if (!method_exists($instance, $fn))  $fn = '';
-        $typeDB =  (count($dataSource) <= 0 && $dataSource[0]) ? $dataSource[0]->getTable() : "";
+        $typeDB =  isset($dataSource[0]) ? $dataSource[0]->getTable() : "";
         $columns = ($fn === '')
             ? [
                 ["dataIndex" => 'id', "renderer" => "id", "type" => $typeDB, "align" => "center"],
