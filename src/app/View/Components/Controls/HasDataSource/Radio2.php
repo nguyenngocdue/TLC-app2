@@ -6,23 +6,26 @@ use Illuminate\View\Component;
 
 class Radio2 extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
+    use HasDataSource;
+    public function __construct(
+        private $type,
+        private $name,
+        private $selected,
+    ) {
         //
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
     public function render()
     {
-        return view('components.controls.has-data-source.radio2');
+        $dataSource = $this->getDataSource('eloquentParams');
+        $warning = $this->warningIfDataSourceIsEmpty($dataSource);
+        if ($warning) return $warning;
+
+        return view('components.controls.has-data-source.radio2', [
+            'dataSource' => $dataSource,
+            'span' => $this->getSpan(),
+            'name' => $this->name,
+            'selected' => $this->selected,
+        ]);
     }
 }

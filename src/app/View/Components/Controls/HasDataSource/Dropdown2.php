@@ -6,23 +6,30 @@ use Illuminate\View\Component;
 
 class Dropdown2 extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
+    use HasDataSource;
+    public function __construct(
+        private $type,
+        private $name,
+        private $selected,
+        private $multiple = false,
+    ) {
         //
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
     public function render()
     {
-        return view('components.controls.has-data-source.dropdown2');
+        $eloquentOrOracy = $this->multiple ? "oracyParams" : "eloquentParams";
+        $dataSource = $this->getDataSource($eloquentOrOracy);
+        $warning = $this->warningIfDataSourceIsEmpty($dataSource);
+        if ($warning) return $warning;
+
+        $selected = ($this->selected[0] != '[') ? "[" . $this->selected . "]" : $this->selected;
+
+        return view('components.controls.has-data-source.dropdown2', [
+            'dataSource' => $dataSource,
+            'name' => $this->name,
+            'selected' => $selected,
+            'multiple' => $this->multiple,
+        ]);
     }
 }

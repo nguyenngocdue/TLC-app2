@@ -13,9 +13,25 @@ class SuperProps
     private static function makeRelationshipObject($type)
     {
         $allRelationship = Relationships::getAllOf($type);
+        $modelPath = "App\\Models\\" . Str::singular($type);
+        $dummyInstance = new ($modelPath);
         $result = [];
         foreach ($allRelationship as $key => $rls) {
             $column_name = $rls['control_name'];
+
+            foreach ($dummyInstance->eloquentParams as $key2 => $params) {
+                if ("_" . $key2 === $key) {
+                    $rls['eloquentParams'] = $params;
+                    break;
+                }
+            }
+            foreach ($dummyInstance->oracyParams as $key2 => $params) {
+                if ("_" . $key2 === $key) {
+                    $rls['oracyParams'] = $params;
+                    break;
+                }
+            }
+
             $result["_" . $column_name] = $rls;
         }
         return $result;
@@ -120,7 +136,7 @@ class SuperProps
     private static function make($type)
     {
         static::$result['problems'] = [];
-        static::$result['type'] = $type;
+        static::$result['type'] = Str::singular($type);
         static::$result['plural'] = Str::plural($type);
         static::$result['props'] = static::readProps($type);
         static::$result['statuses'] = static::readStatuses($type);

@@ -39,7 +39,7 @@ $id = $action === "edit" ? $values->id : "";
         $title = $columnName." / ".$control ;
         $col_span = $val['col_span'] === '' ? 1 : $val['col_span']*1;
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
-
+        
         $isRequired = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
         $iconJson = $columnType === 'json' ?'<i class="fa-duotone fa-brackets-curly"></i>' : "";
         @endphp
@@ -128,16 +128,16 @@ $id = $action === "edit" ? $values->id : "";
                         @break
                        
                         @case ('dropdown')
-                        <x-controls.has-data-source.dropdown id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
+                        <x-controls.has-data-source.dropdown type={{$type}} name={{$columnName}} selected={{$value}}               id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
                         @break
                         @case ('radio')
-                        <x-controls.has-data-source.radio id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
+                        <x-controls.has-data-source.radio type={{$type}} name={{$columnName}} selected={{$value}}                id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
                         @break
                         @case ('dropdown_multi')
-                        <x-controls.has-data-source.dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
+                        <x-controls.has-data-source.dropdown type={{$type}} name={{$columnName}} selected={{$value}} multiple={{true}}           id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
                         @break
                         @case('checkbox')
-                        <x-controls.has-data-source.checkbox id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
+                        <x-controls.has-data-source.checkbox type={{$type}} name={{$columnName}} selected={{$value}}             id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
                         @break
 
                         @case('attachment')
