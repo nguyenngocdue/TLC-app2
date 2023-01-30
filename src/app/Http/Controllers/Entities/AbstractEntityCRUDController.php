@@ -14,6 +14,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityM2M;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityStatus;
 use App\Http\Services\UploadService;
+use App\Utils\Support\Json\SuperProps;
 
 abstract class AbstractEntityCRUDController extends Controller
 {
@@ -31,10 +32,12 @@ abstract class AbstractEntityCRUDController extends Controller
 
 	protected $type;
 	protected $data;
+	protected $superProps;
 
 	public function __construct(
 		protected UploadService $uploadService,
 	) {
+		$this->superProps = SuperProps::getFor($this->type);
 	}
 
 	public function getType()

@@ -39,7 +39,7 @@ $id = $action === "edit" ? $values->id : "";
         $title = $columnName." / ".$control ;
         $col_span = $val['col_span'] === '' ? 1 : $val['col_span']*1;
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
-        
+
         $isRequired = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
         $iconJson = $columnType === 'json' ?'<i class="fa-duotone fa-brackets-curly"></i>' : "";
         @endphp
@@ -94,7 +94,7 @@ $id = $action === "edit" ? $values->id : "";
                         @endif
 
                         {{-- Invisible anchor for scrolling when users click on validation fail message --}}
-                        <strong class="scroll-mt-20 snap-start" id="{{$columnName}}"></strong>
+                        <strong class="scroll-mt-20 snap-start" id="scroll-{{$columnName}}"></strong>
 
                         @switch ($control)
                         @case($timeControls[0])
@@ -126,18 +126,19 @@ $id = $action === "edit" ? $values->id : "";
                         <x-controls.toggle name={{$columnName}} value={{$value}} />
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
-                       
+
                         @case ('dropdown')
-                        <x-controls.has-data-source.dropdown type={{$type}} name={{$columnName}} selected={{$value}}               id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
+                        <x-controls.has-data-source.dropdown type={{$type}} name={{$columnName}} selected={{$value}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
+                        {{-- <x-controls.has-data-source.dropdown type={{$type}} name={{$columnName}} selected={{$value}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} /> --}}
                         @break
                         @case ('radio')
-                        <x-controls.has-data-source.radio type={{$type}} name={{$columnName}} selected={{$value}}                id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
+                        <x-controls.has-data-source.radio type={{$type}} name={{$columnName}} selected={{$value}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
                         @break
                         @case ('dropdown_multi')
-                        <x-controls.has-data-source.dropdown type={{$type}} name={{$columnName}} selected={{$value}} multiple={{true}}           id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
+                        <x-controls.has-data-source.dropdown type={{$type}} name={{$columnName}} selected={{$value}} multiple={{true}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
                         @break
                         @case('checkbox')
-                        <x-controls.has-data-source.checkbox type={{$type}} name={{$columnName}} selected={{$value}}             id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
+                        <x-controls.has-data-source.checkbox type={{$type}} name={{$columnName}} selected={{$value}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
                         @break
 
                         @case('attachment')
@@ -171,7 +172,7 @@ $id = $action === "edit" ? $values->id : "";
             </div>
         </div>
         @endforeach
-        
+
     </div>
     <div class="flex justify-left border-t-2 dark:bg-gray-800 px-5">
         @switch($action)

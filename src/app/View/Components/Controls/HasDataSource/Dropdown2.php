@@ -23,13 +23,16 @@ class Dropdown2 extends Component
         $warning = $this->warningIfDataSourceIsEmpty($dataSource);
         if ($warning) return $warning;
 
-        $selected = ($this->selected[0] != '[') ? "[" . $this->selected . "]" : $this->selected;
+        $id = $this->multiple ? substr($this->name, 0, strlen($this->name) - 2) : $this->name; // Remove parenthesis ()
+        $name = $this->multiple ? $this->name . "[]" : $this->name;
+        $selected = isset($this->selected[0]) ? (($this->selected[0] != '[') ? "[" . $this->selected . "]" : $this->selected) : "[]";
 
         return view('components.controls.has-data-source.dropdown2', [
             'dataSource' => $dataSource,
-            'name' => $this->name,
+            'name' => $name,
+            'id' => $id,
             'selected' => $selected,
-            'multiple' => $this->multiple,
+            'multipleStr' => $this->multiple ? "multiple" : "",
         ]);
     }
 }

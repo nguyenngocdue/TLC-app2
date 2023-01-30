@@ -10,6 +10,7 @@ use App\View\Components\Formula\User_PositionRendered;
 
 trait TraitEntityFormula
 {
+    //TODO: remove $type
     private function apply_formula($item, $type)
     {
         $defaultValues = DefaultValues::getAllOf($type);

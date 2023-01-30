@@ -20,7 +20,9 @@ class Checkbox2 extends Component
         $dataSource = $this->getDataSource('oracyParams');
         $warning = $this->warningIfDataSourceIsEmpty($dataSource);
         if ($warning) return $warning;
+
         $selected = json_decode($this->selected);
+        $selected = is_null($selected) ? [] : $selected;
 
         return view('components.controls.has-data-source.checkbox2', [
             'dataSource' => $dataSource,

@@ -21,7 +21,7 @@
                 $strSearch = substr($message, 4, $idx - 4);
                 // dump($message , $prop, $strSearch);
                 @endphp
-                <a href="#{{$colName}}" title="{{$colName}}">{{str_replace($strSearch, "[".$prop['label']."] ", $message)}}</a>
+                <a href="#scroll-{{$colName}}" title="{{$colName}}">{{str_replace($strSearch, "[".$prop['label']."] ", $message)}}</a>
                 @endif
                 @endforeach
             </li>

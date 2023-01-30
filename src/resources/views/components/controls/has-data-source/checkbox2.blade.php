@@ -2,12 +2,7 @@
     @foreach($dataSource as $index => $item)
     <div class="items-center bg-white-50 col-span-{{$span}} flex align-center ">
         <label title="{{$item['description'] ?? ""}}">
-            <input 
-                type='checkbox' 
-                name="{{$name}}[]" 
-                value="{{$item['value']}}" 
-                @checked(in_array($item['value'], $selected))
-                />
+            <input type='checkbox' name="{{$name}}[]" value="{{$item['value']}}" @checked(in_array($item['value'], $selected)) />
             {{$item['label']}}
         </label>
     </div>
