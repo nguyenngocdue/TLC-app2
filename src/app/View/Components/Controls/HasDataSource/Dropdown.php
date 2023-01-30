@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\Controls\HasDataSource;
 
 use App\Helpers\Helper;
 use App\Utils\Support\CurrentRoute;
@@ -61,7 +61,7 @@ class Dropdown extends Component
 
         $byFilter = Helper::filterConditionsInRel($type, $colName);
 
-        return view('components.controls.dropdown')->with(compact('byFilter', 'triggers_colNames', 'colNames_ModelNames', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
+        return view('components.controls.has-data-source.dropdown')->with(compact('byFilter', 'triggers_colNames', 'colNames_ModelNames', 'colName', 'action', 'label', 'currentEntity', 'dataListenTrigger', 'listenersJson'));
     }
 
 

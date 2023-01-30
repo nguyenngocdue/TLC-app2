@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\Controls\HasDataSource;
 
 use App\Helpers\Helper;
 use App\Utils\Support\CurrentRoute;
@@ -33,6 +33,6 @@ class Radio extends Component
         }
 
         $span = Helper::getColSpan($colName, $type);
-        return view('components.controls.radio')->with(compact('dataSource', 'currentEntity', 'colName', 'span', 'action', 'label'));
+        return view('components.controls.has-data-source.radio')->with(compact('dataSource', 'currentEntity', 'colName', 'span', 'action', 'label'));
     }
 }

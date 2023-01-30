@@ -128,16 +128,16 @@ $id = $action === "edit" ? $values->id : "";
                         @break
                        
                         @case ('dropdown')
-                        <x-controls.dropdown id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
+                        <x-controls.has-data-source.dropdown id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
                         @break
                         @case ('radio')
-                        <x-controls.radio id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
+                        <x-controls.has-data-source.radio id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
                         @break
                         @case ('dropdown_multi')
-                        <x-controls.dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
+                        <x-controls.has-data-source.dropdown-multi id={{$id}} colName={{$columnName}} type={{$type}} modelPath={{$modelPath}} label={{$label}} />
                         @break
                         @case('checkbox')
-                        <x-controls.checkbox id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
+                        <x-controls.has-data-source.checkbox id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} type={{$type}} />
                         @break
 
                         @case('attachment')

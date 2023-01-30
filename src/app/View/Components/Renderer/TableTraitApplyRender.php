@@ -65,7 +65,7 @@ trait TableTraitApplyRender
         $cell = $dataLine[$column['dataIndex']] ?? "No dataIndex for " . $column['dataIndex']; //This is for Thumbnail
         if ($isEditable && $isDropdown) {
             $instance = json_decode($cell);
-            if (!is_null($instance)) $cell = $instance->id;
+            if (!is_null($instance) && isset($instance->id)) $cell = $instance->id;
         }
         $params = ['column' => $column, 'dataLine' => $dataLine, 'cell' => $cell,];
         if ($isDropdown) $params['cbbDataSource'] = $cbbDataSource;

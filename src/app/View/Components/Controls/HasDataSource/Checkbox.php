@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\Controls\HasDataSource;
 
 use App\Helpers\Helper;
 use App\Utils\Support\CurrentRoute;
@@ -51,6 +51,6 @@ class Checkbox extends Component
         if (is_null($dataSource) || gettype($dataSource) === 'string') return "<x-feedback.alert message='Not found record \"$colName\" in  Fields.' type='warning' />";
 
         $span = Helper::getColSpan($colName, $type);
-        return view('components.controls.checkbox')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
+        return view('components.controls.has-data-source.checkbox')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
     }
 }
