@@ -62,6 +62,13 @@
         "sub_package": "dev_admin",
         "title": "Posts"
     },
+    "priority": {
+        "name": "priority",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "system_admin",
+        "title": "Priority"
+    },
     "prod_discipline": {
         "name": "prod_discipline",
         "hidden": null,
