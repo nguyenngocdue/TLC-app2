@@ -22,12 +22,14 @@ class SuperProps
             foreach ($dummyInstance->eloquentParams as $key2 => $params) {
                 if ("_" . $key2 === $key) {
                     $rls['eloquentParams'] = $params;
+                    $rls['table'] = (new $params[1])->getTable();
                     break;
                 }
             }
             foreach ($dummyInstance->oracyParams as $key2 => $params) {
                 if ("_" . $key2 === $key) {
                     $rls['oracyParams'] = $params;
+                    $rls['table'] = (new $params[1])->getTable();
                     break;
                 }
             }

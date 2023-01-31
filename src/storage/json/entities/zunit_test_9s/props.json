@@ -383,9 +383,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_user_position_4": {
-        "name": "_user_position_4",
-        "column_name": "user_position_4",
+    "_user_position_1": {
+        "name": "_user_position_1",
+        "column_name": "user_position_1",
         "column_type": "string",
         "label": "Position",
         "control": "text",

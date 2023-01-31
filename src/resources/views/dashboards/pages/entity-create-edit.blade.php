@@ -14,7 +14,8 @@ $id = $action === "edit" ? $values->id : "";
 
 {{-- HERE {{mb_strlen(serialize((array)$listenerDataSource), '8bit');}} bytes --}}
 <script>
-    k = @json($listenerDataSource)
+    k = @json($listenerDataSource);
+    listeners = @json($listeners);
 
 </script>
 

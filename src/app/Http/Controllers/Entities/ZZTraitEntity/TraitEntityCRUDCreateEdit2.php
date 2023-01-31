@@ -24,6 +24,7 @@ trait TraitEntityCRUDCreateEdit2
 		$title = "Add New";
 		$topTitle = CurrentRoute::getTitleOf($this->type);
 		$listenerDataSource = $this->renderListenDataSource();
+		$listeners = $this->getListeners();
 		return view('dashboards.pages.entity-create-edit')->with(compact(
 			'props',
 			'defaultValues',
@@ -34,6 +35,7 @@ trait TraitEntityCRUDCreateEdit2
 			'title',
 			'topTitle',
 			'listenerDataSource',
+			'listeners',
 		));
 	}
 
@@ -53,6 +55,7 @@ trait TraitEntityCRUDCreateEdit2
 		$title = "Edit";
 		$topTitle = CurrentRoute::getTitleOf($this->type);
 		$listenerDataSource = $this->renderListenDataSource();
+		$listeners = $this->getListeners();
 		return view('dashboards.pages.entity-create-edit')->with(compact(
 			'props',
 			'defaultValues',
@@ -63,6 +66,7 @@ trait TraitEntityCRUDCreateEdit2
 			'title',
 			'topTitle',
 			'listenerDataSource',
+			'listeners',
 		));
 	}
 

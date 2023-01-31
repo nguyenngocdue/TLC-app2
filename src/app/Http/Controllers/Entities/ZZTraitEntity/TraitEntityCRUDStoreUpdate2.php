@@ -9,7 +9,7 @@ trait TraitEntityCRUDStoreUpdate2
 {
 	private $debugForStoreUpdate = false;
 
-	private function dump($title, $content)
+	private function dump1($title, $content)
 	{
 		if ($this->debugForStoreUpdate) {
 			echo "$title";
@@ -35,7 +35,7 @@ trait TraitEntityCRUDStoreUpdate2
 			}
 			$result[$column_type][] = $prop['name'];
 		}
-		$this->dump("getProps1", $result);
+		$this->dump1("getProps1", $result);
 		return $result;
 	}
 
@@ -48,7 +48,7 @@ trait TraitEntityCRUDStoreUpdate2
 			}
 		}
 		$rules = array_filter($rules, fn ($i) => $i);
-		$this->dump("getValidationRules", $rules);
+		$this->dump1("getValidationRules", $rules);
 		return $rules;
 	}
 
@@ -93,7 +93,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 			$fieldName = substr($propName, 0, strlen($propName) - 2); //Remove parenthesis ()
 			$theRow->syncCheck($fieldName, $relatedModel, $ids);
-			$this->dump("handleCheckboxAndDropdownMulti $propName", $ids);
+			$this->dump1("handleCheckboxAndDropdownMulti $propName", $ids);
 		}
 	}
 
@@ -107,13 +107,13 @@ trait TraitEntityCRUDStoreUpdate2
 		$dataSource = $this->handleToggle($dataSource);
 		$dataSource = $this->handleTextArea($dataSource);
 
-		$this->dump("handleFields", $dataSource);
+		$this->dump1("handleFields", $dataSource);
 		return $dataSource;
 	}
 
 	public function store(Request $request)
 	{
-		$this->dump("Request", $request->input());
+		$this->dump1("Request", $request->input());
 		$props = $this->getProps1();
 		$fields = $this->handleFields($request, __FUNCTION__);
 
@@ -127,7 +127,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function update(Request $request, $id)
 	{
-		$this->dump("Request", $request->input());
+		$this->dump1("Request", $request->input());
 		$props = $this->getProps1();
 		$fields = $this->handleFields($request, __FUNCTION__);
 
