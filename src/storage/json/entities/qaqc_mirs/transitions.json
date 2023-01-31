@@ -1,0 +1,56 @@
+{
+    "new": {
+        "name": "new",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "assigned": {
+        "name": "assigned",
+        "new": "",
+        "assigned": "",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "rejected": {
+        "name": "rejected",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "inspected": {
+        "name": "inspected",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "inspection_rejected": {
+        "name": "inspection_rejected",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "closed": {
+        "name": "closed",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    }
+}
