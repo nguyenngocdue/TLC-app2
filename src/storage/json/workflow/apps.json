@@ -67,7 +67,7 @@
         "hidden": null,
         "package": "system",
         "sub_package": "system_admin",
-        "title": "Priority"
+        "title": "Priorities"
     },
     "prod_discipline": {
         "name": "prod_discipline",
@@ -208,6 +208,13 @@
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC Insp Values"
+    },
+    "qaqc_mir": {
+        "name": "qaqc_mir",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "qaqc",
+        "title": "QAQC MIRs"
     },
     "sub_project": {
         "name": "sub_project",
