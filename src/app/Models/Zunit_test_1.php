@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Zunit_test_1 extends ModelExtended
 {
-    protected $fillable = ["text1", "text2", "text3", "dropdown1", "radio1", "boolean1"];
+    protected $fillable = ["text1", "text2", "text3", "text4", "dropdown1", "radio1", "boolean1"];
     protected $primaryKey = 'id';
     protected $table = 'zunit_test_1s';
 

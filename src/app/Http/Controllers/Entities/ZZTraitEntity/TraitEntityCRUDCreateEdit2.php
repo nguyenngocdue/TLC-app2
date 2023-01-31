@@ -51,7 +51,6 @@ trait TraitEntityCRUDCreateEdit2
 		$props = $this->getProps();
 
 		$values = $this->loadValueForCheckboxAndDropdownMulti($original, $props);
-		dump($values);
 
 		$defaultValues = DefaultValues::getAllOf($this->type);
 		$type = Str::plural($this->type);

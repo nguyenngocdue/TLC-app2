@@ -10,6 +10,11 @@ use App\View\Components\Formula\User_PositionRendered;
 
 trait TraitEntityFormula
 {
+    private function applyFormula($item)
+    {
+        return $this->apply_formula($item, $this->type);
+    }
+
     //TODO: remove $type
     private function apply_formula($item, $type)
     {
