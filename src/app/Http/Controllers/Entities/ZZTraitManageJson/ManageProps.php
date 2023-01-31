@@ -196,7 +196,7 @@ class ManageProps extends Manage_Parent
             if ($column_type === 'static') {
                 $prop['align'] = ['value' => $prop['align'] ?? '', 'cbbDS' => ['', 'center', 'right']];
             } else {
-                $prop['align'] = 'invisible';
+                $prop['align'] = 'invisible_this_control';
             }
         }
 

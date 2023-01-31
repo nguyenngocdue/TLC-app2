@@ -24,13 +24,11 @@ class Checkbox extends Component
      */
     public function render()
     {
-        if ($this->cell === 'invisible') return "";
+        if ($this->cell === 'invisible_this_control') return "";
         return view('components.renderer.editable.checkbox', [
             'name' => $this->name,
             'value' => in_array($this->cell, [1, 'true']),
             'disabled' => $this->cell === 'disabled',
-            // 'cell' => $this->cell,
-            // 'invisible' => ($this->cell === 'invisible') ? "invisible" : "",
         ]);
     }
 }

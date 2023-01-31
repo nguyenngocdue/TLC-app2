@@ -94,7 +94,7 @@ abstract class ManageV_Parent extends Manage_Parent
             if ($isNotVisibleProps) {
                 foreach ($allStatuses as $status) {
                     $visible =  (isset($visibleProps[$name]) && isset($visibleProps[$name][$status]) && $visibleProps[$name][$status] === 'true');
-                    if (!$visible) $newItem[$status] = "invisible";
+                    if (!$visible) $newItem[$status] = "invisible_this_control";
                 }
             }
 

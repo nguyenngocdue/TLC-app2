@@ -17,12 +17,14 @@ trait TraitPropAndRelationship
         foreach (array_keys($a) as $key) {
             if (!isset($b[$key])) continue;
             $updatedValue = $b[$key][$column];
-            if ($a[$key][$column] != $updatedValue) {
-                $a[$key][$column] = [
-                    'title' => $a[$key][$column] . " => " . $updatedValue,
-                    'value' => $updatedValue,
-                ];
-                $a[$key]['row_color'] = 'blue';
+            if (isset($a[$key][$column])) {
+                if ($a[$key][$column] != $updatedValue) {
+                    $a[$key][$column] = [
+                        'title' => $a[$key][$column] . " => " . $updatedValue,
+                        'value' => $updatedValue,
+                    ];
+                    $a[$key]['row_color'] = 'blue';
+                }
             }
         }
     }

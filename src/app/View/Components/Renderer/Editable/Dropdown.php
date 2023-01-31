@@ -47,7 +47,7 @@ class Dropdown extends Component
      */
     public function render()
     {
-        if ($this->cell === 'invisible') return "";
+        if ($this->cell === 'invisible_this_control') return "";
         // dump($this->cell);
         if (is_array($this->cell)) {
             $this->selected = $this->cell['value'] ?? null;
