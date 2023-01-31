@@ -9,7 +9,16 @@
 $editType = Str::plural($type);
 $labelValidation = "";
 $id = $action === "edit" ? $values->id : "";
+
 @endphp
+
+{{-- HERE {{mb_strlen(serialize((array)$listenerDataSource), '8bit');}} bytes --}}
+<script>
+    k = @json($listenerDataSource)
+
+</script>
+
+
 @if ($action === "edit")
 
 <a class="text-blue-500 hover:text-gray-400" href="{{ route($editType.'.show', $id) }}">show</a></li>
@@ -35,7 +44,7 @@ $id = $action === "edit" ? $values->id : "";
         $control = $val['control'];
 
         $colSpan = $val['col_span'];
-        $value = $action === "edit" ? $values->{$columnName} :'';
+        $value = $action === "edit" ? ($values->{$columnName} ?? '') :'';
         $title = $columnName." / ".$control ;
         $col_span = $val['col_span'] === '' ? 1 : $val['col_span']*1;
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
@@ -104,7 +113,7 @@ $id = $action === "edit" ? $values->id : "";
                         @case($timeControls[4])
                         @case($timeControls[5])
                         @case($timeControls[6])
-                        <x-controls.date-time name={{$columnName}} value={{$value}} />
+                        <x-controls.date-time name={{$columnName}} value={{$value}} control="{{$control}}" />
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('id')

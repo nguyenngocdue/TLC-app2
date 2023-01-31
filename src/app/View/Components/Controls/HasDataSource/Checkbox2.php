@@ -17,7 +17,7 @@ class Checkbox2 extends Component
 
     public function render()
     {
-        $dataSource = $this->getDataSource('oracyParams');
+        $dataSource = $this->getDataSourceEOO('oracyParams');
         $warning = $this->warningIfDataSourceIsEmpty($dataSource);
         if ($warning) return $warning;
 

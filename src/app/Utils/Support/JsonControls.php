@@ -46,6 +46,11 @@ class JsonControls
         return self::getAll()['controls'];
     }
 
+    public static function getHeadings()
+    {
+        return self::getAll()['headings'];
+    }
+
     public static function getRendererViewAll()
     {
         return self::getAll()['renderer_view_all'];

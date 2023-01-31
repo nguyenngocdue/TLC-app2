@@ -45,6 +45,7 @@ class FieldSeeder extends Seeder
             'comment_by_clinic' => 28,
             'comment_by_line_manager' => 29,
             'comment_by_general_manager' => 30,
+            'dropdownMonitors' => 31,
         ];
     }
     /**

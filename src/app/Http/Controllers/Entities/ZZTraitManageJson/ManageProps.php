@@ -195,6 +195,8 @@ class ManageProps extends Manage_Parent
             $column_type = $prop['column_type'];
             if ($column_type === 'static') {
                 $prop['align'] = ['value' => $prop['align'] ?? '', 'cbbDS' => ['', 'center', 'right']];
+                $prop['control'] = ['value' => $prop['control'] ?? '', 'cbbDS' => JsonControls::getHeadings()];
+                $prop['hidden_view_all'] = 'invisible_this_control';
             } else {
                 $prop['align'] = 'invisible_this_control';
             }

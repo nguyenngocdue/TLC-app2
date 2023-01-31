@@ -63,6 +63,11 @@ class ManageRelationships extends Manage_Parent
                 "renderer" => "text",
             ],
             [
+                "dataIndex" => "control",
+                "editable" => true,
+                "renderer" => "read-only-text",
+            ],
+            [
                 "dataIndex" => "filter_columns",
                 "editable" => true,
                 "renderer" => "text",
@@ -71,11 +76,6 @@ class ManageRelationships extends Manage_Parent
                 "dataIndex" => "filter_values",
                 "editable" => true,
                 "renderer" => "text",
-            ],
-            [
-                "dataIndex" => "control",
-                "editable" => true,
-                "renderer" => "read-only-text",
             ],
             [
                 "dataIndex" => "radio_checkbox_colspan",
@@ -135,6 +135,14 @@ class ManageRelationships extends Manage_Parent
                     if (isset($json[$key]['control'])) {
                         $control = ($json[$key]['control']);
                         if (!in_array($control, ['radio', 'checkbox'])) {
+                            $result[$key][$column] = 'invisible_this_control';
+                        }
+                    }
+                }
+                if (in_array($column, ['filter_columns', 'filter_values'])) {
+                    if (isset($json[$key]['control'])) {
+                        $control = ($json[$key]['control']);
+                        if (!in_array($control, ['radio', 'checkbox', 'dropdown', 'dropdown_multi'])) {
                             $result[$key][$column] = 'invisible_this_control';
                         }
                     }

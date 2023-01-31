@@ -1,4 +1,15 @@
 {
+    "headings": [
+        "",
+        "z_h1",
+        "z_h2",
+        "z_h3",
+        "z_h4",
+        "z_h5",
+        "z_h6_base",
+        "z_divider",
+        "z_page_break"
+    ],
     "controls": [
         "",
         "attachment",
@@ -22,15 +33,7 @@
         "status",
         "text",
         "textarea",
-        "thumbnail",
-        "z_h1",
-        "z_h2",
-        "z_h3",
-        "z_h4",
-        "z_h5",
-        "z_h6_base",
-        "z_divider",
-        "z_page_break"
+        "thumbnail"
     ],
     "renderer_view_all": [
         "",

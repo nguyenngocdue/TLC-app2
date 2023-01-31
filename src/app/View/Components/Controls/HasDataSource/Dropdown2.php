@@ -19,7 +19,7 @@ class Dropdown2 extends Component
     public function render()
     {
         $eloquentOrOracy = $this->multiple ? "oracyParams" : "eloquentParams";
-        $dataSource = $this->getDataSource($eloquentOrOracy);
+        $dataSource = $this->getDataSourceEOO($eloquentOrOracy);
         $warning = $this->warningIfDataSourceIsEmpty($dataSource);
         if ($warning) return $warning;
 
@@ -33,6 +33,8 @@ class Dropdown2 extends Component
             'id' => $id,
             'selected' => $selected,
             'multipleStr' => $this->multiple ? "multiple" : "",
+            'className' => "bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
+            'table' => $this->getTableEOO($eloquentOrOracy),
         ]);
     }
 }

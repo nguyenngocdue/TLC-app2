@@ -79,7 +79,7 @@ abstract class Manage_Parent
     {
         $jsonGetSet = $this->jsonGetSet;
         $data = $request->input();
-        $table00 = $data['table00'];
+        $table00 = $data['table00'] ?? [];
 
         //Make up the columns
         $columns = $this->getColumns();

@@ -17,7 +17,7 @@ class Radio2 extends Component
 
     public function render()
     {
-        $dataSource = $this->getDataSource('eloquentParams');
+        $dataSource = $this->getDataSourceEOO('eloquentParams');
         $warning = $this->warningIfDataSourceIsEmpty($dataSource);
         if ($warning) return $warning;
 

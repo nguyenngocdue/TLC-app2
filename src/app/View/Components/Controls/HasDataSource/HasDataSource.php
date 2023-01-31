@@ -3,19 +3,54 @@
 namespace App\View\Components\Controls\HasDataSource;
 
 use App\Utils\Support\Json\SuperProps;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 trait HasDataSource
 {
-    function getDataSource($eloquentOrOracy)
+    private $loadFilterColumnByPHP = true;
+
+    function getRelatedModelEOO($eloquentOrOracy)
     {
         $sp = SuperProps::getFor($this->type);
         $name = "_" . $this->name;
         $params = $sp['props'][$name]['relationships'][$eloquentOrOracy];
-        // dump($params);
         $relatedModel = $params[1];
-        $dataSource = $relatedModel::all();
-        // dump($dataSource);
+        return $relatedModel;
+    }
+
+    function getTableEOO($eloquentOrOracy)
+    {
+        $relatedModel = $this->getRelatedModelEOO($eloquentOrOracy);
+        $table = (new $relatedModel)->getTable();
+        return $table;
+    }
+
+    function getDataSourceEOO($eloquentOrOracy)
+    {
+        $relatedModel = $this->getRelatedModelEOO($eloquentOrOracy);
+        if ($this->loadFilterColumnByPHP) {
+            $sp = SuperProps::getFor($this->type);
+            $name = "_" . $this->name;
+            $table = (new $relatedModel)->getTable();
+            $dataSource = DB::table($table);
+
+            $filter_columns = $sp['props'][$name]['relationships']['filter_columns'];
+            $filter_values = $sp['props'][$name]['relationships']['filter_values'];
+
+            $filter_columns = $filter_columns ? explode(",", $filter_columns) : [];
+            $filter_values = $filter_values ? explode(",", $filter_values) : [];
+            // dump($sp['props'][$name]['relationships']['filter_columns']);
+            // dump(array_values($filter_columns));
+            for ($i = 0; $i < sizeof($filter_columns); $i++) {
+                // dump($filter_columns[$i] . " - " . $filter_values[$i]);
+                $dataSource = $dataSource->where($filter_columns[$i], $filter_values[$i]);
+            }
+            $dataSource = $dataSource->get();
+            // $dataSource = DB::table($table)->get();
+        } else {
+            $dataSource = $relatedModel::all();
+        }
 
         $result = [];
         foreach ($dataSource as $row) {

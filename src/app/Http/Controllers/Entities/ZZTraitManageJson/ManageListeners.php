@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
-use App\Utils\Support\DBTable;
 use App\Utils\Support\Json\Listeners;
+use App\Utils\Support\Json\Props;
 
 class ManageListeners extends Manage_Parent
 {
@@ -13,9 +13,8 @@ class ManageListeners extends Manage_Parent
 
     protected function getColumns()
     {
-        $columns = DBTable::getColumnNames($this->type);
+        $columns = array_values(array_map(fn ($i) => $i['column_name'], Props::getAllOf($this->type)));
         $columns = array_merge([""], $columns);
-        // dump($columns);
         return [
             [
                 "dataIndex" => "action",

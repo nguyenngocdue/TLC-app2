@@ -4,15 +4,18 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\DefaultValues;
+use App\Utils\Support\Json\Listeners;
 use App\Utils\Support\Json\Props;
 use Illuminate\Support\Str;
 
 trait TraitEntityCRUDCreateEdit2
 {
+	use TraitEntityListenDataSource;
+
 	public function create()
 	{
-		$action = 'create';
-		$props = $this->getProps();
+		$action = __FUNCTION__;
+		$props = $this->getCreateEditProps();
 		$defaultValues = DefaultValues::getAllOf($this->type);
 
 		$type = $this->type;
@@ -20,10 +23,50 @@ trait TraitEntityCRUDCreateEdit2
 		$values = "";
 		$title = "Add New";
 		$topTitle = CurrentRoute::getTitleOf($this->type);
-		return view('dashboards.pages.entity-create-edit')->with(compact('props', 'defaultValues', 'type', 'action', 'modelPath', 'values', 'title', 'topTitle'));
+		$listenerDataSource = $this->renderListenDataSource();
+		return view('dashboards.pages.entity-create-edit')->with(compact(
+			'props',
+			'defaultValues',
+			'type',
+			'action',
+			'modelPath',
+			'values',
+			'title',
+			'topTitle',
+			'listenerDataSource',
+		));
 	}
 
-	private function getProps()
+	public function edit($id)
+	{
+		$action = __FUNCTION__;
+		$original = $this->data::find($id);
+		$props = $this->getCreateEditProps();
+
+		$values = $this->loadValueForCheckboxAndDropdownMulti($original, $props);
+
+		$defaultValues = DefaultValues::getAllOf($this->type);
+		$type = Str::plural($this->type);
+
+		$modelPath = $this->data;
+
+		$title = "Edit";
+		$topTitle = CurrentRoute::getTitleOf($this->type);
+		$listenerDataSource = $this->renderListenDataSource();
+		return view('dashboards.pages.entity-create-edit')->with(compact(
+			'props',
+			'defaultValues',
+			'values',
+			'type',
+			'action',
+			'modelPath',
+			'title',
+			'topTitle',
+			'listenerDataSource',
+		));
+	}
+
+	private function getCreateEditProps()
 	{
 		$props = Props::getAllOf($this->type);
 		$result = array_filter($props, fn ($prop) => $prop['hidden_edit'] !== 'true');
@@ -42,23 +85,5 @@ trait TraitEntityCRUDCreateEdit2
 			}
 		}
 		return (object) $values;
-	}
-
-	public function edit($id)
-	{
-		$action = 'edit';
-		$original = $this->data::find($id);
-		$props = $this->getProps();
-
-		$values = $this->loadValueForCheckboxAndDropdownMulti($original, $props);
-
-		$defaultValues = DefaultValues::getAllOf($this->type);
-		$type = Str::plural($this->type);
-
-		$modelPath = $this->data;
-
-		$title = "Edit";
-		$topTitle = CurrentRoute::getTitleOf($this->type);
-		return view('dashboards.pages.entity-create-edit')->with(compact('props', 'defaultValues', 'values', 'type', 'action', 'modelPath',  'title', 'topTitle'));
 	}
 }

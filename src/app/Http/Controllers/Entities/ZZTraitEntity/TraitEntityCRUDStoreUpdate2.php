@@ -19,7 +19,10 @@ trait TraitEntityCRUDStoreUpdate2
 
 	private function getProps1()
 	{
-		$result = [];
+		$result = [
+			'oracy_prop' => [],
+			'eloquent_prop' => [],
+		];
 		foreach ($this->superProps['props'] as $prop) {
 			switch ($prop['column_type']) {
 				case 'oracy_prop':
@@ -39,7 +42,11 @@ trait TraitEntityCRUDStoreUpdate2
 	private function getValidationRules()
 	{
 		$rules = [];
-		foreach ($this->superProps['props'] as $prop) $rules[$prop['column_name']] = $prop['default-values']['validation'];
+		foreach ($this->superProps['props'] as $prop) {
+			if (isset($prop['default-values']['validation'])) {
+				$rules[$prop['column_name']] = $prop['default-values']['validation'];
+			}
+		}
 		$rules = array_filter($rules, fn ($i) => $i);
 		$this->dump("getValidationRules", $rules);
 		return $rules;
