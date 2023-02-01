@@ -4,5 +4,5 @@
 @section('title', 'Manage Workflow')
 
 @section('content')
-HELLO
+<x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" />
 @endsection

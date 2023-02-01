@@ -13,7 +13,7 @@ class WelcomeDueController extends Controller
         return "dashboard";
     }
 
-    private function getSqlStr()
+    protected function getSqlStr()
     {
         $sqlStr = "SELECT po.id AS po_id ,ps.id AS sq_id ,
         MIN(CONCAT(pr.date,' ', pr.start)) AS start_datetime,
@@ -51,7 +51,7 @@ class WelcomeDueController extends Controller
         return $sqlStr;
     }
 
-    public function getColumns($urlParams)
+    protected function getColumns($urlParams)
     {
         $sql = $this->getSql($urlParams);
         $sqlData = DB::select($sql);
@@ -61,7 +61,7 @@ class WelcomeDueController extends Controller
         return $tableColumns;
     }
 
-    public function getDataSource($urlParams)
+    private function getDataSource($urlParams)
     {
         $sql = $this->getSql($urlParams);
         $sqlData = DB::select($sql);

@@ -32,15 +32,18 @@
             <x-demo.demo-attachment :attachmentData="$attachmentData" :dataComment="$dataComment" />
         </div>
         <div id="editable_tables" class="p-4 hidden">
-            <x-demo.demo-data-table  :tableEditableColumns="$tableEditableColumns" :tableDataSource="$tableDataSource"/>
+            <x-demo.demo-data-table :tableEditableColumns="$tableEditableColumns" :tableDataSource="$tableDataSource" />
         </div>
         <div id="navigation" class="p-4 hidden">
-            <x-demo.demo-navigation :tabData1="$tabData1" :tabData2="$tabData2"/>
+            <x-demo.demo-navigation :tabData1="$tabData1" :tabData2="$tabData2" />
         </div>
         <div id="feedbacks" class="p-4 hidden">
             <x-demo.demo-feedback />
         </div>
     </div>
 </x-renderer.card>
-<script>initTab('e07ff0dbf9a2afd616aca8e7a85921e2');</script>
+<script>
+    initTab('e07ff0dbf9a2afd616aca8e7a85921e2');
+
+</script>
 @endsection
