@@ -55,6 +55,9 @@ return new class extends Migration
         Schema::table('prod_runs', function (Blueprint $table) {
             $table->foreign('prod_sequence_id')->references('id')->on('prod_sequences');
         });
+        Schema::table('prod_disciplines', function (Blueprint $table) {
+            $table->foreign('def_assignee')->references('id')->on('users');
+        });
         Schema::table('prod_sequences', function (Blueprint $table) {
             $table->foreign('prod_order_id')->references('id')->on('prod_orders');
             $table->foreign('prod_routing_link_id')->references('id')->on('prod_routing_links');
@@ -107,6 +110,14 @@ return new class extends Migration
         Schema::table('qaqc_insp_chklst_runs', function (Blueprint $table) {
             $table->foreign('qaqc_insp_chklst_sht_id')->references('id')->on('qaqc_insp_chklst_shts')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+        });
+        Schema::table('qaqc_mirs', function (Blueprint $table) {
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('sub_project_id')->references('id')->on('sub_project s');
+            $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
+            $table->foreign('priority_id')->references('id')->on('priorities');
+            $table->foreign('assignee_to')->references('id')->on('users');
+            $table->foreign('inspected_by')->references('id')->on('users');
         });
     }
 
