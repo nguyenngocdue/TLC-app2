@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
+//make a,b,c to [a,b,c]
+//make "" to []
+Str::macro('parseArray', function (string $values) {
+    return ($values != "") ? explode(",", $values) : [];
+});
 Str::macro('appTitle', function (string $s) {
     $s = Str::plural($s);
     $s = Str::headline($s);

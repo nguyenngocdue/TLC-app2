@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 class SuperProps
 {
     private static $result = [];
+
     private static function makeRelationshipObject($type)
     {
         $allRelationship = Relationships::getAllOf($type);
@@ -33,6 +34,9 @@ class SuperProps
                     break;
                 }
             }
+
+            $rls['filter_columns'] = Str::parseArray($rls['filter_columns']);
+            $rls['filter_values'] = Str::parseArray($rls['filter_values']);
 
             $result["_" . $column_name] = $rls;
         }
@@ -89,7 +93,7 @@ class SuperProps
     private static function readProps($type)
     {
         $allProps = Props::getAllOf($type);
-        static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
+        // static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
         static::attachJson("default-values", $allProps, DefaultValues::getAllOf($type));
         static::attachJson("relationships", $allProps, static::makeRelationshipObject($type));
 

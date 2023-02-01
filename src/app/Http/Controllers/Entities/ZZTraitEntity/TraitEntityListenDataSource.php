@@ -20,22 +20,19 @@ trait TraitEntityListenDataSource
         }
     }
 
-    private function renderListenDataSource()
+    private function refineListenToFieldAndAttr()
     {
         $sp = $this->superProps;
         $this->dump2("SuperProps", $sp);
-        $toBeLoaded = [];
-        $listen_to_fields = [];
+
         $listen_to_attrs = [];
+        $toBeLoaded = [];
 
         $listeners = Listeners::getAllOf($this->type);
         foreach ($listeners as $listener) {
             $listen_to_fields0 = $listener['listen_to_fields'];
-            $listen_to_fields0 = $listen_to_fields0 ? explode(",", $listen_to_fields0) : [];
-            $listen_to_fields[] = array_map(fn ($i) => $sp['props']["_" . $i]['relationships']['table'], $listen_to_fields0);
-
-            $listen_to_attrs0 = $listener['listen_to_attrs'];
-            $listen_to_attrs[] = $listen_to_fields0 ? explode(",", $listen_to_attrs0) : [];
+            $listen_to_tables[] = array_map(fn ($i) => $sp['props']["_" . $i]['relationships']['table'], $listen_to_fields0);
+            $listen_to_attrs[] = $listener['listen_to_attrs'];
         }
 
         foreach ($sp['props'] as $prop) {
@@ -46,43 +43,62 @@ trait TraitEntityListenDataSource
             }
         }
 
-        $listen_to_fields = Arr::flatten($listen_to_fields);
+        $listen_to_tables = Arr::flatten($listen_to_tables);
         $listen_to_attrs = Arr::flatten($listen_to_attrs);
-        $toBeLoaded = [...$toBeLoaded, ...$listen_to_fields];
-
-        $this->dump2('listen_to_fields', $listen_to_fields);
+        $this->dump2('listen_to_tables', $listen_to_tables);
         $this->dump2('listen_to_attrs', $listen_to_attrs);
 
-        $extraColumns = [];
-        foreach ($listen_to_fields as $i => $table) {
-            $extraColumns[$table][] = $listen_to_attrs[$i];
-        }
-        $this->dump2("Extra Columns to load: ", $extraColumns);
-
-        $toBeLoaded = array_unique($toBeLoaded);
+        $toBeLoaded = array_unique([...$toBeLoaded, ...$listen_to_tables]);
         $this->dump2("To Be Loaded Tables", $toBeLoaded);
 
+        $extraColumns = [];
+        //Scan and flag all extra columns in Listeners screen
+        foreach ($listen_to_tables as $i => $table) $extraColumns[$table][] = $listen_to_attrs[$i];
+        $this->dump2("Extra Columns to load: ", $extraColumns);
+
+        foreach ($sp['props'] as $prop) {
+            $relationships = $prop['relationships'];
+            $filter_columns = $relationships['filter_columns'] ?? [];
+
+            if (sizeof($filter_columns) > 0) {
+                // dump($filter_columns);
+                $table = $relationships['table'];
+                foreach ($filter_columns as $filter_column) {
+                    $extraColumns[$table][] = $filter_column;
+                }
+                $extraColumns[$table] = array_unique($extraColumns[$table]);
+            }
+        }
+
+        return [$extraColumns, $toBeLoaded];
+    }
+
+    private function getMatrix()
+    {
+        [$extraColumns, $toBeLoaded] = $this->refineListenToFieldAndAttr();
 
         $matrix = [];
         foreach ($toBeLoaded as $table) {
-            // $columns = DBTable::getColumnNames($table);
             $props = Props::getAllOf($table);
-            $availableColumnNames = array_values(array_map(fn ($prop) => $prop['column_name'], $props));
-            // dump($availableColumnNames);
-
             $defaultColumns =  ['id', 'name', 'description'];
             if (isset($extraColumns[$table])) $defaultColumns = [...$defaultColumns, ...$extraColumns[$table]];
-            // $matrix[$table] = [...$defaultColumns, ...$columns];
+            //Make sure all columns in matrix is really exist in the Prop list
+            $availableColumnNames = array_values(array_map(fn ($prop) => $prop['column_name'], $props));
             $matrix[$table] = array_intersect($defaultColumns, $availableColumnNames);
             $diff = array_diff($matrix[$table], $defaultColumns);
 
             if (sizeof($diff) > 0) $this->dump2("Column not found in $table", $diff);
         }
         $this->dump2("Matrix", $matrix);
+        return $matrix;
+    }
 
+    private function renderListenDataSource()
+    {
+        $matrix = $this->getMatrix();
         $result = [];
-
         $columnsWithOracy = [];
+
         foreach ($matrix as $table => $columns) {
             $modelPath = "App\\Models\\" . Str::singular($table);
             $nameless = (new $modelPath)->nameless;
@@ -91,7 +107,6 @@ trait TraitEntityListenDataSource
             $rows = DB::table($table)->select($columnsWithoutOracy);
             if (!$nameless) $rows = $rows->orderBy('name');
             $objectRows = $rows->get()->toArray();
-            // $result[$table] = $objectRows;
             $result[$table] = array_map(fn ($o) => (array)$o, $objectRows);
         }
 
@@ -117,18 +132,22 @@ trait TraitEntityListenDataSource
     {
         $sp = $this->superProps;
         $result = array_values(Listeners::getAllOf($this->type));
+        dump($result);
         foreach ($result as &$line) {
+            $relationships = $sp['props']["_" . $line['column_name']]['relationships'];
             unset($line['name']);
-            if (!isset($sp['props']["_" . $line['column_name']]['relationships']['table'])) {
+            if (!isset($relationships['table'])) {
                 $line['table_name'] = $line['column_name'] . " is not a HasDataSource control";
             } else {
-                $line['table_name'] = $sp['props']["_" . $line['column_name']]['relationships']['table'];
+                $line['table_name'] = $relationships['table'];
             }
-            $line['listen_to_attrs'] = $line['listen_to_attrs'] ? explode(",", $line['listen_to_attrs']) : [];
-            $line['listen_to_fields'] = $line['listen_to_fields'] ? explode(",", $line['listen_to_fields']) : [];
-            $line['triggers'] = explode(",", $line['triggers']);
+            // $line['listen_to_attrs'] = $line['listen_to_attrs'] ? explode(",", $line['listen_to_attrs']) : [];
+            // $line['listen_to_fields'] = $line['listen_to_fields'] ? explode(",", $line['listen_to_fields']) : [];
+            // $line['triggers'] = explode(",", $line['triggers']);
 
             $line['listen_to_tables'] = array_map(fn ($control) => $sp['props']["_" . $control]['relationships']['table'], $line['listen_to_fields']);
+            $line['filter_columns'] = $relationships['filter_columns'] ?? [];
+            $line['filter_values'] = $relationships['filter_values'] ?? [];
         }
 
         return $result;

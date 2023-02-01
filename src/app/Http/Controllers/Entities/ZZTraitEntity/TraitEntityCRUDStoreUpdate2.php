@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -69,7 +70,7 @@ trait TraitEntityCRUDStoreUpdate2
 			if ($prop['control'] === 'textarea' && $prop['column_type'] === 'json') {
 				$column_name = $prop['column_name'];
 				$text = $dataSource[$column_name];
-				$dataSource[$column_name] = /*json_decode*/ (preg_replace("/\r|\n/", "", $text));;
+				$dataSource[$column_name] = /*json_decode*/ (preg_replace("/\r|\n/", "", $text));
 			}
 		}
 		return $dataSource;
@@ -122,6 +123,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		$this->handleStatus($theRow, $fields);
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
+		Toastr::success("$this->type created successfully", "Create $this->type");
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
@@ -138,6 +140,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		$this->handleStatus($theRow, $fields);
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
+		Toastr::success("$this->type updated successfully", "Updated $this->type");
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 }

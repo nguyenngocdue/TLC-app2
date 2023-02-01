@@ -12,7 +12,8 @@ class Radio2 extends Component
         private $name,
         private $selected,
     ) {
-        //
+        $old = old($name);
+        if (!is_null($old)) $this->selected = $old;
     }
 
     public function render()

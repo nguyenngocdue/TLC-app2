@@ -47,8 +47,8 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown",
-        "filter_columns": "",
-        "filter_values": "",
+        "filter_columns": "resigned",
+        "filter_values": "0",
         "radio_checkbox_colspan": ""
     },
     "_category": {

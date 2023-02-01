@@ -1,6 +1,6 @@
 const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="flex justify-between px-1"><span>${state.text}</span><span>${state.id}</span></div>`)
 
-let k = {}, listeners = {}, table = ""
+let k = {}, listeners = {}
 
 const onChangeDropdown2Reduce = (listener) => {
     const debug = false
