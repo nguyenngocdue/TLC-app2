@@ -1,4 +1,68 @@
 {
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "listen_action": "assign",
+        "triggers": "prod_discipline_1",
+        "listen_to_fields": "prod_discipline_1",
+        "listen_to_attrs": "def_assignee"
+    },
+    "_dropdownMonitors()": {
+        "name": "_dropdownMonitors()",
+        "column_name": "dropdownMonitors()",
+        "listen_action": "assign",
+        "triggers": "prod_discipline_1",
+        "listen_to_fields": "prod_discipline_1",
+        "listen_to_attrs": "def_monitors"
+    },
+    "_user_1": {
+        "name": "_user_1",
+        "column_name": "user_1",
+        "listen_action": "dot",
+        "triggers": "department_1",
+        "listen_to_fields": "department_1",
+        "listen_to_attrs": "head_of_department"
+    },
+    "_user_position_1": {
+        "name": "_user_position_1",
+        "column_name": "user_position_1",
+        "listen_action": "dot",
+        "triggers": "user_4",
+        "listen_to_fields": "user_4",
+        "listen_to_attrs": "position_rendered"
+    },
+    "_user_2": {
+        "name": "_user_2",
+        "column_name": "user_2",
+        "listen_action": "reduce",
+        "triggers": "department_2",
+        "listen_to_fields": "user_2",
+        "listen_to_attrs": "department"
+    },
+    "_user_3": {
+        "name": "_user_3",
+        "column_name": "user_3",
+        "listen_action": "reduce",
+        "triggers": "category_id",
+        "listen_to_fields": "user_3",
+        "listen_to_attrs": "category"
+    },
+    "_sub_project_1": {
+        "name": "_sub_project_1",
+        "column_name": "sub_project_1",
+        "listen_action": "reduce",
+        "triggers": "project_1",
+        "listen_to_fields": "sub_project_1",
+        "listen_to_attrs": "project_id"
+    },
+    "_prod_order_1": {
+        "name": "_prod_order_1",
+        "column_name": "prod_order_1",
+        "listen_action": "reduce",
+        "triggers": "sub_project_1,prod_routing_1",
+        "listen_to_fields": "prod_order_1,prod_order_1",
+        "listen_to_attrs": "sub_project_id,prod_routing_id"
+    },
     "_id": {
         "name": "_id",
         "column_name": "id",
@@ -15,22 +79,6 @@
         "listen_to_fields": "",
         "listen_to_attrs": ""
     },
-    "_department_1": {
-        "name": "_department_1",
-        "column_name": "department_1",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_user_1": {
-        "name": "_user_1",
-        "column_name": "user_1",
-        "listen_action": "reduce",
-        "triggers": "department_1",
-        "listen_to_fields": "department_1",
-        "listen_to_attrs": "head_of_department"
-    },
     "_department_2": {
         "name": "_department_2",
         "column_name": "department_2",
@@ -38,14 +86,6 @@
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": ""
-    },
-    "_user_2": {
-        "name": "_user_2",
-        "column_name": "user_2",
-        "listen_action": "reduce",
-        "triggers": "department_2",
-        "listen_to_fields": "user_2",
-        "listen_to_attrs": "department"
     },
     "_category_id": {
         "name": "_category_id",
@@ -55,14 +95,6 @@
         "listen_to_fields": "",
         "listen_to_attrs": ""
     },
-    "_user_3": {
-        "name": "_user_3",
-        "column_name": "user_3",
-        "listen_action": "reduce",
-        "triggers": "category_id",
-        "listen_to_fields": "user_3",
-        "listen_to_attrs": "category"
-    },
     "_project_1": {
         "name": "_project_1",
         "column_name": "project_1",
@@ -70,14 +102,6 @@
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": ""
-    },
-    "_sub_project_1": {
-        "name": "_sub_project_1",
-        "column_name": "sub_project_1",
-        "listen_action": "reduce",
-        "triggers": "project_1",
-        "listen_to_fields": "sub_project_1",
-        "listen_to_attrs": "project_id"
     },
     "_prod_routing_1": {
         "name": "_prod_routing_1",
@@ -87,14 +111,6 @@
         "listen_to_fields": "",
         "listen_to_attrs": ""
     },
-    "_prod_order_1": {
-        "name": "_prod_order_1",
-        "column_name": "prod_order_1",
-        "listen_action": "reduce",
-        "triggers": "sub_project_1,prod_routing_1",
-        "listen_to_fields": "prod_order_1,prod_order_1",
-        "listen_to_attrs": "sub_project_id,prod_routing_id"
-    },
     "_prod_discipline_1": {
         "name": "_prod_discipline_1",
         "column_name": "prod_discipline_1",
@@ -103,17 +119,9 @@
         "listen_to_fields": "",
         "listen_to_attrs": ""
     },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
-        "listen_action": "assign",
-        "triggers": "prod_discipline_1",
-        "listen_to_fields": "prod_discipline_1",
-        "listen_to_attrs": "def_assignee"
-    },
-    "_dropdownMonitors()": {
-        "name": "_dropdownMonitors()",
-        "column_name": "dropdownMonitors()",
+    "_department_1": {
+        "name": "_department_1",
+        "column_name": "department_1",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -126,14 +134,6 @@
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": ""
-    },
-    "_user_position_1": {
-        "name": "_user_position_1",
-        "column_name": "user_position_1",
-        "listen_action": "dot",
-        "triggers": "user_4",
-        "listen_to_fields": "user_4",
-        "listen_to_attrs": "position_rendered"
     },
     "_created_at": {
         "name": "_created_at",

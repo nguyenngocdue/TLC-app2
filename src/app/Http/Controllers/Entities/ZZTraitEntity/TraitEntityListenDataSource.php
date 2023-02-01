@@ -26,24 +26,31 @@ trait TraitEntityListenDataSource
         $toBeLoaded = [];
         $listen_to_fields = [];
         $listen_to_attrs = [];
+
+        $listeners = Listeners::getAllOf($this->type);
+        foreach ($listeners as $listener) {
+            $listen_to_fields0 = $listener['listen_to_fields'];
+            $listen_to_fields0 = $listen_to_fields0 ? explode(",", $listen_to_fields0) : [];
+            $listen_to_fields[] = array_map(fn ($i) => $sp['props']["_" . $i]['relationships']['table'], $listen_to_fields0);
+
+            $listen_to_attrs0 = $listener['listen_to_attrs'];
+            $listen_to_attrs[] = $listen_to_fields0 ? explode(",", $listen_to_attrs0) : [];
+        }
+
         foreach ($sp['props'] as $prop) {
             $relationships = $prop['relationships'];
             if (isset($relationships['table'])) {
                 $table = $relationships['table'];
                 $toBeLoaded[] = $table;
-
-                if (sizeof($prop['listeners']) > 0) {
-                    $listen_to_fields0 = $prop['listeners']['listen_to_fields'];
-                    $listen_to_attrs0 = $prop['listeners']['listen_to_attrs'];
-                    $listen_to_fields0 = $listen_to_fields0 ? explode(",", $listen_to_fields0) : [];
-                    $listen_to_fields[] = array_map(fn ($i) => $sp['props']["_" . $i]['relationships']['table'], $listen_to_fields0);
-                    $listen_to_attrs[] = $listen_to_attrs0 ? explode(",", $listen_to_attrs0) : [];
-                }
             }
         }
 
         $listen_to_fields = Arr::flatten($listen_to_fields);
         $listen_to_attrs = Arr::flatten($listen_to_attrs);
+        $toBeLoaded = [...$toBeLoaded, ...$listen_to_fields];
+
+        $this->dump2('listen_to_fields', $listen_to_fields);
+        $this->dump2('listen_to_attrs', $listen_to_attrs);
 
         $extraColumns = [];
         foreach ($listen_to_fields as $i => $table) {
@@ -61,6 +68,8 @@ trait TraitEntityListenDataSource
             $defaultColumns =  ['id', 'name', 'description'];
             if (isset($extraColumns[$table])) $defaultColumns = [...$defaultColumns, ...$extraColumns[$table]];
             $matrix[$table] = array_intersect($defaultColumns, $columns);
+            $diff = array_diff($matrix[$table], $defaultColumns);
+            if (sizeof($diff) > 0) $this->dump2("Column not found in $table", $diff);
         }
         $this->dump2("Result", $matrix);
 
@@ -68,6 +77,7 @@ trait TraitEntityListenDataSource
         foreach ($matrix as $table => $columns) {
             $result[$table] = DB::table($table)
                 ->select($columns)
+                ->orderBy('name')
                 ->get();
         }
 
@@ -76,12 +86,20 @@ trait TraitEntityListenDataSource
 
     private function getListeners()
     {
+        $sp = $this->superProps;
         $result = array_values(Listeners::getAllOf($this->type));
         foreach ($result as &$line) {
             unset($line['name']);
-            $line['listen_to_attrs'] = explode(",", $line['listen_to_attrs']);
-            $line['listen_to_fields'] = explode(",", $line['listen_to_fields']);
+            if (!isset($sp['props']["_" . $line['column_name']]['relationships']['table'])) {
+                $line['table_name'] = $line['column_name'] . " is not a HasDataSource control";
+            } else {
+                $line['table_name'] = $sp['props']["_" . $line['column_name']]['relationships']['table'];
+            }
+            $line['listen_to_attrs'] = $line['listen_to_attrs'] ? explode(",", $line['listen_to_attrs']) : [];
+            $line['listen_to_fields'] = $line['listen_to_fields'] ? explode(",", $line['listen_to_fields']) : [];
             $line['triggers'] = explode(",", $line['triggers']);
+
+            $line['listen_to_tables'] = array_map(fn ($control) => $sp['props']["_" . $control]['relationships']['table'], $line['listen_to_fields']);
         }
 
         return $result;

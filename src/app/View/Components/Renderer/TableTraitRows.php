@@ -73,7 +73,7 @@ trait TableTraitRows
         $start = (is_object($dataSource) && method_exists($dataSource, 'items')) ?  $dataSource->perPage() * ($dataSource->currentPage() - 1) : 0;
         if ($this->groupBy) {
             if (is_object($dataSource)) $dataSource = $items;
-            usort($dataSource, fn ($a, $b) => strcasecmp($a[$this->groupBy], $b[$this->groupBy]));
+            usort($dataSource, fn ($a, $b) => strcasecmp($a[$this->groupBy] ?? 'zzz', $b[$this->groupBy] ?? 'zzz'));
         }
 
         $lastIndex = "anything";

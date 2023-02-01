@@ -4,15 +4,11 @@
         , name: "{{$name}}"
         , className: "{{$className}}"
         , multipleStr: "{{$multipleStr}}"
-        , table: "{{$table}}"
-        , selected: "{{$selected}}"
     }))
+    reloadDataToDropdown2("{{$id}}", k["{{$table}}"], JSON.parse("{{$selected}}"))
+
     $(document).ready(function() {
-        $('#{{$id}}').select2({
-            placeholder: "Please select"
-            , allowClear: true
-            , templateResult: select2FormatState
-        });
+        $("#{{$id}}").trigger('change')
     })
 
 </script>
