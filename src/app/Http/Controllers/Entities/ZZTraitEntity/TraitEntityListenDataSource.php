@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Utils\Support\DBTable;
 use App\Utils\Support\Json\Listeners;
+use App\Utils\Support\Json\Props;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 trait TraitEntityListenDataSource
@@ -61,26 +62,54 @@ trait TraitEntityListenDataSource
         $toBeLoaded = array_unique($toBeLoaded);
         $this->dump2("To Be Loaded Tables", $toBeLoaded);
 
+
         $matrix = [];
         foreach ($toBeLoaded as $table) {
-            $columns = DBTable::getColumnNames($table);
+            // $columns = DBTable::getColumnNames($table);
+            $props = Props::getAllOf($table);
+            $availableColumnNames = array_values(array_map(fn ($prop) => $prop['column_name'], $props));
+            // dump($availableColumnNames);
 
             $defaultColumns =  ['id', 'name', 'description'];
             if (isset($extraColumns[$table])) $defaultColumns = [...$defaultColumns, ...$extraColumns[$table]];
-            $matrix[$table] = array_intersect($defaultColumns, $columns);
+            // $matrix[$table] = [...$defaultColumns, ...$columns];
+            $matrix[$table] = array_intersect($defaultColumns, $availableColumnNames);
             $diff = array_diff($matrix[$table], $defaultColumns);
+
             if (sizeof($diff) > 0) $this->dump2("Column not found in $table", $diff);
         }
-        $this->dump2("Result", $matrix);
+        $this->dump2("Matrix", $matrix);
 
         $result = [];
+
+        $columnsWithOracy = [];
         foreach ($matrix as $table => $columns) {
-            $result[$table] = DB::table($table)
-                ->select($columns)
-                ->orderBy('name')
-                ->get();
+            $modelPath = "App\\Models\\" . Str::singular($table);
+            $nameless = (new $modelPath)->nameless;
+            $columnsWithoutOracy = array_filter($columns, fn ($column) => !str_contains($column, "()"));
+            $columnsWithOracy[$table] = array_values(array_filter($columns, fn ($column) => str_contains($column, "()")));
+            $rows = DB::table($table)->select($columnsWithoutOracy);
+            if (!$nameless) $rows = $rows->orderBy('name');
+            $objectRows = $rows->get()->toArray();
+            // $result[$table] = $objectRows;
+            $result[$table] = array_map(fn ($o) => (array)$o, $objectRows);
         }
 
+        $this->dump2("columnsWithOracy", $columnsWithOracy);
+        foreach ($columnsWithOracy as $table => $listOfFn) {
+            $modelPath = "App\\Models\\" . Str::singular($table);
+            if (sizeof($listOfFn) > 0) {
+                foreach ($listOfFn as $fn) {
+                    $fn = substr($fn, 0, strlen($fn) - 2); //Remove ()
+                    foreach ($result[$table] as &$row) {
+                        $model = $modelPath::find($row['id']);
+                        $row[$fn] = $model->getCheckedByField($fn)->pluck('id')->toArray();
+                    }
+                }
+            }
+        }
+
+        $this->dump2("Result", $result);
         return $result;
     }
 

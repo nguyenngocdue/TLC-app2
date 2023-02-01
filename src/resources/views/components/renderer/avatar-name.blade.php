@@ -2,8 +2,8 @@
 @php
 $json = json_decode($slot);
 foreach ( explode(",", $rendererParam) as $param) {
-    $pairs = explode("=", $param);
-    if($json) ${$pairs[0]} = $json->{$pairs[1]} ?? "";
+$pairs = explode("=", $param);
+if($json) ${$pairs[0]} = $json->{$pairs[1]} ?? "";
 }
 @endphp
 @endif
@@ -16,7 +16,7 @@ $txt_gray = $gray ? "text-gray-600" : "";
 
 <div class="flex items-center text-sm {{$bg_gray}} rounded px-1 w-full" component="avatar-name">
     <span class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-        <img class="object-cover w-full h-full rounded-full" src={{$avatar}} alt="" loading="lazy">
+        <img class="object-cover w-full h-full rounded-full" src="{{$avatar}}" alt="" loading="lazy">
         <span class="absolute inset-0 rounded-full" aria-hidden="true"></span>
     </span>
     <span>

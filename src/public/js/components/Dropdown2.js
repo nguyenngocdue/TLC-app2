@@ -5,15 +5,14 @@ let k = {}, listeners = {}, table = ""
 const onChangeDropdown2Reduce = (listener) => {
     const debug = false
     if (debug) console.log("Reduce listener", listener)
-    const { column_name, table_name, listen_to_attrs } = listener
+    const { column_name, table_name, listen_to_attrs, triggers } = listener
     let dataSource = k[table_name]
     if (debug) console.log("dataSource in k", dataSource)
 
-    const constraints = listener['triggers']
-    const constraintsValues = constraints.map((constraint) => $("#" + constraint).val())
-    if (debug) console.log(constraints, constraintsValues)
+    const constraintsValues = triggers.map((trigger) => $("#" + trigger).val())
+    if (debug) console.log(triggers, constraintsValues)
 
-    for (let i = 0; i < constraints.length; i++) {
+    for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
         const column = listen_to_attrs[i]
         if (!value) continue;
@@ -28,29 +27,53 @@ const onChangeDropdown2Reduce = (listener) => {
     //TODO: make selected array if dropdown is multiple
     reloadDataToDropdown2(column_name, dataSource, [lastSelected * 1])
 }
-const onChangeDropdown2Assign = (listener) => {
-    console.log("Assign", listener)
-}
-const onChangeDropdown2Dot = (listener) => {
-    const debug = false
-    if (debug) console.log("Dot", listener)
-    const { listen_to_fields, listen_to_tables, listen_to_attrs, column_name } = listener
+const onChangeGetSelectedObject = (listener) => {
+    const { listen_to_fields, listen_to_tables } = listener
     const listen_to_field = listen_to_fields[0]
     const listen_to_table = listen_to_tables[0]
-    const listen_to_attr = listen_to_attrs[0]
     const selectedId = $("#" + listen_to_field).val()
 
     const table = k[listen_to_table]
     const selectedObject = table.find((i) => i['id'] == selectedId)
-    const theValue = selectedObject[listen_to_attr]
-    if (debug) console.log(selectedId, table, selectedObject, listen_to_attr, theValue)
 
-    $("#" + column_name).val(theValue)
-    $("#" + column_name).trigger('change')
-    if (debug) console.log("Assigning", column_name, "with value", theValue)
+    return selectedObject
+}
+const removeParenthesis = (str) => (str.includes("()")) ? str.substring(0, str.length - 2) : str
+
+const onChangeDropdown2Assign = (listener) => {
+    const debug = false
+    if (debug) console.log("Assign", listener)
+    const { column_name, listen_to_attrs } = listener
+    const selectedObject = onChangeGetSelectedObject(listener)
+    const listen_to_attr = removeParenthesis(listen_to_attrs[0])
+    if (debug) console.log(selectedObject, listen_to_attr)
+    const theValue = selectedObject[listen_to_attr]
+    const column_name1 = removeParenthesis(column_name)
+    if (debug) console.log(column_name1, theValue)
+    $("#" + column_name1).val(theValue)
+    $("#" + column_name1).trigger('change')
+}
+const onChangeDropdown2Dot = (listener) => {
+    const debug = false
+    if (debug) console.log("Dot", listener)
+    const selectedObject = onChangeGetSelectedObject(listener)
+
+    const { listen_to_attrs, column_name } = listener
+    const listen_to_attr = listen_to_attrs[0]
+
+    if (debug) console.log(selectedObject, listen_to_attr)
+    // Unknown error
+    if (selectedObject !== undefined) {
+        const theValue = selectedObject[listen_to_attr]
+        if (debug) console.log(theValue)
+
+        $("#" + column_name).val(theValue)
+        $("#" + column_name).trigger('change')
+        if (debug) console.log("Dotting", column_name, "with value", theValue)
+    }
 }
 
-const onChangeDropdown2 = (control, name) => {
+const onChangeDropdown2 = (name) => {
     // console.log("onChangeDropdown2", name, control.value)
     for (let i = 0; i < listeners.length; i++) {
         let listener = listeners[i]
@@ -108,7 +131,7 @@ const Dropdown2 = ({ id, name, className, multipleStr }) => {
     render += "<select "
     render += "id='" + id + "' "
     render += "name='" + name + "' "
-    render += "onChange='onChangeDropdown2(this,\"" + name + "\")' "
+    render += "onChange='onChangeDropdown2(\"" + name + "\")' "
     render += " " + multipleStr + " "
     render += "class='" + className + "' "
     render += ">"
