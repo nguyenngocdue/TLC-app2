@@ -47,11 +47,13 @@ const onChangeDropdown2Assign = (listener) => {
     const selectedObject = onChangeGetSelectedObject(listener)
     const listen_to_attr = removeParenthesis(listen_to_attrs[0])
     if (debug) console.log(selectedObject, listen_to_attr)
-    const theValue = selectedObject[listen_to_attr]
-    const column_name1 = removeParenthesis(column_name)
-    if (debug) console.log(column_name1, theValue)
-    $("#" + column_name1).val(theValue)
-    $("#" + column_name1).trigger('change')
+    if (selectedObject !== undefined) {
+        const theValue = selectedObject[listen_to_attr]
+        const column_name1 = removeParenthesis(column_name)
+        if (debug) console.log(column_name1, theValue)
+        $("#" + column_name1).val(theValue)
+        $("#" + column_name1).trigger('change')
+    }
 }
 const onChangeDropdown2Dot = (listener) => {
     const debug = false

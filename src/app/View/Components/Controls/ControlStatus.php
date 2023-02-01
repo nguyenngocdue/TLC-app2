@@ -6,21 +6,23 @@ use Illuminate\View\Component;
 
 class ControlStatus extends Component
 {
-    private $value;
+    // private $value;
     /**
      * Create a new component instance.
      *
      * @return void
      */
     public function __construct(
-        private $type,
-        private $colName,
-        private $id,
+        // private $type,
+        private $name,
+        // private $id,
         private $modelPath,
+        private $value = 'new',
     ) {
         //
-        $model = ($this->modelPath)::find($this->id);
-        $this->value = is_null($model) ? "new" : $model->status;
+        // $model = ($this->modelPath)::find($this->id);
+        // $this->value = is_null($model) ? "new" : $model->status;
+
     }
 
     public function render()
@@ -29,7 +31,7 @@ class ControlStatus extends Component
         $cbb = $this->modelPath::getAvailableStatuses();
         return view("components.controls.control-status", [
             'options' => $cbb,
-            'colName' => $this->colName,
+            'name' => $this->name,
             'value' => $this->value,
         ]);
     }

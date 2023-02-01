@@ -136,6 +136,9 @@ $id = $action === "edit" ? $values->id : "";
                         <x-controls.toggle name={{$columnName}} value={{$value}} />
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
+                        @case('status')
+                        <x-controls.control-status value={{$value}} name={{$columnName}} modelPath={{$modelPath}} />
+                        @break
 
                         @case ('dropdown')
                         <x-controls.has-data-source.dropdown type={{$type}} name={{$columnName}} selected={{$value}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
@@ -160,9 +163,6 @@ $id = $action === "edit" ? $values->id : "";
 
                         @case('relationship_renderer')
                         <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} colSpan={{$col_span}} />
-                        @break
-                        @case('status')
-                        <x-controls.control-status type={{$type}} colName={{$columnName}} id={{$id}} modelPath={{$modelPath}} />
                         @break
 
                         @default

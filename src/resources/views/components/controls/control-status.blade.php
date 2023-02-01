@@ -1,5 +1,5 @@
 <div>
-    <select name="status" id="select-dropdown-{{$colName}}" class="w-full">
+    <select name="status" id="select-dropdown-{{$name}}" class="w-full">
         @foreach($options as $option)
         <option value="{{$option}}" @selected($value===$option)>{{Str::headline( $option)}}</option>
         @endforeach
@@ -7,7 +7,7 @@
 </div>
 
 <script type="text/javascript">
-    $('#select-dropdown-{{$colName}}').select2({
+    $('#select-dropdown-{{$name}}').select2({
         placeholder: "Please select"
         , allowClear: false
     });
