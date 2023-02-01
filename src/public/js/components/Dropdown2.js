@@ -2,6 +2,19 @@ const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="
 
 let k = {}, listeners = {}
 
+const filterDropdown2 = (column_name, dataSource) => {
+    if (filters[column_name] !== undefined) {
+        const { filter_columns, filter_values } = filters[column_name]
+        //Filter by filter_columns and filter_values
+        for (let i = 0; i < filter_columns.length; i++) {
+            const column = filter_columns[i]
+            const value = filter_values[i]
+            dataSource = dataSource.filter((row) => value == row[column])
+        }
+    }
+    return dataSource
+}
+
 const onChangeDropdown2Reduce = (listener) => {
     const debug = false
     if (debug) console.log("Reduce listener", listener)
@@ -100,9 +113,11 @@ const onChangeDropdown2 = (name) => {
 }
 
 const reloadDataToDropdown2 = (id, dataSource, selected) => {
-    // console.log("Loading dataSource for", id, selected)
     $("#" + id).empty()
     let options = []
+
+    dataSource = filterDropdown2(id, dataSource)
+    // console.log("Loading dataSource for", id, selected, dataSource)
 
     for (let i = 0; i < dataSource.length; i++) {
         let item = dataSource[i]

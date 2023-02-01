@@ -23,7 +23,21 @@ trait TraitEntityCRUDCreateEdit
 		$topTitle = CurrentRoute::getTitleOf($this->type);
 		$listenerDataSource = [];
 		$listeners = [];
-		return view('dashboards.pages.entity-create-edit')->with(compact('props', 'defaultValues', 'type', 'action', 'modelPath', 'values', 'idItems', 'title', 'topTitle', 'listenerDataSource', 'listeners',));
+		$filters = [];
+		return view('dashboards.pages.entity-create-edit')->with(compact(
+			'props',
+			'defaultValues',
+			'type',
+			'action',
+			'modelPath',
+			'values',
+			'idItems',
+			'title',
+			'topTitle',
+			'listenerDataSource',
+			'listeners',
+			'filters',
+		));
 	}
 
 	public function edit($id)
@@ -42,6 +56,21 @@ trait TraitEntityCRUDCreateEdit
 		$topTitle = CurrentRoute::getTitleOf($this->type);
 		$listenerDataSource = [];
 		$listeners = [];
-		return view('dashboards.pages.entity-create-edit')->with(compact('props', 'defaultValues', 'values', 'type', 'action', 'currentElement', 'modelPath', 'idItems', 'title', 'topTitle', 'listenerDataSource', 'listeners',));
+		$filters = [];
+		return view('dashboards.pages.entity-create-edit')->with(compact(
+			'props',
+			'defaultValues',
+			'values',
+			'type',
+			'action',
+			'currentElement',
+			'modelPath',
+			'idItems',
+			'title',
+			'topTitle',
+			'listenerDataSource',
+			'listeners',
+			'filters',
+		));
 	}
 }

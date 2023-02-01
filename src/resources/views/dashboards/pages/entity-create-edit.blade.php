@@ -16,6 +16,7 @@ $id = $action === "edit" ? $values->id : "";
 <script>
     k = @json($listenerDataSource);
     listeners = @json($listeners);
+    filters = @json($filters);
 
 </script>
 
