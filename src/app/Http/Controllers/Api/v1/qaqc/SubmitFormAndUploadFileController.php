@@ -3,18 +3,15 @@
 namespace App\Http\Controllers\Api\v1\qaqc;
 
 use App\Console\Commands\Traits\CloneRunTrait;
-use App\Events\UpdateStatusChklstRunEvent;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Attachment;
 use App\Models\Qaqc_insp_chklst_line;
 use App\Models\Qaqc_insp_chklst_run;
-use App\Models\Qaqc_insp_chklst_sht;
 use Carbon\Carbon;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -31,6 +28,8 @@ class SubmitFormAndUploadFileController extends Controller
         try {
             $transactionId = $request->transactionId;
             $ownerId = $request->ownerId;
+            $progress = $request->progress;
+            $status = $request->status;
             $sheetId = $request->sheetId;
             $name = $request->name;
             $description = $request->description;
@@ -39,11 +38,19 @@ class SubmitFormAndUploadFileController extends Controller
             $controlValueId = $request->controlValueId;
             $groupId = $request->groupId;
             $value = $request->value;
+            $valueComment = $request->valueComment;
+            if (in_array($controlValueId, ['4', '8'])) {
+                $valueOnHold = $request->valueOnHold;
+            } else {
+                $valueOnHold = null;
+            }
             if (!(cache('transactionId') === $transactionId)) {
                 cache(['transactionId' => $transactionId], 10);
                 $qaqcInspChklstRun = Qaqc_insp_chklst_run::create([
                     'owner_id' => $ownerId,
                     'qaqc_insp_chklst_sht_id' => $sheetId,
+                    'progress' => $progress,
+                    'status' => $status,
                 ]);
                 cache(['qaqcInspChklstRunId' => $qaqcInspChklstRun->id], 10);
                 $qaqcInspChklstLine = Qaqc_insp_chklst_line::create([
@@ -51,13 +58,14 @@ class SubmitFormAndUploadFileController extends Controller
                     'description' => $description,
                     'control_type_id' => $controlTypeId,
                     'value' => $value,
+                    'value_comment' => $valueComment,
+                    'value_on_hold' => $valueOnHold,
                     'qaqc_insp_group_id' => $groupId,
                     'qaqc_insp_chklst_run_id' => $qaqcInspChklstRun->id,
                     'qaqc_insp_control_value_id' => $controlValueId,
                     'qaqc_insp_control_group_id' => $controlGroupId,
                 ]);
                 $this->uploadFile($request, $qaqcInspChklstLine->id);
-                return response()->json('Successfully');
             } else {
                 $qaqcRunId = cache('qaqcInspChklstRunId');
                 $qaqcInspChklstLine = Qaqc_insp_chklst_line::create([
@@ -65,17 +73,19 @@ class SubmitFormAndUploadFileController extends Controller
                     'description' => $description,
                     'control_type_id' => $controlTypeId,
                     'value' => $value,
+                    'value_comment' => $valueComment,
+                    'value_on_hold' => $valueOnHold,
                     'qaqc_insp_group_id' => $groupId,
                     'qaqc_insp_chklst_run_id' => $qaqcRunId,
                     'qaqc_insp_control_value_id' => $controlValueId,
                     'qaqc_insp_control_group_id' => $controlGroupId,
                 ]);
                 $this->uploadFile($request, $qaqcInspChklstLine->id);
-                return response()->json('Successfully');
             }
 
-            return response()->json($request->sheetId);
+            return response()->json('Successfully');
         } catch (\Throwable $th) {
+            Log::error($th);
             return response()->json($th);
         }
     }

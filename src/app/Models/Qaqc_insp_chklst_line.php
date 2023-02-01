@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Qaqc_insp_chklst_line extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "control_type_id", "value",
+        "id", "name", "description", "control_type_id", "value", "value_on_hold", "value_comment",
         "qaqc_insp_chklst_run_id", "qaqc_insp_group_id",
         "qaqc_insp_control_value_id", "qaqc_insp_control_group_id",
     ];
