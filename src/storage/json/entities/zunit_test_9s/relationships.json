@@ -7,6 +7,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -19,6 +20,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -31,6 +33,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -43,6 +46,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -55,6 +59,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -67,6 +72,20 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getProject1": {
+        "name": "_getProject1",
+        "relationship": "belongsTo",
+        "control_name": "project_1",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -79,6 +98,20 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getProdRouting1": {
+        "name": "_getProdRouting1",
+        "relationship": "belongsTo",
+        "control_name": "prod_routing_1",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -91,6 +124,59 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getProdDiscipline1": {
+        "name": "_getProdDiscipline1",
+        "relationship": "belongsTo",
+        "control_name": "prod_discipline_1",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getAssignee1": {
+        "name": "_getAssignee1",
+        "relationship": "belongsTo",
+        "control_name": "assignee_1",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_user4": {
+        "name": "_user4",
+        "relationship": "belongsTo",
+        "control_name": "user_4",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_dropdownMonitors()": {
+        "name": "_dropdownMonitors()",
+        "relationship": "getCheckedByField",
+        "control_name": "dropdownMonitors()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

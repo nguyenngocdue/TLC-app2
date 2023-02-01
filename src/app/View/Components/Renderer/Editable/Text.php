@@ -15,6 +15,7 @@ class Text extends Component
     public function __construct(
         private $name = "",
         private $placeholder = "",
+        private $cell = null,
         // private $width = null,
     ) {
     }
@@ -26,6 +27,7 @@ class Text extends Component
      */
     public function render()
     {
+        if ($this->cell === 'invisible_this_control') return "";
         return view('components.renderer.editable.text', [
             'placeholder' => $this->placeholder,
             'name' => $this->name,

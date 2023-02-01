@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\WelcomeDueController;
 use App\Http\Controllers\Workflow\ManageAppsController;
 use App\Http\Controllers\Workflow\ManageStatusesController;
 use App\Http\Controllers\Workflow\ManageWidgetsController;
@@ -51,7 +52,7 @@ Route::group([
                 Route::resource("{$singular}_prp", "{$path}ManageJsonController")->only('index', 'store', 'create');
                 Route::resource("{$singular}_dfv", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_rls", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_ltn", "{$path}ManageJsonController")->only('index', 'store', 'create');
+                Route::resource("{$singular}_ltn", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_stt", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_tst", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_atb", "{$path}ManageJsonController")->only('index', 'store');
@@ -103,6 +104,7 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
 Route::get('test', [HomeController::class, 'index']);
 Route::resource('welcome', WelcomeController::class)->only('index', 'store');
+Route::resource('welcome-due', WelcomeDueController::class)->only('index');
 Route::get('app-menu', [AppMenuController::class, 'index']);
 Route::group([
     'prefix' => 'dashboard/workflow',

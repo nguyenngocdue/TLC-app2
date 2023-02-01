@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->dateTime('opened_date')->nullable();
             $table->dateTime('closed_date')->nullable();
-
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });

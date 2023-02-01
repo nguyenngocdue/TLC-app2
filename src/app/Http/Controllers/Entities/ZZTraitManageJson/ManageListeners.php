@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
-use App\Utils\Support\DBTable;
 use App\Utils\Support\Json\Listeners;
+use App\Utils\Support\Json\Props;
 
 class ManageListeners extends Manage_Parent
 {
@@ -13,9 +13,8 @@ class ManageListeners extends Manage_Parent
 
     protected function getColumns()
     {
-        $columns = DBTable::getColumnNames($this->type);
+        $columns = array_values(array_map(fn ($i) => $i['column_name'], Props::getAllOf($this->type)));
         $columns = array_merge([""], $columns);
-        // dump($columns);
         return [
             [
                 "dataIndex" => "action",
@@ -28,11 +27,16 @@ class ManageListeners extends Manage_Parent
             ],
             [
                 "dataIndex" => "column_name",
-                "renderer" => "dropdown",
+                "renderer" => "read-only-text",
                 "editable" => true,
-                "cbbDataSource" => $columns,
-                "properties" => ["strFn" => 'same'],
             ],
+            // [
+            //     "dataIndex" => "column_name",
+            //     "renderer" => "dropdown",
+            //     "editable" => true,
+            //     "cbbDataSource" => $columns,
+            //     "properties" => ["strFn" => 'same'],
+            // ],
             [
                 "dataIndex" => "listen_action",
                 "renderer" => "dropdown",
@@ -59,12 +63,41 @@ class ManageListeners extends Manage_Parent
         ];
     }
 
+    // protected function getDataSource()
+    // {
+    //     $dataSource = Listeners::getAllOf($this->type);
+    //     foreach (array_keys($dataSource) as $key) {
+    //         $this->attachActionButtons($dataSource, $key, ['right_by_name']);
+    //     }
+    //     return $dataSource;
+    // }
     protected function getDataSource()
     {
-        $dataSource = Listeners::getAllOf($this->type);
-        foreach (array_keys($dataSource) as $key) {
+        $allProps = Props::getAllOf($this->type);
+        $dataInJson = Listeners::getAllOf($this->type);
+        // dump($dataInJson);
+        $result = [];
+        foreach ($allProps as $prop) {
+            $name = $prop['name'];
+            if (isset($dataInJson[$name])) {
+                $newItem = $dataInJson[$name];
+            } else {
+                $newItem = ['name' => $name];
+            }
+            $newItem['column_name'] = $prop['column_name'];
+            if (isset($newItem['listen_action']) && $newItem['listen_action'] == '') {
+                $newItem['triggers'] = 'invisible_this_control';
+                $newItem['listen_to_fields'] = 'invisible_this_control';
+                $newItem['listen_to_attrs'] = 'invisible_this_control';
+            }
+            $isStatic = (isset($prop['column_type']) && $prop['column_type'] === 'static');
+            if (!$isStatic) $result[] = $newItem;
+        }
+
+
+        foreach (array_keys($result) as $key) {
             $this->attachActionButtons($dataSource, $key, ['right_by_name']);
         }
-        return $dataSource;
+        return $result;
     }
 }

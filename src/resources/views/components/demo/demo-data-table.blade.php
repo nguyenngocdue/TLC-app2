@@ -14,7 +14,7 @@
             @dump($_GET['table_01'] ?? "[]")
             <form method="GET">
                 @csrf
-                <x-renderer.table tableName='table_01' showNo={{true}} :columns="$tableEditableColumns" :dataSource="$tableDataSource" />
+                <x-renderer.table tableName='table_01' model="App\\Models\\User" showNo={{true}} :columns="$tableEditableColumns" :dataSource="$tableDataSource" />
                 <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
             </form>
         </x-renderer.card>

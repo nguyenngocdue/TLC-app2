@@ -7,17 +7,15 @@ use Illuminate\View\Component;
 class Toggle extends Component
 {
     public function __construct(
-        private $colName,
+        private $name,
         private $value,
-        private $label,
     ) {
     }
 
     public function render()
     {
-        $colName = $this->colName;
+        $name = $this->name;
         $value = $this->value;
-        $label = $this->label;
-        return view('components.controls.toggle')->with(compact('colName', 'value', 'label'));
+        return view('components.controls.toggle')->with(compact('name', 'value'));
     }
 }

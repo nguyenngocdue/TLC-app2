@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('text1')->nullable();
             $table->text('text2')->nullable();
             $table->text('text3')->nullable();
+            $table->json('text4')->nullable();
             $table->unsignedBigInteger('dropdown1')->nullable();
             $table->unsignedBigInteger('radio1')->nullable();
             $table->unsignedBigInteger('boolean1')->nullable();

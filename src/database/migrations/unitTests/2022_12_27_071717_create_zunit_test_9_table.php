@@ -17,14 +17,24 @@ return new class extends Migration
         Schema::create('zunit_test_9s', function (Blueprint $table) {
             $table->id();
             $table->text('content')->nullable();
-            $table->string('department_1')->nullable();
-            $table->string('department_2')->nullable();
-            $table->string('category_id')->nullable();
-            $table->string('sub_project_1')->nullable();
-            $table->string('user_1')->nullable();
-            $table->string('user_2')->nullable();
-            $table->string('user_3')->nullable();
-            $table->string('prod_order_1')->nullable();
+            $table->unsignedBigInteger('department_1')->nullable();
+            $table->unsignedBigInteger('user_1')->nullable();
+            $table->unsignedBigInteger('department_2')->nullable();
+            $table->unsignedBigInteger('user_2')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('user_3')->nullable();
+
+            $table->unsignedBigInteger('project_1')->nullable();
+            $table->unsignedBigInteger('sub_project_1')->nullable();
+            $table->unsignedBigInteger('prod_routing_1')->nullable();
+            $table->unsignedBigInteger('prod_order_1')->nullable();
+
+            $table->unsignedBigInteger('prod_discipline_1')->nullable();
+            $table->unsignedBigInteger('assignee_1')->nullable();
+
+            $table->unsignedBigInteger('user_4')->nullable();
+            $table->string('user_position_1')->nullable();
+
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });

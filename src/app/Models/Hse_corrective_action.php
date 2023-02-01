@@ -38,6 +38,7 @@ class Hse_corrective_action extends ModelExtended
     {
         return [
             ['dataIndex' => 'id', 'renderer' => 'id', 'type' => 'hse_corrective_actions', 'align' => 'center'],
+            ['dataIndex' => 'getHseIncidentReport', 'title' => 'Source Doc', 'renderer' => 'column', 'rendererParam' => 'name'],
             ['dataIndex' => 'name', 'title' => 'Name'],
             ['dataIndex' => 'priority_id', 'title' => 'Priority ID'],
             ['dataIndex' => 'getWorkArea', 'title' => 'Work Area', 'renderer' => 'column', 'rendererParam' => 'name'],

@@ -4,7 +4,7 @@
 @section('title', $title)
 
 @section('content')
-<x-navigation.pill/>
+<x-navigation.pill />
 <form action="{{$route}}" method="POST">
     @csrf
     <button class="hidden" title="This button is to avoid a bug when change label and press enter."></button>
@@ -13,7 +13,7 @@
 </form>
 <br />
 <hr />
-<x-form.create-new action="{{$route}}/create"/>
+{{-- <x-form.create-new action="{{$route}}/create"/> --}}
 <br />
 <br />
 <br />

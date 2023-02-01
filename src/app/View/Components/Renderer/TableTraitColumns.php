@@ -10,8 +10,9 @@ trait TableTraitColumns
     {
         $renderer = $column['renderer'] ?? "_no_renderer_";
         $dataIndex = $column['dataIndex'];
+        $columnName = $column['column_name'] ?? $dataIndex;
         $title = $column['title'] ?? Str::headline($column['dataIndex']);
-        return "<th class='{$dataIndex}_th px-4 py-3' title=\"{$dataIndex} / {$renderer}\">{$title}</th>";
+        return "<th class='{$dataIndex}_th px-4 py-3' title=\"DataIndex: $dataIndex\nColumnName: $columnName\nRenderer: $renderer\">{$title}</th>";
     }
 
     private function makeColGroup($columns)

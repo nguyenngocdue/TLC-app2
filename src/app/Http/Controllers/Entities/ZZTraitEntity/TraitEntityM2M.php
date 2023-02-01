@@ -71,6 +71,7 @@ trait TraitEntityM2M
         }
     }
 
+    //No use for CreateEdit2
     private function getManyToManyRelationship($currentElement) //checkBox
     {
         [$relationships, $eloquentParams] = $this->getRelationships();

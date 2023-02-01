@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\Controls\HasDataSource;
 
 use App\Helpers\Helper;
 use App\Utils\Support\CurrentRoute;
@@ -36,6 +36,6 @@ class DropdownMulti extends Component
 
         $dataSource = Helper::getDataSourceByManyToMany($modelPath, $colName, $type);
         if (is_null($dataSource) || gettype($dataSource) === 'string') return "<x-feedback.alert message='Not found record \"$colName\" in Fields.' type='warning' />";
-        return view('components.controls.dropdown-multi')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
+        return view('components.controls.has-data-source.dropdown-multi')->with(compact('dataSource', 'colName', 'idsChecked', 'action', 'span', 'label'));
     }
 }

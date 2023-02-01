@@ -76,7 +76,7 @@ class ManageIntermediateProps extends Manage_Parent
                 unset($visibleProp['column_name']);
                 foreach ($visibleProp as $status => $true_or_false) {
                     if ($true_or_false !== 'true') {
-                        $newItem[$status] = 'invisible';
+                        $newItem[$status] = 'invisible_this_control';
                     } else {
                         $cbbDS = [];
                         $cbbDS[] = "";

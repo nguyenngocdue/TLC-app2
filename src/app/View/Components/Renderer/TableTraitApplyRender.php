@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait TableTraitApplyRender
@@ -32,15 +33,16 @@ trait TableTraitApplyRender
     private function applyRender($renderer, $rawData, $column, $dataLine, $index)
     {
         $tableName = $this->tableName;
-        $name = isset($column['dataIndex']) ? "name='{$tableName}[{$column['dataIndex']}][$index]'" : "";
+        $columnName = $column['column_name'] ?? $column['dataIndex'];
+        $name = isset($column['dataIndex']) ? "name='{$tableName}[$columnName][$index]'" : "";
         $attributeRender = $this->getAttributeRendered($column, $dataLine);
         $propertyRender = $this->getPropertyRendered($column, $dataLine);
         $typeRender = isset($column['type']) ? "type='{$column['type']}'" : "";
         $sortByRender = isset($column['sortBy']) ? "sortBy='{$column['sortBy']}'" : "";
 
-        $needCbbDataSource = isset($column['renderer']) && in_array($column['renderer'], ['dropdown']);
+        $isDropdown = isset($column['renderer']) && in_array($column['renderer'], ['dropdown']);
         $cbbDataSource = $column['cbbDataSource'] ?? ["", "true"];
-        $cbbDataSourceRender = $needCbbDataSource ? ':cbbDataSource=\'$cbbDataSource\'' : "";
+        $cbbDataSourceRender = $isDropdown ? ':cbbDataSource=\'$cbbDataSource\'' : "";
         $dataLineRender = $dataLine ? ':dataLine=\'$dataLine\'' : "";
         $columnRender = $column ? ':column=\'$column\'' : "";
         $cellRender = ':cell=\'$cell\'';
@@ -52,16 +54,28 @@ trait TableTraitApplyRender
         $attributes .= "$sortByRender ";
         $attributes = Str::of($attributes)->replaceMatches('/ {2,}/', ' '); //<< Remove double+ space
 
-        $editable = (isset($column['editable']) && $column['editable'] == true) ? ".editable" : "";
-        $tagName = "x-renderer{$editable}.{$renderer}";
+        $isEditable = (isset($column['editable']) && $column['editable'] == true);
+        $editableStr = $isEditable ? ".editable" : "";
+        $tagName = "x-renderer{$editableStr}.{$renderer}";
 
         $output = "<$tagName $attributes>$rawData</$tagName>";
         // if ($editable) Log::info($output);
         // Log::info($output);
         // Log::info($column);
         $cell = $dataLine[$column['dataIndex']] ?? "No dataIndex for " . $column['dataIndex']; //This is for Thumbnail
+        if ($isEditable && $isDropdown) {
+            if (is_string($cell)) {
+                $instance = json_decode($cell);
+                if (!is_null($instance) && isset($instance->id)) $cell = $instance->id;
+            } else {
+                // echo "Something is not string: ";
+                // var_dump($cell);
+                //$cell is ['value', 'cbbDS'] format
+            }
+        }
+
         $params = ['column' => $column, 'dataLine' => $dataLine, 'cell' => $cell,];
-        if ($needCbbDataSource) $params['cbbDataSource'] = $cbbDataSource;
+        if ($isDropdown) $params['cbbDataSource'] = $cbbDataSource;
         $blade = Blade::render($output, $params);
         return $blade;
     }

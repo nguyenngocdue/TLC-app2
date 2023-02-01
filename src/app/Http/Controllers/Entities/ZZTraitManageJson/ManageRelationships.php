@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
+use App\Utils\Support\Json\Props;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\Relationships;
 use Illuminate\Support\Facades\App;
@@ -62,6 +63,11 @@ class ManageRelationships extends Manage_Parent
                 "renderer" => "text",
             ],
             [
+                "dataIndex" => "control",
+                "editable" => true,
+                "renderer" => "read-only-text",
+            ],
+            [
                 "dataIndex" => "filter_columns",
                 "editable" => true,
                 "renderer" => "text",
@@ -74,7 +80,7 @@ class ManageRelationships extends Manage_Parent
             [
                 "dataIndex" => "radio_checkbox_colspan",
                 "editable" => true,
-                "renderer" => "text",
+                "renderer" => "number",
             ],
         ];
     }
@@ -86,14 +92,19 @@ class ManageRelationships extends Manage_Parent
         $oracyParams = $model->oracyParams;
         $columnParams = $eloquentParams + $oracyParams;
 
+        $allProps = Props::getAllOf($this->type);
+
         $result = [];
         foreach ($columnParams as $elqName => $elqValue) {
             $rowDescription = "$elqName => " . join(" | ", $elqValue);
+            $control_name = Relationships::getColumnName("_" . $elqName,  $elqValue[0], $columnParams);
+
             $result["_$elqName"] = [
                 "name" => "_$elqName",
                 "eloquent" => $elqName,
                 "relationship" => $elqValue[0],
-                'control_name' => Relationships::getColumnName("_" . $elqName,  $elqValue[0], $columnParams),
+                'control_name' => $control_name,
+                'control' => $allProps["_" . $control_name]['control'],
                 "rowDescription" => $rowDescription,
             ];
         }
@@ -107,12 +118,35 @@ class ManageRelationships extends Manage_Parent
         $result = $this->makeBlankDefaultObject($this->type);
         $this->renewColumn($json, $result, 'relationship');
         $this->renewColumn($json, $result, 'control_name');
+        $this->renewColumn($json, $result, 'control');
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
 
         foreach ($json as $key => $columns) {
             $result[$key]["name"] = $key;
             foreach ($columns as $column => $value) {
                 $result[$key][$column] = $value;
+            }
+        }
+
+        foreach ($json as $key => $columns) {
+            $result[$key]["name"] = $key;
+            foreach ($columns as $column => $value) {
+                if ($column === 'radio_checkbox_colspan') {
+                    if (isset($json[$key]['control'])) {
+                        $control = ($json[$key]['control']);
+                        if (!in_array($control, ['radio', 'checkbox'])) {
+                            $result[$key][$column] = 'invisible_this_control';
+                        }
+                    }
+                }
+                if (in_array($column, ['filter_columns', 'filter_values'])) {
+                    if (isset($json[$key]['control'])) {
+                        $control = ($json[$key]['control']);
+                        if (!in_array($control, ['radio', 'checkbox', 'dropdown', 'dropdown_multi'])) {
+                            $result[$key][$column] = 'invisible_this_control';
+                        }
+                    }
+                }
             }
         }
 

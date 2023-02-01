@@ -7,11 +7,11 @@ use App\Helpers\Helper;
 
 trait TraitEntityStatus
 {
-    private function setStatus($valueInput, $data = null)
+    private function setStatus($theRow, $data = null)
     {
-        if (!isset($valueInput['status'])) return false;
-        $statusCurrent = $valueInput['status'];
-        $item = Helper::getItemModel($this->type, $valueInput['id'] ?? $data->id);
+        if (!isset($theRow['status'])) return false;
+        $statusCurrent = $theRow['status'];
+        $item = Helper::getItemModel($this->type, $theRow['id'] ?? $data->id);
         if ($statusCurrent === $item->status) return false;
         return $item->transitionTo($statusCurrent);
     }
