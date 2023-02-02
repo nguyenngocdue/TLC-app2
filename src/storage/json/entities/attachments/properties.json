@@ -1,0 +1,16 @@
+{
+    "1": {
+        "name": "1",
+        "field_name": "attachment_1",
+        "max_file_size": "11",
+        "max_file_count": "2",
+        "allowed_file_types": "all_supported"
+    },
+    "2": {
+        "name": "2",
+        "field_name": "attachment_2",
+        "max_file_size": "3",
+        "max_file_count": "4",
+        "allowed_file_types": "only_images"
+    }
+}

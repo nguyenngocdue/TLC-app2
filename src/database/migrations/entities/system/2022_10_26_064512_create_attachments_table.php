@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('url_folder');
             $table->string('filename');
             $table->string('extension');
+            $table->string('mine_type')->nullable();
             $table->unsignedBigInteger('owner_id');
             $table->string('object_type')->nullable();
             $table->unsignedBigInteger('object_id')->nullable();

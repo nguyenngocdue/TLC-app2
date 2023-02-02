@@ -1,7 +1,7 @@
 {{-- @dump($attachments) --}}
 <div class="flex flex-col container mx-auto ">
     @if(sizeof($attachments) ==0)
-        <x-renderer.emptiness p="2" class="border"/>
+        <x-renderer.emptiness p="2" class="border" message="{{$message}}"/>
     @else
         <div class=" grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-4 mb-1 p-1 hidden1">
             @foreach($attachments as $attachment)

@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 trait TraitEntityCRUDStoreUpdate2
 {
-	private $debugForStoreUpdate = false;
+	private $debugForStoreUpdate = !false;
 
 	private function dump1($title, $content)
 	{
@@ -25,15 +25,18 @@ trait TraitEntityCRUDStoreUpdate2
 			'eloquent_prop' => [],
 		];
 		foreach ($this->superProps['props'] as $prop) {
-			switch ($prop['column_type']) {
-				case 'oracy_prop':
-				case 'eloquent_prop':
-					$column_type = $prop['column_type'];
-					break;
-				default:
-					$column_type = 'field';
-					break;
-			}
+			if ($prop['control'] === 'attachment') {
+				$column_type = 'attachment';
+			} else
+				switch ($prop['column_type']) {
+					case 'oracy_prop':
+					case 'eloquent_prop':
+						$column_type = $prop['column_type'];
+						break;
+					default:
+						$column_type = 'field';
+						break;
+				}
 			$result[$column_type][] = $prop['name'];
 		}
 		$this->dump1("getProps1", $result);
@@ -100,8 +103,6 @@ trait TraitEntityCRUDStoreUpdate2
 
 	private function handleFields(Request $request, $action)
 	{
-		$request->validate($this->getValidationRules());
-
 		$dataSource = $request->except(['_token', '_method', 'status', 'created_at', 'updated_at']);
 		if ($action === 'store') $dataSource['id'] = null;
 		$dataSource = $this->applyFormula($dataSource);
@@ -112,9 +113,18 @@ trait TraitEntityCRUDStoreUpdate2
 		return $dataSource;
 	}
 
+	private function uploadAttachmentWithoutParentId(Request $request)
+	{
+		$ids = $this->uploadService2->store($request);
+		dump($ids);
+	}
+
 	public function store(Request $request)
 	{
 		$this->dump1("Request", $request->input());
+		//This has to run before form validation
+		$this->uploadAttachmentWithoutParentId($request);
+		$request->validate($this->getValidationRules());
 		$props = $this->getProps1();
 		$fields = $this->handleFields($request, __FUNCTION__);
 
@@ -130,6 +140,9 @@ trait TraitEntityCRUDStoreUpdate2
 	public function update(Request $request, $id)
 	{
 		$this->dump1("Request", $request->input());
+		//This has to run before form validation
+		$this->uploadAttachmentWithoutParentId($request);
+		$request->validate($this->getValidationRules());
 		$props = $this->getProps1();
 		$fields = $this->handleFields($request, __FUNCTION__);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Models\Field;
 use App\Utils\Support\Json\Properties;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class ManageProperties extends Manage_Parent
@@ -15,6 +16,11 @@ class ManageProperties extends Manage_Parent
     protected function getPropertyColumns()
     {
         $result['attachment'] = [
+            [
+                'dataIndex' => 'field_name',
+                'editable' => true,
+                'renderer' => 'read-only-text',
+            ],
             [
                 'dataIndex' => 'max_file_size',
                 'renderer' => 'number',
@@ -87,7 +93,7 @@ class ManageProperties extends Manage_Parent
             ],
             [
                 "dataIndex" => "name",
-                "title" => "Field Name",
+                "title" => "Field ID",
                 "renderer" => "dropdown",
                 "editable" => true,
                 "cbbDataSource" => $columns,
@@ -102,9 +108,14 @@ class ManageProperties extends Manage_Parent
     protected function getDataSource()
     {
         $dataSource = Properties::getAllOf($this->type);
+        $fields = Field::all();
+        $index = Arr::keyBy($fields, 'id');
+        foreach ($dataSource as &$row) {
+            $row['field_name'] = $index[$row['name']]->name;
+        }
         foreach (array_keys($dataSource) as $key) {
             $this->attachActionButtons($dataSource, $key, ['right_by_name']);
         }
-        return $dataSource;
+        return array_values($dataSource);
     }
 }
