@@ -1,4 +1,4 @@
-li@extends('layouts.app')
+@extends('layouts.app')
 
 @section('topTitle', $topTitle)
 @section('title', $title)
