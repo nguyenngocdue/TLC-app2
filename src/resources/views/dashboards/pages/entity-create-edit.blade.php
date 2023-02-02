@@ -9,7 +9,6 @@
 $editType = Str::plural($type);
 $labelValidation = "";
 $id = $action === "edit" ? $values->id : "";
-
 @endphp
 
 {{-- HERE {{mb_strlen(serialize((array)$listenerDataSource), '8bit');}} bytes --}}
@@ -143,20 +142,25 @@ $id = $action === "edit" ? $values->id : "";
 
                         @case ('dropdown')
                         <x-controls.has-data-source.dropdown type={{$type}} name={{$columnName}} selected={{$value}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
-                        {{-- <x-controls.has-data-source.dropdown type={{$type}} name={{$columnName}} selected={{$value}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} /> --}}
+                        {{-- <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}}/> --}}
                         @break
                         @case ('radio')
                         <x-controls.has-data-source.radio type={{$type}} name={{$columnName}} selected={{$value}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
+                        {{-- <x-controls.has-data-source.radio2 type={{$type}} name={{$columnName}} selected={{$value}}  /> --}}
                         @break
                         @case ('dropdown_multi')
                         <x-controls.has-data-source.dropdown type={{$type}} name={{$columnName}} selected={{$value}} multiple={{true}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
+                        {{-- <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} multiple={{true}}  /> --}}
                         @break
                         @case('checkbox')
                         <x-controls.has-data-source.checkbox type={{$type}} name={{$columnName}} selected={{$value}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
+                        {{-- <x-controls.has-data-source.checkbox2 type={{$type}} name={{$columnName}} selected={{$value}} /> --}}
                         @break
 
                         @case('attachment')
                         <x-controls.upload-files id={{$id}} colName={{$columnName}} label={{$label}} type={{$type}} />
+                        {{-- <x-renderer.attachment2 name={{$columnName}} value={{$value}} /> --}}
+
                         @break
                         @case('comment')
                         <x-controls.comment-group id={{$id}} type={{$type}} colName={{$columnName}} label={{$label}} colSpan={{$col_span}} />

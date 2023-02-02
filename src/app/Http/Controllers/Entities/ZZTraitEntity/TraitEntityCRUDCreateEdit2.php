@@ -46,7 +46,7 @@ trait TraitEntityCRUDCreateEdit2
 		$original = $this->data::findOrFail($id);
 		$props = $this->getCreateEditProps();
 
-		$values = $this->loadValueForCheckboxAndDropdownMulti($original, $props);
+		$values = $this->loadValueOfOracyPropsAndAttachments($original, $props);
 
 		$defaultValues = DefaultValues::getAllOf($this->type);
 		$type = Str::plural($this->type);
@@ -59,6 +59,7 @@ trait TraitEntityCRUDCreateEdit2
 		$listeners = $this->getListeners();
 		$filters = $this->getFilters();
 		return view('dashboards.pages.entity-create-edit')->with(compact(
+			'original',
 			'props',
 			'defaultValues',
 			'values',
@@ -80,15 +81,17 @@ trait TraitEntityCRUDCreateEdit2
 		return $result;
 	}
 
-	private function loadValueForCheckboxAndDropdownMulti($original, $props)
+	private function loadValueOfOracyPropsAndAttachments($original, $props)
 	{
 		$values = $original->getOriginal();
 		foreach ($props as $prop) {
+			$name = $prop['column_name'];
 			if ($prop['control'] === 'checkbox' || $prop['control'] === 'dropdown_multi') {
-				// dump($prop);
-				$name = $prop['column_name'];
 				$field_name = substr($name, 0, strlen($name) - 2); //Remove parenthesis()
 				$values[$name] = json_encode($original->getCheckedByField($field_name)->pluck('id')->toArray());
+			}
+			if ($prop['control'] === 'attachment') {
+				$values[$name] = $original->{$name};
 			}
 		}
 		return (object) $values;

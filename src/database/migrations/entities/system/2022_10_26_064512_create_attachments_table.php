@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('filename');
             $table->string('extension');
             $table->unsignedBigInteger('owner_id');
-            $table->unsignedBigInteger('object_id')->nullable();
             $table->string('object_type')->nullable();
+            $table->unsignedBigInteger('object_id')->nullable();
             $table->unsignedBigInteger('category');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
