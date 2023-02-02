@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\DefaultValues;
-use App\Utils\Support\Json\Listeners;
 use App\Utils\Support\Json\Props;
 use Illuminate\Support\Str;
 
@@ -25,6 +24,7 @@ trait TraitEntityCRUDCreateEdit2
 		$topTitle = CurrentRoute::getTitleOf($this->type);
 		$listenerDataSource = $this->renderListenDataSource();
 		$listeners = $this->getListeners();
+		$filters = $this->getFilters();
 		return view('dashboards.pages.entity-create-edit')->with(compact(
 			'props',
 			'defaultValues',
@@ -36,13 +36,14 @@ trait TraitEntityCRUDCreateEdit2
 			'topTitle',
 			'listenerDataSource',
 			'listeners',
+			'filters',
 		));
 	}
 
 	public function edit($id)
 	{
 		$action = __FUNCTION__;
-		$original = $this->data::find($id);
+		$original = $this->data::findOrFail($id);
 		$props = $this->getCreateEditProps();
 
 		$values = $this->loadValueForCheckboxAndDropdownMulti($original, $props);
@@ -56,6 +57,7 @@ trait TraitEntityCRUDCreateEdit2
 		$topTitle = CurrentRoute::getTitleOf($this->type);
 		$listenerDataSource = $this->renderListenDataSource();
 		$listeners = $this->getListeners();
+		$filters = $this->getFilters();
 		return view('dashboards.pages.entity-create-edit')->with(compact(
 			'props',
 			'defaultValues',
@@ -67,6 +69,7 @@ trait TraitEntityCRUDCreateEdit2
 			'topTitle',
 			'listenerDataSource',
 			'listeners',
+			'filters',
 		));
 	}
 

@@ -38,10 +38,9 @@ trait HasDataSource
             $filter_columns = $sp['props'][$name]['relationships']['filter_columns'];
             $filter_values = $sp['props'][$name]['relationships']['filter_values'];
 
-            $filter_columns = $filter_columns ? explode(",", $filter_columns) : [];
-            $filter_values = $filter_values ? explode(",", $filter_values) : [];
             // dump($sp['props'][$name]['relationships']['filter_columns']);
-            // dump(array_values($filter_columns));
+            // dump(($filter_columns));
+            // dump(($filter_values));
             for ($i = 0; $i < sizeof($filter_columns); $i++) {
                 // dump($filter_columns[$i] . " - " . $filter_values[$i]);
                 $dataSource = $dataSource->where($filter_columns[$i], $filter_values[$i]);

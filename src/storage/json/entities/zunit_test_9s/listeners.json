@@ -13,7 +13,7 @@
         "listen_action": "assign",
         "triggers": "prod_discipline_1",
         "listen_to_fields": "prod_discipline_1",
-        "listen_to_attrs": "def_monitors"
+        "listen_to_attrs": "getDefMonitors()"
     },
     "_user_1": {
         "name": "_user_1",

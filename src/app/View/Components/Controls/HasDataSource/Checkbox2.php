@@ -12,7 +12,8 @@ class Checkbox2 extends Component
         private $name,
         private $selected,
     ) {
-        //
+        $old = old($name);
+        if (!is_null($old)) $this->selected = "[" . join(",", $old) . "]";
     }
 
     public function render()

@@ -113,7 +113,7 @@ return new class extends Migration
         });
         Schema::table('qaqc_mirs', function (Blueprint $table) {
             $table->foreign('project_id')->references('id')->on('projects');
-            $table->foreign('sub_project_id')->references('id')->on('sub_project s');
+            $table->foreign('sub_project_id')->references('id')->on('sub_projects');
             $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
             $table->foreign('priority_id')->references('id')->on('priorities');
             $table->foreign('assignee_to')->references('id')->on('users');
