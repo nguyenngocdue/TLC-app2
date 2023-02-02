@@ -28,6 +28,7 @@ class ComponentDemo
             'gridDataSource' => $this->getGridData($tableDataSource),
             'dataComment' => $this->getCommendData(),
             'attachmentData' => $this->getAttachmentData(),
+            'attachmentData2' => $this->getAttachmentData2(),
             'tagColumns' => $this->getTagColumns(),
             'tagDataSource' => $this->getTagDataSource(),
             'tabData1' => $this->getTab1(),

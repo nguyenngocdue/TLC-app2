@@ -2443,6 +2443,10 @@ video {
 .text-\[25px\] {
   font-size: 25px;
 }
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
 .font-semibold {
   font-weight: 600;
 }

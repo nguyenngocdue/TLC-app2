@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\WelcomeDueController;
+use App\Http\Controllers\WelcomeFortuneController;
 use App\Http\Controllers\Workflow\ManageAppsController;
 use App\Http\Controllers\Workflow\ManageStatusesController;
 use App\Http\Controllers\Workflow\ManageWidgetsController;
@@ -105,6 +106,7 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 Route::get('test', [HomeController::class, 'index']);
 Route::resource('welcome', WelcomeController::class)->only('index', 'store');
 Route::resource('welcome-due', WelcomeDueController::class)->only('index');
+Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index');
 Route::get('app-menu', [AppMenuController::class, 'index']);
 Route::group([
     'prefix' => 'dashboard/workflow',

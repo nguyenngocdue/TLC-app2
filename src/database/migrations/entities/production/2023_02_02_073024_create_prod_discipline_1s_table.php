@@ -14,21 +14,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attachments', function (Blueprint $table) {
+        Schema::create('prod_discipline_1s', function (Blueprint $table) {
             $table->id();
-            $table->string('url_thumbnail');
-            $table->string('url_media');
-            $table->string('url_folder');
-            $table->string('filename');
-            $table->string('extension');
-            $table->unsignedBigInteger('owner_id');
-            $table->string('object_type')->nullable();
-            $table->unsignedBigInteger('object_id')->nullable();
-            $table->unsignedBigInteger('category');
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->string('slug')->unique();
+            $table->unsignedBigInteger('prod_discipline_id')->nullable();
+            $table->unsignedBigInteger('def_assignee')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attachments');
+        Schema::dropIfExists('prod_discipline_1s');
     }
 };

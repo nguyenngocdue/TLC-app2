@@ -4,6 +4,83 @@ namespace App\Http\Controllers\ComponentDemo;
 
 trait TraitAttachmentData
 {
+    function getAttachmentData2()
+    {
+        $result = [
+            "attachment_1" => [
+                [
+                    "id" => 1,
+                    "url_thumbnail" => "avatars/01087-150x150.png",
+                    "url_media" => "avatars/01087.png",
+                    "filename" => 'file_name_123.xyz',
+                    "category" => 1,
+                ],
+                [
+                    "id" => 2,
+                    "url_thumbnail" => "avatars/00080-150x150.jpg",
+                    "url_media" => "avatars/00080.jpg",
+                    "filename" => 'file_name_123.xyz',
+                    "category" => 1,
+                ],
+                [
+                    "id" => 3,
+                    "url_thumbnail" => "avatars/01031-150x150.png",
+                    "url_media" => "avatars/01031.png",
+                    "filename" => 'file_name_123.xyz',
+                    "category" => 1,
+                ],
+            ],
+            "attachment_2" => [
+                [
+                    "id" => 1,
+                    "url_thumbnail" => "avatars/01034-150x150.jpg",
+                    "url_media" => "avatars/01034.jpg",
+                    "filename" => 'file_name_123.xyz',
+                    "category" => 2,
+                ],
+                [
+                    "id" => 2,
+                    "url_thumbnail" => "avatars/01163-150x150.jpg",
+                    "url_media" => "avatars/01163.jpg",
+                    "filename" => 'file_name_123.xyz',
+                    "category" => 2,
+                ],
+                [
+                    "id" => 3,
+                    "url_thumbnail" => "avatars/01340-150x150.jpeg",
+                    "url_media" => "avatars/01340.jpeg",
+                    "filename" => 'file_name_123.xyz',
+                    "category" => 2,
+                ],
+            ],
+            "attachment_3" => [
+                [
+                    "id" => 1,
+                    "url_thumbnail" => "avatars/01491-150x150.png",
+                    "url_media" => "avatars/01491.png",
+                    "filename" => 'file_name_123.xyz',
+                    "category" => 3,
+                ],
+                [
+                    "id" => 2,
+                    "url_thumbnail" => "avatars/01021-150x150.jpg",
+                    "url_media" => "avatars/01021.jpg",
+                    "filename" => 'file_name_123.xyz',
+                    "category" => 3,
+                ],
+                [
+                    "id" => 3,
+                    "url_thumbnail" => "avatars/00041-150x150.png",
+                    "url_media" => "avatars/00041.png",
+                    "filename" => 'file_name_123.xyz',
+                    "category" => 3,
+                ],
+            ],
+        ];
+
+        return $result;
+    }
+
     function getAttachmentData()
     {
         $attachmentData = [
