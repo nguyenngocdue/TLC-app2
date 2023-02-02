@@ -38,10 +38,18 @@ function data() {
         },
         isProfileMenuOpen: false,
         toggleProfileMenu() {
+            print(123)
             this.isProfileMenuOpen = !this.isProfileMenuOpen
         },
         closeProfileMenu() {
             this.isProfileMenuOpen = false
+        },
+        isSearchMenuOpen: false,
+        toggleSearchMenu() {
+            this.isSearchMenuOpen = !this.isSearchMenuOpen
+        },
+        closeSearchMenu() {
+            this.isSearchMenuOpen = false
         },
         // isPagesMenuOpen: false,
         // togglePagesMenu() {

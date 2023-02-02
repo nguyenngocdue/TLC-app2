@@ -25,6 +25,7 @@
     <script src="{{ asset('js/tlc2.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2.js') }}"></script>
+    <script src="{{ asset('js/components/SearchModal.js') }}"></script>
     <script src="{{ asset('js/applayout.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
@@ -34,6 +35,7 @@
     <div class=" flex bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         <x-homepage.sidebar2 />
         <div class="flex flex-col flex-1 w-full bg-gray-100">
+            
             <x-homepage.navbar2 />
             <main class="h-full overflow-y-auto">
                 <div class="container1 mx-auto grid px-6">

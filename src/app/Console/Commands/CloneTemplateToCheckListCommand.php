@@ -8,6 +8,7 @@ use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
 use App\Console\Commands\Traits\CloneRunTrait;
 use App\Models\Qaqc_insp_chklst_run;
+use App\View\Components\Formula\All_SlugifyByName;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -51,7 +52,7 @@ class CloneTemplateToCheckListCommand extends Command
                     Qaqc_insp_chklst_sht::create([
                         'name' => $qaqcInspTmplSheet->name,
                         'description' => $qaqcInspTmplSheet->description,
-                        'slug' => $qaqcInspTmplSheet->slug,
+                        'slug' => (new All_SlugifyByName())($qaqcInspTmplSheet->slug, '', ''),
                         'qaqc_insp_chklst_id' => $idQaqcInspChklst,
                         'qaqc_insp_tmpl_sht_id' => $qaqcInspTmplSheet->id
                     ]);

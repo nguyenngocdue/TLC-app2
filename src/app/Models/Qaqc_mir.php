@@ -7,7 +7,8 @@ use App\BigThink\ModelExtended;
 class Qaqc_mir extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "slug", "project_id", "sub_project_id",
-     "prod_discipline_id", "priority_id", "due_date", "assignee"];
+     "prod_discipline_id", "priority_id", "due_date", "assignee_to"];
+     protected $primaryKey = 'id';
     protected $table = "qaqc_mirs";
 
     public $eloquentParams = [
@@ -31,6 +32,11 @@ class Qaqc_mir extends ModelExtended
         "attachment_mir_technical_data_sheet" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_mir_material_inspection_photo" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_mir_pdf_attached" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parentable', 'parent_type', 'parent_id'],
+    ];
+
+    public $oracyParams = [
+        "getDefMonitors()" => ["getCheckedByField", User::class],
     ];
 
     public function getProject()
@@ -146,5 +152,15 @@ class Qaqc_mir extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function getDefMonitors()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    public function getNcrs(){
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2],$p[3],$p[4]);
     }
 }

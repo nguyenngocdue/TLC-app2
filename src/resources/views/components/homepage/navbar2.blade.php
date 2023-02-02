@@ -12,6 +12,9 @@
                 <x-homepage.theme-toggle></x-homepage.theme-toggle>
             </li> --}}
             <li class="flex">
+                <x-homepage.search-modal/>
+            </li>
+            <li class="relative">
                 <x-homepage.setting-gear></x-homepage.setting-gear>
             </li>
             <li class="relative">
