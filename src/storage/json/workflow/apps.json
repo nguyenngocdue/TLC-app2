@@ -216,6 +216,20 @@
         "sub_package": "qaqc",
         "title": "QAQC MIRs"
     },
+    "qaqc_ncr": {
+        "name": "qaqc_ncr",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "qaqc",
+        "title": "QAQC NCRs"
+    },
+    "qaqc_wir": {
+        "name": "qaqc_wir",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "qaqc",
+        "title": "QAQC WIRs"
+    },
     "sub_project": {
         "name": "sub_project",
         "hidden": null,

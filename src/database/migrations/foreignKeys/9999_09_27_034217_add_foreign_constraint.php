@@ -58,6 +58,13 @@ return new class extends Migration
         Schema::table('prod_disciplines', function (Blueprint $table) {
             $table->foreign('def_assignee')->references('id')->on('users');
         });
+        Schema::table('prod_discipline_1s', function (Blueprint $table) {
+            $table->foreign('def_assignee')->references('id')->on('users');
+            $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
+        });
+        Schema::table('prod_discipline_2s', function (Blueprint $table) {
+            $table->foreign('prod_discipline_1_id')->references('id')->on('prod_discipline_1s');
+        });
         Schema::table('prod_sequences', function (Blueprint $table) {
             $table->foreign('prod_order_id')->references('id')->on('prod_orders');
             $table->foreign('prod_routing_link_id')->references('id')->on('prod_routing_links');
@@ -118,6 +125,28 @@ return new class extends Migration
             $table->foreign('priority_id')->references('id')->on('priorities');
             $table->foreign('assignee_to')->references('id')->on('users');
             $table->foreign('inspected_by')->references('id')->on('users');
+        });
+        Schema::table('qaqc_wirs', function (Blueprint $table) {
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('sub_project_id')->references('id')->on('sub_projects');
+            $table->foreign('prod_routing_id')->references('id')->on('prod_routings');
+            $table->foreign('prod_order_id')->references('id')->on('prod_orders');
+            $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
+            $table->foreign('wir_description_id')->references('id')->on('wir_descriptions');
+            $table->foreign('priority_id')->references('id')->on('priorities');
+            $table->foreign('assignee_to')->references('id')->on('users');
+        });
+        Schema::table('qaqc_ncrs', function (Blueprint $table) {
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('sub_project_id')->references('id')->on('sub_projects');
+            $table->foreign('prod_routing_id')->references('id')->on('prod_routings');
+            $table->foreign('prod_order_id')->references('id')->on('prod_orders');
+            $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
+            $table->foreign('prod_discipline_1_id')->references('id')->on('prod_discipline_1s');
+            $table->foreign('prod_discipline_2_id')->references('id')->on('prod_discipline_2s');
+            $table->foreign('user_team_id')->references('id')->on('user_teams');
+            $table->foreign('priority_id')->references('id')->on('priorities');
+            $table->foreign('assignee_to')->references('id')->on('users');
         });
     }
 
