@@ -128,5 +128,18 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
+    },
+    "_getDefMonitors()": {
+        "name": "_getDefMonitors()",
+        "relationship": "getCheckedByField",
+        "control_name": "getDefMonitors()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }

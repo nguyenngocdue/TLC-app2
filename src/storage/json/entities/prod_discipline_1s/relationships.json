@@ -1,8 +1,8 @@
 {
-    "_routingLink": {
-        "name": "_routingLink",
+    "_getDiscipline2": {
+        "name": "_getDiscipline2",
         "relationship": "hasMany",
-        "control_name": "routingLink",
+        "control_name": "getDiscipline2",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
@@ -12,15 +12,15 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getDiscipline1": {
-        "name": "_getDiscipline1",
-        "relationship": "hasMany",
-        "control_name": "getDiscipline1",
-        "renderer_view_all": "count",
-        "renderer_view_all_param": "",
-        "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
-        "control": "relationship_renderer",
+    "_getDiscipline": {
+        "name": "_getDiscipline",
+        "relationship": "belongsTo",
+        "control_name": "prod_discipline_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

@@ -74,49 +74,63 @@
         "hidden": null,
         "package": "system",
         "sub_package": "production",
-        "title": "Prod Disciplines"
+        "title": "PROD Disciplines"
+    },
+    "prod_discipline_1": {
+        "name": "prod_discipline_1",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "production",
+        "title": "PROD Discipline 1s"
+    },
+    "prod_discipline_2": {
+        "name": "prod_discipline_2",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "production",
+        "title": "PROD Discipline 2s"
     },
     "prod_order": {
         "name": "prod_order",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Prod Orders"
+        "title": "PROD Orders"
     },
     "prod_routing": {
         "name": "prod_routing",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Prod Routings"
+        "title": "PROD Routings"
     },
     "prod_routing_detail": {
         "name": "prod_routing_detail",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Prod Routing Details"
+        "title": "PROD Routing Details"
     },
     "prod_routing_link": {
         "name": "prod_routing_link",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Prod Routing Links"
+        "title": "PROD Routing Links"
     },
     "prod_run": {
         "name": "prod_run",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Prod Runs"
+        "title": "PROD Runs"
     },
     "prod_sequence": {
         "name": "prod_sequence",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Prod Sequences"
+        "title": "PROD Sequences"
     },
     "project": {
         "name": "project",

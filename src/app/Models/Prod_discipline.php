@@ -13,6 +13,7 @@ class Prod_discipline extends ModelExtended
 
     public $eloquentParams = [
         "routingLink" => ['hasMany', Prod_routing_link::class, 'prod_discipline_id'],
+        "getDiscipline1" => ['hasMany', Prod_discipline_1::class, 'prod_discipline_id'],
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
     ];
 
@@ -21,6 +22,11 @@ class Prod_discipline extends ModelExtended
     ];
 
     public function routingLink()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getDiscipline1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
