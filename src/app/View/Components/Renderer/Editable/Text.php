@@ -18,6 +18,11 @@ class Text extends Component
         private $cell = null,
         // private $width = null,
     ) {
+        // $this->cell = "hello \"a\"";
+        // dump($this->cell);
+        if (str_starts_with($this->cell, "No dataIndex for ")) {
+            $this->cell = "";
+        }
     }
 
     /**
@@ -32,6 +37,7 @@ class Text extends Component
             'placeholder' => $this->placeholder,
             'name' => $this->name,
             'type' => 'text',
+            'cell' => $this->cell,
             // 'width' => $this->width,
         ]);
     }

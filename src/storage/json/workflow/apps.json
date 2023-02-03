@@ -7,7 +7,7 @@
         "title": "Attachments",
         "nickname": "abc",
         "status": "beta",
-        "icon": "fa-solid fa-paperclip"
+        "icon": "<i class=\"fa-regular fa-paperclip\"><\/i>"
     },
     "comment": {
         "name": "comment",
@@ -17,7 +17,7 @@
         "title": "Comments",
         "nickname": "cm",
         "status": "beta",
-        "icon": "fa-regular fa-comment"
+        "icon": "<i class=\"fa-duotone fa-comments\"><\/i>"
     },
     "control_type": {
         "name": "control_type",
@@ -37,7 +37,7 @@
         "title": "Departments",
         "nickname": "dp",
         "status": "beta",
-        "icon": "fa-regular fa-sitemap"
+        "icon": "<i class=\"fa-regular fa-sitemap\"><\/i>"
     },
     "erp_routing_link": {
         "name": "erp_routing_link",
