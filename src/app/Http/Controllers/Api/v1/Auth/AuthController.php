@@ -73,6 +73,7 @@ class AuthController extends Controller
                     'message' => 'Login failed'
                 ], 401);
             }
+
             GetSetCookie::setCookieForever('time_zone', $user->time_zone);
             $token = $user->createToken('tlc_token')->plainTextToken;
 
@@ -106,6 +107,13 @@ class AuthController extends Controller
         return response()->json([
             'success' => true,
             'user' => $request->user()
+        ], 200);
+    }
+    public function verify(Request $request)
+    {
+        return response()->json([
+            'success' => true,
+            'verify' => $request->user() ? true : false,
         ], 200);
     }
     public function email()

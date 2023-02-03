@@ -111,6 +111,7 @@ class SubmitFormAndUploadFileController extends Controller
                             'url_folder' => $path,
                             'filename' => basename($pathImage),
                             'extension' => $imageFileType,
+                            'mime_type' => $file->getMimeType(),
                             'category' => $nameIdFields[$key],
                             'owner_id' =>  (int)Auth::user()->id,
                             'object_id' => (int)$modelId,

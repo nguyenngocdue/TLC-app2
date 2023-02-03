@@ -63,8 +63,8 @@ function data() {
         //     console.log(type, this.openingMenu)
         // },
         // Modal
-        // isModalOpen: false,
         trapCleanup: null,
+        // isModalOpen: false,
         // openModal() {
         //     this.isModalOpen = true
         //     this.trapCleanup = focusTrap(document.querySelector('#modal'))

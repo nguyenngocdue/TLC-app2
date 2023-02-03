@@ -32,6 +32,7 @@ Route::group([
     ], function () {
         Route::get('logout', [App\Http\Controllers\Api\v1\Auth\AuthController::class, 'logout']);
         Route::get('user', [App\Http\Controllers\Api\v1\Auth\AuthController::class, 'user']);
+        Route::get('verify', [App\Http\Controllers\Api\v1\Auth\AuthController::class, 'verify']);
     });
 });
 Route::group([

@@ -8,11 +8,11 @@
             <x-homepage.search-input></x-homepage.search-input>
         </div> --}}
         <ul class="flex items-center flex-shrink-0 space-x-6">
-            {{-- <li class="flex">
-                <x-homepage.theme-toggle></x-homepage.theme-toggle>
-            </li> --}}
             <li class="flex">
                 <x-homepage.search-modal/>
+            </li>
+            <li class="flex">
+                <x-homepage.theme-toggle></x-homepage.theme-toggle>
             </li>
             <li class="relative">
                 <x-homepage.setting-gear></x-homepage.setting-gear>
