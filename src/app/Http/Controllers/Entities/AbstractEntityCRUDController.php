@@ -21,10 +21,10 @@ use App\Utils\Support\Json\SuperProps;
 abstract class AbstractEntityCRUDController extends Controller
 {
 	use TraitEntityCRUDShow;
-	use TraitEntityCRUDCreateEdit;
-	// use TraitEntityCRUDCreateEdit2;
-	use TraitEntityCRUDStoreUpdate;
-	// use TraitEntityCRUDStoreUpdate2;
+	// use TraitEntityCRUDCreateEdit;
+	use TraitEntityCRUDCreateEdit2;
+	// use TraitEntityCRUDStoreUpdate;
+	use TraitEntityCRUDStoreUpdate2;
 
 	use TraitEntityM2M;
 	use TraitEntityAttachment;

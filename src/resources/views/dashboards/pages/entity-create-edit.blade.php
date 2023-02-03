@@ -140,25 +140,25 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case ('dropdown')
-                        <x-controls.has-data-source.dropdown type={{$type}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
-                        {{-- <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}}/> --}}
+                        {{-- <x-controls.has-data-source.dropdown type={{$type}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} /> --}}
+                        <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}}/>
                         @break
                         @case ('radio')
-                        <x-controls.has-data-source.radio type={{$type}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
-                        {{-- <x-controls.has-data-source.radio2 type={{$type}} name={{$columnName}} selected={{$value}}  /> --}}
+                        {{-- <x-controls.has-data-source.radio type={{$type}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} /> --}}
+                        <x-controls.has-data-source.radio2 type={{$type}} name={{$columnName}} selected={{$value}}  />
                         @break
                         @case ('dropdown_multi')
-                        <x-controls.has-data-source.dropdown type={{$type}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
-                        {{-- <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} multiple={{true}}  /> --}}
+                        {{-- <x-controls.has-data-source.dropdown type={{$type}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} /> --}}
+                        <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} multiple={{true}}  />
                         @break
                         @case('checkbox')
-                        <x-controls.has-data-source.checkbox type={{$type}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
-                        {{-- <x-controls.has-data-source.checkbox2 type={{$type}} name={{$columnName}} selected={{$value}} /> --}}
+                        {{-- <x-controls.has-data-source.checkbox type={{$type}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} /> --}}
+                        <x-controls.has-data-source.checkbox2 type={{$type}} name={{$columnName}} selected={{$value}} />
                         @break
 
                         @case('attachment')
-                        <x-controls.upload-files id={{$id}} colName={{$columnName}} label={{$label}} type={{$type}} />
-                        {{-- <x-renderer.attachment2 name={{$columnName}} value={{$value}} /> --}}
+                        {{-- <x-controls.upload-files id={{$id}} colName={{$columnName}} label={{$label}} type={{$type}} /> --}}
+                        <x-renderer.attachment2 name={{$columnName}} value={{$value}} />
 
                         @break
                         @case('comment')
