@@ -12,6 +12,7 @@ abstract class Report_ParentController extends Controller
 {
     abstract protected function getSqlStr();
     abstract protected function getTableColumns();
+    protected $viewName;
     public function getType()
     {
         return "dashboard";
@@ -51,7 +52,7 @@ abstract class Report_ParentController extends Controller
 
         $dataSource = $this->getDataSource($urlParams);
         // dump($columns, $dataSource);
-        return view("welcome-due", [
+        return view($this->viewName, [
             'tableColumns' => $columns,
             'tableDataSource' => $dataSource
         ]);

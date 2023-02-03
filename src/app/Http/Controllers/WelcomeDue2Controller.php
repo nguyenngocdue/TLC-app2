@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Reports\Report_ParentController;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
-class WelcomeDueController extends Report_ParentController
+class WelcomeDue2Controller extends Controller
 {
-    protected $viewName = "welcome-due-2";
+    protected $viewName = "welcome-due";
     public function getSqlStr()
     {
         return "SELECT 

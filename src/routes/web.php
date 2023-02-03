@@ -105,6 +105,7 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 Route::get('test', [HomeController::class, 'index']);
 Route::resource('welcome', WelcomeController::class)->only('index', 'store');
 Route::resource('welcome-due', WelcomeDueController::class)->only('index');
+Route::resource('welcome-due-2', WelcomeDueController::class)->only('index');
 Route::get('app-menu', [AppMenuController::class, 'index']);
 Route::group([
     'prefix' => 'dashboard/workflow',
