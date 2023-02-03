@@ -1,7 +1,17 @@
 <!-- OPTION -->
 <option disabled></option>
 
-
+<!-- EMPTINESS-->
+<div class="p-1"></div>
+<div class="p-2"></div>
+<div class="p-3"></div>
+<div class="p-4"></div>
+<div class="p-5"></div>
+<div class="p-6"></div>
+<div class="p-7"></div>
+<div class="p-8"></div>
+<div class="p-9"></div>
+<div class="p-10"></div>
 
 <!-- CREATE - EDIT -->
 <span class="mx-1 col-span-1"></span>
