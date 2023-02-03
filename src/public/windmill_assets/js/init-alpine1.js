@@ -38,7 +38,6 @@ function data() {
         },
         isProfileMenuOpen: false,
         toggleProfileMenu() {
-            print(123)
             this.isProfileMenuOpen = !this.isProfileMenuOpen
         },
         closeProfileMenu() {

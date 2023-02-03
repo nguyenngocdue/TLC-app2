@@ -1,6 +1,7 @@
 let dataContainer = null
 let searchInput = null
 let allApps = {}
+let currentUserIsAdmin = null
 let apps = []
 
 const renderHtml = (apps) => {
@@ -26,7 +27,6 @@ const renderHtml = (apps) => {
                             </ul>
                         </div>`
     }
-    console.log(resultHtml)
     dataContainer.innerHTML += resultHtml
 }
 function groupBySubPackage(arr) {
@@ -47,15 +47,22 @@ function capitalize(str) {
     return str2
 }
 function render(value) {
+    console.log(value)
     apps = groupBySubPackage(value)
     renderHtml(apps)
 }
 function matchRegex(valueSearch, app) {
-    console.log(valueSearch)
     const formatText = valueSearch.replaceAll(' ', '.*')
-    console.log(app)
     var regex = new RegExp(formatText)
     const arr = [app.title, app.sub_package, app.package, app.name]
     const str = arr.join(' ')
     return regex.test(str)
+}
+function filterAllAppCheckAdmin(arr) {
+    return allApps.filter((app) => {
+        if (!currentUserIsAdmin) {
+            return !app.hidden
+        }
+        return true
+    })
 }

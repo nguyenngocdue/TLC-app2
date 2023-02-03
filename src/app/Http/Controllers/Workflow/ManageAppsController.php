@@ -50,6 +50,18 @@ class ManageAppsController extends AbstractManageLibController
                 'renderer' => 'text',
                 'editable' => true,
             ],
+            [
+                'dataIndex' => 'nickname',
+                'renderer' => 'text',
+                'editable' => true,
+            ],
+            [
+                'dataIndex' => 'status',
+                'renderer' => 'dropdown',
+                'editable' => true,
+                'cbbDataSource' => ['', 'beta', 'test'],
+            ],
+
         ];
     }
 }

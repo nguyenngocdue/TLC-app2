@@ -2,8 +2,8 @@
     <i class="fa-solid fa-magnifying-glass"></i>
 </button>
   <template x-if="isSearchMenuOpen">
-    <div tabindex="-1" class="fixed mx-96 top-0 left-0 right-0 z-50 p-4 md:h-full justify-center items-center flex" aria-hidden="true" @click.away="closeSearchMenu" @keydown.escape="closeSearchMenu">
-        <div class="relative w-full h-full md:h-auto">
+    <div tabindex="-1" class="fixed sm:p-0 md:p-0 top-0 left-0 right-0 z-50 lg:p-4 h-full bg-gray-200 bg-opacity-70 justify-center items-center flex" aria-hidden="true"  @keydown.escape="closeSearchMenu">
+        <div class="relative sm:mx-0 md:mx-0 w-full lg:mx-96 h-auto md:h-auto sm:h-auto" @click.away="closeSearchMenu">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <!-- Modal header -->
@@ -37,18 +37,23 @@
         searchInput = document.querySelector("[data-search]")
         searchInput.focus()
         allApps = (@json($allApps))
-        render(allApps)
+        currentUserIsAdmin = (@json($currentUserIsAdmin))
+        render(filterAllAppCheckAdmin(allApps))
         searchInput.addEventListener("input",(e)=>{
             const value = e.target.value.toLowerCase();
             if(value.length == 0){
-                render(allApps)
+                render(filterAllAppCheckAdmin(allApps))
             }else{
                 apps = allApps.filter(app => {
+                    if(!currentUserIsAdmin){
+                        return app.hidden ? false : matchRegex(value,app)
+                    }
                     return matchRegex(value,app)
                 })
                 render(apps)
             }
         })
+        
     </script>
   </template>
   

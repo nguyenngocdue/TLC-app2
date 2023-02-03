@@ -4,391 +4,503 @@
         "hidden": "true",
         "package": "system",
         "sub_package": "system_admin",
-        "title": "Attachments"
+        "title": "Attachments",
+        "nickname": "abc",
+        "status": "beta"
     },
     "comment": {
         "name": "comment",
         "hidden": "true",
         "package": "system",
         "sub_package": "system_admin",
-        "title": "Comments"
+        "title": "Comments",
+        "nickname": "cm",
+        "status": "beta"
     },
     "control_type": {
         "name": "control_type",
         "hidden": "true",
         "package": "system",
         "sub_package": "dev_admin",
-        "title": "Control Types"
+        "title": "Control Types",
+        "nickname": null,
+        "status": null
     },
     "department": {
         "name": "department",
         "hidden": null,
         "package": "system",
         "sub_package": "system_admin",
-        "title": "Departments"
+        "title": "Departments",
+        "nickname": null,
+        "status": null
     },
     "erp_routing_link": {
         "name": "erp_routing_link",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "ERP Routing Links"
+        "title": "ERP Routing Links",
+        "nickname": null,
+        "status": null
     },
     "field": {
         "name": "field",
         "hidden": "true",
         "package": "system",
         "sub_package": "dev_admin",
-        "title": "Fields"
+        "title": "Fields",
+        "nickname": null,
+        "status": null
     },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
         "hidden": null,
         "package": "compliance",
         "sub_package": "hse",
-        "title": "HSE Corrective Actions"
+        "title": "HSE Corrective Actions",
+        "nickname": null,
+        "status": null
     },
     "hse_incident_report": {
         "name": "hse_incident_report",
         "hidden": null,
         "package": "compliance",
         "sub_package": "hse",
-        "title": "HSE Incident Reports"
+        "title": "HSE Incident Reports",
+        "nickname": null,
+        "status": null
     },
     "post": {
         "name": "post",
         "hidden": null,
         "package": "system",
         "sub_package": "dev_admin",
-        "title": "Posts"
+        "title": "Posts",
+        "nickname": null,
+        "status": null
     },
     "priority": {
         "name": "priority",
         "hidden": null,
         "package": "system",
         "sub_package": "system_admin",
-        "title": "Priorities"
+        "title": "Priorities",
+        "nickname": null,
+        "status": null
     },
     "prod_discipline": {
         "name": "prod_discipline",
         "hidden": null,
         "package": "system",
         "sub_package": "production",
-        "title": "Prod Disciplines"
+        "title": "Prod Disciplines",
+        "nickname": null,
+        "status": null
     },
     "prod_order": {
         "name": "prod_order",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Prod Orders"
+        "title": "Prod Orders",
+        "nickname": null,
+        "status": null
     },
     "prod_routing": {
         "name": "prod_routing",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Prod Routings"
+        "title": "Prod Routings",
+        "nickname": null,
+        "status": null
     },
     "prod_routing_detail": {
         "name": "prod_routing_detail",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Prod Routing Details"
+        "title": "Prod Routing Details",
+        "nickname": null,
+        "status": null
     },
     "prod_routing_link": {
         "name": "prod_routing_link",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Prod Routing Links"
+        "title": "Prod Routing Links",
+        "nickname": null,
+        "status": null
     },
     "prod_run": {
         "name": "prod_run",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Prod Runs"
+        "title": "Prod Runs",
+        "nickname": null,
+        "status": null
     },
     "prod_sequence": {
         "name": "prod_sequence",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "Prod Sequences"
+        "title": "Prod Sequences",
+        "nickname": null,
+        "status": null
     },
     "project": {
         "name": "project",
         "hidden": null,
         "package": "project_management",
         "sub_package": "project_management",
-        "title": "Projects"
+        "title": "Projects",
+        "nickname": null,
+        "status": null
     },
     "public_holiday": {
         "name": "public_holiday",
         "hidden": null,
         "package": "system",
         "sub_package": "production",
-        "title": "Public Holidays"
+        "title": "Public Holidays",
+        "nickname": null,
+        "status": null
     },
     "qaqc_insp_chklst": {
         "name": "qaqc_insp_chklst",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Chklsts"
+        "title": "QAQC Insp Chklsts",
+        "nickname": null,
+        "status": null
     },
     "qaqc_insp_chklst_line": {
         "name": "qaqc_insp_chklst_line",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Chklst Lines"
+        "title": "QAQC Insp Chklst Lines",
+        "nickname": null,
+        "status": null
     },
     "qaqc_insp_chklst_run": {
         "name": "qaqc_insp_chklst_run",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Chklst Runs"
+        "title": "QAQC Insp Chklst Runs",
+        "nickname": null,
+        "status": null
     },
     "qaqc_insp_chklst_sht": {
         "name": "qaqc_insp_chklst_sht",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Chklst Shts"
+        "title": "QAQC Insp Chklst Shts",
+        "nickname": null,
+        "status": null
     },
     "qaqc_insp_control_group": {
         "name": "qaqc_insp_control_group",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Control Groups"
+        "title": "QAQC Insp Control Groups",
+        "nickname": null,
+        "status": null
     },
     "qaqc_insp_control_value": {
         "name": "qaqc_insp_control_value",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Control Values"
+        "title": "QAQC Insp Control Values",
+        "nickname": null,
+        "status": null
     },
     "qaqc_insp_group": {
         "name": "qaqc_insp_group",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Groups"
+        "title": "QAQC Insp Groups",
+        "nickname": null,
+        "status": null
     },
     "qaqc_insp_tmpl": {
         "name": "qaqc_insp_tmpl",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Tmpls"
+        "title": "QAQC Insp Tmpls",
+        "nickname": null,
+        "status": null
     },
     "qaqc_insp_tmpl_line": {
         "name": "qaqc_insp_tmpl_line",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Tmpl Lines"
+        "title": "QAQC Insp Tmpl Lines",
+        "nickname": null,
+        "status": null
     },
     "qaqc_insp_tmpl_sht": {
         "name": "qaqc_insp_tmpl_sht",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Tmpl Shts"
+        "title": "QAQC Insp Tmpl Shts",
+        "nickname": null,
+        "status": null
     },
     "qaqc_insp_value": {
         "name": "qaqc_insp_value",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Values"
+        "title": "QAQC Insp Values",
+        "nickname": null,
+        "status": null
     },
     "qaqc_mir": {
         "name": "qaqc_mir",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC MIRs"
+        "title": "QAQC MIRs",
+        "nickname": null,
+        "status": null
     },
     "qaqc_ncr": {
         "name": "qaqc_ncr",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC NCRs"
+        "title": "QAQC NCRs",
+        "nickname": null,
+        "status": null
     },
     "qaqc_wir": {
         "name": "qaqc_wir",
         "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC WIRs"
+        "title": "QAQC WIRs",
+        "nickname": null,
+        "status": null
     },
     "sub_project": {
         "name": "sub_project",
         "hidden": null,
         "package": "system",
         "sub_package": "system_admin",
-        "title": "Sub Projects"
+        "title": "Sub Projects",
+        "nickname": null,
+        "status": null
     },
     "term": {
         "name": "term",
         "hidden": null,
         "package": "system",
         "sub_package": "system_admin",
-        "title": "Terms"
+        "title": "Terms",
+        "nickname": null,
+        "status": null
     },
     "user": {
         "name": "user",
         "hidden": null,
         "package": "hr_&_admin",
         "sub_package": "user",
-        "title": "Users"
+        "title": "Users",
+        "nickname": null,
+        "status": null
     },
     "user_category": {
         "name": "user_category",
         "hidden": null,
         "package": "system",
         "sub_package": "user",
-        "title": "User Categories"
+        "title": "User Categories",
+        "nickname": null,
+        "status": null
     },
     "user_discipline": {
         "name": "user_discipline",
         "hidden": null,
         "package": "system",
         "sub_package": "user",
-        "title": "User Disciplines"
+        "title": "User Disciplines",
+        "nickname": null,
+        "status": null
     },
     "user_position1": {
         "name": "user_position1",
         "hidden": null,
         "package": "system",
         "sub_package": "user",
-        "title": "User Position1"
+        "title": "User Position1",
+        "nickname": null,
+        "status": null
     },
     "user_position2": {
         "name": "user_position2",
         "hidden": null,
         "package": "system",
         "sub_package": "user",
-        "title": "User Position2"
+        "title": "User Position2",
+        "nickname": null,
+        "status": null
     },
     "user_position3": {
         "name": "user_position3",
         "hidden": null,
         "package": "system",
         "sub_package": "user",
-        "title": "User Position3"
+        "title": "User Position3",
+        "nickname": null,
+        "status": null
     },
     "user_position_pre": {
         "name": "user_position_pre",
         "hidden": null,
         "package": "system",
         "sub_package": "user",
-        "title": "User Position Pre"
+        "title": "User Position Pre",
+        "nickname": null,
+        "status": null
     },
     "user_team": {
         "name": "user_team",
         "hidden": null,
         "package": "system",
         "sub_package": "user",
-        "title": "User Teams"
+        "title": "User Teams",
+        "nickname": null,
+        "status": null
     },
     "user_time_keep_type": {
         "name": "user_time_keep_type",
         "hidden": null,
         "package": "system",
         "sub_package": "user",
-        "title": "User Time Keep Types"
+        "title": "User Time Keep Types",
+        "nickname": null,
+        "status": null
     },
     "user_type": {
         "name": "user_type",
         "hidden": null,
         "package": "system",
         "sub_package": "user",
-        "title": "User Types"
+        "title": "User Types",
+        "nickname": null,
+        "status": null
     },
     "wir_description": {
         "name": "wir_description",
         "hidden": null,
         "package": "project_management",
         "sub_package": "production",
-        "title": "WIR Descriptions"
+        "title": "WIR Descriptions",
+        "nickname": null,
+        "status": null
     },
     "work_area": {
         "name": "work_area",
         "hidden": null,
         "package": "system",
         "sub_package": "system_admin",
-        "title": "Work Areas"
+        "title": "Work Areas",
+        "nickname": null,
+        "status": null
     },
     "work_mode": {
         "name": "work_mode",
         "hidden": null,
         "package": "system",
         "sub_package": "system_admin",
-        "title": "Work Modes"
+        "title": "Work Modes",
+        "nickname": null,
+        "status": null
     },
     "workplace": {
         "name": "workplace",
         "hidden": null,
         "package": "system",
         "sub_package": "system_admin",
-        "title": "Workplaces"
+        "title": "Workplaces",
+        "nickname": null,
+        "status": null
     },
     "zunit_test_1": {
         "name": "zunit_test_1",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "UT01 (Basic Controls)"
+        "title": "UT01 (Basic Controls)",
+        "nickname": null,
+        "status": "test"
     },
     "zunit_test_2": {
         "name": "zunit_test_2",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "UT02 (Dropdown\/Checkbox)"
+        "title": "UT02 (Dropdown\/Checkbox)",
+        "nickname": null,
+        "status": "test"
     },
     "zunit_test_3": {
         "name": "zunit_test_3",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "UT03 (DateTime Controls)"
+        "title": "UT03 (DateTime Controls)",
+        "nickname": null,
+        "status": "test"
     },
     "zunit_test_4": {
         "name": "zunit_test_4",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "UT04 (Static Typography)"
+        "title": "UT04 (Static Typography)",
+        "nickname": null,
+        "status": "test"
     },
     "zunit_test_5": {
         "name": "zunit_test_5",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "UT05 (Attachments)"
+        "title": "UT05 (Attachments)",
+        "nickname": null,
+        "status": "test"
     },
     "zunit_test_7": {
         "name": "zunit_test_7",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "UT07 (Comments)"
+        "title": "UT07 (Comments)",
+        "nickname": null,
+        "status": "test"
     },
     "zunit_test_9": {
         "name": "zunit_test_9",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "UT09 (Basic Events)"
+        "title": "UT09 (Basic Events)",
+        "nickname": null,
+        "status": "test"
     }
 }

@@ -3,6 +3,7 @@
 namespace App\View\Components\Homepage;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Arr;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
@@ -33,6 +34,7 @@ class SearchModal extends Component
         }, $allApps);
         return view('components.homepage.search-modal', [
             'allApps' => array_values($allApps),
+            'currentUserIsAdmin' => CurrentUser::isAdmin()
         ]);;
     }
 }
