@@ -32,8 +32,8 @@
         "package": "system",
         "sub_package": "system_admin",
         "title": "Departments",
-        "nickname": null,
-        "status": null
+        "nickname": "dp",
+        "status": "beta"
     },
     "erp_routing_link": {
         "name": "erp_routing_link",
@@ -42,7 +42,7 @@
         "sub_package": "production",
         "title": "ERP Routing Links",
         "nickname": null,
-        "status": null
+        "status": "beta"
     },
     "field": {
         "name": "field",
@@ -51,7 +51,7 @@
         "sub_package": "dev_admin",
         "title": "Fields",
         "nickname": null,
-        "status": null
+        "status": "beta"
     },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
@@ -454,7 +454,7 @@
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "UT02 (Dropdown/Checkbox)",
+        "title": "UT02 (Dropdown\/Checkbox)",
         "nickname": null,
         "status": "test"
     },

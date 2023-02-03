@@ -4,7 +4,6 @@ function data() {
         if (window.localStorage.getItem('dark')) {
             return JSON.parse(window.localStorage.getItem('dark'))
         }
-
         // else return their preferences
         return (
             !!window.matchMedia &&
@@ -49,6 +48,7 @@ function data() {
         },
         closeSearchMenu() {
             this.isSearchMenuOpen = false
+            //Using remove event listener file search-modal.blade.php
             searchInput.removeEventListener('input', () => {})
         },
         // isPagesMenuOpen: false,
