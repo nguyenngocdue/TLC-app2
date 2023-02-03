@@ -68,8 +68,6 @@ trait TableTraitApplyRender
                 $instance = json_decode($cell);
                 if (!is_null($instance) && isset($instance->id)) $cell = $instance->id;
             } else {
-                // echo "Something is not string: ";
-                // var_dump($cell);
                 //$cell is ['value', 'cbbDS'] format
             }
         }

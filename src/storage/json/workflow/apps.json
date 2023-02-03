@@ -182,8 +182,8 @@
     "public_holiday": {
         "name": "public_holiday",
         "hidden": null,
-        "package": "system",
-        "sub_package": "production",
+        "package": "hr_&_admin",
+        "sub_package": "hr_admin",
         "title": "Public Holidays",
         "nickname": null,
         "status": null,

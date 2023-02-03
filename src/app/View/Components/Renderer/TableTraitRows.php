@@ -3,11 +3,12 @@
 namespace App\View\Components\Renderer;
 
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Str;
 use ReflectionClass;
 
 trait TableTraitRows
 {
+    use TableTraitApplyRender;
+
     private function smartGetItems($dataSource)
     {
         if (is_null($dataSource)) return null;

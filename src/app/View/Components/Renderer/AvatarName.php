@@ -15,13 +15,15 @@ class AvatarName extends Component
         private $href = "",
         private $gray = false,
     ) {
-        $src = "/images/avatar.jpg";
-        $this->avatar = (!$this->avatar || $this->avatar === 'avatar') ? $src : $this->avatar;
     }
 
     public function render()
     {
-        $rendererParam = "title=name,description=position_rendered,href=href,avatar=avatar,gray=gray";
+        $rendererParam = "title=name,description=position_rendered,href=href,gray=gray,avatar=avatar";
+        if (!is_array($this->dataLine)) {
+            $avatar = $this->dataLine->user->avatar;
+            if ($avatar) $this->avatar = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $avatar->url_thumbnail;
+        }
         return view('components.renderer.avatar-name', [
             'title' => $this->title,
             'description' => $this->description,
