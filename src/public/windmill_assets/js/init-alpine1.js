@@ -50,6 +50,7 @@ function data() {
         },
         closeSearchMenu() {
             this.isSearchMenuOpen = false
+            searchInput.removeEventListener('input', () => {})
         },
         // isPagesMenuOpen: false,
         // togglePagesMenu() {
