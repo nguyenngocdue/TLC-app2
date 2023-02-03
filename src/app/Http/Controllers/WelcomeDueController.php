@@ -8,7 +8,8 @@ use Illuminate\Support\Str;
 
 class WelcomeDueController extends Report_ParentController
 {
-    protected function getSqlStr()
+    protected $viewName = "welcome-due";
+    public function getSqlStr()
     {
         return "SELECT 
                         po.id AS po_id

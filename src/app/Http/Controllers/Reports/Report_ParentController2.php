@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-abstract class Report_ParentController extends Controller
+abstract class Report_ParentController2 extends Controller
 {
     abstract protected function getSqlStr();
     abstract protected function getTableColumns();
@@ -17,6 +17,7 @@ abstract class Report_ParentController extends Controller
     {
         return "dashboard";
     }
+
 
     private function getSql($urlParams)
     {
@@ -40,6 +41,7 @@ abstract class Report_ParentController extends Controller
         $sqlData = DB::select($sql);
         $result = array_map(fn ($item) => (array) $item, $sqlData);
         // dump($result);
+
         return $result;
     }
 
@@ -52,7 +54,7 @@ abstract class Report_ParentController extends Controller
 
         $dataSource = $this->getDataSource($urlParams);
         // dump($columns, $dataSource);
-        dump($this->viewName);
+        // dump($this->viewName);
         return view($this->viewName, [
             'tableColumns' => $columns,
             'tableDataSource' => $dataSource
