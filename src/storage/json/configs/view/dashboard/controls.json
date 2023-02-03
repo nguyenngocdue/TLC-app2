@@ -103,6 +103,8 @@
         "user",
         "unit_test",
         "system_admin",
-        "dev_admin"
+        "dev_admin",
+        "hr_admin",
+        "hr"
     ]
 }

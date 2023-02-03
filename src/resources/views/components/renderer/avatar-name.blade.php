@@ -2,8 +2,10 @@
 @php
 $json = json_decode($slot);
 foreach ( explode(",", $rendererParam) as $param) {
-$pairs = explode("=", $param);
-if($json) ${$pairs[0]} = $json->{$pairs[1]} ?? "";
+    $pairs = explode("=", $param);
+    if(!$avatar || $pairs[0] !== 'avatar'){
+        if($json) ${$pairs[0]} = ($json->{$pairs[1]} ?? "");
+    }
 }
 @endphp
 @endif

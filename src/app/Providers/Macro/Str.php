@@ -9,15 +9,18 @@ Str::macro('parseArray', function (?string $values) {
     return ($values != "") ? explode(",", $values) : [];
 });
 Str::macro('appTitle', function (string $s) {
-    $s = Str::plural($s);
+    $exceptionOfKeepingSingular = ['qaqc', 'hse', 'kpi', 'esg', 'hr', 'scm'];
+    $s = in_array($s, $exceptionOfKeepingSingular) ? $s : Str::plural($s);
     $s = Str::headline($s);
 
     $sources = ['hr', 'erp', 'wir', 'hse', 'esg', 'scm', 'qaqc', 'dev', 'kpi', 'qs', 'nz', 'dc', 'it', 'qa', 'qc', 'bd', 'prod', 'ho', 'ws'];
-    $sources = array_map(fn ($i) => '/\b' . $i . '\b/', $sources);
+    // /i is for case insensitive
+    $sources = array_map(fn ($i) => '/\b' . $i . '\b/i', $sources);
     $target = ['HR', 'ERP', 'WIR', 'HSE', 'ESG', 'SCM', 'QAQC', 'DEV', 'KPI', 'QS', 'NZ', 'DC', 'IT', 'QA', 'QC', 'BD', 'PROD', 'HO', 'WS'];
     $s = preg_replace($sources, $target, $s);
 
     $sources = ['acct', 'cpl', 'dir', 'fac', 'des', 'fin', 'mgr', 'pln', 'proc', 'proj', 'whs', 'asst'];
+    // /u is for whole word
     $sources = array_map(fn ($i) => '/\b' . $i . '\b/u', $sources);
     $target =  ['Accounting', 'Compliance', 'Director', 'Factory', 'Design', 'Finance', 'Manager', 'Planning', 'Procurement', 'Project', 'Warehouse', 'Assistant'];
     $s = preg_replace($sources, $target, $s);

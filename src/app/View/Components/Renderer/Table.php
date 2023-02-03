@@ -10,7 +10,6 @@ use Illuminate\View\Component;
 class Table extends Component
 {
   use TableTraitColumns;
-  use TableTraitApplyRender;
   use TableTraitRows;
 
   public function __construct(
