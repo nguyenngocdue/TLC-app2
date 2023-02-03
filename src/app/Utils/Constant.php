@@ -13,4 +13,5 @@ class Constant
     const FORMAT_DATETIME_MYSQL = "Y-m-d H:i:s";
     const FORMAT_TIME_MYSQL = "H:i:s";
     const FORMAT_WEEKDAY_SHORT = "D";
+    const FORMAT_YEAR_MONTH = "Y/m";
 }

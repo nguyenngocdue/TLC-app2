@@ -4,52 +4,66 @@ namespace App\Http\Services;
 
 use App\Helpers\Helper;
 use App\Models\Attachment;
-use Carbon\Carbon;
+use App\Utils\Constant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class UploadService2
 {
+    public function destroy($toBeDeletedIds)
+    {
+        try {
+            foreach ($toBeDeletedIds as $id) {
+                $attachment = Attachment::find($id);
+                Storage::disk('s3')->delete($attachment->url_thumbnail);
+                Storage::disk('s3')->delete($attachment->url_media);
+                $attachment->delete();
+            }
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
     public function store($request)
     {
-        $dt = Carbon::now('Asia/Ho_Chi_Minh');
-        $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
+        $thumbnailW = 150;
+        $thumbnailH = 150;
+        $allowedExts = ['jpeg', 'png', 'jpg', 'gif', 'svg'];
+
+        $path = env('MEDIA_ROOT_FOLDER', 'media') . "/" . date(Constant::FORMAT_YEAR_MONTH) . "/";
         try {
             $fields = Helper::getDataDbByName('fields', 'name', 'id');
             $filesUpload = $request->files;
             $attachmentRows = [];
-            $colNameMedia = [];
             foreach ($filesUpload as $fieldName => $files) {
                 $files = $files['toBeUploaded'];
                 foreach ($files as $file) {
                     $fileName = Helper::customizeSlugData($file, 'attachments', $attachmentRows);
                     $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
-                    $fileName = pathinfo($fileName, PATHINFO_FILENAME);
+                    $fileNameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
                     $mimeType = $file->getMimeType();
-                    $path_image = $path . $fileName;
+                    $imagePath = $path . $fileName;
 
-                    Storage::disk('s3')->put($path_image, file_get_contents($file), 'public');
-                    // dd($fileName, $save, file_get_contents($file), $path_image);
+                    Storage::disk('s3')->put($imagePath, file_get_contents($file), 'public');
+                    // dump($fileName, $imagePath, $mimeType);
 
-                    $imageFileTypeFrame = ['jpeg', 'png', 'jpg', 'gif', 'svg'];
                     //Only crunch if the attachment is a photo
-                    if (in_array($fileExt, $imageFileTypeFrame)) {
+                    if (in_array($fileExt, $allowedExts)) {
                         $thumbnailImage = Image::make($file);
-                        $thumbnailImage->fit(150, 150);
+                        $thumbnailImage->fit($thumbnailW, $thumbnailH);
                         $resource = $thumbnailImage->stream();
-                        $thumbnailFileName = $fileName . '-150x150.' . $fileExt;
+                        $thumbnailFileName = $fileNameWithoutExt . "-{$thumbnailW}x{$thumbnailH}." . $fileExt;
                         $thumbnailPath = $path . $thumbnailFileName;
-                        // dd($fileName);
                         Storage::disk('s3')->put($thumbnailPath, $resource->__toString(), 'public');
                     }
 
                     // dd($fields[$fieldName);
                     array_push($attachmentRows, [
                         'url_thumbnail' => isset($thumbnailPath) ? $thumbnailPath : "",
-                        'url_media' => $path_image,
+                        'url_media' => $imagePath,
                         'url_folder' => $path,
-                        'filename' => basename($path_image),
+                        'filename' => basename($imagePath),
                         'extension' => $fileExt,
                         'category' => $fields[$fieldName],
                         'owner_id' =>  (int)Auth::user()->id,
@@ -60,15 +74,15 @@ class UploadService2
 
             // dd($attachmentRows);
             $invertedFields = array_flip($fields);
+            $result = [];
             foreach ($attachmentRows as $row) {
                 $insertedRow = Attachment::create($row);
-                $colNameMedia[$insertedRow['id']] = $invertedFields[$row['category']];   // [id-media = "attachment-name"]
+                $result[$insertedRow['id']] = $invertedFields[$row['category']];
             }
-            // dd($colNameMedia);
-            return $colNameMedia;
+            // dd($result);
+            return $result;
         } catch (\Exception $e) {
             dd($e->getMessage());
-            return  $e;
         }
     }
 }

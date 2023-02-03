@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Models\Attachment;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 trait TraitEntityCRUDStoreUpdate2
 {
-	private $debugForStoreUpdate = !false;
+	private $debugForStoreUpdate = false;
 
 	private function dump1($title, $content)
 	{
@@ -23,6 +24,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$result = [
 			'oracy_prop' => [],
 			'eloquent_prop' => [],
+			'attachment' => [],
 		];
 		foreach ($this->superProps['props'] as $prop) {
 			if ($prop['control'] === 'attachment') {
@@ -113,25 +115,70 @@ trait TraitEntityCRUDStoreUpdate2
 		return $dataSource;
 	}
 
+	private function deleteAttachments($props, Request $request)
+	{
+		foreach ($props as $prop) {
+			$propName = substr($prop, 1); //Remove first "_"
+			$toBeDeletedIds = Str::parseArray($request->input($propName)['toBeDeleted']);
+			$this->uploadService2->destroy($toBeDeletedIds);
+		}
+	}
+
+	private function attachOrphan($props, Request $request, $objectType, $objectId)
+	{
+		foreach ($props as $prop) {
+			$propName = substr($prop, 1); //Remove first "_"
+			$attachmentField = $request->input($propName);
+			if (isset($attachmentField['toBeAttached'])) {
+				$toBeAttachedIds = $attachmentField['toBeAttached'];
+				// $this->uploadService2->destroy($toBeAttachedIds);
+				// dd($toBeAttachedIds);
+				foreach ($toBeAttachedIds as $id) {
+					$attachment = Attachment::find($id);
+					//In case if the orphan is just deleted in this transaction, ignore it from attaching
+					if (!is_null($attachment)) {
+						$attachment->object_type = $objectType;
+						$attachment->object_id = $objectId;
+						$attachment->save();
+					}
+				}
+			}
+		}
+	}
+
 	private function uploadAttachmentWithoutParentId(Request $request)
 	{
-		$ids = $this->uploadService2->store($request);
-		dump($ids);
+		return $this->uploadService2->store($request);
+	}
+
+	private function updateAttachmentParentId($uploadedIds, $objectType, $objectId)
+	{
+		foreach (array_keys($uploadedIds) as $id) {
+			$attachmentRow = Attachment::find($id);
+			$attachmentRow->update(['object_type' => $objectType, 'object_id' => $objectId]);
+		}
 	}
 
 	public function store(Request $request)
 	{
 		$this->dump1("Request", $request->input());
-		//This has to run before form validation
-		$this->uploadAttachmentWithoutParentId($request);
-		$request->validate($this->getValidationRules());
 		$props = $this->getProps1();
+		$this->deleteAttachments($props['attachment'], $request);
+		//Uploading attachments has to run before form validation
+		$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
+		$request->validate($this->getValidationRules());
 		$fields = $this->handleFields($request, __FUNCTION__);
 
 		$theRow = $this->data::create($fields);
+		$objectType = "App\\Models\\" . ucfirst(Str::singular($theRow->getTable()));
+		$objectId = $theRow->id;
+
+		$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
+		$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 
 		$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		$this->handleStatus($theRow, $fields);
+
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		Toastr::success("$this->type created successfully", "Create $this->type");
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
@@ -140,18 +187,25 @@ trait TraitEntityCRUDStoreUpdate2
 	public function update(Request $request, $id)
 	{
 		$this->dump1("Request", $request->input());
-		//This has to run before form validation
-		$this->uploadAttachmentWithoutParentId($request);
-		$request->validate($this->getValidationRules());
 		$props = $this->getProps1();
+		$this->deleteAttachments($props['attachment'], $request);
+		//Uploading attachments has to run before form validation
+		$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
+		$request->validate($this->getValidationRules());
 		$fields = $this->handleFields($request, __FUNCTION__);
 
 		$theRow = $this->data::find($id);
 		$theRow->fill($fields);
 		$theRow->save();
+		$objectType = "App\\Models\\" . Str::singular($theRow->getTable());
+		$objectId = $theRow->id;
+
+		$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
+		$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 
 		$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		$this->handleStatus($theRow, $fields);
+
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		Toastr::success("$this->type updated successfully", "Updated $this->type");
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));

@@ -10,6 +10,7 @@ class Attachment2 extends Component
     private $attachments = [];
     public function __construct(
         private $name,
+        //either a string of serialized array of attachments object or array or attachments 
         private $value = "",
         private $readonly = false,
         private $destroyable = true,
@@ -23,6 +24,7 @@ class Attachment2 extends Component
             //Convert to array if object given
             foreach ($this->attachments as &$attachment) if (is_object($attachment)) $attachment = (array)$attachment;
         }
+        // dump($this->attachments);
     }
 
     private function getProperties()

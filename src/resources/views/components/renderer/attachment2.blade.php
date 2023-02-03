@@ -5,7 +5,15 @@
     @else
         <div class=" grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-4 mb-1 p-1 hidden1">
             @foreach($attachments as $attachment)
-                <div name='{{$name}}' class="relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg border-gray-300 group/item overflow-hidden bg-inherit">
+                @php
+                $isOrphan = isset($attachment['isOrphan']);
+                $border = $isOrphan ? "red" : "gray";
+                $title = $isOrphan ? "Orphan image found. Will attach after this document is saved.":"";
+                @endphp
+                @isset($attachment['isOrphan'])
+                <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="hidden"/>
+                @endisset
+                <div name='{{$name}}' title="{{$title}}" class="border-{{$border}}-300 relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit">
                     {{-- This is the image --}}
                     <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}"/>
                     {{-- This is to show the toBeDeleted trash icon --}}
