@@ -6,7 +6,8 @@
         "sub_package": "system_admin",
         "title": "Attachments",
         "nickname": "abc",
-        "status": "beta"
+        "status": "beta",
+        "icon": "fa-solid fa-paperclip"
     },
     "comment": {
         "name": "comment",
@@ -15,7 +16,8 @@
         "sub_package": "system_admin",
         "title": "Comments",
         "nickname": "cm",
-        "status": "beta"
+        "status": "beta",
+        "icon": "fa-regular fa-comment"
     },
     "control_type": {
         "name": "control_type",
@@ -24,7 +26,8 @@
         "sub_package": "dev_admin",
         "title": "Control Types",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "department": {
         "name": "department",
@@ -33,7 +36,8 @@
         "sub_package": "system_admin",
         "title": "Departments",
         "nickname": "dp",
-        "status": "beta"
+        "status": "beta",
+        "icon": "fa-regular fa-sitemap"
     },
     "erp_routing_link": {
         "name": "erp_routing_link",
@@ -42,7 +46,8 @@
         "sub_package": "production",
         "title": "ERP Routing Links",
         "nickname": null,
-        "status": "beta"
+        "status": "beta",
+        "icon": null
     },
     "field": {
         "name": "field",
@@ -51,7 +56,8 @@
         "sub_package": "dev_admin",
         "title": "Fields",
         "nickname": null,
-        "status": "beta"
+        "status": "beta",
+        "icon": null
     },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
@@ -60,7 +66,8 @@
         "sub_package": "hse",
         "title": "HSE Corrective Actions",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "hse_incident_report": {
         "name": "hse_incident_report",
@@ -69,7 +76,8 @@
         "sub_package": "hse",
         "title": "HSE Incident Reports",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "post": {
         "name": "post",
@@ -78,7 +86,8 @@
         "sub_package": "dev_admin",
         "title": "Posts",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "priority": {
         "name": "priority",
@@ -87,7 +96,8 @@
         "sub_package": "system_admin",
         "title": "Priorities",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "prod_discipline": {
         "name": "prod_discipline",
@@ -96,7 +106,8 @@
         "sub_package": "production",
         "title": "Prod Disciplines",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "prod_order": {
         "name": "prod_order",
@@ -105,7 +116,8 @@
         "sub_package": "production",
         "title": "Prod Orders",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "prod_routing": {
         "name": "prod_routing",
@@ -114,7 +126,8 @@
         "sub_package": "production",
         "title": "Prod Routings",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "prod_routing_detail": {
         "name": "prod_routing_detail",
@@ -123,7 +136,8 @@
         "sub_package": "production",
         "title": "Prod Routing Details",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "prod_routing_link": {
         "name": "prod_routing_link",
@@ -132,7 +146,8 @@
         "sub_package": "production",
         "title": "Prod Routing Links",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "prod_run": {
         "name": "prod_run",
@@ -141,7 +156,8 @@
         "sub_package": "production",
         "title": "Prod Runs",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "prod_sequence": {
         "name": "prod_sequence",
@@ -150,7 +166,8 @@
         "sub_package": "production",
         "title": "Prod Sequences",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "project": {
         "name": "project",
@@ -159,7 +176,8 @@
         "sub_package": "project_management",
         "title": "Projects",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "public_holiday": {
         "name": "public_holiday",
@@ -168,7 +186,8 @@
         "sub_package": "production",
         "title": "Public Holidays",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_insp_chklst": {
         "name": "qaqc_insp_chklst",
@@ -177,7 +196,8 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Chklsts",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_insp_chklst_line": {
         "name": "qaqc_insp_chklst_line",
@@ -186,7 +206,8 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Chklst Lines",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_insp_chklst_run": {
         "name": "qaqc_insp_chklst_run",
@@ -195,7 +216,8 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Chklst Runs",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_insp_chklst_sht": {
         "name": "qaqc_insp_chklst_sht",
@@ -204,7 +226,8 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Chklst Shts",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_insp_control_group": {
         "name": "qaqc_insp_control_group",
@@ -213,7 +236,8 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Control Groups",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_insp_control_value": {
         "name": "qaqc_insp_control_value",
@@ -222,7 +246,8 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Control Values",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_insp_group": {
         "name": "qaqc_insp_group",
@@ -231,7 +256,8 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Groups",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_insp_tmpl": {
         "name": "qaqc_insp_tmpl",
@@ -240,7 +266,8 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Tmpls",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_insp_tmpl_line": {
         "name": "qaqc_insp_tmpl_line",
@@ -249,7 +276,8 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Tmpl Lines",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_insp_tmpl_sht": {
         "name": "qaqc_insp_tmpl_sht",
@@ -258,7 +286,8 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Tmpl Shts",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_insp_value": {
         "name": "qaqc_insp_value",
@@ -267,7 +296,8 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Values",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_mir": {
         "name": "qaqc_mir",
@@ -276,7 +306,8 @@
         "sub_package": "qaqc",
         "title": "QAQC MIRs",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_ncr": {
         "name": "qaqc_ncr",
@@ -285,7 +316,8 @@
         "sub_package": "qaqc",
         "title": "QAQC NCRs",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "qaqc_wir": {
         "name": "qaqc_wir",
@@ -294,7 +326,8 @@
         "sub_package": "qaqc",
         "title": "QAQC WIRs",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "sub_project": {
         "name": "sub_project",
@@ -303,7 +336,8 @@
         "sub_package": "system_admin",
         "title": "Sub Projects",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "term": {
         "name": "term",
@@ -312,7 +346,8 @@
         "sub_package": "system_admin",
         "title": "Terms",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "user": {
         "name": "user",
@@ -321,7 +356,8 @@
         "sub_package": "user",
         "title": "Users",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "user_category": {
         "name": "user_category",
@@ -330,7 +366,8 @@
         "sub_package": "user",
         "title": "User Categories",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "user_discipline": {
         "name": "user_discipline",
@@ -339,7 +376,8 @@
         "sub_package": "user",
         "title": "User Disciplines",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "user_position1": {
         "name": "user_position1",
@@ -348,7 +386,8 @@
         "sub_package": "user",
         "title": "User Position1",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "user_position2": {
         "name": "user_position2",
@@ -357,7 +396,8 @@
         "sub_package": "user",
         "title": "User Position2",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "user_position3": {
         "name": "user_position3",
@@ -366,7 +406,8 @@
         "sub_package": "user",
         "title": "User Position3",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "user_position_pre": {
         "name": "user_position_pre",
@@ -375,7 +416,8 @@
         "sub_package": "user",
         "title": "User Position Pre",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "user_team": {
         "name": "user_team",
@@ -384,7 +426,8 @@
         "sub_package": "user",
         "title": "User Teams",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "user_time_keep_type": {
         "name": "user_time_keep_type",
@@ -393,7 +436,8 @@
         "sub_package": "user",
         "title": "User Time Keep Types",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "user_type": {
         "name": "user_type",
@@ -402,7 +446,8 @@
         "sub_package": "user",
         "title": "User Types",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "wir_description": {
         "name": "wir_description",
@@ -411,7 +456,8 @@
         "sub_package": "production",
         "title": "WIR Descriptions",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "work_area": {
         "name": "work_area",
@@ -420,7 +466,8 @@
         "sub_package": "system_admin",
         "title": "Work Areas",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "work_mode": {
         "name": "work_mode",
@@ -429,7 +476,8 @@
         "sub_package": "system_admin",
         "title": "Work Modes",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "workplace": {
         "name": "workplace",
@@ -438,7 +486,8 @@
         "sub_package": "system_admin",
         "title": "Workplaces",
         "nickname": null,
-        "status": null
+        "status": null,
+        "icon": null
     },
     "zunit_test_1": {
         "name": "zunit_test_1",
@@ -447,7 +496,8 @@
         "sub_package": "unit_test",
         "title": "UT01 (Basic Controls)",
         "nickname": null,
-        "status": "test"
+        "status": "test",
+        "icon": null
     },
     "zunit_test_2": {
         "name": "zunit_test_2",
@@ -456,7 +506,8 @@
         "sub_package": "unit_test",
         "title": "UT02 (Dropdown\/Checkbox)",
         "nickname": null,
-        "status": "test"
+        "status": "test",
+        "icon": null
     },
     "zunit_test_3": {
         "name": "zunit_test_3",
@@ -465,7 +516,8 @@
         "sub_package": "unit_test",
         "title": "UT03 (DateTime Controls)",
         "nickname": null,
-        "status": "test"
+        "status": "test",
+        "icon": null
     },
     "zunit_test_4": {
         "name": "zunit_test_4",
@@ -474,7 +526,8 @@
         "sub_package": "unit_test",
         "title": "UT04 (Static Typography)",
         "nickname": null,
-        "status": "test"
+        "status": "test",
+        "icon": null
     },
     "zunit_test_5": {
         "name": "zunit_test_5",
@@ -483,7 +536,8 @@
         "sub_package": "unit_test",
         "title": "UT05 (Attachments)",
         "nickname": null,
-        "status": "test"
+        "status": "test",
+        "icon": null
     },
     "zunit_test_7": {
         "name": "zunit_test_7",
@@ -492,7 +546,8 @@
         "sub_package": "unit_test",
         "title": "UT07 (Comments)",
         "nickname": null,
-        "status": "test"
+        "status": "test",
+        "icon": null
     },
     "zunit_test_9": {
         "name": "zunit_test_9",
@@ -501,6 +556,7 @@
         "sub_package": "unit_test",
         "title": "UT09 (Basic Events)",
         "nickname": null,
-        "status": "test"
+        "status": "test",
+        "icon": null
     }
 }

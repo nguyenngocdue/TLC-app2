@@ -61,6 +61,11 @@ class ManageAppsController extends AbstractManageLibController
                 'editable' => true,
                 'cbbDataSource' => ['', 'beta', 'test'],
             ],
+            [
+                'dataIndex' => 'icon',
+                'renderer' => 'text',
+                'editable' => true,
+            ],
 
         ];
     }
