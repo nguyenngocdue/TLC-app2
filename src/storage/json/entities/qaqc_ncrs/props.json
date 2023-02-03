@@ -420,7 +420,7 @@
         "column_name": "getParent",
         "column_type": "eloquent_prop",
         "label": "Parent",
-        "control": "relationship_renderer",
+        "control": "link_morph_to",
         "align": "",
         "col_span": "12",
         "width": "",

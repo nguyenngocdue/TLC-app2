@@ -32,7 +32,7 @@ class Qaqc_mir extends ModelExtended
         "attachment_mir_technical_data_sheet" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_mir_material_inspection_photo" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_mir_pdf_attached" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
-        "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parentable', 'parent_type', 'parent_id'],
+        "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
     ];
 
     public $oracyParams = [
