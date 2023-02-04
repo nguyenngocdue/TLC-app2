@@ -8,6 +8,17 @@ class LibApps extends AbstractLib
 {
     protected static $key = "apps";
 
+    public static function getAll()
+    {
+        $result = parent::getAll();
+        foreach ($result as &$app) {
+            $app['package_rendered'] = isset($app['package']) ? Str::appTitle($app['package']) : "unknown package";
+            $app['sub_package_rendered'] = isset($app['sub_package']) ? Str::appTitle($app['sub_package']) : "unknown sub_package";
+            $app['href'] = route(Str::plural($app['name']) . ".index");
+        }
+        return $result;
+    }
+
     public static function getFor($entityType)
     {
         $allApps = static::getAll();

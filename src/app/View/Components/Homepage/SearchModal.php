@@ -28,10 +28,6 @@ class SearchModal extends Component
     public function render()
     {
         $allApps = LibApps::getAll();
-        $allApps = array_map(function ($item) {
-            $item['sub_package'] = Str::appTitle($item['sub_package']);
-            return array_merge($item, ['href' => route(Str::plural($item['name']) . ".index")]);
-        }, $allApps);
         return view('components.homepage.search-modal', [
             'allApps' => array_values($allApps),
             'currentUserIsAdmin' => CurrentUser::isAdmin()

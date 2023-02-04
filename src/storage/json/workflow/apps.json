@@ -79,6 +79,46 @@
         "status": null,
         "icon": null
     },
+    "manageApps": {
+        "name": "manageApps",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Apps",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "manageStatuses": {
+        "name": "manageStatuses",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Statuses",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "manageWidgets": {
+        "name": "manageWidgets",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Widgets",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "permissions": {
+        "name": "permissions",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "system_permission",
+        "title": "Permissions",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
     "post": {
         "name": "post",
         "hidden": null,
@@ -329,11 +369,61 @@
         "status": null,
         "icon": null
     },
+    "role_sets": {
+        "name": "role_sets",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "system_permission",
+        "title": "Role Sets",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "roles": {
+        "name": "roles",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "system_permission",
+        "title": "Roles",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "setpermissions": {
+        "name": "setpermissions",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "system_permission",
+        "title": "Setpermissions",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "setroles": {
+        "name": "setroles",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "system_permission",
+        "title": "Setroles",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "setrolesets": {
+        "name": "setrolesets",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "system_permission",
+        "title": "Setrolesets",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
     "sub_project": {
         "name": "sub_project",
         "hidden": null,
-        "package": "system",
-        "sub_package": "system_admin",
+        "package": "project_management",
+        "sub_package": "project_management",
         "title": "Sub Projects",
         "nickname": null,
         "status": null,

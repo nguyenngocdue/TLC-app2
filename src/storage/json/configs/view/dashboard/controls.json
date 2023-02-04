@@ -105,6 +105,8 @@
         "system_admin",
         "dev_admin",
         "hr_admin",
-        "hr"
+        "hr",
+        "system_configuration",
+        "system_permission"
     ]
 }
