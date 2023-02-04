@@ -107,10 +107,11 @@ abstract class AbstractManageJsonController extends Controller
         if (!in_array($page, $this->pages)) dd($page);
         $className = __NAMESPACE__ . "\\ZZTraitManageJson\\Manage" . Str::plural($page);
         $type = $this->getType($request);
-        $typeModel = "App\\Models\\$type";
+        $modelPath = Str::modelPathFrom($type);
+
         /** @var Manage_Parent $instance */
-        $instance = new $className($type, $typeModel);
-        // dump($page, $className, $type, $typeModel);
+        $instance = new $className($type, $modelPath);
+        // dump($page, $className, $type, $modelPath);
         return $instance;
     }
 

@@ -16,7 +16,7 @@ class SidebarEntityItems
         $singular = Str::singular($table);
         $isActive = ($currentType === $singular);
 
-        $modelPath = "App\\Models\\" . Str::ucfirst($singular);
+        $modelPath = Str::modelPathFrom($singular);
         $model = App::make($modelPath);
 
         $result = [

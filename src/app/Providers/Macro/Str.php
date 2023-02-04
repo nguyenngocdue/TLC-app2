@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
+Str::macro('modelPathFrom', function (string $table_or_type) {
+    return "App\\Models\\" . ucfirst(Str::singular($table_or_type));
+});
 //make a,b,c to [a,b,c]
 //make "" to []
 Str::macro('parseArray', function (?string $values) {

@@ -170,7 +170,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$fields = $this->handleFields($request, __FUNCTION__);
 
 		$theRow = $this->data::create($fields);
-		$objectType = "App\\Models\\" . ucfirst(Str::singular($theRow->getTable()));
+		$objectType = Str::modelPathFrom($theRow->getTable());
 		$objectId = $theRow->id;
 
 		$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);

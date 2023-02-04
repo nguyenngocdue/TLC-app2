@@ -37,6 +37,7 @@ trait TraitEntityListenDataSource
         }
 
         foreach ($sp['props'] as $prop) {
+            if ($prop['hidden_edit'] === 'true') continue; // Avoid crash when loading role_set in User edit screen
             $relationships = $prop['relationships'];
             if (isset($relationships['table'])) {
                 $table = $relationships['table'];
@@ -101,7 +102,8 @@ trait TraitEntityListenDataSource
         $columnsWithOracy = [];
 
         foreach ($matrix as $table => $columns) {
-            $modelPath = "App\\Models\\" . Str::singular($table);
+            // $modelPath = "App\\Models\\" . Str::singular($table);
+            $modelPath = Str::modelPathFrom($table);
             $nameless = (new $modelPath)->nameless;
             $columnsWithoutOracy = array_filter($columns, fn ($column) => !str_contains($column, "()"));
             $columnsWithOracy[$table] = array_values(array_filter($columns, fn ($column) => str_contains($column, "()")));
@@ -113,7 +115,8 @@ trait TraitEntityListenDataSource
 
         $this->dump2("columnsWithOracy", $columnsWithOracy);
         foreach ($columnsWithOracy as $table => $listOfFn) {
-            $modelPath = "App\\Models\\" . Str::singular($table);
+            // $modelPath = "App\\Models\\" . Str::singular($table);
+            $modelPath = Str::modelPathFrom($table);
             if (sizeof($listOfFn) > 0) {
                 foreach ($listOfFn as $fn) {
                     $fn = substr($fn, 0, strlen($fn) - 2); //Remove ()

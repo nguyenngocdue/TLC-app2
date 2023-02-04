@@ -8,6 +8,8 @@
     "commentable",
     "Eloquents",
     "endsection",
+    "datetime",
+    "Dispatchable",
     "Laravel",
     "mediable",
     "Middlewares",

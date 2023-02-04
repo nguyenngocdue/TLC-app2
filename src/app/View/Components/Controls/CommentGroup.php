@@ -66,7 +66,7 @@ class CommentGroup extends Component
 
         if ($action === 'edit') {
             $array = [];
-            $modelPath = "App\\Models\\" . Str::singular($type);
+            $modelPath = Str::modelPathFrom($type);
             $allCommentsUser = $modelPath::find($id)->comments()->get();
             $idCateCommentsUser = $allCommentsUser->pluck('category', 'id')->toArray();
 

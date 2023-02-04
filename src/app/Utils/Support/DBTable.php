@@ -16,8 +16,7 @@ class DBTable
 
     public static function fromNameToModel($tableName): Model
     {
-        $modelName = Str::singular($tableName);
-        return App::make("App\\Models\\$modelName");
+        return App::make(Str::modelPathFrom($tableName));
     }
 
     public static function getColumnTypes($tableName)

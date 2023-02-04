@@ -14,7 +14,7 @@ class SuperProps
     private static function makeRelationshipObject($type)
     {
         $allRelationship = Relationships::getAllOf($type);
-        $modelPath = "App\\Models\\" . Str::singular($type);
+        $modelPath = Str::modelPathFrom($type);
         $dummyInstance = new ($modelPath);
         $result = [];
         foreach ($allRelationship as $key => $rls) {

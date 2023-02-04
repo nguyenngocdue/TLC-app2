@@ -50,7 +50,7 @@ $id = $action === "edit" ? $values->id : "";
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
 
         $isRequired = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
-        $iconJson = $columnType === 'json' ?'<i class="fa-duotone fa-brackets-curly"></i>' : "";
+        $iconJson = $columnType === 'json' ?'<i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
         @endphp
         <div class='col-span-{{$col_span}} grid'>
             <div class='grid grid-row-1'>

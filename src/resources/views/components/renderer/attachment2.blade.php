@@ -1,5 +1,5 @@
 {{-- @dump($attachments) --}}
-<div class="flex flex-col container mx-auto ">
+<div class="flex flex-col container mx-aut1o w-full">
     @if(sizeof($attachments) ==0)
         <x-renderer.emptiness p="2" class="border" message="{{$message}}"/>
     @else

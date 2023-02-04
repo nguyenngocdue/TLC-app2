@@ -18,11 +18,11 @@ class Breadcrumb extends Component
         $singular = CurrentRoute::getTypeSingular();
         if (in_array($singular, ['dashboard', 'permission', 'workflow'])) return "";
 
-        $model = "App\\Models\\" . Str::ucfirst($singular);
-        $first = $model::first();
+        $modelPath = Str::modelPathFrom($singular);
+        $first = $modelPath::first();
         $first_id = $first ? $first->id : null;
 
-        $latest = $model::latest()->first();
+        $latest = $modelPath::latest()->first();
         $latest_id = $latest ? $latest->id : null;
 
         $links = [];
