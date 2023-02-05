@@ -32,9 +32,8 @@ class Prod_run extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id', 'renderer' => 'id', 'type' => 'prod_runs', 'align' => 'center'],
-            ['dataIndex' => 'prodSequence', 'title' => 'Run ID', 'renderer' => 'column', 'rendererParam' => 'id'],
-            // ['dataIndex' => 'prodRun',],
+            ['dataIndex' => 'id'],
+            ['dataIndex' => 'prod_sequence_id', 'title' => 'Run ID',  'rendererParam' => 'id'],
             ['dataIndex' => 'date',],
             ['dataIndex' => 'start',],
             ['dataIndex' => 'end',],

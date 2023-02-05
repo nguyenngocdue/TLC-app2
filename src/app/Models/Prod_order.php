@@ -48,7 +48,7 @@ class Prod_order extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id', 'renderer' => 'id', 'type' => 'prod_orders', 'align' => 'center'],
+            ['dataIndex' => 'id',],
             ['dataIndex' => 'name', 'title' => 'Priority'],
             ['dataIndex' => 'production_name'],
             ['dataIndex' => 'compliance_name'],

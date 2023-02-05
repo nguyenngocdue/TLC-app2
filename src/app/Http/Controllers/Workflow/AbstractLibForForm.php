@@ -45,7 +45,14 @@ class AbstractLibForForm extends AbstractLib
         //<< When filter, the order is the order of the allStatus, not the form order
         // $result = array_filter($allStatuses, fn ($status) => in_array($status, $json), ARRAY_FILTER_USE_KEY);
         $result = [];
-        foreach ($json as $status) $result[$status] = $allStatuses[$status];
+        foreach ($json as $status) {
+            if (isset($allStatuses[$status])) {
+                $result[$status] = $allStatuses[$status];
+            } else {
+                echo "Found an orphan status, please remove it in statuses.json of $entityType manually";
+                dump($status);
+            }
+        }
 
         return $result;
     }

@@ -187,7 +187,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id', "renderer" => "id", "align" => "center", "type" => "users"],
+            ['dataIndex' => 'id'],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'position_rendered'],
             ['dataIndex' => 'resigned', 'renderer' => 'toggle', "align" => "center"],
@@ -203,5 +203,10 @@ class User extends Authenticatable implements LdapAuthenticatable
             'last_name' => $this->last_name,
             'email' => $this->email,
         ];
+    }
+
+    public static function getTableName()
+    {
+        return (new static())->getTable();
     }
 }

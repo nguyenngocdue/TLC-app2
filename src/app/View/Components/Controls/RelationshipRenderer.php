@@ -23,47 +23,28 @@ class RelationshipRenderer extends Component
     ) {
     }
 
-    private function getDataSource($itemDB, $colName, $showAll = false)
+    private function getDataSource($row, $colName, $showAll = false)
     {
-        $eloquentParam = $itemDB->eloquentParams[$colName];
+        $eloquentParam = $row->eloquentParams[$colName];
         //TODO: This is to prevent from a crash
         if ($eloquentParam[0] === 'morphToMany') return [];
 
-        if (isset($eloquentParam[2])) $relation = $itemDB->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
-        elseif (isset($eloquentParam[1])) $relation = $itemDB->{$eloquentParam[0]}($eloquentParam[1]);
-        elseif (isset($eloquentParam[0])) $relation = $itemDB->{$eloquentParam[0]}();
+        if (isset($eloquentParam[2])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
+        elseif (isset($eloquentParam[1])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1]);
+        elseif (isset($eloquentParam[0])) $relation = $row->{$eloquentParam[0]}();
         $perPage = $showAll ? 10000 : 10;
         return $relation->getQuery()->paginate($perPage, ['*'], $colName);
     }
 
-    private function getModelOfEloquentParam($itemDB, $colName,)
-    {
-        $eloquentParam = $itemDB->eloquentParams[$colName];
-        return $eloquentParam[1];
-    }
-
-    private function makeEditableColumns($columns, $sp)
-    {
-        $result = [];
-        foreach ($columns as $column) {
-            $newColumn = $column;
-            $prop = $sp['props']["_" . $column['dataIndex']];
-            $newColumn['title'] = $prop['label'] . " <br/>" . $prop['control'];
-            $newColumn['renderer'] = "text";
-            $newColumn['editable'] = true;
-            $result[] = $newColumn;
-        }
-        // dump($result);
-        return $result;
-    }
-
     private function makeReadOnlyColumns($columns, $sp, $tableName)
     {
+        // dump($sp);
         $result = [];
         foreach ($columns as $column) {
             $newColumn = $column;
+            // if (!isset($sp['props']["_" . $column['dataIndex']])) die();
             $prop = $sp['props']["_" . $column['dataIndex']];
-            $newColumn['title'] = $prop['label'] . " <br/>" . $prop['control'];
+            $newColumn['title'] = $column['title'] ?? $prop['label'] . " <br/>" . $prop['control'];
             switch ($prop['control']) {
                 case 'id':
                     $newColumn['renderer'] = 'id';
@@ -74,16 +55,38 @@ class RelationshipRenderer extends Component
                     $dataIndex = $prop['relationships']['control_name_function'];
                     $newColumn['dataIndex'] = $dataIndex;
                     $newColumn['renderer'] = 'column';
-                    $newColumn['rendererParam'] = 'name';
+                    $newColumn['rendererParam'] = $column['rendererParam'] ?? 'name';
                     break;
                 case 'status':
                     $newColumn['renderer'] = 'status';
                     $newColumn['align'] = 'center';
                     break;
+                case 'number':
+                    $newColumn['align'] = 'right';
+                    break;
+                case 'toggle':
+                    $newColumn['renderer'] = 'toggle';
+                    $newColumn["align"] = "center";
+                    break;
                 default:
                     $newColumn['renderer'] = "text";
                     break;
             }
+            $result[] = $newColumn;
+        }
+        // dump($result);
+        return $result;
+    }
+
+    private function makeEditableColumns($columns, $sp)
+    {
+        $result = [];
+        foreach ($columns as $column) {
+            $newColumn = $column;
+            $prop = $sp['props']["_" . $column['dataIndex']];
+            $newColumn['title'] = $column['title'] ?? $prop['label'] . " <br/>" . $prop['control'];
+            $newColumn['renderer'] = "text";
+            $newColumn['editable'] = true;
             $result[] = $newColumn;
         }
         // dump($result);
@@ -96,41 +99,34 @@ class RelationshipRenderer extends Component
         $modelPath = $this->modelPath;
         $type = $this->type;
         $id = $this->id;
-        $action = CurrentRoute::getControllerAction();
 
-        if ($action !== 'edit') return "";
+        $superProps = SuperProps::getFor($this->type);
+        $props = $superProps['props']["_" . $colName];
+        // dump($colName);
+        // dump($props);
 
-        $relationship = Relationships::getAllOf($this->type);
-
-        $theValue = array_filter($relationship, fn ($value) => $value['control_name'] === $colName);
-        if (empty($theValue)) return "<x-feedback.alert message='Column [$colName] can not be found in control_name of Relationship screen.' type='warning' />";
-        $value = $theValue["_" . $colName];
-
-        $itemDB = $modelPath::find($id);
-        if (is_null($itemDB->$colName)) return "<x-feedback.alert message='There is no item to be found.' type='warning' />";
-
-        // $dataSource = $itemDB->$colName->all();
-        $renderer_edit = $value['renderer_edit'];
+        $renderer_edit = $props['relationships']['renderer_edit'];
         $showAll = $renderer_edit === "many_icons";
-        $dataSource = $this->getDataSource($itemDB, $colName, $showAll);
-        $smallModel = $this->getModelOfEloquentParam($itemDB, $colName);
+        $smallModel = $props['relationships']['eloquentParams'][1];
         $instance = new $smallModel;
 
-        $fn = $value['renderer_edit_param'];
+        $fn = $props['relationships']['renderer_edit_param'];
         if (!method_exists($instance, $fn))  $fn = '';
-        $typeDB =  isset($dataSource[0]) ? $dataSource[0]->getTable() : "";
+        $tableName = $smallModel::getTableName();
         $columns = ($fn === '')
             ? [
-                ["dataIndex" => 'id', "renderer" => "id", "type" => $typeDB, "align" => "center"],
+                ["dataIndex" => 'id', "renderer" => "id", "type" => $tableName, "align" => "center"],
                 ["dataIndex" => 'name'],
             ]
             : $instance->$fn();
 
+        $row = $modelPath::find($id);
+        $dataSource = $row ? $this->getDataSource($row, $colName, $showAll) : [];
         switch ($renderer_edit) {
             case "many_icons":
                 $colSpan =  Helper::getColSpan($colName, $type);
                 foreach ($dataSource as &$item) {
-                    $item['href'] = route($typeDB . '.edit', $item->id);
+                    $item['href'] = route($tableName . '.edit', $item->id);
                     $item['gray'] = $item['resigned'];
                 }
                 $dataSource = $dataSource->all(); // Force LengthAwarePaginator to Array

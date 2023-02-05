@@ -22,8 +22,8 @@ class Public_holiday extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ["dataIndex" => 'id', 'renderer' => 'id', 'type' => 'public_holidays', 'align' => 'center'],
-            ['dataIndex' => 'getWorkplace', 'title' => 'Workplace', 'renderer' => 'column', 'rendererParam' => 'name'],
+            ["dataIndex" => 'id',],
+            ['dataIndex' => 'workplace_id', 'title' => 'Workplace',],
             ['dataIndex' => 'year'],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'ph_date'],

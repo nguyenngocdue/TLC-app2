@@ -45,7 +45,7 @@ class Prod_routing extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id', 'renderer' => 'id', 'align' => 'center', 'type' => 'prod_routings'],
+            ['dataIndex' => 'id'],
             ['dataIndex' => 'name'],
         ];
     }

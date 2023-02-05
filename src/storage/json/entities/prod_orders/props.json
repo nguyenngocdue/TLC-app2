@@ -59,9 +59,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_production": {
-        "name": "_production",
-        "column_name": "production",
+    "_production_name": {
+        "name": "_production_name",
+        "column_name": "production_name",
         "column_type": "string",
         "label": "Production Name",
         "control": "text",
@@ -74,9 +74,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_compliance": {
-        "name": "_compliance",
-        "column_name": "compliance",
+    "_compliance_name": {
+        "name": "_compliance_name",
+        "column_name": "compliance_name",
         "column_type": "string",
         "label": "Compliance Name",
         "control": "text",

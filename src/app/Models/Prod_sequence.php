@@ -66,20 +66,39 @@ class Prod_sequence extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ["dataIndex" => "id", "renderer" => "id", "type" => "prod_sequences", "align" => "center"],
-            ["dataIndex" => "prodOrder", "title" => "Prod Order Id", "renderer" => "column", "rendererParam" => "id"],
-            ["dataIndex" => "prodOrder", "title" => "Routing Id (*)", "renderer" => "column", "rendererParam" => "prod_routing_id"],
-            ["dataIndex" => "prodRoutingLinks", "title" => "Prod Routing ID", "renderer" => "column", "rendererParam" => "id"],
-            ["dataIndex" => "prodRoutingLinks",  "title" => "Prod Routing Name (*)", "renderer" => "column", "rendererParam" => "name"],
+            ["dataIndex" => "id",], //"renderer" => "id", "type" => "prod_sequences", "align" => "center"],
+            ["dataIndex" => "prod_order_id", "title" => "Prod Order Id", "rendererParam" => "id"],
+            ["dataIndex" => "prod_order_id", "title" => "Routing Id (*)", "rendererParam" => "prod_routing_id"],
+            ["dataIndex" => "prod_routing_link_id", "title" => "Prod Routing ID", "rendererParam" => "id"],
+            ["dataIndex" => "prod_routing_link_id",  "title" => "Prod Routing Name (*)", "rendererParam" => "name"],
 
-            ["dataIndex" => "expected_start_at", "align" => "right"],
-            ["dataIndex" => "expected_finish_at", "align" => "right"],
+            ["dataIndex" => "expected_start_at",],
+            ["dataIndex" => "expected_finish_at",],
 
-            ["dataIndex" => "total_hours", "align" => "right"],
-            ["dataIndex" => "total_man_hours", "title" => "Total ManHours", "align" => "right"],
-            ["dataIndex" => "prodRoutingDetails", "title" => "Target Hours", "align" => "right", "renderer" => "column", "rendererParam" => "target_hours"],
-            ["dataIndex" => "prodRoutingDetails", "title" => "Target ManHours (*)", "align" => "right", "renderer" => "column", "rendererParam" => "target_man_hours"],
-            ["dataIndex" => "status", "renderer" => "status", "align" => "center"],
+            ["dataIndex" => "total_hours",],
+            ["dataIndex" => "total_man_hours", "title" => "Total ManHours",],
+            ["dataIndex" => "prod_routing_link_id", "title" => "Target Hours", "rendererParam" => "target_hours"],
+            ["dataIndex" => "prod_routing_link_id", "title" => "Target ManHours (*)", "rendererParam" => "target_man_hours"],
+            ["dataIndex" => "status",],
         ];
     }
+    // public function getManyLineParams()
+    // {
+    //     return [
+    //         ["dataIndex" => "id", "renderer" => "id", "type" => "prod_sequences", "align" => "center"],
+    //         ["dataIndex" => "prodOrder", "title" => "Prod Order Id", "renderer" => "column", "rendererParam" => "id"],
+    //         ["dataIndex" => "prodOrder", "title" => "Routing Id (*)", "renderer" => "column", "rendererParam" => "prod_routing_id"],
+    //         ["dataIndex" => "prodRoutingLinks", "title" => "Prod Routing ID", "renderer" => "column", "rendererParam" => "id"],
+    //         ["dataIndex" => "prodRoutingLinks",  "title" => "Prod Routing Name (*)", "renderer" => "column", "rendererParam" => "name"],
+
+    //         ["dataIndex" => "expected_start_at", "align" => "right"],
+    //         ["dataIndex" => "expected_finish_at", "align" => "right"],
+
+    //         ["dataIndex" => "total_hours", "align" => "right"],
+    //         ["dataIndex" => "total_man_hours", "title" => "Total ManHours", "align" => "right"],
+    //         ["dataIndex" => "prodRoutingDetails", "title" => "Target Hours", "align" => "right", "renderer" => "column", "rendererParam" => "target_hours"],
+    //         ["dataIndex" => "prodRoutingDetails", "title" => "Target ManHours (*)", "align" => "right", "renderer" => "column", "rendererParam" => "target_man_hours"],
+    //         ["dataIndex" => "status", "renderer" => "status", "align" => "center"],
+    //     ];
+    // }
 }

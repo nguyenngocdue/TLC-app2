@@ -33,7 +33,7 @@ $id = $action === "edit" ? $values->id : "";
         @endphp
         @foreach($props as $key => $val)
         @php
-        if ($action === "create" && $val['control'] === 'relationship_renderer') continue;
+        // if ($action === "create" && $val['control'] === 'relationship_renderer') continue;
         $defaultValue = $defaultValues[$key] ?? [];
 
         $label = $val['label'];
@@ -103,7 +103,6 @@ $id = $action === "edit" ? $values->id : "";
 
                         {{-- Invisible anchor for scrolling when users click on validation fail message --}}
                         <strong class="scroll-mt-20 snap-start" id="scroll-{{$columnName}}"></strong>
-
                         @switch ($control)
                         @case($timeControls[0])
                         @case($timeControls[1])
@@ -166,7 +165,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case('relationship_renderer')
-                        <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} colSpan={{$col_span}} />
+                        <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
                         @break
 
                         @default

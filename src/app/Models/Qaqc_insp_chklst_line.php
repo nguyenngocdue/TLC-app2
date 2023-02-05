@@ -37,26 +37,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    // public function getNoOfYesNo()
-    // {
-    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
-    // public function getOnHoldOfYesNo()
-    // {
-    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
-    // public function getFailedOfPassFail()
-    // {
-    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
-    // public function getOnHoldOfPassFail()
-    // {
-    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
+
     public function getGroup()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -85,7 +66,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id', "renderer" => "id", "align" => "center", "type" => "qaqc_insp_chklst_lines"],
+            ['dataIndex' => 'id',],
             ['dataIndex' => 'getChklst', 'title' => "Checklist", 'renderer' => "column", "rendererParam" => "description"],
             // ['dataIndex' => 'getSheet', 'title' => "Sheet", 'renderer' => "column", "rendererParam" => "description"],
             // ['dataIndex' => 'getGroup', "title" => "Group", 'renderer' => "column", "rendererParam" => "description"],
