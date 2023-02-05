@@ -4,8 +4,8 @@ namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\Relationships;
+use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
 class RelationshipRenderer extends Component
@@ -42,18 +42,48 @@ class RelationshipRenderer extends Component
         return $eloquentParam[1];
     }
 
-    private function makeEditableColumns($columns, $tableName)
+    private function makeEditableColumns($columns, $sp)
     {
-        $props = Props::getAllOf($tableName);
-        // dump($props);
-
         $result = [];
         foreach ($columns as $column) {
             $newColumn = $column;
-            $prop =  $props['_' . $column['dataIndex']];
+            $prop = $sp['props']["_" . $column['dataIndex']];
             $newColumn['title'] = $prop['label'] . " <br/>" . $prop['control'];
             $newColumn['renderer'] = "text";
             $newColumn['editable'] = true;
+            $result[] = $newColumn;
+        }
+        // dump($result);
+        return $result;
+    }
+
+    private function makeReadOnlyColumns($columns, $sp, $tableName)
+    {
+        $result = [];
+        foreach ($columns as $column) {
+            $newColumn = $column;
+            $prop = $sp['props']["_" . $column['dataIndex']];
+            $newColumn['title'] = $prop['label'] . " <br/>" . $prop['control'];
+            switch ($prop['control']) {
+                case 'id':
+                    $newColumn['renderer'] = 'id';
+                    $newColumn['type'] = $tableName;
+                    $newColumn['align'] = 'center';
+                    break;
+                case 'dropdown':
+                    $dataIndex = $prop['relationships']['control_name_function'];
+                    $newColumn['dataIndex'] = $dataIndex;
+                    $newColumn['renderer'] = 'column';
+                    $newColumn['rendererParam'] = 'name';
+                    break;
+                case 'status':
+                    $newColumn['renderer'] = 'status';
+                    $newColumn['align'] = 'center';
+                    break;
+                default:
+                    $newColumn['renderer'] = "text";
+                    break;
+            }
             $result[] = $newColumn;
         }
         // dump($result);
@@ -69,7 +99,6 @@ class RelationshipRenderer extends Component
         $action = CurrentRoute::getControllerAction();
 
         if ($action !== 'edit') return "";
-
 
         $relationship = Relationships::getAllOf($this->type);
 
@@ -108,8 +137,10 @@ class RelationshipRenderer extends Component
                 return view('components.controls.many-icon-params')->with(compact('dataSource', 'colSpan'));
             case "many_lines":
                 $tableName =  $smallModel::getTableName();
-                $editableColumns = $this->makeEditableColumns($columns, $tableName);
-                return view('components.controls.many-line-params')->with(compact('columns', 'dataSource', 'fn', 'editableColumns', 'tableName'));
+                $sp = SuperProps::getFor($tableName);
+                $readOnlyColumns = $this->makeReadOnlyColumns($columns, $sp, $tableName);
+                $editableColumns = $this->makeEditableColumns($columns, $sp,);
+                return view('components.controls.many-line-params')->with(compact('readOnlyColumns', 'dataSource', 'fn', 'editableColumns', 'tableName'));
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
         }

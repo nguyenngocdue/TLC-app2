@@ -34,7 +34,7 @@ class Hse_corrective_action extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getManyLineParams()
+    public function getManyLineParams0()
     {
         return [
             ['dataIndex' => 'id', 'renderer' => 'id', 'type' => 'hse_corrective_actions', 'align' => 'center'],
@@ -51,7 +51,7 @@ class Hse_corrective_action extends ModelExtended
         ];
     }
 
-    public function getManyLineParams1()
+    public function getManyLineParams()
     {
         return [
             ['dataIndex' => 'id',], //'renderer' => 'id', 'type' => 'hse_corrective_actions', 'align' => 'center'],

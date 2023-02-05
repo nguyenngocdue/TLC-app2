@@ -19,6 +19,7 @@ class SuperProps
         $result = [];
         foreach ($allRelationship as $key => $rls) {
             $column_name = $rls['control_name'];
+            $rls['control_name_function'] = substr($key, 1); //remove first "_";
 
             foreach ($dummyInstance->eloquentParams as $key2 => $params) {
                 if ("_" . $key2 === $key) {
