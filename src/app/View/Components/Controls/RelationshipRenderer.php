@@ -4,8 +4,8 @@ namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\Relationships;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class RelationshipRenderer extends Component
@@ -42,11 +42,24 @@ class RelationshipRenderer extends Component
         return $eloquentParam[1];
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
+    private function makeEditableColumns($columns, $tableName)
+    {
+        $props = Props::getAllOf($tableName);
+        // dump($props);
+
+        $result = [];
+        foreach ($columns as $column) {
+            $newColumn = $column;
+            $prop =  $props['_' . $column['dataIndex']];
+            $newColumn['title'] = $prop['label'] . " <br/>" . $prop['control'];
+            $newColumn['renderer'] = "text";
+            $newColumn['editable'] = true;
+            $result[] = $newColumn;
+        }
+        // dump($result);
+        return $result;
+    }
+
     public function render()
     {
         $colName = $this->colName;
@@ -94,7 +107,9 @@ class RelationshipRenderer extends Component
                 $dataSource = $dataSource->all(); // Force LengthAwarePaginator to Array
                 return view('components.controls.many-icon-params')->with(compact('dataSource', 'colSpan'));
             case "many_lines":
-                return view('components.controls.many-line-params')->with(compact('columns', 'dataSource', 'fn'));
+                $tableName =  $smallModel::getTableName();
+                $editableColumns = $this->makeEditableColumns($columns, $tableName);
+                return view('components.controls.many-line-params')->with(compact('columns', 'dataSource', 'fn', 'editableColumns', 'tableName'));
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
         }

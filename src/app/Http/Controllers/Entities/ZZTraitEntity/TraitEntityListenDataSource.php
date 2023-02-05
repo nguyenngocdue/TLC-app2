@@ -15,7 +15,7 @@ trait TraitEntityListenDataSource
     private function dump2($title, $content, $line = '')
     {
         if ($this->debugListenDataSource) {
-            echo "$title " . $line;
+            echo "$title line $line";
             dump($content);
         }
     }

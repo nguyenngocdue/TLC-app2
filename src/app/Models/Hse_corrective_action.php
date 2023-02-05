@@ -50,4 +50,25 @@ class Hse_corrective_action extends ModelExtended
             ['dataIndex' => 'unsafe_action_type_id', 'title' => 'Unsafe Action Type'],
         ];
     }
+
+    public function getManyLineParams1()
+    {
+        return [
+            ['dataIndex' => 'id',], //'renderer' => 'id', 'type' => 'hse_corrective_actions', 'align' => 'center'],
+            // ['dataIndex' => 'getHseIncidentReport', 'title' => 'Source Doc', 'renderer' => 'column', 'rendererParam' => 'name'],
+            ['dataIndex' => 'hse_incident_report_id'],
+            ['dataIndex' => 'name',], //'title' => 'Name'],
+            ['dataIndex' => 'priority_id',], // 'title' => 'Priority ID'],
+            // ['dataIndex' => 'getWorkArea', 'title' => 'Work Area', 'renderer' => 'column', 'rendererParam' => 'name'],
+            ['dataIndex' => 'work_area_id'],
+
+            ['dataIndex' => 'description'],
+            // ['dataIndex' => 'getAssignee', 'title' => 'Assignee', 'renderer' => 'column', 'rendererParam' => 'name'],
+            ['dataIndex' => 'assignee'],
+            ['dataIndex' => 'opened_date'],
+            ['dataIndex' => 'closed_date'],
+            ['dataIndex' => 'status',], //"renderer" => "status", "align" => "center"],
+            ['dataIndex' => 'unsafe_action_type_id',], // 'title' => 'Unsafe Action Type'],
+        ];
+    }
 }

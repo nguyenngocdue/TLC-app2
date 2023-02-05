@@ -3,18 +3,21 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Models\Attachment;
+use App\Utils\Support\Json\SuperProps;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 trait TraitEntityCRUDStoreUpdate2
 {
+	use TraitEntityEditableTable;
+
 	private $debugForStoreUpdate = false;
 
-	private function dump1($title, $content)
+	private function dump1($title, $content, $line)
 	{
 		if ($this->debugForStoreUpdate) {
-			echo "$title";
+			echo "$title line $line";
 			dump($content);
 		}
 	}
@@ -25,11 +28,14 @@ trait TraitEntityCRUDStoreUpdate2
 			'oracy_prop' => [],
 			'eloquent_prop' => [],
 			'attachment' => [],
+			'editable_table' => [],
 		];
 		foreach ($this->superProps['props'] as $prop) {
 			if ($prop['control'] === 'attachment') {
 				$column_type = 'attachment';
-			} else
+			} elseif ($prop['control'] === 'relationship_renderer') {
+				$column_type = 'editable_table';
+			} else {
 				switch ($prop['column_type']) {
 					case 'oracy_prop':
 					case 'eloquent_prop':
@@ -39,9 +45,10 @@ trait TraitEntityCRUDStoreUpdate2
 						$column_type = 'field';
 						break;
 				}
+			}
 			$result[$column_type][] = $prop['name'];
 		}
-		$this->dump1("getProps1", $result);
+		$this->dump1("getProps1", $result, __LINE__);
 		return $result;
 	}
 
@@ -54,7 +61,7 @@ trait TraitEntityCRUDStoreUpdate2
 			}
 		}
 		$rules = array_filter($rules, fn ($i) => $i);
-		$this->dump1("getValidationRules", $rules);
+		$this->dump1("getValidationRules", $rules, __LINE__);
 		return $rules;
 	}
 
@@ -99,7 +106,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 			$fieldName = substr($propName, 0, strlen($propName) - 2); //Remove parenthesis ()
 			$theRow->syncCheck($fieldName, $relatedModel, $ids);
-			$this->dump1("handleCheckboxAndDropdownMulti $propName", $ids);
+			$this->dump1("handleCheckboxAndDropdownMulti $propName", $ids, __LINE__);
 		}
 	}
 
@@ -111,7 +118,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$dataSource = $this->handleToggle($dataSource);
 		$dataSource = $this->handleTextArea($dataSource);
 
-		$this->dump1("handleFields", $dataSource);
+		$this->dump1("handleFields", $dataSource, __LINE__);
 		return $dataSource;
 	}
 
@@ -161,7 +168,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function store(Request $request)
 	{
-		$this->dump1("Request", $request->input());
+		$this->dump1("Request", $request->input(), __LINE__);
 		$props = $this->getProps1();
 		$this->deleteAttachments($props['attachment'], $request);
 		//Uploading attachments has to run before form validation
@@ -186,7 +193,13 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function update(Request $request, $id)
 	{
-		$this->dump1("Request", $request->input());
+		if ($request['tableNames'] === 'fakeRequest') {
+			$tableName = $request['tableName'];
+			$this->superProps = SuperProps::getFor($tableName);
+			$this->data = Str::modelPathFrom($tableName);
+		}
+
+		$this->dump1("Request", $request->input(), __LINE__);
 		$props = $this->getProps1();
 		$this->deleteAttachments($props['attachment'], $request);
 		//Uploading attachments has to run before form validation
@@ -204,10 +217,12 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 
 		$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
+
+		if ($request['tableNames'] !== 'fakeRequest') $this->handleEditableTables($request, $props['editable_table']);
 		$this->handleStatus($theRow, $fields);
 
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
-		Toastr::success("$this->type updated successfully", "Updated $this->type");
+		if ($request['tableNames'] !== 'fakeRequest') Toastr::success("$this->type updated successfully", "Updated $this->type");
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 }
