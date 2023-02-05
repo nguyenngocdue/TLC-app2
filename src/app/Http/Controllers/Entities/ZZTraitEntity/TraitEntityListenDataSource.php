@@ -12,10 +12,10 @@ trait TraitEntityListenDataSource
 {
     private $debugListenDataSource = false;
 
-    private function dump2($title, $content)
+    private function dump2($title, $content, $line = '')
     {
         if ($this->debugListenDataSource) {
-            echo "$title";
+            echo "$title " . $line;
             dump($content);
         }
     }
@@ -23,7 +23,7 @@ trait TraitEntityListenDataSource
     private function refineListenToFieldAndAttr()
     {
         $sp = $this->superProps;
-        $this->dump2("SuperProps", $sp);
+        $this->dump2("SuperProps", $sp, __LINE__);
 
         $listen_to_attrs = [];
         $listen_to_tables = [];
@@ -47,16 +47,16 @@ trait TraitEntityListenDataSource
 
         $listen_to_tables = Arr::flatten($listen_to_tables);
         $listen_to_attrs = Arr::flatten($listen_to_attrs);
-        $this->dump2('listen_to_tables', $listen_to_tables);
-        $this->dump2('listen_to_attrs', $listen_to_attrs);
+        $this->dump2('listen_to_tables', $listen_to_tables, __LINE__);
+        $this->dump2('listen_to_attrs', $listen_to_attrs, __LINE__);
 
         $toBeLoaded = array_unique([...$toBeLoaded, ...$listen_to_tables]);
-        $this->dump2("To Be Loaded Tables", $toBeLoaded);
+        $this->dump2("To Be Loaded Tables", $toBeLoaded, __LINE__);
 
         $extraColumns = [];
         //Scan and flag all extra columns in Listeners screen
         foreach ($listen_to_tables as $i => $table) $extraColumns[$table][] = $listen_to_attrs[$i];
-        $this->dump2("Extra Columns to load: ", $extraColumns);
+        $this->dump2("Extra Columns to load: ", $extraColumns, __LINE__);
 
         foreach ($sp['props'] as $prop) {
             $relationships = $prop['relationships'];
@@ -80,6 +80,7 @@ trait TraitEntityListenDataSource
         [$extraColumns, $toBeLoaded] = $this->refineListenToFieldAndAttr();
 
         $matrix = [];
+        $notFoundInProps = [];
         foreach ($toBeLoaded as $table) {
             $props = Props::getAllOf($table);
             $defaultColumns =  ['id', 'name', 'description'];
@@ -87,11 +88,12 @@ trait TraitEntityListenDataSource
             //Make sure all columns in matrix is really exist in the Prop list
             $availableColumnNames = array_values(array_map(fn ($prop) => $prop['column_name'], $props));
             $matrix[$table] = array_intersect($defaultColumns, $availableColumnNames);
-            $diff = array_diff($matrix[$table], $defaultColumns);
-
-            if (sizeof($diff) > 0) $this->dump2("Column not found in $table", $diff);
+            $diff = array_diff($defaultColumns, $matrix[$table]);
+            if (sizeof($diff) > 0) $notFoundInProps[$table] = $diff;
         }
-        $this->dump2("Matrix", $matrix);
+        $this->dump2("Column not found in prop.json", $notFoundInProps, __LINE__);
+        $this->dump2("Matrix", $matrix, __LINE__);
+        // dump($matrix);
         return $matrix;
     }
 
@@ -113,7 +115,7 @@ trait TraitEntityListenDataSource
             $result[$table] = array_map(fn ($o) => (array)$o, $objectRows);
         }
 
-        $this->dump2("columnsWithOracy", $columnsWithOracy);
+        $this->dump2("columnsWithOracy", $columnsWithOracy, __LINE__);
         foreach ($columnsWithOracy as $table => $listOfFn) {
             // $modelPath = "App\\Models\\" . Str::singular($table);
             $modelPath = Str::modelPathFrom($table);
@@ -128,7 +130,7 @@ trait TraitEntityListenDataSource
             }
         }
 
-        $this->dump2("Result", $result);
+        $this->dump2("Result", $result, __LINE__);
         return $result;
     }
 

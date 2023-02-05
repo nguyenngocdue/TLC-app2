@@ -22,7 +22,7 @@
 <script>
     let toggleVParentMode = "";
     const getCheckboxElement = (status, id) => {
-        let name = 'table00['+status+']['+id+']'
+        let name = 'table01['+status+']['+id+']'
         return document.getElementsByName(name)[0]
     }
 

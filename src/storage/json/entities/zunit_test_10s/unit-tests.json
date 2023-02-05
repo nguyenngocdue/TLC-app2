@@ -1,0 +1,10 @@
+{
+    "_123": {
+        "name": "_123",
+        "column_name": "123",
+        "text_value": "a",
+        "number_value": "111",
+        "checkbox": "true",
+        "dropdown": "value_1"
+    }
+}

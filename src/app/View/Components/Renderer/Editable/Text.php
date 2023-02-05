@@ -18,8 +18,11 @@ class Text extends Component
         private $cell = null,
         // private $width = null,
     ) {
-        // $this->cell = "hello \"a\"";
-        // dump($this->cell);
+        //In case of listeners, the data was parsed in to array
+        if (is_array($this->cell)) {
+            // dd($this->cell);
+            $this->cell = join(",", $this->cell);
+        }
         if (str_starts_with($this->cell, "No dataIndex for ")) {
             $this->cell = "";
         }

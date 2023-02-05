@@ -14,7 +14,7 @@ class Table extends Component
 
   public function __construct(
     private Request $request,
-    private $tableName = 'table00',
+    private $tableName = 'table01',
     private $columns = null,
     private $dataSource = null,
     private $dataHeader = null,

@@ -10,10 +10,30 @@ trait HasDataSource
 {
     private $loadFilterColumnByPHP = true;
 
+    function getName()
+    {
+        if ($this->table01Name) {
+            $name = "_hse_incident_report_id";
+        } else {
+            $name = "_" . $this->name;
+        }
+        return $name;
+    }
+
+    function getType()
+    {
+        if ($this->table01Name) {
+            $type = "hse_corrective_action";
+        } else {
+            $type = $this->type;
+        }
+        return $type;
+    }
+
     function getRelatedModelEOO($eloquentOrOracy)
     {
-        $sp = SuperProps::getFor($this->type);
-        $name = "_" . $this->name;
+        $sp = SuperProps::getFor($this->getType());
+        $name = $this->getName();
         $params = $sp['props'][$name]['relationships'][$eloquentOrOracy];
         $relatedModel = $params[1];
         return $relatedModel;
@@ -30,8 +50,9 @@ trait HasDataSource
     {
         $relatedModel = $this->getRelatedModelEOO($eloquentOrOracy);
         if ($this->loadFilterColumnByPHP) {
-            $sp = SuperProps::getFor($this->type);
-            $name = "_" . $this->name;
+            $sp = SuperProps::getFor($this->getType());
+            $name = $this->getName();
+
             $table = (new $relatedModel)->getTable();
             $dataSource = DB::table($table);
 
@@ -72,8 +93,8 @@ trait HasDataSource
 
     function getSpan()
     {
-        $sp = SuperProps::getFor($this->type);
-        $name = "_" . $this->name;
+        $sp = SuperProps::getFor($this->getType());
+        $name = $this->getName();
         return $sp['props'][$name]['relationships']['radio_checkbox_colspan'];
     }
 }

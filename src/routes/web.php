@@ -105,9 +105,10 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::get('/mail-test', [MailController::class, 'index']);
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
 Route::get('test', [HomeController::class, 'index']);
-Route::resource('welcome', WelcomeController::class)->only('index', 'store');
+Route::resource('welcome', WelcomeController::class)->only('index');
 Route::resource('welcome-due', WelcomeDueController::class)->only('index');
 Route::resource('welcome-due-2', WelcomeDue2Controller::class)->only('index');
+Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index', 'store');
 Route::get('app-menu', [AppMenuController::class, 'index']);
 Route::group([
     'prefix' => 'dashboard/workflow',

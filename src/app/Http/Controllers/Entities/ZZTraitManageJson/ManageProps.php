@@ -208,8 +208,8 @@ class ManageProps extends Manage_Parent
 
     public function create(Request $request)
     {
-        $table00 = $request->input('table00');
-        $name = $table00['name'][0];
+        $table01 = $request->input('table01');
+        $name = $table01['name'][0];
         $names = explode("|", $name);
         $newItems = [];
         foreach ($names as $name) $newItems[$name] = [

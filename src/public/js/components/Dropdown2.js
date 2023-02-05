@@ -1,10 +1,10 @@
 const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="flex justify-between px-1"><span>${state.text}</span><span>${state.id}</span></div>`)
 
-let k = {}, listeners = {}
+let k = {}, listenersOfDropdown2 = {}, filtersOfDropdown2 = {}
 
 const filterDropdown2 = (column_name, dataSource) => {
-    if (filters[column_name] !== undefined) {
-        const { filter_columns, filter_values } = filters[column_name]
+    if (filtersOfDropdown2[column_name] !== undefined) {
+        const { filter_columns, filter_values } = filtersOfDropdown2[column_name]
         //Filter by filter_columns and filter_values
         for (let i = 0; i < filter_columns.length; i++) {
             const column = filter_columns[i]
@@ -90,8 +90,8 @@ const onChangeDropdown2Dot = (listener) => {
 
 const onChangeDropdown2 = (name) => {
     // console.log("onChangeDropdown2", name, control.value)
-    for (let i = 0; i < listeners.length; i++) {
-        let listener = listeners[i]
+    for (let i = 0; i < listenersOfDropdown2.length; i++) {
+        let listener = listenersOfDropdown2[i]
         const { triggers, listen_action } = listener
         if (triggers.includes(name)) {
             switch (listen_action) {
@@ -117,6 +117,10 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
     let options = []
 
     dataSource = filterDropdown2(id, dataSource)
+    if (dataSource === undefined) {
+        console.error("DataSource not found in k for dropdown", id);
+        return;
+    }
     // console.log("Loading dataSource for", id, selected, dataSource)
 
     for (let i = 0; i < dataSource.length; i++) {

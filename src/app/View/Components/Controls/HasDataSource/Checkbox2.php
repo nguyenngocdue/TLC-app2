@@ -11,6 +11,7 @@ class Checkbox2 extends Component
         private $type,
         private $name,
         private $selected,
+        private $table01Name = null,
     ) {
         $old = old($name);
         if (!is_null($old)) $this->selected = "[" . join(",", $old) . "]";

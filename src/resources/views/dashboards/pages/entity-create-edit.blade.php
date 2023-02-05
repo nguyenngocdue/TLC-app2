@@ -14,8 +14,8 @@ $id = $action === "edit" ? $values->id : "";
 {{-- HERE {{mb_strlen(serialize((array)$listenerDataSource), '8bit');}} bytes --}}
 <script>
     k = @json($listenerDataSource);
-    listeners = @json($listeners);
-    filters = @json($filters);
+    listenersOfDropdown2 = @json($listeners);
+    filtersOfDropdown2 = @json($filters);
 
 </script>
 

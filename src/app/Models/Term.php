@@ -6,7 +6,15 @@ use App\BigThink\ModelExtended;
 
 class Term extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'description', 'slug', 'field_id'];
+    protected $fillable = [
+        'id',
+        'name',
+        'description',
+        'slug',
+        'field_id',
+        'parent1_id',
+        'parent2_id',
+    ];
     protected $table = "terms";
 
     public $eloquentParams = [

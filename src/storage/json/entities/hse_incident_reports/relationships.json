@@ -7,6 +7,7 @@
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "comment",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -19,6 +20,7 @@
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "comment",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -31,6 +33,7 @@
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "comment",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -43,6 +46,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -55,6 +59,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -67,6 +72,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -79,6 +85,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -91,6 +98,7 @@
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -103,6 +111,7 @@
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
+        "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -115,6 +124,7 @@
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
+        "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -127,6 +137,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "field_id",
         "filter_values": "108",
         "radio_checkbox_colspan": ""
@@ -139,6 +150,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "field_id",
         "filter_values": "109",
         "radio_checkbox_colspan": ""
@@ -151,6 +163,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "checkbox",
         "filter_columns": "field_id",
         "filter_values": "101",
         "radio_checkbox_colspan": "3"
@@ -163,6 +176,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "checkbox",
         "filter_columns": "field_id",
         "filter_values": "102",
         "radio_checkbox_colspan": "3"
@@ -175,6 +189,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "checkbox",
         "filter_columns": "field_id",
         "filter_values": "103",
         "radio_checkbox_colspan": "3"
@@ -187,6 +202,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "checkbox",
         "filter_columns": "field_id",
         "filter_values": "104",
         "radio_checkbox_colspan": "3"
@@ -199,6 +215,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "checkbox",
         "filter_columns": "field_id",
         "filter_values": "105",
         "radio_checkbox_colspan": "3"
@@ -211,6 +228,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "checkbox",
         "filter_columns": "field_id",
         "filter_values": "106",
         "radio_checkbox_colspan": "3"
@@ -223,6 +241,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "checkbox",
         "filter_columns": "field_id",
         "filter_values": "107",
         "radio_checkbox_colspan": "3"

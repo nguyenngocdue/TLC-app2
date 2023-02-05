@@ -579,8 +579,8 @@
         "status": null,
         "icon": null
     },
-    "zunit_test_1": {
-        "name": "zunit_test_1",
+    "zunit_test_01": {
+        "name": "zunit_test_01",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
@@ -589,8 +589,18 @@
         "status": "test",
         "icon": null
     },
-    "zunit_test_2": {
-        "name": "zunit_test_2",
+    "zunit_test_10": {
+        "name": "zunit_test_10",
+        "hidden": null,
+        "package": "unit_test",
+        "sub_package": "unit_test",
+        "title": "UT10 (Editable Table)",
+        "nickname": null,
+        "status": "test",
+        "icon": null
+    },
+    "zunit_test_02": {
+        "name": "zunit_test_02",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
@@ -599,8 +609,8 @@
         "status": "test",
         "icon": null
     },
-    "zunit_test_3": {
-        "name": "zunit_test_3",
+    "zunit_test_03": {
+        "name": "zunit_test_03",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
@@ -609,8 +619,8 @@
         "status": "test",
         "icon": null
     },
-    "zunit_test_4": {
-        "name": "zunit_test_4",
+    "zunit_test_04": {
+        "name": "zunit_test_04",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
@@ -619,8 +629,8 @@
         "status": "test",
         "icon": null
     },
-    "zunit_test_5": {
-        "name": "zunit_test_5",
+    "zunit_test_05": {
+        "name": "zunit_test_05",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
@@ -629,8 +639,8 @@
         "status": "test",
         "icon": null
     },
-    "zunit_test_7": {
-        "name": "zunit_test_7",
+    "zunit_test_07": {
+        "name": "zunit_test_07",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
@@ -639,8 +649,8 @@
         "status": "test",
         "icon": null
     },
-    "zunit_test_9": {
-        "name": "zunit_test_9",
+    "zunit_test_09": {
+        "name": "zunit_test_09",
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",

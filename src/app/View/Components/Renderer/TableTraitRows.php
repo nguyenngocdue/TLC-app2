@@ -82,12 +82,10 @@ trait TableTraitRows
             $tds = $this->makeTd($columns, $dataLine, $columnCount, $start + $no + 1, $no);
 
             if ($this->groupBy) {
-                if (isset($dataLine[$this->groupBy][0])) { //<< this to make sure an item with empty name doesn't crash the app
-                    $index = strtoupper(substr($dataLine[$this->groupBy], 0, $this->groupByLength));
-                    if ($index !== $lastIndex) {
-                        $lastIndex = $index;
-                        $trs[] = "<tr class='bg-gray-100 '><td class='p-2 text-lg font-bold text-gray-600' colspan=$colspan>{$index}</td></tr>";
-                    }
+                $index = isset($dataLine[$this->groupBy][0]) ? strtoupper(substr($dataLine[$this->groupBy], 0, $this->groupByLength)) : "(EMPTY)";
+                if ($index !== $lastIndex) {
+                    $lastIndex = $index;
+                    $trs[] = "<tr class='bg-gray-100 '><td class='p-2 text-lg font-bold text-gray-600' colspan=$colspan>{$index}</td></tr>";
                 }
             }
 
