@@ -42,14 +42,27 @@ class Qaqc_insp_tmpl_line extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id', "renderer" => "id", "align" => "center", "type" => "qaqc_insp_tmpl_lines"],
-            ['dataIndex' => 'getTemplate', 'title' => "Template", 'renderer' => "column", "rendererParam" => "description"],
-            ['dataIndex' => 'getSheet', 'title' => "Sheet", 'renderer' => "column", "rendererParam" => "description"],
-            ['dataIndex' => 'getGroup', "title" => "Group", 'renderer' => "column", "rendererParam" => "description"],
-            ['dataIndex' => 'getControlType', "title" => "Control Type", 'renderer' => "column", "rendererParam" => "name"],
-            ['dataIndex' => 'getControlGroup', "title" => "Control Group", 'renderer' => "column", "rendererParam" => "name"],
+            ['dataIndex' => 'id'],
+            // ['dataIndex' => 'getTemplate', 'title' => "Template", 'renderer' => "column", "rendererParam" => "description"],
+            ['dataIndex' => 'qaqc_insp_tmpl_sht_id', 'title' => "Sheet", "rendererParam" => "description"],
+            ['dataIndex' => 'qaqc_insp_group_id', "title" => "Group", "rendererParam" => "description"],
+            ['dataIndex' => 'control_type_id', "title" => "Control Type",],
+            ['dataIndex' => 'qaqc_insp_control_group_id', "title" => "Control Group",],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'description'],
         ];
     }
+    // public function getManyLineParams()
+    // {
+    //     return [
+    //         ['dataIndex' => 'id', "renderer" => "id", "align" => "center", "type" => "qaqc_insp_tmpl_lines"],
+    //         ['dataIndex' => 'getTemplate', 'title' => "Template", 'renderer' => "column", "rendererParam" => "description"],
+    //         ['dataIndex' => 'getSheet', 'title' => "Sheet", 'renderer' => "column", "rendererParam" => "description"],
+    //         ['dataIndex' => 'getGroup', "title" => "Group", 'renderer' => "column", "rendererParam" => "description"],
+    //         ['dataIndex' => 'getControlType', "title" => "Control Type", 'renderer' => "column", "rendererParam" => "name"],
+    //         ['dataIndex' => 'getControlGroup', "title" => "Control Group", 'renderer' => "column", "rendererParam" => "name"],
+    //         ['dataIndex' => 'name'],
+    //         ['dataIndex' => 'description'],
+    //     ];
+    // }
 }

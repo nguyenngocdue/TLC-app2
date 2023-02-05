@@ -7,6 +7,7 @@
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -19,6 +20,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -27,10 +29,11 @@
         "name": "_getTmplSheet",
         "relationship": "belongsTo",
         "control_name": "qaqc_insp_tmpl_sht_id",
-        "renderer_view_all": "",
-        "renderer_view_all_param": "",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "description",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

@@ -99,14 +99,18 @@ class ManageRelationships extends Manage_Parent
             $rowDescription = "$elqName => " . join(" | ", $elqValue);
             $control_name = Relationships::getColumnName("_" . $elqName,  $elqValue[0], $columnParams);
 
-            $result["_$elqName"] = [
-                "name" => "_$elqName",
-                "eloquent" => $elqName,
-                "relationship" => $elqValue[0],
-                'control_name' => $control_name,
-                'control' => $allProps["_" . $control_name]['control'],
-                "rowDescription" => $rowDescription,
-            ];
+            if (!isset($allProps["_" . $control_name])) {
+                dump("Cannot find $control_name in $elqName");
+            } else {
+                $result["_$elqName"] = [
+                    "name" => "_$elqName",
+                    "eloquent" => $elqName,
+                    "relationship" => $elqValue[0],
+                    'control_name' => $control_name,
+                    'control' => $allProps["_" . $control_name]['control'],
+                    "rowDescription" => $rowDescription,
+                ];
+            }
         }
 
         return $result;

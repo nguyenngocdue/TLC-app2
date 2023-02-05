@@ -190,7 +190,7 @@ class User extends Authenticatable implements LdapAuthenticatable
             ['dataIndex' => 'id'],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'position_rendered'],
-            ['dataIndex' => 'resigned', 'renderer' => 'toggle', "align" => "center"],
+            ['dataIndex' => 'resigned'],
         ];
     }
     public function toSearchableArray()

@@ -14,8 +14,6 @@ class Qaqc_insp_chklst_line extends ModelExtended
     protected $table = "qaqc_insp_chklst_lines";
 
     public $eloquentParams = [
-        // "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, "qaqc_insp_chklst_id"],
-        // "getSheet" => ["belongsTo", Qaqc_insp_sheet::class, "qaqc_insp_sheet_id"],
         "getGroup" => ["belongsTo", Qaqc_insp_group::class, "qaqc_insp_group_id"],
         "getRun" => ["belongsTo", Qaqc_insp_chklst_run::class, "qaqc_insp_chklst_run_id"],
         "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],
@@ -67,12 +65,13 @@ class Qaqc_insp_chklst_line extends ModelExtended
     {
         return [
             ['dataIndex' => 'id',],
-            ['dataIndex' => 'getChklst', 'title' => "Checklist", 'renderer' => "column", "rendererParam" => "description"],
-            // ['dataIndex' => 'getSheet', 'title' => "Sheet", 'renderer' => "column", "rendererParam" => "description"],
-            // ['dataIndex' => 'getGroup', "title" => "Group", 'renderer' => "column", "rendererParam" => "description"],
+            ['dataIndex' => 'qaqc_insp_group_id', 'title' => "Group"],
+            ['dataIndex' => 'qaqc_insp_chklst_run_id', 'title' => "Run"],
+            ['dataIndex' => 'qaqc_insp_control_group_id', 'title' => "Control Group"],
+            ['dataIndex' => 'qaqc_insp_control_value_id', 'title' => "Control Value"],
+            ['dataIndex' => 'control_type_id', 'title' => "Control Type"],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'description'],
-            ['dataIndex' => 'control_type'],
         ];
     }
 }

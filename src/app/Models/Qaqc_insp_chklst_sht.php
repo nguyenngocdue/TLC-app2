@@ -36,4 +36,15 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
+    public function getManyLineParams()
+    {
+        return [
+            ['dataIndex' => 'id',],
+            ['dataIndex' => 'name'],
+            ['dataIndex' => 'description'],
+            ['dataIndex' => 'qaqc_insp_chklst_id'],
+            ['dataIndex' => 'qaqc_insp_tmpl_sht_id'],
+        ];
+    }
 }

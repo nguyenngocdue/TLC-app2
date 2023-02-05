@@ -12,6 +12,7 @@ class Qaqc_insp_chklst extends ModelExtended
     public $eloquentParams = [
         "prodOrder" => ["belongsTo", Prod_order::class, "prod_order_id"],
         "getSheets" => ["hasMany", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_id"],
+        // "getUser" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public function prodOrder()
@@ -31,6 +32,8 @@ class Qaqc_insp_chklst extends ModelExtended
             ["dataIndex" => "id"],
             ["dataIndex" => "name"],
             ["dataIndex" => "progress"],
+            ["dataIndex" => "prod_order_id"],
+            // ["dataIndex" => "owner_id"],
         ];
     }
 }
