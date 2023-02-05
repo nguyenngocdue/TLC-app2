@@ -20,14 +20,13 @@ $id = $action === "edit" ? $values->id : "";
 </script>
 
 @if ($action === "edit")
-
 <a class="text-blue-500 hover:text-gray-400" href="{{ route($editType.'.show', $id) }}">show</a></li>
 @endif
 
 <x-controls.header-alert-validation :strProps="$props" />
 <form class="w-full mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? 0 : $id )}} ">
     @csrf
-    <div class=" grid grid-cols-12">
+    <div class=" grid grid-cols-12 px-4">
         @method($action === "create" ? 'POST' : 'PUT')
         @php
         $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quarter','picker_year','picker_datetime'];
@@ -114,6 +113,7 @@ $id = $action === "edit" ? $values->id : "";
                         @case($timeControls[5])
                         @case($timeControls[6])
                         <x-controls.date-time name={{$columnName}} value={{$value}} control="{{$control}}" />
+                        <x-controls.localtime id={{$id}} control={{$control}} colName={{$columnName}} modelPath={{$modelPath}} :timeControls="$timeControls" label={{$label}} />
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('id')
@@ -170,13 +170,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @default
-                        <x-feedback.alert type="warning" title="Control" message="[{{$control}}] is not available" />
-                        @break
-                        @endswitch
-
-                        @switch ($action)
-                        @case('edit')
-                        <x-controls.localtime id={{$id}} control={{$control}} colName={{$columnName}} modelPath={{$modelPath}} :timeControls="$timeControls" label={{$label}} />
+                        <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}]" />
                         @break
                         @endswitch
                     </div>
@@ -186,24 +180,21 @@ $id = $action === "edit" ? $values->id : "";
             </div>
         </div>
         @endforeach
-
     </div>
-    <div class="flex justify-left border-t-2 dark:bg-gray-800 px-5">
-        @switch($action)
-        @case('edit')
+    <div class="flex justify-left border-t-2 dark:bg-gray-800 px-5 mb-4">
         <button type="submit" class="mt-4 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-bold text-white hover:bg-purple-400 focus:outline-none">
+            @switch($action)
+            @case('edit')
             Update
-        </button>
-        @break
-        @case('create')
-        <button type="submit" class="mt-4 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-bold text-white hover:bg-purple-400 focus:outline-none">
+            @break
+            @case('create')
             Create
+            @break
+            @default
+            <span>Unknown action "{{$action}}"</span>
+            @break
+            @endswitch
         </button>
-        @break
-        @default
-        <span>Unknown action "{{$action}}"</span>
-        @break
-        @endswitch
     </div>
 </form>
 @endsection

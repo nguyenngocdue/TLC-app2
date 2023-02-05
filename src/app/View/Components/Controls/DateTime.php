@@ -38,6 +38,6 @@ class DateTime extends Component
         $value = $this->value;
         $control = $this->control;
         $placeholder = $this->getPlaceholder($control);
-        return view('components.controls.text')->with(compact('name', 'value', 'placeholder'));
+        return view('components.controls.date-time')->with(compact('name', 'value', 'placeholder'));
     }
 }

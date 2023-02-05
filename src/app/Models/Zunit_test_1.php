@@ -15,6 +15,11 @@ class Zunit_test_1 extends ModelExtended
         "workplaceRadio1" => ['belongsTo', Workplace::class, 'radio1'],
     ];
 
+    public $oracyParams = [
+        "checkboxZut1()" => ["getCheckedByField", Workplace::class],
+        "dropdownMultiZut1()" => ["getCheckedByField", Workplace::class],
+    ];
+
     public function workplaceDropDown1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -25,19 +30,12 @@ class Zunit_test_1 extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-
-
-    public $oracyParams = [
-        "checkbox()" => ["getCheckedByField", Workplace::class],
-        "dropdownMulti()" => ["getCheckedByField", Workplace::class],
-    ];
-
-    public function checkbox()
+    public function checkboxZut1()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    public function dropdownMulti()
+    public function dropdownMultiZut1()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
