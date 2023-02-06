@@ -47,7 +47,7 @@
         "title": "ERP Routing Links",
         "nickname": null,
         "status": "beta",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-calendar-days\"><\/i>"
     },
     "field": {
         "name": "field",
@@ -145,6 +145,26 @@
         "package": "system",
         "sub_package": "production",
         "title": "Prod Disciplines",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "prod_discipline_1": {
+        "name": "prod_discipline_1",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Prod Discipline 1",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "prod_discipline_2": {
+        "name": "prod_discipline_2",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Prod Discipline 2",
         "nickname": null,
         "status": null,
         "icon": null
@@ -589,16 +609,6 @@
         "status": "test",
         "icon": null
     },
-    "zunit_test_10": {
-        "name": "zunit_test_10",
-        "hidden": null,
-        "package": "unit_test",
-        "sub_package": "unit_test",
-        "title": "UT10 (Editable Table)",
-        "nickname": null,
-        "status": "test",
-        "icon": null
-    },
     "zunit_test_02": {
         "name": "zunit_test_02",
         "hidden": null,
@@ -655,6 +665,16 @@
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT09 (Basic Events)",
+        "nickname": null,
+        "status": "test",
+        "icon": null
+    },
+    "zunit_test_10": {
+        "name": "zunit_test_10",
+        "hidden": null,
+        "package": "unit_test",
+        "sub_package": "unit_test",
+        "title": "UT10 (Editable Table)",
         "nickname": null,
         "status": "test",
         "icon": null

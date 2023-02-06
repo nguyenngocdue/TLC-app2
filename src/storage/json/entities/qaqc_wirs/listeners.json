@@ -1,0 +1,154 @@
+{
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "listen_action": "reduce",
+        "triggers": "project_id",
+        "listen_to_fields": "sub_project_id",
+        "listen_to_attrs": "project_id"
+    },
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_prod_routing_id": {
+        "name": "_prod_routing_id",
+        "column_name": "prod_routing_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_pj_level_id": {
+        "name": "_pj_level_id",
+        "column_name": "pj_level_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_pj_type_id": {
+        "name": "_pj_type_id",
+        "column_name": "pj_type_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_prod_order_id": {
+        "name": "_prod_order_id",
+        "column_name": "prod_order_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_wir_description_id": {
+        "name": "_wir_description_id",
+        "column_name": "wir_description_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_priority_id": {
+        "name": "_priority_id",
+        "column_name": "priority_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_due_date": {
+        "name": "_due_date",
+        "column_name": "due_date",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_closed_date": {
+        "name": "_closed_date",
+        "column_name": "closed_date",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_assignee_to": {
+        "name": "_assignee_to",
+        "column_name": "assignee_to",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_getDefMonitors()": {
+        "name": "_getDefMonitors()",
+        "column_name": "getDefMonitors()",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    }
+}
