@@ -34,9 +34,14 @@ trait HasDataSource
     {
         $sp = SuperProps::getFor($this->getType());
         $name = $this->getName();
-        $params = $sp['props'][$name]['relationships'][$eloquentOrOracy];
-        $relatedModel = $params[1];
-        return $relatedModel;
+        if (isset($sp['props'][$name]['relationships'][$eloquentOrOracy])) {
+            $params = $sp['props'][$name]['relationships'][$eloquentOrOracy];
+            $relatedModel = $params[1];
+            return $relatedModel;
+        } else {
+            dump("$name $eloquentOrOracy is missing ");
+            dd();
+        }
     }
 
     function getTableEOO($eloquentOrOracy)

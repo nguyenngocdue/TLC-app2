@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,10 +18,13 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        $statuses = array_keys(LibStatuses::getFor('post'));
+        // dd($statuses);
         return [
             "owner_id" => User::all()->random()->id,
             "name" => $this->faker->text(50),
             "content" => $this->faker->text(1000),
+            "status" => $statuses[random_int(0, sizeof($statuses) - 1)],
         ];
     }
 }

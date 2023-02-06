@@ -1,7 +1,10 @@
 @php
-$svg = "<span class='text-green-700 font-bold text-3xl'><i class='fa-duotone fa-square-check'></i></span>";
+$svgChecked = "<i class='fa-duotone fa-square-check'></i>";
+$svgSquare = "<i class='fa-duotone fa-square'></i>";
 $checked = !!$slot->__toString();
 @endphp
 
 {{-- {{$checked}} --}}
-{!! $checked ? $svg : "" !!}
+<span class='text-green-700 font-bold text-3xl'>
+    {!! $checked ? $svgChecked : $svgSquare !!}
+</span>

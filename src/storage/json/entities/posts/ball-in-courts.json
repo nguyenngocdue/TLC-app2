@@ -1,119 +1,22 @@
 {
     "new": {
         "name": "new",
-        "ball-in-court": "creator",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
+        "ball-in-court": "creator"
     },
-    "pending_endorsed": {
-        "name": "pending_endorsed",
-        "ball-in-court": "assignee_1",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
-    },
-    "endorse_rejected": {
-        "name": "endorse_rejected",
-        "ball-in-court": "creator",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
+    "draft": {
+        "name": "draft",
+        "ball-in-court": "assignee_1"
     },
     "pending_review": {
         "name": "pending_review",
-        "ball-in-court": "assignee_2",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
+        "ball-in-court": "assignee_2"
     },
-    "review_rejected": {
-        "name": "review_rejected",
-        "ball-in-court": "assignee_1",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
+    "publish": {
+        "name": "publish",
+        "ball-in-court": "assignee_3"
     },
-    "pending_approval": {
-        "name": "pending_approval",
-        "ball-in-court": "assignee_1",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
-    },
-    "approval_rejected": {
-        "name": "approval_rejected",
-        "ball-in-court": "assignee_2",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
-    },
-    "pending_ack": {
-        "name": "pending_ack",
-        "ball-in-court": "assignee_3",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
-    },
-    "active": {
-        "name": "active",
-        "ball-in-court": "assignee_2",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
+    "obsolete": {
+        "name": "obsolete",
+        "ball-in-court": "assignee_4"
     }
 }

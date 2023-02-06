@@ -127,9 +127,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_checkbox()": {
-        "name": "_checkbox()",
-        "column_name": "checkbox()",
+    "_checkboxZut1()": {
+        "name": "_checkboxZut1()",
+        "column_name": "checkboxZut1()",
         "column_type": "oracy_prop",
         "label": "Checkbox",
         "control": "checkbox",
@@ -143,9 +143,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_dropdownMulti()": {
-        "name": "_dropdownMulti()",
-        "column_name": "dropdownMulti()",
+    "_dropdownMultiZut1()": {
+        "name": "_dropdownMultiZut1()",
+        "column_name": "dropdownMultiZut1()",
         "column_type": "oracy_prop",
         "label": "DropdownMulti",
         "control": "dropdown_multi",
