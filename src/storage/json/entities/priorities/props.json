@@ -79,6 +79,22 @@
         "hidden_print": "",
         "new_line": ""
     },
+    "_field_id": {
+        "name": "_field_id",
+        "column_name": "field_id",
+        "column_type": "bigint",
+        "label": "Group ID",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",

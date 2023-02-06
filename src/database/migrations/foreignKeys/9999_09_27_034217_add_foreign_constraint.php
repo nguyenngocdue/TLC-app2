@@ -33,6 +33,9 @@ return new class extends Migration
         Schema::table('sub_projects', function (Blueprint $table) {
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
+        Schema::table('priorities', function (Blueprint $table) {
+            $table->foreign('field_id')->references('id')->on('fields');
+        });
         //************** USER MODULE **************/
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('workplace')->references('id')->on('workplaces')->onDelete('cascade');
