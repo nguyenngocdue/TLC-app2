@@ -60,13 +60,15 @@
     nbCells = table.rows[0].cells.length
     movKey = {
         ArrowUp: (p) => {
-            p.r = p.r !== 2 ? (--p.r - 2) : (13)
+            p.r = p.r !== 2 ? (--p.r - 2) : (nbRows - 1)
         },
         ArrowDown: (p) => {
-            p.r = p.r !== 15 ? (++p.r - 2) : (0)
+            p.r = p.r !== (nbRows+ 1) ? (++p.r - 2) : (0)
         },
     }
-    array = [...table.querySelectorAll('select'),...table.querySelectorAll('input'),...table.querySelectorAll('textarea')]
+    array = [...table.querySelectorAll('select'),
+    ...table.querySelectorAll('input'),
+    ...table.querySelectorAll('textarea')]
     array.forEach((elm) => {
     elm.onfocus = (e) => {
         let sPos = table.querySelector('.select'),
@@ -77,7 +79,6 @@
         tdPos.classList.add('select')
     }
 })
-var ctrlKeyHistory = 0
 document.onkeydown = (e) => {
     let sPos = table.querySelector('.select')
         evt = e == null ? event : e
@@ -85,7 +86,6 @@ document.onkeydown = (e) => {
         if (!o) {
             return
         }
-
         if (
             o.tagName !== 'TEXTAREA' &&
             o.tagName !== 'INPUT' &&
@@ -97,7 +97,6 @@ document.onkeydown = (e) => {
             r: sPos ? sPos.parentNode.rowIndex : -1,
             c: sPos ? sPos.cellIndex : -1,
         }
-
     if (
         sPos && 
         evt.ctrlKey &&
@@ -109,8 +108,9 @@ document.onkeydown = (e) => {
         do {
             movKey[evt.code](pos)
             cell = table.rows[pos.r].cells[pos.c]
-            nxFocus = cell.querySelector('input') || cell.querySelector('select') || cell.querySelector('textarea')   // get focussable element of <td>
-
+            nxFocus = cell.querySelector('input') || 
+            cell.querySelector('select') || 
+            cell.querySelector('textarea')   // get focussable element of <td>
             if (
                 nxFocus &&
                 cell.style.display !== 'none' &&
