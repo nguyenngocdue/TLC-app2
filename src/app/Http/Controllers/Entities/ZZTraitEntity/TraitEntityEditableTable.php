@@ -37,14 +37,18 @@ trait TraitEntityEditableTable
     private function handleEditableTables(Request $request, $props)
     {
         // dump($request);
-        // dump($props);
         // echo "RECURSIVE = RECURSIVE = RECURSIVE = RECURSIVE = RECURSIVE = ";
+        // dump($props);
+        // dump($this->superProps['props']);
+        $originalSuperProps = $this->superProps['props'];
         foreach ($props as $propName) {
-            $tableName = $this->superProps['props'][$propName]['relationships']['table'];
+            $tableName = $originalSuperProps[$propName]['relationships']['table'];
             $dataSource = $this->stripDataSource($request, $tableName);
+            $this->dump1("RECURSIVE CALLED STRIPPING $tableName", $dataSource, __LINE__);
             if (is_null($dataSource)) continue;
 
             $dataSource = $this->parseHTTPArrayToLines($dataSource);
+            $this->dump1("RECURSIVE CALLED PARSING $tableName", $dataSource, __LINE__);
             // dump($dataSource);
             foreach ($dataSource as $line) {
                 $fakeRequest = new Request();

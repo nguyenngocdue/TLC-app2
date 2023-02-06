@@ -59,7 +59,6 @@ trait TableTraitApplyRender
         $tagName = "x-renderer{$editableStr}.{$renderer}";
 
         $output = "<$tagName $attributes>$rawData</$tagName>";
-        // if ($editable) Log::info($output);
         // Log::info($output);
         // Log::info($column);
         $cell = $dataLine[$column['dataIndex']] ?? "No dataIndex for " . $column['dataIndex']; //This is for Thumbnail

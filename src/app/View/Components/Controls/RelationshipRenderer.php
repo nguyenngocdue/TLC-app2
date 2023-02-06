@@ -161,6 +161,7 @@ class RelationshipRenderer extends Component
                     'editableColumns' => $this->makeEditableColumns($columns, $sp, $tableName),
                     'tableName' => $smallModel::getTableName(),
                     'table01Name' => $this->table01Name,
+                    'table01ROName' => $this->table01Name . "RO",
                 ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
