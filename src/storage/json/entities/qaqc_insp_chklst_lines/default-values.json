@@ -98,50 +98,6 @@
         "default_value": "",
         "control_extra": ""
     },
-    "_getNoOfYesNo()": {
-        "name": "_getNoOfYesNo()",
-        "column_name": "getNoOfYesNo()",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
-    "_getOnHoldOfYesNo()": {
-        "name": "_getOnHoldOfYesNo()",
-        "column_name": "getOnHoldOfYesNo()",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
-    "_getFailedOfPassFail()": {
-        "name": "_getFailedOfPassFail()",
-        "column_name": "getFailedOfPassFail()",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
-    "_getOnHoldOfPassFail()": {
-        "name": "_getOnHoldOfPassFail()",
-        "column_name": "getOnHoldOfPassFail()",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
     "_insp_photos": {
         "name": "_insp_photos",
         "column_name": "insp_photos",

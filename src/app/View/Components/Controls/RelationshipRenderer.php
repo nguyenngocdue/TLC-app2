@@ -27,15 +27,22 @@ class RelationshipRenderer extends Component
 
     private function getDataSource($row, $colName, $showAll = false)
     {
-        $eloquentParam = $row->eloquentParams[$colName];
-        //TODO: This is to prevent from a crash
-        if ($eloquentParam[0] === 'morphToMany') return [];
+        if (!isset($row->eloquentParams[$colName])) {
+            //TODO: 
+            dump("Not found $colName, maybe change to dropdown?");
+            dump($row->eloquentParams);
+            return [];
+        } else {
+            $eloquentParam = $row->eloquentParams[$colName];
+            //TODO: This is to prevent from a crash
+            if ($eloquentParam[0] === 'morphToMany') return [];
 
-        if (isset($eloquentParam[2])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
-        elseif (isset($eloquentParam[1])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1]);
-        elseif (isset($eloquentParam[0])) $relation = $row->{$eloquentParam[0]}();
-        $perPage = $showAll ? 10000 : 10;
-        return $relation->getQuery()->paginate($perPage, ['*'], $colName);
+            if (isset($eloquentParam[2])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
+            elseif (isset($eloquentParam[1])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1]);
+            elseif (isset($eloquentParam[0])) $relation = $row->{$eloquentParam[0]}();
+            $perPage = $showAll ? 10000 : 10;
+            return $relation->getQuery()->paginate($perPage, ['*'], $colName);
+        }
     }
 
     private function makeReadOnlyColumns($columns, $sp, $tableName)

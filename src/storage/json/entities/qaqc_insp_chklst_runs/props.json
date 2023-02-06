@@ -84,7 +84,7 @@
         "column_name": "owner_id",
         "column_type": "bigint",
         "label": "Owner ID",
-        "control": "relationship_renderer",
+        "control": "dropdown",
         "align": "",
         "col_span": "12",
         "width": "",
