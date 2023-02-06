@@ -19,12 +19,13 @@ trait HasStatus
     function transitionTo($newStatus)
     {
         $available = $this::getAvailableStatuses();
+        $table = $this->getTable();
         if (!in_array($newStatus, $available)) {
-            throw new Exception("The status [$newStatus] is not available for this Model. Availabilities are [" . join(", ", $available) . "]");
+            throw new Exception("The status [$newStatus] is not available for $table. Availabilities are [" . join(", ", $available) . "]");
         }
 
         $eventData = [
-            'type' => $this->getTable(),
+            'type' => $table,
             'id' => $this->id,
             'old_status' => $this->status,
             'new_status' => $newStatus,

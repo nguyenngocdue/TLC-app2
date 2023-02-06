@@ -31,6 +31,22 @@
         "hidden_print": "",
         "new_line": "true"
     },
+    "_getDiscipline1": {
+        "name": "_getDiscipline1",
+        "column_name": "getDiscipline1",
+        "column_type": "eloquent_prop",
+        "label": "Discipline 1",
+        "control": "relationship_renderer",
+        "align": "",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": "true"
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",

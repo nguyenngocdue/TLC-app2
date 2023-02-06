@@ -41,4 +41,16 @@ class Prod_discipline_1 extends ModelExtended
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
+
+    public function getManyLineParams()
+    {
+        return [
+            ['dataIndex' => 'id'],
+            ['dataIndex' => 'prod_discipline_id'],
+            ['dataIndex' => 'name'],
+            ['dataIndex' => 'description'],
+            ['dataIndex' => 'slug'],
+            ['dataIndex' => 'def_assignee'],
+        ];
+    }
 }

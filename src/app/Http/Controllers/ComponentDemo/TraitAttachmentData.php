@@ -32,21 +32,21 @@ trait TraitAttachmentData
             ],
             "attachment_2" => [
                 [
-                    "id" => 1,
+                    "id" => 4,
                     "url_thumbnail" => "avatars/01034-150x150.jpg",
                     "url_media" => "avatars/01034.jpg",
                     "filename" => 'file_name_123.xyz',
                     "category" => 2,
                 ],
                 [
-                    "id" => 2,
+                    "id" => 5,
                     "url_thumbnail" => "avatars/01163-150x150.jpg",
                     "url_media" => "avatars/01163.jpg",
                     "filename" => 'file_name_123.xyz',
                     "category" => 2,
                 ],
                 [
-                    "id" => 3,
+                    "id" => 6,
                     "url_thumbnail" => "avatars/01340-150x150.jpeg",
                     "url_media" => "avatars/01340.jpeg",
                     "filename" => 'file_name_123.xyz',
@@ -55,21 +55,21 @@ trait TraitAttachmentData
             ],
             "attachment_3" => [
                 [
-                    "id" => 1,
+                    "id" => 7,
                     "url_thumbnail" => "avatars/01491-150x150.png",
                     "url_media" => "avatars/01491.png",
                     "filename" => 'file_name_123.xyz',
                     "category" => 3,
                 ],
                 [
-                    "id" => 2,
+                    "id" => 8,
                     "url_thumbnail" => "avatars/01021-150x150.jpg",
                     "url_media" => "avatars/01021.jpg",
                     "filename" => 'file_name_123.xyz',
                     "category" => 3,
                 ],
                 [
-                    "id" => 3,
+                    "id" => 9,
                     "url_thumbnail" => "avatars/00041-150x150.png",
                     "url_media" => "avatars/00041.png",
                     "filename" => 'file_name_123.xyz',
