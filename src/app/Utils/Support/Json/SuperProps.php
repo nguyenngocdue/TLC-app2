@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class SuperProps
 {
-    private static $result = [];
+    private static $result = [], $type = '';
 
     private static function makeRelationshipObject($type)
     {
@@ -46,9 +46,7 @@ class SuperProps
 
     private static function attachJson($external_name, &$allProps, $externals)
     {
-        foreach (array_keys($allProps) as $column_name) {
-            $allProps[$column_name][$external_name] = [];
-        }
+        foreach (array_keys($allProps) as $column_name) $allProps[$column_name][$external_name] = [];
         foreach ($externals as $column_name => $value) {
             // dump($column_name);
             if (isset($allProps[$column_name])) {
@@ -57,7 +55,9 @@ class SuperProps
                     $allProps[$column_name][$external_name][$k] = $v;
                 }
             } else {
-                static::$result['problems']["orphan_$external_name"][] = "Column name not found $column_name - " . $value['name'];
+                // dump($externals);
+                dump("Orphan json attributes found in " . static::$type . "\\" . $external_name . ".json\\" . $column_name . " when constructing SuperProps");
+                static::$result['problems']["orphan_$external_name"][] = "Column name not found $column_name - $external_name" . $value['name'];
             }
         }
     }
@@ -142,6 +142,7 @@ class SuperProps
 
     private static function make($type)
     {
+        static::$type = $type;
         static::$result['problems'] = [];
         static::$result['type'] = Str::singular($type);
         static::$result['plural'] = Str::plural($type);

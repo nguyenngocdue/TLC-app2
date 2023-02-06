@@ -16,21 +16,21 @@ $time = $date ? date("d/m/Y H:i:s", strtotime($date)) : date("d/m/Y H:i:s");
         <div class=" grid col-span-9  text-center flex-nowrap">
             <div class="grid grid-cols-12 gap-4 ">
                 <div class="col-span-4">
-                    <div class="border cursor-pointer bg-[#f5f5f5] thumbs rounded-lg w-full border-gray-300 p-1 focus:border-purple-400 focus:outline-none  ">
+                    <div class="dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 border cursor-pointer bg-[#f5f5f5] thumbs rounded-lg w-full border-gray-300 p-1 focus:border-purple-400 focus:outline-none  ">
                         <x-renderer.avatar-name title="{{$authorName}}"></x-renderer.avatar-name>
                         <input name="owner_id" value="{{Auth::user()->id}}" class='hidden' type='text'>
                     </div>
                 </div>
                 <div class="col-span-4 ">
-                    <input name='position_rendered' value="{{$position}}" readonly class='bg-[#f5f5f5] border border-gray-300 text-gray-900  rounded-lg  p-2.5  dark:placeholder-gray-400  block w-full text-sm  focus:border-purple-400 focus:outline-none ' type='text'>
+                        <input name='position_rendered' value="{{$position}}" readonly class='dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 bg-[#f5f5f5] border border-gray-300 text-gray-900  rounded-lg  p-2.5  dark:placeholder-gray-400  block w-full text-sm  focus:border-purple-400 focus:outline-none ' type='text'>
                 </div>
 
                 <div class="col-span-4">
-                    <div class="relative   ">
+                    <div class="relative    ">
                         <div class="flex absolute  inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <i class="fa-duotone fa-calendar"></i>
                         </div>
-                        <input datepicker type="text" value="{{$time}}" readonly class="bg-[#f5f5f5] border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none block w-full pl-8 p-2.5" placeholder="">
+                        <input datepicker type="text" value="{{$time}}" readonly class="dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 bg-[#f5f5f5] border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none block w-full pl-8 p-2.5" placeholder="">
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@ $time = $date ? date("d/m/Y H:i:s", strtotime($date)) : date("d/m/Y H:i:s");
 
         <div class="col-span-3  text-center flex">
             <div class="col-span-1 flex-1 ">
-                <input value="#{{$data['id']}}" readonly class='bg-[#f5f5f5] text-center  border border-gray-300 text-gray-900  rounded-lg  p-2.5   dark:placeholder-gray-400  block w-full text-sm   focus:border-purple-400 focus:outline-none  ' type='text'>
+                <input value="#{{$data['id']}}" readonly class='dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 bg-[#f5f5f5] text-center  border border-gray-300 text-gray-900  rounded-lg  p-2.5   dark:placeholder-gray-400  block w-full text-sm   focus:border-purple-400 focus:outline-none  ' type='text'>
             </div>
             @if($destroyable)
             <div class=" m-auto text-center flex-1">

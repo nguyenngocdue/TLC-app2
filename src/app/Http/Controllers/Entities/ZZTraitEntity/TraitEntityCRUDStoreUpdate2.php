@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 use App\Models\Attachment;
 use App\Utils\Support\Json\SuperProps;
 use Brian2694\Toastr\Facades\Toastr;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -88,11 +89,10 @@ trait TraitEntityCRUDStoreUpdate2
 		return $dataSource;
 	}
 
-	private function handleStatus($theRow, $fields)
+	private function handleStatus($theRow, $newStatus)
 	{
-		if (!isset($fields['status'])) return;
-		if (!isset($theRow['status'])) return;
-		$theRow->transitionTo($fields['status']);
+		if (!$newStatus) return;
+		$theRow->transitionTo($newStatus);
 	}
 
 	private function handleCheckboxAndDropdownMulti(Request $request, $theRow, array $oracyProps)
@@ -126,8 +126,13 @@ trait TraitEntityCRUDStoreUpdate2
 	{
 		foreach ($props as $prop) {
 			$propName = substr($prop, 1); //Remove first "_"
-			$toBeDeletedIds = Str::parseArray($request->input($propName)['toBeDeleted']);
-			$this->uploadService2->destroy($toBeDeletedIds);
+			$input = $request->input($propName);
+			if (isset($input['toBeDeleted'])) {
+				$toBeDeletedIds = Str::parseArray($input['toBeDeleted']);
+				$this->uploadService2->destroy($toBeDeletedIds);
+			} else {
+				//This type doesn't have any attachment
+			}
 		}
 	}
 
@@ -168,24 +173,36 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function store(Request $request)
 	{
-		$this->dump1("Request", $request->input(), __LINE__);
-		$props = $this->getProps1();
-		$this->deleteAttachments($props['attachment'], $request);
-		//Uploading attachments has to run before form validation
-		$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
+		try {
+			$this->dump1("Request", $request->input(), __LINE__);
+			$props = $this->getProps1();
+			$this->deleteAttachments($props['attachment'], $request);
+			//Uploading attachments has to run before form validation
+			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
+		} catch (Exception $e) {
+			dump("Exception during store " . $e->getFile() . " line " . $e->getLine());
+			dd($e->getMessage());
+		}
 		$request->validate($this->getValidationRules());
-		$fields = $this->handleFields($request, __FUNCTION__);
+		try {
+			//Get newStatus before it get removed by handleFields
+			$newStatus = $request['status'];
+			$fields = $this->handleFields($request, __FUNCTION__);
 
-		$theRow = $this->data::create($fields);
-		$objectType = Str::modelPathFrom($theRow->getTable());
-		$objectId = $theRow->id;
+			$theRow = $this->data::create($fields);
+			$objectType = Str::modelPathFrom($theRow->getTable());
+			$objectId = $theRow->id;
 
-		$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
-		$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
+			$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
+			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 
-		$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
-		$this->handleStatus($theRow, $fields);
-
+			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
+			$this->handleStatus($theRow, $newStatus);
+		} catch (Exception $e) {
+			dump("Exception during store " . $e->getFile() . " line " . $e->getLine());
+			dd($e->getMessage());
+		}
+		if ($request['tableNames'] === 'fakeRequest') return;
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		Toastr::success("$this->type created successfully", "Create $this->type");
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
@@ -198,31 +215,42 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->superProps = SuperProps::getFor($tableName);
 			$this->data = Str::modelPathFrom($tableName);
 		}
-
-		$this->dump1("Request", $request->input(), __LINE__);
-		$props = $this->getProps1();
-		$this->deleteAttachments($props['attachment'], $request);
-		//Uploading attachments has to run before form validation
-		$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
+		try {
+			$this->dump1("Request", $request->input(), __LINE__);
+			$props = $this->getProps1();
+			$this->deleteAttachments($props['attachment'], $request);
+			//Uploading attachments has to run before form validation
+			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
+		} catch (Exception $e) {
+			dump("Exception during update " . $e->getFile() . " line " . $e->getLine());
+			dd($e->getMessage());
+		}
 		$request->validate($this->getValidationRules());
-		$fields = $this->handleFields($request, __FUNCTION__);
+		try {
+			//Get newStatus before it get removed by handleFields
+			$newStatus = $request['status'];
+			$fields = $this->handleFields($request, __FUNCTION__);
 
-		$theRow = $this->data::find($id);
-		$theRow->fill($fields);
-		$theRow->save();
-		$objectType = "App\\Models\\" . Str::singular($theRow->getTable());
-		$objectId = $theRow->id;
+			$theRow = $this->data::find($id);
+			$theRow->fill($fields);
+			$theRow->save();
+			$objectType = "App\\Models\\" . Str::singular($theRow->getTable());
+			$objectId = $theRow->id;
 
-		$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
-		$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
+			$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
+			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 
-		$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
+			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 
-		if ($request['tableNames'] !== 'fakeRequest') $this->handleEditableTables($request, $props['editable_table']);
-		$this->handleStatus($theRow, $fields);
-
+			if ($request['tableNames'] !== 'fakeRequest') $this->handleEditableTables($request, $props['editable_table']);
+			$this->handleStatus($theRow, $newStatus);
+		} catch (Exception $e) {
+			dump("Exception during update " . $e->getFile() . " line " . $e->getLine());
+			dd($e->getMessage());
+		}
+		if ($request['tableNames'] === 'fakeRequest') return;
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
-		if ($request['tableNames'] !== 'fakeRequest') Toastr::success("$this->type updated successfully", "Updated $this->type");
+		Toastr::success("$this->type updated successfully", "Updated $this->type");
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 }

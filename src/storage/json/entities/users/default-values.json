@@ -493,16 +493,5 @@
         "placeholder": "",
         "default_value": "",
         "control_extra": ""
-    },
-    "_attachment": {
-        "name": "_attachment",
-        "column_name": "attachment",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
     }
 }

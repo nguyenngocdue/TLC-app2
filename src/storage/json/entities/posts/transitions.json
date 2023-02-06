@@ -2,109 +2,41 @@
     "new": {
         "name": "new",
         "new": "",
-        "pending_endorsed": "true",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
-    },
-    "pending_endorsed": {
-        "name": "pending_endorsed",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "true",
+        "draft": "true",
         "pending_review": "true",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
+        "publish": "true",
+        "obsolete": ""
     },
-    "endorse_rejected": {
-        "name": "endorse_rejected",
+    "draft": {
+        "name": "draft",
         "new": "",
-        "pending_endorsed": "true",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
+        "draft": "",
+        "pending_review": "true",
+        "publish": "true",
+        "obsolete": ""
     },
     "pending_review": {
         "name": "pending_review",
         "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
+        "draft": "true",
         "pending_review": "",
-        "review_rejected": "true",
-        "pending_approval": "true",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
+        "publish": "true",
+        "obsolete": "true"
     },
-    "review_rejected": {
-        "name": "review_rejected",
+    "publish": {
+        "name": "publish",
         "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
+        "draft": "",
         "pending_review": "true",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
+        "publish": "",
+        "obsolete": "true"
     },
-    "pending_approval": {
-        "name": "pending_approval",
+    "obsolete": {
+        "name": "obsolete",
         "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
+        "draft": "true",
         "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "true",
-        "pending_ack": "true",
-        "active": ""
-    },
-    "approval_rejected": {
-        "name": "approval_rejected",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "true",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
-    },
-    "pending_ack": {
-        "name": "pending_ack",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": "true"
-    },
-    "active": {
-        "name": "active",
-        "new": "",
-        "pending_endorsed": "",
-        "endorse_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "pending_ack": "",
-        "active": ""
+        "publish": "true",
+        "obsolete": ""
     }
 }

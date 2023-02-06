@@ -664,7 +664,7 @@
         "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "UT09 (Basic Events)",
+        "title": "UT09 (Form Event Listeners)",
         "nickname": null,
         "status": "test",
         "icon": null
