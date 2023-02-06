@@ -87,9 +87,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_checkbox()": {
-        "name": "_checkbox()",
-        "column_name": "checkbox()",
+    "_checkboxZut1()": {
+        "name": "_checkboxZut1()",
+        "column_name": "checkboxZut1()",
         "label": "",
         "default_value": "",
         "validation": "",
@@ -98,9 +98,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_dropdownMulti()": {
-        "name": "_dropdownMulti()",
-        "column_name": "dropdownMulti()",
+    "_dropdownMultiZut1()": {
+        "name": "_dropdownMultiZut1()",
+        "column_name": "dropdownMultiZut1()",
         "label": "",
         "default_value": "",
         "validation": "",

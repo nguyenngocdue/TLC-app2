@@ -23,10 +23,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": "4"
     },
-    "_checkbox()": {
-        "name": "_checkbox()",
+    "_checkboxZut1()": {
+        "name": "_checkboxZut1()",
         "relationship": "getCheckedByField",
-        "control_name": "checkbox()",
+        "control_name": "checkboxZut1()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -35,10 +35,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": "4"
     },
-    "_dropdownMulti()": {
-        "name": "_dropdownMulti()",
+    "_dropdownMultiZut1()": {
+        "name": "_dropdownMultiZut1()",
         "relationship": "getCheckedByField",
-        "control_name": "dropdownMulti()",
+        "control_name": "dropdownMultiZut1()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
