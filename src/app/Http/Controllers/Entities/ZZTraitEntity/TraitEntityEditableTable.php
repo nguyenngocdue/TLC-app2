@@ -42,6 +42,7 @@ trait TraitEntityEditableTable
         foreach ($props as $propName) {
             $tableName = $this->superProps['props'][$propName]['relationships']['table'];
             $dataSource = $this->stripDataSource($request, $tableName);
+            if (is_null($dataSource)) continue;
 
             $dataSource = $this->parseHTTPArrayToLines($dataSource);
             // dump($dataSource);
