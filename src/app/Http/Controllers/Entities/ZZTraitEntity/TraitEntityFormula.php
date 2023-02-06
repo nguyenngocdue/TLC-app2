@@ -19,20 +19,22 @@ trait TraitEntityFormula
     private function apply_formula($item, $type)
     {
         $defaultValues = DefaultValues::getAllOf($type);
-        $id = $item['id'];
-        $name = $item['name'] ?? "";
 
         foreach ($defaultValues as $prop) {
             if ($prop['formula'] === '') continue;
             switch ($prop['formula']) {
                 case "All_ConcatNameWith123":
+                    $name = $item['name'] ?? "";
                     $value = (new All_ConcatNameWith123())($name);
                     break;
                 case "All_SlugifyByName":
+                    $id = $item['id'];
+                    $name = $item['name'] ?? "";
                     $name = $item['slug'] ?? $name;
                     $value = (new All_SlugifyByName())($name, $type, $id);
                     break;
                 case "User_PositionRendered":
+                    $id = $item['id'];
                     $user = User::find($id);
                     if (is_null($user)) {
                         $value = "";

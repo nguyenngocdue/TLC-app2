@@ -27,7 +27,7 @@
         "label": "",
         "default_value": "",
         "validation": "",
-        "formula": "",
+        "formula": "All_ConcatNameWith123",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
