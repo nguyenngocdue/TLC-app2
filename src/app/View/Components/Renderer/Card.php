@@ -32,12 +32,12 @@ class Card extends Component
             $title = $data['attributes']["title"];
             $description = $data['attributes']["description"] ?? "";
             $class = $this->class;
-            return "<div id='$this->idHtml' class='break-normal min-w-0 p-4 border rounded-lg shadow-xs $this->style $class' >" .
+            return "<div id='$this->idHtml' class='break-normal min-w-0 p-4 border dark:bg-gray-800 dark:border-gray-600 rounded-lg shadow-xs $this->style $class' >" .
                 (($title) ? "<h4 class='mb-4 font-semibold text-gray-600 dark:text-gray-300'>{$title} </h4>" : "") .
-                "<p class='text-gray-600 dark:text-gray-400'>
+                "<p class='text-gray-600 dark:text-gray-300'>
                     $description
                 </p>
-                <p class='text-gray-600 dark:text-gray-400 break-keep'>
+                <p class='text-gray-600 dark:text-gray-300 break-keep'>
                     $items
                 </p>
             </div>";

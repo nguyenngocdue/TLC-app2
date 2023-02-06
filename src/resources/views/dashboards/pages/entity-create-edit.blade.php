@@ -88,7 +88,7 @@ $id = $action === "edit" ? $values->id : "";
                     </div>
                     @else
                     <div class='col-span-{{24/$col_span}} col-start-1 {{$val['new_line'] === 'true' ? "col-span-12 text-left" : "text-right" }} '>
-                        <label class='text-gray-700 dark:text-gray-400  px-3 block text-base' title='{{$title}}'>{{$label}}
+                        <label class='text-gray-700 dark:text-gray-300  px-3 block text-base' title='{{$title}}'>{{$label}}
                             {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
                             <br />
                             <span class="flex justify-end">

@@ -1,9 +1,22 @@
 <!DOCTYPE html>
+<script>
+    function check() {
+        if (window.localStorage.getItem('dark')) {
+            return JSON.parse(window.localStorage.getItem('dark'))
+        }
+        return false;
+    }
+    const isDark =  check();
+    if(isDark){
+        var root = document.getElementsByTagName('html')[0];
+        root.classList.add('dark');
+    }
+</script>
 <html :class="{ 'dark': dark }" x-data="data()" lang="en">
 
 <head>
-    <script src="{{ asset('js/alpine.min.js') }}"></script>
     <script src="{{ asset('windmill_assets/js/init-alpine1.js') }}"></script>
+    <script src="{{ asset('js/alpine.min.js') }}"></script>
     <meta charset="UTF-8">
     <meta name="The master layout G4T">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +46,7 @@
 <body >
     <div class=" flex bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         <x-homepage.sidebar2 />
-        <div class="flex flex-col flex-1 w-full bg-gray-100">
+        <div class="flex flex-col flex-1 w-full bg-gray-100 dark:bg-gray-700">
             
             <x-homepage.navbar2 />
             <main class="h-full overflow-y-auto">

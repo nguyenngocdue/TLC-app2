@@ -35,7 +35,7 @@
             <i class="fa-duotone fa-users"></i>
         </div>
         <div>
-            <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+            <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-300">
                 Total clients
             </p>
             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
@@ -49,7 +49,7 @@
             <i class="fa-duotone fa-users"></i>
         </div>
         <div>
-            <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+            <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-300">
                 Account balance
             </p>
             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
@@ -63,7 +63,7 @@
             <i class="fa-duotone fa-users"></i>            
         </div>
         <div>
-            <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+            <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-300">
                 New sales
             </p>
             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
@@ -77,7 +77,7 @@
             <i class="fa-duotone fa-users"></i>            
         </div>
         <div>
-            <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+            <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-300">
                 Pending contacts
             </p>
             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">

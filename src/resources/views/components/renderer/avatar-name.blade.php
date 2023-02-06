@@ -28,7 +28,7 @@ $txt_gray = $gray ? "text-gray-600" : "";
         <p class="font-semibold text-left {{$txt_gray}}">{{$title}}</p>
         @endif
 
-        <p class="text-xs text-gray-600 dark:text-gray-400 ">
+        <p class="text-xs text-gray-600 dark:text-gray-300 ">
             {{$description}}
         </p>
     </span>

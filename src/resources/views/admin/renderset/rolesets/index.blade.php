@@ -32,7 +32,7 @@
             <div class="w-full overflow-x-auto">
                 <table class="whitespace-no-wrap w-full">
                     <thead>
-                        <tr class="border-b text-center bg-gray-50 text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
+                        <tr class="border-b text-center bg-gray-50 text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300">
                             <th class="px-4 py-3">ID</th>
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Email</th>
@@ -43,7 +43,7 @@
                     </thead>
                     <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
                         @foreach ($users as $user)
-                        <tr class="text-gray-700 dark:text-gray-400">
+                        <tr class="text-gray-700 dark:text-gray-300">
                             <td class="px-4 py-3 text-center text-sm">
                                 {{ $user->id }}
                             </td>
@@ -85,7 +85,7 @@
                     </tfoot>
                 </table>
             </div>
-            <div class="grid border-t bg-gray-50 px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:grid-cols-9">
+            <div class="grid border-t bg-gray-50 px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9">
                 <span class="col-span-3 flex items-center">
                     @if (isset($users) && count($users) > 0)
                     {{ $users->links('dashboards.pagination.showing') }}

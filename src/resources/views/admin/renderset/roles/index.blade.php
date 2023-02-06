@@ -6,7 +6,7 @@
 @section('content')
 <main class="h-full overflow-y-auto">
     <div class="container mx-auto grid px-6">
-        <label for="roleSets" class="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-400">Select an
+        <label for="roleSets" class="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-300">Select an
             option role sets</label>
         <div class="mb-3 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             <form action="{{ route('setroles.store') }}" method="POST">
@@ -35,7 +35,7 @@
                         @if ($last === $value)
                         <div class="form-check items-center" title="{{ $role->name }}">
                             <input type="hidden" name="roleSet" value="{{ $selected }}">
-                            <label class="text-sm font-normal text-gray-900 dark:text-gray-400">
+                            <label class="text-sm font-normal text-gray-900 dark:text-gray-300">
                                 <input type="checkbox" name="checked[]" value="{{ $role->name }}" title="{{ $role->name }}" @isset($roleUsing) @foreach ($roleUsing as $item) @if ($item->name == $role->name)
                                 @checked(true)
                                 @endif

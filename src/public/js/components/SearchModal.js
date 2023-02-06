@@ -15,18 +15,20 @@ const renderHtml = (apps) => {
             // const package = capitalize(app.package)
             const { package_rendered } = app
             html += `<li>
-                        <a href="${app.href
-                }" class="flex items-center p-2 text-xs font-medium text-gray-700 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                        <a href="${
+                            app.href
+                        }" class="flex items-center p-2 text-xs font-medium text-gray-700 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                             ${app.icon ?? "<i class='fa-light fa-file'></i>"}
-                            <span class="flex-1 ml-3 whitespace-nowrap">${app.title
-                }</span>
-                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-400">${status}</span>
-                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-400">${package_rendered}</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">${
+                                app.title
+                            }</span>
+                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>
+                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${package_rendered}</span>
                         </a>
                     </li>`
         })
         resultHtml += `<div>
-                        <p class="py-2 text-sm font-medium text-gray-900 dark:text-gray-400">${subPackage}</p>
+                        <p class="py-2 text-sm font-medium text-gray-900 dark:text-gray-300">${subPackage}</p>
                             <ul class="space-y-1">
                                 ${html}
                             </ul>
@@ -59,6 +61,7 @@ function matchRegex(valueSearch, app) {
     const formatText = valueSearch.replaceAll(' ', '.*')
     var regex = new RegExp(formatText, 'i')
     const arr = [
+        app.status,
         app.title,
         app.sub_package_rendered,
         app.package_rendered,

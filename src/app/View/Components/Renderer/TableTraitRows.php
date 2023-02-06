@@ -55,7 +55,7 @@ trait TableTraitRows
             }
             $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
             $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
-            $tds[] = "<td class='px-1 py-1 $borderRight $align'>" . $rendered . "</td>";
+            $tds[] = "<td class='px-1 py-1 dark:border-gray-600 $borderRight $align'>" . $rendered . "</td>";
         }
         return $tds;
     }
@@ -85,12 +85,12 @@ trait TableTraitRows
                 $index = isset($dataLine[$this->groupBy][0]) ? strtoupper(substr($dataLine[$this->groupBy], 0, $this->groupByLength)) : "(EMPTY)";
                 if ($index !== $lastIndex) {
                     $lastIndex = $index;
-                    $trs[] = "<tr class='bg-gray-100 '><td class='p-2 text-lg font-bold text-gray-600' colspan=$colspan>{$index}</td></tr>";
+                    $trs[] = "<tr class='bg-gray-100 dark:bg-gray-800'><td class='p-2 text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td></tr>";
                 }
             }
 
             $bgClass = ($dataLine['row_color'] ?? false) ? "bg-" . $dataLine['row_color'] . "-400" : "";
-            $trs[] = "<tr class='hover:bg-gray-100 $bgClass text-gray-700 dark:text-gray-400'>" . join("", $tds) . "</tr>";
+            $trs[] = "<tr class='hover:bg-gray-200 $bgClass text-gray-700 dark:text-gray-300'>" . join("", $tds) . "</tr>";
 
             if (isset($dataLine['rowDescription'])) {
                 $colspan_minus_1 = $colspan - 1;

@@ -38,7 +38,7 @@ class Heading extends Component
                 $font = "font-medium";
             }
 
-            $class = "$font leading-tight text-{$textSize} text-black my-2 text-{$this->align}";
+            $class = "$font leading-tight text-{$textSize} text-black my-2 text-{$this->align} dark:text-gray-300";
             $slot = $data['slot'];
             return "<$h class='$class' title='$this->title'>$slot</$h>";
         };

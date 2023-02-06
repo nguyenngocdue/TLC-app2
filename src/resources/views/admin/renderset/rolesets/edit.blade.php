@@ -7,7 +7,7 @@
 <main class="h-full overflow-y-auto">
     <div class="container mx-auto grid px-6">
         <div class="mb-8 rounded-lg bg-white px-4 py-3 text-center shadow-md dark:bg-gray-800">
-            <label for="roleSets" class="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-400">Select an
+            <label for="roleSets" class="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-300">Select an
                 option Role Set</label>
             <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                 <form action="{{ route('setrolesets.update', $id) }}" method="POST">

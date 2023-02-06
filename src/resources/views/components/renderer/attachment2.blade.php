@@ -37,7 +37,7 @@
     @endif
 </div>
 <input id="{{$name}}-toBeDeleted" name="{{$name}}[toBeDeleted]" readonly type='hidden' class='p-2.5 w-full bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
-<input name="{{$name}}[toBeUploaded][]" multiple type="file" class="{{$readonly ? 'hidden' : ''}} block w-full text-sm text-gray-900 p-2.5 rounded-lg bg-white border border-white cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+<input name="{{$name}}[toBeUploaded][]" multiple type="file" class="{{$readonly ? 'hidden' : ''}} block w-full text-sm text-gray-900 p-2.5 rounded-lg bg-white border border-white cursor-pointer dark:text-gray-300 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
 
 @once
 <script type="text/javascript">

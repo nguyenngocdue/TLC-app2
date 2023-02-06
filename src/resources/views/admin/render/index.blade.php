@@ -9,12 +9,12 @@
             <form action="{{ route($type . '.index') }}" method="GET" class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                 <div>
                     <input type="text" name="search"
-                        class="block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                        class="block w-full rounded-md border border-slate-300 bg-white dark:bg-gray-800 dark:border-gray-600 px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                         value="{{ $search }}">
                 </div>
                 <div>
                     <button type="submit"
-                        class="focus:shadow-outline-purple rounded-lg border border-transparent bg-emerald-500 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-emerald-200 focus:outline-none active:bg-emerald-600">Search</button>
+                        class="focus:shadow-outline-purple rounded-lg border border-transparent  bg-emerald-500 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-emerald-200 focus:outline-none active:bg-emerald-600">Search</button>
                 </div>
             </form>
             <div class="mt-2 grid grid-cols-2 gap-5">
@@ -22,7 +22,7 @@
                     @csrf
                     <div>
                         <input type="text" name="name"
-                            class="block w-full rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                            class="block w-full rounded-md border border-slate-300 bg-white dark:bg-gray-800 dark:border-gray-600 px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                             value="">
                         @error('name')
                             <span class="ml-2 text-xs font-light text-red-600" role="alert">
@@ -40,7 +40,7 @@
                     <div class="mt-2 flex">
                         <div class="mr-1 w-12">
                             <input type="text" name="page_limit"
-                                class="block w-12 rounded-md border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                class="block w-12 rounded-md border border-slate-300 bg-white dark:bg-gray-800 dark:border-gray-600 px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                                 value="{{ $pageLimit }}">
                         </div>
                         <div>
@@ -52,12 +52,12 @@
                 </form>
             </div>
 
-            <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border bg-white shadow-sm dark:bg-gray-800">
+            <div class="mt-2 mb-8 w-full overflow-hidden rounded-lg border bg-white shadow-sm dark:bg-gray-800 dark:border-gray-600">
                 <div class="w-full overflow-x-auto">
                     <table class="whitespace-no-wrap w-full">
                         <thead>
                             <tr
-                                class="border-b bg-gray-50 text-center text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
+                                class="border-b bg-gray-50 text-center text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300">
                                 <th class="px-4 py-3">ID</th>
                                 <th class="px-4 py-3">Name</th>
                                 <th class="px-4 py-3">Gruard Name</th>
@@ -66,7 +66,7 @@
                         </thead>
                         <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
                             @foreach ($data as $value)
-                                <tr class="text-gray-700 dark:text-gray-400">
+                                <tr class="text-gray-700 dark:text-gray-300">
                                     <td class="px-4 py-3 text-sm">
                                         {{ $value->id }}
                                     </td>
@@ -99,7 +99,7 @@
                     </table>
                 </div>
                 <div
-                    class="grid border-t bg-gray-50 px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:grid-cols-9">
+                    class="grid border-t bg-gray-50 px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9">
                     <span class="col-span-3 flex items-center">
                         @if (isset($data) && count($data) > 0)
                             {{ $data->links('dashboards.pagination.showing') }}
