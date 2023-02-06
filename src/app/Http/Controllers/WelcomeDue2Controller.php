@@ -18,7 +18,7 @@ class WelcomeDue2Controller extends Report_ParentController2
         ,l.name AS line_name
         ,l.description AS line_description
         
-        ,cv.id AS control_value
+        ,cv.id AS control_value_id
         ,cv.name AS control_value_name
         ,cv.qaqc_insp_control_group_id control_group_id
     
@@ -53,55 +53,17 @@ class WelcomeDue2Controller extends Report_ParentController2
                         )  AS divide_control ON l.qaqc_insp_control_group_id = divide_control.control_group_id
        
     WHERE r.qaqc_insp_chklst_sht_id = 1
-    ORDER BY control_value
-        
-        ";
+    ORDER BY control_value_id, line_id DESC";
     }
     public function getTableColumns()
     {
         return [
             [
-                "title" => 'ID.',
-                "dataIndex" => "line_id",
-                "renderer" => "id",
-                "align" => "center",
-            ],
-            [
                 "title" => 'Description',
                 "dataIndex" => "line_description",
             ],
-
-
-
             [
-                "dataIndex" => "c1",
-                "align" => "right",
-            ],
-            [
-                "dataIndex" => "c2",
-                "align" => "right",
-            ],
-            [
-                "dataIndex" => "c3",
-                "align" => "right",
-            ],
-            [
-                "dataIndex" => "c4",
-                "align" => "right",
-            ],
-
-
-
-            [
-                "dataIndex" => "group_description",
-                "align" => "right",
-            ],
-            [
-                "dataIndex" => "line_id",
-                "align" => "right",
-            ],
-            [
-                "dataIndex" => "control_value_name",
+                "dataIndex" => "c5",
                 "align" => "right",
             ]
         ];

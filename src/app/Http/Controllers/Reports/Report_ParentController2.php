@@ -40,7 +40,7 @@ abstract class Report_ParentController2 extends Controller
         $sql = $this->getSql($urlParams);
         $sqlData = DB::select($sql);
         $result = array_map(fn ($item) => (array) $item, $sqlData);
-        // dump($result);
+        // dd($result);
 
         return $result;
     }
@@ -49,15 +49,67 @@ abstract class Report_ParentController2 extends Controller
     {
         $urlParams = $request->all();
         $columns = $this->getTableColumns();
+        $dataSource = $this->getDataSource($urlParams);
 
         // dd($columns);
+        $circleIcon = "<i class='fa-thin fa-circle'></i>";
+        $checkedIcon = "<i class='fa-solid fa-circle-check'></i>";
+        $controlItem = [];
+        $ids_lineDescriptions = array_column($dataSource, 'line_description', 'line_id');
+        $desc_id = array_column($dataSource, 'line_id', 'line_description');
 
-        $dataSource = $this->getDataSource($urlParams);
-        // dump($columns, $dataSource);
+        $lines =  [];
+        foreach ($dataSource as $key => $item) {
+            $lines[$item['line_id']] = $item;
+        }
+
+
+        $idsDecs = [];
+        foreach ($ids_lineDescriptions as $id => $value) {
+            $idsDecs[$value][] = $id;
+        }
+
+        $arrayHtmlRender = [];
+        $arr = [];
+        foreach ($idsDecs as $dec => $ids) {
+            $str = '';
+            foreach ($ids as $id) {
+                $item = $lines[$id];
+                if ($item['c1'] !== null) {
+                    $arrayControl = ['c1' => $item['c1'], 'c2' => $item['c2'], 'c3' => $item['c3'], 'c4' => $item['c4']];
+                    foreach ($arrayControl as $col => $value) {
+                        if ($item['control_value_name'] === $item[$col]) {
+                            // dump($str . $checkedIcon . $value);
+                            $str =    $str . $checkedIcon . $value;
+                        } else {
+                            $str =  $str . $circleIcon . $value;
+                        }
+                    }
+                }
+                $arr[$id] = $str;
+                $str = '';
+            }
+        }
+
+        foreach ($arr as $id => $value) {
+            if ($value !== "") {
+                $arrayHtmlRender[$id] =   $value;
+            } else {
+                $arrayHtmlRender[$id] = "";
+            }
+        }
+
+        $dataRender = [];
+        foreach ($desc_id as $key => $id) {
+            $dataRender[] = $lines[$id] + ['c5' =>  $arrayHtmlRender[$id]];
+        }
+
+        // dd($dataRender);
+
         // dump($this->viewName);
         return view($this->viewName, [
             'tableColumns' => $columns,
-            'tableDataSource' => $dataSource
+            'tableDataSource' => $dataRender
         ]);
     }
 }
