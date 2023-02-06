@@ -3,13 +3,14 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
-use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\Json\Relationships;
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
 class RelationshipRenderer extends Component
 {
+    private static $table00Count = 1;
+    private $table01Name;
     /**
      * Create a new component instance.
      *
@@ -21,6 +22,7 @@ class RelationshipRenderer extends Component
         private $colName,
         private $modelPath,
     ) {
+        $this->table01Name = "table" . str_pad(static::$table00Count++, 2, 0, STR_PAD_LEFT);
     }
 
     private function getDataSource($row, $colName, $showAll = false)
@@ -78,15 +80,33 @@ class RelationshipRenderer extends Component
         return $result;
     }
 
-    private function makeEditableColumns($columns, $sp)
+    private function makeEditableColumns($columns, $sp, $tableName)
     {
         $result = [];
         foreach ($columns as $column) {
             $newColumn = $column;
             $prop = $sp['props']["_" . $column['dataIndex']];
             $newColumn['title'] = $column['title'] ?? $prop['label'] . " <br/>" . $prop['control'];
-            $newColumn['renderer'] = "text";
-            $newColumn['editable'] = true;
+            switch ($prop['control']) {
+                case 'id':
+                    $newColumn['renderer'] = 'read-only-text';
+                    $newColumn['editable'] = true;
+                    $newColumn['align'] = 'center';
+                    break;
+                case 'status':
+                    $newColumn['renderer'] = 'dropdown';
+                    $newColumn['editable'] = true;
+                    $newColumn['cbbDataSource'] = array_keys(LibStatuses::getFor($tableName));
+                    break;
+                case 'textarea':
+                    $newColumn['renderer'] = 'textarea';
+                    $newColumn['editable'] = true;
+                    break;
+                default:
+                    $newColumn['renderer'] = "text";
+                    $newColumn['editable'] = true;
+                    break;
+            }
             $result[] = $newColumn;
         }
         // dump($result);
@@ -134,9 +154,14 @@ class RelationshipRenderer extends Component
             case "many_lines":
                 $tableName =  $smallModel::getTableName();
                 $sp = SuperProps::getFor($tableName);
-                $readOnlyColumns = $this->makeReadOnlyColumns($columns, $sp, $tableName);
-                $editableColumns = $this->makeEditableColumns($columns, $sp,);
-                return view('components.controls.many-line-params')->with(compact('readOnlyColumns', 'dataSource', 'fn', 'editableColumns', 'tableName'));
+                return view('components.controls.many-line-params', [
+                    'dataSource' => $dataSource,
+                    'fn' => $fn,
+                    'readOnlyColumns' => $this->makeReadOnlyColumns($columns, $sp, $tableName),
+                    'editableColumns' => $this->makeEditableColumns($columns, $sp, $tableName),
+                    'tableName' => $smallModel::getTableName(),
+                    'table01Name' => $this->table01Name,
+                ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
         }

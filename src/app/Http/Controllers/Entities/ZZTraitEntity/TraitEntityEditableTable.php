@@ -54,8 +54,11 @@ trait TraitEntityEditableTable
                 // dd($fakeRequest);
                 // dump($line);
                 if ($line['id']) {
+                    // dump("Recursive called for update to $tableName for #" . $line['id']);
+                    // dump($line);
                     $this->update($fakeRequest, $line['id']);
                 } else {
+                    // dump("Recursive called for store to $tableName");
                     dd("STORING STORING STORING STORING");
                     $this->store($fakeRequest);
                 }

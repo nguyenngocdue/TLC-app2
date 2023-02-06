@@ -2,34 +2,20 @@
     <x-renderer.card title="Attachments">
         <form action="" method="GET">
             @dump($_GET['attachment_1'] ??[])
-            <x-renderer.card title="attachment_1 title">
+            <x-renderer.card title="Default attachment without attributes">
                 <x-renderer.attachment2 name='attachment_1' :value="$attachmentData2['attachment_1']?? []" />
             </x-renderer.card>
             <br/>
             @dump($_GET['attachment_2'] ??[])
             <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }">
-                <x-renderer.attachment2 name='attachment_2' :value="$attachmentData2['attachment_2']?? []" readonly={{true}} destroyable={{true}} showToBeDeleted={{true}}  />
+                <x-renderer.attachment2 name='attachment_2' :value="$attachmentData2['attachment_2']?? []" readonly={{true}} showToBeDeleted={{true}}  />
             </x-renderer.card>
             <br />
             @dump($_GET['attachment_3'] ??[])
-            <x-renderer.card title="readonly = { { false} }, destroyable = { { false} }, showToBeDeleted = { { false} }, categoryName={ {attachment_2} } ">
-                <x-renderer.attachment2 name='attachment_3'  :value="$attachmentData2['attachment_3']?? []" readonly={{false}} destroyable={{false}} categoryName="attachment_2" showToBeDeleted={{false}}/>
-            </x-renderer.card>
-            <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
-        </form>
-        @dump($_GET)
-        <form action="" method="GET">
-            <x-renderer.card title="attachmentData = [[]], not entering other attributes.  ">
-                <x-renderer.attachment :attachmentData="[]" />
+            <x-renderer.card title="readonly = { { false} }, destroyable = { { false} }, showToBeDeleted = { { false } }">
+                <x-renderer.attachment2 name='attachment_3'  :value="$attachmentData2['attachment_3']?? []" destroyable={{false}} categoryName="attachment_2" showToBeDeleted={{false}}/>
             </x-renderer.card>
             <br/>
-            <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }">
-                <x-renderer.attachment readonly={{true}} destroyable={{true}} showToBeDeleted={{true}} :attachmentData="$attachmentData" />
-            </x-renderer.card>
-            <br />
-            <x-renderer.card title="readonly = { { false} }, destroyable = { { false} }, showToBeDeleted = { { false} }, categoryName={ {attachment_2} } ">
-                <x-renderer.attachment readonly={{false}} destroyable={{false}} categoryName="attachment_2" showToBeDeleted={{false}} :attachmentData="$attachmentData" />
-            </x-renderer.card>
             <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
         </form>
     </x-renderer.card>
