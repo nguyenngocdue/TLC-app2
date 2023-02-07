@@ -1,6 +1,6 @@
 <div class="rounded-lg border border-gray-300 dark:border-gray-600">
-    <div class="sm:-mx-6 lg:-mx-8">
-        <div class="inline-block w-full sm:px-6 lg:px-8">
+    <div>
+        <div class="inline-block w-full sm:px-0 lg:px-0">
             @if ($header)
                 <div
                     class='grid1 border-t bg-gray-100 px-4 py-3 text-xs font-semibold tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
@@ -39,11 +39,11 @@
                     {{ $showing }}
                 </span>
                 <span class="col-span-2"></span>
-                <span class="col-span-4 mt-2 flex sm:mt-auto sm:justify-end">
+                {{-- <span class="col-span-4 mt-2 flex sm:mt-auto sm:justify-end">
                     <nav aria-label="Table navigation">
                         {!! $pagination !!}
                     </nav>
-                </span>
+                </span> --}}
             </div>
             @if ($footer)
                 <div
