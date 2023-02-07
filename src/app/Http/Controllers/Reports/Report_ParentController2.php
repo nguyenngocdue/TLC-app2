@@ -28,9 +28,9 @@ abstract class Report_ParentController2 extends Controller
                 $valueParam =  $urlParams[$value];
                 $searchStr = head($matches)[$key];
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
-                break;
             }
         }
+        // dd($sqlStr, $matches);
         return $sqlStr;
     }
 
@@ -40,7 +40,6 @@ abstract class Report_ParentController2 extends Controller
         $sql = $this->getSql($urlParams);
         $sqlData = DB::select($sql);
         $result = array_map(fn ($item) => (array) $item, $sqlData);
-        // dd($result);
 
         return $result;
     }
@@ -48,65 +47,56 @@ abstract class Report_ParentController2 extends Controller
     public function index(Request $request)
     {
         $urlParams = $request->all();
+        // dump($urlParams);
         $columns = $this->getTableColumns();
         $dataSource = $this->getDataSource($urlParams);
 
         // dd($columns);
-        $circleIcon = "<i class='fa-thin fa-circle'></i>";
-        $checkedIcon = "<i class='fa-solid fa-circle-check'></i>";
-        $controlItem = [];
-        $ids_lineDescriptions = array_column($dataSource, 'line_description', 'line_id');
-        $desc_id = array_column($dataSource, 'line_id', 'line_description');
+        $circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
+        $checkedIcon = "<i class='fa-solid fa-circle-check px-2'></i>";
 
         $lines =  [];
-        foreach ($dataSource as $key => $item) {
+        foreach ($dataSource as $item) {
             $lines[$item['line_id']] = $item;
         }
 
-
-        $idsDecs = [];
-        foreach ($ids_lineDescriptions as $id => $value) {
-            $idsDecs[$value][] = $id;
+        $id_lineDesc = array_column($dataSource, 'line_description', 'line_id');
+        $desc_ids = [];
+        foreach ($id_lineDesc as $id => $value) {
+            $desc_ids[$value][] = $id;
         }
-
-        $arrayHtmlRender = [];
-        $arr = [];
-        foreach ($idsDecs as $dec => $ids) {
+        $ids_htmls = [];
+        foreach ($desc_ids as $ids) {
             $str = '';
             foreach ($ids as $id) {
                 $item = $lines[$id];
-                if ($item['c1'] !== null) {
+                if (!is_null($item['c1'])) {
                     $arrayControl = ['c1' => $item['c1'], 'c2' => $item['c2'], 'c3' => $item['c3'], 'c4' => $item['c4']];
+                    $s = "";
                     foreach ($arrayControl as $col => $value) {
                         if ($item['control_value_name'] === $item[$col]) {
-                            // dump($str . $checkedIcon . $value);
-                            $str =    $str . $checkedIcon . $value;
+                            $s .= "<td class ='px-6 py-4'>" . $checkedIcon . $value . "</td>";
                         } else {
-                            $str =  $str . $circleIcon . $value;
+                            $s .= "<td class ='px-6 py-4'>" . $circleIcon . $value . "</td>";
                         }
-                    }
-                }
-                $arr[$id] = $str;
-                $str = '';
-            }
-        }
+                    };
+                    $runDesc = "<td>" . $item['run_desc'] . ":" . "</td>";
+                    $runUpdated = "<td class ='px-6 py-4'>" . $item['run_updated'] . "</td>";
 
-        foreach ($arr as $id => $value) {
-            if ($value !== "") {
-                $arrayHtmlRender[$id] =   $value;
-            } else {
-                $arrayHtmlRender[$id] = "";
+
+
+                    $str .= "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" .  $runDesc  . $s . $runUpdated . "</tr>";
+                }
+                $ids_htmls[$id] = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str . "</tbody>" . "</table>";
             }
         }
 
         $dataRender = [];
-        foreach ($desc_id as $key => $id) {
-            $dataRender[] = $lines[$id] + ['c5' =>  $arrayHtmlRender[$id]];
+        $desc_id = array_column($dataSource, 'line_id', 'line_description');
+        foreach ($desc_id as $id) {
+            $dataRender[] = $lines[$id] + ['response_type' => $ids_htmls[$id]];
         }
 
-        // dd($dataRender);
-
-        // dump($this->viewName);
         return view($this->viewName, [
             'tableColumns' => $columns,
             'tableDataSource' => $dataRender
