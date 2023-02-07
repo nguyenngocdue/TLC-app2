@@ -1,5 +1,4 @@
 @if ($errors->any())
-@dump($errors->default)
 <div class="w-full flex p-4 mb-4 text-sm text-red-700 bg-red-100  dark:text-red-800 rounded-lg shadow-md dark:bg-gray-800 " role="alert">
     <i class="p-4 mb-4 text-lg fa-duotone fa-circle-xmark"></i>
     <span class="sr-only">Danger</span>

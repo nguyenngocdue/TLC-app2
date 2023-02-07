@@ -23,13 +23,13 @@ const addANewLine = (params) => {
                 }
                 break
             case 'dropdown':
-                renderer = "<select class='" + column['classList'] + "'></select>"
+                renderer = "<select name='" + name + "' class='" + column['classList'] + "'></select>"
                 break
             case "text":
-                renderer = "<input name='A' value='B' class='" + column['classList'] + "'/>";
+                renderer = "<input name='" + name + "' class='" + column['classList'] + "' />";
                 break
             case "textarea":
-                renderer = "<textarea name='' class='" + column['classList'] + "'></textarea>"
+                renderer = "<textarea name='" + name + "' class='" + column['classList'] + "'></textarea>"
                 break
             default:
                 renderer = "Unknown how to render " + column['renderer']

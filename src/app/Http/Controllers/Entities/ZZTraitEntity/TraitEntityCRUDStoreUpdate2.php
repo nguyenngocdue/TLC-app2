@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Models\Attachment;
-use App\Utils\Support\Json\SuperProps;
 use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 use Illuminate\Http\Request;
@@ -12,6 +11,7 @@ use Illuminate\Support\Str;
 trait TraitEntityCRUDStoreUpdate2
 {
 	use TraitEntityEditableTable;
+	use TraitEntityFormula;
 
 	private $debugForStoreUpdate = false;
 
@@ -114,11 +114,13 @@ trait TraitEntityCRUDStoreUpdate2
 	{
 		$dataSource = $request->except(['_token', '_method', 'status', 'created_at', 'updated_at']);
 		if ($action === 'store') $dataSource['id'] = null;
+
+		$this->dump1("Before handleFields", $dataSource, __LINE__);
 		$dataSource = $this->applyFormula($dataSource);
 		$dataSource = $this->handleToggle($dataSource);
 		$dataSource = $this->handleTextArea($dataSource);
 
-		$this->dump1("handleFields", $dataSource, __LINE__);
+		$this->dump1("After handleFields", $dataSource, __LINE__);
 		return $dataSource;
 	}
 
@@ -171,9 +173,9 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 	}
 
-	protected function handleMyException($e, $action,)
+	protected function handleMyException($e, $action, $phase)
 	{
-		dump("Exception during $action " . $e->getFile() . " line " . $e->getLine());
+		dump("Exception during $action phase $phase " . $e->getFile() . " line " . $e->getLine());
 		dd($e->getMessage());
 	}
 
@@ -186,7 +188,7 @@ trait TraitEntityCRUDStoreUpdate2
 			//Uploading attachments has to run before form validation
 			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
 		} catch (Exception $e) {
-			$this->handleMyException($e, __FUNCTION__);
+			$this->handleMyException($e, __FUNCTION__, 1);
 		}
 		$request->validate($this->getValidationRules());
 		try {
@@ -203,13 +205,13 @@ trait TraitEntityCRUDStoreUpdate2
 
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		} catch (Exception $e) {
-			$this->handleMyException($e, __FUNCTION__);
+			$this->handleMyException($e, __FUNCTION__, 2);
 		}
 		if ($request['tableNames'] !== 'fakeRequest') $this->handleEditableTables($request, $props['editable_table']);
 		try {
 			$this->handleStatus($theRow, $newStatus);
 		} catch (Exception $e) {
-			$this->handleMyException($e, __FUNCTION__);
+			$this->handleMyException($e, __FUNCTION__, 3);
 		}
 		if ($request['tableNames'] === 'fakeRequest') return;
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
@@ -219,11 +221,12 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function update(Request $request, $id)
 	{
-		if ($request['tableNames'] === 'fakeRequest') {
-			$tableName = $request['tableName'];
-			$this->superProps = SuperProps::getFor($tableName);
-			$this->data = Str::modelPathFrom($tableName);
-		}
+		// if ($request['tableNames'] === 'fakeRequest') {
+		// 	$tableName = $request['tableName'];
+		// 	$this->superProps = SuperProps::getFor($tableName);
+		// 	$this->data = Str::modelPathFrom($tableName);
+		// 	$this->type = Str::singular($tableName);
+		// }
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
 			$props = $this->getProps1();
@@ -231,7 +234,7 @@ trait TraitEntityCRUDStoreUpdate2
 			//Uploading attachments has to run before form validation
 			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
 		} catch (Exception $e) {
-			$this->handleMyException($e, __FUNCTION__);
+			$this->handleMyException($e, __FUNCTION__, 1);
 		}
 		$request->validate($this->getValidationRules());
 		try {
@@ -250,13 +253,13 @@ trait TraitEntityCRUDStoreUpdate2
 
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		} catch (Exception $e) {
-			$this->handleMyException($e, __FUNCTION__);
+			$this->handleMyException($e, __FUNCTION__, 2);
 		}
 		if ($request['tableNames'] !== 'fakeRequest') $this->handleEditableTables($request, $props['editable_table']);
 		try {
 			$this->handleStatus($theRow, $newStatus);
 		} catch (Exception $e) {
-			$this->handleMyException($e, __FUNCTION__);
+			$this->handleMyException($e, __FUNCTION__, 3);
 		}
 		if ($request['tableNames'] === 'fakeRequest') return;
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
