@@ -4,7 +4,7 @@
     name="{{$name}}" 
     value="{{$value}}" 
     title="{{$title}}"
-    onClick={!! $onClick !!}
+    onClick="{!! $onClick !!}"
     >
     {{$slot}}
 </button>
