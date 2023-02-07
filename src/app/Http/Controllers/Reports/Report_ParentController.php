@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Reports;
 
 use App\Http\Controllers\Controller;
-use App\Utils\Support\DBTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 abstract class Report_ParentController extends Controller
 {
@@ -27,14 +25,12 @@ abstract class Report_ParentController extends Controller
                 $valueParam =  $urlParams[$value];
                 $searchStr = head($matches)[$key];
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
-                break;
             }
         }
         return $sqlStr;
     }
 
-
-    private function getDataSource($urlParams)
+    protected function getDataSource($urlParams)
     {
         $sql = $this->getSql($urlParams);
         $sqlData = DB::select($sql);
@@ -43,16 +39,18 @@ abstract class Report_ParentController extends Controller
         return $result;
     }
 
+    protected function enrichDataSource($dataSource)
+    {
+        return $dataSource;
+    }
+
     public function index(Request $request)
     {
         $urlParams = $request->all();
         $columns = $this->getTableColumns();
-
-        // dd($columns);
-
         $dataSource = $this->getDataSource($urlParams);
-        // dump($columns, $dataSource);
-        dump($this->viewName);
+        $dataSource = $this->enrichDataSource($dataSource);
+        // dump($this->viewName, $dataSource);
         return view($this->viewName, [
             'tableColumns' => $columns,
             'tableDataSource' => $dataSource

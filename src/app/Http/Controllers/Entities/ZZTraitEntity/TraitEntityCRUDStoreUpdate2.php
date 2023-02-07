@@ -171,6 +171,12 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 	}
 
+	protected function handleMyException($e, $action,)
+	{
+		dump("Exception during $action " . $e->getFile() . " line " . $e->getLine());
+		dd($e->getMessage());
+	}
+
 	public function store(Request $request)
 	{
 		try {
@@ -180,8 +186,7 @@ trait TraitEntityCRUDStoreUpdate2
 			//Uploading attachments has to run before form validation
 			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
 		} catch (Exception $e) {
-			dump("Exception during store " . $e->getFile() . " line " . $e->getLine());
-			dd($e->getMessage());
+			$this->handleMyException($e, __FUNCTION__);
 		}
 		$request->validate($this->getValidationRules());
 		try {
@@ -197,10 +202,14 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
+		} catch (Exception $e) {
+			$this->handleMyException($e, __FUNCTION__);
+		}
+		if ($request['tableNames'] !== 'fakeRequest') $this->handleEditableTables($request, $props['editable_table']);
+		try {
 			$this->handleStatus($theRow, $newStatus);
 		} catch (Exception $e) {
-			dump("Exception during store " . $e->getFile() . " line " . $e->getLine());
-			dd($e->getMessage());
+			$this->handleMyException($e, __FUNCTION__);
 		}
 		if ($request['tableNames'] === 'fakeRequest') return;
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
@@ -222,8 +231,7 @@ trait TraitEntityCRUDStoreUpdate2
 			//Uploading attachments has to run before form validation
 			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
 		} catch (Exception $e) {
-			dump("Exception during update " . $e->getFile() . " line " . $e->getLine());
-			dd($e->getMessage());
+			$this->handleMyException($e, __FUNCTION__);
 		}
 		$request->validate($this->getValidationRules());
 		try {
@@ -241,12 +249,14 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
-
-			if ($request['tableNames'] !== 'fakeRequest') $this->handleEditableTables($request, $props['editable_table']);
+		} catch (Exception $e) {
+			$this->handleMyException($e, __FUNCTION__);
+		}
+		if ($request['tableNames'] !== 'fakeRequest') $this->handleEditableTables($request, $props['editable_table']);
+		try {
 			$this->handleStatus($theRow, $newStatus);
 		} catch (Exception $e) {
-			dump("Exception during update " . $e->getFile() . " line " . $e->getLine());
-			dd($e->getMessage());
+			$this->handleMyException($e, __FUNCTION__);
 		}
 		if ($request['tableNames'] === 'fakeRequest') return;
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");

@@ -38,6 +38,7 @@
     <script src="{{ asset('js/tlc2.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2.js') }}"></script>
+    <script src="{{ asset('js/components/EditableTable.js') }}"></script>
     <script src="{{ asset('js/components/SearchModal.js') }}"></script>
     <script src="{{ asset('js/applayout.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
