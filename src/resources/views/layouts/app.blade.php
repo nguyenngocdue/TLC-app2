@@ -44,18 +44,17 @@
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
 </head>
 <body >
-    <div class=" flex bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div class=" bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         {{-- <x-homepage.sidebar2 /> --}}
-        <div class="flex flex-col flex-1 w-full bg-gray-100 dark:bg-gray-700">
-            
+        <div class="flex flex-col w-full ">
             <x-homepage.navbar2 />
-            <main class="h-full overflow-y-auto">
-                <div class="container1 mx-auto grid px-6">
-                    <div class="no-print container1 flex items-center justify-between h-full mx-auto1 text-purple-600 dark:text-purple-300">
-                        <div class="flex justify-cen1ter flex-1 lg:mr-32">
+            <main class="w-full flex-grow bg-gray-100 dark:bg-gray-700 min-h-screen">
+                <div class="w-full lg:px-6 sm:px-2 md:px-4">
+                    <div class="no-print flex flex-wrap items-center justify-between h-full text-purple-600 dark:text-purple-300">
+                        <div class="w-full lg:w-1/2">
                             <x-renderer.heading level=3>@yield('title', 'Untitled')</x-renderer.heading>
                         </div>
-                        <ul class="flex items-center flex-shrink-0 space-x-6">
+                        <ul class="w-full lg:w-1/2">
                             <li class="relative">
                                 <x-navigation.breadcrumb />
                             </li>
@@ -68,6 +67,7 @@
                 </div>
             </main>
         </div>
+    </div>
         {!! Toastr::message() !!}
 </body>
 
