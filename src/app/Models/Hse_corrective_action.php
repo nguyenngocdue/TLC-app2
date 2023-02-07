@@ -15,11 +15,21 @@ class Hse_corrective_action extends ModelExtended
     public $eloquentParams = [
         'getHseIncidentReport' => ['belongsTo', Hse_incident_report::class, 'hse_incident_report_id'],
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
-        'getAssignee' => ['belongsTo', User::class, 'assignee'],
         'getPriority' => ['belongsTo', Priority::class, 'priority_id'],
+        'getAssignee' => ['belongsTo', User::class, 'assignee'],
+        'getUnsafeActionType' => ['belongsTo', Term::class, 'unsafe_action_type_id'],
+    ];
+
+    public $oracyParams = [
+        "getDefMonitors()" => ["getCheckedByField", User::class],
     ];
 
     public function getHseIncidentReport()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getUnsafeActionType()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -37,7 +47,13 @@ class Hse_corrective_action extends ModelExtended
     public function getPriority()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2]); 
+    }
+    
+    public function getDefMonitors()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
     // public function getManyLineParams0()

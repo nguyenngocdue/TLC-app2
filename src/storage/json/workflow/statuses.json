@@ -143,6 +143,12 @@
         "color": "pink",
         "color_index": "200"
     },
+    "opened": {
+        "name": "opened",
+        "title": "Opened",
+        "color": "lime",
+        "color_index": "200"
+    },
     "passed": {
         "name": "passed",
         "title": "Passed",

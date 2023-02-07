@@ -25,6 +25,19 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getPriority": {
+        "name": "_getPriority",
+        "relationship": "belongsTo",
+        "control_name": "priority_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "field_id",
+        "filter_values": "134",
+        "radio_checkbox_colspan": ""
+    },
     "_getAssignee": {
         "name": "_getAssignee",
         "relationship": "belongsTo",
@@ -38,17 +51,30 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getPriority": {
-        "name": "_getPriority",
+    "_getUnsafeActionType": {
+        "name": "_getUnsafeActionType",
         "relationship": "belongsTo",
-        "control_name": "priority_id",
+        "control_name": "unsafe_action_type_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "field_id",
-        "filter_values": "134",
+        "filter_values": "136",
+        "radio_checkbox_colspan": ""
+    },
+    "_getDefMonitors()": {
+        "name": "_getDefMonitors()",
+        "relationship": "getCheckedByField",
+        "control_name": "getDefMonitors()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "field_id",
+        "filter_values": "27",
         "radio_checkbox_colspan": ""
     }
 }
