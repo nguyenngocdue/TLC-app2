@@ -39,7 +39,7 @@
         </x-renderer.card>
         <br />
         <x-renderer.card title="Table with Data and No. and dataHeader">
-            showNo= { { true } }z
+            showNo= { { true } }
             <x-renderer.table :columns="$tableColumns" :dataHeader="$tableDataHeader" :dataSource="$tableDataSource" showNo="{{true}}" />
         </x-renderer.card>
         <br />        
@@ -64,7 +64,7 @@
         <br />
         <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive) but keep original order">
             showNoR= { { true } }
-            groupBy="status" groupByLength=100 groupKeepOrder={ { true }}
+            groupBy="status" groupByLength=100 groupKeepOrder={ { true } }
             <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="status" groupByLength=100 groupKeepOrder={{true}}/>
         </x-renderer.card>
         <br />

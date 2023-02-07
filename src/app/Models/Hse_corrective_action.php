@@ -84,6 +84,8 @@ class Hse_corrective_action extends ModelExtended
             ['dataIndex' => 'assignee'],
             ['dataIndex' => 'opened_date'],
             ['dataIndex' => 'status',],
+            ['dataIndex' => 'priority_id',],
+            ['dataIndex' => 'unsafe_action_type_id',],
         ];
     }
 }
