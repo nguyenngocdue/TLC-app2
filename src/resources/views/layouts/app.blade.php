@@ -45,9 +45,9 @@
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
 </head>
 <body >
-    <div class=" bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div class="bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         {{-- <x-homepage.sidebar2 /> --}}
-        <div class="flex flex-col w-full ">
+        <div class="flex flex-col w-full">
             <x-homepage.navbar2 />
             <main class="w-full flex-grow bg-gray-100 dark:bg-gray-700 min-h-screen">
                 <div class="w-full lg:px-6 sm:px-2 md:px-4">
