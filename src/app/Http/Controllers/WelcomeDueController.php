@@ -26,6 +26,7 @@ class WelcomeDueController extends Report_ParentController
                         FROM prod_orders po
                             LEFT JOIN prod_routing_details prd ON po.prod_routing_id = prd.prod_routing_id
                             LEFT JOIN prod_sequences ps ON po.id = ps.prod_order_id
+                            WHERE po.id = '{{po}}'
                         GROUP BY po.id
                 ";
     }
