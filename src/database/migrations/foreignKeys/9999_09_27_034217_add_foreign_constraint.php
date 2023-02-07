@@ -109,6 +109,7 @@ return new class extends Migration
         });
         Schema::table('qaqc_insp_chklsts', function (Blueprint $table) {
             $table->foreign('prod_order_id')->references('id')->on('prod_orders')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('qaqc_insp_tmpl_id')->references('id')->on('qaqc_insp_tmpls');
         });
         Schema::table('qaqc_insp_chklst_lines', function (Blueprint $table) {
             // $table->foreign('qaqc_insp_chklst_id')->references('id')->on('qaqc_insp_chklsts')->onDelete('cascade')->onUpdate('cascade');
