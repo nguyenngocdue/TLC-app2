@@ -42,16 +42,7 @@
             showNo= { { true } }z
             <x-renderer.table :columns="$tableColumns" :dataHeader="$tableDataHeader" :dataSource="$tableDataSource" showNo="{{true}}" />
         </x-renderer.card>
-        <br />
-    </x-renderer.card>
-    <x-renderer.card title="Tables 2">
-        <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive)">
-            showNoR= { { true } }
-            groupBy="client" groupByLength=1
-
-            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="client" />
-        </x-renderer.card>
-        <br />
+        <br />        
         <x-renderer.card title="Empty Table">
             <x-renderer.table :columns="$tableColumns" :dataSource="[]" />
         </x-renderer.card>
@@ -63,5 +54,19 @@
         <x-renderer.card title="Missing DataSource">
             <x-renderer.table :columns="$tableColumns" />
         </x-renderer.card>
+    </x-renderer.card>
+    <x-renderer.card title="Tables 2">
+        <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive)">
+            showNoR= { { true } }
+            groupBy="client" groupByLength=1
+            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="client" />
+        </x-renderer.card>
+        <br />
+        <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive) but keep original order">
+            showNoR= { { true } }
+            groupBy="status" groupByLength=100 groupKeepOrder={ { true }}
+            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="status" groupByLength=100 groupKeepOrder={{true}}/>
+        </x-renderer.card>
+        <br />
     </x-renderer.card>
 </div>

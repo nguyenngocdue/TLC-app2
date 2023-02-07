@@ -23,6 +23,7 @@ class Table extends Component
     private $showNoR = false,
     private $groupBy = false,
     private $groupByLength = 1,
+    private $groupKeepOrder = false,
     private $header = "",
     private $footer = "",
     private $maxH = 40,

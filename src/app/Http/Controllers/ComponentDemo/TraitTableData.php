@@ -109,12 +109,12 @@ trait TraitTableData
             ],
             [
                 "avatar" => "/images/hans.jpeg",
-                "id" => 2002, "client" => "Hans", "amount" => 863.45, "status" => "abc", "date" => "06/10/2022",
+                "id" => 2002, "client" => "Hans", "amount" => 863.45, "status" => "approved", "date" => "06/10/2022",
                 "loggedIn" => false,
             ],
             [
                 "avatar" => "/images/helen.jpeg",
-                "id" => 3003, "client" => "Helen", "amount" => 123.45, "status" => "pending", "color" => "orange", "date" => "07/10/2022",
+                "id" => 3003, "client" => "Helen", "amount" => 123.45, "status" => "rejected", "color" => "orange", "date" => "07/10/2022",
                 "loggedIn" => true,
                 "disabled" => true,
             ],
@@ -125,17 +125,17 @@ trait TraitTableData
             ],
             [
                 "avatar" => "/images/Sandy.jpeg",
-                "id" => 5005, "client" => "Sandy", "amount" => 789.45, "status" => "expired", "color" => "gray", "date" => "09/10/2022",
+                "id" => 5005, "client" => "Sandy", "amount" => 789.45, "status" => "pending", "color" => "gray", "date" => "09/10/2022",
                 "loggedIn" => 1,
             ],
             [
                 "avatar" => "/images/avatar.jpg",
-                "id" => 6006, "client" => "Eva", "amount" => 1011.45, "status" => "approved", "color" => "green", "date" => "16/10/2022",
+                "id" => 6006, "client" => "Eva", "amount" => 1011.45, "status" => "pending", "color" => "green", "date" => "16/10/2022",
                 "loggedIn" => 0,
             ],
             [
                 "avatar" => "/images/Travis.jpeg",
-                "id" => 6006, "client" => "Travis", "amount" => 1011.45, "status" => "approved", "color" => "green", "date" => "16/10/2022",
+                "id" => 6006, "client" => "Travis", "amount" => 1011.45, "color" => "green", "date" => "16/10/2022",
                 "loggedIn" => 0,
             ],
         ];
