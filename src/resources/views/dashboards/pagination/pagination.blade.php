@@ -5,7 +5,6 @@ $classNameDisabled = "focus:shadow-outline-purple rounded-md border border-r-0 b
 @endphp
 <span class="hidden focus:shadow-outline-purple rounded-md border border-r-0 border-purple-600 bg-purple-600 m-0.5 px-3 py-1 text-white transition-colors duration-150 focus:outline-none">Active</span>
 <span class="hidden focus:shadow-outline-purple rounded-md border border-r-0 border-purple-100 bg-purple-100 m-0.5 px-3 py-1 text-white transition-colors duration-150 focus:outline-none">Disabled</span>
-{{-- @dump($elements); --}}
 <!-- Pagination -->
 <ul class="inline-flex items-center">
     {{-- Previous Page Link --}}

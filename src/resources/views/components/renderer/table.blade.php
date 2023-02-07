@@ -1,5 +1,5 @@
-<div class="my-2 flex flex-col rounded-lg border border-gray-300 dark:border-gray-600">
-    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+<div class="rounded-lg border border-gray-300 dark:border-gray-600">
+    <div class="sm:-mx-6 lg:-mx-8">
         <div class="inline-block w-full sm:px-6 lg:px-8">
             @if ($header)
                 <div
@@ -8,7 +8,7 @@
                 </div>
             @endif
             <div class="table-wrp block max-h-[{{ $maxH }}rem] overflow-x-auto rounded-t-lg">
-                <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm' style="table-layout: auto" >
+                <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm' style="table-layout: auto">
                     <colgroup>
                         {!! $colgroup !!}
                     </colgroup>
@@ -34,7 +34,7 @@
                 </table>
             </div>
             <div
-                class='grid border-t rounded-b-lg bg-gray-100 px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
+                class='w-full grid border-t rounded-b-lg bg-gray-100 px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
                 <span class='col-span-3 flex items-center'>
                     {{ $showing }}
                 </span>
