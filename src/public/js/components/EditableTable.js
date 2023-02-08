@@ -24,13 +24,14 @@ const setValueOfTrByName = (a, fieldName, value) => {
         }
     })
 }
-const getCellValueByName = (tableId, columnName, index) => {
+const getCellValueByName = (tableId, columnName, rowIndex) => {
     const rows = $("#" + tableId + " > tbody")[0].children
-    return getValueOfTrByName(rows[index], columnName)
+    // console.log(rows, tableId, columnName, rowIndex, rows[rowIndex])
+    return getValueOfTrByName(rows[rowIndex], columnName)
 }
-const setCellValueByName = (tableId, columnName, index, value) => {
+const setCellValueByName = (tableId, columnName, rowIndex, value) => {
     const rows = $("#" + tableId + " > tbody")[0].children
-    setValueOfTrByName(rows[index], columnName, value)
+    setValueOfTrByName(rows[rowIndex], columnName, value)
 }
 
 const rerenderTableBaseOnNewOrder = (tableId) => {
@@ -44,12 +45,16 @@ const rerenderTableBaseOnNewOrder = (tableId) => {
     })
     $("#" + tableId + ' > tbody').html(sortedTable)
 }
-const getIndexFromFingerPrint = (tableId, id) => {
+
+const getIndexFromFingerPrint = (tableId, fingerPrint) => {
     const rows = getAllRows(tableId)
     for (let i = 0; i < rows.length; i++) {
+        // console.log(rows.length, i)
         const cell = 1 * getCellValueByName(tableId, '[finger_print]', i)
-        if (cell === id) return i
+        // console.log(cell, fingerPrint)
+        if (cell === fingerPrint) return i
     }
+    console.error("Can not find FingerPrint #", fingerPrint, "in all rows")
     return -1
 }
 
@@ -58,12 +63,13 @@ const getMaxValueOfAColumn = (tableId, columnName) => {
     let max = 0
     for (let i = 0; i < rows.length; i++) {
         const cell = 1 * getCellValueByName(tableId, columnName, i)
-        // console.log(cell)
+        // console.log(cell, max)
         if (cell > max) max = cell
     }
     // console.log("Max", max)
     return max
 }
+
 const getMinValueOfAColumn = (tableId, columnName) => {
     const rows = getAllRows(tableId)
     let min = 1000000
@@ -75,6 +81,7 @@ const getMinValueOfAColumn = (tableId, columnName) => {
     // console.log("Min", min)
     return min
 }
+
 const moveUpEditableTable = (params) => {
     const { control, fingerPrint } = params
     const tableId = control.value
@@ -82,23 +89,24 @@ const moveUpEditableTable = (params) => {
     // console.log(tableId, fingerPrint, firstRowFingerPrintValue)
     if (fingerPrint === firstRowFingerPrintValue) {
         const max = getMaxValueOfAColumn(tableId, "[order_no]")
-        // console.log("FIRST ROW, max of order_by", max)
+        // console.log("FIRST ROW, max of order_no", max)
         setCellValueByName(tableId, '[order_no]', 0, max + 1)
     } else {
         // console.log("NORMAL ROW")
-        const myIndex = getIndexFromFingerPrint(tableId, fingerPrint)
-        const myValue = 1 * getCellValueByName(tableId, '[order_no]', myIndex)
+        const myRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
+        const myValue = 1 * getCellValueByName(tableId, '[order_no]', myRowIndex)
 
-        const previousIndex = myIndex - 1
-        const myPreviousValue = 1 * getCellValueByName(tableId, '[order_no]', previousIndex)
-        // console.log(previousIndex, myIndex)
+        const previousRowIndex = myRowIndex - 1
+        const myPreviousValue = 1 * getCellValueByName(tableId, '[order_no]', previousRowIndex)
+        // console.log(previousRowIndex, myRowIndex, myPreviousValue, myValue)
 
         const tmp = myPreviousValue
-        setCellValueByName(tableId, '[order_no]', previousIndex, myValue)
-        setCellValueByName(tableId, '[order_no]', myIndex, tmp)
+        setCellValueByName(tableId, '[order_no]', previousRowIndex, myValue)
+        setCellValueByName(tableId, '[order_no]', myRowIndex, tmp)
     }
     rerenderTableBaseOnNewOrder(tableId)
 }
+
 const moveDownEditableTable = (params) => {
     const { control, fingerPrint } = params
     const tableId = control.value
@@ -111,35 +119,50 @@ const moveDownEditableTable = (params) => {
         setCellValueByName(tableId, '[order_no]', length - 1, min - 1)
     } else {
         // console.log("NORMAL ROW")
-        const myIndex = getIndexFromFingerPrint(tableId, fingerPrint)
-        const myValue = 1 * getCellValueByName(tableId, '[order_no]', myIndex)
+        const myRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
+        const myValue = 1 * getCellValueByName(tableId, '[order_no]', myRowIndex)
 
-        const nextIndex = myIndex + 1
-        const myNextValue = 1 * getCellValueByName(tableId, '[order_no]', nextIndex)
-        // console.log(nextIndex, myIndex)
+        const nextRowIndex = myRowIndex + 1
+        const myNextValue = 1 * getCellValueByName(tableId, '[order_no]', nextRowIndex)
+        // console.log(nextRowIndex, myRowIndex)
 
         const tmp = myNextValue
-        setCellValueByName(tableId, '[order_no]', nextIndex, myValue)
-        setCellValueByName(tableId, '[order_no]', myIndex, tmp)
+        setCellValueByName(tableId, '[order_no]', nextRowIndex, myValue)
+        setCellValueByName(tableId, '[order_no]', myRowIndex, tmp)
     }
     rerenderTableBaseOnNewOrder(tableId)
 }
 
 const duplicateEditableTable = (params) => {
-    const { control, id } = params
+    const { control, fingerPrint } = params
     const tableId = control.value
-    console.log("Duplicate", tableId, id)
+    const { columns } = tableObject[tableId]
+    const newFingerPrint = addANewLine({ tableId: control.value })
+
+    // console.log("Duplicate", tableId, fingerPrint, newFingerPrint, columns)
+    for (let i = 0; i < columns.length; i++) {
+        const column = columns[i]
+        if (['action', 'id', 'order_no'].includes(column.dataIndex)) continue
+        const sourceRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
+        const value = getCellValueByName(tableId, column['dataIndex'], sourceRowIndex)
+        // console.log("Cloning", column['dataIndex'], "to", value)
+        const targetRowIndex = getIndexFromFingerPrint(tableId, newFingerPrint)
+        setCellValueByName(tableId, column['dataIndex'], targetRowIndex, value)
+    }
 }
 const trashEditableTable = (params) => {
-    const { control, id } = params
+    const { control, fingerPrint } = params
     const tableId = control.value
-    console.log("Trash", tableId, id)
+    console.log("Trash", tableId, fingerPrint)
 }
 const addANewLine = (params) => {
-    const { tableId, columns, showNo, showNoR } = params
-    // console.log("ADD LINE TO", params)
+    const { tableId } = params
+    const { columns, showNo, showNoR, tableDebug } = tableObject[tableId]
+    console.log("ADD LINE TO", params, tableDebug)
     const table = document.getElementById(tableId)
     const row = table.insertRow()
+    row.classList.add('bg-lime-200')
+    let fingerPrint = ''
     if (showNo) { //<< Ignore No. column
         const noCell = row.insertCell()
         noCell.classList = "px-1 py-1 dark:border-gray-600 border-r text-center";
@@ -151,16 +174,17 @@ const addANewLine = (params) => {
         const name = tableId + "[" + column['dataIndex'] + "][]"
         if (column['dataIndex'] === 'action') {
             const fingerPrintName = tableId + "[finger_print][]"
-            const fingerPrint = getMaxValueOfAColumn(tableId, "[finger_print]") + 1
-            const fingerPrintInput = '<input name="' + fingerPrintName + '" value="' + fingerPrint + '" type=hidden1 />'
+            fingerPrint = getMaxValueOfAColumn(tableId, "[finger_print]") + 1
+            const params = "{tableId: '" + tableId + "', control:this, fingerPrint: " + fingerPrint + "}"
+            const fingerPrintInput = '<input name="' + fingerPrintName + '" value="' + fingerPrint + '" type=' + (tableDebug ? "text" : "hidden") + ' />'
             renderer = fingerPrintInput + ' <div class="whitespace-nowrap">\
-                            <button value="'+ tableId + '" onClick="moveUpEditableTable({control:this, fingerPrint:' + fingerPrint + '})"\
+                            <button value="'+ tableId + '" onClick="moveUpEditableTable(' + params + ')"\
                                 type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" name="" value="" title="" onclick=""><i class="fa fa-arrow-up"></i></button>\
-                            <button value="' + tableId + '" onClick="moveDownEditableTable({control:this, fingerPrint:' + fingerPrint + '})"\
+                            <button value="' + tableId + '" onClick="moveDownEditableTable(' + params + ')"\
                                 type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" name="" value="" title="" onclick=""><i class="fa fa-arrow-down"></i></button>\
-                            <button value="' + tableId + '" onClick="duplicateEditableTable({control:this, fingerPrint:' + fingerPrint + '})"\
+                            <button value="' + tableId + '" onClick="duplicateEditableTable(' + params + ')"\
                                 type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg" name="" value="" title="" onclick=""><i class="fa fa-copy"></i></button>\
-                            <button value="' + tableId + '" onClick="trashEditableTable({control:this, fingerPrint:' + fingerPrint + '})"\
+                            <button value="' + tableId + '" onClick="trashEditableTable(' + params + ')"\
                                 type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-red-600 text-white shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none active:bg-red-800 active:shadow-lg" name="" value="" title="" onclick=""><i class="fa fa-trash"></i></button>\
                         </div>'
             // } else if (column['dataIndex'] === 'order_no') {
@@ -192,7 +216,6 @@ const addANewLine = (params) => {
                         value = getMaxValueOfAColumn(tableId, "[order_no]") + 1
                     }
                     renderer = "<input name='" + name + "' class='" + column['classList'] + "' type=number step=any value='" + value + "'/>";
-                    console.log(renderer)
                     break
                 case "text":
                     renderer = "<input name='" + name + "' class='" + column['classList'] + "' />";
@@ -216,4 +239,5 @@ const addANewLine = (params) => {
         noCell.classList = "px-1 py-1 dark:border-gray-600 border-r text-center";
         noCell.innerHTML = "New"
     }
+    return fingerPrint
 }

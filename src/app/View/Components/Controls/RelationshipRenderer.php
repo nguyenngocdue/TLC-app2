@@ -12,6 +12,7 @@ class RelationshipRenderer extends Component
 {
     private static $table00Count = 1;
     private $table01Name;
+    private $tableDebug = false;
     /**
      * Create a new component instance.
      *
@@ -151,7 +152,8 @@ class RelationshipRenderer extends Component
         foreach ($dataSource as &$row) {
             $id = $row->order_no;
             // dump($index);
-            $row->action = Blade::render("<input name='{$table01Name}[finger_print][]' value='$id' type=hidden1 />
+            $type = $this->tableDebug ? "text" : "hidden";
+            $row->action = Blade::render("<input name='{$table01Name}[finger_print][]' value='$id' type=$type />
             <div class='whitespace-nowrap'>
                 <x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
                 <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>
@@ -159,6 +161,15 @@ class RelationshipRenderer extends Component
                 <x-renderer.button size='xs' value='$table01Name' onClick='trashEditableTable({control:this, fingerPrint: $id})' type='danger' ><i class='fa fa-trash'></i></x-renderer.button>
             </div>
             ");
+        }
+        return $dataSource;
+    }
+
+    private function remakeOrderNoColumn($dataSource)
+    {
+        // dump($dataSource);
+        foreach ($dataSource as $index => &$row) {
+            $row->order_no = 1000 + $index;
         }
         return $dataSource;
     }
@@ -204,6 +215,8 @@ class RelationshipRenderer extends Component
             case "many_lines":
                 $tableName =  $smallModel::getTableName();
                 $sp = SuperProps::getFor($tableName);
+                //remakeOrderNoColumn MUST before attach Action Column
+                $dataSource = $this->remakeOrderNoColumn($dataSource);
                 $dataSource = $this->attachActionColumn($this->table01Name, $dataSource);
                 return view('components.controls.many-line-params', [
                     'dataSource' => $dataSource,
@@ -213,6 +226,7 @@ class RelationshipRenderer extends Component
                     'tableName' => $smallModel::getTableName(),
                     'table01Name' => $this->table01Name,
                     'table01ROName' => $this->table01Name . "RO",
+                    'tableDebug' => $this->tableDebug ? "true" : "false",
                 ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";

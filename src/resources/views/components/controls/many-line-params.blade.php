@@ -23,12 +23,13 @@
         columns: editableColumns['{{$table01Name}}'],
         showNo:true,
         showNoR:true,
-        value: 1,
-        cbbDataSource: [],
+        tableDebug: {{$tableDebug}},
+        // value: 1,
+        // cbbDataSource: [],
     }
     </script>
 <br/>
-<x-renderer.button type="success" title="Add a new line" onClick="addANewLine(tableObject['{{$table01Name}}'])">Add A New Item</x-renderer.button>
+<x-renderer.button type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
 <input name="tableNames[{{$table01Name}}]" value="{{$tableName}}" type="hidden" />
 
 @endif
