@@ -15,6 +15,8 @@
     showNoR="{{true}}" 
     {{-- type="{{$lineType}}" --}}
     footer="{{$fn === '' ? '(Default column settings loaded)' : ''}}"
+    {{-- groupBy='status' --}}
+    {{-- groupByLength=100 --}}
 />
 <script>
     editableColumns['{{$table01Name}}']=@json($editableColumns);
@@ -27,7 +29,7 @@
         cbbDataSource: [],
     }
     </script>
-
+<br/>
 <x-renderer.button type="success" title="Add a new line" onClick="addANewLine(tableObject['{{$table01Name}}'])">Add A New Item</x-renderer.button>
 <input name="tableNames[{{$table01Name}}]" value="{{$tableName}}" type="hidden" />
 

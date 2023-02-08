@@ -8,7 +8,7 @@
     reloadDataToDropdown2("{{$id}}", k["{{$table}}"], JSON.parse("{{$selected}}"))
 
     $(document).ready(function() {
-        $("#{{$id}}").trigger('change')
+        getEById("{{$id}}").trigger('change')
     })
 
 </script>

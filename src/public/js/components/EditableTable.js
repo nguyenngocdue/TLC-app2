@@ -23,7 +23,16 @@ const addANewLine = (params) => {
                 }
                 break
             case 'dropdown':
-                renderer = "<select name='" + name + "' class='" + column['classList'] + "'></select>"
+                if (column['dataIndex'] === 'status') {
+                    renderer = "<select name='" + name + "' class='" + column['classList'] + "'>"
+                    column['cbbDataSource'].forEach((status) => {
+                        statusObject = column['cbbDataSourceObject'][status]
+                        renderer += "<option value='" + status + "'>" + statusObject.title + "</option>"
+                    })
+                    renderer += "</select>"
+                } else {
+                    renderer = "<select name='" + name + "' class='" + column['classList'] + "'></select>"
+                }
                 break
             case "text":
                 renderer = "<input name='" + name + "' class='" + column['classList'] + "' />";

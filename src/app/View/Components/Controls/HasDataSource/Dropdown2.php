@@ -36,7 +36,8 @@ class Dropdown2 extends Component
         // $warning = $this->warningIfDataSourceIsEmpty($dataSource);
         // if ($warning) return $warning;
 
-        $id = $this->multiple ? substr($this->name, 0, strlen($this->name) - 2) : $this->name; // Remove parenthesis ()
+        $id = $this->name;
+        // $id = $this->multiple ? substr($this->name, 0, strlen($this->name) - 2) : $this->name; // Remove parenthesis ()
         $name = $this->multiple ? $this->name . "[]" : $this->name;
 
         return view('components.controls.has-data-source.dropdown2', [
