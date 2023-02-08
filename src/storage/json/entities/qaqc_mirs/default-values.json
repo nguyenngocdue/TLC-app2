@@ -109,17 +109,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_assignee": {
-        "name": "_assignee",
-        "column_name": "assignee",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",

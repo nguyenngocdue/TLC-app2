@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Qaqc_mir extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "slug", "project_id", "sub_project_id",
-     "prod_discipline_id", "priority_id", "due_date", "assignee_to"];
+     "prod_discipline_id", "priority_id", "due_date", "assignee_to", "inspected_by"];
      protected $primaryKey = 'id';
     protected $table = "qaqc_mirs";
 

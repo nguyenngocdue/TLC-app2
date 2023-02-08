@@ -143,11 +143,11 @@
         "hidden_print": "",
         "new_line": "true"
     },
-    "_getDiscipline1": {
-        "name": "_getDiscipline1",
-        "column_name": "getDiscipline1",
+    "_getDiscipline1s": {
+        "name": "_getDiscipline1s",
+        "column_name": "getDiscipline1s",
         "column_type": "eloquent_prop",
-        "label": "Discipline 1",
+        "label": "Prod Discipline 1",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "12",
@@ -157,6 +157,38 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "new_line": "true"
+        "new_line": ""
+    },
+    "_getErpRoutingLinks": {
+        "name": "_getErpRoutingLinks",
+        "column_name": "getErpRoutingLinks",
+        "column_type": "eloquent_prop",
+        "label": "ERP Routing Links",
+        "control": "relationship_renderer",
+        "align": "",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
+    },
+    "_getWirDescriptions": {
+        "name": "_getWirDescriptions",
+        "column_name": "getWirDescriptions",
+        "column_type": "eloquent_prop",
+        "label": "WIR Description",
+        "control": "relationship_renderer",
+        "align": "",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     }
 }

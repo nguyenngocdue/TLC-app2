@@ -1,4 +1,20 @@
 {
+    "_assignee_to": {
+        "name": "_assignee_to",
+        "column_name": "assignee_to",
+        "listen_action": "assign",
+        "triggers": "wir_description_id",
+        "listen_to_fields": "wir_description_id",
+        "listen_to_attrs": "def_assignee"
+    },
+    "_getDefMonitors()": {
+        "name": "_getDefMonitors()",
+        "column_name": "getDefMonitors()",
+        "listen_action": "assign",
+        "triggers": "wir_description_id",
+        "listen_to_fields": "wir_description_id",
+        "listen_to_attrs": "getDefMonitors()"
+    },
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
@@ -6,6 +22,22 @@
         "triggers": "project_id",
         "listen_to_fields": "sub_project_id",
         "listen_to_attrs": "project_id"
+    },
+    "_prod_order_id": {
+        "name": "_prod_order_id",
+        "column_name": "prod_order_id",
+        "listen_action": "reduce",
+        "triggers": "sub_project_id",
+        "listen_to_fields": "prod_order_id",
+        "listen_to_attrs": "sub_project_id"
+    },
+    "_wir_description_id": {
+        "name": "_wir_description_id",
+        "column_name": "wir_description_id",
+        "listen_action": "reduce",
+        "triggers": "prod_discipline_id",
+        "listen_to_fields": "wir_description_id",
+        "listen_to_attrs": "prod_discipline_id"
     },
     "_id": {
         "name": "_id",
@@ -71,25 +103,9 @@
         "listen_to_fields": "",
         "listen_to_attrs": ""
     },
-    "_prod_order_id": {
-        "name": "_prod_order_id",
-        "column_name": "prod_order_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
     "_prod_discipline_id": {
         "name": "_prod_discipline_id",
         "column_name": "prod_discipline_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_wir_description_id": {
-        "name": "_wir_description_id",
-        "column_name": "wir_description_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -114,22 +130,6 @@
     "_closed_date": {
         "name": "_closed_date",
         "column_name": "closed_date",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_assignee_to": {
-        "name": "_assignee_to",
-        "column_name": "assignee_to",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_getDefMonitors()": {
-        "name": "_getDefMonitors()",
-        "column_name": "getDefMonitors()",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

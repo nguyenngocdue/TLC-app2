@@ -83,6 +83,13 @@ return new class extends Migration
             $table->foreign('erp_routing_link_id')->references('id')->on('erp_routing_links')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('wir_description_id')->references('id')->on('wir_descriptions')->onDelete('cascade')->onUpdate('cascade');
         });
+        Schema::table('wir_descriptions', function (Blueprint $table) {
+            $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
+            $table->foreign('def_assignee')->references('id')->on('users');
+        });
+        Schema::table('erp_routing_links', function (Blueprint $table) {
+            $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
+        });
         //************** HSE MODULE **************/
         Schema::table('hse_incident_reports', function (Blueprint $table) {
             $table->foreign('work_area_id')->references('id')->on('work_areas');
