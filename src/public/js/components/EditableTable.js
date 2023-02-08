@@ -44,6 +44,7 @@ const rerenderTableBaseOnNewOrder = (tableId) => {
         return aValue - bValue
     })
     $("#" + tableId + ' > tbody').html(sortedTable)
+    // console.log("Re-render completed")
 }
 
 const getIndexFromFingerPrint = (tableId, fingerPrint) => {
@@ -60,7 +61,7 @@ const getIndexFromFingerPrint = (tableId, fingerPrint) => {
 
 const getMaxValueOfAColumn = (tableId, columnName) => {
     const rows = getAllRows(tableId)
-    let max = 0
+    let max = Number.MIN_VALUE
     for (let i = 0; i < rows.length; i++) {
         const cell = 1 * getCellValueByName(tableId, columnName, i)
         // console.log(cell, max)
@@ -72,7 +73,7 @@ const getMaxValueOfAColumn = (tableId, columnName) => {
 
 const getMinValueOfAColumn = (tableId, columnName) => {
     const rows = getAllRows(tableId)
-    let min = 1000000
+    let min = Number.MAX_VALUE
     for (let i = 0; i < rows.length; i++) {
         const cell = 1 * getCellValueByName(tableId, columnName, i)
         // console.log(cell)
@@ -154,11 +155,12 @@ const trashEditableTable = (params) => {
     const { control, fingerPrint } = params
     const tableId = control.value
     console.log("Trash", tableId, fingerPrint)
+
 }
 const addANewLine = (params) => {
     const { tableId } = params
     const { columns, showNo, showNoR, tableDebug } = tableObject[tableId]
-    console.log("ADD LINE TO", params, tableDebug)
+    // console.log("ADD LINE TO", params, tableDebug)
     const table = document.getElementById(tableId)
     const row = table.insertRow()
     row.classList.add('bg-lime-200')
@@ -187,8 +189,6 @@ const addANewLine = (params) => {
                             <button value="' + tableId + '" onClick="trashEditableTable(' + params + ')"\
                                 type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-red-600 text-white shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none active:bg-red-800 active:shadow-lg" name="" value="" title="" onclick=""><i class="fa fa-trash"></i></button>\
                         </div>'
-            // } else if (column['dataIndex'] === 'order_no') {
-            //     renderer = "<input name=" + name + " type='hid1den' value=100 />"
         } else {
             switch (column['renderer']) {
                 case 'read-only-text':
@@ -211,11 +211,12 @@ const addANewLine = (params) => {
                     }
                     break
                 case "number":
-                    let value = ''
+                    let value = '', onChange = ''
                     if (column['dataIndex'] === 'order_no') {
                         value = getMaxValueOfAColumn(tableId, "[order_no]") + 1
+                        onChange = "rerenderTableBaseOnNewOrder(\"" + tableId + "\")"
                     }
-                    renderer = "<input name='" + name + "' class='" + column['classList'] + "' type=number step=any value='" + value + "'/>";
+                    renderer = "<input name='" + name + "' class='" + column['classList'] + "' type=number step=any value='" + value + "' onChange='" + onChange + "' />";
                     break
                 case "text":
                     renderer = "<input name='" + name + "' class='" + column['classList'] + "' />";

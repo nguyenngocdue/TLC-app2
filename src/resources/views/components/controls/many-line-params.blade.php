@@ -24,8 +24,6 @@
         showNo:true,
         showNoR:true,
         tableDebug: {{$tableDebug}},
-        // value: 1,
-        // cbbDataSource: [],
     }
     </script>
 <br/>

@@ -16,6 +16,7 @@ class Number extends Component
         private $name = "",
         private $placeholder = "",
         private $cell = null,
+        private $onChange = null,
     ) {
     }
 
@@ -31,6 +32,7 @@ class Number extends Component
             'placeholder' => $this->placeholder,
             'name' => $this->name,
             'type' => 'number',
+            'onChange' => $this->onChange,
         ]);
     }
 }

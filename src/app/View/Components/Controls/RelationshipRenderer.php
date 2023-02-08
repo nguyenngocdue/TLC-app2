@@ -99,7 +99,7 @@ class RelationshipRenderer extends Component
         return $result;
     }
 
-    private function makeEditableColumns($columns, $sp, $tableName)
+    private function makeEditableColumns($columns, $sp, $tableName, $table01Name)
     {
         $result = [
             [
@@ -140,6 +140,9 @@ class RelationshipRenderer extends Component
                     $newColumn['classList'] = " block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
                     break;
             }
+            if ($newColumn['dataIndex'] === 'order_no') {
+                $newColumn['onChange'] = "rerenderTableBaseOnNewOrder(`" . $table01Name . "`)";
+            }
             $result[] = $newColumn;
         }
         // dump($result);
@@ -169,7 +172,7 @@ class RelationshipRenderer extends Component
     {
         // dump($dataSource);
         foreach ($dataSource as $index => &$row) {
-            $row->order_no = 1000 + $index;
+            $row->order_no = 1001 + $index;
         }
         return $dataSource;
     }
@@ -222,7 +225,7 @@ class RelationshipRenderer extends Component
                     'dataSource' => $dataSource,
                     'fn' => $fn,
                     'readOnlyColumns' => $this->makeReadOnlyColumns($columns, $sp, $tableName),
-                    'editableColumns' => $this->makeEditableColumns($columns, $sp, $tableName),
+                    'editableColumns' => $this->makeEditableColumns($columns, $sp, $tableName, $this->table01Name),
                     'tableName' => $smallModel::getTableName(),
                     'table01Name' => $this->table01Name,
                     'table01ROName' => $this->table01Name . "RO",

@@ -48,9 +48,10 @@ trait TableTraitApplyRender
         $cellRender = ':cell=\'$cell\'';
         $rendererParam = isset($column['rendererParam']) ? $this->getRendererParams($column) : "";
         $formatterName = isset($column['formatterName']) ? "formatterName='{$column['formatterName']}'" : "";
+        $onChange = isset($column['onChange']) ? "onChange='{$column['onChange']}'" : "";
 
         $attributes = "$name $attributeRender $propertyRender $typeRender $cbbDataSourceRender ";
-        $attributes .= "$dataLineRender $columnRender $cellRender $rendererParam $formatterName ";
+        $attributes .= "$dataLineRender $columnRender $cellRender $rendererParam $formatterName $onChange";
         $attributes .= "$sortByRender ";
         $attributes = Str::of($attributes)->replaceMatches('/ {2,}/', ' '); //<< Remove double+ space
 
