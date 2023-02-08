@@ -42,15 +42,18 @@ trait HasCheckbox
         if ($result0->count() == 0) return new Collection([]);
 
         $ids = $result0->pluck('term_id');
-        $modelPath = $result0->pluck('term_type')[0];
-        $model = App::make($modelPath);
-        $result1 = $model::whereIn('id', $ids)->get();
-        $resultInverted = Arr::keyBy($result1, 'id');
+        $modelPaths = $result0->pluck('term_type')->unique();
+        foreach ($modelPaths as $modelPath) {
+            $model = App::make($modelPath);
+            $result1[$modelPath] = $model::whereIn('id', $ids)->get();
+            $resultInverted[$modelPath] = Arr::keyBy($result1[$modelPath], 'id');
+        }
 
         $result = [];
         foreach ($result0 as $item) {
             // error_log($item->term_id);
-            $origin = clone $resultInverted[$item->term_id];
+            $modelPath = $item->term_type;
+            $origin = clone $resultInverted[$modelPath][$item->term_id];
             $origin->field_id = $item->field_id;
             $origin->pivot = [
                 'created_at' => $item->created_at,

@@ -50,6 +50,7 @@ class Table extends Component
     $hasPaging = (is_object($dataSource) && method_exists($dataSource, 'links') && !empty($dataSource));
 
     return view("components.renderer.table", [
+      'tableName' => $this->tableName,
       'columns' => $columns,
       'dataSource' => $dataSource,
       'headerRendered' => $this->makeThHeader($columns, $this->dataHeader),

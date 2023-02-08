@@ -25,6 +25,7 @@ class SuperProps
                 if ("_" . $key2 === $key) {
                     $rls['eloquentParams'] = $params;
                     $rls['table'] = (new $params[1])->getTable();
+                    $rls['type'] = ucfirst(Str::singular($rls['table']));
                     break;
                 }
             }
@@ -32,6 +33,7 @@ class SuperProps
                 if ("_" . $key2 === $key) {
                     $rls['oracyParams'] = $params;
                     $rls['table'] = (new $params[1])->getTable();
+                    $rls['type'] = ucfirst(Str::singular($rls['table']));
                     break;
                 }
             }

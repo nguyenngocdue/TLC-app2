@@ -40,9 +40,10 @@ trait TraitEntityEditableTable
         // echo "RECURSIVE = RECURSIVE = RECURSIVE = RECURSIVE = RECURSIVE = ";
         // dump($props);
         // dump($this->superProps['props']);
-        $originalSuperProps = $this->superProps['props'];
+
         foreach ($props as $propName) {
-            $tableName = $originalSuperProps[$propName]['relationships']['table'];
+            $tableName = $this->superProps['props'][$propName]['relationships']['table'];
+            $tableType = $this->superProps['props'][$propName]['relationships']['type'];
             $dataSource = $this->stripDataSource($request, $tableName);
             $this->dump1("RECURSIVE CALLED STRIPPING $tableName", $dataSource, __LINE__);
             if (is_null($dataSource)) continue;
@@ -57,14 +58,19 @@ trait TraitEntityEditableTable
                 $fakeRequest->merge($line);
                 // dd($fakeRequest);
                 // dump($line);
+
+                $controllerPath = "App\\Http\\Controllers\\Entities\\$tableType\\EntityCRUDController";
+                $controller = new $controllerPath;
                 if ($line['id']) {
                     // dump("Recursive called for update to $tableName for #" . $line['id']);
                     // dump($line);
-                    $this->update($fakeRequest, $line['id']);
+                    $controller->update($fakeRequest, $line['id']);
+                    // $this->update($fakeRequest, $line['id']);
                 } else {
                     // dump("Recursive called for store to $tableName");
-                    dd("STORING STORING STORING STORING");
-                    $this->store($fakeRequest);
+                    // dd("STORING STORING STORING STORING");
+                    $controller->store($fakeRequest);
+                    // $this->store($fakeRequest);
                 }
             }
         }

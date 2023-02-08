@@ -1,0 +1,90 @@
+{
+    "_prod_order_id": {
+        "name": "_prod_order_id",
+        "column_name": "prod_order_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_progress": {
+        "name": "_progress",
+        "column_name": "progress",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_qaqc_insp_tmpl_id": {
+        "name": "_qaqc_insp_tmpl_id",
+        "column_name": "qaqc_insp_tmpl_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_consent_number": {
+        "name": "_consent_number",
+        "column_name": "consent_number",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_getSheets": {
+        "name": "_getSheets",
+        "column_name": "getSheets",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    }
+}

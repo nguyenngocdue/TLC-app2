@@ -22,8 +22,14 @@ return new class extends Migration
             $table->unsignedBigInteger('incident_doc_type_id');
             $table->unsignedBigInteger('incident_doc_sub_type_id');
             $table->unsignedBigInteger('injured_person');
+            $table->string('injured_staff_id');
+            $table->string('injured_staff_position');
             $table->unsignedBigInteger('line_manager');
+            $table->string('manager_staff_id');
+            $table->string('manager_staff_position');
             $table->unsignedBigInteger('report_person');
+            $table->string('report_staff_id');
+            $table->string('report_staff_position');
             $table->double('number_injured_person');
             $table->double('number_involved_person');
             $table->text('issue_description');

@@ -19,7 +19,6 @@ trait TraitEntityFormula
     private function apply_formula($item, $type)
     {
         $defaultValues = DefaultValues::getAllOf($type);
-
         foreach ($defaultValues as $prop) {
             if ($prop['formula'] === '') continue;
             switch ($prop['formula']) {

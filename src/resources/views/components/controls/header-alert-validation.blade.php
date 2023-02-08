@@ -9,11 +9,12 @@
         @endphp
         <span class="font-medium">Error: The operation failed.</span>
         <ul class="mt-1.5 ml-4 text-red-700 list-disc list-inside">
-            @foreach($colNameErrors as $colName => $value)
+            @foreach($colNameErrors as $colName => $errorList)
+            @php $message = join(", ", $errorList); @endphp
             <li>
-                @foreach($props as $keyProps => $prop)
+                <a href="#scroll-{{$colName}}" title="{{$colName}}">{{$message}}</a>
+                {{-- @foreach($props as $keyProps => $prop)
                 @if ($prop['column_name']=== $colName)
-                {{-- @dump($colNameErrors) --}}
                 @php
                 // $strSearch = str_contains($colName, '_') ? str_replace('_', ' ', $colName) : $colName;
                 $message = $value[0];
@@ -21,9 +22,8 @@
                 $strSearch = substr($message, 4, $idx - 4);
                 // dump($message , $prop, $strSearch);
                 @endphp
-                <a href="#scroll-{{$colName}}" title="{{$colName}}">{{$message}}</a>
                 @endif
-                @endforeach
+                @endforeach --}}
             </li>
             @endforeach
         </ul>

@@ -99,19 +99,25 @@ class RelationshipRenderer extends Component
                     $newColumn['renderer'] = 'read-only-text';
                     $newColumn['editable'] = true;
                     $newColumn['align'] = 'center';
+
                     break;
                 case 'status':
+                    $newColumn['cbbDataSourceObject'] = LibStatuses::getFor($tableName);
+                    $newColumn['cbbDataSource'] = array_keys(LibStatuses::getFor($tableName));
+                    // case 'dropdown':
                     $newColumn['renderer'] = 'dropdown';
                     $newColumn['editable'] = true;
-                    $newColumn['cbbDataSource'] = array_keys(LibStatuses::getFor($tableName));
+                    $newColumn['classList'] = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 text-left placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
                     break;
                 case 'textarea':
                     $newColumn['renderer'] = 'textarea';
                     $newColumn['editable'] = true;
+                    $newColumn['classList'] = "bg-white border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input";
                     break;
                 default:
                     $newColumn['renderer'] = "text";
                     $newColumn['editable'] = true;
+                    $newColumn['classList'] = " block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
                     break;
             }
             $result[] = $newColumn;

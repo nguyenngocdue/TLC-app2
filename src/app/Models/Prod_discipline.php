@@ -13,8 +13,10 @@ class Prod_discipline extends ModelExtended
 
     public $eloquentParams = [
         "routingLink" => ['hasMany', Prod_routing_link::class, 'prod_discipline_id'],
-        "getDiscipline1" => ['hasMany', Prod_discipline_1::class, 'prod_discipline_id'],
+        "getDiscipline1s" => ['hasMany', Prod_discipline_1::class, 'prod_discipline_id'],
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
+        "getErpRoutingLinks" => ['hasMany', Erp_routing_link::class, 'prod_discipline_id'],
+        "getWirDescriptions" => ['hasMany', Wir_description::class, 'prod_discipline_id'],
     ];
 
     public $oracyParams = [
@@ -26,7 +28,7 @@ class Prod_discipline extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getDiscipline1()
+    public function getDiscipline1s()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -40,5 +42,15 @@ class Prod_discipline extends ModelExtended
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function getErpRoutingLinks()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getWirDescriptions()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

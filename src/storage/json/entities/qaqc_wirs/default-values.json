@@ -76,28 +76,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getPjLevel()": {
-        "name": "_getPjLevel()",
-        "column_name": "getPjLevel()",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getPjType()": {
-        "name": "_getPjType()",
-        "column_name": "getPjType()",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_prod_order_id": {
         "name": "_prod_order_id",
         "column_name": "prod_order_id",

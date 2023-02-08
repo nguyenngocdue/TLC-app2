@@ -6,14 +6,16 @@
     "Chklsts",
     "colspan",
     "commentable",
-    "Eloquents",
-    "endsection",
     "datetime",
     "Dispatchable",
+    "Eloquents",
+    "endsection",
     "Laravel",
     "mediable",
     "Middlewares",
     "migrationrelationship",
+    "mirs",
+    "Ncrs",
     "onhold",
     "oracies",
     "oracy",
@@ -26,6 +28,7 @@
     "tmpl",
     "tmpls",
     "Toastr",
+    "wirs",
     "zunit"
   ]
 }

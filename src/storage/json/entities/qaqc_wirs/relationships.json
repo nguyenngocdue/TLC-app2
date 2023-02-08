@@ -69,7 +69,7 @@
         "relationship": "belongsTo",
         "control_name": "prod_order_id",
         "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "renderer_view_all_param": "description",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown",

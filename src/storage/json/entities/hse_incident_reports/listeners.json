@@ -1,4 +1,20 @@
 {
+    "_injured_staff_id": {
+        "name": "_injured_staff_id",
+        "column_name": "injured_staff_id",
+        "listen_action": "dot",
+        "triggers": "injured_person",
+        "listen_to_fields": "injured_person",
+        "listen_to_attrs": "employeeid"
+    },
+    "_injured_staff_position": {
+        "name": "_injured_staff_position",
+        "column_name": "injured_staff_position",
+        "listen_action": "dot",
+        "triggers": "injured_person",
+        "listen_to_fields": "injured_person",
+        "listen_to_attrs": "position_rendered"
+    },
     "_incident_doc_sub_type_id": {
         "name": "_incident_doc_sub_type_id",
         "column_name": "incident_doc_sub_type_id",
@@ -55,6 +71,22 @@
         "listen_to_fields": "",
         "listen_to_attrs": ""
     },
+    "_manager_staff_id": {
+        "name": "_manager_staff_id",
+        "column_name": "manager_staff_id",
+        "listen_action": "dot",
+        "triggers": "line_manager",
+        "listen_to_fields": "line_manager",
+        "listen_to_attrs": "employeeid"
+    },
+    "_manager_staff_position": {
+        "name": "_manager_staff_position",
+        "column_name": "manager_staff_position",
+        "listen_action": "dot",
+        "triggers": "line_manager",
+        "listen_to_fields": "line_manager",
+        "listen_to_attrs": "position_rendered"
+    },
     "_report_person": {
         "name": "_report_person",
         "column_name": "report_person",
@@ -62,6 +94,22 @@
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": ""
+    },
+    "_report_staff_id": {
+        "name": "_report_staff_id",
+        "column_name": "report_staff_id",
+        "listen_action": "dot",
+        "triggers": "report_person",
+        "listen_to_fields": "report_person",
+        "listen_to_attrs": "employeeid"
+    },
+    "_report_staff_position": {
+        "name": "_report_staff_position",
+        "column_name": "report_staff_position",
+        "listen_action": "dot",
+        "triggers": "report_person",
+        "listen_to_fields": "report_person",
+        "listen_to_attrs": "position_rendered"
     },
     "_incident_doc_type_id": {
         "name": "_incident_doc_type_id",

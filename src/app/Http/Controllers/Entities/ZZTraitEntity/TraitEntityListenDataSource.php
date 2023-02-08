@@ -121,10 +121,10 @@ trait TraitEntityListenDataSource
             $modelPath = Str::modelPathFrom($table);
             if (sizeof($listOfFn) > 0) {
                 foreach ($listOfFn as $fn) {
-                    $fn = substr($fn, 0, strlen($fn) - 2); //Remove ()
+                    $fn_no_parenthesis = substr($fn, 0, strlen($fn) - 2); //Remove ()
                     foreach ($result[$table] as &$row) {
                         $model = $modelPath::find($row['id']);
-                        $row[$fn] = $model->getCheckedByField($fn)->pluck('id')->toArray();
+                        $row[$fn] = $model->getCheckedByField($fn_no_parenthesis)->pluck('id')->toArray();
                     }
                 }
             }

@@ -7,8 +7,8 @@
                     {!! $header !!}
                 </div>
             @endif
-            <div class="table-wrp block max-h-[{{ $maxH }}rem] overflow-auto rounded-t-lg">
-                <table class='whitespace-no-wrap min-w-full text-sm' style="table-layout: auto" id="table_columns">
+            <div class="table-wrp block max-h-[{{ $maxH }}rem] overflow-x-auto rounded-t-lg">
+                <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm' style="table-layout: auto">
                     <colgroup>
                         {!! $colgroup !!}
                     </colgroup>
@@ -55,30 +55,27 @@
     </div>
 </div>
 <script>
-    table = document.querySelector('#table_columns tbody')
+    table = document.querySelector('#{{$tableName}} tbody')
+    
     nbRows = table.rows.length
     nbCells = table.rows[0].cells.length
     movKey = {
-        ArrowUp: (p) => {
-            p.r = p.r !== 2 ? (--p.r - 2) : (nbRows - 1)
-        },
-        ArrowDown: (p) => {
-            p.r = p.r !== (nbRows+ 1) ? (++p.r - 2) : (0)
-        },
+        ArrowUp: (p) => p.r = (p.r !== 2) ? (--p.r - 2) : (nbRows - 1),
+        ArrowDown: (p) => p.r = (p.r !== (nbRows+ 1)) ? (++p.r - 2) : (0),
     }
     array = [...table.querySelectorAll('select'),
     ...table.querySelectorAll('input'),
-    ...table.querySelectorAll('textarea')]
+    ...table.querySelectorAll('textarea'),
+    ...table.querySelectorAll('check'),
+    ]
     array.forEach((elm) => {
-    elm.onfocus = (e) => {
-        let sPos = table.querySelector('.select'),
+        elm.onfocus = (e) => {
+            let sPos = table.querySelector('.select'),
             tdPos = elm.parentNode
-
-        if (sPos) sPos.classList.remove('select')
-
-        tdPos.classList.add('select')
-    }
-})
+            if (sPos) sPos.classList.remove('select')
+            tdPos.classList.add('select')
+        }
+    })
 document.onkeydown = (e) => {
     let sPos = table.querySelector('.select')
         evt = e == null ? event : e
