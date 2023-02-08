@@ -8,7 +8,7 @@ class Hse_corrective_action extends ModelExtended
 {
     protected $fillable = [
         'id', 'name', 'description', 'slug', 'hse_incident_report_id', 'priority_id', 'work_area_id',
-        'assignee', 'opened_date', 'closed_date', 'status', 'unsafe_action_type_id',
+        'assignee', 'opened_date', 'closed_date', 'status', 'unsafe_action_type_id', 'order_no',
     ];
     protected $table = "hse_corrective_actions";
 
@@ -47,9 +47,9 @@ class Hse_corrective_action extends ModelExtended
     public function getPriority()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]); 
+        return $this->{$p[0]}($p[1], $p[2]);
     }
-    
+
     public function getDefMonitors()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
@@ -102,6 +102,7 @@ class Hse_corrective_action extends ModelExtended
             ['dataIndex' => 'status',],
             ['dataIndex' => 'priority_id',],
             ['dataIndex' => 'unsafe_action_type_id',],
+            ['dataIndex' => 'order_no',],
         ];
     }
 }
