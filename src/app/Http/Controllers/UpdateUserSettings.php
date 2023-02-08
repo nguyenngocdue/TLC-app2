@@ -21,11 +21,28 @@ class UpdateUserSettings extends Controller
 
     private function updateGear($request, $settings)
     {
+        [$type, $toBeInserted] = $this->formatRequestValue($request);
+        $settings[$type]['columns'] = $toBeInserted;
+        return $settings;
+    }
+    private function updateFilter($request, $settings)
+    {
+        [$type, $valueRequest] = $this->formatRequestValue($request);
+        $settings[$type]['advance_filters'] = $valueRequest;
+        return $settings;
+    }
+    private function clearFilter($request, $settings)
+    {
+        [$type,] = $this->formatRequestValue($request);
+        unset($settings[$type]);
+        return $settings;
+    }
+    private function formatRequestValue($request)
+    {
         $all = $request->all();
         $type = $all['_entity'];
         $toBeInserted = array_diff_key($all, array_flip(['_method', '_token', '_entity', 'action']));
-        $settings[$type]['columns'] = $toBeInserted;
-        return $settings;
+        return [$type, $toBeInserted];
     }
 
     /**
@@ -47,14 +64,18 @@ class UpdateUserSettings extends Controller
             case 'updateGear':
                 $settings = $this->updateGear($request, $settings);
                 break;
+            case 'updateAdvanceFilter':
+                $settings = $this->updateFilter($request, $settings);
+                break;
+            case 'clearAdvanceFilter':
+                $settings = $this->clearFilter($request, $settings);
+                break;
             default:
                 Log::error("Unknown action $action");
                 break;
         }
         $user->settings = $settings;
         $user->update();
-
-        // dd($settings);
         Toastr::success('User Settings Saved Successfully', 'Successfully');
         return redirect()->back();
     }

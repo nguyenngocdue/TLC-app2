@@ -1,5 +1,5 @@
 <form action="{{ route('updateUserSettings') }}" method="post">
-    @method('PUT')
+@method('PUT')
     @csrf
     <x-feedback.modal title="{{$title}}" type="{{$type}}">
         <div class='h-[calc(100%-112px)] overflow-y-scroll px-5 py-2'>

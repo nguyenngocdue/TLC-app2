@@ -3,18 +3,23 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntitySuperPropsFilter;
+use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\Relationships;
+use App\Utils\Support\Json\SuperProps;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 abstract class AbstractViewAllController extends Controller
 {
+    use TraitEntitySuperPropsFilter;
     protected $type = "";
     protected $typeModel = '';
     protected $permissionMiddleware;
@@ -37,19 +42,121 @@ abstract class AbstractViewAllController extends Controller
         $settings = CurrentUser::getSettings();
         $pageLimit = $settings[$type]['page_limit'] ?? 20;
         $columnLimit = $settings[$type]['columns'] ?? null;
-        return [$pageLimit, $columnLimit];
+        $advanceFilter = $settings[$type]['advance_filters'] ?? null;
+        return [$pageLimit, $columnLimit, $advanceFilter];
+    }
+    private function distributeFilter($advanceFilters, $propsFilters)
+    {
+        $propsFilters = array_map(fn ($item) => $item['control'], $propsFilters);
+        if (!empty($advanceFilters)) {
+            $advanceFilters = array_filter($advanceFilters, fn ($item) => $item);
+            $result = [];
+            foreach ($advanceFilters as $key => $value) {
+                switch ($propsFilters['_' . $key]) {
+                    case 'id':
+                        $result['id'][$key] = $value;
+                        break;
+                    case 'text':
+                    case 'textarea':
+                    case 'number':
+                    case 'status':
+                        $result['text'][$key] = $value;
+                        break;
+                    case 'toggle':
+                        $result['toggle'][$key] = $value;
+                        break;
+                    case 'dropdown':
+                    case 'radio':
+                    case 'dropdown_multi':
+                    case 'checkbox':
+                        $result['dropdown_multiple'][$key] = $value;
+                        break;
+                    case 'picker_datetime':
+                    case 'picker_time':
+                        $result['picker_time'][$key] = $value;
+                        break;
+                    case 'picker_date':
+                    case 'picker_month':
+                    case 'picker_week':
+                    case 'picker_quarter':
+                    case 'picker_year':
+                        $result['picker_datetime'][$key] = $value;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return $result;
+        }
+        return false;
     }
 
-    private function getDataSource($pageLimit)
+    private function getDataSource($pageLimit, $advanceFilters = null)
     {
+        $propsFilters = $this->advanceFilter();
+        $advanceFilters = $this->distributeFilter($advanceFilters, $propsFilters);
         $model = $this->typeModel;
         $search = request('search');
         $result = App::make($model)::search($search)
-            ->query(fn ($q) => $q->orderBy('updated_at', 'desc'))
+            ->query(function ($q) use ($advanceFilters) {
+                if ($advanceFilters) {
+                    $queryResult = array_filter($advanceFilters, fn ($item) => $item);
+                    array_walk($queryResult, function ($value, $key) use ($q) {
+                        switch ($key) {
+                            case 'id':
+                                array_walk($value, function ($value, $key) use ($q) {
+                                    $arrayId = explode(',', $value);
+                                    if (!empty($arrayId)) {
+                                        $q->whereIn($key, $arrayId);
+                                    }
+                                });
+                                break;
+                            case 'text':
+                                array_walk($value, function ($value, $key) use ($q) {
+                                    $q->where($key, 'like', $value . '%');
+                                });
+                                break;
+                            case 'toggle':
+                                array_walk($value, function ($value, $key) use ($q) {
+                                    $q->where($key, $value);
+                                });
+                                break;
+                            case 'picker_time':
+                                array_walk($value, function ($value, $key) use ($q) {
+                                    $arrayTime = explode(' - ', $value);
+                                    dump($arrayTime);
+                                    $q->whereTime($key, '>=', $arrayTime[0])
+                                        ->whereTime($key, '<=', $arrayTime[1]);
+                                });
+                                break;
+                            case 'picker_datetime':
+                                array_walk($value, function ($value, $key) use ($q) {
+                                    $arrayDate = explode(' - ', $value);
+                                    $q->whereDate($key, '>=', $this->convertDateTime($arrayDate[0]))
+                                        ->whereDate($key, '<=', $this->convertDateTime($arrayDate[1]));
+                                });
+                                break;
+                            case 'dropdown_multiple':
+                                array_walk($value, function ($value, $key) use ($q) {
+                                    $q->whereIn($key, $value);
+                                });
+                                break;
+                            default:
+                                break;
+                        }
+                        return;
+                    });
+                }
+                return $q->orderBy('updated_at', 'desc');
+            })
             ->paginate($pageLimit);
         return $result;
     }
 
+    private function convertDateTime($time)
+    {
+        return date('Y-m-d', strtotime(str_replace('/', '-', $time)));
+    }
     private function getColumns($type, $columnLimit)
     {
         function createObject($prop, $type)
@@ -188,23 +295,26 @@ abstract class AbstractViewAllController extends Controller
         }
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        [$pageLimit, $columnLimit] = $this->getUserSettings();
+        if (!empty($request->input())) {
+            (new UpdateUserSettings())($request);
+            return redirect()->back();
+        }
+        [$pageLimit, $columnLimit, $advanceFilters] = $this->getUserSettings();
         // Log::info($columnLimit);
-
         $type = Str::plural($this->type);
         $columns = $this->getColumns($type, $columnLimit);
-        $dataSource = $this->getDataSource($pageLimit);
+        $dataSource = $this->getDataSource($pageLimit, $advanceFilters);
 
         $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
         $this->attachRendererIntoColumn($columns);
-
         $searchableArray = App::make($this->typeModel)->toSearchableArray();
 
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'pageLimit' => $pageLimit,
+            'valueAdvanceFilters' => $advanceFilters,
             'type' => $type,
             'columns' => $columns,
             'dataSource' => $dataSource,

@@ -19,7 +19,7 @@ trait TraitEntityCRUDCreateEdit2
 	{
 		$props = $this->getCreateEditProps();
 		$values =  (object) $this->loadValueOfOrphanAttachments($props);
-		// dump($values);
+		// dump($props);
 		return view('dashboards.pages.entity-create-edit', [
 			'props' => $props,
 			'defaultValues' => DefaultValues::getAllOf($this->type),

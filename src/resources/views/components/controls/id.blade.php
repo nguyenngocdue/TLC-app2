@@ -1,4 +1,5 @@
 <input 
+    id="{{$name}}"
     name="{{$name}}" 
     readonly 
     value='{{$value}}' 

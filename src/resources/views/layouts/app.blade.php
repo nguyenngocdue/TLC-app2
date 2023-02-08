@@ -28,13 +28,19 @@
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}">
     <link rel="stylesheet" href="{{ asset('css/customizeSelect2.css') }}">
+    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.css')}}">
+    <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/adminlte.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
-
+        
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('AdminLTE/plugins/select2/js/select2.full.min.js')}}"></script>
+    <script src="{{ asset('AdminLTE/plugins/moment/moment.min.js')}}"></script>
+    <script src="{{ asset('AdminLTE/plugins/inputmask/min/jquery.inputmask.bundle.min.js')}}"></script>
+    <script src="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
-    <script src="{{ asset('js/select2.min.js') }}"></script>
     <script src="{{ asset('js/tlc2.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2.js') }}"></script>

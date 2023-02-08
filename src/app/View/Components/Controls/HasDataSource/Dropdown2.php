@@ -38,7 +38,6 @@ class Dropdown2 extends Component
 
         $id = $this->multiple ? substr($this->name, 0, strlen($this->name) - 2) : $this->name; // Remove parenthesis ()
         $name = $this->multiple ? $this->name . "[]" : $this->name;
-
         return view('components.controls.has-data-source.dropdown2', [
             // 'dataSource' => $dataSource,
             'name' => $name,

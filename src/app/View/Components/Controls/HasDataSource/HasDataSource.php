@@ -57,7 +57,6 @@ trait HasDataSource
         if ($this->loadFilterColumnByPHP) {
             $sp = SuperProps::getFor($this->getType());
             $name = $this->getName();
-
             $table = (new $relatedModel)->getTable();
             $dataSource = DB::table($table);
 
