@@ -75,10 +75,10 @@ abstract class AbstractViewAllController extends Controller
                     case 'dropdown_multi':
                         $result['dropdown_multi'][$key] = $value;
                         break;
-                    case 'picker_datetime':
                     case 'picker_time':
                         $result['picker_time'][$key] = $value;
                         break;
+                    case 'picker_datetime':
                     case 'picker_date':
                     case 'picker_month':
                     case 'picker_week':
@@ -128,7 +128,6 @@ abstract class AbstractViewAllController extends Controller
                             case 'picker_time':
                                 array_walk($value, function ($value, $key) use ($q) {
                                     $arrayTime = explode(' - ', $value);
-                                    dump($arrayTime);
                                     $q->whereTime($key, '>=', $arrayTime[0])
                                         ->whereTime($key, '<=', $arrayTime[1]);
                                 });

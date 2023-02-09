@@ -37,7 +37,7 @@
         "listen_action": "reduce",
         "triggers": "prod_discipline_id,prod_routing_id",
         "listen_to_fields": "wir_description_id,wir_description_id",
-        "listen_to_attrs": "prod_discipline_id,prod_routing_id"
+        "listen_to_attrs": "prod_discipline_id,getDefRoutings()"
     },
     "_id": {
         "name": "_id",
