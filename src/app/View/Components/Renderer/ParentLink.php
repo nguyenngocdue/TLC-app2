@@ -32,15 +32,19 @@ class ParentLink extends Component
         $ableStr = $this->column['dataIndex'];
         $item = $dataLine->$ableStr;
         if (!is_null($item)) {
-            $table = $item->getTable();
-            $id = $item->id;
-            $name = $item->name ?? "Nameless";
-            // dump($table);
-            // dump("$item $table");
-            $href = route($table . ".edit", $id);
-            $idStr = Str::makeId($id);
-            return "<a class='text-blue-500' href='$href' title='$idStr ($table)'>$name<br/>($table)</a>";
+            if (method_exists($item, 'getTable')) {
+                $table = $item->getTable();
+                $id = $item->id;
+                $name = $item->name ?? "Nameless";
+                $href = route($table . ".edit", $id);
+                $idStr = Str::makeId($id);
+                return "<a class='text-blue-500' href='$href' title='$idStr ($table)'>$name<br/>($table)</a>";
+            } else {
+                dump("This item doesn't have getTable method.");
+                dump($item);
+                return;
+            }
         }
-        // return "XYZ";
+        return "NO LINK FOUND";
     }
 }

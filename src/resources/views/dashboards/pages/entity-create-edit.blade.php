@@ -169,7 +169,7 @@ $id = $action === "edit" ? $values->id : "";
                         @break
 
                         @case('parent_link')
-                        Parent link
+                        <x-feedback.alert type="warning" title="Warning" message="parent_link suppose to show in View All screen only, please do not show in Edit screen." />
                         @break
                         @case('parent_type')
                         <x-renderer.parent_type type={{$type}} name={{$columnName}} selected="{{$value}}"/>

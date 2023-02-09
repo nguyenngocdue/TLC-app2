@@ -1,30 +1,4 @@
 {
-    "_avatar": {
-        "name": "_avatar",
-        "relationship": "morphOne",
-        "control_name": "avatar",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "url_thumbnail",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "thumbnail",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_posts": {
-        "name": "_posts",
-        "relationship": "hasMany",
-        "control_name": "posts",
-        "renderer_view_all": "count",
-        "renderer_view_all_param": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "relationship_renderer",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_getWorkplaces": {
         "name": "_getWorkplaces",
         "relationship": "belongsTo",
@@ -164,6 +138,45 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_posts": {
+        "name": "_posts",
+        "relationship": "hasMany",
+        "control_name": "posts",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_attachment": {
+        "name": "_attachment",
+        "relationship": "morphMany",
+        "control_name": "attachment",
+        "renderer_view_all": "thumbnails",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "text",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_avatar": {
+        "name": "_avatar",
+        "relationship": "morphOne",
+        "control_name": "avatar",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "url_thumbnail",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "thumbnail",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

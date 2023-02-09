@@ -734,5 +734,21 @@
         "hidden_filter": "",
         "hidden_print": "",
         "new_line": ""
+    },
+    "_attachment": {
+        "name": "_attachment",
+        "column_name": "attachment",
+        "column_type": "eloquent_prop",
+        "label": "Attachment",
+        "control": "text",
+        "align": "",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     }
 }
