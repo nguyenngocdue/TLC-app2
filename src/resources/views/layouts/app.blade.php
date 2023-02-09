@@ -29,8 +29,8 @@
     <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}">
     <link rel="stylesheet" href="{{ asset('css/customizeSelect2.css') }}">
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.css')}}">
-    <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/adminlte.min.css')}}" />
-    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
         
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>

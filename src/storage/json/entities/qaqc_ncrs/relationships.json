@@ -194,19 +194,6 @@
         "filter_values": "118",
         "radio_checkbox_colspan": ""
     },
-    "_getParent": {
-        "name": "_getParent",
-        "relationship": "morphTo",
-        "control_name": "getParent",
-        "renderer_view_all": "link_morph_to",
-        "renderer_view_all_param": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "relationship_renderer",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_getDefMonitors()": {
         "name": "_getDefMonitors()",
         "relationship": "getCheckedByField",
@@ -216,6 +203,19 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getParent": {
+        "name": "_getParent",
+        "relationship": "morphTo",
+        "control_name": "getParent",
+        "renderer_view_all": "link_morph_to",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "link_morph_to",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

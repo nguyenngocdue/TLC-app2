@@ -2,7 +2,7 @@ const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="
 const getEById = (id) => $("[id='" + id + "']")
 // const removeParenthesis = (str) => (str.includes("()")) ? str.substring(0, str.length - 2) : str
 
-let k = {}, listenersOfDropdown2 = {}, filtersOfDropdown2 = {}
+let k = {}, listenersOfDropdown2 = {}, filtersOfDropdown2 = {}, debugListener = false
 
 const filterDropdown2 = (column_name, dataSource) => {
     if (filtersOfDropdown2[column_name] !== undefined) {
@@ -21,24 +21,24 @@ const filterDropdown2 = (column_name, dataSource) => {
 }
 
 const onChangeDropdown2Reduce = (listener) => {
-    const debug = false
-    if (debug) console.log("Reduce listener", listener)
+    // const debugListener = false
+    if (debugListener) console.log("Reduce listener", listener)
     const { column_name, table_name, listen_to_attrs, triggers } = listener
     let dataSource = k[table_name]
-    if (debug) console.log("dataSource in k", dataSource)
+    if (debugListener) console.log("dataSource in k", dataSource)
 
     const constraintsValues = triggers.map((trigger) => getEById(trigger).val())
-    if (debug) console.log(triggers, constraintsValues)
+    if (debugListener) console.log(triggers, constraintsValues)
 
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
         const column = listen_to_attrs[i]
         if (!value) continue;
-        if (debug) console.log("Applying", column, value, "to", table_name)
+        if (debugListener) console.log("Applying", column, value, "to", table_name)
         dataSource = dataSource.filter((row) => value == row[column])
     }
 
-    if (debug) console.log("DataSource", dataSource)
+    if (debugListener) console.log("DataSource", dataSource)
     // console.log('onChangeDropdown2Reduce')
     const lastSelected = getEById(column_name).val()
     // console.log("Selected", lastSelected)
@@ -58,18 +58,18 @@ const onChangeGetSelectedObject = (listener) => {
 }
 
 const onChangeDropdown2Assign = (listener) => {
-    const debug = false
-    if (debug) console.log("Assign", listener)
+    // const debugListener = false
+    if (debugListener) console.log("Assign", listener)
     const { column_name, listen_to_attrs } = listener
     const selectedObject = onChangeGetSelectedObject(listener)
     const listen_to_attr = listen_to_attrs[0]
     // const listen_to_attr = removeParenthesis(listen_to_attrs[0])
-    if (debug) console.log(selectedObject, listen_to_attr)
+    if (debugListener) console.log(selectedObject, listen_to_attr)
     if (selectedObject !== undefined) {
         const theValue = selectedObject[listen_to_attr]
         if (theValue !== undefined) {
             // const column_name1 = removeParenthesis(column_name)
-            if (debug) console.log(column_name, theValue)
+            if (debugListener) console.log(column_name, theValue)
             getEById(column_name).val(theValue)
             getEById(column_name).trigger('change')
         }
@@ -79,23 +79,23 @@ const onChangeDropdown2Assign = (listener) => {
     }
 }
 const onChangeDropdown2Dot = (listener) => {
-    const debug = false
-    if (debug) console.log("Dot", listener)
+    // const debugListener = false
+    if (debugListener) console.log("Dot", listener)
     const selectedObject = onChangeGetSelectedObject(listener)
 
     const { listen_to_attrs, column_name } = listener
     const listen_to_attr = listen_to_attrs[0]
 
-    if (debug) console.log(selectedObject, listen_to_attr)
+    if (debugListener) console.log(selectedObject, listen_to_attr)
     // Unknown error
     if (selectedObject !== undefined) {
         const theValue = selectedObject[listen_to_attr]
         // console.log(theValue)
-        if (debug) console.log(theValue)
+        if (debugListener) console.log(theValue)
 
         getEById(column_name).val(theValue)
         getEById(column_name).trigger('change')
-        if (debug) console.log("Dotting", column_name, "with value", theValue)
+        if (debugListener) console.log("Dotting", column_name, "with value", theValue)
     }
 }
 
