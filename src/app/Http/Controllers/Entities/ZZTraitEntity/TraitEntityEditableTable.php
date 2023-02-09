@@ -10,6 +10,7 @@ trait TraitEntityEditableTable
     {
         $tableNames = $request['tableNames'];
         $table00Name = '';
+        if (is_null($tableNames))  return [];
         foreach ($tableNames as $key => $value) {
             if ($value === $tableName) {
                 $table00Name = $key;
@@ -50,7 +51,8 @@ trait TraitEntityEditableTable
 
             $dataSource = $this->parseHTTPArrayToLines($dataSource);
             $this->dump1("RECURSIVE CALLED PARSING $tableName", $dataSource, __LINE__);
-            // dump($dataSource);
+            // dd($dataSource);
+
             foreach ($dataSource as $line) {
                 $fakeRequest = new Request();
                 $line['tableNames'] = "fakeRequest";
@@ -62,15 +64,18 @@ trait TraitEntityEditableTable
                 $controllerPath = "App\\Http\\Controllers\\Entities\\$tableType\\EntityCRUDController";
                 $controller = new $controllerPath;
                 if ($line['id']) {
-                    // dump("Recursive called for update to $tableName for #" . $line['id']);
-                    // dump($line);
-                    $controller->update($fakeRequest, $line['id']);
-                    // $this->update($fakeRequest, $line['id']);
+                    if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
+                        dd("Destroying", $line['id']);
+                        $controller->destroy($fakeRequest, $line['id']);
+                    } else {
+                        $controller->update($fakeRequest, $line['id']);
+                    }
                 } else {
-                    // dump("Recursive called for store to $tableName");
-                    // dd("STORING STORING STORING STORING");
-                    $controller->store($fakeRequest);
-                    // $this->store($fakeRequest);
+                    if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
+                        //Ignore this case
+                    } else {
+                        $controller->store($fakeRequest);
+                    }
                 }
             }
         }

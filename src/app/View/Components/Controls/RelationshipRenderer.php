@@ -5,12 +5,14 @@ namespace App\View\Components\Controls;
 use App\Helpers\Helper;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\Json\SuperProps;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
 class RelationshipRenderer extends Component
 {
     private static $table00Count = 1;
     private $table01Name;
+    private $tableDebug = false;
     /**
      * Create a new component instance.
      *
@@ -37,11 +39,21 @@ class RelationshipRenderer extends Component
             //TODO: This is to prevent from a crash
             if ($eloquentParam[0] === 'morphToMany') return [];
 
+            $dummyInstance = new $eloquentParam[1];
+            $fillable = $dummyInstance->getFillable();
+            $hasOrderNoColumn = in_array('order_no', $fillable);
+            if (!$hasOrderNoColumn) dump("Order_no column not found, re-ordering function will not work");
+            // dump($fillable);
+
             if (isset($eloquentParam[2])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
             elseif (isset($eloquentParam[1])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1]);
             elseif (isset($eloquentParam[0])) $relation = $row->{$eloquentParam[0]}();
             $perPage = $showAll ? 10000 : 10;
-            return $relation->getQuery()->paginate($perPage, ['*'], $colName);
+            $result = $relation->getQuery();
+            if ($hasOrderNoColumn) $result = $result->orderBy('order_no');
+
+            $result = $result->paginate($perPage, ['*'], $colName);
+            return $result;
         }
     }
 
@@ -87,9 +99,13 @@ class RelationshipRenderer extends Component
         return $result;
     }
 
-    private function makeEditableColumns($columns, $sp, $tableName)
+    private function makeEditableColumns($columns, $sp, $tableName, $table01Name)
     {
-        $result = [];
+        $result = [
+            [
+                'dataIndex' => 'action',
+            ]
+        ];
         foreach ($columns as $column) {
             $newColumn = $column;
             $prop = $sp['props']["_" . $column['dataIndex']];
@@ -99,7 +115,6 @@ class RelationshipRenderer extends Component
                     $newColumn['renderer'] = 'read-only-text';
                     $newColumn['editable'] = true;
                     $newColumn['align'] = 'center';
-
                     break;
                 case 'status':
                     $newColumn['cbbDataSourceObject'] = LibStatuses::getFor($tableName);
@@ -114,16 +129,52 @@ class RelationshipRenderer extends Component
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = "bg-white border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input";
                     break;
+                case 'number':
+                    $newColumn['renderer'] = 'number';
+                    $newColumn['editable'] = true;
+                    $newColumn['classList'] = "text-right block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
+                    break;
                 default:
                     $newColumn['renderer'] = "text";
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = " block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
                     break;
             }
+            if ($newColumn['dataIndex'] === 'order_no') {
+                $newColumn['onChange'] = "rerenderTableBaseOnNewOrder(`" . $table01Name . "`)";
+            }
             $result[] = $newColumn;
         }
         // dump($result);
         return $result;
+    }
+
+    private function attachActionColumn($table01Name, $dataSource)
+    {
+        // dump($dataSource);
+        foreach ($dataSource as &$row) {
+            $id = $row->order_no;
+            // dump($index);
+            $type = $this->tableDebug ? "text" : "hidden";
+            $row->action = Blade::render("<input name='{$table01Name}[finger_print][]' value='$id' type=$type />
+            <div class='whitespace-nowrap'>
+                <x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
+                <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>
+                <x-renderer.button size='xs' value='$table01Name' onClick='duplicateEditableTable({control:this, fingerPrint: $id})' type='secondary' ><i class='fa fa-copy'></i></x-renderer.button>
+                <x-renderer.button size='xs' value='$table01Name' onClick='trashEditableTable({control:this, fingerPrint: $id})' type='danger' ><i class='fa fa-trash'></i></x-renderer.button>
+            </div>
+            ");
+        }
+        return $dataSource;
+    }
+
+    private function remakeOrderNoColumn($dataSource)
+    {
+        // dump($dataSource);
+        foreach ($dataSource as $index => &$row) {
+            $row->order_no = 1000 + $index * 10;
+        }
+        return $dataSource;
     }
 
     public function render()
@@ -167,14 +218,18 @@ class RelationshipRenderer extends Component
             case "many_lines":
                 $tableName =  $smallModel::getTableName();
                 $sp = SuperProps::getFor($tableName);
+                //remakeOrderNoColumn MUST before attach Action Column
+                $dataSource = $this->remakeOrderNoColumn($dataSource);
+                $dataSource = $this->attachActionColumn($this->table01Name, $dataSource);
                 return view('components.controls.many-line-params', [
                     'dataSource' => $dataSource,
                     'fn' => $fn,
                     'readOnlyColumns' => $this->makeReadOnlyColumns($columns, $sp, $tableName),
-                    'editableColumns' => $this->makeEditableColumns($columns, $sp, $tableName),
+                    'editableColumns' => $this->makeEditableColumns($columns, $sp, $tableName, $this->table01Name),
                     'tableName' => $smallModel::getTableName(),
                     'table01Name' => $this->table01Name,
                     'table01ROName' => $this->table01Name . "RO",
+                    'tableDebug' => $this->tableDebug ? "true" : "false",
                 ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";

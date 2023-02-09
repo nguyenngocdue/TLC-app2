@@ -16,6 +16,7 @@ class Text extends Component
         private $name = "",
         private $placeholder = "",
         private $cell = null,
+        private $onChange = null,
         // private $width = null,
     ) {
         //In case of listeners, the data was parsed in to array
@@ -41,6 +42,7 @@ class Text extends Component
             'name' => $this->name,
             'type' => 'text',
             'cell' => $this->cell,
+            'onChange' => $this->onChange,
             // 'width' => $this->width,
         ]);
     }
