@@ -172,7 +172,7 @@ class RelationshipRenderer extends Component
     {
         // dump($dataSource);
         foreach ($dataSource as $index => &$row) {
-            $row->order_no = 1001 + $index;
+            $row->order_no = 1000 + $index * 10;
         }
         return $dataSource;
     }

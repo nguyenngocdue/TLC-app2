@@ -91,7 +91,7 @@ const moveUpEditableTable = (params) => {
     if (fingerPrint === firstRowFingerPrintValue) {
         const max = getMaxValueOfAColumn(tableId, "[order_no]")
         // console.log("FIRST ROW, max of order_no", max)
-        setCellValueByName(tableId, '[order_no]', 0, max + 1)
+        setCellValueByName(tableId, '[order_no]', 0, max + 10)
     } else {
         // console.log("NORMAL ROW")
         const myRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
@@ -117,7 +117,7 @@ const moveDownEditableTable = (params) => {
     if (fingerPrint === lastRowFingerPrintValue) {
         const min = getMinValueOfAColumn(tableId, "[order_no]")
         // console.log("FIRST ROW, min of order_by", min)
-        setCellValueByName(tableId, '[order_no]', length - 1, min - 1)
+        setCellValueByName(tableId, '[order_no]', length - 1, min - 10)
     } else {
         // console.log("NORMAL ROW")
         const myRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
@@ -213,7 +213,7 @@ const addANewLine = (params) => {
                 case "number":
                     let value = '', onChange = ''
                     if (column['dataIndex'] === 'order_no') {
-                        value = getMaxValueOfAColumn(tableId, "[order_no]") + 1
+                        value = getMaxValueOfAColumn(tableId, "[order_no]") + 10
                         onChange = "rerenderTableBaseOnNewOrder(\"" + tableId + "\")"
                     }
                     renderer = "<input name='" + name + "' class='" + column['classList'] + "' type=number step=any value='" + value + "' onChange='" + onChange + "' />";

@@ -10,6 +10,7 @@ trait TraitEntityEditableTable
     {
         $tableNames = $request['tableNames'];
         $table00Name = '';
+        if (is_null($tableNames))  return [];
         foreach ($tableNames as $key => $value) {
             if ($value === $tableName) {
                 $table00Name = $key;
@@ -63,13 +64,14 @@ trait TraitEntityEditableTable
                 $controllerPath = "App\\Http\\Controllers\\Entities\\$tableType\\EntityCRUDController";
                 $controller = new $controllerPath;
                 if ($line['id']) {
-                    if (isset($line['DESTROY_THIS_LINE'])) {
+                    if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
+                        dd("Destroying", $line['id']);
                         $controller->destroy($fakeRequest, $line['id']);
                     } else {
                         $controller->update($fakeRequest, $line['id']);
                     }
                 } else {
-                    if (isset($line['DESTROY_THIS_LINE'])) {
+                    if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
                         //Ignore this case
                     } else {
                         $controller->store($fakeRequest);
