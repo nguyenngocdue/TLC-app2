@@ -20,7 +20,7 @@
         "column_name": "url_thumbnail",
         "column_type": "string",
         "label": "Url Thumbnail",
-        "control": "thumbnail",
+        "control": "text",
         "align": "",
         "col_span": "12",
         "width": "10",

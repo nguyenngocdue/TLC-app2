@@ -42,7 +42,7 @@
     <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
     <script src="{{ asset('js/tlc2.js') }}"></script>
-    <script src="{{ asset('js/flowbite.js') }}"></script>
+    <script src="{{ asset('js/flowbite.min.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2.js') }}"></script>
     <script src="{{ asset('js/components/EditableTable.js') }}"></script>

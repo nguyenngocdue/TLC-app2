@@ -2,12 +2,11 @@
 
 namespace App\View\Components\Renderer;
 
-use App\Utils\Support\Json\Relationships;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class ParentType extends Component
 {
+    use TraitMorphTo;
     /**
      * Create a new component instance.
      *
@@ -21,17 +20,9 @@ class ParentType extends Component
     ) {
     }
 
-
-
     private function getDataSource()
     {
-        // dump($this->getMetadata());
-        $result = [
-            ['id' => 'a', 'name' => 'Fortune'],
-            ['id' => 'b', 'name' => 'Due'],
-            ['id' => 'c', 'name' => 'Canh'],
-        ];
-        return $result;
+        return $this->getAllTypeMorphMany();
     }
 
     private function renderJS($tableName)

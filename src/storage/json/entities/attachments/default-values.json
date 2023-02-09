@@ -3,143 +3,154 @@
         "name": "_id",
         "column_name": "id",
         "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": "",
-        "validation": "",
-        "formula": ""
+        "control_extra": ""
     },
     "_url_thumbnail": {
         "name": "_url_thumbnail",
         "column_name": "url_thumbnail",
         "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": "",
-        "validation": "",
-        "formula": ""
+        "control_extra": ""
     },
     "_url_media": {
         "name": "_url_media",
         "column_name": "url_media",
         "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": "",
-        "validation": "",
-        "formula": ""
+        "control_extra": ""
     },
     "_url_folder": {
         "name": "_url_folder",
         "column_name": "url_folder",
         "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": "",
-        "validation": "",
-        "formula": ""
+        "control_extra": ""
     },
     "_filename": {
         "name": "_filename",
         "column_name": "filename",
         "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": "",
-        "validation": "",
-        "formula": ""
+        "control_extra": ""
     },
     "_extension": {
         "name": "_extension",
         "column_name": "extension",
         "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": "",
-        "validation": "",
-        "formula": ""
+        "control_extra": ""
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
         "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": "",
-        "validation": "",
-        "formula": ""
-    },
-    "_object_id": {
-        "name": "_object_id",
-        "column_name": "object_id",
-        "label": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": "",
-        "validation": "",
-        "formula": ""
+        "control_extra": ""
     },
     "_object_type": {
         "name": "_object_type",
         "column_name": "object_type",
         "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
         "label_extra": "",
         "placeholder": "",
+        "control_extra": ""
+    },
+    "_object_id": {
+        "name": "_object_id",
+        "column_name": "object_id",
+        "label": "",
         "default_value": "",
-        "control_extra": "",
         "validation": "",
-        "formula": ""
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
     },
     "_category": {
         "name": "_category",
         "column_name": "category",
         "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": "",
-        "validation": "required",
-        "formula": ""
+        "control_extra": ""
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
         "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": "",
-        "validation": "",
-        "formula": ""
+        "control_extra": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
         "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": "",
-        "validation": "",
-        "formula": ""
+        "control_extra": ""
     },
     "_attachable": {
         "name": "_attachable",
         "column_name": "attachable",
         "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
         "label_extra": "",
         "placeholder": "",
+        "control_extra": ""
+    },
+    "_mime_type": {
+        "name": "_mime_type",
+        "column_name": "mime_type",
+        "label": "",
         "default_value": "",
-        "control_extra": "",
-        "validation": "",
-        "formula": ""
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
     }
 }

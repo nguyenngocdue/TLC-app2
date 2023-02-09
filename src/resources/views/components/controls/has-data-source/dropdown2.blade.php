@@ -5,7 +5,14 @@
         , className: "{{$className}}"
         , multipleStr: "{{$multipleStr}}"
     }))
-    reloadDataToDropdown2("{{$id}}", k["{{$table}}"], JSON.parse('{!! $selected !!}'))
+
+    selectedJson = '{!! $selected !!}'
+    // console.log(selectedJson)
+    selectedJson = selectedJson.replace(/\\/g, '\\\\') //<< Replace \ to \\ EG. ["App\Models\Qaqc_mir"] to ["App\\Models\\Qaqc_mir"]
+    // console.log(selectedJson)
+    selectedJson = JSON.parse(selectedJson)
+    // console.log(selectedJson)
+    reloadDataToDropdown2("{{$id}}", k["{{$table}}"], selectedJson)
 
     $(document).ready(()=>getEById("{{$id}}").trigger('change'))
 

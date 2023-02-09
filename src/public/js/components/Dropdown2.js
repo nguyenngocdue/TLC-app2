@@ -39,7 +39,7 @@ const onChangeDropdown2Reduce = (listener) => {
 
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
-        // if (debugListener) console.log("value", constraintsValues[i], value, !value)
+        if (debugListener) console.log("value", constraintsValues[i], value, !value)
         const column = listen_to_attrs[i]
         if (!value) continue;
         if (debugListener) console.log("Applying", column, value, "to", table_name)
@@ -50,7 +50,7 @@ const onChangeDropdown2Reduce = (listener) => {
             } else {
                 result = row[column] == value
             }
-            // if (debugListener) console.log("Result of reduce filter", row[column], value, result)
+            if (debugListener) console.log("Result of reduce filter", row[column], value, result)
             return result
         })
     }

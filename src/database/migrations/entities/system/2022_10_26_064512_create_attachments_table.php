@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('url_folder');
             $table->string('filename');
             $table->string('extension');
-            $table->string('mime_type')->nullable();
+            $table->string('mime_type');
             $table->unsignedBigInteger('owner_id');
             $table->string('object_type')->nullable();
             $table->unsignedBigInteger('object_id')->nullable();
