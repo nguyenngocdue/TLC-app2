@@ -27,7 +27,7 @@
         "name": "_attachable",
         "relationship": "morphTo",
         "control_name": "attachable",
-        "renderer_view_all": "link_morph_to",
+        "renderer_view_all": "parent_link",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",

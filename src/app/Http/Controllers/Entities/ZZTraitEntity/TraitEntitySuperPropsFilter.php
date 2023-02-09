@@ -9,7 +9,7 @@ trait TraitEntitySuperPropsFilter
 {
     private function advanceFilter()
     {
-        $blackList = ['attachment', 'comment', 'relationship_renderer', 'thumbnail', 'link_morph_to'];
+        $blackList = ['attachment', 'comment', 'relationship_renderer', 'thumbnail', 'parent_link'];
         $supperProps = SuperProps::getFor($this->type);
         $propsFilters = array_filter($supperProps['props'], function ($item) use ($blackList) {
             if ($item['column_type'] === "static") {

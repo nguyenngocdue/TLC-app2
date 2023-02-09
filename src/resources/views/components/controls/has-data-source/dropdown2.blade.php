@@ -5,10 +5,8 @@
         , className: "{{$className}}"
         , multipleStr: "{{$multipleStr}}"
     }))
-    reloadDataToDropdown2("{{$id}}", k["{{$table}}"], JSON.parse("{{$selected}}"))
+    reloadDataToDropdown2("{{$id}}", k["{{$table}}"], JSON.parse('{!! $selected !!}'))
 
-    $(document).ready(function() {
-        getEById("{{$id}}").trigger('change')
-    })
+    $(document).ready(()=>getEById("{{$id}}").trigger('change'))
 
 </script>

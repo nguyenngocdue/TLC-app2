@@ -111,12 +111,12 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_object_id": {
-        "name": "_object_id",
-        "column_name": "object_id",
-        "column_type": "bigint",
-        "label": "Object Id",
-        "control": "number",
+    "_object_type": {
+        "name": "_object_type",
+        "column_name": "object_type",
+        "column_type": "string",
+        "label": "Object Type",
+        "control": "parent_type",
         "align": "",
         "col_span": "12",
         "width": "",
@@ -127,12 +127,12 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_object_type": {
-        "name": "_object_type",
-        "column_name": "object_type",
-        "column_type": "string",
-        "label": "Object Type",
-        "control": "text",
+    "_object_id": {
+        "name": "_object_id",
+        "column_name": "object_id",
+        "column_type": "bigint",
+        "label": "Object Id",
+        "control": "parent_id",
         "align": "",
         "col_span": "12",
         "width": "",
@@ -196,7 +196,7 @@
         "column_name": "attachable",
         "column_type": "eloquent_prop",
         "label": "Parent",
-        "control": "link_morph_to",
+        "control": "parent_link",
         "align": "",
         "col_span": "12",
         "width": "",

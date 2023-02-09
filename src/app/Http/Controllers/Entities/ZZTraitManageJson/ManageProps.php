@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\Props;
 use App\Utils\Support\DBTable;
+use App\Utils\Support\Json\Relationships;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
@@ -170,6 +171,66 @@ class ManageProps extends Manage_Parent
         return $result;
     }
 
+    private function getAllMorphTo()
+    {
+        $relationships = Relationships::getAllOf($this->type);
+        // dump($relationships);
+        $dummyEntity = new $this->typeModel();
+        $eloquentParams = $dummyEntity->eloquentParams;
+        // dump($dummyEntity);
+        $result = [];
+        foreach ($relationships as $name => $relationship) {
+            if ($relationship['relationship'] == 'morphTo') {
+                $name = substr($name, 1); //remove first "_"
+                $eloquentParam = $eloquentParams[$name];
+                $result[$name]['parent_type'] = $eloquentParam[2];
+                $result[$name]['parent_id'] = $eloquentParam[3];
+            }
+        }
+        return $result;
+    }
+
+    private function applyControlListForStaticProps(&$json)
+    {
+        foreach ($json as &$prop) {
+            $column_type = $prop['column_type'];
+            if ($column_type === 'static') {
+                $prop['align'] = ['value' => $prop['align'] ?? '', 'cbbDS' => ['', 'center', 'right']];
+                $prop['control'] = ['value' => $prop['control'] ?? '', 'cbbDS' => JsonControls::getHeadings()];
+                $prop['hidden_view_all'] = 'DO_NOT_RENDER';
+            } else {
+                $prop['align'] = 'DO_NOT_RENDER';
+            }
+        }
+    }
+
+    private function applyControlListForMorphTo(&$json)
+    {
+        $allMorphTo = $this->getAllMorphTo();
+        // dump($allMorphTo);
+        // dump($json);
+        foreach ($allMorphTo as $controlName => $parentPairs) {
+            $json['_' . $controlName]['control'] = [
+                'value' => $json['_' . $controlName]['control'],
+                'cbbDS' => ['parent_link', ''],
+            ];
+
+            $parent_type = $parentPairs['parent_type'];
+            // $json['_' . $parent_type]['hidden_view_all'] = 'true';
+            $json['_' . $parent_type]['control'] = [
+                'value' => $json['_' . $parent_type]['control'],
+                'cbbDS' => ['parent_type', ''],
+            ];
+
+            $parent_id = $parentPairs['parent_id'];
+            // $json['_' . $parent_type]['hidden_view_all'] = 'true';
+            $json['_' . $parent_id]['control'] = [
+                'value' => $json['_' . $parent_id]['control'],
+                'cbbDS' => ['parent_id', ''],
+            ];
+        }
+    }
+
     protected function getDataSource()
     {
         $json = Props::getAllOf($this->type);
@@ -191,16 +252,8 @@ class ManageProps extends Manage_Parent
             }
         }
 
-        foreach ($json as $key => &$prop) {
-            $column_type = $prop['column_type'];
-            if ($column_type === 'static') {
-                $prop['align'] = ['value' => $prop['align'] ?? '', 'cbbDS' => ['', 'center', 'right']];
-                $prop['control'] = ['value' => $prop['control'] ?? '', 'cbbDS' => JsonControls::getHeadings()];
-                $prop['hidden_view_all'] = 'DO_NOT_RENDER';
-            } else {
-                $prop['align'] = 'DO_NOT_RENDER';
-            }
-        }
+        $this->applyControlListForStaticProps($json);
+        $this->applyControlListForMorphTo($json);
 
         $this->attachButtons($json, ['up', 'down', 'right_by_name']);
         return $json;

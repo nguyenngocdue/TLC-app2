@@ -30,24 +30,32 @@ const onChangeDropdown2Reduce = (listener) => {
     const constraintsValues = triggers.map((trigger) => getEById(trigger).val())
     if (debugListener) console.log(triggers, constraintsValues)
 
+    const dumbIncludes = (array, item) => {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] == item) return true
+        }
+        return false
+    }
+
     for (let i = 0; i < triggers.length; i++) {
-        const value = constraintsValues[i] * 1
+        const value = constraintsValues[i]
+        // if (debugListener) console.log("value", constraintsValues[i], value, !value)
         const column = listen_to_attrs[i]
         if (!value) continue;
         if (debugListener) console.log("Applying", column, value, "to", table_name)
         dataSource = dataSource.filter((row) => {
             let result = null
             if (Array.isArray(row[column])) {
-                result = row[column].includes(value)
+                result = dumbIncludes(row[column], value)
             } else {
                 result = row[column] == value
             }
-            // if(debugListener) console.log(row[column], value, result)
+            // if (debugListener) console.log("Result of reduce filter", row[column], value, result)
             return result
         })
     }
 
-    if (debugListener) console.log("DataSource", dataSource)
+    if (debugListener) console.log("DataSource AFTER reduce", dataSource)
     // console.log('onChangeDropdown2Reduce')
     const lastSelected = getEById(column_name).val()
     // console.log("Selected", lastSelected)

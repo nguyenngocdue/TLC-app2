@@ -6,10 +6,12 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_ncr extends ModelExtended
 {
-    protected $fillable = ["id", "name", "description", "slug", "project_id", "sub_project_id",
-    "object_id", "object_type_id", "prod_routing_id", "prod_order_id", "prod_discipline_1_id", 
-    "prod_discipline_id", "prod_discipline_2_id", "user_team_id", "priority_id", "due_date", 
-    "assignee_to", "cause_analysis"];
+    protected $fillable = [
+        "id", "name", "description", "slug", "project_id", "sub_project_id",
+        "parent_id", "parent_type", "prod_routing_id", "prod_order_id", "prod_discipline_1_id",
+        "prod_discipline_id", "prod_discipline_2_id", "user_team_id", "priority_id", "due_date",
+        "assignee_to", "cause_analysis"
+    ];
     protected $primaryKey = 'id';
     protected $table = "qaqc_ncrs";
 
@@ -36,7 +38,8 @@ class Qaqc_ncr extends ModelExtended
         "getDefMonitors()" => ["getCheckedByField", User::class],
     ];
 
-    public function getParent(){
+    public function getParent()
+    {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }

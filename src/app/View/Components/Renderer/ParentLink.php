@@ -5,7 +5,7 @@ namespace App\View\Components\Renderer;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
-class LinkMorphTo extends Component
+class ParentLink extends Component
 {
     /**
      * Create a new component instance.
@@ -30,13 +30,13 @@ class LinkMorphTo extends Component
     {
         $dataLine = $this->dataLine;
         $ableStr = $this->column['dataIndex'];
-        $able = $dataLine->$ableStr;
-        if (!is_null($able)) {
-            $table = $able->getTable();
-            $id = $able->id;
-            $name = $able->name ?? "Nameless";
+        $item = $dataLine->$ableStr;
+        if (!is_null($item)) {
+            $table = $item->getTable();
+            $id = $item->id;
+            $name = $item->name ?? "Nameless";
             // dump($table);
-            // dump("$able $table");
+            // dump("$item $table");
             $href = route($table . ".edit", $id);
             $idStr = Str::makeId($id);
             return "<a class='text-blue-500' href='$href' title='$idStr ($table)'>$name<br/>($table)</a>";

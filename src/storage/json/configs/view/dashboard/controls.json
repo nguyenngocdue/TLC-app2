@@ -18,7 +18,6 @@
         "dropdown",
         "dropdown_multi",
         "id",
-        "link_morph_to",
         "number",
         "picker_datetime",
         "picker_time",
@@ -40,7 +39,7 @@
         "avatar_name",
         "column",
         "count",
-        "link_morph_to",
+        "parent_link",
         "thumbnails"
     ],
     "renderer_edit": [

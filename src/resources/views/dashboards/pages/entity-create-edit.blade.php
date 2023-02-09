@@ -168,6 +168,16 @@ $id = $action === "edit" ? $values->id : "";
                         <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
                         @break
 
+                        @case('parent_link')
+                        Parent link
+                        @break
+                        @case('parent_type')
+                        <x-renderer.parent_type type={{$type}} name={{$columnName}} selected="{{$value}}"/>
+                        @break
+                        @case('parent_id')
+                        <x-renderer.parent_id type={{$type}} name={{$columnName}} selected="{{$value}}"/>
+                        @break
+
                         @default
                         <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}]" />
                         @break
