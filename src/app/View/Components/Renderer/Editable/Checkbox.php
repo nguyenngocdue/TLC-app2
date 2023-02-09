@@ -24,7 +24,7 @@ class Checkbox extends Component
      */
     public function render()
     {
-        if ($this->cell === 'invisible_this_control') return "";
+        if ($this->cell === 'DO_NOT_RENDER') return "";
         return view('components.renderer.editable.checkbox', [
             'name' => $this->name,
             'value' => in_array($this->cell, [1, 'true']),

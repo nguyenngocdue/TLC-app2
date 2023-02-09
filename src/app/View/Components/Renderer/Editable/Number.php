@@ -27,7 +27,7 @@ class Number extends Component
      */
     public function render()
     {
-        if ($this->cell === 'invisible_this_control') return "";
+        if ($this->cell === 'DO_NOT_RENDER') return "";
         return view('components.renderer.editable.text', [
             'placeholder' => $this->placeholder,
             'name' => $this->name,

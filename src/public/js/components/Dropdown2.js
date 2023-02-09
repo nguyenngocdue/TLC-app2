@@ -31,11 +31,20 @@ const onChangeDropdown2Reduce = (listener) => {
     if (debugListener) console.log(triggers, constraintsValues)
 
     for (let i = 0; i < triggers.length; i++) {
-        const value = constraintsValues[i]
+        const value = constraintsValues[i] * 1
         const column = listen_to_attrs[i]
         if (!value) continue;
         if (debugListener) console.log("Applying", column, value, "to", table_name)
-        dataSource = dataSource.filter((row) => value == row[column])
+        dataSource = dataSource.filter((row) => {
+            let result = null
+            if (Array.isArray(row[column])) {
+                result = row[column].includes(value)
+            } else {
+                result = row[column] == value
+            }
+            // if(debugListener) console.log(row[column], value, result)
+            return result
+        })
     }
 
     if (debugListener) console.log("DataSource", dataSource)

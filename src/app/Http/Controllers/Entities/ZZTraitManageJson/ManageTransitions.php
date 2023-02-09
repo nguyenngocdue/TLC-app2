@@ -58,7 +58,7 @@ class ManageTransitions extends Manage_Parent
             } else {
                 $newItem = ['name' => $name];
             }
-            $newItem[$name] = 'invisible_this_control';
+            $newItem[$name] = 'DO_NOT_RENDER';
             $result[] = $newItem;
         }
         return $result;

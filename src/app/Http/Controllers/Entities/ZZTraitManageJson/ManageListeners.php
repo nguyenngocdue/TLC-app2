@@ -86,9 +86,9 @@ class ManageListeners extends Manage_Parent
             }
             $newItem['column_name'] = $prop['column_name'];
             if (isset($newItem['listen_action']) && $newItem['listen_action'] == '') {
-                $newItem['triggers'] = 'invisible_this_control';
-                $newItem['listen_to_fields'] = 'invisible_this_control';
-                $newItem['listen_to_attrs'] = 'invisible_this_control';
+                $newItem['triggers'] = 'DO_NOT_RENDER';
+                $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
+                $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
             }
             $isStatic = (isset($prop['column_type']) && $prop['column_type'] === 'static');
             if (!$isStatic) $result[] = $newItem;

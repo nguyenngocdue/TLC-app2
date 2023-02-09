@@ -139,7 +139,7 @@ class ManageRelationships extends Manage_Parent
                     if (isset($json[$key]['control'])) {
                         $control = ($json[$key]['control']);
                         if (!in_array($control, ['radio', 'checkbox'])) {
-                            $result[$key][$column] = 'invisible_this_control';
+                            $result[$key][$column] = 'DO_NOT_RENDER';
                         }
                     }
                 }
@@ -147,7 +147,7 @@ class ManageRelationships extends Manage_Parent
                     if (isset($json[$key]['control'])) {
                         $control = ($json[$key]['control']);
                         if (!in_array($control, ['radio', 'checkbox', 'dropdown', 'dropdown_multi'])) {
-                            $result[$key][$column] = 'invisible_this_control';
+                            $result[$key][$column] = 'DO_NOT_RENDER';
                         }
                     }
                 }
