@@ -43,9 +43,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_project_id": {
-        "name": "_project_id",
-        "column_name": "project_id",
+    "_pj_building_id": {
+        "name": "_pj_building_id",
+        "column_name": "pj_building_id",
         "label": "",
         "default_value": "",
         "validation": "",
@@ -54,9 +54,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_sub_project_id": {
-        "name": "_sub_project_id",
-        "column_name": "sub_project_id",
+    "_pj_level_id": {
+        "name": "_pj_level_id",
+        "column_name": "pj_level_id",
         "label": "",
         "default_value": "",
         "validation": "",
@@ -65,9 +65,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_prod_routing_id": {
-        "name": "_prod_routing_id",
-        "column_name": "prod_routing_id",
+    "_pj_type_id": {
+        "name": "_pj_type_id",
+        "column_name": "pj_type_id",
         "label": "",
         "default_value": "",
         "validation": "",
@@ -76,9 +76,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_prod_order_id": {
-        "name": "_prod_order_id",
-        "column_name": "prod_order_id",
+    "_pj_name_id": {
+        "name": "_pj_name_id",
+        "column_name": "pj_name_id",
         "label": "",
         "default_value": "",
         "validation": "",
@@ -87,9 +87,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_prod_discipline_id": {
-        "name": "_prod_discipline_id",
-        "column_name": "prod_discipline_id",
+    "_pj_character_id": {
+        "name": "_pj_character_id",
+        "column_name": "pj_character_id",
         "label": "",
         "default_value": "",
         "validation": "",
@@ -98,9 +98,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_wir_description_id": {
-        "name": "_wir_description_id",
-        "column_name": "wir_description_id",
+    "_pj_unit_id": {
+        "name": "_pj_unit_id",
+        "column_name": "pj_unit_id",
         "label": "",
         "default_value": "",
         "validation": "",
@@ -109,53 +109,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_priority_id": {
-        "name": "_priority_id",
-        "column_name": "priority_id",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_due_date": {
-        "name": "_due_date",
-        "column_name": "due_date",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_closed_date": {
-        "name": "_closed_date",
-        "column_name": "closed_date",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_assignee_to": {
-        "name": "_assignee_to",
-        "column_name": "assignee_to",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getDefMonitors()": {
-        "name": "_getDefMonitors()",
-        "column_name": "getDefMonitors()",
+    "_pj_shipment_id": {
+        "name": "_pj_shipment_id",
+        "column_name": "pj_shipment_id",
         "label": "",
         "default_value": "",
         "validation": "",

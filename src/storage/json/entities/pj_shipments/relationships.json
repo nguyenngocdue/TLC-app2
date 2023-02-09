@@ -1,8 +1,8 @@
 {
-    "_getSubProjects": {
-        "name": "_getSubProjects",
+    "_getPjModules": {
+        "name": "_getPjModules",
         "relationship": "hasMany",
-        "control_name": "getSubProjects",
+        "control_name": "getPjModules",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",

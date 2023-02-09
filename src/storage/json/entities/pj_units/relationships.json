@@ -1,0 +1,28 @@
+{
+    "_getPjSellType": {
+        "name": "_getPjSellType",
+        "relationship": "belongsTo",
+        "control_name": "pj_sell_type_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "field_id",
+        "filter_values": "115",
+        "radio_checkbox_colspan": ""
+    },
+    "_getPjModules": {
+        "name": "_getPjModules",
+        "relationship": "hasMany",
+        "control_name": "getPjModules",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    }
+}

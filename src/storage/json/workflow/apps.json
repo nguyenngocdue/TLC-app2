@@ -119,6 +119,56 @@
         "status": null,
         "icon": null
     },
+    "pj_module": {
+        "name": "pj_module",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Pj Module",
+        "nickname": null,
+        "status": null,
+        "icon": "PJ Modules"
+    },
+    "pj_pod": {
+        "name": "pj_pod",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Pj Pod",
+        "nickname": null,
+        "status": null,
+        "icon": "PJ Pods"
+    },
+    "pj_shipment": {
+        "name": "pj_shipment",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Pj Shipment",
+        "nickname": null,
+        "status": null,
+        "icon": "PJ Shipments"
+    },
+    "pj_staircase": {
+        "name": "pj_staircase",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Pj Staircase",
+        "nickname": null,
+        "status": null,
+        "icon": "PJ Staircases"
+    },
+    "pj_unit": {
+        "name": "pj_unit",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Pj Unit",
+        "nickname": null,
+        "status": null,
+        "icon": "PJ Units"
+    },
     "post": {
         "name": "post",
         "hidden": null,

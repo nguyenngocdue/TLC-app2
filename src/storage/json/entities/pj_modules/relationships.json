@@ -1,0 +1,93 @@
+{
+    "_getPjBuilding": {
+        "name": "_getPjBuilding",
+        "relationship": "belongsTo",
+        "control_name": "pj_building_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "field_id",
+        "filter_values": "110",
+        "radio_checkbox_colspan": ""
+    },
+    "_getPjLevel": {
+        "name": "_getPjLevel",
+        "relationship": "belongsTo",
+        "control_name": "pj_level_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "field_id",
+        "filter_values": "111",
+        "radio_checkbox_colspan": ""
+    },
+    "_getPjType": {
+        "name": "_getPjType",
+        "relationship": "belongsTo",
+        "control_name": "pj_type_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "field_id",
+        "filter_values": "112",
+        "radio_checkbox_colspan": ""
+    },
+    "_getPjName": {
+        "name": "_getPjName",
+        "relationship": "belongsTo",
+        "control_name": "pj_name_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "field_id",
+        "filter_values": "113",
+        "radio_checkbox_colspan": ""
+    },
+    "_getPjCharacter": {
+        "name": "_getPjCharacter",
+        "relationship": "belongsTo",
+        "control_name": "pj_character_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "field_id",
+        "filter_values": "114",
+        "radio_checkbox_colspan": ""
+    },
+    "_getPjUnit": {
+        "name": "_getPjUnit",
+        "relationship": "belongsTo",
+        "control_name": "pj_unit_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getPjShipment": {
+        "name": "_getPjShipment",
+        "relationship": "belongsTo",
+        "control_name": "pj_shipment_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    }
+}

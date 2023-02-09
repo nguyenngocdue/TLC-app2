@@ -93,6 +93,7 @@ class Hse_corrective_action extends ModelExtended
     public function getManyLineParams1()
     {
         return [
+            ['dataIndex' => 'order_no',],
             ['dataIndex' => 'id',],
             ['dataIndex' => 'hse_incident_report_id'],
             ['dataIndex' => 'name',],
@@ -102,7 +103,6 @@ class Hse_corrective_action extends ModelExtended
             ['dataIndex' => 'status',],
             ['dataIndex' => 'priority_id',],
             ['dataIndex' => 'unsafe_action_type_id',],
-            ['dataIndex' => 'order_no',],
         ];
     }
 }

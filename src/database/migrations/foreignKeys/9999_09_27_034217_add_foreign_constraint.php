@@ -90,6 +90,13 @@ return new class extends Migration
         Schema::table('erp_routing_links', function (Blueprint $table) {
             $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
         });
+        Schema::table('pj_modules', function (Blueprint $table) {
+            $table->foreign('pj_unit_id')->references('id')->on('pj_units');
+            $table->foreign('pj_shipment_id')->references('id')->on('pj_shipments');
+        });
+        Schema::table('pj_pods', function (Blueprint $table) {
+            $table->foreign('pj_module_id')->references('id')->on('pj_modules');
+        });
         //************** HSE MODULE **************/
         Schema::table('hse_incident_reports', function (Blueprint $table) {
             $table->foreign('work_area_id')->references('id')->on('work_areas');

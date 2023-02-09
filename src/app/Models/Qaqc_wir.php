@@ -16,8 +16,6 @@ class Qaqc_wir extends ModelExtended
         "getProject" => ['belongsTo', Project::class, "project_id"],
         "getSubProject" => ['belongsTo', Sub_project::class, "sub_project_id"],
         "getProdRouting" => ['belongsTo', Prod_routing::class, "prod_routing_id"],
-        "getPjLevel" => ['belongsTo', Term::class, "pj_level_id"],
-        "getPjType" => ['belongsTo', Term::class, "pj_type_id"],
         "getProdOrder" => ['belongsTo', Prod_order::class, "prod_order_id"],
         "getDiscipline" => ['belongsTo', Prod_discipline::class, "prod_discipline_id"],
         "getWirDescription" => ['belongsTo', Wir_description::class, "wir_description_id"],
@@ -65,16 +63,6 @@ class Qaqc_wir extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getAssigneeTo()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getPjLevel()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getPjType()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -38,38 +38,12 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getPjLevel": {
-        "name": "_getPjLevel",
-        "relationship": "belongsTo",
-        "control_name": "pj_level_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "dropdown",
-        "filter_columns": "field_id",
-        "filter_values": "111",
-        "radio_checkbox_colspan": ""
-    },
-    "_getPjType": {
-        "name": "_getPjType",
-        "relationship": "belongsTo",
-        "control_name": "pj_type_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "dropdown",
-        "filter_columns": "field_id",
-        "filter_values": "112",
-        "radio_checkbox_colspan": ""
-    },
     "_getProdOrder": {
         "name": "_getProdOrder",
         "relationship": "belongsTo",
         "control_name": "prod_order_id",
         "renderer_view_all": "column",
-        "renderer_view_all_param": "description",
+        "renderer_view_all_param": "production_name",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown",
@@ -112,8 +86,8 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown",
-        "filter_columns": "",
-        "filter_values": "",
+        "filter_columns": "field_id",
+        "filter_values": "135",
         "radio_checkbox_colspan": ""
     },
     "_getAssigneeTo": {

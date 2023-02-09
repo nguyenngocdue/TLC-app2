@@ -1,0 +1,18 @@
+{
+    "new": {
+        "name": "new",
+        "ball-in-court": "creator"
+    },
+    "assigned": {
+        "name": "assigned",
+        "ball-in-court": "assignee_1"
+    },
+    "rejected": {
+        "name": "rejected",
+        "ball-in-court": "creator"
+    },
+    "closed": {
+        "name": "closed",
+        "ball-in-court": "assignee_1"
+    }
+}
