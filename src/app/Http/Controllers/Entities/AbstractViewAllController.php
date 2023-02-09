@@ -164,12 +164,10 @@ abstract class AbstractViewAllController extends Controller
                             default:
                                 break;
                         }
-                        return;
                     });
                 }
                 return $q->orderBy('updated_at', 'desc');
-            })
-            ->paginate($pageLimit);
+            })->paginate($pageLimit);
         return $result;
     }
 
@@ -317,7 +315,7 @@ abstract class AbstractViewAllController extends Controller
 
     public function index(Request $request)
     {
-        if (!empty($request->input())) {
+        if (!$request->input('page') && !empty($request->input())) {
             (new UpdateUserSettings())($request);
             return redirect()->back();
         }
