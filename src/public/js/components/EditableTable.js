@@ -4,24 +4,28 @@ const getValueOfTrByName = (a, fieldName) => {
     let result = null
     a.childNodes.forEach((td) => {
         // console.log(td.firstChild)
-        const name = td.firstChild.name
-        if (name !== undefined) {
-            if (name.includes(fieldName)) {
-                // console.log("Found name", name)
-                result = td.firstChild.value
+        td.childNodes.forEach((control) => {
+            const name = control.name
+            if (name !== undefined) {
+                if (name.includes(fieldName)) {
+                    // console.log("Found name", name)
+                    result = control.value
+                }
             }
-        }
+        })
     })
     // if (result === null) console.warn("No value found for field", fieldName)
     return result
 }
 const setValueOfTrByName = (a, fieldName, value) => {
     a.childNodes.forEach((td) => {
-        const name = td.firstChild.name
-        if (name !== undefined) {
-            if (name.includes(fieldName))
-                td.firstChild.value = value
-        }
+        td.childNodes.forEach((control) => {
+            const name = control.name
+            if (name !== undefined) {
+                if (name.includes(fieldName))
+                    control.value = value
+            }
+        })
     })
 }
 const getCellValueByName = (tableId, columnName, rowIndex) => {
@@ -152,10 +156,28 @@ const duplicateEditableTable = (params) => {
     }
 }
 const trashEditableTable = (params) => {
-    const { control, fingerPrint } = params
-    const tableId = control.value
-    console.log("Trash", tableId, fingerPrint)
+    const { control: button, fingerPrint } = params
+    const tableId = button.value
+    // console.log("Trash", tableId, fingerPrint)
+    //This can be changed if the GUI changed
+    const divWhiteSpace = button.parentNode
+    const td = divWhiteSpace.parentNode
+    const tr = td.parentNode
 
+    const rowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
+    const value = getCellValueByName(tableId, '[DESTROY_THIS_LINE]', rowIndex) === 'true'
+    const isDeleted = !value;
+    setCellValueByName(tableId, '[DESTROY_THIS_LINE]', rowIndex, isDeleted)
+    // console.log(button.firstChild)
+    if (isDeleted) {
+        tr.classList.add('bg-pink-400')
+        button.firstChild.classList.remove('fa-trash')
+        button.firstChild.classList.add('fa-trash-undo')
+    } else {
+        tr.classList.remove('bg-pink-400')
+        button.firstChild.classList.add('fa-trash')
+        button.firstChild.classList.remove('fa-trash-undo')
+    }
 }
 const addANewLine = (params) => {
     const { tableId } = params
@@ -175,20 +197,28 @@ const addANewLine = (params) => {
 
         const name = tableId + "[" + column['dataIndex'] + "][]"
         if (column['dataIndex'] === 'action') {
-            const fingerPrintName = tableId + "[finger_print][]"
-            fingerPrint = getMaxValueOfAColumn(tableId, "[finger_print]") + 1
+            fingerPrint = getMaxValueOfAColumn(tableId, "[finger_print]") + 10
             const params = "{tableId: '" + tableId + "', control:this, fingerPrint: " + fingerPrint + "}"
-            const fingerPrintInput = '<input name="' + fingerPrintName + '" value="' + fingerPrint + '" type=' + (tableDebug ? "text" : "hidden") + ' />'
-            renderer = fingerPrintInput + ' <div class="whitespace-nowrap">\
-                            <button value="'+ tableId + '" onClick="moveUpEditableTable(' + params + ')"\
-                                type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" name="" value="" title="" onclick=""><i class="fa fa-arrow-up"></i></button>\
-                            <button value="' + tableId + '" onClick="moveDownEditableTable(' + params + ')"\
-                                type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" name="" value="" title="" onclick=""><i class="fa fa-arrow-down"></i></button>\
-                            <button value="' + tableId + '" onClick="duplicateEditableTable(' + params + ')"\
-                                type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg" name="" value="" title="" onclick=""><i class="fa fa-copy"></i></button>\
-                            <button value="' + tableId + '" onClick="trashEditableTable(' + params + ')"\
-                                type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-red-600 text-white shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none active:bg-red-800 active:shadow-lg" name="" value="" title="" onclick=""><i class="fa fa-trash"></i></button>\
-                        </div>'
+
+            const fingerPrintName = tableId + "[finger_print][]"
+            const fingerPrintInput = '<input readonly class="w-10 bg-gray-300" name="' + fingerPrintName + '" value="' + fingerPrint + '" type=' + (tableDebug ? "text" : "hidden") + ' />'
+
+            const destroyName = tableId + "[DESTROY_THIS_LINE][]"
+            const destroyInput = '<input readonly class="w-10 bg-gray-300" name="' + destroyName + '" type=' + (tableDebug ? "text" : "hidden") + ' />'
+
+            const btnUp = '<button value="' + tableId + '" onClick="moveUpEditableTable(' + params + ')" type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-up"></i></button>'
+            const btnDown = '<button value="' + tableId + '" onClick="moveDownEditableTable(' + params + ')" type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-down"></i></button>'
+            const btnDuplicate = '<button value = "' + tableId + '" onClick = "duplicateEditableTable(' + params + ')" type = "button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg"> <i class="fa fa-copy"></i></button >'
+            const btnTrash = '<button value="' + tableId + '" onClick="trashEditableTable(' + params + ')" type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-red-600 text-white shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none active:bg-red-800 active:shadow-lg" ><i class="fa fa-trash"></i></button>'
+            renderer = ""
+                + fingerPrintInput
+                + destroyInput
+                + '<div class="whitespace-nowrap">'
+                + btnUp
+                + btnDown
+                + btnDuplicate
+                + btnTrash
+                + '</div>'
         } else {
             switch (column['renderer']) {
                 case 'read-only-text':

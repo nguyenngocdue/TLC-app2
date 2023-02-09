@@ -156,7 +156,9 @@ class RelationshipRenderer extends Component
             $id = $row->order_no;
             // dump($index);
             $type = $this->tableDebug ? "text" : "hidden";
-            $row->action = Blade::render("<input name='{$table01Name}[finger_print][]' value='$id' type=$type />
+            $row->action = Blade::render("
+            <input readonly name='{$table01Name}[finger_print][]' value='$id' type=$type class='w-10 bg-gray-300' />
+            <input readonly name='{$table01Name}[DESTROY_THIS_LINE][]'  type=$type class='w-10 bg-gray-300' />
             <div class='whitespace-nowrap'>
                 <x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
                 <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>
