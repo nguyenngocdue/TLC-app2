@@ -42,6 +42,7 @@
     <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
     <script src="{{ asset('js/tlc2.js') }}"></script>
+    <script src="{{ asset('js/flowbite.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2.js') }}"></script>
     <script src="{{ asset('js/components/EditableTable.js') }}"></script>
@@ -53,12 +54,12 @@
 <body >
     <div class="bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         {{-- <x-homepage.sidebar2 /> --}}
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col flex-1 w-full">
             <x-homepage.navbar2 />
-            <main class="w-full flex-grow bg-gray-100 dark:bg-gray-700 min-h-screen">
-                <div class="w-full lg:px-6 sm:px-2 md:px-4">
-                    <div class="no-print flex flex-wrap items-center justify-between h-full text-purple-600 dark:text-purple-300">
-                        <div class="w-full lg:w-1/2">
+            <main class="mt-16 w-full flex-grow bg-gray-100 dark:bg-gray-700 min-h-screen">
+                <div class="w-full h-18">
+                    <div class="no-print flex bg-white flex-wrap items-center justify-between h-full text-purple-600 dark:text-purple-300">
+                        <div class="w-full lg:w-1/2 lg:px-6 sm:px-2 md:px-4">
                             <x-renderer.heading level=4>@yield('title', 'Untitled')</x-renderer.heading>
                         </div>
                         <ul class="w-full lg:w-1/2">
@@ -70,7 +71,9 @@
                     <div class="only-print">
                         TLC LOGO HERE
                     </div>
-                    @yield('content')
+                    <div class="w-full lg:px-6 sm:px-2 md:px-4 mt-3">
+                        @yield('content')
+                    </div>
                 </div>
             </main>
         </div>

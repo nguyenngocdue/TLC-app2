@@ -1,4 +1,4 @@
-<header class="no-print z-20 py-4 bg-white shadow-md dark:bg-gray-800">
+<header class="no-print fixed w-full z-20 py-4 bg-white shadow-md dark:bg-gray-800">
     <div class="container1 flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
         <x-homepage.mobile-hamburger></x-homepage.mobile-hamburger>
         <div class="flex flex-1 lg:mr-32">

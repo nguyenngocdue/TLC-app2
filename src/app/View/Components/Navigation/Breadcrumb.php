@@ -27,12 +27,12 @@ class Breadcrumb extends Component
 
         $links = [];
         if ($first_id) {
-            $links[] = ['href' => route($type . '.edit', $first_id), 'title' => 'View First',];
-            $links[] = ['href' => route($type . '.edit', $latest_id), 'title' => 'View Latest',];
+            $links[] = ['href' => route($type . '.edit', $first_id), 'title' => 'View First', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];
+            $links[] = ['href' => route($type . '.edit', $latest_id), 'title' => 'View Latest', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];
         }
-        $links[] = ['href' => route($type . '.index'), 'title' => 'View All',];
-        $links[] = ['href' => route($type . '.create'), 'title' => 'Add New',];
-        $links[] = ['href' => route($singular . '_prp.index'), 'title' => 'Manage Workflows',];
+        $links[] = ['href' => route($type . '.index'), 'title' => 'View All', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];
+        $links[] = ['href' => route($type . '.create'), 'title' => 'Add New', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];
+        $links[] = ['href' => route($singular . '_prp.index'), 'title' => 'Manage Workflows', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];
         return view('components.navigation.breadcrumb')->with(compact('links'));
     }
 }

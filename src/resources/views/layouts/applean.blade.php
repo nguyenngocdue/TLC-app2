@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}">
     <link rel="stylesheet" href="{{ asset('css/customizeSelect2.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/flowbite.min.css') }}">
 
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
@@ -23,6 +24,7 @@
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
     <script src="{{ asset('js/tlc2.js') }}"></script>
+    <script src="{{ asset('js/flowbite.min.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2.js') }}"></script>
     <script src="{{ asset('js/components/SearchModal.js') }}"></script>
@@ -34,5 +36,4 @@
 <body>
     @yield('content')
 </body>
-applean.blade.php
 </html>
