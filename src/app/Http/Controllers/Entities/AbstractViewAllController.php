@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntitySuperPropsFilter;
 use App\Http\Controllers\UpdateUserSettings;
+use App\Models\Field;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
@@ -14,6 +15,7 @@ use App\Utils\Support\Json\SuperProps;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -66,10 +68,12 @@ abstract class AbstractViewAllController extends Controller
                         $result['toggle'][$key] = $value;
                         break;
                     case 'dropdown':
+                        $result['dropdown'][$key] = $value;
+                        break;
                     case 'radio':
-                    case 'dropdown_multi':
                     case 'checkbox':
-                        $result['dropdown_multiple'][$key] = $value;
+                    case 'dropdown_multi':
+                        $result['dropdown_multi'][$key] = $value;
                         break;
                     case 'picker_datetime':
                     case 'picker_time':
@@ -98,10 +102,10 @@ abstract class AbstractViewAllController extends Controller
         $model = $this->typeModel;
         $search = request('search');
         $result = App::make($model)::search($search)
-            ->query(function ($q) use ($advanceFilters) {
+            ->query(function ($q) use ($advanceFilters, $propsFilters) {
                 if ($advanceFilters) {
                     $queryResult = array_filter($advanceFilters, fn ($item) => $item);
-                    array_walk($queryResult, function ($value, $key) use ($q) {
+                    array_walk($queryResult, function ($value, $key) use ($q, $propsFilters) {
                         switch ($key) {
                             case 'id':
                                 array_walk($value, function ($value, $key) use ($q) {
@@ -136,9 +140,26 @@ abstract class AbstractViewAllController extends Controller
                                         ->whereDate($key, '<=', $this->convertDateTime($arrayDate[1]));
                                 });
                                 break;
-                            case 'dropdown_multiple':
+                            case 'dropdown':
                                 array_walk($value, function ($value, $key) use ($q) {
                                     $q->whereIn($key, $value);
+                                });
+                                break;
+                            case 'dropdown_multi':
+                                array_walk($value, function ($value, $key) use ($q, $propsFilters) {
+                                    $relationship = $propsFilters['_' . $key]['relationships'];
+                                    $oracyParams = $relationship['oracyParams'];
+                                    $field = $key;
+                                    $fieldId = DB::table('fields')->where('name', str_replace('()', '', $field))->value('id');
+                                    $collectionFilter = DB::table('many_to_many')->where('field_id', $fieldId)
+                                        ->where('term_type', $oracyParams[1])
+                                        ->where('doc_type', $this->typeModel)
+                                        ->whereIn('term_id', $value)
+                                        ->get();
+                                    $valueFilter = $collectionFilter->map(function ($item) {
+                                        return $item->doc_id;
+                                    })->toArray();
+                                    $q->whereIn('id', $valueFilter);
                                 });
                                 break;
                             default:

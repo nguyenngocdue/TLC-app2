@@ -52,6 +52,8 @@
                 <x-controls.toggle name={{$columnName}} value={{$valueControl}} />
                 @break
                 @case ('dropdown')
+                <x-controls.dropdown3 :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
+                @break
                 @case ('radio')
                 @case ('dropdown_multi')
                 @case('checkbox')
