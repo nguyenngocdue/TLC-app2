@@ -42,7 +42,7 @@
         "name": "_getDefRoutings()",
         "relationship": "getCheckedByField",
         "control_name": "getDefRoutings()",
-        "renderer_view_all": "",
+        "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",

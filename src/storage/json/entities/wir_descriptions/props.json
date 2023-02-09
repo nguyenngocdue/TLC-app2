@@ -111,6 +111,22 @@
         "hidden_print": "",
         "new_line": ""
     },
+    "_getDefRoutings()": {
+        "name": "_getDefRoutings()",
+        "column_name": "getDefRoutings()",
+        "column_type": "oracy_prop",
+        "label": "Routings",
+        "control": "dropdown_multi",
+        "align": "",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -158,21 +174,5 @@
         "hidden_filter": "",
         "hidden_print": "",
         "new_line": "true"
-    },
-    "_getDefRoutings()": {
-        "name": "_getDefRoutings()",
-        "column_name": "getDefRoutings()",
-        "column_type": "oracy_prop",
-        "label": "Routings",
-        "control": "dropdown_multi",
-        "align": "",
-        "col_span": "12",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "new_line": ""
     }
 }

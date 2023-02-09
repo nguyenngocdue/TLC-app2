@@ -107,7 +107,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "true",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -139,7 +139,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -155,7 +155,7 @@
         "hidden_view_all": "",
         "hidden_edit": "true",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -171,7 +171,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -187,7 +187,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -203,7 +203,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -219,7 +219,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -235,7 +235,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -251,7 +251,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -267,7 +267,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -283,7 +283,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -299,7 +299,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -315,7 +315,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -331,7 +331,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -347,7 +347,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -363,7 +363,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -379,7 +379,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -411,7 +411,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "true",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -475,7 +475,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     }

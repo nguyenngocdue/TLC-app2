@@ -65,17 +65,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_prod_routing_id": {
-        "name": "_prod_routing_id",
-        "column_name": "prod_routing_id",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_prod_order_id": {
         "name": "_prod_order_id",
         "column_name": "prod_order_id",
