@@ -59,7 +59,7 @@
                 <div class="w-full lg:px-6 sm:px-2 md:px-4">
                     <div class="no-print flex flex-wrap items-center justify-between h-full text-purple-600 dark:text-purple-300">
                         <div class="w-full lg:w-1/2">
-                            <x-renderer.heading level=3>@yield('title', 'Untitled')</x-renderer.heading>
+                            <x-renderer.heading level=4>@yield('title', 'Untitled')</x-renderer.heading>
                         </div>
                         <ul class="w-full lg:w-1/2">
                             <li class="relative">

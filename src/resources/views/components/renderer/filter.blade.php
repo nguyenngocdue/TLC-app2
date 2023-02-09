@@ -4,7 +4,7 @@
     <div class="rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
         <div class="flex ">
             <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
-                <button type="submit" name="action" value="clearAdvanceFilter" class=" text-gray-900 bg-white focus:shadow-outline border border-gray-200 focus:outline-none hover:bg-purple-400  font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 lg:mr-20" onclick="return false;">
+                <button type="submit" formaction="{{route($type . '.index')}}" name="action" value="clearAdvanceFilter" class=" text-gray-900 bg-white focus:shadow-outline border border-gray-200 focus:outline-none hover:bg-purple-400  font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700" >
                     <i class="fa-light fa-circle-check mr-2"></i>
                     Reset Filter
                   </button>

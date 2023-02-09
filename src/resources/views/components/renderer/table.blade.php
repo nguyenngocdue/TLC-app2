@@ -39,11 +39,11 @@
                     {{ $showing }}
                 </span>
                 <span class="col-span-2"></span>
-                {{-- <span class="col-span-4 mt-2 flex sm:mt-auto sm:justify-end">
+                <span class="col-span-4 mt-2 flex sm:mt-auto sm:justify-end">
                     <nav aria-label="Table navigation">
                         {!! $pagination !!}
                     </nav>
-                </span> --}}
+                </span>
             </div>
             @if ($footer)
                 <div
