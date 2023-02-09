@@ -4,7 +4,7 @@ namespace App\Http\Controllers\ComponentDemo;
 
 use Illuminate\Support\Facades\Blade;
 
-trait TraitTableData
+trait TraitDemoTableData
 {
     public function getTableColumns()
     {

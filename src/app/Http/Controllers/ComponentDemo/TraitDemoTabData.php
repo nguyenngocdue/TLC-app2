@@ -4,7 +4,7 @@ namespace App\Http\Controllers\ComponentDemo;
 
 use Illuminate\Support\Facades\Blade;
 
-trait TraitTabData
+trait TraitDemoTabData
 {
     function getTab1()
     {

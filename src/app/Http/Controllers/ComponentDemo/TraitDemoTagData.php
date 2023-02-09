@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\ComponentDemo;
 
-trait TraitTagData
+trait TraitDemoTagData
 {
     function getTagColumns()
     {

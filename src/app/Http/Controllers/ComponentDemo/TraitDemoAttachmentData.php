@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\ComponentDemo;
 
-trait TraitAttachmentData
+trait TraitDemoAttachmentData
 {
     function getAttachmentData2()
     {

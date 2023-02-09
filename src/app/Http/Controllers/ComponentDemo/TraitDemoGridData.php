@@ -4,7 +4,7 @@ namespace App\Http\Controllers\ComponentDemo;
 
 use Illuminate\Support\Facades\Log;
 
-trait TraitGridData
+trait TraitDemoGridData
 {
     function getGridData($tableDataSource)
     {

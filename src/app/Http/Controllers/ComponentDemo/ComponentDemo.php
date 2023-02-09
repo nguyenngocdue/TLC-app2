@@ -4,12 +4,12 @@ namespace App\Http\Controllers\ComponentDemo;
 
 class ComponentDemo
 {
-    use TraitAttachmentData;
-    use TraitCommentData;
-    use TraitGridData;
-    use TraitTableData;
-    use TraitTagData;
-    use TraitTabData;
+    use TraitDemoAttachmentData;
+    use TraitDemoCommentData;
+    use TraitDemoGridData;
+    use TraitDemoTableData;
+    use TraitDemoTagData;
+    use TraitDemoTabData;
 
     function getType()
     {

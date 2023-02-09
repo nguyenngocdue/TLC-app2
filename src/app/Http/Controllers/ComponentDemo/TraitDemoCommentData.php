@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\ComponentDemo;
 
-trait TraitCommentData
+trait TraitDemoCommentData
 {
     function getCommendData()
     {

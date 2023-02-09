@@ -55,7 +55,7 @@ trait TableTraitRows
             }
             $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
             $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
-            $tds[] = "<td class='px-1 py-1 dark:border-gray-600 $borderRight $align'>" . $rendered . "</td>";
+            $tds[] = "<td class='p1x-1 p1y-1 dark:border-gray-600 $borderRight $align'>" . $rendered . "</td>";
         }
         return $tds;
     }

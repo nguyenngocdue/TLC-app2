@@ -119,6 +119,7 @@ $id = $action === "edit" ? $values->id : "";
                         <x-controls.id name={{$columnName}} value="{{$action === 'edit' ? $value : 'to be generated'}}" />
                         @break
                         @case('text')
+                        @case('thumbnail')
                         <x-controls.text name={{$columnName}} value={{$value}} />
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
@@ -168,14 +169,15 @@ $id = $action === "edit" ? $values->id : "";
                         <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
                         @break
 
-                        @case('parent_link')
-                        <x-feedback.alert type="warning" title="Warning" message="parent_link suppose to show in View All screen only, please do not show in Edit screen." />
-                        @break
                         @case('parent_type')
                         <x-renderer.parent_type type={{$type}} name={{$columnName}} selected="{{$value}}"/>
                         @break
                         @case('parent_id')
                         <x-renderer.parent_id type={{$type}} name={{$columnName}} selected="{{$value}}"/>
+                        @break
+
+                        @case('parent_link')
+                        <x-feedback.alert type="warning" title="Warning" message="{{$control}} suppose to show in View All screen only, please do not show in Edit screen." />
                         @break
 
                         @default
