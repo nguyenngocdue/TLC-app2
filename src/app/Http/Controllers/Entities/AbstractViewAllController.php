@@ -317,7 +317,7 @@ abstract class AbstractViewAllController extends Controller
     {
         if (!$request->input('page') && !empty($request->input())) {
             (new UpdateUserSettings())($request);
-            return redirect()->back();
+            return redirect($request->getPathInfo());
         }
         [$pageLimit, $columnLimit, $advanceFilters] = $this->getUserSettings();
         // Log::info($columnLimit);

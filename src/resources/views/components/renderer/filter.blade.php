@@ -1,10 +1,10 @@
-<form action="{{route($type . '.index')}}" method="GET">
+<form id="{{$type}}" action="{{route($type . '.index')}}" method="GET">
     <input type="hidden" name="_entity" value="{{$type}}">
     
     <div class="rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
         <div class="flex ">
             <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
-                <button type="submit" formaction="{{route($type . '.index')}}" name="action" value="clearAdvanceFilter" class=" text-gray-900 bg-white focus:shadow-outline border border-gray-200 focus:outline-none hover:bg-purple-400  font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700" >
+                <button type="button" class=" text-gray-900 bg-orange-400 focus:shadow-outline border border-gray-200 focus:outline-none hover:bg-purple-400  font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700" @click="clearAdvanceFilter()">
                     <i class="fa-light fa-circle-check mr-2"></i>
                     Reset Filter
                   </button>
@@ -28,7 +28,7 @@
                 <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                 @endif
                 {{-- Invisible anchor for scrolling when users click on validation fail message --}}
-                <label for={{$columnName}} class="text-gray-700 dark:text-gray-300 text-base font-normal" >{{$label}}</label>
+                <label for={{$columnName}} class="text-gray-900 dark:text-gray-300 text-base font-normal" >{{$label}}</label>
                 @switch ($control)
                 @case($timeControls[0])
                 <x-controls.time-picker2 :name="$columnName" :value="$valueControl"/>
@@ -67,17 +67,16 @@
     
         </div>
         <div >
-            <button type="submit" name="action" value="updateAdvanceFilter" class="mt-4 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-bold text-white hover:bg-purple-400 focus:outline-none">
+            <button type="submit" name="action" value="updateAdvanceFilter" class="mt-4 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-semibold text-base text-white hover:bg-purple-400 focus:outline-none">
                 Apply
             </button>
         </div>
     </div>
+    
 </form>
 <script>
-    $(document).on('keyup keypress', 'form input[type="text"]', function(e) {
-        if (e.keyCode == 13) {
-            e.preventDefault();
-            return false;
-        }
-    });
+    function clearAdvanceFilter(){
+        $('[id="'+"{{$type}}"+'"]').append('<input type="hidden" name="action" value="clearAdvanceFilter">')
+        $('[id="'+"{{$type}}"+'"]').submit()
+    }
 </script>
