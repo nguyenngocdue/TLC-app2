@@ -28,6 +28,7 @@ class UpdateUserSettings extends Controller
     private function updateFilter($request, $settings)
     {
         [$type, $valueRequest] = $this->formatRequestValue($request);
+        dd($valueRequest);
         $settings[$type]['advance_filters'] = $valueRequest;
         return $settings;
     }
