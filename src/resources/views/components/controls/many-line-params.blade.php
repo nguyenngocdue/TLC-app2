@@ -1,3 +1,5 @@
+@if($tableName !== 'hse_corrective_actions') 
+
 <x-renderer.table 
     tableName="{{$table01ROName}}"
     :columns="$readOnlyColumns" 
@@ -6,7 +8,7 @@
     footer="{{$fn === '' ? '(Default column settings loaded)' : ''}}"
     />
 
-@if (env('ENV_OF_FORTUNE'))
+@else
 
 <x-renderer.table 
     tableName="{{$table01Name}}"

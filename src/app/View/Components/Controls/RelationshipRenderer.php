@@ -159,7 +159,7 @@ class RelationshipRenderer extends Component
             $row->action = Blade::render("
             <input readonly name='{$table01Name}[finger_print][]' value='$id' type=$type class='w-10 bg-gray-300' />
             <input readonly name='{$table01Name}[DESTROY_THIS_LINE][]'  type=$type class='w-10 bg-gray-300' />
-            <div class='whitespace-nowrap'>
+            <div class='whitespace-nowrap flex'>
                 <x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
                 <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>
                 <x-renderer.button size='xs' value='$table01Name' onClick='duplicateEditableTable({control:this, fingerPrint: $id})' type='secondary' ><i class='fa fa-copy'></i></x-renderer.button>

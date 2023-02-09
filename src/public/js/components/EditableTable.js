@@ -213,7 +213,7 @@ const addANewLine = (params) => {
             renderer = ""
                 + fingerPrintInput
                 + destroyInput
-                + '<div class="whitespace-nowrap">'
+                + '<div class="whitespace-nowrap flex">'
                 + btnUp
                 + btnDown
                 + btnDuplicate
