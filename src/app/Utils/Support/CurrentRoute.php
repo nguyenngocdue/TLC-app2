@@ -37,6 +37,7 @@ class CurrentRoute
     public static function getEntityId($typeSingular)
     {
         $current = Route::current();
+        $typeSingular = Str::singular($typeSingular);
         // $typeSingular = $current->controller->getType();
         $result = $current->parameters[$typeSingular] ?? null;
         return $result;

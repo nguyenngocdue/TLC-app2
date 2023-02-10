@@ -1,4 +1,4 @@
-@if($tableName !== 'hse_corrective_actions') 
+{{-- @if($tableName !== 'hse_corrective_actions')  --}}
 
 <x-renderer.table 
     tableName="{{$table01ROName}}"
@@ -8,7 +8,7 @@
     footer="{{$fn === '' ? '(Default column settings loaded)' : ''}}"
     />
 
-@else
+{{-- @else --}}
 
 <x-renderer.table 
     tableName="{{$table01Name}}"
@@ -30,6 +30,7 @@
     </script>
 <br/>
 <x-renderer.button type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
-<input name="tableNames[{{$table01Name}}]" value="{{$tableName}}" type="hidden" />
+<input class="bg-gray-200" readonly name="tableNames[{{$table01Name}}]" value="{{$tableName}}" type="{{$tableDebugTextHidden}}" />
+<input class="bg-gray-200" readonly id="entityParentId" value="{{$entityId}}" type="{{$tableDebugTextHidden}}" />
 
-@endif
+{{-- @endif --}}

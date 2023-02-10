@@ -6,19 +6,16 @@ use Illuminate\Support\Str;
 
 trait TableTraitColumns
 {
-    private function makeColumn($column)
+    private function isInvisible($column)
     {
-        $renderer = $column['renderer'] ?? "_no_renderer_";
-        $dataIndex = $column['dataIndex'];
-        $columnName = $column['column_name'] ?? $dataIndex;
-        $title = $column['title'] ?? Str::headline($column['dataIndex']);
-        return "<th class='{$dataIndex}_th px-4 py-3' title=\"DataIndex: $dataIndex\nColumnName: $columnName\nRenderer: $renderer\">{$title}</th>";
+        return (isset($column['invisible']) && $column['invisible'] == true);
     }
 
     private function makeColGroup($columns)
     {
         $result = [];
         foreach ($columns as $column) {
+            if ($this->isInvisible($column)) continue;
             $name = $column['dataIndex'];
             if (isset($column['width'])) {
                 $w = $column['width'];
@@ -30,11 +27,22 @@ trait TableTraitColumns
         return join("", $result);
     }
 
+    private function makeTh($column)
+    {
+        $renderer = $column['renderer'] ?? "_no_renderer_";
+        $dataIndex = $column['dataIndex'];
+        $columnName = $column['column_name'] ?? $dataIndex;
+        $title = $column['title'] ?? Str::headline($column['dataIndex']);
+        return "<th class='{$dataIndex}_th px-4 py-3' title=\"DataIndex: $dataIndex\nColumnName: $columnName\nRenderer: $renderer\">{$title}</th>";
+    }
+
     private function getColumnRendered($columns)
     {
         $columnsRendered = [];
         array_walk($columns, function ($column, $key) use (&$columnsRendered) {
-            $columnsRendered[] = $this->makeColumn($column, $key);
+            if (!$this->isInvisible($column)) {
+                $columnsRendered[] = $this->makeTh($column, $key);
+            }
         });
         $columnsRendered = join("", $columnsRendered);
         return $columnsRendered;
@@ -58,5 +66,12 @@ trait TableTraitColumns
         }
         $result = join($th);
         return $result;
+    }
+
+    private function hideColumns($columns)
+    {
+        $columns = array_filter($columns, fn ($column) => !(isset($column['hidden']) &&  $column['hidden'] == true));
+        // dump($columns);
+        return $columns;
     }
 }

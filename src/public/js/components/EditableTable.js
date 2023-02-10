@@ -1,8 +1,8 @@
-const editableColumns = {}, tableObject = {}
+const editableColumns = {}, tableObject = {}, entityId = null
 const getAllRows = (tableId) => $("#" + tableId + " > tbody")[0].children
-const getValueOfTrByName = (a, fieldName) => {
+const getValueOfTrByName = (aRow, fieldName) => {
     let result = null
-    a.childNodes.forEach((td) => {
+    aRow.childNodes.forEach((td) => {
         // console.log(td.firstChild)
         td.childNodes.forEach((control) => {
             const name = control.name
@@ -17,8 +17,8 @@ const getValueOfTrByName = (a, fieldName) => {
     // if (result === null) console.warn("No value found for field", fieldName)
     return result
 }
-const setValueOfTrByName = (a, fieldName, value) => {
-    a.childNodes.forEach((td) => {
+const setValueOfTrByName = (aRow, fieldName, value) => {
+    aRow.childNodes.forEach((td) => {
         td.childNodes.forEach((control) => {
             const name = control.name
             if (name !== undefined) {
@@ -193,6 +193,7 @@ const addANewLine = (params) => {
         noCell.innerHTML = "New"
     }
     columns.forEach((column) => {
+        if (column['hidden'] == true) return
         let renderer = 'newCell'
 
         const name = tableId + "[" + column['dataIndex'] + "][]"
@@ -261,9 +262,15 @@ const addANewLine = (params) => {
         }
         //row.insertCell MUST run after get Max finger Print
         const cell = row.insertCell();
-        cell.classList = "px-1 py-1 dark:border-gray-600 border-r text-center";
+        const hidden = column['invisible'] ? "hidden" : ""
+        cell.classList = "p1x-1 p1y-1 dark:border-gray-600 border-r text-center " + hidden;
         // console.log("Insert column", column['dataIndex'], renderer)
-        cell.innerHTML = renderer;
+        cell.innerHTML = renderer
+        if (column['value_as_parent_id'] == true) {
+            value = $('#entityParentId').val()
+            // console.log(value)
+            cell.firstChild.value = value
+        }
     })
     if (showNoR) { //<< Ignore No. column
         const noCell = row.insertCell()

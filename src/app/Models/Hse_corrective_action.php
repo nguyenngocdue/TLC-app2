@@ -93,11 +93,11 @@ class Hse_corrective_action extends ModelExtended
     public function getManyLineParams1()
     {
         return [
-            ['dataIndex' => 'order_no',],
-            ['dataIndex' => 'id',],
-            ['dataIndex' => 'hse_incident_report_id'],
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'hse_incident_report_id', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'name',],
-            ['dataIndex' => 'work_area_id'],
+            ['dataIndex' => 'work_area_id', 'hidden' => !true],
             ['dataIndex' => 'assignee'],
             ['dataIndex' => 'opened_date'],
             ['dataIndex' => 'status',],

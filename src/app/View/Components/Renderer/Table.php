@@ -41,11 +41,13 @@ class Table extends Component
   public function render()
   {
     $columns = $this->columns;
+    // dump($columns);
     if (is_null($columns)) return Blade::render("<x-feedback.alert type='warning' message='Columns attribute is missing.' />");
     if (!is_array($columns)) return Blade::render("<x-feedback.alert type='warning' message='Props file is missing.' />");
     if (empty($columns)) return Blade::render("<x-feedback.alert type='warning' message='Columns attribute is an empty array.' />");
 
     $columns = $this->makeNoColumn($columns);
+    $columns = $this->hideColumns($columns);
     $dataSource = $this->dataSource;
     $hasPaging = (is_object($dataSource) && method_exists($dataSource, 'links') && !empty($dataSource));
 

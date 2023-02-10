@@ -41,6 +41,7 @@ trait TraitDemoTableData
             [
                 "title" => 'Date',
                 "dataIndex" => "date",
+                // "hidden" => true, //<< It works
             ],
         ];
     }

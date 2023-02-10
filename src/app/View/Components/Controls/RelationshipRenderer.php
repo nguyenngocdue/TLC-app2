@@ -4,6 +4,7 @@ namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
@@ -232,6 +233,8 @@ class RelationshipRenderer extends Component
                     'table01Name' => $this->table01Name,
                     'table01ROName' => $this->table01Name . "RO",
                     'tableDebug' => $this->tableDebug ? "true" : "false",
+                    'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
+                    'entityId' => CurrentRoute::getEntityId($this->type),
                 ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";

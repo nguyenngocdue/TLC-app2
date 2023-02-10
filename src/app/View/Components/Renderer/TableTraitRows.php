@@ -26,9 +26,10 @@ trait TableTraitRows
         return $dataSource->items();
     }
 
-    private function makeTd($columns, $dataLine, $columnCount, $no, $dataLineIndex)
+    private function makeTd($columns, $dataLine, $no, $dataLineIndex)
     {
         $tds = [];
+        $columnCount = sizeof($columns);
         // Log::info($columns);
         foreach (array_values($columns) as $index => $column) {
             $renderer = $column['renderer'] ?? false;
@@ -55,7 +56,8 @@ trait TableTraitRows
             }
             $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
             $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
-            $tds[] = "<td class='p1x-1 p1y-1 dark:border-gray-600 $borderRight $align'>" . $rendered . "</td>";
+            $hidden = $this->isInvisible($column) ? "hidden" : "";
+            $tds[] = "<td class='p1x-1 p1y-1 $hidden dark:border-gray-600 $borderRight $align'>" . $rendered . "</td>";
         }
         return $tds;
     }
@@ -70,7 +72,7 @@ trait TableTraitRows
         if (is_null($dataSource)) return "<tr><td colspan=$colspan>" . Blade::render("<x-feedback.alert type='error' message='DataSource attribute is missing.' />") . "</td></tr>";
         if (empty($dataSource) || (is_object($dataSource) && empty($items))) return "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
 
-        $columnCount = count($columns);
+        // $columnCount = count($columns);
         $start = (is_object($dataSource) && method_exists($dataSource, 'items')) ?  $dataSource->perPage() * ($dataSource->currentPage() - 1) : 0;
         if ($this->groupBy && !$this->groupKeepOrder) {
             if (is_object($dataSource)) $dataSource = $items;
@@ -79,7 +81,7 @@ trait TableTraitRows
 
         $lastIndex = "anything";
         foreach ($dataSource as $no => $dataLine) {
-            $tds = $this->makeTd($columns, $dataLine, $columnCount, $start + $no + 1, $no);
+            $tds = $this->makeTd($columns, $dataLine, $start + $no + 1, $no);
 
             if ($this->groupBy) {
                 $index = isset($dataLine[$this->groupBy][0]) ? strtoupper(substr($dataLine[$this->groupBy], 0, $this->groupByLength)) : "(EMPTY)";
