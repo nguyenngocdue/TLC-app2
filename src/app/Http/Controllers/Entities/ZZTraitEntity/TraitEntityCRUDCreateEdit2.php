@@ -39,7 +39,6 @@ trait TraitEntityCRUDCreateEdit2
 	{
 		$props = $this->getCreateEditProps();
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($id, $props);
-		// dump($values);
 		return view('dashboards.pages.entity-create-edit', [
 			'props' => $props,
 			'defaultValues' => DefaultValues::getAllOf($this->type),

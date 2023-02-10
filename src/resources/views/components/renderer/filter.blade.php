@@ -46,6 +46,7 @@
                 @case('number')
                 @case('textarea')
                 @case('status')
+                @case('parent_id')
                 <x-controls.text name={{$columnName}} value={{$valueControl}} />
                 @break
                 @case('toggle')
@@ -56,6 +57,9 @@
                 @case ('dropdown_multi')
                 @case('checkbox')
                 <x-controls.dropdown3 :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
+                @break
+                @case('parent_type')
+                <x-controls.parent-type :type="$type" :name="$columnName" :valueSelected="$valueControl"/>
                 @break
                 @default
                 <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}]" />

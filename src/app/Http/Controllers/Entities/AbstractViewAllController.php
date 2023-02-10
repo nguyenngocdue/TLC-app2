@@ -86,6 +86,12 @@ abstract class AbstractViewAllController extends Controller
                     case 'picker_year':
                         $result['picker_datetime'][$key] = $value;
                         break;
+                    case 'parent_type':
+                        $result['parent_type'][$key] = $value;
+                        break;
+                    case 'parent_id':
+                        $result['parent_id'][$key] = $value;
+                        break;
                     default:
                         break;
                 }
@@ -108,6 +114,7 @@ abstract class AbstractViewAllController extends Controller
                     array_walk($queryResult, function ($value, $key) use ($q, $propsFilters) {
                         switch ($key) {
                             case 'id':
+                            case 'parent_id':
                                 array_walk($value, function ($value, $key) use ($q) {
                                     $arrayId = explode(',', $value);
                                     if (!empty($arrayId)) {
@@ -117,7 +124,7 @@ abstract class AbstractViewAllController extends Controller
                                 break;
                             case 'text':
                                 array_walk($value, function ($value, $key) use ($q) {
-                                    $q->where($key, 'like', $value . '%');
+                                    $q->where($key, 'like', '%' . $value . '%');
                                 });
                                 break;
                             case 'toggle':
@@ -140,6 +147,7 @@ abstract class AbstractViewAllController extends Controller
                                 });
                                 break;
                             case 'dropdown':
+                            case 'parent_type':
                                 array_walk($value, function ($value, $key) use ($q) {
                                     $q->whereIn($key, $value);
                                 });
