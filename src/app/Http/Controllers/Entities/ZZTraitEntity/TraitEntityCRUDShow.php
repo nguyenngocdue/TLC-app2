@@ -48,8 +48,6 @@ trait TraitEntityCRUDShow
 				}
 			}
 		}
-
-
 		dd($dataSource);
 		return view('dashboards.pages.entity-show', [
 			'propsTree' => array_values($node),
