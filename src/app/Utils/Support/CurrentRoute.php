@@ -34,14 +34,13 @@ class CurrentRoute
         return $parserStr[4];
     }
 
-    public static function getCurrentController()
+    public static function getEntityId($typeSingular)
     {
-        $result = Route::current()->action['controller'];
-        $parserStr = explode('\\', $result);
-        $str = $parserStr[Count($parserStr) - 1];
-        return substr($str, 0, strpos($str, '@'));
+        $current = Route::current();
+        // $typeSingular = $current->controller->getType();
+        $result = $current->parameters[$typeSingular] ?? null;
+        return $result;
     }
-
 
     /** This will return hse_incident_reports.edit */
     public static function getControllerAs()

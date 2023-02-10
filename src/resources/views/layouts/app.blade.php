@@ -74,7 +74,7 @@
                     
                 </div>
             </main>
-            <div class="w-full "> {{-- lg:px-6 sm:px-2 md:px-4 --}}
+            <div class="w-full MUST-NOT-HAVE-X-PADDING-MARGIN-FOR-PRINT-PAGE"> {{-- lg:px-6 sm:px-2 md:px-4 --}}
                 @yield('content')
             </div>
             <div class="mt-8 no-print"></div>

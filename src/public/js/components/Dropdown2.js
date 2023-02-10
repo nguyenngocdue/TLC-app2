@@ -2,7 +2,7 @@ const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="
 const getEById = (id) => $("[id='" + id + "']")
 // const removeParenthesis = (str) => (str.includes("()")) ? str.substring(0, str.length - 2) : str
 
-let k = {}, listenersOfDropdown2 = {}, filtersOfDropdown2 = {}, debugListener = !false
+let k = {}, listenersOfDropdown2 = {}, filtersOfDropdown2 = {}, debugListener = false
 
 const filterDropdown2 = (column_name, dataSource) => {
     if (filtersOfDropdown2[column_name] !== undefined) {
@@ -122,14 +122,17 @@ const onChangeDropdown2DateOffset = (listener) => {
 
     const { listen_to_attrs, column_name } = listener
     const listen_to_attr = listen_to_attrs[0]
-    console.log(listen_to_attr, column_name, selectedObject)
+    // console.log(listen_to_attr, column_name, selectedObject)
     if (selectedObject !== undefined) {
         const theValue = selectedObject[listen_to_attr]
         if (debugListener) console.log(theValue)
 
-        getEById(column_name).val(theValue)
+        const theValueDate = moment().add(theValue, 'days').format("YYYY-MM-DD HH:mm:ss");
+        if (debugListener) console.log(theValueDate)
+
+        getEById(column_name).val(theValueDate)
         getEById(column_name).trigger('change')
-        if (debugListener) console.log("Date Offset", column_name, "with value", theValue)
+        if (debugListener) console.log("Date Offset", column_name, "with value", theValueDate)
     }
 }
 
