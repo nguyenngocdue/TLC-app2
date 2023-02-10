@@ -4,8 +4,7 @@ use App\Http\Controllers\AppMenuController;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Reports\Documents\DocumentQaqcInspChklst;
-use App\Http\Controllers\Reports\Reports\ReportProdRecords;
+use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\WelcomeFortuneController;
@@ -52,6 +51,8 @@ Route::group([
 
                 $path = "App\\Http\\Controllers\\Reports\\Registers\\{$ucfirstName}";
                 Route::get('register-' . $singular, [$path, 'index']);
+
+                // dump($path);
 
                 $path = "App\\Http\\Controllers\\Reports\\Documents\\{$ucfirstName}";
                 Route::get('document-' . $singular, [$path, 'index']);
