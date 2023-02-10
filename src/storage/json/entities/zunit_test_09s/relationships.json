@@ -168,6 +168,19 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getPriority": {
+        "name": "_getPriority",
+        "relationship": "belongsTo",
+        "control_name": "priority_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "field_id",
+        "filter_values": "135",
+        "radio_checkbox_colspan": ""
+    },
     "_dropdownMonitors()": {
         "name": "_dropdownMonitors()",
         "relationship": "getCheckedByField",

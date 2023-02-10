@@ -15,6 +15,22 @@
         "listen_to_fields": "prod_discipline_1",
         "listen_to_attrs": "getDefMonitors()"
     },
+    "_priority_id": {
+        "name": "_priority_id",
+        "column_name": "priority_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_due_date": {
+        "name": "_due_date",
+        "column_name": "due_date",
+        "listen_action": "date_offset",
+        "triggers": "priority_id",
+        "listen_to_fields": "priority_id",
+        "listen_to_attrs": "duration"
+    },
     "_user_1": {
         "name": "_user_1",
         "column_name": "user_1",

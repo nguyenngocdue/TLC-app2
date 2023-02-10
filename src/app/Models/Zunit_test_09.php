@@ -22,6 +22,8 @@ class Zunit_test_09 extends ModelExtended
         'assignee_1',
         'user_4',
         'user_position_1',
+        "priority_id",
+        "due_date",
     ];
     protected $table = "zunit_test_09s";
 
@@ -44,6 +46,7 @@ class Zunit_test_09 extends ModelExtended
         "getAssignee1" => ['belongsTo', User::class, 'assignee_1'],
 
         "user4" => ['belongsTo', User::class, 'user_4'],
+        "getPriority" => ['belongsTo', Priority::class, 'priority_id'],
     ];
 
     public $oracyParams = [
@@ -57,6 +60,11 @@ class Zunit_test_09 extends ModelExtended
     }
 
     public function department1()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getPriority()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

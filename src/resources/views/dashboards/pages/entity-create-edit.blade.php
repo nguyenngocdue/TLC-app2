@@ -41,7 +41,7 @@ $id = $action === "edit" ? $values->id : "";
         $colSpan = $val['col_span'];
         $value = $values->{$columnName} ?? '';
         $title = $columnName." / ".$control ;
-        $col_span = $val['col_span'] === '' ? 1 : $val['col_span']*1;
+        $col_span = $val['col_span'] === '' ? 12 : $val['col_span'] * 1;
         $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
 
         $isRequired = in_array("required", explode("|", $defaultValue['validation'] ?? ""));

@@ -446,5 +446,53 @@
         "hidden_filter": "",
         "hidden_print": "",
         "new_line": ""
+    },
+    "_h5": {
+        "name": "_h5",
+        "column_name": "h5",
+        "column_type": "static",
+        "label": "Date Offset",
+        "control": "z_h4",
+        "align": "center",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
+    },
+    "_priority_id": {
+        "name": "_priority_id",
+        "column_name": "priority_id",
+        "column_type": "bigint",
+        "label": "Priority",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
+    },
+    "_due_date": {
+        "name": "_due_date",
+        "column_name": "due_date",
+        "column_type": "datetime",
+        "label": "Due Date",
+        "control": "picker_datetime",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     }
 }

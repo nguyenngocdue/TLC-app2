@@ -2,7 +2,7 @@ const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="
 const getEById = (id) => $("[id='" + id + "']")
 // const removeParenthesis = (str) => (str.includes("()")) ? str.substring(0, str.length - 2) : str
 
-let k = {}, listenersOfDropdown2 = {}, filtersOfDropdown2 = {}, debugListener = false
+let k = {}, listenersOfDropdown2 = {}, filtersOfDropdown2 = {}, debugListener = !false
 
 const filterDropdown2 = (column_name, dataSource) => {
     if (filtersOfDropdown2[column_name] !== undefined) {
@@ -116,12 +116,30 @@ const onChangeDropdown2Dot = (listener) => {
     }
 }
 
+const onChangeDropdown2DateOffset = (listener) => {
+    if (debugListener) console.log("Date Offset", listener)
+    const selectedObject = onChangeGetSelectedObject(listener)
+
+    const { listen_to_attrs, column_name } = listener
+    const listen_to_attr = listen_to_attrs[0]
+    console.log(listen_to_attr, column_name, selectedObject)
+    if (selectedObject !== undefined) {
+        const theValue = selectedObject[listen_to_attr]
+        if (debugListener) console.log(theValue)
+
+        getEById(column_name).val(theValue)
+        getEById(column_name).trigger('change')
+        if (debugListener) console.log("Date Offset", column_name, "with value", theValue)
+    }
+}
+
 const onChangeDropdown2 = (name) => {
-    // console.log("onChangeDropdown2", name, control.value)
+    // console.log("onChangeDropdown2", name, listenersOfDropdown2)
     for (let i = 0; i < listenersOfDropdown2.length; i++) {
         let listener = listenersOfDropdown2[i]
         const { triggers, listen_action } = listener
         if (triggers.includes(name)) {
+            // console.log("listen_action", listen_action)
             switch (listen_action) {
                 case "reduce":
                     onChangeDropdown2Reduce(listener)
@@ -132,8 +150,11 @@ const onChangeDropdown2 = (name) => {
                 case "dot":
                     onChangeDropdown2Dot(listener)
                     break;
+                case "date_offset":
+                    onChangeDropdown2DateOffset(listener)
+                    break;
                 default:
-                    console.warn("Unknown listen_action", listen_action);
+                    console.error("Unknown listen_action", listen_action, "of", name);
                     break;
             }
         }
