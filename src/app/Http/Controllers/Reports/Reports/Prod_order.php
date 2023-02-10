@@ -7,7 +7,6 @@ use App\Http\Controllers\Reports\Report_ParentController;
 class Prod_order extends Report_ParentController
 
 {
-    protected $viewName = 'report-prod-records';
     public function getSqlStr()
     {
         $sql = "SELECT 
@@ -30,7 +29,7 @@ class Prod_order extends Report_ParentController
                 ";
         return $sql;
     }
-    public function getTableColumns()
+    public function getTableColumns($dataSource = [])
     {
         return [
             [

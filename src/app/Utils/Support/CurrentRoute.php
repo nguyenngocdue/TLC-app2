@@ -30,6 +30,14 @@ class CurrentRoute
         return substr($result, strpos($result, '@') + 1);
     }
 
+    public static function getTypeController()
+    {
+        $result = Route::current()->action['controller'];
+        $parserStr = explode('\\', $result);
+        return $parserStr[4];
+    }
+
+
     public static function getControllerAs()
     {
         $result = Route::current()->action['as'];

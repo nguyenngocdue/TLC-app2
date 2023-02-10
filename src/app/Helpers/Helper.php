@@ -414,4 +414,25 @@ class Helper
         $elementRel = array_values(array_filter($relationships, fn ($item) => $item['control_name'] === $colName))[0] ?? [];
         return (count($elementRel) && $tempSpan = $elementRel["radio_checkbox_colspan"]) ? $tempSpan : 3;
     }
+    public static function mergeArrayValues($grouped_array)
+    {
+        $result = [];
+        foreach (array_keys($grouped_array) as $key) {
+            $result[] = array_merge(...$grouped_array[$key]);
+        }
+        return $result;
+    }
+    public static function slugName($string)
+    {
+        $strLower = strtolower($string);
+        return str_replace(" ", "_", $strLower);
+    }
+    public static function groupArrayByKey($dataSource, $key)
+    {
+        $groupedArray = [];
+        foreach ($dataSource as $element) {
+            $groupedArray[$element[$key]][] = $element;
+        }
+        return $groupedArray;
+    }
 }

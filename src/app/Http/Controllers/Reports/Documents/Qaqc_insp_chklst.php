@@ -60,7 +60,7 @@ class Qaqc_insp_chklst extends Report_ParentController
             ORDER BY line_name,  run_updated DESC ";
         return $sql;
     }
-    public function getTableColumns()
+    public function getTableColumns($dataSource = [])
     {
         return [
             [
