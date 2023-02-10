@@ -17,6 +17,7 @@
         "checkbox",
         "dropdown",
         "dropdown_multi",
+        "hyperlink",
         "id",
         "number",
         "picker_datetime",

@@ -43,6 +43,39 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_external_doc_link": {
+        "name": "_external_doc_link",
+        "column_name": "external_doc_link",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",

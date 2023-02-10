@@ -97,6 +97,10 @@ return new class extends Migration
         Schema::table('pj_pods', function (Blueprint $table) {
             $table->foreign('pj_module_id')->references('id')->on('pj_modules');
         });
+        Schema::table('pj_shipments', function (Blueprint $table) {
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('sub_project_id')->references('id')->on('sub_projects');
+        });
         //************** HSE MODULE **************/
         Schema::table('hse_incident_reports', function (Blueprint $table) {
             $table->foreign('work_area_id')->references('id')->on('work_areas');

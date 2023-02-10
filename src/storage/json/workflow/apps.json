@@ -29,16 +29,6 @@
         "status": null,
         "icon": null
     },
-    "dashboard": {
-        "name": "dashboard",
-        "hidden": null,
-        "package": "system",
-        "sub_package": "system_admin",
-        "title": "Dashboard",
-        "nickname": null,
-        "status": null,
-        "icon": null
-    },
     "department": {
         "name": "department",
         "hidden": null,
@@ -125,6 +115,56 @@
         "package": "system",
         "sub_package": "system_permission",
         "title": "Permissions",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "pj_module": {
+        "name": "pj_module",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Project Modules",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "pj_pod": {
+        "name": "pj_pod",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Project Pods",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "pj_shipment": {
+        "name": "pj_shipment",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Project Shipments",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "pj_staircase": {
+        "name": "pj_staircase",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Project Staircases",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "pj_unit": {
+        "name": "pj_unit",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Project Units",
         "nickname": null,
         "status": null,
         "icon": null

@@ -15,6 +15,14 @@
         "listen_to_fields": "wir_description_id",
         "listen_to_attrs": "getDefMonitors()"
     },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
@@ -55,14 +63,6 @@
         "listen_to_fields": "",
         "listen_to_attrs": ""
     },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
@@ -82,22 +82,6 @@
     "_prod_routing_id": {
         "name": "_prod_routing_id",
         "column_name": "prod_routing_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_pj_level_id": {
-        "name": "_pj_level_id",
-        "column_name": "pj_level_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_pj_type_id": {
-        "name": "_pj_type_id",
-        "column_name": "pj_type_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
