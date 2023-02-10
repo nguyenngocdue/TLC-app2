@@ -4,7 +4,7 @@ use App\Http\Controllers\AppMenuController;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\ReportIndexController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\WelcomeFortuneController;
@@ -36,6 +36,7 @@ Route::group([
         // Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
         // Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');
     });
+    Route::get('reports', [ReportIndexController::class, 'index'])->name('reportIndices.index');
     Route::group([
         'prefix' => 'reports'
     ], function () use ($entities) {
@@ -46,16 +47,18 @@ Route::group([
             Route::group([
                 'middleware' => "role:ADMIN-DATA-" . Str::upper($entityName),
             ], function () use ($singular, $ucfirstName) {
+
                 $path = "App\\Http\\Controllers\\Reports\\Reports\\{$ucfirstName}";
-                Route::get('report-' . $singular, [$path, 'index']);
+                $name = 'report-' . $singular;
+                Route::get($name, [$path, 'index'])->name($name);
 
                 $path = "App\\Http\\Controllers\\Reports\\Registers\\{$ucfirstName}";
-                Route::get('register-' . $singular, [$path, 'index']);
-
-                // dump($path);
+                $name = 'register-' . $singular;
+                Route::get($name, [$path, 'index'])->name($name);
 
                 $path = "App\\Http\\Controllers\\Reports\\Documents\\{$ucfirstName}";
-                Route::get('document-' . $singular, [$path, 'index']);
+                $name = 'document-' . $singular;
+                Route::get($name, [$path, 'index'])->name($name);
             });
         }
     });
@@ -127,7 +130,7 @@ Route::group([
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 // Route::get('/mail-test', [MailController::class, 'index']);
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
-Route::get('test', [HomeController::class, 'index']);
+// Route::get('test', [HomeController::class, 'index']);
 
 Route::resource('welcome', WelcomeController::class)->only('index');
 // Route::resource('welcome-due', WelcomeDueController::class)->only('index');
@@ -143,4 +146,5 @@ Route::group([
     Route::resource('manageWidgets', ManageWidgetsController::class)->only('index', 'store', 'create');
     Route::resource('manageApps', ManageAppsController::class)->only('index', 'store', 'create');
 });
+
 Route::get('components', [ComponentDemo::class, 'index']);
