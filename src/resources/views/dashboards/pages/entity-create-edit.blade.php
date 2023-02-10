@@ -19,10 +19,6 @@ $id = $action === "edit" ? $values->id : "";
 
 </script>
 
-@if ($action === "edit")
-<a class="text-blue-500 hover:text-gray-400" href="{{ route($editType.'.show', $id) }}">show</a></li>
-@endif
-
 <x-controls.header-alert-validation :strProps="$props" />
 <form class="w-full mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? 0 : $id )}} ">
     @csrf
@@ -192,8 +188,8 @@ $id = $action === "edit" ? $values->id : "";
         </div>
         @endforeach
     </div>
-    <div class="flex justify-left border-t-2 dark:bg-gray-800 px-5 mb-4">
-        <button type="submit" class="mt-4 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-bold text-white hover:bg-purple-400 focus:outline-none">
+    <div class="flex justify-left border-t-2 dark:bg-gray-800 px-5">
+        <button type="submit" class="m-4 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-bold text-white hover:bg-purple-400 focus:outline-none">
             @switch($action)
             @case('edit')
             Update

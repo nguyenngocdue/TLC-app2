@@ -8,11 +8,6 @@ use Illuminate\Support\Str;
 
 class CurrentRoute
 {
-    public static function getTypePluralPretty()
-    {
-        return Str::headline(self::getTypePlural());
-    }
-
     public static function getTypeSingular()
     {
         $type = Route::current()->getController()->getType();
@@ -24,12 +19,14 @@ class CurrentRoute
         return Str::plural(self::getTypeSingular());
     }
 
+    /** This will return index, create, edit, show,... */
     public static function getControllerAction()
     {
         $result = Route::current()->action['controller'];
         return substr($result, strpos($result, '@') + 1);
     }
 
+    /** This will return entity name: Hse_incident_report ... */
     public static function getTypeController()
     {
         $result = Route::current()->action['controller'];
@@ -37,7 +34,15 @@ class CurrentRoute
         return $parserStr[4];
     }
 
+    public static function getEntityId($typeSingular)
+    {
+        $current = Route::current();
+        // $typeSingular = $current->controller->getType();
+        $result = $current->parameters[$typeSingular] ?? null;
+        return $result;
+    }
 
+    /** This will return hse_incident_reports.edit */
     public static function getControllerAs()
     {
         $result = Route::current()->action['as'];
