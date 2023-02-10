@@ -17,7 +17,7 @@ abstract class AbstractManageLibController extends Controller
 
     public function getType()
     {
-        return "workflow";
+        return $this->route;
     }
 
     abstract protected function getColumns();

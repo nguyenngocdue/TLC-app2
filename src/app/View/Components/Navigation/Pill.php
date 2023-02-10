@@ -12,7 +12,7 @@ class Pill extends Component
     {
         $type = CurrentRoute::getTypePlural();
         $singular = CurrentRoute::getTypeSingular();
-        if (in_array($singular, ['dashboard', 'permission', 'workflow'])) return "";
+        // if (in_array($singular, ['dashboard', 'permission', 'workflow'])) return "";
 
         $model = "App\\Models\\" . Str::ucfirst($singular);
         $first = $model::first();
