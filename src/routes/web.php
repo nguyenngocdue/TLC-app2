@@ -4,6 +4,7 @@ use App\Http\Controllers\AppMenuController;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\WelcomeController;
@@ -36,6 +37,7 @@ Route::group([
         // Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
         // Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');
     });
+    Route::get('reports', [ReportController::class, 'index']);
     Route::group([
         'prefix' => 'reports'
     ], function () use ($entities) {
@@ -46,16 +48,18 @@ Route::group([
             Route::group([
                 'middleware' => "role:ADMIN-DATA-" . Str::upper($entityName),
             ], function () use ($singular, $ucfirstName) {
+
                 $path = "App\\Http\\Controllers\\Reports\\Reports\\{$ucfirstName}";
-                Route::get('report-' . $singular, [$path, 'index']);
+                $name = 'report-' . $singular;
+                Route::get($name, [$path, 'index'])->name($name);
 
                 $path = "App\\Http\\Controllers\\Reports\\Registers\\{$ucfirstName}";
-                Route::get('register-' . $singular, [$path, 'index']);
-
-                // dump($path);
+                $name = 'register-' . $singular;
+                Route::get($name, [$path, 'index'])->name($name);
 
                 $path = "App\\Http\\Controllers\\Reports\\Documents\\{$ucfirstName}";
-                Route::get('document-' . $singular, [$path, 'index']);
+                $name = 'document-' . $singular;
+                Route::get($name, [$path, 'index'])->name($name);
             });
         }
     });
@@ -143,4 +147,5 @@ Route::group([
     Route::resource('manageWidgets', ManageWidgetsController::class)->only('index', 'store', 'create');
     Route::resource('manageApps', ManageAppsController::class)->only('index', 'store', 'create');
 });
+
 Route::get('components', [ComponentDemo::class, 'index']);
