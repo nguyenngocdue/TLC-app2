@@ -36,7 +36,9 @@ class QrCode extends Component
             $href =  $route_exits ? route($route_name, $id) : "#";
             $color =  $route_exits ? "blue" : "red";
 
-            $hyperlink_qr = "<a href='$href' class='inline-block text-{$color}-500'><i class='fa-duotone fa-qrcode'></i></a>";
+            $icon = "<i class='fa-duotone fa-qrcode'></i>";
+            $hyperlink_qr = "<a href='$href' class='inline-block text-{$color}-500'>$icon</a>";
+            // $hyperlink_qr  = "<div class='bg-green-100'>$hyperlink_qr</div>";
 
             return $hyperlink_qr;
         };

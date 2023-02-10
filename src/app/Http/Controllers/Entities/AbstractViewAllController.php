@@ -235,6 +235,10 @@ abstract class AbstractViewAllController extends Controller
                 case "thumbnail":
                     $output['renderer'] = "thumbnail";
                     break;
+                case "hyperlink":
+                    $output['renderer'] = "hyper-link";
+                    $output['align'] = 'center';
+                    break;
                 default:
                     break;
             }

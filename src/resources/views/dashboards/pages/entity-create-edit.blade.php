@@ -114,6 +114,7 @@ $id = $action === "edit" ? $values->id : "";
                         @case('id')
                         <x-controls.id name={{$columnName}} value="{{$action === 'edit' ? $value : 'to be generated'}}" />
                         @break
+                        @case('hyperlink')
                         @case('text')
                         @case('thumbnail')
                         <x-controls.text name={{$columnName}} value={{$value}} />
@@ -176,8 +177,10 @@ $id = $action === "edit" ? $values->id : "";
                         <x-feedback.alert type="warning" title="Warning" message="{{$control}} suppose to show in View All screen only, please do not show in Edit screen." />
                         @break
 
+                        
+
                         @default
-                        <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}]" />
+                        <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />
                         @break
                         @endswitch
                     </div>

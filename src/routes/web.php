@@ -36,7 +36,7 @@ Route::group([
         // Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
         // Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');
     });
-    Route::get('reports', [ReportIndexController::class, 'index']);
+    Route::get('reports', [ReportIndexController::class, 'index'])->name('reportIndices.index');
     Route::group([
         'prefix' => 'reports'
     ], function () use ($entities) {
@@ -130,7 +130,7 @@ Route::group([
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 // Route::get('/mail-test', [MailController::class, 'index']);
 // Route::post('/mail-test', [MailController::class, 'sendMail'])->name('send_mail');
-Route::get('test', [HomeController::class, 'index']);
+// Route::get('test', [HomeController::class, 'index']);
 
 Route::resource('welcome', WelcomeController::class)->only('index');
 // Route::resource('welcome-due', WelcomeDueController::class)->only('index');
