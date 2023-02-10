@@ -2,47 +2,49 @@
 
 namespace App\Http\Controllers\Reports\Documents;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Reports\Report_ParentController;
 
 class Qaqc_insp_chklst extends Report_ParentController
 {
     protected $viewName = 'document-qaqc-insp-chklst';
 
-    public function getSqlStr()
+    public function getSqlStr($urlParams)
     {
         $sql =  " SELECT
-                po.id
-                ,s.id AS sheet_id
-                ,r.id AS run_id
-                ,r.updated_at AS run_updated
-                ,r.description run_desc
+                        po.id
+                        ,r.qaqc_insp_chklst_sht_id AS sheet_id
+                        ,s.description AS sheet_name
+                        ,r.id AS run_id
+                        ,r.updated_at AS run_updated
+                        ,r.description run_desc
 
-                ,l.id AS line_id
-                ,l.description AS line_description
-                ,l.name AS line_name
+                        ,l.id AS line_id
+                        ,l.description AS line_description
+                        ,l.name AS line_name
+                        
+                        
+                        ,cv.id AS control_value_id
+                        ,cv.name AS control_value_name
+                        ,cv.qaqc_insp_control_group_id control_group_id
+                    
+                        ,ct.id AS control_type_id
+                        ,ct.name AS control_type_name
+                        ,g.id AS group_id
+                        ,g.description AS group_description
+                        ,ts.id AS tmpl_sheet_id
+                        ,ts.description AS tmpl_sheet_description
+                        
+                        ,divide_control.c1
+                        ,divide_control.c2
+                        ,divide_control.c3
+                        ,divide_control.c4
                 
-                
-                ,cv.id AS control_value_id
-                ,cv.name AS control_value_name
-                ,cv.qaqc_insp_control_group_id control_group_id
-            
-                ,ct.id AS control_type_id
-                ,ct.name AS control_type_name
-                ,g.id AS group_id
-                ,g.description AS group_description
-                ,ts.id AS tmpl_sheet_id
-                ,ts.description AS tmpl_sheet_description
-                
-                ,divide_control.c1
-                ,divide_control.c2
-                ,divide_control.c3
-                ,divide_control.c4
-                
-                
+
             FROM qaqc_insp_chklst_runs r
-                JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id
-                JOIN prod_orders po ON po.id = '{{po}}'
-                JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
+                JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id";
+        if (isset($urlParams['prod_order_id'])) $sql .= " \n JOIN prod_orders po ON po.id = '{{prod_order_id}}' \n";
+        $sql .= " \n JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
                 JOIN control_types ct ON ct.id = l.control_type_id
                 LEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
                 JOIN qaqc_insp_groups g ON g.id = l.qaqc_insp_group_id
@@ -56,10 +58,14 @@ class Qaqc_insp_chklst extends Report_ParentController
                         FROM qaqc_insp_control_groups AS cg
                                 )  AS divide_control ON l.qaqc_insp_control_group_id = divide_control.control_group_id
             
-            WHERE r.qaqc_insp_chklst_sht_id = '{{sheet_id}}'
-            ORDER BY line_name,  run_updated DESC ";
+                        WHERE 1=1";
+        if (isset($urlParams['sheet_id'])) $sql .= " \n AND r.qaqc_insp_chklst_sht_id = '{{sheet_id}}' \n";
+        $sql .= "\n ORDER BY line_name,  run_updated DESC ";
         return $sql;
     }
+
+
+
     public function getTableColumns($dataSource = [])
     {
         return [
@@ -76,8 +82,9 @@ class Qaqc_insp_chklst extends Report_ParentController
 
     protected function enrichDataSource($dataSource)
     {
+        // dd($dataSource);
 
-        // dd($columns);
+
         $circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
         $checkedIcon = "<i class='fa-solid fa-circle-check px-2'></i>";
 
@@ -86,13 +93,14 @@ class Qaqc_insp_chklst extends Report_ParentController
             $lines[$item['line_id']] = $item;
         }
 
-        $id_lineDesc = array_column($dataSource, 'line_description', 'line_id');
-        $desc_ids = [];
-        foreach ($id_lineDesc as $id => $value) {
-            $desc_ids[$value][] = $id;
+        $line_id_lineDesc = array_column($dataSource, 'line_description', 'line_id');
+        // dd($line_id_lineDesc);
+        $desc_line_ids = [];
+        foreach ($line_id_lineDesc as $id => $value) {
+            $desc_line_ids[$value][] = $id;
         }
         $ids_htmls = [];
-        foreach ($desc_ids as $ids) {
+        foreach ($desc_line_ids as $ids) {
             $str = '';
             foreach ($ids as $id) {
                 $item = $lines[$id];
@@ -115,10 +123,27 @@ class Qaqc_insp_chklst extends Report_ParentController
         }
 
         $dataRender = [];
-        $desc_id = array_column($dataSource, 'line_id', 'line_description');
-        foreach ($desc_id as $id) {
+        // $desc_id = array_column($dataSource, 'line_id', 'line_description');
+        $line_id_desc = array_column($dataSource, 'line_description', 'line_id');
+        foreach ($line_id_desc as $id => $value) {
             $dataRender[] = $lines[$id] + ['response_type' => $ids_htmls[$id]];
         }
-        return $dataRender;
+
+        $out = array_filter($dataRender, fn ($item) => $item['sheet_id'] === 1);
+        // dd($out);
+        // dump($line_id_desc);
+        // dump($lines);
+
+        $groupBy_line_desc = Helper::groupArrayByKey($dataRender, 'line_description');
+
+        $array = [];
+        foreach ($groupBy_line_desc as $key => $value) {
+            $array[] = array_pop($value);
+        }
+
+        $groupBy_sheet_id = Helper::groupArrayByKey($array, 'sheet_id');
+        ksort($groupBy_sheet_id);
+        // dd($groupBy_sheet_id);
+        return $groupBy_sheet_id;
     }
 }

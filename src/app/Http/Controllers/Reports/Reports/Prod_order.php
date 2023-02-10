@@ -7,7 +7,7 @@ use App\Http\Controllers\Reports\Report_ParentController;
 class Prod_order extends Report_ParentController
 
 {
-    public function getSqlStr()
+    public function getSqlStr($urlParams)
     {
         $sql = "SELECT 
                 po.id AS po_id
@@ -24,9 +24,11 @@ class Prod_order extends Report_ParentController
                 FROM prod_orders po
                     LEFT JOIN prod_routing_details prd ON po.prod_routing_id = prd.prod_routing_id
                     LEFT JOIN prod_sequences ps ON po.id = ps.prod_order_id
-                    WHERE po.id = '{{po}}'
-                GROUP BY po.id
-                ";
+                    WHERE 1 = 1 \n";
+        // dump($urlParams);
+        if (isset($urlParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}' \n";
+        if (isset($urlParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'\n ";
+        $sql .=  "GROUP BY po.id";
         return $sql;
     }
     public function getTableColumns($dataSource = [])
