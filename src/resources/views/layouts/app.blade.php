@@ -56,9 +56,9 @@
         {{-- <x-homepage.sidebar2 /> --}}
         <div class="flex flex-col flex-1 w-full">
             <x-homepage.navbar2 />
-            <main class="mt-16 w-full flex-grow bg-gray-100 dark:bg-gray-700 min-h-screen">
+            <main class="mt-16 mb-8 w-full flex-grow bg-green-400 dark:bg-gray-700 no-print">
                 <div class="w-full h-18">
-                    <div class="no-print flex bg-white flex-wrap items-center justify-between h-full text-purple-600 dark:text-purple-300">
+                    <div class="no-print flex bg-white dark:bg-gray-800 flex-wrap items-center justify-between h-full text-purple-600 dark:text-purple-300">
                         <div class="w-full lg:w-1/2 lg:px-6 sm:px-2 md:px-4">
                             <x-renderer.heading level=4>@yield('title', 'Untitled')</x-renderer.heading>
                         </div>
@@ -68,14 +68,16 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="only-print">
+                    {{-- <div class="only-print">
                         TLC LOGO HERE
-                    </div>
-                    <div class="w-full lg:px-6 sm:px-2 md:px-4 mt-3">
-                        @yield('content')
-                    </div>
+                    </div> --}}
+                    
                 </div>
             </main>
+            <div class="w-full "> {{-- lg:px-6 sm:px-2 md:px-4 --}}
+                @yield('content')
+            </div>
+            <div class="mt-8 no-print"></div>
         </div>
     </div>
         {!! Toastr::message() !!}

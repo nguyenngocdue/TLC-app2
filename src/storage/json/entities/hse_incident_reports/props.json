@@ -15,13 +15,13 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_h1a": {
-        "name": "_h1a",
-        "column_name": "h1a",
-        "column_type": "static",
-        "label": "SECTION I: INITIAL INFORMATION",
-        "control": "z_h4",
-        "align": "center",
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "column_type": "string",
+        "label": "Issue Title",
+        "control": "text",
+        "align": "",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "",
@@ -31,13 +31,13 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
-        "column_type": "string",
-        "label": "Issue Title",
-        "control": "text",
-        "align": "",
+    "_h1a": {
+        "name": "_h1a",
+        "column_name": "h1a",
+        "column_type": "static",
+        "label": "SECTION I: INITIAL INFORMATION",
+        "control": "z_h4",
+        "align": "center",
         "col_span": "12",
         "width": "",
         "hidden_view_all": "",
