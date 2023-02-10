@@ -7,8 +7,9 @@ use App\Http\Controllers\Reports\Report_ParentController;
 
 class Qaqc_insp_chklst_sht extends Report_ParentController
 {
-    public function getSqlStr()
+    public function getSqlStr($urlParams)
     {
+        // dd($urlParams);
         $sql = " SELECT *, 
                         CASE
                             WHEN sheet_status_combine LIKE '%No%' THEN 'Inprogress'
@@ -33,11 +34,12 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
                             sh.id AS sheet_id,
                             MAX(sr.id) AS max_run_id
                             FROM prod_orders po, qaqc_insp_chklsts csh, qaqc_insp_chklst_shts sh, qaqc_insp_chklst_runs sr
-                                WHERE 1 = 1
-                                AND po.sub_project_id = {{sub_project_id}}
-                                AND po.id = csh.prod_order_id
-                                AND csh.id = '{{chklst}}'
-                                AND csh.id = sh.qaqc_insp_chklst_id
+                                WHERE 1 = 1";
+        if (isset($urlParams['sub_project_id'])) $sql .= " \n AND po.sub_project_id = {{sub_project_id}} \n";
+        $sql .= " \n AND po.id = csh.prod_order_id";
+        // dump($urlParams);
+        if (isset($urlParams['chklst'])) $sql .= " \n AND csh.id = '{{chklst}}' \n";
+        $sql .= "\n AND csh.id = sh.qaqc_insp_chklst_id
                                 AND sh.id = sr.qaqc_insp_chklst_sht_id
                                 GROUP BY sh.id
                         ) sub
@@ -50,6 +52,7 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
                         JOIN control_types ct ON ct.id = lr.control_type_id
                         GROUP BY sh.id
                         ) AS tb";
+        // dump($sql);
         return $sql;
     }
     public function getTableColumns($dataSource = [])
@@ -84,11 +87,11 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
     }
     private function changeValueData($dataSource)
     {
-        $iconPass = '<i class="fa-solid fa-circle-check" title="Pass"></i>';
-        $iconInprogress = '<i class="fa-sharp fa-regular fa-circle-stop" title="Inprogress"></i>';
-        $iconOnHold = '<i class="fa-sharp fa-solid fa-circle-euro" title="On Hold"></i>';
-        $iconNA = '<i class="fa-sharp fa-regular fa-circle" title="Na"></i>';
-        $iconNull = '<i class="fa-sharp fa-regular fa-circle" title="Null"></i>';
+        $iconPass = '<div class="bg-green-400"><i class="fa-solid fa-circle-check" title="Pass"></i> </div>';
+        $iconInprogress = '<div class="bg-orange-400"><i class="fa-sharp fa-regular fa-circle-stop" title="Inprogress"></i></di>';
+        $iconOnHold = '<div class="bg-orange-600"><i class="fa-sharp fa-solid fa-circle-euro" title="On Hold"></i></di>';
+        $iconNA = '<div class="bg-blue-400"><i class="fa-sharp fa-regular fa-circle" title="Na"></i></di>';
+        $iconNull = '<div class="bg-gray-400"><i class="fa-sharp fa-regular fa-circle" title="Null"></i></di>';
 
         foreach ($dataSource as $key => $value) {
             $idx = array_search("sheet_status", array_keys($value));
