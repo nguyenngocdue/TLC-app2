@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->unsignedBigInteger('pj_building_id')->nullable();
             $table->unsignedBigInteger('pj_level_id')->nullable();
-            $table->unsignedBigInteger('pj_type_id')->nullable();
+            $table->unsignedBigInteger('pj_module_type_id')->nullable();
             $table->unsignedBigInteger('pj_name_id')->nullable();
             $table->unsignedBigInteger('pj_character_id')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

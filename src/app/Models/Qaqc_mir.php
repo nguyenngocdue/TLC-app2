@@ -159,7 +159,8 @@ class Qaqc_mir extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    public function getNcrs(){
+    public function getNcrs()
+    {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2],$p[3],$p[4]);
     }

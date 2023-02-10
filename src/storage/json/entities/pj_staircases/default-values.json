@@ -65,9 +65,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_pj_type_id": {
-        "name": "_pj_type_id",
-        "column_name": "pj_type_id",
+    "_pj_module_type_id": {
+        "name": "_pj_module_type_id",
+        "column_name": "pj_module_type_id",
         "label": "",
         "default_value": "",
         "validation": "",

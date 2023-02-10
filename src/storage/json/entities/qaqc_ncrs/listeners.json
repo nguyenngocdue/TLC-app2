@@ -79,9 +79,9 @@
         "listen_to_fields": "",
         "listen_to_attrs": ""
     },
-    "_pj_type_id": {
-        "name": "_pj_type_id",
-        "column_name": "pj_type_id",
+    "_pj_module_type_id": {
+        "name": "_pj_module_type_id",
+        "column_name": "pj_module_type_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

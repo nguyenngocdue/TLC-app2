@@ -27,7 +27,7 @@ class Qaqc_ncr extends ModelExtended
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
         'getAssigneeTo' => ["belongsTo", User::class, 'assignee_to'],
         "getPjLevel" => ["belongsTo", Term::class, 'pj_level_id'],
-        "getPjType" => ["belongsTo", Term::class, 'pj_type_id'],
+        "getPjType" => ["belongsTo", Term::class, 'pj_module_type_id'],
         "getInterSubcon" => ["belongsTo", Term::class, 'inter_subcon_id'],
         "getDefectRootCause" => ["belongsTo", Term::class, 'defect_root_cause_id'],
         "getDefectDisposition" => ["belongsTo", Term::class, 'defect_disposition_id'],

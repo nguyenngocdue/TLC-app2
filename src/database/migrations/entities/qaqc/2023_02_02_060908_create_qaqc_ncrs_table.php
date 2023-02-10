@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sub_project_id')->nullable();
             $table->unsignedBigInteger('prod_routing_id')->nullable();
             $table->unsignedBigInteger('pj_level_id')->nullable();
-            $table->unsignedBigInteger('pj_type_id')->nullable();
+            $table->unsignedBigInteger('pj_module_type_id')->nullable();
             $table->unsignedBigInteger('prod_order_id')->nullable();
             $table->unsignedBigInteger('prod_discipline_id')->nullable();
             $table->unsignedBigInteger('prod_discipline_1_id')->nullable();

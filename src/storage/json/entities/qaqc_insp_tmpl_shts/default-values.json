@@ -75,16 +75,6 @@
         "placeholder": "",
         "default_value": "",
         "control_extra": ""
-    },
-    "_getRuns": {
-        "name": "_getRuns",
-        "column_name": "getRuns",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
+   
     }
 }

@@ -28,7 +28,7 @@
     "_getPjType": {
         "name": "_getPjType",
         "relationship": "belongsTo",
-        "control_name": "pj_type_id",
+        "control_name": "pj_module_type_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

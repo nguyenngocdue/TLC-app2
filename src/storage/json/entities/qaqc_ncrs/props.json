@@ -159,9 +159,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_pj_type_id": {
-        "name": "_pj_type_id",
-        "column_name": "pj_type_id",
+    "_pj_module_type_id": {
+        "name": "_pj_module_type_id",
+        "column_name": "pj_module_type_id",
         "column_type": "bigint",
         "label": "Modular Type",
         "control": "dropdown",

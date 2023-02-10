@@ -43,28 +43,7 @@
         "default_value": "",
         "control_extra": ""
     },
-    "_production": {
-        "name": "_production",
-        "column_name": "production",
-        "label": "",
-        "validation": "required",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
-    "_compliance": {
-        "name": "_compliance",
-        "column_name": "compliance",
-        "label": "",
-        "validation": "required",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
+   
     "_description": {
         "name": "_description",
         "column_name": "description",
