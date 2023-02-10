@@ -1228,6 +1228,9 @@ video {
 .rounded-md {
   border-radius: 0.375rem;
 }
+.rounded-sm {
+  border-radius: 0.125rem;
+}
 .rounded-t {
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
@@ -2315,6 +2318,10 @@ video {
 .py-10 {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
+}
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 .pt-2 {
   padding-top: 0.5rem;

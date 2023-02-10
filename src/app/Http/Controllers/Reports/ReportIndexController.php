@@ -1,14 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Reports;
 
+use App\Http\Controllers\Controller;
 use App\Utils\Support\Entities;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-class ReportController extends Controller
+class ReportIndexController extends Controller
 {
+    public function getType()
+    {
+        return "reportIndex";
+    }
+
     private function getDataSource()
     {
         $entities = Entities::getAll();
@@ -31,17 +37,9 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $dataSource = $this->getDataSource();
-        dump($dataSource);
-        echo "<ul>";
-        foreach ($dataSource as $plural => $listOfReports) {
-            echo "<li>" . Str::appTitle($plural) . "</li>";
-            echo "<ul>";
-            foreach ($listOfReports as $name => $path) {
-                $route = route($path);
-                echo "<li><a href='$route'>$name</a></li>";
-            }
-            echo "</ul>";
-        }
-        echo "</ul>";
+        // dump($dataSource);
+        return view("reports.report-index", [
+            'dataSource' => $dataSource,
+        ]);
     }
 }

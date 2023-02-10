@@ -17,7 +17,7 @@ class Breadcrumb extends Component
     {
         $type = CurrentRoute::getTypePlural();
         $singular = CurrentRoute::getTypeSingular();
-        if (in_array($singular, ['dashboard', 'permission', 'manageApp', 'manageStatus', 'manageWidget',])) return "";
+        if (in_array($singular, ['dashboard', 'permission', 'manageApp', 'manageStatus', 'manageWidget', 'reportIndex'])) return "";
 
         $links = [];
         $isAdmin = CurrentUser::isAdmin();

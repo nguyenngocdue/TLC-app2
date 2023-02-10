@@ -4,8 +4,7 @@ use App\Http\Controllers\AppMenuController;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\ReportIndexController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\WelcomeFortuneController;
@@ -37,7 +36,7 @@ Route::group([
         // Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
         // Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');
     });
-    Route::get('reports', [ReportController::class, 'index']);
+    Route::get('reports', [ReportIndexController::class, 'index']);
     Route::group([
         'prefix' => 'reports'
     ], function () use ($entities) {
