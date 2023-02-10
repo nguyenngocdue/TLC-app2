@@ -5,8 +5,8 @@
         <div class="flex ">
             <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
                 <button type="button" class=" text-gray-900 bg-orange-400 focus:shadow-outline border border-gray-200 focus:outline-none hover:bg-purple-400  font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700" @click="clearAdvanceFilter()">
-                    <i class="fa-light fa-circle-check mr-2"></i>
-                    Reset Filter
+                <i class="fa-sharp fa-solid fa-circle-xmark"></i>
+                <span class="ml-2">Reset Filter</span>
                   </button>
         </div>
                 

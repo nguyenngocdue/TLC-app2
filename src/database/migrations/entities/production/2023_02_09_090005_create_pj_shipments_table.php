@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('slug')->unique();
+            $table->unsignedBigInteger('project_id')->nullable();
+            $table->unsignedBigInteger('sub_project_id')->nullable();
+            $table->text('external_doc_link')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
