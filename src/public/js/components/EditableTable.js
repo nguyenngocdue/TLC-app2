@@ -270,10 +270,18 @@ const addANewLine = (params) => {
         cell.classList = "p1x-1 p1y-1 dark:border-gray-600 border-r text-center " + hidden;
         // console.log("Insert column", column['dataIndex'], renderer)
         cell.innerHTML = renderer
+
+        if (column['renderer'] === 'dropdown2') {
+            const dataSource = k[tableId]
+            console.log("render dataSource for", name, tableId, dataSource, column)
+            // reloadDataToDropdown2(id, dataSource, lineEntity, '[]')
+        }
+
         if (column['value_as_parent_id'] == true) {
             value = $('#entityParentId').val()
             // console.log(value)
             cell.firstChild.value = value
+            //trigger here if need
         }
     })
     if (showNoR) { //<< Ignore No. column

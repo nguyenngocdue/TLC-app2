@@ -5,9 +5,9 @@ namespace App\View\Components\Controls\HasDataSource;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
-class Dropdown2 extends Component
+class Dropdown4 extends Component
 {
-    use HasDataSource;
+    // use HasDataSource;
     public function __construct(
         private $name,
         private $selected = null,
@@ -15,6 +15,7 @@ class Dropdown2 extends Component
         private $type = null,
 
         private $table01Name = null,
+        private $tableName = null,
         private $lineType = null,
     ) {
         $old = old($name);
@@ -32,11 +33,9 @@ class Dropdown2 extends Component
 
     public function render()
     {
-        $eloquentOrOracy = $this->multiple ? "oracyParams" : "eloquentParams";
-
         $id = $this->name;
         $name = $this->multiple ? $this->name . "[]" : $this->name;
-        $table = $this->getTableEOO($eloquentOrOracy);
+        $table = $this->tableName;
         $params = [
             'name' => $name,
             'id' => $id,
@@ -44,8 +43,10 @@ class Dropdown2 extends Component
             'multipleStr' => $this->multiple ? "multiple" : "",
             'className' => "bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
             'table' => $table,
+
+            'lineType' => $this->lineType,
         ];
         // dump($params);
-        return view('components.controls.has-data-source.dropdown2', $params);
+        return view('components.controls.has-data-source.dropdown4', $params);
     }
 }

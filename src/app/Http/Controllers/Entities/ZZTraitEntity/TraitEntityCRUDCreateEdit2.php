@@ -18,14 +18,13 @@ trait TraitEntityCRUDCreateEdit2
 	public function create()
 	{
 		$types = [
-			$this->type,
 			'hse_corrective_action',
 			'zunit_test_02',
 			'zunit_test_09',
 		];
 		$props = $this->getCreateEditProps();
 		$values =  (object) $this->loadValueOfOrphanAttachments($props);
-		// dump($props);
+		$tableBluePrint = $this->makeTableBluePrint();
 		return view('dashboards.pages.entity-create-edit', [
 			'props' => $props,
 			'defaultValues' => DefaultValues::getAllOf($this->type),
@@ -36,21 +35,23 @@ trait TraitEntityCRUDCreateEdit2
 			'title' => "Add New",
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
 			'listenerDataSource' => $this->renderListenDataSource($types),
-			'listeners' => $this->getListeners($types),
-			'filters' => $this->getFilters($types),
+			'listeners2' => $this->getListeners2($this->type),
+			'filters2' => $this->getFilters2($this->type),
+			'listeners4' => $this->getListeners4($tableBluePrint),
+			'filters4' => $this->getFilters4($tableBluePrint),
 		]);
 	}
 
 	public function edit($id)
 	{
 		$types = [
-			$this->type,
 			'hse_corrective_action',
 			'zunit_test_02',
 			'zunit_test_09',
 		];
 		$props = $this->getCreateEditProps();
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($id, $props);
+		$tableBluePrint = $this->makeTableBluePrint();
 		return view('dashboards.pages.entity-create-edit', [
 			'props' => $props,
 			'defaultValues' => DefaultValues::getAllOf($this->type),
@@ -61,8 +62,10 @@ trait TraitEntityCRUDCreateEdit2
 			'title' => "Edit",
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
 			'listenerDataSource' => $this->renderListenDataSource($types),
-			'listeners' => $this->getListeners($types),
-			'filters' => $this->getFilters($types),
+			'listeners2' => $this->getListeners2($this->type),
+			'filters2' => $this->getFilters2($this->type),
+			'listeners4' => $this->getListeners4($tableBluePrint),
+			'filters4' => $this->getFilters4($tableBluePrint),
 		]);
 	}
 
@@ -70,6 +73,21 @@ trait TraitEntityCRUDCreateEdit2
 	{
 		$props = Props::getAllOf($this->type);
 		$result = array_filter($props, fn ($prop) => $prop['hidden_edit'] !== 'true');
+		return $result;
+	}
+
+	private function makeTableBluePrint()
+	{
+		$props = $this->getCreateEditProps();
+		$props = array_values(array_filter($props, fn ($prop) => $prop['control'] == 'relationship_renderer'));
+		$result = [];
+		foreach ($props as $index => $prop) {
+			$table01Name = "table" . str_pad($index + 1, 2, 0, STR_PAD_LEFT);
+			$name = $prop['name'];
+			// dump($this->superProps['props'][$name]);
+			$result[$table01Name] = Str::singular($this->superProps['props'][$name]['relationships']['table']);
+		}
+		// dump($result);
 		return $result;
 	}
 

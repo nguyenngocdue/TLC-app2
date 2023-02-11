@@ -163,45 +163,52 @@ trait TraitEntityListenDataSource
         return $result;
     }
 
-    private function getListeners($types)
+    private function getListeners2($type)
     {
-        $output = [];
-        foreach ($types as $type) {
-            $sp = SuperProps::getFor($type);
-            $result = array_values(Listeners::getAllOf($type));
-            foreach ($result as &$line) {
-                $relationships = $sp['props']["_" . $line['column_name']]['relationships'];
-                unset($line['name']);
-                if (!isset($relationships['table'])) {
-                    $line['table_name'] = $line['column_name'] . " is not a HasDataSource control";
-                } else {
-                    $line['table_name'] = $relationships['table'];
-                }
-                $line['listen_to_tables'] = array_map(fn ($control) => $sp['props']["_" . $control]['relationships']['table'], $line['listen_to_fields']);
-                // $line['filter_columns'] = $relationships['filter_columns'] ?? [];
-                // $line['filter_values'] = $relationships['filter_values'] ?? [];
+        $sp = SuperProps::getFor($type);
+        $result = array_values(Listeners::getAllOf($type));
+        foreach ($result as &$line) {
+            $relationships = $sp['props']["_" . $line['column_name']]['relationships'];
+            unset($line['name']);
+            if (!isset($relationships['table'])) {
+                $line['table_name'] = $line['column_name'] . " is not a HasDataSource control";
+            } else {
+                $line['table_name'] = $relationships['table'];
             }
-            $output[$type] = $result;
+            $line['listen_to_tables'] = array_map(fn ($control) => $sp['props']["_" . $control]['relationships']['table'], $line['listen_to_fields']);
         }
-
-        return $output;
+        return $result;
     }
 
-    private function getFilters($types)
+    private function getFilters2($type)
     {
-        $output = [];
-        foreach ($types as $type) {
-            $sp = SuperProps::getFor($type);
-            $result = [];
-            foreach ($sp['props'] as $prop) {
-                if (isset($prop['relationships']['filter_columns']) && sizeof($prop['relationships']['filter_columns']) > 0) {
-                    $result[$prop['column_name']]['filter_columns'] = ($prop['relationships']['filter_columns']);
-                    $result[$prop['column_name']]['filter_values'] = ($prop['relationships']['filter_values']);
-                }
+        $sp = SuperProps::getFor($type);
+        $result = [];
+        foreach ($sp['props'] as $prop) {
+            if (isset($prop['relationships']['filter_columns']) && sizeof($prop['relationships']['filter_columns']) > 0) {
+                $result[$prop['column_name']]['filter_columns'] = ($prop['relationships']['filter_columns']);
+                $result[$prop['column_name']]['filter_values'] = ($prop['relationships']['filter_values']);
             }
-            $output[$type] = $result;
         }
-        // dump($output);
-        return $output;
+        return $result;
+    }
+
+    private function getListeners4($tableBluePrint)
+    {
+        $result = [];
+        foreach ($tableBluePrint as $table01Name => $type) {
+            // $result[$type] = $this->getListeners2($type);
+            $result[$table01Name] = $this->getListeners2($type);
+        }
+        return $result;
+    }
+    private function getFilters4($tableBluePrint)
+    {
+        $result = [];
+        foreach ($tableBluePrint as $table01Name => $type) {
+            // $result[$type] = $this->getListeners2($type);
+            $result[$table01Name] = $this->getFilters2($type);
+        }
+        return $result;
     }
 }

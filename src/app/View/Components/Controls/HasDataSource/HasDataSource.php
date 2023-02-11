@@ -10,21 +10,14 @@ trait HasDataSource
 {
     private $loadFilterColumnByPHP = true;
 
-    function getName()
+    function getControlName()
     {
-        $name = $this->name;
-        if (str_starts_with($this->name, $this->table01Name)) {
-            $name = substr($this->name, strlen($this->table01Name) + 1); // table01[hse_incident_report_id][0] => hse_incident_report_id][0]
-            $name = substr($name, 0, strpos($name, "]"));
-        }
-        // dump($this->table01Name, $this->name, $name);
-        $name = "_" . $name;
+        $name = "_" . $this->name;
         return $name;
     }
 
     function getType()
     {
-        // dump($this->type);
         $type = $this->type;
         return $type;
     }
@@ -32,7 +25,7 @@ trait HasDataSource
     function getRelatedModelEOO($eloquentOrOracy)
     {
         $sp = SuperProps::getFor($this->getType());
-        $name = $this->getName();
+        $name = $this->getControlName();
         if (isset($sp['props'][$name]['relationships'][$eloquentOrOracy])) {
             $params = $sp['props'][$name]['relationships'][$eloquentOrOracy];
             $relatedModel = $params[1];
@@ -55,7 +48,7 @@ trait HasDataSource
         $relatedModel = $this->getRelatedModelEOO($eloquentOrOracy);
         if ($this->loadFilterColumnByPHP) {
             $sp = SuperProps::getFor($this->getType());
-            $name = $this->getName();
+            $name = $this->getControlName();
             $table = (new $relatedModel)->getTable();
             $dataSource = DB::table($table);
 
@@ -97,7 +90,7 @@ trait HasDataSource
     function getSpan()
     {
         $sp = SuperProps::getFor($this->getType());
-        $name = $this->getName();
+        $name = $this->getControlName();
         return $sp['props'][$name]['relationships']['radio_checkbox_colspan'];
     }
 }

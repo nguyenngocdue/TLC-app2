@@ -1,14 +1,14 @@
-const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="flex justify-between px-1"><span>${state.text}</span><span>${state.id}</span></div>`)
-const getEById = (id) => $("[id='" + id + "']")
+// const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="flex justify-between px-1"><span>${state.text}</span><span>${state.id}</span></div>`)
+// const getEById = (id) => $("[id='" + id + "']")
 // const removeParenthesis = (str) => (str.includes("()")) ? str.substring(0, str.length - 2) : str
 
-let k = {}, listenersOfDropdown2 = {}, filtersOfDropdown2 = {}, debugListener = false
+let listenersOfDropdown4s = {}, filtersOfDropdown4s = {}
 
-const filterDropdown2 = (column_name, dataSource) => {
-    // const filtersOfDropdown2 = filtersOfDropdown2s[lineType]
-    // console.log(filtersOfDropdown2s, filtersOfDropdown2, column_name, lineType)
-    if (filtersOfDropdown2[column_name] !== undefined) {
-        const { filter_columns, filter_values } = filtersOfDropdown2[column_name]
+const filterDropdown4 = (column_name, dataSource, lineType) => {
+    const filtersOfDropdown4 = filtersOfDropdown4s[lineType]
+    // console.log(filtersOfDropdown4s, filtersOfDropdown4, column_name, lineType)
+    if (filtersOfDropdown4[column_name] !== undefined) {
+        const { filter_columns, filter_values } = filtersOfDropdown4[column_name]
         //Filter by filter_columns and filter_values
         for (let i = 0; i < filter_columns.length; i++) {
             const column = filter_columns[i]
@@ -22,7 +22,7 @@ const filterDropdown2 = (column_name, dataSource) => {
     return dataSource
 }
 
-const onChangeDropdown2Reduce = (listener) => {
+const onChangeDropdown4Reduce = (listener, lineType) => {
     // const debugListener = false
     if (debugListener) console.log("Reduce listener", listener)
     const { column_name, table_name, listen_to_attrs, triggers } = listener
@@ -58,25 +58,25 @@ const onChangeDropdown2Reduce = (listener) => {
     }
 
     if (debugListener) console.log("DataSource AFTER reduce", dataSource)
-    // console.log('onChangeDropdown2Reduce')
+    // console.log('onChangeDropdown4Reduce')
     const lastSelected = getEById(column_name).val()
     // console.log("Selected", lastSelected)
     //TODO: make selected array if dropdown is multiple
-    reloadDataToDropdown2(column_name, dataSource, [lastSelected * 1])
+    reloadDataToDropdown4(column_name, dataSource, lineType, [lastSelected * 1])
 }
-const onChangeGetSelectedObject = (listener) => {
-    const { listen_to_fields, listen_to_tables } = listener
-    const listen_to_field = listen_to_fields[0]
-    const listen_to_table = listen_to_tables[0]
-    const selectedId = getEById(listen_to_field).val()
+// const onChangeGetSelectedObject = (listener) => {
+//     const { listen_to_fields, listen_to_tables } = listener
+//     const listen_to_field = listen_to_fields[0]
+//     const listen_to_table = listen_to_tables[0]
+//     const selectedId = getEById(listen_to_field).val()
 
-    const table = k[listen_to_table]
-    const selectedObject = table.find((i) => i['id'] == selectedId)
+//     const table = k[listen_to_table]
+//     const selectedObject = table.find((i) => i['id'] == selectedId)
 
-    return selectedObject
-}
+//     return selectedObject
+// }
 
-const onChangeDropdown2Assign = (listener) => {
+const onChangeDropdown4Assign = (listener) => {
     // const debugListener = false
     if (debugListener) console.log("Assign", listener)
     const { column_name, listen_to_attrs } = listener
@@ -97,7 +97,7 @@ const onChangeDropdown2Assign = (listener) => {
         }
     }
 }
-const onChangeDropdown2Dot = (listener) => {
+const onChangeDropdown4Dot = (listener) => {
     // const debugListener = false
     if (debugListener) console.log("Dot", listener)
     const selectedObject = onChangeGetSelectedObject(listener)
@@ -118,7 +118,7 @@ const onChangeDropdown2Dot = (listener) => {
     }
 }
 
-const onChangeDropdown2DateOffset = (listener) => {
+const onChangeDropdown4DateOffset = (listener) => {
     if (debugListener) console.log("Date Offset", listener)
     const selectedObject = onChangeGetSelectedObject(listener)
 
@@ -138,27 +138,28 @@ const onChangeDropdown2DateOffset = (listener) => {
     }
 }
 
-const onChangeDropdown2 = (name) => {
-    console.log("onChangeDropdown2", name)
-    // const listenersOfDropdown2 = listenersOfDropdown2s[lineType]
-    for (let i = 0; i < listenersOfDropdown2.length; i++) {
-        let listener = listenersOfDropdown2[i]
+const onChangeDropdown4 = (name, lineType) => {
+    console.log("onChangeDropdown4", name, lineType)
+    console.log("listenersOfDropdown4s", listenersOfDropdown4s, lineType)
+    const listenersOfDropdown4 = listenersOfDropdown4s[lineType]
+    for (let i = 0; i < listenersOfDropdown4.length; i++) {
+        let listener = listenersOfDropdown4[i]
         const { triggers, listen_action } = listener
         console.log(triggers, listen_action, name)
         if (triggers.includes(name)) {
             console.log("listen_action", listen_action)
             switch (listen_action) {
                 case "reduce":
-                    onChangeDropdown2Reduce(listener)
+                    onChangeDropdown4Reduce(listener, lineType)
                     break;
                 case "assign":
-                    onChangeDropdown2Assign(listener)
+                    onChangeDropdown4Assign(listener)
                     break;
                 case "dot":
-                    onChangeDropdown2Dot(listener)
+                    onChangeDropdown4Dot(listener)
                     break;
                 case "date_offset":
-                    onChangeDropdown2DateOffset(listener)
+                    onChangeDropdown4DateOffset(listener)
                     break;
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);
@@ -168,13 +169,13 @@ const onChangeDropdown2 = (name) => {
     }
 }
 
-const reloadDataToDropdown2 = (id, dataSource, selected) => {
+const reloadDataToDropdown4 = (id, dataSource, lineType, selected) => {
     if (dataSource === undefined) return;
     getEById(id).empty()
 
     let options = []
-    dataSource = filterDropdown2(id, dataSource)
-    // console.log("Loading dataSource for", id, selected, dataSource)
+    console.log("Loading dataSource for", id, selected, dataSource)
+    // dataSource = filterDropdown4(id, dataSource, lineType)
 
     for (let i = 0; i < dataSource.length; i++) {
         let item = dataSource[i]
@@ -200,12 +201,12 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
 
 }
 
-const Dropdown2 = ({ id, name, className, multipleStr }) => {
+const Dropdown4 = ({ id, name, className, multipleStr, lineType }) => {
     let render = ""
     render += "<select "
     render += "id='" + id + "' "
     render += "name='" + name + "' "
-    render += "onChange='onChangeDropdown2(\"" + name + "\")' "
+    render += "onChange='onChangeDropdown4(\"" + name + "\", \"" + lineType + "\")' "
     render += " " + multipleStr + " "
     render += "class='" + className + "' "
     render += ">"
