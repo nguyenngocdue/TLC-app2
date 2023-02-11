@@ -100,7 +100,7 @@ class ManageRelationships extends Manage_Parent
             $control_name = Relationships::getColumnName("_" . $elqName,  $elqValue[0], $columnParams);
 
             if (!isset($allProps["_" . $control_name])) {
-                dump("Cannot find $control_name in $elqName");
+                dump("Cannot find $control_name in $elqName, maybe create it in ManageProps screen.");
             } else {
                 $result["_$elqName"] = [
                     "name" => "_$elqName",

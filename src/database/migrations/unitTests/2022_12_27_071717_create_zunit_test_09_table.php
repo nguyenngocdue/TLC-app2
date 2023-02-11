@@ -16,7 +16,8 @@ return new class extends Migration
     {
         Schema::create('zunit_test_09s', function (Blueprint $table) {
             $table->id();
-            $table->text('content')->nullable();
+            $table->string('name')->nullable();
+
             $table->unsignedBigInteger('department_1')->nullable();
             $table->unsignedBigInteger('user_1')->nullable();
             $table->unsignedBigInteger('department_2')->nullable();
@@ -37,6 +38,9 @@ return new class extends Migration
 
             $table->unsignedBigInteger('priority_id')->nullable();
             $table->dateTime('due_date')->nullable();
+
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedInteger('order_no')->nullable();
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;

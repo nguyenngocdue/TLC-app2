@@ -7,11 +7,14 @@ use App\BigThink\ModelExtended;
 class Zunit_test_02 extends ModelExtended
 {
     protected $fillable = [
-        'content',
+        'name',
         'radio_yes_no',
         'radio_pass_fail',
         'dropdown_yes_no',
         'dropdown_pass_fail',
+
+        'parent_id',
+        'order_no',
     ];
     protected $table = "zunit_test_02s";
 
@@ -28,6 +31,25 @@ class Zunit_test_02 extends ModelExtended
         "dropdownMultiYesNo()" => ["getCheckedByField", Qaqc_insp_control_value::class],
         "dropdownMultiPassFail()" => ["getCheckedByField", Qaqc_insp_control_value::class],
     ];
+
+    public function getManyLineParams()
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name',],
+            ['dataIndex' => 'radio_yes_no',],
+            ['dataIndex' => 'radio_pass_fail',],
+            ['dataIndex' => 'dropdown_yes_no',],
+            ['dataIndex' => 'dropdown_pass_fail',],
+            ['dataIndex' => 'checkboxYesNo()',],
+            ['dataIndex' => 'checkboxPassFail()',],
+            ['dataIndex' => 'dropdownMultiYesNo()',],
+            ['dataIndex' => 'dropdownMultiPassFail()',],
+
+        ];
+    }
 
     public function radioYesNo()
     {

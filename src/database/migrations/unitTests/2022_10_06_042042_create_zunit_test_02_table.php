@@ -16,11 +16,16 @@ return new class extends Migration
     {
         Schema::create('zunit_test_02s', function (Blueprint $table) {
             $table->id();
-            $table->text('content');
-            $table->unsignedBigInteger('radio_yes_no');
-            $table->unsignedBigInteger('radio_pass_fail');
-            $table->unsignedBigInteger('dropdown_yes_no');
-            $table->unsignedBigInteger('dropdown_pass_fail');
+            $table->string('name');
+
+            $table->unsignedBigInteger('radio_yes_no')->nullable();
+            $table->unsignedBigInteger('radio_pass_fail')->nullable();
+            $table->unsignedBigInteger('dropdown_yes_no')->nullable();
+            $table->unsignedBigInteger('dropdown_pass_fail')->nullable();
+
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedInteger('order_no')->nullable();
+
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });

@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Zunit_test_09 extends ModelExtended
 {
     protected $fillable = [
-        'content',
+        'name',
         'department_1',
         'user_1',
         'department_2',
@@ -24,6 +24,9 @@ class Zunit_test_09 extends ModelExtended
         'user_position_1',
         "priority_id",
         "due_date",
+
+        'parent_id',
+        "order_no",
     ];
     protected $table = "zunit_test_09s";
 
@@ -52,6 +55,70 @@ class Zunit_test_09 extends ModelExtended
     public $oracyParams = [
         "dropdownMonitors()" => ["getCheckedByField", User::class],
     ];
+
+    public function getManyLineParamsReduce11()
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name',],
+            ['dataIndex' => 'department_2'],
+            ['dataIndex' => 'user_2'],
+            ['dataIndex' => 'category_id'],
+            ['dataIndex' => 'user_3'],
+        ];
+    }
+    public function getManyLineParamsReduce1111()
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name',],
+            ['dataIndex' => 'project_1'],
+            ['dataIndex' => 'sub_project_1'],
+            ['dataIndex' => 'prod_routing_1'],
+            ['dataIndex' => 'prod_order_1'],
+        ];
+    }
+    public function getManyLineParamsAssign()
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name',],
+            ['dataIndex' => 'prod_discipline_1'],
+            ['dataIndex' => 'assignee_1'],
+            //And Monitors
+        ];
+    }
+    public function getManyLineParamsDot()
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name',],
+            ['dataIndex' => 'department_1'],
+            ['dataIndex' => 'user_1'],
+            ['dataIndex' => 'user_4'],
+            ['dataIndex' => 'user_position_1'],
+        ];
+    }
+    public function getManyLineParamsDateOffset()
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name',],
+            ['dataIndex' => "priority_id"],
+            ['dataIndex' => "due_date"],
+
+        ];
+    }
 
     public function dropdownMonitors()
     {
