@@ -4,18 +4,17 @@
 @section('title', 'Manage Workflow')
 
 @section('content')
-<x-navigation.pill/>
-<form action="{{$route}}" method="POST">
-    @csrf
-    <x-renderer.table :columns="$columns" :dataSource="$dataSource" :dataHeader="$dataHeader" showNo=true maxH=32 headerTop={{$headerTop}}></x-renderer.table>
-    <x-renderer.button type="primary" htmlType='submit' name='button'>Update</x-renderer.button>
-</form>
-<br />
-<hr />
-{{-- <x-form.create-new action="{{$route}}/create"/> --}}
-<br />
-<br />
-<br />
+<div class="px-4">
+    <x-navigation.pill/>
+    <form action="{{$route}}" method="POST">
+        @csrf
+        <x-renderer.table :columns="$columns" :dataSource="$dataSource" :dataHeader="$dataHeader" showNo=true maxH=32 headerTop={{$headerTop}}></x-renderer.table>
+        <x-renderer.button type="primary" htmlType='submit' name='button'>Update</x-renderer.button>
+    </form>
+    <br />
+    <hr />
+    {{-- <x-form.create-new action="{{$route}}/create"/> --}}
+</div>
 @endsection
 
 @once
