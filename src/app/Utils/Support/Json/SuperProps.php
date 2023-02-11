@@ -157,6 +157,7 @@ class SuperProps
 
     public static function getFor($type)
     {
+        if (is_null($type)) dd("Type is missing, SuperProps cant instantiate.");
         if (App::isLocal()) return static::make($type);
         $key = "super_prop_$type";
         if (!Cache::has($key)) {

@@ -58,6 +58,16 @@ trait TableTraitApplyRender
         $isEditable = (isset($column['editable']) && $column['editable'] == true);
         $editableStr = $isEditable ? ".editable" : "";
         $tagName = "x-renderer{$editableStr}.{$renderer}";
+        if ($column['renderer'] === 'dropdown2') {
+            $tagName = "x-controls.has-data-source.dropdown2";
+            $table01Name = $column['table01Name'];
+            $type = $column['columnEntity'];
+            $attributes = "$name selected='[$rawData]' type='$type' table01Name='$table01Name' isInTable=true ";
+            $output = "<$tagName $attributes></$tagName>";
+
+            $blade = Blade::render($output);
+            return $blade;
+        }
 
         $output = "<$tagName $attributes>$rawData</$tagName>";
         // Log::info($output);

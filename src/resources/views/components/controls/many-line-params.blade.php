@@ -1,12 +1,12 @@
 {{-- @if($tableName !== 'hse_corrective_actions')  --}}
 
-<x-renderer.table 
+{{-- <x-renderer.table 
     tableName="{{$table01ROName}}"
     :columns="$readOnlyColumns" 
     :dataSource="$dataSource" 
     showNo="{{true}}" 
-    footer="{{$fn === '' ? '(Default column settings loaded)' : ''}}"
-    />
+    footer="{{$tableFooter}}"
+    /> --}}
 
 {{-- @else --}}
 
@@ -16,7 +16,7 @@
     :dataSource="$dataSource" 
     showNo="{{true}}" 
     showNoR="{{true}}" 
-    footer="{{$fn === '' ? '(Default column settings loaded)' : ''}}"
+    footer="{{$tableFooter}}"
 />
 <script>
     editableColumns['{{$table01Name}}'] = @json($editableColumns);

@@ -221,6 +221,7 @@ const addANewLine = (params) => {
                 + btnTrash
                 + '</div>'
         } else {
+            // console.log("Rendering", column)
             switch (column['renderer']) {
                 case 'read-only-text':
                     if (column['dataIndex'] === 'id') {
@@ -238,8 +239,11 @@ const addANewLine = (params) => {
                         })
                         renderer += "</select>"
                     } else {
-                        renderer = "<select name='" + name + "' class='" + column['classList'] + "'></select>"
+                        renderer = "dropdown_dropdown_dropdown_"
                     }
+                    break
+                case 'dropdown2':
+                    renderer = "<select name='" + name + "' class='" + column['classList'] + "'></select>"
                     break
                 case "number":
                     let value = '', onChange = ''

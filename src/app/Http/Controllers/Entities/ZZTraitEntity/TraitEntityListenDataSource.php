@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\Json\Listeners;
 use App\Utils\Support\Json\Props;
+use App\Utils\Support\Json\SuperProps;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -20,16 +21,16 @@ trait TraitEntityListenDataSource
         }
     }
 
-    private function refineListenToFieldAndAttr()
+    private function refineListenToFieldAndAttr($type)
     {
-        $sp = $this->superProps;
+        $sp = SuperProps::getFor($type);
         $this->dump2("SuperProps", $sp, __LINE__);
 
         $listen_to_attrs = [];
         $listen_to_tables = [];
         $toBeLoaded = [];
 
-        $listeners = Listeners::getAllOf($this->type);
+        $listeners = Listeners::getAllOf($type);
         foreach ($listeners as $listener) {
             $listen_to_fields0 = $listener['listen_to_fields'];
             $listen_to_tables[] = array_map(fn ($i) => $sp['props']["_" . $i]['relationships']['table'], $listen_to_fields0);
@@ -75,9 +76,36 @@ trait TraitEntityListenDataSource
         return [$extraColumns, $toBeLoaded];
     }
 
-    private function getMatrix()
+
+    private function deepMerge(array $a1, array $a2)
     {
-        [$extraColumns, $toBeLoaded] = $this->refineListenToFieldAndAttr();
+        $allKeys = [...array_keys($a1), ...array_keys($a2)];
+        $result = [];
+        foreach ($allKeys as $key) {
+            $values1 = $a1[$key] ?? [];
+            $values2 = $a2[$key] ?? [];
+            $values = array_unique([...$values1, ...$values2]);
+            $result[$key] = array_values($values);
+        }
+        return $result;
+    }
+
+    private function getMatrix($types)
+    {
+        // dump($this->deepMerge([], []));
+        // dump($this->deepMerge(["a" => [1, 2, 3]], ["b" => [4, 5, 6]]));
+        // dump($this->deepMerge(["a" => [1, 2, 3], "b" => [4, 5, 6, 10]], ["a" => [1, 2, 7, 8, 9], "b" => [10, 11, 12]]));
+        // dump($this->type);
+
+        $extraColumns = [];
+        $toBeLoaded = [];
+        foreach ($types as $type) {
+            [$extraColumns0, $toBeLoaded0] = $this->refineListenToFieldAndAttr($type);
+            // dump($extraColumns0);
+            $extraColumns = $this->deepMerge($extraColumns, $extraColumns0);
+            $toBeLoaded = array_unique([...$toBeLoaded, ...$toBeLoaded0]);
+        }
+        // dump($extraColumns, $toBeLoaded);
 
         $matrix = [];
         $notFoundInProps = [];
@@ -97,9 +125,10 @@ trait TraitEntityListenDataSource
         return $matrix;
     }
 
-    private function renderListenDataSource()
+    private function renderListenDataSource($types)
     {
-        $matrix = $this->getMatrix();
+        $matrix = $this->getMatrix($types);
+        // dump($matrix);
         $result = [];
         $columnsWithOracy = [];
 
@@ -134,38 +163,45 @@ trait TraitEntityListenDataSource
         return $result;
     }
 
-    private function getListeners()
+    private function getListeners($types)
     {
-        $sp = $this->superProps;
-        $result = array_values(Listeners::getAllOf($this->type));
-        foreach ($result as &$line) {
-            $relationships = $sp['props']["_" . $line['column_name']]['relationships'];
-            unset($line['name']);
-            if (!isset($relationships['table'])) {
-                $line['table_name'] = $line['column_name'] . " is not a HasDataSource control";
-            } else {
-                $line['table_name'] = $relationships['table'];
+        $output = [];
+        foreach ($types as $type) {
+            $sp = SuperProps::getFor($type);
+            $result = array_values(Listeners::getAllOf($type));
+            foreach ($result as &$line) {
+                $relationships = $sp['props']["_" . $line['column_name']]['relationships'];
+                unset($line['name']);
+                if (!isset($relationships['table'])) {
+                    $line['table_name'] = $line['column_name'] . " is not a HasDataSource control";
+                } else {
+                    $line['table_name'] = $relationships['table'];
+                }
+                $line['listen_to_tables'] = array_map(fn ($control) => $sp['props']["_" . $control]['relationships']['table'], $line['listen_to_fields']);
+                // $line['filter_columns'] = $relationships['filter_columns'] ?? [];
+                // $line['filter_values'] = $relationships['filter_values'] ?? [];
             }
-            $line['listen_to_tables'] = array_map(fn ($control) => $sp['props']["_" . $control]['relationships']['table'], $line['listen_to_fields']);
-            // $line['filter_columns'] = $relationships['filter_columns'] ?? [];
-            // $line['filter_values'] = $relationships['filter_values'] ?? [];
+            $output[$type] = $result;
         }
 
-        return $result;
+        return $output;
     }
 
-    private function getFilters()
+    private function getFilters($types)
     {
-        $sp = $this->superProps;
-        // dump($sp);
-        $result = [];
-        foreach ($sp['props'] as $prop) {
-            if (isset($prop['relationships']['filter_columns']) && sizeof($prop['relationships']['filter_columns']) > 0) {
-                $result[$prop['column_name']]['filter_columns'] = ($prop['relationships']['filter_columns']);
-                $result[$prop['column_name']]['filter_values'] = ($prop['relationships']['filter_values']);
+        $output = [];
+        foreach ($types as $type) {
+            $sp = SuperProps::getFor($type);
+            $result = [];
+            foreach ($sp['props'] as $prop) {
+                if (isset($prop['relationships']['filter_columns']) && sizeof($prop['relationships']['filter_columns']) > 0) {
+                    $result[$prop['column_name']]['filter_columns'] = ($prop['relationships']['filter_columns']);
+                    $result[$prop['column_name']]['filter_values'] = ($prop['relationships']['filter_values']);
+                }
             }
+            $output[$type] = $result;
         }
-        // dump($result);
-        return $result;
+        // dump($output);
+        return $output;
     }
 }

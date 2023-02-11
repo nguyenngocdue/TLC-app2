@@ -2,9 +2,11 @@ const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="
 const getEById = (id) => $("[id='" + id + "']")
 // const removeParenthesis = (str) => (str.includes("()")) ? str.substring(0, str.length - 2) : str
 
-let k = {}, listenersOfDropdown2 = {}, filtersOfDropdown2 = {}, debugListener = false
+let k = {}, listenersOfDropdown2s = {}, filtersOfDropdown2s = {}, debugListener = false
 
-const filterDropdown2 = (column_name, dataSource) => {
+const filterDropdown2 = (column_name, dataSource, lineEntity) => {
+    const filtersOfDropdown2 = filtersOfDropdown2s[lineEntity]
+    // console.log(filtersOfDropdown2s, filtersOfDropdown2, column_name, lineEntity)
     if (filtersOfDropdown2[column_name] !== undefined) {
         const { filter_columns, filter_values } = filtersOfDropdown2[column_name]
         //Filter by filter_columns and filter_values
@@ -20,7 +22,7 @@ const filterDropdown2 = (column_name, dataSource) => {
     return dataSource
 }
 
-const onChangeDropdown2Reduce = (listener) => {
+const onChangeDropdown2Reduce = (listener, lineEntity) => {
     // const debugListener = false
     if (debugListener) console.log("Reduce listener", listener)
     const { column_name, table_name, listen_to_attrs, triggers } = listener
@@ -39,7 +41,7 @@ const onChangeDropdown2Reduce = (listener) => {
 
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
-        if (debugListener) console.log("value", constraintsValues[i], value, !value)
+        //console.log("value", constraintsValues[i], value, !value)
         const column = listen_to_attrs[i]
         if (!value) continue;
         if (debugListener) console.log("Applying", column, value, "to", table_name)
@@ -60,7 +62,7 @@ const onChangeDropdown2Reduce = (listener) => {
     const lastSelected = getEById(column_name).val()
     // console.log("Selected", lastSelected)
     //TODO: make selected array if dropdown is multiple
-    reloadDataToDropdown2(column_name, dataSource, [lastSelected * 1])
+    reloadDataToDropdown2(column_name, dataSource, lineEntity, [lastSelected * 1])
 }
 const onChangeGetSelectedObject = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
@@ -81,7 +83,7 @@ const onChangeDropdown2Assign = (listener) => {
     const selectedObject = onChangeGetSelectedObject(listener)
     const listen_to_attr = listen_to_attrs[0]
     // const listen_to_attr = removeParenthesis(listen_to_attrs[0])
-    if (debugListener) console.log(selectedObject, listen_to_attr)
+    if (debugListener) console.log("Selected Object:", selectedObject, " - listen_to_attr:", listen_to_attr)
     if (selectedObject !== undefined) {
         const theValue = selectedObject[listen_to_attr]
         if (theValue !== undefined) {
@@ -136,16 +138,19 @@ const onChangeDropdown2DateOffset = (listener) => {
     }
 }
 
-const onChangeDropdown2 = (name) => {
-    // console.log("onChangeDropdown2", name, listenersOfDropdown2)
+const onChangeDropdown2 = (name, lineEntity) => {
+    // console.log("onChangeDropdown2", name, lineEntity)
+    // console.log("listenersOfDropdown2s", listenersOfDropdown2s)
+    const listenersOfDropdown2 = listenersOfDropdown2s[lineEntity]
     for (let i = 0; i < listenersOfDropdown2.length; i++) {
         let listener = listenersOfDropdown2[i]
         const { triggers, listen_action } = listener
+        // console.log(triggers, listen_action)
         if (triggers.includes(name)) {
             // console.log("listen_action", listen_action)
             switch (listen_action) {
                 case "reduce":
-                    onChangeDropdown2Reduce(listener)
+                    onChangeDropdown2Reduce(listener, lineEntity)
                     break;
                 case "assign":
                     onChangeDropdown2Assign(listener)
@@ -164,16 +169,12 @@ const onChangeDropdown2 = (name) => {
     }
 }
 
-const reloadDataToDropdown2 = (id, dataSource, selected) => {
+const reloadDataToDropdown2 = (id, dataSource, lineEntity, selected) => {
+    if (dataSource === undefined) return;
     getEById(id).empty()
 
     let options = []
-
-    dataSource = filterDropdown2(id, dataSource)
-    if (dataSource === undefined) {
-        console.error("DataSource not found in k for dropdown", id);
-        return;
-    }
+    dataSource = filterDropdown2(id, dataSource, lineEntity)
     // console.log("Loading dataSource for", id, selected, dataSource)
 
     for (let i = 0; i < dataSource.length; i++) {
@@ -192,20 +193,20 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
     getEById(id).append(options)
     // console.log("Appended", id, 'with options has', options.length, 'items')
 
-    getEById(id).select2({
-        placeholder: "Please select"
-        , allowClear: true
-        , templateResult: select2FormatState
-    });
+    // getEById(id).select2({
+    //     placeholder: "Please select"
+    //     , allowClear: true
+    //     , templateResult: select2FormatState
+    // });
 
 }
 
-const Dropdown2 = ({ id, name, className, multipleStr }) => {
+const Dropdown2 = ({ id, name, className, multipleStr, lineEntity }) => {
     let render = ""
     render += "<select "
     render += "id='" + id + "' "
     render += "name='" + name + "' "
-    render += "onChange='onChangeDropdown2(\"" + name + "\")' "
+    render += "onChange='onChangeDropdown2(\"" + name + "\", \"" + lineEntity + "\")' "
     render += " " + multipleStr + " "
     render += "class='" + className + "' "
     render += ">"

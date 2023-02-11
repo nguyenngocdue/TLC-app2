@@ -12,21 +12,20 @@ trait HasDataSource
 
     function getName()
     {
-        if ($this->table01Name) {
-            $name = "_hse_incident_report_id";
-        } else {
-            $name = "_" . $this->name;
+        $name = $this->name;
+        if (str_starts_with($this->name, $this->table01Name)) {
+            $name = substr($this->name, strlen($this->table01Name) + 1); // table01[hse_incident_report_id][0] => hse_incident_report_id][0]
+            $name = substr($name, 0, strpos($name, "]"));
         }
+        // dump($this->table01Name, $this->name, $name);
+        $name = "_" . $name;
         return $name;
     }
 
     function getType()
     {
-        if ($this->table01Name) {
-            $type = "hse_corrective_action";
-        } else {
-            $type = $this->type;
-        }
+        // dump($this->type);
+        $type = $this->type;
         return $type;
     }
 

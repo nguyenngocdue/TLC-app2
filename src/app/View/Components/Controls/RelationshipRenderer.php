@@ -8,6 +8,7 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class RelationshipRenderer extends Component
 {
@@ -120,10 +121,16 @@ class RelationshipRenderer extends Component
                 case 'status':
                     $newColumn['cbbDataSourceObject'] = LibStatuses::getFor($tableName);
                     $newColumn['cbbDataSource'] = array_keys(LibStatuses::getFor($tableName));
-                    // case 'dropdown':
                     $newColumn['renderer'] = 'dropdown';
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 text-left placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
+                    break;
+                case 'dropdown':
+                    $newColumn['renderer'] = 'dropdown2';
+                    $newColumn['editable'] = true;
+                    $newColumn['classList'] = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 text-left placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
+                    $newColumn['columnEntity'] = Str::singular($tableName);
+                    $newColumn['table01Name'] = $table01Name;
                     break;
                 case 'textarea':
                     $newColumn['renderer'] = 'textarea';
@@ -197,8 +204,12 @@ class RelationshipRenderer extends Component
         $smallModel = $props['relationships']['eloquentParams'][1];
         $instance = new $smallModel;
 
+        $tableFooter = "";
         $fn = $props['relationships']['renderer_edit_param'];
-        if (!method_exists($instance, $fn))  $fn = '';
+        if (!method_exists($instance, $fn)) {
+            $tableFooter = "Not found $fn in $smallModel";
+            $fn = '';
+        }
         $tableName = $smallModel::getTableName();
         $columns = ($fn === '')
             ? [
@@ -226,7 +237,7 @@ class RelationshipRenderer extends Component
                 $dataSource = $this->attachActionColumn($this->table01Name, $dataSource);
                 return view('components.controls.many-line-params', [
                     'dataSource' => $dataSource,
-                    'fn' => $fn,
+                    'tableFooter' => $tableFooter,
                     'readOnlyColumns' => $this->makeReadOnlyColumns($columns, $sp, $tableName),
                     'editableColumns' => $this->makeEditableColumns($columns, $sp, $tableName, $this->table01Name),
                     'tableName' => $smallModel::getTableName(),

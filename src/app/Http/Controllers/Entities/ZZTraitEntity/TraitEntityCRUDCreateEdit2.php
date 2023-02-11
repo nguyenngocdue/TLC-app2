@@ -17,6 +17,12 @@ trait TraitEntityCRUDCreateEdit2
 
 	public function create()
 	{
+		$types = [
+			$this->type,
+			'hse_corrective_action',
+			'zunit_test_02',
+			'zunit_test_09',
+		];
 		$props = $this->getCreateEditProps();
 		$values =  (object) $this->loadValueOfOrphanAttachments($props);
 		// dump($props);
@@ -29,14 +35,20 @@ trait TraitEntityCRUDCreateEdit2
 			'values' => $values,
 			'title' => "Add New",
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
-			'listenerDataSource' => $this->renderListenDataSource(),
-			'listeners' => $this->getListeners(),
-			'filters' => $this->getFilters(),
+			'listenerDataSource' => $this->renderListenDataSource($types),
+			'listeners' => $this->getListeners($types),
+			'filters' => $this->getFilters($types),
 		]);
 	}
 
 	public function edit($id)
 	{
+		$types = [
+			$this->type,
+			'hse_corrective_action',
+			'zunit_test_02',
+			'zunit_test_09',
+		];
 		$props = $this->getCreateEditProps();
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($id, $props);
 		return view('dashboards.pages.entity-create-edit', [
@@ -48,9 +60,9 @@ trait TraitEntityCRUDCreateEdit2
 			'modelPath' => $this->data,
 			'title' => "Edit",
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
-			'listenerDataSource' => $this->renderListenDataSource(),
-			'listeners' => $this->getListeners(),
-			'filters' => $this->getFilters(),
+			'listenerDataSource' => $this->renderListenDataSource($types),
+			'listeners' => $this->getListeners($types),
+			'filters' => $this->getFilters($types),
 		]);
 	}
 
