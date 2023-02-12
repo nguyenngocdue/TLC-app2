@@ -37,7 +37,7 @@ const filterDropdown4 = (column_name, dataSource, lineType) => {
 }
 
 const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
-    const debugListener = true
+    // const debugListener = true
     if (debugListener) console.log("Reduce listener", listener)
     const { column_name, table_name, listen_to_attrs, triggers } = listener
     let dataSource = k[table_name]
@@ -80,43 +80,45 @@ const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
     //TODO: make selected array if dropdown is multiple
     reloadDataToDropdown4(id, dataSource, lineType, [lastSelected * 1])
 }
-// const onChangeGetSelectedObject = (listener) => {
-//     const { listen_to_fields, listen_to_tables } = listener
-//     const listen_to_field = listen_to_fields[0]
-//     const listen_to_table = listen_to_tables[0]
-//     const selectedId = getEById(listen_to_field).val()
+const onChangeGetSelectedObject4 = (listener, table01Name, rowIndex) => {
+    const { listen_to_fields, listen_to_tables } = listener
+    const listen_to_field = listen_to_fields[0]
+    const listen_to_table = listen_to_tables[0]
+    const id = makeIdFrom(table01Name, listen_to_field, rowIndex)
+    const selectedId = getEById(id).val()
 
-//     const table = k[listen_to_table]
-//     const selectedObject = table.find((i) => i['id'] == selectedId)
+    const table = k[listen_to_table]
+    const selectedObject = table.find((i) => i['id'] == selectedId)
 
-//     return selectedObject
-// }
+    return selectedObject
+}
 
-const onChangeDropdown4Assign = (listener) => {
-    // const debugListener = false
+const onChangeDropdown4Assign = (listener, table01Name, rowIndex) => {
+    // const debugListener = true
     if (debugListener) console.log("Assign", listener)
     const { column_name, listen_to_attrs } = listener
-    const selectedObject = onChangeGetSelectedObject(listener)
+    const selectedObject = onChangeGetSelectedObject4(listener, table01Name, rowIndex)
     const listen_to_attr = listen_to_attrs[0]
     // const listen_to_attr = removeParenthesis(listen_to_attrs[0])
     if (debugListener) console.log("Selected Object:", selectedObject, " - listen_to_attr:", listen_to_attr)
     if (selectedObject !== undefined) {
         const theValue = selectedObject[listen_to_attr]
+        const id = makeIdFrom(table01Name, column_name, rowIndex)
         if (theValue !== undefined) {
-            // const column_name1 = removeParenthesis(column_name)
-            if (debugListener) console.log(column_name, theValue)
-            getEById(column_name).val(theValue)
-            getEById(column_name).trigger('change')
+            // const column_name1 = removeParenthesis(id)
+            if (debugListener) console.log(id, theValue)
+            getEById(id).val(theValue)
+            getEById(id).trigger('change')
         }
         else {
-            console.error("Column", listen_to_attr, 'not found in', column_name, "(Listeners Screen)")
+            console.error("Column", listen_to_attr, 'not found in', id, "(Listeners Screen)")
         }
     }
 }
-const onChangeDropdown4Dot = (listener) => {
-    // const debugListener = false
+const onChangeDropdown4Dot = (listener, table01Name, rowIndex) => {
+    // const debugListener = true
     if (debugListener) console.log("Dot", listener)
-    const selectedObject = onChangeGetSelectedObject(listener)
+    const selectedObject = onChangeGetSelectedObject4(listener, table01Name, rowIndex)
 
     const { listen_to_attrs, column_name } = listener
     const listen_to_attr = listen_to_attrs[0]
@@ -126,31 +128,34 @@ const onChangeDropdown4Dot = (listener) => {
     if (selectedObject !== undefined) {
         const theValue = selectedObject[listen_to_attr]
         // console.log(theValue)
-        if (debugListener) console.log(theValue)
+        const id = makeIdFrom(table01Name, column_name, rowIndex)
+        if (debugListener) console.log(id, theValue)
 
-        getEById(column_name).val(theValue)
-        getEById(column_name).trigger('change')
-        if (debugListener) console.log("Dotting", column_name, "with value", theValue)
+        getEById(id).val(theValue)
+        getEById(id).trigger('change')
+        if (debugListener) console.log("Dotting", id, "with value", theValue)
     }
 }
 
-const onChangeDropdown4DateOffset = (listener) => {
+const onChangeDropdown4DateOffset = (listener, table01Name, rowIndex) => {
+    // const debugListener = true
     if (debugListener) console.log("Date Offset", listener)
-    const selectedObject = onChangeGetSelectedObject(listener)
+    const selectedObject = onChangeGetSelectedObject4(listener, table01Name, rowIndex)
 
     const { listen_to_attrs, column_name } = listener
     const listen_to_attr = listen_to_attrs[0]
     // console.log(listen_to_attr, column_name, selectedObject)
     if (selectedObject !== undefined) {
         const theValue = selectedObject[listen_to_attr]
+        const id = makeIdFrom(table01Name, column_name, rowIndex)
         if (debugListener) console.log(theValue)
 
         const theValueDate = moment().add(theValue, 'days').format("YYYY-MM-DD HH:mm:ss");
         if (debugListener) console.log(theValueDate)
 
-        getEById(column_name).val(theValueDate)
-        getEById(column_name).trigger('change')
-        if (debugListener) console.log("Date Offset", column_name, "with value", theValueDate)
+        getEById(id).val(theValueDate)
+        getEById(id).trigger('change')
+        if (debugListener) console.log("Date Offset", id, "with value", theValueDate)
     }
 }
 
@@ -170,13 +175,13 @@ const onChangeDropdown4 = (name, lineType, table01Name, rowIndex) => {
                     onChangeDropdown4Reduce(listener, table01Name, rowIndex, lineType)
                     break;
                 case "assign":
-                    onChangeDropdown4Assign(listener)
+                    onChangeDropdown4Assign(listener, table01Name, rowIndex)
                     break;
                 case "dot":
-                    onChangeDropdown4Dot(listener)
+                    onChangeDropdown4Dot(listener, table01Name, rowIndex)
                     break;
                 case "date_offset":
-                    onChangeDropdown4DateOffset(listener)
+                    onChangeDropdown4DateOffset(listener, table01Name, rowIndex)
                     break;
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);
@@ -187,12 +192,12 @@ const onChangeDropdown4 = (name, lineType, table01Name, rowIndex) => {
 }
 
 const reloadDataToDropdown4 = (id, dataSource, lineType, selected) => {
-    console.log("reloadDataToDropdown4", id, dataSource, lineType, selected)
+    // console.log("reloadDataToDropdown4", id, dataSource, lineType, selected)
     if (dataSource === undefined) return;
     getEById(id).empty()
 
     let options = []
-    console.log("Loading dataSource for", id, selected, dataSource)
+    // console.log("Loading dataSource for", id, selected, dataSource)
     // dataSource = filterDropdown4(id, dataSource, lineType)
 
     for (let i = 0; i < dataSource.length; i++) {
@@ -211,11 +216,11 @@ const reloadDataToDropdown4 = (id, dataSource, lineType, selected) => {
     getEById(id).append(options)
     // console.log("Appended", id, 'with options has', options.length, 'items')
 
-    // getEById(id).select2({
-    //     placeholder: "Please select"
-    //     , allowClear: true
-    //     , templateResult: select2FormatState
-    // });
+    getEById(id).select2({
+        placeholder: "Please select"
+        , allowClear: true
+        , templateResult: select2FormatState
+    });
 
 }
 

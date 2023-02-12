@@ -61,10 +61,16 @@ trait TableTraitApplyRender
         if ($column['renderer'] === 'dropdown4') {
             $tagName = "x-controls.has-data-source.dropdown4";
             $table01Name = $column['table01Name'];
-            // $type = $column['table'];
+            $multiple = (isset($column['multiple']) && $column['multiple'] == true) ? "multiple=true" : "";
             $tableName = $column['table'];
             $lineType = $column['lineType'];
-            $attributes = "$name $typeRender selected='[$rawData]' table01Name='$table01Name' tableName='$tableName' lineType='$lineType' rowIndex='$index'";
+            $attributes = "$name $typeRender $multiple
+                                selected='[$rawData]' 
+                                table01Name='$table01Name' 
+                                tableName='$tableName' 
+                                lineType='$lineType' 
+                                rowIndex='$index'
+                                ";
             $output = "<$tagName $attributes></$tagName>";
             // Log::info($output);
 

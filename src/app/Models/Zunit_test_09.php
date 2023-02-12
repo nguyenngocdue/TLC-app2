@@ -91,7 +91,7 @@ class Zunit_test_09 extends ModelExtended
             ['dataIndex' => 'name',],
             ['dataIndex' => 'prod_discipline_1'],
             ['dataIndex' => 'assignee_1'],
-            //And Monitors
+            ['dataIndex' => 'dropdownMonitors()'],
         ];
     }
     public function getManyLineParamsDot()

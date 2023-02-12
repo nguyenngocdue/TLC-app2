@@ -65,7 +65,7 @@ const onChangeDropdown2Reduce = (listener) => {
     //TODO: make selected array if dropdown is multiple
     reloadDataToDropdown2(column_name, dataSource, [lastSelected * 1])
 }
-const onChangeGetSelectedObject = (listener) => {
+const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
     const listen_to_field = listen_to_fields[0]
     const listen_to_table = listen_to_tables[0]
@@ -81,7 +81,7 @@ const onChangeDropdown2Assign = (listener) => {
     // const debugListener = false
     if (debugListener) console.log("Assign", listener)
     const { column_name, listen_to_attrs } = listener
-    const selectedObject = onChangeGetSelectedObject(listener)
+    const selectedObject = onChangeGetSelectedObject2(listener)
     const listen_to_attr = listen_to_attrs[0]
     // const listen_to_attr = removeParenthesis(listen_to_attrs[0])
     if (debugListener) console.log("Selected Object:", selectedObject, " - listen_to_attr:", listen_to_attr)
@@ -101,7 +101,7 @@ const onChangeDropdown2Assign = (listener) => {
 const onChangeDropdown2Dot = (listener) => {
     // const debugListener = false
     if (debugListener) console.log("Dot", listener)
-    const selectedObject = onChangeGetSelectedObject(listener)
+    const selectedObject = onChangeGetSelectedObject2(listener)
 
     const { listen_to_attrs, column_name } = listener
     const listen_to_attr = listen_to_attrs[0]
@@ -121,7 +121,7 @@ const onChangeDropdown2Dot = (listener) => {
 
 const onChangeDropdown2DateOffset = (listener) => {
     if (debugListener) console.log("Date Offset", listener)
-    const selectedObject = onChangeGetSelectedObject(listener)
+    const selectedObject = onChangeGetSelectedObject2(listener)
 
     const { listen_to_attrs, column_name } = listener
     const listen_to_attr = listen_to_attrs[0]

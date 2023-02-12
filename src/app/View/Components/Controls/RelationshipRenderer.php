@@ -75,6 +75,9 @@ class RelationshipRenderer extends Component
                     $newColumn['align'] = 'center';
                     break;
                 case 'dropdown':
+                case 'dropdown_multi':
+                case 'radio':
+                case 'checkbox':
                     $dataIndex = $prop['relationships']['control_name_function'];
                     $newColumn['dataIndex'] = $dataIndex;
                     $newColumn['renderer'] = 'column';
@@ -126,6 +129,9 @@ class RelationshipRenderer extends Component
                     $newColumn['classList'] = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 text-left placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
                     break;
                 case 'dropdown':
+                case 'dropdown_multi':
+                case 'checkbox':
+                case 'radio':
                     $newColumn['renderer'] = 'dropdown4';
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 text-left placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
@@ -151,6 +157,9 @@ class RelationshipRenderer extends Component
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = " block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
                     break;
+            }
+            if (in_array($prop['control'], ['dropdown_multi', 'checkbox'])) {
+                $newColumn['multiple'] = true;
             }
             if ($newColumn['dataIndex'] === 'order_no') {
                 $newColumn['onChange'] = "rerenderTableBaseOnNewOrder(`" . $table01Name . "`)";

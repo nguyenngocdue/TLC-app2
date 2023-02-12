@@ -5,6 +5,7 @@
 $align = $type==='number' ? "text-right" : "";
 @endphp
 <input 
+    id="{{$name}}" 
     name="{{$name}}" 
     value="{{$cell??$slot}}" 
     type="{{$type}}" 
