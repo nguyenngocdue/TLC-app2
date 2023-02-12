@@ -140,27 +140,23 @@ const onChangeDropdown2DateOffset = (listener) => {
 }
 
 const onChangeDropdown2 = (name) => {
-    console.log("onChangeDropdown2", name)
+    // console.log("onChangeDropdown2", name)
     // const listenersOfDropdown2 = listenersOfDropdown2s[lineType]
     for (let i = 0; i < listenersOfDropdown2.length; i++) {
         let listener = listenersOfDropdown2[i]
         const { triggers, listen_action } = listener
-        console.log(triggers, listen_action, name)
+        // console.log(triggers, listen_action, name)
         if (triggers.includes(name)) {
-            console.log("listen_action", listen_action)
+            // console.log("listen_action", listen_action)
             switch (listen_action) {
                 case "reduce":
-                    onChangeDropdown2Reduce(listener)
-                    break;
+                    return onChangeDropdown2Reduce(listener)
                 case "assign":
-                    onChangeDropdown2Assign(listener)
-                    break;
+                    return onChangeDropdown2Assign(listener)
                 case "dot":
-                    onChangeDropdown2Dot(listener)
-                    break;
+                    return onChangeDropdown2Dot(listener)
                 case "date_offset":
-                    onChangeDropdown2DateOffset(listener)
-                    break;
+                    return onChangeDropdown2DateOffset(listener)
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);
                     break;

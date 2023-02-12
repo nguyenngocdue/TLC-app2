@@ -172,17 +172,13 @@ const onChangeDropdown4 = (name, lineType, table01Name, rowIndex) => {
             // console.log("listen_action", listen_action)
             switch (listen_action) {
                 case "reduce":
-                    onChangeDropdown4Reduce(listener, table01Name, rowIndex, lineType)
-                    break;
+                    return onChangeDropdown4Reduce(listener, table01Name, rowIndex, lineType)
                 case "assign":
-                    onChangeDropdown4Assign(listener, table01Name, rowIndex)
-                    break;
+                    return onChangeDropdown4Assign(listener, table01Name, rowIndex)
                 case "dot":
-                    onChangeDropdown4Dot(listener, table01Name, rowIndex)
-                    break;
+                    return onChangeDropdown4Dot(listener, table01Name, rowIndex)
                 case "date_offset":
-                    onChangeDropdown4DateOffset(listener, table01Name, rowIndex)
-                    break;
+                    return onChangeDropdown4DateOffset(listener, table01Name, rowIndex)
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);
                     break;
@@ -218,7 +214,7 @@ const reloadDataToDropdown4 = (id, dataSource, lineType, selected) => {
 
     getEById(id).select2({
         placeholder: "Please select"
-        , allowClear: true
+        , allowClear: true //<< Do not allow, user will select a secondary dropdown, and clear this one will make database issue
         , templateResult: select2FormatState
     });
 

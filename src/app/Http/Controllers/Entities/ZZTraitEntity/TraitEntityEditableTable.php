@@ -3,27 +3,10 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 trait TraitEntityEditableTable
 {
-    private function stripDataSource(Request $request, $tableName)
-    {
-        $tableNames = $request['tableNames'];
-        $table00Name = '';
-        if (is_null($tableNames))  return [];
-        foreach ($tableNames as $key => $value) {
-            if ($value === $tableName) {
-                $table00Name = $key;
-                break;
-            }
-        }
-
-        $dataSource = $request[$table00Name];
-        // dump($table00Name);
-        // dump($dataSource);
-        return $dataSource;
-    }
-
     private function parseHTTPArrayToLines(array $dataSource)
     {
         $result = [];
@@ -39,18 +22,17 @@ trait TraitEntityEditableTable
     {
         // dump($request);
         // echo "RECURSIVE = RECURSIVE = RECURSIVE = RECURSIVE = RECURSIVE = ";
-        // dump($props);
         // dump($this->superProps['props']);
-
-        foreach ($props as $propName) {
-            $tableName = $this->superProps['props'][$propName]['relationships']['table'];
-            $tableType = $this->superProps['props'][$propName]['relationships']['type'];
-            $dataSource = $this->stripDataSource($request, $tableName);
+        // dump($props);
+        $table01Names = $request['tableNames'];
+        foreach ($table01Names as $table01Name => $tableName) {
+            $tableType = ucfirst(Str::singular($tableName));
+            $dataSource = $request[$table01Name];
             $this->dump1("RECURSIVE CALLED STRIPPING $tableName", $dataSource, __LINE__);
             if (is_null($dataSource)) continue;
 
             $dataSource = $this->parseHTTPArrayToLines($dataSource);
-            $this->dump1("RECURSIVE CALLED PARSING $tableName", $dataSource, __LINE__);
+            $this->dump1("RECURSIVE CALLED PARSING from HTML DATA to ARRAY $tableName", $dataSource, __LINE__);
             // dd($dataSource);
 
             foreach ($dataSource as $line) {
@@ -68,6 +50,8 @@ trait TraitEntityEditableTable
                         dd("Destroying", $line['id']);
                         $controller->destroy($fakeRequest, $line['id']);
                     } else {
+                        // dump("Updating line " . $line['id'] . " of table $tableType");
+                        // dump($line);
                         $controller->update($fakeRequest, $line['id']);
                     }
                 } else {

@@ -221,12 +221,6 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function update(Request $request, $id)
 	{
-		// if ($request['tableNames'] === 'fakeRequest') {
-		// 	$tableName = $request['tableName'];
-		// 	$this->superProps = SuperProps::getFor($tableName);
-		// 	$this->data = Str::modelPathFrom($tableName);
-		// 	$this->type = Str::singular($tableName);
-		// }
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
 			$props = $this->getProps1();
