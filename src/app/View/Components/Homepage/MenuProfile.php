@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Homepage;
 
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
@@ -12,8 +13,13 @@ class MenuProfile extends Component
      *
      * @return void
      */
+    private $table = "";
     public function __construct()
     {
+        // dump(Route::current());
+        $as = CurrentRoute::getControllerAs();
+        $this->table = substr($as, 0, strpos($as, "."));
+        // dump($this->table);
     }
 
     private function getUserMenu()
@@ -34,11 +40,14 @@ class MenuProfile extends Component
                 $phpMyAdmin = "localhost:38102";
                 break;
         }
-        // $userMenuStr = str_replace("{{hostname}}", $hostname, $userMenuStr);
+        $phpMyAdminTable = $phpMyAdmin . "/index.php?route=/sql&pos=0&db=laravel&table=" . $this->table . "&"; //<<Last amp & to compromise the slash /
         $userMenuStr = str_replace("{{app}}", $app, $userMenuStr);
         $userMenuStr = str_replace("{{phpMyAdmin}}", $phpMyAdmin, $userMenuStr);
+        $userMenuStr = str_replace("{{phpMyAdminTable}}", $phpMyAdminTable, $userMenuStr);
+        // dump($userMenuStr);
 
         $userMenu = json_decode($userMenuStr, true);
+        // dump($userMenu);
         return $userMenu;
     }
 

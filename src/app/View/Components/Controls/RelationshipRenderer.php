@@ -65,7 +65,9 @@ class RelationshipRenderer extends Component
         $result = [];
         foreach ($columns as $column) {
             $newColumn = $column;
-            // if (!isset($sp['props']["_" . $column['dataIndex']])) die();
+            if (!isset($sp['props']["_" . $column['dataIndex']])) {
+                dd("Column [" . $column['dataIndex'] . "] not found in SuperProps of " . $tableName);
+            }
             $prop = $sp['props']["_" . $column['dataIndex']];
             $newColumn['title'] = $column['title'] ?? $prop['label'] . " <br/>" . $prop['control'];
             switch ($prop['control']) {

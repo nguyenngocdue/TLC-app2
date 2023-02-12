@@ -4,6 +4,11 @@
         "hef": "http://{{phpMyAdmin}}/",
         "icon_fa": "fa-duotone fa-database"
     },
+    "php_admin_table": {
+        "title": "PhpMyAdmin -> Table",
+        "hef": "http://{{phpMyAdminTable}}/",
+        "icon_fa": "fa-duotone fa-database"
+    },
     "telescope": {
         "title": "Telescope",
         "hef": "http://{{app}}/telescope/requests",

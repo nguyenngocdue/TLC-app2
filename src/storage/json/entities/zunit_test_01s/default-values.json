@@ -10,6 +10,17 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_text1": {
         "name": "_text1",
         "column_name": "text1",
@@ -123,6 +134,28 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_parent_id": {
+        "name": "_parent_id",
+        "column_name": "parent_id",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "label": "",
         "default_value": "",
         "validation": "",
