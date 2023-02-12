@@ -675,6 +675,9 @@ video {
 .m-0\.5 {
   margin: 0.125rem;
 }
+.m-1 {
+  margin: 0.25rem;
+}
 .mx-5 {
   margin-left: 1.25rem;
   margin-right: 1.25rem;

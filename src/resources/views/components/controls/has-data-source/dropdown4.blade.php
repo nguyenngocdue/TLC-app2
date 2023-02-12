@@ -23,7 +23,7 @@
     // console.log("DataSource from",table)
     if(dataSourceDropdown === undefined) console.error("Key {{$table}} not found in k[]");
     // console.log("{{$id}}")
-    reloadDataToDropdown4("{{$id}}", dataSourceDropdown, "{{$lineType}}", selectedJson)
+    reloadDataToDropdown4("{{$id}}", dataSourceDropdown, "{{$table01Name }}", selectedJson)
 
     $(document).ready(()=>getEById("{{$id}}").trigger('change'))
 

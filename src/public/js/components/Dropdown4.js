@@ -18,9 +18,10 @@ const getFieldNameInTable01FormatJS = (name, table01Name) => {
 
 let listenersOfDropdown4s = {}, filtersOfDropdown4s = {}
 
-const filterDropdown4 = (column_name, dataSource, lineType) => {
-    const filtersOfDropdown4 = filtersOfDropdown4s[lineType]
-    // console.log(filtersOfDropdown4s, filtersOfDropdown4, column_name, lineType)
+const filterDropdown4 = (id, dataSource, table01Name) => {
+    const filtersOfDropdown4 = filtersOfDropdown4s[table01Name]
+    const column_name = getFieldNameInTable01FormatJS(id, table01Name)
+    // console.log(filtersOfDropdown4s, filtersOfDropdown4, column_name)
     if (filtersOfDropdown4[column_name] !== undefined) {
         const { filter_columns, filter_values } = filtersOfDropdown4[column_name]
         //Filter by filter_columns and filter_values
@@ -78,7 +79,7 @@ const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
     const lastSelected = getEById(id).val()
     // console.log("Selected", lastSelected)
     //TODO: make selected array if dropdown is multiple
-    reloadDataToDropdown4(id, dataSource, lineType, [lastSelected * 1])
+    reloadDataToDropdown4(id, dataSource, table01Name, [lastSelected * 1])
 }
 const onChangeGetSelectedObject4 = (listener, table01Name, rowIndex) => {
     const { listen_to_fields, listen_to_tables } = listener
@@ -106,7 +107,7 @@ const onChangeDropdown4Assign = (listener, table01Name, rowIndex) => {
         const id = makeIdFrom(table01Name, column_name, rowIndex)
         if (theValue !== undefined) {
             // const column_name1 = removeParenthesis(id)
-            if (debugListener) console.log(id, theValue)
+            if (debugListener) console.log("Set value of", id, "to", theValue)
             getEById(id).val(theValue)
             getEById(id).trigger('change')
         }
@@ -172,13 +173,17 @@ const onChangeDropdown4 = (name, lineType, table01Name, rowIndex) => {
             // console.log("listen_action", listen_action)
             switch (listen_action) {
                 case "reduce":
-                    return onChangeDropdown4Reduce(listener, table01Name, rowIndex, lineType)
+                    onChangeDropdown4Reduce(listener, table01Name, rowIndex, lineType)
+                    break
                 case "assign":
-                    return onChangeDropdown4Assign(listener, table01Name, rowIndex)
+                    onChangeDropdown4Assign(listener, table01Name, rowIndex)
+                    break
                 case "dot":
-                    return onChangeDropdown4Dot(listener, table01Name, rowIndex)
+                    onChangeDropdown4Dot(listener, table01Name, rowIndex)
+                    break
                 case "date_offset":
-                    return onChangeDropdown4DateOffset(listener, table01Name, rowIndex)
+                    onChangeDropdown4DateOffset(listener, table01Name, rowIndex)
+                    break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);
                     break;
@@ -187,22 +192,18 @@ const onChangeDropdown4 = (name, lineType, table01Name, rowIndex) => {
     }
 }
 
-const reloadDataToDropdown4 = (id, dataSource, lineType, selected) => {
-    // console.log("reloadDataToDropdown4", id, dataSource, lineType, selected)
+const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
+    // console.log("reloadDataToDropdown4", id, dataSource, table01Name, rowIndex, lineType, selected)
     if (dataSource === undefined) return;
     getEById(id).empty()
 
     let options = []
     // console.log("Loading dataSource for", id, selected, dataSource)
-    // dataSource = filterDropdown4(id, dataSource, lineType)
+    dataSource = filterDropdown4(id, dataSource, table01Name)
 
     for (let i = 0; i < dataSource.length; i++) {
         let item = dataSource[i]
-        if (dataSource.length === 1) {
-            selectedStr = 'selected'
-        } else {
-            selectedStr = selected.includes(item.id) ? "selected" : ""
-        }
+        selectedStr = (dataSource.length === 1) ? 'selected' : (selected.includes(item.id) ? "selected" : "")
         option = "<option value='" + item.id + "' title='" + item.description + "' " + selectedStr + " >"
         option += item.name
         option += "</option>"
@@ -214,7 +215,7 @@ const reloadDataToDropdown4 = (id, dataSource, lineType, selected) => {
 
     getEById(id).select2({
         placeholder: "Please select"
-        , allowClear: true //<< Do not allow, user will select a secondary dropdown, and clear this one will make database issue
+        , allowClear: true
         , templateResult: select2FormatState
     });
 

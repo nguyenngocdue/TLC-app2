@@ -49,6 +49,7 @@
         </div>
     </div>
 </div>
+<div class="p-1"></div>
 <script>
     table = document.querySelector('#{{$tableName}} tbody')
 

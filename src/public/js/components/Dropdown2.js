@@ -23,7 +23,7 @@ const filterDropdown2 = (column_name, dataSource) => {
 }
 
 const onChangeDropdown2Reduce = (listener) => {
-    // const debugListener = false
+    // const debugListener = true
     if (debugListener) console.log("Reduce listener", listener)
     const { column_name, table_name, listen_to_attrs, triggers } = listener
     let dataSource = k[table_name]
@@ -78,7 +78,7 @@ const onChangeGetSelectedObject2 = (listener) => {
 }
 
 const onChangeDropdown2Assign = (listener) => {
-    // const debugListener = false
+    // const debugListener = true
     if (debugListener) console.log("Assign", listener)
     const { column_name, listen_to_attrs } = listener
     const selectedObject = onChangeGetSelectedObject2(listener)
@@ -99,7 +99,7 @@ const onChangeDropdown2Assign = (listener) => {
     }
 }
 const onChangeDropdown2Dot = (listener) => {
-    // const debugListener = false
+    // const debugListener = true
     if (debugListener) console.log("Dot", listener)
     const selectedObject = onChangeGetSelectedObject2(listener)
 
@@ -141,22 +141,26 @@ const onChangeDropdown2DateOffset = (listener) => {
 
 const onChangeDropdown2 = (name) => {
     // console.log("onChangeDropdown2", name)
-    // const listenersOfDropdown2 = listenersOfDropdown2s[lineType]
+    // console.log(listenersOfDropdown2)
     for (let i = 0; i < listenersOfDropdown2.length; i++) {
         let listener = listenersOfDropdown2[i]
         const { triggers, listen_action } = listener
-        // console.log(triggers, listen_action, name)
+        // console.log(listen_action, name, triggers)
         if (triggers.includes(name)) {
             // console.log("listen_action", listen_action)
             switch (listen_action) {
                 case "reduce":
-                    return onChangeDropdown2Reduce(listener)
+                    onChangeDropdown2Reduce(listener)
+                    break
                 case "assign":
-                    return onChangeDropdown2Assign(listener)
+                    onChangeDropdown2Assign(listener)
+                    break
                 case "dot":
-                    return onChangeDropdown2Dot(listener)
+                    onChangeDropdown2Dot(listener)
+                    break
                 case "date_offset":
-                    return onChangeDropdown2DateOffset(listener)
+                    onChangeDropdown2DateOffset(listener)
+                    break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);
                     break;
@@ -175,11 +179,7 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
 
     for (let i = 0; i < dataSource.length; i++) {
         let item = dataSource[i]
-        if (dataSource.length === 1) {
-            selectedStr = 'selected'
-        } else {
-            selectedStr = selected.includes(item.id) ? "selected" : ""
-        }
+        selectedStr = (dataSource.length === 1) ? 'selected' : (selected.includes(item.id) ? "selected" : "")
         option = "<option value='" + item.id + "' title='" + item.description + "' " + selectedStr + " >"
         option += item.name
         option += "</option>"
