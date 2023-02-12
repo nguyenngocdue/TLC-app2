@@ -184,6 +184,7 @@ const addANewLine = (params) => {
     const { columns, showNo, showNoR, tableDebug } = tableObject[tableId]
     // console.log("ADD LINE TO", params, tableDebug)
     const table = document.getElementById(tableId)
+    const newRowIndex = getAllRows(tableId).length
     const row = table.insertRow()
     row.classList.add('bg-lime-200')
     let fingerPrint = ''
@@ -196,7 +197,8 @@ const addANewLine = (params) => {
         if (column['hidden'] == true) return
         let renderer = 'newCell'
 
-        const name = tableId + "[" + column['dataIndex'] + "][]"
+        const multipleBracket = column?.multiple ? "[]" : ""
+        const name = tableId + "[" + column['dataIndex'] + "][" + newRowIndex + "]" + multipleBracket
         if (column['dataIndex'] === 'action') {
             fingerPrint = getMaxValueOfAColumn(tableId, "[finger_print]") + 10
             const params = "{tableId: '" + tableId + "', control:this, fingerPrint: " + fingerPrint + "}"
@@ -221,6 +223,8 @@ const addANewLine = (params) => {
                 + btnTrash
                 + '</div>'
         } else {
+            let onChange = ''
+            let value = ''
             // console.log("Rendering", column)
             switch (column['renderer']) {
                 case 'read-only-text':
@@ -239,14 +243,16 @@ const addANewLine = (params) => {
                         })
                         renderer += "</select>"
                     } else {
-                        renderer = "dropdown_dropdown_dropdown_"
+                        renderer = "Only STATUS is implemented for dropdown1."
                     }
                     break
-                case 'dropdown2':
-                    renderer = "<select name='" + name + "' class='" + column['classList'] + "'></select>"
+                case 'dropdown4':
+                    // onChangeDropdown4("table02[prod_discipline_id][5]", "prod_discipline_1", "table02", 5)
+                    onChange = "onChangeDropdown4(\"" + name + "\", \"" + column['lineType'] + "\", \"" + column['table01Name'] + "\", " + newRowIndex + ")"
+                    multipleStr = column?.multiple ? "multiple" : ""
+                    renderer = "<select id='" + name + "' name='" + name + "' " + multipleStr + " onChange='" + onChange + "' class='" + column['classList'] + "'></select>"
                     break
                 case "number":
-                    let value = '', onChange = ''
                     if (column['dataIndex'] === 'order_no') {
                         value = getMaxValueOfAColumn(tableId, "[order_no]") + 10
                         onChange = "rerenderTableBaseOnNewOrder(\"" + tableId + "\")"
@@ -271,10 +277,8 @@ const addANewLine = (params) => {
         // console.log("Insert column", column['dataIndex'], renderer)
         cell.innerHTML = renderer
 
-        if (column['renderer'] === 'dropdown2') {
-            const dataSource = k[tableId]
-            console.log("render dataSource for", name, tableId, dataSource, column)
-            // reloadDataToDropdown2(id, dataSource, lineEntity, '[]')
+        if (column['renderer'] === 'dropdown4') {
+            reloadDataToDropdown4(name, k[column['table']], tableId, '[]')
         }
 
         if (column['value_as_parent_id'] == true) {

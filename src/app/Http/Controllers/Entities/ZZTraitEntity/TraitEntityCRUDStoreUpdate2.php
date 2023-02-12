@@ -18,7 +18,7 @@ trait TraitEntityCRUDStoreUpdate2
 	private function dump1($title, $content, $line)
 	{
 		if ($this->debugForStoreUpdate) {
-			echo "$title line $line";
+			echo "$title in file " . basename(__FILE__) . " line $line";
 			dump($content);
 		}
 	}

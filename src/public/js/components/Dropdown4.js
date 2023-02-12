@@ -21,7 +21,7 @@ let listenersOfDropdown4s = {}, filtersOfDropdown4s = {}
 const filterDropdown4 = (id, dataSource, table01Name) => {
     const filtersOfDropdown4 = filtersOfDropdown4s[table01Name]
     const column_name = getFieldNameInTable01FormatJS(id, table01Name)
-    // console.log(filtersOfDropdown4s, filtersOfDropdown4, column_name)
+    // console.log(filtersOfDropdown4, column_name)
     if (filtersOfDropdown4[column_name] !== undefined) {
         const { filter_columns, filter_values } = filtersOfDropdown4[column_name]
         //Filter by filter_columns and filter_values
@@ -193,7 +193,8 @@ const onChangeDropdown4 = (name, lineType, table01Name, rowIndex) => {
 }
 
 const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
-    // console.log("reloadDataToDropdown4", id, dataSource, table01Name, rowIndex, lineType, selected)
+    // console.log("reloadDataToDropdown4", id, dataSource, table01Name, selected)
+    // console.log(table01Name, id, selected)
     if (dataSource === undefined) return;
     getEById(id).empty()
 
@@ -215,7 +216,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
 
     getEById(id).select2({
         placeholder: "Please select"
-        , allowClear: true
+        // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
         , templateResult: select2FormatState
     });
 

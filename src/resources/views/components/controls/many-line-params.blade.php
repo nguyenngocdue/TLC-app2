@@ -21,7 +21,7 @@
 <script>
     editableColumns['{{$table01Name}}'] = @json($editableColumns);
     tableObject['{{$table01Name}}'] = {
-        tableId:'{{$table01Name}}', 
+        // tableId:'{{$table01Name}}', 
         columns: editableColumns['{{$table01Name}}'],
         showNo:true,
         showNoR:true,

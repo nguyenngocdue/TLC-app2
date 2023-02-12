@@ -191,7 +191,7 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
 
     getEById(id).select2({
         placeholder: "Please select..."
-        , allowClear: true
+        // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
         , templateResult: select2FormatState
     });
 

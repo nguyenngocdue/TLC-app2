@@ -19,7 +19,14 @@
     // console.log("DataSource from",table)
     if(dataSourceDropdown === undefined) console.error("key {{$table}} not found in k[]");
     reloadDataToDropdown2("{{$id}}", dataSourceDropdown, selectedJson)
-
-    $(document).ready(()=>getEById("{{$id}}").trigger('change'))
+    
+    $(document).ready(()=>{
+        listenersOfDropdown2.forEach((listener)=>{
+            if(listener.triggers.includes("{{$id}}") && listener.listen_action === 'reduce'){
+                // console.log("I am a trigger of reduce, I have to trigger myself when form load [{{$id}}]", )
+                getEById("{{$id}}").trigger('change')
+            }
+        })
+    })
 
 </script>

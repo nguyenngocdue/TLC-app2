@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -64,8 +65,10 @@ trait TableTraitApplyRender
             $multiple = (isset($column['multiple']) && $column['multiple'] == true) ? "multiple=true" : "";
             $tableName = $column['table'];
             $lineType = $column['lineType'];
+            $rawData = ($rawData instanceof Collection) ? $rawData = $rawData->pluck('id') : [$rawData];
+            $rawData = json_encode($rawData);
             $attributes = "$name $typeRender $multiple
-                                selected='[$rawData]' 
+                                selected='$rawData' 
                                 table01Name='$table01Name' 
                                 tableName='$tableName' 
                                 lineType='$lineType' 
