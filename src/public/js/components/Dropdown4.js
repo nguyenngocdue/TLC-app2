@@ -2,6 +2,20 @@
 // const getEById = (id) => $("[id='" + id + "']")
 // const removeParenthesis = (str) => (str.includes("()")) ? str.substring(0, str.length - 2) : str
 
+const makeIdFrom = (table01Name, fieldName, rowIndex) => table01Name + "[" + fieldName + "][" + rowIndex + "]"
+
+const getFieldNameInTable01FormatJS = (name, table01Name) => {
+    const isStartWith = table01Name && name.startsWith(table01Name)
+    if (isStartWith) {
+        name = name.substr(table01Name.length + 1)// table01[hse_incident_report_id][0] => hse_incident_report_id][0]
+        name = name.substr(0, name.indexOf("]"))
+    }
+    return name;
+}
+// console.log(getFieldNameInTable01FormatJS('table01[hello][9]', 'table01'))
+// console.log(getFieldNameInTable01FormatJS('table99[help][100]', 'table99'))
+
+
 let listenersOfDropdown4s = {}, filtersOfDropdown4s = {}
 
 const filterDropdown4 = (column_name, dataSource, lineType) => {
@@ -22,14 +36,14 @@ const filterDropdown4 = (column_name, dataSource, lineType) => {
     return dataSource
 }
 
-const onChangeDropdown4Reduce = (listener, lineType) => {
-    // const debugListener = false
+const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
+    const debugListener = true
     if (debugListener) console.log("Reduce listener", listener)
     const { column_name, table_name, listen_to_attrs, triggers } = listener
     let dataSource = k[table_name]
     if (debugListener) console.log("dataSource in k", dataSource)
 
-    const constraintsValues = triggers.map((trigger) => getEById(trigger).val())
+    const constraintsValues = triggers.map((trigger) => getEById(makeIdFrom(table01Name, trigger, rowIndex)).val())
     if (debugListener) console.log(triggers, constraintsValues)
 
     const dumbIncludes = (array, item) => {
@@ -41,10 +55,11 @@ const onChangeDropdown4Reduce = (listener, lineType) => {
 
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
-        //console.log("value", constraintsValues[i], value, !value)
+        // console.log("value", constraintsValues[i], value, !value)
         const column = listen_to_attrs[i]
+        if (column === undefined) console.log("The column to look up [", column, "] is not found in ...")
         if (!value) continue;
-        if (debugListener) console.log("Applying", column, value, "to", table_name)
+        if (debugListener) console.log("Applying", column, value, "to", table_name, 'by column', column)
         dataSource = dataSource.filter((row) => {
             let result = null
             if (Array.isArray(row[column])) {
@@ -59,10 +74,11 @@ const onChangeDropdown4Reduce = (listener, lineType) => {
 
     if (debugListener) console.log("DataSource AFTER reduce", dataSource)
     // console.log('onChangeDropdown4Reduce')
-    const lastSelected = getEById(column_name).val()
+    const id = makeIdFrom(table01Name, column_name, rowIndex)
+    const lastSelected = getEById(id).val()
     // console.log("Selected", lastSelected)
     //TODO: make selected array if dropdown is multiple
-    reloadDataToDropdown4(column_name, dataSource, lineType, [lastSelected * 1])
+    reloadDataToDropdown4(id, dataSource, lineType, [lastSelected * 1])
 }
 // const onChangeGetSelectedObject = (listener) => {
 //     const { listen_to_fields, listen_to_tables } = listener
@@ -138,19 +154,20 @@ const onChangeDropdown4DateOffset = (listener) => {
     }
 }
 
-const onChangeDropdown4 = (name, lineType) => {
-    console.log("onChangeDropdown4", name, lineType)
-    console.log("listenersOfDropdown4s", listenersOfDropdown4s, lineType)
-    const listenersOfDropdown4 = listenersOfDropdown4s[lineType]
+const onChangeDropdown4 = (name, lineType, table01Name, rowIndex) => {
+    // console.log("onChangeDropdown4", name, lineType, table01Name, rowIndex)
+    // console.log("listenersOfDropdown4s", listenersOfDropdown4s)
+    const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
     for (let i = 0; i < listenersOfDropdown4.length; i++) {
         let listener = listenersOfDropdown4[i]
         const { triggers, listen_action } = listener
-        console.log(triggers, listen_action, name)
-        if (triggers.includes(name)) {
-            console.log("listen_action", listen_action)
+        const fieldName = getFieldNameInTable01FormatJS(name, table01Name)
+        // console.log(triggers, listen_action, name, fieldName, table01Name, rowIndex)
+        if (triggers.includes(fieldName)) {
+            // console.log("listen_action", listen_action)
             switch (listen_action) {
                 case "reduce":
-                    onChangeDropdown4Reduce(listener, lineType)
+                    onChangeDropdown4Reduce(listener, table01Name, rowIndex, lineType)
                     break;
                 case "assign":
                     onChangeDropdown4Assign(listener)
@@ -170,6 +187,7 @@ const onChangeDropdown4 = (name, lineType) => {
 }
 
 const reloadDataToDropdown4 = (id, dataSource, lineType, selected) => {
+    console.log("reloadDataToDropdown4", id, dataSource, lineType, selected)
     if (dataSource === undefined) return;
     getEById(id).empty()
 
@@ -201,16 +219,19 @@ const reloadDataToDropdown4 = (id, dataSource, lineType, selected) => {
 
 }
 
-const Dropdown4 = ({ id, name, className, multipleStr, lineType }) => {
+const Dropdown4 = ({ id, name, className, multipleStr, lineType, table01Name, rowIndex }) => {
+
     let render = ""
     render += "<select "
     render += "id='" + id + "' "
     render += "name='" + name + "' "
-    render += "onChange='onChangeDropdown4(\"" + name + "\", \"" + lineType + "\")' "
+    render += "onChange='onChangeDropdown4(\"" + name + "\", \"" + lineType + "\", \"" + table01Name + "\", " + rowIndex + ")' "
     render += " " + multipleStr + " "
     render += "class='" + className + "' "
     render += ">"
     render += "</select>"
+
+    // console.log(render)
 
     return render
 }

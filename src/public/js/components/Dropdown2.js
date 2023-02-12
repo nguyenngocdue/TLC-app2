@@ -43,6 +43,7 @@ const onChangeDropdown2Reduce = (listener) => {
         const value = constraintsValues[i]
         //console.log("value", constraintsValues[i], value, !value)
         const column = listen_to_attrs[i]
+        if (column === undefined) console.log("The column to look up [", column, "] is not found in ...")
         if (!value) continue;
         if (debugListener) console.log("Applying", column, value, "to", table_name)
         dataSource = dataSource.filter((row) => {
@@ -192,11 +193,11 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
     getEById(id).append(options)
     // console.log("Appended", id, 'with options has', options.length, 'items')
 
-    // getEById(id).select2({
-    //     placeholder: "Please select"
-    //     , allowClear: true
-    //     , templateResult: select2FormatState
-    // });
+    getEById(id).select2({
+        placeholder: "Please select..."
+        , allowClear: true
+        , templateResult: select2FormatState
+    });
 
 }
 

@@ -64,7 +64,7 @@ trait TableTraitApplyRender
             // $type = $column['table'];
             $tableName = $column['table'];
             $lineType = $column['lineType'];
-            $attributes = "$name $typeRender selected='[$rawData]' table01Name='$table01Name' tableName='$tableName' lineType='$lineType' ";
+            $attributes = "$name $typeRender selected='[$rawData]' table01Name='$table01Name' tableName='$tableName' lineType='$lineType' rowIndex='$index'";
             $output = "<$tagName $attributes></$tagName>";
             // Log::info($output);
 

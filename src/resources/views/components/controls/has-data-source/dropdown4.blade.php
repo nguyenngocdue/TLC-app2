@@ -6,6 +6,8 @@
         , multipleStr: "{{$multipleStr}}"
 
         , lineType : "{{$lineType}}" //<< This is when the form has EditableTable, it get the listenerDataSource from an isolated array element
+        , table01Name: "{{$table01Name }}"
+        , rowIndex: "{{$rowIndex}}"
     }
     // console.log(params)
     document.write(Dropdown4(params))
@@ -20,6 +22,7 @@
     dataSourceDropdown = k[table];
     // console.log("DataSource from",table)
     if(dataSourceDropdown === undefined) console.error("Key {{$table}} not found in k[]");
+    // console.log("{{$id}}")
     reloadDataToDropdown4("{{$id}}", dataSourceDropdown, "{{$lineType}}", selectedJson)
 
     $(document).ready(()=>getEById("{{$id}}").trigger('change'))

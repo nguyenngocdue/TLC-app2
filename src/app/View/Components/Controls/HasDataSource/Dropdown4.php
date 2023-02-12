@@ -17,6 +17,7 @@ class Dropdown4 extends Component
         private $table01Name = null,
         private $tableName = null,
         private $lineType = null,
+        private $rowIndex = null,
     ) {
         $old = old($name);
         if ($old) {
@@ -34,6 +35,7 @@ class Dropdown4 extends Component
     public function render()
     {
         $id = $this->name;
+        // dump($id);
         $name = $this->multiple ? $this->name . "[]" : $this->name;
         $table = $this->tableName;
         $params = [
@@ -45,6 +47,8 @@ class Dropdown4 extends Component
             'table' => $table,
 
             'lineType' => $this->lineType,
+            'table01Name' => $this->table01Name,
+            'rowIndex' => $this->rowIndex,
         ];
         // dump($params);
         return view('components.controls.has-data-source.dropdown4', $params);
