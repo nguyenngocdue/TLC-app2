@@ -31,6 +31,22 @@
         "hidden_print": "",
         "new_line": "true"
     },
+    "_getUT1": {
+        "name": "_getUT1",
+        "column_name": "getUT1",
+        "column_type": "eloquent_prop",
+        "label": "UT1 Basic Controls",
+        "control": "relationship_renderer",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": "true"
+    },
     "_getDiscipline1": {
         "name": "_getDiscipline1",
         "column_name": "getDiscipline1",
