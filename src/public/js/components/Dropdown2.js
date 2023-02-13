@@ -1,5 +1,53 @@
 const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="flex justify-between px-1"><span>${state.text}</span><span>${state.id}</span></div>`)
 const getEById = (id) => $("[id='" + id + "']")
+
+const getIsMultipleOfE = (id) => getEById(id)[0].hasAttribute("multiple")
+const getControlTypeOfE = (id) => getEById(id).attr("controlType")
+
+const getValueOfEById = (id) => {
+    const isMultipleOfE = getIsMultipleOfE(id)
+    const controlType = getControlTypeOfE(id)
+    // console.log(id, isMultipleOfE, controlType)
+    if (controlType === "radio_or_checkbox") {
+        const control = isMultipleOfE ? "checkbox" : "radio"
+        return $("input:" + control + "[name='" + id + "']:checked").val();
+    }
+    return getEById(id).val()
+}
+const setValueOfEById = (id, value) => {
+    const debugSetValue = false
+    const isMultipleOfE = getIsMultipleOfE(id)
+    const controlType = getControlTypeOfE(id)
+    // console.log(id, isMultipleOfE, controlType)
+    let queryStr = ''
+    if (controlType === "radio_or_checkbox") {
+        // console.log(id, value)
+        if (isMultipleOfE) {
+            // $("input:checkbox[name='dropdownMonitors()[]']").prop("checked",false)
+            queryStr = "input:checkbox[name='" + id + "[]']"
+            $(queryStr).prop("checked", false)
+            if (debugSetValue) console.log("Unchecked all", queryStr);
+            value.forEach(id_id => {
+                queryStr = "input:checkbox[name='" + id + "[]'][value=" + id_id + "]";
+                $(queryStr).prop("checked", true);
+                if (debugSetValue) console.log("Checking", queryStr);
+            })
+        } else {
+            // $("input:radio[name='assignee_1'][value=765]").prop("checked",true)
+            if (value == null) {
+                queryStr = "input:radio[name='" + id + "']"
+                $(queryStr).prop("checked", false);
+            } else {
+                queryStr = "input:radio[name='" + id + "'][value=" + value + "]"
+                $(queryStr).prop("checked", true);
+            }
+            if (debugSetValue) console.log(queryStr)
+        }
+    } else {
+        //Dropdown and dropdownMulti
+        getEById(id).val(value)
+    }
+}
 // const removeParenthesis = (str) => (str.includes("()")) ? str.substring(0, str.length - 2) : str
 
 let k = {}, listenersOfDropdown2 = {}, filtersOfDropdown2 = {}, debugListener = false
@@ -14,7 +62,11 @@ const filterDropdown2 = (column_name, dataSource) => {
             const column = filter_columns[i]
             const value = filter_values[i]
             dataSource.forEach((row) => {
-                if (row[column] === undefined) console.error("Column", column, " in filter_columns not found in", column_name, "(Relationships Screen)")
+                if (row[column] === undefined) {
+                    console.error("Column [", column, "] in filter_columns not found in", column_name, "(Relationships Screen)")
+                    // } else {
+                    //     console.log("Column [", column, "] in filter_columns found in", column_name, "(Relationships Screen)");
+                }
             })
             dataSource = dataSource.filter((row) => value == row[column])
         }
@@ -29,7 +81,7 @@ const onChangeDropdown2Reduce = (listener) => {
     let dataSource = k[table_name]
     if (debugListener) console.log("dataSource in k", dataSource)
 
-    const constraintsValues = triggers.map((trigger) => getEById(trigger).val())
+    const constraintsValues = triggers.map((trigger) => getValueOfEById(trigger))
     if (debugListener) console.log(triggers, constraintsValues)
 
     const dumbIncludes = (array, item) => {
@@ -60,16 +112,16 @@ const onChangeDropdown2Reduce = (listener) => {
 
     if (debugListener) console.log("DataSource AFTER reduce", dataSource)
     // console.log('onChangeDropdown2Reduce')
-    const lastSelected = getEById(column_name).val()
-    // console.log("Selected", lastSelected)
-    //TODO: make selected array if dropdown is multiple
+    const lastSelected = getValueOfEById(column_name)
+    // console.log("Selected of", column_name, "is", lastSelected)
     reloadDataToDropdown2(column_name, dataSource, [lastSelected * 1])
 }
 const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
     const listen_to_field = listen_to_fields[0]
     const listen_to_table = listen_to_tables[0]
-    const selectedId = getEById(listen_to_field).val()
+    const selectedId = getValueOfEById(listen_to_field)
+    // const selectedId = getEById(listen_to_field).val()
 
     const table = k[listen_to_table]
     const selectedObject = table.find((i) => i['id'] == selectedId)
@@ -89,8 +141,9 @@ const onChangeDropdown2Assign = (listener) => {
         const theValue = selectedObject[listen_to_attr]
         if (theValue !== undefined) {
             // const column_name1 = removeParenthesis(column_name)
-            if (debugListener) console.log(column_name, theValue)
-            getEById(column_name).val(theValue)
+            if (debugListener) console.log("Set value of", column_name, "to", theValue)
+            // getEById(column_name).val(theValue)
+            setValueOfEById(column_name, theValue)
             getEById(column_name).trigger('change')
         }
         else {
@@ -170,6 +223,9 @@ const onChangeDropdown2 = (name) => {
 }
 
 const reloadDataToDropdown2 = (id, dataSource, selected) => {
+    const control_type = getControlTypeOfE(id)
+
+    // console.log("reloadDataToDropdown2", id, control_type, dataSource, selected)
     if (dataSource === undefined) return;
     getEById(id).empty()
 
@@ -177,24 +233,64 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
     dataSource = filterDropdown2(id, dataSource)
     // console.log("Loading dataSource for", id, selected, dataSource)
 
-    for (let i = 0; i < dataSource.length; i++) {
-        let item = dataSource[i]
-        selectedStr = (dataSource.length === 1) ? 'selected' : (selected.includes(item.id) ? "selected" : "")
-        option = "<option value='" + item.id + "' title='" + item.description + "' " + selectedStr + " >"
-        option += item.name
-        option += "</option>"
-        options.push(option)
+    if (control_type === 'dropdown') {
+        for (let i = 0; i < dataSource.length; i++) {
+            let item = dataSource[i]
+            selectedStr = (dataSource.length === 1) ? 'selected' : (selected.includes(item.id) ? "selected" : "")
+            option = "<option value='" + item.id + "' title='" + item.description + "' " + selectedStr + " >"
+            option += item.name
+            option += "</option>"
+            options.push(option)
+        }
+        options.unshift("<option value=''></option>")
+        getEById(id).append(options)
+        // console.log("Appended", id, 'with options has', options.length, 'items')
+
+        getEById(id).select2({
+            placeholder: "Please select..."
+            // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
+            , templateResult: select2FormatState
+        });
+    } else if (control_type == "radio_or_checkbox") {
+        // const control = getEById(id)
+        // const isMultiple = control[0].hasAttribute("multiple")
+        const isMultiple = getIsMultipleOfE(id)
+        const radio_or_checkbox = isMultiple ? "checkbox" : "radio"
+        const control_name = isMultiple ? (id + "[]") : id
+        for (let i = 0; i < dataSource.length; i++) {
+            let item = dataSource[i];
+            selectedStr = (dataSource.length === 1) ? 'checked' : (selected.includes(item['id']) ? "checked" : "")
+            // console.log(item)
+            const title = item['description'] + " (#" + item['id'] + ")"
+            option = '<div class="items-center bg-white-50 col-span-4 flex align-center ">'
+            option += '<label title="' + title + '">'
+            option += '<input type="' + radio_or_checkbox + '" name="' + control_name + '" value="' + item['id'] + '" ' + selectedStr + '>'
+            option += " " + item['name']
+            option += '</label>'
+            option += '</div>'
+            options.push(option)
+        }
+        getEById(id).append(options)
+    } else {
+        console.error("Unknown control_type", control_type)
     }
-    options.unshift("<option value=''></option>")
-    getEById(id).append(options)
-    // console.log("Appended", id, 'with options has', options.length, 'items')
+}
 
-    getEById(id).select2({
-        placeholder: "Please select..."
-        // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
-        , templateResult: select2FormatState
-    });
+const RadioOrCheckbox = ({ id, name, className, multiple }) => {
+    name = multiple ? name + "[]" : name
+    multipleStr = multiple ? 'multiple' : ''
 
+    let render = ""
+    render += "<div "
+    render += "id='" + id + "' "
+    render += "name='" + name + "' "
+    render += "onChange='onChangeDropdown2(\"" + name + "\")' "
+    render += " " + multipleStr + " "
+    render += "controlType='radio_or_checkbox' "
+    render += "class='" + className + "' "
+    render += ">"
+    render += "</div>"
+    return render
 }
 
 const Dropdown2 = ({ id, name, className, multipleStr }) => {
@@ -204,10 +300,10 @@ const Dropdown2 = ({ id, name, className, multipleStr }) => {
     render += "name='" + name + "' "
     render += "onChange='onChangeDropdown2(\"" + name + "\")' "
     render += " " + multipleStr + " "
+    render += "controlType='dropdown' "
     render += "class='" + className + "' "
     render += ">"
     render += "</select>"
 
     return render
 }
-

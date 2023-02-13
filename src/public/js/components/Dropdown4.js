@@ -29,7 +29,11 @@ const filterDropdown4 = (id, dataSource, table01Name) => {
             const column = filter_columns[i]
             const value = filter_values[i]
             dataSource.forEach((row) => {
-                if (row[column] === undefined) console.error("Column", column, " in filter_columns not found in", column_name, "(Relationships Screen)")
+                if (row[column] === undefined) {
+                    console.error("Column", column, " in filter_columns not found in", column_name, "(Relationships Screen)")
+                    // } else {
+                    //     console.log("Column [", column, "] in filter_columns found in", column_name, "(Relationships Screen)");
+                }
             })
             dataSource = dataSource.filter((row) => value == row[column])
         }

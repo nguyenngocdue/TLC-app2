@@ -59,23 +59,25 @@ trait TraitEntityListenDataSource
         foreach ($listen_to_tables as $i => $table) $extraColumns[$table][] = $listen_to_attrs[$i];
         $this->dump2("Extra Columns to load: ", $extraColumns, __LINE__);
 
-        foreach ($sp['props'] as $prop) {
-            $relationships = $prop['relationships'];
-            $filter_columns = $relationships['filter_columns'] ?? [];
-
-            if (sizeof($filter_columns) > 0) {
-                // dump($filter_columns);
-                $table = $relationships['table'];
-                foreach ($filter_columns as $filter_column) {
-                    $extraColumns[$table][] = $filter_column;
-                }
-                $extraColumns[$table] = array_unique($extraColumns[$table]);
-            }
-        }
+        foreach ($sp['props'] as $prop) $this->loadExtraColumnsFromFilterColumns($prop, $extraColumns);
 
         return [$extraColumns, $toBeLoaded];
     }
 
+    private function loadExtraColumnsFromFilterColumns($prop, &$extraColumns)
+    {
+        $relationships = $prop['relationships'];
+        $filter_columns = $relationships['filter_columns'] ?? [];
+
+        if (sizeof($filter_columns) > 0) {
+            // dump("Load more columns due to filter_columns", $filter_columns);
+            $table = $relationships['table'];
+            foreach ($filter_columns as $filter_column) {
+                $extraColumns[$table][] = $filter_column;
+            }
+            $extraColumns[$table] = array_unique($extraColumns[$table]);
+        }
+    }
 
     private function deepMerge(array $a1, array $a2)
     {
@@ -90,19 +92,40 @@ trait TraitEntityListenDataSource
         return $result;
     }
 
+    private function getMatrixForRadioCheckboxDropdown()
+    {
+        $sp = SuperProps::getFor($this->type);
+        $extraColumns = [];
+        $toBeLoaded = [];
+
+        foreach ($sp['props'] as $prop) {
+            if ($prop['hidden_edit']) continue;
+            if (in_array($prop['control'], ['radio', 'checkbox', 'dropdown', 'dropdown_multi'])) {
+                $table = $prop['relationships']['table'];
+                $toBeLoaded[] = $table;
+                $this->loadExtraColumnsFromFilterColumns($prop, $extraColumns);
+            }
+        }
+        // dump($props);
+        return [$extraColumns, array_unique($toBeLoaded)];
+    }
+
     private function getMatrix($types)
     {
         // dump($this->deepMerge([], []));
         // dump($this->deepMerge(["a" => [1, 2, 3]], ["b" => [4, 5, 6]]));
         // dump($this->deepMerge(["a" => [1, 2, 3], "b" => [4, 5, 6, 10]], ["a" => [1, 2, 7, 8, 9], "b" => [10, 11, 12]]));
+        // dd();
         // dump($this->type);
+        // dump($types);
 
-        $extraColumns = [];
-        $toBeLoaded = [];
+        [$extraColumns, $toBeLoaded] = $this->getMatrixForRadioCheckboxDropdown();
+        // dump($extraColumns, $toBeLoaded);
+
         foreach ($types as $type) {
             [$extraColumns0, $toBeLoaded0] = $this->refineListenToFieldAndAttr($type);
-            // dump($extraColumns0);
             $extraColumns = $this->deepMerge($extraColumns, $extraColumns0);
+            // dump($extraColumns, $extraColumns0);
             $toBeLoaded = array_unique([...$toBeLoaded, ...$toBeLoaded0]);
         }
         // dump($extraColumns, $toBeLoaded);
@@ -128,7 +151,7 @@ trait TraitEntityListenDataSource
     private function renderListenDataSource($types)
     {
         $matrix = $this->getMatrix($types);
-        // dump($matrix);
+        // dump($types, $matrix);
         $result = [];
         $columnsWithOracy = [];
 

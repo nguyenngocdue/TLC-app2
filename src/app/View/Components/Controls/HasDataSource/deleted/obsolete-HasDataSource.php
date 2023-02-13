@@ -36,12 +36,12 @@ trait HasDataSource
         }
     }
 
-    function getTableEOO($eloquentOrOracy)
-    {
-        $relatedModel = $this->getRelatedModelEOO($eloquentOrOracy);
-        $table = (new $relatedModel)->getTable();
-        return $table;
-    }
+    // function getTableEOO($eloquentOrOracy)
+    // {
+    //     $relatedModel = $this->getRelatedModelEOO($eloquentOrOracy);
+    //     $table = (new $relatedModel)->getTable();
+    //     return $table;
+    // }
 
     function getDataSourceEOO($eloquentOrOracy)
     {

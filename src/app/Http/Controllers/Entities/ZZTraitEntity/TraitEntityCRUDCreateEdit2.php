@@ -17,14 +17,10 @@ trait TraitEntityCRUDCreateEdit2
 
 	public function create()
 	{
-		$types = [
-			'hse_corrective_action',
-			'zunit_test_02',
-			'zunit_test_09',
-		];
 		$props = $this->getCreateEditProps();
 		$values =  (object) $this->loadValueOfOrphanAttachments($props);
 		$tableBluePrint = $this->makeTableBluePrint();
+		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		return view('dashboards.pages.entity-create-edit', [
 			'props' => $props,
 			'defaultValues' => DefaultValues::getAllOf($this->type),
@@ -34,7 +30,7 @@ trait TraitEntityCRUDCreateEdit2
 			'values' => $values,
 			'title' => "Add New",
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
-			'listenerDataSource' => $this->renderListenDataSource($types),
+			'listenerDataSource' => $this->renderListenDataSource($tableToLoadDataSource),
 			'listeners2' => $this->getListeners2($this->type),
 			'filters2' => $this->getFilters2($this->type),
 			'listeners4' => $this->getListeners4($tableBluePrint),
@@ -44,14 +40,10 @@ trait TraitEntityCRUDCreateEdit2
 
 	public function edit($id)
 	{
-		$types = [
-			'hse_corrective_action',
-			'zunit_test_02',
-			'zunit_test_09',
-		];
 		$props = $this->getCreateEditProps();
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($id, $props);
 		$tableBluePrint = $this->makeTableBluePrint();
+		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		return view('dashboards.pages.entity-create-edit', [
 			'props' => $props,
 			'defaultValues' => DefaultValues::getAllOf($this->type),
@@ -61,7 +53,7 @@ trait TraitEntityCRUDCreateEdit2
 			'modelPath' => $this->data,
 			'title' => "Edit",
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
-			'listenerDataSource' => $this->renderListenDataSource($types),
+			'listenerDataSource' => $this->renderListenDataSource($tableToLoadDataSource),
 			'listeners2' => $this->getListeners2($this->type),
 			'filters2' => $this->getFilters2($this->type),
 			'listeners4' => $this->getListeners4($tableBluePrint),

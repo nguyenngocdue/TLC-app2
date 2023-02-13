@@ -55,7 +55,7 @@ $id = $action === "edit" ? $values->id : "";
             @endphp
             <div class='col-span-{{$col_span}} grid'>
                 <div class='grid grid-row-1'>
-                    <div class='grid grid-cols-12 items-center {{$hiddenRow}} '>
+                    <div class='grid grid-cols-12 items-center content-start {{$hiddenRow}} '>
                         @if($columnType === 'static')
                         <div class='col-span-12 text-left'>
                             @switch($control)
@@ -143,24 +143,19 @@ $id = $action === "edit" ? $values->id : "";
                             @break
 
                             @case ('dropdown')
-                            {{-- <x-controls.has-data-source.dropdown type={{$type}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} /> --}}
                             <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} />
                             @break
                             @case ('radio')
-                            {{-- <x-controls.has-data-source.radio type={{$type}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} /> --}}
-                            <x-controls.has-data-source.radio2 type={{$type}} name={{$columnName}} selected={{$value}} />
+                            <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} />
                             @break
                             @case ('dropdown_multi')
-                            {{-- <x-controls.has-data-source.dropdown type={{$type}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} /> --}}
                             <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} multiple={{true}} />
                             @break
                             @case('checkbox')
-                            {{-- <x-controls.has-data-source.checkbox type={{$type}} id={{$id}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} /> --}}
-                            <x-controls.has-data-source.checkbox2 type={{$type}} name={{$columnName}} selected={{$value}} />
+                            <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} multiple={{true}}/>
                             @break
 
                             @case('attachment')
-                            {{-- <x-controls.upload-files id={{$id}} colName={{$columnName}} label={{$label}} type={{$type}} /> --}}
                             <x-renderer.attachment2 name={{$columnName}} value={{$value}} />
 
                             @break
@@ -182,8 +177,6 @@ $id = $action === "edit" ? $values->id : "";
                             @case('parent_link')
                             <x-feedback.alert type="warning" title="Warning" message="{{$control}} suppose to show in View All screen only, please do not show in Edit screen." />
                             @break
-
-                            
 
                             @default
                             <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />

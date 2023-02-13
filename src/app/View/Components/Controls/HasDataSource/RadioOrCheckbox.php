@@ -4,19 +4,16 @@ namespace App\View\Components\Controls\HasDataSource;
 
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
-use Illuminate\Support\Str;
 
-class Dropdown2 extends Component
+class RadioOrCheckBox extends Component
 {
     // use HasDataSource;
     public function __construct(
+        private $type,
         private $name,
-        private $selected = null,
+        private $selected,
+        private $table01Name = null,
         private $multiple = false,
-        private $type = null,
-
-        // private $table01Name = null,
-        // private $lineType = null,
     ) {
         $old = old($name);
         if ($old) {
@@ -37,16 +34,17 @@ class Dropdown2 extends Component
         $prop = $sp['props']["_" . $this->name];
         $table = $prop['relationships']['table'];
         $id = $this->name;
-        $name = $this->multiple ? $this->name . "[]" : $this->name;
+        $name =  $this->name;
         $params = [
             'name' => $name,
             'id' => $id,
             'selected' => $this->selected,
-            'multipleStr' => $this->multiple ? "multiple" : "",
-            'className' => "bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
+            'multiple' => $this->multiple ? "true" : "false",
+            'className' => "grid grid-cols-12 gap-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
             'table' => $table,
         ];
         // dump($params);
-        return view('components.controls.has-data-source.dropdown2', $params);
+
+        return view('components.controls.has-data-source.radio-or-checkbox', $params);
     }
 }
