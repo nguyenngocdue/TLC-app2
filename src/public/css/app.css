@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com
+! tailwindcss v3.2.1 | MIT License | https://tailwindcss.com
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -24,7 +24,6 @@
 2. Prevent adjustments of font size after orientation changes in iOS.
 3. Use a more readable tab size.
 4. Use the user's configured `sans` font-family by default.
-5. Use the user's configured `sans` font-feature-settings by default.
 */
 
 html {
@@ -34,7 +33,6 @@ html {
   -o-tab-size: 4;
      tab-size: 4; /* 3 */
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, system-ui, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji; /* 4 */
-  font-feature-settings: normal; /* 5 */
 }
 
 /*
@@ -675,9 +673,6 @@ video {
 .m-0\.5 {
   margin: 0.125rem;
 }
-.m-1 {
-  margin: 0.25rem;
-}
 .mx-5 {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
@@ -1032,6 +1027,9 @@ video {
 }
 .w-\[1000px\] {
   width: 1000px;
+}
+.w-\[40\%\] {
+  width: 40%;
 }
 .min-w-0 {
   min-width: 0px;
@@ -2521,9 +2519,6 @@ video {
 }
 .leading-normal {
   line-height: 1.5;
-}
-.leading-4 {
-  line-height: 1rem;
 }
 .tracking-tight {
   letter-spacing: -0.025em;

@@ -14,6 +14,8 @@ class Qaqc_insp_chklst extends Report_ParentController
     {
         $sql =  " SELECT
                         po.id
+                        ,sp.name AS project_name
+                        ,l.value AS sign
                         ,r.qaqc_insp_chklst_sht_id AS sheet_id
                         ,s.description AS sheet_name
                         ,r.id AS run_id
@@ -44,9 +46,11 @@ class Qaqc_insp_chklst extends Report_ParentController
 
             FROM qaqc_insp_chklst_runs r
                 JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id";
+
         if (isset($urlParams['prod_order_id'])) $sql .= " \n JOIN prod_orders po ON po.id = '{{prod_order_id}}' \n";
         $sql .= " \n JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
                 JOIN control_types ct ON ct.id = l.control_type_id
+                JOIN sub_projects sp ON sp.id = po.sub_project_id
                 LEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
                 JOIN qaqc_insp_groups g ON g.id = l.qaqc_insp_group_id
                 JOIN qaqc_insp_tmpl_shts ts ON ts.id = s.qaqc_insp_tmpl_sht_id
@@ -77,7 +81,8 @@ class Qaqc_insp_chklst extends Report_ParentController
             [
                 "dataIndex" => "response_type",
                 "align" => "center",
-            ]
+            ],
+
         ];
     }
 
@@ -116,9 +121,11 @@ class Qaqc_insp_chklst extends Report_ParentController
                             $s .= "<td class ='px-6 py-4'>" . $circleIcon . $value . "</td>";
                         }
                     };
-                    $runDesc = "<td>" . $item['run_desc'] . ":" . "</td>";
+                    $runDesc = "<td class='hidden'>" . $item['run_desc'] . ":" . "</td>";
                     $runUpdated = "<td class ='px-6 py-4'>" . $item['run_updated'] . "</td>";
                     $str .= "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" .  $runDesc  . $s . $runUpdated . "</tr>";
+                } else {
+                    $str .=  $item['sign'];
                 }
                 $arrayHtml[$id] = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str . "</tbody>" . "</table>";
             }
@@ -144,6 +151,7 @@ class Qaqc_insp_chklst extends Report_ParentController
             $data[$sheetId] = array_values($runLines);
         }
         ksort($data);
+        // dd($data);
         return $data;
     }
 }

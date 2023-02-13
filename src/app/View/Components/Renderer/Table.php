@@ -30,6 +30,7 @@ class Table extends Component
     //Editable MODE
     private $model = null,
     // private $editable = false,
+    private $setBorder = "border rounded-lg"
   ) {
   }
 
@@ -65,6 +66,7 @@ class Table extends Component
       'footer' => $this->footer,
       'colgroup' => $this->makeColGroup($columns),
       'maxH' => $this->maxH,
+      'setBorder' => $this->setBorder
     ]);
   }
 }

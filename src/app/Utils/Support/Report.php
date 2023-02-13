@@ -24,6 +24,6 @@ class Report
     public static function slugName($string)
     {
         $strLower = strtolower($string);
-        return str_replace(" ", "_", $strLower);
+        return preg_replace('/[[:space:]]+/', "_", $strLower);
     }
 }
