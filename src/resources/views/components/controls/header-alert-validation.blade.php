@@ -8,22 +8,11 @@
         $colNameErrors = (array)$outErrors;
         @endphp
         <span class="font-medium">Error: The operation failed.</span>
-        <ul class="mt-1.5 ml-4 text-red-700 list-disc list-inside">
+        <ul class="mt-1.5 ml-4 text-blue-700 list-disc list-inside">
             @foreach($colNameErrors as $colName => $errorList)
             @php $message = join(", ", $errorList); @endphp
             <li>
                 <a href="#scroll-{{$colName}}" title="{{$colName}}">{{$message}}</a>
-                {{-- @foreach($props as $keyProps => $prop)
-                @if ($prop['column_name']=== $colName)
-                @php
-                // $strSearch = str_contains($colName, '_') ? str_replace('_', ' ', $colName) : $colName;
-                $message = $value[0];
-                $idx = strpos($message, 'field'); // index of "field" word in message
-                $strSearch = substr($message, 4, $idx - 4);
-                // dump($message , $prop, $strSearch);
-                @endphp
-                @endif
-                @endforeach --}}
             </li>
             @endforeach
         </ul>

@@ -21,6 +21,7 @@ trait TraitEntityEditableTable
     private function handleEditableTables(Request $request, $props)
     {
         // dump($request);
+        // dd();
         // echo "RECURSIVE = RECURSIVE = RECURSIVE = RECURSIVE = RECURSIVE = ";
         // dump($this->superProps['props']);
         // dump($props);
@@ -39,6 +40,8 @@ trait TraitEntityEditableTable
                 $fakeRequest = new Request();
                 $line['tableNames'] = "fakeRequest";
                 $line['tableName'] = $tableName;
+                $line['table01Name'] = $table01Name;
+                $line['theField'] = "";
                 $fakeRequest->merge($line);
                 // dd($fakeRequest);
                 // dump($line);

@@ -7,6 +7,8 @@ use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\Validation\Validator;
 
 trait TraitEntityCRUDStoreUpdate2
 {
@@ -177,6 +179,28 @@ trait TraitEntityCRUDStoreUpdate2
 	{
 		dump("Exception during $action phase $phase " . $e->getFile() . " line " . $e->getLine());
 		dd($e->getMessage());
+		// dd($e);
+	}
+
+	protected function handleValidationException($e, $action, $request, $phase)
+	{
+		dump("Exception during $action phase $phase " . $e->getFile() . " line " . $e->getLine());
+		// dump($e->getMessage());
+		// dd($e);
+		$table01Name = $request['tableNames'];
+		if ($table01Name === 'fakeRequest') {
+			$messageBag = $e->validator->getMessageBag();
+			$messages = $messageBag->getMessages();
+			$tableName = $request['tableName'];
+			$table01Name = $request['table01Name'];
+
+			dump($tableName, $table01Name,  $messages);
+			return $e->validator;
+			// return redirect("")->withErrors($e->validator)->withInput();
+			// throw new TableException($e, $request);
+		} else {
+			//If not a fake request, the exception will eventually be thrown to the alert validation control
+		}
 	}
 
 	public function store(Request $request)
@@ -190,7 +214,16 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
+		// try {
 		$request->validate($this->getValidationRules());
+		// } catch (ValidationException $e) {
+		// 	$validator = $e->validator;
+		// 	$tableName = $request['tableName'];
+		// 	$table01Name = $request['table01Name'];
+		// 	$theField = $request['theField'];
+		// 	$validator->getMessageBag()->add($table01Name, $tableName);
+		// 	return redirect("")->withErrors($e->validator)->withInput();
+		// }
 		try {
 			//Get newStatus before it get removed by handleFields
 			$newStatus = $request['status'];
@@ -230,7 +263,11 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
+		// try {
 		$request->validate($this->getValidationRules());
+		// } catch (ValidationException $e) {
+		// $this->handleValidationException($e, __FUNCTION__, $request['tableNames'], 10000);
+		// }
 		try {
 			//Get newStatus before it get removed by handleFields
 			$newStatus = $request['status'];

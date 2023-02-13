@@ -104,7 +104,9 @@ $id = $action === "edit" ? $values->id : "";
                             @endif
 
                             {{-- Invisible anchor for scrolling when users click on validation fail message --}}
-                            <strong class="scroll-mt-20 snap-start" id="scroll-{{$columnName}}"></strong>
+                            <strong class="scroll-mt-20 snap-start" id="scroll-{{$columnName}}">
+                                {{-- #{{$columnName}} --}}
+                            </strong>
                             @switch ($control)
                             @case($timeControls[0])
                             @case($timeControls[1])
