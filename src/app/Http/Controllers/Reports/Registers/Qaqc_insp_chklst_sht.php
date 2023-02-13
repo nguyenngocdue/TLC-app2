@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Utils\Support\Report;
 
 class Qaqc_insp_chklst_sht extends Report_ParentController
 {
@@ -77,11 +78,11 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
     protected function enrichDataSource($dataSource)
     {
         $enrichData = array_map(function ($item) {
-            return $item + [Helper::slugName($item['sheet_desc']) => $item['sheet_status']];
+            return $item + [Report::slugName($item['sheet_desc']) => $item['sheet_status']];
         }, array_values($dataSource));
 
-        $groupedArray = Helper::groupArrayByKey($enrichData, 'po_id');
-        $result = Helper::mergeArrayValues($groupedArray);
+        $groupedArray = Report::groupArrayByKey($enrichData, 'po_id');
+        $result = Report::mergeArrayValues($groupedArray);
         $dataSource = $this->changeValueData($result);
         return $dataSource;
     }

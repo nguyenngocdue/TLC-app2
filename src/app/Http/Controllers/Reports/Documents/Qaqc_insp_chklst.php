@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Utils\Support\Report;
 
 class Qaqc_insp_chklst extends Report_ParentController
 {
@@ -13,6 +14,8 @@ class Qaqc_insp_chklst extends Report_ParentController
     {
         $sql =  " SELECT
                         po.id
+                        ,sp.name AS project_name
+                        ,l.value AS sign
                         ,r.qaqc_insp_chklst_sht_id AS sheet_id
                         ,s.description AS sheet_name
                         ,r.id AS run_id
@@ -43,9 +46,11 @@ class Qaqc_insp_chklst extends Report_ParentController
 
             FROM qaqc_insp_chklst_runs r
                 JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id";
+
         if (isset($urlParams['prod_order_id'])) $sql .= " \n JOIN prod_orders po ON po.id = '{{prod_order_id}}' \n";
         $sql .= " \n JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
                 JOIN control_types ct ON ct.id = l.control_type_id
+                JOIN sub_projects sp ON sp.id = po.sub_project_id
                 LEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
                 JOIN qaqc_insp_groups g ON g.id = l.qaqc_insp_group_id
                 JOIN qaqc_insp_tmpl_shts ts ON ts.id = s.qaqc_insp_tmpl_sht_id
@@ -76,13 +81,13 @@ class Qaqc_insp_chklst extends Report_ParentController
             [
                 "dataIndex" => "response_type",
                 "align" => "center",
-            ]
+            ],
+
         ];
     }
 
     protected function enrichDataSource($dataSource)
     {
-        // dd($dataSource);
 
 
         $circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
@@ -90,17 +95,19 @@ class Qaqc_insp_chklst extends Report_ParentController
 
         $lines =  [];
         foreach ($dataSource as $item) {
-            $lines[$item['line_id']] = $item;
+            if (isset($item['line_id'])) {
+                $lines[$item['line_id']] = $item;
+            }
         }
 
-        $line_id_lineDesc = array_column($dataSource, 'line_description', 'line_id');
-        // dd($line_id_lineDesc);
-        $desc_line_ids = [];
-        foreach ($line_id_lineDesc as $id => $value) {
-            $desc_line_ids[$value][] = $id;
+        $desc_lineIds = [];
+        foreach ($lines as $id => $value) {
+            $desc = $value['line_description'];
+            $desc_lineIds[$desc][] = $id;
         }
-        $ids_htmls = [];
-        foreach ($desc_line_ids as $ids) {
+
+        $arrayHtml = [];
+        foreach ($desc_lineIds as $ids) {
             $str = '';
             foreach ($ids as $id) {
                 $item = $lines[$id];
@@ -114,36 +121,37 @@ class Qaqc_insp_chklst extends Report_ParentController
                             $s .= "<td class ='px-6 py-4'>" . $circleIcon . $value . "</td>";
                         }
                     };
-                    $runDesc = "<td>" . $item['run_desc'] . ":" . "</td>";
+                    $runDesc = "<td class='hidden'>" . $item['run_desc'] . ":" . "</td>";
                     $runUpdated = "<td class ='px-6 py-4'>" . $item['run_updated'] . "</td>";
                     $str .= "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" .  $runDesc  . $s . $runUpdated . "</tr>";
+                } else {
+                    $str .=  $item['sign'];
                 }
-                $ids_htmls[$id] = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str . "</tbody>" . "</table>";
+                $arrayHtml[$id] = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str . "</tbody>" . "</table>";
             }
         }
 
-        $dataRender = [];
-        // $desc_id = array_column($dataSource, 'line_id', 'line_description');
-        $line_id_desc = array_column($dataSource, 'line_description', 'line_id');
-        foreach ($line_id_desc as $id => $value) {
-            $dataRender[] = $lines[$id] + ['response_type' => $ids_htmls[$id]];
+        foreach ($lines as $id => $value) {
+            $lines[$id]['response_type'] = $arrayHtml[$id];
+        }
+        $sheetGroup = Report::groupArrayByKey($lines, 'sheet_id');
+
+        $sheets = [];
+        foreach ($sheetGroup as $sheetId => $value) {
+            $groupDesc = Report::groupArrayByKey($value, 'line_description');
+            foreach ($groupDesc as $key => $value) {
+                $groupDesc[$key] = array_pop($value);
+            }
+            // dd($groupDesc);
+            $sheets[$sheetId] = $groupDesc;
         }
 
-        $out = array_filter($dataRender, fn ($item) => $item['sheet_id'] === 1);
-        // dd($out);
-        // dump($line_id_desc);
-        // dump($lines);
-
-        $groupBy_line_desc = Helper::groupArrayByKey($dataRender, 'line_description');
-
-        $array = [];
-        foreach ($groupBy_line_desc as $key => $value) {
-            $array[] = array_pop($value);
+        $data = [];
+        foreach ($sheets as $sheetId => $runLines) {
+            $data[$sheetId] = array_values($runLines);
         }
-
-        $groupBy_sheet_id = Helper::groupArrayByKey($array, 'sheet_id');
-        ksort($groupBy_sheet_id);
-        // dd($groupBy_sheet_id);
-        return $groupBy_sheet_id;
+        ksort($data);
+        // dd($data);
+        return $data;
     }
 }
