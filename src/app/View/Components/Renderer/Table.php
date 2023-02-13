@@ -30,6 +30,7 @@ class Table extends Component
     //Editable MODE
     private $model = null,
     // private $editable = false,
+    private $setBorder = "border rounded-lg"
   ) {
   }
 

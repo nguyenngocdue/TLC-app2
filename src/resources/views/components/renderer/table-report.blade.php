@@ -1,7 +1,7 @@
 <div class="overflow-x-auto">
-    <div class="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
-        <div class="w-[50%] lg:w-5/6">
-            <div class="bg-white shadow-md rounded my-6">
+    <div class="  min-w-screen min-h-screen bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
+        <div class="w-[40%] lg:w-5/6">
+            <div class="bg-white shadow-md  my-6 border rounded-lg overflow-hidden">
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -18,8 +18,11 @@
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">
-                                    <span>{{$value}}</span>
+                                <div class="flex items-center ">
+                                    @php
+                                    $name = App\Utils\Support\Report::slugName($value)
+                                    @endphp
+                                    <a href="#{{$name}}">{{$value}}</a>
                                 </div>
                             </td>
                         </tr>

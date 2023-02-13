@@ -55,6 +55,16 @@ abstract class Report_ParentController extends Controller
         return $dataSource;
     }
 
+    protected function getSheets($dataSource)
+    {
+        // dump($dataSource);
+        $sheets = array_map(function ($item) {
+            $x = isset(array_pop($item)['sheet_name']);
+            return $x ? array_pop($item)['sheet_name'] : '';
+        }, $dataSource);
+        // dd($sheets);
+        return $sheets;
+    }
 
     public function index(Request $request)
     {
@@ -66,14 +76,15 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->getDataSource($urlParams);
         $dataSource = $this->enrichDataSource($dataSource);
         $columns = $this->getTableColumns($dataSource);
-        $prod_orders  = Prod_order::get()->pluck('name', 'id')->toArray();
 
+        $prod_orders  = Prod_order::get()->pluck('name', 'id')->toArray();
         $subProjects = Sub_project::get()->pluck('name', 'id')->toArray();
         $chklts_Sheet = Qaqc_insp_chklst::get()->pluck('name', 'id')->toArray();
 
 
         // dd($dataSource);
-        $sheets = array_map(fn ($item) => array_pop($item)['sheet_name'], $dataSource);
+        $sheets = $this->getSheets($dataSource);
+        // dump($sheets);
 
 
         $typeReport = CurrentRoute::getCurrentController();

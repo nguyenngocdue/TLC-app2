@@ -1,4 +1,4 @@
-<div class="rounded-lg border border-gray-300 dark:border-gray-600">
+<div class="border rounded-lg border-gray-300 dark:border-gray-600">
     <div>
         <div class="inline-block w-full sm:px-0 lg:px-0">
             @if ($header)

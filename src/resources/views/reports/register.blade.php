@@ -10,6 +10,6 @@ $nameControl2 = isset($nameControls[1]) ? $nameControls[1] : "No";
 @endphp
 
 @section('content')
-<x-renderer.modes-report :dataControl1="$subProjects" :dataControl2="$prod_orders" nameControl1="{{$nameControl1}}" nameControl2="{{$nameControl2}}" :itemsSelected="$urlParams"></x-renderer.modes-report>
+<x-renderer.modes-report :controlValues="[$subProjects, $prod_orders]" :controlNames="[$nameControl1, $nameControl2]" :itemsSelected="$urlParams"></x-renderer.modes-report>
 <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" />
 @endsection
