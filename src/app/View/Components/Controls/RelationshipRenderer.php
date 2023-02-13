@@ -29,7 +29,21 @@ class RelationshipRenderer extends Component
         $this->table01Name = "table" . str_pad(static::$table00Count++, 2, 0, STR_PAD_LEFT);
     }
 
-    private function getDataSource($row, $colName, $showAll = false)
+    private function isTableOrderable($row, $colName)
+    {
+        $eloquentParam = $row->eloquentParams[$colName];
+        //TODO: This is to prevent from a crash
+        if ($eloquentParam[0] === 'morphToMany') return [];
+
+        $dummyInstance = new $eloquentParam[1];
+        $fillable = $dummyInstance->getFillable();
+        $hasOrderNoColumn = in_array('order_no', $fillable);
+
+        // if (!$hasOrderNoColumn) dump("Order_no column not found, re-ordering function will not work");
+        return $hasOrderNoColumn;
+    }
+
+    private function getDataSource($row, $colName, $isOrderable, $showAll = false)
     {
         if (!isset($row->eloquentParams[$colName])) {
             //TODO: 
@@ -41,18 +55,12 @@ class RelationshipRenderer extends Component
             //TODO: This is to prevent from a crash
             if ($eloquentParam[0] === 'morphToMany') return [];
 
-            $dummyInstance = new $eloquentParam[1];
-            $fillable = $dummyInstance->getFillable();
-            $hasOrderNoColumn = in_array('order_no', $fillable);
-            if (!$hasOrderNoColumn) dump("Order_no column not found, re-ordering function will not work");
-            // dump($fillable);
-
             if (isset($eloquentParam[2])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
             elseif (isset($eloquentParam[1])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1]);
             elseif (isset($eloquentParam[0])) $relation = $row->{$eloquentParam[0]}();
             $perPage = $showAll ? 10000 : 10;
             $result = $relation->getQuery();
-            if ($hasOrderNoColumn) $result = $result->orderBy('order_no');
+            if ($isOrderable) $result = $result->orderBy('order_no');
 
             $result = $result->paginate($perPage, ['*'], $colName);
             return $result;
@@ -69,7 +77,8 @@ class RelationshipRenderer extends Component
                 dd("Column [" . $column['dataIndex'] . "] not found in SuperProps of " . $tableName);
             }
             $prop = $sp['props']["_" . $column['dataIndex']];
-            $newColumn['title'] = $column['title'] ?? $prop['label'] . " <br/>" . $prop['control'];
+            $newColumn['title'] = $column['title'] ?? $prop['label']; //. " <br/>" . $prop['control'];
+            $newColumn['width'] = $prop['width'];
             switch ($prop['control']) {
                 case 'id':
                     $newColumn['renderer'] = 'id';
@@ -111,12 +120,16 @@ class RelationshipRenderer extends Component
         $result = [
             [
                 'dataIndex' => 'action',
+                'width' => 5,
             ]
         ];
         foreach ($columns as $column) {
             $newColumn = $column;
             $prop = $sp['props']["_" . $column['dataIndex']];
-            $newColumn['title'] = $column['title'] ?? $prop['label'] . " <br/>" . $prop['control'];
+            $newColumn['title'] = $column['title'] ?? $prop['label']; //. " <br/>" . $prop['control'];
+            $newColumn['width'] = $prop['width'];
+            // dump($newColumn);
+            // dump($prop);
             switch ($prop['control']) {
                 case 'id':
                     $newColumn['renderer'] = 'read-only-text';
@@ -166,29 +179,31 @@ class RelationshipRenderer extends Component
             if ($newColumn['dataIndex'] === 'order_no') {
                 $newColumn['onChange'] = "rerenderTableBaseOnNewOrder(`" . $table01Name . "`)";
             }
+            // dump($newColumn);
             $result[] = $newColumn;
         }
         // dump($result);
         return $result;
     }
 
-    private function attachActionColumn($table01Name, $dataSource)
+    private function attachActionColumn($table01Name, $dataSource, $isOrderable)
     {
         // dump($dataSource);
         foreach ($dataSource as &$row) {
             $id = $row->order_no;
             // dump($index);
             $type = $this->tableDebug ? "text" : "hidden";
-            $row->action = Blade::render("
+            $output = "
             <input readonly name='{$table01Name}[finger_print][]' value='$id' type=$type class='w-10 bg-gray-300' />
             <input readonly name='{$table01Name}[DESTROY_THIS_LINE][]'  type=$type class='w-10 bg-gray-300' />
-            <div class='whitespace-nowrap flex'>
-                <x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
-                <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>
-                <x-renderer.button size='xs' value='$table01Name' onClick='duplicateEditableTable({control:this, fingerPrint: $id})' type='secondary' ><i class='fa fa-copy'></i></x-renderer.button>
+            <div class='whitespace-nowrap flex justify-center '>";
+            if ($isOrderable) $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
+                 <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>";
+            $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='duplicateEditableTable({control:this, fingerPrint: $id})' type='secondary' ><i class='fa fa-copy'></i></x-renderer.button>
                 <x-renderer.button size='xs' value='$table01Name' onClick='trashEditableTable({control:this, fingerPrint: $id})' type='danger' ><i class='fa fa-trash'></i></x-renderer.button>
             </div>
-            ");
+            ";
+            $row->action = Blade::render($output);
         }
         return $dataSource;
     }
@@ -234,7 +249,8 @@ class RelationshipRenderer extends Component
             : $instance->$fn();
 
         $row = $modelPath::find($id);
-        $dataSource = $row ? $this->getDataSource($row, $colName, $showAll) : [];
+        $isOrderable = $this->isTableOrderable($row, $colName,);
+        $dataSource = $row ? $this->getDataSource($row, $colName, $isOrderable, $showAll) : [];
         switch ($renderer_edit) {
             case "many_icons":
                 $colSpan =  Helper::getColSpan($colName, $type);
@@ -249,7 +265,7 @@ class RelationshipRenderer extends Component
                 $sp = SuperProps::getFor($tableName);
                 //remakeOrderNoColumn MUST before attach Action Column
                 $dataSource = $this->remakeOrderNoColumn($dataSource);
-                $dataSource = $this->attachActionColumn($this->table01Name, $dataSource);
+                $dataSource = $this->attachActionColumn($this->table01Name, $dataSource, $isOrderable);
                 return view('components.controls.many-line-params', [
                     'dataSource' => $dataSource,
                     'tableFooter' => $tableFooter,
@@ -261,6 +277,7 @@ class RelationshipRenderer extends Component
                     'tableDebug' => $this->tableDebug ? "true" : "false",
                     'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
                     'entityId' => CurrentRoute::getEntityId($this->type),
+                    'entityType' => Str::modelPathFrom($this->type),
                 ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";

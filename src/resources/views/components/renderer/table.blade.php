@@ -1,4 +1,4 @@
-<div class="rounded-lg border border-gray-300 dark:border-gray-600">
+<div class="border rounded-lg border-gray-300 dark:border-gray-600">
     <div>
         <div class="inline-block w-full sm:px-0 lg:px-0">
             @if ($header)
@@ -6,7 +6,7 @@
                 {!! $header !!}
             </div>
             @endif
-            <div class="table-wrp block max-h-[{{ $maxH }}rem] overflow-x-auto rounded-t-lg">
+            <div class="table-wrp block {{ $maxH }} overflow-x-auto rounded-t-lg">
                 <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm' style="table-layout: auto">
                     <colgroup>
                         {!! $colgroup !!}

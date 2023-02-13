@@ -17,9 +17,9 @@ trait TableTraitColumns
         foreach ($columns as $column) {
             if ($this->isInvisible($column)) continue;
             $name = $column['dataIndex'];
-            if (isset($column['width'])) {
+            if (isset($column['width']) && $column['width'] != '') {
                 $w = $column['width'];
-                $result[] = "<col name='$name' style='width: {$w}px'>";
+                $result[] = "<col name='$name' style='width:{$w}px'>";
             } else {
                 $result[] = "<col name='$name'>";
             }
@@ -32,8 +32,13 @@ trait TableTraitColumns
         $renderer = $column['renderer'] ?? "_no_renderer_";
         $dataIndex = $column['dataIndex'];
         $columnName = $column['column_name'] ?? $dataIndex;
+        $width = $column['width'] ?? "";
         $title = $column['title'] ?? Str::headline($column['dataIndex']);
-        return "<th class='{$dataIndex}_th px-4 py-3' title=\"DataIndex: $dataIndex\nColumnName: $columnName\nRenderer: $renderer\">{$title}</th>";
+        $tooltip = "DataIndex: $dataIndex\n";
+        $tooltip .= "ColumnName: $columnName\n";
+        $tooltip .= "Renderer: $renderer\n";
+        $tooltip .= "Width: $width";
+        return "<th class='{$dataIndex}_th px-4 py-3' title='$tooltip'>{$title}</th>";
     }
 
     private function getColumnRendered($columns)
