@@ -15,14 +15,6 @@
         "listen_to_fields": "wir_description_id",
         "listen_to_attrs": "getDefMonitors()"
     },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
@@ -58,6 +50,14 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -106,10 +106,10 @@
     "_due_date": {
         "name": "_due_date",
         "column_name": "due_date",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_action": "date_offset",
+        "triggers": "priority_id",
+        "listen_to_fields": "priority_id",
+        "listen_to_attrs": "duration"
     },
     "_closed_date": {
         "name": "_closed_date",
