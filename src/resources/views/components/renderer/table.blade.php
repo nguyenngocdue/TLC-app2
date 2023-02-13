@@ -6,7 +6,7 @@
                 {!! $header !!}
             </div>
             @endif
-            <div class="table-wrp block max-h-[{{ $maxH }}rem] overflow-x-auto rounded-t-lg">
+            <div class="table-wrp block {{ $maxH }} overflow-x-auto rounded-t-lg">
                 <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm' style="table-layout: auto">
                     <colgroup>
                         {!! $colgroup !!}

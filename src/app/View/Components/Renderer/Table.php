@@ -64,7 +64,7 @@ class Table extends Component
       'header' => $this->header,
       'footer' => $this->footer,
       'colgroup' => $this->makeColGroup($columns),
-      'maxH' => $this->maxH,
+      'maxH' => $this->maxH ? "max-h-[{$this->maxH}rem]" : "",
     ]);
   }
 }

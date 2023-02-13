@@ -77,6 +77,7 @@ class Hse_corrective_action extends ModelExtended
     {
         return [
             ['dataIndex' => 'id',],
+            // ['dataIndex' => 'hse_incident_report_id', 'invisible' => !true, 'value_as_parent_id' => true],
             ['dataIndex' => 'hse_incident_report_id'],
             ['dataIndex' => 'name',],
             ['dataIndex' => 'priority_id',],
@@ -95,8 +96,8 @@ class Hse_corrective_action extends ModelExtended
         return [
             ['dataIndex' => 'order_no', 'invisible' => true],
             ['dataIndex' => 'id', 'invisible' => true],
-            ['dataIndex' => 'hse_incident_report_id', 'invisible' => !true, 'value_as_parent_id' => true],
-            ['dataIndex' => 'name',],
+            ['dataIndex' => 'hse_incident_report_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name', 'value_as_parent_type' => true],
             ['dataIndex' => 'work_area_id', 'hidden' => !true],
             ['dataIndex' => 'assignee'],
             ['dataIndex' => 'opened_date'],

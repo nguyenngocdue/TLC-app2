@@ -147,6 +147,7 @@ const duplicateEditableTable = (params) => {
     // console.log("Duplicate", tableId, fingerPrint, newFingerPrint, columns)
     for (let i = 0; i < columns.length; i++) {
         const column = columns[i]
+        //Do not duplicate those columns
         if (['action', 'id', 'order_no'].includes(column.dataIndex)) continue
         const sourceRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
         const value = getCellValueByName(tableId, column['dataIndex'], sourceRowIndex)
@@ -277,16 +278,25 @@ const addANewLine = (params) => {
         // console.log("Insert column", column['dataIndex'], renderer)
         cell.innerHTML = renderer
 
-        if (column['renderer'] === 'dropdown4') {
-            reloadDataToDropdown4(name, k[column['table']], tableId, '[]')
-        }
+        let selectedStr = '[]', selected = '', parentType = ''
 
         if (column['value_as_parent_id'] == true) {
-            value = $('#entityParentId').val()
-            // console.log(value)
-            cell.firstChild.value = value
-            //trigger here if need
+            selected = $('#entityParentId').val()
+            selectedStr = "[" + selected + "]"
+            // console.log("Setting parent id for the new line", selectedStr)
         }
+        if (column['value_as_parent_type'] == true) {
+            parentType = $('#entityParentType').val()
+            // console.log("Setting parent id for the new line", selectedStr)
+            cell.firstChild.value = parentType
+        }
+        if (column['renderer'] === 'dropdown4') {
+            reloadDataToDropdown4(name, k[column['table']], tableId, selectedStr)
+        } else {
+            if (column['value_as_parent_id']) cell.firstChild.value = selected
+        }
+
+        // console.log("Add new line >  column", column['dataIndex'], column)
     })
     if (showNoR) { //<< Ignore No. column
         const noCell = row.insertCell()
