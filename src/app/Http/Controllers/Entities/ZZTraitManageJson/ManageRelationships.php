@@ -81,6 +81,7 @@ class ManageRelationships extends Manage_Parent
                 "dataIndex" => "radio_checkbox_colspan",
                 "editable" => true,
                 "renderer" => "number",
+                'properties' => ['placeholder' => 4],
             ],
         ];
     }

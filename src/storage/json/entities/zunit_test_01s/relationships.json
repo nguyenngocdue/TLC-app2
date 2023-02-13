@@ -7,6 +7,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -19,9 +20,10 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "radio",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": "4"
+        "radio_checkbox_colspan": ""
     },
     "_checkboxZut1()": {
         "name": "_checkboxZut1()",
@@ -31,9 +33,10 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "checkbox",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": "4"
+        "radio_checkbox_colspan": ""
     },
     "_dropdownMultiZut1()": {
         "name": "_dropdownMultiZut1()",
@@ -43,6 +46,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

@@ -4,6 +4,7 @@
         , name: "{{$name}}"
         , className: "{{$className}}"
         , multiple: {{$multiple}}
+        , span: {{$span}}
     }
     // console.log(params)
     document.write(RadioOrCheckbox(params))

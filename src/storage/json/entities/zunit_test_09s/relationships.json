@@ -7,7 +7,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown",
+        "control": "radio",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -137,7 +137,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown",
+        "control": "radio",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -176,10 +176,10 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown",
+        "control": "radio",
         "filter_columns": "field_id",
         "filter_values": "135",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "3"
     },
     "_dropdownMonitors()": {
         "name": "_dropdownMonitors()",

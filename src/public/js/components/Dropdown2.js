@@ -3,6 +3,7 @@ const getEById = (id) => $("[id='" + id + "']")
 
 const getIsMultipleOfE = (id) => getEById(id)[0].hasAttribute("multiple")
 const getControlTypeOfE = (id) => getEById(id).attr("controlType")
+const getColSpanOfE = (id) => getEById(id).attr("colSpan")
 
 const getValueOfEById = (id) => {
     const isMultipleOfE = getIsMultipleOfE(id)
@@ -225,13 +226,13 @@ const onChangeDropdown2 = (name) => {
 const reloadDataToDropdown2 = (id, dataSource, selected) => {
     const control_type = getControlTypeOfE(id)
 
-    // console.log("reloadDataToDropdown2", id, control_type, dataSource, selected)
+    // console.log("reloadDataToDropdown2", id, control_type, dataSource.length, selected)
     if (dataSource === undefined) return;
     getEById(id).empty()
 
     let options = []
     dataSource = filterDropdown2(id, dataSource)
-    // console.log("Loading dataSource for", id, selected, dataSource)
+    // console.log("Loading dataSource after filterDropdown2", id, selected, dataSource.length)
 
     if (control_type === 'dropdown') {
         for (let i = 0; i < dataSource.length; i++) {
@@ -257,12 +258,13 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
         const isMultiple = getIsMultipleOfE(id)
         const radio_or_checkbox = isMultiple ? "checkbox" : "radio"
         const control_name = isMultiple ? (id + "[]") : id
+        const colSpan = getColSpanOfE(id)
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i];
             selectedStr = (dataSource.length === 1) ? 'checked' : (selected.includes(item['id']) ? "checked" : "")
             // console.log(item)
             const title = item['description'] + " (#" + item['id'] + ")"
-            option = '<div class="items-center bg-white-50 col-span-4 flex align-center ">'
+            option = '<div class="items-center bg-white-50 flex align-center ' + colSpan + '">'
             option += '<label title="' + title + '">'
             option += '<input type="' + radio_or_checkbox + '" name="' + control_name + '" value="' + item['id'] + '" ' + selectedStr + '>'
             option += " " + item['name']
@@ -276,9 +278,11 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
     }
 }
 
-const RadioOrCheckbox = ({ id, name, className, multiple }) => {
+const RadioOrCheckbox = ({ id, name, className, multiple, span }) => {
     name = multiple ? name + "[]" : name
     multipleStr = multiple ? 'multiple' : ''
+
+    const colSpan = "col-span-" + span
 
     let render = ""
     render += "<div "
@@ -287,6 +291,7 @@ const RadioOrCheckbox = ({ id, name, className, multiple }) => {
     render += "onChange='onChangeDropdown2(\"" + name + "\")' "
     render += " " + multipleStr + " "
     render += "controlType='radio_or_checkbox' "
+    render += "colSpan='" + colSpan + "' "
     render += "class='" + className + "' "
     render += ">"
     render += "</div>"

@@ -33,6 +33,8 @@ class RadioOrCheckBox extends Component
         $sp = SuperProps::getFor($this->type);
         $prop = $sp['props']["_" . $this->name];
         $table = $prop['relationships']['table'];
+        $span = $prop['relationships']['radio_checkbox_colspan'] ? $prop['relationships']['radio_checkbox_colspan'] : 4;
+        // dump($prop['relationships']);
         $id = $this->name;
         $name =  $this->name;
         $params = [
@@ -42,6 +44,7 @@ class RadioOrCheckBox extends Component
             'multiple' => $this->multiple ? "true" : "false",
             'className' => "grid grid-cols-12 gap-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
             'table' => $table,
+            'span' => $span,
         ];
         // dump($params);
 
