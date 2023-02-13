@@ -29,7 +29,7 @@ class UploadService2
     {
         $thumbnailW = 150;
         $thumbnailH = 150;
-        $allowedExts = ['jpeg', 'png', 'jpg', 'gif', 'svg'];
+        $allowedExts = ['jpeg', 'png', 'jpg', 'gif', 'webp'];
 
         $path = env('MEDIA_ROOT_FOLDER', 'media') . "/" . date(Constant::FORMAT_YEAR_MONTH) . "/";
         try {
@@ -57,7 +57,6 @@ class UploadService2
                         $thumbnailPath = $path . $thumbnailFileName;
                         Storage::disk('s3')->put($thumbnailPath, $resource->__toString(), 'public');
                     }
-
                     // dd($fields[$fieldName);
                     array_push($attachmentRows, [
                         'url_thumbnail' => isset($thumbnailPath) ? $thumbnailPath : "",

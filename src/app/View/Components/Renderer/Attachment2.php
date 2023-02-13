@@ -15,6 +15,7 @@ class Attachment2 extends Component
         private $readonly = false,
         private $destroyable = true,
         private $showToBeDeleted = false,
+        private $showUploadFile = true,
         private $label = '',
     ) {
         if (is_array($value)) {
@@ -48,12 +49,12 @@ class Attachment2 extends Component
             "allowed_file_types" => 'only_images',
         ];
         $message =  "Allows MAX " . $properties['max_file_count'] . " files (each " . $properties['max_file_size'] . "MB) (" . $properties['allowed_file_types'] . ")";
-
         return view('components.renderer.attachment2', [
             'name' => $this->name,
-            'destroyable' => (bool)$this->destroyable,
+            'destroyable' => $this->destroyable,
             'readonly' => $this->readonly,
             'showToBeDeleted' => $this->showToBeDeleted,
+            'showUploadFile' => $this->showUploadFile,
             'path' => env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/',
             'attachments' => $this->attachments,
             'message' => $message,

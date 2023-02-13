@@ -14,8 +14,9 @@ class Description extends Component
     public function __construct(
         private $label,
         private $colSpan,
-        private $contents,
-        private $colName,
+        private $dataSource,
+        private $columnName,
+        private $control,
     ) {
         //
     }
@@ -27,26 +28,18 @@ class Description extends Component
      */
     public function render()
     {
-        $contents = $this->contents;
-        $colName = $this->colName;
-        dump($colName);
-        dump($contents);
+        $dataSource = $this->dataSource;
+        $columnName = $this->columnName;
+        $content = $dataSource[$columnName];
 
-        if (is_array($contents)) {
-            $attachmentData = [$colName => $contents];
-            dd($attachmentData);
-            // dd($attachmentData);
-            // return "<x-renderer.attachment :attachmentData='123'/>";
-            return "attachment";
-        }
         $label = $this->label;
         $colSpan = $this->colSpan;
-        $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
-
+        $control = $this->control;
         return view('components.renderer.description', [
             'label' => $label,
             'colSpan' => $colSpan,
-            'contents' => $contents,
+            'content' => $content,
+            'control' => $control
         ]);
     }
 }
