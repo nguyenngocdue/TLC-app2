@@ -1,0 +1,101 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_qaqc_ncr_id": {
+        "name": "_qaqc_ncr_id",
+        "column_name": "qaqc_ncr_id",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_cause_analysis": {
+        "name": "_cause_analysis",
+        "column_name": "cause_analysis",
+        "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_corrective_action": {
+        "name": "_corrective_action",
+        "column_name": "corrective_action",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_responsible_person": {
+        "name": "_responsible_person",
+        "column_name": "responsible_person",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    }
+}
