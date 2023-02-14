@@ -1,4 +1,6 @@
-const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="flex justify-between px-1"><span>${state.text}</span><span>${state.id}</span></div>`)
+const makeIdForNumber = (n) => "#" + String(n).padStart(6, '0').substring(0, 3) + "." + String(n).padStart(6, '0').substring(3)
+const makeId = (n) => isNaN(n) ? "" : makeIdForNumber(n)
+const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="flex justify-between px-1"><span>${state.text}</span><span>${makeId(state.id)}</span></div>`)
 const getEById = (id) => $("[id='" + id + "']")
 
 const getIsMultipleOfE = (id) => getEById(id)[0].hasAttribute("multiple")

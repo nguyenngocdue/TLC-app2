@@ -21,10 +21,6 @@ trait TraitEntityEditableTable
     private function handleEditableTables(Request $request, $props)
     {
         // dump($request);
-        // dd();
-        // echo "RECURSIVE = RECURSIVE = RECURSIVE = RECURSIVE = RECURSIVE = ";
-        // dump($this->superProps['props']);
-        // dump($props);
         $table01Names = $request['tableNames'];
         foreach ($table01Names as $table01Name => $tableName) {
             $tableType = ucfirst(Str::singular($tableName));
@@ -39,13 +35,8 @@ trait TraitEntityEditableTable
             foreach ($dataSource as $line) {
                 $fakeRequest = new Request();
                 $line['tableNames'] = "fakeRequest";
-                $line['tableName'] = $tableName;
-                $line['table01Name'] = $table01Name;
-                $line['theField'] = "";
+                $line['idForScroll'] = substr($props[$table01Name], 1); //remove first "_"
                 $fakeRequest->merge($line);
-                // dd($fakeRequest);
-                // dump($line);
-
                 $controllerPath = "App\\Http\\Controllers\\Entities\\$tableType\\EntityCRUDController";
                 $controller = new $controllerPath;
                 if ($line['id']) {
