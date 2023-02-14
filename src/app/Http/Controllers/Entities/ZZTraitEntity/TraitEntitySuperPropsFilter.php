@@ -7,10 +7,10 @@ use App\Utils\Support\Json\SuperProps;
 
 trait TraitEntitySuperPropsFilter
 {
-    private function advanceFilter()
+    private function advanceFilter($type = null)
     {
         $blackList = ['attachment', 'comment', 'relationship_renderer', 'thumbnail', 'parent_link'];
-        $supperProps = SuperProps::getFor($this->type);
+        $supperProps = SuperProps::getFor($type ?? $this->type);
         $propsFilters = array_filter($supperProps['props'], function ($item) use ($blackList) {
             if ($item['column_type'] === "static") {
                 return false;

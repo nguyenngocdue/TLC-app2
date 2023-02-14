@@ -32,6 +32,9 @@
                 @switch ($control)
                 @case($timeControls[0])
                 <x-controls.time-picker2 :name="$columnName" :value="$valueControl"/>
+                @if(Session::has($columnName))
+                    <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
+                @endif
                 @break
                 @case($timeControls[1])
                 @case($timeControls[2])
@@ -40,9 +43,13 @@
                 @case($timeControls[5])
                 @case($timeControls[6])
                 <x-controls.date-picker2 :name="$columnName" :value="$valueControl"/>
+                @if(Session::has($columnName))
+                    <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
+                @endif
                 @break
                 @case('id')
                 @case('text')
+
                 @case('number')
                 @case('textarea')
                 @case('status')

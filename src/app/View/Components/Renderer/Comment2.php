@@ -22,18 +22,18 @@ class Comment2 extends Component
     {
         return [
             [
-                "title" => 'Client',
+                "title" => 'User',
                 "dataIndex" => "user",
                 "renderer" => "avatar-name",
                 // "attributes" => ['title' => 'user', 'description' => 'position_rendered', 'avatar' => 'avatar', 'gray' => 'disabled']
             ],
             [
-                "title" => 'Date',
-                "dataIndex" => "date",
-            ],
-            [
                 "title" => 'Comment',
                 "dataIndex" => "comment",
+            ],
+            [
+                "title" => 'Date',
+                "dataIndex" => "date",
             ],
         ];
     }
@@ -41,6 +41,7 @@ class Comment2 extends Component
     public function getTableDataSource()
     {
         $dataSource = $this->value;
+        dump($dataSource);
         $result = [];
         foreach ($dataSource as $value) {
             $ownerId = $value['owner_id'];
