@@ -19,11 +19,11 @@
                     @if(in_array($extension,["png","gif","jpg","jpeg","webb"]))
                         <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}"/>
                     @elseif(in_array($extension,["csv","pdf","zip"]))
-                        <img class="w-full h-full object-cover" src="/images/iconfile.png" alt="{{$attachment['filename']}}">
+                        <img class="w-auto h-full object-cover" src="/images/iconfile.png" alt="{{$attachment['filename']}}">
                     @elseif($extension == 'mp4')
-                        <video class="w-full h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"></video>
+                        <video class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"></video>
                     @elseif($extension === 'svg')
-                        <img class="w-full h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"/>
+                        <img class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"/>
                     @else
                     @endif
                     {{-- This is to show the toBeDeleted trash icon --}}
@@ -38,7 +38,7 @@
                         @if($destroyable)
                         <button type="button" onclick="updateToBeDeletedTextBox({{$attachment['id']}}, '{{$name}}-toBeDeleted')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
                             <i class=" text-red-700 fas fa-trash cursor-pointer"></i>
-                        </button
+                        </button>
                         @endif
                     </div>
                     <span>{{date('d/m/Y',strtotime($attachment['created_at']))}}</span>

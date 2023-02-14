@@ -41,7 +41,6 @@ class Comment2 extends Component
     public function getTableDataSource()
     {
         $dataSource = $this->value;
-        dump($dataSource);
         $result = [];
         foreach ($dataSource as $value) {
             $ownerId = $value['owner_id'];
