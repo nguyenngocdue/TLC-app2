@@ -1,0 +1,54 @@
+{
+    "_getWorkplace": {
+        "name": "_getWorkplace",
+        "relationship": "belongsTo",
+        "control_name": "workplace_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getAssigneeTo": {
+        "name": "_getAssigneeTo",
+        "relationship": "belongsTo",
+        "control_name": "assignee_to",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getDefMonitors()": {
+        "name": "_getDefMonitors()",
+        "relationship": "getCheckedByField",
+        "control_name": "getDefMonitors()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getHrOTLines": {
+        "name": "_getHrOTLines",
+        "relationship": "hasMany",
+        "control_name": "getHrOTLines",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    }
+}

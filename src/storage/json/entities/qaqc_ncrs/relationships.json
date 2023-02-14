@@ -112,8 +112,8 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown",
-        "filter_columns": "",
-        "filter_values": "",
+        "filter_columns": "field_id",
+        "filter_values": "135",
         "radio_checkbox_colspan": ""
     },
     "_getAssigneeTo": {
@@ -127,32 +127,6 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_getPjLevel": {
-        "name": "_getPjLevel",
-        "relationship": "belongsTo",
-        "control_name": "pj_level_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "dropdown",
-        "filter_columns": "field_id",
-        "filter_values": "111",
-        "radio_checkbox_colspan": ""
-    },
-    "_getPjType": {
-        "name": "_getPjType",
-        "relationship": "belongsTo",
-        "control_name": "pj_module_type_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "dropdown",
-        "filter_columns": "field_id",
-        "filter_values": "112",
         "radio_checkbox_colspan": ""
     },
     "_getInterSubcon": {
@@ -192,7 +166,7 @@
         "control": "radio",
         "filter_columns": "field_id",
         "filter_values": "118",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "3"
     },
     "_getDefMonitors()": {
         "name": "_getDefMonitors()",
@@ -203,6 +177,19 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getQaqcCars": {
+        "name": "_getQaqcCars",
+        "relationship": "hasMany",
+        "control_name": "getQaqcCars",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

@@ -59,6 +59,26 @@
         "status": "beta",
         "icon": null
     },
+    "hr_overtime_request": {
+        "name": "hr_overtime_request",
+        "hidden": null,
+        "package": "hr_&_admin",
+        "sub_package": "hr_admin",
+        "title": "HR Overtime Requests",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "hr_overtime_request_line": {
+        "name": "hr_overtime_request_line",
+        "hidden": "true",
+        "package": "hr_&_admin",
+        "sub_package": "hr_admin",
+        "title": "HR Overtime Request Lines",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
         "hidden": null,
@@ -81,7 +101,7 @@
     },
     "manageApps": {
         "name": "manageApps",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Apps",
@@ -91,7 +111,7 @@
     },
     "manageStatuses": {
         "name": "manageStatuses",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Statuses",
@@ -101,7 +121,7 @@
     },
     "manageWidgets": {
         "name": "manageWidgets",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Widgets",
@@ -111,7 +131,7 @@
     },
     "permissions": {
         "name": "permissions",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Permissions",
@@ -171,7 +191,7 @@
     },
     "post": {
         "name": "post",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "dev_admin",
         "title": "Posts",
@@ -181,7 +201,7 @@
     },
     "priority": {
         "name": "priority",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Priorities",
@@ -191,7 +211,7 @@
     },
     "prod_discipline": {
         "name": "prod_discipline",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "production",
         "title": "Prod Disciplines",
@@ -201,7 +221,7 @@
     },
     "prod_discipline_1": {
         "name": "prod_discipline_1",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "production",
         "title": "Prod Discipline 1",
@@ -211,7 +231,7 @@
     },
     "prod_discipline_2": {
         "name": "prod_discipline_2",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "production",
         "title": "Prod Discipline 2",
@@ -231,7 +251,7 @@
     },
     "prod_routing": {
         "name": "prod_routing",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "production",
         "title": "Prod Routings",
@@ -241,7 +261,7 @@
     },
     "prod_routing_detail": {
         "name": "prod_routing_detail",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "production",
         "title": "Prod Routing Details",
@@ -251,7 +271,7 @@
     },
     "prod_routing_link": {
         "name": "prod_routing_link",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "production",
         "title": "Prod Routing Links",
@@ -261,7 +281,7 @@
     },
     "prod_run": {
         "name": "prod_run",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "production",
         "title": "Prod Runs",
@@ -271,7 +291,7 @@
     },
     "prod_sequence": {
         "name": "prod_sequence",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "production",
         "title": "Prod Sequences",
@@ -291,10 +311,20 @@
     },
     "public_holiday": {
         "name": "public_holiday",
-        "hidden": null,
+        "hidden": "true",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "Public Holidays",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "qaqc_car": {
+        "name": "qaqc_car",
+        "hidden": null,
+        "package": "project_management",
+        "sub_package": "qaqc",
+        "title": "QAQA Cars",
         "nickname": null,
         "status": null,
         "icon": null
@@ -311,7 +341,7 @@
     },
     "qaqc_insp_chklst_line": {
         "name": "qaqc_insp_chklst_line",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC Insp Chklst Lines",
@@ -321,7 +351,7 @@
     },
     "qaqc_insp_chklst_run": {
         "name": "qaqc_insp_chklst_run",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC Insp Chklst Runs",
@@ -331,7 +361,7 @@
     },
     "qaqc_insp_chklst_sht": {
         "name": "qaqc_insp_chklst_sht",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC Insp Chklst Shts",
@@ -341,7 +371,7 @@
     },
     "qaqc_insp_control_group": {
         "name": "qaqc_insp_control_group",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC Insp Control Groups",
@@ -351,7 +381,7 @@
     },
     "qaqc_insp_control_value": {
         "name": "qaqc_insp_control_value",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC Insp Control Values",
@@ -361,7 +391,7 @@
     },
     "qaqc_insp_group": {
         "name": "qaqc_insp_group",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC Insp Groups",
@@ -381,7 +411,7 @@
     },
     "qaqc_insp_tmpl_line": {
         "name": "qaqc_insp_tmpl_line",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC Insp Tmpl Lines",
@@ -391,7 +421,7 @@
     },
     "qaqc_insp_tmpl_sht": {
         "name": "qaqc_insp_tmpl_sht",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC Insp Tmpl Shts",
@@ -401,7 +431,7 @@
     },
     "qaqc_insp_value": {
         "name": "qaqc_insp_value",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC Insp Values",
@@ -441,7 +471,7 @@
     },
     "role_sets": {
         "name": "role_sets",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Role Sets",
@@ -451,7 +481,7 @@
     },
     "roles": {
         "name": "roles",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Roles",
@@ -461,7 +491,7 @@
     },
     "setpermissions": {
         "name": "setpermissions",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Setpermissions",
@@ -471,7 +501,7 @@
     },
     "setroles": {
         "name": "setroles",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Setroles",
@@ -481,7 +511,7 @@
     },
     "setrolesets": {
         "name": "setrolesets",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Setrolesets",
@@ -501,7 +531,7 @@
     },
     "term": {
         "name": "term",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Terms",
@@ -511,7 +541,7 @@
     },
     "user": {
         "name": "user",
-        "hidden": null,
+        "hidden": "true",
         "package": "hr_&_admin",
         "sub_package": "user",
         "title": "Users",
@@ -521,7 +551,7 @@
     },
     "user_category": {
         "name": "user_category",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "user",
         "title": "User Categories",
@@ -531,7 +561,7 @@
     },
     "user_discipline": {
         "name": "user_discipline",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "user",
         "title": "User Disciplines",
@@ -541,7 +571,7 @@
     },
     "user_position1": {
         "name": "user_position1",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "user",
         "title": "User Position1",
@@ -551,7 +581,7 @@
     },
     "user_position2": {
         "name": "user_position2",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "user",
         "title": "User Position2",
@@ -561,7 +591,7 @@
     },
     "user_position3": {
         "name": "user_position3",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "user",
         "title": "User Position3",
@@ -571,7 +601,7 @@
     },
     "user_position_pre": {
         "name": "user_position_pre",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "user",
         "title": "User Position Pre",
@@ -581,7 +611,7 @@
     },
     "user_team": {
         "name": "user_team",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "user",
         "title": "User Teams",
@@ -591,7 +621,7 @@
     },
     "user_time_keep_type": {
         "name": "user_time_keep_type",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "user",
         "title": "User Time Keep Types",
@@ -601,7 +631,7 @@
     },
     "user_type": {
         "name": "user_type",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "user",
         "title": "User Types",
@@ -611,7 +641,7 @@
     },
     "wir_description": {
         "name": "wir_description",
-        "hidden": null,
+        "hidden": "true",
         "package": "project_management",
         "sub_package": "production",
         "title": "WIR Descriptions",
@@ -621,7 +651,7 @@
     },
     "work_area": {
         "name": "work_area",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Work Areas",
@@ -631,7 +661,7 @@
     },
     "work_mode": {
         "name": "work_mode",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Work Modes",
@@ -641,7 +671,7 @@
     },
     "workplace": {
         "name": "workplace",
-        "hidden": null,
+        "hidden": "true",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Workplaces",
@@ -651,100 +681,80 @@
     },
     "zunit_test_01": {
         "name": "zunit_test_01",
-        "hidden": null,
+        "hidden": "true",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT01 (Basic Controls)",
         "nickname": null,
-        "status": "test",
+        "status": null,
         "icon": null
     },
     "zunit_test_02": {
         "name": "zunit_test_02",
-        "hidden": null,
+        "hidden": "true",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT02 (Dropdown\/Checkbox)",
         "nickname": null,
-        "status": "test",
+        "status": null,
         "icon": null
     },
     "zunit_test_03": {
         "name": "zunit_test_03",
-        "hidden": null,
+        "hidden": "true",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT03 (DateTime Controls)",
         "nickname": null,
-        "status": "test",
+        "status": null,
         "icon": null
     },
     "zunit_test_04": {
         "name": "zunit_test_04",
-        "hidden": null,
+        "hidden": "true",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT04 (Static Typography)",
         "nickname": null,
-        "status": "test",
+        "status": null,
         "icon": null
     },
     "zunit_test_05": {
         "name": "zunit_test_05",
-        "hidden": null,
+        "hidden": "true",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT05 (Attachments)",
         "nickname": null,
-        "status": "test",
+        "status": null,
         "icon": null
     },
     "zunit_test_07": {
         "name": "zunit_test_07",
-        "hidden": null,
+        "hidden": "true",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT07 (Comments)",
         "nickname": null,
-        "status": "test",
+        "status": null,
         "icon": null
     },
     "zunit_test_09": {
         "name": "zunit_test_09",
-        "hidden": null,
+        "hidden": "true",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT09 (Form Event Listeners)",
         "nickname": null,
-        "status": "test",
+        "status": null,
         "icon": null
     },
     "zunit_test_10": {
         "name": "zunit_test_10",
-        "hidden": null,
+        "hidden": "true",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT10 (Editable Table)",
-        "nickname": null,
-        "status": "test",
-        "icon": null
-    },
-    "dashboard": {
-        "name": "dashboard",
-        "hidden": null,
-        "package": "system",
-        "sub_package": "system_admin",
-        "title": "Dashboard",
-        "nickname": null,
-        "status": null,
-        "icon": null
-    },
-    "reportIndex": {
-        "name": "reportIndex",
-        "hidden": null,
-        "package": "system",
-        "sub_package": "system_admin",
-        "title": "Report Index",
         "nickname": null,
         "status": null,
         "icon": null

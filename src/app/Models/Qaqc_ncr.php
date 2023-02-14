@@ -23,15 +23,14 @@ class Qaqc_ncr extends ModelExtended
         "getDiscipline" => ['belongsTo', Prod_discipline::class, "prod_discipline_id"],
         "getDiscipline1" => ['belongsTo', Prod_discipline_1::class, "prod_discipline_1_id"],
         "getDiscipline2" => ['belongsTo', Prod_discipline_2::class, "prod_discipline_2_id"],
-        "getUserTeam" => ['belongsTo', Prod_order::class, "user_team_id"],
+        "getUserTeam" => ['belongsTo', User_team::class, "user_team_id"],
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
         'getAssigneeTo' => ["belongsTo", User::class, 'assignee_to'],
-        "getPjLevel" => ["belongsTo", Term::class, 'pj_level_id'],
-        "getPjType" => ["belongsTo", Term::class, 'pj_module_type_id'],
         "getInterSubcon" => ["belongsTo", Term::class, 'inter_subcon_id'],
         "getDefectRootCause" => ["belongsTo", Term::class, 'defect_root_cause_id'],
         "getDefectDisposition" => ["belongsTo", Term::class, 'defect_disposition_id'],
         "getParent" => ['morphTo', Qaqc_ncr::class, 'parent_type', 'parent_id'],
+        'getQaqcCars' => ['hasMany', Qaqc_car::class, 'qaqc_ncr_id'],
     ];
 
     public $oracyParams = [
@@ -94,16 +93,6 @@ class Qaqc_ncr extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getPjLevel()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getPjType()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
     public function getInterSubcon()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -115,6 +104,11 @@ class Qaqc_ncr extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getDefectDisposition()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getQaqcCars()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

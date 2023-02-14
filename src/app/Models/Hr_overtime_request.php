@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Models;
+
+use App\BigThink\ModelExtended;
+
+class Hr_overtime_request extends ModelExtended
+{
+    protected $fillable = ['id', 'workplace_id', 'assignee_to', 'ot_purpose'];
+    protected $table = "hr_overtime_requests";
+    public $nameless = true;
+
+    public $eloquentParams = [
+        "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
+        "getAssigneeTo" => ["belongsTo", User::class, 'assignee_to'],
+        'getHrOTLines' => ['hasMany', Hr_overtime_request_line::class, 'hr_overtime_request_id'],
+    ];
+
+    public $oracyParams = [
+        "getDefMonitors()" => ["getCheckedByField", User::class],
+    ];
+
+    public function getWorkplace()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    
+    public function getAssigneeTo()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getHrOTLines()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getDefMonitors()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+}

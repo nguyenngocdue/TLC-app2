@@ -24,8 +24,6 @@ return new class extends Migration
             $table->unsignedBigInteger('project_id')->nullable();
             $table->unsignedBigInteger('sub_project_id')->nullable();
             $table->unsignedBigInteger('prod_routing_id')->nullable();
-            $table->unsignedBigInteger('pj_level_id')->nullable();
-            $table->unsignedBigInteger('pj_module_type_id')->nullable();
             $table->unsignedBigInteger('prod_order_id')->nullable();
             $table->unsignedBigInteger('prod_discipline_id')->nullable();
             $table->unsignedBigInteger('prod_discipline_1_id')->nullable();
@@ -37,7 +35,6 @@ return new class extends Migration
             $table->dateTime('closed_date')->nullable();
             $table->unsignedBigInteger('defect_root_cause_id')->nullable();
             $table->unsignedBigInteger('defect_disposition_id')->nullable();
-            $table->text('cause_analysis')->nullable();
             $table->unsignedBigInteger('assignee_to')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;

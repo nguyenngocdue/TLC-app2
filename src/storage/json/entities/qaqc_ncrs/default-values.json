@@ -98,28 +98,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_pj_level_id": {
-        "name": "_pj_level_id",
-        "column_name": "pj_level_id",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_pj_module_type_id": {
-        "name": "_pj_module_type_id",
-        "column_name": "pj_module_type_id",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_prod_order_id": {
         "name": "_prod_order_id",
         "column_name": "prod_order_id",
@@ -233,17 +211,6 @@
     "_defect_disposition_id": {
         "name": "_defect_disposition_id",
         "column_name": "defect_disposition_id",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_cause_analysis": {
-        "name": "_cause_analysis",
-        "column_name": "cause_analysis",
         "label": "",
         "default_value": "",
         "validation": "",

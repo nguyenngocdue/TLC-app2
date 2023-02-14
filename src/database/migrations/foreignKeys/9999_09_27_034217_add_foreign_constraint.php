@@ -26,9 +26,6 @@ return new class extends Migration
         Schema::table('attachments', function (Blueprint $table) {
             $table->foreign('category')->references('id')->on('fields')->onDelete('cascade');
         });
-        Schema::table('public_holidays', function (Blueprint $table) {
-            $table->foreign('workplace_id')->references('id')->on('workplaces')->onDelete('cascade');
-        });
         //************** GLOBAL MODULE **************/
         Schema::table('sub_projects', function (Blueprint $table) {
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
@@ -53,6 +50,18 @@ return new class extends Migration
         //************** POST MODULE **************/
         Schema::table('posts', function (Blueprint $table) {
             $table->foreign('owner_id')->references('id')->on('users');
+        });
+        //************** HR MODULE **************/
+        Schema::table('hr_overtime_requests', function (Blueprint $table) {
+            $table->foreign('workplace_id')->references('id')->on('workplaces');
+        });
+        Schema::table('public_holidays', function (Blueprint $table) {
+            $table->foreign('workplace_id')->references('id')->on('workplaces')->onDelete('cascade');
+        });
+        Schema::table('hr_overtime_request_lines', function (Blueprint $table) {
+            $table->foreign('work_mode_id')->references('id')->on('work_modes');
+            $table->foreign('sub_project_id')->references('id')->on('sub_projects');
+            $table->foreign('user_id')->references('id')->on('users');
         });
         //************** PRODUCTION MODULE **************/
         Schema::table('prod_runs', function (Blueprint $table) {
@@ -182,6 +191,9 @@ return new class extends Migration
             $table->foreign('user_team_id')->references('id')->on('user_teams');
             $table->foreign('priority_id')->references('id')->on('priorities');
             $table->foreign('assignee_to')->references('id')->on('users');
+        });
+        Schema::table('qaqc_cars', function (Blueprint $table) {
+            $table->foreign('responsible_person')->references('id')->on('users');
         });
     }
 

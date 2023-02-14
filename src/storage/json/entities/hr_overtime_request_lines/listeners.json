@@ -1,0 +1,122 @@
+{
+    "_employeeid": {
+        "name": "_employeeid",
+        "column_name": "employeeid",
+        "listen_action": "dot",
+        "triggers": "user_id",
+        "listen_to_fields": "user_id",
+        "listen_to_attrs": "employeeid"
+    },
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_hr_overtime_request_id": {
+        "name": "_hr_overtime_request_id",
+        "column_name": "hr_overtime_request_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_position_rendered": {
+        "name": "_position_rendered",
+        "column_name": "position_rendered",
+        "listen_action": "dot",
+        "triggers": "user_id",
+        "listen_to_fields": "user_id",
+        "listen_to_attrs": "position_rendered"
+    },
+    "_ot_date": {
+        "name": "_ot_date",
+        "column_name": "ot_date",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_from_time": {
+        "name": "_from_time",
+        "column_name": "from_time",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_to_time": {
+        "name": "_to_time",
+        "column_name": "to_time",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_break_time": {
+        "name": "_break_time",
+        "column_name": "break_time",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_total_time": {
+        "name": "_total_time",
+        "column_name": "total_time",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_work_mode_id": {
+        "name": "_work_mode_id",
+        "column_name": "work_mode_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": ""
+    }
+}

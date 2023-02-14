@@ -60,7 +60,7 @@ class ManageAppsController extends AbstractManageLibController
                 'dataIndex' => 'status',
                 'renderer' => 'dropdown',
                 'editable' => true,
-                'cbbDataSource' => ['', 'beta', 'test'],
+                'cbbDataSource' => ['', 'dev','beta'],
             ],
             [
                 'dataIndex' => 'icon',

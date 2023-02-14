@@ -73,8 +73,8 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown_multi",
-        "filter_columns": "field_id",
-        "filter_values": "27",
+        "filter_columns": "",
+        "filter_values": "",
         "radio_checkbox_colspan": ""
     }
 }
