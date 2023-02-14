@@ -313,3 +313,22 @@ const Dropdown2 = ({ id, name, className, multipleStr }) => {
 
     return render
 }
+
+const documentReadyDropdown2 = ({ id, selectedJson, table }) => {
+    // selectedJson = '{!! $selected !!}'
+    selectedJson = selectedJson.replace(/\\/g, '\\\\') //<< Replace \ to \\ EG. ["App\Models\Qaqc_mir"] to ["App\\Models\\Qaqc_mir"]
+    selectedJson = JSON.parse(selectedJson)
+    // table = "{{$table}}"
+    dataSourceDropdown = k[table];
+    if (dataSourceDropdown === undefined) console.error("key {{$table}} not found in k[]");
+    reloadDataToDropdown2(id, dataSourceDropdown, selectedJson)
+
+    $(document).ready(() => {
+        listenersOfDropdown2.forEach((listener) => {
+            if (listener.triggers.includes(id) && listener.listen_action === 'reduce') {
+                // console.log("I am a trigger of reduce, I have to trigger myself when form load [id]", )
+                getEById(id).trigger('change')
+            }
+        })
+    })
+}

@@ -254,6 +254,7 @@ const addANewLine = (params) => {
                     onChange = "onChangeDropdown4(\"" + name + "\", \"" + column['lineType'] + "\", \"" + column['table01Name'] + "\", " + newRowIndex + ")"
                     multipleStr = column?.multiple ? "multiple" : ""
                     renderer = "<select id='" + name + "' name='" + name + "' " + multipleStr + " onChange='" + onChange + "' class='" + column['classList'] + "'></select>"
+                    renderer += "<script>getEById('" + name + "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
                     break
                 case "number":
                     if (column['dataIndex'] === 'order_no') {
