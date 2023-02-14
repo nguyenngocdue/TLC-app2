@@ -11,8 +11,9 @@
             @foreach($colNameErrors as $colName => $errorList)
             {{-- @dump($errorList) --}}
             @php $label = $props["_".$colName]['label']; @endphp
+            @php $control = $props["_".$colName]['control']; @endphp
             <li>
-                <a class="underline" href="#scroll-{{$colName}}" title="{{$colName}}">{{$label}}:</a>
+                <a class="underline" href="#scroll-{{$colName}}" title="{{$colName}} - {{$control}}">{{$label}}:</a>
                 <ul class="mt-1.5 ml-4 text-red-700 list-disc list-inside">
                     @foreach($errorList as $msg)
                     <li class="text-xs">{{$msg}}</li>

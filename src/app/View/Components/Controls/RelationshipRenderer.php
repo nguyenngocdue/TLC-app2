@@ -126,10 +126,13 @@ class RelationshipRenderer extends Component
         foreach ($columns as $column) {
             $newColumn = $column;
             $prop = $sp['props']["_" . $column['dataIndex']];
+            // dump($prop);
             $newColumn['title'] = $column['title'] ?? $prop['label']; //. " <br/>" . $prop['control'];
             $newColumn['width'] = $prop['width'];
+            $validation = $prop['default-values']['validation'] ?? "";
+            $isRequired = in_array("required", explode("|", $validation));
+            $newColumn['title'] .= $isRequired ? "</br><i class='text-red-400' title='required'>*</i>" : "";
             // dump($newColumn);
-            // dump($prop);
             switch ($prop['control']) {
                 case 'id':
                     $newColumn['renderer'] = 'read-only-text';

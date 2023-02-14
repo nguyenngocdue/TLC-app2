@@ -38,7 +38,8 @@ trait TableTraitColumns
         $tooltip .= "ColumnName: $columnName\n";
         $tooltip .= "Renderer: $renderer\n";
         $tooltip .= "Width: $width";
-        return "<th class='{$dataIndex}_th px-4 py-3' title='$tooltip'>{$title}</th>";
+        $styleStr = $this->getStyleStr($column);
+        return "<th class='{$dataIndex}_th px-4 py-3' $styleStr title='$tooltip'>{$title}</th>";
     }
 
     private function getColumnRendered($columns)
@@ -66,8 +67,9 @@ trait TableTraitColumns
         if (is_null($dataHeader)) return "";
         $th = [];
         foreach ($columns as $column) {
-            if (isset($dataHeader[$column['dataIndex']])) $th[] = "<th class='py-1'>" . $dataHeader[$column['dataIndex']] . "</th>";
-            else $th[] = "<th></th>";
+            $styleStr = $this->getStyleStr($column);
+            if (isset($dataHeader[$column['dataIndex']])) $th[] = "<th class='py-1' $styleStr>" . $dataHeader[$column['dataIndex']] . "</th>";
+            else $th[] = "<th $styleStr></th>";
         }
         $result = join($th);
         return $result;

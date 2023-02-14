@@ -267,7 +267,7 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
             // console.log(item)
             const title = item['description'] + " (#" + item['id'] + ")"
             option = '<div class="items-center bg-white-50 flex align-center ' + colSpan + '">'
-            option += '<label title="' + title + '">'
+            option += '<label class="truncate" title="' + title + '">'
             option += '<input type="' + radio_or_checkbox + '" name="' + control_name + '" value="' + item['id'] + '" ' + selectedStr + '>'
             option += " " + item['name']
             option += '</label>'
