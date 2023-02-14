@@ -117,12 +117,7 @@ class RelationshipRenderer extends Component
 
     private function makeEditableColumns($columns, $sp, $tableName, $table01Name)
     {
-        $result = [
-            [
-                'dataIndex' => 'action',
-                'width' => 5,
-            ]
-        ];
+        $result = [['dataIndex' => 'action', 'width' => 5,]];
         foreach ($columns as $column) {
             $newColumn = $column;
             $prop = $sp['props']["_" . $column['dataIndex']];
@@ -150,6 +145,7 @@ class RelationshipRenderer extends Component
                 case 'dropdown_multi':
                 case 'checkbox':
                 case 'radio':
+                    // $newColumn['renderer'] = 'text';
                     $newColumn['renderer'] = 'dropdown4';
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 text-left placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
@@ -202,6 +198,8 @@ class RelationshipRenderer extends Component
             <div class='whitespace-nowrap flex justify-center '>";
             if ($isOrderable) $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
                  <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>";
+            // if ($isOrderable) $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
+            //      <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>";
             $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='duplicateEditableTable({control:this, fingerPrint: $id})' type='secondary' ><i class='fa fa-copy'></i></x-renderer.button>
                 <x-renderer.button size='xs' value='$table01Name' onClick='trashEditableTable({control:this, fingerPrint: $id})' type='danger' ><i class='fa fa-trash'></i></x-renderer.button>
             </div>

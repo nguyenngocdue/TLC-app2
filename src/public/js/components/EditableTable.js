@@ -47,8 +47,9 @@ const rerenderTableBaseOnNewOrder = (tableId) => {
         const bValue = getValueOfTrByName(b, '[order_no]') * 1
         return aValue - bValue
     })
+
     $("#" + tableId + ' > tbody').html(sortedTable)
-    // console.log("Re-render completed")
+    // console.log("Re-render completed", tableId, sortedTable)
 }
 
 const getIndexFromFingerPrint = (tableId, fingerPrint) => {
@@ -88,6 +89,7 @@ const getMinValueOfAColumn = (tableId, columnName) => {
 }
 
 const moveUpEditableTable = (params) => {
+    // console.log("Moving up editable table", params)
     const { control, fingerPrint } = params
     const tableId = control.value
     const firstRowFingerPrintValue = 1 * getCellValueByName(tableId, '[finger_print]', 0)

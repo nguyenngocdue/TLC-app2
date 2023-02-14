@@ -1,3 +1,4 @@
+let k = {}, listenersOfDropdown2 = {}, filtersOfDropdown2 = {}, debugListener = false
 const makeIdForNumber = (n) => "#" + String(n).padStart(6, '0').substring(0, 3) + "." + String(n).padStart(6, '0').substring(3)
 const makeId = (n) => isNaN(n) ? "" : makeIdForNumber(n)
 const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="flex justify-between px-1"><span>${state.text}</span><span>${makeId(state.id)}</span></div>`)
@@ -52,8 +53,6 @@ const setValueOfEById = (id, value) => {
     }
 }
 // const removeParenthesis = (str) => (str.includes("()")) ? str.substring(0, str.length - 2) : str
-
-let k = {}, listenersOfDropdown2 = {}, filtersOfDropdown2 = {}, debugListener = false
 
 const filterDropdown2 = (column_name, dataSource) => {
     // const filtersOfDropdown2 = filtersOfDropdown2s[lineType]

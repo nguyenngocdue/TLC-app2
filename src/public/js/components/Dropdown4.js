@@ -1,7 +1,4 @@
-// const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="flex justify-between px-1"><span>${state.text}</span><span>${state.id}</span></div>`)
-// const getEById = (id) => $("[id='" + id + "']")
-// const removeParenthesis = (str) => (str.includes("()")) ? str.substring(0, str.length - 2) : str
-
+let runOnce = {}
 const makeIdFrom = (table01Name, fieldName, rowIndex) => table01Name + "[" + fieldName + "][" + rowIndex + "]"
 
 const getFieldNameInTable01FormatJS = (name, table01Name) => {
