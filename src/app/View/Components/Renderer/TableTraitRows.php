@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Log;
 use ReflectionClass;
 
 trait TableTraitRows
@@ -57,7 +58,8 @@ trait TableTraitRows
             $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
             $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
             $hidden = $this->isInvisible($column) ? "hidden" : "";
-            $tds[] = "<td class='p1x-1 p1y-1 $hidden dark:border-gray-600 $borderRight $align'>" . $rendered . "</td>";
+            $styleStr = $this->getStyleStr($column);
+            $tds[] = "<td class='p1x-1 p1y-1 $hidden dark:border-gray-600 $borderRight $align' $styleStr>" . $rendered . "</td>";
         }
         return $tds;
     }

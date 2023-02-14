@@ -1,0 +1,156 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getCorrectiveActions": {
+        "name": "_getCorrectiveActions",
+        "column_name": "getCorrectiveActions",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT1": {
+        "name": "_getUT1",
+        "column_name": "getUT1",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getDiscipline1": {
+        "name": "_getDiscipline1",
+        "column_name": "getDiscipline1",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT9Reduce11": {
+        "name": "_getUT9Reduce11",
+        "column_name": "getUT9Reduce11",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT9Reduce1111": {
+        "name": "_getUT9Reduce1111",
+        "column_name": "getUT9Reduce1111",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT9Assign": {
+        "name": "_getUT9Assign",
+        "column_name": "getUT9Assign",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT9Dot": {
+        "name": "_getUT9Dot",
+        "column_name": "getUT9Dot",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT9DateOffset": {
+        "name": "_getUT9DateOffset",
+        "column_name": "getUT9DateOffset",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT2": {
+        "name": "_getUT2",
+        "column_name": "getUT2",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    }
+}

@@ -1,4 +1,6 @@
-const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="flex justify-between px-1"><span>${state.text}</span><span>${state.id}</span></div>`)
+const makeIdForNumber = (n) => "#" + String(n).padStart(6, '0').substring(0, 3) + "." + String(n).padStart(6, '0').substring(3)
+const makeId = (n) => isNaN(n) ? "" : makeIdForNumber(n)
+const select2FormatState = (state) => (!state.id) ? state.text : $(`<div class="flex justify-between px-1"><span>${state.text}</span><span>${makeId(state.id)}</span></div>`)
 const getEById = (id) => $("[id='" + id + "']")
 
 const getIsMultipleOfE = (id) => getEById(id)[0].hasAttribute("multiple")
@@ -265,7 +267,7 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
             // console.log(item)
             const title = item['description'] + " (#" + item['id'] + ")"
             option = '<div class="items-center bg-white-50 flex align-center ' + colSpan + '">'
-            option += '<label title="' + title + '">'
+            option += '<label class="truncate" title="' + title + '">'
             option += '<input type="' + radio_or_checkbox + '" name="' + control_name + '" value="' + item['id'] + '" ' + selectedStr + '>'
             option += " " + item['name']
             option += '</label>'

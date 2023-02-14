@@ -7,11 +7,13 @@ use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 trait TraitEntityCRUDStoreUpdate2
 {
 	use TraitEntityEditableTable;
 	use TraitEntityFormula;
+	use TraitValidation;
 
 	private $debugForStoreUpdate = false;
 
@@ -25,6 +27,8 @@ trait TraitEntityCRUDStoreUpdate2
 
 	private function getProps1()
 	{
+		$table01Count = 0;
+		$table01Index = "";
 		$result = [
 			'oracy_prop' => [],
 			'eloquent_prop' => [],
@@ -32,10 +36,13 @@ trait TraitEntityCRUDStoreUpdate2
 			'editable_table' => [],
 		];
 		foreach ($this->superProps['props'] as $prop) {
+			if ($prop['hidden_edit']) continue;
 			if ($prop['control'] === 'attachment') {
 				$column_type = 'attachment';
 			} elseif ($prop['control'] === 'relationship_renderer') {
 				$column_type = 'editable_table';
+				$table01Count++;
+				$table01Index = "table" . str_pad($table01Count, 2, '0', STR_PAD_LEFT);
 			} else {
 				switch ($prop['column_type']) {
 					case 'oracy_prop':
@@ -47,23 +54,15 @@ trait TraitEntityCRUDStoreUpdate2
 						break;
 				}
 			}
-			$result[$column_type][] = $prop['name'];
+
+			if ($prop['control'] === 'relationship_renderer') {
+				$result[$column_type][$table01Index] = $prop['name'];
+			} else {
+				$result[$column_type][] = $prop['name'];
+			}
 		}
 		$this->dump1("getProps1", $result, __LINE__);
 		return $result;
-	}
-
-	private function getValidationRules()
-	{
-		$rules = [];
-		foreach ($this->superProps['props'] as $prop) {
-			if (isset($prop['default-values']['validation'])) {
-				$rules[$prop['column_name']] = $prop['default-values']['validation'];
-			}
-		}
-		$rules = array_filter($rules, fn ($i) => $i);
-		$this->dump1("getValidationRules", $rules, __LINE__);
-		return $rules;
 	}
 
 	private function handleToggle($dataSource)
@@ -177,6 +176,7 @@ trait TraitEntityCRUDStoreUpdate2
 	{
 		dump("Exception during $action phase $phase " . $e->getFile() . " line " . $e->getLine());
 		dd($e->getMessage());
+		// dd($e);
 	}
 
 	public function store(Request $request)
@@ -190,7 +190,15 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
-		$request->validate($this->getValidationRules());
+		try {
+			$request->validate($this->getValidationRules());
+		} catch (ValidationException $e) {
+			if ($request['tableNames'] == 'fakeRequest') {
+				$newValidation = $this->createTableValidator($e, $request);
+				return redirect("")->withErrors($newValidation)->withInput();
+			}
+			throw $e; //<<This is for form's fields
+		}
 		try {
 			//Get newStatus before it get removed by handleFields
 			$newStatus = $request['status'];
@@ -230,7 +238,15 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
-		$request->validate($this->getValidationRules());
+		try {
+			$request->validate($this->getValidationRules());
+		} catch (ValidationException $e) {
+			if ($request['tableNames'] == 'fakeRequest') {
+				$newValidation = $this->createTableValidator($e, $request);
+				return redirect("")->withErrors($newValidation)->withInput();
+			}
+			throw $e; //<<This is for form's fields
+		}
 		try {
 			//Get newStatus before it get removed by handleFields
 			$newStatus = $request['status'];

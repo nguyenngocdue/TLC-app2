@@ -9,6 +9,7 @@ use Illuminate\View\Component;
 
 class Table extends Component
 {
+  use TableTraitCommon;
   use TableTraitColumns;
   use TableTraitRows;
 

@@ -33,9 +33,9 @@
         </div>
     </x-renderer.card>
     <x-renderer.card title="Tables 1">
-        <x-renderer.card title="Table with Data">
+        <x-renderer.card title="Table with Data and maxH= { { false } }">
             In dataSource: rowDescription="This is an example of a rowDescription"
-            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" />
+            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" maxH={{false}}/>
         </x-renderer.card>
         <br />
         <x-renderer.card title="Table with Data and No. and dataHeader">
@@ -59,7 +59,7 @@
         <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive)">
             showNoR= { { true } }
             groupBy="client" groupByLength=1
-            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="client" />
+            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="client" maxH={{false}}/>
         </x-renderer.card>
         <br />
         <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive) but keep original order">
