@@ -250,7 +250,7 @@ class RelationshipRenderer extends Component
             : $instance->$fn();
 
         $row = $modelPath::find($id);
-        $isOrderable = $this->isTableOrderable($row, $colName,);
+        $isOrderable = $row ? $this->isTableOrderable($row, $colName,) : [];
         $dataSource = $row ? $this->getDataSource($row, $colName, $isOrderable, $showAll) : [];
         switch ($renderer_edit) {
             case "many_icons":
