@@ -12,7 +12,7 @@ class Dropdown3 extends Component
      * @return void
      */
     public function __construct(
-        private $relationships = '',
+        private $relationships = [],
         private $name = '',
         private $valueSelected = null,
     ) {
@@ -28,7 +28,29 @@ class Dropdown3 extends Component
     {
         $dataRelationShips = $this->relationships;
         $params = $dataRelationShips['eloquentParams'] ?? $dataRelationShips['oracyParams'];
-        $dataSource = (new $params[1])::all();
+        $filterColumns = $dataRelationShips['filter_columns'];
+        $filterValues = $dataRelationShips['filter_values'];
+        if (!empty($filterColumns) && !empty($filterValues)) {
+            $arrayQuery = [];
+            foreach ($filterColumns as $key => $value) {
+                if (isset($arrayQuery[$value])) {
+                    $result = [];
+                    $result[] = $arrayQuery[$value];
+                    $result[] = $filterValues[$key];
+                    $arrayQuery[$value] = $result;
+                } else {
+                    $arrayQuery[$value] = $filterValues[$key];
+                }
+            }
+            $dataSource = (new $params[1])::where(function ($q) use ($arrayQuery) {
+                foreach ($arrayQuery as $key => $value) {
+                    is_array($value) ? $q->whereIn($key, $value) : $q->where($key, $value);
+                }
+                return $q;
+            })->get();
+        } else {
+            $dataSource = (new $params[1])::all();
+        }
         return view('components.controls.dropdown3', [
             'dataSource' => $dataSource,
             'name' =>  $this->name,

@@ -8,9 +8,10 @@
 <div class="flex justify-center">
     <div class="w-[1000px] min-h-[1300px] items-center border bg-white box-border">
         <x-renderer.letter-head />
-        @foreach($propsTree as $propTree)
-            <x-renderer.description-group :propTree="$propTree" :dataSource="$dataSource" />
-        @endforeach
+            @foreach($propsTree as $propTree)
+                <x-renderer.description-group :propTree="$propTree" :dataSource="$dataSource" />
+            @endforeach
+
     </div>
     
 </div>

@@ -12,11 +12,8 @@ class Description extends Component
      * @return void
      */
     public function __construct(
-        private $label,
-        private $colSpan,
+        private $prop,
         private $dataSource,
-        private $columnName,
-        private $control,
     ) {
         //
     }
@@ -29,17 +26,19 @@ class Description extends Component
     public function render()
     {
         $dataSource = $this->dataSource;
-        $columnName = $this->columnName;
+        $prop = $this->prop;
+        $columnName = $prop['column_name'];
         $content = $dataSource[$columnName];
-
-        $label = $this->label;
-        $colSpan = $this->colSpan;
-        $control = $this->control;
+        $label = $prop['label'];
+        $control = $prop['control'];
+        $colSpan = $prop['col_span'];
+        $relationships = $prop['relationships'];
         return view('components.renderer.description', [
             'label' => $label,
             'colSpan' => $colSpan,
             'content' => $content,
-            'control' => $control
+            'control' => $control,
+            'relationships' => $relationships
         ]);
     }
 }

@@ -3,7 +3,7 @@
     @if(sizeof($attachments) ==0)
         <x-renderer.emptiness p="2" class="border" message="{{$message}}"/>
     @else
-        <div class=" grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-4 mb-1 p-1 hidden1">
+        <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1">
             @foreach($attachments as $attachment)
                 @php
                 $isOrphan = isset($attachment['isOrphan']);
@@ -41,7 +41,7 @@
                         </button>
                         @endif
                     </div>
-                    <span>{{date('d-m-Y',strtotime($attachment['created_at']))}}</span>
+                    <span>{{date('d/m/Y',strtotime($attachment['created_at']))}}</span>
                 </div>
                 
             @endforeach

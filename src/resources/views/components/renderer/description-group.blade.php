@@ -1,48 +1,4 @@
-{{-- @if(isset($prop['children'][0]))
-<div class='grid grid-cols-12 items-center'>
-    @php
-    $heading = $prop['label'];
-    $control = $prop['control'];
-    @endphp
-    <div class='col-span-12 text-left'>
-        @switch($control)
-        @case('z_page_break')
-        <x-renderer.page-break />
-        @case('z_h1')
-        <x-renderer.heading level=1>{{$heading}}</x-renderer.heading>
-        @break
-        @case('z_h2')
-        <x-renderer.heading level=2>{{$heading}}</x-renderer.heading>
-        @break
-        @case('z_h3')
-        <x-renderer.heading level=3>{{$heading}}</x-renderer.heading>
-        @break
-        @case('z_h4')
-        <x-renderer.heading level=4>{{$heading}}</x-renderer.heading>
-        @break
-        @case('z_h5')
-        <x-renderer.heading level=5>{{$heading}}</x-renderer.heading>
-        @break
-        @case('z_h6_base')
-        <x-renderer.heading>{{$heading}}</x-renderer.heading>
-        @break
-        @endswitch
-    </div>
-</div>
-<div class='grid grid-cols-12'>
-    @foreach($prop['children'] as $prp)
-    @php
-    $x = $items[$prp['column_name']];
-    $contents = $prp['control'] === 'attachment' ? $x ->toArray() : $x;
-    $label = $prp['label'];
-    $colSpan = $prp['col_span'];
-    $colName = $prp['column_name'];
-    @endphp
-    <x-renderer.description label={{$label}} colName={{$colName}} colSpan={{$colSpan}} :contents="$contents" />
-    @endforeach
-</div>
-@endif --}}
-{{-- @dump($propTree['value']) --}}
+
 @if ($propTree['value'])
     <div class='grid grid-cols-12 items-center'>
         @php
@@ -90,7 +46,7 @@
             @if ($prop['control'] === 'relationship_renderer')
                 <span>Relationship_renderer</span>
             @else
-                <x-renderer.description label={{$label}} columnName={{$columnName}} colSpan={{$colSpan}} control={{$control}} :dataSource="$dataSource" />
+                <x-renderer.description :prop="$prop" :dataSource="$dataSource" />
             @endif
             @endforeach
         @endif
@@ -100,16 +56,10 @@
     <div class='grid grid-cols-12'>
         @if ($propTree['children'])
             @foreach($propTree['children'] as $prop)
-            @php
-            $label = $prop['label'];
-            $control = $prop['control'];
-            $colSpan = $prop['col_span'];
-            $columnName = $prop['column_name'];
-            @endphp
             @if ($prop['control'] === 'relationship_renderer')
             <span>Relationship_renderer</span>
             @else
-            <x-renderer.description label={{$label}} columnName={{$columnName}} colSpan={{$colSpan}} control={{$control}} :dataSource="$dataSource" />
+            <x-renderer.description :prop="$prop" :dataSource="$dataSource" />
             @endif
             @endforeach
         @else
@@ -118,3 +68,4 @@
         
     </div>
 @endif
+
