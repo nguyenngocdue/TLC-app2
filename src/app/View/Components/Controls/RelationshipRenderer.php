@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\SuperProps;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
@@ -43,7 +44,7 @@ class RelationshipRenderer extends Component
         return $hasOrderNoColumn;
     }
 
-    private function getDataSource($row, $colName, $isOrderable, $showAll = false)
+    private function getPaginatedDataSource($row, $colName, $isOrderable, $showAll = false)
     {
         if (!isset($row->eloquentParams[$colName])) {
             //TODO: 
@@ -209,6 +210,29 @@ class RelationshipRenderer extends Component
         return $dataSource;
     }
 
+    private function parseHTTPArrayToLines(array $dataSource)
+    {
+        $result = [];
+        foreach ($dataSource as $fieldName => $fieldValueArray) {
+            foreach ($fieldValueArray as $key => $value) {
+                $result[$key][$fieldName] = $value;
+            }
+        }
+        return $result;
+    }
+
+    private function convertOldToDataSource($old, $dataSource, $lineModelPath)
+    {
+        if (is_null($old)) return $dataSource;
+        $oldObjects = $this->parseHTTPArrayToLines($old);
+        $result = new Collection();
+        foreach ($oldObjects as $oldObject) {
+            $result->add(new $lineModelPath($oldObject));
+        }
+
+        return $result;
+    }
+
     private function remakeOrderNoColumn($dataSource)
     {
         // dump($dataSource);
@@ -232,16 +256,16 @@ class RelationshipRenderer extends Component
 
         $renderer_edit = $props['relationships']['renderer_edit'];
         $showAll = $renderer_edit === "many_icons";
-        $smallModel = $props['relationships']['eloquentParams'][1];
-        $instance = new $smallModel;
+        $lineModelPath = $props['relationships']['eloquentParams'][1];
+        $instance = new $lineModelPath;
 
         $tableFooter = "";
         $fn = $props['relationships']['renderer_edit_param'];
         if (!method_exists($instance, $fn)) {
-            $tableFooter = "Not found $fn in $smallModel";
+            $tableFooter = "Not found $fn in $lineModelPath";
             $fn = '';
         }
-        $tableName = $smallModel::getTableName();
+        $tableName = $lineModelPath::getTableName();
         $columns = ($fn === '')
             ? [
                 ["dataIndex" => 'id', "renderer" => "id", "type" => $tableName, "align" => "center"],
@@ -251,7 +275,7 @@ class RelationshipRenderer extends Component
 
         $row = $modelPath::find($id);
         $isOrderable = $row ? $this->isTableOrderable($row, $colName,) : [];
-        $dataSource = $row ? $this->getDataSource($row, $colName, $isOrderable, $showAll) : [];
+        $dataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
         switch ($renderer_edit) {
             case "many_icons":
                 $colSpan =  Helper::getColSpan($colName, $type);
@@ -262,17 +286,20 @@ class RelationshipRenderer extends Component
                 $dataSource = $dataSource->all(); // Force LengthAwarePaginator to Array
                 return view('components.controls.many-icon-params')->with(compact('dataSource', 'colSpan'));
             case "many_lines":
-                $tableName =  $smallModel::getTableName();
                 $sp = SuperProps::getFor($tableName);
+                $dataSourceWithOld = $this->convertOldToDataSource(old($this->table01Name), $dataSource, $lineModelPath);
+
                 //remakeOrderNoColumn MUST before attach Action Column
-                $dataSource = $this->remakeOrderNoColumn($dataSource);
-                $dataSource = $this->attachActionColumn($this->table01Name, $dataSource, $isOrderable);
+                $dataSourceWithOld = $this->remakeOrderNoColumn($dataSourceWithOld);
+                $dataSourceWithOld = $this->attachActionColumn($this->table01Name, $dataSourceWithOld, $isOrderable);
+                // dump($dataSourceWithOld);
                 return view('components.controls.many-line-params', [
                     'dataSource' => $dataSource,
+                    'dataSourceWithOld' => $dataSourceWithOld,
                     'tableFooter' => $tableFooter,
                     'readOnlyColumns' => $this->makeReadOnlyColumns($columns, $sp, $tableName),
                     'editableColumns' => $this->makeEditableColumns($columns, $sp, $tableName, $this->table01Name),
-                    'tableName' => $smallModel::getTableName(),
+                    'tableName' => $lineModelPath::getTableName(),
                     'table01Name' => $this->table01Name,
                     'table01ROName' => $this->table01Name . "RO",
                     'tableDebug' => $this->tableDebug ? "true" : "false",

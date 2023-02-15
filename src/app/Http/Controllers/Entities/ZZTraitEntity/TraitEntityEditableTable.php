@@ -30,16 +30,17 @@ trait TraitEntityEditableTable
 
             $dataSource = $this->parseHTTPArrayToLines($dataSource);
             $this->dump1("RECURSIVE CALLED PARSING from HTML DATA to ARRAY $tableName", $dataSource, __LINE__);
-            // dd($dataSource);
+            // dump($dataSource);
 
             foreach ($dataSource as $line) {
                 $fakeRequest = new Request();
                 $line['tableNames'] = "fakeRequest";
                 $line['idForScroll'] = substr($props[$table01Name], 1); //remove first "_"
+                // dump($line);
                 $fakeRequest->merge($line);
                 $controllerPath = "App\\Http\\Controllers\\Entities\\$tableType\\EntityCRUDController";
                 $controller = new $controllerPath;
-                if ($line['id']) {
+                if (isset($line['id']) && !is_null($line['id'])) {
                     if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
                         // dd("Destroying", $line['id']);
                         $controller->destroy($fakeRequest, $line['id']);
@@ -52,6 +53,7 @@ trait TraitEntityEditableTable
                     if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
                         //Ignore this case
                     } else {
+                        // dump($fakeRequest);
                         $controller->store($fakeRequest);
                     }
                 }
