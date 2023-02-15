@@ -2,7 +2,7 @@
 $sheetDesc = $dataSource['tmpl_sheet_description'];
 $name = App\Utils\Support\Report::slugName($sheetDesc)
 @endphp
-<div id="{{$name}}" class="scroll-mt-20  bg-white border-t border-r border-l border-gray-300 dark:border-gray-600">
+<div id="{{$name}}" class="scroll-mt-20 rounded-lg  bg-white border-t border-r border-l border-gray-300 dark:border-gray-600">
     <div class="border-b p-3 font-medium">
         <span class="">{{strtoupper($sheetDesc)}} - INSPECTION CHECK SHEET</span>
     </div>
