@@ -41,7 +41,7 @@ trait TraitEntityEditableTable
                 $controller = new $controllerPath;
                 if ($line['id']) {
                     if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
-                        dd("Destroying", $line['id']);
+                        // dd("Destroying", $line['id']);
                         $controller->destroy($fakeRequest, $line['id']);
                     } else {
                         // dump("Updating line " . $line['id'] . " of table $tableType");

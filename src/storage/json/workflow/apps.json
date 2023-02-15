@@ -5,8 +5,8 @@
         "package": "system",
         "sub_package": "system_admin",
         "title": "Attachments",
-        "nickname": "abc",
-        "status": "beta",
+        "nickname": null,
+        "status": null,
         "icon": "<i class=\"fa-regular fa-paperclip\"><\/i>"
     },
     "comment": {
@@ -16,7 +16,7 @@
         "sub_package": "system_admin",
         "title": "Comments",
         "nickname": "cm",
-        "status": "beta",
+        "status": null,
         "icon": "<i class=\"fa-duotone fa-comments\"><\/i>"
     },
     "control_type": {
@@ -35,8 +35,8 @@
         "package": "system",
         "sub_package": "system_admin",
         "title": "Departments",
-        "nickname": "dp",
-        "status": "beta",
+        "nickname": "dpm",
+        "status": null,
         "icon": "<i class=\"fa-regular fa-sitemap\"><\/i>"
     },
     "erp_routing_link": {
@@ -46,7 +46,7 @@
         "sub_package": "production",
         "title": "ERP Routing Links",
         "nickname": null,
-        "status": "beta",
+        "status": null,
         "icon": "<i class=\"fa-duotone fa-calendar-days\"><\/i>"
     },
     "field": {
@@ -56,7 +56,7 @@
         "sub_package": "dev_admin",
         "title": "Fields",
         "nickname": null,
-        "status": "beta",
+        "status": null,
         "icon": null
     },
     "hr_overtime_request": {
@@ -65,8 +65,8 @@
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "HR Overtime Requests",
-        "nickname": null,
-        "status": null,
+        "nickname": "otr",
+        "status": "dev",
         "icon": null
     },
     "hr_overtime_request_line": {
@@ -75,8 +75,8 @@
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "HR Overtime Request Lines",
-        "nickname": null,
-        "status": null,
+        "nickname": "otrl",
+        "status": "dev",
         "icon": null
     },
     "hse_corrective_action": {
@@ -85,7 +85,7 @@
         "package": "compliance",
         "sub_package": "hse",
         "title": "HSE Corrective Actions",
-        "nickname": null,
+        "nickname": "cra",
         "status": null,
         "icon": null
     },
@@ -325,7 +325,7 @@
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQA Cars",
-        "nickname": null,
+        "nickname": "car",
         "status": null,
         "icon": null
     },
