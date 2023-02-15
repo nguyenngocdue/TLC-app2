@@ -23,9 +23,9 @@ return new class extends Migration
             $table->json('text4')->nullable();
             $table->unsignedBigInteger('dropdown1')->nullable();
             $table->unsignedBigInteger('radio1')->nullable();
-            $table->unsignedBigInteger('boolean1')->nullable();
-            $table->foreign('dropdown1')->references('id')->on('workplaces')->onDelete('cascade');
-            $table->foreign('radio1')->references('id')->on('workplaces')->onDelete('cascade');
+            $table->boolean('boolean1')->nullable();
+            // $table->foreign('dropdown1')->references('id')->on('workplaces')->onDelete('cascade');
+            // $table->foreign('radio1')->references('id')->on('workplaces')->onDelete('cascade');
 
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedInteger('order_no')->nullable();

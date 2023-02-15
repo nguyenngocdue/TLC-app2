@@ -60,6 +60,11 @@ trait TraitTableColumnEditable
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = "text-right block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
                     break;
+                case 'toggle':
+                    $newColumn['renderer'] = 'toggle';
+                    $newColumn['editable'] = true;
+                    $newColumn['align'] = 'center';
+                    break;
                 default:
                     $newColumn['renderer'] = "text";
                     $newColumn['editable'] = true;

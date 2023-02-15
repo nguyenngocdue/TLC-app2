@@ -11,7 +11,7 @@ trait TraitTableColumnRO
         foreach ($columns as $column) {
             $newColumn = $column;
             if (!isset($sp['props']["_" . $column['dataIndex']])) {
-                dd("Column [" . $column['dataIndex'] . "] not found in SuperProps of " . $tableName);
+                dd("Column [" . $column['dataIndex'] . "] not found in SuperProps of " . $tableName . ". Pls double check your ManageProps screen.");
             }
             $prop = $sp['props']["_" . $column['dataIndex']];
             $newColumn['title'] = $column['title'] ?? $prop['label']; //. " <br/>" . $prop['control'];
