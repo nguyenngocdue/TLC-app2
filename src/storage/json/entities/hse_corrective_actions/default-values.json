@@ -87,6 +87,17 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_getDefMonitors()": {
+        "name": "_getDefMonitors()",
+        "column_name": "getDefMonitors()",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_opened_date": {
         "name": "_opened_date",
         "column_name": "opened_date",
@@ -125,7 +136,7 @@
         "column_name": "unsafe_action_type_id",
         "label": "",
         "default_value": "",
-        "validation": "",
+        "validation": "required",
         "formula": "",
         "label_extra": "",
         "placeholder": "",
@@ -145,6 +156,17 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "label": "",
         "default_value": "",
         "validation": "",

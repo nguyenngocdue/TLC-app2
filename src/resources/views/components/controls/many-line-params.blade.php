@@ -13,10 +13,11 @@
 <x-renderer.table 
     tableName="{{$table01Name}}"
     :columns="$editableColumns" 
-    :dataSource="$dataSource" 
+    :dataSource="$dataSourceWithOld" 
     showNo="{{true}}" 
     showNoR="{{true}}" 
     footer="{{$tableFooter}}"
+    maxH={{false}}
 />
 <script>
     editableColumns['{{$table01Name}}'] = @json($editableColumns);

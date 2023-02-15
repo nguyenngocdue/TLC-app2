@@ -261,13 +261,13 @@ const addANewLine = (params) => {
                         value = getMaxValueOfAColumn(tableId, "[order_no]") + 10
                         onChange = "rerenderTableBaseOnNewOrder(\"" + tableId + "\")"
                     }
-                    renderer = "<input name='" + name + "' class='" + column['classList'] + "' type=number step=any value='" + value + "' onChange='" + onChange + "' />";
+                    renderer = "<input id='" + name + "' name='" + name + "' class='" + column['classList'] + "' type=number step=any value='" + value + "' onChange='" + onChange + "' />";
                     break
                 case "text":
-                    renderer = "<input name='" + name + "' class='" + column['classList'] + "' />";
+                    renderer = "<input id='" + name + "' name='" + name + "' class='" + column['classList'] + "' />";
                     break
                 case "textarea":
-                    renderer = "<textarea name='" + name + "' class='" + column['classList'] + "'></textarea>"
+                    renderer = "<textarea id='" + name + "' name='" + name + "' class='" + column['classList'] + "'></textarea>"
                     break
                 default:
                     renderer = "Unknown how to render " + column['renderer']

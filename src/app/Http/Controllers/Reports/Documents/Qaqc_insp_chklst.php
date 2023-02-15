@@ -116,13 +116,13 @@ class Qaqc_insp_chklst extends Report_ParentController
                     $s = "";
                     foreach ($arrayControl as $col => $value) {
                         if ($item['control_value_name'] === $item[$col]) {
-                            $s .= "<td class ='px-6 py-4'>" . $checkedIcon . $value . "</td>";
+                            $s .= "<td class =''>" . $checkedIcon . $value . "</td>";
                         } else {
-                            $s .= "<td class ='px-6 py-4'>" . $circleIcon . $value . "</td>";
+                            $s .= "<td class =''>" . $circleIcon . $value . "</td>";
                         }
                     };
                     $runDesc = "<td class='hidden'>" . $item['run_desc'] . ":" . "</td>";
-                    $runUpdated = "<td class ='px-6 py-4'>" . $item['run_updated'] . "</td>";
+                    $runUpdated = "<td class =''>" . $item['run_updated'] . "</td>";
                     $str .= "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" .  $runDesc  . $s . $runUpdated . "</tr>";
                 } else {
                     $str .=  $item['sign'];

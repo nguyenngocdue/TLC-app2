@@ -40,11 +40,11 @@
         "align": "",
         "col_span": "12",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
+        "hidden_filter": "true",
+        "hidden_print": "true",
         "new_line": ""
     },
     "_status": {

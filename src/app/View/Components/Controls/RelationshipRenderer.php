@@ -3,15 +3,20 @@
 namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
-use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\SuperProps;
+use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnEditable;
+use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnRO;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
 class RelationshipRenderer extends Component
 {
+    use TraitTableColumnRO;
+    use TraitTableColumnEditable;
+
     private static $table00Count = 1;
     private $table01Name;
     private $tableDebug = false;
@@ -43,7 +48,7 @@ class RelationshipRenderer extends Component
         return $hasOrderNoColumn;
     }
 
-    private function getDataSource($row, $colName, $isOrderable, $showAll = false)
+    private function getPaginatedDataSource($row, $colName, $isOrderable, $showAll = false)
     {
         if (!isset($row->eloquentParams[$colName])) {
             //TODO: 
@@ -67,123 +72,6 @@ class RelationshipRenderer extends Component
         }
     }
 
-    private function makeReadOnlyColumns($columns, $sp, $tableName)
-    {
-        // dump($sp);
-        $result = [];
-        foreach ($columns as $column) {
-            $newColumn = $column;
-            if (!isset($sp['props']["_" . $column['dataIndex']])) {
-                dd("Column [" . $column['dataIndex'] . "] not found in SuperProps of " . $tableName);
-            }
-            $prop = $sp['props']["_" . $column['dataIndex']];
-            $newColumn['title'] = $column['title'] ?? $prop['label']; //. " <br/>" . $prop['control'];
-            $newColumn['width'] = $prop['width'];
-            switch ($prop['control']) {
-                case 'id':
-                    $newColumn['renderer'] = 'id';
-                    $newColumn['type'] = $tableName;
-                    $newColumn['align'] = 'center';
-                    break;
-                case 'dropdown':
-                case 'dropdown_multi':
-                case 'radio':
-                case 'checkbox':
-                    $dataIndex = $prop['relationships']['control_name_function'];
-                    $newColumn['dataIndex'] = $dataIndex;
-                    $newColumn['renderer'] = 'column';
-                    $newColumn['rendererParam'] = $column['rendererParam'] ?? 'name';
-                    break;
-                case 'status':
-                    $newColumn['renderer'] = 'status';
-                    $newColumn['align'] = 'center';
-                    break;
-                case 'number':
-                    $newColumn['align'] = 'right';
-                    break;
-                case 'toggle':
-                    $newColumn['renderer'] = 'toggle';
-                    $newColumn["align"] = "center";
-                    break;
-                default:
-                    $newColumn['renderer'] = "text";
-                    break;
-            }
-            $result[] = $newColumn;
-        }
-        // dump($result);
-        return $result;
-    }
-
-    private function makeEditableColumns($columns, $sp, $tableName, $table01Name)
-    {
-        $result = [['dataIndex' => 'action', 'width' => 5,]];
-        foreach ($columns as $column) {
-            $newColumn = $column;
-            $prop = $sp['props']["_" . $column['dataIndex']];
-            // dump($prop);
-            $newColumn['title'] = $column['title'] ?? $prop['label']; //. " <br/>" . $prop['control'];
-            $newColumn['width'] = $prop['width'];
-            $validation = $prop['default-values']['validation'] ?? "";
-            $isRequired = in_array("required", explode("|", $validation));
-            $newColumn['title'] .= $isRequired ? "</br><i class='text-red-400' title='required'>*</i>" : "";
-            // dump($newColumn);
-            switch ($prop['control']) {
-                case 'id':
-                    $newColumn['renderer'] = 'read-only-text';
-                    $newColumn['editable'] = true;
-                    $newColumn['align'] = 'center';
-                    break;
-                case 'status':
-                    $newColumn['cbbDataSourceObject'] = LibStatuses::getFor($tableName);
-                    $newColumn['cbbDataSource'] = array_keys(LibStatuses::getFor($tableName));
-                    $newColumn['renderer'] = 'dropdown';
-                    $newColumn['editable'] = true;
-                    $newColumn['classList'] = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 text-left placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
-                    break;
-                case 'dropdown':
-                case 'dropdown_multi':
-                case 'checkbox':
-                case 'radio':
-                    // $newColumn['renderer'] = 'text';
-                    $newColumn['renderer'] = 'dropdown4';
-                    $newColumn['editable'] = true;
-                    $newColumn['classList'] = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 text-left placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
-
-                    $newColumn['type'] = $this->type;
-                    $newColumn['lineType'] = Str::singular($tableName);
-                    $newColumn['table'] = $prop['relationships']['table'];
-                    $newColumn['table01Name'] = $table01Name;
-                    // dump($newColumn);
-                    break;
-                case 'textarea':
-                    $newColumn['renderer'] = 'textarea';
-                    $newColumn['editable'] = true;
-                    $newColumn['classList'] = "bg-white border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input";
-                    break;
-                case 'number':
-                    $newColumn['renderer'] = 'number';
-                    $newColumn['editable'] = true;
-                    $newColumn['classList'] = "text-right block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
-                    break;
-                default:
-                    $newColumn['renderer'] = "text";
-                    $newColumn['editable'] = true;
-                    $newColumn['classList'] = " block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
-                    break;
-            }
-            if (in_array($prop['control'], ['dropdown_multi', 'checkbox'])) {
-                $newColumn['multiple'] = true;
-            }
-            if ($newColumn['dataIndex'] === 'order_no') {
-                $newColumn['onChange'] = "rerenderTableBaseOnNewOrder(`" . $table01Name . "`)";
-            }
-            // dump($newColumn);
-            $result[] = $newColumn;
-        }
-        // dump($result);
-        return $result;
-    }
 
     private function attachActionColumn($table01Name, $dataSource, $isOrderable)
     {
@@ -209,6 +97,29 @@ class RelationshipRenderer extends Component
         return $dataSource;
     }
 
+    private function parseHTTPArrayToLines(array $dataSource)
+    {
+        $result = [];
+        foreach ($dataSource as $fieldName => $fieldValueArray) {
+            foreach ($fieldValueArray as $key => $value) {
+                $result[$key][$fieldName] = $value;
+            }
+        }
+        return $result;
+    }
+
+    private function convertOldToDataSource($old, $dataSource, $lineModelPath)
+    {
+        if (is_null($old)) return $dataSource;
+        $oldObjects = $this->parseHTTPArrayToLines($old);
+        $result = new Collection();
+        foreach ($oldObjects as $oldObject) {
+            $result->add(new $lineModelPath($oldObject));
+        }
+
+        return $result;
+    }
+
     private function remakeOrderNoColumn($dataSource)
     {
         // dump($dataSource);
@@ -232,16 +143,16 @@ class RelationshipRenderer extends Component
 
         $renderer_edit = $props['relationships']['renderer_edit'];
         $showAll = $renderer_edit === "many_icons";
-        $smallModel = $props['relationships']['eloquentParams'][1];
-        $instance = new $smallModel;
+        $lineModelPath = $props['relationships']['eloquentParams'][1];
+        $instance = new $lineModelPath;
 
         $tableFooter = "";
         $fn = $props['relationships']['renderer_edit_param'];
         if (!method_exists($instance, $fn)) {
-            $tableFooter = "Not found $fn in $smallModel";
+            $tableFooter = "Not found $fn in $lineModelPath";
             $fn = '';
         }
-        $tableName = $smallModel::getTableName();
+        $tableName = $lineModelPath::getTableName();
         $columns = ($fn === '')
             ? [
                 ["dataIndex" => 'id', "renderer" => "id", "type" => $tableName, "align" => "center"],
@@ -251,7 +162,7 @@ class RelationshipRenderer extends Component
 
         $row = $modelPath::find($id);
         $isOrderable = $row ? $this->isTableOrderable($row, $colName,) : [];
-        $dataSource = $row ? $this->getDataSource($row, $colName, $isOrderable, $showAll) : [];
+        $dataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
         switch ($renderer_edit) {
             case "many_icons":
                 $colSpan =  Helper::getColSpan($colName, $type);
@@ -262,17 +173,20 @@ class RelationshipRenderer extends Component
                 $dataSource = $dataSource->all(); // Force LengthAwarePaginator to Array
                 return view('components.controls.many-icon-params')->with(compact('dataSource', 'colSpan'));
             case "many_lines":
-                $tableName =  $smallModel::getTableName();
                 $sp = SuperProps::getFor($tableName);
+                $dataSourceWithOld = $this->convertOldToDataSource(old($this->table01Name), $dataSource, $lineModelPath);
+
                 //remakeOrderNoColumn MUST before attach Action Column
-                $dataSource = $this->remakeOrderNoColumn($dataSource);
-                $dataSource = $this->attachActionColumn($this->table01Name, $dataSource, $isOrderable);
+                $dataSourceWithOld = $this->remakeOrderNoColumn($dataSourceWithOld);
+                $dataSourceWithOld = $this->attachActionColumn($this->table01Name, $dataSourceWithOld, $isOrderable);
+                // dump($dataSourceWithOld);
                 return view('components.controls.many-line-params', [
                     'dataSource' => $dataSource,
+                    'dataSourceWithOld' => $dataSourceWithOld,
                     'tableFooter' => $tableFooter,
                     'readOnlyColumns' => $this->makeReadOnlyColumns($columns, $sp, $tableName),
                     'editableColumns' => $this->makeEditableColumns($columns, $sp, $tableName, $this->table01Name),
-                    'tableName' => $smallModel::getTableName(),
+                    'tableName' => $lineModelPath::getTableName(),
                     'table01Name' => $this->table01Name,
                     'table01ROName' => $this->table01Name . "RO",
                     'tableDebug' => $this->tableDebug ? "true" : "false",

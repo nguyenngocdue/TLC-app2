@@ -1,7 +1,12 @@
+/* This is for the option box bigger */
+.select2-dropdown.select2-dropdown--above{
+    width: max-content!important;
+}
 .select2-dropdown.select2-dropdown--below{
     width: max-content!important;
 }
 
+/* This is not making the dropdown have different size during dynamic render */
 select + .select2-container {
     width: 100% !important;
   }

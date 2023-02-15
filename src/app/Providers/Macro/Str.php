@@ -3,22 +3,6 @@
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
-Str::macro('getFieldNameInTable01Format', function (string $name, string $table01Name) {
-    $isStartWith = $table01Name && str_starts_with($name, $table01Name);
-    if ($isStartWith) {
-        $name = substr($name, strlen($table01Name) + 1); // table01[hse_incident_report_id][0] => hse_incident_report_id][0]
-        $name = substr($name, 0, strpos($name, "]"));
-    }
-    return $name;
-});
-Str::macro('modelPathFrom', function (string $table_or_type) {
-    return "App\\Models\\" . ucfirst(Str::singular($table_or_type));
-});
-//make a,b,c to [a,b,c]
-//make "" to []
-Str::macro('parseArray', function (?string $values) {
-    return ($values != "") ? explode(",", $values) : [];
-});
 Str::macro('appTitle', function (string $s) {
     $exceptionOfKeepingSingular = ['qaqc', 'hse', 'kpi', 'esg', 'hr', 'scm'];
     $s = in_array($s, $exceptionOfKeepingSingular) ? $s : Str::plural($s);
@@ -37,6 +21,23 @@ Str::macro('appTitle', function (string $s) {
     $s = preg_replace($sources, $target, $s);
     return $s;
 });
+Str::macro('getFieldNameInTable01Format', function (string $name, string $table01Name) {
+    $isStartWith = $table01Name && str_starts_with($name, $table01Name);
+    if ($isStartWith) {
+        $name = substr($name, strlen($table01Name) + 1); // table01[hse_incident_report_id][0] => hse_incident_report_id][0]
+        $name = substr($name, 0, strpos($name, "]"));
+    }
+    return $name;
+});
+Str::macro('modelPathFrom', function (string $table_or_type) {
+    return "App\\Models\\" . ucfirst(Str::singular($table_or_type));
+});
+//make a,b,c to [a,b,c]
+//make "" to []
+Str::macro('parseArray', function (?string $values) {
+    return ($values != "") ? explode(",", $values) : [];
+});
+
 Str::macro('modelToPretty', function (string $string) {
     return Str::headline(App::make($string)->getTable());
 });

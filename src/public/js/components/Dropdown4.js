@@ -1,4 +1,6 @@
 let runOnce = {}
+//Similar to includes, this will be checking both numbers and strings
+const dumbIncludes = (item, array) => { for (let i = 0; i < array.length; i++) { if (array[i] == item) return true } return false }
 const makeIdFrom = (table01Name, fieldName, rowIndex) => table01Name + "[" + fieldName + "][" + rowIndex + "]"
 
 const getFieldNameInTable01FormatJS = (name, table01Name) => {
@@ -48,12 +50,7 @@ const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
     const constraintsValues = triggers.map((trigger) => getEById(makeIdFrom(table01Name, trigger, rowIndex)).val())
     if (debugListener) console.log(triggers, constraintsValues)
 
-    const dumbIncludes = (array, item) => {
-        for (let i = 0; i < array.length; i++) {
-            if (array[i] == item) return true
-        }
-        return false
-    }
+
 
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
@@ -65,7 +62,7 @@ const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
         dataSource = dataSource.filter((row) => {
             let result = null
             if (Array.isArray(row[column])) {
-                result = dumbIncludes(row[column], value)
+                result = dumbIncludes(value, row[column])
             } else {
                 result = row[column] == value
             }
@@ -118,7 +115,7 @@ const onChangeDropdown4Assign = (listener, table01Name, rowIndex) => {
     }
 }
 const onChangeDropdown4Dot = (listener, table01Name, rowIndex) => {
-    // const debugListener = true
+    const debugListener = true
     if (debugListener) console.log("Dot", listener)
     const selectedObject = onChangeGetSelectedObject4(listener, table01Name, rowIndex)
 
@@ -162,8 +159,8 @@ const onChangeDropdown4DateOffset = (listener, table01Name, rowIndex) => {
 }
 
 const onChangeDropdown4 = (name, lineType, table01Name, rowIndex) => {
-    // console.log("onChangeDropdown4", name, lineType, table01Name, rowIndex)
-    // console.log("listenersOfDropdown4s", listenersOfDropdown4s)
+    console.log("onChangeDropdown4", name, lineType, table01Name, rowIndex)
+    console.log("listenersOfDropdown4s", listenersOfDropdown4s)
     const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
     for (let i = 0; i < listenersOfDropdown4.length; i++) {
         let listener = listenersOfDropdown4[i]
@@ -205,7 +202,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
 
     for (let i = 0; i < dataSource.length; i++) {
         let item = dataSource[i]
-        selectedStr = (dataSource.length === 1) ? 'selected' : (selected.includes(item.id) ? "selected" : "")
+        selectedStr = (dataSource.length === 1) ? 'selected' : (dumbIncludes(item.id, selected) ? "selected" : "")
         option = "<option value='" + item.id + "' title='" + item.description + "' " + selectedStr + " >"
         option += item.name
         option += "</option>"
