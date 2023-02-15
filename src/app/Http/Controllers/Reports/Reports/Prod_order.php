@@ -27,7 +27,7 @@ class Prod_order extends Report_ParentController
                     WHERE 1 = 1 \n";
         // dump($urlParams);
         if (isset($urlParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}' \n";
-        if (isset($urlParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'\n ";
+        if (isset($urlParams['prod_order'])) $sql .= "\n AND po.id = '{{prod_order}}'\n ";
         $sql .=  "GROUP BY po.id";
         return $sql;
     }
