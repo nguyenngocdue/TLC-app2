@@ -28,6 +28,7 @@
         "brian2694/laravel-toastr": "^5.57",
         "directorytree/ldaprecord-laravel": "^2.5.6",
         "doctrine/dbal": "^3.4",
+        "fortune/font-beauty": "@dev",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
@@ -42,8 +43,8 @@
         "mll-lab/graphql-php-scalars": "^5.4",
         "mll-lab/laravel-graphql-playground": "^2.6",
         "ndc/spatie-custom": "@dev",
-        "fortune/font-beauty": "@dev",
         "nuwave/lighthouse": "^5.61",
+        "predis/predis": "^2.1",
         "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {

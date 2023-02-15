@@ -58,6 +58,7 @@ trait TraitEntityCRUDShow
 			'propsTree' => array_values($node),
 			'dataSource' => $dataSource,
 			'type' => $this->type,
+			'showId' => $id,
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
 		]);
 	}

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
 class LetterHead extends Component
@@ -11,8 +12,10 @@ class LetterHead extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $type,
+        private $showId,
+    ) {
         //
     }
 
@@ -34,6 +37,7 @@ class LetterHead extends Component
         ];
         return view('components.renderer.letter-head', [
             'dataSource' => $dataSource,
+            'id' => $this->showId,
         ]);
     }
 }

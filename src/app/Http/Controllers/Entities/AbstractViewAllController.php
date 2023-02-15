@@ -340,7 +340,6 @@ abstract class AbstractViewAllController extends Controller
         $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
         $this->attachRendererIntoColumn($columns);
         $searchableArray = App::make($this->typeModel)->toSearchableArray();
-
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'pageLimit' => $pageLimit,

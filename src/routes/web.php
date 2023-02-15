@@ -4,6 +4,7 @@ use App\Http\Controllers\AppMenuController;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RedisController;
 use App\Http\Controllers\Reports\ReportIndexController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\WelcomeController;
@@ -148,3 +149,4 @@ Route::group([
 });
 
 Route::get('components', [ComponentDemo::class, 'index']);
+Route::get('redis', [RedisController::class, 'index']);

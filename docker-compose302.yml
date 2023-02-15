@@ -19,6 +19,25 @@ services:
       - mysql
     networks:
       - laravel302
+  redis:
+    image: redis
+    container_name: laravel302_redis
+    restart: unless-stopped
+    environment:
+      - REDIS_PASSWORD=password
+      - REDIS_REPLICATION_mode=master
+    ports:
+      - "37912:6379"
+    networks:
+      - laravel302
+  redisinsight:
+    image: redislabs/redisinsight
+    container_name: laravel302_redisinsight
+    restart: unless-stopped
+    ports:
+      - "37902:8001"
+    networks:
+      - laravel302
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: laravel302_phpmyadmin
@@ -31,7 +50,7 @@ services:
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
     ports:
-      - 38102:80
+      - "38102:80"
     networks:
       - laravel302
 

@@ -9,7 +9,7 @@
                 $isOrphan = isset($attachment['isOrphan']);
                 $border = $isOrphan ? "red" : "gray";
                 $title = $isOrphan ? "Orphan image found. Will attach after this document is saved.":"";
-                $extension = $attachment['extension'];
+                $extension = $attachment['extension'] ?? "";
                 @endphp
                 @isset($attachment['isOrphan'])
                 <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="hidden"/>
@@ -41,7 +41,7 @@
                         </button>
                         @endif
                     </div>
-                    <span>{{date('d/m/Y',strtotime($attachment['created_at']))}}</span>
+                    <span>{{date('d/m/Y',strtotime($attachment['created_at'] ?? ''))}}</span>
                 </div>
                 
             @endforeach

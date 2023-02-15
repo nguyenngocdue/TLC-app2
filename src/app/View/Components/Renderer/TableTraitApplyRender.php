@@ -82,6 +82,7 @@ trait TableTraitApplyRender
         }
 
         $output = "<$tagName $attributes>$rawData</$tagName>";
+
         // Log::info($output);
         // Log::info($column);
         $cell = $dataLine[$column['dataIndex']] ?? "No dataIndex for " . $column['dataIndex']; //This is for Thumbnail

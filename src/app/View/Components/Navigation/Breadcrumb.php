@@ -24,7 +24,6 @@ class Breadcrumb extends Component
         $isAdmin = CurrentUser::isAdmin();
         $action = CurrentRoute::getControllerAction();
         $id = CurrentRoute::getEntityId($singular);
-
         if ($isAdmin) {
             $modelPath = Str::modelPathFrom($singular);
             $first = $modelPath::first();

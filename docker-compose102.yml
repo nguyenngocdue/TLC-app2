@@ -1,68 +1,87 @@
-version: '3'
+version: "3"
 
 networks:
-    laravel102:
-        driver: bridge
+  laravel102:
+    driver: bridge
 services:
-    nginx:
-        image: nginx:alpine
-        container_name: laravel102_nginx
-        restart: unless-stopped
-        tty: true
-        ports:
-            - "18002:8001"
-        volumes:
-            - ./src:/var/www/app
-            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-        depends_on:
-            - php
-            - mysql
-        networks:
-            - laravel102
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        container_name: laravel102_phpmyadmin
-        restart: unless-stopped
-        depends_on:
-            - mysql
-        environment:
-            PMA_HOSTS: mysql
-            MYSQL_ROOT_PASSWORD: LNIBsCP9Gj7xF4d3
-            PMA_PORT: 3306
-            PMA_ARBITRARY: 1
-        ports:
-            - 18102:80
-        networks:
-            - laravel102
+  nginx:
+    image: nginx:alpine
+    container_name: laravel102_nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "18002:8001"
+    volumes:
+      - ./src:/var/www/app
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - laravel102
+  redis:
+    image: redis
+    container_name: laravel102_redis
+    restart: unless-stopped
+    environment:
+      - REDIS_PASSWORD=password
+      - REDIS_REPLICATION_mode=master
+    ports:
+      - "17912:6379"
+    networks:
+      - laravel102
+  redisinsight:
+    image: redislabs/redisinsight
+    container_name: laravel102_redisinsight
+    restart: unless-stopped
+    ports:
+      - "17902:8001"
+    networks:
+      - laravel102
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: laravel102_phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOSTS: mysql
+      MYSQL_ROOT_PASSWORD: LNIBsCP9Gj7xF4d3
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    ports:
+      - 18102:80
+    networks:
+      - laravel102
 
-    mysql:
-        image: mysql
-        container_name: laravel102_mysql
-        restart: unless-stopped
-        tty: true
-        ports:
-            - "13302:3306"
-        volumes:
-            - ./mysql:/var/lib/mysql
-        environment:
-            MYSQL_ROOT_PASSWORD: LNIBsCP9Gj7xF4d3
-            MYSQL_DATABASE: laravel
-            MYSQL_USER: tlc_app_2
-            MYSQL_PASSWORD: DLTedTfrVzYbrYv9
-        networks:
-            - laravel102
+  mysql:
+    image: mysql
+    container_name: laravel102_mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "13302:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: LNIBsCP9Gj7xF4d3
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: tlc_app_2
+      MYSQL_PASSWORD: DLTedTfrVzYbrYv9
+    networks:
+      - laravel102
 
-    php:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        container_name: laravel102_php
-        restart: unless-stopped
-        tty: true
-        working_dir: /var/www/app
-        volumes:
-            - ./src:/var/www/app
-        ports:
-            - "19002:9000"
-        networks:
-            - laravel102
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel102_php
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www/app
+    volumes:
+      - ./src:/var/www/app
+    ports:
+      - "19002:9000"
+    networks:
+      - laravel102

@@ -1,4 +1,8 @@
 <table class="border-none whitespace-nowrap w-full">
+    @php
+        $urlCurrent = url()->current();
+
+    @endphp
     <tbody>
         <tr>
             <td align="left">
@@ -13,11 +17,13 @@
                 <td class="w-[20%]" align="center">
                     <div class="flex flex-row flex-wrap justify-center gap-y-0">
                         <div class="relative max-w-full min-h-[1px]">
-                            <div class="float-left transform rotate-[270deg] mt-8 ml-8">
-                            </div>
-                            <canvas class="w-20 h-20" height="80" width="80">
-                            </canvas>
-                            <div class="transform rotate-[270deg] float-right mt-8 -ml-4">
+                            {{-- <div class="float-left transform rotate-[270deg] mt-8 ml-8">
+                            </div> --}}
+                            <div id="{{$id}}" class="w-24 h-24 flex"></div>
+                            <script>
+                                new QRCode(document.getElementById("{{$id}}"),"{{$urlCurrent}}",)
+                            </script>
+                            <div class="flex transform rotate-[270deg] float-right mt-8 -ml-4">
                                 eco/64388
                             </div>
                         </div>

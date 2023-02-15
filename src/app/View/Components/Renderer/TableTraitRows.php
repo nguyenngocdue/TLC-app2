@@ -92,7 +92,6 @@ trait TableTraitRows
                     $trs[] = "<tr class='bg-gray-100 dark:bg-gray-800'><td class='p-2 text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td></tr>";
                 }
             }
-
             $bgClass = ($dataLine['row_color'] ?? false) ? "bg-" . $dataLine['row_color'] . "-400" : "";
             $trs[] = "<tr class='dark:hover:bg-gray-600 hover:bg-gray-200 $bgClass text-gray-700 dark:text-gray-300'>" . join("", $tds) . "</tr>";
 
@@ -103,7 +102,6 @@ trait TableTraitRows
             }
         }
         $tr_td = join("", $trs);
-
         return $tr_td;
     }
 }
