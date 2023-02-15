@@ -20,7 +20,7 @@ $nameControl1 = isset($nameControls[0]) ? $nameControls[0] : "NO";
 
 
 @section('content')
-<x-renderer.modes-report :controlValues="[$prod_orders]" :controlNames="[$nameControl1]" :itemsSelected="$urlParams"></x-renderer.modes-report>
+{{-- <x-renderer.modes-report :controlValues="[$prod_orders]" :controlNames="[$nameControl1]" :itemsSelected="$urlParams"></x-renderer.modes-report> --}}
 <x-renderer.table-report :dataSource="$sheets"></x-renderer.table-report>
 
 
@@ -32,7 +32,7 @@ $item = $data[0];
 
 <div class="flex-nowrap bg-gray-100 dark:bg-gray-800  mb-5 p-2">
     <x-renderer.report.header-report :dataSource="$item"></x-renderer.report.header-report>
-    <x-renderer.table setBorder="border-b border-r border-l" :columns="$tableColumns" :dataSource="$data" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
+    <x-renderer.table :columns="$tableColumns" :dataSource="$data" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
 </div>
 <br />
 <br />
