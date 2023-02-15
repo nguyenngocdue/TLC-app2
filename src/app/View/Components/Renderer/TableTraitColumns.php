@@ -32,13 +32,17 @@ trait TableTraitColumns
         $renderer = $column['renderer'] ?? "_no_renderer_";
         $dataIndex = $column['dataIndex'];
         $columnName = $column['column_name'] ?? $dataIndex;
+        $columnType = $column['column_type'] ?? "";
         $width = $column['width'] ?? "";
         $title = $column['title'] ?? Str::headline($column['dataIndex']);
-        $tooltip = "DataIndex: $dataIndex\n";
-        $tooltip .= "ColumnName: $columnName\n";
-        $tooltip .= "Renderer: $renderer\n";
-        $tooltip .= "Width: $width";
+        $tooltip = "Column details:\n";
+        $tooltip .= "+ DataIndex: $dataIndex\n";
+        $tooltip .= "+ ColumnName: $columnName\n";
+        $tooltip .= "+ Renderer: $renderer\n";
+        $tooltip .= "+ Width: $width";
         $styleStr = $this->getStyleStr($column);
+        $iconJson = $columnType === 'json' ? '<br/><i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
+        if ($columnType === 'json') $title .= $iconJson;
         return "<th class='{$dataIndex}_th px-4 py-3' $styleStr title='$tooltip'>{$title}</th>";
     }
 
