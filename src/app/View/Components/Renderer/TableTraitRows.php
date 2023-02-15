@@ -59,7 +59,7 @@ trait TableTraitRows
             $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
             $hidden = $this->isInvisible($column) ? "hidden" : "";
             $styleStr = $this->getStyleStr($column);
-            $tds[] = "<td class='p1x-1 p1y-1 $hidden dark:border-gray-600 $borderRight $align' $styleStr>" . $rendered . "</td>";
+            $tds[] = "<td class='p1x-1 p1y-1 $hidden  dark:border-gray-600 $borderRight $align' $styleStr>" . $rendered . "</td>";
         }
         return $tds;
     }

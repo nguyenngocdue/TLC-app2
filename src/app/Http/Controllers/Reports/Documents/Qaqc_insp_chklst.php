@@ -16,6 +16,7 @@ class Qaqc_insp_chklst extends Report_ParentController
                         po.id
                         ,sp.name AS project_name
                         ,l.value AS sign
+                        ,l.value_comment AS value_comment
                         ,r.qaqc_insp_chklst_sht_id AS sheet_id
                         ,s.description AS sheet_name
                         ,r.id AS run_id
@@ -29,11 +30,6 @@ class Qaqc_insp_chklst extends Report_ParentController
                         
                         ,cv.id AS control_value_id
                         ,cv.name AS control_value_name
-                        ,cv.qaqc_insp_control_group_id control_group_id
-                    
-                        ,ct.id AS control_type_id
-                        ,ct.name AS control_type_name
-                        ,g.id AS group_id
                         ,g.description AS group_description
                         ,ts.id AS tmpl_sheet_id
                         ,ts.description AS tmpl_sheet_description
@@ -77,6 +73,7 @@ class Qaqc_insp_chklst extends Report_ParentController
             [
                 "title" => 'Description',
                 "dataIndex" => "line_description",
+                'width' => "253"
             ],
             [
                 "dataIndex" => "response_type",
@@ -116,14 +113,21 @@ class Qaqc_insp_chklst extends Report_ParentController
                     $s = "";
                     foreach ($arrayControl as $col => $value) {
                         if ($item['control_value_name'] === $item[$col]) {
-                            $s .= "<td class =''>" . $checkedIcon . $value . "</td>";
+                            $s .= '<td class="border" style="width:50px">' . $checkedIcon . $value . '</td>';
                         } else {
-                            $s .= "<td class =''>" . $circleIcon . $value . "</td>";
+                            $s .=  '<td class="border" style="width:50px">' . $circleIcon . $value . '</td>';
                         }
                     };
-                    $runDesc = "<td class='hidden'>" . $item['run_desc'] . ":" . "</td>";
-                    $runUpdated = "<td class =''>" . $item['run_updated'] . "</td>";
-                    $str .= "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" .  $runDesc  . $s . $runUpdated . "</tr>";
+                    $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item['run_desc'] . ":" . "</td>" : "";
+                    $runUpdated = '<td class="border" style="width:80px" >' . $item['run_updated'] . "</td>";
+
+                    $pictures = '<td class="border" style="width:190px">' . '<div class="flex">' . $this->getImage() . '</div>' . '</td>';
+                    // dump($item);
+                    $value_comment = '<td class="border" style="width:190px">' .  $item['value_comment'] . '</td>';
+
+                    $showItems = $runDesc . $s . $runUpdated . $pictures . $value_comment;
+
+                    $str .= "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $showItems . "</tr>";
                 } else {
                     $str .=  $item['sign'];
                 }
@@ -153,5 +157,15 @@ class Qaqc_insp_chklst extends Report_ParentController
         ksort($data);
         // dd($data);
         return $data;
+    }
+
+    protected function getImage()
+    {
+        return "
+        <img title='dev-thuc/2023/02/incident trong tran van-150x150.png' width='64' class='rounded-lg object-cover border mr-1' src='http://192.168.100.100:9000/hello-001/dev-thuc/2023/02/incident trong tran van-150x150.png'>
+        <img title='avatars/admin avatar-150x150.png' width='64' class='rounded-lg object-cover border mr-1' src='http://192.168.100.100:9000/hello-001/avatars/admin avatar-150x150.png'>
+        <img title='avatars/admin avatar-150x150.png' width='64' class='rounded-lg object-cover border mr-1' src='http://192.168.100.100:9000/hello-001/avatars/admin avatar-150x150.png'>
+        <img title='avatars/admin avatar-150x150.png' width='64' class='rounded-lg object-cover border mr-1' src='http://192.168.100.100:9000/hello-001/avatars/admin avatar-150x150.png'>
+        ";
     }
 }
