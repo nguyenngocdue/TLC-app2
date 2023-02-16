@@ -52,14 +52,20 @@ trait HasCheckbox
         $result = [];
         foreach ($result0 as $item) {
             // error_log($item->term_id);
+            // dd($item);
             $modelPath = $item->term_type;
-            $origin = clone $resultInverted[$modelPath][$item->term_id];
-            $origin->field_id = $item->field_id;
-            $origin->pivot = [
-                'created_at' => $item->created_at,
-                'json' => json_decode($item->json),
-            ];
-            $result[] = $origin;
+            if (isset($resultInverted[$modelPath][$item->term_id])) {
+                $objToBeCloned = $resultInverted[$modelPath][$item->term_id];
+                $origin = clone $objToBeCloned;
+                $origin->field_id = $item->field_id;
+                $origin->pivot = [
+                    'created_at' => $item->created_at,
+                    'json' => json_decode($item->json),
+                ];
+                $result[] = $origin;
+            } else {
+                dump("ID #{$item->term_id} not found in $modelPath (HasCheckbox)");
+            }
         }
         return new Collection($result);
     }

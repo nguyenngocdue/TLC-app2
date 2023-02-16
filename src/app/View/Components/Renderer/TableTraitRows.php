@@ -93,7 +93,8 @@ trait TableTraitRows
                 }
             }
             $bgClass = ($dataLine['row_color'] ?? false) ? "bg-" . $dataLine['row_color'] . "-400" : "";
-            $trs[] = "<tr class='dark:hover:bg-gray-600 hover:bg-gray-200 $bgClass text-gray-700 dark:text-gray-300'>" . join("", $tds) . "</tr>";
+            $extraTrClass = $dataLine->extraTrClass;
+            $trs[] = "<tr class='dark:hover:bg-gray-600 hover:bg-gray-200 $bgClass text-gray-700 dark:text-gray-300 $extraTrClass'>" . join("", $tds) . "</tr>";
 
             if (isset($dataLine['rowDescription'])) {
                 $colspan_minus_1 = $colspan - 1;

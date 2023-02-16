@@ -206,10 +206,10 @@ const addANewLine = (params) => {
             fingerPrint = getMaxValueOfAColumn(tableId, "[finger_print]") + 10
             const params = "{tableId: '" + tableId + "', control:this, fingerPrint: " + fingerPrint + "}"
 
-            const fingerPrintName = tableId + "[finger_print][]"
+            const fingerPrintName = tableId + "[finger_print][" + newRowIndex + "]"
             const fingerPrintInput = '<input readonly class="w-10 bg-gray-300" name="' + fingerPrintName + '" value="' + fingerPrint + '" type=' + (tableDebug ? "text" : "hidden") + ' />'
 
-            const destroyName = tableId + "[DESTROY_THIS_LINE][]"
+            const destroyName = tableId + "[DESTROY_THIS_LINE][" + newRowIndex + "]"
             const destroyInput = '<input readonly class="w-10 bg-gray-300" name="' + destroyName + '" type=' + (tableDebug ? "text" : "hidden") + ' />'
 
             const btnUp = '<button value="' + tableId + '" onClick="moveUpEditableTable(' + params + ')" type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-up"></i></button>'

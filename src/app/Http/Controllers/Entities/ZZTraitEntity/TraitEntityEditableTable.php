@@ -46,31 +46,31 @@ trait TraitEntityEditableTable
                 $controller = new $controllerPath;
                 if (isset($line['id']) && !is_null($line['id'])) {
                     if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
-                        // dd("Destroying", $line['id']);
-                        $controller->destroy($fakeRequest, $line['id']);
+                        $destroySuccess = $controller->destroy($fakeRequest, $line['id']);
                         //Not necessary because it will be deleted when mapping with the next lines
-                        session()->push('editableTablesTransactions.' . $table01Name, ["msg" => "Destroyed", 'id' => 1 * $line['id'],]);
-                        // Log::info("Destroyed $table01Name " . $line['id']);
+                        if ($destroySuccess) {
+                            session()->push('editableTablesTransactions.' . $table01Name, ["result" => 1, "msg" => "Destroyed", 'id' => 1 * $line['id'],]);
+                        } else {
+                            session()->push('editableTablesTransactions.' . $table01Name, ["result" => 0, "msg" => "destroy_failed", 'id' => 1 * $line['id'],]);
+                        }
                     } else {
-                        // dump("Updating line $table01Name " . $line['id'] . " of table $tableType");
-                        // dump($line);
-                        $controller->update($fakeRequest, $line['id']);
-                        session()->push('editableTablesTransactions.' . $table01Name, ["msg" => "Updated", 'id' => 1 * $line['id'],]);
-                        // Log::info("Updated $table01Name " . $line['id']);
+                        $updatedId = $controller->update($fakeRequest, $line['id']);
+                        if (is_numeric($updatedId)) {
+                            session()->push('editableTablesTransactions.' . $table01Name, ["result" => 1, "msg" => "Updated", 'id' => 1 * $line['id'],]);
+                        } else {
+                            session()->push('editableTablesTransactions.' . $table01Name, ["result" => 0, "msg" => "update_failed_due_to_validation", 'id' => 1 * $line['id'],]);
+                        }
                     }
                 } else {
-                    if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
+                    if (isset($line['DESTROY_THIS_LINE']) && $line["DESTROY_THIS_LINE"] == true) {
                         //Ignore this case
                     } else {
-                        // dump($fakeRequest);
                         $insertedId = $controller->store($fakeRequest);
                         //Incase the storing failed, it will return a HTML string of 302
                         if (is_numeric($insertedId)) {
-                            session()->push('editableTablesTransactions.' . $table01Name, ["msg" => "Created", 'id' => 1 * $insertedId,]);
-                            // Log::info("Created $table01Name " . $line['id']);
+                            session()->push('editableTablesTransactions.' . $table01Name, ["result" => 1, "msg" => "Created", 'id' => 1 * $insertedId,]);
                         } else {
-                            session()->push('editableTablesTransactions.' . $table01Name, ["msg" => "insert_failed_due_to_validation", 'id' => null]);
-                            // Log::info("insert_failed_due_to_validation $table01Name " . $line['id']);
+                            session()->push('editableTablesTransactions.' . $table01Name, ["result" => 0, "msg" => "insert_failed_due_to_validation", 'id' => null]);
                         }
                     }
                 }

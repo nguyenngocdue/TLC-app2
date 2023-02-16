@@ -10,7 +10,6 @@ trait TraitEntityCRUDDestroy
     {
         $modelPath = $this->data;
         $item = $modelPath::find($id);
-        $item->delete();
-        // dd("Destroying", $request, $id,);
+        return $item->delete();
     }
 }

@@ -18,19 +18,50 @@ trait TraitTableEditableDataSourceWithOld
         return $result;
     }
 
+    private function removeDestroyedLines(&$editableTablesTransactions, &$oldObjects)
+    {
+        $toBeRemoved = [];
+        foreach ($editableTablesTransactions as $index => $transaction) {
+            if ($transaction['msg'] == 'Destroyed' && $transaction['result'] == true) {
+                $toBeRemoved[] = $index;
+            }
+        }
+        foreach ($toBeRemoved as $index) {
+            unset($editableTablesTransactions[$index]);
+            unset($oldObjects[$index]);
+        }
+        $editableTablesTransactions = array_values($editableTablesTransactions);
+        $oldObjects = array_values($oldObjects);
+    }
+
+    private function getToBeHighlightedLineIndex($editableTablesTransactions)
+    {
+        $toBeHighlighted = [];
+        foreach ($editableTablesTransactions as $index => $transaction) {
+            if ($transaction['result'] == false)  $toBeHighlighted[] = $index;
+        }
+        return $toBeHighlighted;
+    }
+
     private function convertOldToDataSource($table01Name, $dataSource, $lineModelPath)
     {
         $old = old($table01Name);
         // dump($dataSource);
         if (is_null($old)) return $dataSource;
-        $oldObjects = $this->parseHTTPArrayToLines($old);
+        $oldObjects = array_values($this->parseHTTPArrayToLines($old));
         $result = [];
         $editableTablesTransactions = session()->get('editableTablesTransactions');
         $editableTablesTransactions = $editableTablesTransactions[$table01Name];
-        dump($editableTablesTransactions);
+        // dump($editableTablesTransactions);
         // dump($oldObjects);
-        foreach ($oldObjects as $oldObject) {
+
+        $this->removeDestroyedLines($editableTablesTransactions, $oldObjects);
+        $toBeHighlightedIndex = $this->getToBeHighlightedLineIndex($editableTablesTransactions);
+        // dump($toBeHighlightedIndex);
+
+        foreach ($oldObjects as $index => $oldObject) {
             $newObject = new $lineModelPath($oldObject);
+            $newObject->extraTrClass = (in_array($index, $toBeHighlightedIndex)) ? "bg-red-300" : "";
             $result[] = $newObject;
         }
         // dump($result);
@@ -66,13 +97,13 @@ trait TraitTableEditableDataSourceWithOld
     private function attachActionColumn($table01Name, $dataSource, $isOrderable)
     {
         // dump($dataSource);
-        foreach ($dataSource as &$row) {
+        foreach ($dataSource as $rowIndex => &$row) {
             $id = $row->order_no;
             // dump($index);
             $type = $this->tableDebug ? "text" : "hidden";
             $output = "
-            <input readonly name='{$table01Name}[finger_print][]' value='$id' type=$type class='w-10 bg-gray-300' />
-            <input readonly name='{$table01Name}[DESTROY_THIS_LINE][]'  type=$type class='w-10 bg-gray-300' />
+            <input readonly name='{$table01Name}[finger_print][$rowIndex]' value='$id' type=$type class='w-10 bg-gray-300' />
+            <input readonly name='{$table01Name}[DESTROY_THIS_LINE][$rowIndex]'  type=$type class='w-10 bg-gray-300' />
             <div class='whitespace-nowrap flex justify-center '>";
             if ($isOrderable) $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
                  <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>";
