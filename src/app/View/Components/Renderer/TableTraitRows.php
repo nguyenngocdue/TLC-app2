@@ -27,13 +27,15 @@ trait TableTraitRows
         return $dataSource->items();
     }
 
-    private function makeTd($columns, $dataLine, $no, $dataLineIndex)
+    private function makeTd($columns, $dataLine, $no, $dataLineIndex, $tableDebug)
     {
         $tds = [];
         $columnCount = sizeof($columns);
         // Log::info($columns);
         foreach (array_values($columns) as $index => $column) {
             $renderer = $column['renderer'] ?? false;
+            $columnName = $column['column_name'] ?? $column['dataIndex'];
+            $name = isset($column['dataIndex']) ? "{$this->tableName}[$columnName][$dataLineIndex]" : "";
             switch ($renderer) {
                 case  'no.':
                     // dd($start, $no);
@@ -51,7 +53,7 @@ trait TableTraitRows
                     $rendered = $renderer
                         // ? "A" 
                         // : "B";
-                        ? $this->applyRender($renderer, $rawData, $column, $dataLine, $dataLineIndex)
+                        ? $this->applyRender($name, $renderer, $rawData, $column, $dataLine, $dataLineIndex)
                         : $rawData;
                     break;
             }
@@ -59,12 +61,13 @@ trait TableTraitRows
             $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
             $hidden = $this->isInvisible($column) ? "hidden" : "";
             $styleStr = $this->getStyleStr($column);
+            $rendered = ($tableDebug && ($renderer != 'no.') ? $name : "") . $rendered;
             $tds[] = "<td class='p1x-1 p1y-1 $hidden  dark:border-gray-600 $borderRight $align' $styleStr>" . $rendered . "</td>";
         }
         return $tds;
     }
 
-    private function makeTrTd($columns, $dataSource)
+    private function makeTrTd($columns, $dataSource, $tableDebug)
     {
         $trs = [];
         $colspan = sizeof($columns);
@@ -83,7 +86,7 @@ trait TableTraitRows
 
         $lastIndex = "anything";
         foreach ($dataSource as $no => $dataLine) {
-            $tds = $this->makeTd($columns, $dataLine, $start + $no + 1, $no);
+            $tds = $this->makeTd($columns, $dataLine, $start + $no + 1, $no, $tableDebug);
 
             if ($this->groupBy) {
                 $index = isset($dataLine[$this->groupBy][0]) ? strtoupper(substr($dataLine[$this->groupBy], 0, $this->groupByLength)) : "(EMPTY)";
@@ -94,7 +97,10 @@ trait TableTraitRows
             }
             $bgClass = ($dataLine['row_color'] ?? false) ? "bg-" . $dataLine['row_color'] . "-400" : "";
             $extraTrClass = $dataLine->extraTrClass ?? "";
-            $trs[] = "<tr class='dark:hover:bg-gray-600 hover:bg-gray-200 $bgClass text-gray-700 dark:text-gray-300 $extraTrClass'>" . join("", $tds) . "</tr>";
+            $tr = "<tr class='dark:hover:bg-gray-600 hover:bg-gray-200 $bgClass text-gray-700 dark:text-gray-300 $extraTrClass'>";
+            $tr .=  join("", $tds);
+            $tr .= "</tr>";
+            $trs[] = $tr;
 
             if (isset($dataLine['rowDescription'])) {
                 $colspan_minus_1 = $colspan - 1;

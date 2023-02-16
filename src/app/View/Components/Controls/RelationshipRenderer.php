@@ -19,7 +19,7 @@ class RelationshipRenderer extends Component
 
     private static $table00Count = 1;
     private $table01Name;
-    private $tableDebug = false;
+    private $tableDebug = !false;
     /**
      * Create a new component instance.
      *
@@ -135,7 +135,7 @@ class RelationshipRenderer extends Component
                     'tableName' => $lineModelPath::getTableName(),
                     'table01Name' => $this->table01Name,
                     'table01ROName' => $this->table01Name . "RO",
-                    'tableDebug' => $this->tableDebug ? "true" : "false",
+                    'tableDebug' => $this->tableDebug ? true : false,
                     'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
                     'entityId' => CurrentRoute::getEntityId($this->type),
                     'entityType' => Str::modelPathFrom($this->type),

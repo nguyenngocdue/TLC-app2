@@ -196,8 +196,8 @@ const addANewLine = (params) => {
     const { tableId, } = params
     let { valuesOfOrigin } = params //<< Incase of duplicate, this is the value of the original line
     // console.log("valuesOfOrigin: ", valuesOfOrigin)
-    const { columns, showNo, showNoR, tableDebug } = tableObject[tableId]
-    // console.log("ADD LINE TO", params, tableDebug)
+    const { columns, showNo, showNoR, tableDebugJs } = tableObject[tableId]
+    // console.log("ADD LINE TO", params, tableDebugJs)
     const table = document.getElementById(tableId)
     const newRowIndex = getAllRows(tableId).length
     const row = table.insertRow()
@@ -219,10 +219,10 @@ const addANewLine = (params) => {
             const params = "{tableId: '" + tableId + "', control:this, fingerPrint: " + fingerPrint + "}"
 
             const fingerPrintName = tableId + "[finger_print][" + newRowIndex + "]"
-            const fingerPrintInput = '<input readonly class="w-10 bg-gray-300" name="' + fingerPrintName + '" value="' + fingerPrint + '" type=' + (tableDebug ? "text" : "hidden") + ' />'
+            const fingerPrintInput = '<input readonly class="w-10 bg-gray-300" name="' + fingerPrintName + '" value="' + fingerPrint + '" type=' + (tableDebugJs ? "text" : "hidden") + ' />'
 
             const destroyName = tableId + "[DESTROY_THIS_LINE][" + newRowIndex + "]"
-            const destroyInput = '<input readonly class="w-10 bg-gray-300" name="' + destroyName + '" type=' + (tableDebug ? "text" : "hidden") + ' />'
+            const destroyInput = '<input readonly class="w-10 bg-gray-300" name="' + destroyName + '" type=' + (tableDebugJs ? "text" : "hidden") + ' />'
 
             const btnUp = '<button value="' + tableId + '" onClick="moveUpEditableTable(' + params + ')" type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-up"></i></button>'
             const btnDown = '<button value="' + tableId + '" onClick="moveDownEditableTable(' + params + ')" type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-down"></i></button>'
@@ -292,7 +292,8 @@ const addANewLine = (params) => {
         const hidden = column['invisible'] ? "hidden" : ""
         cell.classList = "p1x-1 p1y-1 dark:border-gray-600 border-r text-center " + hidden;
         // console.log("Insert column", column['dataIndex'], renderer)
-        cell.innerHTML = renderer
+        const showNameStr = tableDebugJs ? name : ""
+        cell.innerHTML = showNameStr + renderer
 
         let selected = '', parentType = ''
 
@@ -307,7 +308,7 @@ const addANewLine = (params) => {
             cell.firstChild.value = parentType
         }
 
-        selectedStr = valuesOfOrigin[column['dataIndex']]
+        selectedStr = (valuesOfOrigin == undefined) ? "" : valuesOfOrigin[column['dataIndex']]
         if (column['renderer'] === 'dropdown4') {
             // console.log("reloading", selectedStr)
             reloadDataToDropdown4(name, k[column['table']], tableId, selectedStr)
@@ -322,6 +323,7 @@ const addANewLine = (params) => {
 
         // console.log("Add new line >  column", column['dataIndex'], column)
     })
+    // console.log(showNoR)
     if (showNoR) { //<< Ignore No. column
         const noCell = row.insertCell()
         noCell.classList = "px-1 py-1 dark:border-gray-600 border-r text-center";
