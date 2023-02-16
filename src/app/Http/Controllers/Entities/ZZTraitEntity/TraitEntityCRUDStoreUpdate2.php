@@ -221,7 +221,7 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
 		}
-		if ($request['tableNames'] === 'fakeRequest') return;
+		if ($request['tableNames'] === 'fakeRequest') return $theRow->id;
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		Toastr::success("$this->type created successfully", "Create $this->type");
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));

@@ -7,6 +7,7 @@ use App\BigThink\ModelExtended;
 class Zunit_test_02 extends ModelExtended
 {
     protected $fillable = [
+        'id',
         'name',
         'radio_yes_no',
         'radio_pass_fail',

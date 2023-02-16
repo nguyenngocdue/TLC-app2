@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait TraitEntityEditableTable
@@ -22,6 +23,7 @@ trait TraitEntityEditableTable
     {
         // dump($request);
         $table01Names = $request['tableNames'];
+        session()->forget('editableTablesTransactions');
         foreach ($table01Names as $table01Name => $tableName) {
             $tableType = ucfirst(Str::singular($tableName));
             $dataSource = $request[$table01Name];
@@ -31,6 +33,8 @@ trait TraitEntityEditableTable
             $dataSource = $this->parseHTTPArrayToLines($dataSource);
             $this->dump1("RECURSIVE CALLED PARSING from HTML DATA to ARRAY $tableName", $dataSource, __LINE__);
             // dump($dataSource);
+            // session()->flush();
+            session()->put('editableTables_index', $table01Names);
 
             foreach ($dataSource as $line) {
                 $fakeRequest = new Request();
@@ -44,17 +48,30 @@ trait TraitEntityEditableTable
                     if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
                         // dd("Destroying", $line['id']);
                         $controller->destroy($fakeRequest, $line['id']);
+                        //Not necessary because it will be deleted when mapping with the next lines
+                        session()->push('editableTablesTransactions.' . $table01Name, ["msg" => "Destroyed", 'id' => 1 * $line['id'],]);
+                        // Log::info("Destroyed $table01Name " . $line['id']);
                     } else {
-                        // dump("Updating line " . $line['id'] . " of table $tableType");
+                        // dump("Updating line $table01Name " . $line['id'] . " of table $tableType");
                         // dump($line);
                         $controller->update($fakeRequest, $line['id']);
+                        session()->push('editableTablesTransactions.' . $table01Name, ["msg" => "Updated", 'id' => 1 * $line['id'],]);
+                        // Log::info("Updated $table01Name " . $line['id']);
                     }
                 } else {
                     if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
                         //Ignore this case
                     } else {
                         // dump($fakeRequest);
-                        $controller->store($fakeRequest);
+                        $insertedId = $controller->store($fakeRequest);
+                        //Incase the storing failed, it will return a HTML string of 302
+                        if (is_numeric($insertedId)) {
+                            session()->push('editableTablesTransactions.' . $table01Name, ["msg" => "Created", 'id' => 1 * $insertedId,]);
+                            // Log::info("Created $table01Name " . $line['id']);
+                        } else {
+                            session()->push('editableTablesTransactions.' . $table01Name, ["msg" => "insert_failed_due_to_validation", 'id' => null]);
+                            // Log::info("insert_failed_due_to_validation $table01Name " . $line['id']);
+                        }
                     }
                 }
             }

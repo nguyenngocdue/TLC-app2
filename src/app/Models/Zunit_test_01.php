@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Zunit_test_01 extends ModelExtended
 {
-    protected $fillable = ["name", "text1", "text2", "text3", "text4", "dropdown1", "radio1", "boolean1", "parent_id", "order_no"];
+    protected $fillable = ['id', "name", "text1", "text2", "text3", "text4", "dropdown1", "radio1", "boolean1", "parent_id", "order_no"];
     protected $primaryKey = 'id';
     protected $table = 'zunit_test_01s';
 
@@ -24,7 +24,7 @@ class Zunit_test_01 extends ModelExtended
     {
         return [
             ['dataIndex' => 'order_no', 'invisible' => true],
-            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => !true],
             ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'name',],
             ['dataIndex' => 'text1'],

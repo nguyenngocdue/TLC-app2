@@ -256,6 +256,7 @@ const addANewLine = (params) => {
                     renderer = "<select id='" + name + "' name='" + name + "' " + multipleStr + " onChange='" + onChange + "' class='" + column['classList'] + "'></select>"
                     renderer += "<script>getEById('" + name + "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
                     break
+                case "toggle":
                 case "number":
                     if (column['dataIndex'] === 'order_no') {
                         value = getMaxValueOfAColumn(tableId, "[order_no]") + 10

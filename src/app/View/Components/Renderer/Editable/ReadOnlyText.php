@@ -34,6 +34,8 @@ class ReadOnlyText extends Component
             $value = $this->cell;
             $title = $this->cell;
         }
+        if (str_starts_with($value, "No dataIndex for ")) $value = null;
+        if (str_starts_with($title, "No dataIndex for ")) $title = null;
         return view('components.renderer.editable.read-only-text', [
             'type' => "hidden",
             "name" => $this->name,

@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
 ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com
-=======
-! tailwindcss v3.2.1 | MIT License | https://tailwindcss.com
->>>>>>> dev0215_PrintReport
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -28,6 +24,7 @@
 2. Prevent adjustments of font size after orientation changes in iOS.
 3. Use a more readable tab size.
 4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
 */
 
 html {
@@ -37,6 +34,7 @@ html {
   -o-tab-size: 4;
      tab-size: 4; /* 3 */
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, system-ui, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji; /* 4 */
+  font-feature-settings: normal; /* 5 */
 }
 
 /*
@@ -915,6 +913,9 @@ video {
 .h-20 {
   height: 5rem;
 }
+.h-24 {
+  height: 6rem;
+}
 .max-h-\[30rem\] {
   max-height: 30rem;
 }
@@ -1028,42 +1029,12 @@ video {
 }
 .w-\[1000px\] {
   width: 1000px;
-<<<<<<< HEAD
-=======
-}
-.w-\[253px\] {
-  width: 253px;
-}
-.w-96 {
-  width: 24rem;
-}
-.w-1\/2 {
-  width: 50%;
-}
-.w-\[50\%\] {
-  width: 50%;
-}
-.w-\[30\%\] {
-  width: 30%;
-}
-.w-\[40\%\] {
-  width: 40%;
 }
 .w-\[500px\] {
   width: 500px;
 }
-.w-\[100px\] {
-  width: 100px;
-}
-.w-\[150\%\] {
-  width: 150%;
-}
-.w-\[200px\] {
-  width: 200px;
-}
-.w-\[200\] {
-  width: 200;
->>>>>>> dev0215_PrintReport
+.w-\[50\%\] {
+  width: 50%;
 }
 .min-w-0 {
   min-width: 0px;
@@ -2489,15 +2460,6 @@ video {
 .pb-5 {
   padding-bottom: 1.25rem;
 }
-<<<<<<< HEAD
-=======
-.pb-1 {
-  padding-bottom: 0.25rem;
-}
-.pb-2 {
-  padding-bottom: 0.5rem;
-}
->>>>>>> dev0215_PrintReport
 .text-left {
   text-align: left;
 }
