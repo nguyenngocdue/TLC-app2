@@ -1,10 +1,12 @@
 {{-- @if($tableName !== 'hse_corrective_actions')  --}}
 
+@php $showNo = true; $showNoR = false; @endphp
+
 <x-renderer.table 
     tableName="{{$table01ROName}}"
     :columns="$readOnlyColumns" 
     :dataSource="$dataSource" 
-    showNo="{{true}}" 
+    showNo="{{$showNo?1:0}}" 
     footer="{{$tableFooter}}"
     />
 
@@ -14,19 +16,20 @@
     tableName="{{$table01Name}}"
     :columns="$editableColumns" 
     :dataSource="$dataSourceWithOld" 
-    showNo="{{true}}" 
-    showNoR="{{true}}" 
+    showNo="{{$showNo?1:0}}"
+    showNoR="{{$showNoR?1:0}}" 
     footer="{{$tableFooter}}"
     maxH={{false}}
+    tableDebug={{$tableDebug}}
 />
 <script>
     editableColumns['{{$table01Name}}'] = @json($editableColumns);
     tableObject['{{$table01Name}}'] = {
         // tableId:'{{$table01Name}}', 
         columns: editableColumns['{{$table01Name}}'],
-        showNo:true,
-        showNoR:true,
-        tableDebug: {{$tableDebug}},
+        showNo: {{$showNo?1:0}},
+        showNoR: {{$showNoR?1:0}},
+        tableDebugJs: {{$tableDebug}},
     }
     </script>
 <x-renderer.button type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>

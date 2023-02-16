@@ -913,6 +913,9 @@ video {
 .h-20 {
   height: 5rem;
 }
+.h-24 {
+  height: 6rem;
+}
 .max-h-\[30rem\] {
   max-height: 30rem;
 }
@@ -1026,6 +1029,12 @@ video {
 }
 .w-\[1000px\] {
   width: 1000px;
+}
+.w-\[500px\] {
+  width: 500px;
+}
+.w-\[50\%\] {
+  width: 50%;
 }
 .min-w-0 {
   min-width: 0px;

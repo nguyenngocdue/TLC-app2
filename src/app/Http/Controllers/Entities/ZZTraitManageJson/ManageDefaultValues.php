@@ -40,6 +40,7 @@ class ManageDefaultValues extends Manage_Parent
                 "dataIndex" => "validation",
                 "editable" => true,
                 "renderer" => "text",
+                'title' => "Validation Rules<br/><a class='text-blue-700 underline' target='_blank' href='https://laravel.com/docs/9.x/validation#available-validation-rules'>Open Laravel Doc</a>"
             ],
             [
                 "dataIndex" => "formula",

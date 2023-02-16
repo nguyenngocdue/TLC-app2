@@ -31,11 +31,11 @@ trait TableTraitApplyRender
         return "rendererParam='$str'";
     }
 
-    private function applyRender($renderer, $rawData, $column, $dataLine, $index)
+    private function applyRender($name, $renderer, $rawData, $column, $dataLine, $index)
     {
         $tableName = $this->tableName;
-        $columnName = $column['column_name'] ?? $column['dataIndex'];
-        $name = isset($column['dataIndex']) ? "name='{$tableName}[$columnName][$index]'" : "";
+        $name = $name ? "name='$name'" : "";
+
         $attributeRender = $this->getAttributeRendered($column, $dataLine);
         $propertyRender = $this->getPropertyRendered($column, $dataLine);
         $typeRender = isset($column['type']) ? "type='{$column['type']}'" : "";

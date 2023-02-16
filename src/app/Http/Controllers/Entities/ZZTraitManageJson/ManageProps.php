@@ -79,6 +79,7 @@ class ManageProps extends Manage_Parent
                 "renderer" => "number",
                 'width' => 10,
                 'title' => "Width (px)",
+                'properties' => ['placeholder' => 100],
             ],
             [
                 "dataIndex" => "hidden_view_all",

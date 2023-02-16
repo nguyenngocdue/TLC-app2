@@ -6,6 +6,7 @@ trait TableTraitCommon
 {
     private function getStyleStr($column)
     {
-        return (isset($column['width']) && $column['width'] != '') ? "style='width:" . $column['width'] . "px'" : "";
+        $width = (isset($column['width']) && $column['width'] != '') ? $column['width'] : 100;
+        return "style='width:" . $width . "px'";
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait TraitEntityEditableTable
@@ -21,7 +22,9 @@ trait TraitEntityEditableTable
     private function handleEditableTables(Request $request, $props)
     {
         // dump($request);
+        $toastrResult = [];
         $table01Names = $request['tableNames'];
+        session()->forget('editableTablesTransactions');
         foreach ($table01Names as $table01Name => $tableName) {
             $tableType = ucfirst(Str::singular($tableName));
             $dataSource = $request[$table01Name];
@@ -31,6 +34,8 @@ trait TraitEntityEditableTable
             $dataSource = $this->parseHTTPArrayToLines($dataSource);
             $this->dump1("RECURSIVE CALLED PARSING from HTML DATA to ARRAY $tableName", $dataSource, __LINE__);
             // dump($dataSource);
+            // session()->flush();
+            session()->put('editableTables_index', $table01Names);
 
             foreach ($dataSource as $line) {
                 $fakeRequest = new Request();
@@ -42,22 +47,39 @@ trait TraitEntityEditableTable
                 $controller = new $controllerPath;
                 if (isset($line['id']) && !is_null($line['id'])) {
                     if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
-                        // dd("Destroying", $line['id']);
-                        $controller->destroy($fakeRequest, $line['id']);
+                        $destroySuccess = $controller->destroy($fakeRequest, $line['id']);
+                        //Not necessary because it will be deleted when mapping with the next lines
+                        if ($destroySuccess) {
+                            session()->push('editableTablesTransactions.' . $table01Name, ["result" => 1, "msg" => "Destroyed", 'id' => 1 * $line['id'],]);
+                        } else {
+                            session()->push('editableTablesTransactions.' . $table01Name, ["result" => 0, "msg" => "destroy_failed", 'id' => 1 * $line['id'],]);
+                            $toastrResult[$table01Name] = "Delete line failed.";
+                        }
                     } else {
-                        // dump("Updating line " . $line['id'] . " of table $tableType");
-                        // dump($line);
-                        $controller->update($fakeRequest, $line['id']);
+                        $updatedId = $controller->update($fakeRequest, $line['id']);
+                        if (is_numeric($updatedId)) {
+                            session()->push('editableTablesTransactions.' . $table01Name, ["result" => 1, "msg" => "Updated", 'id' => 1 * $line['id'],]);
+                        } else {
+                            session()->push('editableTablesTransactions.' . $table01Name, ["result" => 0, "msg" => "update_failed_due_to_validation", 'id' => 1 * $line['id'],]);
+                            $toastrResult[$table01Name] = "Update line failed.";
+                        }
                     }
                 } else {
-                    if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
+                    if (isset($line['DESTROY_THIS_LINE']) && $line["DESTROY_THIS_LINE"] == true) {
                         //Ignore this case
                     } else {
-                        // dump($fakeRequest);
-                        $controller->store($fakeRequest);
+                        $insertedId = $controller->store($fakeRequest);
+                        //Incase the storing failed, it will return a HTML string of 302
+                        if (is_numeric($insertedId)) {
+                            session()->push('editableTablesTransactions.' . $table01Name, ["result" => 1, "msg" => "Created", 'id' => 1 * $insertedId,]);
+                        } else {
+                            session()->push('editableTablesTransactions.' . $table01Name, ["result" => 0, "msg" => "insert_failed_due_to_validation", 'id' => null]);
+                            $toastrResult[$table01Name] = "Create line failed.";
+                        }
                     }
                 }
             }
         }
+        return $toastrResult;
     }
 }

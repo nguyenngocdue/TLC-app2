@@ -7,8 +7,7 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\SuperProps;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnEditable;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnRO;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Blade;
+use App\View\Components\Controls\RelationshipRenderer\TraitTableEditableDataSourceWithOld;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -16,10 +15,11 @@ class RelationshipRenderer extends Component
 {
     use TraitTableColumnRO;
     use TraitTableColumnEditable;
+    use TraitTableEditableDataSourceWithOld;
 
     private static $table00Count = 1;
     private $table01Name;
-    private $tableDebug = false;
+    private $tableDebug = !false;
     /**
      * Create a new component instance.
      *
@@ -72,63 +72,6 @@ class RelationshipRenderer extends Component
         }
     }
 
-
-    private function attachActionColumn($table01Name, $dataSource, $isOrderable)
-    {
-        // dump($dataSource);
-        foreach ($dataSource as &$row) {
-            $id = $row->order_no;
-            // dump($index);
-            $type = $this->tableDebug ? "text" : "hidden";
-            $output = "
-            <input readonly name='{$table01Name}[finger_print][]' value='$id' type=$type class='w-10 bg-gray-300' />
-            <input readonly name='{$table01Name}[DESTROY_THIS_LINE][]'  type=$type class='w-10 bg-gray-300' />
-            <div class='whitespace-nowrap flex justify-center '>";
-            if ($isOrderable) $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
-                 <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>";
-            // if ($isOrderable) $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
-            //      <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>";
-            $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='duplicateEditableTable({control:this, fingerPrint: $id})' type='secondary' ><i class='fa fa-copy'></i></x-renderer.button>
-                <x-renderer.button size='xs' value='$table01Name' onClick='trashEditableTable({control:this, fingerPrint: $id})' type='danger' ><i class='fa fa-trash'></i></x-renderer.button>
-            </div>
-            ";
-            $row->action = Blade::render($output);
-        }
-        return $dataSource;
-    }
-
-    private function parseHTTPArrayToLines(array $dataSource)
-    {
-        $result = [];
-        foreach ($dataSource as $fieldName => $fieldValueArray) {
-            foreach ($fieldValueArray as $key => $value) {
-                $result[$key][$fieldName] = $value;
-            }
-        }
-        return $result;
-    }
-
-    private function convertOldToDataSource($old, $dataSource, $lineModelPath)
-    {
-        if (is_null($old)) return $dataSource;
-        $oldObjects = $this->parseHTTPArrayToLines($old);
-        $result = new Collection();
-        foreach ($oldObjects as $oldObject) {
-            $result->add(new $lineModelPath($oldObject));
-        }
-
-        return $result;
-    }
-
-    private function remakeOrderNoColumn($dataSource)
-    {
-        // dump($dataSource);
-        foreach ($dataSource as $index => &$row) {
-            $row->order_no = 1000 + $index * 10;
-        }
-        return $dataSource;
-    }
-
     public function render()
     {
         $colName = $this->colName;
@@ -153,11 +96,12 @@ class RelationshipRenderer extends Component
             $fn = '';
         }
         $tableName = $lineModelPath::getTableName();
+        $defaultColumns = [
+            ["dataIndex" => 'id', "renderer" => "id", "type" => $tableName, "align" => "center"],
+        ];
+        if (!$instance->nameless) $defaultColumns[] = ["dataIndex" => 'name',];
         $columns = ($fn === '')
-            ? [
-                ["dataIndex" => 'id', "renderer" => "id", "type" => $tableName, "align" => "center"],
-                ["dataIndex" => 'name'],
-            ]
+            ? $defaultColumns
             : $instance->$fn();
 
         $row = $modelPath::find($id);
@@ -174,22 +118,24 @@ class RelationshipRenderer extends Component
                 return view('components.controls.many-icon-params')->with(compact('dataSource', 'colSpan'));
             case "many_lines":
                 $sp = SuperProps::getFor($tableName);
-                $dataSourceWithOld = $this->convertOldToDataSource(old($this->table01Name), $dataSource, $lineModelPath);
-
+                $dataSourceWithOld = $this->convertOldToDataSource($this->table01Name, $dataSource, $lineModelPath);
+                $editableColumns = $this->makeEditableColumns($columns, $sp, $tableName, $this->table01Name);
+                $this->alertIfFieldsAreMissingFromFillable($instance, $lineModelPath, $editableColumns);
                 //remakeOrderNoColumn MUST before attach Action Column
                 $dataSourceWithOld = $this->remakeOrderNoColumn($dataSourceWithOld);
                 $dataSourceWithOld = $this->attachActionColumn($this->table01Name, $dataSourceWithOld, $isOrderable);
                 // dump($dataSourceWithOld);
+                // dump($dataSource);
                 return view('components.controls.many-line-params', [
                     'dataSource' => $dataSource,
                     'dataSourceWithOld' => $dataSourceWithOld,
                     'tableFooter' => $tableFooter,
                     'readOnlyColumns' => $this->makeReadOnlyColumns($columns, $sp, $tableName),
-                    'editableColumns' => $this->makeEditableColumns($columns, $sp, $tableName, $this->table01Name),
+                    'editableColumns' => $editableColumns,
                     'tableName' => $lineModelPath::getTableName(),
                     'table01Name' => $this->table01Name,
                     'table01ROName' => $this->table01Name . "RO",
-                    'tableDebug' => $this->tableDebug ? "true" : "false",
+                    'tableDebug' => $this->tableDebug ? true : false,
                     'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
                     'entityId' => CurrentRoute::getEntityId($this->type),
                     'entityType' => Str::modelPathFrom($this->type),

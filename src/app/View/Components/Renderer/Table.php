@@ -31,7 +31,7 @@ class Table extends Component
     //Editable MODE
     private $model = null,
     // private $editable = false,
-    private $setBorder = "border rounded-lg"
+    private $tableDebug = false,
   ) {
   }
 
@@ -60,13 +60,14 @@ class Table extends Component
       'headerRendered' => $this->makeThHeader($columns, $this->dataHeader),
       'headerTop' => $this->headerTop,
       'columnsRendered' => $this->getColumnRendered($columns),
-      'tr_td' => $this->makeTrTd($columns, $dataSource),
+      'tr_td' => $this->makeTrTd($columns, $dataSource, $this->tableDebug),
       'showing' => $hasPaging ? $dataSource->appends($this->request->toArray())->links('dashboards.pagination.showing') : "",
       'pagination' => $hasPaging ? $dataSource->links('dashboards.pagination.pagination') : "",
       'header' => $this->header,
       'footer' => $this->footer,
       'colgroup' => $this->makeColGroup($columns),
       'maxH' => $this->maxH ? "max-h-[{$this->maxH}rem]" : "",
+      'tableDebug' => $this->tableDebug,
     ]);
   }
 }
