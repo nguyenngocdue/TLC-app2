@@ -125,6 +125,7 @@ class RelationshipRenderer extends Component
                 $dataSourceWithOld = $this->remakeOrderNoColumn($dataSourceWithOld);
                 $dataSourceWithOld = $this->attachActionColumn($this->table01Name, $dataSourceWithOld, $isOrderable);
                 // dump($dataSourceWithOld);
+                // dump($dataSource);
                 return view('components.controls.many-line-params', [
                     'dataSource' => $dataSource,
                     'dataSourceWithOld' => $dataSourceWithOld,

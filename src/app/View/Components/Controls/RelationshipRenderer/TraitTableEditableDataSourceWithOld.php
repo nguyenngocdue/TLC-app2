@@ -43,6 +43,21 @@ trait TraitTableEditableDataSourceWithOld
         return $toBeHighlighted;
     }
 
+    private function getOracyValues($oldValues)
+    {
+        $result = [];
+        foreach ($oldValues as $rowIndex => $line) {
+            foreach ($line as $controlName => $value) {
+                if (str_contains($controlName, "()")) {
+                    $result[$rowIndex] = [
+                        $controlName => $value,
+                    ];
+                }
+            }
+        }
+        return $result;
+    }
+
     private function convertOldToDataSource($table01Name, $dataSource, $lineModelPath)
     {
         $old = old($table01Name);
@@ -56,12 +71,20 @@ trait TraitTableEditableDataSourceWithOld
         // dump($oldObjects);
 
         $this->removeDestroyedLines($editableTablesTransactions, $oldObjects);
+        $oracyValues = $this->getOracyValues($oldObjects);
+        // dump($oracyValues);
         $toBeHighlightedIndex = $this->getToBeHighlightedLineIndex($editableTablesTransactions);
         // dump($toBeHighlightedIndex);
 
         foreach ($oldObjects as $index => $oldObject) {
             $newObject = new $lineModelPath($oldObject);
             $newObject->extraTrClass = (in_array($index, $toBeHighlightedIndex)) ? "bg-red-300" : "";
+            if (isset($oracyValues[$index])) {
+                foreach ($oracyValues[$index] as $key => $value) {
+                    $newObject->{$key} = $value;
+                }
+            }
+            // dump($newObject);
             $result[] = $newObject;
         }
         // dump($result);
