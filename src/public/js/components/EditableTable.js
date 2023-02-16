@@ -21,19 +21,26 @@ const setValueOfTrByName = (aRow, fieldName, value) => {
     aRow.childNodes.forEach((td) => {
         td.childNodes.forEach((control) => {
             const name = control.name
+            // console.log(name)
             if (name !== undefined) {
-                if (name.includes(fieldName))
+                if (name.includes(fieldName)) {
                     control.value = value
+                    // console.log(control)
+                }
             }
         })
     })
 }
+const getValueById = (id) => getEById(id).val()
+const setValueById = (id, value) => getEById(id).val(value)
+
 const getCellValueByName = (tableId, columnName, rowIndex) => {
     const rows = $("#" + tableId + " > tbody")[0].children
     // console.log(rows, tableId, columnName, rowIndex, rows[rowIndex])
     return getValueOfTrByName(rows[rowIndex], columnName)
 }
 const setCellValueByName = (tableId, columnName, rowIndex, value) => {
+    // console.log("setCellValueByName", columnName, "to", value)
     const rows = $("#" + tableId + " > tbody")[0].children
     setValueOfTrByName(rows[rowIndex], columnName, value)
 }
@@ -144,20 +151,23 @@ const duplicateEditableTable = (params) => {
     const { control, fingerPrint } = params
     const tableId = control.value
     const { columns } = tableObject[tableId]
-    const newFingerPrint = addANewLine({ tableId: control.value })
 
+    const valuesOfOrigin = {}
     // console.log("Duplicate", tableId, fingerPrint, newFingerPrint, columns)
     for (let i = 0; i < columns.length; i++) {
         const column = columns[i]
+        const { multiple } = column
         //Do not duplicate those columns
         if (['action', 'id', 'order_no'].includes(column.dataIndex)) continue
         const sourceRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
-        const value = getCellValueByName(tableId, column['dataIndex'], sourceRowIndex)
-        // console.log("Cloning", column['dataIndex'], "to", value)
-        const targetRowIndex = getIndexFromFingerPrint(tableId, newFingerPrint)
-        setCellValueByName(tableId, column['dataIndex'], targetRowIndex, value)
+        const value = getValueById(tableId + "[" + column['dataIndex'] + "][" + sourceRowIndex + "]")
+        const valueStr = (Array.isArray(value)) ? value.join(",") : value
+        valuesOfOrigin[column['dataIndex']] = multiple ? "[" + valueStr + "]" : valueStr
     }
+    // console.log(valuesOfOrigin)
+    addANewLine({ tableId: control.value, valuesOfOrigin })
 }
+
 const trashEditableTable = (params) => {
     const { control: button, fingerPrint } = params
     const tableId = button.value
@@ -183,7 +193,9 @@ const trashEditableTable = (params) => {
     }
 }
 const addANewLine = (params) => {
-    const { tableId } = params
+    const { tableId, } = params
+    let { valuesOfOrigin } = params //<< Incase of duplicate, this is the value of the original line
+    // console.log("valuesOfOrigin: ", valuesOfOrigin)
     const { columns, showNo, showNoR, tableDebug } = tableObject[tableId]
     // console.log("ADD LINE TO", params, tableDebug)
     const table = document.getElementById(tableId)
@@ -282,7 +294,7 @@ const addANewLine = (params) => {
         // console.log("Insert column", column['dataIndex'], renderer)
         cell.innerHTML = renderer
 
-        let selectedStr = '[]', selected = '', parentType = ''
+        let selected = '', parentType = ''
 
         if (column['value_as_parent_id'] == true) {
             selected = $('#entityParentId').val()
@@ -294,11 +306,19 @@ const addANewLine = (params) => {
             // console.log("Setting parent id for the new line", selectedStr)
             cell.firstChild.value = parentType
         }
+
+        selectedStr = valuesOfOrigin[column['dataIndex']]
         if (column['renderer'] === 'dropdown4') {
+            // console.log("reloading", selectedStr)
             reloadDataToDropdown4(name, k[column['table']], tableId, selectedStr)
         } else {
-            if (column['value_as_parent_id']) cell.firstChild.value = selected
+            if (column['value_as_parent_id']) {
+                cell.firstChild.value = selected // or selectedStr ???
+            } else {
+                getEById(name).val(selectedStr)
+            }
         }
+
 
         // console.log("Add new line >  column", column['dataIndex'], column)
     })
