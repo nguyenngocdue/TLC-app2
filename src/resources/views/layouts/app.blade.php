@@ -24,6 +24,7 @@
     
     <link rel="stylesheet" href="{{ asset('vendor/font-awesome-pro-6/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/flowbite.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fonts.google.Inter.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}">
@@ -43,6 +44,7 @@
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
     <script src="{{ asset('js/tlc2.js') }}"></script>
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
+    <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4.js') }}"></script>
@@ -52,11 +54,10 @@
     <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script> --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body >
-    <div class="bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div  class="bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         {{-- <x-homepage.sidebar2 /> --}}
         <div class="flex flex-col flex-1 w-full">
             <x-homepage.navbar2 />
@@ -78,8 +79,7 @@
                     
                 </div>
             </main>
-            
-            <div id="invoice" class="w-full MUST-NOT-HAVE-X-PADDING-MARGIN-FOR-PRINT-PAGE">
+            <div id="invoice"  class="w-full MUST-NOT-HAVE-X-PADDING-MARGIN-FOR-PRINT-PAGE">
                 @yield('content')
             </div>
             <div class="mt-8 no-print"></div>

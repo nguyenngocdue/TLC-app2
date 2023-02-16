@@ -19,8 +19,17 @@
     function generatePDF() {
         // Choose the element that your content will be rendered to.
         const element = document.getElementById('invoice');
+        const opt = {
+            margin:       0,
+            filename:     'tlc.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2},
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
         // Choose the element and save the PDF for your user.
-        html2pdf().from(element).save();
+        html2pdf().set(opt).from(element).save();
+        // Old monolithic-style usage:
+        // html2pdf(element, opt);
     }
     buttonExport.addEventListener('click', generatePDF);
 </script>

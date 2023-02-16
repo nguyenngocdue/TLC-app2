@@ -1,15 +1,21 @@
 /* This is for the option box bigger */
-.select2-dropdown.select2-dropdown--above{
-    width: max-content!important;
+.select2-dropdown.select2-dropdown--above {
+    width: max-content !important;
 }
-.select2-dropdown.select2-dropdown--below{
-    width: max-content!important;
+.select2-dropdown.select2-dropdown--below {
+    width: max-content !important;
+}
+
+@media print {
+    .pagebreak {
+        page-break-before: always;
+    }
 }
 
 /* This is not making the dropdown have different size during dynamic render */
 select + .select2-container {
     width: 100% !important;
-  }
+}
 
 .table-line-new {
     background: #00ff7f !important;
@@ -69,16 +75,16 @@ select + .select2-container {
     }
 
     .no-print {
-      display: none !important;
+        display: none !important;
     }
 
-    .only-print{
+    .only-print {
         display: block;
     }
 }
 
 @media screen {
-    .only-print{
+    .only-print {
         display: none;
     }
 }
@@ -87,4 +93,4 @@ a.disabled {
     pointer-events: none;
     cursor: default;
     opacity: 0.6;
-  }
+}

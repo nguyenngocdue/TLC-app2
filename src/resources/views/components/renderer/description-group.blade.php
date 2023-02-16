@@ -1,4 +1,3 @@
-
 @if ($propTree['value'])
     <div class='grid grid-cols-12 items-center'>
         @php
@@ -9,7 +8,9 @@
         <div class='col-span-12 text-left'>
             @switch($control)
             @case('z_page_break')
-            <x-renderer.page-break />
+            {{-- <x-renderer.page-break /> --}}
+            <div class="pagebreak"></div>
+            @break
             @case('z_h1')
             <x-renderer.heading level=1>{{$heading}}</x-renderer.heading>
             @break

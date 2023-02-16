@@ -28,20 +28,24 @@ class MenuProfile extends Component
         switch (env('APP_ENV')) {
             case "production":
                 $app = 'app2.tlcmodular.com';
+                $redis = 'app2.redis.tlcmodular.com';
                 $phpMyAdmin = "192.168.100.100:18102";
                 break;
             case "testing":
                 $app = 'beta2.tlcmodular.com';
+                $redis = 'beta2.redis.tlcmodular.com';
                 $phpMyAdmin = "192.168.100.100:28102";
                 break;
             case "local":
             default:
                 $app = 'localhost:38002';
+                $redis = 'localhost:37902';
                 $phpMyAdmin = "localhost:38102";
                 break;
         }
         $phpMyAdminTable = $phpMyAdmin . "/index.php?route=/sql&pos=0&db=laravel&table=" . $this->table . "&"; //<<Last amp & to compromise the slash /
         $userMenuStr = str_replace("{{app}}", $app, $userMenuStr);
+        $userMenuStr = str_replace("{{redis}}", $redis, $userMenuStr);
         $userMenuStr = str_replace("{{phpMyAdmin}}", $phpMyAdmin, $userMenuStr);
         $userMenuStr = str_replace("{{phpMyAdminTable}}", $phpMyAdminTable, $userMenuStr);
         // dump($userMenuStr);

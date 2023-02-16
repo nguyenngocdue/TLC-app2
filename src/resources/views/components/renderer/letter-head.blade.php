@@ -6,7 +6,7 @@
     <tbody>
         <tr>
             <td align="left">
-                <img alt="TLC Logo" src="{{$dataSource['company_logo']}}" class="w-52 pr-5">
+                <img alt="TLC Logo" src="{{$dataSource['company_logo']}}" class="w-full pl-5">
             </td>
             <td align="center"></td>
             <td class="text-sm">
@@ -15,21 +15,17 @@
                 <br>Tel: {{$dataSource['company_telephone']}} Fax: {{$dataSource['company_fax']}}
                 <br>Email: {{$dataSource['company_email']}} Website: {{$dataSource['company_website']}}</td>
                 <td class="w-[20%]" align="center">
-                    <div class="flex flex-row flex-wrap justify-center gap-y-0">
-                        <div class="relative max-w-full min-h-[1px]">
-                            {{-- <div class="float-left transform rotate-[270deg] mt-8 ml-8">
-                            </div> --}}
-                            <div id="{{$id}}" class="w-24 h-24 flex"></div>
+                    <div class="flex flex-row flex-wrap items-center justify-center gap-y-2">
+                            <div id="{{$id}}" class="w-28 h-28 flex m-5"></div>
                             <script>
                                 new QRCode(document.getElementById("{{$id}}"),"{{$urlCurrent}}",)
                             </script>
-                            <div class="flex transform rotate-[270deg] float-right mt-8 -ml-4">
+                            <div class="flex transform rotate-[270deg] float-right -ml-10">
                                 eco/64388
                             </div>
-                        </div>
                     </div>
-                    <div class="flex flex-row flex-wrap gap-y-0">
-                        <div class="border border-gray-400">
+                    <div class="flex flex-row flex-wrap gap-y-0 mb-1 mr-1">
+                        <div class="border border-gray-600 p-1">
                             Doc ID: TLC-HLC-ECO-0083
                         </div>
                     </div>

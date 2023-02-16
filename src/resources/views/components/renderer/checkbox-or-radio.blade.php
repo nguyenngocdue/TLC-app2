@@ -1,5 +1,5 @@
 @if (isset($dataSource) && sizeof($dataSource) > 3)
-    <ul class="space-y-1 list-disc list-inside  grid grid-cols-12">
+    <ul class="list-disc list-inside  grid grid-cols-12 p-1">
         @foreach($dataSource as $value)
             <li class="col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}}">
                 {{$value}}

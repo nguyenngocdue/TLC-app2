@@ -10,7 +10,7 @@ trait TraitEntityCRUDShow
 {
 	public function show($id)
 	{
-		$blackList = ['z_divider'];
+		$blackList = ['z_divider', 'z_page_break'];
 		$props = SuperProps::getFor($this->type)['props'];
 		$node = [];
 		$nodeCount = 0;

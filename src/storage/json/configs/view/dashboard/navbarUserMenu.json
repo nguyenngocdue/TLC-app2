@@ -38,5 +38,10 @@
         "title": "Font Awesome 6 Pro",
         "hef": "https://fontawesome.com/icons",
         "icon_fa": "fa-duotone fa-font-awesome"
+    },
+    "redis-insight": {
+        "title": "Redis Insight",
+        "hef": "http://{{redis}}",
+        "icon_fa": "fa-duotone fa-registered"
     }
 }
