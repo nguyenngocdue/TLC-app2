@@ -51,7 +51,7 @@ trait TraitTableEditableDataSourceWithOld
         $oldObjects = array_values($this->parseHTTPArrayToLines($old));
         $result = [];
         $editableTablesTransactions = session()->get('editableTablesTransactions');
-        $editableTablesTransactions = $editableTablesTransactions[$table01Name];
+        $editableTablesTransactions = $editableTablesTransactions[$table01Name] ?? [];
         // dump($editableTablesTransactions);
         // dump($oldObjects);
 

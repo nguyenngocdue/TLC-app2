@@ -179,6 +179,16 @@ trait TraitEntityCRUDStoreUpdate2
 		// dd($e);
 	}
 
+	private function handleToastrMessage($action, $toastrResult)
+	{
+		Toastr::success("$this->type $action successfully", "$action $this->type");
+		if (!empty($toastrResult)) {
+			foreach ($toastrResult as $table01Name => $toastrMessage) {
+				Toastr::error($toastrMessage, "$table01Name $action failed");
+			}
+		}
+	}
+
 	public function store(Request $request)
 	{
 		try {
@@ -215,7 +225,7 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
-		if ($request['tableNames'] !== 'fakeRequest') $this->handleEditableTables($request, $props['editable_table']);
+		$toastrResult =  ($request['tableNames'] !== 'fakeRequest') ? $this->handleEditableTables($request, $props['editable_table']) : [];
 		try {
 			$this->handleStatus($theRow, $newStatus);
 		} catch (Exception $e) {
@@ -223,7 +233,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		if ($request['tableNames'] === 'fakeRequest') return $theRow->id;
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
-		Toastr::success("$this->type created successfully", "Create $this->type");
+		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
@@ -265,7 +275,7 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
-		if ($request['tableNames'] !== 'fakeRequest') $this->handleEditableTables($request, $props['editable_table']);
+		$toastrResult = ($request['tableNames'] !== 'fakeRequest') ? $this->handleEditableTables($request, $props['editable_table']) : [];
 		try {
 			$this->handleStatus($theRow, $newStatus);
 		} catch (Exception $e) {
@@ -273,7 +283,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		if ($request['tableNames'] === 'fakeRequest') return $theRow->id;
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
-		Toastr::success("$this->type updated successfully", "Updated $this->type");
+		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 }
