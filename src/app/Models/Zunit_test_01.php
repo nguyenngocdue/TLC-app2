@@ -23,19 +23,19 @@ class Zunit_test_01 extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'order_no', 'invisible' => !true],
             ['dataIndex' => 'id', 'invisible' => !true],
-            ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'parent_id', 'invisible' => !true, 'value_as_parent_id' => true],
             ['dataIndex' => 'name',],
             ['dataIndex' => 'text1'],
             ['dataIndex' => 'text2'],
-            ['dataIndex' => 'text3'],
+            // ['dataIndex' => 'text3'],
             ['dataIndex' => 'text4'],
-            ['dataIndex' => 'dropdown1'],
+            // ['dataIndex' => 'dropdown1'],
             ['dataIndex' => 'radio1'],
             ['dataIndex' => 'boolean1'],
             ['dataIndex' => 'checkboxZut1()'],
-            ['dataIndex' => 'dropdownMultiZut1()'],
+            // ['dataIndex' => 'dropdownMultiZut1()'],
         ];
     }
 

@@ -4,7 +4,7 @@ namespace App\View\Components\Renderer;
 
 use Illuminate\View\Component;
 
-class ModesReport extends Component
+class ModesControl extends Component
 {
     /**
      * Create a new component instance.
@@ -13,20 +13,18 @@ class ModesReport extends Component
      */
     public function __construct(
         private $itemsSelected = [],
-        private $controlNames = [],
-        private $controlValues = [],
+        private $dataSource = [],
+        private $hiddenItems = []
     ) {
         //
     }
 
     public function render()
     {
-        $controlNames = $this->controlNames;
-        $controlValues = $this->controlValues;
-        $dataRender = array_combine($controlNames, $controlValues);
-        return view('components.renderer.modes-report', [
+        return view('components.renderer.modes-control', [
             'itemsSelected' => $this->itemsSelected,
-            'dataRender' => $dataRender,
+            'dataSource' => $this->dataSource,
+            'hiddenItems' => $this->hiddenItems
         ]);
     }
 }

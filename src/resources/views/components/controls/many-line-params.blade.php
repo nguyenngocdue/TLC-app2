@@ -29,7 +29,7 @@
         columns: editableColumns['{{$table01Name}}'],
         showNo: {{$showNo?1:0}},
         showNoR: {{$showNoR?1:0}},
-        tableDebugJs: {{$tableDebug}},
+        tableDebugJs: {{$tableDebug?1:0}},
     }
     </script>
 <x-renderer.button type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>

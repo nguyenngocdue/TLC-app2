@@ -85,11 +85,6 @@ class Qaqc_insp_chklst extends Report_ParentController
 
     protected function enrichDataSource($dataSource)
     {
-
-
-        $circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
-        $checkedIcon = "<i class='fa-solid fa-circle-check px-2'></i>";
-
         $lines =  [];
         foreach ($dataSource as $item) {
             if (isset($item['line_id'])) {
@@ -109,25 +104,8 @@ class Qaqc_insp_chklst extends Report_ParentController
             foreach ($ids as $id) {
                 $item = $lines[$id];
                 if (!is_null($item['c1'])) {
-                    $arrayControl = ['c1' => $item['c1'], 'c2' => $item['c2'], 'c3' => $item['c3'], 'c4' => $item['c4']];
-                    $s = "";
-                    foreach ($arrayControl as $col => $value) {
-                        if ($item['control_value_name'] === $item[$col]) {
-                            $s .= '<td class="border" style="width:50px">' . $checkedIcon . $value . '</td>';
-                        } else {
-                            $s .=  '<td class="border" style="width:50px">' . $circleIcon . $value . '</td>';
-                        }
-                    };
-                    $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item['run_desc'] . ":" . "</td>" : "";
-                    $runUpdated = '<td class="border" style="width:80px" >' . $item['run_updated'] . "</td>";
-
-                    $pictures = '<td class="border" style="width:190px">' . '<div class="flex">' . $this->getImage() . '</div>' . '</td>';
-                    // dump($item);
-                    $value_comment = '<td class="border" style="width:190px">' .  $item['value_comment'] . '</td>';
-
-                    $showItems = $runDesc . $s . $runUpdated . $pictures . $value_comment;
-
-                    $str .= "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $showItems . "</tr>";
+                    $itemsRender = $this->createLongStrHTML($item);
+                    $str .= "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $itemsRender . "</tr>";
                 } else {
                     $str .=  $item['sign'];
                 }
@@ -140,19 +118,21 @@ class Qaqc_insp_chklst extends Report_ParentController
         }
         $sheetGroup = Report::groupArrayByKey($lines, 'sheet_id');
 
-        $sheets = [];
+        $sheetId_Desc = [];
         foreach ($sheetGroup as $sheetId => $value) {
             $groupDesc = Report::groupArrayByKey($value, 'line_description');
             foreach ($groupDesc as $key => $value) {
                 $groupDesc[$key] = array_pop($value);
             }
             // dd($groupDesc);
-            $sheets[$sheetId] = $groupDesc;
+            $sheetId_Desc[$sheetId] = $groupDesc;
         }
 
+        // dd($sheetId_Desc);
+
         $data = [];
-        foreach ($sheets as $sheetId => $runLines) {
-            $data[$sheetId] = array_values($runLines);
+        foreach ($sheetId_Desc as $sheetId => $values) {
+            $data[$sheetId] = array_values($values);
         }
         ksort($data);
         // dd($data);
@@ -167,5 +147,28 @@ class Qaqc_insp_chklst extends Report_ParentController
         <img title='avatars/admin avatar-150x150.png' width='64' class='rounded-lg object-cover border mr-1' src='http://192.168.100.100:9000/hello-001/avatars/admin avatar-150x150.png'>
         <img title='avatars/admin avatar-150x150.png' width='64' class='rounded-lg object-cover border mr-1' src='http://192.168.100.100:9000/hello-001/avatars/admin avatar-150x150.png'>
         ";
+    }
+    private function createLongStrHTML($item)
+    {
+        $circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
+        $checkedIcon = "<i class='fa-solid fa-circle-check px-2'></i>";
+        $arrayControl = ['c1' => $item['c1'], 'c2' => $item['c2'], 'c3' => $item['c3'], 'c4' => $item['c4']];
+        $str = "";
+        foreach ($arrayControl as $col => $value) {
+            if ($item['control_value_name'] === $item[$col]) {
+                $str .= '<td class="border" style="width:50px">' . $checkedIcon . $value . '</td>';
+            } else {
+                $str .=  '<td class="border" style="width:50px">' . $circleIcon . $value . '</td>';
+            }
+        };
+        $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item['run_desc'] . ":" . "</td>" : "";
+        $runUpdated = '<td class="border" style="width:80px" >' . $item['run_updated'] . "</td>";
+
+        $pictures = '<td class="border" style="width:190px">' . '<div class="flex">' . $this->getImage() . '</div>' . '</td>';
+        // dump($item);
+        $value_comment = '<td class="border" style="width:190px">' .  $item['value_comment'] . '</td>';
+
+        $items = $runDesc . $str . $runUpdated . $pictures . $value_comment;
+        return $items;
     }
 }

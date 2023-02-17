@@ -8,7 +8,6 @@ const getValueOfTrByName = (aRow, fieldName) => {
             const name = control.name
             if (name !== undefined) {
                 if (name.includes(fieldName)) {
-                    // console.log("Found name", name)
                     result = control.value
                 }
             }
@@ -148,7 +147,7 @@ const moveDownEditableTable = (params) => {
 }
 
 const duplicateEditableTable = (params) => {
-    const { control, fingerPrint } = params
+    const { control, fingerPrint, nameIndex } = params
     const tableId = control.value
     const { columns } = tableObject[tableId]
 
@@ -159,8 +158,10 @@ const duplicateEditableTable = (params) => {
         const { multiple } = column
         //Do not duplicate those columns
         if (['action', 'id', 'order_no'].includes(column.dataIndex)) continue
-        const sourceRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
-        const value = getValueById(tableId + "[" + column['dataIndex'] + "][" + sourceRowIndex + "]")
+        // const sourceRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
+        // console.log("Duplicating", fingerPrint, sourceRowIndex)
+        // const value = getCellValueByName(tableId, column['dataIndex'], sourceRowIndex)
+        const value = getValueById(tableId + "[" + column['dataIndex'] + "][" + nameIndex + "]")
         const valueStr = (Array.isArray(value)) ? value.join(",") : value
         valuesOfOrigin[column['dataIndex']] = multiple ? "[" + valueStr + "]" : valueStr
     }
@@ -211,12 +212,13 @@ const addANewLine = (params) => {
     columns.forEach((column) => {
         if (column['hidden'] == true) return
         let renderer = 'newCell'
+        let orderNoValue = 0
 
-        const multipleBracket = column?.multiple ? "[]" : ""
-        const name = tableId + "[" + column['dataIndex'] + "][" + newRowIndex + "]" + multipleBracket
+        const id = tableId + "[" + column['dataIndex'] + "][" + newRowIndex + "]"
         if (column['dataIndex'] === 'action') {
             fingerPrint = getMaxValueOfAColumn(tableId, "[finger_print]") + 10
-            const params = "{tableId: '" + tableId + "', control:this, fingerPrint: " + fingerPrint + "}"
+
+            const params = "{tableId: '" + tableId + "', control:this, fingerPrint: " + fingerPrint + ", nameIndex: " + newRowIndex + "}"
 
             const fingerPrintName = tableId + "[finger_print][" + newRowIndex + "]"
             const fingerPrintInput = '<input readonly class="w-10 bg-gray-300" name="' + fingerPrintName + '" value="' + fingerPrint + '" type=' + (tableDebugJs ? "text" : "hidden") + ' />'
@@ -239,19 +241,18 @@ const addANewLine = (params) => {
                 + '</div>'
         } else {
             let onChange = ''
-            let value = ''
             // console.log("Rendering", column)
             switch (column['renderer']) {
                 case 'read-only-text':
                     if (column['dataIndex'] === 'id') {
-                        renderer = "<input name=" + name + " type='hidden' />"
+                        renderer = "<input name=" + id + " type='hidden' />"
                     } else {
                         renderer = 'New read-only-text'
                     }
                     break
                 case 'dropdown':
                     if (column['dataIndex'] === 'status') {
-                        renderer = "<select name='" + name + "' class='" + column['classList'] + "'>"
+                        renderer = "<select name='" + id + "' class='" + column['classList'] + "'>"
                         column['cbbDataSource'].forEach((status) => {
                             statusObject = column['cbbDataSourceObject'][status]
                             renderer += "<option value='" + status + "'>" + statusObject.title + "</option>"
@@ -263,24 +264,25 @@ const addANewLine = (params) => {
                     break
                 case 'dropdown4':
                     // onChangeDropdown4("table02[prod_discipline_id][5]", "prod_discipline_1", "table02", 5)
-                    onChange = "onChangeDropdown4(\"" + name + "\", \"" + column['lineType'] + "\", \"" + column['table01Name'] + "\", " + newRowIndex + ")"
+                    onChange = "onChangeDropdown4(\"" + id + "\", \"" + column['lineType'] + "\", \"" + column['table01Name'] + "\", " + newRowIndex + ")"
                     multipleStr = column?.multiple ? "multiple" : ""
-                    renderer = "<select id='" + name + "' name='" + name + "' " + multipleStr + " onChange='" + onChange + "' class='" + column['classList'] + "'></select>"
-                    renderer += "<script>getEById('" + name + "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
+                    bracket = column?.multiple ? "[]" : ""
+                    renderer = "<select id='" + id + "' name='" + id + bracket + "' " + multipleStr + " onChange='" + onChange + "' class='" + column['classList'] + "'></select>"
+                    renderer += "<script>getEById('" + id + "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
                     break
                 case "toggle":
                 case "number":
                     if (column['dataIndex'] === 'order_no') {
-                        value = getMaxValueOfAColumn(tableId, "[order_no]") + 10
+                        orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
                         onChange = "rerenderTableBaseOnNewOrder(\"" + tableId + "\")"
                     }
-                    renderer = "<input id='" + name + "' name='" + name + "' class='" + column['classList'] + "' type=number step=any value='" + value + "' onChange='" + onChange + "' />";
+                    renderer = "<input id='" + id + "' name='" + id + "' class='" + column['classList'] + "' type=number step=any onChange='" + onChange + "' />";
                     break
                 case "text":
-                    renderer = "<input id='" + name + "' name='" + name + "' class='" + column['classList'] + "' />";
+                    renderer = "<input id='" + id + "' name='" + id + "' class='" + column['classList'] + "' />";
                     break
                 case "textarea":
-                    renderer = "<textarea id='" + name + "' name='" + name + "' class='" + column['classList'] + "'></textarea>"
+                    renderer = "<textarea id='" + id + "' name='" + id + "' class='" + column['classList'] + "'></textarea>"
                     break
                 default:
                     renderer = "Unknown how to render " + column['renderer']
@@ -292,10 +294,10 @@ const addANewLine = (params) => {
         const hidden = column['invisible'] ? "hidden" : ""
         cell.classList = "p1x-1 p1y-1 dark:border-gray-600 border-r text-center " + hidden;
         // console.log("Insert column", column['dataIndex'], renderer)
-        const showNameStr = tableDebugJs ? name : ""
+        const showNameStr = tableDebugJs ? id : ""
         cell.innerHTML = showNameStr + renderer
 
-        let selected = '', parentType = ''
+        let selected = '', parentType = '', selectedStr = ''
 
         if (column['value_as_parent_id'] == true) {
             selected = $('#entityParentId').val()
@@ -308,15 +310,18 @@ const addANewLine = (params) => {
             cell.firstChild.value = parentType
         }
 
-        selectedStr = (valuesOfOrigin == undefined) ? "" : valuesOfOrigin[column['dataIndex']]
+        selectedStr = (valuesOfOrigin == undefined) ? selectedStr : valuesOfOrigin[column['dataIndex']]
         if (column['renderer'] === 'dropdown4') {
             // console.log("reloading", selectedStr)
-            reloadDataToDropdown4(name, k[column['table']], tableId, selectedStr)
+            reloadDataToDropdown4(id, k[column['table']], tableId, selectedStr)
         } else {
             if (column['value_as_parent_id']) {
-                cell.firstChild.value = selected // or selectedStr ???
+                const parentId = $('#entityParentId').val() //selected // or selectedStr ???
+                getEById(id).val(parentId)
+            } else if (column['dataIndex'] === 'order_no') {
+                getEById(id).val(orderNoValue)
             } else {
-                getEById(name).val(selectedStr)
+                getEById(id).val(selectedStr)
             }
         }
 

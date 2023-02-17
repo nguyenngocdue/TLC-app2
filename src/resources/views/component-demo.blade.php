@@ -4,7 +4,7 @@
 @section('content')
 
 @php
-    $activeClass = "bg-white border-t border-r border-l -mb-px";
+$activeClass = "bg-white border-t border-r border-l -mb-px";
 @endphp
 
 <x-renderer.heading level=3 align='center'><a href="/components">Components</a></x-renderer.heading>
@@ -19,6 +19,7 @@
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#editable_tables">Editable Tables</a></li>
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#navigation">Navigation</a></li>
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#feedbacks">Feedbacks</a></li>
+        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#modecontrols">Mode Controls</a></li>
     </ul>
 
     <!-- Tab Contents -->
@@ -44,8 +45,35 @@
         <div id="feedbacks" class="p-4 hidden">
             {{-- <x-demo.demo-feedback /> --}}
         </div>
+        <div id="modecontrols" class="p-4">
+            <x-demo.demo-modes-control :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
+        </div>
     </div>
 </x-renderer.card>
+
+@once
+<script type="text/javascript">
+const initTab = (tabId) => {
+    let tabsContainer = document.querySelector("#tabs-" + tabId);
+    let tabTogglers = tabsContainer.querySelectorAll("#tabs-" + tabId + " a");
+    tabTogglers.forEach(function(toggler) {
+        toggler.addEventListener("click", function(e) {
+            e.preventDefault();
+            let tabName = this.getAttribute("href");
+            let tabContents = document.querySelector("#tab-contents-" + tabId);
+            for (let i = 0; i < tabContents.children.length; i++) {
+                tabTogglers[i].parentElement.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+                tabContents.children[i].classList.remove("hidden");
+                if ("#" + tabContents.children[i].id === tabName) continue;
+                tabContents.children[i].classList.add("hidden");
+            }
+            e.target.parentElement.classList.add("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+        });
+    });
+}
+</script>
+@endonce
+
 <script>
     initTab('e07ff0dbf9a2afd616aca8e7a85921e2');
 </script>

@@ -1,3 +1,8 @@
+/* Override flow-bite */
+[type='text'],[type='number'],select{
+    /* gray-300 */
+    border: 1px solid rgb(209 213 219); 
+}
 /* This is for the option box bigger */
 .select2-dropdown.select2-dropdown--above {
     width: max-content !important;

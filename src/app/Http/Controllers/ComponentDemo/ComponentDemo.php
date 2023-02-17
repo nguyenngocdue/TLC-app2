@@ -10,6 +10,7 @@ class ComponentDemo
     use TraitDemoTableData;
     use TraitDemoTagData;
     use TraitDemoTabData;
+    use TraitDemoModeControl;
 
     function getType()
     {
@@ -33,6 +34,9 @@ class ComponentDemo
             'tagDataSource' => $this->getTagDataSource(),
             'tabData1' => $this->getTab1(),
             'tabData2' => $this->getTab2(),
+            'dataSource' => $this->getDataSource(),
+            'itemsSelected' => $this->getItemsSelected()
+
         ]);
     }
 }
