@@ -128,10 +128,10 @@ trait TraitTableEditableDataSourceWithOld
             <input readonly name='{$table01Name}[finger_print][$rowIndex]' value='$id' type=$type class='w-16 bg-gray-300' />
             <input readonly name='{$table01Name}[DESTROY_THIS_LINE][$rowIndex]'  type=$type class='w-16 bg-gray-300' />
             <div class='whitespace-nowrap flex justify-center '>";
-            if ($isOrderable) $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
-                 <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>";
-            $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='duplicateEditableTable({control:this, fingerPrint: $id})' type='secondary' ><i class='fa fa-copy'></i></x-renderer.button>
-                <x-renderer.button size='xs' value='$table01Name' onClick='trashEditableTable({control:this, fingerPrint: $id})' type='danger' ><i class='fa fa-trash'></i></x-renderer.button>
+            if ($isOrderable) $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})'><i class='fa fa-arrow-up'></i></x-renderer.button>
+                 <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})'><i class='fa fa-arrow-down'></i></x-renderer.button>";
+            $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='duplicateEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})' type='secondary' ><i class='fa fa-copy'></i></x-renderer.button>
+                <x-renderer.button size='xs' value='$table01Name' onClick='trashEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})' type='danger' ><i class='fa fa-trash'></i></x-renderer.button>
             </div>
             ";
             $row->action = Blade::render($output);

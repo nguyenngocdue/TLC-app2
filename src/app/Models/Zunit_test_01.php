@@ -25,7 +25,7 @@ class Zunit_test_01 extends ModelExtended
         return [
             ['dataIndex' => 'order_no', 'invisible' => !true],
             ['dataIndex' => 'id', 'invisible' => !true],
-            ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'parent_id', 'invisible' => !true, 'value_as_parent_id' => true],
             ['dataIndex' => 'name',],
             ['dataIndex' => 'text1'],
             ['dataIndex' => 'text2'],

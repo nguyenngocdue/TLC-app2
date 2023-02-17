@@ -19,7 +19,7 @@ class RelationshipRenderer extends Component
 
     private static $table00Count = 1;
     private $table01Name;
-    private $tableDebug = !false;
+    private $tableDebug = false;
     /**
      * Create a new component instance.
      *

@@ -231,7 +231,10 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
 		}
-		if ($request['tableNames'] === 'fakeRequest') return $theRow->id;
+		if ($request['tableNames'] === 'fakeRequest') {
+			$this->dump1("Created line ", $theRow->id, __LINE__);
+			return $theRow->id;
+		}
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
@@ -281,7 +284,10 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
 		}
-		if ($request['tableNames'] === 'fakeRequest') return $theRow->id;
+		if ($request['tableNames'] === 'fakeRequest') {
+			$this->dump1("Updated line ", $theRow->id, __LINE__);
+			return $theRow->id;
+		}
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
