@@ -6,12 +6,13 @@
 
 @php
 $nameControls = array_keys($urlParams);
-$nameControl1 = isset($nameControls[0]) ? $nameControls[0] : "NO";
+$controlName1 = isset($nameControls[0]) ? $nameControls[0] : "NO";
+$dataSource = [$controlName1 => $prod_orders];
 @endphp
 
 @section('content')
 <div class="px-4">
-    <x-renderer.modes-report :controlValues="[$prod_orders]" :controlNames="[$nameControl1]" :itemsSelected="$urlParams"></x-renderer.modes-report>
+    <x-renderer.modes-control :dataSource="$dataSource" :itemsSelected="$urlParams" />
 </div>
 <div class="px-4">
     <x-renderer.table-report :dataSource="$sheets"></x-renderer.table-report>
