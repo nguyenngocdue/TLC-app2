@@ -1,6 +1,16 @@
 let runOnce = {}
 //Similar to includes, this will be checking both numbers and strings
-const dumbIncludes = (item, array) => { for (let i = 0; i < array.length; i++) { if (array[i] == item) return true } return false }
+const dumbIncludes = (item, array) => {
+    if (Array.isArray(array)) {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] == item) return true
+        }
+        return false
+    } else {
+        return item == array
+        // console.log("IMPLEMENT ME", item, array)
+    }
+}
 const makeIdFrom = (table01Name, fieldName, rowIndex) => table01Name + "[" + fieldName + "][" + rowIndex + "]"
 
 const getFieldNameInTable01FormatJS = (name, table01Name) => {
@@ -37,6 +47,7 @@ const filterDropdown4 = (id, dataSource, table01Name) => {
             dataSource = dataSource.filter((row) => value == row[column])
         }
     }
+    // console.log("Filtered")
     return dataSource
 }
 
@@ -203,6 +214,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
     for (let i = 0; i < dataSource.length; i++) {
         let item = dataSource[i]
         selectedStr = (dataSource.length === 1) ? 'selected' : (dumbIncludes(item.id, selected) ? "selected" : "")
+        // console.log("During making option list", item.id, item.name, "================================", selectedStr)
         option = "<option value='" + item.id + "' title='" + item.description + "' " + selectedStr + " >"
         option += item.name
         option += "</option>"

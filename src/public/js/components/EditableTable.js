@@ -155,15 +155,18 @@ const duplicateEditableTable = (params) => {
     // console.log("Duplicate", tableId, fingerPrint, newFingerPrint, columns)
     for (let i = 0; i < columns.length; i++) {
         const column = columns[i]
-        const { multiple } = column
+        // const { renderer } = column
+        // console.log(column['dataIndex'], renderer)
+        // const radio_or_chk_or_dropdown = ['radio', 'checkbox', 'dropdown4'].includes(renderer)
         //Do not duplicate those columns
         if (['action', 'id', 'order_no'].includes(column.dataIndex)) continue
         // const sourceRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
         // console.log("Duplicating", fingerPrint, sourceRowIndex)
         // const value = getCellValueByName(tableId, column['dataIndex'], sourceRowIndex)
         const value = getValueById(tableId + "[" + column['dataIndex'] + "][" + nameIndex + "]")
-        const valueStr = (Array.isArray(value)) ? value.join(",") : value
-        valuesOfOrigin[column['dataIndex']] = multiple ? "[" + valueStr + "]" : valueStr
+        valuesOfOrigin[column['dataIndex']] = value
+        // const valueStr = (Array.isArray(value)) ? value.join(",") : value
+        // valuesOfOrigin[column['dataIndex']] = (radio_or_chk_or_dropdown) ? "[" + valueStr + "]" : valueStr
     }
     // console.log(valuesOfOrigin)
     addANewLine({ tableId: control.value, valuesOfOrigin })
@@ -312,7 +315,7 @@ const addANewLine = (params) => {
 
         selectedStr = (valuesOfOrigin == undefined) ? selectedStr : valuesOfOrigin[column['dataIndex']]
         if (column['renderer'] === 'dropdown4') {
-            // console.log("reloading", selectedStr)
+            // console.log("reloading", valuesOfOrigin, selectedStr)
             reloadDataToDropdown4(id, k[column['table']], tableId, selectedStr)
         } else {
             if (column['value_as_parent_id']) {
