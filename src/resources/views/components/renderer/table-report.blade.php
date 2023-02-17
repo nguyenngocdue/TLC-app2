@@ -9,7 +9,7 @@
             <div class="bg-white border rounded-lg overflow-hidden">
                 <table class="min-w-max w-full table-auto">
                     <thead>
-                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                        <tr class=" bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="py-1 px-6 text-left">NO.</th>
                             <th class="py-1 px-6 text-left">Sheet Name</th>
                         </tr>

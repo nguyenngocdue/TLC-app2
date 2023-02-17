@@ -10,7 +10,8 @@ class Dropdown extends Component
     public function __construct(
         private $dataSource = [],
         private $name = 'name',
-        private $itemsSelected = []
+        private $itemsSelected = [],
+        private $hiddenItems = []
     ) {
     }
 
@@ -21,7 +22,8 @@ class Dropdown extends Component
         return view('components.control.renderer.dropdown', [
             'dataSource' =>  $this->dataSource,
             'name' => $this->name,
-            'itemsSelected' => $this->itemsSelected
+            'itemsSelected' => $this->itemsSelected,
+            'hiddenItems' => $this->hiddenItems
         ]);
     }
 }

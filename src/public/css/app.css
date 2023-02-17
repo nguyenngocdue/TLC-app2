@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
-! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com
-=======
 ! tailwindcss v3.2.1 | MIT License | https://tailwindcss.com
->>>>>>> dev0215_PrintReport
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -623,6 +619,9 @@ video {
 .z-10 {
   z-index: 10;
 }
+.order-last {
+  order: 9999;
+}
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
@@ -656,8 +655,47 @@ video {
 .col-span-12 {
   grid-column: span 12 / span 12;
 }
+.col-span-11 {
+  grid-column: span 11 / span 11;
+}
+.col-auto {
+  grid-column: auto;
+}
 .col-start-1 {
   grid-column-start: 1;
+}
+.col-start-4 {
+  grid-column-start: 4;
+}
+.col-start-6 {
+  grid-column-start: 6;
+}
+.col-start-5 {
+  grid-column-start: 5;
+}
+.col-start-3 {
+  grid-column-start: 3;
+}
+.col-start-2 {
+  grid-column-start: 2;
+}
+.col-start-12 {
+  grid-column-start: 12;
+}
+.col-start-8 {
+  grid-column-start: 8;
+}
+.col-start-10 {
+  grid-column-start: 10;
+}
+.col-start-11 {
+  grid-column-start: 11;
+}
+.col-end-7 {
+  grid-column-end: 7;
+}
+.col-end-12 {
+  grid-column-end: 12;
 }
 .float-right {
   float: right;
@@ -912,8 +950,8 @@ video {
 .h-\[600px\] {
   height: 600px;
 }
-.h-20 {
-  height: 5rem;
+.h-24 {
+  height: 6rem;
 }
 .max-h-\[30rem\] {
   max-height: 30rem;
@@ -1014,56 +1052,26 @@ video {
 .w-80 {
   width: 20rem;
 }
+.w-\[150px\] {
+  width: 150px;
+}
 .w-52 {
   width: 13rem;
 }
 .w-\[20\%\] {
   width: 20%;
 }
-.w-20 {
-  width: 5rem;
-}
 .w-40 {
   width: 10rem;
-}
-.w-\[1000px\] {
-  width: 1000px;
-<<<<<<< HEAD
-=======
-}
-.w-\[253px\] {
-  width: 253px;
-}
-.w-96 {
-  width: 24rem;
-}
-.w-1\/2 {
-  width: 50%;
 }
 .w-\[50\%\] {
   width: 50%;
 }
-.w-\[30\%\] {
-  width: 30%;
+.w-\[1000px\] {
+  width: 1000px;
 }
-.w-\[40\%\] {
-  width: 40%;
-}
-.w-\[500px\] {
-  width: 500px;
-}
-.w-\[100px\] {
-  width: 100px;
-}
-.w-\[150\%\] {
-  width: 150%;
-}
-.w-\[200px\] {
-  width: 200px;
-}
-.w-\[200\] {
-  width: 200;
->>>>>>> dev0215_PrintReport
+.w-1\/2 {
+  width: 50%;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1176,6 +1184,9 @@ video {
 .list-none {
   list-style-type: none;
 }
+.grid-flow-row {
+  grid-auto-flow: row;
+}
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -1199,6 +1210,9 @@ video {
 }
 .flex-row {
   flex-direction: row;
+}
+.flex-row-reverse {
+  flex-direction: row-reverse;
 }
 .flex-col {
   flex-direction: column;
@@ -2489,15 +2503,6 @@ video {
 .pb-5 {
   padding-bottom: 1.25rem;
 }
-<<<<<<< HEAD
-=======
-.pb-1 {
-  padding-bottom: 0.25rem;
-}
-.pb-2 {
-  padding-bottom: 0.5rem;
-}
->>>>>>> dev0215_PrintReport
 .text-left {
   text-align: left;
 }

@@ -5,14 +5,15 @@
 
 @php
 $nameControls = array_keys($urlParams);
-$nameControl1 = isset($nameControls[0]) ? $nameControls[0] : "NO";
-$nameControl2 = isset($nameControls[1]) ? $nameControls[1] : "No";
+$controlName1 = isset($nameControls[0]) ? $nameControls[0] : "NO";
+$controlName2 = isset($nameControls[1]) ? $nameControls[1] : "No";
+$dataSource = [$controlName1 => $subProjects, $controlName2 =>$prod_orders];
+// $hiddenItems = ["chklst"];
 @endphp
 
 @section('content')
 <div class="px-4">
-
-    <x-renderer.modes-report :controlValues="[$subProjects, $prod_orders]" :controlNames="[$nameControl1, $nameControl2]" :itemsSelected="$urlParams"></x-renderer.modes-report>
+    <x-renderer.modes-control :dataSource="$dataSource" :itemsSelected="$urlParams" />
     <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" />
-    @endsection
 </div>
+@endsection
