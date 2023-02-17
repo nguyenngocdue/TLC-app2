@@ -211,6 +211,7 @@ const addANewLine = (params) => {
     columns.forEach((column) => {
         if (column['hidden'] == true) return
         let renderer = 'newCell'
+        let orderNoValue = 0
 
         const multipleBracket = column?.multiple ? "[]" : ""
         const name = tableId + "[" + column['dataIndex'] + "][" + newRowIndex + "]" + multipleBracket
@@ -239,7 +240,6 @@ const addANewLine = (params) => {
                 + '</div>'
         } else {
             let onChange = ''
-            let value = ''
             // console.log("Rendering", column)
             switch (column['renderer']) {
                 case 'read-only-text':
@@ -271,10 +271,10 @@ const addANewLine = (params) => {
                 case "toggle":
                 case "number":
                     if (column['dataIndex'] === 'order_no') {
-                        value = getMaxValueOfAColumn(tableId, "[order_no]") + 10
+                        orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
                         onChange = "rerenderTableBaseOnNewOrder(\"" + tableId + "\")"
                     }
-                    renderer = "<input id='" + name + "' name='" + name + "' class='" + column['classList'] + "' type=number step=any value='" + value + "' onChange='" + onChange + "' />";
+                    renderer = "<input id='" + name + "' name='" + name + "' class='" + column['classList'] + "' type=number step=any onChange='" + onChange + "' />";
                     break
                 case "text":
                     renderer = "<input id='" + name + "' name='" + name + "' class='" + column['classList'] + "' />";
@@ -308,13 +308,15 @@ const addANewLine = (params) => {
             cell.firstChild.value = parentType
         }
 
-        selectedStr = (valuesOfOrigin == undefined) ? "" : valuesOfOrigin[column['dataIndex']]
+        selectedStr = (valuesOfOrigin == undefined) ? selectedStr : valuesOfOrigin[column['dataIndex']]
         if (column['renderer'] === 'dropdown4') {
             // console.log("reloading", selectedStr)
             reloadDataToDropdown4(name, k[column['table']], tableId, selectedStr)
         } else {
             if (column['value_as_parent_id']) {
                 cell.firstChild.value = selected // or selectedStr ???
+            } else if (column['dataIndex'] === 'order_no') {
+                getEById(name).val(orderNoValue)
             } else {
                 getEById(name).val(selectedStr)
             }

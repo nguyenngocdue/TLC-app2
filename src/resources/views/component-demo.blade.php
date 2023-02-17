@@ -50,6 +50,30 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         </div>
     </div>
 </x-renderer.card>
+
+@once
+<script type="text/javascript">
+const initTab = (tabId) => {
+    let tabsContainer = document.querySelector("#tabs-" + tabId);
+    let tabTogglers = tabsContainer.querySelectorAll("#tabs-" + tabId + " a");
+    tabTogglers.forEach(function(toggler) {
+        toggler.addEventListener("click", function(e) {
+            e.preventDefault();
+            let tabName = this.getAttribute("href");
+            let tabContents = document.querySelector("#tab-contents-" + tabId);
+            for (let i = 0; i < tabContents.children.length; i++) {
+                tabTogglers[i].parentElement.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+                tabContents.children[i].classList.remove("hidden");
+                if ("#" + tabContents.children[i].id === tabName) continue;
+                tabContents.children[i].classList.add("hidden");
+            }
+            e.target.parentElement.classList.add("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+        });
+    });
+}
+</script>
+@endonce
+
 <script>
     initTab('e07ff0dbf9a2afd616aca8e7a85921e2');
 

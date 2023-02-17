@@ -1,6 +1,5 @@
-<!-- OPTION -->
-<option disabled></option>
-<input class="truncate" />
+
+<input class="truncate w-16" />
 
 <!-- EMPTINESS-->
 <div class="p-1"></div>

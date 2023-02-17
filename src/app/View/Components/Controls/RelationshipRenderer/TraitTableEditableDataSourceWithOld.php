@@ -125,8 +125,8 @@ trait TraitTableEditableDataSourceWithOld
             // dump($index);
             $type = $this->tableDebug ? "text" : "hidden";
             $output = "
-            <input readonly name='{$table01Name}[finger_print][$rowIndex]' value='$id' type=$type class='w-10 bg-gray-300' />
-            <input readonly name='{$table01Name}[DESTROY_THIS_LINE][$rowIndex]'  type=$type class='w-10 bg-gray-300' />
+            <input readonly name='{$table01Name}[finger_print][$rowIndex]' value='$id' type=$type class='w-16 bg-gray-300' />
+            <input readonly name='{$table01Name}[DESTROY_THIS_LINE][$rowIndex]'  type=$type class='w-16 bg-gray-300' />
             <div class='whitespace-nowrap flex justify-center '>";
             if ($isOrderable) $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-up'></i></x-renderer.button>
                  <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id})'><i class='fa fa-arrow-down'></i></x-renderer.button>";
