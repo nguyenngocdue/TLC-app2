@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Models\Attachment;
+use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 
 class Qaqc_insp_chklst extends Report_ParentController
@@ -73,13 +76,13 @@ class Qaqc_insp_chklst extends Report_ParentController
             [
                 "title" => 'Description',
                 "dataIndex" => "line_description",
-                'width' => "253"
+                'width' => "50"
             ],
             [
                 "dataIndex" => "response_type",
                 "align" => "center",
+                'width' => "100"
             ],
-
         ];
     }
 
@@ -104,8 +107,9 @@ class Qaqc_insp_chklst extends Report_ParentController
             foreach ($ids as $id) {
                 $item = $lines[$id];
                 if (!is_null($item['c1'])) {
-                    $itemsRender = $this->createLongStrHTML($item);
-                    $str .= "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $itemsRender . "</tr>";
+                    $str .= "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createLongStrHTML($item) . "</tr>";
+                    $str .= $this->createStrImage($item);
+                    $str .=  $this->createStrComment($item);
                 } else {
                     $str .=  $item['sign'];
                 }
@@ -127,9 +131,7 @@ class Qaqc_insp_chklst extends Report_ParentController
             // dd($groupDesc);
             $sheetId_Desc[$sheetId] = $groupDesc;
         }
-
         // dd($sheetId_Desc);
-
         $data = [];
         foreach ($sheetId_Desc as $sheetId => $values) {
             $data[$sheetId] = array_values($values);
@@ -139,15 +141,45 @@ class Qaqc_insp_chklst extends Report_ParentController
         return $data;
     }
 
-    protected function getImage()
+    protected function getAttachment($object_type, $object_id)
     {
-        return "
-        <img title='dev-thuc/2023/02/incident trong tran van-150x150.png' width='64' class='rounded-lg object-cover border mr-1' src='http://192.168.100.100:9000/hello-001/dev-thuc/2023/02/incident trong tran van-150x150.png'>
-        <img title='avatars/admin avatar-150x150.png' width='64' class='rounded-lg object-cover border mr-1' src='http://192.168.100.100:9000/hello-001/avatars/admin avatar-150x150.png'>
-        <img title='avatars/admin avatar-150x150.png' width='64' class='rounded-lg object-cover border mr-1' src='http://192.168.100.100:9000/hello-001/avatars/admin avatar-150x150.png'>
-        <img title='avatars/admin avatar-150x150.png' width='64' class='rounded-lg object-cover border mr-1' src='http://192.168.100.100:9000/hello-001/avatars/admin avatar-150x150.png'>
-        ";
+        if (!$object_type && !$object_id) return [];
+        $uid = CurrentUser::get()->id;
+        $query = Attachment::whereIn('object_type', [$object_type])
+            ->where('owner_id', $uid)
+            ->where('object_id', $object_id)
+            ->get();
+        return $query->ToArray();
     }
+
+    protected function createStrHtmlImage($item)
+
+    {
+        $object_type = "App\Models\qaqc_insp_chklst_line";
+        $attachment = $this->getAttachment($object_type, $item['line_id']);
+        $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+        $strCenter = "";
+        foreach ($attachment as  $att) {
+            $url_thumbnail = $path . $att["url_thumbnail"];
+            $url_media = $path . $att["url_media"];
+            $fileName = $att["filename"];
+            $strCenter .= "
+                            <div class='relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit'>
+                                <img class='w-auto h-full object-cover' src='$url_thumbnail' alt='$fileName' />
+                                <div class='invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]'>
+                                        <a title='$fileName' href='$url_media' target='_blank' class='hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full'>
+                                        <span class='text-sm'><i class='fa-sharp fa-solid fa-eye text-2xl '></i></span>
+                                        </a>
+                                </div>
+                            </div>";
+        };
+        $strHead = "<div class='flex flex-col container mx-aut1o w-full'>
+                    <div class='grid grid-cols-4 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1'>";
+        $strTail = "</div></div>";
+        $allStr = $strHead . $strCenter . $strTail;
+        return $allStr;
+    }
+
     private function createLongStrHTML($item)
     {
         $circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
@@ -161,14 +193,25 @@ class Qaqc_insp_chklst extends Report_ParentController
                 $str .=  '<td class="border" style="width:50px">' . $circleIcon . $value . '</td>';
             }
         };
-        $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item['run_desc'] . ":" . "</td>" : "";
         $runUpdated = '<td class="border" style="width:80px" >' . $item['run_updated'] . "</td>";
 
-        $pictures = '<td class="border" style="width:190px">' . '<div class="flex">' . $this->getImage() . '</div>' . '</td>';
-        // dump($item);
-        $value_comment = '<td class="border" style="width:190px">' .  $item['value_comment'] . '</td>';
 
-        $items = $runDesc . $str . $runUpdated . $pictures . $value_comment;
-        return $items;
+        $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item['run_desc'] . ":" . "</td>" : "";
+        $line_id =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item['line_id'] . '</td>' : "";
+
+        $longStr = $runDesc . $line_id . $str . $runUpdated;
+        return $longStr;
+    }
+
+    private function createStrImage($item)
+    {
+        $td = '<td class="border" colspan=5 style="width:190px">' . '<div class="flex">' . $this->createStrHtmlImage($item) . '</div>' . '</td>';
+        return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+    }
+    private function createStrComment($item)
+    {
+        $comment = $item['value_comment'];
+        $td = "<td class='border p-3' colspan = 5 style='width:190px'>$comment</td>";
+        return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
     }
 }

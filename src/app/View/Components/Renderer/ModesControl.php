@@ -21,6 +21,7 @@ class ModesControl extends Component
 
     public function render()
     {
+        // dd($this->dataSource);
         return view('components.renderer.modes-control', [
             'itemsSelected' => $this->itemsSelected,
             'dataSource' => $this->dataSource,

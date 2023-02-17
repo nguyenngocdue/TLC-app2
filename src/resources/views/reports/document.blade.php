@@ -1,13 +1,10 @@
 @extends('layouts.app')
-
 @section('topTitle',$typeReport)
 @section('title', $entity)
 @section('content')
 
 @php
-$nameControls = array_keys($urlParams);
-$controlName1 = isset($nameControls[0]) ? $nameControls[0] : "NO";
-$dataSource = [$controlName1 => $prod_orders];
+$dataSource = ['sub_project_id' => $subProjects,'prod_order_id' => $prod_orders /* ,'filter_run' => ['Filter for a latest run', 'Filter for many runs'] */];
 @endphp
 
 @section('content')
@@ -15,15 +12,14 @@ $dataSource = [$controlName1 => $prod_orders];
     <x-renderer.modes-control :dataSource="$dataSource" :itemsSelected="$urlParams" />
 </div>
 <div class="px-4">
-    <x-renderer.table-report :dataSource="$sheets"></x-renderer.table-report>
+    <x-renderer.table maxH="{{false}}" :dataSource="$sheets" :columns="[['dataIndex' => key(array_pop($sheets))]]" showNo="{{true}}" />
     <x-renderer.divider />
     <x-renderer.page-break />
     <x-renderer.divider />
     @foreach($tableDataSource as $idSheet => $data)
     @php
-    $item = $data[0];
     @endphp
-    <x-renderer.report.header-report :dataSource="$item"></x-renderer.report.header-report>
+    <x-renderer.report.header-report :dataSource="array_pop($data)" />
     <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$data" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
     <x-renderer.page-break />
     @endforeach

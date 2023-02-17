@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Reports;
 use App\Http\Controllers\Controller;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_chklst;
+use App\Models\Qaqc_insp_chklst_sht;
+use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\Http\Request;
@@ -27,7 +29,7 @@ abstract class Report_ParentController extends Controller
     {
         // dd($urlParams);
         $sqlStr = $this->getSqlStr($urlParams);
-        if (empty($urlParams)) return  dd("<x-feedback.alert type='warning' message='Check URL Parameters'></x-feedback.alert>");
+        if (empty($urlParams)) return  "";
         // if (is_null($urlParams[$x = array_key_first($urlParams)])) return dd("<x-feedback.alert type='warning' message='$x parameter is empty at URL'></x-feedback.alert>");
 
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
@@ -44,6 +46,7 @@ abstract class Report_ParentController extends Controller
 
     protected function getDataSource($urlParams)
     {
+        if (!$this->getSql($urlParams)) return [];
         $sql = $this->getSql($urlParams);
         $sqlData = DB::select($sql);
         $result = array_map(fn ($item) => (array) $item, $sqlData);
@@ -57,12 +60,11 @@ abstract class Report_ParentController extends Controller
 
     protected function getSheets($dataSource)
     {
-        // dump($dataSource);
+        if (!is_array($dataSource)) return [];
         $sheets = array_map(function ($item) {
             $x = isset(array_pop($item)['sheet_name']);
-            return $x ? array_pop($item)['sheet_name'] : '';
+            return $x ? ["sheet_name" => array_pop($item)['sheet_name']] : '';
         }, $dataSource);
-        // dd($sheets);
         return $sheets;
     }
 
@@ -79,7 +81,7 @@ abstract class Report_ParentController extends Controller
 
         $prod_orders  = Prod_order::get()->pluck('name', 'id')->toArray();
         $subProjects = Sub_project::get()->pluck('name', 'id')->toArray();
-        $chklts_Sheet = Qaqc_insp_chklst::get()->pluck('name', 'id')->toArray();
+        $insp_tmpls = Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray();
 
 
         // dd($dataSource);
@@ -91,9 +93,9 @@ abstract class Report_ParentController extends Controller
         return view('reports.' . $viewName, [
             'tableColumns' => $columns,
             'tableDataSource' => $dataSource,
-            'subProjects' => $subProjects,
-            'chklts_Sheet' => $chklts_Sheet,
             'prod_orders' => $prod_orders,
+            'subProjects' => $subProjects,
+            'insp_tmpls' => $insp_tmpls,
             'urlParams' => $urlParams,
             'entity' => $currentRoute,
             'typeReport' => $typeReport,
