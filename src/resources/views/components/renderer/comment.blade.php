@@ -17,7 +17,7 @@ $time = $date ? date("d/m/Y H:i:s", strtotime($date)) : date("d/m/Y H:i:s");
             <div class="grid grid-cols-12 gap-4 ">
                 <div class="col-span-4">
                     <div class="dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 border cursor-pointer bg-[#f5f5f5] thumbs rounded-lg w-full border-gray-300 p-1 focus:border-purple-400 focus:outline-none  ">
-                        <x-renderer.avatar-name title="{{$authorName}}"></x-renderer.avatar-name>
+                        <x-renderer.avatar-user title="{{$authorName}}">{!!$user!!}</x-renderer.avatar-user>
                         <input name="owner_id" value="{{Auth::user()->id}}" class='hidden' type='text'>
                     </div>
                 </div>

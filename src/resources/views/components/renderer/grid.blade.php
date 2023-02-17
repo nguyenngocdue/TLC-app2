@@ -18,7 +18,7 @@
     @endphp
     
     <div class="bg-white-50 col-span-{{$colSpan}} flex align-center ">
-        <x-renderer.avatar-name>{!!$itemStr!!}</x-renderer.avatar-name>
+        <x-renderer.avatar-user>{!!$itemStr!!}</x-renderer.avatar-user>
         {{-- The following line is find with component test, but buggy with manyIconParams --}}
         {{-- <{{$itemRenderer}}>{!!$itemStr!!}</{{$itemRenderer}}> --}}
         {{-- try this --}}

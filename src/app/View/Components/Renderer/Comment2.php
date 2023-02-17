@@ -24,7 +24,8 @@ class Comment2 extends Component
             [
                 "title" => 'User',
                 "dataIndex" => "user",
-                "renderer" => "avatar-name",
+                "renderer" => "avatar-user",
+                // "attributes" => ['gray' => 'resigned'],
                 // "attributes" => ['title' => 'user', 'description' => 'position_rendered', 'avatar' => 'avatar', 'gray' => 'disabled']
             ],
             [

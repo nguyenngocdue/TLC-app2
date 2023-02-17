@@ -16,7 +16,7 @@ $bg_gray = $gray ? "bg-gray-300":"";
 $txt_gray = $gray ? "text-gray-600" : "";
 @endphp
 
-<div class="flex items-center text-sm {{$bg_gray}} rounded px-1 w-full" component="avatar-name">
+<div class="flex items-center text-sm {{$bg_gray}} rounded px-1 w-full" component="avatar-item">
     <span class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
         <img class="object-cover w-full h-full rounded-full" src="{{$avatar}}" alt="" loading="lazy">
         <span class="absolute inset-0 rounded-full" aria-hidden="true"></span>

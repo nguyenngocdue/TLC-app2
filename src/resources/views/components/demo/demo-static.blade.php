@@ -97,10 +97,10 @@
     </x-renderer.card>
     <x-renderer.card title="Grids">
         Grid colSpan=6
-        <x-renderer.grid colSpan="6" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name"></x-renderer.grid>
+        <x-renderer.grid colSpan="6" :items="$gridDataSource" itemRenderer="x-renderer.avatar-user"></x-renderer.grid>
         <br />
         Grid colSpan=4 groupBy=name 
-        <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-name" groupBy="name"></x-renderer.grid>
+        <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-user" groupBy="name"></x-renderer.grid>
     </x-renderer.card>
     <x-renderer.card title="Tags">
         <x-renderer.table showNo=true :columns="$tagColumns" :dataSource="$tagDataSource" maxH=45/>

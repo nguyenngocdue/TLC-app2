@@ -1,5 +1,5 @@
 <button class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none" @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account" aria-haspopup="true">
-    <x-renderer.avatar-name avatar="{{$avatar}}" title="{{$user->full_name}}" description="{{$user->position_rendered}}"/>
+    <x-renderer.avatar-user >{!!$user!!}</x-renderer.avatar-user>
 </button>
 <template x-if="isProfileMenuOpen">
     <ul x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.away="closeProfileMenu" @keydown.escape="closeProfileMenu" 
