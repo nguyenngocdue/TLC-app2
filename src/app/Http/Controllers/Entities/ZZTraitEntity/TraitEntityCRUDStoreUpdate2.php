@@ -237,7 +237,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function store(Request $request)
 	{
-		dd($request->input());
+		// dd($request->input());
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
 			$props = $this->getProps1();

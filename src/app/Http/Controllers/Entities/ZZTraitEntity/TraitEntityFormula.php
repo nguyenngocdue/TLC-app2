@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Models\User;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\DefaultValues;
 use App\View\Components\Formula\All_ConcatNameWith123;
 use App\View\Components\Formula\All_SlugifyByName;
@@ -45,7 +46,11 @@ trait TraitEntityFormula
                     $position_3 = ($user->position3) ? $user->position3->name : "";
                     $value = (new User_PositionRendered())($position_pres, $position_1, $position_2, $position_3);
                     break;
+                    case "All_OwnerId":
+                        $value = CurrentUser::get()->id;
+                        break;
                 default:
+                $value = "";
                     break;
             }
             $item[$prop['column_name']] = $value;
