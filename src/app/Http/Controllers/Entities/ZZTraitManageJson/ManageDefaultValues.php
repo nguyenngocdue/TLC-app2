@@ -50,6 +50,7 @@ class ManageDefaultValues extends Manage_Parent
                     '',
                     'All_ConcatNameWith123',
                     'All_SlugifyByName',
+                    'All_OwnerId',
                     'User_PositionRendered',
                     '(not-yet)Wir_NameRendered',
                     '(not-yet)format_production',

@@ -26,6 +26,7 @@ return new class extends Migration
 
             // $table->primary(['prod_routing_id', 'prod_routing_link_id'], md5('prod_routing_id' . 'prod_routing_link_id'));
             $table->unique(['prod_routing_id', 'prod_routing_link_id'], md5('prod_routing_id' . 'prod_routing_link_id'));
+            $table->unsignedBigInteger('owner_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
             $table->foreign('prod_routing_id')->references('id')->on('prod_routings')->onDelete('cascade')->onUpdate('cascade');

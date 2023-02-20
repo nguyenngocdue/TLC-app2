@@ -11,7 +11,7 @@ class Hse_incident_report extends ModelExtended
         'id', 'name', 'work_area_id', 'issue_datetime', 'injured_person', 'line_manager', 'report_person',
         'number_injured_person', 'number_involved_person', 'issue_description',
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
-        'lost_days',
+        'lost_days', 'owner_id'
     ];
     protected $table = "hse_incident_reports";
     public $nameless = true;
@@ -29,6 +29,7 @@ class Hse_incident_report extends ModelExtended
         "attachment_2" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "getDocType" => ['belongsTo', Term::class, 'incident_doc_type_id'],
         "getDocSubType" => ['belongsTo', Term::class, 'incident_doc_sub_type_id'],
+        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public $oracyParams = [
@@ -141,5 +142,10 @@ class Hse_incident_report extends ModelExtended
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function getOwnerId()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

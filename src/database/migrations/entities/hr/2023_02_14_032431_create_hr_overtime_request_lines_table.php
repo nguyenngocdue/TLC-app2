@@ -29,6 +29,7 @@ return new class extends Migration
             $table->unsignedBigInteger("work_mode_id");
             $table->string("remark")->nullable();
             $table->unsignedInteger('order_no')->nullable();
+            $table->unsignedBigInteger('owner_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
