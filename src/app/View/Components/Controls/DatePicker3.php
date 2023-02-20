@@ -54,8 +54,11 @@ class DatePicker3 extends Component
                 $this->value = $value;
                 break;
             case 'picker_date':
-                $this->value = Carbon::createFromFormat(Constant::FORMAT_DATE_MYSQL, $this->value)
-                    ->format(Constant::FORMAT_DATE_ASIAN);
+                // dump($this->value);
+                if ($this->value) {
+                    $this->value = Carbon::createFromFormat(Constant::FORMAT_DATE_MYSQL, $this->value)
+                        ->format(Constant::FORMAT_DATE_ASIAN);
+                }
                 break;
             default:
                 return "Unknown control " . $this->dateTimeType;
