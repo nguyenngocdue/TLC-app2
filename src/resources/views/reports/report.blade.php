@@ -4,7 +4,7 @@
 @section('title', $entity)
 
 @php
-$dataSource = ['sub_project_id' => $subProjects,'prod_orders' => $prod_orders];
+$dataSource = ['sub_project_id' => $subProjects,'prod_order' => $prod_orders];
 @endphp
 
 @section('content')

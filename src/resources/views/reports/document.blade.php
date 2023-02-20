@@ -4,18 +4,25 @@
 @section('content')
 
 @php
-$dataSource = ['sub_project_id' => $subProjects,'prod_order_id' => $prod_orders /* ,'filter_run' => ['Filter for a latest run', 'Filter for many runs'] */];
+$dataSource = [
+'sub_project_id' => $subProjects,
+'prod_order_id' => $prod_orders ,
+'chklsts' => $insp_tmpls,
+'filter_run' => ['Filter for a latest run', 'Filter for many runs'],
+];
 @endphp
 
 @section('content')
-<div class="px-4">
+<div class="md:px-4">
     <x-renderer.modes-control :dataSource="$dataSource" :itemsSelected="$urlParams" />
 </div>
-<div class="px-4">
+<div class="md:px-4">
+    @if (count($sheets))
     <x-renderer.table maxH="{{false}}" :dataSource="$sheets" :columns="[['dataIndex' => key(array_pop($sheets))]]" showNo="{{true}}" />
     <x-renderer.divider />
     <x-renderer.page-break />
     <x-renderer.divider />
+    @endif
     @foreach($tableDataSource as $idSheet => $data)
     @php
     @endphp

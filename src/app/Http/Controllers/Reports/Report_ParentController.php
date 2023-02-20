@@ -30,7 +30,6 @@ abstract class Report_ParentController extends Controller
         // dd($urlParams);
         $sqlStr = $this->getSqlStr($urlParams);
         if (empty($urlParams)) return  "";
-        // if (is_null($urlParams[$x = array_key_first($urlParams)])) return dd("<x-feedback.alert type='warning' message='$x parameter is empty at URL'></x-feedback.alert>");
 
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
@@ -53,7 +52,7 @@ abstract class Report_ParentController extends Controller
         return $result;
     }
 
-    protected function enrichDataSource($dataSource)
+    protected function enrichDataSource($dataSource, $urlParams)
     {
         return $dataSource;
     }
@@ -76,7 +75,7 @@ abstract class Report_ParentController extends Controller
         $viewName = strtolower(Str::singular($currentRoute));
 
         $dataSource = $this->getDataSource($urlParams);
-        $dataSource = $this->enrichDataSource($dataSource);
+        $dataSource = $this->enrichDataSource($dataSource, $urlParams);
         $columns = $this->getTableColumns($dataSource);
 
         $prod_orders  = Prod_order::get()->pluck('name', 'id')->toArray();
@@ -87,6 +86,7 @@ abstract class Report_ParentController extends Controller
         // dd($dataSource);
         $sheets = $this->getSheets($dataSource);
         // dump($sheets);
+        // dd($sheets);
 
 
         $typeReport = CurrentRoute::getCurrentController();

@@ -17,6 +17,7 @@ class Qaqc_insp_chklst extends Report_ParentController
     {
         $sql =  " SELECT
                         po.id
+                        ,tp.id AS template
                         ,sp.name AS project_name
                         ,l.value AS sign
                         ,l.value_comment AS value_comment
@@ -34,8 +35,6 @@ class Qaqc_insp_chklst extends Report_ParentController
                         ,cv.id AS control_value_id
                         ,cv.name AS control_value_name
                         ,g.description AS group_description
-                        ,ts.id AS tmpl_sheet_id
-                        ,ts.description AS tmpl_sheet_description
                         
                         ,divide_control.c1
                         ,divide_control.c2
@@ -47,28 +46,30 @@ class Qaqc_insp_chklst extends Report_ParentController
                 JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id";
 
         if (isset($urlParams['prod_order_id'])) $sql .= " \n JOIN prod_orders po ON po.id = '{{prod_order_id}}' \n";
-        $sql .= " \n JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
+        $sql .= " \n JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
+                JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id
+                JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
                 JOIN control_types ct ON ct.id = l.control_type_id
                 JOIN sub_projects sp ON sp.id = po.sub_project_id
                 LEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
                 JOIN qaqc_insp_groups g ON g.id = l.qaqc_insp_group_id
-                JOIN qaqc_insp_tmpl_shts ts ON ts.id = s.qaqc_insp_tmpl_sht_id
+
+                 
                 LEFT JOIN (
-                        SELECT id as control_group_id
-                        , REVERSE(SUBSTRING_INDEX(REVERSE(SUBSTRING_INDEX(cg.name, '|', 1)), '|', 1)) AS c1
-                        , REVERSE(SUBSTRING_INDEX(REVERSE(SUBSTRING_INDEX(cg.name, '|', 2)), '|', 1)) AS c2
-                        , REVERSE(SUBSTRING_INDEX(REVERSE(SUBSTRING_INDEX(cg.name, '|', 3)), '|', 1)) AS c3
-                        , REVERSE(SUBSTRING_INDEX(REVERSE(SUBSTRING_INDEX(cg.name, '|', 4)), '|', 1)) AS c4
-                        FROM qaqc_insp_control_groups AS cg
-                                )  AS divide_control ON l.qaqc_insp_control_group_id = divide_control.control_group_id
+                    SELECT id as control_group_id
+                    , REVERSE(SUBSTRING_INDEX(REVERSE(SUBSTRING_INDEX(cg.name, '|', 1)), '|', 1)) AS c1
+                    , REVERSE(SUBSTRING_INDEX(REVERSE(SUBSTRING_INDEX(cg.name, '|', 2)), '|', 1)) AS c2
+                    , REVERSE(SUBSTRING_INDEX(REVERSE(SUBSTRING_INDEX(cg.name, '|', 3)), '|', 1)) AS c3
+                    , REVERSE(SUBSTRING_INDEX(REVERSE(SUBSTRING_INDEX(cg.name, '|', 4)), '|', 1)) AS c4
+                    FROM qaqc_insp_control_groups AS cg
+                            )  AS divide_control ON l.qaqc_insp_control_group_id = divide_control.control_group_id
             
-                        WHERE 1=1";
-        if (isset($urlParams['sheet_id'])) $sql .= " \n AND r.qaqc_insp_chklst_sht_id = '{{sheet_id}}' \n";
+                WHERE 1=1";
+        if (isset($urlParams['sub_project_id'])) $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
+        if (isset($urlParams['chklsts'])) $sql .= " \n AND csh.id = '{{chklsts}}' \n";
         $sql .= "\n ORDER BY line_name,  run_updated DESC ";
         return $sql;
     }
-
-
 
     public function getTableColumns($dataSource = [])
     {
@@ -76,35 +77,42 @@ class Qaqc_insp_chklst extends Report_ParentController
             [
                 "title" => 'Description',
                 "dataIndex" => "line_description",
-                'width' => "50"
+                'width' => "10"
             ],
             [
                 "dataIndex" => "response_type",
                 "align" => "center",
-                'width' => "100"
+                'width' => "500"
             ],
         ];
     }
 
-    protected function enrichDataSource($dataSource)
+    protected function enrichDataSource($dataSource, $urlParams)
     {
+        // dd($dataSource);
+        // dump(end($urlParams));
         $lines =  [];
         foreach ($dataSource as $item) {
             if (isset($item['line_id'])) {
                 $lines[$item['line_id']] = $item;
             }
         }
+        // dd($lines);
 
-        $desc_lineIds = [];
-        foreach ($lines as $id => $value) {
-            $desc = $value['line_description'];
-            $desc_lineIds[$desc][] = $id;
+        $descIdLines = [];
+        array_walk($lines, function ($value, $key) use (&$descIdLines) {
+            $descIdLines[$value['line_description']][] = $key;
+        });
+        // Reduce the number of lines from URL request 
+        if (!end($urlParams)) {
+            $descIdLines = array_map(fn ($item) => array_splice($item, 0, 1), $descIdLines);
         }
 
         $arrayHtml = [];
-        foreach ($desc_lineIds as $ids) {
+        foreach ($descIdLines as $ids) {
             $str = '';
             foreach ($ids as $id) {
+                // dump($id);
                 $item = $lines[$id];
                 if (!is_null($item['c1'])) {
                     $str .= "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createLongStrHTML($item) . "</tr>";
@@ -116,15 +124,22 @@ class Qaqc_insp_chklst extends Report_ParentController
                 $arrayHtml[$id] = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str . "</tbody>" . "</table>";
             }
         }
-
+        // dd($arrayHtml);
+        $arrayMaxRun = [];
         foreach ($lines as $id => $value) {
-            $lines[$id]['response_type'] = $arrayHtml[$id];
+            if (isset($arrayHtml[$id])) {
+                $value['response_type'] = $arrayHtml[$id];
+                $arrayMaxRun[$id] = $value;
+            }
         }
-        $sheetGroup = Report::groupArrayByKey($lines, 'sheet_id');
+        // dd($arrayMaxRun, $lines);
+        $sheetGroup = Report::groupArrayByKey($arrayMaxRun, 'sheet_id');
+        // dd($sheetGroup);
 
         $sheetId_Desc = [];
         foreach ($sheetGroup as $sheetId => $value) {
             $groupDesc = Report::groupArrayByKey($value, 'line_description');
+            // dd($groupDesc);
             foreach ($groupDesc as $key => $value) {
                 $groupDesc[$key] = array_pop($value);
             }
@@ -153,7 +168,6 @@ class Qaqc_insp_chklst extends Report_ParentController
     }
 
     protected function createStrHtmlImage($item)
-
     {
         $object_type = "App\Models\qaqc_insp_chklst_line";
         $attachment = $this->getAttachment($object_type, $item['line_id']);
@@ -164,20 +178,19 @@ class Qaqc_insp_chklst extends Report_ParentController
             $url_media = $path . $att["url_media"];
             $fileName = $att["filename"];
             $strCenter .= "
-                            <div class='relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit'>
-                                <img class='w-auto h-full object-cover' src='$url_thumbnail' alt='$fileName' />
+                            <div class='border-gray-300 relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit'>
+                                <img class='' src='$url_thumbnail' alt='$fileName' />
                                 <div class='invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]'>
                                         <a title='$fileName' href='$url_media' target='_blank' class='hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full'>
-                                        <span class='text-sm'><i class='fa-sharp fa-solid fa-eye text-2xl '></i></span>
+                                            <span class='text-sm'><i class='fa-sharp fa-solid fa-eye text-2xl '></i></span>
                                         </a>
                                 </div>
                             </div>";
         };
-        $strHead = "<div class='flex flex-col container mx-aut1o w-full'>
-                    <div class='grid grid-cols-4 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1'>";
+        $strHead = "<div class='flex flex-col container mx-auto w-full' >
+                    <div class='grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 '>";
         $strTail = "</div></div>";
-        $allStr = $strHead . $strCenter . $strTail;
-        return $allStr;
+        return $strHead . $strCenter . $strTail;
     }
 
     private function createLongStrHTML($item)
@@ -193,8 +206,7 @@ class Qaqc_insp_chklst extends Report_ParentController
                 $str .=  '<td class="border" style="width:50px">' . $circleIcon . $value . '</td>';
             }
         };
-        $runUpdated = '<td class="border" style="width:80px" >' . $item['run_updated'] . "</td>";
-
+        $runUpdated = $this->createStrDateTime($item);
 
         $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item['run_desc'] . ":" . "</td>" : "";
         $line_id =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item['line_id'] . '</td>' : "";
@@ -205,13 +217,20 @@ class Qaqc_insp_chklst extends Report_ParentController
 
     private function createStrImage($item)
     {
-        $td = '<td class="border" colspan=5 style="width:190px">' . '<div class="flex">' . $this->createStrHtmlImage($item) . '</div>' . '</td>';
+        $td = '<td class="border" colspan=5 style="width:190px">' . '<div class="">' . $this->createStrHtmlImage($item) . '</div>' . '</td>';
         return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
     }
+
     private function createStrComment($item)
     {
         $comment = $item['value_comment'];
         $td = "<td class='border p-3' colspan = 5 style='width:190px'>$comment</td>";
         return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+    }
+
+    private function createStrDateTime($item)
+    {
+        $runUpdated = '<td class="border pl-2" style="width:80px" > Date: ' . str_replace(" ", "</br> Time: ", $item['run_updated']) . "</td>";
+        return $runUpdated;
     }
 }

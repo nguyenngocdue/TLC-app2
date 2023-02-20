@@ -5,7 +5,7 @@
 
 @section('content')
 
-@dd($listOfReports)
+{{-- @dd($listOfReports) --}}
 <ul>
     @foreach ($dataSource as $plural => $listOfReports)
     <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"> {{Str::appTitle($plural) }}</li>
