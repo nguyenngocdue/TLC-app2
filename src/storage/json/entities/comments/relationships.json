@@ -1,24 +1,13 @@
 {
-    "_commentable": {
-        "name": "_commentable",
-        "relationship": "morphTo",
-        "control_name": "commentable",
-        "renderer_view_all": "parent_link",
-        "renderer_view_all_param": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_user": {
-        "name": "_user",
+    "_getOwnerId": {
+        "name": "_getOwnerId",
         "relationship": "belongsTo",
         "control_name": "owner_id",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -31,6 +20,20 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_commentable": {
+        "name": "_commentable",
+        "relationship": "morphTo",
+        "control_name": "commentable",
+        "renderer_view_all": "parent_link",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "parent_link",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

@@ -143,6 +143,22 @@
         "hidden_print": "",
         "new_line": ""
     },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "column_type": "bigint",
+        "label": "Creator",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -172,6 +188,22 @@
         "hidden_edit": "true",
         "hidden_label": "",
         "hidden_filter": "true",
+        "hidden_print": "",
+        "new_line": ""
+    },
+    "_getProdOrders": {
+        "name": "_getProdOrders",
+        "column_name": "getProdOrders",
+        "column_type": "eloquent_prop",
+        "label": "Prod Order",
+        "control": "relationship_renderer",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
         "hidden_print": "",
         "new_line": ""
     }

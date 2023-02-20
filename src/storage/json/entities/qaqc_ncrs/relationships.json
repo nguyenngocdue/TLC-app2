@@ -168,6 +168,19 @@
         "filter_values": "118",
         "radio_checkbox_colspan": "3"
     },
+    "_getOwnerId": {
+        "name": "_getOwnerId",
+        "relationship": "belongsTo",
+        "control_name": "owner_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getDefMonitors()": {
         "name": "_getDefMonitors()",
         "relationship": "getCheckedByField",

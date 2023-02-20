@@ -65,6 +65,17 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "All_OwnerId",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",

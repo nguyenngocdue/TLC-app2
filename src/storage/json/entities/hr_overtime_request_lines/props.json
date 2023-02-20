@@ -107,7 +107,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -123,7 +123,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -139,7 +139,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -155,7 +155,7 @@
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     },
@@ -197,6 +197,22 @@
         "column_type": "string",
         "label": "Remark",
         "control": "text",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "column_type": "bigint",
+        "label": "Creator",
+        "control": "dropdown",
         "align": "",
         "col_span": "",
         "width": "",
@@ -251,7 +267,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "true",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     }

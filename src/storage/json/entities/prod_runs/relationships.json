@@ -1,16 +1,4 @@
 {
-    "_users": {
-        "name": "_users",
-        "relationship": "belongsToMany",
-        "control_name": "users",
-        "renderer_view_all": "count",
-        "renderer_view_all_param": "",
-        "renderer_edit": "many_icons",
-        "renderer_edit_param": "",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_prodSequence": {
         "name": "_prodSequence",
         "relationship": "belongsTo",
@@ -19,6 +7,33 @@
         "renderer_view_all_param": "id",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getOwnerId": {
+        "name": "_getOwnerId",
+        "relationship": "belongsTo",
+        "control_name": "owner_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_users": {
+        "name": "_users",
+        "relationship": "belongsToMany",
+        "control_name": "users",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_icons",
+        "renderer_edit_param": "",
+        "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

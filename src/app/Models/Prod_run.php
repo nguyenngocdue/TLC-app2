@@ -44,6 +44,7 @@ class Prod_run extends ModelExtended
             ['dataIndex' => 'date',],
             ['dataIndex' => 'start',],
             ['dataIndex' => 'end',],
+            ['dataIndex' => 'owner_id',],
         ];
     }
 }
