@@ -13,7 +13,7 @@
                         <i class="fa-duotone fa-file-csv"></i>
                     </a>
                 </x-renderer.button>
-                <x-renderer.button title="Print this list"><i class='fa-duotone fa-print'></i></x-renderer.button>
+                <x-renderer.button title="Print this list QR Code"><i class="fa-duotone fa-qrcode"></i></x-renderer.button>
                 <x-renderer.button title="Screen Settings"><i class="fa-duotone fa-gear"></i></x-renderer.button>
         </div>
         <x-form.per-page type="{{$type}}" route="{{ route('updateUserSettings') }}" page-limit="{{$pageLimit}}" />
