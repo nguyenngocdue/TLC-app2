@@ -31,6 +31,7 @@ trait TraitTableColumnEditable
                 case 'status':
                     $newColumn['cbbDataSourceObject'] = LibStatuses::getFor($tableName);
                     $newColumn['cbbDataSource'] = array_keys(LibStatuses::getFor($tableName));
+                    // $newColumn['renderer'] = 'text';
                     $newColumn['renderer'] = 'dropdown';
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 text-left placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
