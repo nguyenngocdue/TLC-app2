@@ -8,7 +8,7 @@ class Hse_corrective_action extends ModelExtended
 {
     protected $fillable = [
         'id', 'name', 'description', 'slug', 'hse_incident_report_id', 'priority_id', 'work_area_id',
-        'assignee', 'opened_date', 'closed_date', 'status', 'unsafe_action_type_id', 'order_no',
+        'assignee', 'opened_date', 'closed_date', 'status', 'unsafe_action_type_id', 'order_no', 'owner_id'
     ];
     protected $table = "hse_corrective_actions";
 
@@ -18,6 +18,7 @@ class Hse_corrective_action extends ModelExtended
         'getPriority' => ['belongsTo', Priority::class, 'priority_id'],
         'getAssignee' => ['belongsTo', User::class, 'assignee'],
         'getUnsafeActionType' => ['belongsTo', Term::class, 'unsafe_action_type_id'],
+        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public $oracyParams = [
@@ -35,6 +36,11 @@ class Hse_corrective_action extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getWorkArea()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getOwnerId()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -78,7 +84,7 @@ class Hse_corrective_action extends ModelExtended
         return [
             ['dataIndex' => 'id',],
             // ['dataIndex' => 'hse_incident_report_id', 'invisible' => !true, 'value_as_parent_id' => true],
-            ['dataIndex' => 'hse_incident_report_id'],
+            ['dataIndex' => 'hse_incident_report_id','invisible' => true],
             ['dataIndex' => 'name',],
             ['dataIndex' => 'priority_id',],
             ['dataIndex' => 'work_area_id'],

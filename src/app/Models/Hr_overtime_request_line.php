@@ -8,7 +8,7 @@ class Hr_overtime_request_line extends ModelExtended
 {
     protected $fillable = [
         "hr_overtime_request_id", "user_id", "employeeid", "position_rendered",
-        "ot_date", "from_time", "to_time", "break_time", "order_no",
+        "ot_date", "from_time", "to_time", "break_time", "order_no", "owner_id",
         "total_time", "sub_project_id", "work_mode_id", "remark"
     ];
     protected $table = "hr_overtime_request_lines";
@@ -19,9 +19,16 @@ class Hr_overtime_request_line extends ModelExtended
         "getUserID" => ['belongsTo', User::class, 'user_id'],
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getWorkMode" => ['belongsTo', Work_mode::class, 'work_mode_id'],
+        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getHROvertimeRequest()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getOwnerId()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

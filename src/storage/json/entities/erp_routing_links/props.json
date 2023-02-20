@@ -59,6 +59,22 @@
         "hidden_view_all": "true",
         "hidden_edit": "true",
         "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "",
+        "new_line": ""
+    },
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "column_type": "bigint",
+        "label": "Production Discipline ID",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
         "new_line": ""
@@ -78,22 +94,6 @@
         "hidden_filter": "",
         "hidden_print": "",
         "new_line": "true"
-    },
-    "_prod_discipline_id": {
-        "name": "_prod_discipline_id",
-        "column_name": "prod_discipline_id",
-        "column_type": "bigint",
-        "label": "Production Discipline ID",
-        "control": "dropdown",
-        "align": "",
-        "col_span": "12",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "new_line": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -123,7 +123,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "true",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
     }

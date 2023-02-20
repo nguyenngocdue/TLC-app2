@@ -1,16 +1,4 @@
 {
-    "_user": {
-        "name": "_user",
-        "relationship": "hasMany",
-        "control_name": "user",
-        "renderer_view_all": "count",
-        "renderer_view_all_param": "",
-        "renderer_edit": "many_icons",
-        "renderer_edit_param": "getManyIconParams",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": "2"
-    },
     "_getAssignee": {
         "name": "_getAssignee",
         "relationship": "belongsTo",
@@ -19,18 +7,7 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_getPublicHolidays": {
-        "name": "_getPublicHolidays",
-        "relationship": "hasMany",
-        "control_name": "getPublicHolidays",
-        "renderer_view_all": "count",
-        "renderer_view_all_param": "",
-        "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -43,6 +20,46 @@
         "renderer_view_all_param": "name",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_user": {
+        "name": "_user",
+        "relationship": "hasMany",
+        "control_name": "user",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_icons",
+        "renderer_edit_param": "getManyIconParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getPublicHolidays": {
+        "name": "_getPublicHolidays",
+        "relationship": "hasMany",
+        "control_name": "getPublicHolidays",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getHrOvertimeRequests": {
+        "name": "_getHrOvertimeRequests",
+        "relationship": "hasMany",
+        "control_name": "getHrOvertimeRequests",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

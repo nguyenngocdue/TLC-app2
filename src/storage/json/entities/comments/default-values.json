@@ -10,20 +10,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
-        "label": "",
-        "default_value": "",
-        "validation": "required",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
+    "_content": {
+        "name": "_content",
+        "column_name": "content",
         "label": "",
         "default_value": "",
         "validation": "",
@@ -32,9 +21,42 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_duration": {
-        "name": "_duration",
-        "column_name": "duration",
+    "_commentable_type": {
+        "name": "_commentable_type",
+        "column_name": "commentable_type",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_commentable_id": {
+        "name": "_commentable_id",
+        "column_name": "commentable_id",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_commentable": {
+        "name": "_commentable",
+        "column_name": "commentable",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_category": {
+        "name": "_category",
+        "column_name": "category",
         "label": "",
         "default_value": "",
         "validation": "required",
@@ -43,20 +65,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "All_SlugifyByName",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_field_id": {
-        "name": "_field_id",
-        "column_name": "field_id",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "label": "",
         "default_value": "",
         "validation": "required",
@@ -82,6 +93,17 @@
         "label": "",
         "default_value": "",
         "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_position_rendered": {
+        "name": "_position_rendered",
+        "column_name": "position_rendered",
+        "label": "",
+        "default_value": "",
+        "validation": "required",
         "formula": "",
         "label_extra": "",
         "placeholder": "",

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('field_id');
             $table->unsignedBigInteger('parent1_id')->nullable();
             $table->unsignedBigInteger('parent2_id')->nullable();
+            $table->unsignedBigInteger('owner_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
