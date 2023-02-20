@@ -13,6 +13,7 @@ use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\Relationships;
 use App\Utils\Support\Json\SuperProps;
+use DateTime;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -295,7 +296,6 @@ abstract class AbstractViewAllController extends Controller
                     $relationship = $oracyParams[$dataIndex][0];
                     $allows = JsonControls::getViewAllOracies();
                 }
-
                 if (in_array($relationship, $allows)) {
                     // dd($json, $dataIndex, $json["_{$dataIndex}"]);
                     if (!isset($json["_{$dataIndex}"])) {
@@ -314,7 +314,6 @@ abstract class AbstractViewAllController extends Controller
     private function attachEloquentNameIntoColumn(&$columns)
     {
         $eloquentParams = App::make($this->typeModel)->eloquentParams;
-
         $eloquent = [];
         foreach ($eloquentParams as $key => $eloquentParam) {
             if (in_array($eloquentParam[0], ['belongsTo'])) {
@@ -358,17 +357,39 @@ abstract class AbstractViewAllController extends Controller
             'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
         ]);
     }
-
     public function exportCSV()
     {
-        [, $columnLimit, $advanceFilters] = $this->getUserSettings();
-        // Log::info($columnLimit);
+        [,, $advanceFilters] = $this->getUserSettings();
         $type = Str::plural($this->type);
         $columns = $this->getColumnsExportCSV($type);
+        $columns = $this->makeNoColumn($columns);
         $dataSource = $this->getDataSource($advanceFilters)->get();
-        dump($columns);
-        dump($dataSource);
-        $this->makeTrTd($columns, $dataSource, null);
+        $rows = [];
+        foreach ($dataSource as $no => $dataLine) {
+            $rows[] = $this->makeRowData($columns, $dataLine, $no + 1);
+        }
+        $fileName = $this->type . '.csv';
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        $columns = array_values(array_map(fn ($item) => $item['label'], $columns));
+        $callback = function () use ($rows, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+            $array = [];
+            foreach ($rows as $row) {
+                foreach ($columns as $key => $column) {
+                    $array[$column] = $row[$key];
+                }
+                fputcsv($file, $array);
+            }
+            fclose($file);
+        };
+        return response()->stream($callback, 200, $headers);
     }
     public function destroy($id)
     {
