@@ -8,7 +8,7 @@ class Pj_staircase extends ModelExtended
 {
     public $timestamps = false;
     protected $fillable = ["id", "name", "description", "slug", "pj_building_id", "pj_level_id", "pj_module_type_id",
-     "pj_name_id", "pj_character_id"];
+     "pj_name_id", "pj_character_id", "owner_id"];
     protected $primaryKey = 'id';
     protected $table = 'pj_staircases';
 
@@ -19,6 +19,7 @@ class Pj_staircase extends ModelExtended
         'getPjName' => ['belongsTo', Term::class, 'pj_name_id'],
         'getPjCharacter' => ['belongsTo', Term::class, 'pj_character_id'],
         "getProdOrders" => ['morphMany', Prod_order::class, 'meta', 'meta_type', 'meta_id'],
+        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getPjBuilding()
@@ -49,6 +50,11 @@ class Pj_staircase extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getPjCharacter()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getOwnerId()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

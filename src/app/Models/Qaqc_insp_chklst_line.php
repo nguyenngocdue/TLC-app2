@@ -9,7 +9,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
     protected $fillable = [
         "id", "name", "description", "control_type_id", "value", "value_on_hold", "value_comment",
         "qaqc_insp_chklst_run_id", "qaqc_insp_group_id",
-        "qaqc_insp_control_value_id", "qaqc_insp_control_group_id",
+        "qaqc_insp_control_value_id", "qaqc_insp_control_group_id", "owner_id"
     ];
     protected $table = "qaqc_insp_chklst_lines";
 
@@ -20,6 +20,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "getControlValue" => ["belongsTo", Qaqc_insp_control_value::class, "qaqc_insp_control_value_id"],
         "getControlType" => ["belongsTo", Control_type::class, "control_type_id"],
         "insp_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "getOwnerId" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public $oracyParams = [
@@ -61,6 +62,13 @@ class Qaqc_insp_chklst_line extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
+    public function getOwnerId()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    
     public function getManyLineParams()
     {
         return [

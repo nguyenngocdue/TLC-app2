@@ -16,11 +16,11 @@ class Comment extends ModelExtended
 
     public $eloquentParams = [
         "commentable" => ['morphTo', Comment::class, 'commentable_type', 'commentable_id'],
-        "user" => ['belongsTo', User::class, 'owner_id'],
+        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
         "getCategory" => ['belongsTo', Field::class, 'category'],
     ];
 
-    public function user()
+    public function getOwnerId()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

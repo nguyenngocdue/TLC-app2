@@ -67,7 +67,7 @@
         "name": "_assignee_to",
         "column_name": "assignee_to",
         "column_type": "bigint",
-        "label": "Assignee",
+        "label": "Approver",
         "control": "dropdown",
         "align": "",
         "col_span": "",

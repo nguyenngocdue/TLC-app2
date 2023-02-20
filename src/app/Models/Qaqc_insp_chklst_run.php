@@ -11,11 +11,11 @@ class Qaqc_insp_chklst_run extends ModelExtended
     public $nameless = true;
 
     public $eloquentParams = [
-        "user" => ["belongsTo", User::class, "owner_id"],
+        "getOwnerId" => ["belongsTo", User::class, "owner_id"],
         "getLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_run_id"],
         "getSheet" => ["belongsTo", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_sht_id"],
     ];
-    public function user()
+    public function getOwnerId()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
