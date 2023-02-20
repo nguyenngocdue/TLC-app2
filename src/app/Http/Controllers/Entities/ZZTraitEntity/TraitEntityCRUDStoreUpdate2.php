@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Models\Attachment;
+use App\Utils\Constant;
 use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -33,11 +35,16 @@ trait TraitEntityCRUDStoreUpdate2
 			'oracy_prop' => [],
 			'eloquent_prop' => [],
 			'attachment' => [],
+			'datetime' => [],
 			'editable_table' => [],
 		];
+		$dateTimeControls = ['picker_time', 'picker_date', 'picker_month', 'picker_week', 'picker_quarter', 'picker_year', 'picker_datetime'];
 		foreach ($this->superProps['props'] as $prop) {
 			if ($prop['hidden_edit']) continue;
-			if ($prop['control'] === 'attachment') {
+			if (in_array($prop['control'], $dateTimeControls)) {
+				$column_type = 'datetime';
+				$control_sub_type = $prop['control'];
+			} elseif ($prop['control'] === 'attachment') {
 				$column_type = 'attachment';
 			} elseif ($prop['control'] === 'relationship_renderer') {
 				$column_type = 'editable_table';
@@ -57,6 +64,10 @@ trait TraitEntityCRUDStoreUpdate2
 
 			if ($prop['control'] === 'relationship_renderer') {
 				$result[$column_type][$table01Index] = $prop['name'];
+			} elseif (in_array($prop['control'], $dateTimeControls)) {
+				// if (!in_array($prop['name'], ['created_at', 'updated_at'])) {
+				$result[$column_type][$control_sub_type][] = $prop['name'];
+				// }
 			} else {
 				$result[$column_type][] = $prop['name'];
 			}
@@ -189,6 +200,41 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 	}
 
+	private function prepareForValidation2(Request &$request, $props)
+	{
+		$oldRequest = $request->input();
+		$dateTimeProps = $props['datetime'];
+		// dd($dateTimeProps);
+		foreach ($dateTimeProps as $subType => $controls) {
+			foreach ($controls as $control) {
+				$propName = substr($control, 1); //Remove first "_"
+				$value = $oldRequest[$propName];
+				// dump($subType, $value);
+				$format = "";
+				switch ($subType) {
+					case "picker_datetime":
+						$value = date(Constant::FORMAT_DATETIME_MYSQL, strtotime($value));
+						// $format = Constant::FORMAT_DATETIME_ASIAN;
+						// $result =  Carbon::createFromFormat($format, $value)->format(Constant::FORMAT_DATETIME_MYSQL);
+						$oldRequest[$propName] = $value;
+						break;
+					case "picker_date":
+					case "picker_month":
+					case "picker_week":
+					case "picker_quarter":
+					case "picker_year":
+						$format = Constant::FORMAT_DATE_ASIAN;
+						$result =  Carbon::createFromFormat($format, $value)->format(Constant::FORMAT_DATE_MYSQL);
+						$oldRequest[$propName] = $result;
+						// dump($propName . " " . $result);
+						break;
+				}
+			}
+		}
+		$request->replace($oldRequest);
+		// dd($request);
+	}
+
 	public function store(Request $request)
 	{
 		try {
@@ -201,6 +247,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
 		try {
+			$this->prepareForValidation2($request, $props);
 			$request->validate($this->getValidationRules());
 		} catch (ValidationException $e) {
 			if ($request['tableNames'] == 'fakeRequest') {
@@ -252,6 +299,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
 		try {
+			$this->prepareForValidation2($request, $props);
 			$request->validate($this->getValidationRules());
 		} catch (ValidationException $e) {
 			if ($request['tableNames'] == 'fakeRequest') {

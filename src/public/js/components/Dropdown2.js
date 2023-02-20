@@ -240,7 +240,7 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
             let item = dataSource[i]
             selectedStr = (dataSource.length === 1) ? 'selected' : (selected.includes(item.id) ? "selected" : "")
             option = "<option value='" + item.id + "' title='" + item.description + "' " + selectedStr + " >"
-            option += item.name
+            option += item.name || "Nameless #" + item.id
             option += "</option>"
             options.push(option)
         }

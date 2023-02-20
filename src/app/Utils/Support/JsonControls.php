@@ -46,6 +46,11 @@ class JsonControls
         return self::getAll()['controls'];
     }
 
+    public static function getDateTimeControls()
+    {
+        return self::getAll()['datetime_controls'];
+    }
+
     public static function getHeadings()
     {
         return self::getAll()['headings'];

@@ -11,6 +11,8 @@ class Text extends Component
     public function __construct(
         private $name,
         private $value,
+        private $placeholder = 'Type here...',
+        private $icon = null,
     ) {
     }
 
@@ -18,7 +20,8 @@ class Text extends Component
     {
         $name = $this->name;
         $value = $this->value;
-        $placeholder = "Type here...";
-        return view('components.controls.text')->with(compact('name', 'value', 'placeholder'));
+        $placeholder = $this->placeholder;
+        $icon = $this->icon;
+        return view('components.controls.text')->with(compact('name', 'value', 'placeholder', 'icon'));
     }
 }

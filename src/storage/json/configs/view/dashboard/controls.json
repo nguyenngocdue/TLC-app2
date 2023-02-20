@@ -35,6 +35,15 @@
         "textarea",
         "thumbnail"
     ],
+    "datetime_controls": [
+        "picker_time",
+        "picker_date",
+        "picker_month",
+        "picker_week",
+        "picker_quarter",
+        "picker_year",
+        "picker_datetime"
+    ],
     "renderer_view_all": [
         "",
         "avatar_name",

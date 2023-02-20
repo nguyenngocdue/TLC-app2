@@ -108,18 +108,23 @@ $id = $action === "edit" ? $values->id : "";
                                 {{-- #{{$columnName}} --}}
                             </strong>
                             @switch ($control)
-                            @case($timeControls[0])
-                            <x-controls.time-picker2 :name="$columnName" :value="$value"/>
-                            <x-controls.date-time name={{$columnName}} value={{$value}} control="{{$control}}" />
-                            @break
-                            @case($timeControls[1])
-                            @case($timeControls[2])
-                            @case($timeControls[3])
-                            @case($timeControls[4])
-                            @case($timeControls[5])
-                            @case($timeControls[6])
+                            @case('picker_time')
+                            <x-controls.text name={{$columnName}} value={{$value}} placeholder="HH:MM:SS" icon="fa-duotone fa-clock" />
+                            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                            {{-- <x-controls.time-picker2 :name="$columnName" :value="$value"/> --}}
                             {{-- <x-controls.date-time name={{$columnName}} value={{$value}} control="{{$control}}" /> --}}
-                            <x-controls.date-picker3 />
+                            @break
+                            @case('picker_datetime')
+                            <x-controls.text name={{$columnName}} value={{$value}} placeholder="DD/MM/YYYY HH:MM:SS" icon="fa-solid fa-calendar-day" />
+                            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                            @break
+                            @case('picker_date')
+                            @case('picker_week')
+                            @case('picker_month')
+                            @case('picker_quarter')
+                            @case('picker_year')
+                            {{-- <x-controls.date-time name={{$columnName}} value={{$value}} control="{{$control}}" /> --}}
+                            <x-controls.date-picker3 name={{$columnName}} value={{$value}} dateTimeType="{{$control}}"/>
                             <x-controls.localtime id={{$id}} control={{$control}} colName={{$columnName}} modelPath={{$modelPath}} :timeControls="$timeControls" label={{$label}} />
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break

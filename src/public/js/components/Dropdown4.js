@@ -216,7 +216,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
         selectedStr = (dataSource.length === 1) ? 'selected' : (dumbIncludes(item.id, selected) ? "selected" : "")
         // console.log("During making option list", item.id, item.name, "================================", selectedStr)
         option = "<option value='" + item.id + "' title='" + item.description + "' " + selectedStr + " >"
-        option += item.name
+        option += item.name || "Nameless #" + item.id
         option += "</option>"
         options.push(option)
     }
