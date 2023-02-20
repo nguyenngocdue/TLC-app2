@@ -1,6 +1,16 @@
 let runOnce = {}
 //Similar to includes, this will be checking both numbers and strings
-const dumbIncludes = (item, array) => { for (let i = 0; i < array.length; i++) { if (array[i] == item) return true } return false }
+const dumbIncludes = (item, array) => {
+    if (Array.isArray(array)) {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] == item) return true
+        }
+        return false
+    } else {
+        return item == array
+        // console.log("IMPLEMENT ME", item, array)
+    }
+}
 const makeIdFrom = (table01Name, fieldName, rowIndex) => table01Name + "[" + fieldName + "][" + rowIndex + "]"
 
 const getFieldNameInTable01FormatJS = (name, table01Name) => {
@@ -37,6 +47,7 @@ const filterDropdown4 = (id, dataSource, table01Name) => {
             dataSource = dataSource.filter((row) => value == row[column])
         }
     }
+    // console.log("Filtered")
     return dataSource
 }
 
@@ -115,7 +126,7 @@ const onChangeDropdown4Assign = (listener, table01Name, rowIndex) => {
     }
 }
 const onChangeDropdown4Dot = (listener, table01Name, rowIndex) => {
-    const debugListener = true
+    // const debugListener = true
     if (debugListener) console.log("Dot", listener)
     const selectedObject = onChangeGetSelectedObject4(listener, table01Name, rowIndex)
 
@@ -159,8 +170,8 @@ const onChangeDropdown4DateOffset = (listener, table01Name, rowIndex) => {
 }
 
 const onChangeDropdown4 = (name, lineType, table01Name, rowIndex) => {
-    console.log("onChangeDropdown4", name, lineType, table01Name, rowIndex)
-    console.log("listenersOfDropdown4s", listenersOfDropdown4s)
+    // console.log("onChangeDropdown4", name, lineType, table01Name, rowIndex)
+    // console.log("listenersOfDropdown4s", listenersOfDropdown4s)
     const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
     for (let i = 0; i < listenersOfDropdown4.length; i++) {
         let listener = listenersOfDropdown4[i]
@@ -203,6 +214,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
     for (let i = 0; i < dataSource.length; i++) {
         let item = dataSource[i]
         selectedStr = (dataSource.length === 1) ? 'selected' : (dumbIncludes(item.id, selected) ? "selected" : "")
+        // console.log("During making option list", item.id, item.name, "================================", selectedStr)
         option = "<option value='" + item.id + "' title='" + item.description + "' " + selectedStr + " >"
         option += item.name
         option += "</option>"
@@ -217,7 +229,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
         // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
         , templateResult: select2FormatState
     });
-
+    // getEById(id).trigger("change")
 }
 
 const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table }) => {

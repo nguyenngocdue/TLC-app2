@@ -59,7 +59,7 @@ class Table extends Component
       'headerRendered' => $this->makeThHeader($columns, $this->dataHeader),
       'headerTop' => $this->headerTop,
       'columnsRendered' => $this->getColumnRendered($columns),
-      'tr_td' => $this->makeTrTd($columns, $dataSource, $this->tableDebug),
+      'tr_td' => $this->makeTrTd($columns, $dataSource, $this->tableDebug, $this->tableName),
       'showing' => $hasPaging ? $dataSource->appends($this->request->toArray())->links('dashboards.pagination.showing') : "",
       'pagination' => $hasPaging ? $dataSource->links('dashboards.pagination.pagination') : "",
       'header' => $this->header,

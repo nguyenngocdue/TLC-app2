@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->unsignedBigInteger('qaqc_insp_chklst_id');
             $table->unsignedBigInteger('qaqc_insp_tmpl_sht_id');
-
+            $table->unsignedBigInteger('owner_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });

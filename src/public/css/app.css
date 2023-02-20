@@ -973,6 +973,9 @@ video {
 .w-32 {
   width: 8rem;
 }
+.w-16 {
+  width: 4rem;
+}
 .w-auto {
   width: auto;
 }
@@ -1023,12 +1026,6 @@ video {
 }
 .w-\[1000px\] {
   width: 1000px;
-}
-.w-14 {
-  width: 3.5rem;
-}
-.w-16 {
-  width: 4rem;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1265,6 +1262,9 @@ video {
 }
 .overflow-hidden {
   overflow: hidden;
+}
+.overflow-scroll {
+  overflow: scroll;
 }
 .overflow-x-auto {
   overflow-x: auto;

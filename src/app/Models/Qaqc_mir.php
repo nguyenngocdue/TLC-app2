@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Qaqc_mir extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "slug", "project_id", "sub_project_id",
-     "prod_discipline_id", "priority_id", "due_date", "assignee_to", "inspected_by"];
+     "prod_discipline_id", "priority_id", "due_date", "assignee_to", "inspected_by", "owner_id"];
      protected $primaryKey = 'id';
     protected $table = "qaqc_mirs";
 
@@ -33,6 +33,7 @@ class Qaqc_mir extends ModelExtended
         "attachment_mir_material_inspection_photo" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_mir_pdf_attached" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
+        "getOwnerId" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public $oracyParams = [
@@ -163,5 +164,11 @@ class Qaqc_mir extends ModelExtended
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2],$p[3],$p[4]);
+    }
+
+    public function getOwnerId()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

@@ -7,6 +7,7 @@
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -17,11 +18,12 @@
         "control_name": "Users_Count",
         "renderer_view_all": "count",
         "renderer_view_all_param": "",
-        "renderer_edit": "many_icons",
-        "renderer_edit_param": "getManyIconParams",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": "2"
+        "radio_checkbox_colspan": ""
     },
     "_Users_Count2": {
         "name": "_Users_Count2",
@@ -31,6 +33,7 @@
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

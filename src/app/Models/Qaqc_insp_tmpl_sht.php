@@ -6,12 +6,13 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_insp_tmpl_sht extends ModelExtended
 {
-    protected $fillable = ["id", "name", "description", "slug", "qaqc_insp_tmpl_id"];
+    protected $fillable = ["id", "name", "description", "slug", "qaqc_insp_tmpl_id", "owner_id"];
     protected $table = "qaqc_insp_tmpl_shts";
 
     public $eloquentParams = [
         "getTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, 'qaqc_insp_tmpl_id'],
         "getLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_tmpl_sht_id"],
+        "getOwnerId" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public function getLines()
@@ -26,6 +27,12 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getOwnerId()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    
     public function getManyLineParams()
     {
         return [

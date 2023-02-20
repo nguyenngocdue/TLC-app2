@@ -10,9 +10,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
+    "_hr_overtime_request_id": {
+        "name": "_hr_overtime_request_id",
+        "column_name": "hr_overtime_request_id",
         "label": "",
         "default_value": "",
         "validation": "required",
@@ -21,20 +21,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "All_SlugifyByName",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_hse_incident_report_id": {
-        "name": "_hse_incident_report_id",
-        "column_name": "hse_incident_report_id",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "label": "",
         "default_value": "",
         "validation": "required",
@@ -43,9 +32,42 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_priority_id": {
-        "name": "_priority_id",
-        "column_name": "priority_id",
+    "_employeeid": {
+        "name": "_employeeid",
+        "column_name": "employeeid",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_position_rendered": {
+        "name": "_position_rendered",
+        "column_name": "position_rendered",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_ot_date": {
+        "name": "_ot_date",
+        "column_name": "ot_date",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_from_time": {
+        "name": "_from_time",
+        "column_name": "from_time",
         "label": "",
         "default_value": "",
         "validation": "required",
@@ -54,9 +76,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_work_area_id": {
-        "name": "_work_area_id",
-        "column_name": "work_area_id",
+    "_to_time": {
+        "name": "_to_time",
+        "column_name": "to_time",
         "label": "",
         "default_value": "",
         "validation": "required",
@@ -65,9 +87,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
+    "_break_time": {
+        "name": "_break_time",
+        "column_name": "break_time",
         "label": "",
         "default_value": "",
         "validation": "",
@@ -76,9 +98,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_assignee": {
-        "name": "_assignee",
-        "column_name": "assignee",
+    "_total_time": {
+        "name": "_total_time",
+        "column_name": "total_time",
         "label": "",
         "default_value": "",
         "validation": "",
@@ -87,56 +109,34 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getDefMonitors()": {
-        "name": "_getDefMonitors()",
-        "column_name": "getDefMonitors()",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_opened_date": {
-        "name": "_opened_date",
-        "column_name": "opened_date",
-        "label": "",
-        "default_value": "",
-        "validation": "date",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_closed_date": {
-        "name": "_closed_date",
-        "column_name": "closed_date",
-        "label": "",
-        "default_value": "",
-        "validation": "date|nullable",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "label": "",
-        "default_value": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_unsafe_action_type_id": {
-        "name": "_unsafe_action_type_id",
-        "column_name": "unsafe_action_type_id",
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
         "label": "",
         "default_value": "",
         "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_work_mode_id": {
+        "name": "_work_mode_id",
+        "column_name": "work_mode_id",
+        "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
+        "label": "",
+        "default_value": "",
+        "validation": "",
         "formula": "",
         "label_extra": "",
         "placeholder": "",

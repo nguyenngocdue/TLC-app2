@@ -10,7 +10,7 @@ class Qaqc_ncr extends ModelExtended
         "id", "name", "description", "slug", "project_id", "sub_project_id",
         "parent_id", "parent_type", "prod_routing_id", "prod_order_id", "prod_discipline_1_id",
         "prod_discipline_id", "prod_discipline_2_id", "user_team_id", "priority_id", "due_date",
-        "assignee_to", "cause_analysis"
+        "assignee_to", "cause_analysis", "owner_id"
     ];
     protected $primaryKey = 'id';
     protected $table = "qaqc_ncrs";
@@ -31,6 +31,7 @@ class Qaqc_ncr extends ModelExtended
         "getDefectDisposition" => ["belongsTo", Term::class, 'defect_disposition_id'],
         "getParent" => ['morphTo', Qaqc_ncr::class, 'parent_type', 'parent_id'],
         'getQaqcCars' => ['hasMany', Qaqc_car::class, 'qaqc_ncr_id'],
+        "getOwnerId" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public $oracyParams = [
@@ -48,74 +49,94 @@ class Qaqc_ncr extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    
     public function getSubProject()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getProdRouting()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getProdOrder()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getDiscipline()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getDiscipline1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getDiscipline2()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getUserTeam()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getPriority()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getAssigneeTo()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getInterSubcon()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getDefectRootCause()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getDefectDisposition()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getQaqcCars()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
     public function getDefMonitors()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    public function getOwnerId()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

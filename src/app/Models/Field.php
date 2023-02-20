@@ -10,4 +10,5 @@ class Field extends ModelExtended
     protected $table = "fields";
 
     public $eloquentParams = [];
+
 }

@@ -67,7 +67,7 @@ trait TableTraitRows
         return $tds;
     }
 
-    private function makeTrTd($columns, $dataSource, $tableDebug)
+    private function makeTrTd($columns, $dataSource, $tableDebug, $table01Name)
     {
         $trs = [];
         $colspan = sizeof($columns);
@@ -75,7 +75,7 @@ trait TableTraitRows
         $items = $this->smartGetItems($dataSource);
 
         if (is_null($dataSource)) return "<tr><td colspan=$colspan>" . Blade::render("<x-feedback.alert type='error' message='DataSource attribute is missing.' />") . "</td></tr>";
-        if (empty($dataSource) || (is_object($dataSource) && empty($items))) return "<tr><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
+        if (empty($dataSource) || (is_object($dataSource) && empty($items))) return "<tr id='{$table01Name}_emptiness'><td colspan=$colspan>" . Blade::render("<x-renderer.emptiness/>") . "</td></tr>";
 
         // $columnCount = count($columns);
         $start = (is_object($dataSource) && method_exists($dataSource, 'items')) ?  $dataSource->perPage() * ($dataSource->currentPage() - 1) : 0;

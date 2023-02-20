@@ -35,7 +35,7 @@ $id = $action === "edit" ? $values->id : "";
             @endphp
             @foreach($props as $key => $val)
             @php
-            // if ($action === "create" && $val['control'] === 'relationship_renderer') continue;
+            if ($action === "create" && $val['control'] === 'relationship_renderer') continue;
             $defaultValue = $defaultValues[$key] ?? [];
 
             $label = $val['label'];
@@ -170,8 +170,12 @@ $id = $action === "edit" ? $values->id : "";
                             @break
 
                             @case('relationship_renderer')
+                            {{-- @if($action == 'create') --}}
+                            {{-- <x-feedback.alert type="info" title="Info" message="Please create this document to show this control." /> --}}
+                            {{-- @else --}}
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
+                            {{-- @endif --}}
                             @break
 
                             @case('parent_type')

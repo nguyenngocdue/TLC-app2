@@ -36,7 +36,8 @@
 <input class="bg-gray-200" readonly name="tableNames[{{$table01Name}}]" value="{{$tableName}}" type="{{$tableDebugTextHidden}}" />
 {{-- This is for when clicked "Add a new item", if the column is parent_id and parent_type and might be invisible, --}}
 {{-- its value will get from here --}}
-<input class="bg-gray-200" readonly id="entityParentId" value="{{$entityId}}" type="{{$tableDebugTextHidden}}" />
-<input class="bg-gray-200" readonly id="entityParentType" value="{{$entityType}}" type="{{$tableDebugTextHidden}}" />
+<input class="bg-gray-200" readonly title="entityParentId" id="entityParentId" value="{{$entityId}}" type="{{$tableDebugTextHidden}}" />
+<input class="bg-gray-200" readonly title="entityParentType" id="entityParentType" value="{{$entityType}}" type="{{$tableDebugTextHidden}}" />
+<input class="bg-gray-200" readonly title="userId" id="userId" value="{{$userId}}" type="{{$tableDebugTextHidden}}" />
 
 {{-- @endif --}}
