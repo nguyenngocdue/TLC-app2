@@ -196,7 +196,14 @@ const addANewLine = (params) => {
     const { columns, showNo, showNoR, tableDebugJs } = tableObject[tableId]
     // console.log("ADD LINE TO", params, tableDebugJs)
     const table = document.getElementById(tableId)
+    const allRows = getAllRows(tableId)
+    if (allRows.length == 1) {
+        const tr = allRows[0]
+        const name = tableId + '_emptiness'
+        if (tr.id === name) $('#' + name).remove()
+    }
     const newRowIndex = getAllRows(tableId).length
+
     const row = table.insertRow()
     row.classList.add('bg-lime-200')
     let fingerPrint = ''
@@ -205,6 +212,7 @@ const addANewLine = (params) => {
         noCell.classList = "px-1 py-1 dark:border-gray-600 border-r text-center";
         noCell.innerHTML = "New"
     }
+    const toDoAfterAdded = []
     columns.forEach((column) => {
         if (column['hidden'] == true) return
         let renderer = 'newCell'
@@ -229,7 +237,7 @@ const addANewLine = (params) => {
             renderer = ""
                 + fingerPrintInput
                 + destroyInput
-                + '<div class="whitespace-nowrap flex">'
+                + '<div class="whitespace-nowrap flex justify-center">'
                 + btnUp
                 + btnDown
                 + btnDuplicate
@@ -303,18 +311,12 @@ const addANewLine = (params) => {
                     selected = valuesOfOrigin[column['dataIndex']]
                 }
                 // console.log("reloading", valuesOfOrigin, selected)
-                reloadDataToDropdown4(id, k[column['table']], tableId, selected)
+                toDoAfterAdded.push({ id, dataSource: k[column['table']], tableId, selected })
                 break
             case 'dropdown': //<<status
                 if (valuesOfOrigin != undefined) {
                     let selected = valuesOfOrigin[column['dataIndex']]
                     console.log("Setting status", id, 'to', selected)
-                    // document.getElementById(id).value = selected
-                    // getEById(id).select2({
-                    //     placeholder: "Please select"
-                    //     // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
-                    //     , templateResult: select2FormatState
-                    // });
                     getEById(id).val('in_progress')
                 }
                 break
@@ -333,12 +335,18 @@ const addANewLine = (params) => {
                 }
                 if (valuesOfOrigin != undefined) {
                     getEById(id).val(valuesOfOrigin[column['dataIndex']])
+                    break
                 }
-                break
 
-            // console.log("Add new line >  column", column['dataIndex'], column)
+            // console.log("Added new column", column['dataIndex'])
         }
     })
+    // console.log(toDoAfterAdded)
+    for (let i = 0; i < toDoAfterAdded.length; i++) {
+        const { id, dataSource, tableId, selected } = toDoAfterAdded[i]
+        reloadDataToDropdown4(id, dataSource, tableId, selected)
+        getEById(id).trigger("change")
+    }
     // console.log(showNoR)
     if (showNoR) { //<< Ignore No. column
         const noCell = row.insertCell()

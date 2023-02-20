@@ -126,7 +126,7 @@ const onChangeDropdown4Assign = (listener, table01Name, rowIndex) => {
     }
 }
 const onChangeDropdown4Dot = (listener, table01Name, rowIndex) => {
-    const debugListener = true
+    // const debugListener = true
     if (debugListener) console.log("Dot", listener)
     const selectedObject = onChangeGetSelectedObject4(listener, table01Name, rowIndex)
 
@@ -170,8 +170,8 @@ const onChangeDropdown4DateOffset = (listener, table01Name, rowIndex) => {
 }
 
 const onChangeDropdown4 = (name, lineType, table01Name, rowIndex) => {
-    console.log("onChangeDropdown4", name, lineType, table01Name, rowIndex)
-    console.log("listenersOfDropdown4s", listenersOfDropdown4s)
+    // console.log("onChangeDropdown4", name, lineType, table01Name, rowIndex)
+    // console.log("listenersOfDropdown4s", listenersOfDropdown4s)
     const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
     for (let i = 0; i < listenersOfDropdown4.length; i++) {
         let listener = listenersOfDropdown4[i]
@@ -229,7 +229,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
         // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
         , templateResult: select2FormatState
     });
-
+    // getEById(id).trigger("change")
 }
 
 const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table }) => {
