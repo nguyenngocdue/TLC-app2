@@ -3,7 +3,7 @@
         "name": "_user",
         "relationship": "belongsTo",
         "control_name": "head_of_department",
-        "renderer_view_all": "avatar_name",
+        "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",

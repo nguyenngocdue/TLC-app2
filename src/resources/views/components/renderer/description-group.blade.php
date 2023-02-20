@@ -44,11 +44,7 @@
             $colSpan = $prop['col_span'];
             $columnName = $prop['column_name'];
             @endphp
-            @if ($prop['control'] === 'relationship_renderer')
-                <span>Relationship_renderer</span>
-            @else
-                <x-renderer.description :prop="$prop" :dataSource="$dataSource" />
-            @endif
+                <x-renderer.description type={{$type}} modelPath={{$modelPath}} :prop="$prop" :dataSource="$dataSource" />
             @endforeach
         @endif
     </div>
@@ -57,11 +53,7 @@
     <div class='grid grid-cols-12'>
         @if ($propTree['children'])
             @foreach($propTree['children'] as $prop)
-            @if ($prop['control'] === 'relationship_renderer')
-            <span>Relationship_renderer</span>
-            @else
-            <x-renderer.description :prop="$prop" :dataSource="$dataSource" />
-            @endif
+            <x-renderer.description type={{$type}} modelPath={{$modelPath}} :prop="$prop" :dataSource="$dataSource" />
             @endforeach
         @else
             

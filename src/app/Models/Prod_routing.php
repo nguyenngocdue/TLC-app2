@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Prod_routing extends ModelExtended
 {
     public $timestamps = true;
-    protected $fillable = ["name", "description", "slug"];
+    protected $fillable = ["name", "description", "slug", "owner_id"];
     protected $primaryKey = 'id';
     protected $table = 'prod_routings';
 
@@ -16,6 +16,7 @@ class Prod_routing extends ModelExtended
         "prodOrders" => ['hasMany', Prod_order::class],
         "prodSequences" => ["hasManyThrough", Prod_sequence::class, Prod_order::class],
         "prodRoutingDetails" => ['hasMany', Prod_routing_detail::class, 'prod_routing_id'],
+        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function prodRoutingLinks()
@@ -42,6 +43,12 @@ class Prod_routing extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getOwnerId()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    
     public function getManyLineParams()
     {
         return [

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id");
             $table->string("employeeid");
             $table->string("position_rendered");
-            $table->date("ot_date");
+            $table->date("ot_date")->nullable();
             $table->time("from_time");
             $table->time("to_time");
             $table->double("break_time");

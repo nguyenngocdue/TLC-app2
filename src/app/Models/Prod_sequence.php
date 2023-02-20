@@ -12,7 +12,7 @@ class Prod_sequence extends ModelExtended
         "prod_order_id", "prod_routing_link_id",
         "status", "total_hours", "total_man_hours",
         "expected_start_at", "expected_finish_at",
-        "priority",
+        "priority", "owner_id"
     ];
     protected $primaryKey = 'id';
     protected $table = 'prod_sequences';
@@ -23,6 +23,7 @@ class Prod_sequence extends ModelExtended
         "prodRuns" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
         "prodRoutingLinks" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
         "prodRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
+        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function prodOrder()
@@ -32,6 +33,12 @@ class Prod_sequence extends ModelExtended
     }
 
     public function prodRoutingLinks()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getOwnerId()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

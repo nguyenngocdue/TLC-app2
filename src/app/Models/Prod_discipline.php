@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Prod_discipline extends ModelExtended
 {
-    public $fillable = ["id", "name", "description", "slug", "def_assignee"];
+    public $fillable = ["id", "name", "description", "slug", "def_assignee", "owner_id"];
     protected $primaryKey = 'id';
     protected $table = 'prod_disciplines';
     public $timestamps = true;
@@ -17,6 +17,7 @@ class Prod_discipline extends ModelExtended
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
         "getErpRoutingLinks" => ['hasMany', Erp_routing_link::class, 'prod_discipline_id'],
         "getWirDescriptions" => ['hasMany', Wir_description::class, 'prod_discipline_id'],
+        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public $oracyParams = [
@@ -49,6 +50,11 @@ class Prod_discipline extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getWirDescriptions()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getOwnerId()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

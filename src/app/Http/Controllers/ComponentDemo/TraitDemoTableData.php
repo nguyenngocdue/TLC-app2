@@ -18,7 +18,7 @@ trait TraitDemoTableData
             [
                 "title" => 'Client',
                 "dataIndex" => "client",
-                "renderer" => "avatar-user",
+                "renderer" => "avatar-item",
                 "attributes" => ['title' => 'client', 'description' => 'amount', 'avatar' => 'avatar', 'gray' => 'disabled']
             ],
             [

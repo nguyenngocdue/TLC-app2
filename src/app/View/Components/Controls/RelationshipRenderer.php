@@ -67,7 +67,6 @@ class RelationshipRenderer extends Component
             $perPage = $showAll ? 10000 : 10;
             $result = $relation->getQuery();
             if ($isOrderable) $result = $result->orderBy('order_no');
-
             $result = $result->paginate($perPage, ['*'], $colName);
             return $result;
         }
@@ -107,6 +106,7 @@ class RelationshipRenderer extends Component
 
         $row = $modelPath::find($id);
         $isOrderable = $row ? $this->isTableOrderable($row, $colName,) : [];
+        dump($isOrderable);
         $dataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
         switch ($renderer_edit) {
             case "many_icons":

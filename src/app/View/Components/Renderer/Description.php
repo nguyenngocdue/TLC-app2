@@ -14,6 +14,8 @@ class Description extends Component
     public function __construct(
         private $prop,
         private $dataSource,
+        private $modelPath,
+        private $type,
     ) {
         //
     }
@@ -29,6 +31,7 @@ class Description extends Component
         $prop = $this->prop;
         $columnName = $prop['column_name'];
         $content = $dataSource[$columnName];
+        $id = $dataSource['id'];
         $label = $prop['label'];
         $control = $prop['control'];
         $colSpan = $prop['col_span'];
@@ -38,6 +41,10 @@ class Description extends Component
             'colSpan' => $colSpan,
             'content' => $content,
             'control' => $control,
+            'columnName' => $columnName,
+            'id' => $id,
+            'type' => $this->type,
+            'modelPath' => $this->modelPath,
             'relationships' => $relationships
         ]);
     }

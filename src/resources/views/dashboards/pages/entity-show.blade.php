@@ -9,7 +9,7 @@
     <div class="w-[1000px] min-h-[1300px] items-center border bg-white box-border">
         <x-renderer.letter-head showId={{$showId}} type={{$type}} />
             @foreach($propsTree as $propTree)
-                <x-renderer.description-group :propTree="$propTree" :dataSource="$dataSource" />
+                <x-renderer.description-group type={{$type}} modelPath={{$modelPath}} :propTree="$propTree" :dataSource="$dataSource" />
             @endforeach
 
     </div>

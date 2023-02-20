@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityExportCSV;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntitySuperPropsFilter;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Models\Field;
@@ -22,6 +23,7 @@ use Illuminate\Support\Str;
 abstract class AbstractViewAllController extends Controller
 {
     use TraitEntitySuperPropsFilter;
+    use TraitEntityExportCSV;
     protected $type = "";
     protected $typeModel = '';
     protected $permissionMiddleware;
@@ -101,7 +103,7 @@ abstract class AbstractViewAllController extends Controller
         return false;
     }
 
-    private function getDataSource($pageLimit, $advanceFilters = null)
+    private function getDataSource($advanceFilters = null)
     {
         $propsFilters = $this->advanceFilter();
         $advanceFilters = $this->distributeFilter($advanceFilters, $propsFilters);
@@ -175,7 +177,7 @@ abstract class AbstractViewAllController extends Controller
                     });
                 }
                 return $q->orderBy('updated_at', 'desc');
-            })->paginate($pageLimit);
+            });
         return $result;
     }
 
@@ -263,6 +265,13 @@ abstract class AbstractViewAllController extends Controller
         // Log::info($result);
         return $result;
     }
+    private function getColumnsExportCSV($type)
+    {
+        $props = SuperProps::getFor($type)['props'];
+        return $props = array_filter($props, function ($prop) {
+            return !$prop['hidden_view_all'] && $prop['column_type'] !== 'static';
+        });
+    }
 
     private function attachRendererIntoColumn(&$columns)
     {
@@ -335,8 +344,7 @@ abstract class AbstractViewAllController extends Controller
         // Log::info($columnLimit);
         $type = Str::plural($this->type);
         $columns = $this->getColumns($type, $columnLimit);
-        $dataSource = $this->getDataSource($pageLimit, $advanceFilters);
-
+        $dataSource = $this->getDataSource($advanceFilters)->paginate($pageLimit);
         $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
         $this->attachRendererIntoColumn($columns);
         $searchableArray = App::make($this->typeModel)->toSearchableArray();
@@ -351,6 +359,17 @@ abstract class AbstractViewAllController extends Controller
         ]);
     }
 
+    public function exportCSV()
+    {
+        [, $columnLimit, $advanceFilters] = $this->getUserSettings();
+        // Log::info($columnLimit);
+        $type = Str::plural($this->type);
+        $columns = $this->getColumnsExportCSV($type);
+        $dataSource = $this->getDataSource($advanceFilters)->get();
+        dump($columns);
+        dump($dataSource);
+        $this->makeTrTd($columns, $dataSource, null);
+    }
     public function destroy($id)
     {
         try {

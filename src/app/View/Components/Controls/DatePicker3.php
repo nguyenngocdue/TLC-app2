@@ -20,6 +20,23 @@ class DatePicker3 extends Component
     ) {
         //
     }
+    private function getPlaceholder($control)
+    {
+        switch ($control) {
+            case "picker_datetime":
+                return "DD/MM/YYYY HH:MM:SS";
+            case "picker_time":
+                return "HH:MM:SS";
+            case "picker_date":
+            case "picker_month":
+            case "picker_week":
+            case "picker_quarter":
+            case "picker_year":
+                return "DD/MM/YYYY";
+            default:
+                return "??? $control ???";
+        }
+    }
 
     /**
      * Get the view / contents that represent the component.

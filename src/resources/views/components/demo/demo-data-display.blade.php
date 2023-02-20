@@ -1,21 +1,16 @@
 <div class="grid gap-6 mb-8 md:grid-cols-2 ">
-    <x-renderer.card title="AvatarName">
+    <x-renderer.card title="AvatarUser">
         <div class="grid gap-6 mb-8 md:grid-cols-2 ">
             <div>
-                AvatarName with Attributes
-                <x-renderer.avatar-item title="Fortune Truong" description="Software Engineer" href="http://www.google.com"></x-renderer.avatar-item>
+                AvatarItem with Attributes
+                <x-renderer.avatar-item title="Fortune Truong" description="Software Engineer" href="http://www.google.com" avatar="/images/helen.jpeg"></x-renderer.avatar-item>
                 <br />
-                AvatarName with Slot
-                <x-renderer.avatar-user >{
-                    "title":"Thuc Vo",
-                    "description":"Software Tester",
-                    "href":"http://www.google.com",
-                    "gray":"true"
-                }</x-renderer.avatar-user>
+                AvatarUser with Slot
+                <x-renderer.avatar-user >{!!Auth::user()!!}</x-renderer.avatar-user>
             </div>
             <div>
-                AvatarName with gray= { { true } }
-                <x-renderer.avatar-item title="Fortune Truong" description="Software Engineer" href="http://www.google.com" gray='true'></x-renderer.avatar-item>
+                AvatarItem with gray= { { true } }
+                <x-renderer.avatar-item title="Fortune Truong" description="Software Engineer" href="http://www.google.com" avatar="/images/hans.jpeg" gray='true'></x-renderer.avatar-item>
                 <br />
                 Empty attribute
                 <x-renderer.avatar-item></x-renderer.avatar-item>
@@ -23,16 +18,16 @@
             </div>
         </div>
     </x-renderer.card>
-    {{-- <x-renderer.card title="Descriptions">
-        <x-renderer.description-group control='111' :prop="['a','b']" :items="['a','b']" />
+    <x-renderer.card title="Descriptions">
+        {{-- <x-renderer.description-group control='111' :prop="['a','b']" :items="['a','b']" />
         <x-feedback.alert message="TODO: HERE WITHOUT DB INVOLVED" type="error" />
         <br />
         <div class="grid grid-cols-12">
             <x-renderer.description label="Name" colName="hello" colSpan=12 :contents="123" />
             <x-renderer.description label="Age" colName="hello" colSpan=6 :contents="60" />
             <x-renderer.description label="Status" colName="hello" colSpan=6 :contents="456" />
-        </div>
-    </x-renderer.card> --}}
+        </div> --}}
+    </x-renderer.card>
     <x-renderer.card title="Tables 1">
         <x-renderer.card title="Table with Data and maxH= { { false } }">
             In dataSource: rowDescription="This is an example of a rowDescription"

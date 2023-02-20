@@ -8,7 +8,7 @@ class Prod_routing_detail extends ModelExtended
 {
     protected $fillable = [
         "id", "prod_routing_id", "prod_routing_link_id", "erp_routing_link_id",
-        "wir_description_id", "target_hours", "target_man_hours", "priority",
+        "wir_description_id", "target_hours", "target_man_hours", "priority", "owner_id"
     ];
     protected $table = "prod_routing_details";
     public $nameless = true;
@@ -18,6 +18,7 @@ class Prod_routing_detail extends ModelExtended
         "prodRoutingLink" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
         "erpRoutingLink" => ['belongsTo', Erp_routing_link::class, 'erp_routing_link_id'],
         "wirDescription" => ['belongsTo', Wir_description::class, 'wir_description_id'],
+        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function prodRouting()
@@ -44,6 +45,12 @@ class Prod_routing_detail extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getOwnerId()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    
     public function getManyLineParams()
     {
         return [
