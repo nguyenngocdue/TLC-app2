@@ -4,6 +4,7 @@ namespace App\View\Components\Controls;
 
 use App\Helpers\Helper;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnEditable;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnRO;
@@ -137,8 +138,10 @@ class RelationshipRenderer extends Component
                     'table01ROName' => $this->table01Name . "RO",
                     'tableDebug' => $this->tableDebug ? true : false,
                     'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
+
                     'entityId' => CurrentRoute::getEntityId($this->type),
                     'entityType' => Str::modelPathFrom($this->type),
+                    'userId' => CurrentUser::get()->id,
                 ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";

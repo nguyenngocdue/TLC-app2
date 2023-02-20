@@ -15,7 +15,7 @@
         "column_name": "workplace_id",
         "label": "",
         "default_value": "",
-        "validation": "",
+        "validation": "required",
         "formula": "",
         "label_extra": "",
         "placeholder": "",

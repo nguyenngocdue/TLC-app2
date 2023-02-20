@@ -155,18 +155,11 @@ const duplicateEditableTable = (params) => {
     // console.log("Duplicate", tableId, fingerPrint, newFingerPrint, columns)
     for (let i = 0; i < columns.length; i++) {
         const column = columns[i]
-        // const { renderer } = column
-        // console.log(column['dataIndex'], renderer)
-        // const radio_or_chk_or_dropdown = ['radio', 'checkbox', 'dropdown4'].includes(renderer)
         //Do not duplicate those columns
         if (['action', 'id', 'order_no'].includes(column.dataIndex)) continue
-        // const sourceRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
-        // console.log("Duplicating", fingerPrint, sourceRowIndex)
-        // const value = getCellValueByName(tableId, column['dataIndex'], sourceRowIndex)
-        const value = getValueById(tableId + "[" + column['dataIndex'] + "][" + nameIndex + "]")
+        const name = tableId + "[" + column['dataIndex'] + "][" + nameIndex + "]"
+        const value = getValueById(name)
         valuesOfOrigin[column['dataIndex']] = value
-        // const valueStr = (Array.isArray(value)) ? value.join(",") : value
-        // valuesOfOrigin[column['dataIndex']] = (radio_or_chk_or_dropdown) ? "[" + valueStr + "]" : valueStr
     }
     // console.log(valuesOfOrigin)
     addANewLine({ tableId: control.value, valuesOfOrigin })
@@ -255,7 +248,7 @@ const addANewLine = (params) => {
                     break
                 case 'dropdown':
                     if (column['dataIndex'] === 'status') {
-                        renderer = "<select name='" + id + "' class='" + column['classList'] + "'>"
+                        renderer = "<select id='" + id + "' name='" + id + "' class='" + column['classList'] + "'>"
                         column['cbbDataSource'].forEach((status) => {
                             statusObject = column['cbbDataSourceObject'][status]
                             renderer += "<option value='" + status + "'>" + statusObject.title + "</option>"
@@ -300,36 +293,51 @@ const addANewLine = (params) => {
         const showNameStr = tableDebugJs ? id : ""
         cell.innerHTML = showNameStr + renderer
 
-        let selected = '', parentType = '', selectedStr = ''
+        switch (column['renderer']) {
+            case 'dropdown4':
+                let selected
+                if (valuesOfOrigin == undefined) {
+                    if (column['value_as_parent_id'] == true) selected = $('#entityParentId').val()
+                    if (column['value_as_user_id'] == true) selected = $('#userId').val()
+                } else {
+                    selected = valuesOfOrigin[column['dataIndex']]
+                }
+                // console.log("reloading", valuesOfOrigin, selected)
+                reloadDataToDropdown4(id, k[column['table']], tableId, selected)
+                break
+            case 'dropdown': //<<status
+                if (valuesOfOrigin != undefined) {
+                    let selected = valuesOfOrigin[column['dataIndex']]
+                    console.log("Setting status", id, 'to', selected)
+                    // document.getElementById(id).value = selected
+                    // getEById(id).select2({
+                    //     placeholder: "Please select"
+                    //     // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
+                    //     , templateResult: select2FormatState
+                    // });
+                    getEById(id).val('in_progress')
+                }
+                break
+            default:
+                if (column['value_as_parent_id']) {
+                    getEById(id).val($('#entityParentId').val())
+                    break
+                }
+                if (column['value_as_user_id']) {
+                    getEById(id).val($('#userId').val())
+                    break
+                }
+                if (column['dataIndex'] === 'order_no') {
+                    getEById(id).val(orderNoValue)
+                    break
+                }
+                if (valuesOfOrigin != undefined) {
+                    getEById(id).val(valuesOfOrigin[column['dataIndex']])
+                }
+                break
 
-        if (column['value_as_parent_id'] == true) {
-            selected = $('#entityParentId').val()
-            selectedStr = "[" + selected + "]"
-            // console.log("Setting parent id for the new line", selectedStr)
+            // console.log("Add new line >  column", column['dataIndex'], column)
         }
-        if (column['value_as_parent_type'] == true) {
-            parentType = $('#entityParentType').val()
-            // console.log("Setting parent id for the new line", selectedStr)
-            cell.firstChild.value = parentType
-        }
-
-        selectedStr = (valuesOfOrigin == undefined) ? selectedStr : valuesOfOrigin[column['dataIndex']]
-        if (column['renderer'] === 'dropdown4') {
-            // console.log("reloading", valuesOfOrigin, selectedStr)
-            reloadDataToDropdown4(id, k[column['table']], tableId, selectedStr)
-        } else {
-            if (column['value_as_parent_id']) {
-                const parentId = $('#entityParentId').val() //selected // or selectedStr ???
-                getEById(id).val(parentId)
-            } else if (column['dataIndex'] === 'order_no') {
-                getEById(id).val(orderNoValue)
-            } else {
-                getEById(id).val(selectedStr)
-            }
-        }
-
-
-        // console.log("Add new line >  column", column['dataIndex'], column)
     })
     // console.log(showNoR)
     if (showNoR) { //<< Ignore No. column
