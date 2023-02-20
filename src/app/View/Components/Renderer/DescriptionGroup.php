@@ -13,7 +13,9 @@ class DescriptionGroup extends Component
      */
     public function __construct(
         private $propTree,
-        private $dataSource
+        private $dataSource,
+        private $type,
+        private $modelPath,
     ) {
         //
     }
@@ -26,11 +28,11 @@ class DescriptionGroup extends Component
     public function render()
     {
 
-        $propTree = $this->propTree;
-        $dataSource = $this->dataSource;
         return view('components.renderer.description-group', [
-            'propTree' => $propTree,
-            'dataSource' => $dataSource
+            'propTree' => $this->propTree,
+            'dataSource' => $this->dataSource,
+            'type' => $this->type,
+            'modelPath' => $this->modelPath
         ]);
     }
 }

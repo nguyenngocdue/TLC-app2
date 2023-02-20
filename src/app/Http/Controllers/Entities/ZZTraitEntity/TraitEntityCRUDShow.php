@@ -59,6 +59,7 @@ trait TraitEntityCRUDShow
 			'dataSource' => $dataSource,
 			'type' => $this->type,
 			'showId' => $id,
+			'modelPath' => $this->data,
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
 		]);
 	}

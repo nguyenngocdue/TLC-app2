@@ -109,7 +109,7 @@ $id = $action === "edit" ? $values->id : "";
                             </strong>
                             @switch ($control)
                             @case($timeControls[0])
-                            <x-controls.time-picker2 :name="$columnName" :value="$value"/>
+                            {{-- <x-controls.time-picker2 :name="$columnName" :value="$value"/> --}}
                             <x-controls.date-time name={{$columnName}} value={{$value}} control="{{$control}}" />
                             @break
                             @case($timeControls[1])
@@ -119,7 +119,7 @@ $id = $action === "edit" ? $values->id : "";
                             @case($timeControls[5])
                             @case($timeControls[6])
                             {{-- <x-controls.date-time name={{$columnName}} value={{$value}} control="{{$control}}" /> --}}
-                            <x-controls.date-picker3 />
+                            <x-controls.date-picker3 name={{$columnName}} value={{$value}} control="{{$control}}" />
                             <x-controls.localtime id={{$id}} control={{$control}} colName={{$columnName}} modelPath={{$modelPath}} :timeControls="$timeControls" label={{$label}} />
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break

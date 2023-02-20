@@ -32,6 +32,7 @@ Route::group([
             $ucfirstName = Str::ucfirst($singular);
             $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
             Route::resource("{$entityName}", "{$path}ViewAllController")->only('index');
+            Route::get("{$entityName}_ep", ["{$path}ViewAllController", "exportCSV"])->name("{$entityName}_ep.exportCSV");
             Route::resource("{$entityName}", "{$path}EntityCRUDController")->only('create', 'store', 'edit', 'update', 'show', 'destroy');
         }
         // Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
