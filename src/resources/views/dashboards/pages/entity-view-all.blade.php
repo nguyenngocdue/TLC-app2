@@ -9,7 +9,7 @@
         <x-form.search route="{{ route($type . '.index') }}" title="{{$searchTitle}}" />
         <div class="w-full lg:w-1/3 p-2 lg:p-0 items-center">
                 <x-renderer.button title="Export this list to CSV">
-                    <a href="{{route($type.'_ep.exportCSV')}}">
+                    <a href="{{route($type.'_ep.exportCSV')}}" target="_blank">
                         <i class="fa-duotone fa-file-csv"></i>
                     </a>
                 </x-renderer.button>

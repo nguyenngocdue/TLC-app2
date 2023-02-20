@@ -3,91 +3,109 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\Json\SuperProps;
+use DateTime;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
 
 trait TraitEntityExportCSV
 {
-    private $tableName = 'table01';
-    private function makeTd($columns, $dataLine, $no, $dataLineIndex, $tableDebug)
+    private function makeRowData($columns, $dataLine, $no)
     {
-        $tds = [];
-        foreach (array_values($columns) as $index => $column) {
-            $renderer = $column['renderer'] ?? false;
-            $columnName = $column['column_name'] ?? $column['dataIndex'];
-            $name = isset($column['dataIndex']) ? "{$this->tableName}[$columnName][$dataLineIndex]" : "";
+        foreach (array_values($columns) as $column) {
+            switch ($column['control']) {
+                case 'no.':
+                    $result[] = $no;
+                    break;
+                case 'id':
+                case "number":
+                case "text":
+                case "textarea":
+                case "status":
+                case "hyperlink":
+                    $result[] = $dataLine->{$column['column_name']};
+                    break;
+                case 'toggle':
+                    $result[] = $dataLine->{$column['column_name']} == '1' ? 'Yes' : 'No';
+                    break;
+                case "picker_datetime":
+                case "picker_date":
+                case "picker_time":
+                case "picker_month":
+                case "picker_week":
+                case "picker_quarter":
+                case "picker_year":
+                case "picker_datetime":
+                    $dataTime = new DateTime($dataLine->{$column['column_name']});
+                    $result[] = ($dataTime->getTimestamp() / 86400) + 25569;
+                    break;
+                case "thumbnail":
+                    break;
+                case "dropdown":
+                case "radio":
+                    $relationships = $column['relationships'];
+                    if ($relationships['relationship'] == 'belongsTo') {
+                        $result[] = $dataLine
+                            ->{$relationships['control_name_function']}->name;
+                    }
+                    break;
+                case "dropdown_multi":
+                case "checkbox":
+                    $fn = str_replace('()', '', $column['column_name']);
+                    $data = $dataLine->$fn() ?? [];
+                    $dataOracy = [];
+                    foreach ($data as $value) {
+                        $dataOracy[] = $value['name'];
+                    }
+                    $result[] = join(',', $dataOracy);
+                    break;
 
-            switch ($renderer) {
-                case  'no.':
-                    $rendered = $no;
+                case "parent_link":
+                    $relationships = $column['relationships'];
+                    $model = $dataLine
+                        ->{$relationships['control_name_function']};
+                    $href = '';
+                    if (isset($model)) {
+                        $table = $model->getTable();
+                        $id = $model['id'];
+                        $href = route($table . ".show", $id);
+                    }
+                    $result[] = $href;
+                    break;
+                case "attachment":
+                    $relationships = $column['relationships'];
+                    $collection = $dataLine
+                        ->{$relationships['control_name_function']};
+                    $dataAttachment = [];
+                    $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+                    foreach ($collection as $value) {
+                        $dataAttachment[] = $path . $value['url_media'];
+                    }
+                    $result[] = join(',', $dataAttachment);
+                    break;
+                case "relationship_renderer":
+                    switch ($column['relationships']['relationship']) {
+                        case 'hasMany':
+                        case 'morphMany':
+                            $result[] = count($dataLine[$column['column_name']]);
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 default:
-                    $dataIndex = $column['dataIndex'];
-                    if (str_contains($dataIndex, "()")) {
-                        $fn = substr($dataIndex, 0, strlen($dataIndex) - strlen("()"));
-                        $rawData = $dataLine->$fn() ?? ""; //this is to execute the getCheckedByField function
-                    } else {
-                        $rawData = $dataLine[$dataIndex] ?? "";
-                    }
-                    $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
                     break;
             }
         }
-        return $tds;
+        return $result;
     }
-    private function makeNoColumn2($columns)
+    private function makeNoColumn($columns)
     {
-        $columnNo = ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center', "width" => '10'];
-        if (true) array_unshift($columns, $columnNo);
+        $columnNo = [
+            "label" => "No.",
+            "control" => "no.",
+        ];
+        array_unshift($columns, $columnNo);
         return $columns;
-    }
-
-    private function makeTrTd($columns, $dataSource, $tableDebug)
-    {
-        $columns = $this->makeNoColumn2($columns);
-        $trs = [];
-        $items = $dataSource;
-        $lastIndex = "anything";
-        foreach ($dataSource as $no => $dataLine) {
-            $tds = $this->makeTd($columns, $dataLine, $no + 1, $no, $tableDebug);
-            $tr =  join("", $tds);
-            $trs[] = $tr;
-
-            if (isset($dataLine['rowDescription'])) {
-                dump($dataLine['rowDescription']);
-            }
-        }
-        $tr_td = join("", $trs);
-        // dump($tr_td);
-        return $tr_td;
-    }
-    private function getAttributeRendered($column, $dataLine)
-    {
-        $attributes = $column['attributes'] ?? [];
-        array_walk($attributes, fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "_no_$value");
-        $attributeRendered = trim(join(" ", $attributes));
-        return $attributeRendered;
-    }
-
-    private function getPropertyRendered($column)
-    {
-        $properties = $column['properties'] ?? [];
-        array_walk($properties, fn (&$value, $key) => $value = "$key='$value'");
-        $propertyRendered = trim(join(" ", $properties));
-        return $propertyRendered;
-    }
-    private function getRendererParams($column)
-    {
-        $str = (is_array($column['rendererParam'])) ? json_encode($column['rendererParam']) : $column['rendererParam'];
-        return "rendererParam='$str'";
-    }
-
-    private function applyRender($name, $renderer, $rawData, $column, $dataLine, $index)
-    {
-        // dump(SuperProps::getFor($this->type));
-        // dump($column);
-        // dump($dataLine);
-        // dump($rawData);
     }
 }

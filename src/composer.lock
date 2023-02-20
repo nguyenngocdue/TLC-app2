@@ -114,16 +114,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.258.12",
+            "version": "3.259.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "43ee875456822ee7772cfc51da57bfa558ccb30c"
+                "reference": "096711644ebe5c956a97ef449fa2cb3b66443c25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/43ee875456822ee7772cfc51da57bfa558ccb30c",
-                "reference": "43ee875456822ee7772cfc51da57bfa558ccb30c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/096711644ebe5c956a97ef449fa2cb3b66443c25",
+                "reference": "096711644ebe5c956a97ef449fa2cb3b66443c25",
                 "shasum": ""
             },
             "require": {
@@ -202,9 +202,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.258.12"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.259.0"
             },
-            "time": "2023-02-16T19:21:12+00:00"
+            "time": "2023-02-17T19:21:38+00:00"
         },
         {
             "name": "brian2694/laravel-toastr",
@@ -2878,16 +2878,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.12.2",
+            "version": "3.12.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "f6377c709d2275ed6feaf63e44be7a7162b0e77f"
+                "reference": "81e87e74dd5213795c7846d65089712d2dda90ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/f6377c709d2275ed6feaf63e44be7a7162b0e77f",
-                "reference": "f6377c709d2275ed6feaf63e44be7a7162b0e77f",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/81e87e74dd5213795c7846d65089712d2dda90ce",
+                "reference": "81e87e74dd5213795c7846d65089712d2dda90ce",
                 "shasum": ""
             },
             "require": {
@@ -2949,7 +2949,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.12.2"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.12.3"
             },
             "funding": [
                 {
@@ -2965,7 +2965,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-19T12:02:19+00:00"
+            "time": "2023-02-18T15:32:41+00:00"
         },
         {
             "name": "league/flysystem-aws-s3-v3",
@@ -7394,16 +7394,16 @@
         },
         {
             "name": "tightenco/collect",
-            "version": "v9.47.0",
+            "version": "v9.52.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tighten/collect.git",
-                "reference": "7bc3f863032e4458d798a4d2fa9379d32504aa97"
+                "reference": "d4772fe52bbc823d1d2e3d289d3f1ca8c0f3323b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tighten/collect/zipball/7bc3f863032e4458d798a4d2fa9379d32504aa97",
-                "reference": "7bc3f863032e4458d798a4d2fa9379d32504aa97",
+                "url": "https://api.github.com/repos/tighten/collect/zipball/d4772fe52bbc823d1d2e3d289d3f1ca8c0f3323b",
+                "reference": "d4772fe52bbc823d1d2e3d289d3f1ca8c0f3323b",
                 "shasum": ""
             },
             "require": {
@@ -7442,9 +7442,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tighten/collect/issues",
-                "source": "https://github.com/tighten/collect/tree/v9.47.0"
+                "source": "https://github.com/tighten/collect/tree/v9.52.0"
             },
-            "time": "2023-01-13T19:14:21+00:00"
+            "time": "2023-02-17T21:37:36+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
