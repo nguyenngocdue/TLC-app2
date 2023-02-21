@@ -217,6 +217,13 @@ const addANewLine = (params) => {
         if (column['hidden'] == true) return
         let renderer = 'newCell'
         let orderNoValue = 0
+        if (column['properties']) {
+            Object.keys(column['properties']).forEach((key) => {
+                column[key] = column['properties'][key]
+            })
+            delete column['properties']
+            // console.log(column)
+        }
 
         const id = tableId + "[" + column['dataIndex'] + "][" + newRowIndex + "]"
         if (column['dataIndex'] === 'action') {
@@ -286,7 +293,9 @@ const addANewLine = (params) => {
                     renderer = "<input id='" + id + "' name='" + id + "' class='" + column['classList'] + "' type=number step=any onChange='" + onChange + "' />";
                     break
                 case "text":
-                    renderer = "<input id='" + id + "' name='" + id + "' class='" + column['classList'] + "' />";
+                    // console.log(id, column, column['table01Name'])
+                    onChange = "onChangeDropdown4({name:\"" + id + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex:" + newRowIndex + "})"
+                    renderer = "<input id='" + id + "' name='" + id + "' class='" + column['classList'] + "' onChange='" + onChange + "'/>";
                     break
                 case "textarea":
                     renderer = "<textarea id='" + id + "' name='" + id + "' class='" + column['classList'] + "'></textarea>"
@@ -314,7 +323,7 @@ const addANewLine = (params) => {
                     selected = valuesOfOrigin[column['dataIndex']]
                 }
                 // console.log("reloading", valuesOfOrigin, selected)
-                toDoAfterAdded.push({ id, dataSource: k[column['table']], tableId, selected })
+                toDoAfterAdded.push({ id, dataSource: k[column['tableName']], tableId, selected })
                 break
             case 'dropdown': //<<status
                 if (valuesOfOrigin != undefined) {
@@ -345,6 +354,7 @@ const addANewLine = (params) => {
         }
     })
     // console.log(toDoAfterAdded)
+    //This is to make sure the Listen assign will assign to the existing column
     for (let i = 0; i < toDoAfterAdded.length; i++) {
         const { id, dataSource, tableId, selected } = toDoAfterAdded[i]
         reloadDataToDropdown4(id, dataSource, tableId, selected)

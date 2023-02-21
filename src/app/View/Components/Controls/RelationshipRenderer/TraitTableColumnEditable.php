@@ -74,6 +74,7 @@ trait TraitTableColumnEditable
                     $newColumn['renderer'] = 'text';
                     $newColumn['editable'] = true;
                     $newColumn['properties']['icon'] = 'fa-duotone fa-clock';
+                    $newColumn['properties']['placeholder'] = 'HH:MM';
                     break;
                     // case 'picker_date':
                     //     $newColumn['renderer'] = 'text';

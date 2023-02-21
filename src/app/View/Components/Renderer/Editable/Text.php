@@ -17,7 +17,6 @@ class Text extends Component
         private $placeholder = "",
         private $cell = null,
         private $onChange = null,
-        private $component = 'editable/text',
         private $table01Name = null,
         private $rowIndex = -1,
         private $icon = null,
@@ -44,10 +43,8 @@ class Text extends Component
         return view('components.renderer.editable.text', [
             'placeholder' => $this->placeholder,
             'name' => $this->name,
-            'type' => 'text',
             'cell' => $this->cell,
             'onChange' => $this->onChange,
-            'component' => 'editable/number',
             'rowIndex' => $this->rowIndex,
             'table01Name' => $this->table01Name,
             'icon' => $this->icon,

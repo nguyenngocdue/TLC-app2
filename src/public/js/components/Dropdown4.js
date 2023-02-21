@@ -209,7 +209,7 @@ const onChangeDropdown4Expression = (listener, table01Name, rowIndex) => {
 
 const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType }) => {
     // console.log("onChangeDropdown4", name, table01Name, rowIndex, lineType)
-    // console.log("listenersOfDropdown4s", listenersOfDropdown4s)
+    // console.log("listenersOfDropdown4s", listenersOfDropdown4s, table01Name)
     const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
     for (let i = 0; i < listenersOfDropdown4.length; i++) {
         let listener = listenersOfDropdown4[i]

@@ -31,12 +31,10 @@ class Number extends Component
     public function render()
     {
         if ($this->cell === 'DO_NOT_RENDER') return "";
-        return view('components.renderer.editable.text', [
+        return view('components.renderer.editable.number', [
             'placeholder' => $this->placeholder,
             'name' => $this->name,
-            'type' => 'number',
             'onChange' => $this->onChange,
-            'component' => 'editable/number',
             'rowIndex' => $this->rowIndex,
             'table01Name' => $this->table01Name,
             'icon' => $this->icon,

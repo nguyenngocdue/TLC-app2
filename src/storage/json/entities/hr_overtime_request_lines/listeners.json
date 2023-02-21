@@ -24,7 +24,7 @@
         "triggers": "from_time,to_time,break_time",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": "to_time - from_time - break_time"
+        "expression": "Math.round((to_time - from_time - break_time * 60) \/3600 * 100)\/100"
     },
     "_id": {
         "name": "_id",

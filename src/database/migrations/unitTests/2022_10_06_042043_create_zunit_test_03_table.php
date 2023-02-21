@@ -17,12 +17,12 @@ return new class extends Migration
         Schema::create('zunit_test_03s', function (Blueprint $table) {
             $table->id();
             $table->dateTime('datetime1')->nullable();
-            $table->dateTime('datetime2')->nullable();
-            $table->dateTime('datetime3')->nullable();
-            $table->dateTime('datetime4')->nullable();
-            $table->dateTime('datetime5')->nullable();
-            $table->dateTime('datetime6')->nullable();
-            $table->dateTime('datetime7')->nullable();
+            $table->time('datetime2')->nullable();
+            $table->date('datetime3')->nullable();
+            $table->date('datetime4')->nullable();
+            $table->date('datetime5')->nullable();
+            $table->date('datetime6')->nullable();
+            $table->date('datetime7')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
