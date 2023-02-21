@@ -2,7 +2,7 @@
     <div class='col-span-{{$colSpan}} grid gap-0'>
         <div class='grid grid-row-1'>
             <div class='grid grid-cols-12 text-right'>
-                {{-- <label class='p-2 border border-gray-600 bg-gray-50 h-full w-full flex text-base font-medium col-span-{{24/$colSpan}} items-center justify-end col-start-1'>{{$label}}</label> --}}
+                <label class='p-2 border border-gray-600 bg-gray-50 h-full w-full flex text-base font-medium col-span-{{24/$colSpan}} items-center justify-end col-start-1'>{{$label}}</label>
                 @php
                     // $value = $content->sortByDesc('created_at')->toArray();
                     $value = $content->toArray();

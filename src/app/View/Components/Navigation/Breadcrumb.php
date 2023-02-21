@@ -38,6 +38,7 @@ class Breadcrumb extends Component
             }
         }
         if ($action === 'show') {
+            $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
             $links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
         }
         if ($action === 'edit') {
@@ -51,6 +52,9 @@ class Breadcrumb extends Component
         if ($isAdmin) {
             $links[] = ['href' => route($singular . '_prp.index'), 'title' => 'Workflows', 'icon' => '<i class="fa-duotone fa-sitemap"></i>'];
         }
-        return view('components.navigation.breadcrumb')->with(compact('links'));
+        return view('components.navigation.breadcrumb', [
+            'links' => $links,
+            'type' => $type,
+        ]);
     }
 }

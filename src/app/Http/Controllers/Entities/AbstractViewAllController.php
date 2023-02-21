@@ -6,20 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityExportCSV;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntitySuperPropsFilter;
 use App\Http\Controllers\UpdateUserSettings;
-use App\Models\Field;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\Relationships;
-use App\Utils\Support\Json\SuperProps;
-use DateTime;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Route;
 
 abstract class AbstractViewAllController extends Controller
 {
@@ -351,13 +348,26 @@ abstract class AbstractViewAllController extends Controller
             'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
         ]);
     }
+    public function showQRCode()
+    {
+        [, $dataSource] = $this->normalizeDataSourceAndColumnsFollowAdvanceFilter();
+        $plural = Str::plural($this->type);
+        $routeName = "{$plural}.show";
+        $routeExits =  (Route::has($routeName));
+        $dataSource = array_map(function ($item) use ($routeExits, $routeName) {
+            return $routeExits ? route($routeName, $item['id']) : "#";
+        }, $dataSource->toArray());
+
+
+        return view('dashboards.pages.entity-show-qr', [
+            'dataSource' => $dataSource,
+            'type' => $this->type,
+            'topTitle' => CurrentRoute::getTitleOf($this->type),
+        ]);
+    }
     public function exportCSV()
     {
-        [,, $advanceFilters] = $this->getUserSettings();
-        $type = Str::plural($this->type);
-        $columns = $this->getColumnsExportCSV($type);
-        $columns = $this->makeNoColumn($columns);
-        $dataSource = $this->getDataSource($advanceFilters)->get();
+        [$columns, $dataSource] = $this->normalizeDataSourceAndColumnsFollowAdvanceFilter();
         $rows = [];
         foreach ($dataSource as $no => $dataLine) {
             $rows[] = $this->makeRowData($columns, $dataLine, $no + 1);
@@ -395,5 +405,14 @@ abstract class AbstractViewAllController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['message' => $th], 404);
         }
+    }
+    private function normalizeDataSourceAndColumnsFollowAdvanceFilter()
+    {
+        [,, $advanceFilters] = $this->getUserSettings();
+        $type = Str::plural($this->type);
+        $columns = $this->getColumnsExportCSV($type);
+        $columns = $this->makeNoColumn($columns);
+        $dataSource = $this->getDataSource($advanceFilters)->get();
+        return [$columns, $dataSource];
     }
 }
