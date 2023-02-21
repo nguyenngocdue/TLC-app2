@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntitySuperPropsFilter;
 use App\Models\User;
-use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;

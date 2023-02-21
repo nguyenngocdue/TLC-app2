@@ -14,7 +14,9 @@
                     </a>
                 </x-renderer.button>
                 <x-renderer.button title="Print this list QR Code"><i class="fa-duotone fa-qrcode"></i></x-renderer.button>
-                <x-renderer.button title="Screen Settings"><i class="fa-duotone fa-gear"></i></x-renderer.button>
+                <x-renderer.button title="Screen Settings" click="toggleModalSetting('modal-setting-id')" keydown="toggleModalSetting('modal-setting-id')" accesskey="s">
+                    <i class="fa-duotone fa-gear"></i>
+                </x-renderer.button>
         </div>
         <x-form.per-page type="{{$type}}" route="{{ route('updateUserSettings') }}" page-limit="{{$pageLimit}}" />
     </div>

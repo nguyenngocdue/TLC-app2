@@ -99,6 +99,13 @@ trait TraitEntityExportCSV
         }
         return $result;
     }
+    private function getColumnsExportCSV($type)
+    {
+        $props = SuperProps::getFor($type)['props'];
+        return $props = array_filter($props, function ($prop) {
+            return !$prop['hidden_view_all'] && $prop['column_type'] !== 'static' && $prop['control'] !== 'thumbnail';
+        });
+    }
     private function makeNoColumn($columns)
     {
         $columnNo = [

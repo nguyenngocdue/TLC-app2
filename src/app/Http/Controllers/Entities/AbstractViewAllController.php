@@ -266,13 +266,7 @@ abstract class AbstractViewAllController extends Controller
         // Log::info($result);
         return $result;
     }
-    private function getColumnsExportCSV($type)
-    {
-        $props = SuperProps::getFor($type)['props'];
-        return $props = array_filter($props, function ($prop) {
-            return !$prop['hidden_view_all'] && $prop['column_type'] !== 'static';
-        });
-    }
+
 
     private function attachRendererIntoColumn(&$columns)
     {

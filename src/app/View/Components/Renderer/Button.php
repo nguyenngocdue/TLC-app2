@@ -18,8 +18,11 @@ class Button extends Component
         private $outline = false,
         private $htmlType = 'button',
         private $value = '',
-        private $onclick = '',
+        private $onClick = '',
         private $title = '',
+        private $click = '',
+        private $keydown = '',
+        private $accesskey = '',
     ) {
         // dd($this->type);
     }
@@ -98,8 +101,11 @@ class Button extends Component
             'htmlType' => $this->htmlType,
             'value' => $this->value,
             'name' => $this->name,
-            'onClick' => $this->onclick,
+            'onClick' => $this->onClick,
             'title' => $this->title,
+            'click' => $this->click,
+            'keydown' => $this->keydown,
+            'accesskey' => $this->accesskey,
         ]);
     }
 }

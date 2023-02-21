@@ -2,8 +2,10 @@
 
 namespace App\View\Components;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityExportCSV;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\Props;
+use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
 class ModalSettings extends Component
@@ -26,14 +28,11 @@ class ModalSettings extends Component
      */
     public function render()
     {
-        $props = Props::getAllOf($this->type);
         // $path = storage_path() . "/json/entities/$this->type/props.json";
         // if (!file_exists($path)) return "File not found when rendering ModalSettings";
         // $props = json_decode(file_get_contents($path), true);
 
-        $allColumns = array_filter($props, fn ($prop) => isset($prop['hidden_view_all']) && $prop['hidden_view_all'] !== 'true');
-        $allColumns = array_filter($props, fn ($prop) => $prop['column_type'] !== 'static');
-
+        $allColumns = $this->getColumns($this->type);
         $settings = CurrentUser::getSettings();
 
         //If the setting array has not been set, it means this is the 1st time user accessing this module
@@ -46,5 +45,12 @@ class ModalSettings extends Component
             'allColumns' => $allColumns,
             'selected' => $selected,
         ]);
+    }
+    private function getColumns($type)
+    {
+        $props = SuperProps::getFor($type)['props'];
+        return $props = array_filter($props, function ($prop) {
+            return !$prop['hidden_view_all'] && $prop['column_type'] !== 'static';
+        });
     }
 }

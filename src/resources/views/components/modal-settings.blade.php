@@ -4,14 +4,14 @@
     <x-feedback.modal title="{{$title}}" type="{{$type}}">
         <div class='h-[calc(100%-112px)] overflow-y-scroll px-5 py-2'>
             <label class="py-5 text-lg font-semibold text-black dark:text-white">Columns</label>
-            <div class="grid grid-cols-4 gap-x-2">
+            <div class="grid grid-cols-3 gap-x-2">
                 <input type="hidden" name='_entity' value="{{ $type }}">
                 <input type="hidden" name='action' value="updateGear">
                 @forelse ($allColumns as $key => $value)
-                <div class="flex flex-col">
+                <div class="flex flex-col truncate">
                     <label class="text-black dark:text-white">
                         <input type="checkbox" class="checkbox-toggle" name="{{ $key }}" @checked(array_key_exists($key, $selected))>
-                        {{ Str::headline(trim($key, "_")) }}
+                        {{ $value['label'] }}
                     </label>
                 </div>
                 @empty

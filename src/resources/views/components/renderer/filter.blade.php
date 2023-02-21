@@ -28,7 +28,9 @@
                 <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                 @endif
                 {{-- Invisible anchor for scrolling when users click on validation fail message --}}
-                <label for={{$columnName}} class="text-gray-900 dark:text-gray-300 text-base font-normal" >{{$label}}</label>
+                <div class="truncate">
+                    <label for={{$columnName}} class="text-gray-900 dark:text-gray-300 text-base font-normal" >{{$label}}</label>
+                </div>
                 @switch ($control)
                 @case($timeControls[0])
                 <x-controls.time-picker2 :name="$columnName" :value="$valueControl"/>
