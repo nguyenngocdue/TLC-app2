@@ -11,7 +11,8 @@ class Dropdown extends Component
         private $dataSource = [],
         private $name = 'name',
         private $itemsSelected = [],
-        private $hiddenItems = []
+        private $hiddenItems = [],
+        private $isSetValue  = false
     ) {
     }
 
@@ -23,7 +24,8 @@ class Dropdown extends Component
             'dataSource' =>  $this->dataSource,
             'name' => $this->name,
             'itemsSelected' => $this->itemsSelected,
-            'hiddenItems' => $this->hiddenItems
+            'hiddenItems' => $this->hiddenItems,
+            'isSetValue' => $this->isSetValue
         ]);
     }
 }

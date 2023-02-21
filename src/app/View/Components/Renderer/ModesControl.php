@@ -14,7 +14,7 @@ class ModesControl extends Component
     public function __construct(
         private $itemsSelected = [],
         private $dataSource = [],
-        private $hiddenItems = []
+        private $hiddenItems = [],
     ) {
         //
     }
@@ -25,7 +25,7 @@ class ModesControl extends Component
         return view('components.renderer.modes-control', [
             'itemsSelected' => $this->itemsSelected,
             'dataSource' => $this->dataSource,
-            'hiddenItems' => $this->hiddenItems
+            'hiddenItems' => $this->hiddenItems,
         ]);
     }
 }

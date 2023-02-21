@@ -231,4 +231,8 @@ class Qaqc_insp_chklst extends Report_ParentController
         $runUpdated = '<td class="border pl-2" style="width:80px" > Date: ' . str_replace(" ", "</br> Time: ", $item['run_updated']) . "</td>";
         return $runUpdated;
     }
+
+    public function getDataForModeControl($dataSource = [])
+    {
+    }
 }

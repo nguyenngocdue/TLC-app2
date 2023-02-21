@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Models\Qaqc_insp_tmpl;
+use App\Models\Sub_project;
 use App\Utils\Support\Report;
 
 class Qaqc_insp_chklst_sht extends Report_ParentController
@@ -123,5 +125,12 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
             $dataSource[$key] = $value;
         }
         return $dataSource;
+    }
+
+    public function getDataForModeControl($dataSource = [])
+    {
+        $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
+        $insp_tmpls = ['qaqc_insp_tmpl_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
+        return array_merge($subProjects, $insp_tmpls);
     }
 }

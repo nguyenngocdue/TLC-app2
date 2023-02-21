@@ -18,6 +18,7 @@ abstract class Report_ParentController extends Controller
 {
     abstract protected function getSqlStr($urlParams);
     abstract protected function getTableColumns($dataSource = []);
+    abstract protected function getDataForModeControl($dataSource = []);
     public function getType()
     {
         return "dashboard";
@@ -29,7 +30,7 @@ abstract class Report_ParentController extends Controller
     {
         // dd($urlParams);
         $sqlStr = $this->getSqlStr($urlParams);
-        if (empty($urlParams)) return  "";
+        // if (empty($urlParams)) return  "";
 
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
@@ -39,13 +40,14 @@ abstract class Report_ParentController extends Controller
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
         }
-        // dump($sqlStr);
+        // dd($sqlStr);
         return $sqlStr;
     }
 
     protected function getDataSource($urlParams)
     {
-        if (!$this->getSql($urlParams)) return [];
+        // dd($urlParams);
+        // if (!$this->getSql($urlParams)) return [];
         $sql = $this->getSql($urlParams);
         $sqlData = DB::select($sql);
         $result = array_map(fn ($item) => (array) $item, $sqlData);
@@ -69,12 +71,18 @@ abstract class Report_ParentController extends Controller
 
     public function index(Request $request)
     {
+
         $urlParams = $request->all();
 
         $currentRoute = CurrentRoute::getTypeController();
         $viewName = strtolower(Str::singular($currentRoute));
 
         $dataSource = $this->getDataSource($urlParams);
+
+        $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
+
+        // dd($dataModeControl);
+
         $dataSource = $this->enrichDataSource($dataSource, $urlParams);
         // dump($dataSource);
         $columns = $this->getTableColumns($dataSource);
@@ -84,10 +92,12 @@ abstract class Report_ParentController extends Controller
         $insp_tmpls = Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray();
 
 
-        // dd($dataSource);
+
+        // dump($dataModeControl);
         $sheets = $this->getSheets($dataSource);
         // dump($sheets);
         // dd($sheets);
+        // dd($dataSource);
 
 
         $typeReport = CurrentRoute::getCurrentController();
@@ -100,7 +110,8 @@ abstract class Report_ParentController extends Controller
             'urlParams' => $urlParams,
             'entity' => $currentRoute,
             'typeReport' => $typeReport,
-            'sheets' => $sheets
+            'sheets' => $sheets,
+            'dataModeControl' => $dataModeControl
         ]);
     }
 }
