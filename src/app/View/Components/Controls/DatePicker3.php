@@ -24,9 +24,9 @@ class DatePicker3 extends Component
     {
         switch ($control) {
             case "picker_datetime":
-                return "DD/MM/YYYY HH:MM:SS";
+                return "DD/MM/YYYY HH:MM";
             case "picker_time":
-                return "HH:MM:SS";
+                return "HH:MM";
             case "picker_date":
             case "picker_month":
             case "picker_week":
@@ -52,6 +52,7 @@ class DatePicker3 extends Component
         return view(
             'components.controls.date-picker3',
             [
+                // 'placeholder' => $this->getPlaceholder($this->dateTimeType),
                 'name' => $this->name,
                 'value' => $this->value,
             ]

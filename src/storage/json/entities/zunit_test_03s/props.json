@@ -148,7 +148,7 @@
         "column_name": "updated_at",
         "column_type": "datetime",
         "label": "Updated At",
-        "control": "text",
+        "control": "picker_datetime",
         "align": "",
         "col_span": "12",
         "width": "",

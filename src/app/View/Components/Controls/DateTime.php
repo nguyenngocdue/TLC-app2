@@ -18,9 +18,9 @@ class DateTime extends Component
     {
         switch ($control) {
             case "picker_datetime":
-                return "YYYY-MM-DD HH:MM:SS";
+                return "YYYY-MM-DD HH:MM";
             case "picker_time":
-                return "HH:MM:SS";
+                return "HH:MM";
             case "picker_date":
             case "picker_month":
             case "picker_week":

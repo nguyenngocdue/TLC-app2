@@ -109,13 +109,13 @@ $id = $action === "edit" ? $values->id : "";
                             </strong>
                             @switch ($control)
                             @case('picker_time')
-                            <x-controls.text name={{$columnName}} value={{$value}} placeholder="HH:MM:SS" icon="fa-duotone fa-clock" />
+                            <x-controls.text name={{$columnName}} value={{$value}} placeholder="HH:MM" icon="fa-duotone fa-clock" />
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             {{-- <x-controls.time-picker2 :name="$columnName" :value="$value"/> --}}
                             {{-- <x-controls.date-time name={{$columnName}} value={{$value}} control="{{$control}}" /> --}}
                             @break
                             @case('picker_datetime')
-                            <x-controls.text name={{$columnName}} value={{$value}} placeholder="DD/MM/YYYY HH:MM:SS" icon="fa-solid fa-calendar-day" />
+                            <x-controls.text name={{$columnName}} value={{$value}} placeholder="DD/MM/YYYY HH:MM" icon="fa-solid fa-calendar-day" />
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
                             @case('picker_date')
