@@ -14,13 +14,16 @@
                 <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
             </button>
             <script>
-                const buttonExport = document.getElementById('export-pdf');
+                    const buttonExport = document.getElementById('export-pdf');
+                    
                     function generatePDF() {
                         // Choose the element that your content will be rendered to.
                         const element = document.getElementById('invoice');
+                        const date =  new Date;
+                        const dateFormat = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
                         const opt = {
                             margin:       0,
-                            filename:     '{{$type}}.pdf',
+                            filename:     `{{$type}}_${dateFormat}.pdf`,
                             image:        { type: 'jpeg', quality: 0.98 },
                             html2canvas:  { scale: 2},
                             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }

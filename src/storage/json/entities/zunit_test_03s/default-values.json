@@ -92,7 +92,7 @@
         "column_name": "created_at",
         "label": "",
         "default_value": "",
-        "validation": "date_format:Y-m-d H:i:s",
+        "validation": "",
         "formula": "",
         "label_extra": "",
         "placeholder": "",

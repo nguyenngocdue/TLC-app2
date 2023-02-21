@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Models\Attachment;
+use App\Utils\Constant;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\DefaultValues;
 use App\Utils\Support\Json\Props;
+use Carbon\Carbon;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -124,22 +126,45 @@ trait TraitEntityCRUDCreateEdit2
 		// dump($orphanAttachments);
 		$original = $this->data::findOrFail($id);
 		$values = $original->getOriginal();
-		// dump($values);
 		foreach ($props as $prop) {
 			$name = $prop['column_name'];
-			if ($prop['control'] === 'checkbox' || $prop['control'] === 'dropdown_multi') {
-				$field_name = substr($name, 0, strlen($name) - 2); //Remove parenthesis()
-				$values[$name] = json_encode($original->getCheckedByField($field_name)->pluck('id')->toArray());
-			}
-			if ($prop['control'] === 'attachment') {
-				$attachmentsOfThisItem = $original->{$name};
-				// dump($attachmentsOfThisItem);
-				if (isset($orphanAttachments[$name])) {
-					$attachmentsOfThisItem =  $attachmentsOfThisItem->merge($orphanAttachments[$name]);
-				}
-				$values[$name] =  $attachmentsOfThisItem;
-				// dump("Adding $name to value");
-				// dump($values);
+			switch ($prop['control']) {
+				case "picker_date":
+				case "picker_month":
+				case "picker_week":
+				case "picker_quarter":
+				case "picker_year":
+					if ($values[$name]) {
+						$format = Constant::FORMAT_DATE_MYSQL;
+						$values[$name] =  Carbon::createFromFormat($format, $values[$name])->format(Constant::FORMAT_DATE_ASIAN);
+					}
+					break;
+				case 'picker_datetime':
+					if ($values[$name]) {
+						$format = Constant::FORMAT_DATETIME_MYSQL;
+						$values[$name] =  Carbon::createFromFormat($format, $values[$name])->format(Constant::FORMAT_DATETIME_ASIAN);
+					}
+					break;
+				case "picker_time":
+					if ($values[$name]) {
+						$format = Constant::FORMAT_TIME_MYSQL;
+						$values[$name] =  Carbon::createFromFormat($format, $values[$name])->format(Constant::FORMAT_TIME_ASIAN);
+					}
+					break;
+				case 'checkbox':
+				case 'dropdown_multi':
+					$field_name = substr($name, 0, strlen($name) - 2); //Remove parenthesis()
+					$values[$name] = json_encode($original->getCheckedByField($field_name)->pluck('id')->toArray());
+					break;
+				case 'attachment':
+					$attachmentsOfThisItem = $original->{$name};
+					if (isset($orphanAttachments[$name])) {
+						$attachmentsOfThisItem =  $attachmentsOfThisItem->merge($orphanAttachments[$name]);
+					}
+					$values[$name] =  $attachmentsOfThisItem;
+					break;
+				default:
+					break;
 			}
 		}
 		// dump($values);

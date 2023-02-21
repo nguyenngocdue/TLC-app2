@@ -204,7 +204,6 @@ trait TraitEntityCRUDStoreUpdate2
 	{
 		$oldRequest = $request->input();
 		$dateTimeProps = $props['datetime'];
-		// dd($dateTimeProps);
 		foreach ($dateTimeProps as $subType => $controls) {
 			foreach ($controls as $control) {
 				$propName = substr($control, 1); //Remove first "_"
@@ -213,9 +212,10 @@ trait TraitEntityCRUDStoreUpdate2
 				$format = "";
 				switch ($subType) {
 					case "picker_datetime":
-						$value = date(Constant::FORMAT_DATETIME_MYSQL, strtotime($value));
-						// $format = Constant::FORMAT_DATETIME_ASIAN;
-						// $result =  Carbon::createFromFormat($format, $value)->format(Constant::FORMAT_DATETIME_MYSQL);
+						if ($value) {
+							$format = Constant::FORMAT_DATETIME_ASIAN;
+							$value =  Carbon::createFromFormat($format, $value)->format(Constant::FORMAT_DATETIME_MYSQL);
+						}
 						$oldRequest[$propName] = $value;
 						break;
 					case "picker_date":
@@ -223,21 +223,27 @@ trait TraitEntityCRUDStoreUpdate2
 					case "picker_week":
 					case "picker_quarter":
 					case "picker_year":
-						$format = Constant::FORMAT_DATE_ASIAN;
-						$result =  Carbon::createFromFormat($format, $value)->format(Constant::FORMAT_DATE_MYSQL);
-						$oldRequest[$propName] = $result;
-						// dump($propName . " " . $result);
+						if ($value) {
+							$format = Constant::FORMAT_DATE_ASIAN;
+							$value =  Carbon::createFromFormat($format, $value)->format(Constant::FORMAT_DATE_MYSQL);
+						}
+						$oldRequest[$propName] = $value;
+						break;
+					case "picker_time":
+						if ($value) {
+							$format = Constant::FORMAT_TIME_ASIAN;
+							$value =  Carbon::createFromFormat($format, $value)->format(Constant::FORMAT_TIME_MYSQL);
+						}
+						$oldRequest[$propName] = $value;
 						break;
 				}
 			}
 		}
 		$request->replace($oldRequest);
-		// dd($request);
 	}
 
 	public function store(Request $request)
 	{
-		// dd($request->input());
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
 			$props = $this->getProps1();
@@ -248,7 +254,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
 		try {
-			// $this->prepareForValidation2($request, $props);
+			$this->prepareForValidation2($request, $props);
 			$request->validate($this->getValidationRules());
 		} catch (ValidationException $e) {
 			if ($request['tableNames'] == 'fakeRequest') {
@@ -300,7 +306,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
 		try {
-			// $this->prepareForValidation2($request, $props);
+			$this->prepareForValidation2($request, $props);
 			$request->validate($this->getValidationRules());
 		} catch (ValidationException $e) {
 			if ($request['tableNames'] == 'fakeRequest') {
