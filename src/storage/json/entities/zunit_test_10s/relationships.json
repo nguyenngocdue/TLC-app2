@@ -115,5 +115,18 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
+    },
+    "_getUT9Expression": {
+        "name": "_getUT9Expression",
+        "relationship": "hasMany",
+        "control_name": "getUT9Expression",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParamsExpression",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }

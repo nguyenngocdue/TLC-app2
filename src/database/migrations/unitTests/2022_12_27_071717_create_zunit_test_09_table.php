@@ -18,8 +18,6 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
 
-            $table->unsignedBigInteger('department_1')->nullable();
-            $table->unsignedBigInteger('user_1')->nullable();
             $table->unsignedBigInteger('department_2')->nullable();
             $table->unsignedBigInteger('user_2')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
@@ -33,11 +31,18 @@ return new class extends Migration
             $table->unsignedBigInteger('prod_discipline_1')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
 
+            $table->unsignedBigInteger('department_1')->nullable();
+            $table->unsignedBigInteger('user_1')->nullable();
             $table->unsignedBigInteger('user_4')->nullable();
             $table->string('user_position_1')->nullable();
 
             $table->unsignedBigInteger('priority_id')->nullable();
             $table->dateTime('due_date')->nullable();
+
+            $table->integer('total')->nullable();
+            $table->integer('accepted')->nullable();
+            $table->integer('rejected')->nullable();
+            $table->integer('remaining')->nullable();
 
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedInteger('order_no')->nullable();

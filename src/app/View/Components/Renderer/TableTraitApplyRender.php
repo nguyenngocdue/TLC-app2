@@ -33,8 +33,8 @@ trait TableTraitApplyRender
 
     private function applyRender($name, $renderer, $rawData, $column, $dataLine, $index)
     {
-        $tableName = $this->tableName;
         $name = $name ? "name='$name'" : "";
+        $rowIndexRender = "rowIndex='$index'";
 
         $attributeRender = $this->getAttributeRendered($column, $dataLine);
         $propertyRender = $this->getPropertyRendered($column, $dataLine);
@@ -53,7 +53,7 @@ trait TableTraitApplyRender
 
         $attributes = "$name $attributeRender $propertyRender $typeRender $cbbDataSourceRender ";
         $attributes .= "$dataLineRender $columnRender $cellRender $rendererParam $formatterName $onChange";
-        $attributes .= "$sortByRender ";
+        $attributes .= "$sortByRender $rowIndexRender";
         $attributes = Str::of($attributes)->replaceMatches('/ {2,}/', ' '); //<< Remove double+ space
 
         $isEditable = (isset($column['editable']) && $column['editable'] == true);
@@ -61,19 +61,10 @@ trait TableTraitApplyRender
         $tagName = "x-renderer{$editableStr}.{$renderer}";
         if ($column['renderer'] === 'dropdown4') {
             $tagName = "x-controls.has-data-source.dropdown4";
-            $table01Name = $column['table01Name'];
             $multiple = (isset($column['multiple']) && $column['multiple'] == true) ? "multiple=true" : "";
-            $tableName = $column['table'];
-            $lineType = $column['lineType'];
             $rawData = ($rawData instanceof Collection) ? $rawData = $rawData->pluck('id') : [$rawData];
             $rawData = json_encode($rawData);
-            $attributes = "$name $typeRender $multiple
-                                selected='$rawData' 
-                                table01Name='$table01Name' 
-                                tableName='$tableName' 
-                                lineType='$lineType' 
-                                rowIndex='$index'
-                                ";
+            $attributes = "$name $typeRender $multiple $propertyRender $rowIndexRender selected='$rawData'";
             $output = "<$tagName $attributes></$tagName>";
             // Log::info($output);
 

@@ -17,7 +17,10 @@ class Text extends Component
         private $placeholder = "",
         private $cell = null,
         private $onChange = null,
-        // private $width = null,
+        private $component = 'editable/text',
+        private $table01Name = null,
+        private $rowIndex = -1,
+
     ) {
         //In case of listeners, the data was parsed in to array
         if (is_array($this->cell)) {
@@ -43,7 +46,9 @@ class Text extends Component
             'type' => 'text',
             'cell' => $this->cell,
             'onChange' => $this->onChange,
-            // 'width' => $this->width,
+            'component' => 'editable/number',
+            'rowIndex' => $this->rowIndex,
+            'table01Name' => $this->table01Name,
         ]);
     }
 }

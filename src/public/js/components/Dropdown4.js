@@ -169,7 +169,28 @@ const onChangeDropdown4DateOffset = (listener, table01Name, rowIndex) => {
     }
 }
 
-const onChangeDropdown4 = (name, lineType, table01Name, rowIndex) => {
+const onChangeDropdown4Expression = (listener, table01Name, rowIndex) => {
+    // const debugListener = true
+    if (debugListener) console.log("Expression", listener, table01Name, rowIndex)
+    const { expression, column_name } = listener
+    let expression1 = expression
+
+    const vars = getAllVariablesFromExpression(expression)
+    for (let i = 0; i < vars.length; i++) {
+        const varName = vars[i]
+        const varNameFull = makeIdFrom(table01Name, varName, rowIndex)
+        const varValue = getEById(varNameFull).val() || 0
+
+        if (debugListener) console.log(varName, "=", varValue)
+        expression1 = expression1.replace(varName, varValue)
+    }
+    const result = eval(expression1)
+    if (debugListener) console.log(column_name, '=', expression, result)
+    const id = makeIdFrom(table01Name, column_name, rowIndex)
+    getEById(id).val(result)
+}
+
+const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType }) => {
     // console.log("onChangeDropdown4", name, lineType, table01Name, rowIndex)
     // console.log("listenersOfDropdown4s", listenersOfDropdown4s)
     const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
@@ -192,6 +213,9 @@ const onChangeDropdown4 = (name, lineType, table01Name, rowIndex) => {
                     break
                 case "date_offset":
                     onChangeDropdown4DateOffset(listener, table01Name, rowIndex)
+                    break
+                case "expression":
+                    onChangeDropdown4Expression(listener, table01Name, rowIndex)
                     break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);

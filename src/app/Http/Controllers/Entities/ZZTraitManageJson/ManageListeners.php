@@ -30,13 +30,6 @@ class ManageListeners extends Manage_Parent
                 "renderer" => "read-only-text",
                 "editable" => true,
             ],
-            // [
-            //     "dataIndex" => "column_name",
-            //     "renderer" => "dropdown",
-            //     "editable" => true,
-            //     "cbbDataSource" => $columns,
-            //     "properties" => ["strFn" => 'same'],
-            // ],
             [
                 "dataIndex" => "listen_action",
                 "renderer" => "dropdown",
@@ -59,18 +52,15 @@ class ManageListeners extends Manage_Parent
                 "renderer" => "text",
                 "editable" => true,
             ],
+            [
+                "dataIndex" => "expression",
+                "renderer" => "textarea",
+                "editable" => true,
+            ],
 
         ];
     }
 
-    // protected function getDataSource()
-    // {
-    //     $dataSource = Listeners::getAllOf($this->type);
-    //     foreach (array_keys($dataSource) as $key) {
-    //         $this->attachActionButtons($dataSource, $key, ['right_by_name']);
-    //     }
-    //     return $dataSource;
-    // }
     protected function getDataSource()
     {
         $allProps = Props::getAllOf($this->type);
@@ -89,6 +79,12 @@ class ManageListeners extends Manage_Parent
                 $newItem['triggers'] = 'DO_NOT_RENDER';
                 $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
                 $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
+            }
+            if (isset($newItem['listen_action']) && $newItem['listen_action'] == 'expression') {
+                $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
+                $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
+            } else {
+                $newItem['expression'] = 'DO_NOT_RENDER';
             }
             $isStatic = (isset($prop['column_type']) && $prop['column_type'] === 'static');
             if (!$isStatic) $result[] = $newItem;

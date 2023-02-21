@@ -20,6 +20,7 @@ class Zunit_test_10 extends ModelExtended
         "getUT9Assign" => ['hasMany', Zunit_test_09::class, 'parent_id'],
         "getUT9Dot" => ['hasMany', Zunit_test_09::class, 'parent_id'],
         "getUT9DateOffset" => ['hasMany', Zunit_test_09::class, 'parent_id'],
+        "getUT9Expression" => ['hasMany', Zunit_test_09::class, 'parent_id'],
     ];
 
     public function getCorrectiveActions()
@@ -64,6 +65,11 @@ class Zunit_test_10 extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getUT9DateOffset()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getUT9Expression()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

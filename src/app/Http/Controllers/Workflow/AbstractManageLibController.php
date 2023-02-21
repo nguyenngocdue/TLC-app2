@@ -89,8 +89,8 @@ abstract class AbstractManageLibController extends Controller
 
     public function create(Request $request)
     {
-        $table01 = $request->input('table01');
-        $name = $table01['name'][0];
+        $table02 = $request->input('table02');
+        $name = $table02['name'][0];
         $names = explode("|", $name);
         $newItems = [];
         foreach ($names as $name) $newItems[$name] = ['name' => $name, 'title' => Str::headline($name)];

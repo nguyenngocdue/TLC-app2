@@ -17,6 +17,8 @@ class Number extends Component
         private $placeholder = "",
         private $cell = null,
         private $onChange = null,
+        private $table01Name = null,
+        private $rowIndex = -1,
     ) {
     }
 
@@ -33,6 +35,9 @@ class Number extends Component
             'name' => $this->name,
             'type' => 'number',
             'onChange' => $this->onChange,
+            'component' => 'editable/number',
+            'rowIndex' => $this->rowIndex,
+            'table01Name' => $this->table01Name,
         ]);
     }
 }

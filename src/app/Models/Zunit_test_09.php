@@ -25,6 +25,10 @@ class Zunit_test_09 extends ModelExtended
         'user_position_1',
         "priority_id",
         "due_date",
+        'total',
+        'accepted',
+        'rejected',
+        'remaining',
 
         'parent_id',
         "order_no",
@@ -118,6 +122,19 @@ class Zunit_test_09 extends ModelExtended
             ['dataIndex' => "priority_id"],
             ['dataIndex' => "due_date"],
 
+        ];
+    }
+    public function getManyLineParamsExpression()
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name',],
+            ['dataIndex' => "total"],
+            ['dataIndex' => "accepted"],
+            ['dataIndex' => "rejected"],
+            ['dataIndex' => "remaining"],
         ];
     }
 
