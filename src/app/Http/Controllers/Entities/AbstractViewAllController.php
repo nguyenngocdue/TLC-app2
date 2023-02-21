@@ -355,10 +355,12 @@ abstract class AbstractViewAllController extends Controller
         $routeName = "{$plural}.show";
         $routeExits =  (Route::has($routeName));
         $dataSource = array_map(function ($item) use ($routeExits, $routeName) {
-            return $routeExits ? route($routeName, $item['id']) : "#";
+            return [
+                'href' => $routeExits ? route($routeName, $item['id']) : "#",
+                'name' => $item['name']
+            ];
         }, $dataSource->toArray());
-
-
+        $dataSource = array_chunk($dataSource, 6);
         return view('dashboards.pages.entity-show-qr', [
             'dataSource' => $dataSource,
             'type' => $this->type,
