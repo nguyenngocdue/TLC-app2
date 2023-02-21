@@ -89,8 +89,6 @@ class Qaqc_insp_chklst extends Report_ParentController
 
     protected function enrichDataSource($dataSource, $urlParams)
     {
-        // dd($dataSource);
-        // dump(end($urlParams));
         $lines =  [];
         foreach ($dataSource as $item) {
             if (isset($item['line_id'])) {
@@ -104,7 +102,7 @@ class Qaqc_insp_chklst extends Report_ParentController
             $descIdLines[$value['line_description']][] = $key;
         });
         // Reduce the number of lines from URL request 
-        if (!end($urlParams)) {
+        if (isset($urlParams['filter_run']) && !$urlParams['filter_run']) {
             $descIdLines = array_map(fn ($item) => array_splice($item, 0, 1), $descIdLines);
         }
 
@@ -152,7 +150,7 @@ class Qaqc_insp_chklst extends Report_ParentController
             $data[$sheetId] = array_values($values);
         }
         ksort($data);
-        // dd($data);
+        // dump("123", $data);
         return $data;
     }
 

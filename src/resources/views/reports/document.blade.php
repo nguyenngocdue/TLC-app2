@@ -27,6 +27,7 @@ $dataSource = [
     @php
     @endphp
     <x-renderer.report.header-report :dataSource="array_pop($data)" />
+    {{-- @dump($data); --}}
     <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$data" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
     <x-renderer.page-break />
     @endforeach

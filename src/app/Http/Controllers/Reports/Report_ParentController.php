@@ -76,6 +76,7 @@ abstract class Report_ParentController extends Controller
 
         $dataSource = $this->getDataSource($urlParams);
         $dataSource = $this->enrichDataSource($dataSource, $urlParams);
+        // dump($dataSource);
         $columns = $this->getTableColumns($dataSource);
 
         $prod_orders  = Prod_order::get()->pluck('name', 'id')->toArray();

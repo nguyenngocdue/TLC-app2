@@ -76,7 +76,7 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
         return  $cols;
     }
 
-    protected function enrichDataSource($dataSource)
+    protected function enrichDataSource($dataSource, $urlParams)
     {
         if (!is_array($dataSource)) return [];
         $enrichData = array_map(function ($item) {
