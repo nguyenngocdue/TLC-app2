@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Reports;
 use App\Http\Controllers\Controller;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_chklst;
+use App\Models\Qaqc_insp_chklst_sht;
+use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\Http\Request;
@@ -27,8 +29,7 @@ abstract class Report_ParentController extends Controller
     {
         // dd($urlParams);
         $sqlStr = $this->getSqlStr($urlParams);
-        if (empty($urlParams)) return  dd("<x-feedback.alert type='warning' message='Check URL Parameters'></x-feedback.alert>");
-        // if (is_null($urlParams[$x = array_key_first($urlParams)])) return dd("<x-feedback.alert type='warning' message='$x parameter is empty at URL'></x-feedback.alert>");
+        if (empty($urlParams)) return  "";
 
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
@@ -44,25 +45,25 @@ abstract class Report_ParentController extends Controller
 
     protected function getDataSource($urlParams)
     {
+        if (!$this->getSql($urlParams)) return [];
         $sql = $this->getSql($urlParams);
         $sqlData = DB::select($sql);
         $result = array_map(fn ($item) => (array) $item, $sqlData);
         return $result;
     }
 
-    protected function enrichDataSource($dataSource)
+    protected function enrichDataSource($dataSource, $urlParams)
     {
         return $dataSource;
     }
 
     protected function getSheets($dataSource)
     {
-        // dump($dataSource);
+        if (!is_array($dataSource)) return [];
         $sheets = array_map(function ($item) {
             $x = isset(array_pop($item)['sheet_name']);
-            return $x ? array_pop($item)['sheet_name'] : '';
+            return $x ? ["sheet_name" => array_pop($item)['sheet_name']] : '';
         }, $dataSource);
-        // dd($sheets);
         return $sheets;
     }
 
@@ -74,26 +75,28 @@ abstract class Report_ParentController extends Controller
         $viewName = strtolower(Str::singular($currentRoute));
 
         $dataSource = $this->getDataSource($urlParams);
-        $dataSource = $this->enrichDataSource($dataSource);
+        $dataSource = $this->enrichDataSource($dataSource, $urlParams);
+        // dump($dataSource);
         $columns = $this->getTableColumns($dataSource);
 
         $prod_orders  = Prod_order::get()->pluck('name', 'id')->toArray();
         $subProjects = Sub_project::get()->pluck('name', 'id')->toArray();
-        $chklts_Sheet = Qaqc_insp_chklst::get()->pluck('name', 'id')->toArray();
+        $insp_tmpls = Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray();
 
 
         // dd($dataSource);
         $sheets = $this->getSheets($dataSource);
         // dump($sheets);
+        // dd($sheets);
 
 
         $typeReport = CurrentRoute::getCurrentController();
         return view('reports.' . $viewName, [
             'tableColumns' => $columns,
             'tableDataSource' => $dataSource,
-            'subProjects' => $subProjects,
-            'chklts_Sheet' => $chklts_Sheet,
             'prod_orders' => $prod_orders,
+            'subProjects' => $subProjects,
+            'insp_tmpls' => $insp_tmpls,
             'urlParams' => $urlParams,
             'entity' => $currentRoute,
             'typeReport' => $typeReport,

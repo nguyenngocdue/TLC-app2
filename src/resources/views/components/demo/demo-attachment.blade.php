@@ -3,19 +3,20 @@
         <form action="" method="GET">
             @dump($_GET['attachment_1'] ??[])
             <x-renderer.card title="Default attachment without attributes">
+                {{-- @dd($attachmentData2) --}}
                 <x-renderer.attachment2 name='attachment_1' :value="$attachmentData2['attachment_1']?? []" />
             </x-renderer.card>
-            <br/>
+            <br />
             @dump($_GET['attachment_2'] ??[])
             <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }">
-                <x-renderer.attachment2 name='attachment_2' :value="$attachmentData2['attachment_2']?? []" readonly={{true}} showToBeDeleted={{true}}  />
+                <x-renderer.attachment2 name='attachment_2' :value="$attachmentData2['attachment_2']?? []" readonly={{true}} showToBeDeleted={{true}} />
             </x-renderer.card>
             <br />
             @dump($_GET['attachment_3'] ??[])
             <x-renderer.card title="readonly = { { false} }, destroyable = { { false} }, showToBeDeleted = { { false } }">
-                <x-renderer.attachment2 name='attachment_3'  :value="$attachmentData2['attachment_3']?? []" destroyable={{false}} categoryName="attachment_2" showToBeDeleted={{false}}/>
+                <x-renderer.attachment2 name='attachment_3' :value="$attachmentData2['attachment_3']?? []" destroyable={{false}} categoryName="attachment_2" showToBeDeleted={{false}} />
             </x-renderer.card>
-            <br/>
+            <br />
             <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
         </form>
     </x-renderer.card>
