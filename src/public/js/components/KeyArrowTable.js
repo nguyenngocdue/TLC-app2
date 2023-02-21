@@ -10,16 +10,30 @@ const keyArrowTable = (idTable) => {
         ...table.querySelectorAll('textarea'),
         ...table.querySelectorAll('check'),
     ]
+
     array.forEach((elm) => {
+        const handlePreventDefault = (e) => {
+            e.preventDefault()
+        }
+        const handleKeyUp = (e) => {
+            if (!e.ctrlKey && (e.key !== 38 || e.key !== 40)) {
+                elm.removeEventListener('keydown', handlePreventDefault)
+                elm.removeEventListener('keyup', handlePreventDefault)
+            }
+        }
         if (elm.type === 'number') {
-            elm.addEventListener('keydown', function (event) {
-                event.preventDefault()
-            })
-            elm.addEventListener('keyup', function (event) {
-                event.preventDefault()
-            })
+            elm.addEventListener('keydown', handlePreventDefault)
+            elm.addEventListener('keyup', handlePreventDefault)
+        }
+        elm.onblur = (e) => {
+            elm.removeEventListener('keyup', handleKeyUp)
+            if (elm.type === 'number') {
+                elm.addEventListener('keydown', handlePreventDefault)
+                elm.addEventListener('keyup', handlePreventDefault)
+            }
         }
         elm.onfocus = (e) => {
+            elm.addEventListener('keyup', handleKeyUp);
             const nbRows = table.rows.length
             const nbCells = table.rows[0].cells.length
             let sPos = table.querySelector('.select'),
