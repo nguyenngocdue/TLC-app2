@@ -24,7 +24,7 @@
         </div>
         <x-form.per-page type="{{$type}}" route="{{ route('updateUserSettings') }}" page-limit="{{$pageLimit}}" />
     </div>
-    <x-renderer.filter :type="$type"  :valueAdvanceFilters="$valueAdvanceFilters"/>
+    <x-renderer.advanced-filter :type="$type"  :valueAdvanceFilters="$valueAdvanceFilters"/>
     <x-renderer.table showNo="true" :columns=" $columns" :dataSource="$dataSource" />
 </div>
 <br />

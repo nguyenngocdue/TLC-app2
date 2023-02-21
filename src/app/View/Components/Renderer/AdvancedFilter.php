@@ -6,7 +6,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntitySuperPropsFilter;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
-class Filter extends Component
+class AdvancedFilter extends Component
 {
     use TraitEntitySuperPropsFilter;
     /**
@@ -31,7 +31,7 @@ class Filter extends Component
         //     dump($item);
         //     return $item;
         // }, $this->valueAdvanceFilters);
-        return view('components.renderer.filter', [
+        return view('components.renderer.advanced-filter', [
             'type' => $this->type,
             'props' => $propsFilters,
             'valueAdvanceFilters' => $this->valueAdvanceFilters,
