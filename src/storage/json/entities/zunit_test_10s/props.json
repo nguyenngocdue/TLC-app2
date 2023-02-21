@@ -191,6 +191,22 @@
         "hidden_print": "",
         "new_line": "true"
     },
+    "_getUT9ExpressionDateTime": {
+        "name": "_getUT9ExpressionDateTime",
+        "column_name": "getUT9ExpressionDateTime",
+        "column_type": "eloquent_prop",
+        "label": "UT9 Expression DateTime",
+        "control": "relationship_renderer",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": "true"
+    },
     "_getUT2": {
         "name": "_getUT2",
         "column_name": "getUT2",

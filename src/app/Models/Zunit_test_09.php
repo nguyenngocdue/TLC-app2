@@ -153,6 +153,21 @@ class Zunit_test_09 extends ModelExtended
             ['dataIndex' => "remaining"],
         ];
     }
+    public function getManyLineParamsExpressionDateTime()
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name',],
+            // ['dataIndex' => "date_1"],
+            // ['dataIndex' => "date_2"],
+            // ['dataIndex' => "date_3"],
+            ['dataIndex' => "time_1"],
+            ['dataIndex' => "time_2"],
+            ['dataIndex' => "time_3"],
+        ];
+    }
 
     public function dropdownMonitors()
     {

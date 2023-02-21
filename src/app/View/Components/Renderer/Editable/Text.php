@@ -20,6 +20,7 @@ class Text extends Component
         private $component = 'editable/text',
         private $table01Name = null,
         private $rowIndex = -1,
+        private $icon = null,
 
     ) {
         //In case of listeners, the data was parsed in to array
@@ -49,6 +50,7 @@ class Text extends Component
             'component' => 'editable/number',
             'rowIndex' => $this->rowIndex,
             'table01Name' => $this->table01Name,
+            'icon' => $this->icon,
         ]);
     }
 }

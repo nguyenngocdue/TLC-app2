@@ -27,7 +27,6 @@ const keyArrowTable = (idTable) => {
             if (sPos) sPos.classList.remove('select')
             tdPos.classList.add('select')
             document.onkeydown = (e) => {
-                elm.select()
                 let sPos = table.querySelector('.select')
                 evt = e == null ? event : e
                 o = e.srcElement || e.target

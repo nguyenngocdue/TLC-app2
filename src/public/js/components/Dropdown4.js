@@ -178,20 +178,37 @@ const onChangeDropdown4Expression = (listener, table01Name, rowIndex) => {
     const vars = getAllVariablesFromExpression(expression)
     for (let i = 0; i < vars.length; i++) {
         const varName = vars[i]
+        if (['Math', 'round', 'ceil', 'trunc', 'toDateString'].includes(varName)) continue
         const varNameFull = makeIdFrom(table01Name, varName, rowIndex)
-        const varValue = getEById(varNameFull).val() || 0
+        let varValue = getEById(varNameFull).val() || 0
+        if (varValue && isNaN(varValue)) {
+            if (varValue.includes(":") && varValue.includes("/")) {
+                const datetime = varValue.split(" ")
+                const date = datetime[0]
+                const time = datetime[1]
+                varValue = getDaysFromDate(date) * 24 * 3600 + getSecondsFromTime(time)
+            }
+            else {
+                if (varValue.includes(":")) {
+                    varValue = getSecondsFromTime(varValue)
+                } else if (varValue.includes("/")) {
+                    varValue = getDaysFromDate(varValue)
+                }
+            }
+            if (debugListener) console.log(varName, varValue)
+        }
 
         if (debugListener) console.log(varName, "=", varValue)
         expression1 = expression1.replace(varName, varValue)
     }
     const result = eval(expression1)
-    if (debugListener) console.log(column_name, '=', expression, result)
+    if (debugListener) console.log(column_name, '=', expression1, result)
     const id = makeIdFrom(table01Name, column_name, rowIndex)
     getEById(id).val(result)
 }
 
 const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType }) => {
-    // console.log("onChangeDropdown4", name, lineType, table01Name, rowIndex)
+    // console.log("onChangeDropdown4", name, table01Name, rowIndex, lineType)
     // console.log("listenersOfDropdown4s", listenersOfDropdown4s)
     const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
     for (let i = 0; i < listenersOfDropdown4.length; i++) {

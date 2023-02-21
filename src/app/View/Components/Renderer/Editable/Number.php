@@ -19,6 +19,7 @@ class Number extends Component
         private $onChange = null,
         private $table01Name = null,
         private $rowIndex = -1,
+        private $icon = null,
     ) {
     }
 
@@ -38,6 +39,7 @@ class Number extends Component
             'component' => 'editable/number',
             'rowIndex' => $this->rowIndex,
             'table01Name' => $this->table01Name,
+            'icon' => $this->icon,
         ]);
     }
 }

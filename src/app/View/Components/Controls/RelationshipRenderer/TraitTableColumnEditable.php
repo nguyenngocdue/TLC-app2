@@ -70,6 +70,19 @@ trait TraitTableColumnEditable
                     //This is copied from text
                     $newColumn['classList'] = "text-right block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
                     break;
+                case 'picker_time':
+                    $newColumn['renderer'] = 'text';
+                    $newColumn['editable'] = true;
+                    $newColumn['properties']['icon'] = 'fa-duotone fa-clock';
+                    break;
+                    // case 'picker_date':
+                    //     $newColumn['renderer'] = 'text';
+                    //     $newColumn['editable'] = true;
+                    //     break;
+                    // case 'picker_datetime':
+                    //     $newColumn['renderer'] = 'text';
+                    //     $newColumn['editable'] = true;
+                    //     break;
                 default:
                     $newColumn['renderer'] = "text";
                     $newColumn['editable'] = true;
