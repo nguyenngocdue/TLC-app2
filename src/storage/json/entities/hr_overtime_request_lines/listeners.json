@@ -5,31 +5,8 @@
         "listen_action": "dot",
         "triggers": "user_id",
         "listen_to_fields": "user_id",
-        "listen_to_attrs": "employeeid"
-    },
-    "_id": {
-        "name": "_id",
-        "column_name": "id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_hr_overtime_request_id": {
-        "name": "_hr_overtime_request_id",
-        "column_name": "hr_overtime_request_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_user_id": {
-        "name": "_user_id",
-        "column_name": "user_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "employeeid",
+        "expression": ""
     },
     "_position_rendered": {
         "name": "_position_rendered",
@@ -37,7 +14,44 @@
         "listen_action": "dot",
         "triggers": "user_id",
         "listen_to_fields": "user_id",
-        "listen_to_attrs": "position_rendered"
+        "listen_to_attrs": "position_rendered",
+        "expression": ""
+    },
+    "_total_time": {
+        "name": "_total_time",
+        "column_name": "total_time",
+        "listen_action": "expression",
+        "triggers": "from_time,to_time,break_time",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": "to_time - from_time - break_time"
+    },
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": ""
+    },
+    "_hr_overtime_request_id": {
+        "name": "_hr_overtime_request_id",
+        "column_name": "hr_overtime_request_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": ""
+    },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": ""
     },
     "_ot_date": {
         "name": "_ot_date",
@@ -45,7 +59,8 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "",
+        "expression": ""
     },
     "_from_time": {
         "name": "_from_time",
@@ -53,7 +68,8 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "",
+        "expression": ""
     },
     "_to_time": {
         "name": "_to_time",
@@ -61,7 +77,8 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "",
+        "expression": ""
     },
     "_break_time": {
         "name": "_break_time",
@@ -69,15 +86,8 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_total_time": {
-        "name": "_total_time",
-        "column_name": "total_time",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "",
+        "expression": ""
     },
     "_sub_project_id": {
         "name": "_sub_project_id",
@@ -85,7 +95,8 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "",
+        "expression": ""
     },
     "_work_mode_id": {
         "name": "_work_mode_id",
@@ -93,7 +104,8 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "",
+        "expression": ""
     },
     "_remark": {
         "name": "_remark",
@@ -101,7 +113,17 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "",
+        "expression": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -109,7 +131,8 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "",
+        "expression": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -117,6 +140,16 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "",
+        "expression": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": ""
     }
 }

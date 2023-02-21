@@ -6,7 +6,7 @@
     <tbody>
         <tr>
             <td align="left">
-                <img alt="TLC Logo" src="{{$dataSource['company_logo']}}" class="w-full pl-5">
+                <img alt="TLC Logo" width1="245" height1="80" src="{{$dataSource['company_logo']}}" class="w-full pl-5">
             </td>
             <td align="center"></td>
             <td class="text-sm">

@@ -9,26 +9,41 @@ class Zunit_test_09 extends ModelExtended
     protected $fillable = [
         'id',
         'name',
-        'department_1',
-        'user_1',
+        //Reduce 11
         'department_2',
         'user_2',
         'category_id',
         'user_3',
+        //Reduce 1111
         'project_1',
         'sub_project_1',
         'prod_routing_1',
         'prod_order_1',
+        //Assign
         'prod_discipline_1',
         'assignee_1',
         'user_4',
         'user_position_1',
+        //Dot
+        'department_1',
+        'user_1',
         "priority_id",
         "due_date",
+        //Expression
         'total',
         'accepted',
         'rejected',
         'remaining',
+        //Expression Date Time
+        'datetime_1',
+        'datetime_2',
+        'datetime_3',
+        'date_1',
+        'date_2',
+        'date_3',
+        'time_1',
+        'time_2',
+        'time_3',
 
         'parent_id',
         "order_no",
@@ -55,6 +70,7 @@ class Zunit_test_09 extends ModelExtended
 
         "user4" => ['belongsTo', User::class, 'user_4'],
         "getPriority" => ['belongsTo', Priority::class, 'priority_id'],
+
     ];
 
     public $oracyParams = [

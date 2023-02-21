@@ -51,7 +51,34 @@
         "triggers": "total,accepted,rejected",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": "total - ( accepted + rejected )"
+        "expression": "Math.round((total - (accepted + rejected)) * 100) \/ 100"
+    },
+    "_datetime_3": {
+        "name": "_datetime_3",
+        "column_name": "datetime_3",
+        "listen_action": "expression",
+        "triggers": "datetime_1,datetime_2",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": "datetime_2 - datetime_1"
+    },
+    "_date_3": {
+        "name": "_date_3",
+        "column_name": "date_3",
+        "listen_action": "expression",
+        "triggers": "date_1,date_2",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": "date_2 - date_1"
+    },
+    "_time_3": {
+        "name": "_time_3",
+        "column_name": "time_3",
+        "listen_action": "expression",
+        "triggers": "time_1,time_2",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": "time_2 - time_1"
     },
     "_user_2": {
         "name": "_user_2",
@@ -236,6 +263,60 @@
     "_rejected": {
         "name": "_rejected",
         "column_name": "rejected",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": ""
+    },
+    "_datetime_1": {
+        "name": "_datetime_1",
+        "column_name": "datetime_1",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": ""
+    },
+    "_datetime_2": {
+        "name": "_datetime_2",
+        "column_name": "datetime_2",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": ""
+    },
+    "_date_1": {
+        "name": "_date_1",
+        "column_name": "date_1",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": ""
+    },
+    "_date_2": {
+        "name": "_date_2",
+        "column_name": "date_2",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": ""
+    },
+    "_time_1": {
+        "name": "_time_1",
+        "column_name": "time_1",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "expression": ""
+    },
+    "_time_2": {
+        "name": "_time_2",
+        "column_name": "time_2",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

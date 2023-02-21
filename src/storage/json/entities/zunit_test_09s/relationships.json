@@ -179,7 +179,7 @@
         "control": "radio",
         "filter_columns": "field_id",
         "filter_values": "135",
-        "radio_checkbox_colspan": "3"
+        "radio_checkbox_colspan": "6"
     },
     "_dropdownMonitors()": {
         "name": "_dropdownMonitors()",

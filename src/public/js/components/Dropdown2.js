@@ -18,7 +18,15 @@ const getAllVariablesFromExpression = (str) => {
     // console.log(result)
     return result
 }
-
+const getSecondsFromTime = (hms) => {
+    var a = hms.split(':'); // split it at the colons
+    switch (a.length) {
+        case 1: return (+a[0])
+        case 2: return (+a[0]) * 60 * 60 + (+a[1]) * 60 // HH:MM
+        case 3: return (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2])
+    }
+}
+const getDaysFromDate = (dmy) => moment(dmy, "DD/MM/YYYY").diff(moment('1970-01-01'), 'days')
 const getValueOfEById = (id) => {
     const isMultipleOfE = getIsMultipleOfE(id)
     const controlType = getControlTypeOfE(id)
@@ -214,13 +222,30 @@ const onChangeDropdown2Expression = (listener) => {
     const vars = getAllVariablesFromExpression(expression)
     for (let i = 0; i < vars.length; i++) {
         const varName = vars[i]
-        const varValue = getEById(varName).val() || 0
+        if (['Math', 'round', 'ceil', 'trunc', 'toDateString'].includes(varName)) continue
+        let varValue = getEById(varName).val() || 0
+        if (varValue && isNaN(varValue)) {
+            if (varValue.includes(":") && varValue.includes("/")) {
+                const datetime = varValue.split(" ")
+                const date = datetime[0]
+                const time = datetime[1]
+                varValue = getDaysFromDate(date) * 24 * 3600 + getSecondsFromTime(time)
+            }
+            else {
+                if (varValue.includes(":")) {
+                    varValue = getSecondsFromTime(varValue)
+                } else if (varValue.includes("/")) {
+                    varValue = getDaysFromDate(varValue)
+                }
+            }
+            if (debugListener) console.log(varName, varValue)
+        }
 
         if (debugListener) console.log(varName, "=", varValue)
         expression1 = expression1.replace(varName, varValue)
     }
     const result = eval(expression1)
-    if (debugListener) console.log(column_name, '=', expression, result)
+    if (debugListener) console.log(column_name, '=', expression1, '=', result)
     getEById(column_name).val(result)
 }
 

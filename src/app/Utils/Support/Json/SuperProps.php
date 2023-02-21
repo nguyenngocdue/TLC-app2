@@ -40,6 +40,8 @@ class SuperProps
 
             $rls['filter_columns'] = Str::parseArray($rls['filter_columns']);
             $rls['filter_values'] = Str::parseArray($rls['filter_values']);
+            $rls['radio_checkbox_colspan'] = $rls['radio_checkbox_colspan'] ? $rls['radio_checkbox_colspan'] : 4;
+
 
             $result["_" . $column_name] = $rls;
         }
@@ -96,6 +98,10 @@ class SuperProps
     private static function readProps($type)
     {
         $allProps = Props::getAllOf($type);
+        foreach ($allProps as &$prop) {
+            $prop['width'] = $prop['width'] ? $prop['width'] : 100;
+            $prop['col_span'] = $prop['col_span'] ? $prop['col_span'] : 12;
+        }
         // static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
         static::attachJson("default-values", $allProps, DefaultValues::getAllOf($type));
         static::attachJson("relationships", $allProps, static::makeRelationshipObject($type));

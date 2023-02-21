@@ -44,6 +44,18 @@ return new class extends Migration
             $table->integer('rejected')->nullable();
             $table->integer('remaining')->nullable();
 
+            $table->dateTime('datetime_1')->nullable();
+            $table->dateTime('datetime_2')->nullable();
+            $table->bigInteger('datetime_3')->nullable();
+
+            $table->date('date_1')->nullable();
+            $table->date('date_2')->nullable();
+            $table->bigInteger('date_3')->nullable();
+
+            $table->time('time_1')->nullable();
+            $table->time('time_2')->nullable();
+            $table->bigInteger('time_3')->nullable();
+
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedInteger('order_no')->nullable();
 
