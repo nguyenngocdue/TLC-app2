@@ -169,7 +169,7 @@
         "col_span": "",
         "width": "",
         "hidden_view_all": "",
-        "hidden_edit": "",
+        "hidden_edit": "true",
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
