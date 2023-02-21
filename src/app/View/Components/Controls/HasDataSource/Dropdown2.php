@@ -14,9 +14,6 @@ class Dropdown2 extends Component
         private $selected = null,
         private $multiple = false,
         private $type = null,
-
-        // private $table01Name = null,
-        // private $lineType = null,
     ) {
         $old = old($name);
         if ($old) {

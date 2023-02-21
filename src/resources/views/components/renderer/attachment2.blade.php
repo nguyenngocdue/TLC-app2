@@ -1,8 +1,9 @@
 {{-- @dump($attachments) --}}
 <div class="flex flex-col container mx-aut1o w-full">
     @if(sizeof($attachments) ==0)
-        <x-renderer.emptiness p="2" class="border" message="{{$message}}"/>
+    <x-renderer.emptiness p="2" class="border" message="{{$message}}" />
     @else
+<<<<<<< HEAD
         <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1">
             @foreach($attachments as $attachment)
                 @php
@@ -47,7 +48,51 @@
                 </div>
                 
             @endforeach
+=======
+    <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1">
+        @foreach($attachments as $attachment)
+        @php
+        $isOrphan = isset($attachment['isOrphan']);
+        $border = $isOrphan ? "red" : "gray";
+        $title = $isOrphan ? "Orphan image found. Will attach after this document is saved.":"";
+        $extension = $attachment['extension'] ?? "";
+        @endphp
+        @isset($attachment['isOrphan'])
+        <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="hidden" />
+        @endisset
+        <div name='{{$name}}' title="{{$title}}" class="border-{{$border}}-300 relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit">
+            {{-- This is the image --}}
+            @if(in_array($extension,["png","gif","jpg","jpeg","webb"]))
+            <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}" />
+            @elseif(in_array($extension,["csv","pdf","zip"]))
+            <img class="w-auto h-full object-cover" src="/images/iconfile.png" alt="{{$attachment['filename']}}">
+            @elseif($extension == 'mp4')
+            <video class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"></video>
+            @elseif($extension === 'svg')
+            <img class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}" />
+            @else
+            @endif
+            {{-- This is to show the toBeDeleted trash icon --}}
+            <span id="trashIcon-{{$attachment['id']}}" class="hidden">
+                <i class="text-7xl text-pink-500 fa-sharp fa-solid fa-circle-xmark cursor-pointer absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+            </span>
+            {{-- This is to show the thin layer which has the filename and trash button --}}
+            <div class="invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]">
+                <a title="{{$attachment['filename']}}" href="{{$path.$attachment['url_media']}}" target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">
+                    <span class="text-sm">{{$attachment['filename']}}</span>
+                </a>
+                @if($destroyable)
+                <button type="button" onclick="updateToBeDeletedTextBox({{$attachment['id']}}, '{{$name}}-toBeDeleted')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
+                    <i class=" text-red-700 fas fa-trash cursor-pointer"></i>
+                </button>
+                @endif
+            </div>
+            <span>{{date('d/m/Y',strtotime($attachment['created_at'] ?? ''))}}</span>
+>>>>>>> dev0217_Report-BugInterface
         </div>
+
+        @endforeach
+    </div>
     @endif
 </div>
 @if($showToBeDeleted)
@@ -79,5 +124,6 @@
         }
         document.getElementById(name).value = objColName[name]
     }
+
 </script>
 @endonce

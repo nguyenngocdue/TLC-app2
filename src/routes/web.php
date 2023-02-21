@@ -8,6 +8,7 @@ use App\Http\Controllers\RedisController;
 use App\Http\Controllers\Reports\ReportIndexController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\WelcomeDueController;
 use App\Http\Controllers\WelcomeFortuneController;
 use App\Http\Controllers\Workflow\ManageAppsController;
 use App\Http\Controllers\Workflow\ManageStatusesController;
@@ -136,8 +137,7 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 // Route::get('test', [HomeController::class, 'index']);
 
 Route::resource('welcome', WelcomeController::class)->only('index');
-// Route::resource('welcome-due', WelcomeDueController::class)->only('index');
-// Route::resource('welcome-due-2', DocumentQaqcInspChklst::class)->only('index');
+Route::resource('welcome-due', WelcomeDueController::class)->only('index');
 Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index', 'store');
 
 

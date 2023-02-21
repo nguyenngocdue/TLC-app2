@@ -4,11 +4,7 @@
 @section('title', $entity)
 
 @php
-$nameControls = array_keys($urlParams);
-$controlName1 = isset($nameControls[0]) ? $nameControls[0] : "NO";
-$controlName2 = isset($nameControls[1]) ? $nameControls[1] : "No";
-$dataSource = [$controlName1 => $subProjects, $controlName2 =>$prod_orders];
-// $hiddenItems = ["chklst"];
+$dataSource = ['sub_project_id' => $subProjects, 'qaqc_insp_tmpl_id' =>$insp_tmpls];
 @endphp
 
 @section('content')

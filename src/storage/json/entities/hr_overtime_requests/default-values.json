@@ -70,7 +70,7 @@
         "column_name": "owner_id",
         "label": "",
         "default_value": "",
-        "validation": "required",
+        "validation": "",
         "formula": "All_OwnerId",
         "label_extra": "",
         "placeholder": "",

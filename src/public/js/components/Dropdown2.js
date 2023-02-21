@@ -7,6 +7,17 @@ const getEById = (id) => $("[id='" + id + "']")
 const getIsMultipleOfE = (id) => getEById(id)[0].hasAttribute("multiple")
 const getControlTypeOfE = (id) => getEById(id).attr("controlType")
 const getColSpanOfE = (id) => getEById(id).attr("colSpan")
+const getAllVariablesFromExpression = (str) => {
+    const regex = new RegExp('[a-zA-Z_]+[a-zA-Z0-9]*', 'gm'), result = []
+    let m;
+    while ((m = regex.exec(str)) !== null) {
+        // This is necessary to avoid infinite loops with zero-width matches
+        if (m.index === regex.lastIndex) regex.lastIndex++;
+        m.forEach((match) => result.push(match));
+    }
+    // console.log(result)
+    return result
+}
 
 const getValueOfEById = (id) => {
     const isMultipleOfE = getIsMultipleOfE(id)
@@ -194,6 +205,25 @@ const onChangeDropdown2DateOffset = (listener) => {
     }
 }
 
+const onChangeDropdown2Expression = (listener) => {
+    // const debugListener = true
+    if (debugListener) console.log("Expression", listener)
+    const { expression, column_name } = listener
+    let expression1 = expression
+
+    const vars = getAllVariablesFromExpression(expression)
+    for (let i = 0; i < vars.length; i++) {
+        const varName = vars[i]
+        const varValue = getEById(varName).val() || 0
+
+        if (debugListener) console.log(varName, "=", varValue)
+        expression1 = expression1.replace(varName, varValue)
+    }
+    const result = eval(expression1)
+    if (debugListener) console.log(column_name, '=', expression, result)
+    getEById(column_name).val(result)
+}
+
 const onChangeDropdown2 = (name) => {
     // console.log("onChangeDropdown2", name)
     // console.log(listenersOfDropdown2)
@@ -215,6 +245,9 @@ const onChangeDropdown2 = (name) => {
                     break
                 case "date_offset":
                     onChangeDropdown2DateOffset(listener)
+                    break
+                case "expression":
+                    onChangeDropdown2Expression(listener)
                     break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);

@@ -34,13 +34,14 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
                         SELECT
                             sh.id AS sheet_id,
                             MAX(sr.id) AS max_run_id
-                            FROM prod_orders po, qaqc_insp_chklsts csh, qaqc_insp_chklst_shts sh, qaqc_insp_chklst_runs sr
-                                WHERE 1 = 1";
+                            FROM prod_orders po, qaqc_insp_chklsts csh, qaqc_insp_chklst_shts sh, qaqc_insp_chklst_runs sr,  qaqc_insp_tmpls tmpl
+                                WHERE 1 = 1
+                                AND csh.qaqc_insp_tmpl_id = tmpl.id";
+
+        if (isset($urlParams['qaqc_insp_tmpl_id'])) $sql .= " \n AND tmpl.id = {{qaqc_insp_tmpl_id}} \n";
         if (isset($urlParams['sub_project_id'])) $sql .= " \n AND po.sub_project_id = {{sub_project_id}} \n";
-        $sql .= " \n AND po.id = csh.prod_order_id";
-        // dump($urlParams);
-        if (isset($urlParams['chklst'])) $sql .= " \n AND csh.id = '{{chklst}}' \n";
-        $sql .= "\n AND csh.id = sh.qaqc_insp_chklst_id
+        $sql .= "\n AND po.id = csh.prod_order_id
+                                AND csh.id = sh.qaqc_insp_chklst_id
                                 AND sh.id = sr.qaqc_insp_chklst_sht_id
                                 GROUP BY sh.id
                         ) sub
@@ -61,7 +62,7 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
         $flattenData = array_merge(...$dataSource);
         $idx = array_search("sheet_status", array_keys($flattenData));
         $dataColumn = array_slice($flattenData, $idx + 1, count($flattenData) - $idx, true);
-
+        // dd($dataSource);
         $adds = [
             [
                 "dataIndex" => "po_id",
@@ -75,8 +76,9 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
         return  $cols;
     }
 
-    protected function enrichDataSource($dataSource)
+    protected function enrichDataSource($dataSource, $urlParams)
     {
+        if (!is_array($dataSource)) return [];
         $enrichData = array_map(function ($item) {
             return $item + [Report::slugName($item['sheet_desc']) => $item['sheet_status']];
         }, array_values($dataSource));

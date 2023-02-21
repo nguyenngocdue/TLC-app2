@@ -2,7 +2,7 @@
 
 
 @section('content')
-<br/>
+<br />
 
 Welcome
 

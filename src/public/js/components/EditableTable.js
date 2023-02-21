@@ -267,8 +267,9 @@ const addANewLine = (params) => {
                     }
                     break
                 case 'dropdown4':
-                    // onChangeDropdown4("table02[prod_discipline_id][5]", "prod_discipline_1", "table02", 5)
-                    onChange = "onChangeDropdown4(\"" + id + "\", \"" + column['lineType'] + "\", \"" + column['table01Name'] + "\", " + newRowIndex + ")"
+                    // onChangeDropdown4({name:"table02[prod_discipline_id][5]",  table01Name:"table02", rowIndex:5, lineType:"prod_discipline_1"})
+                    onChange = "onChangeDropdown4({name:\"" + id + "\", lineType:\"" + column['lineType'] + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex: " + newRowIndex + "})"
+
                     multipleStr = column?.multiple ? "multiple" : ""
                     bracket = column?.multiple ? "[]" : ""
                     renderer = "<select id='" + id + "' name='" + id + bracket + "' " + multipleStr + " onChange='" + onChange + "' class='" + column['classList'] + "'></select>"
@@ -279,6 +280,8 @@ const addANewLine = (params) => {
                     if (column['dataIndex'] === 'order_no') {
                         orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
                         onChange = "rerenderTableBaseOnNewOrder(\"" + tableId + "\")"
+                    } else {
+                        onChange = "onChangeDropdown4({name:\"" + id + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex:" + newRowIndex + "})"
                     }
                     renderer = "<input id='" + id + "' name='" + id + "' class='" + column['classList'] + "' type=number step=any onChange='" + onChange + "' />";
                     break
