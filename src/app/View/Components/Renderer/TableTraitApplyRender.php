@@ -85,7 +85,12 @@ trait TableTraitApplyRender
 
         // Log::info($output);
         // Log::info($column);
-        $cell = $dataLine[$column['dataIndex']] ?? "No dataIndex for " . $column['dataIndex']; //This is for Thumbnail
+        if (is_array($dataLine)) {
+            $cell = $dataLine[$column['dataIndex']] ?? "No dataIndex for " . $column['dataIndex']; //This is for Thumbnail
+        } else {
+            $columnName = $column['dataIndex'];
+            $cell = $dataLine->$columnName ?? "No dataIndex for " . $column['dataIndex']; //This is for Thumbnail
+        }
         if ($isEditable && $isDropdown) {
             if (is_string($cell)) {
                 $instance = json_decode($cell);

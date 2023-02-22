@@ -47,7 +47,7 @@ trait TableTraitRows
                         $fn = substr($dataIndex, 0, strlen($dataIndex) - strlen("()"));
                         $rawData = $dataLine->$fn() ?? ""; //this is to execute the getCheckedByField function
                     } else {
-                        $rawData = $dataLine[$dataIndex] ?? "";
+                        $rawData = (is_object($dataLine))  ? ($dataLine->$dataIndex ?? "") : ($dataLine[$dataIndex] ?? "");
                     }
                     $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
                     $rendered = $renderer
@@ -95,17 +95,23 @@ trait TableTraitRows
                     $trs[] = "<tr class='bg-gray-100 dark:bg-gray-800'><td class='p-2 text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td></tr>";
                 }
             }
-            $bgClass = ($dataLine['row_color'] ?? false) ? "bg-" . $dataLine['row_color'] . "-400" : "";
+            if (is_array($dataLine)) {
+                $bgClass = ($dataLine['row_color'] ?? false) ? "bg-" . $dataLine['row_color'] . "-400" : "";
+            } else {
+                $bgClass = '';
+            }
             $extraTrClass = $dataLine->extraTrClass ?? "";
             $tr = "<tr class='dark:hover:bg-gray-600 hover:bg-gray-200 $bgClass text-gray-700 dark:text-gray-300 $extraTrClass'>";
             $tr .=  join("", $tds);
             $tr .= "</tr>";
             $trs[] = $tr;
 
-            if (isset($dataLine['rowDescription'])) {
-                $colspan_minus_1 = $colspan - 1;
-                $td = "<td class='p-2 text-xs dark:text-gray-300 text-gray-600' colspan=$colspan_minus_1>{$dataLine['rowDescription']}</td>";
-                $trs[] = "<tr class='dark:bg-gray-600  bg-gray-100 '><td></td>$td</tr>";
+            if (is_array($dataLine)) {
+                if (isset($dataLine['rowDescription'])) {
+                    $colspan_minus_1 = $colspan - 1;
+                    $td = "<td class='p-2 text-xs dark:text-gray-300 text-gray-600' colspan=$colspan_minus_1>{$dataLine['rowDescription']}</td>";
+                    $trs[] = "<tr class='dark:bg-gray-600  bg-gray-100 '><td></td>$td</tr>";
+                }
             }
         }
         $tr_td = join("", $trs);
