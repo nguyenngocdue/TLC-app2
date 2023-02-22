@@ -18,9 +18,8 @@
                         <i class="fa-duotone fa-qrcode"></i>
                     </a>
                 </x-renderer.button>
-                <x-renderer.button title="Screen Settings" click="toggleModalSetting('modal-setting-id')" keydown="toggleModalSetting('modal-setting-id')" accesskey="s">
-                    <i class="fa-duotone fa-gear"></i>
-                </x-renderer.button>
+                <x-modal-settings type="{{$type}}"/>
+                
         </div>
         <x-form.per-page type="{{$type}}" route="{{ route('updateUserSettings') }}" page-limit="{{$pageLimit}}" />
     </div>

@@ -357,7 +357,7 @@ abstract class AbstractViewAllController extends Controller
         $dataSource = array_map(function ($item) use ($routeExits, $routeName) {
             return [
                 'href' => $routeExits ? route($routeName, $item['id']) : "#",
-                'name' => $item['name']
+                'name' => $item['name'] ?? $item['filename'] ?? '',
             ];
         }, $dataSource->toArray());
         $dataSource = array_chunk($dataSource, 6);
