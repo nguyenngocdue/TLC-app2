@@ -34,7 +34,7 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
             <x-demo.demo-data-entry :dropdownCell="$dropdownCell" />
         </div>
         <div id="attachments" class="p-4 ">
-            <x-demo.demo-attachment :attachmentData="$attachmentData" :attachmentData2="$attachmentData2" :dataComment="$dataComment" />
+            <x-demo.demo-attachment-comment :attachmentData="$attachmentData" :attachmentData2="$attachmentData2" :dataComment="$dataComment" />
         </div>
         <div id="editable_tables" class="p-4 hidden">
             <x-demo.demo-data-table :tableEditableColumns="$tableEditableColumns" :tableDataSource="$tableDataSource" />

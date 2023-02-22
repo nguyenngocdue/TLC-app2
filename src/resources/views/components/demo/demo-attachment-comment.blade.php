@@ -23,6 +23,14 @@
 
 
     <x-renderer.card title="Comments">
+        @dump($_GET['comment_1'] ??[])
+        <form action="" method="GET">
+            <x-renderer.card>
+                <x-renderer.comment2 name="comment_1"/>
+            </x-renderer.card>
+            <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
+        </form>
+{{--         
         @dump($_GET)
         <form action="" method="GET">
             <x-renderer.card title="dataComment=[], not entering other attributes.">
@@ -53,6 +61,6 @@
                 <x-renderer.comment readonly={{false}} showToBeDeleted={{false}} destroyable={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment" :attachmentData="$attachmentData" />
             </x-renderer.card>
             <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
-        </form>
+        </form> --}}
     </x-renderer.card>
 </div>

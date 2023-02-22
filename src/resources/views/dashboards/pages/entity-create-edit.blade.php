@@ -175,12 +175,8 @@ $id = $action === "edit" ? $values->id : "";
                             @break
 
                             @case('relationship_renderer')
-                            {{-- @if($action == 'create') --}}
-                            {{-- <x-feedback.alert type="info" title="Info" message="Please create this document to show this control." /> --}}
-                            {{-- @else --}}
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
-                            {{-- @endif --}}
                             @break
 
                             @case('parent_type')

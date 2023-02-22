@@ -17,11 +17,6 @@ class ManageProperties extends Manage_Parent
     {
         $result['attachment'] = [
             [
-                'dataIndex' => 'field_name',
-                'editable' => true,
-                'renderer' => 'read-only-text',
-            ],
-            [
                 'dataIndex' => 'max_file_size',
                 'renderer' => 'number',
                 'editable' => true,
@@ -90,15 +85,28 @@ class ManageProperties extends Manage_Parent
             [
                 "dataIndex" => "action",
                 "align" => "center",
+                'width' => 30,
             ],
             [
-                "dataIndex" => "name",
+                'dataIndex' => 'name',
+                'editable' => true,
+                'renderer' => 'read-only-text',
+                'width' => 50,
+            ],
+            [
+                "dataIndex" => "field_id",
                 "title" => "Field ID",
                 "renderer" => "dropdown",
                 "editable" => true,
                 "cbbDataSource" => $columns,
                 'sortBy' => 'name',
                 "properties" => ["strFn" => 'same'],
+                'width' => 150,
+            ],
+            [
+                'dataIndex' => 'field_name',
+                'editable' => true,
+                'renderer' => 'read-only-text',
             ],
         ];
 
@@ -108,10 +116,18 @@ class ManageProperties extends Manage_Parent
     protected function getDataSource()
     {
         $dataSource = Properties::getAllOf($this->type);
+        // dump($dataSource);
         $fields = Field::all();
         $index = Arr::keyBy($fields, 'id');
         foreach ($dataSource as &$row) {
-            $row['field_name'] = $index[$row['name']]->name;
+            // dump($index[$row['name']]);
+            if (isset($row['field_id']) && $row['field_id']) {
+                $name = $index[$row['field_id']]->name;
+                if ($row['field_name'] != $name) {
+                    $row['row_color'] = "blue";
+                    $row['field_name'] = ["value" => $name, "title" => $row['field_name'] . " -> " . $name];
+                }
+            }
         }
         foreach (array_keys($dataSource) as $key) {
             $this->attachActionButtons($dataSource, $key, ['right_by_name']);
