@@ -14,16 +14,18 @@ use App\Http\Controllers\Workflow\ManageAppsController;
 use App\Http\Controllers\Workflow\ManageStatusesController;
 use App\Http\Controllers\Workflow\ManageWidgetsController;
 use App\Utils\Support\Entities;
+use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 $entities = Entities::getAll();
+$qrCodeApps = JsonControls::getQrCodeApps();
 Auth::routes();
 Route::group([
     'middleware' => ['auth', 'impersonate', 'role_set:guest|admin']
-], function ()  use ($entities) {
+], function ()  use ($entities, $qrCodeApps) {
     Route::group([
         'prefix' => 'dashboard'
     ], function () use ($entities) {
@@ -35,11 +37,12 @@ Route::group([
             Route::resource("{$entityName}", "{$path}ViewAllController")->only('index');
             Route::get("{$entityName}_ep", ["{$path}ViewAllController", "exportCSV"])->name("{$entityName}_ep.exportCSV");
             Route::get("{$entityName}_qr", ["{$path}ViewAllController", "showQRCode"])->name("{$entityName}_qr.showQRCode");
-            Route::resource("{$entityName}", "{$path}EntityCRUDController")->only('create', 'store', 'edit', 'update', 'show', 'showQRCode', 'destroy');
+            Route::resource("{$entityName}", "{$path}EntityCRUDController")->only('create', 'store', 'edit', 'update', 'show', 'destroy');
         }
         // Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
         // Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');
     });
+
     Route::get('reports', [ReportIndexController::class, 'index'])->name('reportIndices.index');
     Route::group([
         'prefix' => 'reports'
@@ -129,6 +132,16 @@ Route::group([
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboards.index');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::get('impersonate/user/{id}', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
+});
+Route::group([
+    'prefix' => 'app'
+], function () use ($qrCodeApps) {
+    foreach ($qrCodeApps as $qrCodeApp) {
+        $singular = Str::singular($qrCodeApp);
+        $ucfirstName = Str::ucfirst($singular);
+        $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
+        Route::get("{$qrCodeApp}/{slug}", ["{$path}EntityCRUDController", "showQR"])->name("{$qrCodeApp}.showQR");
+    }
 });
 
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);

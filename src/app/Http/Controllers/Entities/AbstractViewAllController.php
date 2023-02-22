@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityExportCSV;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityShowQRList6;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntitySuperPropsFilter;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentRoute;
@@ -22,6 +23,7 @@ abstract class AbstractViewAllController extends Controller
 {
     use TraitEntitySuperPropsFilter;
     use TraitEntityExportCSV;
+    use TraitEntityShowQRList6;
     protected $type = "";
     protected $typeModel = '';
     protected $permissionMiddleware;
@@ -348,25 +350,7 @@ abstract class AbstractViewAllController extends Controller
             'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
         ]);
     }
-    public function showQRCode()
-    {
-        [, $dataSource] = $this->normalizeDataSourceAndColumnsFollowAdvanceFilter();
-        $plural = Str::plural($this->type);
-        $routeName = "{$plural}.show";
-        $routeExits =  (Route::has($routeName));
-        $dataSource = array_map(function ($item) use ($routeExits, $routeName) {
-            return [
-                'href' => $routeExits ? route($routeName, $item['id']) : "#",
-                'name' => $item['name'] ?? $item['filename'] ?? '',
-            ];
-        }, $dataSource->toArray());
-        $dataSource = array_chunk($dataSource, 6);
-        return view('dashboards.pages.entity-show-qr', [
-            'dataSource' => $dataSource,
-            'type' => $this->type,
-            'topTitle' => CurrentRoute::getTitleOf($this->type),
-        ]);
-    }
+
     public function exportCSV()
     {
         [$columns, $dataSource] = $this->normalizeDataSourceAndColumnsFollowAdvanceFilter();

@@ -1,31 +1,30 @@
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
-@section('title', "Show List QR Code" )
+@section('title', "Show QR Code" )
 
 @section('content')
-{{-- @dd($dataSource) --}}
 <div class="flex justify-center">
-    <div class="w-[1000px] min-h-[1300px] items-center bor9der bg-white box-border">
-        @foreach($dataSource as $keyGroup => $group)
-            <div class="grid grid-cols-2 gap-4 p-5">
-                @foreach($group as $keyItem => $item)
-                <div class="w-full h-full bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                    <div id="{{$keyGroup.$keyItem}}" class="w-50 h-50 flex m-5 items-center justify-center"></div>
-                    <script>
-                        new QRCode(document.getElementById("{{$keyGroup.$keyItem}}"),"{{$item['href']}}",)
-                    </script>
-                    <span class="text-base font-semibold flex justify-center truncate">{{$item['name']}}</span>
-                    <span class="text-sm font-normal flex justify-center py-2">{{$item['href']}}</span>
+    <div class="w-[1000px] min-h-[1300px] items-center bor9der bg-white box-border flex justify-center">
+        <div>
+            <div class="w-auto h-auto p-2 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-lg transform transition duration-500 hover:scale-110">
+                <div class="w-96 h-96 p-3">
+                    <img src="https://wp.tlcmodular.com/wp-content/uploads/2020/12/GHT.jpg" alt="image" 
+                    class="w-full h-full object-cover">
                 </div>
+                    <span class="text-base font-semibold flex justify-center truncate">{{$dataSource['name']}}</span>
+            </div>
+            <div class="w-auto flex justify-center mt-6">
+                @foreach($props as $key => $value)
+                    @switch($value['control'])
+                    @case('hyperlink')
+                        <x-renderer.hyper-link2 label="{{$value['column_name']}}" href="{{$dataSource[$value['column_name']]}}" />
+                        @break
+                    @default
+                    @endswitch
                 @endforeach
             </div>
-            @if(sizeof($dataSource) !== $keyGroup + 1)
-                <div class="pagebreak"></div>
-            @endif
-        @endforeach
+        </div>
     </div>
-    
 </div>
-
 @endsection

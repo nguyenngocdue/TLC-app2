@@ -23,14 +23,15 @@ class Button extends Component
         private $click = '',
         private $keydown = '',
         private $accesskey = '',
+        private $block = false,
     ) {
         // dd($this->type);
     }
 
-    private function getClass($className)
+    private function getClass($className, $block)
     {
-
-        $defaultClass = "$className inline-block font-medium text-{$this->size} leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out ";
+        $block = $block ? 'block w-full' : 'inline-block';
+        $defaultClass = "$className $block  font-medium text-{$this->size} leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out ";
         switch ($this->type) {
             case "primary":
                 return $defaultClass . "bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg";
@@ -54,9 +55,10 @@ class Button extends Component
         }
     }
 
-    private function getClassOutline($className)
+    private function getClassOutline($className, $block)
     {
-        $defaultClass = "$className inline-block border-2 font-medium text-{$this->size} leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:ring-0 transition duration-150 ease-in-out ";
+        $block = $block ? 'block w-full' : 'inline-block';
+        $defaultClass = "$className $block border-2 font-medium text-{$this->size} leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:ring-0 transition duration-150 ease-in-out ";
         switch ($this->type) {
             case "primary":
                 return $defaultClass . "border-purple-600 text-purple-600";
@@ -97,7 +99,7 @@ class Button extends Component
         }
         return view('components.renderer.button', [
             // 'label' => $this->label,
-            'className' => $this->outline ? $this->getClassOutline($className) : $this->getClass($className),
+            'className' => $this->outline ? $this->getClassOutline($className, $this->block) : $this->getClass($className, $this->block),
             'htmlType' => $this->htmlType,
             'value' => $this->value,
             'name' => $this->name,

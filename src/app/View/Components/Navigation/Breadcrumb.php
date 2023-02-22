@@ -41,6 +41,12 @@ class Breadcrumb extends Component
             $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
             $links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
         }
+        if ($action === 'showQR') {
+            $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
+        }
+        if ($action === 'showQRCode') {
+            $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
+        }
         if ($action === 'edit') {
             $links[] = ['href' => route($type . '.show', $id), 'title' => 'Print Mode', 'icon' => '<i class="fa-duotone fa-print"></i>'];
         }

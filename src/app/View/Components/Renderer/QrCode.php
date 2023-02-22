@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer;
 
 use App\Utils\ConstantSVG;
+use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
@@ -28,10 +29,15 @@ class QrCode extends Component
         return function (array $data) {
             $id = $data["slot"];
             $type = $data["attributes"]["type"];
-            $route_name = "{$type}.show";
-            $route_exits =  (Route::has($route_name));
-            $href =  $route_exits ? route($route_name, $id) : "#";
-            $color =  $route_exits ? "blue" : "red";
+            $dataLine = $data["attributes"]["dataLine"];
+            $qrCodeApps = JsonControls::getQrCodeApps();
+            if (in_array($type, $qrCodeApps)) {
+                $slug = $dataLine['slug'] ?? '';
+                [$routeExits, $href] = $this->checkRouteShowUsingIdOrSlug($type, $slug, true);
+            } else {
+                [$routeExits, $href] =  $this->checkRouteShowUsingIdOrSlug($type, $id);
+            }
+            $color =  $routeExits ? "blue" : "red";
             $icon = "<i class='fa-duotone fa-qrcode'></i>";
             $content = $this->contentPopover($id . '-canvas', $href);
             $popover = "<x-renderer.popover id='$id' content='$content'/>";
@@ -39,6 +45,13 @@ class QrCode extends Component
 
             return $hyperlink_qr;
         };
+    }
+    private function checkRouteShowUsingIdOrSlug($type, $params, $isSlug = false)
+    {
+        $routeName = $isSlug ? "{$type}.showQR" : "{$type}.show";
+        $routeExits =  (Route::has($routeName));
+        $href =  $routeExits ? route($routeName, $params) : "#";
+        return [$routeExits, $href];
     }
     private function contentPopover($id, $href)
     {

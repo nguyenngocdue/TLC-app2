@@ -7,6 +7,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityComment;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDCreateEdit2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDDestroy;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShow;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowQR;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStoreUpdate2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityM2M;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityStatus;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\App;
 abstract class AbstractEntityCRUDController extends Controller
 {
 	use TraitEntityCRUDShow;
+	use TraitEntityCRUDShowQR;
 	use TraitEntityCRUDCreateEdit2;
 	use TraitEntityCRUDStoreUpdate2;
 	use TraitEntityCRUDDestroy;
