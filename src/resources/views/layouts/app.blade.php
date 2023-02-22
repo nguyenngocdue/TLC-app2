@@ -62,6 +62,7 @@
     <div  class="bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         {{-- <x-homepage.sidebar2 /> --}}
         <div class="flex flex-col flex-1 w-full">
+            @auth
             <x-homepage.navbar2 />
             <main class="mt-16 mb-8 w-full flex-grow bg-green-400 dark:bg-gray-700 no-print">
                 <div class="w-full h-18">
@@ -75,12 +76,10 @@
                             </li>
                         </ul>
                     </div>
-                    {{-- <div class="only-print">
-                        TLC LOGO HERE
-                    </div> --}}
-                    
                 </div>
             </main>
+            @endauth
+            
             <div id="print-pdf-document"  class="w-full h-screen MUST-NOT-HAVE-X-PADDING-MARGIN-FOR-PRINT-PAGE">
                 @yield('content')
             </div>

@@ -17,6 +17,7 @@
         {{-- <div class="flex justify-center flex-1 lg:mr-32">            
             <x-homepage.search-input></x-homepage.search-input>
         </div> --}}
+        @auth
         <ul class="flex items-center flex-shrink-0 space-x-6">
             <li class="flex">
                 <x-homepage.search-modal/>
@@ -34,5 +35,7 @@
                 <x-homepage.menu-profile></x-homepage.menu-profile>
             </li>
         </ul>
+        @endauth
+        
     </div>
 </header>
