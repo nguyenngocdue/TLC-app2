@@ -17,8 +17,6 @@ class ModalSettings extends Component
      */
     public function __construct(private $type, private $title = "Settings")
     {
-        // dump($this->type);
-        // dump($this->title);
     }
 
     /**
@@ -28,17 +26,11 @@ class ModalSettings extends Component
      */
     public function render()
     {
-        // $path = storage_path() . "/json/entities/$this->type/props.json";
-        // if (!file_exists($path)) return "File not found when rendering ModalSettings";
-        // $props = json_decode(file_get_contents($path), true);
-
         $allColumns = $this->getColumns($this->type);
         $settings = CurrentUser::getSettings();
-
         //If the setting array has not been set, it means this is the 1st time user accessing this module
         //Therefore all columns must be selected
         $selected = $settings[$this->type]['columns'] ?? $allColumns;
-
         return view('components.modal-settings', [
             'type' => $this->type,
             'title' => $this->title,

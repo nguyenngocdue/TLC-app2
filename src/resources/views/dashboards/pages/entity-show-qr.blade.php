@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
-@section('title', "Show" )
+@section('title', "Show List QR Code" )
 
 @section('content')
 {{-- @dd($dataSource) --}}
@@ -15,7 +15,7 @@
                     <script>
                         new QRCode(document.getElementById("{{$keyGroup.$keyItem}}"),"{{$item['href']}}",)
                     </script>
-                    <span class="text-base font-semibold flex justify-center">{{$item['name']}}</span>
+                    <span class="text-base font-semibold flex justify-center truncate">{{$item['name']}}</span>
                     <span class="text-sm font-normal flex justify-center py-2">{{$item['href']}}</span>
                 </div>
                 @endforeach

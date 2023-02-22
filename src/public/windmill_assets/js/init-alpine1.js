@@ -51,6 +51,13 @@ function data() {
             //Using remove event listener file search-modal.blade.php
             searchInput.removeEventListener('input', () => {})
         },
+        isSettingMenuOpen: false,
+        toggleSettingMenu() {
+            this.isSettingMenuOpen = !this.isSettingMenuOpen
+        },
+        closeSettingMenu() {
+            this.isSettingMenuOpen = false
+        },
         // isPagesMenuOpen: false,
         // togglePagesMenu() {
         //     this.isPagesMenuOpen = !this.isPagesMenuOpen
