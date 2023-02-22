@@ -65,4 +65,9 @@ class JsonControls
     {
         return self::getAll()['renderer_edit'];
     }
+
+    public static function getQrCodeApps()
+    {
+        return self::getAll()['qr_code_apps'];
+    }
 }

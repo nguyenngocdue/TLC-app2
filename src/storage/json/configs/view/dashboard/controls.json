@@ -52,7 +52,11 @@
         "parent_link",
         "thumbnails"
     ],
-    "renderer_edit": ["", "many_icons", "many_lines"],
+    "renderer_edit": [
+        "",
+        "many_icons",
+        "many_lines"
+    ],
     "manage_prop_eloquents": [
         "belongsToMany",
         "hasMany",
@@ -73,8 +77,12 @@
         "belongsTo",
         "morphToMany"
     ],
-    "manage_prop_oracies": ["getCheckedByField"],
-    "view_all_oracies": ["getCheckedByField"],
+    "manage_prop_oracies": [
+        "getCheckedByField"
+    ],
+    "view_all_oracies": [
+        "getCheckedByField"
+    ],
     "packages": [
         "",
         "hr_&_admin",
@@ -109,5 +117,10 @@
         "hr",
         "system_configuration",
         "system_permission"
+    ],
+    "qr_code_apps": [
+        "pj_module",
+        "pj_shipment",
+        "pj_unit"
     ]
 }
