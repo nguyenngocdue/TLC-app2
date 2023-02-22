@@ -115,6 +115,7 @@
             } while (loop)
         }
     }
+
 </script>
 
 @if (env('ENV_OF_FORTUNE1'))

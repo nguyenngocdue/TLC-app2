@@ -2,14 +2,11 @@
 
 @section('topTitle',$typeReport)
 @section('title', $entity)
-
-@php
-$dataSource = ['sub_project_id' => $subProjects,'prod_order' => $prod_orders];
-@endphp
-
 @section('content')
+
+{{-- @dd($tableDataSource, $tableColumns); --}}
 <div class="px-4">
-    <x-renderer.modes-control :dataSource="$dataSource" :itemsSelected="$urlParams" />
+    <x-renderer.modes-control :dataSource="$dataModeControl" :itemsSelected="$urlParams" />
     <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" />
     @endsection
 </div>

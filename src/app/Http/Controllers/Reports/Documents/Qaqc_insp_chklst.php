@@ -5,20 +5,22 @@ namespace App\Http\Controllers\Reports\Documents;
 use App\Helpers\Helper;
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Models\Attachment;
+use App\Models\Prod_order;
+use App\Models\Qaqc_insp_tmpl;
+use App\Models\Sub_project;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 
 class Qaqc_insp_chklst extends Report_ParentController
 {
+    protected $pagingSize = 10000;
     protected $viewName = 'document-qaqc-insp-chklst';
 
     public function getSqlStr($urlParams)
     {
         $sql =  " SELECT
-                        po.id
-                        ,tp.id AS template
-                        ,sp.name AS project_name
+                        tp.id AS template
                         ,l.value AS sign
                         ,l.value_comment AS value_comment
                         ,r.qaqc_insp_chklst_sht_id AS sheet_id
@@ -39,22 +41,20 @@ class Qaqc_insp_chklst extends Report_ParentController
                         ,divide_control.c1
                         ,divide_control.c2
                         ,divide_control.c3
-                        ,divide_control.c4
-                
+                        ,divide_control.c4";
+        if (isset($urlParams['prod_order_id'])) $sql .= "\n ,po.id";
+        if (isset($urlParams['sub_project_id'])) $sql .= " \n ,sp.name AS project_name";
+        $sql .= "\n FROM qaqc_insp_chklst_runs r
+                    JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id
+                    JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
+                    JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id
+                    JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
+                    JOIN control_types ct ON ct.id = l.control_type_id";
+        if (isset($urlParams['prod_order_id'])) $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
+        if (isset($urlParams['sub_project_id'])) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id";
 
-            FROM qaqc_insp_chklst_runs r
-                JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id";
-
-        if (isset($urlParams['prod_order_id'])) $sql .= " \n JOIN prod_orders po ON po.id = '{{prod_order_id}}' \n";
-        $sql .= " \n JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
-                JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id
-                JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
-                JOIN control_types ct ON ct.id = l.control_type_id
-                JOIN sub_projects sp ON sp.id = po.sub_project_id
-                LEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
-                JOIN qaqc_insp_groups g ON g.id = l.qaqc_insp_group_id
-
-                 
+        $sql .= "\nLEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
+                JOIN qaqc_insp_groups g ON g.id = l.qaqc_insp_group_id 
                 LEFT JOIN (
                     SELECT id as control_group_id
                     , REVERSE(SUBSTRING_INDEX(REVERSE(SUBSTRING_INDEX(cg.name, '|', 1)), '|', 1)) AS c1
@@ -89,14 +89,15 @@ class Qaqc_insp_chklst extends Report_ParentController
 
     protected function enrichDataSource($dataSource, $urlParams)
     {
+        // dd(implode($urlParams));
+        if (!count(array_values($urlParams))) return [];
+        $dataArray = $dataSource->items();
         $lines =  [];
-        foreach ($dataSource as $item) {
-            if (isset($item['line_id'])) {
-                $lines[$item['line_id']] = $item;
+        foreach ($dataArray as $item) {
+            if (isset($item->line_id)) {
+                $lines[$item->line_id] = (array)$item;
             }
         }
-        // dd($lines);
-
         $descIdLines = [];
         array_walk($lines, function ($value, $key) use (&$descIdLines) {
             $descIdLines[$value['line_description']][] = $key;
@@ -110,14 +111,15 @@ class Qaqc_insp_chklst extends Report_ParentController
         foreach ($descIdLines as $ids) {
             $str = '';
             foreach ($ids as $id) {
-                // dump($id);
                 $item = $lines[$id];
+                // dd($item);
                 if (!is_null($item['c1'])) {
                     $str .= "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createLongStrHTML($item) . "</tr>";
                     $str .= $this->createStrImage($item);
                     $str .=  $this->createStrComment($item);
                 } else {
-                    $str .=  $item['sign'];
+                    // $str .=  $item['sign'];
+                    $str .=  1000000000000000000;
                 }
                 $arrayHtml[$id] = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str . "</tbody>" . "</table>";
             }
@@ -130,28 +132,26 @@ class Qaqc_insp_chklst extends Report_ParentController
                 $arrayMaxRun[$id] = $value;
             }
         }
-        // dd($arrayMaxRun, $lines);
         $sheetGroup = Report::groupArrayByKey($arrayMaxRun, 'sheet_id');
         // dd($sheetGroup);
 
         $sheetId_Desc = [];
         foreach ($sheetGroup as $sheetId => $value) {
             $groupDesc = Report::groupArrayByKey($value, 'line_description');
-            // dd($groupDesc);
             foreach ($groupDesc as $key => $value) {
                 $groupDesc[$key] = array_pop($value);
             }
-            // dd($groupDesc);
             $sheetId_Desc[$sheetId] = $groupDesc;
         }
-        // dd($sheetId_Desc);
         $data = [];
         foreach ($sheetId_Desc as $sheetId => $values) {
             $data[$sheetId] = array_values($values);
         }
         ksort($data);
+        $dataSource->setCollection(collect($data));
+
         // dump("123", $data);
-        return $data;
+        return $dataSource;
     }
 
     protected function getAttachment($object_type, $object_id)
@@ -221,8 +221,8 @@ class Qaqc_insp_chklst extends Report_ParentController
 
     private function createStrComment($item)
     {
-        $comment = $item['value_comment'];
-        $td = "<td class='border p-3' colspan = 5 style='width:190px'>$comment</td>";
+        if (is_null($item['value_comment'])) return "<tr> </tr>";
+        $td = "<td class='border p-3' colspan = 5 style='width:190px'>{{$item['value_comment']}}</td>";
         return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
     }
 
@@ -234,5 +234,10 @@ class Qaqc_insp_chklst extends Report_ParentController
 
     public function getDataForModeControl($dataSource = [])
     {
+        $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
+        $prod_orders  = ['prod_order_id' =>  Prod_order::get()->pluck('name', 'id')->toArray()];
+        $insp_tmpls = ['qaqc_insp_tmpl_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
+        $filter_run = ['filter_run' => ['Filter for a latest run', 'Filter for many runs']];
+        return array_merge($subProjects, $prod_orders, $insp_tmpls, $filter_run);
     }
 }

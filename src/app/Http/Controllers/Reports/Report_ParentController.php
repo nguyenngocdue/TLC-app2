@@ -10,6 +10,8 @@ use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -17,8 +19,9 @@ use Illuminate\Support\Str;
 abstract class Report_ParentController extends Controller
 {
     abstract protected function getSqlStr($urlParams);
-    abstract protected function getTableColumns($dataSource = []);
-    abstract protected function getDataForModeControl($dataSource = []);
+    abstract protected function getTableColumns($dataSource);
+    abstract protected function getDataForModeControl($dataSource);
+    protected $pagingSize = 10;
     public function getType()
     {
         return "dashboard";
@@ -49,23 +52,33 @@ abstract class Report_ParentController extends Controller
         // dd($urlParams);
         // if (!$this->getSql($urlParams)) return [];
         $sql = $this->getSql($urlParams);
-        $sqlData = DB::select($sql);
-        $result = array_map(fn ($item) => (array) $item, $sqlData);
-        return $result;
+        $sqlData = DB::select(DB::raw($sql));
+        $collection = collect($sqlData);
+        $page = $_GET['page'] ?? 1;
+        $size = $this->pagingSize;
+        $paginationData = (new LengthAwarePaginator(
+            $collection->forPage($page, $size),
+            $collection->count(),
+            $size,
+            $page
+        ))->appends(request()->query());
+        return $paginationData;
     }
 
     protected function enrichDataSource($dataSource, $urlParams)
     {
+
         return $dataSource;
     }
 
     protected function getSheets($dataSource)
     {
-        if (!is_array($dataSource)) return [];
+        dd($dataSource);
+        // if (!is_array($dataSource)) return [];
         $sheets = array_map(function ($item) {
             $x = isset(array_pop($item)['sheet_name']);
             return $x ? ["sheet_name" => array_pop($item)['sheet_name']] : '';
-        }, $dataSource);
+        }, $dataSource->items());
         return $sheets;
     }
 
@@ -78,10 +91,10 @@ abstract class Report_ParentController extends Controller
         $viewName = strtolower(Str::singular($currentRoute));
 
         $dataSource = $this->getDataSource($urlParams);
+        // dd($dataSource);
 
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
 
-        // dd($dataModeControl);
 
         $dataSource = $this->enrichDataSource($dataSource, $urlParams);
         // dump($dataSource);
@@ -92,12 +105,9 @@ abstract class Report_ParentController extends Controller
         $insp_tmpls = Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray();
 
 
+        // $sheets = $this->getSheets($dataSource);
+        $sheets = [];
 
-        // dump($dataModeControl);
-        $sheets = $this->getSheets($dataSource);
-        // dump($sheets);
-        // dd($sheets);
-        // dd($dataSource);
 
 
         $typeReport = CurrentRoute::getCurrentController();
