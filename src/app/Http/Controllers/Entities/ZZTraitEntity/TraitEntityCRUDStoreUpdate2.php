@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Models\Attachment;
-use App\Utils\Constant;
+use App\Utils\Support\DateTimeConcern;
+use App\Utils\Support\JsonControls;
 use Brian2694\Toastr\Facades\Toastr;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -202,44 +202,18 @@ trait TraitEntityCRUDStoreUpdate2
 
 	private function prepareForValidation2(Request &$request, $props)
 	{
-		$oldRequest = $request->input();
+		$newRequest = $request->input();
 		$dateTimeProps = $props['datetime'];
 		foreach ($dateTimeProps as $subType => $controls) {
 			foreach ($controls as $control) {
 				$propName = substr($control, 1); //Remove first "_"
-				$value = $oldRequest[$propName];
 				// dump($subType, $value);
-				$format = "";
-				switch ($subType) {
-					case "picker_datetime":
-						if ($value) {
-							$format = Constant::FORMAT_DATETIME_ASIAN;
-							$value =  Carbon::createFromFormat($format, $value)->format(Constant::FORMAT_DATETIME_MYSQL);
-						}
-						$oldRequest[$propName] = $value;
-						break;
-					case "picker_date":
-					case "picker_month":
-					case "picker_week":
-					case "picker_quarter":
-					case "picker_year":
-						if ($value) {
-							$format = Constant::FORMAT_DATE_ASIAN;
-							$value =  Carbon::createFromFormat($format, $value)->format(Constant::FORMAT_DATE_MYSQL);
-						}
-						$oldRequest[$propName] = $value;
-						break;
-					case "picker_time":
-						if ($value) {
-							$format = Constant::FORMAT_TIME_ASIAN;
-							$value =  Carbon::createFromFormat($format, $value)->format(Constant::FORMAT_TIME_MYSQL);
-						}
-						$oldRequest[$propName] = $value;
-						break;
+				if (in_array($subType, JsonControls::getDateTimeControls())) {
+					$newRequest[$propName] = DateTimeConcern::convertForSaving($subType, $newRequest[$propName]);
 				}
 			}
 		}
-		$request->replace($oldRequest);
+		$request->replace($newRequest);
 	}
 
 	public function store(Request $request)

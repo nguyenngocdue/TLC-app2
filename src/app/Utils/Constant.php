@@ -19,8 +19,7 @@ class Constant
 
 
     const FORMAT_TIME_MYSQL = "H:i:s";
-    const FORMAT_TIME_ASIAN = "H:i";
-    const FORMAT_TIME_US = "H:i";
+    const FORMAT_TIME = "H:i";
 
     const FORMAT_WEEKDAY_SHORT = "D";
     const FORMAT_YEAR_MONTH = "Y/m";

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Models\Attachment;
-use App\Utils\Constant;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\DefaultValues;
 use App\Utils\Support\Json\Props;
+use App\Utils\Support\JsonControls;
 use Carbon\Carbon;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Support\Collection;
@@ -128,29 +129,11 @@ trait TraitEntityCRUDCreateEdit2
 		$values = $original->getOriginal();
 		foreach ($props as $prop) {
 			$name = $prop['column_name'];
+			if (in_array($prop['control'], JsonControls::getDateTimeControls())) {
+				$values[$name] = DateTimeConcern::convertForLoading($prop['control'], $values[$name]);
+				continue;
+			}
 			switch ($prop['control']) {
-				case "picker_date":
-				case "picker_month":
-				case "picker_week":
-				case "picker_quarter":
-				case "picker_year":
-					if ($values[$name]) {
-						$format = Constant::FORMAT_DATE_MYSQL;
-						$values[$name] =  Carbon::createFromFormat($format, $values[$name])->format(Constant::FORMAT_DATE_ASIAN);
-					}
-					break;
-				case 'picker_datetime':
-					if ($values[$name]) {
-						$format = Constant::FORMAT_DATETIME_MYSQL;
-						$values[$name] =  Carbon::createFromFormat($format, $values[$name])->format(Constant::FORMAT_DATETIME_ASIAN);
-					}
-					break;
-				case "picker_time":
-					if ($values[$name]) {
-						$format = Constant::FORMAT_TIME_MYSQL;
-						$values[$name] =  Carbon::createFromFormat($format, $values[$name])->format(Constant::FORMAT_TIME_ASIAN);
-					}
-					break;
 				case 'checkbox':
 				case 'dropdown_multi':
 					$field_name = substr($name, 0, strlen($name) - 2); //Remove parenthesis()
