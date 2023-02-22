@@ -27,6 +27,5 @@
     <x-renderer.table showNo="true" :columns=" $columns" :dataSource="$dataSource" />
 </div>
 <br />
-<x-modalSettings type="{{$type}}" />
 <script src="{{ asset('js/renderprop.js') }}"></script>
 @endsection

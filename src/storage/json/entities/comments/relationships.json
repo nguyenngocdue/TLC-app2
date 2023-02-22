@@ -25,6 +25,19 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_comment_attachment": {
+        "name": "_comment_attachment",
+        "relationship": "morphMany",
+        "control_name": "comment_attachment",
+        "renderer_view_all": "thumbnails",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "attachment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_commentable": {
         "name": "_commentable",
         "relationship": "morphTo",

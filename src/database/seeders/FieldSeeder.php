@@ -30,6 +30,7 @@ class FieldSeeder extends Seeder
             // 'insp_fail_photos' => 13,
             // 'workplaceRel1' => 14,
             // 'workplaceRel2' => 15,
+            'comment_attachment' => 15,
             'checkboxYesNo' => 16,
             'checkboxPassFail' => 17,
             'dropdownMultiYesNo' => 18,

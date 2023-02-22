@@ -76,9 +76,11 @@ trait TraitEntityCRUDCreateEdit2
 		$props = $this->getCreateEditProps();
 		$props = array_values(array_filter($props, fn ($prop) => $prop['control'] == 'relationship_renderer'));
 		$result = [];
+		// dump($this->superProps);
 		foreach ($props as $index => $prop) {
 			$table01Name = "table" . str_pad($index + 1, 2, 0, STR_PAD_LEFT);
 			$name = $prop['name'];
+			// dump($name);
 			// dump($this->superProps['props'][$name]);
 			$result[$table01Name] = Str::singular($this->superProps['props'][$name]['relationships']['table']);
 		}

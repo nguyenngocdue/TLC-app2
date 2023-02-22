@@ -23,44 +23,50 @@
 
 
     <x-renderer.card title="Comments">
-        @dump($_GET['comment_1'] ??[])
         <form action="" method="GET">
-            <x-renderer.card>
-                <x-renderer.comment2 name="comment_1"/>
+            @dump($_GET['comment01'] ??[])
+            <x-renderer.card title="Comment 01">
+                allowed_delete=1
+                <x-renderer.comment2 comment01Name="comment01" rowIndex=0 fieldId=6 commentId=10 
+                    commentableType='App\Models\EntityName' commentableId=1 
+                    ownerId=1 positionRendered='Position 01' datetime='2022-01-01' content="Text 01"
+                    allowedDelete=1
+                    />
+                    allowed_change_owner=1
+                    <x-renderer.comment2 comment01Name="comment01" rowIndex=1 fieldId=6 commentId=11 
+                    commentableType='App\Models\EntityName' commentableId=1 
+                    ownerId=2 positionRendered='Position 02' datetime='2022-01-02' content="Text 02"
+                    allowedChangeOwner=1
+                    />
+                    allowed_attachment=1
+                    <x-renderer.comment2 comment01Name="comment01" rowIndex=2 fieldId=6 commentId=12 
+                    commentableType='App\Models\EntityName' commentableId=1 
+                    ownerId=3 positionRendered='Position 03' datetime='2022-01-03' content="Text 03"
+                    allowedAttachment=1
+                    />
+                    readonly=1
+                    <x-renderer.comment2 comment01Name="comment01" rowIndex=3 fieldId=6 commentId=13
+                    commentableType='App\Models\EntityName' commentableId=1 
+                    ownerId=4 positionRendered='Position 04' datetime='2022-01-04' content="Text 04"
+                    readonly=1
+                    />
+            </x-renderer.card>
+            @dump($_GET['comment02'] ??[])
+            <x-renderer.card title="Comment 02">
+                <x-renderer.comment2 comment01Name="comment02" rowIndex=0 fieldId=7 commentId=21 
+                    commentableType='App\Models\EntityName' commentableId=1 
+                    ownerId=11 positionRendered='Position 04' datetime='2022-01-11' content="Text 04"
+                    />
+                <x-renderer.comment2 comment01Name="comment02" rowIndex=1 fieldId=7 commentId=22 
+                    commentableType='App\Models\EntityName' commentableId=1 
+                    ownerId=12 positionRendered='Position 05' datetime='2022-01-12' content="Text 05"
+                    />
+                <x-renderer.comment2 comment01Name="comment02" rowIndex=2 fieldId=7 commentId=23 
+                    commentableType='App\Models\EntityName' commentableId=1 
+                    ownerId=13 positionRendered='Position 06' datetime='2022-01-013' content="Text 06"
+                    />
             </x-renderer.card>
             <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
         </form>
-{{--         
-        @dump($_GET)
-        <form action="" method="GET">
-            <x-renderer.card title="dataComment=[], not entering other attributes.">
-                <x-renderer.comment :dataComment="[]" />
-            </x-renderer.card>
-            <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
-        </form>
-        <br />
-        @dump($_GET)
-        <form action="" method="GET">
-            <x-renderer.card title="readonly ={ { true } }, destroyable ={ { true } }, showToBeDeleted  ={ { true } }, name={ { comment_1 } }">
-                <x-renderer.comment readonly={{true}} destroyable={{true}} showToBeDeleted={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment" />
-            </x-renderer.card>
-            <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
-        </form>
-        <br />
-        @dump($_GET)
-        <form action="" method="GET">
-            <x-renderer.card title="readonly={ { false } }, destroyable={ { false } }, showToBeDeleted={ { false } }, name={ { comment_1 } }">
-                <x-renderer.comment readonly={{false}} destroyable={{false}} showToBeDeleted={{false}} name="comment_1" type="department" id="1" :dataComment="$dataComment" />
-            </x-renderer.card>
-            <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
-        </form>
-        <br />
-        @dump($_GET)
-        <form action="" method="GET">
-            <x-renderer.card title="readonly={ { false } }, destroyable={ { true } }, showToBeDeleted={ { false } }, name={ { comment_1 } }, attachmentData={ { $attachmentData } } ">
-                <x-renderer.comment readonly={{false}} showToBeDeleted={{false}} destroyable={{true}} name="comment_1" type="department" id="1" :dataComment="$dataComment" :attachmentData="$attachmentData" />
-            </x-renderer.card>
-            <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>
-        </form> --}}
     </x-renderer.card>
 </div>

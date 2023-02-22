@@ -1,3 +1,6 @@
+.readonly{
+    background-color: #f5f5f5;
+}
 /* Override flow-bite */
 [type='text'],[type='number'],textarea,select{
     /* gray-300 */

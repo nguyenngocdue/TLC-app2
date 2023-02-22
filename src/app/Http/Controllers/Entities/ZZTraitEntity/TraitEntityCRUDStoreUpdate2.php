@@ -200,7 +200,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 	}
 
-	private function prepareForValidation2(Request &$request, $props)
+	private function postValidationForDateTime(Request &$request, $props)
 	{
 		$newRequest = $request->input();
 		$dateTimeProps = $props['datetime'];
@@ -228,8 +228,8 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
 		try {
-			$this->prepareForValidation2($request, $props);
 			$request->validate($this->getValidationRules());
+			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
 			if ($request['tableNames'] == 'fakeRequest') {
 				$newValidation = $this->createTableValidator($e, $request);
@@ -280,8 +280,8 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
 		try {
-			$this->prepareForValidation2($request, $props);
 			$request->validate($this->getValidationRules());
+			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
 			if ($request['tableNames'] == 'fakeRequest') {
 				$newValidation = $this->createTableValidator($e, $request);

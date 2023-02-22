@@ -29,6 +29,7 @@
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2.js') }}"></script>
     <script src="{{ asset('js/components/SearchModal.js') }}"></script>
+    <script src="{{ asset('js/components/KeyArrowTable.js') }}"></script>
     <script src="{{ asset('js/applayout.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>

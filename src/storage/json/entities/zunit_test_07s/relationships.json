@@ -7,18 +7,7 @@
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_attachment": {
-        "name": "_attachment",
-        "relationship": "morphMany",
-        "control_name": "attachment",
-        "renderer_view_all": "count",
-        "renderer_view_all_param": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
+        "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
