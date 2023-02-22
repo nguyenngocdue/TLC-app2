@@ -80,7 +80,7 @@
                     
                 </div>
             </main>
-            <div id="invoice"  class="w-full MUST-NOT-HAVE-X-PADDING-MARGIN-FOR-PRINT-PAGE">
+            <div id="print-pdf-document"  class="w-full h-screen MUST-NOT-HAVE-X-PADDING-MARGIN-FOR-PRINT-PAGE">
                 @yield('content')
             </div>
             <div class="mt-8 no-print"></div>

@@ -5,7 +5,7 @@ namespace App\View\Components\Renderer;
 use App\Models\User;
 use Illuminate\View\Component;
 
-class Comment2 extends Component
+class Comment3 extends Component
 {
     /**
      * Create a new component instance.
@@ -63,7 +63,7 @@ class Comment2 extends Component
     public function render()
     {
         $this->getTableDataSource();
-        return view('components.renderer.comment2', [
+        return view('components.renderer.comment3', [
             'tableEditableColumns' => $this->getTableColumns(),
             'tableDataSource' => $this->getTableDataSource(),
         ]);

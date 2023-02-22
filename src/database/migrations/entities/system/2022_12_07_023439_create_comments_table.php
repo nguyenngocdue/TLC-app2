@@ -17,10 +17,10 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('content')->nullable();
-            $table->text('position_rendered');
             $table->unsignedBigInteger(('owner_id'));
-            $table->unsignedBigInteger('commentable_id')->nullable();
+            $table->text('position_rendered');
             $table->string('commentable_type')->nullable();;
+            $table->unsignedBigInteger('commentable_id')->nullable();
             $table->unsignedBigInteger('category');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;

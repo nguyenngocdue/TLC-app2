@@ -18,7 +18,7 @@
                     
                     function generatePDF() {
                         // Choose the element that your content will be rendered to.
-                        const element = document.getElementById('invoice');
+                        const element = document.getElementById('print-pdf-document');
                         const date =  new Date;
                         const dateFormat = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
                         const opt = {

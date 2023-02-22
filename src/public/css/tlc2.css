@@ -1,5 +1,5 @@
 /* Override flow-bite */
-[type='text'],[type='number'],select{
+[type='text'],[type='number'],textarea,select{
     /* gray-300 */
     border: 1px solid rgb(209 213 219); 
 }
