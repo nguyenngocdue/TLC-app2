@@ -160,7 +160,7 @@ const onChangeDropdown4DateOffset = (listener, table01Name, rowIndex) => {
         const id = makeIdFrom(table01Name, column_name, rowIndex)
         if (debugListener) console.log(theValue)
 
-        const theValueDate = moment().add(theValue, 'days').format("YYYY-MM-DD HH:mm:ss");
+        const theValueDate = moment().add(theValue, 'days').format("DD/MM/YYYY HH:mm");
         if (debugListener) console.log(theValueDate)
 
         getEById(id).val(theValueDate)

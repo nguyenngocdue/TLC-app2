@@ -51,6 +51,19 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getUT3": {
+        "name": "_getUT3",
+        "relationship": "hasMany",
+        "control_name": "getUT3",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getUT9Reduce11": {
         "name": "_getUT9Reduce11",
         "relationship": "hasMany",

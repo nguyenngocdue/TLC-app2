@@ -20,7 +20,7 @@
         "column_name": "name",
         "column_type": "string",
         "label": "Title",
-        "control": "text",
+        "control": "textarea",
         "align": "",
         "col_span": "6",
         "width": "200",

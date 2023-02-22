@@ -10,6 +10,28 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "label": "",
+        "default_value": "",
+        "validation": "required",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_parent_id": {
+        "name": "_parent_id",
+        "column_name": "parent_id",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_datetime1": {
         "name": "_datetime1",
         "column_name": "datetime1",
