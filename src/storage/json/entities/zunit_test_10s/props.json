@@ -223,6 +223,22 @@
         "hidden_print": "",
         "new_line": "true"
     },
+    "_getUT3": {
+        "name": "_getUT3",
+        "column_name": "getUT3",
+        "column_type": "eloquent_prop",
+        "label": "UT3",
+        "control": "relationship_renderer",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": "true"
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",

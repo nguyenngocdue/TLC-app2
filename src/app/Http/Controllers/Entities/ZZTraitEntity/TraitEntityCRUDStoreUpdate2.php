@@ -209,7 +209,9 @@ trait TraitEntityCRUDStoreUpdate2
 				$propName = substr($control, 1); //Remove first "_"
 				// dump($subType, $value);
 				if (in_array($subType, JsonControls::getDateTimeControls())) {
-					$newRequest[$propName] = DateTimeConcern::convertForSaving($subType, $newRequest[$propName]);
+					if (isset($newRequest[$propName])) {
+						$newRequest[$propName] = DateTimeConcern::convertForSaving($subType, $newRequest[$propName]);
+					}
 				}
 			}
 		}
@@ -270,6 +272,9 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function update(Request $request, $id)
 	{
+		// if ($request['tableNames'] == 'fakeRequest') {
+		// 	dump($request->input());
+		// }
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
 			$props = $this->getProps1();
@@ -319,6 +324,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
+		// dd();
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 }

@@ -15,6 +15,7 @@ class Zunit_test_10 extends ModelExtended
         "getDiscipline1" => ['hasMany', Prod_discipline_1::class, 'prod_discipline_id'],
         "getUT1" => ['hasMany', Zunit_test_01::class, 'parent_id'],
         "getUT2" => ['hasMany', Zunit_test_02::class, 'parent_id'],
+        "getUT3" => ['hasMany', Zunit_test_03::class, 'parent_id'],
         "getUT9Reduce11" => ['hasMany', Zunit_test_09::class, 'parent_id'],
         "getUT9Reduce1111" => ['hasMany', Zunit_test_09::class, 'parent_id'],
         "getUT9Assign" => ['hasMany', Zunit_test_09::class, 'parent_id'],
