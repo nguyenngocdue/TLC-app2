@@ -25,6 +25,8 @@ class PickerDate4 extends Component
      */
     public function render()
     {
+        $this->cell = str_starts_with($this->cell, "No dataIndex for ") ? 0 : $this->cell;
+        if ($this->cell === 'DO_NOT_RENDER') return "";
         $this->cell = DateTimeConcern::convertForLoading('picker_date', $this->cell);
         return $this->cell;
     }
