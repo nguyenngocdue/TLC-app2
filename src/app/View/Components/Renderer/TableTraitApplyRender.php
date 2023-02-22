@@ -71,19 +71,6 @@ trait TableTraitApplyRender
             $blade = Blade::render($output);
             return $blade;
         }
-        // switch ($column['renderer']) {
-        //     case 'picker-datetime4':
-        //         // dump($rawData);
-        //         $rawData = DateTimeConcern::convertForLoading('picker_datetime', $rawData);
-        //         // dump($rawData);
-        //         break;
-        //     case 'picker-date4':
-        //         $rawData = DateTimeConcern::convertForLoading('picker_date', $rawData);
-        //         break;
-        //     case 'picker-time4':
-        //         $rawData = DateTimeConcern::convertForLoading('picker_time', $rawData);
-        //         break;
-        // }
 
         $output = "<$tagName $attributes>$rawData</$tagName>";
 

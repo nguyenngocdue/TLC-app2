@@ -42,6 +42,18 @@ trait TraitTableColumnRO
                     $newColumn['renderer'] = 'toggle';
                     $newColumn["align"] = "center";
                     break;
+                case 'picker_datetime':
+                    $newColumn['renderer'] = 'picker-datetime4';
+                    $newColumn["align"] = "center";
+                    break;
+                case 'picker_date':
+                    $newColumn['renderer'] = 'picker-date4';
+                    $newColumn["align"] = "center";
+                    break;
+                case 'picker_time':
+                    $newColumn['renderer'] = 'picker-time4';
+                    $newColumn["align"] = "center";
+                    break;
                 default:
                     $newColumn['renderer'] = "text";
                     break;

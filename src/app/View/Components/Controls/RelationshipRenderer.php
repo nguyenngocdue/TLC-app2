@@ -106,7 +106,6 @@ class RelationshipRenderer extends Component
 
         $row = $modelPath::find($id);
         $isOrderable = $row ? $this->isTableOrderable($row, $colName,) : [];
-        dump($isOrderable);
         $dataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
         switch ($renderer_edit) {
             case "many_icons":
