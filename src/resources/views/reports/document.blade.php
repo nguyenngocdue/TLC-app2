@@ -3,18 +3,12 @@
 @section('title', $entity)
 @section('content')
 
-@php
-$dataSource = [
-'sub_project_id' => $subProjects,
-'prod_order_id' => $prod_orders ,
-'chklsts' => $insp_tmpls,
-'filter_run' => ['Filter for a latest run', 'Filter for many runs'],
-];
-@endphp
+{{-- @dump($tableDataSource, $tableColumns) --}}
+{{-- @dump($sheets) --}}
 
 @section('content')
 <div class="md:px-4">
-    <x-renderer.modes-control :dataSource="$dataSource" :itemsSelected="$urlParams" />
+    <x-renderer.modes-control :dataSource="$dataModeControl" :itemsSelected="$urlParams" />
 </div>
 <div class="md:px-4">
     @if (count($sheets))
@@ -27,7 +21,6 @@ $dataSource = [
     @php
     @endphp
     <x-renderer.report.header-report :dataSource="array_pop($data)" />
-    {{-- @dump($data); --}}
     <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$data" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
     <x-renderer.page-break />
     @endforeach

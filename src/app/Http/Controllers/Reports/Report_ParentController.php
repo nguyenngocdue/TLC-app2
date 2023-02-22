@@ -10,6 +10,8 @@ use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -17,7 +19,9 @@ use Illuminate\Support\Str;
 abstract class Report_ParentController extends Controller
 {
     abstract protected function getSqlStr($urlParams);
-    abstract protected function getTableColumns($dataSource = []);
+    abstract protected function getTableColumns($dataSource);
+    abstract protected function getDataForModeControl($dataSource);
+    protected $pagingSize = 10;
     public function getType()
     {
         return "dashboard";
@@ -29,7 +33,7 @@ abstract class Report_ParentController extends Controller
     {
         // dd($urlParams);
         $sqlStr = $this->getSqlStr($urlParams);
-        if (empty($urlParams)) return  "";
+        // if (empty($urlParams)) return  "";
 
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
@@ -39,42 +43,59 @@ abstract class Report_ParentController extends Controller
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
         }
-        // dump($sqlStr);
+        // dd($sqlStr);
         return $sqlStr;
     }
 
     protected function getDataSource($urlParams)
     {
-        if (!$this->getSql($urlParams)) return [];
+        // dd($urlParams);
+        // if (!$this->getSql($urlParams)) return [];
         $sql = $this->getSql($urlParams);
-        $sqlData = DB::select($sql);
-        $result = array_map(fn ($item) => (array) $item, $sqlData);
-        return $result;
+        $sqlData = DB::select(DB::raw($sql));
+        $collection = collect($sqlData);
+        $page = $_GET['page'] ?? 1;
+        $size = $this->pagingSize;
+        $paginationData = (new LengthAwarePaginator(
+            $collection->forPage($page, $size),
+            $collection->count(),
+            $size,
+            $page
+        ))->appends(request()->query());
+        return $paginationData;
     }
 
     protected function enrichDataSource($dataSource, $urlParams)
     {
+
         return $dataSource;
     }
 
     protected function getSheets($dataSource)
     {
-        if (!is_array($dataSource)) return [];
+        dd($dataSource);
+        // if (!is_array($dataSource)) return [];
         $sheets = array_map(function ($item) {
             $x = isset(array_pop($item)['sheet_name']);
             return $x ? ["sheet_name" => array_pop($item)['sheet_name']] : '';
-        }, $dataSource);
+        }, $dataSource->items());
         return $sheets;
     }
 
     public function index(Request $request)
     {
+
         $urlParams = $request->all();
 
         $currentRoute = CurrentRoute::getTypeController();
         $viewName = strtolower(Str::singular($currentRoute));
 
         $dataSource = $this->getDataSource($urlParams);
+        // dd($dataSource);
+
+        $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
+
+
         $dataSource = $this->enrichDataSource($dataSource, $urlParams);
         // dump($dataSource);
         $columns = $this->getTableColumns($dataSource);
@@ -84,10 +105,9 @@ abstract class Report_ParentController extends Controller
         $insp_tmpls = Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray();
 
 
-        // dd($dataSource);
-        $sheets = $this->getSheets($dataSource);
-        // dump($sheets);
-        // dd($sheets);
+        // $sheets = $this->getSheets($dataSource);
+        $sheets = [];
+
 
 
         $typeReport = CurrentRoute::getCurrentController();
@@ -100,7 +120,8 @@ abstract class Report_ParentController extends Controller
             'urlParams' => $urlParams,
             'entity' => $currentRoute,
             'typeReport' => $typeReport,
-            'sheets' => $sheets
+            'sheets' => $sheets,
+            'dataModeControl' => $dataModeControl
         ]);
     }
 }

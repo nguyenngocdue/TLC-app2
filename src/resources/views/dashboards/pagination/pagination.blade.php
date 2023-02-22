@@ -10,12 +10,12 @@ $classNameDisabled = "focus:shadow-outline-purple rounded-md border border-r-0 b
     {{-- Previous Page Link --}}
     @if (!$paginator->onFirstPage())
     <li>
-        <a href="{{ $paginator->toArray()['first_page_url'] }}" class="{{$className}}" aria-label="Next">
+        <a href="{{ substr($paginator->toArray()['first_page_url'],1) }}" class="{{$className}}" aria-label="Next">
             <span><i class="fas fa-angle-double-left"></i></span>
         </a>
     </li>
     <li>
-        <a href="{{ $paginator->previousPageUrl() }}" class="{{$className}}" aria-label="Next">
+        <a href="{{ substr($paginator->previousPageUrl(),1) }}" class="{{$className}}" aria-label="Next">
             <span><i class="fas fa-angle-left"></i></span>
         </a>
     </li>
@@ -28,7 +28,7 @@ $classNameDisabled = "focus:shadow-outline-purple rounded-md border border-r-0 b
     @if ($page == $paginator->currentPage())
     <li><a class="{{$classNameDisabled}}">{{$page}}</a></li>
     @else
-    <li><a class="{{$className}}" href="{{$url}}">{{$page}}</a></li>
+    <li><a class="{{$className}}" href="{{substr($url,1)}}">{{$page}}</a></li>
     @endif
     {{-- @if ($page == $paginator->currentPage())
     <li><span class="focus:shadow-outline-purple rounded-md border border-r-0 border-purple-600 bg-purple-600 m-0.5 px-3 py-1 text-white transition-colors duration-150 focus:outline-none">{{ $page }}</span></li>
@@ -49,12 +49,12 @@ $classNameDisabled = "focus:shadow-outline-purple rounded-md border border-r-0 b
     {{-- Next Page Link --}}
     @if ($paginator->hasMorePages())
     <li>
-        <a class="{{$className}}" href="{{ $paginator->nextPageUrl() }}">
+        <a class="{{$className}}" href="{{ substr($paginator->nextPageUrl(),1) }}">
             <span><i class="fas fa-angle-right"></i></span>
         </a>
     </li>
     <li>
-        <a class="{{$className}}" href="{{ $paginator->toArray()['last_page_url'] }}">
+        <a class="{{$className}}" href="{{ substr($paginator->toArray()['last_page_url'],1) }}">
             <span><i class="fas fa-angle-double-right"></i></span>
         </a>
     </li>

@@ -15,7 +15,7 @@ $name = App\Utils\Support\Report::slugName($sheetDesc)
             </div>
             <div class="flex flex-col">
                 <span>TLC Modular</span>
-                <span>{{$dataSource['project_name']}}</span>
+                <span>{{isset($dataSource['project_name']) ? $dataSource['project_name'] : "" }}</span>
             </div>
         </div>
         <img class="w-40" src="https://assets.website-files.com/61e52058abc83b0e8416a425/61f0ce6fe8161c72f61be858_logo-blue.svg" />

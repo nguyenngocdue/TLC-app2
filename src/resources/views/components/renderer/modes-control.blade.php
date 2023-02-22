@@ -1,4 +1,3 @@
-{{-- @dump($dataSource) --}}
 <form class="w-full no-print flex flex-row-reverse   rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3 ">
     <div class="grid grid-rows-1 ">
         <div class="grid grid-cols-12 items-center" style="display: flex">

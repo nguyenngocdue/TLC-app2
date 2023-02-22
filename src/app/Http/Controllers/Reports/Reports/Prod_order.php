@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Models\Prod_order as ModelsProd_order;
+use App\Models\Sub_project;
+
+
 
 class Prod_order extends Report_ParentController
 
@@ -71,5 +75,16 @@ class Prod_order extends Report_ParentController
                 'align' => 'right',
             ],
         ];
+    }
+    public function getDataForModeControl($dataSource)
+    {
+        $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
+        $prod_orders  = ['prod_order' =>  ModelsProd_order::get()->pluck('name', 'id')->toArray()];
+        return array_merge($subProjects, $prod_orders);
+    }
+    protected function enrichDataSource($dataSource, $urlParams)
+    {
+        if (!count($urlParams)) return [];
+        return $dataSource;
     }
 }
