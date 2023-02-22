@@ -16,16 +16,16 @@ use App\Http\Controllers\Workflow\ManageWidgetsController;
 use App\Utils\Support\Entities;
 use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 $entities = Entities::getAll();
 $qrCodeApps = JsonControls::getQrCodeApps();
+
 Auth::routes();
 Route::group([
     'middleware' => ['auth', 'impersonate', 'role_set:guest|admin']
-], function ()  use ($entities, $qrCodeApps) {
+], function ()  use ($entities) {
     Route::group([
         'prefix' => 'dashboard'
     ], function () use ($entities) {
@@ -133,16 +133,7 @@ Route::group([
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::get('impersonate/user/{id}', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
 });
-Route::group([
-    'prefix' => 'app'
-], function () use ($qrCodeApps) {
-    foreach ($qrCodeApps as $qrCodeApp) {
-        $singular = Str::singular($qrCodeApp);
-        $ucfirstName = Str::ucfirst($singular);
-        $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
-        Route::get("{$qrCodeApp}/{slug}", ["{$path}EntityCRUDController", "showQR"])->name("{$qrCodeApp}.showQR");
-    }
-});
+
 
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 // Route::get('/mail-test', [MailController::class, 'index']);
@@ -162,6 +153,15 @@ Route::group([
     Route::resource('manageWidgets', ManageWidgetsController::class)->only('index', 'store', 'create');
     Route::resource('manageApps', ManageAppsController::class)->only('index', 'store', 'create');
 });
-
 Route::get('components', [ComponentDemo::class, 'index']);
 Route::get('redis', [RedisController::class, 'index']);
+Route::group([
+    'prefix' => 'app'
+], function () use ($qrCodeApps) {
+    foreach ($qrCodeApps as $qrCodeApp) {
+        $singular = Str::singular($qrCodeApp);
+        $ucfirstName = Str::ucfirst($singular);
+        $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
+        Route::get("{$qrCodeApp}/{slug}", ["{$path}EntityCRUDController", "showQR"])->name("{$qrCodeApp}.showQR");
+    }
+});
