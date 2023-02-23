@@ -12,7 +12,9 @@ const renderHtml = (apps) => {
         let html = ``
         apps[property].forEach((app) => {
             const status = capitalize(app.status ?? '')
-            // const package = capitalize(app.package)
+            const statusHtml = status
+                ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>`
+                : ''
             const { package_rendered } = app
             html += `<li>
                         <a href="${
@@ -22,7 +24,7 @@ const renderHtml = (apps) => {
                             <span class="flex-1 ml-3 whitespace-nowrap">${
                                 app.title
                             }</span>
-                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>
+                            ${statusHtml}
                             <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${package_rendered}</span>
                         </a>
                     </li>`
@@ -64,10 +66,11 @@ function matchRegex(valueSearch, app) {
         app.status,
         app.title,
         app.sub_package_rendered,
-        app.package_rendered,
+        // app.package_rendered,
         app.name,
         app.nickname,
     ]
+    console.log(arr)
     const str = arr.join(' ')
     return regex.test(str)
 }

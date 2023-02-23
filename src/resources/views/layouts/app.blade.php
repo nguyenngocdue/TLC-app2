@@ -62,8 +62,8 @@
     <div  class="bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         {{-- <x-homepage.sidebar2 /> --}}
         <div class="flex flex-col flex-1 w-full">
-            @auth
             <x-homepage.navbar2 />
+            @auth
             <main class="mt-16 mb-8 w-full flex-grow bg-green-400 dark:bg-gray-700 no-print">
                 <div class="w-full h-18">
                     <div class="no-print flex bg-white dark:bg-gray-800 flex-wrap items-center justify-between h-full text-purple-600 dark:text-purple-300">
@@ -79,7 +79,10 @@
                 </div>
             </main>
             @endauth
-            
+            @guest
+                <div class="mt-16 mb-8 no-print">
+                </div>
+            @endguest
             <div id="print-pdf-document"  class="w-full h-screen MUST-NOT-HAVE-X-PADDING-MARGIN-FOR-PRINT-PAGE">
                 @yield('content')
             </div>

@@ -43,6 +43,14 @@ class CurrentRoute
         return $result;
     }
 
+    public static function getEntitySlug($typeSingular)
+    {
+        $current = Route::current();
+        $typeSingular = Str::singular($typeSingular);
+        $result = $current->parameters['slug'] ?? null;
+        return $result;
+    }
+
     /** This will return hse_incident_reports.edit */
     public static function getControllerAs()
     {

@@ -19,7 +19,6 @@ class Breadcrumb extends Component
         $singular = CurrentRoute::getTypeSingular();
         $blackList = ['dashboard', 'permission', 'manageApp', 'manageStatus', 'manageWidget', 'reportIndex'];
         if (in_array($singular, $blackList)) return "";
-
         $links = [];
         $isAdmin = CurrentUser::isAdmin();
         $action = CurrentRoute::getControllerAction();
@@ -31,30 +30,33 @@ class Breadcrumb extends Component
             if ($first_id) {
                 $links[] = ['href' => route($type . '.edit', $first_id), 'title' => 'View First', 'icon' => '<i class="fa-duotone fa-backward-fast"></i>'];
             }
-        }
-        if ($isAdmin) {
             if (in_array($singular, ['attachment', 'comment'])) {
                 $links[] = ['href' => route($singular . '_ppt.index'), 'title' => 'Properties', 'icon' => '<i class="fa-solid fa-square-sliders-vertical"></i>'];
             }
         }
-        if ($action === 'show') {
-            $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
-            $links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
+        switch ($action) {
+            case 'show':
+                $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
+                $links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
+                break;
+            case 'showQR':
+                $slug = CurrentRoute::getEntitySlug($singular);
+                $modelPath = Str::modelPathFrom($singular);
+                $id = $modelPath::where('slug', $slug)->first()['id'];
+                $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
+                $links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
+                break;
+            case 'showQRCode':
+                $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
+                break;
+            case 'edit':
+                $links[] = ['href' => route($type . '.show', $id), 'title' => 'Print Mode', 'icon' => '<i class="fa-duotone fa-print"></i>'];
+                break;
+            default:
+                break;
         }
-        if ($action === 'showQR') {
-            $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
-        }
-        if ($action === 'showQRCode') {
-            $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
-        }
-        if ($action === 'edit') {
-            $links[] = ['href' => route($type . '.show', $id), 'title' => 'Print Mode', 'icon' => '<i class="fa-duotone fa-print"></i>'];
-        }
-
-
         $links[] = ['href' => route($type . '.index'), 'title' => 'View All', 'icon' => '<i class="fa-solid fa-table-cells"></i>'];
         $links[] = ['href' => route($type . '.create'), 'title' => 'Add New', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];
-
         if ($isAdmin) {
             $links[] = ['href' => route($singular . '_prp.index'), 'title' => 'Workflows', 'icon' => '<i class="fa-duotone fa-sitemap"></i>'];
         }

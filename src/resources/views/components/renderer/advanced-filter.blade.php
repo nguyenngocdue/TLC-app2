@@ -80,7 +80,7 @@
     
         </div>
         <div >
-            <button type="submit" name="action" value="updateAdvanceFilter" class="mt-4 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-semibold text-base text-white hover:bg-purple-400 focus:outline-none">
+            <button type="submit" name="action" value="updateAdvanceFilter" class="mt-4 focus:shadow-outline rounded bg-emerald-500 py-1.5 px-4 font-semibold text-base text-white hover:bg-purple-400 focus:outline-none">
                 Apply
             </button>
         </div>

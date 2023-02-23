@@ -2,7 +2,7 @@
     <i class="fa-duotone fa-gear"></i>
 </x-renderer.button>
   <template x-if="isSettingMenuOpen">
-    <div tabindex="-1" class="fixed sm:p-0 md:p-0 top-0 left-0 right-0 z-50 lg:p-4 h-full bg-gray-200 dark:bg-slate-400 dark:bg-opacity-70 bg-opacity-70 justify-center items-center flex" aria-hidden="true" @keydown.escape="closeSettingMenu">
+    <div tabindex="-1" class="fixed sm:p-0 md:p-0 top-0 left-0 right-0 z-50 lg:p-4 h-full bg-gray-100 dark:bg-slate-400 dark:bg-opacity-70 bg-opacity-70 justify-center items-center flex" aria-hidden="true" @keydown.escape="closeSettingMenu">
         <div class="relative sm:mx-0 md:mx-10  w-full lg:mx-20 xl:mx-56 2xl:mx-96 h-auto md:h-auto sm:h-auto" @click.away="">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
