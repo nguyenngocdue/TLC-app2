@@ -16,8 +16,9 @@ trait TraitTableColumnEditable2ndThead
         foreach ($columns as $column) {
             if (isset($column['cloneable']) && $column['cloneable']) {
                 $dataIndex = $column['dataIndex'];
+                $renderer = $column['renderer'];
                 $button = "";
-                $button .= "<x-renderer.button size='xs' value='xxx456' onClick=\"cloneFirstLineDown('$dataIndex', '$tableId')\" title='Clone value of the first line'>";
+                $button .= "<x-renderer.button size='xs' value='xxx456' onClick=\"cloneFirstLineDown('$dataIndex', '$tableId','$renderer')\" title='Clone value of the first line'>";
                 $button .= $copyIcon;
                 $button .= "</x-renderer.button>";
                 $result[$dataIndex] = Blade::render($button);

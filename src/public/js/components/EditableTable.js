@@ -1,14 +1,20 @@
 const debugEditable = false
 const editableColumns = {}, tableObject = {}, entityId = null
 const getNameIndexOfRowIndex = (tableId, rowIndex) => {
+    // const debugEditable = true
     const rows = $("#" + tableId + " > tbody")[0].children
     const row = rows[rowIndex]
+    if (debugEditable) console.log("row", row)
     for (let i = 0; i < row.childNodes.length; i++) {
         const td = row.childNodes[i]
-        const tdName = td.childNodes[0].data
-        // console.log(tdName, tdName.startsWith(tableId))
-        if (tdName.startsWith(tableId + "[action]")) {
-            return tdName.substring(tableId.length + "[action][".length, tdName.length - 1)
+        for (let j = 0; j < td.childNodes.length; j++) {
+            if (td.childNodes[j].name == undefined) continue
+            if (debugEditable) console.log(td, td.childNodes[j], td.childNodes[j].name)
+            const tdName = td.childNodes[j].name
+            if (debugEditable) console.log(tdName, tdName.startsWith(tableId))
+            if (tdName.startsWith(tableId + "[finger_print]")) {
+                return tdName.substring(tableId.length + "[finger_print][".length, tdName.length - 1)
+            }
         }
     }
     return -1
@@ -44,7 +50,7 @@ const setValueOfTrByName = (aRow, fieldName, value) => {
         })
     })
 }
-const getValueById = (id) => getEById(id).val()
+const getValueById = (id, renderer) => (renderer === 'toggle') ? getEById(id)[0].checked : getEById(id).val()
 const setValueById = (id, value) => getEById(id).val(value)
 
 const getCellValueByName = (tableId, columnName, rowIndex) => {
@@ -173,12 +179,8 @@ const duplicateEditableTable = (params) => {
         //Do not duplicate those columns
         if (['action', 'id', 'order_no'].includes(column.dataIndex)) continue
         const name = tableId + "[" + column['dataIndex'] + "][" + nameIndex + "]"
-        const value = getValueById(name)
-        if (column['renderer'] === 'toggle') {
-            valuesOfOrigin[column['dataIndex']] = getEById(name)[0].checked
-        } else {
-            valuesOfOrigin[column['dataIndex']] = value
-        }
+        const value = getValueById(name, column['renderer'])
+        valuesOfOrigin[column['dataIndex']] = value
     }
     // console.log(valuesOfOrigin)
     addANewLine({ tableId: control.value, valuesOfOrigin })
@@ -209,18 +211,23 @@ const trashEditableTable = (params) => {
     }
 }
 
-const cloneFirstLineDown = (dataIndex, tableId) => {
+const cloneFirstLineDown = (dataIndex, tableId, renderer) => {
     // const debugEditable = true
     const nameIndex = getNameIndexOfRowIndex(tableId, 0)
-    if (debugEditable) console.log(nameIndex)
+    if (debugEditable) console.log(nameIndex, renderer)
     const name = tableId + "[" + dataIndex + "][" + nameIndex + "]"
-    const value = getValueById(name)
+    const value = getValueById(name, renderer)
     // const value = getCellValueByName(tableId, '[' + dataIndex + ']', 0)
     if (debugEditable) console.log(tableId, dataIndex, '=', value)
     const length = getAllRows(tableId).length
     for (let i = 0; i < length; i++) {
         const id = makeIdFrom(tableId, dataIndex, i)
-        getEById(id).val(value)
-        getEById(id).trigger('change')
+        if (renderer === 'toggle') {
+            getEById(id)[0].checked = value
+            // getEById(id).trigger('change')
+        } else {
+            getEById(id).val(value)
+            getEById(id).trigger('change')
+        }
     }
 }

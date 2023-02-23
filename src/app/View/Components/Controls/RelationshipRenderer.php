@@ -139,7 +139,7 @@ class RelationshipRenderer extends Component
                     'isOrderable' => $isOrderable,
                     'table01Name' => $this->table01Name,
                     'editableColumns' => $editableColumns,
-                    'dataSource2ndThead' => $this->makeEditable2ndThead($columns, $this->table01Name),
+                    'dataSource2ndThead' => $this->makeEditable2ndThead($editableColumns, $this->table01Name),
                     'dataSourceWithOld' => $dataSourceWithOld,
 
                     'tableFooter' => $tableFooter,
