@@ -1,3 +1,4 @@
+const removeEmptinessLine = (tableId) => $('#' + tableId + '_emptiness').remove()
 const addANewLine = (params) => {
     const { tableId } = params
     // console.log('addANewLine', tableId)
@@ -5,16 +6,10 @@ const addANewLine = (params) => {
     // console.log("valuesOfOrigin: ", valuesOfOrigin)
     const { columns, showNo, showNoR, tableDebugJs, isOrderable } = tableObject[tableId]
     // console.log("ADD LINE TO", params, tableDebugJs, isOrderable)
-    const table = document.getElementById(tableId)
-    const allRows = getAllRows(tableId)
-    if (allRows.length == 1) {
-        const tr = allRows[0]
-        const name = tableId + '_emptiness'
-        if (tr.id === name) $('#' + name).remove()
-    }
-    const newRowIndex = getAllRows(tableId).length
 
+    const table = document.getElementById(tableId)
     const row = table.insertRow()
+    removeEmptinessLine(tableId) //<< Must remove after insertRow, otherwise it will insert into 2nd thead
     row.classList.add('bg-lime-200')
     let fingerPrint = ''
     if (showNo) { //<< Ignore No. column
@@ -23,6 +18,7 @@ const addANewLine = (params) => {
         noCell.innerHTML = "New"
     }
     const toDoAfterAdded = []
+    const newRowIndex = getAllRows(tableId).length
     columns.forEach((column) => {
         if (column['hidden'] == true) return
         let renderer = 'newCell'

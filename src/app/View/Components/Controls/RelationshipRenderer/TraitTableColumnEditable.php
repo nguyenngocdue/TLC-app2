@@ -13,6 +13,10 @@ trait TraitTableColumnEditable
         $result = [['dataIndex' => 'action', 'width' => 5,]];
         foreach ($columns as $column) {
             $newColumn = $column;
+            if (!isset($sp['props']["_" . $column['dataIndex']])) {
+                $msg = "Key _" . $column['dataIndex'] . " not found in props.json of $tableName ($table01Name)";
+                dd($msg);
+            }
             $prop = $sp['props']["_" . $column['dataIndex']];
             // dump($prop);
             $newColumn['title'] = $column['title'] ?? $prop['label']; //. " <br/>" . $prop['control'];
