@@ -102,14 +102,14 @@ class Hse_corrective_action extends ModelExtended
         return [
             ['dataIndex' => 'order_no', 'invisible' => true],
             ['dataIndex' => 'id', 'invisible' => true],
-            ['dataIndex' => 'hse_incident_report_id', 'invisible' => !true, 'value_as_parent_id' => true],
-            ['dataIndex' => 'name'],
-            ['dataIndex' => 'work_area_id', 'hidden' => !true],
-            ['dataIndex' => 'assignee_1'],
-            ['dataIndex' => 'opened_date'],
-            ['dataIndex' => 'status',],
-            ['dataIndex' => 'priority_id',],
-            ['dataIndex' => 'unsafe_action_type_id',],
+            ['dataIndex' => 'hse_incident_report_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name', 'cloneable' => true],
+            ['dataIndex' => 'work_area_id', 'hidden' => !true, 'cloneable' => true],
+            ['dataIndex' => 'assignee_1', 'cloneable' => true],
+            ['dataIndex' => 'opened_date', 'cloneable' => true],
+            ['dataIndex' => 'status', 'cloneable' => true],
+            ['dataIndex' => 'priority_id', 'cloneable' => true],
+            ['dataIndex' => 'unsafe_action_type_id', 'cloneable' => true],
         ];
     }
 }

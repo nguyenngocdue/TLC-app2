@@ -6,11 +6,7 @@ use Illuminate\Support\Str;
 
 trait TableTraitColumns
 {
-    private function isInvisible($column)
-    {
-        return (isset($column['invisible']) && $column['invisible'] == true);
-    }
-
+    use TableTraitCommon;
     private function makeColGroup($columns)
     {
         $result = [];
@@ -66,14 +62,16 @@ trait TableTraitColumns
         return $columns;
     }
 
-    private function makeThHeader($columns, $dataHeader)
+    private function makeTable2ndThead($columns, $dataHeader)
     {
         if (is_null($dataHeader)) return "";
         $th = [];
         foreach ($columns as $column) {
+            if ($this->isInvisible($column)) continue;
             $styleStr = $this->getStyleStr($column);
-            if (isset($dataHeader[$column['dataIndex']])) $th[] = "<th class='py-1' $styleStr>" . $dataHeader[$column['dataIndex']] . "</th>";
-            else $th[] = "<th $styleStr></th>";
+            $dataIndex = $column['dataIndex'];
+            if (isset($dataHeader[$dataIndex])) $th[] = "<th class='py-1' $styleStr>" . $dataHeader[$dataIndex] . "</th>";
+            else $th[] = "<th $styleStr dataIndex='" . $dataIndex . "'></th>";
         }
         $result = join($th);
         return $result;

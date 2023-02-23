@@ -50,9 +50,9 @@ $id = $action === "edit" ? $values->id : "";
             $col_span = $val['col_span'] === '' ? 12 : $val['col_span'] * 1;
             $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
             $hiddenLabel = $props[$key]['hidden_label'] === 'true';
-            $labelExtra = $defaultValue['label_extra'];
-            $placeholder = $defaultValue['placeholder'];
-            $controlExtra = $defaultValue['control_extra'];
+            $labelExtra = $defaultValue['label_extra'] ?? "";
+            $placeholder = $defaultValue['placeholder'] ?? "";
+            $controlExtra = $defaultValue['control_extra'] ?? "";
 
             $isRequired = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
             $iconJson = $columnType === 'json' ?'<i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";

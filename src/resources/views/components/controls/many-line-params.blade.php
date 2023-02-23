@@ -15,6 +15,7 @@
 <x-renderer.table 
     tableName="{{$table01Name}}"
     :columns="$editableColumns" 
+    :dataHeader="$dataSource2ndThead"
     :dataSource="$dataSourceWithOld" 
     showNo="{{$showNo?1:0}}"
     showNoR="{{$showNoR?1:0}}" 

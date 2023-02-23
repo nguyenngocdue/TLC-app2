@@ -7,6 +7,7 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnEditable;
+use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnEditable2ndThead;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnRO;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableEditableDataSourceWithOld;
 use Illuminate\View\Component;
@@ -16,6 +17,7 @@ class RelationshipRenderer extends Component
 {
     use TraitTableColumnRO;
     use TraitTableColumnEditable;
+    use TraitTableColumnEditable2ndThead;
     use TraitTableEditableDataSourceWithOld;
 
     private static $table00Count = 1;
@@ -130,17 +132,20 @@ class RelationshipRenderer extends Component
                 // dump($dataSourceWithOld);
                 // dump($dataSource);
                 return view('components.controls.many-line-params', [
-                    'dataSource' => $dataSource,
-                    'dataSourceWithOld' => $dataSourceWithOld,
-                    'tableFooter' => $tableFooter,
-                    'readOnlyColumns' => $this->makeReadOnlyColumns($columns, $sp, $tableName),
-                    'editableColumns' => $editableColumns,
-                    'tableName' => $lineModelPath::getTableName(),
-                    'table01Name' => $this->table01Name,
                     'table01ROName' => $this->table01Name . "RO",
+                    'readOnlyColumns' => $this->makeReadOnlyColumns($columns, $sp, $tableName),
+                    'dataSource' => $dataSource,
+
+                    'isOrderable' => $isOrderable,
+                    'table01Name' => $this->table01Name,
+                    'editableColumns' => $editableColumns,
+                    'dataSource2ndThead' => $this->makeEditable2ndThead($columns, $this->table01Name),
+                    'dataSourceWithOld' => $dataSourceWithOld,
+
+                    'tableFooter' => $tableFooter,
+                    'tableName' => $lineModelPath::getTableName(),
                     'tableDebug' => $this->tableDebug ? true : false,
                     'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
-                    'isOrderable' => $isOrderable,
 
                     'entityId' => CurrentRoute::getEntityId($this->type),
                     'entityType' => Str::modelPathFrom($this->type),

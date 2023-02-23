@@ -56,7 +56,7 @@ class Table extends Component
       'tableName' => $this->tableName,
       'columns' => $columns,
       'dataSource' => $dataSource,
-      'headerRendered' => $this->makeThHeader($columns, $this->dataHeader),
+      'headerRendered' => $this->makeTable2ndThead($columns, $this->dataHeader),
       'headerTop' => $this->headerTop,
       'columnsRendered' => $this->getColumnRendered($columns),
       'tr_td' => $this->makeTrTd($columns, $dataSource, $this->tableDebug, $this->tableName),

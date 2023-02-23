@@ -28,7 +28,7 @@ return new class extends Migration
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('inspected_by')->nullable();
             $table->unsignedBigInteger('owner_id');
-            $table->string('status')->unique();
+            $table->string('status')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });

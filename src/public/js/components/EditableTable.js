@@ -191,3 +191,14 @@ const trashEditableTable = (params) => {
         button.firstChild.classList.remove('fa-trash-undo')
     }
 }
+
+const cloneFirstLineDown = (dataIndex, tableId) => {
+    // const debugEditable = true   
+    const value = getCellValueByName(tableId, '[' + dataIndex + ']', 0)
+    if (debugEditable) console.log(tableId, dataIndex, '=', value)
+    const length = getAllRows(tableId).length
+    for (let i = 0; i < length; i++) {
+        setCellValueByName(tableId, '[' + dataIndex + ']', i, value)
+        getEById(makeIdFrom(tableId, dataIndex, i)).trigger('change')
+    }
+}

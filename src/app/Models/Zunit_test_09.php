@@ -109,10 +109,10 @@ class Zunit_test_09 extends ModelExtended
             ['dataIndex' => 'order_no', 'invisible' => true],
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
-            ['dataIndex' => 'name',],
-            ['dataIndex' => 'prod_discipline_1'],
-            ['dataIndex' => 'assignee_1'],
-            ['dataIndex' => 'dropdownMonitors()'],
+            ['dataIndex' => 'name', 'cloneable' => true],
+            ['dataIndex' => 'prod_discipline_1', 'cloneable' => true],
+            ['dataIndex' => 'assignee_1', 'cloneable' => true],
+            ['dataIndex' => 'dropdownMonitors()', 'cloneable' => true],
         ];
     }
     public function getManyLineParamsDot()
