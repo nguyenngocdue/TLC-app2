@@ -65,6 +65,8 @@ trait TableTraitColumns
     private function makeTable2ndThead($columns, $dataHeader)
     {
         if (is_null($dataHeader)) return "";
+        if (empty($dataHeader)) return "";
+        // dump($dataHeader);
         $th = [];
         foreach ($columns as $column) {
             if ($this->isInvisible($column)) continue;

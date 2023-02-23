@@ -11,13 +11,13 @@
                     <colgroup>
                         {!! $colgroup !!}
                     </colgroup>
-                    <thead class="sticky top-0 z-10">
+                    <thead class="sticky z-10 top-0">
                         <tr class='border-b bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
                             {!! $columnsRendered !!}
                         </tr>
                     </thead>
                     @isset($headerRendered)
-                    <thead class="top-{{ $headerTop }} sticky z-10">
+                    <thead class="sticky z-10 top-{{ $headerTop }}">
                         <tr class='border-b bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
                             {!! $headerRendered !!}
                         </tr>

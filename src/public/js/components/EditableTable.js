@@ -174,7 +174,11 @@ const duplicateEditableTable = (params) => {
         if (['action', 'id', 'order_no'].includes(column.dataIndex)) continue
         const name = tableId + "[" + column['dataIndex'] + "][" + nameIndex + "]"
         const value = getValueById(name)
-        valuesOfOrigin[column['dataIndex']] = value
+        if (column['renderer'] === 'toggle') {
+            valuesOfOrigin[column['dataIndex']] = getEById(name)[0].checked
+        } else {
+            valuesOfOrigin[column['dataIndex']] = value
+        }
     }
     // console.log(valuesOfOrigin)
     addANewLine({ tableId: control.value, valuesOfOrigin })
