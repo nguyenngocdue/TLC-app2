@@ -49,6 +49,10 @@ $id = $action === "edit" ? $values->id : "";
             $title = $columnName." / ".$control ;
             $col_span = $val['col_span'] === '' ? 12 : $val['col_span'] * 1;
             $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
+            $hiddenLabel = $props[$key]['hidden_label'] === 'true';
+            $labelExtra = $defaultValue['label_extra'];
+            $placeholder = $defaultValue['placeholder'];
+            $controlExtra = $defaultValue['control_extra'];
 
             $isRequired = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
             $iconJson = $columnType === 'json' ?'<i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
@@ -90,13 +94,21 @@ $id = $action === "edit" ? $values->id : "";
                         </div>
                         @else
                         <div class='col-span-{{24/$col_span}} col-start-1 {{$val['new_line'] === 'true' ? "col-span-12 text-left" : "text-right" }} '>
-                            <label class='text-gray-700 dark:text-gray-300  px-3 block text-base' title='{{$title}}'>{{$label}}
+                            @if(!$hiddenLabel)
+                            <label class='text-gray-700 dark:text-gray-300  px-3 block text-base' title='{{$title}}'>
+                                {{$label}}
+                                @endif
                                 {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
+                                @if(!$hiddenLabel)
                                 <br />
+                                @endif
                                 <span class="flex justify-end">
                                     {!!$iconJson!!}
                                 </span>
+                                @if(!$hiddenLabel)
+                                <i>{{$labelExtra}}</i>
                             </label>
+                            @endif
                         </div>
                         <div class='col-start-{{24/$col_span+1}} {{$val['new_line'] === 'true' ? "col-span-12" : "col-span-".(12 - 24/$col_span)}} py-2 text-left'>
                             @if (is_null($control))
@@ -134,7 +146,7 @@ $id = $action === "edit" ? $values->id : "";
                             @case('hyperlink')
                             @case('text')
                             @case('thumbnail')
-                            <x-controls.text name={{$columnName}} value={{$value}} />
+                            <x-controls.text name={{$columnName}} value={{$value}} placeholder="{{$placeholder}}" />
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
                             @case('number')
@@ -142,7 +154,7 @@ $id = $action === "edit" ? $values->id : "";
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
                             @case('textarea')
-                            <x-controls.textarea name={{$columnName}} :value="$value" colType={{$columnType}} />
+                            <x-controls.textarea name={{$columnName}} :value="$value" colType={{$columnType}} placeholder="{{$placeholder}}"/>
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
                             @case('toggle')
@@ -194,6 +206,7 @@ $id = $action === "edit" ? $values->id : "";
                             <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />
                             @break
                             @endswitch
+                            {{$controlExtra}}
                         </div>
                         @endif
                     </div>

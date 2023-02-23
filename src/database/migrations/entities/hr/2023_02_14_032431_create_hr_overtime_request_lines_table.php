@@ -27,7 +27,7 @@ return new class extends Migration
             $table->float("total_time");
             $table->unsignedBigInteger("sub_project_id");
             $table->unsignedBigInteger("work_mode_id");
-            $table->string("remark")->nullable();
+            $table->text("remark")->nullable();
             $table->unsignedInteger('order_no')->nullable();
             $table->unsignedBigInteger('owner_id');
             $table->string('status')->nullable();

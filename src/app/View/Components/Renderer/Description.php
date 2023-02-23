@@ -29,6 +29,7 @@ class Description extends Component
     {
         $dataSource = $this->dataSource;
         $prop = $this->prop;
+        dd($prop);
         $columnName = $prop['column_name'];
         $content = $dataSource[$columnName];
         $id = $dataSource['id'];
