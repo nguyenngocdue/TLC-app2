@@ -27,9 +27,9 @@ return new class extends Migration
             $table->unsignedBigInteger('line_manager');
             $table->string('manager_staff_id');
             $table->string('manager_staff_position');
-            $table->unsignedBigInteger('owner');
-            $table->string('owner_id');
-            $table->string('owner_position');
+            $table->unsignedBigInteger('owner_id');
+            $table->string('owner_staff_id');
+            $table->string('owner_staff_position');
             $table->double('number_injured_person');
             $table->double('number_involved_person');
             $table->text('issue_description');

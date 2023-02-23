@@ -115,7 +115,7 @@ return new class extends Migration
             $table->foreign('work_area_id')->references('id')->on('work_areas');
             $table->foreign('injured_person')->references('id')->on('users');
             $table->foreign('line_manager')->references('id')->on('users');
-            $table->foreign('owner')->references('id')->on('users');
+            $table->foreign('owner_id')->references('id')->on('users');
         });
         Schema::table('hse_corrective_actions', function (Blueprint $table) {
             $table->foreign('priority_id')->references('id')->on('priorities');

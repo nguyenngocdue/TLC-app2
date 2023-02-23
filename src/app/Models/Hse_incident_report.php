@@ -8,7 +8,7 @@ class Hse_incident_report extends ModelExtended
 {
     protected $fillable = [
         'incident_doc_type_id', 'incident_doc_sub_type_id',
-        'id', 'name', 'work_area_id', 'issue_datetime', 'injured_person', 'line_manager', 'owner',
+        'id', 'name', 'work_area_id', 'issue_datetime', 'injured_person', 'line_manager', 'owner_id',
         'number_injured_person', 'number_involved_person', 'issue_description',
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
         'lost_days'
@@ -22,7 +22,7 @@ class Hse_incident_report extends ModelExtended
         "comment_by_general_manager" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         'getInjuredPerson' => ["belongsTo", User::class, 'injured_person'],
         'getLineManager' => ["belongsTo", User::class, 'line_manager'],
-        'getOwner' => ["belongsTo", User::class, 'owner'],
+        'getOwner' => ["belongsTo", User::class, 'owner_id'],
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
         'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],
         "attachment_1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
