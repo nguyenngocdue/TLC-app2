@@ -19,6 +19,7 @@ class Qaqc_insp_chklst extends Report_ParentController
 
     public function getSqlStr($urlParams)
     {
+        $isCheck = isset($urlParams['prod_order_id']) && isset($urlParams['sub_project_id']);
         $sql =  " SELECT
                         tp.id AS template
                         ,l.value AS sign
@@ -42,16 +43,16 @@ class Qaqc_insp_chklst extends Report_ParentController
                         ,divide_control.c2
                         ,divide_control.c3
                         ,divide_control.c4";
-        if (isset($urlParams['prod_order_id'])) $sql .= "\n ,po.id";
-        if (isset($urlParams['sub_project_id'])) $sql .= " \n ,sp.name AS project_name";
+        if ($isCheck) $sql .= "\n ,po.id";
+        if ($isCheck) $sql .= " \n ,sp.name AS project_name";
         $sql .= "\n FROM qaqc_insp_chklst_runs r
                     JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id
                     JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
                     JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id
                     JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
                     JOIN control_types ct ON ct.id = l.control_type_id";
-        if (isset($urlParams['prod_order_id'])) $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
-        if (isset($urlParams['sub_project_id'])) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id";
+        if ($isCheck) $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
+        if ($isCheck) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id";
 
         $sql .= "\nLEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
                 JOIN qaqc_insp_groups g ON g.id = l.qaqc_insp_group_id 
@@ -65,7 +66,7 @@ class Qaqc_insp_chklst extends Report_ParentController
                             )  AS divide_control ON l.qaqc_insp_control_group_id = divide_control.control_group_id
             
                 WHERE 1=1";
-        if (isset($urlParams['sub_project_id'])) $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
+        if ($isCheck) $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
         if (isset($urlParams['chklsts'])) $sql .= " \n AND csh.id = '{{chklsts}}' \n";
         $sql .= "\n ORDER BY line_name,  run_updated DESC ";
         return $sql;
