@@ -54,6 +54,9 @@ trait TraitTableColumnRO
                     $newColumn['renderer'] = 'picker-time4';
                     $newColumn["align"] = "center";
                     break;
+                case 'attachment':
+                    $newColumn['renderer'] = "text";
+                    break;
                 default:
                     $newColumn['renderer'] = "text";
                     break;

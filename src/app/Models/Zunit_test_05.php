@@ -49,4 +49,18 @@ class Zunit_test_05 extends ModelExtended
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
+    public function getManyLineParams()
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name', 'cloneable' => true],
+            ['dataIndex' => 'attachment_1', 'cloneable' => true],
+            ['dataIndex' => 'attachment_2', 'cloneable' => true],
+            ['dataIndex' => 'attachment_3', 'cloneable' => true],
+            ['dataIndex' => 'attachment_4', 'cloneable' => true],
+            ['dataIndex' => 'attachment_5', 'cloneable' => true],
+        ];
+    }
 }

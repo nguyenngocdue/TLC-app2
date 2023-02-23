@@ -18,17 +18,17 @@ class Zunit_test_03 extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            // ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'order_no', 'invisible' => true],
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
-            ['dataIndex' => 'name',],
-            ['dataIndex' => 'datetime1',],
-            ['dataIndex' => 'datetime2',],
-            ['dataIndex' => 'datetime3',],
-            ['dataIndex' => 'datetime4',],
-            ['dataIndex' => 'datetime5',],
-            ['dataIndex' => 'datetime6',],
-            ['dataIndex' => 'datetime7',],
+            ['dataIndex' => 'name', 'cloneable' => true],
+            ['dataIndex' => 'datetime1', 'cloneable' => true],
+            ['dataIndex' => 'datetime2', 'cloneable' => true],
+            ['dataIndex' => 'datetime3', 'cloneable' => true],
+            ['dataIndex' => 'datetime4', 'cloneable' => true],
+            ['dataIndex' => 'datetime5', 'cloneable' => true],
+            ['dataIndex' => 'datetime6', 'cloneable' => true],
+            ['dataIndex' => 'datetime7', 'cloneable' => true],
         ];
     }
 }

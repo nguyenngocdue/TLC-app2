@@ -93,6 +93,11 @@ trait TraitTableColumnEditable
                     $newColumn['properties']['placeholder'] = 'DD/MM/YYYY HH:MM';
                     $newColumn['classList'] = $classNameText;
                     break;
+                case 'attachment':
+                    $newColumn['renderer'] = "text";
+                    $newColumn['editable'] = true;
+                    $newColumn['classList'] = 'bg-red-600 ' . $classNameText;
+                    break;
                 default:
                     $newColumn['renderer'] = "text";
                     $newColumn['editable'] = true;
