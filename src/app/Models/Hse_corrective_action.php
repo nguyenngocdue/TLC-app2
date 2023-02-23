@@ -8,7 +8,7 @@ class Hse_corrective_action extends ModelExtended
 {
     protected $fillable = [
         'id', 'name', 'description', 'slug', 'hse_incident_report_id', 'priority_id', 'work_area_id',
-        'assignee', 'opened_date', 'closed_date', 'status', 'unsafe_action_type_id', 'order_no', 'owner_id'
+        'assignee_1', 'opened_date', 'closed_date', 'status', 'unsafe_action_type_id', 'order_no', 'owner_id'
     ];
     protected $table = "hse_corrective_actions";
 
@@ -16,7 +16,7 @@ class Hse_corrective_action extends ModelExtended
         'getHseIncidentReport' => ['belongsTo', Hse_incident_report::class, 'hse_incident_report_id'],
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
         'getPriority' => ['belongsTo', Priority::class, 'priority_id'],
-        'getAssignee' => ['belongsTo', User::class, 'assignee'],
+        'getAssignee' => ['belongsTo', User::class, 'assignee_1'],
         'getUnsafeActionType' => ['belongsTo', Term::class, 'unsafe_action_type_id'],
         "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
     ];
@@ -89,7 +89,7 @@ class Hse_corrective_action extends ModelExtended
             ['dataIndex' => 'priority_id',],
             ['dataIndex' => 'work_area_id'],
             ['dataIndex' => 'description'],
-            ['dataIndex' => 'assignee'],
+            ['dataIndex' => 'assignee_1'],
             ['dataIndex' => 'opened_date'],
             ['dataIndex' => 'closed_date'],
             ['dataIndex' => 'status',],
@@ -105,7 +105,7 @@ class Hse_corrective_action extends ModelExtended
             ['dataIndex' => 'hse_incident_report_id', 'invisible' => !true, 'value_as_parent_id' => true],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'work_area_id', 'hidden' => !true],
-            ['dataIndex' => 'assignee'],
+            ['dataIndex' => 'assignee_1'],
             ['dataIndex' => 'opened_date'],
             ['dataIndex' => 'status',],
             ['dataIndex' => 'priority_id',],
