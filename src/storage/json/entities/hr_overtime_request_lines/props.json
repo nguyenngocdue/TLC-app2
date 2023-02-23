@@ -3,7 +3,7 @@
         "name": "_id",
         "column_name": "id",
         "column_type": "bigint",
-        "label": "ID",
+        "label": "OT Line ID",
         "control": "id",
         "align": "",
         "col_span": "",
