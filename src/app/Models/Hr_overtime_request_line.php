@@ -20,7 +20,20 @@ class Hr_overtime_request_line extends ModelExtended
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getWorkMode" => ['belongsTo', Work_mode::class, 'work_mode_id'],
         "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getRemainingHours" => ['hasOne', View_otr_remaining::class, 'user_id', 'user_id'],
     ];
+
+    public function getRemainingHours()
+    {
+        $month = substr($this->ot_date, 5, 2) * 1;
+        $relation = $this->hasOne(View_otr_remaining::class, 'user_id', 'user_id');
+        $sql = $relation
+            ->getQuery()
+            ->where('month', $month)
+            ->toSql();
+        // var_dump($sql);
+        return $relation;
+    }
 
     public function getHROvertimeRequest()
     {

@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement("CREATE OR REPLACE VIEW views_full_prod_sequence AS
+        DB::statement("CREATE OR REPLACE VIEW view_full_prod_sequence AS
         (
             SELECT 
                 view_prl.*, 
@@ -23,7 +23,7 @@ return new class extends Migration
                 ps.expected_start_at, 
                 ps.expected_finish_at
             FROM 
-                views_full_prod_routing_link view_prl,
+                view_full_prod_routing_link view_prl,
                 prod_sequences ps
             WHERE 1=1
                 AND po_id = ps.prod_order_id
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::statement('DROP VIEW IF EXISTS views_full_prod_sequence');
+        DB::statement('DROP VIEW IF EXISTS view_full_prod_sequence');
     }
 };

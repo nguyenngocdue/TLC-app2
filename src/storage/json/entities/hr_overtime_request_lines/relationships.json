@@ -63,5 +63,18 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
+    },
+    "_getRemainingHours": {
+        "name": "_getRemainingHours",
+        "relationship": "hasOne",
+        "control_name": "getRemainingHours",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "remaining_time",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "number",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }

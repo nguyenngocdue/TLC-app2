@@ -159,6 +159,22 @@
         "hidden_print": "",
         "new_line": ""
     },
+    "_getRemainingHours": {
+        "name": "_getRemainingHours",
+        "column_name": "getRemainingHours",
+        "column_type": "eloquent_prop",
+        "label": "Remaining Hours",
+        "control": "number",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
+    },
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",

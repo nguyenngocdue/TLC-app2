@@ -158,10 +158,11 @@ trait TraitEntityListenDataSource
         foreach ($matrix as $table => $columns) {
             // $modelPath = "App\\Models\\" . Str::singular($table);
             $modelPath = Str::modelPathFrom($table);
-            $nameless = (new $modelPath)->nameless;
             $columnsWithoutOracy = array_filter($columns, fn ($column) => !str_contains($column, "()"));
             $columnsWithOracy[$table] = array_values(array_filter($columns, fn ($column) => str_contains($column, "()")));
+            if (empty($columnsWithoutOracy)) $columnsWithoutOracy = ['id']; //<< getRemainingHours()
             $rows = DB::table($table)->select($columnsWithoutOracy);
+            $nameless = (new $modelPath)->nameless;
             if (!$nameless) $rows = $rows->orderBy('name');
             $objectRows = $rows->get()->toArray();
             $result[$table] = array_map(fn ($o) => (array)$o, $objectRows);

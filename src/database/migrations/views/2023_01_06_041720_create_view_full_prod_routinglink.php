@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement("CREATE OR REPLACE VIEW views_full_prod_routing_link AS
+        DB::statement("CREATE OR REPLACE VIEW view_full_prod_routing_link AS
         (
             SELECT 
                 po.id po_id, 
@@ -49,6 +49,6 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::statement('DROP VIEW IF EXISTS views_full_prod_routing_link');
+        DB::statement('DROP VIEW IF EXISTS view_full_prod_routing_link');
     }
 };

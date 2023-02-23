@@ -66,7 +66,7 @@ trait TraitTableColumnEditable
                 case 'number':
                     $newColumn['renderer'] = 'number';
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = $classNameText;
+                    $newColumn['classList'] = 'text-right ' . $classNameText;
                     break;
                 case 'toggle':
                     $newColumn['renderer'] = 'toggle';

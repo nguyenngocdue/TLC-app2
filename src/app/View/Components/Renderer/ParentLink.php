@@ -35,7 +35,7 @@ class ParentLink extends Component
             if (method_exists($item, 'getTable')) {
                 $table = $item->getTable();
                 $id = $item->id;
-                $name = $item->name ?? "Nameless";
+                $name = $item->name ?? "Nameless #$id";
                 $href = route($table . ".edit", $id);
                 $idStr = Str::makeId($id);
                 return "<a class='text-blue-500' href='$href' title='$idStr ($table)'>$name<br/>($table)</a>";

@@ -107,18 +107,15 @@ const addANewLine = (params) => {
                     renderer = "<textarea id='" + id + "' name='" + id + "' class='" + column['classList'] + "'></textarea>"
                     break
                 case "picker-datetime4":
-                    // onChangeDropdown4({ name:& quot; table01[opened_date][1] & quot;, table01Name:& quot; table01& quot;, rowIndex: 1})"
-                    onChange = "console.log(222333)"
+                    onChange = "onChangeDropdown4({name:\"" + id + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex:" + newRowIndex + "})"
                     renderer = "<input id='" + id + "' name='" + id + "' placeholder='DD/MM/YYYY HH:MM' class='" + column['classList'] + "' onchange='" + onChange + "'>"
                     break
                 case "picker-date4":
-                    // onChangeDropdown4({ name:& quot; table01[opened_date][1] & quot;, table01Name:& quot; table01& quot;, rowIndex: 1})"
-                    onChange = "console.log(333444)"
+                    onChange = "onChangeDropdown4({name:\"" + id + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex:" + newRowIndex + "})"
                     renderer = "<input id='" + id + "' name='" + id + "' placeholder='DD/MM/YYYY' class='" + column['classList'] + "' onchange='" + onChange + "'>"
                     break
                 case "picker-time4":
-                    // onChangeDropdown4({ name:& quot; table01[opened_date][1] & quot;, table01Name:& quot; table01& quot;, rowIndex: 1})"
-                    onChange = "console.log(444555)"
+                    onChange = "onChangeDropdown4({name:\"" + id + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex:" + newRowIndex + "})"
                     renderer = "<input id='" + id + "' name='" + id + "' placeholder='HH:MM' class='" + column['classList'] + "' onchange='" + onChange + "'>"
                     break
                 default:
