@@ -61,9 +61,16 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
     }
     public function getTableColumns($dataSource)
     {
-        // if (!count(get_object_vars($dataSource))) return [[]];
+        $array = [];
+        foreach ($dataSource as $key => $value) {
+            $array[] = (array)$value;
+        }
+        $dataSource = $array;
+
+
         $flattenData = array_merge(...$dataSource);
         $idx = array_search("sheet_status", array_keys($flattenData));
+
         $dataColumn = array_slice($flattenData, $idx + 1, count($flattenData) - $idx, true);
         $adds = [
             [
@@ -123,7 +130,9 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
 
     protected function enrichDataSource($dataSource, $urlParams)
     {
-        if (!count($urlParams)) return (object)[];
+        // dump($dataSource);
+        // if (!count($urlParams)) return $dataSource->setCollection(collect([]));
+        if (!count(array_values($urlParams))) return [];
         $dataArray = $dataSource->items();
         $enrichData = array_map(function ($item) {
             return (array)$item + [Report::slugName($item->sheet_desc) => $item->sheet_status];

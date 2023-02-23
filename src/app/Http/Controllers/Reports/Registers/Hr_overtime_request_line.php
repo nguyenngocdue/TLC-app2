@@ -95,7 +95,7 @@ class Hr_overtime_request_line extends Report_ParentController
     protected function enrichDataSource($dataSource, $urlParams)
     {
         // dd($dataSource);
-        if (!count($urlParams)) return [];
+        if (!count(array_values($urlParams))) return [];
         foreach ($dataSource as $key => $value) {
             $hours = $value->total_overtime_hours * 1;
             if ($hours > 60) {

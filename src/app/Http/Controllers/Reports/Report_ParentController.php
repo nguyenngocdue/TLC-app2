@@ -50,7 +50,7 @@ abstract class Report_ParentController extends Controller
     protected function getDataSource($urlParams)
     {
         // dd($urlParams);
-        // if (!$this->getSql($urlParams)) return [];
+        // if (empty($urlParams)) return  (object)[];
         $sql = $this->getSql($urlParams);
         $sqlData = DB::select(DB::raw($sql));
         $collection = collect($sqlData);
@@ -91,12 +91,12 @@ abstract class Report_ParentController extends Controller
         $viewName = strtolower(Str::singular($currentRoute));
 
         $dataSource = $this->getDataSource($urlParams);
+        $dataSource = $this->enrichDataSource($dataSource, $urlParams);
         // dd($dataSource);
 
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
 
 
-        $dataSource = $this->enrichDataSource($dataSource, $urlParams);
         // dump($dataSource);
         $columns = $this->getTableColumns($dataSource);
 
