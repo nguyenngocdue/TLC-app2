@@ -21,6 +21,10 @@ Str::macro('appTitle', function (string $s) {
     $s = preg_replace($sources, $target, $s);
     return $s;
 });
+Str::macro('removeFirstSlash', function (string $s) {
+    if ($s[0] === '/') return substr($s, 1);
+    return $s;
+});
 Str::macro('getFieldNameInTable01Format', function (string $name, string $table01Name) {
     $isStartWith = $table01Name && str_starts_with($name, $table01Name);
     if ($isStartWith) {
