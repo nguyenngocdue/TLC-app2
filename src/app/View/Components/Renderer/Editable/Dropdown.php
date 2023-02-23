@@ -27,6 +27,12 @@ class Dropdown extends Component
     {
         $dataSource = $this->cbbDataSource;
         //Convert ["v1", "v2"] to [["value" => "v1"], ["value" => "v2"]]
+        // dump($this->name);
+        // dd($dataSource);
+        if (empty($dataSource)) {
+            dump("DataSource of Dropdown is empty, if this is a status dropdown, use Manage Status to add some statuses.");
+            return [];
+        }
         if (!is_array($dataSource[0])) $dataSource = array_map(fn ($item) => ["value" => $item], $dataSource);
         //Convert ["value" => "v1"] to ["title" => "V1", "value" => "v1"]
         foreach ($dataSource as &$option) {
