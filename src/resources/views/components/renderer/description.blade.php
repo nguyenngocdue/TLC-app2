@@ -15,6 +15,8 @@
                         @break
                     @case('checkbox')
                     @case('radio')
+                    @case('dropdown')
+                    @case('dropdown_multi')
                     <div class='p-2  border border-gray-600 text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
                         <x-renderer.checkbox-or-radio :relationships="$relationships" :value="$value" />
                     </div>
