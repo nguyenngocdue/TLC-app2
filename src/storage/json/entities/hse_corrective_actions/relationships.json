@@ -41,7 +41,7 @@
     "_getAssignee": {
         "name": "_getAssignee",
         "relationship": "belongsTo",
-        "control_name": "assignee",
+        "control_name": "assignee_1",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

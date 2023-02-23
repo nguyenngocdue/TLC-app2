@@ -111,9 +111,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_assignee": {
-        "name": "_assignee",
-        "column_name": "assignee",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "column_type": "bigint",
         "label": "Responsible by",
         "control": "dropdown",

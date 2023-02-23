@@ -175,9 +175,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_report_person": {
-        "name": "_report_person",
-        "column_name": "report_person",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "column_type": "bigint",
         "label": "Name of Person Initiating Report",
         "control": "dropdown",
@@ -191,9 +191,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_report_staff_id": {
-        "name": "_report_staff_id",
-        "column_name": "report_staff_id",
+    "_owner_staff_id": {
+        "name": "_owner_staff_id",
+        "column_name": "owner_staff_id",
         "column_type": "string",
         "label": "Staff ID",
         "control": "text",
@@ -207,9 +207,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_report_staff_position": {
-        "name": "_report_staff_position",
-        "column_name": "report_staff_position",
+    "_owner_staff_position": {
+        "name": "_owner_staff_position",
+        "column_name": "owner_staff_position",
         "column_type": "string",
         "label": "Staff Position",
         "control": "text",

@@ -64,10 +64,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getReportPerson": {
-        "name": "_getReportPerson",
+    "_getOwner": {
+        "name": "_getOwner",
         "relationship": "belongsTo",
-        "control_name": "report_person",
+        "control_name": "owner_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
