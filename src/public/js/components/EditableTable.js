@@ -1,3 +1,4 @@
+const debugEditable = false
 const editableColumns = {}, tableObject = {}, entityId = null
 const getAllRows = (tableId) => $("#" + tableId + " > tbody")[0].children
 const getValueOfTrByName = (aRow, fieldName) => {
@@ -95,23 +96,24 @@ const getMinValueOfAColumn = (tableId, columnName) => {
 }
 
 const moveUpEditableTable = (params) => {
-    // console.log("Moving up editable table", params)
+    // const debugEditable = true
+    if (debugEditable) console.log("Moving up editable table", params)
     const { control, fingerPrint } = params
     const tableId = control.value
     const firstRowFingerPrintValue = 1 * getCellValueByName(tableId, '[finger_print]', 0)
-    // console.log(tableId, fingerPrint, firstRowFingerPrintValue)
+    if (debugEditable) console.log(tableId, fingerPrint, firstRowFingerPrintValue)
     if (fingerPrint === firstRowFingerPrintValue) {
         const max = getMaxValueOfAColumn(tableId, "[order_no]")
-        // console.log("FIRST ROW, max of order_no", max)
+        if (debugEditable) console.log("FIRST ROW, max of order_no", max)
         setCellValueByName(tableId, '[order_no]', 0, max + 10)
     } else {
-        // console.log("NORMAL ROW")
+        if (debugEditable) console.log("NORMAL ROW")
         const myRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
         const myValue = 1 * getCellValueByName(tableId, '[order_no]', myRowIndex)
 
         const previousRowIndex = myRowIndex - 1
         const myPreviousValue = 1 * getCellValueByName(tableId, '[order_no]', previousRowIndex)
-        // console.log(previousRowIndex, myRowIndex, myPreviousValue, myValue)
+        if (debugEditable) console.log(previousRowIndex, myRowIndex, myPreviousValue, myValue)
 
         const tmp = myPreviousValue
         setCellValueByName(tableId, '[order_no]', previousRowIndex, myValue)
@@ -270,7 +272,7 @@ const addANewLine = (params) => {
                         })
                         renderer += "</select>"
                     } else {
-                        renderer = "Only STATUS is implemented for dropdown1."
+                        renderer = "Only STATUS has been implemented for dropdown1."
                     }
                     break
                 case 'dropdown4':
@@ -299,6 +301,11 @@ const addANewLine = (params) => {
                     break
                 case "textarea":
                     renderer = "<textarea id='" + id + "' name='" + id + "' class='" + column['classList'] + "'></textarea>"
+                    break
+                case "picker-datetime4":
+                    // onChangeDropdown4({ name:& quot; table01[opened_date][1] & quot;, table01Name:& quot; table01& quot;, rowIndex: 1})"
+                    onChange = "console.log(1222)"
+                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='DD/MM/YYYY HH:MM' class='" + column['classList'] + "' onchange='" + onChange + "'>"
                     break
                 default:
                     renderer = "Unknown how to render " + column['renderer']

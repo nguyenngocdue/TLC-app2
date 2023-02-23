@@ -207,9 +207,9 @@ trait TraitEntityCRUDStoreUpdate2
 		foreach ($dateTimeProps as $subType => $controls) {
 			foreach ($controls as $control) {
 				$propName = substr($control, 1); //Remove first "_"
-				// dump($subType, $value);
 				if (in_array($subType, JsonControls::getDateTimeControls())) {
 					if (isset($newRequest[$propName])) {
+						// dump($subType, $propName, $newRequest[$propName]);
 						$newRequest[$propName] = DateTimeConcern::convertForSaving($subType, $newRequest[$propName]);
 					}
 				}

@@ -35,7 +35,7 @@ class RelationshipRenderer extends Component
         $this->table01Name = "table" . str_pad(static::$table00Count++, 2, 0, STR_PAD_LEFT);
     }
 
-    private function isTableOrderable($row, $colName)
+    private function isTableOrderable($row, $colName, $columns)
     {
         $eloquentParam = $row->eloquentParams[$colName];
         //TODO: This is to prevent from a crash
@@ -43,10 +43,13 @@ class RelationshipRenderer extends Component
 
         $dummyInstance = new $eloquentParam[1];
         $fillable = $dummyInstance->getFillable();
-        $hasOrderNoColumn = in_array('order_no', $fillable);
+        $hasOrderNoColumnInFillable = in_array('order_no', $fillable);
+
+        $hasOrderNoColumnInManyLineParams = false !== array_search('order_no', array_map(fn ($c) => $c['dataIndex'], $columns));
+        // dump($columns, $hasOrderNoColumnInManyLineParams);
 
         // if (!$hasOrderNoColumn) dump("Order_no column not found, re-ordering function will not work");
-        return $hasOrderNoColumn;
+        return $hasOrderNoColumnInFillable && $hasOrderNoColumnInManyLineParams;
     }
 
     private function getPaginatedDataSource($row, $colName, $isOrderable, $showAll = false)
@@ -105,7 +108,7 @@ class RelationshipRenderer extends Component
             : $instance->$fn();
 
         $row = $modelPath::find($id);
-        $isOrderable = $row ? $this->isTableOrderable($row, $colName,) : [];
+        $isOrderable = $row ? $this->isTableOrderable($row, $colName, $columns) : [];
         $dataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
         switch ($renderer_edit) {
             case "many_icons":

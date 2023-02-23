@@ -26,6 +26,7 @@ trait TraitTableColumnEditable
             $newColumn['properties']['table01Name'] = $table01Name;
 
             // dump($newColumn);
+            $classNameText = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
             switch ($prop['control']) {
                 case 'id':
                     $newColumn['renderer'] = 'read-only-text';
@@ -38,7 +39,7 @@ trait TraitTableColumnEditable
                     // $newColumn['renderer'] = 'text';
                     $newColumn['renderer'] = 'dropdown';
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 text-left placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
+                    $newColumn['classList'] = $classNameText;
                     break;
                 case 'dropdown':
                 case 'dropdown_multi':
@@ -47,7 +48,7 @@ trait TraitTableColumnEditable
                     // $newColumn['renderer'] = 'text';
                     $newColumn['renderer'] = 'dropdown4';
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 text-left placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
+                    $newColumn['classList'] = $classNameText;
                     $newColumn['type'] = $this->type;
                     $newColumn['properties']['tableName'] = $prop['relationships']['table'];
 
@@ -56,43 +57,42 @@ trait TraitTableColumnEditable
                 case 'textarea':
                     $newColumn['renderer'] = 'textarea';
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = "bg-white border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input";
+                    $newColumn['classList'] = $classNameText;
                     break;
                 case 'number':
                     $newColumn['renderer'] = 'number';
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = "text-right block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
+                    $newColumn['classList'] = $classNameText;
                     break;
                 case 'toggle':
                     $newColumn['renderer'] = 'toggle';
                     $newColumn['editable'] = true;
                     $newColumn['align'] = 'center';
-                    //This is copied from text
-                    $newColumn['classList'] = "text-right block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
+                    $newColumn['classList'] = $classNameText;
                     break;
                 case 'picker_time':
-                    // $newColumn['renderer'] = "text";
                     $newColumn['renderer'] = 'picker-time4';
                     $newColumn['editable'] = true;
                     $newColumn['properties']['icon'] = 'fa-duotone fa-clock';
                     $newColumn['properties']['placeholder'] = 'HH:MM';
+                    $newColumn['classList'] = $classNameText;
                     break;
                 case 'picker_date':
-                    // $newColumn['renderer'] = "text";
                     $newColumn['renderer'] = 'picker-date4';
                     $newColumn['editable'] = true;
                     $newColumn['properties']['placeholder'] = 'DD/MM/YYYY';
+                    $newColumn['classList'] = $classNameText;
                     break;
                 case 'picker_datetime':
-                    // $newColumn['renderer'] = "text";
                     $newColumn['renderer'] = 'picker-datetime4';
                     $newColumn['editable'] = true;
                     $newColumn['properties']['placeholder'] = 'DD/MM/YYYY HH:MM';
+                    $newColumn['classList'] = $classNameText;
                     break;
                 default:
                     $newColumn['renderer'] = "text";
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = " block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
+                    $newColumn['classList'] = $classNameText;
                     break;
             }
             if (in_array($prop['control'], ['dropdown_multi', 'checkbox'])) {

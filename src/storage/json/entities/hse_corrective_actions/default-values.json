@@ -181,7 +181,7 @@
         "label": "",
         "default_value": "",
         "validation": "",
-        "formula": "",
+        "formula": "All_OwnerId",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
