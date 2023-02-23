@@ -30,6 +30,7 @@ return new class extends Migration
             $table->dateTime('closed_date')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('owner_id');
+            $table->string('status')->unique();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
