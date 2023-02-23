@@ -50,6 +50,7 @@
     <script src="{{ asset('js/components/Dropdown2.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4.js') }}"></script>
     <script src="{{ asset('js/components/EditableTable.js') }}"></script>
+    <script src="{{ asset('js/components/EditableTableAddNewLine.js') }}"></script>
     <script src="{{ asset('js/components/SearchModal.js') }}"></script>
     <script src="{{ asset('js/components/KeyArrowTable.js') }}"></script>
     <script src="{{ asset('js/applayout.js') }}"></script>

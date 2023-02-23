@@ -204,7 +204,7 @@ const onChangeDropdown2DateOffset = (listener) => {
         const theValue = selectedObject[listen_to_attr]
         if (debugListener) console.log(theValue)
 
-        const theValueDate = moment().add(theValue, 'days').format("YYYY-MM-DD HH:mm:ss");
+        const theValueDate = moment().add(theValue, 'days').format("DD/MM/YYYY HH:mm");
         if (debugListener) console.log(theValueDate)
 
         getEById(column_name).val(theValueDate)
