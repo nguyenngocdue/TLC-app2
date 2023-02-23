@@ -25,13 +25,29 @@ class MenuNotification extends Component
      */
     public function render()
     {
-        $data = json_decode(DB::table('notifications')->select('notifiable_type', 'notifiable_id', 'read_at')->where('read_at', null)->get(), true);
-
-        $modeHasNotification = [];
-        foreach ($data as $key => $value) {
-            $modeHasNotification[$key] = $value["notifiable_type"];
+        $notifications = auth()->user()->unreadNotifications->toArray();
+        $assigneeNotifications = [];
+        $monitorNotifications = [];
+        $createdNotifications = [];
+        foreach ($notifications as $key => $value) {
+            switch ($value['data']['type']) {
+                case 'assignee':
+                    $assigneeNotifications[] = $value;
+                    break;
+                case 'monitor':
+                    $monitorNotifications[] = $value;
+                    break;
+                case 'created':
+                    $createdNotifications[] = $value;
+                    break;
+                default:
+                    break;
+            }
         }
-        $dataCountNotification = array_count_values($modeHasNotification);
-        return view('components.homepage.menu-notification')->with(compact('dataCountNotification'));
+        return view('components.homepage.menu-notification', [
+            'assigneeNotifications' => $assigneeNotifications,
+            'monitorNotifications' => $monitorNotifications,
+            'createdNotifications' => $createdNotifications,
+        ]);
     }
 }
