@@ -43,9 +43,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_assignee_to": {
-        "name": "_assignee_to",
-        "column_name": "assignee_to",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "label": "",
         "default_value": "",
         "validation": "required",

@@ -125,7 +125,7 @@
         "column_name": "due_date",
         "label": "",
         "default_value": "",
-        "validation": "required",
+        "validation": "date_format:d\/m\/Y H:i|required",
         "formula": "",
         "label_extra": "",
         "placeholder": "",
@@ -142,9 +142,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_assignee_to": {
-        "name": "_assignee_to",
-        "column_name": "assignee_to",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "label": "",
         "default_value": "",
         "validation": "",
@@ -160,6 +160,17 @@
         "default_value": "",
         "validation": "",
         "formula": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "label": "",
+        "default_value": "",
+        "validation": "",
+        "formula": "All_OwnerId",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""

@@ -6,9 +6,11 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_wir extends ModelExtended
 {
-    protected $fillable = ["id", "name", "description", "slug", "project_id", "sub_project_id", "prod_routing_id",
-     "prod_discipline_id", "pj_level_id", "pj_module_type_id", "prod_order_id", "priority_id", "due_date", 
-     "assignee_to", "wir_description_id", "owner_id"];
+    protected $fillable = [
+        "id", "name", "description", "slug", "project_id", "sub_project_id", "prod_routing_id",
+        "prod_discipline_id", "pj_level_id", "pj_module_type_id", "prod_order_id", "priority_id", "due_date",
+        "assignee_1", "wir_description_id", "owner_id"
+    ];
     protected $table = "qaqc_wirs";
     protected $primaryKey = 'id';
 
@@ -20,7 +22,7 @@ class Qaqc_wir extends ModelExtended
         "getDiscipline" => ['belongsTo', Prod_discipline::class, "prod_discipline_id"],
         "getWirDescription" => ['belongsTo', Wir_description::class, "wir_description_id"],
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
-        'getAssigneeTo' => ["belongsTo", User::class, 'assignee_to'],
+        'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
     ];
 
@@ -33,7 +35,7 @@ class Qaqc_wir extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    
+
     public function getSubProject()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -51,7 +53,7 @@ class Qaqc_wir extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    
+
     public function getDiscipline()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -70,7 +72,7 @@ class Qaqc_wir extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getAssigneeTo()
+    public function getAssignee1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -1,7 +1,7 @@
 {
-    "_assignee_to": {
-        "name": "_assignee_to",
-        "column_name": "assignee_to",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "listen_action": "assign",
         "triggers": "wir_description_id",
         "listen_to_fields": "wir_description_id",

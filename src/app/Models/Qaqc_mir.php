@@ -6,9 +6,11 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_mir extends ModelExtended
 {
-    protected $fillable = ["id", "name", "description", "slug", "project_id", "sub_project_id",
-     "prod_discipline_id", "priority_id", "due_date", "assignee_to", "inspected_by", "owner_id"];
-     protected $primaryKey = 'id';
+    protected $fillable = [
+        "id", "name", "description", "slug", "project_id", "sub_project_id",
+        "prod_discipline_id", "priority_id", "due_date", "assignee_1", "inspected_by", "owner_id"
+    ];
+    protected $primaryKey = 'id';
     protected $table = "qaqc_mirs";
 
     public $eloquentParams = [
@@ -16,7 +18,7 @@ class Qaqc_mir extends ModelExtended
         "getSubProject" => ['belongsTo', Sub_project::class, "sub_project_id"],
         "getDiscipline" => ['belongsTo', Prod_discipline::class, "prod_discipline_id"],
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
-        'getAssigneeTo' => ["belongsTo", User::class, 'assignee_to'],
+        'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
         'getInspector' => ["belongsTo", User::class, 'inspected_by'],
         "attachment_mir_po" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_mir_delivery_docket" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
@@ -60,7 +62,7 @@ class Qaqc_mir extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getAssigneeTo()
+    public function getAssignee1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -163,7 +165,7 @@ class Qaqc_mir extends ModelExtended
     public function getNcrs()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2],$p[3],$p[4]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
 
     public function getOwnerId()

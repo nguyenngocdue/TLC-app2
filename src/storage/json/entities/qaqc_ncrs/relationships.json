@@ -116,10 +116,10 @@
         "filter_values": "135",
         "radio_checkbox_colspan": ""
     },
-    "_getAssigneeTo": {
-        "name": "_getAssigneeTo",
+    "_getAssignee1": {
+        "name": "_getAssignee1",
         "relationship": "belongsTo",
-        "control_name": "assignee_to",
+        "control_name": "assignee_1",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

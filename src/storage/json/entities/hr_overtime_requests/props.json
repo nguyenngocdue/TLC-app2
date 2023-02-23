@@ -63,9 +63,9 @@
         "hidden_print": "",
         "new_line": "true"
     },
-    "_assignee_to": {
-        "name": "_assignee_to",
-        "column_name": "assignee_to",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "column_type": "bigint",
         "label": "Approver",
         "control": "dropdown",

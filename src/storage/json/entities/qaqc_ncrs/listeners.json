@@ -167,9 +167,9 @@
         "listen_to_fields": "",
         "listen_to_attrs": ""
     },
-    "_assignee_to": {
-        "name": "_assignee_to",
-        "column_name": "assignee_to",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

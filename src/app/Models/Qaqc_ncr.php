@@ -10,7 +10,7 @@ class Qaqc_ncr extends ModelExtended
         "id", "name", "description", "slug", "project_id", "sub_project_id",
         "parent_id", "parent_type", "prod_routing_id", "prod_order_id", "prod_discipline_1_id",
         "prod_discipline_id", "prod_discipline_2_id", "user_team_id", "priority_id", "due_date",
-        "assignee_to", "cause_analysis", "owner_id"
+        "assignee_1", "cause_analysis", "owner_id"
     ];
     protected $primaryKey = 'id';
     protected $table = "qaqc_ncrs";
@@ -25,7 +25,7 @@ class Qaqc_ncr extends ModelExtended
         "getDiscipline2" => ['belongsTo', Prod_discipline_2::class, "prod_discipline_2_id"],
         "getUserTeam" => ['belongsTo', User_team::class, "user_team_id"],
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
-        'getAssigneeTo' => ["belongsTo", User::class, 'assignee_to'],
+        'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
         "getInterSubcon" => ["belongsTo", Term::class, 'inter_subcon_id'],
         "getDefectRootCause" => ["belongsTo", Term::class, 'defect_root_cause_id'],
         "getDefectDisposition" => ["belongsTo", Term::class, 'defect_disposition_id'],
@@ -49,7 +49,7 @@ class Qaqc_ncr extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    
+
     public function getSubProject()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -98,7 +98,7 @@ class Qaqc_ncr extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getAssigneeTo()
+    public function getAssignee1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
