@@ -23,4 +23,9 @@ class Constant
 
     const FORMAT_WEEKDAY_SHORT = "D";
     const FORMAT_YEAR_MONTH = "Y/m";
+
+
+    const LIST_ASSIGNEE = ['assignee_1', 'assignee_2', 'assignee_3', 'assignee_4', 'assignee_5', 'assignee_6', 'assignee_7', 'assignee_8', 'assignee_9'];
+    const GET_MONITOR = 'getMonitors()';
+    const OWNER_ID = 'owner_id';
 }

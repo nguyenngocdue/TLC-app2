@@ -2,11 +2,15 @@
 
 namespace App\Providers;
 
+use App\Events\CreateNewDocumentEvent;
 use App\Events\EntityCreatedEvent;
 use App\Events\EntityUpdatedEvent;
 use App\Events\SendEmailItemCreated;
+use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdateStatusChklstRunEvent;
+use App\Listeners\SendCreateNewDocumentNotificationListener;
 use App\Listeners\SendEmailListener;
+use App\Listeners\SendUpdatedDocumentNotificationListener;
 use App\Listeners\ShouldUpdateFieldsListener;
 use App\Listeners\UpdateStatusChklstRunListener;
 use Illuminate\Auth\Events\Registered;
@@ -26,6 +30,8 @@ class EventServiceProvider extends ServiceProvider
         EntityUpdatedEvent::class => [ShouldUpdateFieldsListener::class],
         SendEmailItemCreated::class => [SendEmailListener::class],
         UpdateStatusChklstRunEvent::class => [UpdateStatusChklstRunListener::class],
+        UpdatedDocumentEvent::class => [SendUpdatedDocumentNotificationListener::class],
+        CreateNewDocumentEvent::class => [SendCreateNewDocumentNotificationListener::class],
     ];
 
     /**

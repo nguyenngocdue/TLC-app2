@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Events\CreateNewDocumentEvent;
+use App\Events\UpdatedDocument;
+use App\Events\UpdatedDocumentEvent;
 use App\Models\Attachment;
+use App\Utils\Constant;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\JsonControls;
 use Brian2694\Toastr\Facades\Toastr;
@@ -243,14 +247,11 @@ trait TraitEntityCRUDStoreUpdate2
 			//Get newStatus before it get removed by handleFields
 			$newStatus = $request['status'];
 			$fields = $this->handleFields($request, __FUNCTION__);
-
 			$theRow = $this->data::create($fields);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
-
 			$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
-
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
@@ -268,6 +269,9 @@ trait TraitEntityCRUDStoreUpdate2
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Created New Document"
+		//Add Id into array fields
+		$fields = $this->addEntityType($fields, 'id', $theRow->id);
+		event(new CreateNewDocumentEvent($currentValue = $this->addEntityType($fields, 'entity_type', $this->type)));
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
@@ -297,10 +301,25 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		try {
 			//Get newStatus before it get removed by handleFields
+
 			$newStatus = $request['status'];
 			$fields = $this->handleFields($request, __FUNCTION__);
-
 			$theRow = $this->data::find($id);
+			$previousValue = [];
+			foreach ($fields as $key => $value) {
+				if ($key !== 'tableNames') {
+					if (isset($theRow->$key)) {
+						$previousValue[$key] = $theRow->$key;
+					} else {
+						if ($key === 'getMonitors()') {
+							$valueGetMonitors = $theRow->getMonitors()->pluck('id')->toArray();
+							$previousValue[$key] = $valueGetMonitors;
+						}
+					}
+				} else {
+					$previousValue[$key] = $value;
+				}
+			}
 			$theRow->fill($fields);
 			$theRow->save();
 			$objectType = "App\\Models\\" . Str::singular($theRow->getTable());
@@ -326,6 +345,15 @@ trait TraitEntityCRUDStoreUpdate2
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
+		event(new UpdatedDocumentEvent(
+			$previousValue = $this->addEntityType($previousValue, 'entity_type', $this->type),
+			$currentValue = $this->addEntityType($fields, 'entity_type', $this->type)
+		));
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
+	}
+	private function addEntityType($array, $key, $value)
+	{
+		$array[$key] = $value;
+		return $array;
 	}
 }

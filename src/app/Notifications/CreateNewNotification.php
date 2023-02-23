@@ -10,16 +10,15 @@ use Illuminate\Notifications\Notification;
 class CreateNewNotification extends Notification
 {
     use Queueable;
-
+    public $data;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($id)
+    public function __construct($data)
     {
-        // $this->id = $id;
-        // $this->object_id = $id;
+        $this->data = $data;
     }
 
     /**
@@ -30,7 +29,7 @@ class CreateNewNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast'];
+        return ['database'];
     }
 
     /**
@@ -41,10 +40,10 @@ class CreateNewNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+        // return (new MailMessage)
+        //     ->line('The introduction to the notification.')
+        //     ->action('Notification Action', url('/'))
+        //     ->line('Thank you for using our application!');
     }
 
     /**
@@ -55,8 +54,6 @@ class CreateNewNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            // 'id' =>  $this->id
-        ];
+        return $this->data;
     }
 }
