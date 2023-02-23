@@ -50,6 +50,9 @@ $id = $action === "edit" ? $values->id : "";
             $col_span = $val['col_span'] === '' ? 12 : $val['col_span'] * 1;
             $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
             $hiddenLabel = $props[$key]['hidden_label'] === 'true';
+            $labelExtra = $defaultValue['label_extra'];
+            $placeholder = $defaultValue['placeholder'];
+            $controlExtra = $defaultValue['control_extra'];
 
             $isRequired = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
             $iconJson = $columnType === 'json' ?'<i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
@@ -103,6 +106,7 @@ $id = $action === "edit" ? $values->id : "";
                                     {!!$iconJson!!}
                                 </span>
                                 @if(!$hiddenLabel)
+                                <i>{{$labelExtra}}</i>
                             </label>
                             @endif
                         </div>
@@ -142,7 +146,7 @@ $id = $action === "edit" ? $values->id : "";
                             @case('hyperlink')
                             @case('text')
                             @case('thumbnail')
-                            <x-controls.text name={{$columnName}} value={{$value}} />
+                            <x-controls.text name={{$columnName}} value={{$value}} placeholder="{{$placeholder}}" />
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
                             @case('number')
@@ -150,7 +154,7 @@ $id = $action === "edit" ? $values->id : "";
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
                             @case('textarea')
-                            <x-controls.textarea name={{$columnName}} :value="$value" colType={{$columnType}} />
+                            <x-controls.textarea name={{$columnName}} :value="$value" colType={{$columnType}} placeholder="{{$placeholder}}"/>
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
                             @case('toggle')
@@ -202,6 +206,7 @@ $id = $action === "edit" ? $values->id : "";
                             <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />
                             @break
                             @endswitch
+                            {{$controlExtra}}
                         </div>
                         @endif
                     </div>

@@ -32,11 +32,6 @@ class ManageDefaultValues extends Manage_Parent
                 // "editable" => true,
             ],
             [
-                "dataIndex" => "default_value",
-                "renderer" => "text",
-                "editable" => true,
-            ],
-            [
                 "dataIndex" => "validation",
                 "editable" => true,
                 "renderer" => "text",
@@ -57,6 +52,11 @@ class ManageDefaultValues extends Manage_Parent
                     '(not-yet)format_compliance',
                 ],
                 "properties" => ['strFn' => 'same'],
+            ],
+            [
+                "dataIndex" => "default_value",
+                "renderer" => "text",
+                "editable" => true,
             ],
             [
                 "dataIndex" => "label_extra",
