@@ -54,9 +54,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getDefMonitors()": {
-        "name": "_getDefMonitors()",
-        "column_name": "getDefMonitors()",
+    "_getMonitors()": {
+        "name": "_getMonitors()",
+        "column_name": "getMonitors()",
         "label": "",
         "default_value": "",
         "validation": "",

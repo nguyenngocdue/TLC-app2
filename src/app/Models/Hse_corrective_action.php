@@ -22,7 +22,7 @@ class Hse_corrective_action extends ModelExtended
     ];
 
     public $oracyParams = [
-        "getDefMonitors()" => ["getCheckedByField", User::class],
+        "getMonitors()" => ["getCheckedByField", User::class],
     ];
 
     public function getHseIncidentReport()
@@ -56,7 +56,7 @@ class Hse_corrective_action extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getDefMonitors()
+    public function getMonitors()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

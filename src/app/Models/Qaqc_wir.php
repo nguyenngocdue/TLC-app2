@@ -27,7 +27,7 @@ class Qaqc_wir extends ModelExtended
     ];
 
     public $oracyParams = [
-        "getDefMonitors()" => ["getCheckedByField", User::class],
+        "getMonitors()" => ["getCheckedByField", User::class],
     ];
 
     public function getProject()
@@ -78,7 +78,7 @@ class Qaqc_wir extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getDefMonitors()
+    public function getMonitors()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

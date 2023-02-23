@@ -39,7 +39,7 @@ class Qaqc_mir extends ModelExtended
     ];
 
     public $oracyParams = [
-        "getDefMonitors()" => ["getCheckedByField", User::class],
+        "getMonitors()" => ["getCheckedByField", User::class],
     ];
 
     public function getProject()
@@ -156,7 +156,7 @@ class Qaqc_mir extends ModelExtended
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    public function getDefMonitors()
+    public function getMonitors()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

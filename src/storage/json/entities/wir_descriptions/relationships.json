@@ -38,10 +38,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getDefMonitors()": {
-        "name": "_getDefMonitors()",
+    "_getMonitors()": {
+        "name": "_getMonitors()",
         "relationship": "getCheckedByField",
-        "control_name": "getDefMonitors()",
+        "control_name": "getMonitors()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

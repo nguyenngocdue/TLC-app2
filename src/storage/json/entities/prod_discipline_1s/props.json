@@ -95,9 +95,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_getDefMonitors()": {
-        "name": "_getDefMonitors()",
-        "column_name": "getDefMonitors()",
+    "_getMonitors()": {
+        "name": "_getMonitors()",
+        "column_name": "getMonitors()",
         "column_type": "oracy_prop",
         "label": "Default Monitors",
         "control": "dropdown_multi",

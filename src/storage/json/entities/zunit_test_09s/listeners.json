@@ -14,7 +14,7 @@
         "listen_action": "assign",
         "triggers": "prod_discipline_1",
         "listen_to_fields": "prod_discipline_1",
-        "listen_to_attrs": "getDefMonitors()",
+        "listen_to_attrs": "getMonitors()",
         "expression": ""
     },
     "_due_date": {
