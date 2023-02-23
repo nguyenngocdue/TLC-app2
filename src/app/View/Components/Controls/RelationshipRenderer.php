@@ -140,6 +140,7 @@ class RelationshipRenderer extends Component
                     'table01ROName' => $this->table01Name . "RO",
                     'tableDebug' => $this->tableDebug ? true : false,
                     'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
+                    'isOrderable' => $isOrderable,
 
                     'entityId' => CurrentRoute::getEntityId($this->type),
                     'entityType' => Str::modelPathFrom($this->type),

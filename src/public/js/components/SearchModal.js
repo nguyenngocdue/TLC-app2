@@ -17,13 +17,11 @@ const renderHtml = (apps) => {
                 : ''
             const { package_rendered } = app
             html += `<li>
-                        <a href="${
-                            app.href
-                        }" class="flex items-center p-2 text-xs font-medium text-gray-700 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                        <a href="${app.href
+                }" class="flex items-center p-2 text-xs font-medium text-gray-700 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                             ${app.icon ?? "<i class='fa-light fa-file'></i>"}
-                            <span class="flex-1 ml-3 whitespace-nowrap">${
-                                app.title
-                            }</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">${app.title
+                }</span>
                             ${statusHtml}
                             <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${package_rendered}</span>
                         </a>
@@ -70,7 +68,7 @@ function matchRegex(valueSearch, app) {
         app.name,
         app.nickname,
     ]
-    console.log(arr)
+    // console.log(arr)
     const str = arr.join(' ')
     return regex.test(str)
 }
