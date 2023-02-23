@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('priority_id');
             $table->unsignedBigInteger('hse_incident_report_id');
             $table->unsignedBigInteger('work_area_id');
-            $table->unsignedBigInteger('assignee')->nullable();
+            $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('unsafe_action_type_id');
             $table->string('status')->nullable();
             $table->dateTime('opened_date')->nullable();
