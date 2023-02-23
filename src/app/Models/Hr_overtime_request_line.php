@@ -9,7 +9,7 @@ class Hr_overtime_request_line extends ModelExtended
     protected $fillable = [
         "id", "hr_overtime_request_id", "user_id", "employeeid", "position_rendered",
         "ot_date", "from_time", "to_time", "break_time", "order_no", "owner_id",
-        "total_time", "sub_project_id", "work_mode_id", "remark"
+        "total_time", "sub_project_id", "work_mode_id", "remark", "status"
     ];
     protected $table = "hr_overtime_request_lines";
     public $nameless = true;
@@ -82,6 +82,7 @@ class Hr_overtime_request_line extends ModelExtended
             ['dataIndex' => 'sub_project_id'],
             ['dataIndex' => 'work_mode_id'],
             ['dataIndex' => 'remark'],
+            ['dataIndex' => 'status'],
         ];
     }
 }

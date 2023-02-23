@@ -38,6 +38,7 @@ return new class extends Migration
             $table->dateTime('time_out_hospital')->nullable();
             $table->float('lost_days')->nullable();
             $table->text('investigation_finding')->nullable();
+            $table->string('status')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });

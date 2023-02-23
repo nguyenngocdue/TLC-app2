@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Hr_overtime_request extends ModelExtended
 {
-    protected $fillable = ['id', 'workplace_id', 'assignee_1', 'ot_purpose', 'owner_id'];
+    protected $fillable = ['id', 'workplace_id', 'assignee_1', 'ot_purpose', 'owner_id', 'status'];
     protected $table = "hr_overtime_requests";
     public $nameless = true;
 
