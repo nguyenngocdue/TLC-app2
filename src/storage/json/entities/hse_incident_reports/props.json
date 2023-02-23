@@ -682,7 +682,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "hidden_label": "",
+        "hidden_label": "true",
         "hidden_filter": "",
         "hidden_print": "",
         "new_line": "true"
