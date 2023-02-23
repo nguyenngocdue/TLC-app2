@@ -330,7 +330,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "hidden_label": "",
+        "hidden_label": "true",
         "hidden_filter": "",
         "hidden_print": "",
         "new_line": "true"
@@ -634,7 +634,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "hidden_label": "",
+        "hidden_label": "true",
         "hidden_filter": "",
         "hidden_print": "",
         "new_line": "true"
@@ -730,7 +730,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "hidden_label": "",
+        "hidden_label": "true",
         "hidden_filter": "",
         "hidden_print": "",
         "new_line": "true"
@@ -778,7 +778,7 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "hidden_label": "",
+        "hidden_label": "true",
         "hidden_filter": "true",
         "hidden_print": "",
         "new_line": "true"
@@ -842,7 +842,7 @@
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
-        "hidden_label": "",
+        "hidden_label": "true",
         "hidden_filter": "true",
         "hidden_print": "",
         "new_line": "true"
