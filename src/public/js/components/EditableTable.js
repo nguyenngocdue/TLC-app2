@@ -1,5 +1,18 @@
 const debugEditable = false
 const editableColumns = {}, tableObject = {}, entityId = null
+const getNameIndexOfRowIndex = (tableId, rowIndex) => {
+    const rows = $("#" + tableId + " > tbody")[0].children
+    const row = rows[rowIndex]
+    for (let i = 0; i < row.childNodes.length; i++) {
+        const td = row.childNodes[i]
+        const tdName = td.childNodes[0].data
+        // console.log(tdName, tdName.startsWith(tableId))
+        if (tdName.startsWith(tableId + "[action]")) {
+            return tdName.substring(tableId.length + "[action][".length, tdName.length - 1)
+        }
+    }
+    return -1
+}
 const getAllRows = (tableId) => $("#" + tableId + " > tbody")[0].children
 const getValueOfTrByName = (aRow, fieldName) => {
     let result = null
@@ -193,12 +206,17 @@ const trashEditableTable = (params) => {
 }
 
 const cloneFirstLineDown = (dataIndex, tableId) => {
-    // const debugEditable = true   
-    const value = getCellValueByName(tableId, '[' + dataIndex + ']', 0)
+    // const debugEditable = true
+    const nameIndex = getNameIndexOfRowIndex(tableId, 0)
+    if (debugEditable) console.log(nameIndex)
+    const name = tableId + "[" + dataIndex + "][" + nameIndex + "]"
+    const value = getValueById(name)
+    // const value = getCellValueByName(tableId, '[' + dataIndex + ']', 0)
     if (debugEditable) console.log(tableId, dataIndex, '=', value)
     const length = getAllRows(tableId).length
     for (let i = 0; i < length; i++) {
-        setCellValueByName(tableId, '[' + dataIndex + ']', i, value)
-        getEById(makeIdFrom(tableId, dataIndex, i)).trigger('change')
+        const id = makeIdFrom(tableId, dataIndex, i)
+        getEById(id).val(value)
+        getEById(id).trigger('change')
     }
 }

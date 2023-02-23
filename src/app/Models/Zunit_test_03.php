@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Zunit_test_03 extends ModelExtended
 {
     protected $fillable = [
-        'id', 'name', 'parent_id',
+        'id', 'name', 'parent_id', 'order_no',
         "datetime1", "datetime2", "datetime3", "datetime4", "datetime5", "datetime6", "datetime7"
     ];
     protected $primaryKey = 'id';

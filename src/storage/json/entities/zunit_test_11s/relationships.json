@@ -1,0 +1,15 @@
+{
+    "_getUT1": {
+        "name": "_getUT1",
+        "relationship": "hasMany",
+        "control_name": "getUT1",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    }
+}

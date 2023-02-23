@@ -1,0 +1,123 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "label": "",
+        "validation": "required",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT9Reduce11": {
+        "name": "_getUT9Reduce11",
+        "column_name": "getUT9Reduce11",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT9Reduce1111": {
+        "name": "_getUT9Reduce1111",
+        "column_name": "getUT9Reduce1111",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT9Assign": {
+        "name": "_getUT9Assign",
+        "column_name": "getUT9Assign",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT9Dot": {
+        "name": "_getUT9Dot",
+        "column_name": "getUT9Dot",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT9DateOffset": {
+        "name": "_getUT9DateOffset",
+        "column_name": "getUT9DateOffset",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT9Expression": {
+        "name": "_getUT9Expression",
+        "column_name": "getUT9Expression",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getUT9ExpressionDateTime": {
+        "name": "_getUT9ExpressionDateTime",
+        "column_name": "getUT9ExpressionDateTime",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    }
+}

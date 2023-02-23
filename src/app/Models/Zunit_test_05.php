@@ -7,12 +7,11 @@ use Illuminate\Support\Facades\Log;
 
 class Zunit_test_05 extends ModelExtended
 {
-    protected $fillable = ["id", "name"];
+    protected $fillable = ["id", "name", "parent_id", "order_no"];
     protected $primaryKey = "id";
     protected $table = "zunit_test_05s";
 
     public $eloquentParams = [
-        // "attachment" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_2" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_3" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],

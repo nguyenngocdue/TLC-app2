@@ -1,0 +1,93 @@
+{
+    "_getUT9Reduce11": {
+        "name": "_getUT9Reduce11",
+        "relationship": "hasMany",
+        "control_name": "getUT9Reduce11",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParamsReduce11",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getUT9Reduce1111": {
+        "name": "_getUT9Reduce1111",
+        "relationship": "hasMany",
+        "control_name": "getUT9Reduce1111",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParamsReduce1111",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getUT9Assign": {
+        "name": "_getUT9Assign",
+        "relationship": "hasMany",
+        "control_name": "getUT9Assign",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParamsAssign",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getUT9Dot": {
+        "name": "_getUT9Dot",
+        "relationship": "hasMany",
+        "control_name": "getUT9Dot",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParamsDot",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getUT9DateOffset": {
+        "name": "_getUT9DateOffset",
+        "relationship": "hasMany",
+        "control_name": "getUT9DateOffset",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParamsDateOffset",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getUT9Expression": {
+        "name": "_getUT9Expression",
+        "relationship": "hasMany",
+        "control_name": "getUT9Expression",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParamsExpression",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getUT9ExpressionDateTime": {
+        "name": "_getUT9ExpressionDateTime",
+        "relationship": "hasMany",
+        "control_name": "getUT9ExpressionDateTime",
+        "renderer_view_all": "count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParamsExpressionDateTime",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    }
+}
