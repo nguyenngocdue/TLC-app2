@@ -29,13 +29,14 @@ class Description extends Component
     {
         $dataSource = $this->dataSource;
         $prop = $this->prop;
-        dd($prop);
         $columnName = $prop['column_name'];
         $content = $dataSource[$columnName];
         $id = $dataSource['id'];
         $label = $prop['label'];
         $control = $prop['control'];
         $colSpan = $prop['col_span'];
+        $newLine = $prop['new_line'];
+        $hiddenLabel = $prop['hidden_label'];
         $relationships = $prop['relationships'];
         return view('components.renderer.description', [
             'label' => $label,
@@ -45,6 +46,8 @@ class Description extends Component
             'columnName' => $columnName,
             'id' => $id,
             'type' => $this->type,
+            'newLine' => $newLine,
+            'hiddenLabel' => $hiddenLabel,
             'modelPath' => $this->modelPath,
             'relationships' => $relationships
         ]);

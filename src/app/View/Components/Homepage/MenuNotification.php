@@ -25,7 +25,7 @@ class MenuNotification extends Component
      */
     public function render()
     {
-        $notifications = auth()->user()->unreadNotifications->toArray();
+        $notifications = auth()->user()->notifications->toArray();
         $assigneeNotifications = [];
         $monitorNotifications = [];
         $createdNotifications = [];
