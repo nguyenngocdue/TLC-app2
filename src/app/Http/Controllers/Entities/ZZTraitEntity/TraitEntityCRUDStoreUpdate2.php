@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 use App\Events\CreateNewDocumentEvent;
 use App\Events\UpdatedDocument;
 use App\Events\UpdatedDocumentEvent;
+use App\Http\Controllers\Workflow\LibApps;
 use App\Models\Attachment;
 use App\Utils\Constant;
 use App\Utils\Support\DateTimeConcern;
@@ -12,6 +13,7 @@ use App\Utils\Support\JsonControls;
 use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -247,6 +249,7 @@ trait TraitEntityCRUDStoreUpdate2
 			//Get newStatus before it get removed by handleFields
 			$newStatus = $request['status'];
 			$fields = $this->handleFields($request, __FUNCTION__);
+			$fields = $this->autoDocIDGeneration($fields);
 			$theRow = $this->data::create($fields);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
@@ -355,5 +358,15 @@ trait TraitEntityCRUDStoreUpdate2
 	{
 		$array[$key] = $value;
 		return $array;
+	}
+	private function autoDocIDGeneration($fields)
+	{
+		$libAppsData = LibApps::getFor($this->type);
+		if ($nameColumnDocIDFormat = $libAppsData['doc_id_format_column']) {
+			$tableName = Str::plural($this->type);
+			$maxDocID = DB::table($tableName)->where($nameColumnDocIDFormat, $fields[$nameColumnDocIDFormat])->max('doc_id');
+			$fields['doc_id'] = $maxDocID + 1;
+		}
+		return $fields;
 	}
 }

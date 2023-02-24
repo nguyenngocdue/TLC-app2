@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Qaqc_wir extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "slug", "project_id", "sub_project_id", "prod_routing_id", "status",
+        "id", "name", "doc_id", "description", "slug", "project_id", "sub_project_id", "prod_routing_id", "status",
         "prod_discipline_id", "pj_level_id", "pj_module_type_id", "prod_order_id", "priority_id", "due_date",
         "assignee_1", "wir_description_id", "owner_id"
     ];

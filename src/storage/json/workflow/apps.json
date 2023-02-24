@@ -501,7 +501,7 @@
         "sub_package": "qaqc",
         "title": "QAQC MIRs",
         "nickname": "mir",
-        "doc_id_format_column": null,
+        "doc_id_format_column": "sub_project_id",
         "status": null,
         "icon": null
     },
@@ -512,7 +512,7 @@
         "sub_package": "qaqc",
         "title": "QAQC NCRs",
         "nickname": "ncr",
-        "doc_id_format_column": null,
+        "doc_id_format_column": "sub_project_id",
         "status": null,
         "icon": null
     },
@@ -523,7 +523,7 @@
         "sub_package": "qaqc",
         "title": "QAQC WIRs",
         "nickname": "wir",
-        "doc_id_format_column": null,
+        "doc_id_format_column": "sub_project_id",
         "status": null,
         "icon": null
     },

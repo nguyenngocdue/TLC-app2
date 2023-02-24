@@ -20,7 +20,7 @@
             <x-homepage.search-input></x-homepage.search-input>
         </div> --}}
         <ul class="flex items-center flex-shrink-0 space-x-6">
-            <li class="flex">
+            <li class="flex" title="Hot Key: Alt + Q">
                 <x-homepage.search-modal/>
             </li>
             <li class="flex">
