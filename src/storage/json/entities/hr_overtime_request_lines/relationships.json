@@ -69,7 +69,7 @@
         "relationship": "hasMany",
         "control_name": "getRemainingHoursList",
         "renderer_view_all": "agg_sum",
-        "renderer_view_all_param": "total_hour",
+        "renderer_view_all_param": "total_hours",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown",

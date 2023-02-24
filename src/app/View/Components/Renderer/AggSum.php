@@ -11,9 +11,9 @@ class AggSum extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
+    public function __construct(
+        private $rendererParam = '',
+    ) {
     }
 
     /**
@@ -26,11 +26,20 @@ class AggSum extends Component
         return function (array $data) {
             $json = json_decode($data['slot']);
             if (!is_array($json)) $json = [$json];
+            $column = $this->rendererParam;
+            if ($column == '') return;
             $sum = 0;
             foreach ($json as $line) {
-                $sum += $line->total_hours;
+                if (!isset($line->$column)) {
+                    return "<x-renderer.tag title='Column not found' color='red'>" . $column . "</x-renderer.tag>";
+                } else {
+                    $sum += $line->$column;
+                }
             }
-            return "<div class='text-center'><x-renderer.tag>$sum</x-renderer.tag></div>";
+            $sum = round($sum, 2);
+            $count = sizeof($json);
+            $avg = round($sum / $count, 2);
+            return "<div class='text-center'><x-renderer.tag title='Count: $count\nAVG: $avg'>$sum</x-renderer.tag></div>";
         };
     }
 }
