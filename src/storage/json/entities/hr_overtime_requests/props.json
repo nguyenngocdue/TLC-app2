@@ -19,7 +19,7 @@
         "name": "_workplace_id",
         "column_name": "workplace_id",
         "column_type": "bigint",
-        "label": "Workplace",
+        "label": "OT Workplace",
         "control": "dropdown",
         "align": "",
         "col_span": "",

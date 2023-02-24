@@ -22,6 +22,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_2')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('user_3')->nullable();
+            $table->date('ot_date_1')->nullable();
+            $table->float('remaining_hours')->nullable();
 
             $table->unsignedBigInteger('project_1')->nullable();
             $table->unsignedBigInteger('sub_project_1')->nullable();

@@ -510,5 +510,21 @@ p        "label": "Material Test Reports",
         "hidden_filter": "true",
         "hidden_print": "",
         "new_line": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "column_type": "string",
+        "label": "Status",
+        "control": "status",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
     }
 }

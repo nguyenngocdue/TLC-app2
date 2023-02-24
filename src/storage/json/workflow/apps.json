@@ -5,7 +5,8 @@
         "package": "system",
         "sub_package": "system_admin",
         "title": "Attachments",
-        "nickname": null,
+        "nickname": "att",
+        "doc_id_format_column": null,
         "status": null,
         "icon": "<i class=\"fa-regular fa-paperclip\"><\/i>"
     },
@@ -15,7 +16,8 @@
         "package": "system",
         "sub_package": "system_admin",
         "title": "Comments",
-        "nickname": "cm",
+        "nickname": "cmt",
+        "doc_id_format_column": null,
         "status": null,
         "icon": "<i class=\"fa-duotone fa-comments\"><\/i>"
     },
@@ -26,6 +28,7 @@
         "sub_package": "dev_admin",
         "title": "Control Types",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -35,7 +38,8 @@
         "package": "system",
         "sub_package": "dashboard",
         "title": "Dashboard",
-        "nickname": null,
+        "nickname": "db",
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -46,6 +50,7 @@
         "sub_package": "system_admin",
         "title": "Departments",
         "nickname": "dpm",
+        "doc_id_format_column": null,
         "status": null,
         "icon": "<i class=\"fa-regular fa-sitemap\"><\/i>"
     },
@@ -55,7 +60,8 @@
         "package": "project_management",
         "sub_package": "production",
         "title": "ERP Routing Links",
-        "nickname": null,
+        "nickname": "erl",
+        "doc_id_format_column": null,
         "status": null,
         "icon": "<i class=\"fa-duotone fa-calendar-days\"><\/i>"
     },
@@ -65,7 +71,8 @@
         "package": "system",
         "sub_package": "dev_admin",
         "title": "Fields",
-        "nickname": null,
+        "nickname": "fld",
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -76,6 +83,7 @@
         "sub_package": "hr_admin",
         "title": "HR Overtime Requests",
         "nickname": "otr",
+        "doc_id_format_column": null,
         "status": "dev",
         "icon": null
     },
@@ -86,6 +94,7 @@
         "sub_package": "hr_admin",
         "title": "HR Overtime Request Lines",
         "nickname": "otrl",
+        "doc_id_format_column": null,
         "status": "dev",
         "icon": null
     },
@@ -95,7 +104,8 @@
         "package": "compliance",
         "sub_package": "hse",
         "title": "HSE Corrective Actions",
-        "nickname": "cra",
+        "nickname": "hca",
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -105,7 +115,8 @@
         "package": "compliance",
         "sub_package": "hse",
         "title": "HSE Incident Reports",
-        "nickname": null,
+        "nickname": "hir",
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -116,6 +127,7 @@
         "sub_package": "system_configuration",
         "title": "Manage Apps",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -126,6 +138,7 @@
         "sub_package": "system_configuration",
         "title": "Manage Statuses",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -136,6 +149,7 @@
         "sub_package": "system_configuration",
         "title": "Manage Widgets",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -146,6 +160,7 @@
         "sub_package": "system_permission",
         "title": "Permissions",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -156,6 +171,7 @@
         "sub_package": "production",
         "title": "Project Modules",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -166,6 +182,7 @@
         "sub_package": "production",
         "title": "Project PODs",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -176,6 +193,7 @@
         "sub_package": "production",
         "title": "Project Shipments",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -186,6 +204,7 @@
         "sub_package": "production",
         "title": "Project Staircases",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -196,6 +215,7 @@
         "sub_package": "production",
         "title": "Project Units",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -206,6 +226,7 @@
         "sub_package": "dev_admin",
         "title": "Posts",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -216,6 +237,7 @@
         "sub_package": "system_admin",
         "title": "Priorities",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -226,6 +248,7 @@
         "sub_package": "production",
         "title": "Prod Disciplines",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -236,6 +259,7 @@
         "sub_package": "production",
         "title": "Prod Discipline 1",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -246,6 +270,7 @@
         "sub_package": "production",
         "title": "Prod Discipline 2",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -256,6 +281,7 @@
         "sub_package": "production",
         "title": "Prod Orders",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -266,6 +292,7 @@
         "sub_package": "production",
         "title": "Prod Routings",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -276,6 +303,7 @@
         "sub_package": "production",
         "title": "Prod Routing Details",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -286,6 +314,7 @@
         "sub_package": "production",
         "title": "Prod Routing Links",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -296,6 +325,7 @@
         "sub_package": "production",
         "title": "Prod Runs",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -306,6 +336,7 @@
         "sub_package": "production",
         "title": "Prod Sequences",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -316,6 +347,7 @@
         "sub_package": "project_management",
         "title": "Projects",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -326,6 +358,7 @@
         "sub_package": "hr_admin",
         "title": "Public Holidays",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -336,6 +369,7 @@
         "sub_package": "qaqc",
         "title": "QAQA CARs",
         "nickname": "car",
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -345,7 +379,8 @@
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC Insp Chklsts",
-        "nickname": null,
+        "nickname": "icl",
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -356,6 +391,7 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Chklst Lines",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -366,6 +402,7 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Chklst Runs",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -376,6 +413,7 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Chklst Shts",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -386,6 +424,7 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Control Groups",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -396,6 +435,7 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Control Values",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -406,6 +446,7 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Groups",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -416,6 +457,7 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Tmpls",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -426,6 +468,7 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Tmpl Lines",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -436,6 +479,7 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Tmpl Shts",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -446,6 +490,7 @@
         "sub_package": "qaqc",
         "title": "QAQC Insp Values",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -455,7 +500,8 @@
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC MIRs",
-        "nickname": null,
+        "nickname": "mir",
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -465,7 +511,8 @@
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC NCRs",
-        "nickname": null,
+        "nickname": "ncr",
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -475,7 +522,8 @@
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC WIRs",
-        "nickname": null,
+        "nickname": "wir",
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -486,6 +534,7 @@
         "sub_package": "dashboard",
         "title": "Report Index",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -496,6 +545,7 @@
         "sub_package": "system_permission",
         "title": "Role Sets",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -506,6 +556,7 @@
         "sub_package": "system_permission",
         "title": "Roles",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -516,6 +567,7 @@
         "sub_package": "system_permission",
         "title": "Setpermissions",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -526,6 +578,7 @@
         "sub_package": "system_permission",
         "title": "Setroles",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -536,6 +589,7 @@
         "sub_package": "system_permission",
         "title": "Setrolesets",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -546,6 +600,7 @@
         "sub_package": "project_management",
         "title": "Sub Projects",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -556,6 +611,7 @@
         "sub_package": "system_admin",
         "title": "Terms",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -566,6 +622,7 @@
         "sub_package": "user",
         "title": "Users",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -576,6 +633,7 @@
         "sub_package": "user",
         "title": "User Categories",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -586,6 +644,7 @@
         "sub_package": "user",
         "title": "User Disciplines",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -596,6 +655,7 @@
         "sub_package": "user",
         "title": "User Position1",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -606,6 +666,7 @@
         "sub_package": "user",
         "title": "User Position2",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -616,6 +677,7 @@
         "sub_package": "user",
         "title": "User Position3",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -626,6 +688,7 @@
         "sub_package": "user",
         "title": "User Position Pre",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -636,6 +699,7 @@
         "sub_package": "user",
         "title": "User Teams",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -646,6 +710,7 @@
         "sub_package": "user",
         "title": "User Time Keep Types",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -656,6 +721,7 @@
         "sub_package": "user",
         "title": "User Types",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -666,6 +732,7 @@
         "sub_package": "production",
         "title": "WIR Descriptions",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -676,6 +743,7 @@
         "sub_package": "system_admin",
         "title": "Work Areas",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -686,6 +754,7 @@
         "sub_package": "system_admin",
         "title": "Work Modes",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -696,6 +765,7 @@
         "sub_package": "system_admin",
         "title": "Workplaces",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -706,6 +776,7 @@
         "sub_package": "unit_test",
         "title": "UT01 (Basic Controls)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -716,6 +787,7 @@
         "sub_package": "unit_test",
         "title": "UT02 (Dropdown\/Checkbox)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -726,6 +798,7 @@
         "sub_package": "unit_test",
         "title": "UT03 (DateTime Controls)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -736,6 +809,7 @@
         "sub_package": "unit_test",
         "title": "UT04 (Static Typography)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -746,6 +820,7 @@
         "sub_package": "unit_test",
         "title": "UT05 (Attachments)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -756,6 +831,7 @@
         "sub_package": "unit_test",
         "title": "UT07 (Comments)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -766,6 +842,7 @@
         "sub_package": "unit_test",
         "title": "UT09 (Form Event Listeners)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -776,6 +853,7 @@
         "sub_package": "unit_test",
         "title": "UT10 (Editable Table)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -786,6 +864,7 @@
         "sub_package": "unit_test",
         "title": "UT11 (Basic Controls in Table)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -796,6 +875,7 @@
         "sub_package": "unit_test",
         "title": "UT12 (Dropdown\/Checkbox in Table)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -806,6 +886,7 @@
         "sub_package": "unit_test",
         "title": "UT13 (DateTime in Table)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -816,6 +897,7 @@
         "sub_package": "unit_test",
         "title": "UT15 (Attachments in Table)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     },
@@ -826,6 +908,7 @@
         "sub_package": "unit_test",
         "title": "UT19 (Listen in Table)",
         "nickname": null,
+        "doc_id_format_column": null,
         "status": null,
         "icon": null
     }

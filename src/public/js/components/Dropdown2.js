@@ -98,7 +98,7 @@ const filterDropdown2 = (column_name, dataSource) => {
 const onChangeDropdown2Reduce = (listener) => {
     // const debugListener = true
     if (debugListener) console.log("Reduce listener", listener)
-    const { column_name, table_name, listen_to_attrs, triggers } = listener
+    const { column_name, table_name, listen_to_attrs, triggers, attr_to_compare } = listener
     let dataSource = k[table_name]
     if (debugListener) console.log("dataSource in k", dataSource)
 
@@ -135,7 +135,7 @@ const onChangeDropdown2Reduce = (listener) => {
     // console.log('onChangeDropdown2Reduce')
     const lastSelected = getValueOfEById(column_name)
     // console.log("Selected of", column_name, "is", lastSelected)
-    reloadDataToDropdown2(column_name, dataSource, [lastSelected * 1])
+    reloadDataToDropdown2(column_name, attr_to_compare, dataSource, [lastSelected * 1])
 }
 const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
@@ -282,9 +282,9 @@ const onChangeDropdown2 = (name) => {
     }
 }
 
-const reloadDataToDropdown2 = (id, dataSource, selected) => {
+const reloadDataToDropdown2 = (id, attr_to_compare, dataSource, selected) => {
     const control_type = getControlTypeOfE(id)
-
+    // console.log(id, attr_to_compare)
     // console.log("reloadDataToDropdown2", id, control_type, dataSource.length, selected)
     if (dataSource === undefined) return;
     getEById(id).empty()
@@ -310,6 +310,7 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
             placeholder: "Please select..."
             // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
             , templateResult: select2FormatState
+            // , disabled: true
         });
     } else if (control_type == "radio_or_checkbox") {
         // const control = getEById(id)
@@ -320,12 +321,13 @@ const reloadDataToDropdown2 = (id, dataSource, selected) => {
         const colSpan = getColSpanOfE(id)
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i];
-            selectedStr = (dataSource.length === 1) ? 'checked' : (selected.includes(item['id']) ? "checked" : "")
+            const itemId = item[attr_to_compare]
+            selectedStr = (dataSource.length === 1) ? 'checked' : (selected.includes(itemId) ? "checked" : "")
             // console.log(item)
-            const title = item['description'] + " (#" + item['id'] + ")"
+            const title = item['description'] + " (#" + itemId + ")"
             option = '<div class="items-center bg-white-50 flex align-center ' + colSpan + '">'
             option += '<label class="truncate" title="' + title + '">'
-            option += '<input type="' + radio_or_checkbox + '" name="' + control_name + '" value="' + item['id'] + '" ' + selectedStr + '>'
+            option += '<input type="' + radio_or_checkbox + '" name="' + control_name + '" value="' + itemId + '" ' + selectedStr + '>'
             option += " " + item['name']
             option += '</label>'
             option += '</div>'
@@ -379,7 +381,15 @@ const documentReadyDropdown2 = ({ id, selectedJson, table }) => {
     // table = "{{$table}}"
     dataSourceDropdown = k[table];
     if (dataSourceDropdown === undefined) console.error("key {{$table}} not found in k[]");
-    reloadDataToDropdown2(id, dataSourceDropdown, selectedJson)
+    let attr_to_compare = 'id'
+    for (let i = 0; i < listenersOfDropdown2.length; i++) {
+        if (listenersOfDropdown2[i].column_name === id) {
+            attr_to_compare = listenersOfDropdown2[i].attr_to_compare
+            break
+        }
+    }
+    // console.log(id, listenersOfDropdown2, attr_to_compare)
+    reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedJson)
 
     $(document).ready(() => {
         listenersOfDropdown2.forEach((listener) => {

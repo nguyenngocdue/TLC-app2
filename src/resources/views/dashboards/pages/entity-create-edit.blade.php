@@ -50,6 +50,7 @@ $id = $action === "edit" ? $values->id : "";
             $col_span = $val['col_span'] === '' ? 12 : $val['col_span'] * 1;
             $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
             $hiddenLabel = $props[$key]['hidden_label'] === 'true';
+            $readOnly = ($props[$key]['read_only'] ?? false) === 'true';
 
             $defaultValue = $defaultValues[$key] ?? [];
             $labelExtra = $defaultValue['label_extra'] ?? "";
@@ -172,16 +173,16 @@ $id = $action === "edit" ? $values->id : "";
                             @break
 
                             @case ('dropdown')
-                            <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} />
+                            <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
                             @break
                             @case ('radio')
-                            <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} />
+                            <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
                             @break
                             @case ('dropdown_multi')
-                            <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} multiple={{true}} />
+                            <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
                             @break
                             @case('checkbox')
-                            <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} multiple={{true}}/>
+                            <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}}/>
                             @break
 
                             @case('attachment')

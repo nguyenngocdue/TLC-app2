@@ -4,6 +4,7 @@ $json = json_decode($slot);
 if(!is_array($json)) $json=[$json];
 foreach($json as $item){
     $id = $item->id ?? "";
+    $value = null;
     if(!isset($item->$rendererParam)) {
         // dump('l1'.$rendererParam);
         if($rendererParam !== 'name'){
