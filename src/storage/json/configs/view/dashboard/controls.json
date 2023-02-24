@@ -48,9 +48,10 @@
     ],
     "renderer_view_all": [
         "",
+        "agg_count",
+        "agg_sum",
         "avatar_user",
         "column",
-        "count",
         "parent_link",
         "thumbnails"
     ],

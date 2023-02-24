@@ -203,6 +203,23 @@
         "read_only": "",
         "new_line": ""
     },
+    "_getRemainingHoursList": {
+        "name": "_getRemainingHoursList",
+        "column_name": "getRemainingHoursList",
+        "column_type": "eloquent_prop",
+        "label": "Remaining Hours List",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "new_line": ""
+    },
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
