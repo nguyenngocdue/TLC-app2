@@ -4,6 +4,7 @@ use App\Http\Controllers\AppMenuController;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Notifications\NotificationsController;
 use App\Http\Controllers\RedisController;
 use App\Http\Controllers\Reports\ReportIndexController;
 use App\Http\Controllers\UpdateUserSettings;
@@ -44,6 +45,8 @@ Route::group([
     });
 
     Route::get('reports', [ReportIndexController::class, 'index'])->name('reportIndices.index');
+    Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications.index');
+    Route::get('notifications/{type}/{id}/{idNotification}', [NotificationsController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::group([
         'prefix' => 'reports'
     ], function () use ($entities) {

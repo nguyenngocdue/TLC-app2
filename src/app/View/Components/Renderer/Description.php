@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\View\Component;
 
 class Description extends Component
@@ -34,6 +35,13 @@ class Description extends Component
         $id = $dataSource['id'];
         $label = $prop['label'];
         $control = $prop['control'];
+        if ($control === 'status') {
+            $libStatus = LibStatuses::getFor($this->type);
+            $isContent = $dataSource[$columnName];
+            $content = $isContent ? $libStatus[$isContent]['title'] : '';
+        } else {
+            $content = $dataSource[$columnName];
+        }
         $colSpan = $prop['col_span'];
         $newLine = $prop['new_line'];
         $hiddenLabel = $prop['hidden_label'];
