@@ -2,6 +2,7 @@
 
 @section('topTitle',$typeReport)
 @section('title', $entity)
+{{-- @dump($tableDataSource, $tableColumns) --}}
 
 @section('content')
 <div class="px-4">

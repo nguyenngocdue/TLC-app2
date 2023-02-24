@@ -149,9 +149,9 @@ class Qaqc_insp_chklst extends Report_ParentController
             $data[$sheetId] = array_values($values);
         }
         ksort($data);
-        $dataSource->setCollection(collect($data));
+        $dataSource->setCollection(collect(array_values($data)));
 
-        // dump("123", $data);
+        // dump("123", $dataSource);
         return $dataSource;
     }
 
@@ -240,5 +240,21 @@ class Qaqc_insp_chklst extends Report_ParentController
         $insp_tmpls = ['qaqc_insp_tmpl_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
         $filter_run = ['filter_run' => ['Filter for a latest run', 'Filter for many runs']];
         return array_merge($subProjects, $prod_orders, $insp_tmpls, $filter_run);
+    }
+
+    protected function getSheets($dataSource)
+    {
+        $items = Report::changeTypeAllItems($dataSource);
+        // dd($items);
+        $sheets = array_values(array_map(function ($item) {
+            $x = isset(array_pop($item)['sheet_name']);
+            if ($x) {
+                $name = array_pop($item)['sheet_name'];
+                $str = "<a href='#$name'>$name</a>";
+                return  ["sheet_name" =>  $str];
+            } else return [];
+        }, $items));
+        // dd($sheets);
+        return $sheets;
     }
 }
