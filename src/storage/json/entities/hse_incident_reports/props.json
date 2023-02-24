@@ -943,6 +943,22 @@
         "hidden_print": "",
         "new_line": "true"
     },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "column_type": "string",
+        "label": "Status",
+        "control": "status",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "true",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
