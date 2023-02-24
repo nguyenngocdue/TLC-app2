@@ -85,7 +85,6 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->enrichDataSource($dataSource, $urlParams);
 
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
-        // dump($dataSource);
         $columns = $this->getTableColumns($dataSource);
         $sheets = $this->getSheets($dataSource);
 
