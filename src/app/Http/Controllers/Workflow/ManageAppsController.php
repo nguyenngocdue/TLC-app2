@@ -57,10 +57,15 @@ class ManageAppsController extends AbstractManageLibController
                 'editable' => true,
             ],
             [
+                'dataIndex' => 'doc_id_format_column',
+                'renderer' => 'text',
+                'editable' => true,
+            ],
+            [
                 'dataIndex' => 'status',
                 'renderer' => 'dropdown',
                 'editable' => true,
-                'cbbDataSource' => ['', 'dev','beta'],
+                'cbbDataSource' => ['', 'dev', 'beta'],
             ],
             [
                 'dataIndex' => 'icon',
