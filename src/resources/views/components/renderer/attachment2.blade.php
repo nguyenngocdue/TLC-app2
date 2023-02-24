@@ -58,7 +58,6 @@
 @once
 <script type="text/javascript">
     var objColName = {};
-
     function updateToBeDeletedTextBox(id, name) {
         var binIcon = document.getElementById("trashIcon-" + id)
         if (!Object.keys(objColName).includes(name)) {
@@ -77,6 +76,5 @@
         }
         document.getElementById(name).value = objColName[name]
     }
-
 </script>
 @endonce

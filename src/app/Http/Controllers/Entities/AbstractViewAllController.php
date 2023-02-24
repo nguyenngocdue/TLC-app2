@@ -63,8 +63,10 @@ abstract class AbstractViewAllController extends Controller
                     case 'text':
                     case 'textarea':
                     case 'number':
-                    case 'status':
                         $result['text'][$key] = $value;
+                        break;
+                    case 'status':
+                        $result['status'][$key] = $value;
                         break;
                     case 'toggle':
                         $result['toggle'][$key] = $value;
@@ -149,6 +151,7 @@ abstract class AbstractViewAllController extends Controller
                                 });
                                 break;
                             case 'dropdown':
+                            case 'status':
                             case 'parent_type':
                                 array_walk($value, function ($value, $key) use ($q) {
                                     $q->whereIn($key, $value);
