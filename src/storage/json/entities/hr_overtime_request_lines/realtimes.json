@@ -1,0 +1,9 @@
+{
+    "_rt_remaining_hours": {
+        "name": "_rt_remaining_hours",
+        "column_name": "rt_remaining_hours",
+        "label": "",
+        "realtime_type": "leaving_new",
+        "realtime_fn": "OTRL_RemainingHours"
+    }
+}

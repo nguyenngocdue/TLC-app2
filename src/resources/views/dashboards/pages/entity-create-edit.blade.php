@@ -32,11 +32,11 @@ $id = $action === "edit" ? $values->id : "";
             @method($action === "create" ? 'POST' : 'PUT')
             @php
             $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quarter','picker_year','picker_datetime'];
+            $status = $values->status ?? null;
             @endphp
             @foreach($props as $key => $val)
             @php
             if ($action === "create" && $val['control'] === 'relationship_renderer') continue;
-            $defaultValue = $defaultValues[$key] ?? [];
 
             $label = $val['label'];
             $columnName = $val['column_name'];
@@ -50,9 +50,15 @@ $id = $action === "edit" ? $values->id : "";
             $col_span = $val['col_span'] === '' ? 12 : $val['col_span'] * 1;
             $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
             $hiddenLabel = $props[$key]['hidden_label'] === 'true';
+
+            $defaultValue = $defaultValues[$key] ?? [];
             $labelExtra = $defaultValue['label_extra'] ?? "";
             $placeholder = $defaultValue['placeholder'] ?? "";
             $controlExtra = $defaultValue['control_extra'] ?? "";
+
+            $realtime = $realtimes[$key] ?? [];
+            $realtimeType = $realtime["realtime_type"] ?? "";
+            $realtimeFn = $realtime["realtime_fn"] ?? "";
 
             $isRequired = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
             $iconJson = $columnType === 'json' ?'<i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
@@ -203,7 +209,7 @@ $id = $action === "edit" ? $values->id : "";
                             @break
 
                             @case('realtime')
-                            <x-renderer.realtime name={{$columnName}} />
+                            <x-renderer.realtime name={{$columnName}} realtimeType={{$realtimeType}} realtimeFn={{$realtimeFn}} status={{$status}} value={{$value}} :item="$item"/>
                             @break
 
                             @default

@@ -105,6 +105,7 @@ class SuperProps
         }
         // static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
         static::attachJson("default-values", $allProps, DefaultValues::getAllOf($type));
+        static::attachJson("realtimes", $allProps, Realtimes::getAllOf($type));
         static::attachJson("relationships", $allProps, static::makeRelationshipObject($type));
 
         static::attachJson("visible-props", $allProps, static::makeCheckbox(VisibleProps::getAllOf($type)));
