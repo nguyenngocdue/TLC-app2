@@ -159,11 +159,27 @@
         "hidden_print": "",
         "new_line": ""
     },
+    "_rt_remaining_hours": {
+        "name": "_rt_remaining_hours",
+        "column_name": "rt_remaining_hours",
+        "column_type": "float",
+        "label": "Remaining Hours",
+        "control": "realtime",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
+    },
     "_getRemainingHours": {
         "name": "_getRemainingHours",
         "column_name": "getRemainingHours",
         "column_type": "eloquent_prop",
-        "label": "Remaining Hours",
+        "label": "Remaining Hours (RT)",
         "control": "number",
         "align": "",
         "col_span": "",

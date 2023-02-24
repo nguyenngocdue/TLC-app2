@@ -21,6 +21,7 @@ class Pages
     const Definition = "Definition";
     const IntermediateProp = "IntermediateProp";
     const BallInCourt = "BallInCourt";
+    const Realtime = "Realtime";
 
     const VisibleProp = "VVisibleProp";
     const ReadOnlyProp = "VReadOnlyProp";
@@ -53,6 +54,7 @@ abstract class AbstractManageJsonController extends Controller
         "_dfn" => Pages::Definition,
         "_itm" => Pages::IntermediateProp,
         "_bic" => Pages::BallInCourt,
+        "_rtm" => Pages::Realtime,
 
         "_vsb" => Pages::VisibleProp,
         "_rol" => Pages::ReadOnlyProp,

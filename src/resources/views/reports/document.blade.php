@@ -4,7 +4,7 @@
 @section('content')
 
 {{-- @dump($tableDataSource, $tableColumns) --}}
-{{-- @dump($sheets) --}}
+@dump($sheets)
 
 @section('content')
 <div class="md:px-4">

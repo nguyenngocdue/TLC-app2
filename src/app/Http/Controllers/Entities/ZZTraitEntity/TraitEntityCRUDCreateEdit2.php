@@ -8,8 +8,8 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\DefaultValues;
 use App\Utils\Support\Json\Props;
+use App\Utils\Support\Json\Realtimes;
 use App\Utils\Support\JsonControls;
-use Carbon\Carbon;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -26,7 +26,9 @@ trait TraitEntityCRUDCreateEdit2
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		return view('dashboards.pages.entity-create-edit', [
 			'props' => $props,
+			'item' => (object)[],
 			'defaultValues' => DefaultValues::getAllOf($this->type),
+			'realtimes' => Realtimes::getAllOf($this->type),
 			'type' => $this->type,
 			'action' => __FUNCTION__,
 			'modelPath' => $this->data,
@@ -43,13 +45,17 @@ trait TraitEntityCRUDCreateEdit2
 
 	public function edit($id)
 	{
+		// dump(SuperProps::getFor($this->type));
 		$props = $this->getCreateEditProps();
-		$values = (object) $this->loadValueOfOracyPropsAndAttachments($id, $props);
+		$original = $this->data::findOrFail($id);
+		$values = (object) $this->loadValueOfOracyPropsAndAttachments($original, $props);
 		$tableBluePrint = $this->makeTableBluePrint();
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		return view('dashboards.pages.entity-create-edit', [
 			'props' => $props,
+			'item' => $original,
 			'defaultValues' => DefaultValues::getAllOf($this->type),
+			'realtimes' => Realtimes::getAllOf($this->type),
 			'values' => $values,
 			'type' => Str::plural($this->type),
 			'action' => __FUNCTION__,
@@ -123,11 +129,10 @@ trait TraitEntityCRUDCreateEdit2
 		return $result;
 	}
 
-	private function loadValueOfOracyPropsAndAttachments($id, $props)
+	private function loadValueOfOracyPropsAndAttachments($original, $props)
 	{
 		$orphanAttachments = $this->loadValueOfOrphanAttachments($props);
-		// dump($orphanAttachments);
-		$original = $this->data::findOrFail($id);
+		// dump($orphanAttachments);		
 		$values = $original->getOriginal();
 		foreach ($props as $prop) {
 			$name = $prop['column_name'];

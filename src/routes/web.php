@@ -93,6 +93,7 @@ Route::group([
                 Route::resource("{$singular}_dfn", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_itm", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_bic", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_rtm", "{$path}ManageJsonController")->only('index', 'store');
 
                 Route::resource("{$singular}_vsb", "{$path}ManageJsonController")->only('index', 'store');
                 Route::resource("{$singular}_rol", "{$path}ManageJsonController")->only('index', 'store');

@@ -19,11 +19,11 @@ return new class extends Migration
                 -- 'nameless' AS name,
                 month(ot_date) AS month, 
                 user_id, employeeid, 
-                60 AS allowed_time,
-                sum(total_time) AS total_time,
-                60 - sum(total_time) AS remaining_time
+                60 AS allowed_hours,
+                sum(total_time) AS total_hours,
+                60 - sum(total_time) AS remaining_hours
             FROM `hr_overtime_request_lines`
-            GROUP BY month, user_id, employeeid, allowed_time
+            GROUP BY month, user_id, employeeid, allowed_hours
             ORDER BY month, user_id
         )");
     }

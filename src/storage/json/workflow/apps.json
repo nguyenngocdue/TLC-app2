@@ -29,6 +29,16 @@
         "status": null,
         "icon": null
     },
+    "dashboard": {
+        "name": "dashboard",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "dashboard",
+        "title": "Dashboard",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
     "department": {
         "name": "department",
         "hidden": null,
@@ -465,6 +475,16 @@
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC WIRs",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "reportIndex": {
+        "name": "reportIndex",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "dashboard",
+        "title": "Report Index",
         "nickname": null,
         "status": null,
         "icon": null

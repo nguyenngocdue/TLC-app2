@@ -26,4 +26,12 @@ class Report
         $strLower = strtolower($string);
         return preg_replace('/[[:space:]]+/', "_", $strLower);
     }
+    public static function changeTypeAllItems($dataSource)
+    {
+        $array = [];
+        foreach ($dataSource as $key => $value) {
+            $array[] = (array)$value;
+        }
+        return $array;
+    }
 }

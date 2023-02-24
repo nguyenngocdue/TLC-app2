@@ -1,7 +1,8 @@
 {{-- @dd($dataSource) --}}
 @php
 $sheetDesc = $dataSource['sheet_name'];
-$name = App\Utils\Support\Report::slugName($sheetDesc)
+// $name = App\Utils\Support\Report::slugName($sheetDesc)
+$name = $sheetDesc
 @endphp
 <div id="{{$name}}" class=" md:scroll-mt-20   sm:py-0 rounded-lg  bg-white border-t border-r border-l border-gray-300 dark:border-gray-600">
     <div class="border-b p-3 font-medium">

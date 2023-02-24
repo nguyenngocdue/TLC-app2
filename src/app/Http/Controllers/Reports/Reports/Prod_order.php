@@ -85,7 +85,7 @@ class Prod_order extends Report_ParentController
     protected function enrichDataSource($dataSource, $urlParams)
     {
         // dump(array_flip(array_values($urlParams)));
-        if (!count(array_values($urlParams))) return [];
+        // if (!count(array_values($urlParams))) return $dataSource;
         return $dataSource;
     }
 }

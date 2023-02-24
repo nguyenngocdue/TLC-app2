@@ -19,7 +19,6 @@ class Dropdown extends Component
 
     public function render()
     {
-
         return view('components.control.renderer.dropdown', [
             'dataSource' =>  $this->dataSource,
             'name' => $this->name,

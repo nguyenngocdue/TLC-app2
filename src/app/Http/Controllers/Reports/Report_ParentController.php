@@ -27,8 +27,6 @@ abstract class Report_ParentController extends Controller
         return "dashboard";
     }
 
-
-
     private function getSql($urlParams)
     {
         // dd($urlParams);
@@ -71,52 +69,30 @@ abstract class Report_ParentController extends Controller
         return $dataSource;
     }
 
-    protected function getSheets($dataSource)
+    protected function getSheets($dataSource) // Override document report
     {
-        dd($dataSource);
-        // if (!is_array($dataSource)) return [];
-        $sheets = array_map(function ($item) {
-            $x = isset(array_pop($item)['sheet_name']);
-            return $x ? ["sheet_name" => array_pop($item)['sheet_name']] : '';
-        }, $dataSource->items());
-        return $sheets;
+        return [];
     }
 
     public function index(Request $request)
     {
 
         $urlParams = $request->all();
-
         $currentRoute = CurrentRoute::getTypeController();
         $viewName = strtolower(Str::singular($currentRoute));
 
         $dataSource = $this->getDataSource($urlParams);
         $dataSource = $this->enrichDataSource($dataSource, $urlParams);
-        // dd($dataSource);
 
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
-
-
         // dump($dataSource);
         $columns = $this->getTableColumns($dataSource);
-
-        $prod_orders  = Prod_order::get()->pluck('name', 'id')->toArray();
-        $subProjects = Sub_project::get()->pluck('name', 'id')->toArray();
-        $insp_tmpls = Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray();
-
-
-        // $sheets = $this->getSheets($dataSource);
-        $sheets = [];
-
-
+        $sheets = $this->getSheets($dataSource);
 
         $typeReport = CurrentRoute::getCurrentController();
         return view('reports.' . $viewName, [
             'tableColumns' => $columns,
             'tableDataSource' => $dataSource,
-            'prod_orders' => $prod_orders,
-            'subProjects' => $subProjects,
-            'insp_tmpls' => $insp_tmpls,
             'urlParams' => $urlParams,
             'entity' => $currentRoute,
             'typeReport' => $typeReport,

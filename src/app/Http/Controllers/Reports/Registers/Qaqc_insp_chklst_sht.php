@@ -10,10 +10,11 @@ use App\Utils\Support\Report;
 
 class Qaqc_insp_chklst_sht extends Report_ParentController
 {
+    protected $pagingSize = 10000;
     public function getSqlStr($urlParams)
     {
         // dd($urlParams);
-        $sql = " SELECT *, 
+        $sql = "SELECT tb.*,
                         CASE
                             WHEN sheet_status_combine LIKE '%No%' THEN 'Inprogress'
                             WHEN sheet_status_combine LIKE '%Fail%' THEN 'Inprogress'
@@ -23,40 +24,36 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
                             WHEN sheet_status_combine LIKE 'On Hold' THEN 'OnHold'
                             ELSE 'Null'
                         END AS sheet_status
-                        FROM (SELECT
-                            po.sub_project_id AS sub_project
-                            ,po.id AS po_id
-                            ,po.name AS po_name
-                            ,csh.id AS check_sheet_id
-                            ,sh.id AS sheet_id
-                            ,sh.description AS sheet_desc
-                            ,GROUP_CONCAT(DISTINCT cv.name) AS sheet_status_combine
-                        
-                        FROM (
-                        SELECT
-                            sh.id AS sheet_id,
-                            MAX(sr.id) AS max_run_id
-                            FROM prod_orders po, qaqc_insp_chklsts csh, qaqc_insp_chklst_shts sh, qaqc_insp_chklst_runs sr,  qaqc_insp_tmpls tmpl
-                                WHERE 1 = 1
-                                AND csh.qaqc_insp_tmpl_id = tmpl.id";
 
-        if (isset($urlParams['qaqc_insp_tmpl_id'])) $sql .= " \n AND tmpl.id = {{qaqc_insp_tmpl_id}} \n";
-        if (isset($urlParams['sub_project_id'])) $sql .= " \n AND po.sub_project_id = {{sub_project_id}} \n";
-        $sql .= "\n AND po.id = csh.prod_order_id
-                                AND csh.id = sh.qaqc_insp_chklst_id
-                                AND sh.id = sr.qaqc_insp_chklst_sht_id
-                                GROUP BY sh.id
-                        ) sub
-                        JOIN qaqc_insp_chklst_runs sr ON sr.id = sub.max_run_id
-                        JOIN qaqc_insp_chklst_shts sh ON sh.id = sr.qaqc_insp_chklst_sht_id
-                        JOIN qaqc_insp_chklsts csh ON csh.id = sh.qaqc_insp_chklst_id
-                        LEFT JOIN prod_orders po ON po.id = csh.prod_order_id
-                        JOIN qaqc_insp_chklst_lines lr ON lr.qaqc_insp_chklst_run_id = sr.id
-                        LEFT JOIN qaqc_insp_control_values cv ON cv.id = lr.qaqc_insp_control_value_id
-                        JOIN control_types ct ON ct.id = lr.control_type_id
-                        GROUP BY sh.id
-                        ) AS tb";
-        // dump($sql);
+                FROM (SELECT 
+                    max_run_sheetTB.tmpl_shts_id,
+                    max_run_sheetTB.tmpl_shts_desc,
+                    GROUP_CONCAT(DISTINCT cv.name) AS sheet_status_combine
+                FROM (
+                    SELECT 
+                        cklst_sht_tb.tmpl_shts_id, 
+                        cklst_sht_tb.tmpl_shts_desc,
+                        MAX(rs.id) AS max_run_id
+                        FROM (
+                            SELECT
+                                tmpls.id AS tmpl_shts_id,
+                                tmpls.description AS tmpl_shts_desc,
+                                csh.id AS chklsts_shts_id,
+                                csh.description AS chklsts_shts_desc
+                                FROM qaqc_insp_tmpl_shts tmpls
+                                    LEFT JOIN qaqc_insp_chklst_shts csh ON tmpls.id = csh.qaqc_insp_tmpl_sht_id";
+        if (isset($urlParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND csh.qaqc_insp_chklst_id  = '{{qaqc_insp_tmpl_id}}'";
+        if (isset($urlParams['sub_project_id'])) $sql .= "\n LEFT JOIN prod_orders prod ON prod.sub_project_id  = '{{sub_project_id}}'
+                                                            LEFT JOIN qaqc_insp_chklsts clst ON clst.prod_order_id = prod.id AND clst.id = csh.qaqc_insp_chklst_id";
+
+        $sql .= ") AS cklst_sht_tb
+                                    LEFT JOIN qaqc_insp_chklst_runs rs ON rs.qaqc_insp_chklst_sht_id = cklst_sht_tb.chklsts_shts_id
+                                    GROUP BY cklst_sht_tb.tmpl_shts_id) AS max_run_sheetTB
+                    
+                LEFT JOIN qaqc_insp_chklst_lines lr ON lr.qaqc_insp_chklst_run_id = max_run_sheetTB.max_run_id
+                LEFT JOIN qaqc_insp_control_values cv ON cv.id = lr.qaqc_insp_control_value_id
+                LEFT JOIN control_types ct ON ct.id = lr.control_type_id
+                GROUP BY max_run_sheetTB.tmpl_shts_id) AS tb;";
         return $sql;
     }
     public function getTableColumns($dataSource)
@@ -81,8 +78,9 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
                 "align" => "center"
             ]
         ];
-        $cols = $adds + array_map(fn ($item) => ["dataIndex" => $item, "align" => "center"], array_keys($dataColumn));
-        return  $cols;
+        $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center"], array_keys($dataColumn));
+        $dataColumn = array_merge($adds, $sqlCol);
+        return  $dataColumn;
     }
     private function changeValueData($dataSource)
     {
@@ -135,7 +133,7 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
         if (!count(array_values($urlParams))) return [];
         $dataArray = $dataSource->items();
         $enrichData = array_map(function ($item) {
-            return (array)$item + [Report::slugName($item->sheet_desc) => $item->sheet_status];
+            return (array)$item + [Report::slugName($item->tmpl_shts_desc) => $item->sheet_status];
         }, array_values($dataArray));
 
 
@@ -143,7 +141,7 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
         $result = Report::mergeArrayValues($groupedArray);
         $dt = $this->changeValueData($result);
         $dataSource->setCollection(collect($dt));
-        // dd($dataSource);
-        return $dataSource;
+        dump($dataSource);
+        return $dt;
     }
 }

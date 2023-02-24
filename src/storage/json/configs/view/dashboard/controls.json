@@ -28,6 +28,7 @@
         "picker_quarter",
         "picker_year",
         "radio",
+        "realtime",
         "relationship_renderer",
         "toggle",
         "status",
@@ -52,7 +53,11 @@
         "parent_link",
         "thumbnails"
     ],
-    "renderer_edit": ["", "many_icons", "many_lines"],
+    "renderer_edit": [
+        "",
+        "many_icons",
+        "many_lines"
+    ],
     "manage_prop_eloquents": [
         "belongsToMany",
         "hasMany",
@@ -73,8 +78,12 @@
         "belongsTo",
         "morphToMany"
     ],
-    "manage_prop_oracies": ["getCheckedByField"],
-    "view_all_oracies": ["getCheckedByField"],
+    "manage_prop_oracies": [
+        "getCheckedByField"
+    ],
+    "view_all_oracies": [
+        "getCheckedByField"
+    ],
     "packages": [
         "",
         "hr_&_admin",
@@ -108,7 +117,12 @@
         "hr_admin",
         "hr",
         "system_configuration",
-        "system_permission"
+        "system_permission",
+        "dashboard"
     ],
-    "qr_code_apps": ["pj_modules", "pj_shipments", "pj_units"]
+    "qr_code_apps": [
+        "pj_modules",
+        "pj_shipments",
+        "pj_units"
+    ]
 }

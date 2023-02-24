@@ -7,7 +7,14 @@
             <option class="py-10 w-full " value="" selected>Select your option...</option>
             @foreach($dataSource as $key => $value)
             @php
-            $selected = isset($itemsSelected[$name]) && $key*1 === $itemsSelected[$name]*1 ? "selected" :""
+            $selected = "";
+            if (isset($itemsSelected[$name])) {
+            if (is_numeric($key) && is_numeric($itemsSelected[$name])) {
+            $selected = $key*1 === $itemsSelected[$name]*1 ? "selected" :"";
+            } else{
+            $selected = $key === $itemsSelected[$name] ? "selected" :"";
+            }
+            }
             @endphp
             <option class="py-10 w-full " value="{{$key}}" {{$selected}} title="ID : {{$key}}">{{$value}}</option>
             @endforeach

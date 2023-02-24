@@ -9,35 +9,35 @@ use App\Utils\Support\Report;
 
 class Hr_overtime_request_line extends Report_ParentController
 {
+    protected $pagingSize = 10000;
     public function getSqlStr($urlParams)
     {
         // dd($urlParams);
         $sql = " SELECT 
             wp.name AS workplace, rgt_ot.*
-            ,MONTH(rgt_ot.overtime_date) AS months
             , ('') AS team
-            ,CONCAT(YEAR(rgt_ot.overtime_date), -  FORMAT(MONTH(rgt_ot.overtime_date), 'MM')) AS overtime_year_month
+            ,year_months
             FROM (SELECT 
-                otline.id AS id_request_line
-                ,otline.user_id AS user_id
-                ,us.workplace AS workplace_id
+            otline.user_id AS user_id
+                ,otr.workplace_id AS workplace_id
                 ,us.first_name AS first_name
                 ,us.last_name AS last_name
                 ,otline.employeeid AS employeeid
                 ,us.full_name AS member_name
                 ,otline.ot_date AS overtime_date
-                ,otline.total_time AS total_overtime_hours
-                ,(60) AS maximum_allowed_OT_hours
-                ,(60-otline.total_time ) AS remaining_allowed_OT_hours
-                    FROM users us, hr_overtime_request_lines otline
+                ,SUBSTR(otline.ot_date,1,7) AS year_months
+                ,SUM(otline.total_time) AS total_overtime_hours
+                ,(60) AS maximum_allowed_ot_hours
+                ,(60-SUM(otline.total_time) ) AS remaining_allowed_ot_hours
+                    FROM users us, hr_overtime_request_lines otline, hr_overtime_requests otr
                     WHERE 1 = 1
                     AND otline.user_id = us.id";
-        if (isset($urlParams['months'])) $sql .= "\n AND MONTH(otline.ot_date) = '{{months}}'";
-        $sql .= ") AS rgt_ot \n";
+        if (isset($urlParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
+        $sql .= "\n GROUP BY user_id, employeeid, overtime_date, workplace_id) AS rgt_ot \n";
 
         $sql .= "JOIN workplaces wp ON wp.id = rgt_ot.workplace_id";
         if (isset($urlParams['workplace_id'])) $sql .= "\n AND wp.id = '{{workplace_id}}'";
-        $sql .= "\n ORDER BY workplace, team, first_name, last_name, employeeid, months";
+        $sql .= "\n ORDER BY workplace, team, first_name, last_name, employeeid, year_months DESC";
         return $sql;
     }
     public function getTableColumns($dataSource)
@@ -46,6 +46,10 @@ class Hr_overtime_request_line extends Report_ParentController
         return [
             [
                 "dataIndex" => "workplace",
+                "align" => 'left'
+            ],
+            [
+                "dataIndex" => "user_id",
                 "align" => 'left'
             ],
             [
@@ -66,19 +70,23 @@ class Hr_overtime_request_line extends Report_ParentController
             ],
 
             [
-                "dataIndex" => "months",
+                "title" => "Months",
+                "dataIndex" => "year_months",
                 "align" => "right",
             ],
             [
-                "dataIndex" => "maximum_allowed_OT_hours",
+                "title" => "Maximum Allowed OT Hours",
+                "dataIndex" => "maximum_allowed_ot_hours",
                 "align" => "right",
             ],
             [
+
                 "dataIndex" => "total_overtime_hours",
                 "align" => "right",
             ],
             [
-                "dataIndex" => "remaining_allowed_OT_hours",
+                "title" => "Remaining Allowed OT Hours",
+                "dataIndex" => "remaining_allowed_ot_hours",
                 "align" => "right",
             ],
         ];
@@ -87,15 +95,17 @@ class Hr_overtime_request_line extends Report_ParentController
 
     public function getDataForModeControl($dataSource)
     {
-        // dd($dataSource);
         $workplaces = ['workplace_id' => Workplace::get()->pluck('name', 'id')->toArray()];
-        $months = ['months' => array_unique(array_column($dataSource->items(),  'overtime_year_month', 'months'))];
+        $array = array_unique(array_column($dataSource->items(),  'year_months'));
+        rsort($array);
+        $months = ['months' => array_combine(array_values($array), array_values($array))];
+
         return array_merge($workplaces, $months);
     }
     protected function enrichDataSource($dataSource, $urlParams)
     {
-        // dd($dataSource);
-        if (!count(array_values($urlParams))) return [];
+        // $isAllNUll = array_filter(urlParams);
+        // dd();
         foreach ($dataSource as $key => $value) {
             $hours = $value->total_overtime_hours * 1;
             if ($hours > 60) {
@@ -115,7 +125,8 @@ class Hr_overtime_request_line extends Report_ParentController
                 $dataSource[$key]->total_overtime_hours = $str;
             }
         }
-        // dd($dataSource);
+        $dataSource = Report::changeTypeAllItems($dataSource);
+        if (!count(array_values($urlParams))) return $dataSource;
         return $dataSource;
     }
 }
