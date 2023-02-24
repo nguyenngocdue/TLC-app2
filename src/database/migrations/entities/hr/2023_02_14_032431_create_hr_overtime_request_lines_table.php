@@ -25,6 +25,7 @@ return new class extends Migration
             $table->time("to_time");
             $table->double("break_time");
             $table->float("total_time");
+            $table->float("rt_remaining_hours")->nullable();
             $table->unsignedBigInteger("sub_project_id");
             $table->unsignedBigInteger("work_mode_id");
             $table->text("remark")->nullable();

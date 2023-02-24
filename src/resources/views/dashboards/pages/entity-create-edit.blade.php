@@ -11,7 +11,7 @@ $labelValidation = "";
 $id = $action === "edit" ? $values->id : "";
 @endphp
 
-{{-- HERE {{mb_strlen(serialize((array)$listenerDataSource), '8bit');}} bytes --}}
+{{-- @dump($values) --}}
 <script>
     k = @json($listenerDataSource);
 
@@ -200,6 +200,10 @@ $id = $action === "edit" ? $values->id : "";
 
                             @case('parent_link')
                             <x-feedback.alert type="warning" title="Warning" message="{{$control}} suppose to show in View All screen only, please do not show in Edit screen." />
+                            @break
+
+                            @case('realtime')
+                            <x-renderer.realtime name={{$columnName}} />
                             @break
 
                             @default

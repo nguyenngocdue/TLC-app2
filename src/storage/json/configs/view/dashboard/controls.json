@@ -28,6 +28,7 @@
         "picker_quarter",
         "picker_year",
         "radio",
+        "realtime",
         "relationship_renderer",
         "toggle",
         "status",
