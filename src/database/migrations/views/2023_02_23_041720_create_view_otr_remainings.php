@@ -17,7 +17,7 @@ return new class extends Migration
             SELECT 
                 'idless' AS id,
                 -- 'nameless' AS name,
-                month(ot_date) AS month, 
+                substr(ot_date, 1, 7) AS month, 
                 user_id, employeeid, 
                 60 AS allowed_hours,
                 sum(total_time) AS total_hours,

@@ -183,6 +183,22 @@ trait TraitEntityListenDataSource
             }
         }
 
+        $result['remaining_hours'] = [
+            [
+                'id' => 123456.55,
+                'name' => '2022-12',
+            ],
+            [
+                'id' => 465123.99,
+                'name' => '2022-11',
+            ],
+            [
+                'id' => 789123.11,
+                'name' => '2022-10',
+            ],
+        ];
+        // dump($result);
+
         $this->dump2("Result", $result, __LINE__);
         return $result;
     }

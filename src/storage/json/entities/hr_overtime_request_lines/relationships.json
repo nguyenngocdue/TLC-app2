@@ -64,6 +64,19 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getRemainingHoursList": {
+        "name": "_getRemainingHoursList",
+        "relationship": "hasMany",
+        "control_name": "getRemainingHoursList",
+        "renderer_view_all": "sum",
+        "renderer_view_all_param": "total_hour",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getRemainingHours": {
         "name": "_getRemainingHours",
         "relationship": "hasOne",

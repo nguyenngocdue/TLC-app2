@@ -51,6 +51,7 @@
         "column",
         "count",
         "parent_link",
+        "sum",
         "thumbnails"
     ],
     "renderer_edit": [

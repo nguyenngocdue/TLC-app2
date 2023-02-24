@@ -21,17 +21,18 @@ class Hr_overtime_request_line extends ModelExtended
         "getWorkMode" => ['belongsTo', Work_mode::class, 'work_mode_id'],
         "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
         "getRemainingHours" => ['hasOne', View_otr_remaining::class, 'user_id', 'user_id'],
+        "getRemainingHoursList" => ['hasMany', View_otr_remaining::class, 'user_id', 'user_id'],
     ];
 
     public function getRemainingHours()
     {
-        $month = substr($this->ot_date, 5, 2) * 1;
+        $month = substr($this->ot_date, 0, 7);
         $relation = $this->hasOne(View_otr_remaining::class, 'user_id', 'user_id');
         $sql = $relation
             ->getQuery()
-            ->where('month', $month)
+            ->where('view_otr_remainings.month', 'LIKE', $month)
             ->toSql();
-        // var_dump($sql);
+        // var_dump($month, $sql);
         return $relation;
     }
 
@@ -39,6 +40,14 @@ class Hr_overtime_request_line extends ModelExtended
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getRemainingHoursList()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3]);
+        // var_dump($relation->toSql());
+        return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
 
     public function getOwnerId()
