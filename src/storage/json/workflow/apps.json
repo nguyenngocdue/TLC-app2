@@ -29,6 +29,16 @@
         "status": null,
         "icon": null
     },
+    "dashboard": {
+        "name": "dashboard",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "dashboard",
+        "title": "Dashboard",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
     "department": {
         "name": "department",
         "hidden": null,
@@ -469,6 +479,16 @@
         "status": null,
         "icon": null
     },
+    "reportIndex": {
+        "name": "reportIndex",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "dashboard",
+        "title": "Report Index",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
     "role_sets": {
         "name": "role_sets",
         "hidden": "true",
@@ -805,26 +825,6 @@
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT19 (Listen in Table)",
-        "nickname": null,
-        "status": null,
-        "icon": null
-    },
-    "dashboard": {
-        "name": "dashboard",
-        "hidden": null,
-        "package": "system",
-        "sub_package": "system_admin",
-        "title": "Dashboard",
-        "nickname": null,
-        "status": null,
-        "icon": null
-    },
-    "reportIndex": {
-        "name": "reportIndex",
-        "hidden": null,
-        "package": "system",
-        "sub_package": "system_admin",
-        "title": "Report Index",
         "nickname": null,
         "status": null,
         "icon": null
