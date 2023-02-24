@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Workflow;
 
+use App\Utils\CacheToRamForThisSection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -11,20 +12,21 @@ class AbstractLibForForm extends AbstractLib
 {
     protected static $key = "abstract_lib_for_form";
 
+    private static function _getForExpensive($entityType)
+    {
+        $plural = Str::plural($entityType);
+        $result = [];
+        $path = "entities/$plural/" . static::$key . ".json";
+        $pathFrom = storage_path('json/' . $path);
+        if (!file_exists($pathFrom)) $result = [];
+        else $result = json_decode(file_get_contents($pathFrom, true), true);
+        return $result;
+    }
+
     private static function _getFor($entityType)
     {
-        $singular = Str::singular($entityType);
-        $plural = Str::plural($entityType);
-        $cacheKey = static::$key . "_of_$singular";
-        $result = [];
-        if (!Cache::has($cacheKey)) {
-            $path = "entities/$plural/" . static::$key . ".json";
-            $pathFrom = storage_path('json/' . $path);
-            if (!file_exists($pathFrom)) $result = [];
-            else $result = json_decode(file_get_contents($pathFrom, true), true);
-            Cache::rememberForever($cacheKey, fn () => $result);
-        }
-        return Cache::get($cacheKey);
+        $key = static::$key . "_of_$entityType";
+        return CacheToRamForThisSection::get($key, $entityType, fn ($a) => static::_getForExpensive($a));
     }
 
     private static function setFor($entityType, $dataSource)

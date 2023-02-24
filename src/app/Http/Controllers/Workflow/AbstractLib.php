@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Workflow;
 
-use Illuminate\Support\Arr;
+use App\Utils\CacheToRamForThisSection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class AbstractLib
 {
@@ -26,12 +25,8 @@ class AbstractLib
 
     public static function getAll()
     {
-        if (App::isLocal()) return static::getAllExpensive();
         $key = static::$key . '_of_the_app';
-        if (!Cache::has($key)) {
-            Cache::rememberForever($key, fn () => static::getAllExpensive());
-        }
-        return Cache::get($key);
+        return CacheToRamForThisSection::get($key, null, fn () => static::getAllExpensive());
     }
 
     public static function setAll($dataSource)

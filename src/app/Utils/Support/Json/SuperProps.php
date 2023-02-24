@@ -3,6 +3,7 @@
 namespace App\Utils\Support\Json;
 
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\CacheToRamForThisSection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -165,12 +166,8 @@ class SuperProps
     {
         if (is_null($type)) dd("Type is missing, SuperProps cant instantiate.");
         $type = Str::singular($type);
-        if (App::isLocal()) return static::make($type);
         $key = "super_prop_$type";
-        if (!Cache::has($key)) {
-            Cache::rememberForever($key, fn () => static::make($type));
-        }
-        return Cache::get($key);
+        return CacheToRamForThisSection::get($key, $type, fn ($a) => static::make($a));
     }
 
     public static function invalidateCache($type)
