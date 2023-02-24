@@ -117,6 +117,13 @@ class ManageProps extends Manage_Parent
                 'width' => 10,
             ],
             [
+                "dataIndex" => "read_only",
+                "align" => "center",
+                "editable" => true,
+                "renderer" => "checkbox",
+                'width' => 10,
+            ],
+            [
                 "dataIndex" => "new_line",
                 "align" => "center",
                 "editable" => true,

@@ -31,6 +31,12 @@ class ManageListeners extends Manage_Parent
                 "editable" => true,
             ],
             [
+                "dataIndex" => "attr_to_compare",
+                "renderer" => "text",
+                "editable" => true,
+                "properties" => ["placeholder" => 'id'],
+            ],
+            [
                 "dataIndex" => "listen_action",
                 "renderer" => "dropdown",
                 "editable" => true,

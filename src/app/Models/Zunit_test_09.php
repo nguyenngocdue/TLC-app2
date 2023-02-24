@@ -14,6 +14,8 @@ class Zunit_test_09 extends ModelExtended
         'user_2',
         'category_id',
         'user_3',
+        'ot_date_1',
+        'remaining_hours',
         //Reduce 1111
         'project_1',
         'sub_project_1',

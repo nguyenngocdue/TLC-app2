@@ -200,6 +200,8 @@ trait TraitEntityListenDataSource
                 $line['table_name'] = $relationships['table'];
             }
             $line['listen_to_tables'] = array_map(fn ($control) => $sp['props']["_" . $control]['relationships']['table'], $line['listen_to_fields']);
+
+            $line['attr_to_compare'] = (!isset($line['attr_to_compare']) || $line['attr_to_compare'] == '') ? 'id' : $line['attr_to_compare'];
         }
         return $result;
     }
