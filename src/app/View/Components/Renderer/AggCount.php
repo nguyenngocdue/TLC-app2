@@ -5,7 +5,7 @@ namespace App\View\Components\Renderer;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
-class Sum extends Component
+class AggCount extends Component
 {
     /**
      * Create a new component instance.
@@ -27,11 +27,10 @@ class Sum extends Component
         return function (array $data) {
             $json = json_decode($data['slot']);
             if (!is_array($json)) $json = [$json];
-            $sum = 0;
-            foreach ($json as $line) {
-                $sum += $line->total_hours;
-            }
-            return "<div class='text-center'><x-renderer.tag>$sum</x-renderer.tag></div>";
+            $count = sizeof($json);
+            $str = Str::of('item')->plural($count);
+            $str = $count . " " . $str;
+            return "<div class='text-center'><x-renderer.tag>$str</x-renderer.tag></div>";
         };
     }
 }
