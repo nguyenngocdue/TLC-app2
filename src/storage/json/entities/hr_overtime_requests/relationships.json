@@ -55,7 +55,7 @@
         "name": "_getHrOTLines",
         "relationship": "hasMany",
         "control_name": "getHrOTLines",
-        "renderer_view_all": "count",
+        "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",

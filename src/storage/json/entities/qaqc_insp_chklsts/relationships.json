@@ -42,7 +42,7 @@
         "name": "_getSheets",
         "relationship": "hasMany",
         "control_name": "getSheets",
-        "renderer_view_all": "count",
+        "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
