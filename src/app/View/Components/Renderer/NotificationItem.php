@@ -3,9 +3,9 @@
 namespace App\View\Components\Renderer;
 
 use App\Http\Controllers\Workflow\LibApps;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
-use Illuminate\Support\Str;
 
 class NotificationItem extends Component
 {
@@ -30,17 +30,20 @@ class NotificationItem extends Component
         $dataModel = $dataSource['data']['currentValue'];
         $typeEntity = $dataModel['entity_type'];
         $id = $dataModel['id'];
+        $idNotification = $dataSource['id'];
         $status = $dataModel['status'] ?? '';
-        $typePlural = Str::plural($typeEntity);
-        $routeName = "{$typePlural}.edit";
-        $routeExits =  (Route::has($routeName));
-        $href =  $routeExits ? route($routeName, $id) : "#";
         $title = $dataModel['name'] ?? 'NameLess' . $id;
+        $isRead = $dataSource['read_at'];
+        $timeAgo = Carbon::createFromTimestamp(strtotime($dataSource['updated_at']))->diffForHumans();
         return view('components.renderer.notification-item', [
             'documentType' => LibApps::getFor($typeEntity)['title'],
-            'href' => $href,
+            'type' => $typeEntity,
+            'id' => $id,
+            'idNotification' => $idNotification,
             'status' => $status,
             'title' => $title,
+            'isRead' => $isRead,
+            'timeAgo' => $timeAgo,
         ]);
     }
 }

@@ -26,28 +26,10 @@ class MenuNotification extends Component
     public function render()
     {
         $notifications = auth()->user()->notifications->toArray();
-        $assigneeNotifications = [];
-        $monitorNotifications = [];
-        $createdNotifications = [];
-        foreach ($notifications as $key => $value) {
-            switch ($value['data']['type']) {
-                case 'assignee':
-                    $assigneeNotifications[] = $value;
-                    break;
-                case 'monitor':
-                    $monitorNotifications[] = $value;
-                    break;
-                case 'created':
-                    $createdNotifications[] = $value;
-                    break;
-                default:
-                    break;
-            }
-        }
+        $unreadNotifications = auth()->user()->unreadNotifications->toArray();
         return view('components.homepage.menu-notification', [
-            'assigneeNotifications' => $assigneeNotifications,
-            'monitorNotifications' => $monitorNotifications,
-            'createdNotifications' => $createdNotifications,
+            'notifications' => $notifications,
+            'unreadNotifications' => $unreadNotifications,
         ]);
     }
 }
