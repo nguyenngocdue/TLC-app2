@@ -808,5 +808,25 @@
         "nickname": null,
         "status": null,
         "icon": null
+    },
+    "dashboard": {
+        "name": "dashboard",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "system_admin",
+        "title": "Dashboard",
+        "nickname": null,
+        "status": null,
+        "icon": null
+    },
+    "reportIndex": {
+        "name": "reportIndex",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "system_admin",
+        "title": "Report Index",
+        "nickname": null,
+        "status": null,
+        "icon": null
     }
 }
