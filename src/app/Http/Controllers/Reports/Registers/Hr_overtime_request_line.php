@@ -19,7 +19,7 @@ class Hr_overtime_request_line extends Report_ParentController
             ,year_months
             FROM (SELECT 
             otline.user_id AS user_id
-                ,us.workplace AS workplace_id
+                ,otr.workplace_id AS workplace_id
                 ,us.first_name AS first_name
                 ,us.last_name AS last_name
                 ,otline.employeeid AS employeeid
@@ -29,11 +29,11 @@ class Hr_overtime_request_line extends Report_ParentController
                 ,SUM(otline.total_time) AS total_overtime_hours
                 ,(60) AS maximum_allowed_ot_hours
                 ,(60-SUM(otline.total_time) ) AS remaining_allowed_ot_hours
-                    FROM users us, hr_overtime_request_lines otline
+                    FROM users us, hr_overtime_request_lines otline, hr_overtime_requests otr
                     WHERE 1 = 1
                     AND otline.user_id = us.id";
         if (isset($urlParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
-        $sql .= "\n GROUP BY user_id, employeeid, overtime_date) AS rgt_ot \n";
+        $sql .= "\n GROUP BY user_id, employeeid, overtime_date, workplace_id) AS rgt_ot \n";
 
         $sql .= "JOIN workplaces wp ON wp.id = rgt_ot.workplace_id";
         if (isset($urlParams['workplace_id'])) $sql .= "\n AND wp.id = '{{workplace_id}}'";
@@ -86,7 +86,7 @@ class Hr_overtime_request_line extends Report_ParentController
             ],
             [
                 "title" => "Remaining Allowed OT Hours",
-                "dataIndex" => "remaining_allowed_OT_hours",
+                "dataIndex" => "remaining_allowed_ot_hours",
                 "align" => "right",
             ],
         ];
@@ -96,9 +96,10 @@ class Hr_overtime_request_line extends Report_ParentController
     public function getDataForModeControl($dataSource)
     {
         $workplaces = ['workplace_id' => Workplace::get()->pluck('name', 'id')->toArray()];
-        $array = array_unique(array_column($dataSource->items(),  'year_months', 'year_months'));
+        $array = array_unique(array_column($dataSource->items(),  'year_months'));
         rsort($array);
-        $months = ['months' => ($array)];
+        $months = ['months' => array_combine(array_values($array), array_values($array))];
+
         return array_merge($workplaces, $months);
     }
     protected function enrichDataSource($dataSource, $urlParams)
