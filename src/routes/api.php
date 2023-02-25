@@ -74,4 +74,5 @@ Route::group([
     'prefix' => 'v1/hr',
 ], function () {
     Route::get('overtime_request_line', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours']);
+    Route::get('overtime_request_line2', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours2']);
 });

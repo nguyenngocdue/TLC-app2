@@ -8,9 +8,36 @@ use App\Utils\Constant;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class OvertimeRequestLineController extends Controller
 {
+    function getRemainingHours2(Request $request)
+    {
+        $user_id = $request['user_id'];
+        $ot_date = $request['ot_date'];
+        $otrl_id = $request['id'];
+        $year_month0 = Carbon::createFromFormat(Constant::FORMAT_DATE_ASIAN, $ot_date)->format(Constant::FORMAT_YEAR_MONTH0);
+
+        $sql = "SELECT 
+                substr(ot_date, 1, 7) AS `year_month0`, 
+                user_id, 
+                60 - sum(total_time) AS `remaining_hours`
+            FROM `hr_overtime_request_lines`
+            WHERE 1=1
+                AND user_id=$user_id
+                AND substr(ot_date, 1, 7)='$year_month0'
+                AND id < $otrl_id
+            GROUP BY user_id, year_month0";
+
+        $result = DB::select($sql);
+        return ResponseObject::responseSuccess(
+            $result,
+            ['user_id' => $user_id, 'year_month0' => $year_month0, 'otrl_id' => $otrl_id],
+            "Return total hours this user has OT in this month, only count the lines that have ID less than this OT line."
+        );
+    }
+
     function getRemainingHours(Request $request)
     {
         // dump($request->input());
@@ -21,7 +48,7 @@ class OvertimeRequestLineController extends Controller
         return ResponseObject::responseSuccess(
             $result,
             ['user_id' => $user_id, 'year_month0' => $year_month0],
-            "Hello getRemainingHours"
+            "Return total hours this user has OT in this month"
         );
     }
 }
