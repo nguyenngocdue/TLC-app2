@@ -51,14 +51,23 @@ abstract class Manage_Parent
         $dataSource[$key]['action'] = Blade::render("<div class='whitespace-nowrap'>$result</div>");
     }
 
+    function makeUpWidthForColumns(&$columns)
+    {
+        foreach ($columns as &$column) {
+            if (!isset($column['width'])) $column['width'] = 100;
+        }
+    }
+
     function index(Request $request)
     {
+        $columns = $this->getColumns();
+        $this->makeUpWidthForColumns($columns);
         return view($this->viewName, [
             'title' => "Manage Workflows",
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'type' => $this->type,
             'route' => route($this->type . $this->routeKey . '.store'),
-            'columns' => $this->getColumns(),
+            'columns' => $columns,
             'dataSource' => array_values($this->getDataSource()),
             'dataHeader' => $this->getDataHeader(),
             'headerTop' => $this->headerTop,
@@ -82,7 +91,8 @@ abstract class Manage_Parent
         $table01 = $data['table01'] ?? [];
 
         //Make up the columns
-        $columns = $this->getColumns();
+        $columns = $this->$this->getColumns();
+        $this->makeUpWidthForColumns($columns);
         //Remove all things in blacklist
         $columns = array_filter($columns, fn ($column) => !in_array($column['dataIndex'], ['action', ...$this->storingBlackList,]));
         //Remove all things NOT in whitelist

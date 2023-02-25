@@ -248,7 +248,21 @@ const onChangeDropdown2Expression = (listener) => {
     if (debugListener) console.log(column_name, '=', expression1, '=', result)
     getEById(column_name).val(result)
 }
-
+const onChangeDropdown2AjaxRequestScalar = (listener) => {
+    const debugListener = true
+    if (debugListener) console.log("AjaxRequestScalar", listener)
+    const { triggers } = listener
+    let enoughParams = true
+    const params = {}
+    for (let i = 0; i < triggers.length; i++) {
+        let value = getEById(triggers[i]).val()
+        if (value === null || value === '' || value === undefined) enoughParams = false
+        params[triggers[i]] = value
+    }
+    if (enoughParams) {
+        if (debugListener) console.log("Sending AjaxRequest with params:", params)
+    }
+}
 const onChangeDropdown2 = (name) => {
     // console.log("onChangeDropdown2", name)
     // console.log(listenersOfDropdown2)
@@ -273,6 +287,9 @@ const onChangeDropdown2 = (name) => {
                     break
                 case "expression":
                     onChangeDropdown2Expression(listener)
+                    break
+                case "ajax_request_scalar":
+                    onChangeDropdown2AjaxRequestScalar(listener)
                     break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);

@@ -101,9 +101,13 @@ trait TraitEntityListenDataSource
         foreach ($sp['props'] as $prop) {
             if ($prop['hidden_edit']) continue;
             if (in_array($prop['control'], ['radio', 'checkbox', 'dropdown', 'dropdown_multi'])) {
-                $table = $prop['relationships']['table'];
-                $toBeLoaded[] = $table;
-                $this->loadExtraColumnsFromFilterColumns($prop, $extraColumns);
+                if (isset($prop['relationships']['table'])) {
+                    $table = $prop['relationships']['table'];
+                    $toBeLoaded[] = $table;
+                    $this->loadExtraColumnsFromFilterColumns($prop, $extraColumns);
+                } else {
+                    dump("Orphan prop detected: " . $this->type . "\\" . $prop['name']);
+                }
             }
         }
         // dump($props);

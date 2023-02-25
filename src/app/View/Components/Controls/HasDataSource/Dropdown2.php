@@ -33,6 +33,10 @@ class Dropdown2 extends Component
     {
         $sp = SuperProps::getFor($this->type);
         $prop = $sp['props']["_" . $this->name];
+        if (!isset($prop['relationships']['table'])) {
+            dump("Orphan prop " . $this->type . "\\" . $this->name);
+            return;
+        }
         $table = $prop['relationships']['table'];
         $id = $this->name;
         $name = $this->multiple ? $this->name . "[]" : $this->name;

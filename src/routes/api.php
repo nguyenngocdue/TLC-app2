@@ -70,3 +70,8 @@ Route::group([
     Route::get('google', [App\Http\Controllers\Api\v1\Auth\SocialiteAuthController::class, 'redirectToGoogle']);
     Route::get('google/callback', [App\Http\Controllers\Api\v1\Auth\SocialiteAuthController::class, 'handleGoogleCallback']);
 });
+Route::group([
+    'prefix' => 'v1/hr',
+], function () {
+    Route::get('overtime_request_line/{user_id}/{year_month0}', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours']);
+});

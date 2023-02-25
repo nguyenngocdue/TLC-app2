@@ -17,14 +17,14 @@ return new class extends Migration
             SELECT 
                 'idless' AS id,
                 -- 'nameless' AS name,
-                substr(ot_date, 1, 7) AS month, 
+                substr(ot_date, 1, 7) AS `year_month0`, 
                 user_id, employeeid, 
                 60 AS allowed_hours,
-                sum(total_time) AS total_hours,
-                60 - sum(total_time) AS remaining_hours
+                round(sum(total_time),2) AS total_hours,
+                round(60 - sum(total_time),2) AS remaining_hours
             FROM `hr_overtime_request_lines`
-            GROUP BY month, user_id, employeeid, allowed_hours
-            ORDER BY month, user_id
+            GROUP BY `year_month0`, user_id, employeeid, allowed_hours
+            ORDER BY `year_month0`, user_id
         )");
     }
 
