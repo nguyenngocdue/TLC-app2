@@ -20,6 +20,7 @@ class Number extends Component
         private $table01Name = null,
         private $rowIndex = -1,
         private $icon = null,
+        private $saveOnChange = false,
     ) {
     }
 
@@ -38,6 +39,7 @@ class Number extends Component
             'rowIndex' => $this->rowIndex,
             'table01Name' => $this->table01Name,
             'icon' => $this->icon,
+            'saveOnChange' => $this->saveOnChange,
         ]);
     }
 }

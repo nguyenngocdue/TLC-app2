@@ -247,6 +247,7 @@ const onChangeDropdown2Expression = (listener) => {
     const result = eval(expression1)
     if (debugListener) console.log(column_name, '=', expression1, '=', result)
     getEById(column_name).val(result)
+    getEById(column_name).trigger('change')
 }
 const onChangeDropdown2AjaxRequestScalar = (listener) => {
     // const debugListener = true

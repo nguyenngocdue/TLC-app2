@@ -3,7 +3,7 @@
         "name": "_rt_remaining_hours",
         "column_name": "rt_remaining_hours",
         "listen_action": "ajax_request_scalar",
-        "triggers": "user_id,ot_date,id",
+        "triggers": "user_id,ot_date,id,total_time",
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "attr_to_compare": "",

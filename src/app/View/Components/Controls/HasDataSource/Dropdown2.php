@@ -15,6 +15,7 @@ class Dropdown2 extends Component
         private $multiple = false,
         private $type = null,
         private $readOnly = false,
+        private $saveOnChange = false,
     ) {
         $old = old($name);
         if ($old) {
@@ -48,6 +49,7 @@ class Dropdown2 extends Component
             'className' => "bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
             'table' => $table,
             'readOnly' => $this->readOnly,
+            'saveOnChange' => $this->saveOnChange,
         ];
         // dump($params);
         return view('components.controls.has-data-source.dropdown2', $params);

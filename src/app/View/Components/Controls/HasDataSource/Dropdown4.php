@@ -14,6 +14,7 @@ class Dropdown4 extends Component
         private $multiple = false,
         private $type = null,
         private $readOnly = false,
+        private $saveOnChange = false,
 
         private $table01Name = null,
         private $tableName = null,
@@ -47,6 +48,7 @@ class Dropdown4 extends Component
             'className' => "bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
             'table' => $table,
             'readOnly' => $this->readOnly,
+            'saveOnChange' => $this->saveOnChange,
 
             'lineType' => $this->lineType,
             'table01Name' => $this->table01Name,

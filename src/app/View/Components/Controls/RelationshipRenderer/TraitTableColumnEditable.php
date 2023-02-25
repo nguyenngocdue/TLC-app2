@@ -28,6 +28,7 @@ trait TraitTableColumnEditable
 
             $newColumn['properties']['lineType'] = Str::singular($tableName);
             $newColumn['properties']['table01Name'] = $table01Name;
+            $newColumn['properties']['saveOnChange'] = $prop['save_on_change'] === 'true';
 
             // dump($newColumn);
             $classNameText = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";

@@ -14,6 +14,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_hr_overtime_request_id": {
@@ -31,6 +32,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_user_id": {
@@ -48,6 +50,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "true",
         "new_line": ""
     },
     "_employeeid": {
@@ -65,6 +68,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "true",
         "new_line": ""
     },
     "_position_rendered": {
@@ -82,6 +86,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "true",
         "new_line": ""
     },
     "_ot_date": {
@@ -99,6 +104,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "true",
         "new_line": ""
     },
     "_rt_remaining_hours": {
@@ -116,6 +122,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "true",
+        "save_on_change": "true",
         "new_line": ""
     },
     "_from_time": {
@@ -133,6 +140,7 @@
         "hidden_filter": "true",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "true",
         "new_line": ""
     },
     "_to_time": {
@@ -150,6 +158,7 @@
         "hidden_filter": "true",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "true",
         "new_line": ""
     },
     "_break_time": {
@@ -167,6 +176,7 @@
         "hidden_filter": "true",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "true",
         "new_line": ""
     },
     "_total_time": {
@@ -184,6 +194,7 @@
         "hidden_filter": "true",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "true",
         "new_line": ""
     },
     "_sub_project_id": {
@@ -201,6 +212,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_work_mode_id": {
@@ -218,6 +230,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_remark": {
@@ -235,6 +248,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_owner_id": {
@@ -252,6 +266,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_created_at": {
@@ -269,6 +284,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_updated_at": {
@@ -286,6 +302,7 @@
         "hidden_filter": "true",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_order_no": {
@@ -303,6 +320,7 @@
         "hidden_filter": "true",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_status": {
@@ -320,6 +338,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     }
 }

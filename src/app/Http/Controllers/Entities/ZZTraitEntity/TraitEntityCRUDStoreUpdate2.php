@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Events\CreateNewDocumentEvent;
-use App\Events\UpdatedDocument;
 use App\Events\UpdatedDocumentEvent;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Models\Attachment;
-use App\Utils\Constant;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\JsonControls;
+use App\Utils\System\Api\ResponseObject;
 use Brian2694\Toastr\Facades\Toastr;
 use Exception;
 use Illuminate\Http\Request;
@@ -368,5 +367,21 @@ trait TraitEntityCRUDStoreUpdate2
 			$fields['doc_id'] = $maxDocID + 1;
 		}
 		return $fields;
+	}
+
+	public function storeEmpty(Request $request)
+	{
+		$theRow = $this->data::create($request->input());
+		return ResponseObject::responseSuccess([['id' => $theRow->id]]);
+	}
+
+	public function updateShort(Request $request, $id)
+	{
+		$theRow = $this->data::find($id);
+		$input = $request->input();
+		if (isset($input['ot_date'])) $input['ot_date'] = DateTimeConcern::convertForSaving('picker_date', $input['ot_date']);
+		$theRow->fill($input);
+		$result = $theRow->save();
+		return ResponseObject::responseSuccess([['result' => $result]]);
 	}
 }

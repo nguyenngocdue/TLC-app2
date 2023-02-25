@@ -1,5 +1,5 @@
 <select id='{{$id}}' name='{{$name}}' {{$multipleStr}} class='{{$className}}'
-onChange='onChangeDropdown4({name:"{{$name}}", lineType:"{{$lineType}}", table01Name:"{{$table01Name}}", rowIndex:{{$rowIndex}}})'
+onChange='onChangeDropdown4({name:"{{$name}}", lineType:"{{$lineType}}", table01Name:"{{$table01Name}}", rowIndex:{{$rowIndex}}, saveOnChange:{{$saveOnChange?1:0}}})'
 ></select>
 
 <script>

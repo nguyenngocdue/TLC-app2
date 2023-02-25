@@ -21,6 +21,7 @@ class PickerDate4 extends Component
         private $table01Name = null,
         private $rowIndex = -1,
         private $icon = null,
+        private $saveOnChange = false,
 
     ) {
         //In case of listeners, the data was parsed in to array
@@ -50,6 +51,7 @@ class PickerDate4 extends Component
             'rowIndex' => $this->rowIndex,
             'table01Name' => $this->table01Name,
             'icon' => $this->icon,
+            'saveOnChange' => $this->saveOnChange,
         ]);
     }
 }

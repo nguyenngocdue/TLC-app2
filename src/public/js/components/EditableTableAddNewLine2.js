@@ -1,24 +1,34 @@
 const removeEmptinessLine = (tableId) => $('#' + tableId + '_emptiness').remove()
 
 const addANewLine = (params) => {
+    const { tableId, valuesOfOrigin = {} } = params
+    const parentId = getEById('id').val()
+    const orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
+    const data = {
+        owner_id: 1,
+        hr_overtime_request_id: parentId,
+        order_no: orderNoValue,
+    }
     $.ajax({
         type: 'POST',
         url: '/api/v1/hr/create_overtime_request_line',
-        data: { owner_id: 1 },
+        data,
         success: (response) => {
             const insertedId = response['hits'][0]['id']
-            params.insertedId = insertedId
-            console.log('insertedId', insertedId, params)
-            addANewLineFull(params)
+            valuesOfOrigin['id'] = insertedId
+            valuesOfOrigin['hr_overtime_request_id'] = parentId
+            console.log('insertedId', insertedId, valuesOfOrigin)
+            addANewLineFull({ tableId, valuesOfOrigin })
         }
     })
 }
 
 const addANewLineFull = (params) => {
 
-    const { tableId, insertedId } = params
-    console.log('addANewLine', tableId, insertedId)
+    const { tableId } = params
     let { valuesOfOrigin } = params //<< Incase of duplicate, this is the value of the original line
+    const insertedId = valuesOfOrigin['id']
+    console.log('addANewLine', tableId, insertedId)
     // console.log("valuesOfOrigin: ", valuesOfOrigin)
     const { columns, showNo, showNoR, tableDebugJs, isOrderable } = tableObject[tableId]
     // console.log("ADD LINE TO", params, tableDebugJs, isOrderable)

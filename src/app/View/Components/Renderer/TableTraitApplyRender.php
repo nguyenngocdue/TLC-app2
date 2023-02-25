@@ -62,9 +62,10 @@ trait TableTraitApplyRender
         if ($column['renderer'] === 'dropdown4') {
             $tagName = "x-controls.has-data-source.dropdown4";
             $multiple = (isset($column['multiple']) && $column['multiple'] == true) ? "multiple=true" : "";
+            $saveOnChangeRenderer = (isset($column['saveOnChange']) && $column['saveOnChange'] == true) ? "saveOnChange=true" : "";
             $rawData = ($rawData instanceof Collection) ? $rawData = $rawData->pluck('id') : [$rawData];
             $rawData = json_encode($rawData);
-            $attributes = "$name $typeRender $multiple $propertyRender $rowIndexRender selected='$rawData'";
+            $attributes = "$name $typeRender $multiple $propertyRender $rowIndexRender selected='$rawData' $saveOnChangeRenderer";
             $output = "<$tagName $attributes></$tagName>";
             // Log::info($output);
 

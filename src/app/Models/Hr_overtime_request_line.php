@@ -58,7 +58,7 @@ class Hr_overtime_request_line extends ModelExtended
             ["dataIndex" => 'order_no', 'invisible' => true],
             ["dataIndex" => 'id', 'title' => 'OT Line ID'],
             ['dataIndex' => 'hr_overtime_request_id', 'title' => 'OT ID', 'invisible' => true, 'value_as_parent_id' => true],
-            ['dataIndex' => 'user_id', 'title' => 'Full Name', 'value_as_user_id' => true],
+            ['dataIndex' => 'user_id', 'title' => 'Full Name', 'value_as_user_id' => true, 'cloneable' => true],
             ['dataIndex' => 'employeeid'],
             ['dataIndex' => 'position_rendered', 'title' => 'Position'],
             ['dataIndex' => 'ot_date', 'cloneable' => true],

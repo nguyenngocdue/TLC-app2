@@ -205,6 +205,7 @@ const onChangeDropdown4Expression = (listener, table01Name, rowIndex) => {
     if (debugListener) console.log(column_name, '=', expression1, result)
     const id = makeIdFrom(table01Name, column_name, rowIndex)
     getEById(id).val(result)
+    getEById(id).trigger('change')
 }
 
 const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex) => {
@@ -253,14 +254,27 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex) => 
     }
 }
 
-const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType }) => {
-    // console.log("onChangeDropdown4", name, table01Name, rowIndex, lineType)
+const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange }) => {
+    // console.log("onChangeDropdown4", name, table01Name, rowIndex, lineType, saveOnChange)
     // console.log("listenersOfDropdown4s", listenersOfDropdown4s, table01Name)
+    const fieldName = getFieldNameInTable01FormatJS(name, table01Name)
+    if (saveOnChange) {
+        const lineId = makeIdFrom(table01Name, 'id', rowIndex)
+        const id = getEById(lineId).val()
+        const value = getEById(name).val()
+        const data = { [fieldName]: value }
+        console.log(data)
+        $.ajax({
+            url: '/api/v1/hr/create_overtime_request_line/' + id,
+            type: 'POST',
+            data,
+            success: (response) => { console.log(response) }
+        })
+    }
     const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
     for (let i = 0; i < listenersOfDropdown4.length; i++) {
         let listener = listenersOfDropdown4[i]
         const { triggers, listen_action } = listener
-        const fieldName = getFieldNameInTable01FormatJS(name, table01Name)
         // console.log(triggers, listen_action, name, fieldName, table01Name, rowIndex)
         if (triggers.includes(fieldName)) {
             // console.log("listen_action", listen_action)

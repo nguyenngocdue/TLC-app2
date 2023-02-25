@@ -15,6 +15,7 @@ class RadioOrCheckBox extends Component
         private $table01Name = null,
         private $multiple = false,
         private $readOnly = false,
+        private $saveOnChange = false,
     ) {
         $old = old($name);
         if ($old) {
@@ -47,6 +48,7 @@ class RadioOrCheckBox extends Component
             'table' => $table,
             'span' => $span,
             'readOnly' => $this->readOnly,
+            'saveOnChange' => $this->saveOnChange,
         ];
         // dump($params);
 

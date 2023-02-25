@@ -4,6 +4,7 @@
         , name: "{{$name}}"
         , className: "{{$className}}"
         , multipleStr: "{{$multipleStr}}"
+        , saveOnChange: "{{$saveOnChange?1:0}}"
     }
     // console.log(params)
     document.write(Dropdown2(params))
