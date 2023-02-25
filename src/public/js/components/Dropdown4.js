@@ -207,6 +207,52 @@ const onChangeDropdown4Expression = (listener, table01Name, rowIndex) => {
     getEById(id).val(result)
 }
 
+const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex) => {
+    // const debugListener = true
+    if (debugListener) console.log("AjaxRequestScalar", listener)
+    const { triggers, expression: url, column_name } = listener
+    const { ajax_response_attribute, ajax_item_attribute, ajax_default_value } = listener
+
+    let enoughParams = true
+    const data = {}
+    const missingParams = []
+    for (let i = 0; i < triggers.length; i++) {
+        const name = makeIdFrom(table01Name, triggers[i], rowIndex)
+        let value = getEById(name).val()
+        if (value === null || value === '' || value === undefined) {
+            enoughParams = false
+            missingParams.push(name)
+        }
+        data[triggers[i]] = value
+    }
+    if (enoughParams) {
+        if (debugListener) console.log("Sending AjaxRequest with data:", data, url)
+        $.ajax({
+            url, data,
+            success: (response) => {
+                let value = -1
+                if (response[ajax_response_attribute][0] === undefined) {
+                    value = ajax_default_value
+                    if (debugListener) console.log("Response empty", ajax_response_attribute, ', assigning default value', ajax_default_value)
+                } else if (response[ajax_response_attribute][0][ajax_item_attribute] === undefined) {
+                    value = ajax_default_value
+                    if (debugListener) console.log("Requested column", ajax_item_attribute, 'not found, assigning default value', ajax_default_value)
+                } else {
+                    value = response[ajax_response_attribute][0][ajax_item_attribute]
+                }
+                const id = makeIdFrom(table01Name, column_name, rowIndex)
+                if (debugListener) console.log("Assigning", id, "with value", value)
+                if (debugListener) console.log("Response", response)
+                getEById(id).val(value)
+                getEById(id).trigger('change')
+            },
+            error: (response) => console.error(response)
+        })
+    } else {
+        if (debugListener) console.log("Sending AjaxRequest cancelled as not enough parameters", missingParams)
+    }
+}
+
 const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType }) => {
     // console.log("onChangeDropdown4", name, table01Name, rowIndex, lineType)
     // console.log("listenersOfDropdown4s", listenersOfDropdown4s, table01Name)
@@ -234,6 +280,9 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType }) => {
                 case "expression":
                     onChangeDropdown4Expression(listener, table01Name, rowIndex)
                     break
+                case "ajax_request_scalar":
+                    onChangeDropdown4AjaxRequestScalar(listener, table01Name, rowIndex)
+                    break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);
                     break;
@@ -256,7 +305,8 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
         let item = dataSource[i]
         selectedStr = (dataSource.length === 1) ? 'selected' : (dumbIncludes(item.id, selected) ? "selected" : "")
         // console.log("During making option list", item.id, item.name, "================================", selectedStr)
-        option = "<option value='" + item.id + "' title='" + item.description + "' " + selectedStr + " >"
+        const title = item.description || makeId(item.id)
+        option = "<option value='" + item.id + "' title='" + title + "' " + selectedStr + " >"
         option += item.name || "Nameless #" + item.id
         option += "</option>"
         options.push(option)

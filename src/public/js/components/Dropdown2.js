@@ -256,9 +256,13 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
 
     let enoughParams = true
     const data = {}
+    const missingParams = []
     for (let i = 0; i < triggers.length; i++) {
         let value = getEById(triggers[i]).val()
-        if (value === null || value === '' || value === undefined) enoughParams = false
+        if (value === null || value === '' || value === undefined) {
+            enoughParams = false
+            missingParams.push(triggers[i])
+        }
         data[triggers[i]] = value
     }
     if (enoughParams) {
@@ -284,7 +288,7 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
             error: (response) => console.error(response)
         })
     } else {
-        if (debugListener) console.log("Sending AjaxRequest cancelled as not enough parameters")
+        if (debugListener) console.log("Sending AjaxRequest cancelled as not enough parameters", missingParams)
     }
 }
 const onChangeDropdown2 = (name) => {
@@ -338,7 +342,8 @@ const reloadDataToDropdown2 = (id, attr_to_compare, dataSource, selected) => {
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             selectedStr = (dataSource.length === 1) ? 'selected' : (selected.includes(item.id) ? "selected" : "")
-            option = "<option value='" + item.id + "' title='" + item.description + "' " + selectedStr + " >"
+            const title = item.description || makeId(item.id)
+            option = "<option value='" + item.id + "' title='" + title + "' " + selectedStr + " >"
             option += item.name || "Nameless #" + item.id
             option += "</option>"
             options.push(option)
