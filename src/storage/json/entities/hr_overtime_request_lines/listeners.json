@@ -2,201 +2,261 @@
     "_rt_remaining_hours": {
         "name": "_rt_remaining_hours",
         "column_name": "rt_remaining_hours",
-        "attr_to_compare": "",
         "listen_action": "ajax_request_scalar",
         "triggers": "user_id,ot_date",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "\/api\/v1\/hr\/overtime_request_line",
+        "ajax_response_attribute": "hits",
+        "ajax_item_attribute": "remaining_hours",
+        "ajax_default_value": "60"
     },
     "_employeeid": {
         "name": "_employeeid",
         "column_name": "employeeid",
-        "attr_to_compare": "",
         "listen_action": "dot",
         "triggers": "user_id",
         "listen_to_fields": "user_id",
         "listen_to_attrs": "employeeid",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_position_rendered": {
         "name": "_position_rendered",
         "column_name": "position_rendered",
-        "attr_to_compare": "",
         "listen_action": "dot",
         "triggers": "user_id",
         "listen_to_fields": "user_id",
         "listen_to_attrs": "position_rendered",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_total_time": {
         "name": "_total_time",
         "column_name": "total_time",
-        "attr_to_compare": "",
         "listen_action": "expression",
         "triggers": "from_time,to_time,break_time",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": "Math.round((to_time - from_time - break_time * 60) \/3600 * 100)\/100"
+        "attr_to_compare": "",
+        "expression": "Math.round((to_time - from_time - break_time * 60) \/3600 * 100)\/100",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_hr_overtime_request_id": {
         "name": "_hr_overtime_request_id",
         "column_name": "hr_overtime_request_id",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_user_id": {
         "name": "_user_id",
         "column_name": "user_id",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_ot_date": {
         "name": "_ot_date",
         "column_name": "ot_date",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_from_time": {
         "name": "_from_time",
         "column_name": "from_time",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_to_time": {
         "name": "_to_time",
         "column_name": "to_time",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_break_time": {
         "name": "_break_time",
         "column_name": "break_time",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_getRemainingHours": {
         "name": "_getRemainingHours",
         "column_name": "getRemainingHours",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_work_mode_id": {
         "name": "_work_mode_id",
         "column_name": "work_mode_id",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_remark": {
         "name": "_remark",
         "column_name": "remark",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "attr_to_compare": "",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
-        "expression": ""
+        "attr_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     }
 }

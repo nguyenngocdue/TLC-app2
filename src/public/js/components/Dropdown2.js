@@ -249,18 +249,42 @@ const onChangeDropdown2Expression = (listener) => {
     getEById(column_name).val(result)
 }
 const onChangeDropdown2AjaxRequestScalar = (listener) => {
-    const debugListener = true
+    // const debugListener = true
     if (debugListener) console.log("AjaxRequestScalar", listener)
-    const { triggers } = listener
+    const { triggers, expression: url, column_name } = listener
+    const { ajax_response_attribute, ajax_item_attribute, ajax_default_value } = listener
+
     let enoughParams = true
-    const params = {}
+    const data = {}
     for (let i = 0; i < triggers.length; i++) {
         let value = getEById(triggers[i]).val()
         if (value === null || value === '' || value === undefined) enoughParams = false
-        params[triggers[i]] = value
+        data[triggers[i]] = value
     }
     if (enoughParams) {
-        if (debugListener) console.log("Sending AjaxRequest with params:", params)
+        if (debugListener) console.log("Sending AjaxRequest with data:", data, url)
+        $.ajax({
+            url, data,
+            success: (response) => {
+                let value = -1
+                if (response[ajax_response_attribute][0] === undefined) {
+                    value = ajax_default_value
+                    if (debugListener) console.log("Response empty", ajax_response_attribute, ', assigning default value', ajax_default_value)
+                } else if (response[ajax_response_attribute][0][ajax_item_attribute] === undefined) {
+                    value = ajax_default_value
+                    if (debugListener) console.log("Requested column", ajax_item_attribute, 'not found, assigning default value', ajax_default_value)
+                } else {
+                    value = response[ajax_response_attribute][0][ajax_item_attribute]
+                }
+                if (debugListener) console.log("Assigning", column_name, "with value", value)
+                if (debugListener) console.log("Response", response)
+                getEById(column_name).val(value)
+                getEById(column_name).trigger('change')
+            },
+            error: (response) => console.error(response)
+        })
+    } else {
+        if (debugListener) console.log("Sending AjaxRequest cancelled as not enough parameters")
     }
 }
 const onChangeDropdown2 = (name) => {

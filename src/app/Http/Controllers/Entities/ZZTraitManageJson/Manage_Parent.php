@@ -91,7 +91,7 @@ abstract class Manage_Parent
         $table01 = $data['table01'] ?? [];
 
         //Make up the columns
-        $columns = $this->$this->getColumns();
+        $columns = $this->getColumns();
         $this->makeUpWidthForColumns($columns);
         //Remove all things in blacklist
         $columns = array_filter($columns, fn ($column) => !in_array($column['dataIndex'], ['action', ...$this->storingBlackList,]));

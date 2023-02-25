@@ -31,12 +31,6 @@ class ManageListeners extends Manage_Parent
                 "editable" => true,
             ],
             [
-                "dataIndex" => "attr_to_compare",
-                "renderer" => "text",
-                "editable" => true,
-                "properties" => ["placeholder" => 'id'],
-            ],
-            [
                 "dataIndex" => "listen_action",
                 "renderer" => "dropdown",
                 "editable" => true,
@@ -60,12 +54,33 @@ class ManageListeners extends Manage_Parent
                 "editable" => true,
             ],
             [
+                "dataIndex" => "attr_to_compare",
+                "renderer" => "text",
+                "editable" => true,
+                "properties" => ["placeholder" => 'id'],
+            ],
+            [
                 "dataIndex" => "expression",
+                "title" => "Expression or API",
                 "renderer" => "textarea",
                 "editable" => true,
                 'width' => 200,
             ],
-
+            [
+                "dataIndex" => "ajax_response_attribute",
+                "renderer" => "text",
+                "editable" => true,
+            ],
+            [
+                "dataIndex" => "ajax_item_attribute",
+                "renderer" => "text",
+                "editable" => true,
+            ],
+            [
+                "dataIndex" => "ajax_default_value",
+                "renderer" => "text",
+                "editable" => true,
+            ],
         ];
     }
 
@@ -83,16 +98,41 @@ class ManageListeners extends Manage_Parent
                 $newItem = ['name' => $name];
             }
             $newItem['column_name'] = $prop['column_name'];
-            if (isset($newItem['listen_action']) && $newItem['listen_action'] == '') {
+            if (isset($newItem['listen_action'])) {
+                switch ($newItem['listen_action']) {
+                    case "expression":
+                        $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
+                        $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
+                        $newItem['attr_to_compare'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_item_attribute'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_default_value'] = 'DO_NOT_RENDER';
+                        break;
+                    case "ajax_request_scalar":
+                        $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
+                        $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
+                        $newItem['attr_to_compare'] = 'DO_NOT_RENDER';
+                        break;
+                    case "assign":
+                    case "dot":
+                        $newItem['attr_to_compare'] = 'DO_NOT_RENDER';
+                        // break; //<<no break here
+                    default:
+                        $newItem['expression'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_item_attribute'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_default_value'] = 'DO_NOT_RENDER';
+                        break;
+                }
+            } else {
                 $newItem['triggers'] = 'DO_NOT_RENDER';
                 $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
                 $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
-            }
-            if (isset($newItem['listen_action']) && $newItem['listen_action'] == 'expression') {
-                $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
-                $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
-            } else {
+                $newItem['attr_to_compare'] = 'DO_NOT_RENDER';
                 $newItem['expression'] = 'DO_NOT_RENDER';
+                $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
+                $newItem['ajax_item_attribute'] = 'DO_NOT_RENDER';
+                $newItem['ajax_default_value'] = 'DO_NOT_RENDER';
             }
             $isStatic = (isset($prop['column_type']) && $prop['column_type'] === 'static');
             if (!$isStatic) $result[] = $newItem;

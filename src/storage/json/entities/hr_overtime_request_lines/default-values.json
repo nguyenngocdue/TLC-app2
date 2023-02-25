@@ -109,17 +109,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getRemainingHours": {
-        "name": "_getRemainingHours",
-        "column_name": "getRemainingHours",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
