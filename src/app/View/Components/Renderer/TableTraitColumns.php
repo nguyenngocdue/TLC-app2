@@ -46,9 +46,7 @@ trait TableTraitColumns
     {
         $columnsRendered = [];
         array_walk($columns, function ($column, $key) use (&$columnsRendered) {
-            if (!$this->isInvisible($column)) {
-                $columnsRendered[] = $this->makeTh($column, $key);
-            }
+            if (!$this->isInvisible($column)) $columnsRendered[] = $this->makeTh($column, $key);
         });
         $columnsRendered = join("", $columnsRendered);
         return $columnsRendered;

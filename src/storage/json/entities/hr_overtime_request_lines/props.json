@@ -68,7 +68,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
-        "save_on_change": "true",
+        "save_on_change": "",
         "new_line": ""
     },
     "_position_rendered": {
@@ -86,7 +86,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
-        "save_on_change": "true",
+        "save_on_change": "",
         "new_line": ""
     },
     "_ot_date": {
@@ -122,7 +122,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "true",
-        "save_on_change": "true",
+        "save_on_change": "",
         "new_line": ""
     },
     "_from_time": {
@@ -140,7 +140,7 @@
         "hidden_filter": "true",
         "hidden_print": "",
         "read_only": "",
-        "save_on_change": "true",
+        "save_on_change": "",
         "new_line": ""
     },
     "_to_time": {
@@ -158,7 +158,7 @@
         "hidden_filter": "true",
         "hidden_print": "",
         "read_only": "",
-        "save_on_change": "true",
+        "save_on_change": "",
         "new_line": ""
     },
     "_break_time": {
@@ -176,7 +176,7 @@
         "hidden_filter": "true",
         "hidden_print": "",
         "read_only": "",
-        "save_on_change": "true",
+        "save_on_change": "",
         "new_line": ""
     },
     "_total_time": {

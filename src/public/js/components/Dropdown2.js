@@ -98,7 +98,7 @@ const filterDropdown2 = (column_name, dataSource) => {
 const onChangeDropdown2Reduce = (listener) => {
     // const debugListener = true
     if (debugListener) console.log("Reduce listener", listener)
-    const { column_name, table_name, listen_to_attrs, triggers, attr_to_compare } = listener
+    const { column_name, table_name, listen_to_attrs, triggers, attrs_to_compare } = listener
     let dataSource = k[table_name]
     if (debugListener) console.log("dataSource in k", dataSource)
 
@@ -135,7 +135,7 @@ const onChangeDropdown2Reduce = (listener) => {
     // console.log('onChangeDropdown2Reduce')
     const lastSelected = getValueOfEById(column_name)
     // console.log("Selected of", column_name, "is", lastSelected)
-    reloadDataToDropdown2(column_name, attr_to_compare, dataSource, [lastSelected * 1])
+    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, [lastSelected * 1])
 }
 const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
@@ -431,7 +431,7 @@ const documentReadyDropdown2 = ({ id, selectedJson, table }) => {
     let attr_to_compare = 'id'
     for (let i = 0; i < listenersOfDropdown2.length; i++) {
         if (listenersOfDropdown2[i].column_name === id) {
-            attr_to_compare = listenersOfDropdown2[i].attr_to_compare
+            attr_to_compare = listenersOfDropdown2[i].attrs_to_compare[0]
             break
         }
     }

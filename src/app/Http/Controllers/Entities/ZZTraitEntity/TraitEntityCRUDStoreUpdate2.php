@@ -382,6 +382,12 @@ trait TraitEntityCRUDStoreUpdate2
 		if (isset($input['ot_date'])) $input['ot_date'] = DateTimeConcern::convertForSaving('picker_date', $input['ot_date']);
 		$theRow->fill($input);
 		$result = $theRow->save();
-		return ResponseObject::responseSuccess([['result' => $result]]);
+		return ResponseObject::responseSuccess(
+			[
+				['result' => $result, 'input' => $input]
+			],
+			[],
+			"UpdateShort"
+		);
 	}
 }

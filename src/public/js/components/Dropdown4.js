@@ -253,6 +253,62 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex) => 
         if (debugListener) console.log("Sending AjaxRequest cancelled as not enough parameters", missingParams)
     }
 }
+const onChangeDropdown4TriggerChangeSameLine = (listener, table01Name, rowIndex) => {
+    // const debugListener = true
+    if (debugListener) console.log("TriggerChangeSameLine", listener)
+    const { column_name } = listener
+    const id = makeIdFrom(table01Name, column_name, rowIndex)
+    getEById(id).trigger('change')
+}
+const onChangeDropdown4TriggerChangeSomeLines = (listener, table01Name, rowIndex) => {
+    // const debugListener = true
+    if (debugListener) console.log("TriggerChangeSomeLines", listener)
+    const { column_name, attrs_to_compare } = listener
+    if (debugListener) console.log(column_name, attrs_to_compare)
+
+    const rows = getAllRows(table01Name)
+    // console.log(rows)
+    const source_to_compare = {}
+    for (let j = 0; j < attrs_to_compare.length; j++) {
+        const fieldName = attrs_to_compare[j]
+        const id = makeIdFrom(table01Name, fieldName, rowIndex)
+        source_to_compare[fieldName] = getEById(id).val()
+    }
+    if (debugListener) console.log(source_to_compare)
+
+    const equal = (a, b, attrs_to_compare) => {
+        for (let i = 0; i < attrs_to_compare.length; i++) {
+            if (a[attrs_to_compare[i]] != b[attrs_to_compare[i]]) return false
+        }
+        return true
+    }
+
+    const kk = {}
+    const toBeTriggered = []
+    for (let rowIndex1 = 0; rowIndex1 < rows.length; rowIndex1++) {
+        const indexOfRow = getNameIndexOfRowIndex(table01Name, rowIndex1)
+        if (debugListener) console.log(indexOfRow)
+        const toBeCompared = {}
+        for (let j = 0; j < attrs_to_compare.length; j++) {
+            const fieldName = attrs_to_compare[j]
+            const id = makeIdFrom(table01Name, fieldName, rowIndex1)
+            toBeCompared[fieldName] = getEById(id).val()
+        }
+        if (equal(source_to_compare, toBeCompared, attrs_to_compare)) {
+            kk[indexOfRow] = toBeCompared
+            if (indexOfRow != rowIndex) { //<< Dead loop if indexOfRow == rowIndex
+                toBeTriggered.push(indexOfRow)
+            }
+        }
+    }
+    if (debugListener) console.log(kk, toBeTriggered)
+    for (let i = 0; i < toBeTriggered.length; i++) {
+        const rowI = toBeTriggered[i]
+        const id = makeIdFrom(table01Name, column_name, rowI)
+        if (debugListener) console.log("Trigger", id, i, toBeTriggered.length)
+        setTimeout(() => getEById(id).trigger('change'), 1000)
+    }
+}
 
 const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange }) => {
     // console.log("onChangeDropdown4", name, table01Name, rowIndex, lineType, saveOnChange)
@@ -263,12 +319,12 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
         const id = getEById(lineId).val()
         const value = getEById(name).val()
         const data = { [fieldName]: value }
-        console.log(data)
+        // console.log(data)
         $.ajax({
             url: '/api/v1/hr/create_overtime_request_line/' + id,
             type: 'POST',
             data,
-            success: (response) => { console.log(response) }
+            // success: (response) => { console.log(response) }
         })
     }
     const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
@@ -296,6 +352,12 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
                     break
                 case "ajax_request_scalar":
                     onChangeDropdown4AjaxRequestScalar(listener, table01Name, rowIndex)
+                    break
+                case "trigger_change_same_line":
+                    onChangeDropdown4TriggerChangeSameLine(listener, table01Name, rowIndex)
+                    break
+                case "trigger_change_some_lines":
+                    onChangeDropdown4TriggerChangeSomeLines(listener, table01Name, rowIndex)
                     break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);

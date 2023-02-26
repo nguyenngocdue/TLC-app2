@@ -90,7 +90,8 @@ class RelationshipRenderer extends Component
         // dump($props);
 
         $renderer_edit = $props['relationships']['renderer_edit'];
-        $showAll = $renderer_edit === "many_icons";
+        // $showAll = $renderer_edit === "many_icons";
+        $showAll = true;
         $lineModelPath = $props['relationships']['eloquentParams'][1];
         $instance = new $lineModelPath;
 

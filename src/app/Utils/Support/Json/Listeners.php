@@ -16,6 +16,7 @@ class Listeners extends JsonGetSet
             $row['triggers'] = Str::parseArray($row['triggers']);
             $row['listen_to_fields'] = Str::parseArray($row['listen_to_fields']);
             $row['listen_to_attrs'] = Str::parseArray($row['listen_to_attrs']);
+            $row['attrs_to_compare'] = Str::parseArray($row['attrs_to_compare'] ?? 'id'); //<<CONFIG_MIGRATE
             if ($row['listen_action']) $result[$key] = $row;
         }
         return $result;

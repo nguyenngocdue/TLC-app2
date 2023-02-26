@@ -34,7 +34,7 @@ class ManageListeners extends Manage_Parent
                 "dataIndex" => "listen_action",
                 "renderer" => "dropdown",
                 "editable" => true,
-                "cbbDataSource" => ['', 'reduce', 'assign', 'dot', 'aggregate(not-yet)', 'expression', 'date_offset', 'number_to_words(not-yet)', 'ajax_request_scalar'],
+                "cbbDataSource" => ['', 'reduce', 'assign', 'dot', 'aggregate(not-yet)', 'expression', 'date_offset', 'number_to_words(not-yet)', 'ajax_request_scalar', 'trigger_change_same_line', 'trigger_change_some_lines'],
                 "sortBy" => 'value',
                 "properties" => ["strFn" => 'same'],
             ],
@@ -54,7 +54,7 @@ class ManageListeners extends Manage_Parent
                 "editable" => true,
             ],
             [
-                "dataIndex" => "attr_to_compare",
+                "dataIndex" => "attrs_to_compare",
                 "renderer" => "text",
                 "editable" => true,
                 "properties" => ["placeholder" => 'id'],
@@ -103,7 +103,7 @@ class ManageListeners extends Manage_Parent
                     case "expression":
                         $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
                         $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
-                        $newItem['attr_to_compare'] = 'DO_NOT_RENDER';
+                        $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
                         $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
                         $newItem['ajax_item_attribute'] = 'DO_NOT_RENDER';
                         $newItem['ajax_default_value'] = 'DO_NOT_RENDER';
@@ -111,13 +111,19 @@ class ManageListeners extends Manage_Parent
                     case "ajax_request_scalar":
                         $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
                         $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
-                        $newItem['attr_to_compare'] = 'DO_NOT_RENDER';
+                        $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
                         break;
                     case "assign":
                     case "dot":
-                        $newItem['attr_to_compare'] = 'DO_NOT_RENDER';
-                        // break; //<<no break here
-                    default:
+                        $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
+                        $newItem['expression'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_item_attribute'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_default_value'] = 'DO_NOT_RENDER';
+                        break;
+                    case "trigger_change_some_lines":
+                        $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
+                        $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
                         $newItem['expression'] = 'DO_NOT_RENDER';
                         $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
                         $newItem['ajax_item_attribute'] = 'DO_NOT_RENDER';
@@ -128,7 +134,7 @@ class ManageListeners extends Manage_Parent
                 $newItem['triggers'] = 'DO_NOT_RENDER';
                 $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
                 $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
-                $newItem['attr_to_compare'] = 'DO_NOT_RENDER';
+                $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
                 $newItem['expression'] = 'DO_NOT_RENDER';
                 $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
                 $newItem['ajax_item_attribute'] = 'DO_NOT_RENDER';
