@@ -314,6 +314,7 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
     // console.log("onChangeDropdown4", name, table01Name, rowIndex, lineType, saveOnChange)
     // console.log("listenersOfDropdown4s", listenersOfDropdown4s, table01Name)
     const fieldName = getFieldNameInTable01FormatJS(name, table01Name)
+    const { tableName } = tableObject[table01Name]
     if (saveOnChange) {
         const lineId = makeIdFrom(table01Name, 'id', rowIndex)
         const id = getEById(lineId).val()
@@ -321,7 +322,7 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
         const data = { [fieldName]: value }
         // console.log(data)
         $.ajax({
-            url: '/api/v1/entity/updateShort/' + id,
+            url: '/api/v1/entity/' + tableName + '_updateShort/' + id,
             type: 'POST',
             data,
             // success: (response) => { console.log(response) }
