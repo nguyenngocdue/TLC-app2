@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('zunit_test_01s', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('text1')->nullable();
             $table->text('text2')->nullable();
             $table->text('text3')->nullable();

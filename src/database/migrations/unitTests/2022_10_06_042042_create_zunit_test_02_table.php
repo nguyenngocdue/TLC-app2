@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('zunit_test_02s', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
 
             $table->unsignedBigInteger('radio_yes_no')->nullable();
             $table->unsignedBigInteger('radio_pass_fail')->nullable();

@@ -81,7 +81,15 @@ Route::group([
 Route::group([
     'prefix' => 'v1/entity',
 ], function () {
-    foreach (['Hr_overtime_request_line', 'Hse_corrective_action'] as $entityName) {
+    foreach ([
+        'Hr_overtime_request_line',
+        'Hse_corrective_action',
+        'Zunit_test_01',
+        'Zunit_test_02',
+        'Zunit_test_03',
+        'Zunit_test_05',
+        'Zunit_test_09',
+    ] as $entityName) {
         $path = "App\\Http\\Controllers\\Entities\\$entityName\\";
         $tableName = Str::plural(lcfirst($entityName));
         Route::post("{$tableName}_storeEmpty", [$path . EntityCRUDController::class, 'storeEmpty']);
