@@ -13,6 +13,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_content": {
@@ -29,6 +31,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_category": {
@@ -45,6 +49,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_commentable_type": {
@@ -61,6 +67,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_commentable_id": {
@@ -77,6 +85,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_owner_id": {
@@ -93,6 +103,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_position_rendered": {
@@ -109,6 +121,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_created_at": {
@@ -125,6 +139,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_commentable": {
@@ -141,6 +157,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_updated_at": {
@@ -157,22 +175,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "new_line": ""
-    },
-    "_comment_attachment": {
-        "name": "_comment_attachment",
-        "column_name": "comment_attachment",
-        "column_type": "eloquent_prop",
-        "label": "Attachment",
-        "control": "attachment",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     }
 }

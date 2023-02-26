@@ -18,6 +18,8 @@ class ParentId extends Component
         private $multiple = false,
         private $type,
     ) {
+        if (old($name)) $this->selected = 1 * old($name);
+        // dump($this->selected);
     }
 
     private function getDataSource($attr_name)

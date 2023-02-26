@@ -18,7 +18,7 @@ class DatePicker3 extends Component
         private $value = null,
         private $dateTimeType = 'picker_date',
     ) {
-        //
+        if (!is_null(old($name))) $this->value = old($name);
     }
     private function getPlaceholder($control)
     {

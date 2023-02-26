@@ -4,12 +4,12 @@
         , name: "{{$name}}"
         , className: "{{$className}}"
         , multipleStr: "{{$multipleStr}}"
-        , saveOnChange: "{{$saveOnChange?1:0}}"
     }
     // console.log(params)
     document.write(Dropdown2(params))
-
+    
     params2 = {id: '{{$id}}',selectedJson: '{!! $selected !!}',table: "{{$table}}" }
     documentReadyDropdown2(params2)
-
+    
 </script>
+{{-- , saveOnChange: "{{$saveOnChange?1:0}}" --}}

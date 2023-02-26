@@ -18,6 +18,7 @@ class ParentType extends Component
         private $multiple = false,
         private $type,
     ) {
+        if (old($name)) $this->selected = old($name);
     }
 
     private function getDataSource()

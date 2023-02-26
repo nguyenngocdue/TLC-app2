@@ -429,13 +429,15 @@ const documentReadyDropdown2 = ({ id, selectedJson, table }) => {
     dataSourceDropdown = k[table];
     if (dataSourceDropdown === undefined) console.error("key {{$table}} not found in k[]");
     let attr_to_compare = 'id'
-    for (let i = 0; i < listenersOfDropdown2.length; i++) {
-        if (listenersOfDropdown2[i].column_name === id) {
-            attr_to_compare = listenersOfDropdown2[i].attrs_to_compare[0]
-            break
-        }
-    }
-    // console.log(id, listenersOfDropdown2, attr_to_compare)
+    // for (let i = 0; i < listenersOfDropdown2.length; i++) {
+    //     if (listenersOfDropdown2[i].column_name === id) {
+    //         console.log(listenersOfDropdown2[i], attrs_to_compare[0])
+    //         attr_to_compare = listenersOfDropdown2[i].attrs_to_compare[0]
+    //         break
+    //     }
+    // }
+    // console.log(id, listenersOfDropdown2, attr_to_compare, dataSourceDropdown)
+    console.log(id, attr_to_compare, dataSourceDropdown, selectedJson)
     reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedJson)
 
     $(document).ready(() => {

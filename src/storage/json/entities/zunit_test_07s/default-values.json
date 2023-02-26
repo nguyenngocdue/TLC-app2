@@ -5,9 +5,9 @@
         "label": "",
         "validation": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_content": {
@@ -16,20 +16,20 @@
         "label": "",
         "validation": "required",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_comment_1": {
         "name": "_comment_1",
         "column_name": "comment_1",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_comment_2": {
@@ -38,9 +38,9 @@
         "label": "",
         "validation": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_comment_3": {
@@ -49,9 +49,9 @@
         "label": "",
         "validation": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_created_at": {
@@ -60,9 +60,9 @@
         "label": "",
         "validation": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_updated_at": {
@@ -71,9 +71,9 @@
         "label": "",
         "validation": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_comments": {
@@ -82,9 +82,31 @@
         "label": "",
         "validation": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
+        "control_extra": ""
+    },
+    "_parent_id": {
+        "name": "_parent_id",
+        "column_name": "parent_id",
+        "label": "",
+        "validation": "",
+        "formula": "",
         "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
         "control_extra": ""
     }
 }
