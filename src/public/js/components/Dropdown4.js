@@ -321,7 +321,7 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
         const data = { [fieldName]: value }
         // console.log(data)
         $.ajax({
-            url: '/api/v1/hr/create_overtime_request_line/' + id,
+            url: '/api/v1/entity/updateShort/' + id,
             type: 'POST',
             data,
             // success: (response) => { console.log(response) }

@@ -16,14 +16,14 @@ return new class extends Migration
     {
         Schema::create('hse_corrective_actions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->string('slug')->unique();
-            $table->unsignedBigInteger('priority_id');
-            $table->unsignedBigInteger('hse_incident_report_id');
-            $table->unsignedBigInteger('work_area_id');
+            $table->string('slug')->nullable(); //->unique(); ??
+            $table->unsignedBigInteger('priority_id')->nullable();
+            $table->unsignedBigInteger('hse_incident_report_id')->nullable();
+            $table->unsignedBigInteger('work_area_id')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
-            $table->unsignedBigInteger('unsafe_action_type_id');
+            $table->unsignedBigInteger('unsafe_action_type_id')->nullable();
             $table->string('status')->nullable();
             $table->dateTime('opened_date')->nullable();
             $table->dateTime('closed_date')->nullable();

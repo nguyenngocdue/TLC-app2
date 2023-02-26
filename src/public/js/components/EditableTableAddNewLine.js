@@ -1,20 +1,6 @@
 const removeEmptinessLine = (tableId) => $('#' + tableId + '_emptiness').remove()
 
 const addANewLine = (params) => {
-    $.ajax({
-        type: 'POST',
-        url: '/api/v1/hr/create_overtime_request_line',
-        data: { owner_id: 1 },
-        success: (response) => {
-            const insertedId = response['hits'][0]['id']
-            params.insertedId = insertedId
-            console.log('insertedId', insertedId, params)
-            addANewLineFull(params)
-        }
-    })
-}
-
-const addANewLineFull = (params) => {
 
     const { tableId, insertedId } = params
     console.log('addANewLine', tableId, insertedId)

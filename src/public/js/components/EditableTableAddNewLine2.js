@@ -1,23 +1,44 @@
 const removeEmptinessLine = (tableId) => $('#' + tableId + '_emptiness').remove()
 
+const findParentIdFieldName = (tableId) => {
+    const { columns } = tableObject[tableId]
+    for (let i = 0; i < columns.length; i++) {
+        const keys = Object.keys(columns[i])
+        // console.log(keys)
+        for (let j = 0; j < keys.length; j++) {
+            const key = keys[j]
+            if (key === 'value_as_parent_id' && columns[i][key]) {
+                // console.log(key, columns[i][key], columns[i]['dataIndex'])
+                return columns[i]['dataIndex']
+            }
+        }
+    }
+    return "NOT_FOUND_value_as_parent_id";
+}
+
 const addANewLine = (params) => {
     const { tableId, valuesOfOrigin = {} } = params
-    const parentId = getEById('id').val()
+    const { tableName, } = tableObject[tableId]
+    // console.log(params, tableName,)
+    const parentId = getEById('entityParentId').val()
     const orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
+    const parentIdFieldName = findParentIdFieldName(tableId)
+    // console.log(parentIdFieldName)
     const data = {
         owner_id: 1,
-        hr_overtime_request_id: parentId,
+        [parentIdFieldName]: parentId,
         order_no: orderNoValue,
     }
+    // console.log(data)
     $.ajax({
         type: 'POST',
-        url: '/api/v1/hr/create_overtime_request_line',
+        url: '/api/v1/entity/' + tableName + '_storeEmpty',
         data,
         success: (response) => {
             const insertedId = response['hits'][0]['id']
             valuesOfOrigin['id'] = insertedId
-            valuesOfOrigin['hr_overtime_request_id'] = parentId
-            console.log('insertedId', insertedId, valuesOfOrigin)
+            valuesOfOrigin[parentIdFieldName] = parentId
+            // console.log('insertedId', insertedId, valuesOfOrigin)
             addANewLineFull({ tableId, valuesOfOrigin })
         }
     })
@@ -28,7 +49,7 @@ const addANewLineFull = (params) => {
     const { tableId } = params
     let { valuesOfOrigin } = params //<< Incase of duplicate, this is the value of the original line
     const insertedId = valuesOfOrigin['id']
-    console.log('addANewLine', tableId, insertedId)
+    // console.log('addANewLine', tableId, insertedId)
     // console.log("valuesOfOrigin: ", valuesOfOrigin)
     const { columns, showNo, showNoR, tableDebugJs, isOrderable } = tableObject[tableId]
     // console.log("ADD LINE TO", params, tableDebugJs, isOrderable)
@@ -183,8 +204,8 @@ const addANewLineFull = (params) => {
             case 'dropdown': //<<status
                 if (valuesOfOrigin != undefined) {
                     let selected = valuesOfOrigin[column['dataIndex']]
-                    console.log("Setting status", id, 'to', selected)
-                    getEById(id).val('in_progress')
+                    // console.log("Setting status", id, 'to', selected)
+                    getEById(id).val(selected)
                 }
                 break
             default:

@@ -2,8 +2,7 @@
 
 use App\Utils\System\Memory;
 use App\Utils\System\Timer;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,11 +69,22 @@ Route::group([
     Route::get('google', [App\Http\Controllers\Api\v1\Auth\SocialiteAuthController::class, 'redirectToGoogle']);
     Route::get('google/callback', [App\Http\Controllers\Api\v1\Auth\SocialiteAuthController::class, 'handleGoogleCallback']);
 });
+
+
+
 Route::group([
     'prefix' => 'v1/hr',
 ], function () {
-    Route::post('create_overtime_request_line', [App\Http\Controllers\Entities\Hr_overtime_request_line\EntityCRUDController::class, 'storeEmpty']);
-    Route::post('create_overtime_request_line/{id}', [App\Http\Controllers\Entities\Hr_overtime_request_line\EntityCRUDController::class, 'updateShort']);
     Route::get('overtime_request_line', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours']);
     Route::get('overtime_request_line2', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours2']);
+});
+Route::group([
+    'prefix' => 'v1/entity',
+], function () {
+    foreach (['Hr_overtime_request_line', 'Hse_corrective_action'] as $entityName) {
+        $path = "App\\Http\\Controllers\\Entities\\$entityName\\";
+        $tableName = Str::plural(lcfirst($entityName));
+        Route::post("{$tableName}_storeEmpty", [$path . EntityCRUDController::class, 'storeEmpty']);
+        Route::post("{$tableName}_updateShort/{id}", [$path . EntityCRUDController::class, 'updateShort']);
+    }
 });
