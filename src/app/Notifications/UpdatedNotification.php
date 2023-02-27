@@ -2,10 +2,13 @@
 
 namespace App\Notifications;
 
+use App\Http\Controllers\Workflow\LibApps;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 class UpdatedNotification extends Notification
 {
@@ -40,10 +43,24 @@ class UpdatedNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        // return (new MailMessage)
-        //     ->line('The introduction to the notification.')
-        //     ->action('Notification Action', url('/'))
-        //     ->line('Thank you for using our application!');
+        $data = $this->data['currentValue'];
+        $type = $data['entity_type'];
+        $id = $data['id'];
+        $typePlural = Str::plural($type);
+        $routeName = "{$typePlural}.edit";
+        $routeExits =  (Route::has($routeName));
+        $href =  $routeExits ? route($routeName, $id) : "#";
+        $nameUserCreated = $notifiable['name'];
+        $libApps = LibApps::getFor($type);
+        $nickNameEntity = strtoupper($libApps['nickname'] ?? $type);
+        $titleEntity = $libApps['title'];
+        $subjectMail = '[' . $nickNameEntity . '/' . $id . '] ' . $nameUserCreated . '-' . $titleEntity . ' ' . env('APP_NAME', 'TLC Modular APP');
+        return (new MailMessage)
+            ->subject($subjectMail)
+            ->greeting('Hello ' . $nameUserCreated)
+            ->line('This document has been created by ' . $nameUserCreated)
+            ->action('View Document', url($href))
+            ->line('Thank you for using our application!');
     }
 
     /**

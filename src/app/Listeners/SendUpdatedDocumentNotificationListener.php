@@ -55,7 +55,6 @@ class SendUpdatedDocumentNotificationListener
         }
         $this->checkAndSendNotification($assigneeNotification, $currentValue, 'assignee');
         $this->checkAndSendNotification($monitorNotification, $currentValue, 'monitor');
-        $this->checkAndSendNotification($createNotification, $currentValue, 'created');
     }
     private function checkAndSendNotification($array, $currentValue, $type)
     {
