@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Reports;
 
+use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Controller;
+use App\Models\Hr_overtime_request_line;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
@@ -18,6 +20,7 @@ use Illuminate\Support\Str;
 
 abstract class Report_ParentController extends Controller
 {
+    use TraitMenuTitle;
     abstract protected function getSqlStr($urlParams);
     abstract protected function getTableColumns($dataSource);
     abstract protected function getDataForModeControl($dataSource);
@@ -73,9 +76,15 @@ abstract class Report_ParentController extends Controller
     {
         return [];
     }
+    protected function getTable()
+    {
+        $currentModelName = strtolower(CurrentRoute::getCurrentController());
+        return $currentModelName;
+    }
 
     public function index(Request $request)
     {
+        // dd($request->route());
 
         $urlParams = $request->all();
         $currentRoute = CurrentRoute::getTypeController();
@@ -88,7 +97,8 @@ abstract class Report_ParentController extends Controller
         $columns = $this->getTableColumns($dataSource);
         $sheets = $this->getSheets($dataSource);
 
-        $typeReport = CurrentRoute::getCurrentController();
+        $typeReport = $this->getMenuTitle();
+
         return view('reports.' . $viewName, [
             'tableColumns' => $columns,
             'tableDataSource' => $dataSource,
