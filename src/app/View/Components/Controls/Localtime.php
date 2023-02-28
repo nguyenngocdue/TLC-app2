@@ -2,15 +2,13 @@
 
 namespace App\View\Components\Controls;
 
+use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Localtime extends Component
 {
-
-
     public function __construct(
-        private $timeControls,
         private $control,
         private $id,
         private $modelPath,
@@ -24,9 +22,8 @@ class Localtime extends Component
         $selected = $this->id;
         $colName = $this->colName;
         $control = $this->control;
-        $timeControls = $this->timeControls;
         $label = $this->label;
-
+        $timeControls = JsonControls::getDateTimeControls();
 
         // get database table name
         $insTable = new $this->modelPath;
@@ -47,16 +44,16 @@ class Localtime extends Component
         $time = $dateTimeInstance->format('H:i:s');
         $monthNumber = date("m", strtotime($month));
         $year =  $dateTimeInstance->format("Y");
-        $quater = ceil($monthNumber / 3);
+        $quarter = ceil($monthNumber / 3);
 
         $dataTime = [
-            $timeControls[0] => $time,
-            $timeControls[1] => $date,
-            $timeControls[2] => $monthNumber . '-' . $year,
-            $timeControls[3] => 'W' . $week . '-' . $year,
-            $timeControls[4] => 'Q' . $quater . '-' . $year,
-            $timeControls[5] => $year,
-            $timeControls[6] => $dateTime,
+            'picker_datetime' => $dateTime,
+            'picker_time' => $time,
+            'picker_date' => $date,
+            'picker_month' => $monthNumber . '-' . $year,
+            'picker_week' => 'W' . $week . '-' . $year,
+            'picker_quarter' => 'Q' . $quarter . '-' . $year,
+            'picker_year' => $year,
         ];
 
         return view('components.controls.localtime')->with(compact('day', 'dataTime', 'control', 'colName', 'label'));

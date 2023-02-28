@@ -7,8 +7,8 @@
 
 @php
 $editType = Str::plural($type);
-$labelValidation = "";
 $id = $action === "edit" ? $values->id : "";
+$status = $values->status ?? null;
 @endphp
 
 {{-- @dump($values) --}}
@@ -30,39 +30,12 @@ $id = $action === "edit" ? $values->id : "";
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
         <div class=" grid grid-cols-12 px-4">
             @method($action === "create" ? 'POST' : 'PUT')
+            
+            @foreach($props as $propKey => $prop)
             @php
-            $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quarter','picker_year','picker_datetime'];
-            $status = $values->status ?? null;
-            @endphp
-            @foreach($props as $key => $val)
-            @php
-            if ($action === "create" && $val['control'] === 'relationship_renderer') continue;
-
-            $label = $val['label'];
-            $columnName = $val['column_name'];
-            $columnType = $val['column_type'];
-            $align = $val['align'] ?? 'left';
-            $control = $val['control'];
-
-            $colSpan = $val['col_span'];
-            $value = $values->{$columnName} ?? '';
-            $title = $columnName." / ".$control ;
-            $col_span = $val['col_span'] === '' ? 12 : $val['col_span'] * 1;
-            $hiddenRow = $props[$key]['hidden_edit'] === 'true' ? "hidden":"";
-            $hiddenLabel = $props[$key]['hidden_label'] === 'true';
-            $readOnly = ($props[$key]['read_only'] ?? false) === 'true';
-
-            $defaultValue = $defaultValues[$key] ?? [];
-            $labelExtra = $defaultValue['label_extra'] ?? "";
-            $placeholder = $defaultValue['placeholder'] ?? "";
-            $controlExtra = $defaultValue['control_extra'] ?? "";
-
-            $realtime = $realtimes[$key] ?? [];
-            $realtimeType = $realtime["realtime_type"] ?? "";
-            $realtimeFn = $realtime["realtime_fn"] ?? "";
-
-            $isRequired = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
-            $iconJson = $columnType === 'json' ?'<i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
+            if ($action === "create" && $prop['control'] === 'relationship_renderer') continue;
+            $fields = App\Utils\Support\WorkflowFields::parse($propKey, $prop, $values, $defaultValues);
+            extract($fields);
             @endphp
             <div class='col-span-{{$col_span}} grid'>
                 <div class='grid grid-row-1'>
@@ -70,37 +43,37 @@ $id = $action === "edit" ? $values->id : "";
                         @if($columnType === 'static')
                         <div class='col-span-12 text-left'>
                             @switch($control)
-                            @case('z_page_break')
-                            <x-renderer.page-break />
-                            @case('z_h1')
-                            <x-renderer.heading title="{{$title}}" level=1 align="{{$align}}">{{$label}}</x-renderer.heading>
-                            @break
-                            @case('z_h2')
-                            <x-renderer.heading title="{{$title}}" level=2 align="{{$align}}">{{$label}}</x-renderer.heading>
-                            @break
-                            @case('z_h3')
-                            <x-renderer.heading title="{{$title}}" level=3 align="{{$align}}">{{$label}}</x-renderer.heading>
-                            @break
-                            @case('z_h4')
-                            <x-renderer.heading title="{{$title}}" level=4 align="{{$align}}">{{$label}}</x-renderer.heading>
-                            @break
-                            @case('z_h5')
-                            <x-renderer.heading title="{{$title}}" level=5 align="{{$align}}">{{$label}}</x-renderer.heading>
-                            @break
-                            @case('z_h6_base')
-                            <x-renderer.heading title="{{$title}}" align="{{$align}}">{{$label}}</x-renderer.heading>
-                            @break
-                            @case('z_divider')
-                            <x-renderer.divider />
-                            @break
+                                @case('z_page_break')
+                                <x-renderer.page-break />
+                                @case('z_h1')
+                                <x-renderer.heading title="{{$title}}" level=1 align="{{$align}}">{{$label}}</x-renderer.heading>
+                                @break
+                                @case('z_h2')
+                                <x-renderer.heading title="{{$title}}" level=2 align="{{$align}}">{{$label}}</x-renderer.heading>
+                                @break
+                                @case('z_h3')
+                                <x-renderer.heading title="{{$title}}" level=3 align="{{$align}}">{{$label}}</x-renderer.heading>
+                                @break
+                                @case('z_h4')
+                                <x-renderer.heading title="{{$title}}" level=4 align="{{$align}}">{{$label}}</x-renderer.heading>
+                                @break
+                                @case('z_h5')
+                                <x-renderer.heading title="{{$title}}" level=5 align="{{$align}}">{{$label}}</x-renderer.heading>
+                                @break
+                                @case('z_h6_base')
+                                <x-renderer.heading title="{{$title}}" align="{{$align}}">{{$label}}</x-renderer.heading>
+                                @break
+                                @case('z_divider')
+                                <x-renderer.divider />
+                                @break
 
-                            @default
-                            <x-feedback.alert type="warning" title="{{$title}}" message="The control [{{$control}}] is not available" />
-                            @break
+                                @default
+                                <x-feedback.alert type="warning" title="{{$title}}" message="The control [{{$control}}] is not available" />
+                                @break
                             @endswitch
                         </div>
                         @else
-                        <div class='col-span-{{24/$col_span}} col-start-1 {{$val['new_line'] === 'true' ? "col-span-12 text-left" : "text-right" }} '>
+                        <div class='col-start-1 {{$classColSpanLabel}}  {{$prop['new_line'] === 'true' ? "text-left" : "text-right" }} '>
                             @if(!$hiddenLabel)
                             <label class='text-gray-700 dark:text-gray-300  px-3 block text-base' title='{{$title}}'>
                                 {{$label}}
@@ -109,113 +82,107 @@ $id = $action === "edit" ? $values->id : "";
                                 @if(!$hiddenLabel)
                                 <br />
                                 @endif
-                                <span class="flex justify-end">
-                                    {!!$iconJson!!}
-                                </span>
+                                <span class="flex justify-end">{!!$iconJson!!}</span>
                                 @if(!$hiddenLabel)
                                 <i>{{$labelExtra}}</i>
                             </label>
                             @endif
                         </div>
-                        <div class='col-start-{{24/$col_span+1}} {{$val['new_line'] === 'true' ? "col-span-12" : "col-span-".(12 - 24/$col_span)}} py-2 text-left'>
+                        <div class="{{$classColStart}} {{$classColSpanControl}} py-2 text-left">
                             @if (is_null($control))
                             <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                             @endif
 
                             {{-- Invisible anchor for scrolling when users click on validation fail message --}}
-                            <strong class="scroll-mt-20 snap-start" id="scroll-{{$columnName}}">
-                                {{-- #{{$columnName}} --}}
-                            </strong>
+                            <strong class="scroll-mt-20 snap-start" id="scroll-{{$columnName}}"></strong>
+                            
                             @switch ($control)
-                            @case('picker_time')
-                            <x-controls.text name={{$columnName}} value={{$value}} placeholder="HH:MM" icon="fa-duotone fa-clock" />
-                            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                            {{-- <x-controls.time-picker2 :name="$columnName" :value="$value"/> --}}
-                            {{-- <x-controls.date-time name={{$columnName}} value={{$value}} control="{{$control}}" /> --}}
-                            @break
-                            @case('picker_datetime')
-                            <x-controls.text name={{$columnName}} value={{$value}} placeholder="DD/MM/YYYY HH:MM" icon="fa-solid fa-calendar-day" />
-                            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                            @break
-                            @case('picker_date')
-                            @case('picker_week')
-                            @case('picker_month')
-                            @case('picker_quarter')
-                            @case('picker_year')
-                            {{-- <x-controls.date-time name={{$columnName}} value={{$value}} control="{{$control}}" /> --}}
-                            <x-controls.date-picker3 name={{$columnName}} value={{$value}} dateTimeType="{{$control}}"/>
-                            <x-controls.localtime id={{$id}} control={{$control}} colName={{$columnName}} modelPath={{$modelPath}} :timeControls="$timeControls" label={{$label}} />
-                            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                            @break
-                            @case('id')
-                            <x-controls.id name={{$columnName}} value="{{$action === 'edit' ? $value : 'to be generated'}}" />
-                            @break
-                            @case('hyperlink')
-                            @case('text')
-                            @case('thumbnail')
-                            <x-controls.text name={{$columnName}} value={{$value}} placeholder="{{$placeholder}}" />
-                            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                            @break
-                            @case('number')
-                            <x-controls.number name={{$columnName}} value={{$value}} />
-                            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                            @break
-                            @case('textarea')
-                            <x-controls.textarea name={{$columnName}} :value="$value" colType={{$columnType}} placeholder="{{$placeholder}}"/>
-                            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                            @break
-                            @case('toggle')
-                            <x-controls.toggle name={{$columnName}} value={{$value}} />
-                            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                            @break
-                            @case('status')
-                            <x-controls.control-status value={{$value}} name={{$columnName}} modelPath={{$modelPath}} />
-                            @break
+                                @case('id')
+                                <x-controls.id name={{$columnName}} value="{{$action === 'edit' ? $value : 'to be generated'}}" />
+                                @break
+                                @case('hyperlink')
+                                @case('text')
+                                @case('thumbnail')
+                                <x-controls.text name={{$columnName}} value={{$value}} placeholder="{{$placeholder}}" />
+                                <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                                @break
+                                @case('number')
+                                <x-controls.number name={{$columnName}} value={{$value}} />
+                                <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                                @break
+                                @case('textarea')
+                                <x-controls.textarea name={{$columnName}} :value="$value" colType={{$columnType}} placeholder="{{$placeholder}}"/>
+                                <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                                @break
+                                @case('toggle')
+                                <x-controls.toggle name={{$columnName}} value={{$value}} />
+                                <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                                @break
+                                @case('status')
+                                <x-controls.control-status value={{$value}} name={{$columnName}} modelPath={{$modelPath}} />
+                                @break
 
-                            @case ('dropdown')
-                            <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
-                            @break
-                            @case ('radio')
-                            <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
-                            @break
-                            @case ('dropdown_multi')
-                            <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
-                            @break
-                            @case('checkbox')
-                            <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}}/>
-                            @break
+                                @case ('dropdown')
+                                <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
+                                @break
+                                @case ('radio')
+                                <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
+                                @break
+                                @case ('dropdown_multi')
+                                <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
+                                @break
+                                @case('checkbox')
+                                <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}}/>
+                                @break
 
-                            @case('attachment')
-                            <x-renderer.attachment2 name={{$columnName}} value={{$value}} />
+                                @case('picker_time')
+                                <x-controls.text name={{$columnName}} value={{$value}} placeholder="HH:MM" icon="fa-duotone fa-clock" />
+                                <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                                @break
+                                @case('picker_datetime')
+                                <x-controls.text name={{$columnName}} value={{$value}} placeholder="DD/MM/YYYY HH:MM" icon="fa-solid fa-calendar-day" />
+                                <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                                @break
+                                @case('picker_date')
+                                @case('picker_week')
+                                @case('picker_month')
+                                @case('picker_quarter')
+                                @case('picker_year')
+                                <x-controls.date-picker3 name={{$columnName}} value={{$value}} dateTimeType="{{$control}}"/>
+                                <x-controls.localtime id={{$id}} control={{$control}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
+                                <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                                @break
 
-                            @break
-                            @case('comment')
-                            <x-controls.comment-group id={{$id}} type={{$type}} colName={{$columnName}} label={{$label}} colSpan={{$col_span}} />
-                            @break
+                                @case('attachment')
+                                <x-renderer.attachment2 name={{$columnName}} value={{$value}} />
+                                @break
+                                @case('comment')
+                                <x-controls.comment-group id={{$id}} type={{$type}} colName={{$columnName}} label={{$label}} colSpan={{$col_span}} />
+                                @break
 
-                            @case('relationship_renderer')
-                            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                            <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
-                            @break
+                                @case('relationship_renderer')
+                                <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                                <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
+                                @break
 
-                            @case('parent_type')
-                            <x-renderer.parent_type type={{$type}} name={{$columnName}} selected="{{$value}}"/>
-                            @break
-                            @case('parent_id')
-                            <x-renderer.parent_id type={{$type}} name={{$columnName}} selected="{{$value}}"/>
-                            @break
+                                @case('parent_type')
+                                <x-renderer.parent_type type={{$type}} name={{$columnName}} selected="{{$value}}"/>
+                                @break
+                                @case('parent_id')
+                                <x-renderer.parent_id type={{$type}} name={{$columnName}} selected="{{$value}}"/>
+                                @break
 
-                            @case('parent_link')
-                            <x-feedback.alert type="warning" title="Warning" message="{{$control}} suppose to show in View All screen only, please do not show in Edit screen." />
-                            @break
+                                @case('parent_link')
+                                <x-feedback.alert type="warning" title="Warning" message="{{$control}} suppose to show in View All screen only, please do not show in Edit screen." />
+                                @break
 
-                            @case('realtime')
-                            <x-renderer.realtime name={{$columnName}} realtimeType={{$realtimeType}} realtimeFn={{$realtimeFn}} status={{$status}} value={{$value}} :item="$item"/>
-                            @break
+                                @case('realtime')
+                                <x-renderer.realtime name={{$columnName}} realtimeType={{$realtimeType}} realtimeFn={{$realtimeFn}} status={{$status}} value={{$value}} :item="$item"/>
+                                @break
 
-                            @default
-                            <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />
-                            @break
+                                @default
+                                <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />
+                                @break
                             @endswitch
                             {{$controlExtra}}
                         </div>
