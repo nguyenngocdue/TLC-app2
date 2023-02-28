@@ -146,7 +146,8 @@ class SuperProps
     private static function readSettings($type)
     {
         $result = [];
-        static::attachJson("definitions", $result, static::makeCheckbox(Definitions::getAllOf($type)));
+        $result["definitions"] = static::makeCheckbox(Definitions::getAllOf($type));
+        // static::attachJson("definitions", $result, static::makeCheckbox(Definitions::getAllOf($type)));
         return $result;
     }
 
