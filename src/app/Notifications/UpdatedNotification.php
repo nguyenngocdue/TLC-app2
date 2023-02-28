@@ -3,6 +3,8 @@
 namespace App\Notifications;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Notifications\Traits\TraitSupportNotification;
+use App\Utils\Support\Json\Definitions;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -12,6 +14,7 @@ use Illuminate\Support\Str;
 
 class UpdatedNotification extends Notification
 {
+    use TraitSupportNotification;
     use Queueable;
     public $data;
     /**
@@ -32,7 +35,16 @@ class UpdatedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        $data = $this->data['currentValue'];
+        $type = $data['entity_type'];
+        $status = $data['status'];
+        $definitions = Definitions::getAllOf($type)['new'];
+        array_shift($definitions);
+        $arrayCheck = array_keys(array_filter($definitions, fn ($item) => $item));
+        if (sizeof($arrayCheck) == 0 || in_array($status, $arrayCheck)) {
+            return [];
+        }
+        return ['database', 'mail'];
     }
 
     /**
@@ -43,24 +55,18 @@ class UpdatedNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $data = $this->data['currentValue'];
-        $type = $data['entity_type'];
-        $id = $data['id'];
-        $typePlural = Str::plural($type);
-        $routeName = "{$typePlural}.edit";
-        $routeExits =  (Route::has($routeName));
-        $href =  $routeExits ? route($routeName, $id) : "#";
-        $nameUserCreated = $notifiable['name'];
-        $libApps = LibApps::getFor($type);
-        $nickNameEntity = strtoupper($libApps['nickname'] ?? $type);
-        $titleEntity = $libApps['title'];
-        $subjectMail = '[' . $nickNameEntity . '/' . $id . '] ' . $nameUserCreated . '-' . $titleEntity . ' ' . env('APP_NAME', 'TLC Modular APP');
-        return (new MailMessage)
-            ->subject($subjectMail)
-            ->greeting('Hello ' . $nameUserCreated)
-            ->line('This document has been created by ' . $nameUserCreated)
-            ->action('View Document', url($href))
-            ->line('Thank you for using our application!');
+        switch ($this->data['type']) {
+            case 'assignee':
+                // return $this->sendMailAssignee($this->data, $notifiable);
+                break;
+            case 'monitor':
+                return $this->sendMailMonitors($this->data, $notifiable);
+                break;
+
+            default:
+                # code...
+                break;
+        }
     }
 
     /**

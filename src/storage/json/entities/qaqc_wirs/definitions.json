@@ -1,0 +1,37 @@
+{
+    "new": {
+        "name": "new",
+        "new": "true",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "read-only": {
+        "name": "read-only",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "hide-save-btn": {
+        "name": "hide-save-btn",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "closed": {
+        "name": "closed",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "post_closed": {
+        "name": "post_closed",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    }
+}

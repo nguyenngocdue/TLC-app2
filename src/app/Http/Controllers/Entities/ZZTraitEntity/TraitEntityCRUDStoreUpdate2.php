@@ -273,6 +273,7 @@ trait TraitEntityCRUDStoreUpdate2
 		//Fire the event "Created New Document"
 		//Add Id into array fields
 		$fields = $this->addEntityType($fields, 'id', $theRow->id);
+		$fields = $this->addEntityType($fields, 'status', $newStatus);
 		event(new CreateNewDocumentEvent($currentValue = $this->addEntityType($fields, 'entity_type', $this->type)));
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
@@ -306,6 +307,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 			$newStatus = $request['status'];
 			$fields = $this->handleFields($request, __FUNCTION__);
+			$fields = $this->addEntityType($fields, 'status', $newStatus);
 			$theRow = $this->data::find($id);
 			$previousValue = [];
 			foreach ($fields as $key => $value) {

@@ -30,18 +30,10 @@ class SendCreateNewDocumentNotificationListener
      */
     public function handle(CreateNewDocumentEvent $event)
     {
-        $assigneeNotification = [];
-        $monitorNotification = [];
         $createNotification = [];
         $currentValue = $event->{'currentValue'};
         foreach ($currentValue as $key => $value) {
             switch ($key) {
-                case in_array($key, Constant::LIST_ASSIGNEE):
-                    $assigneeNotification[$key] = $value;
-                    break;
-                case Constant::GET_MONITOR:
-                    $monitorNotification[$key] = $value;
-                    break;
                 case Constant::OWNER_ID:
                     $createNotification[$key] = $value;
                     break;
@@ -50,21 +42,10 @@ class SendCreateNewDocumentNotificationListener
             }
         }
         $this->checkAndSendNotification($createNotification, $currentValue, 'created');
-        $this->checkAndSendNotification($assigneeNotification, $currentValue, 'assignee');
-        $this->checkAndSendNotification($monitorNotification, $currentValue, 'monitor');
     }
     private function checkAndSendNotification($array, $currentValue, $type)
     {
-        foreach ($array as $item) {
-            if (is_array($item)) {
-                foreach ($item as  $value) {
-                    $userSchema = User::find($value);
-                    Notification::send($userSchema, new CreateNewNotification(['type' => $type, 'currentValue' => $currentValue]));
-                }
-            } else {
-                $userSchema = User::find($item);
-                Notification::send($userSchema, new CreateNewNotification(['type' => $type, 'currentValue' => $currentValue]));
-            }
-        }
+        $userSchema = User::find(array_shift($array));
+        Notification::send($userSchema, new CreateNewNotification(['type' => $type, 'currentValue' => $currentValue]));
     }
 }
