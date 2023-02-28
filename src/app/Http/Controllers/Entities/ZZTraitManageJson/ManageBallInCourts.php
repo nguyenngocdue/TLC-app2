@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\Json\BallInCourts;
 use App\Utils\Support\Json\Transitions;
+use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Log;
 
 class ManageBallInCourts extends Manage_Parent
@@ -17,6 +18,7 @@ class ManageBallInCourts extends Manage_Parent
     protected function getColumns()
     {
         $allStatuses = LibStatuses::getFor($this->type);
+        $allAssignees = JsonControls::getAssignees();
         $firstColumns = [
             [
                 "dataIndex" => 'name',
@@ -37,7 +39,7 @@ class ManageBallInCourts extends Manage_Parent
                 "dataIndex" => 'ball-in-court',
                 'renderer' => 'dropdown',
                 'editable' => true,
-                "cbbDataSource" => ['', 'creator', 'assignee_1', 'assignee_2', 'assignee_3', 'assignee_4', 'assignee_5', 'assignee_6', 'assignee_7', 'assignee_8', 'assignee_9',],
+                "cbbDataSource" => ['', 'creator', ...$allAssignees],
                 'width' => 10,
             ],
         ];

@@ -70,4 +70,13 @@ class JsonControls
     {
         return self::getAll()['qr_code_apps'];
     }
+
+    public static function getAssignees()
+    {
+        return self::getAll()['assignees'];
+    }
+    public static function getMonitors()
+    {
+        return self::getAll()['monitors'];
+    }
 }

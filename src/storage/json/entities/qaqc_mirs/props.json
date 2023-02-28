@@ -227,7 +227,7 @@
         "name": "_attachment_mir_material_test_report",
         "column_name": "attachment_mir_material_test_report",
         "column_type": "eloquent_prop",
-p        "label": "Material Test Reports",
+        "label": "Material Test Reports",
         "control": "attachment",
         "align": "",
         "col_span": "12",

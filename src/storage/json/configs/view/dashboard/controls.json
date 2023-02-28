@@ -55,7 +55,11 @@
         "parent_link",
         "thumbnails"
     ],
-    "renderer_edit": ["", "many_icons", "many_lines"],
+    "renderer_edit": [
+        "",
+        "many_icons",
+        "many_lines"
+    ],
     "manage_prop_eloquents": [
         "belongsToMany",
         "hasMany",
@@ -76,8 +80,12 @@
         "belongsTo",
         "morphToMany"
     ],
-    "manage_prop_oracies": ["getCheckedByField"],
-    "view_all_oracies": ["getCheckedByField"],
+    "manage_prop_oracies": [
+        "getCheckedByField"
+    ],
+    "view_all_oracies": [
+        "getCheckedByField"
+    ],
     "packages": [
         "",
         "hr_&_admin",
@@ -114,5 +122,32 @@
         "system_permission",
         "dashboard"
     ],
-    "qr_code_apps": ["pj_modules", "pj_shipments", "pj_units"]
+    "qr_code_apps": [
+        "pj_modules",
+        "pj_shipments",
+        "pj_units"
+    ],
+    "assignees": [
+        "assignee_1",
+        "assignee_2",
+        "assignee_3",
+        "assignee_4",
+        "assignee_5",
+        "assignee_6",
+        "assignee_7",
+        "assignee_8",
+        "assignee_9"
+    ],
+    "monitors": [
+        "getMonitors",
+        "getMonitors1",
+        "getMonitors2",
+        "getMonitors3",
+        "getMonitors4",
+        "getMonitors5",
+        "getMonitors6",
+        "getMonitors7",
+        "getMonitors8",
+        "getMonitors9"
+    ]
 }
