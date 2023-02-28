@@ -1,18 +1,22 @@
 {
     "new": {
         "name": "new",
-        "ball-in-court": "creator"
+        "ball-in-court-assignee": "creator",
+        "ball-in-court-monitors": "getMonitors()"
     },
     "assigned": {
         "name": "assigned",
-        "ball-in-court": "assignee_1"
+        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-monitors": "getMonitors1()"
     },
     "rejected": {
         "name": "rejected",
-        "ball-in-court": "creator"
+        "ball-in-court-assignee": "creator",
+        "ball-in-court-monitors": ""
     },
     "closed": {
         "name": "closed",
-        "ball-in-court": "assignee_1"
+        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-monitors": ""
     }
 }

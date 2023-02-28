@@ -3,6 +3,8 @@
 namespace App\Notifications;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Notifications\Traits\TraitSupportNotification;
+use App\Utils\Support\Json\Definitions;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -14,6 +16,7 @@ use function PHPSTORM_META\type;
 
 class CreateNewNotification extends Notification
 {
+    use TraitSupportNotification;
     use Queueable;
     public $data;
     /**
@@ -34,10 +37,7 @@ class CreateNewNotification extends Notification
      */
     public function via($notifiable)
     {
-        if ($this->data['type'] == 'created') {
-            return ['database', 'mail'];
-        }
-        return ['database'];
+        return ['database', 'mail'];
     }
 
     /**
@@ -48,24 +48,7 @@ class CreateNewNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $data = $this->data['currentValue'];
-        $type = $data['entity_type'];
-        $id = $data['id'];
-        $typePlural = Str::plural($type);
-        $routeName = "{$typePlural}.edit";
-        $routeExits =  (Route::has($routeName));
-        $href =  $routeExits ? route($routeName, $id) : "#";
-        $nameUserCreated = $notifiable['name'];
-        $libApps = LibApps::getFor($type);
-        $nickNameEntity = strtoupper($libApps['nickname'] ?? $type);
-        $titleEntity = $libApps['title'];
-        $subjectMail = '[' . $nickNameEntity . '/' . $id . '] ' . $nameUserCreated . ' - ' . $titleEntity . ' - ' . 'TLC Modular APP';
-        return (new MailMessage)
-            ->subject($subjectMail)
-            ->greeting('Dear ' . $nameUserCreated . ',')
-            ->line('This document has been created by ' . $nameUserCreated . '.')
-            ->action('View Document', url($href))
-            ->line('Thank you for using our application!');
+        return $this->sendMailCreate($this->data, $notifiable);
     }
 
     /**
