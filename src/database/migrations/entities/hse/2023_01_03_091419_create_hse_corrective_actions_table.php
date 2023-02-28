@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('slug')->nullable(); //->unique(); ??
             $table->unsignedBigInteger('priority_id')->nullable();
-            $table->unsignedBigInteger('hse_incident_report_id')->nullable();
+            $table->unsignedBigInteger('hse_incident_report_id');
             $table->unsignedBigInteger('work_area_id')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('unsafe_action_type_id')->nullable();

@@ -437,7 +437,7 @@ const documentReadyDropdown2 = ({ id, selectedJson, table }) => {
     //     }
     // }
     // console.log(id, listenersOfDropdown2, attr_to_compare, dataSourceDropdown)
-    console.log(id, attr_to_compare, dataSourceDropdown, selectedJson)
+    // console.log(id, attr_to_compare, dataSourceDropdown, selectedJson)
     reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedJson)
 
     $(document).ready(() => {

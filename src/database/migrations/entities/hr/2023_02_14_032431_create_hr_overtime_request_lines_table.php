@@ -17,17 +17,17 @@ return new class extends Migration
         Schema::create('hr_overtime_request_lines', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("hr_overtime_request_id");
-            $table->unsignedBigInteger("user_id");
-            $table->string("employeeid");
-            $table->string("position_rendered");
+            $table->unsignedBigInteger("user_id")->nullable();
+            $table->string("employeeid")->nullable();
+            $table->string("position_rendered")->nullable();
             $table->date("ot_date")->nullable();
-            $table->time("from_time");
-            $table->time("to_time");
-            $table->double("break_time");
-            $table->float("total_time");
+            $table->time("from_time")->nullable();
+            $table->time("to_time")->nullable();
+            $table->double("break_time")->nullable();
+            $table->float("total_time")->nullable();
             $table->float("rt_remaining_hours")->nullable();
-            $table->unsignedBigInteger("sub_project_id");
-            $table->unsignedBigInteger("work_mode_id");
+            $table->unsignedBigInteger("sub_project_id")->nullable();
+            $table->unsignedBigInteger("work_mode_id")->nullable();
             $table->text("remark")->nullable();
             $table->unsignedInteger('order_no')->nullable();
             $table->unsignedBigInteger('owner_id');
