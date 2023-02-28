@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Reports\Registers;
 
-use App\Helpers\Helper;
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\TraitReport;
 use App\Models\Workplace;
-use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
 class Hr_overtime_request_line extends Report_ParentController
 {
+    use TraitReport;
     public function getSqlStr($urlParams)
     {
         // dd($urlParams);
@@ -134,11 +134,10 @@ class Hr_overtime_request_line extends Report_ParentController
     }
     protected function enrichDataSource($dataSource, $urlParams)
     {
-        $isAllNUll = count(array_filter($urlParams, fn ($value) => !is_null($value))) <= 0;
-        if ($isAllNUll) {
+        $isNullParams = $this->isNullUrlParams($urlParams);
+        if ($isNullParams) {
             $dataSource->setCollection(collect([]));
             return $dataSource;
-            // dd($dataSource);
         };
 
         if (!count(array_values($urlParams))) return [];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\TraitReport;
 use App\Models\Attachment;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_tmpl;
@@ -14,13 +15,14 @@ use App\Utils\Support\Report;
 
 class Qaqc_insp_chklst extends Report_ParentController
 {
-    protected $pagingSize = 10000;
-    protected $viewName = 'document-qaqc-insp-chklst';
+	use TraitReport;
+	protected $pagingSize = 10000;
+	protected $viewName = 'document-qaqc-insp-chklst';
 
-    public function getSqlStr($urlParams)
-    {
-        $isCheck = isset($urlParams['prod_order_id']) && isset($urlParams['sub_project_id']);
-        $sql =  " SELECT
+	public function getSqlStr($urlParams)
+	{
+		$isCheck = isset($urlParams['prod_order_id']) && isset($urlParams['sub_project_id']);
+		$sql =  " SELECT
                         tp.id AS template
                         ,l.value AS sign
                         ,l.value_comment AS value_comment
@@ -39,22 +41,23 @@ class Qaqc_insp_chklst extends Report_ParentController
                         ,cv.name AS control_value_name
                         ,g.description AS group_description
                         
-                        ,divide_control.c1
-                        ,divide_control.c2
-                        ,divide_control.c3
-                        ,divide_control.c4";
-        if ($isCheck) $sql .= "\n ,po.id";
-        if ($isCheck) $sql .= " \n ,sp.name AS project_name";
-        $sql .= "\n FROM qaqc_insp_chklst_runs r
+                        ,c1
+                        ,c2
+                        ,c3
+                        ,c4";
+		if ($isCheck) $sql .= "\n ,po.id";
+		if ($isCheck) $sql .= " \n ,sp.name AS project_name";
+		$sql .= "\n FROM qaqc_insp_chklst_runs r
                     JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id
                     JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
-                    JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id
-                    JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
+                    JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id";
+		if (isset($urlParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND tp.id = '{{qaqc_insp_tmpl_id}}'";
+		$sql .= "\n JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
                     JOIN control_types ct ON ct.id = l.control_type_id";
-        if ($isCheck) $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
-        if ($isCheck) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id";
+		if ($isCheck) $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
+		if ($isCheck) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id";
 
-        $sql .= "\nLEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
+		$sql .= "\nLEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
                 JOIN qaqc_insp_groups g ON g.id = l.qaqc_insp_group_id 
                 LEFT JOIN (
                     SELECT id as control_group_id
@@ -66,117 +69,140 @@ class Qaqc_insp_chklst extends Report_ParentController
                             )  AS divide_control ON l.qaqc_insp_control_group_id = divide_control.control_group_id
             
                 WHERE 1=1";
-        if ($isCheck) $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
-        if (isset($urlParams['chklsts'])) $sql .= " \n AND csh.id = '{{chklsts}}' \n";
-        $sql .= "\n ORDER BY line_name,  run_updated DESC ";
-        return $sql;
-    }
+		if ($isCheck) $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
+		if (isset($urlParams['chklsts'])) $sql .= " \n AND csh.id = '{{chklsts}}' \n";
+		$sql .= "\n ORDER BY line_name,  run_updated DESC ";
+		return $sql;
+	}
 
-    public function getTableColumns($dataSource = [])
-    {
-        return [
-            [
-                "title" => 'Description',
-                "dataIndex" => "line_description",
-                'width' => "10"
-            ],
-            [
-                "dataIndex" => "response_type",
-                "align" => "center",
-                'width' => "500"
-            ],
-        ];
-    }
+	public function getTableColumns($dataSource = [])
+	{
+		return [
+			[
+				"title" => 'Description',
+				"dataIndex" => "line_description",
+				'width' => "10"
+			],
+			[
+				"dataIndex" => "response_type",
+				"align" => "center",
+				'width' => "500"
+			],
+		];
+	}
 
-    protected function enrichDataSource($dataSource, $urlParams)
-    {
-        // dd(implode($urlParams));
-        if (!count(array_values($urlParams))) return [];
-        $dataArray = $dataSource->items();
-        $lines =  [];
-        foreach ($dataArray as $item) {
-            if (isset($item->line_id)) {
-                $lines[$item->line_id] = (array)$item;
-            }
-        }
-        $descIdLines = [];
-        array_walk($lines, function ($value, $key) use (&$descIdLines) {
-            $descIdLines[$value['line_description']][] = $key;
-        });
-        // Reduce the number of lines from URL request 
-        if (isset($urlParams['filter_run']) && !$urlParams['filter_run']) {
-            $descIdLines = array_map(fn ($item) => array_splice($item, 0, 1), $descIdLines);
-        }
+	protected function enrichDataSource($dataSource, $urlParams)
+	{
+		$isNullParams = $this->isNullUrlParams($urlParams);
+		if ($isNullParams) {
+			$dataSource->setCollection(collect([]));
+			return $dataSource;
+		};
 
-        $arrayHtml = [];
-        foreach ($descIdLines as $ids) {
-            $str = '';
-            foreach ($ids as $id) {
-                $item = $lines[$id];
-                // dd($item);
-                if (!is_null($item['c1'])) {
-                    $str .= "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createLongStrHTML($item) . "</tr>";
-                    $str .= $this->createStrImage($item);
-                    $str .=  $this->createStrComment($item);
-                } else {
-                    // $str .=  $item['sign'];
-                    $str .=  1000000000000000000;
-                }
-                $arrayHtml[$id] = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str . "</tbody>" . "</table>";
-            }
-        }
-        // dd($arrayHtml);
-        $arrayMaxRun = [];
-        foreach ($lines as $id => $value) {
-            if (isset($arrayHtml[$id])) {
-                $value['response_type'] = $arrayHtml[$id];
-                $arrayMaxRun[$id] = $value;
-            }
-        }
-        $sheetGroup = Report::groupArrayByKey($arrayMaxRun, 'sheet_id');
-        // dd($sheetGroup);
+		$dataArray = $dataSource->items();
+		$lines =  [];
+		foreach ($dataArray as $item) {
+			if (isset($item->line_id)) {
+				$lines[$item->line_id] = (array)$item;
+			}
+		}
+		$descIdLines = [];
+		array_walk($lines, function ($value, $key) use (&$descIdLines) {
+			$descIdLines[$value['line_description']][] = $key;
+		});
+		// Reduce the number of lines from URL request 
+		if (isset($urlParams['filter_run']) && !$urlParams['filter_run']) {
+			$descIdLines = array_map(fn ($item) => array_splice($item, 0, 1), $descIdLines);
+		}
 
-        $sheetId_Desc = [];
-        foreach ($sheetGroup as $sheetId => $value) {
-            $groupDesc = Report::groupArrayByKey($value, 'line_description');
-            foreach ($groupDesc as $key => $value) {
-                $groupDesc[$key] = array_pop($value);
-            }
-            $sheetId_Desc[$sheetId] = $groupDesc;
-        }
-        $data = [];
-        foreach ($sheetId_Desc as $sheetId => $values) {
-            $data[$sheetId] = array_values($values);
-        }
-        ksort($data);
-        $dataSource->setCollection(collect(array_values($data)));
 
-        // dump("123", $dataSource);
-        return $dataSource;
-    }
 
-    protected function getAttachment($object_type, $object_id)
-    {
-        if (!$object_type && !$object_id) return [];
-        $uid = CurrentUser::get()->id;
-        $query = Attachment::whereIn('object_type', [$object_type])
-            ->where('owner_id', $uid)
-            ->where('object_id', $object_id)
-            ->get();
-        return $query->ToArray();
-    }
+		// Reduce the number of lines from URL request
+		// if (isset($urlParams['filter_run']) && !$urlParams['filter_run']) {
+		// 	array_walk($descIdLines, function ($value, $key) use ($lines, &$descIdLines) {
+		// 		$maxRunId = array_splice($value, 0, 1);
+		// 		$line = $lines[$maxRunId[0]];
+		// 		if (!is_null($line['c1'])) {
+		// 			// dd("123", $descIdLines[$key], $maxRunId);
+		// 			$descIdLines[$key] = $maxRunId;
+		// 		} else {
+		// 			// dump($maxRunId);
+		// 			$descIdLines[$key] = $value;
+		// 		}
+		// 	});
+		// }
 
-    protected function createStrHtmlImage($item)
-    {
-        $object_type = "App\Models\qaqc_insp_chklst_line";
-        $attachment = $this->getAttachment($object_type, $item['line_id']);
-        $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
-        $strCenter = "";
-        foreach ($attachment as  $att) {
-            $url_thumbnail = $path . $att["url_thumbnail"];
-            $url_media = $path . $att["url_media"];
-            $fileName = $att["filename"];
-            $strCenter .= "
+		// dd($descIdLines);
+
+		$arrayHtml = [];
+		foreach ($descIdLines as $ids) {
+			$str = '';
+			foreach ($ids as $id) {
+				$item = $lines[$id];
+				// dd($item['c1']);
+				if (!is_null($item['c1'])) {
+					$str .= "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createLongStrHTML($item) . "</tr>";
+					$str .= $this->createStrImage($item);
+					$str .=  $this->createStrComment($item);
+					$arrayHtml[$id] = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str . "</tbody>" . "</table>";
+				} else {
+					// $str .=  $item['sign'];
+					$arrayHtml[$id] = "<h2>CSV</h2>";
+				}
+			}
+		}
+		// dd($arrayHtml);
+		$arrayMaxRun = [];
+		foreach ($lines as $id => $value) {
+			if (isset($arrayHtml[$id])) {
+				$value['response_type'] = $arrayHtml[$id];
+				$arrayMaxRun[$id] = $value;
+			}
+		}
+		$sheetGroup = Report::groupArrayByKey($arrayMaxRun, 'sheet_id');
+		// dd($sheetGroup);
+
+		$sheetId_Desc = [];
+		foreach ($sheetGroup as $sheetId => $value) {
+			$groupDesc = Report::groupArrayByKey($value, 'line_description');
+			foreach ($groupDesc as $key => $value) {
+				$groupDesc[$key] = array_pop($value);
+			}
+			$sheetId_Desc[$sheetId] = $groupDesc;
+		}
+		$data = [];
+		foreach ($sheetId_Desc as $sheetId => $values) {
+			$data[$sheetId] = array_values($values);
+		}
+		ksort($data);
+		$dataSource->setCollection(collect(array_values($data)));
+
+		// dd("123", $dataSource);
+		return $dataSource;
+	}
+
+	protected function getAttachment($object_type, $object_id)
+	{
+		if (!$object_type && !$object_id) return [];
+		$uid = CurrentUser::get()->id;
+		$query = Attachment::whereIn('object_type', [$object_type])
+			->where('owner_id', $uid)
+			->where('object_id', $object_id)
+			->get();
+		return $query->ToArray();
+	}
+
+	protected function createStrHtmlImage($item)
+	{
+		$object_type = "App\Models\qaqc_insp_chklst_line";
+		$attachment = $this->getAttachment($object_type, $item['line_id']);
+		$path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+		$strCenter = "";
+		foreach ($attachment as  $att) {
+			$url_thumbnail = $path . $att["url_thumbnail"];
+			$url_media = $path . $att["url_media"];
+			$fileName = $att["filename"];
+			$strCenter .= "
                             <div class='border-gray-300 relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit'>
                                 <img class='' src='$url_thumbnail' alt='$fileName' />
                                 <div class='invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]'>
@@ -185,76 +211,76 @@ class Qaqc_insp_chklst extends Report_ParentController
                                         </a>
                                 </div>
                             </div>";
-        };
-        $strHead = "<div class='flex flex-col container mx-auto w-full' >
+		};
+		$strHead = "<div class='flex flex-col container mx-auto w-full' >
                     <div class='grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 '>";
-        $strTail = "</div></div>";
-        return $strHead . $strCenter . $strTail;
-    }
+		$strTail = "</div></div>";
+		return $strHead . $strCenter . $strTail;
+	}
 
-    private function createLongStrHTML($item)
-    {
-        $circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
-        $checkedIcon = "<i class='fa-solid fa-circle-check px-2'></i>";
-        $arrayControl = ['c1' => $item['c1'], 'c2' => $item['c2'], 'c3' => $item['c3'], 'c4' => $item['c4']];
-        $str = "";
-        foreach ($arrayControl as $col => $value) {
-            if ($item['control_value_name'] === $item[$col]) {
-                $str .= '<td class="border" style="width:50px">' . $checkedIcon . $value . '</td>';
-            } else {
-                $str .=  '<td class="border" style="width:50px">' . $circleIcon . $value . '</td>';
-            }
-        };
-        $runUpdated = $this->createStrDateTime($item);
+	private function createLongStrHTML($item)
+	{
+		$circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
+		$checkedIcon = "<i class='fa-solid fa-circle-check px-2'></i>";
+		$arrayControl = ['c1' => $item['c1'], 'c2' => $item['c2'], 'c3' => $item['c3'], 'c4' => $item['c4']];
+		$str = "";
+		foreach ($arrayControl as $col => $value) {
+			if ($item['control_value_name'] === $item[$col]) {
+				$str .= '<td class="border" style="width:50px">' . $checkedIcon . $value . '</td>';
+			} else {
+				$str .=  '<td class="border" style="width:50px">' . $circleIcon . $value . '</td>';
+			}
+		};
+		$runUpdated = $this->createStrDateTime($item);
 
-        $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item['run_desc'] . ":" . "</td>" : "";
-        $line_id =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item['line_id'] . '</td>' : "";
+		$runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item['run_desc'] . ":" . "</td>" : "";
+		$line_id =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item['line_id'] . '</td>' : "";
 
-        $longStr = $runDesc . $line_id . $str . $runUpdated;
-        return $longStr;
-    }
+		$longStr = $runDesc . $line_id . $str . $runUpdated;
+		return $longStr;
+	}
 
-    private function createStrImage($item)
-    {
-        $td = '<td class="border" colspan=5 style="width:190px">' . '<div class="">' . $this->createStrHtmlImage($item) . '</div>' . '</td>';
-        return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
-    }
+	private function createStrImage($item)
+	{
+		$td = '<td class="border" colspan=5 style="width:190px">' . '<div class="">' . $this->createStrHtmlImage($item) . '</div>' . '</td>';
+		return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+	}
 
-    private function createStrComment($item)
-    {
-        if (is_null($item['value_comment'])) return "<tr> </tr>";
-        $td = "<td class='border p-3' colspan = 5 style='width:190px'>{{$item['value_comment']}}</td>";
-        return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
-    }
+	private function createStrComment($item)
+	{
+		if (is_null($item['value_comment'])) return "<tr> </tr>";
+		$td = "<td class='border p-3' colspan = 5 style='width:190px'>{{$item['value_comment']}}</td>";
+		return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+	}
 
-    private function createStrDateTime($item)
-    {
-        $runUpdated = '<td class="border pl-2" style="width:80px" > Date: ' . str_replace(" ", "</br> Time: ", $item['run_updated']) . "</td>";
-        return $runUpdated;
-    }
+	private function createStrDateTime($item)
+	{
+		$runUpdated = '<td class="border pl-2" style="width:80px" > Date: ' . str_replace(" ", "</br> Time: ", $item['run_updated']) . "</td>";
+		return $runUpdated;
+	}
 
-    public function getDataForModeControl($dataSource = [])
-    {
-        $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        $prod_orders  = ['prod_order_id' =>  Prod_order::get()->pluck('name', 'id')->toArray()];
-        $insp_tmpls = ['qaqc_insp_tmpl_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
-        $filter_run = ['filter_run' => ['Filter for a latest run', 'Filter for many runs']];
-        return array_merge($subProjects, $prod_orders, $insp_tmpls, $filter_run);
-    }
+	public function getDataForModeControl($dataSource = [])
+	{
+		$subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
+		$prod_orders  = ['prod_order_id' =>  Prod_order::get()->pluck('name', 'id')->toArray()];
+		$insp_tmpls = ['qaqc_insp_tmpl_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
+		$filter_run = ['filter_run' => ['Filter for a latest run', 'Filter for many runs']];
+		return array_merge($subProjects, $prod_orders, $insp_tmpls, $filter_run);
+	}
 
-    protected function getSheets($dataSource)
-    {
-        $items = Report::changeTypeAllItems($dataSource);
-        // dd($items);
-        $sheets = array_values(array_map(function ($item) {
-            $x = isset(array_pop($item)['sheet_name']);
-            if ($x) {
-                $name = array_pop($item)['sheet_name'];
-                $str = "<a href='#$name'>$name</a>";
-                return  ["sheet_name" =>  $str];
-            } else return [];
-        }, $items));
-        // dd($sheets);
-        return $sheets;
-    }
+	protected function getSheets($dataSource)
+	{
+		$items = Report::changeTypeAllItems($dataSource);
+		// dd($items);
+		$sheets = array_values(array_map(function ($item) {
+			$x = isset(array_pop($item)['sheet_name']);
+			if ($x) {
+				$name = array_pop($item)['sheet_name'];
+				$str = "<a href='#$name'>$name</a>";
+				return  ["sheet_name" =>  $str];
+			} else return [];
+		}, $items));
+		// dd($sheets);
+		return $sheets;
+	}
 }

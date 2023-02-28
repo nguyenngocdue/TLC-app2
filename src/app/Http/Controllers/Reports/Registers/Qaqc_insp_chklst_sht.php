@@ -4,56 +4,76 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\TraitReport;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
 use App\Utils\Support\Report;
 
 class Qaqc_insp_chklst_sht extends Report_ParentController
 {
-    protected $pagingSize = 10000;
+    use TraitReport;
+    protected $pagingSize = 100000;
     public function getSqlStr($urlParams)
     {
         // dd($urlParams);
         $sql = "SELECT tb.*,
-                        CASE
-                            WHEN sheet_status_combine LIKE '%No%' THEN 'Inprogress'
-                            WHEN sheet_status_combine LIKE '%Fail%' THEN 'Inprogress'
-                            WHEN sheet_status_combine LIKE'%N/A%'  THEN 'Inprogress'
-                            WHEN sheet_status_combine LIKE '%Yes%' OR '%Pass%' THEN 'Pass'
-                            WHEN sheet_status_combine LIKE 'N/A' THEN 'NA'
-                            WHEN sheet_status_combine LIKE 'On Hold' THEN 'OnHold'
-                            ELSE 'Null'
-                        END AS sheet_status
-
-                FROM (SELECT 
-                    max_run_sheetTB.tmpl_shts_id,
-                    max_run_sheetTB.tmpl_shts_desc,
-                    GROUP_CONCAT(DISTINCT cv.name) AS sheet_status_combine
-                FROM (
-                    SELECT 
-                        cklst_sht_tb.tmpl_shts_id, 
-                        cklst_sht_tb.tmpl_shts_desc,
-                        MAX(rs.id) AS max_run_id
-                        FROM (
-                            SELECT
-                                tmpls.id AS tmpl_shts_id,
-                                tmpls.description AS tmpl_shts_desc,
-                                csh.id AS chklsts_shts_id,
-                                csh.description AS chklsts_shts_desc
-                                FROM qaqc_insp_tmpl_shts tmpls
-                                    LEFT JOIN qaqc_insp_chklst_shts csh ON tmpls.id = csh.qaqc_insp_tmpl_sht_id";
-        if (isset($urlParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND csh.qaqc_insp_chklst_id  = '{{qaqc_insp_tmpl_id}}'";
-        if (isset($urlParams['sub_project_id'])) $sql .= "\n LEFT JOIN prod_orders prod ON prod.sub_project_id  = '{{sub_project_id}}'
-                                                            LEFT JOIN qaqc_insp_chklsts clst ON clst.prod_order_id = prod.id AND clst.id = csh.qaqc_insp_chklst_id";
-
-        $sql .= ") AS cklst_sht_tb
-                                    LEFT JOIN qaqc_insp_chklst_runs rs ON rs.qaqc_insp_chklst_sht_id = cklst_sht_tb.chklsts_shts_id
-                                    GROUP BY cklst_sht_tb.tmpl_shts_id) AS max_run_sheetTB
-                    
-                LEFT JOIN qaqc_insp_chklst_lines lr ON lr.qaqc_insp_chklst_run_id = max_run_sheetTB.max_run_id
-                LEFT JOIN qaqc_insp_control_values cv ON cv.id = lr.qaqc_insp_control_value_id
-                LEFT JOIN control_types ct ON ct.id = lr.control_type_id
-                GROUP BY max_run_sheetTB.tmpl_shts_id) AS tb;";
+        CASE
+            WHEN sheet_status_combine LIKE '%No%' THEN 'Inprogress'
+            WHEN sheet_status_combine LIKE '%Fail%' THEN 'Inprogress'
+            WHEN sheet_status_combine LIKE'%N/A%'  THEN 'Inprogress'
+            WHEN sheet_status_combine LIKE '%Yes%' OR '%Pass%' THEN 'Pass'
+            WHEN sheet_status_combine LIKE 'N/A' THEN 'NA'
+            WHEN sheet_status_combine LIKE 'On Hold' THEN 'OnHold'
+            ELSE 'Null'
+        END AS sheet_status
+    FROM (SELECT 
+        sub_project,prod_id,prod_name
+        ,tmpl_sheet_id
+        ,tmpl_sheet_description
+        ,sheet_id
+        ,max_run_id
+        ,GROUP_CONCAT(DISTINCT cv.name) AS sheet_status_combine
+        
+        FROM (SELECT
+            sub_project,prod_id, prod_name
+            ,tmpl_sheet_id
+            ,tmpl_sheet_description
+            ,sheet_id
+            ,MAX(rs.id) AS max_run_id
+        FROM (SELECT
+             sub_project
+             ,prod_id
+             ,prod_name
+            ,tmpl_sheet_description
+            ,tmpl_sheet_id
+            ,csh.id AS sheet_id
+            ,csh.description AS sheet_description
+            ,template_id
+            FROM (SELECT 
+                    prod.sub_project_id AS sub_project
+                    ,prod.id AS prod_id
+                    ,prod.name AS prod_name
+                    ,tmpl.id AS template_id
+                    ,tmplsh.id AS tmpl_sheet_id
+                    ,tmplsh.description AS tmpl_sheet_description
+                    , chlst.id AS check_list_id
+                    FROM prod_orders prod, qaqc_insp_chklsts chlst, qaqc_insp_tmpls tmpl, qaqc_insp_tmpl_shts tmplsh
+                    WHERE 1 = 1";
+        if (isset($urlParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
+        if (isset($urlParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND chlst.qaqc_insp_tmpl_id = '{{qaqc_insp_tmpl_id}}'";
+        $sql .= "\n AND chlst.qaqc_insp_tmpl_id = 1
+                    AND chlst.prod_order_id = prod.id
+                    AND chlst.qaqc_insp_tmpl_id = tmpl.id
+                    AND tmplsh.qaqc_insp_tmpl_id = tmpl.id
+                 ) AS temptb
+              LEFT JOIN qaqc_insp_chklst_shts csh ON temptb.tmpl_sheet_id = csh.qaqc_insp_tmpl_sht_id AND csh.qaqc_insp_chklst_id  = temptb.check_list_id) AS chklst_shts
+              LEFT JOIN qaqc_insp_chklst_runs rs ON rs.qaqc_insp_chklst_sht_id = chklst_shts.sheet_id
+              GROUP BY chklst_shts.sheet_id, tmpl_sheet_id, tmpl_sheet_description, prod_id ) AS maxRuntb
+    
+        LEFT JOIN qaqc_insp_chklst_lines lr ON lr.qaqc_insp_chklst_run_id = max_run_id
+        LEFT JOIN qaqc_insp_control_values cv ON cv.id = lr.qaqc_insp_control_value_id
+        LEFT JOIN control_types ct ON ct.id = lr.control_type_id
+        GROUP BY sheet_id, prod_id, tmpl_sheet_id) AS tb";
         return $sql;
     }
     public function getTableColumns($dataSource)
@@ -71,10 +91,10 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
         $dataColumn = array_slice($flattenData, $idx + 1, count($flattenData) - $idx, true);
         $adds = [
             [
-                "dataIndex" => "po_id",
+                "dataIndex" => "prod_id",
                 "align" => "center"
             ],            [
-                "dataIndex" => "po_name",
+                "dataIndex" => "prod_name",
                 "align" => "center"
             ]
         ];
@@ -128,20 +148,24 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
 
     protected function enrichDataSource($dataSource, $urlParams)
     {
-        // dump($dataSource);
-        // if (!count($urlParams)) return $dataSource->setCollection(collect([]));
-        if (!count(array_values($urlParams))) return [];
-        $dataArray = $dataSource->items();
+        // dd($dataSource);
+        $isNullParams = $this->isNullUrlParams($urlParams);
+        if ($isNullParams) {
+            $dataSource->setCollection(collect([]));
+            return $dataSource;
+        };
+
+        $items = $dataSource->items();
         $enrichData = array_map(function ($item) {
-            return (array)$item + [Report::slugName($item->tmpl_shts_desc) => $item->sheet_status];
-        }, array_values($dataArray));
+            return (array)$item + [Report::slugName($item->tmpl_sheet_description) => $item->sheet_status];
+        }, array_values($items));
 
 
-        $groupedArray = Report::groupArrayByKey($enrichData, 'po_id');
+        $groupedArray = Report::groupArrayByKey($enrichData, 'prod_id');
         $result = Report::mergeArrayValues($groupedArray);
         $dt = $this->changeValueData($result);
         $dataSource->setCollection(collect($dt));
-        dump($dataSource);
-        return $dt;
+
+        return $dataSource;
     }
 }

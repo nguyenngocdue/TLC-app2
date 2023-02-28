@@ -3,9 +3,7 @@
 @section('title', $entity)
 @section('content')
 
-{{-- @dump($tableDataSource, $tableColumns) --}}
-@dump($sheets)
-
+{{-- @dump($tableDataSource) --}}
 @section('content')
 <div class="md:px-4">
     <x-renderer.modes-control :dataSource="$dataModeControl" :itemsSelected="$urlParams" />
@@ -18,10 +16,8 @@
     <x-renderer.divider />
     @endif
     @foreach($tableDataSource as $idSheet => $data)
-    @php
-    @endphp
     <x-renderer.report.header-report :dataSource="array_pop($data)" />
-    <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$data" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
+    <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource[$idSheet]" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
     <x-renderer.page-break />
     @endforeach
 </div>

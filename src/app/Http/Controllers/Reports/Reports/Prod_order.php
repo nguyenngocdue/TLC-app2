@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\TraitReport;
 use App\Models\Prod_order as ModelsProd_order;
 use App\Models\Sub_project;
 
@@ -11,6 +12,7 @@ use App\Models\Sub_project;
 class Prod_order extends Report_ParentController
 
 {
+    use TraitReport;
     public function getSqlStr($urlParams)
     {
         $sql = "SELECT 
@@ -84,8 +86,11 @@ class Prod_order extends Report_ParentController
     }
     protected function enrichDataSource($dataSource, $urlParams)
     {
-        // dump(array_flip(array_values($urlParams)));
-        // if (!count(array_values($urlParams))) return $dataSource;
+        $isNullParams = $this->isNullUrlParams($urlParams);
+        if ($isNullParams) {
+            $dataSource->setCollection(collect([]));
+            return $dataSource;
+        };
         return $dataSource;
     }
 }

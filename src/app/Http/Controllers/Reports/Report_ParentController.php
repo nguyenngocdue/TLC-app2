@@ -32,10 +32,7 @@ abstract class Report_ParentController extends Controller
 
     private function getSql($urlParams)
     {
-        // dd($urlParams);
         $sqlStr = $this->getSqlStr($urlParams);
-        // if (empty($urlParams)) return  "";
-
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
             if (isset($urlParams[$value])) {
@@ -98,6 +95,7 @@ abstract class Report_ParentController extends Controller
         $sheets = $this->getSheets($dataSource);
 
         $typeReport = $this->getMenuTitle();
+        // dump($dataSource);
 
         return view('reports.' . $viewName, [
             'tableColumns' => $columns,
