@@ -226,20 +226,10 @@ $id = $action === "edit" ? $values->id : "";
             </div>
             @endforeach
         </div>
-        <div class="flex justify-left border-t-2 dark:bg-gray-800 px-5">
-            <button type="submit" class="m-4 focus:shadow-outline rounded bg-emerald-500 py-2 px-4 font-bold text-white hover:bg-purple-400 focus:outline-none">
-                @switch($action)
-                @case('edit')
-                Update
-                @break
-                @case('create')
-                Create
-                @break
-                @default
-                <span>Unknown action "{{$action}}"</span>
-                @break
-                @endswitch
-            </button>
+        <div class="flex justify-left dark:bg-gray-800 px-5">
+            <div class="my-5">
+                <x-controls.action-buttons action="{{$action}}" />
+            </div>
         </div>
     </form>
 </div>

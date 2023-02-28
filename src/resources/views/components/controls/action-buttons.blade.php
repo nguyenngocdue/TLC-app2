@@ -1,0 +1,1 @@
+<x-renderer.button htmlType='submit' size='lg' type='success'> {{$action}} </x-renderer.button>
