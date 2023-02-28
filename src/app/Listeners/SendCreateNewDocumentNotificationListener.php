@@ -49,9 +49,9 @@ class SendCreateNewDocumentNotificationListener
                     break;
             }
         }
+        $this->checkAndSendNotification($createNotification, $currentValue, 'created');
         $this->checkAndSendNotification($assigneeNotification, $currentValue, 'assignee');
         $this->checkAndSendNotification($monitorNotification, $currentValue, 'monitor');
-        $this->checkAndSendNotification($createNotification, $currentValue, 'created');
     }
     private function checkAndSendNotification($array, $currentValue, $type)
     {
