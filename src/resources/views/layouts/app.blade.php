@@ -49,13 +49,10 @@
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4.js') }}"></script>
-    @if (env('ENV_OF_FORTUNE'))
     <script src="{{ asset('js/components/EditableTable2.js') }}"></script>
     <script src="{{ asset('js/components/EditableTableAddNewLine2.js') }}"></script>
-    @else
-    <script src="{{ asset('js/components/EditableTable.js') }}"></script>
-    <script src="{{ asset('js/components/EditableTableAddNewLine.js') }}"></script>
-    @endif
+    {{-- <script src="{{ asset('js/components/EditableTable.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/components/EditableTableAddNewLine.js') }}"></script> --}}
     <script src="{{ asset('js/components/SearchModal.js') }}"></script>
     <script src="{{ asset('js/components/KeyArrowTable.js') }}"></script>
     <script src="{{ asset('js/applayout.js') }}"></script>
