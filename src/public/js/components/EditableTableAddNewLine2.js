@@ -78,12 +78,12 @@ const addANewLineFull = (params) => {
             delete column['properties']
             // console.log(column)
         }
+        // console.log(column['dataIndex'], column['saveOnChange'])
+        const saveOnChange = column['saveOnChange'] ? 1 : 0
 
         const id = tableId + "[" + column['dataIndex'] + "][" + newRowIndex + "]"
         if (column['dataIndex'] === 'action') {
             fingerPrint = getMaxValueOfAColumn(tableId, "[finger_print]") + 10
-
-            const params = "{tableId: '" + tableId + "', control:this, fingerPrint: " + fingerPrint + ", nameIndex: " + newRowIndex + "}"
 
             const fingerPrintName = tableId + "[finger_print][" + newRowIndex + "]"
             const fingerPrintInput = '<input readonly class="w-10 bg-gray-300" name="' + fingerPrintName + '" value="' + fingerPrint + '" type=' + (tableDebugJs ? "text" : "hidden") + ' />'
@@ -91,10 +91,12 @@ const addANewLineFull = (params) => {
             const destroyName = tableId + "[DESTROY_THIS_LINE][" + newRowIndex + "]"
             const destroyInput = '<input readonly class="w-10 bg-gray-300" name="' + destroyName + '" type=' + (tableDebugJs ? "text" : "hidden") + ' />'
 
-            const btnUp = '<button value="' + tableId + '" onClick="moveUpEditableTable(' + params + ')" type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-up"></i></button>'
-            const btnDown = '<button value="' + tableId + '" onClick="moveDownEditableTable(' + params + ')" type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-down"></i></button>'
-            const btnDuplicate = '<button value = "' + tableId + '" onClick = "duplicateEditableTable(' + params + ')" type = "button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg"> <i class="fa fa-copy"></i></button >'
-            const btnTrash = '<button value="' + tableId + '" onClick="trashEditableTable(' + params + ')" type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-red-600 text-white shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none active:bg-red-800 active:shadow-lg" ><i class="fa fa-trash"></i></button>'
+            const paramString = "{tableId: '" + tableId + "', control: this, fingerPrint:" + fingerPrint + ", nameIndex:" + newRowIndex + "}"
+
+            const btnUp = '<button value="' + tableId + '" onClick="moveUpEditableTable(' + paramString + ')" type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-up"></i></button>'
+            const btnDown = '<button value="' + tableId + '" onClick="moveDownEditableTable(' + paramString + ')" type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-down"></i></button>'
+            const btnDuplicate = '<button value = "' + tableId + '" onClick = "duplicateEditableTable(' + paramString + ')" type = "button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg"> <i class="fa fa-copy"></i></button >'
+            const btnTrash = '<button value="' + tableId + '" onClick="trashEditableTable(' + paramString + ')" type="button" class="px-1.5 py-1  inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-red-600 text-white shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none active:bg-red-800 active:shadow-lg" ><i class="fa fa-trash"></i></button>'
             renderer = ""
                 + fingerPrintInput
                 + destroyInput
@@ -107,6 +109,15 @@ const addANewLineFull = (params) => {
         } else {
             let onChange = ''
             // console.log("Rendering", column)
+            // onChangeDropdown4({name:"table02[prod_discipline_id][5]",  table01Name:"table02", rowIndex:5, lineType:"prod_discipline_1"})
+            let onChangeParams = "{"
+            onChangeParams += "name:\"" + id + "\","
+            onChangeParams += "lineType:\"" + column['lineType'] + "\","
+            onChangeParams += "table01Name:\"" + column['table01Name'] + "\","
+            onChangeParams += "rowIndex: " + newRowIndex + ","
+            onChangeParams += "saveOnChange: " + saveOnChange + ","
+            onChangeParams += "}"
+
             switch (column['renderer']) {
                 case 'read-only-text':
                     if (column['dataIndex'] === 'id') {
@@ -132,8 +143,7 @@ const addANewLineFull = (params) => {
                     }
                     break
                 case 'dropdown4':
-                    // onChangeDropdown4({name:"table02[prod_discipline_id][5]",  table01Name:"table02", rowIndex:5, lineType:"prod_discipline_1"})
-                    onChange = "onChangeDropdown4({name:\"" + id + "\", lineType:\"" + column['lineType'] + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex: " + newRowIndex + "})"
+                    onChange = "onChangeDropdown4(" + onChangeParams + ")"
 
                     multipleStr = column?.multiple ? "multiple" : ""
                     bracket = column?.multiple ? "[]" : ""
@@ -152,28 +162,27 @@ const addANewLineFull = (params) => {
                         orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
                         onChange = "rerenderTableBaseOnNewOrder(\"" + tableId + "\")"
                     } else {
-                        onChange = "onChangeDropdown4({name:\"" + id + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex:" + newRowIndex + "})"
+                        onChange = "onChangeDropdown4(" + onChangeParams + ")"
                     }
                     renderer = "<input id='" + id + "' name='" + id + "' class='" + column['classList'] + "' type=number step=any onChange='" + onChange + "' />";
                     break
                 case "text":
-                    // console.log(id, column, column['table01Name'])
-                    onChange = "onChangeDropdown4({name:\"" + id + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex:" + newRowIndex + "})"
+                    onChange = "onChangeDropdown4(" + onChangeParams + ")"
                     renderer = "<input id='" + id + "' name='" + id + "' class='" + column['classList'] + "' onChange='" + onChange + "'/>";
                     break
                 case "textarea":
                     renderer = "<textarea id='" + id + "' name='" + id + "' class='" + column['classList'] + "'></textarea>"
                     break
                 case "picker-datetime4":
-                    onChange = "onChangeDropdown4({name:\"" + id + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex:" + newRowIndex + "})"
+                    onChange = "onChangeDropdown4(" + onChangeParams + ")"
                     renderer = "<input id='" + id + "' name='" + id + "' placeholder='DD/MM/YYYY HH:MM' class='" + column['classList'] + "' onchange='" + onChange + "'>"
                     break
                 case "picker-date4":
-                    onChange = "onChangeDropdown4({name:\"" + id + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex:" + newRowIndex + "})"
+                    onChange = "onChangeDropdown4(" + onChangeParams + ")"
                     renderer = "<input id='" + id + "' name='" + id + "' placeholder='DD/MM/YYYY' class='" + column['classList'] + "' onchange='" + onChange + "'>"
                     break
                 case "picker-time4":
-                    onChange = "onChangeDropdown4({name:\"" + id + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex:" + newRowIndex + "})"
+                    onChange = "onChangeDropdown4(" + onChangeParams + ")"
                     renderer = "<input id='" + id + "' name='" + id + "' placeholder='HH:MM' class='" + column['classList'] + "' onchange='" + onChange + "'>"
                     break
                 default:
@@ -206,19 +215,23 @@ const addANewLineFull = (params) => {
                     let selected = valuesOfOrigin[column['dataIndex']]
                     // console.log("Setting status", id, 'to', selected)
                     getEById(id).val(selected)
+                    getEById(id).trigger("change")
                 }
                 break
             default:
                 if (column['value_as_parent_id']) {
                     getEById(id).val($('#entityParentId').val())
+                    getEById(id).trigger("change")
                     break
                 }
                 if (column['value_as_user_id']) {
                     getEById(id).val($('#userId').val())
+                    getEById(id).trigger("change")
                     break
                 }
                 if (column['dataIndex'] === 'order_no') {
                     getEById(id).val(orderNoValue)
+                    getEById(id).trigger("change")
                     break
                 }
                 if (valuesOfOrigin != undefined) {
@@ -228,6 +241,7 @@ const addANewLineFull = (params) => {
                     } else {
                         getEById(id).val(value)
                     }
+                    getEById(id).trigger("change")
                     break
                 }
 
@@ -240,6 +254,7 @@ const addANewLineFull = (params) => {
         const { id, dataSource, tableId, selected } = toDoAfterAdded[i]
         reloadDataToDropdown4(id, dataSource, tableId, selected)
         getEById(id).trigger("change")
+        // console.log("Triggered change", id)
     }
     // console.log(showNoR)
     if (showNoR) { //<< Ignore No. column

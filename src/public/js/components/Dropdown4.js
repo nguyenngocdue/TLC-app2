@@ -311,11 +311,12 @@ const onChangeDropdown4TriggerChangeSomeLines = (listener, table01Name, rowIndex
 }
 
 const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange }) => {
-    // console.log("onChangeDropdown4", name, table01Name, rowIndex, lineType, saveOnChange)
+    // console.log("onChangeDropdown4", name, table01Name, rowIndex, saveOnChange, lineType)
     // console.log("listenersOfDropdown4s", listenersOfDropdown4s, table01Name)
     const fieldName = getFieldNameInTable01FormatJS(name, table01Name)
     const { tableName } = tableObject[table01Name]
     if (saveOnChange) {
+        // console.log("saveOnChange", tableName, fieldName)
         const lineId = makeIdFrom(table01Name, 'id', rowIndex)
         const id = getEById(lineId).val()
         const value = getEById(name).val()

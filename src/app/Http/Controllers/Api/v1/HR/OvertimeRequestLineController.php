@@ -22,7 +22,7 @@ class OvertimeRequestLineController extends Controller
         $sql = "SELECT 
                 substr(ot_date, 1, 7) AS `year_month0`, 
                 user_id, 
-                60 - sum(total_time) AS `remaining_hours`
+                round(60 - sum(total_time),2) AS `remaining_hours`
             FROM `hr_overtime_request_lines`
             WHERE 1=1
                 AND user_id=$user_id

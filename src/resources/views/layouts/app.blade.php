@@ -86,7 +86,7 @@
                 <div class="mt-16 mb-8 no-print">
                 </div>
             @endguest
-            <div id="print-pdf-document"  class="w-full h-screen MUST-NOT-HAVE-X-PADDING-MARGIN-FOR-PRINT-PAGE">
+            <div id="print-pdf-document"  class="w-full min-h-screen MUST-NOT-HAVE-X-PADDING-MARGIN-FOR-PRINT-PAGE">
                 @yield('content')
             </div>
             <div class="mt-8 no-print"></div>
