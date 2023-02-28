@@ -1,0 +1,17 @@
+{
+    "new": {
+        "name": "new",
+        "ball-in-court-assignee": "creator",
+        "ball-in-court-monitors": "getMonitors7"
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-monitors": ""
+    },
+    "approved": {
+        "name": "approved",
+        "ball-in-court-assignee": "creator",
+        "ball-in-court-monitors": ""
+    }
+}

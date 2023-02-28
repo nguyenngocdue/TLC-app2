@@ -13,12 +13,13 @@ class ManageBallInCourts extends Manage_Parent
     protected $viewName = "dashboards.pages.manage-ball-in-court";
     protected $routeKey = "_bic";
     protected $jsonGetSet = BallInCourts::class;
-    protected $storingWhiteList = ['name', 'ball-in-court'];
+    protected $storingWhiteList = ['name', 'ball-in-court-assignee', 'ball-in-court-monitors'];
 
     protected function getColumns()
     {
         $allStatuses = LibStatuses::getFor($this->type);
         $allAssignees = JsonControls::getAssignees();
+        $allMonitors = JsonControls::getMonitors();
         $firstColumns = [
             [
                 "dataIndex" => 'name',
@@ -36,12 +37,13 @@ class ManageBallInCourts extends Manage_Parent
                 'width' => 10,
             ],
             [
-                "dataIndex" => 'ball-in-court',
+                "dataIndex" => 'ball-in-court-assignee',
                 'renderer' => 'dropdown',
                 'editable' => true,
                 "cbbDataSource" => ['', 'creator', ...$allAssignees],
                 'width' => 10,
             ],
+
         ];
         $columns = array_map(fn ($i) => [
             'dataIndex' => $i['name'],
@@ -50,7 +52,16 @@ class ManageBallInCourts extends Manage_Parent
             'width' => 10,
             'title' => $i['title'],
         ], $allStatuses);
-        return array_merge($firstColumns, $columns);
+        $columns = array_merge($firstColumns, $columns);
+        array_push($columns,  [
+            "dataIndex" => 'ball-in-court-monitors',
+            'renderer' => 'dropdown',
+            'editable' => true,
+            "cbbDataSource" => ['',  ...$allMonitors],
+            'properties' => ['strFn' => 'same'],
+            'width' => 10,
+        ],);
+        return $columns;
     }
 
     protected function getDataSource()
@@ -80,9 +91,9 @@ class ManageBallInCourts extends Manage_Parent
                 // dump($workflowArray);
                 foreach (array_keys($allStatuses) as $status2) {
                     if (is_array($workflow) && in_array($status2, $workflowArray)) {
-                        if (isset($bic[$name]['ball-in-court']) && isset($bic[$status2]['ball-in-court'])) {
-                            $a1 = $bic[$name]['ball-in-court'];
-                            $a2 = $bic[$status2]['ball-in-court'];
+                        if (isset($bic[$name]['ball-in-court-assignee']) && isset($bic[$status2]['ball-in-court-assignee'])) {
+                            $a1 = $bic[$name]['ball-in-court-assignee'];
+                            $a2 = $bic[$status2]['ball-in-court-assignee'];
                             $newItem[$status2] = "$a1 -> $a2";
                         }
                     }
