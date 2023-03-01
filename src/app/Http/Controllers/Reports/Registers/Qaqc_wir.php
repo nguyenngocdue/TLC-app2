@@ -7,6 +7,7 @@ use App\Http\Controllers\Reports\TraitReport;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Sub_project;
 use App\Utils\Support\Report;
+use Illuminate\Support\Facades\DB;
 
 class Qaqc_wir extends Report_ParentController
 {
@@ -36,7 +37,7 @@ class Qaqc_wir extends Report_ParentController
                         FROM prod_orders prod, sub_projects sub, prod_routings prodr
                         WHERE 1 = 1";
         if (isset($urlParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
-
+        if (isset($urlParams['prod_routing_id'])) $sql .= "\n AND prodr.id = '{{prod_routing_id}}'";
         $sql .= "\n AND sub.id = prod.sub_project_id
                         AND prodr.id = prod.prod_routing_id ) AS tb1
                         LEFT JOIN prod_routing_details prodrd ON prodrd.prod_routing_id = tb1.prod_routings_id
@@ -94,11 +95,35 @@ class Qaqc_wir extends Report_ParentController
         return  $dataColumn;
     }
 
-    public function getDataForModeControl($dataSource = [])
+    protected function getDataProdRouting()
+    {
+        $sql = "
+            SELECT
+                prodr.id AS prod_routings_id
+                ,prodr.name AS prod_routings_name
+                FROM prod_orders prod, sub_projects sub, prod_routings prodr
+                WHERE 1 = 1
+                AND sub.id = prod.sub_project_id
+                AND prodr.id = prod.prod_routing_id
+                GROUP BY prod_routings_id,  prod_routings_name";
+        $sqlData = DB::select(DB::raw($sql));
+        return $sqlData;
+    }
+
+    protected function getDataForModeControl($dataSource = [])
     {
         $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        return array_merge($subProjects);
+        $dataProdRouting = $this->getDataProdRouting();
+        $prodRoutings = ['prod_routing_id' => array_column($dataProdRouting, 'prod_routings_name', 'prod_routings_id')];
+        return array_merge($subProjects, $prodRoutings);
     }
+
+
+
+
+
+
+
 
     protected function transformDataSource($dataSource, $urlParams)
     {
