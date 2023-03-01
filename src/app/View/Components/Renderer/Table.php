@@ -32,6 +32,7 @@ class Table extends Component
     private $model = null,
     // private $editable = false,
     private $tableDebug = false,
+    private $rotate45Width = false,
   ) {
   }
 
@@ -67,6 +68,7 @@ class Table extends Component
       'colgroup' => $this->makeColGroup($columns),
       'maxH' => $this->maxH ? "max-h-[{$this->maxH}rem]" : "",
       'tableDebug' => $this->tableDebug,
+      'trClassList' => 'border-b bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
     ]);
   }
 }

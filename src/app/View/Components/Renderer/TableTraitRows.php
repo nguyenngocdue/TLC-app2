@@ -110,7 +110,7 @@ trait TableTraitRows
                 if (isset($dataLine['rowDescription'])) {
                     $colspan_minus_1 = $colspan - 1;
                     $td = "<td class='p-2 text-xs dark:text-gray-300 text-gray-600' colspan=$colspan_minus_1>{$dataLine['rowDescription']}</td>";
-                    $trs[] = "<tr class='dark:bg-gray-600  bg-gray-100 '><td></td>$td</tr>";
+                    $trs[] = "<tr component='rowDescription' class='dark:bg-gray-600  bg-gray-100 '><td></td>$td</tr>";
                 }
             }
         }

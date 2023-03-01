@@ -11,6 +11,6 @@
         <x-form.per-page type="{{$typeReport}}" route="{{ route('updateUserSettings') }}" />
     </div>
     <x-renderer.parameter-control :dataSource="$dataModeControl" :itemsSelected="$urlParams" />
-    <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource" showNo={{true}} />
+    <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource" showNo={{true}} rotate45Width={{600}}/>
 </div>
 @endsection
