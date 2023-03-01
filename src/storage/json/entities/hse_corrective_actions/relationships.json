@@ -77,10 +77,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getMonitors()": {
-        "name": "_getMonitors()",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
         "relationship": "getCheckedByField",
-        "control_name": "getMonitors()",
+        "control_name": "getMonitors1()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

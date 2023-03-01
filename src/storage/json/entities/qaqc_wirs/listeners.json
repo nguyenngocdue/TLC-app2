@@ -7,13 +7,13 @@
         "listen_to_fields": "wir_description_id",
         "listen_to_attrs": "def_assignee"
     },
-    "_getMonitors()": {
-        "name": "_getMonitors()",
-        "column_name": "getMonitors()",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
         "listen_action": "assign",
         "triggers": "wir_description_id",
         "listen_to_fields": "wir_description_id",
-        "listen_to_attrs": "getMonitors()"
+        "listen_to_attrs": "getMonitors1()"
     },
     "_sub_project_id": {
         "name": "_sub_project_id",

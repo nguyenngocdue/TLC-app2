@@ -303,9 +303,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_dropdownMonitors()": {
-        "name": "_dropdownMonitors()",
-        "column_name": "dropdownMonitors()",
+    "_dropdownMonitorsZut9()": {
+        "name": "_dropdownMonitorsZut9()",
+        "column_name": "dropdownMonitorsZut9()",
         "column_type": "oracy_prop",
         "label": "Monitors",
         "control": "dropdown_multi",

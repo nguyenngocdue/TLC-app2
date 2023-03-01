@@ -9,14 +9,14 @@
         "listen_to_attrs": "def_assignee",
         "expression": ""
     },
-    "_dropdownMonitors()": {
-        "name": "_dropdownMonitors()",
-        "column_name": "dropdownMonitors()",
+    "_dropdownMonitorsZut9()": {
+        "name": "_dropdownMonitorsZut9()",
+        "column_name": "dropdownMonitorsZut9()",
         "attr_to_compare": "",
         "listen_action": "assign",
         "triggers": "prod_discipline_1",
         "listen_to_fields": "prod_discipline_1",
-        "listen_to_attrs": "getMonitors()",
+        "listen_to_attrs": "getMonitors1()",
         "expression": ""
     },
     "_due_date": {
