@@ -24,7 +24,7 @@ $status = $values->status ?? null;
 </script>
 
 <div class="px-4">
-    <x-controls.workflow403-checker type="{{$type}}" status="{{$status}}"/>
+    <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}"/>
     <x-controls.header-alert-validation :strProps="$props" />
     <form class="w-full mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
         @csrf        
