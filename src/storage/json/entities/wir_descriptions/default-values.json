@@ -65,9 +65,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getMonitors()": {
-        "name": "_getMonitors()",
-        "column_name": "getMonitors()",
+    "_getDefMonitors1()": {
+        "name": "_getDefMonitors1()",
+        "column_name": "getDefMonitors1()",
         "label": "",
         "default_value": "",
         "validation": "",
@@ -76,9 +76,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getDefRoutings()": {
-        "name": "_getDefRoutings()",
-        "column_name": "getDefRoutings()",
+    "_getRoutings()": {
+        "name": "_getRoutings()",
+        "column_name": "getRoutings()",
         "label": "",
         "default_value": "",
         "validation": "",

@@ -22,7 +22,7 @@ class Hse_corrective_action extends ModelExtended
     ];
 
     public $oracyParams = [
-        "getMonitors()" => ["getCheckedByField", User::class],
+        "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
     public function getHseIncidentReport()
@@ -56,7 +56,7 @@ class Hse_corrective_action extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getMonitors()
+    public function getMonitors1()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
@@ -67,7 +67,7 @@ class Hse_corrective_action extends ModelExtended
         return [
             ['dataIndex' => 'order_no', 'invisible' => true],
             ['dataIndex' => 'id', 'invisible' => true],
-            ['dataIndex' => 'hse_incident_report_id', 'invisible' => !true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'hse_incident_report_id', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'name',],
             ['dataIndex' => 'priority_id',],
             ['dataIndex' => 'work_area_id'],

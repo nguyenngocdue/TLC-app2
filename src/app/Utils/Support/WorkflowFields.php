@@ -4,7 +4,7 @@ namespace App\Utils\Support;
 
 class WorkflowFields
 {
-    static function parse($key, $prop, $values, $defaultValues)
+    static function parseFields($key, $prop, $values, $defaultValues)
     {
         $result['label'] = $prop['label'];
         $columnName = $prop['column_name'];
@@ -16,7 +16,7 @@ class WorkflowFields
         $result['control']  = $control;
         $col_span = $prop['col_span'] === '' ? 12 : $prop['col_span'] * 1;
         $result['col_span'] = $col_span;
-        $result['classColSpanLabel'] = "col-span-" . (24 / $col_span);
+        $result['classColSpanLabel'] = "col-span-" . ($prop['new_line'] === 'true' ? "12" : (24 / $col_span));
         $result['classColStart'] = "col-start-" . (24 / $col_span + 1);
         $result['classColSpanControl'] = "col-span-" . ($prop['new_line'] === 'true' ? "12" : (12 - 24 / $col_span));
 

@@ -38,10 +38,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getMonitors()": {
-        "name": "_getMonitors()",
+    "_getDefMonitors1()": {
+        "name": "_getDefMonitors1()",
         "relationship": "getCheckedByField",
-        "control_name": "getMonitors()",
+        "control_name": "getDefMonitors1()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",
@@ -51,10 +51,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getDefRoutings()": {
-        "name": "_getDefRoutings()",
+    "_getRoutings()": {
+        "name": "_getRoutings()",
         "relationship": "getCheckedByField",
-        "control_name": "getDefRoutings()",
+        "control_name": "getRoutings()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_edit": "",

@@ -8,19 +8,19 @@ use Illuminate\Support\Facades\Cache;
 class CacheToRamForThisSection
 {
     static $singleton = [];
-    private static function getExpensive($key, $param, $fn)
+    private static function getExpensive($key, $fn)
     {
-        if (App::isLocal()) return $fn($param);
+        if (App::isLocal()) return $fn();
         if (!Cache::has($key)) {
-            Cache::rememberForever($key, fn () => $fn($param));
+            Cache::rememberForever($key, fn () => $fn());
         }
         return Cache::get($key);
     }
 
-    static function get($key, $param, $fn)
+    static function get($key, $fn)
     {
         if (!isset(static::$singleton[$key])) {
-            static::$singleton[$key] = static::getExpensive($key, $param, $fn);
+            static::$singleton[$key] = static::getExpensive($key, $fn);
         }
         return static::$singleton[$key];
     }

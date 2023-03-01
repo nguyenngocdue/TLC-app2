@@ -108,15 +108,6 @@ class SuperProps
         static::attachJson("realtimes", $allProps, Realtimes::getAllOf($type));
         static::attachJson("relationships", $allProps, static::makeRelationshipObject($type));
 
-        static::attachJson("visible-props", $allProps, static::makeCheckbox(VisibleProps::getAllOf($type)));
-        static::attachJson("hidden-props", $allProps, static::makeCheckbox(HiddenProps::getAllOf($type)));
-        static::attachJson("required-props", $allProps,  static::makeCheckbox(RequiredProps::getAllOf($type)));
-        static::attachJson("read-only-props", $allProps, static::makeCheckbox(ReadOnlyProps::getAllOf($type)));
-
-        static::attachJson("visible-wl-role-sets", $allProps, static::makeCheckbox(VisibleWLProps::getAllOf($type)));
-        static::attachJson("hidden-wl-role-sets", $allProps, static::makeCheckbox(HiddenWLProps::getAllOf($type)));
-        static::attachJson("required-wl-role-sets", $allProps,  static::makeCheckbox(RequiredWLProps::getAllOf($type)));
-        static::attachJson("read-only-wl-role-sets", $allProps, static::makeCheckbox(ReadOnlyWLProps::getAllOf($type)));
         return $allProps;
     }
 
@@ -147,7 +138,6 @@ class SuperProps
     {
         $result = [];
         $result["definitions"] = static::makeCheckbox(Definitions::getAllOf($type));
-        // static::attachJson("definitions", $result, static::makeCheckbox(Definitions::getAllOf($type)));
         return $result;
     }
 
@@ -169,7 +159,7 @@ class SuperProps
         if (is_null($type)) dd("Type is missing, SuperProps cant instantiate.");
         $type = Str::singular($type);
         $key = "super_prop_$type";
-        return CacheToRamForThisSection::get($key, $type, fn ($a) => static::make($a));
+        return CacheToRamForThisSection::get($key, fn () => static::make($type));
     }
 
     public static function invalidateCache($type)

@@ -26,7 +26,7 @@ class AbstractLibForForm extends AbstractLib
     private static function _getFor($entityType)
     {
         $key = static::$key . "_of_$entityType";
-        return CacheToRamForThisSection::get($key, $entityType, fn ($a) => static::_getForExpensive($a));
+        return CacheToRamForThisSection::get($key, fn () => static::_getForExpensive($entityType));
     }
 
     private static function setFor($entityType, $dataSource)
@@ -44,6 +44,7 @@ class AbstractLibForForm extends AbstractLib
         $json = static::_getFor($entityType);
 
         $allStatuses = static::getAll();
+
         //<< When filter, the order is the order of the allStatus, not the form order
         // $result = array_filter($allStatuses, fn ($status) => in_array($status, $json), ARRAY_FILTER_USE_KEY);
         $result = [];

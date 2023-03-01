@@ -5,103 +5,25 @@
         "listen_action": "assign",
         "triggers": "wir_description_id",
         "listen_to_fields": "wir_description_id",
-        "listen_to_attrs": "def_assignee"
+        "listen_to_attrs": "def_assignee",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
-    "_getMonitors()": {
-        "name": "_getMonitors()",
-        "column_name": "getMonitors()",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
         "listen_action": "assign",
         "triggers": "wir_description_id",
         "listen_to_fields": "wir_description_id",
-        "listen_to_attrs": "getMonitors()"
-    },
-    "_sub_project_id": {
-        "name": "_sub_project_id",
-        "column_name": "sub_project_id",
-        "listen_action": "reduce",
-        "triggers": "project_id",
-        "listen_to_fields": "sub_project_id",
-        "listen_to_attrs": "project_id"
-    },
-    "_prod_order_id": {
-        "name": "_prod_order_id",
-        "column_name": "prod_order_id",
-        "listen_action": "reduce",
-        "triggers": "sub_project_id,prod_routing_id",
-        "listen_to_fields": "prod_order_id,prod_order_id",
-        "listen_to_attrs": "sub_project_id,prod_routing_id"
-    },
-    "_wir_description_id": {
-        "name": "_wir_description_id",
-        "column_name": "wir_description_id",
-        "listen_action": "reduce",
-        "triggers": "prod_discipline_id,prod_routing_id",
-        "listen_to_fields": "wir_description_id,wir_description_id",
-        "listen_to_attrs": "prod_discipline_id,getDefRoutings()"
-    },
-    "_id": {
-        "name": "_id",
-        "column_name": "id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_project_id": {
-        "name": "_project_id",
-        "column_name": "project_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_prod_routing_id": {
-        "name": "_prod_routing_id",
-        "column_name": "prod_routing_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_prod_discipline_id": {
-        "name": "_prod_discipline_id",
-        "column_name": "prod_discipline_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
-    },
-    "_priority_id": {
-        "name": "_priority_id",
-        "column_name": "priority_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "getMonitors1()",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_due_date": {
         "name": "_due_date",
@@ -109,7 +31,168 @@
         "listen_action": "date_offset",
         "triggers": "priority_id",
         "listen_to_fields": "priority_id",
-        "listen_to_attrs": "duration"
+        "listen_to_attrs": "duration",
+        "attrs_to_compare": "id",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "listen_action": "reduce",
+        "triggers": "project_id",
+        "listen_to_fields": "sub_project_id",
+        "listen_to_attrs": "project_id",
+        "attrs_to_compare": "id",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_prod_order_id": {
+        "name": "_prod_order_id",
+        "column_name": "prod_order_id",
+        "listen_action": "reduce",
+        "triggers": "sub_project_id,prod_routing_id",
+        "listen_to_fields": "prod_order_id,prod_order_id",
+        "listen_to_attrs": "sub_project_id,prod_routing_id",
+        "attrs_to_compare": "id",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_wir_description_id": {
+        "name": "_wir_description_id",
+        "column_name": "wir_description_id",
+        "listen_action": "reduce",
+        "triggers": "prod_discipline_id,prod_routing_id",
+        "listen_to_fields": "wir_description_id,wir_description_id",
+        "listen_to_attrs": "prod_discipline_id,getRoutings()",
+        "attrs_to_compare": "id",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_doc_id": {
+        "name": "_doc_id",
+        "column_name": "doc_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_prod_routing_id": {
+        "name": "_prod_routing_id",
+        "column_name": "prod_routing_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_priority_id": {
+        "name": "_priority_id",
+        "column_name": "priority_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_closed_date": {
         "name": "_closed_date",
@@ -117,7 +200,38 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -125,7 +239,12 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -133,6 +252,11 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": ""
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
     }
 }

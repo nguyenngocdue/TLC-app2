@@ -12,7 +12,7 @@ use App\Utils\Support\Report;
 class Qaqc_insp_chklst_sht extends Report_ParentController
 {
     use TraitReport;
-    protected $pagingSize = 100000;
+    protected $pagingSize = 10;
     public function getSqlStr($urlParams)
     {
         // dd($urlParams);
@@ -89,6 +89,8 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
         $idx = array_search("sheet_status", array_keys($flattenData));
 
         $dataColumn = array_slice($flattenData, $idx + 1, count($flattenData) - $idx, true);
+        ksort($dataColumn);
+
         $adds = [
             [
                 "dataIndex" => "prod_id",
@@ -148,24 +150,16 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
 
     protected function enrichDataSource($dataSource, $urlParams)
     {
-        // dd($dataSource);
         $isNullParams = $this->isNullUrlParams($urlParams);
-        if ($isNullParams) {
-            $dataSource->setCollection(collect([]));
-            return $dataSource;
-        };
+        if ($isNullParams) return collect([]);
 
-        $items = $dataSource->items();
         $enrichData = array_map(function ($item) {
             return (array)$item + [Report::slugName($item->tmpl_sheet_description) => $item->sheet_status];
-        }, array_values($items));
-
+        }, $dataSource->ToArray());
 
         $groupedArray = Report::groupArrayByKey($enrichData, 'prod_id');
         $result = Report::mergeArrayValues($groupedArray);
-        $dt = $this->changeValueData($result);
-        $dataSource->setCollection(collect($dt));
-
-        return $dataSource;
+        $data = $this->changeValueData($result);
+        return collect($data);
     }
 }

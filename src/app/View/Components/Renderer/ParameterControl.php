@@ -4,7 +4,7 @@ namespace App\View\Components\Renderer;
 
 use Illuminate\View\Component;
 
-class ModesControl extends Component
+class ParameterControl extends Component
 {
     /**
      * Create a new component instance.
@@ -22,7 +22,7 @@ class ModesControl extends Component
     public function render()
     {
         // dd($this->dataSource);
-        return view('components.renderer.modes-control', [
+        return view('components.renderer.parameter-control', [
             'itemsSelected' => $this->itemsSelected,
             'dataSource' => $this->dataSource,
             'hiddenItems' => $this->hiddenItems,

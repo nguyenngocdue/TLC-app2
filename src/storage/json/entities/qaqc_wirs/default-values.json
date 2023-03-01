@@ -153,9 +153,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getMonitors()": {
-        "name": "_getMonitors()",
-        "column_name": "getMonitors()",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
         "label": "",
         "default_value": "",
         "validation": "",

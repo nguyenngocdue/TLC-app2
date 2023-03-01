@@ -26,7 +26,7 @@ class AbstractLib
     public static function getAll()
     {
         $key = static::$key . '_of_the_app';
-        return CacheToRamForThisSection::get($key, null, fn () => static::getAllExpensive());
+        return CacheToRamForThisSection::get($key, fn () => static::getAllExpensive());
     }
 
     public static function setAll($dataSource)

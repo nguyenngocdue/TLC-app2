@@ -38,7 +38,8 @@ class Description extends Component
         if ($control === 'status') {
             $libStatus = LibStatuses::getFor($this->type);
             $isContent = $dataSource[$columnName];
-            $content = $isContent ? $libStatus[$isContent]['title'] : '';
+            $title = (isset($libStatus[$isContent])) ? $libStatus[$isContent]['title'] : $dataSource[$columnName] . " (orphan_status)";
+            $content = $isContent ? $title : '';
         } else {
             $content = $dataSource[$columnName];
         }

@@ -25,7 +25,7 @@ $qrCodeApps = JsonControls::getQrCodeApps();
 
 Auth::routes();
 Route::group([
-    'middleware' => ['auth', 'impersonate', 'role_set:guest|admin']
+    'middleware' => ['auth', 'impersonate',]
 ], function ()  use ($entities) {
     Route::group([
         'prefix' => 'dashboard'

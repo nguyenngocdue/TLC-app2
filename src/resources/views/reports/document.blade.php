@@ -6,7 +6,7 @@
 {{-- @dump($tableDataSource) --}}
 @section('content')
 <div class="md:px-4">
-    <x-renderer.modes-control :dataSource="$dataModeControl" :itemsSelected="$urlParams" />
+    <x-renderer.parameter-control :dataSource="$dataModeControl" :itemsSelected="$urlParams" />
 </div>
 <div class="md:px-4">
     @if (count($sheets))

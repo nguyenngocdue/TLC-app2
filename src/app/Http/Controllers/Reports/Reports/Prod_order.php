@@ -87,10 +87,6 @@ class Prod_order extends Report_ParentController
     protected function enrichDataSource($dataSource, $urlParams)
     {
         $isNullParams = $this->isNullUrlParams($urlParams);
-        if ($isNullParams) {
-            $dataSource->setCollection(collect([]));
-            return $dataSource;
-        };
-        return $dataSource;
+        if ($isNullParams) return collect([]);
     }
 }
