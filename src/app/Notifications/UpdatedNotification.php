@@ -9,10 +9,11 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-class UpdatedNotification extends Notification
+class UpdatedNotification extends Notification implements ShouldQueue
 {
     use TraitSupportNotification;
     use Queueable;
@@ -36,6 +37,7 @@ class UpdatedNotification extends Notification
     public function via($notifiable)
     {
         $data = $this->data['currentValue'];
+        Log::info($data);
         $type = $data['entity_type'];
         $status = $data['status'];
         $definitions = Definitions::getAllOf($type)['new'];
@@ -57,14 +59,12 @@ class UpdatedNotification extends Notification
     {
         switch ($this->data['type']) {
             case 'assignee':
-                // return $this->sendMailAssignee($this->data, $notifiable);
+                return $this->sendMailUpdate($this->data, $this->data['type'], $notifiable);
                 break;
-            case 'monitor':
-                return $this->sendMailMonitors($this->data, $notifiable);
+            case 'monitors':
+                return $this->sendMailUpdate($this->data, $this->data['type'], $notifiable);
                 break;
-
             default:
-                # code...
                 break;
         }
     }

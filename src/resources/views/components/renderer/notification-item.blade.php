@@ -10,13 +10,14 @@
                 <span class="ml-2 text-xs font-light text-red-400">{{$timeAgo}}</span>
             </div>
             <span class="col-span-3 flex items-center truncate">{{$title}}</span>
-            <div class="ml-2 flex items-center">
-                <div class="h-2 w-2 rounded-full bg-green-500"></div>
-                <span class="ml-2">{{$status}}</span>
+            <div class="flex items-center">
+                <span class="bg-{{$colorStatus}}-{{$colorIndexStatus}} rounded p-1">{{$titleStatus}}</span>
             </div>
         </div>
         @if(!$isRead)
-            <div class="justify-end h-1.5 w-1.5 rounded-full bg-blue-500"></div>
+            <div class="ml-3 justify-end h-1.5 w-1.5 rounded-full bg-blue-500"></div>
+        @else
+            <div class="ml-3 justify-end h-1.5 w-1.5"></div>    
         @endif
     </div>
 </a>

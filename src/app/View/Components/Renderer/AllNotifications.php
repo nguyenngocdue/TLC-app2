@@ -32,7 +32,7 @@ class AllNotifications extends Component
                 case 'assignee':
                     $assigneeNotifications[] = $value;
                     break;
-                case 'monitor':
+                case 'monitors':
                     $monitorNotifications[] = $value;
                     break;
                 case 'created':
