@@ -54,6 +54,15 @@ class FieldSeeder extends Seeder
             'getMonitors7' => 37,
             'getMonitors8' => 38,
             'getMonitors9' => 39,
+            'getDefMonitors1' => 41,
+            'getDefMonitors2' => 42,
+            'getDefMonitors3' => 43,
+            'getDefMonitors4' => 44,
+            'getDefMonitors5' => 45,
+            'getDefMonitors6' => 46,
+            'getDefMonitors7' => 47,
+            'getDefMonitors8' => 48,
+            'getDefMonitors9' => 49,
         ];
     }
     /**

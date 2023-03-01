@@ -6,13 +6,12 @@ use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Sub_project;
-use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Report;
 
 class Qaqc_wir extends Report_ParentController
 {
     use TraitReport;
-    protected $pagingSize = 1000;
+    protected $pagingSize = 50;
     public function getSqlStr($urlParams)
     {
         // dd($urlParams);
@@ -47,7 +46,6 @@ class Qaqc_wir extends Report_ParentController
                         AND wir.wir_description_id = tb2.wirdesc_id
                         ORDER BY prod_id ASC";
 
-
         return $sql;
     }
 
@@ -58,7 +56,7 @@ class Qaqc_wir extends Report_ParentController
         return $this->getDataSourceFromSqlStr($sql);
     }
 
-    public function getTableColumns($dataSource)
+    protected function getTableColumns($dataSource)
     {
         $items = $dataSource->items();
         if (!is_array($dataSource->items()[0])) {
@@ -101,12 +99,10 @@ class Qaqc_wir extends Report_ParentController
         return array_merge($subProjects);
     }
 
-
-    protected function enrichDataSource($dataSource, $urlParams)
+    protected function transformDataSource($dataSource, $urlParams)
     {
-
         $routeCreate = route("qaqc_wirs.create");
-        $items = $dataSource->items();
+        $items = $dataSource->all();
         $entityStatuses = LibStatuses::getFor('qaqc_wir');
         $enrichData = array_map(function ($item) use ($entityStatuses, $routeCreate) {
             $color = "";
@@ -152,8 +148,8 @@ class Qaqc_wir extends Report_ParentController
         }, $result);
         // dd($enrichData);
 
-        $dataSource->setCollection(collect($enrichData));
+        // $dataSource->setCollection(collect($enrichData));
         // dd($dataSource);
-        return $dataSource;
+        return collect($enrichData);
     }
 }

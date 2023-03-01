@@ -52,20 +52,16 @@ abstract class Report_ParentController extends Controller
         $sql = $this->getSql($urlParams);
         $sqlData = DB::select(DB::raw($sql));
         $collection = collect($sqlData);
-        $page = $_GET['page'] ?? 1;
-        $size = $this->pagingSize;
-        $paginationData = (new LengthAwarePaginator(
-            $collection->forPage($page, $size),
-            $collection->count(),
-            $size,
-            $page
-        ))->appends(request()->query());
-        return $paginationData;
+        return $collection;
     }
 
     protected function enrichDataSource($dataSource, $urlParams)
     {
+        return $dataSource;
+    }
 
+    protected function transformDataSource($dataSource, $urlParams)
+    {
         return $dataSource;
     }
 
@@ -79,6 +75,14 @@ abstract class Report_ParentController extends Controller
         return $currentModelName;
     }
 
+    private function paginateDataSource($dataSource)
+    {
+        $page = $_GET['page'] ?? 1;
+        $size = $this->pagingSize;
+        $dataSource = new LengthAwarePaginator($dataSource->forPage($page, $size), $dataSource->count(), $size, $page); //->appends(request()->query();
+        return $dataSource;
+    }
+
     public function index(Request $request)
     {
         // dd($request->route());
@@ -89,6 +93,8 @@ abstract class Report_ParentController extends Controller
 
         $dataSource = $this->getDataSource($urlParams);
         $dataSource = $this->enrichDataSource($dataSource, $urlParams);
+        $dataSource = $this->transformDataSource($dataSource, $urlParams);
+        $dataSource = $this->paginateDataSource($dataSource);
 
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
         $columns = $this->getTableColumns($dataSource);

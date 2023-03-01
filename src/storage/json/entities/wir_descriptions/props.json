@@ -95,9 +95,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getDefMonitors1()": {
+        "name": "_getDefMonitors1()",
+        "column_name": "getDefMonitors1()",
         "column_type": "oracy_prop",
         "label": "Def Monitors",
         "control": "dropdown_multi",
@@ -111,9 +111,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_getDefRoutings()": {
-        "name": "_getDefRoutings()",
-        "column_name": "getDefRoutings()",
+    "_getRoutings()": {
+        "name": "_getRoutings()",
+        "column_name": "getRoutings()",
         "column_type": "oracy_prop",
         "label": "Routings",
         "control": "dropdown_multi",
