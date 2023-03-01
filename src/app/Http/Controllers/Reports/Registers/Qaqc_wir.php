@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Reports\Registers;
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
 use App\Http\Controllers\Workflow\LibStatuses;
-use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Report;
@@ -23,13 +22,14 @@ class Qaqc_wir extends Report_ParentController
                         ,wir.doc_id AS doc_id
                         ,wir.status AS wir_status
                         FROM(SELECT 
-                        tb1.project_name
+                        tb1.sub_project_name
                         ,tb1.sub_projects_id
+                        ,tb1.prod_name 
                         ,tb1.prod_id 
                         ,wirdesc.id AS wirdesc_id
                         ,wirdesc.name AS wirdesc_name
                         FROM (SELECT
-                        sub.name AS project_name
+                        sub.name AS sub_project_name
                         ,prod.sub_project_id AS sub_projects_id
                         ,prod.name AS prod_name
                         ,prod.id AS prod_id
@@ -44,7 +44,8 @@ class Qaqc_wir extends Report_ParentController
                         LEFT JOIN wir_descriptions wirdesc ON prodrd.wir_description_id = wirdesc.id
                         GROUP BY wirdesc_id, prod_id ) AS tb2
                         LEFT JOIN qaqc_wirs wir ON wir.prod_order_id = tb2.prod_id 
-                        AND wir.wir_description_id = tb2.wirdesc_id";
+                        AND wir.wir_description_id = tb2.wirdesc_id
+                        ORDER BY prod_id ASC";
 
 
         return $sql;
@@ -66,28 +67,32 @@ class Qaqc_wir extends Report_ParentController
 
         // dd($items);
         $flattenData = array_merge(...$items);
-        $idx = array_search("sheet_status", array_keys($flattenData));
-
+        $idx = array_search("wir_status", array_keys($flattenData));
         $dataColumn = array_slice($flattenData, $idx + 1, count($flattenData) - $idx, true);
 
-        // unset($dataColumn["wir_status"]);
-        unset($dataColumn["wirdesc_name"], $dataColumn["wirdesc_id"]);
-        // dd($dataSource);
-
-        // $adds = [
-        //     [
-        //         "title" => "",
-        //         "dataIndex" => "",
-        //         "align" => ""
-        //     ]
-        // ];
+        $adds = [
+            [
+                "dataIndex" => "sub_project_name",
+                "align" => ""
+            ],
+            [
+                "title" => "Modular Name",
+                "dataIndex" => "prod_name",
+                "align" => ""
+            ],
+            [
+                "title" => "Prod ID",
+                "dataIndex" => "prod_id",
+                "align" => "right"
+            ]
+        ];
         // dd($dataColumn);
         $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center"], array_keys($dataColumn));
-        // $dataColumn = array_merge($adds, $sqlCol);
+        $dataColumn = array_merge($adds, $sqlCol);
         // dd($sqlCol);
 
 
-        return  $sqlCol;
+        return  $dataColumn;
     }
 
     public function getDataForModeControl($dataSource = [])
@@ -99,7 +104,6 @@ class Qaqc_wir extends Report_ParentController
 
     protected function enrichDataSource($dataSource, $urlParams)
     {
-        // dd($dataSource);
 
         $routeCreate = route("qaqc_wirs.create");
         $items = $dataSource->items();
