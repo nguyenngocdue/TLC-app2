@@ -26,7 +26,7 @@ class AbstractLibForForm extends AbstractLib
     private static function _getFor($entityType)
     {
         $key = static::$key . "_of_$entityType";
-        return CacheToRamForThisSection::get($key, $entityType, fn ($a) => static::_getForExpensive($a));
+        return CacheToRamForThisSection::get($key, fn () => static::_getForExpensive($entityType));
     }
 
     private static function setFor($entityType, $dataSource)

@@ -24,6 +24,7 @@ $status = $values->status ?? null;
 </script>
 
 <div class="px-4">
+    <x-controls.workflow403-checker type="{{$type}}" status="{{$status}}"/>
     <x-controls.header-alert-validation :strProps="$props" />
     <form class="w-full mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
         @csrf        
@@ -34,8 +35,7 @@ $status = $values->status ?? null;
             @foreach($props as $propKey => $prop)
             @php
             if ($action === "create" && $prop['control'] === 'relationship_renderer') continue;
-            $fields = App\Utils\Support\WorkflowFields::parse($propKey, $prop, $values, $defaultValues);
-            extract($fields);
+            extract(App\Utils\Support\WorkflowFields::parseFields($propKey, $prop, $values, $defaultValues));
             @endphp
             <div class='col-span-{{$col_span}} grid'>
                 <div class='grid grid-row-1'>

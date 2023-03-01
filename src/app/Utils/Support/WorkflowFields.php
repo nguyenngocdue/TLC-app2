@@ -4,7 +4,7 @@ namespace App\Utils\Support;
 
 class WorkflowFields
 {
-    static function parse($key, $prop, $values, $defaultValues)
+    static function parseFields($key, $prop, $values, $defaultValues)
     {
         $result['label'] = $prop['label'];
         $columnName = $prop['column_name'];
