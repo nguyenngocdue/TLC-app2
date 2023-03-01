@@ -44,6 +44,7 @@ class AbstractLibForForm extends AbstractLib
         $json = static::_getFor($entityType);
 
         $allStatuses = static::getAll();
+
         //<< When filter, the order is the order of the allStatus, not the form order
         // $result = array_filter($allStatuses, fn ($status) => in_array($status, $json), ARRAY_FILTER_USE_KEY);
         $result = [];
