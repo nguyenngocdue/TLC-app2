@@ -12,7 +12,7 @@ use App\Utils\Support\Report;
 class Qaqc_insp_chklst_sht extends Report_ParentController
 {
     use TraitReport;
-    protected $pagingSize = 100000;
+    protected $pagingSize = 10;
     public function getSqlStr($urlParams)
     {
         // dd($urlParams);
@@ -148,7 +148,6 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
 
     protected function enrichDataSource($dataSource, $urlParams)
     {
-        // dd($dataSource);
         $isNullParams = $this->isNullUrlParams($urlParams);
         if ($isNullParams) {
             $dataSource->setCollection(collect([]));
@@ -165,6 +164,7 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
         $result = Report::mergeArrayValues($groupedArray);
         $dt = $this->changeValueData($result);
         $dataSource->setCollection(collect($dt));
+        // dd($dataSource);
 
         return $dataSource;
     }
