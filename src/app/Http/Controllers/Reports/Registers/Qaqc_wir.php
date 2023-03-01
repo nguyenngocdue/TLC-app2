@@ -79,11 +79,6 @@ class Qaqc_wir extends Report_ParentController
                 "title" => "Modular Name",
                 "dataIndex" => "prod_name",
                 "align" => ""
-            ],
-            [
-                "title" => "Prod ID",
-                "dataIndex" => "prod_id",
-                "align" => "right"
             ]
         ];
         // dd($dataColumn);
@@ -143,9 +138,10 @@ class Qaqc_wir extends Report_ParentController
                 $color = 'bg-red-500';
             }
             $route = !is_null($item->doc_id) ? route('qaqc_wirs.show', $item->wir_id) : $routeCreate;
-            $html = "<div class='$color' title=''><a href='$route'>$item->doc_id</a></div>";
+            $docId = str_pad($item->doc_id, 6, 0, STR_PAD_LEFT);
+            $html = "<div class='$color' title=''><a href='$route'>$docId</a></div>";
             if (is_null($item->doc_id)) {
-                $html =  "<div class='bg-gray-400' title='prod_id: {$item->prod_id}'><a href='$route'><i class='fa-regular fa-circle-plus'></i></a></div>";
+                $html =  "<div class='bg-white' title='prod_id: {$item->prod_id}'><a href='$route'><i class='fa-regular fa-circle-plus'></i></a></div>";
             }
 
             $arr = [];
@@ -169,7 +165,7 @@ class Qaqc_wir extends Report_ParentController
             $arrayDiff = array_diff($wirDesc, array_keys($item));
             // dd($arrayDiff, $wirDesc, $item);
 
-            $html =  "<div class='bg-gray-400' title='prod_id: {$item['prod_id']}'><a href='$routeCreate'><i class='fa-regular fa-circle-plus'></i></a></div>";
+            $html =  "<div class='bg-white' title='prod_id: {$item['prod_id']}'><a href='$routeCreate'><i class='fa-regular fa-circle-plus'></i></a></div>";
             $combineArray = array_merge(...array_map(fn ($item) => [$item => $html], $arrayDiff));
             // dd($combineArray);
             $enrichData = $item + $combineArray;
