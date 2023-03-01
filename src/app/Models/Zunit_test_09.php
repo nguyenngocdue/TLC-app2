@@ -76,7 +76,7 @@ class Zunit_test_09 extends ModelExtended
     ];
 
     public $oracyParams = [
-        "dropdownMonitors()" => ["getCheckedByField", User::class],
+        "dropdownMonitorsZut9()" => ["getCheckedByField", User::class],
     ];
 
     public function getManyLineParamsReduce11()
@@ -114,7 +114,7 @@ class Zunit_test_09 extends ModelExtended
             ['dataIndex' => 'name', 'cloneable' => true],
             ['dataIndex' => 'prod_discipline_1', 'cloneable' => true],
             ['dataIndex' => 'assignee_1', 'cloneable' => true],
-            ['dataIndex' => 'dropdownMonitors()', 'cloneable' => true],
+            ['dataIndex' => 'dropdownMonitorsZut9()', 'cloneable' => true],
         ];
     }
     public function getManyLineParamsDot()
@@ -171,7 +171,7 @@ class Zunit_test_09 extends ModelExtended
         ];
     }
 
-    public function dropdownMonitors()
+    public function dropdownMonitorsZut9()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
