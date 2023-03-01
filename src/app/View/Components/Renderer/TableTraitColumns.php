@@ -39,7 +39,16 @@ trait TableTraitColumns
         $styleStr = $this->getStyleStr($column);
         $iconJson = $columnType === 'json' ? '<br/><i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
         if ($columnType === 'json') $title .= $iconJson;
-        return "<th class='{$dataIndex}_th px-4 py-3' $styleStr title='$tooltip'>{$title}</th>";
+        $rotate45Width = $this->rotate45Width;
+        $rotate45Height = $rotate45Width - 100;
+        $classTh = ($this->rotate45Width) ? "rotated-title-th h-[{$rotate45Height}px]" : "";
+        $classDiv = ($this->rotate45Width) ? "rotated-title-div text-right w-[{$rotate45Width}px]" : "";
+        $th = "";
+        $th .= "<th class='px-4 py-3 $classTh' $styleStr title='$tooltip'>";
+        $th .= "<div class='$classDiv' style='height: 50px; display: flex; justify-content: center; flex-flow: column;'><span>" . $title . "</span></div>";
+        $th .= "</th>";
+
+        return $th;
     }
 
     private function getColumnRendered($columns)

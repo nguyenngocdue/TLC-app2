@@ -19,6 +19,10 @@ class Prod_routing extends ModelExtended
         "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
     ];
 
+    // public $oracyParams = [
+    //     "getWirDescriptions()" => ["getCheckedByField", Wir_description::class],
+    // ];
+
     public function prodRoutingLinks()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -48,7 +52,13 @@ class Prod_routing extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    
+
+    // public function getWirDescriptions()
+    // {
+    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    // }
+
     public function getManyLineParams()
     {
         return [

@@ -1,3 +1,23 @@
+th.rotated-title-th {
+    vertical-align: bottom;
+    text-align: left!important;
+    line-height: 1;
+    padding: 0;
+    border-right: none!important;
+    position: relative;
+}
+
+.rotated-title-div {
+    position: absolute;
+    bottom: 0;
+    right: 75%;
+    -webkit-transform-origin: bottom right;
+    transform-origin: bottom right;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    pointer-events: auto;
+}
+
 grammarly-desktop-integration{
     display: none;
 }
