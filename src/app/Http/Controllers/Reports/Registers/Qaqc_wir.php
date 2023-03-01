@@ -59,7 +59,7 @@ class Qaqc_wir extends Report_ParentController
     protected function getTableColumns($dataSource)
     {
         $items = $dataSource->items();
-        if (!is_array($dataSource->items()[0])) {
+        if (!is_array($dataSource->items())) {
             $items = Report::pressArrayTypeAllItems($dataSource);
         }
 
@@ -67,6 +67,7 @@ class Qaqc_wir extends Report_ParentController
         $flattenData = array_merge(...$items);
         $idx = array_search("wir_status", array_keys($flattenData));
         $dataColumn = array_slice($flattenData, $idx + 1, count($flattenData) - $idx, true);
+        ksort($dataColumn);
 
         $adds = [
             [
@@ -101,6 +102,9 @@ class Qaqc_wir extends Report_ParentController
 
     protected function transformDataSource($dataSource, $urlParams)
     {
+        // $isNullParams = $this->isNullUrlParams($urlParams);
+        // if ($isNullParams) return collect([]);
+
         $routeCreate = route("qaqc_wirs.create");
         $items = $dataSource->all();
         $entityStatuses = LibStatuses::getFor('qaqc_wir');

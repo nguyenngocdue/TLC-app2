@@ -94,14 +94,10 @@ class Qaqc_insp_chklst extends Report_ParentController
 	protected function enrichDataSource($dataSource, $urlParams)
 	{
 		$isNullParams = $this->isNullUrlParams($urlParams);
-		if ($isNullParams) {
-			$dataSource->setCollection(collect([]));
-			return $dataSource;
-		};
+		if ($isNullParams) return collect([]);
 
-		$dataArray = $dataSource->items();
 		$lines =  [];
-		foreach ($dataArray as $item) {
+		foreach ($dataSource as $item) {
 			if (isset($item->line_id)) {
 				$lines[$item->line_id] = (array)$item;
 			}
@@ -175,10 +171,8 @@ class Qaqc_insp_chklst extends Report_ParentController
 			$data[$sheetId] = array_values($values);
 		}
 		ksort($data);
-		$dataSource->setCollection(collect(array_values($data)));
-
 		// dd("123", $dataSource);
-		return $dataSource;
+		return collect($data);
 	}
 
 	protected function getAttachment($object_type, $object_id)
@@ -270,7 +264,7 @@ class Qaqc_insp_chklst extends Report_ParentController
 
 	protected function getSheets($dataSource)
 	{
-		$items = Report::changeTypeAllItems($dataSource);
+		$items = Report::pressArrayTypeAllItems($dataSource);
 		// dd($items);
 		$sheets = array_values(array_map(function ($item) {
 			$x = isset(array_pop($item)['sheet_name']);

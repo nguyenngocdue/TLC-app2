@@ -135,12 +135,8 @@ class Hr_overtime_request_line extends Report_ParentController
     protected function enrichDataSource($dataSource, $urlParams)
     {
         $isNullParams = $this->isNullUrlParams($urlParams);
-        if ($isNullParams) {
-            $dataSource->setCollection(collect([]));
-            return $dataSource;
-        };
+        if ($isNullParams) return collect([]);
 
-        if (!count(array_values($urlParams))) return [];
         foreach ($dataSource as $key => $value) {
 
             // display name/description for total_overtime_hours
