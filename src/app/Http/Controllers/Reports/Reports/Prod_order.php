@@ -13,8 +13,9 @@ class Prod_order extends Report_ParentController
 
 {
     use TraitReport;
-    public function getSqlStr($urlParams)
+    public function getSqlStr($modeParams)
     {
+        // dd($modeParams);
         $sql = "SELECT 
                 po.id AS po_id
                 ,po.name AS po_name
@@ -31,9 +32,8 @@ class Prod_order extends Report_ParentController
                     LEFT JOIN prod_routing_details prd ON po.prod_routing_id = prd.prod_routing_id
                     LEFT JOIN prod_sequences ps ON po.id = ps.prod_order_id
                     WHERE 1 = 1 \n";
-        // dump($urlParams);
-        if (isset($urlParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}' \n";
-        if (isset($urlParams['prod_order'])) $sql .= "\n AND po.id = '{{prod_order}}'\n ";
+        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}' \n";
+        if (isset($modeParams['prod_order'])) $sql .= "\n AND po.id = '{{prod_order}}'\n ";
         $sql .=  "GROUP BY po.id";
         return $sql;
     }
@@ -84,9 +84,10 @@ class Prod_order extends Report_ParentController
         $prod_orders  = ['prod_order' =>  ModelsProd_order::get()->pluck('name', 'id')->toArray()];
         return array_merge($subProjects, $prod_orders);
     }
-    protected function enrichDataSource($dataSource, $urlParams)
+    protected function enrichDataSource($dataSource, $modeParams)
     {
-        $isNullParams = $this->isNullUrlParams($urlParams);
+        $isNullParams = $this->isNullModeParams($modeParams);
         if ($isNullParams) return collect([]);
+        else return $dataSource;
     }
 }

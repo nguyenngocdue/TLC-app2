@@ -12,10 +12,8 @@ use App\Utils\Support\Report;
 class Qaqc_insp_chklst_sht extends Report_ParentController
 {
     use TraitReport;
-    protected $pagingSize = 10;
-    public function getSqlStr($urlParams)
+    public function getSqlStr($modeParams)
     {
-        // dd($urlParams);
         $sql = "SELECT tb.*,
         CASE
             WHEN sheet_status_combine LIKE '%No%' THEN 'Inprogress'
@@ -59,8 +57,8 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
                     , chlst.id AS check_list_id
                     FROM prod_orders prod, qaqc_insp_chklsts chlst, qaqc_insp_tmpls tmpl, qaqc_insp_tmpl_shts tmplsh
                     WHERE 1 = 1";
-        if (isset($urlParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
-        if (isset($urlParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND chlst.qaqc_insp_tmpl_id = '{{qaqc_insp_tmpl_id}}'";
+        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
+        if (isset($modeParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND chlst.qaqc_insp_tmpl_id = '{{qaqc_insp_tmpl_id}}'";
         $sql .= "\n AND chlst.qaqc_insp_tmpl_id = 1
                     AND chlst.prod_order_id = prod.id
                     AND chlst.qaqc_insp_tmpl_id = tmpl.id
@@ -148,9 +146,9 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
         return array_merge($subProjects, $insp_tmpls);
     }
 
-    protected function enrichDataSource($dataSource, $urlParams)
+    protected function enrichDataSource($dataSource, $modeParams)
     {
-        $isNullParams = $this->isNullUrlParams($urlParams);
+        $isNullParams = $this->isNullModeParams($modeParams);
         if ($isNullParams) return collect([]);
 
         $enrichData = array_map(function ($item) {

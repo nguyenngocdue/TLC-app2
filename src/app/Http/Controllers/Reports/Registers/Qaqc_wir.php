@@ -12,10 +12,8 @@ use Illuminate\Support\Facades\DB;
 class Qaqc_wir extends Report_ParentController
 {
     use TraitReport;
-    protected $pagingSize = 50;
-    public function getSqlStr($urlParams)
+    public function getSqlStr($modeParams)
     {
-        // dd($urlParams);
         $sql =
             "SELECT tb2.*
                         ,wir.id AS wir_id
@@ -36,8 +34,8 @@ class Qaqc_wir extends Report_ParentController
                         ,prodr.id AS prod_routings_id
                         FROM prod_orders prod, sub_projects sub, prod_routings prodr
                         WHERE 1 = 1";
-        if (isset($urlParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
-        if (isset($urlParams['prod_routing_id'])) $sql .= "\n AND prodr.id = '{{prod_routing_id}}'";
+        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
+        if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND prodr.id = '{{prod_routing_id}}'";
         $sql .= "\n AND sub.id = prod.sub_project_id
                         AND prodr.id = prod.prod_routing_id ) AS tb1
                         LEFT JOIN prod_routing_details prodrd ON prodrd.prod_routing_id = tb1.prod_routings_id
@@ -120,9 +118,9 @@ class Qaqc_wir extends Report_ParentController
 
 
 
-    protected function transformDataSource($dataSource, $urlParams)
+    protected function transformDataSource($dataSource, $modeParams)
     {
-        // $isNullParams = $this->isNullUrlParams($urlParams);
+        // $isNullParams = $this->isNullModeParams($modeParams);
         // if ($isNullParams) return collect([]);
 
         $routeCreate = route("qaqc_wirs.create");

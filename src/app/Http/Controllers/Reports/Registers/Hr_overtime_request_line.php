@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\DB;
 class Hr_overtime_request_line extends Report_ParentController
 {
     use TraitReport;
-    public function getSqlStr($urlParams)
+    public function getSqlStr($modeParams)
     {
-        // dd($urlParams);
         $sql = "
         SELECT otTb.*, wpus.name AS user_workplace
         FROM (SELECT 
@@ -35,13 +34,13 @@ class Hr_overtime_request_line extends Report_ParentController
                     AND otline.user_id = us.id
                     AND otline.hr_overtime_request_id = otr.id
                     AND uscate.id = us.category";
-        if (isset($urlParams['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
+        if (isset($modeParams['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
 
-        if (isset($urlParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
+        if (isset($modeParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
         $sql .= "\n GROUP BY user_id, employeeid, year_months, workplace_id) AS rgt_ot \n";
 
         $sql .= "JOIN workplaces wp ON wp.id = rgt_ot.ot_workplace_id";
-        if (isset($urlParams['ot_workplace_id'])) $sql .= "\n AND wp.id = '{{ot_workplace_id}}'";
+        if (isset($modeParams['ot_workplace_id'])) $sql .= "\n AND wp.id = '{{ot_workplace_id}}'";
         $sql .= "\n ORDER BY workplace, user_category_name, first_name, last_name, employeeid, year_months DESC )AS otTb, workplaces wpus
                     WHERE 1 = 1
                     AND otTb.user_workplace_id = wpus.id ";
@@ -132,9 +131,9 @@ class Hr_overtime_request_line extends Report_ParentController
 
         return array_merge($workplaces, $months, $users);
     }
-    protected function enrichDataSource($dataSource, $urlParams)
+    protected function enrichDataSource($dataSource, $modeParams)
     {
-        $isNullParams = $this->isNullUrlParams($urlParams);
+        $isNullParams = $this->isNullModeParams($modeParams);
         if ($isNullParams) return collect([]);
 
         foreach ($dataSource as $key => $value) {

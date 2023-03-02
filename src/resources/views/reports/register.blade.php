@@ -1,16 +1,14 @@
 @extends('layouts.app')
 
-@section('topTitle',$typeReport)
-@section('title', $entity)
-{{-- @dump($tableDataSource, $tableColumns) --}}
-{{-- @dump($typeReport) --}}
-{{-- reports/register-hr_overtime_request_line --}}
+@section('topTitle', $topTitle)
+@section('title', $typeReport)
+
 @section('content')
 <div class="px-4 ">
     <div class="flex justify-end pb-2 pr-4">
-        <x-form.per-page type="{{$typeReport}}" route="{{ route('updateUserSettings') }}" />
+        <x-form.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" route="{{ route('updateUserSettings') }}" page-limit="{{$pageLimit}}" />
     </div>
-    <x-renderer.parameter-control :dataSource="$dataModeControl" :itemsSelected="$urlParams" />
-    <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource" showNo={{true}} rotate45Width={{600}}/>
+    <x-form.parameter-report :dataSource="$dataModeControl" :itemsSelected="$modeParams" route="{{ route('updateUserSettings') }}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
+    <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource" showNo={{true}} rotate45Width={{600}} />
 </div>
 @endsection
