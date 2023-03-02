@@ -5,9 +5,9 @@
         "label": "",
         "validation": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_name": {
@@ -16,9 +16,9 @@
         "label": "",
         "validation": "required",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_description": {
@@ -27,9 +27,9 @@
         "label": "",
         "validation": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_slug": {
@@ -38,9 +38,42 @@
         "label": "",
         "validation": "",
         "formula": "All_SlugifyByName",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
+        "control_extra": ""
+    },
+    "_def_assignee": {
+        "name": "_def_assignee",
+        "column_name": "def_assignee",
+        "label": "",
+        "validation": "",
+        "formula": "",
         "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getDefMonitors1()": {
+        "name": "_getDefMonitors1()",
+        "column_name": "getDefMonitors1()",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
         "control_extra": ""
     },
     "_created_at": {
@@ -49,9 +82,9 @@
         "label": "",
         "validation": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_updated_at": {
@@ -60,9 +93,9 @@
         "label": "",
         "validation": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_routingLink": {
@@ -71,9 +104,42 @@
         "label": "",
         "validation": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
+        "control_extra": ""
+    },
+    "_getDiscipline1s": {
+        "name": "_getDiscipline1s",
+        "column_name": "getDiscipline1s",
+        "label": "",
+        "validation": "",
+        "formula": "",
         "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getErpRoutingLinks": {
+        "name": "_getErpRoutingLinks",
+        "column_name": "getErpRoutingLinks",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getWirDescriptions": {
+        "name": "_getWirDescriptions",
+        "column_name": "getWirDescriptions",
+        "label": "",
+        "validation": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
         "control_extra": ""
     }
 }

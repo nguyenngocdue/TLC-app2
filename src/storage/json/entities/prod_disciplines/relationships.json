@@ -68,7 +68,7 @@
         "name": "_getErpRoutingLinks",
         "relationship": "hasMany",
         "control_name": "getErpRoutingLinks",
-        "renderer_view_all": "coagg_countunt",
+        "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
