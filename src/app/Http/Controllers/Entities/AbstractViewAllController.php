@@ -17,6 +17,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 
@@ -201,7 +202,7 @@ abstract class AbstractViewAllController extends Controller
                 'title' => $prop['label'],
                 'dataIndex' => $prop['column_name'],
             ];
-            if (isset($prop['width']) && $prop['width']) $output['width'] = $prop['width'];
+            $output['width'] = (isset($prop['width']) && $prop['width']) ? $prop['width'] : 100;
 
             switch ($prop['control']) {
                 case 'id':
