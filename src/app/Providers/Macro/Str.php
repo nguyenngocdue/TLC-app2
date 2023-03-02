@@ -102,3 +102,10 @@ Str::macro('markDocId', function ($dataSource, $type = null) {
     }
     return $docIdName;
 });
+Str::macro('arrayToAttrs', function (array $array) {
+    $result = [];
+    foreach ($array as $key => $value) {
+        $result[] = "$key='$value'";
+    }
+    return join(" ", $result);
+});
