@@ -23,6 +23,17 @@ class RelationshipRenderer extends Component
     private static $table00Count = 1;
     private $table01Name;
     private $tableDebug = false;
+
+    private $tablesInEditableMode = [
+        'hse_incident_reports' => ['hse_corrective_actions'],
+        'hr_overtime_requests' => ['hr_overtime_request_lines'],
+
+        'zunit_test_11s' => 'zunit_test_01s',
+        'zunit_test_12s' => 'zunit_test_02s',
+        'zunit_test_13s' => 'zunit_test_03s',
+        'zunit_test_15s' => 'zunit_test_05s',
+        'zunit_test_19s' => 'zunit_test_09s',
+    ];
     /**
      * Create a new component instance.
      *
@@ -47,7 +58,9 @@ class RelationshipRenderer extends Component
         $fillable = $dummyInstance->getFillable();
         $hasOrderNoColumnInFillable = in_array('order_no', $fillable);
 
-        $hasOrderNoColumnInManyLineParams = false !== array_search('order_no', array_map(fn ($c) => $c['dataIndex'], $columns));
+        // Log::info($columns);
+        $allDataIndex = array_map(fn ($c) => $c['dataIndex'] ?? "", $columns);
+        $hasOrderNoColumnInManyLineParams = false !== array_search('order_no', $allDataIndex);
         // dump($columns, $hasOrderNoColumnInManyLineParams);
 
         // if (!$hasOrderNoColumn) dump("Order_no column not found, re-ordering function will not work");
@@ -111,7 +124,7 @@ class RelationshipRenderer extends Component
             : $instance->$fn();
 
         $row = $modelPath::find($id);
-        $isOrderable = $row ? $this->isTableOrderable($row, $colName, $columns) : [];
+        $isOrderable = $row ? $this->isTableOrderable($row, $colName, $columns) : false;
         $dataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
         switch ($renderer_edit) {
             case "many_icons":
@@ -126,12 +139,16 @@ class RelationshipRenderer extends Component
                 $sp = SuperProps::getFor($tableName);
                 $dataSourceWithOld = $this->convertOldToDataSource($this->table01Name, $dataSource, $lineModelPath);
                 $editableColumns = $this->makeEditableColumns($columns, $sp, $tableName, $this->table01Name);
-                $this->alertIfFieldsAreMissingFromFillable($instance, $lineModelPath, $editableColumns);
+                $editable = isset($this->tablesInEditableMode[$this->type]) && in_array($tableName, $this->tablesInEditableMode[$this->type]);
+                if ($editable) {
+                    $this->alertIfFieldsAreMissingFromFillable($instance, $lineModelPath, $editableColumns);
+                }
                 //remakeOrderNoColumn MUST before attach Action Column
                 $dataSourceWithOld = $this->remakeOrderNoColumn($dataSourceWithOld);
                 $dataSourceWithOld = $this->attachActionColumn($this->table01Name, $dataSourceWithOld, $isOrderable);
                 // dump($dataSourceWithOld);
                 // dump($dataSource);
+                // $tableName = $lineModelPath::getTableName();
                 return view('components.controls.many-line-params', [
                     'table01ROName' => $this->table01Name . "RO",
                     'readOnlyColumns' => $this->makeReadOnlyColumns($columns, $sp, $tableName),
@@ -144,13 +161,14 @@ class RelationshipRenderer extends Component
                     'dataSourceWithOld' => $dataSourceWithOld,
 
                     'tableFooter' => $tableFooter,
-                    'tableName' => $lineModelPath::getTableName(),
+                    'tableName' => $tableName,
                     'tableDebug' => $this->tableDebug ? true : false,
                     'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
 
                     'entityId' => CurrentRoute::getEntityId($this->type),
                     'entityType' => Str::modelPathFrom($this->type),
                     'userId' => CurrentUser::get()->id,
+                    'editable' => $editable,
                 ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";

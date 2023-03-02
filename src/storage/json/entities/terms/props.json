@@ -111,6 +111,38 @@
         "hidden_print": "",
         "new_line": ""
     },
+    "_parent3_id": {
+        "name": "_parent3_id",
+        "column_name": "parent3_id",
+        "column_type": "bigint",
+        "label": "Parent3 ID",
+        "control": "number",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
+    },
+    "_parent4_id": {
+        "name": "_parent4_id",
+        "column_name": "parent4_id",
+        "column_type": "bigint",
+        "label": "Parent4 ID",
+        "control": "number",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "new_line": ""
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",

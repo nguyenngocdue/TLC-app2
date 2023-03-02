@@ -14,6 +14,8 @@ class Term extends ModelExtended
         'field_id',
         'parent1_id',
         'parent2_id',
+        'parent3_id',
+        'parent4_id',
         'owner_id'
     ];
     protected $table = "terms";

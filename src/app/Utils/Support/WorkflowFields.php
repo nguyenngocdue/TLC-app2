@@ -26,7 +26,7 @@ class WorkflowFields
         $result['hiddenLabel'] = $prop['hidden_label'] === 'true';
         $result['readOnly'] = ($prop['read_only'] ?? false) === 'true';
 
-        $result['defaultValue'] = $defaultValues[$key] ?? [];
+        $defaultValue = $defaultValues[$key] ?? [];
         $result['labelExtra'] = $defaultValue['label_extra'] ?? "";
         $result['placeholder'] = $defaultValue['placeholder'] ?? "";
         $result['controlExtra'] = $defaultValue['control_extra'] ?? "";
