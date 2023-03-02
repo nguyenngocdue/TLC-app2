@@ -34,7 +34,8 @@ class SendCreateNewDocumentNotificationListener implements ShouldQueue
         $currentValue = $event->{'currentValue'};
         if (!$currentValue['status'] || !$currentValue['owner_id']) {
             dump('Does not exist status or owner_id in database');
-            dd('Please check both columns if want using send notifications and send mail');
+            dump('Please check both columns if want using send notifications and send mail');
+            return;
         }
         foreach ($currentValue as $key => $value) {
             switch ($key) {

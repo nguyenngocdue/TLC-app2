@@ -55,7 +55,7 @@ class Hr_overtime_request_line extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ["dataIndex" => 'order_no', 'invisible' => true],
+            ["dataIndex" => 'order_no', 'invisible' => !true],
             ["dataIndex" => 'id', 'title' => 'OT Line ID'],
             ['dataIndex' => 'hr_overtime_request_id', 'title' => 'OT ID', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'user_id', 'title' => 'Full Name', 'value_as_user_id' => true, 'cloneable' => true],

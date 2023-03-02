@@ -1,3 +1,10 @@
 [
-    "new"
+    "concept",
+    "design",
+    "timesheet_only",
+    "manufacturing",
+    "construction_site",
+    "closed",
+    "cancelled",
+    "on_hold"
 ]

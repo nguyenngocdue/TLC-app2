@@ -74,7 +74,7 @@ Str::macro('markDocId', function ($dataSource, $type = null) {
     if (!$type) {
         $type = $dataSource->getTable();
     }
-    $docId = $dataSource['doc_id'];
+    $docId = $dataSource['doc_id'] ?? '';
     $libAppsData = LibApps::getFor($type);
     $docIdName = '';
     if ($nameColumnDocIDFormat = $libAppsData['doc_id_format_column']) {

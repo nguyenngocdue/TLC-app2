@@ -105,6 +105,10 @@ return new class extends Migration
         });
         Schema::table('pj_pods', function (Blueprint $table) {
             $table->foreign('pj_module_id')->references('id')->on('pj_modules');
+            $table->foreign('pj_shipment_id')->references('id')->on('pj_shipments');
+        });
+        Schema::table('pj_staircases', function (Blueprint $table) {
+            $table->foreign('pj_shipment_id')->references('id')->on('pj_shipments');
         });
         Schema::table('pj_shipments', function (Blueprint $table) {
             $table->foreign('project_id')->references('id')->on('projects');

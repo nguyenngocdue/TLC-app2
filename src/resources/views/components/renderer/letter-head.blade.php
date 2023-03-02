@@ -5,7 +5,9 @@
     <tbody>
         <tr>
             <td align="left">
-                <img alt="TLC Logo" width1="245" height1="80" src="{{$dataSource['company_logo']}}" class="w-full pl-5">
+                <div class="h-20 w-56">
+                    <img alt="TLC Logo" src="{{$dataSource['company_logo']}}" class="h-full w-full">
+                </div>
             </td>
             <td align="center"></td>
             <td class="text-sm">
@@ -24,11 +26,13 @@
                                 {{$tableName}}
                             </div>
                     </div>
-                    <div class="flex flex-row flex-wrap gap-y-0 mb-1 mr-1">
-                        <div class="border border-gray-600 p-1">
+                    @if($nameRenderDocId)
+                    <div class="flex flex-row flex-wrap gap-y-0 mb-1">
+                        <div class="border border-gray-600 p-1 text-base">
                             Doc ID: {{$nameRenderDocId}}
                         </div>
                     </div>
+                    @endif
             </td>
         </tr>
     </tbody>
