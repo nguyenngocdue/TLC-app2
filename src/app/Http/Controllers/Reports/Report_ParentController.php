@@ -78,7 +78,8 @@ abstract class Report_ParentController extends Controller
     private function paginateDataSource($dataSource, $pageLimit)
     {
         $page = $_GET['page'] ?? 1;
-        $dataSource = new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page); //->appends(request()->query();
+        $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))->appends(request()->query());
+        // dd($dataSource);
         return $dataSource;
     }
 
@@ -98,16 +99,13 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
 
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
+        // dump(count($dataSource));
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
+        // dd($dataSource);
 
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
         $columns = $this->getTableColumns($dataSource);
         $sheets = $this->getSheets($dataSource);
-
-        $modeParams = $this->getModeParams($typeReport, $entity);
-
-        $pageLimit = $this->getPageParam($typeReport, $entity);
-        $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
 
         return view('reports.' . $viewName, [
             'tableColumns' => $columns,
