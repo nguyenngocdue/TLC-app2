@@ -15,6 +15,7 @@ class LetterHead extends Component
     public function __construct(
         private $type,
         private $showId,
+        private $dataSource,
     ) {
         //
     }
@@ -26,7 +27,7 @@ class LetterHead extends Component
      */
     public function render()
     {
-        $dataSource = [
+        $data = [
             'company_logo' => asset('logo/tlc.png'),
             'company_name' => 'TLC MODULAR CONSTRUCTION LIMITED LIABILITY COMPANY',
             'company_address' => '326 Vo Van Kiet Street, Co Giang Ward, District 1, HCMC, Vietnam',
@@ -35,10 +36,12 @@ class LetterHead extends Component
             'company_email' => 'info@tlcmodular.com',
             'company_website' => 'https://www.tlcmodular.com',
         ];
+        $nameRenderDocId = Str::markDocId($this->dataSource, $this->type);
         return view('components.renderer.letter-head', [
-            'dataSource' => $dataSource,
+            'dataSource' => $data,
             'id' => $this->showId,
             'type' => Str::plural($this->type),
+            'nameRenderDocId' => $nameRenderDocId,
         ]);
     }
 }

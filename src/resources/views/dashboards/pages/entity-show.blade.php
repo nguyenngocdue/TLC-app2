@@ -7,7 +7,7 @@
 {{-- @dd($dataSource) --}}
 <div class="flex justify-center">
     <div class="w-[1000px] min-h-[1300px] items-center border bg-white box-border">
-        <x-renderer.letter-head showId={{$showId}} type={{$type}} />
+        <x-renderer.letter-head showId={{$showId}} type={{$type}} :dataSource="$dataSource" />
             @foreach($propsTree as $propTree)
                 <x-renderer.description-group type={{$type}} modelPath={{$modelPath}} :propTree="$propTree" :dataSource="$dataSource" />
             @endforeach

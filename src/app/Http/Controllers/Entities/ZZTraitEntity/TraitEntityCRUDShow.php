@@ -54,6 +54,7 @@ trait TraitEntityCRUDShow
 				}
 			}
 		}
+
 		return view('dashboards.pages.entity-show', [
 			'propsTree' => array_values($node),
 			'dataSource' => $dataSource,

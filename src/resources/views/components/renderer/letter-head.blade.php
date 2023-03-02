@@ -19,13 +19,14 @@
                             <div class="flex w-28 transform rotate-[270deg] float-right -ml-14 text-xs whitespace-pre-wrap">
                                 @php
                                     $tableName = $type.'/'.$id;
-                                    $tableName = substr_replace()
+                                    $tableName = join(' ',str_split($tableName, 16)); 
                                 @endphp
+                                {{$tableName}}
                             </div>
                     </div>
                     <div class="flex flex-row flex-wrap gap-y-0 mb-1 mr-1">
                         <div class="border border-gray-600 p-1">
-                            Doc ID: TLC-HLC-ECO-0083
+                            Doc ID: {{$nameRenderDocId}}
                         </div>
                     </div>
             </td>
