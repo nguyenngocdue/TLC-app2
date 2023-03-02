@@ -13,6 +13,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_workplace_id": {
@@ -29,6 +31,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_ot_purpose": {
@@ -45,6 +49,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_getHrOTLines": {
@@ -61,6 +67,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_assignee_1": {
@@ -77,6 +85,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_getMonitors1()": {
@@ -93,6 +103,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_owner_id": {
@@ -109,6 +121,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_status": {
@@ -121,10 +135,12 @@
         "col_span": "",
         "width": "",
         "hidden_view_all": "",
-        "hidden_edit": "true",
+        "hidden_edit": "",
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_created_at": {
@@ -141,6 +157,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_updated_at": {
@@ -157,6 +175,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     }
 }
