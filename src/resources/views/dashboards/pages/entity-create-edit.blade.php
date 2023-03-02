@@ -11,6 +11,7 @@ $id = $action === "edit" ? $values->id : "";
 $status = $values->status ?? null;
 @endphp
 
+{{-- @dump($item) --}}
 {{-- @dump($values) --}}
 <script>
     k = @json($listenerDataSource);

@@ -6,7 +6,7 @@
 @section('content')
 {{-- @dd($dataSource) --}}
 <div class="flex justify-center">
-    <div class="w-[1000px] min-h-[1300px] items-center bor9der bg-white box-border">
+    <div class="w-[1000px] min-h-[1100px] items-center bor9der bg-white box-border">
         @foreach($dataSource as $keyGroup => $group)
             <div class="grid grid-cols-2 gap-4 p-5">
                 @foreach($group as $keyItem => $item)
