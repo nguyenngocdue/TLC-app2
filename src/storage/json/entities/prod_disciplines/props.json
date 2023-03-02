@@ -94,7 +94,7 @@
         "column_name": "getDefMonitors1()",
         "column_type": "oracy_prop",
         "label": "Default Monitors",
-        "control": "dropdown",
+        "control": "dropdown_multi",
         "align": "",
         "col_span": "",
         "width": "",
