@@ -82,7 +82,7 @@ class RelationshipRenderer extends Component
             if (isset($eloquentParam[2])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
             elseif (isset($eloquentParam[1])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1]);
             elseif (isset($eloquentParam[0])) $relation = $row->{$eloquentParam[0]}();
-            $perPage = $showAll ? 10000 : 10;
+            $perPage = $showAll ? 10000 : 25;
             $result = $relation->getQuery();
             if ($isOrderable) $result = $result->orderBy('order_no');
             $result = $result->paginate($perPage, ['*'], $colName);
@@ -103,10 +103,11 @@ class RelationshipRenderer extends Component
         // dump($props);
 
         $renderer_edit = $props['relationships']['renderer_edit'];
-        // $showAll = $renderer_edit === "many_icons";
-        $showAll = true;
         $lineModelPath = $props['relationships']['eloquentParams'][1];
         $instance = new $lineModelPath;
+        $tableName = $lineModelPath::getTableName();
+        $editable = isset($this->tablesInEditableMode[$this->type]) && in_array($tableName, $this->tablesInEditableMode[$this->type]);
+        $showAll = ($renderer_edit === "many_icons" || ($renderer_edit === "many_lines" && $editable));
 
         $tableFooter = "";
         $fn = $props['relationships']['renderer_edit_param'];
@@ -114,7 +115,6 @@ class RelationshipRenderer extends Component
             $tableFooter = "Function $fn() not found in $lineModelPath";
             $fn = '';
         }
-        $tableName = $lineModelPath::getTableName();
         $defaultColumns = [
             ["dataIndex" => 'id', "renderer" => "id", "type" => $tableName, "align" => "center"],
         ];
@@ -139,7 +139,6 @@ class RelationshipRenderer extends Component
                 $sp = SuperProps::getFor($tableName);
                 $dataSourceWithOld = $this->convertOldToDataSource($this->table01Name, $dataSource, $lineModelPath);
                 $editableColumns = $this->makeEditableColumns($columns, $sp, $tableName, $this->table01Name);
-                $editable = isset($this->tablesInEditableMode[$this->type]) && in_array($tableName, $this->tablesInEditableMode[$this->type]);
                 if ($editable) {
                     $this->alertIfFieldsAreMissingFromFillable($instance, $lineModelPath, $editableColumns);
                 }
