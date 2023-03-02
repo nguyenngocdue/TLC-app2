@@ -111,7 +111,7 @@ class RelationshipRenderer extends Component
         $tableFooter = "";
         $fn = $props['relationships']['renderer_edit_param'];
         if (!method_exists($instance, $fn)) {
-            $tableFooter = "Not found $fn in $lineModelPath";
+            $tableFooter = "Function $fn() not found in $lineModelPath";
             $fn = '';
         }
         $tableName = $lineModelPath::getTableName();

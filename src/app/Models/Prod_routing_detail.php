@@ -54,7 +54,7 @@ class Prod_routing_detail extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => !true],
             ['dataIndex' => 'prod_routing_id',],
             ['dataIndex' => 'prod_routing_link_id',],
             ['dataIndex' => 'erp_routing_link_id',],

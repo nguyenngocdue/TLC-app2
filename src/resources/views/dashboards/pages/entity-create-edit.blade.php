@@ -101,6 +101,7 @@ $status = $values->status ?? null;
                                 <x-controls.id name={{$columnName}} value="{{$action === 'edit' ? $value : 'to be generated'}}" />
                                 @break
                                 @case('hyperlink')
+                                @php $placeholder="https://www.google.com"; @endphp
                                 @case('text')
                                 @case('thumbnail')
                                 <x-controls.text name={{$columnName}} value={{$value}} placeholder="{{$placeholder}}" />
