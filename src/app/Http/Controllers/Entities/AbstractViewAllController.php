@@ -249,6 +249,12 @@ abstract class AbstractViewAllController extends Controller
                     $output['renderer'] = "hyper-link";
                     $output['align'] = 'center';
                     break;
+                case "doc_id":
+                    $output['renderer'] = 'doc-id';
+                    $output['align'] = 'center';
+                    // $output['attributes']['id'] = 'id';
+                    $output['attributes']['type'] = 'type';
+                    break;
                 default:
                     break;
             }

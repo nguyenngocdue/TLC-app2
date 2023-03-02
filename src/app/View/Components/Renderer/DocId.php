@@ -14,9 +14,19 @@ class DocId extends Component
      *
      * @return void
      */
-    public function __construct(private $id, private $type, private $docId)
-    {
+    private $id = null;
+    private $type = null;
+    private $docId = null;
+    public function __construct(
+        private $dataLine = null,
+    ) {
         //
+        // dd($dataLine);
+        if ($dataLine) {
+            $this->type = $dataLine->getTable();
+            $this->id = $dataLine->id;
+            $this->docId = $dataLine->doc_id;
+        }
     }
 
     /**
