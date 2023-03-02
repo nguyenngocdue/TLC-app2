@@ -85,6 +85,28 @@ class UpdateUserSettings extends Controller
         return $arrayFlip;
     }
 
+    private function updateReportRegister($request, $settings)
+    {
+        $reqValue = $request->all();
+        $entity = $request->input("_entity");
+        $typeReport = strtolower($request->input("type_report"));
+        $indexBreak = array_search("type_report", array_keys($reqValue));
+        $parameter = array_slice($reqValue, $indexBreak + 1, count($reqValue) - $indexBreak);
+        $settings[$entity][$typeReport]["mode_001"] = $parameter;
+        return $settings;
+    }
+
+    private function updatePerPageRegister($request, $settings)
+    {
+        $entity = $request->input("_entity");
+        $typeReport = strtolower($request->input("type_report"));
+        $perPage = $request->input('page_limit');
+        $settings[$entity][$typeReport]['page_limit'] = $perPage;
+        return $settings;
+    }
+
+
+
     /**
      * Handle the incoming request.
      *
@@ -93,10 +115,10 @@ class UpdateUserSettings extends Controller
      */
     public function __invoke(Request $request)
     {
+        // dd($request->all());
         $action = $request->input('action');
         $user = User::find(Auth::id());
         $settings = $user->settings;
-
         switch ($action) {
             case 'updatePerPage':
                 $settings = $this->updatePerPage($request, $settings);
@@ -109,6 +131,25 @@ class UpdateUserSettings extends Controller
                 break;
             case 'clearAdvanceFilter':
                 $settings = $this->clearFilter($request, $settings);
+                break;
+                //report 
+            case 'updateReportRegisters':
+                $settings = $this->updateReportRegister($request, $settings);
+                break;
+            case 'updateReportReports':
+                $settings = $this->updateReportRegister($request, $settings);
+                break;
+            case 'updateReportDocuments':
+                $settings = $this->updateReportRegister($request, $settings);
+                break;
+            case 'updatePerPageRegisters':
+                $settings = $this->updatePerPageRegister($request, $settings);
+                break;
+            case 'updatePerPageReports':
+                $settings = $this->updatePerPageRegister($request, $settings);
+                break;
+            case 'updatePerPageDocuments':
+                $settings = $this->updatePerPageRegister($request, $settings);
                 break;
             default:
                 Log::error("Unknown action $action");
