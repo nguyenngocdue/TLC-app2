@@ -71,16 +71,19 @@ class Qaqc_wir extends Report_ParentController
         $adds = [
             [
                 "dataIndex" => "sub_project_name",
-                "align" => ""
+                "align" => "center",
+                "width" => 500
             ],
             [
                 "title" => "Modular Name",
-                "dataIndex" => "prod_name",
-                "align" => ""
+                "dataIndex" => "prod_name_html",
+                "align" => "center",
+                "width" => 500
+
             ]
         ];
         // dd($dataColumn);
-        $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center"], array_keys($dataColumn));
+        $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center", "width" => 100], array_keys($dataColumn));
         $dataColumn = array_merge($adds, $sqlCol);
         // dd($sqlCol);
 
@@ -120,13 +123,13 @@ class Qaqc_wir extends Report_ParentController
 
     protected function transformDataSource($dataSource, $modeParams)
     {
-        // $isNullParams = $this->isNullModeParams($modeParams);
-        // if ($isNullParams) return collect([]);
 
+        $icon = "<i  class='fa-regular fa-circle-plus '></i>";
         $routeCreate = route("qaqc_wirs.create");
         $items = $dataSource->all();
         $entityStatuses = LibStatuses::getFor('qaqc_wir');
-        $enrichData = array_map(function ($item) use ($entityStatuses, $routeCreate) {
+
+        $transformData = array_map(function ($item) use ($entityStatuses, $routeCreate, $icon) {
             $color = "";
             if (!is_null($item->wir_status) && isset($entityStatuses[$item->wir_status])) {
                 $status = $entityStatuses[$item->wir_status];
@@ -136,43 +139,37 @@ class Qaqc_wir extends Report_ParentController
                 $color = 'bg-red-500';
             }
             $route = !is_null($item->doc_id) ? route('qaqc_wirs.show', $item->wir_id) : $routeCreate;
-            $docId = str_pad($item->doc_id, 6, 0, STR_PAD_LEFT);
-            $html = "<div class='$color' title=''><a href='$route'>$docId</a></div>";
+            $docId = str_pad($item->doc_id, 4, 0, STR_PAD_LEFT);
+            $html = "<div style='width: 36px' class='$color' title=''><a href='$route'>$docId</a></div>";
             if (is_null($item->doc_id)) {
-                $html =  "<div class='bg-white' title='prod_id: {$item->prod_id}'><a href='$route'><i class='fa-regular fa-circle-plus'></i></a></div>";
+                $html =  "<div  style='width: 36px' class='bg-white' title='prod_id: {$item->prod_id}'><a href='$route'>$icon</a></div>";
             }
 
-            $arr = [];
+            $wirdescName = [];
             if (!is_null($item->wirdesc_name)) {
-                $arr = [Report::slugName($item->wirdesc_name) => $html];
+                $wirdescName = [Report::slugName($item->wirdesc_name) => $html];
             }
-            return (array)$item + $arr;
+            // enrich prod_name ( html)
+            $prodNameHtml = ['prod_name_html' =>  "<div  style='width: 100px'>$item->prod_name</div>"];
+            return (array)$item + $wirdescName + $prodNameHtml;
         }, array_values($items));
-        // dd($enrichData);
 
-        $prodGroup = Report::groupArrayByKey($enrichData, 'prod_id');
+        $prodGroup = Report::groupArrayByKey($transformData, 'prod_id');
         $result = Report::mergeArrayValues($prodGroup);
-        // dd($enrichData);
 
         $wirDesc = $this->getDataWirDescription();
         $wirDesc = array_column($wirDesc, 'wir_description_name');
         $wirDesc = array_map(fn ($item) => Report::slugName($item), $wirDesc);
-        // dd($wirDesc);
 
-        $enrichData = array_map(function ($item) use ($wirDesc, $routeCreate) {
+        $transformData = array_map(function ($item) use ($wirDesc, $routeCreate, $icon) {
             $arrayDiff = array_diff($wirDesc, array_keys($item));
-            // dd($arrayDiff, $wirDesc, $item);
-
-            $html =  "<div class='bg-white' title='prod_id: {$item['prod_id']}'><a href='$routeCreate'><i class='fa-regular fa-circle-plus'></i></a></div>";
+            $html =  "<div style='width: 36px' class='bg-white ' title='prod_id: {$item['prod_id']}'><a href='$routeCreate'>$icon</a></div>";
             $combineArray = array_merge(...array_map(fn ($item) => [$item => $html], $arrayDiff));
-            // dd($combineArray);
-            $enrichData = $item + $combineArray;
-            return $enrichData;
+            $transformData = $item + $combineArray;
+            return $transformData;
         }, $result);
-        // dd($enrichData);
 
-        // $dataSource->setCollection(collect($enrichData));
-        // dd($dataSource);
-        return collect($enrichData);
+
+        return collect($transformData);
     }
 }
