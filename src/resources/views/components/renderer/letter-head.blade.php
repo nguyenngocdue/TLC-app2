@@ -1,7 +1,6 @@
 <table class="border-none whitespace-nowrap w-full">
     @php
         $urlCurrent = url()->current();
-
     @endphp
     <tbody>
         <tr>
@@ -15,14 +14,10 @@
                 <br>Tel: {{$dataSource['company_telephone']}} Fax: {{$dataSource['company_fax']}}
                 <br>Email: {{$dataSource['company_email']}} Website: {{$dataSource['company_website']}}</td>
                 <td class="w-[20%]" align="center">
-                    <div class="flex flex-row flex-wrap items-center justify-center gap-y-2">
+                    <div class="flex flex-row items-center justify-center gap-y-2">
                             <div id="{{$id}}" class="w-28 h-28 flex m-5"></div>
-                            <script>
-                                new QRCode(document.getElementById("{{$id}}"),"{{$urlCurrent}}",)
-                            </script>
-                            <div class="flex transform rotate-[270deg] float-right -ml-10">
-                                eco/64388
-                            </div>
+                            <div class="flex transform rotate-[270deg] float-right -ml-14 text-xs w-auto"><p class="inline whitespace-pre break-words">
+                                {{$type}}/{{$id}}</p> </div>
                     </div>
                     <div class="flex flex-row flex-wrap gap-y-0 mb-1 mr-1">
                         <div class="border border-gray-600 p-1">
@@ -33,3 +28,7 @@
         </tr>
     </tbody>
 </table>
+
+<script>
+new QRCode(document.getElementById("{{$id}}"),"{{$urlCurrent}}",)
+</script>

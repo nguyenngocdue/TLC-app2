@@ -2,8 +2,8 @@
 
 namespace App\View\Components\Renderer;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class LetterHead extends Component
 {
@@ -38,6 +38,7 @@ class LetterHead extends Component
         return view('components.renderer.letter-head', [
             'dataSource' => $dataSource,
             'id' => $this->showId,
+            'type' => Str::plural($this->type),
         ]);
     }
 }
