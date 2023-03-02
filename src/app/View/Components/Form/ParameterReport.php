@@ -1,10 +1,11 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Form;
 
+use AWS\CRT\HTTP\Request;
 use Illuminate\View\Component;
 
-class ParameterControl extends Component
+class ParameterReport extends Component
 {
     /**
      * Create a new component instance.
@@ -15,17 +16,24 @@ class ParameterControl extends Component
         private $itemsSelected = [],
         private $dataSource = [],
         private $hiddenItems = [],
+        private $route = '',
+        private $entity = '',
+        private $typeReport = '',
+
+
     ) {
         //
     }
 
     public function render()
     {
-        // dd($this->dataSource);
-        return view('components.renderer.parameter-control', [
+        return view('components.form.parameter-report', [
             'itemsSelected' => $this->itemsSelected,
             'dataSource' => $this->dataSource,
             'hiddenItems' => $this->hiddenItems,
+            'route' => $this->route,
+            'entity' => $this->entity,
+            'typeReport' => $this->typeReport
         ]);
     }
 }

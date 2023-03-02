@@ -11,32 +11,33 @@ use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 abstract class Report_ParentController extends Controller
 {
     use TraitMenuTitle;
-    abstract protected function getSqlStr($urlParams);
+    abstract protected function getSqlStr($modeParams);
     abstract protected function getTableColumns($dataSource);
     abstract protected function getDataForModeControl($dataSource);
-    protected $pagingSize = 10;
     public function getType()
     {
         return "dashboard";
     }
 
-    private function getSql($urlParams)
+    private function getSql($modeParams)
     {
-        $sqlStr = $this->getSqlStr($urlParams);
+        $sqlStr = $this->getSqlStr($modeParams);
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
-            if (isset($urlParams[$value])) {
-                $valueParam =  $urlParams[$value];
+            if (isset($modeParams[$value])) {
+                $valueParam =  $modeParams[$value];
                 $searchStr = head($matches)[$key];
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
@@ -45,22 +46,21 @@ abstract class Report_ParentController extends Controller
         return $sqlStr;
     }
 
-    protected function getDataSource($urlParams)
+    protected function getDataSource($modeParams)
     {
-        // dd($urlParams);
-        // if (empty($urlParams)) return  (object)[];
-        $sql = $this->getSql($urlParams);
+        $sql = $this->getSql($modeParams);
         $sqlData = DB::select(DB::raw($sql));
         $collection = collect($sqlData);
         return $collection;
     }
 
-    protected function enrichDataSource($dataSource, $urlParams)
+    protected function enrichDataSource($dataSource, $modeParams)
     {
+        // dd($dataSource);
         return $dataSource;
     }
 
-    protected function transformDataSource($dataSource, $urlParams)
+    protected function transformDataSource($dataSource, $modeParams)
     {
         return $dataSource;
     }
@@ -75,42 +75,70 @@ abstract class Report_ParentController extends Controller
         return $currentModelName;
     }
 
-    private function paginateDataSource($dataSource)
+    private function paginateDataSource($dataSource, $pageLimit)
     {
         $page = $_GET['page'] ?? 1;
-        $size = $this->pagingSize;
-        $dataSource = new LengthAwarePaginator($dataSource->forPage($page, $size), $dataSource->count(), $size, $page); //->appends(request()->query();
+        $dataSource = new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page); //->appends(request()->query();
         return $dataSource;
     }
 
     public function index(Request $request)
     {
-        // dd($request->route());
 
-        $urlParams = $request->all();
-        $currentRoute = CurrentRoute::getTypeController();
-        $viewName = strtolower(Str::singular($currentRoute));
+        $typeReport = CurrentRoute::getTypeController();
+        $viewName = strtolower(Str::singular($typeReport));
+        $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
 
-        $dataSource = $this->getDataSource($urlParams);
-        $dataSource = $this->enrichDataSource($dataSource, $urlParams);
-        $dataSource = $this->transformDataSource($dataSource, $urlParams);
-        $dataSource = $this->paginateDataSource($dataSource);
+
+        $pageLimit = $this->getPageParam($typeReport, $entity);
+        $modeParams = $this->getModeParams($typeReport, $entity);
+
+        $dataSource = $this->getDataSource($modeParams);
+
+        $dataSource = $this->enrichDataSource($dataSource, $modeParams);
+
+        $dataSource = $this->transformDataSource($dataSource, $modeParams);
+        $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
 
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
         $columns = $this->getTableColumns($dataSource);
         $sheets = $this->getSheets($dataSource);
 
-        $typeReport = $this->getMenuTitle();
-        // dump($dataSource);
+        $modeParams = $this->getModeParams($typeReport, $entity);
+
+        $pageLimit = $this->getPageParam($typeReport, $entity);
+        $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
 
         return view('reports.' . $viewName, [
             'tableColumns' => $columns,
             'tableDataSource' => $dataSource,
-            'urlParams' => $urlParams,
-            'entity' => $currentRoute,
+            'modeParams' => $modeParams,
+            'entity' => $entity,
             'typeReport' => $typeReport,
             'sheets' => $sheets,
-            'dataModeControl' => $dataModeControl
+            'dataModeControl' => $dataModeControl,
+            'topTitle' => $this->getMenuTitle(),
+            'pageLimit' => $pageLimit
         ]);
+    }
+    protected function getModeParams($typeReport, $entity)
+    {
+        $settings = CurrentUser::getSettings();
+        if (!isset($settings[$entity])) return [];
+        if (isset($settings[$entity][strtolower($typeReport)]['mode_001'])) {
+            $modeParams = $settings[$entity][strtolower($typeReport)]['mode_001'];
+            return $modeParams;
+        }
+        return [];
+    }
+    protected function getPageParam($typeReport, $entity)
+    {
+        $settings = CurrentUser::getSettings();
+        if (!isset($settings[$entity])) return 10;
+        if (isset($settings[$entity][strtolower($typeReport)]['page_limit'])) {
+            $pageLimit = $settings[$entity][strtolower($typeReport)]['page_limit'];
+            return $pageLimit;
+        }
+        return 10;
     }
 }

@@ -16,12 +16,11 @@ use App\Utils\Support\Report;
 class Qaqc_insp_chklst extends Report_ParentController
 {
 	use TraitReport;
-	protected $pagingSize = 10000;
 	protected $viewName = 'document-qaqc-insp-chklst';
 
-	public function getSqlStr($urlParams)
+	public function getSqlStr($modeParams)
 	{
-		$isCheck = isset($urlParams['prod_order_id']) && isset($urlParams['sub_project_id']);
+		$isCheck = isset($modeParams['prod_order_id']) && isset($modeParams['sub_project_id']);
 		$sql =  " SELECT
                         tp.id AS template
                         ,l.value AS sign
@@ -51,7 +50,7 @@ class Qaqc_insp_chklst extends Report_ParentController
                     JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id
                     JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
                     JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id";
-		if (isset($urlParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND tp.id = '{{qaqc_insp_tmpl_id}}'";
+		if (isset($modeParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND tp.id = '{{qaqc_insp_tmpl_id}}'";
 		$sql .= "\n JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
                     JOIN control_types ct ON ct.id = l.control_type_id";
 		if ($isCheck) $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
@@ -70,7 +69,7 @@ class Qaqc_insp_chklst extends Report_ParentController
             
                 WHERE 1=1";
 		if ($isCheck) $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
-		if (isset($urlParams['chklsts'])) $sql .= " \n AND csh.id = '{{chklsts}}' \n";
+		if (isset($modeParams['chklsts'])) $sql .= " \n AND csh.id = '{{chklsts}}' \n";
 		$sql .= "\n ORDER BY line_name,  run_updated DESC ";
 		return $sql;
 	}
@@ -91,9 +90,9 @@ class Qaqc_insp_chklst extends Report_ParentController
 		];
 	}
 
-	protected function enrichDataSource($dataSource, $urlParams)
+	protected function enrichDataSource($dataSource, $modeParams)
 	{
-		$isNullParams = $this->isNullUrlParams($urlParams);
+		$isNullParams = $this->isNullModeParams($modeParams);
 		if ($isNullParams) return collect([]);
 
 		$lines =  [];
@@ -107,14 +106,14 @@ class Qaqc_insp_chklst extends Report_ParentController
 			$descIdLines[$value['line_description']][] = $key;
 		});
 		// Reduce the number of lines from URL request 
-		if (isset($urlParams['filter_run']) && !$urlParams['filter_run']) {
+		if (isset($modeParams['filter_run']) && !$modeParams['filter_run']) {
 			$descIdLines = array_map(fn ($item) => array_splice($item, 0, 1), $descIdLines);
 		}
 
 
 
 		// Reduce the number of lines from URL request
-		// if (isset($urlParams['filter_run']) && !$urlParams['filter_run']) {
+		// if (isset($modeParams['filter_run']) && !$modeParams['filter_run']) {
 		// 	array_walk($descIdLines, function ($value, $key) use ($lines, &$descIdLines) {
 		// 		$maxRunId = array_splice($value, 0, 1);
 		// 		$line = $lines[$maxRunId[0]];

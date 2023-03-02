@@ -4,7 +4,7 @@ namespace App\View\Components\Form;
 
 use Illuminate\View\Component;
 
-class PerPage extends Component
+class PerPageReport extends Component
 {
     /**
      * Create a new component instance.
@@ -12,9 +12,10 @@ class PerPage extends Component
      * @return void
      */
     public function __construct(
-        private $type = '',
+        private $typeReport = '',
         private $route = '',
         private $pageLimit = '',
+        private $entity = '',
     ) {
         //
     }
@@ -26,11 +27,11 @@ class PerPage extends Component
      */
     public function render()
     {
-
-        return view('components.form.per-page', [
-            'type' => $this->type,
+        return view('components.form.per-page-report', [
+            'typeReport' => $this->typeReport,
             'route' => $this->route,
             'pageLimit' => $this->pageLimit,
+            'entity' => $this->entity,
         ]);
     }
 }

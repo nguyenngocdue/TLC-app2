@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\DB;
 
 trait TraitReport
 {
-    function isNullUrlParams($urlParams)
+    function isNullModeParams($modeParams)
     {
-        return count(array_filter($urlParams, fn ($value) => !is_null($value))) <= 0;
+        return count(array_filter($modeParams, fn ($value) => !is_null($value))) <= 0;
     }
 
     protected function getDataSourceFromSqlStr($sql)

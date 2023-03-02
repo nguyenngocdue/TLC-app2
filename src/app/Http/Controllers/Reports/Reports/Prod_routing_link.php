@@ -8,7 +8,7 @@ use App\Models\Sub_project;
 
 class Prod_routing_link extends Report_ParentController
 {
-    public function getSqlStr($urlParams)
+    public function getSqlStr($modeParams)
     {
         $sql = "SELECT
                     ps.prod_routing_link_id AS prod_routing_link_id
