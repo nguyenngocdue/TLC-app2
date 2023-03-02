@@ -8,9 +8,9 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\DefaultValues;
 use App\Utils\Support\Json\Props;
-use App\Utils\Support\Json\Realtimes;
 use App\Utils\Support\JsonControls;
 use Database\Seeders\FieldSeeder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -18,17 +18,18 @@ trait TraitEntityCRUDCreateEdit2
 {
 	use TraitEntityListenDataSource;
 
-	public function create()
+	public function create(Request $request)
 	{
 		$props = $this->getCreateEditProps();
-		$values =  (object) $this->loadValueOfOrphanAttachments($props);
+		$values =  (object) array_merge($request->input(), $this->loadValueOfOrphanAttachments($props));
+
 		$tableBluePrint = $this->makeTableBluePrint();
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		return view('dashboards.pages.entity-create-edit', [
 			'props' => $props,
 			'item' => (object)[],
 			'defaultValues' => DefaultValues::getAllOf($this->type),
-			'realtimes' => Realtimes::getAllOf($this->type),
+			// 'realtimes' => Realtimes::getAllOf($this->type),
 			'type' => $this->type,
 			'action' => __FUNCTION__,
 			'modelPath' => $this->data,
@@ -55,7 +56,7 @@ trait TraitEntityCRUDCreateEdit2
 			'props' => $props,
 			'item' => $original,
 			'defaultValues' => DefaultValues::getAllOf($this->type),
-			'realtimes' => Realtimes::getAllOf($this->type),
+			// 'realtimes' => Realtimes::getAllOf($this->type),
 			'values' => $values,
 			'type' => Str::plural($this->type),
 			'action' => __FUNCTION__,
