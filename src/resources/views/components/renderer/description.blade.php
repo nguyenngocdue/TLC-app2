@@ -6,10 +6,10 @@
                     @php
                         $value = $content->toArray();
                     @endphp
-                    @if(sizeof($value) > 0)
-                        @if (!$hiddenLabel)
+                    @if (!(sizeof($value) == 0 && ($control == 'attachment')) && !$hiddenLabel)
                         <label class='p-2 h-full w-full text-base font-medium flex col-span-{{$colSpan}} items-center justify-start col-start-1'>{{$label}}</label>
-                        @endif
+                    @endif
+                    @if(sizeof($value) > 0)
                         @switch($control)
                             @case('attachment')
                                     <div class='p-2 border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
@@ -37,15 +37,19 @@
                             @default
                             <span class='p-2  border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>{{$content}}</span>
                         @endswitch
+                    @else
+                        <div class='p-2  border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
+                            (None)
+                        </div>        
                     @endif
                 @else
                     @php
                         $value = $content->toArray();
                     @endphp
+                    @if(!(sizeof($value) == 0 && ($control == 'attachment')) && !$hiddenLabel)
+                        <label class='p-2 border border-gray-600 bg-gray-50 h-full w-full text-base font-medium col-span-{{24/$colSpan}} items-center justify-end col-start-1'>{{$label}}</label>
+                    @endif
                     @if(sizeof($value) > 0)
-                        @if(!$hiddenLabel)
-                            <label class='p-2 border border-gray-600 bg-gray-50 h-full w-full text-base font-medium col-span-{{24/$colSpan}} items-center justify-end col-start-1'>{{$label}}</label>
-                        @endif
                         @switch($control)
                             @case('attachment')
                                 <div class='p-2 border border-gray-600 text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>

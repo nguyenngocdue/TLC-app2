@@ -274,7 +274,11 @@ trait TraitEntityCRUDStoreUpdate2
 		//Add Id into array fields
 		$fields = $this->addEntityType($fields, 'id', $theRow->id);
 		$fields = $this->addEntityType($fields, 'status', $newStatus);
-		event(new CreateNewDocumentEvent($currentValue = $this->addEntityType($fields, 'entity_type', $this->type)));
+		try {
+			event(new CreateNewDocumentEvent($currentValue = $this->addEntityType($fields, 'entity_type', $this->type)));
+		} catch (\Throwable $th) {
+			dump($th);
+		}
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
@@ -349,10 +353,14 @@ trait TraitEntityCRUDStoreUpdate2
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
-		event(new UpdatedDocumentEvent(
-			$previousValue = $this->addEntityType($previousValue, 'entity_type', $this->type),
-			$currentValue = $this->addEntityType($fields, 'entity_type', $this->type)
-		));
+		try {
+			event(new UpdatedDocumentEvent(
+				$previousValue = $this->addEntityType($previousValue, 'entity_type', $this->type),
+				$currentValue = $this->addEntityType($fields, 'entity_type', $this->type)
+			));
+		} catch (\Throwable $th) {
+			dump($th);
+		}
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 	private function addEntityType($array, $key, $value)

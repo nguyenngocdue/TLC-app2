@@ -13,6 +13,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_h1a": {
@@ -29,6 +31,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_name": {
@@ -45,6 +49,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_work_area_id": {
@@ -61,6 +67,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_issue_datetime": {
@@ -77,6 +85,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_injured_person": {
@@ -93,6 +103,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_injured_staff_id": {
@@ -109,6 +121,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_injured_staff_position": {
@@ -125,6 +139,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_line_manager": {
@@ -141,6 +157,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_manager_staff_id": {
@@ -157,6 +175,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_manager_staff_position": {
@@ -173,6 +193,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_owner_id": {
@@ -189,6 +211,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_owner_staff_id": {
@@ -205,6 +229,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_owner_staff_position": {
@@ -221,6 +247,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_incident_doc_type_id": {
@@ -237,6 +265,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_incident_doc_sub_type_id": {
@@ -253,6 +283,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_number_injured_person": {
@@ -269,6 +301,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_number_involved_person": {
@@ -285,6 +319,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_divider1": {
@@ -301,6 +337,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_h1b": {
@@ -317,6 +355,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_issue_description": {
@@ -333,6 +373,8 @@
         "hidden_label": "true",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_attachment_1": {
@@ -349,6 +391,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_divider2": {
@@ -365,6 +409,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_h2b": {
@@ -381,6 +427,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_accident_book_entry": {
@@ -397,6 +445,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_lost_days": {
@@ -413,6 +463,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_time_in_hospital": {
@@ -429,6 +481,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_time_out_hospital": {
@@ -445,6 +499,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_divider3": {
@@ -461,6 +517,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_h8b": {
@@ -477,6 +535,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_mainAffectedPart()": {
@@ -493,6 +553,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_natureOfInjury()": {
@@ -509,6 +571,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_treatmentInstruction()": {
@@ -525,6 +589,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_comment_by_clinic": {
@@ -541,6 +607,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_divider8": {
@@ -557,6 +625,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_h2a": {
@@ -573,6 +643,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_causeOfIssue()": {
@@ -589,6 +661,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_divider4": {
@@ -605,6 +679,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_h3b": {
@@ -621,6 +697,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_activityLeadToIssue()": {
@@ -637,6 +715,8 @@
         "hidden_label": "true",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_divider5": {
@@ -653,6 +733,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_h4b": {
@@ -669,6 +751,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_immediateCause()": {
@@ -685,6 +769,8 @@
         "hidden_label": "true",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_divider6": {
@@ -701,6 +787,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_h5b": {
@@ -717,6 +805,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_issueRootCause()": {
@@ -733,6 +823,8 @@
         "hidden_label": "true",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_divider7": {
@@ -749,6 +841,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_h6b": {
@@ -765,6 +859,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_investigation_finding": {
@@ -778,9 +874,11 @@
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
-        "hidden_label": "true",
+        "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_attachment_2": {
@@ -797,6 +895,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_divider9": {
@@ -813,6 +913,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_h7b": {
@@ -829,6 +931,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_getCorrectiveActions": {
@@ -845,6 +949,8 @@
         "hidden_label": "true",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_divider10": {
@@ -861,6 +967,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_h3a": {
@@ -877,6 +985,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_comment_by_line_manager": {
@@ -893,6 +1003,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_divider11": {
@@ -909,6 +1021,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_h4a": {
@@ -925,6 +1039,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_comment_by_general_manager": {
@@ -941,6 +1057,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": "true"
     },
     "_status": {
@@ -957,6 +1075,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_created_at": {
@@ -973,6 +1093,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_updated_at": {
@@ -989,6 +1111,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     }
 }
