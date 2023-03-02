@@ -21,7 +21,7 @@
                 <x-modal-settings type="{{$type}}"/>
                 
         </div>
-        <x-form.per-page type="{{$type}}" route="{{ route('updateUserSettings') }}" page-limit="{{$pageLimit}}" />
+        <x-form.per-page type="{{$type}}" route="{{ route('updateUserSettings') }}" perPage="{{$perPage}}" />
     </div>
     <x-renderer.advanced-filter :type="$type"  :valueAdvanceFilters="$valueAdvanceFilters"/>
     <x-renderer.table showNo="true" :columns=" $columns" :dataSource="$dataSource" />

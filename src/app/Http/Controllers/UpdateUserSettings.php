@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntitySuperPropsFilter;
 use App\Models\User;
+use App\Utils\Constant;
 use App\Utils\Support\Json\SuperProps;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -16,22 +17,22 @@ class UpdateUserSettings extends Controller
     use TraitEntitySuperPropsFilter;
     private function updatePerPage($request, $settings)
     {
-        $perPage = $request->input('page_limit');
+        $perPage = $request->input('per_page');
         $type = $request->input("_entity");
-        $settings[$type]['page_limit'] = $perPage;
+        $settings[$type][Constant::VIEW_ALL]['per_page'] = $perPage;
         return $settings;
     }
 
     private function updateGear($request, $settings)
     {
         [$type, $toBeInserted] = $this->formatRequestValue($request);
-        $settings[$type]['columns'] = $toBeInserted;
+        $settings[$type][Constant::VIEW_ALL]['columns'] = $toBeInserted;
         return $settings;
     }
     private function updateFilter($request, $settings)
     {
         [$type, $valueRequest] = $this->formatRequestValue($request);
-        $settings[$type]['advance_filters'] = $valueRequest;
+        $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = $valueRequest;
         return $settings;
     }
     private function clearFilter($request, $settings)

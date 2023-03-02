@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Models\User;
 use App\Notifications\Traits\TraitSupportNotification;
 use App\Utils\Support\Json\Definitions;
 use Illuminate\Bus\Queueable;
@@ -37,7 +38,11 @@ class CreateNewNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'mail'];
+        $data = $this->data;
+        if ($data['currentValue']['status']) {
+            return ['database', 'mail'];
+        }
+        return ['database'];
     }
 
     /**

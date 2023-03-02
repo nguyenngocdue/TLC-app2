@@ -27,4 +27,6 @@ class Constant
 
 
     const OWNER_ID = 'owner_id';
+
+    const VIEW_ALL = 'view_all';
 }

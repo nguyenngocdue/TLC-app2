@@ -7,6 +7,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityExportCSV;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityShowQRList6;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntitySuperPropsFilter;
 use App\Http\Controllers\UpdateUserSettings;
+use App\Utils\Constant;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
@@ -44,10 +45,10 @@ abstract class AbstractViewAllController extends Controller
     {
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
-        $pageLimit = $settings[$type]['page_limit'] ?? 20;
-        $columnLimit = $settings[$type]['columns'] ?? null;
-        $advanceFilter = $settings[$type]['advance_filters'] ?? null;
-        return [$pageLimit, $columnLimit, $advanceFilter];
+        $perPage = $settings[$type][Constant::VIEW_ALL]['per_page'] ?? 20;
+        $columnLimit = $settings[$type][Constant::VIEW_ALL]['columns'] ?? null;
+        $advancedFilter = $settings[$type][Constant::VIEW_ALL]['advanced_filters'] ?? null;
+        return [$perPage, $columnLimit, $advancedFilter];
     }
     private function distributeFilter($advanceFilters, $propsFilters)
     {
@@ -59,6 +60,9 @@ abstract class AbstractViewAllController extends Controller
                 switch ($propsFilters['_' . $key]) {
                     case 'id':
                         $result['id'][$key] = $value;
+                        break;
+                    case 'doc_id':
+                        $result['doc_id'][$key] = $value;
                         break;
                     case 'text':
                     case 'textarea':
@@ -119,6 +123,7 @@ abstract class AbstractViewAllController extends Controller
                         switch ($key) {
                             case 'id':
                             case 'parent_id':
+                            case 'doc_id':
                                 array_walk($value, function ($value, $key) use ($q) {
                                     $arrayId = explode(',', $value);
                                     if (!empty($arrayId)) {
@@ -331,21 +336,22 @@ abstract class AbstractViewAllController extends Controller
 
     public function index(Request $request)
     {
+        // dd($request->input());
         if (!$request->input('page') && !empty($request->input())) {
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
         }
-        [$pageLimit, $columnLimit, $advanceFilters] = $this->getUserSettings();
+        [$perPage, $columnLimit, $advanceFilters] = $this->getUserSettings();
         // Log::info($columnLimit);
         $type = Str::plural($this->type);
         $columns = $this->getColumns($type, $columnLimit);
-        $dataSource = $this->getDataSource($advanceFilters)->paginate($pageLimit);
+        $dataSource = $this->getDataSource($advanceFilters)->paginate($perPage);
         $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
         $this->attachRendererIntoColumn($columns);
         $searchableArray = App::make($this->typeModel)->toSearchableArray();
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
-            'pageLimit' => $pageLimit,
+            'perPage' => $perPage,
             'valueAdvanceFilters' => $advanceFilters,
             'type' => $type,
             'columns' => $columns,

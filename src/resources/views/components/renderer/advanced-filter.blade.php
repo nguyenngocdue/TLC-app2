@@ -51,10 +51,10 @@
                 @break
                 @case('id')
                 @case('text')
-
                 @case('number')
                 @case('textarea')
                 @case('parent_id')
+                @case('doc_id')
                 <x-controls.text name={{$columnName}} value={{$valueControl}} />
                 @break
                 @case('toggle')

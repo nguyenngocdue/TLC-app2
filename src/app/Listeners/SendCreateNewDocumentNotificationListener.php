@@ -32,6 +32,10 @@ class SendCreateNewDocumentNotificationListener implements ShouldQueue
     {
         $createNotification = [];
         $currentValue = $event->{'currentValue'};
+        if (!$currentValue['status'] || !$currentValue['owner_id']) {
+            dump('Does not exist status or owner_id in database');
+            dd('Please check both columns if want using send notifications and send mail');
+        }
         foreach ($currentValue as $key => $value) {
             switch ($key) {
                 case Constant::OWNER_ID:
@@ -45,7 +49,7 @@ class SendCreateNewDocumentNotificationListener implements ShouldQueue
     }
     private function checkAndSendNotification($array, $currentValue, $type)
     {
-        $userSchema = User::find(array_shift($array));
-        Notification::send($userSchema, new CreateNewNotification(['type' => $type, 'currentValue' => $currentValue]));
+        $user = User::find(array_shift($array));
+        Notification::send($user, new CreateNewNotification(['type' => $type, 'currentValue' => $currentValue]));
     }
 }

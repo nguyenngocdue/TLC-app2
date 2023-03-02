@@ -43,6 +43,10 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         $changStatusMonitors = [];
         $previousValue = $event->{'previousValue'};
         $currentValue = $event->{'currentValue'};
+        if (!$currentValue['status']) {
+            dump('Send Mail And Notifications not working when key status doesn\'t exist');
+            dd('Please check key status in form submit');
+        }
         $listAssignees = JsonControls::getAssignees();
         $listMonitors = JsonControls::getMonitors();
         foreach ($currentValue as $key => $value) {
@@ -115,7 +119,6 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
     private function send($array, $previousValue, $currentValue, $type, $sendNotification = true)
     {
         $array = array_filter($array, fn ($item) => $item);
-        dump($array);
         foreach ($array as $key => $value) {
             $value = is_array($value) ? $value : [$value];
             foreach ($value as  $id) {

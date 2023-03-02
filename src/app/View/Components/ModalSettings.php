@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityExportCSV;
+use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\SuperProps;
@@ -30,7 +31,7 @@ class ModalSettings extends Component
         $settings = CurrentUser::getSettings();
         //If the setting array has not been set, it means this is the 1st time user accessing this module
         //Therefore all columns must be selected
-        $selected = $settings[$this->type]['columns'] ?? $allColumns;
+        $selected = $settings[$this->type][Constant::VIEW_ALL]['columns'] ?? $allColumns;
         return view('components.modal-settings', [
             'type' => $this->type,
             'title' => $this->title,

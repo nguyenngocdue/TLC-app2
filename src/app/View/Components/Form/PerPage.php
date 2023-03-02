@@ -14,7 +14,7 @@ class PerPage extends Component
     public function __construct(
         private $type = '',
         private $route = '',
-        private $pageLimit = '',
+        private $perPage = '',
     ) {
         //
     }
@@ -29,7 +29,7 @@ class PerPage extends Component
         return view('components.form.per-page', [
             'type' => $this->type,
             'route' => $this->route,
-            'pageLimit' => $this->pageLimit,
+            'perPage' => $this->perPage,
         ]);
     }
 }

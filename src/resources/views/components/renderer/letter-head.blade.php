@@ -16,8 +16,9 @@
                 <td class="w-[20%]" align="center">
                     <div class="flex flex-row items-center justify-center gap-y-2">
                             <div id="{{$id}}" class="w-28 h-28 flex m-5"></div>
-                            <div class="flex transform rotate-[270deg] float-right -ml-14 text-xs w-auto"><p class="inline whitespace-pre break-words">
-                                {{$type}}/{{$id}}</p> </div>
+                            <div class="flex w-28 transform rotate-[270deg] float-right -ml-14 text-xs whitespace-pre-wrap">
+                                {{$type}} /{{$id}}
+                            </div>
                     </div>
                     <div class="flex flex-row flex-wrap gap-y-0 mb-1 mr-1">
                         <div class="border border-gray-600 p-1">
