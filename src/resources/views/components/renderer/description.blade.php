@@ -92,7 +92,6 @@
                     @endif
                     @if ($control == 'toggle')
                     <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-{{$colSpan}} text-left'>{{$content == "1" ? "Yes" : "No"}}</span>
-                    @else
                     <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-{{$colSpan}} text-left'>{{$content}}</span>
                     @endif
                 @else

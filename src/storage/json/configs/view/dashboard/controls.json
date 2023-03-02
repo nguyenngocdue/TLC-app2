@@ -127,7 +127,6 @@
         "assignee_9"
     ],
     "monitors": [
-        "getMonitors()",
         "getMonitors1()",
         "getMonitors2()",
         "getMonitors3()",

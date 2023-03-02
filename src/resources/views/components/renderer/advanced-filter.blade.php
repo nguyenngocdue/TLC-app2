@@ -50,12 +50,12 @@
                 @endif
                 @break
                 @case('id')
+                @case('doc_id')
                 @case('text')
                 @case('number')
                 @case('textarea')
                 @case('parent_id')
-                @case('doc_id')
-                <x-controls.text name={{$columnName}} value={{$valueControl}} />
+                <x-controls.text name={{$columnName}} value={{$valueControl}} placeholder="Comma separated numbers are allowed"/>
                 @break
                 @case('toggle')
                 <x-controls.toggle name={{$columnName}} value={{$valueControl}} />

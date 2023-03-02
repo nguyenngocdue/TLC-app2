@@ -93,12 +93,11 @@ $status = $values->status ?? null;
                             @if (is_null($control))
                             <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                             @endif
-
                             {{-- Invisible anchor for scrolling when users click on validation fail message --}}
                             <strong class="scroll-mt-20 snap-start" id="scroll-{{$columnName}}"></strong>
-                            
                             @switch ($control)
                                 @case('id')
+                                @case('doc_id')
                                 <x-controls.id name={{$columnName}} value="{{$action === 'edit' ? $value : 'to be generated'}}" />
                                 @break
                                 @case('hyperlink')

@@ -319,8 +319,8 @@ trait TraitEntityCRUDStoreUpdate2
 					if (isset($theRow->$key)) {
 						$previousValue[$key] = $theRow->$key;
 					} else {
-						if ($key === 'getMonitors()') {
-							$valueGetMonitors = $theRow->getMonitors()->pluck('id')->toArray();
+						if (in_array($key, JsonControls::getMonitors())) {
+							$valueGetMonitors = $theRow->{$key}->pluck('id')->toArray();
 							$previousValue[$key] = $valueGetMonitors;
 						}
 					}
