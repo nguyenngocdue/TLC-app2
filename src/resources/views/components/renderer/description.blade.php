@@ -30,8 +30,8 @@
                                 </div>
                                 @break
                             @case('relationship_renderer')
-                                <div class='p-2  border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
-                                    <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
+                                <div class='p1-2  border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
+                                    <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} />
                                 </div>
                                 @break
                             @default

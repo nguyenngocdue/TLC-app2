@@ -7,6 +7,7 @@
         :dataSource="$dataSource" 
         showNo="{{$showNo?1:0}}" 
         footer="{{$tableFooter}}"
+        noCss="{{$noCss}}"
         />
 @else
     <x-renderer.table 

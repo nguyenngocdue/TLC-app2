@@ -44,6 +44,7 @@ class RelationshipRenderer extends Component
         private $type,
         private $colName,
         private $modelPath,
+        private $noCss = false,
     ) {
         $this->table01Name = "table" . str_pad(static::$table00Count++, 2, 0, STR_PAD_LEFT);
     }
@@ -148,9 +149,11 @@ class RelationshipRenderer extends Component
                 // dump($dataSourceWithOld);
                 // dump($dataSource);
                 // $tableName = $lineModelPath::getTableName();
+                $roColumns = $this->makeReadOnlyColumns($columns, $sp, $tableName);
+                // dump($roColumns);
                 return view('components.controls.many-line-params', [
                     'table01ROName' => $this->table01Name . "RO",
-                    'readOnlyColumns' => $this->makeReadOnlyColumns($columns, $sp, $tableName),
+                    'readOnlyColumns' => $roColumns,
                     'dataSource' => $dataSource,
 
                     'isOrderable' => $isOrderable,
@@ -168,6 +171,7 @@ class RelationshipRenderer extends Component
                     'entityType' => Str::modelPathFrom($this->type),
                     'userId' => CurrentUser::get()->id,
                     'editable' => $editable,
+                    'noCss' => $this->noCss,
                 ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";

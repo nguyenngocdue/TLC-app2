@@ -1,3 +1,13 @@
+@if($noCss)
+@php
+    $columnsRendered = preg_replace('/<th class=\'.*?\'/', "<th class='text-center bg-gray-50 border border-gray-400  py-2'", $columnsRendered);
+    $tr_td = preg_replace('/<tr class=\'.*?\'/', "<tr class='border border-gray-400'", $tr_td);
+@endphp
+<table>
+    <thead>{!! $columnsRendered !!}</thead>
+    <tbody>{!! $tr_td !!}</tbody>
+</table>
+@else
 <div class="border rounded-lg border-gray-300 dark:border-gray-600">
     <div>
         <div class="inline-block w-full sm:px-0 lg:px-0">
@@ -117,6 +127,7 @@
     }
 
 </script>
+@endif
 
 @if (env('ENV_OF_FORTUNE1'))
 @roleset('admin')

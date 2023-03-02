@@ -33,6 +33,7 @@ class Table extends Component
     // private $editable = false,
     private $tableDebug = false,
     private $rotate45Width = false,
+    private $noCss = false,
   ) {
   }
 
@@ -69,6 +70,7 @@ class Table extends Component
       'maxH' => $this->maxH ? "max-h-[{$this->maxH}rem]" : "",
       'tableDebug' => $this->tableDebug,
       'trClassList' => 'border-b bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
+      'noCss' => $this->noCss,
     ]);
   }
 }
