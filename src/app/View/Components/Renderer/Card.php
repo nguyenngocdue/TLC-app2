@@ -15,6 +15,8 @@ class Card extends Component
         private $style = 'bg-white',
         private $class = '',
         private $idHtml = '',
+        private $px = 4,
+        private $py = 4,
     ) {
     }
 
@@ -32,7 +34,7 @@ class Card extends Component
             $title = $data['attributes']["title"];
             $description = $data['attributes']["description"] ?? "";
             $class = $this->class;
-            return "<div id='$this->idHtml' class='break-normal min-w-0 p-4 border dark:bg-gray-800 dark:border-gray-600 rounded-lg shadow-xs $this->style $class' >" .
+            return "<div id='$this->idHtml' component='renderer/card' class='break-normal min-w-0 px-{$this->px} py-{$this->py}  border dark:bg-gray-800 dark:border-gray-600 rounded-lg shadow-xs $this->style $class' >" .
                 (($title) ? "<h4 class='mb-4 font-semibold text-gray-600 dark:text-gray-300'>{$title} </h4>" : "") .
                 "<p class='text-gray-600 dark:text-gray-300'>
                     $description

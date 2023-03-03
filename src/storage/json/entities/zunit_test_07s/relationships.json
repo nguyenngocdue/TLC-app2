@@ -51,28 +51,15 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_comment_4": {
-        "name": "_comment_4",
+    "_attachment_1": {
+        "name": "_attachment_1",
         "relationship": "morphMany",
-        "control_name": "comment_4",
-        "renderer_view_all": "agg_count",
+        "control_name": "attachment_1",
+        "renderer_view_all": "thumbnails",
         "renderer_view_all_param": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "comment",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_comment_5": {
-        "name": "_comment_5",
-        "relationship": "morphMany",
-        "control_name": "comment_5",
-        "renderer_view_all": "agg_count",
-        "renderer_view_all_param": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "comment",
+        "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

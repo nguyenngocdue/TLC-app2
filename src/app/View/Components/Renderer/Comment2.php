@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer;
 
 use App\Models\User;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\View\Component;
 
@@ -16,7 +17,7 @@ class Comment2 extends Component
      */
     public function __construct(
         private $comment01Name = null,
-        private $name = null,
+        // private $name = null,
         // private $id = null,
 
         private $content = null,
@@ -51,20 +52,28 @@ class Comment2 extends Component
     {
         $user = User::find($this->ownerId);
         $datetime = DateTimeConcern::convertForLoading("picker_datetime", $this->datetime);
-        $avatar = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $user->avatar->url_thumbnail;
+        $avatarObj = $user ? $user->avatar : null;
+        $userName = $user ? $user->name : "Not found user #" . $this->ownerId;
+        $avatar = $avatarObj ? env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $avatarObj->url_thumbnail : "";
+        $readonly = $this->readonly;
+        $content = $this->content;
+        if (CurrentUser::get()->id != $this->ownerId) {
+            $readonly = true;
+        }
+        // $readonly = !true;
 
         return view('components.renderer.comment2', [
             'comment01Name' => $this->comment01Name,
-            'name' => $this->name,
+            // 'name' => $this->name,
             // 'id' => $this->id,
             'ownerId' => $this->ownerId,
-            'ownerName' => $user->name,
+            'ownerName' => $userName,
             'ownerAvatar' => $avatar,
 
             'positionRendered' => $this->positionRendered,
             'datetime' => $datetime,
-            'content' => $this->content,
-            'readonly' => $this->readonly,
+            'content' => $content,
+            'readonly' => $readonly,
             'rowIndex' => $this->rowIndex,
             'category' => $this->category,
             'commentId' => $this->commentId,
