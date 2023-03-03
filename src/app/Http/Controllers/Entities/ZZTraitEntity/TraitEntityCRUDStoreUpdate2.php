@@ -331,7 +331,7 @@ trait TraitEntityCRUDStoreUpdate2
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
-		// $this->eventUpdatedNotificationAndMail($previousValue, $fields, $this->type);
+		$this->eventUpdatedNotificationAndMail($previousValue, $fields, $this->type, $newStatus);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 	private function addEntityType($array, $key, $value)

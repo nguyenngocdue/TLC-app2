@@ -8,25 +8,29 @@ use App\Utils\Support\JsonControls;
 
 trait TraitSendNotificationAndMail
 {
-    private function eventCreatedNotificationAndMail($fields, $id, $newStatus, $type)
+    private function eventCreatedNotificationAndMail($fields, $id, $status, $type)
     {
-        $fields = $this->addEntityType($fields, 'id', $id);
-        $fields = $this->addEntityType($fields, 'status', $newStatus);
-        try {
-            event(new CreateNewDocumentEvent($currentValue = $this->addEntityType($fields, 'entity_type', $type)));
-        } catch (\Throwable $th) {
-            dump($th);
+        if ($status) {
+            $fields = $this->addEntityType($fields, 'id', $id);
+            $fields = $this->addEntityType($fields, 'status', $status);
+            try {
+                event(new CreateNewDocumentEvent($currentValue = $this->addEntityType($fields, 'entity_type', $type)));
+            } catch (\Throwable $th) {
+                dump($th);
+            }
         }
     }
-    private function eventUpdatedNotificationAndMail($previousValue, $fields, $type)
+    private function eventUpdatedNotificationAndMail($previousValue, $fields, $type, $status)
     {
-        try {
-            event(new UpdatedDocumentEvent(
-                $previousValue = $this->addEntityType($previousValue, 'entity_type', $type),
-                $currentValue = $this->addEntityType($fields, 'entity_type', $type)
-            ));
-        } catch (\Throwable $th) {
-            dump($th);
+        if ($status) {
+            try {
+                event(new UpdatedDocumentEvent(
+                    $previousValue = $this->addEntityType($previousValue, 'entity_type', $type),
+                    $currentValue = $this->addEntityType($fields, 'entity_type', $type)
+                ));
+            } catch (\Throwable $th) {
+                dump($th);
+            }
         }
     }
     private function getPreviousValue($fields, $item)
