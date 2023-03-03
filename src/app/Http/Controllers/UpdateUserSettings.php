@@ -45,7 +45,10 @@ class UpdateUserSettings extends Controller
     {
         $regexDate = '/[0123][0-9][\/][01][0-9][\/][0-9]{4} - [0123][0-9][\/][01][0-9][\/][0-9]{4}/m';
         $regexTime = '/^(((([0-1][0-9])|(2[0-3])):?[0-5][0-9]:?[0-5][0-9]+)) - (((([0-1][0-9])|(2[0-3])):?[0-5][0-9]:?[0-5][0-9]+$))/m';
-        $picker = ['picker_time', 'picker_date', 'picker_month', 'picker_week', 'picker_quarter', 'picker_year', 'picker_datetime'];
+        $regexMonth = '/([0][1-9]|1[0-2])[\/][0-9]{4} - [01][0-9][\/][0-9]{4}/m';
+        $regexWeek = '/[Ww]([0-4][0-9]|5[0-3])[\/][0-9]{4} - [Ww]([0-4][0-9]|5[0-3])[\/][0-9]{4}/m';
+        $regexQuarter = '/[Qq][1-4][\/][0-9]{4} - [Qq][1-4][\/][0-9]{4}/m';
+        $regexYear = '/[0-9]{4} - [0-9]{4}/m';
         $all = $request->all();
         $type = $all['_entity'];
         $superProps = $this->advanceFilter($type);
@@ -57,15 +60,23 @@ class UpdateUserSettings extends Controller
         foreach ($all as $key => $value) {
             if (isset($result[$key]))
                 switch ($result[$key]) {
-                    case $picker[0]:
+                    case 'picker_time':
                         $arrayFlip = $this->matchRegex($regexTime, $key, $value, $arrayFlip);
                         break;
-                    case $picker[1]:
-                    case $picker[2]:
-                    case $picker[3]:
-                    case $picker[4]:
-                    case $picker[5]:
-                    case $picker[6]:
+                    case 'picker_month':
+                        $arrayFlip = $this->matchRegex($regexMonth, $key, $value, $arrayFlip);
+                        break;
+                    case 'picker_week':
+                        $arrayFlip = $this->matchRegex($regexWeek, $key, $value, $arrayFlip);
+                        break;
+                    case 'picker_quarter':
+                        $arrayFlip = $this->matchRegex($regexQuarter, $key, $value, $arrayFlip);
+                        break;
+                    case 'picker_year':
+                        $arrayFlip = $this->matchRegex($regexYear, $key, $value, $arrayFlip);
+                        break;
+                    case 'picker_datetime':
+                    case 'picker_date':
                         $arrayFlip = $this->matchRegex($regexDate, $key, $value, $arrayFlip);
                         break;
                     default:

@@ -11,9 +11,6 @@
         </div>
                 
         <div class="grid lg:grid-cols-6 lg:gap-2 md:grid-cols-4 md:gap-4 sm:grid-cols-2 sm:gap-10">
-            @php
-            $timeControls = ['picker_time','picker_date','picker_month','picker_week','picker_quarter','picker_year','picker_datetime'];
-            @endphp
             @foreach($props as $key => $value)
             <div>
                 @php
@@ -32,18 +29,38 @@
                     <label for={{$columnName}} class="text-gray-900 dark:text-gray-300 text-base font-normal" >{{$label}}</label>
                 </div>
                 @switch ($control)
-                @case($timeControls[0])
+                @case('picker_time')
                 <x-controls.time-picker2 :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
-                @case($timeControls[1])
-                @case($timeControls[2])
-                @case($timeControls[3])
-                @case($timeControls[4])
-                @case($timeControls[5])
-                @case($timeControls[6])
+                @case('picker_month')
+                <x-controls.month-picker :name="$columnName" :value="$valueControl"/>
+                @if(Session::has($columnName))
+                    <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
+                @endif
+                @break
+                @case('picker_week')
+                <x-controls.week-picker :name="$columnName" :value="$valueControl"/>
+                @if(Session::has($columnName))
+                    <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
+                @endif
+                @break
+                @case('picker_year')
+                <x-controls.year-picker :name="$columnName" :value="$valueControl"/>
+                @if(Session::has($columnName))
+                    <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
+                @endif
+                @break
+                @case('picker_quarter')
+                <x-controls.quarter-picker :name="$columnName" :value="$valueControl"/>
+                @if(Session::has($columnName))
+                    <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
+                @endif
+                @break
+                @case('picker_date')
+                @case('picker_datetime')
                 <x-controls.date-picker2 :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>

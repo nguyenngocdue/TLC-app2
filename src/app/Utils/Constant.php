@@ -25,7 +25,7 @@ class Constant
     const FORMAT_YEAR_MONTH = "m/Y";
     const FORMAT_YEAR_MONTH0 = "Y-m";
     const FORMAT_YEAR = "Y";
-    const FORMAT_QUARTER = "Q0q/Y";
+    const FORMAT_QUARTER = "Qq/Y";
     const FORMAT_WEEK = "W/Y";
 
 

@@ -157,7 +157,7 @@ $status = $values->status ?? null;
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                                 @break
                                 @case('picker_quarter')
-                                <x-controls.text name={{$columnName}} value={{$value}} placeholder="Q01/YYYY" icon="fa-solid fa-calendar-day" />
+                                <x-controls.text name={{$columnName}} value={{$value}} placeholder="Q1/YYYY" icon="fa-solid fa-calendar-day" />
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                                 @break
                                 @case('picker_year')
