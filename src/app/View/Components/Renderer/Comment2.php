@@ -16,17 +16,19 @@ class Comment2 extends Component
     public function __construct(
         private $comment01Name = 'comment01',
         private $name = null,
-        private $id = null,
+        // private $id = null,
+
+        private $content = null,
         private $ownerId = null,
         private $positionRendered = null,
-        private $datetime = null,
-        private $content = null,
-        private $readonly = false,
-        private $rowIndex = null,
-        private $fieldId = null,
-        private $commentId = null,
         private $commentableType = null,
         private $commentableId = null,
+        private $category = null,
+        private $datetime = null,
+        private $commentId = null,
+
+        private $readonly = false,
+        private $rowIndex = null,
 
         private $allowedDelete = null,
         private $allowedChangeOwner = null,
@@ -36,6 +38,8 @@ class Comment2 extends Component
         private $commentDebug = !false,
     ) {
         //
+        // dump($datetime);
+        // dump($content);
     }
 
     /**
@@ -46,19 +50,22 @@ class Comment2 extends Component
     public function render()
     {
         $user = User::find($this->ownerId);
+        $datetime = DateTimeConcern::convertForLoading("picker_datetime", $this->datetime);
+        // dump($this->datetime);
+        // dump($datetime);
 
         return view('components.renderer.comment2', [
             'comment01Name' => $this->comment01Name,
             'name' => $this->name,
-            'id' => $this->id,
+            // 'id' => $this->id,
             'ownerId' => $this->ownerId,
             'ownerObj' => $user,
             'positionRendered' => $this->positionRendered,
-            'datetime' => DateTimeConcern::convertForLoading("picker_datetime", $this->datetime),
+            'datetime' => $datetime,
             'content' => $this->content,
             'readonly' => $this->readonly,
             'rowIndex' => $this->rowIndex,
-            'fieldId' => $this->fieldId,
+            'category' => $this->category,
             'commentId' => $this->commentId,
             'commentableType' => $this->commentableType,
             'commentableId' => $this->commentableId,
@@ -69,7 +76,7 @@ class Comment2 extends Component
             'forceCommentOnce' => $this->forceCommentOnce,
             'commentDebug' => $this->commentDebug,
             'commentDebugType' => $this->commentDebug ?  'text' : 'hidden',
-            'classList' => 'readonly dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full text-sm focus:border-purple-400 focus:outline-none',
+            'classList' => 'dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full text-sm focus:border-purple-400 focus:outline-none',
         ]);
     }
 }

@@ -24,7 +24,14 @@ class CommentGroup2 extends Component
      */
     public function render()
     {
-        $commentDataSource = $this->item->{$this->name};
+        $fn = $this->name;
+        if (!method_exists($this->item, $fn)) {
+            dump("The comment $fn not found, please create an eloquent param for it.");
+            return;
+        }
+        $commentDataSource = $this->item->{$fn};
+        foreach ($commentDataSource as $commentObj)
+            $commentObj->commentId = $commentObj->id;
         return view('components.controls.comment-group2', [
             'dataSource' => $commentDataSource,
         ]);

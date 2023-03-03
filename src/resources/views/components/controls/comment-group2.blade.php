@@ -1,19 +1,18 @@
-<x-renderer.card style=" border-gray-300 rounded-lg">
-    @foreach($dataSource as $line)
-    @dump($line->getOriginal())
-    @php $commentAttrs = Str::arrayToAttrs($line->getOriginal());  @endphp
-    <x-renderer.comment2 {!! $commentAttrs !!} />
+<x-renderer.card style="border-gray-300 rounded-lg">
+    @foreach($dataSource as $rowIndex => $line)
+    {{-- @dump($line->getAttributes()) --}}
+    {{-- @dump($rowIndex) --}}
+    @php $attrs = $line->getAttributes(); @endphp
+    {{-- @dump($attrs) --}}
+    <x-renderer.comment2 
+            content="{{$attrs['content']}}"
+            owner_id="{{$attrs['owner_id']}}"
+            position_rendered="{{$attrs['position_rendered']}}"
+            commentable_type="{{$attrs['commentable_type']}}"
+            commentable_id="{{$attrs['commentable_id']}}"
+            category="{{$attrs['category']}}"
+            datetime="{{$attrs['created_at']}}"
+            commentId="{{$attrs['commentId']}}"
+        ></x-renderer.comment2>
     @endforeach
-    {{-- @foreach($dataSource as $key => $value)
-        @dump($value)
-        @php 
-            $commentAttrs = Str::arrayToAttrs($value); 
-            $destroyable = $value['id'] !== '';
-            dump($commentAttrs);
-        @endphp
-        <div class="">
-            <x-renderer.comment2 {!! $commentAttrs !!} />
-        </div>
-    @endforeach --}}
 </x-renderer.card>
-{{-- :attachmentData="$attachmentData" --}}

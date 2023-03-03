@@ -5,7 +5,7 @@
             <input name='{{$comment01Name}}[id][{{$rowIndex}}]' type="{{$commentDebugType}}" value="{{$commentId}}" readonly class="w-full border">
         </div>
         <div class="col-span-3">
-            <input name='{{$comment01Name}}[category][{{$rowIndex}}]' type="{{$commentDebugType}}" value="{{$fieldId}}" readonly class="w-full border">
+            <input name='{{$comment01Name}}[category][{{$rowIndex}}]' type="{{$commentDebugType}}" value="{{$category}}" readonly class="w-full border">
         </div>
         <div class="col-span-3">
             <input name='{{$comment01Name}}[commentable_type][{{$rowIndex}}]' type="{{$commentDebugType}}" value="{{$commentableType}}" readonly class="w-full border">
@@ -31,7 +31,7 @@
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <i class="fa-duotone fa-calendar"></i>
                         </div>
-                        <input datepicker type="text" value="{{$datetime}}" readonly placeholder="" class="{{$classList}} pl-8">
+                        <input type="text" value="{{$datetime}}" readonly class="{{$classList}} pl-8">
                     </div>
                 </div>
             </div>
@@ -52,7 +52,8 @@
         </div>
         <div class="col-span-12 mt-2 rounded-lg border1 border-gray-300 overflow-hidden">
             @php $contentName = "{$comment01Name}[content][$rowIndex]" @endphp
-            <textarea name="{{$contentName}}" rows="2" @readonly($readonly) placeholder="Type here..." class="{{$readonly?"readonly":""}} {{$classList}}">{{old($contentName, $content) ?? $content }}</textarea>
+            <textarea name="{{$contentName}}" rows="2" @readonly($readonly) placeholder="Type here..." class="{{$readonly?"readonly":""}} {{$classList}}"
+            >{{old($contentName, $content) ?? $content }}</textarea>
         </div>
         @if($allowedAttachment)
             <div class="col-span-12 mt-2 rounded-lg border border-gray-300 overflow-hidden">
