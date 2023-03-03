@@ -16,8 +16,16 @@ class Zunit_test_07 extends ModelExtended
         "comment_3" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_4" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_5" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-        "comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        // "comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+
+        "getDiscipline1" => ['hasMany', Prod_discipline_1::class, 'prod_discipline_id'],
     ];
+
+    public function getDiscipline1()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function comment_1()
     {
@@ -49,11 +57,11 @@ class Zunit_test_07 extends ModelExtended
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    public function comments()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-    }
+    // public function comments()
+    // {
+    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+    // }
 
     // public function attachment()
     // {

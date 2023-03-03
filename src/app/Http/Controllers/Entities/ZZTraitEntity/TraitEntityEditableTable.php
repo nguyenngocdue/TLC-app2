@@ -32,6 +32,9 @@ trait TraitEntityEditableTable
             if (is_null($dataSource)) continue;
 
             $dataSource = $this->parseHTTPArrayToLines($dataSource);
+            // dump($tableName);
+            if ($tableName === 'comments') {
+            }
             $this->dump1("RECURSIVE CALLED PARSING from HTML DATA to ARRAY $tableName", $dataSource, __LINE__);
             // dump($dataSource);
             // session()->flush();
