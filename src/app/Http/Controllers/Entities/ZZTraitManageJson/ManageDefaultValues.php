@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
-use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\DefaultValues;
 use App\Utils\Support\Json\Props;
 
@@ -14,7 +13,6 @@ class ManageDefaultValues extends Manage_Parent
 
     protected function getColumns()
     {
-        $controls = JsonControls::getControls();
         return [
             [
                 "dataIndex" => "name",
@@ -36,6 +34,13 @@ class ManageDefaultValues extends Manage_Parent
                 "editable" => true,
                 "renderer" => "text",
                 'title' => "Validation Rules<br/><a class='text-blue-700 underline' target='_blank' href='https://laravel.com/docs/9.x/validation#available-validation-rules'>Open Laravel Doc</a>"
+            ],
+            [
+                "dataIndex" => "validation_regex",
+                "editable" => true,
+                "renderer" => "text",
+                'title' => "Validation Regex<br/><a class='text-blue-700 underline' target='_blank' href='https://regex101.com/'>Open Regex101</a>",
+                "properties" => ['placeholder' => '/^[0-9]+$/'],
             ],
             [
                 "dataIndex" => "formula",

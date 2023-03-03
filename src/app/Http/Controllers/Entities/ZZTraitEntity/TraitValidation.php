@@ -31,11 +31,15 @@ trait TraitValidation
         $rules = [];
         foreach ($this->superProps['props'] as $prop) {
             if (isset($prop['default-values']['validation'])) {
-                $rules[$prop['column_name']] = $prop['default-values']['validation'];
+                $commonValidations = $prop['default-values']['validation'];
+                $regexValidations = $prop['default-values']['validation_regex'] ?? "";
+                $rules[$prop['column_name']] = explode("|", $commonValidations);
+                if ($regexValidations) $rules[$prop['column_name']][] = "regex:" . $regexValidations;
             }
         }
         $rules = array_filter($rules, fn ($i) => $i);
-        $this->dump1("getValidationRules", $rules, __LINE__);
+        // dd("getValidationRules", $rules);
+        // $this->dump1("getValidationRules", $rules, __LINE__);
         return $rules;
     }
 }
