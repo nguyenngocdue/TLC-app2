@@ -63,7 +63,7 @@
                     />
                 <x-renderer.comment2 comment01Name="comment02" rowIndex=2 category=7 commentId=23 
                     commentableType='App\Models\EntityName' commentableId=1 
-                    ownerId=13 positionRendered='Position 06' datetime='2022-01-013 01:02:03' content="Text 06"
+                    ownerId=13 positionRendered='Position 06' datetime='2022-01-13 01:02:03' content="Text 06"
                     />
             </x-renderer.card>
             <x-renderer.button htmlType='submit' type='primary'>Update</x-renderer.button>

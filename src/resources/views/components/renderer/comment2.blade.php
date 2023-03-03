@@ -2,16 +2,16 @@
 <div id="{{$comment01Name}}_div" class="p-4 my-4 bg-gray-250 border rounded-lg shadow-md ">
     <div class="grid grid-cols-12 gap-4 ">
         <div class="col-span-3">
-            <input name='{{$comment01Name}}[id][{{$rowIndex}}]' type="{{$commentDebugType}}" value="{{$commentId}}" readonly class="w-full border">
+            <input name='{{$comment01Name}}[id][{{$rowIndex}}]' type="{{$commentDebugType}}" value="{{$commentId}}" readonly class="readonly w-full border">
         </div>
         <div class="col-span-3">
-            <input name='{{$comment01Name}}[category][{{$rowIndex}}]' type="{{$commentDebugType}}" value="{{$category}}" readonly class="w-full border">
+            <input name='{{$comment01Name}}[category][{{$rowIndex}}]' type="{{$commentDebugType}}" value="{{$category}}" readonly class="readonly w-full border">
         </div>
         <div class="col-span-3">
-            <input name='{{$comment01Name}}[commentable_type][{{$rowIndex}}]' type="{{$commentDebugType}}" value="{{$commentableType}}" readonly class="w-full border">
+            <input name='{{$comment01Name}}[commentable_type][{{$rowIndex}}]' type="{{$commentDebugType}}" value="{{$commentableType}}" readonly class="readonly w-full border">
         </div>
         <div class="col-span-3">
-            <input name='{{$comment01Name}}[commentable_id][{{$rowIndex}}]' type="{{$commentDebugType}}" value="{{$commentableId}}" readonly class="w-full border">
+            <input name='{{$comment01Name}}[commentable_id][{{$rowIndex}}]' type="{{$commentDebugType}}" value="{{$commentableId}}" readonly class="readonly w-full border">
         </div>
     </div>
     <div class="grid grid-cols-12 gap-2 flex-nowrap">
@@ -20,10 +20,10 @@
                 <div class="col-span-4">
                     {{-- {{$ownerObj ? $ownerObj->name : "NULL"}} --}}
                     {{-- {{$allowedChangeOwner ? "true" : "false"}} --}}
-                    <input name='{{$comment01Name}}[owner_id][{{$rowIndex}}]' value="{{$ownerId}}" readonly type='text' class='{{$classList}}'>
+                    <input name='{{$comment01Name}}[owner_id][{{$rowIndex}}]' value="{{$ownerId}}" readonly type='text' class='readonly {{$classList}}'>
                 </div>
                 <div class="col-span-4 ">
-                    <input name='{{$comment01Name}}[position_rendered][{{$rowIndex}}]' value="{{$positionRendered}}" readonly type='text' class='{{$classList}}'>
+                    <input name='{{$comment01Name}}[position_rendered][{{$rowIndex}}]' value="{{$positionRendered}}" readonly type='text' class='readonly {{$classList}}'>
                 </div>
 
                 <div class="col-span-4">
@@ -31,7 +31,7 @@
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <i class="fa-duotone fa-calendar"></i>
                         </div>
-                        <input type="text" value="{{$datetime}}" readonly class="{{$classList}} pl-8">
+                        <input type="text" value="{{$datetime}}" readonly class="readonly {{$classList}} pl-8">
                     </div>
                 </div>
             </div>
