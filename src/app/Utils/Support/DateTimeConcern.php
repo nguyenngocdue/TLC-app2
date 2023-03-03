@@ -30,14 +30,14 @@ class DateTimeConcern
     }
     public static function formatQuarterForSaving($value, $formatTo)
     {
-        $value = ltrim($value, 'Q');
+        $value = substr($value, 1);
         [$quarter, $year] = explode('/', $value);
         $result = Carbon::createFromDate($year, (($quarter - 1) * 3) + 1, 1)->startOfQuarter();
         return $result->format($formatTo);
     }
     public static function formatWeekForSaving($value, $formatTo)
     {
-        $value = ltrim($value, 'W');
+        $value = substr($value, 1);
         [$week, $year] = explode('/', $value);
         $result = Carbon::parse("{$year}-W{$week}-1")->startOfWeek();
         return $result->format($formatTo);
