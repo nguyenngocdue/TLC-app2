@@ -2,19 +2,28 @@
 
 namespace App\View\Components\Controls;
 
+use App\Utils\Constant;
+use Database\Seeders\FieldSeeder;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class CommentGroup2 extends Component
 {
+    private static $comment00Count = 0;
+    private $comment01Name;
     /**
      * Create a new component instance.
      *
      * @return void
      */
     public function __construct(
-        private $name,
+        private $id = null,
+        private $name = null,
         private $item = null,
+        private $type = null,
     ) {
+        $this->comment01Name = "comment" . str_pad(static::$comment00Count++, 2, 0, STR_PAD_LEFT);
+        // dump($this->comment01Name);
     }
 
     /**
@@ -25,6 +34,8 @@ class CommentGroup2 extends Component
     public function render()
     {
         $fn = $this->name;
+        $fieldId = FieldSeeder::getIdFromFieldName($this->name);
+        $modelPath = Str::modelPathFrom($this->type);
         if (!method_exists($this->item, $fn)) {
             dump("The comment $fn not found, please create an eloquent param for it.");
             return;
@@ -33,7 +44,15 @@ class CommentGroup2 extends Component
         foreach ($commentDataSource as $commentObj)
             $commentObj->commentId = $commentObj->id;
         return view('components.controls.comment-group2', [
+            'comment01Name' => $this->comment01Name,
+
             'dataSource' => $commentDataSource,
+            'allowAppending' => true,
+            'commentable_type' => $modelPath,
+            'commentable_id' => $this->id,
+            'fieldId' => $fieldId,
+
+            'now' => date(Constant::FORMAT_DATETIME_ASIAN),
         ]);
     }
 }

@@ -168,7 +168,7 @@ $status = $values->status ?? null;
                                 <x-renderer.attachment2 name={{$columnName}} value={{$value}} />
                                 @break
                                 @case('comment')
-                                <x-controls.comment-group2 :item="$item" name={{$columnName}} />
+                                <x-controls.comment-group2 :item="$item" id={{$id}} type={{$type}} name={{$columnName}} />
                                 {{-- <x-controls.comment-group id={{$id}} type={{$type}} colName={{$columnName}} label={{$label}} colSpan={{$col_span}} /> --}}
                                 @break
 

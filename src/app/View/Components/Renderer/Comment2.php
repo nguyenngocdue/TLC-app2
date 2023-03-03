@@ -14,7 +14,7 @@ class Comment2 extends Component
      * @return void
      */
     public function __construct(
-        private $comment01Name = 'comment01',
+        private $comment01Name = null,
         private $name = null,
         // private $id = null,
 
