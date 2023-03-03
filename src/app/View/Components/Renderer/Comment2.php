@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Models\Comment;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
@@ -9,7 +10,7 @@ use Illuminate\View\Component;
 
 class Comment2 extends Component
 {
-    private $commentDebug = false;
+    private $commentDebug = !false;
     /**
      * Create a new component instance.
      *
@@ -50,6 +51,10 @@ class Comment2 extends Component
      */
     public function render()
     {
+        // if ($this->commentDebug) {
+        //     echo "allowedDelete: [$this->allowedDelete], allowedChangeOwner: [$this->allowedChangeOwner]";
+        //     echo "allowedAttachment: [$this->allowedAttachment], forceCommentOnce: [$this->forceCommentOnce]";
+        // }
         $user = User::find($this->ownerId);
         $datetime = DateTimeConcern::convertForLoading("picker_datetime", $this->datetime);
         $avatarObj = $user ? $user->avatar : null;
@@ -61,6 +66,17 @@ class Comment2 extends Component
             $readonly = true;
         }
         // $readonly = !true;
+        $comment_attachment = collect([]);
+        if ($this->commentId) {
+            $commentItem = Comment::find($this->commentId);
+            // dump($commentItem->comment_attachment);
+            $comment_attachment = $commentItem->comment_attachment;
+        }
+        $allowedDelete = $this->allowedDelete;
+        if (is_null($this->commentId)) {
+            $allowedDelete = false;
+        }
+
 
         return view('components.renderer.comment2', [
             'comment01Name' => $this->comment01Name,
@@ -79,8 +95,9 @@ class Comment2 extends Component
             'commentId' => $this->commentId,
             'commentableType' => $this->commentableType,
             'commentableId' => $this->commentableId,
+            'commentAttachment' => $comment_attachment,
 
-            'allowedDelete' => $this->allowedDelete,
+            'allowedDelete' => $allowedDelete,
             'allowedChangeOwner' => $this->allowedChangeOwner,
             'allowedAttachment' => $this->allowedAttachment,
             'forceCommentOnce' => $this->forceCommentOnce,

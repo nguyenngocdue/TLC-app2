@@ -1,22 +1,28 @@
 {{-- {{old()}} --}}
-<div id="{{$comment01Name}}_div" class="p-2 my-2 bg-gray-250 border rounded-lg shadow-md ">
+<div id="{{$comment01Name}}_div_{{$rowIndex}}" class="p-2 my-2 bg-gray-250 border rounded-lg shadow-md ">
     <div class="grid grid-cols-12 gap-2 ">
-        <div class="col-span-3">
+        <div class="col-span-2">
             @php $name = $readonly ? '' : "{$comment01Name}[id][$rowIndex]"; @endphp
-            <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$commentId}}" readonly class="readonly w-full border">
+            <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$commentId}}" readonly class="readonly w-full border rounded-lg">
         </div>
-        <div class="col-span-3">
+        <div class="col-span-2">
             @php $name = $readonly ? '' : "{$comment01Name}[category][$rowIndex]"; @endphp
-            <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$category}}" readonly class="readonly w-full border">
+            <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$category}}" readonly class="readonly w-full border rounded-lg">
         </div>
-        <div class="col-span-3">
+        <div class="col-span-2">
             @php $name = $readonly ? '' : "{$comment01Name}[commentable_type][$rowIndex]"; @endphp
-            <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$commentableType}}" readonly class="readonly w-full border">
+            <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$commentableType}}" readonly class="readonly w-full border rounded-lg">
         </div>
-        <div class="col-span-3">
+        <div class="col-span-2">
             @php $name = $readonly ? '' : "{$comment01Name}[commentable_id][$rowIndex]"; @endphp
-            <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$commentableId}}" readonly class="readonly w-full border">
+            <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$commentableId}}" readonly class="readonly w-full border rounded-lg">
         </div>
+        @if($allowedDelete) 
+        <div class="col-span-2">
+            @php $destroyName="{$comment01Name}[DESTROY_THIS_LINE][$rowIndex]"; @endphp
+            <input name="{{$destroyName}}" id="{{$destroyName}}" type="{{$commentDebugType}}" value="" class="readonly w-full border" />
+        </div>
+        @endif
     </div>
     <div class="grid grid-cols-12 gap-2 flex-nowrap">
         <div class=" grid col-span-11 text-center flex-nowrap">
@@ -51,12 +57,10 @@
         <div class="col-span-1 text-center flex">
             <div class="m-auto text-center flex-1">
                 <div class="flex">
-                    @if($allowedDelete == true) 
-                        @php $destroyName="{$comment01Name}[DESTROY_THIS_LINE][$rowIndex]"; @endphp
-                        <button type="button" onclick='trashComment("{{$destroyName}}","{{$comment01Name}}_div")' class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
+                    @if($allowedDelete) 
+                        <button type="button" onclick='trashComment("{{$destroyName}}","{{$comment01Name}}_div_{{$rowIndex}}")' class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
                             <i class="text-[#d11a2a] fas fa-trash cursor-pointer"></i>
                         </button>
-                        <input name="{{$destroyName}}" id="{{$destroyName}}" type="{{$commentDebugType}}" value="" class="w-10" />
                         @else
                         <button type="button" class="w-10 h-10 m-auto hover1:bg-slate-300 rounded-full">
                             <i class="text-gray-400 fas fa-trash cursor-not-allowed"></i>
@@ -72,9 +76,8 @@
         </div>
         @if($allowedAttachment)
         <div class="col-span-12 mt-2 rounded-lg border border-gray-300 overflow-hidden">
-                {{-- @php $name = $readonly ? '' : "{$comment01Name}[comment_attachment][$rowIndex]"; @endphp --}}
-                <x-renderer.attachment2 name="{{$comment01Name}}[comment_attachment][toBeUploaded]" />
-                {{-- readonly="{{$readonly}}" destroyable={{$allowedDelete}} categoryName={{$comment01Name}} :attachmentData="$a[{{$rowIndex}}]ttachmentData" action={{$action}} labelName={{$labelName}} path={{$path}} /> --}}
+                @php $name = $readonly ? '' : "{$comment01Name}[comment_attachment][$rowIndex][toBeUploaded]"; @endphp
+                <x-renderer.attachment2 name="comment_attachment" value="{{$commentAttachment}}" />
             </div>
         @endif
     </div>
@@ -83,8 +86,9 @@
 @once
 <script>
     const trashComment = (id, divId) =>{
+        // console.log(id, divId)
         const lastValue = getEById(id).val() === 'true'
-        getEById(id).val(!lastValue)
+        getEById(id).val(!lastValue?true:null)
         if(lastValue) document.getElementById(divId).classList.remove("bg-red-300") 
         else document.getElementById(divId).classList.add("bg-red-300")
     }

@@ -18,6 +18,11 @@
                 datetime="{{$attrs['created_at']}}"
                 commentId="{{$attrs['commentId']}}"
 
+                allowedDelete="{{$allowedDelete}}"
+                allowedChangeOwner="{{$allowedChangeOwner}}"
+                allowedAttachment="{{$allowedAttachment}}"
+                forceCommentOnce="{{$forceCommentOnce}}"
+
                 readonly="{{!true?1:0}}"
             ></x-renderer.comment2>
     @endforeach
@@ -33,6 +38,12 @@
                 commentable_id="{{$commentable_id}}"
                 category="{{$fieldId}}"
                 datetime="{{$now}}"
+
+                allowedDelete="{{$allowedDelete}}"
+                allowedChangeOwner="{{$allowedChangeOwner}}"
+                allowedAttachment="{{$allowedAttachment}}"
+                forceCommentOnce="{{$forceCommentOnce}}"
+                
             ></x-renderer.comment2>
     @endif
 </x-renderer.card>

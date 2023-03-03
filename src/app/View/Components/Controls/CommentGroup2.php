@@ -4,7 +4,7 @@ namespace App\View\Components\Controls;
 
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
-use Database\Seeders\FieldSeeder;
+use App\Utils\Support\Json\Properties;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -35,9 +35,16 @@ class CommentGroup2 extends Component
     public function render()
     {
         $fn = $this->name;
-        $fieldId = FieldSeeder::getIdFromFieldName($this->name);
         $modelPath = Str::modelPathFrom($this->type);
 
+        $properties = Properties::getAllOf('comment');
+        if (!isset($properties["_" . $fn])) {
+            dump("Properties of comment [$fn] not found, pls use Manage-Property screen to add one.");
+            return;
+        }
+        $properties = $properties["_" . $fn];
+        // dump($properties);
+        $fieldId = $properties['field_id'];
 
         $user = CurrentUser::get();
         $userName = $user->name;
@@ -64,6 +71,11 @@ class CommentGroup2 extends Component
             'userName' => $userName,
             'userId' => $userId,
             'userPosition' => $userPosition,
+
+            "allowedChangeOwner" => $properties['allowed_change_owner'],
+            "allowedAttachment" => $properties['allowed_attachment'],
+            "allowedDelete" => $properties['allowed_delete'],
+            "forceCommentOnce" => $properties['force_comment_once'],
 
             'now' => date(Constant::FORMAT_DATETIME_ASIAN),
         ]);

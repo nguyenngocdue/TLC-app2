@@ -53,7 +53,7 @@ trait TraitEntityEditableTable
                 $controllerPath = "App\\Http\\Controllers\\Entities\\$tableType\\EntityCRUDController";
                 $controller = new $controllerPath;
                 if (isset($line['id']) && !is_null($line['id'])) {
-                    if (isset($line['DESTROY_THIS_LINE']) && !is_null($line["DESTROY_THIS_LINE"])) {
+                    if (isset($line['DESTROY_THIS_LINE']) && ('true' == $line["DESTROY_THIS_LINE"])) {
                         $destroySuccess = $controller->destroy($fakeRequest, $line['id']);
                         //Not necessary because it will be deleted when mapping with the next lines
                         if ($destroySuccess) {
