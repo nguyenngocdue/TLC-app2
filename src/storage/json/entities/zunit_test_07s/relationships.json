@@ -1,4 +1,17 @@
 {
+    "_getDiscipline1": {
+        "name": "_getDiscipline1",
+        "relationship": "hasMany",
+        "control_name": "getDiscipline1",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_comment_1": {
         "name": "_comment_1",
         "relationship": "morphMany",
@@ -60,19 +73,6 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "comment",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_comments": {
-        "name": "_comments",
-        "relationship": "morphMany",
-        "control_name": "comments",
-        "renderer_view_all": "agg_count",
-        "renderer_view_all_param": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

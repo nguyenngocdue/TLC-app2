@@ -109,9 +109,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_comments": {
-        "name": "_comments",
-        "column_name": "comments",
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "label": "",
         "validation": "",
         "formula": "",
@@ -120,9 +120,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
+    "_getDiscipline1": {
+        "name": "_getDiscipline1",
+        "column_name": "getDiscipline1",
         "label": "",
         "validation": "",
         "formula": "",

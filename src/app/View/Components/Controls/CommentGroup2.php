@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class CommentGroup2 extends Component
 {
-    private static $comment00Count = 0;
+    private static $comment00Count = 1;
     private $comment01Name;
     /**
      * Create a new component instance.
