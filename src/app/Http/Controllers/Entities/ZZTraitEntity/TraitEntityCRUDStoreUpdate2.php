@@ -21,6 +21,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitEntityEditableTable;
 	use TraitEntityFormula;
 	use TraitValidation;
+	use TraitSendNotificationAndMail;
 
 	private $debugForStoreUpdate = false;
 
@@ -43,7 +44,8 @@ trait TraitEntityCRUDStoreUpdate2
 			'datetime' => [],
 			'editable_table' => [],
 		];
-		$dateTimeControls = ['picker_time', 'picker_date', 'picker_month', 'picker_week', 'picker_quarter', 'picker_year', 'picker_datetime'];
+
+		$dateTimeControls = JsonControls::getDateTimeControls();
 		foreach ($this->superProps['props'] as $prop) {
 			if ($prop['hidden_edit']) continue;
 			if (in_array($prop['control'], $dateTimeControls)) {
@@ -66,13 +68,10 @@ trait TraitEntityCRUDStoreUpdate2
 						break;
 				}
 			}
-
 			if ($prop['control'] === 'relationship_renderer') {
 				$result[$column_type][$table01Index] = $prop['name'];
 			} elseif (in_array($prop['control'], $dateTimeControls)) {
-				// if (!in_array($prop['name'], ['created_at', 'updated_at'])) {
 				$result[$column_type][$control_sub_type][] = $prop['name'];
-				// }
 			} else {
 				$result[$column_type][] = $prop['name'];
 			}
@@ -271,14 +270,7 @@ trait TraitEntityCRUDStoreUpdate2
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Created New Document"
-		//Add Id into array fields
-		$fields = $this->addEntityType($fields, 'id', $theRow->id);
-		$fields = $this->addEntityType($fields, 'status', $newStatus);
-		try {
-			event(new CreateNewDocumentEvent($currentValue = $this->addEntityType($fields, 'entity_type', $this->type)));
-		} catch (\Throwable $th) {
-			dump($th);
-		}
+		$this->eventCreatedNotificationAndMail($fields, $theRow->id, $newStatus, $this->type);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
@@ -313,21 +305,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$fields = $this->handleFields($request, __FUNCTION__);
 			$fields = $this->addEntityType($fields, 'status', $newStatus);
 			$theRow = $this->data::find($id);
-			$previousValue = [];
-			foreach ($fields as $key => $value) {
-				if ($key !== 'tableNames') {
-					if (isset($theRow->$key)) {
-						$previousValue[$key] = $theRow->$key;
-					} else {
-						if (in_array($key, JsonControls::getMonitors())) {
-							$valueGetMonitors = $theRow->{$key}->pluck('id')->toArray();
-							$previousValue[$key] = $valueGetMonitors;
-						}
-					}
-				} else {
-					$previousValue[$key] = $value;
-				}
-			}
+			$previousValue = $this->getPreviousValue($fields, $theRow);
 			$theRow->fill($fields);
 			$theRow->save();
 			$objectType = "App\\Models\\" . Str::singular($theRow->getTable());
@@ -353,14 +331,7 @@ trait TraitEntityCRUDStoreUpdate2
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
-		try {
-			event(new UpdatedDocumentEvent(
-				$previousValue = $this->addEntityType($previousValue, 'entity_type', $this->type),
-				$currentValue = $this->addEntityType($fields, 'entity_type', $this->type)
-			));
-		} catch (\Throwable $th) {
-			dump($th);
-		}
+		// $this->eventUpdatedNotificationAndMail($previousValue, $fields, $this->type);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 	private function addEntityType($array, $key, $value)

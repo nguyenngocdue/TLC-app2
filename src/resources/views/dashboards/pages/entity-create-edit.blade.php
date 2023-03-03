@@ -145,15 +145,26 @@ $status = $values->status ?? null;
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                                 @break
                                 @case('picker_date')
-                                @case('picker_week')
-                                @case('picker_month')
-                                @case('picker_quarter')
-                                @case('picker_year')
                                 <x-controls.date-picker3 name={{$columnName}} value={{$value}} dateTimeType="{{$control}}"/>
                                 <x-controls.localtime id={{$id}} control={{$control}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                                 @break
-
+                                @case('picker_week')
+                                <x-controls.text name={{$columnName}} value={{$value}} placeholder="W01/YYYY" icon="fa-solid fa-calendar-day" />
+                                <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                                @break
+                                @case('picker_month')
+                                <x-controls.text name={{$columnName}} value={{$value}} placeholder="MM/YYYY" icon="fa-solid fa-calendar-day" />
+                                <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                                @break
+                                @case('picker_quarter')
+                                <x-controls.text name={{$columnName}} value={{$value}} placeholder="Q01/YYYY" icon="fa-solid fa-calendar-day" />
+                                <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                                @break
+                                @case('picker_year')
+                                <x-controls.text name={{$columnName}} value={{$value}} placeholder="YYYY" icon="fa-solid fa-calendar-day" />
+                                <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                                @break
                                 @case('attachment')
                                 <x-renderer.attachment2 name={{$columnName}} value={{$value}} />
                                 @break

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Entities;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityExportCSV;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityShowQRList6;
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntitySuperPropsFilter;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentRoute;
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 abstract class AbstractViewAllController extends Controller
 {
-    use TraitEntitySuperPropsFilter;
+    use TraitEntityAdvancedFilter;
     use TraitEntityExportCSV;
     use TraitEntityShowQRList6;
     protected $type = "";
@@ -41,7 +41,6 @@ abstract class AbstractViewAllController extends Controller
     {
         return $this->type;
     }
-
     private function getUserSettings()
     {
         $type = Str::plural($this->type);
@@ -50,64 +49,6 @@ abstract class AbstractViewAllController extends Controller
         $columnLimit = $settings[$type][Constant::VIEW_ALL]['columns'] ?? null;
         $advancedFilter = $settings[$type][Constant::VIEW_ALL]['advanced_filters'] ?? null;
         return [$perPage, $columnLimit, $advancedFilter];
-    }
-    private function distributeFilter($advanceFilters, $propsFilters)
-    {
-        $propsFilters = array_map(fn ($item) => $item['control'], $propsFilters);
-        if (!empty($advanceFilters)) {
-            $advanceFilters = array_filter($advanceFilters, fn ($item) => $item);
-            $result = [];
-            foreach ($advanceFilters as $key => $value) {
-                switch ($propsFilters['_' . $key]) {
-                    case 'id':
-                        $result['id'][$key] = $value;
-                        break;
-                    case 'doc_id':
-                        $result['doc_id'][$key] = $value;
-                        break;
-                    case 'text':
-                    case 'textarea':
-                    case 'number':
-                        $result['text'][$key] = $value;
-                        break;
-                    case 'status':
-                        $result['status'][$key] = $value;
-                        break;
-                    case 'toggle':
-                        $result['toggle'][$key] = $value;
-                        break;
-                    case 'dropdown':
-                        $result['dropdown'][$key] = $value;
-                        break;
-                    case 'radio':
-                    case 'checkbox':
-                    case 'dropdown_multi':
-                        $result['dropdown_multi'][$key] = $value;
-                        break;
-                    case 'picker_time':
-                        $result['picker_time'][$key] = $value;
-                        break;
-                    case 'picker_datetime':
-                    case 'picker_date':
-                    case 'picker_month':
-                    case 'picker_week':
-                    case 'picker_quarter':
-                    case 'picker_year':
-                        $result['picker_datetime'][$key] = $value;
-                        break;
-                    case 'parent_type':
-                        $result['parent_type'][$key] = $value;
-                        break;
-                    case 'parent_id':
-                        $result['parent_id'][$key] = $value;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            return $result;
-        }
-        return false;
     }
 
     private function getDataSource($advanceFilters = null)
@@ -118,73 +59,7 @@ abstract class AbstractViewAllController extends Controller
         $search = request('search');
         $result = App::make($model)::search($search)
             ->query(function ($q) use ($advanceFilters, $propsFilters) {
-                if ($advanceFilters) {
-                    $queryResult = array_filter($advanceFilters, fn ($item) => $item);
-                    array_walk($queryResult, function ($value, $key) use ($q, $propsFilters) {
-                        switch ($key) {
-                            case 'id':
-                            case 'parent_id':
-                            case 'doc_id':
-                                array_walk($value, function ($value, $key) use ($q) {
-                                    $arrayId = explode(',', $value);
-                                    if (!empty($arrayId)) {
-                                        $q->whereIn($key, $arrayId);
-                                    }
-                                });
-                                break;
-                            case 'text':
-                                array_walk($value, function ($value, $key) use ($q) {
-                                    $q->where($key, 'like', '%' . $value . '%');
-                                });
-                                break;
-                            case 'toggle':
-                                array_walk($value, function ($value, $key) use ($q) {
-                                    $q->where($key, $value);
-                                });
-                                break;
-                            case 'picker_time':
-                                array_walk($value, function ($value, $key) use ($q) {
-                                    $arrayTime = explode(' - ', $value);
-                                    $q->whereTime($key, '>=', $arrayTime[0])
-                                        ->whereTime($key, '<=', $arrayTime[1]);
-                                });
-                                break;
-                            case 'picker_datetime':
-                                array_walk($value, function ($value, $key) use ($q) {
-                                    $arrayDate = explode(' - ', $value);
-                                    $q->whereDate($key, '>=', $this->convertDateTime($arrayDate[0]))
-                                        ->whereDate($key, '<=', $this->convertDateTime($arrayDate[1]));
-                                });
-                                break;
-                            case 'dropdown':
-                            case 'status':
-                            case 'parent_type':
-                                array_walk($value, function ($value, $key) use ($q) {
-                                    $q->whereIn($key, $value);
-                                });
-                                break;
-                            case 'dropdown_multi':
-                                array_walk($value, function ($value, $key) use ($q, $propsFilters) {
-                                    $relationship = $propsFilters['_' . $key]['relationships'];
-                                    $oracyParams = $relationship['oracyParams'];
-                                    $field = $key;
-                                    $fieldId = DB::table('fields')->where('name', str_replace('()', '', $field))->value('id');
-                                    $collectionFilter = DB::table('many_to_many')->where('field_id', $fieldId)
-                                        ->where('term_type', $oracyParams[1])
-                                        ->where('doc_type', $this->typeModel)
-                                        ->whereIn('term_id', $value)
-                                        ->get();
-                                    $valueFilter = $collectionFilter->map(function ($item) {
-                                        return $item->doc_id;
-                                    })->toArray();
-                                    $q->whereIn('id', $valueFilter);
-                                });
-                                break;
-                            default:
-                                break;
-                        }
-                    });
-                }
+                $this->queryAdvancedFilter($q, $advanceFilters, $propsFilters);
                 return $q->orderBy('updated_at', 'desc');
             });
         return $result;
@@ -277,7 +152,6 @@ abstract class AbstractViewAllController extends Controller
         ];
         array_splice($props, 1, 0, [$qrCodeColumn]);
         $result = array_values(array_map(fn ($prop) => createObject($prop, $type), $props));
-        // Log::info($result);
         return $result;
     }
 
@@ -407,14 +281,5 @@ abstract class AbstractViewAllController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['message' => $th], 404);
         }
-    }
-    private function normalizeDataSourceAndColumnsFollowAdvanceFilter()
-    {
-        [,, $advanceFilters] = $this->getUserSettings();
-        $type = Str::plural($this->type);
-        $columns = $this->getColumnsExportCSV($type);
-        $columns = $this->makeNoColumn($columns);
-        $dataSource = $this->getDataSource($advanceFilters)->get();
-        return [$columns, $dataSource];
     }
 }

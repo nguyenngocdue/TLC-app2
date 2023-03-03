@@ -173,7 +173,6 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
             case 'monitor_status_change':
                 $cc = $this->getMailCc($typeSend, $creator, $monitorsCurrent);
                 $cc = array_filter($cc, fn ($item) => $item !== $user['email']);
-                dd($cc);
                 Mail::to($user)
                     ->cc($cc)
                     ->bcc($this->getMailBcc())

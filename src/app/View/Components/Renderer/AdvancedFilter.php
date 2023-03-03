@@ -2,13 +2,13 @@
 
 namespace App\View\Components\Renderer;
 
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntitySuperPropsFilter;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
 class AdvancedFilter extends Component
 {
-    use TraitEntitySuperPropsFilter;
+    use TraitEntityAdvancedFilter;
     /**
      * Create a new component instance.
      *

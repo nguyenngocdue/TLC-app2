@@ -57,7 +57,7 @@ class QrCode extends Component
     {
         return '
                 <div id="' . $id . '"class="items-center flex justify-center"></div>
-                <div class="items-center">
+                <div class="items-center w-auto">
                     <span class font-medium>Scan this code by your phone</span>
                     <p class="text-xs font-medium">' . $href . '</p>
                 </div>

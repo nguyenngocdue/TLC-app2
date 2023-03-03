@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntitySuperPropsFilter;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
 use App\Models\User;
 use App\Utils\Constant;
 use App\Utils\Support\Json\SuperProps;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Session;
 
 class UpdateUserSettings extends Controller
 {
-    use TraitEntitySuperPropsFilter;
+    use TraitEntityAdvancedFilter;
     private function updatePerPage($request, $settings)
     {
         $perPage = $request->input('per_page');

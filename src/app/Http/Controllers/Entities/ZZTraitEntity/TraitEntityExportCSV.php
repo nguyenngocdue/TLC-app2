@@ -46,7 +46,8 @@ trait TraitEntityExportCSV
                     $relationships = $column['relationships'];
                     if ($relationships['relationship'] == 'belongsTo') {
                         $result[] = $dataLine
-                            ->{$relationships['control_name_function']}->name;
+                            ->{$relationships['control_name_function']}->name ?? $dataLine
+                            ->{$relationships['control_name_function']}->id;
                     }
                     break;
                 case "dropdown_multi":
@@ -114,5 +115,14 @@ trait TraitEntityExportCSV
         ];
         array_unshift($columns, $columnNo);
         return $columns;
+    }
+    private function normalizeDataSourceAndColumnsFollowAdvanceFilter()
+    {
+        [,, $advanceFilters] = $this->getUserSettings();
+        $type = Str::plural($this->type);
+        $columns = $this->getColumnsExportCSV($type);
+        $columns = $this->makeNoColumn($columns);
+        $dataSource = $this->getDataSource($advanceFilters)->get();
+        return [$columns, $dataSource];
     }
 }
