@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
-
 trait TraitEntityComment2
 {
+    function removeNullCommentOfNullId($dataSource)
+    {
+        $result = [];
+        foreach ($dataSource as $line) {
+            if (!is_null($line['id']) || !is_null($line['content'])) {
+                $result[] = $line;
+            }
+        }
+        return $result;
+    }
 }
