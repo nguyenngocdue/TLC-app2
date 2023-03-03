@@ -70,16 +70,14 @@ class Qaqc_wir extends Report_ParentController
 
         $adds = [
             [
-                "dataIndex" => "sub_project_name",
+                "title" => "Sub Project",
+                "dataIndex" => "sub_project_name_html",
                 "align" => "center",
-                "width" => 500
             ],
             [
                 "title" => "Modular Name",
                 "dataIndex" => "prod_name_html",
                 "align" => "center",
-                "width" => 500
-
             ]
         ];
         // dd($dataColumn);
@@ -149,9 +147,10 @@ class Qaqc_wir extends Report_ParentController
             if (!is_null($item->wirdesc_name)) {
                 $wirdescName = [Report::slugName($item->wirdesc_name) => $html];
             }
-            // enrich prod_name ( html)
-            $prodNameHtml = ['prod_name_html' =>  "<div  style='width: 100px'>$item->prod_name</div>"];
-            return (array)$item + $wirdescName + $prodNameHtml;
+
+            $prodNameHtml = ['prod_name_html' =>  "<div  style='width: 120px'>$item->prod_name</div>"];
+            $subProjectNameHtml = ['sub_project_name_html' =>  "<div  style='width: 80px'>$item->sub_project_name</div>"];
+            return (array)$item + $wirdescName + $prodNameHtml + $subProjectNameHtml;
         }, array_values($items));
 
         $prodGroup = Report::groupArrayByKey($transformData, 'prod_id');
