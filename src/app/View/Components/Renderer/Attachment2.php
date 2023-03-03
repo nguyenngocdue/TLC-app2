@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 class Attachment2 extends Component
 {
     private $attachments = [];
+    private $debugAttachment = false;
     public function __construct(
         private $name,
         //either a string of serialized array of attachments object or array or attachments 
@@ -58,6 +59,7 @@ class Attachment2 extends Component
             'path' => env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/',
             'attachments' => $this->attachments,
             'message' => $message,
+            'hiddenOrText' => $this->debugAttachment ? "text" : "hidden",
         ]);
     }
 }

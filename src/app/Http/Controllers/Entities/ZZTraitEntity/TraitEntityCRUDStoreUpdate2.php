@@ -82,6 +82,9 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function update(Request $request, $id)
 	{
+		// dump($request->input());
+		// dump($request->files);
+		// dd();
 		// if ($request['tableNames'] == 'fakeRequest') {
 		// 	dump($request->input());
 		// }

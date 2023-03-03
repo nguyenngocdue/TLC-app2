@@ -76,8 +76,8 @@
         </div>
         @if($allowedAttachment)
         <div class="col-span-12 mt-2 rounded-lg border border-gray-300 overflow-hidden">
-                @php $name = $readonly ? '' : "{$comment01Name}[comment_attachment][$rowIndex][toBeUploaded]"; @endphp
-                <x-renderer.attachment2 name="comment_attachment" value="{{$commentAttachment}}" />
+                @php $name = $readonly ? '' : "{$comment01Name}[comment_attachment][$rowIndex]"; @endphp
+                <x-renderer.attachment2 name="{{$name}}" value="{{$commentAttachment}}" />
             </div>
         @endif
     </div>
