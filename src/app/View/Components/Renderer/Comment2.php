@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 
 class Comment2 extends Component
 {
+    private $commentDebug = false;
     /**
      * Create a new component instance.
      *
@@ -35,7 +36,6 @@ class Comment2 extends Component
         private $allowedAttachment = null,
         private $forceCommentOnce = null,
 
-        private $commentDebug = !false,
     ) {
         //
         // dump($datetime);
@@ -51,15 +51,16 @@ class Comment2 extends Component
     {
         $user = User::find($this->ownerId);
         $datetime = DateTimeConcern::convertForLoading("picker_datetime", $this->datetime);
-        // dump($this->datetime);
-        // dump($datetime);
+        $avatar = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $user->avatar->url_thumbnail;
 
         return view('components.renderer.comment2', [
             'comment01Name' => $this->comment01Name,
             'name' => $this->name,
             // 'id' => $this->id,
             'ownerId' => $this->ownerId,
-            'ownerObj' => $user,
+            'ownerName' => $user->name,
+            'ownerAvatar' => $avatar,
+
             'positionRendered' => $this->positionRendered,
             'datetime' => $datetime,
             'content' => $this->content,
