@@ -92,7 +92,14 @@ class Qaqc_wir extends Report_ParentController
     protected function getDataProdRouting()
     {
         $sql = "
-            y";
+            SELECT
+                prodr.id AS prod_routings_id
+                ,prodr.name AS prod_routings_name
+                FROM prod_orders prod, sub_projects sub, prod_routings prodr
+                WHERE 1 = 1
+                AND sub.id = prod.sub_project_id
+                AND prodr.id = prod.prod_routing_id
+                GROUP BY prod_routings_id,  prod_routings_name";
         $sqlData = DB::select(DB::raw($sql));
         return $sqlData;
     }
