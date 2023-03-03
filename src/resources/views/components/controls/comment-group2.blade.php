@@ -27,8 +27,8 @@
                 rowIndex="{{$rowIndex}}"
 
                 content=""
-                owner_id="1"
-                position_rendered="A"
+                owner_id="{{$userId}}"
+                position_rendered="{{$userPosition}}"
                 commentable_type="{{$commentable_type}}"
                 commentable_id="{{$commentable_id}}"
                 category="{{$fieldId}}"
@@ -36,3 +36,5 @@
             ></x-renderer.comment2>
     @endif
 </x-renderer.card>
+
+<input class="bg-gray-200" readonly="" name="tableNames[{{$comment01Name}}]" value="comments" type="hidden">

@@ -37,6 +37,8 @@ trait TraitEntityCRUDStoreUpdate2
 	{
 		$table01Count = 0;
 		$table01Index = "";
+		$comment01Count = 0;
+		$comment01Index = "";
 		$result = [
 			'oracy_prop' => [],
 			'eloquent_prop' => [],
@@ -57,6 +59,10 @@ trait TraitEntityCRUDStoreUpdate2
 				$column_type = 'editable_table';
 				$table01Count++;
 				$table01Index = "table" . str_pad($table01Count, 2, '0', STR_PAD_LEFT);
+			} elseif ($prop['control'] === 'comment') {
+				$column_type = 'editable_table';
+				$comment01Count++;
+				$comment01Index = "comment" . str_pad($comment01Count, 2, '0', STR_PAD_LEFT);
 			} else {
 				switch ($prop['column_type']) {
 					case 'oracy_prop':
@@ -70,6 +76,8 @@ trait TraitEntityCRUDStoreUpdate2
 			}
 			if ($prop['control'] === 'relationship_renderer') {
 				$result[$column_type][$table01Index] = $prop['name'];
+			} elseif ($prop['control'] === 'comment') {
+				$result[$column_type][$comment01Index] = $prop['name'];
 			} elseif (in_array($prop['control'], $dateTimeControls)) {
 				$result[$column_type][$control_sub_type][] = $prop['name'];
 			} else {
