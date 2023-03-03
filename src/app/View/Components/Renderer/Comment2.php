@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer;
 
 use App\Models\User;
+use App\Utils\Support\DateTimeConcern;
 use Illuminate\View\Component;
 
 class Comment2 extends Component
@@ -32,7 +33,7 @@ class Comment2 extends Component
         private $allowedAttachment = null,
         private $forceCommentOnce = null,
 
-        private $commentDebug = false,
+        private $commentDebug = !false,
     ) {
         //
     }
@@ -45,6 +46,7 @@ class Comment2 extends Component
     public function render()
     {
         $user = User::find($this->ownerId);
+
         return view('components.renderer.comment2', [
             'comment01Name' => $this->comment01Name,
             'name' => $this->name,
@@ -52,7 +54,7 @@ class Comment2 extends Component
             'ownerId' => $this->ownerId,
             'ownerObj' => $user,
             'positionRendered' => $this->positionRendered,
-            'datetime' => $this->datetime,
+            'datetime' => DateTimeConcern::convertForLoading("picker_datetime", $this->datetime),
             'content' => $this->content,
             'readonly' => $this->readonly,
             'rowIndex' => $this->rowIndex,
@@ -67,6 +69,7 @@ class Comment2 extends Component
             'forceCommentOnce' => $this->forceCommentOnce,
             'commentDebug' => $this->commentDebug,
             'commentDebugType' => $this->commentDebug ?  'text' : 'hidden',
+            'classList' => 'readonly dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full text-sm focus:border-purple-400 focus:outline-none',
         ]);
     }
 }

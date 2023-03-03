@@ -112,7 +112,7 @@
         "column_name": "rt_remaining_hours",
         "column_type": "float",
         "label": "Remaining Hours",
-        "control": "realtime",
+        "control": "number",
         "align": "",
         "col_span": "",
         "width": "",

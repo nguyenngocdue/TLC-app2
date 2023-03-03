@@ -3,6 +3,9 @@
 namespace App\View\Components\Renderer;
 
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\Constant;
+use App\Utils\Support\JsonControls;
+use Illuminate\Mail\Mailables\Content;
 use Illuminate\View\Component;
 
 class Description extends Component
@@ -35,13 +38,39 @@ class Description extends Component
         $id = $dataSource['id'];
         $label = $prop['label'];
         $control = $prop['control'];
-        if ($control === 'status') {
-            $libStatus = LibStatuses::getFor($this->type);
-            $isContent = $dataSource[$columnName];
-            $title = (isset($libStatus[$isContent])) ? $libStatus[$isContent]['title'] : $dataSource[$columnName] . " (orphan_status)";
-            $content = $isContent ? $title : '';
-        } else {
-            $content = $dataSource[$columnName];
+        $dataTimeControls = JsonControls::getDateTimeControls();
+        switch ($control) {
+            case 'status':
+                $libStatus = LibStatuses::getFor($this->type);
+                $isContent = $dataSource[$columnName];
+                $title = (isset($libStatus[$isContent])) ? $libStatus[$isContent]['title'] : $dataSource[$columnName] . " (orphan_status)";
+                $content = $isContent ? $title : '';
+                break;
+            case 'picker_time':
+                $content ? $content = date(Constant::FORMAT_TIME, strtotime($content)) : $content;
+                break;
+            case 'picker_date':
+                $content ? $content = date(Constant::FORMAT_DATE_ASIAN, strtotime($content)) : $content;
+                break;
+            case 'picker_month':
+                $content ? $content = date(Constant::FORMAT_YEAR_MONTH, strtotime($content)) : $content;
+                break;
+            case 'picker_week':
+                $content ? $content = date('Y', strtotime($content)) : $content;
+                break;
+            case 'picker_quarter':
+                $content ? $content = date('Y', strtotime($content)) : $content;
+                break;
+            case 'picker_year':
+                $content ? $content = date(Constant::FORMAT_YEAR, strtotime($content)) : $content;
+                break;
+            case 'picker_datetime':
+                $content ? $content = date(Constant::FORMAT_DATETIME_ASIAN, strtotime($content)) : $content;
+                break;
+
+            default:
+                # code...
+                break;
         }
         $colSpan = $prop['col_span'];
         $newLine = $prop['new_line'];

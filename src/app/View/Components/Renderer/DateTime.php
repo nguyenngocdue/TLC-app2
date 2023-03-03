@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Utils\Constant;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
@@ -33,13 +34,13 @@ class DateTime extends Component
 
         switch ($this->rendererParam) {
             case "picker_datetime":
-                return date("d/m/Y H:i:s", $timestamp);
+                return date(Constant::FORMAT_DATETIME_ASIAN, $timestamp);
             case "picker_date":
-                return date("d/m/Y", $timestamp);
+                return date(Constant::FORMAT_DATE_ASIAN, $timestamp);
             case "picker_time":
-                return date("H:i:s", $timestamp);
+                return date(Constant::FORMAT_TIME, $timestamp);
             case "picker_month":
-                return date("m/Y", $timestamp);
+                return date(Constant::FORMAT_YEAR_MONTH0, $timestamp);
             case "picker_week":
                 return "W" . date("W-Y", $timestamp);
             case "picker_quarter":

@@ -22,8 +22,9 @@ class Constant
     const FORMAT_TIME = "H:i";
 
     const FORMAT_WEEKDAY_SHORT = "D";
-    const FORMAT_YEAR_MONTH = "Y/m";
+    const FORMAT_YEAR_MONTH = "m/Y";
     const FORMAT_YEAR_MONTH0 = "Y-m";
+    const FORMAT_YEAR = "Y";
 
 
     const OWNER_ID = 'owner_id';
