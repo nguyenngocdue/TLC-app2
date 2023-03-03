@@ -31,7 +31,6 @@ class DateTime extends Component
         $rawData = $this->dataLine->{$dataIndex};
         if (is_null($rawData)) return ""; //<< This to render empty string on ViewAll screen
         $timestamp = strtotime($rawData);
-
         switch ($this->rendererParam) {
             case "picker_datetime":
                 return date(Constant::FORMAT_DATETIME_ASIAN, $timestamp);
@@ -42,9 +41,9 @@ class DateTime extends Component
             case "picker_month":
                 return date(Constant::FORMAT_YEAR_MONTH0, $timestamp);
             case "picker_week":
-                return "W" . date("W-Y", $timestamp);
+                return "W" . date("W/Y", $timestamp);
             case "picker_quarter":
-                return "Q" . ceil(date("m", $timestamp) / 3) . "-" . date("Y", $timestamp);
+                return "Q" . ceil(date("m", $timestamp) / 3) . "/" . date("Y", $timestamp);
             case "picker_year":
                 return date("Y", $timestamp);
             default:

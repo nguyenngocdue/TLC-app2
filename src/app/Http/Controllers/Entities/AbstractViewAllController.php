@@ -98,10 +98,9 @@ abstract class AbstractViewAllController extends Controller
                 case "number":
                     $output['align'] = "right";
                     break;
-                case "picker_datetime":
-                case "picker_date":
                 case "picker_time":
                 case "picker_month":
+                case "picker_date":
                 case "picker_week":
                 case "picker_quarter":
                 case "picker_year":
