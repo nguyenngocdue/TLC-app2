@@ -63,6 +63,9 @@ return new class extends Migration
             $table->foreign('sub_project_id')->references('id')->on('sub_projects');
             $table->foreign('user_id')->references('id')->on('users');
         });
+        Schema::table('user_team_ots', function (Blueprint $table) {
+            $table->foreign('owner_id')->references('id')->on('users');
+        });
         //************** PRODUCTION MODULE **************/
         Schema::table('prod_runs', function (Blueprint $table) {
             $table->foreign('prod_sequence_id')->references('id')->on('prod_sequences');

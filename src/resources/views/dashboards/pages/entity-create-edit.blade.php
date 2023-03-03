@@ -11,7 +11,6 @@ $id = $action === "edit" ? $values->id : "";
 $status = $values->status ?? null;
 @endphp
 
-{{-- @dump($item) --}}
 {{-- @dump($values) --}}
 <script>
     k = @json($listenerDataSource);
@@ -169,7 +168,8 @@ $status = $values->status ?? null;
                                 <x-renderer.attachment2 name={{$columnName}} value={{$value}} />
                                 @break
                                 @case('comment')
-                                <x-controls.comment-group id={{$id}} type={{$type}} colName={{$columnName}} label={{$label}} colSpan={{$col_span}} />
+                                <x-controls.comment-group2 :item="$item" name={{$columnName}} />
+                                {{-- <x-controls.comment-group id={{$id}} type={{$type}} colName={{$columnName}} label={{$label}} colSpan={{$col_span}} /> --}}
                                 @break
 
                                 @case('relationship_renderer')
@@ -189,7 +189,7 @@ $status = $values->status ?? null;
                                 @break
 
                                 @case('realtime')
-                                <x-renderer.realtime name={{$columnName}} realtimeType={{$realtimeType}} realtimeFn={{$realtimeFn}} status={{$status}} value={{$value}} :item="$item"/>
+                                <x-renderer.realtime :item="$item" name={{$columnName}} realtimeType={{$realtimeType}} realtimeFn={{$realtimeFn}} status={{$status}} value={{$value}} />
                                 @break
 
                                 @default
