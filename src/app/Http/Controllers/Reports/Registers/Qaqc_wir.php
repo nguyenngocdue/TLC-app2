@@ -92,14 +92,7 @@ class Qaqc_wir extends Report_ParentController
     protected function getDataProdRouting()
     {
         $sql = "
-            SELECT
-                prodr.id AS prod_routings_id
-                ,prodr.name AS prod_routings_name
-                FROM prod_orders prod, sub_projects sub, prod_routings prodr
-                WHERE 1 = 1
-                AND sub.id = prod.sub_project_id
-                AND prodr.id = prod.prod_routing_id
-                GROUP BY prod_routings_id,  prod_routings_name";
+            y";
         $sqlData = DB::select(DB::raw($sql));
         return $sqlData;
     }
@@ -148,7 +141,7 @@ class Qaqc_wir extends Report_ParentController
                 $wirdescName = [Report::slugName($item->wirdesc_name) => $html];
             }
 
-            $prodNameHtml = ['prod_name_html' =>  "<div  style='width: 80px'>$item->prod_name</div>"];
+            $prodNameHtml = ['prod_name_html' =>  "<div  style='width: 120px'>$item->prod_name</div>"];
             $subProjectNameHtml = ['sub_project_name_html' =>  "<div  style='width: 80px'>$item->sub_project_name</div>"];
             return (array)$item + $wirdescName + $prodNameHtml + $subProjectNameHtml;
         }, array_values($items));
