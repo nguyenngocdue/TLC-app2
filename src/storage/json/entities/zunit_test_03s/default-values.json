@@ -80,7 +80,7 @@
         "name": "_datetime5",
         "column_name": "datetime5",
         "label": "",
-        "validation": "nullable|date_format:d\/m\/Y",
+        "validation": "nullable|regex:\/^W([0-4][0-9]|5[0-3])[\\\/][0-9]{4}\/",
         "formula": "",
         "default_value": "",
         "label_extra": "",
