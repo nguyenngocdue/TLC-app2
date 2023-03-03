@@ -703,6 +703,17 @@
         "status": null,
         "icon": null
     },
+    "user_team_ot": {
+        "name": "user_team_ot",
+        "hidden": "true",
+        "package": "system",
+        "sub_package": "hr_admin",
+        "title": "User Team OT",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "icon": null
+    },
     "user_time_keep_type": {
         "name": "user_time_keep_type",
         "hidden": "true",
