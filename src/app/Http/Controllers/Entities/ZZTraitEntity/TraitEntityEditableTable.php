@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 
 trait TraitEntityEditableTable
 {
+    use TraitEntityComment2;
+
     private function parseHTTPArrayToLines(array $dataSource)
     {
         $result = [];
@@ -34,7 +36,9 @@ trait TraitEntityEditableTable
             $dataSource = $this->parseHTTPArrayToLines($dataSource);
             // dump($tableName);
             if ($tableName === 'comments') {
+                $dataSource = $this->removeNullCommentOfNullId($dataSource);
             }
+
             $this->dump1("RECURSIVE CALLED PARSING from HTML DATA to ARRAY $tableName", $dataSource, __LINE__);
             // dump($dataSource);
             // session()->flush();

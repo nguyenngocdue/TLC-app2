@@ -1,4 +1,4 @@
-<x-renderer.card style="border-gray-300 rounded-lg">
+<x-renderer.card style="border-gray-300 rounded-lg" px="2" py="1">
     @php $rowIndex = 0; @endphp
     @foreach($dataSource as $line)
         {{-- @dump($line->getAttributes()) --}}
