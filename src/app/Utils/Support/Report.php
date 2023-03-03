@@ -9,8 +9,10 @@ class Report
     {
         $groupedArray = [];
         foreach ($dataSource as $element) {
-            $groupedArray[$element[$key]][] = $element;
+            $eleArray = (array)$element;
+            $groupedArray[$eleArray[$key]][] = $eleArray;
         }
+        // dd($groupedArray, $dataSource);
         return $groupedArray;
     }
     public static function mergeArrayValues($grouped_array)
