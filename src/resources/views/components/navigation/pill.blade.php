@@ -5,7 +5,7 @@
         $href = ($link['disabled']) ? "javascript:void(0)": $link['href'];
         @endphp
             <a href="{{$href}}" >
-                <button class="px-4 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg focus:outline-none {{$className}}">
+                <button title="{{$link['tooltip']??''}}" class="px-4 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg focus:outline-none {{$className}}">
                     {{$link['title']}}
                 </button>
             </a>
@@ -18,7 +18,7 @@
         $href = ($link['disabled']) ? "javascript:void(0)": $link['href'];
     @endphp
             <a href="{{$href}}" >
-        <button class="px-4 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg focus:outline-none {{$className}}">
+        <button title="{{$link['tooltip']??''}}" class="px-4 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg focus:outline-none {{$className}}">
             {{$link['title']}}
         </button>
     </a>

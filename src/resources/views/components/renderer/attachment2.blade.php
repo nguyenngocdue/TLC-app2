@@ -6,14 +6,14 @@
     <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1">
         @foreach($attachments as $attachment)
         @php
-        $hasOrphan = isset($attachment['hasOrphan']);
+        $hasOrphan = isset($attachment['hasOrphan']) && $attachment['hasOrphan'] ;
         $border = $hasOrphan ? "red" : "gray";
         $title = $hasOrphan ? "Orphan image found. Will attach after this document is saved.":"";
         $extension = $attachment['extension'] ?? "";
         @endphp
-        @isset($attachment['hasOrphan'])
+        @if($hasOrphan)
         <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="hiddenOrText" />
-        @endisset
+        @endif
         <div name='{{$name}}' title="{{$title}}" class="border-{{$border}}-300 relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit">
             {{-- This is the image --}}
             @if(in_array($extension,["png","gif","jpg","jpeg","webb"]))

@@ -117,7 +117,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$previousValue = $this->getPreviousValue($fields, $theRow);
 			$theRow->fill($fields);
 			$theRow->save();
-			$objectType = "App\\Models\\" . Str::singular($theRow->getTable());
+			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
 
 			$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
