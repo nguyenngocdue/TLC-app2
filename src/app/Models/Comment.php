@@ -18,15 +18,15 @@ class Comment extends ModelExtended
         "commentable" => ['morphTo', Comment::class, 'commentable_type', 'commentable_id'],
         "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
         "getCategory" => ['belongsTo', Field::class, 'category'],
-        // "comment_attachment" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "comment_attachment" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
-    // public function comment_attachment()
-    // {
-    //     $p = $this->eloquentParams[__FUNCTION__];
-    //     $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-    //     return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
-    // }
+    public function comment_attachment()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
 
     public function getOwnerId()
     {

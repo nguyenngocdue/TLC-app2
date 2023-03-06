@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Helpers\Helper;
+use App\Utils\Constant;
+use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\SuperProps;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 trait TraitEntityAdvancedFilter
@@ -63,11 +66,19 @@ trait TraitEntityAdvancedFilter
                         break;
                     case 'picker_datetime':
                     case 'picker_date':
-                    case 'picker_month':
-                    case 'picker_week':
-                    case 'picker_quarter':
-                    case 'picker_year':
                         $result['picker_datetime'][$key] = $value;
+                        break;
+                    case 'picker_month':
+                        $result['picker_month'][$key] = $value;
+                        break;
+                    case 'picker_week':
+                        $result['picker_week'][$key] = $value;
+                        break;
+                    case 'picker_quarter':
+                        $result['picker_quarter'][$key] = $value;
+                        break;
+                    case 'picker_year':
+                        $result['picker_year'][$key] = $value;
                         break;
                     case 'parent_type':
                         $result['parent_type'][$key] = $value;
@@ -114,6 +125,44 @@ trait TraitEntityAdvancedFilter
                             $arrayTime = explode(' - ', $value);
                             $q->whereTime($key, '>=', $arrayTime[0])
                                 ->whereTime($key, '<=', $arrayTime[1]);
+                        });
+                        break;
+                    case 'picker_month':
+                        array_walk($value, function ($value, $key) use ($q) {
+                            $arrayDate = explode(' - ', $value);
+                            $fistDayOfMonth = DateTimeConcern::format2($arrayDate[0], Constant::FORMAT_YEAR_MONTH)->startOfMonth()->toDateString();
+                            $endDayOfMonth = DateTimeConcern::format2($arrayDate[1], Constant::FORMAT_YEAR_MONTH)->endOfMonth()->toDateString();
+                            $q->whereDate($key, '>=', $fistDayOfMonth)
+                                ->whereDate($key, '<=', $endDayOfMonth);
+                        });
+                        break;
+                    case 'picker_week':
+                        array_walk($value, function ($value, $key) use ($q) {
+                            $value = str_replace(['W', 'w'], '', $value);
+                            $arrayDate = explode(' - ', $value);
+                            $fistDayOfWeek = DateTimeConcern::formatWeek2($arrayDate[0])->startOfWeek(Carbon::SUNDAY)->toDateString();
+                            $endDayOfWeek = DateTimeConcern::formatWeek2($arrayDate[1])->endOfWeek(Carbon::SATURDAY)->toDateString();
+                            $q->whereDate($key, '>=', $fistDayOfWeek)
+                                ->whereDate($key, '<=', $endDayOfWeek);
+                        });
+                        break;
+                    case 'picker_quarter':
+                        array_walk($value, function ($value, $key) use ($q) {
+                            $value = str_replace(['Q', 'q'], '', $value);
+                            $arrayDate = explode(' - ', $value);
+                            $fistDayOfQuarter = DateTimeConcern::formatQuarter2($arrayDate[0])->startOfQuarter()->toDateString();
+                            $endDayOfQuarter = DateTimeConcern::formatQuarter2($arrayDate[1])->endOfQuarter()->toDateString();
+                            $q->whereDate($key, '>=', $fistDayOfQuarter)
+                                ->whereDate($key, '<=', $endDayOfQuarter);
+                        });
+                        break;
+                    case 'picker_year':
+                        array_walk($value, function ($value, $key) use ($q) {
+                            $arrayDate = explode(' - ', $value);
+                            $fistDayOfYear = DateTimeConcern::format2($arrayDate[0], Constant::FORMAT_YEAR)->startOfYear()->toDateString();
+                            $endDayOfYear = DateTimeConcern::format2($arrayDate[1], Constant::FORMAT_YEAR)->endOfYear()->toDateString();
+                            $q->whereDate($key, '>=', $fistDayOfYear)
+                                ->whereDate($key, '<=', $endDayOfYear);
                         });
                         break;
                     case 'picker_datetime':

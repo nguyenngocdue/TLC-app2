@@ -100,7 +100,7 @@
         "column_name": "datetime6",
         "label": "",
         "validation": "nullable",
-        "validation_regex": "\/^[Qq]([0][1-4])[\\\/][0-9]{4}\/",
+        "validation_regex": "\/^[Qq]([1-4])[\\\/][0-9]{4}\/",
         "formula": "",
         "default_value": "",
         "label_extra": "",

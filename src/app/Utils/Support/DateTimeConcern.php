@@ -13,6 +13,10 @@ class DateTimeConcern
         if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
         return Carbon::createFromFormat($formatFrom, $value)->format($formatTo);
     }
+    public static function format2($value, $formatFrom)
+    {
+        return Carbon::createFromFormat($formatFrom, $value);
+    }
     public static function formatQuarterForLoading($value, $formatFrom, $formatTo)
     {
         //Deal with old()
@@ -41,6 +45,16 @@ class DateTimeConcern
         [$week, $year] = explode('/', $value);
         $result = Carbon::parse("{$year}-W{$week}-1")->startOfWeek();
         return $result->format($formatTo);
+    }
+    public static function formatWeek2($value)
+    {
+        [$week, $year] = explode('/', $value);
+        return Carbon::parse("{$year}-W{$week}");
+    }
+    public static function formatQuarter2($value)
+    {
+        [$quarter, $year] = explode('/', $value);
+        return Carbon::createFromDate($year, (($quarter - 1) * 3) + 1);
     }
     public static function convertForLoading($control, $value)
     {

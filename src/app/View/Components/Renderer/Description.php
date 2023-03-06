@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Constant;
+use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\JsonControls;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\View\Component;
@@ -56,10 +57,14 @@ class Description extends Component
                 $content ? $content = date(Constant::FORMAT_YEAR_MONTH, strtotime($content)) : $content;
                 break;
             case 'picker_week':
-                $content ? $content = date('Y', strtotime($content)) : $content;
+                $formatFrom = Constant::FORMAT_DATE_MYSQL;
+                $formatTo = Constant::FORMAT_WEEK;
+                $content ? $content = DateTimeConcern::formatWeekForLoading($content, $formatFrom, $formatTo) : $content;
                 break;
             case 'picker_quarter':
-                $content ? $content = date('Y', strtotime($content)) : $content;
+                $formatFrom = Constant::FORMAT_DATE_MYSQL;
+                $formatTo = Constant::FORMAT_QUARTER;
+                $content ? $content = DateTimeConcern::formatQuarterForLoading($content, $formatFrom, $formatTo) : $content;
                 break;
             case 'picker_year':
                 $content ? $content = date(Constant::FORMAT_YEAR, strtotime($content)) : $content;
