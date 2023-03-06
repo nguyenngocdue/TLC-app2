@@ -39,10 +39,10 @@ class Pill extends Component
 
         $links1 = [];
         $links1[] = ['href' => route($singular . '_cpb.index'), 'disabled' => strpos($as, '_cpb.') !== false, 'title' => 'Capabilities',];
-        $links1[] = ['href' => route($singular . '_vsb.index'), 'disabled' => strpos($as, '_vsb.') !== false, 'title' => 'Visible',];
+        $links1[] = ['href' => route($singular . '_vsb.index'), 'disabled' => strpos($as, '_vsb.') !== false, 'title' => 'Visible', "tooltip" => "If not visible, the control will not be submitted with the form."];
         $links1[] = ['href' => route($singular . '_rol.index'), 'disabled' => strpos($as, '_rol.') !== false, 'title' => 'Read-Only',];
         $links1[] = ['href' => route($singular . '_rqr.index'), 'disabled' => strpos($as, '_rqr.') !== false, 'title' => 'Required',];
-        $links1[] = ['href' => route($singular . '_hdn.index'), 'disabled' => strpos($as, '_hdn.') !== false, 'title' => 'Hidden',];
+        $links1[] = ['href' => route($singular . '_hdn.index'), 'disabled' => strpos($as, '_hdn.') !== false, 'title' => 'Hidden', "tooltip" => "If hidden, the control will be submitted with the form."];
         $links1[] = ['href' => route($singular . '_vsb-wl.index'), 'disabled' => strpos($as, '_vsb-wl.') !== false, 'title' => 'Visible WhiteList',];
         $links1[] = ['href' => route($singular . '_rol-wl.index'), 'disabled' => strpos($as, '_rol-wl.') !== false, 'title' => 'Read-Only WhiteList',];
         $links1[] = ['href' => route($singular . '_rqr-wl.index'), 'disabled' => strpos($as, '_rqr-wl.') !== false, 'title' => 'Required WhiteList',];
