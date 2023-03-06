@@ -39,7 +39,6 @@ class Description extends Component
         $id = $dataSource['id'];
         $label = $prop['label'];
         $control = $prop['control'];
-        $dataTimeControls = JsonControls::getDateTimeControls();
         switch ($control) {
             case 'status':
                 $libStatus = LibStatuses::getFor($this->type);

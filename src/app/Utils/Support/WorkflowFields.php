@@ -2,10 +2,24 @@
 
 namespace App\Utils\Support;
 
+use App\Utils\Support\Json\SuperWorkflows;
+
 class WorkflowFields
 {
-    static function parseFields($key, $prop, $values, $defaultValues)
+    static function getSuperWorkflowByRoleSet($type)
     {
+        $roleSet = CurrentUser::getRoleSet();
+        return SuperWorkflows::getFor($type, $roleSet);
+    }
+    static function parseFields($key, $prop, $values, $defaultValues, $status, $type)
+    {
+        $superWorkflow = self::getSuperWorkflowByRoleSet($type);
+        if ($status) {
+            $workflow = self::getSuperWorkflowByRoleSet($type)['workflows'][$status];
+
+            dump($prop);
+            dd($workflow);
+        }
         $result['label'] = $prop['label'];
         $columnName = $prop['column_name'];
         $result['columnName'] = $columnName;
