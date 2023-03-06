@@ -4,6 +4,7 @@ namespace App\Utils\Support\Json;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\CacheToRamForThisSection;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -29,11 +30,12 @@ class SuperWorkflows
         return $result;
     }
 
-    private static function consolidate($roleSet, $statuses, $name, $list, $whiteList, $defaultValue)
+    private static function consolidate($props, $roleSet, $statuses, $name, $list, $whiteList, $defaultValue)
     {
         $result = [];
         if (sizeof($list) != sizeof($whiteList)) dump("Warning: Number of props in $name and $name WhiteList are different");
-        foreach ($list as $propName => $propValue) {
+        foreach (array_keys($props) as $propName) {
+            $propValue = $list[$propName] ?? [];
             $thisRoleSetIsInWL = false;
             if (isset($whiteList[$propName])) {
                 $thisRoleSetIsInWL = in_array($roleSet, $whiteList[$propName]);
@@ -78,10 +80,11 @@ class SuperWorkflows
             }
         }
 
-        $visibleProps = static::consolidate($roleSet, $statuses, "VisibleProps", VisibleProps::getAllOf($type), static::makeCheckbox(VisibleWLProps::getAllOf($type)), true);
-        $readonlyProps = static::consolidate($roleSet, $statuses, "ReadOnlyProps", ReadOnlyProps::getAllOf($type), static::makeCheckbox(ReadOnlyWLProps::getAllOf($type)), false);
-        $hiddenProps = static::consolidate($roleSet, $statuses, "HiddenProps", HiddenProps::getAllOf($type), static::makeCheckbox(HiddenWLProps::getAllOf($type)), false);
-        $requiredProps = static::consolidate($roleSet, $statuses, "RequiredProps", RequiredProps::getAllOf($type), static::makeCheckbox(RequiredWLProps::getAllOf($type)), false);
+        $props = Props::getAllOf($type);
+        $visibleProps = static::consolidate($props, $roleSet, $statuses, "VisibleProps", VisibleProps::getAllOf($type), static::makeCheckbox(VisibleWLProps::getAllOf($type)), true);
+        $readonlyProps = static::consolidate($props, $roleSet, $statuses, "ReadOnlyProps", ReadOnlyProps::getAllOf($type), static::makeCheckbox(ReadOnlyWLProps::getAllOf($type)), false);
+        $hiddenProps = static::consolidate($props, $roleSet, $statuses, "HiddenProps", HiddenProps::getAllOf($type), static::makeCheckbox(HiddenWLProps::getAllOf($type)), false);
+        $requiredProps = static::consolidate($props, $roleSet, $statuses, "RequiredProps", RequiredProps::getAllOf($type), static::makeCheckbox(RequiredWLProps::getAllOf($type)), false);
 
         foreach (array_keys($statuses) as $statusKey) {
             $result[$statusKey]['visible']  = static::getPropValueByStatus($statusKey, $visibleProps);
@@ -104,8 +107,9 @@ class SuperWorkflows
         return static::$result;
     }
 
-    public static function getFor($type, $roleSet)
+    public static function getFor($type, $roleSet = null)
     {
+        if (is_null($roleSet)) $roleSet = CurrentUser::getRoleSet();
         if (is_null($type) || is_null($roleSet)) dd("Type or RoleSet is missing, SuperWorkflow cant instantiate.");
         $type = Str::singular($type, $roleSet);
         $key = "super_workflow_{$type}_{$roleSet}";
