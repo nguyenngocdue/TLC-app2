@@ -1,9 +1,9 @@
 th.rotated-title-th {
     vertical-align: bottom;
-    text-align: left!important;
+    text-align: left !important;
     line-height: 1;
     padding: 0;
-    border-right: none!important;
+    border-right: none !important;
     position: relative;
 }
 
@@ -18,16 +18,19 @@ th.rotated-title-th {
     pointer-events: auto;
 }
 
-grammarly-desktop-integration{
+grammarly-desktop-integration {
     display: none;
 }
-.readonly{
-    background-color: #f5f5f5;
+.readonly {
+    background-color: #f5f5f5 !important;
 }
 /* Override flow-bite */
-[type='text'],[type='number'],textarea,select{
+[type='text'],
+[type='number'],
+textarea,
+select {
     /* gray-300 */
-    border: 1px solid rgb(209 213 219); 
+    border: 1px solid rgb(209 213 219);
 }
 /* This is for the option box bigger */
 .select2-dropdown.select2-dropdown--above {

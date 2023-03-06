@@ -13,6 +13,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_name": {
@@ -29,6 +31,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_text1": {
@@ -45,6 +49,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_text2": {
@@ -61,6 +67,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_text4": {
@@ -77,6 +85,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_text3": {
@@ -93,12 +103,14 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_boolean1": {
         "name": "_boolean1",
         "column_name": "boolean1",
-        "column_type": "bigint",
+        "column_type": "boolean",
         "label": "Boolean",
         "control": "toggle",
         "align": "",
@@ -109,6 +121,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_radio1": {
@@ -125,6 +139,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_dropdown1": {
@@ -141,6 +157,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_checkboxZut1()": {
@@ -157,6 +175,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_dropdownMultiZut1()": {
@@ -173,6 +193,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_created_at": {
@@ -189,6 +211,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_updated_at": {
@@ -205,6 +229,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_parent_id": {
@@ -221,6 +247,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_order_no": {
@@ -237,6 +265,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     }
 }

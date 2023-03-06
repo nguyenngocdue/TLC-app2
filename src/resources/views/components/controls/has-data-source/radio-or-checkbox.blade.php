@@ -1,11 +1,12 @@
 <script>
     params = {
-        id: "{{$id}}"
-        , name: "{{$name}}"
-        , className: "{{$className}}"
-        , multiple: {{$multiple}}
-        , span: {{$span}}
-        , saveOnChange:{{$saveOnChange?1:0}}
+        id: "{{$id}}", 
+        name: "{{$name}}", 
+        className: "{{$className}}", 
+        multiple: {{$multiple}}, 
+        span: {{$span}}, 
+        saveOnChange:{{$saveOnChange?1:0}},
+        readOnly: "{{$readOnly}}",
     }
     // console.log(params)
     document.write(RadioOrCheckbox(params))

@@ -22,6 +22,7 @@ class CommentGroup2 extends Component
         private $name = null,
         private $item = null,
         private $type = null,
+        private $readOnly = false,
     ) {
         $this->comment01Name = "comment" . str_pad(static::$comment00Count++, 2, 0, STR_PAD_LEFT);
         // dump($this->comment01Name);
@@ -76,7 +77,7 @@ class CommentGroup2 extends Component
             "allowedAttachment" => $properties['allowed_attachment'],
             "allowedDelete" => $properties['allowed_delete'],
             "forceCommentOnce" => $properties['force_comment_once'],
-
+            "readOnly" => $this->readOnly,
             'now' => date(Constant::FORMAT_DATETIME_ASIAN),
         ]);
     }

@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use App\Utils\Support\Json\SuperWorkflows;
+use Illuminate\Support\Facades\Log;
 
 class WorkflowFields
 {
@@ -63,7 +64,7 @@ class WorkflowFields
     {
         $result['hiddenRow'] = $prop['hidden_edit'] === 'true' ? "hidden" : "";
         $result['hiddenLabel'] = $prop['hidden_label'] === 'true';
-        $result['readOnly'] = ($prop['read_only'] ?? false) === 'true';
+        $result['readOnly'] =  ($prop['read_only'] ?? false) === 'true';
         $result['isRequired'] = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
     }
     private static function followWorkflow(&$result, $prop, $defaultValue, $hidden, $readonly, $required)

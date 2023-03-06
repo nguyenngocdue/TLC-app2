@@ -13,7 +13,7 @@ class Attachment2 extends Component
         private $name,
         //either a string of serialized array of attachments object or array or attachments 
         private $value = "",
-        private $readonly = false,
+        private $readOnly = false,
         private $destroyable = true,
         private $showToBeDeleted = true,
         private $showUploadFile = true,
@@ -53,7 +53,7 @@ class Attachment2 extends Component
         return view('components.renderer.attachment2', [
             'name' => $this->name,
             'destroyable' => $this->destroyable,
-            'readonly' => $this->readonly,
+            'readOnly' => $this->readOnly,
             'showToBeDeleted' => $this->showToBeDeleted,
             'showUploadFile' => $this->showUploadFile,
             'path' => env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/',

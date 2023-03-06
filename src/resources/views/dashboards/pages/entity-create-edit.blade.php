@@ -31,7 +31,6 @@ $status = $values->status ?? null;
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
         <div class=" grid grid-cols-12 px-4">
             @method($action === "create" ? 'POST' : 'PUT')
-            
             @foreach($props as $propKey => $prop)
             @php
             if ($action === "create" && $prop['control'] === 'relationship_renderer') continue;
@@ -109,45 +108,36 @@ $status = $values->status ?? null;
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                                 @break
                                 @case('number')
-                                <x-controls.number name={{$columnName}} value={{$value}} />
+                                <x-controls.number name={{$columnName}} value={{$value}} readOnly={{$readOnly}}/>
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                                {{'readonly::'.$readOnly}}
+                                {{'readonly-->'.$readOnly}}
                                 @break
                                 @case('textarea')
                                 <x-controls.textarea name={{$columnName}} :value="$value" colType={{$columnType}} placeholder="{{$placeholder}}" readOnly={{$readOnly}}/>
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                                 @break
                                 @case('toggle')
-                                <x-controls.toggle name={{$columnName}} value={{$value}} />
+                                <x-controls.toggle name={{$columnName}} value={{$value}} readOnly={{$readOnly}} />
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                                {{'readonly::'.$readOnly}}
                                 @break
                                 @case('status')
-                                <x-controls.control-status value={{$value}} name={{$columnName}} modelPath={{$modelPath}} />
-                                {{'readonly::'.$readOnly}}
+                                <x-controls.control-status value={{$value}} name={{$columnName}} modelPath={{$modelPath}} readOnly={{$readOnly}} />
                                 @break
-
                                 @case ('dropdown')
                                 <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
-                                {{'readonly::'.$readOnly}}
                                 @break
                                 @case ('radio')
                                 <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
-                                {{'readonly::'.$readOnly}}
                                 @break
                                 @case ('dropdown_multi')
                                 <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
-                                {{'readonly::'.$readOnly}}
                                 @break
                                 @case('checkbox')
                                 <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}}/>
-                                {{'readonly::'.$readOnly}}
                                 @break
-
                                 @case('picker_time')
                                 <x-controls.text name={{$columnName}} value={{$value}} readOnly={{$readOnly}} placeholder="HH:MM" icon="fa-duotone fa-clock" />
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                                {{'readonly::'.$readOnly}}
                                 @break
                                 @case('picker_datetime')
                                 <x-controls.text name={{$columnName}} value={{$value}} readOnly={{$readOnly}} placeholder="DD/MM/YYYY HH:MM" icon="fa-solid fa-calendar-day" />
@@ -175,38 +165,34 @@ $status = $values->status ?? null;
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                                 @break
                                 @case('attachment')
-                                <x-renderer.attachment2 name={{$columnName}} value={{$value}} />
-                                {{'readonly::'.$readOnly}}
+                                <x-renderer.attachment2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} />
                                 @break
                                 @case('comment')
-                                <x-controls.comment-group2 :item="$item" id={{$id}} type={{$type}} name={{$columnName}} />
-                                {{'readonly::'.$readOnly}}
+                                <x-controls.comment-group2 :item="$item" id={{$id}} type={{$type}} name={{$columnName}} readOnly={{$readOnly}} />
                                 {{-- <x-controls.comment-group id={{$id}} type={{$type}} colName={{$columnName}} label={{$label}} colSpan={{$col_span}} /> --}}
                                 @break
 
                                 @case('relationship_renderer')
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                                 <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
-                                {{'readonly::'.$readOnly}}
+                                {{'readonly-->'.$readOnly}}
                                 @break
 
                                 @case('parent_type')
-                                <x-renderer.parent_type type={{$type}} name={{$columnName}} selected="{{$value}}"/>
-                                {{'readonly::'.$readOnly}}
+                                <x-renderer.parent_type type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}}/>
                                 @break
                                 @case('parent_id')
-                                <x-renderer.parent_id type={{$type}} name={{$columnName}} selected="{{$value}}"/>
-                                {{'readonly::'.$readOnly}}
+                                <x-renderer.parent_id type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}}/>
                                 @break
 
                                 @case('parent_link')
                                 <x-feedback.alert type="warning" title="Warning" message="{{$control}} suppose to show in View All screen only, please do not show in Edit screen." />
-                                {{'readonly::'.$readOnly}}
+                                {{'readonly-->'.$readOnly}}
                                 @break
 
                                 @case('realtime')
                                 <x-renderer.realtime :item="$item" name={{$columnName}} realtimeType={{$realtimeType}} realtimeFn={{$realtimeFn}} status={{$status}} value={{$value}} />
-                                {{'readonly::'.$readOnly}}
+                                {{'readonly-->'.$readOnly}}
                                 @break
 
                                 @default

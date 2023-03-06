@@ -35,24 +35,29 @@
                 <a title="{{$attachment['filename']}}" href="{{$path.$attachment['url_media']}}" target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">
                     <span class="text-sm">{{$attachment['filename']}}</span>
                 </a>
-                @if($destroyable)
-                <button type="button" onclick="updateToBeDeletedTextBox({{$attachment['id']}}, '{{$name}}-toBeDeleted')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
-                    <i class=" text-red-700 fas fa-trash cursor-pointer"></i>
-                </button>
+                @if(!$readOnly)
+                    @if($destroyable)
+                    <button type="button" onclick="updateToBeDeletedTextBox({{$attachment['id']}}, '{{$name}}-toBeDeleted')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
+                        <i class=" text-red-700 fas fa-trash cursor-pointer"></i>
+                    </button>
+                    @endif
                 @endif
             </div>
             <span>{{date('d/m/Y',strtotime($attachment['created_at'] ?? ''))}}</span>
         </div>
-
         @endforeach
     </div>
     @endif
 </div>
-@if($showToBeDeleted)
-<input id="{{$name}}-toBeDeleted" name="{{$name}}[toBeDeleted]" readonly type='hiddenOrText' class='p-2.5 w-full bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
+@if(!$readOnly)
+    @if($showToBeDeleted)
+    <input id="{{$name}}-toBeDeleted" name="{{$name}}[toBeDeleted]" readonly type='hiddenOrText' class='p-2.5 w-full bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
+    @endif
 @endif
-@if($showUploadFile)
-<input name="{{$name}}[toBeUploaded][]" multiple type="file" class="{{$readonly ? 'hidden' : ''}} block w-full text-sm text-gray-900 p-2.5 rounded-lg bg-white border border-white cursor-pointer dark:text-gray-300 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+@if(!$readOnly)
+    @if($showUploadFile)
+    <input name="{{$name}}[toBeUploaded][]" multiple type="file" class="block w-full text-sm text-gray-900 p-2.5 rounded-lg bg-white border border-white cursor-pointer dark:text-gray-300 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+    @endif
 @endif
 
 @once

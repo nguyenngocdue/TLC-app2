@@ -30,7 +30,7 @@ class Comment2 extends Component
         private $datetime = null,
         private $commentId = null,
 
-        private $readonly = false,
+        private $readOnly = false,
         private $rowIndex = null,
 
         private $allowedDelete = null,
@@ -60,10 +60,10 @@ class Comment2 extends Component
         $avatarObj = $user ? $user->avatar : null;
         $userName = $user ? $user->name : "Not found user #" . $this->ownerId;
         $avatar = $avatarObj ? env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $avatarObj->url_thumbnail : "";
-        $readonly = $this->readonly;
+        $readOnly = $this->readOnly;
         $content = $this->content;
         if (CurrentUser::get()->id != $this->ownerId) {
-            $readonly = true;
+            $readOnly = true;
         }
         // $readonly = !true;
         $comment_attachment = collect([]);
@@ -89,7 +89,7 @@ class Comment2 extends Component
             'positionRendered' => $this->positionRendered,
             'datetime' => $datetime,
             'content' => $content,
-            'readonly' => $readonly,
+            'readOnly' => $readOnly,
             'rowIndex' => $this->rowIndex,
             'category' => $this->category,
             'commentId' => $this->commentId,

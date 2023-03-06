@@ -17,6 +17,7 @@ class ParentId extends Component
         private $selected = "",
         private $multiple = false,
         private $type,
+        private $readOnly = false,
     ) {
         if (old($name)) $this->selected = 1 * old($name);
         // dump($this->selected);
@@ -64,6 +65,7 @@ class ParentId extends Component
             'selected' => json_encode([is_numeric($this->selected) ? $this->selected * 1 : $this->selected]),
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $tableName,
+            'readOnly' => $this->readOnly,
             'className' => "bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
             'entity' => $this->type,
         ];

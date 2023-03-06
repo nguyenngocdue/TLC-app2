@@ -12,6 +12,19 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_attachment_1": {
+        "name": "_attachment_1",
+        "relationship": "morphMany",
+        "control_name": "attachment_1",
+        "renderer_view_all": "thumbnails",
+        "renderer_view_all_param": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "attachment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_comment_1": {
         "name": "_comment_1",
         "relationship": "morphMany",
@@ -47,19 +60,6 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "comment",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_attachment_1": {
-        "name": "_attachment_1",
-        "relationship": "morphMany",
-        "control_name": "attachment_1",
-        "renderer_view_all": "thumbnails",
-        "renderer_view_all_param": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

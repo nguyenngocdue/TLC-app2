@@ -2,19 +2,19 @@
 <div id="{{$comment01Name}}_div_{{$rowIndex}}" class="p-2 my-2 bg-gray-250 border rounded-lg shadow-md ">
     <div class="grid grid-cols-12 gap-2 ">
         <div class="col-span-2">
-            @php $name = $readonly ? '' : "{$comment01Name}[id][$rowIndex]"; @endphp
+            @php $name = $readOnly ? '' : "{$comment01Name}[id][$rowIndex]"; @endphp
             <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$commentId}}" readonly class="readonly w-full border rounded-lg">
         </div>
         <div class="col-span-2">
-            @php $name = $readonly ? '' : "{$comment01Name}[category][$rowIndex]"; @endphp
+            @php $name = $readOnly ? '' : "{$comment01Name}[category][$rowIndex]"; @endphp
             <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$category}}" readonly class="readonly w-full border rounded-lg">
         </div>
         <div class="col-span-2">
-            @php $name = $readonly ? '' : "{$comment01Name}[commentable_type][$rowIndex]"; @endphp
+            @php $name = $readOnly ? '' : "{$comment01Name}[commentable_type][$rowIndex]"; @endphp
             <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$commentableType}}" readonly class="readonly w-full border rounded-lg">
         </div>
         <div class="col-span-2">
-            @php $name = $readonly ? '' : "{$comment01Name}[commentable_id][$rowIndex]"; @endphp
+            @php $name = $readOnly ? '' : "{$comment01Name}[commentable_id][$rowIndex]"; @endphp
             <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$commentableId}}" readonly class="readonly w-full border rounded-lg">
         </div>
         @if($allowedDelete) 
@@ -34,12 +34,12 @@
                             <img src="{{$ownerAvatar}}" class="rounded-full h-6 w-6 object-cover">
                         </div>
                         <input value="{{$ownerName}}" readonly type='text' class='readonly {{$classList}} pl-10'>
-                        @php $name = $readonly ? '' : "{$comment01Name}[owner_id][$rowIndex]"; @endphp
+                        @php $name = $readOnly ? '' : "{$comment01Name}[owner_id][$rowIndex]"; @endphp
                         <input name='{{$name}}' value="{{$ownerId}}" readonly type='hidden' class='readonly {{$classList}}'>
                     </div>
                 </div>
                 <div class="col-span-4 ">
-                    @php $name = $readonly ? '' : "{$comment01Name}[position_rendered][$rowIndex]"; @endphp
+                    @php $name = $readOnly ? '' : "{$comment01Name}[position_rendered][$rowIndex]"; @endphp
                     <input name='{{$name}}' value="{{$positionRendered}}" readonly type='text' class='readonly {{$classList}}'>
                 </div>
                 
@@ -57,7 +57,7 @@
         <div class="col-span-1 text-center flex">
             <div class="m-auto text-center flex-1">
                 <div class="flex">
-                    @if($allowedDelete) 
+                    @if($allowedDelete && !$readOnly) 
                         <button type="button" onclick='trashComment("{{$destroyName}}","{{$comment01Name}}_div_{{$rowIndex}}")' class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
                             <i class="text-[#d11a2a] fas fa-trash cursor-pointer"></i>
                         </button>
@@ -70,13 +70,13 @@
                 </div>
             </div>
             <div class="col-span-12 rounded-lg border1 border-gray-300 overflow-hidden">
-            @php $name = $readonly ? '' : "{$comment01Name}[content][$rowIndex]"; @endphp
-            <textarea name="{{$name}}" rows="2" @readonly($readonly) placeholder="Type here..." class="{{$readonly?"readonly":""}} {{$classList}}"
+            @php $name = $readOnly ? '' : "{$comment01Name}[content][$rowIndex]"; @endphp 
+            <textarea name="{{$name}}" rows="2" @readonly($readOnly) placeholder="Type here..." class="{{$readOnly ? "readonly" :""}} {{$classList}}"
             >{{old($name, $content) ?? $content }}</textarea>
         </div>
         @if($allowedAttachment)
         <div class="col-span-12 mt-2 rounded-lg border border-gray-300 overflow-hidden">
-                @php $name = $readonly ? '' : "{$comment01Name}[comment_attachment][$rowIndex]"; @endphp
+                @php $name = $readOnly ? '' : "{$comment01Name}[comment_attachment][$rowIndex]"; @endphp
                 <x-renderer.attachment2 name="{{$name}}" value="{{$commentAttachment}}" />
             </div>
         @endif

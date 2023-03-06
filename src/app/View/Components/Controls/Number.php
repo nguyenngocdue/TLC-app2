@@ -11,6 +11,7 @@ class Number extends Component
     public function __construct(
         private $name,
         private $value,
+        private $readOnly = false,
     ) {
     }
 
@@ -18,6 +19,7 @@ class Number extends Component
     {
         $name = $this->name;
         $value = $this->value;
-        return view('components.controls.number')->with(compact('name', 'value'));
+        $readOnly = $this->readOnly;
+        return view('components.controls.number')->with(compact('name', 'value', 'readOnly'));
     }
 }

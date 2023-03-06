@@ -18,6 +18,7 @@ class ControlStatus extends Component
         // private $id,
         private $modelPath,
         private $value = 'new',
+        private $readOnly = false,
     ) {
         //
         // $model = ($this->modelPath)::find($this->id);
@@ -33,6 +34,7 @@ class ControlStatus extends Component
             'options' => $cbb,
             'name' => $this->name,
             'value' => $this->value,
+            'readOnly' => $this->readOnly,
         ]);
     }
 }
