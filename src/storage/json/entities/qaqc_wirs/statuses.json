@@ -1,7 +1,6 @@
 [
     "new",
     "assigned",
-    "pending_approval",
     "rejected",
     "closed"
 ]
