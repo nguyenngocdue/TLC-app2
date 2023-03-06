@@ -10,7 +10,7 @@ use Illuminate\View\Component;
 
 class Comment2 extends Component
 {
-    private $commentDebug = !false;
+    private $commentDebug = false;
     /**
      * Create a new component instance.
      *

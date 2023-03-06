@@ -4,7 +4,7 @@
         "field_id": "6",
         "field_name": "comment_1",
         "allowed_change_owner": "",
-        "allowed_attachment": "true",
+        "allowed_attachment": "",
         "allowed_delete": "true",
         "force_comment_once": ""
     },
@@ -30,7 +30,43 @@
         "name": "_comment_4",
         "field_id": "9",
         "field_name": "comment_4",
-        "allowed_change_owner": "true",
+        "allowed_change_owner": "",
+        "allowed_attachment": "",
+        "allowed_delete": "",
+        "force_comment_once": ""
+    },
+    "_comment_5": {
+        "name": "_comment_5",
+        "field_id": "10",
+        "field_name": "comment_5",
+        "allowed_change_owner": "",
+        "allowed_attachment": "",
+        "allowed_delete": "",
+        "force_comment_once": ""
+    },
+    "_comment_by_clinic": {
+        "name": "_comment_by_clinic",
+        "field_id": "28",
+        "field_name": "comment_by_clinic",
+        "allowed_change_owner": "",
+        "allowed_attachment": "",
+        "allowed_delete": "",
+        "force_comment_once": ""
+    },
+    "_comment_by_line_manager": {
+        "name": "_comment_by_line_manager",
+        "field_id": "29",
+        "field_name": "comment_by_line_manager",
+        "allowed_change_owner": "",
+        "allowed_attachment": "",
+        "allowed_delete": "",
+        "force_comment_once": ""
+    },
+    "_comment_by_general_manager": {
+        "name": "_comment_by_general_manager",
+        "field_id": "30",
+        "field_name": "comment_by_general_manager",
+        "allowed_change_owner": "",
         "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
