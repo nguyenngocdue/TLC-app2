@@ -21,7 +21,7 @@ trait TraitEntityEditableTable
         return $result;
     }
 
-    private function handleEditableTables(Request $request, $props)
+    private function handleEditableTables(Request $request, $props, $parentId)
     {
         // dump($request);
         $toastrResult = [];
@@ -46,6 +46,7 @@ trait TraitEntityEditableTable
 
             foreach ($dataSource as $line) {
                 $fakeRequest = new Request();
+                if ($tableName === 'comments') $line['commentable_id'] = $parentId;
                 $line['tableNames'] = "fakeRequest";
                 $line['idForScroll'] = substr($props[$table01Name], 1); //remove first "_"
                 // dump($line);

@@ -112,7 +112,7 @@ trait TraitTableEditableDataSourceWithOld
         $fillable = $instance->getFillable();
         $diff = array_diff($columns, $fillable);
         if (!empty($diff)) {
-            $msg = join(", ", $diff) . " be missing from fillable of $lineModelPath.";
+            $msg = join(", ", $diff) . " not found in fillable of $lineModelPath.";
             echo Blade::render("<x-feedback.alert type='error' message='$msg' ></x-feedback.alert>");
         }
     }

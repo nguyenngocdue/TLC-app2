@@ -51,12 +51,12 @@ class CommentGroup2 extends Component
         $userId = $user->id;
         $userPosition = $user->position_rendered;
         // dump($userId, $userName, $userPosition);
-
-        if (!method_exists($this->item, $fn)) {
+        if (!empty((array)$this->item) && !method_exists($this->item, $fn)) {
             dump("The comment $fn not found, please create an eloquent param for it.");
             return;
         }
-        $commentDataSource = $this->item->{$fn};
+
+        $commentDataSource = $this->item->{$fn} ?? collect();
         foreach ($commentDataSource as $commentObj)
             $commentObj->commentId = $commentObj->id;
         return view('components.controls.comment-group2', [
