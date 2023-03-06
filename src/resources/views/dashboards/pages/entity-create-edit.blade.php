@@ -35,7 +35,7 @@ $status = $values->status ?? null;
             @foreach($props as $propKey => $prop)
             @php
             if ($action === "create" && $prop['control'] === 'relationship_renderer') continue;
-            extract(App\Utils\Support\WorkflowFields::parseFields($propKey, $prop, $values, $defaultValues));
+            extract(App\Utils\Support\WorkflowFields::parseFields($propKey, $prop, $values, $defaultValues,$status,$type));
             @endphp
             <div class='col-span-{{$col_span}} grid'>
                 <div class='grid grid-row-1'>
