@@ -6,6 +6,7 @@ use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Sub_project;
+use App\Models\Wir_description;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ class Qaqc_wir extends Report_ParentController
                         ,project_id
                         ,wirdesc.id AS wir_description_id
                         ,wirdesc.prod_discipline_id AS prod_discipline_id
-                        ,wirdesc.name AS wirdesc_name
+                        ,wirdesc.name AS wir_description_name
                         ,tb1.prod_routing_name
                         ,tb1.prod_routing_id
                         FROM (SELECT
@@ -68,6 +69,7 @@ class Qaqc_wir extends Report_ParentController
         if (!is_array($dataSource->items())) {
             $items = Report::pressArrayTypeAllItems($dataSource);
         }
+        // dd($dataSource);
 
         // dd($items);
         $flattenData = array_merge(...$items);
@@ -85,12 +87,16 @@ class Qaqc_wir extends Report_ParentController
                 "title" => "Production Order Name",
                 "dataIndex" => "prod_order_name_html",
                 "align" => "center",
-            ]
+            ],
+            [
+                "dataIndex" => "prod_order_id",
+                "align" => "center",
+            ],
         ];
-        // dd($dataColumn);
         $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center", "width" => 100], array_keys($dataColumn));
         $dataColumn = array_merge($adds, $sqlCol);
         // dd($sqlCol);
+        // dd($dataColumn);
 
 
         return  $dataColumn;
@@ -162,6 +168,7 @@ class Qaqc_wir extends Report_ParentController
         $items = $dataSource->all();
         $items = Report::pressArrayTypeAllItems($items);
 
+        // dd($items);
         $entityStatuses = LibStatuses::getFor('qaqc_wir');
 
         $transformData = array_map(function ($item) use ($entityStatuses, $routeCreate, $icon) {
@@ -179,12 +186,12 @@ class Qaqc_wir extends Report_ParentController
             $docId = str_pad($item['doc_id'], 4, 0, STR_PAD_LEFT);
             $html = "<div style='width: 36px' class='$color' title=''><a href='$href'>$docId</a></div>";
             if (is_null($item['doc_id'])) {
-                $html =  "<div  style='width: 36px' class='bg-white' title='prod_order_id: {$item['prod_order_id']}'><a href='$href'>$icon</a></div>";
+                $html =  "<div  style='width: 36px' class='bg-yellow-500' title='{$item['wir_description_name']}/{$item['wir_description_id']}'><a href='$href'>$icon</a></div>";
             }
 
             $wirdescName = [];
-            if (!is_null($item['wirdesc_name'])) {
-                $wirdescName = [Report::slugName($item['wirdesc_name']) => $html];
+            if (!is_null($item['wir_description_name'])) {
+                $wirdescName = [Report::slugName($item['wir_description_name']) => $html];
             }
 
             $prodNameHtml = ['prod_order_name_html' =>  "<div  style='width: 120px'>{$item['prod_order_name']}</div>"];
@@ -192,36 +199,55 @@ class Qaqc_wir extends Report_ParentController
             return $prodNameHtml + $subProjectNameHtml + (array)$item + $wirdescName;
         }, array_values($items));
 
+        // dd($transformData);
 
 
+        // group by prod_order_id
         $prodGroup = Report::groupArrayByKey($transformData, 'prod_order_id');
+        // dd($prodGroup['220']);
 
-        $result = Report::mergeArrayValues($prodGroup);
+        $transformData = Report::mergeArrayValues($prodGroup);
+        // dd($transformData);
 
 
         $settings = CurrentUser::getSettings();
         $idProdRouting = $settings['qaqc_wirs']['registers']['mode_001']['prod_routing_id'];
         $lstRenderColWirDesc = $tableDataIdProdRouting[$idProdRouting];
         $lstRenderColWirDesc = array_map(fn ($item) => Report::slugName($item), $lstRenderColWirDesc);
-        // dd($transformData);
+        // dump($lstRenderColWirDesc);
+        // dump($result);
 
-        $transformData = array_map(function ($item) use ($lstRenderColWirDesc, $routeCreate, $icon) {
-            $arrayDiff = array_diff($lstRenderColWirDesc, array_keys($item));
-
-            // set url when Onclick icon
-            $params = $this->getParamForUrl($item);
-            $href = $routeCreate . implode('&', $params);
-
-            $html =  "<div style='width: 36px' class='bg-white ' title='prod_order_id: {$item['prod_order_id']}'><a href={$href}>$icon</a></div>";
-            $combineArray = array_merge(...array_map(fn ($item) => [$item => $html], $arrayDiff));
-            // dd($combineArray);
-            $transformData = $item + $combineArray;
-            return $transformData;
-        }, $result);
-
-        // dd($transformData);
-        return collect($transformData);
+        $array = [];
+        foreach ($transformData as $key => $prodOrder) {
+            $arrayDiff = array_diff($lstRenderColWirDesc, array_keys($prodOrder));
+            // dd($prodOrder);
+            $combineArray = array_map(function ($item) use ($routeCreate, $icon, $prodOrder, $arrayDiff) {
+                // set url when Onclick icon
+                $idWirDesc = array_search($item, $arrayDiff);
+                $itemWirDesc = Wir_description::find((int)$idWirDesc)->ToArray();
+                // dd($itemWirDesc);
+                $param1 = '/?project_id=' . $prodOrder['project_id'];
+                $param2 = 'sub_project_id=' . $prodOrder['sub_project_id'];
+                $param3 = 'prod_routing_id=' . $prodOrder['prod_routing_id'];
+                $param4 = 'prod_order_id=' . $prodOrder['prod_order_id'];
+                $param5 = 'prod_discipline_id=' . $itemWirDesc['prod_discipline_id'];
+                $param6 = 'wir_description_id=' . $itemWirDesc['id'];
+                $params = [$param1, $param2, $param3, $param4, $param5, $param6];
+                $href = $routeCreate . implode('&', $params);
+                // dump($prodOrder);
+                $html =  "<div style='width: 36px' class='bg-white ' title='{$itemWirDesc['name']}/{$itemWirDesc['id']}'><a href={$href}>$icon</a></div>";
+                // dd($item, $html);
+                return [$item => $html];
+            }, $arrayDiff);
+            // dd($key, $combineArray, $key, $prodOrder);
+            $array[$key] = $prodOrder + array_merge(...$combineArray);
+        }
+        // dd(collect($array));
+        return collect($array);
     }
+
+
+
     protected  function getParamForUrl($item)
     {
         $param1 = '/?project_id=' . $item['project_id'];
