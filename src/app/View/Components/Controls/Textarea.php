@@ -11,6 +11,7 @@ class Textarea extends Component
         private $name,
         private $value,
         private $colType,
+        private $readOnly = false,
     ) {
     }
 
@@ -22,6 +23,11 @@ class Textarea extends Component
         $_value = $this->colType === 'json' ? json_encode($arrContent, JSON_PRETTY_PRINT) : $this->value;
         $value = $_value === 'null' ? "" : $_value;
 
-        return view('components.controls.textarea')->with(compact('name', 'value'));
+
+        return view('components.controls.textarea', [
+            'name' => $name,
+            'value' => $value,
+            'readOnly' => $this->readOnly,
+        ]);
     }
 }

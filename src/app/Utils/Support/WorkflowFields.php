@@ -13,13 +13,23 @@ class WorkflowFields
     }
     static function parseFields($key, $prop, $values, $defaultValues, $status, $type)
     {
-        $superWorkflow = self::getSuperWorkflowByRoleSet($type);
+        $result = null;
         if ($status) {
             $workflow = self::getSuperWorkflowByRoleSet($type)['workflows'][$status];
-
-            dump($prop);
-            dd($workflow);
+            $visible = $workflow['visible'];
+            $readonly = $workflow['readonly'];
+            $required = $workflow['required'];
+            $hidden = $workflow['hidden'];
+            if (in_array($prop['name'], $visible)) {
+                self::formatResult($result, $prop, $values, $key, $defaultValues, $hidden, $readonly, $required, true);
+            }
+        } else {
+            self::formatResult($result, $prop, $values, $key, $defaultValues);
         }
+        return $result;
+    }
+    static function formatResult(&$result, $prop, $values, $key, $defaultValues, $hidden = null, $readonly = null, $required = null, $typeWorkflow = false)
+    {
         $result['label'] = $prop['label'];
         $columnName = $prop['column_name'];
         $result['columnName'] = $columnName;
@@ -36,9 +46,6 @@ class WorkflowFields
 
         $result['value'] = $values->{$columnName} ?? '';
         $result['title'] = $columnName . " / " . $control;
-        $result['hiddenRow'] = $prop['hidden_edit'] === 'true' ? "hidden" : "";
-        $result['hiddenLabel'] = $prop['hidden_label'] === 'true';
-        $result['readOnly'] = ($prop['read_only'] ?? false) === 'true';
 
         $defaultValue = $defaultValues[$key] ?? [];
         $result['labelExtra'] = $defaultValue['label_extra'] ?? "";
@@ -49,9 +56,21 @@ class WorkflowFields
         $result['realtimeType'] = $realtime["realtime_type"] ?? "";
         $result['realtimeFn'] = $realtime["realtime_fn"] ?? "";
 
-        $result['isRequired'] = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
         $result['iconJson'] = $columnType === 'json' ? '<i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
-
-        return $result;
+        $typeWorkflow ?  self::followWorkflow($result, $prop, $defaultValue, $hidden, $readonly, $required) : self::noneFollowWorkflow($result, $prop, $defaultValue);
+    }
+    private static function noneFollowWorkflow(&$result, $prop, $defaultValue)
+    {
+        $result['hiddenRow'] = $prop['hidden_edit'] === 'true' ? "hidden" : "";
+        $result['hiddenLabel'] = $prop['hidden_label'] === 'true';
+        $result['readOnly'] = ($prop['read_only'] ?? false) === 'true';
+        $result['isRequired'] = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
+    }
+    private static function followWorkflow(&$result, $prop, $defaultValue, $hidden, $readonly, $required)
+    {
+        $result['hiddenRow'] = ($prop['hidden_edit'] ? $prop['hidden_edit'] : in_array($prop['name'], $hidden)) == 'true' ? "hidden" : "";
+        $result['hiddenLabel'] = ($prop['hidden_label'] ? $prop['hidden_label'] : in_array($prop['name'], $hidden)) == 'true';
+        $result['readOnly'] = ($prop['read_only'] ? $prop['read_only'] : in_array($prop['name'], $readonly)) == 'true';
+        $result['isRequired'] = in_array($prop['name'], $required) ? in_array("required", explode("|", $defaultValue['validation'] ?? "")) : "";
     }
 }

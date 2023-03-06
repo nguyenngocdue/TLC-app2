@@ -13,6 +13,7 @@ class Text extends Component
         private $value,
         private $placeholder = 'Type here...',
         private $icon = null,
+        private $readOnly = false,
     ) {
     }
 
@@ -22,6 +23,13 @@ class Text extends Component
         $value = $this->value;
         $placeholder = $this->placeholder;
         $icon = $this->icon;
-        return view('components.controls.text')->with(compact('name', 'value', 'placeholder', 'icon'));
+        $readOnly = $this->readOnly;
+        return view('components.controls.text', [
+            'name' => $name,
+            'value' => $value,
+            'placeholder' => $placeholder,
+            'icon' => $icon,
+            'readOnly' => $readOnly
+        ]);
     }
 }

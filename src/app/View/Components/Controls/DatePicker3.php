@@ -17,6 +17,7 @@ class DatePicker3 extends Component
         private $name,
         private $value = null,
         private $dateTimeType = 'picker_date',
+        private $readOnly = false,
     ) {
         if (!is_null(old($name))) $this->value = old($name);
     }
@@ -55,6 +56,7 @@ class DatePicker3 extends Component
                 // 'placeholder' => $this->getPlaceholder($this->dateTimeType),
                 'name' => $this->name,
                 'value' => $this->value,
+                'readOnly' => $this->readOnly,
             ]
         );
     }
