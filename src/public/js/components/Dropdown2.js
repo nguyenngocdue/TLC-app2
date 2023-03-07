@@ -12,10 +12,9 @@ const select2FormatState = (state) =>
     !state.id
         ? state.text
         : $(
-              `<div class="flex justify-between px-1"><span>${
-                  state.text
-              }</span><span>${makeId(state.id)}</span></div>`
-          )
+            `<div class="flex justify-between px-1"><span>${state.text
+            }</span><pre>   </pre><span>${makeId(state.id)}</span></div>`
+        )
 const getEById = (id) => $("[id='" + id + "']")
 
 const getIsMultipleOfE = (id) => getEById(id)[0].hasAttribute('multiple')
@@ -355,7 +354,7 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
                         )
                 } else if (
                     response[ajax_response_attribute][0][
-                        ajax_item_attribute
+                    ajax_item_attribute
                     ] === undefined
                 ) {
                     value = ajax_default_value
@@ -369,7 +368,7 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
                 } else {
                     value =
                         response[ajax_response_attribute][0][
-                            ajax_item_attribute
+                        ajax_item_attribute
                         ]
                 }
                 if (debugListener)
@@ -447,8 +446,8 @@ const reloadDataToDropdown2 = (id, attr_to_compare, dataSource, selected) => {
                 dataSource.length === 1
                     ? 'selected'
                     : selected.includes(item.id)
-                    ? 'selected'
-                    : ''
+                        ? 'selected'
+                        : ''
             const title = item.description || makeId(item.id)
             option =
                 "<option value='" +
@@ -487,8 +486,8 @@ const reloadDataToDropdown2 = (id, attr_to_compare, dataSource, selected) => {
                 dataSource.length === 1
                     ? 'checked'
                     : selected.includes(itemId)
-                    ? 'checked'
-                    : ''
+                        ? 'checked'
+                        : ''
             console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
             // console.log(item)
