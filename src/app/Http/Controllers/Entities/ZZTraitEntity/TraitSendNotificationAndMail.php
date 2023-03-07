@@ -42,8 +42,8 @@ trait TraitSendNotificationAndMail
                     $previousValue[$key] = $item->$key;
                 } else {
                     if (in_array($key, JsonControls::getMonitors())) {
-                        $key = str_replace('()', '', $key);
-                        $valueGetMonitors = $item->{$key}()->pluck('id')->toArray();
+                        $fn = str_replace('()', '', $key);
+                        $valueGetMonitors = $item->{$fn}()->pluck('id')->toArray();
                         $previousValue[$key] = $valueGetMonitors;
                     }
                 }

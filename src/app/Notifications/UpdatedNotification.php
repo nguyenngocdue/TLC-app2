@@ -37,10 +37,9 @@ class UpdatedNotification extends Notification implements ShouldQueue
     public function via($notifiable)
     {
         $data = $this->data['currentValue'];
-        Log::info($data);
         $type = $data['entity_type'];
         $status = $data['status'];
-        $definitions = Definitions::getAllOf($type)['new'];
+        $definitions = Definitions::getAllOf($type)['new'] ?? ['name' => '', 'new' => true];
         array_shift($definitions);
         $arrayCheck = array_keys(array_filter($definitions, fn ($item) => $item));
         if (sizeof($arrayCheck) == 0 || in_array($status, $arrayCheck)) {

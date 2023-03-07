@@ -53,31 +53,35 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         foreach ($currentValue as $key => $value) {
             switch ($key) {
                 case in_array($key, $listAssignees):
-                    $assigneePrevious = $previousValue[$key];
+                    $assigneePrevious = $previousValue[$key] ?? null;
                     [$isChange, $outBallInCourt, $newBallInCourt] =
-                        $this->isChangeBallInCourt($previousValue, $currentValue, $listAssignees);
+                        $this->isChangeBallInCourt($previousValue, $currentValue, $listAssignees, $listMonitors);
                     $keyCombine = $outBallInCourt . '|' . $newBallInCourt;
                     $value == $assigneePrevious ? $assigneeNotification[$keyCombine] = null
                         : $assigneeNotification[$keyCombine] = $value;
-                    if ($isChange) {
-                        if (explode('|', $newBallInCourt)[0] == 'creator') {
-                            $changStatusAssignee[$keyCombine]
-                                = $currentValue['owner_id'];
-                        } else {
-                            $changStatusAssignee[$keyCombine]
-                                = $value;
+                    if ($previousValue['status'] !== $currentValue['status']) {
+                        if ($isChange) {
+                            if (explode('|', $newBallInCourt)[0] == 'creator') {
+                                $changStatusAssignee[$keyCombine]
+                                    = $currentValue['owner_id'];
+                            } else {
+                                $changStatusAssignee[$keyCombine]
+                                    = $value;
+                            }
                         }
                     }
                     break;
                 case in_array($key, $listMonitors):
-                    $monitorPrevious = $previousValue[$key];
+                    $monitorPrevious = $previousValue[$key] ?? [];
                     [$isChange, $outBallInCourt, $newBallInCourt] =
-                        $this->isChangeBallInCourt($previousValue, $currentValue, $listMonitors);
+                        $this->isChangeBallInCourt($previousValue, $currentValue, $listAssignees, $listMonitors, 1);
                     $keyCombine = $outBallInCourt . '|' . $newBallInCourt;
                     $monitorNotification[$keyCombine] = array_diff($value, $monitorPrevious);
-                    if ($isChange) {
-                        $changStatusMonitors[$outBallInCourt . '|' . $newBallInCourt]
-                            = $value;
+                    if ($previousValue['status'] !== $currentValue['status']) {
+                        if ($isChange) {
+                            $changStatusMonitors[$outBallInCourt . '|' . $newBallInCourt]
+                                = $value;
+                        }
                     }
                     break;
                 default:
@@ -89,7 +93,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         $this->send($changStatusAssignee, $previousValue, $currentValue, 'assignee_status_change', false);
         $this->send($changStatusMonitors, $previousValue, $currentValue, 'monitor_status_change', false);
     }
-    private function isChangeBallInCourt($previousValue, $currentValue, $list, $index = 0)
+    private function isChangeBallInCourt($previousValue, $currentValue, $listAssignees, $listMonitors, $index = 0)
     {
         $typeBallInCourt = [
             'ball-in-court-assignee',
@@ -98,12 +102,13 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         $previousStatus = $previousValue['status'];
         $currentStatus = $currentValue['status'];
         $type = $currentValue['entity_type'];
-        $ballInCourts = array_map(function ($item) use ($list, $typeBallInCourt) {
+
+        $ballInCourts = array_map(function ($item) use ($listAssignees, $listMonitors, $typeBallInCourt) {
             if (!$item[$typeBallInCourt[0]]) {
-                $item[$typeBallInCourt] = $list[0];
+                $item[$typeBallInCourt[0]] = $listAssignees[0];
             }
             if (!$item[$typeBallInCourt[1]]) {
-                $item[$typeBallInCourt] = $list[0];
+                $item[$typeBallInCourt[1]] = $listMonitors[0];
             }
             return $item;
         }, BallInCourts::getAllOf($type));
@@ -114,7 +119,6 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         if ($newBallInCourt[$typeBallInCourt[$index]] == $outBallInCourt[$typeBallInCourt[$index]]) {
             return [false, $result1, $result2];
         }
-
         return [true, $result1, $result2];
     }
     private function send($array, $previousValue, $currentValue, $type, $sendNotification = true)
