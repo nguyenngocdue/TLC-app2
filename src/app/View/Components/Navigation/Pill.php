@@ -35,7 +35,7 @@ class Pill extends Component
         $links[] = ['href' => route($singular . '_atb.index'), 'disabled' => strpos($as, '_atb.') !== false, 'title' => 'Action Buttons',];
         $links[] = ['href' => route($singular . '_dfn.index'), 'disabled' => strpos($as, '_dfn.') !== false, 'title' => 'Definitions',];
         $links[] = ['href' => route($singular . '_itm.index'), 'disabled' => strpos($as, '_itm.') !== false, 'title' => 'Intermediate Props',];
-        $links[] = ['href' => route($singular . '_rtm.index'), 'disabled' => strpos($as, '_rtm.') !== false, 'title' => 'Realtime',];
+        // $links[] = ['href' => route($singular . '_rtm.index'), 'disabled' => strpos($as, '_rtm.') !== false, 'title' => 'Realtime',];
 
         $links1 = [];
         $links1[] = ['href' => route($singular . '_cpb.index'), 'disabled' => strpos($as, '_cpb.') !== false, 'title' => 'Capabilities',];

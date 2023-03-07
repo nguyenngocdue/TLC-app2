@@ -27,6 +27,7 @@ trait TraitTableColumnEditable
 
             $newColumn['properties']['lineType'] = Str::singular($tableName);
             $newColumn['properties']['table01Name'] = $table01Name;
+            $newColumn['properties']['readOnly'] = $prop['read_only'] === 'true';
             $isSaveOnChange = ($prop['save_on_change'] ?? false) === 'true'; //<<CONFIG_MIGRATE
             $newColumn['properties']['saveOnChange'] = $isSaveOnChange;
             $newColumn['title'] .= $isRequired ? "</br><i class='text-red-400' title='required'>*</i>" : "";

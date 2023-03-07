@@ -8,6 +8,7 @@
     </div>
     @endif --}}
     <input
+        @readonly($readOnly)
         component="editable/number"
         id="{{$name}}"
         name="{{$name}}"
@@ -15,7 +16,7 @@
         step='any' 
         type="number"
         placeholder="{{$placeholder}}" 
-        class="text-right block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm"
+        class="{{$readOnly?"readonly":""}} text-right block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm"
         onChange='onChangeDropdown4({name:"{{$name}}", table01Name:"{{$table01Name}}", rowIndex:{{$rowIndex}}, saveOnChange: {{$saveOnChange?1:0}}})'
         >
 {{-- </div> --}}

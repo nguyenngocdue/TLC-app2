@@ -40,7 +40,7 @@ trait TableTraitRows
             switch ($renderer) {
                 case  'no.':
                     // dd($start, $no);
-                    $rendered = "<p class='p-2'>" . $no . "<p>";
+                    $rendered = "<p class='p-2'>" . $no . "</p>";
                     break;
                 default:
                     $dataIndex = $column['dataIndex'];
@@ -56,7 +56,9 @@ trait TableTraitRows
                         // ? "A" 
                         // : "B";
                         ? $this->applyRender($name, $renderer, $rawData, $column, $dataLine, $dataLineIndex)
-                        : "<p class='p-2'>" . $valueOfRawData . "</p>";
+                        : ($dataIndex === 'action' ? $valueOfRawData :
+                            "<p class='p-2' valueOfRawData>" . $valueOfRawData . "</p>"
+                        );
                     break;
             }
             $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
@@ -72,7 +74,13 @@ trait TableTraitRows
                     $cellColor = $rawData->cell_color;
                 }
             }
-            $tds[] = "<td class='$cellColor $hidden  dark:border-gray-600 $borderRight $align' $styleStr>" . $rendered . "</td>";
+            $td = "<td class='$cellColor $hidden dark:border-gray-600 $borderRight $align' $styleStr>";
+            // $td .= "<p class='bg-red-200 p-2'>";
+            $td .= $rendered;
+            // $td .= "</p>";
+            $td .= "</td>";
+
+            $tds[] = $td;
         }
         return $tds;
     }
@@ -111,7 +119,7 @@ trait TableTraitRows
                 $bgClass = '';
             }
             $extraTrClass = $dataLine->extraTrClass ?? "";
-            $tr = "<tr class='dark:hover:bg-gray-600 hover:bg-gray-200 $bgClass text-gray-700 dark:text-gray-300 $extraTrClass'>";
+            $tr = "<tr class='dark:hover:bg-gray-900 hover:bg-gray-100 $bgClass text-gray-700 dark:text-gray-300 $extraTrClass'>";
             $tr .=  join("", $tds);
             $tr .= "</tr>";
             $trs[] = $tr;

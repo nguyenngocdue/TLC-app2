@@ -21,7 +21,7 @@ class Text extends Component
         private $rowIndex = -1,
         private $icon = null,
         private $saveOnChange = false,
-
+        private $readOnly = false,
     ) {
         //In case of listeners, the data was parsed in to array
         if (is_array($this->cell)) {
@@ -50,6 +50,7 @@ class Text extends Component
             'table01Name' => $this->table01Name,
             'icon' => $this->icon,
             'saveOnChange' => $this->saveOnChange,
+            'readOnly' => $this->readOnly,
         ]);
     }
 }

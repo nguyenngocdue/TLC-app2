@@ -13,7 +13,9 @@ const getNameIndexOfRowIndex = (tableId, rowIndex) => {
             const tdName = td.childNodes[j].name
             if (debugEditable) console.log(tdName, tdName.startsWith(tableId))
             if (tdName.startsWith(tableId + "[finger_print]")) {
-                return tdName.substring(tableId.length + "[finger_print][".length, tdName.length - 1)
+                const result = tdName.substring(tableId.length + "[finger_print][".length, tdName.length - 1)
+                if (debugEditable) console.log(result)
+                return result
             }
         }
     }
@@ -213,6 +215,7 @@ const trashEditableTable = (params) => {
 
 const cloneFirstLineDown = (dataIndex, tableId, renderer) => {
     // const debugEditable = true
+    if (debugEditable) console.log(tableId)
     const nameIndex = getNameIndexOfRowIndex(tableId, 0)
     if (debugEditable) console.log(nameIndex, renderer)
     const name = tableId + "[" + dataIndex + "][" + nameIndex + "]"
