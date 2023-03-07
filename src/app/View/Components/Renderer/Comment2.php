@@ -70,7 +70,9 @@ class Comment2 extends Component
         if ($this->commentId) {
             $commentItem = Comment::find($this->commentId);
             // dump($commentItem->comment_attachment);
-            $comment_attachment = $commentItem->comment_attachment;
+            if ($commentItem) {
+                $comment_attachment = $commentItem->comment_attachment;
+            }
         }
         $allowedDelete = $this->allowedDelete;
         if (is_null($this->commentId)) {

@@ -42,6 +42,7 @@ class ManageStatusesController extends AbstractManageLibController
             [
                 'dataIndex' => "rendered",
                 'renderer' => 'formatter',
+                'align' => 'center',
                 'formatterName' => 'statusColorRendered',
             ],
         ];

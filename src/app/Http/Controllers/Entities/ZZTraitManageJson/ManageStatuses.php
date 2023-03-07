@@ -16,7 +16,8 @@ class ManageStatuses extends Manage_Parent
             [
                 'title' => "Current Statuses",
                 'dataIndex' => "title",
-                "renderer" => "tag", "attributes" => ['color' => 'color', 'colorIndex' => 'color_index'],
+                "renderer" => "tag",
+                "attributes" => ['color' => 'color', 'colorIndex' => 'color_index'],
                 'align' => 'right',
             ],
             [
@@ -52,7 +53,8 @@ class ManageStatuses extends Manage_Parent
             [
                 'title' => "Available Statuses",
                 'dataIndex' => "title",
-                "renderer" => "tag", "attributes" => ['color' => 'color', 'colorIndex' => 'color_index'],
+                "renderer" => "tag",
+                "attributes" => ['color' => 'color', 'colorIndex' => 'color_index'],
             ],
         ];
     }

@@ -32,6 +32,7 @@ class ManageActionButtons extends Manage_Parent
                 "dataIndex" => 'label',
                 'renderer' => 'text',
                 'editable' => true,
+                'properties' => ['placeholder' => 'As status TITLE'],
             ],
             [
                 "dataIndex" => 'tooltip',
