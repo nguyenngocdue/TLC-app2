@@ -111,12 +111,31 @@ class SuperProps
         return $allProps;
     }
 
+    private static function loadCapa($type)
+    {
+        $capa = Capabilities::getAllOf($type);
+        $statuses = LibStatuses::getFor($type);
+        $result = [];
+        foreach (array_keys($statuses) as $statusKey) {
+            $result[$statusKey][] = 'admin';
+        }
+        foreach ($capa as $roleSet => $value) {
+            foreach (array_keys($statuses) as $statusKey) {
+                if ($value[$statusKey] == 'true') {
+                    $result[$statusKey][] = $roleSet;
+                }
+            }
+        }
+        return $result;
+    }
+
     private static function readStatuses($type)
     {
         $allStatuses = LibStatuses::getFor($type);
         static::attachJson("transitions", $allStatuses, static::makeCheckbox(Transitions::getAllOf($type)));
         static::attachJson("ball-in-courts", $allStatuses, static::makeFromWhiteList(BallInCourts::getAllOf($type)));
         static::attachJson("action-buttons", $allStatuses, static::makeFromWhiteList(ActionButtons::getAllOf($type)));
+        static::attachJson("capability-roles", $allStatuses, static::loadCapa($type));
         return $allStatuses;
     }
 

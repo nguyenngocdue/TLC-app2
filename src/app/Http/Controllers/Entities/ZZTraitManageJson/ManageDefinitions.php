@@ -46,7 +46,7 @@ class ManageDefinitions extends Manage_Parent
                 'name' => 'new',
             ],
             [
-                'description' => 'Status where a document becomes read only',
+                'description' => '(not-yet) Status where a document becomes read only',
                 'name' => 'read-only',
                 'rowDescription' => 'Hide Save Button and all Submit Buttons',
             ],
@@ -55,12 +55,12 @@ class ManageDefinitions extends Manage_Parent
                 'name' => 'hide-save-btn',
             ],
             [
-                'description' => 'Status to which a new document is closed',
+                'description' => '(not-yet) Status to which a new document is closed',
                 'name' => 'closed',
                 'rowDescription' => 'Ignore due date, set closed_date_gmt',
             ],
             [
-                'description' => 'Status to which a new document is post_closed',
+                'description' => '(not-yet) Status to which a new document is post_closed',
                 'name' => 'post_closed',
                 'rowDescription' => 'Stop rt_la_remaining from realtime',
             ],
