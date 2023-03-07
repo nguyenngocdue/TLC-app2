@@ -164,14 +164,14 @@ const addANewLineFull = (params) => {
                     } else {
                         onChange = "onChangeDropdown4(" + onChangeParams + ")"
                     }
-                    renderer = "<input id='" + id + "' name='" + id + "' class='" + column['classList'] + "' type=number step=any onChange='" + onChange + "' />";
+                    renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "' type=number step=any onChange='" + onChange + "' />";
                     break
                 case "text":
                     onChange = "onChangeDropdown4(" + onChangeParams + ")"
-                    renderer = "<input id='" + id + "' name='" + id + "' class='" + column['classList'] + "' onChange='" + onChange + "'/>";
+                    renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "' onChange='" + onChange + "'/>";
                     break
                 case "textarea":
-                    renderer = "<textarea id='" + id + "' name='" + id + "' class='" + column['classList'] + "'></textarea>"
+                    renderer = "<textarea id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "'></textarea>"
                     break
                 case "picker-datetime4":
                     onChange = "onChangeDropdown4(" + onChangeParams + ")"

@@ -16,7 +16,7 @@ class Textarea extends Component
         private $name = "",
         private $placeholder = "",
         private $cell = null,
-        // private $width = null,
+        private $readOnly = false,
     ) {
         //In case of listeners, the data was parsed in to array
         if (is_array($this->cell)) {
@@ -41,7 +41,7 @@ class Textarea extends Component
             'name' => $this->name,
             'type' => 'text',
             'cell' => $this->cell,
-            // 'width' => $this->width,
+            'readOnly' => $this->readOnly,
         ]);
     }
 }

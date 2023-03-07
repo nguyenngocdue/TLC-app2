@@ -27,14 +27,19 @@ trait TraitTableColumnEditable
 
             $newColumn['properties']['lineType'] = Str::singular($tableName);
             $newColumn['properties']['table01Name'] = $table01Name;
-            $newColumn['properties']['readOnly'] = $prop['read_only'] === 'true';
+
+            $isReadOnly = ($prop['read_only'] ?? false) === 'true'; //<<CONFIG_MIGRATE
+            $newColumn['properties']['readOnly'] = $isReadOnly;
+
+            $newColumn['title'] .= $isRequired ? "</br><i class='text-red-400' title='required'>*</i>" : "";
+
             $isSaveOnChange = ($prop['save_on_change'] ?? false) === 'true'; //<<CONFIG_MIGRATE
             $newColumn['properties']['saveOnChange'] = $isSaveOnChange;
-            $newColumn['title'] .= $isRequired ? "</br><i class='text-red-400' title='required'>*</i>" : "";
             $newColumn['title'] .= $isSaveOnChange ? "</br><i class='fa-duotone fa-floppy-disk' title='Save On Change'></i>" : "";
 
             // dump($newColumn);
             $classNameText = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
+            if ($isReadOnly) $classNameText = "readonly $classNameText";
             switch ($prop['control']) {
                 case 'id':
                     $newColumn['renderer'] = 'read-only-text';
