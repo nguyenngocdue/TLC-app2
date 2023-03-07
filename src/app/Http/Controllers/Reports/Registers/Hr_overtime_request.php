@@ -99,6 +99,23 @@ class Hr_overtime_request extends Report_ParentController
         ];
     }
 
+    protected function getParamColumns()
+    {
+        return [
+            [
+                'title' => 'OT Workplace',
+                'dataIndex' => 'ot_workplace_id'
+            ],
+            [
+                'dataIndex' => 'months'
+            ],
+            [
+                'title' => 'User',
+                'dataIndex' => 'user_id'
+            ]
+        ];
+    }
+
     private function getAllMonths()
     {
         $sql = "SELECT DISTINCT(SUBSTR(otline.ot_date, 1, 7)) AS year_months

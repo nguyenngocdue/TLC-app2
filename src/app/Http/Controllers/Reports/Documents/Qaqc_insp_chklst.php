@@ -90,6 +90,37 @@ class Qaqc_insp_chklst extends Report_ParentController
 		];
 	}
 
+	protected function getParamColumns()
+	{
+		return [
+			[
+				'title' => 'Sub Project',
+				'dataIndex' => 'sub_project_id'
+			],
+			[
+				'title' => 'Production Order',
+				'dataIndex' => 'prod_order_id'
+			],
+			[
+				'title' => 'QAQC inspect template',
+				'dataIndex' => 'qaqc_insp_tmpl_id'
+			],
+			[
+				'dataIndex' => 'filter_run'
+			]
+		];
+	}
+
+	public function getDataForModeControl($dataSource = [])
+	{
+		$subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
+		$prod_orders  = ['prod_order_id' =>  Prod_order::get()->pluck('name', 'id')->toArray()];
+		$insp_tmpls = ['qaqc_insp_tmpl_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
+		$filter_run = ['filter_run' => ['Filter for a latest run', 'Filter for many runs']];
+		return array_merge($subProjects, $prod_orders, $insp_tmpls, $filter_run);
+	}
+
+
 	protected function enrichDataSource($dataSource, $modeParams)
 	{
 		$isNullParams = $this->isNullModeParams($modeParams);
@@ -250,15 +281,6 @@ class Qaqc_insp_chklst extends Report_ParentController
 	{
 		$runUpdated = '<td class="border pl-2" style="width:80px" > Date: ' . str_replace(" ", "</br> Time: ", $item['run_updated']) . "</td>";
 		return $runUpdated;
-	}
-
-	public function getDataForModeControl($dataSource = [])
-	{
-		$subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-		$prod_orders  = ['prod_order_id' =>  Prod_order::get()->pluck('name', 'id')->toArray()];
-		$insp_tmpls = ['qaqc_insp_tmpl_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
-		$filter_run = ['filter_run' => ['Filter for a latest run', 'Filter for many runs']];
-		return array_merge($subProjects, $prod_orders, $insp_tmpls, $filter_run);
 	}
 
 	protected function getSheets($dataSource)

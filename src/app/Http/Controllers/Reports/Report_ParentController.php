@@ -63,6 +63,11 @@ abstract class Report_ParentController extends Controller
         return $dataSource;
     }
 
+    protected function getParamColumns()
+    {
+        return [[]];
+    }
+
     protected function transformDataSource($dataSource, $modeParams)
     {
         return $dataSource;
@@ -86,43 +91,6 @@ abstract class Report_ParentController extends Controller
         return $dataSource;
     }
 
-    public function index(Request $request)
-    {
-
-        $typeReport = CurrentRoute::getTypeController();
-        $viewName = strtolower(Str::singular($typeReport));
-        $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
-
-
-        $pageLimit = $this->getPageParam($typeReport, $entity);
-        $modeParams = $this->getModeParams($typeReport, $entity);
-
-        $dataSource = $this->getDataSource($modeParams);
-
-        $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-
-        $dataSource = $this->transformDataSource($dataSource, $modeParams);
-        // dump(count($dataSource));
-        $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
-        // dd($dataSource);
-
-        $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
-        $columns = $this->getTableColumns($dataSource);
-        $sheets = $this->getSheets($dataSource);
-
-        return view('reports.' . $viewName, [
-            'tableColumns' => $columns,
-            'tableDataSource' => $dataSource,
-            'modeParams' => $modeParams,
-            'entity' => $entity,
-            'typeReport' => $typeReport,
-            'sheets' => $sheets,
-            'dataModeControl' => $dataModeControl,
-            'topTitle' => $this->getMenuTitle(),
-            'pageLimit' => $pageLimit,
-            'rotate45Width' => $this->rotate45Width,
-        ]);
-    }
     protected function getModeParams($typeReport, $entity)
     {
         $settings = CurrentUser::getSettings();
@@ -142,5 +110,45 @@ abstract class Report_ParentController extends Controller
             return $pageLimit;
         }
         return 10;
+    }
+
+    public function index(Request $request)
+    {
+
+        $typeReport = CurrentRoute::getTypeController();
+        $viewName = strtolower(Str::singular($typeReport));
+        $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
+
+
+        $pageLimit = $this->getPageParam($typeReport, $entity);
+        $modeParams = $this->getModeParams($typeReport, $entity);
+
+        $dataSource = $this->getDataSource($modeParams);
+
+        $dataSource = $this->enrichDataSource($dataSource, $modeParams);
+        // dd($dataSource);
+        $dataSource = $this->transformDataSource($dataSource, $modeParams);
+        // dump(count($dataSource));
+        $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
+
+        $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
+        $columns = $this->getTableColumns($dataSource);
+        $sheets = $this->getSheets($dataSource);
+
+        $paramColumns = $this->getParamColumns();
+
+        return view('reports.' . $viewName, [
+            'tableColumns' => $columns,
+            'tableDataSource' => $dataSource,
+            'modeParams' => $modeParams,
+            'entity' => $entity,
+            'typeReport' => $typeReport,
+            'sheets' => $sheets,
+            'dataModeControl' => $dataModeControl,
+            'topTitle' => $this->getMenuTitle(),
+            'pageLimit' => $pageLimit,
+            'paramColumns' => $paramColumns,
+            'rotate45Width' => $this->rotate45Width,
+        ]);
     }
 }

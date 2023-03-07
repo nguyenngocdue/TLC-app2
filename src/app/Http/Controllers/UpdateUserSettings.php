@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
 use App\Models\User;
 use App\Utils\Constant;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -96,9 +97,33 @@ class UpdateUserSettings extends Controller
         return $arrayFlip;
     }
 
-    private function updateReportRegister($request, $settings)
+    private function resetParamsReport($request)
     {
         $reqValue = $request->all();
+        $entity = $request->input("_entity");
+        $typeReport = strtolower($request->input("type_report"));
+        $settingUser = CurrentUser::getSettings();
+        $modeNames = $reqValue['mode_names'];
+        $settings = [];
+        if (isset($settingUser[$entity][$typeReport])) {
+            foreach ($modeNames as $key => $value) {
+                $paramsReset = $settingUser[$entity][$typeReport][$value];
+                array_walk($paramsReset, function ($value, $key) use (&$paramsReset) {
+                    $paramsReset[$key] = null;
+                });
+                $settings[$entity][$typeReport][$value] = $paramsReset;
+            }
+        }
+        return $settings;
+    }
+
+
+    private function updateReport($request, $settings)
+    {
+        $reqValue = $request->all();
+        if (isset($reqValue['mode_names'])) {
+            return $this->resetParamsReport($request);
+        }
         $entity = $request->input("_entity");
         $typeReport = strtolower($request->input("type_report"));
         $indexBreak = array_search("type_report", array_keys($reqValue));
@@ -126,7 +151,6 @@ class UpdateUserSettings extends Controller
      */
     public function __invoke(Request $request)
     {
-        // dd($request->all());
         $action = $request->input('action');
         $user = User::find(Auth::id());
         $settings = $user->settings;
@@ -145,13 +169,13 @@ class UpdateUserSettings extends Controller
                 break;
                 //report 
             case 'updateReportRegisters':
-                $settings = $this->updateReportRegister($request, $settings);
+                $settings = $this->updateReport($request, $settings);
                 break;
             case 'updateReportReports':
-                $settings = $this->updateReportRegister($request, $settings);
+                $settings = $this->updateReport($request, $settings);
                 break;
             case 'updateReportDocuments':
-                $settings = $this->updateReportRegister($request, $settings);
+                $settings = $this->updateReport($request, $settings);
                 break;
             case 'updatePerPageRegisters':
                 $settings = $this->updatePerPageRegister($request, $settings);
