@@ -110,7 +110,6 @@ $status = $values->status ?? null;
                                 @case('number')
                                 <x-controls.number name={{$columnName}} value={{$value}} readOnly={{$readOnly}}/>
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                                {{'readonly-->'.$readOnly}}
                                 @break
                                 @case('textarea')
                                 <x-controls.textarea name={{$columnName}} :value="$value" colType={{$columnType}} placeholder="{{$placeholder}}" readOnly={{$readOnly}}/>
@@ -175,7 +174,6 @@ $status = $values->status ?? null;
                                 @case('relationship_renderer')
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                                 <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
-                                {{'readonly-->'.$readOnly}}
                                 @break
 
                                 @case('parent_type')
@@ -187,13 +185,10 @@ $status = $values->status ?? null;
 
                                 @case('parent_link')
                                 <x-feedback.alert type="warning" title="Warning" message="{{$control}} suppose to show in View All screen only, please do not show in Edit screen." />
-                                {{'readonly-->'.$readOnly}}
                                 @break
-
-                                @case('realtime')
+                                                    {{-- @case('realtime')
                                 <x-renderer.realtime :item="$item" name={{$columnName}} realtimeType={{$realtimeType}} realtimeFn={{$realtimeFn}} status={{$status}} value={{$value}} />
-                                {{'readonly-->'.$readOnly}}
-                                @break
+                                @break --}}
 
                                 @default
                                 <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />
