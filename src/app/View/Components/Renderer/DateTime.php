@@ -20,17 +20,8 @@ class DateTime extends Component
         // Log::info($dataLine);
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
+    private function toString($timestamp)
     {
-        $dataIndex = $this->column['dataIndex'];
-        $rawData = $this->dataLine->{$dataIndex};
-        if (is_null($rawData)) return ""; //<< This to render empty string on ViewAll screen
-        $timestamp = strtotime($rawData);
         switch ($this->rendererParam) {
             case "picker_datetime":
                 return date(Constant::FORMAT_DATETIME_ASIAN, $timestamp);
@@ -50,5 +41,20 @@ class DateTime extends Component
                 return "Unknown type [{$this->rendererParam}]";
                 break;
         }
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
+     */
+    public function render()
+    {
+        $dataIndex = $this->column['dataIndex'];
+        $rawData = $this->dataLine->{$dataIndex};
+        if (is_null($rawData)) return ""; //<< This to render empty string on ViewAll screen
+        $timestamp = strtotime($rawData);
+        $string = $this->toString($timestamp);
+        return "<p class='p-2'>$string</p>";
     }
 }

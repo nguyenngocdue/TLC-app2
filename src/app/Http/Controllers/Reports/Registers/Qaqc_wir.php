@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 class Qaqc_wir extends Report_ParentController
 {
     use TraitReport;
+    protected $rotate45Width = 600;
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT tb1.*

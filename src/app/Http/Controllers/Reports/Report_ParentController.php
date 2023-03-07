@@ -26,6 +26,9 @@ abstract class Report_ParentController extends Controller
     abstract protected function getSqlStr($modeParams);
     abstract protected function getTableColumns($dataSource);
     abstract protected function getDataForModeControl($dataSource);
+
+    protected $rotate45Width = false;
+
     public function getType()
     {
         return "dashboard";
@@ -116,7 +119,8 @@ abstract class Report_ParentController extends Controller
             'sheets' => $sheets,
             'dataModeControl' => $dataModeControl,
             'topTitle' => $this->getMenuTitle(),
-            'pageLimit' => $pageLimit
+            'pageLimit' => $pageLimit,
+            'rotate45Width' => $this->rotate45Width,
         ]);
     }
     protected function getModeParams($typeReport, $entity)

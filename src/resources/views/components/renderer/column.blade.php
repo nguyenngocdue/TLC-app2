@@ -18,6 +18,6 @@ foreach($json as $item){
     }
     $result [] = "<span title='#{$id}'>".$value."</span>";
 }
-echo join(", ", $result);
+echo "<p class='p-2'>" .join(", ", $result)."</p>";
 @endphp
 
