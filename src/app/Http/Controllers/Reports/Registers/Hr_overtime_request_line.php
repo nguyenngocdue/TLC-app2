@@ -27,8 +27,8 @@ class Hr_overtime_request_line extends Report_ParentController
                 ,us.full_name AS member_name
                 ,SUBSTR(otline.ot_date,1,7) AS year_months
                 ,SUM(otline.total_time) AS total_overtime_hours
-                ,(60) AS maximum_allowed_ot_hours
-                ,(60-SUM(otline.total_time) ) AS remaining_allowed_ot_hours
+                ,(40) AS maximum_allowed_ot_hours
+                ,(40-SUM(otline.total_time) ) AS remaining_allowed_ot_hours
                     FROM users us, hr_overtime_request_lines otline, hr_overtime_requests otr, user_categories uscate
                     WHERE 1 = 1
                     AND otline.user_id = us.id
@@ -148,15 +148,15 @@ class Hr_overtime_request_line extends Report_ParentController
             // display colors for total_overtime_hours
             $hours = $value->total_overtime_hours * 1;
             $strHour = "";
-            if ($hours > 60) {
+            if ($hours > 40) {
                 $strHour = "<div class='bg-red-500'>$hours</i></div>";
             }
-            if (40 < $hours && $hours <= 60) {
+            if (20 < $hours && $hours <= 40) {
                 $strHour = "<div class='bg-yellow-400'>$hours</i></div>";
             }
-            if (20 < $hours && $hours <= 40) {
-                $strHour = "<div class='bg-green-400'>$hours</i></div>";
-            }
+            // if (20 < $hours && $hours <= 40) {
+            //     $strHour = "<div class='bg-green-400'>$hours</i></div>";
+            // }
             if ($hours <= 20) {
                 $strHour = "<div class='bg-white'>$hours</i></div>";
             }

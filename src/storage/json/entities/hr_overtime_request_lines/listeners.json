@@ -10,7 +10,7 @@
         "expression": "\/api\/v1\/hr\/overtime_request_line2",
         "ajax_response_attribute": "hits",
         "ajax_item_attribute": "remaining_hours",
-        "ajax_default_value": "60"
+        "ajax_default_value": "40"
     },
     "_employeeid": {
         "name": "_employeeid",
