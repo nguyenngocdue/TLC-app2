@@ -196,23 +196,5 @@
         "read_only": "",
         "save_on_change": "",
         "new_line": ""
-    },
-    "_content": {
-        "name": "_content",
-        "column_name": "content",
-        "column_type": "text",
-        "label": "",
-        "control": "",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "new_line": ""
     }
 }

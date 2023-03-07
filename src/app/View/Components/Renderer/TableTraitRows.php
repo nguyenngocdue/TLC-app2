@@ -51,7 +51,7 @@ trait TableTraitRows
                         $rawData = (is_object($dataLine))  ? ($dataLine->$dataIndex ?? "") : ($dataLine[$dataIndex] ?? "");
                     }
                     $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
-                    $valueOfRawData = is_object($rawData) ? $rawData->value : $rawData;
+                    $valueOfRawData = (is_object($rawData) && isset($rawData->value)) ? $rawData->value : $rawData;
                     $rendered = $renderer
                         // ? "A" 
                         // : "B";
