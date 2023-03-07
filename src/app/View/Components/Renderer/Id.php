@@ -39,7 +39,7 @@ class Id extends Component
             $href =  $route_exits ? route($route_name, $id) : "#";
             $color =  $route_exits ? "blue" : "red";
 
-            $a = "<a href='$href' class='text-{$color}-500'>$idStr</a>";
+            $a = "<p class='p-2'><a href='$href' class='text-{$color}-500'>$idStr</a></p>";
             $hiddenInput = "<input type='hidden' value='$id' name='$name' />";
             return $a . $hiddenInput;
         };
