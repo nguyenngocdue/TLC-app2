@@ -1,4 +1,4 @@
-
+<th class="border-t-0"></th>
 <input class="truncate w-16" />
 <input class="h-[100px] w-[100px]"/>
 <input class="h-[200px] w-[200px]"/>

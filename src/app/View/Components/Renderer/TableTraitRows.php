@@ -54,7 +54,7 @@ trait TableTraitRows
                         // ? "A" 
                         // : "B";
                         ? $this->applyRender($name, $renderer, $rawData, $column, $dataLine, $dataLineIndex)
-                        : $rawData;
+                        : "<p class='p-2'>" . $rawData . "</p>";
                     break;
             }
             $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
@@ -62,7 +62,8 @@ trait TableTraitRows
             $hidden = $this->isInvisible($column) ? "hidden" : "";
             $styleStr = $this->getStyleStr($column);
             $rendered = ($tableDebug && ($renderer != 'no.') ? $name : "") . $rendered;
-            $tds[] = "<td class='p1x-1 p1y-1 $hidden  dark:border-gray-600 $borderRight $align' $styleStr>" . $rendered . "</td>";
+            $cellColor = (is_object($dataLine))  ? ($dataLine->cell_color ?? "") : ($dataLine['cell_color'] ?? "");
+            $tds[] = "<td class='$cellColor $hidden  dark:border-gray-600 $borderRight $align' $styleStr>" . $rendered . "</td>";
         }
         return $tds;
     }

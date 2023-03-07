@@ -27,7 +27,7 @@ class Text extends Component
         return function (array $data) {
             $str = $data['slot'];
             $str = Str::limitWords($str, 10);
-            return $str;
+            return "<p class='p-2'>" . $str . "</p>";
         };
     }
 }

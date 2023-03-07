@@ -23,7 +23,7 @@ trait TableTraitColumns
         return join("", $result);
     }
 
-    private function makeTh($column)
+    private function makeTh($column, $isLastColumn)
     {
         $renderer = $column['renderer'] ?? "_no_renderer_";
         $dataIndex = $column['dataIndex'];
@@ -40,12 +40,16 @@ trait TableTraitColumns
         $iconJson = $columnType === 'json' ? '<br/><i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
         if ($columnType === 'json') $title .= $iconJson;
         $rotate45Width = $this->rotate45Width;
-        $rotate45Height = $rotate45Width - 100;
+        $rotate45Height = ($this->rotate45Width) ? $rotate45Width - 100 : false;
         $classTh = ($this->rotate45Width) ? "rotated-title-th h-[{$rotate45Height}px]" : "";
         $classDiv = ($this->rotate45Width) ? "rotated-title-div text-right w-[{$rotate45Width}px]" : "";
+        $borderRight = $isLastColumn ? "" : "border border-r-2 border-t-0";
+        $borderRight = ($this->rotate45Width) ? "" : $borderRight;
         $th = "";
-        $th .= "<th class='px-4 py-3 $classTh' $styleStr title='$tooltip'>";
-        $th .= "<div class='$classDiv' style='height: 50px; display: flex; justify-content: center; flex-flow: column;'><span>" . $title . "</span></div>";
+        $th .= "<th class='px-4 py-3 $borderRight $classTh' $styleStr title='$tooltip'>";
+        $th .= "<div class='$classDiv text-gray-700 '>";
+        $th .= "<span>" . $title . "</span>";
+        $th .= "</div>";
         $th .= "</th>";
 
         return $th;
@@ -54,9 +58,9 @@ trait TableTraitColumns
     private function getColumnRendered($columns)
     {
         $columnsRendered = [];
-        array_walk($columns, function ($column, $key) use (&$columnsRendered) {
-            if (!$this->isInvisible($column)) $columnsRendered[] = $this->makeTh($column, $key);
-        });
+        foreach ($columns as $key => $column) {
+            if (!$this->isInvisible($column)) $columnsRendered[] = $this->makeTh($column, $key == sizeof($columns) - 1);
+        }
         $columnsRendered = join("", $columnsRendered);
         return $columnsRendered;
     }

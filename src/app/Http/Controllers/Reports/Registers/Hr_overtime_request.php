@@ -7,7 +7,7 @@ use App\Http\Controllers\Reports\TraitReport;
 use App\Models\Workplace;
 use Illuminate\Support\Facades\DB;
 
-class Hr_overtime_request_line extends Report_ParentController
+class Hr_overtime_request extends Report_ParentController
 {
     use TraitReport;
     public function getSqlStr($modeParams)
@@ -149,7 +149,7 @@ class Hr_overtime_request_line extends Report_ParentController
             $hours = $value->total_overtime_hours * 1;
             $strHour = "";
             if ($hours > 40) {
-                $strHour = "<div class='bg-red-500'>$hours</i></div>";
+                $strHour = "<div class='h-full w-full bg-red-500'>$hours</i></div>";
             }
             if (20 < $hours && $hours <= 40) {
                 $strHour = "<div class='bg-yellow-400'>$hours</i></div>";
