@@ -128,3 +128,30 @@ a.disabled {
     cursor: default;
     opacity: 0.6;
 }
+.select2-container--default
+    .select2-selection--multiple
+    .select2-selection__rendered {
+    box-sizing: border-box;
+    list-style: none;
+    margin: 5px 0 0 0;
+    padding: 3px 0 2px 9px;
+    width: 100%;
+    font-size: 0.875rem;
+}
+.select2-selection.select2-selection--multiple {
+    padding: 0px !important;
+    border: 1px solid rgb(209 213 219) !important;
+    border-radius: 0.5rem !important;
+}
+select:not([size]) {
+    background-image: url(
+        data:image/svg + xml;charset=utf-8,
+        %3Csvgxmlns='http://www.w3.org/2000/svg'fill='none'viewBox='0 0 20 20'%3E%3Cpathstroke='%236B7280'stroke-linecap='round'stroke-linejoin='round'stroke-width='1.5'd='m6 8 4 4 4-4'/%3E%3C/svg%3E
+    );
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 0rem;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}

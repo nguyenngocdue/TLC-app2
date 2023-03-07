@@ -19,6 +19,7 @@ use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 $entities = Entities::getAll();
 $qrCodeApps = JsonControls::getQrCodeApps();
@@ -168,4 +169,13 @@ Route::group([
         $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
         Route::get("{$qrCodeApp}/{slug}", ["{$path}EntityCRUDController", "showQR"])->name("{$qrCodeApp}.showQR");
     }
+});
+Route::get('/modular/{slug}', function (Request $request, $slug) {
+    return redirect('app/pj_modules/' . $slug);
+});
+Route::get('/unit/{slug}', function (Request $request, $slug) {
+    return redirect('app/pj_units/' . $slug);
+});
+Route::get('/shipment/{slug}', function (Request $request, $slug) {
+    return redirect('app/pj_shipments/' . $slug);
 });

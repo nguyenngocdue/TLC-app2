@@ -4,9 +4,9 @@
     <div class="rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
         <div class="flex ">
             <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
-                <button type="button" class=" text-gray-900 bg-orange-400 focus:shadow-outline border border-gray-200 focus:outline-none hover:bg-purple-400  font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700" @click="clearAdvanceFilter()">
+                <button type="button" class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg" @click="clearAdvanceFilter()">
                 <i class="fa-sharp fa-solid fa-circle-xmark"></i>
-                <span class="ml-2">Reset Filter</span>
+                <span class="ml-1">RESET FILTER</span>
                 </button>
         </div>
                 
@@ -89,11 +89,14 @@
                     @php
                         $libStatus = App\Http\Controllers\Workflow\LibStatuses::getFor($type);
                     @endphp
-                    <select id="{{$columnName}}" class="select2-hidden-accessible" multiple="multiple" style="width: 100%;" name="{{$columnName}}[]" tabindex="-1" aria-hidden="true">
-                        @foreach($libStatus as $value)
-                        <option value="{{$value['name']}}" @selected($valueControl ? in_array($value['name'],$valueControl) : null) >{{$value['title'] ?? $value['name']}}</option>
-                        @endforeach
-                    </select>
+                    <div class="mt-1">
+                        <select id="{{$columnName}}" class="select2-hidden-accessible" multiple="multiple" style="width: 100%;" name="{{$columnName}}[]" tabindex="-1" aria-hidden="true">
+                            @foreach($libStatus as $value)
+                            <option value="{{$value['name']}}" @selected($valueControl ? in_array($value['name'],$valueControl) : null) >{{$value['title'] ?? $value['name']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
                     <script>
                             $('[id="'+"{{$columnName}}"+'"]').select2({
                                 placeholder: "Please select..."
@@ -115,8 +118,8 @@
     
         </div>
         <div >
-            <button type="submit" name="action" value="updateAdvanceFilter" class="mt-4 focus:shadow-outline rounded bg-emerald-500 py-1.5 px-4 font-semibold text-base text-white hover:bg-purple-400 focus:outline-none">
-                Apply
+            <button type="submit" name="action" value="updateAdvanceFilter" class="mt-4 px-3 py-2  inline-block  font-medium text-sm leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg">
+                APPLY
             </button>
         </div>
     </div>
