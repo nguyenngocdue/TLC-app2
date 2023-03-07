@@ -1,6 +1,6 @@
 <input
     @readonly($readOnly)
-    component="editable/picker_datetime4"
+    component="editable/{{$control}}"
     id="{{$name}}"
     name="{{$name}}"
     value="{{$cell??$slot}}"

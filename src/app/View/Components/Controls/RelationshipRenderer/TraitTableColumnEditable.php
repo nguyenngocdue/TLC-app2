@@ -64,8 +64,6 @@ trait TraitTableColumnEditable
                     $newColumn['classList'] = $classNameText;
                     $newColumn['type'] = $this->type;
                     $newColumn['properties']['tableName'] = $prop['relationships']['table'];
-
-                    // dump($newColumn);
                     break;
                 case 'textarea':
                     $newColumn['renderer'] = 'textarea';
@@ -84,23 +82,16 @@ trait TraitTableColumnEditable
                     $newColumn['classList'] = $classNameText;
                     break;
                 case 'picker_time':
-                    $newColumn['renderer'] = 'picker-time4';
-                    $newColumn['editable'] = true;
-                    $newColumn['properties']['icon'] = 'fa-duotone fa-clock';
-                    $newColumn['properties']['placeholder'] = 'HH:MM';
-                    $newColumn['classList'] = $classNameText;
-                    break;
                 case 'picker_date':
-                    $newColumn['renderer'] = 'picker-date4';
-                    $newColumn['editable'] = true;
-                    $newColumn['properties']['placeholder'] = 'DD/MM/YYYY';
-                    $newColumn['classList'] = $classNameText;
-                    break;
                 case 'picker_datetime':
-                    $newColumn['renderer'] = 'picker-datetime4';
+                case 'picker_week':
+                case 'picker_month':
+                case 'picker_quarter':
+                case 'picker_year':
+                    $newColumn['renderer'] = 'picker-all4';
                     $newColumn['editable'] = true;
-                    $newColumn['properties']['placeholder'] = 'DD/MM/YYYY HH:MM';
                     $newColumn['classList'] = $classNameText;
+                    $newColumn['properties']['control'] = $prop['control'];
                     break;
                 case 'attachment':
                     $newColumn['renderer'] = "text";
