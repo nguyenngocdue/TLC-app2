@@ -130,8 +130,8 @@ trait TraitEntityAdvancedFilter
                     case 'picker_month':
                         array_walk($value, function ($value, $key) use ($q) {
                             $arrayDate = explode(' - ', $value);
-                            $fistDayOfMonth = DateTimeConcern::format2($arrayDate[0], Constant::FORMAT_YEAR_MONTH)->startOfMonth()->toDateString();
-                            $endDayOfMonth = DateTimeConcern::format2($arrayDate[1], Constant::FORMAT_YEAR_MONTH)->endOfMonth()->toDateString();
+                            $fistDayOfMonth = DateTimeConcern::format2($arrayDate[0], Constant::FORMAT_MONTH)->startOfMonth()->toDateString();
+                            $endDayOfMonth = DateTimeConcern::format2($arrayDate[1], Constant::FORMAT_MONTH)->endOfMonth()->toDateString();
                             $q->whereDate($key, '>=', $fistDayOfMonth)
                                 ->whereDate($key, '<=', $endDayOfMonth);
                         });

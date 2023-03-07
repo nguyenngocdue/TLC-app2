@@ -22,12 +22,13 @@ class Constant
     const FORMAT_TIME = "H:i";
 
     const FORMAT_WEEKDAY_SHORT = "D";
-    const FORMAT_YEAR_MONTH = "m/Y";
-    const FORMAT_YEAR = "Y";
-    const FORMAT_QUARTER = "Qq/Y";
     const FORMAT_WEEK = "W/Y";
+    const FORMAT_MONTH = "m/Y";
+    const FORMAT_QUARTER = "Qq/Y";
+    const FORMAT_YEAR = "Y";
 
-    const FORMAT_YEAR_MONTH0 = "Y-m"; //<< Please do not change this format
+    const FORMAT_YEAR_MONTH = "Y/m"; //<< Please do not change this format, for create Media Folder
+    const FORMAT_YEAR_MONTH0 = "Y-m"; //<< Please do not change this format, for SQL Comparison
 
     const OWNER_ID = 'owner_id';
 

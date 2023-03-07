@@ -68,7 +68,7 @@ class DateTimeConcern
                     break;
                 case "picker_month":
                     $formatFrom = Constant::FORMAT_DATE_MYSQL;
-                    $formatTo = Constant::FORMAT_YEAR_MONTH;
+                    $formatTo = Constant::FORMAT_MONTH;
                     $value = self::format($value, $formatFrom, $formatTo);
                     break;
                 case "picker_week":
@@ -114,7 +114,7 @@ class DateTimeConcern
                     $value = self::format($value, $formatFrom, $formatTo);
                     break;
                 case "picker_month":
-                    $formatFrom = Constant::FORMAT_YEAR_MONTH;
+                    $formatFrom = Constant::FORMAT_MONTH;
                     $formatTo = Constant::FORMAT_DATE_MYSQL;
                     $value = self::format($value, $formatFrom, $formatTo);
                     break;

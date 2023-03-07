@@ -13,7 +13,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     },
@@ -31,7 +31,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     },
@@ -49,7 +49,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     },
@@ -67,7 +67,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     },
@@ -85,7 +85,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     },
@@ -103,7 +103,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     },
@@ -121,7 +121,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     },
@@ -139,7 +139,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     },
@@ -157,7 +157,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     },
@@ -175,7 +175,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     },
@@ -193,7 +193,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     },
@@ -211,7 +211,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     },
@@ -229,7 +229,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "new_line": ""
     }
