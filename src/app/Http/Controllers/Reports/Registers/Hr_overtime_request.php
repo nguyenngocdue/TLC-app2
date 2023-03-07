@@ -149,16 +149,19 @@ class Hr_overtime_request extends Report_ParentController
             $hours = $value->total_overtime_hours * 1;
             $strHour = "";
             if ($hours > 40) {
-                $strHour = "<div class='h-full w-full bg-red-500'>$hours</i></div>";
+                $strHour = (object)[
+                    'cell_color' => 'bg-red-400',
+                    'value' => $hours,
+                ];
             }
             if (20 < $hours && $hours <= 40) {
-                $strHour = "<div class='bg-yellow-400'>$hours</i></div>";
+                $strHour = (object) [
+                    'cell_color' => 'bg-yellow-300',
+                    'value' => $hours,
+                ];
             }
-            // if (20 < $hours && $hours <= 40) {
-            //     $strHour = "<div class='bg-green-400'>$hours</i></div>";
-            // }
             if ($hours <= 20) {
-                $strHour = "<div class='bg-white'>$hours</i></div>";
+                $strHour = $hours;
             }
             $dataSource[$key]->total_overtime_hours = $strHour;
         }

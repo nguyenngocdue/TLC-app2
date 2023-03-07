@@ -36,10 +36,11 @@ trait TableTraitRows
             $renderer = $column['renderer'] ?? false;
             $columnName = $column['column_name'] ?? $column['dataIndex'];
             $name = isset($column['dataIndex']) ? "{$this->tableName}[$columnName][$dataLineIndex]" : "";
+            $rawData = null;
             switch ($renderer) {
                 case  'no.':
                     // dd($start, $no);
-                    $rendered = $no;
+                    $rendered = "<p class='p-2'>" . $no . "<p>";
                     break;
                 default:
                     $dataIndex = $column['dataIndex'];
@@ -50,11 +51,12 @@ trait TableTraitRows
                         $rawData = (is_object($dataLine))  ? ($dataLine->$dataIndex ?? "") : ($dataLine[$dataIndex] ?? "");
                     }
                     $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
+                    $valueOfRawData = is_object($rawData) ? $rawData->value : $rawData;
                     $rendered = $renderer
                         // ? "A" 
                         // : "B";
                         ? $this->applyRender($name, $renderer, $rawData, $column, $dataLine, $dataLineIndex)
-                        : "<p class='p-2'>" . $rawData . "</p>";
+                        : "<p class='p-2'>" . $valueOfRawData . "</p>";
                     break;
             }
             $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
@@ -62,7 +64,14 @@ trait TableTraitRows
             $hidden = $this->isInvisible($column) ? "hidden" : "";
             $styleStr = $this->getStyleStr($column);
             $rendered = ($tableDebug && ($renderer != 'no.') ? $name : "") . $rendered;
-            $cellColor = (is_object($dataLine))  ? ($dataLine->cell_color ?? "") : ($dataLine['cell_color'] ?? "");
+
+            // $cellColor = (is_object($dataLine))  ? ($dataLine->cell_color ?? "") : ($dataLine['cell_color'] ?? "");
+            $cellColor = '';
+            if (is_object($rawData)) {
+                if (isset($rawData->cell_color)) {
+                    $cellColor = $rawData->cell_color;
+                }
+            }
             $tds[] = "<td class='$cellColor $hidden  dark:border-gray-600 $borderRight $align' $styleStr>" . $rendered . "</td>";
         }
         return $tds;
