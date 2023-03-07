@@ -78,16 +78,26 @@ class Prod_order extends Report_ParentController
             ],
         ];
     }
+
+    protected function getParamColumns()
+    {
+        return [
+            [
+                'title' => 'Sub Project',
+                'dataIndex' => 'sub_project_id'
+            ],
+            [
+                'title' => 'Production Order',
+                'dataIndex' => 'prod_order_id'
+            ]
+        ];
+    }
+
+
     public function getDataForModeControl($dataSource)
     {
         $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        $prod_orders  = ['prod_order' =>  ModelsProd_order::get()->pluck('name', 'id')->toArray()];
+        $prod_orders  = ['prod_order_id' =>  ModelsProd_order::get()->pluck('name', 'id')->toArray()];
         return array_merge($subProjects, $prod_orders);
-    }
-    protected function enrichDataSource($dataSource, $modeParams)
-    {
-        $isNullParams = $this->isNullModeParams($modeParams);
-        if ($isNullParams) return collect([]);
-        else return $dataSource;
     }
 }

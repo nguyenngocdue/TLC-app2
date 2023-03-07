@@ -94,6 +94,21 @@ class Qaqc_wir extends Report_ParentController
         return  $dataColumn;
     }
 
+
+    protected function getParamColumns()
+    {
+        return [
+            [
+                'title' => 'Sub Porject',
+                'dataIndex' => 'sub_project_id'
+            ],
+            [
+                'title' => 'Prod Routing',
+                'dataIndex' => 'prod_routing_id'
+            ]
+        ];
+    }
+
     protected function getDataProdRouting()
     {
         $sql = "
@@ -140,6 +155,18 @@ class Qaqc_wir extends Report_ParentController
         return array_merge($subProjects, $prodRoutings);
     }
 
+    protected  function getParamForUrl($item)
+    {
+        $param1 = '/?project_id=' . $item['project_id'];
+        $param2 = 'sub_project_id=' . $item['sub_project_id'];
+        $param3 = 'prod_routing_id=' . $item['prod_routing_id'];
+        $param4 = 'prod_order_id=' . $item['prod_order_id'];
+        $param5 = 'wir_prod_discipline_id=' . $item['wir_prod_discipline_id'];
+        $param6 = 'wir_description_id=' . $item['wir_description_id'];
+        return [$param1, $param2, $param3, $param4, $param5, $param6];
+    }
+
+
     protected function transformDataSource($dataSource, $modeParams)
     {
 
@@ -160,12 +187,13 @@ class Qaqc_wir extends Report_ParentController
             if (!is_null($item['wir_status']) && !isset($entityStatuses[$item['wir_status']])) {
                 $color = 'bg-red-500';
             }
-            // set url when Onclick icon
+            // set url when onclick icon
             $params = $this->getParamForUrl($item);
-            $href = $routeCreate . implode('&', $params);
             $docId = str_pad($item['wir_doc_id'], 4, 0, STR_PAD_LEFT);
-            $html = "<div class='$color w-full' title='{$item['wir_description_name']}'><a href='$href'>$docId</a></div>";
+            $routeEdit = route('qaqc_wirs.edit', $docId);
+            $html = "<div class='$color w-full' title='{$item['wir_description_name']}'><a href='$routeEdit'>$docId</a></div>";
             if (is_null($item['wir_doc_id'])) {
+                $href = $routeCreate . implode('&', $params);
                 $html =  "<div class='w-full ' title='{$item['wir_description_name']}/{$item['wir_description_id']}'><a href='$href'>$icon</a></div>";
             }
 
@@ -199,11 +227,14 @@ class Qaqc_wir extends Report_ParentController
         // * get parameters from  "setting field" in database
         $settings = CurrentUser::getSettings();
         $lstRenderColWirDesc = [];
-        if (isset($settings['qaqc_wirs'])) {
-            $idProdRouting = $settings['qaqc_wirs']['registers']['mode_001']['prod_routing_id'] ?? 0;
-            $lstRenderColWirDesc = $groupByIdProdRouting[$idProdRouting];
-            $lstRenderColWirDesc = array_map(fn ($item) => Report::slugName($item), $lstRenderColWirDesc);
-        }
+        // if (isset($settings['qaqc_wirs'])) {
+        //     // dd($settings);
+        //     if (!is_null($settings['qaqc_wirs']['registers']['mode_001']['prod_routing_id'])) {
+        //         $idProdRouting = $settings['qaqc_wirs']['registers']['mode_001']['prod_routing_id'];
+        //         $lstRenderColWirDesc = $groupByIdProdRouting[$idProdRouting];
+        //         $lstRenderColWirDesc = array_map(fn ($item) => Report::slugName($item), $lstRenderColWirDesc);
+        //     }
+        // }
 
         $itemsWirDesc =  DB::table('wir_descriptions')->select('name', 'prod_discipline_id', 'id')->get()->ToArray();
         $itemsWirDesc = Report::pressArrayTypeAllItems($itemsWirDesc);
@@ -231,18 +262,5 @@ class Qaqc_wir extends Report_ParentController
             $transformData[$key] = $prodOrder + $lackFieldArray;
         }
         return collect($transformData);
-    }
-
-
-
-    protected  function getParamForUrl($item)
-    {
-        $param1 = '/?project_id=' . $item['project_id'];
-        $param2 = 'sub_project_id=' . $item['sub_project_id'];
-        $param3 = 'prod_routing_id=' . $item['prod_routing_id'];
-        $param4 = 'prod_order_id=' . $item['prod_order_id'];
-        $param5 = 'wir_prod_discipline_id=' . $item['wir_prod_discipline_id'];
-        $param6 = 'wir_description_id=' . $item['wir_description_id'];
-        return [$param1, $param2, $param3, $param4, $param5, $param6];
     }
 }
