@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\SuperProps;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 trait TraitEntityCRUDShowQR
 {
@@ -11,6 +12,9 @@ trait TraitEntityCRUDShowQR
 	{
 		$modelCurrent = new ($this->data);
 		$dataSource = $modelCurrent::where('slug', $slug)->first();
+		if (!$dataSource) {
+			throw new NotFoundHttpException();
+		}
 		$props = SuperProps::getFor($this->type)['props'];
 		return view('dashboards.pages.entity-show-qr', [
 			'props' => $props,
