@@ -102,7 +102,7 @@ class Qaqc_insp_chklst extends Report_ParentController
 				'dataIndex' => 'prod_order_id'
 			],
 			[
-				'title' => 'QAQC inspect template',
+				'title' => 'QAQC Inspect Template',
 				'dataIndex' => 'qaqc_insp_tmpl_id'
 			],
 			[
