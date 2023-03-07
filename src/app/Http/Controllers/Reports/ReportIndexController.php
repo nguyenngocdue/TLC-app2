@@ -28,7 +28,7 @@ class ReportIndexController extends Controller
                 $path = "$key-$singular";
                 // dump($path);
                 //TODO: Thuc's PC get cache of this register and crash the app
-                // if($path === "register-hr_overtime_request_line") continue;
+                if($path === "register-hr_overtime_request_line") continue;
                 $controller = "App\\Http\\Controllers\\Reports\\$value\\{$ucfirstName}";
                 $class_exists = class_exists($controller);
                 if (Route::has($path) && $class_exists) $result[$entityName][$value] = $path;
