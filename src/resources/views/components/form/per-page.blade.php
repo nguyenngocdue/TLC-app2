@@ -8,7 +8,7 @@
             {{-- <input type="text" name="page_limit" class="text-right block w-24 rounded-md border border-slate-300 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm" value="{{ $pageLimit }}"> --}}
             <select name="per_page" class="block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm">
                 @foreach([10,20,30,40,50,100] as $value)
-                <option class="text-sm" value="{{$value}}" @selected($perPage==$value)>{{$value}} / page</option>
+                <option class="text-sm" value="{{$value}}" @selected($perPage==$value)>{{$value}}/page</option>
                 @endforeach
             </select>
         </div>
