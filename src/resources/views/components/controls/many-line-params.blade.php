@@ -33,7 +33,8 @@
             tableName: "{{$tableName}}",
         }
         </script>
-    <x-renderer.button type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
+    <x-renderer.button id="btnAddANewLine_{{$table01Name}}" type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
+    <i id="iconSpin_{{$table01Name}}" class="fa-duotone fa-spinner fa-spin text-green-500" style="display: none"></i>
     <input class="bg-gray-200" readonly name="tableNames[{{$table01Name}}]" value="{{$tableName}}" type="{{$tableDebugTextHidden}}" />
     {{-- This is for when clicked "Add a new item", if the column is parent_id and parent_type and might be invisible, --}}
     {{-- its value will get from here --}}

@@ -30,6 +30,11 @@ const addANewLine = (params) => {
         order_no: orderNoValue,
     }
     // console.log(data)
+
+    const btnId = "btnAddANewLine_" + tableId
+    const spinId = "iconSpin_" + tableId
+    getEById(btnId).hide()
+    getEById(spinId).show()
     $.ajax({
         type: 'POST',
         url: '/api/v1/entity/' + tableName + '_storeEmpty',
@@ -40,6 +45,8 @@ const addANewLine = (params) => {
             valuesOfOrigin[parentIdFieldName] = parentId
             // console.log('insertedId', insertedId, valuesOfOrigin)
             addANewLineFull({ tableId, valuesOfOrigin })
+            getEById(btnId).show()
+            getEById(spinId).hide()
         }
     })
 }

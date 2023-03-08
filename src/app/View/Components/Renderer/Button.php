@@ -13,6 +13,7 @@ class Button extends Component
      */
     public function __construct(
         private $size = 'sm',
+        private $id = '',
         private $name = '',
         private $type = "light",
         private $outline = false,
@@ -102,6 +103,7 @@ class Button extends Component
             'className' => $this->outline ? $this->getClassOutline($className, $this->block) : $this->getClass($className, $this->block),
             'htmlType' => $this->htmlType,
             'value' => $this->value,
+            'id' => $this->id,
             'name' => $this->name,
             'onClick' => $this->onClick,
             'title' => $this->title,
