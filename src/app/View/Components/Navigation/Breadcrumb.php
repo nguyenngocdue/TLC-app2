@@ -37,6 +37,7 @@ class Breadcrumb extends Component
         switch ($action) {
             case 'show':
                 $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
+                $links[] = ['href' => null, 'modePrint' => true, 'title' => 'Print Mode', 'icon' => '<i class="fa-duotone fa-print"></i>'];
                 $links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
                 break;
             case 'showQR':

@@ -26,15 +26,21 @@
                                 {{$tableName}}
                             </div>
                     </div>
-                    @if($nameRenderDocId)
+                    
+            </td>
+        </tr>
+        @if($nameRenderDocId)
+            <tr >
+                <td >
                     <div class="flex flex-row flex-wrap gap-y-0 mb-1">
-                        <div class="border border-gray-600 p-1 text-base">
+                        <div class="justify-end border border-gray-600 p-1 text-base">
                             Doc ID: {{$nameRenderDocId}}
                         </div>
                     </div>
-                    @endif
-            </td>
-        </tr>
+                </td>
+                
+            </tr>
+        @endif
     </tbody>
 </table>
 
