@@ -186,6 +186,7 @@ abstract class AbstractViewAllController extends Controller
                         // dump($relationshipJson);
                         $column['renderer'] = $relationshipJson['renderer_view_all'] ?? "";
                         $column['rendererParam'] = $relationshipJson['renderer_view_all_param'] ?? "";
+                        $column['rendererUnit'] = $relationshipJson['renderer_view_all_unit'] ?? "";
                     }
                 }
             }
