@@ -32,11 +32,9 @@ class DatePicker3 extends Component
         // dump($this->dateTimeType);
         // dump($this->value);
 
-
         return view(
             'components.controls.date-picker3',
             [
-                // 'placeholder' => $this->getPlaceholder($this->dateTimeType),
                 'name' => $this->name,
                 'value' => $this->value,
                 'readOnly' => $this->readOnly,

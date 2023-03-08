@@ -5,6 +5,7 @@ namespace App\View\Components\Renderer\Editable;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class PickerAll4 extends Component
 {
@@ -35,28 +36,6 @@ class PickerAll4 extends Component
         }
     }
 
-    private function getPlaceholder($control)
-    {
-        switch ($control) {
-            case "picker_datetime":
-                return "DD/MM/YYYY HH:MM";
-            case "picker_time":
-                return "HH:MM";
-            case "picker_date":
-                return "DD/MM/YYYY";
-            case "picker_month":
-                return "MM/YYYY";
-            case "picker_week":
-                return "W01/YYYY";
-            case "picker_quarter":
-                return "Q1/YYYY";
-            case "picker_year":
-                return "YYYY";
-            default:
-                return "??? $control ???";
-        }
-    }
-
     /**
      * Get the view / contents that represent the component.
      *
@@ -67,7 +46,7 @@ class PickerAll4 extends Component
         if ($this->cell === 'DO_NOT_RENDER') return "";
         $this->cell = DateTimeConcern::convertForLoading($this->control, $this->cell);
         return view('components.renderer.editable.picker-all4', [
-            'placeholder' => $this->getPlaceholder($this->control),
+            'placeholder' => Str::getPickerPlaceholder($this->control),
             'name' => $this->name,
             'cell' => $this->cell,
             'onChange' => $this->onChange,

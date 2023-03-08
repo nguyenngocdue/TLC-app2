@@ -102,10 +102,23 @@ Str::macro('markDocId', function ($dataSource, $type = null) {
     }
     return $docIdName;
 });
-// Str::macro('arrayToAttrs', function (array $array) {
-//     $result = [];
-//     foreach ($array as $key => $value) {
-//         $result[] = "$key='$value'";
-//     }
-//     return join(" ", $result);
-// });
+Str::macro('getPickerPlaceholder', function ($control) {
+    switch ($control) {
+        case "picker_datetime":
+            return "DD/MM/YYYY HH:MM";
+        case "picker_time":
+            return "HH:MM";
+        case "picker_date":
+            return "DD/MM/YYYY";
+        case "picker_month":
+            return "MM/YYYY";
+        case "picker_week":
+            return "W01/YYYY";
+        case "picker_quarter":
+            return "Q1/YYYY";
+        case "picker_year":
+            return "YYYY";
+        default:
+            return "??? $control ???";
+    }
+});

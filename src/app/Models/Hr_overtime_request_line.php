@@ -63,7 +63,7 @@ class Hr_overtime_request_line extends ModelExtended
             ['dataIndex' => 'employeeid'],
             ['dataIndex' => 'position_rendered', 'title' => 'Position'],
             ['dataIndex' => 'ot_date', 'cloneable' => true],
-            ['dataIndex' => 'allowed_hours', 'cloneable' => !true],
+            ['dataIndex' => 'allowed_hours', 'cloneable' => !true, 'invisible' => !true],
             ['dataIndex' => 'from_time', 'cloneable' => true],
             ['dataIndex' => 'to_time', 'cloneable' => true],
             ['dataIndex' => 'break_time', 'cloneable' => true],

@@ -162,7 +162,7 @@ const addANewLineFull = (params) => {
                         orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
                         onChange = "reRenderTableBaseOnNewOrder(\"" + tableId + "\")"
                     } else {
-                        onChange = "onChangeDropdown4(" + onChangeParams + ")"
+                        onChange = "onChangeDropdown4(" + onChangeParams + ");changeBgColor(this,\"" + tableId + "\")"
                     }
                     renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "' type=number step=any onChange='" + onChange + "' />";
                     break
@@ -173,17 +173,9 @@ const addANewLineFull = (params) => {
                 case "textarea":
                     renderer = "<textarea id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "'></textarea>"
                     break
-                case "picker-datetime4":
+                case "picker-all4":
                     onChange = "onChangeDropdown4(" + onChangeParams + ")"
-                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='DD/MM/YYYY HH:MM' class='" + column['classList'] + "' onchange='" + onChange + "'>"
-                    break
-                case "picker-date4":
-                    onChange = "onChangeDropdown4(" + onChangeParams + ")"
-                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='DD/MM/YYYY' class='" + column['classList'] + "' onchange='" + onChange + "'>"
-                    break
-                case "picker-time4":
-                    onChange = "onChangeDropdown4(" + onChangeParams + ")"
-                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='HH:MM' class='" + column['classList'] + "' onchange='" + onChange + "'>"
+                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "' onchange='" + onChange + "'>"
                     break
                 default:
                     renderer = "Unknown how to render " + column['renderer']
