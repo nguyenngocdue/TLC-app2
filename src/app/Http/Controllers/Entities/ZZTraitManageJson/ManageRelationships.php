@@ -52,6 +52,12 @@ class ManageRelationships extends Manage_Parent
                 "renderer" => "text",
             ],
             [
+                "dataIndex" => "renderer_view_all_unit",
+                "editable" => true,
+                "renderer" => "dropdown",
+                "cbbDataSource" => ['', 'hour', 'item'],
+            ],
+            [
                 "dataIndex" => "renderer_edit",
                 "editable" => true,
                 "renderer" => "dropdown",
@@ -136,6 +142,11 @@ class ManageRelationships extends Manage_Parent
         foreach ($json as $key => $columns) {
             $result[$key]["name"] = $key;
             foreach ($columns as $column => $value) {
+                if ($column === 'renderer_view_all_unit') {
+                    if ($result[$key]['renderer_view_all'] !== 'agg_sum') {
+                        $result[$key][$column] = 'DO_NOT_RENDER';
+                    }
+                }
                 if ($column === 'radio_checkbox_colspan') {
                     if (isset($json[$key]['control'])) {
                         $control = ($json[$key]['control']);

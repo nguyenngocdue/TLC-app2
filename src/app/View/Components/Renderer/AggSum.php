@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class AggSum extends Component
 {
@@ -13,6 +14,7 @@ class AggSum extends Component
      */
     public function __construct(
         private $rendererParam = '',
+        private $rendererUnit = '',
     ) {
     }
 
@@ -27,6 +29,7 @@ class AggSum extends Component
             $json = json_decode($data['slot']);
             if (!is_array($json)) $json = [$json];
             $column = $this->rendererParam;
+            $unit = $this->rendererUnit;
             if ($column == '') return;
             $sum = 0;
             foreach ($json as $line) {
@@ -39,7 +42,8 @@ class AggSum extends Component
             $sum = round($sum, 2);
             $count = sizeof($json);
             $avg = round($sum / $count, 2);
-            return "<div class='text-center'><x-renderer.tag title='Count: $count\nAVG: $avg'>$sum</x-renderer.tag></div>";
+            $unit = Str::plural($unit, round($avg));
+            return "<div class='text-center'><x-renderer.tag title='Count: $count\nAVG: $avg'>$sum $unit</x-renderer.tag></div>";
         };
     }
 }

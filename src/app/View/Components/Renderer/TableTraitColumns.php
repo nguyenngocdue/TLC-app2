@@ -26,6 +26,7 @@ trait TableTraitColumns
     private function makeTh($column, $isLastColumn)
     {
         $renderer = $column['renderer'] ?? "_no_renderer_";
+        // $rendererUnit = $column['rendererUnit'] ?? "_no_unit_";
         $dataIndex = $column['dataIndex'];
         $columnName = $column['column_name'] ?? $dataIndex;
         $columnType = $column['column_type'] ?? "";
@@ -35,6 +36,7 @@ trait TableTraitColumns
         $tooltip .= "+ DataIndex: $dataIndex\n";
         $tooltip .= "+ ColumnName: $columnName\n";
         $tooltip .= "+ Renderer: $renderer\n";
+        // $tooltip .= "+ RendererUnit: $rendererUnit\n";
         $tooltip .= "+ Width: $width";
         $styleStr = $this->getStyleStr($column);
         $iconJson = $columnType === 'json' ? '<br/><i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
