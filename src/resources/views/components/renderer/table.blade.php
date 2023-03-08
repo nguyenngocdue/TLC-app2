@@ -3,7 +3,7 @@
     $columnsRendered = preg_replace('/<th class=\'.*?\'/', "<th class='text-center bg-gray-50 border border-gray-400  py-2'", $columnsRendered);
     $tr_td = preg_replace('/<tr class=\'.*?\'/', "<tr class='border border-gray-400'", $tr_td);
 @endphp
-<table>
+<table class="w-full min-w-full max-w-full">
     <thead>{!! $columnsRendered !!}</thead>
     <tbody>{!! $tr_td !!}</tbody>
 </table>

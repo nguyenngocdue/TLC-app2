@@ -1122,6 +1122,9 @@ video {
   min-width: -moz-max-content;
   min-width: max-content;
 }
+.min-w-full {
+  min-width: 100%;
+}
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -1133,6 +1136,9 @@ video {
 }
 .max-w-2xl {
   max-width: 42rem;
+}
+.max-w-full {
+  max-width: 100%;
 }
 .flex-1 {
   flex: 1 1 0%;
