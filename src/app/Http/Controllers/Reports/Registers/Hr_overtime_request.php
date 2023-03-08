@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\DB;
 class Hr_overtime_request extends Report_ParentController
 {
     use TraitReport;
+    protected $groupBy = 'first_name';
     public function getSqlStr($modeParams)
     {
-        $sql = "SELECT 
-        GROUP_CONCAT(workplace) AS ot_workplace,
+        $sql = " SELECT tb2.*,LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month ORDER BY year_months) AS maximum_allowed_ot_hours_year
+        FROM(SELECT 
+        GROUP_CONCAT(workplace SEPARATOR ', ') AS ot_workplace,
             user_category_name,
             user_category_desc,
             MAX(first_name) AS first_name,
@@ -27,8 +29,8 @@ class Hr_overtime_request extends Report_ParentController
             years_month,
             (200) AS maximum_allowed_ot_hours_year,
             ROW_NUMBER() OVER (PARTITION BY employeeid, years_month ORDER BY year_months) AS step_plus,
-            SUM(ABS(40 - SUM(total_overtime_hours))) OVER (PARTITION BY employeeid, years_month ORDER BY year_months) AS cumulative_remaining_hours_year,
-            (200 - SUM(ABS(40 - SUM(total_overtime_hours))) OVER (PARTITION BY employeeid, years_month ORDER BY year_months)) AS remaining_allowed_ot_hours_year
+            SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employeeid, years_month ORDER BY year_months) AS cumulative_remaining_hours_year,
+            (200 - SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employeeid, years_month ORDER BY year_months)) AS remaining_allowed_ot_hours_year
             
         FROM (
             SELECT otTb.*, wpus.name AS user_workplace
@@ -66,12 +68,13 @@ class Hr_overtime_request extends Report_ParentController
                 ) AS rgt_ot 
                 JOIN workplaces wp ON wp.id = rgt_ot.ot_workplace_id";
         if (isset($modeParams['ot_workplace_id'])) $sql .= "\n AND wp.id = '{{ot_workplace_id}}'";
-        $sql .= "\nORDER BY first_name, last_name, employeeid, year_months DESC) AS otTb, workplaces wpus
+        $sql .= "\n) AS otTb, workplaces wpus
             WHERE 1 = 1
             AND otTb.user_workplace_id = wpus.id
             GROUP BY user_id, employeeid, year_months, ot_workplace_id, years_month
         ) tbg
         GROUP BY year_months, years_month, employeeid, user_category_name, user_category_desc
+        ) tb2
         ORDER BY first_name, last_name, employeeid, year_months DESC";
         return $sql;
     }
@@ -116,17 +119,18 @@ class Hr_overtime_request extends Report_ParentController
                 "align" => "right",
             ],
             [
-                "title" => "Maximum Allowed OT Hours/Month",
+                "title" => "Maximum Allowed OT Hours (Month)",
                 "dataIndex" => "maximum_allowed_ot_hours",
                 "align" => "right",
             ],
             [
 
+                "title" => "Total Overtime Hours (Month)",
                 "dataIndex" => "total_overtime_hours",
                 "align" => "right",
             ],
             [
-                "title" => "Remaining Allowed OT Hours",
+                "title" => "Remaining Allowed OT Hours (Month)",
                 "dataIndex" => "remaining_allowed_ot_hours",
                 "align" => "right",
             ],
@@ -135,13 +139,19 @@ class Hr_overtime_request extends Report_ParentController
                 "dataIndex" => "years_month",
                 "align" => "right",
             ],
+
             [
-                "title" => "Cumulative Remaining Hours(Year)",
+                "title" => "Maximum Allowed OT Hours (Year)",
+                "dataIndex" => "maximum_allowed_ot_hours_year",
+                "align" => "right",
+            ],
+            [
+                "title" => "Cumulative Total Hours (Year)",
                 "dataIndex" => "cumulative_remaining_hours_year",
                 "align" => "right",
             ],
             [
-                // "title" => "Remaining Allowed OT Hours(Year)",
+                "title" => "Remaining Allowed OT Hours (Year)",
                 "dataIndex" => "remaining_allowed_ot_hours_year",
                 "align" => "right",
             ],

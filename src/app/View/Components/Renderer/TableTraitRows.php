@@ -99,7 +99,8 @@ trait TableTraitRows
         $start = (is_object($dataSource) && method_exists($dataSource, 'items')) ?  $dataSource->perPage() * ($dataSource->currentPage() - 1) : 0;
         if ($this->groupBy && !$this->groupKeepOrder) {
             if (is_object($dataSource)) $dataSource = $items;
-            usort($dataSource, fn ($a, $b) => strcasecmp($a[$this->groupBy] ?? 'zzz', $b[$this->groupBy] ?? 'zzz'));
+            $groupBy = $this->groupBy;
+            usort($dataSource, fn ($a, $b) => strcasecmp((is_object($a) ? $a->{$groupBy} : $a[$this->groupBy]) ?? 'zzz', (is_object($a) ? $a->{$groupBy} : $b[$this->groupBy]) ?? 'zzz'));
         }
 
         $lastIndex = "anything";
@@ -107,7 +108,12 @@ trait TableTraitRows
             $tds = $this->makeTd($columns, $dataLine, $start + $no + 1, $no, $tableDebug);
 
             if ($this->groupBy) {
-                $index = isset($dataLine[$this->groupBy][0]) ? strtoupper(substr($dataLine[$this->groupBy], 0, $this->groupByLength)) : "(EMPTY)";
+                $groupBy = $this->groupBy;
+                if (is_object($dataLine)) {
+                    $index = isset($dataLine->{$groupBy}[0]) ? strtoupper(substr($dataLine->{$groupBy}, 0, $this->groupByLength)) : "(EMPTY)";
+                } else {
+                    $index = isset($dataLine[$this->groupBy][0]) ? strtoupper(substr($dataLine[$this->groupBy], 0, $this->groupByLength)) : "(EMPTY)";
+                }
                 if ($index !== $lastIndex) {
                     $lastIndex = $index;
                     $trs[] = "<tr class='bg-gray-100 dark:bg-gray-800'><td class='p-2 text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td></tr>";
