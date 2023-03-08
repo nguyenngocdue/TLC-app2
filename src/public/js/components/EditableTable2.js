@@ -66,8 +66,10 @@ const setCellValueByName = (tableId, columnName, rowIndex, value) => {
     setValueOfTrByName(rows[rowIndex], columnName, value)
 }
 
-const rerenderTableBaseOnNewOrder = (tableId) => {
+const reRenderTableBaseOnNewOrder = (tableId) => {
+    // const debugEditable = true
     const rows = getAllRows(tableId)
+    if (debugEditable) console.log("rows", rows)
     const newTable = []
     for (let item of rows) newTable.push(item)
     const sortedTable = newTable.sort((a, b) => {
@@ -77,7 +79,7 @@ const rerenderTableBaseOnNewOrder = (tableId) => {
     })
 
     $("#" + tableId + ' > tbody').html(sortedTable)
-    // console.log("Re-render completed", tableId, sortedTable)
+    if (debugEditable) console.log("Re-render completed", tableId, sortedTable)
 }
 
 const getIndexFromFingerPrint = (tableId, fingerPrint) => {
@@ -140,7 +142,7 @@ const moveUpEditableTable = (params) => {
         setCellValueByName(tableId, '[order_no]', previousRowIndex, myValue)
         setCellValueByName(tableId, '[order_no]', myRowIndex, tmp)
     }
-    rerenderTableBaseOnNewOrder(tableId)
+    reRenderTableBaseOnNewOrder(tableId)
 }
 
 const moveDownEditableTable = (params) => {
@@ -166,7 +168,7 @@ const moveDownEditableTable = (params) => {
         setCellValueByName(tableId, '[order_no]', nextRowIndex, myValue)
         setCellValueByName(tableId, '[order_no]', myRowIndex, tmp)
     }
-    rerenderTableBaseOnNewOrder(tableId)
+    reRenderTableBaseOnNewOrder(tableId)
 }
 
 const duplicateEditableTable = (params) => {

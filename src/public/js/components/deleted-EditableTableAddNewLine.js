@@ -105,7 +105,7 @@ const addANewLine = (params) => {
                 case "number":
                     if (column['dataIndex'] === 'order_no') {
                         orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
-                        onChange = "rerenderTableBaseOnNewOrder(\"" + tableId + "\")"
+                        onChange = "reRenderTableBaseOnNewOrder(\"" + tableId + "\")"
                     } else {
                         onChange = "onChangeDropdown4({name:\"" + id + "\", table01Name:\"" + column['table01Name'] + "\", rowIndex:" + newRowIndex + "})"
                     }

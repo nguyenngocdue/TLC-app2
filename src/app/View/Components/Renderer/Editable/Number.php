@@ -33,15 +33,15 @@ class Number extends Component
     public function render()
     {
         if ($this->cell === 'DO_NOT_RENDER') return "";
+        // dump($this->onChange);
+        $onChange = $this->onChange ?? "onChangeDropdown4({name:'{$this->name}',table01Name:'{$this->table01Name}',rowIndex:{$this->rowIndex},saveOnChange:" . ($this->saveOnChange ? 1 : 0) . ")";
         return view('components.renderer.editable.number', [
             'placeholder' => $this->placeholder,
             'name' => $this->name,
             'onChange' => $this->onChange,
-            'rowIndex' => $this->rowIndex,
-            'table01Name' => $this->table01Name,
             'icon' => $this->icon,
-            'saveOnChange' => $this->saveOnChange,
             'readOnly' => $this->readOnly,
+            'onChange' => $onChange,
         ]);
     }
 }

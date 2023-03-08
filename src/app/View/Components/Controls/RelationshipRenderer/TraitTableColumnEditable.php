@@ -108,7 +108,7 @@ trait TraitTableColumnEditable
                 $newColumn['multiple'] = true;
             }
             if ($newColumn['dataIndex'] === 'order_no') {
-                $newColumn['onChange'] = "rerenderTableBaseOnNewOrder(`" . $table01Name . "`)";
+                $newColumn['onChange'] = "reRenderTableBaseOnNewOrder(`" . $table01Name . "`)";
             }
             // dump($newColumn);
             $result[] = $newColumn;
