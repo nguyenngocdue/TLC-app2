@@ -148,6 +148,31 @@ class Hr_overtime_request extends Report_ParentController
 
         return array_merge($workplaces, $months, $users);
     }
+    private function wrapValueInObjectWithCellColor($value)
+    {
+        switch (true) {
+            case $value > 40:
+                return (object)[
+                    'cell_color' => 'bg-red-400',
+                    'value' => $value,
+                ];
+            case $value > 30:
+                return (object)[
+                    'cell_color' => 'bg-pink-400',
+                    'value' => $value,
+                ];
+            case $value > 20:
+                return (object)[
+                    'cell_color' => 'bg-yellow-400',
+                    'value' => $value,
+                ];
+            case $value >= 0:
+                return (object)[
+                    'cell_color' => 'bg-green-400',
+                    'value' => $value,
+                ];
+        }
+    }
     protected function enrichDataSource($dataSource, $modeParams)
     {
         $isNullParams = $this->isNullModeParams($modeParams);
@@ -161,25 +186,9 @@ class Hr_overtime_request extends Report_ParentController
             $strTeam = "<span title='$teamDesc'>$teamName</span>";
             $dataSource[$key]->user_category_name = $strTeam;
 
-
             // display colors for total_overtime_hours
             $hours = $value->total_overtime_hours * 1;
-            $strHour = "";
-            if ($hours > 40) {
-                $strHour = (object)[
-                    'cell_color' => 'bg-red-400',
-                    'value' => $hours,
-                ];
-            }
-            if (20 < $hours && $hours <= 40) {
-                $strHour = (object) [
-                    'cell_color' => 'bg-yellow-300',
-                    'value' => $hours,
-                ];
-            }
-            if ($hours <= 20) {
-                $strHour = $hours;
-            }
+            $strHour = $this->wrapValueInObjectWithCellColor($hours);
             $dataSource[$key]->total_overtime_hours = $strHour;
         }
 

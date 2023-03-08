@@ -74,7 +74,10 @@ trait TableTraitRows
                     $cellColor = $rawData->cell_color;
                 }
             }
-            $td = "<td class='$cellColor $hidden dark:border-gray-600 $borderRight $align' $styleStr>";
+            $breakWords = $this->noCss ? "break-all" : "";
+            $tinyText = $this->noCss ? "text-xs" : "";
+            $borderGray = $this->noCss ? "border-gray-400" : "";
+            $td = "<td class='dark:border-gray-600 $tinyText $breakWords $cellColor $hidden $borderRight $borderGray $align' $styleStr>";
             // $td .= "<p class='bg-red-200 p-2'>";
             $td .= $rendered;
             // $td .= "</p>";

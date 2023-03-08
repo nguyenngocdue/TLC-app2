@@ -45,9 +45,10 @@ trait TableTraitColumns
         $classDiv = ($this->rotate45Width) ? "rotated-title-div text-right w-[{$rotate45Width}px]" : "";
         $borderRight = $isLastColumn ? "" : "border border-r-2 border-t-0";
         $borderRight = ($this->rotate45Width) ? "" : $borderRight;
+        $tinyText = $this->noCss ? "text-xs" : "";
         $th = "";
         $th .= "<th class='px-4 py-3 $borderRight $classTh' $styleStr title='$tooltip'>";
-        $th .= "<div class='$classDiv text-gray-700 dark:text-gray-300'>";
+        $th .= "<div class='$classDiv $tinyText text-gray-700 dark:text-gray-300'>";
         $th .= "<span>" . $title . "</span>";
         $th .= "</div>";
         $th .= "</th>";
