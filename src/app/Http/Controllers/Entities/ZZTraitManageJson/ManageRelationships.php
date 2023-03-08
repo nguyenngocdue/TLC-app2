@@ -55,7 +55,7 @@ class ManageRelationships extends Manage_Parent
                 "dataIndex" => "renderer_view_all_unit",
                 "editable" => true,
                 "renderer" => "dropdown",
-                "cbbDataSource" => ['', 'hour', 'item'],
+                "cbbDataSource" => JsonControls::getParamUnits(),
             ],
             [
                 "dataIndex" => "renderer_edit",
@@ -143,7 +143,7 @@ class ManageRelationships extends Manage_Parent
             $result[$key]["name"] = $key;
             foreach ($columns as $column => $value) {
                 if ($column === 'renderer_view_all_unit') {
-                    if ($result[$key]['renderer_view_all'] !== 'agg_sum') {
+                    if (!in_array($result[$key]['renderer_view_all'], ['agg_sum', 'agg_count'])) {
                         $result[$key][$column] = 'DO_NOT_RENDER';
                     }
                 }

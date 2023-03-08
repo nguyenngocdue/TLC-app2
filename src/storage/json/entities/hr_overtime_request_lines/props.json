@@ -183,7 +183,7 @@
         "name": "_total_time",
         "column_name": "total_time",
         "column_type": "float",
-        "label": "Total Time (Hrs)",
+        "label": "Total Time (Hours)",
         "control": "number",
         "align": "",
         "col_span": "",
