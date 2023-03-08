@@ -60,7 +60,9 @@ function data() {
         },
         isIntermediateOpen: {},
         toggleIntermediate(type) {
-            const status = document.getElementById('status')
+            const status =
+                document.getElementById('status') ??
+                document.getElementById('select-dropdown-status')
             status.value = type
             this.isIntermediateOpen[type] = !this.isIntermediateOpen[type]
         },

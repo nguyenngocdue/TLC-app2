@@ -276,7 +276,7 @@ abstract class AbstractViewAllController extends Controller
             $model = $this->typeModel;
             $data = App::make($model)->find($id);
             $data->delete();
-            return response()->json(['message' => 'Delete User Successfully'], 200);
+            return response()->json(['message' => 'Delete Item Successfully'], 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => $th], 404);
         }

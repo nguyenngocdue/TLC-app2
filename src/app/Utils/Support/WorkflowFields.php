@@ -19,10 +19,6 @@ class WorkflowFields
         self::$type = $type;
         $buttonSave = true;
         $props = $superProps['props'];
-        if (!$isCheckColumnStatus) {
-            return [[], $props, [], [], $buttonSave, []];
-        }
-        $statuses = $superProps['statuses'];
         $definitions = $superProps['settings']['definitions'] ?? [];
         if (!$status) {
             if (!empty($definitions)) {
@@ -31,6 +27,11 @@ class WorkflowFields
                 $status = array_shift(array_values($definitions));
             }
         }
+        if (!$isCheckColumnStatus) {
+            return [$status = null, [], $props, [], [], $buttonSave, []];
+        }
+        $statuses = $superProps['statuses'];
+
         $hideSaveButton = $definitions['hide-save-btn'] ?? [];
         $buttonSave = !($status == 'closed') && !in_array($status, $hideSaveButton);
         $intermediate = $superProps['intermediate'];
@@ -49,12 +50,12 @@ class WorkflowFields
         foreach ($transitions as $value) {
             $actionButtons[$value] = $statuses[$value]['action-buttons'];
         }
-        return [$statuses, $props, $actionButtons, $transitions, $buttonSave, $propsIntermediate];
+        return [$status, $statuses, $props, $actionButtons, $transitions, $buttonSave, $propsIntermediate];
     }
-    static function parseFields($props, $values, $defaultValues, $status)
+    static function parseFields($props, $values, $defaultValues, $status, $isCheckColumnStatus)
     {
         $result = [];
-        if ($status) {
+        if ($isCheckColumnStatus) {
             $workflow = self::getSuperWorkflowByRoleSet(self::$type)['workflows'][$status];
             $visible = $workflow['visible'];
             $readonly = $workflow['readonly'];

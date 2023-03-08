@@ -3,7 +3,7 @@
 $editType = Str::plural($type);
 $id = $action === "edit" ? $values->id : "";
 $status = $status ?? $values->status ?? null;
-[$statuses,$props,$actionButtons,$transitions,$buttonSave,$propsIntermediate] = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$isCheckColumnStatus);
+[$status,$statuses,$props,$actionButtons,$transitions,$buttonSave,$propsIntermediate] = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$isCheckColumnStatus);
 $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
 @endphp
 @section('topTitle', $topTitle)
@@ -28,7 +28,7 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
 <div class="px-4">
     <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}"/>
     <x-controls.header-alert-validation :strProps="$props" />
-    @if($status)
+    @if($status && !$action === 'create')
         <div class="w-full mb-8 bg-white rounded-lg  dark:bg-gray-800">
             <div class="p-4">
                 @foreach($statuses as $key => $value)
