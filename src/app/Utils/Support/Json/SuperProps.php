@@ -16,26 +16,29 @@ class SuperProps
     {
         $allRelationship = Relationships::getAllOf($type);
         $modelPath = Str::modelPathFrom($type);
-        $dummyInstance = new ($modelPath);
+        $dummyInstance = null;
+        if ($type !== 'role_set') $dummyInstance = new ($modelPath);
         $result = [];
         foreach ($allRelationship as $key => $rls) {
             $column_name = $rls['control_name'];
             $rls['control_name_function'] = substr($key, 1); //remove first "_";
 
-            foreach ($dummyInstance->eloquentParams as $key2 => $params) {
-                if ("_" . $key2 === $key) {
-                    $rls['eloquentParams'] = $params;
-                    $rls['table'] = (new $params[1])->getTable();
-                    $rls['type'] = ucfirst(Str::singular($rls['table']));
-                    break;
+            if ($dummyInstance) {
+                foreach ($dummyInstance->eloquentParams as $key2 => $params) {
+                    if ("_" . $key2 === $key) {
+                        $rls['eloquentParams'] = $params;
+                        $rls['table'] = (new $params[1])->getTable();
+                        $rls['type'] = ucfirst(Str::singular($rls['table']));
+                        break;
+                    }
                 }
-            }
-            foreach ($dummyInstance->oracyParams as $key2 => $params) {
-                if ("_" . $key2 === $key) {
-                    $rls['oracyParams'] = $params;
-                    $rls['table'] = (new $params[1])->getTable();
-                    $rls['type'] = ucfirst(Str::singular($rls['table']));
-                    break;
+                foreach ($dummyInstance->oracyParams as $key2 => $params) {
+                    if ("_" . $key2 === $key) {
+                        $rls['oracyParams'] = $params;
+                        $rls['table'] = (new $params[1])->getTable();
+                        $rls['type'] = ucfirst(Str::singular($rls['table']));
+                        break;
+                    }
                 }
             }
 
