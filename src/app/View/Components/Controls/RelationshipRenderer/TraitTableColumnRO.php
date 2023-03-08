@@ -4,11 +4,13 @@ namespace App\View\Components\Controls\RelationshipRenderer;
 
 trait TraitTableColumnRO
 {
-    private function makeReadOnlyColumns($columns, $sp, $tableName)
+    private function makeReadOnlyColumns($columns, $sp, $tableName, $noCss)
     {
         // dump($sp);
+        // dump($columns);
         $result = [];
         foreach ($columns as $column) {
+            if (isset($column['no_print']) && $column['no_print']) continue;
             $newColumn = $column;
             if (!isset($sp['props']["_" . $column['dataIndex']])) {
                 dd("Column [" . $column['dataIndex'] . "] not found in SuperProps of " . $tableName . ". Pls double check your ManageProps screen.");

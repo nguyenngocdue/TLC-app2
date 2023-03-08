@@ -155,7 +155,7 @@ class RelationshipRenderer extends Component
                 // dump($dataSourceWithOld);
                 // dump($dataSource);
                 // $tableName = $lineModelPath::getTableName();
-                $roColumns = $this->makeReadOnlyColumns($columns, $sp, $tableName);
+                $roColumns = $this->makeReadOnlyColumns($columns, $sp, $tableName, $this->noCss);
                 // dump($roColumns);
                 return view('components.controls.many-line-params', [
                     'table01ROName' => $this->table01Name . "RO",

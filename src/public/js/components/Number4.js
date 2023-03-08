@@ -3,7 +3,7 @@ const changeBgColor = (e, tableId) => {
     const value = getEById(id).val()
     const filedName = getFieldNameInTable01FormatJS(e.name, tableId)
     // console.log('ABC', filedName, value, e)
-    if (['remaining_hours', 'allowed_hours'].includes(filedName)) {
+    if (['remaining_hours', 'allowed_hours_111'].includes(filedName)) {
         // console.log(id, value)
         let color = 'bg-gray-100'
         switch (true) {

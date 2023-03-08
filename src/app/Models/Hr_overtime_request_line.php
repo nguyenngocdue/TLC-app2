@@ -56,8 +56,8 @@ class Hr_overtime_request_line extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ["dataIndex" => 'order_no', 'invisible' => !true],
-            ["dataIndex" => 'id', 'title' => 'OT Line ID'],
+            ["dataIndex" => 'order_no', 'invisible' => !true, 'no_print' => true],
+            ["dataIndex" => 'id', 'title' => 'OT Line ID', 'no_print' => true],
             ['dataIndex' => 'hr_overtime_request_id', 'title' => 'OT ID', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'user_id', 'title' => 'Full Name', 'value_as_user_id' => true, 'cloneable' => true],
             ['dataIndex' => 'employeeid'],
@@ -70,9 +70,9 @@ class Hr_overtime_request_line extends ModelExtended
             ['dataIndex' => 'total_time'],
             ['dataIndex' => 'remaining_hours', 'cloneable' => !true],
             ['dataIndex' => 'sub_project_id', 'cloneable' => true],
-            ['dataIndex' => 'work_mode_id', 'cloneable' => true],
+            ['dataIndex' => 'work_mode_id', 'cloneable' => true, 'no_print' => true],
             ['dataIndex' => 'remark'],
-            ['dataIndex' => 'status', 'cloneable' => true],
+            ['dataIndex' => 'status', 'cloneable' => true, 'no_print' => true],
         ];
     }
 }

@@ -36,6 +36,19 @@
     <x-renderer.button id="btnAddANewLine_{{$table01Name}}" type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
     <i id="iconSpin_{{$table01Name}}" class="fa-duotone fa-spinner fa-spin text-green-500" style="display: none"></i>
     <input class="bg-gray-200" readonly name="tableNames[{{$table01Name}}]" value="{{$tableName}}" type="{{$tableDebugTextHidden}}" />
+    <br/>
+    <br/>
+    @if($tableName == 'hr_overtime_request_lines')
+    <x-renderer.card title="Remaining Hours Legend">
+        <div class="grid lg:grid-cols-5 md:grid-cols-5 grid-cols-2">
+            <div class="flex"><div class="border h-6 w-6 mr-2 bg-red-600"></div> < 0 hours/month</div>
+            <div class="flex"><div class="border h-6 w-6 mr-2 bg-pink-400"></div> >= 0 hours/month</div>
+            <div class="flex"><div class="border h-6 w-6 mr-2 bg-orange-300"></div> >= 10 hours/month</div>
+            <div class="flex"><div class="border h-6 w-6 mr-2 bg-yellow-300"></div> >= 20 hours/month</div>
+            <div class="flex"><div class="border h-6 w-6 mr-2 bg-green-300"></div> >= 30 hours/month</div>
+        </div>
+    </x-renderer.card>
+    @endif
     {{-- This is for when clicked "Add a new item", if the column is parent_id and parent_type and might be invisible, --}}
     {{-- its value will get from here --}}
     <input class="bg-gray-200" readonly title="entityParentType" id="entityParentType" value="{{$entityType}}" type="{{$tableDebugTextHidden}}" />

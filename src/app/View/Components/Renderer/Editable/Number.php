@@ -18,7 +18,7 @@ class Number extends Component
         private $placeholder = "",
         private $cell = null,
         private $onChange = null,
-        private $table01Name = null,
+        private $table01Name = 'table00',
         private $rowIndex = -1,
         private $icon = null,
         private $saveOnChange = false,
@@ -29,7 +29,7 @@ class Number extends Component
     function getBgColor()
     {
         $fieldName = Str::getFieldNameInTable01Format($this->name, $this->table01Name);
-        if (in_array($fieldName, ['remaining_hours', 'allowed_hours'])) {
+        if (in_array($fieldName, ['remaining_hours', 'allowed_hours_111'])) {
             $value = $this->cell;
             // dump($this->cell);
             switch (true) {

@@ -34,15 +34,24 @@ class Card extends Component
             $title = $data['attributes']["title"];
             $description = $data['attributes']["description"] ?? "";
             $class = $this->class;
-            return "<div id='$this->idHtml' component='renderer/card' class='break-normal min-w-0 px-{$this->px} py-{$this->py}  border dark:bg-gray-800 dark:border-gray-600 rounded-lg shadow-xs $this->style $class' >" .
-                (($title) ? "<h4 class='mb-4 font-semibold text-gray-600 dark:text-gray-300'>{$title} </h4>" : "") .
-                "<p class='text-gray-600 dark:text-gray-300'>
-                    $description
-                </p>
-                <p class='text-gray-600 dark:text-gray-300 break-keep'>
-                    $items
-                </p>
-            </div>";
+            $result = "<fieldset id='$this->idHtml' component='renderer/card' class='break-normal min-w-0 px-{$this->px} py-{$this->py} border dark:bg-gray-800 dark:border-gray-600 rounded-lg shadow-xs $this->style $class'>";
+            if ($title) $result .= "<legend><h4 class='px-2 font-semibold text-gray-600 dark:text-gray-300'>$title</h4></legend>";
+            if ($description) $result .= $description;
+            $result .= "<p class='text-gray-600 dark:text-gray-300 break-keep'>";
+            $result .= $items;
+            $result .= "</p>";
+            $result .= "</fieldset>";
+
+            // return "<div id='$this->idHtml' component='renderer/card' class='break-normal min-w-0 px-{$this->px} py-{$this->py}  border dark:bg-gray-800 dark:border-gray-600 rounded-lg shadow-xs $this->style $class' >" .
+            //     (($title) ? "<h4 class='mb-4 font-semibold text-gray-600 dark:text-gray-300'>{$title} </h4>" : "") .
+            //     "<p class='text-gray-600 dark:text-gray-300'>
+            //         $description
+            //     </p>
+            //     <p class='text-gray-600 dark:text-gray-300 break-keep'>
+            //         $items
+            //     </p>
+            // </div>";
+            return $result;
         };
     }
 }
