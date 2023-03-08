@@ -29,19 +29,19 @@ class Number extends Component
     function getBgColor()
     {
         $fieldName = Str::getFieldNameInTable01Format($this->name, $this->table01Name);
-        if ($fieldName === 'remaining_hours') {
+        if (in_array($fieldName, ['remaining_hours', 'allowed_hours'])) {
             $value = $this->cell;
             // dump($this->cell);
             switch (true) {
                 case $value < 0:
                     return 'bg-red-600';
-                case $value < 10:
-                    return 'bg-red-400';
-                case $value < 20:
+                case $value <= 10:
+                    return 'bg-pink-400';
+                case $value <= 20:
                     return 'bg-orange-300';
-                case $value < 30:
+                case $value <= 30:
                     return 'bg-yellow-300';
-                case $value < 40:
+                case $value <= 40:
                     return 'bg-green-300';
             }
         }
