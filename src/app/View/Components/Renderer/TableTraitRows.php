@@ -62,7 +62,7 @@ trait TableTraitRows
                     break;
             }
             $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
-            $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
+            $borderRight = ($index < $columnCount - 1) ? "border-r border-gray-400" : "";
             $hidden = $this->isInvisible($column) ? "hidden" : "";
             $styleStr = $this->getStyleStr($column);
             $rendered = ($tableDebug && ($renderer != 'no.') ? $name : "") . $rendered;
@@ -74,7 +74,9 @@ trait TableTraitRows
                     $cellColor = $rawData->cell_color;
                 }
             }
-            $td = "<td class='$cellColor $hidden dark:border-gray-600 $borderRight $align' $styleStr>";
+            $breakWords = $this->noCss ? "break-all" : "";
+            $tinyText = $this->noCss ? "text-xs" : "";
+            $td = "<td class='dark:border-gray-600 $tinyText $breakWords $cellColor $hidden $borderRight $align' $styleStr>";
             // $td .= "<p class='bg-red-200 p-2'>";
             $td .= $rendered;
             // $td .= "</p>";
