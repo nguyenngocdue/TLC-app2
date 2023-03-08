@@ -30,9 +30,9 @@ class DateTime extends Component
             case "picker_time":
                 return date(Constant::FORMAT_TIME, $timestamp);
             case "picker_month":
-                return date(Constant::FORMAT_YEAR_MONTH0, $timestamp);
+                return date(Constant::FORMAT_MONTH, $timestamp);
             case "picker_week":
-                return "W" . date("W/Y", $timestamp);
+                return "W" . date(Constant::FORMAT_WEEK, $timestamp);
             case "picker_quarter":
                 return "Q" . ceil(date("m", $timestamp) / 3) . "/" . date("Y", $timestamp);
             case "picker_year":

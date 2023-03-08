@@ -9,10 +9,10 @@ class Dropdown extends Component
 
     public function __construct(
         private $dataSource = [],
-        private $name = 'name',
+        private $name = 'No name',
         private $itemsSelected = [],
-        private $hiddenItems = [],
-        private $isSetValue  = false
+        private $title = "No title",
+
     ) {
     }
 
@@ -23,8 +23,9 @@ class Dropdown extends Component
             'dataSource' =>  $this->dataSource,
             'name' => $this->name,
             'itemsSelected' => $this->itemsSelected,
-            'hiddenItems' => $this->hiddenItems,
-            'isSetValue' => $this->isSetValue
+            'name' => $this->name,
+            'title' => $this->title,
+
         ]);
     }
 }

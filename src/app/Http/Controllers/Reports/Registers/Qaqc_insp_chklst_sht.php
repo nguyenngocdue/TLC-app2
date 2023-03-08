@@ -102,6 +102,22 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
         $dataColumn = array_merge($adds, $sqlCol);
         return  $dataColumn;
     }
+
+    protected function getParamColumns()
+    {
+        return [
+            [
+                'title' => 'Sub Porject',
+                'dataIndex' => 'sub_project_id'
+            ],
+            [
+                'title' => 'QAQC Inspect Template',
+                'dataIndex' => 'qaqc_insp_tmpl_id'
+            ]
+        ];
+    }
+
+
     private function changeValueData($dataSource)
     {
         $iconPass = '<div class="bg-green-400"><i class="fa-solid fa-circle-check" title="Pass"></i> </div>';

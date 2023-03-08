@@ -1,7 +1,7 @@
 {
-    "_rt_remaining_hours": {
-        "name": "_rt_remaining_hours",
-        "column_name": "rt_remaining_hours",
+    "_allowed_hours": {
+        "name": "_allowed_hours",
+        "column_name": "allowed_hours",
         "listen_action": "ajax_request_scalar",
         "triggers": "user_id,ot_date,id",
         "listen_to_fields": "",
@@ -46,7 +46,20 @@
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "attrs_to_compare": "",
-        "expression": "Math.round((to_time - from_time - break_time * 60) \/3600 * 100)\/100",
+        "expression": "Math.round((to_time - from_time - break_time * 60)\/3600*100)\/100",
+        "ajax_response_attribute": "",
+        "ajax_item_attribute": "",
+        "ajax_default_value": ""
+    },
+    "_remaining_hours": {
+        "name": "_remaining_hours",
+        "column_name": "remaining_hours",
+        "listen_action": "expression",
+        "triggers": "allowed_hours,total_time",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "Math.round((allowed_hours - total_time)*100)\/100",
         "ajax_response_attribute": "",
         "ajax_item_attribute": "",
         "ajax_default_value": ""

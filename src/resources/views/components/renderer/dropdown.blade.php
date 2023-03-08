@@ -1,6 +1,6 @@
 <div class="w-full">
     <div class=" text-left whitespace-nowrap">
-        <span class="px-1 ">{{ucwords(str_replace('_', " ", $name ))}}:</span>
+        <span class="px-1 ">{{$title}}</span>
     </div>
     <div class=" w-full">
         <select name='{{$name}}' id="{{$name}}" class="w-full form-select  bg-white border border-gray-300  text-sm rounded-lg block   focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">

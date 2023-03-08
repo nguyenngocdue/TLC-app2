@@ -228,6 +228,8 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex) => 
     }
     if (enoughParams) {
         if (debugListener) console.log("Sending AjaxRequest with data:", data, url)
+        const id = makeIdFrom(table01Name, column_name, rowIndex)
+        getEById(id).hide()
         $.ajax({
             url, data,
             success: (response) => {
@@ -241,11 +243,12 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex) => 
                 } else {
                     value = response[ajax_response_attribute][0][ajax_item_attribute]
                 }
-                const id = makeIdFrom(table01Name, column_name, rowIndex)
                 if (debugListener) console.log("Assigning", id, "with value", value)
                 if (debugListener) console.log("Response", response)
                 getEById(id).val(value)
                 getEById(id).trigger('change')
+
+                getEById(id).show()
             },
             error: (response) => console.error(response)
         })
@@ -322,6 +325,7 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
         const value = getEById(name).val()
         const data = { [fieldName]: value }
         // console.log(data)
+
         $.ajax({
             url: '/api/v1/entity/' + tableName + '_updateShort/' + id,
             type: 'POST',

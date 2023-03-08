@@ -5,8 +5,9 @@ namespace App\View\Components\Renderer\Editable;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
-class PickerDate4 extends Component
+class PickerAll4 extends Component
 {
     /**
      * Create a new component instance.
@@ -22,7 +23,8 @@ class PickerDate4 extends Component
         private $rowIndex = -1,
         private $icon = null,
         private $saveOnChange = false,
-
+        private $readOnly = false,
+        private $control = 'picker_date',
     ) {
         //In case of listeners, the data was parsed in to array
         if (is_array($this->cell)) {
@@ -42,9 +44,9 @@ class PickerDate4 extends Component
     public function render()
     {
         if ($this->cell === 'DO_NOT_RENDER') return "";
-        $this->cell = DateTimeConcern::convertForLoading('picker_date', $this->cell);
-        return view('components.renderer.editable.picker-date4', [
-            'placeholder' => $this->placeholder,
+        $this->cell = DateTimeConcern::convertForLoading($this->control, $this->cell);
+        return view('components.renderer.editable.picker-all4', [
+            'placeholder' => Str::getPickerPlaceholder($this->control),
             'name' => $this->name,
             'cell' => $this->cell,
             'onChange' => $this->onChange,
@@ -52,6 +54,8 @@ class PickerDate4 extends Component
             'table01Name' => $this->table01Name,
             'icon' => $this->icon,
             'saveOnChange' => $this->saveOnChange,
+            'readOnly' => $this->readOnly,
+            'control' => $this->control,
         ]);
     }
 }

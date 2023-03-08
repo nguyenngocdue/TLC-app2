@@ -7,54 +7,44 @@ use Carbon\Carbon;
 
 class DateTimeConcern
 {
-    public static function format($value, $formatFrom, $formatTo)
+    private static function format($value, $formatFrom, $formatTo)
     {
         //Deal with old()
         if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
         return Carbon::createFromFormat($formatFrom, $value)->format($formatTo);
     }
-    public static function format2($value, $formatFrom)
-    {
-        return Carbon::createFromFormat($formatFrom, $value);
-    }
-    public static function formatQuarterForLoading($value, $formatFrom, $formatTo)
+    private static function formatQuarterForLoading($value, $formatFrom, $formatTo)
     {
         //Deal with old()
-        if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
+        // if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
+        $regexQuarter = '/[Qq][1-4][\/][0-9]{4}/m';
+        if (preg_match($regexQuarter, $value)) return $value;
         $result = Carbon::createFromFormat($formatFrom, $value)->format($formatTo);
         $quarter = Carbon::createFromFormat($formatFrom, $value)->quarter;
         return str_replace('q', $quarter, $result);
     }
-    public static function formatWeekForLoading($value, $formatFrom, $formatTo)
+    private static function formatWeekForLoading($value, $formatFrom, $formatTo)
     {
         //Deal with old()
-        if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
+        // if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
+        $regexWeek = '/[Ww]([0-4][0-9]|5[0-3])[\/][0-9]{4}/m';
+        if (preg_match($regexWeek, $value)) return $value;
         $result = Carbon::createFromFormat($formatFrom, $value)->format($formatTo);
         return "W" . $result;
     }
-    public static function formatQuarterForSaving($value, $formatTo)
+    private static function formatQuarterForSaving($value, $formatTo)
     {
         $value = substr($value, 1);
         [$quarter, $year] = explode('/', $value);
         $result = Carbon::createFromDate($year, (($quarter - 1) * 3) + 1, 1)->startOfQuarter();
         return $result->format($formatTo);
     }
-    public static function formatWeekForSaving($value, $formatTo)
+    private static function formatWeekForSaving($value, $formatTo)
     {
         $value = substr($value, 1);
         [$week, $year] = explode('/', $value);
         $result = Carbon::parse("{$year}-W{$week}-1")->startOfWeek();
         return $result->format($formatTo);
-    }
-    public static function formatWeek2($value)
-    {
-        [$week, $year] = explode('/', $value);
-        return Carbon::parse("{$year}-W{$week}");
-    }
-    public static function formatQuarter2($value)
-    {
-        [$quarter, $year] = explode('/', $value);
-        return Carbon::createFromDate($year, (($quarter - 1) * 3) + 1);
     }
     public static function convertForLoading($control, $value)
     {
@@ -68,7 +58,7 @@ class DateTimeConcern
                     break;
                 case "picker_month":
                     $formatFrom = Constant::FORMAT_DATE_MYSQL;
-                    $formatTo = Constant::FORMAT_YEAR_MONTH;
+                    $formatTo = Constant::FORMAT_MONTH;
                     $value = self::format($value, $formatFrom, $formatTo);
                     break;
                 case "picker_week":
@@ -102,7 +92,6 @@ class DateTimeConcern
         }
         return $value;
     }
-
     public static function convertForSaving($control, $value)
     {
         if (!$value) return null;
@@ -114,7 +103,7 @@ class DateTimeConcern
                     $value = self::format($value, $formatFrom, $formatTo);
                     break;
                 case "picker_month":
-                    $formatFrom = Constant::FORMAT_YEAR_MONTH;
+                    $formatFrom = Constant::FORMAT_MONTH;
                     $formatTo = Constant::FORMAT_DATE_MYSQL;
                     $value = self::format($value, $formatFrom, $formatTo);
                     break;
@@ -147,5 +136,19 @@ class DateTimeConcern
             // dd();
         }
         return $value;
+    }
+    public static function format2($value, $formatFrom)
+    {
+        return Carbon::createFromFormat($formatFrom, $value);
+    }
+    public static function formatWeek2($value)
+    {
+        [$week, $year] = explode('/', $value);
+        return Carbon::parse("{$year}-W{$week}");
+    }
+    public static function formatQuarter2($value)
+    {
+        [$quarter, $year] = explode('/', $value);
+        return Carbon::createFromDate($year, (($quarter - 1) * 3) + 1);
     }
 }

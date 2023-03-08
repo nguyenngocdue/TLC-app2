@@ -27,13 +27,19 @@ trait TraitTableColumnEditable
 
             $newColumn['properties']['lineType'] = Str::singular($tableName);
             $newColumn['properties']['table01Name'] = $table01Name;
+
+            $isReadOnly = ($prop['read_only'] ?? false) === 'true'; //<<CONFIG_MIGRATE
+            $newColumn['properties']['readOnly'] = $isReadOnly;
+
+            $newColumn['title'] .= $isRequired ? "</br><i class='text-red-400' title='required'>*</i>" : "";
+
             $isSaveOnChange = ($prop['save_on_change'] ?? false) === 'true'; //<<CONFIG_MIGRATE
             $newColumn['properties']['saveOnChange'] = $isSaveOnChange;
-            $newColumn['title'] .= $isRequired ? "</br><i class='text-red-400' title='required'>*</i>" : "";
             $newColumn['title'] .= $isSaveOnChange ? "</br><i class='fa-duotone fa-floppy-disk' title='Save On Change'></i>" : "";
 
             // dump($newColumn);
             $classNameText = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
+            if ($isReadOnly) $classNameText = "readonly $classNameText";
             switch ($prop['control']) {
                 case 'id':
                     $newColumn['renderer'] = 'read-only-text';
@@ -58,8 +64,6 @@ trait TraitTableColumnEditable
                     $newColumn['classList'] = $classNameText;
                     $newColumn['type'] = $this->type;
                     $newColumn['properties']['tableName'] = $prop['relationships']['table'];
-
-                    // dump($newColumn);
                     break;
                 case 'textarea':
                     $newColumn['renderer'] = 'textarea';
@@ -78,23 +82,17 @@ trait TraitTableColumnEditable
                     $newColumn['classList'] = $classNameText;
                     break;
                 case 'picker_time':
-                    $newColumn['renderer'] = 'picker-time4';
-                    $newColumn['editable'] = true;
-                    $newColumn['properties']['icon'] = 'fa-duotone fa-clock';
-                    $newColumn['properties']['placeholder'] = 'HH:MM';
-                    $newColumn['classList'] = $classNameText;
-                    break;
                 case 'picker_date':
-                    $newColumn['renderer'] = 'picker-date4';
-                    $newColumn['editable'] = true;
-                    $newColumn['properties']['placeholder'] = 'DD/MM/YYYY';
-                    $newColumn['classList'] = $classNameText;
-                    break;
                 case 'picker_datetime':
-                    $newColumn['renderer'] = 'picker-datetime4';
+                case 'picker_week':
+                case 'picker_month':
+                case 'picker_quarter':
+                case 'picker_year':
+                    $newColumn['renderer'] = 'picker-all4';
                     $newColumn['editable'] = true;
-                    $newColumn['properties']['placeholder'] = 'DD/MM/YYYY HH:MM';
                     $newColumn['classList'] = $classNameText;
+                    $newColumn['properties']['control'] = $prop['control'];
+                    $newColumn['properties']['placeholder'] = Str::getPickerPlaceholder($prop['control']);
                     break;
                 case 'attachment':
                     $newColumn['renderer'] = "text";
@@ -111,7 +109,7 @@ trait TraitTableColumnEditable
                 $newColumn['multiple'] = true;
             }
             if ($newColumn['dataIndex'] === 'order_no') {
-                $newColumn['onChange'] = "rerenderTableBaseOnNewOrder(`" . $table01Name . "`)";
+                $newColumn['onChange'] = "reRenderTableBaseOnNewOrder(`" . $table01Name . "`)";
             }
             // dump($newColumn);
             $result[] = $newColumn;

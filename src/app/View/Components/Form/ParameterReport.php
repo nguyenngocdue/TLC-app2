@@ -16,6 +16,7 @@ class ParameterReport extends Component
         private $itemsSelected = [],
         private $dataSource = [],
         private $hiddenItems = [],
+        private $columns = [],
         private $route = '',
         private $entity = '',
         private $typeReport = '',
@@ -33,7 +34,8 @@ class ParameterReport extends Component
             'hiddenItems' => $this->hiddenItems,
             'route' => $this->route,
             'entity' => $this->entity,
-            'typeReport' => $this->typeReport
+            'typeReport' => $this->typeReport,
+            'columns' => $this->columns
         ]);
     }
 }

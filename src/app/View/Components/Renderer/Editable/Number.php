@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\Editable;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class Number extends Component
 {
@@ -21,7 +22,30 @@ class Number extends Component
         private $rowIndex = -1,
         private $icon = null,
         private $saveOnChange = false,
+        private $readOnly = false,
     ) {
+    }
+
+    function getBgColor()
+    {
+        $fieldName = Str::getFieldNameInTable01Format($this->name, $this->table01Name);
+        if (in_array($fieldName, ['remaining_hours', 'allowed_hours'])) {
+            $value = $this->cell;
+            // dump($this->cell);
+            switch (true) {
+                case $value < 0:
+                    return 'bg-red-600';
+                case $value <= 10:
+                    return 'bg-pink-400';
+                case $value <= 20:
+                    return 'bg-orange-300';
+                case $value <= 30:
+                    return 'bg-yellow-300';
+                case $value <= 40:
+                    return 'bg-green-300';
+            }
+        }
+        return ($this->readOnly)  ? "readonly" : "";
     }
 
     /**
@@ -32,14 +56,19 @@ class Number extends Component
     public function render()
     {
         if ($this->cell === 'DO_NOT_RENDER') return "";
+        // dump($this->onChange);
+        $onChange = $this->onChange ?? "onChangeDropdown4({name:'{$this->name}',table01Name:'{$this->table01Name}',rowIndex:{$this->rowIndex},saveOnChange:" . ($this->saveOnChange ? 1 : 0) . "})";
+        $bgColor = $this->getBgColor();
+        // dump($bgColor);
         return view('components.renderer.editable.number', [
             'placeholder' => $this->placeholder,
             'name' => $this->name,
             'onChange' => $this->onChange,
-            'rowIndex' => $this->rowIndex,
-            'table01Name' => $this->table01Name,
             'icon' => $this->icon,
-            'saveOnChange' => $this->saveOnChange,
+            'readOnly' => $this->readOnly,
+            'table01Name' => $this->table01Name,
+            'onChange' => $onChange,
+            'bgColor' => $bgColor,
         ]);
     }
 }

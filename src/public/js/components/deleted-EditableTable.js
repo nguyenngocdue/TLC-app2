@@ -64,7 +64,7 @@ const setCellValueByName = (tableId, columnName, rowIndex, value) => {
     setValueOfTrByName(rows[rowIndex], columnName, value)
 }
 
-const rerenderTableBaseOnNewOrder = (tableId) => {
+const reRenderTableBaseOnNewOrder = (tableId) => {
     const rows = getAllRows(tableId)
     const newTable = []
     for (let item of rows) newTable.push(item)
@@ -138,7 +138,7 @@ const moveUpEditableTable = (params) => {
         setCellValueByName(tableId, '[order_no]', previousRowIndex, myValue)
         setCellValueByName(tableId, '[order_no]', myRowIndex, tmp)
     }
-    rerenderTableBaseOnNewOrder(tableId)
+    reRenderTableBaseOnNewOrder(tableId)
 }
 
 const moveDownEditableTable = (params) => {
@@ -164,7 +164,7 @@ const moveDownEditableTable = (params) => {
         setCellValueByName(tableId, '[order_no]', nextRowIndex, myValue)
         setCellValueByName(tableId, '[order_no]', myRowIndex, tmp)
     }
-    rerenderTableBaseOnNewOrder(tableId)
+    reRenderTableBaseOnNewOrder(tableId)
 }
 
 const duplicateEditableTable = (params) => {

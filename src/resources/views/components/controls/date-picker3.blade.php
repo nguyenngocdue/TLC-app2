@@ -4,7 +4,7 @@
   </div>
   <input 
       value="{{$value}}" name={{$name}} id={{$name}} 
-      datepicker 
+      {{$readOnly ? "" : "datepicker" }}
       datepicker-autohide 
       component="controls/datepicker3"
       type='text'

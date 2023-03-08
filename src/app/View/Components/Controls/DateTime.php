@@ -4,6 +4,7 @@ namespace App\View\Components\Controls;
 
 use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class DateTime extends Component
 {
@@ -14,30 +15,12 @@ class DateTime extends Component
     ) {
     }
 
-    private function getPlaceholder($control)
-    {
-        switch ($control) {
-            case "picker_datetime":
-                return "YYYY-MM-DD HH:MM";
-            case "picker_time":
-                return "HH:MM";
-            case "picker_date":
-            case "picker_month":
-            case "picker_week":
-            case "picker_quarter":
-            case "picker_year":
-                return "YYYY-MM-DD";
-            default:
-                return "??? $control ???";
-        }
-    }
-
     public function render()
     {
         $name = $this->name;
         $value = $this->value;
         $control = $this->control;
-        $placeholder = $this->getPlaceholder($control);
+        $placeholder = Str::getPickerPlaceholder($control);
         return view('components.controls.date-time')->with(compact('name', 'value', 'placeholder'));
     }
 }

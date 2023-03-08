@@ -30,6 +30,11 @@ const addANewLine = (params) => {
         order_no: orderNoValue,
     }
     // console.log(data)
+
+    const btnId = "btnAddANewLine_" + tableId
+    const spinId = "iconSpin_" + tableId
+    getEById(btnId).hide()
+    getEById(spinId).show()
     $.ajax({
         type: 'POST',
         url: '/api/v1/entity/' + tableName + '_storeEmpty',
@@ -40,6 +45,8 @@ const addANewLine = (params) => {
             valuesOfOrigin[parentIdFieldName] = parentId
             // console.log('insertedId', insertedId, valuesOfOrigin)
             addANewLineFull({ tableId, valuesOfOrigin })
+            getEById(btnId).show()
+            getEById(spinId).hide()
         }
     })
 }
@@ -160,30 +167,22 @@ const addANewLineFull = (params) => {
                 case "number":
                     if (column['dataIndex'] === 'order_no') {
                         orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
-                        onChange = "rerenderTableBaseOnNewOrder(\"" + tableId + "\")"
+                        onChange = "reRenderTableBaseOnNewOrder(\"" + tableId + "\")"
                     } else {
-                        onChange = "onChangeDropdown4(" + onChangeParams + ")"
+                        onChange = "onChangeDropdown4(" + onChangeParams + ");changeBgColor(this,\"" + tableId + "\")"
                     }
-                    renderer = "<input id='" + id + "' name='" + id + "' class='" + column['classList'] + "' type=number step=any onChange='" + onChange + "' />";
+                    renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "' type=number step=any onChange='" + onChange + "' />";
                     break
                 case "text":
                     onChange = "onChangeDropdown4(" + onChangeParams + ")"
-                    renderer = "<input id='" + id + "' name='" + id + "' class='" + column['classList'] + "' onChange='" + onChange + "'/>";
+                    renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "' onChange='" + onChange + "'/>";
                     break
                 case "textarea":
-                    renderer = "<textarea id='" + id + "' name='" + id + "' class='" + column['classList'] + "'></textarea>"
+                    renderer = "<textarea id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "'></textarea>"
                     break
-                case "picker-datetime4":
+                case "picker-all4":
                     onChange = "onChangeDropdown4(" + onChangeParams + ")"
-                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='DD/MM/YYYY HH:MM' class='" + column['classList'] + "' onchange='" + onChange + "'>"
-                    break
-                case "picker-date4":
-                    onChange = "onChangeDropdown4(" + onChangeParams + ")"
-                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='DD/MM/YYYY' class='" + column['classList'] + "' onchange='" + onChange + "'>"
-                    break
-                case "picker-time4":
-                    onChange = "onChangeDropdown4(" + onChangeParams + ")"
-                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='HH:MM' class='" + column['classList'] + "' onchange='" + onChange + "'>"
+                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "' onchange='" + onChange + "'>"
                     break
                 default:
                     renderer = "Unknown how to render " + column['renderer']

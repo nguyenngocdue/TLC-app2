@@ -53,7 +53,7 @@ class Description extends Component
                 $content ? $content = date(Constant::FORMAT_DATE_ASIAN, strtotime($content)) : $content;
                 break;
             case 'picker_month':
-                $content ? $content = date(Constant::FORMAT_YEAR_MONTH, strtotime($content)) : $content;
+                $content ? $content = date(Constant::FORMAT_MONTH, strtotime($content)) : $content;
                 break;
             case 'picker_week':
                 $formatFrom = Constant::FORMAT_DATE_MYSQL;

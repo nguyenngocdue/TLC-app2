@@ -47,7 +47,7 @@ trait TableTraitColumns
         $borderRight = ($this->rotate45Width) ? "" : $borderRight;
         $th = "";
         $th .= "<th class='px-4 py-3 $borderRight $classTh' $styleStr title='$tooltip'>";
-        $th .= "<div class='$classDiv text-gray-700 '>";
+        $th .= "<div class='$classDiv text-gray-700 dark:text-gray-300'>";
         $th .= "<span>" . $title . "</span>";
         $th .= "</div>";
         $th .= "</th>";
