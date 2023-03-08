@@ -1,0 +1,82 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
+    "_workplace_id": {
+        "name": "_workplace_id",
+        "column_name": "workplace_id",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
+    "_ot_purpose": {
+        "name": "_ot_purpose",
+        "column_name": "ot_purpose",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
+    "_getHrOTLines": {
+        "name": "_getHrOTLines",
+        "column_name": "getHrOTLines",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    }
+}

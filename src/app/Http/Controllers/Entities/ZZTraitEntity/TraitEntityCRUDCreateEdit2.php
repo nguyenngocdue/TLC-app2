@@ -28,12 +28,14 @@ trait TraitEntityCRUDCreateEdit2
 
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
+		$isCheckColumnStatus = Schema::hasColumn(Str::plural($this->type), 'status');
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
 			'props' => $props,
 			'item' => (object)[],
 			'defaultValues' => DefaultValues::getAllOf($this->type),
 			// 'realtimes' => Realtimes::getAllOf($this->type),
+			'isCheckColumnStatus' => $isCheckColumnStatus,
 			'type' => $this->type,
 			'action' => __FUNCTION__,
 			'modelPath' => $this->data,

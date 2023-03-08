@@ -1,0 +1,22 @@
+{
+    "new": {
+        "name": "new",
+        "label": "Create New",
+        "tooltip": ""
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "label": "Request for Approval",
+        "tooltip": ""
+    },
+    "rejected": {
+        "name": "rejected",
+        "label": "Reject",
+        "tooltip": ""
+    },
+    "approved": {
+        "name": "approved",
+        "label": "Approve",
+        "tooltip": ""
+    }
+}
