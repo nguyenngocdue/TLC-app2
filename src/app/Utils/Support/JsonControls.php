@@ -79,4 +79,8 @@ class JsonControls
     {
         return self::getAll()['monitors'];
     }
+    public static function getParamUnits()
+    {
+        return self::getAll()['param_units'];
+    }
 }

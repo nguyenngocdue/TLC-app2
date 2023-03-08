@@ -147,5 +147,11 @@
         "getMonitors7()",
         "getMonitors8()",
         "getMonitors9()"
+    ],
+    "param_units": [
+        "",
+        "hour",
+        "item",
+        "person"
     ]
 }

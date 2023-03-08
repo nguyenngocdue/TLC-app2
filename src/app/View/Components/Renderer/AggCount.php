@@ -12,8 +12,9 @@ class AggCount extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $rendererUnit = '',
+    ) {
         //
     }
 
@@ -28,9 +29,15 @@ class AggCount extends Component
             $json = json_decode($data['slot']);
             if (!is_array($json)) $json = [$json];
             $count = sizeof($json);
-            $str = Str::of('item')->plural($count);
+            $unit = $this->rendererUnit ? $this->rendererUnit : "item";
+            $str = Str::of($unit)->plural($count);
             $str = $count . " " . $str;
-            return "<div class='text-center'><x-renderer.tag>$str</x-renderer.tag></div>";
+            $names = [];
+            foreach ($json as $item) {
+                $names[] = $item->name ?? "Nameless #" . $item->id;
+            }
+            $title = join("\n", $names);
+            return "<div class='text-center' title='$title'><x-renderer.tag>$str</x-renderer.tag>111</div>";
         };
     }
 }
