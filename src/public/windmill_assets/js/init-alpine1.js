@@ -58,6 +58,21 @@ function data() {
         closeSettingMenu() {
             this.isSettingMenuOpen = false
         },
+        isIntermediateOpen: {},
+        toggleIntermediate(type) {
+            const status = document.getElementById('status')
+            status.value = type
+            this.isIntermediateOpen[type] = !this.isIntermediateOpen[type]
+        },
+        closeIntermediate(type) {
+            this.isIntermediateOpen[type] = false
+        },
+        changeStatus(type) {
+            const status =
+                document.getElementById('status') ??
+                document.getElementById('select-dropdown-status')
+            status.value = type
+        },
         // isPagesMenuOpen: false,
         // togglePagesMenu() {
         //     this.isPagesMenuOpen = !this.isPagesMenuOpen

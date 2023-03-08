@@ -542,20 +542,20 @@ const RadioOrCheckbox = ({ id, name, className, multiple, span, readOnly }) => {
     return render
 }
 
-const Dropdown2 = ({ id, name, className, multipleStr }) => {
-    let render = ''
-    render += '<select '
-    render += "id='" + id + "' "
-    render += "name='" + name + "' "
-    render += 'onChange=\'onChangeDropdown2("' + name + '")\' '
-    render += ' ' + multipleStr + ' '
-    render += "controlType='dropdown' "
-    render += "class='" + className + "' "
-    render += '>'
-    render += '</select>'
+// const Dropdown2 = ({ id, name, className, multipleStr }) => {
+//     let render = ''
+//     render += '<select '
+//     render += "id='" + id + "' "
+//     render += "name='" + name + "' "
+//     render += 'onChange=\'onChangeDropdown2("' + name + '")\' '
+//     render += ' ' + multipleStr + ' '
+//     render += "controlType='dropdown' "
+//     render += "class='" + className + "' "
+//     render += '>'
+//     render += '</select>'
 
-    return render
-}
+//     return render
+// }
 
 const documentReadyDropdown2 = ({ id, selectedJson, table }) => {
     // selectedJson = '{!! $selected !!}'

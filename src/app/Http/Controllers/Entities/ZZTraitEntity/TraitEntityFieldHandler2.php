@@ -116,7 +116,6 @@ trait TraitEntityFieldHandler2
     {
         $dataSource = $request->except(['_token', '_method', 'status', 'created_at', 'updated_at']);
         if ($action === 'store') $dataSource['id'] = null;
-
         $this->dump1("Before handleFields", $dataSource, __LINE__);
         $dataSource = $this->applyFormula($dataSource);
         $dataSource = $this->handleToggle($dataSource);

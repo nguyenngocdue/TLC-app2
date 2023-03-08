@@ -8,10 +8,12 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\DefaultValues;
 use App\Utils\Support\Json\Props;
+use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\JsonControls;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 trait TraitEntityCRUDCreateEdit2
@@ -20,12 +22,14 @@ trait TraitEntityCRUDCreateEdit2
 
 	public function create(Request $request)
 	{
-		$props = $this->getCreateEditProps();
+		$superProps = $this->getSuperProps();
+		$props = $superProps['props'];
 		$values =  (object) array_merge($request->input(), $this->loadValueOfOrphanAttachments($props));
 
-		$tableBluePrint = $this->makeTableBluePrint();
+		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		return view('dashboards.pages.entity-create-edit', [
+			'superProps' => $superProps,
 			'props' => $props,
 			'item' => (object)[],
 			'defaultValues' => DefaultValues::getAllOf($this->type),
@@ -44,20 +48,26 @@ trait TraitEntityCRUDCreateEdit2
 		]);
 	}
 
-	public function edit($id)
+	public function edit(Request $request, $id)
 	{
+		$status = $request->query('status');
 		// dump(SuperProps::getFor($this->type));
-		$props = $this->getCreateEditProps();
+		$superProps = $this->getSuperProps();
+		$props = $superProps['props'];
 		$original = $this->data::findOrFail($id);
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($original, $props);
-		$tableBluePrint = $this->makeTableBluePrint();
+		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
+		$isCheckColumnStatus = Schema::hasColumn(Str::plural($this->type), 'status');
 		return view('dashboards.pages.entity-create-edit', [
+			'superProps' => $superProps,
 			'props' => $props,
 			'item' => $original,
 			'defaultValues' => DefaultValues::getAllOf($this->type),
 			// 'realtimes' => Realtimes::getAllOf($this->type),
 			'values' => $values,
+			'status' => $status,
+			'isCheckColumnStatus' => $isCheckColumnStatus,
 			'type' => Str::plural($this->type),
 			'action' => __FUNCTION__,
 			'modelPath' => $this->data,
@@ -71,16 +81,15 @@ trait TraitEntityCRUDCreateEdit2
 		]);
 	}
 
-	private function getCreateEditProps()
+
+	private function getSuperProps()
 	{
-		$props = Props::getAllOf($this->type);
-		$result = array_filter($props, fn ($prop) => $prop['hidden_edit'] !== 'true');
+		$result = SuperProps::getFor($this->type);
 		return $result;
 	}
 
-	private function makeTableBluePrint()
+	private function makeTableBluePrint($props)
 	{
-		$props = $this->getCreateEditProps();
 		$props = array_values(array_filter($props, fn ($prop) => $prop['control'] == 'relationship_renderer'));
 		$result = [];
 		// dump($this->superProps);
