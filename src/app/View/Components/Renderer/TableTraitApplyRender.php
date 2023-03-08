@@ -28,7 +28,8 @@ trait TableTraitApplyRender
     private function getRendererParams($column)
     {
         $strParam = (is_array($column['rendererParam'])) ? json_encode($column['rendererParam']) : $column['rendererParam'];
-        $strUnit = (is_array($column['rendererUnit'])) ? json_encode($column['rendererUnit']) : $column['rendererUnit'];
+        $rendererUnit = $column['rendererUnit'] ?? ""; //<< CONFIG_MIGRATE
+        $strUnit = (is_array($rendererUnit)) ? json_encode($rendererUnit) : $rendererUnit;
         return "rendererParam='$strParam' rendererUnit='$strUnit'";
     }
 
