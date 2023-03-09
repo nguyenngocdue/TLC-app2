@@ -2,7 +2,7 @@
 const renderSelect = ({ id, name, disabled, onChangedItems }) => {
     let disabledSelect = disabled ? 'disabled' : '';
     let strHTML = ` 
-    <select name='${name}' id="${id}" onchange="onChangedItems(value*1, ${name})" ${disabledSelect} class=" js-example-basic-multiple bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+    <select name='${name}' id="${id}" onchange="onChangedItems(value*1, ${name})" ${disabledSelect} class=" js-example-basic-multiple bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
         <option class="py-10" value="" selected >Select your option...</option>
     </select>`;
     eleTriggers = document.getElementById('add-' + name);

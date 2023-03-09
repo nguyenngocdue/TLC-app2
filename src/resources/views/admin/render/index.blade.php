@@ -9,7 +9,7 @@
             <form action="{{ route($type . '.index') }}" method="GET" class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                 <div>
                     <input type="text" name="search"
-                        class="block w-full rounded-md border border-slate-300 bg-white dark:bg-gray-800 dark:border-gray-600 px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                        class="block w-full rounded-md border border-slate-300 bg-white dark:bg-gray-800 dark:border-gray-600 px-3 py-2 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                         value="{{ $search }}">
                 </div>
                 <div>
@@ -22,7 +22,7 @@
                     @csrf
                     <div>
                         <input type="text" name="name"
-                            class="block w-full rounded-md border border-slate-300 bg-white dark:bg-gray-800 dark:border-gray-600 px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                            class="block w-full rounded-md border border-slate-300 bg-white dark:bg-gray-800 dark:border-gray-600 px-3 py-2 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                             value="">
                         @error('name')
                             <span class="ml-2 text-xs font-light text-red-600" role="alert">
@@ -40,7 +40,7 @@
                     <div class="mt-2 flex">
                         <div class="mr-1 w-12">
                             <input type="text" name="page_limit"
-                                class="block w-12 rounded-md border border-slate-300 bg-white dark:bg-gray-800 dark:border-gray-600 px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                                class="block w-12 rounded-md border border-slate-300 bg-white dark:bg-gray-800 dark:border-gray-600 px-3 py-2 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                                 value="{{ $pageLimit }}">
                         </div>
                         <div>

@@ -48,10 +48,10 @@ class Realtime extends Component
      */
     public function render()
     {
-        $name = $this->name;
-        $value = $this->getValue();
-        $classList = "bg-white border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input";
-        $classList .= " readonly text-rig1ht ";
-        return "<input id='$name' name='$name' type='number' step='any' value='$value' readonly class='$classList'/>";
+        // $name = $this->name;
+        // $value = $this->getValue();
+        // $classList = "bg-white border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input";
+        // $classList .= " readonly text-rig1ht ";
+        // return "<input id='$name' name='$name' type='number' step='any' value='$value' readonly class='$classList'/>";
     }
 }

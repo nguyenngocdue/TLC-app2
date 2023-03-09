@@ -38,7 +38,7 @@ trait TraitTableColumnEditable
             $newColumn['title'] .= $isSaveOnChange ? "</br><i class='fa-duotone fa-floppy-disk' title='Save On Change'></i>" : "";
 
             // dump($newColumn);
-            $classNameText = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm focus:border-purple-400 dark:focus:border-blue-600 focus:outline-none sm:text-sm";
+            $classNameText = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm dark:focus:border-blue-600 focus:outline-none sm:text-sm";
             if ($isReadOnly) $classNameText = "readonly $classNameText";
             switch ($prop['control']) {
                 case 'id':

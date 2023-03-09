@@ -105,7 +105,7 @@ class Comment2 extends Component
             'forceCommentOnce' => $this->forceCommentOnce,
             'commentDebug' => $this->commentDebug,
             'commentDebugType' => $this->commentDebug ?  'text' : 'hidden',
-            'classList' => 'dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full text-sm focus:border-purple-400 focus:outline-none',
+            'classList' => 'dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 border border-gray-300 text-gray-900 rounded-lg p-2.5 dark:placeholder-gray-400 block w-full text-sm focus:outline-none',
         ]);
     }
 }
