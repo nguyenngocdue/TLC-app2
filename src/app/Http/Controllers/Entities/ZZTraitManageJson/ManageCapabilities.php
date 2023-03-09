@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 use App\Http\Controllers\Workflow\LibRoleSets;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\Json\Capabilities;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -13,6 +14,8 @@ class ManageCapabilities extends Manage_Parent
     protected $viewName = "dashboards.pages.manage-capability";
     protected $routeKey = "_cpb";
     protected $jsonGetSet = Capabilities::class;
+
+    // protected $showToggleColumn = true;
 
     protected function getColumns()
     {
@@ -30,6 +33,11 @@ class ManageCapabilities extends Manage_Parent
                 'align' => 'right',
             ],
         ];
+        if ($this->showToggleColumn) $firstColumn[] =    [
+            "dataIndex" => 'toggle',
+            'width' => 10,
+            'align' => 'center',
+        ];
 
         $allStatuses = LibStatuses::getFor($this->type);
         // dump($allStatuses);
@@ -46,12 +54,25 @@ class ManageCapabilities extends Manage_Parent
         return $columns;
     }
 
+    protected function getDataHeader()
+    {
+        $result = [];
+        $allStatuses = array_keys(LibStatuses::getFor($this->type));
+        foreach ($allStatuses as $status) {
+            $button = "<x-renderer.button size='xs' value='xxx123' onClick=\"toggleVParent_Vertical('$status', this)\">Tg</x-renderer.button>";
+            $result[$status] = Blade::render($button);
+        }
+        // Log::info($result);
+        return $result;
+    }
+
     protected function getDataSource()
     {
         $allRoleSets = LibRoleSets::getAll();
         $dataInJson = Capabilities::getAllOf($this->type);
         // dump($dataInJson);
         $result = [];
+        $index = 0;
         foreach ($allRoleSets as $status) {
             $name = $status['name'];
             if (isset($dataInJson[$name])) {
@@ -59,9 +80,12 @@ class ManageCapabilities extends Manage_Parent
             } else {
                 $newItem = ['name' => $name];
             }
+            if ($this->showToggleColumn) $newItem['toggle'] = Blade::render("<x-renderer.button size='xs' onClick='toggleVParent_Horizon($index)'>Tg</x-renderer.button>");
             $newItem['name_rendered'] = Str::appTitle($newItem['name']);
             $result[] = $newItem;
+            $index++;
         }
+        // dump($result);
         return $result;
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\JsonGetSet;
+use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
@@ -17,6 +19,9 @@ abstract class Manage_Parent
     protected $storingWhiteList = [];
     protected $storingBlackList = [];
     protected $headerTop = 0;
+
+    protected $showToggleColumn = false;
+    protected $showToggleRow = false;
 
     protected abstract function getColumns();
     protected abstract function getDataSource();
@@ -58,10 +63,28 @@ abstract class Manage_Parent
         }
     }
 
+    protected function getColumnSource()
+    {
+        return LibStatuses::getFor($this->type);
+    }
+
+    private function getJavascript()
+    {
+        $allProps = Props::getAllOf($this->type);
+        $allStatuses = array_keys($this->getColumnSource());
+        $allStatusesStr = "[" . join(", ", array_map(fn ($i) => '"' . $i . '"', $allStatuses)) . "]";
+        $allIdsStr = "[" . join(", ", array_keys(array_values($allProps))) . "]";
+        $javascript = "const statuses = $allStatusesStr; const ids = $allIdsStr; ";
+        $javascript .= "let k_horizon_mode = {}; let k_horizon_value = {};";
+        $javascript .= "let k_vertical_mode = {}; let k_vertical_value = {};";
+        return "<script>$javascript</script>";
+    }
+
     function index(Request $request)
     {
         $columns = $this->getColumns();
         $this->makeUpWidthForColumns($columns);
+        $jsStatusArray = $this->getJavascript();
         return view($this->viewName, [
             'title' => "Manage Workflows",
             'topTitle' => CurrentRoute::getTitleOf($this->type),
@@ -71,6 +94,7 @@ abstract class Manage_Parent
             'dataSource' => array_values($this->getDataSource()),
             'dataHeader' => $this->getDataHeader(),
             'headerTop' => $this->headerTop,
+            'jsStatusArray' => $jsStatusArray,
         ]);
     }
 

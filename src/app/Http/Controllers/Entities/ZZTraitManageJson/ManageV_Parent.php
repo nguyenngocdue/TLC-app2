@@ -15,10 +15,9 @@ abstract class ManageV_Parent extends Manage_Parent
     protected $viewName = "dashboards.pages.manage-v-parent";
     protected $storingBlackList = ['label', 'toggle'];
     protected $headerTop = 9;
+
     protected $showToggleColumn = true;
     protected $showToggleRow = true;
-
-    abstract protected function getColumnSource();
 
     protected function getColumns()
     {
@@ -67,13 +66,6 @@ abstract class ManageV_Parent extends Manage_Parent
         $isNotVisibleProps = in_array($this->jsonGetSet, [HiddenProps::class, ReadOnlyProps::class, RequiredProps::class]);
 
         $allStatuses = array_keys($this->getColumnSource());
-        $allStatusesStr = "[" . join(", ", array_map(fn ($i) => '"' . $i . '"', $allStatuses)) . "]";
-        $allIdsStr = "[" . join(", ", array_keys(array_values($allProps))) . "]";
-        $javascript = "const statuses = $allStatusesStr; const ids = $allIdsStr; ";
-        $javascript .= "let k_horizon_mode = {}; let k_horizon_value = {};";
-        $javascript .= "let k_vertical_mode = {}; let k_vertical_value = {};";
-        echo "<script>$javascript</script>";
-        // dump($allStatuses);
         if ($isNotVisibleProps) $visibleProps = VisibleProps::getAllOf($this->type);
 
         $result = [];
