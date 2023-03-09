@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 trait TraitEntityFieldHandler2
 {
-
+    use TraitEntityFormula;
     private function getProps1()
     {
         $table01Count = 0;
