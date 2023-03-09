@@ -57,7 +57,7 @@ trait TableTraitRows
                         // : "B";
                         ? $this->applyRender($name, $renderer, $rawData, $column, $dataLineObj, $dataLineIndex)
                         : ($dataIndex === 'action' ? $valueOfRawData :
-                            "<p class='p-2' valueOfRawData>" . $valueOfRawData . "</p>"
+                            "<div class='p-2' valueOfRawData>" . $valueOfRawData . "</div>"
                         );
                     break;
             }
