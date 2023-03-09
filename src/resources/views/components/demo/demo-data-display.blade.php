@@ -73,5 +73,8 @@
             <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="status" groupByLength=100 groupKeepOrder={{true}}/>
         </x-renderer.card>
         <br />
+        <x-renderer.card title="Table with cell_class, cell_title, and cell_href, and rotate45">
+            <x-renderer.table :columns="$tableColumnsForRegister" :dataSource="$tableDataSourceForRegister" showNo="{{true}}" rotate45Width={{200}}/>
+        </x-renderer.card>
     </x-renderer.card>
 </div>

@@ -141,4 +141,42 @@ trait TraitDemoTableData
             ],
         ];
     }
+
+    public function getColumnsForRegister()
+    {
+        return [
+            [
+                'dataIndex' => 'name',
+            ],
+            [
+                'dataIndex' => 'create',
+                'align' => 'center',
+            ],
+            [
+                'dataIndex' => 'value',
+                'align' => 'center',
+            ],
+        ];
+    }
+
+    public function getDataSourceForRegister()
+    {
+        return [
+            [
+                'name' => 'a',
+                'create' => (object)[
+                    'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
+                    'cell_href' => 'https://www.google.com',
+                    'cell_class' => 'bg-green-300 text-red-500',
+                    'cell_title' => 'Create a new item',
+                ],
+                'value' => (object)[
+                    'value' => 456,
+                    'cell_title' => 'Hover on me',
+                    'cell_class' => 'bg-yellow-300 text-white font-bold',
+                    'cell_href' => 'https://www.google.com',
+                ],
+            ],
+        ];
+    }
 }

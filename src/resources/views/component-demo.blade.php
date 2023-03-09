@@ -28,7 +28,13 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
             <x-demo.demo-static :tagColumns="$tagColumns" :tagDataSource="$tagDataSource" :gridDataSource="$gridDataSource" />
         </div>
         <div id="data_display" class="p-4 hidden">
-            <x-demo.demo-data-display :tableColumns="$tableColumns" :tableDataSource="$tableDataSource" :tableDataHeader="$tableDataHeader" />
+            <x-demo.demo-data-display 
+                    :tableColumns="$tableColumns" 
+                    :tableDataSource="$tableDataSource" 
+                    :tableDataHeader="$tableDataHeader"
+                    :tableDataSourceForRegister="$tableDataSourceForRegister"
+                    :tableColumnsForRegister="$tableColumnsForRegister"
+                     />
         </div>
         <div id="data_entry" class="p-4 hidden">
             <x-demo.demo-data-entry :dropdownCell="$dropdownCell" />

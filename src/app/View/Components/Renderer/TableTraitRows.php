@@ -67,19 +67,24 @@ trait TableTraitRows
             $styleStr = $this->getStyleStr($column);
             $rendered = ($tableDebug && ($renderer != 'no.') ? $name : "") . $rendered;
 
-            $cellColor = '';
+            $cellClassList = '';
+            $cellTitle = '';
+            $cellHref = '';
             if (is_object($rawData)) {
-                if (isset($rawData->cell_color)) {
-                    $cellColor = $rawData->cell_color;
-                }
+                if (isset($rawData->cell_class)) $cellClassList = $rawData->cell_class;
+                if (isset($rawData->cell_title)) $cellTitle = $rawData->cell_title;
+                if (isset($rawData->cell_href)) $cellHref = $rawData->cell_href;
             }
             $breakWords = $this->noCss ? "break-all" : "";
             $tinyText = $this->noCss ? "text-xs" : "";
             $borderGray = $this->noCss ? "border-gray-400" : "";
-            $td = "<td class='dark:border-gray-600 $tinyText $breakWords $cellColor $hidden $borderRight $borderGray $align' $styleStr>";
-            // $td .= "<p class='bg-red-200 p-2'>";
+            $td = "<td class='dark:border-gray-600 $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align'";
+            $td .= $styleStr;
+            $td .= $cellTitle ? "title='$cellTitle'" : "";
+            $td .= ">";
+            if ($cellHref) $td .= "<a href='$cellHref'>";
             $td .= $rendered;
-            // $td .= "</p>";
+            if ($cellHref) $td .= "</a>";
             $td .= "</td>";
 
             $tds[] = $td;

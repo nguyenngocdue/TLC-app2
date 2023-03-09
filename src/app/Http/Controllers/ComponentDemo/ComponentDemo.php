@@ -35,8 +35,9 @@ class ComponentDemo
             'tabData1' => $this->getTab1(),
             'tabData2' => $this->getTab2(),
             'dataSource' => $this->getDataSource(),
-            'itemsSelected' => $this->getItemsSelected()
-
+            'itemsSelected' => $this->getItemsSelected(),
+            'tableDataSourceForRegister' => $this->getDataSourceForRegister(),
+            'tableColumnsForRegister' => $this->getColumnsForRegister(),
         ]);
     }
 }
