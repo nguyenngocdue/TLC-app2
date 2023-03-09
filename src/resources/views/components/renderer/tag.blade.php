@@ -9,8 +9,9 @@ $text_dark = "dark:text-{$color}-{$colorIndex}";
 
 $title_rendered = isset($title) ? "title='$title'" : "";
 $class = $class ?? "";
+$rounded = $rounded ?? 'rounded-lg';
 @endphp
 
-<span {!! $title_rendered !!} class="{{$bg}} {{$text}} {{$bg_dark}} {{$text_dark}} whitespace-nowrap rounded-lg font-semibold text-xs px-2 py-1 leading-tight {{$class}}">
+<span {!! $title_rendered !!} class="{{$bg}} {{$text}} {{$bg_dark}} {{$text_dark}} whitespace-nowrap {{$class}} {{$rounded}} font-semibold text-xs px-2 py-1 leading-tight ">
     {{ $slot }}
 </span
