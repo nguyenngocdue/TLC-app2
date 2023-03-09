@@ -17,12 +17,14 @@ class Prod_order extends Report_ParentController
     {
         // dd($modeParams);
         $sql = "SELECT 
-                po.id AS po_id
+     			sp.name AS sub_project_name
+     			,po.sub_project_id AS sub_project_id
+                ,po.id AS po_id
                 ,po.name AS po_name
                 ,SUM(ps.total_hours) AS total_hours
                 ,SUM(prd.target_hours) AS total_target_hours
                 ,SUM(prd.target_hours) - SUM(ps.total_hours) AS total_interest_target_hours
-                
+
                 ,SUM(ps.total_man_hours) AS total_man_hours 
                 ,SUM(prd.target_man_hours) AS total_target_man_hours
                 ,SUM(prd.target_man_hours) - SUM(ps.total_man_hours) AS total_interest_target_man_hours
@@ -31,15 +33,19 @@ class Prod_order extends Report_ParentController
                 FROM prod_orders po
                     LEFT JOIN prod_routing_details prd ON po.prod_routing_id = prd.prod_routing_id
                     LEFT JOIN prod_sequences ps ON po.id = ps.prod_order_id
+                    LEFT JOIN sub_projects sp ON sp.id = po.sub_project_id
                     WHERE 1 = 1 \n";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}' \n";
-        if (isset($modeParams['prod_order'])) $sql .= "\n AND po.id = '{{prod_order}}'\n ";
+        if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'\n ";
         $sql .=  "GROUP BY po.id";
         return $sql;
     }
     public function getTableColumns($dataSource = [])
     {
         return [
+            [
+                "dataIndex" => "sub_project_name",
+            ],
             [
                 "title" => 'Prod Order ID',
                 "dataIndex" => "po_id",

@@ -260,12 +260,13 @@ class Qaqc_wir extends Report_ParentController
                 $param7 = $_itemsWirDesc[$name]['name'];
                 $params = [$param1, $param2, $param3, $param4, $param5, $param6];
                 $href = $routeCreate . implode('&', $params);
-                $html =  "<div  class=' w-full'  title='{$param7}' ><a href={$href}>$icon</a></div>";
+                $html =  "<div  class=' w-full'  title='{$param7}' ><a href='$href'>$icon</a></div>";
+                // $lackFieldArray[$name] = "$html";
                 $lackFieldArray[$name] = "$html";
             }
             $transformData[$key] = /* (object) */ ($prodOrder + $lackFieldArray);
         }
-        // dd($transformData);
+        // dump($transformData);
         return collect($transformData);
     }
 }

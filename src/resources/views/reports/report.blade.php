@@ -9,7 +9,7 @@
     <div class="flex justify-end pb-2 pr-4">
         <x-form.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" route="{{ route('updateUserSettings') }}" page-limit="{{$pageLimit}}" />
     </div>
-    <x-form.parameter-report :dataSource="$dataModeControl" :itemsSelected="$modeParams" :columns="$paramColumns" route="{{ route('updateUserSettings') }}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
+    <x-form.parameter-report :dataSource="$dataModeControl" :itemsSelected="$modeParams" :columns="$paramColumns" routeName="{{$routeName}}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
     <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" />
     @endsection
 </div>

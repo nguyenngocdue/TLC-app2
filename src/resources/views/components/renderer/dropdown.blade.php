@@ -27,7 +27,7 @@
 <script type="text/javascript">
     $('#{{$name}}').select2({
         placeholder: ''
-        , allowClear: true
+        , allowClear: '{{$allowClear}}'
     });
 
 </script>

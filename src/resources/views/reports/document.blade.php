@@ -3,16 +3,17 @@
 @section('title', $typeReport)
 @section('content')
 
-{{-- @dump($tableDataSource) --}}
+{{-- @dump($modeParams) --}}
 @section('content')
 <div class="md:px-4">
     <div class="flex justify-end pb-2 pr-4">
         <x-form.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" route="{{ route('updateUserSettings') }}" page-limit="{{$pageLimit}}" />
     </div>
-    <x-form.parameter-report :dataSource="$dataModeControl" :itemsSelected="$modeParams" :columns="$paramColumns" route="{{ route('updateUserSettings') }}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
+    <x-form.parameter-report :dataSource="$dataModeControl" :itemsSelected="$modeParams" :columns="$paramColumns" routeName="{{$routeName}}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
 </div>
 <div class="md:px-4">
     @if (count($sheets))
+    {{-- <x-renderer.report.header- :dataSource="[]" /> --}}
     <x-renderer.table maxH="{{false}}" :dataSource="$sheets" :columns="[['dataIndex' => key(array_pop($sheets))]]" showNo="{{true}}" />
     <x-renderer.divider />
     <x-renderer.page-break />

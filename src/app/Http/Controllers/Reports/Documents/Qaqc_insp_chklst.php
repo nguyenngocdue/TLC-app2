@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports\Documents;
 use App\Helpers\Helper;
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\UpdateUserSettings;
 use App\Models\Attachment;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_tmpl;
@@ -22,6 +23,7 @@ class Qaqc_insp_chklst extends Report_ParentController
 	{
 		$isCheck = isset($modeParams['prod_order_id']) && isset($modeParams['sub_project_id']);
 		$sql =  " SELECT
+                        
                         tp.id AS template
                         ,l.value AS sign
                         ,l.value_comment AS value_comment
@@ -35,16 +37,14 @@ class Qaqc_insp_chklst extends Report_ParentController
                         ,l.description AS line_description
                         ,l.name AS line_name
                         
-                        
                         ,cv.id AS control_value_id
                         ,cv.name AS control_value_name
                         ,g.description AS group_description
-                        
                         ,c1
                         ,c2
                         ,c3
                         ,c4";
-		if ($isCheck) $sql .= "\n ,po.id";
+		if ($isCheck) $sql .= "\n ,po.id AS po_id , po.name AS po_name";
 		if ($isCheck) $sql .= " \n ,sp.name AS project_name";
 		$sql .= "\n FROM qaqc_insp_chklst_runs r
                     JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id
@@ -69,7 +69,7 @@ class Qaqc_insp_chklst extends Report_ParentController
             
                 WHERE 1=1";
 		if ($isCheck) $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
-		if (isset($modeParams['chklsts'])) $sql .= " \n AND csh.id = '{{chklsts}}' \n";
+		// if (isset($modeParams['chklsts'])) $sql .= " \n AND csh.id = '{{chklsts}}' \n";
 		$sql .= "\n ORDER BY line_name,  run_updated DESC ";
 		return $sql;
 	}
@@ -95,15 +95,18 @@ class Qaqc_insp_chklst extends Report_ParentController
 		return [
 			[
 				'title' => 'Sub Project',
-				'dataIndex' => 'sub_project_id'
+				'dataIndex' => 'sub_project_id',
+				// 'allowClear' => true
 			],
 			[
 				'title' => 'Production Order',
-				'dataIndex' => 'prod_order_id'
+				'dataIndex' => 'prod_order_id',
+				// 'allowClear' => true
 			],
 			[
 				'title' => 'Checklist Type',
-				'dataIndex' => 'qaqc_insp_tmpl_id'
+				'dataIndex' => 'qaqc_insp_tmpl_id',
+				// 'allowClear' => true
 			],
 			[
 				'dataIndex' => 'run_option'
@@ -297,5 +300,36 @@ class Qaqc_insp_chklst extends Report_ParentController
 		}, $items));
 		// dd($sheets);
 		return $sheets;
+	}
+
+	protected function setDefaultValueModeParams($modeParams, $request, $entity, $typeReport)
+	{
+		// dd($request);
+		$x = 'sub_project_id';
+		$y = 'prod_order_id';
+		$z = 'qaqc_insp_tmpl_id';
+
+		$params = [
+			"_entity" => $entity,
+			"action" => "updateReport" . $typeReport,
+			"type_report" => $typeReport,
+			$x => $modeParams[$x],
+			$y => $modeParams[$y],
+			$z => $modeParams[$z]
+		];
+
+		$isNullParam = in_array(null, $params, true);
+		if ($isNullParam) {
+			$params[$x] = 21;
+			$params[$y] = 82;
+			$params[$z] = 1;
+			// Update request to pass to UpdateUserSetting
+			$requestData = $request->all();
+			$requestData[] = $params;
+			$request->merge($params);
+			(new UpdateUserSettings())($request);
+			redirect($request->getPathInfo());
+		}
+		return $modeParams;
 	}
 }
