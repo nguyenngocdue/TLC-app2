@@ -62,7 +62,7 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
-		$toastrResult =  ($request['tableNames'] !== 'fakeRequest') ? $this->handleEditableTables($request, $props['editable_table'], $objectId) : [];
+		[$toastrResult, $lineResult] = ($request['tableNames'] !== 'fakeRequest') ? $this->handleEditableTables($request, $props['editable_table'], $objectId) : [];
 		try {
 			$this->handleStatus($theRow, $newStatus);
 		} catch (Exception $e) {
@@ -111,9 +111,9 @@ trait TraitEntityCRUDStoreUpdate2
 
 			$newStatus = $request['status'];
 			$fields = $this->handleFields($request, __FUNCTION__);
-			$fields = $this->addEntityType($fields, 'status', $newStatus);
+			$fieldForEmailHandler = $this->addEntityType($fields, 'status', $newStatus);
 			$theRow = $this->data::find($id);
-			$previousValue = $this->getPreviousValue($fields, $theRow);
+			$previousValue = $this->getPreviousValue($fieldForEmailHandler, $theRow);
 			$theRow->fill($fields);
 			$theRow->save();
 			$objectType = Str::modelPathFrom($theRow->getTable());
@@ -126,7 +126,7 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
-		$toastrResult = ($request['tableNames'] !== 'fakeRequest') ? $this->handleEditableTables($request, $props['editable_table'], $objectId) : [];
+		[$toastrResult, $lineResult] = ($request['tableNames'] !== 'fakeRequest') ? $this->handleEditableTables($request, $props['editable_table'], $objectId) : [];
 		try {
 			$this->handleStatus($theRow, $newStatus);
 		} catch (Exception $e) {
@@ -139,7 +139,7 @@ trait TraitEntityCRUDStoreUpdate2
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
-		$this->eventUpdatedNotificationAndMail($previousValue, $fields, $this->type, $newStatus);
+		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $this->type, $newStatus);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 

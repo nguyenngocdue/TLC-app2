@@ -25,7 +25,7 @@ class WorkflowFields
         }
         $statuses = $superProps['statuses'];
         if (!$status) {
-            if (!empty($definitions)) {
+            if (empty($definitions)) {
                 $status = 'new';
             } else {
                 $status = array_shift(array_values($definitions));
@@ -44,8 +44,7 @@ class WorkflowFields
                 }
             }
         }
-        $transitions = $statuses[$status]['transitions'];
-
+        $transitions = $statuses[$status]['transitions'] ?? [];
         $actionButtons = [];
         foreach ($transitions as $value) {
             $actionButtons[$value] = $statuses[$value]['action-buttons'];
@@ -67,7 +66,7 @@ class WorkflowFields
     static function parseFields($props, $values, $defaultValues, $status, $isCheckColumnStatus)
     {
         $result = [];
-        if ($isCheckColumnStatus && $status) {
+        if ($isCheckColumnStatus && $status && isset(self::getSuperWorkflowByRoleSet()['workflows'][$status])) {
             $workflow = self::getSuperWorkflowByRoleSet()['workflows'][$status];
             $visible = $workflow['visible'];
             $readonly = $workflow['readonly'];
