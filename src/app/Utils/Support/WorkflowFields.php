@@ -20,7 +20,6 @@ class WorkflowFields
         $buttonSave = true;
         $props = $superProps['props'];
         $definitions = $superProps['settings']['definitions'] ?? [];
-
         if (!$isCheckColumnStatus) {
             return [$status = null, [], $props, [], [], $buttonSave, []];
         }
@@ -46,6 +45,7 @@ class WorkflowFields
             }
         }
         $transitions = $statuses[$status]['transitions'];
+
         $actionButtons = [];
         foreach ($transitions as $value) {
             $actionButtons[$value] = $statuses[$value]['action-buttons'];
@@ -53,13 +53,22 @@ class WorkflowFields
         if (CurrentUser::isAdmin()) {
             $buttonSave = true;
         }
+        $workflows = self::getSuperWorkflowByRoleSet()['workflows'];
+        $checkWorkflowCapa = [];
+        foreach ($workflows as $key => $value) {
+            $checkWorkflowCapa[$key] = $value['capabilities'];
+        }
+        if (!$checkWorkflowCapa[$status]) {
+            $buttonSave = false;
+            $actionButtons = [];
+        }
         return [$status, $statuses, $props, $actionButtons, $transitions, $buttonSave, $propsIntermediate];
     }
     static function parseFields($props, $values, $defaultValues, $status, $isCheckColumnStatus)
     {
         $result = [];
         if ($isCheckColumnStatus && $status) {
-            $workflow = self::getSuperWorkflowByRoleSet(self::$type)['workflows'][$status];
+            $workflow = self::getSuperWorkflowByRoleSet()['workflows'][$status];
             $visible = $workflow['visible'];
             $readonly = $workflow['readonly'];
             $required = $workflow['required'];

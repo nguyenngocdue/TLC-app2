@@ -234,7 +234,7 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
         @endphp
         <template x-if="isIntermediateOpen['{{$key}}']">
             <div tabindex="-1" class="fixed sm:p-0 md:p-0 top-0 left-0 right-0 z-50 lg:p-4 h-full bg-gray-100 dark:bg-slate-400 dark:bg-opacity-70 bg-opacity-70 justify-center items-center flex" aria-hidden="true" @keydown.escape="closeIntermediate('{{$key}}')">
-                <div class="relative sm:mx-0 md:mx-5  w-full lg:mx-10 xl:mx-16 2xl:mx-20 h-auto md:h-auto sm:h-auto" @click.away="">
+                <div class="relative sm:mx-0 md:mx-5  w-full lg:mx-10 xl:mx-16 2xl:mx-20 h-auto md:h-auto sm:h-auto" @click.away="closeIntermediate('{{$key}}')">
                     <!-- Modal content -->
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                         <!-- Modal header -->
@@ -413,7 +413,7 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
                                 </div>
                             </div>
                             <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
-                                <button type="submit" class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg">
+                                <button type="submit" class="mr-3 px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg">
                                         Next -> (to {{$actionButtons[$key]['label']}})
                                 </button>
                             </div>                
@@ -442,5 +442,4 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
 
     </form>
 </div>
-
 @endsection
