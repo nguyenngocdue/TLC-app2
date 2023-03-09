@@ -28,6 +28,7 @@ abstract class Report_ParentController extends Controller
     abstract protected function getDataForModeControl($dataSource);
 
     protected $rotate45Width = false;
+    protected $groupBy = false;
 
     public function getType()
     {
@@ -149,6 +150,7 @@ abstract class Report_ParentController extends Controller
             'pageLimit' => $pageLimit,
             'paramColumns' => $paramColumns,
             'rotate45Width' => $this->rotate45Width,
+            'groupBy' => $this->groupBy,
         ]);
     }
 }

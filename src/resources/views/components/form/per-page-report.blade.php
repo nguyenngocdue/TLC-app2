@@ -2,7 +2,7 @@
     @method('PUT')
     @csrf
     <div class="flex items-center lg:justify-end">
-        <div class="w-28">
+        <div class="w-28 px-2">
             <input type="hidden" name='_entity' value="{{ $entity }}">
             <input type="hidden" name='action' value="updatePerPage{{$typeReport}}">
             <input type="hidden" name='type_report' value="{{$typeReport}}">

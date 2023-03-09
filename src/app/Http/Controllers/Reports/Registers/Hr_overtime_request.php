@@ -10,49 +10,86 @@ use Illuminate\Support\Facades\DB;
 class Hr_overtime_request extends Report_ParentController
 {
     use TraitReport;
+    protected $groupBy = 'first_name';
     public function getSqlStr($modeParams)
     {
-        $sql = "
-        SELECT otTb.*, wpus.name AS user_workplace
-        FROM (SELECT 
-            wp.name AS workplace, rgt_ot.*
-            FROM (SELECT 
-                us.workplace AS user_workplace_id
-                ,otr.workplace_id AS ot_workplace_id
-                ,us.first_name AS first_name
-                ,us.last_name AS last_name
-                ,uscate.name AS user_category_name
-                ,uscate.description AS user_category_desc
-                ,otline.employeeid AS employeeid
-                ,us.full_name AS member_name
-                ,SUBSTR(otline.ot_date,1,7) AS year_months
-                ,SUM(otline.total_time) AS total_overtime_hours
-                ,(40) AS maximum_allowed_ot_hours
-                ,(40-SUM(otline.total_time) ) AS remaining_allowed_ot_hours
-                    FROM users us, hr_overtime_request_lines otline, hr_overtime_requests otr, user_categories uscate
+        $sql = " SELECT tb2.*,LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month ORDER BY year_months) AS maximum_allowed_ot_hours_year
+        FROM(SELECT 
+        GROUP_CONCAT(workplace SEPARATOR ', ') AS ot_workplace,
+            user_category_name,
+            user_category_desc,
+            MAX(first_name) AS first_name,
+            MAX(last_name) AS last_name,
+            MAX(user_workplace) AS user_workplace,
+            employeeid,
+            year_months,
+            (40) AS maximum_allowed_ot_hours,
+            SUM(total_overtime_hours) AS total_overtime_hours,
+            (40 - SUM(total_overtime_hours)) AS remaining_allowed_ot_hours,
+            years_month,
+            (200) AS maximum_allowed_ot_hours_year,
+            ROW_NUMBER() OVER (PARTITION BY employeeid, years_month ORDER BY year_months) AS step_plus,
+            SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employeeid, years_month ORDER BY year_months) AS cumulative_remaining_hours_year,
+            (200 - SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employeeid, years_month ORDER BY year_months)) AS remaining_allowed_ot_hours_year
+            
+        FROM (
+            SELECT otTb.*, wpus.name AS user_workplace
+            FROM (
+                SELECT 
+                    wp.name AS workplace,
+                    rgt_ot.*
+                FROM (
+                    SELECT 
+                        us.workplace AS user_workplace_id,
+                        otr.workplace_id AS ot_workplace_id,
+                        us.first_name AS first_name,
+                        us.last_name AS last_name,
+                        uscate.name AS user_category_name,
+                        uscate.description AS user_category_desc,
+                        otline.employeeid AS employeeid,
+                        us.full_name AS member_name,
+                        SUBSTR(otline.ot_date,1,7) AS year_months,
+                        SUBSTR(otline.ot_date,1,4) AS years_month,
+                        SUM(otline.total_time) AS total_overtime_hours,
+                        us.id AS user_id
+                    FROM 
+                        users us, 
+                        hr_overtime_request_lines otline, 
+                        hr_overtime_requests otr, 
+                        user_categories uscate
                     WHERE 1 = 1
                     AND otline.user_id = us.id
                     AND otline.hr_overtime_request_id = otr.id
                     AND uscate.id = us.category";
+
         if (isset($modeParams['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
-
         if (isset($modeParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
-        $sql .= "\n GROUP BY user_id, employeeid, year_months, workplace_id) AS rgt_ot \n";
-
-        $sql .= "JOIN workplaces wp ON wp.id = rgt_ot.ot_workplace_id";
+        $sql .= "\nGROUP BY user_id, employeeid, year_months, ot_workplace_id, years_month
+                ) AS rgt_ot 
+                JOIN workplaces wp ON wp.id = rgt_ot.ot_workplace_id";
         if (isset($modeParams['ot_workplace_id'])) $sql .= "\n AND wp.id = '{{ot_workplace_id}}'";
-        $sql .= "\n ORDER BY workplace, user_category_name, first_name, last_name, employeeid, year_months DESC )AS otTb, workplaces wpus
-                    WHERE 1 = 1
-                    AND otTb.user_workplace_id = wpus.id ";
+        $sql .= "\n) AS otTb, workplaces wpus
+            WHERE 1 = 1
+            AND otTb.user_workplace_id = wpus.id
+            GROUP BY user_id, employeeid, year_months, ot_workplace_id, years_month
+        ) tbg
+        GROUP BY year_months, years_month, employeeid, user_category_name, user_category_desc
+        ) tb2
+        ORDER BY first_name, last_name, employeeid, year_months DESC";
         return $sql;
     }
+
+
+
+
 
     public function getTableColumns($dataSource)
     {
         // dump($dataSource);
         return [
             [
-                "dataIndex" => "workplace",
+                'title' => 'OT Workplace',
+                "dataIndex" => "ot_workplace",
                 "align" => 'left'
             ],
             [
@@ -82,18 +119,40 @@ class Hr_overtime_request extends Report_ParentController
                 "align" => "right",
             ],
             [
-                "title" => "Maximum Allowed OT Hours",
+                "title" => "Maximum Allowed OT Hours (Month)",
                 "dataIndex" => "maximum_allowed_ot_hours",
                 "align" => "right",
             ],
             [
 
+                "title" => "Total Overtime Hours (Month)",
                 "dataIndex" => "total_overtime_hours",
                 "align" => "right",
             ],
             [
-                "title" => "Remaining Allowed OT Hours",
+                "title" => "Remaining Allowed OT Hours (Month)",
                 "dataIndex" => "remaining_allowed_ot_hours",
+                "align" => "right",
+            ],
+            [
+                "title" => "Years",
+                "dataIndex" => "years_month",
+                "align" => "right",
+            ],
+
+            [
+                "title" => "Maximum Allowed OT Hours (Year)",
+                "dataIndex" => "maximum_allowed_ot_hours_year",
+                "align" => "right",
+            ],
+            [
+                "title" => "Cumulative Total Hours (Year)",
+                "dataIndex" => "cumulative_remaining_hours_year",
+                "align" => "right",
+            ],
+            [
+                "title" => "Remaining Allowed OT Hours (Year)",
+                "dataIndex" => "remaining_allowed_ot_hours_year",
                 "align" => "right",
             ],
         ];
@@ -175,8 +234,6 @@ class Hr_overtime_request extends Report_ParentController
     }
     protected function enrichDataSource($dataSource, $modeParams)
     {
-        $isNullParams = $this->isNullModeParams($modeParams);
-        if ($isNullParams) return collect([]);
 
         foreach ($dataSource as $key => $value) {
 
