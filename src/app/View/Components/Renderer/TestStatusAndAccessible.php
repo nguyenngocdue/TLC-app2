@@ -30,6 +30,7 @@ class TestStatusAndAccessible extends Component
     public function render()
     {
         $isAdmin = CurrentUser::isAdmin();
+        if (!$isAdmin) return "";
         return view('components.renderer.test-status-and-accessible', [
             'type' => $this->type,
             'renderId' => $this->renderId,

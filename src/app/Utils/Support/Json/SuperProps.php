@@ -181,7 +181,9 @@ class SuperProps
         if (is_null($type)) dd("Type is missing, SuperProps cant instantiate.");
         $type = Str::singular($type);
         $key = "super_prop_$type";
-        return CacheToRamForThisSection::get($key, fn () => static::make($type));
+        $result = CacheToRamForThisSection::get($key, fn () => static::make($type));
+        // dump($result);
+        return $result;
     }
 
     public static function invalidateCache($type)

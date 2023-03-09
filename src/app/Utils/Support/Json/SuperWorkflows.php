@@ -117,7 +117,9 @@ class SuperWorkflows
         if (is_null($type) || is_null($roleSet)) dd("Type or RoleSet is missing, SuperWorkflow cant instantiate.");
         $type = Str::singular($type, $roleSet);
         $key = "super_workflow_{$type}_{$roleSet}";
-        return CacheToRamForThisSection::get($key, fn () => static::make($type, $roleSet));
+        $result = CacheToRamForThisSection::get($key, fn () => static::make($type, $roleSet));
+        // dump($result);
+        return $result;
     }
 
     public static function invalidateCache($type, $roleSet)
