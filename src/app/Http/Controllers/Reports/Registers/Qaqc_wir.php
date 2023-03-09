@@ -190,14 +190,26 @@ class Qaqc_wir extends Report_ParentController
                 $color = 'bg-red-500';
             }
             // set url when onclick icon
-            $params = $this->getParamForUrl($item);
+            // $params = $this->getParamForUrl($item);
             $docId = str_pad($item['wir_doc_id'], 4, 0, STR_PAD_LEFT);
             $routeEdit = route('qaqc_wirs.edit', $docId);
-            $html = "<div class='$color w-full' title='{$item['wir_description_name']}'><a href='$routeEdit'>$docId</a></div>";
-            if (is_null($item['wir_doc_id'])) {
-                $href = $routeCreate . implode('&', $params);
-                $html =  "<div class='w-full ' title='{$item['wir_description_name']}/{$item['wir_description_id']}'><a href='$href'>$icon</a></div>";
-            }
+            // $html = "<div class='$color w-full' title='{$item['wir_description_name']}'><a href='$routeEdit'>$docId</a></div>";
+            $html = (object)[
+                'value' => $docId,
+                'cell_title' => $item['wir_description_name'],
+                'cell_class' => $color,
+                'cell_href' => $routeEdit,
+            ];
+            // if (is_null($item['wir_doc_id'])) {
+            //     $href = $routeCreate . implode('&', $params);
+            //     // $html =  "<div class='w-full ' title='{$item['wir_description_name']}/{$item['wir_description_id']}'><a href='$href'>$icon</a></div>";
+            //     $html = (object)[
+            //         'value' => $docId,
+            //         'cell_title' => $item['wir_description_name'],
+            //         'cell_class' => $color,
+            //         'cell_href' => $href,
+            //     ];
+            // }
 
             $wirdescName = [];
             if (!is_null($item['wir_description_name'])) {
@@ -260,9 +272,12 @@ class Qaqc_wir extends Report_ParentController
                 $param7 = $_itemsWirDesc[$name]['name'];
                 $params = [$param1, $param2, $param3, $param4, $param5, $param6];
                 $href = $routeCreate . implode('&', $params);
-                $html =  "<div  class=' w-full'  title='{$param7}' ><a href='$href'>$icon</a></div>";
-                // $lackFieldArray[$name] = "$html";
-                $lackFieldArray[$name] = "$html";
+                $lackFieldArray[$name] = (object)[
+                    'value' => $icon,
+                    'cell_title' => $param7,
+                    'cell_href' => $href,
+                    'cell_class' => 'bg-green-50',
+                ];
             }
             $transformData[$key] = /* (object) */ ($prodOrder + $lackFieldArray);
         }

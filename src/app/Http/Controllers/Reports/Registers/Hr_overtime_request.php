@@ -214,22 +214,22 @@ class Hr_overtime_request extends Report_ParentController
         switch (true) {
             case $value > $levelTime[$index][0]:
                 return (object)[
-                    'cell_color' => 'bg-red-400',
+                    'cell_class' => 'bg-red-400',
                     'value' => $value,
                 ];
             case $value > $levelTime[$index][1]:
                 return (object)[
-                    'cell_color' => 'bg-pink-400',
+                    'cell_class' => 'bg-pink-400',
                     'value' => $value,
                 ];
             case $value > $levelTime[$index][2]:
                 return (object)[
-                    'cell_color' => 'bg-yellow-400',
+                    'cell_class' => 'bg-yellow-400',
                     'value' => $value,
                 ];
             case $levelTime[$index][3] >= 0:
                 return (object)[
-                    'cell_color' => 'bg-green-400',
+                    'cell_class' => 'bg-green-400',
                     'value' => $value,
                 ];
         }

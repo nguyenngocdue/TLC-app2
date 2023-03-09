@@ -120,11 +120,6 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
 
     private function changeValueData($dataSource)
     {
-        $iconPass = '<div class="bg-green-400"><i class="fa-solid fa-circle-check" title="Pass"></i> </div>';
-        $iconInprogress = '<div class="bg-orange-400"><i class="fa-sharp fa-regular fa-circle-stop" title="Inprogress"></i></di>';
-        $iconOnHold = '<div class="bg-orange-600"><i class="fa-sharp fa-solid fa-circle-euro" title="On Hold"></i></di>';
-        $iconNA = '<div class="bg-blue-400"><i class="fa-sharp fa-regular fa-circle" title="Na"></i></di>';
-        $iconNull = '<div class="bg-gray-400"><i class="fa-sharp fa-regular fa-circle" title="Null"></i></di>';
 
         foreach ($dataSource as $key => $value) {
             $idx = array_search("sheet_status", array_keys($value));
@@ -132,19 +127,39 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
             foreach ($rangeArray as $col => $valCol) {
                 switch ($valCol) {
                     case "Pass":
-                        $value[$col] = $iconPass;
+                        $value[$col] = (object)[
+                            'value' => '<i class="fa-solid fa-circle-check"></i>',
+                            'cell_class' => 'bg-green-400',
+                            'cell_title' => "Pass",
+                        ];
                         break;
                     case "Inprogress":
-                        $value[$col] = $iconInprogress;
+                        $value[$col] = (object)[
+                            'value' => '<i class="fa-sharp fa-regular fa-circle-stop"></i>',
+                            'cell_class' => 'bg-orange-400',
+                            'cell_title' => "In Progress",
+                        ];
                         break;
                     case "OnHold":
-                        $value[$col] = $iconOnHold;
+                        $value[$col] = (object)[
+                            'value' => '<i class="fa-sharp fa-solid fa-circle-euro"></i>',
+                            'cell_class' => 'bg-orange-600',
+                            'cell_title' => "On Hold",
+                        ];
                         break;
                     case "NA":
-                        $value[$col] = $iconNA;
+                        $value[$col] = (object)[
+                            'value' => '<i class="fa-sharp fa-regular fa-circle"></i>',
+                            'cell_class' => 'bg-blue-400',
+                            'cell_title' => "Not Applicable",
+                        ];
                         break;
                     case "Null":
-                        $value[$col] = $iconNull;
+                        $value[$col] = (object)[
+                            'value' => '<i class="fa-sharp fa-regular fa-circle"></i>',
+                            'cell_class' => 'bg-gray-400',
+                            'cell_title' => "Work Not Started",
+                        ];
                         break;
                     default:
                         break;
