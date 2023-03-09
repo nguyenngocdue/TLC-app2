@@ -12,9 +12,10 @@
             <td class="text-sm">
                 <b>{{$dataSource['company_name']}}</b>
                 <br>{{$dataSource['company_address']}}
-                <br>Tel: {{$dataSource['company_telephone']}} Fax: {{$dataSource['company_fax']}}
+                <br>Tel: {{$dataSource['company_telephone']}} 
+                <br>Fax: {{$dataSource['company_fax']}}
                 <br>Email: {{$dataSource['company_email']}} Website: {{$dataSource['company_website']}}</td>
-                <td class="w-auto" align="center">
+                <td class="w-[20%]" align="center">
                     <div class="flex flex-row items-center justify-center gap-y-2">
                             <div id="{{$id}}" class="w-28 h-28 flex m-5"></div>
                             <div class="flex w-28 transform rotate-[270deg] float-right -ml-14 text-xs whitespace-pre-wrap">
@@ -25,19 +26,14 @@
                                 {{$tableName}}
                             </div>
                     </div>
+                    @if($nameRenderDocId)
+                    <div class="flex border border-gray-600 p-1 text-sm mb-1">
+                        Doc ID: {{$nameRenderDocId}}
+                    </div>
+                    @endif
                     
             </td>
         </tr>
-        @if($nameRenderDocId)
-            <tr >
-                <td >
-                    <div class="justify-end border border-gray-600 p-1 text-base mb-1">
-                        Doc ID: {{$nameRenderDocId}}
-                    </div>
-                </td>
-                
-            </tr>
-        @endif
     </tbody>
 </table>
 
