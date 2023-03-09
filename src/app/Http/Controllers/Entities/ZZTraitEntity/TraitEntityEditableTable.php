@@ -25,6 +25,7 @@ trait TraitEntityEditableTable
     {
         // dump($request);
         $toastrResult = [];
+        $lineResult = [];
         $table01Names = $request['tableNames'];
         session()->forget('editableTablesTransactions');
         foreach ($table01Names as $table01Name => $tableName) {
@@ -62,6 +63,7 @@ trait TraitEntityEditableTable
                         } else {
                             session()->push('editableTablesTransactions.' . $table01Name, ["result" => 0, "msg" => "destroy_failed", 'id' => 1 * $line['id'],]);
                             $toastrResult[$table01Name] = "Delete line failed.";
+                            $lineResult[$table01Name] = false;
                         }
                     } else {
                         $updatedId = $controller->update($fakeRequest, $line['id']);
@@ -70,6 +72,7 @@ trait TraitEntityEditableTable
                         } else {
                             session()->push('editableTablesTransactions.' . $table01Name, ["result" => 0, "msg" => "update_failed_due_to_validation", 'id' => 1 * $line['id'],]);
                             $toastrResult[$table01Name] = "Update line failed.";
+                            $lineResult[$table01Name] = false;
                         }
                     }
                 } else {
@@ -83,11 +86,12 @@ trait TraitEntityEditableTable
                         } else {
                             session()->push('editableTablesTransactions.' . $table01Name, ["result" => 0, "msg" => "insert_failed_due_to_validation", 'id' => null]);
                             $toastrResult[$table01Name] = "Create line failed.";
+                            $lineResult[$table01Name] = false;
                         }
                     }
                 }
             }
         }
-        return $toastrResult;
+        return [$toastrResult, $lineResult];
     }
 }

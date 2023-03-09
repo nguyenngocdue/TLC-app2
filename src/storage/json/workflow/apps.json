@@ -846,6 +846,17 @@
         "status": null,
         "icon": null
     },
+    "zunit_test_08": {
+        "name": "zunit_test_08",
+        "hidden": "true",
+        "package": "unit_test",
+        "sub_package": "unit_test",
+        "title": "UT08 (Status and Workflow)",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "icon": null
+    },
     "zunit_test_09": {
         "name": "zunit_test_09",
         "hidden": "true",
