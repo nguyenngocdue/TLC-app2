@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Reports\Registers;
 
-use App\Helpers\Helper;
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
 use App\Models\Qaqc_insp_tmpl;
@@ -12,6 +11,7 @@ use App\Utils\Support\Report;
 class Qaqc_insp_chklst_sht extends Report_ParentController
 {
     use TraitReport;
+    protected $rotate45Width = 300;
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT tb.*,
@@ -107,11 +107,11 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
     {
         return [
             [
-                'title' => 'Sub Porject',
+                'title' => 'Sub Project',
                 'dataIndex' => 'sub_project_id'
             ],
             [
-                'title' => 'QAQC Inspect Template',
+                'title' => 'Checklist Type',
                 'dataIndex' => 'qaqc_insp_tmpl_id'
             ]
         ];

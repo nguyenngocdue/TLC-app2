@@ -46,11 +46,11 @@ trait TraitEntityFormula
                     $position_3 = ($user->position3) ? $user->position3->name : "";
                     $value = (new User_PositionRendered())($position_pres, $position_1, $position_2, $position_3);
                     break;
-                    case "All_OwnerId":
-                        $value = CurrentUser::get()->id;
-                        break;
+                case "All_OwnerId":
+                    $value = CurrentUser::get()->id;
+                    break;
                 default:
-                $value = "";
+                    $value = "";
                     break;
             }
             $item[$prop['column_name']] = $value;
