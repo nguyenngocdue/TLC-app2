@@ -14,16 +14,8 @@ class WorkflowFields
         $roleSet = CurrentUser::getRoleSet();
         return SuperWorkflows::getFor(self::$type, $roleSet);
     }
-    static function resolveSuperProps($superProps, $status, $type, $isCheckColumnStatus)
+    static function getStatusFollowDefinitions($status, $definitions)
     {
-        self::$type = $type;
-        $buttonSave = true;
-        $props = $superProps['props'];
-        $definitions = $superProps['settings']['definitions'] ?? [];
-        if (!$isCheckColumnStatus) {
-            return [$status = null, [], $props, [], [], $buttonSave, []];
-        }
-        $statuses = $superProps['statuses'];
         if (!$status) {
             if (empty($definitions)) {
                 $status = 'new';
@@ -31,9 +23,10 @@ class WorkflowFields
                 $status = array_shift(array_values($definitions));
             }
         }
-        $hideSaveButton = $definitions['hide-save-btn'] ?? [];
-        $buttonSave = !($status == 'closed') && !in_array($status, $hideSaveButton);
-        $intermediate = $superProps['intermediate'];
+        return $status;
+    }
+    static function getPropsIntermediate($intermediate, $status, $props)
+    {
         $propsIntermediate = [];
         if (!empty($intermediate) && isset($intermediate[$status])) {
             $filters = $intermediate[$status];
@@ -44,23 +37,58 @@ class WorkflowFields
                 }
             }
         }
-        $transitions = $statuses[$status]['transitions'] ?? [];
-        $actionButtons = [];
-        foreach ($transitions as $value) {
-            $actionButtons[$value] = $statuses[$value]['action-buttons'];
-        }
+        return $propsIntermediate;
+    }
+    static function checkButtonSaveRenderWhenAdmin(&$buttonSave)
+    {
         if (CurrentUser::isAdmin()) {
             $buttonSave = true;
         }
+    }
+    static function getCapabilitiesByRoleSetCurrentUser()
+    {
         $workflows = self::getSuperWorkflowByRoleSet()['workflows'];
         $checkWorkflowCapa = [];
         foreach ($workflows as $key => $value) {
             $checkWorkflowCapa[$key] = $value['capabilities'];
         }
+        return $checkWorkflowCapa;
+    }
+    static function checkWorkflowCapabilitiesForRenderButton($checkWorkflowCapa, $status, &$buttonSave, &$actionButtons)
+    {
         if (!$checkWorkflowCapa[$status]) {
             $buttonSave = false;
             $actionButtons = [];
         }
+    }
+    static function getActionButtonsFromTransitionAndStatuses($transitions, $statuses)
+    {
+        $actionButtons = [];
+        foreach ($transitions as $value) {
+            $actionButtons[$value] = $statuses[$value]['action-buttons'];
+        }
+        return $actionButtons;
+    }
+    static function resolveSuperProps($superProps, $status, $type, $isCheckColumnStatus)
+    {
+        self::$type = $type;
+        $buttonSave = true;
+        $props = $superProps['props'];
+        $definitions = $superProps['settings']['definitions'] ?? [];
+        if (!$isCheckColumnStatus) {
+            return [$status = null, [], $props, [], [], $buttonSave, []];
+        }
+        $statuses = $superProps['statuses'];
+        $status = self::getStatusFollowDefinitions($status, $definitions);
+        $hideSaveButton = $definitions['hide-save-btn'] ?? [];
+        $buttonSave = !($status == 'closed') && !in_array($status, $hideSaveButton);
+        $intermediate = $superProps['intermediate'];
+        $propsIntermediate = self::getPropsIntermediate($intermediate, $status, $props);
+        $transitions = $statuses[$status]['transitions'] ?? [];
+        $actionButtons = self::getActionButtonsFromTransitionAndStatuses($transitions, $statuses);
+        self::checkButtonSaveRenderWhenAdmin($buttonSave);
+        $checkWorkflowCapa = self::getCapabilitiesByRoleSetCurrentUser();
+        self::checkWorkflowCapabilitiesForRenderButton($checkWorkflowCapa, $status, $buttonSave, $actionButtons);
         return [$status, $statuses, $props, $actionButtons, $transitions, $buttonSave, $propsIntermediate];
     }
     static function parseFields($props, $values, $defaultValues, $status, $isCheckColumnStatus)
