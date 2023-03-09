@@ -37,7 +37,7 @@
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
-        "approved": ""
+        "approved": "true"
     },
     "bd_manager": {
         "name": "bd_manager",

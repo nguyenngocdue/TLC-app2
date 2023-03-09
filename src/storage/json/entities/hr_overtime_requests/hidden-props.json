@@ -58,10 +58,10 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
     },
     "_created_at": {
         "name": "_created_at",

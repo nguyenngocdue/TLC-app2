@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class SuperWorkflows
 {
     private static $result = [];
-    private static $adminIsRampage  = true;
+    private static $adminIsRampage  = !true;
 
     private static function makeCheckbox($dataSource)
     {
