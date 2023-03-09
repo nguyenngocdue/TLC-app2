@@ -51,7 +51,7 @@
 </div>
 @if(!$readOnly)
     @if($showToBeDeleted)
-    <input id="{{$name}}-toBeDeleted" name="{{$name}}[toBeDeleted]" readonly type='hiddenOrText' class='p-2.5 w-full bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purple-400 focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
+    <input id="{{$name}}-toBeDeleted" name="{{$name}}[toBeDeleted]" readonly type='hiddenOrText' class='p-2.5 w-full bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
     @endif
 @endif
 @if(!$readOnly)
