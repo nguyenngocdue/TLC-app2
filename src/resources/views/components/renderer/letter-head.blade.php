@@ -9,13 +9,12 @@
                     <img alt="TLC Logo" src="{{$dataSource['company_logo']}}" class="h-full w-full">
                 </div>
             </td>
-            <td align="center"></td>
             <td class="text-sm">
                 <b>{{$dataSource['company_name']}}</b>
                 <br>{{$dataSource['company_address']}}
                 <br>Tel: {{$dataSource['company_telephone']}} Fax: {{$dataSource['company_fax']}}
                 <br>Email: {{$dataSource['company_email']}} Website: {{$dataSource['company_website']}}</td>
-                <td class="w-[20%]" align="center">
+                <td class="w-auto" align="center">
                     <div class="flex flex-row items-center justify-center gap-y-2">
                             <div id="{{$id}}" class="w-28 h-28 flex m-5"></div>
                             <div class="flex w-28 transform rotate-[270deg] float-right -ml-14 text-xs whitespace-pre-wrap">
@@ -32,10 +31,8 @@
         @if($nameRenderDocId)
             <tr >
                 <td >
-                    <div class="flex flex-row flex-wrap gap-y-0 mb-1">
-                        <div class="justify-end border border-gray-600 p-1 text-base">
-                            Doc ID: {{$nameRenderDocId}}
-                        </div>
+                    <div class="justify-end border border-gray-600 p-1 text-base mb-1">
+                        Doc ID: {{$nameRenderDocId}}
                     </div>
                 </td>
                 

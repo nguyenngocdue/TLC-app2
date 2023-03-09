@@ -75,9 +75,11 @@
                             <x-renderer.heading level=4>
                                 @yield('title', 'Untitled')
                             </x-renderer.heading>
+                            @if(isset($type))
                             <x-renderer.heading-status :type="$type">
                                 @yield('status', 'Untitled')
                             </x-renderer.heading-status>
+                            @endif
                         </div>
                         <ul class="w-full lg:w-1/2">
                             <li class="relative">
