@@ -29,28 +29,7 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
 <div class="px-4">
     <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}"/>
     <x-controls.header-alert-validation :strProps="$props" />
-    @if(App\Utils\Support\CurrentUser::isAdmin())
-        @if($status && !($action === 'create'))
-            <div class="w-full mb-8 p-2 bg-white rounded-lg  dark:bg-gray-800">
-                <x-renderer.card title="Test Status" >
-                    <div class="mb-3">
-                        @foreach($statuses as $key => $value)
-                            <span class="bg-{{$value['color']}}-{{$value['color_index']}} whitespace-nowrap rounded hover:bg-blue-400 font-medium text-xs px-2 py-1.5 leading-tight mx-1">
-                                <a href="{{route($type.'.edit',$id)}}?status={{$value['name']}}">{{$value['title']}}</a>
-                            </span>
-                        @endforeach
-                    </div>
-                </x-renderer.card>
-                <x-renderer.card title="Accessible" >
-                    <div class="mb-3">
-                        @foreach($statuses[$status]['capability-roles'] as $value)
-                            <span><x-renderer.tag color="gray" rounded="rounded" class="ml-1">{{$value}}</x-renderer.tag></span>
-                        @endforeach
-                    </div>
-                </x-renderer.card>
-            </div>
-        @endif
-    @endif
+    <x-renderer.test-status-and-accessible type={{$type}} renderId={{$id}} status={{$status}} action={{$action}} :statuses="$statuses"/>
     <form class="w-full mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
         @csrf        
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
