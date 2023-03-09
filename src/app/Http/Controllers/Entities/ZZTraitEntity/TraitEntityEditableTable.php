@@ -92,6 +92,10 @@ trait TraitEntityEditableTable
                 }
             }
         }
-        return [$toastrResult, $lineResult];
+        // return $toastrResult;
+        // dump($lineResult);
+        $result = [$toastrResult, empty($lineResult)];
+        // dump($result);
+        return $result;
     }
 }

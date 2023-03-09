@@ -126,9 +126,10 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
-		[$toastrResult, $lineResult] = ($request['tableNames'] !== 'fakeRequest') ? $this->handleEditableTables($request, $props['editable_table'], $objectId) : [];
+		[$toastrResult, $lineResult] = ($request['tableNames'] !== 'fakeRequest') ? $this->handleEditableTables($request, $props['editable_table'], $objectId) : [[], []];
 		try {
-			$this->handleStatus($theRow, $newStatus);
+			//If all tables are created or updated, change the status of the item
+			if ($lineResult) $this->handleStatus($theRow, $newStatus);
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
 		}
