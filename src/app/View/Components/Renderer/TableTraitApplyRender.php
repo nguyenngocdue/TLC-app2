@@ -9,10 +9,18 @@ use Illuminate\Support\Str;
 
 trait TableTraitApplyRender
 {
-    private function getAttributeRendered($column, $dataLine)
+    private function getAttributeRendered($column, object $dataLineObj)
     {
         $attributes = $column['attributes'] ?? [];
-        array_walk($attributes, fn (&$value, $key) => $value = isset($dataLine[$value]) ? "$key='$dataLine[$value]'" : "_no_$value");
+        foreach ($attributes as $key => &$att) {
+            if (isset($dataLineObj->$att)) {
+                $value = $dataLineObj->$att;
+                $att = "$key='$value'";
+            } else {
+                $att = "_no_$att";
+            }
+        }
+        // array_walk($attributes, fn (&$value, $key) => $value = isset($dataLine->{$value}) ? "$key='$dataLine->{$value}'" : "_no_$value");
         $attributeRendered = trim(join(" ", $attributes));
         return $attributeRendered;
     }
@@ -33,20 +41,20 @@ trait TableTraitApplyRender
         return "rendererParam='$strParam' rendererUnit='$strUnit'";
     }
 
-    private function applyRender($name, $renderer, $rawData, $column, $dataLine, $index)
+    private function applyRender($name, $renderer, $rawData, $column, object $dataLineObj, $index)
     {
         $name = $name ? "name='$name'" : "";
         $rowIndexRender = "rowIndex='$index'";
 
-        $attributeRender = $this->getAttributeRendered($column, $dataLine);
-        $propertyRender = $this->getPropertyRendered($column, $dataLine);
+        $attributeRender = $this->getAttributeRendered($column, $dataLineObj);
+        $propertyRender = $this->getPropertyRendered($column);
         $typeRender = isset($column['type']) ? "type='{$column['type']}'" : "";
         $sortByRender = isset($column['sortBy']) ? "sortBy='{$column['sortBy']}'" : "";
 
         $isDropdown = isset($column['renderer']) && in_array($column['renderer'], ['dropdown']);
         $cbbDataSource = $column['cbbDataSource'] ?? ["", "true"];
         $cbbDataSourceRender = $isDropdown ? ':cbbDataSource=\'$cbbDataSource\'' : "";
-        $dataLineRender = $dataLine ? ':dataLine=\'$dataLine\'' : "";
+        $dataLineRender = $dataLineObj ? ':dataLine=\'$dataLine\'' : "";
         $columnRender = $column ? ':column=\'$column\'' : "";
         $cellRender = ':cell=\'$cell\'';
         $rendererParam = isset($column['rendererParam']) ? $this->getRendererParams($column) : "";
@@ -79,12 +87,9 @@ trait TableTraitApplyRender
 
         // Log::info($output);
         // Log::info($column);
-        if (is_array($dataLine)) {
-            $cell = $dataLine[$column['dataIndex']] ?? "No dataIndex for " . $column['dataIndex']; //This is for Thumbnail
-        } else {
-            $columnName = $column['dataIndex'];
-            $cell = $dataLine->$columnName ?? "No dataIndex for " . $column['dataIndex']; //This is for Thumbnail
-        }
+
+        $columnName = $column['dataIndex'];
+        $cell = $dataLineObj->$columnName ?? "No dataIndex for " . $column['dataIndex']; //This is for Thumbnail
         if ($isEditable && $isDropdown) {
             if (is_string($cell)) {
                 $instance = json_decode($cell);
@@ -94,7 +99,7 @@ trait TableTraitApplyRender
             }
         }
 
-        $params = ['column' => $column, 'dataLine' => $dataLine, 'cell' => $cell,];
+        $params = ['column' => $column, 'dataLine' => $dataLineObj, 'cell' => $cell,];
         if ($isDropdown) $params['cbbDataSource'] = $cbbDataSource;
         $blade = Blade::render($output, $params);
         return $blade;

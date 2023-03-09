@@ -27,7 +27,7 @@ trait TableTraitRows
         return $dataSource->items();
     }
 
-    private function makeTd($columns, $dataLine, $no, $dataLineIndex, $tableDebug)
+    private function makeTd($columns, $dataLineObj, $no, $dataLineIndex, $tableDebug)
     {
         $tds = [];
         $columnCount = sizeof($columns);
@@ -46,16 +46,16 @@ trait TableTraitRows
                     $dataIndex = $column['dataIndex'];
                     if (str_contains($dataIndex, "()")) {
                         $fn = substr($dataIndex, 0, strlen($dataIndex) - strlen("()"));
-                        $rawData = $dataLine->$fn() ?? ""; //this is to execute the getCheckedByField function
+                        $rawData = $dataLineObj->$fn() ?? ""; //this is to execute the getCheckedByField function
                     } else {
-                        $rawData = (is_object($dataLine))  ? ($dataLine->$dataIndex ?? "") : ($dataLine[$dataIndex] ?? "");
+                        $rawData = $dataLineObj->$dataIndex ?? "";
                     }
                     $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
                     $valueOfRawData = (is_object($rawData) && isset($rawData->value)) ? $rawData->value : $rawData;
                     $rendered = $renderer
                         // ? "A" 
                         // : "B";
-                        ? $this->applyRender($name, $renderer, $rawData, $column, $dataLine, $dataLineIndex)
+                        ? $this->applyRender($name, $renderer, $rawData, $column, $dataLineObj, $dataLineIndex)
                         : ($dataIndex === 'action' ? $valueOfRawData :
                             "<p class='p-2' valueOfRawData>" . $valueOfRawData . "</p>"
                         );
@@ -67,7 +67,6 @@ trait TableTraitRows
             $styleStr = $this->getStyleStr($column);
             $rendered = ($tableDebug && ($renderer != 'no.') ? $name : "") . $rendered;
 
-            // $cellColor = (is_object($dataLine))  ? ($dataLine->cell_color ?? "") : ($dataLine['cell_color'] ?? "");
             $cellColor = '';
             if (is_object($rawData)) {
                 if (isset($rawData->cell_color)) {
@@ -103,42 +102,34 @@ trait TableTraitRows
         if ($this->groupBy && !$this->groupKeepOrder) {
             if (is_object($dataSource)) $dataSource = $items;
             $groupBy = $this->groupBy;
-            usort($dataSource, fn ($a, $b) => strcasecmp((is_object($a) ? $a->{$groupBy} : $a[$this->groupBy]) ?? 'zzz', (is_object($a) ? $a->{$groupBy} : $b[$this->groupBy]) ?? 'zzz'));
+            uasort($dataSource, fn ($a, $b) => strcasecmp((is_object($a) ? $a->{$groupBy} : $a[$this->groupBy]) ?? 'zzz', (is_object($a) ? $a->{$groupBy} : $b[$this->groupBy]) ?? 'zzz'));
         }
 
-        $lastIndex = "anything";
-        foreach ($dataSource as $no => $dataLine) {
-            $tds = $this->makeTd($columns, $dataLine, $start + $no + 1, $no, $tableDebug);
+        $lastIndex = -1;
+        $lineNo = 0;
+        foreach ($dataSource as $dataLineIndex => $dataLine) {
+            $dataLineObj = is_object($dataLine) ? $dataLine : (object)$dataLine;
+            $tds = $this->makeTd($columns, $dataLineObj, $start + $lineNo++ + 1, $dataLineIndex, $tableDebug);
 
             if ($this->groupBy) {
                 $groupBy = $this->groupBy;
-                if (is_object($dataLine)) {
-                    $index = isset($dataLine->{$groupBy}[0]) ? strtoupper(substr($dataLine->{$groupBy}, 0, $this->groupByLength)) : "(EMPTY)";
-                } else {
-                    $index = isset($dataLine[$this->groupBy][0]) ? strtoupper(substr($dataLine[$this->groupBy], 0, $this->groupByLength)) : "(EMPTY)";
-                }
+                $index = isset($dataLineObj->{$groupBy}[0]) ? strtoupper(substr($dataLineObj->{$groupBy}, 0, $this->groupByLength)) : "(EMPTY)";
                 if ($index !== $lastIndex) {
                     $lastIndex = $index;
                     $trs[] = "<tr class='bg-gray-100 dark:bg-gray-800'><td class='p-2 text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td></tr>";
                 }
             }
-            if (is_array($dataLine)) {
-                $bgClass = ($dataLine['row_color'] ?? false) ? "bg-" . $dataLine['row_color'] . "-400" : "";
-            } else {
-                $bgClass = '';
-            }
-            $extraTrClass = $dataLine->extraTrClass ?? "";
+            $bgClass = ($dataLineObj->row_color ?? false) ? "bg-" . $dataLineObj->row_color . "-400" : "";
+            $extraTrClass = $dataLineObj->extraTrClass ?? "";
             $tr = "<tr class='dark:hover:bg-gray-900 hover:bg-gray-100 $bgClass text-gray-700 dark:text-gray-300 $extraTrClass'>";
             $tr .=  join("", $tds);
             $tr .= "</tr>";
             $trs[] = $tr;
 
-            if (is_array($dataLine)) {
-                if (isset($dataLine['rowDescription'])) {
-                    $colspan_minus_1 = $colspan - 1;
-                    $td = "<td class='p-2 text-xs dark:text-gray-300 text-gray-600' colspan=$colspan_minus_1>{$dataLine['rowDescription']}</td>";
-                    $trs[] = "<tr component='rowDescription' class='dark:bg-gray-600  bg-gray-100 '><td></td>$td</tr>";
-                }
+            if (isset($dataLineObj->rowDescription)) {
+                $colspan_minus_1 = $colspan - 1;
+                $td = "<td class='p-2 text-xs dark:text-gray-300 text-gray-600' colspan=$colspan_minus_1>{$dataLineObj->rowDescription}</td>";
+                $trs[] = "<tr component='rowDescription' class='dark:bg-gray-600  bg-gray-100 '><td></td>$td</tr>";
             }
         }
         $tr_td = join("", $trs);

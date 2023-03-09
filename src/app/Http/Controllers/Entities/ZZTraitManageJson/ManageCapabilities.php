@@ -15,7 +15,7 @@ class ManageCapabilities extends Manage_Parent
     protected $routeKey = "_cpb";
     protected $jsonGetSet = Capabilities::class;
 
-    // protected $showToggleColumn = true;
+    protected $showToggleColumn = true;
 
     protected function getColumns()
     {
