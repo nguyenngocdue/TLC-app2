@@ -14,7 +14,6 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitEntityFieldHandler2;
 	use TraitEntityAttachment2;
 	use TraitEntityEditableTable;
-	use TraitEntityFormula;
 	use TraitValidation;
 	use TraitSendNotificationAndMail;
 
