@@ -102,11 +102,11 @@ class Qaqc_insp_chklst extends Report_ParentController
 				'dataIndex' => 'prod_order_id'
 			],
 			[
-				'title' => 'QAQC Inspect Template',
+				'title' => 'Checklist Type',
 				'dataIndex' => 'qaqc_insp_tmpl_id'
 			],
 			[
-				'dataIndex' => 'filter_run'
+				'dataIndex' => 'run_option'
 			]
 		];
 	}
@@ -116,8 +116,8 @@ class Qaqc_insp_chklst extends Report_ParentController
 		$subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
 		$prod_orders  = ['prod_order_id' =>  Prod_order::get()->pluck('name', 'id')->toArray()];
 		$insp_tmpls = ['qaqc_insp_tmpl_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
-		$filter_run = ['filter_run' => ['Filter for a latest run', 'Filter for many runs']];
-		return array_merge($subProjects, $prod_orders, $insp_tmpls, $filter_run);
+		$run_option = ['run_option' => ['View only last run', 'View all runs']];
+		return array_merge($subProjects, $prod_orders, $insp_tmpls, $run_option);
 	}
 
 
@@ -137,14 +137,14 @@ class Qaqc_insp_chklst extends Report_ParentController
 			$descIdLines[$value['line_description']][] = $key;
 		});
 		// Reduce the number of lines from URL request 
-		if (isset($modeParams['filter_run']) && !$modeParams['filter_run']) {
+		if (isset($modeParams['run_option']) && !$modeParams['run_option']) {
 			$descIdLines = array_map(fn ($item) => array_splice($item, 0, 1), $descIdLines);
 		}
 
 
 
 		// Reduce the number of lines from URL request
-		// if (isset($modeParams['filter_run']) && !$modeParams['filter_run']) {
+		// if (isset($modeParams['run_option']) && !$modeParams['run_option']) {
 		// 	array_walk($descIdLines, function ($value, $key) use ($lines, &$descIdLines) {
 		// 		$maxRunId = array_splice($value, 0, 1);
 		// 		$line = $lines[$maxRunId[0]];

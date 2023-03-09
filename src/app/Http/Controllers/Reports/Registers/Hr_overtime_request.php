@@ -15,7 +15,7 @@ class Hr_overtime_request extends Report_ParentController
     {
         $sql = " SELECT tb2.*,LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month ORDER BY year_months) AS maximum_allowed_ot_hours_year
         FROM(SELECT 
-        GROUP_CONCAT(workplace SEPARATOR ', ') AS ot_workplace,
+        GROUP_CONCAT(distinct workplace SEPARATOR ', ') AS ot_workplace,
             user_category_name,
             user_category_desc,
             MAX(first_name) AS first_name,
@@ -79,10 +79,6 @@ class Hr_overtime_request extends Report_ParentController
         return $sql;
     }
 
-
-
-
-
     public function getTableColumns($dataSource)
     {
         // dump($dataSource);
@@ -98,6 +94,7 @@ class Hr_overtime_request extends Report_ParentController
                 "align" => 'left'
             ],
             [
+                "title" => "Employee ID",
                 "dataIndex" => "employeeid",
                 "align" => 'left'
             ],
