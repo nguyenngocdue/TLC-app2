@@ -20,17 +20,18 @@ class Hr_overtime_request extends Report_ParentController
             user_category_desc,
             MAX(first_name) AS first_name,
             MAX(last_name) AS last_name,
+            MAX(user_id) AS user_id,
             MAX(user_workplace) AS user_workplace,
-            employeeid,
+            employee_id,
             year_months,
             (40) AS maximum_allowed_ot_hours,
             SUM(total_overtime_hours) AS total_overtime_hours,
             (40 - SUM(total_overtime_hours)) AS remaining_allowed_ot_hours,
             years_month,
             (200) AS maximum_allowed_ot_hours_year,
-            ROW_NUMBER() OVER (PARTITION BY employeeid, years_month ORDER BY year_months) AS step_plus,
-            SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employeeid, years_month ORDER BY year_months) AS cumulative_remaining_hours_year,
-            (200 - SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employeeid, years_month ORDER BY year_months)) AS remaining_allowed_ot_hours_year
+            ROW_NUMBER() OVER (PARTITION BY employee_id, years_month ORDER BY year_months) AS step_plus,
+            SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employee_id, years_month ORDER BY year_months) AS cumulative_remaining_hours_year,
+            (200 - SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employee_id, years_month ORDER BY year_months)) AS remaining_allowed_ot_hours_year
             
         FROM (
             SELECT otTb.*, wpus.name AS user_workplace
@@ -46,7 +47,7 @@ class Hr_overtime_request extends Report_ParentController
                         us.last_name AS last_name,
                         uscate.name AS user_category_name,
                         uscate.description AS user_category_desc,
-                        otline.employeeid AS employeeid,
+                        otline.employeeid AS employee_id,
                         us.full_name AS member_name,
                         SUBSTR(otline.ot_date,1,7) AS year_months,
                         SUBSTR(otline.ot_date,1,4) AS years_month,
@@ -64,18 +65,18 @@ class Hr_overtime_request extends Report_ParentController
 
         if (isset($modeParams['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
         if (isset($modeParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
-        $sql .= "\nGROUP BY user_id, employeeid, year_months, ot_workplace_id, years_month
+        $sql .= "\nGROUP BY user_id, employee_id, year_months, ot_workplace_id, years_month
                 ) AS rgt_ot 
                 JOIN workplaces wp ON wp.id = rgt_ot.ot_workplace_id";
         if (isset($modeParams['ot_workplace_id'])) $sql .= "\n AND wp.id = '{{ot_workplace_id}}'";
         $sql .= "\n) AS otTb, workplaces wpus
             WHERE 1 = 1
             AND otTb.user_workplace_id = wpus.id
-            GROUP BY user_id, employeeid, year_months, ot_workplace_id, years_month
+            GROUP BY user_id, employee_id, year_months, ot_workplace_id, years_month
         ) tbg
-        GROUP BY year_months, years_month, employeeid, user_category_name, user_category_desc
+        GROUP BY year_months, years_month, employee_id, user_category_name, user_category_desc
         ) tb2
-        ORDER BY first_name, last_name, employeeid, year_months DESC";
+        ORDER BY first_name, last_name, employee_id, year_months DESC";
         return $sql;
     }
 
@@ -95,7 +96,7 @@ class Hr_overtime_request extends Report_ParentController
             ],
             [
                 "title" => "Employee ID",
-                "dataIndex" => "employeeid",
+                "dataIndex" => "employee_id",
                 "align" => 'left'
             ],
             [
@@ -204,31 +205,36 @@ class Hr_overtime_request extends Report_ParentController
 
         return array_merge($workplaces, $months, $users);
     }
-    private function wrapValueInObjectWithCellColor($value)
+    private function wrapValueInObjectWithCellColor($value, $index)
     {
+        $levelTime = [
+            [40, 30, 20, 10, 0],
+            [200, 150, 100, 50, 0],
+        ];
         switch (true) {
-            case $value > 40:
+            case $value > $levelTime[$index][0]:
                 return (object)[
                     'cell_color' => 'bg-red-400',
                     'value' => $value,
                 ];
-            case $value > 30:
+            case $value > $levelTime[$index][1]:
                 return (object)[
                     'cell_color' => 'bg-pink-400',
                     'value' => $value,
                 ];
-            case $value > 20:
+            case $value > $levelTime[$index][2]:
                 return (object)[
                     'cell_color' => 'bg-yellow-400',
                     'value' => $value,
                 ];
-            case $value >= 0:
+            case $levelTime[$index][3] >= 0:
                 return (object)[
                     'cell_color' => 'bg-green-400',
                     'value' => $value,
                 ];
         }
     }
+
     protected function enrichDataSource($dataSource, $modeParams)
     {
 
@@ -237,16 +243,21 @@ class Hr_overtime_request extends Report_ParentController
             // display name/description for total_overtime_hours
             $teamName = $value->user_category_name;
             $teamDesc = $value->user_category_desc;
-            $strTeam = "<span title='$teamDesc'>$teamName</span>";
-            $dataSource[$key]->user_category_name = $strTeam;
+            $htmlTeam = "<span title='$teamDesc'>$teamName</span>";
+            $htmlEmployeeId = "<span title='User ID: $value->user_id'>$value->employee_id</span>";
+            $dataSource[$key]->user_category_name = $htmlTeam;
+            $dataSource[$key]->employee_id = $htmlEmployeeId;
 
             // display colors for total_overtime_hours
-            $hours = $value->total_overtime_hours * 1;
-            $strHour = $this->wrapValueInObjectWithCellColor($hours);
-            $dataSource[$key]->total_overtime_hours = $strHour;
+            $totalOvertimeHour = $value->total_overtime_hours * 1;
+            $cumulativeRemainingHours = $value->cumulative_remaining_hours_year * 1;
+
+            $strTotalOvertimeHour = $this->wrapValueInObjectWithCellColor($totalOvertimeHour, 0);
+            $strCumulativeRemainingHours = $this->wrapValueInObjectWithCellColor($cumulativeRemainingHours, 1);
+
+            $dataSource[$key]->total_overtime_hours = $strTotalOvertimeHour;
+            $dataSource[$key]->cumulative_remaining_hours_year = $strCumulativeRemainingHours;
         }
-
-
         // dd($dataSource);
         return $dataSource;
     }

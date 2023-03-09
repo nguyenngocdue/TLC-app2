@@ -12,6 +12,7 @@ class Dropdown extends Component
         private $name = 'No name',
         private $itemsSelected = [],
         private $title = "No title",
+        private $allowClear = false
 
     ) {
     }
@@ -25,6 +26,7 @@ class Dropdown extends Component
             'itemsSelected' => $this->itemsSelected,
             'name' => $this->name,
             'title' => $this->title,
+            'allowClear' => $this->allowClear
 
         ]);
     }

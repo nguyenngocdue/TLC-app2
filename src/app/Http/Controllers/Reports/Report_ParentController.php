@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports;
 
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\UpdateUserSettings;
 use App\Models\Hr_overtime_request_line;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_chklst;
@@ -94,10 +95,11 @@ abstract class Report_ParentController extends Controller
 
     protected function getModeParams($typeReport, $entity)
     {
+        $typeReport = strtolower($typeReport);
         $settings = CurrentUser::getSettings();
         if (!isset($settings[$entity])) return [];
-        if (isset($settings[$entity][strtolower($typeReport)]['mode_001'])) {
-            $modeParams = $settings[$entity][strtolower($typeReport)]['mode_001'];
+        if (isset($settings[$entity][$typeReport]['mode_001'])) {
+            $modeParams = $settings[$entity][$typeReport]['mode_001'];
             return $modeParams;
         }
         return [];
@@ -112,24 +114,31 @@ abstract class Report_ParentController extends Controller
         }
         return 10;
     }
+    protected function setDefaultValueModeParams($modeParams, $request, $entity, $typeReport)
+    {
+        return $modeParams;
+    }
 
     public function index(Request $request)
     {
-
+        if (!$request->input('page') && !empty($request->input())) {
+            (new UpdateUserSettings())($request);
+            return redirect($request->getPathInfo());
+        }
         $typeReport = CurrentRoute::getTypeController();
-        $viewName = strtolower(Str::singular($typeReport));
+        $routeName = $request->route()->action['as'];
         $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
 
-
-        $pageLimit = $this->getPageParam($typeReport, $entity);
         $modeParams = $this->getModeParams($typeReport, $entity);
-
+        $modeParams = $this->setDefaultValueModeParams($modeParams, $request, $entity, $typeReport);
+        // dd($request->route()->action['controller']);
         $dataSource = $this->getDataSource($modeParams);
 
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
         // dd($dataSource);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
         // dump(count($dataSource));
+        $pageLimit = $this->getPageParam($typeReport, $entity);
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
         // dd($dataSource);
 
@@ -138,19 +147,21 @@ abstract class Report_ParentController extends Controller
         $sheets = $this->getSheets($dataSource);
 
         $paramColumns = $this->getParamColumns();
+        $viewName = strtolower(Str::singular($typeReport));
 
         return view('reports.' . $viewName, [
             'tableColumns' => $columns,
+            'routeName' => $routeName,
             'tableDataSource' => $dataSource,
             'modeParams' => $modeParams,
             'entity' => $entity,
             'typeReport' => $typeReport,
             'sheets' => $sheets,
             'dataModeControl' => $dataModeControl,
-            'topTitle' => $this->getMenuTitle(),
             'pageLimit' => $pageLimit,
             'paramColumns' => $paramColumns,
             'rotate45Width' => $this->rotate45Width,
+            'topTitle' => $this->getMenuTitle(),
             'groupBy' => $this->groupBy,
         ]);
     }

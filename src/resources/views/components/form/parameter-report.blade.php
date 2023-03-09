@@ -6,9 +6,7 @@ $modeParams = ['mode_001'];
     <div class="flex justify-end ">
         <x-form.reset-param-report typeReport="{{$typeReport}}" entity="{{$entity}}" route="{{ route('updateUserSettings') }}" :modeNames='$modeParams' />
     </div>
-    <form action="{{$route}}" method="post" class="flex flex-row-reverse">
-        @method('PUT')
-        @csrf
+    <form action="{{route($routeName)}}" method="GET" class="flex flex-row-reverse">
         <div class="grid grid-rows-1 ">
             <div class="flex">
                 <input type="hidden" name='_entity' value="{{ $entity }}">
@@ -19,9 +17,10 @@ $modeParams = ['mode_001'];
                 $title = isset($value['title']) ? $value['title'] : ucwords(str_replace('_', " ", $value['dataIndex']));
                 $name = $value['dataIndex'];
                 $data = $dataSource[$name];
+                $allowClear = isset($value['allowClear']) ? $value['allowClear'] : false;
                 @endphp
                 <div class=" w-72 px-2 ">
-                    <x-renderer.dropdown title="{{$title}}" name="{{$name}}" :dataSource="$data" :itemsSelected="$itemsSelected" />
+                    <x-renderer.dropdown title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} :dataSource="$data" :itemsSelected="$itemsSelected" />
                 </div>
                 @endforeach
                 <div class="  flex items-end">

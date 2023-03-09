@@ -120,12 +120,13 @@ class UpdateUserSettings extends Controller
 
     private function updateReport($request, $settings)
     {
+        // dd($request);
         $reqValue = $request->all();
         if (isset($reqValue['mode_names'])) {
             return $this->resetParamsReport($request);
         }
-        $entity = $request->input("_entity");
-        $typeReport = strtolower($request->input("type_report"));
+        $entity = $reqValue["_entity"];
+        $typeReport = strtolower($reqValue["type_report"]);
         $indexBreak = array_search("type_report", array_keys($reqValue));
         $parameter = array_slice($reqValue, $indexBreak + 1, count($reqValue) - $indexBreak);
         $settings[$entity][$typeReport]["mode_001"] = $parameter;
