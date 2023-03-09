@@ -22,42 +22,42 @@
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
     },
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
     },
     "_prod_discipline_id": {
         "name": "_prod_discipline_id",
         "column_name": "prod_discipline_id",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
     },
     "_description": {
         "name": "_description",
@@ -82,22 +82,22 @@
     "_priority_id": {
         "name": "_priority_id",
         "column_name": "priority_id",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
     },
     "_due_date": {
         "name": "_due_date",
         "column_name": "due_date",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
     },
     "_closed_date": {
         "name": "_closed_date",
@@ -233,17 +233,17 @@
         "name": "_attachment_mir_material_inspection_photo",
         "column_name": "attachment_mir_material_inspection_photo",
         "new": "",
-        "assigned": "true",
+        "assigned": "inspected",
         "rejected": "",
-        "inspected": "true",
+        "inspected": "",
         "inspection_rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_attachment_mir_pdf_attached": {
         "name": "_attachment_mir_pdf_attached",
         "column_name": "attachment_mir_pdf_attached",
         "new": "",
-        "assigned": "",
+        "assigned": "inspected",
         "rejected": "",
         "inspected": "",
         "inspection_rejected": "",
@@ -262,28 +262,28 @@
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
-    },
-    "_inspected_by": {
-        "name": "_inspected_by",
-        "column_name": "inspected_by",
         "new": "",
-        "assigned": "true",
+        "assigned": "",
         "rejected": "",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
         "new": "",
         "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_inspected_by": {
+        "name": "_inspected_by",
+        "column_name": "inspected_by",
+        "new": "",
+        "assigned": "inspected",
         "rejected": "",
         "inspected": "",
         "inspection_rejected": "",

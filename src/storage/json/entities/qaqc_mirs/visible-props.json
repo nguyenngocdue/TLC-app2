@@ -269,9 +269,9 @@
         "inspection_rejected": "true",
         "closed": "true"
     },
-    "_inspected_by": {
-        "name": "_inspected_by",
-        "column_name": "inspected_by",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
@@ -279,9 +279,9 @@
         "inspection_rejected": "true",
         "closed": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_inspected_by": {
+        "name": "_inspected_by",
+        "column_name": "inspected_by",
         "new": "true",
         "assigned": "true",
         "rejected": "true",

@@ -485,12 +485,12 @@
         "save_on_change": "",
         "new_line": ""
     },
-    "_inspected_by": {
-        "name": "_inspected_by",
-        "column_name": "inspected_by",
-        "column_type": "bigint",
-        "label": "Inspected By",
-        "control": "dropdown",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "column_type": "oracy_prop",
+        "label": "Monitors",
+        "control": "dropdown_multi",
         "align": "",
         "col_span": "6",
         "width": "",
@@ -503,14 +503,14 @@
         "save_on_change": "",
         "new_line": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
-        "column_type": "oracy_prop",
-        "label": "Monitors",
-        "control": "dropdown_multi",
+    "_inspected_by": {
+        "name": "_inspected_by",
+        "column_name": "inspected_by",
+        "column_type": "bigint",
+        "label": "Inspected By",
+        "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
