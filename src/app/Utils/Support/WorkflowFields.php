@@ -20,7 +20,8 @@ class WorkflowFields
             if (empty($definitions)) {
                 $status = 'new';
             } else {
-                $status = array_shift(array_values($definitions));
+                $def = array_values($definitions);
+                $status = array_shift($def)[0];
             }
         }
         return $status;

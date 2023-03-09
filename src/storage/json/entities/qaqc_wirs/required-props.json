@@ -109,7 +109,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "true"
     },
     "_assignee_1": {
         "name": "_assignee_1",

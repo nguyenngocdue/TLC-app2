@@ -1,0 +1,332 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_doc_id": {
+        "name": "_doc_id",
+        "column_name": "doc_id",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_priority_id": {
+        "name": "_priority_id",
+        "column_name": "priority_id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_due_date": {
+        "name": "_due_date",
+        "column_name": "due_date",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_closed_date": {
+        "name": "_closed_date",
+        "column_name": "closed_date",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_po": {
+        "name": "_attachment_mir_po",
+        "column_name": "attachment_mir_po",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_delivery_docket": {
+        "name": "_attachment_mir_delivery_docket",
+        "column_name": "attachment_mir_delivery_docket",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_invoice": {
+        "name": "_attachment_mir_invoice",
+        "column_name": "attachment_mir_invoice",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_packing_list": {
+        "name": "_attachment_mir_packing_list",
+        "column_name": "attachment_mir_packing_list",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_material_test_report": {
+        "name": "_attachment_mir_material_test_report",
+        "column_name": "attachment_mir_material_test_report",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_material_test_certificate": {
+        "name": "_attachment_mir_material_test_certificate",
+        "column_name": "attachment_mir_material_test_certificate",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_conformity_certificate": {
+        "name": "_attachment_mir_conformity_certificate",
+        "column_name": "attachment_mir_conformity_certificate",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_quality_certificate": {
+        "name": "_attachment_mir_quality_certificate",
+        "column_name": "attachment_mir_quality_certificate",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_general_certificate": {
+        "name": "_attachment_mir_general_certificate",
+        "column_name": "attachment_mir_general_certificate",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_non_conformity_report": {
+        "name": "_attachment_mir_non_conformity_report",
+        "column_name": "attachment_mir_non_conformity_report",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_safety_data_sheet": {
+        "name": "_attachment_mir_safety_data_sheet",
+        "column_name": "attachment_mir_safety_data_sheet",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_technical_data_sheet": {
+        "name": "_attachment_mir_technical_data_sheet",
+        "column_name": "attachment_mir_technical_data_sheet",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_mir_material_inspection_photo": {
+        "name": "_attachment_mir_material_inspection_photo",
+        "column_name": "attachment_mir_material_inspection_photo",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "",
+        "closed": "true"
+    },
+    "_attachment_mir_pdf_attached": {
+        "name": "_attachment_mir_pdf_attached",
+        "column_name": "attachment_mir_pdf_attached",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_inspected_by": {
+        "name": "_inspected_by",
+        "column_name": "inspected_by",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_getNcrs": {
+        "name": "_getNcrs",
+        "column_name": "getNcrs",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    }
+}

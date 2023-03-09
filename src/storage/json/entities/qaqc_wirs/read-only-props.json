@@ -75,9 +75,9 @@
         "name": "_name",
         "column_name": "name",
         "new": "",
-        "assigned": "true",
+        "assigned": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_description": {
         "name": "_description",
@@ -133,7 +133,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "true"
     },
     "_status": {
         "name": "_status",

@@ -1,0 +1,32 @@
+{
+    "new": {
+        "name": "new",
+        "label": "New",
+        "tooltip": ""
+    },
+    "assigned": {
+        "name": "assigned",
+        "label": "Request to Assign",
+        "tooltip": ""
+    },
+    "rejected": {
+        "name": "rejected",
+        "label": "Reject Assignment",
+        "tooltip": ""
+    },
+    "inspected": {
+        "name": "inspected",
+        "label": "Inspect",
+        "tooltip": ""
+    },
+    "inspection_rejected": {
+        "name": "inspection_rejected",
+        "label": "Reject Inspection",
+        "tooltip": ""
+    },
+    "closed": {
+        "name": "closed",
+        "label": "Close",
+        "tooltip": ""
+    }
+}

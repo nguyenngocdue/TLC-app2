@@ -4,6 +4,8 @@
         "new": "true",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "read-only": {
@@ -11,6 +13,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": "true"
     },
     "hide-save-btn": {
@@ -18,6 +22,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": "true"
     },
     "closed": {
@@ -25,6 +31,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": "true"
     },
     "post_closed": {
@@ -32,6 +40,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     }
 }

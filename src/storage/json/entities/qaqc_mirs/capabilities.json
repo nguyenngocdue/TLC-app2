@@ -6,6 +6,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "acct_manager_nz": {
@@ -15,6 +17,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "acct_member": {
@@ -24,6 +28,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "acct_member_nz": {
@@ -33,6 +39,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "admin": {
@@ -42,6 +50,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "bd_manager": {
@@ -51,6 +61,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "bd_member": {
@@ -60,6 +72,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "cpl_manager_nz": {
@@ -69,6 +83,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "cpl_member": {
@@ -78,6 +94,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "dc_ho": {
@@ -87,6 +105,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "dc_manager": {
@@ -96,6 +116,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "dc_ws": {
@@ -105,6 +127,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "des_manager": {
@@ -114,6 +138,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "des_member": {
@@ -123,6 +149,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "dir": {
@@ -132,6 +160,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "dir_nz": {
@@ -141,6 +171,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "fac_admin": {
@@ -150,6 +182,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "fin_member_nz": {
@@ -159,6 +193,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "guest": {
@@ -168,6 +204,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "hr_manager": {
@@ -177,6 +215,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "hr_member": {
@@ -186,6 +226,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "hr_member_nz": {
@@ -195,6 +237,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "hse_manager": {
@@ -204,6 +248,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "hse_member": {
@@ -213,6 +259,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "it_manager": {
@@ -222,6 +270,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "it_member": {
@@ -231,6 +281,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "mgr_asst_nz": {
@@ -240,6 +292,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "newcomer": {
@@ -249,6 +303,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "pln_admin": {
@@ -258,6 +314,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proc_manager": {
@@ -267,6 +325,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proc_member": {
@@ -276,6 +336,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proc_member_nz": {
@@ -285,15 +347,19 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "prod_manager": {
         "name": "prod_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
+        "new": "",
         "assigned": "",
-        "rejected": "true",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "prod_manager_nz": {
@@ -303,15 +369,19 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "prod_member": {
         "name": "prod_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
+        "new": "",
         "assigned": "",
-        "rejected": "true",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "prod_member_nz": {
@@ -321,6 +391,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proj_manager": {
@@ -330,6 +402,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proj_manager_nz": {
@@ -339,6 +413,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proj_member": {
@@ -348,6 +424,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proj_member_nz": {
@@ -357,6 +435,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "qaqc_manager": {
@@ -366,6 +446,8 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": ""
     },
     "qaqc_member": {
@@ -375,6 +457,8 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "true",
         "closed": ""
     },
     "qs_manager": {
@@ -384,6 +468,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "qs_member": {
@@ -393,6 +479,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "qs_member_nz": {
@@ -402,6 +490,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "supreme_manage": {
@@ -411,24 +501,30 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": ""
     },
     "whs_manager": {
         "name": "whs_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
+        "new": "true",
         "assigned": "",
-        "rejected": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "whs_member": {
         "name": "whs_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
+        "new": "true",
         "assigned": "",
-        "rejected": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "worker": {
@@ -438,6 +534,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     }
 }

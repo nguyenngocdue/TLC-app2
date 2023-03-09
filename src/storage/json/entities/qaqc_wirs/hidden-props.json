@@ -18,15 +18,15 @@
     "_doc_id": {
         "name": "_doc_id",
         "column_name": "doc_id",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "closed": ""
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
     },
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
-        "new": "true",
+        "new": "",
         "assigned": "",
         "rejected": "",
         "closed": ""
@@ -130,18 +130,18 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
         "closed": ""
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "closed": ""
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
     },
     "_created_at": {
         "name": "_created_at",

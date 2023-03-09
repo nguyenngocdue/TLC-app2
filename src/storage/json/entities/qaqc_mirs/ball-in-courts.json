@@ -1,26 +1,32 @@
 {
     "new": {
         "name": "new",
-        "ball-in-court": "creator"
+        "ball-in-court-assignee": "creator",
+        "ball-in-court-monitors": ""
     },
     "assigned": {
         "name": "assigned",
-        "ball-in-court": "assignee_1"
+        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-monitors": ""
     },
     "rejected": {
         "name": "rejected",
-        "ball-in-court": "creator"
+        "ball-in-court-assignee": "creator",
+        "ball-in-court-monitors": ""
     },
     "inspected": {
         "name": "inspected",
-        "ball-in-court": "assignee_2"
+        "ball-in-court-assignee": "assignee_2",
+        "ball-in-court-monitors": ""
     },
     "inspection_rejected": {
         "name": "inspection_rejected",
-        "ball-in-court": "assignee_1"
+        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-monitors": ""
     },
     "closed": {
         "name": "closed",
-        "ball-in-court": "assignee_2"
+        "ball-in-court-assignee": "assignee_2",
+        "ball-in-court-monitors": ""
     }
 }
