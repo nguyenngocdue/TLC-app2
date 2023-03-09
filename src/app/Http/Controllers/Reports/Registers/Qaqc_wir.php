@@ -58,6 +58,7 @@ class Qaqc_wir extends Report_ParentController
     protected function getTableColumns($dataSource)
     {
         $items = $dataSource->items();
+        // dd($dataSource);
         if (!is_array($dataSource->items())) {
             $items = Report::pressArrayTypeAllItems($dataSource);
         }
@@ -169,6 +170,7 @@ class Qaqc_wir extends Report_ParentController
 
     protected function transformDataSource($dataSource, $modeParams)
     {
+        // dd($dataSource);
 
         $icon = "<i  class='fa-regular fa-circle-plus '></i>";
         $routeCreate = route("qaqc_wirs.create");
@@ -227,14 +229,14 @@ class Qaqc_wir extends Report_ParentController
         // * get parameters from  "setting field" in database
         $settings = CurrentUser::getSettings();
         $lstRenderColWirDesc = [];
-        // if (isset($settings['qaqc_wirs'])) {
-        //     // dd($settings);
-        //     if (!is_null($settings['qaqc_wirs']['registers']['mode_001']['prod_routing_id'])) {
-        //         $idProdRouting = $settings['qaqc_wirs']['registers']['mode_001']['prod_routing_id'];
-        //         $lstRenderColWirDesc = $groupByIdProdRouting[$idProdRouting];
-        //         $lstRenderColWirDesc = array_map(fn ($item) => Report::slugName($item), $lstRenderColWirDesc);
-        //     }
-        // }
+        if (isset($settings['qaqc_wirs'])) {
+            // dd($settings);
+            if (isset($settings['qaqc_wirs']['registers']['mode_001']['prod_routing_id'])) {
+                $idProdRouting = $settings['qaqc_wirs']['registers']['mode_001']['prod_routing_id'];
+                $lstRenderColWirDesc = $groupByIdProdRouting[$idProdRouting];
+                $lstRenderColWirDesc = array_map(fn ($item) => Report::slugName($item), $lstRenderColWirDesc);
+            }
+        }
 
         $itemsWirDesc =  DB::table('wir_descriptions')->select('name', 'prod_discipline_id', 'id')->get()->ToArray();
         $itemsWirDesc = Report::pressArrayTypeAllItems($itemsWirDesc);
@@ -242,9 +244,11 @@ class Qaqc_wir extends Report_ParentController
         foreach ($itemsWirDesc as $key => $value) {
             $_itemsWirDesc[Report::slugName($value['name'])] = $value;
         }
+        // dd($itemsWirDesc);
 
         foreach ($transformData as $key => $prodOrder) {
             $arrayDiff = array_diff($lstRenderColWirDesc, array_keys($prodOrder));
+            // dd($arrayDiff);
             $param1 = '/?project_id=' . $prodOrder['project_id'];
             $param2 = 'sub_project_id=' . $prodOrder['sub_project_id'];
             $param3 = 'prod_routing_id=' . $prodOrder['prod_routing_id'];
@@ -259,8 +263,9 @@ class Qaqc_wir extends Report_ParentController
                 $html =  "<div  class=' w-full'  title='{$param7}' ><a href={$href}>$icon</a></div>";
                 $lackFieldArray[$name] = "$html";
             }
-            $transformData[$key] = $prodOrder + $lackFieldArray;
+            $transformData[$key] = /* (object) */ ($prodOrder + $lackFieldArray);
         }
+        // dd($transformData);
         return collect($transformData);
     }
 }

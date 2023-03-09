@@ -88,7 +88,7 @@ abstract class Report_ParentController extends Controller
     {
         $page = $_GET['page'] ?? 1;
         $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))->appends(request()->query());
-        // dd($dataSource);
+        // dd($dataSource, $pageLimit);
         return $dataSource;
     }
 
@@ -131,6 +131,7 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
         // dump(count($dataSource));
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
+        // dd($dataSource);
 
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
         $columns = $this->getTableColumns($dataSource);
