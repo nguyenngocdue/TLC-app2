@@ -11,17 +11,13 @@ use App\View\Components\Formula\User_PositionRendered;
 
 trait TraitEntityFormula
 {
-    private function applyFormula($item)
+    private function applyFormula($item, $action)
     {
-        return $this->apply_formula($item, $this->type);
-    }
-
-    //TODO: remove $type
-    private function apply_formula($item, $type)
-    {
+        $type = $this->type;
         $defaultValues = DefaultValues::getAllOf($type);
         foreach ($defaultValues as $prop) {
             if ($prop['formula'] === '') continue;
+            if ($prop['formula'] === 'All_OwnerId' && $action == 'update') continue;
             switch ($prop['formula']) {
                 case "All_ConcatNameWith123":
                     $name = $item['name'] ?? "";
