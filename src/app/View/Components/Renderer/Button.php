@@ -25,6 +25,7 @@ class Button extends Component
         private $keydown = '',
         private $accesskey = '',
         private $block = false,
+        private $class = '',
     ) {
         // dd($this->type);
     }
@@ -98,9 +99,10 @@ class Button extends Component
                 $className = "px-2.5 py-2 ";
                 break;
         }
+        $className = $this->outline ? $this->getClassOutline($className, $this->block) : $this->getClass($className, $this->block);
         return view('components.renderer.button', [
             // 'label' => $this->label,
-            'className' => $this->outline ? $this->getClassOutline($className, $this->block) : $this->getClass($className, $this->block),
+            'className' => $className . " " . $this->class,
             'htmlType' => $this->htmlType,
             'value' => $this->value,
             'id' => $this->id,

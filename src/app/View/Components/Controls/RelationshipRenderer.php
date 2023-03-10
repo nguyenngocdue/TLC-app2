@@ -25,16 +25,16 @@ class RelationshipRenderer extends Component
     private $tableDebug = false;
 
     private $tablesInEditableMode = [
-        'hse_incident_reports' => ['hse_corrective_actions'],
-        'hr_overtime_requests' => ['hr_overtime_request_lines'],
+        'hse_incident_reports' => ['hse_corrective_actions' => [],],
+        'hr_overtime_requests' => ['hr_overtime_request_lines' => ['showBtnAddFromAList' => 1],],
 
-        'zunit_test_07s' => ['prod_discipline_1s'],
+        'zunit_test_07s' => ['prod_discipline_1s' => [],],
 
-        'zunit_test_11s' => ['zunit_test_01s'],
-        'zunit_test_12s' => ['zunit_test_02s'],
-        'zunit_test_13s' => ['zunit_test_03s'],
-        'zunit_test_15s' => ['zunit_test_05s'],
-        'zunit_test_19s' => ['zunit_test_09s'],
+        'zunit_test_11s' => ['zunit_test_01s' => [],],
+        'zunit_test_12s' => ['zunit_test_02s' => [],],
+        'zunit_test_13s' => ['zunit_test_03s' => [],],
+        'zunit_test_15s' => ['zunit_test_05s' => [],],
+        'zunit_test_19s' => ['zunit_test_09s' => [],],
     ];
     /**
      * Create a new component instance.
@@ -113,7 +113,8 @@ class RelationshipRenderer extends Component
         // dump($tableName);
         // dump($this->tablesInEditableMode[$this->type]);
 
-        $editable = isset($this->tablesInEditableMode[$this->type]) && in_array($tableName, $this->tablesInEditableMode[$this->type]);
+        $editable = isset($this->tablesInEditableMode[$this->type]) && in_array($tableName, array_keys($this->tablesInEditableMode[$this->type]));
+        $tableSettings = $editable ? $this->tablesInEditableMode[$this->type][$tableName] : [];
         $showAll = ($renderer_edit === "many_icons" || ($renderer_edit === "many_lines" && $editable));
 
         $tableFooter = "";
@@ -178,6 +179,7 @@ class RelationshipRenderer extends Component
                     'userId' => CurrentUser::get()->id,
                     'editable' => $editable,
                     'noCss' => $this->noCss,
+                    'tableSettings' => $tableSettings,
                 ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
