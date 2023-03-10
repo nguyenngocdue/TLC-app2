@@ -145,10 +145,10 @@
                         @break
 
                         @case('parent_type')
-                        <x-renderer.parent_type type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}}/>
+                        <x-controls.parent_type type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}}/>
                         @break
                         @case('parent_id')
-                        <x-renderer.parent_id type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}}/>
+                        <x-controls.parent_id type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}}/>
                         @break
 
                         @case('parent_link')

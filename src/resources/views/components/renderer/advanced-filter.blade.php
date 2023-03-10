@@ -106,7 +106,7 @@
                     </script>
                 @break
                 @case('parent_type')
-                <x-controls.parent-type :type="$type" :name="$columnName" :valueSelected="$valueControl"/>
+                <x-controls.parent-type3 :type="$type" :name="$columnName" :valueSelected="$valueControl"/>
                 @break
                 @default
                 <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}]" />

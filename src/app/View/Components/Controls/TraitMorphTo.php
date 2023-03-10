@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Controls;
 
 use App\Utils\Support\Entities;
 use App\Utils\Support\Json\Relationships;
