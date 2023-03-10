@@ -119,15 +119,19 @@ class SuperProps
         $capa = Capabilities::getAllOf($type);
         $statuses = LibStatuses::getFor($type);
         $result = [];
-        foreach (array_keys($statuses) as $statusKey) {
+        $statusesKeys = array_keys($statuses);
+        foreach ($statusesKeys as $statusKey) {
             $result[$statusKey][] = 'admin';
         }
         foreach ($capa as $roleSet => $value) {
-            foreach (array_keys($statuses) as $statusKey) {
+            foreach ($statusesKeys as $statusKey) {
                 if ($value[$statusKey] == 'true') {
                     $result[$statusKey][] = $roleSet;
                 }
             }
+        }
+        foreach ($statusesKeys as $statusKey) {
+            $result[$statusKey] = array_unique($result[$statusKey]);
         }
         return $result;
     }

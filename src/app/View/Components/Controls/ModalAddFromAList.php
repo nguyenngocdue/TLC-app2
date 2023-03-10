@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Models\User_team_ot;
 use Illuminate\View\Component;
 
 class ModalAddFromAList extends Component
@@ -24,6 +25,8 @@ class ModalAddFromAList extends Component
      */
     public function render()
     {
+        $list = User_team_ot::get();
+        dump($list);
         return view('components.controls.modal-add-from-a-list', [
             'modalId' => $this->modalId,
         ]);
