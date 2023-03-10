@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Sub_project;
 use App\Models\Wir_description;
@@ -17,33 +18,47 @@ class Qaqc_wir extends Report_ParentController
     protected $rotate45Width = 600;
     public function getSqlStr($modeParams)
     {
-        $sql = "SELECT tb1.*
-        , wir.prod_order_id AS wir_prod_order_id
-        , wir.sub_project_id AS wir_sub_project_id
-        , wir.wir_description_id AS wir_description_id
-        , wirdesc.name AS wir_description_name
-        ,wir.doc_id AS wir_doc_id
-        ,wir.prod_discipline_id AS wir_prod_discipline_id
-        ,wir.status AS wir_status
-        FROM( SELECT
-            sub.name AS sub_project_name
-            ,prod.sub_project_id AS sub_project_id
-            ,prod.name AS prod_order_name
-            ,prod.id AS prod_order_id
-            ,prodr.id AS prod_routing_id
-            ,prodr.name AS prod_routing_name
-            ,sub.project_id AS project_id 
-            FROM prod_orders prod, sub_projects sub, prod_routings prodr
-            WHERE 1 = 1";
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
-        if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND prodr.id = '{{prod_routing_id}}'";
-        $sql .= "\n AND sub.id = prod.sub_project_id
-                 #AND prod.id = 372
-                 AND prodr.id = prod.prod_routing_id) tb1
-                 LEFT JOIN qaqc_wirs wir ON wir.prod_order_id = tb1.prod_order_id
-                     AND wir.sub_project_id = tb1.sub_project_id
-                 LEFT JOIN wir_descriptions wirdesc ON wir.wir_description_id = wirdesc.id
-        ";
+        $sql = "SELECT 
+        pairs.sub_project_id
+        ,pairs.project_id
+        ,sub_project_name
+        ,pairs.prod_order_id
+        ,pairs.prod_order_name
+        ,wir_description_id
+        ,wir_description_name
+        ,pairs.prod_routing_id
+        ,pairs.prod_routing_name
+        ,qw.id AS wir_id
+        ,qw.doc_id AS wir_doc_id
+        ,qw.prod_discipline_id AS wir_prod_discipline_id
+        ,qw.status AS wir_status
+        FROM qaqc_wirs AS qw,
+        (SELECT * 
+            FROM(SELECT 
+                 sp.id AS sub_project_id
+                ,sp.project_id AS project_id
+                ,sp.name AS sub_project_name
+                ,po.id AS prod_order_id
+                ,po.name AS prod_order_name 
+                ,pr.id AS prod_routing_id
+                ,pr.name AS prod_routing_name
+                FROM  sub_projects sp, prod_orders po, prod_routings pr
+                    WHERE 1 = 1";
+        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
+        if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND pr.id = '{{prod_routing_id}}'";
+        $sql .= "\n AND sp.id = po.sub_project_id	
+                    AND po.prod_routing_id = pr.id) wirPo,
+                (SELECT wd.id as wd_id, wd.name AS wir_description_name
+                FROM many_to_many m2m, wir_descriptions wd
+                WHERE 1 =1 
+                AND doc_type='App\\\Models\\\Wir_description'
+                AND term_type='App\\\Models\\\Prod_routing'";
+        if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND term_id = '{{prod_routing_id}}'";
+        $sql .= " \n AND m2m.doc_id=wd.id) AS wirDesc ) pairs
+                    WHERE 1=1
+                    AND qw.prod_order_id=pairs.prod_order_id
+                    AND qw.wir_description_id=pairs.wd_id
+          ";
 
         return $sql;
     }
@@ -66,7 +81,6 @@ class Qaqc_wir extends Report_ParentController
         $idx = array_search("wir_status", array_keys($flattenData));
         $dataColumn = array_slice($flattenData, $idx + 1, count($flattenData) - $idx, true);
         unset($dataColumn['wir_status']);
-        // dd($dataColumn);
         ksort($dataColumn);
 
         $adds = [
@@ -95,20 +109,38 @@ class Qaqc_wir extends Report_ParentController
         return  $dataColumn;
     }
 
-
     protected function getParamColumns()
     {
         return [
             [
                 'title' => 'Sub Porject',
-                'dataIndex' => 'sub_project_id'
+                'dataIndex' => 'sub_project_id',
+                // 'allowClear' => true
             ],
             [
                 'title' => 'Prod Routing',
-                'dataIndex' => 'prod_routing_id'
+                'dataIndex' => 'prod_routing_id',
+                // 'allowClear' => true
             ]
         ];
     }
+
+    protected function filterWirDescriptionsFromProdRouting($modeParams)
+    {
+
+        // dd($modeParams);
+        $sql = "SELECT wd.id as wir_description_id, wd.name AS wir_description_name
+        FROM many_to_many m2m, wir_descriptions wd
+        WHERE 1 =1 
+        AND doc_type='App\\\Models\\\Wir_description'
+        AND term_type='App\\\Models\\\Prod_routing'
+        AND m2m.doc_id=wd.id
+        AND term_id = ";
+        $sql .= $modeParams['prod_routing_id'];
+        $sqlData = DB::select(DB::raw($sql));
+        return $sqlData;
+    }
+
 
     protected function getDataProdRouting()
     {
@@ -124,30 +156,6 @@ class Qaqc_wir extends Report_ParentController
         $sqlData = DB::select(DB::raw($sql));
         return $sqlData;
     }
-
-
-    protected function filterProdRoutingFollowWirDescription()
-    {
-        $sql = "SELECT #tb1.*
-                    prodr.id AS prod_routing_id, 
-                    prodr.name AS prod_routing_name
-                    ,wirdesc.id AS wir_description_id,wirdesc.name AS wir_description_name
-                FROM (SELECT
-                        mtm.doc_type AS doc_type,
-                        mtm.doc_id AS doc_id,
-                        mtm.term_type AS term_type,
-                        mtm.term_id AS term_id
-                        FROM many_to_many mtm
-                            WHERE 1 = 1
-                            AND mtm.term_type LIKE '%Prod_routing%'
-                            AND mtm.doc_type LIKE '%Wir_description%') tb1
-                            JOIN prod_routings prodr ON tb1.term_id = prodr.id
-                            JOIN wir_descriptions wirdesc ON wirdesc.id = tb1.doc_id";
-        $sqlData = DB::select(DB::raw($sql));
-        return $sqlData;
-    }
-
-
     protected function getDataForModeControl($dataSource = [])
     {
         $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
@@ -156,117 +164,105 @@ class Qaqc_wir extends Report_ParentController
         return array_merge($subProjects, $prodRoutings);
     }
 
-    protected  function getParamForUrl($item)
+
+    protected function setDefaultValueModeParams($modeParams, $request, $entity, $typeReport)
     {
-        $param1 = '/?project_id=' . $item['project_id'];
-        $param2 = 'sub_project_id=' . $item['sub_project_id'];
-        $param3 = 'prod_routing_id=' . $item['prod_routing_id'];
-        $param4 = 'prod_order_id=' . $item['prod_order_id'];
-        $param5 = 'wir_prod_discipline_id=' . $item['wir_prod_discipline_id'];
-        $param6 = 'wir_description_id=' . $item['wir_description_id'];
-        return [$param1, $param2, $param3, $param4, $param5, $param6];
+
+        $x = 'sub_project_id';
+        $y = 'prod_routing_id';
+        $params = [];
+        if (!isset($modeParams[$x]) || empty($modeParams)) {
+            $params = [
+                "_entity" => $entity,
+                "action" => "updateReport" . $typeReport,
+                "type_report" => $typeReport,
+                $x => 82,
+                $y => 6,
+            ];
+        }
+        // Update request to pass to UpdateUserSetting
+        $requestData = $request->all();
+        $requestData[] = $params;
+        $request->merge($params);
+        (new UpdateUserSettings())($request);
+        redirect($request->getPathInfo());
+        return $modeParams;
     }
+
 
 
     protected function transformDataSource($dataSource, $modeParams)
     {
         // dd($dataSource);
 
-        $icon = "<i  class='fa-regular fa-circle-plus '></i>";
         $routeCreate = route("qaqc_wirs.create");
-
         $items = $dataSource->all();
         $items = Report::pressArrayTypeAllItems($items);
 
         $entityStatuses = LibStatuses::getFor('qaqc_wir');
 
-        $transformData = array_map(function ($item) use ($entityStatuses, $routeCreate, $icon) {
+        $transformData = array_map(function ($item) use ($entityStatuses) {
             $color = "";
-            if (!is_null($item['wir_status']) && isset($entityStatuses[$item['wir_status']])) {
+            if (isset($entityStatuses[$item['wir_status']])) {
                 $status = $entityStatuses[$item['wir_status']];
                 $color = "bg-{$status['color']}-{$status['color_index']}";
-            }
-            if (!is_null($item['wir_status']) && !isset($entityStatuses[$item['wir_status']])) {
+            } else {
                 $color = 'bg-red-500';
             }
-            // set url when onclick icon
-            $params = $this->getParamForUrl($item);
+
             $docId = str_pad($item['wir_doc_id'], 4, 0, STR_PAD_LEFT);
-            $routeEdit = route('qaqc_wirs.edit', $docId);
-            $html = "<div class='$color w-full' title='{$item['wir_description_name']}'><a href='$routeEdit'>$docId</a></div>";
-            if (is_null($item['wir_doc_id'])) {
-                $href = $routeCreate . implode('&', $params);
-                $html =  "<div class='w-full ' title='{$item['wir_description_name']}/{$item['wir_description_id']}'><a href='$href'>$icon</a></div>";
-            }
+            $hrefEdit = route('qaqc_wirs.edit', $item['wir_id']);
+            $html = "<div class='$color w-full' title='{$item['wir_description_name']}'><a href='$hrefEdit'>$docId</a></div>";
+            $wirDescName = [Report::slugName($item['wir_description_name']) => $html];
 
-            $wirdescName = [];
-            if (!is_null($item['wir_description_name'])) {
-                $wirdescName = [Report::slugName($item['wir_description_name']) => $html];
-            }
-
+            // Edit visibility of production_order_name + sub_project_name to display in the table
             $prodNameHtml = ['prod_order_name_html' =>  "<div  style='width: 120px'>{$item['prod_order_name']}</div>"];
             $subProjectNameHtml = ['sub_project_name_html' =>  "<div  style='width: 80px'>{$item['sub_project_name']}</div>"];
-            return $prodNameHtml + $subProjectNameHtml + (array)$item + $wirdescName;
+
+            return $prodNameHtml + $subProjectNameHtml + (array)$item + $wirDescName;
         }, array_values($items));
-
-        // dd($transformData);
-
 
         // group by prod_order_id
         $prodGroup = Report::groupArrayByKey($transformData, 'prod_order_id');
-
         $transformData = Report::mergeArrayValues($prodGroup);
-        // dd($transformData);
 
+        // set wir_description name for each key
+        $dataProdRouting = $this->filterWirDescriptionsFromProdRouting($modeParams);
+        $wirDesc = array_column($dataProdRouting, 'wir_description_name', "wir_description_id");
+        $keyNameWirDesc = array_merge(...array_map(fn ($item) => [Report::slugName($item) => $item], $wirDesc));
+        // dd($keyNameWirDesc);
 
-        // Add fields are null
-        $dataProdRouting = $this->filterProdRoutingFollowWirDescription();
-        $prodRoutingGroup = Report::groupArrayByKey($dataProdRouting, 'prod_routing_id');
-        $groupByIdProdRouting = [];
-        foreach ($prodRoutingGroup as $key => $value) {
-            $groupByIdProdRouting[$key] = array_column($value, 'wir_description_name', "wir_description_id");
-        }
-        // * get parameters from  "setting field" in database
-        $settings = CurrentUser::getSettings();
-        $lstRenderColWirDesc = [];
-        if (isset($settings['qaqc_wirs'])) {
-            // dd($settings);
-            if (isset($settings['qaqc_wirs']['registers']['mode_001']['prod_routing_id'])) {
-                $idProdRouting = $settings['qaqc_wirs']['registers']['mode_001']['prod_routing_id'];
-                $lstRenderColWirDesc = $groupByIdProdRouting[$idProdRouting];
-                $lstRenderColWirDesc = array_map(fn ($item) => Report::slugName($item), $lstRenderColWirDesc);
-            }
-        }
-
+        // group ['name 'prod_discipline_id] of wir_description for each wir_description's name
         $itemsWirDesc =  DB::table('wir_descriptions')->select('name', 'prod_discipline_id', 'id')->get()->ToArray();
-        $itemsWirDesc = Report::pressArrayTypeAllItems($itemsWirDesc);
-        $_itemsWirDesc = [];
-        foreach ($itemsWirDesc as $key => $value) {
-            $_itemsWirDesc[Report::slugName($value['name'])] = $value;
-        }
-        // dd($itemsWirDesc);
+        $itemsWirDescGroup = array_merge(...array_map(fn ($item) => [Report::slugName($item->name) => (array)$item], $itemsWirDesc));
+        // dd($itemsWirDescGroup);
 
+        $icon = "<i  class='fa-regular fa-circle-plus '></i>";
         foreach ($transformData as $key => $prodOrder) {
-            $arrayDiff = array_diff($lstRenderColWirDesc, array_keys($prodOrder));
-            // dd($arrayDiff);
+            $idx = array_search("wir_status", array_keys($prodOrder));
+            $itemHasWirDesc = array_slice($prodOrder, $idx + 1, count($prodOrder) - $idx, true);
+            $itemHasNotWirDesc = array_diff_key($keyNameWirDesc, $itemHasWirDesc);
+
             $param1 = '/?project_id=' . $prodOrder['project_id'];
             $param2 = 'sub_project_id=' . $prodOrder['sub_project_id'];
             $param3 = 'prod_routing_id=' . $prodOrder['prod_routing_id'];
             $param4 = 'prod_order_id=' . $prodOrder['prod_order_id'];
-            $lackFieldArray = [];
-            foreach ($arrayDiff as $id => $name) {
-                $param5 = 'prod_discipline_id=' . $_itemsWirDesc[$name]['prod_discipline_id'];
-                $param6 = 'wir_description_id=' . $_itemsWirDesc[$name]['id'];
-                $param7 = $_itemsWirDesc[$name]['name'];
+            $itemsHasNotWirDescData = [];
+            foreach (array_keys($itemHasNotWirDesc) as $keyName) {
+                $param5 = 'prod_discipline_id=' . $itemsWirDescGroup[$keyName]['prod_discipline_id'];
+                $param6 = 'wir_description_id=' . $itemsWirDescGroup[$keyName]['id'];
+                $param7 = $itemsWirDescGroup[$keyName]['name'];
                 $params = [$param1, $param2, $param3, $param4, $param5, $param6];
                 $href = $routeCreate . implode('&', $params);
-                $html =  "<div  class=' w-full'  title='{$param7}' ><a href='$href'>$icon</a></div>";
-                // $lackFieldArray[$name] = "$html";
-                $lackFieldArray[$name] = "$html";
+                $itemsHasNotWirDescData[$keyName] = (object)[
+                    'value' => $icon,
+                    'cell_title' => $param7,
+                    'cell_href' => $href,
+                    'cell_class' => 'bg-green-50',
+                ];;
             }
-            $transformData[$key] = /* (object) */ ($prodOrder + $lackFieldArray);
+            $transformData[$key] =  $prodOrder + $itemsHasNotWirDescData;
         }
-        // dump($transformData);
         return collect($transformData);
     }
 }
