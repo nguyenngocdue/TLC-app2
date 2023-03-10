@@ -161,14 +161,17 @@ class Hr_overtime_request extends Report_ParentController
         return [
             [
                 'title' => 'OT Workplace',
-                'dataIndex' => 'ot_workplace_id'
+                'dataIndex' => 'ot_workplace_id',
+                'allowClear' => true,
             ],
             [
-                'dataIndex' => 'months'
+                'dataIndex' => 'months',
+                'allowClear' => true,
             ],
             [
                 'title' => 'User',
-                'dataIndex' => 'user_id'
+                'dataIndex' => 'user_id',
+                'allowClear' => true,
             ]
         ];
     }
