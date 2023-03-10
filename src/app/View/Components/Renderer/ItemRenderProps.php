@@ -16,7 +16,8 @@ class ItemRenderProps extends Component
         private $status = null,
         private $action,
         private $type,
-        private $modelPath
+        private $modelPath,
+        private $id = null,
     ) {
         //
     }
@@ -33,7 +34,8 @@ class ItemRenderProps extends Component
             'status' => $this->status,
             'action' => $this->action,
             'type' => $this->type,
-            'modelPath' => $this->modelPath
+            'modelPath' => $this->modelPath,
+            'id' => $this->id,
         ]);
     }
 }

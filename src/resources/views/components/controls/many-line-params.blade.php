@@ -34,6 +34,15 @@
         }
         </script>
     <x-renderer.button id="btnAddANewLine_{{$table01Name}}" type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
+    {{-- @dump($tableSettings) --}}
+    @isset($tableSettings['showBtnAddFromAList'])
+    @if($tableSettings['showBtnAddFromAList'])
+
+    <x-renderer.button  click="toggleListingTable('456')" id="btnAddFromAList_{{$table01Name}}" type="success" title="Add from a list" onClick="addFromAList({tableId: '{{$table01Name}}'})">Add From A List</x-renderer.button>
+    <x-controls.model-add-from-a-list modalId='456' />
+    @endif
+    @endisset
+    
     <i id="iconSpin_{{$table01Name}}" class="fa-duotone fa-spinner fa-spin text-green-500" style="display: none"></i>
     <input class="bg-gray-200" readonly name="tableNames[{{$table01Name}}]" value="{{$tableName}}" type="{{$tableDebugTextHidden}}" />
     <br/>

@@ -29,6 +29,7 @@ trait TraitValidation
 
     private function getValidationRules($newStatus)
     {
+        if ($newStatus == '') return [];
         $rules = [];
         $visibleProps = SuperWorkflows::getFor($this->type)['workflows'][$newStatus]['visible'];
         foreach ($this->superProps['props'] as $prop) {

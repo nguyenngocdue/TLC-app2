@@ -49,7 +49,7 @@ function data() {
         closeSearchMenu() {
             this.isSearchMenuOpen = false
             //Using remove event listener file search-modal.blade.php
-            searchInput.removeEventListener('input', () => {})
+            searchInput.removeEventListener('input', () => { })
         },
         isSettingMenuOpen: false,
         toggleSettingMenu() {
@@ -57,6 +57,13 @@ function data() {
         },
         closeSettingMenu() {
             this.isSettingMenuOpen = false
+        },
+        isListingTableOpen: {},
+        toggleListingTable(type) {
+            this.isListingTableOpen[type] = !this.isListingTableOpen[type]
+        },
+        closeListingTable(type) {
+            this.isListingTableOpen[type] = false
         },
         isIntermediateOpen: {},
         toggleIntermediate(type) {

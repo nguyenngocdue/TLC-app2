@@ -4,7 +4,7 @@
 $editType = Str::plural($type);
 $id = $action === "edit" ? $values->id : "";
 $status = $status ?? $values->status ?? null;
-[$status,$statuses,$props,$actionButtons,$transitions,$buttonSave,$propsIntermediate] = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$isCheckColumnStatus);
+[$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$isCheckColumnStatus);
 $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
 @endphp
 @section('topTitle', $topTitle)
@@ -29,11 +29,11 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
         <div class=" grid grid-cols-12 px-4">
             @method($action === "create" ? 'POST' : 'PUT')
-            <x-renderer.item-render-props :dataSource="$result" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}}/>
+            <x-renderer.item-render-props id={{$id}} :dataSource="$result" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}}/>
         </div>
         @foreach($propsIntermediate as $key => $props)
         @php
-            $resultIntermediate = App\Utils\Support\WorkflowFields::parseFields($action,$props, $values, $defaultValues,$status,$type);
+            $resultIntermediate = App\Utils\Support\WorkflowFields::parseFields($action, $props, $values, $defaultValues, $status, $type);
         @endphp
         <template x-if="isIntermediateOpen['{{$key}}']">
             <div tabindex="-1" class="fixed sm:p-0 md:p-0 top-0 left-0 right-0 z-50 lg:p-4 h-full bg-gray-100 dark:bg-slate-400 dark:bg-opacity-70 bg-opacity-70 justify-center items-center flex" aria-hidden="true" @keydown.escape="closeIntermediate('{{$key}}')">
@@ -53,18 +53,18 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
                             </div>
                         </div>
                         <!-- Modal body -->
-                            <div class='overflow-y-scroll p-4'>
-                                <div class="grid grid-cols-12 px-4">
-                                    <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}"/>
-                                    <x-controls.header-alert-validation :strProps="$props" />
-                                    <x-renderer.item-render-props :dataSource="$resultIntermediate" action={{$action}} type={{$type}} modelPath={{$modelPath}}/>
-                                </div>
+                        <div class='overflow-y-scroll p-4'>
+                            <div class="grid grid-cols-12 px-4">
+                                <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}"/>
+                                <x-controls.header-alert-validation :strProps="$props" />
+                                <x-renderer.item-render-props id="{{$id}}" :dataSource="$resultIntermediate" action={{$action}} type={{$type}} modelPath={{$modelPath}}/>
                             </div>
-                            <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
-                                <button type="submit" class="mr-3 px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg">
-                                        Next -> (to {{$actionButtons[$key]['label']}})
-                                </button>
-                            </div>                
+                        </div>
+                        <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
+                            <button type="submit" class="mr-3 px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg">
+                                    Next -> (to {{$actionButtons[$key]['label']}})
+                            </button>
+                        </div>                
                     </div>
                 </div>
             </div>
