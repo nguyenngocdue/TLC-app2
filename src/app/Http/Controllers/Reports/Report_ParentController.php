@@ -87,6 +87,7 @@ abstract class Report_ParentController extends Controller
 
     private function paginateDataSource($dataSource, $pageLimit)
     {
+        // dd($dataSource);
         $page = $_GET['page'] ?? 1;
         $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))->appends(request()->query());
         // dd($dataSource, $pageLimit);
