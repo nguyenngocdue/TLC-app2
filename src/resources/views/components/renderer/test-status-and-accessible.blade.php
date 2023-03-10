@@ -4,7 +4,8 @@
             <x-renderer.card title="Test Status" >
                 <div class="mb-3">
                     @foreach($statuses as $key => $value)
-                        <span class="bg-{{$value['color']}}-{{$value['color_index']}} whitespace-nowrap rounded hover:bg-blue-400 font-medium text-xs px-2 py-1 leading-tight ml-1">
+                        @php $colorIndex =$value['color_index'];  @endphp
+                        <span class="bg-{{$value['color']}}-{{$colorIndex}} text-{{$value['color']}}-{{1000-$colorIndex}} whitespace-nowrap rounded hover:bg-blue-400 font-medium text-xs px-2 py-1 leading-tight ml-1">
                             <a href="{{route($type.'.edit',$renderId)}}?status={{$value['name']}}">{{$value['title']}}</a>
                         </span>
                     @endforeach

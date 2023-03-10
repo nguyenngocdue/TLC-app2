@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('status')->nullable();
 
+            $table->unsignedBigInteger('owner_id')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedInteger('order_no')->nullable();
 

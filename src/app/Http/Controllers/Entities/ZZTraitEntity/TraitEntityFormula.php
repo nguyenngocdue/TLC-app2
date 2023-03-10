@@ -15,6 +15,7 @@ trait TraitEntityFormula
     {
         $type = $this->type;
         $defaultValues = DefaultValues::getAllOf($type);
+        // dump($defaultValues);
         foreach ($defaultValues as $prop) {
             if ($prop['formula'] === '') continue;
             if ($prop['formula'] === 'All_OwnerId' && $action == 'update') continue;

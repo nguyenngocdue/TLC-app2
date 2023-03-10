@@ -2,56 +2,56 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true",
+        "new": "",
         "active": "",
         "approval_rejected": ""
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "true",
+        "new": "",
         "active": "",
         "approval_rejected": ""
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true",
+        "new": "",
         "active": "",
         "approval_rejected": ""
     },
     "_parent_id": {
         "name": "_parent_id",
         "column_name": "parent_id",
-        "new": "true",
+        "new": "",
         "active": "",
         "approval_rejected": ""
     },
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
-        "new": "true",
+        "new": "",
         "active": "",
         "approval_rejected": ""
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true",
+        "new": "",
         "active": "",
         "approval_rejected": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true",
+        "new": "",
         "active": "",
         "approval_rejected": ""
     },

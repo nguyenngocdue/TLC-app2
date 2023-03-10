@@ -99,7 +99,15 @@ class WorkflowFields
             $workflow = self::getSuperWorkflowByRoleSet()['workflows'][$status];
             $visible = $workflow['visible'];
             $readonly = $workflow['readonly'];
-            $required = $workflow['required'];
+
+            $required = [];
+            foreach ($defaultValues as $propName => $prop) {
+                $validation = $prop['validation'];
+                $isRequired = in_array('required', explode("|", $validation));
+                if ($isRequired) $required[] = $propName;
+            }
+            $required = array_unique(array_merge($required, $workflow['required']));
+
             $hidden = $workflow['hidden'];
             foreach ($props as $key => $prop) {
                 if (in_array($prop['name'], $visible)) {

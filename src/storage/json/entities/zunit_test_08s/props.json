@@ -142,5 +142,23 @@
         "read_only": "",
         "save_on_change": "",
         "new_line": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "column_type": "bigint",
+        "label": "Owner ID",
+        "control": "number",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "new_line": ""
     }
 }

@@ -12,6 +12,7 @@ class Zunit_test_08 extends ModelExtended
         'description',
         'status',
 
+        'owner_id',
         'parent_id',
         "order_no",
     ];

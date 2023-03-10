@@ -1,0 +1,20 @@
+{
+    "new": {
+        "name": "new",
+        "new": "",
+        "active": "true",
+        "approval_rejected": ""
+    },
+    "active": {
+        "name": "active",
+        "new": "",
+        "active": "",
+        "approval_rejected": ""
+    },
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "new": "",
+        "active": "",
+        "approval_rejected": ""
+    }
+}

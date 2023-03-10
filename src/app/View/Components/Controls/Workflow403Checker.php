@@ -33,21 +33,27 @@ class Workflow403Checker extends Component
         $currentRoleSet = CurrentUser::getRoleSet();
         $sw = SuperWorkflows::getFor($this->type, $currentRoleSet);
         // dd($sw);
-        switch ($this->action) {
-            case 'create':
-                $allowed = true;
-                break;
-            case 'edit':
-                if (!isset($sw['workflows'][$this->status])) {
-                    dump("Orphan status [{$this->status}] detected, please fix this or you will not be able to edit this document.");
-                    $allowed = false;
-                } else {
-                    $allowed = $sw['workflows'][$this->status]['capabilities'];
-                }
-                break;
-            default:
-                $allowed = false;
+        if (!isset($sw['workflows'][$this->status])) {
+            dump("Orphan status [{$this->status}] detected, please fix this or you will not be able to edit this document.");
+            $allowed = false;
+        } else {
+            $allowed = $sw['workflows'][$this->status]['capabilities'];
         }
+        // switch ($this->action) {
+        //     case 'create':
+        //         $allowed = true;
+        //         break;
+        //     case 'edit':
+        //         if (!isset($sw['workflows'][$this->status])) {
+        //             dump("Orphan status [{$this->status}] detected, please fix this or you will not be able to edit this document.");
+        //             $allowed = false;
+        //         } else {
+        //             $allowed = $sw['workflows'][$this->status]['capabilities'];
+        //         }
+        //         break;
+        //     default:
+        //         $allowed = false;
+        // }
         return view(
             'components.controls.workflow403-checker',
             [

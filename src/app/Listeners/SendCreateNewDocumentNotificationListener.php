@@ -6,6 +6,7 @@ use App\Events\CreateNewDocumentEvent;
 use App\Models\User;
 use App\Notifications\CreateNewNotification;
 use App\Utils\Constant;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
@@ -32,9 +33,13 @@ class SendCreateNewDocumentNotificationListener implements ShouldQueue
     {
         $createNotification = [];
         $currentValue = $event->{'currentValue'};
-        if (!$currentValue['status'] || !$currentValue['owner_id']) {
-            dump('Does not exist status or owner_id in database');
-            dump('Please check both columns if want using send notifications and send mail');
+        // dd($currentValue['owner_id']);
+        if (!$currentValue['status']) {
+            Toastr::warning('Send Notifications Warning!', 'Please check columns status or DefaultValues.json doest not exist');
+            return;
+        }
+        if (!$currentValue['owner_id']) {
+            Toastr::warning('Send Notifications Warning!', 'Please check columns owner_id or DefaultValues.json doest not exist');
             return;
         }
         foreach ($currentValue as $key => $value) {

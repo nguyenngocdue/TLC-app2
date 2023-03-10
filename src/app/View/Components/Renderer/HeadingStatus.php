@@ -35,7 +35,9 @@ class HeadingStatus extends Component
             $color = $statusProps['color'];
             $colorIndex = $statusProps['color_index'];
             $title = $statusProps['title'];
-            $class = "bg-{$color}-{$colorIndex}  rounded font-medium text-black text-xs px-2 py-1.5 leading-tight mx-1";
+            // return "<div class='h-2 mt-2.5 ml-2'><x-renderer.status>$slot</x-renderer.status></div>";
+            $textColorIndex = 1000 - $colorIndex;
+            $class = "text-{$color}-{$textColorIndex} bg-{$color}-{$colorIndex} rounded font-medium text-black text-xs px-2 py-1.5 leading-tight mx-1";
             return "<div class='h-2 mt-2.5 ml-2'><span class='$class'>$title</span></div>";
         };
     }

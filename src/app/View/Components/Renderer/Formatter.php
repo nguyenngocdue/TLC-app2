@@ -18,9 +18,9 @@ class Formatter extends Component
 
     function statusColorRendered()
     {
-        $title = $this->dataLine['title'] ?? "";
-        $color = $this->dataLine['color'] ?? "";
-        $colorIndex = $this->dataLine['color_index'] ?? "";
+        $title = $this->dataLine->title ?? "";
+        $color = $this->dataLine->color ?? "";
+        $colorIndex = $this->dataLine->color_index ?? "";
         $colorIndex = ($colorIndex) ? "colorIndex='$colorIndex'"  : "";
         return "<x-renderer.tag color='$color' $colorIndex>$title</x-renderer.tag>";
     }

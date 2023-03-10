@@ -35,9 +35,9 @@
         "name": "admin",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "active": "",
-        "approval_rejected": ""
+        "new": "true",
+        "active": "true",
+        "approval_rejected": "true"
     },
     "bd_manager": {
         "name": "bd_manager",

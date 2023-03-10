@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Utils\Support\Json\SuperWorkflows;
 use Illuminate\Support\MessageBag;
 
 trait TraitValidation
@@ -26,10 +27,12 @@ trait TraitValidation
         return $newValidation;
     }
 
-    private function getValidationRules()
+    private function getValidationRules($newStatus)
     {
         $rules = [];
+        $visibleProps = SuperWorkflows::getFor($this->type)['workflows'][$newStatus]['visible'];
         foreach ($this->superProps['props'] as $prop) {
+            if (!in_array($prop['name'], $visibleProps)) continue;
             if (isset($prop['default-values']['validation'])) {
                 $commonValidations = $prop['default-values']['validation'];
                 $regexValidations = $prop['default-values']['validation_regex'] ?? "";

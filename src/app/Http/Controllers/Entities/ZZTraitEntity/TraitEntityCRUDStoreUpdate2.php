@@ -39,7 +39,9 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
 		try {
-			$request->validate($this->getValidationRules());
+			//Get newStatus before it get removed by handleFields
+			$newStatus = $request['status'];
+			$request->validate($this->getValidationRules($newStatus));
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
 			if ($request['tableNames'] == 'fakeRequest') {
@@ -49,9 +51,8 @@ trait TraitEntityCRUDStoreUpdate2
 			throw $e; //<<This is for form's fields
 		}
 		try {
-			//Get newStatus before it get removed by handleFields
-			$newStatus = $request['status'];
 			$fields = $this->handleFields($request, __FUNCTION__);
+			// dd($fields);
 			$fields = $this->autoDocIDGeneration($fields);
 			$theRow = $this->data::create($fields);
 			$objectType = Str::modelPathFrom($theRow->getTable());
@@ -97,7 +98,9 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
 		try {
-			$request->validate($this->getValidationRules());
+			//Get newStatus before it get removed by handleFields
+			$newStatus = $request['status'];
+			$request->validate($this->getValidationRules($newStatus));
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
 			if ($request['tableNames'] == 'fakeRequest') {
@@ -107,9 +110,6 @@ trait TraitEntityCRUDStoreUpdate2
 			throw $e; //<<This is for form's fields
 		}
 		try {
-			//Get newStatus before it get removed by handleFields
-
-			$newStatus = $request['status'];
 			$fields = $this->handleFields($request, __FUNCTION__);
 			$fieldForEmailHandler = $this->addEntityType($fields, 'status', $newStatus);
 			$theRow = $this->data::find($id);
