@@ -28,7 +28,7 @@ class RelationshipRenderer extends Component
         'hse_incident_reports' => ['hse_corrective_actions'],
         'hr_overtime_requests' => ['hr_overtime_request_lines'],
 
-        // 'zunit_test_07s' => ['prod_discipline_1s'],
+        'zunit_test_07s' => ['prod_discipline_1s'],
 
         'zunit_test_11s' => ['zunit_test_01s'],
         'zunit_test_12s' => ['zunit_test_02s'],
