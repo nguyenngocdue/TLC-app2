@@ -108,11 +108,12 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
         return [
             [
                 'title' => 'Sub Project',
-                'dataIndex' => 'sub_project_id'
+                'dataIndex' => 'sub_project_id',
             ],
             [
                 'title' => 'Checklist Type',
-                'dataIndex' => 'qaqc_insp_tmpl_id'
+                'dataIndex' => 'qaqc_insp_tmpl_id',
+                'allowClear' => true
             ]
         ];
     }
@@ -190,5 +191,14 @@ class Qaqc_insp_chklst_sht extends Report_ParentController
         $result = Report::mergeArrayValues($groupedArray);
         $data = $this->changeValueData($result);
         return collect($data);
+    }
+
+    protected function setDefaultValueModeParams($modeParams)
+    {
+        $x = 'sub_project_id';
+        if (!isset($modeParams[$x]) || empty($modeParams)) {
+            return [$x => 21];
+        }
+        return $modeParams;
     }
 }

@@ -16,6 +16,7 @@ class PerPageReport extends Component
         private $route = '',
         private $pageLimit = '',
         private $entity = '',
+        private $routeName = ''
     ) {
         //
     }
@@ -32,6 +33,7 @@ class PerPageReport extends Component
             'route' => $this->route,
             'pageLimit' => $this->pageLimit,
             'entity' => $this->entity,
+            'routeName' => $this->routeName
         ]);
     }
 }

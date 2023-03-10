@@ -1,5 +1,4 @@
-<form action="{{$route}}" method="post" class="w-full lg:w-1/3 p-2 lg:p-0">
-    @method('PUT')
+<form action="{{route($routeName)}}" method="GET" class="w-full lg:w-1/3 p-2 lg:p-0">
     @csrf
     <div class="flex items-center lg:justify-end">
         <div class="w-28 px-2">

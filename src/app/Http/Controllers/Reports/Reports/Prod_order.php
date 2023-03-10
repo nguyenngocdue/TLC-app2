@@ -90,11 +90,13 @@ class Prod_order extends Report_ParentController
         return [
             [
                 'title' => 'Sub Project',
-                'dataIndex' => 'sub_project_id'
+                'dataIndex' => 'sub_project_id',
+                'allowClear' => true
             ],
             [
                 'title' => 'Production Order',
-                'dataIndex' => 'prod_order_id'
+                'dataIndex' => 'prod_order_id',
+                'allowClear' => true
             ]
         ];
     }

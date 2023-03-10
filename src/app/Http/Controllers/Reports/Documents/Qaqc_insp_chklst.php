@@ -302,33 +302,12 @@ class Qaqc_insp_chklst extends Report_ParentController
 		return $sheets;
 	}
 
-	protected function setDefaultValueModeParams($modeParams, $request, $entity, $typeReport)
+	protected function setDefaultValueModeParams($modeParams)
 	{
-		// dd($request);
 		$x = 'sub_project_id';
 		$y = 'prod_order_id';
-		$z = 'qaqc_insp_tmpl_id';
-
-		$params = [
-			"_entity" => $entity,
-			"action" => "updateReport" . $typeReport,
-			"type_report" => $typeReport,
-			$x => $modeParams[$x],
-			$y => $modeParams[$y],
-			$z => $modeParams[$z]
-		];
-
-		$isNullParam = in_array(null, $params, true);
-		if ($isNullParam) {
-			$params[$x] = 21;
-			$params[$y] = 82;
-			$params[$z] = 1;
-			// Update request to pass to UpdateUserSetting
-			$requestData = $request->all();
-			$requestData[] = $params;
-			$request->merge($params);
-			(new UpdateUserSettings())($request);
-			redirect($request->getPathInfo());
+		if (!isset($modeParams[$x]) || empty($modeParams)) {
+			return [$x => 21, $y => 82];
 		}
 		return $modeParams;
 	}

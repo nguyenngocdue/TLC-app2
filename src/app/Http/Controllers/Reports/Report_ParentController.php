@@ -33,7 +33,7 @@ abstract class Report_ParentController extends Controller
 
     public function getType()
     {
-        return "dashboard";
+        return str_replace(' ', '_', strtolower($this->getMenuTitle()));
     }
 
     private function getSql($modeParams)
@@ -115,23 +115,23 @@ abstract class Report_ParentController extends Controller
         }
         return 10;
     }
-    protected function setDefaultValueModeParams($modeParams, $request, $entity, $typeReport)
+    protected function setDefaultValueModeParams($modeParams)
     {
         return $modeParams;
     }
 
     public function index(Request $request)
     {
+        $typeReport = CurrentRoute::getTypeController();
+        $routeName = $request->route()->action['as'];
+        $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
+        $modeParams = $this->getModeParams($typeReport, $entity);
+        $modeParams = $this->setDefaultValueModeParams($modeParams);
+
         if (!$request->input('page') && !empty($request->input())) {
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
         }
-        $typeReport = CurrentRoute::getTypeController();
-        $routeName = $request->route()->action['as'];
-        $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
-
-        $modeParams = $this->getModeParams($typeReport, $entity);
-        $modeParams = $this->setDefaultValueModeParams($modeParams, $request, $entity, $typeReport);
         // dd($request->route()->action['controller']);
         $dataSource = $this->getDataSource($modeParams);
 

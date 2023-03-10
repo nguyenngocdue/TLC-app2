@@ -165,27 +165,14 @@ class Qaqc_wir extends Report_ParentController
     }
 
 
-    protected function setDefaultValueModeParams($modeParams, $request, $entity, $typeReport)
+    protected function setDefaultValueModeParams($modeParams)
     {
 
         $x = 'sub_project_id';
         $y = 'prod_routing_id';
-        $params = [];
         if (!isset($modeParams[$x]) || empty($modeParams)) {
-            $params = [
-                "_entity" => $entity,
-                "action" => "updateReport" . $typeReport,
-                "type_report" => $typeReport,
-                $x => 82,
-                $y => 6,
-            ];
+            return [$x => 82, $y => 6];
         }
-        // Update request to pass to UpdateUserSetting
-        $requestData = $request->all();
-        $requestData[] = $params;
-        $request->merge($params);
-        (new UpdateUserSettings())($request);
-        redirect($request->getPathInfo());
         return $modeParams;
     }
 
@@ -209,8 +196,14 @@ class Qaqc_wir extends Report_ParentController
             }
             $docId = str_pad($item['wir_doc_id'], 4, 0, STR_PAD_LEFT);
             $hrefEdit = route('qaqc_wirs.edit', $item['wir_id']);
-            $html = "<div class='$color w-full' title='{$item['wir_description_name']}'><a href='$hrefEdit'>$docId</a></div>";
-            $wirDescName = [Report::slugName($item['wir_description_name']) => $html];
+
+            $htmlRender = (object)[
+                'value' => $docId,
+                'cell_title' => $item['wir_description_name'],
+                'cell_href' => $hrefEdit,
+                'cell_class' => $color,
+            ];
+            $wirDescName = [Report::slugName($item['wir_description_name']) => $htmlRender];
 
             // Edit visibility of production_order_name + sub_project_name to display in the table
             $prodNameHtml = ['prod_order_name_html' =>  "<div  style='width: 120px'>{$item['prod_order_name']}</div>"];
@@ -256,7 +249,7 @@ class Qaqc_wir extends Report_ParentController
                     'cell_title' => $param7,
                     'cell_href' => $href,
                     'cell_class' => 'bg-green-50',
-                ];;
+                ];
             }
             $transformData[$key] =  $prodOrder + $itemsHasNotWirDescData;
         }
