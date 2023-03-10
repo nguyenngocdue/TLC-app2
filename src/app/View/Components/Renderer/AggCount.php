@@ -33,11 +33,12 @@ class AggCount extends Component
             $str = Str::of($unit)->plural($count);
             $str = $count . " " . $str;
             $names = [];
-            foreach ($json as $item) {
-                $names[] = $item->name ?? "Nameless #" . $item->id;
+            foreach ($json as $index => $item) {
+                $name = $item->name ?? "Nameless #" . $item->id;
+                $names[] = (1 + $index) . ". " . $name;
             }
             $title = join("\n", $names);
-            return "<div class='text-center' title='$title'><x-renderer.tag>$str</x-renderer.tag>111</div>";
+            return "<div class='text-center' title='$title'><x-renderer.tag>$str</x-renderer.tag></div>";
         };
     }
 }
