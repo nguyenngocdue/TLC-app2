@@ -36,7 +36,7 @@ class Breadcrumb extends Component
         }
         switch ($action) {
             case 'show':
-                $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
+                // $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
                 $links[] = ['href' => null, 'modePrint' => true, 'title' => 'Print Mode', 'icon' => '<i class="fa-duotone fa-print"></i>'];
                 $links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
                 break;
@@ -44,11 +44,11 @@ class Breadcrumb extends Component
                 $slug = CurrentRoute::getEntitySlug($singular);
                 $modelPath = Str::modelPathFrom($singular);
                 $id = $modelPath::where('slug', $slug)->first()['id'];
-                $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
+                // $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
                 $links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
                 break;
             case 'showQRCode':
-                $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
+                // $links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
                 break;
             case 'edit':
                 $links[] = ['href' => route($type . '.show', $id), 'title' => 'Print Mode', 'icon' => '<i class="fa-duotone fa-print"></i>'];

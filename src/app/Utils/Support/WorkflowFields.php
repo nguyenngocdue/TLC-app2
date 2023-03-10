@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Log;
 
 class WorkflowFields
 {
-    static $type;
-    static function getSuperWorkflowByRoleSet()
+    public static $type;
+    private static function getSuperWorkflowByRoleSet()
     {
         $roleSet = CurrentUser::getRoleSet();
         return SuperWorkflows::getFor(self::$type, $roleSet);
     }
-    static function getStatusFollowDefinitions($status, $definitions)
+    private static function getStatusFollowDefinitions($status, $definitions)
     {
         if (!$status) {
             if (empty($definitions)) {
@@ -26,7 +26,7 @@ class WorkflowFields
         }
         return $status;
     }
-    static function getPropsIntermediate($intermediate, $status, $props)
+    private static function getPropsIntermediate($intermediate, $status, &$props)
     {
         $propsIntermediate = [];
         if (!empty($intermediate) && isset($intermediate[$status])) {
@@ -40,29 +40,29 @@ class WorkflowFields
         }
         return $propsIntermediate;
     }
-    static function checkButtonSaveRenderWhenAdmin(&$buttonSave)
+    private static function checkButtonSaveRenderWhenAdmin(&$buttonSave)
     {
         if (CurrentUser::isAdmin()) {
             $buttonSave = true;
         }
     }
-    static function getCapabilitiesByRoleSetCurrentUser()
+    private static function getCapabilitiesByRoleSetCurrentUser()
     {
         $workflows = self::getSuperWorkflowByRoleSet()['workflows'];
         $checkWorkflowCapa = [];
         foreach ($workflows as $key => $value) {
-            $checkWorkflowCapa[$key] = $value['capabilities'];
+            $checkWorkflowCapa[$key] = $value['capabilities'] ?? false;
         }
         return $checkWorkflowCapa;
     }
-    static function checkWorkflowCapabilitiesForRenderButton($checkWorkflowCapa, $status, &$buttonSave, &$actionButtons)
+    private static function checkWorkflowCapabilitiesForRenderButton($checkWorkflowCapa, $status, &$buttonSave, &$actionButtons)
     {
-        if (!$checkWorkflowCapa[$status]) {
+        if (isset($checkWorkflowCapa[$status]) && !$checkWorkflowCapa[$status]) {
             $buttonSave = false;
             $actionButtons = [];
         }
     }
-    static function getActionButtonsFromTransitionAndStatuses($transitions, $statuses)
+    private static function getActionButtonsFromTransitionAndStatuses($transitions, $statuses)
     {
         $actionButtons = [];
         foreach ($transitions as $value) {
@@ -70,7 +70,7 @@ class WorkflowFields
         }
         return $actionButtons;
     }
-    static function resolveSuperProps($superProps, $status, $type, $isCheckColumnStatus)
+    public static function resolveSuperProps($superProps, $status, $type, $isCheckColumnStatus)
     {
         self::$type = $type;
         $buttonSave = true;
@@ -92,7 +92,7 @@ class WorkflowFields
         self::checkWorkflowCapabilitiesForRenderButton($checkWorkflowCapa, $status, $buttonSave, $actionButtons);
         return [$status, $statuses, $props, $actionButtons, $transitions, $buttonSave, $propsIntermediate];
     }
-    static function parseFields($props, $values, $defaultValues, $status, $isCheckColumnStatus)
+    public static function parseFields($props, $values, $defaultValues, $status, $isCheckColumnStatus)
     {
         $result = [];
         if ($isCheckColumnStatus && $status && isset(self::getSuperWorkflowByRoleSet()['workflows'][$status])) {
@@ -129,20 +129,17 @@ class WorkflowFields
         $result['classColSpanLabel'] = "col-span-" . ($prop['new_line'] === 'true' ? "12" : (24 / $col_span));
         $result['classColStart'] = "col-start-" . (24 / $col_span + 1);
         $result['classColSpanControl'] = "col-span-" . ($prop['new_line'] === 'true' ? "12" : (12 - 24 / $col_span));
-
         $result['value'] = $values->{$columnName} ?? '';
         $result['title'] = $columnName . " / " . $control;
-
         $defaultValue = $defaultValues[$key] ?? [];
         $result['labelExtra'] = $defaultValue['label_extra'] ?? "";
         $result['placeholder'] = $defaultValue['placeholder'] ?? "";
         $result['controlExtra'] = $defaultValue['control_extra'] ?? "";
-
         $realtime = $realtimes[$key] ?? [];
         $result['realtimeType'] = $realtime["realtime_type"] ?? "";
         $result['realtimeFn'] = $realtime["realtime_fn"] ?? "";
-
         $result['iconJson'] = $columnType === 'json' ? '<i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
+
         $typeWorkflow ?  self::followWorkflow($result, $prop, $defaultValue, $hidden, $readonly, $required) : self::noneFollowWorkflow($result, $prop, $defaultValue);
     }
     private static function noneFollowWorkflow(&$result, $prop, $defaultValue)

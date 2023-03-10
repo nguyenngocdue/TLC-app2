@@ -42,8 +42,14 @@ trait TraitEntityCRUDShow
 				} else {
 					$relationships = $prop['relationships'];
 					if ($relationships['relationship'] === 'belongsTo') {
+						dump(
+							$relationships['control_name_function'],
+							$dataModelCurrent
+								->{$relationships['control_name_function']},
+							$dataModelCurrent
+						);
 						$dataSource[$prop['column_name']] = $dataModelCurrent
-							->{$relationships['control_name_function']}->name;
+							->{$relationships['control_name_function']}->name ?? '';
 					} else {
 						isset($prop['relationships']['eloquentParams']) ?
 							$dataSource[$prop['column_name']] = $dataModelCurrent
