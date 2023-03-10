@@ -23,7 +23,7 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
 <div class="px-4">
     <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}"/>
     <x-controls.header-alert-validation :strProps="$props" />
-    <x-renderer.test-status-and-accessible type={{$type}} renderId={{$id}} status={{$status}} action={{$action}} :statuses="$statuses"/>
+    <x-renderer.test-status-and-accessible type={{$type}} renderId={{$id}} status={{$status}} action={{$action}} :dryRunToken="$dryRunToken" :statuses="$statuses" />
     <form class="w-full mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
         @csrf        
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}

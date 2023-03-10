@@ -17,7 +17,8 @@ class TestStatusAndAccessible extends Component
         private $renderId,
         private $status,
         private $action,
-        private $statuses
+        private $statuses,
+        private $dryRunToken,
     ) {
         //
     }
@@ -37,7 +38,8 @@ class TestStatusAndAccessible extends Component
             'status' => $this->status,
             'action' => $this->action,
             'statuses' => $this->statuses,
-            'isAdmin' => $isAdmin
+            'isAdmin' => $isAdmin,
+            'dryRunToken' => $this->dryRunToken
         ]);
     }
 }

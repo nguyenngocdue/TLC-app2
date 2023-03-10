@@ -6,7 +6,7 @@
                     @foreach($statuses as $key => $value)
                         @php $colorIndex =$value['color_index'];  @endphp
                         <span class="bg-{{$value['color']}}-{{$colorIndex}} text-{{$value['color']}}-{{1000-$colorIndex}} whitespace-nowrap rounded hover:bg-blue-400 font-medium text-xs px-2 py-1 leading-tight ml-1">
-                            <a href="{{route($type.'.edit',$renderId)}}?status={{$value['name']}}">{{$value['title']}}</a>
+                            <a href="{{route($type.'.edit',$renderId)}}?status={{$value['name']}}&dryrun_token={{$dryRunToken}}">{{$value['title']}}</a>
                         </span>
                     @endforeach
                 </div>

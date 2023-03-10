@@ -13,6 +13,7 @@ use App\Utils\Support\JsonControls;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
@@ -50,9 +51,13 @@ trait TraitEntityCRUDCreateEdit2
 		]);
 	}
 
+
 	public function edit(Request $request, $id)
 	{
 		$status = $request->query('status');
+		$dryRunTokenRequest = $request->query('dryrun_token');
+		$valueCreateDryToken = $this->hashDryRunToken($id, $status);
+		$this->checkDryRunToken($dryRunTokenRequest, $valueCreateDryToken);
 		// dump(SuperProps::getFor($this->type));
 		$superProps = $this->getSuperProps();
 		$props = $superProps['props'];
@@ -61,6 +66,7 @@ trait TraitEntityCRUDCreateEdit2
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$isCheckColumnStatus = Schema::hasColumn(Str::plural($this->type), 'status');
+
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
 			'props' => $props,
@@ -69,6 +75,7 @@ trait TraitEntityCRUDCreateEdit2
 			// 'realtimes' => Realtimes::getAllOf($this->type),
 			'values' => $values,
 			'status' => $status,
+			'dryRunToken' => Hash::make($valueCreateDryToken),
 			'isCheckColumnStatus' => $isCheckColumnStatus,
 			'type' => Str::plural($this->type),
 			'action' => __FUNCTION__,
@@ -81,6 +88,22 @@ trait TraitEntityCRUDCreateEdit2
 			'listeners4' => $this->getListeners4($tableBluePrint),
 			'filters4' => $this->getFilters4($tableBluePrint),
 		]);
+	}
+	private function hashDryRunToken($id)
+	{
+		$user = auth()->user();
+		$userId = $user->id;
+		$userPassword = $user->password;
+		$value = $this->type . $id . $userId . $userPassword;
+		return $value;
+	}
+	private function checkDryRunToken($dryRunTokenRequest, $value)
+	{
+		if ($dryRunTokenRequest) {
+			if (!Hash::check($value, $dryRunTokenRequest)) {
+				abort(403, 'Forbidden');
+			}
+		}
 	}
 
 
