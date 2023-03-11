@@ -22,7 +22,7 @@
                 </div>
                 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
                    <x-renderer.button class="mx-2" type='success'>Populate</x-renderer.button>
-                   <x-renderer.button type='default'>Cancel</x-renderer.button>
+                   <x-renderer.button type='default' click="closeListingTable('{{$modalId}}')">Cancel</x-renderer.button>
                 </div>                
             </div>
         </div>
