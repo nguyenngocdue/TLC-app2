@@ -9,21 +9,21 @@
     "_h1a": {
         "name": "_h1a",
         "column_name": "h1a",
-        "new": "",
+        "new": "true",
         "active": "true",
         "approval_rejected": ""
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": "true"
     },
     "_work_area_id": {
         "name": "_work_area_id",
         "column_name": "work_area_id",
-        "new": "",
+        "new": "true",
         "active": "true",
         "approval_rejected": ""
     },
@@ -37,399 +37,399 @@
     "_injured_person": {
         "name": "_injured_person",
         "column_name": "injured_person",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_injured_staff_id": {
         "name": "_injured_staff_id",
         "column_name": "injured_staff_id",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_injured_staff_position": {
         "name": "_injured_staff_position",
         "column_name": "injured_staff_position",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_line_manager": {
         "name": "_line_manager",
         "column_name": "line_manager",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_manager_staff_id": {
         "name": "_manager_staff_id",
         "column_name": "manager_staff_id",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_manager_staff_position": {
         "name": "_manager_staff_position",
         "column_name": "manager_staff_position",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_owner_staff_id": {
         "name": "_owner_staff_id",
         "column_name": "owner_staff_id",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_owner_staff_position": {
         "name": "_owner_staff_position",
         "column_name": "owner_staff_position",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_incident_doc_type_id": {
         "name": "_incident_doc_type_id",
         "column_name": "incident_doc_type_id",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_incident_doc_sub_type_id": {
         "name": "_incident_doc_sub_type_id",
         "column_name": "incident_doc_sub_type_id",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_number_injured_person": {
         "name": "_number_injured_person",
         "column_name": "number_injured_person",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_number_involved_person": {
         "name": "_number_involved_person",
         "column_name": "number_involved_person",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_divider1": {
         "name": "_divider1",
         "column_name": "divider1",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_h1b": {
         "name": "_h1b",
         "column_name": "h1b",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_issue_description": {
         "name": "_issue_description",
         "column_name": "issue_description",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_attachment_1": {
         "name": "_attachment_1",
         "column_name": "attachment_1",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_divider2": {
         "name": "_divider2",
         "column_name": "divider2",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_h2b": {
         "name": "_h2b",
         "column_name": "h2b",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_accident_book_entry": {
         "name": "_accident_book_entry",
         "column_name": "accident_book_entry",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_lost_days": {
         "name": "_lost_days",
         "column_name": "lost_days",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_time_in_hospital": {
         "name": "_time_in_hospital",
         "column_name": "time_in_hospital",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_time_out_hospital": {
         "name": "_time_out_hospital",
         "column_name": "time_out_hospital",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_divider3": {
         "name": "_divider3",
         "column_name": "divider3",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_h8b": {
         "name": "_h8b",
         "column_name": "h8b",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_mainAffectedPart()": {
         "name": "_mainAffectedPart()",
         "column_name": "mainAffectedPart()",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_natureOfInjury()": {
         "name": "_natureOfInjury()",
         "column_name": "natureOfInjury()",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_treatmentInstruction()": {
         "name": "_treatmentInstruction()",
         "column_name": "treatmentInstruction()",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_comment_by_clinic": {
         "name": "_comment_by_clinic",
         "column_name": "comment_by_clinic",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_divider8": {
         "name": "_divider8",
         "column_name": "divider8",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_h2a": {
         "name": "_h2a",
         "column_name": "h2a",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_causeOfIssue()": {
         "name": "_causeOfIssue()",
         "column_name": "causeOfIssue()",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_divider4": {
         "name": "_divider4",
         "column_name": "divider4",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_h3b": {
         "name": "_h3b",
         "column_name": "h3b",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_activityLeadToIssue()": {
         "name": "_activityLeadToIssue()",
         "column_name": "activityLeadToIssue()",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_divider5": {
         "name": "_divider5",
         "column_name": "divider5",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_h4b": {
         "name": "_h4b",
         "column_name": "h4b",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_immediateCause()": {
         "name": "_immediateCause()",
         "column_name": "immediateCause()",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_divider6": {
         "name": "_divider6",
         "column_name": "divider6",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_h5b": {
         "name": "_h5b",
         "column_name": "h5b",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_issueRootCause()": {
         "name": "_issueRootCause()",
         "column_name": "issueRootCause()",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_divider7": {
         "name": "_divider7",
         "column_name": "divider7",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_h6b": {
         "name": "_h6b",
         "column_name": "h6b",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_investigation_finding": {
         "name": "_investigation_finding",
         "column_name": "investigation_finding",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_attachment_2": {
         "name": "_attachment_2",
         "column_name": "attachment_2",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_divider9": {
         "name": "_divider9",
         "column_name": "divider9",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_h7b": {
         "name": "_h7b",
         "column_name": "h7b",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_getCorrectiveActions": {
         "name": "_getCorrectiveActions",
         "column_name": "getCorrectiveActions",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_divider10": {
         "name": "_divider10",
         "column_name": "divider10",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_h3a": {
         "name": "_h3a",
         "column_name": "h3a",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_comment_by_line_manager": {
         "name": "_comment_by_line_manager",
         "column_name": "comment_by_line_manager",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_divider11": {
         "name": "_divider11",
         "column_name": "divider11",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_h4a": {
         "name": "_h4a",
         "column_name": "h4a",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_comment_by_general_manager": {
         "name": "_comment_by_general_manager",
         "column_name": "comment_by_general_manager",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "",
+        "new": "true",
         "active": "",
         "approval_rejected": ""
     }

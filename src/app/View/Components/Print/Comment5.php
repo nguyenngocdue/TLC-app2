@@ -1,11 +1,11 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Print;
 
 use App\Models\User;
 use Illuminate\View\Component;
 
-class Comment3 extends Component
+class Comment5 extends Component
 {
     /**
      * Create a new component instance.
@@ -63,7 +63,7 @@ class Comment3 extends Component
     public function render()
     {
         $this->getTableDataSource();
-        return view('components.renderer.comment3', [
+        return view('components.print.comment5', [
             'tableEditableColumns' => $this->getTableColumns(),
             'tableDataSource' => $this->getTableDataSource(),
         ]);

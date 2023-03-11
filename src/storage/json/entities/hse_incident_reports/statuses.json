@@ -1,5 +1,6 @@
 [
     "new",
     "active",
-    "approval_rejected"
+    "approval_rejected",
+    "closed"
 ]
