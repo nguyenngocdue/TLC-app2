@@ -2,11 +2,9 @@
 
 namespace App\View\Components\Controls;
 
-use App\Utils\Constant;
-use Carbon\Carbon;
 use Illuminate\View\Component;
 
-class DatePicker3 extends Component
+class DatePicker2 extends Component
 {
     /**
      * Create a new component instance.
@@ -33,7 +31,7 @@ class DatePicker3 extends Component
         // dump($this->value);
 
         return view(
-            'components.controls.date-picker3',
+            'components.controls.date-picker2',
             [
                 'name' => $this->name,
                 'value' => $this->value,

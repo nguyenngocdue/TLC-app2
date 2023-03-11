@@ -3,10 +3,9 @@
 namespace App\View\Components\Controls;
 
 use App\Utils\ClassList;
-use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 
-class Text extends Component
+class Text2 extends Component
 {
 
     public function __construct(
@@ -25,7 +24,7 @@ class Text extends Component
         $placeholder = $this->placeholder;
         $icon = $this->icon;
         $readOnly = $this->readOnly;
-        return view('components.controls.text', [
+        return view('components.controls.text2', [
             'name' => $name,
             'value' => $value,
             'placeholder' => $placeholder,

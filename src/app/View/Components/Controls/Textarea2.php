@@ -3,10 +3,9 @@
 namespace App\View\Components\Controls;
 
 use App\Utils\ClassList;
-use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 
-class Textarea extends Component
+class Textarea2 extends Component
 {
     public function __construct(
         private $name,
@@ -25,7 +24,7 @@ class Textarea extends Component
         $value = $_value === 'null' ? "" : $_value;
 
 
-        return view('components.controls.textarea', [
+        return view('components.controls.textarea2', [
             'name' => $name,
             'value' => $value,
             'readOnly' => $this->readOnly,

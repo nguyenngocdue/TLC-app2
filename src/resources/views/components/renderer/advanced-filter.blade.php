@@ -70,14 +70,14 @@
                 @case('doc_id')
                 @case('parent_id')
                 <div class="mt-1">
-                    <x-controls.text name={{$columnName}} value={{$valueControl}} placeholder="Comma separated numbers are allowed"/>
+                    <x-controls.text2 name={{$columnName}} value={{$valueControl}} placeholder="Comma separated numbers are allowed"/>
                 </div>
                 @break
                 @case('text')
                 @case('number')
                 @case('textarea')
                 <div class="mt-1">
-                    <x-controls.text name={{$columnName}} value={{$valueControl}}/>
+                    <x-controls.text2 name={{$columnName}} value={{$valueControl}}/>
                 </div>
                 @break
                 @case('toggle')
@@ -109,9 +109,9 @@
                             });
                     </script>
                 @break
-                @case('parent_type')
+                {{-- @case('parent_type')
                 <x-advanced-filter.parent-type3 :type="$type" :name="$columnName" :valueSelected="$valueControl"/>
-                @break
+                @break --}}
                 @default
                 <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}]" />
                 @break

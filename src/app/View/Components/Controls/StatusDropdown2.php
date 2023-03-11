@@ -5,7 +5,7 @@ namespace App\View\Components\Controls;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
 
-class ControlStatus extends Component
+class StatusDropdown2 extends Component
 {
     // private $value;
     /**
@@ -31,7 +31,7 @@ class ControlStatus extends Component
     {
         if (!method_exists($this->modelPath, "getAvailableStatuses")) return "<x-feedback.alert type='warning' message='This model needs to use HasStatus trait.'></x-feedback.alert>";
         $cbb = $this->modelPath::getAvailableStatuses();
-        return view("components.controls.control-status", [
+        return view("components.controls.status-dropdown2", [
             'options' => $cbb,
             'name' => $this->name,
             'value' => $this->value,

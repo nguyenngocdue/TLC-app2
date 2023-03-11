@@ -1,5 +1,5 @@
 <input
-    component="controls/number" 
+    component="controls/number2" 
     id="{{$name}}" 
     name="{{$name}}" 
     step='any' 

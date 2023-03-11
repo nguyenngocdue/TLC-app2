@@ -5,7 +5,7 @@
     </div>
     @endif
     <input 
-        component="controls/text"
+        component="controls/text2"
         id="{{$name}}" 
         name="{{$name}}" 
         placeholder="{{$placeholder}}" 
