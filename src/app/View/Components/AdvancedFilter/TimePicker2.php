@@ -1,18 +1,20 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\AdvancedFilter;
 
 use Illuminate\View\Component;
 
-class TestTable extends Component
+class TimePicker2 extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $name = '',
+        private $value = '',
+    ) {
         //
     }
 
@@ -23,6 +25,9 @@ class TestTable extends Component
      */
     public function render()
     {
-        return view('components.controls.test-table');
+        return view('components.advanced-filter.time-picker2', [
+            'name' => $this->name,
+            'value' => $this->value
+        ]);
     }
 }

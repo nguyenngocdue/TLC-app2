@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Utils\ClassList;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 
@@ -29,7 +30,8 @@ class Text extends Component
             'value' => $value,
             'placeholder' => $placeholder,
             'icon' => $icon,
-            'readOnly' => $readOnly
+            'readOnly' => $readOnly,
+            'classList' => ClassList::TEXT,
         ]);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\AdvancedFilter;
 
 use Illuminate\View\Component;
 
@@ -51,7 +51,7 @@ class Dropdown3 extends Component
         } else {
             $dataSource = (new $params[1])::all();
         }
-        return view('components.controls.dropdown3', [
+        return view('components.advanced-filter.dropdown3', [
             'dataSource' => $dataSource,
             'name' =>  $this->name,
             'valueSelected' => $this->valueSelected,

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Editable;
 
+use App\Utils\ClassList;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
@@ -56,6 +57,7 @@ class PickerAll4 extends Component
             'saveOnChange' => $this->saveOnChange,
             'readOnly' => $this->readOnly,
             'control' => $this->control,
+            'classList' => ClassList::TEXT,
         ]);
     }
 }

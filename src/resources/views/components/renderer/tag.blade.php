@@ -12,6 +12,6 @@ $class = $class ?? "";
 $rounded = $rounded ?? 'rounded-lg';
 @endphp
 
-<span {!! $title_rendered !!} class="{{$bg}} {{$text}} {{$bg_dark}} {{$text_dark}} whitespace-nowrap {{$class}} {{$rounded}} font-semibold text-xs px-2 py-1 leading-tight ">
+<span {!! $title_rendered !!} class="{{$bg}} {{$text}} {{$bg_dark}} {{$text_dark}} {{$class}} {{$rounded}} whitespace-nowrap font-semibold text-xs px-2 py-1 leading-tight ">
     {{ $slot }}
 </span

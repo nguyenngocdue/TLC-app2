@@ -38,7 +38,7 @@
     @isset($tableSettings['showBtnAddFromAList'])
     @if($tableSettings['showBtnAddFromAList'])
 
-    <x-renderer.button  click="toggleListingTable('456')" id="btnAddFromAList_{{$table01Name}}" type="success" title="Add from a list" onClick="addFromAList({tableId: '{{$table01Name}}'})">Add From A List</x-renderer.button>
+    <x-renderer.button click="toggleListingTable('456')" id="btnAddFromAList_{{$table01Name}}" type="success" title="Add from a list">Add From A List</x-renderer.button>
     <x-controls.model-add-from-a-list modalId='456' />
     @endif
     @endisset

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Utils\ClassList;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 
@@ -17,9 +18,11 @@ class Number extends Component
 
     public function render()
     {
-        $name = $this->name;
-        $value = $this->value;
-        $readOnly = $this->readOnly;
-        return view('components.controls.number')->with(compact('name', 'value', 'readOnly'));
+        return view('components.controls.number', [
+            'name' => $this->name,
+            'value' => $this->value,
+            'readOnly' => $this->readOnly,
+            'classList' => ClassList::TEXT,
+        ]);
     }
 }

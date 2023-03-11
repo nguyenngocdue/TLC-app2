@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\AdvancedFilter;
 
 use Illuminate\View\Component;
 
-class TimePicker2 extends Component
+class YearPicker extends Component
 {
     /**
      * Create a new component instance.
@@ -25,7 +25,7 @@ class TimePicker2 extends Component
      */
     public function render()
     {
-        return view('components.controls.time-picker2', [
+        return view('components.advanced-filter.year-picker', [
             'name' => $this->name,
             'value' => $this->value
         ]);

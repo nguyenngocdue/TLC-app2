@@ -1,12 +1,11 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\AdvancedFilter;
 
 use Illuminate\View\Component;
 
-class ParentType3 extends Component
+class WeekPicker extends Component
 {
-    use TraitMorphTo;
     /**
      * Create a new component instance.
      *
@@ -14,8 +13,7 @@ class ParentType3 extends Component
      */
     public function __construct(
         private $name = '',
-        private $valueSelected = null,
-        private $type,
+        private $value = '',
     ) {
         //
     }
@@ -27,11 +25,9 @@ class ParentType3 extends Component
      */
     public function render()
     {
-        $dataSource = $this->getAllTypeMorphMany();
-        return view('components.controls.parent-type', [
-            'dataSource' => $dataSource,
-            'name' =>  $this->name,
-            'valueSelected' => $this->valueSelected,
+        return view('components.advanced-filter.week-picker', [
+            'name' => $this->name,
+            'value' => $this->value
         ]);
     }
 }

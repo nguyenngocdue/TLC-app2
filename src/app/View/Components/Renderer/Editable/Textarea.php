@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Editable;
 
+use App\Utils\ClassList;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
@@ -42,6 +43,7 @@ class Textarea extends Component
             'type' => 'text',
             'cell' => $this->cell,
             'readOnly' => $this->readOnly,
+            'classList' => ClassList::TEXTAREA,
         ]);
     }
 }

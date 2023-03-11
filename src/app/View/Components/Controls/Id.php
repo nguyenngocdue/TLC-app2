@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Controls;
 
-use App\Utils\Support\CurrentRoute;
+use App\Utils\ClassList;
 use Illuminate\View\Component;
 
 class Id extends Component
@@ -15,8 +15,10 @@ class Id extends Component
 
     public function render()
     {
-        $name = $this->name;
-        $value = $this->value;
-        return view('components.controls.id')->with(compact('name', 'value'));
+        return view('components.controls.id', [
+            'name' => $this->name,
+            'value' => $this->value,
+            'classList' => ClassList::TEXT,
+        ]);
     }
 }

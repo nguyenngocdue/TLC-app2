@@ -30,38 +30,38 @@
                 </div>
                 @switch ($control)
                 @case('picker_time')
-                <x-controls.time-picker2 :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.time-picker2 :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_month')
-                <x-controls.month-picker :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.month-picker :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_week')
-                <x-controls.week-picker :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.week-picker :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_year')
-                <x-controls.year-picker :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.year-picker :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_quarter')
-                <x-controls.quarter-picker :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.quarter-picker :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_date')
                 @case('picker_datetime')
-                <x-controls.date-picker2 :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.date-picker2 :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
@@ -83,7 +83,7 @@
                 @case ('radio')
                 @case ('dropdown_multi')
                 @case('checkbox')
-                    <x-controls.dropdown3 :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
+                    <x-advanced-filter.dropdown3 :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
                 @break
                 @case('status')
                     @php
@@ -106,7 +106,7 @@
                     </script>
                 @break
                 @case('parent_type')
-                <x-controls.parent-type3 :type="$type" :name="$columnName" :valueSelected="$valueControl"/>
+                <x-advanced-filter.parent-type3 :type="$type" :name="$columnName" :valueSelected="$valueControl"/>
                 @break
                 @default
                 <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}]" />

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Utils\ClassList;
 use Illuminate\View\Component;
 
 class ControlStatus extends Component
@@ -35,6 +36,7 @@ class ControlStatus extends Component
             'name' => $this->name,
             'value' => $this->value,
             'readOnly' => $this->readOnly,
+            'classList' => ClassList::DROPDOWN,
         ]);
     }
 }

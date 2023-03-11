@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Utils\ClassList;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 
@@ -28,6 +29,7 @@ class Textarea extends Component
             'name' => $name,
             'value' => $value,
             'readOnly' => $this->readOnly,
+            'classList' => ClassList::TEXTAREA,
         ]);
     }
 }

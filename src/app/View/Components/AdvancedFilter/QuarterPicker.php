@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\AdvancedFilter;
 
 use Illuminate\View\Component;
 
@@ -25,7 +25,7 @@ class QuarterPicker extends Component
      */
     public function render()
     {
-        return view('components.controls.quarter-picker', [
+        return view('components.advanced-filter.quarter-picker', [
             'name' => $this->name,
             'value' => $this->value
         ]);

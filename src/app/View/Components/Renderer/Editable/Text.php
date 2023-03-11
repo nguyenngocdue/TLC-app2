@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Editable;
 
+use App\Utils\ClassList;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
@@ -51,6 +52,7 @@ class Text extends Component
             'icon' => $this->icon,
             'saveOnChange' => $this->saveOnChange,
             'readOnly' => $this->readOnly,
+            'classList' => ClassList::TEXT,
         ]);
     }
 }

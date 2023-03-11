@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Editable;
 
+use App\Utils\ClassList;
 use Illuminate\View\Component;
 
 class ReadOnlyText extends Component
@@ -43,6 +44,7 @@ class ReadOnlyText extends Component
             'value' => $value,
             'title' => $title,
             'align' => $this->align,
+            'classList' => ClassList::TEXT,
         ]);
     }
 }

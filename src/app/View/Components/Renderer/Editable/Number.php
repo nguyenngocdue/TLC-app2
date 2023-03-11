@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Editable;
 
+use App\Utils\ClassList;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
@@ -69,6 +70,7 @@ class Number extends Component
             'table01Name' => $this->table01Name,
             'onChange' => $onChange,
             'bgColor' => $bgColor,
+            'classList' => ClassList::TEXT,
         ]);
     }
 }

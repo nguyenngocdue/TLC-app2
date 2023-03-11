@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Editable;
 
+use App\Utils\ClassList;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
@@ -67,6 +68,7 @@ class Dropdown extends Component
             'name' => $this->name,
             'cbbDataSource' => $dataSource,
             'selected' => $this->selected,
+            'classList' => ClassList::DROPDOWN,
         ]);
     }
 }
