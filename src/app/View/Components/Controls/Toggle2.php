@@ -5,7 +5,7 @@ namespace App\View\Components\Controls;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
 
-class Toggle extends Component
+class Toggle2 extends Component
 {
     public function __construct(
         private $name,
@@ -19,7 +19,7 @@ class Toggle extends Component
         $name = $this->name;
         $value = $this->value;
         $readOnly = $this->readOnly;
-        return view('components.controls.toggle', [
+        return view('components.controls.toggle2', [
             'name' => $name,
             'value' => $value,
             'readOnly' => $readOnly,

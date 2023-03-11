@@ -18,7 +18,7 @@
                 @foreach($props as $key => $value)
                     @switch($value['control'])
                     @case('hyperlink')
-                        <x-renderer.hyper-link2 label="{{$value['column_name']}}" href="{{$dataSource[$value['column_name']]}}" />
+                        <x-print.hyper-link5 label="{{$value['column_name']}}" href="{{$dataSource[$value['column_name']]}}" />
                         @break
                     @default
                     @endswitch

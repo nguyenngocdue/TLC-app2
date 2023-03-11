@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Print;
 
 use Illuminate\View\Component;
 
-class CheckboxOrRadio extends Component
+class CheckboxOrRadio5 extends Component
 {
     /**
      * Create a new component instance.
@@ -28,7 +28,7 @@ class CheckboxOrRadio extends Component
         $columnRender = $this->relationships['renderer_view_all_param'];
         $colSpan = $this->relationships['radio_checkbox_colspan'];
         $dataSource = array_column($this->value, $columnRender);
-        return view('components.renderer.checkbox-or-radio', [
+        return view('components.print.checkbox-or-radio5', [
             'dataSource' => $dataSource,
             'colSpan' => $colSpan,
         ]);

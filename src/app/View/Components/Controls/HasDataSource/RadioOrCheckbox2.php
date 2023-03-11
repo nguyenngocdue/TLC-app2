@@ -5,7 +5,7 @@ namespace App\View\Components\Controls\HasDataSource;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
-class RadioOrCheckBox extends Component
+class RadioOrCheckBox2 extends Component
 {
     // use HasDataSource;
     public function __construct(
@@ -52,6 +52,6 @@ class RadioOrCheckBox extends Component
         ];
         // dump($params);
 
-        return view('components.controls.has-data-source.radio-or-checkbox', $params);
+        return view('components.controls.has-data-source.radio-or-checkbox2', $params);
     }
 }

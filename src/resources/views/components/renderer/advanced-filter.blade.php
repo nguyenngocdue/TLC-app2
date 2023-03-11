@@ -81,7 +81,7 @@
                 </div>
                 @break
                 @case('toggle')
-                <x-controls.toggle name={{$columnName}} value={{$valueControl}} />
+                <x-controls.toggle2 name={{$columnName}} value={{$valueControl}} />
                 @break
                 @case ('dropdown')
                 @case ('radio')

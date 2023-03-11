@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Reports;
 
 use Illuminate\View\Component;
 
@@ -24,7 +24,7 @@ class TableReport extends Component
      */
     public function render()
     {
-        return view('components.renderer.table-report', [
+        return view('components.reports.table-report', [
             'dataSource' => $this->dataSource
         ]);
     }

@@ -21,7 +21,7 @@
                             @case('dropdown')
                             @case('dropdown_multi')
                             <div class='p-2  border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
-                                <x-renderer.checkbox-or-radio :relationships="$relationships" :value="$value" />
+                                <x-print.checkbox-or-radio5 :relationships="$relationships" :value="$value" />
                             </div>
                                 @break
                             @case('comment')
@@ -31,7 +31,7 @@
                                 @break
                             @case('relationship_renderer')
                                 <div class='p1-2  border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
-                                    <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} />
+                                    <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} />
                                 </div>
                                 @break
                             @default
@@ -63,8 +63,8 @@
                             @case('radio')
                             @case('dropdown')
                             @case('dropdown_multi')
-                            <div class='p-2  border border-gray-600 text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
-                                <x-renderer.checkbox-or-radio :relationships="$relationships" :value="$value" />
+                            <div class='p-2 border border-gray-600 text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
+                                <x-print.checkbox-or-radio5 :relationships="$relationships" :value="$value" />
                             </div>
                                 @break
                             @case('comment')
@@ -74,7 +74,7 @@
                                 @break
                             @case('relationship_renderer')
                                 <div class='p-2  border border-gray-600 text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
-                                    <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
+                                    <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
                                 </div>
                                 @break
                             @default

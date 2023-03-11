@@ -7,10 +7,10 @@
     </x-renderer.card>
     <x-renderer.card title="Toggle">
         Toggle FALSE
-        <x-controls.toggle name='hello1' value=0></x-controls.toggle>
+        <x-controls.toggle2 name='hello1' value=0></x-controls.toggle2>
         <br />
         Toggle TRUE
-        <x-controls.toggle name='hello2' value=1></x-controls.toggle>
+        <x-controls.toggle2 name='hello2' value=1></x-controls.toggle2>
         <br />
     </x-renderer.card>
     <x-renderer.card title="Dropdown">

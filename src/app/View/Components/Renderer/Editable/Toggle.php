@@ -28,7 +28,7 @@ class Toggle extends Component
     {
         $this->cell = str_starts_with($this->cell, "No dataIndex for ") ? 0 : $this->cell;
         if ($this->cell === 'DO_NOT_RENDER') return "";
-        return view('components.controls.toggle', [
+        return view('components.controls.toggle2', [
             'name' => $this->name,
             'value' => $this->cell,
             'readOnly' => $this->readOnly,

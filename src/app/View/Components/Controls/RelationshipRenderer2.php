@@ -13,7 +13,7 @@ use App\View\Components\Controls\RelationshipRenderer\TraitTableEditableDataSour
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
-class RelationshipRenderer extends Component
+class RelationshipRenderer2 extends Component
 {
     use TraitTableColumnRO;
     use TraitTableColumnEditable;

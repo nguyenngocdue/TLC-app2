@@ -82,7 +82,7 @@
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('toggle')
-                        <x-controls.toggle name={{$columnName}} value={{$value}} readOnly={{$readOnly}} />
+                        <x-controls.toggle2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} />
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('status')
@@ -94,13 +94,13 @@
                         <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
                         @break
                         @case ('radio')
-                        <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
+                        <x-controls.has-data-source.radio-or-checkbox2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
                         @break
                         @case ('dropdown_multi')
                         <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
                         @break
                         @case('checkbox')
-                        <x-controls.has-data-source.radio-or-checkbox type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}}/>
+                        <x-controls.has-data-source.radio-or-checkbox2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}}/>
                         @break
                         @case('picker_time')
                         <x-controls.text2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} placeholder="HH:MM" icon="fa-duotone fa-clock" />
@@ -140,7 +140,7 @@
 
                         @case('relationship_renderer')
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                        <x-controls.relationship-renderer id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
+                        <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
                         @break
 
                         @case('parent_type')
