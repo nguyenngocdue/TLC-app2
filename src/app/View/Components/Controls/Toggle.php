@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Utils\ClassList;
 use Illuminate\View\Component;
 
 class Toggle extends Component
@@ -21,7 +22,8 @@ class Toggle extends Component
         return view('components.controls.toggle', [
             'name' => $name,
             'value' => $value,
-            'readOnly' => $readOnly
+            'readOnly' => $readOnly,
+            'classList' => ClassList::TOGGLE,
         ]);
     }
 }

@@ -30,38 +30,38 @@
                 </div>
                 @switch ($control)
                 @case('picker_time')
-                <x-advanced-filter.time-picker2 :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.picker-time3 :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_month')
-                <x-advanced-filter.month-picker :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.picker-month3 :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_week')
-                <x-advanced-filter.week-picker :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.picker-week3 :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_year')
-                <x-advanced-filter.year-picker :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.picker-year3 :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_quarter')
-                <x-advanced-filter.quarter-picker :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.picker-quarter3 :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_date')
                 @case('picker_datetime')
-                <x-advanced-filter.date-picker2 :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.picker-date3 :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif

@@ -1,6 +1,7 @@
 <input 
     id="{{$name}}"
     name="{{$name}}" 
+    component="controls/id"
     readonly 
     value='{{$value}}' 
     class='{{$classList}}' 

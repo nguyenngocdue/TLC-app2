@@ -1,3 +1,4 @@
+<p class="block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 placeholder-slate-400 sm:text-sm focus:border-blue-600 focus:border-3 border-5 dark:focus:border-blue-600 focus:outline-none px-1 py-2">
 <th class="border-t-0"></th>
 <input class="truncate w-16" />
 <input class="h-[100px] w-[100px]"/>

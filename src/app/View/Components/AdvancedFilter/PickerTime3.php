@@ -4,7 +4,7 @@ namespace App\View\Components\AdvancedFilter;
 
 use Illuminate\View\Component;
 
-class YearPicker extends Component
+class PickerTime3 extends Component
 {
     /**
      * Create a new component instance.
@@ -25,7 +25,7 @@ class YearPicker extends Component
      */
     public function render()
     {
-        return view('components.advanced-filter.year-picker', [
+        return view('components.advanced-filter.picker-time3', [
             'name' => $this->name,
             'value' => $this->value
         ]);

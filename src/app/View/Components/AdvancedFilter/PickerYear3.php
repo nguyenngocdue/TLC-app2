@@ -4,7 +4,7 @@ namespace App\View\Components\AdvancedFilter;
 
 use Illuminate\View\Component;
 
-class QuarterPicker extends Component
+class PickerYear3 extends Component
 {
     /**
      * Create a new component instance.
@@ -25,7 +25,7 @@ class QuarterPicker extends Component
      */
     public function render()
     {
-        return view('components.advanced-filter.quarter-picker', [
+        return view('components.advanced-filter.picker-year3', [
             'name' => $this->name,
             'value' => $this->value
         ]);

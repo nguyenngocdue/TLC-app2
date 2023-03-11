@@ -25,13 +25,12 @@ grammarly-desktop-integration {
     background-color: #f3f4f6 !important; /*bg-gray-100: f3f4f6*/
 }
 /* Override flow-bite */
-[type='text'],
+/* [type='text'],
 [type='number'],
 textarea,
 select {
-    /* gray-300 */
     border: 1px solid rgb(209 213 219);
-}
+} */
 /* This is for the option box bigger */
 .select2-dropdown.select2-dropdown--above {
     width: max-content !important;

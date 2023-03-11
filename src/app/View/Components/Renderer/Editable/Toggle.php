@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Editable;
 
+use App\Utils\ClassList;
 use Illuminate\View\Component;
 
 class Toggle extends Component
@@ -14,6 +15,7 @@ class Toggle extends Component
     public function __construct(
         private $name = "",
         private $cell = null,
+        private $readOnly = false,
     ) {
     }
 
@@ -29,6 +31,8 @@ class Toggle extends Component
         return view('components.controls.toggle', [
             'name' => $this->name,
             'value' => $this->cell,
+            'readOnly' => $this->readOnly,
+            'classList' => ClassList::TOGGLE,
         ]);
     }
 }

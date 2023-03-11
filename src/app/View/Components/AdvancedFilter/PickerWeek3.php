@@ -4,7 +4,7 @@ namespace App\View\Components\AdvancedFilter;
 
 use Illuminate\View\Component;
 
-class WeekPicker extends Component
+class PickerWeek3 extends Component
 {
     /**
      * Create a new component instance.
@@ -25,7 +25,7 @@ class WeekPicker extends Component
      */
     public function render()
     {
-        return view('components.advanced-filter.week-picker', [
+        return view('components.advanced-filter.picker-week3', [
             'name' => $this->name,
             'value' => $this->value
         ]);

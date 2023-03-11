@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\AdvancedFilterer;
+namespace App\View\Components\AdvancedFilter;
 
 use Illuminate\View\Component;
 
-class DatePicker2 extends Component
+class PickerQuarter3 extends Component
 {
     /**
      * Create a new component instance.
@@ -25,7 +25,7 @@ class DatePicker2 extends Component
      */
     public function render()
     {
-        return view('components.advanced-filter.date-picker2', [
+        return view('components.advanced-filter.picker-quarter3', [
             'name' => $this->name,
             'value' => $this->value
         ]);
