@@ -112,7 +112,6 @@
                         @break
                         @case('picker_date')
                         <x-controls.date-picker3 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}"/>
-                        <x-controls.localtime id={{$id}} control={{$control}} colName={{$columnName}} modelPath={{$modelPath}} label={{$label}} />
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('picker_week')
