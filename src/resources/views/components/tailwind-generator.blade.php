@@ -1,5 +1,9 @@
-<!-- RADIO AND CHECKBOX focus shadow--/>
+<!-- RADIO AND CHECKBOX focus shadow-->
 <input class="w-3.5 h-3.5" >
+
+<!-- Make input same height with dropdown-->
+<input class="h-[42px]" >
+
 <th class="border-t-0"></th>
 <input class="truncate w-16" />
 <input class="h-[100px] w-[100px]"/>

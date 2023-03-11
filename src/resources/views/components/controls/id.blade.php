@@ -4,6 +4,6 @@
     component="controls/id"
     readonly 
     value='{{$value}}' 
-    class='{{$classList}}' 
+    class='{{$classList}} readonly' 
     type='text'
     >
