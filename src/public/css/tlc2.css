@@ -127,21 +127,7 @@ a.disabled {
     cursor: default;
     opacity: 0.6;
 }
-.select2-container--default
-    .select2-selection--multiple
-    .select2-selection__rendered {
-    box-sizing: border-box;
-    list-style: none;
-    margin: 5px 0 0 0;
-    padding: 3px 0 2px 9px;
-    width: 100%;
-    font-size: 0.875rem;
-}
-.select2-selection.select2-selection--multiple {
-    padding: 0px !important;
-    border: 1px solid rgb(209 213 219) !important;
-    border-radius: 0.5rem !important;
-}
+
 select:not([size]) {
     background-image: url(
         data:image/svg + xml;charset=utf-8,
@@ -153,4 +139,14 @@ select:not([size]) {
     padding-right: 0rem;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+}
+
+/*Override flowbite :focus*/
+[multiple]:focus, [type='date']:focus, [type='datetime-local']:focus, [type='email']:focus, [type='month']:focus, [type='number']:focus, [type='password']:focus, [type='search']:focus, [type='tel']:focus, [type='text']:focus, [type='time']:focus, [type='url']:focus, [type='week']:focus, select:focus, textarea:focus{
+    border-color: none;
+    box-shadow: none;
+}
+[type='checkbox']:focus, [type='radio']:focus{
+    border-color: none;
+    box-shadow: 0px 0px 2px 2px;
 }

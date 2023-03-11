@@ -69,12 +69,16 @@
                 @case('id')
                 @case('doc_id')
                 @case('parent_id')
-                <x-controls.text name={{$columnName}} value={{$valueControl}} placeholder="Comma separated numbers are allowed"/>
+                <div class="mt-1">
+                    <x-controls.text name={{$columnName}} value={{$valueControl}} placeholder="Comma separated numbers are allowed"/>
+                </div>
                 @break
                 @case('text')
                 @case('number')
                 @case('textarea')
-                <x-controls.text name={{$columnName}} value={{$valueControl}}/>
+                <div class="mt-1">
+                    <x-controls.text name={{$columnName}} value={{$valueControl}}/>
+                </div>
                 @break
                 @case('toggle')
                 <x-controls.toggle name={{$columnName}} value={{$valueControl}} />

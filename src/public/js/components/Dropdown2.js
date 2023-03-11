@@ -496,11 +496,12 @@ const reloadDataToDropdown2 = (id, attr_to_compare, dataSource, selected) => {
                 '<div class="items-center bg-white-50 flex align-center ' +
                 colSpan +
                 '">'
-            option += '<label class="truncate" title="' + title + '">'
+            option += '<label class="truncate px-1" title="' + title + '">'
             option +=
                 '<input ' +
                 readonly +
                 ' ' +
+                'class="w-3.5 h-3.5"' +
                 'type="' +
                 radio_or_checkbox +
                 '" name="' +

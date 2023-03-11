@@ -27,12 +27,12 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fonts.google.Inter.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/customizeSelect2.css') }}">
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
     {{-- TLC2 will always be the last of CSS List --}}
-    <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2-canh.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2-due.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}"> 
         
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
