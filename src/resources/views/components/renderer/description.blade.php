@@ -39,7 +39,7 @@
                         @endswitch
                     @else
                         @if($control !== 'attachment')
-                        <div class='p-2  border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
+                        <div class='h-[32px] p-2 border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
                             (None)
                         </div>    
                         @endif 

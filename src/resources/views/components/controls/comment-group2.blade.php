@@ -48,7 +48,7 @@
         @endif
     @endif
     @if(!sizeof($dataSource) > 0 && $readOnly)
-        <div>
+        <div class="h-[32px]">
             (None)
         </div>
     @endif

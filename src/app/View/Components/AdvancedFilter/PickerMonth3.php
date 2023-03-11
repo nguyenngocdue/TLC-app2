@@ -2,9 +2,10 @@
 
 namespace App\View\Components\AdvancedFilter;
 
+use App\Utils\ClassList;
 use Illuminate\View\Component;
 
-class MonthPicker extends Component
+class PickerMonth3 extends Component
 {
     /**
      * Create a new component instance.
@@ -25,9 +26,11 @@ class MonthPicker extends Component
      */
     public function render()
     {
-        return view('components.advanced-filter.month-picker', [
+        return view('components.advanced-filter.picker-month3', [
             'name' => $this->name,
-            'value' => $this->value
+            'value' => $this->value,
+            'classListInputGroupText' => ClassList::ADV_FLT_INPUT_GROUP_TEXT,
+            'classListFormInput' => ClassList::ADV_FLT_FORM_INPUT,
         ]);
     }
 }

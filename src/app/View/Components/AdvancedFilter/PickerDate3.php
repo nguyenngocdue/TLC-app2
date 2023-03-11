@@ -1,7 +1,8 @@
 <?php
 
-namespace App\View\Components\AdvancedFilterer;
+namespace App\View\Components\AdvancedFilter;
 
+use App\Utils\ClassList;
 use Illuminate\View\Component;
 
 class PickerDate3 extends Component
@@ -27,7 +28,9 @@ class PickerDate3 extends Component
     {
         return view('components.advanced-filter.picker-date3', [
             'name' => $this->name,
-            'value' => $this->value
+            'value' => $this->value,
+            'classListInputGroupText' => ClassList::ADV_FLT_INPUT_GROUP_TEXT,
+            'classListFormInput' => ClassList::ADV_FLT_FORM_INPUT,
         ]);
     }
 }

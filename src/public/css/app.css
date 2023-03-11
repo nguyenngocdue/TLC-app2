@@ -743,6 +743,10 @@ video {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
 .-mb-px {
   margin-bottom: -1px;
 }
@@ -964,6 +968,9 @@ video {
 }
 .h-\[42px\] {
   height: 42px;
+}
+.h-\[32px\] {
+  height: 32px;
 }
 .max-h-\[30rem\] {
   max-height: 30rem;
@@ -2568,6 +2575,9 @@ video {
 }
 .align-middle {
   vertical-align: middle;
+}
+.align-bottom {
+  vertical-align: bottom;
 }
 .text-lg {
   font-size: 1.125rem;

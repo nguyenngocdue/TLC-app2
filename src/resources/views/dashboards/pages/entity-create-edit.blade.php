@@ -30,7 +30,7 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
         <div class=" grid grid-cols-12 px-4">
             @method($action === "create" ? 'POST' : 'PUT')
-            <x-renderer.item-render-props id={{$id}} :dataSource="$result" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
+            <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$result" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
         </div>
         @foreach($propsIntermediate as $key => $props)
         @php
@@ -60,7 +60,7 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
                             <div class="grid grid-cols-12 px-4">
                                 <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}" />
                                 <x-controls.header-alert-validation :strProps="$props" />
-                                <x-renderer.item-render-props id="{{$id}}" :dataSource="$resultIntermediate" action={{$action}} type={{$type}} modelPath={{$modelPath}} />
+                                <x-renderer.item-render-props id="{{$id}}" :item="$item" :dataSource="$resultIntermediate" action={{$action}} type={{$type}} modelPath={{$modelPath}} />
                             </div>
                         </div>
                         <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
