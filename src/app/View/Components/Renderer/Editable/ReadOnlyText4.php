@@ -5,7 +5,7 @@ namespace App\View\Components\Renderer\Editable;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
 
-class ReadOnlyText extends Component
+class ReadOnlyText4 extends Component
 {
     /**
      * Create a new component instance.
@@ -37,7 +37,7 @@ class ReadOnlyText extends Component
         }
         if (str_starts_with($value, "No dataIndex for ")) $value = null;
         if (str_starts_with($title, "No dataIndex for ")) $title = null;
-        return view('components.renderer.editable.read-only-text', [
+        return view('components.renderer.editable.read-only-text4', [
             'type' => "hidden",
             "name" => $this->name,
             "placeholder" => $this->placeholder,

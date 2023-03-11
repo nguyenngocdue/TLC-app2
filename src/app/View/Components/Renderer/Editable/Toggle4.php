@@ -5,7 +5,7 @@ namespace App\View\Components\Renderer\Editable;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
 
-class Toggle extends Component
+class Toggle4 extends Component
 {
     /**
      * Create a new component instance.

@@ -43,7 +43,7 @@ trait TraitTableColumnEditable
             if ($isReadOnly) $classListText = "readonly $classListText";
             switch ($prop['control']) {
                 case 'id':
-                    $newColumn['renderer'] = 'read-only-text';
+                    $newColumn['renderer'] = 'read-only-text4';
                     $newColumn['editable'] = true;
                     $newColumn['align'] = 'center';
                     break;
@@ -67,17 +67,17 @@ trait TraitTableColumnEditable
                     $newColumn['properties']['tableName'] = $prop['relationships']['table'];
                     break;
                 case 'textarea':
-                    $newColumn['renderer'] = 'textarea';
+                    $newColumn['renderer'] = 'textarea4';
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = $classListText;
                     break;
                 case 'number':
-                    $newColumn['renderer'] = 'number';
+                    $newColumn['renderer'] = 'number4';
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = 'text-right ' . $classListText;
                     break;
                 case 'toggle':
-                    $newColumn['renderer'] = 'toggle';
+                    $newColumn['renderer'] = 'toggle4';
                     $newColumn['editable'] = true;
                     $newColumn['align'] = 'center';
                     $newColumn['classList'] = $classListText;
@@ -96,12 +96,12 @@ trait TraitTableColumnEditable
                     $newColumn['properties']['placeholder'] = Str::getPickerPlaceholder($prop['control']);
                     break;
                 case 'attachment':
-                    $newColumn['renderer'] = "text";
+                    $newColumn['renderer'] = "text4";
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = 'bg-red-600 ' . $classListText;
                     break;
                 default:
-                    $newColumn['renderer'] = "text";
+                    $newColumn['renderer'] = "text4";
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = $classListText;
                     break;

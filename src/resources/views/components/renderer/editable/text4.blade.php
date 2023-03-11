@@ -1,6 +1,6 @@
 <input
     @readonly($readOnly)
-    component="editable/text"
+    component="editable/text4"
     id="{{$name}}"
     name="{{$name}}"
     value="{{$cell??$slot}}"

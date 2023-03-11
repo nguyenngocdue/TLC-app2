@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
-class Number extends Component
+class Number4 extends Component
 {
     /**
      * Create a new component instance.
@@ -61,7 +61,7 @@ class Number extends Component
         $onChange = $this->onChange ?? "onChangeDropdown4({name:'{$this->name}',table01Name:'{$this->table01Name}',rowIndex:{$this->rowIndex},saveOnChange:" . ($this->saveOnChange ? 1 : 0) . "})";
         $bgColor = $this->getBgColor();
         // dump($bgColor);
-        return view('components.renderer.editable.number', [
+        return view('components.renderer.editable.number4', [
             'placeholder' => $this->placeholder,
             'name' => $this->name,
             'onChange' => $this->onChange,
@@ -70,7 +70,7 @@ class Number extends Component
             'table01Name' => $this->table01Name,
             'onChange' => $onChange,
             'bgColor' => $bgColor,
-            'classList' => ClassList::TEXT,
+            'classList' => ClassList::TEXT . " text-right",
         ]);
     }
 }

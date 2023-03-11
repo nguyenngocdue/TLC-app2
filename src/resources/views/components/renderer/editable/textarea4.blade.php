@@ -1,6 +1,6 @@
 <textarea 
     @readonly($readOnly)
-    component="editable/textarea"
+    component="editable/textarea4"
     id="{{$name}}"
     name="{{$name}}"
     rows="2" 

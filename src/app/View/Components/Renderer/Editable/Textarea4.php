@@ -6,7 +6,7 @@ use App\Utils\ClassList;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
-class Textarea extends Component
+class Textarea4 extends Component
 {
     /**
      * Create a new component instance.
@@ -37,7 +37,7 @@ class Textarea extends Component
     public function render()
     {
         if ($this->cell === 'DO_NOT_RENDER') return "";
-        return view('components.renderer.editable.textarea', [
+        return view('components.renderer.editable.textarea4', [
             'placeholder' => $this->placeholder,
             'name' => $this->name,
             'type' => 'text',

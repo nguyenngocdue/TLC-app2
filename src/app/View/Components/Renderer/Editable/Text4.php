@@ -6,7 +6,7 @@ use App\Utils\ClassList;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
-class Text extends Component
+class Text4 extends Component
 {
     /**
      * Create a new component instance.
@@ -42,7 +42,7 @@ class Text extends Component
     public function render()
     {
         if ($this->cell === 'DO_NOT_RENDER') return "";
-        return view('components.renderer.editable.text', [
+        return view('components.renderer.editable.text4', [
             'placeholder' => $this->placeholder,
             'name' => $this->name,
             'cell' => $this->cell,
