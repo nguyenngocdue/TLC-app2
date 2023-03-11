@@ -1,10 +1,9 @@
 @if ($paginator->hasPages())
 @php
-$className = "focus:shadow-outline-purple rounded-md border border-r-0 border-purple-600 bg-purple-600 m-0.5 px-3 py-1 text-white transition-colors duration-150 focus:outline-none";
-$classNameDisabled = "focus:shadow-outline-purple rounded-md border border-r-0 border-purple-100 bg-purple-100 m-0.5 px-3 py-1 text-white transition-colors duration-150 focus:outline-none";
+$classBaseButton = "focus:shadow-outline-purple rounded-md border border-r-0 m-0.5 px-3 py-1 text-white transition-colors duration-150 focus:outline-none";
+$className = "$classBaseButton border-purple-600 bg-purple-600";
+$classNameDisabled = "$classBaseButton border-purple-200 bg-purple-200";
 @endphp
-<span class="hidden focus:shadow-outline-purple rounded-md border border-r-0 border-purple-600 bg-purple-600 m-0.5 px-3 py-1 text-white transition-colors duration-150 focus:outline-none">Active</span>
-<span class="hidden focus:shadow-outline-purple rounded-md border border-r-0 border-purple-100 bg-purple-100 m-0.5 px-3 py-1 text-white transition-colors duration-150 focus:outline-none">Disabled</span>
 <!-- Pagination -->
 <ul class="inline-flex items-center">
     {{-- Previous Page Link --}}
@@ -22,30 +21,19 @@ $classNameDisabled = "focus:shadow-outline-purple rounded-md border border-r-0 b
     @endif
     {{-- Pagination Elements --}}
     @foreach ($elements as $element)
-    {{-- Array Of Links --}}
-    @if (is_array($element))
-    @foreach ($element as $page => $url)
-    @if ($page == $paginator->currentPage())
-    <li><a class="{{$classNameDisabled}}">{{$page}}</a></li>
-    @else
-    <li><a class="{{$className}}" href="{{Str::removeFirstSlash($url)}}">{{$page}}</a></li>
-    @endif
-    {{-- @if ($page == $paginator->currentPage())
-    <li><span class="focus:shadow-outline-purple rounded-md border border-r-0 border-purple-600 bg-purple-600 m-0.5 px-3 py-1 text-white transition-colors duration-150 focus:outline-none">{{ $page }}</span></li>
-    @elseif ($page == $paginator->currentPage() + 1 ||$page == $paginator->lastPage() - 1 ||$page == $paginator->lastPage())
-    <li><a class="focus:shadow-outline-purple rounded-md px-3 py-1 focus:outline-none" href="{{ $url }}">{{ $page }}</a></li>
-    @elseif ($page == $paginator->currentPage() + 2 || $page == $paginator->lastPage() - 2)
-    <li class="disabled"><span class="focus:shadow-outline-purple rounded-md px-3 py-1 focus:outline-none"><i class="fa fa-ellipsis-h"></i></span></li>
-    @endif --}}
-
-
+        {{-- Array Of Links --}}
+        @if (is_array($element))
+            @foreach ($element as $page => $url)
+                @if ($page == $paginator->currentPage())
+                <li><a class="{{$classNameDisabled}}">{{$page}}</a></li>
+                @else
+                <li><a class="{{$className}}" href="{{Str::removeFirstSlash($url)}}">{{$page}}</a></li>
+                @endif
+            @endforeach
+        @else
+        .....
+        @endif
     @endforeach
-    @else
-    .....
-    @endif
-
-    @endforeach
-
     {{-- Next Page Link --}}
     @if ($paginator->hasMorePages())
     <li>

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls\HasDataSource;
 
+use App\Utils\ClassList;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
@@ -46,7 +47,7 @@ class Dropdown2 extends Component
             'id' => $id,
             'selected' => $this->selected,
             'multipleStr' => $this->multiple ? "multiple" : "",
-            'className' => "bg-white border border-gray-300 text-sm rounded-lg block mt-1 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
+            'classList' => ClassList::DROPDOWN,
             'table' => $table,
             'readOnly' => $this->readOnly,
             'saveOnChange' => $this->saveOnChange,

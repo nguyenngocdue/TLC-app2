@@ -4,6 +4,7 @@
 namespace App\View\Components\Controls\RelationshipRenderer;
 
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\ClassList;
 use Illuminate\Support\Str;
 
 trait TraitTableColumnEditable
@@ -38,8 +39,8 @@ trait TraitTableColumnEditable
             $newColumn['title'] .= $isSaveOnChange ? "</br><i class='fa-duotone fa-floppy-disk' title='Save On Change'></i>" : "";
 
             // dump($newColumn);
-            $classNameText = "block w-full rounded-md border bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 px-1 py-2 placeholder-slate-400 shadow-sm dark:focus:border-blue-600 focus:outline-none sm:text-sm";
-            if ($isReadOnly) $classNameText = "readonly $classNameText";
+            $classListText = ClassList::TEXT;
+            if ($isReadOnly) $classListText = "readonly $classListText";
             switch ($prop['control']) {
                 case 'id':
                     $newColumn['renderer'] = 'read-only-text';
@@ -52,7 +53,7 @@ trait TraitTableColumnEditable
                     // $newColumn['renderer'] = 'text';
                     $newColumn['renderer'] = 'dropdown';
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = $classNameText;
+                    $newColumn['classList'] = $classListText;
                     break;
                 case 'dropdown':
                 case 'dropdown_multi':
@@ -61,25 +62,25 @@ trait TraitTableColumnEditable
                     // $newColumn['renderer'] = 'text';
                     $newColumn['renderer'] = 'dropdown4';
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = $classNameText;
+                    $newColumn['classList'] = $classListText;
                     $newColumn['type'] = $this->type;
                     $newColumn['properties']['tableName'] = $prop['relationships']['table'];
                     break;
                 case 'textarea':
                     $newColumn['renderer'] = 'textarea';
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = $classNameText;
+                    $newColumn['classList'] = $classListText;
                     break;
                 case 'number':
                     $newColumn['renderer'] = 'number';
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = 'text-right ' . $classNameText;
+                    $newColumn['classList'] = 'text-right ' . $classListText;
                     break;
                 case 'toggle':
                     $newColumn['renderer'] = 'toggle';
                     $newColumn['editable'] = true;
                     $newColumn['align'] = 'center';
-                    $newColumn['classList'] = $classNameText;
+                    $newColumn['classList'] = $classListText;
                     break;
                 case 'picker_time':
                 case 'picker_date':
@@ -90,19 +91,19 @@ trait TraitTableColumnEditable
                 case 'picker_year':
                     $newColumn['renderer'] = 'picker-all4';
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = $classNameText;
+                    $newColumn['classList'] = $classListText;
                     $newColumn['properties']['control'] = $prop['control'];
                     $newColumn['properties']['placeholder'] = Str::getPickerPlaceholder($prop['control']);
                     break;
                 case 'attachment':
                     $newColumn['renderer'] = "text";
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = 'bg-red-600 ' . $classNameText;
+                    $newColumn['classList'] = 'bg-red-600 ' . $classListText;
                     break;
                 default:
                     $newColumn['renderer'] = "text";
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = $classNameText;
+                    $newColumn['classList'] = $classListText;
                     break;
             }
             if (in_array($prop['control'], ['dropdown_multi', 'checkbox'])) {

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls\HasDataSource;
 
+use App\Utils\ClassList;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
@@ -44,7 +45,7 @@ class RadioOrCheckBox2 extends Component
             'id' => $id,
             'selected' => $this->selected,
             'multiple' => $this->multiple ? "true" : "false",
-            'className' => "grid grid-cols-12 gap-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500  w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+            'className' => ClassList::RADIO_CHECKBOX,
             'table' => $table,
             'span' => $span,
             'readOnly' => $this->readOnly,

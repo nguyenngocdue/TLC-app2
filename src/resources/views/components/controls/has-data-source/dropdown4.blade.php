@@ -1,4 +1,4 @@
-<select id='{{$id}}' name='{{$name}}' {{$multipleStr}} class='{{$className}}'
+<select id='{{$id}}' name='{{$name}}' {{$multipleStr}} class='{{$classList}}'
 onChange='onChangeDropdown4({name:"{{$name}}", lineType:"{{$lineType}}", table01Name:"{{$table01Name}}", rowIndex:{{$rowIndex}}, saveOnChange:{{$saveOnChange?1:0}}})'
 ></select>
 

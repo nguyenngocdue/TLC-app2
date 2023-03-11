@@ -14,7 +14,7 @@
                         id="{{$id}}" 
                         name="{{$name}}" 
                         value="{{$value}}"
-                        class='{{$className}} {{$readOnly ? 'readonly' : ''}}'
+                        class='{{$classList}} {{$readOnly ? 'readonly' : ''}}'
                         {{$readOnly ? 'readonly' : ''}} 
                         />
                         <li class="select2-selection__choice">{{$label[$key]}}</li>
@@ -28,13 +28,13 @@
         </span>
     @else
     {{-- @dd($label[0]) --}}
-    <div class="flex-shrink-0 inline-flex justify-between {{$className}} {{$readOnly ? 'readonly' : ''}}">
+    <div class="flex-shrink-0 inline-flex justify-between {{$classList}} {{$readOnly ? 'readonly' : ''}}">
         <input 
         type="hidden"
         id="{{$id}}" 
         name="{{$name}}" 
         value="{{$selectedDecode[0] ?? ''}}"
-        class='{{$className}} {{$readOnly ? 'readonly' : ''}}'
+        class='{{$classList}} {{$readOnly ? 'readonly' : ''}}'
         {{$readOnly ? 'readonly' : ''}} 
         />
         <span>{{$label[0]??""}}</span>
@@ -46,7 +46,7 @@
 
     <select id='{{$id}}' name='{{$name}}' onChange='onChangeDropdown2("{{$name}}")' {{$multipleStr}}
     controlType='dropdown'
-    class='{{$className}}'
+    class='{{$classList}}'
     >
     </select>
     
