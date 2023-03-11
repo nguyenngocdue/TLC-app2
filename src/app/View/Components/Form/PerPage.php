@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Form;
 
+use App\Utils\ClassList;
 use Illuminate\View\Component;
 
 class PerPage extends Component
@@ -31,6 +32,7 @@ class PerPage extends Component
             'type' => $this->type,
             'route' => $this->route,
             'perPage' => $this->perPage,
+            'classList' => ClassList::DROPDOWN,
         ]);
     }
 }

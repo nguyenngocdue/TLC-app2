@@ -4,7 +4,7 @@ $modeParams = ['mode_001'];
 
 <div class="w-full no-print    rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
     <div class="flex justify-end ">
-        <x-form.reset-param-report typeReport="{{$typeReport}}" entity="{{$entity}}" route="{{ route('updateUserSettings') }}" :modeNames='$modeParams' />
+        <x-reports.reset-param-report typeReport="{{$typeReport}}" entity="{{$entity}}" route="{{ route('updateUserSettings') }}" :modeNames='$modeParams' />
     </div>
     <form action="{{route($routeName)}}" method="GET" class="flex flex-row-reverse">
         <div class="grid grid-rows-1 ">

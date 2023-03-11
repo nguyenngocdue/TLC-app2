@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Form;
+namespace App\View\Components\Reports;
 
 use Illuminate\View\Component;
 
-class ResetParamReport extends Component
+class PerPageReport extends Component
 {
     /**
      * Create a new component instance.
@@ -16,7 +16,7 @@ class ResetParamReport extends Component
         private $route = '',
         private $pageLimit = '',
         private $entity = '',
-        private $modeNames = []
+        private $routeName = ''
     ) {
         //
     }
@@ -28,14 +28,12 @@ class ResetParamReport extends Component
      */
     public function render()
     {
-
-
-        return view('components.form.reset-param-report', [
+        return view('components.reports.per-page-report', [
             'typeReport' => $this->typeReport,
             'route' => $this->route,
             'pageLimit' => $this->pageLimit,
             'entity' => $this->entity,
-            'modeNames' => $this->modeNames
+            'routeName' => $this->routeName
         ]);
     }
 }

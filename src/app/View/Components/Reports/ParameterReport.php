@@ -1,8 +1,7 @@
 <?php
 
-namespace App\View\Components\Form;
+namespace App\View\Components\Reports;
 
-use AWS\CRT\HTTP\Request;
 use Illuminate\View\Component;
 
 class ParameterReport extends Component
@@ -20,15 +19,13 @@ class ParameterReport extends Component
         private $routeName = '',
         private $entity = '',
         private $typeReport = '',
-
-
     ) {
         //
     }
 
     public function render()
     {
-        return view('components.form.parameter-report', [
+        return view('components.reports.parameter-report', [
             'itemsSelected' => $this->itemsSelected,
             'dataSource' => $this->dataSource,
             'hiddenItems' => $this->hiddenItems,
