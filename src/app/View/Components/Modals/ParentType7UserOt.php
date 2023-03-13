@@ -26,11 +26,6 @@ class ParentType7UserOt extends Component
 
     private function getDataSource()
     {
-        // return [
-        //     ['id' => 1001, 'name' => 'A001'],
-        //     ['id' => 1002, 'name' => 'A002'],
-        //     ['id' => 1003, 'name' => 'A003'],
-        // ];
         $list = User_team_ot::get()->toArray();
         $dataSource = [];
         usort($list, fn ($a, $b) => $a['name'] <=> $b['name']);

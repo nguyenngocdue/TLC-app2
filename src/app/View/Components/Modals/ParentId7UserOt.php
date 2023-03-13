@@ -31,7 +31,7 @@ class ParentId7UserOt extends Component
     {
         $fieldId = FieldSeeder::getIdFromFieldName('getOtMembers');
         // dump($fieldId);
-        $sql = "SELECT u.id id, u.name name, ut.id $attr_name
+        $sql = "SELECT u.id AS id, u.name AS name, u.employeeid AS description, ut.id AS $attr_name
                 FROM user_team_ots ut, users u, many_to_many m2m
                 WHERE 1=1
                     AND m2m.field_id=$fieldId
@@ -39,6 +39,7 @@ class ParentId7UserOt extends Component
                     AND ut.id=m2m.doc_id
                     AND m2m.term_type='App\\\\Models\\\\User'
                     AND u.id=m2m.term_id
+                    AND u.resigned != 1
                 ORDER BY u.name
                 ";
         $result = DB::select($sql);
@@ -59,6 +60,7 @@ class ParentId7UserOt extends Component
                 'listen_to_fields' => [$objectIdStr],
                 'listen_to_tables' => [$tableName],
                 'table_name' => $tableName,
+                // 'attrs_to_compare' => ['id'],
                 'triggers' => [$objectTypeStr],
             ],
         ];
@@ -95,7 +97,7 @@ class ParentId7UserOt extends Component
             'multiple' => $this->multiple ? true : false,
             'span' => 2,
         ];
-        $this->renderJS($tableName, 'modal_ot_team', $this->name);
+        $this->renderJS($tableName, 'ot_team', $this->name);
         // dump($params);
         return view('components.controls.has-data-source.' . $this->control, $params);
     }

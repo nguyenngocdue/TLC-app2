@@ -182,6 +182,7 @@ const onChangeDropdown2Reduce = (listener) => {
     // console.log('onChangeDropdown2Reduce')
     const lastSelected = getValueOfEById(column_name)
     // console.log("Selected of", column_name, "is", lastSelected)
+    // console.log(attrs_to_compare)
     reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, [
         lastSelected * 1,
     ])
@@ -428,7 +429,7 @@ const onChangeDropdown2 = (name) => {
     }
 }
 
-const reloadDataToDropdown2 = (id, attr_to_compare, dataSource, selected) => {
+const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected) => {
     const control_type = getControlTypeOfE(id)
     // console.log(id, attr_to_compare)
     // console.log("reloadDataToDropdown2", id, control_type, dataSource.length, selected)
@@ -479,6 +480,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare, dataSource, selected) => {
         const control_name = isMultiple ? id + '[]' : id
         const colSpan = getColSpanOfE(id)
         const readOnly = getReadOnlyOfE(id)
+        // console.log(attr_to_compare)
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
@@ -488,15 +490,15 @@ const reloadDataToDropdown2 = (id, attr_to_compare, dataSource, selected) => {
                     : selected.includes(itemId)
                         ? 'checked'
                         : ''
-            console.log(readOnly)
+            // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
             // console.log(item)
             const title = item['description'] + ' (#' + itemId + ')'
             option =
-                '<div class="items-center bg-white-50 flex align-center ' +
+                '<div class="items-center bg-white-50 flex align-center   ' +
                 colSpan +
                 '">'
-            option += '<label class="truncate px-1" title="' + title + '">'
+            option += '<label class="truncate px-1 cursor-pointer rounded-md hover:bg-green-100" title="' + title + '">'
             option +=
                 '<input ' +
                 readonly +
