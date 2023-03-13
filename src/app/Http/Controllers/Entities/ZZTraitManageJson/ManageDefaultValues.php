@@ -16,12 +16,12 @@ class ManageDefaultValues extends Manage_Parent
         return [
             [
                 "dataIndex" => "name",
-                "renderer" => "read-only-text",
+                "renderer" => "read-only-text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "column_name",
-                "renderer" => "read-only-text",
+                "renderer" => "read-only-text4",
                 "editable" => true,
             ],
             [
@@ -32,13 +32,13 @@ class ManageDefaultValues extends Manage_Parent
             [
                 "dataIndex" => "validation",
                 "editable" => true,
-                "renderer" => "text",
+                "renderer" => "text4",
                 'title' => "Validation Rules<br/><a class='text-blue-700 underline' target='_blank' href='https://laravel.com/docs/9.x/validation#available-validation-rules'>Open Laravel Doc</a>"
             ],
             [
                 "dataIndex" => "validation_regex",
                 "editable" => true,
-                "renderer" => "text",
+                "renderer" => "text4",
                 'title' => "Validation Regex<br/><a class='text-blue-700 underline' target='_blank' href='https://regex101.com/'>Open Regex101</a>",
                 "properties" => ['placeholder' => '/^[0-9]+$/'],
             ],
@@ -60,22 +60,22 @@ class ManageDefaultValues extends Manage_Parent
             ],
             [
                 "dataIndex" => "default_value",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "label_extra",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "placeholder",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "control_extra",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
             ],
         ];

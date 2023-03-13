@@ -23,7 +23,7 @@ class ManageDefinitions extends Manage_Parent
             ],
             [
                 'dataIndex' => 'name',
-                'renderer' => 'read-only-text',
+                'renderer' => 'read-only-text4',
                 'editable' => true,
                 'align' => 'center',
             ],

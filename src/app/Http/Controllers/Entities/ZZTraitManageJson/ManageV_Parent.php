@@ -24,17 +24,17 @@ abstract class ManageV_Parent extends Manage_Parent
         $firstColumns = [
             [
                 "dataIndex" => 'name',
-                'renderer' => 'read-only-text',
+                'renderer' => 'read-only-text4',
                 'editable' => true,
             ],
             [
                 "dataIndex" => 'column_name',
-                'renderer' => 'read-only-text',
+                'renderer' => 'read-only-text4',
                 'editable' => true,
             ],
             [
                 "dataIndex" => 'label',
-                'renderer' => 'read-only-text',
+                'renderer' => 'read-only-text4',
                 'editable' => true,
                 'align' => "right",
             ],

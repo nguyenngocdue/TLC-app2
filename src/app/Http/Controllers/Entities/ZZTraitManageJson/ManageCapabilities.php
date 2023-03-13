@@ -22,7 +22,7 @@ class ManageCapabilities extends Manage_Parent
         $firstColumn = [
             [
                 "dataIndex" => 'name',
-                'renderer' => 'read-only-text',
+                'renderer' => 'read-only-text4',
                 'editable' => true,
                 'align' => 'center',
                 'title' => 'Name',

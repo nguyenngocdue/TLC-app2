@@ -23,20 +23,20 @@ class ManageActionButtons extends Manage_Parent
             ],
             [
                 "dataIndex" => 'name',
-                'renderer' => 'read-only-text',
+                'renderer' => 'read-only-text4',
                 'editable' => true,
                 'align' => 'center',
                 'title' => 'Key',
             ],
             [
                 "dataIndex" => 'label',
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
                 'properties' => ['placeholder' => 'As status TITLE'],
             ],
             [
                 "dataIndex" => 'tooltip',
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
         ];

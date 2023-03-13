@@ -44,7 +44,7 @@
             $colSpan = $prop['col_span'];
             $columnName = $prop['column_name'];
             @endphp
-                <x-renderer.description type={{$type}} modelPath={{$modelPath}} :prop="$prop" :dataSource="$dataSource" />
+                <x-print.description5 type={{$type}} modelPath={{$modelPath}} :prop="$prop" :dataSource="$dataSource" />
             @endforeach
         @endif
     </div>
@@ -53,7 +53,7 @@
     <div class='grid grid-cols-12'>
         @if ($propTree['children'])
             @foreach($propTree['children'] as $prop)
-            <x-renderer.description type={{$type}} modelPath={{$modelPath}} :prop="$prop" :dataSource="$dataSource" />
+            <x-print.description5 type={{$type}} modelPath={{$modelPath}} :prop="$prop" :dataSource="$dataSource" />
             @endforeach
         @else
             

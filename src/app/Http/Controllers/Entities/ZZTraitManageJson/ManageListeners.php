@@ -22,12 +22,12 @@ class ManageListeners extends Manage_Parent
             // ],
             [
                 "dataIndex" => "name",
-                "renderer" => "read-only-text",
+                "renderer" => "read-only-text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "column_name",
-                "renderer" => "read-only-text",
+                "renderer" => "read-only-text4",
                 "editable" => true,
             ],
             [
@@ -40,45 +40,45 @@ class ManageListeners extends Manage_Parent
             ],
             [
                 "dataIndex" => "triggers",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "listen_to_fields",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "listen_to_attrs",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "attrs_to_compare",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
                 "properties" => ["placeholder" => 'id'],
             ],
             [
                 "dataIndex" => "expression",
                 "title" => "Expression or API",
-                "renderer" => "textarea",
+                "renderer" => "textarea4",
                 "editable" => true,
                 'width' => 200,
             ],
             [
                 "dataIndex" => "ajax_response_attribute",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "ajax_item_attribute",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "ajax_default_value",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
             ],
         ];

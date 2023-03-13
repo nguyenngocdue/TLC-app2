@@ -107,7 +107,11 @@ trait TableTraitRows
         if ($this->groupBy && !$this->groupKeepOrder) {
             if (is_object($dataSource)) $dataSource = $items;
             $groupBy = $this->groupBy;
-            uasort($dataSource, fn ($a, $b) => strcasecmp((is_object($a) ? $a->{$groupBy} : $a[$this->groupBy]) ?? 'zzz', (is_object($a) ? $a->{$groupBy} : $b[$this->groupBy]) ?? 'zzz'));
+            uasort($dataSource, function ($a, $b) use ($groupBy) {
+                $aValue = is_object($a) ? ($a->{$groupBy} ?? 'zzz') : ($a[$this->groupBy] ?? 'zzz');
+                $bValue = is_object($a) ? ($a->{$groupBy} ?? 'zzz') : ($b[$this->groupBy] ?? 'zzz');
+                return strcasecmp($aValue, $bValue);
+            });
         }
 
         $lastIndex = -1;

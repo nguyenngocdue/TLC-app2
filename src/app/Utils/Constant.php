@@ -33,4 +33,8 @@ class Constant
     const OWNER_ID = 'owner_id';
 
     const VIEW_ALL = 'view_all';
+
+    const NAME_LOCK_COLUMN = 'lock_version';
+
+    const NAME_LOCK_COLUMN_DEFAULT = 'updated_at';
 }
