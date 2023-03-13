@@ -24,7 +24,7 @@ class CreateNew extends Component
             [
                 'title' => 'Name',
                 'dataIndex' => 'name',
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
             [

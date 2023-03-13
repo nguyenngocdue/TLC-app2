@@ -29,28 +29,28 @@ class ManageProps extends Manage_Parent
             [
                 "dataIndex" => "move_to",
                 "align" => "center",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
                 "width" => 10,
             ],
             [
                 "dataIndex" => "name",
-                "renderer" => "read-only-text",
+                "renderer" => "read-only-text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "column_name",
-                "renderer" => "read-only-text",
+                "renderer" => "read-only-text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "column_type",
-                "renderer" => "read-only-text",
+                "renderer" => "read-only-text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "label",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
             ],
             [
@@ -69,14 +69,14 @@ class ManageProps extends Manage_Parent
             [
                 "dataIndex" => "col_span",
                 "editable" => true,
-                "renderer" => "number",
+                "renderer" => "number4",
                 'width' => 10,
                 'properties' => ['placeholder' => 12],
             ],
             [
                 "dataIndex" => "width",
                 "editable" => true,
-                "renderer" => "number",
+                "renderer" => "number4",
                 'width' => 10,
                 'title' => "Width (px)",
                 'properties' => ['placeholder' => 100],

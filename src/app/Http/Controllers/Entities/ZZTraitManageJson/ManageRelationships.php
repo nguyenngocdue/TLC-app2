@@ -27,17 +27,17 @@ class ManageRelationships extends Manage_Parent
             ],
             [
                 "dataIndex" => "name",
-                "renderer" => "read-only-text",
+                "renderer" => "read-only-text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "relationship",
-                "renderer" => "read-only-text",
+                "renderer" => "read-only-text4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "control_name",
-                "renderer" => "read-only-text",
+                "renderer" => "read-only-text4",
                 "editable" => true,
             ],
             [
@@ -49,7 +49,7 @@ class ManageRelationships extends Manage_Parent
             [
                 "dataIndex" => "renderer_view_all_param",
                 "editable" => true,
-                "renderer" => "text",
+                "renderer" => "text4",
             ],
             [
                 "dataIndex" => "renderer_view_all_unit",
@@ -66,27 +66,27 @@ class ManageRelationships extends Manage_Parent
             [
                 "dataIndex" => "renderer_edit_param",
                 "editable" => true,
-                "renderer" => "text",
+                "renderer" => "text4",
             ],
             [
                 "dataIndex" => "control",
                 "editable" => true,
-                "renderer" => "read-only-text",
+                "renderer" => "read-only-text4",
             ],
             [
                 "dataIndex" => "filter_columns",
                 "editable" => true,
-                "renderer" => "text",
+                "renderer" => "text4",
             ],
             [
                 "dataIndex" => "filter_values",
                 "editable" => true,
-                "renderer" => "text",
+                "renderer" => "text4",
             ],
             [
                 "dataIndex" => "radio_checkbox_colspan",
                 "editable" => true,
-                "renderer" => "number",
+                "renderer" => "number4",
                 'properties' => ['placeholder' => 4],
             ],
         ];

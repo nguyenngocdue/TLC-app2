@@ -18,13 +18,13 @@ class ManageProperties extends Manage_Parent
         $result['attachment'] = [
             [
                 'dataIndex' => 'max_file_size',
-                'renderer' => 'number',
+                'renderer' => 'number4',
                 'editable' => true,
                 'title' => 'Max File Size (in MB)',
             ],
             [
                 'dataIndex' => 'max_file_count',
-                'renderer' => 'number',
+                'renderer' => 'number4',
                 'editable' => true,
             ],
             [
@@ -90,7 +90,7 @@ class ManageProperties extends Manage_Parent
             [
                 'dataIndex' => 'name',
                 'editable' => true,
-                'renderer' => 'read-only-text',
+                'renderer' => 'read-only-text4',
                 'width' => 50,
             ],
             [
@@ -106,7 +106,7 @@ class ManageProperties extends Manage_Parent
             [
                 'dataIndex' => 'field_name',
                 'editable' => true,
-                'renderer' => 'read-only-text',
+                'renderer' => 'read-only-text4',
             ],
         ];
 
