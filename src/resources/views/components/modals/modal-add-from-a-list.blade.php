@@ -2,7 +2,7 @@
     <div tabindex="-1" class="fixed sm:p-0 md:p-0 top-0 left-0 right-0 z-50 lg:p-4 h-full bg-gray-100 dark:bg-slate-400 dark:bg-opacity-70 bg-opacity-70 justify-center items-center flex" aria-hidden="true" @keydown.escape="closeListingTable('{{$modalId}}')">
         <div class="relative sm:mx-0 md:mx-5  w-full lg:mx-10 xl:mx-16 2xl:mx-20 h-auto md:h-auto sm:h-auto"  @click.away="closeListingTable('{{$modalId}}')">
             <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 h-full">
                 <!-- Modal header -->
                 <div class="items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
                     <div class="flex">
@@ -16,8 +16,50 @@
                     </div>
                 </div>
                 <!-- Modal body -->
-                <div class='overflow-y-scroll p-4'>
-                    <div class="grid grid-cols-12 px-4">
+                <div class="h-[300px]">
+                    <div class="overflow-y-scroll p-4">
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        <h1>ABC</h1>
+                        {{-- <x-modals.parent-type7-user-ot name='modal_ot_team'></x-modals.parent-type7> --}}
+                        {{-- <x-modals.parent-id7-user-ot name='modal_ot_user1' multiple={{false}} control='radio-or-checkbox2'></x-modals.parent-type7> --}}
+                        {{-- <x-modals.parent-id7-user-ot name='modal_ot_user2' multiple={{true}} control='radio-or-checkbox2'></x-modals.parent-type7> --}}
+                        {{-- <x-modals.parent-id7-user-ot name='modal_ot_user3' multiple={{false}}></x-modals.parent-type7> --}}
+                        {{-- <x-modals.parent-id7-user-ot name='modal_ot_user4' multiple={{true}}></x-modals.parent-type7> --}}
                     </div>
                 </div>
                 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
