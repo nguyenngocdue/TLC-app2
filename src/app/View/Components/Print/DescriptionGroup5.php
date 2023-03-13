@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Print;
 
 use Illuminate\View\Component;
 
-class DescriptionGroup extends Component
+class DescriptionGroup5 extends Component
 {
     /**
      * Create a new component instance.
@@ -28,7 +28,7 @@ class DescriptionGroup extends Component
     public function render()
     {
 
-        return view('components.renderer.description-group', [
+        return view('components.print.description-group5', [
             'propTree' => $this->propTree,
             'dataSource' => $this->dataSource,
             'type' => $this->type,

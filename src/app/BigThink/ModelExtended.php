@@ -2,6 +2,7 @@
 
 namespace App\BigThink;
 
+use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,7 @@ class ModelExtended extends Model
     use Searchable;
     use Notifiable;
     use HasFactory;
+    use TraitOptimisticLocking;
 
     use HasStatus;
     use HasCheckbox;
