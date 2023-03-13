@@ -33,9 +33,9 @@ class ParentType7UserOt extends Component
         return $dataSource;
     }
 
-    private function renderJS($tableName)
+    private function renderJS($tableName, $dataSource)
     {
-        $k = [$tableName => $this->getDataSource(),];
+        $k = [$tableName => $dataSource,];
         $str = "";
         $str .= "<script>";
         $str .= " k = {...k, ..." . json_encode($k) . "};";
@@ -51,6 +51,9 @@ class ParentType7UserOt extends Component
      */
     public function render()
     {
+        $dataSource = $this->getDataSource();
+        $selectedFirst = $dataSource[0]['id'];
+        // dump($dataSource);
         $tableName = "modal_" . $this->name;
         $params = [
             'name' => $this->name,
@@ -62,7 +65,8 @@ class ParentType7UserOt extends Component
             'classList' => ClassList::DROPDOWN,
             // 'entity' => $this->type,
         ];
-        $this->renderJS($tableName);
+        $params['selected'] = "[$selectedFirst]";
+        $this->renderJS($tableName, $dataSource);
         // dump($params);
         return view('components.controls.has-data-source.dropdown2', $params);
     }

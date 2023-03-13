@@ -36,8 +36,17 @@ class ParentId7UserOt extends Component
                     u.name AS name, 
                     u.employeeid AS description, 
                     ut.id AS $attr_name,
-                    vua.url_thumbnail AS avatar
-                FROM user_team_ots ut, users u, many_to_many m2m, view_user_avatar vua
+                    vua.url_thumbnail AS avatar,
+                    vrmn.remaining_hours AS subtitle
+                FROM 
+                    user_team_ots ut, 
+                    view_user_avatar vua,
+                    many_to_many m2m, 
+                    users u
+                    LEFT JOIN view_otr_remainings vrmn ON (
+                        vrmn.user_id=u.id
+                        AND vrmn.year_month0='2023-02'
+                        )
                 WHERE 1=1
                     AND m2m.field_id=$fieldId
                     AND m2m.doc_type='App\\\\Models\\\\User_team_ot'
@@ -46,13 +55,22 @@ class ParentId7UserOt extends Component
                     AND u.id=m2m.term_id
                     AND u.resigned != 1
                     AND u.id=vua.u_id
+                    
                 ORDER BY u.name
                 ";
         $result = DB::select($sql);
 
         foreach ($result as &$row) {
-            if ($row->avatar) $row->avatar  = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $row->avatar;
-            else $row->avatar = "/images/avatar.jpg";
+            if ($row->avatar) {
+                $row->avatar  = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $row->avatar;
+            } else {
+                $row->avatar = "/images/avatar.jpg";
+            }
+            if (!$row->subtitle) {
+                $row->subtitle = 40;
+            }
+            $row->subtitle = "Remaining OT: " . $row->subtitle . "h";
+            // $row->name = "<b>" . $row->name . "</b>";
         }
         // dump($result);
 
