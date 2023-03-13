@@ -72,7 +72,7 @@ trait TraitDemoTableData
             [
                 "title" => 'Amount',
                 "dataIndex" => "amount",
-                "renderer" => "number",
+                "renderer" => "number4",
                 "editable" => true,
             ],
             [
@@ -85,7 +85,7 @@ trait TraitDemoTableData
             [
                 "title" => 'Date',
                 "dataIndex" => "date",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
             ],
         ];

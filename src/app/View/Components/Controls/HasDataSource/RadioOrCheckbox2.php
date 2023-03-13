@@ -6,7 +6,7 @@ use App\Utils\ClassList;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
-class RadioOrCheckBox2 extends Component
+class RadioOrCheckbox2 extends Component
 {
     // use HasDataSource;
     public function __construct(
@@ -44,14 +44,13 @@ class RadioOrCheckBox2 extends Component
             'name' => $name,
             'id' => $id,
             'selected' => $this->selected,
-            'multiple' => $this->multiple ? "true" : "false",
-            'className' => ClassList::RADIO_CHECKBOX,
+            'multiple' => $this->multiple ? true : false,
+            'classList' => ClassList::RADIO_CHECKBOX,
             'table' => $table,
             'span' => $span,
             'readOnly' => $this->readOnly,
             'saveOnChange' => $this->saveOnChange,
         ];
-        // dump($params);
 
         return view('components.controls.has-data-source.radio-or-checkbox2', $params);
     }

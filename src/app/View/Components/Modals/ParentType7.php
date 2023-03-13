@@ -1,13 +1,13 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\Modals;
 
 use App\Utils\ClassList;
 use Illuminate\View\Component;
 
-class ParentType2 extends Component
+class ParentType7 extends Component
 {
-    use TraitMorphTo;
+    // use TraitMorphTo;
     /**
      * Create a new component instance.
      *
@@ -17,7 +17,7 @@ class ParentType2 extends Component
         private $name,
         private $selected = "",
         private $multiple = false,
-        private $type,
+        // private $type,
         private $readOnly = false,
     ) {
         if (old($name)) $this->selected = old($name);
@@ -25,7 +25,16 @@ class ParentType2 extends Component
 
     private function getDataSource()
     {
-        return $this->getAllTypeMorphMany();
+        return [
+            ['id' => 1001, 'name' => 'A001'],
+            ['id' => 1002, 'name' => 'A002'],
+            ['id' => 1003, 'name' => 'A003'],
+        ];
+        // $list = User_team_ot::get()->toArray();
+        // $dataSource = [];
+        // usort($list, fn ($a, $b) => $a['name'] <=> $b['name']);
+        // foreach ($list as $team) $dataSource[] = ['id' => $team['id'], 'name' => $team['name']];
+        // return $dataSource;
     }
 
     private function renderJS($tableName)
@@ -35,6 +44,7 @@ class ParentType2 extends Component
         $str .= "<script>";
         $str .= " k = {...k, ..." . json_encode($k) . "};";
         $str .= "</script>";
+        $str .= "\n";
         echo $str;
     }
 
@@ -45,7 +55,7 @@ class ParentType2 extends Component
      */
     public function render()
     {
-        $tableName = "morph_to_" . $this->name;
+        $tableName = "modal_" . $this->name;
         $params = [
             'name' => $this->name,
             'id' => $this->name,
@@ -54,7 +64,7 @@ class ParentType2 extends Component
             'table' => $tableName,
             'readOnly' => $this->readOnly,
             'classList' => ClassList::DROPDOWN,
-            'entity' => $this->type,
+            // 'entity' => $this->type,
         ];
         $this->renderJS($tableName);
         // dump($params);

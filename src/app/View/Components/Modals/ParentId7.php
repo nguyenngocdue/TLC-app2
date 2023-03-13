@@ -1,13 +1,13 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\Modals;
 
 use App\Utils\ClassList;
 use Illuminate\View\Component;
 
-class ParentId2 extends Component
+class ParentId7 extends Component
 {
-    use TraitMorphTo;
+    // use TraitMorphTo;
     /**
      * Create a new component instance.
      *
@@ -17,8 +17,9 @@ class ParentId2 extends Component
         private $name,
         private $selected = "",
         private $multiple = false,
-        private $type,
+        // private $type,
         private $readOnly = false,
+        private $control = 'dropdown2', // or 'radio-or-checkbox2'
     ) {
         if (old($name)) $this->selected = 1 * old($name);
         // dump($this->selected);
@@ -26,12 +27,18 @@ class ParentId2 extends Component
 
     private function getDataSource($attr_name)
     {
-        return $this->getAllIdMorphMany($attr_name);
+        return [
+            ['id' => 2001, 'name' => 'B001', $attr_name => 1001],
+            ['id' => 2002, 'name' => 'B002', $attr_name => 1002],
+            ['id' => 2003, 'name' => 'B003', $attr_name => 1003],
+        ];
+        // return $this->getAllIdMorphMany($attr_name);
     }
+
 
     private function renderJS($tableName, $objectTypeStr, $objectIdStr)
     {
-        $attr_name = $tableName . '_xyz_id';
+        $attr_name = $tableName . '_parent_fake_id';
         $k = [$tableName => $this->getDataSource($attr_name),];
         $listenersOfDropdown2 = [
             [
@@ -49,6 +56,7 @@ class ParentId2 extends Component
         $str .= " k = {...k, ..." . json_encode($k) . "};";
         $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";
         $str .= "</script>";
+        $str .= "\n";
         echo $str;
     }
 
@@ -59,7 +67,7 @@ class ParentId2 extends Component
      */
     public function render()
     {
-        $tableName = "morph_to_" . $this->name;
+        $tableName = "modal_" . $this->name;
         $params = [
             'name' => $this->name,
             'id' => $this->name,
@@ -68,11 +76,11 @@ class ParentId2 extends Component
             'table' => $tableName,
             'readOnly' => $this->readOnly,
             'classList' => ClassList::DROPDOWN,
-            'entity' => $this->type,
+            // 'entity' => $this->type,
+            'multiple' => $this->multiple ? true : false,
         ];
-        $parentTypeName = $this->getParentTypeFromParentId($this->name);
-        $this->renderJS($tableName, $parentTypeName, $this->name);
+        $this->renderJS($tableName, 'modal_ot_team', $this->name);
         // dump($params);
-        return view('components.controls.has-data-source.dropdown2', $params);
+        return view('components.controls.has-data-source.' . $this->control, $params);
     }
 }

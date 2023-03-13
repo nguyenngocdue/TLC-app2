@@ -19,6 +19,7 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#editable_tables">Editable Tables</a></li>
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#navigation">Navigation</a></li>
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#feedbacks">Feedbacks</a></li>
+        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#listeners">Listeners</a></li>
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#modecontrols">Mode Controls</a></li>
     </ul>
 
@@ -51,7 +52,10 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         <div id="feedbacks" class="p-4 hidden">
             <x-demo.demo-feedback />
         </div>
-        <div id="modecontrols" class="p-4">
+        <div id="listeners" class="p-4 hidden">
+            <x-demo.demo-listener :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
+        </div>
+        <div id="modecontrols" class="p-4 hidden">
             <x-demo.demo-modes-control :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
         </div>
     </div>

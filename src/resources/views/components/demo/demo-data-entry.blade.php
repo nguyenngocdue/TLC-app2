@@ -1,9 +1,9 @@
 <div class="grid gap-6 mb-8 md:grid-cols-2 ">
     <x-renderer.card title="Textbox & Number">
         Textbox
-        <x-renderer.editable.text name="text1">Hello</x-renderer.editable.text>
+        <x-renderer.editable.text4 name="text1">Hello</x-renderer.editable.text>
         Number
-        <x-renderer.editable.number name="number1">2606.1988</x-renderer.editable.number>
+        <x-renderer.editable.number4 name="number1">2606.1988</x-renderer.editable.number>
     </x-renderer.card>
     <x-renderer.card title="Toggle">
         Toggle FALSE

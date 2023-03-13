@@ -22,7 +22,7 @@ class ManageUnitTests extends Manage_Parent
             [
                 "dataIndex" => "move_to",
                 "align" => "center",
-                "renderer" => "text",
+                "renderer" => "text4",
                 "editable" => true,
                 "width" => 10,
             ],

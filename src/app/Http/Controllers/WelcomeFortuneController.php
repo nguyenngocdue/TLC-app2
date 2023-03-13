@@ -17,17 +17,6 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        $list = User_team_ot::get()->toArray();
-        // dump($list);
-        $dataSource = [];
-        foreach ($list as $team) {
-            $dataSource[$team['id']] = $team['name'];
-        }
-        dump($dataSource);
-        return view("welcome-fortune", [
-            'teamList' => $list,
-            'dataSource' => $dataSource,
-            'itemSelected' => ['name' => 1],
-        ]);
+        return view("welcome-fortune", []);
     }
 }

@@ -1,6 +1,6 @@
 let k = {},
-    listenersOfDropdown2 = {},
-    filtersOfDropdown2 = {},
+    listenersOfDropdown2 = [],
+    filtersOfDropdown2 = [],
     debugListener = false
 const makeIdForNumber = (n) =>
     '#' +
@@ -522,41 +522,6 @@ const reloadDataToDropdown2 = (id, attr_to_compare, dataSource, selected) => {
     }
 }
 
-const RadioOrCheckbox = ({ id, name, className, multiple, span, readOnly }) => {
-    name = multiple ? name + '[]' : name
-    multipleStr = multiple ? 'multiple' : ''
-    const colSpan = 'col-span-' + span
-
-    let render = ''
-    render += '<div '
-    render += "id='" + id + "' "
-    render += "name='" + name + "' "
-    render += 'onChange=\'onChangeDropdown2("' + name + '")\' '
-    render += ' ' + multipleStr + ' '
-    render += "controlType='radio_or_checkbox' "
-    render += "colSpan='" + colSpan + "' "
-    render += readOnly ? 'readOnly ' : ''
-    render += "class='" + className + "' "
-    render += '>'
-    render += '</div>'
-    return render
-}
-
-// const Dropdown2 = ({ id, name, className, multipleStr }) => {
-//     let render = ''
-//     render += '<select '
-//     render += "id='" + id + "' "
-//     render += "name='" + name + "' "
-//     render += 'onChange=\'onChangeDropdown2("' + name + '")\' '
-//     render += ' ' + multipleStr + ' '
-//     render += "controlType='dropdown' "
-//     render += "class='" + className + "' "
-//     render += '>'
-//     render += '</select>'
-
-//     return render
-// }
-
 const documentReadyDropdown2 = ({ id, selectedJson, table }) => {
     // selectedJson = '{!! $selected !!}'
     selectedJson = selectedJson.replace(/\\/g, '\\\\') //<< Replace \ to \\ EG. ["App\Models\Qaqc_mir"] to ["App\\Models\\Qaqc_mir"]
@@ -564,7 +529,7 @@ const documentReadyDropdown2 = ({ id, selectedJson, table }) => {
     // table = "{{$table}}"
     dataSourceDropdown = k[table]
     if (dataSourceDropdown === undefined)
-        console.error('key {{$table}} not found in k[]')
+        console.error('key ' + table + ' not found in k[]')
     let attr_to_compare = 'id'
     // for (let i = 0; i < listenersOfDropdown2.length; i++) {
     //     if (listenersOfDropdown2[i].column_name === id) {
@@ -578,14 +543,18 @@ const documentReadyDropdown2 = ({ id, selectedJson, table }) => {
     reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedJson)
 
     $(document).ready(() => {
-        listenersOfDropdown2.forEach((listener) => {
-            if (
-                listener.triggers.includes(id) &&
-                listener.listen_action === 'reduce'
-            ) {
-                // console.log("I am a trigger of reduce, I have to trigger myself when form load [id]", )
-                getEById(id).trigger('change')
-            }
-        })
+        if (Array.isArray(listenersOfDropdown2)) {
+            listenersOfDropdown2.forEach((listener) => {
+                if (
+                    listener.triggers.includes(id) &&
+                    listener.listen_action === 'reduce'
+                ) {
+                    // console.log("I am a trigger of reduce, I have to trigger myself when form load [id]", )
+                    getEById(id).trigger('change')
+                }
+            })
+        } else {
+            // console.log("There is no registered listeners of dropdown2")
+        }
     })
 }

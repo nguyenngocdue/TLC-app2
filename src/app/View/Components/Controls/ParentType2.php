@@ -17,7 +17,7 @@ class ParentType2 extends Component
         private $name,
         private $selected = "",
         private $multiple = false,
-        private $type,
+        private $type,  //<< Type for morphedTo
         private $readOnly = false,
     ) {
         if (old($name)) $this->selected = old($name);
@@ -35,6 +35,7 @@ class ParentType2 extends Component
         $str .= "<script>";
         $str .= " k = {...k, ..." . json_encode($k) . "};";
         $str .= "</script>";
+        $str .= "\n";
         echo $str;
     }
 
@@ -54,7 +55,7 @@ class ParentType2 extends Component
             'table' => $tableName,
             'readOnly' => $this->readOnly,
             'classList' => ClassList::DROPDOWN,
-            'entity' => $this->type,
+            // 'entity' => $this->type,
         ];
         $this->renderJS($tableName);
         // dump($params);

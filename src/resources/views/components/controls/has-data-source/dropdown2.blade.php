@@ -47,8 +47,7 @@
     <select id='{{$id}}' name='{{$name}}' onChange='onChangeDropdown2("{{$name}}")' {{$multipleStr}}
     controlType='dropdown'
     class='{{$classList}}'
-    >
-    </select>
+    ></select>
     
 <script>
     params2 = {id: '{{$id}}',selectedJson: '{!! $selected !!}',table: "{{$table}}" }
