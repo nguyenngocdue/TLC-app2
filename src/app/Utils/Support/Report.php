@@ -36,4 +36,8 @@ class Report
         }
         return $array;
     }
+    public static function replaceAndUcwords($string)
+    {
+        return  ucwords(str_replace('_', " ", $string));
+    }
 }

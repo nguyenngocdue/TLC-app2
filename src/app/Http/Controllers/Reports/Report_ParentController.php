@@ -120,6 +120,11 @@ abstract class Report_ParentController extends Controller
         return $modeParams;
     }
 
+    protected function getLegendColors()
+    {
+        return [];
+    }
+
     public function index(Request $request)
     {
         $typeReport = CurrentRoute::getTypeController();
@@ -144,26 +149,23 @@ abstract class Report_ParentController extends Controller
         // dd($dataSource);
 
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
-        $columns = $this->getTableColumns($dataSource);
-        $sheets = $this->getSheets($dataSource);
-
-        $paramColumns = $this->getParamColumns();
         $viewName = strtolower(Str::singular($typeReport));
 
         return view('reports.' . $viewName, [
-            'tableColumns' => $columns,
             'routeName' => $routeName,
             'tableDataSource' => $dataSource,
             'modeParams' => $modeParams,
             'entity' => $entity,
             'typeReport' => $typeReport,
-            'sheets' => $sheets,
             'dataModeControl' => $dataModeControl,
             'pageLimit' => $pageLimit,
-            'paramColumns' => $paramColumns,
-            'rotate45Width' => $this->rotate45Width,
-            'topTitle' => $this->getMenuTitle(),
             'groupBy' => $this->groupBy,
+            'rotate45Width' => $this->rotate45Width,
+            'tableColumns' => $this->getTableColumns($dataSource),
+            'sheets' =>  $this->getSheets($dataSource),
+            'paramColumns' => $this->getParamColumns(),
+            'topTitle' => $this->getMenuTitle(),
+            'legendColors' => $this->getLegendColors()
         ]);
     }
 }

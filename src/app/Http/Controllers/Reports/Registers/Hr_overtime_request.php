@@ -238,6 +238,24 @@ class Hr_overtime_request extends Report_ParentController
         }
     }
 
+    protected function getLegendColors()
+    {
+        return [
+            'total_overtime_hours_legend' => [
+                'bg-green-400' => '< 20 hours/month',
+                'bg-yellow-400' => '< 30 hours/month',
+                'bg-pink-400' => '< 40 hours/month',
+                'bg-red-400' => '> 40 hours/month'
+            ],
+            'cumulative_total_hours_legend' => [
+                'bg-green-400' => '< 50 hours/year',
+                'bg-yellow-400' => '< 100 hours/year',
+                'bg-pink-400' => '< 150 hours/year',
+                'bg-red-400' => '> 200 hours/year'
+            ]
+        ];
+    }
+
     protected function enrichDataSource($dataSource, $modeParams)
     {
 
