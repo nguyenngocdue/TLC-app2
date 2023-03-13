@@ -3,6 +3,7 @@
 namespace App\View\Components\Modals;
 
 use App\Utils\ClassList;
+use App\Utils\ColorList;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
@@ -37,7 +38,7 @@ class ParentId7UserOt extends Component
                     u.employeeid AS description, 
                     ut.id AS $attr_name,
                     vua.url_thumbnail AS avatar,
-                    vrmn.remaining_hours AS subtitle
+                    vrmn.remaining_hours AS remaining_hours
                 FROM 
                     user_team_ots ut, 
                     view_user_avatar vua,
@@ -66,11 +67,13 @@ class ParentId7UserOt extends Component
             } else {
                 $row->avatar = "/images/avatar.jpg";
             }
-            if (!$row->subtitle) {
-                $row->subtitle = 40;
+            if (!$row->remaining_hours) {
+                $row->remaining_hours = 40;
             }
-            $row->subtitle = "Remaining OT: " . $row->subtitle . "h";
-            // $row->name = "<b>" . $row->name . "</b>";
+            $row->bgColor = ColorList::getBgColorForRemainingOTHours($row->remaining_hours);
+            $row->disabled = $row->remaining_hours <= 0;
+
+            $row->subtitle = "Remaining OT: " . $row->remaining_hours . "h";
         }
         // dump($result);
 

@@ -494,17 +494,22 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
             readonly = readOnly ? 'onclick="return false;"' : ''
             // console.log(item)
             const title = item['description'] + ' (#' + itemId + ')'
+            const bgColor = item['bgColor'] || ''
             option =
-                '<div class="items-center bg-white-50 flex align-center   ' +
-                colSpan +
+                '<div class="items-center bg-white-50 flex align-center rounded-md ' +
+                bgColor + ' ' +
+                colSpan + ' ' +
                 '">'
-            option += '<label class="truncate px-1 cursor-pointer rounded-md hover:bg-green-100 w-full h-full" title="' + title + '">'
+            const cursor = item['disabled'] ? 'cursor-not-allowed' : 'cursor-pointer'
+            const inputBg = item['disabled'] ? 'bg-gray-300' : ''
+            option += '<label class="truncate px-1 ' + cursor + ' rounded-md hover:bg-gray-100 w-full h-full" title="' + title + '">'
             option += "<div class='flex align-middle'>"
             option +=
                 '<input ' +
+                (item['disabled'] ? "disabled " : "") +
                 readonly +
                 ' ' +
-                'class="w-3.5 h-3.5 mr-1"' +
+                'class="w-3.5 h-3.5 mr-1 mt-0.5 ' + inputBg + ' ' + cursor + '"' +
                 'type="' +
                 radio_or_checkbox +
                 '" name="' +
