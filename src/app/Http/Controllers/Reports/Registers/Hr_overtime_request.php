@@ -238,7 +238,7 @@ class Hr_overtime_request extends Report_ParentController
         }
     }
 
-    protected function getLegendColors()
+    protected function getColorLegends()
     {
         return [
             'total_overtime_hours_legend' => [

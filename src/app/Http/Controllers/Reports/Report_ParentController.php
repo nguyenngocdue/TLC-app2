@@ -120,7 +120,7 @@ abstract class Report_ParentController extends Controller
         return $modeParams;
     }
 
-    protected function getLegendColors()
+    protected function getColorLegends()
     {
         return [];
     }
@@ -165,7 +165,7 @@ abstract class Report_ParentController extends Controller
             'sheets' =>  $this->getSheets($dataSource),
             'paramColumns' => $this->getParamColumns(),
             'topTitle' => $this->getMenuTitle(),
-            'legendColors' => $this->getLegendColors()
+            'legendColors' => $this->getColorLegends()
         ]);
     }
 }
