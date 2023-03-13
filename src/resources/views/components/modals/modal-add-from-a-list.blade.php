@@ -1,3 +1,4 @@
+@php  @endphp
 <template x-if="isListingTableOpen['{{$modalId}}']">
     <div tabindex="-1" class="fixed sm:p-0 md:p-0 top-0 left-0 right-0 z-50 lg:p-4 h-full bg-gray-100 dark:bg-slate-400 dark:bg-opacity-70 bg-opacity-70 justify-center items-center flex " aria-hidden="true" @keydown.escape="closeListingTable('{{$modalId}}')">
         <div class="relative sm:mx-0 md:mx-5  w-full lg:mx-10 xl:mx-16 2xl:mx-20 md:h-auto sm:h-auto h-auto"  @click.away="closeListingTable('{{$modalId}}')">
@@ -16,16 +17,13 @@
                     </div>
                 </div>
                 <!-- Modal body -->
-                    <div class="h-[500px] overflow-y-auto overflow-x-hidden p-4">
-                        <x-modals.parent-type7-user-ot name='ot_team'></x-modals.parent-type7>
-                        {{-- <x-modals.parent-id7-user-ot name='ot_user1' multiple={{false}} control='radio-or-checkbox2'></x-modals.parent-type7> --}}
-                        <x-modals.parent-id7-user-ot name='ot_user2' multiple={{true}} control='radio-or-checkbox2'></x-modals.parent-type7>
-                        {{-- <x-modals.parent-id7-user-ot name='ot_user3' multiple={{false}}></x-modals.parent-type7> --}}
-                        {{-- <x-modals.parent-id7-user-ot name='ot_user4' multiple={{true}}></x-modals.parent-type7> --}}
-                    </div>
+                <div class="h-[500px] overflow-y-auto overflow-x-hidden p-4">
+                    <x-modals.parent-type7-user-ot name='ot_team'></x-modals.parent-type7>
+                    <x-modals.parent-id7-user-ot name='ot_user2' multiple={{true}} control='radio-or-checkbox2'></x-modals.parent-type7>
+                </div>
                 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
-                   <x-renderer.button class="mx-2" type='success'>Populate</x-renderer.button>
-                   <x-renderer.button type='default' click="closeListingTable('{{$modalId}}')">Cancel</x-renderer.button>
+                   <x-renderer.button class="mx-2" type='success' click="loadListToTable('ot_user2','{{$modalId}}')">Populate</x-renderer.button>
+                   <x-renderer.button click="closeListingTable('{{$modalId}}')">Cancel</x-renderer.button>
                 </div>                
             </div>
         </div>
