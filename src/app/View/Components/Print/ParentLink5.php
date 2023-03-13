@@ -1,11 +1,11 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Print;
 
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
-class ParentLink2 extends Component
+class ParentLink5 extends Component
 {
     /**
      * Create a new component instance.

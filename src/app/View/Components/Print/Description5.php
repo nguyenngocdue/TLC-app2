@@ -1,15 +1,13 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Print;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Constant;
 use App\Utils\Support\DateTimeConcern;
-use App\Utils\Support\JsonControls;
-use Illuminate\Mail\Mailables\Content;
 use Illuminate\View\Component;
 
-class Description extends Component
+class Description5 extends Component
 {
     /**
      * Create a new component instance.
@@ -80,7 +78,7 @@ class Description extends Component
         $newLine = $prop['new_line'];
         $hiddenLabel = $prop['hidden_label'];
         $relationships = $prop['relationships'];
-        return view('components.renderer.description', [
+        return view('components.print.description5', [
             'label' => $label,
             'colSpan' => $colSpan,
             'content' => $content,

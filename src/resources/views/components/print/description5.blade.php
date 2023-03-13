@@ -128,7 +128,7 @@
                 @endif
                 @if ($control == 'parent_link')
                 <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
-                    <x-renderer.parent-link2 :dataSource="$content"/>
+                    <x-print.parent-link5 :dataSource="$content"/>
                 </span>
                 @else
                 <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
@@ -140,7 +140,7 @@
                 @endif
                 @if ($control == 'parent_link')
                 <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
-                    <x-renderer.parent-link2 :dataSource="$content"/>
+                    <x-print.parent-link5 :dataSource="$content"/>
                 </span>
                 @else
                 <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>

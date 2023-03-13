@@ -1,11 +1,11 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Print;
 
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
-class LetterHead extends Component
+class LetterHead5 extends Component
 {
     /**
      * Create a new component instance.
@@ -37,7 +37,7 @@ class LetterHead extends Component
             'company_website' => 'https://www.tlcmodular.com',
         ];
         $nameRenderDocId = Str::markDocId($this->dataSource, $this->type);
-        return view('components.renderer.letter-head', [
+        return view('components.print.letter-head5', [
             'dataSource' => $data,
             'id' => $this->showId,
             'type' => Str::plural($this->type),
