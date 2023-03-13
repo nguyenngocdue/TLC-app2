@@ -31,8 +31,13 @@ class ParentId7UserOt extends Component
     {
         $fieldId = FieldSeeder::getIdFromFieldName('getOtMembers');
         // dump($fieldId);
-        $sql = "SELECT u.id AS id, u.name AS name, u.employeeid AS description, ut.id AS $attr_name
-                FROM user_team_ots ut, users u, many_to_many m2m
+        $sql = "SELECT 
+                    u.id AS id, 
+                    u.name AS name, 
+                    u.employeeid AS description, 
+                    ut.id AS $attr_name,
+                    vua.url_thumbnail AS avatar
+                FROM user_team_ots ut, users u, many_to_many m2m, view_user_avatar vua
                 WHERE 1=1
                     AND m2m.field_id=$fieldId
                     AND m2m.doc_type='App\\\\Models\\\\User_team_ot'
@@ -40,10 +45,17 @@ class ParentId7UserOt extends Component
                     AND m2m.term_type='App\\\\Models\\\\User'
                     AND u.id=m2m.term_id
                     AND u.resigned != 1
+                    AND u.id=vua.u_id
                 ORDER BY u.name
                 ";
         $result = DB::select($sql);
+
+        foreach ($result as &$row) {
+            if ($row->avatar) $row->avatar  = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $row->avatar;
+            else $row->avatar = "/images/avatar.jpg";
+        }
         // dump($result);
+
         return $result;
     }
 
@@ -95,7 +107,7 @@ class ParentId7UserOt extends Component
             'classList' => $classList,
             // 'entity' => $this->type,
             'multiple' => $this->multiple ? true : false,
-            'span' => 2,
+            'span' => 3,
         ];
         $this->renderJS($tableName, 'ot_team', $this->name);
         // dump($params);

@@ -498,12 +498,13 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
                 '<div class="items-center bg-white-50 flex align-center   ' +
                 colSpan +
                 '">'
-            option += '<label class="truncate px-1 cursor-pointer rounded-md hover:bg-green-100" title="' + title + '">'
+            option += '<label class="truncate px-1 cursor-pointer rounded-md hover:bg-green-100 w-full h-full" title="' + title + '">'
+            option += "<div class='flex align-middle'>"
             option +=
                 '<input ' +
                 readonly +
                 ' ' +
-                'class="w-3.5 h-3.5"' +
+                'class="w-3.5 h-3.5 mr-1"' +
                 'type="' +
                 radio_or_checkbox +
                 '" name="' +
@@ -513,7 +514,9 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
                 '" ' +
                 selectedStr +
                 '>'
+            if (item['avatar']) option += ' ' + '<img class="w-10 h-10 mr-1 rounded" src="' + item['avatar'] + '" />'
             option += ' ' + item['name']
+            option += "</div>"
             option += '</label>'
             option += '</div>'
             options.push(option)
