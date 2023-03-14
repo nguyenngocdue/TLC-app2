@@ -12,7 +12,7 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
-class Qaqc_wir extends Report_ParentController
+class Qaqc_wir_010 extends Report_ParentController
 {
     use TraitReport;
     protected $rotate45Width = 600;

@@ -33,9 +33,9 @@ Route::group([
     ], function () use ($entities) {
         foreach ($entities as $entity) {
             $entityName = $entity->getTable();
-            $singular = Str::singular($entityName);
-            $ucfirstName = Str::ucfirst($singular);
-            $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
+            // $singular = Str::singular($entityName);
+            // $ucfirstName = Str::ucfirst($singular);
+            $path = "App\\Http\\Controllers\\Entities\\";
             Route::resource("{$entityName}", "{$path}ViewAllController")->only('index');
             Route::get("{$entityName}_ep", ["{$path}ViewAllController", "exportCSV"])->name("{$entityName}_ep.exportCSV");
             Route::get("{$entityName}_qr", ["{$path}ViewAllController", "showQRCode"])->name("{$entityName}_qr.showQRCode");
@@ -58,18 +58,27 @@ Route::group([
             Route::group([
                 'middleware' => "role:ADMIN-DATA-" . Str::upper($entityName),
             ], function () use ($singular, $ucfirstName) {
+                for ($i = 10; $i <= 50; $i += 10) {
+                    $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
+                    $path = "App\\Http\\Controllers\\Reports\\Reports\\{$ucfirstName}_$mode";
+                    // var_dump($path);
+                    $routeName = 'report-' . $singular . "_" . $mode;
+                    $name = 'report-' . $singular . "/$mode";
+                    if (class_exists($path)) Route::get($name, [$path, 'index'])->name($routeName);
 
-                $path = "App\\Http\\Controllers\\Reports\\Reports\\{$ucfirstName}";
-                $name = 'report-' . $singular;
-                Route::get($name, [$path, 'index'])->name($name);
+                    $path = "App\\Http\\Controllers\\Reports\\Registers\\{$ucfirstName}_$mode";
+                    // var_dump($path);
+                    $routeName = 'register-' . $singular . "_" . $mode;
+                    $name = 'register-' . $singular . "/$mode";
+                    if (class_exists($path)) Route::get($name, [$path, 'index'])->name($routeName);
 
-                $path = "App\\Http\\Controllers\\Reports\\Registers\\{$ucfirstName}";
-                $name = 'register-' . $singular;
-                Route::get($name, [$path, 'index'])->name($name);
-
-                $path = "App\\Http\\Controllers\\Reports\\Documents\\{$ucfirstName}";
-                $name = 'document-' . $singular;
-                Route::get($name, [$path, 'index'])->name($name);
+                    $path = "App\\Http\\Controllers\\Reports\\Documents\\{$ucfirstName}_$mode";
+                    // $e = class_exists($path);
+                    // var_dump($path." ".$e);
+                    $routeName = 'document-' . $singular . "_" . $mode;
+                    $name = 'document-' . $singular . "/$mode";
+                    if (class_exists($path)) Route::get($name, [$path, 'index'])->name($routeName);
+                }
             });
         }
     });
@@ -79,11 +88,11 @@ Route::group([
         foreach ($entities as $entity) {
             $entityName = $entity->getTable();
             $singular = Str::singular($entityName);
-            $ucfirstName = Str::ucfirst($singular);
+            // $ucfirstName = Str::ucfirst($singular);
             Route::group([
                 'middleware' => "role:ADMIN-DATA-" . Str::upper($entityName),
-            ], function () use ($singular, $ucfirstName) {
-                $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
+            ], function () use ($singular) {
+                $path = "App\\Http\\Controllers\\Entities\\";
 
                 Route::resource("{$singular}_ppt", "{$path}ManageJsonController")->only('index', 'store', 'create');
 
@@ -166,7 +175,7 @@ Route::group([
     foreach ($qrCodeApps as $qrCodeApp) {
         $singular = Str::singular($qrCodeApp);
         $ucfirstName = Str::ucfirst($singular);
-        $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
+        $path = "App\\Http\\Controllers\\Entities\\";
         Route::get("{$qrCodeApp}/{slug}", ["{$path}EntityCRUDController", "showQR"])->name("{$qrCodeApp}.showQR");
     }
 });

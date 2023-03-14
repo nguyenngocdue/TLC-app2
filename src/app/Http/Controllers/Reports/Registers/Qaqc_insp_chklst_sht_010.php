@@ -8,7 +8,7 @@ use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
 use App\Utils\Support\Report;
 
-class Qaqc_insp_chklst_sht extends Report_ParentController
+class Qaqc_insp_chklst_sht_010 extends Report_ParentController
 {
     use TraitReport;
     protected $rotate45Width = 300;

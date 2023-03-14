@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitManageJson\Manage_Parent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
@@ -37,8 +38,10 @@ class Pages
     const UnitTest = "UnitTest";
 }
 
-abstract class AbstractManageJsonController extends Controller
+class ManageJsonController extends Controller
 {
+    use TraitEntityDynamicType;
+
     protected $type = "";
     protected $typeModel = "";
 
@@ -69,6 +72,12 @@ abstract class AbstractManageJsonController extends Controller
         "_cpb" => Pages::Capability,
         "_unt" => Pages::UnitTest,
     ];
+
+    public function __construct()
+    {
+        $this->assignDynamicTypeManageJson();
+        //More code down here
+    }
 
     private function getPathInfoWithoutCreate(Request $request)
     {

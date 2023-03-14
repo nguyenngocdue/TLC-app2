@@ -182,7 +182,10 @@ class SuperProps
 
     public static function getFor($type)
     {
-        if (is_null($type)) dd("Type is missing, SuperProps cant instantiate.");
+        if (is_null($type)) {
+            dump("Type is missing, SuperProps cant instantiate.");
+            dd();
+        }
         $type = Str::singular($type);
         $key = "super_prop_$type";
         $result = CacheToRamForThisSection::get($key, fn () => static::make($type));

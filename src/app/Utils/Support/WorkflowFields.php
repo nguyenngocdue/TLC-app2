@@ -2,7 +2,7 @@
 
 namespace App\Utils\Support;
 
-use App\Utils\Support\Json\IntermediateProps;
+use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\Json\SuperWorkflows;
 use Illuminate\Support\Facades\Log;
 
@@ -14,16 +14,21 @@ class WorkflowFields
         $roleSet = CurrentUser::getRoleSet();
         return SuperWorkflows::getFor(self::$type, $roleSet);
     }
-    private static function getStatusFollowDefinitions($status, $definitions)
+    public static function getNewFromDefinitions($type)
     {
-        if (!$status) {
-            if (empty($definitions)) {
-                $status = 'new';
-            } else {
-                $def = array_values($definitions);
-                $status = array_shift($def)[0];
-            }
+        $superProps = SuperProps::getFor($type);
+        $definitions = $superProps['settings']['definitions'] ?? [];
+        if (empty($definitions)) {
+            $status = 'new';
+        } else {
+            $def = array_values($definitions);
+            $status = array_shift($def)[0];
         }
+        return $status;
+    }
+    private static function getStatusFollowDefinitions($status)
+    {
+        if (!$status) $status = self::getNewFromDefinitions(static::$type);
         return $status;
     }
     private static function getPropsIntermediate($intermediate, $status, &$props)
@@ -80,9 +85,12 @@ class WorkflowFields
             return [$status = null, [], $props, [], [], $buttonSave, []];
         }
         $statuses = $superProps['statuses'];
-        $status = self::getStatusFollowDefinitions($status, $definitions);
+        $status = self::getStatusFollowDefinitions($status);
+
         $hideSaveButton = $definitions['hide-save-btn'] ?? [];
-        $buttonSave = !($status == 'closed') && !in_array($status, $hideSaveButton);
+        $closed = $definitions['closed'] ?? [];
+        $buttonSave = !(in_array($status, $closed)) && !in_array($status, $hideSaveButton);
+
         $intermediate = $superProps['intermediate'];
         $propsIntermediate = self::getPropsIntermediate($intermediate, $status, $props);
         $transitions = $statuses[$status]['transitions'] ?? [];

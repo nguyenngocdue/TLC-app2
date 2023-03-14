@@ -90,7 +90,7 @@ Route::group([
         'Zunit_test_05',
         'Zunit_test_09',
     ] as $entityName) {
-        $path = "App\\Http\\Controllers\\Entities\\$entityName\\";
+        $path = "App\\Http\\Controllers\\Entities\\";
         $tableName = Str::plural(lcfirst($entityName));
         Route::post("{$tableName}_storeEmpty", [$path . EntityCRUDController::class, 'storeEmpty']);
         Route::post("{$tableName}_updateShort/{id}", [$path . EntityCRUDController::class, 'updateShort']);

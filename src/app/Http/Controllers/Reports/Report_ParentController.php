@@ -5,20 +5,12 @@ namespace App\Http\Controllers\Reports;
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UpdateUserSettings;
-use App\Models\Hr_overtime_request_line;
-use App\Models\Prod_order;
-use App\Models\Qaqc_insp_chklst;
-use App\Models\Qaqc_insp_chklst_sht;
-use App\Models\Qaqc_insp_tmpl;
-use App\Models\Sub_project;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 abstract class Report_ParentController extends Controller
@@ -30,6 +22,7 @@ abstract class Report_ParentController extends Controller
 
     protected $rotate45Width = false;
     protected $groupBy = false;
+    protected $mode = '010';
 
     public function getType()
     {
@@ -38,6 +31,7 @@ abstract class Report_ParentController extends Controller
 
     private function getSql($modeParams)
     {
+
         $sqlStr = $this->getSqlStr($modeParams);
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
@@ -81,8 +75,10 @@ abstract class Report_ParentController extends Controller
     }
     protected function getTable()
     {
-        $currentModelName = strtolower(CurrentRoute::getCurrentController());
-        return $currentModelName;
+        $tableName = CurrentRoute::getCurrentController();
+        $tableName = substr($tableName, 0, strrpos($tableName, "_"));
+        $tableName = strtolower(Str::plural($tableName));
+        return $tableName;
     }
 
     private function paginateDataSource($dataSource, $pageLimit)
@@ -94,17 +90,28 @@ abstract class Report_ParentController extends Controller
         return $dataSource;
     }
 
-    protected function getModeParams($typeReport, $entity)
+    protected function getCurrentMode($typeReport, $entity)
     {
         $typeReport = strtolower($typeReport);
         $settings = CurrentUser::getSettings();
+        return $settings[$entity][$typeReport]['user_mode'] ?? 1001;
+    }
+
+    protected function getModeParams($typeReport, $entity)
+    {
+        $currentMode = $this->getCurrentMode($typeReport, $entity);
+        // dump(Log::info($currentMode));
+        $typeReport = strtolower($typeReport);
+        $settings = CurrentUser::getSettings();
         if (!isset($settings[$entity])) return [];
-        if (isset($settings[$entity][$typeReport]['mode_001'])) {
-            $modeParams = $settings[$entity][$typeReport]['mode_001'];
+        if (isset($settings[$entity][$typeReport][$currentMode])) {
+            $modeParams = $settings[$entity][$typeReport][$currentMode];
             return $modeParams;
         }
         return [];
     }
+
+
     protected function getPageParam($typeReport, $entity)
     {
         $settings = CurrentUser::getSettings();
@@ -115,6 +122,7 @@ abstract class Report_ParentController extends Controller
         }
         return 10;
     }
+
     protected function setDefaultValueModeParams($modeParams)
     {
         return $modeParams;
@@ -125,19 +133,42 @@ abstract class Report_ParentController extends Controller
         return [];
     }
 
+    protected function modeOptions()
+    {
+        return ['mode_option' => ['mode_010' => 'Model 010', 'mode_020' => 'Model 020']];
+    }
+
+    protected function modeColumns()
+    {
+        return [[
+            'dataIndex' => 'mode_option',
+            'allowClear' => true,
+        ]];
+    }
+
+
     public function index(Request $request)
     {
-        $typeReport = CurrentRoute::getTypeController();
-        $routeName = $request->route()->action['as'];
-        $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
-        $modeParams = $this->getModeParams($typeReport, $entity);
-        $modeParams = $this->setDefaultValueModeParams($modeParams);
-
+        if ($request->input('mode_option')) {
+            (new UpdateUserSettings())($request);
+            return redirect($request->getPathInfo());
+        }
         if (!$request->input('page') && !empty($request->input())) {
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
         }
-        // dd($request->route()->action['controller']);
+
+        $typeReport = CurrentRoute::getTypeController();
+        $routeName = $request->route()->action['as'];
+        $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
+
+        $currentUserId = Auth::id();
+        $currentMode = $this->getCurrentMode($typeReport, $entity);
+        // $currentMode = $mode;
+        // dd($currentMode);
+        $modeParams = $this->getModeParams($typeReport, $entity);
+        $modeParams = $this->setDefaultValueModeParams($modeParams);
+
         $dataSource = $this->getDataSource($modeParams);
 
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
@@ -151,6 +182,10 @@ abstract class Report_ParentController extends Controller
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
         $viewName = strtolower(Str::singular($typeReport));
 
+        // dump($modeParams);
+
+        // dd($viewName);
+
         return view('reports.' . $viewName, [
             'routeName' => $routeName,
             'tableDataSource' => $dataSource,
@@ -161,11 +196,15 @@ abstract class Report_ParentController extends Controller
             'pageLimit' => $pageLimit,
             'groupBy' => $this->groupBy,
             'rotate45Width' => $this->rotate45Width,
+            'currentUserId' => $currentUserId,
             'tableColumns' => $this->getTableColumns($dataSource),
             'sheets' =>  $this->getSheets($dataSource),
             'paramColumns' => $this->getParamColumns(),
             'topTitle' => $this->getMenuTitle(),
-            'legendColors' => $this->getColorLegends()
+            'legendColors' => $this->getColorLegends(),
+            'modeOptions' => $this->modeOptions(),
+            'modeColumns' => $this->modeColumns(),
+            'currentMode' => $currentMode,
         ]);
     }
 }

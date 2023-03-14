@@ -4,6 +4,7 @@ namespace App\View\Components\Modals;
 
 use App\Utils\ClassList;
 use App\Utils\ColorList;
+use App\Utils\Constant;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
@@ -32,6 +33,7 @@ class ParentId7UserOt extends Component
     {
         $fieldId = FieldSeeder::getIdFromFieldName('getOtMembers');
         // dump($fieldId);
+        $year_month0 = date(Constant::FORMAT_YEAR_MONTH0);
         $sql = "SELECT 
                     u.id AS id, 
                     u.name AS name, 
@@ -46,7 +48,7 @@ class ParentId7UserOt extends Component
                     users u
                     LEFT JOIN view_otr_remainings vrmn ON (
                         vrmn.user_id=u.id
-                        AND vrmn.year_month0='2023-02'
+                        AND vrmn.year_month0='$year_month0'
                         )
                 WHERE 1=1
                     AND m2m.field_id=$fieldId

@@ -23,7 +23,7 @@ return new class extends Migration
                 round(sum(total_time),2) AS total_hours,
                 round(40 - sum(total_time),2) AS remaining_hours
             FROM `hr_overtime_request_lines`
-            GROUP BY `year_month0`, user_id, employeeid, allowed_hours
+            GROUP BY `year_month0`, user_id, employeeid
             ORDER BY `year_month0`, user_id
         )");
     }

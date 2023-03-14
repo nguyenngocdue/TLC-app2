@@ -7,6 +7,6 @@ use App\Models\Attachment;
 
 class ManageJsonController extends AbstractManageJsonController
 {
-    protected $type = 'attachment';
-    protected $typeModel = Attachment::class;
+    protected $type = 'attachment111';
+    protected $typeModel = Attachment::class . '111';
 }

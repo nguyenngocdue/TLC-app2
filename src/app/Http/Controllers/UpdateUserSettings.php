@@ -99,11 +99,11 @@ class UpdateUserSettings extends Controller
 
     private function resetParamsReport($request)
     {
-        $reqValue = $request->all();
+        $inputValue = $request->all();
         $entity = $request->input("_entity");
         $typeReport = strtolower($request->input("type_report"));
         $settingUser = CurrentUser::getSettings();
-        $modeNames = $reqValue['mode_names'];
+        $modeNames = $inputValue['mode_names'];
         $settings = [];
         if (isset($settingUser[$entity][$typeReport])) {
             foreach ($modeNames as $key => $value) {
@@ -120,16 +120,19 @@ class UpdateUserSettings extends Controller
 
     private function updateReport($request, $settings)
     {
-        // dd($request);
-        $reqValue = $request->all();
-        if (isset($reqValue['mode_names'])) {
-            return $this->resetParamsReport($request);
-        }
-        $entity = $reqValue["_entity"];
-        $typeReport = strtolower($reqValue["type_report"]);
-        $indexBreak = array_search("type_report", array_keys($reqValue));
-        $parameter = array_slice($reqValue, $indexBreak + 1, count($reqValue) - $indexBreak);
-        $settings[$entity][$typeReport]["mode_001"] = $parameter;
+        $inputValue = $request->all();
+        // dd($inputValue);
+        // if (isset($inputValue['mode_names'])) {
+        //     return $this->resetParamsReport($request);
+        // }
+        $modeName = $inputValue['mode_option'];
+        unset($inputValue['mode_option']);
+        $entity = $inputValue["_entity"];
+        $typeReport = strtolower($inputValue["type_report"]);
+        $settings[$entity][$typeReport]['user_mode'] = $modeName;
+        $indexBreak = array_search("type_report", array_keys($inputValue));
+        $parameter = array_slice($inputValue, $indexBreak + 1, count($inputValue) - $indexBreak);
+        $settings[$entity][$typeReport][$modeName] = $parameter;
         return $settings;
     }
 
@@ -152,6 +155,7 @@ class UpdateUserSettings extends Controller
      */
     public function __invoke(Request $request)
     {
+        // dd($request->all());
         $action = $request->input('action');
         $user = User::find(Auth::id());
         $settings = $user->settings;

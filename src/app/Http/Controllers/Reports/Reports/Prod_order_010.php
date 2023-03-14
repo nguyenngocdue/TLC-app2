@@ -9,7 +9,7 @@ use App\Models\Sub_project;
 
 
 
-class Prod_order extends Report_ParentController
+class Prod_order_010 extends Report_ParentController
 
 {
     use TraitReport;
