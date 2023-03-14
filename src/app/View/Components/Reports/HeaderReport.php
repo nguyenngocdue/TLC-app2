@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer\Report;
+namespace App\View\Components\Reports;
 
 use Illuminate\View\Component;
 
@@ -24,7 +24,7 @@ class HeaderReport extends Component
      */
     public function render()
     {
-        return view('components.renderer.report.header-report', [
+        return view('components.reports.header-report', [
             'dataSource' => $this->dataSource
         ]);
     }

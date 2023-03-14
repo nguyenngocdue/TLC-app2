@@ -20,7 +20,7 @@
     <x-renderer.divider />
     @endif
     @foreach($tableDataSource as $idSheet => $data)
-    <x-renderer.report.header-report :dataSource="array_pop($data)" />
+    <x-reports.header-report :dataSource="array_pop($data)" />
     <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource[$idSheet]" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
     <x-renderer.page-break />
     @endforeach
