@@ -103,14 +103,6 @@
         "rejected": "true",
         "closed": "true"
     },
-    "_closed_date": {
-        "name": "_closed_date",
-        "column_name": "closed_date",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "closed": "true"
-    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -143,6 +135,14 @@
         "rejected": "true",
         "closed": "true"
     },
+    "_closed_date": {
+        "name": "_closed_date",
+        "column_name": "closed_date",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": "true"
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -158,5 +158,13 @@
         "assigned": "",
         "rejected": "",
         "closed": ""
+    },
+    "_lock_version": {
+        "name": "_lock_version",
+        "column_name": "lock_version",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
     }
 }

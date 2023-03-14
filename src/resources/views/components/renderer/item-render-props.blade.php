@@ -66,6 +66,9 @@
                         @case('doc_id')
                         <x-controls.id2 name={{$columnName}} value="{{$action === 'edit' ? $value : 'to be generated'}}" />
                         @break
+                        @case(App\Utils\Constant::NAME_LOCK_COLUMN)
+                        <x-controls.lock-version value={{$value}} />
+                        @break
                         @case('hyperlink')
                         @php $placeholder="https://www.google.com"; @endphp
                         @case('text')

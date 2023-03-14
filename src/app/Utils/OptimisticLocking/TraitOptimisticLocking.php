@@ -14,6 +14,9 @@ trait TraitOptimisticLocking
     protected static $lockDefaultColumn = false;
 
     protected static $nameLockColumn = Constant::NAME_LOCK_COLUMN;
+    public function getType()
+    {
+    }
 
     public function updateWithOptimisticLocking($attributes)
     {
@@ -31,7 +34,7 @@ trait TraitOptimisticLocking
                     $this->setAttribute($versionColumn, $newVersion = $beforeUpdateVersion + 1);
                     $dirty[$versionColumn] = $newVersion;
                     $this->update($dirty);
-                    broadcast(new UpdateDocumentSend(auth()->user(), $attributes));
+                    broadcast(new UpdateDocumentSend(auth()->user(), $attributes, $this->getTable()));
                 } else {
                     $this->setAttribute($versionColumn, $beforeUpdateVersion);
                     throw new OptimisticLockingException('Model has been changed during update.');

@@ -22,3 +22,5 @@ Homestead.json
 .phpunit.result.cache
 
 mysql/
+.docker/
+redis/

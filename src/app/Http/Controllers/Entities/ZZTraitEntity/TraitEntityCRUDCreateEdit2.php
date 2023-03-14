@@ -67,7 +67,6 @@ trait TraitEntityCRUDCreateEdit2
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$isCheckColumnStatus = Schema::hasColumn(Str::plural($this->type), 'status');
-		dd($values);
 
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,

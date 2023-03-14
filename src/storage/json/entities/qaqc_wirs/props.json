@@ -358,5 +358,23 @@
         "read_only": "",
         "save_on_change": "",
         "new_line": ""
+    },
+    "_lock_version": {
+        "name": "_lock_version",
+        "column_name": "lock_version",
+        "column_type": "bigint",
+        "label": "Lock Version",
+        "control": "lock_version",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "new_line": ""
     }
 }

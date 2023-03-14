@@ -91,4 +91,14 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
         </div>
     </form>
 </div>
+
+<script type="text/javascript">
+    var i = 0;
+     window.Echo.channel('create_edit_'+'{{$type}}' +'_'+ {{$id}})
+        .listen('.UpdateDocumentEvent_' + '{{$type}}' + '_'+ {{$id}}, (data) => {
+            i++;
+            console.log(i);
+            $("#notification").append('<div class="alert alert-success">'+i+'.'+data.user+'</div>');
+        });
+</script>
 @endsection

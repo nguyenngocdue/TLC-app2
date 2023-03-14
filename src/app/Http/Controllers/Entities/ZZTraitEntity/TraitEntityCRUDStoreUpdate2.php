@@ -117,8 +117,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$fieldForEmailHandler = $this->addEntityType($fields, 'status', $newStatus);
 			$theRow = $this->data::find($id);
 			$previousValue = $this->getPreviousValue($fieldForEmailHandler, $theRow);
-			$theRow->fill($fields);
-			$theRow->save();
+			$theRow->updateWithOptimisticLocking($fields);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
 

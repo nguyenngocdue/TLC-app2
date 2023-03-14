@@ -7,13 +7,13 @@ use Carbon\Carbon;
 
 class DateTimeConcern
 {
-    private static function format($value, $formatFrom, $formatTo)
+    public static function format($value, $formatFrom, $formatTo)
     {
         //Deal with old()
         if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
         return Carbon::createFromFormat($formatFrom, $value)->format($formatTo);
     }
-    private static function formatQuarterForLoading($value, $formatFrom, $formatTo)
+    public static function formatQuarterForLoading($value, $formatFrom, $formatTo)
     {
         //Deal with old()
         // if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
@@ -23,7 +23,7 @@ class DateTimeConcern
         $quarter = Carbon::createFromFormat($formatFrom, $value)->quarter;
         return str_replace('q', $quarter, $result);
     }
-    private static function formatWeekForLoading($value, $formatFrom, $formatTo)
+    public static function formatWeekForLoading($value, $formatFrom, $formatTo)
     {
         //Deal with old()
         // if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
@@ -32,14 +32,14 @@ class DateTimeConcern
         $result = Carbon::createFromFormat($formatFrom, $value)->format($formatTo);
         return "W" . $result;
     }
-    private static function formatQuarterForSaving($value, $formatTo)
+    public static function formatQuarterForSaving($value, $formatTo)
     {
         $value = substr($value, 1);
         [$quarter, $year] = explode('/', $value);
         $result = Carbon::createFromDate($year, (($quarter - 1) * 3) + 1, 1)->startOfQuarter();
         return $result->format($formatTo);
     }
-    private static function formatWeekForSaving($value, $formatTo)
+    public static function formatWeekForSaving($value, $formatTo)
     {
         $value = substr($value, 1);
         [$week, $year] = explode('/', $value);

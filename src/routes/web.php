@@ -17,6 +17,7 @@ use App\Http\Controllers\Workflow\ManageWidgetsController;
 use App\Utils\Support\Entities;
 use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
