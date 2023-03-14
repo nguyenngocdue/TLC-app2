@@ -1,26 +1,30 @@
 @php
 $modeParams = ['mode_001'];
+$route = $routeName ? route($routeName) : "";
 @endphp
 
+{{-- @dd($typeReport) --}}
 <div class="w-full no-print    rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
     <div class="flex justify-end ">
         <x-reports.reset-param-report typeReport="{{$typeReport}}" entity="{{$entity}}" route="{{ route('updateUserSettings') }}" :modeNames='$modeParams' />
     </div>
-    <form action="{{route($routeName)}}" method="GET" class="flex flex-row-reverse">
+    <form action="{{$route}}" method="GET" class="flex flex-row-reverse">
         <div class="grid grid-rows-1 ">
             <div class="flex">
                 <input type="hidden" name='_entity' value="{{ $entity }}">
                 <input type="hidden" name='action' value="updateReport{{$typeReport}}">
                 <input type="hidden" name='type_report' value="{{$typeReport}}">
+                <input type="hidden" name='type_report' value="{{$typeReport}}">
+                <input type="hidden" name='mode_option' value="{{$modeOption}}">
                 @foreach($columns as $key =>$value)
                 @php
                 $title = isset($value['title']) ? $value['title'] : ucwords(str_replace('_', " ", $value['dataIndex']));
                 $name = $value['dataIndex'];
                 $data = $dataSource[$name];
-                $allowClear = isset($value['allowClear']) ? $value['allowClear'] : false;
+                $allowClear = $value['allowClear'] ?? false;
                 @endphp
                 <div class=" w-72 px-2 ">
-                    <x-renderer.dropdown title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} :dataSource="$data" :itemsSelected="$itemsSelected" />
+                    <x-reports.dropdown6 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} :dataSource="$data" :itemsSelected="$itemsSelected" />
                 </div>
                 @endforeach
                 <div class="  flex items-end">

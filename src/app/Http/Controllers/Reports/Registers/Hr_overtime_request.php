@@ -80,6 +80,31 @@ class Hr_overtime_request extends Report_ParentController
         return $sql;
     }
 
+    public function getSqlStrMode2($modeParams)
+    {
+        dd($this->mode);
+        $sql = "SELECT
+        sp.name sub_project_name
+        ,otline.sub_project_id sub_project_id
+        ,otline.id request_id,
+        otline.user_id user_id,
+        otline.employeeid employee_id
+        ,otline.ot_date ot_date
+        ,SUBSTR(otline.ot_date,1,7) AS year_months
+        ,otline.from_time from_line
+        ,otline.break_time break_time
+        ,otline.to_time to_time
+        ,otline.total_time total_time
+        ,otline.rt_remaining_hours rt_remaining_hours
+        FROM hr_overtime_request_lines otline, sub_projects sp
+        WHERE 1 = 1 
+            AND	otline.user_id = 46
+            AND otline.sub_project_id = sp.id";
+        return $sql;
+    }
+
+
+
     public function getTableColumns($dataSource)
     {
         // dump($dataSource);
@@ -176,6 +201,7 @@ class Hr_overtime_request extends Report_ParentController
         ];
     }
 
+
     private function getAllMonths()
     {
         $sql = "SELECT DISTINCT(SUBSTR(otline.ot_date, 1, 7)) AS year_months
@@ -197,7 +223,6 @@ class Hr_overtime_request extends Report_ParentController
     public function getDataForModeControl($dataSource)
     {
         $workplaces = ['ot_workplace_id' => Workplace::get()->pluck('name', 'id')->toArray()];
-
         $sqlMonths = $this->getAllMonths();
         $mon = array_column($sqlMonths, 'year_months');
         $months = ['months' => array_combine($mon, $mon)];
@@ -208,6 +233,7 @@ class Hr_overtime_request extends Report_ParentController
 
         return array_merge($workplaces, $months, $users);
     }
+
     private function wrapValueInObjectWithCellColor($value, $index)
     {
         $levelTime = [
