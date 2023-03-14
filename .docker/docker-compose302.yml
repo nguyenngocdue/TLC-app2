@@ -1,0 +1,106 @@
+version: "3"
+
+networks:
+  laravel302:
+    driver: bridge
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: laravel302_nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "38002:8001"
+    volumes:
+      - ../src:/var/www/app
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - laravel302
+  redis:
+    image: redis
+    container_name: laravel302_redis
+    restart: unless-stopped
+    environment:
+      - REDIS_PASSWORD=password
+      - REDIS_REPLICATION_mode=master
+    ports:
+      - "37912:6379"
+    networks:
+      - laravel302
+  redisinsight:
+    image: redislabs/redisinsight
+    container_name: laravel302_redisinsight
+    restart: unless-stopped
+    volumes:
+      - ../redis:/var/lib/redis
+    ports:
+      - "37902:8001"
+    networks:
+      - laravel302
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: laravel302_phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: LNIBsCP9Gj7xF4d3
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    ports:
+      - "38102:80"
+    networks:
+      - laravel302
+
+  mysql:
+    image: mysql
+    container_name: laravel302_mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "38302:3306"
+    volumes:
+      - ../mysql:/var/lib/mysql
+    # user: 1000:1000
+    environment:
+      MYSQL_ROOT_PASSWORD: LNIBsCP9Gj7xF4d3
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: tlc_app_2
+      MYSQL_PASSWORD: DLTedTfrVzYbrYv9
+    networks:
+      - laravel302
+
+  websocket:
+    container_name: laravel302_websocket
+    build:
+      context: ./laravel-echo-server
+      dockerfile: Dockerfile
+    volumes:
+      - ../src/.env:/var/www/websocket/.env
+    restart: unless-stopped
+
+    ports:
+      - "6001"
+    depends_on:
+      - nginx
+      - redis
+    networks:
+      - laravel302
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel302_php
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www/app
+    volumes:
+      - ../src:/var/www/app
+    ports:
+      - "39002:9000"
+    networks:
+      - laravel302
