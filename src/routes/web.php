@@ -34,7 +34,7 @@ Route::group([
             $entityName = $entity->getTable();
             $singular = Str::singular($entityName);
             $ucfirstName = Str::ucfirst($singular);
-            $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
+            $path = "App\\Http\\Controllers\\Entities\\";
             Route::resource("{$entityName}", "{$path}ViewAllController")->only('index');
             Route::get("{$entityName}_ep", ["{$path}ViewAllController", "exportCSV"])->name("{$entityName}_ep.exportCSV");
             Route::get("{$entityName}_qr", ["{$path}ViewAllController", "showQRCode"])->name("{$entityName}_qr.showQRCode");
@@ -82,7 +82,7 @@ Route::group([
             Route::group([
                 'middleware' => "role:ADMIN-DATA-" . Str::upper($entityName),
             ], function () use ($singular, $ucfirstName) {
-                $path = "App\\Http\\Controllers\\Entities\\{$ucfirstName}\\";
+                $path = "App\\Http\\Controllers\\Entities\\";
 
                 Route::resource("{$singular}_ppt", "{$path}ManageJsonController")->only('index', 'store', 'create');
 

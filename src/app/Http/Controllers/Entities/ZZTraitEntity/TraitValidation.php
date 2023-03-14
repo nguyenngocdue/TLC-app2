@@ -34,7 +34,9 @@ trait TraitValidation
             $newStatus = WorkflowFields::getNewFromDefinitions($this->type);
         }
         $rules = [];
-        $visibleProps = SuperWorkflows::getFor($this->type)['workflows'][$newStatus]['visible'];
+        $workflows = SuperWorkflows::getFor($this->type)['workflows'];
+        if (!isset($workflows[$newStatus])) return [];
+        $visibleProps = $workflows[$newStatus]['visible'];
         foreach ($this->superProps['props'] as $prop) {
             if (!in_array($prop['name'], $visibleProps)) continue;
             if (isset($prop['default-values']['validation'])) {

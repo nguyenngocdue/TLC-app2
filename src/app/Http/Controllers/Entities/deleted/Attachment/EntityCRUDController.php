@@ -7,6 +7,6 @@ use App\Models\Attachment;
 
 class EntityCRUDController extends AbstractEntityCRUDController
 {
-    protected $type = 'attachment';
-    protected $data = Attachment::class;
+    protected $type = 'attachment111';
+    protected $data = Attachment::class . '111';
 }

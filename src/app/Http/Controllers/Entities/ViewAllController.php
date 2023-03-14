@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityExportCSV;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityShowQRList6;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentRoute;
@@ -16,22 +17,26 @@ use App\Utils\Support\Json\Relationships;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+// use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Route;
 
-abstract class AbstractViewAllController extends Controller
+class ViewAllController extends Controller
 {
     use TraitEntityAdvancedFilter;
     use TraitEntityExportCSV;
     use TraitEntityShowQRList6;
+    use TraitEntityDynamicType;
+
     protected $type = "";
     protected $typeModel = '';
     protected $permissionMiddleware;
 
     public function __construct()
     {
+        $this->assignDynamicTypeViewAll();
+
         $this->middleware("permission:{$this->permissionMiddleware['read']}")->only('index');
         $this->middleware("permission:{$this->permissionMiddleware['edit']}")->only('index', 'update');
         $this->middleware("permission:{$this->permissionMiddleware['delete']}")->only('index', 'update', 'destroy');
