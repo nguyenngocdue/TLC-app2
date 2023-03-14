@@ -43,9 +43,9 @@ RUN usermod -u 1000 www-data
 
 RUN chown -R www-data:www-data .
 
-ENV ENABLE_CRONTAB 1
-ENV ENABLE_HORIZON 1
+# ENV ENABLE_CRONTAB 1
+# ENV ENABLE_HORIZON 1
 
-ENTRYPOINT ["sh", "/var/www/app/docker-entrypoint.sh"]
+# ENTRYPOINT ["sh", "/var/www/app/docker-entrypoint.sh"]
 
-CMD supervisord -n -c /etc/supervisord.conf
+# CMD supervisord -n -c /etc/supervisord.conf

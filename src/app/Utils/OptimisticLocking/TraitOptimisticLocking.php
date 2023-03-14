@@ -14,9 +14,6 @@ trait TraitOptimisticLocking
     protected static $lockDefaultColumn = false;
 
     protected static $nameLockColumn = Constant::NAME_LOCK_COLUMN;
-    public function getType()
-    {
-    }
 
     public function updateWithOptimisticLocking($attributes)
     {
