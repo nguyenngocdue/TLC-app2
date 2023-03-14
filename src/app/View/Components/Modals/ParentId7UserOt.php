@@ -3,6 +3,7 @@
 namespace App\View\Components\Modals;
 
 use App\Utils\ClassList;
+use App\Utils\ColorList;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
@@ -31,18 +32,51 @@ class ParentId7UserOt extends Component
     {
         $fieldId = FieldSeeder::getIdFromFieldName('getOtMembers');
         // dump($fieldId);
-        $sql = "SELECT u.id id, u.name name, ut.id $attr_name
-                FROM user_team_ots ut, users u, many_to_many m2m
+        $sql = "SELECT 
+                    u.id AS id, 
+                    u.name AS name, 
+                    u.employeeid AS description, 
+                    ut.id AS $attr_name,
+                    vua.url_thumbnail AS avatar,
+                    vrmn.remaining_hours AS remaining_hours
+                FROM 
+                    user_team_ots ut, 
+                    view_user_avatar vua,
+                    many_to_many m2m, 
+                    users u
+                    LEFT JOIN view_otr_remainings vrmn ON (
+                        vrmn.user_id=u.id
+                        AND vrmn.year_month0='2023-02'
+                        )
                 WHERE 1=1
                     AND m2m.field_id=$fieldId
                     AND m2m.doc_type='App\\\\Models\\\\User_team_ot'
                     AND ut.id=m2m.doc_id
                     AND m2m.term_type='App\\\\Models\\\\User'
                     AND u.id=m2m.term_id
+                    AND u.resigned != 1
+                    AND u.id=vua.u_id
+                    
                 ORDER BY u.name
                 ";
         $result = DB::select($sql);
+
+        foreach ($result as &$row) {
+            if ($row->avatar) {
+                $row->avatar  = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $row->avatar;
+            } else {
+                $row->avatar = "/images/avatar.jpg";
+            }
+            if (!$row->remaining_hours) {
+                $row->remaining_hours = 40;
+            }
+            $row->bgColor = ColorList::getBgColorForRemainingOTHours($row->remaining_hours);
+            $row->disabled = $row->remaining_hours <= 0;
+
+            $row->subtitle = "Remaining OT: " . $row->remaining_hours . "h";
+        }
         // dump($result);
+
         return $result;
     }
 
@@ -59,6 +93,7 @@ class ParentId7UserOt extends Component
                 'listen_to_fields' => [$objectIdStr],
                 'listen_to_tables' => [$tableName],
                 'table_name' => $tableName,
+                // 'attrs_to_compare' => ['id'],
                 'triggers' => [$objectTypeStr],
             ],
         ];
@@ -93,9 +128,9 @@ class ParentId7UserOt extends Component
             'classList' => $classList,
             // 'entity' => $this->type,
             'multiple' => $this->multiple ? true : false,
-            'span' => 2,
+            'span' => 3,
         ];
-        $this->renderJS($tableName, 'modal_ot_team', $this->name);
+        $this->renderJS($tableName, 'ot_team', $this->name);
         // dump($params);
         return view('components.controls.has-data-source.' . $this->control, $params);
     }

@@ -30,11 +30,6 @@ class ParentType7 extends Component
             ['id' => 1002, 'name' => 'A002'],
             ['id' => 1003, 'name' => 'A003'],
         ];
-        // $list = User_team_ot::get()->toArray();
-        // $dataSource = [];
-        // usort($list, fn ($a, $b) => $a['name'] <=> $b['name']);
-        // foreach ($list as $team) $dataSource[] = ['id' => $team['id'], 'name' => $team['name']];
-        // return $dataSource;
     }
 
     private function renderJS($tableName)

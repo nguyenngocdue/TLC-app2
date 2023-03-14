@@ -41,6 +41,7 @@ class ParentId2 extends Component
                 'listen_to_fields' => [$objectIdStr],
                 'listen_to_tables' => [$tableName],
                 'table_name' => $tableName,
+                // 'attrs_to_compare' => ['id'],
                 'triggers' => [$objectTypeStr],
             ],
         ];
