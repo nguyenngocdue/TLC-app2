@@ -7,7 +7,7 @@ use App\Http\Controllers\Reports\TraitReport;
 use App\Models\Workplace;
 use Illuminate\Support\Facades\DB;
 
-class Hr_overtime_request extends Report_ParentController
+class Hr_overtime_request_010 extends Report_ParentController
 {
     use TraitReport;
     protected $groupBy = 'first_name';

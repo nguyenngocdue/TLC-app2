@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers\Reports\Documents;
 
-use App\Helpers\Helper;
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
-use App\Http\Controllers\UpdateUserSettings;
 use App\Models\Attachment;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
-use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 
-class Qaqc_insp_chklst extends Report_ParentController
+class Qaqc_insp_chklst_010 extends Report_ParentController
 {
 	use TraitReport;
 	protected $viewName = 'document-qaqc-insp-chklst';

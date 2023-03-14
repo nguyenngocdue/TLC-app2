@@ -9,6 +9,8 @@ class Hr_overtime_request_020 extends Report_ParentController
 {
     use TraitReport;
     protected $groupBy = 'first_name';
+    protected $mode = '020';
+
     public function getSqlStr($modeParams)
     {
         dd(12312313);

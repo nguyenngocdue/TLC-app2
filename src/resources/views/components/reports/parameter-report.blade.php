@@ -1,6 +1,6 @@
 @php
 $modeParams = ['mode_001'];
-$route = $routeName ? route($routeName) : "";
+$route = $routeName ? route($routeName,999) : "";
 @endphp
 
 {{-- @dd($typeReport) --}}

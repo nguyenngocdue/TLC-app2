@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 
@@ -9,7 +10,7 @@ trait TraitEntityDynamicType
 {
     private function assignDynamicTypeViewAll()
     {
-        $routeName = Request::route()->getName();
+        $routeName = Request::route() ? Request::route()->getName() : "attachment.index";
         $tableName = substr($routeName, 0, strpos($routeName, "."));
         $singular = Str::singular($tableName);
 
@@ -24,7 +25,7 @@ trait TraitEntityDynamicType
 
     private function assignDynamicTypeCreateEdit()
     {
-        $routeName = Request::route()->getName();
+        $routeName = Request::route() ? Request::route()->getName() : "attachment.index";
         $tableName = substr($routeName, 0, strpos($routeName, "."));
         $singular = Str::singular($tableName);
 
@@ -43,7 +44,7 @@ trait TraitEntityDynamicType
 
     private function assignDynamicTypeManageJson()
     {
-        $routeName = Request::route()->getName();
+        $routeName = Request::route() ? Request::route()->getName() : "attachment_prp";
         $tableName = substr($routeName, 0, strrpos($routeName, "_"));
         $singular = Str::singular($tableName);
 

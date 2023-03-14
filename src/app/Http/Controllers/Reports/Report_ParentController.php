@@ -22,7 +22,7 @@ abstract class Report_ParentController extends Controller
 
     protected $rotate45Width = false;
     protected $groupBy = false;
-    protected $mode;
+    protected $mode = '010';
 
     public function getType()
     {
@@ -75,8 +75,10 @@ abstract class Report_ParentController extends Controller
     }
     protected function getTable()
     {
-        $currentModelName = strtolower(CurrentRoute::getCurrentController());
-        return $currentModelName;
+        $tableName = CurrentRoute::getCurrentController();
+        $tableName = substr($tableName, 0, strrpos($tableName, "_"));
+        $tableName = strtolower(Str::plural($tableName));
+        return $tableName;
     }
 
     private function paginateDataSource($dataSource, $pageLimit)
@@ -147,9 +149,6 @@ abstract class Report_ParentController extends Controller
 
     public function index(Request $request)
     {
-        // $this->mode = $mode;
-
-
         if ($request->input('mode_option')) {
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
