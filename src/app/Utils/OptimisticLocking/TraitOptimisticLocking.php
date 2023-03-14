@@ -2,54 +2,40 @@
 
 namespace App\Utils\OptimisticLocking;
 
+use App\Events\UpdateDocumentSend;
 use App\Utils\Constant;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 trait TraitOptimisticLocking
 {
-    protected $lock = true;
+    protected static $lock = true;
 
-    protected $lockDefaultColumn = false;
+    protected static $lockDefaultColumn = false;
 
-    protected $nameLockColumn = Constant::NAME_LOCK_COLUMN;
+    protected static $nameLockColumn = Constant::NAME_LOCK_COLUMN;
 
-    protected static function bootOptimisticLocking()
+    public function updateWithOptimisticLocking($attributes)
     {
-        static::creating(function (Model $model) {
-            if ($model->currentLockVersion() === null) {
-                $model->{static::lockVersionColumn()} = static::defaultLockVersion();
-            }
-        });
-    }
-    protected function performUpdate(Builder $queryBuilder)
-    {
+        $this->fill($attributes);
         if ($this->fireModelEvent('updating') === false) {
             return false;
         }
-
         $dirty = $this->getDirty();
         if (count($dirty) > 0) {
             $versionColumn = static::lockVersionColumn();
-            $this->setKeysForSaveQuery($queryBuilder);
-            if ($versionColumn === Constant::NAME_LOCK_COLUMN_DEFAULT) {
-                if ($this->lockingEnabled()) {
-                    $queryBuilder->where($versionColumn, $this->currentLockVersion());
-                }
-                $beforeUpdateVersion = $this->currentLockVersion();
-            }
-
             if ($this->lockingEnabled()) {
-                $queryBuilder->where($versionColumn, $this->currentLockVersion());
-            }
-            $beforeUpdateVersion = $this->currentLockVersion();
-            $this->setAttribute($versionColumn, $newVersion = $beforeUpdateVersion + 1);
-            $dirty[$versionColumn] = $newVersion;
-
-            $result = $queryBuilder->update($dirty);
-            if ($result === 0) {
-                $this->setAttribute($versionColumn, $beforeUpdateVersion);
-                throw new OptimisticLockingException('Model has been changed during update.');
+                $beforeUpdateVersion = $this->currentLockVersion();
+                $isCheckUpdate = $this->databaseLockVersion() == $beforeUpdateVersion;
+                if ($isCheckUpdate) {
+                    $this->setAttribute($versionColumn, $newVersion = $beforeUpdateVersion + 1);
+                    $dirty[$versionColumn] = $newVersion;
+                    $this->update($dirty);
+                    broadcast(new UpdateDocumentSend(auth()->user(), $attributes));
+                } else {
+                    $this->setAttribute($versionColumn, $beforeUpdateVersion);
+                    throw new OptimisticLockingException('Model has been changed during update.');
+                }
             }
             $this->fireModelEvent('updated', false);
             $this->syncChanges();
@@ -63,6 +49,10 @@ trait TraitOptimisticLocking
     public function currentLockVersion()
     {
         return $this->getAttribute(static::lockVersionColumn());
+    }
+    public function databaseLockVersion()
+    {
+        return $this->getOriginal(static::lockVersionColumn());
     }
 
     protected static function defaultLockVersion()
