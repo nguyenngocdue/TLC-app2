@@ -125,20 +125,8 @@ function data() {
             document.getElementById(id).classList.remove('flex')
         },
 
-        loadListToTable(listId, modalId) {
-            const x = $("input[name='" + listId + "[]']")
-            const result = []
-            for (let i = 0; i < x.length; i++) {
-                if (x[i].checked) result.push(x[i].value)
-            }
-            // console.log(result)
-            const tableId = modalId
-            for (let i = 0; i < result.length; i++) {
-                const user_id = result[i]
-                const valueOfOrigin = { user_id }
-                console.log("Add line", tableId, valueOfOrigin)
-                addANewLine({ tableId, valueOfOrigin })
-            }
+        loadListToTable(fn, listId, modalId) {
+            fn(listId, modalId)
             this.closeListingTable(modalId)
         }
     }

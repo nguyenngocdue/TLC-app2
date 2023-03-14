@@ -22,10 +22,29 @@
                     <x-modals.parent-id7-user-ot name='ot_user2' multiple={{true}} control='radio-or-checkbox2'></x-modals.parent-type7>
                 </div>
                 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
-                   <x-renderer.button class="mx-2" type='success' click="loadListToTable('ot_user2','{{$modalId}}')">Populate</x-renderer.button>
+                   <x-renderer.button class="mx-2" type='success' click="loadListToTable(addLinesToTable,'ot_user2', '{{$modalId}}')">Populate</x-renderer.button>
                    <x-renderer.button click="closeListingTable('{{$modalId}}')">Cancel</x-renderer.button>
                 </div>                
             </div>
         </div>
     </div>
 </template>
+
+<script>
+const addLinesToTable = (listId, tableId) => {
+
+    const x = $("input[name='" + listId + "[]']")
+    const result = []
+    for (let i = 0; i < x.length; i++) {
+        if (x[i].checked) result.push(x[i].value)
+    }
+    // console.log(result)
+    for (let i = 0; i < result.length; i++) {
+        const user_id = result[i]
+        const today = moment().format('DD/MM/YYYY')
+        const valuesOfOrigin = { user_id, ot_date: today }
+        console.log("Add line", tableId, valuesOfOrigin)
+        addANewLine({ tableId, valuesOfOrigin })
+    }
+}
+</script>
