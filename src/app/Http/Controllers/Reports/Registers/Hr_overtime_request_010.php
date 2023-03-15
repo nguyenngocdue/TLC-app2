@@ -13,7 +13,7 @@ class Hr_overtime_request_010 extends Report_ParentController
     protected $groupBy = 'first_name';
     public function getSqlStr($modeParams)
     {
-        $sql = " SELECT tb2.*,LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month ORDER BY year_months) AS maximum_allowed_ot_hours_year
+        $sql = " SELECT tb2.*,LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month, user_id ORDER BY year_months) AS maximum_allowed_ot_hours_year
         FROM(SELECT 
         GROUP_CONCAT(distinct workplace SEPARATOR ', ') AS ot_workplace,
             user_category_name,
@@ -248,17 +248,16 @@ class Hr_overtime_request_010 extends Report_ParentController
     {
         return [
             'remaining_allowed_OT_hours_legend' => [
-                'bg-green-400' => '0% < 25% hours/month',
-                'bg-yellow-400' => '25% < 50% hours/month',
-                'bg-pink-400' => '50% < 75% hours/month',
-                'bg-red-400' => '75% < 100% hours/month'
+                'bg-green-400' => '0% < 25% hours',
+                'bg-yellow-400' => '25% < 50% hours',
+                'bg-pink-400' => '50% < 75% hours',
+                'bg-red-400' => '75% < 100% hours'
             ]
         ];
     }
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
-        $hrefForward = "http://localhost:38002/reports/register-hr_overtime_request/020";
         foreach ($dataSource as $key => $value) {
             // display name/description for total_overtime_hours
             $teamName = $value->user_category_name;
@@ -273,12 +272,13 @@ class Hr_overtime_request_010 extends Report_ParentController
             $remainingAllowedOTHours = $value->remaining_allowed_ot_hours * 1;
             $remainingAllowedOTHoursYear = $value->remaining_allowed_ot_hours_year * 1;
 
-            $hrefForward = $hrefForward . '?user_id=' . $value->user_id;
+            $param = '?user_id=' . $value->user_id . '&' . 'months=' . $value->year_months;
+            $hrefForward = "http://localhost:38002/reports/register-hr_overtime_request/020" . $param;
             $reAllowedOTHoursMonth = $this->wrapValueInObjectWithCellColor($remainingAllowedOTHours, 0, $hrefForward);
             $reAllowedOTHoursYear = $this->wrapValueInObjectWithCellColor($remainingAllowedOTHoursYear, 1, '');
 
             $dataSource[$key]->remaining_allowed_ot_hours = $reAllowedOTHoursMonth;
-            $dataSource[$key]->cumulative_remaining_hours_year = $reAllowedOTHoursYear;
+            $dataSource[$key]->remaining_allowed_ot_hours_year = $reAllowedOTHoursYear;
         }
         return $dataSource;
     }
