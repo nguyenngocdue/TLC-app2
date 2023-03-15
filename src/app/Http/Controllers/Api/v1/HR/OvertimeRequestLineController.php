@@ -20,6 +20,8 @@ class OvertimeRequestLineController extends Controller
         $year_month0 = Carbon::createFromFormat(Constant::FORMAT_DATE_ASIAN, $ot_date)->format(Constant::FORMAT_YEAR_MONTH0);
         $year0 = substr($year_month0, 0, 4);
 
+        $idCmp = is_numeric($otrl_id) ? "AND id < $otrl_id" : ""; //<< id="to be generated" 
+
         $sql = "SELECT * FROM 
             (SELECT 
                 substr(ot_date, 1, 7) AS `year_month0`, 
@@ -29,7 +31,7 @@ class OvertimeRequestLineController extends Controller
             WHERE 1=1
                 AND user_id=$user_id
                 AND substr(ot_date, 1, 7)='$year_month0'
-                AND id < $otrl_id
+                $idCmp
             GROUP BY user_id, year_month0) AS month0,
             (SELECT 
                 substr(ot_date, 1, 4) AS `year0`, 
@@ -39,7 +41,7 @@ class OvertimeRequestLineController extends Controller
             WHERE 1=1
                 AND user_id=$user_id
                 AND substr(ot_date, 1, 4)='$year0'
-                AND id < $otrl_id
+                $idCmp
             GROUP BY user_id, year0) AS year0
             WHERE month0.user_id = year0.user_id
             ";
@@ -48,7 +50,7 @@ class OvertimeRequestLineController extends Controller
         return ResponseObject::responseSuccess(
             $result,
             ['user_id' => $user_id, 'year_month0' => $year_month0, 'otrl_id' => $otrl_id],
-            "Return total hours this user has OT in this month, only count the lines that have ID less than this OT line."
+            "Return total hours this user has OT in this month and this year, only count the lines that have ID less than this OT line."
         );
     }
 

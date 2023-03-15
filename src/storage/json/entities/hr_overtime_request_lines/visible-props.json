@@ -50,18 +50,18 @@
     "_month_allowed_hours": {
         "name": "_month_allowed_hours",
         "column_name": "month_allowed_hours",
-        "new": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
     },
     "_year_allowed_hours": {
         "name": "_year_allowed_hours",
         "column_name": "year_allowed_hours",
-        "new": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
     },
     "_from_time": {
         "name": "_from_time",

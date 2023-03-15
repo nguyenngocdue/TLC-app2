@@ -211,8 +211,8 @@ const onChangeDropdown4Expression = (listener, table01Name, rowIndex) => {
 const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex) => {
     // const debugListener = true
     if (debugListener) console.log("AjaxRequestScalar", listener)
-    const { triggers, expression: url, column_name } = listener
-    const { ajax_response_attribute, ajax_item_attribute, ajax_default_value } = listener
+    const { triggers, expression: url } = listener
+    const { ajax_response_attribute, ajax_form_attributes, ajax_item_attributes, ajax_default_values } = listener
 
     let enoughParams = true
     const data = {}
@@ -228,27 +228,33 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex) => 
     }
     if (enoughParams) {
         if (debugListener) console.log("Sending AjaxRequest with data:", data, url)
-        const id = makeIdFrom(table01Name, column_name, rowIndex)
-        getEById(id).hide()
+        for (let i = 0; i < ajax_form_attributes.length; i++) {
+            const id = makeIdFrom(table01Name, ajax_form_attributes[i], rowIndex)
+            getEById(id).hide()
+        }
         $.ajax({
             url, data,
             success: (response) => {
                 let value = -1
-                if (response[ajax_response_attribute][0] === undefined) {
-                    value = ajax_default_value
-                    if (debugListener) console.log("Response empty", ajax_response_attribute, ', assigning default value', ajax_default_value)
-                } else if (response[ajax_response_attribute][0][ajax_item_attribute] === undefined) {
-                    value = ajax_default_value
-                    if (debugListener) console.log("Requested column", ajax_item_attribute, 'not found, assigning default value', ajax_default_value)
-                } else {
-                    value = response[ajax_response_attribute][0][ajax_item_attribute]
-                }
-                if (debugListener) console.log("Assigning", id, "with value", value)
                 if (debugListener) console.log("Response", response)
-                getEById(id).val(value)
-                getEById(id).trigger('change')
+                for (let i = 0; i < ajax_form_attributes.length; i++) {
+                    const id = makeIdFrom(table01Name, ajax_form_attributes[i], rowIndex)
+                    const hits_0 = response[ajax_response_attribute][0]
+                    if (hits_0 === undefined) {
+                        value = ajax_default_values[i]
+                        if (debugListener) console.log("Response empty", ajax_response_attribute, ' - assigning default value', ajax_default_values[i])
+                    } else if (hits_0[ajax_item_attributes[i]] === undefined) {
+                        value = ajax_default_values[i]
+                        if (debugListener) console.log("Requested column", ajax_item_attributes[i], 'not found, assigning default value', ajax_default_values[i])
+                    } else {
+                        value = hits_0[ajax_item_attributes[i]]
+                    }
+                    if (debugListener) console.log("Assigning", id, "with value", value)
+                    getEById(id).val(value)
+                    getEById(id).trigger('change')
 
-                getEById(id).show()
+                    getEById(id).show()
+                }
             },
             error: (response) => console.error(response)
         })

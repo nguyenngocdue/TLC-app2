@@ -9,8 +9,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_dropdownMonitorsZut9()": {
         "name": "_dropdownMonitorsZut9()",
@@ -22,8 +23,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_due_date": {
         "name": "_due_date",
@@ -35,8 +37,9 @@
         "attrs_to_compare": "id",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_user_1": {
         "name": "_user_1",
@@ -48,8 +51,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_user_position_1": {
         "name": "_user_position_1",
@@ -61,8 +65,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_remaining": {
         "name": "_remaining",
@@ -74,8 +79,9 @@
         "attrs_to_compare": "",
         "expression": "Math.round((total - (accepted + rejected)) * 100) \/ 100",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_datetime_3": {
         "name": "_datetime_3",
@@ -87,8 +93,9 @@
         "attrs_to_compare": "",
         "expression": "datetime_2 - datetime_1",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_date_3": {
         "name": "_date_3",
@@ -100,8 +107,9 @@
         "attrs_to_compare": "",
         "expression": "date_2 - date_1",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_time_3": {
         "name": "_time_3",
@@ -113,8 +121,9 @@
         "attrs_to_compare": "",
         "expression": "time_2 - time_1",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_user_2": {
         "name": "_user_2",
@@ -126,8 +135,9 @@
         "attrs_to_compare": "id",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_user_3": {
         "name": "_user_3",
@@ -139,8 +149,9 @@
         "attrs_to_compare": "id",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_sub_project_1": {
         "name": "_sub_project_1",
@@ -152,8 +163,9 @@
         "attrs_to_compare": "id",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_prod_order_1": {
         "name": "_prod_order_1",
@@ -165,8 +177,9 @@
         "attrs_to_compare": "id",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_id": {
         "name": "_id",
@@ -178,8 +191,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_name": {
         "name": "_name",
@@ -191,8 +205,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_parent_id": {
         "name": "_parent_id",
@@ -204,8 +219,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_department_2": {
         "name": "_department_2",
@@ -217,8 +233,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_category_id": {
         "name": "_category_id",
@@ -230,8 +247,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_project_1": {
         "name": "_project_1",
@@ -243,8 +261,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_prod_routing_1": {
         "name": "_prod_routing_1",
@@ -256,8 +275,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_prod_discipline_1": {
         "name": "_prod_discipline_1",
@@ -269,8 +289,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_department_1": {
         "name": "_department_1",
@@ -282,8 +303,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_user_4": {
         "name": "_user_4",
@@ -295,8 +317,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -308,8 +331,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -321,8 +345,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_priority_id": {
         "name": "_priority_id",
@@ -334,8 +359,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_order_no": {
         "name": "_order_no",
@@ -347,8 +373,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_total": {
         "name": "_total",
@@ -360,8 +387,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_accepted": {
         "name": "_accepted",
@@ -373,8 +401,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_rejected": {
         "name": "_rejected",
@@ -386,8 +415,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_datetime_1": {
         "name": "_datetime_1",
@@ -399,8 +429,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_datetime_2": {
         "name": "_datetime_2",
@@ -412,8 +443,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_date_1": {
         "name": "_date_1",
@@ -425,8 +457,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_date_2": {
         "name": "_date_2",
@@ -438,8 +471,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_time_1": {
         "name": "_time_1",
@@ -451,8 +485,9 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     },
     "_time_2": {
         "name": "_time_2",
@@ -464,7 +499,8 @@
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
-        "ajax_item_attribute": "",
-        "ajax_default_value": ""
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
     }
 }

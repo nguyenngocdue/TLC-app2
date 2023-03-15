@@ -17,6 +17,11 @@ class Listeners extends JsonGetSet
             $row['listen_to_fields'] = Str::parseArray($row['listen_to_fields']);
             $row['listen_to_attrs'] = Str::parseArray($row['listen_to_attrs']);
             $row['attrs_to_compare'] = Str::parseArray($row['attrs_to_compare'] ?? 'id'); //<<CONFIG_MIGRATE
+
+            $row['ajax_form_attributes'] = Str::parseArray($row['ajax_form_attributes'] ?? ""); //<<CONFIG_MIGRATE
+            $row['ajax_item_attributes'] = Str::parseArray($row['ajax_item_attributes'] ?? ""); //<<CONFIG_MIGRATE
+            $row['ajax_default_values'] = Str::parseArray($row['ajax_default_values'] ?? ""); //<<CONFIG_MIGRATE
+
             if ($row['listen_action']) $result[$key] = $row;
         }
         return $result;
