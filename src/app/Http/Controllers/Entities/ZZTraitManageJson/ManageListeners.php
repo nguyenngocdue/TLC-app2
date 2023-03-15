@@ -40,22 +40,22 @@ class ManageListeners extends Manage_Parent
             ],
             [
                 "dataIndex" => "triggers",
-                "renderer" => "text4",
+                "renderer" => "textarea4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "listen_to_fields",
-                "renderer" => "text4",
+                "renderer" => "textarea4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "listen_to_attrs",
-                "renderer" => "text4",
+                "renderer" => "textarea4",
                 "editable" => true,
             ],
             [
                 "dataIndex" => "attrs_to_compare",
-                "renderer" => "text4",
+                "renderer" => "textarea4",
                 "editable" => true,
                 "properties" => ["placeholder" => 'id'],
             ],
@@ -75,11 +75,13 @@ class ManageListeners extends Manage_Parent
                 "dataIndex" => "ajax_form_attributes",
                 "renderer" => "textarea4",
                 "editable" => true,
+                'width' => 200,
             ],
             [
                 "dataIndex" => "ajax_item_attributes",
                 "renderer" => "textarea4",
                 "editable" => true,
+                'width' => 200,
             ],
             [
                 "dataIndex" => "ajax_default_values",

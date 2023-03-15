@@ -42,7 +42,8 @@ Str::macro('modelPathFrom', function (string $table_or_type) {
 //make a,b,c to [a,b,c]
 //make "" to []
 Str::macro('parseArray', function (?string $values) {
-    return ($values != "") ? explode(",", $values) : [];
+    $array = ($values != "") ? explode(",", $values) : [];
+    return array_map(fn ($s) => trim($s), $array);
 });
 
 Str::macro('modelToPretty', function (string $string) {
