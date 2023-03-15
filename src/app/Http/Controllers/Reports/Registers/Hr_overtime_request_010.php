@@ -13,7 +13,7 @@ class Hr_overtime_request_010 extends Report_ParentController
     protected $groupBy = 'first_name';
     public function getSqlStr($modeParams)
     {
-        $sql = " SELECT tb2.*,LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month ORDER BY year_months) AS maximum_allowed_ot_hours_year
+        $sql = " SELECT tb2.*,LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month, user_id ORDER BY year_months) AS maximum_allowed_ot_hours_year
         FROM(SELECT 
         GROUP_CONCAT(distinct workplace SEPARATOR ', ') AS ot_workplace,
             user_category_name,
