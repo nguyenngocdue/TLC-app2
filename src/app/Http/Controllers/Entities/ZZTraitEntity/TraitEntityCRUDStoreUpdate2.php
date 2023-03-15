@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Utils\Support\DateTimeConcern;
-use App\Utils\System\Api\ResponseObject;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -103,6 +102,7 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			//Get newStatus before it get removed by handleFields
 			$newStatus = $request['status'];
+			if ($request['tableNames'] == 'fakeRequest') Log::info($this->getValidationRules($newStatus));
 			$request->validate($this->getValidationRules($newStatus));
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
@@ -149,25 +149,5 @@ trait TraitEntityCRUDStoreUpdate2
 		//Fire the event "Updated New Document"
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $this->type, $newStatus);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
-	}
-
-	public function storeEmpty(Request $request)
-	{
-		$theRow = $this->data::create($request->input());
-		return ResponseObject::responseSuccess([['id' => $theRow->id]]);
-	}
-
-	public function updateShort(Request $request, $id)
-	{
-		$theRow = $this->data::find($id);
-		$input = $request->input();
-		if (isset($input['ot_date'])) $input['ot_date'] = DateTimeConcern::convertForSaving('picker_date', $input['ot_date']);
-		$theRow->fill($input);
-		$result = $theRow->save();
-		return ResponseObject::responseSuccess(
-			[['result' => $result, 'input' => $input]],
-			[],
-			"UpdateShort"
-		);
 	}
 }

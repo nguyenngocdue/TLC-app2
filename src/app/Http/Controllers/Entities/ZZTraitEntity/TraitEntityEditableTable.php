@@ -29,7 +29,6 @@ trait TraitEntityEditableTable
         $table01Names = $request['tableNames'];
         session()->forget('editableTablesTransactions');
         foreach ($table01Names as $table01Name => $tableName) {
-            $tableType = ucfirst(Str::singular($tableName));
             $dataSource = $request[$table01Name];
             $this->dump1("RECURSIVE CALLED STRIPPING $tableName", $dataSource, __LINE__);
             if (is_null($dataSource)) continue;
@@ -52,8 +51,9 @@ trait TraitEntityEditableTable
                 $line['idForScroll'] = substr($props[$table01Name], 1); //remove first "_"
                 // dump($line);
                 $fakeRequest->merge($line);
-                $controllerPath = "App\\Http\\Controllers\\Entities\\$tableType\\EntityCRUDController";
+                $controllerPath = "App\\Http\\Controllers\\Entities\\EntityCRUDController";
                 $controller = new $controllerPath;
+                $controller->init($tableName);
                 if (isset($line['id']) && !is_null($line['id'])) {
                     if (isset($line['DESTROY_THIS_LINE']) && ('true' == $line["DESTROY_THIS_LINE"])) {
                         $destroySuccess = $controller->destroy($fakeRequest, $line['id']);

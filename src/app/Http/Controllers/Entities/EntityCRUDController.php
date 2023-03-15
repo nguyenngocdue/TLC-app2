@@ -31,7 +31,17 @@ class EntityCRUDController extends Controller
 	public function __construct()
 	{
 		$this->assignDynamicTypeCreateEdit();
+		$this->postConstruct();
+	}
 
+	public function init($tableName)
+	{
+		$this->assignDynamicTypeManual($tableName);
+		$this->postConstruct();
+	}
+
+	private function postConstruct()
+	{
 		$this->uploadService2 = App::make('App\Http\Services\UploadService2');
 		$this->superProps = SuperProps::getFor($this->type);
 	}
