@@ -258,7 +258,6 @@ class Hr_overtime_request_010 extends Report_ParentController
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
-        $hrefForward = "http://localhost:38002/reports/register-hr_overtime_request/020";
         foreach ($dataSource as $key => $value) {
             // display name/description for total_overtime_hours
             $teamName = $value->user_category_name;
@@ -273,7 +272,8 @@ class Hr_overtime_request_010 extends Report_ParentController
             $remainingAllowedOTHours = $value->remaining_allowed_ot_hours * 1;
             $remainingAllowedOTHoursYear = $value->remaining_allowed_ot_hours_year * 1;
 
-            $hrefForward = $hrefForward . '?user_id=' . $value->user_id;
+            $param = '?user_id=' . $value->user_id . '&' . 'months=' . $value->year_months;
+            $hrefForward = "http://localhost:38002/reports/register-hr_overtime_request/020" . $param;
             $reAllowedOTHoursMonth = $this->wrapValueInObjectWithCellColor($remainingAllowedOTHours, 0, $hrefForward);
             $reAllowedOTHoursYear = $this->wrapValueInObjectWithCellColor($remainingAllowedOTHoursYear, 1, '');
 

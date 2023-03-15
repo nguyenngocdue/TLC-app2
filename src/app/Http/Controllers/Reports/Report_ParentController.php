@@ -145,9 +145,30 @@ abstract class Report_ParentController extends Controller
     {
 
 
+        $typeReport = CurrentRoute::getTypeController();
+        $routeName = $request->route()->action['as'];
+        $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
+
+
+        if (count($request->input()) === 2) {
+            $modeParams = $this->setDefaultValueModeParams($request->input(), $request);
+            $modeName = explode('/', $request->getPathInfo())[3];
+            $params = [
+                '_entity' => $entity,
+                'action' => 'updateReportRegisters',
+                'type_report' => $typeReport,
+                'mode_option' => $modeName
+            ] + $modeParams;
+
+            $request->replace($params);
+            (new UpdateUserSettings())($request);
+        }
+
+
+
         // dump(Log::info($request->input()));
         if ($request->input('mode_option')) {
-            // dd($request->input());
+            // dd($request);
             $mode = $request->all()['mode_option'];
             $routeName = explode('/', $request->getPathInfo())[2];
             (new UpdateUserSettings())($request);
@@ -158,12 +179,11 @@ abstract class Report_ParentController extends Controller
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
         }
+        // dump(123);
 
 
 
-        $typeReport = CurrentRoute::getTypeController();
-        $routeName = $request->route()->action['as'];
-        $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
+
 
         $currentUserId = Auth::id();
         $currentMode = $this->mode;

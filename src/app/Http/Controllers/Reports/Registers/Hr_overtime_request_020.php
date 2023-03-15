@@ -144,7 +144,7 @@ class Hr_overtime_request_020 extends Report_ParentController
 
     protected function setDefaultValueModeParams($modeParams, $request)
     {
-        // dd($request);
+        // dump($modeParams);
         return $modeParams;
     }
 
