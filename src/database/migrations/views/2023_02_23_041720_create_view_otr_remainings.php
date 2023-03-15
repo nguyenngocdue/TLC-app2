@@ -19,9 +19,9 @@ return new class extends Migration
                 -- 'nameless' AS name,
                 substr(ot_date, 1, 7) AS `year_month0`, 
                 user_id, employeeid, 
-                40 AS allowed_hours,
+                40 AS month_allowed_hours,
                 round(sum(total_time),2) AS total_hours,
-                round(40 - sum(total_time),2) AS remaining_hours
+                round(40 - sum(total_time),2) AS month_remaining_hours
             FROM `hr_overtime_request_lines`
             GROUP BY `year_month0`, user_id, employeeid
             ORDER BY `year_month0`, user_id

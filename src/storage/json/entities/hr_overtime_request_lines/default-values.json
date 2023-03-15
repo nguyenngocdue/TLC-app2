@@ -71,9 +71,21 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_allowed_hours": {
-        "name": "_allowed_hours",
-        "column_name": "allowed_hours",
+    "_month_allowed_hours": {
+        "name": "_month_allowed_hours",
+        "column_name": "month_allowed_hours",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_year_allowed_hours": {
+        "name": "_year_allowed_hours",
+        "column_name": "year_allowed_hours",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -131,9 +143,21 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_remaining_hours": {
-        "name": "_remaining_hours",
-        "column_name": "remaining_hours",
+    "_month_remaining_hours": {
+        "name": "_month_remaining_hours",
+        "column_name": "month_remaining_hours",
+        "label": "",
+        "validation": "numeric|min:0",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_year_remaining_hours": {
+        "name": "_year_remaining_hours",
+        "column_name": "year_remaining_hours",
         "label": "",
         "validation": "numeric|min:0",
         "validation_regex": "",
