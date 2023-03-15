@@ -22,7 +22,7 @@
         "column_name": "hr_overtime_request_id",
         "column_type": "bigint",
         "label": "Parent OT ID",
-        "control": "dropdown",
+        "control": "number",
         "align": "",
         "col_span": "",
         "width": "20",
