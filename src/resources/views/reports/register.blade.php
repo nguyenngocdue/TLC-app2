@@ -8,7 +8,15 @@
         <x-reports.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" routeName="{{$routeName}}" page-limit="{{$pageLimit}}" />
     </div>
     <x-reports.mode-report :dataSource="$modeOptions" formName="mode_options" :itemsSelected="['mode_option' =>$currentMode]" userId="{{$currentUserId}}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
-    <x-reports.parameter-report :dataSource="$dataModeControl" :itemsSelected="$modeParams" modeOption="mode_010" :columns="$paramColumns" routeName="{{$routeName}}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
+
+    @switch($currentMode)
+    @case('010')
+    <x-reports.parameter-report :dataSource="$dataModeControl" :itemsSelected="$modeParams" modeOption="010" :columns="$paramColumns" routeName="{{$routeName}}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
+    @break
+
+    @default
+
+    @endswitch
     <x-renderer.card class="mb-5">
         <x-reports.color-legend-report :dataSource="$legendColors" />
     </x-renderer.card>
