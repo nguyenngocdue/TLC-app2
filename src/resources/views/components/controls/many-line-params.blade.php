@@ -35,18 +35,21 @@
 <x-renderer.card title="Remaining Hours Legend">
     <div class="grid lg:grid-cols-5 md:grid-cols-5 grid-cols-2">
         <div class="flex">
-            <div class="border h-6 w-6 mr-2 bg-red-600"></div>
-            < 0 hours/month</div>
-                <div class="flex">
-                    <div class="border h-6 w-6 mr-2 bg-pink-400"></div> 0 to < 10 hours/month</div>
-                        <div class="flex">
-                            <div class="border h-6 w-6 mr-2 bg-orange-300"></div> 10 to < 20 hours/month</div>
-                                <div class="flex">
-                                    <div class="border h-6 w-6 mr-2 bg-yellow-300"></div> 20 to < 30 hours/month</div>
-                                        <div class="flex">
-                                            <div class="border h-6 w-6 mr-2 bg-green-300"></div> above 30 hours/month
-                                        </div>
-                                </div>
+            <div class="border h-6 w-6 mr-2 bg-red-600"></div>< 0%
+        </div>
+        <div class="flex">
+            <div class="border h-6 w-6 mr-2 bg-pink-400"></div> 0% to < 25%
+        </div>
+        <div class="flex">
+            <div class="border h-6 w-6 mr-2 bg-orange-300"></div> 25% to < 50%
+        </div>
+        <div class="flex">
+            <div class="border h-6 w-6 mr-2 bg-yellow-300"></div> 50% to < 75%
+        </div>
+        <div class="flex">
+            <div class="border h-6 w-6 mr-2 bg-green-300"></div> above 75%
+        </div>
+    </div>
 </x-renderer.card>
 @endif
 {{-- This is for when clicked "Add a new item", if the column is parent_id and parent_type and might be invisible, --}}

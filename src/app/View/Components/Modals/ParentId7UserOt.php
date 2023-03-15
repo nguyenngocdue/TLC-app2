@@ -84,11 +84,10 @@ class ParentId7UserOt extends Component
             if (!$row->year_remaining_hours) {
                 $row->year_remaining_hours = 200;
             }
-            // $row->bgColor = ColorList::getBgColorForRemainingOTHours($row->month_remaining_hours);
             $row->disabled = $row->month_remaining_hours <= 0;
 
-            $monthColor = ColorList::getBgColorForRemainingOTHours($row->month_remaining_hours);
-            $yearColor = ColorList::getBgColorForRemainingOTHours($row->year_remaining_hours);
+            $monthColor = ColorList::getBgColorForRemainingOTHours($row->month_remaining_hours, 40);
+            $yearColor = ColorList::getBgColorForRemainingOTHours($row->year_remaining_hours, 200);
             $row->subtitle = "";
             $row->subtitle .= "Remaining: ";
             $row->subtitle .=  "<span class='$monthColor mx-1 p-0.5 rounded' title='Remaining OT hours of month $year_month0'>" . $row->month_remaining_hours . "h</span>";
