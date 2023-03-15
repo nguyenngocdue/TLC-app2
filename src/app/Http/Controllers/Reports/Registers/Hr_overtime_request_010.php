@@ -210,7 +210,7 @@ class Hr_overtime_request_010 extends Report_ParentController
         return array_merge($workplaces, $months, $users);
     }
 
-    private function wrapValueInObjectWithCellColor($value, $index)
+    private function wrapValueInObjectWithCellColor($value, $index, $href)
     {
         $levelTime = [
             [40, 30, 20, 10, 0],
@@ -219,23 +219,27 @@ class Hr_overtime_request_010 extends Report_ParentController
         switch (true) {
             case $value > $levelTime[$index][0]:
                 return (object)[
-                    'cell_class' => 'bg-red-400',
+                    'cell_class' => 'bg-red-400 ',
                     'value' => $value,
+                    'cell_href' => $href,
                 ];
             case $value > $levelTime[$index][1]:
                 return (object)[
                     'cell_class' => 'bg-pink-400',
                     'value' => $value,
+                    'cell_href' => $href,
                 ];
             case $value > $levelTime[$index][2]:
                 return (object)[
                     'cell_class' => 'bg-yellow-400',
                     'value' => $value,
+                    'cell_href' => $href,
                 ];
             case $levelTime[$index][3] >= 0:
                 return (object)[
                     'cell_class' => 'bg-green-400',
                     'value' => $value,
+                    'cell_href' => $href,
                 ];
         }
     }
@@ -243,45 +247,39 @@ class Hr_overtime_request_010 extends Report_ParentController
     protected function getColorLegends()
     {
         return [
-            'total_overtime_hours_legend' => [
-                'bg-green-400' => '< 20 hours/month',
-                'bg-yellow-400' => '< 30 hours/month',
-                'bg-pink-400' => '< 40 hours/month',
-                'bg-red-400' => '> 40 hours/month'
-            ],
-            'cumulative_total_hours_legend' => [
-                'bg-green-400' => '< 50 hours/year',
-                'bg-yellow-400' => '< 100 hours/year',
-                'bg-pink-400' => '< 150 hours/year',
-                'bg-red-400' => '> 150 hours/year'
+            'remaining_allowed_OT_hours_legend' => [
+                'bg-green-400' => '0% < 25% hours/month',
+                'bg-yellow-400' => '25% < 50% hours/month',
+                'bg-pink-400' => '50% < 75% hours/month',
+                'bg-red-400' => '75% < 100% hours/month'
             ]
         ];
     }
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
-
+        $hrefForward = "http://localhost:38002/reports/register-hr_overtime_request/020";
         foreach ($dataSource as $key => $value) {
-
             // display name/description for total_overtime_hours
             $teamName = $value->user_category_name;
             $teamDesc = $value->user_category_desc;
             $htmlTeam = "<span title='$teamDesc'>$teamName</span>";
             $htmlEmployeeId = "<span title='User ID: $value->user_id'>$value->employee_id</span>";
+
             $dataSource[$key]->user_category_name = $htmlTeam;
             $dataSource[$key]->employee_id = $htmlEmployeeId;
 
             // display colors for total_overtime_hours
-            $totalOvertimeHour = $value->total_overtime_hours * 1;
-            $cumulativeRemainingHours = $value->cumulative_remaining_hours_year * 1;
+            $remainingAllowedOTHours = $value->remaining_allowed_ot_hours * 1;
+            $remainingAllowedOTHoursYear = $value->remaining_allowed_ot_hours_year * 1;
 
-            $strTotalOvertimeHour = $this->wrapValueInObjectWithCellColor($totalOvertimeHour, 0);
-            $strCumulativeRemainingHours = $this->wrapValueInObjectWithCellColor($cumulativeRemainingHours, 1);
+            $hrefForward = $hrefForward . '?user_id=' . $value->user_id;
+            $reAllowedOTHoursMonth = $this->wrapValueInObjectWithCellColor($remainingAllowedOTHours, 0, $hrefForward);
+            $reAllowedOTHoursYear = $this->wrapValueInObjectWithCellColor($remainingAllowedOTHoursYear, 1, '');
 
-            $dataSource[$key]->total_overtime_hours = $strTotalOvertimeHour;
-            $dataSource[$key]->cumulative_remaining_hours_year = $strCumulativeRemainingHours;
+            $dataSource[$key]->remaining_allowed_ot_hours = $reAllowedOTHoursMonth;
+            $dataSource[$key]->cumulative_remaining_hours_year = $reAllowedOTHoursYear;
         }
-        // dd($dataSource);
         return $dataSource;
     }
 }

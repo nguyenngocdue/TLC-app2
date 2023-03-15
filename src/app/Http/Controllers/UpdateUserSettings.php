@@ -103,16 +103,14 @@ class UpdateUserSettings extends Controller
         $entity = $request->input("_entity");
         $typeReport = strtolower($request->input("type_report"));
         $settingUser = CurrentUser::getSettings();
-        $modeNames = $inputValue['mode_names'];
+        $modeNames = $inputValue['mode_name'];
         $settings = [];
         if (isset($settingUser[$entity][$typeReport])) {
-            foreach ($modeNames as $key => $value) {
-                $paramsReset = $settingUser[$entity][$typeReport][$value];
-                array_walk($paramsReset, function ($value, $key) use (&$paramsReset) {
-                    $paramsReset[$key] = null;
-                });
-                $settings[$entity][$typeReport][$value] = $paramsReset;
-            }
+            $paramsReset = $settingUser[$entity][$typeReport][$modeNames];
+            array_walk($paramsReset, function ($value, $key) use (&$paramsReset) {
+                $paramsReset[$key] = null;
+            });
+            $settings[$entity][$typeReport][$modeNames] = $paramsReset;
         }
         return $settings;
     }
@@ -122,10 +120,15 @@ class UpdateUserSettings extends Controller
     {
         $inputValue = $request->all();
         // dd($inputValue);
-        // if (isset($inputValue['mode_names'])) {
-        //     return $this->resetParamsReport($request);
-        // }
+        if (isset($inputValue['mode_name'])) {
+            return $this->resetParamsReport($request);
+        }
         $modeName = $inputValue['mode_option'];
+        // Check case: select modes
+        $index = array_search($modeName, array_values($inputValue));
+        if (empty(array_slice($inputValue, $index + 1, count($inputValue) - $index))) return $settings;
+
+        // Create date to update params into user_setting
         unset($inputValue['mode_option']);
         $entity = $inputValue["_entity"];
         $typeReport = strtolower($inputValue["type_report"]);
