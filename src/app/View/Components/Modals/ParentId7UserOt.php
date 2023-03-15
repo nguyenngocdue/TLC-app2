@@ -84,7 +84,7 @@ class ParentId7UserOt extends Component
             if (!$row->year_remaining_hours) {
                 $row->year_remaining_hours = 200;
             }
-            $row->disabled = $row->month_remaining_hours <= 0;
+            $row->disabled = ($row->month_remaining_hours <= 0) || ($row->year_remaining_hours <= 0);
 
             $monthColor = ColorList::getBgColorForRemainingOTHours($row->month_remaining_hours, 40);
             $yearColor = ColorList::getBgColorForRemainingOTHours($row->year_remaining_hours, 200);
