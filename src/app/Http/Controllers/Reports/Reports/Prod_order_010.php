@@ -101,6 +101,11 @@ class Prod_order_010 extends Report_ParentController
         ];
     }
 
+    protected function modeOptions()
+    {
+        return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020']];
+    }
+
 
     public function getDataForModeControl($dataSource)
     {

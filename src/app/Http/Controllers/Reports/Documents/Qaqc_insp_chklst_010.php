@@ -111,6 +111,11 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		];
 	}
 
+	protected function modeOptions()
+	{
+		return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020']];
+	}
+
 	public function getDataForModeControl($dataSource = [])
 	{
 		$subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];

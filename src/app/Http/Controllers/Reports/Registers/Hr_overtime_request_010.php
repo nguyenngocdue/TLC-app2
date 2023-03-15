@@ -177,6 +177,12 @@ class Hr_overtime_request_010 extends Report_ParentController
         ];
     }
 
+    protected function modeOptions()
+    {
+        return ['mode_option' => ['010' => 'Overtime Summary ', '020' => 'User Overtime']];
+    }
+
+
 
     private function getAllMonths()
     {
@@ -213,7 +219,7 @@ class Hr_overtime_request_010 extends Report_ParentController
     private function wrapValueInObjectWithCellColor($value, $index, $href)
     {
         $levelTime = [
-            [40, 30, 20, 10, 0],
+            [100, 75, 50, 25, 0],
             [200, 150, 100, 50, 0],
         ];
         switch (true) {
@@ -269,8 +275,8 @@ class Hr_overtime_request_010 extends Report_ParentController
             $dataSource[$key]->employee_id = $htmlEmployeeId;
 
             // display colors for total_overtime_hours
-            $remainingAllowedOTHours = $value->remaining_allowed_ot_hours * 1;
-            $remainingAllowedOTHoursYear = $value->remaining_allowed_ot_hours_year * 1;
+            $remainingAllowedOTHours = ($value->remaining_allowed_ot_hours * 1) / 40 * 100;
+            $remainingAllowedOTHoursYear = $value->remaining_allowed_ot_hours_year * 1 / 200 * 100;
 
             $param = '?user_id=' . $value->user_id . '&' . 'months=' . $value->year_months;
             $hrefForward = "http://localhost:38002/reports/register-hr_overtime_request/020" . $param;
