@@ -502,8 +502,10 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
                 selectedStr +
                 '>'
             if (item['avatar']) option += ' ' + '<img class="w-10 h-10 mr-1 rounded" src="' + item['avatar'] + '" />'
+            option += '<div>'
             option += ' ' + item['name']
             if (item['subtitle']) option += "<br/>" + item['subtitle']
+            option += '</div>'
             option += "</div>"
             option += '</label>'
             option += '</div>'

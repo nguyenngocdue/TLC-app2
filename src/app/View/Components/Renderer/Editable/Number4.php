@@ -31,11 +31,11 @@ class Number4 extends Component
     function getBgColor()
     {
         $fieldName = Str::getFieldNameInTable01Format($this->name, $this->table01Name);
-        if (in_array($fieldName, ['month_remaining_hours', 'allowed_hours_111'])) {
+        if (in_array($fieldName, ['month_remaining_hours', 'year_remaining_hours', 'allowed_hours_111'])) {
             $value = $this->cell;
             // dump($this->cell);
             $bg = ColorList::getBgColorForRemainingOTHours($value);
-            if ($bg) return $bg;
+            return $bg;
         }
         return ($this->readOnly)  ? "readonly" : "";
     }

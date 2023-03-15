@@ -7,6 +7,7 @@ use App\Utils\ColorList;
 use App\Utils\Constant;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class ParentId7UserOt extends Component
@@ -33,22 +34,29 @@ class ParentId7UserOt extends Component
     {
         $fieldId = FieldSeeder::getIdFromFieldName('getOtMembers');
         // dump($fieldId);
+        // $year_month0 = '2023-02';
         $year_month0 = date(Constant::FORMAT_YEAR_MONTH0);
+        $year0 = date(Constant::FORMAT_YEAR);
         $sql = "SELECT 
                     u.id AS id, 
                     u.name AS name, 
                     u.employeeid AS description, 
                     ut.id AS $attr_name,
                     vua.url_thumbnail AS avatar,
-                    vrmn.remaining_hours AS remaining_hours
+                    vmrmn.month_remaining_hours AS month_remaining_hours,
+                    vyrmn.year_remaining_hours AS year_remaining_hours
                 FROM 
                     user_team_ots ut, 
                     view_user_avatar vua,
                     many_to_many m2m, 
                     users u
-                    LEFT JOIN view_otr_remainings vrmn ON (
-                        vrmn.user_id=u.id
-                        AND vrmn.year_month0='$year_month0'
+                    LEFT JOIN view_otr_month_remainings vmrmn ON (
+                        vmrmn.user_id=u.id
+                        AND vmrmn.year_month0='$year_month0'
+                        )
+                    LEFT JOIN view_otr_year_remainings vyrmn ON (
+                        vyrmn.user_id=u.id
+                        AND vyrmn.year0='$year0'
                         )
                 WHERE 1=1
                     AND m2m.field_id=$fieldId
@@ -61,6 +69,7 @@ class ParentId7UserOt extends Component
                     
                 ORDER BY u.name
                 ";
+        // Log::info($sql);
         $result = DB::select($sql);
 
         foreach ($result as &$row) {
@@ -69,13 +78,21 @@ class ParentId7UserOt extends Component
             } else {
                 $row->avatar = "/images/avatar.jpg";
             }
-            if (!$row->remaining_hours) {
-                $row->remaining_hours = 40;
+            if (!$row->month_remaining_hours) {
+                $row->month_remaining_hours = 40;
             }
-            $row->bgColor = ColorList::getBgColorForRemainingOTHours($row->remaining_hours);
-            $row->disabled = $row->remaining_hours <= 0;
+            if (!$row->year_remaining_hours) {
+                $row->year_remaining_hours = 200;
+            }
+            // $row->bgColor = ColorList::getBgColorForRemainingOTHours($row->month_remaining_hours);
+            $row->disabled = $row->month_remaining_hours <= 0;
 
-            $row->subtitle = "Remaining OT: " . $row->remaining_hours . "h";
+            $monthColor = ColorList::getBgColorForRemainingOTHours($row->month_remaining_hours);
+            $yearColor = ColorList::getBgColorForRemainingOTHours($row->year_remaining_hours);
+            $row->subtitle = "";
+            $row->subtitle .= "Remaining: ";
+            $row->subtitle .=  "<span class='$monthColor mx-1 p-0.5 rounded' title='Remaining OT hours of month $year_month0'>" . $row->month_remaining_hours . "h</span>";
+            $row->subtitle .=  "<span class='$yearColor mx-1 p-0.5 rounded' title='Remaining OT hours of year $year0'>" . $row->year_remaining_hours . "h</span>";
         }
         // dump($result);
 

@@ -15,9 +15,9 @@ class ColorList
                 return 'bg-orange-300';
             case $value <= 30:
                 return 'bg-yellow-300';
-            case $value <= 40:
+            case $value > 30:
                 return 'bg-green-300';
         }
-        return false;
+        return 'bg-gray-100';
     }
 }
