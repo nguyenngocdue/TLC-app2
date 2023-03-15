@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\BroadcastEvents;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UpdateDocumentSend implements ShouldBroadcast
+class BroadcastCreateEditEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $user;
@@ -36,12 +36,12 @@ class UpdateDocumentSend implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        $nameChanel = 'create_edit_' . $this->type . '_' . $this->dataSource['id'];
+        $nameChanel = 'edit.' . $this->type . '-' . $this->dataSource['id'];
         return new Channel($nameChanel);
     }
     public function broadcastAs()
     {
-        return 'UpdateDocumentEvent_' . $this->type . '_' . $this->dataSource['id'];
+        return 'BroadcastUpdateEvent.' . $this->type . '-' . $this->dataSource['id'];
     }
     public function broadcastWith()
     {

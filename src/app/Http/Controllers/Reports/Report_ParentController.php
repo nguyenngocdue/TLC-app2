@@ -117,7 +117,7 @@ abstract class Report_ParentController extends Controller
         return 10;
     }
 
-    protected function setDefaultValueModeParams($modeParams)
+    protected function setDefaultValueModeParams($modeParams, $request)
     {
         return $modeParams;
     }
@@ -143,8 +143,11 @@ abstract class Report_ParentController extends Controller
 
     public function index(Request $request)
     {
-        dump($request->input());
+
+
+        // dump(Log::info($request->input()));
         if ($request->input('mode_option')) {
+            // dd($request->input());
             $mode = $request->all()['mode_option'];
             $routeName = explode('/', $request->getPathInfo())[2];
             (new UpdateUserSettings())($request);
@@ -156,6 +159,8 @@ abstract class Report_ParentController extends Controller
             return redirect($request->getPathInfo());
         }
 
+
+
         $typeReport = CurrentRoute::getTypeController();
         $routeName = $request->route()->action['as'];
         $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
@@ -164,10 +169,10 @@ abstract class Report_ParentController extends Controller
         $currentMode = $this->mode;
 
 
-        // dump($request->all(), $currentMode);
+        // dump($request->input(), $currentMode);
 
         $modeParams = $this->getModeParams($typeReport, $entity, $currentMode);
-        $modeParams = $this->setDefaultValueModeParams($modeParams);
+        $modeParams = $this->setDefaultValueModeParams($modeParams, $request);
         // dump($modeParams);
 
         $dataSource = $this->getDataSource($modeParams);
@@ -184,7 +189,7 @@ abstract class Report_ParentController extends Controller
         $viewName = strtolower(Str::singular($typeReport));
 
 
-        // dd($viewName);
+        // dd($currentMode);
 
 
         return view('reports.' . $viewName, [
@@ -206,7 +211,6 @@ abstract class Report_ParentController extends Controller
             'modeOptions' => $this->modeOptions(),
             'modeColumns' => $this->modeColumns(),
             'currentMode' => $currentMode,
-            'currentMode' => $currentMode
         ]);
     }
 }

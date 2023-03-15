@@ -1,5 +1,5 @@
 {
-  "authHost": "nginx",
+  "authHost": "http://localhost:38002",
   "authEndpoint": "/broadcasting/auth",
   "clients": [],
   "database": "redis",
@@ -27,9 +27,9 @@
     "redis": true
   },
   "apiOriginAllow": {
-    "allowCors": true,
-    "allowOrigin": "*.*",
-    "allowMethods": "GET, POST",
-    "allowHeaders": "Origin, Content-Type, X-Auth-Token, X-Requested-With, Accept, Authorization, X-CSRF-TOKEN, X-Socket-Id"
+    "allowCors": false,
+    "allowOrigin": "",
+    "allowMethods": "",
+    "allowHeaders": ""
   }
 }

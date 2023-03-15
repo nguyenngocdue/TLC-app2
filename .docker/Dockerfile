@@ -33,15 +33,15 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 COPY ./supervisord.conf /etc/supervisord.conf
 COPY ./supervisor.d /etc/supervisor.d
 
-# RUN addgroup -g 1000 ndcgp
-# RUN adduser -D -u 1000 ndc -G ndcgp
+RUN addgroup -g 1000 ndcgp
+RUN adduser -D -u 1000 ndc -G ndcgp
 # run this line manually by root accout
-# RUN chown -R ndc:ndcgp /var/www/app
-# USER ndc
+RUN chown -R ndc:ndcgp /var/www/app
+USER ndc
 
-RUN usermod -u 1000 www-data
+# RUN usermod -u 1000 www-data
 
-RUN chown -R www-data:www-data .
+# RUN chown -R www-data:www-data .
 
 # ENV ENABLE_CRONTAB 1
 # ENV ENABLE_HORIZON 1
