@@ -248,10 +248,10 @@ class Hr_overtime_request_010 extends Report_ParentController
     {
         return [
             'remaining_allowed_OT_hours_legend' => [
-                'bg-green-400' => '0% < 25% hours/month',
-                'bg-yellow-400' => '25% < 50% hours/month',
-                'bg-pink-400' => '50% < 75% hours/month',
-                'bg-red-400' => '75% < 100% hours/month'
+                'bg-green-400' => '0% < 25% hours',
+                'bg-yellow-400' => '25% < 50% hours',
+                'bg-pink-400' => '50% < 75% hours',
+                'bg-red-400' => '75% < 100% hours'
             ]
         ];
     }
