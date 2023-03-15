@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('date');
             $table->time('start');
             $table->time('end')->nullable();
+            $table->double('worker_number')->nullable();
             $table->unsignedBigInteger('owner_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;

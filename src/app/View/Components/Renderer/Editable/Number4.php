@@ -31,11 +31,12 @@ class Number4 extends Component
     function getBgColor()
     {
         $fieldName = Str::getFieldNameInTable01Format($this->name, $this->table01Name);
-        if (in_array($fieldName, ['remaining_hours', 'allowed_hours_111'])) {
-            $value = $this->cell;
-            // dump($this->cell);
-            $bg = ColorList::getBgColorForRemainingOTHours($value);
-            if ($bg) return $bg;
+        $value = $this->cell;
+        if (in_array($fieldName, ['month_remaining_hours'])) {
+            return ColorList::getBgColorForRemainingOTHours($value, 40);
+        }
+        if (in_array($fieldName, ['year_remaining_hours'])) {
+            return ColorList::getBgColorForRemainingOTHours($value, 200);
         }
         return ($this->readOnly)  ? "readonly" : "";
     }
@@ -48,6 +49,7 @@ class Number4 extends Component
     public function render()
     {
         if ($this->cell === 'DO_NOT_RENDER') return "";
+        if (str_starts_with($this->cell, 'No dataIndex for ')) $this->cell = 0;
         // dump($this->onChange);
         $onChange = $this->onChange ?? "onChangeDropdown4({name:'{$this->name}',table01Name:'{$this->table01Name}',rowIndex:{$this->rowIndex},saveOnChange:" . ($this->saveOnChange ? 1 : 0) . "})";
         $bgColor = $this->getBgColor();

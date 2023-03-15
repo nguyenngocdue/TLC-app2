@@ -25,8 +25,10 @@ return new class extends Migration
             $table->time("to_time")->nullable();
             $table->double("break_time")->nullable();
             $table->float("total_time")->nullable();
-            $table->float("allowed_hours")->nullable();
-            $table->float("remaining_hours")->nullable();
+            $table->float("month_allowed_hours")->nullable();
+            $table->float("month_remaining_hours")->nullable();
+            $table->float("year_allowed_hours")->nullable();
+            $table->float("year_remaining_hours")->nullable();
             $table->unsignedBigInteger("sub_project_id")->nullable();
             $table->unsignedBigInteger("work_mode_id")->nullable();
             $table->text("remark")->nullable();

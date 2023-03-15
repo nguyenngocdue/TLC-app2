@@ -321,8 +321,8 @@ const onChangeDropdown2Expression = (listener) => {
 const onChangeDropdown2AjaxRequestScalar = (listener) => {
     // const debugListener = true
     if (debugListener) console.log('AjaxRequestScalar', listener)
-    const { triggers, expression: url, column_name } = listener
-    const { ajax_response_attribute, ajax_item_attribute, ajax_default_value } =
+    const { triggers, expression: url } = listener
+    const { ajax_response_attribute, ajax_form_attributes, ajax_item_attributes, ajax_default_values } =
         listener
 
     let enoughParams = true
@@ -344,39 +344,23 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
             data,
             success: (response) => {
                 let value = -1
-                if (response[ajax_response_attribute][0] === undefined) {
-                    value = ajax_default_value
-                    if (debugListener)
-                        console.log(
-                            'Response empty',
-                            ajax_response_attribute,
-                            ', assigning default value',
-                            ajax_default_value
-                        )
-                } else if (
-                    response[ajax_response_attribute][0][
-                    ajax_item_attribute
-                    ] === undefined
-                ) {
-                    value = ajax_default_value
-                    if (debugListener)
-                        console.log(
-                            'Requested column',
-                            ajax_item_attribute,
-                            'not found, assigning default value',
-                            ajax_default_value
-                        )
-                } else {
-                    value =
-                        response[ajax_response_attribute][0][
-                        ajax_item_attribute
-                        ]
-                }
-                if (debugListener)
-                    console.log('Assigning', column_name, 'with value', value)
                 if (debugListener) console.log('Response', response)
-                getEById(column_name).val(value)
-                getEById(column_name).trigger('change')
+                const hits_0 = response[ajax_response_attribute][0]
+                for (let i = 0; i < ajax_form_attributes.length; i++) {
+                    if (hits_0 === undefined) {
+                        value = ajax_default_values[i]
+                        if (debugListener) console.log('Response empty', ajax_response_attribute, '- assigning default value', ajax_default_values[i])
+                    } else if (hits_0[ajax_item_attributes[i]] === undefined) {
+                        value = ajax_default_values[i]
+                        if (debugListener) console.log('Requested column', ajax_item_attributes[i], 'not found, assigning default value', ajax_default_values[i])
+                    } else {
+                        value = hits_0[ajax_item_attributes[i]]
+                    }
+                    const toBeAssigned = ajax_form_attributes[i]
+                    if (debugListener) console.log('Assigning', toBeAssigned, 'with value', value)
+                    getEById(toBeAssigned).val(value)
+                    getEById(toBeAssigned).trigger('change')
+                }
             },
             error: (response) => console.error(response),
         })
@@ -416,13 +400,11 @@ const onChangeDropdown2 = (name) => {
                 case 'ajax_request_scalar':
                     onChangeDropdown2AjaxRequestScalar(listener)
                     break
+                case 'trigger_change_some_lines':
+                    //Do nothing, this is an action of table
+                    break
                 default:
-                    console.error(
-                        'Unknown listen_action',
-                        listen_action,
-                        'of',
-                        name
-                    )
+                    console.error('Unknown listen_action', listen_action, 'of', name)
                     break
             }
         }
@@ -520,8 +502,10 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
                 selectedStr +
                 '>'
             if (item['avatar']) option += ' ' + '<img class="w-10 h-10 mr-1 rounded" src="' + item['avatar'] + '" />'
+            option += '<div>'
             option += ' ' + item['name']
             if (item['subtitle']) option += "<br/>" + item['subtitle']
+            option += '</div>'
             option += "</div>"
             option += '</label>'
             option += '</div>'

@@ -42,6 +42,25 @@ trait TraitEntityDynamicType
         // dd();
     }
 
+    private function assignDynamicTypeCreateEditForApi()
+    {
+        $routeName = Request::route() ? Request::route()->getName() : "attachment.index";
+        $tableName = substr($routeName, 0, strpos($routeName, "."));
+        $singular = Str::singular($tableName);
+
+        $this->type = $singular;
+        $this->modelPath = Str::modelPathFrom($tableName);
+        // $this->permissionMiddleware = [
+        //     'read' => "read-$tableName",
+        //     'edit' => "read-$tableName|create-$tableName|edit-$tableName|edit-others-$tableName",
+        //     'delete' => "read-$tableName|create-$tableName|edit-$tableName|edit-others-$tableName|delete-$tableName|delete-others-$tableName"
+        // ];
+
+        // dump($this->type);
+        // dump($this->typeModel);
+        // dd();
+    }
+
     private function assignDynamicTypeManageJson()
     {
         $routeName = Request::route() ? Request::route()->getName() : "attachment_prp";
@@ -50,5 +69,23 @@ trait TraitEntityDynamicType
 
         $this->type = $singular;
         $this->typeModel = Str::modelPathFrom($tableName);
+    }
+
+    private function assignDynamicTypeManual($tableName)
+    {
+        $tableName = Str::plural($tableName);
+        $singular = Str::singular($tableName);
+
+        $this->type = $singular;
+        $this->data = Str::modelPathFrom($tableName);
+        $this->permissionMiddleware = [
+            'read' => "read-$tableName",
+            'edit' => "read-$tableName|create-$tableName|edit-$tableName|edit-others-$tableName",
+            'delete' => "read-$tableName|create-$tableName|edit-$tableName|edit-others-$tableName|delete-$tableName|delete-others-$tableName"
+        ];
+
+        // dump($this->type);
+        // dump($this->typeModel);
+        // dd();
     }
 }

@@ -10,7 +10,8 @@ class Hr_overtime_request_line extends ModelExtended
         "id", "hr_overtime_request_id", "user_id", "employeeid", "position_rendered",
         "ot_date", "from_time", "to_time", "break_time", "order_no", "owner_id",
         "total_time", "sub_project_id", "work_mode_id", "remark", "status",
-        "remaining_hours", "allowed_hours",
+        "month_remaining_hours", "month_allowed_hours",
+        "year_remaining_hours", "year_allowed_hours",
     ];
     protected $table = "hr_overtime_request_lines";
     public $nameless = true;
@@ -63,12 +64,14 @@ class Hr_overtime_request_line extends ModelExtended
             ['dataIndex' => 'employeeid'],
             ['dataIndex' => 'position_rendered', 'title' => 'Position'],
             ['dataIndex' => 'ot_date', 'cloneable' => true],
-            ['dataIndex' => 'allowed_hours', 'cloneable' => !true, 'invisible' => !true],
+            ['dataIndex' => 'month_allowed_hours', 'cloneable' => !true, 'invisible' => !true],
+            ['dataIndex' => 'year_allowed_hours', 'cloneable' => !true, 'invisible' => !true],
             ['dataIndex' => 'from_time', 'cloneable' => true],
             ['dataIndex' => 'to_time', 'cloneable' => true],
             ['dataIndex' => 'break_time', 'cloneable' => true],
             ['dataIndex' => 'total_time'],
-            ['dataIndex' => 'remaining_hours', 'cloneable' => !true],
+            ['dataIndex' => 'month_remaining_hours', 'cloneable' => !true],
+            ['dataIndex' => 'year_remaining_hours', 'cloneable' => !true],
             ['dataIndex' => 'sub_project_id', 'cloneable' => true],
             ['dataIndex' => 'work_mode_id', 'cloneable' => true, 'no_print' => true],
             ['dataIndex' => 'remark'],

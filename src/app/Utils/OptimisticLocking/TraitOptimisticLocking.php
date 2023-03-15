@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 trait TraitOptimisticLocking
 {
-    protected static $lock = true;
+    protected static $lock = !true;
 
     protected static $lockDefaultColumn = false;
 
@@ -18,6 +18,10 @@ trait TraitOptimisticLocking
     public function updateWithOptimisticLocking($attributes)
     {
         $this->fill($attributes);
+        if (!static::$lock) {
+            $this->save();
+            return true;
+        }
         if ($this->fireModelEvent('updating') === false) {
             return false;
         }
