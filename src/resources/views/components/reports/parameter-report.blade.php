@@ -4,7 +4,7 @@ $route = $routeName ? route($routeName) : "";
 @endphp
 
 {{-- @dd($routeName) --}}
-<div class="w-full no-print    rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
+<div class="">
     <div class="flex justify-end ">
         <x-reports.reset-param-report typeReport="{{$typeReport}}" entity="{{$entity}}" route="{{ route('updateUserSettings') }}" modeName='{{$modeOption}}' />
     </div>

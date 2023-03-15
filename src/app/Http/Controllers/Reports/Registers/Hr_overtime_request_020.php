@@ -36,7 +36,8 @@ class Hr_overtime_request_020 extends Report_ParentController
         if (isset($modeParams['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
         if (isset($modeParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
         $sql .= "\n AND otline.sub_project_id = sp.id
-                    AND us.id = otline.user_id";
+                    AND us.id = otline.user_id
+                    ORDER BY first_name, last_name, employee_id, year_months DESC";
         return $sql;
     }
 
@@ -140,7 +141,7 @@ class Hr_overtime_request_020 extends Report_ParentController
     }
 
 
-    
+
     protected function setDefaultValueModeParams($modeParams, $request)
     {
         // dd($request);

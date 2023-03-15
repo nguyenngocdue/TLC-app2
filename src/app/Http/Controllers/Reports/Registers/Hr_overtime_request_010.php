@@ -247,17 +247,11 @@ class Hr_overtime_request_010 extends Report_ParentController
     protected function getColorLegends()
     {
         return [
-            'total_overtime_hours_legend' => [
-                'bg-green-400' => '< 20 hours/month',
-                'bg-yellow-400' => '< 30 hours/month',
-                'bg-pink-400' => '< 40 hours/month',
-                'bg-red-400' => '> 40 hours/month'
-            ],
-            'cumulative_total_hours_legend' => [
-                'bg-green-400' => '< 50 hours/year',
-                'bg-yellow-400' => '< 100 hours/year',
-                'bg-pink-400' => '< 150 hours/year',
-                'bg-red-400' => '> 150 hours/year'
+            'remaining_allowed_OT_hours_legend' => [
+                'bg-green-400' => '0% < 25% hours/month',
+                'bg-yellow-400' => '25% < 50% hours/month',
+                'bg-pink-400' => '50% < 75% hours/month',
+                'bg-red-400' => '75% < 100% hours/month'
             ]
         ];
     }
@@ -276,18 +270,16 @@ class Hr_overtime_request_010 extends Report_ParentController
             $dataSource[$key]->employee_id = $htmlEmployeeId;
 
             // display colors for total_overtime_hours
-            $totalOvertimeHour = $value->total_overtime_hours * 1;
-            $cumulativeRemainingHours = $value->cumulative_remaining_hours_year * 1;
-            // dd($value);
-            $hrefForward = $hrefForward . '?user_id=' . $value->user_id;
-            $strTotalOvertimeHour = $this->wrapValueInObjectWithCellColor($totalOvertimeHour, 0, $hrefForward);
-            $strCumulativeRemainingHours = $this->wrapValueInObjectWithCellColor($cumulativeRemainingHours, 1, '');
+            $remainingAllowedOTHours = $value->remaining_allowed_ot_hours * 1;
+            $remainingAllowedOTHoursYear = $value->remaining_allowed_ot_hours_year * 1;
 
-            $dataSource[$key]->total_overtime_hours = $strTotalOvertimeHour;
-            // dd($dataSource, $strTotalOvertimeHour);
-            $dataSource[$key]->cumulative_remaining_hours_year = $strCumulativeRemainingHours;
+            $hrefForward = $hrefForward . '?user_id=' . $value->user_id;
+            $reAllowedOTHoursMonth = $this->wrapValueInObjectWithCellColor($remainingAllowedOTHours, 0, $hrefForward);
+            $reAllowedOTHoursYear = $this->wrapValueInObjectWithCellColor($remainingAllowedOTHoursYear, 1, '');
+
+            $dataSource[$key]->remaining_allowed_ot_hours = $reAllowedOTHoursMonth;
+            $dataSource[$key]->cumulative_remaining_hours_year = $reAllowedOTHoursYear;
         }
-        // dd($dataSource);
         return $dataSource;
     }
 }
