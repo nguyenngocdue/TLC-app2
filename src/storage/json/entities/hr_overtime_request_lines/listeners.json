@@ -9,8 +9,8 @@
         "attrs_to_compare": "",
         "expression": "\/api\/v1\/hr\/overtime_request_line2",
         "ajax_response_attribute": "hits",
-        "ajax_form_attributes": "year_allowed_hours,month_allowed_hours",
-        "ajax_item_attributes": "year_remaining_hours,month_remaining_hours",
+        "ajax_form_attributes": "year_allowed_hours, month_allowed_hours",
+        "ajax_item_attributes": "year_remaining_hours, month_remaining_hours",
         "ajax_default_values": "200,40"
     },
     "_employeeid": {
