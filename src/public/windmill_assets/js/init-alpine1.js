@@ -42,6 +42,13 @@ function data() {
         closeProfileMenu() {
             this.isProfileMenuOpen = false
         },
+        isBroadcastNotificationOpen: false,
+        toggleBroadcastNotification() {
+            this.isBroadcastNotificationOpen = !this.isBroadcastNotificationOpen
+        },
+        closeBroadcastNotification() {
+            this.isBroadcastNotificationOpen = false
+        },
         isSearchMenuOpen: false,
         toggleSearchMenu() {
             this.isSearchMenuOpen = !this.isSearchMenuOpen
@@ -49,7 +56,7 @@ function data() {
         closeSearchMenu() {
             this.isSearchMenuOpen = false
             //Using remove event listener file search-modal.blade.php
-            searchInput.removeEventListener('input', () => { })
+            searchInput.removeEventListener('input', () => {})
         },
         isSettingMenuOpen: false,
         toggleSettingMenu() {
@@ -128,6 +135,6 @@ function data() {
         loadListToTable(fn, listId, modalId) {
             fn(listId, modalId)
             this.closeListingTable(modalId)
-        }
+        },
     }
 }

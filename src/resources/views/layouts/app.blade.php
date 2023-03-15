@@ -20,6 +20,7 @@
     <meta charset="UTF-8">
     <meta name="The master layout G4T">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('topTitle', 'Untitled') - @yield('title', 'Untitled') - {{ config('app.name') }}</title>
     
     <link rel="stylesheet" href="{{ asset('vendor/font-awesome-pro-6/css/all.min.css') }}">
@@ -96,8 +97,6 @@
                 <div class="mt-16 mb-8 no-print">
                 </div>
             @endguest
-            <h1>Laravel Broadcast Redis Socket io Tutorial - ItSolutionStuff.com</h1>
-            <div id="notification"></div>
             <div id="print-pdf-document"  class="w-full min-h-screen MUST-NOT-HAVE-X-PADDING-MARGIN-FOR-PRINT-PAGE">
                 @yield('content')
             </div>

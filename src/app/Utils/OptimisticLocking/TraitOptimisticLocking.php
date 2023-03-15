@@ -2,7 +2,7 @@
 
 namespace App\Utils\OptimisticLocking;
 
-use App\Events\UpdateDocumentSend;
+use App\Events\BroadcastEvents\BroadcastCreateEditEvent;
 use App\Utils\Constant;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -31,7 +31,7 @@ trait TraitOptimisticLocking
                     $this->setAttribute($versionColumn, $newVersion = $beforeUpdateVersion + 1);
                     $dirty[$versionColumn] = $newVersion;
                     $this->update($dirty);
-                    broadcast(new UpdateDocumentSend(auth()->user(), $attributes, $this->getTable()));
+                    broadcast(new BroadcastCreateEditEvent(auth()->user(), $attributes, $this->getTable()));
                 } else {
                     $this->setAttribute($versionColumn, $beforeUpdateVersion);
                     throw new OptimisticLockingException('Model has been changed during update.');
