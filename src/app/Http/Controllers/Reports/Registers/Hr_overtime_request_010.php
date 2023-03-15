@@ -210,7 +210,7 @@ class Hr_overtime_request_010 extends Report_ParentController
         return array_merge($workplaces, $months, $users);
     }
 
-    private function wrapValueInObjectWithCellColor($value, $index)
+    private function wrapValueInObjectWithCellColor($value, $index, $href)
     {
         $levelTime = [
             [40, 30, 20, 10, 0],
@@ -219,23 +219,27 @@ class Hr_overtime_request_010 extends Report_ParentController
         switch (true) {
             case $value > $levelTime[$index][0]:
                 return (object)[
-                    'cell_class' => 'bg-red-400',
+                    'cell_class' => 'bg-red-400 ',
                     'value' => $value,
+                    'cell_href' => $href,
                 ];
             case $value > $levelTime[$index][1]:
                 return (object)[
                     'cell_class' => 'bg-pink-400',
                     'value' => $value,
+                    'cell_href' => $href,
                 ];
             case $value > $levelTime[$index][2]:
                 return (object)[
                     'cell_class' => 'bg-yellow-400',
                     'value' => $value,
+                    'cell_href' => $href,
                 ];
             case $levelTime[$index][3] >= 0:
                 return (object)[
                     'cell_class' => 'bg-green-400',
                     'value' => $value,
+                    'cell_href' => $href,
                 ];
         }
     }
@@ -260,25 +264,27 @@ class Hr_overtime_request_010 extends Report_ParentController
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
-
+        $hrefForward = "http://localhost:38002/reports/register-hr_overtime_request/020";
         foreach ($dataSource as $key => $value) {
-
             // display name/description for total_overtime_hours
             $teamName = $value->user_category_name;
             $teamDesc = $value->user_category_desc;
             $htmlTeam = "<span title='$teamDesc'>$teamName</span>";
             $htmlEmployeeId = "<span title='User ID: $value->user_id'>$value->employee_id</span>";
+
             $dataSource[$key]->user_category_name = $htmlTeam;
             $dataSource[$key]->employee_id = $htmlEmployeeId;
 
             // display colors for total_overtime_hours
             $totalOvertimeHour = $value->total_overtime_hours * 1;
             $cumulativeRemainingHours = $value->cumulative_remaining_hours_year * 1;
-
-            $strTotalOvertimeHour = $this->wrapValueInObjectWithCellColor($totalOvertimeHour, 0);
-            $strCumulativeRemainingHours = $this->wrapValueInObjectWithCellColor($cumulativeRemainingHours, 1);
+            // dd($value);
+            $hrefForward = $hrefForward . '?user_id=' . $value->user_id;
+            $strTotalOvertimeHour = $this->wrapValueInObjectWithCellColor($totalOvertimeHour, 0, $hrefForward);
+            $strCumulativeRemainingHours = $this->wrapValueInObjectWithCellColor($cumulativeRemainingHours, 1, '');
 
             $dataSource[$key]->total_overtime_hours = $strTotalOvertimeHour;
+            // dd($dataSource, $strTotalOvertimeHour);
             $dataSource[$key]->cumulative_remaining_hours_year = $strCumulativeRemainingHours;
         }
         // dd($dataSource);
