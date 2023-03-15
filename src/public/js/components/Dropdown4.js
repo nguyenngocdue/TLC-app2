@@ -383,9 +383,10 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
     // console.log("reloadDataToDropdown4", id, dataSource, table01Name, selected)
     // console.log(table01Name, id, selected)
     if (dataSource === undefined) return;
-    getEById(id).empty()
+    const theDropdown = getEById(id)
+    theDropdown.empty()
 
-    let options = []
+    let options = ["<option value=''></option>"]
     // console.log("Loading dataSource for", id, selected, dataSource)
     dataSource = filterDropdown4(id, dataSource, table01Name)
 
@@ -399,16 +400,14 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
         option += "</option>"
         options.push(option)
     }
-    options.unshift("<option value=''></option>")
-    getEById(id).append(options)
+    theDropdown.append(options)
     // console.log("Appended", id, 'with options has', options.length, 'items')
-
-    getEById(id).select2({
+    theDropdown.select2({
         placeholder: "Please select"
         // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
         , templateResult: select2FormatState
     });
-    // getEById(id).trigger("change")
+    // theDropdown.trigger("change")
 }
 
 const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table }) => {
