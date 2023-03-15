@@ -47,7 +47,7 @@
             <div class="border h-6 w-6 mr-2 bg-yellow-300"></div> 50% to < 75%
         </div>
         <div class="flex">
-            <div class="border h-6 w-6 mr-2 bg-green-300"></div> above 75%
+            <div class="border h-6 w-6 mr-2 bg-green-300"></div> >= 75%
         </div>
     </div>
 </x-renderer.card>
