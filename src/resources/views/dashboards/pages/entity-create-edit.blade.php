@@ -76,17 +76,29 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
         <div class="flex justify-end dark:bg-gray-800 px-5">
             <div class="my-5">
                 @if($buttonSave)
-                <button type="submit" class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg">
-                    <i class="fa-solid fa-floppy-disk mr-2"></i>Save</button>
+                    @switch($action)
+                        @case('edit')
+                        <button type="submit" class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i>Save</button>
+                            @break
+                        @case('create')
+                        <button type="submit" class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i>Create</button>
+                            @break
+                        @default
+                            
+                    @endswitch
                 @endif
-                @foreach($actionButtons as $key => $button)
-                @php
-                $isCheck = !isset($propsIntermediate[$key]) || empty($propsIntermediate[$key]);
-                @endphp
-                <button {{$isCheck ? 'type=submit '. '@click=changeStatus("'.$key .'")' : 'type=button '. '@click=toggleIntermediate("'.$key .'")' }} class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg">
-                    Next <i class="fa-regular fa-arrow-right"></i> (to {{$button['label']}})
-                </button>
-                @endforeach
+                @if($action !== 'create')
+                    @foreach($actionButtons as $key => $button)
+                    @php
+                    $isCheck = !isset($propsIntermediate[$key]) || empty($propsIntermediate[$key]);
+                    @endphp
+                    <button {{$isCheck ? 'type=submit '. '@click=changeStatus("'.$key .'")' : 'type=button '. '@click=toggleIntermediate("'.$key .'")' }} class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg">
+                        Next <i class="fa-regular fa-arrow-right"></i> (to {{$button['label']}})
+                    </button>
+                    @endforeach
+                @endif
             </div>
         </div>
     </form>
