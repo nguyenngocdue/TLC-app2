@@ -97,15 +97,14 @@ class UpdateUserSettings extends Controller
         return $arrayFlip;
     }
 
-    private function resetParamsReport($request)
+    private function resetParamsReport($request, $settings)
     {
         $inputValue = $request->all();
         $entity = $request->input("_entity");
         $typeReport = strtolower($request->input("type_report"));
         $settingUser = CurrentUser::getSettings();
         $modeNames = $inputValue['mode_name'];
-        $settings = [];
-        if (isset($settingUser[$entity][$typeReport])) {
+        if (isset($settingUser[$entity][$typeReport][$modeNames])) {
             $paramsReset = $settingUser[$entity][$typeReport][$modeNames];
             array_walk($paramsReset, function ($value, $key) use (&$paramsReset) {
                 $paramsReset[$key] = null;
@@ -119,12 +118,12 @@ class UpdateUserSettings extends Controller
     private function updateReport($request, $settings)
     {
         $inputValue = $request->all();
-        // dd($inputValue);
         if (isset($inputValue['mode_name'])) {
-            return $this->resetParamsReport($request);
+            // dd($inputValue);
+            return $this->resetParamsReport($request, $settings);
         }
         $modeName = $inputValue['mode_option'];
-        // Check case: select modes
+        // Check case: select mode alternatively 
         $index = array_search($modeName, array_values($inputValue));
         if (empty(array_slice($inputValue, $index + 1, count($inputValue) - $index))) return $settings;
 

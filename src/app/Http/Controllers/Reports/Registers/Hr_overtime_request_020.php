@@ -109,6 +109,13 @@ class Hr_overtime_request_020 extends Report_ParentController
         ];
     }
 
+    protected function modeOptions()
+    {
+        return ['mode_option' => ['010' => 'Overtime Summary ', '020' => 'User Overtime']];
+    }
+
+
+
     private function getAllMonths()
     {
         $sql = "SELECT DISTINCT(SUBSTR(otline.ot_date, 1, 7)) AS year_months

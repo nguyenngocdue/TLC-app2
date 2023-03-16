@@ -95,9 +95,6 @@ abstract class Report_ParentController extends Controller
     {
         $typeReport = strtolower($typeReport);
         $settings = CurrentUser::getSettings();
-        // dd($settings);
-        // dump($currentMode);
-        // if (!isset($settings[$entity])) return [];
         if (isset($settings[$entity][$typeReport][$currentMode])) {
             $modeParams = $settings[$entity][$typeReport][$currentMode];
             return $modeParams;
@@ -127,11 +124,6 @@ abstract class Report_ParentController extends Controller
         return [];
     }
 
-    protected function modeOptions()
-    {
-        return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020']];
-    }
-
     protected function modeColumns()
     {
         return [[
@@ -139,6 +131,7 @@ abstract class Report_ParentController extends Controller
             'allowClear' => true,
         ]];
     }
+
 
 
     public function index(Request $request)
@@ -180,8 +173,6 @@ abstract class Report_ParentController extends Controller
             return redirect($request->getPathInfo());
         }
         // dump(123);
-
-
 
 
 
