@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class Hr_overtime_request_020 extends Report_ParentController
 {
     use TraitReport;
-    protected $groupBy = 'year_months';
+    protected $groupBy = 'ot_date';
     protected $mode = '020';
 
 
@@ -18,6 +18,7 @@ class Hr_overtime_request_020 extends Report_ParentController
     {
         $sql = "SELECT
         sp.name sub_project_name
+        ,otr.id hr_overtime_request_id
         ,otline.sub_project_id sub_project_id
         ,otline.id request_id,
         otline.user_id user_id,
@@ -25,73 +26,56 @@ class Hr_overtime_request_020 extends Report_ParentController
         us.last_name last_name,
         otline.employeeid employee_id
         ,otline.ot_date ot_date
-        ,SUBSTR(otline.ot_date,1,7) AS year_months
+        ,otline.ot_date AS ot_date
         ,otline.from_time from_time
         ,otline.break_time break_time
         ,otline.to_time to_time
-        ,otline.remaining_hours remaining_hours
-        FROM hr_overtime_request_lines otline, sub_projects sp, users us
+        ,otline.month_allowed_hours month_allowed_hours
+        ,otline.month_remaining_hours month_remaining_hours
+        ,otline.year_allowed_hours year_allowed_hours
+        ,otline.year_remaining_hours year_remaining_hours
+        FROM hr_overtime_request_lines otline, sub_projects sp, users us, hr_overtime_requests otr
         WHERE 1 = 1";
 
         if (isset($modeParams['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
         if (isset($modeParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
         $sql .= "\n AND otline.sub_project_id = sp.id
                     AND us.id = otline.user_id
-                    ORDER BY first_name, last_name, employee_id, year_months DESC";
+                    AND otr.id = otline.hr_overtime_request_id
+                    ORDER BY first_name, last_name, employee_id, ot_date DESC";
         return $sql;
     }
 
 
     public function getTableColumns($dataSource)
     {
-
-        return   [
+        $personDataCol = [
             [
                 "dataIndex" => "sub_project_name",
                 "align" => "center"
             ],
             [
+                "title" => "HR Overtime Request",
+                "dataIndex" => "hr_overtime_request_id",
+                "align" => "center",
+                "renderer" => "id",
+                "type" => "hr_overtime_requests",
+            ],
+            [
                 "dataIndex" => "request_id",
-                "align" => "center"
-            ],
-            [
-                "dataIndex" => "first_name",
-                "align" => "center"
-            ],
-            [
-                "dataIndex" => "last_name",
-                "align" => "center"
-            ],
-            [
-                "dataIndex" => "employee_id",
-                "align" => "center"
-            ],
-            [
-                "dataIndex" => "year_months",
-                "align" => "center"
-            ],
-            [
-                "dataIndex" => "from_time",
-                "align" => "center"
-            ],
-            [
-                "dataIndex" => "break_time",
-                "align" => "center"
-            ],
-            [
-                "dataIndex" => "to_time",
-                "align" => "center"
-            ],
-            [
-                "dataIndex" => "total_time",
-                "align" => "center"
-            ],
-            [
-                "dataIndex" => "remaining_hours",
-                "align" => "center"
-            ],
-
+                "align" => "center",
+                "renderer" => "id",
+                "type" => "hr_overtime_request_lines",
+            ]
         ];
+        $editFields = [[
+            "title" => "Date",
+            "dataIndex" => "ot_date",
+            "align" => "center"
+        ]];
+        $sqlDataCol = $this->createTableColumns($dataSource, 'first_name', 'year_remaining_hours', $editFields);
+        $totalDataCol = array_merge($personDataCol, $sqlDataCol);
+        return  $totalDataCol;
     }
 
     protected function getParamColumns()
