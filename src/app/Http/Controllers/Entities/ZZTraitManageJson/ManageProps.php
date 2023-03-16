@@ -144,7 +144,6 @@ class ManageProps extends Manage_Parent
     {
         $columnNames = DBTable::getColumnNames(Str::plural($this->type));
         $columnTypes = DBTable::getColumnTypes(Str::plural($this->type));
-
         $result = [];
         foreach ($columnNames as $key => $value) {
             $result["_$value"] = [

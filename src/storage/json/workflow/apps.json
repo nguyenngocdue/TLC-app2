@@ -153,6 +153,17 @@
         "status": null,
         "icon": null
     },
+    "me": {
+        "name": "me",
+        "hidden": null,
+        "package": "system",
+        "sub_package": "user",
+        "title": "Me",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "icon": null
+    },
     "permissions": {
         "name": "permissions",
         "hidden": "true",

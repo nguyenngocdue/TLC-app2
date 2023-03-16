@@ -81,6 +81,7 @@ class Hr_overtime_request_010 extends Report_ParentController
     }
 
 
+    // Table
     public function getTableColumns($dataSource)
     {
         // dump($dataSource);
@@ -156,7 +157,6 @@ class Hr_overtime_request_010 extends Report_ParentController
             ],
         ];
     }
-
     protected function getParamColumns()
     {
         return [
@@ -177,11 +177,19 @@ class Hr_overtime_request_010 extends Report_ParentController
         ];
     }
 
-    protected function modeOptions()
+    // Mode
+    protected function getDataModes()
     {
         return ['mode_option' => ['010' => 'Overtime Summary ', '020' => 'Overtime User']];
     }
-
+    protected function modeColumns()
+    {
+        return [
+            'title' => 'Select Mode',
+            'dataIndex' => 'mode_option',
+            'allowClear' => true
+        ];
+    }
 
 
     private function getAllMonths()

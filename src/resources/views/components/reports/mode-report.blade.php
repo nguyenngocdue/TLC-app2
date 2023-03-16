@@ -1,5 +1,6 @@
 @php
-// dd($itemsSelected)
+// dd($column, $name);
+$title = isset($column['title']) ? $column['title'] : $name;
 @endphp
 <form name="{{$formName}}" method="GET" class="flex  items-end w-72 px-2 ">
     <input type="hidden" name='_entity' value="{{ $entity }}">

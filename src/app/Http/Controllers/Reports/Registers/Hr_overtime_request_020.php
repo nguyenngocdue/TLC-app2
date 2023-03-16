@@ -46,7 +46,6 @@ class Hr_overtime_request_020 extends Report_ParentController
         return $sql;
     }
 
-
     public function getTableColumns($dataSource)
     {
         $personDataCol = [
@@ -77,7 +76,6 @@ class Hr_overtime_request_020 extends Report_ParentController
         $totalDataCol = array_merge($personDataCol, $sqlDataCol);
         return  $totalDataCol;
     }
-
     protected function getParamColumns()
     {
         return [
@@ -93,11 +91,10 @@ class Hr_overtime_request_020 extends Report_ParentController
         ];
     }
 
-    protected function modeOptions()
+    protected function getDataModes()
     {
         return ['mode_option' => ['010' => 'Overtime Summary ', '020' => 'User Overtime']];
     }
-
 
 
     private function getAllMonths()
