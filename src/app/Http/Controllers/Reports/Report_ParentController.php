@@ -126,25 +126,26 @@ abstract class Report_ParentController extends Controller
 
     protected function modeColumns()
     {
-        return [[
+        return [
+            'title' => 'Select Mode',
             'dataIndex' => 'mode_option',
-            'allowClear' => true,
-        ]];
+            'allowClear' => true
+        ];
     }
-
 
 
     public function index(Request $request)
     {
 
+        $input = $request->input();
 
         $typeReport = CurrentRoute::getTypeController();
         $routeName = $request->route()->action['as'];
         $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
 
-
-        if (count($request->input()) === 2) {
-            $modeParams = $this->setDefaultValueModeParams($request->input(), $request);
+        // Update user setting when select mode_020
+        if (count($input) === 2 && isset($input['mode_option'])) {
+            $modeParams = $this->setDefaultValueModeParams($input, $request);
             $modeName = explode('/', $request->getPathInfo())[3];
             $params = [
                 '_entity' => $entity,
@@ -152,14 +153,10 @@ abstract class Report_ParentController extends Controller
                 'type_report' => $typeReport,
                 'mode_option' => $modeName
             ] + $modeParams;
-
             $request->replace($params);
             (new UpdateUserSettings())($request);
         }
 
-
-
-        // dump(Log::info($request->input()));
         if ($request->input('mode_option')) {
             // dd($request);
             $mode = $request->all()['mode_option'];
@@ -168,19 +165,13 @@ abstract class Report_ParentController extends Controller
             return redirect(route($routeName . '_' . $mode));
         }
 
-        if (!$request->input('page') && !empty($request->input())) {
+        if (!$request->input('page') && !empty($input)) {
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
         }
-        // dump(123);
-
-
 
         $currentUserId = Auth::id();
         $currentMode = $this->mode;
-
-
-        // dump($request->input(), $currentMode);
 
         $modeParams = $this->getModeParams($typeReport, $entity, $currentMode);
         $modeParams = $this->setDefaultValueModeParams($modeParams, $request);
@@ -200,9 +191,6 @@ abstract class Report_ParentController extends Controller
         $viewName = strtolower(Str::singular($typeReport));
 
 
-        // dd($currentMode);
-
-
         return view('reports.' . $viewName, [
             'routeName' => $routeName,
             'tableDataSource' => $dataSource,
@@ -219,9 +207,10 @@ abstract class Report_ParentController extends Controller
             'paramColumns' => $this->getParamColumns(),
             'topTitle' => $this->getMenuTitle(),
             'legendColors' => $this->getColorLegends(),
-            'modeOptions' => $this->modeOptions(),
+            'modeOptions' => $this->getDataModes(),
             'modeColumns' => $this->modeColumns(),
             'currentMode' => $currentMode,
+
         ]);
     }
 }

@@ -176,7 +176,7 @@ class Qaqc_wir_010 extends Report_ParentController
         return $modeParams;
     }
 
-    protected function modeOptions()
+    protected function getDataModes()
     {
         return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020']];
     }
