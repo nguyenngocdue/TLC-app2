@@ -169,7 +169,7 @@ const onChangeDropdown4DateOffset = (listener, table01Name, rowIndex) => {
     }
 }
 
-const onChangeDropdown4Expression = (listener, table01Name, rowIndex) => {
+const onChangeDropdown4Expression = (listener, table01Name, rowIndex, batchLength = 1) => {
     // const debugListener = true
     if (debugListener) console.log("Expression", listener, table01Name, rowIndex)
     const { expression, column_name } = listener
@@ -205,17 +205,20 @@ const onChangeDropdown4Expression = (listener, table01Name, rowIndex) => {
     if (debugListener) console.log(column_name, '=', expression1, result)
     const id = makeIdFrom(table01Name, column_name, rowIndex)
     getEById(id).val(result)
-    getEById(id).trigger('change')
+    getEById(id).trigger('change', batchLength)
 }
 
-const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex) => {
+const ajaxQueueSelect = {}
+
+const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex, batchLength = 1) => {
     // const debugListener = true
     if (debugListener) console.log("AjaxRequestScalar", listener)
+    // console.log(batchLength)
     const { triggers, expression: url } = listener
     const { ajax_response_attribute, ajax_form_attributes, ajax_item_attributes, ajax_default_values } = listener
 
     let enoughParams = true
-    const data = {}
+    const data0 = {}
     const missingParams = []
     for (let i = 0; i < triggers.length; i++) {
         const name = makeIdFrom(table01Name, triggers[i], rowIndex)
@@ -224,121 +227,120 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex) => 
             enoughParams = false
             missingParams.push(name)
         }
-        data[triggers[i]] = value
+        data0[triggers[i]] = value
     }
     if (enoughParams) {
-        if (debugListener) console.log("Sending AjaxRequest with data:", data, url)
+        if (debugListener) console.log("Sending AjaxRequest with data0:", data0, url)
         for (let i = 0; i < ajax_form_attributes.length; i++) {
             const id = makeIdFrom(table01Name, ajax_form_attributes[i], rowIndex)
             getEById(id).hide()
         }
-        $.ajax({
-            url, data,
-            success: (response) => {
-                let value = -1
-                if (debugListener) console.log("Response", response)
-                for (let i = 0; i < ajax_form_attributes.length; i++) {
-                    const id = makeIdFrom(table01Name, ajax_form_attributes[i], rowIndex)
-                    const hits_0 = response[ajax_response_attribute][0]
-                    if (hits_0 === undefined) {
-                        value = ajax_default_values[i]
-                        if (debugListener) console.log("Response empty", ajax_response_attribute, ' - assigning default value', ajax_default_values[i])
-                    } else if (hits_0[ajax_item_attributes[i]] === undefined) {
-                        value = ajax_default_values[i]
-                        if (debugListener) console.log("Requested column", ajax_item_attributes[i], 'not found, assigning default value', ajax_default_values[i])
-                    } else {
-                        value = hits_0[ajax_item_attributes[i]]
-                    }
-                    if (debugListener) console.log("Assigning", id, "with value", value)
-                    getEById(id).val(value)
-                    getEById(id).trigger('change')
 
-                    getEById(id).show()
-                }
-            },
-            error: (response) => console.error(response)
-        })
+        if (ajaxQueueSelect[url] == undefined) ajaxQueueSelect[url] = {}
+        if (ajaxQueueSelect[url]['data'] == undefined) ajaxQueueSelect[url]['data'] = []
+        ajaxQueueSelect[url]['data'].push(data0)
+
+        if (ajaxQueueSelect[url]['data'].length >= batchLength) {
+            const data = ajaxQueueSelect[url]['data']
+            // console.log("Sending AjaxRequest with data:", data, url)
+            delete (ajaxQueueSelect[url])
+            $.ajax({
+                type: 'POST',
+                url, data: { lines: data },
+                success: (response) => {
+                    let value = -1
+                    if (debugListener) console.log("Response", response)
+                    const hits = response['hits']
+                    // console.log(response, hits)
+                    for (let lineIndex = 0; lineIndex < batchLength; lineIndex++) {
+                        const hit = hits[lineIndex]
+                        for (let i = 0; i < ajax_form_attributes.length; i++) {
+                            const form_att = ajax_form_attributes[i]
+                            const item_att = ajax_item_attributes[i]
+                            const defaultValue = ajax_default_values[i]
+                            const id = makeIdFrom(table01Name, form_att, (batchLength == 1 ? rowIndex : lineIndex))
+                            // console.log(hit, form_att, item_att)
+                            if (hit[item_att] == undefined) {
+                                value = defaultValue
+                                if (debugListener) console.log("Requested column", item_att, 'not found in response - assigning default value', defaultValue)
+                            } else {
+                                value = hit[item_att]
+                            }
+                            if (debugListener) console.log("Assigning", id, "with value", value)
+                            getEById(id).val(value)
+                            getEById(id).trigger('change')
+
+                            getEById(id).show()
+                        }
+                    }
+                },
+                error: (response) => console.error(response)
+            })
+        }
     } else {
         if (debugListener) console.log("Sending AjaxRequest cancelled as not enough parameters", missingParams)
     }
 }
-const onChangeDropdown4TriggerChangeSameLine = (listener, table01Name, rowIndex) => {
-    // const debugListener = true
-    if (debugListener) console.log("TriggerChangeSameLine", listener)
+
+const onChangeDropdown4TriggerChangeAllLines = (listener, table01Name, rowIndex) => {
+    const debugListener = true
+    if (debugListener) console.log("TriggerChangeAllLines", listener)
     const { column_name } = listener
-    const id = makeIdFrom(table01Name, column_name, rowIndex)
-    getEById(id).trigger('change')
-}
-const onChangeDropdown4TriggerChangeSomeLines = (listener, table01Name, rowIndex) => {
-    // const debugListener = true
-    if (debugListener) console.log("TriggerChangeSomeLines", listener)
-    const { column_name, attrs_to_compare } = listener
-    if (debugListener) console.log(column_name, attrs_to_compare)
 
     const rows = getAllRows(table01Name)
-    // console.log(rows)
-    const source_to_compare = {}
-    for (let j = 0; j < attrs_to_compare.length; j++) {
-        const fieldName = attrs_to_compare[j]
-        const id = makeIdFrom(table01Name, fieldName, rowIndex)
-        source_to_compare[fieldName] = getEById(id).val()
-    }
-    if (debugListener) console.log(source_to_compare)
-
-    const equal = (a, b, attrs_to_compare) => {
-        for (let i = 0; i < attrs_to_compare.length; i++) {
-            if (a[attrs_to_compare[i]] != b[attrs_to_compare[i]]) return false
-        }
-        return true
-    }
-
-    const kk = {}
-    const toBeTriggered = []
-    for (let rowIndex1 = 0; rowIndex1 < rows.length; rowIndex1++) {
-        const indexOfRow = getNameIndexOfRowIndex(table01Name, rowIndex1)
-        if (debugListener) console.log(indexOfRow)
-        const toBeCompared = {}
-        for (let j = 0; j < attrs_to_compare.length; j++) {
-            const fieldName = attrs_to_compare[j]
-            const id = makeIdFrom(table01Name, fieldName, rowIndex1)
-            toBeCompared[fieldName] = getEById(id).val()
-        }
-        if (equal(source_to_compare, toBeCompared, attrs_to_compare)) {
-            kk[indexOfRow] = toBeCompared
-            if (indexOfRow != rowIndex) { //<< Dead loop if indexOfRow == rowIndex
-                toBeTriggered.push(indexOfRow)
-            }
-        }
-    }
-    if (debugListener) console.log(kk, toBeTriggered)
-    for (let i = 0; i < toBeTriggered.length; i++) {
-        const rowI = toBeTriggered[i]
-        const id = makeIdFrom(table01Name, column_name, rowI)
-        if (debugListener) console.log("Trigger", id, i, toBeTriggered.length)
-        setTimeout(() => getEById(id).trigger('change'), 1000)
+    const batchLength = rows.length
+    for (let rowI = 0; rowI < rows.length; rowI++) {
+        // if (rowI === rowIndex) continue
+        const id = makeIdFrom(table01Name, column_name, rowI, batchLength)
+        console.log("Trigger Change", rowI, id)
+        setTimeout(() =>
+            getEById(id).trigger('change', batchLength)
+            , 1000)
     }
 }
 
-const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange }) => {
+const ajaxQueueUpdate = {}
+
+const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange, batchLength = 1 }) => {
     // console.log("onChangeDropdown4", name, table01Name, rowIndex, saveOnChange, lineType)
     // console.log("listenersOfDropdown4s", listenersOfDropdown4s, table01Name)
+    // console.log("onChangeDropdown4", name, batchLength)
     const fieldName = getFieldNameInTable01FormatJS(name, table01Name)
     const { tableName } = tableObject[table01Name]
+    const url = '/api/v1/entity/' + tableName + '_updateShort'
     if (saveOnChange) {
+        // console.log("in save on change", batchLength)
         // console.log("saveOnChange", tableName, fieldName)
         const lineId = makeIdFrom(table01Name, 'id', rowIndex)
         const id = getEById(lineId).val()
         const value = getEById(name).val()
-        const data = { [fieldName]: value }
-        // console.log(data)
+        const data0 = { id, value, fieldName }
 
-        $.ajax({
-            url: '/api/v1/entity/' + tableName + '_updateShort/' + id,
-            type: 'POST',
-            data,
-            // success: (response) => { console.log(response) }
-        })
+        if (ajaxQueueUpdate[url] == undefined) ajaxQueueUpdate[url] = {}
+        if (ajaxQueueUpdate[url]['data'] == undefined) ajaxQueueUpdate[url]['data'] = {}
+        if (ajaxQueueUpdate[url]['data'][fieldName] == undefined) ajaxQueueUpdate[url]['data'][fieldName] = []
+        ajaxQueueUpdate[url]['data'][fieldName].push(data0)
     }
+    onChangeFull({ fieldName, table01Name, rowIndex, lineType, batchLength, name })
+    if (saveOnChange) {
+        if (ajaxQueueUpdate[url]['data'][fieldName].length >= batchLength) {
+            const data = ajaxQueueUpdate[url]['data'][fieldName]
+            console.log("Sending AjaxRequest Update ", fieldName, " with data:", data, url, batchLength)
+            delete (ajaxQueueUpdate[url]['data'][fieldName])
+            $.ajax({
+                type: 'POST',
+                url, data: { lines: data },
+                success: (response) => {
+                    if (debugListener) console.log("Response", response)
+                    // const hits = response['hits']
+                }
+            })
+        }
+    }
+}
+
+const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, batchLength = 1, name }) => {
+    // console.log({ fieldName, table01Name, rowIndex, lineType, batchLength, name })
     const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
     for (let i = 0; i < listenersOfDropdown4.length; i++) {
         let listener = listenersOfDropdown4[i]
@@ -360,16 +362,13 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
                     onChangeDropdown4DateOffset(listener, table01Name, rowIndex)
                     break
                 case "expression":
-                    onChangeDropdown4Expression(listener, table01Name, rowIndex)
+                    onChangeDropdown4Expression(listener, table01Name, rowIndex, batchLength)
                     break
                 case "ajax_request_scalar":
-                    onChangeDropdown4AjaxRequestScalar(listener, table01Name, rowIndex)
+                    onChangeDropdown4AjaxRequestScalar(listener, table01Name, rowIndex, batchLength)
                     break
-                case "trigger_change_same_line":
-                    onChangeDropdown4TriggerChangeSameLine(listener, table01Name, rowIndex)
-                    break
-                case "trigger_change_some_lines":
-                    onChangeDropdown4TriggerChangeSomeLines(listener, table01Name, rowIndex)
+                case "trigger_change_all_lines":
+                    onChangeDropdown4TriggerChangeAllLines(listener, table01Name, rowIndex)
                     break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);

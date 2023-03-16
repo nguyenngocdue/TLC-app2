@@ -51,7 +51,7 @@ class Number4 extends Component
         if ($this->cell === 'DO_NOT_RENDER') return "";
         if (str_starts_with($this->cell, 'No dataIndex for ')) $this->cell = 0;
         // dump($this->onChange);
-        $onChange = $this->onChange ?? "onChangeDropdown4({name:'{$this->name}',table01Name:'{$this->table01Name}',rowIndex:{$this->rowIndex},saveOnChange:" . ($this->saveOnChange ? 1 : 0) . "})";
+        // $onChange = $this->onChange ?? "onChangeDropdown4({name:'{$this->name}',table01Name:'{$this->table01Name}',rowIndex:{$this->rowIndex},saveOnChange:" . ($this->saveOnChange ? 1 : 0) . "})";
         $bgColor = $this->getBgColor();
         // dump($bgColor);
         return view('components.renderer.editable.number4', [
@@ -61,9 +61,11 @@ class Number4 extends Component
             'icon' => $this->icon,
             'readOnly' => $this->readOnly,
             'table01Name' => $this->table01Name,
-            'onChange' => $onChange,
+            'rowIndex' => $this->rowIndex,
+            'saveOnChange' => $this->saveOnChange,
             'bgColor' => $bgColor,
             'classList' => ClassList::TEXT . " text-right",
+            'onChange' => $this->onChange,
         ]);
     }
 }
