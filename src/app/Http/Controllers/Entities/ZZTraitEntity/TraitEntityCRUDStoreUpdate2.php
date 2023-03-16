@@ -102,7 +102,7 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			//Get newStatus before it get removed by handleFields
 			$newStatus = $request['status'];
-			if ($request['tableNames'] == 'fakeRequest') Log::info($this->getValidationRules($newStatus));
+			// if ($request['tableNames'] == 'fakeRequest') Log::info($this->getValidationRules($newStatus));
 			$request->validate($this->getValidationRules($newStatus));
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {

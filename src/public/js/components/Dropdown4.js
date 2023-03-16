@@ -252,6 +252,7 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex, bat
                     if (debugListener) console.log("Response", response)
                     const hits = response['hits']
                     // console.log(response, hits)
+                    console.log(rowIndex, batchLength)
                     for (let lineIndex = 0; lineIndex < batchLength; lineIndex++) {
                         const hit = hits[lineIndex]
                         for (let i = 0; i < ajax_form_attributes.length; i++) {
@@ -282,20 +283,40 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex, bat
     }
 }
 
-const onChangeDropdown4TriggerChangeAllLines = (listener, table01Name, rowIndex) => {
+const triggerChangeQueue = {}
+
+const onChangeDropdown4TriggerChangeAllLines = (listener, table01Name, rowIndex, batchLength = 1) => {
     const debugListener = true
     if (debugListener) console.log("TriggerChangeAllLines", listener)
     const { column_name } = listener
 
-    const rows = getAllRows(table01Name)
-    const batchLength = rows.length
-    for (let rowI = 0; rowI < rows.length; rowI++) {
-        // if (rowI === rowIndex) continue
-        const id = makeIdFrom(table01Name, column_name, rowI, batchLength)
-        console.log("Trigger Change", rowI, id)
-        setTimeout(() =>
-            getEById(id).trigger('change', batchLength)
-            , 1000)
+    if (triggerChangeQueue[column_name] == undefined) triggerChangeQueue[column_name] = {}
+    if (triggerChangeQueue[column_name]['data'] == undefined) triggerChangeQueue[column_name]['data'] = []
+    triggerChangeQueue[column_name]['data'].push(1)
+
+    const data = triggerChangeQueue[column_name]['data']
+    // console.log(data.length, batchLength)
+    if (data.length >= batchLength) {
+        delete (triggerChangeQueue[column_name]['data'])
+        if (batchLength == 1) {
+            const rows = getAllRows(table01Name)
+            batchLength = rows.length
+            for (let i = 0; i < batchLength; i++) {
+                if (i === rowIndex) continue
+                const id = makeIdFrom(table01Name, column_name, i, batchLength)
+                setTimeout(() =>
+                    getEById(id).trigger('change', batchLength - 1)
+                    , 1000)
+            }
+        } else {
+            for (let i = 0; i < batchLength; i++) {
+                const id = makeIdFrom(table01Name, column_name, i, batchLength)
+                setTimeout(() =>
+                    getEById(id).trigger('change', batchLength)
+                    , 1000)
+            }
+        }
+
     }
 }
 
@@ -368,7 +389,7 @@ const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, batchLength 
                     onChangeDropdown4AjaxRequestScalar(listener, table01Name, rowIndex, batchLength)
                     break
                 case "trigger_change_all_lines":
-                    onChangeDropdown4TriggerChangeAllLines(listener, table01Name, rowIndex)
+                    onChangeDropdown4TriggerChangeAllLines(listener, table01Name, rowIndex, batchLength)
                     break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);
