@@ -6,6 +6,7 @@ use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
 use App\Models\Workplace;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class Hr_overtime_request_010 extends Report_ParentController
 {
@@ -280,7 +281,7 @@ class Hr_overtime_request_010 extends Report_ParentController
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
-
+        $type = Str::singular($this->getType());
         foreach ($dataSource as $key => $value) {
             // display name/description for total_overtime_hours
             $teamName = $value->user_category_name;
@@ -300,7 +301,7 @@ class Hr_overtime_request_010 extends Report_ParentController
 
             // dump($percentOTMonth);
             $param = '?user_id=' . $value->user_id . '&' . 'months=' . $value->year_months;
-            $hrefForward = "http://localhost:38002/reports/register-hr_overtime_request/020" . $param;
+            $hrefForward = route('dashboard') . "/reports/register-" . $type . "/020" . $param;
             $reAllowedOTHoursMonth = $this->wrapValueInObjectWithCellColor($percentOTMonth, $remainingAllowedOTHoursMonth, $hrefForward);
             $reAllowedOTHoursYear = $this->wrapValueInObjectWithCellColor($percentOTYear, $remainingAllowedOTHoursYear, $hrefForward);
 
