@@ -231,18 +231,23 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex, bat
     }
     if (enoughParams) {
         if (debugListener) console.log("Sending AjaxRequest with data0:", data0, url)
+
+        if (ajaxQueueSelect[url] == undefined) ajaxQueueSelect[url] = {}
+        if (ajaxQueueSelect[url]['data'] == undefined) ajaxQueueSelect[url]['data'] = []
+        if (ajaxQueueSelect[url]['rowIndex'] == undefined) ajaxQueueSelect[url]['rowIndex'] = []
+        ajaxQueueSelect[url]['data'].push(data0)
+        ajaxQueueSelect[url]['rowIndex'].push(rowIndex)
+        // console.log(ajaxQueueSelect[url]['rowIndex'])
+
         for (let i = 0; i < ajax_form_attributes.length; i++) {
             const id = makeIdFrom(table01Name, ajax_form_attributes[i], rowIndex)
             getEById(id).hide()
         }
 
-        if (ajaxQueueSelect[url] == undefined) ajaxQueueSelect[url] = {}
-        if (ajaxQueueSelect[url]['data'] == undefined) ajaxQueueSelect[url]['data'] = []
-        ajaxQueueSelect[url]['data'].push(data0)
-
         if (ajaxQueueSelect[url]['data'].length >= batchLength) {
             const data = ajaxQueueSelect[url]['data']
             // console.log("Sending AjaxRequest with data:", data, url)
+            const rowIndexCache = ajaxQueueSelect[url]['rowIndex']
             delete (ajaxQueueSelect[url])
             $.ajax({
                 type: 'POST',
@@ -252,14 +257,14 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex, bat
                     if (debugListener) console.log("Response", response)
                     const hits = response['hits']
                     // console.log(response, hits)
-                    console.log(rowIndex, batchLength)
                     for (let lineIndex = 0; lineIndex < batchLength; lineIndex++) {
                         const hit = hits[lineIndex]
                         for (let i = 0; i < ajax_form_attributes.length; i++) {
                             const form_att = ajax_form_attributes[i]
                             const item_att = ajax_item_attributes[i]
                             const defaultValue = ajax_default_values[i]
-                            const id = makeIdFrom(table01Name, form_att, (batchLength == 1 ? rowIndex : lineIndex))
+                            const id = makeIdFrom(table01Name, form_att, (batchLength == 1 ? rowIndex : rowIndexCache[lineIndex]))
+                            // console.log(id)
                             // console.log(hit, form_att, item_att)
                             if (hit[item_att] == undefined) {
                                 value = defaultValue
