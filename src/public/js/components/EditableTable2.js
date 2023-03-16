@@ -232,7 +232,7 @@ const cloneFirstLineDown = (dataIndex, tableId, renderer) => {
             // getEById(id).trigger('change')
         } else {
             getEById(id).val(value)
-            getEById(id).trigger('change')
+            getEById(id).trigger('change', length)
         }
     }
 }

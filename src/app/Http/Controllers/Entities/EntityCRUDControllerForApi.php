@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStoreUpdate2Api;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
+use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\SuperProps;
+use App\Utils\System\Api\ResponseObject;
+use Illuminate\Http\Request;
 
 class EntityCRUDControllerForApi extends Controller
 {
-	use TraitEntityCRUDStoreUpdate2Api;
 	use TraitEntityDynamicType;
 
 	protected $type;
-	protected $data;
+	protected $modelPath;
 	protected $superProps;
 
 	protected $uploadService2;
@@ -32,4 +33,32 @@ class EntityCRUDControllerForApi extends Controller
 	// {
 	// 	return $this->type;
 	// }
+
+	public function storeEmpty(Request $request)
+	{
+		$theRow = $this->modelPath::create($request->input());
+		return ResponseObject::responseSuccess([['id' => $theRow->id]]);
+	}
+
+	public function updateShort(Request $request)
+	{
+		$lines = $request->input('lines');
+		// dump($lines);
+		$result = [];
+		foreach ($lines as $input) {
+			$id = $input['id'];
+			$fieldName = $input['fieldName'];
+			$value = $input['value'];
+
+			$theRow = $this->modelPath::find($id);
+			if ($fieldName == 'ot_date') $value = DateTimeConcern::convertForSaving('picker_date', $value);
+			$theRow->fill([$fieldName => $value]);
+			$result[] = $theRow->save();
+		}
+		return ResponseObject::responseSuccess(
+			$result,
+			$lines,
+			"UpdateShort"
+		);
+	}
 }

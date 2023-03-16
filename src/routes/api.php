@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Entities\EntityCRUDControllerForApi;
 use App\Utils\System\Memory;
 use App\Utils\System\Timer;
 use Illuminate\Support\Str;
@@ -76,7 +77,7 @@ Route::group([
     'prefix' => 'v1/hr',
 ], function () {
     // Route::get('overtime_request_line', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours']);
-    Route::get('overtime_request_line2', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours2']);
+    Route::post('overtime_request_line2', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours2']);
 });
 Route::group([
     'prefix' => 'v1/entity',
@@ -90,9 +91,8 @@ Route::group([
         'Zunit_test_05',
         'Zunit_test_09',
     ] as $entityName) {
-        $path = "App\\Http\\Controllers\\Entities\\";
         $tableName = Str::plural(lcfirst($entityName));
-        Route::post("{$tableName}_storeEmpty", [$path . EntityCRUDControllerForApi::class, 'storeEmpty'])->name($tableName . ".storeEmpty");
-        Route::post("{$tableName}_updateShort/{id}", [$path . EntityCRUDControllerForApi::class, 'updateShort'])->name($tableName . ".updateShort");
+        Route::post("{$tableName}_storeEmpty", [EntityCRUDControllerForApi::class, 'storeEmpty'])->name($tableName . ".storeEmpty");
+        Route::post("{$tableName}_updateShort", [EntityCRUDControllerForApi::class, 'updateShort'])->name($tableName . ".updateShort");
     }
 });

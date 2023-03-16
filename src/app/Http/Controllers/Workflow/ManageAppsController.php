@@ -68,6 +68,12 @@ class ManageAppsController extends AbstractManageLibController
                 'cbbDataSource' => ['', 'dev', 'beta'],
             ],
             [
+                'dataIndex' => 'apply_approval_tree',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
+            [
                 'dataIndex' => 'icon',
                 'renderer' => 'text4',
                 'editable' => true,
