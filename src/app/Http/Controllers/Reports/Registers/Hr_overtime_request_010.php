@@ -145,8 +145,8 @@ class Hr_overtime_request_010 extends Report_ParentController
                 "align" => "right",
             ],
             [
-                "title" => "Cumulative Total Hours (Year)",
-                "dataIndex" => "cumulative_remaining_hours_year",
+                "title" => "Total Overtime Hours (Month)",
+                "dataIndex" => "total_overtime_hours",
                 "align" => "right",
             ],
             [
@@ -179,7 +179,7 @@ class Hr_overtime_request_010 extends Report_ParentController
 
     protected function modeOptions()
     {
-        return ['mode_option' => ['010' => 'Overtime Summary ', '020' => 'User Overtime']];
+        return ['mode_option' => ['010' => 'Overtime Summary ', '020' => 'Overtime User']];
     }
 
 
@@ -216,36 +216,43 @@ class Hr_overtime_request_010 extends Report_ParentController
         return array_merge($workplaces, $months, $users);
     }
 
-    private function wrapValueInObjectWithCellColor($value, $index, $href)
+    private function wrapValueInObjectWithCellColor($percent, $value, $href)
     {
-        $levelTime = [
-            [100, 75, 50, 25, 0],
-            [200, 150, 100, 50, 0],
-        ];
         switch (true) {
-            case $value > $levelTime[$index][0]:
+            case $percent < 0:
                 return (object)[
-                    'cell_class' => 'bg-red-400 ',
+                    'cell_class' => 'bg-red-600 ',
                     'value' => $value,
                     'cell_href' => $href,
+                    'cell_title' => $percent . '%',
                 ];
-            case $value > $levelTime[$index][1]:
+            case $percent > 0 && $percent < 25:
                 return (object)[
                     'cell_class' => 'bg-pink-400',
                     'value' => $value,
                     'cell_href' => $href,
+                    'cell_title' => $percent . '%',
                 ];
-            case $value > $levelTime[$index][2]:
+            case $percent >= 25 && $percent < 50:
                 return (object)[
-                    'cell_class' => 'bg-yellow-400',
+                    'cell_class' => 'bg-orange-300',
                     'value' => $value,
                     'cell_href' => $href,
+                    'cell_title' => $percent . '%',
                 ];
-            case $levelTime[$index][3] >= 0:
+            case $percent >= 50 && $percent < 75:
                 return (object)[
-                    'cell_class' => 'bg-green-400',
+                    'cell_class' => 'bg-yellow-300',
                     'value' => $value,
                     'cell_href' => $href,
+                    'cell_title' => $percent . '%',
+                ];
+            case $percent >= 75:
+                return (object)[
+                    'cell_class' => 'bg-green-300',
+                    'value' => $value,
+                    'cell_href' => $href,
+                    'cell_title' => $percent . '%',
                 ];
         }
     }
@@ -254,16 +261,18 @@ class Hr_overtime_request_010 extends Report_ParentController
     {
         return [
             'remaining_allowed_OT_hours_legend' => [
-                'bg-green-400' => '0% < 25% hours',
-                'bg-yellow-400' => '25% < 50% hours',
-                'bg-pink-400' => '50% < 75% hours',
-                'bg-red-400' => '75% < 100% hours'
+                'bg-red-400' => '< 0%',
+                'bg-pink-400' => '0% to < 25%',
+                'bg-orange-300' => '25% to < 50%',
+                'bg-yellow-400' => '50% to < 75%',
+                'bg-green-400' => '>= 75%',
             ]
         ];
     }
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
+
         foreach ($dataSource as $key => $value) {
             // display name/description for total_overtime_hours
             $teamName = $value->user_category_name;
@@ -275,13 +284,17 @@ class Hr_overtime_request_010 extends Report_ParentController
             $dataSource[$key]->employee_id = $htmlEmployeeId;
 
             // display colors for total_overtime_hours
-            $remainingAllowedOTHours = ($value->remaining_allowed_ot_hours * 1) / 40 * 100;
-            $remainingAllowedOTHoursYear = $value->remaining_allowed_ot_hours_year * 1 / 200 * 100;
+            $remainingAllowedOTHoursMonth = ($value->remaining_allowed_ot_hours * 1);
+            $remainingAllowedOTHoursYear = $value->remaining_allowed_ot_hours_year * 1;
 
+            $percentOTMonth = $remainingAllowedOTHoursMonth / 40 * 100;
+            $percentOTYear = $remainingAllowedOTHoursYear / 200 * 100;
+
+            // dump($percentOTMonth);
             $param = '?user_id=' . $value->user_id . '&' . 'months=' . $value->year_months;
             $hrefForward = "http://localhost:38002/reports/register-hr_overtime_request/020" . $param;
-            $reAllowedOTHoursMonth = $this->wrapValueInObjectWithCellColor($remainingAllowedOTHours, 0, $hrefForward);
-            $reAllowedOTHoursYear = $this->wrapValueInObjectWithCellColor($remainingAllowedOTHoursYear, 1, '');
+            $reAllowedOTHoursMonth = $this->wrapValueInObjectWithCellColor($percentOTMonth, $remainingAllowedOTHoursMonth, $hrefForward);
+            $reAllowedOTHoursYear = $this->wrapValueInObjectWithCellColor($percentOTYear, $remainingAllowedOTHoursYear, $hrefForward);
 
             $dataSource[$key]->remaining_allowed_ot_hours = $reAllowedOTHoursMonth;
             $dataSource[$key]->remaining_allowed_ot_hours_year = $reAllowedOTHoursYear;
