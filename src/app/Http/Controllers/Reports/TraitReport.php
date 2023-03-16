@@ -19,6 +19,7 @@ trait TraitReport
 
     function createTableColumns($dataSource, $strFromField, $strToFields, $editFields = [], $unsetFields = [],)
     {
+        // dd($dataSource);
         if (empty($dataSource->items())) return [[]];
         $array = (array)array_slice($dataSource->items(), 0, 1)[0];
         $fromField = array_search($strFromField, array_keys($array));

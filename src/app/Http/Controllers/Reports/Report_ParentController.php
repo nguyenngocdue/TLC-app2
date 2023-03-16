@@ -42,7 +42,6 @@ abstract class Report_ParentController extends Controller
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
         }
-        // dd($sqlStr);
         return $sqlStr;
     }
 
@@ -172,12 +171,11 @@ abstract class Report_ParentController extends Controller
 
         $modeParams = $this->getModeParams($typeReport, $entity, $currentMode);
         $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
-        // dump($modeParams);
 
         $dataSource = $this->getDataSource($modeParams);
+        // dd($dataSource);
 
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-        // dd($dataSource);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
         // dump(count($dataSource));
         $pageLimit = $this->getPageParam($typeReport, $entity);

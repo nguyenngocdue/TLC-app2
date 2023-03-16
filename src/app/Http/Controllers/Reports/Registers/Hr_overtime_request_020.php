@@ -73,6 +73,7 @@ class Hr_overtime_request_020 extends Report_ParentController
             "dataIndex" => "ot_date",
             "align" => "center"
         ]];
+        // dd($dataSource);
         $sqlDataCol = $this->createTableColumns($dataSource, 'first_name', 'year_remaining_hours', $editFields);
         $totalDataCol = array_merge($personDataCol, $sqlDataCol);
         return  $totalDataCol;

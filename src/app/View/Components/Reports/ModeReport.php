@@ -17,7 +17,6 @@ class ModeReport extends Component
         private $entity = '',
         private $typeReport = '',
         private $formName = '',
-        private $userId = '',
         private $column = '',
     ) {
         //
@@ -37,7 +36,6 @@ class ModeReport extends Component
             'typeReport' => $this->typeReport,
             'title' => $title,
             'name' => $name,
-            'userId' => $this->userId,
             'column' => $this->column
         ]);
     }
