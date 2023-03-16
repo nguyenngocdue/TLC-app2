@@ -123,3 +123,8 @@ Str::macro('getPickerPlaceholder', function ($control) {
             return "??? $control ???";
     }
 });
+Str::macro('getEntityName', function ($entity) {
+    $arr = explode('\\', get_class($entity));
+    $result = Str::plural(strtolower(end($arr)));
+    return $result;
+});

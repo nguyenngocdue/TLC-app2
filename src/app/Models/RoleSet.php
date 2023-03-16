@@ -15,4 +15,8 @@ class RoleSet extends ModelsRoleSet
             'name' => $this->name,
         ];
     }
+    public static function getTableName()
+    {
+        return (new static())->getTable();
+    }
 }
