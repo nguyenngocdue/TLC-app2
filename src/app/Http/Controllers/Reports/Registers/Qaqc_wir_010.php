@@ -165,7 +165,7 @@ class Qaqc_wir_010 extends Report_ParentController
     }
 
 
-    protected function setDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueModeParams($modeParams, $request)
     {
 
         $x = 'sub_project_id';

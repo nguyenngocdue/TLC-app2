@@ -33,8 +33,9 @@ trait TraitReport
             if (in_array($value, $locateEditFields)) {
                 $indexEdit = array_search($value, $locateEditFields);
                 $dataColumn[] =  $editFields[$indexEdit];
+            } else {
+                $dataColumn[] = ['dataIndex' => $value, 'align' => 'center'];
             }
-            $dataColumn[] = ['dataIndex' => $value, 'align' => 'center'];
         }
         return $dataColumn;
     }

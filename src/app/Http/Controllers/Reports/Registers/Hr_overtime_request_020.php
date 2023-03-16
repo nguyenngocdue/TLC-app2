@@ -30,6 +30,7 @@ class Hr_overtime_request_020 extends Report_ParentController
         ,otline.from_time from_time
         ,otline.break_time break_time
         ,otline.to_time to_time
+        ,otline.total_time total_time
         ,otline.month_allowed_hours month_allowed_hours
         ,otline.month_remaining_hours month_remaining_hours
         ,otline.year_allowed_hours year_allowed_hours
@@ -57,13 +58,13 @@ class Hr_overtime_request_020 extends Report_ParentController
                 "title" => "HR Overtime Request",
                 "dataIndex" => "hr_overtime_request_id",
                 "align" => "center",
-                "renderer" => "id",
+                "renderer" => "qr_code",
                 "type" => "hr_overtime_requests",
             ],
             [
                 "dataIndex" => "request_id",
                 "align" => "center",
-                "renderer" => "id",
+                "renderer" => "qr_code",
                 "type" => "hr_overtime_request_lines",
             ]
         ];
@@ -130,7 +131,7 @@ class Hr_overtime_request_020 extends Report_ParentController
 
 
 
-    protected function setDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueModeParams($modeParams, $request)
     {
         // dump($modeParams);
         return $modeParams;

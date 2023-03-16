@@ -304,7 +304,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		return $sheets;
 	}
 
-	protected function setDefaultValueModeParams($modeParams, $request)
+	protected function getDefaultValueModeParams($modeParams, $request)
 	{
 		$x = 'sub_project_id';
 		$y = 'prod_order_id';

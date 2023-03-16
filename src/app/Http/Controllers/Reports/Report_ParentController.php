@@ -114,7 +114,7 @@ abstract class Report_ParentController extends Controller
         return 10;
     }
 
-    protected function setDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueModeParams($modeParams, $request)
     {
         return $modeParams;
     }
@@ -144,24 +144,21 @@ abstract class Report_ParentController extends Controller
         $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
 
         // Update user setting when select mode_020
-        if (count($input) === 2 && isset($input['mode_option'])) {
-            $modeParams = $this->setDefaultValueModeParams($input, $request);
-            $modeName = explode('/', $request->getPathInfo())[3];
-            $params = [
-                '_entity' => $entity,
-                'action' => 'updateReportRegisters',
-                'type_report' => $typeReport,
-                'mode_option' => $modeName
-            ] + $modeParams;
-            $request->replace($params);
-            (new UpdateUserSettings())($request);
-        }
-
-        if ($request->input('mode_option')) {
-            // dd($request);
-            $mode = $request->all()['mode_option'];
+        if (isset($input['mode_option']) || isset($input['months'])) {
+            if (isset($input['months'])) {
+                $mode = explode('/', $request->getPathInfo())[3];
+                $params = [
+                    '_entity' => $entity,
+                    'action' => 'updateReportRegisters',
+                    'type_report' => $typeReport,
+                    'mode_option' => $mode
+                ] + $input;
+                $request->replace($params);
+                (new UpdateUserSettings())($request);
+                return redirect($request->getPathInfo());
+            }
+            $mode = $input['mode_option'];
             $routeName = explode('/', $request->getPathInfo())[2];
-            (new UpdateUserSettings())($request);
             return redirect(route($routeName . '_' . $mode));
         }
 
@@ -174,7 +171,7 @@ abstract class Report_ParentController extends Controller
         $currentMode = $this->mode;
 
         $modeParams = $this->getModeParams($typeReport, $entity, $currentMode);
-        $modeParams = $this->setDefaultValueModeParams($modeParams, $request);
+        $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
         // dump($modeParams);
 
         $dataSource = $this->getDataSource($modeParams);
