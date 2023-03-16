@@ -21,7 +21,7 @@ class ManageAppsController extends AbstractManageLibController
             ],
             [
                 'dataIndex' => "name",
-                "renderer"  => 'read-only-text',
+                "renderer"  => 'read-only-text4',
                 'editable' => true,
             ],
             [
@@ -48,17 +48,17 @@ class ManageAppsController extends AbstractManageLibController
             ],
             [
                 'dataIndex' => 'title',
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
             [
                 'dataIndex' => 'nickname',
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
             [
                 'dataIndex' => 'doc_id_format_column',
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
             [
@@ -69,7 +69,7 @@ class ManageAppsController extends AbstractManageLibController
             ],
             [
                 'dataIndex' => 'icon',
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
 

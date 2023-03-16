@@ -3,8 +3,8 @@
 use App\Http\Controllers\AppMenuController;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Notifications\NotificationsController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RedisController;
 use App\Http\Controllers\Reports\ReportIndexController;
 use App\Http\Controllers\UpdateUserSettings;
@@ -23,7 +23,6 @@ use Illuminate\Support\Str;
 
 $entities = Entities::getAll();
 $qrCodeApps = JsonControls::getQrCodeApps();
-
 Auth::routes();
 Route::group([
     'middleware' => ['auth', 'impersonate',]
@@ -32,7 +31,7 @@ Route::group([
         'prefix' => 'dashboard'
     ], function () use ($entities) {
         foreach ($entities as $entity) {
-            $entityName = $entity->getTable();
+            $entityName = Str::getEntityName($entity);
             // $singular = Str::singular($entityName);
             // $ucfirstName = Str::ucfirst($singular);
             $path = "App\\Http\\Controllers\\Entities\\";
@@ -41,6 +40,7 @@ Route::group([
             Route::get("{$entityName}_qr", ["{$path}ViewAllController", "showQRCode"])->name("{$entityName}_qr.showQRCode");
             Route::resource("{$entityName}", "{$path}EntityCRUDController")->only('create', 'store', 'edit', 'update', 'show', 'destroy');
         }
+        // dd();
         // Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
         // Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');
     });
@@ -52,7 +52,7 @@ Route::group([
         'prefix' => 'reports'
     ], function () use ($entities) {
         foreach ($entities as $entity) {
-            $entityName = $entity->getTable();
+            $entityName = Str::getEntityName($entity);
             $singular = Str::singular($entityName);
             $ucfirstName = Str::ucfirst($singular);
             Route::group([
@@ -86,7 +86,7 @@ Route::group([
         'prefix' => 'config'
     ], function () use ($entities) {
         foreach ($entities as $entity) {
-            $entityName = $entity->getTable();
+            $entityName = Str::getEntityName($entity);
             $singular = Str::singular($entityName);
             // $ucfirstName = Str::ucfirst($singular);
             Route::group([
@@ -144,6 +144,7 @@ Route::group([
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboards.index');
+    Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::get('impersonate/user/{id}', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
 });
