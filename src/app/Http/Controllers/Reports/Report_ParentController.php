@@ -144,8 +144,8 @@ abstract class Report_ParentController extends Controller
         $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
 
         // Update user setting when select mode_020
-        if (isset($input['mode_option']) || isset($input['months'])) {
-            if (isset($input['months'])) {
+        if (isset($input['mode_option']) || isset($input['months']) || isset($input['user_id'])) {
+            if (isset($input['months']) || isset($input['user_id'])) {
                 $mode = explode('/', $request->getPathInfo())[3];
                 $params = [
                     '_entity' => $entity,
