@@ -16,18 +16,22 @@ const findParentIdFieldName = (tableId) => {
     return "NOT_FOUND_value_as_parent_id";
 }
 
+const ajaxAddLineQueue = {}
+
 const addANewLine = (params) => {
-    const { tableId, valuesOfOrigin = {}, isDuplicatedOrAddFromList = false } = params
+    const { tableId, valuesOfOrigin = {}, isDuplicatedOrAddFromList = false, batchLength = 1 } = params
     const { tableName, } = tableObject[tableId]
     // console.log(params, tableName,)
     const parentId = getEById('entityParentId').val()
     const orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
     const parentIdFieldName = findParentIdFieldName(tableId)
     // console.log(parentIdFieldName)
-    const data = {
+    const data0 = {
         owner_id: 1,
         [parentIdFieldName]: parentId,
         order_no: orderNoValue,
+
+        ...valuesOfOrigin,
     }
     // console.log(data)
 
@@ -35,27 +39,43 @@ const addANewLine = (params) => {
     const spinId = "iconSpin_" + tableId
     getEById(btnId).hide()
     getEById(spinId).show()
-    $.ajax({
-        type: 'POST',
-        url: '/api/v1/entity/' + tableName + '_storeEmpty',
-        data,
-        success: (response) => {
-            const insertedId = response['hits'][0]['id']
-            valuesOfOrigin['id'] = insertedId
-            valuesOfOrigin[parentIdFieldName] = parentId
-            valuesOfOrigin['ot_date'] = moment().format('DD/MM/YYYY')
 
-            // console.log('insertedId', insertedId, valuesOfOrigin)
-            addANewLineFull({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList })
-            getEById(btnId).show()
-            getEById(spinId).hide()
-        }
-    })
+    const url = '/api/v1/entity/' + tableName + '_storeEmpty'
+
+    if (ajaxAddLineQueue[url] == undefined) ajaxAddLineQueue[url] = {}
+    if (ajaxAddLineQueue[url]['data'] == undefined) ajaxAddLineQueue[url]['data'] = []
+    // if (ajaxAddLineQueue[url]['rowIndex'] == undefined) ajaxAddLineQueue[url]['rowIndex'] = []
+    ajaxAddLineQueue[url]['data'].push(data0)
+    // ajaxAddLineQueue[url]['rowIndex'].push(rowIndex)
+
+    if (ajaxAddLineQueue[url]['data'].length >= batchLength) {
+        const data = ajaxAddLineQueue[url]['data']
+
+        delete (ajaxAddLineQueue[url])
+        // console.log("Inserting", data)
+        $.ajax({
+            type: 'POST',
+            url,
+            data: { lines: data },
+            success: (response) => {
+                // console.log(response)
+                for (let i = 0; i < batchLength; i++) {
+                    const valuesOfOrigin = response['hits'][i]
+                    // valuesOfOrigin['id'] = line.id
+                    valuesOfOrigin['ot_date'] = moment(valuesOfOrigin['ot_date']).format('DD/MM/YYYY')
+                    // console.log(valuesOfOrigin)
+                    addANewLineFull({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList, batchLength })
+                }
+                getEById(btnId).show()
+                getEById(spinId).hide()
+            }
+        })
+    }
 }
 
 const addANewLineFull = (params) => {
 
-    const { tableId, isDuplicatedOrAddFromList } = params
+    const { tableId, isDuplicatedOrAddFromList, batchLength = 1 } = params
     let { valuesOfOrigin } = params //<< Incase of duplicate, this is the value of the original line
     const insertedId = valuesOfOrigin['id']
     // console.log('addANewLine', tableId, insertedId)
@@ -243,7 +263,7 @@ const addANewLineFull = (params) => {
                     }
                     getEById(id + '_label').html(label)
                     toDoAfterAddedDropdown4ReadOnly.push({ id, dataSource: k[column['tableName']], tableId, selected })
-                    // getEById(id).trigger("change")
+                    // getEById(id).trigger('change')
                 } else {
                     toDoAfterAddedDropdown4.push({ id, dataSource: k[column['tableName']], tableId, selected })
                 }
@@ -252,22 +272,22 @@ const addANewLineFull = (params) => {
                 let selected1 = valuesOfOrigin[column['dataIndex']]
                 // console.log("Setting status", id, 'to', selected)
                 getEById(id).val(selected1)
-                getEById(id).trigger("change")
+                getEById(id).trigger('change', batchLength)
                 break
             default:
                 if (column['value_as_parent_id']) {
                     getEById(id).val($('#entityParentId').val())
-                    getEById(id).trigger("change")
+                    getEById(id).trigger('change', batchLength)
                     break
                 }
                 if (column['value_as_user_id']) {
                     getEById(id).val($('#userId').val())
-                    getEById(id).trigger("change")
+                    getEById(id).trigger('change', batchLength)
                     break
                 }
                 if (column['dataIndex'] === 'order_no') {
                     getEById(id).val(orderNoValue)
-                    getEById(id).trigger("change")
+                    getEById(id).trigger('change', batchLength)
                     break
                 }
                 const value = valuesOfOrigin[column['dataIndex']]
@@ -276,7 +296,7 @@ const addANewLineFull = (params) => {
                 } else {
                     getEById(id).val(value)
                 }
-                getEById(id).trigger("change")
+                getEById(id).trigger('change', batchLength)
                 break
 
             // console.log("Added new column", column['dataIndex'])
@@ -287,13 +307,13 @@ const addANewLineFull = (params) => {
     for (let i = 0; i < toDoAfterAddedDropdown4.length; i++) {
         const { id, dataSource, tableId, selected } = toDoAfterAddedDropdown4[i]
         reloadDataToDropdown4(id, dataSource, tableId, selected)
-        getEById(id).trigger("change")
+        getEById(id).trigger('change', batchLength)
         // console.log("Triggered change", id)
     }
     for (let i = 0; i < toDoAfterAddedDropdown4ReadOnly.length; i++) {
         const { id, dataSource, tableId, selected } = toDoAfterAddedDropdown4ReadOnly[i]
         // reloadDataToDropdown4(id, dataSource, tableId, selected)
-        getEById(id).trigger("change")
+        getEById(id).trigger('change', batchLength)
         // console.log("Triggered change", id)
     }
     // console.log(showNoR)
