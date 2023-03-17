@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Utils\Support\Tree\BuildTree;
+use App\Utils\System\Timer;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Hashing\AbstractHasher;
 use Illuminate\Support\Facades\Hash;
@@ -10,13 +12,9 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        $password = Hash::make('123456', ['salt' => 'random']);
-        dump($password);
-        $password2 = Hash::make('123456', ['salt' => 'random2']);
-        dump($password2);
-
-        $isCheck = Hash::check('123456', $password2, ['salt' => 'random']);
-        dd($isCheck);
+        Timer::startTimeCounter();
+        dump(BuildTree::getTreeByOptions(38, 16, 38, false, true));
+        dd(Timer::getTimeElapse());
         return view(
             'welcome',
             []

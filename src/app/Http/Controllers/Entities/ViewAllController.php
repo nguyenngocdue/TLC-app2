@@ -36,10 +36,7 @@ class ViewAllController extends Controller
     public function __construct()
     {
         $this->assignDynamicTypeViewAll();
-
         $this->middleware("permission:{$this->permissionMiddleware['read']}")->only('index');
-        $this->middleware("permission:{$this->permissionMiddleware['edit']}")->only('index', 'update');
-        $this->middleware("permission:{$this->permissionMiddleware['delete']}")->only('index', 'update', 'destroy');
     }
 
     public function getType()
