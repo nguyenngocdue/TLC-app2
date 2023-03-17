@@ -48,6 +48,7 @@
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
+    <script src="{{ asset('js/components/RadioOrCheckbox2.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4.js') }}"></script>
     <script src="{{ asset('js/components/EditableTable2.js') }}"></script>

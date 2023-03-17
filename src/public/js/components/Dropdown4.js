@@ -366,7 +366,7 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
 }
 
 const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, batchLength = 1, name }) => {
-    // const debugFlow = true
+    const debugFlow = true
     // console.log({ fieldName, table01Name, rowIndex, lineType, batchLength, name })
     const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
     for (let i = 0; i < listenersOfDropdown4.length; i++) {

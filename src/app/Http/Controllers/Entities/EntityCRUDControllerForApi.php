@@ -36,8 +36,13 @@ class EntityCRUDControllerForApi extends Controller
 
 	public function storeEmpty(Request $request)
 	{
-		$theRow = $this->modelPath::create($request->input());
-		return ResponseObject::responseSuccess([['id' => $theRow->id]]);
+		$lines = $request->get('lines');
+		$theRows = [];
+		foreach ($lines as $input) {
+			if (isset($input['ot_date'])) $input['ot_date'] = DateTimeConcern::convertForSaving('picker_date', $input['ot_date']);
+			$theRows[] = $this->modelPath::create($input);
+		}
+		return ResponseObject::responseSuccess($theRows);
 	}
 
 	public function updateShort(Request $request)

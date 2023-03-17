@@ -19,6 +19,10 @@
                 <!-- Modal body -->
                 <div class="h-[500px] overflow-y-auto overflow-x-hidden p-4">
                     <x-modals.parent-type7-user-ot name='ot_team'></x-modals.parent-type7>
+                    <div class="py-2">
+                        <x-renderer.button onClick="radioOrCheckboxSelectAll('ot_user2')"><i class="fa-duotone fa-square-check px-1"></i>Selected All</x-renderer.button>
+                        <x-renderer.button onClick="radioOrCheckboxDeselectAll('ot_user2')"><i class="fa-duotone fa-square px-1"></i>Deselected All</x-renderer.button>
+                    </div>
                     <x-modals.parent-id7-user-ot name='ot_user2' multiple={{true}} control='radio-or-checkbox2'></x-modals.parent-type7>
                 </div>
                 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
@@ -43,8 +47,8 @@ const addLinesToTable = (listId, tableId) => {
         const user_id = result[i]
         const today = moment().format('DD/MM/YYYY')
         const valuesOfOrigin = { user_id, ot_date: today }
-        console.log("Add line", tableId, valuesOfOrigin)
-        addANewLine({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList:true })
+        // console.log("Add line", tableId, valuesOfOrigin)
+        addANewLine({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList:true, batchLength: result.length })
     }
 }
 </script>
