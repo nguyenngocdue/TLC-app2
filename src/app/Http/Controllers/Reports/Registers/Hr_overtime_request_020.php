@@ -6,7 +6,7 @@ use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
 use App\Http\Controllers\UpdateUserSettings;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Log;
 
 class Hr_overtime_request_020 extends Report_ParentController
 {
@@ -48,7 +48,7 @@ class Hr_overtime_request_020 extends Report_ParentController
         return $sql;
     }
 
-    public function getTableColumns($dataSource)
+    public function getTableColumns($dataSource, $modeParams)
     {
         $personDataCol = [
             [
@@ -69,13 +69,17 @@ class Hr_overtime_request_020 extends Report_ParentController
                 "type" => "hr_overtime_request_lines",
             ]
         ];
-        $editFields = [[
+        $editDataCols = [[
             "title" => "Date",
             "dataIndex" => "ot_date",
             "align" => "center"
+        ], [
+            "title" => "Break Time (Mins)",
+            "dataIndex" => "break_time",
+            "align" => "center"
         ]];
         // dd($dataSource);
-        $sqlDataCol = $this->createTableColumns($dataSource, 'first_name', 'year_remaining_hours', $editFields);
+        $sqlDataCol = $this->createTableColumns($dataSource, 'first_name', 'year_remaining_hours', $editDataCols);
         $totalDataCol = array_merge($personDataCol, $sqlDataCol);
         return  $totalDataCol;
     }
@@ -150,7 +154,9 @@ class Hr_overtime_request_020 extends Report_ParentController
     protected function forwardToMode($request, $typeReport, $entity)
     {
         $input = $request->input();
+
         if (isset($input['months']) || isset($input['user_id'])) {
+            // Log::info("020");
             $params = [
                 '_entity' => $entity,
                 'action' => 'updateReport' . $typeReport,

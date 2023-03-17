@@ -119,14 +119,12 @@ class UpdateUserSettings extends Controller
     {
         $inputValue = $request->all();
         if (isset($inputValue['mode_name'])) {
-            // dd($inputValue);
             return $this->resetParamsReport($request, $settings);
         }
         $modeName = $inputValue['mode_option'];
         // Check case: select mode alternatively 
         $index = array_search($modeName, array_values($inputValue));
         if (empty(array_slice($inputValue, $index + 1, count($inputValue) - $index))) return $settings;
-
         // Create date to update params into user_setting
         unset($inputValue['mode_option']);
         $entity = $inputValue["_entity"];
@@ -157,7 +155,6 @@ class UpdateUserSettings extends Controller
      */
     public function __invoke(Request $request)
     {
-        // dd($request->all());
         $action = $request->input('action');
         $user = User::find(Auth::id());
         $settings = $user->settings;

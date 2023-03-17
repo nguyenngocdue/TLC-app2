@@ -1,20 +1,23 @@
+<!-- Page Break-->
+<div class="translate-x-[-80px]"></div>
+<div class="translate-x-[80px]"></div>
 <!-- RADIO AND CHECKBOX focus shadow-->
-<input class="w-3.5 h-3.5 mt-0.5" >
+<input class="w-3.5 h-3.5 mt-0.5">
 
 <!-- Make input same height with dropdown-->
-<input class="h-[42px]" >
+<input class="h-[42px]">
 
 <th class="border-t-0"></th>
 <input class="truncate w-16" />
-<input class="h-[100px] w-[100px]"/>
-<input class="h-[200px] w-[200px]"/>
-<input class="h-[300px] w-[300px]"/>
-<input class="h-[400px] w-[400px]"/>
-<input class="h-[500px] w-[500px]"/>
-<input class="h-[600px] w-[600px]"/>
-<input class="h-[700px] w-[700px]"/>
-<input class="h-[800px] w-[800px]"/>
-<input class="h-[900px] w-[900px]"/>
+<input class="h-[100px] w-[100px]" />
+<input class="h-[200px] w-[200px]" />
+<input class="h-[300px] w-[300px]" />
+<input class="h-[400px] w-[400px]" />
+<input class="h-[500px] w-[500px]" />
+<input class="h-[600px] w-[600px]" />
+<input class="h-[700px] w-[700px]" />
+<input class="h-[800px] w-[800px]" />
+<input class="h-[900px] w-[900px]" />
 
 <!-- EMPTINESS-->
 <div class="p-1"></div>

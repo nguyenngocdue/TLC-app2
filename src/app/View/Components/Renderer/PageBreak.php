@@ -11,9 +11,8 @@ class PageBreak extends Component
      *
      * @return void
      */
-    public function __construct(
-        private $x = '16px'
-    ) {
+    public function __construct()
+    {
         //
     }
 
@@ -25,10 +24,11 @@ class PageBreak extends Component
 
     public function render()
     {
-        return "<div style='page-break-after:always !important ' class=' flex justify-center align-middle w-full h-6 relative'>
-                    <div class=' w-full h-full top-0 z-0  absolute bg-gray-100 translate-x-[-16px] '></div>
-                    <div class=' w-full h-full top-0 z-0 absolute bg-gray-100 translate-x-[16px] '></div>
-                    <span class='no-print absolute text-black-300 font-thin text-lg '>— ✄ — ✄ — ✄ —</span>
-                    </div>";
+        $str = "<div style='page-break-after:always!important' class=' flex justify-center align-middle w-full h-6 relative'>";
+        $str .= "<div class=' w-full h-full top-0 z-0 absolute bg-gray-100 translate-x-[-80px] no-print'></div>";
+        $str .= "<div class=' w-full h-full top-0 z-0 absolute bg-gray-100 translate-x-[80px] no-print'></div>";
+        $str .= "<span class='no-print absolute text-black-300 font-thin text-lg '>— ✄ — ✄ — ✄ —</span>";
+        $str .= "</div>";
+        return $str;
     }
 }

@@ -40,7 +40,7 @@ class Prod_order_010 extends Report_ParentController
         $sql .=  "GROUP BY po.id";
         return $sql;
     }
-    public function getTableColumns($dataSource = [])
+    public function getTableColumns($dataSource, $modeParams)
     {
         return [
             [
