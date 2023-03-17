@@ -12,6 +12,7 @@ trait TableTraitColumns
         $result = [];
         foreach ($columns as $column) {
             if ($this->isInvisible($column)) continue;
+            if (empty($column)) continue;
             $name = $column['dataIndex'];
             if (isset($column['width']) && $column['width'] != '') {
                 $w = $column['width'];
@@ -62,6 +63,7 @@ trait TableTraitColumns
     {
         $columnsRendered = [];
         foreach ($columns as $key => $column) {
+            if (empty($column)) continue;
             if (!$this->isInvisible($column)) $columnsRendered[] = $this->makeTh($column, $key == sizeof($columns) - 1);
         }
         $columnsRendered = join("", $columnsRendered);

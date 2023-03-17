@@ -83,9 +83,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_ot_date": {
-        "name": "_ot_date",
-        "column_name": "ot_date",
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
         "listen_action": "trigger_change_all_lines",
         "triggers": "total_time",
         "listen_to_fields": "",
@@ -97,9 +97,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_id": {
-        "name": "_id",
-        "column_name": "id",
+    "_ot_date": {
+        "name": "_ot_date",
+        "column_name": "ot_date",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
