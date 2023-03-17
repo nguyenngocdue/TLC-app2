@@ -291,7 +291,7 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex, bat
 const triggerChangeQueue = {}
 
 const onChangeDropdown4TriggerChangeAllLines = (listener, table01Name, rowIndex, batchLength = 1) => {
-    const debugListener = true
+    // const debugListener = true
     if (debugListener) console.log("TriggerChangeAllLines", listener)
     const { column_name } = listener
 
@@ -351,7 +351,7 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
     if (saveOnChange) {
         if (ajaxQueueUpdate[url]['data'][fieldName].length >= batchLength) {
             const data = ajaxQueueUpdate[url]['data'][fieldName]
-            console.log("Sending AjaxRequest Update ", fieldName, " with data:", data, url, batchLength)
+            // console.log("Sending AjaxRequest Update ", fieldName, " with data:", data, url, batchLength)
             delete (ajaxQueueUpdate[url]['data'][fieldName])
             $.ajax({
                 type: 'POST',
@@ -366,14 +366,16 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
 }
 
 const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, batchLength = 1, name }) => {
+    // const debugFlow = true
     // console.log({ fieldName, table01Name, rowIndex, lineType, batchLength, name })
     const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
     for (let i = 0; i < listenersOfDropdown4.length; i++) {
         let listener = listenersOfDropdown4[i]
-        const { triggers, listen_action } = listener
+        const { triggers, listen_action, column_name } = listener
         // console.log(triggers, listen_action, name, fieldName, table01Name, rowIndex)
         if (triggers.includes(fieldName)) {
             // console.log("listen_action", listen_action)
+            if (debugFlow) console.log(name, "-->", column_name, listen_action, table01Name + "_" + rowIndex, batchLength)
             switch (listen_action) {
                 case "reduce":
                     onChangeDropdown4Reduce(listener, table01Name, rowIndex, lineType)

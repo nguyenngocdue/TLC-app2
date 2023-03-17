@@ -117,9 +117,7 @@ const addANewLineFull = (params) => {
                 + btnTrash
                 + '</div>'
         } else {
-            let onChange = ''
             // console.log("Rendering", column)
-            // onChangeDropdown4({name:"table02[prod_discipline_id][5]",  table01Name:"table02", rowIndex:5, lineType:"prod_discipline_1"})
             let onChangeParams = "{"
             onChangeParams += "name:\"" + id + "\","
             onChangeParams += "lineType:\"" + column['lineType'] + "\","
@@ -140,7 +138,9 @@ const addANewLineFull = (params) => {
                 case 'read-only-text4':
                     if (column['dataIndex'] === 'id') {
                         if (insertedId) {
-                            renderer = "<input id='" + id + "' name='" + id + "' value='" + insertedId + "' type='hidden' />" + insertedId
+                            renderer = "<input id='" + id + "' name='" + id + "' value='" + insertedId + "' type='hidden' />"
+                            renderer += "<div class='text-center'>" + insertedId + "</div>"
+                            renderer += "<script>" + makeOnChangeAdvanced(onChangeDropdown4Fn) + "</script>"
                         } else {
                             renderer = "<input id='" + id + "' name='" + id + "' type='hidden' />"
                         }

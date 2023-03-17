@@ -1,7 +1,8 @@
 let k = {},
     listenersOfDropdown2 = [],
     filtersOfDropdown2 = [],
-    debugListener = false
+    debugListener = false,
+    debugFlow = false
 const makeIdForNumber = (n) =>
     '#' +
     String(n).padStart(6, '0').substring(0, 3) +
