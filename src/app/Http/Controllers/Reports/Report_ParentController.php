@@ -132,38 +132,25 @@ abstract class Report_ParentController extends Controller
         ];
     }
 
+    protected function forwardToMode($request, $typeReport, $entity)
+    {
+        return redirect($request->getPathInfo());
+    }
+
 
     public function index(Request $request)
     {
 
         $input = $request->input();
+        // Log::info($input);
 
         $typeReport = CurrentRoute::getTypeController();
         $routeName = $request->route()->action['as'];
         $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
 
-        // Update user setting when select mode_020
-        if (isset($input['mode_option']) || isset($input['months']) || isset($input['user_id'])) {
-            if (isset($input['months']) || isset($input['user_id'])) {
-                $mode = explode('/', $request->getPathInfo())[3];
-                $params = [
-                    '_entity' => $entity,
-                    'action' => 'updateReportRegisters',
-                    'type_report' => $typeReport,
-                    'mode_option' => $mode
-                ] + $input;
-                $request->replace($params);
-                (new UpdateUserSettings())($request);
-                return redirect($request->getPathInfo());
-            }
-            $mode = $input['mode_option'];
-            $routeName = explode('/', $request->getPathInfo())[2];
-            return redirect(route($routeName . '_' . $mode));
-        }
-
         if (!$request->input('page') && !empty($input)) {
             (new UpdateUserSettings())($request);
-            return redirect($request->getPathInfo());
+            return $this->forwardToMode($request, $typeReport, $entity);
         }
 
         $currentUserId = Auth::id();

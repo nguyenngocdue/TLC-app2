@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\UpdateUserSettings;
 use Illuminate\Support\Facades\DB;
 
 
@@ -130,19 +131,40 @@ class Hr_overtime_request_020 extends Report_ParentController
         return array_merge($months, $users);
     }
 
-
-
     protected function getDefaultValueModeParams($modeParams, $request)
     {
-        // dump($modeParams);
+
+
         return $modeParams;
     }
 
-
-
-
     protected function enrichDataSource($dataSource, $modeParams)
     {
+        foreach ($dataSource as $key => $value) {
+            $htmlEmployeeId = "<span title='User ID: $value->user_id'>$value->employee_id</span>";
+            $dataSource[$key]->employee_id = $htmlEmployeeId;
+        }
         return collect($dataSource);
+    }
+
+    protected function forwardToMode($request, $typeReport, $entity)
+    {
+        $input = $request->input();
+        if (isset($input['months']) || isset($input['user_id'])) {
+            $params = [
+                '_entity' => $entity,
+                'action' => 'updateReport' . $typeReport,
+                'type_report' => $typeReport,
+                'mode_option' => $this->mode
+            ] + $input;
+            $request->replace($params);
+            (new UpdateUserSettings())($request);
+            return redirect($request->getPathInfo());
+        }
+        if (isset($input['mode_option'])) {
+            $mode = $input['mode_option'];
+            $routeName = explode('/', $request->getPathInfo())[2];
+            return redirect(route($routeName . '_' . $mode));
+        }
     }
 }

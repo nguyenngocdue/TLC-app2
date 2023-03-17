@@ -14,7 +14,6 @@ $route = $routeName ? route($routeName) : "";
                 <input type="hidden" name='_entity' value="{{ $entity }}">
                 <input type="hidden" name='action' value="updateReport{{$typeReport}}">
                 <input type="hidden" name='type_report' value="{{$typeReport}}">
-                <input type="hidden" name='type_report' value="{{$typeReport}}">
                 <input type="hidden" name='mode_option' value="{{$modeOption}}">
                 @foreach($columns as $key =>$value)
                 @php
