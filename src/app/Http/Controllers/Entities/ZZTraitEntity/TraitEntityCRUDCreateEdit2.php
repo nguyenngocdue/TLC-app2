@@ -13,6 +13,7 @@ use App\Utils\Support\JsonControls;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -56,6 +57,9 @@ trait TraitEntityCRUDCreateEdit2
 
 	public function edit(Request $request, $id)
 	{
+		$model = (new ($this->data))::findOrFail($id);
+		if (!Gate::allows('edit', $model)) abort(403);
+		if (!Gate::allows('edit-others', $model, $this->type)) abort(403);
 		$status = $request->query('status');
 		$dryRunTokenRequest = $request->query('dryrun_token');
 		$valueCreateDryToken = $this->hashDryRunToken($id, $status);
