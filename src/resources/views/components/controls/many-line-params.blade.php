@@ -54,8 +54,10 @@
 @endif
 {{-- This is for when clicked "Add a new item", if the column is parent_id and parent_type and might be invisible, --}}
 {{-- its value will get from here --}}
-<input class="bg-gray-200" readonly title="entityParentType" id="entityParentType" value="{{$entityType}}" type="{{$tableDebugTextHidden}}" />
-<input class="bg-gray-200" readonly title="entityParentId" id="entityParentId" value="{{$entityId}}" type="{{$tableDebugTextHidden}}" />
-<input class="bg-gray-200" readonly title="userId" id="userId" value="{{$userId}}" type="{{$tableDebugTextHidden}}" />
+@once
+    <input class="bg-gray-200" readonly title="entityParentType" id="entityParentType" value="{{$entityType}}" type="{{$tableDebugTextHidden}}" />
+    <input class="bg-gray-200" readonly title="entityParentId" id="entityParentId" value="{{$entityId}}" type="{{$tableDebugTextHidden}}" />
+    <input class="bg-gray-200" readonly title="currentUserId" id="currentUserId" value="{{$userId}}" type="{{$tableDebugTextHidden}}" />
+@endonce
 
 @endif
