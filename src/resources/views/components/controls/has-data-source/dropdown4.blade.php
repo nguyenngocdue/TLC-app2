@@ -10,8 +10,8 @@
         $label = $nameless ? "Nameless #$selected" : DB::table($table)->whereIn('id',$selectedArray)->pluck('name');
         $selected = (empty($selectedArray)) ? null : $selectedArray[0]; 
         @endphp
-        <input id='{{$id}}' name='{{$name}}' class='{{$classList}}' value="{{$selected}}" type="hidden"/>
-        <div class="px-2">{{$label[0]??""}}</div>
+        <input id='{{$id}}' name='{{$name}}' class='{{$classList}} readonly' value="{{$selected}}" type="hidden" readonly/>
+        <div class="px-2" title="#{{$selected}}">{{$label[0]??""}}</div>
     @endif
 @else
     <select id='{{$id}}' name='{{$name}}' {{$multiple ? "multiple" : ""}} class='{{$classList}}'

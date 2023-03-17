@@ -187,7 +187,7 @@ const duplicateEditableTable = (params) => {
         valuesOfOrigin[column['dataIndex']] = value
     }
     // console.log(valuesOfOrigin)
-    addANewLine({ tableId: control.value, valuesOfOrigin })
+    addANewLine({ tableId: control.value, valuesOfOrigin, isDuplicatedOrAddFromList: true })
 }
 
 const trashEditableTable = (params) => {

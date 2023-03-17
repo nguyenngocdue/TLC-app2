@@ -17,7 +17,7 @@ const findParentIdFieldName = (tableId) => {
 }
 
 const addANewLine = (params) => {
-    const { tableId, valuesOfOrigin = {} } = params
+    const { tableId, valuesOfOrigin = {}, isDuplicatedOrAddFromList = false } = params
     const { tableName, } = tableObject[tableId]
     // console.log(params, tableName,)
     const parentId = getEById('entityParentId').val()
@@ -43,8 +43,10 @@ const addANewLine = (params) => {
             const insertedId = response['hits'][0]['id']
             valuesOfOrigin['id'] = insertedId
             valuesOfOrigin[parentIdFieldName] = parentId
+            valuesOfOrigin['ot_date'] = moment().format('DD/MM/YYYY')
+
             // console.log('insertedId', insertedId, valuesOfOrigin)
-            addANewLineFull({ tableId, valuesOfOrigin })
+            addANewLineFull({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList })
             getEById(btnId).show()
             getEById(spinId).hide()
         }
@@ -53,7 +55,7 @@ const addANewLine = (params) => {
 
 const addANewLineFull = (params) => {
 
-    const { tableId } = params
+    const { tableId, isDuplicatedOrAddFromList } = params
     let { valuesOfOrigin } = params //<< Incase of duplicate, this is the value of the original line
     const insertedId = valuesOfOrigin['id']
     // console.log('addANewLine', tableId, insertedId)
@@ -71,7 +73,8 @@ const addANewLineFull = (params) => {
         noCell.classList = "px-1 py-1 dark:border-gray-600 border-r text-center";
         noCell.innerHTML = "New"
     }
-    const toDoAfterAdded = []
+    const toDoAfterAddedDropdown4 = []
+    const toDoAfterAddedDropdown4ReadOnly = []
     const newRowIndex = getAllRows(tableId).length - 1 //exclude itself
     // console.log("newRowIndex", newRowIndex, getAllRows(tableId))
     columns.forEach((column) => {
@@ -123,7 +126,15 @@ const addANewLineFull = (params) => {
             onChangeParams += "table01Name:\"" + column['table01Name'] + "\","
             onChangeParams += "rowIndex: " + newRowIndex + ","
             onChangeParams += "saveOnChange: " + saveOnChange + ","
+            onChangeParams += "batchLength " + ","
             onChangeParams += "}"
+
+            const onChangeDropdown4Fn = "onChangeDropdown4(" + onChangeParams + ");"
+
+            const makeOnChangeAdvanced = (moreCodeAfter) => ""
+                + "$(\"[id='" + id + "']\").on('change', function(e, batchLength){"
+                + moreCodeAfter
+                + "})"
 
             switch (column['renderer']) {
                 case 'read-only-text4':
@@ -150,12 +161,16 @@ const addANewLineFull = (params) => {
                     }
                     break
                 case 'dropdown4':
-                    onChange = "onChangeDropdown4(" + onChangeParams + ")"
-
                     multipleStr = column?.multiple ? "multiple" : ""
                     bracket = column?.multiple ? "[]" : ""
-                    renderer = "<select id='" + id + "' name='" + id + bracket + "' " + multipleStr + " onChange='" + onChange + "' class='" + column['classList'] + "'></select>"
-                    renderer += "<script>getEById('" + id + "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
+                    if (column['readOnly']) {
+                        renderer = "<input id='" + id + "' name='" + id + bracket + "' type='hidden' >"
+                        renderer += "<div id='" + id + "_label' class='px-2'></div>"
+                    } else {
+                        renderer = "<select id='" + id + "' name='" + id + bracket + "' " + multipleStr + "' class='" + column['classList'] + "'></select>"
+                        // renderer += "<script>getEById('" + id + "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
+                    }
+                    renderer += "<script>" + makeOnChangeAdvanced(onChangeDropdown4Fn) + "</script>"
                     break
                 case "toggle4":
                     renderer = '<div class="flex justify-center">\
@@ -165,24 +180,28 @@ const addANewLineFull = (params) => {
                     </label></div>'
                     break
                 case "number4":
+                    renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "' type=number step=any />";
                     if (column['dataIndex'] === 'order_no') {
                         orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
-                        onChange = "reRenderTableBaseOnNewOrder(\"" + tableId + "\")"
+                        const reRenderFn = "reRenderTableBaseOnNewOrder(\"" + tableId + "\")"
+                        renderer += "<script>" + makeOnChangeAdvanced(reRenderFn) + "</script>"
+
                     } else {
-                        onChange = "onChangeDropdown4(" + onChangeParams + ");changeBgColor(this,\"" + tableId + "\")"
+                        // onChange = "onChangeDropdown4(" + onChangeParams + ");changeBgColor(this,\"" + tableId + "\")"
+                        const changeBgColorFn = "changeBgColor(this,\"" + tableId + "\");"
+                        renderer += "<script>" + makeOnChangeAdvanced(onChangeDropdown4Fn + changeBgColorFn) + "</script>"
                     }
-                    renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "' type=number step=any onChange='" + onChange + "' />";
                     break
                 case "text4":
-                    onChange = "onChangeDropdown4(" + onChangeParams + ")"
-                    renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "' onChange='" + onChange + "'/>";
+                    renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "' />";
+                    renderer += "<script>" + makeOnChangeAdvanced(onChangeDropdown4Fn) + "</script>"
                     break
                 case "textarea4":
                     renderer = "<textarea id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "'></textarea>"
                     break
                 case "picker-all4":
-                    onChange = "onChangeDropdown4(" + onChangeParams + ")"
-                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "' onchange='" + onChange + "'>"
+                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "'>"
+                    renderer += "<script>" + makeOnChangeAdvanced(onChangeDropdown4Fn) + "</script>"
                     break
                 default:
                     renderer = "Unknown how to render " + column['renderer']
@@ -192,30 +211,48 @@ const addANewLineFull = (params) => {
         //row.insertCell MUST run after get Max finger Print
         const cell = row.insertCell();
         const hidden = column['invisible'] ? "hidden" : ""
-        cell.classList = "p1x-1 p1y-1 dark:border-gray-600 border-r text-center " + hidden;
+        const cellId = "cell_" + id
+        cell.classList = "dark:border-gray-600 border-r " + hidden;
+        cell.id = cellId;
         // console.log("Insert column", column['dataIndex'], renderer)
         const showNameStr = tableDebugJs ? id : ""
-        cell.innerHTML = showNameStr + renderer
+        const cellHtml = showNameStr + renderer
+        getEById(cellId).html(cellHtml) //<< This is to run <script>, cell.innerHTML doesn't run
 
         switch (column['renderer']) {
             case 'dropdown4':
                 let selected
-                if (valuesOfOrigin == undefined) {
-                    if (column['value_as_parent_id'] == true) selected = $('#entityParentId').val()
-                    if (column['value_as_user_id'] == true) selected = $('#userId').val()
-                } else {
+                if (isDuplicatedOrAddFromList) {
                     selected = valuesOfOrigin[column['dataIndex']]
+                } else {
+                    switch (true) {
+                        case column['value_as_parent_id']: selected = $('#entityParentId').val(); break
+                        case column['value_as_user_id']: selected = $('#currentUserId').val(); break
+                    }
                 }
-                // console.log("reloading", valuesOfOrigin, selected)
-                toDoAfterAdded.push({ id, dataSource: k[column['tableName']], tableId, selected })
+                if (column['readOnly']) {
+                    getEById(id).val(selected)
+                    const dataSource = k[column['tableName']]
+                    // console.log(dataSource)
+                    let label = "Unknown #" + selected
+                    for (let i = 0; i < dataSource.length; i++) {
+                        if (dataSource[i].id == selected) {
+                            label = dataSource[i].name
+                            break
+                        }
+                    }
+                    getEById(id + '_label').html(label)
+                    toDoAfterAddedDropdown4ReadOnly.push({ id, dataSource: k[column['tableName']], tableId, selected })
+                    // getEById(id).trigger("change")
+                } else {
+                    toDoAfterAddedDropdown4.push({ id, dataSource: k[column['tableName']], tableId, selected })
+                }
                 break
             case 'dropdown': //<<status
-                if (valuesOfOrigin != undefined) {
-                    let selected = valuesOfOrigin[column['dataIndex']]
-                    // console.log("Setting status", id, 'to', selected)
-                    getEById(id).val(selected)
-                    getEById(id).trigger("change")
-                }
+                let selected1 = valuesOfOrigin[column['dataIndex']]
+                // console.log("Setting status", id, 'to', selected)
+                getEById(id).val(selected1)
+                getEById(id).trigger("change")
                 break
             default:
                 if (column['value_as_parent_id']) {
@@ -233,25 +270,29 @@ const addANewLineFull = (params) => {
                     getEById(id).trigger("change")
                     break
                 }
-                if (valuesOfOrigin != undefined) {
-                    const value = valuesOfOrigin[column['dataIndex']]
-                    if (column['renderer'] === 'toggle') {
-                        getEById(id)[0].checked = value
-                    } else {
-                        getEById(id).val(value)
-                    }
-                    getEById(id).trigger("change")
-                    break
+                const value = valuesOfOrigin[column['dataIndex']]
+                if (column['renderer'] === 'toggle') {
+                    getEById(id)[0].checked = value
+                } else {
+                    getEById(id).val(value)
                 }
+                getEById(id).trigger("change")
+                break
 
             // console.log("Added new column", column['dataIndex'])
         }
     })
-    // console.log(toDoAfterAdded)
+    // console.log(toDoAfterAddedDropdown4)
     //This is to make sure the Listen assign will assign to the existing column
-    for (let i = 0; i < toDoAfterAdded.length; i++) {
-        const { id, dataSource, tableId, selected } = toDoAfterAdded[i]
+    for (let i = 0; i < toDoAfterAddedDropdown4.length; i++) {
+        const { id, dataSource, tableId, selected } = toDoAfterAddedDropdown4[i]
         reloadDataToDropdown4(id, dataSource, tableId, selected)
+        getEById(id).trigger("change")
+        // console.log("Triggered change", id)
+    }
+    for (let i = 0; i < toDoAfterAddedDropdown4ReadOnly.length; i++) {
+        const { id, dataSource, tableId, selected } = toDoAfterAddedDropdown4ReadOnly[i]
+        // reloadDataToDropdown4(id, dataSource, tableId, selected)
         getEById(id).trigger("change")
         // console.log("Triggered change", id)
     }
