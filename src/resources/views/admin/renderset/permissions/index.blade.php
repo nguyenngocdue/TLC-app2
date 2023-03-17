@@ -3,19 +3,19 @@
 @section('topTitle', 'Permission Library')
 @section('title', 'Set Permissions to Roles')
 
+  
 @section('content')
 <main class="h-full overflow-y-auto">
     <div class="container mx-auto grid px-6">
         <label for="roles" class="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-300">Select an
             option role</label>
         <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+
             <form action="{{ route('setpermissions.store') }}" method="POST">
                 @csrf
-                <select name="role" id="roles" onchange="this.form.submit()" class="role block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
-                    @foreach ($roles as $role)
-                    <option value="{{ $role->name }}" @isset($roleSelected) {{ $roleSelected->name == $role->name ? 'selected' : '' }} @endisset>
-                        {{ $role->name }}
-                    </option>
+                <select id="roles" class="select2-hidden-accessible" onchange="this.form.submit()" style="width: 100%;" name="role" tabindex="-1" aria-hidden="true">
+                    @foreach($roles as $role)
+                    <option value="{{$role->name}}" @selected($roleSelected ? $roleSelected->name == $role->name : null) >{{$role->name ?? $role->id}}</option>
                     @endforeach
                 </select>
             </form>
@@ -71,6 +71,13 @@
         </div>
     </div>
 </main>
+<script>
+    $('[id="'+"roles"+'"]').select2({
+        placeholder: "Please select..."
+        , allowClear: false
+        , templateResult: select2FormatState
+    });
+</script>
 <script>
     $(document).ready(function() {
         $('.select-all').click(function() {

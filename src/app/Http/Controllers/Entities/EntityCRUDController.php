@@ -26,11 +26,15 @@ class EntityCRUDController extends Controller
 	protected $superProps;
 
 	protected $uploadService2;
+	protected $permissionMiddleware;
 
 	//construction has to be no argument as for further instantiation of EditableTable
 	public function __construct()
 	{
 		$this->assignDynamicTypeCreateEdit();
+		$this->middleware("permission:{$this->permissionMiddleware['create']}")->only('create');
+		$this->middleware("permission:{$this->permissionMiddleware['edit']}")->only('edit', 'store', 'update');
+		$this->middleware("permission:{$this->permissionMiddleware['delete']}")->only('edit', 'store', 'update', 'destroy');
 		$this->postConstruct();
 	}
 

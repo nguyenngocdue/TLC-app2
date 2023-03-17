@@ -44,6 +44,8 @@ class ManageJsonController extends Controller
 
     protected $type = "";
     protected $typeModel = "";
+    protected $permissionMiddleware;
+
 
     private $pages = [
         "_ppt" => Pages::Property,
@@ -73,10 +75,15 @@ class ManageJsonController extends Controller
         "_unt" => Pages::UnitTest,
     ];
 
+
     public function __construct()
     {
         $this->assignDynamicTypeManageJson();
         //More code down here
+        $this->middleware("permission:{$this->permissionMiddleware['read']}")->only('index');
+        $this->middleware("permission:{$this->permissionMiddleware['create']}")->only('create');
+        $this->middleware("permission:{$this->permissionMiddleware['edit']}")->only('store');
+        $this->middleware("permission:{$this->permissionMiddleware['delete']}")->only('store', 'destroy');
     }
 
     private function getPathInfoWithoutCreate(Request $request)

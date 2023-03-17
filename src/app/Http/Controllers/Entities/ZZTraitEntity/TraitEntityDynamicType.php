@@ -18,8 +18,9 @@ trait TraitEntityDynamicType
         $this->typeModel = Str::modelPathFrom($tableName);
         $this->permissionMiddleware = [
             'read' => "read-$tableName",
-            'edit' => "read-$tableName|create-$tableName|edit-$tableName|edit-others-$tableName",
-            'delete' => "read-$tableName|create-$tableName|edit-$tableName|edit-others-$tableName|delete-$tableName|delete-others-$tableName"
+            'create' => "create-$tableName",
+            'edit' => "edit-$tableName|edit-others-$tableName",
+            'delete' => "delete-$tableName|delete-others-$tableName"
         ];
     }
 
@@ -33,8 +34,9 @@ trait TraitEntityDynamicType
         $this->data = Str::modelPathFrom($tableName);
         $this->permissionMiddleware = [
             'read' => "read-$tableName",
-            'edit' => "read-$tableName|create-$tableName|edit-$tableName|edit-others-$tableName",
-            'delete' => "read-$tableName|create-$tableName|edit-$tableName|edit-others-$tableName|delete-$tableName|delete-others-$tableName"
+            'create' => "create-$tableName",
+            'edit' => "edit-$tableName|edit-others-$tableName",
+            'delete' => "delete-$tableName|delete-others-$tableName"
         ];
 
         // dump($this->type);
@@ -69,6 +71,13 @@ trait TraitEntityDynamicType
 
         $this->type = $singular;
         $this->typeModel = Str::modelPathFrom($tableName);
+        $tableName = Str::plural($tableName);
+        $this->permissionMiddleware = [
+            'read' => "read-$tableName",
+            'create' => "create-$tableName",
+            'edit' => "edit-$tableName|edit-others-$tableName",
+            'delete' => "delete-$tableName|delete-others-$tableName"
+        ];
     }
 
     private function assignDynamicTypeManual($tableName)
@@ -80,8 +89,9 @@ trait TraitEntityDynamicType
         $this->data = Str::modelPathFrom($tableName);
         $this->permissionMiddleware = [
             'read' => "read-$tableName",
-            'edit' => "read-$tableName|create-$tableName|edit-$tableName|edit-others-$tableName",
-            'delete' => "read-$tableName|create-$tableName|edit-$tableName|edit-others-$tableName|delete-$tableName|delete-others-$tableName"
+            'create' => "create-$tableName",
+            'edit' => "edit-$tableName|edit-others-$tableName",
+            'delete' => "delete-$tableName|delete-others-$tableName"
         ];
 
         // dump($this->type);
