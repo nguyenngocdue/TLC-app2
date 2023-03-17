@@ -40,4 +40,8 @@ class Report
     {
         return  ucwords(str_replace('_', " ", $string));
     }
+    public static function isNullModeParams($modeParams)
+    {
+        return count(array_filter($modeParams, fn ($value) => !is_null($value))) <= 0;
+    }
 }

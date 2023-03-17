@@ -16,6 +16,12 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 	use TraitReport;
 	protected $viewName = 'document-qaqc-insp-chklst';
 
+	// set default params's values 
+	protected  $sub_project_id = 21;
+	protected  $prod_order_id = 82;
+	protected  $qaqc_insp_tmpl_id = 1;
+	protected  $run_option = 1;
+
 	public function getSqlStr($modeParams)
 	{
 		$isCheck = isset($modeParams['prod_order_id']) && isset($modeParams['sub_project_id']);
@@ -71,7 +77,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		return $sql;
 	}
 
-	public function getTableColumns($dataSource = [])
+	public function getTableColumns($dataSource, $modeParams)
 	{
 		return [
 			[
@@ -111,7 +117,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		];
 	}
 
-	protected function modeOptions()
+	protected function getDataModes()
 	{
 		return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020']];
 	}
@@ -128,7 +134,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 
 	protected function enrichDataSource($dataSource, $modeParams)
 	{
-		$isNullParams = $this->isNullModeParams($modeParams);
+		$isNullParams = Report::isNullModeParams($modeParams);
 		if ($isNullParams) return collect([]);
 
 		$lines =  [];
@@ -172,7 +178,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 				$item = $lines[$id];
 				// dd($item['c1']);
 				if (!is_null($item['c1'])) {
-					$str .= "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createLongStrHTML($item) . "</tr>";
+					$str .= "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createLongStrTdHTML($item) . "</tr>";
 					$str .= $this->createStrImage($item);
 					$str .=  $this->createStrComment($item);
 					$arrayHtml[$id] = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str . "</tbody>" . "</table>";
@@ -225,6 +231,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 	{
 		$object_type = "App\Models\qaqc_insp_chklst_line";
 		$attachment = $this->getAttachment($object_type, $item['line_id']);
+		if (empty($attachment)) return '';
 		$path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
 		$strCenter = "";
 		foreach ($attachment as  $att) {
@@ -247,7 +254,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		return $strHead . $strCenter . $strTail;
 	}
 
-	private function createLongStrHTML($item)
+	private function createLongStrTdHTML($item)
 	{
 		$circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
 		$checkedIcon = "<i class='fa-solid fa-circle-check px-2'></i>";
@@ -271,7 +278,8 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 
 	private function createStrImage($item)
 	{
-		$td = '<td class="border" colspan=5 style="width:190px">' . '<div class="">' . $this->createStrHtmlImage($item) . '</div>' . '</td>';
+		if (!strlen($this->createStrHtmlImage($item))) return '';
+		$td = '<td class="border" colspan=5 style="width:190px">'  . $this->createStrHtmlImage($item) . '</td>';
 		return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
 	}
 
@@ -304,13 +312,21 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		return $sheets;
 	}
 
-	protected function setDefaultValueModeParams($modeParams, $request)
+	protected function getDefaultValueModeParams($modeParams, $request)
 	{
 		$x = 'sub_project_id';
 		$y = 'prod_order_id';
-		if (!isset($modeParams[$x]) || empty($modeParams)) {
-			return [$x => 21, $y => 82];
+		$z = 'qaqc_insp_tmpl_id';
+		$g = 'run_option';
+		$isNullModeParams = Report::isNullModeParams($modeParams);
+		// dd($isNullModeParams);
+		if ($isNullModeParams) {
+			$modeParams[$x] = $this->sub_project_id;
+			$modeParams[$y] = $this->prod_order_id;
+			$modeParams[$z] = $this->qaqc_insp_tmpl_id;
+			$modeParams[$g] = $this->run_option;
 		}
+		// dd($modeParams);
 		return $modeParams;
 	}
 }

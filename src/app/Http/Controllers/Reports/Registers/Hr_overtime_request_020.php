@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\UpdateUserSettings;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Log;
 
 class Hr_overtime_request_020 extends Report_ParentController
 {
@@ -30,6 +31,7 @@ class Hr_overtime_request_020 extends Report_ParentController
         ,otline.from_time from_time
         ,otline.break_time break_time
         ,otline.to_time to_time
+        ,otline.total_time total_time
         ,otline.month_allowed_hours month_allowed_hours
         ,otline.month_remaining_hours month_remaining_hours
         ,otline.year_allowed_hours year_allowed_hours
@@ -46,8 +48,7 @@ class Hr_overtime_request_020 extends Report_ParentController
         return $sql;
     }
 
-
-    public function getTableColumns($dataSource)
+    public function getTableColumns($dataSource, $modeParams)
     {
         $personDataCol = [
             [
@@ -58,26 +59,30 @@ class Hr_overtime_request_020 extends Report_ParentController
                 "title" => "HR Overtime Request",
                 "dataIndex" => "hr_overtime_request_id",
                 "align" => "center",
-                "renderer" => "id",
+                "renderer" => "qr_code",
                 "type" => "hr_overtime_requests",
             ],
             [
                 "dataIndex" => "request_id",
                 "align" => "center",
-                "renderer" => "id",
+                "renderer" => "qr_code",
                 "type" => "hr_overtime_request_lines",
             ]
         ];
-        $editFields = [[
+        $editDataCols = [[
             "title" => "Date",
             "dataIndex" => "ot_date",
             "align" => "center"
+        ], [
+            "title" => "Break Time (Mins)",
+            "dataIndex" => "break_time",
+            "align" => "center"
         ]];
-        $sqlDataCol = $this->createTableColumns($dataSource, 'first_name', 'year_remaining_hours', $editFields);
+        // dd($dataSource);
+        $sqlDataCol = $this->createTableColumns($dataSource, 'first_name', 'year_remaining_hours', $editDataCols);
         $totalDataCol = array_merge($personDataCol, $sqlDataCol);
         return  $totalDataCol;
     }
-
     protected function getParamColumns()
     {
         return [
@@ -93,11 +98,10 @@ class Hr_overtime_request_020 extends Report_ParentController
         ];
     }
 
-    protected function modeOptions()
+    protected function getDataModes()
     {
         return ['mode_option' => ['010' => 'Overtime Summary ', '020' => 'User Overtime']];
     }
-
 
 
     private function getAllMonths()
@@ -131,19 +135,42 @@ class Hr_overtime_request_020 extends Report_ParentController
         return array_merge($months, $users);
     }
 
-
-
-    protected function setDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueModeParams($modeParams, $request)
     {
-        // dump($modeParams);
+
+
         return $modeParams;
     }
 
-
-
-
     protected function enrichDataSource($dataSource, $modeParams)
     {
+        foreach ($dataSource as $key => $value) {
+            $htmlEmployeeId = "<span title='User ID: $value->user_id'>$value->employee_id</span>";
+            $dataSource[$key]->employee_id = $htmlEmployeeId;
+        }
         return collect($dataSource);
+    }
+
+    protected function forwardToMode($request, $typeReport, $entity)
+    {
+        $input = $request->input();
+
+        if (isset($input['months']) || isset($input['user_id'])) {
+            // Log::info("020");
+            $params = [
+                '_entity' => $entity,
+                'action' => 'updateReport' . $typeReport,
+                'type_report' => $typeReport,
+                'mode_option' => $this->mode
+            ] + $input;
+            $request->replace($params);
+            (new UpdateUserSettings())($request);
+            return redirect($request->getPathInfo());
+        }
+        if (isset($input['mode_option'])) {
+            $mode = $input['mode_option'];
+            $routeName = explode('/', $request->getPathInfo())[2];
+            return redirect(route($routeName . '_' . $mode));
+        }
     }
 }

@@ -1,14 +1,14 @@
 {{-- @dd($dataSource) --}}
 @php
-$sheetDesc = $dataSource['sheet_name'];
+$sheetDesc = $dataSource['sheet_name']?? 'No Available Sheet Name ';
 // $name = App\Utils\Support\Report::slugName($sheetDesc)
 $name = $sheetDesc
 @endphp
-<div id="{{$name}}" class=" md:scroll-mt-20   sm:py-0 rounded-lg  bg-white border-t border-r border-l border-gray-300 dark:border-gray-600">
+<div id="{{$name}}" class=" md:scroll-mt-20   sm:py-0 rounded-lg  bg-white  dark:border-gray-600">
     <div class="border-b p-3 font-medium">
         <span class="">{{strtoupper($sheetDesc)}} - INSPECTION CHECK SHEET</span>
     </div>
-    <div class="flex justify-between border-b p-3">
+    <div class="flex justify-between p-3">
         <div class="flex">
             <div class="flex flex-col pr-2  font-medium">
                 <span>Organization:</span>

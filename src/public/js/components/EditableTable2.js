@@ -187,7 +187,7 @@ const duplicateEditableTable = (params) => {
         valuesOfOrigin[column['dataIndex']] = value
     }
     // console.log(valuesOfOrigin)
-    addANewLine({ tableId: control.value, valuesOfOrigin })
+    addANewLine({ tableId: control.value, valuesOfOrigin, isDuplicatedOrAddFromList: true })
 }
 
 const trashEditableTable = (params) => {
@@ -232,7 +232,7 @@ const cloneFirstLineDown = (dataIndex, tableId, renderer) => {
             // getEById(id).trigger('change')
         } else {
             getEById(id).val(value)
-            getEById(id).trigger('change')
+            getEById(id).trigger('change', length)
         }
     }
 }

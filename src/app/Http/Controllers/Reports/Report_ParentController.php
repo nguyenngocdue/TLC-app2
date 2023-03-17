@@ -18,7 +18,7 @@ abstract class Report_ParentController extends Controller
 {
     use TraitMenuTitle;
     abstract protected function getSqlStr($modeParams);
-    abstract protected function getTableColumns($dataSource);
+    abstract protected function getTableColumns($dataSource, $modeParams);
     abstract protected function getDataForModeControl($dataSource);
 
     protected $rotate45Width = false;
@@ -42,7 +42,6 @@ abstract class Report_ParentController extends Controller
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
         }
-        // dd($sqlStr);
         return $sqlStr;
     }
 
@@ -86,6 +85,7 @@ abstract class Report_ParentController extends Controller
     {
         // dd($dataSource);
         $page = $_GET['page'] ?? 1;
+        // $pageLimit = 150;
         $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))->appends(request()->query());
         // dd($dataSource, $pageLimit);
         return $dataSource;
@@ -114,8 +114,9 @@ abstract class Report_ParentController extends Controller
         return 10;
     }
 
-    protected function setDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueModeParams($modeParams, $request)
     {
+        // dd($modeParams);
         return $modeParams;
     }
 
@@ -126,102 +127,80 @@ abstract class Report_ParentController extends Controller
 
     protected function modeColumns()
     {
-        return [[
+        return [
+            'title' => 'Select Mode',
             'dataIndex' => 'mode_option',
-            'allowClear' => true,
-        ]];
+            'allowClear' => true
+        ];
     }
 
+    protected function forwardToMode($request, $typeReport, $entity)
+    {
+        $input = $request->input();
+        if (isset($input['form_type']) && $input['form_type'] === 'updateParams') {
+            (new UpdateUserSettings())($request);
+        }
+        return redirect($request->getPathInfo());
+    }
 
 
     public function index(Request $request)
     {
 
+        $input = $request->input();
+        Log::info($input);
 
         $typeReport = CurrentRoute::getTypeController();
         $routeName = $request->route()->action['as'];
         $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
+        // Log::info(123);
+        // Log::info($input);
 
-
-        if (count($request->input()) === 2) {
-            $modeParams = $this->setDefaultValueModeParams($request->input(), $request);
-            $modeName = explode('/', $request->getPathInfo())[3];
-            $params = [
-                '_entity' => $entity,
-                'action' => 'updateReportRegisters',
-                'type_report' => $typeReport,
-                'mode_option' => $modeName
-            ] + $modeParams;
-
-            $request->replace($params);
-            (new UpdateUserSettings())($request);
+        if (!$request->input('page') && !empty($input)) {
+            return $this->forwardToMode($request, $typeReport, $entity);
         }
-
-
-
-        // dump(Log::info($request->input()));
-        if ($request->input('mode_option')) {
-            // dd($request);
-            $mode = $request->all()['mode_option'];
-            $routeName = explode('/', $request->getPathInfo())[2];
-            (new UpdateUserSettings())($request);
-            return redirect(route($routeName . '_' . $mode));
-        }
-
-        if (!$request->input('page') && !empty($request->input())) {
-            (new UpdateUserSettings())($request);
-            return redirect($request->getPathInfo());
-        }
-        // dump(123);
-
-
 
         $currentUserId = Auth::id();
         $currentMode = $this->mode;
 
-
-        // dump($request->input(), $currentMode);
-
         $modeParams = $this->getModeParams($typeReport, $entity, $currentMode);
-        $modeParams = $this->setDefaultValueModeParams($modeParams, $request);
         // dump($modeParams);
+        $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
 
         $dataSource = $this->getDataSource($modeParams);
 
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-        // dd($dataSource);
+        // dump($dataSource);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
-        // dump(count($dataSource));
+        $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
-        // dd($dataSource);
+        // dump($modeParams);
 
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
         $viewName = strtolower(Str::singular($typeReport));
 
-
-        // dd($currentMode);
-
-
+        $tableColumns = $this->getTableColumns($dataSource, $modeParams);
         return view('reports.' . $viewName, [
-            'routeName' => $routeName,
-            'tableDataSource' => $dataSource,
-            'modeParams' => $modeParams,
             'entity' => $entity,
-            'typeReport' => $typeReport,
-            'dataModeControl' => $dataModeControl,
+            'sheets' =>  $sheet,
             'pageLimit' => $pageLimit,
+            'routeName' => $routeName,
+            'modeParams' => $modeParams,
             'groupBy' => $this->groupBy,
-            'rotate45Width' => $this->rotate45Width,
-            'currentUserId' => $currentUserId,
-            'tableColumns' => $this->getTableColumns($dataSource),
-            'sheets' =>  $this->getSheets($dataSource),
-            'paramColumns' => $this->getParamColumns(),
-            'topTitle' => $this->getMenuTitle(),
-            'legendColors' => $this->getColorLegends(),
-            'modeOptions' => $this->modeOptions(),
-            'modeColumns' => $this->modeColumns(),
+            'typeReport' => $typeReport,
             'currentMode' => $currentMode,
+            'tableColumns' => $tableColumns,
+            'tableDataSource' => $dataSource,
+            'currentUserId' => $currentUserId,
+            'dataModeControl' => $dataModeControl,
+            'rotate45Width' => $this->rotate45Width,
+            'topTitle' => $this->getMenuTitle(),
+            'modeColumns' => $this->modeColumns(),
+            'modeOptions' => $this->getDataModes(),
+            'paramColumns' => $this->getParamColumns(),
+            'legendColors' => $this->getColorLegends(),
+
         ]);
     }
 }

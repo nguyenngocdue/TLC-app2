@@ -17,6 +17,9 @@ class ReadOnlyText4 extends Component
         private $placeholder = "",
         private $cell = '',
         private $align = 'left',
+        private $table01Name = null,
+        private $rowIndex = -1,
+        private $saveOnChange = false,
     ) {
         //
     }
@@ -45,6 +48,9 @@ class ReadOnlyText4 extends Component
             'title' => $title,
             'align' => $this->align,
             'classList' => ClassList::TEXT,
+            'table01Name' => $this->table01Name,
+            'rowIndex' => $this->rowIndex,
+            'saveOnChange' => $this->saveOnChange,
         ]);
     }
 }

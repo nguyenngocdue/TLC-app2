@@ -4,14 +4,19 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\UpdateUserSettings;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
 use App\Utils\Support\Report;
+use Illuminate\Support\Facades\Log;
 
 class Qaqc_insp_chklst_sht_010 extends Report_ParentController
 {
     use TraitReport;
     protected $rotate45Width = 300;
+    // set default params's values 
+    protected  $sub_project_id = 21;
+
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT tb.*,
@@ -74,7 +79,7 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentController
         GROUP BY sheet_id, prod_id, tmpl_sheet_id) AS tb";
         return $sql;
     }
-    public function getTableColumns($dataSource)
+    public function getTableColumns($dataSource, $modeParams)
     {
         $array = [];
         foreach ($dataSource as $key => $value) {
@@ -118,7 +123,7 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentController
         ];
     }
 
-    protected function modeOptions()
+    protected function getDataModes()
     {
         return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020']];
     }
@@ -184,7 +189,7 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentController
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
-        $isNullParams = $this->isNullModeParams($modeParams);
+        $isNullParams = Report::isNullModeParams($modeParams);
         if ($isNullParams) return collect([]);
 
         $enrichData = array_map(function ($item) {
@@ -194,14 +199,16 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentController
         $groupedArray = Report::groupArrayByKey($enrichData, 'prod_id');
         $result = Report::mergeArrayValues($groupedArray);
         $data = $this->changeValueData($result);
+        // dd($data);
         return collect($data);
     }
 
-    protected function setDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueModeParams($modeParams, $request)
     {
         $x = 'sub_project_id';
-        if (!isset($modeParams[$x]) || empty($modeParams)) {
-            return [$x => 21];
+        $isNullModeParams = Report::isNullModeParams($modeParams);
+        if ($isNullModeParams) {
+            $modeParams[$x] = $this->sub_project_id;
         }
         return $modeParams;
     }

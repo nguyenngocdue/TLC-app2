@@ -1,6 +1,6 @@
 <form action="{{route($routeName, 7777)}}" method="GET" class="w-full lg:w-1/3 p-2 lg:p-0">
     @csrf
-    <div class="flex items-center lg:justify-end">
+    <div class="flex items-center lg:justify-end no-print">
         <div class="w-28 px-2">
             <input type="hidden" name='_entity' value="{{ $entity }}">
             <input type="hidden" name='action' value="updatePerPage{{$typeReport}}">

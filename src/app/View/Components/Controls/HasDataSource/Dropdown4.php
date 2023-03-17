@@ -45,7 +45,7 @@ class Dropdown4 extends Component
             'name' => $name,
             'id' => $id,
             'selected' => $this->selected,
-            'multipleStr' => $this->multiple ? "multiple" : "",
+            'multiple' => $this->multiple,
             'classList' => ClassList::DROPDOWN,
             'table' => $table,
             'readOnly' => $this->readOnly,

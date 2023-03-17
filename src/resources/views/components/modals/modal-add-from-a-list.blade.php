@@ -44,7 +44,7 @@ const addLinesToTable = (listId, tableId) => {
         const today = moment().format('DD/MM/YYYY')
         const valuesOfOrigin = { user_id, ot_date: today }
         console.log("Add line", tableId, valuesOfOrigin)
-        addANewLine({ tableId, valuesOfOrigin })
+        addANewLine({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList:true })
     }
 }
 </script>
