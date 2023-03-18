@@ -27,16 +27,6 @@ class OvertimeRequestLineController extends Controller
 
             $sql = "SELECT * FROM 
                 (SELECT 
-                    substr(ot_date, 1, 7) AS `year_month0`, 
-                    user_id, 
-                    round(40 - sum(total_time),2) AS `month_remaining_hours`
-                FROM `hr_overtime_request_lines`
-                WHERE 1=1
-                    AND user_id=$user_id
-                    AND substr(ot_date, 1, 7)='$year_month0'
-                    $idCmp
-                GROUP BY user_id, year_month0) AS month0,
-                (SELECT 
                     substr(ot_date, 1, 4) AS `year0`, 
                     user_id, 
                     round(200 - sum(total_time),2) AS `year_remaining_hours`
@@ -46,7 +36,18 @@ class OvertimeRequestLineController extends Controller
                     AND substr(ot_date, 1, 4)='$year0'
                     $idCmp
                 GROUP BY user_id, year0) AS year0
-                WHERE month0.user_id = year0.user_id
+                LEFT JOIN
+                (SELECT 
+                    substr(ot_date, 1, 7) AS `year_month0`, 
+                    user_id, 
+                    round(40 - sum(total_time),2) AS `month_remaining_hours`
+                FROM `hr_overtime_request_lines`
+                WHERE 1=1
+                    AND user_id=$user_id
+                    AND substr(ot_date, 1, 7)='$year_month0'
+                    $idCmp
+                GROUP BY user_id, year_month0) AS month0
+                ON (month0.user_id = year0.user_id)
                 ";
             // Log::info($sql);
             $resultLine = DB::select($sql);
