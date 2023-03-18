@@ -125,25 +125,47 @@ const onChangeDropdown4Assign = (listener, table01Name, rowIndex) => {
         }
     }
 }
-const onChangeDropdown4Dot = (listener, table01Name, rowIndex) => {
+
+const dotQueue = {}
+
+const onChangeDropdown4Dot = (listener, table01Name, rowIndex, batchLength = 1) => {
     // const debugListener = true
-    if (debugListener) console.log("Dot", listener)
-    const selectedObject = onChangeGetSelectedObject4(listener, table01Name, rowIndex)
+    if (debugListener) console.log("Dot", listener, batchLength)
 
     const { listen_to_attrs, column_name } = listener
     const listen_to_attr = listen_to_attrs[0]
 
-    if (debugListener) console.log(selectedObject, listen_to_attr)
-    // Unknown error
-    if (selectedObject !== undefined) {
-        const theValue = selectedObject[listen_to_attr]
-        // console.log(theValue)
-        const id = makeIdFrom(table01Name, column_name, rowIndex)
-        if (debugListener) console.log(id, theValue)
 
-        getEById(id).val(theValue)
-        getEById(id).trigger('change')
-        if (debugListener) console.log("Dotting", id, "with value", theValue)
+    if (dotQueue[column_name] === undefined) dotQueue[column_name] = {}
+    if (dotQueue[column_name]['data'] === undefined) dotQueue[column_name]['data'] = []
+    dotQueue[column_name]['data'].push(rowIndex)
+
+    const data = dotQueue[column_name]['data']
+    if (data.length >= batchLength) {
+        delete (dotQueue[column_name])
+        let actualBatchLenth = 0
+        for (let i = 0; i < data.length; i++) {
+            rowIndex = data[i]
+            const selectedObject = onChangeGetSelectedObject4(listener, table01Name, rowIndex)
+            if (debugListener) console.log(selectedObject, listen_to_attr)
+            if (selectedObject !== undefined) actualBatchLenth++
+        }
+        for (let i = 0; i < data.length; i++) {
+            rowIndex = data[i]
+            const selectedObject = onChangeGetSelectedObject4(listener, table01Name, rowIndex)
+            // Unknown error
+            if (selectedObject !== undefined) {
+                const theValue = selectedObject[listen_to_attr]
+                // console.log(theValue)
+                const id = makeIdFrom(table01Name, column_name, rowIndex)
+                if (debugListener) console.log(id, theValue)
+
+
+                getEById(id).val(theValue)
+                getEById(id).trigger('change', actualBatchLenth)
+                if (debugListener) console.log("Dotting", id, "with value", theValue)
+            }
+        }
     }
 }
 
@@ -384,7 +406,7 @@ const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, batchLength 
                     onChangeDropdown4Assign(listener, table01Name, rowIndex)
                     break
                 case "dot":
-                    onChangeDropdown4Dot(listener, table01Name, rowIndex)
+                    onChangeDropdown4Dot(listener, table01Name, rowIndex, batchLength)
                     break
                 case "date_offset":
                     onChangeDropdown4DateOffset(listener, table01Name, rowIndex)
