@@ -42,7 +42,11 @@ class EntityCRUDControllerForApi extends Controller
 			if (isset($input['ot_date'])) $input['ot_date'] = DateTimeConcern::convertForSaving('picker_date', $input['ot_date']);
 			$theRows[] = $this->modelPath::create($input);
 		}
-		return ResponseObject::responseSuccess($theRows);
+		return ResponseObject::responseSuccess(
+			$theRows,
+			[],
+			"Created " . sizeof($theRows) . " lines",
+		);
 	}
 
 	public function updateShort(Request $request)
@@ -58,12 +62,12 @@ class EntityCRUDControllerForApi extends Controller
 			$theRow = $this->modelPath::find($id);
 			if ($fieldName == 'ot_date') $value = DateTimeConcern::convertForSaving('picker_date', $value);
 			$theRow->fill([$fieldName => $value]);
-			$result[] = $theRow->save();
+			$result[$id] = $theRow->save();
 		}
 		return ResponseObject::responseSuccess(
 			$result,
 			$lines,
-			"UpdateShort"
+			"Updated " . sizeof($result) . " lines",
 		);
 	}
 }
