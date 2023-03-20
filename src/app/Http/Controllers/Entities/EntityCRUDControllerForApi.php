@@ -45,7 +45,7 @@ class EntityCRUDControllerForApi extends Controller
 		return ResponseObject::responseSuccess(
 			$theRows,
 			[],
-			"Created " . sizeof($theRows) . " liness",
+			"Created " . sizeof($theRows) . " lines",
 		);
 	}
 
@@ -62,7 +62,7 @@ class EntityCRUDControllerForApi extends Controller
 			$theRow = $this->modelPath::find($id);
 			if ($fieldName == 'ot_date') $value = DateTimeConcern::convertForSaving('picker_date', $value);
 			$theRow->fill([$fieldName => $value]);
-			$result[] = $theRow->save();
+			$result[$id] = $theRow->save();
 		}
 		return ResponseObject::responseSuccess(
 			$result,

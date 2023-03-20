@@ -188,7 +188,7 @@ const addANewLineFull = (params) => {
                         renderer += "<div id='" + id + "_label' class='px-2'></div>"
                     } else {
                         renderer = "<select id='" + id + "' name='" + id + bracket + "' " + multipleStr + "' class='" + column['classList'] + "'></select>"
-                        // renderer += "<script>getEById('" + id + "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
+                        renderer += "<script>getEById('" + id + "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
                     }
                     renderer += "<script>" + makeOnChangeAdvanced(onChangeDropdown4Fn) + "</script>"
                     break
