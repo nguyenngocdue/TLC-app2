@@ -12,14 +12,19 @@ trait TraitReport
         return $sqlData;
     }
 
-    function createTableColumns($dataSource, $strFromField, $strToFields, $editFields = [], $unsetFields = [],)
+    function createTableColumns($dataSource, $strFromField = '', $strToFields = '', $editFields = [], $unsetFields = [],)
     {
-        // dd($dataSource);
         if (empty($dataSource->items())) return [[]];
         $array = (array)array_slice($dataSource->items(), 0, 1)[0];
-        $fromField = array_search($strFromField, array_keys($array));
-        $toField = array_search($strToFields, array_keys($array));
-        $fields = array_keys(array_slice($array, $fromField, $toField - $fromField + 1));
+
+        $fields = [];
+        if ($strFromField || $strToFields) {
+            $fromField = array_search($strFromField, array_keys($array));
+            $toField = array_search($strToFields, array_keys($array));
+            $fields = array_keys(array_slice($array, $fromField, $toField - $fromField + 1));
+        } else {
+            $fields = array_keys($array);
+        }
         foreach ($unsetFields as $value) {
             $index = array_search($value, $fields);
             unset($fields[$index]);

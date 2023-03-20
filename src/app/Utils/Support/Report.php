@@ -15,6 +15,14 @@ class Report
         // dd($groupedArray, $dataSource);
         return $groupedArray;
     }
+    public static function assignKeyByKey($dataSource, $keyName)
+    {
+        $array = [];
+        foreach ($dataSource as $element) {
+            $array[$element[$keyName]] = $element;
+        }
+        return $array;
+    }
     public static function mergeArrayValues($grouped_array)
     {
         $result = [];
@@ -42,6 +50,7 @@ class Report
     }
     public static function isNullModeParams($modeParams)
     {
+        // dd($modeParams);
         return count(array_filter($modeParams, fn ($value) => !is_null($value))) <= 0;
     }
 }

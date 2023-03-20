@@ -138,6 +138,7 @@ class UpdateUserSettings extends Controller
 
     private function updatePerPageRegister($request, $settings)
     {
+        // dd(132);
         $entity = $request->input("_entity");
         $typeReport = strtolower($request->input("type_report"));
         $perPage = $request->input('page_limit');
@@ -155,6 +156,7 @@ class UpdateUserSettings extends Controller
      */
     public function __invoke(Request $request)
     {
+        // dd($request);
         $action = $request->input('action');
         $user = User::find(Auth::id());
         $settings = $user->settings;
