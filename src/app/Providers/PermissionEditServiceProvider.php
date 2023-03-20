@@ -41,8 +41,7 @@ class PermissionEditServiceProvider extends ServiceProvider
                 if (!$isTree) {
                     return $user->id == $model->owner_id;
                 }
-                $tree = BuildTree::getTreeByOptions($user->id, $user->viewport_uids, $user->leaf_uids, false, true);
-                foreach ($tree as $value) {
+                foreach ($this->treeCompany($user) as $value) {
                     return $user->id == $value->id;
                 }
                 return false;
@@ -52,5 +51,9 @@ class PermissionEditServiceProvider extends ServiceProvider
         Gate::before(function ($user, $ability) {
             return $user->hasRoleSet('super-admin') ? true : null;
         });
+    }
+    private function treeCompany($user)
+    {
+        return BuildTree::getTreeByOptions($user->id, $user->viewport_uids, $user->leaf_uids, false, true);
     }
 }

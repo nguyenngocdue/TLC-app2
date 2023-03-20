@@ -9,6 +9,7 @@ use Illuminate\View\Component;
 
 class QrCode extends Component
 {
+    static $count = 0;
     /**
      * Create a new component instance.
      *
@@ -37,9 +38,10 @@ class QrCode extends Component
             } else {
                 [$routeExits, $href] =  $this->checkRouteShowUsingIdOrSlug($type, $id);
             }
+            // dump($id);
             $color =  $routeExits ? "blue" : "red";
             $icon = "<i class='fa-duotone fa-qrcode'></i>";
-            $content = $this->contentPopover($id . '-canvas', $href);
+            $content = $this->contentPopover($id . '-canvas', $href, static::$count);
             $popover = "<x-renderer.popover id='$id' content='$content'/>";
             $hyperlink_qr = "<a href='$href' data-popover-target='$id' class='inline-block text-{$color}-500'>$icon</a>" . "$popover";
 
@@ -53,16 +55,17 @@ class QrCode extends Component
         $href =  $routeExits ? route($routeName, $params) : "#";
         return [$routeExits, $href];
     }
-    private function contentPopover($id, $href)
+    private function contentPopover($id, $href, $count)
     {
+        static::$count++;
         return '
-                <div id="' . $id . '"class="items-center flex justify-center"></div>
-                <div class="items-center w-auto">
+                <div id="' . $count . '-' . $id . '"class="items-center flex justify-center"></div>
+                <div class="items-center">
                     <span class font-medium>Scan this code by your phone</span>
                     <p class="text-xs font-medium">' . $href . '</p>
                 </div>
                 <script>
-                    new QRCode(document.getElementById("' . $id . '"),"' . $href . '",)
+                    new QRCode(document.getElementById("' . $count . '-' . $id . '"),"' . $href . '",)
                 </script>
                 ';
     }

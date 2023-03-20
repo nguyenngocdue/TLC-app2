@@ -76,7 +76,7 @@ class RoleSetSeeder extends Seeder
                 $names[] = Str::upper($name);
             }
             $roles = array_map(fn ($item) => "ADMIN-DATA-$item", $names);
-            RoleSet::create(['name' => 'admin'])->giveRoleTo([$roles]);
+            RoleSet::updateOrCreate(['name' => 'admin'])->giveRoleTo([$roles]);
         } catch (\Throwable $th) {
             throw $th;
         }

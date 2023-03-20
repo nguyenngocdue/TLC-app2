@@ -56,7 +56,7 @@ Route::group([
             $singular = Str::singular($entityName);
             $ucfirstName = Str::ucfirst($singular);
             Route::group([
-                'middleware' => "role:READ-WRITE-DATA-" . Str::upper($entityName),
+                'middleware' => "role:READ-WRITE-DATA-" . Str::upper($entityName) . "|ADMIN-DATA-" . Str::upper($entityName),
             ], function () use ($singular, $ucfirstName) {
                 for ($i = 10; $i <= 50; $i += 10) {
                     $mode = str_pad($i, 3, '0', STR_PAD_LEFT);

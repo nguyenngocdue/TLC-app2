@@ -22,9 +22,9 @@ class RoleSeeder extends Seeder
             foreach ($entities as $entity) {
                 $name = $entity->getTable();
                 $nameUpper = Str::upper($name);
-                Role::create(["name" => "READ-DATA-$nameUpper"])->givePermissionTo("read-$name");
-                Role::create(["name" => "READ-WRITE-DATA-$nameUpper"])->givePermissionTo(["read-$name", "edit-$name", "create-$name", "edit-others-$name"]);
-                Role::create(["name" => "ADMIN-DATA-$nameUpper"])->givePermissionTo(["read-$name", "edit-$name", "create-$name", "edit-others-$name", "delete-$name", "delete-others-$name"]);
+                Role::updateOrCreate(["name" => "READ-DATA-$nameUpper"])->givePermissionTo("read-$name");
+                Role::updateOrCreate(["name" => "READ-WRITE-DATA-$nameUpper"])->givePermissionTo(["read-$name", "edit-$name", "create-$name", "edit-others-$name"]);
+                Role::updateOrCreate(["name" => "ADMIN-DATA-$nameUpper"])->givePermissionTo(["read-$name", "edit-$name", "create-$name", "edit-others-$name", "delete-$name", "delete-others-$name"]);
             }
         } catch (\Throwable $th) {
             throw $th;

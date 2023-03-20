@@ -21,12 +21,12 @@ class PermissionSeeder extends Seeder
             $entities = Entities::getAll();
             foreach ($entities as $entity) {
                 $name = $entity->getTable();
-                Permission::create(['name' => "read-$name"]);
-                Permission::create(['name' => "create-$name"]);
-                Permission::create(['name' => "edit-$name"]);
-                Permission::create(['name' => "edit-others-$name"]);
-                Permission::create(['name' => "delete-$name"]);
-                Permission::create(['name' => "delete-others-$name"]);
+                Permission::updateOrCreate(['name' => "read-$name"]);
+                Permission::updateOrCreate(['name' => "create-$name"]);
+                Permission::updateOrCreate(['name' => "edit-$name"]);
+                Permission::updateOrCreate(['name' => "edit-others-$name"]);
+                Permission::updateOrCreate(['name' => "delete-$name"]);
+                Permission::updateOrCreate(['name' => "delete-others-$name"]);
             }
         } catch (\Throwable $th) {
             throw $th;
