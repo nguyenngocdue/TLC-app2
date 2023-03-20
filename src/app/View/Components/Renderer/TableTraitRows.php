@@ -82,7 +82,7 @@ trait TableTraitRows
             $td .= $styleStr;
             $td .= $cellTitle ? "title='$cellTitle'" : "";
             $td .= ">";
-            if ($cellHref) $td .= "<a href='$cellHref'>";
+            if ($cellHref) $td .= "<a class='text-blue-700' href='$cellHref'>";
             $td .= $rendered;
             if ($cellHref) $td .= "</a>";
             $td .= "</td>";
