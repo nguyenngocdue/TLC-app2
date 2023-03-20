@@ -42,6 +42,7 @@ abstract class Report_ParentController extends Controller
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
         }
+        // dd($sqlStr);
         return $sqlStr;
     }
 
@@ -137,8 +138,10 @@ abstract class Report_ParentController extends Controller
     protected function forwardToMode($request, $typeReport, $entity)
     {
         $input = $request->input();
-        if (isset($input['form_type']) && $input['form_type'] === 'updateParams') {
+        $isFormType = isset($input['form_type']);
+        if ($isFormType && $input['form_type'] === 'updateParamsReport' || $isFormType && $input['form_type'] === 'updatePerPageReport') {
             (new UpdateUserSettings())($request);
+            return redirect($request->getPathInfo());
         }
         return redirect($request->getPathInfo());
     }
@@ -153,10 +156,9 @@ abstract class Report_ParentController extends Controller
         $typeReport = CurrentRoute::getTypeController();
         $routeName = $request->route()->action['as'];
         $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
-        // Log::info(123);
-        // Log::info($input);
 
         if (!$request->input('page') && !empty($input)) {
+            // dd($input);
             return $this->forwardToMode($request, $typeReport, $entity);
         }
 
@@ -170,12 +172,18 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->getDataSource($modeParams);
 
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-        // dump($dataSource);
+        $start = microtime(true);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
+        // dump($dataSource);
+
         $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
         // dump($modeParams);
+
+        // Execute the query
+        $time = microtime(true) - $start;
+        dump($time);
 
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
         $viewName = strtolower(Str::singular($typeReport));

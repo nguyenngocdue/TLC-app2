@@ -15,7 +15,7 @@ $route = $routeName ? route($routeName) : "";
                 <input type="hidden" name='action' value="updateReport{{$typeReport}}">
                 <input type="hidden" name='type_report' value="{{$typeReport}}">
                 <input type="hidden" name='mode_option' value="{{$modeOption}}">
-                <input type="hidden" name='form_type' value="updateParams">
+                <input type="hidden" name='form_type' value="updateParamsReport">
                 @foreach($columns as $key =>$value)
                 @php
                 $title = isset($value['title']) ? $value['title'] : ucwords(str_replace('_', " ", $value['dataIndex']));
