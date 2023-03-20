@@ -1,51 +1,51 @@
 version: "3"
 
 networks:
-  laravel202:
+  laravel102:
     driver: bridge
 services:
   nginx:
     image: nginx:alpine
-    container_name: laravel202_nginx
+    container_name: laravel102_nginx
     restart: unless-stopped
     tty: true
-    ports:
-      - "28002:8001"
     environment:
       - NGINX_APP_HOST=${APP_DOMAIN_NAME}
+    ports:
+      - "18002:8001"
     volumes:
       - ../src:/var/www/app
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./configs/certs:/etc/nginx/certs
+      - ../.docker_configs/certs:/etc/nginx/certs
     depends_on:
       - php
       - mysql
     networks:
-      - laravel202
+      - laravel102
   redis:
     image: redis
-    container_name: laravel202_redis
+    container_name: laravel102_redis
     restart: unless-stopped
     environment:
       - REDIS_PASSWORD=password
       - REDIS_REPLICATION_mode=master
     ports:
-      - "27912:6379"
+      - "17912:6379"
     networks:
-      - laravel202
+      - laravel102
   redisinsight:
     image: redislabs/redisinsight
-    container_name: laravel202_redisinsight
+    container_name: laravel102_redisinsight
     restart: unless-stopped
     volumes:
       - ../redis:/var/lib/redis
     ports:
-      - "27902:8001"
+      - "17902:8001"
     networks:
-      - laravel202
+      - laravel102
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: laravel202_phpmyadmin
+    container_name: laravel102_phpmyadmin
     restart: unless-stopped
     depends_on:
       - mysql
@@ -55,17 +55,17 @@ services:
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
     ports:
-      - "28102:80"
+      - "18102:80"
     networks:
-      - laravel202
+      - laravel102
 
   mysql:
     image: mysql
-    container_name: laravel202_mysql
+    container_name: laravel102_mysql
     restart: unless-stopped
     tty: true
     ports:
-      - "28302:3306"
+      - "18302:3306"
     volumes:
       - ../mysql:/var/lib/mysql
     # user: 1000:1000
@@ -75,10 +75,10 @@ services:
       MYSQL_USER: tlc_app_2
       MYSQL_PASSWORD: DLTedTfrVzYbrYv9
     networks:
-      - laravel202
+      - laravel102
 
   websocket:
-    container_name: laravel202_websocket
+    container_name: laravel102_websocket
     build:
       context: ./laravel-echo-server
       dockerfile: Dockerfile
@@ -87,23 +87,23 @@ services:
     restart: unless-stopped
 
     ports:
-      - "27602:6001"
+      - "6001"
     depends_on:
       - nginx
       - redis
     networks:
-      - laravel202
+      - laravel102
   php:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: laravel202_php
+    container_name: laravel102_php
     restart: unless-stopped
     tty: true
     working_dir: /var/www/app
     volumes:
       - ../src:/var/www/app
     ports:
-      - "29002:9000"
+      - "19002:9000"
     networks:
-      - laravel202
+      - laravel102

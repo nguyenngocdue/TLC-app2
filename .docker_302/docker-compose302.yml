@@ -16,7 +16,7 @@ services:
     volumes:
       - ../src:/var/www/app
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./configs/certs:/etc/nginx/certs
+      - ../.docker_configs/certs:/etc/nginx/certs
     depends_on:
       - php
       - mysql
@@ -87,7 +87,7 @@ services:
     restart: unless-stopped
 
     ports:
-      - "37602:6001"
+      - "6001"
     depends_on:
       - nginx
       - redis
