@@ -87,7 +87,7 @@ services:
     restart: unless-stopped
 
     ports:
-      - "6001"
+      - "27602:6001"
     depends_on:
       - nginx
       - redis
