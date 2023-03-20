@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use Ndc\SpatieCustom\Exceptions\UnauthorizedException;
 
 trait TraitEntityCRUDCreateEdit2
 {
@@ -53,13 +54,31 @@ trait TraitEntityCRUDCreateEdit2
 			'filters4' => $this->getFilters4($tableBluePrint),
 		]);
 	}
-
+	private function checkPermissionEdit($permission)
+	{
+		return auth()->user()->roleSets[0]->hasAnyPermission($permission);
+	}
+	private function checkPermissionEditUsingGate($id)
+	{
+		$permissions = $this->permissionMiddleware['edit'];
+		$permissions = is_array($permissions) ? $permissions : explode('|', $permissions);
+		$model = (new ($this->data))::findOrFail($id);
+		switch (true) {
+			case $this->checkPermissionEdit($permissions[0]):
+				if (!Gate::allows('edit', $model)) abort(403);
+				break;
+			case $this->checkPermissionEdit($permissions[1]):
+				if (!Gate::allows('edit-others', $model)) abort(403);
+				break;
+			default:
+				break;
+		}
+	}
 
 	public function edit(Request $request, $id)
 	{
-		$model = (new ($this->data))::findOrFail($id);
-		if (!Gate::allows('edit', $model)) abort(403);
-		if (!Gate::allows('edit-others', $model, $this->type)) abort(403);
+		//check permission using gate
+		$this->checkPermissionEditUsingGate($id);
 		$status = $request->query('status');
 		$dryRunTokenRequest = $request->query('dryrun_token');
 		$valueCreateDryToken = $this->hashDryRunToken($id, $status);
