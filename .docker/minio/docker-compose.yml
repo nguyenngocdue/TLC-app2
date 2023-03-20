@@ -77,10 +77,11 @@ services:
       - ./configs/certs:/etc/nginx/certs
     environment:
       - NGINX_HOST=${DOMAIN_NAME}
+      - NGINX_CONSOLE_HOST=${DOMAIN_CONSOLE}
     ports:
-      - "37802:443"
+      # - "37802:443"
       - "9000:9000"
-      - "9001:9001"
+      - "9000:9001"
     depends_on:
       - minio1
       # - minio2
