@@ -316,6 +316,13 @@ class Hr_overtime_request_010 extends Report_ParentController
     protected function forwardToMode($request, $typeReport, $entity)
     {
         $input = $request->input();
+        // update : page, params
+        $isFormType = isset($input['form_type']);
+        if ($isFormType && $input['form_type'] === 'updateParamsReport' || $isFormType && $input['form_type'] === 'updatePerPageReport') {
+            (new UpdateUserSettings())($request);
+            return redirect($request->getPathInfo());
+        }
+
         if (isset($input['mode_option'])) {
             Log::info("010");
             $mode = $input['mode_option'];

@@ -119,7 +119,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 
 	protected function getDataModes()
 	{
-		return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020']];
+		return ['mode_option' => ['010' => 'Model 010']];
 	}
 
 	public function getDataForModeControl($dataSource = [])
@@ -319,7 +319,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		$z = 'qaqc_insp_tmpl_id';
 		$g = 'run_option';
 		$isNullModeParams = Report::isNullModeParams($modeParams);
-		// dd($isNullModeParams);
 		if ($isNullModeParams) {
 			$modeParams[$x] = $this->sub_project_id;
 			$modeParams[$y] = $this->prod_order_id;

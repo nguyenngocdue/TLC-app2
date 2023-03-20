@@ -6,16 +6,17 @@ use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
 use App\Models\Prod_order as ModelsProd_order;
 use App\Models\Sub_project;
-
-
+use App\Utils\Support\Report;
+use Illuminate\Support\Facades\Log;
 
 class Prod_order_010 extends Report_ParentController
 
 {
     use TraitReport;
+    protected  $sub_project_id = 21;
     public function getSqlStr($modeParams)
     {
-        // dd($modeParams);
+        // Log::info($modeParams);
         $sql = "SELECT 
      			sp.name AS sub_project_name
      			,po.sub_project_id AS sub_project_id
@@ -35,9 +36,10 @@ class Prod_order_010 extends Report_ParentController
                     LEFT JOIN prod_sequences ps ON po.id = ps.prod_order_id
                     LEFT JOIN sub_projects sp ON sp.id = po.sub_project_id
                     WHERE 1 = 1 \n";
+        if (empty($modeParams)) $sql  .= "AND po.sub_project_id =" . $this->sub_project_id;
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}' \n";
         if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'\n ";
-        $sql .=  "GROUP BY po.id";
+        $sql .=  "\n GROUP BY po.id";
         return $sql;
     }
     public function getTableColumns($dataSource, $modeParams)
@@ -91,7 +93,6 @@ class Prod_order_010 extends Report_ParentController
             [
                 'title' => 'Sub Project',
                 'dataIndex' => 'sub_project_id',
-                'allowClear' => true
             ],
             [
                 'title' => 'Production Order',
@@ -103,7 +104,7 @@ class Prod_order_010 extends Report_ParentController
 
     protected function getDataModes()
     {
-        return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020']];
+        return ['mode_option' => ['010' => 'Model 010']];
     }
 
 
@@ -112,5 +113,16 @@ class Prod_order_010 extends Report_ParentController
         $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
         $prod_orders  = ['prod_order_id' =>  ModelsProd_order::get()->pluck('name', 'id')->toArray()];
         return array_merge($subProjects, $prod_orders);
+    }
+
+    protected function getDefaultValueModeParams($modeParams, $request)
+    {
+        $x = 'sub_project_id';
+        $isNullModeParams = Report::isNullModeParams($modeParams);
+        // dd($modeParams, $isNullModeParams);
+        if ($isNullModeParams) {
+            $modeParams[$x] = $this->sub_project_id;
+        }
+        return $modeParams;
     }
 }
