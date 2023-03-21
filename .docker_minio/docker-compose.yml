@@ -69,6 +69,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ../.docker_configs/certs:/etc/nginx/certs
+      - ../.docker_configs/cacert.pem:/etc/nginx/cacert.pem
     environment:
       - NGINX_HOST=${DOMAIN_NAME}
       - NGINX_CONSOLE_HOST=${DOMAIN_CONSOLE}
