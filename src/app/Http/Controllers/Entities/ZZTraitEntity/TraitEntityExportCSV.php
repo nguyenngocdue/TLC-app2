@@ -45,9 +45,9 @@ trait TraitEntityExportCSV
                 case "radio":
                     $relationships = $column['relationships'];
                     if ($relationships['relationship'] == 'belongsTo') {
-                        $result[] = $dataLine
-                            ->{$relationships['control_name_function']}->name ?? $dataLine
-                            ->{$relationships['control_name_function']}->id;
+                        $theSubObject = $dataLine->{$relationships['control_name_function']};
+                        if ($theSubObject) $result[] = $theSubObject->name ?? $theSubObject->id;
+                        else $result[] = "NULL";
                     }
                     break;
                 case "dropdown_multi":

@@ -40,7 +40,7 @@ class Breadcrumb extends Component
                 $links[] = ['href' => null, 'modePrint' => true, 'title' => 'Print Mode', 'icon' => '<i class="fa-duotone fa-print"></i>'];
                 $links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
                 break;
-            case 'showQR':
+            case 'showQRApp':
                 $slug = CurrentRoute::getEntitySlug($singular);
                 $modelPath = Str::modelPathFrom($singular);
                 $id = $modelPath::where('slug', $slug)->first()['id'];
