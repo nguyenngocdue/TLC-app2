@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Utils;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ParserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $txt = explode("\r\n", $_GET['txt'] ?? "");
+        return view("utils/parser", []);
+    }
+
+    public function store(Request $request)
+    {
+        $txt = explode("\r\n", $_POST['txt'] ?? "");
         // $lines = [];
         foreach ($txt as $line) {
             // dump($line);
@@ -18,6 +24,5 @@ class ParserController extends Controller
             }
             echo "\n";
         }
-        return view("utils/parser", []);
     }
 }
