@@ -1,4 +1,9 @@
 let runOnce = {}
+const showErrorMessage = (response) => {
+    const { message } = response.responseJSON
+    toastr.error("The server can't handle with your speed. Please slowdown.", message)
+    console.log(response)
+}
 //Similar to includes, this will be checking both numbers and strings
 const dumbIncludes = (item, array) => {
     if (Array.isArray(array)) {
@@ -143,12 +148,12 @@ const onChangeDropdown4Dot = (listener, table01Name, rowIndex, batchLength = 1) 
     const data = dotQueue[column_name]['data']
     if (data.length >= batchLength) {
         delete (dotQueue[column_name])
-        let actualBatchLenth = 0
+        let actualBatchLength = 0
         for (let i = 0; i < data.length; i++) {
             rowIndex = data[i]
             const selectedObject = onChangeGetSelectedObject4(listener, table01Name, rowIndex)
             if (debugListener) console.log(selectedObject, listen_to_attr)
-            if (selectedObject !== undefined) actualBatchLenth++
+            if (selectedObject !== undefined) actualBatchLength++
         }
         for (let i = 0; i < data.length; i++) {
             rowIndex = data[i]
@@ -162,7 +167,7 @@ const onChangeDropdown4Dot = (listener, table01Name, rowIndex, batchLength = 1) 
 
 
                 getEById(id).val(theValue)
-                getEById(id).trigger('change', actualBatchLenth)
+                getEById(id).trigger('change', actualBatchLength)
                 if (debugListener) console.log("Dotting", id, "with value", theValue)
             }
         }
@@ -302,7 +307,7 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex, bat
                         }
                     }
                 },
-                error: (response) => console.error(response)
+                error: (response) => showErrorMessage(response)
             })
         }
     } else {
@@ -387,7 +392,8 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
                     for (let i = 0; i < rowIndexes.length; i++) {
                         onChangeFull({ fieldName, table01Name, rowIndex: rowIndexes[i], lineType, batchLength, name })
                     }
-                }
+                },
+                error: (response) => showErrorMessage(response)
             })
         }
     } else {
