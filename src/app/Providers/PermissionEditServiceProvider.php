@@ -42,7 +42,9 @@ class PermissionEditServiceProvider extends ServiceProvider
                     return $user->id == $model->owner_id;
                 }
                 foreach ($this->treeCompany($user) as $value) {
-                    return $user->id == $value->id;
+                    if ($user->id == $value->id) {
+                        return true;
+                    }
                 }
                 return false;
             }
