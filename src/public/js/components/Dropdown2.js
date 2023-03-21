@@ -468,21 +468,20 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
             selectedStr =
-                dataSource.length === 1
-                    ? 'checked'
-                    : selected.includes(itemId)
-                        ? 'checked'
-                        : ''
+                dataSource.length === 1 ? 'checked' : (selected.includes(itemId) ? 'checked' : '')
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
             // console.log(item)
             const title = item['description'] + ' (#' + itemId + ')'
             const bgColor = item['bgColor'] || ''
             option =
-                '<div class="items-center bg-white-50 flex align-center rounded-md ' +
-                bgColor + ' ' +
-                colSpan + ' ' +
-                '">'
+                '<div class="items-center bg-white-50 flex align-center rounded-md '
+                + bgColor + ' '
+                + colSpan + ' '
+                + '" '
+                + 'item_name="' + item['name'] + '" '
+                + 'item_description="' + item['description'] + '" '
+                + '">'
             const cursor = item['disabled'] ? 'cursor-not-allowed' : 'cursor-pointer'
             const inputBg = item['disabled'] ? 'bg-gray-300' : ''
             option += '<label class="truncate px-1 ' + cursor + ' rounded-md hover:bg-gray-100 w-full h-full" title="' + title + '">'
@@ -490,18 +489,13 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
             option +=
                 '<input ' +
                 (item['disabled'] ? "disabled " : "") +
-                readonly +
-                ' ' +
-                'class="w-3.5 h-3.5 mr-1 mt-0.5 ' + inputBg + ' ' + cursor + '"' +
-                'type="' +
-                radio_or_checkbox +
-                '" name="' +
-                control_name +
-                '" value="' +
-                itemId +
-                '" ' +
-                selectedStr +
-                '>'
+                readonly + ' ' +
+                'class="w-3.5 h-3.5 mr-1 mt-0.5 ' + inputBg + ' ' + cursor + '" '
+                + 'type="' + radio_or_checkbox + '" '
+                + 'name="' + control_name + '" '
+                + 'value="' + itemId + '" '
+                + selectedStr + ' '
+                + '>'
             if (item['avatar']) option += ' ' + '<img class="w-10 h-10 mr-1 rounded" src="' + item['avatar'] + '" />'
             option += '<div>'
             option += ' ' + item['name']
