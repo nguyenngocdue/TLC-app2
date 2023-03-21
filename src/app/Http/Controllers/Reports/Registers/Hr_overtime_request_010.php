@@ -309,6 +309,7 @@ class Hr_overtime_request_010 extends Report_ParentController
 
             $dataSource[$key]->remaining_allowed_ot_hours = $reAllowedOTHoursMonth;
             $dataSource[$key]->remaining_allowed_ot_hours_year = $reAllowedOTHoursYear;
+            dd($dataSource);
         }
         return $dataSource;
     }
