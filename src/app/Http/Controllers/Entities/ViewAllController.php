@@ -7,19 +7,15 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\UpdateUserSettings;
-use App\Utils\Constant;
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\Relationships;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-// use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-// use Illuminate\Support\Facades\Route;
 
 class ViewAllController extends Controller
 {

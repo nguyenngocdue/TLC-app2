@@ -74,7 +74,7 @@ class Hr_overtime_request_line extends ModelExtended
             ['dataIndex' => 'year_remaining_hours', 'cloneable' => !true],
             ['dataIndex' => 'sub_project_id', 'cloneable' => true],
             ['dataIndex' => 'work_mode_id', 'cloneable' => true, 'no_print' => true],
-            ['dataIndex' => 'remark'],
+            ['dataIndex' => 'remark', 'cloneable' => true],
             ['dataIndex' => 'status', 'cloneable' => true, 'no_print' => true, 'invisible' => true],
         ];
     }
