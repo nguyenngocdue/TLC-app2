@@ -50,7 +50,7 @@ class QrCode extends Component
     }
     private function checkRouteShowUsingIdOrSlug($type, $params, $isSlug = false)
     {
-        $routeName = $isSlug ? "{$type}.showQR" : "{$type}.show";
+        $routeName = $isSlug ? "{$type}.showQRApp" : "{$type}.show";
         $routeExits =  (Route::has($routeName));
         $href =  $routeExits ? route($routeName, $params) : "#";
         return [$routeExits, $href];

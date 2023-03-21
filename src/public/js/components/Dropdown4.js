@@ -331,16 +331,16 @@ const onChangeDropdown4TriggerChangeAllLines = (listener, table01Name, rowIndex,
             for (let i = 0; i < batchLength; i++) {
                 if (i === rowIndex) continue
                 const id = makeIdFrom(table01Name, column_name, i, batchLength)
-                setTimeout(() =>
-                    getEById(id).trigger('change', batchLength - 1)
-                    , 1000)
+                // setTimeout(() =>
+                getEById(id).trigger('change', batchLength - 1)
+                // , 1000)
             }
         } else {
             for (let i = 0; i < batchLength; i++) {
                 const id = makeIdFrom(table01Name, column_name, i, batchLength)
-                setTimeout(() =>
-                    getEById(id).trigger('change', batchLength)
-                    , 1000)
+                // setTimeout(() =>
+                getEById(id).trigger('change', batchLength)
+                // , 1000)
             }
         }
 
@@ -365,25 +365,33 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
         const data0 = { id, value, fieldName }
 
         if (ajaxQueueUpdate[url] == undefined) ajaxQueueUpdate[url] = {}
-        if (ajaxQueueUpdate[url]['data'] == undefined) ajaxQueueUpdate[url]['data'] = {}
-        if (ajaxQueueUpdate[url]['data'][fieldName] == undefined) ajaxQueueUpdate[url]['data'][fieldName] = []
-        ajaxQueueUpdate[url]['data'][fieldName].push(data0)
+        if (ajaxQueueUpdate[url][fieldName] == undefined) ajaxQueueUpdate[url][fieldName] = {}
+        if (ajaxQueueUpdate[url][fieldName]['data'] == undefined) ajaxQueueUpdate[url][fieldName]['data'] = []
+        if (ajaxQueueUpdate[url][fieldName]['rowIndex'] == undefined) ajaxQueueUpdate[url][fieldName]['rowIndex'] = []
+        ajaxQueueUpdate[url][fieldName]['data'].push(data0)
+        ajaxQueueUpdate[url][fieldName]['rowIndex'].push(rowIndex)
     }
-    onChangeFull({ fieldName, table01Name, rowIndex, lineType, batchLength, name })
     if (saveOnChange) {
-        if (ajaxQueueUpdate[url]['data'][fieldName].length >= batchLength) {
-            const data = ajaxQueueUpdate[url]['data'][fieldName]
+        if (ajaxQueueUpdate[url][fieldName]['data'].length >= batchLength) {
+            const data = ajaxQueueUpdate[url][fieldName]['data']
+            const rowIndexes = ajaxQueueUpdate[url][fieldName]['rowIndex']
             // console.log("Sending AjaxRequest Update ", fieldName, " with data:", data, url, batchLength)
-            delete (ajaxQueueUpdate[url]['data'][fieldName])
+            delete (ajaxQueueUpdate[url][fieldName])
             $.ajax({
                 type: 'POST',
                 url, data: { lines: data },
                 success: (response) => {
                     if (debugListener) console.log("Response", response)
+                    // console.log("Execute listeners")
                     // const hits = response['hits']
+                    for (let i = 0; i < rowIndexes.length; i++) {
+                        onChangeFull({ fieldName, table01Name, rowIndex: rowIndexes[i], lineType, batchLength, name })
+                    }
                 }
             })
         }
+    } else {
+        onChangeFull({ fieldName, table01Name, rowIndex, lineType, batchLength, name })
     }
 }
 

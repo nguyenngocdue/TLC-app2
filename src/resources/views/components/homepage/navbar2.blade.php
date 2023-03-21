@@ -23,12 +23,14 @@
             <li class="flex" title="Hot Key: Alt + Q">
                 <x-homepage.search-modal/>
             </li>
+            @if(env('APP_ENV') === 'local')
             <li class="flex">
                 <x-homepage.theme-toggle></x-homepage.theme-toggle>
             </li>
             <li class="relative">
                 <x-homepage.setting-gear></x-homepage.setting-gear>
             </li>
+            @endif
             <li class="relative">
                 <x-homepage.menu-notification></x-homepage.menu-notification>
             </li>

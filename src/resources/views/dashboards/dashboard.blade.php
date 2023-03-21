@@ -19,7 +19,7 @@
         @endforeach
     </div>
 
-
+{{-- 
     <!-- CTA -->
     <a class="focus:shadow-outline-purple mb-8 flex items-center justify-between rounded-lg bg-purple-600 p-4 text-sm font-semibold text-purple-100 shadow-md focus:outline-none" href="#">
         <div class="flex items-center">
@@ -86,6 +86,6 @@
                 </p>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @endsection

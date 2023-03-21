@@ -3,6 +3,10 @@
 use App\Http\Controllers\AppMenuController;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Entities\EntityCRUDController;
+use App\Http\Controllers\Entities\ManageJsonController;
+use App\Http\Controllers\Entities\ViewAllController;
+use App\Http\Controllers\Entities\ViewAllInvokerController;
 use App\Http\Controllers\Notifications\NotificationsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RedisController;
@@ -35,11 +39,10 @@ Route::group([
             $entityName = Str::getEntityName($entity);
             // $singular = Str::singular($entityName);
             // $ucfirstName = Str::ucfirst($singular);
-            $path = "App\\Http\\Controllers\\Entities\\";
-            Route::resource("{$entityName}", "{$path}ViewAllController")->only('index');
-            Route::get("{$entityName}_ep", ["{$path}ViewAllController", "exportCSV"])->name("{$entityName}_ep.exportCSV");
-            Route::get("{$entityName}_qr", ["{$path}ViewAllController", "showQRCode"])->name("{$entityName}_qr.showQRCode");
-            Route::resource("{$entityName}", "{$path}EntityCRUDController")->only('create', 'store', 'edit', 'update', 'show', 'destroy');
+            Route::resource("{$entityName}", ViewAllController::class)->only('index');
+            Route::get("{$entityName}_ep", [ViewAllInvokerController::class, "exportCSV"])->name("{$entityName}_ep.exportCSV");
+            Route::get("{$entityName}_qr", [ViewAllInvokerController::class, "showQRCode"])->name("{$entityName}_qr.showQRCode");
+            Route::resource("{$entityName}", EntityCRUDController::class)->only('create', 'store', 'edit', 'update', 'show', 'destroy');
         }
         // dd();
         // Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
@@ -62,20 +65,16 @@ Route::group([
                 for ($i = 10; $i <= 50; $i += 10) {
                     $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
                     $path = "App\\Http\\Controllers\\Reports\\Reports\\{$ucfirstName}_$mode";
-                    // var_dump($path);
                     $routeName = 'report-' . $singular . "_" . $mode;
                     $name = 'report-' . $singular . "/$mode";
                     if (class_exists($path)) Route::get($name, [$path, 'index'])->name($routeName);
 
                     $path = "App\\Http\\Controllers\\Reports\\Registers\\{$ucfirstName}_$mode";
-                    // var_dump($path);
                     $routeName = 'register-' . $singular . "_" . $mode;
                     $name = 'register-' . $singular . "/$mode";
                     if (class_exists($path)) Route::get($name, [$path, 'index'])->name($routeName);
 
                     $path = "App\\Http\\Controllers\\Reports\\Documents\\{$ucfirstName}_$mode";
-                    // $e = class_exists($path);
-                    // var_dump($path." ".$e);
                     $routeName = 'document-' . $singular . "_" . $mode;
                     $name = 'document-' . $singular . "/$mode";
                     if (class_exists($path)) Route::get($name, [$path, 'index'])->name($routeName);
@@ -89,36 +88,34 @@ Route::group([
         foreach ($entities as $entity) {
             $entityName = Str::getEntityName($entity);
             $singular = Str::singular($entityName);
-            // $ucfirstName = Str::ucfirst($singular);
             Route::group([
                 'middleware' => "role:ADMIN-DATA-" . Str::upper($entityName),
             ], function () use ($singular) {
-                $path = "App\\Http\\Controllers\\Entities\\";
 
-                Route::resource("{$singular}_ppt", "{$path}ManageJsonController")->only('index', 'store', 'create');
+                Route::resource("{$singular}_ppt", ManageJsonController::class)->only('index', 'store', 'create');
 
-                Route::resource("{$singular}_prp", "{$path}ManageJsonController")->only('index', 'store', 'create');
-                Route::resource("{$singular}_dfv", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_rls", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_ltn", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_stt", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_tst", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_atb", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_dfn", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_itm", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_bic", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_rtm", "{$path}ManageJsonController")->only('index', 'store');
+                Route::resource("{$singular}_prp", ManageJsonController::class)->only('index', 'store', 'create');
+                Route::resource("{$singular}_dfv", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_rls", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_ltn", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_stt", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_tst", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_atb", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_dfn", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_itm", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_bic", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_rtm", ManageJsonController::class)->only('index', 'store');
 
-                Route::resource("{$singular}_vsb", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_rol", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_rqr", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_hdn", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_vsb-wl", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_rol-wl", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_rqr-wl", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_hdn-wl", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_cpb", "{$path}ManageJsonController")->only('index', 'store');
-                Route::resource("{$singular}_unt", "{$path}ManageJsonController")->only('index', 'store', 'create');
+                Route::resource("{$singular}_vsb", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_rol", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_rqr", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_hdn", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_vsb-wl", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_rol-wl", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_rqr-wl", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_hdn-wl", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_cpb", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_unt", ManageJsonController::class)->only('index', 'store', 'create');
             });
         }
     });
@@ -176,10 +173,7 @@ Route::group([
     'prefix' => 'app'
 ], function () use ($qrCodeApps) {
     foreach ($qrCodeApps as $qrCodeApp) {
-        $singular = Str::singular($qrCodeApp);
-        $ucfirstName = Str::ucfirst($singular);
-        $path = "App\\Http\\Controllers\\Entities\\";
-        Route::get("{$qrCodeApp}/{slug}", ["{$path}EntityCRUDController", "showQR"])->name("{$qrCodeApp}.showQR");
+        Route::get("{$qrCodeApp}/{slug}", [EntityCRUDController::class, "showQRApp"])->name("{$qrCodeApp}.showQRApp");
     }
 });
 
