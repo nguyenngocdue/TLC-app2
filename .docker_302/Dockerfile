@@ -10,7 +10,8 @@ RUN apk update && apk add \
     freetype-dev \
     libjpeg-turbo-dev \
     zip \
-    unzip
+    unzip \
+    ca-certificates 
 RUN curl -sSLf \
     -o /usr/local/bin/install-php-extensions \
     https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \
