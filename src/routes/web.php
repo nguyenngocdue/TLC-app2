@@ -160,7 +160,7 @@ Route::resource('welcome', WelcomeController::class)->only('index');
 Route::resource('welcome-due', WelcomeDueController::class)->only('index');
 Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index', 'store');
 
-Route::get('utils/parser', [ParserController::class, 'index']);//->only('index');
+Route::resource('utils/parser', ParserController::class)->only('index', 'store');
 
 Route::get('app-menu', [AppMenuController::class, 'index']);
 Route::group([
