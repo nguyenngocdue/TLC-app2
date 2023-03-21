@@ -13,9 +13,9 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        dump(ini_get("curl.cainfo"));
-        dump(Storage::disk('s3')->put('dinhcanh.txt', 'NgoDinhCanh', 'public'));
-        dd(Storage::disk('s3')->allDirectories());
+        // dump(ini_get("curl.cainfo"));
+        // dump(Storage::disk('s3')->put('dinhcanh.txt', 'NgoDinhCanh', 'public'));
+        dd(Storage::disk('s3')->allFiles());
         return view(
             'welcome',
             []
