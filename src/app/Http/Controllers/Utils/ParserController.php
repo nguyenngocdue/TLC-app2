@@ -8,7 +8,7 @@ class ParserController extends Controller
 {
     public function index()
     {
-        $txt = explode("\r\n", $_GET['txt']);
+        $txt = explode("\r\n", $_GET['txt'] ?? "");
         // $lines = [];
         foreach ($txt as $line) {
             // dump($line);
