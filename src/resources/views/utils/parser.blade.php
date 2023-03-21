@@ -3,7 +3,10 @@
 
 <form method="post" >
     @csrf
-    <textarea rows=25 name='txt'></textarea>
+    IDs
+    <textarea rows=25 name='txtIds'></textarea>
+    Values
+    <textarea rows=25 name='txtValues'></textarea>
     <x-renderer.button type='success' htmlType='submit'>Parse</x-renderer.button>
 </form>
 

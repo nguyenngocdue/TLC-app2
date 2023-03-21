@@ -14,15 +14,24 @@ class ParserController extends Controller
 
     public function store(Request $request)
     {
-        $txt = explode("\r\n", $_POST['txt'] ?? "");
-        // $lines = [];
-        foreach ($txt as $line) {
-            // dump($line);
-            $values = unserialize($line);
+        $txtIds = explode("\r\n", $_POST['txtIds'] ?? "");
+        $txtValues = explode("\r\n", $_POST['txtValues'] ?? "");
+        foreach ($txtIds as $index => $id) {
+            $values = unserialize($txtValues[$index]);
             if ($values) {
-                echo join(",", $values);
+                foreach ($values as $value) {
+                    echo "$id";
+                    echo "\t";
+                    echo "$value";
+                    echo "\n";
+                }
+            } else {
+                echo "$id";
+                echo "\t";
+                echo "";
+                echo "\n";
             }
-            echo "\n";
+            // echo "\n";
         }
     }
 }
