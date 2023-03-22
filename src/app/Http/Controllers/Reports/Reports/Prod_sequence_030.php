@@ -38,7 +38,7 @@ class Prod_sequence_030 extends Report_ParentController
     public function getTableColumns($dataSource, $modeParams)
     {
         // dd($dataSource);
-        $editCols = [
+        $firstCols = [
             [
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
@@ -53,10 +53,10 @@ class Prod_sequence_030 extends Report_ParentController
                 "width" => "500",
             ]
         ];
-        $unsetCols = ['po_id', 'prod_sequence_id', 'total_man_hours', 'prod_routing_link_name'];
-        $sqlDataCol = $this->createTableColumns($dataSource, '', '', $editCols, $unsetCols, 'right', '200');
+        $unsetCols = ['po_id', 'prod_sequence_id', 'total_uom', 'prod_routing_link_name'];
+        $sqlDataCol = $this->createTableColumns($dataSource, 'flooring_installation', '', [], $unsetCols, 'right', '200');
         // dd($sqlDataCol);
-        return  $sqlDataCol;
+        return  array_merge($firstCols, $sqlDataCol);
     }
 
     protected function getDataModes()

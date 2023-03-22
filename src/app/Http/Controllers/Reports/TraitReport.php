@@ -18,17 +18,19 @@ trait TraitReport
         $array = (array)array_slice($dataSource->items(), 0, 1)[0];
         $fields = [];
         if ($strFromField || $strToFields) {
-            $fromField = array_search($strFromField, array_keys($array));
-            $toField = array_search($strToFields, array_keys($array));
+            $fromField =  ($x = array_search($strFromField, array_keys($array))) ? $x : 0;
+            $toField = ($x = array_search($strToFields, array_keys($array))) ? $x : count($array);
             $fields = array_keys(array_slice($array, $fromField, $toField - $fromField + 1));
         } else {
+            // dd($strFromField);
             $fields = array_keys($array);
         }
         $fields =  array_diff(array_values($fields), $unsetFields);
-
+        sort($fields);
+        // dd($fields);
         $locateEditFields = array_column($editFields, 'dataIndex');
         $dataColumn = [];
-        foreach ($fields as $value) {
+        foreach ($fields as $key => $value) {
             if (in_array($value, $locateEditFields)) {
                 $indexEdit = array_search($value, $locateEditFields);
                 $dataColumn[] =  $editFields[$indexEdit];
