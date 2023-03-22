@@ -22,7 +22,7 @@
                     <div class="py-2">
                         <x-renderer.button onClick="radioOrCheckboxSelectAll('ot_user2')">Select All</x-renderer.button>
                         <x-renderer.button onClick="radioOrCheckboxDeselectAll('ot_user2')">Deselect All</x-renderer.button>
-                        <x-renderer.button onClick="radioOrCheckboxChangeOrder('ot_user2')">Change Order</x-renderer.button>
+                        <x-renderer.button onClick="radioOrCheckboxChangeOrder('ot_user2', 'modal_ot_user2')">Sort by StaffID Order</x-renderer.button>
                     </div>
                     <x-modals.parent-id7-user-ot name='ot_user2' multiple={{true}} control='radio-or-checkbox2'></x-modals.parent-type7>
                 </div>

@@ -8,25 +8,17 @@ const radioOrCheckboxDeselectAll = (id) => {
     $(queryStr).prop('checked', false)
 }
 
-const toNodeList = function (arrayOfNodes) {
-    var fragment = document.createDocumentFragment();
-    arrayOfNodes.forEach(function (item) {
-        fragment.appendChild(item)//.cloneNode());
-    });
-    console.log(fragment.childNodes)
-    return fragment.childNodes;
-};
-
-const radioOrCheckboxChangeOrder = (id) => {
-    queryStr = "div[id='" + id + "']"
-    console.log(queryStr)
-    const allItems = Array.from($(queryStr)[0].childNodes)
-
-    allItems.sort((a, b) => a.getAttribute('item_description').localeCompare(b.getAttribute('item_description')))
-    const nodeList = toNodeList(allItems)
-    // $(queryStr)[0] = nodeList
-    for (let i = 0; i < nodeList.length; i++) {
-        $(queryStr)[0].appendChild(nodeList[i])
+const radioOrCheckboxChangeOrder = (id, table) => {
+    const dataSourceDropdown = k[table]
+    const sortedDataSource = dataSourceDropdown.sort((a, b) => (a.description).localeCompare(b.description))
+    reloadDataToDropdown2(id, 'id', sortedDataSource, [])
+    if (Array.isArray(listenersOfDropdown2)) {
+        const parentId = 'ot_team'
+        listenersOfDropdown2.forEach((listener) => {
+            if (listener.triggers.includes(parentId) && listener.listen_action === 'reduce') {
+                // console.log("I am a trigger of reduce, I have to trigger myself when form load [id]", )
+                getEById(parentId).trigger('change')
+            }
+        })
     }
-    console.log('Change Order', nodeList, allItems)
 }

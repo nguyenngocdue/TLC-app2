@@ -184,9 +184,7 @@ const onChangeDropdown2Reduce = (listener) => {
     const lastSelected = getValueOfEById(column_name)
     // console.log("Selected of", column_name, "is", lastSelected)
     // console.log(attrs_to_compare)
-    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, [
-        lastSelected * 1,
-    ])
+    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, [lastSelected * 1,])
 }
 const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
@@ -426,12 +424,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
     if (control_type === 'dropdown') {
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
-            selectedStr =
-                dataSource.length === 1
-                    ? 'selected'
-                    : selected.includes(item.id)
-                        ? 'selected'
-                        : ''
+            selectedStr = dataSource.length === 1 ? 'selected' : selected.includes(item.id) ? 'selected' : ''
             const title = item.description || makeId(item.id)
             option =
                 "<option value='" +
@@ -467,8 +460,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
-            selectedStr =
-                dataSource.length === 1 ? 'checked' : (selected.includes(itemId) ? 'checked' : '')
+            selectedStr = dataSource.length === 1 ? 'checked' : (selected.includes(itemId) ? 'checked' : '')
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
             // console.log(item)
