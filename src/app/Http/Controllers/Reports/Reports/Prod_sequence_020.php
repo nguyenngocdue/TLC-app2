@@ -65,7 +65,7 @@ class Prod_sequence_020 extends Report_ParentController
 
     protected function getDataModes()
     {
-        return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020']];
+        return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020', '030' => 'Model 030']];
     }
     protected function getParamColumns()
     {

@@ -125,14 +125,6 @@ class UpdateUserSettings extends Controller
         // Check case: select mode alternatively 
         $index = array_search($modeName, array_values($inputValue));
         if (empty(array_slice($inputValue, $index + 1, count($inputValue) - $index))) return $settings;
-        // Create date to update params into user_setting
-        unset($inputValue['mode_option']);
-        $entity = $inputValue["_entity"];
-        $typeReport = strtolower($inputValue["type_report"]);
-        $settings[$entity][$typeReport]['user_mode'] = $modeName;
-        $indexBreak = array_search("type_report", array_keys($inputValue));
-        $parameter = array_slice($inputValue, $indexBreak + 1, count($inputValue) - $indexBreak);
-        $settings[$entity][$typeReport][$modeName] = $parameter;
         return $settings;
     }
 
