@@ -17,7 +17,7 @@ services:
       - ../src:/var/www/app
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - ../.docker_configs/certs:/etc/nginx/certs
-      - ../.docker_configs/cacert.pem:/etc/nginx/cacert.pem
+      # - ../.docker_configs/cacert.pem:/etc/ssl/cacert.pem
     depends_on:
       - php
       - mysql

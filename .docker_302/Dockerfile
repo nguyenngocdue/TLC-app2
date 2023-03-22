@@ -11,7 +11,8 @@ RUN apk update && apk add \
     libjpeg-turbo-dev \
     zip \
     unzip \
-    ca-certificates 
+    ca-certificates \
+    openssl 
 RUN curl -sSLf \
     -o /usr/local/bin/install-php-extensions \
     https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \

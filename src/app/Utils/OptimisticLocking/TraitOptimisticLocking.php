@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 trait TraitOptimisticLocking
 {
-    protected static $lock = !true;
+    protected static $lock = false;
 
     protected static $lockDefaultColumn = false;
 
