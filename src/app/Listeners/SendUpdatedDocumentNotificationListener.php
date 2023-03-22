@@ -152,8 +152,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         $type = $currentValue['entity_type'];
         $creator = $currentValue['owner_id'];
         [$keyOldAssignee, $keyNewAssignee, $keyOldMonitors, $keyNewMonitors] = $this->getKeyBallInCourt($key);
-        $monitorsPrevious = $previousValue[$keyOldMonitors];
-        $monitorsCurrent = $currentValue[$keyNewMonitors];
+        $monitorsCurrent = $currentValue[$keyNewMonitors] ?? [];
         $id = $currentValue['id'];
         [$href, $subjectMail] = $this->getRouteAndSubjectMail($type, $id);
         switch ($typeSend) {

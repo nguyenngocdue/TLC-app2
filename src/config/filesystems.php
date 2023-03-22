@@ -53,11 +53,14 @@ return [
                 "AWS_USE_PATH_STYLE_ENDPOINT",
                 false,
             ),
-            "schema" => 'https',
-            "curl.options" => [
-                "CURLOPT_SSL_VERIFYHOST" => 0,
-                "CURLOPT_SSL_VERIFYPEER" => 0,
-            ]
+            // "schema" => 'http',
+            // 'options' => [
+            //     'verify' => false,
+            //     'curl_options' => [
+            //         "CURLOPT_SSL_VERIFYHOST" => 0,
+            //         "CURLOPT_SSL_VERIFYPEER" => 0,
+            //     ]
+            // ],
         ]
     ],
 

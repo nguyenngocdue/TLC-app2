@@ -75,12 +75,14 @@ Route::group([
 
 Route::group([
     'prefix' => 'v1/hr',
+    'middleware' => 'throttle:600,1'
 ], function () {
     // Route::get('overtime_request_line', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours']);
     Route::post('overtime_request_line2', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours2']);
 });
 Route::group([
     'prefix' => 'v1/entity',
+    'middleware' => 'throttle:600,1'
 ], function () {
     foreach ([
         'Hr_overtime_request_line',
