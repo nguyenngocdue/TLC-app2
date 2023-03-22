@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitReport;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Models\Workplace;
@@ -13,6 +14,7 @@ use Illuminate\Support\Str;
 class Hr_overtime_request_010 extends Report_ParentController
 {
     use TraitReport;
+    use TraitForwardModeReport;
     protected $groupBy = 'first_name';
     public function getSqlStr($modeParams)
     {
@@ -309,29 +311,8 @@ class Hr_overtime_request_010 extends Report_ParentController
 
             $dataSource[$key]->remaining_allowed_ot_hours = $reAllowedOTHoursMonth;
             $dataSource[$key]->remaining_allowed_ot_hours_year = $reAllowedOTHoursYear;
+            // dd($dataSource);
         }
         return $dataSource;
-    }
-
-    protected function forwardToMode($request, $typeReport, $entity)
-    {
-        $input = $request->input();
-        // update : page, params
-        $isFormType = isset($input['form_type']);
-        if ($isFormType && $input['form_type'] === 'updateParamsReport' || $isFormType && $input['form_type'] === 'updatePerPageReport') {
-            (new UpdateUserSettings())($request);
-            return redirect($request->getPathInfo());
-        }
-
-        if (isset($input['mode_option'])) {
-            Log::info("010");
-            $mode = $input['mode_option'];
-            $routeName = explode('/', $request->getPathInfo())[2];
-            if (isset($input['form_type']) && $input['form_type'] === 'updateParams') {
-                (new UpdateUserSettings())($request);
-                return redirect($request->getPathInfo());
-            }
-            return redirect(route($routeName . '_' . $mode));
-        }
     }
 }

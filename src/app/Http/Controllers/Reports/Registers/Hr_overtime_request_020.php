@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Reports\Registers;
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
 use App\Http\Controllers\UpdateUserSettings;
+use App\Utils\Support\CurrentPathInfo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class Hr_overtime_request_020 extends Report_ParentController
 {
@@ -151,7 +153,7 @@ class Hr_overtime_request_020 extends Report_ParentController
         return collect($dataSource);
     }
 
-    protected function forwardToMode($request, $typeReport, $entity)
+    protected function forwardToMode($request)
     {
         $input = $request->input();
         // update : page, params
@@ -163,8 +165,10 @@ class Hr_overtime_request_020 extends Report_ParentController
 
         if (isset($input['months']) || isset($input['user_id'])) {
             // Log::info("020");
+            $typeReport = CurrentPathInfo::getTypeReport($request);
+            $entityReport = CurrentPathInfo::getEntityReport($request);
             $params = [
-                '_entity' => $entity,
+                '_entity' => $entityReport,
                 'action' => 'updateReport' . $typeReport,
                 'type_report' => $typeReport,
                 'mode_option' => $this->mode

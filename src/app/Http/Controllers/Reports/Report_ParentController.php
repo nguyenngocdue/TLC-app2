@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports;
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UpdateUserSettings;
+use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
@@ -135,13 +136,12 @@ abstract class Report_ParentController extends Controller
         ];
     }
 
-    protected function forwardToMode($request, $typeReport, $entity)
+    protected function forwardToMode($request)
     {
         $input = $request->input();
         $isFormType = isset($input['form_type']);
         if ($isFormType && $input['form_type'] === 'updateParamsReport' || $isFormType && $input['form_type'] === 'updatePerPageReport') {
             (new UpdateUserSettings())($request);
-            return redirect($request->getPathInfo());
         }
         return redirect($request->getPathInfo());
     }
@@ -153,13 +153,13 @@ abstract class Report_ParentController extends Controller
         $input = $request->input();
         Log::info($input);
 
-        $typeReport = CurrentRoute::getTypeController();
+        $typeReport = CurrentPathInfo::getTypeReport($request);
         $routeName = $request->route()->action['as'];
         $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
 
         if (!$request->input('page') && !empty($input)) {
             // dd($input);
-            return $this->forwardToMode($request, $typeReport, $entity);
+            return $this->forwardToMode($request);
         }
 
         $currentUserId = Auth::id();

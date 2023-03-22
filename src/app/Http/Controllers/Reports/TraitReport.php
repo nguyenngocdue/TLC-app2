@@ -12,11 +12,10 @@ trait TraitReport
         return $sqlData;
     }
 
-    function createTableColumns($dataSource, $strFromField = '', $strToFields = '', $editFields = [], $unsetFields = [],)
+    function createTableColumns($dataSource, $strFromField = '', $strToFields = '', $editFields = [], $unsetFields = [], $align = 'center', $width = '100')
     {
         if (empty($dataSource->items())) return [[]];
         $array = (array)array_slice($dataSource->items(), 0, 1)[0];
-
         $fields = [];
         if ($strFromField || $strToFields) {
             $fromField = array_search($strFromField, array_keys($array));
@@ -25,10 +24,8 @@ trait TraitReport
         } else {
             $fields = array_keys($array);
         }
-        foreach ($unsetFields as $value) {
-            $index = array_search($value, $fields);
-            unset($fields[$index]);
-        }
+        $fields =  array_diff(array_values($fields), $unsetFields);
+
         $locateEditFields = array_column($editFields, 'dataIndex');
         $dataColumn = [];
         foreach ($fields as $value) {
@@ -36,7 +33,7 @@ trait TraitReport
                 $indexEdit = array_search($value, $locateEditFields);
                 $dataColumn[] =  $editFields[$indexEdit];
             } else {
-                $dataColumn[] = ['dataIndex' => $value, 'align' => 'center'];
+                $dataColumn[] = ['dataIndex' => $value, 'align' => $align, 'width' => $width];
             }
         }
         return $dataColumn;
