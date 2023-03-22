@@ -5,6 +5,7 @@ namespace App\Utils\Support;
 
 class Report
 {
+
     public static function groupArrayByKey($dataSource, $key)
     {
         $groupedArray = [];

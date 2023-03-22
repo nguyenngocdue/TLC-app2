@@ -16,6 +16,6 @@
 
     </div>
 
-    <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" />
+    <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource" rotate45Width={{$rotate45Width}} />
     @endsection
 </div>

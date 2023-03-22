@@ -27,6 +27,7 @@ class Prod_run_010 extends Report_ParentController
         ,ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0) AS total_production_time_minute
         ,ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60/60,2) AS total_production_time
         ,ROUND(pr.worker_number * TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0) AS man_minute
+        
         FROM ( SELECT
             sp.id AS sub_project_id
             ,sp.name AS sub_project_name
@@ -51,7 +52,6 @@ class Prod_run_010 extends Report_ParentController
 
     public function getMaxProdRunIdAndTotalHours($modeParams)
     {
-        // if (empty($modeParams)) dd(123);
         $sql = "SELECT prlTb.*
             , MAX(pr.id) AS max_prod_run_id
             , SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) AS sum_production_time_minutes
@@ -100,6 +100,21 @@ class Prod_run_010 extends Report_ParentController
                 "align" => 'right',
                 'width' => "400"
             ],
+
+
+            // [
+            //     "dataIndex" => "prod_sequence_id",
+            //     "align" => 'right',
+            //     'width' => "400"
+            // ],
+
+            // [
+            //     "dataIndex" => "total_hours",
+            //     "align" => 'right',
+            //     'width' => "400"
+            // ],
+
+
             [
                 'title' => 'Date',
                 "dataIndex" => "prod_run_date",
@@ -184,7 +199,6 @@ class Prod_run_010 extends Report_ParentController
         return array_merge($subProjects, $prodOrders, $prodRoutingLinks);
     }
 
-
     protected function enrichDataSource($dataSource, $modeParams)
     {
 
@@ -194,8 +208,6 @@ class Prod_run_010 extends Report_ParentController
 
         $itemsSource = $dataSource->all();
         $itemsSource = Report::pressArrayTypeAllItems($itemsSource);
-
-
         // Calculate all of man (minute)
         $groupIdsProdSeq = Report::groupArrayByKey($itemsSource, 'prod_sequence_id');
         $sumManMinutesProSeq = [];
@@ -203,11 +215,6 @@ class Prod_run_010 extends Report_ParentController
             $man_minutes = array_column($sequence, 'man_minute');
             $sumManMinutesProSeq[$key] = array_sum($man_minutes);
         }
-
-
-
-        // dd($itemsSource, $sumManMinutesProSeq, $dataHours);
-
         foreach ($itemsSource as $key => $value) {
             $value['prod_routing_link_name'] = (object) [
                 'cell_title' => 'ID:' . $value['prod_routing_link_id'],
@@ -219,7 +226,6 @@ class Prod_run_010 extends Report_ParentController
                 $man_minute = $sumManMinutesProSeq[$dt['prod_sequence_id']];
                 // dd($sumManMinutesProSeq, $man_minute);
                 $totalWorker = round($man_minute * 1 / $dt['sum_production_time_minutes'] * 1, 2);
-
                 // dd($value);
                 $itemsSource[$key] = $value +
                     [
