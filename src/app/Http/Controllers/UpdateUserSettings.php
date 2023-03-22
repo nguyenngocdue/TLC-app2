@@ -129,7 +129,6 @@ class UpdateUserSettings extends Controller
         unset($inputValue['mode_option']);
         $entity = $inputValue["_entity"];
         $typeReport = strtolower($inputValue["type_report"]);
-        $settings[$entity][$typeReport]['user_mode'] = $modeName;
         $indexBreak = array_search("type_report", array_keys($inputValue));
         $parameter = array_slice($inputValue, $indexBreak + 1, count($inputValue) - $indexBreak);
         $settings[$entity][$typeReport][$modeName] = $parameter;

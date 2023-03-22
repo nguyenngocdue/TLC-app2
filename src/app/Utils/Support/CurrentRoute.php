@@ -26,14 +26,6 @@ class CurrentRoute
         return substr($result, strpos($result, '@') + 1);
     }
 
-    /** This will return entity name: Hse_incident_report ... */
-    public static function getTypeController()
-    {
-        $result = Route::current()->action['controller'];
-        $parserStr = explode('\\', $result);
-        return $parserStr[4];
-    }
-
     public static function getEntityId($typeSingular)
     {
         $current = Route::current();
