@@ -24,6 +24,22 @@ trait TraitEntityDynamicType
         ];
     }
 
+    private function assignDynamicTypeViewAllQrList6()
+    {
+        $routeName = Request::route() ? Request::route()->getName() : "pj_modules_qr";
+        $tableName = substr($routeName, 0, strrpos($routeName, "_"));
+        $singular = Str::singular($tableName);
+
+        $this->type = $singular;
+        $this->typeModel = Str::modelPathFrom($tableName);
+        $this->permissionMiddleware = [
+            'read' => "read-$tableName",
+            'create' => "create-$tableName",
+            'edit' => "edit-$tableName|edit-others-$tableName",
+            'delete' => "delete-$tableName|delete-others-$tableName"
+        ];
+    }
+
     private function assignDynamicTypeCreateEdit()
     {
         $routeName = Request::route() ? Request::route()->getName() : "attachment.index";

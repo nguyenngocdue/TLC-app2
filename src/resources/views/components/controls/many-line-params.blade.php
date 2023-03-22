@@ -22,7 +22,7 @@
 @isset($tableSettings['showBtnAddFromAList'])
 @if($tableSettings['showBtnAddFromAList'])
 
-<x-renderer.button click="toggleListingTable('{{$table01Name}}')" keydown="closeListingTable('{{$table01Name}}')" id="btnAddFromAList_{{$table01Name}}" type="success" title="Add from a list">Add From A List</x-renderer.button>
+<x-renderer.button id="btnAddFromAList_{{$table01Name}}" click="toggleListingTable('{{$table01Name}}')" keydown="closeListingTable('{{$table01Name}}')" type="success" title="Add from a list">Add From A List</x-renderer.button>
 <x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />
 @endif
 @endisset

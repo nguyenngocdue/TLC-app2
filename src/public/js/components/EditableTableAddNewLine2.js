@@ -35,9 +35,11 @@ const addANewLine = (params) => {
     }
     // console.log(data)
 
-    const btnId = "btnAddANewLine_" + tableId
+    const btnAddANewLineId = "btnAddANewLine_" + tableId
+    const btnAddFromAListId = "btnAddFromAList_" + tableId
     const spinId = "iconSpin_" + tableId
-    getEById(btnId).hide()
+    getEById(btnAddANewLineId).hide()
+    getEById(btnAddFromAListId).hide()
     getEById(spinId).show()
 
     const url = '/api/v1/entity/' + tableName + '_storeEmpty'
@@ -66,7 +68,8 @@ const addANewLine = (params) => {
                     // console.log(valuesOfOrigin)
                     addANewLineFull({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList, batchLength })
                 }
-                getEById(btnId).show()
+                getEById(btnAddANewLineId).show()
+                getEById(btnAddFromAListId).show()
                 getEById(spinId).hide()
             }
         })
@@ -86,12 +89,14 @@ const addANewLineFull = (params) => {
     const table = document.getElementById(tableId)
     const row = table.insertRow()
     removeEmptinessLine(tableId) //<< Must remove after insertRow, otherwise it will insert into 2nd thead
+    const newRowNo = getAllRows(tableId).length
+
     row.classList.add('bg-lime-200')
     let fingerPrint = ''
     if (showNo) { //<< Ignore No. column
         const noCell = row.insertCell()
         noCell.classList = "px-1 py-1 dark:border-gray-600 border-r text-center";
-        noCell.innerHTML = "New"
+        noCell.innerHTML = newRowNo
     }
     const toDoAfterAddedDropdown4 = []
     const toDoAfterAddedDropdown4ReadOnly = []
@@ -320,7 +325,7 @@ const addANewLineFull = (params) => {
     if (showNoR) { //<< Ignore No. column
         const noCell = row.insertCell()
         noCell.classList = "px-1 py-1 dark:border-gray-600 border-r text-center";
-        noCell.innerHTML = "New"
+        noCell.innerHTML = newRowNo
     }
     return fingerPrint
 }

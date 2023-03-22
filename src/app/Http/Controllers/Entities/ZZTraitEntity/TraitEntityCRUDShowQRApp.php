@@ -6,9 +6,9 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\SuperProps;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-trait TraitEntityCRUDShowQR
+trait TraitEntityCRUDShowQRApp
 {
-	public function showQR($slug)
+	public function showQRApp($slug)
 	{
 		$modelCurrent = new ($this->data);
 		$dataSource = $modelCurrent::where('slug', $slug)->first();

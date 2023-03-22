@@ -3,31 +3,25 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityExportCSV;
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityShowQRList6;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\UpdateUserSettings;
-use App\Utils\Constant;
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\Relationships;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-// use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-// use Illuminate\Support\Facades\Route;
 
 class ViewAllController extends Controller
 {
-    use TraitEntityAdvancedFilter;
-    use TraitEntityExportCSV;
-    use TraitEntityShowQRList6;
     use TraitEntityDynamicType;
+    use TraitEntityAdvancedFilter;
+    use TraitViewAllFunctions;
 
     protected $type = "";
     protected $typeModel = '';
@@ -42,29 +36,6 @@ class ViewAllController extends Controller
     public function getType()
     {
         return $this->type;
-    }
-    private function getUserSettings()
-    {
-        $type = Str::plural($this->type);
-        $settings = CurrentUser::getSettings();
-        $perPage = $settings[$type][Constant::VIEW_ALL]['per_page'] ?? 20;
-        $columnLimit = $settings[$type][Constant::VIEW_ALL]['columns'] ?? null;
-        $advancedFilter = $settings[$type][Constant::VIEW_ALL]['advanced_filters'] ?? null;
-        return [$perPage, $columnLimit, $advancedFilter];
-    }
-
-    private function getDataSource($advanceFilters = null)
-    {
-        $propsFilters = $this->advanceFilter();
-        $advanceFilters = $this->distributeFilter($advanceFilters, $propsFilters);
-        $model = $this->typeModel;
-        $search = request('search');
-        $result = App::make($model)::search($search)
-            ->query(function ($q) use ($advanceFilters, $propsFilters) {
-                $this->queryAdvancedFilter($q, $advanceFilters, $propsFilters);
-                return $q->orderBy('updated_at', 'desc');
-            });
-        return $result;
     }
 
     private function convertDateTime($time)
@@ -156,7 +127,6 @@ class ViewAllController extends Controller
         return $result;
     }
 
-
     private function attachRendererIntoColumn(&$columns)
     {
         // Log::info($columns);
@@ -243,36 +213,6 @@ class ViewAllController extends Controller
         ]);
     }
 
-    public function exportCSV()
-    {
-        [$columns, $dataSource] = $this->normalizeDataSourceAndColumnsFollowAdvanceFilter();
-        $rows = [];
-        foreach ($dataSource as $no => $dataLine) {
-            $rows[] = $this->makeRowData($columns, $dataLine, $no + 1);
-        }
-        $fileName = $this->type . '.csv';
-        $headers = array(
-            "Content-type"        => "text/csv",
-            "Content-Disposition" => "attachment; filename=$fileName",
-            "Pragma"              => "no-cache",
-            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-            "Expires"             => "0"
-        );
-        $columns = array_values(array_map(fn ($item) => $item['label'], $columns));
-        $callback = function () use ($rows, $columns) {
-            $file = fopen('php://output', 'w');
-            fputcsv($file, $columns);
-            $array = [];
-            foreach ($rows as $row) {
-                foreach ($columns as $key => $column) {
-                    $array[$column] = $row[$key];
-                }
-                fputcsv($file, $array);
-            }
-            fclose($file);
-        };
-        return response()->stream($callback, 200, $headers);
-    }
     public function destroy($id)
     {
         try {

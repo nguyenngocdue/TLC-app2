@@ -1,8 +1,6 @@
-// $.ajaxSetup({
-//     headers: {
-//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-//     },
-// })
+//Setup for any Ajax requests need to login
+$.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), }, })
+
 // $(document).ready(function () {
 //     $('.btn-delete').click(function () {
 //         var url = $(this).attr('data-url')

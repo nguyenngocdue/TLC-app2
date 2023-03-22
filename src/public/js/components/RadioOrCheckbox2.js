@@ -1,11 +1,24 @@
 const radioOrCheckboxSelectAll = (id) => {
     queryStr = "input:checkbox[name='" + id + "[]']"
     $(queryStr).prop('checked', true)
-    // if (debugSetValue) console.log('Unchecked all', queryStr)
 }
 
 const radioOrCheckboxDeselectAll = (id) => {
     queryStr = "input:checkbox[name='" + id + "[]']"
     $(queryStr).prop('checked', false)
-    // if (debugSetValue) console.log('Unchecked all', queryStr)
+}
+
+const radioOrCheckboxChangeOrder = (id, table) => {
+    const dataSourceDropdown = k[table]
+    const sortedDataSource = dataSourceDropdown.sort((a, b) => (a.description).localeCompare(b.description))
+    reloadDataToDropdown2(id, 'id', sortedDataSource, [])
+    if (Array.isArray(listenersOfDropdown2)) {
+        const parentId = 'ot_team'
+        listenersOfDropdown2.forEach((listener) => {
+            if (listener.triggers.includes(parentId) && listener.listen_action === 'reduce') {
+                // console.log("I am a trigger of reduce, I have to trigger myself when form load [id]", )
+                getEById(parentId).trigger('change')
+            }
+        })
+    }
 }

@@ -195,7 +195,7 @@
         "name": "_remark",
         "column_name": "remark",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
