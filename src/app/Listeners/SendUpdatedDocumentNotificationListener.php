@@ -89,8 +89,8 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
             }
         }
         $this->send($assigneeNotification, $previousValue, $currentValue, 'assignee');
-        $this->send($monitorNotification, $previousValue, $currentValue, 'monitors');
         $this->send($changStatusAssignee, $previousValue, $currentValue, 'assignee_status_change', false);
+        $this->send($monitorNotification, $previousValue, $currentValue, 'monitors');
         $this->send($changStatusMonitors, $previousValue, $currentValue, 'monitor_status_change', false);
     }
     private function isChangeBallInCourt($previousValue, $currentValue, $listAssignees, $listMonitors, $index = 0)

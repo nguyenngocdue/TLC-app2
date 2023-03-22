@@ -40,8 +40,8 @@ trait TraitSupportNotification
         $type = $currentValue['entity_type'];
         $creator = $currentValue['owner_id'];
         [$keyOldAssignee, $keyNewAssignee, $keyOldMonitors, $keyNewMonitors] = $this->getKeyBallInCourt($data);
-        $monitorsPrevious = $previousValue[$keyOldMonitors];
-        $monitorsCurrent = $currentValue[$keyNewMonitors];
+        $monitorsPrevious = $previousValue[$keyOldMonitors] ?? [];
+        $monitorsCurrent = $currentValue[$keyNewMonitors] ?? [];
         $id = $currentValue['id'];
         [$href, $subjectMail] = $this->getRouteAndSubjectMail($type, $id, $notifiable);
         switch ($typeSend) {
