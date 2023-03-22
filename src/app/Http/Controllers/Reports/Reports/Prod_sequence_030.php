@@ -20,13 +20,9 @@ class Prod_sequence_030 extends Report_ParentController
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT 
-        sp.name AS sub_project_name, po.id AS po_id, po.name AS po_name, ps.id AS prod_sequence_id 
+               sp.name AS sub_project_name, po.id AS po_id, po.name AS po_name, ps.id AS prod_sequence_id 
        , prl.name AS prod_routing_link_name
-       #,ps.total_hours AS ref_total_hours
-       #,SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) AS total_man_minute
-       #,ROUND(SUM(pr.worker_number),2) AS total_workers
-       ,ROUND(SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) * ROUND(SUM(pr.worker_number),2)/60) AS total_man_hours
-       #,ps.total_man_hours AS ref_total_man_hours 
+       ,ps.total_uom AS total_uom
         FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl
         WHERE 1 = 1";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
@@ -96,10 +92,12 @@ class Prod_sequence_030 extends Report_ParentController
         $groupSeqNames = array_map(function ($items) {
             // dd($items);
             array_walk($items, function ($value, $key) use (&$items) {
+                // dd($items);
                 $items[$key][Report::slugName($value['prod_routing_link_name'])] =
                     (object)[
-                        'value' => $items[$key]['total_man_hours'],
-                        'cell_title' => $items[$key]['prod_routing_link_name']
+                        'value' => $items[$key]['total_uom'] ?? '',
+                        'cell_title' => $items[$key]['prod_routing_link_name'],
+                        'cell_class' => is_null($items[$key]['total_uom']) ? 'bg-pink-400' : '',
                     ];
             });
             return array_merge(...$items);
