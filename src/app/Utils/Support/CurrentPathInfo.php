@@ -16,6 +16,6 @@ class CurrentPathInfo
     {
         $pathInfo = $request->getPathInfo();
         $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[1]);
-        return Str::ucfirst(Str::plural($pathInfo[1]));
+        return strtolower(Str::plural($pathInfo[1]));
     }
 }

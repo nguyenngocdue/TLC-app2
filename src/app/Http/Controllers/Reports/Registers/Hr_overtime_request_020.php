@@ -156,17 +156,10 @@ class Hr_overtime_request_020 extends Report_ParentController
     protected function forwardToMode($request)
     {
         $input = $request->input();
-        // update : page, params
-        $isFormType = isset($input['form_type']);
-        if ($isFormType && $input['form_type'] === 'updateParamsReport' || $isFormType && $input['form_type'] === 'updatePerPageReport') {
-            (new UpdateUserSettings())($request);
-            return redirect($request->getPathInfo());
-        }
-
         if (isset($input['months']) || isset($input['user_id'])) {
-            // Log::info("020");
             $typeReport = CurrentPathInfo::getTypeReport($request);
             $entityReport = CurrentPathInfo::getEntityReport($request);
+            // dd($typeReport, $entityReport);
             $params = [
                 '_entity' => $entityReport,
                 'action' => 'updateReport' . $typeReport,
@@ -175,8 +168,18 @@ class Hr_overtime_request_020 extends Report_ParentController
             ] + $input;
             $request->replace($params);
             (new UpdateUserSettings())($request);
+            // dd($input);
             return redirect($request->getPathInfo());
         }
+
+        // update : page, params
+        $isFormType = isset($input['form_type']);
+        if ($isFormType && $input['form_type'] === 'updateParamsReport' || $isFormType && $input['form_type'] === 'updatePerPageReport') {
+            (new UpdateUserSettings())($request);
+            return redirect($request->getPathInfo());
+        }
+
+
         if (isset($input['mode_option'])) {
             $mode = $input['mode_option'];
             $routeName = explode('/', $request->getPathInfo())[2];

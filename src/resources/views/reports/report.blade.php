@@ -4,7 +4,7 @@
 @section('title', $typeReport)
 @section('content')
 
-{{-- @dd($tableDataSource, $tableColumns); --}}
+{{-- @dd($modeParams, $tableDataSource, $tableColumns); --}}
 <div class="px-4">
     <div class="flex justify-end pb-2 pr-4 ">
         <x-reports.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" routeName="{{$routeName}}" page-limit="{{$pageLimit}}" />

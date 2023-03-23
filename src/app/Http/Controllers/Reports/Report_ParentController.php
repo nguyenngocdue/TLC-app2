@@ -97,6 +97,7 @@ abstract class Report_ParentController extends Controller
     {
         $typeReport = strtolower($typeReport);
         $settings = CurrentUser::getSettings();
+        // dd($settings);
         if (isset($settings[$entity][$typeReport][$currentMode])) {
             $modeParams = $settings[$entity][$typeReport][$currentMode];
             return $modeParams;
@@ -154,6 +155,7 @@ abstract class Report_ParentController extends Controller
         Log::info($input);
 
         $typeReport = CurrentPathInfo::getTypeReport($request);
+        // dd($typeReport);
         $routeName = $request->route()->action['as'];
         $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
 

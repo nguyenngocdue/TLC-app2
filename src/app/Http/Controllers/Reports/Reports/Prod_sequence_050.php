@@ -19,32 +19,35 @@ class Prod_sequence_050 extends Report_ParentController
     protected $rotate45Width = 400;
     public function getSqlStr($modeParams)
     {
-        $sql = "SELECT 
-        sp.name AS sub_project_name, po.id AS po_id, po.name AS po_name, ps.id AS prod_sequence_id 
-        , prl.name AS prod_routing_link_name
-        ,ps.total_uom AS total_uom
-        ,ROUND((SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) * ROUND(SUM(pr.worker_number),2)), 2) AS total_man_minutes
-        ,terms.name AS term_name
-        ,ROUND((SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) * ROUND(SUM(pr.worker_number),2))/ps.total_uom , 2) AS min_uom
-        FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl, terms
-        WHERE 1 = 1";
-
+        $sql = "SELECT sub_project_name ,po_id, po_name
+        ,ROUND(SUM(subquery.min_uom),2) AS total_min_uom
+        ,COUNT(subquery.min_uom) AS count_min_uom
+        ,ROUND(SUM(subquery.min_uom)/COUNT(subquery.min_uom), 2) AS avg_minutes_on_run
+        ,ROUND((SUM(subquery.min_uom)/COUNT(subquery.min_uom))/60, 2) AS avg_hours_on_run
+        ,ROUND(((SUM(subquery.min_uom)/COUNT(subquery.min_uom))/60)*8.5, 2) AS avg_day_on_run
+        FROM (
+            SELECT 
+                sp.name AS sub_project_name, po.id AS po_id, po.name AS po_name, ps.id prod_sequence_id
+                ,ROUND((SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) * ROUND(SUM(pr.worker_number),2))/ps.total_uom , 2) AS min_uom
+            FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl
+            WHERE 1 = 1";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
         if (!isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id =" . $this->sub_project_id;
         if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
         $sql .= "\n AND ps.prod_order_id = po.id
-        #AND ps.total_uom IS NOT NULL
-        AND ps.id = pr.prod_sequence_id
-        AND prl.id = ps.prod_routing_link_id
-        AND terms.id = ps.uom_id
-        GROUP BY po_id, prod_sequence_id";
+                AND ps.id = pr.prod_sequence_id
+                AND prl.id = ps.prod_routing_link_id
+                AND ps.total_uom IS NOT NULL
+            GROUP BY sub_project_name, po_id, prod_sequence_id
+        ) AS subquery
+        GROUP BY sub_project_name ,po_id";
         return $sql;
     }
 
     public function getTableColumns($dataSource, $modeParams)
     {
         // dd($dataSource);
-        $firstCols = [
+        $dataCols = [
             [
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
@@ -57,12 +60,33 @@ class Prod_sequence_050 extends Report_ParentController
                 "dataIndex" => "po_name",
                 "align" => "center",
                 "width" => "300",
+            ],
+            [
+                "title" => "Prod Name",
+                "dataIndex" => "total_min_uom",
+                "align" => "center",
+                "width" => "300",
+            ],
+            [
+                "title" => "Prod Name",
+                "dataIndex" => "avg_minutes_on_run",
+                "align" => "center",
+                "width" => "300",
+            ],
+            [
+                "title" => "Prod Name",
+                "dataIndex" => "avg_hours_on_run",
+                "align" => "center",
+                "width" => "300",
+            ],
+            [
+                "title" => "Prod Name",
+                "dataIndex" => "avg_day_on_run",
+                "align" => "center",
+                "width" => "300",
             ]
         ];
-        $unsetCols = [];
-        $sqlDataCol = $this->createTableColumns($dataSource, 'min_uom', '', [], $unsetCols, 'right', '200');
-        // dd($sqlDataCol);
-        return  array_merge($firstCols, $sqlDataCol);
+        return  $dataCols;
     }
 
     protected function getDataModes()
@@ -93,33 +117,6 @@ class Prod_sequence_050 extends Report_ParentController
 
     protected function transformDataSource($dataSource, $modeParams)
     {
-        $dataSource = Report::pressArrayTypeAllItems($dataSource);
-        $groupByProdOrders = Report::groupArrayByKey($dataSource, 'po_id');
-        $enrichProdOrders = array_map(function ($items) {
-            // dd($items);
-            array_walk($items, function ($value, $key) use (&$items) {
-                $items[$key][Report::slugName($value['prod_routing_link_name'])] =
-                    (object)[
-                        'value' => is_null($x = $items[$key]['min_uom']) ? 'null' : $x,
-                        'cell_title' => $items[$key]['prod_routing_link_name'] . ' [' . $x . '= Total Man Minutes / Total UoM' . '] ' . 'Unit: min/UoM',
-                        'cell_class' => is_null($x) ? 'bg-pink-400' : 'bg-green-400',
-                    ];
-            });
-            // dd($items);
-            return array_merge(...$items);
-        }, $groupByProdOrders);
-        $allSeqNamesReport = array_keys(array_merge(...array_values($enrichProdOrders)));
-        $dataSource = array_map(function ($item) use ($allSeqNamesReport) {
-            $diffItems = array_diff($allSeqNamesReport, array_keys($item));
-            array_walk($diffItems, function ($value, $key) use (&$item) {
-                $item[$value] = (object)[
-                    'value' => '',
-                    'cell_class' => 'bg-gray-600',
-                    'cell_title' => 'Not included this run',
-                ];
-            });
-            return $item;
-        }, $enrichProdOrders);
         return collect($dataSource);
     }
 
