@@ -5,7 +5,8 @@ $user = auth()->user();
 $editType = Str::plural($type);
 $id = $action === "edit" ? $values->id : "";
 $status = $status ?? $values->status ?? null;
-[$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$isCheckColumnStatus);
+$ownerId = $values->owner_id ?? null;
+[$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$isCheckColumnStatus,$ownerId);
 $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
 @endphp
 @section('topTitle', $topTitle)
@@ -59,9 +60,18 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
                     @php
                     $isCheck = !isset($propsIntermediate[$key]) || empty($propsIntermediate[$key]);
                     @endphp
-                    <button {{$isCheck ? 'type=submit '. '@click=changeStatus("'.$key .'")' : 'type=button '. '@click=toggleIntermediate("'.$key .'")' }} class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg">
-                        Next <i class="fa-regular fa-arrow-right"></i> (to {{$button['label']}})
-                    </button>
+                    @if($button['is_close'] == true)
+                    <button type="button" class="px-2.5 py-2 inline-block disabled:opacity-40 font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md focus:outline-none"
+                            disabled
+                            >
+                            Next <i class="fa-regular fa-arrow-right"></i> (to {{$button['label']}})
+                        </button>
+                    @else
+                    <button {{$isCheck ? 'type=submit '. '@click=changeStatus("'.$key .'")' : 'type=button '. '@click=toggleIntermediate("'.$key .'")' }} class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg"
+                            >
+                            Next <i class="fa-regular fa-arrow-right"></i> (to {{$button['label']}})
+                        </button>
+                    @endif
                     @endforeach
                 @endif
             </div>
