@@ -22,8 +22,9 @@ class Prod_sequence_030 extends Report_ParentController
         $sql = "SELECT 
                sp.name AS sub_project_name, po.id AS po_id, po.name AS po_name, ps.id AS prod_sequence_id 
        , prl.name AS prod_routing_link_name
+       ,terms.name AS term_name
        ,ps.total_uom AS total_uom
-        FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl
+        FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl, terms
         WHERE 1 = 1";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
         if (!isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id =" . $this->sub_project_id;
@@ -31,6 +32,7 @@ class Prod_sequence_030 extends Report_ParentController
         $sql .= "\n AND ps.prod_order_id = po.id
         AND ps.id = pr.prod_sequence_id
         AND prl.id = ps.prod_routing_link_id
+        AND terms.id = ps.uom_id
         GROUP BY po_id, prod_sequence_id";
         return $sql;
     }
@@ -54,8 +56,7 @@ class Prod_sequence_030 extends Report_ParentController
             ]
         ];
         $unsetCols = ['po_id', 'prod_sequence_id', 'total_uom', 'prod_routing_link_name'];
-        $sqlDataCol = $this->createTableColumns($dataSource, 'flooring_installation', '', [], $unsetCols, 'right', '200');
-        // dd($sqlDataCol);
+        $sqlDataCol = $this->createTableColumns($dataSource, 'total_uom', '', [], $unsetCols, 'right', '200');
         return  array_merge($firstCols, $sqlDataCol);
     }
 
@@ -88,31 +89,31 @@ class Prod_sequence_030 extends Report_ParentController
     protected function transformDataSource($dataSource, $modeParams)
     {
         $dataSource = Report::pressArrayTypeAllItems($dataSource);
-        $groupProdOrders = Report::groupArrayByKey($dataSource, 'po_id');
-        $groupSeqNames = array_map(function ($items) {
-            // dd($items);
+        $groupByProdOrders = Report::groupArrayByKey($dataSource, 'po_id');
+        $enrichProdOrders = array_map(function ($items) {
             array_walk($items, function ($value, $key) use (&$items) {
-                // dd($items);
                 $items[$key][Report::slugName($value['prod_routing_link_name'])] =
                     (object)[
-                        'value' => $items[$key]['total_uom'] ?? '',
+                        'value' => is_null($x = $items[$key]['total_uom']) ? 'null' : $x . strtolower($items[$key]['term_name']),
                         'cell_title' => $items[$key]['prod_routing_link_name'],
-                        'cell_class' => is_null($items[$key]['total_uom']) ? 'bg-pink-400' : '',
+                        'cell_class' => is_null($x) ? 'bg-pink-400' : 'bg-green-400',
                     ];
             });
             return array_merge(...$items);
-        }, $groupProdOrders);
+        }, $groupByProdOrders);
 
-        $allSeqNames = array_keys(array_merge(...array_values($groupSeqNames)));
-
-        $dataSource = array_map(function ($item) use ($allSeqNames) {
-
-            $diffItems = array_diff_key($allSeqNames, array_keys($item));
+        $allSeqNamesReport = array_keys(array_merge(...array_values($enrichProdOrders)));
+        $dataSource = array_map(function ($item) use ($allSeqNamesReport) {
+            $diffItems = array_diff($allSeqNamesReport, array_keys($item));
             array_walk($diffItems, function ($value, $key) use (&$item) {
-                $item[$value] = '';
+                $item[$value] = (object)[
+                    'value' => '',
+                    'cell_class' => 'bg-gray-600',
+                    'cell_title' => 'Not included this run',
+                ];
             });
             return $item;
-        }, $groupSeqNames);
+        }, $enrichProdOrders);
         return collect($dataSource);
     }
 

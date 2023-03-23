@@ -9,55 +9,59 @@ use App\Models\Prod_order as ModelsProd_order;
 use App\Models\Sub_project;
 use App\Utils\Support\Report;
 
-class Prod_sequence_020 extends Report_ParentController
+class Prod_sequence_050 extends Report_ParentController
 
 {
     use TraitReport;
     use TraitForwardModeReport;
-    protected $mode = '020';
+    protected $mode = '050';
     protected  $sub_project_id = 21;
     protected $rotate45Width = 400;
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT 
         sp.name AS sub_project_name, po.id AS po_id, po.name AS po_name, ps.id AS prod_sequence_id 
-       , prl.name AS prod_routing_link_name
-       #,ps.total_hours AS ref_total_hours
-       ,SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) AS total_man_hours
-       ,ROUND(SUM(pr.worker_number),2) AS total_workers
-       ,ROUND((SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) * ROUND(SUM(pr.worker_number),2))/60, 2) AS total_man_hours
-       #,ps.total_man_hours AS ref_total_man_hours 
-        FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl
+        , prl.name AS prod_routing_link_name
+        ,ps.total_uom AS total_uom
+        ,ROUND((SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) * ROUND(SUM(pr.worker_number),2)), 2) AS total_man_minutes
+        ,terms.name AS term_name
+        ,ROUND((SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) * ROUND(SUM(pr.worker_number),2))/ps.total_uom , 2) AS min_uom
+        FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl, terms
         WHERE 1 = 1";
+
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
         if (!isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id =" . $this->sub_project_id;
         if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
         $sql .= "\n AND ps.prod_order_id = po.id
+        #AND ps.total_uom IS NOT NULL
         AND ps.id = pr.prod_sequence_id
         AND prl.id = ps.prod_routing_link_id
+        AND terms.id = ps.uom_id
         GROUP BY po_id, prod_sequence_id";
         return $sql;
     }
 
     public function getTableColumns($dataSource, $modeParams)
     {
+        // dd($dataSource);
         $firstCols = [
             [
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
                 "align" => "center",
-                "width" => "500",
+                "width" => "300",
 
             ],
             [
                 "title" => "Prod Name",
                 "dataIndex" => "po_name",
                 "align" => "center",
-                "width" => "500",
+                "width" => "300",
             ]
         ];
-        $unsetCols = ['po_id', 'prod_sequence_id', 'total_man_hours', 'prod_routing_link_name'];
-        $sqlDataCol = $this->createTableColumns($dataSource, 'total_workers', '', [], $unsetCols, 'right', '200');
+        $unsetCols = [];
+        $sqlDataCol = $this->createTableColumns($dataSource, 'min_uom', '', [], $unsetCols, 'right', '200');
+        // dd($sqlDataCol);
         return  array_merge($firstCols, $sqlDataCol);
     }
 
@@ -92,14 +96,16 @@ class Prod_sequence_020 extends Report_ParentController
         $dataSource = Report::pressArrayTypeAllItems($dataSource);
         $groupByProdOrders = Report::groupArrayByKey($dataSource, 'po_id');
         $enrichProdOrders = array_map(function ($items) {
+            // dd($items);
             array_walk($items, function ($value, $key) use (&$items) {
                 $items[$key][Report::slugName($value['prod_routing_link_name'])] =
                     (object)[
-                        'value' => $x = $items[$key]['total_man_hours'],
-                        'cell_title' => $items[$key]['prod_routing_link_name'] . ' [' . $x . '= (Total Workers * Total Man Hours)/60' . '] ' . 'Unit: hours ',
-                        'cell_class' => 'bg-green-400',
+                        'value' => is_null($x = $items[$key]['min_uom']) ? 'null' : $x,
+                        'cell_title' => $items[$key]['prod_routing_link_name'] . ' [' . $x . '= Total Man Minutes / Total UoM' . '] ' . 'Unit: min/UoM',
+                        'cell_class' => is_null($x) ? 'bg-pink-400' : 'bg-green-400',
                     ];
             });
+            // dd($items);
             return array_merge(...$items);
         }, $groupByProdOrders);
         $allSeqNamesReport = array_keys(array_merge(...array_values($enrichProdOrders)));

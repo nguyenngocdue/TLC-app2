@@ -18,7 +18,7 @@ trait TraitReport
         $array = (array)array_slice($dataSource->items(), 0, 1)[0];
         $fields = [];
         if ($strFromField || $strToFields) {
-            $fromField =  ($x = array_search($strFromField, array_keys($array))) ? $x : 0;
+            $fromField =  ($x = array_search($strFromField, array_keys($array))) ? $x + 1 : 0;
             $toField = ($x = array_search($strToFields, array_keys($array))) ? $x : count($array);
             $fields = array_keys(array_slice($array, $fromField, $toField - $fromField + 1));
         } else {
@@ -38,6 +38,7 @@ trait TraitReport
                 $dataColumn[] = ['dataIndex' => $value, 'align' => $align, 'width' => $width];
             }
         }
+        // dump($dataColumn);
         return $dataColumn;
     }
 }

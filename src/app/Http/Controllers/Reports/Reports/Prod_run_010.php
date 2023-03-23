@@ -26,7 +26,7 @@ class Prod_run_010 extends Report_ParentController
         ,SUBSTR(TIMEDIFF(pr.end,pr.start), 1, 5) AS prod_run_duration
         ,ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0) AS total_production_time_minute
         ,ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60/60,2) AS total_production_time
-        ,ROUND(pr.worker_number * TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0) AS man_minute
+        ,ROUND(pr.worker_number * TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0) AS man_minutes
         
         FROM ( SELECT
             sp.id AS sub_project_id
@@ -95,11 +95,11 @@ class Prod_run_010 extends Report_ParentController
                 "align" => "center",
                 'width' => "100"
             ],
-            [
-                "dataIndex" => "prod_routing_link_name",
-                "align" => 'right',
-                'width' => "400"
-            ],
+            // [
+            //     "dataIndex" => "prod_routing_link_name",
+            //     "align" => 'right',
+            //     'width' => "400"
+            // ],
 
 
             // [
@@ -107,14 +107,6 @@ class Prod_run_010 extends Report_ParentController
             //     "align" => 'right',
             //     'width' => "400"
             // ],
-
-            // [
-            //     "dataIndex" => "total_hours",
-            //     "align" => 'right',
-            //     'width' => "400"
-            // ],
-
-
             [
                 'title' => 'Date',
                 "dataIndex" => "prod_run_date",
@@ -128,13 +120,13 @@ class Prod_run_010 extends Report_ParentController
                 'width' => "100"
             ],
             [
-                'title' => 'Prod Run Start Time',
+                'title' => 'Prod Run Start Time (hours)',
                 "dataIndex" => "prod_run_start",
                 "align" => "center",
                 'width' => "100"
             ],
             [
-                'title' => 'Prod Run End Time',
+                'title' => 'Prod Run End Time (hours)',
                 "dataIndex" => "prod_run_end",
                 "align" => "center",
                 'width' => "100"
@@ -212,26 +204,27 @@ class Prod_run_010 extends Report_ParentController
         $groupIdsProdSeq = Report::groupArrayByKey($itemsSource, 'prod_sequence_id');
         $sumManMinutesProSeq = [];
         foreach ($groupIdsProdSeq as $key => $sequence) {
-            $man_minutes = array_column($sequence, 'man_minute');
-            $sumManMinutesProSeq[$key] = array_sum($man_minutes);
+            $man_minutess = array_column($sequence, 'man_minutes');
+            $sumManMinutesProSeq[$key] = array_sum($man_minutess);
         }
         foreach ($itemsSource as $key => $value) {
             $value['prod_routing_link_name'] = (object) [
                 'cell_title' => 'ID:' . $value['prod_routing_link_id'],
                 'value' => $value['prod_routing_link_name']
             ];
-
             if (isset($dataHours[$value['prod_run_id']])) {
                 $dt = $dataHours[$value['prod_run_id']];
-                $man_minute = $sumManMinutesProSeq[$dt['prod_sequence_id']];
-                // dd($sumManMinutesProSeq, $man_minute);
-                $totalWorker = round($man_minute * 1 / $dt['sum_production_time_minutes'] * 1, 2);
-                // dd($value);
+                $man_minutes = $sumManMinutesProSeq[$dt['prod_sequence_id']];
+                $totalWorker = round($man_minutes * 1 / $dt['sum_production_time_minutes'] * 1, 2);
                 $itemsSource[$key] = $value +
                     [
                         'sum_production_time_hours' => $dt['sum_production_time_hours'],
                         'sum_production_time_minutes' => $dt['sum_production_time_minutes'],
-                        'total_worker' => $totalWorker
+                        'total_worker' => (object)[
+                            'value' => $totalWorker,
+                            'cell_title' => $totalWorker . ' = [ Total Duration / Total Man Minutes]',
+                            'cell_class' => 'bg-green-400',
+                        ]
                     ];
             } else {
                 $itemsSource[$key] = $value +
@@ -250,7 +243,6 @@ class Prod_run_010 extends Report_ParentController
     {
         $x = 'sub_project_id';
         $isNullModeParams = Report::isNullModeParams($modeParams);
-        // dd($modeParams, $isNullModeParams);
         if ($isNullModeParams) {
             $modeParams[$x] = $this->sub_project_id;
         }

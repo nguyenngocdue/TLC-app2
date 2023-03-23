@@ -19,13 +19,14 @@ class Prod_sequence_010 extends Report_ParentController
     use TraitReport;
     use TraitForwardModeReport;
     protected  $sub_project_id = 21;
-    protected $rotate45Width = 300;
+    protected $rotate45Width = 400;
+
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT 
         sp.name AS sub_project_name, po.id AS po_id, po.name AS po_name, ps.id AS prod_sequence_id 
         , prl.name AS prod_routing_link_name
-        ,SUM(ROUND(pr.worker_number * TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) AS total_man_minute
+        ,SUM(ROUND(pr.worker_number * TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) AS total_man_hours
         ,ROUND(SUM(pr.worker_number * TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60) / SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) ,2) AS workers
         FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl
         WHERE 1 = 1";
@@ -44,7 +45,7 @@ class Prod_sequence_010 extends Report_ParentController
     public function getTableColumns($dataSource, $modeParams)
     {
         // dd($dataSource);
-        $editCols = [
+        $firstCols = [
             [
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
@@ -59,21 +60,15 @@ class Prod_sequence_010 extends Report_ParentController
                 "width" => "200",
             ]
         ];
-        $unsetCols = [
-            'prod_sequence_id', 'prod_routing_link_name',
-            'po_id',
-            'sequence_total_hours',
-            'workers',
-            'total_man_minute'
-        ];
-        $sqlDataCol = $this->createTableColumns($dataSource, '', '', $editCols, $unsetCols, 'right', '100');
+        $unsetCols = [];
+        $sqlDataCol = $this->createTableColumns($dataSource, 'workers', '', [], $unsetCols, 'right', '100');
         // dd($sqlDataCol);
-        return  $sqlDataCol;
+        return  array_merge($firstCols, $sqlDataCol);
     }
 
     protected function getDataModes()
     {
-        return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020', '030' => 'Model 030']];
+        return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020', '030' => 'Model 030', '040' => 'Model 040', '050' => 'Model 050']];
     }
     protected function getParamColumns()
     {
@@ -100,27 +95,30 @@ class Prod_sequence_010 extends Report_ParentController
     protected function transformDataSource($dataSource, $modeParams)
     {
         $dataSource = Report::pressArrayTypeAllItems($dataSource);
-        $groupProdOrders = Report::groupArrayByKey($dataSource, 'po_id');
-        $groupSeqNames = array_map(function ($items) {
+        $groupByProdOrders = Report::groupArrayByKey($dataSource, 'po_id');
+        $enrichProdOrders = array_map(function ($items) {
             array_walk($items, function ($value, $key) use (&$items) {
                 $items[$key][Report::slugName($value['prod_routing_link_name'])] =
                     (object)[
-                        'value' => $items[$key]['workers'],
-                        'cell_title' => $items[$key]['prod_routing_link_name']
+                        'value' => $x = $items[$key]['workers'],
+                        'cell_title' => $items[$key]['prod_routing_link_name'] . '(' . $items[$key]["workers"] . ')' . '= [Σ(Duration) / Σ(Man Minutes)]',
+                        'cell_class' => is_null($x) ? 'bg-pink-400' : 'bg-orange-400',
                     ];
             });
             return array_merge(...$items);
-        }, $groupProdOrders);
-
-        $allSeqNames = array_keys(array_merge(...array_values($groupSeqNames)));
-        $dataSource = array_map(function ($item) use ($allSeqNames) {
-            $diffItems = array_diff_key($allSeqNames, array_keys($item));
+        }, $groupByProdOrders);
+        $allSeqNamesReport = array_keys(array_merge(...array_values($enrichProdOrders)));
+        $dataSource = array_map(function ($item) use ($allSeqNamesReport) {
+            $diffItems = array_diff($allSeqNamesReport, array_keys($item));
             array_walk($diffItems, function ($value, $key) use (&$item) {
-                $item[$value] = '';
+                $item[$value] = (object)[
+                    'value' => '',
+                    'cell_class' => 'bg-yellow-400',
+                    'cell_title' => 'Not included this run',
+                ];
             });
             return $item;
-        }, $groupSeqNames);
-        // dd($dataSource['9']);
+        }, $enrichProdOrders);
         return collect($dataSource);
     }
 
