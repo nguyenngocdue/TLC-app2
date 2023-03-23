@@ -97,7 +97,7 @@ class Prod_sequence_020 extends Report_ParentController
                     (object)[
                         'value' => $x = $items[$key]['total_man_hours'],
                         'cell_title' => $items[$key]['prod_routing_link_name'] . ' [' . $x . '= (Total Workers * Total Man Hours)/60' . '] ' . 'Unit: hours ',
-                        'cell_class' => 'bg-green-400',
+                        'cell_class' => 'bg-50-400',
                     ];
             });
             return array_merge(...$items);

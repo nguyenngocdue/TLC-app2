@@ -62,7 +62,7 @@ class Prod_sequence_030 extends Report_ParentController
 
     protected function getDataModes()
     {
-        return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020', '030' => 'Model 030']];
+        return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020', '030' => 'Model 030', '040' => 'Model 040', '050' => 'Model 050']];
     }
     protected function getParamColumns()
     {
@@ -96,7 +96,7 @@ class Prod_sequence_030 extends Report_ParentController
                     (object)[
                         'value' => is_null($x = $items[$key]['total_uom']) ? 'null' : $x . strtolower($items[$key]['term_name']),
                         'cell_title' => $items[$key]['prod_routing_link_name'],
-                        'cell_class' => is_null($x) ? 'bg-pink-400' : 'bg-green-400',
+                        'cell_class' => is_null($x) ? 'bg-pink-400' : 'bg-green-50',
                     ];
             });
             return array_merge(...$items);

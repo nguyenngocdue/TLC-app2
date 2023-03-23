@@ -102,7 +102,7 @@ class Prod_sequence_040 extends Report_ParentController
                     (object)[
                         'value' => is_null($x = $items[$key]['min_uom']) ? 'null' : $x,
                         'cell_title' => $items[$key]['prod_routing_link_name'] . ' [' . $x . '= Total Man Minutes / Total UoM' . '] ' . 'Unit: min/UoM',
-                        'cell_class' => is_null($x) ? 'bg-pink-400' : 'bg-green-400',
+                        'cell_class' => is_null($x) ? 'bg-pink-400' : 'bg-green-50',
                     ];
             });
             // dd($items);

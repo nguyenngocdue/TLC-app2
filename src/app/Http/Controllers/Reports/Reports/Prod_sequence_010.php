@@ -102,7 +102,7 @@ class Prod_sequence_010 extends Report_ParentController
                     (object)[
                         'value' => $x = $items[$key]['workers'],
                         'cell_title' => $items[$key]['prod_routing_link_name'] . '(' . $items[$key]["workers"] . ')' . '= [Σ(Duration) / Σ(Man Minutes)]',
-                        'cell_class' => is_null($x) ? 'bg-pink-400' : 'bg-orange-400',
+                        'cell_class' => is_null($x) ? 'bg-pink-400' : 'bg-green-50',
                     ];
             });
             return array_merge(...$items);
@@ -113,7 +113,7 @@ class Prod_sequence_010 extends Report_ParentController
             array_walk($diffItems, function ($value, $key) use (&$item) {
                 $item[$value] = (object)[
                     'value' => '',
-                    'cell_class' => 'bg-yellow-400',
+                    'cell_class' => 'bg-gray-600',
                     'cell_title' => 'Not included this run',
                 ];
             });
