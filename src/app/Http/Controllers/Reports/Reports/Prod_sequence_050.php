@@ -16,7 +16,6 @@ class Prod_sequence_050 extends Report_ParentController
     use TraitForwardModeReport;
     protected $mode = '050';
     protected  $sub_project_id = 21;
-    protected $rotate45Width = 400;
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT sub_project_name ,po_id, po_name
@@ -62,25 +61,31 @@ class Prod_sequence_050 extends Report_ParentController
                 "width" => "300",
             ],
             [
-                "title" => "Prod Name",
+                "title" => "Total Tot Min UoM (Mins)",
                 "dataIndex" => "total_min_uom",
                 "align" => "center",
                 "width" => "300",
             ],
             [
-                "title" => "Prod Name",
+                "title" => "Count Min UoM",
+                "dataIndex" => "count_min_uom",
+                "align" => "center",
+                "width" => "300",
+            ],
+            [
+                "title" => "Average Mins (Mins)",
                 "dataIndex" => "avg_minutes_on_run",
                 "align" => "center",
                 "width" => "300",
             ],
             [
-                "title" => "Prod Name",
+                "title" => "Average Hours (Hours)",
                 "dataIndex" => "avg_hours_on_run",
                 "align" => "center",
                 "width" => "300",
             ],
             [
-                "title" => "Prod Name",
+                "title" => "Average Days (Hours/Day)",
                 "dataIndex" => "avg_day_on_run",
                 "align" => "center",
                 "width" => "300",

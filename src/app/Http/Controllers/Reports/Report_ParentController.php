@@ -176,7 +176,7 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
         $start = microtime(true);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
-        dump(count($dataSource));
+        // dump(count($dataSource));
 
         $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
@@ -185,7 +185,7 @@ abstract class Report_ParentController extends Controller
 
         // Execute the query
         $time = microtime(true) - $start;
-        dump($time);
+        // dump($time);
 
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
         $viewName = strtolower(Str::singular($typeReport));
