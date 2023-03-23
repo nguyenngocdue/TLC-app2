@@ -67,15 +67,26 @@ class WorkflowFields
             $actionButtons = [];
         }
     }
-    private static function getActionButtonsFromTransitionAndStatuses($transitions, $statuses)
+    private static function getActionButtonsFromTransitionAndStatuses($transitions, $statuses, $closed, $ownerId)
     {
         $actionButtons = [];
         foreach ($transitions as $value) {
-            $actionButtons[$value] = $statuses[$value]['action-buttons'];
+            $results = array_merge($statuses[$value]['action-buttons'], ['is_close' => false]);
+            $actionButtons[$value] = $results;
+            foreach ($closed as $close) {
+                if ($value == $close) {
+                    $ownerId == static::ownerIdLogin() ? $actionButtons[$value]['is_close'] = true
+                        : $actionButtons[$value]['is_close'] = false;
+                }
+            }
         }
         return $actionButtons;
     }
-    public static function resolveSuperProps($superProps, $status, $type, $isCheckColumnStatus)
+    private static function ownerIdLogin()
+    {
+        return auth()->user()->id;
+    }
+    public static function resolveSuperProps($superProps, $status, $type, $isCheckColumnStatus, $ownerId)
     {
         self::$type = $type;
         $buttonSave = true;
@@ -90,11 +101,10 @@ class WorkflowFields
         $hideSaveButton = $definitions['hide-save-btn'] ?? [];
         $closed = $definitions['closed'] ?? [];
         $buttonSave = !(in_array($status, $closed)) && !in_array($status, $hideSaveButton);
-
         $intermediate = $superProps['intermediate'];
         $propsIntermediate = self::getPropsIntermediate($intermediate, $status, $props);
         $transitions = $statuses[$status]['transitions'] ?? [];
-        $actionButtons = self::getActionButtonsFromTransitionAndStatuses($transitions, $statuses);
+        $actionButtons = self::getActionButtonsFromTransitionAndStatuses($transitions, $statuses, $closed, $ownerId);
         self::checkButtonSaveRenderWhenAdmin($buttonSave);
         $checkWorkflowCapa = self::getCapabilitiesByRoleSetCurrentUser();
         self::checkWorkflowCapabilitiesForRenderButton($checkWorkflowCapa, $status, $buttonSave, $actionButtons);
