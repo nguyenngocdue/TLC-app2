@@ -19,11 +19,11 @@
         <div class="grid gap-6 mb-8 md:grid-cols-2 ">
             <div>
                 AvatarUser with Slot
-                <x-renderer.avatar-user >{!!Auth::user()!!}</x-renderer.avatar-user>
+                <x-renderer.avatar-user>{!!Auth::user()!!}</x-renderer.avatar-user>
             </div>
             <div>
                 Empty attribute
-                <x-renderer.avatar-user ></x-renderer.avatar-user>
+                <x-renderer.avatar-user></x-renderer.avatar-user>
             </div>
         </div>
     </x-renderer.card>
@@ -40,14 +40,14 @@
     <x-renderer.card title="Tables 1">
         <x-renderer.card title="Table with Data and maxH= { { false } }">
             In dataSource: rowDescription="This is an example of a rowDescription"
-            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" maxH={{false}}/>
+            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" maxH={{false}} />
         </x-renderer.card>
         <br />
         <x-renderer.card title="Table with Data and No. and dataHeader">
             showNo= { { true } }
             <x-renderer.table :columns="$tableColumns" :dataHeader="$tableDataHeader" :dataSource="$tableDataSource" showNo="{{true}}" />
         </x-renderer.card>
-        <br />        
+        <br />
         <x-renderer.card title="Empty Table">
             <x-renderer.table :columns="$tableColumns" :dataSource="[]" />
         </x-renderer.card>
@@ -64,17 +64,17 @@
         <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive)">
             showNoR= { { true } }
             groupBy="client" groupByLength=1
-            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="client" maxH={{false}}/>
+            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="client" maxH={{false}} />
         </x-renderer.card>
         <br />
         <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive) but keep original order">
             showNoR= { { true } }
             groupBy="status" groupByLength=100 groupKeepOrder={ { true } }
-            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="status" groupByLength=100 groupKeepOrder={{true}}/>
+            <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNoR="{{true}}" groupBy="status" groupByLength=100 groupKeepOrder={{true}} />
         </x-renderer.card>
         <br />
         <x-renderer.card title="Table with cell_class, cell_title, and cell_href, and rotate45">
-            <x-renderer.table :columns="$tableColumnsForRegister" :dataSource="$tableDataSourceForRegister" showNo="{{true}}" rotate45Width={{200}}/>
+            <x-renderer.table :columns="$tableColumnsForRegister" :dataSource="$tableDataSourceForRegister" showNo="{{true}}" rotate45Width={{200}} />
         </x-renderer.card>
     </x-renderer.card>
 </div>

@@ -23,6 +23,18 @@ class Report
         // dd($groupedArray, $dataSource);
         return $groupedArray;
     }
+
+    public static function groupArrayByKey2($dataSource, $key, $returnKey, $returnValue)
+    {
+        $groupedArray = [];
+        foreach ($dataSource as $element) {
+            $eleArray = (array)$element;
+            $groupedArray[$eleArray[$key]][$eleArray[$returnKey]] = $eleArray[$returnValue];
+        }
+        // dd($groupedArray, $dataSource);
+        return $groupedArray;
+    }
+
     public static function assignKeyByKey($dataSource, $keyName)
     {
         $array = [];

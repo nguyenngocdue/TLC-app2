@@ -39,6 +39,9 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
                         ,l.id AS line_id
                         ,l.description AS line_description
                         ,l.name AS line_name
+
+						,csh.id AS chklsts_id
+						,csh.name AS chklsts_name
                         
                         ,cv.id AS control_value_id
                         ,cv.name AS control_value_name
@@ -83,7 +86,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 			[
 				"title" => 'Description',
 				"dataIndex" => "line_description",
-				'width' => "10"
+				'width' => "10",
 			],
 			[
 				"dataIndex" => "response_type",
@@ -137,69 +140,36 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		return array_merge($subProjects, $prod_orders, $insp_tmpls, $insp_chklsts, $run_option);
 	}
 
-
-	protected function enrichDataSource($dataSource, $modeParams)
+	private function transformLines($groupByLinesDesc, $indexByLineIds, $modeParams)
 	{
-		$isNullParams = Report::isNullModeParams($modeParams);
-		if ($isNullParams) return collect([]);
-		// dd($dataSource);
-
-		// $dataSource = Report::pressArrayTypeAllItems($dataSource);
-		$indexByLineIds = Report::assignKeyByKey($dataSource, 'line_id');
-
-		$groupByLinesDesc = [];
-		array_walk($indexByLineIds, function ($value, $key) use (&$groupByLinesDesc) {
-			$groupByLinesDesc[$value['line_description']][] = $key;
-		});
-
-		// dd($groupByLinesDesc);
-		// Reduce the number of lines from URL request 
 		if (isset($modeParams['run_option']) && !$modeParams['run_option']) {
-			$array = [];
-			foreach ($groupByLinesDesc as $desc => $lineIds) {
+			array_walk($groupByLinesDesc, function ($ids, $desc) use (&$groupByLinesDesc) {
 				if ($desc === 'TLC Inspector Name') {
-					$array[$desc] = $lineIds;
+					$groupByLinesDesc[$desc] = (array)$ids;
 				} else {
-					$array[$desc] = array_slice($lineIds, 0, 1);
+					$groupByLinesDesc[$desc] = array_slice($ids, 0, 1, true);
 				}
-			}
-			$groupByLinesDesc = $array;
-			$signatures = $array['TLC Inspector Name'];
-			$newArrayLinesId = (array_merge(...array_values($array))) + $signatures;
-			$indexByLineIds = array_intersect_key($indexByLineIds, array_flip($newArrayLinesId));
-			// dd($newArrayLinesId, $indexByLineIds);
+			});
 		}
-
-		// dd($groupByLinesDesc);
-		// create "<tr></tr>"  for each run_id
-		$arrayHtml = [];
 		foreach ($groupByLinesDesc as $ids) {
-			array_walk($ids, function ($id) use ($indexByLineIds, &$arrayHtml) {
+			array_walk($ids, function ($sheetId, $lineId) use (&$indexByLineIds) {
 				$str = '';
-				$item = $indexByLineIds[$id];
+				$item = $indexByLineIds[$lineId];
 				if (!is_null($item['c1'])) {
 					$str .= "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrCheckboxHTML($item) . "</tr>";
 					$str .= $this->createStrImage($item);
 					$str .=  $this->createStrComment($item);
-					$arrayHtml[$id] = $str;
 				} else {
-					$arrayHtml[$id] = "<h2>CSV</h2>";
+					$str = "<h2>CSV</h2>";
 				}
+				$indexByLineIds[$lineId]['response_type'] = $str;
 			});
 		}
-		// dd($arrayHtml);
-		// add response_type (children table) for run_id
-		array_walk($indexByLineIds, function ($value, $id) use (&$indexByLineIds, $arrayHtml) {
-			if (isset($arrayHtml[$id])) {
-				$value['response_type'] = $arrayHtml[$id];
-				$indexByLineIds[$id] = $value;
-			}
-		});
-		// dd($indexByLineIds);
-		// group runs into each sheet
-		$sheetGroup = Report::groupArrayByKey($indexByLineIds, 'sheet_id');
-		// dd($indexByLineIds, $sheetGroup);
+		return $indexByLineIds;
+	}
 
+	protected function createDataTableRuns($sheetGroup)
+	{
 		$data = [];
 		foreach ($sheetGroup as $sheetId => $runs) {
 			$groupDesc = Report::groupArrayByKey($runs, 'line_description');
@@ -212,10 +182,46 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 			}
 			$data[$sheetId] = array_values($groupDesc);
 		}
+		return $data;
+	}
+
+	protected function enrichDataSource($dataSource, $modeParams)
+	{
+		$isNullParams = Report::isNullModeParams($modeParams);
+		if ($isNullParams) return collect([]);
+
+		$groupByChklsts = Report::groupArrayByKey($dataSource, 'chklsts_id');
+		$chcklstIds = array_keys($groupByChklsts);
+		// dd($chcklstIds);
+
+		// group lines into chcklst_id
+		array_walk($chcklstIds, function ($value) use (&$groupByChklsts) {
+			$groupByChklsts[$value] =  Report::assignKeyByKey($groupByChklsts[$value], 'line_id');
+		});
+		//add "response_type" field into lines
+		array_walk($groupByChklsts, function ($value, $key) use (&$groupByChklsts, $modeParams) {
+			$groupByLinesDesc = Report::groupArrayByKey2($value, 'line_description', 'line_id', 'sheet_id');
+			// unique run for  "TLC Inspector Name" line
+			$groupByLinesDesc['TLC Inspector Name'] = array_unique($groupByLinesDesc['TLC Inspector Name']);
+			// dd($groupByLinesDesc);
+			$groupByChklsts[$key] = $this->transformLines($groupByLinesDesc, $value, $modeParams);
+		});
+		//group lines into each sheet
+		$sheetGroup = [];
+		array_walk($groupByChklsts, function ($value, $key) use (&$sheetGroup) {
+			$sheetGroup[$key] = Report::groupArrayByKey($value, 'sheet_id');
+		});
+		// combine "response_type" for each line
+		$data = [];
+		array_walk($sheetGroup, function ($value, $key) use (&$data) {
+			$data += $this->createDataTableRuns($value);
+		});
 		ksort($data);
-		// dd("123", $data);
 		return collect($data);
 	}
+
+
+
 
 	protected function getAttachment($object_type, $object_id)
 	{
@@ -298,7 +304,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 	protected function getSheets($dataSource)
 	{
 		$items = Report::pressArrayTypeAllItems($dataSource);
-		// dd($items);
 		$sheets = array_values(array_map(function ($item) {
 			$x = isset(reset($item)['sheet_name']);
 			if ($x) {
@@ -307,7 +312,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 				return  ["sheet_name" =>  $str];
 			} else return [];
 		}, $items));
-		// dd($sheets);
 		return $sheets;
 	}
 
