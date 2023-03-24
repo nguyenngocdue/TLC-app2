@@ -14,17 +14,13 @@ class UpdatedDocumentEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $previousValue;
-    public $currentValue;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($previousValue, $currentValue)
+    public function __construct(public $previousValue, public $currentValue)
     {
-        $this->previousValue = $previousValue;
-        $this->currentValue = $currentValue;
     }
 
     /**

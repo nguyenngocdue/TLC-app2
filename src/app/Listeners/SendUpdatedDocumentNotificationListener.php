@@ -8,8 +8,10 @@ use App\Mail\SendMailChangeStatus;
 use App\Models\User;
 use App\Notifications\UpdatedNotification;
 use App\Utils\Constant;
+use App\Utils\SendMaiAndNotification\CheckDefinitionsNew;
 use App\Utils\Support\Json\BallInCourts;
 use App\Utils\Support\JsonControls;
+use Barryvdh\Debugbar\Twig\Extension\Dump;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
@@ -19,6 +21,7 @@ use Illuminate\Support\Str;
 
 class SendUpdatedDocumentNotificationListener implements ShouldQueue
 {
+    use CheckDefinitionsNew;
     /**
      * Create the event listener.
      *
@@ -88,10 +91,18 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
                     break;
             }
         }
-        $this->send($assigneeNotification, $previousValue, $currentValue, 'assignee');
-        $this->send($changStatusAssignee, $previousValue, $currentValue, 'assignee_status_change', false);
-        $this->send($monitorNotification, $previousValue, $currentValue, 'monitors');
-        $this->send($changStatusMonitors, $previousValue, $currentValue, 'monitor_status_change', false);
+        $isNullAssigneeArrayValue = $this->isNullAssigneeArrayValue($assigneeNotification);
+        $isNullAssigneeArrayValue ?
+            $this->send($assigneeNotification, $previousValue, $currentValue, 'assignee')
+            : $this->send($changStatusAssignee, $previousValue, $currentValue, 'assignee_status_change', false);
+        empty($monitorNotification) ?
+            $this->send($changStatusMonitors, $previousValue, $currentValue, 'monitor_status_change', false)
+            : $this->send($monitorNotification, $previousValue, $currentValue, 'monitors');;
+    }
+    private function isNullAssigneeArrayValue($array)
+    {
+        $arrayValue = array_values($array);
+        return array_shift($arrayValue);
     }
     private function isChangeBallInCourt($previousValue, $currentValue, $listAssignees, $listMonitors, $index = 0)
     {
@@ -146,6 +157,10 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
                 'previousValue' => $previousValue,
             ]
         ));
+        $isDefinitionNew = $this->isDefinitionNew($currentValue);
+        if (!$isDefinitionNew) {
+            $this->sendMail($user, $type, $key, $previousValue, $currentValue);
+        }
     }
     private function sendMail($user, $typeSend, $key, $previousValue, $currentValue)
     {
@@ -153,12 +168,13 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         $creator = $currentValue['owner_id'];
         [$keyOldAssignee, $keyNewAssignee, $keyOldMonitors, $keyNewMonitors] = $this->getKeyBallInCourt($key);
         $monitorsCurrent = $currentValue[$keyNewMonitors] ?? [];
+        $monitorsPrevious = $previousValue[$keyOldMonitors] ?? [];
         $id = $currentValue['id'];
         [$href, $subjectMail] = $this->getRouteAndSubjectMail($type, $id);
         switch ($typeSend) {
             case 'assignee_status_change':
                 $keyOldAssignee = $keyOldAssignee == 'creator' ? 'assignee_1' : $keyOldAssignee;
-                $assigneeOldBallInCourt = $previousValue[$keyOldAssignee];
+                $assigneeOldBallInCourt = $previousValue[$keyOldAssignee] ?? [];
                 $cc = $this->getMailCc($typeSend, $creator, $monitorsCurrent, $assigneeOldBallInCourt);
                 $cc = array_filter($cc, fn ($item) => $item !== $user['email']);
                 Mail::to($user)
@@ -169,6 +185,8 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
                         'name' => $user['name'],
                         'subject' => $subjectMail,
                         'action' => url($href),
+                        'changeAssignee' => null,
+                        'changeMonitor' => null,
                         'currentValue' => $currentValue,
                         'previousValue' => $previousValue,
                     ]));
@@ -184,6 +202,47 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
                         'name' => $user['name'],
                         'subject' => $subjectMail,
                         'action' => url($href),
+                        'changeAssignee' => null,
+                        'changeMonitor' => null,
+                        'currentValue' => $currentValue,
+                        'previousValue' => $previousValue,
+                    ]));
+                break;
+            case 'assignee':
+                $keyOldAssignee = $keyOldAssignee == 'creator' ? 'assignee_1' : $keyOldAssignee;
+                $assigneeOldBallInCourt = $previousValue[$keyOldAssignee];
+                $cc = $this->getMailCc($typeSend, $creator, $monitorsCurrent, $assigneeOldBallInCourt);
+                $cc = array_filter($cc, fn ($item) => $item !== $user['email']);
+                $nameOldAssignee = array_values(User::where('id', $assigneeOldBallInCourt)->pluck('name')->toArray());
+                Mail::to($user)
+                    ->cc($cc)
+                    ->bcc($this->getMailBcc())
+                    ->send(new SendMailChangeStatus([
+                        'type' => $type,
+                        'name' => $user['name'],
+                        'subject' => $subjectMail,
+                        'action' => url($href),
+                        'changeAssignee' => ['previous' => $nameOldAssignee[0] ?? '', 'current' => $user['name']],
+                        'changeMonitor' => null,
+                        'currentValue' => $currentValue,
+                        'previousValue' => $previousValue,
+                    ]));
+                break;
+            case 'monitors':
+                $cc = $this->getMailCc($typeSend, $creator, $monitorsCurrent);
+                $cc = array_filter($cc, fn ($item) => !$item == $user['email']);
+                $listNameMonitorsPrevious = implode(',', array_values(User::whereIn('id', $monitorsPrevious)->pluck('name')->toArray()));
+                $listNameMonitorsCurrent = implode(',', array_values(User::whereIn('id', $monitorsCurrent)->pluck('name')->toArray()));
+                Mail::to($user)
+                    ->cc($cc)
+                    ->bcc($this->getMailBcc())
+                    ->send(new SendMailChangeStatus([
+                        'type' => $type,
+                        'name' => $user['name'],
+                        'subject' => $subjectMail,
+                        'action' => url($href),
+                        'changeAssignee' => null,
+                        'changeMonitor' => ['previous' => $listNameMonitorsPrevious, 'current' => $listNameMonitorsCurrent],
                         'currentValue' => $currentValue,
                         'previousValue' => $previousValue,
                     ]));
@@ -221,6 +280,14 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
                 return $this->getAddressCc($array);
                 break;
             case 'monitor_status_change':
+                $array = [$creator, ...$monitorsCurrent];
+                return $this->getAddressCc($array);
+                break;
+            case 'assignee':
+                $array = [$creator, $assigneeOldBallInCourt, ...$monitorsCurrent];
+                return $this->getAddressCc($array);
+                break;
+            case 'monitors':
                 $array = [$creator, ...$monitorsCurrent];
                 return $this->getAddressCc($array);
                 break;
