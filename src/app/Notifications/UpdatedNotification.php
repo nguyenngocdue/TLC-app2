@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Http\Controllers\Workflow\LibApps;
 use App\Notifications\Traits\TraitSupportNotification;
+use App\Utils\SendMaiAndNotification\CheckDefinitionsNew;
 use App\Utils\Support\Json\Definitions;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,6 +17,7 @@ use Illuminate\Support\Str;
 class UpdatedNotification extends Notification implements ShouldQueue
 {
     use TraitSupportNotification;
+    use CheckDefinitionsNew;
     use Queueable;
     public $data;
     /**
@@ -37,15 +39,11 @@ class UpdatedNotification extends Notification implements ShouldQueue
     public function via($notifiable)
     {
         $data = $this->data['currentValue'];
-        $type = $data['entity_type'];
-        $status = $data['status'];
-        $definitions = Definitions::getAllOf($type)['new'] ?? ['name' => '', 'new' => true];
-        array_shift($definitions);
-        $arrayCheck = array_keys(array_filter($definitions, fn ($item) => $item));
-        if (sizeof($arrayCheck) == 0 || in_array($status, $arrayCheck)) {
+        $isDefinitionNew = $this->isDefinitionNew($data);
+        if ($isDefinitionNew) {
             return [];
         }
-        return ['database', 'mail'];
+        return ['database'];
     }
 
     /**
@@ -56,16 +54,6 @@ class UpdatedNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        switch ($this->data['type']) {
-            case 'assignee':
-                return $this->sendMailUpdate($this->data, $this->data['type'], $notifiable);
-                break;
-            case 'monitors':
-                return $this->sendMailUpdate($this->data, $this->data['type'], $notifiable);
-                break;
-            default:
-                break;
-        }
     }
 
     /**

@@ -40,6 +40,8 @@ class SendMailChangeStatus extends Mailable implements ShouldQueue
         $colorIndexNewStatus = $libStatuses[$newStatus]['color_index'];
         $newStatus = $libStatuses[$newStatus]['title'];
         $appName = env('APP_NAME', 'TLC');
+        $changeAssignee = $data['changeAssignee'];
+        $changeMonitor = $data['changeMonitor'];
         return $this->subject($data['subject'])->view('mails.mail-change-status', [
             'appName' => $appName,
             'name' => $data['name'],
@@ -50,6 +52,8 @@ class SendMailChangeStatus extends Mailable implements ShouldQueue
             'newStatus' => $newStatus,
             'colorNewStatus' => $colorNewStatus,
             'colorIndexNewStatus' => $colorIndexNewStatus,
+            'changeAssignee' => $changeAssignee,
+            'changeMonitor' => $changeMonitor,
         ]);
     }
 }

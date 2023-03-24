@@ -346,6 +346,16 @@
                                             <p style="box-sizing:border-box; font-size:16px; line-height:1.5em; margin-top:0; text-align:left">
                                                 This document change status <span class="p-1" style="background-color: aqua; border-radius: 0.5rem">{{$oldStatus}}</span> to <span class="p-1" style="background-color: aquamarine; border-radius: 0.5rem">{{$newStatus}}</span>.
                                             </p>
+                                            @if($changeAssignee)
+                                            <p style="box-sizing:border-box; font-size:16px; line-height:1.5em; margin-top:0; text-align:left">
+                                                This document change assignee <span class="p-1" style="color:#3d4852; font-size:16px; font-weight:bold;">{{$changeAssignee['previous']}}</span> to <span class="p-1" style="color:#3d4852; font-size:16px; font-weight:bold;">{{$changeAssignee['current']}}</span>.
+                                            </p>
+                                            @endif
+                                            @if($changeMonitor)
+                                            <p style="box-sizing:border-box; font-size:16px; line-height:1.5em; margin-top:0; text-align:left">
+                                                This document change assignee <span class="p-1" style="color:#3d4852; font-size:16px; font-weight:bold;">{{$changeMonitor['previous']}}</span> to <span class="p-1" style="color:#3d4852; font-size:16px; font-weight:bold;">{{$changeMonitor['current']}}</span>.
+                                            </p>
+                                            @endif
                                                 <table class="x_action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing:border-box; margin:30px auto; padding:0; text-align:center; width:100%">
                                                     <tbody>
                                                         <tr>
