@@ -1,10 +1,24 @@
-<div id="" class=" md:scroll-mt-20   sm:py-0 dark:border-gray-600">
-    <div class="p-3 font-medium">
-        <img class="w-40" src="https://assets.website-files.com/61e52058abc83b0e8416a425/61f0ce6fe8161c72f61be858_logo-blue.svg">
-        <span class="flex justify-center text-xl">TLC - INSPECTION CHECK SHEET</span>
-        <div class="flex justify-center">
-            <span class="px-2">Project:</span>
-            <span class="">TLC - General Project</span>
+{{-- @dd($dataSource) --}}
+
+<div class="">
+    <img class="w-40" src="https://dev2.tlcmodular.com/logo/tlc.png">
+    <div class=" border-b border-t bg-gray-300 rounded-lg">
+        <x-renderer.heading level=3 align='center'>TLC - INSPECTION CHECK SHEET</x-renderer.heading>
+    </div>
+    <div class="px-3 flex flex-col-reverse">
+        <div class="pr-3">
+            <x-renderer.heading level=6>Project:</x-renderer.heading>
+            <x-renderer.heading level=6>Sub Project:</x-renderer.heading>
+            <x-renderer.heading level=6>Prod Order:</x-renderer.heading>
+            <x-renderer.heading level=6>Name:</x-renderer.heading>
+            <x-renderer.heading level=6>Inspect Check List:</x-renderer.heading>
+        </div>
+        <div class="">
+            <x-renderer.heading level=6>{{$dataSource['project_name']}}</x-renderer.heading>
+            <x-renderer.heading level=6>{{$dataSource['sub_project_name']}}</x-renderer.heading>
+            <x-renderer.heading level=6>{{$dataSource['po_name']}}</x-renderer.heading>
+            <x-renderer.heading level=6>{{$dataSource['compliance_name']}}</x-renderer.heading>
+            <x-renderer.heading level=6>{{$dataSource['chklsts_name']}}</x-renderer.heading>
         </div>
     </div>
 </div>

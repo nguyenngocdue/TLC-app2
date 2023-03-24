@@ -51,7 +51,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
                         ,c3
                         ,c4";
 		if ($isCheck) $sql .= "\n ,po.id AS po_id , po.name AS po_name";
-		if ($isCheck) $sql .= " \n ,sp.name AS project_name";
+		if ($isCheck) $sql .= " \n ,sp.name AS sub_project_name, pj.name AS project_name, po.compliance_name AS compliance_name";
 		$sql .= "\n FROM qaqc_insp_chklst_runs r
                     JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id
                     JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
@@ -60,7 +60,8 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		$sql .= "\n JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
                     JOIN control_types ct ON ct.id = l.control_type_id";
 		if ($isCheck) $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
-		if ($isCheck) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id";
+		if ($isCheck) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id
+								 JOIN projects pj ON pj.id = sp.project_id";
 
 		$sql .= "\nLEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
                 JOIN qaqc_insp_groups g ON g.id = l.qaqc_insp_group_id 
@@ -130,6 +131,14 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		return ['mode_option' => ['010' => 'Model 010']];
 	}
 
+	protected function modeColumns()
+	{
+		return [
+			'title' => 'Select Mode',
+			'dataIndex' => 'mode_option',
+		];
+	}
+
 	public function getDataForModeControl($dataSource = [])
 	{
 		$subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
@@ -192,7 +201,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 
 		$groupByChklsts = Report::groupArrayByKey($dataSource, 'chklsts_id');
 		$chcklstIds = array_keys($groupByChklsts);
-		// dd($chcklstIds);
 
 		// group lines into chcklst_id
 		array_walk($chcklstIds, function ($value) use (&$groupByChklsts) {

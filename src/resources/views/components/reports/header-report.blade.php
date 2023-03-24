@@ -19,6 +19,6 @@ $name = $sheetDesc
                 <span>{{isset($dataSource['project_name']) ? $dataSource['project_name'] : "" }}</span>
             </div>
         </div>
-        <img class="w-40" src="https://assets.website-files.com/61e52058abc83b0e8416a425/61f0ce6fe8161c72f61be858_logo-blue.svg" />
+        <img class="w-40" src="https://dev2.tlcmodular.com/logo/tlc.png" />
     </div>
 </div>

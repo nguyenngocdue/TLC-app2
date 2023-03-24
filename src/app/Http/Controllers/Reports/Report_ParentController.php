@@ -187,6 +187,11 @@ abstract class Report_ParentController extends Controller
         $viewName = CurrentPathInfo::getViewName($request);
 
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
+        // dd($dataSource);
+
+
+
+
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'sheets' =>  $sheet,
