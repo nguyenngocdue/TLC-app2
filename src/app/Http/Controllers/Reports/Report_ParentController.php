@@ -155,12 +155,10 @@ abstract class Report_ParentController extends Controller
         Log::info($input);
 
         $typeReport = CurrentPathInfo::getTypeReport($request);
-        // dd($typeReport);
         $routeName = $request->route()->action['as'];
         $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
 
         if (!$request->input('page') && !empty($input)) {
-            // dd($input);
             return $this->forwardToMode($request);
         }
 
@@ -181,14 +179,12 @@ abstract class Report_ParentController extends Controller
         $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
-        // dump($modeParams);
-
+        // dd($dataSource);
         // Execute the query
         $time = microtime(true) - $start;
         // dump($time);
-
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
-        $viewName = strtolower(Str::singular($typeReport));
+        $viewName = CurrentPathInfo::getViewName($request);
 
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
         return view('reports.' . $viewName, [
