@@ -14,11 +14,9 @@
         <x-reports.parameter-report :dataSource="$dataModeControl" :itemsSelected="$modeParams" modeOption="{{$currentMode}}" :columns="$paramColumns" routeName="{{$routeName}}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
     </div>
 </div>
-{{-- @dump($tableDataSource) --}}
 <div class="flex justify-center">
     <div class="md:px-4">
         @if (count($sheets))
-        {{-- @dump($sheets) --}}
         <div class="w-[1000px] min-h-[1415px] items-center bor1der bg-white box-border p-8">
             <x-reports.header2-report :dataSource="[]" />
             <x-renderer.table maxH="{{false}}" :dataSource="$sheets" :columns="[['dataIndex' => key(array_pop($sheets))]]" showNo="{{true}}" />
@@ -28,7 +26,6 @@
         @foreach($tableDataSource as $idSheet => $data)
         <div class="w-[1000px] min-h-[1415px] items-center bor1der bg-white box-border p-8">
             <x-reports.header-report :dataSource="array_pop($data)" />
-            {{-- @dump($data) --}}
             <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource[$idSheet]" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
         </div>
         <x-renderer.page-break />

@@ -5,6 +5,13 @@ namespace App\Utils\Support;
 
 class Report
 {
+    public static function getFirstItemFromChildrenArray($dataSource)
+    {
+        foreach ($dataSource as $key => $values) {
+            $dataSource[$key] = (array)reset($values);
+        }
+        return $dataSource;
+    }
 
     public static function groupArrayByKey($dataSource, $key)
     {
@@ -20,6 +27,7 @@ class Report
     {
         $array = [];
         foreach ($dataSource as $element) {
+            $element = is_object($element) ? (array)$element : $element;
             $array[$element[$keyName]] = $element;
         }
         return $array;

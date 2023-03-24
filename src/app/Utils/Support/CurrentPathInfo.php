@@ -18,4 +18,10 @@ class CurrentPathInfo
         $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[1]);
         return strtolower(Str::plural($pathInfo[1]));
     }
+    public static function getViewName($request)
+    {
+        $pathInfo = $request->getPathInfo();
+        $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[1]);
+        return $pathInfo[0];
+    }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitReport;
 use App\Models\Attachment;
 use App\Models\Prod_order;
+use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
 use App\Utils\Support\CurrentUser;
@@ -21,7 +22,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 	protected  $prod_order_id = 82;
 	protected  $qaqc_insp_tmpl_id = 1;
 	protected  $run_option = 1;
-
 	public function getSqlStr($modeParams)
 	{
 		$isCheck = isset($modeParams['prod_order_id']) && isset($modeParams['sub_project_id']);
@@ -72,7 +72,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
             
                 WHERE 1=1";
 		if ($isCheck) $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
-		// if (isset($modeParams['chklsts'])) $sql .= " \n AND csh.id = '{{chklsts}}' \n";
+		if (isset($modeParams['insp_chklst_id'])) $sql .= " \n AND csh.id = '{{insp_chklst_id}}'";
 		$sql .= "\n ORDER BY line_name,  run_updated DESC ";
 		return $sql;
 	}
@@ -112,6 +112,11 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 				// 'allowClear' => true
 			],
 			[
+				'title' => 'Inspection Checklist Sheet',
+				'dataIndex' => 'insp_chklst_id',
+				'allowClear' => true
+			],
+			[
 				'dataIndex' => 'run_option'
 			]
 		];
@@ -127,8 +132,9 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		$subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
 		$prod_orders  = ['prod_order_id' =>  Prod_order::get()->pluck('name', 'id')->toArray()];
 		$insp_tmpls = ['qaqc_insp_tmpl_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
+		$insp_chklsts = ['insp_chklst_id' => Qaqc_insp_chklst::get()->pluck('name', 'id')->toArray()];
 		$run_option = ['run_option' => ['View only last run', 'View all runs']];
-		return array_merge($subProjects, $prod_orders, $insp_tmpls, $run_option);
+		return array_merge($subProjects, $prod_orders, $insp_tmpls, $insp_chklsts, $run_option);
 	}
 
 
@@ -136,83 +142,78 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 	{
 		$isNullParams = Report::isNullModeParams($modeParams);
 		if ($isNullParams) return collect([]);
+		// dd($dataSource);
 
-		$lines =  [];
-		foreach ($dataSource as $item) {
-			if (isset($item->line_id)) {
-				$lines[$item->line_id] = (array)$item;
-			}
-		}
-		$descIdLines = [];
-		array_walk($lines, function ($value, $key) use (&$descIdLines) {
-			$descIdLines[$value['line_description']][] = $key;
+		// $dataSource = Report::pressArrayTypeAllItems($dataSource);
+		$indexByLineIds = Report::assignKeyByKey($dataSource, 'line_id');
+
+		$groupByLinesDesc = [];
+		array_walk($indexByLineIds, function ($value, $key) use (&$groupByLinesDesc) {
+			$groupByLinesDesc[$value['line_description']][] = $key;
 		});
+
+		// dd($groupByLinesDesc);
 		// Reduce the number of lines from URL request 
 		if (isset($modeParams['run_option']) && !$modeParams['run_option']) {
-			$descIdLines = array_map(fn ($item) => array_splice($item, 0, 1), $descIdLines);
-		}
-
-
-
-		// Reduce the number of lines from URL request
-		// if (isset($modeParams['run_option']) && !$modeParams['run_option']) {
-		// 	array_walk($descIdLines, function ($value, $key) use ($lines, &$descIdLines) {
-		// 		$maxRunId = array_splice($value, 0, 1);
-		// 		$line = $lines[$maxRunId[0]];
-		// 		if (!is_null($line['c1'])) {
-		// 			// dd("123", $descIdLines[$key], $maxRunId);
-		// 			$descIdLines[$key] = $maxRunId;
-		// 		} else {
-		// 			// dump($maxRunId);
-		// 			$descIdLines[$key] = $value;
-		// 		}
-		// 	});
-		// }
-
-		// dd($descIdLines);
-
-		$arrayHtml = [];
-		foreach ($descIdLines as $ids) {
-			$str = '';
-			foreach ($ids as $id) {
-				$item = $lines[$id];
-				// dd($item['c1']);
-				if (!is_null($item['c1'])) {
-					$str .= "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createLongStrTdHTML($item) . "</tr>";
-					$str .= $this->createStrImage($item);
-					$str .=  $this->createStrComment($item);
-					$arrayHtml[$id] = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str . "</tbody>" . "</table>";
+			$array = [];
+			foreach ($groupByLinesDesc as $desc => $lineIds) {
+				if ($desc === 'TLC Inspector Name') {
+					$array[$desc] = $lineIds;
 				} else {
-					// $str .=  $item['sign'];
-					$arrayHtml[$id] = "<h2>CSV</h2>";
+					$array[$desc] = array_slice($lineIds, 0, 1);
 				}
 			}
+			$groupByLinesDesc = $array;
+			$signatures = $array['TLC Inspector Name'];
+			$newArrayLinesId = (array_merge(...array_values($array))) + $signatures;
+			$indexByLineIds = array_intersect_key($indexByLineIds, array_flip($newArrayLinesId));
+			// dd($newArrayLinesId, $indexByLineIds);
+		}
+
+		// dd($groupByLinesDesc);
+		// create "<tr></tr>"  for each run_id
+		$arrayHtml = [];
+		foreach ($groupByLinesDesc as $ids) {
+			array_walk($ids, function ($id) use ($indexByLineIds, &$arrayHtml) {
+				$str = '';
+				$item = $indexByLineIds[$id];
+				if (!is_null($item['c1'])) {
+					$str .= "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrCheckboxHTML($item) . "</tr>";
+					$str .= $this->createStrImage($item);
+					$str .=  $this->createStrComment($item);
+					$arrayHtml[$id] = $str;
+				} else {
+					$arrayHtml[$id] = "<h2>CSV</h2>";
+				}
+			});
 		}
 		// dd($arrayHtml);
-		$arrayMaxRun = [];
-		foreach ($lines as $id => $value) {
+		// add response_type (children table) for run_id
+		array_walk($indexByLineIds, function ($value, $id) use (&$indexByLineIds, $arrayHtml) {
 			if (isset($arrayHtml[$id])) {
 				$value['response_type'] = $arrayHtml[$id];
-				$arrayMaxRun[$id] = $value;
+				$indexByLineIds[$id] = $value;
 			}
-		}
-		$sheetGroup = Report::groupArrayByKey($arrayMaxRun, 'sheet_id');
-		// dd($sheetGroup);
+		});
+		// dd($indexByLineIds);
+		// group runs into each sheet
+		$sheetGroup = Report::groupArrayByKey($indexByLineIds, 'sheet_id');
+		// dd($indexByLineIds, $sheetGroup);
 
-		$sheetId_Desc = [];
-		foreach ($sheetGroup as $sheetId => $value) {
-			$groupDesc = Report::groupArrayByKey($value, 'line_description');
-			foreach ($groupDesc as $key => $value) {
-				$groupDesc[$key] = array_pop($value);
-			}
-			$sheetId_Desc[$sheetId] = $groupDesc;
-		}
 		$data = [];
-		foreach ($sheetId_Desc as $sheetId => $values) {
-			$data[$sheetId] = array_values($values);
+		foreach ($sheetGroup as $sheetId => $runs) {
+			$groupDesc = Report::groupArrayByKey($runs, 'line_description');
+			foreach ($groupDesc as $key => $value) {
+				$responseTypes = array_column($value, 'response_type', 'line_id');
+				$html = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . implode(array_values($responseTypes)) . "</tbody>" . "</table>";
+				$x = reset($value);
+				$x['response_type'] = $html;
+				$groupDesc[$key] = $x;
+			}
+			$data[$sheetId] = array_values($groupDesc);
 		}
 		ksort($data);
-		// dd("123", $dataSource);
+		// dd("123", $data);
 		return collect($data);
 	}
 
@@ -254,7 +255,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		return $strHead . $strCenter . $strTail;
 	}
 
-	private function createLongStrTdHTML($item)
+	private function createStrCheckboxHTML($item)
 	{
 		$circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
 		$checkedIcon = "<i class='fa-solid fa-circle-check px-2'></i>";
@@ -268,10 +269,8 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 			}
 		};
 		$runUpdated = $this->createStrDateTime($item);
-
 		$runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item['run_desc'] . ":" . "</td>" : "";
 		$line_id =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item['line_id'] . '</td>' : "";
-
 		$longStr = $runDesc . $line_id . $str . $runUpdated;
 		return $longStr;
 	}
@@ -301,7 +300,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		$items = Report::pressArrayTypeAllItems($dataSource);
 		// dd($items);
 		$sheets = array_values(array_map(function ($item) {
-			$x = isset(array_pop($item)['sheet_name']);
+			$x = isset(reset($item)['sheet_name']);
 			if ($x) {
 				$name = array_pop($item)['sheet_name'];
 				$str = "<a href='#$name'>$name</a>";
