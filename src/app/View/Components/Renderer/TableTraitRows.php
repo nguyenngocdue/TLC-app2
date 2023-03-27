@@ -52,12 +52,15 @@ trait TableTraitRows
                     }
                     $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
                     $valueOfRawData = (is_object($rawData) && isset($rawData->value)) ? $rawData->value : $rawData;
+                    if (is_object($rawData)) {
+                        if (isset($rawData->cell_div_class)) $cellDivClass = $rawData->cell_div_class;
+                    }
                     $rendered = $renderer
                         // ? "A" 
                         // : "B";
                         ? $this->applyRender($name, $renderer, $rawData, $column, $dataLineObj, $dataLineIndex)
                         : ($dataIndex === 'action' ? $valueOfRawData :
-                            "<div class='p-2' valueOfRawData>" . $valueOfRawData . "</div>"
+                            "<div class='p-2 $cellDivClass' valueOfRawData>" . $valueOfRawData . "</div>"
                         );
                     break;
             }

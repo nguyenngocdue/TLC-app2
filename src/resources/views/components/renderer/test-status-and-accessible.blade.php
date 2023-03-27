@@ -15,9 +15,13 @@
         <div class="col-span-12 md:col-span-7 lg:col-span-9 w-full">
             <x-renderer.card title="Accessible" py="1">
                 <div class="mb-1">
-                    @foreach($statuses[$status]['capability-roles'] as $value)
-                        <span><x-renderer.tag color="gray" rounded="rounded" class="ml-1">{{$value}}</x-renderer.tag></span>
-                    @endforeach
+                    @isset($statuses[$status])
+                        @foreach($statuses[$status]['capability-roles'] as $value)
+                            <span><x-renderer.tag color="gray" rounded="rounded" class="ml-1">{{$value}}</x-renderer.tag></span>
+                        @endforeach
+                    @else
+                        Status [{{$status}}] not found
+                    @endisset
                 </div>
             </x-renderer.card>
         </div>

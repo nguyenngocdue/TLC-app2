@@ -86,6 +86,7 @@
     <button type="button" class="inline-block px-6 py-2 border-2 border-gray-800 text-gray-800 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Dark</button>
 </div>
 <!--FOR TABLE -->
+<div class="w-11"></div>
 <span class="bg-green-400 "></span>
 <span class="bg-red-400 "></span>
 <span class="hover:bg-green-100 "></span>

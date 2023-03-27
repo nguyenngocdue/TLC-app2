@@ -168,7 +168,8 @@ trait TraitDemoTableData
                     'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
                     'cell_href' => 'https://www.google.com',
                     'cell_class' => 'bg-green-300 text-red-500',
-                    'cell_title' => 'Create a new item',
+                    'cell_title' => 'Create a new item 111',
+                    'cell_div_class' => 'w-11',
                 ],
                 'value' => (object)[
                     'value' => 456,

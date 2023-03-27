@@ -63,7 +63,7 @@ class Prod_sequence_020 extends Report_ParentController
 
     protected function getDataModes()
     {
-        return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020', '030' => 'Model 030', '040' => 'Model 040', '050' => 'Model 050']];
+        return ['mode_option' => ['010' => 'Worker number', '020' => 'Working hours', '030' => 'Work Amount', '040' => 'min/UoM', '050' => 'Model 050']];
     }
     protected function getParamColumns()
     {
@@ -108,8 +108,9 @@ class Prod_sequence_020 extends Report_ParentController
             array_walk($diffItems, function ($value, $key) use (&$item) {
                 $item[$value] = (object)[
                     'value' => '',
-                    'cell_class' => 'bg-gray-600',
+                    'cell_class' => 'bg-gray-50',
                     'cell_title' => 'Not included this run',
+                    'cell_div_class' => 'w-11',
                 ];
             });
             return $item;

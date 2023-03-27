@@ -190,7 +190,7 @@ class Hr_overtime_request_010 extends Report_ParentController
     protected function modeColumns()
     {
         return [
-            'title' => 'Select Mode',
+            'title' => 'Mode',
             'dataIndex' => 'mode_option',
             'allowClear' => true
         ];

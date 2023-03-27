@@ -26,7 +26,7 @@ trait TraitReport
             $fields = array_keys($array);
         }
         $fields =  array_diff(array_values($fields), $unsetFields);
-        sort($fields);
+        // sort($fields);
         // dd($fields);
         $locateEditFields = array_column($editFields, 'dataIndex');
         $dataColumn = [];

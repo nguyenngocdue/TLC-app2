@@ -131,7 +131,7 @@ abstract class Report_ParentController extends Controller
     protected function modeColumns()
     {
         return [
-            'title' => 'Select Mode',
+            'title' => 'Mode',
             'dataIndex' => 'mode_option',
             'allowClear' => true
         ];
