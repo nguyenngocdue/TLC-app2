@@ -222,7 +222,7 @@ class Prod_run_010 extends Report_ParentController
                         'sum_production_time_minutes' => $dt['sum_production_time_minutes'],
                         'total_worker' => (object)[
                             'value' => $totalWorker,
-                            'cell_title' => $totalWorker . ' = [ Total Duration / Total Man Minutes]',
+                            'cell_title' => $totalWorker . ' = [ Total Duration / Total Man-Minutes]',
                             'cell_class' => 'bg-green-400',
                         ]
                     ];

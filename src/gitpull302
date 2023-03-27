@@ -5,4 +5,4 @@ docker exec -it laravel302_php php artisan view:clear
 docker exec -it laravel302_php php artisan config:clear
 docker exec -it laravel302_php php artisan route:clear
 docker exec -it laravel302_php php artisan event:clear
-docker exec -it laravel302_php php artisan optimize
+docker exec -it laravel302_php php artisan route:cache

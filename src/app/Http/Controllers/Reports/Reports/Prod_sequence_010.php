@@ -68,7 +68,7 @@ class Prod_sequence_010 extends Report_ParentController
 
     protected function getDataModes()
     {
-        return ['mode_option' => ['010' => 'Worker number', '020' => 'Working hours', '030' => 'Work Amount', '040' => 'min/UoM', '050' => 'Model 050']];
+        return ['mode_option' => ['010' => 'Worker number', '020' => 'Total man-hours', '030' => 'Work Amount', '040' => 'min/UoM', '050' => 'Model 050']];
     }
     protected function getParamColumns()
     {
@@ -101,7 +101,7 @@ class Prod_sequence_010 extends Report_ParentController
                 $items[$key][Report::slugName($value['prod_routing_link_name'])] =
                     (object)[
                         'value' => $x = $items[$key]['workers'],
-                        'cell_title' => $items[$key]['prod_routing_link_name'] . '(' . $items[$key]["workers"] . ')' . '= [Σ(Duration) / Σ(Man Minutes)]',
+                        'cell_title' => $items[$key]['prod_routing_link_name'] . "\n" . $items[$key]["workers"] . ' (workers) = Σ(Duration) / Σ(Man-Minutes)',
                         'cell_class' => is_null($x) ? 'bg-pink-400' : 'bg-green-50',
                     ];
             });

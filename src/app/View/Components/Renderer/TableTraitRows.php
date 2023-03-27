@@ -52,6 +52,8 @@ trait TableTraitRows
                     }
                     $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
                     $valueOfRawData = (is_object($rawData) && isset($rawData->value)) ? $rawData->value : $rawData;
+
+                    $cellDivClass = '';
                     if (is_object($rawData)) {
                         if (isset($rawData->cell_div_class)) $cellDivClass = $rawData->cell_div_class;
                     }
