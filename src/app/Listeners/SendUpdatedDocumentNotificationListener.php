@@ -94,9 +94,9 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         $isNullAssigneeArrayValue = $this->isNullAssigneeArrayValue($assigneeNotification);
         $isNullAssigneeArrayValue ?
             $this->send($assigneeNotification, $previousValue, $currentValue, 'assignee')
-            : $this->send($changStatusAssignee, $previousValue, $currentValue, 'assignee_status_change', false);
+            : $this->send($changStatusAssignee, $previousValue, $currentValue, 'assignee_status_change');
         empty($monitorNotification) ?
-            $this->send($changStatusMonitors, $previousValue, $currentValue, 'monitor_status_change', false)
+            $this->send($changStatusMonitors, $previousValue, $currentValue, 'monitor_status_change')
             : $this->send($monitorNotification, $previousValue, $currentValue, 'monitors');;
     }
     private function isNullAssigneeArrayValue($array)
@@ -173,83 +173,107 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         [$href, $subjectMail] = $this->getRouteAndSubjectMail($type, $id);
         switch ($typeSend) {
             case 'assignee_status_change':
-                $keyOldAssignee = $keyOldAssignee == 'creator' ? 'assignee_1' : $keyOldAssignee;
+                $keyOldAssignee = $this->keyOldAssignee($keyOldAssignee);
                 $assigneeOldBallInCourt = $previousValue[$keyOldAssignee] ?? [];
                 $cc = $this->getMailCc($typeSend, $creator, $monitorsCurrent, $assigneeOldBallInCourt);
-                $cc = array_filter($cc, fn ($item) => $item !== $user['email']);
-                Mail::to($user)
-                    ->cc($cc)
-                    ->bcc($this->getMailBcc())
-                    ->send(new SendMailChangeStatus([
-                        'type' => $type,
-                        'name' => $user['name'],
-                        'subject' => $subjectMail,
-                        'action' => url($href),
-                        'changeAssignee' => null,
-                        'changeMonitor' => null,
-                        'currentValue' => $currentValue,
-                        'previousValue' => $previousValue,
-                    ]));
+                $cc = $this->filterCc($cc, $user);
+                $this->sendMailFormat(
+                    $user,
+                    $cc,
+                    $type,
+                    $user['name'],
+                    $subjectMail,
+                    $href,
+                    $currentValue,
+                    $previousValue,
+                    null,
+                    null
+                );
                 break;
             case 'monitor_status_change':
                 $cc = $this->getMailCc($typeSend, $creator, $monitorsCurrent);
-                $cc = array_filter($cc, fn ($item) => $item !== $user['email']);
-                Mail::to($user)
-                    ->cc($cc)
-                    ->bcc($this->getMailBcc())
-                    ->send(new SendMailChangeStatus([
-                        'type' => $type,
-                        'name' => $user['name'],
-                        'subject' => $subjectMail,
-                        'action' => url($href),
-                        'changeAssignee' => null,
-                        'changeMonitor' => null,
-                        'currentValue' => $currentValue,
-                        'previousValue' => $previousValue,
-                    ]));
+                $cc = $this->filterCc($cc, $user);
+                $this->sendMailFormat(
+                    $user,
+                    $cc,
+                    $type,
+                    $user['name'],
+                    $subjectMail,
+                    $href,
+                    $currentValue,
+                    $previousValue,
+                    null,
+                    null
+                );
                 break;
             case 'assignee':
-                $keyOldAssignee = $keyOldAssignee == 'creator' ? 'assignee_1' : $keyOldAssignee;
+                $keyOldAssignee = $this->keyOldAssignee($keyOldAssignee);
                 $assigneeOldBallInCourt = $previousValue[$keyOldAssignee];
                 $cc = $this->getMailCc($typeSend, $creator, $monitorsCurrent, $assigneeOldBallInCourt);
-                $cc = array_filter($cc, fn ($item) => $item !== $user['email']);
+                $cc = $this->filterCc($cc, $user);
                 $nameOldAssignee = array_values(User::where('id', $assigneeOldBallInCourt)->pluck('name')->toArray());
-                Mail::to($user)
-                    ->cc($cc)
-                    ->bcc($this->getMailBcc())
-                    ->send(new SendMailChangeStatus([
-                        'type' => $type,
-                        'name' => $user['name'],
-                        'subject' => $subjectMail,
-                        'action' => url($href),
-                        'changeAssignee' => ['previous' => $nameOldAssignee[0] ?? '', 'current' => $user['name']],
-                        'changeMonitor' => null,
-                        'currentValue' => $currentValue,
-                        'previousValue' => $previousValue,
-                    ]));
+                $this->sendMailFormat(
+                    $user,
+                    $cc,
+                    $type,
+                    $user['name'],
+                    $subjectMail,
+                    $href,
+                    $currentValue,
+                    $previousValue,
+                    ['previous' => $nameOldAssignee[0] ?? '', 'current' => $user['name']],
+                    null
+                );
                 break;
             case 'monitors':
                 $cc = $this->getMailCc($typeSend, $creator, $monitorsCurrent);
-                $cc = array_filter($cc, fn ($item) => !$item == $user['email']);
-                $listNameMonitorsPrevious = implode(',', array_values(User::whereIn('id', $monitorsPrevious)->pluck('name')->toArray()));
-                $listNameMonitorsCurrent = implode(',', array_values(User::whereIn('id', $monitorsCurrent)->pluck('name')->toArray()));
-                Mail::to($user)
-                    ->cc($cc)
-                    ->bcc($this->getMailBcc())
-                    ->send(new SendMailChangeStatus([
-                        'type' => $type,
-                        'name' => $user['name'],
-                        'subject' => $subjectMail,
-                        'action' => url($href),
-                        'changeAssignee' => null,
-                        'changeMonitor' => ['previous' => $listNameMonitorsPrevious, 'current' => $listNameMonitorsCurrent],
-                        'currentValue' => $currentValue,
-                        'previousValue' => $previousValue,
-                    ]));
+                $cc = $this->filterCc($cc, $user);
+                $stringNameMonitorsPrevious = $this->implodeNameMonitors($monitorsPrevious);
+                $stringNameMonitorsCurrent = $this->implodeNameMonitors($monitorsCurrent);
+                $this->sendMailFormat(
+                    $user,
+                    $cc,
+                    $type,
+                    $user['name'],
+                    $subjectMail,
+                    $href,
+                    $currentValue,
+                    $previousValue,
+                    null,
+                    ['previous' => $stringNameMonitorsPrevious, 'current' => $stringNameMonitorsCurrent]
+                );
                 break;
             default:
                 break;
         }
+    }
+    private function keyOldAssignee($key)
+    {
+        return $key == 'creator' ? 'assignee_1' : $key;
+    }
+    private function filterCc($cc, $user)
+    {
+        return array_filter($cc, fn ($item) => !$item == $user['email']);
+    }
+    private function sendMailFormat($user, $cc, $type, $userName, $subjectMail, $href, $currentValue, $previousValue, $changeAssignee, $changeMonitor)
+    {
+        Mail::to($user)
+            ->cc($cc)
+            ->bcc($this->getMailBcc())
+            ->send(new SendMailChangeStatus([
+                'type' => $type,
+                'name' => $user['name'],
+                'subject' => $subjectMail,
+                'action' => url($href),
+                'changeAssignee' => $changeAssignee,
+                'changeMonitor' => $changeMonitor,
+                'currentValue' => $currentValue,
+                'previousValue' => $previousValue,
+            ]));
+    }
+    private function implodeNameMonitors($array)
+    {
+        return implode(',', array_values(User::whereIn('id', $array)->pluck('name')->toArray()));
     }
     private function getKeyBallInCourt($key)
     {
