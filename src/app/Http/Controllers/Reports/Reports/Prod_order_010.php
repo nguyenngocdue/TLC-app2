@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentController;
-use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Models\Prod_order as ModelsProd_order;
 use App\Models\Sub_project;
 use App\Utils\Support\Report;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 class Prod_order_010 extends Report_ParentController
 
 {
-    use TraitReport;
+    use TraitDynamicColumnsTableReport;
     protected  $sub_project_id = 21;
     public function getSqlStr($modeParams)
     {

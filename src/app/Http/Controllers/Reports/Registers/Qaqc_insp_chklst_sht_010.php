@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentController;
-use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Log;
 
 class Qaqc_insp_chklst_sht_010 extends Report_ParentController
 {
-    use TraitReport;
+    use TraitDynamicColumnsTableReport;
+
     protected $rotate45Width = 300;
     // set default params's values 
     protected  $sub_project_id = 21;

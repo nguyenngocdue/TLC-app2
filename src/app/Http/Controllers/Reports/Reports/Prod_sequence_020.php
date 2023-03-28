@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentController;
-use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
 use App\Models\Prod_order as ModelsProd_order;
 use App\Models\Sub_project;
 use App\Utils\Support\Report;
@@ -12,10 +13,13 @@ use App\Utils\Support\Report;
 class Prod_sequence_020 extends Report_ParentController
 
 {
-    use TraitReport;
     use TraitForwardModeReport;
+    use TraitSQLDataSourceParamReport;
+    use TraitDynamicColumnsTableReport;
+
     protected $mode = '020';
     protected  $sub_project_id = 21;
+    protected  $prod_routing_id = 6;
     protected $rotate45Width = 400;
     public function getSqlStr($modeParams)
     {
@@ -23,19 +27,22 @@ class Prod_sequence_020 extends Report_ParentController
         sp.name AS sub_project_name, po.id AS po_id, po.name AS po_name, ps.id AS prod_sequence_id 
        , prl.name AS prod_routing_link_name
        #,ps.total_hours AS ref_total_hours
-       ,SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) AS total_man_hours
        ,ROUND(SUM(pr.worker_number),2) AS total_workers
        ,ROUND((SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) * ROUND(SUM(pr.worker_number),2))/60, 2) AS total_man_hours
        #,ps.total_man_hours AS ref_total_man_hours 
         FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl
-        WHERE 1 = 1";
+        WHERE   1 = 1";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
-        if (!isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id =" . $this->sub_project_id;
+        if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = '{{prod_routing_id}}'";
         if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
-        $sql .= "\n AND ps.prod_order_id = po.id
-        AND ps.id = pr.prod_sequence_id
-        AND prl.id = ps.prod_routing_link_id
-        GROUP BY po_id, prod_sequence_id";
+        $sql .= " \n
+                AND sp.id = po.sub_project_id
+                AND prl.id = ps.prod_routing_link_id
+                AND ps.prod_order_id = po.id
+                AND ps.id = pr.prod_sequence_id
+                AND prl.id = ps.prod_routing_link_id
+                GROUP BY po_id, prod_sequence_id
+                     ORDER BY po_name";
         return $sql;
     }
 
@@ -56,8 +63,7 @@ class Prod_sequence_020 extends Report_ParentController
                 "width" => "500",
             ]
         ];
-        $unsetCols = ['po_id', 'prod_sequence_id', 'total_man_hours', 'prod_routing_link_name'];
-        $sqlDataCol = $this->createTableColumns($dataSource, 'total_workers', '', [], $unsetCols, 'right', '200');
+        $sqlDataCol = $this->createTableColumns($dataSource, 'total_man_hours');
         return  array_merge($firstCols, $sqlDataCol);
     }
 
@@ -73,10 +79,14 @@ class Prod_sequence_020 extends Report_ParentController
                 'dataIndex' => 'sub_project_id',
             ],
             [
-                'title' => 'Production Order',
+                'title' => 'Prod Routing',
+                'dataIndex' => 'prod_routing_id',
+            ],
+            [
+                'title' => 'Prod Order',
                 'dataIndex' => 'prod_order_id',
                 'allowClear' => true
-            ]
+            ],
         ];
     }
 
@@ -84,7 +94,8 @@ class Prod_sequence_020 extends Report_ParentController
     {
         $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
         $prodOrders  = ['prod_order_id' =>  ModelsProd_order::get()->pluck('name', 'id')->toArray()];
-        return array_merge($subProjects, $prodOrders);
+        $prodRoutings = ['prod_routing_id' => array_column($this->getDataProdRouting(), 'prod_routing_name', 'prod_routing_id')];
+        return array_merge($subProjects, $prodOrders, $prodRoutings);
     }
 
     protected function transformDataSource($dataSource, $modeParams)
@@ -121,9 +132,11 @@ class Prod_sequence_020 extends Report_ParentController
     protected function getDefaultValueModeParams($modeParams, $request)
     {
         $x = 'sub_project_id';
+        $y = 'prod_routing_id';
         $isNullModeParams = Report::isNullModeParams($modeParams);
         if ($isNullModeParams) {
             $modeParams[$x] = $this->sub_project_id;
+            $modeParams[$y] = $this->prod_routing_id;
         }
         return $modeParams;
     }
