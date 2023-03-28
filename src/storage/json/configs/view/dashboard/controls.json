@@ -50,6 +50,7 @@
         "",
         "agg_count",
         "agg_sum",
+        "agg_date_range",
         "avatar_user",
         "column",
         "parent_link",

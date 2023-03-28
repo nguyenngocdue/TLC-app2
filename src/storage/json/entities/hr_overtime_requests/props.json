@@ -57,7 +57,7 @@
         "name": "_getHrOTLines",
         "column_name": "getHrOTLines",
         "column_type": "eloquent_prop",
-        "label": "Overtime Lines",
+        "label": "Overtime Details",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "",
