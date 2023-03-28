@@ -26,7 +26,7 @@ trait TraitEntityFormula
                     $value = (new All_ConcatNameWith123())($name);
                     break;
                 case "All_SlugifyByName":
-                    $id = $item['id'];
+                    $id = $item['id'] ?? null;
                     $name = $item['name'] ?? "";
                     $name = $item['slug'] ?? $name;
                     $value = (new All_SlugifyByName())($name, $type, $id);

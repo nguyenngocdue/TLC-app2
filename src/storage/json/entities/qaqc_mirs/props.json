@@ -591,6 +591,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "new_line": ""
+        "new_line": "true"
     }
 }

@@ -86,7 +86,6 @@ Route::group([
 ], function () {
     foreach ([
         'Qaqc_car',
-        'Qaqc_ncr',
         'Hr_overtime_request_line',
         'Hse_corrective_action',
         'Zunit_test_01',

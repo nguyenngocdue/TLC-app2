@@ -22,12 +22,15 @@ class RelationshipRenderer2 extends Component
 
     private static $table00Count = 1;
     private $table01Name;
-    private $tableDebug = !false;
+    private $tableDebug = false;
 
-    private $tablesInEditableMode = [
+    private $tablesHaveCreateANewForm = [
         'qaqc_mirs' => [
             'qaqc_ncrs' => [],
         ],
+    ];
+
+    private $tablesInEditableMode = [
         'qaqc_ncrs' => [
             'qaqc_cars' => [],
         ],
@@ -137,6 +140,7 @@ class RelationshipRenderer2 extends Component
         // dump($tableName);
         // dump($this->tablesInEditableMode[$this->type]);
 
+        $createANewForm = isset($this->tablesHaveCreateANewForm[$this->type]);
         $editable = isset($this->tablesInEditableMode[$this->type]) && in_array($tableName, array_keys($this->tablesInEditableMode[$this->type]));
         $tableSettings = $editable ? $this->tablesInEditableMode[$this->type][$tableName] : [];
         $showAll = ($renderer_edit === "many_icons" || ($renderer_edit === "many_lines" && $editable));
@@ -207,6 +211,7 @@ class RelationshipRenderer2 extends Component
                     'entitySubProjectId' => $itemOriginal['sub_project_id'] ?? null,
 
                     'editable' => $editable,
+                    'createANewForm' => $createANewForm,
                     'noCss' => $this->noCss,
                     'tableSettings' => $tableSettings,
                 ]);

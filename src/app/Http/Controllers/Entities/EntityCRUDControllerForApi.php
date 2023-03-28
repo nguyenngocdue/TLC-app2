@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 class EntityCRUDControllerForApi extends Controller
 {
 	use TraitEntityDynamicType;
+	use TraitEntityFormula;
 
 	protected $type;
 	protected $modelPath;
@@ -40,6 +42,7 @@ class EntityCRUDControllerForApi extends Controller
 		$theRows = [];
 		foreach ($lines as $input) {
 			if (isset($input['ot_date'])) $input['ot_date'] = DateTimeConcern::convertForSaving('picker_date', $input['ot_date']);
+			$input = $this->applyFormula($input, 'store');
 			$theRows[] = $this->modelPath::create($input);
 		}
 		return ResponseObject::responseSuccess(
