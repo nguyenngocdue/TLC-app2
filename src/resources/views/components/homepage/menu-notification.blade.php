@@ -6,8 +6,8 @@
             $countUnreadNotifications = '99+';
         }
     @endphp
-    <div aria-hidden="true" class="absolute top-0 right-0 inline-block w-6 h-6 transform translate-x-4 -translate-y-3 bg-red-600 border-2 items-center justify-center border-white rounded-full dark:border-gray-800">
-        <p class="text-gray-100 text-[10px] mt-1">{{$countUnreadNotifications}}</p>
+    <div aria-hidden="true" class="absolute top-0 right-0 inline-block w-5 h-5 transform translate-x-3 -translate-y-2 bg-red-600 border-2 items-center justify-center border-white rounded-full dark:border-gray-800">
+        <p class="text-gray-100 text-[8px] mt-[3px]">{{$countUnreadNotifications}}</p>
     </div>
 </button>
 <template x-if="isNotificationsMenuOpen">
