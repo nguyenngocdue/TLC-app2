@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentController;
-use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentPathInfo;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class Hr_overtime_request_020 extends Report_ParentController
 {
-    use TraitReport;
+    use TraitDynamicColumnsTableReport;
     protected $groupBy = 'ot_date';
     protected $mode = '020';
 

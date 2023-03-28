@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentController;
-use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Models\Attachment;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_chklst;
@@ -14,7 +14,7 @@ use App\Utils\Support\Report;
 
 class Qaqc_insp_chklst_010 extends Report_ParentController
 {
-	use TraitReport;
+	use TraitDynamicColumnsTableReport;
 	protected $viewName = 'document-qaqc-insp-chklst';
 
 	// set default params's values 

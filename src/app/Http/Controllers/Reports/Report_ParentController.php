@@ -182,7 +182,7 @@ abstract class Report_ParentController extends Controller
         // dd($dataSource);
         // Execute the query
         $time = microtime(true) - $start;
-        // dump($time);
+        dump($time);
         $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
         $viewName = CurrentPathInfo::getViewName($request);
 

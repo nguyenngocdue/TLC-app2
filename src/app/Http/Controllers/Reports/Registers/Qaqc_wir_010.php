@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentController;
-use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Sub_project;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class Qaqc_wir_010 extends Report_ParentController
 {
-    use TraitReport;
+    use TraitDynamicColumnsTableReport;
     protected $rotate45Width = 600;
     // set default params's values 
     protected  $sub_project_id = 21;
@@ -149,7 +149,7 @@ class Qaqc_wir_010 extends Report_ParentController
         AND term_id = ";
         $sql .= $modeParams['prod_routing_id'];
         $sqlData = DB::select(DB::raw($sql));
-        // dump($sqlData);
+        // dump($sql);
         return $sqlData;
     }
 
