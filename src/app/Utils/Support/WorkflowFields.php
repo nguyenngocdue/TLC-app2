@@ -180,6 +180,6 @@ class WorkflowFields
         $result['hiddenRow'] = ($prop['hidden_edit'] ? $prop['hidden_edit'] : in_array($prop['name'], $hidden)) == 'true' ? "hidden" : "";
         $result['hiddenLabel'] = ($prop['hidden_label'] ? $prop['hidden_label'] : in_array($prop['name'], $hidden)) == 'true';
         $result['readOnly'] = ($prop['read_only'] ? $prop['read_only'] : in_array($prop['name'], $readonly)) == 'true';
-        $result['isRequired'] = in_array($prop['name'], $required) ? in_array("required", explode("|", $defaultValue['validation'] ?? "")) : "";
+        $result['isRequired'] = in_array($prop['name'], $required) ? true : in_array("required", explode("|", $defaultValue['validation'] ?? ""));
     }
 }

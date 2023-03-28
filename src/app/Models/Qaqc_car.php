@@ -8,7 +8,7 @@ class Qaqc_car extends ModelExtended
 {
     protected $fillable = [
         'id', "qaqc_ncr_id", "responsible_person", "remark", "cause_analysis",
-        "corrective_action", "order_no", "owner_id"
+        "corrective_action", "order_no", "owner_id", "status",
     ];
     protected $table = "qaqc_cars";
     public $nameless = true;
@@ -42,11 +42,12 @@ class Qaqc_car extends ModelExtended
         return [
             ["dataIndex" => 'order_no', 'invisible' => true],
             ["dataIndex" => 'id'],
-            ['dataIndex' => 'qaqc_ncr_id', 'title' => 'NCR ID', 'invisible' => true,],
-            ['dataIndex' => 'responsible_person'],
+            ['dataIndex' => 'qaqc_ncr_id', 'title' => 'NCR ID', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'cause_analysis'],
             ['dataIndex' => 'corrective_action'],
+            ['dataIndex' => 'responsible_person'],
             ['dataIndex' => 'remark'],
+            ['dataIndex' => 'status'],
         ];
     }
 }

@@ -1,0 +1,101 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_qaqc_ncr_id": {
+        "name": "_qaqc_ncr_id",
+        "column_name": "qaqc_ncr_id",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_cause_analysis": {
+        "name": "_cause_analysis",
+        "column_name": "cause_analysis",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_corrective_action": {
+        "name": "_corrective_action",
+        "column_name": "corrective_action",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_responsible_person": {
+        "name": "_responsible_person",
+        "column_name": "responsible_person",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    }
+}
