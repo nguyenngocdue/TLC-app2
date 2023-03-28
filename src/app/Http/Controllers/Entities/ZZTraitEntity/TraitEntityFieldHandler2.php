@@ -176,4 +176,21 @@ trait TraitEntityFieldHandler2
         }
         return $fields;
     }
+
+    private function makeUpTableFieldForRequired(Request $request)
+    {
+        $tableNames = $request->input('tableNames');
+        array_shift($tableNames);
+        $sp = $this->superProps;
+        foreach ($tableNames as $table01Name => $tableName) {
+            if ($request->input($table01Name)) { //User has submit at least one line
+                if (isset($sp['tables'][$tableName])) {
+                    $functions = $sp['tables'][$tableName];
+                    foreach ($functions as $function) {
+                        $request->request->add([$function => 'has at least one line']);
+                    }
+                }
+            }
+        }
+    }
 }

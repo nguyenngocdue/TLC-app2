@@ -28,14 +28,13 @@ class AggDateRange extends Component
         return function (array $data) {
             $rendererParam = $this->rendererParam;
             $json = json_decode($data['slot']);
-            // if (!is_array($json)) $json = [$json];
-            $dates = array_map(fn ($item) => $item->{$rendererParam}, $json);
-            // dump($dates);
-            $min = DateTimeConcern::convertForLoading('picker_date', min($dates));
-            $max  = DateTimeConcern::convertForLoading('picker_date', max($dates));
-            $result = ($min == $max) ? $min : "$min to $max";
-            return "<p class='p-2'>$result</p>";
+            if (!empty($json)) {
+                $dates = array_map(fn ($item) => $item->{$rendererParam}, $json);
+                $min = DateTimeConcern::convertForLoading('picker_date', min($dates));
+                $max  = DateTimeConcern::convertForLoading('picker_date', max($dates));
+                $result = ($min == $max) ? $min : "$min to $max";
+                return "<p class='p-2'>$result</p>";
+            }
         };
-        // return view('components.renderer.agg-date-range');
     }
 }
