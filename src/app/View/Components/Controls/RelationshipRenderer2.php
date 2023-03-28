@@ -22,21 +22,41 @@ class RelationshipRenderer2 extends Component
 
     private static $table00Count = 1;
     private $table01Name;
-    private $tableDebug = false;
+    private $tableDebug = !false;
 
     private $tablesInEditableMode = [
-        'qaqc_ncrs' => ['qaqc_cars' => [],],
+        'qaqc_mirs' => [
+            'qaqc_ncrs' => [],
+        ],
+        'qaqc_ncrs' => [
+            'qaqc_cars' => [],
+        ],
+        'hse_incident_reports' => [
+            'hse_corrective_actions' => [],
+        ],
+        'hr_overtime_requests' => [
+            'hr_overtime_request_lines' => ['showBtnAddFromAList' => 1],
+        ],
 
-        'hse_incident_reports' => ['hse_corrective_actions' => [],],
-        'hr_overtime_requests' => ['hr_overtime_request_lines' => ['showBtnAddFromAList' => 1],],
+        'zunit_test_07s' => [
+            'prod_discipline_1s' => [],
+        ],
 
-        'zunit_test_07s' => ['prod_discipline_1s' => [],],
-
-        'zunit_test_11s' => ['zunit_test_01s' => [],],
-        'zunit_test_12s' => ['zunit_test_02s' => [],],
-        'zunit_test_13s' => ['zunit_test_03s' => [],],
-        'zunit_test_15s' => ['zunit_test_05s' => [],],
-        'zunit_test_19s' => ['zunit_test_09s' => [],],
+        'zunit_test_11s' => [
+            'zunit_test_01s' => [],
+        ],
+        'zunit_test_12s' => [
+            'zunit_test_02s' => [],
+        ],
+        'zunit_test_13s' => [
+            'zunit_test_03s' => [],
+        ],
+        'zunit_test_15s' => [
+            'zunit_test_05s' => [],
+        ],
+        'zunit_test_19s' => [
+            'zunit_test_09s' => [],
+        ],
     ];
     /**
      * Create a new component instance.
@@ -49,9 +69,11 @@ class RelationshipRenderer2 extends Component
         private $colName,
         private $modelPath,
         private $noCss = false,
+        private $item = null,
     ) {
         $this->table01Name = "table" . str_pad(static::$table00Count++, 2, 0, STR_PAD_LEFT);
         // dump($this->table01Name);
+        // dump($item);
     }
 
     private function isTableOrderable($row, $colName, $columns)
@@ -160,6 +182,8 @@ class RelationshipRenderer2 extends Component
                 // $tableName = $lineModelPath::getTableName();
                 $roColumns = $this->makeReadOnlyColumns($columns, $sp, $tableName, $this->noCss);
                 // dump($roColumns);
+                $itemOriginal = $this->item->getOriginal();
+                // dump($itemOriginal);
                 return view('components.controls.many-line-params', [
                     'table01ROName' => $this->table01Name . "RO",
                     'readOnlyColumns' => $roColumns,
@@ -179,6 +203,9 @@ class RelationshipRenderer2 extends Component
                     'entityId' => CurrentRoute::getEntityId($this->type),
                     'entityType' => Str::modelPathFrom($this->type),
                     'userId' => CurrentUser::get()->id,
+                    'entityProjectId' => $itemOriginal['project_id'] ?? null,
+                    'entitySubProjectId' => $itemOriginal['sub_project_id'] ?? null,
+
                     'editable' => $editable,
                     'noCss' => $this->noCss,
                     'tableSettings' => $tableSettings,

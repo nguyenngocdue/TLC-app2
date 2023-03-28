@@ -53,7 +53,6 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			$fields = $this->handleFields($request, __FUNCTION__);
 			// dd($fields);
-			$fields = $this->autoDocIDGeneration($fields);
 			$theRow = $this->data::create($fields);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;

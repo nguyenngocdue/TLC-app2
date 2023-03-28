@@ -58,6 +58,8 @@
     <input class="bg-gray-200" readonly title="entityParentType" id="entityParentType" value="{{$entityType}}" type="{{$tableDebugTextHidden}}" />
     <input class="bg-gray-200" readonly title="entityParentId" id="entityParentId" value="{{$entityId}}" type="{{$tableDebugTextHidden}}" />
     <input class="bg-gray-200" readonly title="currentUserId" id="currentUserId" value="{{$userId}}" type="{{$tableDebugTextHidden}}" />
+    <input class="bg-gray-200" readonly title="entityProjectId" id="entityProjectId" value="{{$entityProjectId}}" type="{{$tableDebugTextHidden}}" />
+    <input class="bg-gray-200" readonly title="entitySubProjectId" id="entitySubProjectId" value="{{$entitySubProjectId}}" type="{{$tableDebugTextHidden}}" />
 @endonce
 
 @endif

@@ -17,7 +17,7 @@
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "",
+        "formula": "All_DocId",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",

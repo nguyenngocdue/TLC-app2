@@ -1,19 +1,19 @@
 const removeEmptinessLine = (tableId) => $('#' + tableId + '_emptiness').remove()
 
-const findParentIdFieldName = (tableId) => {
+const findParentIdFieldName = (tableId, key_value_as = 'value_as_parent_id') => {
     const { columns } = tableObject[tableId]
     for (let i = 0; i < columns.length; i++) {
         const keys = Object.keys(columns[i])
         // console.log(keys)
         for (let j = 0; j < keys.length; j++) {
             const key = keys[j]
-            if (key === 'value_as_parent_id' && columns[i][key]) {
+            if (key === key_value_as && columns[i][key]) {
                 // console.log(key, columns[i][key], columns[i]['dataIndex'])
                 return columns[i]['dataIndex']
             }
         }
     }
-    return "NOT_FOUND_value_as_parent_id";
+    return "NOT_FOUND_" + key_value_as;
 }
 
 const ajaxAddLineQueue = {}
@@ -22,13 +22,20 @@ const addANewLine = (params) => {
     const { tableId, valuesOfOrigin = {}, isDuplicatedOrAddFromList = false, batchLength = 1 } = params
     const { tableName, } = tableObject[tableId]
     // console.log(params, tableName,)
-    const parentId = getEById('entityParentId').val()
     const orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
-    const parentIdFieldName = findParentIdFieldName(tableId)
+
+    const parentIdFieldName = findParentIdFieldName(tableId, 'value_as_parent_id')
+    const parentId = getEById('entityParentId').val()
+
+    const parentTypeFieldName = findParentIdFieldName(tableId, 'value_as_parent_type')
+    const parentType = getEById('entityParentType').val()
     // console.log(parentIdFieldName)
     const data0 = {
         owner_id: 1,
         [parentIdFieldName]: parentId,
+        [parentTypeFieldName]: parentType,
+        project_id: getEById('entityProjectId').val(),
+        sub_project_id: getEById('entitySubProjectId').val(),
         order_no: orderNoValue,
 
         ...valuesOfOrigin,
@@ -176,10 +183,12 @@ const addANewLineFull = (params) => {
                 case 'dropdown':
                     if (column['dataIndex'] === 'status') {
                         renderer = "<select id='" + id + "' name='" + id + "' class='" + column['classList'] + "'>"
-                        column['cbbDataSource'].forEach((status) => {
+                        for (let i = 0; i < column['cbbDataSource'].length; i++) {
+                            const status = column['cbbDataSource'][i]
                             statusObject = column['cbbDataSourceObject'][status]
-                            renderer += "<option value='" + status + "'>" + statusObject.title + "</option>"
-                        })
+                            const selected = i === 0 ? 'selected' : ''
+                            renderer += "<option value='" + status + "' " + selected + ">" + statusObject.title + "</option>"
+                        }
                         renderer += "</select>"
                     } else {
                         renderer = "Only STATUS has been implemented for dropdown1."
@@ -251,8 +260,11 @@ const addANewLineFull = (params) => {
                     selected = valuesOfOrigin[column['dataIndex']]
                 } else {
                     switch (true) {
+                        case column['value_as_parent_type']: selected = $('#entityParentType').val(); break
                         case column['value_as_parent_id']: selected = $('#entityParentId').val(); break
                         case column['value_as_user_id']: selected = $('#currentUserId').val(); break
+                        case column['value_as_project_id']: selected = $('#entityProjectId').val(); break
+                        case column['value_as_sub_project_id']: selected = $('#entitySubProjectId').val(); break
                     }
                 }
                 if (column['readOnly']) {
@@ -275,11 +287,20 @@ const addANewLineFull = (params) => {
                 break
             case 'dropdown': //<<status
                 let selected1 = valuesOfOrigin[column['dataIndex']]
-                // console.log("Setting status", id, 'to', selected)
-                getEById(id).val(selected1)
-                getEById(id).trigger('change', batchLength)
+                if (selected1 !== undefined) {
+                    // console.log("Setting status", id, 'to', selected1)
+                    getEById(id).val(selected1)
+                    getEById(id).trigger('change', batchLength)
+                } else {
+                    //get the 1st value of the select during render
+                }
                 break
             default:
+                if (column['value_as_parent_type']) {
+                    getEById(id).val($('#entityParentType').val())
+                    getEById(id).trigger('change', batchLength)
+                    break
+                }
                 if (column['value_as_parent_id']) {
                     getEById(id).val($('#entityParentId').val())
                     getEById(id).trigger('change', batchLength)
@@ -287,6 +308,16 @@ const addANewLineFull = (params) => {
                 }
                 if (column['value_as_user_id']) {
                     getEById(id).val($('#userId').val())
+                    getEById(id).trigger('change', batchLength)
+                    break
+                }
+                if (column['value_as_project_id']) {
+                    getEById(id).val($('#entityProjectId').val())
+                    getEById(id).trigger('change', batchLength)
+                    break
+                }
+                if (column['value_as_sub_project_id']) {
+                    getEById(id).val($('#entitySubProjectId').val())
                     getEById(id).trigger('change', batchLength)
                     break
                 }

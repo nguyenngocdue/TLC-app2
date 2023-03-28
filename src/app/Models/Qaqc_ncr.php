@@ -38,6 +38,20 @@ class Qaqc_ncr extends ModelExtended
         "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
+    public function getManyLineParams()
+    {
+        return [
+            // ["dataIndex" => 'order_no', 'invisible' => true],
+            ["dataIndex" => 'id'],
+            ['dataIndex' => 'parent_type', 'title' => 'Parent Type', 'invisible' => !true, 'value_as_parent_type' => true],
+            ['dataIndex' => 'parent_id', 'title' => 'Parent ID', 'invisible' => !true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'project_id', 'value_as_project_id' => true],
+            ['dataIndex' => 'sub_project_id', 'value_as_sub_project_id' => true],
+            ['dataIndex' => 'name',],
+            ['dataIndex' => 'status'],
+        ];
+    }
+
     public function getParent()
     {
         $p = $this->eloquentParams[__FUNCTION__];

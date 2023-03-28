@@ -166,17 +166,6 @@ trait TraitEntityFieldHandler2
         return $array;
     }
 
-    private function autoDocIDGeneration($fields)
-    {
-        $libAppsData = LibApps::getFor($this->type);
-        if ($nameColumnDocIDFormat = $libAppsData['doc_id_format_column']) {
-            $tableName = Str::plural($this->type);
-            $maxDocID = DB::table($tableName)->where($nameColumnDocIDFormat, $fields[$nameColumnDocIDFormat])->max('doc_id');
-            $fields['doc_id'] = $maxDocID + 1;
-        }
-        return $fields;
-    }
-
     private function makeUpTableFieldForRequired(Request $request)
     {
         $tableNames = $request->input('tableNames');
