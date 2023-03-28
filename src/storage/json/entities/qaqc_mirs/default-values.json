@@ -339,7 +339,7 @@
         "name": "_inspected_by",
         "column_name": "inspected_by",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",

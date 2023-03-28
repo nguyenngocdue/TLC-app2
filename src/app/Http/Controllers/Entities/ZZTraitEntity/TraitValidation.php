@@ -35,6 +35,7 @@ trait TraitValidation
         $workflows = SuperWorkflows::getFor($this->type)['workflows'];
         if (!isset($workflows[$newStatus])) return [];
         $visibleProps = $workflows[$newStatus]['visible'];
+        $requiredProps = $workflows[$newStatus]['required'];
 
         $listOfTable = [];
         if ($action === 'store') {
@@ -54,9 +55,10 @@ trait TraitValidation
                 $regexValidations = $prop['default-values']['validation_regex'] ?? "";
                 $rules[$prop['column_name']] = explode("|", $commonValidations);
                 if ($regexValidations) $rules[$prop['column_name']][] = "regex:" . $regexValidations;
+                if (in_array('_' . $prop['column_name'], $requiredProps)) $rules[$prop['column_name']][] = 'required';
             }
         }
-        $rules = array_filter($rules, fn ($i) => $i);
+        $rules = array_filter($rules, fn ($i) => $i); //Remove empty rule
         // dd("getValidationRules", $rules);
         // $this->dump1("getValidationRules", $rules, __LINE__);
         // dump($rules);

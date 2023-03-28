@@ -85,6 +85,7 @@ Route::group([
     'middleware' => 'throttle:600,1'
 ], function () {
     foreach ([
+        'Qaqc_car',
         'Hr_overtime_request_line',
         'Hse_corrective_action',
         'Zunit_test_01',
