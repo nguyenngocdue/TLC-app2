@@ -55,10 +55,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getHrOTLines": {
-        "name": "_getHrOTLines",
+    "_getHrOtLines": {
+        "name": "_getHrOtLines",
         "relationship": "hasMany",
-        "control_name": "getHrOTLines",
+        "control_name": "getHrOtLines",
         "renderer_view_all": "agg_date_range",
         "renderer_view_all_param": "ot_date",
         "renderer_view_all_unit": "",
