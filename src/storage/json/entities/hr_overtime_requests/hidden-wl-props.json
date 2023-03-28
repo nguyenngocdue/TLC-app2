@@ -158,9 +158,9 @@
         "proj_member_nz": "",
         "qs_member_nz": ""
     },
-    "_getHrOTLines": {
-        "name": "_getHrOTLines",
-        "column_name": "getHrOTLines",
+    "_getHrOtLines": {
+        "name": "_getHrOtLines",
+        "column_name": "getHrOtLines",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",

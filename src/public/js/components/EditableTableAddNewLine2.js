@@ -192,7 +192,7 @@ const addANewLineFull = (params) => {
                         renderer = "<input id='" + id + "' name='" + id + bracket + "' type='hidden' >"
                         renderer += "<div id='" + id + "_label' class='px-2'></div>"
                     } else {
-                        renderer = "<select id='" + id + "' name='" + id + bracket + "' " + multipleStr + "' class='" + column['classList'] + "'></select>"
+                        renderer = "<select id='" + id + "' name='" + id + bracket + "' " + multipleStr + " class='" + column['classList'] + "'></select>"
                         renderer += "<script>getEById('" + id + "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
                     }
                     renderer += "<script>" + makeOnChangeAdvanced(onChangeDropdown4Fn) + "</script>"
@@ -222,7 +222,7 @@ const addANewLineFull = (params) => {
                     renderer += "<script>" + makeOnChangeAdvanced(onChangeDropdown4Fn) + "</script>"
                     break
                 case "textarea4":
-                    renderer = "<textarea id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "'></textarea>"
+                    renderer = "<textarea id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "' rows='3'></textarea>"
                     break
                 case "picker-all4":
                     renderer = "<input id='" + id + "' name='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "'>"

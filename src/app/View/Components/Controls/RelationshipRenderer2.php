@@ -25,6 +25,8 @@ class RelationshipRenderer2 extends Component
     private $tableDebug = false;
 
     private $tablesInEditableMode = [
+        'qaqc_ncrs' => ['qaqc_cars' => [],],
+
         'hse_incident_reports' => ['hse_corrective_actions' => [],],
         'hr_overtime_requests' => ['hr_overtime_request_lines' => ['showBtnAddFromAList' => 1],],
 

@@ -17,12 +17,12 @@ class ManageStatusesController extends AbstractManageLibController
             ],
             [
                 'dataIndex' => "name",
-                "renderer"  => 'read-only-text',
+                "renderer"  => 'read-only-text4',
                 'editable' => true,
             ],
             [
                 'dataIndex' => "title",
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
             [
@@ -41,7 +41,7 @@ class ManageStatusesController extends AbstractManageLibController
             ],
             [
                 'dataIndex' => "rendered",
-                'renderer' => 'formatter',
+                'renderer' => 'formatter4',
                 'align' => 'center',
                 'formatterName' => 'statusColorRendered',
             ],

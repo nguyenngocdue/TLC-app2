@@ -167,6 +167,19 @@ class SuperProps
         return $result;
     }
 
+    private static function getTablesFromProps($props)
+    {
+        $result = [];
+        foreach ($props as $prop) {
+            if (isset($prop['relationships']['table'])) {
+                if ('relationship_renderer' == $prop['control']) {
+                    $result[$prop['relationships']['table']][] = $prop['column_name'];
+                }
+            }
+        }
+        return $result;
+    }
+
     private static function make($type)
     {
         static::$type = $type;
@@ -174,6 +187,7 @@ class SuperProps
         static::$result['type'] = Str::singular($type);
         static::$result['plural'] = Str::plural($type);
         static::$result['props'] = static::readProps($type);
+        static::$result['tables'] = static::getTablesFromProps(static::$result['props']);
         static::$result['statuses'] = static::readStatuses($type);
         static::$result['intermediate'] = static::readIntermediate($type);
         static::$result['settings'] = static::readSettings($type);

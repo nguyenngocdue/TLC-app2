@@ -28,17 +28,27 @@ trait TraitValidation
         return $newValidation;
     }
 
-    private function getValidationRules($newStatus)
+    private function getValidationRules($newStatus, $action)
     {
-        if ($newStatus == '') {
-            $newStatus = WorkflowFields::getNewFromDefinitions($this->type);
-        }
+        if ($newStatus == '') $newStatus = WorkflowFields::getNewFromDefinitions($this->type);
         $rules = [];
         $workflows = SuperWorkflows::getFor($this->type)['workflows'];
         if (!isset($workflows[$newStatus])) return [];
         $visibleProps = $workflows[$newStatus]['visible'];
+
+        $listOfTable = [];
+        if ($action === 'store') {
+            $sp = $this->superProps;
+            foreach ($sp['tables'] as $functions) {
+                foreach ($functions as $function) {
+                    $listOfTable[] = '_' . $function;
+                }
+            }
+        }
+
         foreach ($this->superProps['props'] as $prop) {
             if (!in_array($prop['name'], $visibleProps)) continue;
+            if (in_array($prop['name'], $listOfTable)) continue;
             if (isset($prop['default-values']['validation'])) {
                 $commonValidations = $prop['default-values']['validation'];
                 $regexValidations = $prop['default-values']['validation_regex'] ?? "";
@@ -49,6 +59,8 @@ trait TraitValidation
         $rules = array_filter($rules, fn ($i) => $i);
         // dd("getValidationRules", $rules);
         // $this->dump1("getValidationRules", $rules, __LINE__);
+        // dump($rules);
+        // dd();
         return $rules;
     }
 }

@@ -1,0 +1,90 @@
+{
+    "new": {
+        "name": "new",
+        "new": "",
+        "assigned": "true",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "closed": ""
+    },
+    "assigned": {
+        "name": "assigned",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "closed": ""
+    },
+    "assign_rejected": {
+        "name": "assign_rejected",
+        "new": "",
+        "assigned": "true",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "closed": ""
+    },
+    "resolved": {
+        "name": "resolved",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "",
+        "closed": ""
+    },
+    "rejected": {
+        "name": "rejected",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "true",
+        "rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "closed": ""
+    },
+    "pending_verification": {
+        "name": "pending_verification",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "verification_rejected": {
+        "name": "verification_rejected",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "pending_verification": "true",
+        "verification_rejected": "",
+        "closed": ""
+    },
+    "closed": {
+        "name": "closed",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "closed": ""
+    }
+}
