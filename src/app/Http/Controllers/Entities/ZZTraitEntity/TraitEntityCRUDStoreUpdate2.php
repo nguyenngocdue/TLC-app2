@@ -40,7 +40,8 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			//Get newStatus before it get removed by handleFields
 			$newStatus = $request['status'];
-			$request->validate($this->getValidationRules($newStatus));
+			$rules = $this->getValidationRules($newStatus, __FUNCTION__);
+			$request->validate($rules);
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
 			if ($request['tableNames'] == 'fakeRequest') {
@@ -102,8 +103,12 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			//Get newStatus before it get removed by handleFields
 			$newStatus = $request['status'];
-			// if ($request['tableNames'] == 'fakeRequest') Log::info($this->getValidationRules($newStatus));
-			$request->validate($this->getValidationRules($newStatus));
+			$rules = $this->getValidationRules($newStatus, __FUNCTION__);
+			// if ($request['tableNames'] == 'fakeRequest') Log::info($rules);
+			if ($request['tableNames'] !== 'fakeRequest') {
+				$this->makeUpTableFieldForRequired($request);
+			}
+			$request->validate($rules);
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
 			if ($request['tableNames'] == 'fakeRequest') {

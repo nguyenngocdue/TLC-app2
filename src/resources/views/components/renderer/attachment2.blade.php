@@ -19,7 +19,7 @@
             @if(in_array($extension,["png","gif","jpg","jpeg","webb"]))
             <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}" />
             @elseif(in_array($extension,["csv","pdf","zip"]))
-            <img class="w-auto h-full object-cover" src="/images/iconfile.png" alt="{{$attachment['filename']}}">
+            <i class="w-auto h-full object-cover fa-light fa-file-{{$extension=='zip' ? 'arrow-down' : $extension}} text-9xl"></i>
             @elseif($extension == 'mp4')
             <video class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"></video>
             @elseif($extension === 'svg')

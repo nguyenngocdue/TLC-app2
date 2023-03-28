@@ -13,7 +13,7 @@ class Hr_overtime_request extends ModelExtended
     public $eloquentParams = [
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
         "getAssignee1" => ["belongsTo", User::class, 'assignee_1'],
-        'getHrOTLines' => ['hasMany', Hr_overtime_request_line::class, 'hr_overtime_request_id'],
+        'getHrOtLines' => ['hasMany', Hr_overtime_request_line::class, 'hr_overtime_request_id'],
         "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
     ];
 
@@ -39,7 +39,7 @@ class Hr_overtime_request extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getHrOTLines()
+    public function getHrOtLines()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

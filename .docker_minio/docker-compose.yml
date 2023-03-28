@@ -22,7 +22,13 @@ x-minio-common:
     # MINIO_BROWSER_REDIRECT_URL: https://minio.tlcmodular.com
     # MINIO_SERVER_URL: https://minio.tlcmodular.com
   healthcheck:
-    test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+    test:
+      [
+        "CMD",
+        "curl",
+        "-f",
+        "http://localhost:9000/minio/health/live"
+      ]
     interval: 30s
     timeout: 20s
     retries: 3

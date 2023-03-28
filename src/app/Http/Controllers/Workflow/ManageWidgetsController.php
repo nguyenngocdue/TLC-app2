@@ -17,7 +17,7 @@ class ManageWidgetsController extends AbstractManageLibController
             ],
             [
                 'dataIndex' => "name",
-                "renderer"  => 'read-only-text',
+                "renderer"  => 'read-only-text4',
                 'editable' => true,
             ],
             [
@@ -41,27 +41,27 @@ class ManageWidgetsController extends AbstractManageLibController
             ],
             [
                 'dataIndex' => "table_a",
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
             [
                 'dataIndex' => "table_b",
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
             [
                 'dataIndex' => "key_a",
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
             [
                 'dataIndex' => "key_b",
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
             [
                 'dataIndex' => "global_filter",
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
         ];

@@ -95,15 +95,19 @@
                         @break
                         @case ('dropdown')
                         <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case ('radio')
                         <x-controls.has-data-source.radio-or-checkbox2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case ('dropdown_multi')
                         <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('checkbox')
                         <x-controls.has-data-source.radio-or-checkbox2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}}/>
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('picker_time')
                         <x-controls.text2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} placeholder="HH:MM" icon="fa-duotone fa-clock" />

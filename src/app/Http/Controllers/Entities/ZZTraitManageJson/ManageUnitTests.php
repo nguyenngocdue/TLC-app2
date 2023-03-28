@@ -28,22 +28,22 @@ class ManageUnitTests extends Manage_Parent
             ],
             [
                 "dataIndex" => 'name',
-                'renderer' => 'read-only-text',
+                'renderer' => 'read-only-text4',
                 'editable' => true,
             ],
             [
                 "dataIndex" => 'column_name',
-                'renderer' => 'read-only-text',
+                'renderer' => 'read-only-text4',
                 'editable' => true,
             ],
             [
                 "dataIndex" => 'text_value',
-                'renderer' => 'text',
+                'renderer' => 'text4',
                 'editable' => true,
             ],
             [
                 "dataIndex" => 'number_value',
-                'renderer' => 'number',
+                'renderer' => 'number4',
                 'editable' => true,
             ],
             [

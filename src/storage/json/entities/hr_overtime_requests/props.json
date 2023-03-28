@@ -53,11 +53,11 @@
         "save_on_change": "",
         "new_line": ""
     },
-    "_getHrOTLines": {
-        "name": "_getHrOTLines",
-        "column_name": "getHrOTLines",
+    "_getHrOtLines": {
+        "name": "_getHrOtLines",
+        "column_name": "getHrOtLines",
         "column_type": "eloquent_prop",
-        "label": "Overtime Lines",
+        "label": "Overtime Details",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "",
