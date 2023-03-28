@@ -5,7 +5,7 @@ namespace App\View\Components\Renderer;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
-class Formatter extends Component
+class Formatter4 extends Component
 {
     /**
      * Create a new component instance.

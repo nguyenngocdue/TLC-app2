@@ -1,0 +1,10 @@
+[
+    "new",
+    "assigned",
+    "assign_rejected",
+    "resolved",
+    "rejected",
+    "pending_verification",
+    "verification_rejected",
+    "closed"
+]

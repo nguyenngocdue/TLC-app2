@@ -13,6 +13,26 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "new_line": ""
+    },
+    "_doc_id": {
+        "name": "_doc_id",
+        "column_name": "doc_id",
+        "column_type": "integer",
+        "label": "Doc ID",
+        "control": "doc_id",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_name": {
@@ -29,6 +49,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_description": {
@@ -45,6 +67,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_slug": {
@@ -61,6 +85,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_parent_type": {
@@ -77,6 +103,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_parent_id": {
@@ -93,6 +121,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_project_id": {
@@ -109,6 +139,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_sub_project_id": {
@@ -125,6 +157,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_prod_routing_id": {
@@ -141,6 +175,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_prod_order_id": {
@@ -157,6 +193,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_prod_discipline_id": {
@@ -173,6 +211,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_prod_discipline_1_id": {
@@ -189,6 +229,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_prod_discipline_2_id": {
@@ -205,6 +247,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_user_team_id": {
@@ -221,13 +265,15 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_inter_subcon_id": {
         "name": "_inter_subcon_id",
         "column_name": "inter_subcon_id",
         "column_type": "bigint",
-        "label": "TLC\/Externals",
+        "label": "Internal\/Externals",
         "control": "dropdown",
         "align": "",
         "col_span": "6",
@@ -237,6 +283,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_priority_id": {
@@ -253,6 +301,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_due_date": {
@@ -269,6 +319,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_closed_date": {
@@ -285,6 +337,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_defect_root_cause_id": {
@@ -301,6 +355,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_defect_disposition_id": {
@@ -317,6 +373,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_getQaqcCars": {
@@ -333,7 +391,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "new_line": ""
+        "read_only": "",
+        "save_on_change": "",
+        "new_line": "true"
     },
     "_assignee_1": {
         "name": "_assignee_1",
@@ -349,6 +409,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_getMonitors1()": {
@@ -365,6 +427,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_getParent": {
@@ -381,6 +445,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_owner_id": {
@@ -397,6 +463,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_status": {
@@ -413,6 +481,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_created_at": {
@@ -429,6 +499,8 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     },
     "_updated_at": {
@@ -445,6 +517,8 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
         "new_line": ""
     }
 }

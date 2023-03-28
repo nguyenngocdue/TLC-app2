@@ -71,9 +71,9 @@
         "color": "rose",
         "color_index": "200"
     },
-    "endorse_rejected": {
-        "name": "endorse_rejected",
-        "title": "Endorse Rejected",
+    "endorsement_rejected": {
+        "name": "endorsement_rejected",
+        "title": "Endorsement Rejected",
         "color": "orange",
         "color_index": "200"
     },
@@ -179,9 +179,9 @@
         "color": "orange",
         "color_index": "200"
     },
-    "pending_endorsed": {
-        "name": "pending_endorsed",
-        "title": "Pending Endorsed",
+    "pending_endorsement": {
+        "name": "pending_endorsement",
+        "title": "Pending Endorsement",
         "color": "orange",
         "color_index": "200"
     },
@@ -197,9 +197,9 @@
         "color": "amber",
         "color_index": "200"
     },
-    "pending_verified": {
-        "name": "pending_verified",
-        "title": "Pending Verified",
+    "pending_verification": {
+        "name": "pending_verification",
+        "title": "Pending Verification",
         "color": "emerald",
         "color_index": "200"
     },
@@ -281,9 +281,9 @@
         "color": "amber",
         "color_index": "200"
     },
-    "verified_rejected": {
-        "name": "verified_rejected",
-        "title": "Verified Rejected",
+    "verification_rejected": {
+        "name": "verification_rejected",
+        "title": "Verification Rejected",
         "color": "red",
         "color_index": "200"
     }
