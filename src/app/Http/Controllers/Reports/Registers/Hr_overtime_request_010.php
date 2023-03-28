@@ -18,7 +18,8 @@ class Hr_overtime_request_010 extends Report_ParentController
     protected $groupBy = 'first_name';
     public function getSqlStr($modeParams)
     {
-        $sql = " SELECT tb2.*,LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month, user_id ORDER BY year_months) AS maximum_allowed_ot_hours_year
+        $sql = " SELECT tb3.*
+        FROM (SELECT tb2.*,LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month, user_id ORDER BY year_months) AS maximum_allowed_ot_hours_year
         FROM(SELECT 
         GROUP_CONCAT(distinct workplace SEPARATOR ', ') AS ot_workplace,
             user_category_name,
@@ -33,7 +34,6 @@ class Hr_overtime_request_010 extends Report_ParentController
             SUM(total_overtime_hours) AS total_overtime_hours,
             (40 - SUM(total_overtime_hours)) AS remaining_allowed_ot_hours,
             years_month,
-            (200) AS maximum_allowed_ot_hours_year,
             ROW_NUMBER() OVER (PARTITION BY employee_id, years_month ORDER BY year_months) AS step_plus,
             SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employee_id, years_month ORDER BY year_months) AS cumulative_remaining_hours_year,
             (200 - SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employee_id, years_month ORDER BY year_months)) AS remaining_allowed_ot_hours_year
@@ -69,7 +69,6 @@ class Hr_overtime_request_010 extends Report_ParentController
                     AND uscate.id = us.category";
 
         if (isset($modeParams['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
-        if (isset($modeParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
         $sql .= "\nGROUP BY user_id, employee_id, year_months, ot_workplace_id, years_month
                 ) AS rgt_ot 
                 JOIN workplaces wp ON wp.id = rgt_ot.ot_workplace_id";
@@ -81,7 +80,10 @@ class Hr_overtime_request_010 extends Report_ParentController
         ) tbg
         GROUP BY year_months, years_month, employee_id, user_category_name, user_category_desc
         ) tb2
-        ORDER BY first_name, last_name, employee_id, year_months DESC";
+        ORDER BY first_name, last_name, employee_id, year_months DESC ) AS tb3
+        WHERE 1 = 1";
+        // dd($modeParams);
+        if (isset($modeParams['months'])) $sql .= "\n AND year_months = '{{months}}'";
         return $sql;
     }
 
