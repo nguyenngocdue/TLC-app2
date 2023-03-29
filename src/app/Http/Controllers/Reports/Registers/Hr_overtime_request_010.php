@@ -15,7 +15,8 @@ class Hr_overtime_request_010 extends Report_ParentController
 {
     use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
-    protected $groupBy = 'first_name';
+    protected $groupBy = 'name_render';
+    protected $groupByLength = 1;
     public function getSqlStr($modeParams)
     {
         $sql = " SELECT tb3.*
@@ -24,8 +25,7 @@ class Hr_overtime_request_010 extends Report_ParentController
         GROUP_CONCAT(distinct workplace SEPARATOR ', ') AS ot_workplace,
             user_category_name,
             user_category_desc,
-            MAX(first_name) AS first_name,
-            MAX(last_name) AS last_name,
+            MAX(name_render) AS name_render,
             MAX(user_id) AS user_id,
             MAX(user_workplace) AS user_workplace,
             employee_id,
@@ -48,12 +48,10 @@ class Hr_overtime_request_010 extends Report_ParentController
                     SELECT 
                         us.workplace AS user_workplace_id,
                         otr.workplace_id AS ot_workplace_id,
-                        us.first_name AS first_name,
-                        us.last_name AS last_name,
+                        us.name AS name_render,
                         uscate.name AS user_category_name,
                         uscate.description AS user_category_desc,
                         otline.employeeid AS employee_id,
-                        us.full_name AS member_name,
                         SUBSTR(otline.ot_date,1,7) AS year_months,
                         SUBSTR(otline.ot_date,1,4) AS years_month,
                         SUM(otline.total_time) AS total_overtime_hours,
@@ -80,7 +78,7 @@ class Hr_overtime_request_010 extends Report_ParentController
         ) tbg
         GROUP BY year_months, years_month, employee_id, user_category_name, user_category_desc
         ) tb2
-        ORDER BY first_name, last_name, employee_id, year_months DESC ) AS tb3
+        ORDER BY name_render, employee_id, year_months DESC ) AS tb3
         WHERE 1 = 1";
         // dd($modeParams);
         if (isset($modeParams['months'])) $sql .= "\n AND year_months = '{{months}}'";
@@ -109,11 +107,8 @@ class Hr_overtime_request_010 extends Report_ParentController
                 "align" => 'left'
             ],
             [
-                "dataIndex" => "first_name",
-                "align" => 'left'
-            ],
-            [
-                "dataIndex" => "last_name",
+                "title" => "Full Name",
+                "dataIndex" => "name_render",
                 "align" => 'left'
             ],
             [

@@ -25,6 +25,7 @@ abstract class Report_ParentController extends Controller
     protected $rotate45Width = false;
     protected $groupBy = false;
     protected $mode = '010';
+    protected $groupByLength = 7;
 
     public function getType()
     {
@@ -203,6 +204,7 @@ abstract class Report_ParentController extends Controller
             'currentUserId' => $currentUserId,
             'dataModeControl' => $dataModeControl,
             'rotate45Width' => $this->rotate45Width,
+            'groupByLength' => $this->groupByLength,
             'topTitle' => $this->getMenuTitle(),
             'modeColumns' => $this->modeColumns(),
             'modeOptions' => $this->getDataModes(),
