@@ -52,6 +52,7 @@ class Hr_overtime_request_020 extends Report_ParentController
 
     public function getTableColumns($dataSource, $modeParams)
     {
+        dump($dataSource);
         $firstDataCol = [
             [
                 "dataIndex" => "sub_project_name",
@@ -80,7 +81,7 @@ class Hr_overtime_request_020 extends Report_ParentController
             "dataIndex" => "break_time",
             "align" => "center"
         ]];
-        $sqlDataCol = $this->createTableColumns($dataSource, 'first_name', $editDataCols);
+        $sqlDataCol = $this->createTableColumns($dataSource, 'user_id', $editDataCols);
         $totalDataCol = array_merge($firstDataCol, $sqlDataCol);
         return  $totalDataCol;
     }

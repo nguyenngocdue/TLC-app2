@@ -32,13 +32,13 @@ class Prod_sequence_050 extends Report_ParentController
         ,GROUP_CONCAT(distinct po_name SEPARATOR ', ') AS  po_name
         ,COUNT(distinct po_name ) AS  total_order
  
-        ,ROUND(SUM(total_uom),2) AS sum_total_uom
-        ,ROUND(SUM(sum_man_hours_X_total_uom),2) AS total_uom_man_hours_total
-        ,ROUND(SUM(sum_man_hours_X_total_uom) / SUM(total_uom) , 2) total_hours
+        ,format(SUM(total_uom),0) AS sum_total_uom
+        ,format(SUM(sum_man_mins_X_total_uom),0) AS total_uom_man_hours_total
+        ,format(SUM(sum_man_mins_X_total_uom) / SUM(total_uom) , 0) total_min
         
-        ,ROUND((SUM(sum_man_hours_X_total_uom) / SUM(total_uom))/COUNT(distinct po_name )*60,2)  AS total_mins_sequence
-        ,ROUND((SUM(sum_man_hours_X_total_uom) / SUM(total_uom))/COUNT(distinct po_name ),2) AS total_hours_sequence
-        ,ROUND(((SUM(sum_man_hours_X_total_uom) / SUM(total_uom))/COUNT(distinct po_name ))/8,2) AS total_day_sequence
+        ,format(ROUND((SUM(sum_man_mins_X_total_uom) / SUM(total_uom)),2),0)  AS total_min_sequence
+        ,format(ROUND(((SUM(sum_man_mins_X_total_uom)/60) / SUM(total_uom)),2),0) AS total_hours_sequence
+        ,ROUND((((SUM(sum_man_mins_X_total_uom)/60) / SUM(total_uom)))/8,2) AS total_day_sequence
         FROM (SELECT 
                 sp.name AS sub_project_name 
                   ,prl.id AS prod_sequence_id
@@ -46,7 +46,7 @@ class Prod_sequence_050 extends Report_ParentController
                 ,po.name po_name
                 ,ps.total_uom AS total_uom
                   ,GROUP_CONCAT(distinct po.name SEPARATOR ', ') AS  po_names
-                ,(SUM(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60) * SUM(pr.worker_number)) *  ps.total_uom AS sum_man_hours_X_total_uom
+                ,(SUM(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))) * SUM(pr.worker_number)) *  ps.total_uom AS sum_man_mins_X_total_uom
                     FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl
                     WHERE 1 = 1";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id =" . $modeParams['sub_project_id'];
@@ -99,13 +99,14 @@ class Prod_sequence_050 extends Report_ParentController
                 "width" => "300",
             ],
             [
-                "dataIndex" => "total_hours",
+                "title" => "Min",
+                "dataIndex" => "total_min",
                 "align" => "center",
                 "width" => "300",
             ],
             [
                 "title" => "Average Min",
-                "dataIndex" => "total_mins_sequence",
+                "dataIndex" => "total_min_sequence",
                 "align" => "center",
                 "width" => "300",
             ],
@@ -167,12 +168,12 @@ class Prod_sequence_050 extends Report_ParentController
                 'value' => $value->total_uom_man_hours_total,
                 'cell_title' => "(Total UOM) = " . "Σ(Total UOM Sequences)"
             ];
-            $value->total_hours = (object)[
-                'value' => $value->total_hours,
+            $value->total_min = (object)[
+                'value' => $value->total_min,
                 'cell_title' => "(Total Min) = " . "Total UoM Man-Hours / Total UOM"
             ];
-            $value->total_mins_sequence = (object)[
-                'value' => $value->total_mins_sequence,
+            $value->total_min_sequence = (object)[
+                'value' => $value->total_min_sequence,
                 'cell_title' => "(Average Min) = " . "(Total Hours / Total Order)*60"
             ];
             $value->total_hours_sequence = (object)[
