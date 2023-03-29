@@ -1,3 +1,10 @@
+@once
+<script>
+    const superProps = @json($superProps);
+    const superWorkflows = @json($superWorkflows);
+</script>
+@endonce
+
 @if($status && !($action === 'create'))
     <div class="w-full mb-4 p-2 bg-white rounded-lg dark:bg-gray-800 grid grid-cols-12 gap-2">
         <div class="col-span-12 md:col-span-5 lg:col-span-3">
@@ -12,7 +19,7 @@
                 </div>
             </x-renderer.card>
         </div>
-        <div class="col-span-12 md:col-span-7 lg:col-span-9 w-full">
+        <div class="col-span-12 md:col-span-5 lg:col-span-7 w-full">
             <x-renderer.card title="Accessible" py="1">
                 <div class="mb-1">
                     @isset($statuses[$status])
@@ -22,6 +29,14 @@
                     @else
                         Status [{{$status}}] not found
                     @endisset
+                </div>
+            </x-renderer.card>
+        </div>
+        <div class="col-span-12 md:col-span-2 lg:col-span-2 w-full">
+            <x-renderer.card title="Console.log()" py="1">
+                <div class="mb-1 text-center">
+                   <x-renderer.button size="xs" onClick="console.log(superProps)">Super-Props</x-renderer.button>
+                   <x-renderer.button size="xs" onClick="console.log(superWorkflows)">Super-Workflows</x-renderer.button>
                 </div>
             </x-renderer.card>
         </div>
