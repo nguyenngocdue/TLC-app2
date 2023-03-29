@@ -59,7 +59,7 @@
         "name": "_assignee_2",
         "column_name": "assignee_2",
         "new": "",
-        "assigned": "",
+        "assigned": "rejected",
         "rejected": "",
         "closed": ""
     },

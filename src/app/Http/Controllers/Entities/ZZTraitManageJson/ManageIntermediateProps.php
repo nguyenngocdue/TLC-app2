@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\Json\IntermediateProps;
 use App\Utils\Support\Json\Props;
+use App\Utils\Support\Json\Transitions;
 use App\Utils\Support\Json\VisibleProps;
 use Illuminate\Support\Facades\Log;
 
@@ -57,6 +58,8 @@ class ManageIntermediateProps extends Manage_Parent
 
         $visibleProps = VisibleProps::getAllOf($this->type);
         // dump($visibleProps);
+        $transitionProps = Transitions::getAllOf($this->type);
+        // dump($transitionProps);
 
         $result = [];
         foreach ($allProps as $prop) {
@@ -80,7 +83,13 @@ class ManageIntermediateProps extends Manage_Parent
                     } else {
                         $cbbDS = [];
                         $cbbDS[] = "";
-                        foreach ($visibleProp as $k => $v) if ($v === 'true' && $k !== $status) $cbbDS[] = $k;
+                        foreach ($visibleProp as $k => $v) {
+                            if ($v === 'true' && $k !== $status) {
+                                if ($transitionProps[$status][$k] == 'true') {
+                                    $cbbDS[] = $k;
+                                }
+                            }
+                        }
                         $newItem[$status] = [
                             'value' => $newItem[$status] ?? "",
                             'cbbDS' => $cbbDS,
