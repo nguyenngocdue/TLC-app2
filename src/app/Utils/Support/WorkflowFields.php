@@ -71,7 +71,8 @@ class WorkflowFields
     {
         $actionButtons = [];
         foreach ($transitions as $value) {
-            $results = array_merge($statuses[$value]['action-buttons'], ['is_close' => false]);
+            $array = $statuses[$value]['action-buttons'] ?? [];
+            $results = array_merge($array, ['is_close' => false]);
             $actionButtons[$value] = $results;
             foreach ($closed as $close) {
                 if ($value == $close) {

@@ -10,7 +10,8 @@ foreach($json as $item){
         if($rendererParam !== 'name'){
             $result[] = $rendererParam." is missing";
         }else{
-            $value = "Nameless #".($id);
+            $value = "";
+            // $value = "Nameless #".($id); //<< This will cause eye noises
         }
     }else {
         // dump('l2');

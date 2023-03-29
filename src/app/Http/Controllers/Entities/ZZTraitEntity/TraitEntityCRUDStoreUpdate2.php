@@ -54,8 +54,6 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			$fields = $this->handleFields($request, __FUNCTION__);
 			// dd($fields);
-			$fields = $this->autoDocIDGeneration($fields);
-			// dd($fields); Fix
 			$theRow = $this->data::create($fields);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
@@ -104,8 +102,10 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		try {
 			//Get newStatus before it get removed by handleFields
+			$theRow = $this->data::find($id);
+			$oldStatus = $theRow['status'];
 			$newStatus = $request['status'];
-			$rules = $this->getValidationRules($newStatus, __FUNCTION__);
+			$rules = $this->getValidationRules($oldStatus, __FUNCTION__);
 			// if ($request['tableNames'] == 'fakeRequest') Log::info($rules);
 			if ($request['tableNames'] !== 'fakeRequest') {
 				$this->makeUpTableFieldForRequired($request);
@@ -122,7 +122,6 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			$fields = $this->handleFields($request, __FUNCTION__);
 			$fieldForEmailHandler = $this->addEntityType($fields, 'status', $newStatus);
-			$theRow = $this->data::find($id);
 			$previousValue = $this->getPreviousValue($fieldForEmailHandler, $theRow);
 			$theRow->updateWithOptimisticLocking($fields);
 			$objectType = Str::modelPathFrom($theRow->getTable());

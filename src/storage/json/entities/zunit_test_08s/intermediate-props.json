@@ -10,10 +10,10 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
     },
     "_description": {
         "name": "_description",
@@ -26,10 +26,10 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
     },
     "_parent_id": {
         "name": "_parent_id",
@@ -50,10 +50,10 @@
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
     },
     "_assignee_2": {
         "name": "_assignee_2",
@@ -67,8 +67,8 @@
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
         "new": "",
-        "assigned": "true",
-        "rejected": "true",
+        "assigned": "rejected",
+        "rejected": "",
         "closed": ""
     },
     "_owner_id": {

@@ -20,6 +20,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "getControlValue" => ["belongsTo", Qaqc_insp_control_value::class, "qaqc_insp_control_value_id"],
         "getControlType" => ["belongsTo", Control_type::class, "control_type_id"],
         "insp_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
     ];
 
@@ -63,12 +64,18 @@ class Qaqc_insp_chklst_line extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getNcrs()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+    }
+
     public function getOwnerId()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    
+
     public function getManyLineParams()
     {
         return [

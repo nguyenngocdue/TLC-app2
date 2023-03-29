@@ -49,6 +49,7 @@ class JsonGetSet
                 return true;
             } else {
                 Toastr::warning("$filename saved failed. Maybe Permission is missing!", 'Failed');
+                dump(error_get_last());
                 return false;
             }
         } catch (\Throwable $th) {

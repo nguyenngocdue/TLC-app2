@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentController;
-use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
 use App\Models\Prod_order as ModelsProd_order;
 use App\Models\Sub_project;
 use App\Utils\Support\Report;
@@ -12,36 +13,57 @@ use App\Utils\Support\Report;
 class Prod_sequence_050 extends Report_ParentController
 
 {
-    use TraitReport;
+    use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
+    use TraitSQLDataSourceParamReport;
+
+
     protected $mode = '050';
-    protected  $sub_project_id = 21;
+    protected  $sub_project_id = 82;
+    protected  $prod_routing_id = 6;
+
     public function getSqlStr($modeParams)
     {
-        $sql = "SELECT sub_project_name ,po_id, po_name
-        ,ROUND(SUM(subquery.min_uom),2) AS total_min_uom
-        ,COUNT(subquery.min_uom) AS count_min_uom
-        ,ROUND(SUM(subquery.min_uom)/COUNT(subquery.min_uom), 2) AS avg_minutes_on_run
-        ,ROUND((SUM(subquery.min_uom)/COUNT(subquery.min_uom))/60, 2) AS avg_hours_on_run
-        ,ROUND(((SUM(subquery.min_uom)/COUNT(subquery.min_uom))/60)*8.5, 2) AS avg_day_on_run
-        FROM (
-            SELECT 
-                sp.name AS sub_project_name, po.id AS po_id, po.name AS po_name, ps.id prod_sequence_id
-                ,ROUND((SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) * ROUND(SUM(pr.worker_number),2))/ps.total_uom , 2) AS min_uom
-            FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl
-            WHERE 1 = 1";
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
+        // dd($modeParams);
+        $sql = "SELECT
+        sub_project_name
+        ,prod_sequence_id
+        ,prod_sequence_name
+        ,GROUP_CONCAT(distinct po_name SEPARATOR ', ') AS  po_name
+        ,COUNT(distinct po_name ) AS  total_order
+ 
+        ,format(SUM(total_uom),0) AS sum_total_uom
+        ,format(SUM(sum_man_mins_X_total_uom),0) AS total_uom_man_hours_total
+        ,format(SUM(sum_man_mins_X_total_uom) / SUM(total_uom) , 0) total_min
+        
+        ,format(ROUND((SUM(sum_man_mins_X_total_uom) / SUM(total_uom)),2),0)  AS total_min_sequence
+        ,format(ROUND(((SUM(sum_man_mins_X_total_uom)/60) / SUM(total_uom)),2),0) AS total_hours_sequence
+        ,ROUND((((SUM(sum_man_mins_X_total_uom)/60) / SUM(total_uom)))/8,2) AS total_day_sequence
+        FROM (SELECT 
+                sp.name AS sub_project_name 
+                  ,prl.id AS prod_sequence_id
+                ,prl.name AS prod_sequence_name
+                ,po.name po_name
+                ,ps.total_uom AS total_uom
+                  ,GROUP_CONCAT(distinct po.name SEPARATOR ', ') AS  po_names
+                ,(SUM(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))) * SUM(pr.worker_number)) *  ps.total_uom AS sum_man_mins_X_total_uom
+                    FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl
+                    WHERE 1 = 1";
+        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id =" . $modeParams['sub_project_id'];
         if (!isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id =" . $this->sub_project_id;
-        if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
-        $sql .= "\n AND ps.prod_order_id = po.id
-                AND ps.id = pr.prod_sequence_id
-                AND prl.id = ps.prod_routing_link_id
-                AND ps.total_uom IS NOT NULL
-            GROUP BY sub_project_name, po_id, prod_sequence_id
-        ) AS subquery
-        GROUP BY sub_project_name ,po_id";
+        if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = '{{prod_routing_id}}'";
+        if (!isset($modeParams['prod_routing_id'])) $sql .= "\n AND sp.id =" . $this->prod_routing_id;
+        // dump($modeParams);
+        $sql .= "\n     AND sp.id = po.sub_project_id
+                        AND po.id = ps.prod_order_id
+                        AND ps.prod_routing_link_id = prl.id
+                        AND pr.prod_sequence_id = ps.id
+                        AND ps.total_uom IS NOT NULL
+                   GROUP BY prod_sequence_id, prod_sequence_name, po_name, total_uom) AS sub1
+                   GROUP BY prod_sequence_id, prod_sequence_name;";
         return $sql;
     }
+
 
     public function getTableColumns($dataSource, $modeParams)
     {
@@ -55,38 +77,48 @@ class Prod_sequence_050 extends Report_ParentController
 
             ],
             [
-                "title" => "Prod Name",
-                "dataIndex" => "po_name",
+                "dataIndex" => "prod_sequence_name",
                 "align" => "center",
                 "width" => "300",
             ],
             [
-                "title" => "Total Tot Min UoM (Mins)",
-                "dataIndex" => "total_min_uom",
+                "dataIndex" => "total_order",
                 "align" => "center",
                 "width" => "300",
             ],
             [
-                "title" => "Count Min UoM",
-                "dataIndex" => "count_min_uom",
+                "title" => "Total UOM",
+                "dataIndex" => "sum_total_uom",
                 "align" => "center",
                 "width" => "300",
             ],
             [
-                "title" => "Average Mins (Mins)",
-                "dataIndex" => "avg_minutes_on_run",
+                "title" => "Total UoM Man-Hours",
+                "dataIndex" => "total_uom_man_hours_total",
                 "align" => "center",
                 "width" => "300",
             ],
             [
-                "title" => "Average Hours (Hours)",
-                "dataIndex" => "avg_hours_on_run",
+                "title" => "Min",
+                "dataIndex" => "total_min",
                 "align" => "center",
                 "width" => "300",
             ],
             [
-                "title" => "Average Days (Hours/Day)",
-                "dataIndex" => "avg_day_on_run",
+                "title" => "Average Min",
+                "dataIndex" => "total_min_sequence",
+                "align" => "center",
+                "width" => "300",
+            ],
+            [
+                "title" => "Average Hours",
+                "dataIndex" => "total_hours_sequence",
+                "align" => "center",
+                "width" => "300",
+            ],
+            [
+                "title" => "Average Days",
+                "dataIndex" => "total_day_sequence",
                 "align" => "center",
                 "width" => "300",
             ]
@@ -106,31 +138,64 @@ class Prod_sequence_050 extends Report_ParentController
                 'dataIndex' => 'sub_project_id',
             ],
             [
-                'title' => 'Production Order',
-                'dataIndex' => 'prod_order_id',
-                'allowClear' => true
-            ]
+                'title' => 'Prod Routing',
+                'dataIndex' => 'prod_routing_id',
+            ],
+
         ];
     }
 
     public function getDataForModeControl($dataSource)
     {
         $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        $prodOrders  = ['prod_order_id' =>  ModelsProd_order::get()->pluck('name', 'id')->toArray()];
-        return array_merge($subProjects, $prodOrders);
+        $prodRoutings = ['prod_routing_id' => array_column($this->getDataProdRouting(), 'prod_routing_name', 'prod_routing_id')];
+        return array_merge($subProjects, $prodRoutings);
     }
 
     protected function transformDataSource($dataSource, $modeParams)
     {
+        // dd($dataSource);
+        foreach ($dataSource as $key => $value) {
+            $value->total_order = (object)[
+                'value' => $value->total_order,
+                'cell_title' => $value->po_name
+            ];
+            $value->sum_total_uom = (object)[
+                'value' => $value->sum_total_uom,
+                'cell_title' => "(Total UOM) = " . "Σ(Total UOM * Total Man Hours)"
+            ];
+            $value->total_uom_man_hours_total = (object)[
+                'value' => $value->total_uom_man_hours_total,
+                'cell_title' => "(Total UOM) = " . "Σ(Total UOM Sequences)"
+            ];
+            $value->total_min = (object)[
+                'value' => $value->total_min,
+                'cell_title' => "(Total Min) = " . "Total UoM Man-Hours / Total UOM"
+            ];
+            $value->total_min_sequence = (object)[
+                'value' => $value->total_min_sequence,
+                'cell_title' => "(Average Min) = " . "(Total Hours / Total Order)*60"
+            ];
+            $value->total_hours_sequence = (object)[
+                'value' => $value->total_hours_sequence,
+                'cell_title' => "(Average Hours) = " . "Average Min / 60"
+            ];
+            $value->total_day_sequence = (object)[
+                'value' => $value->total_day_sequence,
+                'cell_title' => "(Average Days) = " . "Average Hours / 8"
+            ];
+        }
         return collect($dataSource);
     }
 
     protected function getDefaultValueModeParams($modeParams, $request)
     {
         $x = 'sub_project_id';
+        $y = 'prod_routing_id';
         $isNullModeParams = Report::isNullModeParams($modeParams);
         if ($isNullModeParams) {
             $modeParams[$x] = $this->sub_project_id;
+            $modeParams[$y] = $this->prod_routing_id;
         }
         return $modeParams;
     }

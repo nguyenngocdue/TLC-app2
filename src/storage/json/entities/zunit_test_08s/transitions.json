@@ -2,19 +2,29 @@
     "new": {
         "name": "new",
         "new": "",
-        "active": "true",
-        "approval_rejected": ""
+        "assigned": "true",
+        "rejected": "",
+        "closed": ""
     },
-    "active": {
-        "name": "active",
+    "assigned": {
+        "name": "assigned",
         "new": "",
-        "active": "",
-        "approval_rejected": ""
+        "assigned": "",
+        "rejected": "true",
+        "closed": "true"
     },
-    "approval_rejected": {
-        "name": "approval_rejected",
+    "rejected": {
+        "name": "rejected",
         "new": "",
-        "active": "",
-        "approval_rejected": ""
+        "assigned": "true",
+        "rejected": "",
+        "closed": ""
+    },
+    "closed": {
+        "name": "closed",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
     }
 }

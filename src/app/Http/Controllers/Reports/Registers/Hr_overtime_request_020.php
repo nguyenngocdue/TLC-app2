@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentController;
-use App\Http\Controllers\Reports\TraitReport;
+use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentPathInfo;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class Hr_overtime_request_020 extends Report_ParentController
 {
-    use TraitReport;
+    use TraitDynamicColumnsTableReport;
     protected $groupBy = 'ot_date';
     protected $mode = '020';
 
@@ -52,7 +52,8 @@ class Hr_overtime_request_020 extends Report_ParentController
 
     public function getTableColumns($dataSource, $modeParams)
     {
-        $personDataCol = [
+        dump($dataSource);
+        $firstDataCol = [
             [
                 "dataIndex" => "sub_project_name",
                 "align" => "center"
@@ -80,9 +81,8 @@ class Hr_overtime_request_020 extends Report_ParentController
             "dataIndex" => "break_time",
             "align" => "center"
         ]];
-        // dd($dataSource);
-        $sqlDataCol = $this->createTableColumns($dataSource, 'first_name', 'year_remaining_hours', $editDataCols);
-        $totalDataCol = array_merge($personDataCol, $sqlDataCol);
+        $sqlDataCol = $this->createTableColumns($dataSource, 'user_id', $editDataCols);
+        $totalDataCol = array_merge($firstDataCol, $sqlDataCol);
         return  $totalDataCol;
     }
     protected function getParamColumns()

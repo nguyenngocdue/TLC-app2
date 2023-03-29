@@ -20,8 +20,8 @@
                 <!-- Modal body -->
                 <div class='overflow-y-scroll p-4'>
                     <div class="grid grid-cols-12 px-4">
-                        <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}" />
-                        <x-controls.header-alert-validation :strProps="$props" />
+                        {{-- <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}" /> --}}
+                        {{-- <x-controls.header-alert-validation :strProps="$props" /> --}}
                         <x-renderer.item-render-props id="{{$id}}" :item="$item" :dataSource="$dataSource" action={{$action}} type={{$type}} modelPath={{$modelPath}} />
                     </div>
                 </div>

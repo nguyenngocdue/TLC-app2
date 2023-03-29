@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
-use App\Http\Controllers\Reports\TraitReport;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Models\Workplace;
 use Illuminate\Support\Facades\DB;
@@ -13,18 +13,19 @@ use Illuminate\Support\Str;
 
 class Hr_overtime_request_010 extends Report_ParentController
 {
-    use TraitReport;
+    use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
-    protected $groupBy = 'first_name';
+    protected $groupBy = 'name_render';
+    protected $groupByLength = 1;
     public function getSqlStr($modeParams)
     {
-        $sql = " SELECT tb2.*,LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month, user_id ORDER BY year_months) AS maximum_allowed_ot_hours_year
+        $sql = " SELECT tb3.*
+        FROM (SELECT tb2.*,LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month, user_id ORDER BY year_months) AS maximum_allowed_ot_hours_year
         FROM(SELECT 
         GROUP_CONCAT(distinct workplace SEPARATOR ', ') AS ot_workplace,
             user_category_name,
             user_category_desc,
-            MAX(first_name) AS first_name,
-            MAX(last_name) AS last_name,
+            MAX(name_render) AS name_render,
             MAX(user_id) AS user_id,
             MAX(user_workplace) AS user_workplace,
             employee_id,
@@ -33,7 +34,6 @@ class Hr_overtime_request_010 extends Report_ParentController
             SUM(total_overtime_hours) AS total_overtime_hours,
             (40 - SUM(total_overtime_hours)) AS remaining_allowed_ot_hours,
             years_month,
-            (200) AS maximum_allowed_ot_hours_year,
             ROW_NUMBER() OVER (PARTITION BY employee_id, years_month ORDER BY year_months) AS step_plus,
             SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employee_id, years_month ORDER BY year_months) AS cumulative_remaining_hours_year,
             (200 - SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employee_id, years_month ORDER BY year_months)) AS remaining_allowed_ot_hours_year
@@ -48,12 +48,10 @@ class Hr_overtime_request_010 extends Report_ParentController
                     SELECT 
                         us.workplace AS user_workplace_id,
                         otr.workplace_id AS ot_workplace_id,
-                        us.first_name AS first_name,
-                        us.last_name AS last_name,
+                        us.name AS name_render,
                         uscate.name AS user_category_name,
                         uscate.description AS user_category_desc,
                         otline.employeeid AS employee_id,
-                        us.full_name AS member_name,
                         SUBSTR(otline.ot_date,1,7) AS year_months,
                         SUBSTR(otline.ot_date,1,4) AS years_month,
                         SUM(otline.total_time) AS total_overtime_hours,
@@ -69,7 +67,6 @@ class Hr_overtime_request_010 extends Report_ParentController
                     AND uscate.id = us.category";
 
         if (isset($modeParams['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
-        if (isset($modeParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
         $sql .= "\nGROUP BY user_id, employee_id, year_months, ot_workplace_id, years_month
                 ) AS rgt_ot 
                 JOIN workplaces wp ON wp.id = rgt_ot.ot_workplace_id";
@@ -81,7 +78,10 @@ class Hr_overtime_request_010 extends Report_ParentController
         ) tbg
         GROUP BY year_months, years_month, employee_id, user_category_name, user_category_desc
         ) tb2
-        ORDER BY first_name, last_name, employee_id, year_months DESC";
+        ORDER BY name_render, employee_id, year_months DESC ) AS tb3
+        WHERE 1 = 1";
+        // dd($modeParams);
+        if (isset($modeParams['months'])) $sql .= "\n AND year_months = '{{months}}'";
         return $sql;
     }
 
@@ -107,11 +107,8 @@ class Hr_overtime_request_010 extends Report_ParentController
                 "align" => 'left'
             ],
             [
-                "dataIndex" => "first_name",
-                "align" => 'left'
-            ],
-            [
-                "dataIndex" => "last_name",
+                "title" => "Full Name",
+                "dataIndex" => "name_render",
                 "align" => 'left'
             ],
             [
@@ -229,42 +226,38 @@ class Hr_overtime_request_010 extends Report_ParentController
         return array_merge($workplaces, $months, $users);
     }
 
-    private function wrapValueInObjectWithCellColor($percent, $value, $href)
+    private function wrapValueInObjectWithCellColor($percent, $value)
     {
+        // dump($value);
         switch (true) {
             case $percent < 0:
                 return (object)[
                     'cell_class' => 'bg-red-600 ',
                     'value' => $value,
-                    'cell_href' => $href,
                     'cell_title' => $percent . '%',
                 ];
             case $percent > 0 && $percent < 25:
                 return (object)[
                     'cell_class' => 'bg-pink-400',
                     'value' => $value,
-                    'cell_href' => $href,
                     'cell_title' => $percent . '%',
                 ];
             case $percent >= 25 && $percent < 50:
                 return (object)[
                     'cell_class' => 'bg-orange-300',
                     'value' => $value,
-                    'cell_href' => $href,
                     'cell_title' => $percent . '%',
                 ];
             case $percent >= 50 && $percent < 75:
                 return (object)[
                     'cell_class' => 'bg-yellow-300',
                     'value' => $value,
-                    'cell_href' => $href,
                     'cell_title' => $percent . '%',
                 ];
             case $percent >= 75:
                 return (object)[
                     'cell_class' => 'bg-green-300',
                     'value' => $value,
-                    'cell_href' => $href,
                     'cell_title' => $percent . '%',
                 ];
         }
@@ -285,6 +278,7 @@ class Hr_overtime_request_010 extends Report_ParentController
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
+        // dd($dataSource);
         $type = Str::singular($this->getType());
         foreach ($dataSource as $key => $value) {
             // display name/description for total_overtime_hours
@@ -303,15 +297,19 @@ class Hr_overtime_request_010 extends Report_ParentController
             $percentOTMonth = $remainingAllowedOTHoursMonth / 40 * 100;
             $percentOTYear = $remainingAllowedOTHoursYear / 200 * 100;
 
-            // dump($percentOTMonth);
+            // dump($remainingAllowedOTHoursMonth);
             $param = '?user_id=' . $value->user_id . '&' . 'months=' . $value->year_months;
-            $hrefForward = route('dashboard') . "/reports/register-" . $type . "/020" . $param;
-            $reAllowedOTHoursMonth = $this->wrapValueInObjectWithCellColor($percentOTMonth, $remainingAllowedOTHoursMonth, $hrefForward);
-            $reAllowedOTHoursYear = $this->wrapValueInObjectWithCellColor($percentOTYear, $remainingAllowedOTHoursYear, $hrefForward);
+            $reAllowedOTHoursMonth = $this->wrapValueInObjectWithCellColor($percentOTMonth, $remainingAllowedOTHoursMonth);
+            $reAllowedOTHoursYear = $this->wrapValueInObjectWithCellColor($percentOTYear, $remainingAllowedOTHoursYear);
 
-            $dataSource[$key]->remaining_allowed_ot_hours = $reAllowedOTHoursMonth;
+            $dataSource[$key]->remaining_allowed_ot_hours = $reAllowedOTHoursMonth ?? $value->remaining_allowed_ot_hours;
             $dataSource[$key]->remaining_allowed_ot_hours_year = $reAllowedOTHoursYear;
-            // dd($dataSource);
+
+            $hrefForward = route('dashboard') . "/reports/register-" . $type . "/020" . $param;
+            $dataSource[$key]->total_overtime_hours = (object)[
+                'value' => $value->total_overtime_hours,
+                'cell_href' => $hrefForward
+            ];
         }
         return $dataSource;
     }

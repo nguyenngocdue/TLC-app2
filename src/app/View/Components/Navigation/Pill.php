@@ -34,8 +34,7 @@ class Pill extends Component
         $links[] = ['href' => route($singular . '_bic.index'), 'disabled' => strpos($as, '_bic.') !== false, 'title' => 'Ball In Court',];
         $links[] = ['href' => route($singular . '_atb.index'), 'disabled' => strpos($as, '_atb.') !== false, 'title' => 'Action Buttons',];
         $links[] = ['href' => route($singular . '_dfn.index'), 'disabled' => strpos($as, '_dfn.') !== false, 'title' => 'Definitions',];
-        $links[] = ['href' => route($singular . '_itm.index'), 'disabled' => strpos($as, '_itm.') !== false, 'title' => 'Intermediate Props',];
-        // $links[] = ['href' => route($singular . '_rtm.index'), 'disabled' => strpos($as, '_rtm.') !== false, 'title' => 'Realtime',];
+        $links[] = ['href' => route($singular . '_unt.index'), 'disabled' => strpos($as, '_unt.') !== false, 'title' => 'Unit Tests',];
 
         $links1 = [];
         $links1[] = ['href' => route($singular . '_cpb.index'), 'disabled' => strpos($as, '_cpb.') !== false, 'title' => 'Capabilities',];
@@ -47,8 +46,8 @@ class Pill extends Component
         $links1[] = ['href' => route($singular . '_rol-wl.index'), 'disabled' => strpos($as, '_rol-wl.') !== false, 'title' => 'Read-Only WhiteList',];
         $links1[] = ['href' => route($singular . '_rqr-wl.index'), 'disabled' => strpos($as, '_rqr-wl.') !== false, 'title' => 'Required WhiteList',];
         $links1[] = ['href' => route($singular . '_hdn-wl.index'), 'disabled' => strpos($as, '_hdn-wl.') !== false, 'title' => 'Hidden WhiteList',];
+        $links1[] = ['href' => route($singular . '_itm.index'), 'disabled' => strpos($as, '_itm.') !== false, 'title' => 'Intermediate Props',];
 
-        $links1[] = ['href' => route($singular . '_unt.index'), 'disabled' => strpos($as, '_unt.') !== false, 'title' => 'Unit Tests',];
 
 
         return view('components.navigation.pill')->with(compact('links', 'links1'));
