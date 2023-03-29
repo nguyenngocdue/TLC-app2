@@ -4,10 +4,10 @@ namespace App\Models;
 
 use App\BigThink\ModelExtended;
 
-class Zunit_test_07 extends ModelExtended
+class Zunit_test_06 extends ModelExtended
 {
     protected $fillable = ['id', 'name', 'parent_id', 'order_no'];
-    protected $table = "zunit_test_07s";
+    protected $table = "zunit_test_06s";
 
     public $eloquentParams = [
         "attachment_1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],

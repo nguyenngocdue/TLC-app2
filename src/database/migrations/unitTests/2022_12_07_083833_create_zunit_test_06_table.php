@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('zunit_test_07s', function (Blueprint $table) {
+        Schema::create('zunit_test_06s', function (Blueprint $table) {
             $table->id();
             $table->text('name')->nullable();
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('zunit_test_07s');
+        Schema::dropIfExists('zunit_test_06s');
     }
 };

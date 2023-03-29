@@ -58,7 +58,7 @@ class RelationshipRenderer2 extends Component
             'hr_overtime_request_lines' => ['showBtnAddFromAList' => 1],
         ],
 
-        'zunit_test_07s' => [
+        'zunit_test_06s' => [
             'prod_discipline_1s' => [],
         ],
 
