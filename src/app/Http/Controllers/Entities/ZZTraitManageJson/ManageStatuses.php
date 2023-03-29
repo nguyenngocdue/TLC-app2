@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\CurrentRoute;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
@@ -96,7 +97,12 @@ class ManageStatuses extends Manage_Parent
     {
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));
-            LibStatuses::move($direction, $this->type, $name);
+            $result = LibStatuses::move($direction, $this->type, $name);
+            if ($result) {
+                Toastr::success("Saved successfully!", 'Successfully');
+            } else {
+                Toastr::warning("Saved failed. Maybe Permission is missing!", 'Failed');
+            }
         }
         return back();
     }
