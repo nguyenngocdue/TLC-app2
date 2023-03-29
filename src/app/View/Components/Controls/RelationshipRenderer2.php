@@ -36,6 +36,15 @@ class RelationshipRenderer2 extends Component
                 'prod_discipline_id' => '',
             ],
         ],
+        'qaqc_insp_chklst_lines' => [
+            'qaqc_ncrs' => [
+                'parent_type' => 'entityParentType',
+                'parent_id' => 'entityParentId',
+                // 'project_id' => '',
+                // 'sub_project_id' => '',
+                // 'prod_discipline_id' => '',
+            ],
+        ],
     ];
 
     private $tablesInEditableMode = [
@@ -220,8 +229,13 @@ class RelationshipRenderer2 extends Component
                 // $tableName = $lineModelPath::getTableName();
                 $roColumns = $this->makeReadOnlyColumns($columns, $sp, $tableName, $this->noCss);
                 // dump($roColumns);
-                $itemOriginal = $this->item->getOriginal();
-                $href = $this->createHref($itemOriginal, $createSettings, $tableName);
+
+                //<<This is to avoid crash in print mode, as no item pass down
+                $href = '';
+                if ($this->item) {
+                    $itemOriginal = $this->item->getOriginal();
+                    $href = $this->createHref($itemOriginal, $createSettings, $tableName);
+                }
                 // dump($itemOriginal);
                 return view('components.controls.many-line-params', [
                     'table01ROName' => $this->table01Name . "RO",
