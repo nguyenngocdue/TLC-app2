@@ -12,10 +12,12 @@ class StatusVisibilityChecker extends Component
      * @return void
      */
     public function __construct(
-        private $props = null
+        private $propsOfMainPage = null,
+        private $allProps = null,
     ) {
         //
         // dump($this->props);
+        // dump($allProps);
     }
 
     /**
@@ -25,7 +27,9 @@ class StatusVisibilityChecker extends Component
      */
     public function render()
     {
-        if (!isset($this->props['_status'])) {
+        $statusless = !isset($this->allProps['_status']);
+        $statusIsVisible = isset($this->propsOfMainPage['_status']);
+        if (!$statusIsVisible && !$statusless) {
             $title = "Status field not found";
             $msg = "Please make sure [status] is visible and also hidden, otherwise this document will not be able to change the status.";
             return "<x-feedback.alert message='$msg' type='error' title='$title' />";

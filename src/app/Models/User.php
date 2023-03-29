@@ -102,15 +102,15 @@ class User extends Authenticatable implements LdapAuthenticatable
         "attachment" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
     ];
 
-    // public $oracyParams = [
-    //     "getOtTeams()" => ["getCheckedByField", User::class],
-    // ];
+    public $oracyParams = [
+        "getOtTeams()" => ["getCheckedByField", User_team_ot::class],
+    ];
 
-    // public function getOtTeams()
-    // {
-    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
+    public function getOtTeams()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
 
     protected $guard_name = 'web';
 

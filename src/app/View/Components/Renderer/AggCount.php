@@ -29,6 +29,7 @@ class AggCount extends Component
             $json = json_decode($data['slot']);
             if (!is_array($json)) $json = [$json];
             $count = sizeof($json);
+            if ($count == 0) return "";
             $unit = $this->rendererUnit ? $this->rendererUnit : "item";
             $str = Str::of($unit)->plural($count);
             $str = $count . " " . $str;
