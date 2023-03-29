@@ -11,13 +11,25 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_getParent": {
+        "name": "_getParent",
+        "column_name": "getParent",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_doc_id": {
         "name": "_doc_id",
         "column_name": "doc_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "",
+        "formula": "All_DocId",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
@@ -278,18 +290,6 @@
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getParent": {
-        "name": "_getParent",
-        "column_name": "getParent",
         "label": "",
         "validation": "",
         "validation_regex": "",

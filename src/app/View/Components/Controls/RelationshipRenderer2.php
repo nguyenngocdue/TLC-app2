@@ -24,19 +24,50 @@ class RelationshipRenderer2 extends Component
     private $table01Name;
     private $tableDebug = false;
 
+    private $entityId, $entityType;
+
+    private $tablesHaveCreateANewForm = [
+        'qaqc_mirs' => [
+            'qaqc_ncrs' => [
+                'parent_type' => 'entityParentType',
+                'parent_id' => 'entityParentId',
+                'project_id' => '',
+                'sub_project_id' => '',
+                'prod_discipline_id' => '',
+            ],
+        ],
+    ];
+
     private $tablesInEditableMode = [
-        'qaqc_ncrs' => ['qaqc_cars' => [],],
+        'qaqc_ncrs' => [
+            'qaqc_cars' => [],
+        ],
+        'hse_incident_reports' => [
+            'hse_corrective_actions' => [],
+        ],
+        'hr_overtime_requests' => [
+            'hr_overtime_request_lines' => ['showBtnAddFromAList' => 1],
+        ],
 
-        'hse_incident_reports' => ['hse_corrective_actions' => [],],
-        'hr_overtime_requests' => ['hr_overtime_request_lines' => ['showBtnAddFromAList' => 1],],
+        'zunit_test_07s' => [
+            'prod_discipline_1s' => [],
+        ],
 
-        'zunit_test_07s' => ['prod_discipline_1s' => [],],
-
-        'zunit_test_11s' => ['zunit_test_01s' => [],],
-        'zunit_test_12s' => ['zunit_test_02s' => [],],
-        'zunit_test_13s' => ['zunit_test_03s' => [],],
-        'zunit_test_15s' => ['zunit_test_05s' => [],],
-        'zunit_test_19s' => ['zunit_test_09s' => [],],
+        'zunit_test_11s' => [
+            'zunit_test_01s' => [],
+        ],
+        'zunit_test_12s' => [
+            'zunit_test_02s' => [],
+        ],
+        'zunit_test_13s' => [
+            'zunit_test_03s' => [],
+        ],
+        'zunit_test_15s' => [
+            'zunit_test_05s' => [],
+        ],
+        'zunit_test_19s' => [
+            'zunit_test_09s' => [],
+        ],
     ];
     /**
      * Create a new component instance.
@@ -49,9 +80,13 @@ class RelationshipRenderer2 extends Component
         private $colName,
         private $modelPath,
         private $noCss = false,
+        private $item = null,
     ) {
         $this->table01Name = "table" . str_pad(static::$table00Count++, 2, 0, STR_PAD_LEFT);
+        $this->entityId = CurrentRoute::getEntityId($this->type);
+        $this->entityType = Str::modelPathFrom($this->type);
         // dump($this->table01Name);
+        // dump($item);
     }
 
     private function isTableOrderable($row, $colName, $columns)
@@ -96,6 +131,28 @@ class RelationshipRenderer2 extends Component
         }
     }
 
+    private function createHref($itemOriginal, $createSettings, $tableName)
+    {
+        $createLink = route($tableName . ".create");
+        // dump($createLink);
+        $params = [];
+        foreach ($createSettings as $key => $valueType) {
+            $value = $itemOriginal[$key] ?? '';
+            switch ($valueType) {
+                case 'entityParentType':
+                    $value = $this->entityType;
+                    break;
+                case 'entityParentId':
+                    $value = $this->entityId;
+                    break;
+            }
+            $params[] = "$key=$value";
+        }
+        // dump($itemOriginal, $createSettings);
+        $result = $createLink . '?' . join("&", $params);
+        return $result;
+    }
+
     public function render()
     {
         $colName = $this->colName;
@@ -114,6 +171,9 @@ class RelationshipRenderer2 extends Component
         $tableName = $lineModelPath::getTableName();
         // dump($tableName);
         // dump($this->tablesInEditableMode[$this->type]);
+
+        $createANewForm = isset($this->tablesHaveCreateANewForm[$this->type]);
+        $createSettings = $createANewForm ? $this->tablesHaveCreateANewForm[$this->type][$tableName] : [];
 
         $editable = isset($this->tablesInEditableMode[$this->type]) && in_array($tableName, array_keys($this->tablesInEditableMode[$this->type]));
         $tableSettings = $editable ? $this->tablesInEditableMode[$this->type][$tableName] : [];
@@ -160,6 +220,9 @@ class RelationshipRenderer2 extends Component
                 // $tableName = $lineModelPath::getTableName();
                 $roColumns = $this->makeReadOnlyColumns($columns, $sp, $tableName, $this->noCss);
                 // dump($roColumns);
+                $itemOriginal = $this->item->getOriginal();
+                $href = $this->createHref($itemOriginal, $createSettings, $tableName);
+                // dump($itemOriginal);
                 return view('components.controls.many-line-params', [
                     'table01ROName' => $this->table01Name . "RO",
                     'readOnlyColumns' => $roColumns,
@@ -176,12 +239,20 @@ class RelationshipRenderer2 extends Component
                     'tableDebug' => $this->tableDebug ? true : false,
                     'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
 
-                    'entityId' => CurrentRoute::getEntityId($this->type),
-                    'entityType' => Str::modelPathFrom($this->type),
+                    'entityId' => $this->entityId,
+                    'entityType' => $this->entityType,
                     'userId' => CurrentUser::get()->id,
-                    'editable' => $editable,
+                    'entityProjectId' => $itemOriginal['project_id'] ?? null,
+                    'entitySubProjectId' => $itemOriginal['sub_project_id'] ?? null,
+
                     'noCss' => $this->noCss,
+
+                    'editable' => $editable,
                     'tableSettings' => $tableSettings,
+
+                    'createANewForm' => $createANewForm,
+                    // 'createSettings' => $createSettings,
+                    'href' => $href,
                 ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";

@@ -44,9 +44,13 @@ trait HasCheckbox
         $ids = $result0->pluck('term_id');
         $modelPaths = $result0->pluck('term_type')->unique();
         foreach ($modelPaths as $modelPath) {
-            $model = App::make($modelPath);
-            $result1[$modelPath] = $model::whereIn('id', $ids)->get();
-            $resultInverted[$modelPath] = Arr::keyBy($result1[$modelPath], 'id');
+            if (class_exists($modelPath)) {
+                $model = App::make($modelPath);
+                $result1[$modelPath] = $model::whereIn('id', $ids)->get();
+                $resultInverted[$modelPath] = Arr::keyBy($result1[$modelPath], 'id');
+            } else {
+                dump("Class [$modelPath] does not exist, please double check [term_type] in [many_to_many] table.");
+            }
         }
 
         $result = [];
@@ -64,7 +68,7 @@ trait HasCheckbox
                 ];
                 $result[] = $origin;
             } else {
-                dump("ID #{$item->term_id} not found in $modelPath (HasCheckbox)");
+                dump("ID #{$item->term_id} not found in [$modelPath] (HasCheckbox)");
             }
         }
         return new Collection($result);

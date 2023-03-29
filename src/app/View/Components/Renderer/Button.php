@@ -27,6 +27,8 @@ class Button extends Component
         private $accesskey = '',
         private $block = false,
         private $class = '',
+        private $href = null,
+        private $target = '_self',
     ) {
         // dd($this->type);
     }
@@ -113,6 +115,8 @@ class Button extends Component
             'click' => $this->click,
             'keydown' => $this->keydown,
             'accesskey' => $this->accesskey,
+            'href' => $this->href,
+            'target' => $this->target,
         ]);
     }
 }
