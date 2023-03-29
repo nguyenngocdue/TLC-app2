@@ -11,6 +11,18 @@
         "verification_rejected": "true",
         "closed": "true"
     },
+    "_getParent": {
+        "name": "_getParent",
+        "column_name": "getParent",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "closed": ""
+    },
     "_doc_id": {
         "name": "_doc_id",
         "column_name": "doc_id",
@@ -287,18 +299,6 @@
         "verification_rejected": "",
         "closed": ""
     },
-    "_getParent": {
-        "name": "_getParent",
-        "column_name": "getParent",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "closed": ""
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -314,14 +314,14 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "closed": ""
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
     },
     "_created_at": {
         "name": "_created_at",
