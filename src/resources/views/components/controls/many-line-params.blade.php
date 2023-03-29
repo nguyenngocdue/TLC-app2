@@ -3,7 +3,7 @@
 @if(!$editable)
 <x-renderer.table tableName="{{$table01ROName}}" :columns="$readOnlyColumns" :dataSource="$dataSource" showNo="{{$showNo?1:0}}" footer="{{$tableFooter}}" noCss="{{$noCss}}" />
 @if($createANewForm)
-<x-renderer.button type='success'>Create a new {{Str::singular($tableName)}}</x-renderer.button>
+<x-renderer.button type='success' href='{!!$href!!}' >Create a new {{Str::singular($tableName)}}</x-renderer.button>
 @endif
 @else
 <x-renderer.table tableName="{{$table01Name}}" :columns="$editableColumns" :dataHeader="$dataSource2ndThead" :dataSource="$dataSourceWithOld" showNo="{{$showNo?1:0}}" showNoR="{{$showNoR?1:0}}" footer="{{$tableFooter}}" maxH={{false}} tableDebug={{$tableDebug}} />

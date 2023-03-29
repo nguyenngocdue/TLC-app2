@@ -1,2 +1,4 @@
+@if($href) <a href="{{$href}}" target="{{$target}}"> @endif
 <button type="{{$htmlType}}" id="{{$id}}" name="{{$name}}" value="{{$value}}" title="{{$title}}" onclick="{!! $onClick !!}" class="{{$className}}" @click="{!! $click !!}" @keydown.escape="{!! $keydown !!}" accesskey="{{$accesskey}}">{{$slot}}</button> 
 {{-- IMPORTANT: DO NOT ENTER between <button> and innerHTML, otherwise button.firstChild will be wrong, icon of trash in Editable Table will not change --}}
+@if($href) </a> @endif    

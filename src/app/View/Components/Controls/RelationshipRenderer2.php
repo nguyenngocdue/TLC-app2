@@ -24,9 +24,17 @@ class RelationshipRenderer2 extends Component
     private $table01Name;
     private $tableDebug = false;
 
+    private $entityId, $entityType;
+
     private $tablesHaveCreateANewForm = [
         'qaqc_mirs' => [
-            'qaqc_ncrs' => [],
+            'qaqc_ncrs' => [
+                'parent_type' => 'entityParentType',
+                'parent_id' => 'entityParentId',
+                'project_id' => '',
+                'sub_project_id' => '',
+                'prod_discipline_id' => '',
+            ],
         ],
     ];
 
@@ -75,6 +83,8 @@ class RelationshipRenderer2 extends Component
         private $item = null,
     ) {
         $this->table01Name = "table" . str_pad(static::$table00Count++, 2, 0, STR_PAD_LEFT);
+        $this->entityId = CurrentRoute::getEntityId($this->type);
+        $this->entityType = Str::modelPathFrom($this->type);
         // dump($this->table01Name);
         // dump($item);
     }
@@ -121,6 +131,28 @@ class RelationshipRenderer2 extends Component
         }
     }
 
+    private function createHref($itemOriginal, $createSettings, $tableName)
+    {
+        $createLink = route($tableName . ".create");
+        // dump($createLink);
+        $params = [];
+        foreach ($createSettings as $key => $valueType) {
+            $value = $itemOriginal[$key] ?? '';
+            switch ($valueType) {
+                case 'entityParentType':
+                    $value = $this->entityType;
+                    break;
+                case 'entityParentId':
+                    $value = $this->entityId;
+                    break;
+            }
+            $params[] = "$key=$value";
+        }
+        // dump($itemOriginal, $createSettings);
+        $result = $createLink . '?' . join("&", $params);
+        return $result;
+    }
+
     public function render()
     {
         $colName = $this->colName;
@@ -141,6 +173,8 @@ class RelationshipRenderer2 extends Component
         // dump($this->tablesInEditableMode[$this->type]);
 
         $createANewForm = isset($this->tablesHaveCreateANewForm[$this->type]);
+        $createSettings = $createANewForm ? $this->tablesHaveCreateANewForm[$this->type][$tableName] : [];
+
         $editable = isset($this->tablesInEditableMode[$this->type]) && in_array($tableName, array_keys($this->tablesInEditableMode[$this->type]));
         $tableSettings = $editable ? $this->tablesInEditableMode[$this->type][$tableName] : [];
         $showAll = ($renderer_edit === "many_icons" || ($renderer_edit === "many_lines" && $editable));
@@ -187,6 +221,7 @@ class RelationshipRenderer2 extends Component
                 $roColumns = $this->makeReadOnlyColumns($columns, $sp, $tableName, $this->noCss);
                 // dump($roColumns);
                 $itemOriginal = $this->item->getOriginal();
+                $href = $this->createHref($itemOriginal, $createSettings, $tableName);
                 // dump($itemOriginal);
                 return view('components.controls.many-line-params', [
                     'table01ROName' => $this->table01Name . "RO",
@@ -204,16 +239,20 @@ class RelationshipRenderer2 extends Component
                     'tableDebug' => $this->tableDebug ? true : false,
                     'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
 
-                    'entityId' => CurrentRoute::getEntityId($this->type),
-                    'entityType' => Str::modelPathFrom($this->type),
+                    'entityId' => $this->entityId,
+                    'entityType' => $this->entityType,
                     'userId' => CurrentUser::get()->id,
                     'entityProjectId' => $itemOriginal['project_id'] ?? null,
                     'entitySubProjectId' => $itemOriginal['sub_project_id'] ?? null,
 
-                    'editable' => $editable,
-                    'createANewForm' => $createANewForm,
                     'noCss' => $this->noCss,
+
+                    'editable' => $editable,
                     'tableSettings' => $tableSettings,
+
+                    'createANewForm' => $createANewForm,
+                    // 'createSettings' => $createSettings,
+                    'href' => $href,
                 ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
