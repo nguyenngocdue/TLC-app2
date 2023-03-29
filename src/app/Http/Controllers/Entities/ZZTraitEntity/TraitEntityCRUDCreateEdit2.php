@@ -65,10 +65,10 @@ trait TraitEntityCRUDCreateEdit2
 		$model = (new ($this->data))::findOrFail($id);
 		switch (true) {
 			case $this->checkPermissionEdit($permissions[0]):
-				if (!Gate::allows('edit', $model) || !Gate::allows('edit-others', $model)) abort(403);
+				if (!Gate::allows('edit', $model) || !Gate::allows('edit-others', $model)) abort(403, "Permission denied edit");
 				break;
 			case $this->checkPermissionEdit($permissions[1]):
-				if (!Gate::allows('edit-others', $model)) abort(403);
+				if (!Gate::allows('edit-others', $model)) abort(403, "Permission denied edit-others");
 				break;
 			default:
 				break;

@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\CreateNewDocumentEvent;
+use App\Models\Logger;
 use App\Models\User;
 use App\Notifications\CreateNewNotification;
 use App\Utils\Constant;
@@ -33,6 +34,7 @@ class SendCreateNewDocumentNotificationListener implements ShouldQueue
     {
         $createNotification = [];
         $currentValue = $event->{'currentValue'};
+        $classType = $event->{'classType'};
         // dd($currentValue['owner_id']);
         if (!$currentValue['status']) {
             Toastr::warning('Send Notifications Warning!', 'Please check columns status or DefaultValues.json doest not exist');
@@ -51,11 +53,22 @@ class SendCreateNewDocumentNotificationListener implements ShouldQueue
                     break;
             }
         }
-        $this->checkAndSendNotification($createNotification, $currentValue, 'created');
+        $this->checkAndSendNotification($createNotification, $currentValue, 'created', $classType);
     }
-    private function checkAndSendNotification($array, $currentValue, $type)
+    private function checkAndSendNotification($array, $currentValue, $type, $classType)
     {
         $user = User::find(array_shift($array));
+        $this->insertLogger($currentValue, $classType);
         Notification::send($user, new CreateNewNotification(['type' => $type, 'currentValue' => $currentValue]));
+    }
+    private function insertLogger($currentValue, $classType)
+    {
+        Logger::create([
+            'loggable_type' => $classType,
+            'loggable_id' => $currentValue['id'],
+            'type' => 'created_entity',
+            'key' => 'create',
+            'user_id' => $currentValue['owner_id'],
+        ]);
     }
 }

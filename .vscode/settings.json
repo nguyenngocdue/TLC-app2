@@ -16,6 +16,7 @@
     "endsection",
     "idless",
     "Laravel",
+    "loggable",
     "mediable",
     "Middlewares",
     "migrationrelationship",

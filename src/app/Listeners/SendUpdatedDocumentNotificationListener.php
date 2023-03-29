@@ -2,9 +2,11 @@
 
 namespace App\Listeners;
 
+use App\Events\BroadcastEvents\BroadcastNotificationEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Mail\SendMailChangeStatus;
+use App\Models\Logger;
 use App\Models\User;
 use App\Notifications\UpdatedNotification;
 use App\Utils\Constant;
@@ -46,11 +48,13 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         $changStatusMonitors = [];
         $previousValue = $event->{'previousValue'};
         $currentValue = $event->{'currentValue'};
+        $classType = $event->{'classType'};
         if (!$currentValue['status']) {
             dump('Status NOT FOUND.');
             dump('Send Mail And Notifications will not work.');
             return;
         }
+        $this->insertLogger($previousValue, $currentValue, auth()->user()->id, $classType);
         $listAssignees = JsonControls::getAssignees();
         $listMonitors = JsonControls::getMonitors();
         foreach ($currentValue as $key => $value) {
@@ -147,6 +151,20 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
             }
         }
     }
+    private function insertLogger($previousValue, $currentValue, $userId, $classType)
+    {
+        if ($previousValue['status'] !== $currentValue['status']) {
+            Logger::create([
+                'loggable_type' => $classType,
+                'loggable_id' => $currentValue['id'],
+                'type' => 'updated_field',
+                'key' => 'entity_status',
+                'old_value' => $previousValue['status'],
+                'new_value' => $currentValue['status'],
+                'user_id' => $userId,
+            ]);
+        }
+    }
     private function sendNotificationAndMail($user, $type, $key, $previousValue, $currentValue)
     {
         Notification::send($user, new UpdatedNotification(
@@ -157,6 +175,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
                 'previousValue' => $previousValue,
             ]
         ));
+        broadcast(new BroadcastNotificationEvent(auth()->user()));
         $isDefinitionNew = $this->isDefinitionNew($currentValue);
         if (!$isDefinitionNew) {
             $this->sendMail($user, $type, $key, $previousValue, $currentValue);

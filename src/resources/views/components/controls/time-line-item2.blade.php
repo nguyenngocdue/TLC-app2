@@ -1,0 +1,33 @@
+
+@switch($key)
+@case('create')
+    <div class="border p-1 mt-2 flex justify-center">
+        <x-renderer.avatar-user>{!!$user!!}</x-renderer.avatar-user>
+        <div class="w-full flex justify-center">
+            <span class="text-sm italic">Created</span>
+            <div title="{{$timeFull}}" class="text-xs italic md:mb-3 ml-2">({{$timeAgo}})</div>
+        </div>
+    </div>
+    @break
+@case('entity_status')
+    <div class="flex items-center relative">
+        <div class="hidden md:block w-full">
+            <x-renderer.avatar-user timeLine="true">{!!$user!!}</x-renderer.avatar-user>
+        </div>
+        <div class="border-r-2 border-gray-200 absolute h-full left-40 top-2 z-10">
+            <i class="fa-sharp fa-solid fa-circle-dot -top-1 -left-[7px] absolute text-blue-600"></i>
+        </div>
+        <div class="ml-24 w-full">
+                <div title="{{$timeFull}}" class="text-sm italic md:mb-3">({{$timeAgo}})</div>
+                <div class="flex items-center p-1 border border-gray-300 rounded bg-gray-100 mb-4">
+                    <p class="w-full flex">
+                        <x-renderer.status>{{$statusOld}}</x-renderer.status>
+                        <i>=></i>
+                        <x-renderer.status>{{$statusNew}}</x-renderer.status>
+                    </p>
+                </div>       
+        </div>
+    </div>
+    @break
+@default
+@endswitch
