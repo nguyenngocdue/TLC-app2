@@ -6,6 +6,7 @@ $editType = Str::plural($type);
 $id = $action === "edit" ? $values->id : "";
 $status = $status ?? $values->status ?? null;
 $ownerId = $values->owner_id ?? null;
+$allProps = $superProps['props'];
 [$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$isCheckColumnStatus,$ownerId);
 $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
 @endphp
@@ -24,7 +25,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
 </script>
 <div class="px-4">
     <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}" />
-    <x-controls.header-alert-validation :strProps="$props" />
+    <x-controls.header-alert-validation :strProps="$allProps" />
     <x-renderer.test-status-and-accessible type={{$type}} renderId={{$id}} status={{$status}} action={{$action}} :dryRunToken="$dryRunToken" :statuses="$statuses" />
     <x-controls.status-visibility-checker :props="$propsOfMainPage"/>
     <form class="w-full mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
