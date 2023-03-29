@@ -11,6 +11,10 @@ class FieldSeeder extends Seeder
     {
         return Field::where('name', $fieldName)->firstOrFail()->id;
     }
+    public static function getNameFromFieldId($fieldId)
+    {
+        return Field::where('id', $fieldId)->firstOrFail()->name;
+    }
 
     private static function dataSource()
     {

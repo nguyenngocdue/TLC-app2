@@ -2,9 +2,11 @@
 
 namespace App\View\Components\Controls;
 
+use App\Models\Comment;
 use App\Models\User;
 use App\Utils\Constant;
 use Carbon\Carbon;
+use Database\Seeders\FieldSeeder;
 use Illuminate\View\Component;
 
 class TimeLineItem2 extends Component
@@ -14,7 +16,7 @@ class TimeLineItem2 extends Component
      *
      * @return void
      */
-    public function __construct(private $dataSource)
+    public function __construct(private $dataSource, private $props)
     {
         //
     }
@@ -27,24 +29,34 @@ class TimeLineItem2 extends Component
     public function render()
     {
         $dataSource = $this->dataSource;
-        $statusOld = $dataSource->old_value;
-        $statusNew = $dataSource->new_value;
-        $userId = $dataSource->user_id;
-        $user = User::findOrFail($userId);
-        $lastName = $user->last_name;
-        $positionRendered = $user->position_rendered;
-        $nameRender = $lastName . '(' . $positionRendered . ')';
+        if (isset($dataSource->content)) {
+            $field = FieldSeeder::getNameFromFieldId($dataSource->category);
+            $contentComment = $dataSource->content;
+            $nameComment = $this->props['_' . $field]['label'] ?? '';
+            $userComment = User::findOrFail($dataSource->owner_id);
+        } else {
+            $statusOld = $dataSource->old_value;
+            $statusNew = $dataSource->new_value;
+            $userId = $dataSource->user_id;
+            $user = User::findOrFail($userId);
+            $lastName = $user->last_name;
+            $positionRendered = $user->position_rendered;
+            $nameRender = $lastName . '(' . $positionRendered . ')';
+        }
         $time = $dataSource->created_at;
         $timeAgo = Carbon::createFromTimestamp(strtotime($time))->diffForHumans();
         $timeFull = Carbon::createFromFormat(Constant::FORMAT_DATETIME_MYSQL, $time)->format(Constant::FORMAT_DATETIME_ASIAN);
         return view('components.controls.time-line-item2', [
-            'statusOld' => $statusOld,
-            'statusNew' => $statusNew,
-            'timeAgo' => $timeAgo,
-            'timeFull' => $timeFull,
-            'user' => $user,
-            'nameRender' => $nameRender,
-            'key' => $dataSource->key
+            'statusOld' => $statusOld ?? '',
+            'statusNew' => $statusNew ?? '',
+            'timeAgo' => $timeAgo ?? '',
+            'timeFull' => $timeFull ?? '',
+            'user' => $user ?? '',
+            'nameRender' => $nameRender ?? '',
+            'key' => $dataSource->key ?? 'comment',
+            'userComment' => $userComment ?? '',
+            'nameComment' => $nameComment ?? '',
+            'contentComment' => $contentComment ?? '',
         ]);
     }
 }

@@ -8,7 +8,6 @@ $status = $status ?? $values->status ?? null;
 $ownerId = $values->owner_id ?? null;
 $allProps = $superProps['props'];
 [$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$isCheckColumnStatus,$ownerId);
-dd($actionButtons);
 $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
 @endphp
 @section('topTitle', $topTitle)
@@ -85,7 +84,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
 <div class="px-4">
     <div class="w-full p-2 bg-white rounded-lg  dark:bg-gray-800">
         <x-renderer.card title="Time line">
-            <x-controls.time-line2 id={{$id}} modelPath={{$modelPath}} />
+            <x-controls.time-line2 id={{$id}} modelPath={{$modelPath}} :props="$props" />
         </x-renderer.card>
     </div>
     

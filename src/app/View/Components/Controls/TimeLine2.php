@@ -12,7 +12,7 @@ class TimeLine2 extends Component
      *
      * @return void
      */
-    public function __construct(private $id, private $modelPath)
+    public function __construct(private $id, private $modelPath, private $props)
     {
         //
     }
@@ -29,6 +29,7 @@ class TimeLine2 extends Component
         $merge = $loggers->merge($comments);
         return view('components.controls.time-line2', [
             'dataSource' => $merge,
+            'props' => $this->props,
         ]);
     }
     private function queryMorph($table, $type, $valueType, $typeId, $valueId, $sort = 'desc')
