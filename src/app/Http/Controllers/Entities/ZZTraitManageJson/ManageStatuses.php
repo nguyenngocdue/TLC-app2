@@ -97,10 +97,12 @@ class ManageStatuses extends Manage_Parent
     {
         if ($request->input('button')) {
             [$direction, $name] = explode(",", $request->input('button'));
-            $result = LibStatuses::move($direction, $this->type, $name);
-            if ($result) {
-                Toastr::success("Saved successfully!", 'Successfully');
-            } else {
+            try {
+                $result = LibStatuses::move($direction, $this->type, $name);
+                if (!$result) {
+                    dump(error_get_last());
+                }
+            } catch (\Throwable $th) {
                 Toastr::warning("Saved failed. Maybe Permission is missing!", 'Failed');
             }
         }
