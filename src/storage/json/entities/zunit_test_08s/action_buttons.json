@@ -1,0 +1,22 @@
+{
+    "new": {
+        "name": "new",
+        "label": "New",
+        "tooltip": "Create New"
+    },
+    "assigned": {
+        "name": "assigned",
+        "label": "Assigned",
+        "tooltip": "Request for Approval"
+    },
+    "rejected": {
+        "name": "rejected",
+        "label": "Rejected",
+        "tooltip": "Reject Assignment"
+    },
+    "closed": {
+        "name": "closed",
+        "label": "Closed",
+        "tooltip": "Close"
+    }
+}

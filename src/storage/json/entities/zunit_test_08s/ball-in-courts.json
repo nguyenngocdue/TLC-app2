@@ -1,0 +1,22 @@
+{
+    "new": {
+        "name": "new",
+        "ball-in-court-assignee": "creator",
+        "ball-in-court-monitors": ""
+    },
+    "assigned": {
+        "name": "assigned",
+        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-monitors": ""
+    },
+    "rejected": {
+        "name": "rejected",
+        "ball-in-court-assignee": "creator",
+        "ball-in-court-monitors": ""
+    },
+    "closed": {
+        "name": "closed",
+        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-monitors": ""
+    }
+}

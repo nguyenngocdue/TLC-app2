@@ -863,7 +863,7 @@
         "hidden": "true",
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "UT08 (Status and Workflow)",
+        "title": "UT08 (Status and Workflow - without Approval Tree)",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
