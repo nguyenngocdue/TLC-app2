@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 use App\Events\CreateNewDocumentEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Utils\Support\JsonControls;
+use Brian2694\Toastr\Facades\Toastr;
 
 trait TraitSendNotificationAndMail
 {
@@ -16,7 +17,7 @@ trait TraitSendNotificationAndMail
             try {
                 event(new CreateNewDocumentEvent($currentValue = $this->addEntityType($fields, 'entity_type', $type)));
             } catch (\Throwable $th) {
-                dump($th);
+                Toastr::error($th->getFile() . " " . $th->getLine(), $th->getMessage());
             }
         }
     }
@@ -29,7 +30,7 @@ trait TraitSendNotificationAndMail
                     $currentValue = $this->addEntityType($fields, 'entity_type', $type)
                 ));
             } catch (\Throwable $th) {
-                dump($th);
+                Toastr::error($th->getFile() . " " . $th->getLine(), $th->getMessage());
             }
         }
     }
