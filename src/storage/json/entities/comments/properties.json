@@ -70,5 +70,14 @@
         "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "field_id": "27",
+        "field_name": "comment_rejected_reason",
+        "allowed_change_owner": "",
+        "allowed_attachment": "",
+        "allowed_delete": "",
+        "force_comment_once": ""
     }
 }

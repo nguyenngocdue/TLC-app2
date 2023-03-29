@@ -67,8 +67,8 @@
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
         "new": "",
-        "assigned": "true",
-        "rejected": "true",
+        "assigned": "",
+        "rejected": "",
         "closed": ""
     },
     "_owner_id": {

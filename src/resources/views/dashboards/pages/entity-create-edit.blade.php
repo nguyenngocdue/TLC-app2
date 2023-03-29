@@ -8,7 +8,6 @@ $status = $status ?? $values->status ?? null;
 $ownerId = $values->owner_id ?? null;
 $allProps = $superProps['props'];
 [$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$isCheckColumnStatus,$ownerId);
-dd($actionButtons);
 $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
 @endphp
 @section('topTitle', $topTitle)

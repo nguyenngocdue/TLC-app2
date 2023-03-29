@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\BigThink\HasAttachments;
+use App\BigThink\HasCheckbox;
 use App\BigThink\HasStatus;
 use App\BigThink\TraitMenuTitle;
 use App\BigThink\TraitMetaForChart;
@@ -23,17 +24,21 @@ class User extends Authenticatable implements LdapAuthenticatable
 {
     use Notifiable;
     use AuthenticatesWithLdap;
+
     use HasLdapUser;
     use HasFactory;
     use HasRoleSets;
+    use HasApiTokens;
+
     use Searchable;
     use CheckPermissionEntities;
-    use HasApiTokens;
     use TraitMetaForChart;
     use TraitMenuTitle;
     use TraitMorphManyByFieldName;
+
     use HasAttachments;
     use HasStatus;
+    use HasCheckbox;
 
     /**
      * The attributes that are mass assignable.
@@ -96,7 +101,17 @@ class User extends Authenticatable implements LdapAuthenticatable
         //Otherwise in User screen, the thumbnail will lost its value
         "attachment" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
     ];
-    public $oracyParams = [];
+
+    // public $oracyParams = [
+    //     "getOtTeams()" => ["getCheckedByField", User::class],
+    // ];
+
+    // public function getOtTeams()
+    // {
+    //     $p = $this->oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    // }
+
     protected $guard_name = 'web';
 
     public function getRoleSet()
@@ -178,7 +193,6 @@ class User extends Authenticatable implements LdapAuthenticatable
     }
     public function getManyIconParams()
     {
-
         return [
             'id' => 'id',
             'title' => 'name',
