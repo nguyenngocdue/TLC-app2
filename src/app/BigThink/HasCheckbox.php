@@ -39,15 +39,16 @@ trait HasCheckbox
     {
         // dd($this->id);
         $result0 = DB::table('many_to_many')->where('doc_type', $this::class)->where('doc_id', $this->id)->get();
-        if ($result0->count() == 0) return new Collection([]);
+        $result1 = DB::table('many_to_many')->where('term_type', $this::class)->where('term_id', $this->id)->get();
+        if ($result0->count() == 0 && $result1->count() == 0) return new Collection([]);
 
-        $ids = $result0->pluck('term_id');
-        $modelPaths = $result0->pluck('term_type')->unique();
-        foreach ($modelPaths as $modelPath) {
+        $ids0 = $result0->pluck('term_id');
+        $modelPaths0 = $result0->pluck('term_type')->unique();
+        foreach ($modelPaths0 as $modelPath) {
             if (class_exists($modelPath)) {
                 $model = App::make($modelPath);
-                $result1[$modelPath] = $model::whereIn('id', $ids)->get();
-                $resultInverted[$modelPath] = Arr::keyBy($result1[$modelPath], 'id');
+                $tmp[$modelPath] = $model::whereIn('id', $ids0)->get();
+                $resultInverted0[$modelPath] = Arr::keyBy($tmp[$modelPath], 'id');
             } else {
                 dump("Class [$modelPath] does not exist, please double check [term_type] in [many_to_many] table.");
             }
@@ -58,8 +59,8 @@ trait HasCheckbox
             // error_log($item->term_id);
             // dd($item);
             $modelPath = $item->term_type;
-            if (isset($resultInverted[$modelPath][$item->term_id])) {
-                $objToBeCloned = $resultInverted[$modelPath][$item->term_id];
+            if (isset($resultInverted0[$modelPath][$item->term_id])) {
+                $objToBeCloned = $resultInverted0[$modelPath][$item->term_id];
                 $origin = clone $objToBeCloned;
                 $origin->field_id = $item->field_id;
                 $origin->pivot = [
@@ -71,6 +72,39 @@ trait HasCheckbox
                 dump("ID #{$item->term_id} not found in [$modelPath] (HasCheckbox)");
             }
         }
+
+        //***REVERSE DIRECTION FROM HERE */
+        $ids1 = $result1->pluck('doc_id');
+        $modelPaths1 = $result1->pluck('doc_type')->unique();
+        foreach ($modelPaths1 as $modelPath) {
+            if (class_exists($modelPath)) {
+                $model = App::make($modelPath);
+                $tmp[$modelPath] = $model::whereIn('id', $ids1)->get();
+                $resultInverted1[$modelPath] = Arr::keyBy($tmp[$modelPath], 'id');
+            } else {
+                dump("Class [$modelPath] does not exist, please double check [doc_type] in [many_to_many] table.");
+            }
+        }
+
+        foreach ($result1 as $item) {
+            // error_log($item->term_id);
+            // dd($item);
+            $modelPath = $item->doc_type;
+            if (isset($resultInverted1[$modelPath][$item->doc_id])) {
+                $objToBeCloned = $resultInverted1[$modelPath][$item->doc_id];
+                $origin = clone $objToBeCloned;
+                $origin->field_id = $item->field_id;
+                $origin->pivot = [
+                    'created_at' => $item->created_at,
+                    'json' => json_decode($item->json),
+                ];
+                $result[] = $origin;
+            } else {
+                dump("ID #{$item->doc_id} not found in [$modelPath] (HasCheckbox)");
+            }
+        }
+        //***REVERSE DIRECTION TO HERE */
+
         return new Collection($result);
     }
 
@@ -83,9 +117,9 @@ trait HasCheckbox
         return $result;
     }
 
-    //Zunit_test_1::find(1)->attachCheck(14, "App\\Models\\Workplace", [1,2,3])
-    //Zunit_test_1::find(1)->attachCheck(15, "App\\Models\\Workplace", [4,5=> ["xyz" => 456],6])
-    //Zunit_test_1::find(1)->attachCheck(15, "App\\Models\\Workplace", [7=> ["xyz" => 789],8,9])
+    //Zunit_test_01::find(1)->attachCheck(20, "App\\Models\\Workplace", [1,2,3])
+    //Zunit_test_01::find(1)->attachCheck(20, "App\\Models\\Workplace", [4,5=> ["xyz" => 456],6])
+    //Zunit_test_01::find(1)->attachCheck(20, "App\\Models\\Workplace", [7=> ["xyz" => 789],8,9])
     function attachCheck($fieldNameOrId, $termModelPath, array $ids)
     {
         $fieldId = $this->guessFieldId($fieldNameOrId);
@@ -96,9 +130,9 @@ trait HasCheckbox
         return $count;
     }
 
-    //Zunit_test_1::find(1)->detachCheck(14, "App\\Models\\Workplace", [1,2,3])
-    //Zunit_test_1::find(1)->detachCheck(15, "App\\Models\\Workplace", [4,5=> ["xyz" => 456],6])
-    //Zunit_test_1::find(1)->detachCheck(15, "App\\Models\\Workplace", [7=> ["xyz" => 789],8,9])
+    //Zunit_test_01::find(1)->detachCheck(20, "App\\Models\\Workplace", [1,2,3])
+    //Zunit_test_01::find(1)->detachCheck(20, "App\\Models\\Workplace", [4,5=> ["xyz" => 456],6])
+    //Zunit_test_01::find(1)->detachCheck(20, "App\\Models\\Workplace", [7=> ["xyz" => 789],8,9])
     function detachCheck($fieldNameOrId, $termModelPath, array $ids)
     {
         $fieldId = $this->guessFieldId($fieldNameOrId);
@@ -118,13 +152,13 @@ trait HasCheckbox
         return $count;
     }
 
-    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [1,2,3=>["def"=>345]])
-    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [1,2,4=>["def"=>465]])
-    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [1,2,4=>["def"=>789]])
+    //Zunit_test_01::find(1)->syncCheck(20, "App\\Models\\Workplace", [1,2,3=>["def"=>345]])
+    //Zunit_test_01::find(1)->syncCheck(20, "App\\Models\\Workplace", [1,2,4=>["def"=>465]])
+    //Zunit_test_01::find(1)->syncCheck(20, "App\\Models\\Workplace", [1,2,4=>["def"=>789]])
 
-    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [2,3])
-    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [2,3,5])
-    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [])
+    //Zunit_test_01::find(1)->syncCheck(20, "App\\Models\\Workplace", [2,3])
+    //Zunit_test_01::find(1)->syncCheck(20, "App\\Models\\Workplace", [2,3,5])
+    //Zunit_test_01::find(1)->syncCheck(20, "App\\Models\\Workplace", [])
     function syncCheck($fieldNameOrId, $termModelPath, array $ids)
     {
         $fieldId = $this->guessFieldId($fieldNameOrId);
