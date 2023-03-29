@@ -26,9 +26,11 @@
                     </div>
                 </div>
                 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
+                    @if(isset($actionButtons[$key]))
                     <button type="submit" class="mr-3 px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg">
                         Next -> (to {{$actionButtons[$key]['label']}})
                     </button>
+                    @endif
                 </div>
             </div>
         </div>
