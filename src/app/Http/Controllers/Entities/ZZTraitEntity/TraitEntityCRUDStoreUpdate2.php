@@ -16,6 +16,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitValidation;
 	use TraitSendNotificationAndMail;
 
+
 	private $debugForStoreUpdate = false;
 
 	private function dump1($title, $content, $line)
@@ -54,6 +55,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$fields = $this->handleFields($request, __FUNCTION__);
 			// dd($fields);
 			$fields = $this->autoDocIDGeneration($fields);
+			// dd($fields); Fix
 			$theRow = $this->data::create($fields);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
@@ -79,7 +81,7 @@ trait TraitEntityCRUDStoreUpdate2
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Created New Document"
-		$this->eventCreatedNotificationAndMail($fields, $theRow->id, $newStatus, $this->type);
+		$this->eventCreatedNotificationAndMail($fields, $theRow->id, $newStatus, $this->type, $this->data);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
@@ -152,7 +154,7 @@ trait TraitEntityCRUDStoreUpdate2
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
-		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $this->type, $newStatus);
+		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $this->type, $newStatus, $this->data);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 }
