@@ -15,6 +15,7 @@ trait TraitDynamicColumnsTableReport
     function createTableColumns(
         $dataSource,
         $strFromField = '',
+        $editDataCols = [],
         $align = 'right',
         $width = 100,
         $sort = True,
@@ -31,12 +32,19 @@ trait TraitDynamicColumnsTableReport
             $datColumns = array_keys($array);
         }
         $sort ? sort($datColumns) : $datColumns;
-        array_walk($datColumns, function ($colName, $key) use (&$datColumns, $align, $width) {
-            $datColumns[$key] = [
-                'dataIndex' => $colName,
-                'align' => $align,
-                'width' => $width
-            ];
+        $indexEditFields = array_column($editDataCols, 'dataIndex');
+        // dd($datColumns);
+
+        array_walk($datColumns, function ($colName, $key) use (&$datColumns, $align, $width, $indexEditFields, $editDataCols) {
+            if ($x = array_search($colName, $indexEditFields)) {
+                $datColumns[$key] = $editDataCols[$x];
+            } else {
+                $datColumns[$key] = [
+                    'dataIndex' => $colName,
+                    'align' => $align,
+                    'width' => $width
+                ];
+            }
         });
         return $datColumns;
     }
