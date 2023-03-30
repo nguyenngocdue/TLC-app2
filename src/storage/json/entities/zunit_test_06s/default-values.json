@@ -47,6 +47,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_attachment_1": {
+        "name": "_attachment_1",
+        "column_name": "attachment_1",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_comment_1": {
         "name": "_comment_1",
         "column_name": "comment_1",
@@ -75,19 +87,7 @@
         "name": "_comment_3",
         "column_name": "comment_3",
         "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_attachment_1": {
-        "name": "_attachment_1",
-        "column_name": "attachment_1",
-        "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
