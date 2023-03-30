@@ -59,7 +59,7 @@ class Comment2 extends Component
         $datetime = DateTimeConcern::convertForLoading("picker_datetime", $this->datetime);
         $avatarObj = $user ? $user->avatar : null;
         $userName = $user ? $user->name : "Not found user #" . $this->ownerId;
-        $avatar = $avatarObj ? env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $avatarObj->url_thumbnail : "";
+        $avatar = $avatarObj ? env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $avatarObj->url_thumbnail : "/images/avatar.jpg";
         $readOnly = $this->readOnly;
         $content = $this->content;
         if (CurrentUser::get()->id != $this->ownerId) {
