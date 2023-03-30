@@ -13,16 +13,10 @@
                 <form action="{{ route('setrolesets.update', $id) }}" method="POST">
                     @method('PUT')
                     @csrf
-                    <select name="roleSet" id="roleSets" onclick="event.preventDefault()" class="role block w-full rounded-lg border border-gray-300 bg-gray-100 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
-                        <option value="none" {{ count($roleSetUsing) == 0 ? 'selected' : '' }}>None</option>
-                        @foreach ($roleSets as $roleSet)
-                        <option value="{{ $roleSet->name }}" @isset($roleSetUsing) @foreach ($roleSetUsing as $item) @if ($item->name == $roleSet->name)
-                            @selected(true)
-                            @endif
-                            @endforeach
-                            @endisset>
-                            {{ $roleSet->name }}
-                        </option>
+                    <select id="roleSets" class="select2-hidden-accessible" onchange="this.event.preventDefault()" style="width: 100%;" name="roleSet_id" tabindex="-1" aria-hidden="true">
+                        <option value="none" @selected($roleSetUsing == null ? true : null)>None</option>
+                        @foreach($roleSets as $roleSet)
+                        <option value="{{$roleSet->id}}" @selected($roleSetUsing ? $roleSetUsing->id == $roleSet->id : null) >{{$roleSet->name ?? $roleSet->id}}</option>
                         @endforeach
                     </select>
                     <button class="focus:shadow-outline-purple my-2 ml-2 rounded-lg border border-transparent bg-emerald-500 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-purple-400 focus:outline-none active:bg-emerald-600" type="submit">Save Change</button>
@@ -31,4 +25,11 @@
         </div>
     </div>
 </main>
+<script>
+    $('[id="'+"roleSets"+'"]').select2({
+        placeholder: "Please select..."
+        , allowClear: false
+        , templateResult: select2FormatState
+    });
+</script>
 @endsection

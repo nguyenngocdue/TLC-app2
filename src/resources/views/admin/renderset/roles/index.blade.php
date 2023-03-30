@@ -11,11 +11,9 @@
         <div class="mb-3 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             <form action="{{ route('setroles.store') }}" method="POST">
                 @csrf
-                <select name="roleSet" id="roleSets" onchange="this.form.submit()" class="role block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
-                    @foreach ($roleSets as $roleSet)
-                    <option value="{{ $roleSet->name }}" class="p-5" @isset($roleSetSelected) {{ $roleSetSelected->name == $roleSet->name ? 'selected' : '' }} @endisset>
-                        {{ $roleSet->name }}
-                    </option>
+                <select id="roleSets" class="select2-hidden-accessible" onchange="this.form.submit()" style="width: 100%;" name="roleSet_id" tabindex="-1" aria-hidden="true">
+                    @foreach($roleSets as $roleSet)
+                    <option value="{{$roleSet->id}}" @selected($roleSetSelected ? $roleSetSelected->id == $roleSet->id : null) >{{$roleSet->name ?? $roleSet->id}}</option>
                     @endforeach
                 </select>
             </form>
@@ -34,9 +32,9 @@
                         @endphp
                         @if ($last === $value)
                         <div class="form-check items-center" title="{{ $role->name }}">
-                            <input type="hidden" name="roleSet" value="{{ $selected }}">
+                            <input type="hidden" name="roleSet_id" value="{{ $selected }}">
                             <label class="text-sm font-normal text-gray-900 dark:text-gray-300">
-                                <input type="checkbox" name="checked[]" value="{{ $role->name }}" title="{{ $role->name }}" @isset($roleUsing) @foreach ($roleUsing as $item) @if ($item->name == $role->name)
+                                <input type="checkbox" name="checked[]" value="{{ $role->id }}" title="{{ $role->name }}" @isset($roleUsing) @foreach ($roleUsing as $item) @if ($item->id == $role->id)
                                 @checked(true)
                                 @endif
                                 @endforeach
@@ -55,4 +53,11 @@
         </div>
     </div>
 </main>
+<script>
+    $('[id="'+"roleSets"+'"]').select2({
+        placeholder: "Please select..."
+        , allowClear: false
+        , templateResult: select2FormatState
+    });
+</script>
 @endsection
