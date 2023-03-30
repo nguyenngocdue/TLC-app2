@@ -116,17 +116,18 @@ class SuperWorkflows
         if (is_null($roleSet)) $roleSet = CurrentUser::getRoleSet();
         if (is_null($type) || is_null($roleSet)) dd("Type or RoleSet is missing, SuperWorkflow cant instantiate.");
         $type = Str::singular($type, $roleSet);
-        $key = "super_workflow_{$type}_{$roleSet}";
-        $result = CacheToRamForThisSection::get($key, fn () => static::make($type, $roleSet));
+        $key = "super_workflow_{$type}";
+        $result = CacheToRamForThisSection::get($key, fn () => static::make($type, $roleSet), $roleSet);
         // dump($result);
         return $result;
     }
 
-    public static function invalidateCache($type, $roleSet)
+    public static function invalidateCache($type)
     {
         if (App::isLocal()) return;
         $type = Str::singular($type);
-        $key = "super_workflow_{$type}_{$roleSet}";
-        Cache::forget($key);
+        $key = "super_workflow_{$type}"; //<< Admin set the setting, but apply for all users
+        // Cache::forget($key);
+        CacheToRamForThisSection::forget($key, 'roleSet(to trigger tag mode)');
     }
 }

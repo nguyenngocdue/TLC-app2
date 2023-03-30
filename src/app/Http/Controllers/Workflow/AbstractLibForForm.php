@@ -25,7 +25,8 @@ class AbstractLibForForm extends AbstractLib
 
     private static function _getFor($entityType)
     {
-        $key = static::$key . "_of_$entityType";
+        $singular = Str::singular($entityType);
+        $key = static::$key . "_of_" . $singular;
         return CacheToRamForThisSection::get($key, fn () => static::_getForExpensive($entityType));
     }
 
@@ -35,7 +36,7 @@ class AbstractLibForForm extends AbstractLib
         $plural = Str::plural($entityType);
         $path = "entities/$plural/" . static::$key . ".json";
         $str = json_encode($dataSource, JSON_PRETTY_PRINT);
-        Cache::forget(static::$key . "_of_$singular");
+        CacheToRamForThisSection::forget(static::$key . "_of_{$singular}");
         return Storage::disk('json')->put($path, $str);
     }
 
