@@ -100,6 +100,7 @@ Route::group([
                 Route::resource("{$singular}_ltn", ManageJsonController::class)->only('index', 'store');
                 Route::resource("{$singular}_stt", ManageJsonController::class)->only('index', 'store');
                 Route::resource("{$singular}_tst", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_wdw", ManageJsonController::class)->only('index', 'store');
                 Route::resource("{$singular}_atb", ManageJsonController::class)->only('index', 'store');
                 Route::resource("{$singular}_dfn", ManageJsonController::class)->only('index', 'store');
                 Route::resource("{$singular}_itm", ManageJsonController::class)->only('index', 'store');
