@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string("last_name");
             $table->string("address")->nullable();
             $table->string("phone")->nullable();
-            $table->string("featured_image")->nullable();
+            // $table->string("featured_image")->nullable();
             $table->unsignedBigInteger("time_keeping_type")->default(1);
             $table->unsignedBigInteger("user_type")->nullable();
             $table->unsignedBigInteger("workplace")->nullable();
