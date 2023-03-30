@@ -28,3 +28,11 @@
     });
 
 </script>
+
+{{-- <script type="text/javascript">
+    $('#{{$name}}').select2({
+placeholder: ''
+, allowClear: '{{$allowClear}}'
+});
+
+</script> --}}

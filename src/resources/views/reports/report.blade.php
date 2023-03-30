@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
-@section('title', $typeReport)
+@section('title', Str::ucfirst($typeReport))
 @section('content')
 
 {{-- @dd($modeParams, $tableDataSource, $tableColumns); --}}

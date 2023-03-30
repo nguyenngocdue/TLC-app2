@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('topTitle', $topTitle)
-@section('title', $typeReport)
+@section('title', Str::ucfirst($typeReport))
 @section('content')
 @php
 $dataHead = array_values($tableDataSource->items())[0][0];
