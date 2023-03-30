@@ -40,7 +40,7 @@
         "name_rendered": "",
         "toggle": "",
         "new": "true",
-        "assigned": "",
+        "assigned": "true",
         "rejected": "true",
         "closed": "true"
     },
@@ -336,7 +336,7 @@
         "name": "proj_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
+        "new": "",
         "assigned": "",
         "rejected": "",
         "closed": ""
@@ -363,18 +363,18 @@
         "name": "qaqc_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
         "closed": ""
     },
     "qaqc_member": {
         "name": "qaqc_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
+        "new": "true",
         "assigned": "",
-        "rejected": "",
+        "rejected": "true",
         "closed": ""
     },
     "qs_manager": {
