@@ -34,7 +34,8 @@ trait TraitEntityCRUDShow
 		}
 		$modelCurrent = new ($this->data);
 		$dataSource = [];
-		$dataModelCurrent = $modelCurrent::find($id);
+		$dataModelCurrent = $modelCurrent::findOrFail($id);
+
 		foreach ($props as $key => $prop) {
 			if ($prop['column_type'] !== 'static') {
 				if (empty($prop['relationships'])) {
