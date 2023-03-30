@@ -18,6 +18,7 @@ class Pages
     const Relationship = "Relationship";
     const Status = "Status";
     const Transition = "Transition";
+    const Withdrawal = "Withdrawal";
     const ActionButton = "ActionButton";
     const Definition = "Definition";
     const IntermediateProp = "IntermediateProp";
@@ -55,6 +56,7 @@ class ManageJsonController extends Controller
         "_stt" => Pages::Status,
         "_rls" => Pages::Relationship,
         "_tst" => Pages::Transition,
+        "_wdw" => Pages::Withdrawal,
         "_atb" => Pages::ActionButton,
         "_dfn" => Pages::Definition,
         "_itm" => Pages::IntermediateProp,

@@ -12,7 +12,7 @@
         "name": "acct_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
+        "new": "",
         "assigned": "",
         "rejected": "",
         "closed": ""
@@ -40,7 +40,7 @@
         "name_rendered": "",
         "toggle": "",
         "new": "true",
-        "assigned": "",
+        "assigned": "true",
         "rejected": "true",
         "closed": "true"
     },
@@ -291,9 +291,9 @@
         "name": "prod_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "assigned": "true",
-        "rejected": "",
+        "new": "true",
+        "assigned": "",
+        "rejected": "true",
         "closed": ""
     },
     "prod_manager_nz": {
@@ -336,7 +336,7 @@
         "name": "proj_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
+        "new": "",
         "assigned": "",
         "rejected": "",
         "closed": ""
@@ -364,7 +364,7 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "rejected": "",
         "closed": ""
     },
@@ -373,7 +373,7 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "rejected": "",
         "closed": ""
     },

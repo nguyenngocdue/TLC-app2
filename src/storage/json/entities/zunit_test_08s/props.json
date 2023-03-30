@@ -166,7 +166,7 @@
         "column_name": "owner_id",
         "column_type": "bigint",
         "label": "Owner ID",
-        "control": "number",
+        "control": "dropdown",
         "align": "",
         "col_span": "",
         "width": "",

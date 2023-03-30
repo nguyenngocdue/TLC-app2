@@ -7,6 +7,7 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\JsonGetSet;
 use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\SuperProps;
+use App\Utils\Support\Json\SuperWorkflows;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 
@@ -132,6 +133,7 @@ abstract class Manage_Parent
         }
         $jsonGetSet::setAllOf($this->type, $result);
         SuperProps::invalidateCache($this->type);
+        SuperWorkflows::invalidateCache($this->type);
         return back();
     }
 
@@ -148,6 +150,7 @@ abstract class Manage_Parent
         $dataSource = $this->jsonGetSet::getAllOf($this->type) + $newItems;
         $this->jsonGetSet::setAllOf($this->type, $dataSource);
         SuperProps::invalidateCache($this->type);
+        SuperWorkflows::invalidateCache($this->type);
         return back();
     }
 }

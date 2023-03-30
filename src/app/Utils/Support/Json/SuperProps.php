@@ -212,6 +212,6 @@ class SuperProps
         if (App::isLocal()) return;
         $type = Str::singular($type);
         $key = "super_prop_$type";
-        Cache::forget($key);
+        CacheToRamForThisSection::forget($key);
     }
 }
