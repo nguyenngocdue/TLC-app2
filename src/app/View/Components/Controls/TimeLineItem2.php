@@ -8,6 +8,7 @@ use App\Utils\Constant;
 use Carbon\Carbon;
 use Database\Seeders\FieldSeeder;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class TimeLineItem2 extends Component
 {
@@ -31,7 +32,8 @@ class TimeLineItem2 extends Component
         $dataSource = $this->dataSource;
         if (isset($dataSource->content)) {
             $field = FieldSeeder::getNameFromFieldId($dataSource->category);
-            $contentComment = $dataSource->content;
+            $contentComment = Str::limitWords($dataSource->content, 50);
+            $contentTitle = $dataSource->content;
             $nameComment = $this->props['_' . $field]['label'] ?? '';
             $userComment = User::findOrFail($dataSource->owner_id);
         } else {
@@ -57,6 +59,7 @@ class TimeLineItem2 extends Component
             'userComment' => $userComment ?? '',
             'nameComment' => $nameComment ?? '',
             'contentComment' => $contentComment ?? '',
+            'contentTitle' => $contentTitle ?? '',
         ]);
     }
 }

@@ -84,7 +84,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
 @if($action == 'edit')
 <div class="px-4">
     <div class="w-full p-2 bg-white rounded-lg  dark:bg-gray-800">
-        <x-renderer.card title="Time line">
+        <x-renderer.card title="Timeline">
             <x-controls.time-line2 id={{$id}} modelPath={{$modelPath}} :props="$props" />
         </x-renderer.card>
     </div>
