@@ -23,7 +23,7 @@ trait TraitSQLDataSourceParamReport
         $sqlData = DB::select(DB::raw($sql));
         return $sqlData;
     }
-    private function getAllOtUser()
+    private function getOTUsers()
     {
         $sql = "SELECT DISTINCT(us.id) AS user_id, us.name
                 FROM hr_overtime_request_lines otline, users us

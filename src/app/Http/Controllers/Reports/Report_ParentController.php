@@ -63,11 +63,6 @@ abstract class Report_ParentController extends Controller
         return $dataSource;
     }
 
-    protected function getParamColumns()
-    {
-        return [[]];
-    }
-
     protected function transformDataSource($dataSource, $modeParams)
     {
         return $dataSource;
