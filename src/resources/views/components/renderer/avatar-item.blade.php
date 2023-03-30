@@ -18,7 +18,7 @@ $textGray = $gray ? "text-gray-600" : "";
             @else
             <p class="text-xs font-semibold text-center {{$textGray}}">{{$title}}</p>
             @endif
-            <p class="text-xs text-gray-600 dark:text-gray-300 italic text-center whitespace-nowrap">
+            <p class="text-xs text-gray-600 dark:text-gray-300 italic text-center">
                 {{$description}}
             </p>
         </span>
