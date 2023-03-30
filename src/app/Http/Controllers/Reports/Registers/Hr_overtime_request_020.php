@@ -135,8 +135,8 @@ class Hr_overtime_request_020 extends Report_ParentController
             [
                 'title' => 'Date',
                 'dataIndex' => 'picker_date',
+                'renderer' => 'picker_date',
                 'allowClear' => true,
-                'renderer' => 'picker_date'
             ],
             [
                 'title' => 'User',
@@ -154,8 +154,7 @@ class Hr_overtime_request_020 extends Report_ParentController
 
     public function getDataForModeControl($dataSource)
     {
-        $users = ['user_id' => array_column($this->getAllOtUser(), 'name',  'user_id')];
-        // $date = $this->getModeParams($typeReport, $entity, $this->mode)['picker_date'];
+        $users = ['user_id' => array_column($this->getOTUsers(), 'name',  'user_id')];
         $picker_date = ['picker_date' => []];
         return array_merge($users, $picker_date);
     }

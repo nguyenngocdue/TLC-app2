@@ -22,7 +22,7 @@ class AdminSetPermissionController extends Controller
     public function index()
     {
         $roleSelected = Role::first();
-        $selected = $roleSelected->name;
+        $selected = $roleSelected->id;
         [$roles, $entities, $removeLastPermissionNames, $permissions, $permissionsRoles] = $this->getRolePermissions($roleSelected);
         return view('admin.renderset.permissions.index')->with(compact('roles', 'removeLastPermissionNames', 'selected', 'roleSelected', 'entities', 'permissions', 'permissionsRoles'));
     }
@@ -45,8 +45,8 @@ class AdminSetPermissionController extends Controller
      */
     public function store(Request $request)
     {
-        $selected = $request->input('role');
-        $roleSelected = Role::findByName($selected);
+        $selected = $request->input('role_id');
+        $roleSelected = Role::findById($selected);
         [$roles, $entities, $removeLastPermissionNames, $permissions, $permissionsRoles] = $this->getRolePermissions($roleSelected);
         return view('admin.renderset.permissions.index')->with(compact('roles', 'removeLastPermissionNames', 'selected', 'roleSelected', 'entities', 'permissions', 'permissionsRoles'));
     }
@@ -79,10 +79,10 @@ class AdminSetPermissionController extends Controller
      */
     public function store2(Request $request)
     {
-        $roleRequest = $request->input('role');
+        $roleRequest = $request->input('role_id');
         $modelRequest = $request->input('model');
         $checkedRequest = $request->input('checked');
-        $roleSelected = Role::findByName($roleRequest);
+        $roleSelected = Role::findById((int)$roleRequest, 'web');
         $roleSelected->syncPermissions($checkedRequest);
         // Toastr::success('Sync Permissions successfully!', 'Sync Permissions');
         return $this->redirectBack($roleRequest);
@@ -90,7 +90,7 @@ class AdminSetPermissionController extends Controller
 
     private function redirectBack($selected)
     {
-        $roleSelected = Role::findByName($selected);
+        $roleSelected = Role::findById((int)$selected, 'web');
         [$roles, $entities, $removeLastPermissionNames, $permissions, $permissionsRoles] = $this->getRolePermissions($roleSelected);
         return view('admin.renderset.permissions.index')->with(compact('roles', 'removeLastPermissionNames', 'selected', 'roleSelected', 'entities', 'permissions', 'permissionsRoles'));
     }

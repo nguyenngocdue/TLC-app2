@@ -202,7 +202,7 @@ class Hr_overtime_request_010 extends Report_ParentController
         $sqlData = DB::select(DB::raw($sql));
         return $sqlData;
     }
-    private function getAllOtUser()
+    private function getOTUsers()
     {
         $sql = "SELECT DISTINCT(us.id) AS user_id, us.name
                 FROM hr_overtime_request_lines otline, users us
@@ -219,7 +219,7 @@ class Hr_overtime_request_010 extends Report_ParentController
         $mon = array_column($sqlMonths, 'year_months');
         $months = ['months' => array_combine($mon, $mon)];
 
-        $sqlUsers = $this->getAllOtUser();
+        $sqlUsers = $this->getOTUsers();
         $us = array_column($sqlUsers, 'name',  'user_id');
         $users = ['user_id' => $us];
 

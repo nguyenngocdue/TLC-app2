@@ -2,7 +2,7 @@
     @method('PUT')
     @csrf
     <input type="hidden" name='_entity' value="{{ $entity }}">
-    <input type="hidden" name='action' value="updateReport{{$typeReport}}">
+    <input type="hidden" name='action' value="updateReport{{Str::ucfirst($typeReport)}}">
     <input type="hidden" name='type_report' value="{{$typeReport}}">
     <input type="hidden" name='mode_name' value="{{$modeName}}">
 

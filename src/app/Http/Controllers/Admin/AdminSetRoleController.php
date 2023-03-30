@@ -21,7 +21,7 @@ class AdminSetRoleController extends Controller
     public function index()
     {
         $roleSetSelected = RoleSet::first();
-        $selected = $roleSetSelected->name;
+        $selected = $roleSetSelected->id;
         [$roles, $lastRoleNames, $roleSets, $roleUsing] = $this->getRoleSetRole($roleSetSelected);
         return view('admin.renderset.roles.index')->with(compact('roles', 'selected', 'lastRoleNames', 'roleSetSelected', 'roleSets', 'roleUsing'));
     }
@@ -44,8 +44,8 @@ class AdminSetRoleController extends Controller
      */
     public function store(Request $request)
     {
-        $selected = $request->input('roleSet');
-        $roleSetSelected = RoleSet::findByName($selected);
+        $selected = $request->input('roleSet_id');
+        $roleSetSelected = RoleSet::findById($selected);
         [$roles, $lastRoleNames, $roleSets, $roleUsing] = $this->getRoleSetRole($roleSetSelected);
 
         return view('admin.renderset.roles.index')->with(compact('roles', 'lastRoleNames', 'selected', 'roleSetSelected', 'roleSets', 'roleUsing'));
@@ -79,9 +79,9 @@ class AdminSetRoleController extends Controller
      */
     public function store2(Request $request)
     {
-        $roleSetRequest = $request->input('roleSet');
+        $roleSetRequest = $request->input('roleSet_id');
         $checkedSetRequest = $request->input('checked');
-        $roleSelected = RoleSet::findByName($roleSetRequest);
+        $roleSelected = RoleSet::findById($roleSetRequest);
         $roleSelected->syncRoles($checkedSetRequest);
         // Toastr::success('Sync Roles successfully!', 'Sync Roles');
         return $this->redirectBack($roleSetRequest);
@@ -89,7 +89,7 @@ class AdminSetRoleController extends Controller
 
     private function redirectBack($selected)
     {
-        $roleSetSelected = RoleSet::findByName($selected);
+        $roleSetSelected = RoleSet::findById($selected);
         [$roles, $lastRoleNames, $roleSets, $roleUsing] = $this->getRoleSetRole($roleSetSelected);
         return view('admin.renderset.roles.index')->with(compact('roles', 'lastRoleNames', 'selected', 'roleSetSelected', 'roleSets', 'roleUsing'));
     }

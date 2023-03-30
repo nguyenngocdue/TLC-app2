@@ -76,7 +76,7 @@ class AdminSetRoleSetController extends Controller
     {
         $user = User::find($id);
         $roleSets = RoleSet::all();
-        $roleSetUsing = $user->roleSets;
+        $roleSetUsing = $user->roleSets[0] ?? null;
         return view('admin.renderset.rolesets.edit', compact('user', 'roleSets', 'roleSetUsing', 'id'));
     }
     /**
@@ -98,7 +98,7 @@ class AdminSetRoleSetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $roleSetUpdate = $request->input('roleSet');
+        $roleSetUpdate = $request->input('roleSet_id');
         if ($roleSetUpdate == 'none') {
             Toastr::warning('Update Role Set failed ! Please choose another Role Set (none)', 'Set Role Set User');
             return back();

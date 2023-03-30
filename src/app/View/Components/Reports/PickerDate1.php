@@ -16,6 +16,8 @@ class PickerDate1 extends Component
         private $name = '',
         private $value = '',
         private $title = '',
+        private $allowClear = false,
+
     ) {
         //
     }
@@ -31,6 +33,7 @@ class PickerDate1 extends Component
             'title' => $this->title,
             'name' => $this->name,
             'value' => $this->value,
+            'allowClear' => $this->allowClear,
         ]);
     }
 }

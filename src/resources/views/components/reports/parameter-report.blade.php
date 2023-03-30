@@ -10,7 +10,7 @@ $route = $routeName ? route($routeName) : "";
     </div>
     <form action="{{$route}}" method="GET" class="flex flex-row-reverse">
         <div class="grid grid-rows-1 ">
-            <div class="flex">
+            <div class="flex items-end">
                 <input type="hidden" name='_entity' value="{{ $entity }}">
                 <input type="hidden" name='action' value="updateReport{{Str::ucfirst($typeReport)}}">
                 <input type="hidden" name='type_report' value="{{$typeReport}}">
@@ -32,7 +32,7 @@ $route = $routeName ? route($routeName) : "";
                     <x-reports.dropdown6 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} :dataSource="$data" :itemsSelected="$itemsSelected" />
                     @break
                     @case('picker_date')
-                    <x-reports.picker-date1 title="{{$title}}" name="{{$name}}" value="{{$date}}" />
+                    <x-reports.picker-date1 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} value="{{$date}}" />
                     @break
                     @default
                     @endswitch
