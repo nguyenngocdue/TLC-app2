@@ -36,10 +36,10 @@
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "checkbox",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "12"
     },
     "_prodOrders": {
         "name": "_prodOrders",
