@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;

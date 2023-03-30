@@ -11,7 +11,7 @@
     @break
 @case('entity_status')
     <div class="flex items-center relative">
-        <div class="ml-20 hidden md:block w-52">
+        <div class="ml-20 hidden md:block w-64">
             <x-renderer.avatar-user timeLine="true">{!!$user!!}</x-renderer.avatar-user>
         </div>
         <div class="border-r-2 border-gray-200 absolute h-full left-60 top-2 z-10">
@@ -31,7 +31,7 @@
     @break
     @case('comment')
     <div class="flex items-center relative">
-        <div class="ml-20 hidden md:block w-52">
+        <div class="ml-20 hidden md:block w-64">
             <x-renderer.avatar-user timeLine="true">{!!$userComment!!}</x-renderer.avatar-user>
         </div>
         <div class="border-r-2 border-gray-200 absolute h-full left-60 top-2 z-10">

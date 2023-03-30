@@ -536,8 +536,7 @@
         "nickname": "wir",
         "doc_id_format_column": "sub_project_id",
         "status": null,
-        "icon": null,
-        "apply_approval_tree": "true"
+        "icon": null
     },
     "reportIndex": {
         "name": "reportIndex",
