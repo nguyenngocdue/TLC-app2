@@ -19,6 +19,7 @@ abstract class Report_ParentController extends Controller
 {
     use TraitMenuTitle;
     use TraitModeParamsReport;
+    use TraitDataModesReport;
     abstract protected function getSqlStr($modeParams);
     abstract protected function getTableColumns($dataSource, $modeParams);
     abstract protected function getDataForModeControl($dataSource);
@@ -59,7 +60,6 @@ abstract class Report_ParentController extends Controller
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
-        // dd($dataSource);
         return $dataSource;
     }
 
@@ -184,9 +184,9 @@ abstract class Report_ParentController extends Controller
             'dataModeControl' => $dataModeControl,
             'rotate45Width' => $this->rotate45Width,
             'groupByLength' => $this->groupByLength,
+            'modeOptions' => $this->$entity(),
             'topTitle' => $this->getMenuTitle(),
             'modeColumns' => $this->modeColumns(),
-            'modeOptions' => $this->getDataModes(),
             'paramColumns' => $this->getParamColumns(),
             'legendColors' => $this->getColorLegends(),
 

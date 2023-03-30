@@ -180,10 +180,6 @@ class Hr_overtime_request_010 extends Report_ParentController
     }
 
     // Mode
-    protected function getDataModes()
-    {
-        return ['mode_option' => ['010' => 'Overtime Summary ', '020' => 'Overtime User']];
-    }
     protected function modeColumns()
     {
         return [
@@ -192,7 +188,6 @@ class Hr_overtime_request_010 extends Report_ParentController
             'allowClear' => true
         ];
     }
-
 
     private function getAllMonths()
     {

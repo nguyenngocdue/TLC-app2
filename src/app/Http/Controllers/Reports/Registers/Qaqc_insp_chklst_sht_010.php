@@ -124,11 +124,6 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentController
         ];
     }
 
-    protected function getDataModes()
-    {
-        return ['mode_option' => ['010' => 'Model 010', '020' => 'Model 020']];
-    }
-
     private function changeValueData($dataSource)
     {
 

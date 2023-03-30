@@ -160,10 +160,6 @@ class Prod_run_010 extends Report_ParentController
         ];
     }
 
-    protected function getDataModes()
-    {
-        return ['mode_option' => ['010' => 'Model 010']];
-    }
     protected function getParamColumns()
     {
         return [
