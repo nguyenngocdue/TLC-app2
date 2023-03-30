@@ -29,7 +29,7 @@ class AdminSetRoleSetController extends Controller
         $users = User::search($search)->query(function ($q) {
             $q->orderBy('id', 'asc');
         })->paginate($pageLimit);
-        $roles = Role::all();
+        $roles = Role::orderBy('name')->get();
         $roleSetFirst = RoleSet::first();
         $roleUsing = $roleSetFirst->roles;
         return view('admin.renderset.rolesets.index')->with(compact('users', 'pageLimit', 'search', 'roles', 'roleSetFirst', 'roleUsing'));
@@ -75,7 +75,7 @@ class AdminSetRoleSetController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roleSets = RoleSet::all();
+        $roleSets = RoleSet::orderBy('name')->get();
         $roleSetUsing = $user->roleSets[0] ?? null;
         return view('admin.renderset.rolesets.edit', compact('user', 'roleSets', 'roleSetUsing', 'id'));
     }

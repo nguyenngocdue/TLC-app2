@@ -117,9 +117,9 @@ class AdminSetPermissionController extends Controller
     }
     private function getRolePermissions($roleSelected)
     {
-        $roles = Role::all();
+        $roles = Role::orderBy('name')->get();
         $entities = Entities::getAll();
-        $permissions = Permission::all();
+        $permissions = Permission::orderBy('name')->get();
         $permissionsRoles = $roleSelected->permissions;
         $removeLastPermissionNames = [];
         foreach ($permissions as $permission) {

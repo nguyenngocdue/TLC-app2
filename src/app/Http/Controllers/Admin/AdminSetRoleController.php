@@ -116,8 +116,8 @@ class AdminSetRoleController extends Controller
     }
     private function getRoleSetRole($roleSetSelected)
     {
-        $roles = Role::all();
-        $roleSets = RoleSet::all();
+        $roles = Role::orderBy('name')->get();
+        $roleSets = RoleSet::orderBy('name')->get();
         $roleUsing = $roleSetSelected->roles;
         $lastRoleNames = [];
         foreach ($roles as $role) {
