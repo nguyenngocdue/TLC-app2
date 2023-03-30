@@ -126,10 +126,6 @@ class Prod_sequence_050 extends Report_ParentController
         return  $dataCols;
     }
 
-    protected function getDataModes()
-    {
-        return ['mode_option' => ['010' => 'Worker number', '020' => 'Total man-hours', '030' => 'Work Amount', '040' => 'min/UoM', '050' => 'Model 050']];
-    }
     protected function getParamColumns()
     {
         return [

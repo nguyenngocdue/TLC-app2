@@ -45,6 +45,7 @@ class Hr_overtime_request_020 extends Report_ParentController
         WHERE 1 = 1";
 
         if (isset($modeParams['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
+        if (isset($modeParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
         if ($pickerDate) {
             $fromDate = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', substr($pickerDate, 0, 10)))->format('Y-m-d');
             $toDate = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', substr($pickerDate, 13, strlen($pickerDate))))->format('Y-m-d');
@@ -146,12 +147,6 @@ class Hr_overtime_request_020 extends Report_ParentController
         ];
     }
 
-    protected function getDataModes()
-    {
-        return ['mode_option' => ['010' => 'Overtime Summary ', '020' => 'Overtime User Line']];
-    }
-
-
     public function getDataForModeControl($dataSource)
     {
         $users = ['user_id' => array_column($this->getOTUsers(), 'name',  'user_id')];
@@ -177,7 +172,7 @@ class Hr_overtime_request_020 extends Report_ParentController
     {
         $input = $request->input();
         if (isset($input['months']) || isset($input['user_id'])) {
-            $typeReport = CurrentPathInfo::getTypeReport($request);
+            $typeReport = Str::ucfirst(CurrentPathInfo::getTypeReport($request));
             $entityReport = CurrentPathInfo::getEntityReport($request);
             // dd($typeReport, $entityReport);
             $params = [

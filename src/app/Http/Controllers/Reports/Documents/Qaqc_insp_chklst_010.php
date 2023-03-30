@@ -126,11 +126,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		];
 	}
 
-	protected function getDataModes()
-	{
-		return ['mode_option' => ['010' => 'Model 010']];
-	}
-
 	protected function modeColumns()
 	{
 		return [
