@@ -12,7 +12,7 @@ class AvatarUser extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private $timeLine = false)
     {
         //
     }
@@ -36,7 +36,8 @@ class AvatarUser extends Component
             $description = $slot->{'position_rendered'} ?? '';
             $href = $slot->{'href'} ?? '';
             $gray = $slot->{'resigned'} ?? '';
-            return "<x-renderer.avatar-item title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray'></x-renderer.avatar-item>";
+            $timeLine = $this->timeLine;
+            return "<x-renderer.avatar-item title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' timeLine='$timeLine'></x-renderer.avatar-item>";
         };
     }
 }

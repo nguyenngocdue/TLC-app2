@@ -25,6 +25,7 @@ class Qaqc_wir extends ModelExtended
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
         'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "loggable" => ['morphMany', Logger::class, 'loggers', 'loggable_type', 'loggable_id'],
     ];
 
     public $oracyParams = [
@@ -89,5 +90,10 @@ class Qaqc_wir extends ModelExtended
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function loggable()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
 }

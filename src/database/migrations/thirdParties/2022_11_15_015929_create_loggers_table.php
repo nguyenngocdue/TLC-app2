@@ -14,13 +14,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('zunit_test_07s', function (Blueprint $table) {
+        Schema::create('loggers', function (Blueprint $table) {
             $table->id();
-            $table->text('name')->nullable();
-
-            $table->unsignedBigInteger('parent_id')->nullable();
-            $table->unsignedInteger('order_no')->nullable();
-
+            $table->string('loggable_type');
+            $table->unsignedBigInteger('loggable_id');
+            $table->text('type');
+            $table->text('key');
+            $table->text('old_value')->nullable();
+            $table->text('old_text')->nullable();
+            $table->text('new_value')->nullable();
+            $table->text('new_text')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
@@ -33,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('zunit_test_07s');
+        Schema::dropIfExists('notifications');
     }
 };

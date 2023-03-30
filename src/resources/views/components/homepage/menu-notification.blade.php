@@ -7,14 +7,32 @@
         }
     @endphp
     <div aria-hidden="true" class="absolute top-0 right-0 inline-block w-5 h-5 transform translate-x-3 -translate-y-2 bg-red-600 border-2 items-center justify-center border-white rounded-full dark:border-gray-800">
-        <p class="text-gray-100 text-[8px] mt-[3px]">{{$countUnreadNotifications}}</p>
+        <p id="countUread" class="text-gray-100 text-[8px] mt-[3px]">{{$countUnreadNotifications}}</p>
     </div>
 </button>
+<script type="text/javascript">
+    window.Echo.channel('notifications')
+       .listen('.BroadcastNotificationEvent', (data) => {
+        $.ajax({
+            method: "GET",
+            url: "/api/v1/system/notifications",
+            dataType: "json",
+            success: (response) => {
+                var unreadNotifications = response['meta']['unread'];
+                var count = unreadNotifications.length;
+                console.log(count);
+                document.getElementById("countUread").innerHTML = count;
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        });
+       });
+</script>
 <template x-if="isNotificationsMenuOpen">
     <div x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.away="closeNotificationsMenu" @keydown.escape="closeNotificationsMenu" class="absolute right-0 w-[500px] h-[calc(100vh-100px)] overflow-y-auto text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700">
             <div>
                 <h1 class="p-3 text-2xl font-semibold">Notifications</h1>
-                
                 <div class="flex">
                     <ul id="tabs-notificationsall123456789" class="inline-flex px-1 w-full border-b text-base">
                         <li class="px-3 text-gray-800 font-semibold py-1 rounded-t bg-white border-t border-r border-l -mb-px"><a href="#allNotifications">All</a></li>
@@ -22,17 +40,28 @@
                     </ul>
                 </div>
                 <div id="tab-contents-notificationsall123456789">
-                    <div id="allNotifications" class="p-2">
-                        <x-renderer.all-notifications :dataSource="$notifications" />
-                </div>
-                
-                    <div id="unreadNotifications" class="p-2 hidden">
-                        <x-renderer.all-notifications :dataSource="$unreadNotifications" />
-                    </div>
+                    
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+        $.ajax({
+            method: "GET",
+            url: "/api/v1/system/notificationsRender",
+            dataType: "json",
+            success: (response) => {
+                var component = response['hits'];
+                var htmtAtribute =document.getElementById("tab-contents-notificationsall123456789");
+                htmtAtribute.innerHTML = component
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        });
+    })
+    </script>
     @once
     <script type="text/javascript">
     const initTab = (tabId) => {

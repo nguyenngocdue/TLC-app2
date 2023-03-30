@@ -13,15 +13,13 @@ use Illuminate\Queue\SerializesModels;
 class CreateNewDocumentEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $currentValue;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($currentValue)
+    public function __construct(public $currentValue, public $classType)
     {
-        $this->currentValue = $currentValue;
     }
 
     /**

@@ -11,6 +11,10 @@ class FieldSeeder extends Seeder
     {
         return Field::where('name', $fieldName)->firstOrFail()->id;
     }
+    public static function getNameFromFieldId($fieldId)
+    {
+        return Field::where('id', $fieldId)->firstOrFail()->name;
+    }
 
     private static function dataSource()
     {
@@ -41,7 +45,7 @@ class FieldSeeder extends Seeder
             'getOnHoldOfYesNo' => 24,
             'getFailedOfPassFail' => 25,
             'getOnHoldOfPassFail' => 26,
-            // '' => 27,
+            'comment_rejected_reason' => 27,
             'comment_by_clinic' => 28,
             'comment_by_line_manager' => 29,
             'comment_by_general_manager' => 30,

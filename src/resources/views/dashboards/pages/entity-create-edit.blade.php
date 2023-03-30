@@ -6,8 +6,9 @@ $editType = Str::plural($type);
 $id = $action === "edit" ? $values->id : "";
 $status = $status ?? $values->status ?? null;
 $ownerId = $values->owner_id ?? null;
+$allProps = $superProps['props'];
 [$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$isCheckColumnStatus,$ownerId);
-$result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
+$propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
 @endphp
 @section('topTitle', $topTitle)
 @section('title', $title )
@@ -24,20 +25,21 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
 </script>
 <div class="px-4">
     <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}" />
-    <x-controls.header-alert-validation :strProps="$props" />
+    <x-controls.header-alert-validation :strProps="$allProps" />
     <x-renderer.test-status-and-accessible type={{$type}} renderId={{$id}} status={{$status}} action={{$action}} :dryRunToken="$dryRunToken" :statuses="$statuses" />
+    <x-controls.status-visibility-checker :propsOfMainPage="$propsOfMainPage" :allProps="$allProps"/>
     <form class="w-full mb-8 bg-white rounded-lg  dark:bg-gray-800" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
         @csrf
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
         <div class=" grid grid-cols-12 px-4">
             @method($action === "create" ? 'POST' : 'PUT')
-            <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$result" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
+            <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
         </div>
         @foreach($propsIntermediate as $key => $props)
             @php
-            $resultIntermediate = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues, $status, $type);
+            $propsOfIntermediatePage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues, $status, $type);
             @endphp
-        <x-renderer.editable.modal-intermediate key={{$key}} action={{$action}} type={{$type}} status={{$status}} id={{$id}} modelPath={{$modelPath}} :actionButtons="$actionButtons" :props="$props" :item="$item" :dataSource="$resultIntermediate"  />
+        <x-renderer.editable.modal-intermediate key={{$key}} action={{$action}} type={{$type}} status={{$status}} id={{$id}} modelPath={{$modelPath}} :actionButtons="$actionButtons" :props="$props" :item="$item" :dataSource="$propsOfIntermediatePage"  />
         @endforeach
         <div class="flex justify-end dark:bg-gray-800 px-5">
             <div class="my-5">
@@ -48,7 +50,7 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
                             <i class="fa-solid fa-floppy-disk mr-2"></i>Save</button>
                             @break
                         @case('create')
-                        <button type="submit" class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg">
+                        <button type="submit" onclick="this.form.submit(); this.disabled=true; this.classList.add('disabled:opacity-40')" class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg">
                             <i class="fa-solid fa-floppy-disk mr-2"></i>Create</button>
                             @break
                         @default
@@ -79,6 +81,15 @@ $result = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaul
     </form>
 </div>
 <x-renderer.editable.modal-broadcast-notification />
+<div class="px-4">
+    <div class="w-full p-2 bg-white rounded-lg  dark:bg-gray-800">
+        <x-renderer.card title="Time line">
+            <x-controls.time-line2 id={{$id}} modelPath={{$modelPath}} :props="$props" />
+        </x-renderer.card>
+    </div>
+    
+
+</div>
 <script type="text/javascript">
      userCurrent = @json($user);
      window.Echo.channel('edit.'+'{{$type}}' +'-'+ '{{$id}}')

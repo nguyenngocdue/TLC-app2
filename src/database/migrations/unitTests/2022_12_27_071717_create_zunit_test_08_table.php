@@ -22,6 +22,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger('owner_id')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('assignee_1')->nullable();
+            $table->unsignedBigInteger('assignee_2')->nullable();
             $table->unsignedInteger('order_no')->nullable();
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

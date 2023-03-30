@@ -1,0 +1,98 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "closed": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "closed": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_parent_id": {
+        "name": "_parent_id",
+        "column_name": "parent_id",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "closed": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "closed": "true"
+    },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "new": "true",
+        "assigned": "",
+        "rejected": "",
+        "closed": "true"
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
+        "new": "",
+        "assigned": "",
+        "rejected": "true",
+        "closed": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    }
+}

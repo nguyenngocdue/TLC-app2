@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\v1\System\NotificationsController;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApi;
 use App\Utils\System\Memory;
 use App\Utils\System\Timer;
@@ -70,9 +71,16 @@ Route::group([
     Route::get('google', [App\Http\Controllers\Api\v1\Auth\SocialiteAuthController::class, 'redirectToGoogle']);
     Route::get('google/callback', [App\Http\Controllers\Api\v1\Auth\SocialiteAuthController::class, 'handleGoogleCallback']);
 });
-
-
-
+Route::group([
+    'prefix' => 'v1/system',
+], function () {
+    Route::group([
+        'middleware' => ['auth:sanctum'],
+    ], function () {
+        Route::get('notifications', [NotificationsController::class, 'notifications']);
+        Route::get('notificationsRender', [NotificationsController::class, 'notificationsRender']);
+    });
+});
 Route::group([
     'prefix' => 'v1/hr',
     'middleware' => 'throttle:600,1'

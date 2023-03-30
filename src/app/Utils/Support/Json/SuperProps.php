@@ -65,7 +65,7 @@ class SuperProps
             } else {
                 // dump($externals);
                 dump("Orphan json attributes found in " . static::$type . "\\" . $external_name . ".json\\" . $column_name . " when constructing SuperProps");
-                static::$result['problems']["orphan_$external_name"][] = "Column name not found $column_name - $external_name" . $value['name'];
+                static::$result['problems']["orphan_$external_name"][] = "Column name not found $column_name - $external_name" . ($value['name'] ?? "Unknown value_name");
             }
         }
     }
@@ -125,7 +125,7 @@ class SuperProps
         }
         foreach ($capa as $roleSet => $value) {
             foreach ($statusesKeys as $statusKey) {
-                if ($value[$statusKey] == 'true') {
+                if (isset($value[$statusKey]) && $value[$statusKey] == 'true') {
                     $result[$statusKey][] = $roleSet;
                 }
             }
