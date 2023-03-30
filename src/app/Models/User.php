@@ -8,6 +8,7 @@ use App\BigThink\HasStatus;
 use App\BigThink\TraitMenuTitle;
 use App\BigThink\TraitMetaForChart;
 use App\BigThink\TraitMorphManyByFieldName;
+use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -35,6 +36,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     use TraitMetaForChart;
     use TraitMenuTitle;
     use TraitMorphManyByFieldName;
+    use TraitOptimisticLocking;
 
     use HasAttachments;
     use HasStatus;
