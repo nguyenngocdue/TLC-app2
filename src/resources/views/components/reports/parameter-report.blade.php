@@ -3,7 +3,7 @@ $modeParams = ['mode_001'];
 $route = $routeName ? route($routeName) : "";
 @endphp
 
-{{-- @dd($routeName) --}}
+{{-- @dd($dataSource) --}}
 <div class="">
     <div class="flex justify-end ">
         <x-reports.reset-param-report typeReport="{{$typeReport}}" entity="{{$entity}}" route="{{ route('updateUserSettings') }}" modeName='{{$modeOption}}' />
@@ -12,21 +12,33 @@ $route = $routeName ? route($routeName) : "";
         <div class="grid grid-rows-1 ">
             <div class="flex">
                 <input type="hidden" name='_entity' value="{{ $entity }}">
-                <input type="hidden" name='action' value="updateReport{{$typeReport}}">
+                <input type="hidden" name='action' value="updateReport{{Str::ucfirst($typeReport)}}">
                 <input type="hidden" name='type_report' value="{{$typeReport}}">
                 <input type="hidden" name='mode_option' value="{{$modeOption}}">
                 <input type="hidden" name='form_type' value="updateParamsReport">
+
                 @foreach($columns as $key =>$value)
                 @php
                 $title = isset($value['title']) ? $value['title'] : ucwords(str_replace('_', " ", $value['dataIndex']));
+                $renderer = isset($value['renderer']) ? $value['renderer'] : 'drop_down';
                 $name = $value['dataIndex'];
-                $data = $dataSource[$name];
+                $date = isset($itemsSelected['picker_date']) ? $itemsSelected['picker_date'] : "";
+                $data = isset($dataSource[$name]) ? $dataSource[$name] : [];
                 $allowClear = $value['allowClear'] ?? false;
                 @endphp
-                <div class=" w-72 px-2 ">
+                <div class=" w-72 px-2">
+                    @switch($renderer)
+                    @case("drop_down")
                     <x-reports.dropdown6 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} :dataSource="$data" :itemsSelected="$itemsSelected" />
+                    @break
+                    @case('picker_date')
+                    <x-reports.picker-date1 title="{{$title}}" name="{{$name}}" value="{{$date}}" />
+                    @break
+                    @default
+                    @endswitch
                 </div>
                 @endforeach
+
                 <div class="  flex items-end">
                     <div class=" ">
                         <button type="submit" class="px-4  py-3  inline-block font-medium text-sm leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg">

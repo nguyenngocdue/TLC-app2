@@ -26,6 +26,7 @@ class ParameterReport extends Component
 
     public function render()
     {
+        // dd($this->itemsSelected);
         return view('components.reports.parameter-report', [
             'itemsSelected' => $this->itemsSelected,
             'dataSource' => $this->dataSource,

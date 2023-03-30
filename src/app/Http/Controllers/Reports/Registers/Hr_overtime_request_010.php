@@ -175,7 +175,7 @@ class Hr_overtime_request_010 extends Report_ParentController
                 'title' => 'User',
                 'dataIndex' => 'user_id',
                 'allowClear' => true,
-            ]
+            ],
         ];
     }
 
