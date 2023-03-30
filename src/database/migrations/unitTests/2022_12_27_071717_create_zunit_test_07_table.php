@@ -14,12 +14,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fields', function (Blueprint $table) {
+        Schema::create('zunit_test_07s', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->text('reversed_name')->nullable();
-            $table->text('description')->nullable();
-            $table->string('slug')->unique();
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
+            $table->string('status')->nullable();
+
+            $table->unsignedBigInteger('owner_id')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('assignee_1')->nullable();
+            $table->unsignedBigInteger('assignee_2')->nullable();
+            $table->unsignedInteger('order_no')->nullable();
+
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
@@ -32,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fields');
+        Schema::dropIfExists('zunit_test_07s');
     }
 };

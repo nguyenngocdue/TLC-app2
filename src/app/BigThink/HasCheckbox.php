@@ -14,52 +14,57 @@ trait HasCheckbox
 {
     function guessFieldId($fieldNameOrId)
     {
-        if (is_numeric($fieldNameOrId)) return $fieldNameOrId;
-        try {
-            $fieldId = Field::where('name', $fieldNameOrId)->firstOrFail()->id;
-        } catch (Exception $e) {
-            dump("Create a record in table Field with name as [$fieldNameOrId]");
-            dd($e->getMessage());
-        }
-
-        return $fieldId;
+        if (is_numeric($fieldNameOrId)) return [$fieldNameOrId, false];
+        $fieldId = Field::where('name', $fieldNameOrId)->first();
+        $fieldIdReversed = Field::where('reversed_name', $fieldNameOrId)->first();
+        // dump($fieldId, $fieldIdReversed);
+        if ($fieldId) return [$fieldId->id, false];
+        if ($fieldIdReversed) return [$fieldIdReversed->id, true];
+        //if not found either name or reversed_name
+        dump("Create a record in table Field with name/reversed_name as [$fieldNameOrId]");
+        dd();
     }
 
-    function getCheckedByField($fieldNameOrId, $related = "")
+    function getCheckedByField($fieldNameOrId, $relation = null)
     {
-        $fieldId = $this->guessFieldId($fieldNameOrId);
-        $dataSource = $this->getChecked();
+        [$fieldId, $reversedDirection] = $this->guessFieldId($fieldNameOrId);
+        $dataSource = $this->getChecked($reversedDirection);
         $result = $dataSource->filter(fn ($item) => $item['field_id'] === $fieldId)->values();
         // dd($fieldId, $dataSource, $result);
         // dd($fieldNameOrId, $fieldId, $dataSource, $result);
         return $result;
     }
 
-    function getChecked()
+    private function getFieldSet($reversedDirection)
+    {
+        return !$reversedDirection ? ['doc_type', 'doc_id', 'term_type', 'term_id'] : ['term_type', 'term_id', 'doc_type', 'doc_id'];
+    }
+
+    function getChecked($reversedDirection = false)
     {
         // dd($this->id);
-        $result0 = DB::table('many_to_many')->where('doc_type', $this::class)->where('doc_id', $this->id)->get();
+        [$leftType, $leftId, $rightType, $rightId] = $this->getFieldSet($reversedDirection);
+
+        $result0 = DB::table('many_to_many')->where($leftType, $this::class)->where($leftId, $this->id)->get();
         if ($result0->count() == 0) return new Collection([]);
 
-        $ids = $result0->pluck('term_id');
-        $modelPaths = $result0->pluck('term_type')->unique();
-        foreach ($modelPaths as $modelPath) {
+        $ids0 = $result0->pluck($rightId);
+        $modelPaths0 = $result0->pluck($rightType)->unique();
+        foreach ($modelPaths0 as $modelPath) {
             if (class_exists($modelPath)) {
                 $model = App::make($modelPath);
-                $result1[$modelPath] = $model::whereIn('id', $ids)->get();
-                $resultInverted[$modelPath] = Arr::keyBy($result1[$modelPath], 'id');
+                $tmp[$modelPath] = $model::whereIn('id', $ids0)->get();
+                $resultInverted0[$modelPath] = Arr::keyBy($tmp[$modelPath], 'id');
             } else {
-                dump("Class [$modelPath] does not exist, please double check [term_type] in [many_to_many] table.");
+                dump("Class [$modelPath] does not exist, please double check [$rightType] in [many_to_many] table.");
             }
         }
 
         $result = [];
         foreach ($result0 as $item) {
-            // error_log($item->term_id);
-            // dd($item);
-            $modelPath = $item->term_type;
-            if (isset($resultInverted[$modelPath][$item->term_id])) {
-                $objToBeCloned = $resultInverted[$modelPath][$item->term_id];
+            $modelPath = $item->{$rightType};
+            if (isset($resultInverted0[$modelPath][$item->{$rightId}])) {
+                $objToBeCloned = $resultInverted0[$modelPath][$item->{$rightId}];
                 $origin = clone $objToBeCloned;
                 $origin->field_id = $item->field_id;
                 $origin->pivot = [
@@ -68,40 +73,44 @@ trait HasCheckbox
                 ];
                 $result[] = $origin;
             } else {
-                dump("ID #{$item->term_id} not found in [$modelPath] (HasCheckbox)");
+                dump("ID #{$item->{$rightId}} not found in [$modelPath] (HasCheckbox)");
             }
         }
-        return new Collection($result);
-    }
 
-    private function prepareForAttach($fieldId, $termModelPath, array $ids)
-    {
-        $line = ['field_id' => $fieldId, 'doc_type' => $this::class, 'doc_id' => $this->id, 'term_type' => $termModelPath,];
-        $result = [];
-        $idsAssoc = Arr::toAssoc($ids);
-        foreach ($idsAssoc as $id => $pivot) $result[] = $line + ["term_id" => $id, "json" => ($pivot === $id) ? "{}" : json_encode($pivot)];
+        $result = collect($result);
         return $result;
     }
 
-    //Zunit_test_1::find(1)->attachCheck(14, "App\\Models\\Workplace", [1,2,3])
-    //Zunit_test_1::find(1)->attachCheck(15, "App\\Models\\Workplace", [4,5=> ["xyz" => 456],6])
-    //Zunit_test_1::find(1)->attachCheck(15, "App\\Models\\Workplace", [7=> ["xyz" => 789],8,9])
+    private function prepareForAttach($fieldId, $termModelPath, array $ids, $reversedDirection)
+    {
+        [$leftType, $leftId, $rightType, $rightId] = $this->getFieldSet($reversedDirection);
+        $line = ['field_id' => $fieldId, $leftType => $this::class, $leftId => $this->id, $rightType => $termModelPath,];
+        $result = [];
+        $idsAssoc = Arr::toAssoc($ids);
+        foreach ($idsAssoc as $id => $pivot) $result[] = $line + [$rightId => $id, "json" => ($pivot === $id) ? "{}" : json_encode($pivot)];
+        return $result;
+    }
+
+    //Zunit_test_01::find(1)->attachCheck(20, "App\\Models\\Workplace", [1,2,3])
+    //Zunit_test_01::find(1)->attachCheck(20, "App\\Models\\Workplace", [4,5=> ["xyz" => 456],6])
+    //Zunit_test_01::find(1)->attachCheck(20, "App\\Models\\Workplace", [7=> ["xyz" => 789],8,9])
     function attachCheck($fieldNameOrId, $termModelPath, array $ids)
     {
-        $fieldId = $this->guessFieldId($fieldNameOrId);
-        $result = $this->prepareForAttach($fieldId, $termModelPath, $ids);
+        [$fieldId, $reversedDirection] = $this->guessFieldId($fieldNameOrId);
+        $result = $this->prepareForAttach($fieldId, $termModelPath, $ids, $reversedDirection);
         // var_dump($result);
         $count = 0;
         foreach ($result as $item) $count += DB::table('many_to_many')->insert($item);
         return $count;
     }
 
-    //Zunit_test_1::find(1)->detachCheck(14, "App\\Models\\Workplace", [1,2,3])
-    //Zunit_test_1::find(1)->detachCheck(15, "App\\Models\\Workplace", [4,5=> ["xyz" => 456],6])
-    //Zunit_test_1::find(1)->detachCheck(15, "App\\Models\\Workplace", [7=> ["xyz" => 789],8,9])
+    //Zunit_test_01::find(1)->detachCheck(20, "App\\Models\\Workplace", [1,2,3])
+    //Zunit_test_01::find(1)->detachCheck(20, "App\\Models\\Workplace", [4,5=> ["xyz" => 456],6])
+    //Zunit_test_01::find(1)->detachCheck(20, "App\\Models\\Workplace", [7=> ["xyz" => 789],8,9])
     function detachCheck($fieldNameOrId, $termModelPath, array $ids)
     {
-        $fieldId = $this->guessFieldId($fieldNameOrId);
+        [$fieldId, $reversedDirection] = $this->guessFieldId($fieldNameOrId);
+        [$leftType, $leftId, $rightType, $rightId] = $this->getFieldSet($reversedDirection);
         $idsAssoc = Arr::toAssoc($ids); //[1,2,3]
         $toBeDetached = array_keys($idsAssoc);
         $count = 0;
@@ -109,36 +118,37 @@ trait HasCheckbox
         foreach ($toBeDetached as $id) {
             $count += DB::table('many_to_many')
                 ->where("field_id", $fieldId)
-                ->where("doc_type", $this::class)
-                ->where("doc_id", $this->id)
-                ->where("term_type", $termModelPath)
-                ->where("term_id", $id)
+                ->where($leftType, $this::class)
+                ->where($leftId, $this->id)
+                ->where($rightType, $termModelPath)
+                ->where($rightId, $id)
                 ->delete();
         }
         return $count;
     }
 
-    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [1,2,3=>["def"=>345]])
-    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [1,2,4=>["def"=>465]])
-    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [1,2,4=>["def"=>789]])
+    //Zunit_test_01::find(1)->syncCheck(20, "App\\Models\\Workplace", [1,2,3=>["def"=>345]])
+    //Zunit_test_01::find(1)->syncCheck(20, "App\\Models\\Workplace", [1,2,4=>["def"=>465]])
+    //Zunit_test_01::find(1)->syncCheck(20, "App\\Models\\Workplace", [1,2,4=>["def"=>789]])
 
-    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [2,3])
-    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [2,3,5])
-    //Zunit_test_1::find(1)->syncCheck(14, "App\\Models\\Workplace", [])
+    //Zunit_test_01::find(1)->syncCheck(20, "App\\Models\\Workplace", [2,3])
+    //Zunit_test_01::find(1)->syncCheck(20, "App\\Models\\Workplace", [2,3,5])
+    //Zunit_test_01::find(1)->syncCheck(20, "App\\Models\\Workplace", [])
     function syncCheck($fieldNameOrId, $termModelPath, array $ids)
     {
-        $fieldId = $this->guessFieldId($fieldNameOrId);
-        $result = $this->prepareForAttach($fieldId, $termModelPath, $ids);
-        $toBeSynced = array_map(fn ($item) => $item["term_id"], $result);
+        [$fieldId, $reversedDirection] = $this->guessFieldId($fieldNameOrId);
+        $result = $this->prepareForAttach($fieldId, $termModelPath, $ids, $reversedDirection);
+        [$leftType, $leftId, $rightType, $rightId] = $this->getFieldSet($reversedDirection);
+        $toBeSynced = array_map(fn ($item) => $item[$rightId], $result);
 
         //This section is to determine to be Added and Deleted list
         $current = DB::table('many_to_many')
             ->where("field_id", $fieldId)
-            ->where("doc_type", $this::class)
-            ->where("doc_id", $this->id)
-            ->where("term_type", $termModelPath)
+            ->where($leftType, $this::class)
+            ->where($leftId, $this->id)
+            ->where($rightType, $termModelPath)
             ->get();
-        $currentIds = $current->map(fn ($item) => $item->term_id)->toArray();
+        $currentIds = $current->map(fn ($item) => $item->{$rightId})->toArray();
         $toBeAddedList = array_values(array_diff($toBeSynced, $currentIds));
         $toBeDeletedList = array_values(array_diff($currentIds, $toBeSynced));
 
@@ -155,10 +165,10 @@ trait HasCheckbox
 
         $count = 0;
         // dd('tobeDel', $arrAssoc, $toBeAddedList, $toBeAddedListEnriched);
-        $count += $this->detachCheck($fieldId, $termModelPath, $toBeDeletedList);
+        $count += $this->detachCheck($fieldNameOrId, $termModelPath, $toBeDeletedList);
         // dd($arrAssoc, "DEl", $toBeDeletedList, $toBeAddedListEnriched);
         //Detach must be before attach to make sure the Kept array is removed
-        $count += $this->attachCheck($fieldId, $termModelPath, $toBeAddedListEnriched);
+        $count += $this->attachCheck($fieldNameOrId, $termModelPath, $toBeAddedListEnriched);
         return $count - 2 * sizeof($toBeKeptList);
     }
 }

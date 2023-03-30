@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
 abstract class Report_ParentController extends Controller
 {
     use TraitMenuTitle;
+    use TraitModeParamsReport;
     abstract protected function getSqlStr($modeParams);
     abstract protected function getTableColumns($dataSource, $modeParams);
     abstract protected function getDataForModeControl($dataSource);
@@ -62,11 +63,6 @@ abstract class Report_ParentController extends Controller
         return $dataSource;
     }
 
-    protected function getParamColumns()
-    {
-        return [[]];
-    }
-
     protected function transformDataSource($dataSource, $modeParams)
     {
         return $dataSource;
@@ -86,26 +82,10 @@ abstract class Report_ParentController extends Controller
 
     private function paginateDataSource($dataSource, $pageLimit)
     {
-        // dd($dataSource);
         $page = $_GET['page'] ?? 1;
-        // $pageLimit = 150;
         $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))->appends(request()->query());
-        // dd($dataSource, $pageLimit);
         return $dataSource;
     }
-
-    protected function getModeParams($typeReport, $entity, $currentMode)
-    {
-        $typeReport = strtolower($typeReport);
-        $settings = CurrentUser::getSettings();
-        // dd($settings);
-        if (isset($settings[$entity][$typeReport][$currentMode])) {
-            $modeParams = $settings[$entity][$typeReport][$currentMode];
-            return $modeParams;
-        }
-        return [];
-    }
-
 
     protected function getPageParam($typeReport, $entity)
     {
@@ -120,7 +100,6 @@ abstract class Report_ParentController extends Controller
 
     protected function getDefaultValueModeParams($modeParams, $request)
     {
-        // dd($modeParams);
         return $modeParams;
     }
 
@@ -148,11 +127,11 @@ abstract class Report_ParentController extends Controller
         return redirect($request->getPathInfo());
     }
 
-
     public function index(Request $request)
     {
 
         $input = $request->input();
+        // dd($input);
         Log::info($input);
 
         $typeReport = CurrentPathInfo::getTypeReport($request);
@@ -166,8 +145,8 @@ abstract class Report_ParentController extends Controller
         $currentUserId = Auth::id();
         $currentMode = $this->mode;
 
-        $modeParams = $this->getModeParams($typeReport, $entity, $currentMode);
-        // dump($modeParams);
+        $modeParams = $this->getModeParams($request);
+        // dd($modeParams);
         $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
 
         $dataSource = $this->getDataSource($modeParams);
@@ -188,7 +167,7 @@ abstract class Report_ParentController extends Controller
         $viewName = CurrentPathInfo::getViewName($request);
 
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
-        // dd($dataSource);
+        // dd($dataModeControl);
 
         return view('reports.' . $viewName, [
             'entity' => $entity,

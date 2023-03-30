@@ -10,7 +10,7 @@ class CurrentPathInfo
     {
         $pathInfo = $request->getPathInfo();
         $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[0]);
-        return Str::ucfirst(Str::plural($pathInfo[0]));
+        return strtolower(Str::plural($pathInfo[0]));
     }
     public static function getEntityReport($request)
     {

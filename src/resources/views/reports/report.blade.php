@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
-@section('title', $typeReport)
+@section('title', Str::ucfirst($typeReport))
 @section('content')
 
 {{-- @dd($modeParams, $tableDataSource, $tableColumns); --}}
@@ -15,7 +15,6 @@
         <x-reports.parameter-report :dataSource="$dataModeControl" :itemsSelected="$modeParams" modeOption="{{$currentMode}}" :columns="$paramColumns" routeName="{{$routeName}}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
 
     </div>
-
-    <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource" rotate45Width={{$rotate45Width}} />
+    <x-renderer.table showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource" rotate45Width={{$rotate45Width}} />
     @endsection
 </div>

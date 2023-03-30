@@ -1,0 +1,30 @@
+{
+    "new": {
+        "name": "new",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "closed": ""
+    },
+    "assigned": {
+        "name": "assigned",
+        "new": "",
+        "assigned": "",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "rejected": {
+        "name": "rejected",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "closed": ""
+    },
+    "closed": {
+        "name": "closed",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    }
+}

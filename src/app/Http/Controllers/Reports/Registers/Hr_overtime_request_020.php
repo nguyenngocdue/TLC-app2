@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
+use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentPathInfo;
+use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -13,26 +15,27 @@ use Illuminate\Support\Str;
 class Hr_overtime_request_020 extends Report_ParentController
 {
     use TraitDynamicColumnsTableReport;
+    use TraitSQLDataSourceParamReport;
     protected $groupBy = 'ot_date';
     protected $mode = '020';
 
-
     public function getSqlStr($modeParams)
     {
+        $pickerDate =  isset($modeParams['picker_date']) ? $modeParams['picker_date'] : '';
+        // dd($fromDate);
         $sql = "SELECT
         sp.name sub_project_name
         ,otr.id hr_overtime_request_id
         ,otline.sub_project_id sub_project_id
         ,otline.id request_id,
         otline.user_id user_id,
-        us.first_name first_name,
-        us.last_name last_name,
+        us.name name_render,
         otline.employeeid employee_id
         ,otline.ot_date ot_date
-        ,otline.ot_date AS ot_date
-        ,otline.from_time from_time
         ,otline.break_time break_time
-        ,otline.to_time to_time
+        ,otline.ot_date AS ot_date
+        ,SUBSTR(otline.from_time, 1,5) from_time
+        ,SUBSTR(otline.to_time, 1,5) to_time
         ,otline.total_time total_time
         ,otline.month_allowed_hours month_allowed_hours
         ,otline.month_remaining_hours month_remaining_hours
@@ -42,18 +45,24 @@ class Hr_overtime_request_020 extends Report_ParentController
         WHERE 1 = 1";
 
         if (isset($modeParams['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
-        if (isset($modeParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
-        $sql .= "\n AND otline.sub_project_id = sp.id
+        if ($pickerDate) {
+            $fromDate = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', substr($pickerDate, 0, 10)))->format('Y-m-d');
+            $toDate = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', substr($pickerDate, 13, strlen($pickerDate))))->format('Y-m-d');
+            $sql .= "\n AND otline.ot_date >= '$fromDate'
+                        AND otline.ot_date <= '$toDate'";
+        }
+        $sql .= "\n 
+                    AND otline.sub_project_id = sp.id
                     AND us.id = otline.user_id
                     AND otr.id = otline.hr_overtime_request_id
-                    ORDER BY first_name, last_name, employee_id, ot_date DESC";
+                    ORDER BY name_render, employee_id, ot_date DESC";
         return $sql;
     }
 
     public function getTableColumns($dataSource, $modeParams)
     {
-        dump($dataSource);
-        $firstDataCol = [
+        // dump($dataSource);
+        $totalDataCol = [
             [
                 "dataIndex" => "sub_project_name",
                 "align" => "center"
@@ -66,81 +75,92 @@ class Hr_overtime_request_020 extends Report_ParentController
                 "type" => "hr_overtime_requests",
             ],
             [
-                "dataIndex" => "request_id",
-                "align" => "center",
-                "renderer" => "qr_code",
-                "type" => "hr_overtime_request_lines",
-            ]
+                "title" => "Employee ID",
+                "dataIndex" => "employee_id",
+                "align" => 'left'
+            ],
+            [
+                "title" => "Full Name",
+                "dataIndex" => "name_render",
+                "align" => 'left'
+            ],
+            [
+                "title" => "OT Date",
+                "dataIndex" => "ot_date",
+                "align" => "center"
+            ],
+            [
+                "title" => "From Time",
+                "dataIndex" => "from_time",
+                "align" => "center"
+            ],
+            [
+                "title" => "To Time",
+                "dataIndex" => "to_time",
+                "align" => "center"
+            ],
+            [
+                "title" => "Break Time (Mins)",
+                "dataIndex" => "break_time",
+                "align" => "right"
+            ],
+            [
+                "title" => "Total Time",
+                "dataIndex" => "total_time",
+                "align" => "right",
+            ],
+            [
+                "dataIndex" => "month_allowed_hours",
+                "align" => "right",
+            ],
+            [
+                "dataIndex" => "month_remaining_hours",
+                "align" => "right",
+            ],
+            [
+                "dataIndex" => "year_allowed_hours",
+                "align" => "right",
+            ],
+            [
+                "dataIndex" => "year_remaining_hours",
+                "align" => "right",
+            ],
+
         ];
-        $editDataCols = [[
-            "title" => "Date",
-            "dataIndex" => "ot_date",
-            "align" => "center"
-        ], [
-            "title" => "Break Time (Mins)",
-            "dataIndex" => "break_time",
-            "align" => "center"
-        ]];
-        $sqlDataCol = $this->createTableColumns($dataSource, 'user_id', $editDataCols);
-        $totalDataCol = array_merge($firstDataCol, $sqlDataCol);
         return  $totalDataCol;
     }
     protected function getParamColumns()
     {
         return [
             [
-                'dataIndex' => 'months',
+                'title' => 'Date',
+                'dataIndex' => 'picker_date',
+                'renderer' => 'picker_date',
                 'allowClear' => true,
             ],
             [
                 'title' => 'User',
                 'dataIndex' => 'user_id',
                 'allowClear' => true,
-            ]
+            ],
         ];
     }
 
     protected function getDataModes()
     {
-        return ['mode_option' => ['010' => 'Overtime Summary ', '020' => 'User Overtime']];
+        return ['mode_option' => ['010' => 'Overtime Summary ', '020' => 'Overtime User Line']];
     }
 
-
-    private function getAllMonths()
-    {
-        $sql = "SELECT DISTINCT(SUBSTR(otline.ot_date, 1, 7)) AS year_months
-                    FROM hr_overtime_request_lines otline
-                    ORDER BY year_months DESC";
-        $sqlData = DB::select(DB::raw($sql));
-        return $sqlData;
-    }
-
-    private function getAllOtUser()
-    {
-        $sql = "SELECT DISTINCT(us.id) AS user_id, us.name
-                FROM hr_overtime_request_lines otline, users us
-                WHERE us.id = otline.user_id ORDER BY user_id";
-        $sqlData = DB::select(DB::raw($sql));
-        return $sqlData;
-    }
 
     public function getDataForModeControl($dataSource)
     {
-        $sqlMonths = $this->getAllMonths();
-        $mon = array_column($sqlMonths, 'year_months');
-        $months = ['months' => array_combine($mon, $mon)];
-
-        $sqlUsers = $this->getAllOtUser();
-        $us = array_column($sqlUsers, 'name',  'user_id');
-        $users = ['user_id' => $us];
-
-        return array_merge($months, $users);
+        $users = ['user_id' => array_column($this->getOTUsers(), 'name',  'user_id')];
+        $picker_date = ['picker_date' => []];
+        return array_merge($users, $picker_date);
     }
 
     protected function getDefaultValueModeParams($modeParams, $request)
     {
-
-
         return $modeParams;
     }
 
@@ -178,8 +198,6 @@ class Hr_overtime_request_020 extends Report_ParentController
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
         }
-
-
         if (isset($input['mode_option'])) {
             $mode = $input['mode_option'];
             $routeName = explode('/', $request->getPathInfo())[2];
