@@ -10,12 +10,11 @@
         <label for="roles" class="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-300">Select an
             option role</label>
         <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-
             <form action="{{ route('setpermissions.store') }}" method="POST">
                 @csrf
-                <select id="roles" class="select2-hidden-accessible" onchange="this.form.submit()" style="width: 100%;" name="role" tabindex="-1" aria-hidden="true">
+                <select id="roles" class="select2-hidden-accessible" onchange="this.form.submit()" style="width: 100%;" name="role_id" tabindex="-1" aria-hidden="true">
                     @foreach($roles as $role)
-                    <option value="{{$role->name}}" @selected($roleSelected ? $roleSelected->name == $role->name : null) >{{$role->name ?? $role->id}}</option>
+                    <option value="{{$role->id}}" @selected($roleSelected ? $roleSelected->id == $role->id : null) >{{$role->name ?? $role->id}}</option>
                     @endforeach
                 </select>
             </form>
@@ -47,9 +46,9 @@
                                 @endphp
                                 @if ($lastNamePermission == $entity->getTable())
                                 <td class="text-center" title="{{ $permission->name }}">
-                                    <input type="hidden" name="role" value="{{ $selected }}">
+                                    <input type="hidden" name="role_id" value="{{ $selected }}">
                                     <input type="hidden" name="model[]" value="{{ $entity->getTable() }}">
-                                    <input type="checkbox" name="checked[]" value="{{ $permission->name }}" title="{{ $permission->name }}" @isset($permissionsRoles) @foreach ($permissionsRoles as $item) @if ($item->name == $permission->name)
+                                    <input type="checkbox" name="checked[]" value="{{ $permission->id }}" title="{{ $permission->name }}" @isset($permissionsRoles) @foreach ($permissionsRoles as $item) @if ($item->id == $permission->id)
                                     @checked(true)
                                     @endif @endforeach
                                     @endisset

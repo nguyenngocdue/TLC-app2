@@ -4,10 +4,7 @@
     <div class="rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
         <div class="flex ">
             <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
-                <button type="button" class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg" @click="clearAdvanceFilter()">
-                <i class="fa-sharp fa-solid fa-circle-xmark"></i>
-                <span class="ml-1">RESET FILTER</span>
-                </button>
+                
         </div>
                 
         <div class="grid lg:grid-cols-6 lg:gap-2 md:grid-cols-4 md:gap-4 sm:grid-cols-2 sm:gap-10">
@@ -118,13 +115,10 @@
                 @endswitch
             </div>
             @endforeach
-            
-    
         </div>
-        <div >
-            <button type="submit" name="action" value="updateAdvanceFilter" class="mt-4 px-3 py-2  inline-block  font-medium text-sm leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg">
-                APPLY
-            </button>
+        <div class="py-2">
+            <x-renderer.button htmlType="submit" type="primary" name="action" value="updateAdvanceFilter">APPLY</x-renderer.button>
+            <x-renderer.button type="secondary" click="clearAdvanceFilter()"><i class="fa-sharp fa-solid fa-circle-xmark"></i> RESET FILTER</x-renderer.button>
         </div>
     </div>
     

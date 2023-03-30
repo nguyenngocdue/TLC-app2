@@ -29,7 +29,7 @@ class AdminSetRoleSetController extends Controller
         $users = User::search($search)->query(function ($q) {
             $q->orderBy('id', 'asc');
         })->paginate($pageLimit);
-        $roles = Role::all();
+        $roles = Role::orderBy('name')->get();
         $roleSetFirst = RoleSet::first();
         $roleUsing = $roleSetFirst->roles;
         return view('admin.renderset.rolesets.index')->with(compact('users', 'pageLimit', 'search', 'roles', 'roleSetFirst', 'roleUsing'));
@@ -75,8 +75,8 @@ class AdminSetRoleSetController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roleSets = RoleSet::all();
-        $roleSetUsing = $user->roleSets;
+        $roleSets = RoleSet::orderBy('name')->get();
+        $roleSetUsing = $user->roleSets[0] ?? null;
         return view('admin.renderset.rolesets.edit', compact('user', 'roleSets', 'roleSetUsing', 'id'));
     }
     /**
@@ -98,7 +98,7 @@ class AdminSetRoleSetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $roleSetUpdate = $request->input('roleSet');
+        $roleSetUpdate = $request->input('roleSet_id');
         if ($roleSetUpdate == 'none') {
             Toastr::warning('Update Role Set failed ! Please choose another Role Set (none)', 'Set Role Set User');
             return back();

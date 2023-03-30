@@ -11,7 +11,7 @@
     @break
 @case('entity_status')
     <div class="flex items-center relative">
-        <div class="hidden md:block w-full">
+        <div class="hidden md:block w-52">
             <x-renderer.avatar-user timeLine="true">{!!$user!!}</x-renderer.avatar-user>
         </div>
         <div class="border-r-2 border-gray-200 absolute h-full left-40 top-2 z-10">
@@ -19,7 +19,7 @@
         </div>
         <div class="ml-24 w-full">
                 <div title="{{$timeFull}}" class="text-sm italic md:mb-3 text-left">({{$timeAgo}})</div>
-                <div class="flex items-center p-1 border border-gray-300 rounded bg-gray-100 mb-4">
+                <div class="flex items-center p-1 border border-gray-300 rounded bg-gray-100 mb-4 w-max">
                     <p class="w-full flex">
                         <x-renderer.status>{{$statusOld}}</x-renderer.status>
                         <i>=></i>
@@ -31,17 +31,17 @@
     @break
     @case('comment')
     <div class="flex items-center relative">
-        <div class="block w-72">
+        <div class="hidden md:block w-52">
             <x-renderer.avatar-user timeLine="true">{!!$userComment!!}</x-renderer.avatar-user>
         </div>
         <div class="border-r-2 border-gray-200 absolute h-full left-40 top-2 z-10">
             <i class="fa-sharp fa-solid fa-circle-dot -top-1 -left-[7px] absolute text-blue-600"></i>
         </div>
-        <div class="w-full">
+        <div class="ml-24 w-full">
                 <div title="{{$timeFull}}" class="text-sm italic md:mb-3 text-left">({{$timeAgo}})</div>
                 <div class="text-sm md:mb-3 font-medium whitespace-nowrap text-left">{{$nameComment}}</div>
-                <div class="flex items-center p-1 border border-gray-300 rounded bg-gray-100 mb-4">
-                    <p class="w-full flex whitespace-nowrap font-normal">
+                <div class="flex items-center p-1 border border-gray-300 rounded bg-gray-100 mb-4 w-max px-2">
+                    <p class="w-full flex whitespace-nowrap font-normal text-sm">
                         {{$contentComment}}
                     </p>
                 </div>       
