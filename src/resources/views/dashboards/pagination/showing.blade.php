@@ -1,6 +1,7 @@
-@if($paginator->total() && $paginator->hasPages())
+@php $total = $paginator->total(); @endphp
+@if($total && $paginator->hasPages())
 {{-- Showing {{ $paginator->firstItem() }} to {{ $paginator->lastItem() }} of {{ $paginator->total() }} --}}
 <div class="flex items-center">
-    Total <b class="px-1">{{ Str::humanReadable($paginator->total()) }}</b>
+    Total <b class="px-1" title="{{$total}}">{{ Str::humanReadable($total) }}</b>
 </div>
 @endif
