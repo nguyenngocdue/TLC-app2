@@ -5,3 +5,5 @@ docker exec -it laravel102_php php artisan config:clear
 docker exec -it laravel102_php php artisan route:clear
 docker exec -it laravel102_php php artisan event:clear
 docker exec -it laravel102_php php artisan route:cache
+
+echo "Don't forget to run php artisan migrate to have the latest version of DB"
