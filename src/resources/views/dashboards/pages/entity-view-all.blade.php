@@ -18,20 +18,15 @@
     $abt = "<x-form.action-button-group type='$type' />"; 
     $route = route('updateUserSettings');
     $p = "<x-form.per-page type='$type' route='$route' perPage='$perPage' />";
+    $am = "<x-form.action-multiple type='{{$type}}'/>";
     @endphp
     <x-renderer.table showNo="true" :columns="$columns" :dataSource="$dataSource" 
         showPaginationTop="true"
         topCenterControl="{!! $abt !!}"
         topRightControl="{!! $p !!}"
+        bottomLeftControl="{!! $am !!}"
         />
-        <div class="flex">
-            <x-renderer.button size='xs' value='$name' type='default' onClick='actionDuplicated()' >
-                <input id="{{$type}}_checkbox_all" type="checkbox">
-                    Check all
-            </x-renderer.button>
-            <x-renderer.button size='xs' value='$name' type='secondary' onClick='actionDuplicated()' ><i class='fa fa-copy'></i> Duplicate All</x-renderer.button>
-            <x-renderer.button size='xs' value='$name' type='danger' onClick='actionDeleted()' ><i class='fa fa-trash'></i> Delete All</x-renderer.button>
-        </div>
+        
 </div>
 <br />
 <script src="{{ asset('js/renderprop.js') }}"></script>
