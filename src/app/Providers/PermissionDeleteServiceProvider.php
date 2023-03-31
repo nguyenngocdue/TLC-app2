@@ -2,11 +2,16 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\Workflow\LibApps;
+use App\Models\User;
 use App\Providers\Support\TraitSupportPermissionGate;
+use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
-class PermissionEditServiceProvider extends ServiceProvider
+class PermissionDeleteServiceProvider extends ServiceProvider
 {
     use TraitSupportPermissionGate;
     /**
@@ -26,14 +31,11 @@ class PermissionEditServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Gate::define('edit', function ($user, $model) {
+        Gate::define('delete', function ($user, $model) {
             return $this->editAndDelete($user, $model);
         });
-        Gate::define('edit-others', function ($user, $model) {
+        Gate::define('delete-others', function ($user, $model) {
             return $this->editAndDeleteOther($user, $model);
-        });
-        Gate::before(function ($user, $ability) {
-            return $user->hasRoleSet('super-admin') ? true : null;
         });
     }
 }

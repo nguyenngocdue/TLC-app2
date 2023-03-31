@@ -180,6 +180,7 @@ return [
         App\Providers\EntitiesFacadeServiceProvider::class,
         App\Providers\CurrentUserFacadeProvider::class,
         App\Providers\PermissionEditServiceProvider::class,
+        App\Providers\PermissionDeleteServiceProvider::class,
         Brian2694\Toastr\ToastrServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         // Spatie\Permission\PermissionServiceProvider::class,

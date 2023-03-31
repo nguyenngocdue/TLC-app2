@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Models\Attachment;
+use App\Providers\Support\TraitSupportPermissionGate;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
@@ -23,6 +24,7 @@ trait TraitEntityCRUDCreateEdit2
 {
 	use TraitEntityListenDataSource;
 	use TraitSupportEntityCRUDCreateEdit2;
+	use TraitSupportPermissionGate;
 
 	public function create(Request $request)
 	{
@@ -54,31 +56,12 @@ trait TraitEntityCRUDCreateEdit2
 			'filters4' => $this->getFilters4($tableBluePrint),
 		]);
 	}
-	private function checkPermissionEdit($permission)
-	{
-		return auth()->user()->roleSets[0]->hasAnyPermission($permission);
-	}
-	private function checkPermissionEditUsingGate($id)
-	{
-		$permissions = $this->permissionMiddleware['edit'];
-		$permissions = is_array($permissions) ? $permissions : explode('|', $permissions);
-		$model = (new ($this->data))::findOrFail($id);
-		switch (true) {
-			case $this->checkPermissionEdit($permissions[0]):
-				if (!Gate::allows('edit', $model) || !Gate::allows('edit-others', $model)) abort(403, "Permission denied edit");
-				break;
-			case $this->checkPermissionEdit($permissions[1]):
-				if (!Gate::allows('edit-others', $model)) abort(403, "Permission denied edit-others");
-				break;
-			default:
-				break;
-		}
-	}
+
 
 	public function edit(Request $request, $id)
 	{
 		//check permission using gate
-		$this->checkPermissionEditUsingGate($id);
+		$original = $this->checkPermissionUsingGate($id, 'edit');
 		$status = $request->query('status');
 		$dryRunTokenRequest = $request->query('dryrun_token');
 		$valueCreateDryToken = $this->hashDryRunToken($id, $status);
@@ -86,7 +69,6 @@ trait TraitEntityCRUDCreateEdit2
 		// dump(SuperProps::getFor($this->type));
 		$superProps = $this->getSuperProps();
 		$props = $superProps['props'];
-		$original = $this->data::findOrFail($id);
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($original, $props);
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];

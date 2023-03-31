@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Zunit_test_03 extends ModelExtended
 {
+    use SoftDeletes;
+
     protected $fillable = [
-        'id', 'name', 'parent_id', 'order_no',
+        'id', 'name', 'parent_id', 'order_no', "owner_id", "delete_at",
         "datetime1", "datetime2", "datetime3", "datetime4", "datetime5", "datetime6", "datetime7"
     ];
     protected $primaryKey = 'id';

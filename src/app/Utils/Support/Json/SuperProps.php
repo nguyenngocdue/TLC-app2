@@ -4,6 +4,7 @@ namespace App\Utils\Support\Json;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\CacheToRamForThisSection;
+use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -105,7 +106,11 @@ class SuperProps
         foreach ($allProps as &$prop) {
             $prop['width'] = $prop['width'] ? $prop['width'] : 100;
             $prop['col_span'] = $prop['col_span'] ? $prop['col_span'] : 12;
-            $prop['duplicatable'] = $prop['duplicatable'] ?? ''; //<<CONFIG_MIGRATE
+            if (in_array(substr($prop['name'], 1), JsonControls::getIgnoreDuplicatable())) {
+                $prop['duplicatable'] = '';
+            } else {
+                $prop['duplicatable'] = $prop['duplicatable'] ?? ''; //<<CONFIG_MIGRATE
+            }
         }
         // static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
         static::attachJson("default-values", $allProps, DefaultValues::getAllOf($type));

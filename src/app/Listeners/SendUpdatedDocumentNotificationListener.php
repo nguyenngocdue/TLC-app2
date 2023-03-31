@@ -16,6 +16,7 @@ use App\Utils\Support\JsonControls;
 use Barryvdh\Debugbar\Twig\Extension\Dump;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
@@ -49,12 +50,13 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         $previousValue = $event->{'previousValue'};
         $currentValue = $event->{'currentValue'};
         $classType = $event->{'classType'};
+        $userCurrentId = $event->{'userCurrentId'};
         if (!$currentValue['status']) {
             dump('Status NOT FOUND.');
             dump('Send Mail And Notifications will not work.');
             return;
         }
-        $this->insertLogger($previousValue, $currentValue, auth()->user()->id, $classType);
+        $this->insertLogger($previousValue, $currentValue, $userCurrentId, $classType);
         $listAssignees = JsonControls::getAssignees();
         $listMonitors = JsonControls::getMonitors();
         foreach ($currentValue as $key => $value) {
@@ -71,11 +73,10 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
                             if (explode('|', $newBallInCourt)[0] == 'creator') {
                                 $changStatusAssignee[$keyCombine]
                                     = $currentValue['owner_id'];
-                            } else {
-                                $changStatusAssignee[$keyCombine]
-                                    = $value;
                             }
                         }
+                        $changStatusAssignee[$keyCombine]
+                            = $value;
                     }
                     break;
                 case in_array($key, $listMonitors):
@@ -272,8 +273,9 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
     }
     private function filterCc($cc, $user)
     {
-        return array_filter($cc, fn ($item) => !$item == $user['email']);
+        return array_filter($cc, fn ($item) => $item !== $user['email']);
     }
+
     private function sendMailFormat($user, $cc, $type, $userName, $subjectMail, $href, $currentValue, $previousValue, $changeAssignee, $changeMonitor)
     {
         Mail::to($user)

@@ -2,14 +2,29 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Providers\Support\TraitSupportPermissionGate;
+use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 trait TraitEntityCRUDDestroy
 {
-    function destroy(Request $request, $id)
+    use TraitSupportPermissionGate;
+    function destroy($id)
     {
-        $modelPath = $this->data;
-        $item = $modelPath::find($id);
-        return $item->delete();
+        //check permission using gate
+        $theLine = $this->checkPermissionUsingGate($id, 'delete');
+        try {
+            $theLine->delete();
+            return ResponseObject::responseSuccess(
+                null,
+                [],
+                "Delete document successfully!",
+            );
+        } catch (\Throwable $th) {
+            return ResponseObject::responseFail(
+                "Delete document fail!",
+            );
+        }
     }
 }

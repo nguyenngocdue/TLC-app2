@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityExportCSV;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityShowQRList6;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
+use App\Utils\Support\Json\SuperProps;
+use App\Utils\System\Api\ResponseObject;
+use PDO;
 
 class ViewAllInvokerController extends Controller
 {
@@ -14,6 +18,7 @@ class ViewAllInvokerController extends Controller
     use TraitEntityShowQRList6;
     use TraitEntityDynamicType;
     use TraitViewAllFunctions;
+    use TraitEntityFormula;
 
     protected $type = "";
     protected $typeModel = '';
@@ -59,5 +64,38 @@ class ViewAllInvokerController extends Controller
             fclose($file);
         };
         return response()->stream($callback, 200, $headers);
+    }
+    public function duplicate($id)
+    {
+        $theLine = $this->typeModel::findOrFail($id)->toArray();
+        if (!$theLine) {
+            return ResponseObject::responseFail(
+                "Document doesn't exits!",
+            );
+        }
+        $settingDuplicatable = $this->getSettingDuplicatable();
+        try {
+            foreach ($settingDuplicatable as $key => $value) {
+                if (!$value) {
+                    $theLine[substr($key, 1)] = null;
+                }
+            };
+            $theLine = $this->applyFormula($theLine, 'create');
+            $this->typeModel::create($theLine);
+            return ResponseObject::responseSuccess(
+                null,
+                [],
+                "Duplicate document successfully!",
+            );
+        } catch (\Throwable $th) {
+            return ResponseObject::responseFail(
+                "Duplicate document fail,please check setting duplicatable!",
+            );
+        }
+    }
+    private function getSettingDuplicatable()
+    {
+        $props =  SuperProps::getFor($this->type)['props'];
+        return array_map(fn ($item) => $item['duplicatable'], $props);
     }
 }

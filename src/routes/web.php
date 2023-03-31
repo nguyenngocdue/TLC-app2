@@ -40,6 +40,7 @@ Route::group([
             // $singular = Str::singular($entityName);
             // $ucfirstName = Str::ucfirst($singular);
             Route::resource("{$entityName}", ViewAllController::class)->only('index');
+            Route::get("{$entityName}_dp/{id}", [ViewAllInvokerController::class, "duplicate"])->name("{$entityName}_dp");
             Route::get("{$entityName}_ep", [ViewAllInvokerController::class, "exportCSV"])->name("{$entityName}_ep.exportCSV");
             Route::get("{$entityName}_qr", [ViewAllInvokerController::class, "showQRCode"])->name("{$entityName}_qr.showQRCode");
             Route::resource("{$entityName}", EntityCRUDController::class)->only('create', 'store', 'edit', 'update', 'show', 'destroy');
