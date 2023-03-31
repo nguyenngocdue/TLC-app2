@@ -131,6 +131,7 @@ class ManageProps extends Manage_Parent
                 'width' => 10,
             ],
             [
+                "title" => "Dupli-catable",
                 "dataIndex" => "duplicatable",
                 "align" => "center",
                 "editable" => true,

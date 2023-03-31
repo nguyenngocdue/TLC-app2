@@ -26,10 +26,13 @@
             </a>
         </li>
         @roleset('admin|super-admin')
-        <hr class="my-2" />
         @foreach ($userMenu as $value)
+        @if($value['href'] === '-')
+        <hr class="my-2" />
+        <p class="font-bold text-center w-full text-sm">{{ $value['title'] }}</p>
+        @else
         <li class="flex">
-            <a class="inline-flex w-full items-center rounded-md px-2 py-1 text-sm font-semibold transition-colors duration-150 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="{{ $value['hef'] }}" target="_blank">
+            <a class="inline-flex w-full items-center rounded-md px-2 py-1 text-sm font-semibold transition-colors duration-150 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="{{ $value['href'] }}" target="_blank">
                 @isset($value['icon_fa'])
                 <i class="mr-3 h-4 w-4 {{$value['icon_fa']}}"></i>
                 @else
@@ -38,6 +41,7 @@
                 <span>{{ $value['title'] }}</span>
             </a>
         </li>
+            @endif
         @endforeach
         @endroleset
     </ul>

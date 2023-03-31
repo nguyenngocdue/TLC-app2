@@ -34,6 +34,14 @@ class Table extends Component
     private $tableDebug = false,
     private $rotate45Width = false,
     private $noCss = false,
+    private $showPaginationTop = false,
+    private $showPaginationBottom = true,
+    private $topLeftControl = null,
+    private $topCenterControl = null,
+    private $topRightControl = null,
+    private $bottomLeftControl = null,
+    private $bottomCenterControl = null,
+    private $bottomRightControl = null,
   ) {
   }
 
@@ -71,6 +79,14 @@ class Table extends Component
       'tableDebug' => $this->tableDebug,
       'trClassList' => 'border-b bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
       'noCss' => $this->noCss,
+      'showPaginationTop' => $this->showPaginationTop,
+      'showPaginationBottom' => $this->showPaginationBottom,
+      'topLeftControl' => $this->topLeftControl,
+      'topCenterControl' => $this->topCenterControl,
+      'topRightControl' => $this->topRightControl,
+      'bottomLeftControl' => $this->bottomLeftControl,
+      'bottomCenterControl' => $this->bottomCenterControl,
+      'bottomRightControl' => $this->bottomRightControl,
     ]);
   }
 }

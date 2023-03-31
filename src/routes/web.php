@@ -22,7 +22,7 @@ use App\Http\Controllers\Workflow\ManageWidgetsController;
 use App\Utils\Support\Entities;
 use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -68,17 +68,27 @@ Route::group([
                     $path = "App\\Http\\Controllers\\Reports\\Reports\\{$ucfirstName}_$mode";
                     $routeName = 'report-' . $singular . "_" . $mode;
                     $name = 'report-' . $singular . "/$mode";
-                    if (class_exists($path)) Route::get($name, [$path, 'index'])->name($routeName);
+                    if (class_exists($path)) {
+                        Route::get($name, [$path, 'index'])->name($routeName);
+                        Route::get("{$routeName}_ep", [$path, "exportCSV"])->name("{$routeName}_ep.exportCSV");
+                    }
 
                     $path = "App\\Http\\Controllers\\Reports\\Registers\\{$ucfirstName}_$mode";
                     $routeName = 'register-' . $singular . "_" . $mode;
                     $name = 'register-' . $singular . "/$mode";
-                    if (class_exists($path)) Route::get($name, [$path, 'index'])->name($routeName);
+                    if (class_exists($path)) {
+                        Route::get($name, [$path, 'index'])->name($routeName);
+                        Route::get("{$name}_ep", [$path, 'exportCSV'])->name("{$routeName}_ep.exportCSV");
+                        // Route::get("{$routeName}_ep", [$path, "exportCSV"])->name("{$routeName}_ep.exportCSV");
+                    }
 
                     $path = "App\\Http\\Controllers\\Reports\\Documents\\{$ucfirstName}_$mode";
                     $routeName = 'document-' . $singular . "_" . $mode;
                     $name = 'document-' . $singular . "/$mode";
-                    if (class_exists($path)) Route::get($name, [$path, 'index'])->name($routeName);
+                    if (class_exists($path)) {
+                        Route::get($name, [$path, 'index'])->name($routeName);
+                        Route::get("{$routeName}_ep", [$path, "exportCSV"])->name("{$routeName}_ep.exportCSV");
+                    }
                 }
             });
         }
@@ -183,3 +193,5 @@ Route::group([
 Route::get('/modular/{slug}',  fn ($slug) => redirect('app/pj_modules/' . $slug));
 Route::get('/unit/{slug}', fn ($slug) => redirect('app/pj_units/' . $slug));
 Route::get('/shipment/{slug}', fn ($slug) => redirect('app/pj_shipments/' . $slug));
+
+Route::get('reset', fn () => (new UpdateUserSettings())(new Request(['action' => 'resetAllSettings']), '/'));

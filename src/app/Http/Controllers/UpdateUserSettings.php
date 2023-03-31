@@ -144,7 +144,7 @@ class UpdateUserSettings extends Controller
         return $settings;
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, $redirectTo = null)
     {
         // dd($request);
         $action = $request->input('action');
@@ -182,6 +182,9 @@ class UpdateUserSettings extends Controller
             case 'updatePerPageDocuments':
                 $settings = $this->updatePerPageRegister($request, $settings);
                 break;
+            case 'resetAllSettings':
+                $settings = [];
+                break;
             default:
                 Log::error("Unknown action $action");
                 break;
@@ -189,6 +192,7 @@ class UpdateUserSettings extends Controller
         $user->settings = $settings;
         $user->update();
         Toastr::success('User Settings Saved Successfully', 'Successfully');
-        return redirect()->back();
+        if (is_null($redirectTo)) return redirect()->back();
+        return redirect($redirectTo);
     }
 }

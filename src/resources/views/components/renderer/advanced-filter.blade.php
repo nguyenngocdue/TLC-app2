@@ -110,15 +110,15 @@
                 <x-advanced-filter.parent-type3 :type="$type" :name="$columnName" :valueSelected="$valueControl"/>
                 @break --}}
                 @default
-                <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}]" />
+                <x-feedback.alert type="warning" title="Control" message="[{{$control}}] ???" />
                 @break
                 @endswitch
             </div>
             @endforeach
         </div>
         <div class="py-2">
-            <x-renderer.button htmlType="submit" type="primary" name="action" value="updateAdvanceFilter">APPLY</x-renderer.button>
-            <x-renderer.button type="secondary" click="clearAdvanceFilter()"><i class="fa-sharp fa-solid fa-circle-xmark"></i> RESET FILTER</x-renderer.button>
+            <x-renderer.button htmlType="submit" type="primary" name="action" value="updateAdvanceFilter"><i class="fa-sharp fa-solid fa-check"></i> Apply Filter</x-renderer.button>
+            <x-renderer.button type="secondary" click="clearAdvanceFilter()"><i class="fa-sharp fa-solid fa-circle-xmark"></i> Reset</x-renderer.button>
         </div>
     </div>
     
