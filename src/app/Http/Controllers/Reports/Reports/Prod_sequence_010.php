@@ -20,6 +20,7 @@ class Prod_sequence_010 extends Report_ParentController
     protected  $prod_routing_id = 6;
     protected $rotate45Width = 400;
 
+
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT 

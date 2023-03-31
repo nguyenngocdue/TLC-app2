@@ -4,8 +4,8 @@
 @section('content')
 @php
 $dataHead = array_values($tableDataSource->items())[0][0];
-// dd($tableDataSource->items());
 @endphp
+
 <div class="md:px-4 no-print">
     <div class="flex justify-end pb-2 pr-4 ">
         <x-reports.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" routeName="{{$routeName}}" page-limit="{{$pageLimit}}" />

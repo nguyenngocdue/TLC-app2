@@ -17,6 +17,7 @@ class Hr_overtime_request_010 extends Report_ParentController
     use TraitForwardModeReport;
     protected $groupBy = 'name_render';
     protected $groupByLength = 1;
+
     public function getSqlStr($modeParams)
     {
         $sql = " SELECT tb3.*

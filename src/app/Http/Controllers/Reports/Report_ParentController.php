@@ -20,6 +20,7 @@ abstract class Report_ParentController extends Controller
     use TraitMenuTitle;
     use TraitModeParamsReport;
     use TraitDataModesReport;
+    use TraitFunctionsReport;
     abstract protected function getSqlStr($modeParams);
     abstract protected function getTableColumns($dataSource, $modeParams);
     abstract protected function getDataForModeControl($dataSource);
@@ -143,22 +144,23 @@ abstract class Report_ParentController extends Controller
         }
 
         $currentUserId = Auth::id();
-        $currentMode = $this->mode;
-
         $modeParams = $this->getModeParams($request);
         // dd($modeParams);
         $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
 
         $dataSource = $this->getDataSource($modeParams);
+        // dd($dataSource);
 
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
         $start = microtime(true);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
-        // dump(count($dataSource));
+
 
         $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
+        $this->getDataToExportExcel(132);
+
         // dd($dataSource);
         // Execute the query
         $time = microtime(true) - $start;
@@ -175,21 +177,61 @@ abstract class Report_ParentController extends Controller
             'pageLimit' => $pageLimit,
             'routeName' => $routeName,
             'modeParams' => $modeParams,
-            'groupBy' => $this->groupBy,
             'typeReport' => $typeReport,
-            'currentMode' => $currentMode,
+            'currentMode' =>  $this->mode,
             'tableColumns' => $tableColumns,
             'tableDataSource' => $dataSource,
             'currentUserId' => $currentUserId,
             'dataModeControl' => $dataModeControl,
+            'groupBy' => $this->groupBy,
+            'modeOptions' => $this->$entity(),
             'rotate45Width' => $this->rotate45Width,
             'groupByLength' => $this->groupByLength,
-            'modeOptions' => $this->$entity(),
             'topTitle' => $this->getMenuTitle(),
             'modeColumns' => $this->modeColumns(),
             'paramColumns' => $this->getParamColumns(),
             'legendColors' => $this->getColorLegends(),
 
         ]);
+    }
+
+    protected function getDataToExportExcel($dataSource)
+    {
+        return $dataSource;
+    }
+
+
+    public function exportCSV(Request $request)
+    {
+        $entity = CurrentPathInfo::getEntityReport($request, '_ep');
+        $modeParams = $this->getModeParams($request, '_ep');
+        $dataSource = $this->getDataSource($modeParams);
+        [$columnKeys, $columnNames] = $this->makeColumns($dataSource, $modeParams);
+        $rows = $this->makeRowsFollowColumns($dataSource, $columnKeys);
+
+        $fileName = $entity . $this->mode . '.csv';
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        $columnKeys = array_combine($columnKeys, $columnKeys);
+        // dd($rows, $columnNames);
+        $callback = function () use ($rows, $columnKeys, $columnNames) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columnNames);
+            $array = [];
+            foreach ($rows as $row) {
+                foreach ($columnKeys as $key => $column) {
+                    $array[$column] = $row[$key];
+                }
+                fputcsv($file, $array);
+            }
+            fclose($file);
+        };
+        return response()->stream($callback, 200, $headers);
     }
 }

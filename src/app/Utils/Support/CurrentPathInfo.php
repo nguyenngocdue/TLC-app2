@@ -6,15 +6,15 @@ use Illuminate\Support\Str;
 
 class CurrentPathInfo
 {
-    public static function getTypeReport($request)
+    public static function getTypeReport($request, $tail = '')
     {
-        $pathInfo = $request->getPathInfo();
+        $pathInfo = $tail ? str_replace($tail, '', $request->getPathInfo()) : $request->getPathInfo();
         $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[0]);
         return strtolower(Str::plural($pathInfo[0]));
     }
-    public static function getEntityReport($request)
+    public static function getEntityReport($request, $tail = '')
     {
-        $pathInfo = $request->getPathInfo();
+        $pathInfo = $tail ? str_replace($tail, '', $request->getPathInfo()) : $request->getPathInfo();
         $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[1]);
         return strtolower(Str::plural($pathInfo[1]));
     }

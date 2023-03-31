@@ -17,6 +17,7 @@
         <x-reports.color-legend-report :dataSource="$legendColors" />
     </x-renderer.card>
     @endif
+    <x-reports.utility-report routeName="{{$routeName}}" />
     <x-renderer.table :columns="$tableColumns" :dataSource="$tableDataSource" showNo={{true}} rotate45Width={{$rotate45Width}} groupBy="{{$groupBy}}" groupByLength="{{$groupByLength}}" />
 </div>
 @endsection

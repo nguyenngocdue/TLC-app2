@@ -57,6 +57,11 @@ class Report
         $strLower = strtolower($string);
         return preg_replace('/[[:space:]]+/', "_", $strLower);
     }
+    public static function makeTitle($string)
+    {
+        return ucwords(str_replace('_', ' ', $string));
+    }
+
     public static function pressArrayTypeAllItems($dataSource)
     {
         $array = [];
