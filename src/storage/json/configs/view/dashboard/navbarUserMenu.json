@@ -1,47 +1,59 @@
 {
+    "hr0": {
+        "title": "Internal",
+        "href": "-"
+    },
     "php_admin": {
         "title": "PhpMyAdmin",
-        "hef": "http://{{phpMyAdmin}}/",
+        "href": "http://{{phpMyAdmin}}/",
         "icon_fa": "fa-duotone fa-database"
     },
     "php_admin_table": {
         "title": "PhpMyAdmin -> Table",
-        "hef": "http://{{phpMyAdminTable}}/",
+        "href": "http://{{phpMyAdminTable}}/",
         "icon_fa": "fa-duotone fa-database"
+    },
+    "component": {
+        "title": "Components Demo",
+        "href": "/components",
+        "icon_fa": "fa-brands fa-elementor"
+    },
+    "hr1": {
+        "title": "External",
+        "href": "-"
+    },
+    "min_io": {
+        "title": "MinIO",
+        "href": "https://qaqc.tlcmodular.com",
+        "icon_fa": "fa-duotone fa-images"
+    },
+    "redis-insight": {
+        "title": "Redis Insight",
+        "href": "http://{{redis}}",
+        "icon_fa": "fa-duotone fa-registered"
     },
     "telescope": {
         "title": "Telescope",
-        "hef": "http://{{app}}/telescope/requests",
+        "href": "/telescope/requests",
         "icon_fa": "fa-duotone fa-telescope"
     },
     "graphql": {
         "title": "GraphQL PlayGround",
-        "hef": "http://{{app}}/graphql-playground",
+        "href": "/graphql-playground",
         "icon_fa": "fa-duotone fa-diagram-project"
     },
-    "min_io": {
-        "title": "MinIO",
-        "hef": "http://192.168.100.100:9001",
-        "icon_fa": "fa-duotone fa-images"
-    },
-    "component": {
-        "title": "Components Demo",
-        "hef": "/components",
-        "icon_fa": "fa-brands fa-elementor"
+    "hr2": {
+        "title": "3rd Party",
+        "href": "-"
     },
     "windmill": {
         "title": "Windmill Dashboard",
-        "hef": "https://windmill-dashboard.vercel.app/",
+        "href": "https://windmill-dashboard.vercel.app/",
         "icon_fa": "fa-duotone fa-gauge"
     },
     "font-awesome": {
         "title": "Font Awesome 6 Pro",
-        "hef": "https://fontawesome.com/icons",
+        "href": "https://fontawesome.com/icons",
         "icon_fa": "fa-duotone fa-font-awesome"
-    },
-    "redis-insight": {
-        "title": "Redis Insight",
-        "hef": "http://{{redis}}",
-        "icon_fa": "fa-duotone fa-registered"
     }
 }
