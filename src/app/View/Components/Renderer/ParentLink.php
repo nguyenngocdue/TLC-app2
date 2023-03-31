@@ -45,6 +45,6 @@ class ParentLink extends Component
                 return;
             }
         }
-        return "NO LINK FOUND";
+        return "<div class='px-2'>NO LINK FOUND</div>";
     }
 }
