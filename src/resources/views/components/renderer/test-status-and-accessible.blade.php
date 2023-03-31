@@ -24,7 +24,7 @@
                 <div class="mb-1">
                     @isset($statuses[$status])
                         @foreach($statuses[$status]['capability-roles'] as $value)
-                            <span><x-renderer.tag color="gray" rounded="rounded" class="ml-1">{{$value}}</x-renderer.tag></span>
+                            <x-renderer.tag color="gray" rounded="rounded" class="ml-1">{{$value}}</x-renderer.tag>
                         @endforeach
                     @else
                         Status [{{$status}}] not found

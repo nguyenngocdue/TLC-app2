@@ -14,4 +14,4 @@ $rounded = $rounded ?? 'rounded-lg';
 
 <span {!! $title_rendered !!} class="{{$bg}} {{$text}} {{$bg_dark}} {{$text_dark}} {{$class}} {{$rounded}} whitespace-nowrap font-semibold text-xs px-2 py-1 leading-tight ">
     {{ $slot }}
-</span
+</span>
