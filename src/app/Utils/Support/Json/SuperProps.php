@@ -105,6 +105,7 @@ class SuperProps
         foreach ($allProps as &$prop) {
             $prop['width'] = $prop['width'] ? $prop['width'] : 100;
             $prop['col_span'] = $prop['col_span'] ? $prop['col_span'] : 12;
+            $prop['duplicatable'] = $prop['duplicatable'] ?? ''; //<<CONFIG_MIGRATE
         }
         // static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
         static::attachJson("default-values", $allProps, DefaultValues::getAllOf($type));
@@ -180,6 +181,17 @@ class SuperProps
         return $result;
     }
 
+    private static function getCommentsFromProps($props)
+    {
+        $result = [];
+        $index = 1;
+        foreach ($props as $key => $prop) {
+            if ($prop['control'] === 'comment')
+                $result["comment" . str_pad($index, 2, '0', STR_PAD_LEFT)] = $key;
+        }
+        return $result;
+    }
+
     private static function make($type)
     {
         static::$type = $type;
@@ -187,10 +199,11 @@ class SuperProps
         static::$result['type'] = Str::singular($type);
         static::$result['plural'] = Str::plural($type);
         static::$result['props'] = static::readProps($type);
-        static::$result['tables'] = static::getTablesFromProps(static::$result['props']);
         static::$result['statuses'] = static::readStatuses($type);
         static::$result['intermediate'] = static::readIntermediate($type);
         static::$result['settings'] = static::readSettings($type);
+        static::$result['tables'] = static::getTablesFromProps(static::$result['props']);
+        static::$result['comments'] = static::getCommentsFromProps(static::$result['props']);
         return static::$result;
     }
 
@@ -212,6 +225,6 @@ class SuperProps
         if (App::isLocal()) return;
         $type = Str::singular($type);
         $key = "super_prop_$type";
-        Cache::forget($key);
+        CacheToRamForThisSection::forget($key);
     }
 }

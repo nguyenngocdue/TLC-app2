@@ -123,6 +123,13 @@ class ViewAllController extends Controller
             'control' => 'qr_code',
         ];
         array_splice($props, 1, 0, [$qrCodeColumn]);
+
+        $actionColumn = [
+            'label' => "QR Code",
+            'column_name' => 'id',
+            'control' => 'qr_code',
+        ];
+        // array_splice($props, 1, 0, [$qrCodeColumn]);
         $result = array_values(array_map(fn ($prop) => createObject($prop, $type), $props));
         return $result;
     }

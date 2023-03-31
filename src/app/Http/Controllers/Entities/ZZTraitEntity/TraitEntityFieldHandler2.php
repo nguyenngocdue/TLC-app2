@@ -169,7 +169,7 @@ trait TraitEntityFieldHandler2
     private function makeUpTableFieldForRequired(Request $request)
     {
         $tableNames = $request->input('tableNames');
-        array_shift($tableNames);
+        array_shift($tableNames); //Remove table00 (the_form)
         $sp = $this->superProps;
         foreach ($tableNames as $table01Name => $tableName) {
             if ($request->input($table01Name)) { //User has submit at least one line
@@ -181,5 +181,28 @@ trait TraitEntityFieldHandler2
                 }
             }
         }
+    }
+
+    private function makeUpCommentFieldForRequired(Request $request)
+    {
+        $comments = $this->superProps['comments'];
+        foreach ($comments as $comment01Name => $commentFieldName) {
+            $alright = true;
+            $comment = $request->input($comment01Name);
+            if ($comment) {
+                $contents = $comment['content'];
+                foreach ($contents as $content) {
+                    if ($content == "") {
+                        $alright  = false;
+                        break;
+                    }
+                }
+            }
+            // dump($comment);
+            $field = substr($commentFieldName, 1); //Remove first _
+            if ($alright) $request->request->add([$field => 'has at least one line']);
+        }
+        // dump($alright);
+        // dd();
     }
 }

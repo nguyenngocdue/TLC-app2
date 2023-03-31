@@ -22,7 +22,7 @@ use App\Http\Controllers\Workflow\ManageWidgetsController;
 use App\Utils\Support\Entities;
 use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -110,6 +110,7 @@ Route::group([
                 Route::resource("{$singular}_ltn", ManageJsonController::class)->only('index', 'store');
                 Route::resource("{$singular}_stt", ManageJsonController::class)->only('index', 'store');
                 Route::resource("{$singular}_tst", ManageJsonController::class)->only('index', 'store');
+                Route::resource("{$singular}_wdw", ManageJsonController::class)->only('index', 'store');
                 Route::resource("{$singular}_atb", ManageJsonController::class)->only('index', 'store');
                 Route::resource("{$singular}_dfn", ManageJsonController::class)->only('index', 'store');
                 Route::resource("{$singular}_itm", ManageJsonController::class)->only('index', 'store');
@@ -191,3 +192,5 @@ Route::group([
 Route::get('/modular/{slug}',  fn ($slug) => redirect('app/pj_modules/' . $slug));
 Route::get('/unit/{slug}', fn ($slug) => redirect('app/pj_units/' . $slug));
 Route::get('/shipment/{slug}', fn ($slug) => redirect('app/pj_shipments/' . $slug));
+
+Route::get('reset', fn () => (new UpdateUserSettings())(new Request(['action' => 'resetAllSettings']), '/'));

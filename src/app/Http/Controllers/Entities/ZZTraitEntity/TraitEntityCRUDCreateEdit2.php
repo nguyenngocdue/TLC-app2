@@ -78,7 +78,7 @@ trait TraitEntityCRUDCreateEdit2
 	public function edit(Request $request, $id)
 	{
 		//check permission using gate
-		// $this->checkPermissionEditUsingGate($id);
+		$this->checkPermissionEditUsingGate($id);
 		$status = $request->query('status');
 		$dryRunTokenRequest = $request->query('dryrun_token');
 		$valueCreateDryToken = $this->hashDryRunToken($id, $status);

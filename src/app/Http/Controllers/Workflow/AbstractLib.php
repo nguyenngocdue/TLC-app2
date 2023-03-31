@@ -39,6 +39,6 @@ class AbstractLib
     public static function invalidateCache()
     {
         if (App::isLocal()) return;
-        Cache::forget(static::$key . '_of_the_app');
+        CacheToRamForThisSection::forget(static::$key . '_of_the_app');
     }
 }

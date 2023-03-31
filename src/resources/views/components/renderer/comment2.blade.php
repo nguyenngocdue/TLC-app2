@@ -33,14 +33,14 @@
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <img src="{{$ownerAvatar}}" class="rounded-full h-6 w-6 object-cover">
                         </div>
-                        <input value="{{$ownerName}}" readonly type='text' class='readonly {{$classList}} pl-10'>
+                        <input tabindex="-1" value="{{$ownerName}}" readonly type='text' class='readonly {{$classList}} pl-10'>
                         @php $name = $readOnly ? '' : "{$comment01Name}[owner_id][$rowIndex]"; @endphp
                         <input name='{{$name}}' value="{{$ownerId}}" readonly type='hidden' class='readonly {{$classList}}'>
                     </div>
                 </div>
                 <div class="col-span-4 ">
                     @php $name = $readOnly ? '' : "{$comment01Name}[position_rendered][$rowIndex]"; @endphp
-                    <input name='{{$name}}' value="{{$positionRendered}}" readonly type='text' class='readonly {{$classList}}'>
+                    <input tabindex="-1" name='{{$name}}' value="{{$positionRendered}}" readonly type='text' class='readonly {{$classList}}'>
                 </div>
                 
                 <div class="col-span-4">
@@ -48,7 +48,7 @@
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <i class="fa-duotone fa-calendar"></i>
                         </div>
-                        <input type="text" value="{{$datetime}}" readonly class="readonly {{$classList}} pl-8">
+                        <input tabindex="-1" type="text" value="{{$datetime}}" readonly class="readonly {{$classList}} pl-8">
                     </div>
                 </div>
             </div>
@@ -58,14 +58,14 @@
             <div class="m-auto text-center flex-1">
                 <div class="flex">
                     @if($allowedDelete && !$readOnly) 
-                        <button type="button" onclick='trashComment("{{$destroyName}}","{{$comment01Name}}_div_{{$rowIndex}}")' class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
+                        <button type="button" title="#{{$commentId}}" onclick='trashComment("{{$destroyName}}","{{$comment01Name}}_div_{{$rowIndex}}")' class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
                             <i class="text-[#d11a2a] fas fa-trash cursor-pointer"></i>
                         </button>
-                        @else
-                        <button type="button" class="w-10 h-10 m-auto hover1:bg-slate-300 rounded-full">
+                    @else
+                        <button type="button" title="#{{$commentId}}" tabindex="-1" class="w-10 h-10 m-auto hover1:bg-slate-300 rounded-full">
                             <i class="text-gray-400 fas fa-trash cursor-not-allowed"></i>
                         </button>
-                        @endif
+                    @endif
                     </div>
                 </div>
             </div>

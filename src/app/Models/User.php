@@ -8,6 +8,7 @@ use App\BigThink\HasStatus;
 use App\BigThink\TraitMenuTitle;
 use App\BigThink\TraitMetaForChart;
 use App\BigThink\TraitMorphManyByFieldName;
+use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -35,6 +36,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     use TraitMetaForChart;
     use TraitMenuTitle;
     use TraitMorphManyByFieldName;
+    use TraitOptimisticLocking;
 
     use HasAttachments;
     use HasStatus;
@@ -47,7 +49,7 @@ class User extends Authenticatable implements LdapAuthenticatable
      */
     protected $fillable = [
         "name", "full_name", "name_suffix", "employeeid", "first_name",
-        "last_name", "address", "phone", "featured_image", "time_keeping_type", "user_type", "workplace",
+        "last_name", "address", "phone", "time_keeping_type", "user_type", "workplace",
         "category", "date_of_birth", "first_date", "last_date", "title", "position_prefix", "position_1",
         "position_2", "position_3", "position_rendered", "discipline", "department", "show_on_beta",
         "resigned", "viewport_uids", "leaf_uids", 'email_verified_at', "email", "password", "settings", "provider", "user_id_passport", "user_pin",
@@ -100,6 +102,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         //This line is for ParentType to load,
         //Otherwise in User screen, the thumbnail will lost its value
         "attachment" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
+        "featured_image" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
     ];
 
     public $oracyParams = [
@@ -179,6 +182,12 @@ class User extends Authenticatable implements LdapAuthenticatable
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function featured_image()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
     public function productionRuns()
     {
