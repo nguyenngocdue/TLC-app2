@@ -105,6 +105,7 @@ class SuperProps
         foreach ($allProps as &$prop) {
             $prop['width'] = $prop['width'] ? $prop['width'] : 100;
             $prop['col_span'] = $prop['col_span'] ? $prop['col_span'] : 12;
+            $prop['duplicatable'] = $prop['duplicatable'] ?? ''; //<<CONFIG_MIGRATE
         }
         // static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
         static::attachJson("default-values", $allProps, DefaultValues::getAllOf($type));
