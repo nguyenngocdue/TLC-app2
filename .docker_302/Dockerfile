@@ -14,9 +14,9 @@ RUN apk update && apk add \
     ca-certificates \
     openssl \
     nano \
-    mc
-
-RUN apk add supervisor
+    mc \
+    htop \
+    supervisor
 
 RUN curl -sSLf \
     -o /usr/local/bin/install-php-extensions \
@@ -56,4 +56,5 @@ USER ndc
 # RUN chmod +x /var/www/app/docker-entrypoint.sh
 # ENTRYPOINT ["sh", "/var/www/app/docker-entrypoint.sh"]
 
-CMD supervisord -n -c /etc/supervisord.conf
+# CMD ["supervisord -n -c /etc/supervisord.conf"]
+RUN rm -rf /var/cache/apk/*
