@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Http\Controllers\Entities\EntityCRUDController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -51,12 +52,13 @@ trait TraitEntityEditableTable
                 $line['idForScroll'] = substr($props[$table01Name], 1); //remove first "_"
                 // dump($line);
                 $fakeRequest->merge($line);
-                $controllerPath = "App\\Http\\Controllers\\Entities\\EntityCRUDController";
-                $controller = new $controllerPath;
+
+                $controller = new EntityCRUDController();
                 $controller->init($tableName);
                 if (isset($line['id']) && !is_null($line['id'])) {
                     if (isset($line['DESTROY_THIS_LINE']) && ('true' == $line["DESTROY_THIS_LINE"])) {
-                        $destroySuccess = $controller->destroy($fakeRequest, $line['id']);
+                        $destroySuccess = $controller->destroy($line['id']);
+                        // $destroySuccess = $controller->destroy($fakeRequest, $line['id']);
                         //Not necessary because it will be deleted when mapping with the next lines
                         if ($destroySuccess) {
                             session()->push('editableTablesTransactions.' . $table01Name, ["result" => 1, "msg" => "Destroyed", 'id' => 1 * $line['id'],]);
