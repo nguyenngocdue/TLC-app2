@@ -30,6 +30,7 @@ trait TraitEntityCRUDDestroy
     public function destroyMultiple(Request $request)
     {
         try {
+
             $strIds = $request->ids;
             $ids = explode(',', $strIds) ?? [];
             $arrFail = $this->checkPermissionUsingGateForDeleteMultiple($ids, 'delete');

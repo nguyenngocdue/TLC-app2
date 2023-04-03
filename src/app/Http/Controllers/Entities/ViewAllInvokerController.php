@@ -11,6 +11,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use PDO;
 
 class ViewAllInvokerController extends Controller

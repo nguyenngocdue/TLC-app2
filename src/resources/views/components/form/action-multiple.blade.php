@@ -1,4 +1,4 @@
-@if(app()->isLocal())
+@if(app()->isLocal() || app()->isTesting() )
 @php
     $idInput = $type.'_checkbox_all';
     $nameInput = $type. '[]';
@@ -10,7 +10,7 @@
         <input id="{{$idInput}}" type="checkbox" name="{{$nameInput}}" value="none"/>
             Select all
     </x-renderer.button>
-    <x-renderer.button size='xs' type='secondary' onClick="actionDuplicateMultiple('{{$type}}','{{$urlDuplicate}}')" ><i class='fa fa-copy'></i> Duplicate</x-renderer.button>
+    <x-renderer.button size='xs' type='secondary' onClick="actionDuplicateMultiple('{{$type}}','{{$urlDuplicate}}')" class="mx-1" ><i class='fa fa-copy'></i> Duplicate</x-renderer.button>
     <x-renderer.button size='xs' type='danger' onClick="actionDeletedMultiple('{{$type}}','{{$urlDestroy}}')" ><i class='fa fa-trash'></i> Delete</x-renderer.button>
 </div>
 @endif
