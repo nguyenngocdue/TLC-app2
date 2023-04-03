@@ -18,7 +18,7 @@
     $abt = "<x-form.action-button-group type='$type' />"; 
     $route = route('updateUserSettings');
     $p = "<x-form.per-page type='$type' route='$route' perPage='$perPage' />";
-    $am = "<x-form.action-multiple type='{{$type}}'/>";
+    $am = "<x-form.action-multiple type='$type'/>";
     @endphp
     <x-renderer.table showNo="true" :columns="$columns" :dataSource="$dataSource" 
         showPaginationTop="true"

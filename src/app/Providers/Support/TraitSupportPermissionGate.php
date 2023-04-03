@@ -71,4 +71,24 @@ trait TraitSupportPermissionGate
         }
         return $model;
     }
+    private function checkPermissionUsingGateForDeleteMultiple($ids, $action = 'delete')
+    {
+        $permissions = $this->permissionMiddleware[$action];
+        $permissions = is_array($permissions) ? $permissions : explode('|', $permissions);
+        $arrFail = [];
+        foreach ($ids as $id) {
+            $model = $this->data::findOrFail($id);
+            switch (true) {
+                case $this->checkPermissionEdit($permissions[0]):
+                    if (!Gate::allows($action, $model) || !Gate::allows($action . '-others', $model)) $arrFail[] = $id;
+                    break;
+                case $this->checkPermissionEdit($permissions[1]):
+                    if (!Gate::allows($action . '-others', $model)) $arrFail[] = $id;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return array_unique($arrFail) ?? [];
+    }
 }
