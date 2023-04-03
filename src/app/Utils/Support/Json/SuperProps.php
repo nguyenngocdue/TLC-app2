@@ -112,9 +112,9 @@ class SuperProps
             $control =  $prop['control'];
             if (in_array($control, ['attachment'])) {
                 $value = $attachmentP[$propName];
-                $value['max_file_count'] = $value['max_file_count'] ? $value['max_file_count'] : 10;
-                $value['max_file_size'] = $value['max_file_size'] ? $value['max_file_size'] : 10;
-                $value['allowed_file_types'] = $value['allowed_file_types'] ? $value['allowed_file_types'] : 'only_images';
+                // $value['max_file_count'] = $value['max_file_count'] ? $value['max_file_count'] : 10;
+                // $value['max_file_size'] = $value['max_file_size'] ? $value['max_file_size'] : 10;
+                // $value['allowed_file_types'] = $value['allowed_file_types'] ? $value['allowed_file_types'] : 'only_images';
                 $result[$propName] = $value;
             }
             if (in_array($control, ['comment'])) {
