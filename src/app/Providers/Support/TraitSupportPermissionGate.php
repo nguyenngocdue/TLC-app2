@@ -49,6 +49,17 @@ trait TraitSupportPermissionGate
     {
         return BuildTree::getTreeByOptions($user->id, $user->viewport_uids, $user->leaf_uids, false, true);
     }
+    private function getListOwnerIds($user)
+    {
+        $value = $this->treeCompany($user);
+        $result = array_map(fn ($item) => $item->id, $value);
+        $result[] = $user->id;
+        return array_unique($result) ?? [];
+    }
+    private function isUseTree($type)
+    {
+        return LibApps::getFor($type)['apply_approval_tree'] ?? false;
+    }
 
     private function checkPermissionEdit($permission)
     {
