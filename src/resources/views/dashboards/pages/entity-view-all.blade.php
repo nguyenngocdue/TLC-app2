@@ -25,6 +25,7 @@
         topCenterControl="{!! $abt !!}"
         topRightControl="{!! $p !!}"
         bottomLeftControl="{!! $am !!}"
+        bottomRightControl="{!! $p !!}"
         />
         
 </div>
