@@ -149,6 +149,7 @@ class WorkflowFields
     static function formatResult(&$result, $prop, $values, $key, $defaultValues, $hidden = null, $readonly = null, $required = null, $typeWorkflow = false)
     {
         $result['label'] = $prop['label'];
+        $result['properties'] = $prop['properties'];
         $columnName = $prop['column_name'];
         $result['columnName'] = $columnName;
         $result['new_line'] = $prop['new_line'];
