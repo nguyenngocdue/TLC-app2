@@ -35,6 +35,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->deleteAttachments($props['attachment'], $request);
 			//Uploading attachments has to run before form validation
 			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
+			dd($uploadedIds);
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
@@ -57,7 +58,9 @@ trait TraitEntityCRUDStoreUpdate2
 			$theRow = $this->data::create($fields);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
-			$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
+			if ($uploadedIds) {
+				$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
+			}
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		} catch (Exception $e) {
@@ -127,8 +130,9 @@ trait TraitEntityCRUDStoreUpdate2
 			$theRow->updateWithOptimisticLocking($fields);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
-
-			$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
+			if ($uploadedIds) {
+				$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
+			}
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
