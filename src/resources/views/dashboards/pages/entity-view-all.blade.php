@@ -29,8 +29,8 @@
                 <input id="{{$type}}_checkbox_all" type="checkbox">
                     Check all
             </x-renderer.button>
-            <x-renderer.button size='xs' value='$name' type='secondary' onClick='actionDuplicated()' ><i class='fa fa-copy'></i> Duplicate All</x-renderer.button>
-            <x-renderer.button size='xs' value='$name' type='danger' onClick='actionDeleted()' ><i class='fa fa-trash'></i> Delete All</x-renderer.button>
+            <x-renderer.button size='xs' value='$name' type='secondary' onClick='actionDuplicated()' ><i class='fa fa-copy'></i> Duplicate</x-renderer.button>
+            <x-renderer.button size='xs' value='$name' type='danger' onClick='actionDeleted()' ><i class='fa fa-trash'></i> Delete</x-renderer.button>
         </div>
 </div>
 <br />
