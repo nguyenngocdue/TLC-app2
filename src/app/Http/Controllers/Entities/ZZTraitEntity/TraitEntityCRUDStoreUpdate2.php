@@ -35,7 +35,6 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->deleteAttachments($props['attachment'], $request);
 			//Uploading attachments has to run before form validation
 			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
-			dd($uploadedIds);
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
@@ -134,7 +133,6 @@ trait TraitEntityCRUDStoreUpdate2
 				$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
 			}
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
-
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);

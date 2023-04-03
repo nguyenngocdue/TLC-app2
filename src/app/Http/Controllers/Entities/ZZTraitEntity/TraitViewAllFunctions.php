@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\App;
@@ -26,6 +27,8 @@ trait TraitViewAllFunctions
         $propsFilters = $this->advanceFilter();
         $advanceFilters = $this->distributeFilter($advanceFilters, $propsFilters);
         $model = $this->typeModel;
+        $isUseTree = $this->isUseTree($this->type);
+        dd($isUseTree);
         $search = request('search');
         $result = App::make($model)::search($search)
             ->query(function ($q) use ($advanceFilters, $propsFilters) {
@@ -34,4 +37,10 @@ trait TraitViewAllFunctions
             });
         return $result;
     }
+    private function isUseTree($type)
+    {
+        return LibApps::getFor($type)['apply_approval_tree'] ?? false;
+    }
+
+    //     
 }
