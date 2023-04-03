@@ -75,6 +75,8 @@ services:
       MYSQL_DATABASE: laravel
       MYSQL_USER: tlc_app_2
       MYSQL_PASSWORD: DLTedTfrVzYbrYv9
+    # removed NO_ZERO_DATE, ONLY_FULL_GROUP_BY
+    command: mysqld --log-bin-trust-function-creators=1
     networks:
       - laravel302
 
