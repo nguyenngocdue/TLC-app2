@@ -10,6 +10,8 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use PDO;
 
 class ViewAllInvokerController extends Controller
@@ -92,6 +94,46 @@ class ViewAllInvokerController extends Controller
                 "Duplicate document fail,please check setting duplicatable!",
             );
         }
+    }
+    public function duplicateMultiple(Request $request)
+    {
+        try {
+            $strIds = $request->ids;
+            $ids = explode(',', $strIds) ?? [];
+            $arrFail = [];
+            $arrDuplicate = [];
+            foreach ($ids as $id) {
+                $theLine = $this->typeModel::findOrFail($id)->toArray();
+                if (!$theLine) {
+                    $arrFail[] = $id;
+                }
+                $settingDuplicatable = $this->getSettingDuplicatable();
+                try {
+                    foreach ($settingDuplicatable as $key => $value) {
+                        if (!$value) {
+                            $theLine[substr($key, 1)] = null;
+                        }
+                    };
+                    $theLine = $this->applyFormula($theLine, 'create');
+                    $this->typeModel::create($theLine);
+                    $arrDuplicate[] = $id;
+                } catch (\Throwable $th) {
+                    $arrFail[] = $id;
+                }
+            }
+            $arrFail = array_unique($arrFail) ?? [];
+            return ResponseObject::responseSuccess(
+                $arrDuplicate,
+                [$arrFail],
+                "Duplicate document successfully!",
+            );
+        } catch (\Throwable $th) {
+            return ResponseObject::responseFail(
+                "Duplicate document fail,please check setting duplicatable!",
+            );
+        }
+
+        return response()->json($strIds);
     }
     private function getSettingDuplicatable()
     {

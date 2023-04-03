@@ -43,5 +43,6 @@ class AppServiceProvider extends ServiceProvider
 
         include_once(__DIR__ . "/Macro/Str.php");
         include_once(__DIR__ . "/Macro/Arr.php");
+        include_once(__DIR__ . "/Macro/App.php");
     }
 }

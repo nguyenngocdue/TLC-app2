@@ -135,7 +135,7 @@ class ViewAllController extends Controller
             'control' => 'qr_code',
         ];
         array_splice($props, 1, 0, [$qrCodeColumn]);
-        if (App::isLocal()) {
+        if (App::isLocal() || App::isTesting()) {
             $actionColumn = [
                 'label' => "Action",
                 'column_name' => 'id',
