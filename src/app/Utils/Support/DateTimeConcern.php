@@ -151,4 +151,62 @@ class DateTimeConcern
         [$quarter, $year] = explode('/', $value);
         return Carbon::createFromDate($year, (($quarter - 1) * 3) + 1);
     }
+
+    // private static function check_in_range($start_date, $end_date, $date_from_user)
+    // {
+    //     // Convert to timestamp
+    //     $start_ts = strtotime($start_date);
+    //     $end_ts = strtotime($end_date);
+    //     $user_ts = strtotime($date_from_user);
+
+    //     // Check that user date is between start & end
+    //     return (($user_ts >= $start_ts) && ($user_ts <= $end_ts));
+    // }
+
+    /** If date in 26/12/2023 ++, it will return year of 2024 */
+    /** Else it will return year as last 4 digits of the input date */
+    //     dump(DateTimeConcern::getMonthBeginAndEndDate0('2023-01-12'));
+    //     dump(DateTimeConcern::getMonthBeginAndEndDate0('2023-12-12'));
+    //     dump(DateTimeConcern::getMonthBeginAndEndDate0('2023-12-25'));
+    //     dump(DateTimeConcern::getMonthBeginAndEndDate0('2023-12-26'));
+    //     dump(DateTimeConcern::getMonthBeginAndEndDate0('2023-12-31'));
+    //     dump(DateTimeConcern::getMonthBeginAndEndDate0('2024-01-01'));
+    public static function getMonthBeginAndEndDate0($date)
+    {
+        $year0 = substr($date, 0, 4);
+        $month0 = substr($date, 5, 2);
+        $date0 = substr($date, 8, 2);
+
+        $previousMonth0 = (($month0 * 1 - 1) % 12);
+        $previousMonth0 = $previousMonth0 == 0 ? 12 : $previousMonth0;
+        $nextMonth0 = ($month0 * 1 + 1) % 12;
+
+        $previousMonth0 = str_pad($previousMonth0, 2, 0, STR_PAD_LEFT);
+        $nextMonth0 = str_pad($nextMonth0, 2, 0, STR_PAD_LEFT);
+
+        $starting = config()->get('hr.month_starting_date', 26);
+        $ending = config()->get('hr.month_ending_date', 25);
+
+        if ($date0 <= $ending) {
+            // echo "Smaller than ending, return previous month";
+            $previousYear0 = (1 * $month0 == 1) ? $year0 - 1 : $year0;
+            $begin = "$previousYear0-$previousMonth0-$starting";
+            $end = "$year0-$month0-$ending";
+        } else {
+            // echo "Greater than ending, return next month";
+            $nextYear0 = ($month0 == 12) ? $year0 + 1 : $year0;
+            $begin = "$year0-$month0-$starting";
+            $end = "$nextYear0-$nextMonth0-$ending";
+        }
+        // dump("$year0 - $month0 - $date0        $begin - $end");
+        return [$begin, $end];
+    }
+
+    public static function getYearBeginAndEndDate0($date)
+    {
+        $year0 = substr($date, 0, 4);
+        $begin = static::getMonthBeginAndEndDate0($year0 . "-01-01");
+        $end = static::getMonthBeginAndEndDate0($year0 . "-12-01");
+        return [$begin[0], $end[1]];
+    }
 }
