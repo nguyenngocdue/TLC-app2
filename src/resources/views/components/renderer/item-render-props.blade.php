@@ -138,6 +138,7 @@
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('attachment')
+                        @dd($prop)
                         <x-renderer.attachment2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} />
                         @break
                         @case('comment')
