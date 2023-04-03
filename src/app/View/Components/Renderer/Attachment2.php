@@ -45,7 +45,7 @@ class Attachment2 extends Component
         $properties = $this->getProperties();
         // dump($properties);
         $properties = !is_null($properties) ? $properties : [
-            "max_file_count" => 5,
+            "max_file_count" => 10,
             "max_file_size" => 10,
             "allowed_file_types" => 'only_images',
         ];
