@@ -3,7 +3,7 @@ FROM php:8.0-fpm-alpine
 WORKDIR /var/www/app
 
 RUN apk update && apk add \
-    build-base shadow supervisor \
+    # build-base shadow supervisor \
     curl \
     libpng-dev \
     libxml2-dev \
@@ -12,7 +12,12 @@ RUN apk update && apk add \
     zip \
     unzip \
     ca-certificates \
-    openssl 
+    openssl \
+    nano \
+    mc \
+    htop \
+    supervisor
+
 RUN curl -sSLf \
     -o /usr/local/bin/install-php-extensions \
     https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \
@@ -47,7 +52,9 @@ USER ndc
 
 # ENV ENABLE_CRONTAB 1
 # ENV ENABLE_HORIZON 1
-
+# COPY ./docker-entrypoint.sh /var/www/app/docker-entrypoint.sh
+# RUN chmod +x /var/www/app/docker-entrypoint.sh
 # ENTRYPOINT ["sh", "/var/www/app/docker-entrypoint.sh"]
 
-# CMD supervisord -n -c /etc/supervisord.conf
+# CMD ["supervisord -n -c /etc/supervisord.conf"]
+RUN rm -rf /var/cache/apk/*
