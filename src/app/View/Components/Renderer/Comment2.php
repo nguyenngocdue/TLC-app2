@@ -62,7 +62,7 @@ class Comment2 extends Component
         $avatar = $avatarObj ? env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $avatarObj->url_thumbnail : "/images/avatar.jpg";
         $readOnly = $this->readOnly;
         $content = $this->content;
-        if (CurrentUser::get()->id != $this->ownerId) {
+        if (CurrentUser::get() && CurrentUser::get()->id != $this->ownerId) {
             $readOnly = true;
         }
         // $readonly = !true;
