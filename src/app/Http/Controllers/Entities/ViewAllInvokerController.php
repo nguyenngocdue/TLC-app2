@@ -84,12 +84,14 @@ class ViewAllInvokerController extends Controller
             };
             $theLine = $this->applyFormula($theLine, 'create');
             $this->typeModel::create($theLine);
+            dd($theLine);
             return ResponseObject::responseSuccess(
                 null,
                 [],
                 "Duplicate document successfully!",
             );
         } catch (\Throwable $th) {
+            dd($th);
             return ResponseObject::responseFail(
                 "Duplicate document fail,please check setting duplicatable!",
             );

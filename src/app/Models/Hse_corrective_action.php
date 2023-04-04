@@ -8,7 +8,7 @@ class Hse_corrective_action extends ModelExtended
 {
     protected $fillable = [
         'id', 'name', 'description', 'slug', 'hse_incident_report_id', 'priority_id', 'work_area_id',
-        'assignee_1', 'opened_date', 'closed_date', 'status', 'unsafe_action_type_id', 'order_no', 'owner_id'
+        'assignee_1', 'opened_date', 'closed_at', 'status', 'unsafe_action_type_id', 'order_no', 'owner_id'
     ];
     protected $table = "hse_corrective_actions";
 
@@ -74,7 +74,7 @@ class Hse_corrective_action extends ModelExtended
             ['dataIndex' => 'description'],
             ['dataIndex' => 'assignee_1'],
             ['dataIndex' => 'opened_date'],
-            ['dataIndex' => 'closed_date'],
+            ['dataIndex' => 'closed_at'],
             ['dataIndex' => 'status',],
             ['dataIndex' => 'unsafe_action_type_id',],
         ];
