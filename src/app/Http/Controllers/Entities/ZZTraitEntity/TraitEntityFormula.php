@@ -13,7 +13,7 @@ use App\View\Components\Formula\User_PositionRendered;
 
 trait TraitEntityFormula
 {
-    private function applyFormula($item, $action)
+    private function applyFormula($item, $action, $status)
     {
         $type = $this->type;
         $defaultValues = DefaultValues::getAllOf($type);
@@ -52,7 +52,7 @@ trait TraitEntityFormula
                     $value = (new All_DocId())($item, $type);
                     break;
                 case "All_ClosedAt":
-                    $value = (new All_ClosedAt())($item, $type);
+                    $value = (new All_ClosedAt())($status, $type);
                     break;
                 default:
                     $value = "";

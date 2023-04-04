@@ -115,14 +115,13 @@ trait TraitEntityFieldHandler2
     private function handleFields(Request $request, $action)
     {
 
-        $dataSourceFormula = $request->except(['_token', '_method', 'created_at', 'updated_at']);
+        $status = $request->status ?? '';
         $dataSource = $request->except(['_token', '_method', 'status', 'created_at', 'updated_at']);
         if ($action === 'store') $dataSource['id'] = null;
         $this->dump1("Before handleFields", $dataSource, __LINE__);
-        $dataSource = $this->applyFormula($dataSourceFormula, $action);
+        $dataSource = $this->applyFormula($dataSource, $action, $status);
         $dataSource = $this->handleToggle($dataSource);
         $dataSource = $this->handleTextArea($dataSource);
-
         $this->dump1("After handleFields", $dataSource, __LINE__);
         return $dataSource;
     }
