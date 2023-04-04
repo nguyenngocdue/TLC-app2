@@ -26,7 +26,7 @@ trait TraitSupportPermissionGate
         if (!CurrentUser::isAdmin()) {
             $isTree = $this->useTree($model);
             if ($user->id == $model->owner_id) {
-                return false;
+                return true;
             }
             if (!$isTree) {
                 return $user->id == $model->owner_id;
