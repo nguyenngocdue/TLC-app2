@@ -103,13 +103,13 @@ class UpdateUserSettings extends Controller
         $entity = $request->input("_entity");
         $typeReport = strtolower($request->input("type_report"));
         $settingUser = CurrentUser::getSettings();
-        $modeNames = $inputValue['mode_name'];
-        if (isset($settingUser[$entity][$typeReport][$modeNames])) {
-            $paramsReset = $settingUser[$entity][$typeReport][$modeNames];
+        $modeOption = $inputValue['mode_option'];
+        if (isset($settingUser[$entity][$typeReport][$modeOption])) {
+            $paramsReset = $settingUser[$entity][$typeReport][$modeOption];
             array_walk($paramsReset, function ($value, $key) use (&$paramsReset) {
                 $paramsReset[$key] = null;
             });
-            $settings[$entity][$typeReport][$modeNames] = $paramsReset;
+            $settings[$entity][$typeReport][$modeOption] = $paramsReset;
         }
         return $settings;
     }
@@ -118,13 +118,15 @@ class UpdateUserSettings extends Controller
     private function updateReport($request, $settings)
     {
         $inputValue = $request->all();
-        if (isset($inputValue['mode_name'])) {
+        // dd($inputValue);
+        if (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport") {
             return $this->resetParamsReport($request, $settings);
         }
         $modeName = $inputValue['mode_option'];
         // Check case: select mode alternatively 
         $index = array_search($modeName, array_values($inputValue));
         if (empty(array_slice($inputValue, $index + 1, count($inputValue) - $index))) return $settings;
+
         // Create date to update params into user_setting
         unset($inputValue['mode_option']);
         $entity = $inputValue["_entity"];
@@ -146,7 +148,7 @@ class UpdateUserSettings extends Controller
 
     public function __invoke(Request $request, $redirectTo = null)
     {
-        // dd($request);
+        // dd($request->input());
         $action = $request->input('action');
         $user = User::find(Auth::id());
         $settings = $user->settings;
