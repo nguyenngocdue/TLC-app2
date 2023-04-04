@@ -10,7 +10,7 @@ class Qaqc_wir extends ModelExtended
     protected $fillable = [
         "id", "name", "doc_id", "description", "slug", "project_id", "sub_project_id", "prod_routing_id", "status",
         "prod_discipline_id", "pj_level_id", "pj_module_type_id", "prod_order_id", "priority_id", "due_date",
-        "assignee_1", "wir_description_id", "owner_id", "lock_version"
+        "assignee_1", "wir_description_id", "owner_id", "lock_version", "closed_at"
     ];
     protected $table = "qaqc_wirs";
     protected $primaryKey = 'id';
@@ -25,7 +25,7 @@ class Qaqc_wir extends ModelExtended
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
         'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
-        "loggable" => ['morphMany', Logger::class, 'loggers', 'loggable_type', 'loggable_id'],
+        // "loggable" => ['morphMany', Logger::class, 'loggers', 'loggable_type', 'loggable_id'],
     ];
 
     public $oracyParams = [
@@ -91,9 +91,9 @@ class Qaqc_wir extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function loggable()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-    }
+    // public function loggable()
+    // {
+    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+    // }
 }

@@ -52,6 +52,7 @@ class ManageDefaultValues extends Manage_Parent
                     'All_SlugifyByName',
                     'All_OwnerId',
                     'All_DocId',
+                    'All_ClosedAt',
                     'User_PositionRendered',
                     '(not-yet)Wir_NameRendered',
                     '(not-yet)format_production',

@@ -92,10 +92,10 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "closed": ""
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
     }
 }
