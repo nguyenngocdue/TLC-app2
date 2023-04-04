@@ -197,7 +197,7 @@
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "",
+        "formula": "Duplicate_Status",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",

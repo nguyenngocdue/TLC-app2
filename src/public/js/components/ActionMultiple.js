@@ -48,7 +48,7 @@ const actionDeletedMultiple = (type, url) => {
                                 ).then(() => {
                                     setTimeout(
                                         location.reload.bind(location),
-                                        1000
+                                        500
                                     )
                                 })
                             }
@@ -75,7 +75,7 @@ const actionDeletedMultiple = (type, url) => {
                                 response.message,
                                 'warning'
                             ).then(() => {
-                                setTimeout(location.reload.bind(location), 1000)
+                                setTimeout(location.reload.bind(location), 500)
                             })
                         }
                     },
@@ -86,7 +86,7 @@ const actionDeletedMultiple = (type, url) => {
                             'Permission denied , please check your permissions!',
                             'warning'
                         ).then(() => {
-                            setTimeout(location.reload.bind(location), 1000)
+                            setTimeout(location.reload.bind(location), 500)
                         })
                     },
                 })
@@ -144,7 +144,7 @@ const actionDuplicateMultiple = (type, url) => {
                                 ).then(() => {
                                     setTimeout(
                                         location.reload.bind(location),
-                                        1000
+                                        500
                                     )
                                 })
                             }
@@ -161,7 +161,7 @@ const actionDuplicateMultiple = (type, url) => {
                                 ).then(() => {
                                     setTimeout(
                                         location.reload.bind(location),
-                                        1000
+                                        500
                                     )
                                 })
                             }
@@ -171,7 +171,7 @@ const actionDuplicateMultiple = (type, url) => {
                                 response.message,
                                 'warning'
                             ).then(() => {
-                                setTimeout(location.reload.bind(location), 1000)
+                                setTimeout(location.reload.bind(location), 500)
                             })
                         }
                     },
@@ -182,7 +182,7 @@ const actionDuplicateMultiple = (type, url) => {
                             'Permission denied , please check your permissions!',
                             'warning'
                         ).then(() => {
-                            setTimeout(location.reload.bind(location), 1000)
+                            setTimeout(location.reload.bind(location), 500)
                         })
                     },
                 })

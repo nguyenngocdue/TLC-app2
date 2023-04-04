@@ -21,19 +21,19 @@ const actionDuplicated = (obj) => {
                             response.message,
                             'success'
                         )
-                        setTimeout(location.reload.bind(location), 1500)
+                        setTimeout(location.reload.bind(location), 1000)
                     } else {
                         Swal.fire(
                             'Duplicated Fail',
                             response.message,
                             'warning'
                         )
-                        setTimeout(location.reload.bind(location), 2000)
+                        setTimeout(location.reload.bind(location), 1500)
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     Swal.fire('Duplicated Fail', textStatus, 'warning')
-                    setTimeout(location.reload.bind(location), 2000)
+                    setTimeout(location.reload.bind(location), 1500)
                 },
             })
         }
@@ -62,10 +62,10 @@ const actionDeleted = (obj) => {
                             response.message,
                             'success'
                         )
-                        setTimeout(location.reload.bind(location), 1500)
+                        setTimeout(location.reload.bind(location), 1000)
                     } else {
                         Swal.fire('Deleted Fail', response.message, 'warning')
-                        setTimeout(location.reload.bind(location), 2000)
+                        setTimeout(location.reload.bind(location), 1500)
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -74,6 +74,7 @@ const actionDeleted = (obj) => {
                         'Permission denied , please check your permissions!',
                         'warning'
                     )
+                    setTimeout(location.reload.bind(location), 1500)
                 },
             })
         }

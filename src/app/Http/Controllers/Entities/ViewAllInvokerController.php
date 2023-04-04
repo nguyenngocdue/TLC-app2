@@ -8,6 +8,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityShowQRList6;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
+use App\Utils\Support\Json\Definitions;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
@@ -76,6 +77,7 @@ class ViewAllInvokerController extends Controller
             );
         }
         $settingDuplicatable = $this->getSettingDuplicatable();
+
         try {
             foreach ($settingDuplicatable as $key => $value) {
                 if (!$value) {
@@ -84,14 +86,12 @@ class ViewAllInvokerController extends Controller
             };
             $theLine = $this->applyFormula($theLine, 'create');
             $this->typeModel::create($theLine);
-            dd($theLine);
             return ResponseObject::responseSuccess(
                 null,
                 [],
                 "Duplicate document successfully!",
             );
         } catch (\Throwable $th) {
-            dd($th);
             return ResponseObject::responseFail(
                 "Duplicate document fail,please check setting duplicatable!",
             );

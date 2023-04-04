@@ -34,6 +34,7 @@ class Attachment2 extends Component
     public function render()
     {
         $properties = $this->properties;
+        // dd($properties);
         $message =  "Allows MAX " . $properties['max_file_count'] . " files (each " . $properties['max_file_size'] . "MB) (" . $properties['allowed_file_types'] . ")";
         switch ($properties['allowed_file_types']) {
             case 'only_images':

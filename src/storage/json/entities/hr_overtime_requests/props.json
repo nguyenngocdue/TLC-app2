@@ -91,7 +91,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
+        "duplicatable": "true",
         "new_line": ""
     },
     "_assignee_1": {
@@ -110,7 +110,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
+        "duplicatable": "true",
         "new_line": ""
     },
     "_getMonitors1()": {
@@ -129,7 +129,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
+        "duplicatable": "true",
         "new_line": ""
     },
     "_status": {
@@ -148,7 +148,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
+        "duplicatable": "true",
         "new_line": ""
     },
     "_created_at": {
