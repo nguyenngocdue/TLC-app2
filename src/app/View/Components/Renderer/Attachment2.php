@@ -18,7 +18,11 @@ class Attachment2 extends Component
         private $showToBeDeleted = true,
         private $showUploadFile = true,
         private $label = '',
-        private $properties,
+        private $properties = [
+            'max_file_count' => 10,
+            'max_file_size' => 10,
+            'allowed_file_types' => 'only_images',
+        ],
     ) {
         if (is_array($value)) {
             $this->attachments = $value;
