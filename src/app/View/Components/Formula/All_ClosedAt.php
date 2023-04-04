@@ -17,11 +17,9 @@ class All_ClosedAt
     {
         $result = null;
         $definitionClosed = Definitions::getAllOf($type)['closed'] ?? [];
-        $closed = array_filter($definitionClosed, fn ($item) => $item == "true");
-        foreach ($closed as $key => $value) {
-            if ($item['status'] == $key) {
-                $result =  Carbon::now()->toDateTimeString();
-            }
+        $closed = array_keys(array_filter($definitionClosed, fn ($item) => $item == "true"));
+        if (in_array($item['status'], $closed)) {
+            $result =  Carbon::now()->toDateTimeString();
         }
         return $result;
     }
