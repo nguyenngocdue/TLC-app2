@@ -56,11 +56,7 @@
         "parent_link",
         "thumbnails"
     ],
-    "renderer_edit": [
-        "",
-        "many_icons",
-        "many_lines"
-    ],
+    "renderer_edit": ["", "many_icons", "many_lines"],
     "manage_prop_eloquents": [
         "belongsToMany",
         "hasMany",
@@ -81,12 +77,8 @@
         "belongsTo",
         "morphToMany"
     ],
-    "manage_prop_oracies": [
-        "getCheckedByField"
-    ],
-    "view_all_oracies": [
-        "getCheckedByField"
-    ],
+    "manage_prop_oracies": ["getCheckedByField"],
+    "view_all_oracies": ["getCheckedByField"],
     "packages": [
         "",
         "hr_&_admin",
@@ -123,11 +115,7 @@
         "system_permission",
         "dashboard"
     ],
-    "qr_code_apps": [
-        "pj_modules",
-        "pj_shipments",
-        "pj_units"
-    ],
+    "qr_code_apps": ["pj_modules", "pj_shipments", "pj_units"],
     "assignees": [
         "assignee_1",
         "assignee_2",
@@ -150,12 +138,13 @@
         "getMonitors8()",
         "getMonitors9()"
     ],
-    "param_units": [
-        "",
-        "hour",
-        "item",
-        "person",
-        "line",
-        "team"
+    "param_units": ["", "hour", "item", "person", "line", "team"],
+    "ignore_duplicatable": [
+        "id",
+        "owner_id",
+        "slug",
+        "created_at",
+        "updated_at",
+        "deleted_at"
     ]
 }

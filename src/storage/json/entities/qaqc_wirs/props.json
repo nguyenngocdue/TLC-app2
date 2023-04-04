@@ -305,9 +305,9 @@
         "save_on_change": "",
         "new_line": ""
     },
-    "_closed_date": {
-        "name": "_closed_date",
-        "column_name": "closed_date",
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
         "column_type": "datetime",
         "label": "Closed Date",
         "control": "picker_datetime",

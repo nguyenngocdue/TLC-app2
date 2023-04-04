@@ -83,4 +83,8 @@ class JsonControls
     {
         return self::getAll()['param_units'];
     }
+    public static function getIgnoreDuplicatable()
+    {
+        return self::getAll()['ignore_duplicatable'];
+    }
 }

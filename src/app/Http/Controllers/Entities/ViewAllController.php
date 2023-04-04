@@ -64,6 +64,18 @@ class ViewAllController extends Controller
                     $output['type'] = $type;
                     $output['width'] = 10;
                     break;
+                case 'action_column':
+                    $output['renderer'] = 'action_column';
+                    $output['align'] = 'center';
+                    $output['type'] = $type;
+                    $output['width'] = 10;
+                    break;
+                case 'checkbox_column':
+                    $output['renderer'] = 'checkbox_column';
+                    $output['align'] = 'center';
+                    $output['type'] = $type;
+                    $output['width'] = 10;
+                    break;
                 case 'toggle':
                     $output['renderer'] = "toggle";
                     $output['align'] = "center";
@@ -123,13 +135,19 @@ class ViewAllController extends Controller
             'control' => 'qr_code',
         ];
         array_splice($props, 1, 0, [$qrCodeColumn]);
-
-        $actionColumn = [
-            'label' => "QR Code",
-            'column_name' => 'id',
-            'control' => 'qr_code',
-        ];
-        // array_splice($props, 1, 0, [$qrCodeColumn]);
+        if (App::isLocal() || App::isTesting()) {
+            $actionColumn = [
+                'label' => "Action",
+                'column_name' => 'id',
+                'control' => 'action_column',
+            ];
+            $checkboxColumn = [
+                'label' => "",
+                'column_name' => 'id',
+                'control' => 'checkbox_column',
+            ];
+            array_splice($props, 0, 0, [$checkboxColumn, $actionColumn]);
+        }
         $result = array_values(array_map(fn ($prop) => createObject($prop, $type), $props));
         return $result;
     }
@@ -220,15 +238,16 @@ class ViewAllController extends Controller
         ]);
     }
 
+
     public function destroy($id)
     {
-        try {
-            $model = $this->typeModel;
-            $data = App::make($model)->find($id);
-            $data->delete();
-            return response()->json(['message' => 'Delete Item Successfully'], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => $th], 404);
-        }
+        // try {
+        //     $model = $this->typeModel;
+        //     $data = App::make($model)->find($id);
+        //     $data->delete();
+        //     return response()->json(['message' => 'Delete Item Successfully'], 200);
+        // } catch (\Throwable $th) {
+        //     return response()->json(['message' => $th], 404);
+        // }
     }
 }

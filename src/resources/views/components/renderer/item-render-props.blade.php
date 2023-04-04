@@ -138,7 +138,10 @@
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('attachment')
-                        <x-renderer.attachment2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} />
+                        @php
+                            $properties = $prop['properties'];
+                        @endphp
+                        <x-renderer.attachment2 name={{$columnName}} value={{$value}} :properties="$properties" readOnly={{$readOnly}} />
                         @break
                         @case('comment')
                         <x-controls.comment-group2 :item="$item" id={{$id}} type={{$type}} name={{$columnName}} readOnly={{$readOnly}} />

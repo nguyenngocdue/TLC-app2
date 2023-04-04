@@ -110,7 +110,7 @@
                 <x-advanced-filter.parent-type3 :type="$type" :name="$columnName" :valueSelected="$valueControl"/>
                 @break --}}
                 @default
-                <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}]" />
+                <x-feedback.alert type="warning" title="Control" message="[{{$control}}] ???" />
                 @break
                 @endswitch
             </div>

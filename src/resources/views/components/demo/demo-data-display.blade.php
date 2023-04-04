@@ -76,5 +76,24 @@
         <x-renderer.card title="Table with cell_class, cell_title, cell_href, cell_div_class, and rotate45">
             <x-renderer.table :columns="$tableColumnsForRegister" :dataSource="$tableDataSourceForRegister" showNo="{{true}}" rotate45Width={{200}} />
         </x-renderer.card>
+        <x-renderer.card title="Table with showPaginationTop, topLeftControl, topCenterControl, topRightControl, bottomLeftControl, bottomCenterControl, bottomRightControl">
+            @php
+             $tl = "<x-renderer.tag>Top Left</x-renderer.tag>" ;
+             $tc = "<x-renderer.tag>Top Center</x-renderer.tag>"; 
+             $tr = "<x-renderer.tag>Top Right</x-renderer.tag>"; 
+             $bl = "<x-renderer.tag>Bottom Left</x-renderer.tag>"; 
+             $bc = "<x-renderer.tag>Bottom Center</x-renderer.tag>"; 
+             $br = "<x-renderer.tag>Bottom Right</x-renderer.tag>"; 
+            @endphp
+            <x-renderer.table :columns="$tableColumnsForRegister" :dataSource="$tableDataSourceForRegister" showNo="{{true}}" rotate45Width={{200}}
+                showPaginationTop="true"
+                topLeftControl="{!!$tl!!}" 
+                topCenterControl="{!!$tc!!}" 
+                topRightControl="{!!$tr!!}" 
+                bottomLeftControl="{!!$bl!!}" 
+                bottomCenterControl="{!!$bc!!}" 
+                bottomRightControl="{!!$br!!}" 
+            />
+        </x-renderer.card>
     </x-renderer.card>
 </div>

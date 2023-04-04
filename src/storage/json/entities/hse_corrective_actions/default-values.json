@@ -103,18 +103,18 @@
         "column_name": "opened_date",
         "label": "",
         "default_value": "",
-        "validation": "date_format:d\/m\/Y H:i",
+        "validation": "date_format:d/m/Y H:i",
         "formula": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
-    "_closed_date": {
-        "name": "_closed_date",
-        "column_name": "closed_date",
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
         "label": "",
         "default_value": "",
-        "validation": "date_format:d\/m\/Y H:i|nullable",
+        "validation": "date_format:d/m/Y H:i|nullable",
         "formula": "",
         "label_extra": "",
         "placeholder": "",

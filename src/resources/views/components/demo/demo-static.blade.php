@@ -105,32 +105,32 @@
     <x-renderer.card title="Tags">
         <x-renderer.table showNo=true :columns="$tagColumns" :dataSource="$tagDataSource" maxH=45/>
 
-            <x-renderer.tag color="slate" colorIndex=900>slate</x-renderer.tag><span></span>
-            <x-renderer.tag color="zinc">zinc</x-renderer.tag><span></span>
-            <x-renderer.tag color="neutral">neutral</x-renderer.tag><span></span>
-            <x-renderer.tag color="stone">stone</x-renderer.tag><span></span>
-            <x-renderer.tag color="amber">amber</x-renderer.tag><span></span>
+            <x-renderer.tag color="slate" colorIndex=900>slate</x-renderer.tag>
+            <x-renderer.tag color="zinc">zinc</x-renderer.tag>
+            <x-renderer.tag color="neutral">neutral</x-renderer.tag>
+            <x-renderer.tag color="stone">stone</x-renderer.tag>
+            <x-renderer.tag color="amber">amber</x-renderer.tag>
             <br />
-            <x-renderer.tag color="yellow">yellow</x-renderer.tag><span></span>
-            <x-renderer.tag color="lime">lime</x-renderer.tag><span></span>
-            <x-renderer.tag color="emerald">emerald</x-renderer.tag><span></span>
-            <x-renderer.tag color="teal">teal</x-renderer.tag><span></span>
-            <x-renderer.tag color="cyan">cyan</x-renderer.tag><span></span>
+            <x-renderer.tag color="yellow">yellow</x-renderer.tag>
+            <x-renderer.tag color="lime">lime</x-renderer.tag>
+            <x-renderer.tag color="emerald">emerald</x-renderer.tag>
+            <x-renderer.tag color="teal">teal</x-renderer.tag>
+            <x-renderer.tag color="cyan">cyan</x-renderer.tag>
             <br />
-            <x-renderer.tag color="sky">sky</x-renderer.tag><span></span>
-            <x-renderer.tag color="blue">blue</x-renderer.tag><span></span>
-            <x-renderer.tag color="indigo">indigo</x-renderer.tag><span></span>
-            <x-renderer.tag color="violet">violet</x-renderer.tag><span></span>
-            <x-renderer.tag color="purple">purple</x-renderer.tag><span></span>
+            <x-renderer.tag color="sky">sky</x-renderer.tag>
+            <x-renderer.tag color="blue">blue</x-renderer.tag>
+            <x-renderer.tag color="indigo">indigo</x-renderer.tag>
+            <x-renderer.tag color="violet">violet</x-renderer.tag>
+            <x-renderer.tag color="purple">purple</x-renderer.tag>
             <br />
-            <x-renderer.tag color="fuchsia">fuchsia</x-renderer.tag><span></span>
-            <x-renderer.tag color="pink">pink</x-renderer.tag><span></span>
-            <x-renderer.tag color="rose">rose</x-renderer.tag><span></span>
-            <x-renderer.tag color="green">green</x-renderer.tag><span></span>
+            <x-renderer.tag color="fuchsia">fuchsia</x-renderer.tag>
+            <x-renderer.tag color="pink">pink</x-renderer.tag>
+            <x-renderer.tag color="rose">rose</x-renderer.tag>
+            <x-renderer.tag color="green">green</x-renderer.tag>
             <br />
-            <x-renderer.tag color="orange">orange</x-renderer.tag><span></span>
-            <x-renderer.tag color="red">red</x-renderer.tag><span></span>
-            <x-renderer.tag color="gray">gray</x-renderer.tag><span></span>
+            <x-renderer.tag color="orange">orange</x-renderer.tag>
+            <x-renderer.tag color="red">red</x-renderer.tag>
+            <x-renderer.tag color="gray">gray</x-renderer.tag>
             <br />
             <br />
             Empty attributes:<br />

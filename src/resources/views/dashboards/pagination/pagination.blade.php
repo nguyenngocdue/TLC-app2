@@ -1,6 +1,6 @@
 @if ($paginator->hasPages())
 @php
-$classBaseButton = "focus:shadow-outline-purple rounded-md border border-r-0 m-0.5 px-3 py-1 text-white transition-colors duration-150 focus:outline-none";
+$classBaseButton = "focus:shadow-outline-purple rounded border border-r-0 m-0.5 px-1 py-1 text-white transition-colors duration-150 focus:outline-none";
 $className = "$classBaseButton border-purple-600 bg-purple-600";
 $classNameDisabled = "$classBaseButton border-purple-200 bg-purple-200";
 @endphp
@@ -49,4 +49,5 @@ $classNameDisabled = "$classBaseButton border-purple-200 bg-purple-200";
     @endif
 </ul>
 <!-- Pagination -->
+{{-- <x-form.per-page type="{{$type}}" route="{{ route('updateUserSettings') }}" perPage="{{$perPage}}" /> --}}
 @endif

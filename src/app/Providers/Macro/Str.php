@@ -128,3 +128,10 @@ Str::macro('getEntityName', function ($entity) {
     $result = Str::plural(strtolower(end($arr)));
     return $result;
 });
+Str::macro('humanReadable', function ($bytes, $base = 1000, $dec = 1) {
+    $factor = floor((strlen($bytes) - 1) / 3);
+    if ($factor == 0) $dec = 0;
+    $size   = array('', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y');
+
+    return sprintf("%.{$dec}f%s", $bytes / ($base ** $factor), $size[$factor]);
+});

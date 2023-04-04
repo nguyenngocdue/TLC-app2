@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Http\Controllers\Workflow\LibApps;
+use App\Providers\Support\TraitSupportPermissionGate;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\App;
@@ -10,6 +12,7 @@ use Illuminate\Support\Str;
 trait TraitViewAllFunctions
 {
     use TraitEntityAdvancedFilter;
+    use TraitSupportPermissionGate;
 
     private function getUserSettings()
     {
@@ -27,7 +30,21 @@ trait TraitViewAllFunctions
         $advanceFilters = $this->distributeFilter($advanceFilters, $propsFilters);
         $model = $this->typeModel;
         $search = request('search');
-        $result = App::make($model)::search($search)
+        $relation = App::make($model)::search($search);
+        if (!CurrentUser::isAdmin()) {
+            $isUseTree = $this->isUseTree($this->type);
+            if ($isUseTree) {
+                $ids = $this->getListOwnerIds(auth()->user());
+                $result = $relation
+                    ->query(function ($q) use ($ids, $advanceFilters, $propsFilters) {
+                        $q->whereIn('owner_id', $ids);
+                        $this->queryAdvancedFilter($q, $advanceFilters, $propsFilters);
+                        return $q->orderBy('updated_at', 'desc');
+                    });
+                return $result;
+            }
+        }
+        $result = $relation
             ->query(function ($q) use ($advanceFilters, $propsFilters) {
                 $this->queryAdvancedFilter($q, $advanceFilters, $propsFilters);
                 return $q->orderBy('updated_at', 'desc');

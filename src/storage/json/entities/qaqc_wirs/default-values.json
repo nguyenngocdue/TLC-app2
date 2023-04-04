@@ -29,7 +29,7 @@
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "",
+        "formula": "All_DocId",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
@@ -147,19 +147,7 @@
         "name": "_due_date",
         "column_name": "due_date",
         "label": "",
-        "validation": "date_format:d\/m\/Y H:i|required",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_closed_date": {
-        "name": "_closed_date",
-        "column_name": "closed_date",
-        "label": "",
-        "validation": "",
+        "validation": "date_format:d/m/Y H:i|required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -215,6 +203,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -230,6 +230,18 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_lock_version": {
+        "name": "_lock_version",
+        "column_name": "lock_version",
         "label": "",
         "validation": "",
         "validation_regex": "",

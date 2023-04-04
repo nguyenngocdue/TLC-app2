@@ -77,10 +77,12 @@ class WorkflowFields
             $isTree = LibApps::getFor($type)['apply_approval_tree'] ?? false;
             $actionButtons[$value] = $results;
             if ($isTree) {
-                foreach ($closed as $close) {
-                    if ($value == $close) {
-                        $ownerId == static::ownerIdLogin() ? $actionButtons[$value]['is_close'] = false
-                            : $actionButtons[$value]['is_close'] = true;
+                if (!CurrentUser::isAdmin()) {
+                    foreach ($closed as $close) {
+                        if ($value == $close) {
+                            $ownerId == static::ownerIdLogin() ? $actionButtons[$value]['is_close'] = false
+                                : $actionButtons[$value]['is_close'] = true;
+                        }
                     }
                 }
             }
@@ -147,6 +149,7 @@ class WorkflowFields
     static function formatResult(&$result, $prop, $values, $key, $defaultValues, $hidden = null, $readonly = null, $required = null, $typeWorkflow = false)
     {
         $result['label'] = $prop['label'];
+        $result['properties'] = $prop['properties'];
         $columnName = $prop['column_name'];
         $result['columnName'] = $columnName;
         $result['new_line'] = $prop['new_line'];

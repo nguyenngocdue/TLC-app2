@@ -18,6 +18,7 @@ class Attachment2 extends Component
         private $showToBeDeleted = true,
         private $showUploadFile = true,
         private $label = '',
+        private $properties,
     ) {
         if (is_array($value)) {
             $this->attachments = $value;
@@ -29,27 +30,30 @@ class Attachment2 extends Component
         // dump($this->attachments);
     }
 
-    private function getProperties()
-    {
-        $properties = Properties::getAllOf('attachment');
-        foreach ($properties as $property) {
-            if ($property['field_name'] === $this->name) {
-                return $property;
-            }
-        }
-        return null;
-    }
 
     public function render()
     {
-        $properties = $this->getProperties();
-        // dump($properties);
-        $properties = !is_null($properties) ? $properties : [
-            "max_file_count" => 5,
-            "max_file_size" => 10,
-            "allowed_file_types" => 'only_images',
-        ];
+        $properties = $this->properties;
         $message =  "Allows MAX " . $properties['max_file_count'] . " files (each " . $properties['max_file_size'] . "MB) (" . $properties['allowed_file_types'] . ")";
+        switch ($properties['allowed_file_types']) {
+            case 'only_images':
+                $acceptAttachment = ".png,.jpeg,.gif,.jpg,.svg,.webp";
+                break;
+            case 'only_videos':
+                $acceptAttachment = "video/mp4";
+                break;
+            case 'only_media':
+                $acceptAttachment = "video/* image/*";
+                break;
+            case 'only_non_media':
+                $acceptAttachment = ".csv,.pdf,.zip";
+                break;
+            case 'all_supported':
+                $acceptAttachment = "";
+                break;
+            default:
+                break;
+        }
         return view('components.renderer.attachment2', [
             'name' => $this->name,
             'destroyable' => $this->destroyable,
@@ -58,6 +62,7 @@ class Attachment2 extends Component
             'showUploadFile' => $this->showUploadFile,
             'path' => env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/',
             'attachments' => $this->attachments,
+            'acceptAttachment' => $acceptAttachment,
             'message' => $message,
             'hiddenOrText' => $this->debugAttachment ? "text" : "hidden",
         ]);

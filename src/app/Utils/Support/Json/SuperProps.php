@@ -4,6 +4,8 @@ namespace App\Utils\Support\Json;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\CacheToRamForThisSection;
+use App\Utils\Support\JsonControls;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -99,18 +101,46 @@ class SuperProps
         return $result;
     }
 
+    private static function attachProperty($type)
+    {
+        $allProps = Props::getAllOf($type);
+        $result = [];
+        $commentP =  Properties::getAllOf('comment');
+        $attachmentP =  Properties::getAllOf('attachment');
+
+        foreach ($allProps as $propName => $prop) {
+            $control =  $prop['control'];
+            if (in_array($control, ['attachment'])) {
+                $value = $attachmentP[$propName];
+                // $value['max_file_count'] = $value['max_file_count'] ? $value['max_file_count'] : 10;
+                // $value['max_file_size'] = $value['max_file_size'] ? $value['max_file_size'] : 10;
+                // $value['allowed_file_types'] = $value['allowed_file_types'] ? $value['allowed_file_types'] : 'only_images';
+                $result[$propName] = $value;
+            }
+            if (in_array($control, ['comment'])) {
+                $result[$propName] = $commentP[$propName];
+            }
+        }
+        return $result;
+    }
+
     private static function readProps($type)
     {
         $allProps = Props::getAllOf($type);
         foreach ($allProps as &$prop) {
             $prop['width'] = $prop['width'] ? $prop['width'] : 100;
             $prop['col_span'] = $prop['col_span'] ? $prop['col_span'] : 12;
-            $prop['duplicatable'] = $prop['duplicatable'] ?? ''; //<<CONFIG_MIGRATE
+            if (in_array(substr($prop['name'], 1), JsonControls::getIgnoreDuplicatable())) {
+                $prop['duplicatable'] = '';
+            } else {
+                $prop['duplicatable'] = $prop['duplicatable'] ?? ''; //<<CONFIG_MIGRATE
+            }
         }
         // static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
         static::attachJson("default-values", $allProps, DefaultValues::getAllOf($type));
         // static::attachJson("realtimes", $allProps, Realtimes::getAllOf($type));
         static::attachJson("relationships", $allProps, static::makeRelationshipObject($type));
+        static::attachJson("properties", $allProps, static::attachProperty($type));
 
         return $allProps;
     }

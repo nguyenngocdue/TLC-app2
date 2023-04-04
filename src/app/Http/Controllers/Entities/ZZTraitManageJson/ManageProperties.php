@@ -21,19 +21,21 @@ class ManageProperties extends Manage_Parent
                 'renderer' => 'number4',
                 'editable' => true,
                 'title' => 'Max File Size (in MB)',
+                'properties' => ['placeholder' => 10],
             ],
             [
                 'dataIndex' => 'max_file_count',
                 'renderer' => 'number4',
                 'editable' => true,
+                'properties' => ['placeholder' => 10],
             ],
             [
                 'dataIndex' => 'allowed_file_types',
                 'renderer' => 'dropdown',
                 'editable' => true,
                 'cbbDataSource' => [
-                    ['value' => '', 'title' => ''],
-                    ['value' => 'only_images', 'title' => 'Only Images (JPG, JPEG, PNG, GIF, WEBB, SVG)'],
+                    // ['value' => '', 'title' => ''],
+                    ['value' => 'only_images', 'title' => 'Only Images (JPG, JPEG, PNG, GIF, WEBP, SVG)'],
                     ['value' => 'only_videos', 'title' => 'Only Videos (MP4)'],
                     ['value' => 'only_media', 'title' => 'Only Images and Videos'],
                     ['value' => 'only_non_media', 'title' => 'Only Non-Media (CSV, PDF, ZIP)'],

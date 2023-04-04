@@ -15,7 +15,7 @@ trait TraitSendNotificationAndMail
             $fields = $this->addEntityType($fields, 'id', $id);
             $fields = $this->addEntityType($fields, 'status', $status);
             try {
-                event(new CreateNewDocumentEvent($currentValue = $this->addEntityType($fields, 'entity_type', $type), $classType));
+                event(new CreateNewDocumentEvent($currentValue = $this->addEntityType($fields, 'entity_type', $type), $classType,));
             } catch (\Throwable $th) {
                 Toastr::error($th->getFile() . " " . $th->getLine(), $th->getMessage());
             }
@@ -29,6 +29,7 @@ trait TraitSendNotificationAndMail
                     $previousValue = $this->addEntityType($previousValue, 'entity_type', $type),
                     $currentValue = $this->addEntityType($fields, 'entity_type', $type),
                     $classType = $classType,
+                    $userCurrentId = auth()->user()->id,
                 ));
             } catch (\Throwable $th) {
                 Toastr::error($th->getFile() . " " . $th->getLine(), $th->getMessage());

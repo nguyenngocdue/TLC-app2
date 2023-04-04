@@ -34,7 +34,7 @@ class EntityCRUDController extends Controller
 		$this->assignDynamicTypeCreateEdit();
 		$this->middleware("permission:{$this->permissionMiddleware['create']}")->only('create');
 		$this->middleware("permission:{$this->permissionMiddleware['edit']}")->only('edit', 'store', 'update');
-		$this->middleware("permission:{$this->permissionMiddleware['delete']}")->only('destroy');
+		$this->middleware("permission:{$this->permissionMiddleware['delete']}")->only('destroy', 'destroyMultiple');
 		$this->postConstruct();
 	}
 
