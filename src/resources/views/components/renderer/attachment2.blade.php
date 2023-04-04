@@ -15,7 +15,7 @@
         @endif
         <div name='{{$name}}' title="{{$title}}" class="border-{{$border}}-300 relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit">
             {{-- This is the image --}}
-            @if(in_array($extension,["png","gif","jpg","jpeg","webb"]))
+            @if(in_array($extension,["png","gif","jpg","jpeg","webp"]))
             <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}" />
             @elseif(in_array($extension,["csv","pdf","zip"]))
             <i class="w-auto h-full object-cover fa-light fa-file-{{$extension=='zip' ? 'arrow-down' : $extension}} text-9xl"></i>
@@ -55,7 +55,7 @@
 @endif
 @if(!$readOnly)
     @if($showUploadFile)
-    <input name="{{$name}}[toBeUploaded][]" multiple type="file" class="block w-full text-sm text-gray-900 p-2.5 rounded-lg bg-white border border-white cursor-pointer dark:text-gray-300 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+    <input name="{{$name}}[toBeUploaded][]" multiple type="file" accept="{{$acceptAttachment}}" class="block w-full text-sm text-gray-900 p-2.5 rounded-lg bg-white border border-white cursor-pointer dark:text-gray-300 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
     @endif
 @endif
 

@@ -31,7 +31,6 @@ trait TraitEntityCRUDCreateEdit2
 		$superProps = $this->getSuperProps();
 		$props = $superProps['props'];
 		$values =  (object) array_merge($request->input(), $this->loadValueOfOrphanAttachments($props));
-
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$isCheckColumnStatus = Schema::hasColumn(Str::plural($this->type), 'status');

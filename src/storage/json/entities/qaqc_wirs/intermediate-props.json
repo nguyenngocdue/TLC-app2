@@ -103,9 +103,9 @@
         "rejected": "",
         "closed": ""
     },
-    "_closed_date": {
-        "name": "_closed_date",
-        "column_name": "closed_date",
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
         "new": "",
         "assigned": "",
         "rejected": "",

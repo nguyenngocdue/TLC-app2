@@ -68,15 +68,15 @@ return [
                 'model' => App\Models\User::class,
                 'sync_passwords' => false,
                 'sync_attributes' => [
-                    'name' => 'cn',
-                    'full_name' => 'cn',
+                    // 'name' => 'cn', => login overwrite database
+                    // 'full_name' => 'cn',
                     'email' => 'mail',
-                    'first_name' => 'sn',
-                    'last_name' => 'givenname',
-                    'title' => 'title',
-                    'employeeid' => 'employeeid',
-                    'phone' => 'mobile',
-                    'settings' => [],
+                    // 'first_name' => 'sn',
+                    // 'last_name' => 'givenname',
+                    // 'title' => 'title',
+                    // 'employeeid' => 'employeeid',
+                    // 'phone' => 'mobile',
+                    // 'settings' => [],
                 ],
                 'sync_existing' => [
                     'email' => 'mail',

@@ -54,6 +54,7 @@ class Hr_overtime_request_020 extends Report_ParentController
         }
         $sql .= "\n 
                     AND otline.sub_project_id = sp.id
+                    AND otline.status LIKE 'approved'
                     AND us.id = otline.user_id
                     AND otr.id = otline.hr_overtime_request_id
                     ORDER BY name_render, employee_id, ot_date DESC";
@@ -168,7 +169,7 @@ class Hr_overtime_request_020 extends Report_ParentController
         return collect($dataSource);
     }
 
-    protected function forwardToMode($request)
+    protected function forwardToMode($request, $modeParams)
     {
         $input = $request->input();
         if (isset($input['months']) || isset($input['user_id'])) {

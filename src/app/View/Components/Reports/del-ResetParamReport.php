@@ -16,7 +16,7 @@ class ResetParamReport extends Component
         private $route = '',
         private $pageLimit = '',
         private $entity = '',
-        private $modeName = ''
+        private $modeOption = ''
     ) {
         //
     }
@@ -33,7 +33,7 @@ class ResetParamReport extends Component
             'route' => $this->route,
             'pageLimit' => $this->pageLimit,
             'entity' => $this->entity,
-            'modeName' => $this->modeName
+            'modeOption' => $this->modeOption
         ]);
     }
 }

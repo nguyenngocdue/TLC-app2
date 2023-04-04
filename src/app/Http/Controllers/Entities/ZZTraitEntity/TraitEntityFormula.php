@@ -44,7 +44,8 @@ trait TraitEntityFormula
                     $value = (new User_PositionRendered())($position_pres, $position_1, $position_2, $position_3);
                     break;
                 case "All_OwnerId":
-                    $value = CurrentUser::get()->id;
+                    //$item['owner_id']: passed from api parameter
+                    $value = $item['owner_id'] ?? CurrentUser::get()->id;
                     break;
                 case "All_DocId":
                     $value = (new All_DocId())($item, $type);
