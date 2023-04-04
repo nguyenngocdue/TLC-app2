@@ -56,16 +56,24 @@ return new class extends Migration
             $table->foreign('workplace_id')->references('id')->on('workplaces');
         });
         Schema::table('public_holidays', function (Blueprint $table) {
-            $table->foreign('workplace_id')->references('id')->on('workplaces')->onDelete('cascade');
+            $table->foreign('workplace_id')->references('id')->on('workplaces');
         });
         Schema::table('hr_overtime_request_lines', function (Blueprint $table) {
             $table->foreign('work_mode_id')->references('id')->on('work_modes');
             $table->foreign('sub_project_id')->references('id')->on('sub_projects');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('hr_overtime_request_id')->references('id')->on('hr_overtime_requests')->onDelete('cascade');
         });
         Schema::table('user_team_ots', function (Blueprint $table) {
             $table->foreign('owner_id')->references('id')->on('users');
         });
+        // Schema::table('ts_tasks', function (Blueprint $table) {
+        //     $table->foreign('owner_id')->references('id')->on('users');
+        // });
+        // Schema::table('ts_subtasks', function (Blueprint $table) {
+        //     $table->foreign('owner_id')->references('id')->on('users');
+        //     $table->foreign('ts_task_id')->references('id')->on('ts_tasks');
+        // });
         //************** PRODUCTION MODULE **************/
         Schema::table('prod_runs', function (Blueprint $table) {
             $table->foreign('prod_sequence_id')->references('id')->on('prod_sequences');
@@ -92,8 +100,8 @@ return new class extends Migration
             $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
         });
         Schema::table('prod_routing_details', function (Blueprint $table) {
-            $table->foreign('erp_routing_link_id')->references('id')->on('erp_routing_links')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('wir_description_id')->references('id')->on('wir_descriptions')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('erp_routing_link_id')->references('id')->on('erp_routing_links')->onUpdate('cascade');
+            $table->foreign('wir_description_id')->references('id')->on('wir_descriptions')->onUpdate('cascade');
         });
         Schema::table('wir_descriptions', function (Blueprint $table) {
             $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
