@@ -135,9 +135,9 @@
         "listen_to_fields": "",
         "listen_to_attrs": ""
     },
-    "_closed_date": {
-        "name": "_closed_date",
-        "column_name": "closed_date",
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

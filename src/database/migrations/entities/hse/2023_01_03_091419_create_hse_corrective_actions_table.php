@@ -26,9 +26,9 @@ return new class extends Migration
             $table->unsignedBigInteger('unsafe_action_type_id')->nullable();
             $table->string('status')->nullable();
             $table->dateTime('opened_date')->nullable();
-            $table->dateTime('closed_date')->nullable();
             $table->unsignedInteger('order_no')->nullable();
             $table->unsignedBigInteger('owner_id');
+            $table->dateTime('closed_at')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });

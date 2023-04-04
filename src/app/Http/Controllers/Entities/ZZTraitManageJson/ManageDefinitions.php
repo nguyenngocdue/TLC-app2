@@ -57,7 +57,7 @@ class ManageDefinitions extends Manage_Parent
             [
                 'description' => 'Status to which a new document is closed',
                 'name' => 'closed',
-                'rowDescription' => 'Hide save button (Ignore due date, set closed_date_gmt)',
+                'rowDescription' => 'Hide save button (Ignore due date, set closed_at_gmt)',
             ],
             [
                 'description' => '(not-yet) Status to which a new document is post_closed',

@@ -62,7 +62,7 @@ const actionDeleted = (obj) => {
                             response.message,
                             'success'
                         )
-                        // setTimeout(location.reload.bind(location), 1000)
+                        setTimeout(location.reload.bind(location), 1000)
                     } else {
                         Swal.fire('Deleted Fail', response.message, 'warning')
                         setTimeout(location.reload.bind(location), 2000)

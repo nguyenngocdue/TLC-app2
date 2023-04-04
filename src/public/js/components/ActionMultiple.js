@@ -44,8 +44,7 @@ const actionDeletedMultiple = (type, url) => {
                                     ? response.meta[0]
                                     : 'empty'
                             var message = `Delete Success Document ID: ${deleteSuccess} and Delete Fail Document ID: ${deleteFail}`
-                            if (response.hits)
-                                Swal.fire('Deleted Success', message, 'success')
+                            Swal.fire('Deleted Success', message, 'success')
                             setTimeout(location.reload.bind(location), 1000)
                         } else {
                             Swal.fire(
@@ -116,8 +115,7 @@ const actionDuplicateMultiple = (type, url) => {
                                     ? response.meta[0]
                                     : 'empty'
                             var message = `Duplicate Success Document ID: ${duplicateSuccess} and Duplicate Fail Document ID: ${duplicateFail}`
-                            if (response.hits)
-                                Swal.fire('Deleted Success', message, 'success')
+                            Swal.fire('Duplicate Success', message, 'success')
                             setTimeout(location.reload.bind(location), 1000)
                         } else {
                             Swal.fire(
