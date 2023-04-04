@@ -71,19 +71,21 @@ class WorkflowFields
     private static function getActionButtonsFromTransitionAndStatuses($transitions, $statuses, $closed, $ownerId, $type)
     {
         $actionButtons = [];
+        $isTree = LibApps::getFor($type)['apply_approval_tree'] ?? false;
         foreach ($transitions as $value) {
-            $array = $statuses[$value]['action-buttons'] ?? [];
-            $results = array_merge($array, ['is_close' => true]);
-            $isTree = LibApps::getFor($type)['apply_approval_tree'] ?? false;
-            $actionButtons[$value] = $results;
-            if ($isTree) {
-                if (!CurrentUser::isAdmin()) {
-                    foreach ($closed as $close) {
-                        if ($value == $close) {
-                            $ownerId == static::ownerIdLogin() ? $actionButtons[$value]['is_close'] = false
-                                : $actionButtons[$value]['is_close'] = true;
-                        }
+            $actionButtons[$value] = $statuses[$value]['action-buttons'] ?? [];
+            foreach ($closed as $close) {
+                $value == $close ? $actionButtons[$value]['closed_at'] = true : $actionButtons[$value]['closed_at'] = false;
+                if ($isTree && !CurrentUser::isAdmin()) {
+                    if ($value == $close) {
+                        $ownerId == static::ownerIdLogin()
+                            ? $actionButtons[$value]['is_close'] = true
+                            : $actionButtons[$value]['is_close'] = false;
+                    } else {
+                        $actionButtons[$value]['is_close'] = false;
                     }
+                } else {
+                    $actionButtons[$value]['is_close'] = false;
                 }
             }
         }

@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Reports;
 
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
+use Illuminate\Support\Facades\DB;
 
 trait TraitFunctionsReport
 {
+    function getDataSourceFromSqlStr($sql)
+    {
+        $sqlData = DB::select(DB::raw($sql));
+        return $sqlData;
+    }
 
     protected function makeColumns($dataSource, $modeParams)
     {

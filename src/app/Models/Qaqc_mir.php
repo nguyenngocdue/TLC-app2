@@ -8,7 +8,7 @@ class Qaqc_mir extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "doc_id", "description", "slug", "project_id", "sub_project_id", "status",
-        "prod_discipline_id", "priority_id", "due_date", "assignee_1", "inspected_by", "owner_id"
+        "prod_discipline_id", "priority_id", "due_date", "assignee_1", "inspected_by", "owner_id", "closed_at"
     ];
     protected $primaryKey = 'id';
     protected $table = "qaqc_mirs";

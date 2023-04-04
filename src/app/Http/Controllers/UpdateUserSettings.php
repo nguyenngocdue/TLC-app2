@@ -137,12 +137,12 @@ class UpdateUserSettings extends Controller
         return $settings;
     }
 
-    private function updatePerPageRegister($request, $settings)
+    private function updatePerPageReports($request, $settings)
     {
         $entity = $request->input("_entity");
         $typeReport = strtolower($request->input("type_report"));
-        $perPage = $request->input('page_limit');
-        $settings[$entity][$typeReport]['page_limit'] = $perPage;
+        $perPage = $request->input('per_page');
+        $settings[$entity][$typeReport]['per_page'] = $perPage;
         return $settings;
     }
 
@@ -176,13 +176,13 @@ class UpdateUserSettings extends Controller
                 $settings = $this->updateReport($request, $settings);
                 break;
             case 'updatePerPageRegisters':
-                $settings = $this->updatePerPageRegister($request, $settings);
+                $settings = $this->updatePerPageReports($request, $settings);
                 break;
             case 'updatePerPageReports':
-                $settings = $this->updatePerPageRegister($request, $settings);
+                $settings = $this->updatePerPageReports($request, $settings);
                 break;
             case 'updatePerPageDocuments':
-                $settings = $this->updatePerPageRegister($request, $settings);
+                $settings = $this->updatePerPageReports($request, $settings);
                 break;
             case 'resetAllSettings':
                 $settings = [];

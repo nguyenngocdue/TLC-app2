@@ -35,24 +35,48 @@ const actionDeletedMultiple = (type, url) => {
                     data: 'ids=' + strIds,
                     success: function (response) {
                         if (response.success) {
-                            var deleteSuccess =
-                                response.hits.length > 0
-                                    ? response.hits
-                                    : 'empty'
-                            var deleteFail =
-                                response.meta[0].length > 0
-                                    ? response.meta[0]
-                                    : 'empty'
-                            var message = `Delete Success Document ID: ${deleteSuccess} and Delete Fail Document ID: ${deleteFail}`
-                            Swal.fire('Deleted Success', message, 'success')
-                            setTimeout(location.reload.bind(location), 1000)
+                            if (response.hits.length > 0) {
+                                var deleteSuccess =
+                                    response.hits.length > 0
+                                        ? response.hits
+                                        : 'empty'
+                                var message = `Deleted Success Document ID: ${deleteSuccess}`
+                                Swal.fire(
+                                    'Deleted Success',
+                                    message,
+                                    'success'
+                                ).then(() => {
+                                    setTimeout(
+                                        location.reload.bind(location),
+                                        1000
+                                    )
+                                })
+                            }
+                            if (response.meta[0].length > 0) {
+                                var deleteFail =
+                                    response.meta[0].length > 0
+                                        ? response.meta[0]
+                                        : 'empty'
+                                var message = `Deleted Fail Document ID: ${deleteFail}. Please check setting and permission!`
+                                Swal.fire(
+                                    'Deleted Fail',
+                                    message,
+                                    'warning'
+                                ).then(() => {
+                                    setTimeout(
+                                        location.reload.bind(location),
+                                        1000
+                                    )
+                                })
+                            }
                         } else {
                             Swal.fire(
                                 'Deleted Fail',
                                 response.message,
                                 'warning'
-                            )
-                            setTimeout(location.reload.bind(location), 2000)
+                            ).then(() => {
+                                setTimeout(location.reload.bind(location), 1000)
+                            })
                         }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
@@ -61,7 +85,9 @@ const actionDeletedMultiple = (type, url) => {
                             'Delete Fail!',
                             'Permission denied , please check your permissions!',
                             'warning'
-                        )
+                        ).then(() => {
+                            setTimeout(location.reload.bind(location), 1000)
+                        })
                     },
                 })
             }
@@ -104,26 +130,49 @@ const actionDuplicateMultiple = (type, url) => {
                     url: url,
                     data: 'ids=' + strIds,
                     success: function (response) {
-                        console.log(response)
                         if (response.success) {
-                            var duplicateSuccess =
-                                response.hits.length > 0
-                                    ? response.hits
-                                    : 'empty'
-                            var duplicateFail =
-                                response.meta[0].length > 0
-                                    ? response.meta[0]
-                                    : 'empty'
-                            var message = `Duplicate Success Document ID: ${duplicateSuccess} and Duplicate Fail Document ID: ${duplicateFail}`
-                            Swal.fire('Duplicate Success', message, 'success')
-                            setTimeout(location.reload.bind(location), 1000)
+                            if (response.hits.length > 0) {
+                                var duplicateSuccess =
+                                    response.hits.length > 0
+                                        ? response.hits
+                                        : 'empty'
+                                var message = `Duplicate Success Document ID: ${duplicateSuccess}`
+                                Swal.fire(
+                                    'Duplicate Success',
+                                    message,
+                                    'success'
+                                ).then(() => {
+                                    setTimeout(
+                                        location.reload.bind(location),
+                                        1000
+                                    )
+                                })
+                            }
+                            if (response.meta[0].length > 0) {
+                                var duplicateFail =
+                                    response.meta[0].length > 0
+                                        ? response.meta[0]
+                                        : 'empty'
+                                var message = `Duplicate Fail Document ID: ${duplicateFail}. Please check setting and permission!`
+                                Swal.fire(
+                                    'Duplicate Fail',
+                                    message,
+                                    'warning'
+                                ).then(() => {
+                                    setTimeout(
+                                        location.reload.bind(location),
+                                        1000
+                                    )
+                                })
+                            }
                         } else {
                             Swal.fire(
                                 'Duplicate Fail',
                                 response.message,
                                 'warning'
-                            )
-                            setTimeout(location.reload.bind(location), 2000)
+                            ).then(() => {
+                                setTimeout(location.reload.bind(location), 1000)
+                            })
                         }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
@@ -132,7 +181,9 @@ const actionDuplicateMultiple = (type, url) => {
                             'Duplicate Fail!',
                             'Permission denied , please check your permissions!',
                             'warning'
-                        )
+                        ).then(() => {
+                            setTimeout(location.reload.bind(location), 1000)
+                        })
                     },
                 })
             }

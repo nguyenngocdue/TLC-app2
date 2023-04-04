@@ -61,15 +61,17 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
                     @foreach($actionButtons as $key => $button)
                     @php
                     $isCheck = !isset($propsIntermediate[$key]) || empty($propsIntermediate[$key]);
+                    $isClosedAt = $button['closed_at'] == true;
                     @endphp
-                    @if($button['is_close'] == false)
+                    @if($button['is_close'] == true)
                     <button type="button" title="Person can't close ,because you not owner document" class="px-2.5 py-2 inline-block disabled:opacity-40 font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md focus:outline-none"
                             disabled
                             >
                             Next <i class="fa-regular fa-arrow-right"></i> (to {{$button['label']}})
                         </button>
                     @else
-                    <button {{$isCheck ? 'type=submit '. '@click=changeStatus("'.$key .'")' : 'type=button '. '@click=toggleIntermediate("'.$key .'")' }} class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg"
+                    <button {{$isCheck ? 'type=submit '. '@click=changeStatus("'.$key .'")' : 'type=button '. '@click=toggleIntermediate("'.$key .'")' }} 
+                    class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg"
                             >
                             Next <i class="fa-regular fa-arrow-right"></i> (to {{$button['label']}})
                         </button>

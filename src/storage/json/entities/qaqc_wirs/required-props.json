@@ -103,14 +103,6 @@
         "rejected": "true",
         "closed": "true"
     },
-    "_closed_at": {
-        "name": "_closed_at",
-        "column_name": "closed_at",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "closed": "true"
-    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -143,6 +135,14 @@
         "rejected": "true",
         "closed": "true"
     },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -154,6 +154,22 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "_lock_version": {
+        "name": "_lock_version",
+        "column_name": "lock_version",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "_loggable": {
+        "name": "_loggable",
+        "column_name": "loggable",
         "new": "",
         "assigned": "",
         "rejected": "",

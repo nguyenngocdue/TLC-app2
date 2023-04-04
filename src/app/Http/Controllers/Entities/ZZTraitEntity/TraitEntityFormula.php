@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\DefaultValues;
+use App\View\Components\Formula\All_ClosedAt;
 use App\View\Components\Formula\All_ConcatNameWith123;
 use App\View\Components\Formula\All_DocId;
 use App\View\Components\Formula\All_SlugifyByName;
@@ -12,13 +13,13 @@ use App\View\Components\Formula\User_PositionRendered;
 
 trait TraitEntityFormula
 {
-    private function applyFormula($item, $action)
+    private function applyFormula($item, $action, $status)
     {
         $type = $this->type;
         $defaultValues = DefaultValues::getAllOf($type);
         foreach ($defaultValues as $prop) {
             if ($prop['formula'] === '') continue;
-            if (in_array($prop['formula'], ['All_OwnerId', 'All_DocId']) && $action == 'update') continue;
+            if (in_array($prop['formula'], ['All_OwnerId', 'All_DocId',]) && $action == 'update') continue;
             switch ($prop['formula']) {
                 case "All_ConcatNameWith123":
                     $name = $item['name'] ?? "";
@@ -49,6 +50,9 @@ trait TraitEntityFormula
                     break;
                 case "All_DocId":
                     $value = (new All_DocId())($item, $type);
+                    break;
+                case "All_ClosedAt":
+                    $value = (new All_ClosedAt())($status, $type);
                     break;
                 default:
                     $value = "";
