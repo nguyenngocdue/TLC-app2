@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
+use App\Http\Controllers\Reports\TraitFunctionsReport;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Sub_project;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 class Qaqc_wir_010 extends Report_ParentController
 {
     use TraitDynamicColumnsTableReport;
+    use TraitFunctionsReport;
     protected $rotate45Width = 600;
     // set default params's values 
     protected  $sub_project_id = 21;

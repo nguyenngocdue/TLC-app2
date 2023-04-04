@@ -6,12 +6,6 @@ use Illuminate\Support\Facades\DB;
 
 trait TraitDynamicColumnsTableReport
 {
-    function getDataSourceFromSqlStr($sql)
-    {
-        $sqlData = DB::select(DB::raw($sql));
-        return $sqlData;
-    }
-
     function createTableColumns(
         $dataSource,
         $strFromField = '',

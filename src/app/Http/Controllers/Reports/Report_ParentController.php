@@ -92,8 +92,8 @@ abstract class Report_ParentController extends Controller
     {
         $settings = CurrentUser::getSettings();
         if (!isset($settings[$entity])) return 10;
-        if (isset($settings[$entity][strtolower($typeReport)]['page_limit'])) {
-            $pageLimit = $settings[$entity][strtolower($typeReport)]['page_limit'];
+        if (isset($settings[$entity][strtolower($typeReport)]['per_page'])) {
+            $pageLimit = $settings[$entity][strtolower($typeReport)]['per_page'];
             return $pageLimit;
         }
         return 10;
@@ -131,7 +131,9 @@ abstract class Report_ParentController extends Controller
     public function index(Request $request)
     {
 
+        // dd($request);
         $input = $request->input();
+        // dump($input);
         // Log::info($input);
 
         $typeReport = CurrentPathInfo::getTypeReport($request);
