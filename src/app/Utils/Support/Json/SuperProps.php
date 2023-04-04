@@ -5,6 +5,7 @@ namespace App\Utils\Support\Json;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\CacheToRamForThisSection;
 use App\Utils\Support\JsonControls;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
@@ -111,14 +112,18 @@ class SuperProps
         foreach ($allProps as $propName => $prop) {
             $control =  $prop['control'];
             if (in_array($control, ['attachment'])) {
-                $value = $attachmentP[$propName];
-                // $value['max_file_count'] = $value['max_file_count'] ? $value['max_file_count'] : 10;
-                // $value['max_file_size'] = $value['max_file_size'] ? $value['max_file_size'] : 10;
-                // $value['allowed_file_types'] = $value['allowed_file_types'] ? $value['allowed_file_types'] : 'only_images';
-                $result[$propName] = $value;
+                if (!isset($attachmentP[$propName])) {
+                    Toastr::error("Please create $propName in attachment property screen");
+                } else {
+                    $result[$propName] = $attachmentP[$propName];
+                }
             }
             if (in_array($control, ['comment'])) {
-                $result[$propName] = $commentP[$propName];
+                if (!isset($commentP[$propName])) {
+                    Toastr::error("Please create $propName in comment property screen");
+                } else {
+                    $result[$propName] = $commentP[$propName];
+                }
             }
         }
         return $result;
