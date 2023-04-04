@@ -25,11 +25,14 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
                 return true;
             }
 
-            return $entry->isReportableException() ||
-                $entry->isFailedRequest() ||
-                $entry->isFailedJob() ||
-                $entry->isScheduledTask() ||
-                $entry->hasMonitoredTag();
+            return true; //<<Fortune: no filter anything, 
+            //<<Fortune: use telescope logging to log on production during the development state
+
+            // return $entry->isReportableException() ||
+            //     $entry->isFailedRequest() ||
+            //     $entry->isFailedJob() ||
+            //     $entry->isScheduledTask() ||
+            //     $entry->hasMonitoredTag();
         });
     }
 
@@ -64,9 +67,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     {
         Gate::define('viewTelescope', function ($user) {
             return in_array($user->email, [
-                'canhngo@tlcmodular.com',
-                'fortune@tlcmodular.com',
-                'admin',
+                'admin@tlc.com',
             ]);
         });
     }

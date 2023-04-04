@@ -65,7 +65,8 @@ class Hr_overtime_request_010 extends Report_ParentController
                     WHERE 1 = 1
                     AND otline.user_id = us.id
                     AND otline.hr_overtime_request_id = otr.id
-                    AND uscate.id = us.category";
+                    AND uscate.id = us.category
+                    AND  otline.status LIKE 'approved'";
 
         if (isset($modeParams['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
         $sql .= "\nGROUP BY user_id, employee_id, year_months, ot_workplace_id, years_month

@@ -118,7 +118,7 @@ abstract class Report_ParentController extends Controller
         ];
     }
 
-    protected function forwardToMode($request)
+    protected function forwardToMode($request, $modeParams)
     {
         $input = $request->input();
         $isFormType = isset($input['form_type']);
@@ -132,22 +132,20 @@ abstract class Report_ParentController extends Controller
     {
 
         $input = $request->input();
-        // dd($input);
-        Log::info($input);
+        // Log::info($input);
 
         $typeReport = CurrentPathInfo::getTypeReport($request);
         $routeName = $request->route()->action['as'];
-        $entity = str_replace(' ', '_', strtolower($this->getMenuTitle()));
-
-        if (!$request->input('page') && !empty($input)) {
-            return $this->forwardToMode($request);
-        }
+        $entity = CurrentPathInfo::getEntityReport($request);
 
         $currentUserId = Auth::id();
         $modeParams = $this->getModeParams($request);
-        // dd($modeParams);
         $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
+        // dump($modeParams);
 
+        if (!$request->input('page') && !empty($input)) {
+            return $this->forwardToMode($request, $modeParams);
+        }
         $dataSource = $this->getDataSource($modeParams);
         // dd($dataSource);
 
@@ -159,7 +157,6 @@ abstract class Report_ParentController extends Controller
         $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
-        $this->getDataToExportExcel(132);
 
         // dd($dataSource);
         // Execute the query
@@ -195,12 +192,6 @@ abstract class Report_ParentController extends Controller
         ]);
     }
 
-    protected function getDataToExportExcel($dataSource)
-    {
-        return $dataSource;
-    }
-
-
     public function exportCSV(Request $request)
     {
         $entity = CurrentPathInfo::getEntityReport($request, '_ep');
@@ -217,9 +208,7 @@ abstract class Report_ParentController extends Controller
             "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
             "Expires"             => "0"
         );
-
         $columnKeys = array_combine($columnKeys, $columnKeys);
-        // dd($rows, $columnNames);
         $callback = function () use ($rows, $columnKeys, $columnNames) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columnNames);
