@@ -113,10 +113,14 @@ class SuperProps
             $control =  $prop['control'];
             if (in_array($control, ['attachment'])) {
                 if (!isset($attachmentP[$propName])) {
-                    Toastr::error("Please create $propName in attachment property screen");
-                } else {
-                    $result[$propName] = $attachmentP[$propName];
+                    $attachmentP[$propName] = [
+                        'max_file_count' => 10,
+                        'max_file_size' => 10,
+                        'allowed_file_types' => 'only_images',
+                    ];
+                    // Toastr::error("Please create $propName in attachment property screen");
                 }
+                $result[$propName] = $attachmentP[$propName];
             }
             if (in_array($control, ['comment'])) {
                 if (!isset($commentP[$propName])) {

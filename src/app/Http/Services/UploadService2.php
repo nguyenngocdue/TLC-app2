@@ -61,7 +61,7 @@ class UploadService2
             $filesUpload = $request->files;
             $attachmentRows = [];
             foreach ($filesUpload as $fieldName => $files) {
-                $property = $attachmentP['_' . $fieldName];
+                $property = ($attachmentP['_' . $fieldName] ?? ['max_file_size' => 10, 'max_file_count' => 10, 'allowed_file_types' => 'only_images']);
                 $nameValidate = $fieldName . '.toBeUploaded';
                 $maxFileSize = $property['max_file_size'] * 1024;
                 $maxFileCount = $property['max_file_count'];
