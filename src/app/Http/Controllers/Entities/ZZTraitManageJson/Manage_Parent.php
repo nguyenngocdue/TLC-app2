@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\Entities;
 use App\Utils\Support\Json\JsonGetSet;
 use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\SuperProps;
@@ -109,6 +110,20 @@ abstract class Manage_Parent
         foreach ($result as &$line) unset($line['move_to']);
     }
 
+    function invalidateCache()
+    {
+        SuperProps::invalidateCache($this->type);
+        SuperWorkflows::invalidateCache($this->type);
+        if ($this->jsonGetSet == 'App\Utils\Support\Json\Properties') {
+            $allEntities = Entities::getAllSingularNames();
+            foreach ($allEntities as $entity) {
+                // dump("Invalidating $entity");
+                SuperProps::invalidateCache($entity);
+            }
+            // dd("Invalidate all");
+        }
+    }
+
     function store(Request $request)
     {
         $jsonGetSet = $this->jsonGetSet;
@@ -132,8 +147,10 @@ abstract class Manage_Parent
             $jsonGetSet::move($result, $direction, $name);
         }
         $jsonGetSet::setAllOf($this->type, $result);
-        SuperProps::invalidateCache($this->type);
-        SuperWorkflows::invalidateCache($this->type);
+
+        $this->invalidateCache();
+
+
         return back();
     }
 
@@ -149,8 +166,7 @@ abstract class Manage_Parent
         ];
         $dataSource = $this->jsonGetSet::getAllOf($this->type) + $newItems;
         $this->jsonGetSet::setAllOf($this->type, $dataSource);
-        SuperProps::invalidateCache($this->type);
-        SuperWorkflows::invalidateCache($this->type);
+        $this->invalidateCache();
         return back();
     }
 }

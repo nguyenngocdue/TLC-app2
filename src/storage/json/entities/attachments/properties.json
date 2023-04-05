@@ -150,5 +150,13 @@
         "max_file_size": "10",
         "max_file_count": "10",
         "allowed_file_types": "only_images"
+    },
+    "_featured_image": {
+        "name": "_featured_image",
+        "field_id": "11",
+        "field_name": "featured_image",
+        "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "only_images"
     }
 }
