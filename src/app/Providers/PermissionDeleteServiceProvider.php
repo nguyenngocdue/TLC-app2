@@ -31,11 +31,5 @@ class PermissionDeleteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Gate::define('delete', function ($user, $model) {
-            return $this->editAndDelete($user, $model);
-        });
-        Gate::define('delete-others', function ($user, $model) {
-            return $this->editAndDeleteOther($user, $model);
-        });
     }
 }
