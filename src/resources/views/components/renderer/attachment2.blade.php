@@ -56,8 +56,8 @@
 @if(!$readOnly)
     @if($showUploadFile)
     <div class="mt-2">
-        <input name="{{$name}}[toBeUploaded][]" id="{{$name}}_browse" multiple type="file" accept="{{$acceptAttachment}}" class="hidden block w-full text-sm text-gray-900 p-2.5 rounded-lg bg-white border border-white cursor-pointer dark:text-gray-300 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
-        <label for="{{$name}}_browse" class="{{$btnClass}} border cursor-pointer p-2 bg-gray-400 font-normal" title="{{$messageTitle}}">{!! $message !!}</label>
+        <input name="{{$name}}[toBeUploaded][]" id="{{$name}}_browse" multiple type="file" accept="{{$acceptAttachment}}" class="hidden w-full text-sm text-gray-900 p-2.5 rounded-lg bg-white border border-white cursor-pointer dark:text-gray-300 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+        <label for="{{$name}}_browse" class="{{$btnClass}} border cursor-pointer p-2 bg-blue-50 font-normal text-sm" title="{{$messageTitle}}">{!! $message !!}</label>
     </div>
     @endif
 @endif

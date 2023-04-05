@@ -184,6 +184,11 @@ trait TraitEntityFieldHandler2
         }
     }
 
+    private function makeUpAttachmentFieldForRequired(Request $request)
+    {
+        $attachments = $this->superProps['attachments'];
+    }
+
     private function makeUpCommentFieldForRequired(Request $request)
     {
         $comments = $this->superProps['comments'];

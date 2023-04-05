@@ -231,6 +231,17 @@ class SuperProps
         return $result;
     }
 
+    private static function getAttachmentsFromProps($props)
+    {
+        $result = [];
+        foreach ($props as $key => $prop) {
+            if ($prop['control'] == 'attachment') {
+                $result[] = $key;
+            }
+        }
+        return $result;
+    }
+
     private static function make($type)
     {
         static::$type = $type;
@@ -243,6 +254,7 @@ class SuperProps
         static::$result['settings'] = static::readSettings($type);
         static::$result['tables'] = static::getTablesFromProps(static::$result['props']);
         static::$result['comments'] = static::getCommentsFromProps(static::$result['props']);
+        static::$result['attachments'] = static::getAttachmentsFromProps(static::$result['props']);
         return static::$result;
     }
 
