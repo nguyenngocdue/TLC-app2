@@ -15,7 +15,7 @@ class Attachment2 extends Component
         private $value = "",
         private $readOnly = false,
         private $destroyable = true,
-        private $showToBeDeleted = true,
+        private $showToBeDeleted = false,
         private $showUploadFile = true,
         private $label = '',
         private $properties = [],
