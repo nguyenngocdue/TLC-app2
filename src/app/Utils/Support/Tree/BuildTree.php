@@ -41,6 +41,12 @@ class BuildTree
 
         return static::arrayGenKey($queryUsers);
     }
+    private static function getLeafs($ids)
+    {
+        $queryUsers =  DB::table('users')->whereIn('id', $ids)->select('id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned')->get()->toArray();
+
+        return static::arrayGenKey($queryUsers);
+    }
     private static function getDataDisciplines()
     {
         $queryUserDisciplines = DB::table('user_disciplines')->select('id', 'name', 'def_assignee')->get()->toArray();
@@ -72,6 +78,7 @@ class BuildTree
             $arrId[] = $currentId;
         }
         $result = [];
+
         foreach ($arrId as $value) {
             $result[] = static::findNodeValue($tree, $value, $onlyChildren);
         }
@@ -84,11 +91,12 @@ class BuildTree
             $arrIdLeaf[] = explode(',', $arrUIdLeaf);
             $arrIdLeaf = array_unique(...$arrIdLeaf);
         }
-        $result = [];
-        foreach ($arrIdLeaf as $value) {
-            $result[] = static::findNodeValueByUIDLeaf($tree, $value);
-        }
-        return $result;
+        // $result = [];
+        // foreach ($arrIdLeaf as $value) {
+
+        //     $result[] = static::findNodeValueByUIDLeaf($tree, $value);
+        // }
+        return [static::getLeafs($arrIdLeaf)];
     }
     private static function flatten($tree)
     {
@@ -114,11 +122,11 @@ class BuildTree
         $key = static::$key . '_of_the_app';
         return CacheToRamForThisSection::get($key, fn () => static::createTreeExpensive());
     }
-    public static function getTreeByOptions($currentId = null, $arrUIdViewPort = null, $arrUIdLeaf = null, $onlyChildren = false, $flatten = false)
+    public static function getTreeByOptions($currentId = null, $arrUIdViewPort = null, $arrUIdLeaf = null, $onlyDirectChildren = false, $flatten = false)
     {
         $tree = static::getAll();
-        $valueTreeCurrentIdAndViewPort = static::getTreeFollowedCurrentIdAndViewPort($tree, $currentId, $arrUIdViewPort, $onlyChildren);
-        $valueTreeLeaf = static::getTreeFollowedLeaf($tree, $arrUIdLeaf, $onlyChildren);
+        $valueTreeCurrentIdAndViewPort = static::getTreeFollowedCurrentIdAndViewPort($tree, $currentId, $arrUIdViewPort, $onlyDirectChildren);
+        $valueTreeLeaf = static::getTreeFollowedLeaf($tree, $arrUIdLeaf, $onlyDirectChildren);
         $result = array_merge(...$valueTreeCurrentIdAndViewPort, ...$valueTreeLeaf);
         if ($flatten) {
             return static::flatten($result);
