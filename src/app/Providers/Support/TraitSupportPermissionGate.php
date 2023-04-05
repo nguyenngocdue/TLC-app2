@@ -44,8 +44,6 @@ trait TraitSupportPermissionGate
         if (CurrentUser::isAdmin()) {
             return $model;
         }
-        $edit = false;
-        $editOther = false;
         $message = [];
         if ($isTree) {
             [$edit, $editOther] = $this->useTreeForPermissionTheLine($isTree, $permissions, $model);
@@ -83,6 +81,8 @@ trait TraitSupportPermissionGate
     }
     private function useTreeForPermissionTheLine($isTree, $permissions, $model)
     {
+        $result1 = false;
+        $result2 = false;
         if ($isTree) {
             switch (true) {
                 case $this->checkPermission($permissions[0]):

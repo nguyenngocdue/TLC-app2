@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Providers\Support\TraitSupportPermissionGate;
+use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Json\SuperWorkflows;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -35,6 +37,8 @@ trait TraitEntityCRUDDestroy
             $ids = explode(',', $strIds) ?? [];
             $arrFail = $this->checkPermissionUsingGateForDeleteMultiple($ids, 'delete');
             $arrDelete = array_diff($ids, $arrFail);
+            //$roleSet = CurrentUser::getRoleSet();
+            //dd(SuperWorkflows::getFor($this->type, $roleSet));
             $this->data::whereIn('id', $arrDelete)->delete();
             return ResponseObject::responseSuccess(
                 $arrDelete,
