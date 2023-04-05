@@ -1,6 +1,6 @@
 <div class="flex flex-col container mx-aut1o w-full">
     @if(sizeof($attachments) ==0)
-    <x-renderer.emptiness p="2" class="border" message="{{$message}}" />
+    <x-renderer.emptiness p="2" class="border" message="There is no item to be found." />
     @else
     <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1">
         @foreach($attachments as $attachment)

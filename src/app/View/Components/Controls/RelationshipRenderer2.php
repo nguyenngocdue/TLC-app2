@@ -31,9 +31,9 @@ class RelationshipRenderer2 extends Component
             'qaqc_ncrs' => [
                 'parent_type' => ['type' => 'formValue', 'name' => 'entityParentType',],
                 'parent_id' => ['type' => 'formValue', 'name' => 'entityParentId',],
-                'project_id' => '',
-                'sub_project_id' => '',
-                'prod_discipline_id' => '',
+                'project_id' => [],
+                'sub_project_id' => [],
+                'prod_discipline_id' => [],
             ],
         ],
         'qaqc_insp_chklst_lines' => [
@@ -165,15 +165,18 @@ class RelationshipRenderer2 extends Component
         // dump($createLink);
         $params = [];
         foreach ($createSettings as $key => $valueType) {
-            $value = $itemOriginal[$key] ?? '';
-            switch ($valueType['type']) {
-                case 'formValue':
-                    if ($valueType['name'] == 'entityParentType') $value = $this->entityType;
-                    if ($valueType['name'] == 'entityParentId') $value = $this->entityId;
-                    break;
-                case 'complexEloquent':
-                    $value = $this->getValueOfComplexEloquent($valueType['name'], $item);
-                    break;
+            if (isset($valueType['type'])) {
+                switch ($valueType['type']) {
+                    case 'formValue':
+                        if ($valueType['name'] == 'entityParentType') $value = $this->entityType;
+                        if ($valueType['name'] == 'entityParentId') $value = $this->entityId;
+                        break;
+                    case 'complexEloquent':
+                        $value = $this->getValueOfComplexEloquent($valueType['name'], $item);
+                        break;
+                }
+            } else {
+                $value = $itemOriginal[$key] ?? '';
             }
             $params[] = "$key=$value";
         }
