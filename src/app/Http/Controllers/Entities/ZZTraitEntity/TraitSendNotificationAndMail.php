@@ -17,7 +17,7 @@ trait TraitSendNotificationAndMail
             try {
                 event(new CreateNewDocumentEvent($currentValue = $this->addEntityType($fields, 'entity_type', $type), $classType,));
             } catch (\Throwable $th) {
-                Toastr::error($th->getFile() . " " . $th->getLine(), $th->getMessage());
+                Toastr::error($th->getFile() . " " . $th->getLine() . " in " . __FUNCTION__, $th->getMessage());
             }
         }
     }
@@ -32,7 +32,7 @@ trait TraitSendNotificationAndMail
                     $userCurrentId = auth()->user()->id,
                 ));
             } catch (\Throwable $th) {
-                Toastr::error($th->getFile() . " " . $th->getLine(), $th->getMessage());
+                Toastr::error($th->getFile() . " " . $th->getLine() . " in " . __FUNCTION__, $th->getMessage());
             }
         }
     }

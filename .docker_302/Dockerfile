@@ -11,8 +11,8 @@ RUN apk update && apk add \
     libjpeg-turbo-dev \
     zip \
     unzip \
-    ca-certificates \
-    openssl \
+    # ca-certificates \
+    # openssl \
     nano \
     mc \
     htop \

@@ -113,7 +113,11 @@ trait TraitEntityCRUDStoreUpdate2
 			if ($request['tableNames'] !== 'fakeRequest') {
 				$this->makeUpTableFieldForRequired($request);
 			}
+			$this->makeUpAttachmentFieldForRequired($theRow, $request);
 			$this->makeUpCommentFieldForRequired($request);
+			// dump($request);
+			// dump($rules);
+			// dd();
 			$request->validate($rules);
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {

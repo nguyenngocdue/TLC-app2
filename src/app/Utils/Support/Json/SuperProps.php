@@ -113,10 +113,14 @@ class SuperProps
             $control =  $prop['control'];
             if (in_array($control, ['attachment'])) {
                 if (!isset($attachmentP[$propName])) {
-                    Toastr::error("Please create $propName in attachment property screen");
-                } else {
-                    $result[$propName] = $attachmentP[$propName];
+                    $attachmentP[$propName] = [
+                        'max_file_count' => 10,
+                        'max_file_size' => 10,
+                        'allowed_file_types' => 'only_images',
+                    ];
+                    // Toastr::error("Please create $propName in attachment property screen");
                 }
+                $result[$propName] = $attachmentP[$propName];
             }
             if (in_array($control, ['comment'])) {
                 if (!isset($commentP[$propName])) {
@@ -227,6 +231,17 @@ class SuperProps
         return $result;
     }
 
+    private static function getAttachmentsFromProps($props)
+    {
+        $result = [];
+        foreach ($props as $key => $prop) {
+            if ($prop['control'] == 'attachment') {
+                $result[] = $key;
+            }
+        }
+        return $result;
+    }
+
     private static function make($type)
     {
         static::$type = $type;
@@ -239,6 +254,7 @@ class SuperProps
         static::$result['settings'] = static::readSettings($type);
         static::$result['tables'] = static::getTablesFromProps(static::$result['props']);
         static::$result['comments'] = static::getCommentsFromProps(static::$result['props']);
+        static::$result['attachments'] = static::getAttachmentsFromProps(static::$result['props']);
         return static::$result;
     }
 

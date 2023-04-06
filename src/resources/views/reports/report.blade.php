@@ -16,6 +16,13 @@
         <x-reports.utility-report routeName="{{$routeName}}" />
         <x-reports.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" routeName="{{$routeName}}" page-limit="{{$pageLimit}}" formName="updatePerPage" />
     </div>
-    <x-renderer.table showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource" rotate45Width={{$rotate45Width}} />
+
+    @php
+    // $tc = "<x-renderer.tag>Top Centerdfgdfgfdgfdgfdgfdg</x-renderer.tag> ";
+    $tc = "
+    <x-reports.utility-report routeName='$routeName' ";
+    @endphp
+    {{-- <x-renderer.tag>Top Center</x-renderer.tag> --}}
+    <x-renderer.table topCenterControl=" {!!$tc!!}" showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource" rotate45Width={{$rotate45Width}} />
     @endsection
 </div>

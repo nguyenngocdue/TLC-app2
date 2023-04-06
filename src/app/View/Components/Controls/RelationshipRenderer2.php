@@ -29,19 +29,21 @@ class RelationshipRenderer2 extends Component
     private $tablesHaveCreateANewForm = [
         'qaqc_mirs' => [
             'qaqc_ncrs' => [
-                'parent_type' => 'entityParentType',
-                'parent_id' => 'entityParentId',
-                'project_id' => '',
-                'sub_project_id' => '',
-                'prod_discipline_id' => '',
+                'parent_type' => ['type' => 'formValue', 'name' => 'entityParentType',],
+                'parent_id' => ['type' => 'formValue', 'name' => 'entityParentId',],
+                'project_id' => [],
+                'sub_project_id' => [],
+                'prod_discipline_id' => [],
             ],
         ],
         'qaqc_insp_chklst_lines' => [
             'qaqc_ncrs' => [
-                'parent_type' => 'entityParentType',
-                'parent_id' => 'entityParentId',
-                // 'project_id' => '',
-                // 'sub_project_id' => '',
+                'parent_type' => ['type' => 'formValue', 'name' => 'entityParentType',],
+                'parent_id' => ['type' => 'formValue', 'name' => 'entityParentId',],
+                'project_id' => ['type' => 'complexEloquent', 'name' => 'fromChklstLine2Project'],
+                'sub_project_id' => ['type' => 'complexEloquent', 'name' => 'fromChklstLine2SubProject'],
+                'prod_routing_id' => ['type' => 'complexEloquent', 'name' => 'fromChklstLine2Routing'],
+                'prod_order_id' => ['type' => 'complexEloquent', 'name' => 'fromChklstLine2ProdOrder'],
                 // 'prod_discipline_id' => '',
             ],
         ],
@@ -140,20 +142,41 @@ class RelationshipRenderer2 extends Component
         }
     }
 
-    private function createHref($itemOriginal, $createSettings, $tableName)
+    private function getValueOfComplexEloquent($name, $item)
     {
+        switch ($name) {
+            case 'fromChklstLine2Project':
+                return  $item->getProject->id;
+            case 'fromChklstLine2SubProject':
+                return  $item->getSubProject->id;
+            case 'fromChklstLine2Routing':
+                return  $item->getProdRouting->id;
+            case 'fromChklstLine2ProdOrder':
+                return  $item->getProdOrder->id;
+            default:
+                return '';
+        }
+    }
+
+    private function createHref($item, $createSettings, $tableName)
+    {
+        $itemOriginal = $item->getOriginal();
         $createLink = route($tableName . ".create");
         // dump($createLink);
         $params = [];
         foreach ($createSettings as $key => $valueType) {
-            $value = $itemOriginal[$key] ?? '';
-            switch ($valueType) {
-                case 'entityParentType':
-                    $value = $this->entityType;
-                    break;
-                case 'entityParentId':
-                    $value = $this->entityId;
-                    break;
+            if (isset($valueType['type'])) {
+                switch ($valueType['type']) {
+                    case 'formValue':
+                        if ($valueType['name'] == 'entityParentType') $value = $this->entityType;
+                        if ($valueType['name'] == 'entityParentId') $value = $this->entityId;
+                        break;
+                    case 'complexEloquent':
+                        $value = $this->getValueOfComplexEloquent($valueType['name'], $item);
+                        break;
+                }
+            } else {
+                $value = $itemOriginal[$key] ?? '';
             }
             $params[] = "$key=$value";
         }
@@ -234,7 +257,7 @@ class RelationshipRenderer2 extends Component
                 $href = '';
                 if ($this->item) {
                     $itemOriginal = $this->item->getOriginal();
-                    $href = $this->createHref($itemOriginal, $createSettings, $tableName);
+                    $href = $this->createHref($this->item, $createSettings, $tableName);
                 }
                 // dump($itemOriginal);
                 return view('components.controls.many-line-params', [

@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
-use App\Utils\Support\Json\Properties;
+use App\Utils\ClassList;
 use Illuminate\View\Component;
 
 class Attachment2 extends Component
@@ -15,14 +15,9 @@ class Attachment2 extends Component
         private $value = "",
         private $readOnly = false,
         private $destroyable = true,
-        private $showToBeDeleted = true,
         private $showUploadFile = true,
         private $label = '',
-        private $properties = [
-            'max_file_count' => 10,
-            'max_file_size' => 10,
-            'allowed_file_types' => 'only_images',
-        ],
+        private $properties = [],
     ) {
         if (is_array($value)) {
             $this->attachments = $value;
@@ -38,23 +33,31 @@ class Attachment2 extends Component
     public function render()
     {
         $properties = $this->properties;
+        $properties['max_file_count'] = $properties['max_file_count'] ?? 10;
+        $properties['max_file_size'] = $properties['max_file_size'] ?? 10;
+        $properties['allowed_file_types'] = $properties['allowed_file_types'] ?? 'only_images';
         // dd($properties);
-        $message =  "Allows MAX " . $properties['max_file_count'] . " files (each " . $properties['max_file_size'] . "MB) (" . $properties['allowed_file_types'] . ")";
+        $message =  "<i class='fa-sharp fa-regular fa-upload'></i> Browse (Max " . $properties['max_file_count'] . " files, each " . $properties['max_file_size']  . "MB)";
         switch ($properties['allowed_file_types']) {
             case 'only_images':
                 $acceptAttachment = ".png,.jpeg,.gif,.jpg,.svg,.webp";
+                $title = "Only Images (JPG, JPEG, PNG, GIF, WEBP, SVG)";
                 break;
             case 'only_videos':
                 $acceptAttachment = "video/mp4";
+                $title = "Only Videos (MP4)";
                 break;
             case 'only_media':
                 $acceptAttachment = "video/* image/*";
+                $title = "Only Images (JPG, JPEG, PNG, GIF, WEBP, SVG) and Videos (MP4)";
                 break;
             case 'only_non_media':
                 $acceptAttachment = ".csv,.pdf,.zip";
+                $title = "Only Non-Media (CSV, PDF, ZIP)";
                 break;
             case 'all_supported':
                 $acceptAttachment = "";
+                $title = "All supported formats";
                 break;
             default:
                 break;
@@ -63,13 +66,14 @@ class Attachment2 extends Component
             'name' => $this->name,
             'destroyable' => $this->destroyable,
             'readOnly' => $this->readOnly,
-            'showToBeDeleted' => $this->showToBeDeleted,
             'showUploadFile' => $this->showUploadFile,
             'path' => env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/',
             'attachments' => $this->attachments,
             'acceptAttachment' => $acceptAttachment,
             'message' => $message,
+            'messageTitle' => $title,
             'hiddenOrText' => $this->debugAttachment ? "text" : "hidden",
+            'btnClass' => ClassList::BUTTON,
         ]);
     }
 }

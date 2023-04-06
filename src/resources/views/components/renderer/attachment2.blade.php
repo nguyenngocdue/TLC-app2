@@ -1,6 +1,6 @@
 <div class="flex flex-col container mx-aut1o w-full">
     @if(sizeof($attachments) ==0)
-    <x-renderer.emptiness p="2" class="border" message="{{$message}}" />
+    <x-renderer.emptiness p="2" class="border" message="There is no item to be found." />
     @else
     <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1">
         @foreach($attachments as $attachment)
@@ -11,7 +11,7 @@
         $extension = $attachment['extension'] ?? "";
         @endphp
         @if($hasOrphan)
-        <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="hiddenOrText" />
+        <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
         @endif
         <div name='{{$name}}' title="{{$title}}" class="border-{{$border}}-300 relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit">
             {{-- This is the image --}}
@@ -49,13 +49,14 @@
     @endif
 </div>
 @if(!$readOnly)
-    @if($showToBeDeleted)
-    <input id="{{$name}}-toBeDeleted" name="{{$name}}[toBeDeleted]" readonly type='hiddenOrText' class='p-2.5 w-full bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
-    @endif
+    <input id="{{$name}}-toBeDeleted" name="{{$name}}[toBeDeleted]" readonly type='{{$hiddenOrText}}' class='p-2.5 w-full bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
 @endif
 @if(!$readOnly)
     @if($showUploadFile)
-    <input name="{{$name}}[toBeUploaded][]" multiple type="file" accept="{{$acceptAttachment}}" class="block w-full text-sm text-gray-900 p-2.5 rounded-lg bg-white border border-white cursor-pointer dark:text-gray-300 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+    <div class="mt-2">
+        <input name="{{$name}}[toBeUploaded][]" id="{{$name}}_browse" multiple type="file" accept="{{$acceptAttachment}}" class="hidden w-full text-sm text-gray-900 p-2.5 rounded-lg bg-white border border-white cursor-pointer dark:text-gray-300 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+        <label for="{{$name}}_browse" class="{{$btnClass}} border cursor-pointer p-2 bg-blue-50 font-normal text-sm" title="{{$messageTitle}}">{!! $message !!}</label>
+    </div>
     @endif
 @endif
 

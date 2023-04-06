@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RedisController;
 use App\Http\Controllers\Reports\ReportIndexController;
 use App\Http\Controllers\UpdateUserSettings;
+use App\Http\Controllers\Utils\MyCompany;
 use App\Http\Controllers\Utils\ParserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\WelcomeDueController;
@@ -159,6 +160,8 @@ Route::group([
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::get('impersonate/user/{id}', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
+    Route::get('app-menu', [AppMenuController::class, 'index']);
+    Route::get('my-company', [MyCompany::class, 'index']);
 });
 
 
@@ -173,7 +176,6 @@ Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index
 
 Route::resource('utils/parser', ParserController::class)->only('index', 'store');
 
-Route::get('app-menu', [AppMenuController::class, 'index']);
 Route::group([
     'prefix' => 'dashboard/workflow',
 ], function () {
