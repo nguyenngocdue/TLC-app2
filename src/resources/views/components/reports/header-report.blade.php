@@ -6,7 +6,7 @@ $name = $sheetDesc
 @endphp
 <div id="{{$name}}" class=" md:scroll-mt-20   sm:py-0 rounded-lg  bg-white  dark:border-gray-600">
     <div class="border-b p-3 font-medium">
-        <span class="">{{strtoupper($sheetDesc)}} - INSPECTION CHECK SHEET</span>
+        <x-renderer.heading level=5>{{strtoupper($sheetDesc)}} - INSPECTION CHECK SHEET</x-renderer.heading>
     </div>
     <div class="flex justify-between p-3">
         <div class="flex">

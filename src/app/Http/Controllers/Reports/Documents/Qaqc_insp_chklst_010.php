@@ -16,7 +16,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 {
 	use TraitDynamicColumnsTableReport;
 	protected $viewName = 'document-qaqc-insp-chklst';
-	protected $pageLimit = 1000;
 
 	// set default params's values 
 	protected  $sub_project_id = 21;
@@ -315,7 +314,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 			$x = isset(reset($item)['sheet_name']);
 			if ($x) {
 				$name = array_pop($item)['sheet_name'];
-				$str = "<a href='#$name'>$name</a>";
+				$str = "<a href='#$name' class='text-blue-600'>$name</a>";
 				return  ["sheet_name" =>  $str];
 			} else return [];
 		}, $items));

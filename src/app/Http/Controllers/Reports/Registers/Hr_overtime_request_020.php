@@ -22,7 +22,9 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
     {
         $pickerDate =  isset($modeParams['picker_date']) ? $modeParams['picker_date'] : '';
         // dd($fromDate);
-        $sql = "SELECT
+        $sql = "SELECT 	tb1.*
+        FROM 
+        (SELECT
         sp.name sub_project_name
         ,otr.id hr_overtime_request_id
         ,otline.sub_project_id sub_project_id
@@ -32,31 +34,32 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
         otline.employeeid employee_id
         ,otline.ot_date ot_date
         ,otline.break_time break_time
-        ,otline.ot_date AS ot_date
         ,SUBSTR(otline.from_time, 1,5) from_time
         ,SUBSTR(otline.to_time, 1,5) to_time
         ,otline.total_time total_time
         ,otline.month_allowed_hours month_allowed_hours
         ,otline.month_remaining_hours month_remaining_hours
         ,otline.year_allowed_hours year_allowed_hours
+        ,if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,7), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,7)) AS years_month 
         ,otline.year_remaining_hours year_remaining_hours
+
         FROM hr_overtime_request_lines otline, sub_projects sp, users us, hr_overtime_requests otr
         WHERE 1 = 1";
 
         if (isset($modeParams['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
-        if (isset($modeParams['months'])) $sql .= "\n AND SUBSTR(otline.ot_date,1,7) = '{{months}}'";
         if ($pickerDate) {
             $fromDate = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', substr($pickerDate, 0, 10)))->format('Y-m-d');
             $toDate = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', substr($pickerDate, 13, strlen($pickerDate))))->format('Y-m-d');
             $sql .= "\n AND otline.ot_date >= '$fromDate'
-                        AND otline.ot_date <= '$toDate'";
+            AND otline.ot_date <= '$toDate'";
         }
-        $sql .= "\n 
-                    AND otline.sub_project_id = sp.id
+        $sql .= "\n AND otline.sub_project_id = sp.id
                     AND otline.status LIKE 'approved'
                     AND us.id = otline.user_id
                     AND otr.id = otline.hr_overtime_request_id
-                    ORDER BY name_render, employee_id, ot_date DESC";
+                        ) AS tb1";
+        if (isset($modeParams['months'])) $sql .= "\n WHERE tb1.years_month  = '{{months}}'";
+        $sql .= "\n ORDER BY name_render, employee_id, ot_date DESC";
         return $sql;
     }
 

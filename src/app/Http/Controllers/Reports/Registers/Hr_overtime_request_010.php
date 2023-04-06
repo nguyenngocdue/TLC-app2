@@ -32,7 +32,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
             year_months,
             (40) AS maximum_allowed_ot_hours,
             SUM(total_overtime_hours) AS total_overtime_hours,
-            (40 - SUM(total_overtime_hours)) AS remaining_allowed_ot_hours,
+            ROUND((40 - SUM(total_overtime_hours)),2) AS remaining_allowed_ot_hours,
             years_month,
             ROW_NUMBER() OVER (PARTITION BY employee_id, years_month ORDER BY year_months) AS step_plus,
             SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employee_id, years_month ORDER BY year_months) AS cumulative_remaining_hours_year,
@@ -53,9 +53,10 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
                         uscate.description AS user_category_desc,
                         otline.employeeid AS employee_id,
                         SUBSTR(otline.ot_date,1,7) AS year_months,
-                        SUBSTR(otline.ot_date,1,4) AS years_month,
+                        #SUBSTR(otline.ot_date,1,4) AS years_month,
                         SUM(otline.total_time) AS total_overtime_hours,
-                        us.id AS user_id
+                        us.id AS user_id,
+                        if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,7), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,7)) AS years_month -- range salary term
                     FROM 
                         users us, 
                         hr_overtime_request_lines otline, 
@@ -65,25 +66,14 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
                     AND otline.user_id = us.id
                     AND otline.hr_overtime_request_id = otr.id
                     AND uscate.id = us.category
-                    AND  otline.status LIKE 'approved'
-
-                    #AND (MONTH(otline.ot_date) = 2 OR MONTH(otline.ot_date) = 1) --(A)
-                    AND (MONTH(otline.ot_date) = 1 OR MONTH(otline.ot_date) = 12)
-                    AND (
-                            -- From December of the previous year
-                            (MONTH(otline.ot_date) = 12 AND DAY(otline.ot_date) >=26 AND MONTH(DATE_ADD(otline.ot_date, INTERVAL 1 MONTH)) = 1)
-                            
-                            -- From January of the current year -  Only add line when MONTH(otline.ot_date = 1 (A)
-                            OR (MONTH(otline.ot_date) = 1 AND DAY(otline.ot_date) <=25 AND MONTH(DATE_SUB(otline.ot_date, INTERVAL 1 MONTH)) = 12) 
-                            
-                            -- From the previous month (including December of the previous year) - the last 5 days of the previous month.
-                            #AND (DAY(otline.ot_date) >= 26 AND MONTH(otline.ot_date) = MONTH(DATE_SUB(otline.ot_date, INTERVAL 1 MONTH)))
-                            OR (DAY(otline.ot_date) >= 26 AND MONTH(otline.ot_date) = MONTH(DATE_ADD(otline.ot_date, INTERVAL 1 MONTH))-1)
-                            -- From the current month (including January of the current year) -  the first 25 days of the next month.
-                            OR (DAY(otline.ot_date) <= 25 AND MONTH(otline.ot_date) = MONTH(DATE_SUB(otline.ot_date, INTERVAL 1 MONTH))+1)
-                            #OR (DAY(otline.ot_date) <= 25 AND MONTH(otline.ot_date) = MONTH(DATE_ADD(otline.ot_date, INTERVAL 1 MONTH)))
-                        )
-";
+                    AND  otline.status LIKE 'approved' ";
+        // $sql .= "\n AND (
+        //                 -- (B)
+        //                 -- From the previous month (including December of the previous year) - the last 5 days of the previous month.
+        //                 (DAY(otline.ot_date) >= 26 AND MONTH(otline.ot_date) = MONTH(DATE_ADD(otline.ot_date, INTERVAL 1 MONTH))-1)
+        //                 -- From the current month (including January of the current year) -  the first 25 days of the next month.
+        //                 OR (DAY(otline.ot_date) <= 25 AND MONTH(otline.ot_date) = MONTH(DATE_SUB(otline.ot_date, INTERVAL 1 MONTH))+1)
+        //                 )";
 
         if (isset($modeParams['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
         $sql .= "\nGROUP BY user_id, employee_id, year_months, ot_workplace_id, years_month
