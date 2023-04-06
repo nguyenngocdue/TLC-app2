@@ -11,7 +11,7 @@
         $extension = $attachment['extension'] ?? "";
         @endphp
         @if($hasOrphan)
-        <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="hiddenOrText" />
+        <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
         @endif
         <div name='{{$name}}' title="{{$title}}" class="border-{{$border}}-300 relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit">
             {{-- This is the image --}}
@@ -49,9 +49,7 @@
     @endif
 </div>
 @if(!$readOnly)
-    @if($showToBeDeleted)
-    <input id="{{$name}}-toBeDeleted" name="{{$name}}[toBeDeleted]" readonly type='hiddenOrText' class='p-2.5 w-full bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
-    @endif
+    <input id="{{$name}}-toBeDeleted" name="{{$name}}[toBeDeleted]" readonly type='{{$hiddenOrText}}' class='p-2.5 w-full bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
 @endif
 @if(!$readOnly)
     @if($showUploadFile)

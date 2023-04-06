@@ -135,11 +135,12 @@ trait TraitEntityFieldHandler2
 
     private function handleToastrMessage($action, $toastrResult)
     {
-        Toastr::success("$this->type $action successfully", "$action $this->type");
         if (!empty($toastrResult)) {
             foreach ($toastrResult as $table01Name => $toastrMessage) {
                 Toastr::error($toastrMessage, "$table01Name $action failed");
             }
+        } else {
+            Toastr::success("$this->type $action successfully", "$action $this->type");
         }
     }
 
@@ -184,9 +185,18 @@ trait TraitEntityFieldHandler2
         }
     }
 
-    private function makeUpAttachmentFieldForRequired(Request $request)
+    private function makeUpAttachmentFieldForRequired($item, Request $request)
     {
         $attachments = $this->superProps['attachments'];
+        // dump($attachments);
+        foreach ($attachments as $attachment) {
+            $function = substr($attachment, 1); //Remove leading underscore
+            $files = $item->{$function};
+            $count = sizeof($files);
+            if ($count)  $request->request->add([$function => $count . " item_xyz"]);
+            else $request->request->remove($function);
+        }
+        // dump($item);
     }
 
     private function makeUpCommentFieldForRequired(Request $request)
