@@ -43,7 +43,7 @@ COPY ./supervisor.d /etc/supervisor.d
 #RUN chown -R ndc:ndcgp /var/www/app
 #USER ndc
 
-RUN usermod -u 1000 www-data
+RUN usermod -u 82 www-data
 RUN chown -R www-data:www-data .
 
 # ENV ENABLE_CRONTAB 1

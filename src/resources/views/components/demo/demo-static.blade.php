@@ -11,9 +11,9 @@
     </x-renderer.card>
    
     <x-renderer.card title="Typography">
-        <x-renderer.heading level=1>Heading Level 1</x-renderer.heading>
-        <x-renderer.heading level=2>Heading Level 2</x-renderer.heading>
-        <x-renderer.heading level=3>Heading Level 3</x-renderer.heading>
+        <x-renderer.heading level=1 class='text-green-600'>Heading Level 1</x-renderer.heading>
+        <x-renderer.heading level=2 class='text-pink-600'>Heading Level 2</x-renderer.heading>
+        <x-renderer.heading level=3 class='text-blue-600'>Heading Level 3</x-renderer.heading>
         <x-renderer.heading level=4>Heading Level 4</x-renderer.heading>
         <x-renderer.heading level=5>Heading Level 5</x-renderer.heading>
         <x-renderer.heading>Heading Level 6: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</x-renderer.heading>
