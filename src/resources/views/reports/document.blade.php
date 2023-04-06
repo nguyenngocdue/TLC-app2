@@ -3,7 +3,8 @@
 @section('title', Str::ucfirst($typeReport))
 @section('content')
 @php
-$dataHead = array_values($tableDataSource->items())[0][0];
+// dd($tableDataSource);
+$dataHeading = array_values($tableDataSource->items())[0][0] ?? [];
 @endphp
 
 <div class="md:px-4 no-print">
@@ -15,14 +16,14 @@ $dataHead = array_values($tableDataSource->items())[0][0];
     </div>
     <div class="flex pb-2 pr-4 ">
         <x-reports.utility-report routeName="{{$routeName}}" />
-        <x-reports.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" routeName="{{$routeName}}" page-limit="{{$pageLimit}}" formName="updatePerPage" />
+        {{-- <x-reports.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" routeName="{{$routeName}}" page-limit="{{$pageLimit}}" formName="updatePerPage" /> --}}
     </div>
 </div>
 <div class="flex justify-center">
     <div class="md:px-4">
         @if (count($sheets))
         <div class="w-[1000px] min-h-[1415px] items-center bor1der bg-white box-border p-8">
-            <x-reports.header2-report :dataSource="$dataHead" />
+            <x-reports.header2-report :dataSource="$dataHeading" />
             <x-renderer.table maxH="{{false}}" :dataSource="$sheets" :columns="[['dataIndex' => key(array_pop($sheets))]]" showNo="{{true}}" />
         </div>
         <x-renderer.page-break />

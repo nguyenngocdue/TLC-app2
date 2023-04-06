@@ -21,8 +21,8 @@ trait HasCheckbox
         if ($fieldId) return [$fieldId->id, false];
         if ($fieldIdReversed) return [$fieldIdReversed->id, true];
         //if not found either name or reversed_name
-        dump("Create a record in table Field with name/reversed_name as [$fieldNameOrId]");
-        dd();
+        // dump("Create a record in table Field with name/reversed_name as [$fieldNameOrId]");
+        // dd();
     }
 
     function getCheckedByField($fieldNameOrId, $relation = null)
