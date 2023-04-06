@@ -52,11 +52,11 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
                         uscate.name AS user_category_name,
                         uscate.description AS user_category_desc,
                         otline.employeeid AS employee_id,
-                        SUBSTR(otline.ot_date,1,7) AS year_months,
-                        #SUBSTR(otline.ot_date,1,4) AS years_month,
+                        #SUBSTR(otline.ot_date,1,7) AS year_months,
+                         if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,4), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,4)) AS years_month,
                         SUM(otline.total_time) AS total_overtime_hours,
                         us.id AS user_id,
-                        if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,7), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,7)) AS years_month -- range salary term
+                        if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,7), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,7)) AS year_months -- range salary term
                     FROM 
                         users us, 
                         hr_overtime_request_lines otline, 
