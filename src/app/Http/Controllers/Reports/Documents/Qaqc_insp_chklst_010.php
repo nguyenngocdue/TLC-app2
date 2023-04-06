@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Reports\Documents;
 
-use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\Report_ParentDocumentController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Models\Attachment;
 use App\Models\Prod_order;
@@ -12,7 +12,7 @@ use App\Models\Sub_project;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 
-class Qaqc_insp_chklst_010 extends Report_ParentController
+class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 {
 	use TraitDynamicColumnsTableReport;
 	protected $viewName = 'document-qaqc-insp-chklst';

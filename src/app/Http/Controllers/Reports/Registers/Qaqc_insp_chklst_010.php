@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Reports\Registers;
 
-use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
-use App\Http\Controllers\UpdateUserSettings;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Log;
 
-class Qaqc_insp_chklst_sht_010 extends Report_ParentController
+class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
 

@@ -34,7 +34,6 @@
     },
     "dashboard": {
         "name": "dashboard",
-        "hidden": null,
         "package": "system",
         "sub_package": "dashboard",
         "title": "Dashboard",
@@ -45,7 +44,6 @@
     },
     "department": {
         "name": "department",
-        "hidden": null,
         "package": "system",
         "sub_package": "system_admin",
         "title": "Departments",
@@ -56,7 +54,6 @@
     },
     "erp_routing_link": {
         "name": "erp_routing_link",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "production",
         "title": "ERP Routing Links",
@@ -78,7 +75,6 @@
     },
     "hr_overtime_request": {
         "name": "hr_overtime_request",
-        "hidden": null,
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "HR Overtime Requests",
@@ -102,7 +98,6 @@
     },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
-        "hidden": null,
         "package": "compliance",
         "sub_package": "hse",
         "title": "HSE Corrective Actions",
@@ -113,7 +108,6 @@
     },
     "hse_incident_report": {
         "name": "hse_incident_report",
-        "hidden": null,
         "package": "compliance",
         "sub_package": "hse",
         "title": "HSE Incident Reports",
@@ -157,7 +151,6 @@
     },
     "me": {
         "name": "me",
-        "hidden": null,
         "package": "system",
         "sub_package": "user",
         "title": "Me",
@@ -179,7 +172,6 @@
     },
     "pj_module": {
         "name": "pj_module",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "production",
         "title": "Project Modules",
@@ -190,7 +182,6 @@
     },
     "pj_pod": {
         "name": "pj_pod",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "production",
         "title": "Project PODs",
@@ -201,7 +192,6 @@
     },
     "pj_shipment": {
         "name": "pj_shipment",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "production",
         "title": "Project Shipments",
@@ -212,7 +202,6 @@
     },
     "pj_staircase": {
         "name": "pj_staircase",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "production",
         "title": "Project Staircases",
@@ -223,7 +212,6 @@
     },
     "pj_unit": {
         "name": "pj_unit",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "production",
         "title": "Project Units",
@@ -289,7 +277,6 @@
     },
     "prod_order": {
         "name": "prod_order",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "production",
         "title": "Prod Orders",
@@ -355,7 +342,6 @@
     },
     "project": {
         "name": "project",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "project_management",
         "title": "Projects",
@@ -377,10 +363,9 @@
     },
     "qaqc_car": {
         "name": "qaqc_car",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQA CARs",
+        "title": "Corrective Action Registers",
         "nickname": "car",
         "doc_id_format_column": null,
         "status": null,
@@ -388,10 +373,9 @@
     },
     "qaqc_insp_chklst": {
         "name": "qaqc_insp_chklst",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Chklsts",
+        "title": "Inspection Checklist",
         "nickname": "icl",
         "doc_id_format_column": null,
         "status": null,
@@ -465,10 +449,9 @@
     },
     "qaqc_insp_tmpl": {
         "name": "qaqc_insp_tmpl",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Tmpls",
+        "title": "Inspection Templates",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
@@ -509,10 +492,9 @@
     },
     "qaqc_mir": {
         "name": "qaqc_mir",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC MIRs",
+        "title": "Material Inspection Requests",
         "nickname": "mir",
         "doc_id_format_column": "sub_project_id",
         "status": null,
@@ -520,10 +502,9 @@
     },
     "qaqc_ncr": {
         "name": "qaqc_ncr",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC NCRs",
+        "title": "Non Conformance Reports",
         "nickname": "ncr",
         "doc_id_format_column": "sub_project_id",
         "status": null,
@@ -531,10 +512,9 @@
     },
     "qaqc_wir": {
         "name": "qaqc_wir",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC WIRs",
+        "title": "Work Inspection Requests",
         "nickname": "wir",
         "doc_id_format_column": "sub_project_id",
         "status": null,
@@ -542,7 +522,6 @@
     },
     "reportIndex": {
         "name": "reportIndex",
-        "hidden": null,
         "package": "system",
         "sub_package": "dashboard",
         "title": "Report Index",
@@ -608,7 +587,6 @@
     },
     "sub_project": {
         "name": "sub_project",
-        "hidden": null,
         "package": "project_management",
         "sub_package": "project_management",
         "title": "Sub Projects",
@@ -861,7 +839,6 @@
     },
     "zunit_test_07": {
         "name": "zunit_test_07",
-        "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT07 (Workflow - without Approval Tree)",
@@ -872,7 +849,6 @@
     },
     "zunit_test_08": {
         "name": "zunit_test_08",
-        "hidden": null,
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT08 (Workflow - with Approval Tree)",

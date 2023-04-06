@@ -19,7 +19,10 @@ abstract class Report_ParentController extends Controller
 {
     use TraitMenuTitle;
     use TraitModeParamsReport;
+
     use TraitDataModesReport;
+    use TraitDataModesDocument;
+
     use TraitFunctionsReport;
     abstract protected function getSqlStr($modeParams);
     abstract protected function getTableColumns($dataSource, $modeParams);
@@ -32,7 +35,8 @@ abstract class Report_ParentController extends Controller
 
     public function getType()
     {
-        return str_replace(' ', '_', strtolower($this->getMenuTitle()));
+        return $this->getTable();
+        // return str_replace(' ', '_', strtolower($this->getMenuTitle()));
     }
 
     private function getSql($modeParams)

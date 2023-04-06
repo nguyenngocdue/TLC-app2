@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
@@ -10,7 +10,7 @@ use App\Models\Prod_order as ModelsProd_order;
 use App\Models\Sub_project;
 use App\Utils\Support\Report;
 
-class Prod_sequence_030 extends Report_ParentController
+class Prod_sequence_030 extends Report_ParentReportController
 
 {
     use TraitDynamicColumnsTableReport;

@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Reports\Registers;
 
-use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentPathInfo;
 use DateTime;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class Hr_overtime_request_020 extends Report_ParentController
+class Hr_overtime_request_020 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
     use TraitSQLDataSourceParamReport;
