@@ -142,6 +142,7 @@
                             $properties = $prop['properties'];
                         @endphp
                         <x-renderer.attachment2 name={{$columnName}} value={{$value}} :properties="$properties" readOnly={{$readOnly}} />
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('comment')
                         <x-controls.comment-group2 :item="$item" id={{$id}} type={{$type}} name={{$columnName}} readOnly={{$readOnly}} />
