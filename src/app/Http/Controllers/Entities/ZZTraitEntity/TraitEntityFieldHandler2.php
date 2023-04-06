@@ -192,9 +192,13 @@ trait TraitEntityFieldHandler2
         foreach ($attachments as $attachment) {
             $function = substr($attachment, 1); //Remove leading underscore
             $files = $item->{$function};
-            $count = sizeof($files);
-            if ($count)  $request->request->add([$function => $count . " item_xyz"]);
-            else $request->request->remove($function);
+            if ($files) {
+                $count = sizeof($files);
+                if ($count)  $request->request->add([$function => $count . " item_xyz"]);
+                else $request->request->remove($function);
+            } else {
+                $request->request->remove($function);
+            }
         }
         // dump($item);
     }
