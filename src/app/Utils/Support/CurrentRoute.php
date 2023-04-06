@@ -46,7 +46,7 @@ class CurrentRoute
     /** This will return hse_incident_reports.edit */
     public static function getControllerAs()
     {
-        $result = Route::current()->action['as'];
+        $result = Route::current()->action['as'] ?? "unknown_controller_as";
         return $result;
     }
 

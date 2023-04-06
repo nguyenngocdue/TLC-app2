@@ -18,6 +18,11 @@
         "href": "/components",
         "icon_fa": "fa-brands fa-elementor"
     },
+    "my_company": {
+        "title": "My Company Tree",
+        "href": "/my-company",
+        "icon_fa": "fa-duotone fa-folder-tree"
+    },
     "hr1": {
         "title": "External",
         "href": "-"
