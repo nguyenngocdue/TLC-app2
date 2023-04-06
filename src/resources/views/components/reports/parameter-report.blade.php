@@ -35,7 +35,7 @@ $route = $routeName ? route($routeName) : "";
     </div>
     <div class="py-2">
         <x-renderer.button htmlType="submit" type="primary"><i class="fa-sharp fa-solid fa-check"></i> Apply Filter</x-renderer.button>
-        <x-renderer.button htmlType="submit" click="resetFilter()" type="secondary"><i class="fa-sharp fa-solid fa-check"></i> Reset</x-renderer.button>
+        <x-renderer.button htmlType="submit" click="resetFilter()" type="secondary"><i class="fa-sharp fa-solid fa-circle-xmark pr-1"></i>Reset</x-renderer.button>
     </div>
 </form>
 

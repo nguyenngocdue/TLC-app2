@@ -16,12 +16,15 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 {
 	use TraitDynamicColumnsTableReport;
 	protected $viewName = 'document-qaqc-insp-chklst';
+	protected $pageLimit = 1000;
 
 	// set default params's values 
 	protected  $sub_project_id = 21;
 	protected  $prod_order_id = 82;
 	protected  $qaqc_insp_tmpl_id = 1;
 	protected  $run_option = 1;
+	protected $insp_chklst_id = 1;
+
 	public function getSqlStr($modeParams)
 	{
 		$isCheck = isset($modeParams['prod_order_id']) && isset($modeParams['sub_project_id']);
@@ -103,24 +106,21 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 			[
 				'title' => 'Sub Project',
 				'dataIndex' => 'sub_project_id',
-				// 'allowClear' => true
 			],
 			[
 				'title' => 'Production Order',
 				'dataIndex' => 'prod_order_id',
-				// 'allowClear' => true
 			],
 			[
-				'title' => 'Checklist Type',
+				'title' => 'Checksheet Type ',
 				'dataIndex' => 'qaqc_insp_tmpl_id',
-				// 'allowClear' => true
 			],
 			[
-				'title' => 'Inspection Checklist Sheet',
+				'title' => 'Checksheet',
 				'dataIndex' => 'insp_chklst_id',
-				'allowClear' => true
 			],
 			[
+				'title' => 'Run History Option',
 				'dataIndex' => 'run_option'
 			]
 		];
@@ -132,6 +132,11 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 			'title' => 'Mode',
 			'dataIndex' => 'mode_option',
 		];
+	}
+
+	protected function getPageParam($typeReport, $entity)
+	{
+		return 1000;
 	}
 
 	public function getDataForModeControl($dataSource = [])
@@ -160,7 +165,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 				$str = '';
 				$item = $indexByLineIds[$lineId];
 				if (!is_null($item['c1'])) {
-					$str .= "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrCheckboxHTML($item) . "</tr>";
+					$str .= "<tr title='Chklst Run ID: {$item['run_id']}\nChklst Line ID: {$item['line_id']}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrCheckboxHTML($item) . "</tr>";
 					$str .= $this->createStrImage($item);
 					$str .=  $this->createStrComment($item);
 				} else {
@@ -206,7 +211,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 			$groupByLinesDesc = Report::groupArrayByKey2($value, 'line_description', 'line_id', 'sheet_id');
 			// unique run for  "TLC Inspector Name" line
 			$groupByLinesDesc['TLC Inspector Name'] = array_unique($groupByLinesDesc['TLC Inspector Name']);
-			// dd($groupByLinesDesc);
 			$groupByChklsts[$key] = $this->transformLines($groupByLinesDesc, $value, $modeParams);
 		});
 		//group lines into each sheet
@@ -278,8 +282,8 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 			}
 		};
 		$runUpdated = $this->createStrDateTime($item);
-		$runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item['run_desc'] . ":" . "</td>" : "";
-		$line_id =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item['line_id'] . '</td>' : "";
+		$runDesc =  env('APP_ENV')  === '_local' ? '<td class="border" style="width:10px">' . $item['run_desc'] . ":" . "</td>" : "";
+		$line_id =  env('APP_ENV')  === '_local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item['line_id'] . '</td>' : "";
 		$longStr = $runDesc . $line_id . $str . $runUpdated;
 		return $longStr;
 	}
@@ -288,13 +292,13 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 	{
 		if (!strlen($this->createStrHtmlImage($item))) return '';
 		$td = '<td class="border" colspan=5 style="width:190px">'  . $this->createStrHtmlImage($item) . '</td>';
-		return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+		return "<tr  class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
 	}
 
 	private function createStrComment($item)
 	{
 		if (is_null($item['value_comment'])) return "<tr> </tr>";
-		$td = "<td class='border p-3' colspan = 5 style='width:190px'>{{$item['value_comment']}}</td>";
+		$td = "<td class='border p-3' colspan = 5 style='width:190px'>{$item['value_comment']}</td>";
 		return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
 	}
 
@@ -323,13 +327,15 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		$x = 'sub_project_id';
 		$y = 'prod_order_id';
 		$z = 'qaqc_insp_tmpl_id';
-		$g = 'run_option';
+		$l = 'insp_chklst_id';
+		$m = 'run_option';
 		$isNullModeParams = Report::isNullModeParams($modeParams);
 		if ($isNullModeParams) {
 			$modeParams[$x] = $this->sub_project_id;
 			$modeParams[$y] = $this->prod_order_id;
 			$modeParams[$z] = $this->qaqc_insp_tmpl_id;
-			$modeParams[$g] = $this->run_option;
+			$modeParams[$l] = $this->insp_chklst_id;
+			$modeParams[$m] = $this->run_option;
 		}
 		// dd($modeParams);
 		return $modeParams;
