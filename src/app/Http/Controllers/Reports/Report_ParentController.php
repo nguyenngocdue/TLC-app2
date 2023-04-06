@@ -47,7 +47,7 @@ abstract class Report_ParentController extends Controller
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
         }
-        // dd($sqlStr);
+        dd($sqlStr);
         return $sqlStr;
     }
 
