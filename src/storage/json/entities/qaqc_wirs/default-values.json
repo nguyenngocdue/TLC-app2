@@ -197,7 +197,7 @@
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "",
+        "formula": "Duplicate_Status",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
@@ -242,18 +242,6 @@
     "_lock_version": {
         "name": "_lock_version",
         "column_name": "lock_version",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_loggable": {
-        "name": "_loggable",
-        "column_name": "loggable",
         "label": "",
         "validation": "",
         "validation_regex": "",

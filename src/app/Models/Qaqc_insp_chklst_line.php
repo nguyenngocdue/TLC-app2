@@ -20,6 +20,10 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "getControlValue" => ["belongsTo", Qaqc_insp_control_value::class, "qaqc_insp_control_value_id"],
         "getControlType" => ["belongsTo", Control_type::class, "control_type_id"],
         "insp_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        // "getProject" => ["morphMany", Project::class, "complex"],
+        // "getSubProject" => ["morphMany", Sub_Project::class, "complex"],
+        // "getProdRouting" => ["morphMany", Prod_routing::class, "complex"],
+        // "getProdOrder" => ["morphMany", Prod_order::class, "complex"],
         "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
     ];
@@ -74,6 +78,34 @@ class Qaqc_insp_chklst_line extends ModelExtended
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getProject()
+    {
+        $tmp = $this->getRun->getSheet->getChklst->prodOrder->subProject;
+        $relation = $tmp->belongsTo(Project::class, 'project_id');
+        return $relation;
+    }
+
+    public function getSubProject()
+    {
+        $tmp = $this->getRun->getSheet->getChklst->prodOrder;
+        $relation = $tmp->belongsTo(Sub_project::class, 'sub_project_id');
+        return $relation;
+    }
+
+    public function getProdRouting()
+    {
+        $tmp = $this->getRun->getSheet->getChklst->prodOrder;
+        $relation = $tmp->belongsTo(Prod_routing::class, 'prod_routing_id');
+        return $relation;
+    }
+
+    public function getProdOrder()
+    {
+        $tmp = $this->getRun->getSheet->getChklst;
+        $relation = $tmp->belongsTo(Prod_order::class, 'prod_order_id');
+        return $relation;
     }
 
     public function getManyLineParams()

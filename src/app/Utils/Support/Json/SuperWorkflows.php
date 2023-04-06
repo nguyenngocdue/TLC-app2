@@ -33,9 +33,11 @@ class SuperWorkflows
     private static function consolidate($props, $roleSet, $statuses, $name, $list, $whiteList, $defaultValue)
     {
         $result = [];
-        if (sizeof($list) != sizeof($whiteList)) {
+        $s0 = sizeof($list);
+        $s1 = sizeof($whiteList);
+        if ($s0 != $s1) {
             if (!empty($whiteList)) {
-                dump("Warning: Number of props in $name and $name WhiteList are different");
+                dump("Warning: Number of props in $name ($s0) and $name ($s1) WhiteList are different");
             }
         }
         foreach (array_keys($props) as $propName) {

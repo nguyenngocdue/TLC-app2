@@ -9,11 +9,12 @@ use App\View\Components\Formula\All_ClosedAt;
 use App\View\Components\Formula\All_ConcatNameWith123;
 use App\View\Components\Formula\All_DocId;
 use App\View\Components\Formula\All_SlugifyByName;
+use App\View\Components\Formula\Duplicate_Status;
 use App\View\Components\Formula\User_PositionRendered;
 
 trait TraitEntityFormula
 {
-    private function applyFormula($item, $action, $status)
+    private function applyFormula($item, $action, $status = null)
     {
         $type = $this->type;
         $defaultValues = DefaultValues::getAllOf($type);
@@ -53,6 +54,9 @@ trait TraitEntityFormula
                     break;
                 case "All_ClosedAt":
                     $value = (new All_ClosedAt())($status, $type);
+                    break;
+                case "Duplicate_Status":
+                    $value = (new Duplicate_Status())($type);
                     break;
                 default:
                     $value = "";

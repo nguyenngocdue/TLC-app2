@@ -26,12 +26,6 @@ class PermissionEditServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Gate::define('edit', function ($user, $model) {
-            return $this->editAndDelete($user, $model);
-        });
-        Gate::define('edit-others', function ($user, $model) {
-            return $this->editAndDeleteOther($user, $model);
-        });
         Gate::before(function ($user, $ability) {
             return $user->hasRoleSet('super-admin') ? true : null;
         });

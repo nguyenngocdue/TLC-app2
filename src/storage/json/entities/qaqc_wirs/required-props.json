@@ -166,13 +166,5 @@
         "assigned": "",
         "rejected": "",
         "closed": ""
-    },
-    "_loggable": {
-        "name": "_loggable",
-        "column_name": "loggable",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "closed": ""
     }
 }

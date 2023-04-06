@@ -71,4 +71,8 @@ class CurrentUser
     {
         return Auth::user();
     }
+    public static function id()
+    {
+        return self::get()->id;
+    }
 }

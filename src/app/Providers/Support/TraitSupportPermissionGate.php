@@ -10,36 +10,6 @@ use Illuminate\Support\Str;
 
 trait TraitSupportPermissionGate
 {
-    private function editAndDelete($user, $model)
-    {
-        if (!CurrentUser::isAdmin()) {
-            $isTree = $this->useTree($model);
-            if ($isTree) {
-                return true;
-            }
-            return $user->id == $model->owner_id;
-        }
-        return true;
-    }
-    private function editAndDeleteOther($user, $model)
-    {
-        if (!CurrentUser::isAdmin()) {
-            $isTree = $this->useTree($model);
-            if ($user->id == $model->owner_id) {
-                return true;
-            }
-            if (!$isTree) {
-                return $user->id == $model->owner_id;
-            }
-            foreach ($this->treeCompany($user) as $value) {
-                if ($model->owner_id == $value->id) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return true;
-    }
     private function useTree($model)
     {
         $type = Str::singular($model->getTable());
@@ -61,45 +31,70 @@ trait TraitSupportPermissionGate
         return LibApps::getFor($type)['apply_approval_tree'] ?? false;
     }
 
-    private function checkPermissionEdit($permission)
+    private function checkPermission($permission)
     {
         return auth()->user()->roleSets[0]->hasAnyPermission($permission);
     }
     private function checkPermissionUsingGate($id, $action = 'edit')
     {
+        $model = $this->data::findOrFail($id);
+        $isTree = $this->useTree($model);
         $permissions = $this->permissionMiddleware[$action];
         $permissions = is_array($permissions) ? $permissions : explode('|', $permissions);
-        $model = $this->data::findOrFail($id);
-        switch (true) {
-            case $this->checkPermissionEdit($permissions[0]):
-                if (!Gate::allows($action, $model) || !Gate::allows($action . '-others', $model)) abort(403, "Permission denied " . $action);
-                break;
-            case $this->checkPermissionEdit($permissions[1]):
-                if (!Gate::allows($action . '-others', $model)) abort(403, "Permission denied " . $action . "-others");
-                break;
-            default:
-                break;
+        if (CurrentUser::isAdmin()) {
+            return $model;
+        }
+        $message = [];
+        if ($isTree) {
+            [$edit, $editOther] = $this->useTreeForPermissionTheLine($isTree, $permissions, $model);
+            $message[] = 'Permission edit denied';
+            $message[] = $edit ? '' : 'You not able open edit because you not is owner id document';
+            $message[] = $editOther ? '' : "You not able open edit because you not has in approval tree";
+            if (!($edit || $editOther)) abort(403, join(' & ', $message));
         }
         return $model;
+    }
+    private function checkTree($model)
+    {
+        foreach ($this->treeCompany(CurrentUser::get()) as $value) {
+            if ($model->owner_id == $value->id) {
+                return true;
+            }
+        }
+        return false;
     }
     private function checkPermissionUsingGateForDeleteMultiple($ids, $action = 'delete')
     {
         $permissions = $this->permissionMiddleware[$action];
         $permissions = is_array($permissions) ? $permissions : explode('|', $permissions);
         $arrFail = [];
+        if (CurrentUser::isAdmin()) {
+            return $arrFail;
+        }
         foreach ($ids as $id) {
             $model = $this->data::findOrFail($id);
+            $isTree = $this->useTree($model);
+            [$delete, $deleteOther] = $this->useTreeForPermissionTheLine($isTree, $permissions, $model);
+            if (!($delete || $deleteOther)) $arrFail[] = $id;
+        }
+        return array_unique($arrFail) ?? [];
+    }
+    private function useTreeForPermissionTheLine($isTree, $permissions, $model)
+    {
+        $result1 = false;
+        $result2 = false;
+        if ($isTree) {
             switch (true) {
-                case $this->checkPermissionEdit($permissions[0]):
-                    if (!Gate::allows($action, $model) || !Gate::allows($action . '-others', $model)) $arrFail[] = $id;
+                case $this->checkPermission($permissions[0]):
+                    $result1 = CurrentUser::id() == $model->owner_id;
                     break;
-                case $this->checkPermissionEdit($permissions[1]):
-                    if (!Gate::allows($action . '-others', $model)) $arrFail[] = $id;
+                case $this->checkPermission($permissions[1]):
+                    $result2 = CurrentUser::id() == $model->owner_id || $this->checkTree($model);
                     break;
                 default:
                     break;
             }
         }
-        return array_unique($arrFail) ?? [];
+        return [$result1, $result2];
     }
 }
