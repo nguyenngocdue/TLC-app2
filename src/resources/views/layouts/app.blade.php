@@ -54,7 +54,7 @@
     <script src="{{ asset('js/components/ActionMultiple.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4.js') }}"></script>
     <script src="{{ asset('js/components/EditableTable2.js') }}"></script>
-    <script src="{{ asset('js/components/EditableTableAddNewLine2.js') }}"></script>
+    <script src="{{ asset('js/components/EditableTableAddNewLine2-20230406.js') }}"></script>
     <script src="{{ asset('js/components/Number4.js') }}"></script>
     {{-- <script src="{{ asset('js/components/EditableTable.js') }}"></script> --}}
     {{-- <script src="{{ asset('js/components/EditableTableAddNewLine.js') }}"></script> --}}
