@@ -87,10 +87,8 @@ trait TraitSupportPermissionGate
             switch (true) {
                 case $this->checkPermission($permissions[0]):
                     $result1 = CurrentUser::id() == $model->owner_id;
-                    break;
                 case $this->checkPermission($permissions[1]):
-                    $result2 = CurrentUser::id() == $model->owner_id || $this->checkTree($model);
-                    break;
+                    $result2 = (CurrentUser::id() == $model->owner_id) || $this->checkTree($model);
                 default:
                     break;
             }
