@@ -15,6 +15,7 @@ class Heading extends Component
         private $level = 6,
         private $title = '',
         private $align = 'left',
+        private $class = '',
     ) {
         //
     }
@@ -38,9 +39,9 @@ class Heading extends Component
                 $font = "font-medium";
             }
 
-            $class = "$font leading-tight text-{$textSize} text-blue-600 my-2 text-{$this->align} dark:text-gray-300";
+            $theClass = "{$this->class} $font leading-tight text-{$textSize} text-black my-2 text-{$this->align} dark:text-gray-300";
             $slot = $data['slot'];
-            return "<$h class='$class' title='$this->title'>$slot</$h>";
+            return "<$h class='$theClass' title='$this->title'>$slot</$h>";
         };
         // return view('components.renderer.heading');
     }
