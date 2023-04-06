@@ -8,6 +8,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\Relationships;
@@ -135,7 +136,7 @@ class ViewAllController extends Controller
             'control' => 'qr_code',
         ];
         array_splice($props, 1, 0, [$qrCodeColumn]);
-        if (App::isLocal() || App::isTesting()) {
+        if (CurrentUser::isAdmin()) {
             $actionColumn = [
                 'label' => "Action",
                 'column_name' => 'id',
