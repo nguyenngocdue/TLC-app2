@@ -26,7 +26,8 @@ class ManageAppsController extends AbstractManageLibController
             ],
             [
                 'dataIndex' => "hidden",
-                "renderer"  => 'dropdown',
+                "renderer"  => 'checkbox',
+                'align' => 'center',
                 'editable' => true,
                 'title' => "Hidden For non-admin Users",
             ],

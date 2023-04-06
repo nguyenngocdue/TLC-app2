@@ -3,14 +3,19 @@ FROM php:8.0-fpm-alpine
 WORKDIR /var/www/app
 
 RUN apk update && apk add \
-    build-base shadow supervisor \
+    # build-base shadow supervisor \
     curl \
     libpng-dev \
     libxml2-dev \
     freetype-dev \
     libjpeg-turbo-dev \
     zip \
-    unzip
+    unzip \
+    nano \
+    mc \
+    htop \
+    supervisor
+
 RUN curl -sSLf \
     -o /usr/local/bin/install-php-extensions \
     https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \
@@ -38,7 +43,7 @@ COPY ./supervisor.d /etc/supervisor.d
 #RUN chown -R ndc:ndcgp /var/www/app
 #USER ndc
 
-RUN usermod -u 82 www-data
+# RUN usermod -u 82 www-data
 RUN chown -R www-data:www-data .
 
 # ENV ENABLE_CRONTAB 1
