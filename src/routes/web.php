@@ -200,4 +200,4 @@ Route::get('/unit/{slug}', fn ($slug) => redirect('app/pj_units/' . $slug));
 Route::get('/shipment/{slug}', fn ($slug) => redirect('app/pj_shipments/' . $slug));
 
 Route::get('reset', fn () => (new UpdateUserSettings())(new Request(['action' => 'resetAllSettings']), '/'));
-Route::get('gitpull202', fn ($a) => Log::info($a));
+Route::get('gitpull202', fn () => Log::info("WebHook Called"));
