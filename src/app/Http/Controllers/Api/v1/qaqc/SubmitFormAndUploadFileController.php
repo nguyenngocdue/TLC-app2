@@ -64,6 +64,7 @@ class SubmitFormAndUploadFileController extends Controller
                     'qaqc_insp_chklst_run_id' => $qaqcInspChklstRun->id,
                     'qaqc_insp_control_value_id' => $controlValueId,
                     'qaqc_insp_control_group_id' => $controlGroupId,
+                    'owner_id' => $ownerId,
                 ]);
                 $this->uploadFile($request, $qaqcInspChklstLine->id);
             } else {
@@ -79,6 +80,7 @@ class SubmitFormAndUploadFileController extends Controller
                     'qaqc_insp_chklst_run_id' => $qaqcRunId,
                     'qaqc_insp_control_value_id' => $controlValueId,
                     'qaqc_insp_control_group_id' => $controlGroupId,
+                    'owner_id' => $ownerId,
                 ]);
                 $this->uploadFile($request, $qaqcInspChklstLine->id);
             }
