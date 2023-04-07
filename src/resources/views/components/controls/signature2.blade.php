@@ -1,11 +1,11 @@
 {{-- https://github.com/szimek/signature_pad --}}
-<div id="div1{{$name}}" class="border rounded w-[664px] h-[339px]">
+<div id="div1{{$name}}" class="border border-gray-300 rounded-md w-[664px] h-[339px]">
     {!! $value_decoded !!}
     <x-renderer.button class="mt-7" id="btnReset1">Reset</x-renderer.button>
 </div>
 <div id="div2{{$name}}" class="hidden signature-pad--body">
     <canvas width="664" height="339" id="canvas_{{$name}}"
-    class="border rounded" style="touch-action: none; user-select: none;" ></canvas>
+    class="border rounded-md border-gray-300" style="touch-action: none; user-select: none;" ></canvas>
     <x-renderer.button id="btnReset2">Reset</x-renderer.button>
     <input name="{{$name}}" id="{{$name}}" value="{!! $value !!}" type="hidden">
 </div>
