@@ -2,7 +2,7 @@ scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 scalar JSON @scalar(class: "MLL\\GraphQLScalars\\JSON")
 
-type Query {
+extend type Query {
     users: [User!]! @all @guard
     user(id: ID @eq): User @find @guard
 }
@@ -17,7 +17,6 @@ type User {
     last_name: String!
     address: String
     phone: String
-    featured_image: Int
     time_keeping_type: Int
     user_type: Int
     workplace: Int
@@ -48,6 +47,7 @@ type User {
     updated_at: DateTime
     productionRunLines: [Prod_run_line!]! @belongsToMany
     qaqcInspChecklists: [Qaqc_insp_checklist!]! @hasMany
+    avatar: Attachment! @morphOne
 }
 input CreateUserInput {
     email: String! @rules(apply: ["email", "unique:users,email"])
@@ -59,7 +59,6 @@ input CreateUserInput {
     last_name: String!
     address: String
     phone: String
-    featured_image: Int
     time_keeping_type: Int
     user_type: Int
     workplace: Int
@@ -100,7 +99,6 @@ input UpdateUserInput {
     last_name: String
     address: String
     phone: String
-    featured_image: Int
     time_keeping_type: Int
     user_type: Int
     workplace: Int

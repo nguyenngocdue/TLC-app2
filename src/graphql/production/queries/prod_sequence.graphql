@@ -13,7 +13,8 @@ type Prod_sequence {
     id: ID!
     prod_order_id: Int!
     prod_routing_link_id: Int!
-    status: String!
+    owner_id: Int!
+    status: String
     total_hours: Float
     total_man_hours: Float
     created_at: DateTime
@@ -26,7 +27,8 @@ type Prod_sequence {
 input CreateProdSequenceInput {
     prod_order_id: Int!
     prod_routing_link_id: Int!
-    status: String!
+    owner_id: Int!
+    status: String
     total_hours: Float
     total_man_hours: Float
     created_at: DateTime
@@ -36,6 +38,7 @@ input UpdateProdSequenceInput {
     id: ID!
     prod_order_id: Int
     prod_routing_link_id: Int
+    owner_id: Int
     status: String
     total_hours: Float
     total_man_hours: Float

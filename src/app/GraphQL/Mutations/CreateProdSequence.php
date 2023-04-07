@@ -18,6 +18,7 @@ final class CreateProdSequence
                     'prod_order_id' => $args['prod_order_id'],
                     'prod_routing_link_id' => $args['prod_routing_link_id'],
                     'status' => $args['status'],
+                    'owner_id' => $args['owner_id'],
                 ]
             );
             $prodRun->transitionTo($args['status']);

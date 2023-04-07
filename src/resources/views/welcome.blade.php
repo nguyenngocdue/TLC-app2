@@ -1,51 +1,15 @@
 @extends('layouts.applean')
 @section('content')
-<button data-popover-target="popover-company-profile" type="button" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Company profile</button>
-@php
-    $content = '<div class="p-3">
-        <div class="flex">
-            <div class="mr-3 shrink-0">
-                <a href="#" class="block p-2 bg-gray-100 rounded-lg dark:bg-gray-700">
-                <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/logo.svg" alt="Flowbite logo">
-            </a>
-            </div>
-            <div>
-                <p class="mb-1 text-base font-semibold leading-none text-gray-900 dark:text-white">
-                    <a href="#" class="hover:underline">Flowbite</a>
-                </p>
-                <p class="mb-3 text-sm font-normal">
-                    Tech company
-                </p>
-                <p class="mb-4 text-sm font-light">Open-source library of Tailwind CSS components and Figma design system.</p>
-                <ul class="text-sm font-light">
-                    <li class="flex items-center mb-2">
-                        <span class="mr-1 font-semibold text-gray-400">
-                            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z" clip-rule="evenodd"></path></svg>
-                        </span>
-                        <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">https://flowbite.com/</a>
-                    </li>
-                    <li class="flex items-start mb-2">
-                        <span class="mr-1 font-semibold text-gray-400">
-                            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
-                        </span>
-                        <span>4,567,346 people like this including 5 of your friends</span>
-                    </li>
-                </ul>
-                <div class="flex mb-3 -space-x-3">
-                    <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="/docs/images/people/profile-picture-5.jpg" alt="">
-                    <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="/docs/images/people/profile-picture-2.jpg" alt="">
-                    <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="/docs/images/people/profile-picture-3.jpg" alt="">
-                    <a class="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800" href="#">+3</a>
-                </div>
-                <div class="flex">
-                    <button type="button" class="inline-flex items-center justify-center w-full px-5 py-2 mr-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"><svg class="w-4 h-4 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>Like page</button>
-                    <button class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shrink-0 focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button"> 
-                        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>'
-@endphp
-<x-renderer.popover id="popover-company-profile"  :content="$content" />
+<svg viewBox="0 0 201 83" xmlns="http://www.w3.org/2000/svg">
+    <polyline fill="none" stroke="#ff000000" points="3.00,80.83 3.00,79.73 4.09,77.55 5.18,76.47 5.18,75.37 6.27,74.29 6.27,72.11 7.36,69.18 10.63,59.38 11.73,49.91 13.53,39.36 19.00,27.38 20.09,20.09 21.18,14.65 22.27,8.47 25.54,5.18 26.63,4.10 26.63,3.00 26.63,4.10 26.63,7.36 26.63,9.54 27.73,13.55 27.73,16.83 28.44,22.27 28.44,32.82 32.81,42.29 34.99,51.01 38.27,62.64 40.45,68.10 43.73,73.18 43.73,72.11 43.73,68.10 45.54,61.56 46.63,58.28 48.81,52.09 49.90,48.83 53.17,44.47 53.17,43.37 54.26,42.29 57.54,43.37 57.54,44.47 59.73,46.65 61.54,49.91 63.72,52.09 64.81,53.19 65.90,53.19 66.99,53.19 69.17,53.19 71.35,53.19 73.53,53.19 74.63,53.19 76.44,53.19 78.63,52.09 78.63,51.01 78.63,48.83 78.63,46.65 78.63,42.29 77.54,40.47 75.73,37.18 73.53,35.00 71.35,32.82 70.26,31.74 70.26,33.92 70.26,37.18 72.44,40.47 72.44,41.18 73.53,42.29 74.63,42.29 77.54,41.18 78.63,40.47 79.72,39.36 80.81,37.18 82.99,35.00 84.08,33.92 85.17,33.92 87.35,35.00 89.53,37.18 90.62,38.28 91.71,39.36 94.63,41.18 95.72,42.29 96.81,43.37 97.90,43.37 98.99,43.37 101.17,43.37 103.35,43.37 107.71,43.37 112.81,43.37 119.35,43.37 127.72,43.37 136.44,43.37 149.17,43.37 160.81,43.37 172.80,43.37 182.26,43.37 190.63,43.37 196.08,43.37 198.26,43.37 197.17,43.37 191.72,45.55 186.62,47.73 183.35,48.83 180.08,48.83 178.99,48.83 177.90,48.83 177.90,48.83" />
+    <polyline fill="none" stroke="#ff000000" points="3.00,80.83 3.00,79.73 4.09,77.55 5.18,76.47 5.18,75.37 6.27,74.29 6.27,72.11 7.36,69.18 10.63,59.38 11.73,49.91 13.53,39.36 19.00,27.38 20.09,20.09 21.18,14.65 22.27,8.47 25.54,5.18 26.63,4.10 26.63,3.00 26.63,4.10 26.63,7.36 26.63,9.54 27.73,13.55 27.73,16.83 28.44,22.27 28.44,32.82 32.81,42.29 34.99,51.01 38.27,62.64 40.45,68.10 43.73,73.18 43.73,72.11 43.73,68.10 45.54,61.56 46.63,58.28 48.81,52.09 49.90,48.83 53.17,44.47 53.17,43.37 54.26,42.29 57.54,43.37 57.54,44.47 59.73,46.65 61.54,49.91 63.72,52.09 64.81,53.19 65.90,53.19 66.99,53.19 69.17,53.19 71.35,53.19 73.53,53.19 74.63,53.19 76.44,53.19 78.63,52.09 78.63,51.01 78.63,48.83 78.63,46.65 78.63,42.29 77.54,40.47 75.73,37.18 73.53,35.00 71.35,32.82 70.26,31.74 70.26,33.92 70.26,37.18 72.44,40.47 72.44,41.18 73.53,42.29 74.63,42.29 77.54,41.18 78.63,40.47 79.72,39.36 80.81,37.18 82.99,35.00 84.08,33.92 85.17,33.92 87.35,35.00 89.53,37.18 90.62,38.28 91.71,39.36 94.63,41.18 95.72,42.29 96.81,43.37 97.90,43.37 98.99,43.37 101.17,43.37 103.35,43.37 107.71,43.37 112.81,43.37 119.35,43.37 127.72,43.37 136.44,43.37 149.17,43.37 160.81,43.37 172.80,43.37 182.26,43.37 190.63,43.37 196.08,43.37 198.26,43.37 197.17,43.37 191.72,45.55 186.62,47.73 183.35,48.83 180.08,48.83 178.99,48.83 177.90,48.83 177.90,48.83 45.54,73.18 47.72,75.37 50.99,76.47 55.35,77.55 63.72,77.55 70.26,78.65 82.99,78.65 100.08,78.65 113.90,78.65 128.81,78.65 144.81,78.65 157.54,78.65 167.35,78.65 173.54,78.65 177.90,78.65 180.08,78.65 180.08,78.65" />
+</svg>
+<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+    <!-- Example of a polyline with the default fill -->
+    <polyline points="0,100 50,25 50,75 100,0" />
+  
+    <!-- Example of the same polyline shape with stroke and no fill -->
+    <polyline points="100,100 150,25 150,75 200,0" fill="none" stroke="black" />
+  </svg>
+
 @endsection
