@@ -12,7 +12,7 @@ class Qaqc_insp_chklst_run extends ModelExtended
 
     public $eloquentParams = [
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
-        "getLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_run_id"],
+        "getLines" => ["hasMany", Qaqc_insp_chklst_run_line::class, "qaqc_insp_chklst_run_id"],
         "getSheet" => ["belongsTo", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_sht_id"],
     ];
     public function getOwnerId()

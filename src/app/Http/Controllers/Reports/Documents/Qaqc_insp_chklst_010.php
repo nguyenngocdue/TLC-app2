@@ -59,7 +59,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
                     JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
                     JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id";
 		if (isset($modeParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND tp.id = '{{qaqc_insp_tmpl_id}}'";
-		$sql .= "\n JOIN qaqc_insp_chklst_lines l ON l.qaqc_insp_chklst_run_id = r.id
+		$sql .= "\n JOIN qaqc_insp_chklst_run_lines l ON l.qaqc_insp_chklst_run_id = r.id
                     JOIN control_types ct ON ct.id = l.control_type_id";
 		if ($isCheck) $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
 		if ($isCheck) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id
@@ -242,7 +242,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 
 	protected function createStrHtmlImage($item)
 	{
-		$object_type = "App\Models\qaqc_insp_chklst_line";
+		$object_type = "App\Models\qaqc_insp_chklst_run_line";
 		$attachment = $this->getAttachment($object_type, $item['line_id']);
 		if (empty($attachment)) return '';
 		$path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
