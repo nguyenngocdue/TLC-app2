@@ -88,6 +88,10 @@
                         <x-controls.toggle2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} />
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
+                        @case('signature')
+                        <x-controls.signature2 name={{$columnName}} />
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                        @break
                         @case('status')
                             @if($status)
                             <x-controls.status-dropdown2 value={{$status}} name={{$columnName}} modelPath={{$modelPath}} readOnly={{$readOnly}} />

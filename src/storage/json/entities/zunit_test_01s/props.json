@@ -15,6 +15,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_name": {
@@ -33,6 +34,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_text1": {
@@ -51,6 +53,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_text2": {
@@ -69,6 +72,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_text4": {
@@ -87,6 +91,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_text3": {
@@ -105,6 +110,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_boolean1": {
@@ -123,6 +129,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_radio1": {
@@ -141,6 +148,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_dropdown1": {
@@ -159,6 +167,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_checkboxZut1()": {
@@ -177,6 +186,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_dropdownMultiZut1()": {
@@ -195,6 +205,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_created_at": {
@@ -213,6 +224,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_updated_at": {
@@ -231,6 +243,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_parent_id": {
@@ -249,6 +262,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_order_no": {
@@ -267,6 +281,26 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_signature": {
+        "name": "_signature",
+        "column_name": "signature",
+        "column_type": "text",
+        "label": "Signature",
+        "control": "signature",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     }
 }
