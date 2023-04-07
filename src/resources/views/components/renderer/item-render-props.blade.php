@@ -89,7 +89,7 @@
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('signature')
-                        <x-controls.signature2 name={{$columnName}} />
+                        <x-controls.signature2 name={{$columnName}} value={{$value}}/>
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case('status')

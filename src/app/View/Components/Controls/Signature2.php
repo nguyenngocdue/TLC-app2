@@ -11,8 +11,10 @@ class Signature2 extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $name,
+        private $value = null,
+    ) {
         //
     }
 
@@ -23,6 +25,14 @@ class Signature2 extends Component
      */
     public function render()
     {
-        return view('components.controls.signature2');
+        $value_decoded = (htmlspecialchars_decode($this->value));
+        return view(
+            'components.controls.signature2',
+            [
+                'name' => $this->name,
+                'value' => $this->value,
+                'value_decoded' => $value_decoded
+            ]
+        );
     }
 }
