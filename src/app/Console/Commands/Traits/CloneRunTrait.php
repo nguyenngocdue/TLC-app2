@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Traits;
 
-use App\Models\Qaqc_insp_chklst_line;
+use App\Models\Qaqc_insp_chklst_run_line;
 use App\Models\Qaqc_insp_control_value;
 use Illuminate\Support\Facades\Log;
 
@@ -20,7 +20,7 @@ trait CloneRunTrait
         $qaqcInspTmplLines = $modelRun->getLines;
         if (count($qaqcInspTmplLines) > 0) {
             foreach ($qaqcInspTmplLines as $key => $qaqcInspTmplLine) {
-                $model = Qaqc_insp_chklst_line::create([
+                $model = Qaqc_insp_chklst_run_line::create([
                     'name' => $qaqcInspTmplLine->name,
                     'description' => $qaqcInspTmplLine->description,
                     'control_type_id' => $qaqcInspTmplLine->control_type_id,

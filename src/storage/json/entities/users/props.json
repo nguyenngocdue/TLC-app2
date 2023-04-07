@@ -15,6 +15,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_avatar": {
@@ -33,6 +34,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_email": {
@@ -51,6 +53,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_name": {
@@ -69,6 +72,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_full_name": {
@@ -87,6 +91,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_name_suffix": {
@@ -105,6 +110,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_employeeid": {
@@ -123,6 +129,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_first_name": {
@@ -141,6 +148,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_last_name": {
@@ -159,6 +167,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_address": {
@@ -177,6 +186,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_phone": {
@@ -195,6 +205,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_featured_image": {
@@ -213,6 +224,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_time_keeping_type": {
@@ -231,6 +243,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_user_type": {
@@ -249,6 +262,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_workplace": {
@@ -267,6 +281,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_category": {
@@ -285,6 +300,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_date_of_birth": {
@@ -303,6 +319,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_first_date": {
@@ -321,6 +338,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_last_date": {
@@ -339,6 +357,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_title": {
@@ -357,6 +376,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_position_prefix": {
@@ -375,6 +395,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_position_1": {
@@ -393,6 +414,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_position_2": {
@@ -411,6 +433,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_position_3": {
@@ -429,6 +452,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_position_rendered": {
@@ -447,6 +471,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_discipline": {
@@ -465,6 +490,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_department": {
@@ -483,6 +509,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_show_on_beta": {
@@ -501,6 +528,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_resigned": {
@@ -519,6 +547,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_viewport_uids": {
@@ -537,6 +566,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_leaf_uids": {
@@ -555,6 +585,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_user_id_passport": {
@@ -573,6 +604,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_user_pin": {
@@ -591,6 +623,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_email_verified_at": {
@@ -609,6 +642,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_provider": {
@@ -627,6 +661,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_password": {
@@ -645,6 +680,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_time_zone": {
@@ -663,6 +699,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_settings": {
@@ -681,6 +718,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_remember_token": {
@@ -699,6 +737,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_created_at": {
@@ -717,6 +756,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_updated_at": {
@@ -735,6 +775,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_guid": {
@@ -753,6 +794,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_domain": {
@@ -771,6 +813,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_posts": {
@@ -789,6 +832,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_productionRuns": {
@@ -807,6 +851,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_getRoleSet": {
@@ -825,6 +870,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_attachment": {
@@ -843,6 +889,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_getOtTeams()": {
@@ -861,6 +908,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     }
 }

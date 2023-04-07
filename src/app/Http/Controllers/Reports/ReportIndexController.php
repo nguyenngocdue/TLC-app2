@@ -19,34 +19,46 @@ class ReportIndexController extends Controller
         return "reportIndex";
     }
 
+    public static function getReportOf($tableName)
+    {
+        $result = [];
+
+        $singular = Str::singular($tableName);
+        $ucfirstName = Str::ucfirst($singular);
+
+        $conditions = ['report' => 'Reports', 'register' => 'Registers', 'document' => 'Documents'];
+        foreach ($conditions as $key => $value) {
+            for ($i = 10; $i <= 50; $i += 10) {
+                $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
+                $path = "$key-{$singular}_$mode";
+                // dump($path);
+                $controller = "App\\Http\\Controllers\\Reports\\$value\\{$ucfirstName}_$mode";
+                // dump($path);
+                // dump($controller);
+                $class_exists = class_exists($controller);
+                if (Route::has($path) && $class_exists) {
+                    $result[$value][$mode] = [
+                        'path' => $path,
+                        'title' => (new ($controller))->{$tableName}()['mode_option'][$mode],
+                    ];
+                }
+            }
+        }
+        return $result;
+    }
+
     private function getDataSource()
     {
         $entities = Entities::getAll();
         $result = [];
         $titles = [];
         foreach ($entities as $entity) {
-            $entityName = $entity->getTable();
-            $singular = Str::singular($entityName);
-            $ucfirstName = Str::ucfirst($singular);
-
-            $conditions = ['report' => 'Reports', 'register' => 'Registers', 'document' => 'Documents'];
-            foreach ($conditions as $key => $value) {
-                for ($i = 10; $i <= 50; $i += 10) {
-                    $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
-                    $path = "$key-{$singular}_$mode";
-                    // dump($path);
-                    $controller = "App\\Http\\Controllers\\Reports\\$value\\{$ucfirstName}_$mode";
-                    // dump($path);
-                    // dump($controller);
-                    $class_exists = class_exists($controller);
-                    if (Route::has($path) && $class_exists) {
-                        $result[$entityName][$value][$mode] = [
-                            'path' => $path,
-                            'title' => (new ($controller))->{$entityName}()['mode_option'][$mode],
-                        ];
-                        $titles[$entityName] = LibApps::getFor($entityName)['title'];
-                    }
-                }
+            $tableName = $entity->getTable();
+            $array = static::getReportOf($tableName);
+            // dump($array, $title);
+            if (!empty($array)) {
+                $result[$tableName] = $array;
+                $titles[$tableName] = LibApps::getFor($tableName)['title'];;;
             }
         }
         // dump($result);

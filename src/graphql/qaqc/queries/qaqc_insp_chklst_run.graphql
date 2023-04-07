@@ -16,7 +16,7 @@ type Qaqc_insp_chklst_run {
     created_at: DateTime
     updated_at: DateTime
     getOwnerId: User @belongsTo
-    getLines: [Qaqc_insp_chklst_line!]! @hasMany
+    getLines: [Qaqc_insp_chklst_run_line!]! @hasMany
 }
 
 input CreateQAQCInspChklstRunInput {

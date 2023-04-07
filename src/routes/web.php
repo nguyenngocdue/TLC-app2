@@ -24,6 +24,7 @@ use App\Utils\Support\Entities;
 use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -199,3 +200,4 @@ Route::get('/unit/{slug}', fn ($slug) => redirect('app/pj_units/' . $slug));
 Route::get('/shipment/{slug}', fn ($slug) => redirect('app/pj_shipments/' . $slug));
 
 Route::get('reset', fn () => (new UpdateUserSettings())(new Request(['action' => 'resetAllSettings']), '/'));
+Route::get('gitpull202', fn () => Log::info("WebHook Called"));

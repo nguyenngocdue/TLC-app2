@@ -109,6 +109,16 @@
         "inspection_rejected": "",
         "closed": ""
     },
+    "_attachment_mir_material_inspection_photo": {
+        "name": "_attachment_mir_material_inspection_photo",
+        "column_name": "attachment_mir_material_inspection_photo",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
     "_attachment_mir_po": {
         "name": "_attachment_mir_po",
         "column_name": "attachment_mir_po",
@@ -229,16 +239,6 @@
         "inspection_rejected": "",
         "closed": ""
     },
-    "_attachment_mir_material_inspection_photo": {
-        "name": "_attachment_mir_material_inspection_photo",
-        "column_name": "attachment_mir_material_inspection_photo",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
-    },
     "_attachment_mir_pdf_attached": {
         "name": "_attachment_mir_pdf_attached",
         "column_name": "attachment_mir_pdf_attached",
@@ -269,19 +269,19 @@
         "inspection_rejected": "",
         "closed": ""
     },
-    "_inspected_by": {
-        "name": "_inspected_by",
-        "column_name": "inspected_by",
-        "new": "true",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "",
         "assigned": "",
-        "rejected": "true",
+        "rejected": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_inspected_by": {
+        "name": "_inspected_by",
+        "column_name": "inspected_by",
         "new": "",
         "assigned": "",
         "rejected": "",
