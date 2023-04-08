@@ -34,7 +34,7 @@ return [
          * `Spatie\Permission\Contracts\Role` contract.
          */
 
-        'role_set' => App\Models\RoleSet::class,
+        'role_set' => App\Models\Role_set::class,
 
     ],
 

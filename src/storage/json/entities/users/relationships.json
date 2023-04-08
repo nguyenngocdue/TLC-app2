@@ -195,6 +195,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_featured_image": {
+        "name": "_featured_image",
+        "relationship": "morphMany",
+        "control_name": "featured_image",
+        "renderer_view_all": "thumbnails",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "attachment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_avatar": {
         "name": "_avatar",
         "relationship": "morphOne",

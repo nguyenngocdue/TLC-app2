@@ -2,12 +2,6 @@
 
 namespace Ndc\SpatieCustom;
 
-use Illuminate\Routing\Route;
-use Illuminate\Support\Arr;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\View\Compilers\BladeCompiler;
-use Ndc\SpatieCustom\Contracts\RoleSet as RoleSetContract;
-use Ndc\SpatieCustom\Contracts\Role as RoleContract;
 use Spatie\Permission\PermissionServiceProvider as PermissionPermissionServiceProvider;
 
 class PermissionServiceProvider extends PermissionPermissionServiceProvider
