@@ -109,16 +109,6 @@
         "inspection_rejected": "",
         "closed": ""
     },
-    "_attachment_mir_material_inspection_photo": {
-        "name": "_attachment_mir_material_inspection_photo",
-        "column_name": "attachment_mir_material_inspection_photo",
-        "new": "",
-        "assigned": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
-    },
     "_attachment_mir_po": {
         "name": "_attachment_mir_po",
         "column_name": "attachment_mir_po",
@@ -239,6 +229,16 @@
         "inspection_rejected": "",
         "closed": ""
     },
+    "_attachment_mir_material_inspection_photo": {
+        "name": "_attachment_mir_material_inspection_photo",
+        "column_name": "attachment_mir_material_inspection_photo",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
     "_attachment_mir_pdf_attached": {
         "name": "_attachment_mir_pdf_attached",
         "column_name": "attachment_mir_pdf_attached",
@@ -283,7 +283,7 @@
         "name": "_inspected_by",
         "column_name": "inspected_by",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "rejected": "",
         "inspected": "true",
         "inspection_rejected": "true",
@@ -327,6 +327,36 @@
         "rejected": "",
         "inspected": "",
         "inspection_rejected": "",
+        "closed": ""
+    },
+    "_comment_asm_rejected_reason": {
+        "name": "_comment_asm_rejected_reason",
+        "column_name": "comment_asm_rejected_reason",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "true",
+        "closed": ""
+    },
+    "_comment_insp_rejected_reason": {
+        "name": "_comment_insp_rejected_reason",
+        "column_name": "comment_insp_rejected_reason",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
+        "column_name": "comment_inspector_decision",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "true",
         "closed": ""
     }
 }

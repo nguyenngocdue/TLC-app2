@@ -163,6 +163,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
                 'old_value' => $previousValue['status'],
                 'new_value' => $currentValue['status'],
                 'user_id' => $userId,
+                'created_at' => $currentValue['updated_at'],
             ]);
         }
     }

@@ -346,5 +346,29 @@
         "pending_verification": "",
         "verification_rejected": "",
         "closed": ""
+    },
+    "_defect_severity": {
+        "name": "_defect_severity",
+        "column_name": "defect_severity",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_defect_report_type": {
+        "name": "_defect_report_type",
+        "column_name": "defect_report_type",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
     }
 }

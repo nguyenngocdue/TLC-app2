@@ -11,6 +11,7 @@ use App\Http\Controllers\Notifications\NotificationsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RedisController;
 use App\Http\Controllers\Reports\ReportIndexController;
+use App\Http\Controllers\SignOff\SignOffController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Utils\MyCompany;
 use App\Http\Controllers\Utils\ParserController;
@@ -158,6 +159,8 @@ Route::group([
     'middleware' => ['auth']
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/qaqc_insp_chklst_sht/sign_off/{id}', [SignOffController::class, 'index']);
+    Route::put('/qaqc_insp_chklst_sht/sign_off/update/{id}', [SignOffController::class, 'update'])->name('sign_off.update');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboards.index');
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');

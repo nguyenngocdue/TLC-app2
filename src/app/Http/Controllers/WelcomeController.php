@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Qaqc_insp_chklst_run;
+use App\Models\Qaqc_insp_chklst_sht;
 use App\Utils\Support\Tree\BuildTree;
 use App\Utils\System\Timer;
 use Illuminate\Contracts\Hashing\Hasher;
@@ -16,7 +18,7 @@ class WelcomeController extends Controller
     {
         // dump(ini_get("curl.cainfo"));
         // dump(Storage::disk('s3')->put('dinhcanh.txt', 'NgoDinhCanh', 'public'));
-        dd(App::isTesting());
+        dd(Qaqc_insp_chklst_sht::find(78)->getProject);
         return view(
             'welcome',
             []

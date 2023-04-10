@@ -20,7 +20,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     {
         $p = $this->eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2]);
-        $sql = $relation
+        $relation
             ->getQuery()
             ->orderBy('created_at', 'DESC')
             ->toSql();
@@ -43,7 +43,26 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    
+    public function getProject()
+    {
+        $tmp = $this->getChklst->prodOrder->subProject;
+        $relation = $tmp->belongsTo(Project::class, 'project_id');
+        return $relation;
+    }
+
+    public function getSubProject()
+    {
+        $tmp = $this->getChklst->prodOrder;
+        $relation = $tmp->belongsTo(Sub_project::class, 'sub_project_id');
+        return $relation;
+    }
+    public function getProdOrder()
+    {
+        $tmp = $this->getChklst;
+        $relation = $tmp->belongsTo(Prod_order::class, 'prod_order_id');
+        return $relation;
+    }
+
     public function getManyLineParams()
     {
         return [

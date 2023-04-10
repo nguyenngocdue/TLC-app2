@@ -69,6 +69,7 @@ class SendCreateNewDocumentNotificationListener implements ShouldQueue
             'type' => 'created_entity',
             'key' => 'create',
             'user_id' => $currentValue['owner_id'],
+            'created_at' => $currentValue['created_at'],
         ]);
     }
 }
