@@ -73,7 +73,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
               LEFT JOIN qaqc_insp_chklst_runs rs ON rs.qaqc_insp_chklst_sht_id = chklst_shts.sheet_id
               GROUP BY chklst_shts.sheet_id, tmpl_sheet_id, tmpl_sheet_description, prod_id ) AS maxRuntb
     
-        LEFT JOIN qaqc_insp_chklst_lines lr ON lr.qaqc_insp_chklst_run_id = max_run_id
+        LEFT JOIN qaqc_insp_chklst_run_lines lr ON lr.qaqc_insp_chklst_run_id = max_run_id
         LEFT JOIN qaqc_insp_control_values cv ON cv.id = lr.qaqc_insp_control_value_id
         LEFT JOIN control_types ct ON ct.id = lr.control_type_id
         GROUP BY sheet_id, prod_id, tmpl_sheet_id) AS tb";

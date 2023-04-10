@@ -98,7 +98,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "time_keep_types" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
         "productionRuns" => ['belongsToMany', Prod_run::class, 'prod_user_runs', 'user_id', 'prod_run_id'],
         "qaqcInspChklsts" => ['belongsTo', Qaqc_insp_chklst::class, 'owner_id'],
-        "getRoleSet" => ['morphToMany', RoleSet::class, 'model', 'model_has_role_sets'],
+        "getRoleSet" => ['morphToMany', Role_set::class, 'model', 'model_has_role_sets'],
         //This line is for ParentType to load,
         //Otherwise in User screen, the thumbnail will lost its value
         "attachment" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],

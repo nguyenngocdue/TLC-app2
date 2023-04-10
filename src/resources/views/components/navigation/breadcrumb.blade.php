@@ -1,21 +1,40 @@
 <div class="flex justify-end pt-1">
     @foreach($links as $value)
-        @if ($value['href'])
-        <div class="px-2 py-1 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-1 my-2">
+        @if (isset($value['href']))
+        <div class="{{$classList}}">
             <a class="text-lg text-blue-500 hover:text-gray-400" href="{{$value['href']}}">
                 {!!$value['icon']!!}
                 <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
             </a>
         </div>
-        @elseif(isset($value['modePrint']))
-        <div class="px-2 py-1 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-1 my-2">
+        @elseif(isset($value['type']) && $value['type'] == 'modePrint')
+        <div class="{{$classList}}">
             <button class="text-lg text-blue-500 hover:text-gray-400" onclick="window.print();">
                 {!!$value['icon']!!}
                 <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
             </button>
         </div>
+        @elseif(isset($value['type']) && $value['type'] == 'report' )
+        <div class="{{$classList}}">
+            <button class="text-lg text-blue-500 hover:text-gray-400" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500" data-dropdown-trigger="hover" >
+                {!!$value['icon']!!}
+                <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
+            </button>
+            <div id="dropdownDelay" class="bg-gray-50 z-10 hidden divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
+                    @foreach($value['dataSource'] as $reportType)
+                        @foreach( $reportType as $report)
+                            <li title="{{$report['mode']}}">
+                                <a href="{{$report['href']}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{$report['title']}}</a>
+                            </li>
+                        @endforeach
+                  @endforeach
+                </ul>
+            </div>
+        </div>
         @else
-        <div class="px-2 py-1 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-1 my-2">
+        Unknown type {{$value['type'] }}
+        {{-- <div class="{{$classList}}">
             <button class="text-lg text-blue-500 hover:text-gray-400" id={{$value['id']}}>
                 {!!$value['icon']!!}
                 <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
@@ -41,7 +60,7 @@
                     }
                     buttonExport.addEventListener('click', generatePDF);
             </script>
-        </div>
+        </div> --}}
         @endif
     
     @endforeach

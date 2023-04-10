@@ -381,23 +381,23 @@
         "status": null,
         "icon": null
     },
-    "qaqc_insp_chklst_line": {
-        "name": "qaqc_insp_chklst_line",
-        "hidden": "true",
-        "package": "project_management",
-        "sub_package": "qaqc",
-        "title": "QAQC Insp Chklst Lines",
-        "nickname": null,
-        "doc_id_format_column": null,
-        "status": null,
-        "icon": null
-    },
     "qaqc_insp_chklst_run": {
         "name": "qaqc_insp_chklst_run",
         "hidden": "true",
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "QAQC Insp Chklst Runs",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "icon": null
+    },
+    "qaqc_insp_chklst_run_line": {
+        "name": "qaqc_insp_chklst_run_line",
+        "hidden": "true",
+        "package": "project_management",
+        "sub_package": "qaqc",
+        "title": "QAQC Insp Chklst Run Lines",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,

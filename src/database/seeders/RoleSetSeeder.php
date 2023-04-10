@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\RoleSet;
+use App\Models\Role_set;
 use App\Utils\Support\Entities;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -66,7 +66,7 @@ class RoleSetSeeder extends Seeder
             "whs_member",
             "worker",
         ];
-        foreach ($roleSets as $roleSet) RoleSet::create(['name' => $roleSet]);
+        foreach ($roleSets as $roleSet) Role_set::create(['name' => $roleSet]);
 
         try {
             $entities = Entities::getAll();

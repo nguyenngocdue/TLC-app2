@@ -88,6 +88,10 @@
                         <x-controls.toggle2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} />
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
+                        @case('signature')
+                        <x-controls.signature2 name={{$columnName}} value={{$value}}/>
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                        @break
                         @case('status')
                             @if($status)
                             <x-controls.status-dropdown2 value={{$status}} name={{$columnName}} modelPath={{$modelPath}} readOnly={{$readOnly}} />
@@ -102,8 +106,13 @@
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
                         @case ('dropdown_multi')
+                        @if($columnName == 'getRoleSet')
+                        {{$item->getRoleSet[0]->name}}
+                        <x-renderer.button href="/dashboard/admin/setrolesets/{{$id}}/edit" target="_blank">Edit RoleSet in popup</x-renderer.button>
+                        @else
                         <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                        @endif
                         @break
                         @case('checkbox')
                         <x-controls.has-data-source.radio-or-checkbox2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}}/>

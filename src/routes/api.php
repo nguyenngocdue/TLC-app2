@@ -63,6 +63,7 @@ Route::group([
         Route::post('delete_file', [App\Http\Controllers\Api\v1\FileController::class, 'delete']);
         Route::post('edit_file', [App\Http\Controllers\Api\v1\FileController::class, 'edit']);
         Route::post('submit_form', [App\Http\Controllers\Api\v1\qaqc\SubmitFormAndUploadFileController::class, 'submitAndUploadFile']);
+        Route::get("{id}/href_ncr", [App\Http\Controllers\Api\v1\qaqc\Qaqc_insp_chklst_lineController::class, 'getHrefFormNcr']);
     });
 });
 Route::group([

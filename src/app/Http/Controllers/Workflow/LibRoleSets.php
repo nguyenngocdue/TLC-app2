@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Workflow;
 
-use App\Models\RoleSet;
+use App\Models\Role_set;
 use Illuminate\Support\Str;
 
 class LibRoleSets
 {
     static function getAll()
     {
-        $allRoleSets = RoleSet::all()->pluck('name');
+        $allRoleSets = Role_set::all()->pluck('name');
         $result = [];
         foreach ($allRoleSets as $roleSet) {
             $result[$roleSet] = [

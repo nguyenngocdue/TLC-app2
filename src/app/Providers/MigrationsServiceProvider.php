@@ -39,7 +39,7 @@ class MigrationsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom($path . "foreignKeys");
 
         $this->loadMigrationsFrom($path . "views");
-        $this->loadMigrationsFrom($path . "storedProcedures");
+        // $this->loadMigrationsFrom($path . "storedProcedures");
         // $this->loadMigrationsFrom($path . "storedFunctions");
     }
 }

@@ -15,6 +15,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_avatar": {
@@ -33,6 +34,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_email": {
@@ -51,6 +53,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_name": {
@@ -60,7 +63,7 @@
         "label": "Name Rendered",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -69,6 +72,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_full_name": {
@@ -78,7 +82,7 @@
         "label": "Full Name",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -87,6 +91,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_name_suffix": {
@@ -96,7 +101,7 @@
         "label": "Name Suffix",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -105,6 +110,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_employeeid": {
@@ -114,7 +120,7 @@
         "label": "Employee ID",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -123,6 +129,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_first_name": {
@@ -132,7 +139,7 @@
         "label": "First Name",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -141,6 +148,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_last_name": {
@@ -150,7 +158,7 @@
         "label": "Last Name",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -159,6 +167,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_address": {
@@ -168,7 +177,7 @@
         "label": "Address",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -177,6 +186,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_phone": {
@@ -186,7 +196,7 @@
         "label": "Phone",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -195,6 +205,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_featured_image": {
@@ -213,6 +224,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_time_keeping_type": {
@@ -222,7 +234,7 @@
         "label": "Time Keeping Type",
         "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -231,6 +243,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_user_type": {
@@ -240,7 +253,7 @@
         "label": "User Type",
         "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -249,6 +262,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_workplace": {
@@ -258,7 +272,7 @@
         "label": "Workplace",
         "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -267,6 +281,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_category": {
@@ -276,7 +291,7 @@
         "label": "Category",
         "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -285,6 +300,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_date_of_birth": {
@@ -294,7 +310,7 @@
         "label": "Date Of Birth",
         "control": "picker_date",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -303,42 +319,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "new_line": ""
-    },
-    "_first_date": {
-        "name": "_first_date",
-        "column_name": "first_date",
-        "column_type": "date",
-        "label": "First Date",
-        "control": "picker_date",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "true",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "new_line": ""
-    },
-    "_last_date": {
-        "name": "_last_date",
-        "column_name": "last_date",
-        "column_type": "date",
-        "label": "Last Date",
-        "control": "picker_date",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "true",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_title": {
@@ -348,7 +329,7 @@
         "label": "Title",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -357,6 +338,45 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_first_date": {
+        "name": "_first_date",
+        "column_name": "first_date",
+        "column_type": "date",
+        "label": "First Date",
+        "control": "picker_date",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_last_date": {
+        "name": "_last_date",
+        "column_name": "last_date",
+        "column_type": "date",
+        "label": "Last Date",
+        "control": "picker_date",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_position_prefix": {
@@ -366,7 +386,7 @@
         "label": "Position Prefix",
         "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -375,6 +395,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_position_1": {
@@ -384,7 +405,7 @@
         "label": "Position 1",
         "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -393,6 +414,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_position_2": {
@@ -402,7 +424,7 @@
         "label": "Position 2",
         "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -411,6 +433,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_position_3": {
@@ -420,7 +443,7 @@
         "label": "Position 3",
         "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -429,13 +452,14 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_position_rendered": {
         "name": "_position_rendered",
         "column_name": "position_rendered",
         "column_type": "string",
-        "label": "Position",
+        "label": "Position Rendered",
         "control": "text",
         "align": "",
         "col_span": "",
@@ -447,6 +471,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_discipline": {
@@ -456,7 +481,7 @@
         "label": "Discipline",
         "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -465,6 +490,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_department": {
@@ -474,7 +500,7 @@
         "label": "Department",
         "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -483,6 +509,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_show_on_beta": {
@@ -492,7 +519,7 @@
         "label": "Show On Beta",
         "control": "toggle",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -501,6 +528,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_resigned": {
@@ -510,7 +538,7 @@
         "label": "Resigned",
         "control": "toggle",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -519,6 +547,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_viewport_uids": {
@@ -528,7 +557,7 @@
         "label": "Viewport Uids",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -537,6 +566,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_leaf_uids": {
@@ -546,7 +576,7 @@
         "label": "Leaf Uids",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -555,6 +585,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_user_id_passport": {
@@ -564,7 +595,7 @@
         "label": "User Id\/Passport",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -573,60 +604,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "new_line": ""
-    },
-    "_user_pin": {
-        "name": "_user_pin",
-        "column_name": "user_pin",
-        "column_type": "string",
-        "label": "User Pin",
-        "control": "text",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "true",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "true",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "new_line": ""
-    },
-    "_email_verified_at": {
-        "name": "_email_verified_at",
-        "column_name": "email_verified_at",
-        "column_type": "datetime",
-        "label": "Email Verified At",
-        "control": "picker_datetime",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "true",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "true",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "new_line": ""
-    },
-    "_provider": {
-        "name": "_provider",
-        "column_name": "provider",
-        "column_type": "string",
-        "label": "Provider",
-        "control": "text",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "true",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "true",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_password": {
@@ -636,7 +614,7 @@
         "label": "Password",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -645,6 +623,83 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_user_pin": {
+        "name": "_user_pin",
+        "column_name": "user_pin",
+        "column_type": "string",
+        "label": "User Pin",
+        "control": "text",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_email_verified_at": {
+        "name": "_email_verified_at",
+        "column_name": "email_verified_at",
+        "column_type": "datetime",
+        "label": "Email Verified At",
+        "control": "picker_datetime",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_getRoleSet": {
+        "name": "_getRoleSet",
+        "column_name": "getRoleSet",
+        "column_type": "eloquent_prop",
+        "label": "RoleSet",
+        "control": "dropdown_multi",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_provider": {
+        "name": "_provider",
+        "column_name": "provider",
+        "column_type": "string",
+        "label": "Provider",
+        "control": "text",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_time_zone": {
@@ -663,6 +718,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_settings": {
@@ -681,6 +737,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_remember_token": {
@@ -699,6 +756,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_created_at": {
@@ -708,7 +766,7 @@
         "label": "Created At",
         "control": "picker_datetime",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -717,6 +775,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_updated_at": {
@@ -726,7 +785,7 @@
         "label": "Updated At",
         "control": "picker_datetime",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -735,6 +794,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_guid": {
@@ -753,6 +813,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_domain": {
@@ -771,6 +832,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_posts": {
@@ -789,6 +851,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_productionRuns": {
@@ -807,24 +870,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "new_line": ""
-    },
-    "_getRoleSet": {
-        "name": "_getRoleSet",
-        "column_name": "getRoleSet",
-        "column_type": "eloquent_prop",
-        "label": "RoleSet",
-        "control": "relationship_renderer",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "true",
-        "hidden_label": "",
-        "hidden_filter": "true",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_attachment": {
@@ -843,6 +889,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_getOtTeams()": {
@@ -861,6 +908,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     }
 }

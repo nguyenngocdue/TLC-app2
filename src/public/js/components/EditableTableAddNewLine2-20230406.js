@@ -24,6 +24,8 @@ const addANewLine = (params) => {
     // console.log(params, tableName,)
     const orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
 
+    const currentUser = getEById('currentUserId').val()
+
     const parentIdFieldName = findParentIdFieldName(tableId, 'value_as_parent_id')
     const parentId = getEById('entityParentId').val()
 
@@ -31,7 +33,7 @@ const addANewLine = (params) => {
     const parentType = getEById('entityParentType').val()
     // console.log(parentIdFieldName)
     const data0 = {
-        owner_id: 1,
+        owner_id: currentUser,
         [parentIdFieldName]: parentId,
         [parentTypeFieldName]: parentType,
         project_id: getEById('entityProjectId').val(),

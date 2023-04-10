@@ -283,7 +283,7 @@
         "name": "_inspected_by",
         "column_name": "inspected_by",
         "new": "",
-        "assigned": "",
+        "assigned": "inspected",
         "rejected": "",
         "inspected": "",
         "inspection_rejected": "",

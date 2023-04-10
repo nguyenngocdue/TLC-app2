@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\Json\SuperWorkflows;
 use App\Utils\Support\WorkflowFields;
 use Illuminate\Support\MessageBag;
@@ -42,14 +43,38 @@ trait TraitValidation
         return $result;
     }
 
-    private function getValidationRules($newStatus, $action)
+    private function getValidationRules($oldStatus, $newStatus, $action)
     {
-        if ($newStatus == '') $newStatus = WorkflowFields::getNewFromDefinitions($this->type);
+        if ($oldStatus == '') $oldStatus = WorkflowFields::getNewFromDefinitions($this->type);
+
+
         $rules = [];
+        $sp = SuperProps::getFor($this->type);
+        $intermediate = $sp["intermediate"];
+        $transitions = $sp['statuses'][$oldStatus]['transitions'];
+        //Remove the current transition
+        $transitions = array_filter($transitions, fn ($item) => $item != $newStatus);
+        // dump($transitions);
+        // dump($sp);
+        // dump($intermediate);
+
+        $toBeRemovedProps = [];
+        foreach ($transitions as $statusName) {
+            if (isset($intermediate[$oldStatus][$statusName])) {
+                $tmp = $intermediate[$oldStatus][$statusName];
+                $toBeRemovedProps = [...$toBeRemovedProps, ...$tmp];
+            }
+        }
+        // dump($toBeRemovedProps);
+
         $workflows = SuperWorkflows::getFor($this->type)['workflows'];
-        if (!isset($workflows[$newStatus])) return [];
-        $visibleProps = $workflows[$newStatus]['visible'];
-        $requiredProps = $workflows[$newStatus]['required'];
+        if (!isset($workflows[$oldStatus])) return [];
+        $visibleProps = $workflows[$oldStatus]['visible'];
+        $requiredProps = $workflows[$oldStatus]['required'];
+        //In case there are props in the intermediate screen, remove them
+        // dump($requiredProps);
+        $requiredProps = array_diff($requiredProps, $toBeRemovedProps);
+
 
         $listOfTableToIgnoreRequired = $this->getListOfTableToIgnoreRequired($action);
 
@@ -73,6 +98,7 @@ trait TraitValidation
         $rules = array_filter($rules, fn ($i) => !empty($i));
         // dd("getValidationRules", $rules);
         // $this->dump1("getValidationRules", $rules, __LINE__);
+        // dump("$oldStatus to $newStatus");
         // dump($rules);
         // dd();
         return $rules;

@@ -6,7 +6,7 @@ use App\Console\Commands\Traits\CloneRunTrait;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Attachment;
-use App\Models\Qaqc_insp_chklst_line;
+use App\Models\Qaqc_insp_chklst_run_line;
 use App\Models\Qaqc_insp_chklst_run;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -53,7 +53,7 @@ class SubmitFormAndUploadFileController extends Controller
                     'status' => $status,
                 ]);
                 cache(['qaqcInspChklstRunId' => $qaqcInspChklstRun->id], 10);
-                $qaqcInspChklstLine = Qaqc_insp_chklst_line::create([
+                $qaqcInspChklstLine = Qaqc_insp_chklst_run_line::create([
                     'name' => $name,
                     'description' => $description,
                     'control_type_id' => $controlTypeId,
@@ -64,11 +64,12 @@ class SubmitFormAndUploadFileController extends Controller
                     'qaqc_insp_chklst_run_id' => $qaqcInspChklstRun->id,
                     'qaqc_insp_control_value_id' => $controlValueId,
                     'qaqc_insp_control_group_id' => $controlGroupId,
+                    'owner_id' => $ownerId,
                 ]);
                 $this->uploadFile($request, $qaqcInspChklstLine->id);
             } else {
                 $qaqcRunId = cache('qaqcInspChklstRunId');
-                $qaqcInspChklstLine = Qaqc_insp_chklst_line::create([
+                $qaqcInspChklstLine = Qaqc_insp_chklst_run_line::create([
                     'name' => $name,
                     'description' => $description,
                     'control_type_id' => $controlTypeId,
@@ -79,6 +80,7 @@ class SubmitFormAndUploadFileController extends Controller
                     'qaqc_insp_chklst_run_id' => $qaqcRunId,
                     'qaqc_insp_control_value_id' => $controlValueId,
                     'qaqc_insp_control_group_id' => $controlGroupId,
+                    'owner_id' => $ownerId,
                 ]);
                 $this->uploadFile($request, $qaqcInspChklstLine->id);
             }
@@ -89,7 +91,7 @@ class SubmitFormAndUploadFileController extends Controller
             return response()->json($th);
         }
     }
-    private function uploadFile($request, $modelId, $modelName = 'App\\Models\\Qaqc_insp_chklst_line')
+    private function uploadFile($request, $modelId, $modelName = 'App\\Models\\Qaqc_insp_chklst_run_line')
     {
         try {
             $nameIdFields = Helper::getDataDbByName('fields', 'name', 'id');

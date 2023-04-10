@@ -3,7 +3,7 @@
 </button>
   <template x-if="isSearchMenuOpen">
     <div tabindex="-1" class="fixed sm:p-0 md:p-0 top-0 left-0 right-0 z-50 lg:p-4 h-full bg-gray-100 dark:bg-slate-400 dark:bg-opacity-70 bg-opacity-70 justify-center items-center flex" aria-hidden="true"  @keydown.escape="closeSearchMenu">
-        <div class="relative sm:mx-0 md:mx-10  w-full lg:mx-20 xl:mx-56 2xl:mx-96 h-auto md:h-auto sm:h-auto" @click.away="closeSearchMenu">
+        <div class="relative my-20 sm:mx-0 sm:my-8 md:mx-10 md:my-10 w-full lg:mx-20 xl:mx-56 2xl:mx-96 h-auto md:h-auto sm:h-auto" @click.away="closeSearchMenu">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <!-- Modal header -->
@@ -20,7 +20,7 @@
                     <input type="search" id="search" data-search class="block w-full p-3 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required>
                 </div>
                 <!-- Modal body -->
-                <div class="px-6 overflow-y-auto h-[600px]" data-container>
+                <div class="px-6 overflow-y-auto h-[500px] sm:h-[600px]" data-container>
                     
                 </div>
                 <!-- Modal footer -->

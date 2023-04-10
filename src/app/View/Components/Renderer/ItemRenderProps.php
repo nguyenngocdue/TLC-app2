@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class ItemRenderProps extends Component

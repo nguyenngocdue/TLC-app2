@@ -116,7 +116,7 @@ class SuperWorkflows
     public static function getFor($type, $roleSet = null)
     {
         if (is_null($roleSet)) $roleSet = CurrentUser::getRoleSet();
-        if (is_null($type) || is_null($roleSet)) dd("Type or RoleSet is missing, SuperWorkflow cant instantiate.");
+        if (is_null($type) || is_null($roleSet)) dd("Type or Role_set is missing, SuperWorkflow cant instantiate.");
         $type = Str::singular($type, $roleSet);
         $key = "super_workflow_{$type}";
         $result = CacheToRamForThisSection::get($key, fn () => static::make($type, $roleSet), $roleSet);

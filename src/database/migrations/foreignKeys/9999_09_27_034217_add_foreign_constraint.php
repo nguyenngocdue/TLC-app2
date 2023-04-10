@@ -152,7 +152,7 @@ return new class extends Migration
             $table->foreign('prod_order_id')->references('id')->on('prod_orders');
             $table->foreign('qaqc_insp_tmpl_id')->references('id')->on('qaqc_insp_tmpls');
         });
-        Schema::table('qaqc_insp_chklst_lines', function (Blueprint $table) {
+        Schema::table('qaqc_insp_chklst_run_lines', function (Blueprint $table) {
             // $table->foreign('qaqc_insp_chklst_id')->references('id')->on('qaqc_insp_chklsts')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('qaqc_insp_chklst_run_id')->references('id')->on('qaqc_insp_chklst_runs');
             $table->foreign('qaqc_insp_group_id')->references('id')->on('qaqc_insp_groups');

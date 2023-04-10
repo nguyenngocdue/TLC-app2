@@ -131,6 +131,12 @@
         "color": "lime",
         "color_index": "200"
     },
+    "not_applicable": {
+        "name": "not_applicable",
+        "title": "Not Applicable",
+        "color": "gray",
+        "color_index": "200"
+    },
     "obsolete": {
         "name": "obsolete",
         "title": "Obsolete",

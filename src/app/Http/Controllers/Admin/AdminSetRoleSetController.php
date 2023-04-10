@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;
-use App\Models\RoleSet;
+use App\Models\Role_set;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -30,7 +30,7 @@ class AdminSetRoleSetController extends Controller
             $q->orderBy('id', 'asc');
         })->paginate($pageLimit);
         $roles = Role::orderBy('name')->get();
-        $roleSetFirst = RoleSet::first();
+        $roleSetFirst = Role_set::first();
         $roleUsing = $roleSetFirst->roles;
         return view('admin.renderset.rolesets.index')->with(compact('users', 'pageLimit', 'search', 'roles', 'roleSetFirst', 'roleUsing'));
     }
@@ -75,7 +75,7 @@ class AdminSetRoleSetController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roleSets = RoleSet::orderBy('name')->get();
+        $roleSets = Role_set::orderBy('name')->get();
         $roleSetUsing = $user->roleSets[0] ?? null;
         return view('admin.renderset.rolesets.edit', compact('user', 'roleSets', 'roleSetUsing', 'id'));
     }

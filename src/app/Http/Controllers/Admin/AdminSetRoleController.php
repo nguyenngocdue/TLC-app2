@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;
-use App\Models\RoleSet;
+use App\Models\Role_set;
 use Illuminate\Http\Request;
 
 class AdminSetRoleController extends Controller
@@ -20,7 +20,7 @@ class AdminSetRoleController extends Controller
      */
     public function index()
     {
-        $roleSetSelected = RoleSet::first();
+        $roleSetSelected = Role_set::first();
         $selected = $roleSetSelected->id;
         [$roles, $lastRoleNames, $roleSets, $roleUsing] = $this->getRoleSetRole($roleSetSelected);
         return view('admin.renderset.roles.index')->with(compact('roles', 'selected', 'lastRoleNames', 'roleSetSelected', 'roleSets', 'roleUsing'));
@@ -45,7 +45,7 @@ class AdminSetRoleController extends Controller
     public function store(Request $request)
     {
         $selected = $request->input('roleSet_id');
-        $roleSetSelected = RoleSet::findById($selected);
+        $roleSetSelected = Role_set::findById($selected);
         [$roles, $lastRoleNames, $roleSets, $roleUsing] = $this->getRoleSetRole($roleSetSelected);
 
         return view('admin.renderset.roles.index')->with(compact('roles', 'lastRoleNames', 'selected', 'roleSetSelected', 'roleSets', 'roleUsing'));
@@ -81,7 +81,7 @@ class AdminSetRoleController extends Controller
     {
         $roleSetRequest = $request->input('roleSet_id');
         $checkedSetRequest = $request->input('checked');
-        $roleSelected = RoleSet::findById($roleSetRequest);
+        $roleSelected = Role_set::findById($roleSetRequest);
         $roleSelected->syncRoles($checkedSetRequest);
         // Toastr::success('Sync Roles successfully!', 'Sync Roles');
         return $this->redirectBack($roleSetRequest);
@@ -89,7 +89,7 @@ class AdminSetRoleController extends Controller
 
     private function redirectBack($selected)
     {
-        $roleSetSelected = RoleSet::findById($selected);
+        $roleSetSelected = Role_set::findById($selected);
         [$roles, $lastRoleNames, $roleSets, $roleUsing] = $this->getRoleSetRole($roleSetSelected);
         return view('admin.renderset.roles.index')->with(compact('roles', 'lastRoleNames', 'selected', 'roleSetSelected', 'roleSets', 'roleUsing'));
     }
@@ -117,7 +117,7 @@ class AdminSetRoleController extends Controller
     private function getRoleSetRole($roleSetSelected)
     {
         $roles = Role::orderBy('name')->get();
-        $roleSets = RoleSet::orderBy('name')->get();
+        $roleSets = Role_set::orderBy('name')->get();
         $roleUsing = $roleSetSelected->roles;
         $lastRoleNames = [];
         foreach ($roles as $role) {

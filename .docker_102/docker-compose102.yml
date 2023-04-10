@@ -54,6 +54,7 @@ services:
       MYSQL_ROOT_PASSWORD: LNIBsCP9Gj7xF4d3
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 104857600
     ports:
       - "18102:80"
     networks:

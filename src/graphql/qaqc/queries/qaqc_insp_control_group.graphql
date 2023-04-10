@@ -12,7 +12,7 @@ type Qaqc_insp_control_group {
     slug: String!
     created_at: DateTime
     updated_at: DateTime
-    getChklstLines: [Qaqc_insp_chklst_line!]! @hasMany
+    getChklstLines: [Qaqc_insp_chklst_run_line!]! @hasMany
     getControlValues: [Qaqc_insp_control_value]! @hasMany
 }
 

@@ -5,7 +5,7 @@ namespace App\Models;
 use Laravel\Scout\Searchable;
 use Ndc\SpatieCustom\Models\RoleSet as ModelsRoleSet;
 
-class RoleSet extends ModelsRoleSet
+class Role_set extends ModelsRoleSet
 {
     use Searchable;
     public function toSearchableArray()
