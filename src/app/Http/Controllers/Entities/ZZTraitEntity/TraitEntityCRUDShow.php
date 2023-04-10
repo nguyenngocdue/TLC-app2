@@ -12,6 +12,7 @@ trait TraitEntityCRUDShow
 	{
 		$blackList = ['z_divider', 'z_page_break'];
 		$props = SuperProps::getFor($this->type)['props'];
+		$props = array_filter($props, fn ($item) => $item['hidden_print'] != true);
 		$node = [];
 		$nodeCount = 0;
 		foreach ($props as $key => $value) {
@@ -55,7 +56,6 @@ trait TraitEntityCRUDShow
 				}
 			}
 		}
-
 		return view('dashboards.pages.entity-show', [
 			'propsTree' => array_values($node),
 			'dataSource' => $dataSource,
