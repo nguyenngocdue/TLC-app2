@@ -4,7 +4,7 @@ namespace App\View\Components\Reports;
 
 use Illuminate\View\Component;
 
-class HeaderReport extends Component
+class HeaderInfoDocReport extends Component
 {
     /**
      * Create a new component instance.
@@ -24,7 +24,7 @@ class HeaderReport extends Component
      */
     public function render()
     {
-        return view('components.reports.header-report', [
+        return view('components.reports.header-info-doc-report', [
             'dataSource' => $this->dataSource
         ]);
     }
