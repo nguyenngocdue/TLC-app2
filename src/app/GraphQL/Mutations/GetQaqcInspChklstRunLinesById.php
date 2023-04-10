@@ -4,7 +4,7 @@ namespace App\GraphQL\Mutations;
 
 use App\Models\Qaqc_insp_sheet;
 
-final class GetQaqcInspChklstLinesById
+final class GetQaqcInspChklstRunLinesById
 {
     /**
      * @param  null  $_

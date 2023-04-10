@@ -1,8 +1,10 @@
 extend type Mutation {
-    getQaqcInspChklstLinesById(
+    getQaqcInspChklstRunLinesById(
         qaqc_insp_chklst_run_id: ID!
         qaqc_insp_chklst_id: ID!
     ): [Qaqc_insp_chklst_run_line!]!
         @guard
-        @field(resolver: "App\\GraphQL\\Mutations\\GetQaqcInspChklstLinesById")
+        @field(
+            resolver: "App\\GraphQL\\Mutations\\GetQaqcInspChklstRunLinesById"
+        )
 }

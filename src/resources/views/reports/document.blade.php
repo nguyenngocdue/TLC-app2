@@ -31,6 +31,7 @@ $dataHeading = array_values($tableDataSource->items())[0][0] ?? [];
         @foreach($tableDataSource as $idSheet => $data)
         <div class="w-[1000px] min-h-[1415px] items-center bor1der bg-white box-border p-8">
             <x-reports.header-report :dataSource="array_pop($data)" />
+            @dump($tableColumns)
             <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource[$idSheet]" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
         </div>
         <x-renderer.page-break />

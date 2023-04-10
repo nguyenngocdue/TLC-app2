@@ -31,7 +31,7 @@ class Signature2 extends Component
             [
                 'name' => $this->name,
                 'value' => $this->value,
-                'value_decoded' => $value_decoded
+                'value_decoded' => $value_decoded,
             ]
         );
     }

@@ -3,7 +3,9 @@ scalar DateTime
 
 extend type Query {
     qaqc_insp_chklst_run_lines: [Qaqc_insp_chklst_run_line!]! @all @guard
-    qaqc_insp_chklst_run_line(id: ID @eq): Qaqc_insp_chklst_run_line @find @guard
+    qaqc_insp_chklst_run_line(id: ID @eq): Qaqc_insp_chklst_run_line
+        @find
+        @guard
 }
 type Qaqc_insp_chklst_run_line {
     id: ID!
@@ -31,7 +33,7 @@ type Qaqc_insp_chklst_run_line {
     updated_at: DateTime
 }
 
-input CreateQAQCInspChkLstLineInput {
+input CreateQAQCInspChkLstRunLineInput {
     id: ID!
     qaqc_insp_chklst_run_id: ID!
     qaqc_insp_group_id: ID!
@@ -44,7 +46,7 @@ input CreateQAQCInspChkLstLineInput {
     created_at: DateTime
     updated_at: DateTime
 }
-input UpdateQAQCInspChkLstLineInput {
+input UpdateQAQCInspChkLstRunLineInput {
     id: ID!
     qaqc_insp_chklst_run_id: ID
     qaqc_insp_sheet_id: ID
@@ -60,11 +62,11 @@ input UpdateQAQCInspChkLstLineInput {
 }
 
 extend type Mutation {
-    createQAQCInspChklstLine(
-        input: CreateQAQCInspChkLstLineInput! @spread
+    createQAQCInspChklstRunLine(
+        input: CreateQAQCInspChkLstRunLineInput! @spread
     ): Qaqc_insp_chklst_run_line! @guard @create
-    updateQAQCChklstLine(
-        input: UpdateQAQCInspChkLstLineInput! @spread
+    updateQAQCChklstRunLine(
+        input: UpdateQAQCInspChkLstRunLineInput! @spread
     ): Qaqc_insp_chklst_run_line @guard @update
-    deleteQAQCChklstLine(id: ID!): Qaqc_insp_chklst_run_line @guard @delete
+    deleteQAQCChklstRunLine(id: ID!): Qaqc_insp_chklst_run_line @guard @delete
 }
