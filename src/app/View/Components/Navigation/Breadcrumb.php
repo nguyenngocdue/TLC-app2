@@ -35,7 +35,15 @@ class Breadcrumb extends Component
     {
         $type = CurrentRoute::getTypePlural();
         $singular = CurrentRoute::getTypeSingular();
-        $blackList = ['dashboard', 'permission', 'manageApp', 'manageStatus', 'manageWidget', 'reportIndex'];
+        $blackList = [
+            'dashboard',
+            'permission',
+            'manageApp',
+            'manageAppCreation',
+            'manageStatus',
+            'manageWidget',
+            'reportIndex',
+        ];
         if (in_array($singular, $blackList)) return "";
 
         $links = [];

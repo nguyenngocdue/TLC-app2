@@ -24,13 +24,7 @@ class ManageAppsController extends AbstractManageLibController
                 "renderer"  => 'read-only-text4',
                 'editable' => true,
             ],
-            [
-                'dataIndex' => "hidden",
-                "renderer"  => 'checkbox',
-                'align' => 'center',
-                'editable' => true,
-                'title' => "Hidden For non-admin Users",
-            ],
+
             [
                 'dataIndex' => "package",
                 'renderer' => 'dropdown',
@@ -73,6 +67,19 @@ class ManageAppsController extends AbstractManageLibController
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',
+            ],
+            [
+                'dataIndex' => "hidden",
+                "renderer"  => 'checkbox',
+                'align' => 'center',
+                'editable' => true,
+                'title' => "Hidden For non-admin Users",
+            ],
+            [
+                'dataIndex' => "disallowed_direct_creation",
+                "renderer"  => 'checkbox',
+                'align' => 'center',
+                'editable' => true,
             ],
             [
                 'dataIndex' => 'icon',
