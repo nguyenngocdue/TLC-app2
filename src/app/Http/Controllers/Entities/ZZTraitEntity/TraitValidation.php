@@ -50,8 +50,13 @@ trait TraitValidation
 
         $rules = [];
         $sp = SuperProps::getFor($this->type);
+        // dump($this->type);
         $intermediate = $sp["intermediate"];
-        $transitions = $sp['statuses'][$oldStatus]['transitions'];
+        // dump($oldStatus);
+        // dump($sp['statuses']);
+
+        //In case comment is a fakeRequest, it wont have next status
+        $transitions = isset($sp['statuses'][$oldStatus]) ? $sp['statuses'][$oldStatus]['transitions'] : [];
         //Remove the current transition
         $transitions = array_filter($transitions, fn ($item) => $item != $newStatus);
         // dump($transitions);
