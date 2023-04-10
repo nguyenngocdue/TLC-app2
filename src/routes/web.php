@@ -18,6 +18,7 @@ use App\Http\Controllers\Utils\ParserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\WelcomeDueController;
 use App\Http\Controllers\WelcomeFortuneController;
+use App\Http\Controllers\Workflow\ManageAppCreationsController;
 use App\Http\Controllers\Workflow\ManageAppsController;
 use App\Http\Controllers\Workflow\ManageStatusesController;
 use App\Http\Controllers\Workflow\ManageWidgetsController;
@@ -186,6 +187,7 @@ Route::group([
     Route::resource('manageStatuses', ManageStatusesController::class)->only('index', 'store', 'create');
     Route::resource('manageWidgets', ManageWidgetsController::class)->only('index', 'store', 'create');
     Route::resource('manageApps', ManageAppsController::class)->only('index', 'store', 'create');
+    Route::resource('manageAppCreations', ManageAppCreationsController::class)->only('index', 'store');
 });
 Route::get('components', [ComponentDemo::class, 'index']);
 Route::get('redis', [RedisController::class, 'index']);

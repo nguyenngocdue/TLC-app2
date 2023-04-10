@@ -53,10 +53,10 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
                         uscate.description AS user_category_desc,
                         otline.employeeid AS employee_id,
                         #SUBSTR(otline.ot_date,1,7) AS year_months,
-                         if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,4), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,4)) AS years_month,
+                         if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,4), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,4)) AS years_month, -- get Years
                         SUM(otline.total_time) AS total_overtime_hours,
                         us.id AS user_id,
-                        if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,7), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,7)) AS year_months -- range salary term
+                        if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,7), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,7)) AS year_months -- get range salary
                     FROM 
                         users us, 
                         hr_overtime_request_lines otline, 
@@ -232,9 +232,10 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
 
     private function wrapValueInObjectWithCellColor($percent, $value)
     {
-        // dump($value);
+
         switch (true) {
-            case $percent < 0:
+
+            case $percent <= 0:
                 return (object)[
                     'cell_class' => 'bg-red-600 ',
                     'value' => $value,
@@ -298,10 +299,10 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
             $remainingAllowedOTHoursMonth = ($value->remaining_allowed_ot_hours * 1);
             $remainingAllowedOTHoursYear = $value->remaining_allowed_ot_hours_year * 1;
 
+            // dump($remainingAllowedOTHoursMonth);
             $percentOTMonth = $remainingAllowedOTHoursMonth / 40 * 100;
             $percentOTYear = $remainingAllowedOTHoursYear / 200 * 100;
 
-            // dump($remainingAllowedOTHoursMonth);
             $param = '?user_id=' . $value->user_id . '&' . 'months=' . $value->year_months;
             $reAllowedOTHoursMonth = $this->wrapValueInObjectWithCellColor($percentOTMonth, $remainingAllowedOTHoursMonth);
             $reAllowedOTHoursYear = $this->wrapValueInObjectWithCellColor($percentOTYear, $remainingAllowedOTHoursYear);
@@ -309,6 +310,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
             $dataSource[$key]->remaining_allowed_ot_hours = $reAllowedOTHoursMonth ?? $value->remaining_allowed_ot_hours;
             $dataSource[$key]->remaining_allowed_ot_hours_year = $reAllowedOTHoursYear;
 
+            // dd($dataSource[0]);
             $hrefForward = route('dashboard') . "/reports/register-" . $type . "/020" . $param;
             $dataSource[$key]->total_overtime_hours = (object)[
                 'value' => $value->total_overtime_hours,

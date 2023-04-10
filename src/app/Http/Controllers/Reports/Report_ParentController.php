@@ -58,6 +58,7 @@ abstract class Report_ParentController extends Controller
     protected function getDataSource($modeParams)
     {
         $sql = $this->getSql($modeParams);
+        if (is_null($sql)) return collect();
         $sqlData = DB::select(DB::raw($sql));
         $collection = collect($sqlData);
         return $collection;
@@ -135,9 +136,8 @@ abstract class Report_ParentController extends Controller
     public function index(Request $request)
     {
 
-        // dd($request);
         $input = $request->input();
-        // dump($input);
+        // dd($input);
         // Log::info($input);
 
         $typeReport = CurrentPathInfo::getTypeReport($request);
@@ -194,7 +194,7 @@ abstract class Report_ParentController extends Controller
             'modeColumns' => $this->modeColumns(),
             'paramColumns' => $this->getParamColumns(),
             'legendColors' => $this->getColorLegends(),
-
+            'getSettingParams' => $this->getSettingParamsReport()
         ]);
     }
 

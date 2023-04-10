@@ -11,7 +11,7 @@ class Qaqc_ncr extends ModelExtended
         "parent_id", "parent_type", "prod_routing_id", "prod_order_id", "prod_discipline_1_id",
         "prod_discipline_id", "prod_discipline_2_id", "user_team_id", "priority_id", "due_date",
         "assignee_1", "cause_analysis", "owner_id", "inter_subcon_id", "defect_root_cause_id",
-        "defect_disposition_id", "closed_at"
+        "defect_disposition_id", "closed_at", "severity", "report_type",
     ];
     protected $primaryKey = 'id';
     protected $table = "qaqc_ncrs";
@@ -33,6 +33,8 @@ class Qaqc_ncr extends ModelExtended
         "getParent" => ['morphTo', Qaqc_ncr::class, 'parent_type', 'parent_id'],
         'getQaqcCars' => ['hasMany', Qaqc_car::class, 'qaqc_ncr_id'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "getSeverity" => ["belongsTo", Term::class, 'defect_severity'],
+        "getReportType" => ["belongsTo", Term::class, 'defect_report_type'],
     ];
 
     public $oracyParams = [
@@ -150,6 +152,18 @@ class Qaqc_ncr extends ModelExtended
     }
 
     public function getOwnerId()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getSeverity()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getReportType()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

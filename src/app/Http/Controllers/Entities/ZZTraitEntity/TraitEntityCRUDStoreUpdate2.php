@@ -42,7 +42,9 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			//Get newStatus before it get removed by handleFields
 			$newStatus = $request['status'];
-			$rules = $this->getValidationRules($newStatus, __FUNCTION__);
+			/** oldStatus when create will be same as new status */
+			$oldStatus = $newStatus;
+			$rules = $this->getValidationRules($oldStatus, $newStatus, __FUNCTION__);
 			$request->validate($rules);
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
@@ -108,7 +110,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$theRow = $this->data::find($id);
 			$oldStatus = $theRow['status'];
 			$newStatus = $request['status'];
-			$rules = $this->getValidationRules($oldStatus, __FUNCTION__);
+			$rules = $this->getValidationRules($oldStatus, $newStatus, __FUNCTION__);
 			// if ($request['tableNames'] == 'fakeRequest') Log::info($rules);
 			if ($request['tableNames'] !== 'fakeRequest') {
 				$this->makeUpTableFieldForRequired($request);

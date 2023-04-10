@@ -79,5 +79,41 @@
         "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
+    },
+    "_comment_asm_rejected_reason": {
+        "name": "_comment_asm_rejected_reason",
+        "field_id": "50",
+        "field_name": "comment_asm_rejected_reason",
+        "allowed_change_owner": "",
+        "allowed_attachment": "",
+        "allowed_delete": "",
+        "force_comment_once": ""
+    },
+    "_comment_approver_decision": {
+        "name": "_comment_approver_decision",
+        "field_id": "52",
+        "field_name": "comment_approver_decision",
+        "allowed_change_owner": "",
+        "allowed_attachment": "",
+        "allowed_delete": "",
+        "force_comment_once": ""
+    },
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
+        "field_id": "53",
+        "field_name": "comment_inspector_decision",
+        "allowed_change_owner": "",
+        "allowed_attachment": "",
+        "allowed_delete": "",
+        "force_comment_once": ""
+    },
+    "_comment_insp_rejected_reason": {
+        "name": "_comment_insp_rejected_reason",
+        "field_id": "51",
+        "field_name": "comment_insp_rejected_reason",
+        "allowed_change_owner": "",
+        "allowed_attachment": "",
+        "allowed_delete": "",
+        "force_comment_once": ""
     }
 }

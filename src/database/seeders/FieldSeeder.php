@@ -67,6 +67,11 @@ class FieldSeeder extends Seeder
             'getDefMonitors7' => 47,
             'getDefMonitors8' => 48,
             'getDefMonitors9' => 49,
+
+            'comment_asm_rejected_reason' => 50,
+            'comment_insp_rejected_reason' => 51,
+            'comment_approver_decision' => 52,
+            'comment_inspector_decision' => 53,
         ];
     }
     /**

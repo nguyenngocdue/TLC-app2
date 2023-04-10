@@ -286,7 +286,7 @@
         "assigned": "inspected",
         "rejected": "",
         "inspected": "",
-        "inspection_rejected": "",
+        "inspection_rejected": "inspected",
         "closed": ""
     },
     "_status": {
@@ -327,6 +327,36 @@
         "rejected": "",
         "inspected": "",
         "inspection_rejected": "",
+        "closed": ""
+    },
+    "_comment_asm_rejected_reason": {
+        "name": "_comment_asm_rejected_reason",
+        "column_name": "comment_asm_rejected_reason",
+        "new": "",
+        "assigned": "rejected",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_comment_insp_rejected_reason": {
+        "name": "_comment_insp_rejected_reason",
+        "column_name": "comment_insp_rejected_reason",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "inspection_rejected",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
+        "column_name": "comment_inspector_decision",
+        "new": "",
+        "assigned": "inspected",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "inspected",
         "closed": ""
     }
 }

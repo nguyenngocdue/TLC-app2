@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentDocumentController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
+use App\Http\Controllers\UpdateUserSettings;
 use App\Models\Attachment;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_chklst;
@@ -12,21 +13,22 @@ use App\Models\Sub_project;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 
+use function PHPUnit\Framework\isEmpty;
+
 class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 {
 	use TraitDynamicColumnsTableReport;
 	protected $viewName = 'document-qaqc-insp-chklst';
 
 	// set default params's values 
-	protected  $sub_project_id = 21;
-	protected  $prod_order_id = 82;
-	protected  $qaqc_insp_tmpl_id = 1;
+	protected  $qaqc_insp_tmpl = 1;
+	protected  $sub_project = 82;
+	protected  $prod_order = 238;
+	protected $check_sheet = 1;
 	protected  $run_option = 1;
-	protected $insp_chklst_id = 1;
 
 	public function getSqlStr($modeParams)
 	{
-		$isCheck = isset($modeParams['prod_order_id']) && isset($modeParams['sub_project_id']);
 		$sql =  " SELECT
                         
                         tp.id AS template
@@ -52,17 +54,20 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
                         ,c2
                         ,c3
                         ,c4";
-		if ($isCheck) $sql .= "\n ,po.id AS po_id , po.name AS po_name";
-		if ($isCheck) $sql .= " \n ,sp.name AS sub_project_name, pj.name AS project_name, po.compliance_name AS compliance_name";
+		if (isset($modeParams['prod_order'])) $sql .= "\n ,po.id AS po_id , po.name AS po_name , po.compliance_name AS compliance_name";
+		if (isset($modeParams['sub_project'])) $sql .= " \n ,sp.name AS sub_project_name, pj.name AS project_name ";
 		$sql .= "\n FROM qaqc_insp_chklst_runs r
                     JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id
                     JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
                     JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id";
-		if (isset($modeParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND tp.id = '{{qaqc_insp_tmpl_id}}'";
+		if (isset($modeParams['qaqc_insp_tmpl'])) $sql .= "\n AND tp.id = '{{qaqc_insp_tmpl}}'";
 		$sql .= "\n JOIN qaqc_insp_chklst_run_lines l ON l.qaqc_insp_chklst_run_id = r.id
                     JOIN control_types ct ON ct.id = l.control_type_id";
-		if ($isCheck) $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
-		if ($isCheck) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id
+		if (isset($modeParams['prod_order']))  $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order}}'";
+		else {
+			$sql .= "\nJOIN prod_orders po ON po.id = 0";
+		};
+		if (isset($modeParams['sub_project'])) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id
 								 JOIN projects pj ON pj.id = sp.project_id";
 
 		$sql .= "\nLEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
@@ -77,8 +82,8 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
                             )  AS divide_control ON l.qaqc_insp_control_group_id = divide_control.control_group_id
             
                 WHERE 1=1";
-		if ($isCheck) $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
-		if (isset($modeParams['insp_chklst_id'])) $sql .= " \n AND csh.id = '{{insp_chklst_id}}'";
+		if (isset($modeParams['sub_project']))  $sql .= " \n AND po.sub_project_id = '{{sub_project}}' \n";
+		if (isset($modeParams['check_sheet'])) $sql .= " \n AND csh.id = '{{check_sheet}}'";
 		$sql .= "\n ORDER BY line_name,  run_updated DESC ";
 		return $sql;
 	}
@@ -136,16 +141,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 	protected function getPageParam($typeReport, $entity)
 	{
 		return 1000;
-	}
-
-	public function getDataForModeControl($dataSource = [])
-	{
-		$subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-		$prod_orders  = ['prod_order_id' =>  Prod_order::get()->pluck('name', 'id')->toArray()];
-		$insp_tmpls = ['qaqc_insp_tmpl_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
-		$insp_chklsts = ['insp_chklst_id' => Qaqc_insp_chklst::get()->pluck('name', 'id')->toArray()];
-		$run_option = ['run_option' => ['View only last run', 'View all runs']];
-		return array_merge($subProjects, $prod_orders, $insp_tmpls, $insp_chklsts, $run_option);
 	}
 
 	private function transformLines($groupByLinesDesc, $indexByLineIds, $modeParams)
@@ -323,20 +318,35 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 
 	protected function getDefaultValueModeParams($modeParams, $request)
 	{
-		$x = 'sub_project_id';
-		$y = 'prod_order_id';
-		$z = 'qaqc_insp_tmpl_id';
-		$l = 'insp_chklst_id';
+		$x = 'sub_project';
+		$y = 'prod_order';
+		$z = 'qaqc_insp_tmpl';
+		$l = 'check_sheet';
 		$m = 'run_option';
 		$isNullModeParams = Report::isNullModeParams($modeParams);
 		if ($isNullModeParams) {
-			$modeParams[$x] = $this->sub_project_id;
-			$modeParams[$y] = $this->prod_order_id;
-			$modeParams[$z] = $this->qaqc_insp_tmpl_id;
-			$modeParams[$l] = $this->insp_chklst_id;
+			$modeParams[$x] = $this->sub_project;
+			$modeParams[$y] = $this->prod_order;
+			$modeParams[$z] = $this->qaqc_insp_tmpl;
+			$modeParams[$l] = $this->check_sheet;
 			$modeParams[$m] = $this->run_option;
 		}
 		// dd($modeParams);
 		return $modeParams;
+	}
+
+	protected function forwardToMode($request, $modeParams)
+	{
+		$input = $request->input();
+		$isFormType = isset($input['form_type']);
+		if ($isFormType && $input['form_type'] === 'updateParamsReport') {
+			// check_sheet listen to prod_order
+			if (!$input['prod_order']) {
+				$input['check_sheet'] = "0";
+				$request->replace($input);
+			}
+			(new UpdateUserSettings())($request);
+		}
+		return redirect($request->getPathInfo());
 	}
 }
