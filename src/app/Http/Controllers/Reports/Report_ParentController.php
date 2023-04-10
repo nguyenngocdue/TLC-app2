@@ -32,6 +32,7 @@ abstract class Report_ParentController extends Controller
     protected $groupBy = false;
     protected $mode = '010';
     protected $groupByLength = 7;
+    protected $maxH = 400;
 
     public function getType()
     {
@@ -158,8 +159,6 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
         $start = microtime(true);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
-
-
         $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
@@ -175,6 +174,7 @@ abstract class Report_ParentController extends Controller
         // dd($dataModeControl);
 
         return view('reports.' . $viewName, [
+            'maxH' => $this->maxH,
             'entity' => $entity,
             'sheets' =>  $sheet,
             'pageLimit' => $pageLimit,
