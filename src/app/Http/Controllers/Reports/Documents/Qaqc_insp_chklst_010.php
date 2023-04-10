@@ -18,11 +18,11 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 	protected $viewName = 'document-qaqc-insp-chklst';
 
 	// set default params's values 
-	protected  $sub_project_id = 21;
-	protected  $prod_order_id = 82;
-	protected  $qaqc_insp_tmpl_id = 1;
+	protected  $sub_project = 21;
+	protected  $prod_order = 82;
+	protected  $qaqc_insp_tmpl = 1;
 	protected  $run_option = 1;
-	protected $insp_chklst_id = 1;
+	protected $insp_chklst = 1;
 
 	public function getSqlStr($modeParams)
 	{
@@ -136,16 +136,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 	protected function getPageParam($typeReport, $entity)
 	{
 		return 1000;
-	}
-
-	public function getDataForModeControl($dataSource = [])
-	{
-		$subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-		$prod_orders  = ['prod_order_id' =>  Prod_order::get()->pluck('name', 'id')->toArray()];
-		$insp_tmpls = ['qaqc_insp_tmpl_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
-		$insp_chklsts = ['insp_chklst_id' => Qaqc_insp_chklst::get()->pluck('name', 'id')->toArray()];
-		$run_option = ['run_option' => ['View only last run', 'View all runs']];
-		return array_merge($subProjects, $prod_orders, $insp_tmpls, $insp_chklsts, $run_option);
 	}
 
 	private function transformLines($groupByLinesDesc, $indexByLineIds, $modeParams)
@@ -323,17 +313,17 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 
 	protected function getDefaultValueModeParams($modeParams, $request)
 	{
-		$x = 'sub_project_id';
-		$y = 'prod_order_id';
-		$z = 'qaqc_insp_tmpl_id';
-		$l = 'insp_chklst_id';
+		$x = 'sub_project';
+		$y = 'prod_order';
+		$z = 'qaqc_insp_tmpl';
+		$l = 'insp_chklst';
 		$m = 'run_option';
 		$isNullModeParams = Report::isNullModeParams($modeParams);
 		if ($isNullModeParams) {
-			$modeParams[$x] = $this->sub_project_id;
-			$modeParams[$y] = $this->prod_order_id;
-			$modeParams[$z] = $this->qaqc_insp_tmpl_id;
-			$modeParams[$l] = $this->insp_chklst_id;
+			$modeParams[$x] = $this->sub_project;
+			$modeParams[$y] = $this->prod_order;
+			$modeParams[$z] = $this->qaqc_insp_tmpl;
+			$modeParams[$l] = $this->insp_chklst;
 			$modeParams[$m] = $this->run_option;
 		}
 		// dd($modeParams);

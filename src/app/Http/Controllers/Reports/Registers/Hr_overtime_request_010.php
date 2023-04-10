@@ -67,13 +67,13 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
                     AND otline.hr_overtime_request_id = otr.id
                     AND uscate.id = us.category
                     AND  otline.status LIKE 'approved' ";
-        // $sql .= "\n AND (
-        //                 -- (B)
-        //                 -- From the previous month (including December of the previous year) - the last 5 days of the previous month.
-        //                 (DAY(otline.ot_date) >= 26 AND MONTH(otline.ot_date) = MONTH(DATE_ADD(otline.ot_date, INTERVAL 1 MONTH))-1)
-        //                 -- From the current month (including January of the current year) -  the first 25 days of the next month.
-        //                 OR (DAY(otline.ot_date) <= 25 AND MONTH(otline.ot_date) = MONTH(DATE_SUB(otline.ot_date, INTERVAL 1 MONTH))+1)
-        //                 )";
+        $sql .= "\n AND (
+                        -- (B)
+                        -- From the previous month (including December of the previous year) - the last 5 days of the previous month.
+                        (DAY(otline.ot_date) >= 26 AND MONTH(otline.ot_date) = MONTH(DATE_ADD(otline.ot_date, INTERVAL 1 MONTH))-1)
+                        -- From the current month (including January of the current year) -  the first 25 days of the next month.
+                        OR (DAY(otline.ot_date) <= 25 AND MONTH(otline.ot_date) = MONTH(DATE_SUB(otline.ot_date, INTERVAL 1 MONTH))+1)
+                        )";
 
         if (isset($modeParams['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
         $sql .= "\nGROUP BY user_id, employee_id, year_months, ot_workplace_id, years_month

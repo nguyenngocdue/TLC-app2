@@ -137,7 +137,7 @@ abstract class Report_ParentController extends Controller
 
         // dd($request);
         $input = $request->input();
-        // dump($input);
+        // dd($input);
         // Log::info($input);
 
         $typeReport = CurrentPathInfo::getTypeReport($request);
@@ -194,7 +194,7 @@ abstract class Report_ParentController extends Controller
             'modeColumns' => $this->modeColumns(),
             'paramColumns' => $this->getParamColumns(),
             'legendColors' => $this->getColorLegends(),
-
+            'getSettingParams' => $this->getSettingParamsReport()
         ]);
     }
 
