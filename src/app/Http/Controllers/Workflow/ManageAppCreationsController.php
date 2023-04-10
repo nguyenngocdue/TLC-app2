@@ -29,7 +29,7 @@ class ManageAppCreationsController extends AbstractManageLibController
                 'editable' => true,
             ],
             [
-                'title' => 'Creation Links<br/>Comma Separated<br/>(link1, link2, link3, ...)',
+                'title' => 'PLEASE INITIATE THE CREATION VIA [...]',
                 'dataIndex' => 'creation_links',
                 'renderer' => 'textarea4',
                 'editable' => true,
