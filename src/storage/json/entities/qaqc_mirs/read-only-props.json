@@ -322,11 +322,11 @@
     "_getNcrs": {
         "name": "_getNcrs",
         "column_name": "getNcrs",
-        "new": "",
+        "new": "true",
         "assigned": "",
-        "rejected": "",
+        "rejected": "true",
         "inspected": "",
         "inspection_rejected": "",
-        "closed": ""
+        "closed": "true"
     }
 }
