@@ -286,7 +286,7 @@
         "assigned": "inspected",
         "rejected": "",
         "inspected": "",
-        "inspection_rejected": "",
+        "inspection_rejected": "inspected",
         "closed": ""
     },
     "_status": {
@@ -356,7 +356,7 @@
         "assigned": "inspected",
         "rejected": "",
         "inspected": "",
-        "inspection_rejected": "",
+        "inspection_rejected": "inspected",
         "closed": ""
     }
 }

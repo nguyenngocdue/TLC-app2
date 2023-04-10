@@ -283,7 +283,7 @@
         "name": "_inspected_by",
         "column_name": "inspected_by",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "rejected": "",
         "inspected": "true",
         "inspection_rejected": "true",
@@ -336,7 +336,7 @@
         "assigned": "true",
         "rejected": "",
         "inspected": "",
-        "inspection_rejected": "",
+        "inspection_rejected": "true",
         "closed": ""
     },
     "_comment_insp_rejected_reason": {
@@ -356,7 +356,7 @@
         "assigned": "true",
         "rejected": "",
         "inspected": "",
-        "inspection_rejected": "",
+        "inspection_rejected": "true",
         "closed": ""
     }
 }
