@@ -16,12 +16,12 @@ const actionDeletedMultiple = (type, url) => {
         var strIds = checkedValues.join(',') ?? ''
         Swal.fire({
             title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
+            text: "You are about to delete the following item(s): " + checkedValues.join(', '),
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes,delete it!',
+            confirmButtonText: 'OK',
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
@@ -40,9 +40,9 @@ const actionDeletedMultiple = (type, url) => {
                                     response.hits.length > 0
                                         ? response.hits
                                         : 'empty'
-                                var message = `Deleted Success Document ID: ${deleteSuccess}`
+                                var message = `Document ID(s): ${deleteSuccess}`
                                 Swal.fire(
-                                    'Deleted Success',
+                                    'Deleted Successfully',
                                     message,
                                     'success'
                                 ).then(() => {
@@ -57,9 +57,9 @@ const actionDeletedMultiple = (type, url) => {
                                     response.meta[0].length > 0
                                         ? response.meta[0]
                                         : 'empty'
-                                var message = `Deleted Fail Document ID: ${deleteFail}. Please check setting and permission!`
+                                var message = `Document ID(s): ${deleteFail}. Please check settings and permissions!`
                                 Swal.fire(
-                                    'Deleted Fail',
+                                    'Failed to delete',
                                     message,
                                     'warning'
                                 ).then(() => {
@@ -71,9 +71,9 @@ const actionDeletedMultiple = (type, url) => {
                             }
                         } else {
                             Swal.fire(
-                                'Deleted Fail',
+                                'Failed to delete',
                                 response.message,
-                                'warning'
+                                'error'
                             ).then(() => {
                                 setTimeout(location.reload.bind(location), 500)
                             })
@@ -82,9 +82,9 @@ const actionDeletedMultiple = (type, url) => {
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log(jqXHR)
                         Swal.fire(
-                            'Delete Fail!',
-                            'Permission denied , please check your permissions!',
-                            'warning'
+                            'Failed to delete',
+                            'Permission denied, please check your permissions!',
+                            'error'
                         ).then(() => {
                             setTimeout(location.reload.bind(location), 500)
                         })
@@ -94,7 +94,7 @@ const actionDeletedMultiple = (type, url) => {
         })
     } else {
         toastr.warning(
-            'Please checked line if you want using feature delete that',
+            'Please select at least one item for deletion.',
             'Warning'
         )
     }
@@ -112,12 +112,12 @@ const actionDuplicateMultiple = (type, url) => {
         var strIds = checkedValues.join(',') ?? ''
         Swal.fire({
             title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
+            text: "You are about to duplicate the following item(s): " + checkedValues.join(', '),
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes,duplicate it!',
+            confirmButtonText: 'OK',
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
@@ -136,9 +136,9 @@ const actionDuplicateMultiple = (type, url) => {
                                     response.hits.length > 0
                                         ? response.hits
                                         : 'empty'
-                                var message = `Duplicate Success Document ID: ${duplicateSuccess}`
+                                var message = `Document ID(s): ${duplicateSuccess}`
                                 Swal.fire(
-                                    'Duplicate Success',
+                                    'Duplicated Successfully',
                                     message,
                                     'success'
                                 ).then(() => {
@@ -153,9 +153,9 @@ const actionDuplicateMultiple = (type, url) => {
                                     response.meta[0].length > 0
                                         ? response.meta[0]
                                         : 'empty'
-                                var message = `Duplicate Fail Document ID: ${duplicateFail}. Please check setting and permission!`
+                                var message = `Document ID: ${duplicateFail}. Please check setting and permission!`
                                 Swal.fire(
-                                    'Duplicate Fail',
+                                    'Failed to duplicate',
                                     message,
                                     'warning'
                                 ).then(() => {
@@ -167,7 +167,7 @@ const actionDuplicateMultiple = (type, url) => {
                             }
                         } else {
                             Swal.fire(
-                                'Duplicate Fail',
+                                'Failed to duplicate ',
                                 response.message,
                                 'warning'
                             ).then(() => {
@@ -178,9 +178,9 @@ const actionDuplicateMultiple = (type, url) => {
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log(jqXHR)
                         Swal.fire(
-                            'Duplicate Fail!',
-                            'Permission denied , please check your permissions!',
-                            'warning'
+                            'Failed to duplicate',
+                            'Permission denied, please check your permissions!',
+                            'error'
                         ).then(() => {
                             setTimeout(location.reload.bind(location), 500)
                         })
@@ -190,7 +190,7 @@ const actionDuplicateMultiple = (type, url) => {
         })
     } else {
         toastr.warning(
-            'Please checked line if you want using feature duplicate that',
+            'Please select at least one item for duplication.',
             'Warning'
         )
     }
