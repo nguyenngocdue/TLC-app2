@@ -12,7 +12,7 @@ $name = $sheetDesc
         <div class="flex">
             <div class="flex flex-col pr-2  font-medium">
                 <span>Organization:</span>
-                <span>Project Name:</span>
+                <span>Project:</span>
             </div>
             <div class="flex flex-col">
                 <span>TLC Modular</span>

@@ -24,6 +24,7 @@ abstract class ParentIdReports extends Component
     }
     private function renderJS($tableName, $objectTypeStr, $objectIdStr)
     {
+        // dump($objectIdStr);
         $attr_name = $tableName . '_parent_fake_id';
         $k = [$tableName => $this->getDataSource($attr_name),];
         $listenersOfDropdown2 = [
@@ -38,6 +39,7 @@ abstract class ParentIdReports extends Component
                 'triggers' => [$objectTypeStr],
             ],
         ];
+        // dump($listenersOfDropdown2);
         $str = "";
         $str .= "<script>";
         $str .= " k = {...k, ..." . json_encode($k) . "};";
