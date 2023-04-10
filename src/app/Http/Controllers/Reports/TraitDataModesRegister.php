@@ -11,16 +11,16 @@ trait TraitDataModesRegister
             '020' => 'Overtime User Line'
         ]];
     }
-    public function qaqc_insp_chklst_shts()
+    public function qaqc_insp_chklsts()
     {
         return ['mode_option' => [
-            '010' => 'Mode 10',
+            '010' => 'Inspection Matrix',
         ]];
     }
     public function qaqc_wirs()
     {
         return ['mode_option' => [
-            '010' => 'Mode 10',
+            '010' => 'WIR Register',
         ]];
     }
 }
