@@ -33,8 +33,8 @@ class Qaqc_ncr extends ModelExtended
         "getParent" => ['morphTo', Qaqc_ncr::class, 'parent_type', 'parent_id'],
         'getQaqcCars' => ['hasMany', Qaqc_car::class, 'qaqc_ncr_id'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
-        "getSeverity" => ["belongsTo", Term::class, 'severity'],
-        "getReportType" => ["belongsTo", Term::class, 'report_type'],
+        "getSeverity" => ["belongsTo", Term::class, 'defect_severity'],
+        "getReportType" => ["belongsTo", Term::class, 'defect_report_type'],
     ];
 
     public $oracyParams = [

@@ -35,8 +35,8 @@ return new class extends Migration
             $table->dateTime('due_date')->nullable();
             $table->unsignedBigInteger('defect_root_cause_id')->nullable();
             $table->unsignedBigInteger('defect_disposition_id')->nullable();
-            $table->unsignedBigInteger('severity')->nullable();
-            $table->unsignedBigInteger('report_type')->nullable();
+            $table->unsignedBigInteger('defect_severity')->nullable();
+            $table->unsignedBigInteger('defect_report_type')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('owner_id');
             $table->string('status')->nullable();
