@@ -5,6 +5,7 @@ namespace App\View\Components\Navigation;
 use App\Http\Controllers\Reports\ReportIndexController;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
+use App\View\Components\Controls\DisallowedDirectCreationChecker;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -54,6 +55,8 @@ class Breadcrumb extends Component
         $allReports = ReportIndexController::getReportOf($type);
         $allReports = $this->makeUpReports($allReports);
 
+        $disallowedDirectCreationChecker = DisallowedDirectCreationChecker::check($type);
+
         if ($isAdmin) {
             $modelPath = Str::modelPathFrom($singular);
             $first = $modelPath::first();
@@ -85,7 +88,7 @@ class Breadcrumb extends Component
                 break;
         }
         $links[] = ['href' => route($type . '.index'), 'title' => 'View All', 'icon' => '<i class="fa-solid fa-table-cells"></i>'];
-        $links[] = ['href' => route($type . '.create'), 'title' => 'Add New', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];
+        if (!$disallowedDirectCreationChecker) $links[] = ['href' => route($type . '.create'), 'title' => 'Add New', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];
         if ($isAdmin) {
             if (!empty($allReports)) $links[] = ['type' => 'report', 'title' => 'View Report', 'dataSource' => $allReports, 'icon' => '<i class="fa-regular fa-file-chart-column"></i>'];
             $links[] = ['href' => route($singular . '_prp.index'), 'title' => 'Workflows', 'icon' => '<i class="fa-duotone fa-sitemap"></i>'];

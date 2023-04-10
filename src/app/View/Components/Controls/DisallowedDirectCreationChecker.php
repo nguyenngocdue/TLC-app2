@@ -29,10 +29,16 @@ class DisallowedDirectCreationChecker extends Component
         return $app['creation_links'] ?? " its appropriate parent";
     }
 
-    public static function check(Request $request, $type)
+    public static function check($type)
     {
         $app = LibApps::getFor($type);
         $disallowed_direct_creation = isset($app['disallowed_direct_creation']) &&  $app['disallowed_direct_creation'] == true;
+        return $disallowed_direct_creation;
+    }
+
+    public static function checkAgainstRequest(Request $request, $type)
+    {
+        $disallowed_direct_creation = static::check($type);
         if ($disallowed_direct_creation) {
             $appCreation = LibAppCreations::getFor($type);
             $requiredParams = explode(",", $appCreation['required_params']);
