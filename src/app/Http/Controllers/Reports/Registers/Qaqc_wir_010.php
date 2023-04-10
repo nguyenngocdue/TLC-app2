@@ -14,7 +14,8 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
     use TraitFunctionsReport;
-    protected $rotate45Width = 600;
+    protected $rotate45Width = 500;
+    protected $maxH = 80;
     // set default params's values 
     protected  $sub_project_id = 21;
     protected  $prod_routing_id = 2;
@@ -23,23 +24,15 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT 
-        pairs.sub_project_id
-        ,pairs.project_id
-        ,sub_project_name
-        ,pairs.prod_order_id
-        ,pairs.prod_order_name
-        ,wir_description_id
-        ,wir_description_name
-        ,pairs.prod_routing_id
-        ,pairs.prod_routing_name
-        ,qw.id AS wir_id
-        ,qw.doc_id AS wir_doc_id
-        ,qw.prod_discipline_id AS wir_prod_discipline_id
-        ,qw.status AS wir_status
-        FROM qaqc_wirs AS qw,
-        (SELECT * 
+        wirPo.*
+        ,wir.id AS wir_id
+        ,wir.doc_id AS wir_doc_id
+        ,wir.prod_discipline_id AS wir_prod_discipline_id
+        ,wir.status AS wir_status
+        ,wir.wir_description_id AS wir_description_id
+        ,wirdes.name AS wir_description_name
             FROM(SELECT 
-                 sp.id AS sub_project_id
+                sp.id AS sub_project_id
                 ,sp.project_id AS project_id
                 ,sp.name AS sub_project_name
                 ,po.id AS prod_order_id
@@ -50,19 +43,10 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                     WHERE 1 = 1";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
         if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND pr.id = '{{prod_routing_id}}'";
-        $sql .= "\n AND sp.id = po.sub_project_id	
-                    AND po.prod_routing_id = pr.id) wirPo,
-                (SELECT wd.id as wd_id, wd.name AS wir_description_name
-                FROM many_to_many m2m, wir_descriptions wd
-                WHERE 1 =1 
-                AND doc_type='App\\\Models\\\Wir_description'
-                AND term_type='App\\\Models\\\Prod_routing'";
-        if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND term_id = '{{prod_routing_id}}'";
-        $sql .= " \n AND m2m.doc_id=wd.id) AS wirDesc ) pairs
-                    WHERE 1=1
-                    AND qw.prod_order_id=pairs.prod_order_id
-                    AND qw.wir_description_id=pairs.wd_id
-          ";
+        $sql .= "\n AND po.prod_routing_id = pr.id) wirPo
+                    LEFT JOIN qaqc_wirs wir ON wirPo.prod_order_id = wir.prod_order_id AND wirPo.sub_project_id = wir.sub_project_id 
+                    LEFT JOIN wir_descriptions wirdes ON wir.wir_description_id = wirdes.id 
+                    ORDER BY wirPo.prod_order_name";
 
         return $sql;
     }
@@ -87,8 +71,8 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
         $flattenData = array_merge(...$items);
         $idx = array_search("wir_status", array_keys($flattenData));
         $dataColumn = array_slice($flattenData, $idx + 1, count($flattenData) - $idx, true);
-        unset($dataColumn['wir_status']);
         ksort($dataColumn);
+        unset($dataColumn['wir_status']);
 
         $adds = [
             [
@@ -97,25 +81,15 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                 "align" => "center",
             ],
             [
-                "title" => "Production Order Name",
+                "title" => "Prod Order Name",
                 "dataIndex" => "prod_order_name_html",
                 "align" => "center",
             ],
-            [
-                "title" => "Production Order ID",
-                "dataIndex" => "prod_order_id",
-                "align" => "center",
-            ],
-            [
-                "title" => "Production Order IDDDDDD",
-                "dataIndex" => "z",
-                "align" => "center",
-            ]
         ];
         // dd($dataColumn);
+        unset($dataColumn['wir_description_id'], $dataColumn['wir_description_name']);
         $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center", "width" => 100], array_keys($dataColumn));
         $dataColumn = array_merge($adds, $sqlCol);
-        // dd($sqlCol);
 
 
         return  $dataColumn;
@@ -170,7 +144,7 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
     }
     protected function getDataForModeControl($dataSource = [])
     {
-        $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
+        $subProjects = ['sub_project_id' => Sub_project::orderBy('name')->get()->pluck('name', 'id')->toArray()];
         $dataProdRouting = $this->getDataProdRouting();
         $prodRoutings = ['prod_routing_id' => array_column($dataProdRouting, 'prod_routing_name', 'prod_routing_id')];
         return array_merge($subProjects, $prodRoutings);
@@ -207,21 +181,22 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                 $status = $entityStatuses[$item['wir_status']];
                 $color = "bg-{$status['color']}-{$status['color_index']}";
             }
+            // dd($item);
             $docId = str_pad($item['wir_doc_id'], 4, 0, STR_PAD_LEFT);
-            $hrefEdit = route('qaqc_wirs.edit', $item['wir_id']);
-
+            // $hrefEdit = route('qaqc_wirs.edit', $item['wir_id']);
+            $hrefEdit = is_null($item['wir_id']) ? "" : route('qaqc_wirs.edit', $item['wir_id']);
             $htmlRender = (object)[
                 'value' => $docId,
                 'cell_title' => $item['wir_description_name'],
                 'cell_href' => $hrefEdit,
                 'cell_class' => $color,
             ];
-            $wirDescName = [Report::slugName($item['wir_description_name']) => $htmlRender];
+
+            $wirDescName =  is_null($item['wir_description_name']) ? [] : [Report::slugName($item['wir_description_name']) => $htmlRender];
 
             // Edit visibility of production_order_name + sub_project_name to display in the table
             $prodNameHtml = ['prod_order_name_html' =>  "<div  style='width: 120px'>{$item['prod_order_name']}</div>"];
             $subProjectNameHtml = ['sub_project_name_html' =>  "<div  style='width: 80px'>{$item['sub_project_name']}</div>"];
-
             return $prodNameHtml + $subProjectNameHtml + (array)$item + $wirDescName;
         }, array_values($items));
 
@@ -245,6 +220,8 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
             $idx = array_search("wir_status", array_keys($prodOrder));
             $itemHasWirDesc = array_slice($prodOrder, $idx + 1, count($prodOrder) - $idx, true);
             $itemHasNotWirDesc = array_diff_key($keyNameWirDesc, $itemHasWirDesc);
+            // dd($prodOrder);
+
 
             $param1 = '/?project_id=' . $prodOrder['project_id'];
             $param2 = 'sub_project_id=' . $prodOrder['sub_project_id'];
@@ -266,7 +243,6 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
             }
             $transformData[$key] =  $prodOrder + $itemsHasNotWirDescData;
         }
-        // dd($transformData);
         return collect($transformData);
     }
 }

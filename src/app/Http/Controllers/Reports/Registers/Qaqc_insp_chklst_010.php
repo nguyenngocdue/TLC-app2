@@ -19,18 +19,20 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
 
     public function getSqlStr($modeParams)
     {
+        // dd($modeParams);
         $sql = "SELECT tb.*,
         CASE
             WHEN sheet_status_combine LIKE '%No%' THEN 'Inprogress'
             WHEN sheet_status_combine LIKE '%Fail%' THEN 'Inprogress'
             WHEN sheet_status_combine LIKE'%N/A%'  THEN 'Inprogress'
+            WHEN sheet_status_combine LIKE 'Null' THEN 'Inprogress'
             WHEN sheet_status_combine LIKE '%Yes%' OR '%Pass%' THEN 'Pass'
             WHEN sheet_status_combine LIKE 'N/A' THEN 'NA'
             WHEN sheet_status_combine LIKE 'On Hold' THEN 'OnHold'
             ELSE 'Null'
         END AS sheet_status
     FROM (SELECT 
-        sub_project,prod_id,prod_name
+        sub_project,prod_id,prod_name, sub_project_name
         ,tmpl_sheet_id
         ,tmpl_sheet_description
         ,sheet_id
@@ -38,13 +40,14 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         ,GROUP_CONCAT(DISTINCT cv.name) AS sheet_status_combine
         
         FROM (SELECT
-            sub_project,prod_id, prod_name
+            sub_project,prod_id, prod_name, sub_project_name
             ,tmpl_sheet_id
             ,tmpl_sheet_description
             ,sheet_id
             ,MAX(rs.id) AS max_run_id
         FROM (SELECT
              sub_project
+             ,sub_project_name
              ,prod_id
              ,prod_name
             ,tmpl_sheet_description
@@ -52,19 +55,20 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
             ,csh.id AS sheet_id
             ,csh.description AS sheet_description
             ,template_id
-            FROM (SELECT 
-                    prod.sub_project_id AS sub_project
+            FROM (SELECT
+                    sp.name AS sub_project_name
+                    ,prod.sub_project_id AS sub_project
                     ,prod.id AS prod_id
                     ,prod.name AS prod_name
                     ,tmpl.id AS template_id
                     ,tmplsh.id AS tmpl_sheet_id
                     ,tmplsh.description AS tmpl_sheet_description
                     , chlst.id AS check_list_id
-                    FROM prod_orders prod, qaqc_insp_chklsts chlst, qaqc_insp_tmpls tmpl, qaqc_insp_tmpl_shts tmplsh
+                    FROM sub_projects sp, prod_orders prod, qaqc_insp_chklsts chlst, qaqc_insp_tmpls tmpl, qaqc_insp_tmpl_shts tmplsh
                     WHERE 1 = 1";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
         if (isset($modeParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND chlst.qaqc_insp_tmpl_id = '{{qaqc_insp_tmpl_id}}'";
-        $sql .= "\n AND chlst.qaqc_insp_tmpl_id = 1
+        $sql .= "\n AND sp.id = prod.sub_project_id
                     AND chlst.prod_order_id = prod.id
                     AND chlst.qaqc_insp_tmpl_id = tmpl.id
                     AND tmplsh.qaqc_insp_tmpl_id = tmpl.id
@@ -96,9 +100,11 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
 
         $adds = [
             [
-                "dataIndex" => "prod_id",
+                "title" => "Sub Project",
+                "dataIndex" => "sub_project_name",
                 "align" => "center"
-            ],            [
+            ],
+            [
                 "dataIndex" => "prod_name",
                 "align" => "center"
             ]
@@ -114,6 +120,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
             [
                 'title' => 'Sub Project',
                 'dataIndex' => 'sub_project_id',
+                'allowClear' => true
             ],
             [
                 'title' => 'Checklist Type',
@@ -163,7 +170,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
                         $value[$col] = (object)[
                             'value' => '<i class="fa-sharp fa-regular fa-circle"></i>',
                             'cell_class' => 'bg-gray-400',
-                            'cell_title' => "Work Not Started",
+                            'cell_title' => "Not Yet Started",
                         ];
                         break;
                     default:

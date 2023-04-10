@@ -6,10 +6,6 @@ use App\Http\Controllers\Reports\Report_ParentDocumentController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Models\Attachment;
-use App\Models\Prod_order;
-use App\Models\Qaqc_insp_chklst;
-use App\Models\Qaqc_insp_tmpl;
-use App\Models\Sub_project;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 
