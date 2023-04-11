@@ -2,12 +2,12 @@
 
 namespace App\View\Components\Reports\Modals;
 
-
+use App\View\Components\Reports\ParentIdParamReports;
 use App\View\Components\Reports\ParentIdReports;
 use Illuminate\Support\Facades\DB;
 
 
-class ParamCheckSheet extends ParentIdReports
+class ParamCheckSheet extends ParentIdParamReports
 {
     protected $referData = 'prod_order';
     protected function getDataSource($attr_name)

@@ -20,7 +20,9 @@ class Dropdown7 extends Component
 
     public function render()
     {
-        $selected = $this->itemsSelected[$this->name];
+        // dd($this->name);
+        $selected = $this->itemsSelected[$this->name] ?? '';
+        // dump($selected);
         $title = $this->title;
         $viewName = Report::getViewName($this->name);
         $str = "<span class='px-1 '>$title</span>

@@ -4,10 +4,9 @@ namespace App\View\Components\Reports;
 
 
 use App\Utils\ClassList;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
-abstract class ParentIdReports extends Component
+abstract class ParentIdParamReports extends Component
 {
 
     abstract protected function getDataSource($attr_name);
