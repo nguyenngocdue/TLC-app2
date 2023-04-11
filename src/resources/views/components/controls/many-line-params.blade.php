@@ -30,7 +30,9 @@
         @endif
     </div>
 
-    <x-renderer.button type="secondary" onClick="refreshCalculation('{{$table01Name}}')"><i class="fa-solid fa-calculator"></i> Recalcule</x-renderer.button>
+    @if( isset($tableSettings['showBtnRecalculate']) && $tableSettings['showBtnRecalculate'])
+        <x-renderer.button type="secondary" onClick="refreshCalculation('{{$table01Name}}')"><i class="fa-solid fa-calculator"></i> Recalculate</x-renderer.button>
+    @endif
 </div>
 
 <i id="iconSpin_{{$table01Name}}" class="fa-duotone fa-spinner fa-spin text-green-500" style="display: none"></i>
