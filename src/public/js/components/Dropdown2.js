@@ -184,7 +184,9 @@ const onChangeDropdown2Reduce = (listener) => {
     const lastSelected = getValueOfEById(column_name)
     // console.log("Selected of", column_name, "is", lastSelected)
     // console.log(attrs_to_compare)
-    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, [lastSelected * 1,], false)
+    const control = getEById(column_name)
+    const allowClear = control.attr('allowclear')
+    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, [lastSelected * 1,], allowClear)
 }
 const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
