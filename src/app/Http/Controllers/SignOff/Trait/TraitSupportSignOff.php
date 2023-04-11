@@ -22,12 +22,12 @@ trait TraitSupportSignOff
             [
                 "title" => 'Description',
                 "dataIndex" => "description",
-                'width' => "10",
+                'width' => 500,
             ],
             [
                 "dataIndex" => "response_type",
                 "align" => "center",
-                'width' => "500"
+                'width' => 350,
             ],
         ];
     }
@@ -106,7 +106,7 @@ trait TraitSupportSignOff
     }
     private function createStrHtmlDateTime($item)
     {
-        $runUpdated = '<td class="border pl-2" style="width:80px" > Date: ' . str_replace(" ", "</br> Time: ", $item->updated_at) . "</td>";
+        $runUpdated = '<td class="border pl-2" style="width:50px" >' . DateTimeConcern::convertForLoading('picker_datetime', $item->updated_at) . "</td>";
         return $runUpdated;
     }
     private function createStrHtmlAttachment($item)

@@ -159,6 +159,9 @@ return new class extends Migration
             $table->foreign('qaqc_insp_control_group_id')->references('id')->on('qaqc_insp_control_groups');
             $table->foreign('qaqc_insp_control_value_id')->references('id')->on('qaqc_insp_control_values');
             $table->foreign('control_type_id')->references('id')->on('control_types');
+
+            $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('inspector_id')->references('id')->on('users');
         });
         Schema::table('qaqc_insp_values', function (Blueprint $table) {
             $table->foreign('qaqc_insp_control_value_id')->references('id')->on('qaqc_insp_control_values');

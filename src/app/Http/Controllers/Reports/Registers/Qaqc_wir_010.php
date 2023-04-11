@@ -40,7 +40,10 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                 ,pr.id AS prod_routing_id
                 ,pr.name AS prod_routing_name
                 FROM  sub_projects sp, prod_orders po, prod_routings pr
-                    WHERE 1 = 1";
+                    WHERE 1 = 1
+                    AND sp.id = po.sub_project_id
+                    AND po.prod_routing_id = pr.id
+                    AND pr.id = po.prod_routing_id";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
         if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND pr.id = '{{prod_routing_id}}'";
         $sql .= "\n AND po.prod_routing_id = pr.id) wirPo
@@ -49,13 +52,6 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                     ORDER BY wirPo.prod_order_name";
 
         return $sql;
-    }
-
-    private function getDataWirDescription()
-    {
-        $sql = "SELECT wirdesc.id AS wir_description_id, wirdesc.name wir_description_name
-                        FROM wir_descriptions wirdesc;";
-        return $this->getDataSourceFromSqlStr($sql);
     }
 
     protected function getTableColumns($dataSource, $modeParams)
@@ -112,43 +108,18 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
     protected function filterWirDescriptionsFromProdRouting($modeParams)
     {
 
-        // dd($modeParams);
         $sql = "SELECT wd.id as wir_description_id, wd.name AS wir_description_name
         FROM many_to_many m2m, wir_descriptions wd
         WHERE 1 =1 
         AND doc_type='App\\\Models\\\Wir_description'
         AND term_type='App\\\Models\\\Prod_routing'
-        AND m2m.doc_id=wd.id
-        AND term_id = ";
-        $sql .= $modeParams['prod_routing_id'];
+        AND m2m.doc_id=wd.id \n";
+        $sql  .= !is_null($modeParams['prod_routing_id']) ? 'AND term_id =' . $modeParams["prod_routing_id"] : "";
         $sqlData = DB::select(DB::raw($sql));
-        // dump($sql);
         return $sqlData;
     }
 
 
-    protected function getDataProdRouting()
-    {
-        $sql = "
-            SELECT
-                prodr.id AS prod_routing_id
-                ,prodr.name AS prod_routing_name
-                FROM prod_orders prod, sub_projects sub, prod_routings prodr
-                WHERE 1 = 1
-                AND sub.id = prod.sub_project_id
-                AND prodr.id = prod.prod_routing_id
-                GROUP BY prod_routing_id,  prod_routing_name";
-        $sqlData = DB::select(DB::raw($sql));
-        // dd($sqlData);
-        return $sqlData;
-    }
-    protected function getDataForModeControl($dataSource = [])
-    {
-        $subProjects = ['sub_project_id' => Sub_project::orderBy('name')->get()->pluck('name', 'id')->toArray()];
-        $dataProdRouting = $this->getDataProdRouting();
-        $prodRoutings = ['prod_routing_id' => array_column($dataProdRouting, 'prod_routing_name', 'prod_routing_id')];
-        return array_merge($subProjects, $prodRoutings);
-    }
 
     protected function getDefaultValueModeParams($modeParams, $request)
     {

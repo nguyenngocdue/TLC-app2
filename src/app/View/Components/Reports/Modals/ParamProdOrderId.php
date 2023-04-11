@@ -2,13 +2,12 @@
 
 namespace App\View\Components\Reports\Modals;
 
-
-use App\View\Components\Reports\ParentIdReports;
+use App\View\Components\Reports\ParentIdParamReports;
 use Illuminate\Support\Facades\DB;
 
-class ParamProdOrder extends ParentIdReports
+class ParamProdOrderId extends ParentIdParamReports
 {
-    protected $referData = 'sub_project';
+    protected $referData = 'sub_project_id';
     protected function getDataSource($attr_name)
     {
         // dump($attr_name);

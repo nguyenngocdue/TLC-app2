@@ -2,14 +2,14 @@
 
 namespace App\View\Components\Reports\Modals;
 
-
+use App\View\Components\Reports\ParentIdParamReports;
 use App\View\Components\Reports\ParentIdReports;
 use Illuminate\Support\Facades\DB;
 
 
-class ParamCheckSheet extends ParentIdReports
+class ParamCheckSheetId extends ParentIdParamReports
 {
-    protected $referData = 'prod_order';
+    protected $referData = 'prod_order_id';
     protected function getDataSource($attr_name)
     {
         $sql = "SELECT 
@@ -20,7 +20,6 @@ class ParamCheckSheet extends ParentIdReports
                     FROM qaqc_insp_chklsts chklst
                     ORDER BY chklst.name
                 ";
-        // dump($attr_name);
         $result = DB::select($sql);
         return $result;
     }

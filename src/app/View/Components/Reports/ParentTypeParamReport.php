@@ -1,31 +1,21 @@
 <?php
 
-namespace App\View\Components\Reports\Modals;
+namespace App\View\Components\Reports;
 
-use App\Models\Qaqc_insp_tmpl;
-use App\Models\Sub_project;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
 
-class ParamChecksheetType extends Component
+abstract class ParentTypeParamReport extends Component
 {
+    abstract protected function getDataSource();
     public function __construct(
         private $name,
-        private $selected = "1",
+        private $selected = "",
         private $multiple = false,
         private $readOnly = false,
+        private $allowClear = false,
     ) {
-        // if (old($name)) $this->selected = old($name);
-    }
-
-    private function getDataSource()
-    {
-        $list = Qaqc_insp_tmpl::get()->toArray();
-        $dataSource = [];
-        usort($list, fn ($a, $b) => $a['name'] <=> $b['name']);
-        foreach ($list as $team) $dataSource[] = ['id' => $team['id'], 'name' => $team['name']];
-        // dd($dataSource);
-        return $dataSource;
+        if (old($name)) $this->selected = old($name);
     }
 
     private function renderJS($tableName)
@@ -50,7 +40,7 @@ class ParamChecksheetType extends Component
             'table' => $tableName,
             'readOnly' => $this->readOnly,
             'classList' => ClassList::DROPDOWN,
-            // 'entity' => $this->type,
+            'allowClear' => $this->allowClear,
         ];
         $this->renderJS($tableName);
         return view('components.controls.has-data-source.dropdown2', $params);

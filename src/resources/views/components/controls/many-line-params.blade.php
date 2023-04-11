@@ -20,15 +20,20 @@
     , }
 
 </script>
-<x-renderer.button id="btnAddANewLine_{{$table01Name}}" type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
-{{-- @dump($tableSettings) --}}
-@isset($tableSettings['showBtnAddFromAList'])
-@if($tableSettings['showBtnAddFromAList'])
 
-<x-renderer.button id="btnAddFromAList_{{$table01Name}}" click="toggleListingTable('{{$table01Name}}')" keydown="closeListingTable('{{$table01Name}}')" type="success" title="Add from a list">Add From A List</x-renderer.button>
-<x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />
-@endif
-@endisset
+<div class="flex justify-between">
+    <div>
+        <x-renderer.button id="btnAddANewLine_{{$table01Name}}" type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
+        @if( isset($tableSettings['showBtnAddFromAList']) && $tableSettings['showBtnAddFromAList'])
+            <x-renderer.button id="btnAddFromAList_{{$table01Name}}" click="toggleListingTable('{{$table01Name}}')" keydown="closeListingTable('{{$table01Name}}')" type="success" title="Add from a list">Add From A List</x-renderer.button>
+            <x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />
+        @endif
+    </div>
+
+    @if( isset($tableSettings['showBtnRecalculate']) && $tableSettings['showBtnRecalculate'])
+        <x-renderer.button type="secondary" onClick="refreshCalculation('{{$table01Name}}')"><i class="fa-solid fa-calculator"></i> Recalculate</x-renderer.button>
+    @endif
+</div>
 
 <i id="iconSpin_{{$table01Name}}" class="fa-duotone fa-spinner fa-spin text-green-500" style="display: none"></i>
 <input class="bg-gray-200" readonly name="tableNames[{{$table01Name}}]" value="{{$tableName}}" type="{{$tableDebugTextHidden}}" />

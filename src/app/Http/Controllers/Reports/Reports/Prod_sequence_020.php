@@ -18,8 +18,10 @@ class Prod_sequence_020 extends Report_ParentReportController
     use TraitDynamicColumnsTableReport;
 
     protected $mode = '020';
-    protected  $sub_project_id = 21;
+    protected  $sub_project_id = 82;
+    protected $prod_order_id = 238;
     protected  $prod_routing_id = 6;
+
     protected $rotate45Width = 400;
     public function getSqlStr($modeParams)
     {
@@ -75,24 +77,17 @@ class Prod_sequence_020 extends Report_ParentReportController
                 'dataIndex' => 'sub_project_id',
             ],
             [
-                'title' => 'Prod Routing',
-                'dataIndex' => 'prod_routing_id',
-            ],
-            [
                 'title' => 'Prod Order',
                 'dataIndex' => 'prod_order_id',
-                'allowClear' => true
+            ],
+            [
+                'title' => 'Prod Routing',
+                'dataIndex' => 'prod_routing_id',
             ],
         ];
     }
 
-    public function getDataForModeControl($dataSource)
-    {
-        $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        $prodOrders  = ['prod_order_id' =>  ModelsProd_order::get()->pluck('name', 'id')->toArray()];
-        $prodRoutings = ['prod_routing_id' => array_column($this->getDataProdRouting(), 'prod_routing_name', 'prod_routing_id')];
-        return array_merge($subProjects, $prodOrders, $prodRoutings);
-    }
+
 
     protected function transformDataSource($dataSource, $modeParams)
     {
@@ -129,10 +124,12 @@ class Prod_sequence_020 extends Report_ParentReportController
     {
         $x = 'sub_project_id';
         $y = 'prod_routing_id';
+        $z = 'prod_order_id';
         $isNullModeParams = Report::isNullModeParams($modeParams);
         if ($isNullModeParams) {
             $modeParams[$x] = $this->sub_project_id;
             $modeParams[$y] = $this->prod_routing_id;
+            $modeParams[$z] = $this->prod_order_id;
         }
         return $modeParams;
     }

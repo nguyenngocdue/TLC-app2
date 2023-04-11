@@ -79,4 +79,8 @@ class Report
         // dd($modeParams);
         return count(array_filter($modeParams, fn ($value) => !is_null($value))) <= 0;
     }
+    public static function getViewName($str)
+    {
+        return 'param-' . str_replace('_', '-', $str);
+    }
 }

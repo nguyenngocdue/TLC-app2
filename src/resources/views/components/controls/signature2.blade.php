@@ -1,6 +1,7 @@
 {{-- https://github.com/szimek/signature_pad --}}
-<div id="div1{{$name}}" class="relative border border-gray-300 rounded-md w-[664px] h-[339px]">
-    <button type="button" id="btnReset1" class="w-10 h-10 top-1 right-2 absolute">
+@php $w=340; $h=140; /* ORI 220 x 90*/ @endphp 
+<div id="div1{{$name}}" class="relative border border-gray-300 rounded-md w-[{{$w}}px] h-[{{$h}}px]">
+    <button type="button" id="btnReset1" class="no-print w-10 h-10 top-1 right-2 absolute">
         <i class="text-red-700 fa-solid fa-xmark cursor-pointer text-lg"></i>
     </button>
     {!! $value_decoded !!}
@@ -10,7 +11,7 @@
         <button type="button" id="btnReset2" class="w-10 h-10 top-1 right-2 absolute">
             <i class="text-red-700 fa-solid fa-xmark cursor-pointer text-lg"></i>
         </button>
-        <canvas width="664" height="339" id="canvas_{{$name}}"
+        <canvas width="{{$w}}" height="{{$h}}" id="canvas_{{$name}}"
          style="touch-action: none; user-select: none;" >
         </canvas>
     </div>

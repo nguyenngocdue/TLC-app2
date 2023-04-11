@@ -95,19 +95,11 @@ class Prod_order_010 extends Report_ParentReportController
                 'dataIndex' => 'sub_project_id',
             ],
             [
-                'title' => 'Production Order',
+                'title' => 'Prod Order',
                 'dataIndex' => 'prod_order_id',
                 'allowClear' => true
             ]
         ];
-    }
-
-
-    public function getDataForModeControl($dataSource)
-    {
-        $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        $prod_orders  = ['prod_order_id' =>  ModelsProd_order::get()->pluck('name', 'id')->toArray()];
-        return array_merge($subProjects, $prod_orders);
     }
 
     protected function getDefaultValueModeParams($modeParams, $request)

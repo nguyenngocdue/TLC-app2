@@ -20,6 +20,7 @@ class ParentId7 extends Component
         // private $type,
         private $readOnly = false,
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
+        private $allowClear = false,
     ) {
         if (old($name)) $this->selected = 1 * old($name);
         // dump($this->selected);
@@ -30,7 +31,7 @@ class ParentId7 extends Component
         return [
             ['id' => 2001, 'name' => 'B001', $attr_name => 1001],
             ['id' => 2002, 'name' => 'B002', $attr_name => 1002],
-            ['id' => 2003, 'name' => 'B003', $attr_name => 1003],
+            ['id' => 2003, 'name' => 'B003', $attr_name => '1003-a'],
         ];
         // return $this->getAllIdMorphMany($attr_name);
     }
@@ -79,6 +80,7 @@ class ParentId7 extends Component
             'classList' => ClassList::DROPDOWN,
             // 'entity' => $this->type,
             'multiple' => $this->multiple ? true : false,
+            'allowClear' => $this->allowClear,
         ];
         $this->renderJS($tableName, 'modal_ot_team', $this->name);
         // dump($params);

@@ -168,7 +168,7 @@ class Prod_run_010 extends  Report_ParentReportController
                 'dataIndex' => 'sub_project_id',
             ],
             [
-                'title' => 'Production Order',
+                'title' => 'Prod Order',
                 'dataIndex' => 'prod_order_id',
                 'allowClear' => true
             ],
@@ -177,14 +177,6 @@ class Prod_run_010 extends  Report_ParentReportController
                 'allowClear' => true
             ]
         ];
-    }
-
-    public function getDataForModeControl($dataSource)
-    {
-        $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        $prodOrders  = ['prod_order_id' =>  ModelsProd_order::get()->pluck('name', 'id')->toArray()];
-        $prodRoutingLinks = ['prod_routing_link_id' => Prod_routing_link::get()->pluck('name', 'id')->toArray()];
-        return array_merge($subProjects, $prodOrders, $prodRoutingLinks);
     }
 
     protected function enrichDataSource($dataSource, $modeParams)

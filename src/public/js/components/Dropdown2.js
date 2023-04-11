@@ -14,7 +14,7 @@ const select2FormatState = (state) =>
         ? state.text
         : $(
             `<div class="flex justify-between px-1"><span>${state.text
-            }</span><pre>   </pre><span>${makeId(state.id)}</span></div>`
+            }</span><pre>   </pre><span>${isNaN(state.id) ? state.id : makeId(state.id)}</span></div>`
         )
 const getEById = (id) => $("[id='" + id + "']")
 
@@ -184,7 +184,7 @@ const onChangeDropdown2Reduce = (listener) => {
     const lastSelected = getValueOfEById(column_name)
     // console.log("Selected of", column_name, "is", lastSelected)
     // console.log(attrs_to_compare)
-    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, [lastSelected * 1,])
+    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, [lastSelected * 1,], false)
 }
 const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
@@ -410,7 +410,7 @@ const onChangeDropdown2 = (name) => {
     }
 }
 
-const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected) => {
+const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected, allowClear = false) => {
     const control_type = getControlTypeOfE(id)
     // console.log(id, attr_to_compare)
     // console.log("reloadDataToDropdown2", id, control_type, dataSource.length, selected)
@@ -424,8 +424,9 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
     if (control_type === 'dropdown') {
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
-            selectedStr = dataSource.length === 1 ? 'selected' : selected.includes(item.id) ? 'selected' : ''
-            const title = item.description || makeId(item.id)
+            selectedStr = dataSource.length === 1 ? 'selected' : dumbIncludes(selected, item.id) ? 'selected' : ''
+            // console.log(selected, item.id, selectedStr)
+            const title = item.description || (isNaN(item.id) ? item.id : makeId(item.id))
             option =
                 "<option value='" +
                 item.id +
@@ -444,6 +445,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
 
         getEById(id).select2({
             placeholder: 'Please select...',
+            allowClear,
             // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
             templateResult: select2FormatState,
             // , disabled: true
@@ -460,7 +462,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
-            selectedStr = dataSource.length === 1 ? 'checked' : (selected.includes(itemId) ? 'checked' : '')
+            selectedStr = dataSource.length === 1 ? 'checked' : (dumbIncludes(selected, itemId) ? 'checked' : '')
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
             // console.log(item)
@@ -504,7 +506,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected)
     }
 }
 
-const documentReadyDropdown2 = ({ id, selectedJson, table }) => {
+const documentReadyDropdown2 = ({ id, selectedJson, table, allowClear = false }) => {
     // selectedJson = '{!! $selected !!}'
     selectedJson = selectedJson.replace(/\\/g, '\\\\') //<< Replace \ to \\ EG. ["App\Models\Qaqc_mir"] to ["App\\Models\\Qaqc_mir"]
     selectedJson = JSON.parse(selectedJson)
@@ -522,7 +524,7 @@ const documentReadyDropdown2 = ({ id, selectedJson, table }) => {
     // }
     // console.log(id, listenersOfDropdown2, attr_to_compare, dataSourceDropdown)
     // console.log(id, attr_to_compare, dataSourceDropdown, selectedJson)
-    reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedJson)
+    reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedJson, allowClear)
 
     $(document).ready(() => {
         if (Array.isArray(listenersOfDropdown2)) {
