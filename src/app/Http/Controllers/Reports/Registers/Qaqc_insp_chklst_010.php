@@ -66,7 +66,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
                     FROM sub_projects sp, prod_orders prod, qaqc_insp_chklsts chlst, qaqc_insp_tmpls tmpl, qaqc_insp_tmpl_shts tmplsh
                     WHERE 1 = 1";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
-        if (isset($modeParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND chlst.qaqc_insp_tmpl_id = '{{qaqc_insp_tmpl_id}}'";
+        if (isset($modeParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND chlst.qaqc_insp_tmpl_id = '{{checksheet_type_id}}'";
         $sql .= "\n AND sp.id = prod.sub_project_id
                     AND chlst.prod_order_id = prod.id
                     AND chlst.qaqc_insp_tmpl_id = tmpl.id
@@ -119,11 +119,11 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
             [
                 'title' => 'Sub Project',
                 'dataIndex' => 'sub_project_id',
-                'allowClear' => true
+                // 'allowClear' => true
             ],
             [
                 'title' => 'Checklist Type',
-                'dataIndex' => 'qaqc_insp_tmpl_id',
+                'dataIndex' => 'checksheet_type_id',
                 'allowClear' => true
             ]
         ];
@@ -184,7 +184,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
     public function getDataForModeControl($dataSource = [])
     {
         $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        $insp_tmpls = ['qaqc_insp_tmpl_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
+        $insp_tmpls = ['checksheet_type_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
         return array_merge($subProjects, $insp_tmpls);
     }
 

@@ -75,13 +75,12 @@ class Prod_sequence_020 extends Report_ParentReportController
                 'dataIndex' => 'sub_project_id',
             ],
             [
-                'title' => 'Prod Routing',
-                'dataIndex' => 'prod_routing_id',
-            ],
-            [
                 'title' => 'Prod Order',
                 'dataIndex' => 'prod_order_id',
-                'allowClear' => true
+            ],
+            [
+                'title' => 'Prod Routing',
+                'dataIndex' => 'prod_routing_id',
             ],
         ];
     }

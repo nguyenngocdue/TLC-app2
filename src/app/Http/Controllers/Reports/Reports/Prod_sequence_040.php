@@ -79,7 +79,6 @@ class Prod_sequence_040 extends Report_ParentReportController
             [
                 'title' => 'Prod Order',
                 'dataIndex' => 'prod_order_id',
-                'allowClear' => true
             ],
             [
                 'title' => 'Prod Routing',
