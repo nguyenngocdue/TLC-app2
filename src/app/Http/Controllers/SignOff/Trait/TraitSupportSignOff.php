@@ -16,7 +16,6 @@ trait TraitSupportSignOff
         $runLines = $runLatest->getLines;
         return [$runLines, $chklstSht];
     }
-
     public function getTableColumns()
     {
         return [
@@ -35,7 +34,7 @@ trait TraitSupportSignOff
     private function transformDataSource($dataSource)
     {
         foreach ($dataSource as &$value) {
-            $value['response_type'] = $this->createDataTableRun($value);
+            $value['response_type'] = $this->createDataSourceTableRun($value);
             $value['group_description'] = $value->getGroup->description ?? '';
         }
         return $dataSource->toArray();
@@ -45,14 +44,17 @@ trait TraitSupportSignOff
         $controlGroup = $value->getControlGroup->name ?? null;
         $str = '';
         if (!is_null($controlGroup)) {
-            $str .= "<tr title='Chklst Run ID: {$value->getRun->id}\nChklst Line ID: {$value->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrGroupRadioHTML($value) . "</tr>";
-            $str .= $this->createStrImage($value);
-            $str .=  $this->createStrComment($value);
+            $str .= "<tr title='Chklst Run ID: {$value->getRun->id}\nChklst Line ID: {$value->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($value) . "</tr>";
+            $str .= $this->createStrHtmlAttachment($value);
+            $str .=  $this->createStrHtmlComment($value);
         } else {
             $valueSignature = $value->value;
             $signatureId = $value->id;
-            $action = route('sign_off.update', $signatureId);
+            $type = 'qaqc_insp_chklst_sht';
+            $action = route($type . '.sign_off.update', $signatureId);
             $inspectorId = $value->inspector_id;
+            $qaqcInspChklstShtId = $value->getRun->qaqc_insp_chklst_sht_id;
+            $actionQaqcInspChklstSht = route($type . '.sign_off.index', $qaqcInspChklstShtId);
             $inspectorName = null;
             if ($inspectorId) {
                 $inspectorName = User::findOrFail($inspectorId)->full_name;
@@ -67,17 +69,20 @@ trait TraitSupportSignOff
                     @if('$inspectorName')
                         <p class='font-medium'>$inspectorName</p>
                         <p>$updatedAt</p>
-                    @endif
-                    <div class='no-print'>
-                    <x-renderer.button htmlType='submit' type='secondary'>Submit</x-renderer.button>
-                    </div>
+                    @endif 
                 </div>
-                </form>",
+                <div class='flex justify-between no-print'>
+                    <x-renderer.button htmlType='button' click=toggleListingTable($qaqcInspChklstShtId) type='secondary' class='ml-10'>Request</x-renderer.button>
+                    <x-renderer.button htmlType='submit' type='secondary' class='mr-10'>Submit</x-renderer.button>
+                    </div>
+                    </form>
+                <x-modals.modal-add-inspector-from-list modalId='$qaqcInspChklstShtId' type='$type' action='$actionQaqcInspChklstSht' />
+                    ",
             );
         }
         return $str;
     }
-    private function createStrGroupRadioHTML($item)
+    private function createStrHtmlGroupRadio($item)
     {
         $controlGroup = $item->getControlGroup->name ?? '';
         $arrayControl = explode('|', $controlGroup);
@@ -93,27 +98,27 @@ trait TraitSupportSignOff
                 $str .=  '<td class="border" style="width:50px">' . $circleIcon . $value . '</td>';
             }
         };
-        $runUpdated = $this->createStrDateTime($item);
+        $runUpdated = $this->createStrHtmlDateTime($item);
         $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item->description . ":" . "</td>" : "";
         $lineId =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item->id . '</td>' : "";
         $longStr = $runDesc . $lineId . $str . $runUpdated;
         return $longStr;
     }
-    private function createStrDateTime($item)
+    private function createStrHtmlDateTime($item)
     {
         $runUpdated = '<td class="border pl-2" style="width:80px" > Date: ' . str_replace(" ", "</br> Time: ", $item->updated_at) . "</td>";
         return $runUpdated;
     }
-    private function createStrImage($item)
+    private function createStrHtmlAttachment($item)
     {
         if (isset($item->insp_photos) && !$item->insp_photos->isEmpty()) {
-            $td = '<td class="border" colspan=5 style="width:190px">'  . $this->createStrHtmlImage($item->insp_photos) . '</td>';
+            $td = '<td class="border" colspan=5 style="width:190px">'  . $this->formatAttachmentRender($item->insp_photos) . '</td>';
             return "<tr  class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
         }
         return '';
     }
 
-    private function createStrComment($item)
+    private function createStrHtmlComment($item)
     {
         if (!is_null($item->value_comment)) {
             $td = "<td class='border p-3' colspan = 5 style='width:190px'>{$item->value_comment}</td>";
@@ -121,7 +126,7 @@ trait TraitSupportSignOff
         }
         return "<tr> </tr>";
     }
-    protected function createStrHtmlImage($item)
+    protected function formatAttachmentRender($item)
     {
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $strCenter = "";
@@ -144,10 +149,9 @@ trait TraitSupportSignOff
         $strTail = "</div></div>";
         return $strHead . $strCenter . $strTail;
     }
-    protected function createDataTableRun($value)
+    protected function createDataSourceTableRun($value)
     {
         $html = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $this->transFormLine($value) . "</tbody>" . "</table>";
-
         return $html;
     }
 }
