@@ -112,15 +112,13 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
     protected function filterWirDescriptionsFromProdRouting($modeParams)
     {
 
-        // dd($modeParams);
         $sql = "SELECT wd.id as wir_description_id, wd.name AS wir_description_name
         FROM many_to_many m2m, wir_descriptions wd
         WHERE 1 =1 
         AND doc_type='App\\\Models\\\Wir_description'
         AND term_type='App\\\Models\\\Prod_routing'
         AND m2m.doc_id=wd.id
-        AND term_id =  1" . $modeParams['prod_routing_id'];
-        $sql .= $modeParams['prod_routing_id'];
+        AND term_id = " . $modeParams['prod_routing_id'];;
         $sqlData = DB::select(DB::raw($sql));
         return $sqlData;
     }

@@ -19,6 +19,7 @@ abstract class ParentIdReports extends Component
         private $multiple = false,
         private $readOnly = false,
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
+        private $allowClear = false,
     ) {
         if (old($name)) $this->selected = 1 * old($name);
     }
@@ -66,8 +67,8 @@ abstract class ParentIdReports extends Component
             'table' => $tableName,
             'readOnly' => $this->readOnly,
             'classList' => ClassList::DROPDOWN,
-            // 'entity' => $this->type,
             'multiple' => $this->multiple ? true : false,
+            'allowClear' => $this->allowClear,
         ];
         $this->renderJS($tableName, $this->referData, $this->name);
         return view('components.controls.has-data-source.' . $this->control, $params);

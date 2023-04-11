@@ -19,7 +19,7 @@ class ParentType7 extends Component
         private $multiple = false,
         // private $type,
         private $readOnly = false,
-        private $allowClear = true,
+        private $allowClear = false,
     ) {
         if (old($name)) $this->selected = old($name);
     }
