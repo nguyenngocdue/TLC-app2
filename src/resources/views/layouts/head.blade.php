@@ -33,7 +33,7 @@
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/components/RadioOrCheckbox2.js') }}"></script>
-    <script src="{{ asset('js/components/Dropdown2.js') }}"></script>
+    <script src="{{ asset('js/components/Dropdown2-20230411.js') }}"></script>
     <script src="{{ asset('js/components/ActionColumn.js') }}"></script>
     <script src="{{ asset('js/components/ActionMultiple.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4.js') }}"></script>
