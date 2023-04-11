@@ -11,7 +11,7 @@ abstract class AdminController extends Controller
 {
     public function getType()
     {
-        return "permission";
+        return "admin_permission";
     }
     /**
      * Display a listing of the resource.

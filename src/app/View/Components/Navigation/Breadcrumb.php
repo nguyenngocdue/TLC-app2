@@ -31,32 +31,55 @@ class Breadcrumb extends Component
         }
         return $result;
     }
-
     public function render()
     {
         $type = CurrentRoute::getTypePlural();
         $singular = CurrentRoute::getTypeSingular();
         $blackList = [
             'dashboard',
-            'permission',
             'manageApp',
+            'admin_permission',
             'manageAppCreation',
             'manageStatus',
             'manageWidget',
             'reportIndex',
         ];
+        $permissionList = [
+            'permission',
+            'role',
+            'role_set'
+        ];
         if (in_array($singular, $blackList)) return "";
-
         $links = [];
         $isAdmin = CurrentUser::isAdmin();
+        if (in_array($singular, $permissionList)) {
+            switch ($singular) {
+                case 'permission':
+                    $links[] = ['href' => route('setroles.index'), 'title' => 'Set Roles', 'icon' => '<i class="fa-duotone fa-backward-fast"></i>'];
+                    $links[] = ['href' => route('setrolesets.index'), 'title' => 'Set Role Sets', 'icon' => '<i class="fa-duotone fa-backward-fast"></i>'];
+                    break;
+                case 'role':
+                    $links[] = ['href' => route('setpermissions.index'), 'title' => 'Set Permission', 'icon' => '<i class="fa-duotone fa-backward-fast"></i>'];
+                    $links[] = ['href' => route('setrolesets.index'), 'title' => 'Set Role Sets', 'icon' => '<i class="fa-duotone fa-backward-fast"></i>'];
+                    break;
+                case 'role_set':
+                    $links[] = ['href' => route('setpermissions.index'), 'title' => 'Set Permission', 'icon' => '<i class="fa-duotone fa-backward-fast"></i>'];
+                    $links[] = ['href' => route('setroles.index'), 'title' => 'Set Role Sets', 'icon' => '<i class="fa-duotone fa-backward-fast"></i>'];
+                    break;
+                default:
+                    break;
+            }
+            return view('components.navigation.breadcrumb', [
+                'links' => $links,
+                'type' => $type,
+                'classList' => 'px-2 py-1 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-1 my-2',
+            ]);
+        }
         $action = CurrentRoute::getControllerAction();
         $id = CurrentRoute::getEntityId($singular);
-
         $allReports = ReportIndexController::getReportOf($type);
         $allReports = $this->makeUpReports($allReports);
-
         $disallowedDirectCreationChecker = DisallowedDirectCreationChecker::check($type);
-
         if ($isAdmin) {
             $modelPath = Str::modelPathFrom($singular);
             $first = $modelPath::first();
