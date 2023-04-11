@@ -7,7 +7,7 @@ use App\View\Components\Reports\ParentIdReports;
 use Illuminate\Support\Facades\DB;
 
 
-class ParamCheckSheet extends ParentIdParamReports
+class ParamCheckSheetId extends ParentIdParamReports
 {
     protected $referData = 'prod_order';
     protected function getDataSource($attr_name)
@@ -20,7 +20,6 @@ class ParamCheckSheet extends ParentIdParamReports
                     FROM qaqc_insp_chklsts chklst
                     ORDER BY chklst.name
                 ";
-        // dump($attr_name);
         $result = DB::select($sql);
         return $result;
     }

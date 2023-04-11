@@ -4,7 +4,7 @@ namespace App\View\Components\Reports\Modals;
 
 use App\View\Components\Reports\ParentTypeParamReport;
 
-class ParamRunHistoryOption extends ParentTypeParamReport
+class ParamRunHistoryOptionId extends ParentTypeParamReport
 {
 
     protected function getDataSource()

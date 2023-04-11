@@ -16,7 +16,6 @@ class ParamMonth extends ParentTypeParamReport
         $sqlData = DB::select(DB::raw($sql));
         $dataSource = [];
         foreach ($sqlData as $item) $dataSource[] = ['id' => $item->year_months, 'name' => $item->year_months];
-        // dd($dataSource);
         return $dataSource;
     }
 }

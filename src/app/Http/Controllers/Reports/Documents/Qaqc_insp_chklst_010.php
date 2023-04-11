@@ -17,11 +17,11 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 	protected $viewName = 'document-qaqc-insp-chklst';
 
 	// set default params's values 
-	protected  $qaqc_insp_tmpl = 1;
+	protected $checksheet_type_id = 1;
 	protected  $sub_project_id = 82;
 	protected  $prod_order_id = 238;
-	protected $check_sheet = 1;
-	protected  $run_option = 1;
+	protected  $check_sheet_id = 1;
+	protected  $run_history_option_id = 1;
 
 	public function getSqlStr($modeParams)
 	{
@@ -56,7 +56,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
                     JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id
                     JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
                     JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id";
-		if (isset($modeParams['qaqc_insp_tmpl'])) $sql .= "\n AND tp.id = '{{qaqc_insp_tmpl}}'";
+		if (isset($modeParams['qaqc_insp_tmpl'])) $sql .= "\n AND tp.id = '{{qaqc_insp_tmpl_id}}'";
 		$sql .= "\n JOIN qaqc_insp_chklst_run_lines l ON l.qaqc_insp_chklst_run_id = r.id
                     JOIN control_types ct ON ct.id = l.control_type_id";
 		if (isset($modeParams['prod_order']))  $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
@@ -79,7 +79,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
             
                 WHERE 1=1";
 		if (isset($modeParams['sub_project']))  $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
-		if (isset($modeParams['check_sheet'])) $sql .= " \n AND csh.id = '{{check_sheet}}'";
+		if (isset($modeParams['check_sheet'])) $sql .= " \n AND csh.id = '{{checksheet_type_id}}'";
 		$sql .= "\n ORDER BY line_name,  run_updated DESC ";
 		return $sql;
 	}
@@ -104,6 +104,10 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 	{
 		return [
 			[
+				'title' => 'Checksheet Type ',
+				'dataIndex' => 'checksheet_type_id',
+			],
+			[
 				'title' => 'Sub Project',
 				'dataIndex' => 'sub_project_id',
 			],
@@ -112,16 +116,12 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 				'dataIndex' => 'prod_order_id',
 			],
 			[
-				'title' => 'Checksheet Type ',
-				'dataIndex' => 'qaqc_insp_tmpl_id',
-			],
-			[
 				'title' => 'Checksheet',
-				'dataIndex' => 'insp_chklst_id',
+				'dataIndex' => 'check_sheet_id',
 			],
 			[
 				'title' => 'Run History Option',
-				'dataIndex' => 'run_option'
+				'dataIndex' => 'run_history_option_id',
 			]
 		];
 	}
@@ -316,16 +316,16 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 	{
 		$x = 'sub_project_id';
 		$y = 'prod_order_id';
-		$z = 'qaqc_insp_tmpl';
-		$l = 'check_sheet';
-		$m = 'run_option';
+		$z = 'check_sheet_id';
+		$l = 'checksheet_type_id';
+		$m = 'run_history_option_id';
 		$isNullModeParams = Report::isNullModeParams($modeParams);
 		if ($isNullModeParams) {
 			$modeParams[$x] = $this->sub_project_id;
 			$modeParams[$y] = $this->prod_order_id;
-			$modeParams[$z] = $this->qaqc_insp_tmpl;
-			$modeParams[$l] = $this->check_sheet;
-			$modeParams[$m] = $this->run_option;
+			$modeParams[$z] = $this->check_sheet_id;
+			$modeParams[$l] = $this->checksheet_type_id;
+			$modeParams[$m] = $this->run_history_option_id;
 		}
 		// dd($modeParams);
 		return $modeParams;
@@ -337,8 +337,8 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 		$isFormType = isset($input['form_type']);
 		if ($isFormType && $input['form_type'] === 'updateParamsReport') {
 			// check_sheet listen to prod_order
-			if (!$input['prod_order']) {
-				$input['check_sheet'] = "0";
+			if (!$input['prod_order_id']) {
+				$input['check_sheet_id'] = "0";
 				$request->replace($input);
 			}
 			(new UpdateUserSettings())($request);
