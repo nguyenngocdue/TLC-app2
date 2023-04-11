@@ -49,7 +49,7 @@ trait TraitValidation
 
 
         $rules = [];
-        $sp = SuperProps::getFor($this->type);
+        $sp = $this->superProps;
         // dump($this->type);
         $intermediate = $sp["intermediate"];
         // dump($oldStatus);
@@ -86,13 +86,15 @@ trait TraitValidation
         foreach ($this->superProps['props'] as $prop) {
             if (!in_array($prop['name'], $visibleProps)) continue;
             if (in_array($prop['name'], $listOfTableToIgnoreRequired)) continue;
+            //Validations in the Default Value Screen
             if (isset($prop['default-values']['validation'])) {
                 $commonValidations = $prop['default-values']['validation'];
                 $regexValidations = $prop['default-values']['validation_regex'] ?? "";
                 $rules[$prop['column_name']] = explode("|", $commonValidations);
                 if ($regexValidations) $rules[$prop['column_name']][] = "regex:" . $regexValidations;
-                if (in_array('_' . $prop['column_name'], $requiredProps)) $rules[$prop['column_name']][] = 'required';
             }
+            //Validation in the Required screen
+            if (in_array('_' . $prop['column_name'], $requiredProps)) $rules[$prop['column_name']][] = 'required';
         }
 
         foreach ($rules as &$rule) {
