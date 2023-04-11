@@ -23,12 +23,12 @@ trait TraitSupportSignOff
             [
                 "title" => 'Description',
                 "dataIndex" => "description",
-                'width' => "10",
+                'width' => 500,
             ],
             [
                 "dataIndex" => "response_type",
                 "align" => "center",
-                'width' => "500"
+                'width' => 350,
             ],
         ];
     }
@@ -45,7 +45,7 @@ trait TraitSupportSignOff
         $controlGroup = $value->getControlGroup->name ?? null;
         $str = '';
         if (!is_null($controlGroup)) {
-            $str .= "<tr title='Chklst Run ID: {$value->getRun->id}\nChklst Line ID: {$value->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrGroupRadioHTML($value) . "</tr>";
+            $str .= "<tr title='Run ID: {$value->getRun->id}\nRun line ID: {$value->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrGroupRadioHTML($value) . "</tr>";
             $str .= $this->createStrImage($value);
             $str .=  $this->createStrComment($value);
         } else {
@@ -94,21 +94,21 @@ trait TraitSupportSignOff
             }
         };
         $runUpdated = $this->createStrDateTime($item);
-        $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item->description . ":" . "</td>" : "";
-        $lineId =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item->id . '</td>' : "";
-        $longStr = $runDesc . $lineId . $str . $runUpdated;
+        // $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item->description . ":" . "</td>" : "";
+        // $lineId =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item->id . '</td>' : "";
+        $longStr = /*$runDesc . $lineId .*/ $str . $runUpdated;
         return $longStr;
     }
     private function createStrDateTime($item)
     {
-        $runUpdated = '<td class="border pl-2" style="width:80px" > Date: ' . str_replace(" ", "</br> Time: ", $item->updated_at) . "</td>";
+        $runUpdated = '<td class="border pl-2" style="width:50px" >' . DateTimeConcern::convertForLoading('picker_datetime', $item->updated_at) . "</td>";
         return $runUpdated;
     }
     private function createStrImage($item)
     {
         if (isset($item->insp_photos) && !$item->insp_photos->isEmpty()) {
             $td = '<td class="border" colspan=5 style="width:190px">'  . $this->createStrHtmlImage($item->insp_photos) . '</td>';
-            return "<tr  class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+            return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
         }
         return '';
     }

@@ -57,7 +57,10 @@ class RelationshipRenderer2 extends Component
             'hse_corrective_actions' => [],
         ],
         'hr_overtime_requests' => [
-            'hr_overtime_request_lines' => ['showBtnAddFromAList' => 1],
+            'hr_overtime_request_lines' => [
+                'showBtnAddFromAList' => 1,
+                'showBtnRecalculate' => 1,
+            ],
         ],
 
         'zunit_test_06s' => [
