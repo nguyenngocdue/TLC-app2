@@ -150,12 +150,6 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
         ];
     }
 
-    public function getDataForModeControl($dataSource)
-    {
-        $users = ['user_id' => array_column($this->getOTUsers(), 'name',  'user_id')];
-        $picker_date = ['picker_date' => []];
-        return array_merge($users, $picker_date);
-    }
 
     protected function getDefaultValueModeParams($modeParams, $request)
     {

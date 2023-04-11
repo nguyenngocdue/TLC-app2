@@ -26,7 +26,6 @@ abstract class Report_ParentController extends Controller
     use TraitFunctionsReport;
     abstract protected function getSqlStr($modeParams);
     abstract protected function getTableColumns($dataSource, $modeParams);
-    abstract protected function getDataForModeControl($dataSource);
 
     protected $rotate45Width = false;
     protected $groupBy = false;
@@ -108,6 +107,11 @@ abstract class Report_ParentController extends Controller
     protected function getDefaultValueModeParams($modeParams, $request)
     {
         return $modeParams;
+    }
+
+    public function getDataForModeControl($dataSource)
+    {
+        return $dataSource;
     }
 
     protected function getColorLegends()

@@ -140,12 +140,6 @@ class Prod_sequence_050 extends Report_ParentReportController
         ];
     }
 
-    public function getDataForModeControl($dataSource)
-    {
-        $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        $prodRoutings = ['prod_routing_id' => array_column($this->getDataProdRouting(), 'prod_routing_name', 'prod_routing_id')];
-        return array_merge($subProjects, $prodRoutings);
-    }
 
     protected function transformDataSource($dataSource, $modeParams)
     {

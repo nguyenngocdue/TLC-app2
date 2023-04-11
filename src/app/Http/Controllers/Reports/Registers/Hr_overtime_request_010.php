@@ -194,40 +194,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
         return [
             'title' => 'Mode',
             'dataIndex' => 'mode_option',
-            'allowClear' => true
         ];
-    }
-
-    private function getAllMonths()
-    {
-        $sql = "SELECT DISTINCT(SUBSTR(otline.ot_date, 1, 7)) AS year_months
-                    FROM hr_overtime_request_lines otline
-                    ORDER BY year_months DESC";
-        $sqlData = DB::select(DB::raw($sql));
-        return $sqlData;
-    }
-    private function getOTUsers()
-    {
-        $sql = "SELECT DISTINCT(us.id) AS user_id, us.name
-                FROM hr_overtime_request_lines otline, users us
-                WHERE us.id = otline.user_id ORDER BY user_id";
-        $sqlData = DB::select(DB::raw($sql));
-        return $sqlData;
-    }
-
-
-    public function getDataForModeControl($dataSource)
-    {
-        $workplaces = ['workplace_id' => Workplace::get()->pluck('name', 'id')->toArray()];
-        $sqlMonths = $this->getAllMonths();
-        $mon = array_column($sqlMonths, 'year_months');
-        $months = ['months' => array_combine($mon, $mon)];
-
-        $sqlUsers = $this->getOTUsers();
-        $us = array_column($sqlUsers, 'name',  'user_id');
-        $users = ['user_id' => $us];
-
-        return array_merge($workplaces, $months, $users);
     }
 
     private function wrapValueInObjectWithCellColor($percent, $value)

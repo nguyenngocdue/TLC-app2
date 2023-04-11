@@ -217,9 +217,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 		return collect($data);
 	}
 
-
-
-
 	protected function getAttachment($object_type, $object_id)
 	{
 		if (!$object_type && !$object_id) return [];

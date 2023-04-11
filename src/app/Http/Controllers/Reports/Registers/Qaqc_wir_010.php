@@ -54,13 +54,6 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
         return $sql;
     }
 
-    private function getDataWirDescription()
-    {
-        $sql = "SELECT wirdesc.id AS wir_description_id, wirdesc.name wir_description_name
-                        FROM wir_descriptions wirdesc;";
-        return $this->getDataSourceFromSqlStr($sql);
-    }
-
     protected function getTableColumns($dataSource, $modeParams)
     {
         $items = $dataSource->items();
@@ -127,28 +120,6 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
     }
 
 
-    protected function getDataProdRouting()
-    {
-        $sql = "
-            SELECT
-                prodr.id AS prod_routing_id
-                ,prodr.name AS prod_routing_name
-                FROM prod_orders prod, sub_projects sub, prod_routings prodr
-                WHERE 1 = 1
-                AND sub.id = prod.sub_project_id
-                AND prodr.id = prod.prod_routing_id
-                GROUP BY prod_routing_id,  prod_routing_name";
-        $sqlData = DB::select(DB::raw($sql));
-        // dd($sqlData);
-        return $sqlData;
-    }
-    protected function getDataForModeControl($dataSource = [])
-    {
-        $subProjects = ['sub_project_id' => Sub_project::orderBy('name')->get()->pluck('name', 'id')->toArray()];
-        $dataProdRouting = $this->getDataProdRouting();
-        $prodRoutings = ['prod_routing_id' => array_column($dataProdRouting, 'prod_routing_name', 'prod_routing_id')];
-        return array_merge($subProjects, $prodRoutings);
-    }
 
     protected function getDefaultValueModeParams($modeParams, $request)
     {

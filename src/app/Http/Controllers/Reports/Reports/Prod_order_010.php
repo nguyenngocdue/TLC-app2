@@ -102,14 +102,6 @@ class Prod_order_010 extends Report_ParentReportController
         ];
     }
 
-
-    public function getDataForModeControl($dataSource)
-    {
-        $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        $prod_orders  = ['prod_order_id' =>  ModelsProd_order::get()->pluck('name', 'id')->toArray()];
-        return array_merge($subProjects, $prod_orders);
-    }
-
     protected function getDefaultValueModeParams($modeParams, $request)
     {
         $x = 'sub_project_id';
