@@ -26,63 +26,9 @@ class RelationshipRenderer2 extends Component
 
     private $entityId, $entityType;
 
-    private $tablesHaveCreateANewForm = [
-        'qaqc_mirs' => [
-            'qaqc_ncrs' => [
-                'parent_type' => ['type' => 'formValue', 'name' => 'entityParentType',],
-                'parent_id' => ['type' => 'formValue', 'name' => 'entityParentId',],
-                'project_id' => [],
-                'sub_project_id' => [],
-                'prod_discipline_id' => [],
-            ],
-        ],
-        'qaqc_insp_chklst_run_lines' => [
-            'qaqc_ncrs' => [
-                'parent_type' => ['type' => 'formValue', 'name' => 'entityParentType',],
-                'parent_id' => ['type' => 'formValue', 'name' => 'entityParentId',],
-                'project_id' => ['type' => 'complexEloquent', 'name' => 'fromChklstLine2Project'],
-                'sub_project_id' => ['type' => 'complexEloquent', 'name' => 'fromChklstLine2SubProject'],
-                'prod_routing_id' => ['type' => 'complexEloquent', 'name' => 'fromChklstLine2Routing'],
-                'prod_order_id' => ['type' => 'complexEloquent', 'name' => 'fromChklstLine2ProdOrder'],
-                // 'prod_discipline_id' => '',
-            ],
-        ],
-    ];
-
-    private $tablesInEditableMode = [
-        'qaqc_ncrs' => [
-            'qaqc_cars' => [],
-        ],
-        'hse_incident_reports' => [
-            'hse_corrective_actions' => [],
-        ],
-        'hr_overtime_requests' => [
-            'hr_overtime_request_lines' => [
-                'showBtnAddFromAList' => 1,
-                'showBtnRecalculate' => 1,
-            ],
-        ],
-
-        'zunit_test_06s' => [
-            'prod_discipline_1s' => [],
-        ],
-
-        'zunit_test_11s' => [
-            'zunit_test_01s' => [],
-        ],
-        'zunit_test_12s' => [
-            'zunit_test_02s' => [],
-        ],
-        'zunit_test_13s' => [
-            'zunit_test_03s' => [],
-        ],
-        'zunit_test_15s' => [
-            'zunit_test_05s' => [],
-        ],
-        'zunit_test_19s' => [
-            'zunit_test_09s' => [],
-        ],
-    ];
+    private $tablesHaveCreateANewForm;
+    private $tablesInEditableMode;
+    private $tablesCallCmdBtn;
     /**
      * Create a new component instance.
      *
@@ -101,6 +47,10 @@ class RelationshipRenderer2 extends Component
         $this->entityType = Str::modelPathFrom($this->type);
         // dump($this->table01Name);
         // dump($item);
+
+        $this->tablesHaveCreateANewForm = config()->get('tablesHaveCreateANewForm');
+        $this->tablesInEditableMode = config()->get('tablesInEditableMode');
+        $this->tablesCallCmdBtn = config()->get('tablesCallCmdBtn');
     }
 
     private function isTableOrderable($row, $colName, $columns)
@@ -210,6 +160,9 @@ class RelationshipRenderer2 extends Component
         $createANewForm = isset($this->tablesHaveCreateANewForm[$this->type]);
         $createSettings = $createANewForm ? $this->tablesHaveCreateANewForm[$this->type][$tableName] : [];
 
+        $btnCmd = isset($this->tablesCallCmdBtn[$this->type]);
+        $btnCmdSettings = $btnCmd ? ($this->tablesCallCmdBtn[$this->type][$tableName] ?? []) : [];
+
         $editable = isset($this->tablesInEditableMode[$this->type]) && in_array($tableName, array_keys($this->tablesInEditableMode[$this->type]));
         $tableSettings = $editable ? $this->tablesInEditableMode[$this->type][$tableName] : [];
         $showAll = ($renderer_edit === "many_icons" || ($renderer_edit === "many_lines" && $editable));
@@ -292,6 +245,7 @@ class RelationshipRenderer2 extends Component
 
                     'createANewForm' => $createANewForm,
                     // 'createSettings' => $createSettings,
+                    'btnCmdSettings' => $btnCmdSettings,
                     'href' => $href,
                 ]);
             default:
