@@ -40,7 +40,10 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                 ,pr.id AS prod_routing_id
                 ,pr.name AS prod_routing_name
                 FROM  sub_projects sp, prod_orders po, prod_routings pr
-                    WHERE 1 = 1";
+                    WHERE 1 = 1
+                    AND sp.id = po.sub_project_id
+                    AND po.prod_routing_id = pr.id
+                    AND pr.id = po.prod_routing_id";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
         if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND pr.id = '{{prod_routing_id}}'";
         $sql .= "\n AND po.prod_routing_id = pr.id) wirPo
@@ -117,8 +120,8 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
         WHERE 1 =1 
         AND doc_type='App\\\Models\\\Wir_description'
         AND term_type='App\\\Models\\\Prod_routing'
-        AND m2m.doc_id=wd.id
-        AND term_id = " . $modeParams['prod_routing_id'];;
+        AND m2m.doc_id=wd.id \n";
+        $sql  .= !is_null($modeParams['prod_routing_id']) ? 'AND term_id =' . $modeParams["prod_routing_id"] : "";
         $sqlData = DB::select(DB::raw($sql));
         return $sqlData;
     }

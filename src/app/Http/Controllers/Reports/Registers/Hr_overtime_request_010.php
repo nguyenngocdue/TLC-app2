@@ -173,11 +173,11 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
         return [
             [
                 'title' => 'OT Workplace',
-                'dataIndex' => 'ot_workplace_id',
+                'dataIndex' => 'workplace_id',
                 'allowClear' => true,
             ],
             [
-                'dataIndex' => 'months',
+                'dataIndex' => 'month',
                 'allowClear' => true,
             ],
             [
@@ -218,7 +218,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
 
     public function getDataForModeControl($dataSource)
     {
-        $workplaces = ['ot_workplace_id' => Workplace::get()->pluck('name', 'id')->toArray()];
+        $workplaces = ['workplace_id' => Workplace::get()->pluck('name', 'id')->toArray()];
         $sqlMonths = $this->getAllMonths();
         $mon = array_column($sqlMonths, 'year_months');
         $months = ['months' => array_combine($mon, $mon)];

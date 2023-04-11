@@ -1,0 +1,22 @@
+<?php
+
+namespace App\View\Components\Reports\Modals;
+
+use App\Models\Sub_project;
+use App\View\Components\Reports\ParentTypeParamReport;
+use Illuminate\Support\Facades\DB;
+
+class ParamMonth extends ParentTypeParamReport
+{
+    protected function getDataSource()
+    {
+        $sql = "SELECT DISTINCT(SUBSTR(otline.ot_date, 1, 7)) AS year_months
+        FROM hr_overtime_request_lines otline
+        ORDER BY year_months DESC";
+        $sqlData = DB::select(DB::raw($sql));
+        $dataSource = [];
+        foreach ($sqlData as $item) $dataSource[] = ['id' => $item->year_months, 'name' => $item->year_months];
+        // dd($dataSource);
+        return $dataSource;
+    }
+}
