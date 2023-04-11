@@ -14,7 +14,7 @@ const select2FormatState = (state) =>
         ? state.text
         : $(
             `<div class="flex justify-between px-1"><span>${state.text
-            }</span><pre>   </pre><span>${makeId(state.id)}</span></div>`
+            }</span><pre>   </pre><span>${isNaN(state.id) ? state.id : makeId(state.id)}</span></div>`
         )
 const getEById = (id) => $("[id='" + id + "']")
 
@@ -424,8 +424,9 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
     if (control_type === 'dropdown') {
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
-            selectedStr = dataSource.length === 1 ? 'selected' : selected.includes(item.id) ? 'selected' : ''
-            const title = item.description || makeId(item.id)
+            selectedStr = dataSource.length === 1 ? 'selected' : dumbIncludes(selected, item.id) ? 'selected' : ''
+            // console.log(selected, item.id, selectedStr)
+            const title = item.description || (isNaN(item.id) ? item.id : makeId(item.id))
             option =
                 "<option value='" +
                 item.id +
@@ -461,7 +462,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
-            selectedStr = dataSource.length === 1 ? 'checked' : (selected.includes(itemId) ? 'checked' : '')
+            selectedStr = dataSource.length === 1 ? 'checked' : (dumbIncludes(selected, itemId) ? 'checked' : '')
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
             // console.log(item)

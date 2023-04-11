@@ -29,7 +29,7 @@ class ParentType7 extends Component
         return [
             ['id' => 1001, 'name' => 'A001'],
             ['id' => 1002, 'name' => 'A002'],
-            ['id' => 1003, 'name' => 'A003'],
+            ['id' => '1003-a', 'name' => 'A003'],
         ];
     }
 
