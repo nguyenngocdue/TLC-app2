@@ -20,6 +20,7 @@ class ParentId7 extends Component
         // private $type,
         private $readOnly = false,
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
+        private $allowClear = false,
     ) {
         if (old($name)) $this->selected = 1 * old($name);
         // dump($this->selected);
@@ -79,6 +80,7 @@ class ParentId7 extends Component
             'classList' => ClassList::DROPDOWN,
             // 'entity' => $this->type,
             'multiple' => $this->multiple ? true : false,
+            'allowClear' => $this->allowClear,
         ];
         $this->renderJS($tableName, 'modal_ot_team', $this->name);
         // dump($params);

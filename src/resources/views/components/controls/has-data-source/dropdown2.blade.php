@@ -39,6 +39,7 @@ $label = DB::table($table)->whereIn('id',$selectedDecode)->pluck('name');
         id: '{{$id}}'
         , selectedJson: '{!! $selected !!}'
         , table: "{{$table}}"
+        , allowClear: {{$allowClear ?'true':'false'}}
     }
     documentReadyDropdown2(params2)
 

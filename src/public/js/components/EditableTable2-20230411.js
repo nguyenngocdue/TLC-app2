@@ -215,6 +215,17 @@ const trashEditableTable = (params) => {
     }
 }
 
+const refreshCalculation = (tableId) => {
+    // const debugEditable = true
+    if (debugEditable) console.log(tableId)
+    const length = getAllRows(tableId).length
+    if (debugEditable) console.log(length)
+    for (let i = 0; i < length; i++) {
+        const id = makeIdFrom(tableId, 'id', i)
+        getEById(id).trigger('change', length)
+    }
+}
+
 const cloneFirstLineDown = (dataIndex, tableId, renderer) => {
     // const debugEditable = true
     if (debugEditable) console.log(tableId)

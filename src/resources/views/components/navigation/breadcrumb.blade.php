@@ -29,6 +29,10 @@
                             </li>
                         @endforeach
                   @endforeach
+                  @roleset('admin')
+                  <hr/>
+                  <li><a href="/reports" target="_blank">Report Index</a></li>
+                  @endroleset
                 </ul>
             </div>
         </div>
