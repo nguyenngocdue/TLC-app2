@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ParamCheckSheetId extends ParentIdParamReports
 {
-    protected $referData = 'prod_order';
+    protected $referData = 'prod_order_id';
     protected function getDataSource($attr_name)
     {
         $sql = "SELECT 
