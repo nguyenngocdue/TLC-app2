@@ -14,6 +14,8 @@ class ParamRunHistoryOption extends Component
         private $multiple = false,
         // private $type,
         private $readOnly = false,
+        private $allowClear = false,
+
     ) {
         if (old($name)) $this->selected = old($name);
     }
@@ -46,7 +48,7 @@ class ParamRunHistoryOption extends Component
             'table' => $tableName,
             'readOnly' => $this->readOnly,
             'classList' => ClassList::DROPDOWN,
-            // 'entity' => $this->type,
+            'allowClear' => $this->allowClear,
         ];
         $this->renderJS($tableName);
         return view('components.controls.has-data-source.dropdown2', $params);

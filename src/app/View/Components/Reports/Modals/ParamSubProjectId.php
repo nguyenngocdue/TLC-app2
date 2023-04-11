@@ -12,8 +12,8 @@ class ParamSubProjectId extends Component
         private $name,
         private $selected = "",
         private $multiple = false,
-        // private $type,
         private $readOnly = false,
+        private $allowClear = false,
     ) {
         // if (old($name)) $this->selected = old($name);
     }
@@ -50,7 +50,7 @@ class ParamSubProjectId extends Component
             'table' => $tableName,
             'readOnly' => $this->readOnly,
             'classList' => ClassList::DROPDOWN,
-            // 'entity' => $this->type,
+            'allowClear' => $this->allowClear,
         ];
         $this->renderJS($tableName);
         return view('components.controls.has-data-source.dropdown2', $params);

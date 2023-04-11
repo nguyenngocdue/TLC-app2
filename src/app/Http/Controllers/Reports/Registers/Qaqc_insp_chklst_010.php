@@ -19,7 +19,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
 
     public function getSqlStr($modeParams)
     {
-        // dd($modeParams);
         $sql = "SELECT tb.*,
         CASE
             WHEN sheet_status_combine LIKE '%No%' THEN 'Inprogress'
