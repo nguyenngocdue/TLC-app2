@@ -6,7 +6,7 @@ use App\Models\Sub_project;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
 
-class ParamSubProject extends Component
+class ParamSubProjectId extends Component
 {
     public function __construct(
         private $name,

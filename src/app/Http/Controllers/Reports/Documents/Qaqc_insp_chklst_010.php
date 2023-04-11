@@ -18,8 +18,8 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 
 	// set default params's values 
 	protected  $qaqc_insp_tmpl = 1;
-	protected  $sub_project = 82;
-	protected  $prod_order = 238;
+	protected  $sub_project_id = 82;
+	protected  $prod_order_id = 238;
 	protected $check_sheet = 1;
 	protected  $run_option = 1;
 
@@ -59,7 +59,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 		if (isset($modeParams['qaqc_insp_tmpl'])) $sql .= "\n AND tp.id = '{{qaqc_insp_tmpl}}'";
 		$sql .= "\n JOIN qaqc_insp_chklst_run_lines l ON l.qaqc_insp_chklst_run_id = r.id
                     JOIN control_types ct ON ct.id = l.control_type_id";
-		if (isset($modeParams['prod_order']))  $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order}}'";
+		if (isset($modeParams['prod_order']))  $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
 		else {
 			$sql .= "\nJOIN prod_orders po ON po.id = 0";
 		};
@@ -78,7 +78,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
                             )  AS divide_control ON l.qaqc_insp_control_group_id = divide_control.control_group_id
             
                 WHERE 1=1";
-		if (isset($modeParams['sub_project']))  $sql .= " \n AND po.sub_project_id = '{{sub_project}}' \n";
+		if (isset($modeParams['sub_project']))  $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
 		if (isset($modeParams['check_sheet'])) $sql .= " \n AND csh.id = '{{check_sheet}}'";
 		$sql .= "\n ORDER BY line_name,  run_updated DESC ";
 		return $sql;
@@ -314,15 +314,15 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 
 	protected function getDefaultValueModeParams($modeParams, $request)
 	{
-		$x = 'sub_project';
-		$y = 'prod_order';
+		$x = 'sub_project_id';
+		$y = 'prod_order_id';
 		$z = 'qaqc_insp_tmpl';
 		$l = 'check_sheet';
 		$m = 'run_option';
 		$isNullModeParams = Report::isNullModeParams($modeParams);
 		if ($isNullModeParams) {
-			$modeParams[$x] = $this->sub_project;
-			$modeParams[$y] = $this->prod_order;
+			$modeParams[$x] = $this->sub_project_id;
+			$modeParams[$y] = $this->prod_order_id;
 			$modeParams[$z] = $this->qaqc_insp_tmpl;
 			$modeParams[$l] = $this->check_sheet;
 			$modeParams[$m] = $this->run_option;
