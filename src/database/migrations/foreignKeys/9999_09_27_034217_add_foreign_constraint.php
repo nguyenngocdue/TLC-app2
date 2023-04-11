@@ -172,6 +172,9 @@ return new class extends Migration
         Schema::table('qaqc_insp_chklst_shts', function (Blueprint $table) {
             $table->foreign('qaqc_insp_chklst_id')->references('id')->on('qaqc_insp_chklsts');
         });
+        Schema::table('qaqc_insp_chklst_sht_sigs', function (Blueprint $table) {
+            $table->foreign('qaqc_insp_chklst_sht_id')->references('id')->on('qaqc_insp_chklst_shts');
+        });
         Schema::table('qaqc_insp_chklst_runs', function (Blueprint $table) {
             $table->foreign('qaqc_insp_chklst_sht_id')->references('id')->on('qaqc_insp_chklst_shts');
             $table->foreign('owner_id')->references('id')->on('users');
