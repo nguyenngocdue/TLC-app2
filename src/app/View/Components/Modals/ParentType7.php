@@ -19,6 +19,7 @@ class ParentType7 extends Component
         private $multiple = false,
         // private $type,
         private $readOnly = false,
+        private $allowClear = true,
     ) {
         if (old($name)) $this->selected = old($name);
     }
@@ -60,6 +61,7 @@ class ParentType7 extends Component
             'readOnly' => $this->readOnly,
             'classList' => ClassList::DROPDOWN,
             // 'entity' => $this->type,
+            'allowClear' => $this->allowClear,
         ];
         $this->renderJS($tableName);
         // dump($params);

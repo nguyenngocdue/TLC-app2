@@ -17,6 +17,7 @@ class Dropdown2 extends Component
         private $type = null,
         private $readOnly = false,
         private $saveOnChange = false,
+        private $allowClear = false,
     ) {
         $old = old($name);
         if ($old) {
@@ -51,6 +52,7 @@ class Dropdown2 extends Component
             'table' => $table,
             'readOnly' => $this->readOnly,
             'saveOnChange' => $this->saveOnChange,
+            'allowClear' => $this->allowClear,
         ];
         // dump($params);
         return view('components.controls.has-data-source.dropdown2', $params);

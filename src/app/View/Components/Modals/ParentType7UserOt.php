@@ -20,6 +20,7 @@ class ParentType7UserOt extends Component
         private $multiple = false,
         // private $type,
         private $readOnly = false,
+        private $allowClear = false,
     ) {
         if (old($name)) $this->selected = old($name);
     }
@@ -64,6 +65,7 @@ class ParentType7UserOt extends Component
             'readOnly' => $this->readOnly,
             'classList' => ClassList::DROPDOWN,
             // 'entity' => $this->type,
+            'allowClear' => $this->allowClear,
         ];
         $params['selected'] = "[$selectedFirst]";
         $this->renderJS($tableName, $dataSource);
