@@ -181,6 +181,7 @@ class Prod_sequence_050 extends Report_ParentReportController
     {
         $x = 'sub_project_id';
         $y = 'prod_routing_id';
+        $z = 'prod_order_id';
         $isNullModeParams = Report::isNullModeParams($modeParams);
         if ($isNullModeParams) {
             $modeParams[$x] = $this->sub_project_id;

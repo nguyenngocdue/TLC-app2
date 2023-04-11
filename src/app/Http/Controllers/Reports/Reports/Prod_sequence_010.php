@@ -16,7 +16,8 @@ class Prod_sequence_010 extends  Report_ParentReportController
     use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
     use TraitSQLDataSourceParamReport;
-    protected  $sub_project_id = 21;
+    protected  $sub_project_id = 82;
+    protected $prod_order_id = 238;
     protected  $prod_routing_id = 6;
     protected $rotate45Width = 400;
 
@@ -121,10 +122,12 @@ class Prod_sequence_010 extends  Report_ParentReportController
     {
         $x = 'sub_project_id';
         $y = 'prod_routing_id';
+        $z = 'prod_order_id';
         $isNullModeParams = Report::isNullModeParams($modeParams);
         if ($isNullModeParams) {
             $modeParams[$x] = $this->sub_project_id;
             $modeParams[$y] = $this->prod_routing_id;
+            $modeParams[$z] = $this->prod_order_id;
         }
         return $modeParams;
     }

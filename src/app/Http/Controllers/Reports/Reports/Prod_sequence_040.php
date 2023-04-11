@@ -18,7 +18,9 @@ class Prod_sequence_040 extends Report_ParentReportController
     use TraitSQLDataSourceParamReport;
 
     protected $mode = '040';
-    protected  $sub_project_id = 21;
+    protected  $sub_project_id = 82;
+    protected $prod_order_id = 238;
+    protected  $prod_routing_id = 6;
     protected $rotate45Width = 400;
     public function getSqlStr($modeParams)
     {
@@ -123,9 +125,13 @@ class Prod_sequence_040 extends Report_ParentReportController
     protected function getDefaultValueModeParams($modeParams, $request)
     {
         $x = 'sub_project_id';
+        $y = 'prod_routing_id';
+        $z = 'prod_order_id';
         $isNullModeParams = Report::isNullModeParams($modeParams);
         if ($isNullModeParams) {
             $modeParams[$x] = $this->sub_project_id;
+            $modeParams[$y] = $this->prod_routing_id;
+            $modeParams[$z] = $this->prod_order_id;
         }
         return $modeParams;
     }

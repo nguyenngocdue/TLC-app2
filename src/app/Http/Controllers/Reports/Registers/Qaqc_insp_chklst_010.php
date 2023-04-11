@@ -119,7 +119,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
             [
                 'title' => 'Sub Project',
                 'dataIndex' => 'sub_project_id',
-                // 'allowClear' => true
+                'allowClear' => true
             ],
             [
                 'title' => 'Checklist Type',

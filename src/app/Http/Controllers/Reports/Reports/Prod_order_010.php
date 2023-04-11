@@ -95,7 +95,7 @@ class Prod_order_010 extends Report_ParentReportController
                 'dataIndex' => 'sub_project_id',
             ],
             [
-                'title' => 'Production Order',
+                'title' => 'Prod Order',
                 'dataIndex' => 'prod_order_id',
                 'allowClear' => true
             ]
