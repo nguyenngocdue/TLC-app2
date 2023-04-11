@@ -31,7 +31,9 @@ class OvertimeRequestLineController extends Controller
             $ot_date = DateTimeConcern::convertForSaving('picker_date', $ot_date);
             [$begin_date_of_month, $end_date_of_month] = DateTimeConcern::getMonthBeginAndEndDate0($ot_date);
             [$begin_date_of_year, $end_date_of_year] = DateTimeConcern::getYearBeginAndEndDate0($ot_date);
-            $idCmp = is_numeric($otrl_id) ? "AND id < $otrl_id" : ""; //<< id="to be generated" 
+            // $idCmp = is_numeric($otrl_id) ? "AND id < $otrl_id" : ""; //<< id="to be generated" 
+            $idCmp = "AND concat(ot_date,id) < concat('$ot_date',$otrl_id)";
+            // dump($idCmp);
 
             $sql = "SELECT * FROM 
                 (SELECT 

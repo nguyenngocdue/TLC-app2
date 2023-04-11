@@ -24,11 +24,14 @@
 {{-- @dump($tableSettings) --}}
 @isset($tableSettings['showBtnAddFromAList'])
 @if($tableSettings['showBtnAddFromAList'])
-
-<x-renderer.button id="btnAddFromAList_{{$table01Name}}" click="toggleListingTable('{{$table01Name}}')" keydown="closeListingTable('{{$table01Name}}')" type="success" title="Add from a list">Add From A List</x-renderer.button>
-<x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />
+    <x-renderer.button id="btnAddFromAList_{{$table01Name}}" click="toggleListingTable('{{$table01Name}}')" keydown="closeListingTable('{{$table01Name}}')" type="success" title="Add from a list">Add From A List</x-renderer.button>
+    <x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />
 @endif
 @endisset
+
+@roleset('admin')
+    <x-renderer.button type="secondary" onClick="refreshCalculation('{{$table01Name}}')"><i class="fa-solid fa-eye"></i> Refresh calculation</x-renderer.button>
+@endroleset
 
 <i id="iconSpin_{{$table01Name}}" class="fa-duotone fa-spinner fa-spin text-green-500" style="display: none"></i>
 <input class="bg-gray-200" readonly name="tableNames[{{$table01Name}}]" value="{{$tableName}}" type="{{$tableDebugTextHidden}}" />
