@@ -17,7 +17,12 @@ const select2FormatState = (state) =>
             }</span><pre>   </pre><span>${isNaN(state.id) ? state.id : makeId(state.id)}</span></div>`
         )
 const getEById = (id) => $("[id='" + id + "']")
-
+const dumbIncludes2 = (array, item) => {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] == item) return true
+    }
+    return false
+}
 const getIsMultipleOfE = (id) => getEById(id)[0].hasAttribute('multiple')
 const getControlTypeOfE = (id) => getEById(id).attr('controlType')
 const getColSpanOfE = (id) => getEById(id).attr('colSpan')
@@ -141,12 +146,7 @@ const onChangeDropdown2Reduce = (listener) => {
     )
     if (debugListener) console.log(triggers, constraintsValues)
 
-    const dumbIncludes = (array, item) => {
-        for (let i = 0; i < array.length; i++) {
-            if (array[i] == item) return true
-        }
-        return false
-    }
+
 
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
@@ -164,7 +164,7 @@ const onChangeDropdown2Reduce = (listener) => {
         dataSource = dataSource.filter((row) => {
             let result = null
             if (Array.isArray(row[column])) {
-                result = dumbIncludes(row[column], value)
+                result = dumbIncludes2(row[column], value)
             } else {
                 result = row[column] == value
             }
@@ -424,8 +424,8 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
     if (control_type === 'dropdown') {
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
-            selectedStr = dataSource.length === 1 ? 'selected' : dumbIncludes(selected, item.id) ? 'selected' : ''
-            // console.log(selected, item.id, selectedStr)
+            selectedStr = dataSource.length === 1 ? 'selected' : dumbIncludes2(selected, item.id) ? 'selected' : ''
+            console.log(selected, item.id, selectedStr)
             const title = item.description || (isNaN(item.id) ? item.id : makeId(item.id))
             option =
                 "<option value='" +
@@ -462,7 +462,8 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
-            selectedStr = dataSource.length === 1 ? 'checked' : (dumbIncludes(selected, itemId) ? 'checked' : '')
+            selectedStr = dataSource.length === 1 ? 'checked' : (dumbIncludes2(selected, itemId) ? 'checked' : '')
+            // console.log(selected, itemId, selectedStr)
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
             // console.log(item)
