@@ -1,10 +1,11 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\Controls\InspChklst;
 
+use App\Models\Control_type;
 use Illuminate\View\Component;
 
-class CheckPointSignature extends Component
+class CheckPoint extends Component
 {
     /**
      * Create a new component instance.
@@ -12,9 +13,9 @@ class CheckPointSignature extends Component
      * @return void
      */
     public function __construct(
+        private $line,
         private $table01Name,
         private $rowIndex,
-        private $line,
     ) {
         //
     }
@@ -26,10 +27,14 @@ class CheckPointSignature extends Component
      */
     public function render()
     {
-        return view('components.controls.check-point-signature', [
+        // dump($this->line);
+        $controlType = Control_type::get()->pluck('name', 'id',);
+        // dump($controlType);
+        return view('components.controls.insp-chklst.check-point', [
+            'line' => $this->line,
+            'controlType' => $controlType,
             'table01Name' => $this->table01Name,
             'rowIndex' => $this->rowIndex,
-            'line' => $this->line,
         ]);
     }
 }

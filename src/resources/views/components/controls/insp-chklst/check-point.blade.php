@@ -5,10 +5,10 @@
     <div class="flex justify-center">
         @switch($line->control_type_id)
             @case (4)  {{-- 4 => "radio" --}}
-                <x-controls.check-point-option :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" />
+                <x-controls.insp_chklst.check-point-option :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" />
             @break
             @case (7) {{-- 7 => "signature" --}}
-                <x-controls.check-point-signature :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" />
+                <x-controls.insp_chklst.check-point-signature :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" />
             @break
             @default
                 Unknown control_type_id {{$line->control_type_id}} ({{$controlType[$line->control_type_id]}})

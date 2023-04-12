@@ -10,7 +10,7 @@
         <span title="Checklist #{{$chklst->id}}">{{$chklst->name}}</span>
 
         @foreach($lines as $rowIndex => $line)
-            <x-controls.check-point :line="$line" table01Name="table01" :rowIndex="$rowIndex" />
+            <x-controls.insp-chklst.check-point :line="$line" table01Name="table01" :rowIndex="$rowIndex" />
         @endforeach
     </div>
 </div>
