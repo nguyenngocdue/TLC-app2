@@ -1,7 +1,7 @@
 <x-renderer.card title="Listen Reduce">
     <div class="grid grid-cols-12">
         <div class="col-span-12">
-            Parent: <x-modals.parent-type7 name='modal_ot_team' allowClear={{true}}></x-modals.parent-type7>
+            Parent: <x-modals.parent-type7 name='modal_ot_team' allowClear={{true}} selected="1001"></x-modals.parent-type7>
         </div>
         <div class="col-span-6">
             <div class="grid grid-cols-12">

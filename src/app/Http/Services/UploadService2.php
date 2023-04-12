@@ -8,6 +8,7 @@ use App\Utils\Constant;
 use App\Utils\Support\Json\Properties;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -80,7 +81,7 @@ class UploadService2
                     $imagePath = $path . $fileName;
 
                     Storage::disk('s3')->put($imagePath, file_get_contents($file), 'public');
-                    // dump($fileName, $imagePath, $mimeType);
+                    // Log::info($fileName);
                     //Only crunch if the attachment is a photo
                     if (in_array($fileExt, $allowedExts)) {
                         $thumbnailImage = Image::make($file);
