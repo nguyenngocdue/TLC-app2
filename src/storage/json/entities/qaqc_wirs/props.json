@@ -397,5 +397,43 @@
         "save_on_change": "",
         "duplicatable": "",
         "new_line": ""
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
+        "column_type": "eloquent_prop",
+        "label": "Rejected Reasons",
+        "control": "comment",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
+        "column_name": "comment_inspector_decision",
+        "column_type": "eloquent_prop",
+        "label": "Inspector Decision",
+        "control": "comment",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
     }
 }
