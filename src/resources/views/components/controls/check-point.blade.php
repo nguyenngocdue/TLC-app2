@@ -1,14 +1,19 @@
-<x-renderer.card>
-    <p title="{{$line->name}}">{{$line->description}}</p>
-    @switch($line->control_type_id)
-        @case (4)  {{-- 4 => "radio" --}}
-            <x-controls.check-point-option lineId="{{$line->id}}" />
-        @break
-        @case (7) {{-- 7 => "signature" --}}
-            Show signature
-        @break
-        @default
-            Unknown control_type_id {{$line->control_type_id}} ({{$controlType[$line->control_type_id]}})
-        @break
-    @endswitch
+<x-renderer.card class="my-1">
+    <p title="{{$line->name}} - #{{$line->id}}">{{$line->description}}</p>
+    <div class="flex justify-center">
+        @switch($line->control_type_id)
+            @case (4)  {{-- 4 => "radio" --}}
+                <x-controls.check-point-option :line="$line" />
+            @break
+            @case (7) {{-- 7 => "signature" --}}
+                <x-controls.check-point-signature :line="$line" />
+            @break
+            @default
+                Unknown control_type_id {{$line->control_type_id}} ({{$controlType[$line->control_type_id]}})
+            @break
+        @endswitch
+    </div>
+    Attachment here
+    <br/>
+    Comment here
 </x-renderer.card>
