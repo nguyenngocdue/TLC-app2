@@ -77,7 +77,6 @@ class ViewAllInvokerController extends Controller
             );
         }
         $settingDuplicatable = $this->getSettingDuplicatable();
-
         try {
             foreach ($settingDuplicatable as $key => $value) {
                 if (!$value) {

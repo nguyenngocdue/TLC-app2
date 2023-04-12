@@ -21,7 +21,7 @@ trait TraitEntityCRUDDestroy
             return ResponseObject::responseSuccess(
                 null,
                 [],
-                "Delete document successfully!",
+                "Deleted document successfully!",
             );
         } catch (\Throwable $th) {
             return ResponseObject::responseFail(
