@@ -17,22 +17,18 @@ const actionDuplicated = (obj) => {
                 success: function (response) {
                     if (response.success) {
                         Swal.fire(
-                            'Duplicated Success',
+                            'Duplicated Successfully',
                             response.message,
                             'success'
                         )
                         setTimeout(location.reload.bind(location), 500)
                     } else {
-                        Swal.fire(
-                            'Duplicated Fail',
-                            response.message,
-                            'warning'
-                        )
+                        Swal.fire('Duplicate Fail', response.message, 'warning')
                         setTimeout(location.reload.bind(location), 1500)
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    Swal.fire('Duplicated Fail', textStatus, 'warning')
+                    Swal.fire('Duplicate Fail', textStatus, 'warning')
                     setTimeout(location.reload.bind(location), 1500)
                 },
             })
@@ -56,15 +52,15 @@ const actionDeleted = (obj) => {
                 type: 'delete',
                 url: url,
                 success: function (response) {
-                    if (response.success) {
+                    if (response.success == 'true') {
                         Swal.fire(
-                            'Deleted Success',
+                            'Deleted Successfully!',
                             response.message,
                             'success'
                         )
                         setTimeout(location.reload.bind(location), 500)
                     } else {
-                        Swal.fire('Deleted Fail', response.message, 'warning')
+                        Swal.fire('Delete Fail', response.message, 'warning')
                         setTimeout(location.reload.bind(location), 1500)
                     }
                 },
