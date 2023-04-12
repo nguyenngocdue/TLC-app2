@@ -98,7 +98,7 @@
     "in_progress": {
         "name": "in_progress",
         "title": "In Progress",
-        "color": "blue",
+        "color": "yellow",
         "color_index": "200"
     },
     "inactive": {
@@ -206,7 +206,7 @@
     "pending_verification": {
         "name": "pending_verification",
         "title": "Pending Verification",
-        "color": "emerald",
+        "color": "orange",
         "color_index": "200"
     },
     "publish": {
