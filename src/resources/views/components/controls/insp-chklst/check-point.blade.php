@@ -15,7 +15,7 @@
             @break
         @endswitch
     </div>
-    Attachment here
+    <x-renderer.attachment2 name="insp_photos" :value="$attachments"/>
     <br/>
     Comment here
 </x-renderer.card>

@@ -27,7 +27,8 @@ class Dropdown3 extends Component
     public function render()
     {
         $dataRelationShips = $this->relationships;
-        $params = $dataRelationShips['eloquentParams'] ?? $dataRelationShips['oracyParams'];
+        if (empty($dataRelationShips)) return "Relationship not found";
+        $params = $dataRelationShips['eloquentParams'] ?? ($dataRelationShips['oracyParams'] ?? "");
         $filterColumns = $dataRelationShips['filter_columns'];
         $filterValues = $dataRelationShips['filter_values'];
         if (!empty($filterColumns) && !empty($filterValues)) {
