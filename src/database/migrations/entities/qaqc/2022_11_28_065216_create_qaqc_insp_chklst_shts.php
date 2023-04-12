@@ -22,9 +22,10 @@ return new class extends Migration
             $table->unsignedBigInteger('qaqc_insp_chklst_id');
             $table->unsignedBigInteger('qaqc_insp_tmpl_sht_id');
             $table->unsignedBigInteger('owner_id');
-            $table->string('status')->nullable();
+            $table->float('progress')->nullable(); //version 2
+            $table->string('status')->nullable(); //version 2
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 
