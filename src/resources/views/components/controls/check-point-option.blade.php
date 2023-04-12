@@ -4,7 +4,7 @@
         <input 
             @checked($line->value==$id) 
             
-            name="{{$table01Name}}[qaqc_insp_control_value_id][{{$rowIndex}}]" 
+            name="{{$table01Name}}[value][{{$rowIndex}}]" 
             id="radio_{{$line->id}}_{{$id}}" 
             type="radio" 
             value="{{$id}}"

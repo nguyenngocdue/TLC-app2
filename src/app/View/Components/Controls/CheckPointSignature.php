@@ -11,8 +11,11 @@ class CheckPointSignature extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $table01Name,
+        private $rowIndex,
+        private $line,
+    ) {
         //
     }
 
@@ -23,6 +26,10 @@ class CheckPointSignature extends Component
      */
     public function render()
     {
-        return view('components.controls.check-point-signature');
+        return view('components.controls.check-point-signature', [
+            'table01Name' => $this->table01Name,
+            'rowIndex' => $this->rowIndex,
+            'line' => $this->line,
+        ]);
     }
 }

@@ -14,7 +14,7 @@
         @endforeach
     </div>
 </div>
-<input type="hidden" name="tableNames[]" value="qaqc_insp_chklst_lines">
+<input type="hidden" name="tableNames[table01]" value="qaqc_insp_chklst_lines">
 
 {{-- Those are for main body, not the table --}}
 <input type="hidden" name="name" value="{{$item->name}}">

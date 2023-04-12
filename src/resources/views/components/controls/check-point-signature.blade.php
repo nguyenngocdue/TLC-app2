@@ -1,3 +1,5 @@
-<div>
-     Simplicity is an acquired taste. - Katharine Gerould 
-</div>
+<input 
+     name="{{$table01Name}}[value][{{$rowIndex}}]" 
+     type='text' 
+     value="{{$line->value}}"
+>
