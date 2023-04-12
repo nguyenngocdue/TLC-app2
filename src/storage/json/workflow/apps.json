@@ -419,11 +419,10 @@
         "name": "qaqc_insp_chklst_sht",
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Chklst Shts",
+        "title": "Inspection Checklist Sheets",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
-        "hidden": "true",
         "icon": null
     },
     "qaqc_insp_control_group": {
@@ -484,11 +483,10 @@
         "name": "qaqc_insp_tmpl_sht",
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Tmpl Shts",
+        "title": "Inspection Template Sheets",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
-        "hidden": "true",
         "icon": null
     },
     "qaqc_insp_value": {
