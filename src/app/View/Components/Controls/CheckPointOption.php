@@ -12,7 +12,7 @@ class CheckPointOption extends Component
      * @return void
      */
     public function __construct(
-        private $lineId,
+        private $line,
     ) {
         //
     }
@@ -24,9 +24,16 @@ class CheckPointOption extends Component
      */
     public function render()
     {
+        // dump($this->line->getControlGroup);
+        $controlGroupNames = explode("|", $this->line->getControlGroup->name);
+        // dump($controlGroupNames);
+
         return view(
             'components.controls.check-point-option',
-            ['lineId' => $this->lineId]
+            [
+                'line' => $this->line,
+                'controlGroupNames' => $controlGroupNames
+            ]
         );
     }
 }

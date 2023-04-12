@@ -1,11 +1,7 @@
-<div>
-    <label for="a">
-        <input name="radio_{{$lineId}}" id="a" type="radio" value="1"> AA
+<div class="my-4">
+    @foreach($controlGroupNames as $id => $name)
+    <label for="radio_{{$line->id}}_{{$id}}" class="border bg-gray-400 p-4 rounded mx-0.5">
+        <input name="radio_{{$line->id}}" id="radio_{{$line->id}}_{{$id}}" type="radio" value="{{$id}}"> {{$name}}
     </label>
-    <label for="b">
-        <input name="radio_{{$lineId}}" id="b" type="radio" value="1"> BB
-    </label>
-    <label for="c">
-        <input name="radio_{{$lineId}}" id="c" type="radio" value="1">  CC
-    </label>
+    @endforeach
 </div>
