@@ -41,6 +41,7 @@ class RelationshipRenderer2 extends Component
         private $modelPath,
         private $noCss = false,
         private $item = null,
+        private $readOnly = false,
     ) {
         $this->table01Name = "table" . str_pad(static::$table00Count++, 2, 0, STR_PAD_LEFT);
         $this->entityId = CurrentRoute::getEntityId($this->type);
@@ -217,6 +218,7 @@ class RelationshipRenderer2 extends Component
                 }
                 // dump($itemOriginal);
                 return view('components.controls.many-line-params', [
+                    'readOnly' => $this->readOnly,
                     'table01ROName' => $this->table01Name . "RO",
                     'readOnlyColumns' => $roColumns,
                     'dataSource' => $dataSource,

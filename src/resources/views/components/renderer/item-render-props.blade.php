@@ -160,7 +160,7 @@
 
                         @case('relationship_renderer')
                         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-                        <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} :item="$item"/>
+                        <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} readOnly={{$readOnly}} :item="$item"/>
                         @break
 
                         @case('parent_type')

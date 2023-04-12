@@ -425,7 +425,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             selectedStr = dataSource.length === 1 ? 'selected' : dumbIncludes2(selected, item.id) ? 'selected' : ''
-            console.log(selected, item.id, selectedStr)
+            // console.log(selected, item.id, selectedStr)
             const title = item.description || (isNaN(item.id) ? item.id : makeId(item.id))
             option =
                 "<option value='" +
