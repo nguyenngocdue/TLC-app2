@@ -26,11 +26,22 @@ class ItemRenderCheckSheet extends Component
      */
     public function render()
     {
-        $lines = $this->item->getRuns[0]->getLines;
+        // getRun->getSheet->getChklst->prodOrder->subProject
+        $lines = $this->item->getLines;
+        // $lines = $this->item->getRuns[0]->getLines;
+        $chklst = $this->item->getChklst;
+        $prodOrder = $chklst->prodOrder;
+        $sub_project = $prodOrder->subProject;
+        $project = $sub_project->getProject;
+        // dump($chklst);
         return view(
             'components.renderer.item-render-check-sheet',
             [
+                'chklst' => $chklst,
+                'item' => $this->item,
                 'lines' => $lines,
+                'subProject' => $sub_project,
+                'project' => $project,
             ]
         );
     }

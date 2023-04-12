@@ -38,8 +38,8 @@
     "closed": {
         "name": "closed",
         "title": "Closed",
-        "color": "gray",
-        "color_index": "200"
+        "color": "neutral",
+        "color_index": "300"
     },
     "concept": {
         "name": "concept",
@@ -98,7 +98,7 @@
     "in_progress": {
         "name": "in_progress",
         "title": "In Progress",
-        "color": "blue",
+        "color": "yellow",
         "color_index": "200"
     },
     "inactive": {
@@ -206,7 +206,7 @@
     "pending_verification": {
         "name": "pending_verification",
         "title": "Pending Verification",
-        "color": "emerald",
+        "color": "orange",
         "color_index": "200"
     },
     "publish": {
@@ -292,5 +292,11 @@
         "title": "Verification Rejected",
         "color": "red",
         "color_index": "200"
+    },
+    "": {
+        "name": null,
+        "title": null,
+        "color": null,
+        "color_index": "100"
     }
 }

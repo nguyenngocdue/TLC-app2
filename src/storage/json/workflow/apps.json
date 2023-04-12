@@ -388,9 +388,20 @@
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "Inspection Checklist",
-        "nickname": "icl",
+        "nickname": "ics",
         "doc_id_format_column": null,
         "status": null,
+        "icon": null
+    },
+    "qaqc_insp_chklst_line": {
+        "name": "qaqc_insp_chklst_line",
+        "package": "project_management",
+        "sub_package": "qaqc",
+        "title": "Qaqc Insp Chklst Line",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "hidden": "true",
         "icon": null
     },
     "qaqc_insp_chklst_run": {
@@ -420,7 +431,7 @@
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "Inspection Checklist Sheets",
-        "nickname": null,
+        "nickname": "ics",
         "doc_id_format_column": null,
         "status": null,
         "icon": null

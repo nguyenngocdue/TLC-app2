@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\Helpers\Helper;
 use App\Models\Attachment;
 use App\Utils\Constant;
+use App\Utils\Support\AttachmentName;
 use App\Utils\Support\Json\Properties;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
@@ -74,7 +75,7 @@ class UploadService2
                 ]);
                 $files = $files['toBeUploaded'];
                 foreach ($files as $file) {
-                    $fileName = Helper::customizeSlugData($file, 'attachments', $attachmentRows);
+                    $fileName = AttachmentName::customizeSlugData($file, $attachmentRows);
                     $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
                     $fileNameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
                     $mimeType = $file->getMimeType();

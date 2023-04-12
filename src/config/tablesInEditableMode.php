@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'qaqc_insp_chklst_shts' => [
+        'qaqc_insp_chklst_lines' => [],
+    ],
     'qaqc_ncrs' => [
         'qaqc_cars' => [],
     ],

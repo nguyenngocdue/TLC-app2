@@ -10,6 +10,7 @@ use App\Models\Qaqc_insp_chklst_line;
 use App\Models\Qaqc_insp_chklst_run_line;
 use App\Models\Qaqc_insp_chklst_run;
 use App\Models\Qaqc_insp_chklst_sht;
+use App\Utils\Support\AttachmentName;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -135,7 +136,7 @@ class SubmitFormAndUploadFileController extends Controller
                 $attachments = [];
                 foreach ($filesUpload as $key => $files) {
                     foreach ($files as $file) {
-                        $fileName = Helper::customizeSlugData($file, 'attachments', $attachments);
+                        $fileName = AttachmentName::customizeSlugData($file, $attachments);
                         $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
                         $dt = Carbon::now('Asia/Ho_Chi_Minh');
                         $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
