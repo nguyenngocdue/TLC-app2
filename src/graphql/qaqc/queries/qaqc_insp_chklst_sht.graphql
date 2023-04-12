@@ -13,7 +13,8 @@ type Qaqc_insp_chklst_sht {
     qaqc_insp_chklst_id: ID!
     created_at: DateTime
     updated_at: DateTime
-    getRuns: [Qaqc_insp_chklst_run!]! @hasMany
+    # getRuns: [Qaqc_insp_chklst_run!]! @hasMany  # version 1
+    getLines: [Qaqc_insp_chklst_line!]! @hasMany # version 2
     getTmplSheet: Qaqc_insp_tmpl_sht! @belongsTo
 }
 

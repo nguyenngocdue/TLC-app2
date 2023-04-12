@@ -15,7 +15,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_name": {
@@ -34,7 +33,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_slug": {
@@ -53,7 +51,6 @@
         "hidden_print": "true",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_status": {
@@ -72,7 +69,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_production_name": {
@@ -91,7 +87,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_compliance_name": {
@@ -110,7 +105,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_description": {
@@ -125,11 +119,10 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "true",
+        "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_quantity": {
@@ -148,7 +141,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_started_at": {
@@ -167,7 +159,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_sub_project_id": {
@@ -186,7 +177,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_meta_type": {
@@ -201,11 +191,10 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "true",
+        "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_meta_id": {
@@ -220,11 +209,10 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "true",
+        "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_prod_routing_id": {
@@ -243,7 +231,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_created_at": {
@@ -262,7 +249,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_updated_at": {
@@ -277,11 +263,10 @@
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "true",
+        "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_prodSequences": {
@@ -300,7 +285,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": "true"
     },
     "_qaqcInspChklsts": {
@@ -319,7 +303,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": "true"
     },
     "_getMeta": {
@@ -338,7 +321,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     },
     "_owner_id": {
@@ -357,7 +339,6 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "duplicatable": "",
         "new_line": ""
     }
 }

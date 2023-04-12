@@ -8,6 +8,7 @@ use App\Models\Qaqc_insp_tmpl;
 use App\Console\Commands\Traits\CloneRunTrait;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Models\Prod_order;
+use App\Models\Qaqc_insp_chklst_line;
 use App\View\Components\Formula\All_SlugifyByName;
 use Illuminate\Console\Command;
 
@@ -69,7 +70,7 @@ class CloneTemplateFormProdOrderCommand extends Command
             $qaqcInspTmplSheets = $qaqcInspTmpl->getSheets;
             if (count($qaqcInspTmplSheets) > 0) {
                 foreach ($qaqcInspTmplSheets as $qaqcInspTmplSheet) {
-                    Qaqc_insp_chklst_sht::create([
+                    $qaqcInspChklstSht = Qaqc_insp_chklst_sht::create([
                         'name' => $qaqcInspTmplSheet->name,
                         'description' => $qaqcInspTmplSheet->description,
                         'slug' => (new All_SlugifyByName())($qaqcInspTmplSheet->slug, 'qaqc_insp_chklst_sht', ''),
@@ -77,6 +78,17 @@ class CloneTemplateFormProdOrderCommand extends Command
                         'qaqc_insp_tmpl_sht_id' => $qaqcInspTmplSheet->id,
                         'owner_id' => $ownerId,
                     ]);
+                    foreach ($qaqcInspTmplSheet->getLines as $qaqcInspTmplLine) {
+                        Qaqc_insp_chklst_line::create([
+                            'name' => $qaqcInspTmplLine->name,
+                            'description' => $qaqcInspTmplLine->description,
+                            'control_type_id' => $qaqcInspTmplLine->control_type_id,
+                            'qaqc_insp_group_id' => $qaqcInspTmplLine->qaqc_insp_group_id,
+                            'qaqc_insp_control_group_id' => $qaqcInspTmplLine->qaqc_insp_control_group_id,
+                            'qaqc_insp_chklst_sht_id' => $qaqcInspChklstSht->id,
+                            'owner_id' => $ownerId,
+                        ]);
+                    }
                 }
             }
             $this->info("Created Qaqc_insp_chklst and cloned qaqc_insp_tmpl_sht successfully");
