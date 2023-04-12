@@ -19,3 +19,4 @@
 {{-- Those are for main body, not the table --}}
 <input type="hidden" name="name" value="{{$item->name}}">
 <input type="hidden" name="qaqc_insp_chklst_id" value="{{$item->qaqc_insp_chklst_id}}">
+{{-- <input type="hidden" name="id" value="{{$item->id}}"> --}}

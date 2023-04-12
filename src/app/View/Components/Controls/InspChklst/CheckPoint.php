@@ -16,6 +16,7 @@ class CheckPoint extends Component
         private $line,
         private $table01Name,
         private $rowIndex,
+        private $debug = !false,
     ) {
         //
     }
@@ -37,6 +38,7 @@ class CheckPoint extends Component
             'table01Name' => $this->table01Name,
             'rowIndex' => $this->rowIndex,
             'attachments' => $attachments,
+            'debug' => $this->debug,
         ]);
     }
 }
