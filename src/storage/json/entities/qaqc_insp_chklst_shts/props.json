@@ -208,6 +208,25 @@
         "duplicatable": "",
         "new_line": ""
     },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "column_type": "eloquent_prop",
+        "label": "QAQC Inspection Checklist Lines",
+        "control": "relationship_renderer",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "true"
+    },
     "_getRuns": {
         "name": "_getRuns",
         "column_name": "getRuns",
@@ -226,24 +245,5 @@
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "true"
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
-        "column_type": "eloquent_prop",
-        "label": "QAQC Inspection Checklist Run Lines",
-        "control": "relationship_renderer",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "true",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "duplicatable": "",
-        "new_line": ""
     }
 }
