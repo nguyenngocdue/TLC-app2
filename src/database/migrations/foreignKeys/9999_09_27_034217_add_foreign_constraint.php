@@ -162,6 +162,18 @@ return new class extends Migration
 
             $table->foreign('owner_id')->references('id')->on('users');
             $table->foreign('inspector_id')->references('id')->on('users');
+        });  //version 1 
+        Schema::table('qaqc_insp_chklst_lines', function (Blueprint $table) {
+            // $table->foreign('qaqc_insp_chklst_id')->references('id')->on('qaqc_insp_chklsts')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('qaqc_insp_chklst_sht_id')->references('id')->on('qaqc_insp_chklst_shts'); // version 2
+            // $table->foreign('qaqc_insp_chklst_run_id')->references('id')->on('qaqc_insp_chklst_runs'); // version 1
+            $table->foreign('qaqc_insp_group_id')->references('id')->on('qaqc_insp_groups');
+            $table->foreign('qaqc_insp_control_group_id')->references('id')->on('qaqc_insp_control_groups');
+            $table->foreign('qaqc_insp_control_value_id')->references('id')->on('qaqc_insp_control_values');
+            $table->foreign('control_type_id')->references('id')->on('control_types');
+
+            $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('inspector_id')->references('id')->on('users');
         });
         Schema::table('qaqc_insp_values', function (Blueprint $table) {
             $table->foreign('qaqc_insp_control_value_id')->references('id')->on('qaqc_insp_control_values');
@@ -181,7 +193,7 @@ return new class extends Migration
         Schema::table('qaqc_insp_chklst_runs', function (Blueprint $table) {
             $table->foreign('qaqc_insp_chklst_sht_id')->references('id')->on('qaqc_insp_chklst_shts');
             $table->foreign('owner_id')->references('id')->on('users');
-        });
+        }); // version 1 
         Schema::table('qaqc_mirs', function (Blueprint $table) {
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('sub_project_id')->references('id')->on('sub_projects');

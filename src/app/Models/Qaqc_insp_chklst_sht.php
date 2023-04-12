@@ -10,7 +10,8 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     protected $table = "qaqc_insp_chklst_shts";
 
     public $eloquentParams = [
-        "getRuns" => ["hasMany", Qaqc_insp_chklst_run::class, "qaqc_insp_chklst_sht_id"],
+        "getRuns" => ["hasMany", Qaqc_insp_chklst_run::class, "qaqc_insp_chklst_sht_id"], // version 1
+        "getLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_sht_id"],
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
         "getTmplSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, 'qaqc_insp_tmpl_sht_id'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
@@ -25,7 +26,13 @@ class Qaqc_insp_chklst_sht extends ModelExtended
             ->orderBy('created_at', 'DESC')
             ->toSql();
         return $relation;
-    }
+    } // version 1
+
+    public function getLines()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    } // version 2
 
     public function getChklst()
     {

@@ -5,7 +5,7 @@
     },
     "assigned": {
         "name": "assigned",
-        "withdraw_to": "new"
+        "withdraw_to": ""
     },
     "rejected": {
         "name": "rejected",

@@ -64,6 +64,12 @@ trait TraitEntityFieldHandler2
                 $result[$column_type][] = $prop['name'];
             }
         }
+        //This is for Inspection Checklist Sheet screen
+        if ($this->superProps['type'] == 'qaqc_insp_chklst_sht') {
+            $result['editable_table'] = [
+                'table01' => '_getLines',
+            ];
+        }
         $this->dump1("getProps1", $result, __LINE__);
         return $result;
     }

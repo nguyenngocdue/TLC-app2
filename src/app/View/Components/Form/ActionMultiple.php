@@ -2,6 +2,8 @@
 
 namespace App\View\Components\Form;
 
+use App\Utils\Support\CurrentUser;
+use Illuminate\Support\Facades\App;
 use Illuminate\View\Component;
 
 class ActionMultiple extends Component
@@ -24,8 +26,11 @@ class ActionMultiple extends Component
      */
     public function render()
     {
-        return view('components.form.action-multiple', [
-            'type' => $this->type,
-        ]);
+        if (App::isTesting() || App::isLocal() || CurrentUser::isAdmin()) {
+            return view('components.form.action-multiple', [
+                'type' => $this->type,
+            ]);
+        }
+        return '';
     }
 }

@@ -388,9 +388,20 @@
         "package": "project_management",
         "sub_package": "qaqc",
         "title": "Inspection Checklist",
-        "nickname": "icl",
+        "nickname": "ics",
         "doc_id_format_column": null,
         "status": null,
+        "icon": null
+    },
+    "qaqc_insp_chklst_line": {
+        "name": "qaqc_insp_chklst_line",
+        "package": "project_management",
+        "sub_package": "qaqc",
+        "title": "Qaqc Insp Chklst Line",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "hidden": "true",
         "icon": null
     },
     "qaqc_insp_chklst_run": {
@@ -419,11 +430,10 @@
         "name": "qaqc_insp_chklst_sht",
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Chklst Shts",
-        "nickname": null,
+        "title": "Inspection Checklist Sheets",
+        "nickname": "ics",
         "doc_id_format_column": null,
         "status": null,
-        "hidden": "true",
         "icon": null
     },
     "qaqc_insp_control_group": {
@@ -484,11 +494,10 @@
         "name": "qaqc_insp_tmpl_sht",
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "QAQC Insp Tmpl Shts",
+        "title": "Inspection Template Sheets",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
-        "hidden": "true",
         "icon": null
     },
     "qaqc_insp_value": {

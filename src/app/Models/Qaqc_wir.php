@@ -25,6 +25,8 @@ class Qaqc_wir extends ModelExtended
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
         'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "comment_inspector_decision" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         // "loggable" => ['morphMany', Logger::class, 'loggers', 'loggable_type', 'loggable_id'],
     ];
 
@@ -32,6 +34,19 @@ class Qaqc_wir extends ModelExtended
         "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
+    public function comment_rejected_reason()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function comment_inspector_decision()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    
     public function getProject()
     {
         $p = $this->eloquentParams[__FUNCTION__];
