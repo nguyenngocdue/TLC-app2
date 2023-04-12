@@ -26,6 +26,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
         // "getProdOrder" => ["morphMany", Prod_order::class, "complex"],
         "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "getInspector" => ["belongsTo", User::class, "inspector_id"],
     ];
 
     public $oracyParams = [
@@ -75,6 +76,12 @@ class Qaqc_insp_chklst_line extends ModelExtended
     }
 
     public function getOwnerId()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getInspector()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
