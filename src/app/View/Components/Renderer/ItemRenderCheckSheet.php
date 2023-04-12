@@ -27,7 +27,8 @@ class ItemRenderCheckSheet extends Component
     public function render()
     {
         // getRun->getSheet->getChklst->prodOrder->subProject
-        $lines = $this->item->getRuns[0]->getLines;
+        $lines = $this->item->getLines;
+        // $lines = $this->item->getRuns[0]->getLines;
         $chklst = $this->item->getChklst;
         $prodOrder = $chklst->prodOrder;
         $sub_project = $prodOrder->subProject;

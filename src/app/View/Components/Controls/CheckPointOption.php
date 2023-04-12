@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Models\Qaqc_insp_control_value;
 use Illuminate\View\Component;
 
 class CheckPointOption extends Component
@@ -13,6 +14,8 @@ class CheckPointOption extends Component
      */
     public function __construct(
         private $line,
+        private $table01Name,
+        private $rowIndex,
     ) {
         //
     }
@@ -24,15 +27,16 @@ class CheckPointOption extends Component
      */
     public function render()
     {
-        // dump($this->line->getControlGroup);
-        $controlGroupNames = explode("|", $this->line->getControlGroup->name);
-        // dump($controlGroupNames);
+        $options = Qaqc_insp_control_value::where('qaqc_insp_control_group_id', $this->line->getControlGroup->id)->get();
+        $options = $options->pluck('name', 'id',);
 
         return view(
             'components.controls.check-point-option',
             [
                 'line' => $this->line,
-                'controlGroupNames' => $controlGroupNames
+                'options' => $options,
+                'table01Name' => $this->table01Name,
+                'rowIndex' => $this->rowIndex,
             ]
         );
     }

@@ -14,6 +14,8 @@ class CheckPoint extends Component
      */
     public function __construct(
         private $line,
+        private $table01Name,
+        private $rowIndex,
     ) {
         //
     }
@@ -31,6 +33,8 @@ class CheckPoint extends Component
         return view('components.controls.check-point', [
             'line' => $this->line,
             'controlType' => $controlType,
+            'table01Name' => $this->table01Name,
+            'rowIndex' => $this->rowIndex,
         ]);
     }
 }

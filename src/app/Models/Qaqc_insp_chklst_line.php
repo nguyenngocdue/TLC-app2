@@ -120,6 +120,9 @@ class Qaqc_insp_chklst_line extends ModelExtended
             ['dataIndex' => 'control_type_id', 'title' => "Control Type"],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'description'],
+            ['dataIndex' => 'value'],
+            ['dataIndex' => 'value_on_hold'],
+            // ['dataIndex' => 'value_comment'],
         ];
     }
 }

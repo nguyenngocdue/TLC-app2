@@ -33,15 +33,12 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
             <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
             <div class=" grid grid-cols-12 px-4">
                 @method($action === "create" ? 'POST' : 'PUT')
-                {{-- @if($type != 'qaqc_insp_chklst_shts') --}}
+                @if($type != 'qaqc_insp_chklst_shts')
                     <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
-                {{-- @else
-                    <div class="col-span-12 flex justify-center">
-                        <div class="w-1/2">
-                            <x-renderer.item-render-check-sheet id={{$id}} :item="$item"/>
-                        </div>
-                    </div>
-                @endif --}}
+                @else
+                <x-renderer.item-render-check-sheet id={{$id}} :item="$item"/>
+                    {{-- <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} /> --}}
+                @endif
             </div>
             @foreach($propsIntermediate as $key => $props)
                 @php
