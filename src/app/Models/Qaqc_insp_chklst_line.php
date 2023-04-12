@@ -113,6 +113,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
         return [
             ['dataIndex' => 'id',],
             ['dataIndex' => 'qaqc_insp_group_id', 'title' => "Group"],
+            ['dataIndex' => 'qaqc_insp_chklst_sht_id', 'title' => 'Sheet ID', 'invisible' => !true, 'value_as_parent_id' => true],
             // ['dataIndex' => 'qaqc_insp_chklst_run_id', 'title' => "Run"],
             ['dataIndex' => 'qaqc_insp_control_group_id', 'title' => "Control Group"],
             ['dataIndex' => 'qaqc_insp_control_value_id', 'title' => "Control Value"],
