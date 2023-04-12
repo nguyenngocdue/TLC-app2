@@ -47,7 +47,7 @@ class Helper
         $separateFileName = array_keys(Helper::getName_NumericalOrderMedia($fileName))[0];
         $isValueInData = Helper::isValueInData($nameImages, $extensions, $separateFileName, $extensionFile);
 
-        dd($nameImages, $dataSource, $fileName, $mediaNames, $separateFileName);
+        // dd($nameImages, $dataSource, $fileName, $mediaNames, $separateFileName);
 
         if (in_array($fileName, $mediaNames)  || $isValueInData) {
             $maxValOnDB =  Helper::getMaxNumberMediaName($nameImages, $fileName, $extensionFile);

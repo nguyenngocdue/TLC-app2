@@ -6,8 +6,10 @@ use App\Console\Commands\Traits\CloneRunTrait;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Attachment;
+use App\Models\Qaqc_insp_chklst_line;
 use App\Models\Qaqc_insp_chklst_run_line;
 use App\Models\Qaqc_insp_chklst_run;
+use App\Models\Qaqc_insp_chklst_sht;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,7 +68,7 @@ class SubmitFormAndUploadFileController extends Controller
                     'qaqc_insp_control_group_id' => $controlGroupId,
                     'owner_id' => $ownerId,
                 ]);
-                $this->uploadFile($request, $qaqcInspChklstLine->id);
+                $this->uploadFile($request, $ownerId, $qaqcInspChklstLine->id);
             } else {
                 $qaqcRunId = cache('qaqcInspChklstRunId');
                 $qaqcInspChklstLine = Qaqc_insp_chklst_run_line::create([
@@ -82,7 +84,7 @@ class SubmitFormAndUploadFileController extends Controller
                     'qaqc_insp_control_group_id' => $controlGroupId,
                     'owner_id' => $ownerId,
                 ]);
-                $this->uploadFile($request, $qaqcInspChklstLine->id);
+                $this->uploadFile($request, $ownerId, $qaqcInspChklstLine->id);
             }
 
             return response()->json('Successfully');
@@ -91,14 +93,47 @@ class SubmitFormAndUploadFileController extends Controller
             return response()->json($th);
         }
     }
-    private function uploadFile($request, $modelId, $modelName = 'App\\Models\\Qaqc_insp_chklst_run_line')
+    public function submit2AndUploadFile(Request $request)
     {
         try {
-            $nameIdFields = Helper::getDataDbByName('fields', 'name', 'id');
-            $filesUpload = $request->files;
-            $attachments = [];
-            foreach ($filesUpload as $key => $files) {
-                try {
+            $lineId = $request->id;
+            $ownerId = $request->ownerId;
+            $sheetId = $request->sheetId;
+            $progress = $request->progress;
+            $status = $request->status;
+            $controlValueId = $request->controlValueId;
+            $value = $request->value;
+            if (in_array($controlValueId, ['4', '8'])) {
+                $valueOnHold = $request->valueOnHold;
+            } else {
+                $valueOnHold = null;
+            }
+            Qaqc_insp_chklst_sht::findOrFail($sheetId)->update([
+                'progress' => $progress ?? null,
+                'status' => $status ?? null,
+            ]);
+            Qaqc_insp_chklst_line::findOrFail($lineId)
+                ->update([
+                    'value' => $value ?? null,
+                    'value_on_hold' => $valueOnHold ?? null,
+                    'qaqc_insp_control_value_id' => $controlValueId ?? null,
+                    'inspector_id' => $value != null ? $ownerId : null,
+                ]);
+            $this->uploadFile($request, $ownerId, $lineId);
+            return response()->json('Successfully');
+        } catch (\Throwable $th) {
+            Log::error($th);
+            return response()->json($th);
+        }
+    }
+    private function uploadFile($request, $ownerId, $modelId, $modelName = 'App\\Models\\Qaqc_insp_chklst_line')
+    {
+        if (sizeof($request->files) > 0) {
+            try {
+                $nameIdFields = Helper::getDataDbByName('fields', 'name', 'id');
+                $filesUpload = $request->files;
+                $attachments = [];
+                foreach ($filesUpload as $key => $files) {
                     foreach ($files as $file) {
                         $fileName = Helper::customizeSlugData($file, 'attachments', $attachments);
                         $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
@@ -115,16 +150,15 @@ class SubmitFormAndUploadFileController extends Controller
                             'extension' => $imageFileType,
                             'mime_type' => $file->getMimeType(),
                             'category' => $nameIdFields[$key],
-                            'owner_id' =>  (int)Auth::user()->id,
+                            'owner_id' =>  $ownerId,
                             'object_id' => (int)$modelId,
                             'object_type' => $modelName,
                         ]);
                     }
                     $this->createAttachment($attachments);
-                } catch (\Exception $e) {
                 }
+            } catch (\Throwable $th) {
             }
-        } catch (\Throwable $th) {
         }
     }
     private function createThumbnailGiveImage($imageFileType, $file, $fileName, $path, $imageFileTypeFrame = ['jpeg', 'png', 'jpg', 'gif', 'svg'])

@@ -11,7 +11,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
 
     public $eloquentParams = [
         "getRuns" => ["hasMany", Qaqc_insp_chklst_run::class, "qaqc_insp_chklst_sht_id"], // version 1
-        "getLines" => ["hasMany", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_sht_id"],
+        "getLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_sht_id"],
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
         "getTmplSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, 'qaqc_insp_tmpl_sht_id'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],

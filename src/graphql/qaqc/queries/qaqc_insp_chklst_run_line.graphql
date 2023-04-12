@@ -2,12 +2,14 @@ scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 extend type Query {
-    qaqc_insp_chklst_lines: [Qaqc_insp_chklst_line!]! @all @guard
-    qaqc_insp_chklst_line(id: ID @eq): Qaqc_insp_chklst_line @find @guard
+    qaqc_insp_chklst_run_lines: [Qaqc_insp_chklst_run_line!]! @all @guard
+    qaqc_insp_chklst_run_line(id: ID @eq): Qaqc_insp_chklst_run_line
+        @find
+        @guard
 }
-type Qaqc_insp_chklst_line {
+type Qaqc_insp_chklst_run_line {
     id: ID!
-    qaqc_insp_chklst_sht_id: ID!
+    qaqc_insp_chklst_run_id: ID!
     qaqc_insp_group_id: ID!
     control_type_id: ID!
     qaqc_insp_control_value_id: ID
@@ -16,9 +18,9 @@ type Qaqc_insp_chklst_line {
     description: String!
     value: String
     value_on_hold: String
-    # value_comment: String
+    value_comment: String
     getControlType: Control_type! @belongsTo
-    get: Qaqc_insp_chklst! @belongsTo
+    getRun: Qaqc_insp_chklst_run! @belongsTo
     getGroup: Qaqc_insp_group! @belongsTo
     getControlGroup: Qaqc_insp_control_group @belongsTo
     getControlValue: Qaqc_insp_control_value @belongsTo
@@ -31,44 +33,40 @@ type Qaqc_insp_chklst_line {
     updated_at: DateTime
 }
 
-input CreateQAQCInspChkLstLineInput {
-    qaqc_insp_chklst_sht_id: ID!
+input CreateQAQCInspChkLstRunLineInput {
+    id: ID!
+    qaqc_insp_chklst_run_id: ID!
     qaqc_insp_group_id: ID!
     qaqc_insp_control_value_id: ID!
     qaqc_insp_control_group_id: ID!
     name: String!
-    description: String
+    description: String!
     control_type_id: ID!
-    value: String
-    value_on_hold: String
-    owner_id: ID!
-    inspector_id: ID
+    value: String!
     created_at: DateTime
     updated_at: DateTime
 }
-input UpdateQAQCInspChkLstLineInput {
-    id: ID
-    qaqc_insp_chklst_sht_id: ID
+input UpdateQAQCInspChkLstRunLineInput {
+    id: ID!
+    qaqc_insp_chklst_run_id: ID
+    qaqc_insp_sheet_id: ID
     qaqc_insp_group_id: ID
-    qaqc_insp_control_value_id: ID
-    qaqc_insp_control_group_id: ID
+    qaqc_insp_control_value_id: ID!
+    qaqc_insp_control_group_id: ID!
     name: String
     description: String
     control_type_id: ID
     value: String
-    value_on_hold: String
-    owner_id: ID
-    inspector_id: ID
     created_at: DateTime
     updated_at: DateTime
 }
 
 extend type Mutation {
-    createQAQCInspChklstLine(
-        input: CreateQAQCInspChkLstLineInput! @spread
-    ): Qaqc_insp_chklst_line! @guard @create
-    updateQAQCChklstLine(
-        input: UpdateQAQCInspChkLstLineInput! @spread
-    ): Qaqc_insp_chklst_line @guard @update
-    deleteQAQCChklstLine(id: ID!): Qaqc_insp_chklst_line @guard @delete
+    createQAQCInspChklstRunLine(
+        input: CreateQAQCInspChkLstRunLineInput! @spread
+    ): Qaqc_insp_chklst_run_line! @guard @create
+    updateQAQCChklstRunLine(
+        input: UpdateQAQCInspChkLstRunLineInput! @spread
+    ): Qaqc_insp_chklst_run_line @guard @update
+    deleteQAQCChklstRunLine(id: ID!): Qaqc_insp_chklst_run_line @guard @delete
 }
