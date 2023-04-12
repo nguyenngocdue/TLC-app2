@@ -16,7 +16,7 @@ class CheckPoint extends Component
         private $line,
         private $table01Name,
         private $rowIndex,
-        private $debug = !false,
+        private $debug = false,
     ) {
         //
     }
