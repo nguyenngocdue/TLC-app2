@@ -15,7 +15,7 @@
             @break
         @endswitch
     </div>
-    <x-renderer.attachment2 name="table01[insp_photos]" :value="$attachments"/>
+    <x-renderer.attachment2 name="table01[insp_photos][{{$rowIndex}}]" :value="$attachments"/>
     <br/>
     Comment here
 </x-renderer.card>

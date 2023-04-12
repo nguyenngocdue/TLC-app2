@@ -89,12 +89,14 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function update(Request $request, $id)
 	{
+		// dump($this->type);
 		// dd($request->input());
 		// dump($request->files);
 		// dd();
 		// if ($request['tableNames'] == 'fakeRequest') {
 		// 	dump($request->input());
 		// }
+		$isFakeRequest = $request['tableNames'] == 'fakeRequest';
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
 			$props = $this->getProps1();
@@ -111,7 +113,8 @@ trait TraitEntityCRUDStoreUpdate2
 			$newStatus = $request['status'];
 			$rules = $this->getValidationRules($oldStatus, $newStatus, __FUNCTION__);
 			// if ($request['tableNames'] == 'fakeRequest') Log::info($rules);
-			if ($request['tableNames'] !== 'fakeRequest') {
+			// if ($request['tableNames'] !== 'fakeRequest') {
+			if (!$isFakeRequest) {
 				$this->makeUpTableFieldForRequired($request);
 			}
 			$this->makeUpAttachmentFieldForRequired($theRow, $request);
@@ -122,7 +125,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$request->validate($rules);
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
-			if ($request['tableNames'] == 'fakeRequest') {
+			if ($isFakeRequest) {
 				$newValidation = $this->createTableValidator($e, $request);
 				return redirect("")->withErrors($newValidation)->withInput();
 			}
@@ -147,7 +150,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 		$toastrResult = [];
 		$lineResult = true;
-		if ($request['tableNames'] !== 'fakeRequest') {
+		if (!$isFakeRequest) {
 			[$toastrResult, $lineResult] = $this->handleEditableTables($request, $props['editable_table'], $objectId);
 		}
 		try {
@@ -156,7 +159,7 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
 		}
-		if ($request['tableNames'] === 'fakeRequest') {
+		if ($isFakeRequest) {
 			$this->dump1("Updated line ", $theRow->id, __LINE__);
 			return $theRow->id;
 		}
