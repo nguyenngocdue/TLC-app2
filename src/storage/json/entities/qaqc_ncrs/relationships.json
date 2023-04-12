@@ -179,7 +179,7 @@
         "control": "radio",
         "filter_columns": "field_id",
         "filter_values": "118",
-        "radio_checkbox_colspan": "4"
+        "radio_checkbox_colspan": "3"
     },
     "_getOwnerId": {
         "name": "_getOwnerId",

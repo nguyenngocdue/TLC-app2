@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Attachment;
 use App\Utils\Support\Json\Relationships;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -10,154 +11,7 @@ use Exception;
 
 class Helper
 {
-    // private static function getDataFromPathModelHasKeyTableName($modelPath, $byFilters = [])
-    // {
-    //     $model = App::make($modelPath);
-    //     $nameless = ($model->nameless);
 
-    //     $insTableSource = new $modelPath();
-    //     $tableName = $insTableSource->getTable();
-    //     $table = DB::table($tableName);
-    //     // dump($tableName);
-    //     if (count($byFilters)) {
-    //         // dd($tableName, $byFilters);
-    //         return [$tableName =>  $table->where($byFilters)->get()];
-    //     }
-    //     $dataSource =  $nameless ? $table->get() : $table->orderBy('name')->get();
-    //     return [$tableName => $dataSource];
-    // }
-
-
-    // public static function getDataFromPathModel($modelPath, $byFilters = [])
-    // {
-    //     // dd($modelPath, $byFilters);
-    //     $model = App::make($modelPath);
-    //     $nameless = ($model->nameless);
-    //     $insTableSource = new $modelPath();
-    //     $tableName = $insTableSource->getTable();
-    //     $table = DB::table($tableName);
-    //     // dump($tableName);
-    //     if (count($byFilters)) {
-    //         // dd($tableName, $byFilters);
-    //         return $table->where($byFilters)->get();
-    //     }
-    //     $dataSource =  $nameless ? $table->get() : $table->orderBy('name')->get();
-    //     // die($dataSource);
-    //     return $dataSource;
-    // }
-
-
-    // public static function getDataFromPathModelDropdown($modelPath, $colName, $type)
-    // {
-    //     // dump($colName);
-    //     $model = App::make($modelPath);
-    //     $nameless = ($model->nameless);
-    //     $insTableSource = new $modelPath();
-    //     $tableName = $insTableSource->getTable();
-    //     $table = DB::table($tableName);
-
-    //     $byFilters = Helper::filterConditionsInRel($type, $colName);
-    //     if (count($byFilters)) {
-    //         // dump($tableName, $colName, $byFilters);
-    //         return $table->where($byFilters)->get();
-    //     }
-    //     $dataSource =  $nameless ? $table->get() : $table->orderBy('name')->get();
-    //     // dd($dataSource);
-    //     return $dataSource;
-    // }
-
-    // public static function filterConditionsInRel($type, $colName)
-    // {
-    //     $relationships = Relationships::getAllOf($type);
-    //     $elementRel = array_values(array_filter($relationships, fn ($item) => $item['control_name'] === $colName))[0] ?? [];
-    //     $byFilters = [];
-    //     if (isset($elementRel['filter_columns']) && $elementRel['filter_columns'] && $elementRel['filter_values']) {
-    //         $byFilters = [$elementRel['filter_columns'] => $elementRel['filter_values']];
-    //     }
-    //     return $byFilters;
-    // }
-
-    // public static function getDataSourceHasKeyTableName($modelPath, $colName, $type)
-    // {
-    //     try {
-    //         // dd($colName);
-    //         $instance = new $modelPath;
-    //         $eloquentParam = $instance->eloquentParams;
-    //         $keyNameEloquent = "";
-    //         foreach ($eloquentParam as $key => $value) {
-    //             if (in_array($colName, $value)) {
-    //                 $keyNameEloquent = $key;
-    //                 break;
-    //             }
-    //         }
-    //         $byFilters = Helper::filterConditionsInRel($type, $colName);
-    //         $termModelPath = $eloquentParam[$keyNameEloquent][1];
-    //         // dump($termModelPath);
-
-    //         return Helper::getDataFromPathModelHasKeyTableName($termModelPath, $byFilters) ?? [];
-    //     } catch (Exception $e) {
-    //         dump($colName);
-    //         dump($eloquentParam);
-    //         dd($e->getMessage());
-    //     }
-    // }
-
-
-    // public static function getTableNames($modelPath, $colName)
-    // {
-    //     $instance = new $modelPath;
-    //     $eloquentParam = $instance->eloquentParams;
-    //     $keyNameEloquent = "";
-    //     foreach ($eloquentParam as $key => $value) {
-    //         if (in_array($colName, $value)) {
-    //             $keyNameEloquent = $key;
-    //             break;
-    //         }
-    //     }
-    //     $termModelPath = $eloquentParam[$keyNameEloquent][1];
-    //     $insTableSource = new $termModelPath();
-    //     $tableNames = $insTableSource->getTable();
-    //     return $tableNames;
-    // }
-
-    // public static function getDataSource($modelPath, $colName, $type)
-    // {
-    //     try {
-    //         // dd($colName, $modelPath);
-    //         $instance = new $modelPath;
-    //         $eloquentParam = $instance->eloquentParams;
-    //         $keyNameEloquent = "";
-    //         foreach ($eloquentParam as $key => $value) {
-    //             if (in_array($colName, $value)) {
-    //                 $keyNameEloquent = $key;
-    //                 break;
-    //             }
-    //         }
-    //         $byFilters = Helper::filterConditionsInRel($type, $colName);
-    //         $termModelPath = $eloquentParam[$keyNameEloquent][1];
-    //         // dd($byFilters);
-    //         // die($colName);
-
-    //         return Helper::getDataFromPathModel($termModelPath, $byFilters) ?? [];
-    //     } catch (Exception $e) {
-    //         dump($colName);
-    //         dump($eloquentParam);
-    //         dd($e->getMessage());
-    //     }
-    // }
-
-    // public static function getDataSourceByManyToMany($modelPath, $colName, $type)
-    // {
-    //     $instance = new $modelPath;
-    //     $oracyParams = $instance->oracyParams;
-
-    //     $valEloquentByColName = isset($oracyParams[$colName]) ? $oracyParams[$colName] : [];
-    //     $termModelPath = $valEloquentByColName[1] ?? "oracyParams";
-    //     $byFilters = Helper::filterConditionsInRel($type, $colName);
-    //     return Helper::getDataFromPathModel($termModelPath, $byFilters);
-    // }
-
-    //OK
     public static function customMessageValidation($message, $labelName)
     {
         $idx = strpos($message, 'field'); // index of "field" word in message
@@ -176,20 +30,27 @@ class Helper
     public static function customizeSlugData($file, $tableName, $media)
     {
         $dataSource = json_decode(DB::table($tableName)->select('filename', 'extension')->get(), true);
-        $data = array_map(fn ($item) => array_values($item)[0], $dataSource) ?? [];
-        $dataExtension = array_map(fn ($item) => array_values($item)[1], $dataSource) ?? [];
+        $nameImages = array_map(fn ($item) => array_values($item)[0], $dataSource) ?? [];
+        $extensions = array_map(fn ($item) => array_values($item)[1], $dataSource) ?? [];
+
 
         // dd($dataSource, $data, $dataExtension);
         $fileName =  $file->getClientOriginalName();
         $extensionFile = $file->getClientOriginalExtension();
 
+        $media = Attachment::get()->toArray();
+        // dd($media);
+
+
         $mediaNames = array_map(fn ($item) => $item['filename'], $media);
 
         $separateFileName = array_keys(Helper::getName_NumericalOrderMedia($fileName))[0];
-        $isValueInData = Helper::isValueInData($data, $dataExtension, $separateFileName, $extensionFile);
+        $isValueInData = Helper::isValueInData($nameImages, $extensions, $separateFileName, $extensionFile);
+
+        dd($nameImages, $dataSource, $fileName, $mediaNames, $separateFileName);
 
         if (in_array($fileName, $mediaNames)  || $isValueInData) {
-            $maxValOnDB =  Helper::getMaxNumberMediaName($data, $fileName, $extensionFile);
+            $maxValOnDB =  Helper::getMaxNumberMediaName($nameImages, $fileName, $extensionFile);
             $max_ValOnTemp =  Helper::getMaxNumberMediaName($mediaNames, $fileName, $extensionFile);
             $fileNameNumberMax = array_values($maxValOnDB)[0] > array_values($max_ValOnTemp)[0] ? $maxValOnDB : $max_ValOnTemp;
 
@@ -209,6 +70,7 @@ class Helper
 
     private static function getName_NumericalOrderMedia($fileName)
     {
+        dd(str_ends_with("hlc-003.jpg", "."));
         $idx1 = Helper::indexCharacterInString('-', $fileName);
         $idx2 = Helper::indexCharacterInString('.', $fileName);
         $strName = (string)substr($fileName, 0, $idx1);
@@ -255,41 +117,7 @@ class Helper
         return false;
     }
 
-    // public static function removeItemsByKeysArray($originalArray, $keysArray)
-    // {
-    //     foreach ($keysArray as $value) {
-    //         unset($originalArray[$value]);
-    //     }
-    //     return $originalArray;
-    // }
 
-    // public static function getColNamesByControlAndColumnType($props, $control, $columnType)
-    // {
-    //     $props = array_filter($props, fn ($prop) => $prop['control'] === $control && $prop['column_type'] === $columnType);
-    //     $colNameByControls = array_values(array_map(fn ($item) => $item['column_name'], $props));
-    //     return $colNameByControls;
-    // }
-
-    // public static function getColNamesByControl($props, $control)
-    // {
-    //     $props = array_filter($props, fn ($prop) => $prop['control'] === $control);
-    //     $colNameByControls = array_values(array_map(fn ($item) => $item['column_name'], $props));
-    //     return $colNameByControls;
-    // }
-
-    // public static function getValColNamesValueNotEmpty($props, $controlName)
-    // {
-    //     $props = array_filter($props, fn ($prop) => $prop[$controlName] != '');
-    //     $colNameByControls = array_values(array_map(fn ($item) => $item[$controlName], $props));
-    //     return $colNameByControls;
-    // }
-
-    // public static function getColNamesValueNotEmpty($props, $controlName)
-    // {
-    //     $props = array_filter($props, fn ($prop) => $prop[$controlName] != '');
-    //     $colNameByControls = array_values(array_map(fn ($item) => $item, $props));
-    //     return $colNameByControls;
-    // }
 
     private static function getMaxName($objNames, $fileName)
     {
@@ -352,15 +180,7 @@ class Helper
         return $result;
     }
 
-    // public static function getValueByIdAndTableFromDB($arrayIdsTableNames)
-    // {
-    //     $arrayValues = [];
-    //     foreach ($arrayIdsTableNames as $tableName => $idItem) {
-    //         $data = DB::table($tableName)->where('id', $idItem)->select('name')->get();
-    //         $arrayValues[] = implode(array_column(json_decode($data, true), 'name'));
-    //     }
-    //     return $arrayValues;
-    // }
+
 
     public static function getDataDbByName($tableName, $keyCol = '', $valueCol = '')
     {
@@ -369,39 +189,6 @@ class Helper
         return $result;
     }
 
-    // public static function getDataModelByName($modelName, $id,  $keyCol = '', $valueCol = '')
-    // {
-    //     $modelPath = "App\\Models\\" . Str::singular($modelName);
-    //     $result = $modelPath::find($id)->pluck($keyCol, $valueCol)->toArray();
-    //     return $result;
-    // }
-    // public static function getAndChangeKeyItemsContainString($dataInput, $strSearch)
-    // {
-    //     $newItems = [];
-    //     foreach ($dataInput as $key => $value) {
-    //         if (str_contains($key, $strSearch)) {
-    //             $newKey = str_replace($strSearch, '', $key);
-    //             $newItems[$newKey] = $value;
-    //         }
-    //     }
-    //     return $newItems;
-    // }
-
-
-    // public  static function getItemModel($type, $id)
-    // {
-    //     try {
-    //         $modelPath = "App\\Models\\" . Str::singular($type);
-    //         return $modelPath::find($id);
-    //     } catch (Exception $e) {
-    //         dd($e->getMessage());
-    //     }
-    // }
-    // public  static function getItemModelByFn($type, $id = '', $fnName = '')
-    // {
-    //     $modelPath = "App\\Models\\" . Str::singular($type);
-    //     return $modelPath::find($id)->{$fnName}()->get();
-    // }
 
     public static function getColSpan($colName, $type)
     {

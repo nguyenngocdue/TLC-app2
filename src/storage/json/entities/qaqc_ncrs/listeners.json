@@ -5,13 +5,7 @@
         "listen_action": "date_offset",
         "triggers": "priority_id",
         "listen_to_fields": "priority_id",
-        "listen_to_attrs": "duration",
-        "attrs_to_compare": "id",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": "duration"
     },
     "_sub_project_id": {
         "name": "_sub_project_id",
@@ -19,27 +13,7 @@
         "listen_action": "reduce",
         "triggers": "project_id",
         "listen_to_fields": "sub_project_id",
-        "listen_to_attrs": "project_id",
-        "attrs_to_compare": "id",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_prod_order_id": {
-        "name": "_prod_order_id",
-        "column_name": "prod_order_id",
-        "listen_action": "reduce",
-        "triggers": "prod_routing_id",
-        "listen_to_fields": "prod_order_id",
-        "listen_to_attrs": "prod_routing_id",
-        "attrs_to_compare": "id",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": "project_id"
     },
     "_prod_discipline_1_id": {
         "name": "_prod_discipline_1_id",
@@ -47,13 +21,7 @@
         "listen_action": "reduce",
         "triggers": "prod_discipline_id",
         "listen_to_fields": "prod_discipline_1_id",
-        "listen_to_attrs": "prod_discipline_id",
-        "attrs_to_compare": "id",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": "prod_discipline_id"
     },
     "_prod_discipline_2_id": {
         "name": "_prod_discipline_2_id",
@@ -61,27 +29,7 @@
         "listen_action": "reduce",
         "triggers": "prod_discipline_1_id",
         "listen_to_fields": "prod_discipline_2_id",
-        "listen_to_attrs": "prod_discipline_1_id",
-        "attrs_to_compare": "id",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_defect_report_type": {
-        "name": "_defect_report_type",
-        "column_name": "defect_report_type",
-        "listen_action": "reduce",
-        "triggers": "defect_disposition_id,defect_severity",
-        "listen_to_fields": "defect_disposition_id,defect_severity",
-        "listen_to_attrs": "parent1_id,parent2_id",
-        "attrs_to_compare": "id",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": "prod_discipline_1_id"
     },
     "_id": {
         "name": "_id",
@@ -89,41 +37,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_getParent": {
-        "name": "_getParent",
-        "column_name": "getParent",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_doc_id": {
-        "name": "_doc_id",
-        "column_name": "doc_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_name": {
         "name": "_name",
@@ -131,13 +45,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_description": {
         "name": "_description",
@@ -145,13 +53,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_slug": {
         "name": "_slug",
@@ -159,13 +61,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_parent_type": {
         "name": "_parent_type",
@@ -173,13 +69,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_parent_id": {
         "name": "_parent_id",
@@ -187,13 +77,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_project_id": {
         "name": "_project_id",
@@ -201,13 +85,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_prod_routing_id": {
         "name": "_prod_routing_id",
@@ -215,13 +93,15 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
+    },
+    "_prod_order_id": {
+        "name": "_prod_order_id",
+        "column_name": "prod_order_id",
+        "listen_action": "reduce",
+        "triggers": "prod_routing_id",
+        "listen_to_fields": "prod_order_id",
+        "listen_to_attrs": "prod_routing_id"
     },
     "_prod_discipline_id": {
         "name": "_prod_discipline_id",
@@ -229,13 +109,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_user_team_id": {
         "name": "_user_team_id",
@@ -243,13 +117,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_inter_subcon_id": {
         "name": "_inter_subcon_id",
@@ -257,13 +125,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_priority_id": {
         "name": "_priority_id",
@@ -271,13 +133,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_closed_at": {
         "name": "_closed_at",
@@ -285,13 +141,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_defect_root_cause_id": {
         "name": "_defect_root_cause_id",
@@ -299,13 +149,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_defect_disposition_id": {
         "name": "_defect_disposition_id",
@@ -313,41 +157,15 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
-    "_defect_severity": {
-        "name": "_defect_severity",
-        "column_name": "defect_severity",
+    "_cause_analysis": {
+        "name": "_cause_analysis",
+        "column_name": "cause_analysis",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_getQaqcCars": {
-        "name": "_getQaqcCars",
-        "column_name": "getQaqcCars",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_assignee_1": {
         "name": "_assignee_1",
@@ -355,13 +173,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
@@ -369,41 +181,15 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_getParent": {
+        "name": "_getParent",
+        "column_name": "getParent",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -411,13 +197,7 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -425,12 +205,6 @@
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
+        "listen_to_attrs": ""
     }
 }

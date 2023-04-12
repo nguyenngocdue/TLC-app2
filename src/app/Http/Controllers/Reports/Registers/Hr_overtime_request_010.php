@@ -173,7 +173,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
         return [
             [
                 'title' => 'OT Workplace',
-                'dataIndex' => 'workplace_id',
+                'dataIndex' => 'ot_workplace_id',
                 'allowClear' => true,
             ],
             [

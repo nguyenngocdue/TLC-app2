@@ -99,9 +99,9 @@ trait TraitSupportSignOff
             }
         };
         $runUpdated = $this->createStrHtmlDateTime($item);
-        $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item->description . ":" . "</td>" : "";
-        $lineId =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item->id . '</td>' : "";
-        $longStr = $runDesc . $lineId . $str . $runUpdated;
+        // $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item->description . ":" . "</td>" : "";
+        // $lineId =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item->id . '</td>' : "";
+        $longStr = /*$runDesc . $lineId .*/ $str . $runUpdated;
         return $longStr;
     }
     private function createStrHtmlDateTime($item)
