@@ -38,8 +38,8 @@
     "closed": {
         "name": "closed",
         "title": "Closed",
-        "color": "gray",
-        "color_index": "200"
+        "color": "neutral",
+        "color_index": "300"
     },
     "concept": {
         "name": "concept",
@@ -292,5 +292,11 @@
         "title": "Verification Rejected",
         "color": "red",
         "color_index": "200"
+    },
+    "": {
+        "name": null,
+        "title": null,
+        "color": null,
+        "color_index": "100"
     }
 }
