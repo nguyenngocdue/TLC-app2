@@ -14,7 +14,7 @@ class AdminSetRoleSetController extends Controller
 {
     public function getType()
     {
-        return "permission";
+        return "role_set";
     }
     /**
      * Display a listing of the resource.

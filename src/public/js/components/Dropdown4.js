@@ -5,7 +5,7 @@ const showErrorMessage = (response) => {
     console.log(response)
 }
 //Similar to includes, this will be checking both numbers and strings
-const dumbIncludes = (item, array) => {
+const dumbIncludes4 = (item, array) => {
     if (Array.isArray(array)) {
         for (let i = 0; i < array.length; i++) {
             if (array[i] == item) return true
@@ -78,7 +78,7 @@ const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
         dataSource = dataSource.filter((row) => {
             let result = null
             if (Array.isArray(row[column])) {
-                result = dumbIncludes(value, row[column])
+                result = dumbIncludes4(value, row[column])
             } else {
                 result = row[column] == value
             }
@@ -455,7 +455,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
 
     for (let i = 0; i < dataSource.length; i++) {
         let item = dataSource[i]
-        selectedStr = (dataSource.length === 1) ? 'selected' : (dumbIncludes(item.id, selected) ? "selected" : "")
+        selectedStr = (dataSource.length === 1) ? 'selected' : (dumbIncludes4(item.id, selected) ? "selected" : "")
         // console.log("During making option list", item.id, item.name, "================================", selectedStr)
         const title = item.description || makeId(item.id)
         option = "<option value='" + item.id + "' title='" + title + "' " + selectedStr + " >"

@@ -84,7 +84,7 @@ class ViewAllInvokerController extends Controller
                     $theLine[substr($key, 1)] = null;
                 }
             };
-            $theLine = $this->applyFormula($theLine, 'create');
+            $theLine = $this->applyFormula($theLine, 'store');
             $this->typeModel::create($theLine);
             return ResponseObject::responseSuccess(
                 null,
@@ -116,7 +116,7 @@ class ViewAllInvokerController extends Controller
                             $theLine[substr($key, 1)] = null;
                         }
                     };
-                    $theLine = $this->applyFormula($theLine, 'create');
+                    $theLine = $this->applyFormula($theLine, 'store');
                     $this->typeModel::create($theLine);
                     $arrDuplicate[] = $id;
                 } catch (\Throwable $th) {

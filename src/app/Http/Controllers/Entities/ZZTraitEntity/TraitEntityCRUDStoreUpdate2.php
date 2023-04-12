@@ -56,7 +56,6 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		try {
 			$fields = $this->handleFields($request, __FUNCTION__);
-			// dd($fields);
 			$theRow = $this->data::create($fields);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
@@ -84,7 +83,7 @@ trait TraitEntityCRUDStoreUpdate2
 		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Created New Document"
-		$this->eventCreatedNotificationAndMail($fields, $theRow->id, $newStatus, $this->type, $this->data);
+		$this->eventCreatedNotificationAndMail($theRow->getAttributes(), $theRow->id, $newStatus, $this->type, $this->data);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
@@ -131,9 +130,10 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		try {
 			$fields = $this->handleFields($request, __FUNCTION__);
-			$fieldForEmailHandler = $this->addEntityType($fields, 'status', $newStatus);
-			$previousValue = $this->getPreviousValue($fieldForEmailHandler, $theRow);
+			$fieldsHandle = $this->addEntityType($fields, 'status', $newStatus);
+			$previousValue = $this->getPreviousValue($fieldsHandle, $theRow);
 			$theRow->updateWithOptimisticLocking($fields);
+			$fieldForEmailHandler = $this->addEntityType($theRow->getAttributes(), 'status', $newStatus);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
 			if ($uploadedIds) {

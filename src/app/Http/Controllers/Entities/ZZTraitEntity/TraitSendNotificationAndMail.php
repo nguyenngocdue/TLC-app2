@@ -6,11 +6,13 @@ use App\Events\CreateNewDocumentEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Utils\Support\JsonControls;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Database\Eloquent\Collection;
 
 trait TraitSendNotificationAndMail
 {
     private function eventCreatedNotificationAndMail($fields, $id, $status, $type, $classType)
     {
+        // dd($fields);
         if ($status) {
             $fields = $this->addEntityType($fields, 'id', $id);
             $fields = $this->addEntityType($fields, 'status', $status);
@@ -42,7 +44,11 @@ trait TraitSendNotificationAndMail
         foreach ($fields as $key => $value) {
             if ($key !== 'tableNames') {
                 if (isset($item->$key)) {
-                    $previousValue[$key] = $item->$key;
+                    if (($item->$key) instanceof Collection) {
+                        unset($previousValue[$key]);
+                    } else {
+                        $previousValue[$key] = $item->$key;
+                    }
                 } else {
                     if (in_array($key, JsonControls::getMonitors())) {
                         $fn = str_replace('()', '', $key);

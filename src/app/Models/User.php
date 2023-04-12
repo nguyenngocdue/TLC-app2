@@ -200,6 +200,11 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public static function getAllInspector()
+    {
+        $disciplineInspector = 23;
+        return self::where('discipline', $disciplineInspector)->where('resigned', 0)->get();
+    }
     public function getManyIconParams()
     {
         return [

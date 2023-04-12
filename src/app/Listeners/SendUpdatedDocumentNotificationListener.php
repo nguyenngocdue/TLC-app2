@@ -154,6 +154,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
     }
     private function insertLogger($previousValue, $currentValue, $userId, $classType)
     {
+        // dd($currentValue);
         if ($previousValue['status'] !== $currentValue['status']) {
             Logger::create([
                 'loggable_type' => $classType,

@@ -6,10 +6,12 @@ use App\Events\CreateNewDocumentEvent;
 use App\Events\EntityCreatedEvent;
 use App\Events\EntityUpdatedEvent;
 use App\Events\SendEmailItemCreated;
+use App\Events\SendMailForInspector;
 use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdateStatusChklstRunEvent;
 use App\Listeners\SendCreateNewDocumentNotificationListener;
 use App\Listeners\SendEmailListener;
+use App\Listeners\SendMailForInspectorListener;
 use App\Listeners\SendUpdatedDocumentNotificationListener;
 use App\Listeners\ShouldUpdateFieldsListener;
 use App\Listeners\UpdateStatusChklstRunListener;
@@ -32,6 +34,7 @@ class EventServiceProvider extends ServiceProvider
         UpdateStatusChklstRunEvent::class => [UpdateStatusChklstRunListener::class],
         UpdatedDocumentEvent::class => [SendUpdatedDocumentNotificationListener::class],
         CreateNewDocumentEvent::class => [SendCreateNewDocumentNotificationListener::class],
+        SendMailForInspector::class => [SendMailForInspectorListener::class],
     ];
 
     /**

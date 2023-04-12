@@ -31,7 +31,7 @@ class ParentId7 extends Component
         return [
             ['id' => 2001, 'name' => 'B001', $attr_name => 1001],
             ['id' => 2002, 'name' => 'B002', $attr_name => 1002],
-            ['id' => 2003, 'name' => 'B003', $attr_name => "a1003"],
+            ['id' => 2003, 'name' => 'B003', $attr_name => '1003-a'],
         ];
         // return $this->getAllIdMorphMany($attr_name);
     }

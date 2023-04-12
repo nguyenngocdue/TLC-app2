@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\SignOff;
 
+use App\Events\SendMailForInspector;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SignOff\Trait\TraitSupportSignOff;
 use App\Models\Qaqc_insp_chklst_run_line;
@@ -37,5 +38,14 @@ class SignOffController extends Controller
             Toastr::warning($th, 'Update Signature Failed');
             //throw $th;
         }
+    }
+    public function sendMail(Request $request)
+    {
+        $id = $request->input('inspector_id');
+        $fields = $request->except('inspector_id', '_token');
+        if ($id) {
+            event(new SendMailForInspector($fields, $id));
+        }
+        return redirect()->back();
     }
 }

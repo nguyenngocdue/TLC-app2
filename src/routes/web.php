@@ -159,8 +159,9 @@ Route::group([
     'middleware' => ['auth']
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/qaqc_insp_chklst_sht/sign_off/{id}', [SignOffController::class, 'index']);
-    Route::put('/qaqc_insp_chklst_sht/sign_off/update/{id}', [SignOffController::class, 'update'])->name('sign_off.update');
+    Route::get('/qaqc_insp_chklst_sht/sign_off/{id}', [SignOffController::class, 'index'])->name('qaqc_insp_chklst_sht.sign_off.index');
+    Route::post('/qaqc_insp_chklst_sht/sign_off/sendMail', [SignOffController::class, 'sendMail'])->name('qaqc_insp_chklst_sht.sign_off.sendMail');
+    Route::put('/qaqc_insp_chklst_sht/sign_off/update/{id}', [SignOffController::class, 'update'])->name('qaqc_insp_chklst_sht.sign_off.update');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboards.index');
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
