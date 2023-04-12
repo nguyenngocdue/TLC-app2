@@ -166,5 +166,21 @@
         "assigned": "",
         "rejected": "",
         "closed": ""
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "closed": ""
+    },
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
+        "column_name": "comment_inspector_decision",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "closed": ""
     }
 }
