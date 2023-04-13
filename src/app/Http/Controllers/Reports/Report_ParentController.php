@@ -72,7 +72,8 @@ abstract class Report_ParentController extends Controller
 
     protected function transformDataSource($dataSource, $modeParams)
     {
-        return $dataSource;
+
+        return $this->enrichDataSource($dataSource, $modeParams);
     }
 
     protected function getSheets($dataSource) // Override document report
@@ -215,7 +216,7 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->modifyDataToExportCSV($dataSource, $modeParams);
         [$columnKeys, $columnNames] = $this->makeColumns($dataSource, $modeParams);
         $rows = $this->makeRowsFollowColumns($dataSource, $columnKeys);
-        $fileName = $entity . $this->mode . '.csv';
+        $fileName = $entity . '_' . date('d:m:Y H:i:s') . '.csv';
         $headers = array(
             "Content-type"        => "text/csv",
             "Content-Disposition" => "attachment; filename=$fileName",

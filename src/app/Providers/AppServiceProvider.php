@@ -4,11 +4,11 @@ namespace App\Providers;
 
 use App\Console\Commands\CreateControllerEntity\CreateControllerEntityCreator;
 use App\Console\Commands\CreateTableRelationship\MigrationRelationShipCreator;
-use Illuminate\Support\Facades\App;
+use App\Services\Comment\CommentService;
+use App\Services\Comment\CommentServiceInterface;
+use App\Repositories\Comment\CommentRepository;
+use App\Repositories\Comment\CommentRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,7 +19,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // singleton Services
+        $this->app->singleton(CommentServiceInterface::class, CommentService::class);
+
+
+        // singleton Repositories
+        $this->app->singleton(CommentRepositoryInterface::class, CommentRepository::class);
     }
 
     /**
