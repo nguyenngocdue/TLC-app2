@@ -18,6 +18,7 @@ class Image extends Component
         private $h = null,
         private $title = null,
         private $text = null,
+        private $class = "",
     ) {
         //
     }
@@ -32,7 +33,7 @@ class Image extends Component
         $w = $this->w ? "width='$this->w'" : "";
         $h = $this->h ? "height='$this->h'" : "";
         $title = $this->title ? "title='$this->title'" : "";
-        $img = "<img $title $w $h class='rounded-lg object-cover border mr-1' src='$this->src'/>";
+        $img = "<img $title $w $h class='$this->class object-cover border mr-1' src='$this->src'/>";
         if ($this->href) $img = "<a class='' target='_blank' href='$this->href'>$img</a>";
         return $img;
     }
