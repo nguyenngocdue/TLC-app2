@@ -66,7 +66,8 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
                     AND otline.user_id = us.id
                     AND otline.hr_overtime_request_id = otr.id
                     AND uscate.id = us.category
-                    AND  otline.status LIKE 'approved' ";
+                    AND otline.hr_overtime_request_id = otr.id
+                    AND  otr.status LIKE 'approved' ";
         // $sql .= "\n AND (
         //                 -- (B)
         //                 -- From the previous month (including December of the previous year) - the last 5 days of the previous month.
