@@ -48,8 +48,6 @@ class Prod_sequence_010 extends  Report_ParentReportController
         return $sql;
     }
 
-
-
     public function getTableColumns($dataSource, $modeParams)
     {
         // dd($dataSource);
