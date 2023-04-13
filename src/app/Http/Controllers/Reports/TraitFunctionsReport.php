@@ -17,6 +17,7 @@ trait TraitFunctionsReport
     protected function makeColumns($dataSource, $modeParams)
     {
         $columns = $this->getTableColumns($dataSource, $modeParams);
+        // dd($dataSource);
         $columnKeys = array_column($columns, 'dataIndex');
         $columnNames =  array_map(function ($item) {
             if (!isset($item['title'])) return Report::makeTitle($item['dataIndex']);
@@ -26,11 +27,15 @@ trait TraitFunctionsReport
     }
     protected function makeRowsFollowColumns($dataSource, $columnKeys)
     {
-        $rows = [];
-        $columnKeys = array_combine($columnKeys, $columnKeys);
-        foreach ($dataSource as $key => $value) {
-            $rows[] = array_intersect_key((array)$value, $columnKeys);
+        try {
+            $rows = [];
+            $columnKeys = array_combine($columnKeys, $columnKeys);
+            foreach ($dataSource as $key => $value) {
+                $rows[] = array_intersect_key((array)$value, $columnKeys);
+            }
+            return $rows;
+        } catch (\PDOException $e) {
+            $e->getMessage();
         }
-        return $rows;
     }
 }

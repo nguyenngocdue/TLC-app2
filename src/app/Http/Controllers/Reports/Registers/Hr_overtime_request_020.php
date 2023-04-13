@@ -54,11 +54,11 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
             AND otline.ot_date <= '$toDate'";
         }
         $sql .= "\n AND otline.sub_project_id = sp.id
-                    AND otline.status LIKE 'approved'
-                    AND us.id = otline.user_id
                     AND otr.id = otline.hr_overtime_request_id
+                    AND  otr.status LIKE 'approved'
+                    AND us.id = otline.user_id
                         ) AS tb1";
-        if (isset($modeParams['months'])) $sql .= "\n WHERE tb1.years_month  = '{{months}}'";
+        if (isset($modeParams['month'])) $sql .= "\n WHERE tb1.years_month  = '{{month}}'";
         $sql .= "\n ORDER BY name_render, employee_id, ot_date DESC";
         return $sql;
     }
@@ -168,7 +168,7 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
     protected function forwardToMode($request, $modeParams)
     {
         $input = $request->input();
-        if (isset($input['months']) || isset($input['user_id'])) {
+        if (isset($input['month']) || isset($input['user_id'])) {
             $typeReport = Str::ucfirst(CurrentPathInfo::getTypeReport($request));
             $entityReport = CurrentPathInfo::getEntityReport($request);
             // dd($typeReport, $entityReport);

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 use App\Http\Controllers\Entities\EntityCRUDController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\FileBag;
 
 trait TraitEntityEditableTable
 {
@@ -20,6 +20,23 @@ trait TraitEntityEditableTable
             }
         }
         return $result;
+    }
+
+    private function distributeFileBag(Request $request, $rowIndex, Request $fakeRequest)
+    {
+        $fileBag = $request->files->get('table01');
+        $fileBag = $fileBag ? $fileBag : [];
+        $array = [];
+        foreach ($fileBag as $column_name => $file) {
+            // dump($file);
+            // dump($rowIndex);
+            if (isset($file[$rowIndex])) {
+                $array[$column_name] = $file[$rowIndex];
+            }
+        }
+        // dump($array);
+        if (!empty($array)) $fakeRequest->files = new FileBag($array);
+        // dump($fakeRequest->files);
     }
 
     private function handleEditableTables(Request $request, $props, $parentId)
@@ -45,18 +62,22 @@ trait TraitEntityEditableTable
             // session()->flush();
             session()->put('editableTables_index', $table01Names);
 
-            foreach ($dataSource as $line) {
+            foreach ($dataSource as $rowIndex => $line) {
                 $fakeRequest = new Request();
                 if ($tableName === 'comments') $line['commentable_id'] = $parentId;
                 $line['tableNames'] = "fakeRequest";
+                // $line['rowIndex'] = $rowIndex;
                 $line['idForScroll'] = substr($props[$table01Name], 1); //remove first "_"
                 // dump($line);
                 $fakeRequest->merge($line);
+                $this->distributeFileBag($request, $rowIndex, $fakeRequest);
 
                 $controller = new EntityCRUDController();
                 $controller->init($tableName);
+                // dump($line);
                 if (isset($line['id']) && !is_null($line['id'])) {
                     if (isset($line['DESTROY_THIS_LINE']) && ('true' == $line["DESTROY_THIS_LINE"])) {
+                        // dump("Delete");
                         $destroySuccess = $controller->destroy($line['id']);
                         // $destroySuccess = $controller->destroy($fakeRequest, $line['id']);
                         //Not necessary because it will be deleted when mapping with the next lines
@@ -68,6 +89,7 @@ trait TraitEntityEditableTable
                             $lineResult[$table01Name] = false;
                         }
                     } else {
+                        // dump("Update");
                         $updatedId = $controller->update($fakeRequest, $line['id']);
                         if (is_numeric($updatedId)) {
                             session()->push('editableTablesTransactions.' . $table01Name, ["result" => 1, "msg" => "Updated", 'id' => 1 * $line['id'],]);
@@ -81,6 +103,7 @@ trait TraitEntityEditableTable
                     if (isset($line['DESTROY_THIS_LINE']) && $line["DESTROY_THIS_LINE"] == true) {
                         //Ignore this case
                     } else {
+                        // dump("Insert");
                         $insertedId = $controller->store($fakeRequest);
                         //Incase the storing failed, it will return a HTML string of 302
                         if (is_numeric($insertedId)) {

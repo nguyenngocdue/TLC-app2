@@ -1,5 +1,5 @@
 <div class="col-span-12 flex justify-center">
-    <div class="w-1/2">
+    <div class="w-full md:w-3/4 xl:w-1/2">
         <x-renderer.heading level=5>
             <span title="Checklist Sheet #{{$item->id}}">{{$item->description}}</span>
         </x-renderer.heading>
@@ -19,3 +19,6 @@
 {{-- Those are for main body, not the table --}}
 <input type="hidden" name="name" value="{{$item->name}}">
 <input type="hidden" name="qaqc_insp_chklst_id" value="{{$item->qaqc_insp_chklst_id}}">
+{{-- status id is for change status submit button --}}
+<input type="hidden" name="status" id='status' value="{{$status}}"> 
+{{-- <input type="hidden" name="id" value="{{$item->id}}"> --}}

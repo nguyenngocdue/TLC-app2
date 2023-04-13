@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Controls\InspChklst;
 
 use Illuminate\View\Component;
 
@@ -34,14 +34,16 @@ class ItemRenderCheckSheet extends Component
         $sub_project = $prodOrder->subProject;
         $project = $sub_project->getProject;
         // dump($chklst);
+        $status = $this->item->status ? $this->item->status : 'in_progress';
         return view(
-            'components.renderer.item-render-check-sheet',
+            'components.controls.insp-chklst.item-render-check-sheet',
             [
                 'chklst' => $chklst,
                 'item' => $this->item,
                 'lines' => $lines,
                 'subProject' => $sub_project,
                 'project' => $project,
+                'status' => $status,
             ]
         );
     }
