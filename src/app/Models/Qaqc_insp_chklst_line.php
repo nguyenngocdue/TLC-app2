@@ -19,7 +19,6 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],
         "getControlValue" => ["belongsTo", Qaqc_insp_control_value::class, "qaqc_insp_control_value_id"],
         "getControlType" => ["belongsTo", Control_type::class, "control_type_id"],
-        "insp_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         // "getProject" => ["morphMany", Project::class, "complex"],
         // "getSubProject" => ["morphMany", Sub_Project::class, "complex"],
         // "getProdRouting" => ["morphMany", Prod_routing::class, "complex"],
@@ -27,6 +26,8 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
         "getInspector" => ["belongsTo", User::class, "inspector_id"],
+        "insp_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "insp_comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
 
     public $oracyParams = [
@@ -37,6 +38,13 @@ class Qaqc_insp_chklst_line extends ModelExtended
     ];
 
     public function insp_photos()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
+    public function insp_comments()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);

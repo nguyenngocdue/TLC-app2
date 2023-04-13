@@ -1,6 +1,6 @@
 <div class="flex flex-col container mx-aut1o w-full">
     @if(sizeof($attachments) ==0)
-    <x-renderer.emptiness p="2" class="border" message="There is no item to be found." />
+    {{-- <x-renderer.emptiness p="2" class="border" message="There is no item to be found." /> --}}
     @else
     <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1">
         @foreach($attachments as $attachment)
@@ -53,7 +53,7 @@
 @endif
 @if(!$readOnly)
     @if($showUploadFile)
-    <div class="flex mt-2 custom-file-button">
+    <div class="flex mt-2 custom-file-button no-print1">
         <label for="{{$name}}_browse" class="{{$btnClass}} w-72 border cursor-pointer p-2 bg-blue-50 font-normal text-sm" title="{{$messageTitle}}">{!! $message !!}</label>
         <input name="{{$name}}[toBeUploaded][]" id="{{$name}}_browse" multiple type="file" accept="{{$acceptAttachment}}" class="hidden1 w-1/2 h-9 text-sm text-gray-900 p-2.5 rounded-lg bg-white border border-white cursor-pointer dark:text-gray-300 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
     </div>

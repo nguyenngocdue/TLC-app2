@@ -6,7 +6,7 @@
 @endonce
 
 @if($status && !($action === 'create'))
-    <div class="w-full mb-4 p-2 bg-white rounded-lg dark:bg-gray-800 grid grid-cols-12 gap-2">
+    <div class="w-full mb-4 p-2 bg-white rounded-lg dark:bg-gray-800 grid grid-cols-12 gap-2 no-print">
         <div class="col-span-12 md:col-span-5 lg:col-span-3">
             <x-renderer.card title="Test Status" py="1" >
                 <div class="mb-1">

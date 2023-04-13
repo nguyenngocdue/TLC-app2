@@ -97,6 +97,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getNcrs": {
+        "name": "_getNcrs",
+        "relationship": "morphMany",
+        "control_name": "getNcrs",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_insp_photos": {
         "name": "_insp_photos",
         "relationship": "morphMany",
@@ -111,16 +125,16 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getNcrs": {
-        "name": "_getNcrs",
+    "_insp_comments": {
+        "name": "_insp_comments",
         "relationship": "morphMany",
-        "control_name": "getNcrs",
+        "control_name": "insp_comments",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
-        "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
-        "control": "relationship_renderer",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "comment",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
