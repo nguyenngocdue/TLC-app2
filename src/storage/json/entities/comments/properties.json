@@ -115,5 +115,14 @@
         "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
+    },
+    "_insp_comments": {
+        "name": "_insp_comments",
+        "field_id": "13",
+        "field_name": "insp_comments",
+        "allowed_change_owner": "",
+        "allowed_attachment": "",
+        "allowed_delete": "",
+        "force_comment_once": ""
     }
 }
