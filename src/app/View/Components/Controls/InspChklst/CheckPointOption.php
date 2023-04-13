@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\Controls\InspChklst;
 
 use App\Models\Qaqc_insp_control_value;
 use Illuminate\View\Component;
@@ -31,7 +31,7 @@ class CheckPointOption extends Component
         $options = $options->pluck('name', 'id',);
 
         return view(
-            'components.controls.check-point-option',
+            'components.controls.insp-chklst.check-point-option',
             [
                 'line' => $this->line,
                 'options' => $options,
