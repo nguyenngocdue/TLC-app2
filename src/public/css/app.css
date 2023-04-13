@@ -1009,6 +1009,15 @@ video {
 .h-full {
   height: 100%;
 }
+.h-60 {
+  height: 15rem;
+}
+.h-36 {
+  height: 9rem;
+}
+.h-32 {
+  height: 8rem;
+}
 .max-h-0 {
   max-height: 0px;
 }
