@@ -48,6 +48,7 @@ class CommentGroup2a extends Component
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $counter = static::$counter;
         $index = 0;
+        $currentUser = CurrentUser::get();
         $params = [];
         foreach ($comments as $comment) {
             $user = User::find($comment->owner_id);
@@ -63,11 +64,12 @@ class CommentGroup2a extends Component
             $item['commentable_type']['value'] = $commentableType;
             $item['commentable_id']['value'] = $commentableId;
             $item['category']['value'] = $category_id;
+            $item['mine'] = $comment->owner_id == $currentUser->id;
             $params[] = $item;
             $index++;
         }
         if (!$this->readOnly) {
-            $user = CurrentUser::get();
+            $user = $currentUser;
             $item = $this->getAnEmptyLine($counter, $index);
             $item['id']['value'] = null;
             $item['position_rendered']['value'] = $user->position_rendered;
@@ -80,6 +82,7 @@ class CommentGroup2a extends Component
             $item['commentable_type']['value'] = $commentableType;
             $item['commentable_id']['value'] = $commentableId;
             $item['category']['value'] = $category_id;
+            $item['mine'] = true;
             $params[] = $item;
         }
         // dump($params);

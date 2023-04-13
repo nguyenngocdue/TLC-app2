@@ -34,8 +34,8 @@ class Card extends Component
             $description = $data['attributes']["description"] ?? "";
             $class = $this->class;
             $result = "<fieldset id='$this->idHtml' component='renderer/card' 
-                class='$class break-normal min-w-0 px-{$this->px} py-{$this->py}  dark:bg-gray-800 dark:border-gray-600 rounded-lg shadow-xs'>";
-            if ($title) $result .= "<legend><h4 class='px-2 font-semibold text-gray-600 dark:text-gray-300'>$title</h4></legend>";
+                class='$class break-normal min-w-0 px-{$this->px} py-{$this->py} dark:bg-gray-800 dark:border-gray-600 rounded-lg shadow-xs'>";
+            if ($title) $result .= "<legend><h4 class='px-2 font-medium text-gray-600 dark:text-gray-300'>$title</h4></legend>";
             if ($description) $result .= $description;
             $result .= "<p class='text-gray-600 dark:text-gray-300 break-keep'>";
             $result .= $items;
