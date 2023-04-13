@@ -73,7 +73,8 @@ abstract class Report_ParentController extends Controller
     protected function transformDataSource($dataSource, $modeParams)
     {
 
-        return $this->enrichDataSource($dataSource, $modeParams);
+        // return $this->enrichDataSource($dataSource, $modeParams);
+        return $dataSource;
     }
 
     protected function getSheets($dataSource) // Override document report

@@ -5,10 +5,10 @@
                 <i class="fa-duotone fa-file-csv"></i>
             </x-renderer.button>
         </a>
-        {{-- <x-renderer.button title="Export this list to CSV">
-            <a href="{{route($routeName.'_ep.exportCSV')}}" target="_blank">
-        <i class="fa-solid fa-print"></i>
+        <a href="{{route($routeName.'_ep.exportCSV')}}" target="_blank">
+            <x-renderer.button title="Export this list to CSV">
+                <i class="fa-solid fa-print"></i>
+            </x-renderer.button>
         </a>
-        </x-renderer.button> --}}
     </div>
 </div>
