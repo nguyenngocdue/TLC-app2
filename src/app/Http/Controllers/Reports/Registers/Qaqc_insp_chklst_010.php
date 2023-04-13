@@ -213,4 +213,19 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         }
         return $modeParams;
     }
+
+    protected function modifyDataToExportCSV($dataSource, $modeParams)
+    {
+        $dataSource = $this->enrichDataSource($dataSource, $modeParams);
+        $data = array_map(function ($item) {
+            foreach ($item as $key => $val) {
+                if (is_object($val)) {
+                    $item[$key] =  !str_contains($val->value, '</') ? $val->value : "";
+                }
+            }
+            return $item;
+        }, $dataSource->toArray());
+        // dd($data);
+        return collect($data);
+    }
 }

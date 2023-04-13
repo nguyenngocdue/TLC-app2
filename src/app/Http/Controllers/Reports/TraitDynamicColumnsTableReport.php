@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Reports;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 trait TraitDynamicColumnsTableReport
@@ -14,9 +15,9 @@ trait TraitDynamicColumnsTableReport
         $width = 100,
         $sort = True,
     ) {
-        // dd($dataSource);
-        if (empty($dataSource->items())) return [[]];
-        $array = (array)array_slice($dataSource->items(), 0, 1)[0];
+        $dataSource = $dataSource instanceof Collection ? array_map(fn ($i) => (array)$i, $dataSource->toArray()) : $dataSource->items();
+        if (empty($dataSource)) return [[]];
+        $array = (array)array_slice($dataSource, 0, 1)[0];
 
         $datColumns = [];
         if ($strFromField) {

@@ -10,6 +10,7 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -202,14 +203,18 @@ abstract class Report_ParentController extends Controller
         ]);
     }
 
+    protected function modifyDataToExportCSV($dataSource, $modeParams)
+    {
+        return  $dataSource;
+    }
     public function exportCSV(Request $request)
     {
         $entity = CurrentPathInfo::getEntityReport($request, '_ep');
         $modeParams = $this->getModeParams($request, '_ep');
         $dataSource = $this->getDataSource($modeParams);
+        $dataSource = $this->modifyDataToExportCSV($dataSource, $modeParams);
         [$columnKeys, $columnNames] = $this->makeColumns($dataSource, $modeParams);
         $rows = $this->makeRowsFollowColumns($dataSource, $columnKeys);
-
         $fileName = $entity . $this->mode . '.csv';
         $headers = array(
             "Content-type"        => "text/csv",
@@ -219,6 +224,8 @@ abstract class Report_ParentController extends Controller
             "Expires"             => "0"
         );
         $columnKeys = array_combine($columnKeys, $columnKeys);
+        // dd($columnNames, $columnKeys, $rows);
+
         $callback = function () use ($rows, $columnKeys, $columnNames) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columnNames);
@@ -230,6 +237,7 @@ abstract class Report_ParentController extends Controller
                 fputcsv($file, $array);
             }
             fclose($file);
+            Log::info($array);
         };
         return response()->stream($callback, 200, $headers);
     }

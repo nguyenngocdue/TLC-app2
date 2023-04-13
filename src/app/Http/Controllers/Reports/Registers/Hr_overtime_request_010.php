@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
+use App\Http\Controllers\Reports\TraitDataToExcelReport;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Models\Workplace;
@@ -14,6 +15,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
+
     protected $groupBy = 'name_render';
     protected $groupByLength = 1;
 
@@ -32,6 +34,8 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
             year_months,
             (40) AS maximum_allowed_ot_hours,
             SUM(total_overtime_hours) AS total_overtime_hours,
+            #add Total Overtime Hours (Month) to export data to excel
+            SUM(total_overtime_hours) AS _total_overtime_hours,
             ROUND((40 - SUM(total_overtime_hours)),2) AS remaining_allowed_ot_hours,
             years_month,
             ROW_NUMBER() OVER (PARTITION BY employee_id, years_month ORDER BY year_months) AS step_plus,
@@ -159,7 +163,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
             ],
             [
                 "title" => "Total Overtime Hours (Month)",
-                "dataIndex" => "total_overtime_hours",
+                "dataIndex" => "_total_overtime_hours",
                 "align" => "right",
             ],
             [
@@ -251,7 +255,6 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
-        // dd($dataSource);
         $type = Str::singular($this->getType());
         foreach ($dataSource as $key => $value) {
             // display name/description for total_overtime_hours

@@ -3,17 +3,23 @@
 namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
+use App\Http\Controllers\Reports\TraitDataToExcelReport;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitFunctionsReport;
+use App\Http\Controllers\Reports\TraitTransformDataToExcelReport;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Sub_project;
 use App\Utils\Support\Report;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 class Qaqc_wir_010 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
     use TraitFunctionsReport;
+    use TraitTransformDataToExcelReport;
+
     protected $rotate45Width = 500;
     protected $maxH = 80;
     // set default params's values 
@@ -56,7 +62,7 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
 
     protected function getTableColumns($dataSource, $modeParams)
     {
-        $items = $dataSource->items();
+        $items = $dataSource instanceof Collection ? array_map(fn ($i) => (array)$i, $dataSource->toArray()) : $dataSource->items();
         // create table default columns
         if (empty($items)) {
             $dataProdRouting = $this->filterWirDescriptionsFromProdRouting($modeParams);
@@ -64,21 +70,36 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
             $dataColumn = array_map(fn ($item) => ["dataIndex" => $item, "align" => "center", "width" => 100], $wirDesc);
             return $dataColumn;
         }
+        // Check DataSource empty
+        // foreach ($items as $key => $value) {
+        //     foreach ($value as $key => $column) {
+        //         // dd($value);
+        //         if ($key === "370._sanitary_wares_leak_test") {
+        //             // dd($value);
+        //         }
+        //     }
+        // }
+
         $flattenData = array_merge(...$items);
+
+
+
+        // dd($flattenData);
         $idx = array_search("wir_status", array_keys($flattenData));
         $dataColumn = array_slice($flattenData, $idx + 1, count($flattenData) - $idx, true);
+
         ksort($dataColumn);
         unset($dataColumn['wir_status']);
 
         $adds = [
             [
                 "title" => "Sub Project",
-                "dataIndex" => "sub_project_name_html",
+                "dataIndex" => "sub_project_name",
                 "align" => "center",
             ],
             [
                 "title" => "Prod Order Name",
-                "dataIndex" => "prod_order_name_html",
+                "dataIndex" => "prod_order_name",
                 "align" => "center",
             ],
         ];
@@ -86,8 +107,6 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
         unset($dataColumn['wir_description_id'], $dataColumn['wir_description_name']);
         $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center", "width" => 100], array_keys($dataColumn));
         $dataColumn = array_merge($adds, $sqlCol);
-
-
         return  $dataColumn;
     }
 
@@ -116,6 +135,7 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
         AND m2m.doc_id=wd.id \n";
         $sql  .= !is_null($modeParams['prod_routing_id']) ? 'AND term_id =' . $modeParams["prod_routing_id"] : "";
         $sqlData = DB::select(DB::raw($sql));
+        // dd($sql);
         return $sqlData;
     }
 
@@ -163,12 +183,23 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                 'cell_class' => $color,
             ];
 
+            // modify html sub_project_name + prod_order_name
+            $item['sub_project_name'] = (object) [
+                'value' => $item['sub_project_name'],
+                'cell_title' => $item['sub_project_id'],
+            ];
+            $item['prod_order_name'] = (object) [
+                'value' => $item['prod_order_name'],
+                'cell_title' => $item['prod_order_id'],
+            ];
+            // dd($item);
+
             $wirDescName =  is_null($item['wir_description_name']) ? [] : [Report::slugName($item['wir_description_name']) => $htmlRender];
 
             // Edit visibility of production_order_name + sub_project_name to display in the table
-            $prodNameHtml = ['prod_order_name_html' =>  "<div  style='width: 120px'>{$item['prod_order_name']}</div>"];
-            $subProjectNameHtml = ['sub_project_name_html' =>  "<div  style='width: 80px'>{$item['sub_project_name']}</div>"];
-            return $prodNameHtml + $subProjectNameHtml + (array)$item + $wirDescName;
+            // $prodNameHtml = ['prod_order_name_html' =>  "<div  style='width: 120px'>{$item['prod_order_name']}</div>"];
+            // $subProjectNameHtml = ['sub_project_name_html' =>  "<div  style='width: 80px'>{$item['sub_project_name']}</div>"];
+            return /* $prodNameHtml + $subProjectNameHtml + */ (array)$item + $wirDescName;
         }, array_values($items));
 
         // group by prod_order_id
@@ -214,6 +245,7 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
             }
             $transformData[$key] =  $prodOrder + $itemsHasNotWirDescData;
         }
+        // dd($transformData);
         return collect($transformData);
     }
 }
