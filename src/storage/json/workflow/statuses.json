@@ -110,7 +110,7 @@
     "inspected": {
         "name": "inspected",
         "title": "Inspected",
-        "color": "pink",
+        "color": "lime",
         "color_index": "200"
     },
     "inspection_rejected": {
@@ -176,7 +176,7 @@
     "pending_approval": {
         "name": "pending_approval",
         "title": "Pending Approval",
-        "color": "pink",
+        "color": "orange",
         "color_index": "200"
     },
     "pending_confirmation": {
