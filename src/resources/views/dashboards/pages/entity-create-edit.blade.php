@@ -69,7 +69,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
                         $isClosedAt = (isset($button['closed_at'])&& $button['closed_at'] == true);
                         @endphp
                         @if(isset($button['closed_at']) && $button['is_close'] == true)
-                        <button type="button" title="Person can't close ,because you not owner document" class="px-2.5 py-2 inline-block disabled:opacity-40 font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md focus:outline-none"
+                        <button type="button" title="You can't close this as this is your own document." class="px-2.5 py-2 inline-block disabled:opacity-40 font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md focus:outline-none"
                                 disabled
                                 >
                                 Next <i class="fa-regular fa-arrow-right"></i> (to {{$button['label']}})

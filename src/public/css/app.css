@@ -2516,10 +2516,6 @@ video {
 .p-9 {
   padding: 2.25rem;
 }
-.px-0 {
-  padding-left: 0px;
-  padding-right: 0px;
-}
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -2555,10 +2551,6 @@ video {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-}
-.py-0 {
-  padding-top: 0px;
-  padding-bottom: 0px;
 }
 .py-1 {
   padding-top: 0.25rem;
@@ -4535,6 +4527,10 @@ video {
     height: 100vh;
   }
 
+  .md\:w-3\/4 {
+    width: 75%;
+  }
+
   .md\:scroll-mt-20 {
     scroll-margin-top: 5rem;
   }
@@ -4773,6 +4769,10 @@ video {
   .xl\:mx-80 {
     margin-left: 20rem;
     margin-right: 20rem;
+  }
+
+  .xl\:w-1\/2 {
+    width: 50%;
   }
 
   .xl\:grid-cols-2 {

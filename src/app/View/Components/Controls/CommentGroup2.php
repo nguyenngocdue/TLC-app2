@@ -36,6 +36,7 @@ class CommentGroup2 extends Component
     public function render()
     {
         $fn = $this->name;
+        if (!$this->type) return "Type not found for comment group renderer, it will be fill into commentable_type column.";
         $modelPath = Str::modelPathFrom($this->type);
 
         $properties = Properties::getAllOf('comment');
