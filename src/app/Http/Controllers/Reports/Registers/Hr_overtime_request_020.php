@@ -168,7 +168,7 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
     protected function forwardToMode($request, $modeParams)
     {
         $input = $request->input();
-        if (isset($input['months']) || isset($input['user_id'])) {
+        if (isset($input['month']) || isset($input['user_id'])) {
             $typeReport = Str::ucfirst(CurrentPathInfo::getTypeReport($request));
             $entityReport = CurrentPathInfo::getEntityReport($request);
             // dd($typeReport, $entityReport);
