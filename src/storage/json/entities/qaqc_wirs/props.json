@@ -158,7 +158,7 @@
         "label": "WIR Description",
         "control": "dropdown",
         "align": "",
-        "col_span": "6",
+        "col_span": "12",
         "width": "300",
         "hidden_view_all": "",
         "hidden_edit": "",
