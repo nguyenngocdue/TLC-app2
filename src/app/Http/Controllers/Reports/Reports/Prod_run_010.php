@@ -6,6 +6,7 @@ use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDataToExcelReport;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitEnrichDataToExcelReport;
+use App\Http\Controllers\Reports\TraitTransformDataToExcelReport;
 use App\Models\Prod_order as ModelsProd_order;
 use App\Models\Prod_routing_link;
 use App\Models\Sub_project;
@@ -16,7 +17,7 @@ class Prod_run_010 extends  Report_ParentReportController
 
 {
     use TraitDynamicColumnsTableReport;
-    use TraitEnrichDataToExcelReport;
+    use TraitTransformDataToExcelReport;
 
     protected  $sub_project_id = 21;
     public function getSqlStr($modeParams)
