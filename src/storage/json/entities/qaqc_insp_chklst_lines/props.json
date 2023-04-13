@@ -302,5 +302,24 @@
         "save_on_change": "",
         "duplicatable": "",
         "new_line": ""
+    },
+    "_insp_comments": {
+        "name": "_insp_comments",
+        "column_name": "insp_comments",
+        "column_type": "eloquent_prop",
+        "label": "Insp Comments",
+        "control": "comment",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
     }
 }

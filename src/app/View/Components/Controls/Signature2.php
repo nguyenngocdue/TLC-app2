@@ -6,6 +6,7 @@ use Illuminate\View\Component;
 
 class Signature2 extends Component
 {
+    static $count = 0;
     /**
      * Create a new component instance.
      *
@@ -16,6 +17,7 @@ class Signature2 extends Component
         private $value = null,
     ) {
         //
+        static::$count++;
     }
 
     /**
@@ -32,6 +34,7 @@ class Signature2 extends Component
                 'name' => $this->name,
                 'value' => $this->value,
                 'value_decoded' => $value_decoded,
+                'count' => static::$count,
             ]
         );
     }
