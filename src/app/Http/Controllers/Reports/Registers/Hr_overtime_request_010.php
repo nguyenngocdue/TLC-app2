@@ -95,7 +95,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
         ORDER BY name_render, employee_id, year_months DESC ) AS tb3
         WHERE 1 = 1";
         // dd($modeParams);
-        if (isset($modeParams['months'])) $sql .= "\n AND year_months = '{{months}}'";
+        if (isset($modeParams['month'])) $sql .= "\n AND year_months = '{{month}}'";
         return $sql;
     }
 
