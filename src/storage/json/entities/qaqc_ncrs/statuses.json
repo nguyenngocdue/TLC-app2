@@ -4,7 +4,7 @@
     "assign_rejected",
     "resolved",
     "rejected",
-    "pending_verification",
-    "verification_rejected",
+    "inspected",
+    "inspection_rejected",
     "closed"
 ]

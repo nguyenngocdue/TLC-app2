@@ -173,7 +173,7 @@
         "new": "",
         "assigned": "true",
         "rejected": "true",
-        "closed": ""
+        "closed": "true"
     },
     "_comment_inspector_decision": {
         "name": "_comment_inspector_decision",
@@ -181,6 +181,6 @@
         "new": "",
         "assigned": "true",
         "rejected": "true",
-        "closed": ""
+        "closed": "true"
     }
 }

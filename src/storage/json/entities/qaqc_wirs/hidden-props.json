@@ -103,14 +103,6 @@
         "rejected": "",
         "closed": ""
     },
-    "_closed_at": {
-        "name": "_closed_at",
-        "column_name": "closed_at",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "closed": ""
-    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -143,6 +135,14 @@
         "rejected": "true",
         "closed": "true"
     },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -158,5 +158,29 @@
         "assigned": "",
         "rejected": "",
         "closed": ""
+    },
+    "_lock_version": {
+        "name": "_lock_version",
+        "column_name": "lock_version",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
+        "new": "",
+        "assigned": "",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
+        "column_name": "comment_inspector_decision",
+        "new": "",
+        "assigned": "",
+        "rejected": "true",
+        "closed": "true"
     }
 }
