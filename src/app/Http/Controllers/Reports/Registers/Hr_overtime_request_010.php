@@ -256,6 +256,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
     protected function enrichDataSource($dataSource, $modeParams)
     {
         $type = Str::singular($this->getType());
+        // dump($dataSource);
         foreach ($dataSource as $key => $value) {
             // display name/description for total_overtime_hours
             $teamName = $value->user_category_name;
@@ -288,6 +289,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
                 'cell_href' => $hrefForward
             ];
         }
+
         return $dataSource;
     }
 }
