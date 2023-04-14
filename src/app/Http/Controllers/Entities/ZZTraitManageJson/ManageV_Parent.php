@@ -109,4 +109,12 @@ abstract class ManageV_Parent extends Manage_Parent
         // Log::info($result);
         return $result;
     }
+
+    protected function getMoreJS()
+    {
+        $allProps = Props::getAllOf($this->type);
+        $allIdsStr = "[" . join(", ", array_keys(array_values($allProps))) . "]";
+        $javascript = "const ids = $allIdsStr;";
+        return "<script>$javascript</script>";
+    }
 }
