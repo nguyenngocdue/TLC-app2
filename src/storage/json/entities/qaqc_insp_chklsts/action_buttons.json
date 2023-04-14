@@ -1,0 +1,22 @@
+{
+    "in_progress": {
+        "name": "in_progress",
+        "label": "Change to In Progress",
+        "tooltip": ""
+    },
+    "cancelled": {
+        "name": "cancelled",
+        "label": "Change to Cancel",
+        "tooltip": ""
+    },
+    "on_hold": {
+        "name": "on_hold",
+        "label": "Change to On Hold",
+        "tooltip": ""
+    },
+    "approved": {
+        "name": "approved",
+        "label": "Approve and Close",
+        "tooltip": ""
+    }
+}

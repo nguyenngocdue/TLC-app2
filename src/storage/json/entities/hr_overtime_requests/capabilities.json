@@ -2,6 +2,7 @@
     "acct_manager": {
         "name": "acct_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -10,6 +11,7 @@
     "acct_manager_nz": {
         "name": "acct_manager_nz",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -18,6 +20,7 @@
     "acct_member": {
         "name": "acct_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -26,6 +29,7 @@
     "acct_member_nz": {
         "name": "acct_member_nz",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -34,6 +38,7 @@
     "admin": {
         "name": "admin",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -42,6 +47,7 @@
     "bd_manager": {
         "name": "bd_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -50,6 +56,7 @@
     "bd_member": {
         "name": "bd_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -58,6 +65,7 @@
     "cpl_manager_nz": {
         "name": "cpl_manager_nz",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -66,6 +74,7 @@
     "cpl_member": {
         "name": "cpl_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -74,6 +83,7 @@
     "dc_ho": {
         "name": "dc_ho",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -82,6 +92,7 @@
     "dc_manager": {
         "name": "dc_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -90,6 +101,7 @@
     "dc_ws": {
         "name": "dc_ws",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -98,6 +110,7 @@
     "des_manager": {
         "name": "des_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -106,6 +119,7 @@
     "des_member": {
         "name": "des_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -114,6 +128,7 @@
     "dir": {
         "name": "dir",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -122,6 +137,16 @@
     "dir_nz": {
         "name": "dir_nz",
         "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "external_inspector": {
+        "name": "external_inspector",
+        "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -130,14 +155,16 @@
     "fac_admin": {
         "name": "fac_admin",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
-        "pending_approval": "",
+        "pending_approval": "true",
         "rejected": "true",
         "approved": ""
     },
     "fin_member_nz": {
         "name": "fin_member_nz",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -146,6 +173,7 @@
     "guest": {
         "name": "guest",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -154,6 +182,7 @@
     "hr_manager": {
         "name": "hr_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -162,6 +191,7 @@
     "hr_member": {
         "name": "hr_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -170,6 +200,7 @@
     "hr_member_nz": {
         "name": "hr_member_nz",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -178,6 +209,7 @@
     "hse_manager": {
         "name": "hse_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -186,6 +218,7 @@
     "hse_member": {
         "name": "hse_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -194,6 +227,7 @@
     "it_manager": {
         "name": "it_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -202,6 +236,7 @@
     "it_member": {
         "name": "it_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -210,6 +245,7 @@
     "mgr_asst_nz": {
         "name": "mgr_asst_nz",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -218,6 +254,7 @@
     "newcomer": {
         "name": "newcomer",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -226,6 +263,7 @@
     "pln_admin": {
         "name": "pln_admin",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -234,6 +272,7 @@
     "proc_manager": {
         "name": "proc_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -242,6 +281,7 @@
     "proc_member": {
         "name": "proc_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -250,6 +290,7 @@
     "proc_member_nz": {
         "name": "proc_member_nz",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -258,6 +299,7 @@
     "prod_manager": {
         "name": "prod_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -266,6 +308,7 @@
     "prod_manager_nz": {
         "name": "prod_manager_nz",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -274,6 +317,7 @@
     "prod_member": {
         "name": "prod_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -282,6 +326,7 @@
     "prod_member_nz": {
         "name": "prod_member_nz",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -290,6 +335,7 @@
     "proj_manager": {
         "name": "proj_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -298,6 +344,7 @@
     "proj_manager_nz": {
         "name": "proj_manager_nz",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -306,6 +353,7 @@
     "proj_member": {
         "name": "proj_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -314,6 +362,7 @@
     "proj_member_nz": {
         "name": "proj_member_nz",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -322,6 +371,7 @@
     "qaqc_manager": {
         "name": "qaqc_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -330,6 +380,7 @@
     "qaqc_member": {
         "name": "qaqc_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -338,6 +389,7 @@
     "qs_manager": {
         "name": "qs_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -346,6 +398,7 @@
     "qs_member": {
         "name": "qs_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -354,6 +407,7 @@
     "qs_member_nz": {
         "name": "qs_member_nz",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -362,6 +416,7 @@
     "supreme_manage": {
         "name": "supreme_manage",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -370,6 +425,7 @@
     "whs_manager": {
         "name": "whs_manager",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -378,6 +434,7 @@
     "whs_member": {
         "name": "whs_member",
         "name_rendered": "",
+        "toggle": "",
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
@@ -386,6 +443,7 @@
     "worker": {
         "name": "worker",
         "name_rendered": "",
+        "toggle": "",
         "new": "",
         "pending_approval": "",
         "rejected": "",
