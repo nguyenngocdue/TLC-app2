@@ -80,7 +80,10 @@ abstract class Manage_Parent
         return "<script>$javascript</script>";
     }
 
-    abstract protected function getMoreJS();
+    protected function getMoreJS()
+    {
+        return "";
+    }
 
     function index(Request $request)
     {
