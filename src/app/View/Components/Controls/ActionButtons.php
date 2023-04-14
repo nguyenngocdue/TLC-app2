@@ -12,21 +12,12 @@ class ActionButtons extends Component
      * @return void
      */
     public function __construct(
-        private $action = null,
+        private $buttonSave,
+        private $action,
+        private $actionButtons,
+        private $propsIntermediate,
     ) {
         //
-    }
-
-    private function getActionLabel()
-    {
-        switch ($this->action) {
-            case "edit":
-                return "Update";
-            case "create":
-                return "Create";
-            default:
-                return "??? $this->action ???";
-        }
     }
 
     /**
@@ -37,7 +28,10 @@ class ActionButtons extends Component
     public function render()
     {
         return view('components.controls.action-buttons', [
-            'action' => $this->getActionLabel(),
+            'buttonSave' => $this->buttonSave,
+            'action' => $this->action,
+            'actionButtons' => $this->actionButtons,
+            'propsIntermediate' => $this->propsIntermediate,
         ]);
     }
 }
