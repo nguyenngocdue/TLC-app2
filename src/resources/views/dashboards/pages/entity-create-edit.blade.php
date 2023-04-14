@@ -64,23 +64,31 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
                     @endif
                     @if($action !== 'create')
                         @foreach($actionButtons as $key => $button)
-                        @php
-                        $isCheck = !isset($propsIntermediate[$key]) || empty($propsIntermediate[$key]);
-                        $isClosedAt = (isset($button['closed_at'])&& $button['closed_at'] == true);
-                        @endphp
-                        @if(isset($button['closed_at']) && $button['is_close'] == true)
-                        <button type="button" title="You can't close this as this is your own document." class="px-2.5 py-2 inline-block disabled:opacity-40 font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md focus:outline-none"
-                                disabled
-                                >
-                                Next <i class="fa-regular fa-arrow-right"></i> (to {{$button['label']}})
-                            </button>
-                        @else
-                        <button {{$isCheck ? 'type=submit '. '@click=changeStatus("'.$key .'")' : 'type=button '. '@click=toggleIntermediate("'.$key .'")' }} 
-                        class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg"
-                                >
-                                Next <i class="fa-regular fa-arrow-right"></i> (to {{$button['label']}})
-                            </button>
-                        @endif
+                            @php
+                                $hasIntermediateScreen = isset($propsIntermediate[$key])  && ! empty($propsIntermediate[$key]);
+                                // $isClosedAt = (isset($button['closed_at'])&& $button['closed_at'] == true);
+                                $isClosingOwnDoc = isset($button['closed_at']) && $button['is_close'] == true;
+                                $buttonNext = "Next <i class='fa-regular fa-arrow-right'></i> (to <b>".$button['label']."</b>)";
+                                $buttonTo = "<b>".$button['label']."</b>";
+                                $buttonInnerHtml = $hasIntermediateScreen ? $buttonNext : $buttonTo;
+
+                            @endphp
+                            @if($isClosingOwnDoc)
+                                <button type="button" 
+                                        title="You can't close this as this is your own document." 
+                                        class="px-2.5 py-2 inline-block disabled:opacity-40 font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md focus:outline-none"
+                                        disabled
+                                        >
+                                        {!! $buttonInnerHtml !!}
+                                    </button>
+                                    @else
+                                <button {{$hasIntermediateScreen ? 'type=button @click=toggleIntermediate("'.$key .'")' : 'type=submit @click=changeStatus("'.$key .'")' }}
+                                    class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg"
+                                    title="{{ $hasIntermediateScreen ? 'Open an intermediate screen' : $actionButtons[$key]['tooltip']}}"
+                                        >
+                                        {!! $buttonInnerHtml !!}
+                                </button>
+                            @endif
                         @endforeach
                     @endif
                 </div>

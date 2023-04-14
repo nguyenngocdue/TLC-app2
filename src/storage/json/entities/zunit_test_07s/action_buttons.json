@@ -1,22 +1,22 @@
 {
     "new": {
         "name": "new",
-        "label": "New",
+        "label": "Create New",
         "tooltip": "Create New"
     },
     "assigned": {
         "name": "assigned",
-        "label": "Assigned",
+        "label": "Assign",
         "tooltip": "Request for Approval"
     },
     "rejected": {
         "name": "rejected",
-        "label": "Rejected",
+        "label": "Reject",
         "tooltip": "Reject Assignment"
     },
     "closed": {
         "name": "closed",
-        "label": "Closed",
-        "tooltip": "Close"
+        "label": "Close",
+        "tooltip": "Approve and Close"
     }
 }

@@ -17,7 +17,8 @@
             {{-- <div class="col-span-1"> --}}
             <div class="col-span-12 md:col-span-10 md:col-start-2">
                 <x-renderer.card title="{{$title}}" px=0 py=0 class="bg-gray-100">
-                    <textarea rows="2" class="w-full border-gray-100 bg-gray-100 px-2" name="{{$comment['content']['name']}}"
+                    <textarea rows="2" name="{{$comment['content']['name']}}"
+                    class="w-full border-gray-100 bg-gray-100 px-2 focus:border-gray-100"
                     >{{$comment['content']['value']}}</textarea>
                 </x-renderer.card>
             </div> 
@@ -34,7 +35,8 @@
             </div>
             <div class="col-span-12 md:col-span-10">
                 <x-renderer.card title="{{$title}}" px=0 py=0 class="bg-gray-100">
-                    <textarea rows="2" class="w-full border-gray-100 bg-gray-100 px-2" name="{{$comment['content']['name']}}"
+                    <textarea rows="2" name="{{$comment['content']['name']}}"
+                        class="w-full border-gray-100 bg-gray-100 px-2 focus:border-gray-100"
                         >{{$comment['content']['value']}}</textarea>
                 </x-renderer.card>
             </div> 

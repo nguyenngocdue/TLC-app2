@@ -31,7 +31,7 @@
                   @endforeach
                   @roleset('admin')
                   <hr/>
-                  <li><a href="/reports" target="_blank">Report Index</a></li>
+                  <li class="mt-2"><a href="/reports" target="_blank"><i class="fa-duotone fa-eye"></i> Report Index</a></li>
                   @endroleset
                 </ul>
             </div>

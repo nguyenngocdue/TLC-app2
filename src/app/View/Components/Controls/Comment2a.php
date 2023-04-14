@@ -30,11 +30,13 @@ class Comment2a extends Component
         $name =  $this->comment['owner_id']['display_name'];
         $position = $this->comment['position_rendered']['value'];
         $created_at = $this->comment['created_at']['value'];
+        $title = "$name ($position)";
         $humanReadable = "now";
         if (!is_null($this->comment['id']['value'])) {
             $humanReadable = Carbon::createFromFormat(Constant::FORMAT_DATETIME_MYSQL, $created_at)->diffForHumans();
+            $title .= " at $humanReadable";
         }
-        $title = "$name ($position) at $humanReadable:";
+        $title .= ":";
 
         return view(
             'components.controls.comment2a',
