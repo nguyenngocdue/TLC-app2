@@ -33,8 +33,7 @@ trait TraitSupportPermissionGate
 
     private function checkPermission($permission)
     {
-        dump($permission);
-        return auth()->user()->roleSets[0]->hasAnyPermission($permission);
+        return auth()->user()->roleSets[0]->hasPermissionTo($permission);
     }
     private function checkPermissionUsingGate($id, $action = 'edit')
     {
@@ -85,17 +84,11 @@ trait TraitSupportPermissionGate
         $result1 = false;
         $result2 = false;
         if ($isTree) {
-            foreach ($permissions as $permission) {
-                switch (true) {
-                    case $this->checkPermission($permission):
-                        $result1 = CurrentUser::id() == $model->owner_id;
-                        break;
-                    case $this->checkPermission($permission):
-                        $result2 = (CurrentUser::id() == $model->owner_id) || $this->checkTree($model);
-                        break;
-                    default:
-                        break;
-                }
+            if ($this->checkPermission($permissions[0])) {
+                $result1 = CurrentUser::id() == $model->owner_id;
+            }
+            if ($this->checkPermission($permissions[1])) {
+                $result2 = (CurrentUser::id() == $model->owner_id) || $this->checkTree($model);
             }
         }
         return [$result1, $result2];
