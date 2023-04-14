@@ -106,9 +106,8 @@ class BuildTree
                 $value = static::flatten($node->children);
                 $flatArray = array_merge($flatArray, $value);
                 unset($node->children);
-            } else {
-                $flatArray[] = $node;
             }
+            $flatArray[] = $node;
         }
         return $flatArray;
     }
