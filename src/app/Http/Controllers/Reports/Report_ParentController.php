@@ -212,8 +212,8 @@ abstract class Report_ParentController extends Controller
         $entity = CurrentPathInfo::getEntityReport($request, '_ep');
         $modeParams = $this->getModeParams($request, '_ep');
         $dataSource = $this->getDataSource($modeParams);
+        // dd($modeParams, $dataSource);
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-        // dump($dataSource);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
         $dataSource = $this->modifyDataToExportCSV($dataSource);
         [$columnKeys, $columnNames] = $this->makeColumns($dataSource, $modeParams);

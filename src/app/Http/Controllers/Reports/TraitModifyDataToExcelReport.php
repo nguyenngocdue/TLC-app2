@@ -15,7 +15,7 @@ trait TraitModifyDataToExcelReport
             }
             return $item;
         }, $dataSource->toArray());
-        dd($dataSource, $data);
+        // dd($dataSource, $data);
         return collect($data);
     }
 }
