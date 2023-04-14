@@ -213,7 +213,7 @@ abstract class Report_ParentController extends Controller
         $modeParams = $this->getModeParams($request, '_ep');
         $dataSource = $this->getDataSource($modeParams);
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-        dump($dataSource);
+        // dump($dataSource);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
         $dataSource = $this->modifyDataToExportCSV($dataSource);
         [$columnKeys, $columnNames] = $this->makeColumns($dataSource, $modeParams);
