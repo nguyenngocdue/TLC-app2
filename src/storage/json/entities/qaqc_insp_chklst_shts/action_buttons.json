@@ -1,27 +1,37 @@
 {
     "in_progress": {
         "name": "in_progress",
-        "label": "Update Information",
+        "label": "Chang to In Progress",
+        "tooltip": ""
+    },
+    "not_applicable": {
+        "name": "not_applicable",
+        "label": "Change to N\/A",
+        "tooltip": ""
+    },
+    "on_hold": {
+        "name": "on_hold",
+        "label": "Change to On Hold",
         "tooltip": ""
     },
     "passed": {
         "name": "passed",
-        "label": "Ready to Internal Sign Off",
+        "label": "Ready for Internal Sign Off",
         "tooltip": ""
     },
     "inspected": {
         "name": "inspected",
-        "label": "Finish Inspection",
+        "label": "Finish Internal Inspection",
         "tooltip": ""
     },
     "pending_approval": {
         "name": "pending_approval",
-        "label": "Ready to External Approvals",
+        "label": "Ready for External Approvals",
         "tooltip": ""
     },
     "rejected": {
         "name": "rejected",
-        "label": "Rejecte",
+        "label": "Reject",
         "tooltip": ""
     },
     "approved": {
