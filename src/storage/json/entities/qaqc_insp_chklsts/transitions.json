@@ -1,0 +1,30 @@
+{
+    "in_progress": {
+        "name": "in_progress",
+        "in_progress": "",
+        "cancelled": "true",
+        "on_hold": "true",
+        "approved": "true"
+    },
+    "cancelled": {
+        "name": "cancelled",
+        "in_progress": "true",
+        "cancelled": "",
+        "on_hold": "",
+        "approved": ""
+    },
+    "on_hold": {
+        "name": "on_hold",
+        "in_progress": "true",
+        "cancelled": "",
+        "on_hold": "",
+        "approved": ""
+    },
+    "approved": {
+        "name": "approved",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "approved": ""
+    }
+}

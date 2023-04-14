@@ -202,20 +202,23 @@ abstract class Report_ParentController extends Controller
             'getSettingParams' => $this->getSettingParamsReport()
         ]);
     }
-
-    protected function modifyDataToExportCSV($dataSource, $modeParams)
+    protected function modifyDataToExportCSV($dataSource)
     {
-        return  $dataSource;
+        return $dataSource;
     }
+
     public function exportCSV(Request $request)
     {
         $entity = CurrentPathInfo::getEntityReport($request, '_ep');
         $modeParams = $this->getModeParams($request, '_ep');
         $dataSource = $this->getDataSource($modeParams);
-        $dataSource = $this->modifyDataToExportCSV($dataSource, $modeParams);
+        // dd($modeParams, $dataSource);
+        $dataSource = $this->enrichDataSource($dataSource, $modeParams);
+        $dataSource = $this->transformDataSource($dataSource, $modeParams);
+        $dataSource = $this->modifyDataToExportCSV($dataSource);
         [$columnKeys, $columnNames] = $this->makeColumns($dataSource, $modeParams);
         $rows = $this->makeRowsFollowColumns($dataSource, $columnKeys);
-        $fileName = $entity . $this->mode . '.csv';
+        $fileName = $entity . '_' . date('d:m:Y H:i:s') . '.csv';
         $headers = array(
             "Content-type"        => "text/csv",
             "Content-Disposition" => "attachment; filename=$fileName",
@@ -237,7 +240,7 @@ abstract class Report_ParentController extends Controller
                 fputcsv($file, $array);
             }
             fclose($file);
-            Log::info($array);
+            // Log::info($array);
         };
         return response()->stream($callback, 200, $headers);
     }

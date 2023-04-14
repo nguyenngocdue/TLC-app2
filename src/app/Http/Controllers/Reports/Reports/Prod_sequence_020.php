@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentReportController;
-use App\Http\Controllers\Reports\TraitDataToExcelReport;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
-use App\Http\Controllers\Reports\TraitTransformDataToExcelReport;
-use App\Models\Prod_order as ModelsProd_order;
-use App\Models\Sub_project;
 use App\Utils\Support\Report;
 
 class Prod_sequence_020 extends Report_ParentReportController
@@ -18,7 +15,9 @@ class Prod_sequence_020 extends Report_ParentReportController
     use TraitForwardModeReport;
     use TraitSQLDataSourceParamReport;
     use TraitDynamicColumnsTableReport;
-    use TraitTransformDataToExcelReport;
+    use TraitModifyDataToExcelReport;
+
+
 
     protected $mode = '020';
     protected  $sub_project_id = 82;
@@ -102,7 +101,7 @@ class Prod_sequence_020 extends Report_ParentReportController
                     (object)[
                         'value' => $x = $items[$key]['total_man_hours'],
                         'cell_title' => $items[$key]['prod_routing_link_name'] . "\n" . $x . ' (hours) = (Total Workers * Total Minutes)/60',
-                        'cell_class' => 'bg-50-400',
+                        'cell_class' => 'bg-green-50',
                     ];
             });
             return array_merge(...$items);

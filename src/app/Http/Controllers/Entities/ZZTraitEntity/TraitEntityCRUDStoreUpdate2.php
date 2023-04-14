@@ -13,9 +13,9 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitEntityFieldHandler2;
 	use TraitEntityAttachment2;
 	use TraitEntityEditableTable;
+	use TraitEntityEditableComment;
 	use TraitValidation;
 	use TraitSendNotificationAndMail;
-
 
 	private $debugForStoreUpdate = false;
 
@@ -96,6 +96,9 @@ trait TraitEntityCRUDStoreUpdate2
 		// if ($request['tableNames'] == 'fakeRequest') {
 		// 	dump($request->input());
 		// }
+
+		$this->processComments($request);
+
 		$isFakeRequest = $request['tableNames'] == 'fakeRequest';
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);

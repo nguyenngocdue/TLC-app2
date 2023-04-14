@@ -10,14 +10,23 @@ class CurrentPathInfo
     {
         $pathInfo = $tail ? str_replace($tail, '', $request->getPathInfo()) : $request->getPathInfo();
         $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[0]);
-        return strtolower(Str::plural($pathInfo[0]));
+        $str = strtolower(Str::plural($pathInfo[0]));
+        if (filter_var($str . 's', FILTER_SANITIZE_NUMBER_INT)) {
+            $str = str_replace('_' . filter_var($str . 's', FILTER_SANITIZE_NUMBER_INT), '', $str);
+        }
+        return $str;
     }
     public static function getEntityReport($request, $tail = '')
     {
         $pathInfo = $tail ? str_replace($tail, '', $request->getPathInfo()) : $request->getPathInfo();
         $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[1]);
-        return strtolower(Str::plural($pathInfo[1]));
+        $str = strtolower(Str::plural($pathInfo[1]));
+        if (filter_var($str . 's', FILTER_SANITIZE_NUMBER_INT)) {
+            $str = str_replace('_' . filter_var($str . 's', FILTER_SANITIZE_NUMBER_INT), '', $str);
+        }
+        return $str;
     }
+
     public static function getViewName($request)
     {
         $pathInfo = $request->getPathInfo();

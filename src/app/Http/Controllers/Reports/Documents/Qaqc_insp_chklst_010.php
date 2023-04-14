@@ -50,20 +50,20 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
                         ,c2
                         ,c3
                         ,c4";
-		if (isset($modeParams['prod_order'])) $sql .= "\n ,po.id AS po_id , po.name AS po_name , po.compliance_name AS compliance_name";
-		if (isset($modeParams['sub_project'])) $sql .= " \n ,sp.name AS sub_project_name, pj.name AS project_name ";
+		if (isset($modeParams['prod_order_id'])) $sql .= "\n ,po.id AS po_id , po.name AS po_name , po.compliance_name AS compliance_name";
+		if (isset($modeParams['sub_project_id'])) $sql .= " \n ,sp.name AS sub_project_name, pj.name AS project_name ";
 		$sql .= "\n FROM qaqc_insp_chklst_runs r
                     JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id
                     JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
                     JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id";
-		if (isset($modeParams['qaqc_insp_tmpl'])) $sql .= "\n AND tp.id = '{{qaqc_insp_tmpl_id}}'";
+		if (isset($modeParams['checksheet_type_id'])) $sql .= "\n AND tp.id = '{{checksheet_type_id}}'";
 		$sql .= "\n JOIN qaqc_insp_chklst_run_lines l ON l.qaqc_insp_chklst_run_id = r.id
                     JOIN control_types ct ON ct.id = l.control_type_id";
 		if (isset($modeParams['prod_order']))  $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
 		else {
 			$sql .= "\nJOIN prod_orders po ON po.id = 0";
 		};
-		if (isset($modeParams['sub_project'])) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id
+		if (isset($modeParams['sub_project_id'])) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id
 								 JOIN projects pj ON pj.id = sp.project_id";
 
 		$sql .= "\nLEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
@@ -78,8 +78,8 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
                             )  AS divide_control ON l.qaqc_insp_control_group_id = divide_control.control_group_id
             
                 WHERE 1=1";
-		if (isset($modeParams['sub_project']))  $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
-		if (isset($modeParams['check_sheet'])) $sql .= " \n AND csh.id = '{{checksheet_type_id}}'";
+		if (isset($modeParams['sub_project_id']))  $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
+		if (isset($modeParams['check_sheet_id'])) $sql .= " \n AND csh.id = '{{check_sheet_id}}'";
 		$sql .= "\n ORDER BY line_name,  run_updated DESC ";
 		return $sql;
 	}

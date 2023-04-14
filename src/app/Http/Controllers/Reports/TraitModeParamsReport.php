@@ -9,9 +9,9 @@ trait TraitModeParamsReport
 {
     protected function getModeParams($request, $str = '')
     {
+        $currentMode = $this->mode;
         $typeReport = CurrentPathInfo::getTypeReport($request, $str);
         $entity = CurrentPathInfo::getEntityReport($request, $str);
-        $currentMode = $this->mode;
         $settings = CurrentUser::getSettings();
         if (isset($settings[$entity][$typeReport][$currentMode])) {
             $modeParams = $settings[$entity][$typeReport][$currentMode];

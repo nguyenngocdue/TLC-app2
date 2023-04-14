@@ -33,6 +33,8 @@ class JsonGetSet
         if (!file_exists($path)) {
             // Log::error("$path not found");
             return [];
+        } else {
+            // Log::info("Loading $path");
         }
         return json_decode(file_get_contents($path), true);
     }

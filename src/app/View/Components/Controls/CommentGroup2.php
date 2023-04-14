@@ -75,7 +75,7 @@ class CommentGroup2 extends Component
             'userPosition' => $userPosition,
 
             "allowedChangeOwner" => $properties['allowed_change_owner'],
-            "allowedAttachment" => $properties['allowed_attachment'],
+            // "allowedAttachment" => $properties['allowed_attachment'],
             "allowedDelete" => $properties['allowed_delete'],
             "forceCommentOnce" => $properties['force_comment_once'],
             "readOnly" => $this->readOnly,

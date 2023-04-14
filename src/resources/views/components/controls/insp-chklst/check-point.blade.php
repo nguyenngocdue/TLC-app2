@@ -1,4 +1,4 @@
-<x-renderer.card class="my-1" px="0" py="0">
+<x-renderer.card class="my-1 border" px="0" py="0">
     <div class="bg-gray-300 rounded-t p-2">
         <p title="{{$line->name}} - #{{$line->id}}">{{$line->description}}</p>
     </div>
@@ -20,6 +20,6 @@
         </div>
         <x-renderer.attachment2 name="table01[insp_photos][{{$rowIndex}}]" :value="$attachments"/>
         <br/>
-        <x-controls.comment-group2 name="insp_comments" type="qaqc_insp_chklst_line" :rowIndex="$rowIndex" />
+        <x-controls.comment-group2a category="insp_comments" commentableType="qaqc_insp_chklst_line" commentableId="{{$line->id}}" />
     </div>
 </x-renderer.card>

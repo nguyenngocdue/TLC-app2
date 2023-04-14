@@ -72,21 +72,26 @@ abstract class Manage_Parent
 
     private function getJavascript()
     {
-        $allProps = Props::getAllOf($this->type);
         $allStatuses = array_keys($this->getColumnSource());
         $allStatusesStr = "[" . join(", ", array_map(fn ($i) => '"' . $i . '"', $allStatuses)) . "]";
-        $allIdsStr = "[" . join(", ", array_keys(array_values($allProps))) . "]";
-        $javascript = "const statuses = $allStatusesStr; const ids = $allIdsStr; ";
+        $javascript = "const statuses = $allStatusesStr;";
         $javascript .= "let k_horizon_mode = {}; let k_horizon_value = {};";
         $javascript .= "let k_vertical_mode = {}; let k_vertical_value = {};";
         return "<script>$javascript</script>";
     }
 
+    protected function getMoreJS()
+    {
+        return "";
+    }
+
     function index(Request $request)
     {
+        if (app()->isProduction()) abort(403, "All Manage Workflow Screens are not available on production.");
         $columns = $this->getColumns();
         $this->makeUpWidthForColumns($columns);
         $jsStatusArray = $this->getJavascript();
+        $jsStatusArray2 = $this->getMoreJS();
         return view($this->viewName, [
             'title' => "Manage Workflows",
             'topTitle' => CurrentRoute::getTitleOf($this->type),
@@ -97,6 +102,7 @@ abstract class Manage_Parent
             'dataHeader' => $this->getDataHeader(),
             'headerTop' => $this->headerTop,
             'jsStatusArray' => $jsStatusArray,
+            'jsStatusArray2' => $jsStatusArray2,
         ]);
     }
 

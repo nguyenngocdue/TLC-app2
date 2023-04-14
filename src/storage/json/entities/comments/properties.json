@@ -4,7 +4,6 @@
         "field_id": "6",
         "field_name": "comment_1",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "true",
         "force_comment_once": ""
     },
@@ -13,7 +12,6 @@
         "field_id": "7",
         "field_name": "comment_2",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "true",
         "force_comment_once": ""
     },
@@ -22,7 +20,6 @@
         "field_id": "8",
         "field_name": "comment_3",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "true",
         "force_comment_once": "true"
     },
@@ -31,7 +28,6 @@
         "field_id": "9",
         "field_name": "comment_4",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
     },
@@ -40,7 +36,6 @@
         "field_id": "10",
         "field_name": "comment_5",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
     },
@@ -49,7 +44,6 @@
         "field_id": "28",
         "field_name": "comment_by_clinic",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
     },
@@ -58,7 +52,6 @@
         "field_id": "29",
         "field_name": "comment_by_line_manager",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
     },
@@ -67,7 +60,6 @@
         "field_id": "30",
         "field_name": "comment_by_general_manager",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
     },
@@ -76,7 +68,6 @@
         "field_id": "27",
         "field_name": "comment_rejected_reason",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
     },
@@ -85,7 +76,6 @@
         "field_id": "50",
         "field_name": "comment_asm_rejected_reason",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
     },
@@ -94,7 +84,6 @@
         "field_id": "52",
         "field_name": "comment_approver_decision",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
     },
@@ -103,7 +92,6 @@
         "field_id": "53",
         "field_name": "comment_inspector_decision",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
     },
@@ -112,7 +100,6 @@
         "field_id": "51",
         "field_name": "comment_insp_rejected_reason",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
     },
@@ -121,7 +108,6 @@
         "field_id": "13",
         "field_name": "insp_comments",
         "allowed_change_owner": "",
-        "allowed_attachment": "",
         "allowed_delete": "",
         "force_comment_once": ""
     }

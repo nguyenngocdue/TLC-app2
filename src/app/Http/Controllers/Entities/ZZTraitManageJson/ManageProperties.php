@@ -50,12 +50,12 @@ class ManageProperties extends Manage_Parent
                 'editable' => true,
                 'align' => 'center',
             ],
-            [
-                'dataIndex' => 'allowed_attachment',
-                'renderer' => 'checkbox',
-                'editable' => true,
-                'align' => 'center',
-            ],
+            // [
+            //     'dataIndex' => 'allowed_attachment',
+            //     'renderer' => 'checkbox',
+            //     'editable' => true,
+            //     'align' => 'center',
+            // ],
             [
                 'dataIndex' => 'allowed_delete',
                 'renderer' => 'checkbox',
