@@ -87,6 +87,7 @@ abstract class Manage_Parent
 
     function index(Request $request)
     {
+        if (app()->isProduction()) abort(403, "All Manage Workflow Screens are not available on production.");
         $columns = $this->getColumns();
         $this->makeUpWidthForColumns($columns);
         $jsStatusArray = $this->getJavascript();
