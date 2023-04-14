@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Reports;
 
-trait TraitTransformDataToExcelReport
+trait TraitModifyDataToExcelReport
 {
-    protected function modifyDataToExportCSV($dataSource, $modeParams)
+    protected function modifyDataToExportCSV($dataSource)
     {
-        $dataSource = $this->transformDataSource($dataSource, $modeParams);
         $data = array_map(function ($item) {
+            $item = (object)$item;
             foreach ($item as $key => $val) {
                 if (is_object($val)) {
-                    $item[$key] =  !str_contains($val->value, '</') ? $val->value : "";
+                    $item->$key =  !str_contains((string)$val->value, '</') ? $val->value : "";
                 }
             }
             return $item;
         }, $dataSource->toArray());
+        dd($dataSource, $data);
         return collect($data);
     }
 }

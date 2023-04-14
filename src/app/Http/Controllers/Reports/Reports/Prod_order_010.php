@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
-use App\Models\Prod_order as ModelsProd_order;
-use App\Models\Sub_project;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Log;
 

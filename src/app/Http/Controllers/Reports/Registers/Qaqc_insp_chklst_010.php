@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
+use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
 use App\Utils\Support\Report;
@@ -12,9 +13,9 @@ use Illuminate\Support\Facades\Log;
 class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
+    use TraitModifyDataToExcelReport;
 
     protected $rotate45Width = 300;
-    // set default params's values 
     protected  $sub_project_id = 21;
 
     public function getSqlStr($modeParams)
@@ -212,20 +213,5 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
             $modeParams[$x] = $this->sub_project_id;
         }
         return $modeParams;
-    }
-
-    protected function modifyDataToExportCSV($dataSource, $modeParams)
-    {
-        $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-        $data = array_map(function ($item) {
-            foreach ($item as $key => $val) {
-                if (is_object($val)) {
-                    $item[$key] =  !str_contains($val->value, '</') ? $val->value : "";
-                }
-            }
-            return $item;
-        }, $dataSource->toArray());
-        // dd($data);
-        return collect($data);
     }
 }

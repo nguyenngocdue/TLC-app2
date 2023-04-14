@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
-use App\Http\Controllers\Reports\TraitDataToExcelReport;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
-use App\Models\Workplace;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use Illuminate\Support\Str;
 
 class Hr_overtime_request_010 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
+    use TraitModifyDataToExcelReport;
 
     protected $groupBy = 'name_render';
     protected $groupByLength = 1;
@@ -256,16 +254,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
     protected function enrichDataSource($dataSource, $modeParams)
     {
         $type = Str::singular($this->getType());
-        // dump($dataSource);
         foreach ($dataSource as $key => $value) {
-            // display name/description for total_overtime_hours
-            $teamName = $value->user_category_name;
-            $teamDesc = $value->user_category_desc;
-            $htmlTeam = "<span title='$teamDesc'>$teamName</span>";
-            $htmlEmployeeId = "<span title='User ID: $value->user_id'>$value->employee_id</span>";
-
-            $dataSource[$key]->user_category_name = $htmlTeam;
-            $dataSource[$key]->employee_id = $htmlEmployeeId;
 
             // display colors for total_overtime_hours
             $remainingAllowedOTHoursMonth = ($value->remaining_allowed_ot_hours * 1);
@@ -288,8 +277,17 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
                 'value' => $value->total_overtime_hours,
                 'cell_href' => $hrefForward
             ];
-        }
 
+            $dataSource[$key]->user_category_name = (object)[
+                'value' => $value->user_category_name,
+                'cell_title' => $value->user_category_desc
+            ];
+            // display name/description for total_overtime_hours
+            $dataSource[$key]->employee_id = (object)[
+                'value' => $value->employee_id,
+                'cell_title' => 'User ID: ' . $value->user_id,
+            ];
+        }
         return $dataSource;
     }
 }
