@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Workflow\LibWidgets;
 use App\Utils\Support\DBTable;
+use Illuminate\Support\Arr;
 
 class DashboardController extends Controller
 {
@@ -51,12 +52,12 @@ class DashboardController extends Controller
         $allWidgets = LibWidgets::getAll();
         $allWidgets = array_map(fn ($widget) => array_merge($this->a($widget), $widget), $allWidgets);
         $allWidgets = array_filter($allWidgets, fn ($widget) => !$widget['hidden']);
-
         // dump($allWidgets);
+        $allWidgetGroups = Arr::groupByToChildren($allWidgets, 'table_a');
         return view(
             'dashboards.dashboard',
             [
-                'allWidgets' => $allWidgets,
+                'allWidgetGroups' => $allWidgetGroups,
             ]
         );
     }

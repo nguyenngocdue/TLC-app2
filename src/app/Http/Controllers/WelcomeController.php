@@ -19,7 +19,6 @@ class WelcomeController extends Controller
     {
         // dump(ini_get("curl.cainfo"));
         // dump(Storage::disk('s3')->put('dinhcanh.txt', 'NgoDinhCanh', 'public'));
-        dd(User::getAllInspector());
         return view(
             'welcome',
             []

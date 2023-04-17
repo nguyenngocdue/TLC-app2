@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Http\Controllers\Workflow\LibRoleSets;
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Models\Role_set;
 use App\Utils\Support\Json\Capabilities;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
@@ -87,5 +88,13 @@ class ManageCapabilities extends Manage_Parent
         }
         // dump($result);
         return $result;
+    }
+
+    protected function getMoreJS()
+    {
+        $dataInJson = Role_set::all()->toArray();
+        $allIdsStr = "[" . join(", ", array_keys(array_values($dataInJson))) . "]";
+        $javascript = "const ids = $allIdsStr;";
+        return "<script>$javascript</script>";
     }
 }

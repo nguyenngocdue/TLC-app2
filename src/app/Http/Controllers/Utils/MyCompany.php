@@ -24,7 +24,6 @@ class MyCompany extends Controller
         $onlyDirectChildren = $request->input('only_direct_children');
         $flatten = $request->input('flatten');
         $uid = CurrentUser::get()->id;
-
         $tree = BuildTree::getTreeByOptions($rootUid, $viewportUid, $leafUid, $onlyDirectChildren, $flatten);
         return view(
             "utils/my-company",

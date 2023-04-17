@@ -18,4 +18,5 @@
 @endsection
 
 @php echo $jsStatusArray; @endphp
+@php echo $jsStatusArray2; @endphp
 @once <script src="{{ asset('js/manage-workflows/toggleHorizonAndVertical.js') }}"></script> @endonce
