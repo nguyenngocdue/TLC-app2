@@ -64,7 +64,9 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
                     AND otr.status LIKE 'approved'
                     AND us.id = otline.user_id
                     AND otline.work_mode_id = wm.id 
-                    AND otr.workplace_id = wp.id ) AS tb1
+                    AND otr.workplace_id = wp.id";
+        if (isset($modeParams['ot_workplace_id'])) $sql .= "\n AND otr.workplace_id = '{{ot_workplace_id}}'";
+        $sql .= " \n  ) AS tb1
                     LEFT JOIN workplaces uswp ON uswp.id = tb1.us_workplace_id ";
         if (isset($modeParams['month'])) $sql .= "\n WHERE tb1.years_month  = '{{month}}'";
         $sql .= "\n ORDER BY name_render, employee_id, ot_date DESC";

@@ -247,7 +247,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
             $percentOTMonth = $remainingAllowedOTHoursMonth / 40 * 100;
             $percentOTYear = $remainingAllowedOTHoursYear / 200 * 100;
 
-            $param = '?user_id=' . $value->user_id . '&' . 'month=' . $value->year_months;
+            $param = '?user_id=' . $value->user_id . '&' . 'month=' . $value->year_months . '&' . 'ot_workplace_id=' . $value->ot_workplace_id;
             $reAllowedOTHoursMonth = $this->wrapValueInObjectWithCellColor($percentOTMonth, $remainingAllowedOTHoursMonth);
             $reAllowedOTHoursYear = $this->wrapValueInObjectWithCellColor($percentOTYear, $remainingAllowedOTHoursYear);
 
