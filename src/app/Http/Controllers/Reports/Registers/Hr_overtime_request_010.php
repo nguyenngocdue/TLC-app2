@@ -19,81 +19,59 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
 
     public function getSqlStr($modeParams)
     {
-        $sql = " SELECT tb3.*
-        FROM (SELECT tb2.*,LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month, user_id ORDER BY year_months) AS maximum_allowed_ot_hours_year
-        FROM(SELECT 
-        GROUP_CONCAT(distinct workplace SEPARATOR ', ') AS ot_workplace,
-            user_category_name,
-            user_category_desc,
-            MAX(name_render) AS name_render,
-            MAX(user_id) AS user_id,
-            MAX(user_workplace) AS user_workplace,
-            employee_id,
-            year_months,
-            (40) AS maximum_allowed_ot_hours,
-            SUM(total_overtime_hours) AS total_overtime_hours,
-            #add Total Overtime Hours (Month) to export data to excel
-            SUM(total_overtime_hours) AS _total_overtime_hours,
-            ROUND((40 - SUM(total_overtime_hours)),2) AS remaining_allowed_ot_hours,
-            years_month,
-            ROW_NUMBER() OVER (PARTITION BY employee_id, years_month ORDER BY year_months) AS step_plus,
-            SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employee_id, years_month ORDER BY year_months) AS cumulative_remaining_hours_year,
-            (200 - SUM(SUM(total_overtime_hours)) OVER (PARTITION BY employee_id, years_month ORDER BY year_months)) AS remaining_allowed_ot_hours_year
-            
+        $sql = "SELECT 
+        wpus.name AS user_workplace,
+        tb3.*,
+        total_overtime_hours AS _total_overtime_hours,
+        LAG(remaining_allowed_ot_hours_year, 1, 200) OVER (PARTITION BY years_month, user_id ORDER BY year_months) AS maximum_allowed_ot_hours_year,
+        (40) AS maximum_allowed_ot_hours,
+        ROUND(40 - total_overtime_hours, 2) AS remaining_allowed_ot_hours
         FROM (
-            SELECT otTb.*, wpus.name AS user_workplace
+            SELECT 
+                wp.name AS ot_workplace_name,
+                rgt_ot.*,
+                us.name AS name_render,
+                200 - SUM(total_overtime_hours) OVER (PARTITION BY employee_id, years_month ORDER BY year_months ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS remaining_allowed_ot_hours_year
             FROM (
                 SELECT 
-                    wp.name AS workplace,
-                    rgt_ot.*
-                FROM (
-                    SELECT 
-                        us.workplace AS user_workplace_id,
-                        otr.workplace_id AS ot_workplace_id,
-                        us.name AS name_render,
-                        uscate.name AS user_category_name,
-                        uscate.description AS user_category_desc,
-                        otline.employeeid AS employee_id,
-                        #SUBSTR(otline.ot_date,1,7) AS year_months,
-                         if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,4), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,4)) AS years_month, -- get Years
-                        SUM(otline.total_time) AS total_overtime_hours,
-                        us.id AS user_id,
-                        if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,7), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,7)) AS year_months -- get range salary
-                    FROM 
-                        users us, 
-                        hr_overtime_request_lines otline, 
-                        hr_overtime_requests otr, 
-                        user_categories uscate
-                    WHERE 1 = 1
+                    us.workplace AS user_workplace_id,
+                    otr.workplace_id AS ot_workplace_id,
+                    uscate.name AS user_category_name,
+                    uscate.description AS user_category_desc,
+                    otline.employeeid AS employee_id,
+                    if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,4), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,4)) AS years_month,
+                    SUM(otline.total_time) AS total_overtime_hours,
+                    us.id AS user_id,
+                    if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,7), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,7)) AS year_months
+                FROM 
+                    users us, 
+                    hr_overtime_request_lines otline, 
+                    hr_overtime_requests otr, 
+                    user_categories uscate
+                WHERE 1 = 1
                     AND otline.user_id = us.id
                     AND otline.hr_overtime_request_id = otr.id
                     AND uscate.id = us.category
                     AND otline.hr_overtime_request_id = otr.id
-                    AND  otr.status LIKE 'approved' ";
-        // $sql .= "\n AND (
-        //                 -- (B)
-        //                 -- From the previous month (including December of the previous year) - the last 5 days of the previous month.
-        //                 (DAY(otline.ot_date) >= 26 AND MONTH(otline.ot_date) = MONTH(DATE_ADD(otline.ot_date, INTERVAL 1 MONTH))-1)
-        //                 -- From the current month (including January of the current year) -  the first 25 days of the next month.
-        //                 OR (DAY(otline.ot_date) <= 25 AND MONTH(otline.ot_date) = MONTH(DATE_SUB(otline.ot_date, INTERVAL 1 MONTH))+1)
-        //                 )";
-
+                    AND otr.status LIKE 'approved'";
         if (isset($modeParams['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
-        $sql .= "\nGROUP BY user_id, employee_id, year_months, ot_workplace_id, years_month
-                ) AS rgt_ot 
-                JOIN workplaces wp ON wp.id = rgt_ot.ot_workplace_id";
+        if (isset($modeParams['workplace_id'])) $sql .= "\n AND us.workplace = '{{workplace_id}}'";
+        $sql .= "\n GROUP BY 
+                    user_id, employee_id, 
+                    year_months, 
+                    years_month,
+                    ot_workplace_id,
+                    user_category_name,
+                    user_category_desc
+            ) AS rgt_ot 
+            JOIN workplaces wp ON wp.id = rgt_ot.ot_workplace_id";
+
         if (isset($modeParams['ot_workplace_id'])) $sql .= "\n AND wp.id = '{{ot_workplace_id}}'";
-        $sql .= "\n) AS otTb, workplaces wpus
-            WHERE 1 = 1
-            AND otTb.user_workplace_id = wpus.id
-            GROUP BY user_id, employee_id, year_months, ot_workplace_id, years_month
-        ) tbg
-        GROUP BY year_months, years_month, employee_id, user_category_name, user_category_desc
-        ) tb2
-        ORDER BY name_render, employee_id, year_months DESC ) AS tb3
-        WHERE 1 = 1";
-        // dd($modeParams);
+        $sql .= "\n JOIN users us ON us.id = rgt_ot.user_id) AS tb3
+                    JOIN workplaces wpus ON tb3.user_workplace_id = wpus.id";
+
         if (isset($modeParams['month'])) $sql .= "\n AND year_months = '{{month}}'";
+        $sql .= "\n ORDER BY name_render, employee_id,  year_months DESC";
         return $sql;
     }
 
@@ -105,7 +83,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
         return [
             [
                 'title' => 'OT Workplace',
-                "dataIndex" => "ot_workplace",
+                "dataIndex" => "ot_workplace_name",
                 "align" => 'left'
             ],
             [
@@ -177,6 +155,11 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
             [
                 'title' => 'OT Workplace',
                 'dataIndex' => 'ot_workplace_id',
+                'allowClear' => true,
+            ],
+            [
+                'title' => 'User Workplace',
+                'dataIndex' => 'workplace_id',
                 'allowClear' => true,
             ],
             [
