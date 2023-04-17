@@ -1,7 +1,7 @@
 {{-- @dd($dataSource) --}}
 
 <div class="">
-    <img class="w-40" src="https://dev2.tlcmodular.com/logo/tlc.png">
+    <img class="w-40" src="{{asset('logo/tlc.png')}}">
     <div class=" border-b border-t bg-gray-300 rounded-lg">
         <x-renderer.heading level=3 align='center'>TLC - INSPECTION CHECK SHEET</x-renderer.heading>
     </div>

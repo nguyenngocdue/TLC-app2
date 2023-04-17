@@ -59,7 +59,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 		if (isset($modeParams['checksheet_type_id'])) $sql .= "\n AND tp.id = '{{checksheet_type_id}}'";
 		$sql .= "\n JOIN qaqc_insp_chklst_run_lines l ON l.qaqc_insp_chklst_run_id = r.id
                     JOIN control_types ct ON ct.id = l.control_type_id";
-		if (isset($modeParams['prod_order']))  $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
+		if (isset($modeParams['prod_order_id']))  $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
 		else {
 			$sql .= "\nJOIN prod_orders po ON po.id = 0";
 		};
