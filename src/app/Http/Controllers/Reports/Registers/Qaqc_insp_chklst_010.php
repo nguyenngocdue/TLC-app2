@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
+use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
@@ -14,6 +15,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
     use TraitModifyDataToExcelReport;
+    use TraitForwardModeReport;
 
     protected $rotate45Width = 300;
     protected  $sub_project_id = 21;

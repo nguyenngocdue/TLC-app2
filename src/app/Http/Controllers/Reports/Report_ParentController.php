@@ -133,6 +133,7 @@ abstract class Report_ParentController extends Controller
     {
         $input = $request->input();
         $isFormType = isset($input['form_type']);
+        // dd($input);
         if ($isFormType && $input['form_type'] === 'updateParamsReport' || $isFormType && $input['form_type'] === 'updatePerPageReport') {
             (new UpdateUserSettings())($request);
         }
