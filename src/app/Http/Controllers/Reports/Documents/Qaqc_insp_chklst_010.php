@@ -53,7 +53,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 		if (isset($modeParams['prod_order_id'])) $sql .= "\n ,po.id AS po_id , po.name AS po_name , po.compliance_name AS compliance_name";
 		if (isset($modeParams['sub_project_id'])) $sql .= " \n ,sp.name AS sub_project_name, pj.name AS project_name ";
 		$sql .= "\n FROM qaqc_insp_chklst_runs r
-                    JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id
+                    JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id #AND s.id = 44
                     JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
                     JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id";
 		if (isset($modeParams['checksheet_type_id'])) $sql .= "\n AND tp.id = '{{checksheet_type_id}}'";
