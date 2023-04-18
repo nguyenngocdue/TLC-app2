@@ -43,6 +43,8 @@ class CommentGroup2a extends Component
             'commentable_type' => ['name' => "comments[commentable_type][gr{$counter}_ln{$index}]",],
             'commentable_id' => ['name' => "comments[commentable_id][gr{$counter}_ln{$index}]",],
             'category' => ['name' => "comments[category][gr{$counter}_ln{$index}]",],
+            'toBeDeleted' => ['name' => "comments[toBeDeleted][gr{$counter}_ln{$index}]",],
+            'group_line_id' => "gr{$counter}_ln{$index}",
         ];
     }
 

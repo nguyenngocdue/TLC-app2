@@ -1,19 +1,22 @@
 <div title="#{{$comment['id']['value']}}" class="mb-2">
     {{-- <input name="{{$comment['content']['name']}}" value="{{$comment['content']['value']}}" > --}}
-    <input name="{{$comment['id']['name']}}" value="{{$comment['id']['value']}}" type="{{$input_or_hidden}}" >
+    <input name="{{$comment['id']['name']}}" value="{{$comment['id']['value']}}" title="id" class="border" type="{{$input_or_hidden}}" >
 
     @if(is_null($comment['id']['value']))
-        <input name="{{$comment['position_rendered']['name']}}" value="{{$comment['position_rendered']['value']}}" type="{{$input_or_hidden}}">
-        <input name="{{$comment['owner_id']['name']}}" value="{{$comment['owner_id']['value']}}" type="{{$input_or_hidden}}">
-        <input name="{{$comment['created_at']['name']}}" value="{{$comment['created_at']['value']}}" type="{{$input_or_hidden}}">
+        <input name="{{$comment['position_rendered']['name']}}" value="{{$comment['position_rendered']['value']}}" title="position_rendered" class="border" type="{{$input_or_hidden}}">
+        <input name="{{$comment['owner_id']['name']}}" value="{{$comment['owner_id']['value']}}" title="owner_id" class="border" type="{{$input_or_hidden}}">
+        <input name="{{$comment['created_at']['name']}}" value="{{$comment['created_at']['value']}}" title="created_at" class="border" type="{{$input_or_hidden}}">
 
-        <input name="{{$comment['commentable_type']['name']}}" value="{{$comment['commentable_type']['value']}}" type="{{$input_or_hidden}}">
-        <input name="{{$comment['commentable_id']['name']}}" value="{{$comment['commentable_id']['value']}}" type="{{$input_or_hidden}}">
-        <input name="{{$comment['category']['name']}}" value="{{$comment['category']['value']}}" type="{{$input_or_hidden}}">
+        <input name="{{$comment['commentable_type']['name']}}" value="{{$comment['commentable_type']['value']}}" title="commentable_type" class="border" type="{{$input_or_hidden}}">
+        <input name="{{$comment['commentable_id']['name']}}" value="{{$comment['commentable_id']['value']}}" title="commentable_id" class="border" type="{{$input_or_hidden}}">
+        <input name="{{$comment['category']['name']}}" value="{{$comment['category']['value']}}" title="category" class="border" type="{{$input_or_hidden}}">
     @endif
-
+    
     <div class="grid grid-cols-12">
         @if($comment['mine'])
+            @if($deletable)
+                <input id="{{$comment['toBeDeleted']['name']}}" name="{{$comment['toBeDeleted']['name']}}" value="false" title="toBeDeleted" class="border" type="{{$input_or_hidden}}">
+            @endif
             <div class="col-span-12 md:col-span-10 md:col-start-2">
                 <x-controls.comment.comment2a-textarea :title="$title" :readOnly="$readOnly" :comment="$comment" class="bg-green-50"/>
             </div> 

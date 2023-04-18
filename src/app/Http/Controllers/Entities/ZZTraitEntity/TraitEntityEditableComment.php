@@ -23,11 +23,16 @@ trait TraitEntityEditableComment
         }
         foreach ($result as $line) {
             if (is_null($line['id']) && is_null($line['content'])) continue;
-            //Insert
             if (is_null($line['id'])) {
+                //Insert
                 Comment::create($line);
-            } else { //Update
-                Comment::find($line['id'])->update($line);
+            } else { //Update or Delete
+                $comment = Comment::find($line['id']);
+                if (isset($line['toBeDeleted']) && $line['toBeDeleted'] == true) {
+                    $comment->delete();
+                } else {
+                    $comment->update($line);
+                }
             }
         }
     }
