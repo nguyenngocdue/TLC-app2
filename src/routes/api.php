@@ -66,7 +66,9 @@ Route::group([
         Route::post('submit_form2', [App\Http\Controllers\Api\v1\qaqc\SubmitFormAndUploadFileController::class, 'submit2AndUploadFile']);
         Route::get('qaqc_insp_chklst_line/{id}', [App\Http\Controllers\Api\v1\qaqc\CommentApiController::class, 'getAll']);
         Route::post('comment', [App\Http\Controllers\Api\v1\qaqc\CommentApiController::class, 'store']);
-        Route::delete('comment/{id}', [App\Http\Controllers\Api\v1\qaqc\CommentApiController::class, 'destroy']);
+        Route::post('signature', [App\Http\Controllers\Api\v1\qaqc\Qaqc_insp_chklst_sht_sigController::class, 'store']);
+        Route::delete('signature/{id}', [App\Http\Controllers\Api\v1\qaqc\Qaqc_insp_chklst_sht_sigController::class, 'destroy']);
+        Route::put('signature/{id}', [App\Http\Controllers\Api\v1\qaqc\Qaqc_insp_chklst_sht_sigController::class, 'update']);
         Route::get("{id}/href_ncr", [App\Http\Controllers\Api\v1\qaqc\Qaqc_insp_chklst_lineController::class, 'getHrefFormNcr']);
     });
 });

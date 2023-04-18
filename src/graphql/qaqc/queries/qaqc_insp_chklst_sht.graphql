@@ -16,6 +16,7 @@ type Qaqc_insp_chklst_sht {
     # getRuns: [Qaqc_insp_chklst_run!]! @hasMany  # version 1
     getLines: [Qaqc_insp_chklst_line!]! @hasMany # version 2
     getTmplSheet: Qaqc_insp_tmpl_sht! @belongsTo
+    getShtSigs: [Qaqc_insp_chklst_sht_sig!]! @hasMany
 }
 
 input CreateQAQCInspChklstSheetInput {

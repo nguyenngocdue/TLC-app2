@@ -5,7 +5,7 @@ namespace App\Repositories\Qaqc_insp_chklst_line;
 use App\Repositories\BaseRepository;
 use App\Models\Qaqc_insp_chklst_line;
 
-class ProductRepository extends BaseRepository implements Qaqc_insp_chklst_lineRepositoryInterface
+class Qaqc_insp_chklst_lineRepository extends BaseRepository implements Qaqc_insp_chklst_lineRepositoryInterface
 {
 
     public function getModel()

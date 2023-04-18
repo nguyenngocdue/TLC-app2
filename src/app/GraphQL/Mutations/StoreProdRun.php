@@ -18,6 +18,7 @@ final class StoreProdRun
             $dt = Carbon::now();
             $prodRun = Prod_run::create([
                 "prod_sequence_id" => $args['prod_sequence_id'],
+                "owner_id" => $args['owner_id'],
                 "date" => $args['date'] ?? $dt->format('Y-m-d'),
                 "start" => $args['start'] ?? $dt->format('H:i:s'),
                 "end" => $args['end'] ?? null,

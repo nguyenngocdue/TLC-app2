@@ -16,4 +16,4 @@ mix.js('resources/js/app.js', 'public/js').postCss(
     'public/css',
     [require('tailwindcss')]
 )
-mix.js('resources/js/laravel-echo.js', 'public/js')
+// mix.js('resources/js/laravel-echo.js', 'public/js')

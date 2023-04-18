@@ -8,6 +8,10 @@ use App\Services\Comment\CommentService;
 use App\Services\Comment\CommentServiceInterface;
 use App\Repositories\Comment\CommentRepository;
 use App\Repositories\Comment\CommentRepositoryInterface;
+use App\Repositories\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigRepository;
+use App\Repositories\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigRepositoryInterface;
+use App\Services\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigService;
+use App\Services\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,10 +25,12 @@ class AppServiceProvider extends ServiceProvider
     {
         // singleton Services
         $this->app->singleton(CommentServiceInterface::class, CommentService::class);
+        $this->app->singleton(Qaqc_insp_chklst_sht_sigServiceInterface::class, Qaqc_insp_chklst_sht_sigService::class);
 
 
         // singleton Repositories
         $this->app->singleton(CommentRepositoryInterface::class, CommentRepository::class);
+        $this->app->singleton(Qaqc_insp_chklst_sht_sigRepositoryInterface::class, Qaqc_insp_chklst_sht_sigRepository::class);
     }
 
     /**

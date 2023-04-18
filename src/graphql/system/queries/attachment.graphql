@@ -6,17 +6,17 @@ extend type Query {
     attachment(id: ID @eq): Attachment @find @guard
 }
 type Attachment {
-    id: ID!
-    url_thumbnail: String!
-    url_media: String!
-    url_folder: String!
-    filename: String!
-    extension: String!
-    mine_type: String!
-    owner_id: Int!
+    id: ID
+    url_thumbnail: String
+    url_media: String
+    url_folder: String
+    filename: String
+    extension: String
+    mine_type: String
+    owner_id: Int
     object_type: String
     object_id: Int
-    category: Int!
+    category: Int
     created_at: DateTime
     updated_at: DateTime
 }

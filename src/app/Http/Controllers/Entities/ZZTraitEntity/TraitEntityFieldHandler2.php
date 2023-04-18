@@ -120,7 +120,7 @@ trait TraitEntityFieldHandler2
 
     private function handleFields(Request $request, $action)
     {
-
+        dump($request);
         $status = $request->status ?? '';
         $dataSource = $request->except(['_token', '_method', 'status', 'created_at', 'updated_at']);
         if ($action === 'store') $dataSource['id'] = null;

@@ -15,6 +15,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
         "getTmplSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, 'qaqc_insp_tmpl_sht_id'],
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "getShtSigs" => ["hasMany", Qaqc_insp_chklst_sht_sig::class, "qaqc_insp_chklst_sht_id"],
     ];
 
     public function getRuns()
@@ -33,7 +34,11 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     } // version 2
-
+    public function getShtSigs()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
     public function getChklst()
     {
         $p = $this->eloquentParams[__FUNCTION__];
