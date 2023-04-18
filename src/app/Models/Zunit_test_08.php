@@ -18,6 +18,7 @@ class Zunit_test_08 extends ModelExtended
         'assignee_1',
         'assignee_2',
         "order_no",
+        'closed_at',
     ];
     protected $table = "zunit_test_08s";
 

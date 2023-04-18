@@ -43,6 +43,9 @@ class Dropdown2 extends Component
         $table = $prop['relationships']['table'];
         $id = $this->name;
         $name = $this->multiple ? $this->name . "[]" : $this->name;
+
+        $nameless = (new (Str::modelPathFrom($table)))->nameless;
+
         $params = [
             'name' => $name,
             'id' => $id,
@@ -53,6 +56,7 @@ class Dropdown2 extends Component
             'readOnly' => $this->readOnly,
             'saveOnChange' => $this->saveOnChange,
             'allowClear' => $this->allowClear,
+            'nameless' => $nameless,
         ];
         // dump($params);
         return view('components.controls.has-data-source.dropdown2', $params);

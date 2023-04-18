@@ -13,6 +13,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_name": {
@@ -29,6 +32,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_description": {
@@ -45,6 +51,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_slug": {
@@ -61,6 +70,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_status": {
@@ -77,6 +89,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_owner_id": {
@@ -93,6 +108,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_created_at": {
@@ -109,6 +127,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_updated_at": {
@@ -125,6 +146,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_getSubProjects": {
@@ -141,6 +165,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     }
 }

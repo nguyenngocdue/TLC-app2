@@ -1,0 +1,155 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_hse_incident_report_id": {
+        "name": "_hse_incident_report_id",
+        "column_name": "hse_incident_report_id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_priority_id": {
+        "name": "_priority_id",
+        "column_name": "priority_id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_work_area_id": {
+        "name": "_work_area_id",
+        "column_name": "work_area_id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_opened_date": {
+        "name": "_opened_date",
+        "column_name": "opened_date",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_unsafe_action_type_id": {
+        "name": "_unsafe_action_type_id",
+        "column_name": "unsafe_action_type_id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    }
+}

@@ -25,17 +25,20 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
     {
         $pickerDate =  isset($modeParams['picker_date']) ? $modeParams['picker_date'] : '';
         // dd($fromDate);
-        $sql = "SELECT 	tb1.*
+        $sql = "SELECT 	uswp.name workplace_name,tb1.*
         FROM 
         (SELECT
         sp.name sub_project_name
         ,otr.id hr_overtime_request_id
         ,otline.sub_project_id sub_project_id
+        ,wp.name AS ot_workplace_name
+        ,us.workplace us_workplace_id
         ,otline.id request_id,
         otline.user_id user_id,
         us.name name_render,
         otline.employeeid employee_id
         ,otline.ot_date ot_date
+        ,wm.name work_mode_name
         ,otline.break_time break_time
         ,SUBSTR(otline.from_time, 1,5) from_time
         ,SUBSTR(otline.to_time, 1,5) to_time
@@ -46,7 +49,7 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
         ,if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,7), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,7)) AS years_month 
         ,otline.year_remaining_hours year_remaining_hours
 
-        FROM hr_overtime_request_lines otline, sub_projects sp, users us, hr_overtime_requests otr
+        FROM hr_overtime_request_lines otline, sub_projects sp, users us, hr_overtime_requests otr, work_modes wm, workplaces wp
         WHERE 1 = 1";
 
         if (isset($modeParams['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
@@ -58,9 +61,13 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
         }
         $sql .= "\n AND otline.sub_project_id = sp.id
                     AND otr.id = otline.hr_overtime_request_id
-                    AND  otr.status LIKE 'approved'
+                    AND otr.status LIKE 'approved'
                     AND us.id = otline.user_id
-                        ) AS tb1";
+                    AND otline.work_mode_id = wm.id 
+                    AND otr.workplace_id = wp.id";
+        if (isset($modeParams['ot_workplace_id'])) $sql .= "\n AND otr.workplace_id = '{{ot_workplace_id}}'";
+        $sql .= " \n  ) AS tb1
+                    LEFT JOIN workplaces uswp ON uswp.id = tb1.us_workplace_id ";
         if (isset($modeParams['month'])) $sql .= "\n WHERE tb1.years_month  = '{{month}}'";
         $sql .= "\n ORDER BY name_render, employee_id, ot_date DESC";
         return $sql;
@@ -72,65 +79,96 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
         $totalDataCol = [
             [
                 "dataIndex" => "sub_project_name",
-                "align" => "center"
+                "align" => "center",
+                "width" => 150,
+            ],
+            [
+                "title" => "OT Workplace",
+                "dataIndex" => "ot_workplace_name",
+                "align" => 'left',
+                "width" => 150,
+            ],
+            [
+                "title" => "Work Mode",
+                "dataIndex" => "work_mode_name",
+                "align" => 'left',
+                "width" => 200,
             ],
             [
                 "title" => "HR Overtime Request",
                 "dataIndex" => "hr_overtime_request_id",
                 "align" => "center",
+                "width" => 150,
                 "renderer" => "qr_code",
                 "type" => "hr_overtime_requests",
             ],
             [
                 "title" => "Employee ID",
                 "dataIndex" => "employee_id",
-                "align" => 'left'
+                "align" => 'left',
+                "width" => 150,
             ],
             [
                 "title" => "Full Name",
                 "dataIndex" => "name_render",
-                "align" => 'left'
+                "align" => 'left',
+                "width" => 350,
+            ],
+            [
+                "title" => "User Workplace",
+                "dataIndex" => "workplace_name",
+                "align" => 'left',
+                "width" => 150,
             ],
             [
                 "title" => "OT Date",
                 "dataIndex" => "ot_date",
-                "align" => "center"
+                "align" => "center",
+                "width" => 300,
             ],
             [
                 "title" => "From Time",
                 "dataIndex" => "from_time",
-                "align" => "center"
+                "align" => "center",
+                "width" => 150,
             ],
             [
                 "title" => "To Time",
                 "dataIndex" => "to_time",
-                "align" => "center"
+                "align" => "center",
+                "width" => 150,
             ],
             [
                 "title" => "Break Time (Mins)",
                 "dataIndex" => "break_time",
-                "align" => "right"
+                "align" => "right",
+                "width" => 150,
             ],
             [
                 "title" => "Total Time",
                 "dataIndex" => "total_time",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "dataIndex" => "month_allowed_hours",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "dataIndex" => "month_remaining_hours",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "dataIndex" => "year_allowed_hours",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "dataIndex" => "year_remaining_hours",
                 "align" => "right",
+                "width" => 150,
             ],
 
         ];

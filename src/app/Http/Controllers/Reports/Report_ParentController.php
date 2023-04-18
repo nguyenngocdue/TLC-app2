@@ -75,6 +75,11 @@ abstract class Report_ParentController extends Controller
         return $dataSource;
     }
 
+    protected function changeValueData($dataSource)
+    {
+        return $dataSource;
+    }
+
     protected function getSheets($dataSource) // Override document report
     {
         return [];
@@ -133,6 +138,7 @@ abstract class Report_ParentController extends Controller
     {
         $input = $request->input();
         $isFormType = isset($input['form_type']);
+        // dd($input);
         if ($isFormType && $input['form_type'] === 'updateParamsReport' || $isFormType && $input['form_type'] === 'updatePerPageReport') {
             (new UpdateUserSettings())($request);
         }
@@ -164,6 +170,7 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
         $start = microtime(true);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
+        $dataSource = $this->changeValueData($dataSource);
         $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);

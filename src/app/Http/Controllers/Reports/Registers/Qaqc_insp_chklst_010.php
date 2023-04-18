@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
+use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\Sub_project;
@@ -14,6 +15,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
     use TraitModifyDataToExcelReport;
+    use TraitForwardModeReport;
 
     protected $rotate45Width = 300;
     protected  $sub_project_id = 21;
@@ -67,7 +69,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
                     FROM sub_projects sp, prod_orders prod, qaqc_insp_chklsts chlst, qaqc_insp_tmpls tmpl, qaqc_insp_tmpl_shts tmplsh
                     WHERE 1 = 1";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
-        if (isset($modeParams['qaqc_insp_tmpl_id'])) $sql .= "\n AND chlst.qaqc_insp_tmpl_id = '{{checksheet_type_id}}'";
+        if (isset($modeParams['checksheet_type_id'])) $sql .= "\n AND chlst.qaqc_insp_tmpl_id = '{{checksheet_type_id}}'";
         $sql .= "\n AND sp.id = prod.sub_project_id
                     AND chlst.prod_order_id = prod.id
                     AND chlst.qaqc_insp_tmpl_id = tmpl.id
@@ -130,7 +132,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         ];
     }
 
-    private function changeValueData($dataSource)
+    protected function changeValueData($dataSource)
     {
 
         foreach ($dataSource as $key => $value) {
@@ -182,12 +184,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         return $dataSource;
     }
 
-    public function getDataForModeControl($dataSource = [])
-    {
-        $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        $insp_tmpls = ['checksheet_type_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
-        return array_merge($subProjects, $insp_tmpls);
-    }
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
@@ -201,7 +197,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         $groupedArray = Report::groupArrayByKey($enrichData, 'prod_id');
         $result = Report::mergeArrayValues($groupedArray);
         $data = $this->changeValueData($result);
-        // dd($data);
         return collect($data);
     }
 

@@ -1,3 +1,4 @@
+{{-- @dump($dataSource) --}}
 @foreach($dataSource as $idSheet => $data)
 <div class="w-[1000px] min-h-[1415px] items-center bor1der bg-white box-border p-8">
     <x-reports.header-sheet-report :dataSource="array_pop($data)" />

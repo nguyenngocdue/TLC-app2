@@ -11,11 +11,11 @@
     "_qaqc_ncr_id": {
         "name": "_qaqc_ncr_id",
         "column_name": "qaqc_ncr_id",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "closed": ""
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
     },
     "_cause_analysis": {
         "name": "_cause_analysis",

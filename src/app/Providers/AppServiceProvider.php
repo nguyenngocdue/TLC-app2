@@ -40,16 +40,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->when(MigrationRelationShipCreator::class)
-            ->needs('$customStubPath')
-            ->give(function ($app) {
-                return $app->basePath('stubs');
-            });
-        $this->app->when(CreateControllerEntityCreator::class)
-            ->needs('$customStubPath')
-            ->give(function ($app) {
-                return $app->basePath('stubs');
-            });
+        // $this->app->when(MigrationRelationShipCreator::class)
+        //     ->needs('$customStubPath')
+        //     ->give(function ($app) {
+        //         return $app->basePath('stubs');
+        //     });
+        // $this->app->when(CreateControllerEntityCreator::class)
+        //     ->needs('$customStubPath')
+        //     ->give(function ($app) {
+        //         return $app->basePath('stubs');
+        //     });
 
 
         include_once(__DIR__ . "/Macro/Str.php");
