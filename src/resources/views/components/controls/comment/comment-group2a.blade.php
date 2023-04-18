@@ -3,7 +3,7 @@
         <div>(None)</div>
     @endif
     @foreach($params as $comment)
-        <x-controls.comment2a 
+        <x-controls.comment.comment2a 
             :comment="$comment" 
             :properties="$properties"
             :readOnly="$readOnly"

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\Controls\Comment;
 
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
@@ -47,13 +47,18 @@ class Comment2a extends Component
         $created_at = $this->comment['created_at']['value'];
         [$title, $humanReadable] = $this->getTitle($name, $position, $created_at);
 
+        $hasNotCreated = is_null($this->comment['id']['value']);
         $user = CurrentUser::get();
         $differentOwner = $this->comment['owner_id']['value'] !== $user->id;
         $readOnly = $this->readOnly || $differentOwner;
         // dump($readOnly);
+        // dump($this->properties);
+        $allowed_to_delete = $this->properties['allowed_to_delete'] == true;
+        $deletable = !$this->readOnly && $allowed_to_delete && !$differentOwner && !$hasNotCreated;
+        // dump($deletable);
 
         return view(
-            'components.controls.comment2a',
+            'components.controls.comment.comment2a',
             [
                 'comment' => $this->comment,
                 // 'debug' => $this->debug,
@@ -62,6 +67,7 @@ class Comment2a extends Component
                 'humanReadable' => $humanReadable,
                 'properties' => $this->properties,
                 'readOnly' => $readOnly,
+                'deletable' => $deletable,
             ]
         );
     }

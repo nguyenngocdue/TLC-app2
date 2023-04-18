@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Controls;
+namespace App\View\Components\Controls\Comment;
 
 use App\Models\User;
 use App\Utils\Constant;
@@ -110,7 +110,7 @@ class CommentGroup2a extends Component
 
         $properties = Properties::getFor('comment', $this->category);
 
-        return view('components.controls.comment-group2a', [
+        return view('components.controls.comment.comment-group2a', [
             'readOnly' => $this->readOnly,
             'commentableType' => $commentableTypePath,
             'commentableId' => $this->commentableId,

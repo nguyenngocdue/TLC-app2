@@ -15,29 +15,17 @@
     <div class="grid grid-cols-12">
         @if($comment['mine'])
             <div class="col-span-12 md:col-span-10 md:col-start-2">
-                <x-renderer.card title="{{$title}}" px=0 py=0 class="bg-gray-100 px-2">
-                    <textarea @readonly($readOnly) rows="2" name="{{$comment['content']['name']}}"
-                    class="w-full border-gray-100 bg-green-50 focus:border-gray-100 rounded"
-                    >{{$comment['content']['value']}}</textarea>
-                </x-renderer.card>
+                <x-controls.comment.comment2a-textarea :title="$title" :readOnly="$readOnly" :comment="$comment" class="bg-green-50"/>
             </div> 
             <div class="col-span-12 md:col-span-1 text-xs flex justify-start">
-                <div class="pt-4">
-                    <x-renderer.image class="rounded-full" w=40 src="{{$comment['owner_id']['avatar']}}" />
-                </div>
+                <x-controls.comment.comment2a-avatar :comment="$comment" :deletable="$deletable" id="{{$comment['id']['value']}}" class="justify-start"/>
             </div>
         @else
             <div class="col-span-12 md:col-span-1 text-xs flex justify-end">
-                <div class="pt-4">
-                    <x-renderer.image class="rounded-full" w=40 src="{{$comment['owner_id']['avatar']}}" />
-                </div>
+                <x-controls.comment.comment2a-avatar :comment="$comment" :deletable="$deletable" id="{{$comment['id']['value']}}" class="justify-end"/>
             </div>
             <div class="col-span-12 md:col-span-10">
-                <x-renderer.card title="{{$title}}" px=0 py=0 class="bg-gray-100 px-2">
-                    <textarea @readonly($readOnly) rows="2" name="{{$comment['content']['name']}}"
-                        class="w-full border-gray-100 bg-gray-100 focus:border-gray-100 rounded"
-                        >{{$comment['content']['value']}}</textarea>
-                </x-renderer.card>
+                <x-controls.comment.comment2a-textarea :title="$title" :readOnly="$readOnly" :comment="$comment" class="bg-gray-100"/>
             </div> 
         @endif
     </div>
