@@ -8,7 +8,7 @@ x-minio-common:
   # image: quay.io/minio/minio:RELEASE.2022-12-12T19-27-27Z
   &minio-common
   image: quay.io/minio/minio:RELEASE.2022-07-26T00-53-03Z
-  command: server --console-address "console.minio.tlcmodular.com" http://minio{1...1}/data{1...2}
+  command: server --console-address "console.minio.tlcmodular.com:443" http://minio{1...1}/data{1...2}
   # command: server --console-address ":9001" http://minio{1...4}/data{1...2}
   restart: unless-stopped
   expose:
