@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('assignee_2')->nullable();
             $table->unsignedInteger('order_no')->nullable();
 
+            $table->dateTime('closed_at')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
         });
