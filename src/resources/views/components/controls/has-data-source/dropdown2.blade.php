@@ -32,7 +32,7 @@
     @endif
 @else
 
-    <select id='{{$id}}' name='{{$name}}' onChange='onChangeDropdown2("{{$name}}")' {{$multipleStr}} controlType='dropdown' class='{{$classList}}'></select>
+    <select id='{{$id}}' name='{{$name}}' allowClear="{{$allowClear?'true':'false'}}" onChange='onChangeDropdown2("{{$name}}")' {{$multipleStr}} controlType='dropdown' class='{{$classList}}'></select>
 
     <script>
         params2 = {
