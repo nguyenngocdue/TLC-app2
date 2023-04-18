@@ -18,7 +18,7 @@
                 <input id="{{$comment['toBeDeleted']['name']}}" name="{{$comment['toBeDeleted']['name']}}" value="false" title="toBeDeleted" class="border" type="{{$input_or_hidden}}">
             @endif
             <div class="col-span-12 md:col-span-10 md:col-start-2">
-                <x-controls.comment.comment2a-textarea :title="$title" :readOnly="$readOnly" :comment="$comment" class="bg-green-50"/>
+                <x-controls.comment.comment2a-textarea :title="$title" :readOnly="$readOnly" :comment="$comment" class="bg-lime-50"/>
             </div> 
             <div class="col-span-12 md:col-span-1 text-xs flex justify-start">
                 <x-controls.comment.comment2a-avatar :comment="$comment" :deletable="$deletable" id="{{$comment['id']['value']}}" class="justify-start"/>
