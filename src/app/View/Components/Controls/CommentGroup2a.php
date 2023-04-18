@@ -5,6 +5,7 @@ namespace App\View\Components\Controls;
 use App\Models\User;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Json\Properties;
 use Database\Seeders\FieldSeeder;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
@@ -23,6 +24,8 @@ class CommentGroup2a extends Component
         private $commentableId = '',
         private $category,
         private $debug = false,
+
+
     ) {
         //
         static::$counter++;
@@ -105,6 +108,8 @@ class CommentGroup2a extends Component
         if ($this->debug) dump("Type: $this->commentableType($commentableTypePath) - ID: $this->commentableId - Category: $this->category #$category_id - Count: " . sizeof($comments));
         $params = $this->createDataSource($comments, $commentableTypePath, $this->commentableId, $category_id);
 
+        $properties = Properties::getFor('comment', $this->category);
+
         return view('components.controls.comment-group2a', [
             'readOnly' => $this->readOnly,
             'commentableType' => $commentableTypePath,
@@ -113,6 +118,7 @@ class CommentGroup2a extends Component
             'comments' => $comments,
             'params' => $params,
             'debug' => $this->debug,
+            'properties' => $properties,
         ]);
     }
 }

@@ -33,9 +33,9 @@ class Comment2 extends Component
         private $readOnly = false,
         private $rowIndex = null,
 
-        private $allowedDelete = null,
-        private $allowedChangeOwner = null,
-        private $allowedAttachment = null,
+        private $allowedToDelete = null,
+        // private $allowedChangeOwner = null,
+        // private $allowedAttachment = null,
         private $forceCommentOnce = null,
 
     ) {
@@ -52,7 +52,7 @@ class Comment2 extends Component
     public function render()
     {
         // if ($this->commentDebug) {
-        //     echo "allowedDelete: [$this->allowedDelete], allowedChangeOwner: [$this->allowedChangeOwner]";
+        //     echo "allowedToDelete: [$this->allowedToDelete], allowedChangeOwner: [$this->allowedChangeOwner]";
         //     echo "allowedAttachment: [$this->allowedAttachment], forceCommentOnce: [$this->forceCommentOnce]";
         // }
         $user = User::find($this->ownerId);
@@ -74,9 +74,9 @@ class Comment2 extends Component
                 $comment_attachment = $commentItem->comment_attachment;
             }
         }
-        $allowedDelete = $this->allowedDelete;
+        $allowedToDelete = $this->allowedToDelete;
         if (is_null($this->commentId)) {
-            $allowedDelete = false;
+            $allowedToDelete = false;
         }
 
 
@@ -99,9 +99,9 @@ class Comment2 extends Component
             'commentableId' => $this->commentableId,
             'commentAttachment' => $comment_attachment,
 
-            'allowedDelete' => $allowedDelete,
-            'allowedChangeOwner' => $this->allowedChangeOwner,
-            'allowedAttachment' => $this->allowedAttachment,
+            'allowedToDelete' => $allowedToDelete,
+            // 'allowedChangeOwner' => $this->allowedChangeOwner,
+            // 'allowedAttachment' => $this->allowedAttachment,
             'forceCommentOnce' => $this->forceCommentOnce,
             'commentDebug' => $this->commentDebug,
             'commentDebugType' => $this->commentDebug ?  'text' : 'hidden',

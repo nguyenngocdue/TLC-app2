@@ -3,112 +3,98 @@
         "name": "_comment_1",
         "field_id": "6",
         "field_name": "comment_1",
-        "allowed_change_owner": "",
-        "allowed_delete": "true",
+        "allowed_to_delete": "true",
         "force_comment_once": ""
     },
     "_comment_2": {
         "name": "_comment_2",
         "field_id": "7",
         "field_name": "comment_2",
-        "allowed_change_owner": "",
-        "allowed_delete": "true",
+        "allowed_to_delete": "",
         "force_comment_once": ""
     },
     "_comment_3": {
         "name": "_comment_3",
         "field_id": "8",
         "field_name": "comment_3",
-        "allowed_change_owner": "",
-        "allowed_delete": "true",
+        "allowed_to_delete": "true",
         "force_comment_once": "true"
     },
     "_comment_4": {
         "name": "_comment_4",
         "field_id": "9",
         "field_name": "comment_4",
-        "allowed_change_owner": "",
-        "allowed_delete": "",
+        "allowed_to_delete": "",
         "force_comment_once": ""
     },
     "_comment_5": {
         "name": "_comment_5",
         "field_id": "10",
         "field_name": "comment_5",
-        "allowed_change_owner": "",
-        "allowed_delete": "",
+        "allowed_to_delete": "",
         "force_comment_once": ""
     },
     "_comment_by_clinic": {
         "name": "_comment_by_clinic",
         "field_id": "28",
         "field_name": "comment_by_clinic",
-        "allowed_change_owner": "",
-        "allowed_delete": "",
+        "allowed_to_delete": "",
         "force_comment_once": ""
     },
     "_comment_by_line_manager": {
         "name": "_comment_by_line_manager",
         "field_id": "29",
         "field_name": "comment_by_line_manager",
-        "allowed_change_owner": "",
-        "allowed_delete": "",
+        "allowed_to_delete": "",
         "force_comment_once": ""
     },
     "_comment_by_general_manager": {
         "name": "_comment_by_general_manager",
         "field_id": "30",
         "field_name": "comment_by_general_manager",
-        "allowed_change_owner": "",
-        "allowed_delete": "",
+        "allowed_to_delete": "",
         "force_comment_once": ""
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "field_id": "27",
         "field_name": "comment_rejected_reason",
-        "allowed_change_owner": "",
-        "allowed_delete": "",
+        "allowed_to_delete": "",
         "force_comment_once": ""
     },
     "_comment_asm_rejected_reason": {
         "name": "_comment_asm_rejected_reason",
         "field_id": "50",
         "field_name": "comment_asm_rejected_reason",
-        "allowed_change_owner": "",
-        "allowed_delete": "",
+        "allowed_to_delete": "",
         "force_comment_once": ""
     },
     "_comment_approver_decision": {
         "name": "_comment_approver_decision",
         "field_id": "52",
         "field_name": "comment_approver_decision",
-        "allowed_change_owner": "",
-        "allowed_delete": "",
+        "allowed_to_delete": "",
         "force_comment_once": ""
     },
     "_comment_inspector_decision": {
         "name": "_comment_inspector_decision",
         "field_id": "53",
         "field_name": "comment_inspector_decision",
-        "allowed_change_owner": "",
-        "allowed_delete": "",
+        "allowed_to_delete": "",
         "force_comment_once": ""
     },
     "_comment_insp_rejected_reason": {
         "name": "_comment_insp_rejected_reason",
         "field_id": "51",
         "field_name": "comment_insp_rejected_reason",
-        "allowed_change_owner": "",
-        "allowed_delete": "",
+        "allowed_to_delete": "",
         "force_comment_once": ""
     },
     "_insp_comments": {
         "name": "_insp_comments",
         "field_id": "13",
         "field_name": "insp_comments",
-        "allowed_change_owner": "",
-        "allowed_delete": "",
+        "allowed_to_delete": "",
         "force_comment_once": ""
     }
 }

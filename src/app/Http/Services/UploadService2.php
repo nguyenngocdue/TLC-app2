@@ -56,14 +56,15 @@ class UploadService2
         $thumbnailW = 150;
         $thumbnailH = 150;
         $allowedExts = ['jpeg', 'png', 'jpg', 'gif', 'webp'];
-        $attachmentP = Properties::getAllOf('attachment');
+        // $attachmentP = Properties::getAllOf('attachment');
         $path = env('MEDIA_ROOT_FOLDER', 'media') . "/" . date(Constant::FORMAT_YEAR_MONTH) . "/";
         try {
             $fields = Helper::getDataDbByName('fields', 'name', 'id');
             $filesUpload = $request->files;
             $attachmentRows = [];
             foreach ($filesUpload as $fieldName => $files) {
-                $property = ($attachmentP['_' . $fieldName] ?? ['max_file_size' => 10, 'max_file_count' => 10, 'allowed_file_types' => 'only_images']);
+                $property = Properties::getFor('attachment', $fieldName);
+                // $property = ($attachmentP['_' . $fieldName] ?? ['max_file_size' => 10, 'max_file_count' => 10, 'allowed_file_types' => 'only_images']);
                 $nameValidate = $fieldName . '.toBeUploaded';
                 $maxFileSize = $property['max_file_size'] * 1024;
                 $maxFileCount = $property['max_file_count'];

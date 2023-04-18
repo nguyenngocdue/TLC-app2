@@ -74,9 +74,9 @@ class CommentGroup2 extends Component
             'userId' => $userId,
             'userPosition' => $userPosition,
 
-            "allowedChangeOwner" => $properties['allowed_change_owner'],
+            // "allowedChangeOwner" => $properties['allowed_change_owner'],
             // "allowedAttachment" => $properties['allowed_attachment'],
-            "allowedDelete" => $properties['allowed_delete'],
+            "allowedToDelete" => $properties['allowed_to_delete'],
             "forceCommentOnce" => $properties['force_comment_once'],
             "readOnly" => $this->readOnly,
             'now' => date(Constant::FORMAT_DATETIME_ASIAN),

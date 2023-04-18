@@ -17,7 +17,7 @@
             @php $name = $readOnly ? '' : "{$comment01Name}[commentable_id][$rowIndex]"; @endphp
             <input name='{{$name}}' type="{{$commentDebugType}}" value="{{$commentableId}}" readonly class="readonly w-full border rounded-lg">
         </div>
-        @if($allowedDelete) 
+        @if($allowedToDelete) 
         <div class="col-span-2">
             @php $destroyName="{$comment01Name}[DESTROY_THIS_LINE][$rowIndex]"; @endphp
             <input name="{{$destroyName}}" id="{{$destroyName}}" type="{{$commentDebugType}}" value="" class="readonly w-full border" />
@@ -57,7 +57,7 @@
         <div class="col-span-1 text-center flex">
             <div class="m-auto text-center flex-1">
                 <div class="flex">
-                    @if($allowedDelete && !$readOnly) 
+                    @if($allowedToDelete && !$readOnly) 
                         <button type="button" title="#{{$commentId}}" onclick='trashComment("{{$destroyName}}","{{$comment01Name}}_div_{{$rowIndex}}")' class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full">
                             <i class="text-[#d11a2a] fas fa-trash cursor-pointer"></i>
                         </button>
