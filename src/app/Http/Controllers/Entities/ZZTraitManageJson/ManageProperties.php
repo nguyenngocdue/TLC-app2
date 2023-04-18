@@ -44,12 +44,12 @@ class ManageProperties extends Manage_Parent
             ],
         ];
         $result['comment'] = [
-            [
-                'dataIndex' => 'allowed_change_owner',
-                'renderer' => 'checkbox',
-                'editable' => true,
-                'align' => 'center',
-            ],
+            // [
+            //     'dataIndex' => 'allowed_change_owner',
+            //     'renderer' => 'checkbox',
+            //     'editable' => true,
+            //     'align' => 'center',
+            // ],
             // [
             //     'dataIndex' => 'allowed_attachment',
             //     'renderer' => 'checkbox',
@@ -57,7 +57,7 @@ class ManageProperties extends Manage_Parent
             //     'align' => 'center',
             // ],
             [
-                'dataIndex' => 'allowed_delete',
+                'dataIndex' => 'allowed_to_delete',
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',

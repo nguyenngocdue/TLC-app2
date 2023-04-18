@@ -14,7 +14,7 @@ class Zunit_test_06 extends ModelExtended
         "comment_1" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_2" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_3" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-        // "comment_4" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "comment_4" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         // "comment_5" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
 
         "getDiscipline1" => ['hasMany', Prod_discipline_1::class, 'prod_discipline_id'],

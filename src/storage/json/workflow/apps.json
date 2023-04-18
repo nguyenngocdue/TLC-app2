@@ -160,17 +160,6 @@
         "hidden": "true",
         "icon": null
     },
-    "me": {
-        "name": "me",
-        "package": "system",
-        "sub_package": "user",
-        "title": "Me",
-        "nickname": null,
-        "doc_id_format_column": null,
-        "status": null,
-        "hidden": "true",
-        "icon": null
-    },
     "permissions": {
         "name": "permissions",
         "package": "system",

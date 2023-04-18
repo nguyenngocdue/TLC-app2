@@ -27,7 +27,7 @@ class Grid extends Component
      */
     public function render()
     {
-
+        if (empty($this->items)) return "<x-renderer.emptiness class='border' />";
         if ($this->groupBy) usort($this->items, fn ($a, $b) => strcasecmp($a[$this->groupBy], $b[$this->groupBy]));
         // dump($this->groupBy);
 

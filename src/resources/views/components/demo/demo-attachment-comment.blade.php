@@ -26,18 +26,18 @@
         <form action="" method="GET">
             @dump($_GET['comment01'] ??[])
             <x-renderer.card title="Comment 01">
-                allowed_delete=1
+                allowed_to_delete=1
                 <x-renderer.comment2 comment01Name="comment01" rowIndex=0 category=6 commentId=10 
                     commentableType='App\Models\EntityName' commentableId=1 
                     ownerId=1 positionRendered='Position 01' datetime='2022-01-01 01:02:03' content="Text 01"
-                    allowedDelete=1
+                    allowedToDelete=1
                     />
-                    allowed_change_owner=1
+                    {{-- allowed_change_owner=1
                     <x-renderer.comment2 comment01Name="comment01" rowIndex=1 category=6 commentId=11 
                     commentableType='App\Models\EntityName' commentableId=1 
                     ownerId=2 positionRendered='Position 02' datetime='2022-01-02 01:02:03' content="Text 02"
                     allowedChangeOwner=1
-                    />
+                    /> --}}
                     {{-- allowed_attachment=1
                     <x-renderer.comment2 comment01Name="comment01" rowIndex=2 category=6 commentId=12 
                     commentableType='App\Models\EntityName' commentableId=1 

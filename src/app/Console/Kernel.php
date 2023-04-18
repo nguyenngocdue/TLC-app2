@@ -2,8 +2,8 @@
 
 namespace App\Console;
 
-use App\Console\Commands\CreateControllerEntityCommand;
-use App\Console\Commands\CreateTableRelationshipCommand;
+// use App\Console\Commands\CreateControllerEntityCommand;
+// use App\Console\Commands\CreateTableRelationshipCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
         require base_path("routes/console.php");
     }
     protected $commands = [
-        CreateTableRelationshipCommand::class,
-        CreateControllerEntityCommand::class
+        // CreateTableRelationshipCommand::class,
+        // CreateControllerEntityCommand::class
     ];
 }

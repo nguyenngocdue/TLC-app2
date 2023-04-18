@@ -1,0 +1,502 @@
+{
+    "acct_manager": {
+        "name": "acct_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "acct_manager_nz": {
+        "name": "acct_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "acct_member": {
+        "name": "acct_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "acct_member_nz": {
+        "name": "acct_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "admin": {
+        "name": "admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true",
+        "cancelled": "true"
+    },
+    "bd_manager": {
+        "name": "bd_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "bd_member": {
+        "name": "bd_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "cpl_manager_nz": {
+        "name": "cpl_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "cpl_member": {
+        "name": "cpl_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "dc_ho": {
+        "name": "dc_ho",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "dc_manager": {
+        "name": "dc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "dc_ws": {
+        "name": "dc_ws",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "des_manager": {
+        "name": "des_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "des_member": {
+        "name": "des_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "dir": {
+        "name": "dir",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "dir_nz": {
+        "name": "dir_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "external_inspector": {
+        "name": "external_inspector",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "fac_admin": {
+        "name": "fac_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "fin_member_nz": {
+        "name": "fin_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "guest": {
+        "name": "guest",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "hr_manager": {
+        "name": "hr_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "hr_member": {
+        "name": "hr_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "hr_member_nz": {
+        "name": "hr_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "hse_manager": {
+        "name": "hse_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "hse_member": {
+        "name": "hse_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "it_manager": {
+        "name": "it_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "it_member": {
+        "name": "it_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "mgr_asst_nz": {
+        "name": "mgr_asst_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "newcomer": {
+        "name": "newcomer",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "pln_admin": {
+        "name": "pln_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "proc_manager": {
+        "name": "proc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "proc_member": {
+        "name": "proc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "proc_member_nz": {
+        "name": "proc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "prod_manager": {
+        "name": "prod_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "prod_manager_nz": {
+        "name": "prod_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "prod_member": {
+        "name": "prod_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "prod_member_nz": {
+        "name": "prod_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "proj_manager": {
+        "name": "proj_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "proj_manager_nz": {
+        "name": "proj_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "proj_member": {
+        "name": "proj_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "proj_member_nz": {
+        "name": "proj_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "qaqc_manager": {
+        "name": "qaqc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "qaqc_member": {
+        "name": "qaqc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "qs_manager": {
+        "name": "qs_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "qs_member": {
+        "name": "qs_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "qs_member_nz": {
+        "name": "qs_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "supreme_manage": {
+        "name": "supreme_manage",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "whs_manager": {
+        "name": "whs_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "whs_member": {
+        "name": "whs_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "worker": {
+        "name": "worker",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    }
+}

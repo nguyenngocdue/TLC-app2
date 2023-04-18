@@ -62,6 +62,7 @@ trait TraitEntityCRUDStoreUpdate2
 			if ($uploadedIds) {
 				$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
 			}
+			$this->processComments($request, $objectId);
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		} catch (Exception $e) {
@@ -97,7 +98,6 @@ trait TraitEntityCRUDStoreUpdate2
 		// 	dump($request->input());
 		// }
 
-		$this->processComments($request);
 
 		$isFakeRequest = $request['tableNames'] == 'fakeRequest';
 		try {
@@ -145,6 +145,7 @@ trait TraitEntityCRUDStoreUpdate2
 			if ($uploadedIds) {
 				$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
 			}
+			$this->processComments($request);
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		} catch (Exception $e) {

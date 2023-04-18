@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 trait TraitEntityEditableComment
 {
-    function processComments(Request $request)
+    function processComments(Request $request, $commentableId = null)
     {
         $comments = $request->input('comments');
         if (is_null($comments)) return;
@@ -15,9 +15,12 @@ trait TraitEntityEditableComment
         foreach ($comments as $fieldName => $fields) {
             foreach ($fields as $key => $value) {
                 $result[$key][$fieldName] = $value;
+                //In case inserting new parent
+                if ($fieldName == 'commentable_id' && is_null($value)) {
+                    $result[$key]['commentable_id'] = $commentableId;
+                }
             }
         }
-        // dump($result);
         foreach ($result as $line) {
             if (is_null($line['id']) && is_null($line['content'])) continue;
             //Insert

@@ -1,0 +1,26 @@
+{
+    "new": {
+        "name": "new",
+        "withdraw_to": ""
+    },
+    "assigned": {
+        "name": "assigned",
+        "withdraw_to": ""
+    },
+    "rejected": {
+        "name": "rejected",
+        "withdraw_to": ""
+    },
+    "inspected": {
+        "name": "inspected",
+        "withdraw_to": ""
+    },
+    "inspection_rejected": {
+        "name": "inspection_rejected",
+        "withdraw_to": ""
+    },
+    "closed": {
+        "name": "closed",
+        "withdraw_to": ""
+    }
+}
