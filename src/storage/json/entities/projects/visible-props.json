@@ -1,0 +1,110 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
+    "_getSubProjects": {
+        "name": "_getSubProjects",
+        "column_name": "getSubProjects",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    }
+}

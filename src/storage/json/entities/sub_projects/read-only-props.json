@@ -1,0 +1,122 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "_prodOrders": {
+        "name": "_prodOrders",
+        "column_name": "prodOrders",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    }
+}
