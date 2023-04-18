@@ -31,7 +31,7 @@
                     Dropdown
                 </div>
                 <div class="col-span-9">
-                    <x-modals.parent-id7 name='modal_ot_user3' multiple={{false}}>
+                    <x-modals.parent-id7 name='modal_ot_user3' multiple={{false}} allowClear="true">
                         </x-modals.parent-type7>
                 </div>
             </div>
