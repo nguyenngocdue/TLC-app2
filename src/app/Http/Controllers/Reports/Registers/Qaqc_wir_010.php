@@ -66,24 +66,10 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
             $dataColumn = array_map(fn ($item) => ["dataIndex" => $item, "align" => "center", "width" => 100], $wirDesc);
             return $dataColumn;
         }
-        // Check DataSource empty
-        // foreach ($items as $key => $value) {
-        //     foreach ($value as $key => $column) {
-        //         // dd($value);
-        //         if ($key === "370._sanitary_wares_leak_test") {
-        //             // dd($value);
-        //         }
-        //     }
-        // }
-
         $flattenData = array_merge(...$items);
-
-
-
         // dd($flattenData);
         $idx = array_search("wir_status", array_keys($flattenData));
         $dataColumn = array_slice($flattenData, $idx + 1, count($flattenData) - $idx, true);
-
         ksort($dataColumn);
         unset($dataColumn['wir_status']);
 
@@ -188,14 +174,8 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                 'value' => $item['prod_order_name'],
                 'cell_title' => $item['prod_order_id'],
             ];
-            // dd($item);
-
             $wirDescName =  is_null($item['wir_description_name']) ? [] : [Report::slugName($item['wir_description_name']) => $htmlRender];
-
-            // Edit visibility of production_order_name + sub_project_name to display in the table
-            // $prodNameHtml = ['prod_order_name_html' =>  "<div  style='width: 120px'>{$item['prod_order_name']}</div>"];
-            // $subProjectNameHtml = ['sub_project_name_html' =>  "<div  style='width: 80px'>{$item['sub_project_name']}</div>"];
-            return /* $prodNameHtml + $subProjectNameHtml + */ (array)$item + $wirDescName;
+            return (array)$item + $wirDescName;
         }, array_values($items));
 
         // group by prod_order_id

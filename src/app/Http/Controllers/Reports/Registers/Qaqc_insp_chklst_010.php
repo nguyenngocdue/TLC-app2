@@ -132,7 +132,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         ];
     }
 
-    private function changeValueData($dataSource)
+    protected function changeValueData($dataSource)
     {
 
         foreach ($dataSource as $key => $value) {
@@ -184,12 +184,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         return $dataSource;
     }
 
-    public function getDataForModeControl($dataSource = [])
-    {
-        $subProjects = ['sub_project_id' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        $insp_tmpls = ['checksheet_type_id' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
-        return array_merge($subProjects, $insp_tmpls);
-    }
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
@@ -203,7 +197,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         $groupedArray = Report::groupArrayByKey($enrichData, 'prod_id');
         $result = Report::mergeArrayValues($groupedArray);
         $data = $this->changeValueData($result);
-        // dd($data);
         return collect($data);
     }
 
