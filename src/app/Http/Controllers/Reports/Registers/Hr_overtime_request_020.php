@@ -79,80 +79,96 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
         $totalDataCol = [
             [
                 "dataIndex" => "sub_project_name",
-                "align" => "center"
+                "align" => "center",
+                "width" => 150,
             ],
             [
                 "title" => "OT Workplace",
                 "dataIndex" => "ot_workplace_name",
-                "align" => 'left'
+                "align" => 'left',
+                "width" => 150,
             ],
             [
                 "title" => "Work Mode",
                 "dataIndex" => "work_mode_name",
-                "align" => 'left'
+                "align" => 'left',
+                "width" => 200,
             ],
             [
                 "title" => "HR Overtime Request",
                 "dataIndex" => "hr_overtime_request_id",
                 "align" => "center",
+                "width" => 150,
                 "renderer" => "qr_code",
                 "type" => "hr_overtime_requests",
             ],
             [
                 "title" => "Employee ID",
                 "dataIndex" => "employee_id",
-                "align" => 'left'
+                "align" => 'left',
+                "width" => 150,
             ],
             [
                 "title" => "Full Name",
                 "dataIndex" => "name_render",
-                "align" => 'left'
+                "align" => 'left',
+                "width" => 350,
             ],
             [
                 "title" => "User Workplace",
                 "dataIndex" => "workplace_name",
-                "align" => 'left'
+                "align" => 'left',
+                "width" => 150,
             ],
             [
                 "title" => "OT Date",
                 "dataIndex" => "ot_date",
-                "align" => "center"
+                "align" => "center",
+                "width" => 300,
             ],
             [
                 "title" => "From Time",
                 "dataIndex" => "from_time",
-                "align" => "center"
+                "align" => "center",
+                "width" => 150,
             ],
             [
                 "title" => "To Time",
                 "dataIndex" => "to_time",
-                "align" => "center"
+                "align" => "center",
+                "width" => 150,
             ],
             [
                 "title" => "Break Time (Mins)",
                 "dataIndex" => "break_time",
-                "align" => "right"
+                "align" => "right",
+                "width" => 150,
             ],
             [
                 "title" => "Total Time",
                 "dataIndex" => "total_time",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "dataIndex" => "month_allowed_hours",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "dataIndex" => "month_remaining_hours",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "dataIndex" => "year_allowed_hours",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "dataIndex" => "year_remaining_hours",
                 "align" => "right",
+                "width" => 150,
             ],
 
         ];

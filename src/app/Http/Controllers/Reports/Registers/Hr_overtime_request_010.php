@@ -84,68 +84,82 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
             [
                 'title' => 'OT Workplace',
                 "dataIndex" => "ot_workplace_name",
-                "align" => 'left'
+                "align" => 'left',
+                "width" => 150,
             ],
             [
                 "title" => "Team",
                 "dataIndex" => "user_category_name",
-                "align" => 'left'
+                "align" => 'left',
+                "width" => 150,
             ],
             [
                 "title" => "Employee ID",
                 "dataIndex" => "employee_id",
-                "align" => 'left'
+                "align" => 'left',
+                "width" => 150,
             ],
             [
                 "title" => "Full Name",
                 "dataIndex" => "name_render",
-                "align" => 'left'
+                "align" => 'left',
+                "width" => 230,
             ],
             [
                 "dataIndex" => "user_workplace",
-                "align" => 'left'
+                "align" => 'left',
+                "width" => 150,
+
             ],
             [
                 "title" => "Months",
                 "dataIndex" => "year_months",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "title" => "Maximum Allowed OT Hours (Month)",
                 "dataIndex" => "maximum_allowed_ot_hours",
                 "align" => "right",
+                "width" => 150,
             ],
             [
 
                 "title" => "Total Overtime Hours (Month)",
                 "dataIndex" => "total_overtime_hours",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "title" => "Remaining Allowed OT Hours (Month)",
                 "dataIndex" => "remaining_allowed_ot_hours",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "title" => "Years",
                 "dataIndex" => "years_month",
                 "align" => "right",
+                "width" => 150,
             ],
 
             [
                 "title" => "Maximum Allowed OT Hours (Year)",
                 "dataIndex" => "maximum_allowed_ot_hours_year",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "title" => "Total Overtime Hours (Month)",
                 "dataIndex" => "_total_overtime_hours",
                 "align" => "right",
+                "width" => 150,
             ],
             [
                 "title" => "Remaining Allowed OT Hours (Year)",
                 "dataIndex" => "remaining_allowed_ot_hours_year",
                 "align" => "right",
+                "width" => 150,
             ],
         ];
     }
