@@ -19,8 +19,8 @@ class CommentGroup2a extends Component
      */
     public function __construct(
         private $readOnly = false,
-        private $commentableType = 1,
-        private $commentableId = 1,
+        private $commentableType,
+        private $commentableId = '',
         private $category,
         private $debug = false,
     ) {
@@ -97,8 +97,11 @@ class CommentGroup2a extends Component
     {
         $category_id = FieldSeeder::getIdFromFieldName($this->category);
         $commentableTypePath = Str::modelPathFrom($this->commentableType);
-        $commentableItem = $commentableTypePath::find($this->commentableId);
-        $comments = $commentableItem->{$this->category};
+        $comments = [];
+        if ('' !== $this->commentableId) {
+            $commentableItem = $commentableTypePath::find($this->commentableId);
+            $comments = $commentableItem->{$this->category};
+        }
         if ($this->debug) dump("Type: $this->commentableType($commentableTypePath) - ID: $this->commentableId - Category: $this->category #$category_id - Count: " . sizeof($comments));
         $params = $this->createDataSource($comments, $commentableTypePath, $this->commentableId, $category_id);
 

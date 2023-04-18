@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\FileBag;
 
 trait TraitEntityEditableTable
 {
-    use TraitEntityComment2;
+    // use TraitEntityComment2;
 
     private function parseHTTPArrayToLines(array $dataSource)
     {
@@ -53,9 +53,9 @@ trait TraitEntityEditableTable
 
             $dataSource = $this->parseHTTPArrayToLines($dataSource);
             // dump($tableName);
-            if ($tableName === 'comments') {
-                $dataSource = $this->removeNullCommentOfNullId($dataSource);
-            }
+            // if ($tableName === 'comments') {
+            //     $dataSource = $this->removeNullCommentOfNullId($dataSource);
+            // }
 
             $this->dump1("RECURSIVE CALLED PARSING from HTML DATA to ARRAY $tableName", $dataSource, __LINE__);
             // dump($dataSource);
@@ -64,7 +64,7 @@ trait TraitEntityEditableTable
 
             foreach ($dataSource as $rowIndex => $line) {
                 $fakeRequest = new Request();
-                if ($tableName === 'comments') $line['commentable_id'] = $parentId;
+                // if ($tableName === 'comments') $line['commentable_id'] = $parentId;
                 $line['tableNames'] = "fakeRequest";
                 // $line['rowIndex'] = $rowIndex;
                 $line['idForScroll'] = substr($props[$table01Name], 1); //remove first "_"
