@@ -3,6 +3,11 @@
         <div>(None)</div>
     @endif
     @foreach($params as $comment)
-        <x-controls.comment2a :comment="$comment" :debug="$debug" />
+        <x-controls.comment2a 
+            :comment="$comment" 
+            :properties="$properties"
+            :readOnly="$readOnly"
+            :debug="$debug" 
+            />
     @endforeach
 </x-renderer.card>
