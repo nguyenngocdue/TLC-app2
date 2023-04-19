@@ -1,0 +1,43 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    qaqc_insp_chklst_sht_sigs: [qaqc_insp_chklst_sht_sig!]! @all @guard
+    qaqc_insp_chklst_sht_sig(id: ID @eq): qaqc_insp_chklst_sht_sig @find @guard
+}
+type Qaqc_insp_chklst_sht_sig {
+    id: ID!
+    value: String
+    owner_id: String
+    qaqc_insp_chklst_sht_id: ID!
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input CreateQAQCInspChklstShtSigInput {
+    id: ID!
+    value: String
+    owner_id: String!
+    qaqc_insp_chklst_sht_id: ID!
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateQAQCInspChklstShtSigInput {
+    id: ID!
+    name: String
+    description: String
+    slug: String
+    qaqc_insp_chklst_id: ID
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createQAQCInspChklstShtSig(
+        input: CreateQAQCInspChklstShtSigInput! @spread
+    ): Qaqc_insp_chklst_sht_sig! @guard @create
+    updateQAQCInspChklstShtSig(
+        input: UpdateQAQCInspChklstShtSigInput! @spread
+    ): Qaqc_insp_chklst_sht_sig @guard @update
+    deleteQAQCInspChklstShtSig(id: ID!): Qaqc_insp_chklst_sht_sig @guard @delete
+}

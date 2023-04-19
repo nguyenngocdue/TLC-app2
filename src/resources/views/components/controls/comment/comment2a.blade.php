@@ -1,6 +1,7 @@
-<div title="#{{$comment['id']['value']}}" class="mb-2">
+<div title="{{$legendTooltip}}" class="mb-2">
     {{-- <input name="{{$comment['content']['name']}}" value="{{$comment['content']['value']}}" > --}}
     <input name="{{$comment['id']['name']}}" value="{{$comment['id']['value']}}" title="id" class="border" type="{{$input_or_hidden}}" >
+    <input name="{{$comment['category_name']['name']}}" value="{{$comment['category_name']['value']}}" title="category_name" class="border" type="{{$input_or_hidden}}">
 
     @if(is_null($comment['id']['value']))
         <input name="{{$comment['position_rendered']['name']}}" value="{{$comment['position_rendered']['value']}}" title="position_rendered" class="border" type="{{$input_or_hidden}}">
@@ -18,7 +19,7 @@
                 <input id="{{$comment['toBeDeleted']['name']}}" name="{{$comment['toBeDeleted']['name']}}" value="false" title="toBeDeleted" class="border" type="{{$input_or_hidden}}">
             @endif
             <div class="col-span-12 md:col-span-10 md:col-start-2">
-                <x-controls.comment.comment2a-textarea :title="$title" :readOnly="$readOnly" :comment="$comment" class="bg-green-50"/>
+                <x-controls.comment.comment2a-textarea :title="$title" :readOnly="$readOnly" :comment="$comment" class="bg-lime-50"/>
             </div> 
             <div class="col-span-12 md:col-span-1 text-xs flex justify-start">
                 <x-controls.comment.comment2a-avatar :comment="$comment" :deletable="$deletable" id="{{$comment['id']['value']}}" class="justify-start"/>

@@ -32,7 +32,7 @@
                 @endphp
                 @if($isClosingOwnDoc)
                     <button type="button" 
-                            title="You can't close this as this is your own document." 
+                            title="You can't close your own document." 
                             class="{{$classList}} {{$bgColor}} {{$textColor}} {{$borderColor}} disabled:opacity-40"
                             disabled
                             >

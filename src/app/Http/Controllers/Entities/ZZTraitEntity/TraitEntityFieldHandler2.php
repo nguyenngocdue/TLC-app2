@@ -120,7 +120,6 @@ trait TraitEntityFieldHandler2
 
     private function handleFields(Request $request, $action)
     {
-
         $status = $request->status ?? '';
         $dataSource = $request->except(['_token', '_method', 'status', 'created_at', 'updated_at']);
         if ($action === 'store') $dataSource['id'] = null;
@@ -211,24 +210,28 @@ trait TraitEntityFieldHandler2
 
     private function makeUpCommentFieldForRequired(Request $request)
     {
-        $comments = $this->superProps['comments'];
-        foreach ($comments as $comment01Name => $commentFieldName) {
-            $alright = true;
-            $comment = $request->input($comment01Name);
-            if ($comment) {
-                $contents = $comment['content'];
-                foreach ($contents as $content) {
-                    if ($content == "") {
-                        $alright  = false;
-                        break;
-                    }
-                }
-            }
-            // dump($comment);
-            $field = substr($commentFieldName, 1); //Remove first _
-            if ($alright) $request->request->add([$field => 'has at least one line']);
+        $comments = $request->input('comments');
+        if (is_null($comments)) return;
+
+        $result = [];
+        foreach ($comments as $comment) {
+            $result[$comment['category_name']] = 0;
         }
-        // dump($alright);
-        // dd();
+
+        foreach ($comments as  $comment) {
+            if (is_null($comment['id']) && is_null($comment['content'])) continue;
+            if (isset($comment['toBeDeleted']) && $comment['toBeDeleted'] !== 'false') continue;
+            // dump($comment);
+            $result[$comment['category_name']]++;
+        }
+        // dump($result);
+
+        $result = array_filter($result, fn ($i) => $i);
+        // dump($result);
+
+        foreach ($result as $fieldName => $count) {
+            // dump($fieldName);
+            $request->request->add([$fieldName => "has $count line(s)"]);
+        }
     }
 }

@@ -18,9 +18,9 @@
   "protocol": "http",
   "socketio": {},
   "secureOptions": 67108864,
-  "sslCertPath": "/path/ssl/certs/public.crt",
-  "sslKeyPath": "/path/ssl/certs/private.key",
-  "sslCertChainPath": "/path/ssl/certs/ca_bundle.pem",
+  "sslCertPath": "",
+  "sslKeyPath": "",
+  "sslCertChainPath": "",
   "sslPassphrase": "",
   "subscribers": {
     "http": true,

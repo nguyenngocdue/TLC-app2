@@ -47,7 +47,7 @@ class Properties extends JsonGetSet
                 case 'comment':
                     $property = [
                         'allowed_to_delete' => false,
-                        'force_comment_once' => false,
+                        // 'force_comment_once' => false,
                     ];
                     break;
 

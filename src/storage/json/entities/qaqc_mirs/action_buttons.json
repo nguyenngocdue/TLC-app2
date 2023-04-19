@@ -6,7 +6,7 @@
     },
     "assigned": {
         "name": "assigned",
-        "label": "Request to Assign",
+        "label": "Assign Now",
         "tooltip": ""
     },
     "rejected": {

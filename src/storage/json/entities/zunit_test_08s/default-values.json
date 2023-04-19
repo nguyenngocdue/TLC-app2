@@ -142,5 +142,17 @@
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
+    },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "All_ClosedAt",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
     }
 }

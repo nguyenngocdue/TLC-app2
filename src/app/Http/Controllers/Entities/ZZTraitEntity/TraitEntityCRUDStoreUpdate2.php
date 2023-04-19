@@ -30,6 +30,8 @@ trait TraitEntityCRUDStoreUpdate2
 	public function store(Request $request)
 	{
 		// dd($request->input());
+		$this->reArrangeComments($request);
+
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
 			$props = $this->getProps1();
@@ -45,6 +47,9 @@ trait TraitEntityCRUDStoreUpdate2
 			/** oldStatus when create will be same as new status */
 			$oldStatus = $newStatus;
 			$rules = $this->getValidationRules($oldStatus, $newStatus, __FUNCTION__);
+
+			$this->makeUpCommentFieldForRequired($request);
+
 			$request->validate($rules);
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
@@ -81,7 +86,8 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->dump1("Created line ", $theRow->id, __LINE__);
 			return $theRow->id;
 		}
-		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
+		// if ($this->debugForStoreUpdate)
+		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Created New Document"
 		$this->eventCreatedNotificationAndMail($theRow->getAttributes(), $theRow->id, $newStatus, $this->type, $this->data);
@@ -97,7 +103,7 @@ trait TraitEntityCRUDStoreUpdate2
 		// if ($request['tableNames'] == 'fakeRequest') {
 		// 	dump($request->input());
 		// }
-
+		$this->reArrangeComments($request);
 
 		$isFakeRequest = $request['tableNames'] == 'fakeRequest';
 		try {
@@ -167,7 +173,8 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->dump1("Updated line ", $theRow->id, __LINE__);
 			return $theRow->id;
 		}
-		if ($this->debugForStoreUpdate) dd(__FUNCTION__ . " done");
+		// if ($this->debugForStoreUpdate) 
+		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $this->type, $newStatus, $this->data);

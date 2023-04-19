@@ -20,6 +20,6 @@
         </div>
         <x-renderer.attachment2 name="table01[insp_photos][{{$rowIndex}}]" :value="$attachments"/>
         <br/>
-        <x-controls.comment-group2a category="insp_comments" commentableType="qaqc_insp_chklst_line" commentableId="{{$line->id}}" />
+        <x-controls.comment.comment-group2a category="insp_comments" commentableType="qaqc_insp_chklst_line" commentableId="{{$line->id}}" />
     </div>
 </x-renderer.card>

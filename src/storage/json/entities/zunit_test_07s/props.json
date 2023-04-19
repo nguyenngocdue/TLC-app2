@@ -226,5 +226,24 @@
         "save_on_change": "",
         "duplicatable": "",
         "new_line": ""
+    },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "column_type": "datetime",
+        "label": "Closed At",
+        "control": "picker_datetime",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
     }
 }

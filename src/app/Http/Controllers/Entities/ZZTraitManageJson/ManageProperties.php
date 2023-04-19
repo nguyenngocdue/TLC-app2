@@ -62,12 +62,12 @@ class ManageProperties extends Manage_Parent
                 'editable' => true,
                 'align' => 'center',
             ],
-            [
-                'dataIndex' => 'force_comment_once',
-                'renderer' => 'checkbox',
-                'editable' => true,
-                'align' => 'center',
-            ],
+            // [
+            //     'dataIndex' => 'force_comment_once',
+            //     'renderer' => 'checkbox',
+            //     'editable' => true,
+            //     'align' => 'center',
+            // ],
         ];
 
         return $result[$this->type];
@@ -134,6 +134,7 @@ class ManageProperties extends Manage_Parent
         foreach (array_keys($dataSource) as $key) {
             $this->attachActionButtons($dataSource, $key, ['right_by_name']);
         }
+        uasort($dataSource, fn ($a, $b) => $a['name'] <=> $b['name']);
         return array_values($dataSource);
     }
 }
