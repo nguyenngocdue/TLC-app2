@@ -94,7 +94,7 @@
         "name": "_insp_comments",
         "field_id": "13",
         "field_name": "insp_comments",
-        "allowed_to_delete": "",
+        "allowed_to_delete": "true",
         "force_comment_once": ""
     }
 }
