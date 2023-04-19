@@ -134,6 +134,16 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
     protected function transformDataSource($dataSource, $modeParams)
     {
         // dd($dataSource);
+        $items = $dataSource->toArray();
+
+        // $prodOrders = array_slice(array_unique(array_column($items, 'prod_order_id')), 0, 10);
+        // $filteredData = array_filter($items, function ($item) use ($prodOrders) {
+        //     return in_array($item->prod_order_id, $prodOrders);
+        // });
+        // $items = $filteredData;
+        // dd($items);
+
+
         $sheetsDesc = $this->transformSheetsDesc($modeParams);
         $transformData = array_map(function ($item) {
             if (!is_null($item->chklst_shts_desc)) {
@@ -141,7 +151,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 return (array)$item + [$sheetNameKey => $item->chklst_shts_status];
             }
             return (array)$item;
-        }, $dataSource->ToArray());
+        }, $items);
         $groupedArray = Report::groupArrayByKey($transformData, 'prod_order_id');
         $dataSource = Report::mergeArrayValues($groupedArray);
         // dd($groupedArray);
@@ -159,7 +169,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 
     protected function changeValueData($dataSource)
     {
-        $plural = static::getTable();
+        $plural = 'qaqc_insp_chklst_shts';
         $statuses = LibStatuses::getFor($plural);
         $items = $dataSource->toArray();
         foreach ($items as $key => $value) {
@@ -176,7 +186,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                         'value' =>  $status["icon"] ?? "Not available icon",
                         'cell_class' => 'bg-' . $status['color'] . '-' . $status['color_index'],
                         'cell_title' => $status['title'],
-                        'cell_href' =>  route('qaqc_insp_chklst_shts' . '.edit',  $id),
+                        'cell_href' =>  route($plural . '.edit',  $id),
                     ];
                 } else {
                     $value[$col] = (object)[
