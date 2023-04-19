@@ -1,4 +1,4 @@
-<div title="#{{$comment['id']['value']}}" class="mb-2">
+<div title="{{$legendTooltip}}" class="mb-2">
     {{-- <input name="{{$comment['content']['name']}}" value="{{$comment['content']['value']}}" > --}}
     <input name="{{$comment['id']['name']}}" value="{{$comment['id']['value']}}" title="id" class="border" type="{{$input_or_hidden}}" >
 

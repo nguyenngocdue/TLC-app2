@@ -57,6 +57,9 @@ class Comment2a extends Component
         $deletable = !$this->readOnly && $allowed_to_delete && !$differentOwner && !$hasNotCreated;
         // dump($deletable);
 
+        $category = $this->properties['field_name'];
+        $legendTooltip = "Category: $category (#" . $this->comment['id']['value'] . ")";
+
         return view(
             'components.controls.comment.comment2a',
             [
@@ -68,6 +71,7 @@ class Comment2a extends Component
                 'properties' => $this->properties,
                 'readOnly' => $readOnly,
                 'deletable' => $deletable,
+                'legendTooltip' => $legendTooltip,
             ]
         );
     }
