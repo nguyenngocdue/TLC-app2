@@ -12,7 +12,7 @@ trait TraitDataModesDocument
     public function qaqc_insp_chklsts()
     {
         return ['mode_option' => [
-            '010' => 'Inspection Checklist',
+            // '010' => 'Inspection Checklist',
         ]];
     }
 

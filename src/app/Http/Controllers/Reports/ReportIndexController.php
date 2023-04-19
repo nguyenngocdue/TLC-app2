@@ -37,10 +37,13 @@ class ReportIndexController extends Controller
                 // dump($controller);
                 $class_exists = class_exists($controller);
                 if (Route::has($path) && $class_exists) {
-                    $result[$value][$mode] = [
-                        'path' => $path,
-                        'title' => (new ($controller))->{$tableName}()['mode_option'][$mode],
-                    ];
+                    $title = (new ($controller))->{$tableName}()['mode_option']; //[$mode];
+                    if (isset($title[$mode])) {
+                        $result[$value][$mode] = [
+                            'path' => $path,
+                            'title' => $title[$mode],
+                        ];
+                    }
                 }
             }
         }

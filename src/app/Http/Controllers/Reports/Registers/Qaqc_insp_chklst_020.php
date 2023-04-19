@@ -193,7 +193,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 } else {
                     $value[$col] = (object)[
                         'value' =>  '<i class="fa-sharp fa-regular fa-circle"></i>',
-                        'cell_class' => 'bg-gray-400',
+                        'cell_class' => 'bg-gray-100 text-gray-900',
                         'cell_title' => 'Not Yet Started'
                     ];
                 };
