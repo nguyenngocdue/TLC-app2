@@ -42,10 +42,10 @@ trait TraitEntityEditableComment
                 $comment = Comment::find($line['id']);
                 // dump($line);
                 if (isset($line['toBeDeleted']) && $line['toBeDeleted'] !== 'false') {
-                    Log::info("Delete " . $line['id']);
+                    // Log::info("Deleted " . $line['id']);
                     $comment->delete();
                 } else {
-                    Log::info("Update " . $line['id']);
+                    // Log::info("Updated " . $line['id']);
                     $comment->update($line);
                 }
             }

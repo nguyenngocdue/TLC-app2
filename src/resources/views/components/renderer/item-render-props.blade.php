@@ -155,8 +155,7 @@
                         @break
                         @case('comment')
                         <x-controls.comment.comment-group2a commentableId={{$id}} commentableType="{{$type}}" category="{{$columnName}}" readOnly={{$readOnly}} />
-                        {{-- <x-controls.comment-group2 :item="$item" id={{$id}} type={{$type}} name={{$columnName}} readOnly={{$readOnly}} /> --}}
-                        {{-- <x-controls.comment-group id={{$id}} type={{$type}} colName={{$columnName}} label={{$label}} colSpan={{$col_span}} /> --}}
+                        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                         @break
 
                         @case('relationship_renderer')
