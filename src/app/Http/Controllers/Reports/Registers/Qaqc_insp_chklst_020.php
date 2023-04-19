@@ -24,13 +24,12 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
     protected  $sub_project_id = 82;
     protected  $prod_routing_id = 6;
     protected $mode = '020';
+    protected $checksheet_type_id = 1;
 
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT 
         po_tb.*
-        ,tmpl.id AS tmpl_id
-        ,tmpl.name AS tmpl_name
         ,tmplsh.description AS tmplsh_desc
         ,chklst_shts.id AS chklst_shts_id
         ,chklst_shts.description AS chklst_shts_desc
@@ -59,22 +58,14 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         // AND sp.id = 82
         $sql .= "\n ) AS po_tb
               LEFT JOIN qaqc_insp_chklsts chksh ON chksh.prod_order_id = po_tb.prod_order_id #AND chksh.id = 3
-             LEFT JOIN qaqc_insp_tmpls tmpl ON tmpl.id = chksh.qaqc_insp_tmpl_id";
-        if (isset($modeParams['checksheet_type_id'])) $sql .= "\n AND tmpl.id = '{{checksheet_type_id}}'";
-
-        $sql .= "\n LEFT JOIN qaqc_insp_tmpl_shts tmplsh ON tmplsh.qaqc_insp_tmpl_id =  tmpl.id
-             LEFT JOIN qaqc_insp_chklst_shts chklst_shts ON chklst_shts.qaqc_insp_tmpl_sht_id = tmplsh.id AND chksh.id = chklst_shts.qaqc_insp_chklst_id
-        ORDER BY prod_order_name;";
+              LEFT JOIN qaqc_insp_chklst_shts chklst_shts ON chksh.id = chklst_shts.qaqc_insp_chklst_id
+              LEFT JOIN qaqc_insp_tmpl_shts tmplsh ON tmplsh.id =  chklst_shts.qaqc_insp_tmpl_sht_id
+              ORDER BY prod_order_name";
         return $sql;
     }
     public function getTableColumns($dataSource, $modeParams)
     {
-        $items = $dataSource instanceof Collection ? array_map(fn ($i) => (array)$i, $dataSource->toArray()) : $dataSource->items();
-        $flattenData = array_merge(...$items);
-        $idx = array_search("chklst_shts_status", array_keys($flattenData));
-        $dataColumn = array_slice($flattenData, $idx + 2, count($flattenData) - $idx, true);
-        ksort($dataColumn);
-        $adds = [
+        $dataColumn1 = [
             [
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
@@ -86,8 +77,17 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 "align" => "center",
             ],
         ];
-        $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center", "width" => 100], array_keys($dataColumn));
-        $dataColumn = array_merge($adds, $sqlCol);
+
+        $sheetsDesc = $this->transformSheetsDesc($modeParams);
+        $dataColumn2 = [];
+        foreach (array_keys($sheetsDesc) as $value) {
+            $dataColumn2[] = [
+                "dataIndex" => $value,
+                "align" => "center",
+            ];
+        }
+        $dataColumn = array_merge($dataColumn1, $dataColumn2);
+        // dd($dataColumn);
         return $dataColumn;
     }
 
@@ -102,7 +102,6 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             [
                 'title' => 'Sub Project',
                 'dataIndex' => 'sub_project_id',
-                'allowClear' => true
             ],
             [
                 'title' => 'Prod Routing',
@@ -112,32 +111,25 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         ];
     }
 
-    protected function filterDataFromProdRouting($modeParams)
+    protected function filterSheetFromProdRouting($modeParams)
     {
-        $sql = "SELECT
-                        pr.id AS prod_routing_id,
-                        pr.name AS prod_routing_name,
-                        tmplsh.id AS prod_routing_desc,
-                        tmplsh.description AS prod_routing_desc
-                        FROM prod_routings pr, qaqc_insp_tmpls tmpl, qaqc_insp_tmpl_shts tmplsh
-                        WHERE 1 = 1
-                        AND tmpl.prod_routing_id = pr.id
-                        AND tmplsh.qaqc_insp_tmpl_id = tmpl.id \n";
-        $sql  .= isset($modeParams['prod_routing_id']) && !is_null($modeParams['prod_routing_id']) ? "\n AND pr.id =" . $modeParams["prod_routing_id"] : "";
-        $sql  .= isset($modeParams['checksheet_type_id']) && !is_null($modeParams['checksheet_type_id']) ? "\n AND tmpl.id =" . $modeParams["checksheet_type_id"] : "";
-        $sqlData = DB::select(DB::raw($sql));
-        return $sqlData;
+        $checksheet_type_id = $modeParams['checksheet_type_id'];
+        $sheets = Qaqc_insp_tmpl::find($checksheet_type_id)->getSheets->pluck('description', 'id')->ToArray();
+        return $sheets;
+    }
+
+    private function transformSheetsDesc($modeParams)
+    {
+        $sheets = $this->filterSheetFromProdRouting($modeParams);
+        $sheetsDesc = array_merge(...array_map(fn ($item) => [Report::slugName($item) => null], $sheets));
+        return $sheetsDesc;
     }
 
 
     protected function transformDataSource($dataSource, $modeParams)
     {
         // dd($dataSource);
-        $dataRouting = $this->filterDataFromProdRouting($modeParams);
-        // dd($dataRouting);
-        $routingDesc = array_column($dataRouting, 'prod_routing_desc');
-        $routingDesc = array_merge(...array_map(fn ($item) => [Report::slugName($item) => null], $routingDesc));
-
+        $sheetsDesc = $this->transformSheetsDesc($modeParams);
         $transformData = array_map(function ($item) {
             if (!is_null($item->chklst_shts_desc)) {
                 $sheetNameKey = Report::slugName($item->chklst_shts_desc);
@@ -145,17 +137,17 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             }
             return (array)$item;
         }, $dataSource->ToArray());
-        // dd($transformData);
         $groupedArray = Report::groupArrayByKey($transformData, 'prod_order_id');
         $dataSource = Report::mergeArrayValues($groupedArray);
 
-        array_walk($dataSource, function ($item, $key) use (&$dataSource, $routingDesc) {
+        array_walk($dataSource, function ($item, $key) use (&$dataSource, $sheetsDesc) {
             if (!is_null($item['chklst_shts_desc'])) {
-                $itemHasNotShts = array_diff_key($routingDesc, $item);
+                $itemHasNotShts = array_diff_key($sheetsDesc, $item);
                 $dataSource[$key] = $item + $itemHasNotShts;
             }
-            $dataSource[$key] = $item + $routingDesc;
+            $dataSource[$key] = $item + $sheetsDesc;
         });
+        // dd($dataSource);
         return collect($dataSource);
     }
 
@@ -217,10 +209,12 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
     {
         $x = 'sub_project_id';
         $y = 'prod_routing_id';
+        $z = 'checksheet_type_id';
         $isNullModeParams = Report::isNullModeParams($modeParams);
         if ($isNullModeParams) {
             $modeParams[$x] = $this->sub_project_id;
             $modeParams[$y] = $this->prod_routing_id;
+            $modeParams[$z] = $this->checksheet_type_id;
         }
         return $modeParams;
     }
