@@ -41,6 +41,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "relationship": "getCheckedByField",
+        "control_name": "getMonitors1()",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "person",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getRuns": {
         "name": "_getRuns",
         "relationship": "hasMany",
@@ -64,6 +78,20 @@
         "renderer_view_all_unit": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getShtSigs": {
+        "name": "_getShtSigs",
+        "relationship": "hasMany",
+        "control_name": "getShtSigs",
+        "renderer_view_all": "agg_sum",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "person",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",

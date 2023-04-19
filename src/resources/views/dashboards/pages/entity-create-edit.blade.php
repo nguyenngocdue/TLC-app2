@@ -36,7 +36,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
                 @if($type != 'qaqc_insp_chklst_shts')
                     <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
                 @else
-                <x-controls.insp-chklst.item-render-check-sheet id={{$id}} :item="$item"/>
+                <x-controls.insp-chklst.item-render-check-sheet id={{$id}} :item="$item" :type="$type"/>
                     {{-- <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} /> --}}
                 @endif
             </div>
