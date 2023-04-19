@@ -29,6 +29,7 @@ class Button extends Component
         private $class = '',
         private $href = null,
         private $target = '_self',
+        private $icon = null,
     ) {
         // dd($this->type);
     }
@@ -117,6 +118,7 @@ class Button extends Component
             'accesskey' => $this->accesskey,
             'href' => $this->href,
             'target' => $this->target,
+            'icon' => $this->icon,
         ]);
     }
 }

@@ -14,6 +14,7 @@ class ItemRenderCheckSheet extends Component
     public function __construct(
         private $id,
         private $item,
+        private $type,
     ) {
         // dump($item);
 
@@ -46,6 +47,7 @@ class ItemRenderCheckSheet extends Component
                 'project' => $project,
                 'status' => $status,
                 'signatures' => $signatures,
+                'type' => $this->type,
             ]
         );
     }

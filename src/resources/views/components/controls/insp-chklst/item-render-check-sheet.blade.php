@@ -13,7 +13,7 @@
             <x-controls.insp-chklst.check-point :line="$line" table01Name="table01" :rowIndex="$rowIndex" />
         @endforeach
 
-        <x-controls.insp-chklst.sign-off :signatures="$signatures"/>
+        <x-controls.insp-chklst.sign-off :signatures="$signatures" :type="$type" :item="$item"/>
     </div>
 </div>
 <input type="hidden" name="tableNames[table01]" value="qaqc_insp_chklst_lines">

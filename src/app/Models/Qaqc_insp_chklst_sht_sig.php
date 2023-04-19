@@ -10,6 +10,7 @@ class Qaqc_insp_chklst_sht_sig extends ModelExtended
     protected $table = "qaqc_insp_chklst_sht_sigs";
 
     public $eloquentParams = [];
+    public $nameless = true;
 
 
     public function getManyLineParams()

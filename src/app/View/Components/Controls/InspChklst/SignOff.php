@@ -15,6 +15,8 @@ class SignOff extends Component
      */
     public function __construct(
         private $signatures,
+        private $type,
+        private $item,
     ) {
         //
     }
@@ -26,19 +28,25 @@ class SignOff extends Component
      */
     public function render()
     {
+        $selectedMonitors = $this->item->getMonitors1();
+        $selectedStr = "[" . join(",", $selectedMonitors->pluck('id')->toArray()) . ']';
         $signatures = $this->signatures;
+        $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         foreach ($signatures as &$signature) {
             $user = User::find($signature['owner_id']);
             $signature['user'] = [
                 'id' => $user['id'],
                 // 'name' => $user['name'],
+                'avatar' => $path . $user->avatar->url_thumbnail,
                 'full_name' => $user['full_name'],
                 'position_rendered' => $user['position_rendered'],
                 'timestamp' => DateTimeConcern::convertForLoading("picker_datetime", $signature['created_at']),
             ];
         }
         return view('components.controls.insp-chklst.sign-off', [
-            'signatures' => $this->signatures
+            'signatures' => $this->signatures,
+            'type' => $this->type,
+            'selected' => $selectedStr,
         ]);
     }
 }
