@@ -34,6 +34,7 @@ class ItemRenderCheckSheet extends Component
         $sub_project = $prodOrder->subProject;
         $project = $sub_project->getProject;
         // dump($chklst);
+        $signatures = $this->item->getShtSigs;
         $status = $this->item->status ? $this->item->status : 'in_progress';
         return view(
             'components.controls.insp-chklst.item-render-check-sheet',
@@ -44,6 +45,7 @@ class ItemRenderCheckSheet extends Component
                 'subProject' => $sub_project,
                 'project' => $project,
                 'status' => $status,
+                'signatures' => $signatures,
             ]
         );
     }

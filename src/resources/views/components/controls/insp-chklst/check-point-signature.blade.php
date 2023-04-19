@@ -1,7 +1,12 @@
-<div class="w-96 h-36">
-     <x-controls.signature2 
-          name="{{$table01Name}}[value][{{$rowIndex}}]"  
-          id="{{$table01Name}}[value][{{$rowIndex}}]"  
-          value="{{$line->value}}"
-     />
+<div class="flex justify-center">
+     <div>
+          <div class="w-96 h-36">
+               <x-controls.signature2 
+                    name="{{$table01Name}}[value][{{$rowIndex}}]"  
+                    id="{{$table01Name}}[value][{{$rowIndex}}]"  
+                    value="{{$line->value}}"
+               />
+          </div>
+          <x-controls.insp-chklst.name-position :user="$user" />
+     </div>
 </div>
