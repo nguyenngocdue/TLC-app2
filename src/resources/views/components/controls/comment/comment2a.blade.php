@@ -1,6 +1,7 @@
 <div title="{{$legendTooltip}}" class="mb-2">
     {{-- <input name="{{$comment['content']['name']}}" value="{{$comment['content']['value']}}" > --}}
     <input name="{{$comment['id']['name']}}" value="{{$comment['id']['value']}}" title="id" class="border" type="{{$input_or_hidden}}" >
+    <input name="{{$comment['category_name']['name']}}" value="{{$comment['category_name']['value']}}" title="category_name" class="border" type="{{$input_or_hidden}}">
 
     @if(is_null($comment['id']['value']))
         <input name="{{$comment['position_rendered']['name']}}" value="{{$comment['position_rendered']['value']}}" title="position_rendered" class="border" type="{{$input_or_hidden}}">

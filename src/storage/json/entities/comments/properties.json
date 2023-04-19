@@ -29,16 +29,22 @@
         "field_name": "comment_5",
         "allowed_to_delete": ""
     },
+    "_comment_approver_decision": {
+        "name": "_comment_approver_decision",
+        "field_id": "52",
+        "field_name": "comment_approver_decision",
+        "allowed_to_delete": ""
+    },
+    "_comment_asm_rejected_reason": {
+        "name": "_comment_asm_rejected_reason",
+        "field_id": "50",
+        "field_name": "comment_asm_rejected_reason",
+        "allowed_to_delete": "true"
+    },
     "_comment_by_clinic": {
         "name": "_comment_by_clinic",
         "field_id": "28",
         "field_name": "comment_by_clinic",
-        "allowed_to_delete": ""
-    },
-    "_comment_by_line_manager": {
-        "name": "_comment_by_line_manager",
-        "field_id": "29",
-        "field_name": "comment_by_line_manager",
         "allowed_to_delete": ""
     },
     "_comment_by_general_manager": {
@@ -47,22 +53,16 @@
         "field_name": "comment_by_general_manager",
         "allowed_to_delete": ""
     },
-    "_comment_rejected_reason": {
-        "name": "_comment_rejected_reason",
-        "field_id": "27",
-        "field_name": "comment_rejected_reason",
+    "_comment_by_line_manager": {
+        "name": "_comment_by_line_manager",
+        "field_id": "29",
+        "field_name": "comment_by_line_manager",
         "allowed_to_delete": ""
     },
-    "_comment_asm_rejected_reason": {
-        "name": "_comment_asm_rejected_reason",
-        "field_id": "50",
-        "field_name": "comment_asm_rejected_reason",
-        "allowed_to_delete": ""
-    },
-    "_comment_approver_decision": {
-        "name": "_comment_approver_decision",
-        "field_id": "52",
-        "field_name": "comment_approver_decision",
+    "_comment_insp_rejected_reason": {
+        "name": "_comment_insp_rejected_reason",
+        "field_id": "51",
+        "field_name": "comment_insp_rejected_reason",
         "allowed_to_delete": ""
     },
     "_comment_inspector_decision": {
@@ -71,10 +71,10 @@
         "field_name": "comment_inspector_decision",
         "allowed_to_delete": ""
     },
-    "_comment_insp_rejected_reason": {
-        "name": "_comment_insp_rejected_reason",
-        "field_id": "51",
-        "field_name": "comment_insp_rejected_reason",
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "field_id": "27",
+        "field_name": "comment_rejected_reason",
         "allowed_to_delete": ""
     },
     "_insp_comments": {

@@ -241,7 +241,7 @@ class SuperProps
         $index = 1;
         foreach ($props as $key => $prop) {
             if ($prop['control'] === 'comment')
-                $result["comment" . str_pad($index++, 2, '0', STR_PAD_LEFT)] = $key;
+                $result["comment" . $index++] = $key;
         }
         return $result;
     }

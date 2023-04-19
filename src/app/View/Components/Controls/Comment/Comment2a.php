@@ -58,7 +58,8 @@ class Comment2a extends Component
         // dump($deletable);
 
         $category = $this->properties['field_name'];
-        $legendTooltip = "Category: $category (#" . $this->comment['id']['value'] . ")";
+        $category_id = $this->properties['field_id'];
+        $legendTooltip = "Category: $category (#$category_id) (#" . $this->comment['id']['value'] . ")";
 
         return view(
             'components.controls.comment.comment2a',

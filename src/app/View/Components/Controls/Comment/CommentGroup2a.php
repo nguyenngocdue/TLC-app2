@@ -34,21 +34,22 @@ class CommentGroup2a extends Component
     function getAnEmptyLine($counter, $index)
     {
         return [
-            'id' => ['name' => "comments[id][gr{$counter}_ln{$index}]",],
-            'position_rendered' => ['name' => "comments[position_rendered][gr{$counter}_ln{$index}]",],
-            'owner_id' => ['name' => "comments[owner_id][gr{$counter}_ln{$index}]",],
-            'created_at' => ['name' => "comments[created_at][gr{$counter}_ln{$index}]",],
-            'content' => ['name' => "comments[content][gr{$counter}_ln{$index}]",],
+            'id' => ['name' => "comments[id][comment{$counter}_ln{$index}]",],
+            'position_rendered' => ['name' => "comments[position_rendered][comment{$counter}_ln{$index}]",],
+            'owner_id' => ['name' => "comments[owner_id][comment{$counter}_ln{$index}]",],
+            'created_at' => ['name' => "comments[created_at][comment{$counter}_ln{$index}]",],
+            'content' => ['name' => "comments[content][comment{$counter}_ln{$index}]",],
 
-            'commentable_type' => ['name' => "comments[commentable_type][gr{$counter}_ln{$index}]",],
-            'commentable_id' => ['name' => "comments[commentable_id][gr{$counter}_ln{$index}]",],
-            'category' => ['name' => "comments[category][gr{$counter}_ln{$index}]",],
-            'toBeDeleted' => ['name' => "comments[toBeDeleted][gr{$counter}_ln{$index}]",],
-            'group_line_id' => "gr{$counter}_ln{$index}",
+            'commentable_type' => ['name' => "comments[commentable_type][comment{$counter}_ln{$index}]",],
+            'commentable_id' => ['name' => "comments[commentable_id][comment{$counter}_ln{$index}]",],
+            'category' => ['name' => "comments[category][comment{$counter}_ln{$index}]",],
+            'category_name' => ['name' => "comments[category_name][comment{$counter}_ln{$index}]",],
+            'toBeDeleted' => ['name' => "comments[toBeDeleted][comment{$counter}_ln{$index}]",],
+            'comment_line_id' => "comment{$counter}_ln{$index}",
         ];
     }
 
-    function createDataSource($comments, $commentableType, $commentableId, $category_id)
+    function createDataSource($comments, $commentableType, $commentableId, $category, $category_id)
     {
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $counter = static::$counter;
@@ -69,6 +70,7 @@ class CommentGroup2a extends Component
             $item['commentable_type']['value'] = $commentableType;
             $item['commentable_id']['value'] = $commentableId;
             $item['category']['value'] = $category_id;
+            $item['category_name']['value'] = $category;
             $item['mine'] = $comment->owner_id == $currentUser->id;
             $params[] = $item;
             $index++;
@@ -87,6 +89,7 @@ class CommentGroup2a extends Component
             $item['commentable_type']['value'] = $commentableType;
             $item['commentable_id']['value'] = $commentableId;
             $item['category']['value'] = $category_id;
+            $item['category_name']['value'] = $category;
             $item['mine'] = true;
             $params[] = $item;
         }
@@ -108,7 +111,7 @@ class CommentGroup2a extends Component
             $comments = $commentableItem->{$this->category};
         }
         if ($this->debug) dump("Type: $this->commentableType($commentableTypePath) - ID: $this->commentableId - Category: $this->category #$category_id - Count: " . sizeof($comments));
-        $params = $this->createDataSource($comments, $commentableTypePath, $this->commentableId, $category_id);
+        $params = $this->createDataSource($comments, $commentableTypePath, $this->commentableId, $this->category, $category_id);
 
         $properties = Properties::getFor('comment', $this->category);
 
