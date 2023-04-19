@@ -222,6 +222,7 @@ abstract class Report_ParentController extends Controller
         // dd($modeParams, $dataSource);
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
+        // dd($dataSource);
         $dataSource = $this->modifyDataToExportCSV($dataSource);
         [$columnKeys, $columnNames] = $this->makeColumns($dataSource, $modeParams);
         $rows = $this->makeRowsFollowColumns($dataSource, $columnKeys);
@@ -235,7 +236,6 @@ abstract class Report_ParentController extends Controller
         );
         $columnKeys = array_combine($columnKeys, $columnKeys);
         // dd($columnNames, $columnKeys, $rows);
-
         $callback = function () use ($rows, $columnKeys, $columnNames) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columnNames);
