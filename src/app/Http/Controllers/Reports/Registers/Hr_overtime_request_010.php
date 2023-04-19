@@ -272,7 +272,8 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
             $hrefForward = route('dashboard') . "/reports/register-" . $type . "/020" . $param;
             $dataSource[$key]->total_overtime_hours = (object)[
                 'value' => $value->total_overtime_hours,
-                'cell_href' => $hrefForward
+                'cell_href' => $hrefForward,
+                'cell_class' => 'text-blue-700',
             ];
 
             $dataSource[$key]->user_category_name = (object)[

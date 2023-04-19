@@ -182,9 +182,11 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                         ->where('qaqc_insp_chklst_id', $value['chklst_shts_chklst_id'])
                         ->where('description', Report::replaceAndUcwords($col))
                         ->pluck('id')->toArray()[0] ?? 0;
+                    $bgColor = 'bg-' . $status['color'] . '-' . $status['color_index'];
+                    $textColor = 'text-' . $status['color'] . '-' . (1000 - $status['color_index']);
                     $value[$col] = (object)[
-                        'value' =>  $status["icon"] ?? "Not available icon",
-                        'cell_class' => 'bg-' . $status['color'] . '-' . $status['color_index'],
+                        'value' =>  $status["icon"] ?? '<i class="fa-duotone fa-square-question"></i>',
+                        'cell_class' => "$bgColor $textColor",
                         'cell_title' => $status['title'],
                         'cell_href' =>  route($plural . '.edit',  $id),
                     ];

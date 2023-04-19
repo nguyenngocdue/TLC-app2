@@ -18,7 +18,7 @@
         "title": "Approved",
         "color": "green",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-thumbs-up\"><\/i>"
     },
     "assign_rejected": {
         "name": "assign_rejected",
@@ -116,7 +116,7 @@
         "title": "In Progress",
         "color": "yellow",
         "color_index": "200",
-        "icon": "<i class=\"fa-sharp fa-regular fa-circle-stop\"><\/i>"
+        "icon": "<i class=\"fa-duotone fa-bars-progress\"><\/i>"
     },
     "inactive": {
         "name": "inactive",
@@ -130,7 +130,7 @@
         "title": "Inspected",
         "color": "lime",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-circle-check\"><\/i>"
     },
     "inspection_rejected": {
         "name": "inspection_rejected",
@@ -172,7 +172,7 @@
         "title": "On Hold",
         "color": "violet",
         "color_index": "200",
-        "icon": "<i class=\"fa-sharp fa-solid fa-circle-euro\"><\/i>"
+        "icon": "<i class=\"fa-duotone fa-hand-holding-box\"><\/i>"
     },
     "opened": {
         "name": "opened",
@@ -207,7 +207,7 @@
         "title": "Pending Approval",
         "color": "orange",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-signature\"><\/i>"
     },
     "pending_confirmation": {
         "name": "pending_confirmation",
@@ -256,7 +256,7 @@
         "title": "Rejected",
         "color": "red",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-circle-xmark\"><\/i>"
     },
     "reopen": {
         "name": "reopen",

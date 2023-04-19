@@ -152,7 +152,9 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
             $color = "bg-red-500";
             if (isset($entityStatuses[$item['wir_status']])) {
                 $status = $entityStatuses[$item['wir_status']];
-                $color = "bg-{$status['color']}-{$status['color_index']}";
+                $bgColor = "bg-{$status['color']}-{$status['color_index']}";
+                $textColor = "text-{$status['color']}-" . (1000 - $status['color_index']);
+                $color = "$bgColor $textColor";
             }
             // dd($item);
             $docId = str_pad($item['wir_doc_id'], 4, 0, STR_PAD_LEFT);
@@ -216,7 +218,7 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                     'value' => $icon,
                     'cell_title' => $param7,
                     'cell_href' => $href,
-                    'cell_class' => 'bg-green-50',
+                    'cell_class' => 'bg-green-50 text-green-900',
                 ];
             }
             $transformData[$key] =  $prodOrder + $itemsHasNotWirDescData;
