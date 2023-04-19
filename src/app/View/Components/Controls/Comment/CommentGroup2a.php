@@ -49,6 +49,15 @@ class CommentGroup2a extends Component
         ];
     }
 
+    function getOldComment($counter, $index)
+
+    {
+        $name = "comment{$counter}_ln{$index}";
+        $comments = old('comments');
+        if (isset($comments[$name])) return $comments[$name]['content'];
+        return '';
+    }
+
     function createDataSource($comments, $commentableType, $commentableId, $category, $category_id)
     {
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
@@ -76,6 +85,7 @@ class CommentGroup2a extends Component
             $index++;
         }
         if (!$this->readOnly) {
+            $oldValue = $this->getOldComment($counter, $index);
             $user = $currentUser;
             $item = $this->getAnEmptyLine($counter, $index);
             $item['id']['value'] = null;
@@ -84,7 +94,7 @@ class CommentGroup2a extends Component
             $item['owner_id']['display_name'] = $user->name;
             $item['owner_id']['avatar'] = $path . $user->avatar->url_thumbnail;
             $item['created_at']['value'] = date(Constant::FORMAT_DATETIME_MYSQL);
-            $item['content']['value'] = '';
+            $item['content']['value'] = $oldValue;
 
             $item['commentable_type']['value'] = $commentableType;
             $item['commentable_id']['value'] = $commentableId;

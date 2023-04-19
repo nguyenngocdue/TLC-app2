@@ -1,0 +1,62 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true"
+    },
+    "_attachment_1": {
+        "name": "_attachment_1",
+        "column_name": "attachment_1",
+        "new": "true"
+    },
+    "_comment_1": {
+        "name": "_comment_1",
+        "column_name": "comment_1",
+        "new": "true"
+    },
+    "_comment_2": {
+        "name": "_comment_2",
+        "column_name": "comment_2",
+        "new": "true"
+    },
+    "_comment_3": {
+        "name": "_comment_3",
+        "column_name": "comment_3",
+        "new": "true"
+    },
+    "_comment_4": {
+        "name": "_comment_4",
+        "column_name": "comment_4",
+        "new": "true"
+    },
+    "_parent_id": {
+        "name": "_parent_id",
+        "column_name": "parent_id",
+        "new": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "true"
+    },
+    "_getDiscipline1": {
+        "name": "_getDiscipline1",
+        "column_name": "getDiscipline1",
+        "new": "true"
+    }
+}
