@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers\Reports\Registers;
 
+use App\BigThink\HasStatus;
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
+use App\Http\Controllers\Workflow\LibStatuses;
+use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
-use App\Models\Sub_project;
+use App\Models\Qaqc_insp_tmpl_sht;
 use App\Utils\Support\Report;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
     use TraitModifyDataToExcelReport;
     use TraitForwardModeReport;
+    use HasStatus;
 
 
     protected $rotate45Width = 300;
@@ -32,8 +34,11 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         po_tb.*
         ,tmplsh.description AS tmplsh_desc
         ,chklst_shts.id AS chklst_shts_id
+        ,chklst_shts.qaqc_insp_chklst_id AS chklst_shts_chklst_id
         ,chklst_shts.description AS chklst_shts_desc
+        ,chksh.id AS chksh_id
         ,chklst_shts.status AS chklst_shts_status
+
         
         FROM (SELECT
         pr.id AS project_id
@@ -139,6 +144,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         }, $dataSource->ToArray());
         $groupedArray = Report::groupArrayByKey($transformData, 'prod_order_id');
         $dataSource = Report::mergeArrayValues($groupedArray);
+        // dd($groupedArray);
 
         array_walk($dataSource, function ($item, $key) use (&$dataSource, $sheetsDesc) {
             if (!is_null($item['chklst_shts_desc'])) {
@@ -153,54 +159,37 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 
     protected function changeValueData($dataSource)
     {
+        $plural = static::getTable();
+        $statuses = LibStatuses::getFor($plural);
         $items = $dataSource->toArray();
         foreach ($items as $key => $value) {
             $idx = array_search("chklst_shts_status", array_keys($value));
             $rangeArray = array_slice($value, $idx + 1, count($value) - $idx, true);
             foreach ($rangeArray as $col => $valCol) {
-                switch ($valCol) {
-                    case "Pass":
-                        $value[$col] = (object)[
-                            'value' => '<i class="fa-solid fa-circle-check"></i>',
-                            'cell_class' => 'bg-green-400',
-                            'cell_title' => "Pass",
-                        ];
-                        break;
-                    case "Inprogress":
-                        $value[$col] = (object)[
-                            'value' => '<i class="fa-sharp fa-regular fa-circle-stop"></i>',
-                            'cell_class' => 'bg-orange-400',
-                            'cell_title' => "In Progress",
-                        ];
-                        break;
-                    case "OnHold":
-                        $value[$col] = (object)[
-                            'value' => '<i class="fa-sharp fa-solid fa-circle-euro"></i>',
-                            'cell_class' => 'bg-orange-600',
-                            'cell_title' => "On Hold",
-                        ];
-                        break;
-                    case "NA":
-                        $value[$col] = (object)[
-                            'value' => '<i class="fa-sharp fa-regular fa-circle"></i>',
-                            'cell_class' => 'bg-blue-400',
-                            'cell_title' => "Not Applicable",
-                        ];
-                        break;
-                    case null:
-                        $value[$col] = (object)[
-                            'value' => '<i class="fa-sharp fa-regular fa-circle"></i>',
-                            'cell_class' => 'bg-gray-400',
-                            'cell_title' => "Not Yet Started",
-                        ];
-                        break;
-                    default:
-                        break;
-                }
+                if (isset($statuses[$valCol])) {
+                    $status = $statuses[$valCol];
+                    $id = Qaqc_insp_chklst_sht::get()
+                        ->where('qaqc_insp_chklst_id', $value['chklst_shts_chklst_id'])
+                        ->where('description', Report::replaceAndUcwords($col))
+                        ->pluck('id')->toArray()[0] ?? 0;
+                    $value[$col] = (object)[
+                        'value' =>  $status["icon"] ?? "Not available icon",
+                        'cell_class' => 'bg-' . $status['color'] . '-' . $status['color_index'],
+                        'cell_title' => $status['title'],
+                        'cell_href' =>  route('qaqc_insp_chklst_shts' . '.edit',  $id),
+                    ];
+                } else {
+                    $value[$col] = (object)[
+                        'value' =>  '<i class="fa-sharp fa-regular fa-circle"></i>',
+                        'cell_class' => 'bg-gray-400',
+                        'cell_title' => 'Not Yet Started'
+                    ];
+                };
             }
             $items[$key] = $value;
             $items[$key]['prod_order_name'] = (object)['value' => $value['prod_order_name'], 'cell_title' => 'ID: ' . $value['prod_order_id']];
         }
+        // dump($items);
         return collect($items);
     }
 
