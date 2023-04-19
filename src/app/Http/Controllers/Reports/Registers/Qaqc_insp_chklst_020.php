@@ -62,9 +62,11 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         // AND pr.id = 6
         // AND sp.id = 82
         $sql .= "\n ) AS po_tb
-              LEFT JOIN qaqc_insp_chklsts chksh ON chksh.prod_order_id = po_tb.prod_order_id #AND chksh.id = 3
-              LEFT JOIN qaqc_insp_chklst_shts chklst_shts ON chksh.id = chklst_shts.qaqc_insp_chklst_id
-              LEFT JOIN qaqc_insp_tmpl_shts tmplsh ON tmplsh.id =  chklst_shts.qaqc_insp_tmpl_sht_id
+              LEFT JOIN qaqc_insp_chklsts chksh ON chksh.prod_order_id = po_tb.prod_order_id ";
+        if (isset($modeParams['checksheet_type_id'])) $sql .= " AND chksh.id = '{{checksheet_type_id}}'";
+        $sql .= "\n LEFT JOIN qaqc_insp_chklst_shts chklst_shts ON chksh.id = chklst_shts.qaqc_insp_chklst_id
+              LEFT JOIN qaqc_insp_tmpls tmpl ON tmpl.id = chksh.qaqc_insp_tmpl_id
+              LEFT JOIN qaqc_insp_tmpl_shts tmplsh ON tmplsh.id =  chklst_shts.qaqc_insp_tmpl_sht_id AND tmpl.id = tmplsh.qaqc_insp_tmpl_id
               ORDER BY prod_order_name";
         return $sql;
     }
