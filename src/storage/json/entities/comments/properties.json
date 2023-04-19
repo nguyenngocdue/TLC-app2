@@ -21,7 +21,7 @@
         "name": "_comment_4",
         "field_id": "9",
         "field_name": "comment_4",
-        "allowed_to_delete": ""
+        "allowed_to_delete": "true"
     },
     "_comment_5": {
         "name": "_comment_5",

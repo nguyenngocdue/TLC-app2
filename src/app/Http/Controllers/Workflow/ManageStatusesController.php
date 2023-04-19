@@ -40,6 +40,11 @@ class ManageStatusesController extends AbstractManageLibController
                 "sortBy" => "value",
             ],
             [
+                'dataIndex' => 'icon',
+                'renderer' => 'text4',
+                'editable' => true,
+            ],
+            [
                 'dataIndex' => "rendered",
                 'renderer' => 'formatter4',
                 'align' => 'center',
