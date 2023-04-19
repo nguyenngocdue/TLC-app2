@@ -62,12 +62,12 @@ class ManageProperties extends Manage_Parent
                 'editable' => true,
                 'align' => 'center',
             ],
-            [
-                'dataIndex' => 'force_comment_once',
-                'renderer' => 'checkbox',
-                'editable' => true,
-                'align' => 'center',
-            ],
+            // [
+            //     'dataIndex' => 'force_comment_once',
+            //     'renderer' => 'checkbox',
+            //     'editable' => true,
+            //     'align' => 'center',
+            // ],
         ];
 
         return $result[$this->type];
