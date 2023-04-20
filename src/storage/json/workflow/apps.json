@@ -376,7 +376,7 @@
         "name": "qaqc_insp_chklst",
         "package": "project_management",
         "sub_package": "qaqc",
-        "title": "Inspection Checklist",
+        "title": "Inspection Checklists",
         "nickname": "ics",
         "doc_id_format_column": null,
         "status": null,

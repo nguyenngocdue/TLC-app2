@@ -15,6 +15,9 @@ class ManageStatuses extends Manage_Parent
     {
         return [
             [
+                'dataIndex' => 'name',
+            ],
+            [
                 'title' => "Current Statuses",
                 'dataIndex' => "title",
                 "renderer" => "tag",
