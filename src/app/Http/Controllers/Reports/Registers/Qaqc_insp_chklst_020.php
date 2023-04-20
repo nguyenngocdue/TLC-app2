@@ -146,7 +146,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         // dd($dataSource);
         $items = $dataSource->toArray();
 
-        $prodOderIds = $modeParams['prod_order_id2'] ?? 0;
+        $prodOderIds = $modeParams['prod_order_id2'] ?? [0];
         $chklsts = Qaqc_insp_chklst::whereIn('prod_order_id', $prodOderIds)->pluck('qaqc_insp_tmpl_id', 'prod_order_id')->ToArray();
         $chklstType = $modeParams['checksheet_type_id'] ?? '';
         $delProdOrder = [];
