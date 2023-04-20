@@ -8,6 +8,7 @@ use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\Qaqc_insp_tmpl_sht;
@@ -145,14 +146,23 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         // dd($dataSource);
         $items = $dataSource->toArray();
 
-        // // $prodOrders = array_slice(array_unique(array_column($items, 'prod_order_id')), 0, 10);
-        // $prodOrders = [267, 270];
-        // $filteredData = array_filter($items, function ($item) use ($prodOrders) {
-        //     return in_array($item->prod_order_id, $prodOrders);
-        // });
-        // $items = $filteredData;
+        $prodOderIds = $modeParams['prod_order_id2'] ?? '';
+        $chklsts = Qaqc_insp_chklst::whereIn('prod_order_id', $prodOderIds)->pluck('qaqc_insp_tmpl_id', 'prod_order_id')->ToArray();
+        $chklstType = $modeParams['checksheet_type_id'] ?? '';
+        $delProdOrder = [];
+        foreach ($chklsts as $poId => $idChklstType) {
+            if ($chklstType * 1 !== $idChklstType * 1) {
+                $delProdOrder[] = $poId;
+            }
+        }
+        // dump($delProdOrder, $modeParams, $chklsts, $chklstType, $items);
+        // $prodOrders = array_slice(array_unique(array_column($items, 'prod_order_id')), 0, 10);
+        $prodOrders = $delProdOrder;
+        $filteredData = array_filter($items, function ($item) use ($prodOrders) {
+            return !in_array($item->prod_order_id, $prodOrders);
+        });
+        $items = $filteredData;
         // dd($items);
-
 
         $sheetsDesc = $this->transformSheetsDesc($modeParams);
         $transformData = array_map(function ($item) {
@@ -174,6 +184,12 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             $dataSource[$key] = $item + $sheetsDesc;
         });
         // dd($dataSource);
+
+
+
+
+
+
         return collect($dataSource);
     }
 
@@ -186,12 +202,14 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             $idx = array_search("chklst_shts_status", array_keys($value));
             $rangeArray = array_slice($value, $idx + 1, count($value) - $idx, true);
             foreach ($rangeArray as $col => $valCol) {
+                // dump(Report::replaceAndUcwords($col));
                 if (isset($statuses[$valCol])) {
                     $status = $statuses[$valCol];
+                    // dd($value);
                     $id = Qaqc_insp_chklst_sht::get()
                         ->where('qaqc_insp_chklst_id', $value['chklst_shts_chklst_id'])
                         ->where('description', Report::replaceAndUcwords($col))
-                        ->pluck('id')->toArray()[0] ?? 0;
+                        ->pluck('id')->toArray()[0] ?? "check data of qaqc_insp_chklst_sh";
                     $bgColor = 'bg-' . $status['color'] . '-' . $status['color_index'];
                     $textColor = 'text-' . $status['color'] . '-' . (1000 - $status['color_index']);
                     $value[$col] = (object)[
