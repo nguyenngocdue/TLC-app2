@@ -4,6 +4,7 @@ namespace App\View\Components\Modals;
 
 use App\Utils\ClassList;
 use Illuminate\View\Component;
+use Illuminate\Support\Arr;
 
 class ParentId7 extends Component
 {
@@ -22,18 +23,7 @@ class ParentId7 extends Component
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
     ) {
-        $old = old($name);
-        if ($old) {
-            $this->selected = (is_array($old)) ? "[" . join(",", $old) . "]" : "[$old]";
-        } else {
-            if (isset($this->selected[0])) {
-                $this->selected =  ($this->selected[0] != '[') ? "[" . $this->selected . "]" : $this->selected;
-            } else {
-                $this->selected = "[]";
-            }
-        }
-
-        // dump($this->selected);
+        $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
     private function getDataSource($attr_name)
@@ -79,6 +69,7 @@ class ParentId7 extends Component
      */
     public function render()
     {
+        dump("Selected: '" . $this->selected . "'");
         $tableName = "modal_" . $this->name;
         $params = [
             'name' => $this->name,

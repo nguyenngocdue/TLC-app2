@@ -105,3 +105,15 @@ Arr::macro('containsEach', function ($arrayCheck, $arrayIndex) {
     }
     return false;
 });
+Arr::macro('normalizeSelected', function ($selected, $old = null) {
+    if ($old) {
+        $selected = (is_array($old)) ? "[" . join(",", $old) . "]" : "[$old]";
+    } else {
+        if (isset($selected[0])) {
+            $selected =  ($selected[0] != '[') ? "[" . $selected . "]" : $selected;
+        } else {
+            $selected = "[]";
+        }
+    }
+    return $selected;
+});
