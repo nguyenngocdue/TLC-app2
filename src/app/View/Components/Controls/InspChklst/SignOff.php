@@ -5,6 +5,7 @@ namespace App\View\Components\Controls\InspChklst;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class SignOff extends Component
@@ -33,6 +34,19 @@ class SignOff extends Component
             }
         }
         return false;
+    }
+
+    function getRemindList($signatures)
+    {
+        $monitors1 = $this->item->getMonitors1();
+        // dump($monitors1);
+        $signed = $signatures->map(fn ($s) => $s['owner_id']);
+        // dump($signed);
+        $signedArr =  $signed->toArray();
+        $unsigned = $monitors1->filter(fn ($item) => !in_array($item->id, $signedArr));
+        $unsigned = $unsigned->pluck('email', 'name');
+
+        return $unsigned;
     }
 
     /**
@@ -67,6 +81,13 @@ class SignOff extends Component
             'timestamp' => null,
         ];
         // dd($currentUser);
+        $remindList = $this->getRemindList($signatures);
+        // dump($remindList);
+        $people = [];
+        $index = 0;
+        foreach ($remindList as $person) {
+            $people[] = (++$index) . ". " . $person;
+        }
 
         $alreadySigned = $this->alreadySigned($signatures, $currentUser);
         return view('components.controls.insp-chklst.sign-off', [
@@ -78,6 +99,9 @@ class SignOff extends Component
             'input_or_hidden' => $this->debug ? "text" : "hidden",
             'debug' => $this->debug,
             'alreadySigned' => $alreadySigned,
+            'remindList' => $remindList,
+            'people' => count($remindList) . " " . Str::plural("person"),
+            'title' => "Send a friendly email to remind:\n" . join("\n", $people),
         ]);
     }
 }

@@ -8,7 +8,7 @@
                 <x-controls.has-data-source.dropdown2 type={{$type}} name='getMonitors1()' :selected="$selected" multiple={{true}} />
             </div>
             <div class="col-span-12 md:col-span-3">
-                <x-renderer.button icon="fa-duotone fa-paper-plane" class="w-full h-full bg-lime-200">Remind</x-renderer.button>
+                <x-renderer.button title='{{$title}}' icon="fa-duotone fa-paper-plane" class="w-full h-full bg-lime-200">Remind {{$people}}</x-renderer.button>
             </div>
         </div>
         
@@ -36,7 +36,7 @@
             @php $index ++; @endphp
             @endforeach
             @if(!$alreadySigned)
-                <div class="text-right bg-lime-50">
+                <div class="text-right p-2 rounded bg-lime-50">
                     <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]">
                     <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$currentUser['id']}}">
                     <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
