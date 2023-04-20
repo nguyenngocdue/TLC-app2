@@ -72,7 +72,9 @@ class Report
     }
     public static function replaceAndUcwords($string)
     {
-        return  ucwords(str_replace('_', " ", $string));
+        $str = str_replace('_', " ", $string);
+        $str = ucwords($str, '-');
+        return  ucwords(str_replace('_', " ", $str));
     }
     public static function isNullModeParams($modeParams)
     {
