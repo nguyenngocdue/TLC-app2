@@ -151,7 +151,6 @@ abstract class Report_ParentController extends Controller
         $input = $request->input();
         // dd($input);
         // Log::info($input);
-
         $typeReport = CurrentPathInfo::getTypeReport($request);
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);

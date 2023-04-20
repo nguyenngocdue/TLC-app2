@@ -20,7 +20,16 @@ abstract class ParentIdParamReports extends Component
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
     ) {
-        if (old($name)) $this->selected = 1 * old($name);
+        $old = old($name);
+        if ($old) {
+            $this->selected = (is_array($old)) ? "[" . join(",", $old) . "]" : "[$old]";
+        } else {
+            if (isset($this->selected[0])) {
+                $this->selected =  ($this->selected[0] != '[') ? "[" . $this->selected . "]" : $this->selected;
+            } else {
+                $this->selected = "[]";
+            }
+        }
     }
     private function renderJS($tableName, $objectTypeStr, $objectIdStr)
     {
@@ -49,19 +58,13 @@ abstract class ParentIdParamReports extends Component
         echo $str;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
     public function render()
     {
-        // dump($this->name);
         $tableName = "modal_" . $this->name;
         $params = [
-            'name' => $this->name,
+            'name' => $this->multiple ?  $this->name . '[]' : $this->name,
             'id' => $this->name,
-            'selected' => json_encode([is_numeric($this->selected) ? $this->selected * 1 : $this->selected]),
+            'selected' => $this->selected,
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $tableName,
             'readOnly' => $this->readOnly,
@@ -69,6 +72,8 @@ abstract class ParentIdParamReports extends Component
             'multiple' => $this->multiple ? true : false,
             'allowClear' => $this->allowClear,
         ];
+
+
         $this->renderJS($tableName, $this->referData, $this->name);
         return view('components.controls.has-data-source.' . $this->control, $params);
     }

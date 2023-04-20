@@ -20,7 +20,7 @@
                     Checkbox
                 </div>
                 <div class="col-span-9">
-                    <x-modals.parent-id7 name='modal_ot_user2' multiple={{true}} control='radio-or-checkbox2' selected="[2002,2003]">
+                    <x-modals.parent-id7 name='modal_ot_user2' multiple={{true}} control='radio-or-checkbox2' selected="['2002','2003']">
                         </x-modals.parent-type7>
                 </div>
             </div>
