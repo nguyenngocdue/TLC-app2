@@ -18,7 +18,7 @@
          style="touch-action: none; user-select: none;" >
         </canvas>
     </div>
-    <input name="{{$name}}" id="{{$name}}" value='{!! $value !!}' type="hidden">
+    <input name="{{$name}}" id="{{$name}}" value='{!! $value !!}' class="border w-full" type="{{$input_or_hidden}}">
 </div>
 
 @once

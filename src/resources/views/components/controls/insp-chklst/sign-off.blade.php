@@ -14,20 +14,40 @@
     </x-renderer.card>
     <div class="flex justify-center">
         <div class="p-4">
+            @php $index = 0; @endphp
             @foreach($signatures as $signature)
                 {{-- @dump($signature) --}}
+                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]" value="{{$signature['id']}}">
+                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$currentUser['id']}}">
+                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
                 <div class="text-right">
                     <div class="w-96 h-36">
                         <x-controls.signature2 
-                            name="AAA"
+                            name="signatures[{{$index}}][value]"
                             value="{{$signature['value']}}"
+                            
                         />
                     </div>
                     <div>
                         <x-controls.insp-chklst.name-position :user="$signature['user']" />                        
                     </div>
                 </div>
-        @endforeach
+            @php $index ++; @endphp
+            @endforeach
+            {{-- @php $index ++; @endphp --}}
+            <div class="text-right bg-lime-50">
+                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]">
+                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$currentUser['id']}}">
+                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
+                <div class="w-96 h-36">
+                    <x-controls.signature2 
+                        name="signatures[{{$index}}][value]"
+                        value=""
+                    />
+                </div>
+                <div>
+                    <x-controls.insp-chklst.name-position :user="$currentUser" />                        
+            </div>
         </div>
     </div>
 </x-renderer.card>

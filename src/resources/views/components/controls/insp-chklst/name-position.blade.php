@@ -4,9 +4,13 @@
         <br/>
         ({{$user['position_rendered']}})
         <br/>
-        <i>Signed at {{$user['timestamp']}}</i>
+        @if($user['timestamp'])
+            <i>Signed at {{$user['timestamp']}}</i>
+        @else
+            <i>Current timestamp will be applied</i>
+        @endif
     </div>
     <div>
-        <x-renderer.image class="rounded-full" w=56 h=56 src="{{$user['avatar']}}" />
+        <x-renderer.image spanClass="w-14 h-14" class="rounded-full" src="{{$user['avatar']}}" />
     </div>
 </div>

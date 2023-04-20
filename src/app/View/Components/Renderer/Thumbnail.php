@@ -59,7 +59,7 @@ class Thumbnail extends Component
             $href =  "";
             $title =  $this->cell;
         }
-        $imgStr = "<x-renderer.image w=64 h=64 title='{$title}' src='{$url_thumbnail}' $href></x-renderer.image>";
+        $imgStr = "<x-renderer.image class='rounded' title='{$title}' src='{$url_thumbnail}' $href></x-renderer.image>";
         return "<div class='flex flex-row justify-center' component='$component'>$imgStr</div>";
     }
 }

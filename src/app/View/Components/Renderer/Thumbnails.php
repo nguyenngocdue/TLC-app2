@@ -38,7 +38,7 @@ class Thumbnails extends Component
             'url_media' => $path . $item->url_media,
             'filename' => $item->filename,
         ], $cell);
-        $imgs = array_map(fn ($item) => "<x-renderer.image w=64 title='{$item['filename']}' src='{$item['url_thumbnail']}' href='{$item['url_media']}'></x-renderer.image>", $result);
+        $imgs = array_map(fn ($item) => "<x-renderer.image class='rounded' title='{$item['filename']}' src='{$item['url_thumbnail']}' href='{$item['url_media']}'></x-renderer.image>", $result);
         $imgStr = join(" ", $imgs);
         if ($remain) {
             $imgStr .= "<x-renderer.tag color='sky'>+$remain more</x-renderer.tag>";

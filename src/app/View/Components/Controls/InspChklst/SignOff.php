@@ -3,6 +3,7 @@
 namespace App\View\Components\Controls\InspChklst;
 
 use App\Models\User;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\View\Component;
 
@@ -17,6 +18,7 @@ class SignOff extends Component
         private $signatures,
         private $type,
         private $item,
+        private $debug = false,
     ) {
         //
     }
@@ -43,10 +45,23 @@ class SignOff extends Component
                 'timestamp' => DateTimeConcern::convertForLoading("picker_datetime", $signature['created_at']),
             ];
         }
+        $user = CurrentUser::get();
+        $currentUser = [
+            'id' => $user->id,
+            'avatar' => $path . $user->avatar->url_thumbnail,
+            'full_name' => $user['full_name'],
+            'position_rendered' => $user['position_rendered'],
+            'timestamp' => null,
+        ];
+        // dd($currentUser);
         return view('components.controls.insp-chklst.sign-off', [
             'signatures' => $this->signatures,
             'type' => $this->type,
+            'signableId' => $this->item->id,
             'selected' => $selectedStr,
+            'currentUser' => $currentUser,
+            'input_or_hidden' => $this->debug ? "text" : "hidden",
+            'debug' => $this->debug,
         ]);
     }
 }

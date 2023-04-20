@@ -1,6 +1,6 @@
 
-<div class="pt-2">
-        <x-renderer.image class="rounded-full" w=40 src="{{$comment['owner_id']['avatar']}}" />
+<div class="pt-2 m-1">
+        <x-renderer.image class="rounded-full" src="{{$comment['owner_id']['avatar']}}" />
         @if($deletable)
             <div class="text-red-600 text-center cursor-pointer">
                 <x-renderer.button 
