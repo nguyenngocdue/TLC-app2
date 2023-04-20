@@ -12,15 +12,17 @@ $route = $routeName ? route($routeName) : "";
             @foreach($columns as $key =>$value)
             @php
             $title = isset($value['title']) ? $value['title'] : ucwords(str_replace('_', " ", $value['dataIndex']));
-            $renderer = isset($value['renderer']) ? $value['renderer'] : 'drop_down';
+            $renderer = $value['renderer'] ?? 'drop_down';
             $name = $value['dataIndex'];
-            $date = isset($itemsSelected['picker_date']) ? $itemsSelected['picker_date'] : "";
+            $date = $itemsSelected['picker_date'] ?? "";
             $allowClear = $value['allowClear'] ?? false;
+            $multiple = $value['multiple'] ?? false;
+            // dump($multiple, $date, $allowClear)
             @endphp
             <div class="col-span-3">
                 @switch($renderer)
                 @case("drop_down")
-                <x-reports.dropdown7 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} :itemsSelected="$itemsSelected" />
+                <x-reports.dropdown7 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" />
                 @break
                 @case('picker_date')
                 <x-reports.picker-date1 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} value="{{$date}}" />

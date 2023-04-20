@@ -30,6 +30,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 
     public function getSqlStr($modeParams)
     {
+        // dd($modeParams);
         $sql = "SELECT 
         po_tb.*
         ,tmplsh.description AS tmplsh_desc
@@ -39,7 +40,6 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         ,chksh.id AS chksh_id
         ,chklst_shts.status AS chklst_shts_status
 
-        
         FROM (SELECT
         pr.id AS project_id
         ,pr.name AS project_name
@@ -53,14 +53,17 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         WHERE 1 = 1
         AND pj.id = sp.project_id
         AND po.sub_project_id = sp.id
-        #AND po.id = 267
-
         AND pr.id = po.prod_routing_id";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}'";
         if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND pr.id = '{{prod_routing_id}}'";
-        // AND po.id = 230
-        // AND pr.id = 6
-        // AND sp.id = 82
+
+        if (isset($modeParams['prod_order_id']) && is_array($x = $modeParams['prod_order_id'])) {
+            $sql .= "\n AND";
+            for ($i = 0; $i < count($x); $i++) {
+                $sql .=  " po.id = " . (int)$x[$i];
+                if ($i < count($x) - 1) $sql .= " OR ";
+            }
+        };
         $sql .= "\n ) AS po_tb
               LEFT JOIN qaqc_insp_chklsts chksh ON chksh.prod_order_id = po_tb.prod_order_id ";
         if (isset($modeParams['checksheet_type_id'])) $sql .= " AND chksh.qaqc_insp_tmpl_id = '{{checksheet_type_id}}'";
@@ -68,6 +71,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
               LEFT JOIN qaqc_insp_tmpls tmpl ON tmpl.id = chksh.qaqc_insp_tmpl_id
               LEFT JOIN qaqc_insp_tmpl_shts tmplsh ON tmplsh.id =  chklst_shts.qaqc_insp_tmpl_sht_id AND tmpl.id = tmplsh.qaqc_insp_tmpl_id
               ORDER BY prod_order_name";
+
+        // dd($sql);
         return $sql;
     }
     public function getTableColumns($dataSource, $modeParams)
@@ -104,7 +109,6 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             [
                 'title' => 'Checklist Type',
                 'dataIndex' => 'checksheet_type_id',
-                'allowClear' => true
             ],
             [
                 'title' => 'Sub Project',
@@ -115,12 +119,18 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 'dataIndex' => 'prod_routing_id',
                 'allowClear' => true
             ],
+            [
+                'title' => 'Prod Order',
+                'dataIndex' => 'prod_order_id',
+                'allowClear' => true,
+                'multiple' => true
+            ],
         ];
     }
 
     protected function filterSheetFromProdRouting($modeParams)
     {
-        $checksheet_type_id = $modeParams['checksheet_type_id'];
+        $checksheet_type_id = $modeParams['checksheet_type_id'] ?? $this->checksheet_type_id;
         $sheets = Qaqc_insp_tmpl::find($checksheet_type_id)->getSheets->pluck('description', 'id')->ToArray();
         return $sheets;
     }
