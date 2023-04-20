@@ -22,7 +22,17 @@ class ParentId7 extends Component
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
     ) {
-        if (old($name)) $this->selected = 1 * old($name);
+        $old = old($name);
+        if ($old) {
+            $this->selected = (is_array($old)) ? "[" . join(",", $old) . "]" : "[$old]";
+        } else {
+            if (isset($this->selected[0])) {
+                $this->selected =  ($this->selected[0] != '[') ? "[" . $this->selected . "]" : $this->selected;
+            } else {
+                $this->selected = "[]";
+            }
+        }
+
         // dump($this->selected);
     }
 
@@ -73,7 +83,7 @@ class ParentId7 extends Component
         $params = [
             'name' => $this->name,
             'id' => $this->name,
-            'selected' => json_encode([is_numeric($this->selected) ? $this->selected * 1 : $this->selected]),
+            'selected' => $this->selected,
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $tableName,
             'readOnly' => $this->readOnly,

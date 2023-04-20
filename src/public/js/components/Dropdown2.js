@@ -182,12 +182,16 @@ const onChangeDropdown2Reduce = (listener) => {
 
     if (debugListener) console.log('DataSource AFTER reduce', dataSource)
     // console.log('onChangeDropdown2Reduce')
-    const lastSelected = getValueOfEById(column_name)
+    let lastSelected = getValueOfEById(column_name)
+    // console.log(lastSelected)
+    if (undefined === lastSelected) lastSelected = []
+    if (!Array.isArray(lastSelected)) lastSelected = [lastSelected]
+    // const lastSelected1 = (Array.isArray(lastSelected) && lastSelected.length == 0) ? [] : lastSelected
     // console.log("Selected of", column_name, "is", lastSelected)
     // console.log(attrs_to_compare)
     const allowClear = getAllowClear(column_name)
     // console.log(allowClear)
-    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, [lastSelected * 1,], allowClear)
+    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, lastSelected, allowClear)
 }
 const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
@@ -423,12 +427,13 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
     let options = []
     dataSource = filterDropdown2(id, dataSource)
     // console.log("Loading dataSource after filterDropdown2", id, selected, dataSource.length)
+    // console.log(selected)
 
     if (control_type === 'dropdown') {
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             selectedStr = dataSource.length === 1 ? 'selected' : dumbIncludes2(selected, item.id) ? 'selected' : ''
-            // console.log(selected, item.id, selectedStr)
+            // console.log(id, selected, item.id, selectedStr)
             const title = item.description || (isNaN(item.id) ? item.id : makeId(item.id))
             option =
                 "<option value='" +
@@ -513,7 +518,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
 const documentReadyDropdown2 = ({ id, selectedJson, table, allowClear = false }) => {
     // selectedJson = '{!! $selected !!}'
     selectedJson = selectedJson.replace(/\\/g, '\\\\') //<< Replace \ to \\ EG. ["App\Models\Qaqc_mir"] to ["App\\Models\\Qaqc_mir"]
-    selectedJson = JSON.parse(selectedJson)
+    const selectedArray = JSON.parse(selectedJson)
     // table = "{{$table}}"
     dataSourceDropdown = k[table]
     if (dataSourceDropdown === undefined)
@@ -528,7 +533,7 @@ const documentReadyDropdown2 = ({ id, selectedJson, table, allowClear = false })
     // }
     // console.log(id, listenersOfDropdown2, attr_to_compare, dataSourceDropdown)
     // console.log(id, attr_to_compare, dataSourceDropdown, selectedJson)
-    reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedJson, allowClear)
+    reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedArray, allowClear)
 
     $(document).ready(() => {
         if (Array.isArray(listenersOfDropdown2)) {
