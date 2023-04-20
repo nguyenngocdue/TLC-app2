@@ -1,18 +1,10 @@
 <div class="flex justify-end dark:bg-gray-800 px-5">
-    <div class="my-5">
+    <div id="divActionButtons" class="my-5">
         @if($buttonSave)
-            @switch($action)
-                @case('edit')
-                <button type="submit" class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg">
-                    <i class="fa-solid fa-floppy-disk mr-2"></i>Save</button>
-                @break
-                @case('create')
-                <button type="submit" onclick="this.form.submit(); this.disabled=true; this.classList.add('disabled:opacity-40')" class="px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg">
-                    <i class="fa-solid fa-floppy-disk mr-2"></i>Create</button>
-                @break
-                @default
-                @break
-            @endswitch
+            @php $btnText = $action=='edit' ? 'Save' : 'Create New' @endphp
+            <x-renderer.button htmlType="submit" icon="fa-solid fa-floppy-disk"
+                onClick="this.form.submit(); $('button').prop('disabled',true);" 
+                >{{$btnText}}</x-renderer.button>
         @endif
         @if($action !== 'create')
             @foreach($actionButtons as $key => $button)
@@ -40,8 +32,9 @@
                         </button>
                         @else
                     <button {{$hasIntermediateScreen ? 'type=button @click=toggleIntermediate("'.$key .'")' : 'type=submit @click=changeStatus("'.$key .'")' }}
-                        class="{{$classList}} {{$bgColor}} {{$textColor}} {{$borderColor}}  hover:shadow-xl focus:shadow-xl active:shadow-xl"
-                        title="{{ $hasIntermediateScreen ? 'Open an intermediate screen' : $actionButtons[$key]['tooltip']}}"
+                            title="{{ $hasIntermediateScreen ? 'Open an intermediate screen' : $actionButtons[$key]['tooltip']}}"
+                            class="{{$classList}} {{$bgColor}} {{$textColor}} {{$borderColor}}  hover:shadow-xl focus:shadow-xl active:shadow-xl"
+                            onClick="this.form.submit(); $('button').prop('disabled',true);" 
                             >
                             {!! $buttonInnerHtml !!}
                     </button>
