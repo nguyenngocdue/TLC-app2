@@ -59,7 +59,20 @@ const getValueOfEById = (id) => {
     // console.log(id, isMultipleOfE, controlType)
     if (controlType === 'radio_or_checkbox') {
         const control = isMultipleOfE ? 'checkbox' : 'radio'
-        return $('input:' + control + "[name='" + id + "']:checked").val()
+        const name = isMultipleOfE ? id + "[]" : id
+        const controlName = 'input:' + control + "[name='" + name + "']:checked"
+        let value = []
+        if (isMultipleOfE) {
+            const checkboxes = $(controlName)
+            for (let i = 0; i < checkboxes.length; i++) {
+                value.push(checkboxes[i].value)
+                // console.log(checkboxes[i].value)
+            }
+        } else {
+            value.push($(controlName).val())
+        }
+        // console.log(controlName, value)
+        return value
     }
     return getEById(id).val()
 }
@@ -183,7 +196,7 @@ const onChangeDropdown2Reduce = (listener) => {
     if (debugListener) console.log('DataSource AFTER reduce', dataSource)
     // console.log('onChangeDropdown2Reduce')
     let lastSelected = getValueOfEById(column_name)
-    // console.log(lastSelected)
+    console.log(column_name, lastSelected)
     if (undefined === lastSelected) lastSelected = []
     if (!Array.isArray(lastSelected)) lastSelected = [lastSelected]
     // const lastSelected1 = (Array.isArray(lastSelected) && lastSelected.length == 0) ? [] : lastSelected
@@ -519,6 +532,7 @@ const documentReadyDropdown2 = ({ id, selectedJson, table, allowClear = false })
     // selectedJson = '{!! $selected !!}'
     selectedJson = selectedJson.replace(/\\/g, '\\\\') //<< Replace \ to \\ EG. ["App\Models\Qaqc_mir"] to ["App\\Models\\Qaqc_mir"]
     const selectedArray = JSON.parse(selectedJson)
+    console.log(selectedArray)
     // table = "{{$table}}"
     dataSourceDropdown = k[table]
     if (dataSourceDropdown === undefined)

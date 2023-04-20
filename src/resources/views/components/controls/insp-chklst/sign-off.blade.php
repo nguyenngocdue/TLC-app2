@@ -8,7 +8,7 @@
                 <x-controls.has-data-source.dropdown2 type={{$type}} name='getMonitors1()' :selected="$selected" multiple={{true}} />
             </div>
             <div class="col-span-12 md:col-span-4">
-                <x-renderer.button icon="fa-duotone fa-paper-plane" class="w-full h-full">Send Reminder</x-renderer.button>
+                <x-renderer.button icon="fa-duotone fa-paper-plane" class="w-full h-full bg-lime-200">Send Reminder</x-renderer.button>
             </div>
         </div>
     </x-renderer.card>
