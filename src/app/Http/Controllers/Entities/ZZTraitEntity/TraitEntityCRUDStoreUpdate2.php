@@ -14,6 +14,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitEntityAttachment2;
 	use TraitEntityEditableTable;
 	use TraitEntityEditableComment;
+	use TraitEntityEditableSignature;
 	use TraitValidation;
 	use TraitSendNotificationAndMail;
 
@@ -152,6 +153,7 @@ trait TraitEntityCRUDStoreUpdate2
 				$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
 			}
 			$this->processComments($request);
+			$this->processSignatures($request);
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		} catch (Exception $e) {

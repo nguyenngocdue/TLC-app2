@@ -23,6 +23,18 @@ class SignOff extends Component
         //
     }
 
+    private function alreadySigned($signatures, $user)
+    {
+        $uid = $user->id;
+        foreach ($signatures as $signature) {
+            // dump($signature->owner_id);
+            if ($signature->owner_id == $uid) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -34,34 +46,38 @@ class SignOff extends Component
         $selectedStr = "[" . join(",", $selectedMonitors->pluck('id')->toArray()) . ']';
         $signatures = $this->signatures;
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+        $currentUser = CurrentUser::get();
         foreach ($signatures as &$signature) {
             $user = User::find($signature['owner_id']);
             $signature['user'] = [
                 'id' => $user['id'],
                 // 'name' => $user['name'],
-                'avatar' => $path . $user->avatar->url_thumbnail,
+                'avatar' => $user->avatar ? $path . $user->avatar->url_thumbnail : "/images/avatar.jpg",
                 'full_name' => $user['full_name'],
                 'position_rendered' => $user['position_rendered'],
                 'timestamp' => DateTimeConcern::convertForLoading("picker_datetime", $signature['created_at']),
             ];
+            $signature['updatable'] = $user['id'] == $currentUser->id;
         }
-        $user = CurrentUser::get();
-        $currentUser = [
-            'id' => $user->id,
-            'avatar' => $path . $user->avatar->url_thumbnail,
-            'full_name' => $user['full_name'],
-            'position_rendered' => $user['position_rendered'],
+        $currentUserObject = [
+            'id' => $currentUser->id,
+            'avatar' =>  $currentUser->avatar ? $path . $currentUser->avatar->url_thumbnail : "/images/avatar.jpg",
+            'full_name' => $currentUser['full_name'],
+            'position_rendered' => $currentUser['position_rendered'],
             'timestamp' => null,
         ];
         // dd($currentUser);
+
+        $alreadySigned = $this->alreadySigned($signatures, $currentUser);
         return view('components.controls.insp-chklst.sign-off', [
             'signatures' => $this->signatures,
             'type' => $this->type,
             'signableId' => $this->item->id,
             'selected' => $selectedStr,
-            'currentUser' => $currentUser,
+            'currentUser' => $currentUserObject,
             'input_or_hidden' => $this->debug ? "text" : "hidden",
             'debug' => $this->debug,
+            'alreadySigned' => $alreadySigned,
         ]);
     }
 }

@@ -16,6 +16,7 @@ class Signature2 extends Component
         private $name,
         private $value = null,
         private $debug = false,
+        private $updatable = true,
     ) {
         //
         static::$count++;
@@ -37,6 +38,7 @@ class Signature2 extends Component
                 'value_decoded' => $value_decoded,
                 'count' => static::$count,
                 'input_or_hidden' => $this->debug ? "text" : "hidden",
+                'updatable' => $this->updatable,
             ]
         );
     }

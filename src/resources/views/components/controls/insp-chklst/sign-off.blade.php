@@ -18,14 +18,14 @@
             @foreach($signatures as $signature)
                 {{-- @dump($signature) --}}
                 <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]" value="{{$signature['id']}}">
-                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$currentUser['id']}}">
+                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$signature['owner_id']}}">
                 <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
                 <div class="text-right">
                     <div class="w-96 h-36">
                         <x-controls.signature2 
                             name="signatures[{{$index}}][value]"
                             value="{{$signature['value']}}"
-                            
+                            updatable="{{$signature['updatable']}}"
                         />
                     </div>
                     <div>
@@ -34,20 +34,23 @@
                 </div>
             @php $index ++; @endphp
             @endforeach
-            {{-- @php $index ++; @endphp --}}
-            <div class="text-right bg-lime-50">
-                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]">
-                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$currentUser['id']}}">
-                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
-                <div class="w-96 h-36">
-                    <x-controls.signature2 
-                        name="signatures[{{$index}}][value]"
-                        value=""
-                    />
+            @if(!$alreadySigned)
+                <div class="text-right bg-lime-50">
+                    <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]">
+                    <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$currentUser['id']}}">
+                    <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
+                    <div class="w-96 h-36">
+                        <x-controls.signature2 
+                            name="signatures[{{$index}}][value]"
+                            value=""
+                        />
+                    </div>
+                    <div>
+                        <x-controls.insp-chklst.name-position :user="$currentUser" />                        
                 </div>
-                <div>
-                    <x-controls.insp-chklst.name-position :user="$currentUser" />                        
-            </div>
+            @else
+                <x-feedback.alert type="success" titleless=1 message="You have signed off this document." />
+            @endif
         </div>
     </div>
 </x-renderer.card>
