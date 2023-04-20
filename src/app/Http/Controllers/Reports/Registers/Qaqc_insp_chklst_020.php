@@ -57,13 +57,10 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}'";
         if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND pr.id = '{{prod_routing_id}}'";
 
-        if (isset($modeParams['prod_order_id']) && is_array($x = $modeParams['prod_order_id'])) {
-            $sql .= "\n AND";
-            for ($i = 0; $i < count($x); $i++) {
-                $sql .=  " po.id = " . (int)$x[$i];
-                if ($i < count($x) - 1) $sql .= " OR ";
-            }
-        };
+        if (isset($modeParams['prod_order_id2']) && is_array($x = $modeParams['prod_order_id2'])) {
+            $con = str_replace(['[', ']'], ['(', ')'], json_encode($x));
+            $sql .= "\n AND po.id IN " . $con;
+        }
         $sql .= "\n ) AS po_tb
               LEFT JOIN qaqc_insp_chklsts chksh ON chksh.prod_order_id = po_tb.prod_order_id ";
         if (isset($modeParams['checksheet_type_id'])) $sql .= " AND chksh.qaqc_insp_tmpl_id = '{{checksheet_type_id}}'";
@@ -121,7 +118,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             ],
             [
                 'title' => 'Prod Order',
-                'dataIndex' => 'prod_order_id',
+                'dataIndex' => 'prod_order_id2',
                 'allowClear' => true,
                 'multiple' => true
             ],
@@ -148,7 +145,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         // dd($dataSource);
         $items = $dataSource->toArray();
 
-        // $prodOrders = array_slice(array_unique(array_column($items, 'prod_order_id')), 0, 10);
+        // // $prodOrders = array_slice(array_unique(array_column($items, 'prod_order_id')), 0, 10);
+        // $prodOrders = [267, 270];
         // $filteredData = array_filter($items, function ($item) use ($prodOrders) {
         //     return in_array($item->prod_order_id, $prodOrders);
         // });

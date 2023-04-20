@@ -31,7 +31,7 @@ abstract class ParentTypeParamReport extends Component
 
     public function render()
     {
-        $tableName = "modal_" . $this->name;
+        $tableName = $this->name;
         // dump(getType($this->selected));
         $params = [
             'name' => $this->name,

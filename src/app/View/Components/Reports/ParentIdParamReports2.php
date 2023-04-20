@@ -6,11 +6,12 @@ namespace App\View\Components\Reports;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
 
-abstract class ParentIdParamReports extends Component
+abstract class ParentIdParamReports2 extends Component
 {
 
     abstract protected function getDataSource($attr_name);
     protected $referData = '';
+    protected $referData1 = '';
 
     public function __construct(
         private $name,
@@ -33,20 +34,19 @@ abstract class ParentIdParamReports extends Component
     }
     private function renderJS($tableName, $objectTypeStr, $objectIdStr)
     {
-        // dump($objectIdStr);
-        $attr_name = $tableName . '_parent_fake_id';
+        $attr_name = $tableName;
         $k = [$tableName => $this->getDataSource($attr_name),];
-        // dump($attr_name);
+        // dump($this->referData, $this->referData1, $objectIdStr, $attr_name, $tableName, $objectTypeStr);
         $listenersOfDropdown2 = [
             [
                 'listen_action' => 'reduce',
                 'column_name' => $objectIdStr,
-                'listen_to_attrs' => [$attr_name],
-                'listen_to_fields' => [$objectIdStr],
-                'listen_to_tables' => [$tableName],
+                'listen_to_attrs' => [$this->referData, $this->referData1],
+                'listen_to_fields' => [$objectIdStr, $objectIdStr],
+                'listen_to_tables' => [$tableName, $tableName],
                 'table_name' => $tableName,
                 // 'attrs_to_compare' => ['id'],
-                'triggers' => [$objectTypeStr],
+                'triggers' => [$this->referData, $this->referData1],
             ],
         ];
         // dump($listenersOfDropdown2);
