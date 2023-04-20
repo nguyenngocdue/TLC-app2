@@ -123,7 +123,7 @@ class CommentGroup2a extends Component
         if ($this->debug) dump("Type: $this->commentableType($commentableTypePath) - ID: $this->commentableId - Category: $this->category #$category_id - Count: " . sizeof($comments));
         $params = $this->createDataSource($comments, $commentableTypePath, $this->commentableId, $this->category, $category_id);
 
-        $properties = Properties::getFor('comment', $this->category);
+        // $properties = Properties::getFor('comment', $this->category);
 
         return view('components.controls.comment.comment-group2a', [
             'readOnly' => $this->readOnly,
@@ -133,7 +133,8 @@ class CommentGroup2a extends Component
             'comments' => $comments,
             'params' => $params,
             'debug' => $this->debug,
-            'properties' => $properties,
+            // 'properties' => $properties,
+
         ]);
     }
 }

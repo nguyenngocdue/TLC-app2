@@ -20,26 +20,12 @@
     </x-renderer.card>
     <x-renderer.card title="Images">
         <div class="grid gap-6 mb-8 md:grid-cols-6 ">
-            <span>
-                <x-renderer.image w=40 title='Width: 40'></x-renderer.image>
-                Width: 40
-            </span>
-            <span>
-                <x-renderer.image w=60 title='Width: 60'></x-renderer.image>
-                Width: 60
-            </span>
-            <span>
-                <x-renderer.image w=80 title='Width: 80'></x-renderer.image>
-                Width: 80
-            </span>
-            <span>
-                <x-renderer.image title='A custom title'></x-renderer.image>
-                With title
-            </span>
-            <span>
-                <x-renderer.image title='Go to Google' href='http://www.google.com'></x-renderer.image>
-                With HREF
-            </span>
+            <span><x-renderer.image title='A custom title'></x-renderer.image>With title</span>
+            <span><x-renderer.image title='Go to Google' href='http://www.google.com'></x-renderer.image>With HREF</span>
+            <span><x-renderer.image spanClass="w-12 h-12"></x-renderer.image>w-12 h-12</span>
+            <span><x-renderer.image spanClass="w-14 h-14"></x-renderer.image>w-14 h-14</span>
+            <span><x-renderer.image spanClass="w-16 h-16"></x-renderer.image>w-16 h-16</span>
+            <span><x-renderer.image spanClass="w-20 h-20"></x-renderer.image>w-20 h-20</span>
         </div>
     </x-renderer.card>
     <x-renderer.card title="Buttons">

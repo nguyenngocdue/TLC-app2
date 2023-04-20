@@ -5,6 +5,7 @@ namespace App\View\Components\Modals;
 use App\Models\User_team_ot;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
+use Illuminate\Support\Arr;
 
 class ParentType7UserOt extends Component
 {
@@ -22,7 +23,8 @@ class ParentType7UserOt extends Component
         private $readOnly = false,
         private $allowClear = false,
     ) {
-        if (old($name)) $this->selected = old($name);
+        // if (old($name)) $this->selected = old($name);
+        $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
     private function getDataSource()
@@ -59,7 +61,8 @@ class ParentType7UserOt extends Component
         $params = [
             'name' => $this->name,
             'id' => $this->name,
-            'selected' => json_encode([$this->selected]),
+            'selected' => $this->selected,
+            // 'selected' => json_encode([$this->selected]),
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $tableName,
             'readOnly' => $this->readOnly,

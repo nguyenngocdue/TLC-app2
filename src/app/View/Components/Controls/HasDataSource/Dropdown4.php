@@ -5,6 +5,7 @@ namespace App\View\Components\Controls\HasDataSource;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class Dropdown4 extends Component
 {
@@ -22,17 +23,7 @@ class Dropdown4 extends Component
         private $lineType = null,
         private $rowIndex = null,
     ) {
-        $old = old($name);
-        if ($old) {
-            $this->selected = (is_array($old)) ? "[" . join(",", $old) . "]" : "[$old]";
-        } else {
-            if (isset($this->selected[0])) {
-                $this->selected =  ($this->selected[0] != '[') ? "[" . $this->selected . "]" : $this->selected;
-            } else {
-                $this->selected = "[]";
-            }
-        }
-        // dump($this->selected);
+        $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
     public function render()

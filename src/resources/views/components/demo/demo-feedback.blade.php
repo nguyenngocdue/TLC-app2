@@ -44,7 +44,7 @@
         $content2 ='<div class="p-3">
             <div class="flex items-center justify-between mb-2">
                 <a href="#">
-                    <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Jese Leos">
+                    <img class="w-10 h-10 rounded-full" src="/images/helen.jpeg" alt="Jese Leos">
                 </a>
                 <div>
                     <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Follow</button>
@@ -106,9 +106,9 @@
                         </li>
                     </ul>
                     <div class="flex mb-3 -space-x-3">
-                        <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="/docs/images/people/profile-picture-5.jpg" alt="">
-                        <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="/docs/images/people/profile-picture-2.jpg" alt="">
-                        <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="/docs/images/people/profile-picture-3.jpg" alt="">
+                        <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="/images/helen.jpeg" alt="">
+                        <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="/images/helen.jpeg" alt="">
+                        <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="/images/helen.jpeg" alt="">
                         <a class="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800" href="#">+3</a>
                     </div>
                     <div class="flex">

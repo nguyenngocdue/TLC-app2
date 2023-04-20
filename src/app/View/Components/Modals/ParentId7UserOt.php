@@ -9,6 +9,7 @@ use Database\Seeders\FieldSeeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
+use Illuminate\Support\Arr;
 
 class ParentId7UserOt extends Component
 {
@@ -27,7 +28,8 @@ class ParentId7UserOt extends Component
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
     ) {
-        if (old($name)) $this->selected = 1 * old($name);
+        $this->selected = Arr::normalizeSelected($this->selected, old($name));
+        // if (old($name)) $this->selected = 1 * old($name);
         // dump($this->selected);
     }
 
@@ -140,7 +142,8 @@ class ParentId7UserOt extends Component
         $params = [
             'name' => $this->name,
             'id' => $this->name,
-            'selected' => json_encode([is_numeric($this->selected) ? $this->selected * 1 : $this->selected]),
+            'selected' => $this->selected,
+            // 'selected' => json_encode([is_numeric($this->selected) ? $this->selected * 1 : $this->selected]),
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $tableName,
             'readOnly' => $this->readOnly,

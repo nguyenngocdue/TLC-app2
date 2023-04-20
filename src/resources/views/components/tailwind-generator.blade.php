@@ -1,3 +1,11 @@
+<!-- Image-->
+<span class="w-10 h-10" ></span>
+<span class="w-11 h-11" ></span>
+<span class="w-12 h-12" ></span>
+<span class="w-14 h-14" ></span>
+<span class="w-16 h-16" ></span>
+<span class="w-20 h-20" ></span>
+
 <!-- Page Break-->
 <div class="translate-x-[-80px]"></div>
 <div class="translate-x-[80px]"></div>

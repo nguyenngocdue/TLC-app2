@@ -196,7 +196,7 @@ const onChangeDropdown2Reduce = (listener) => {
     if (debugListener) console.log('DataSource AFTER reduce', dataSource)
     // console.log('onChangeDropdown2Reduce')
     let lastSelected = getValueOfEById(column_name)
-    console.log(column_name, lastSelected)
+    // console.log(column_name, lastSelected)
     if (undefined === lastSelected) lastSelected = []
     if (!Array.isArray(lastSelected)) lastSelected = [lastSelected]
     // const lastSelected1 = (Array.isArray(lastSelected) && lastSelected.length == 0) ? [] : lastSelected
@@ -532,7 +532,7 @@ const documentReadyDropdown2 = ({ id, selectedJson, table, allowClear = false })
     // selectedJson = '{!! $selected !!}'
     selectedJson = selectedJson.replace(/\\/g, '\\\\') //<< Replace \ to \\ EG. ["App\Models\Qaqc_mir"] to ["App\\Models\\Qaqc_mir"]
     const selectedArray = JSON.parse(selectedJson)
-    console.log(selectedArray)
+    // console.log(selectedArray)
     // table = "{{$table}}"
     dataSourceDropdown = k[table]
     if (dataSourceDropdown === undefined)

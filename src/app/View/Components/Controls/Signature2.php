@@ -15,6 +15,7 @@ class Signature2 extends Component
     public function __construct(
         private $name,
         private $value = null,
+        private $debug = false,
     ) {
         //
         static::$count++;
@@ -35,6 +36,7 @@ class Signature2 extends Component
                 'value' => $this->value,
                 'value_decoded' => $value_decoded,
                 'count' => static::$count,
+                'input_or_hidden' => $this->debug ? "text" : "hidden",
             ]
         );
     }

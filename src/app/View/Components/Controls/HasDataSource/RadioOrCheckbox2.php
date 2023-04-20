@@ -5,6 +5,7 @@ namespace App\View\Components\Controls\HasDataSource;
 use App\Utils\ClassList;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
+use Illuminate\Support\Arr;
 
 class RadioOrCheckbox2 extends Component
 {
@@ -18,17 +19,7 @@ class RadioOrCheckbox2 extends Component
         private $readOnly = false,
         private $saveOnChange = false,
     ) {
-        $old = old($name);
-        if ($old) {
-            $this->selected = (is_array($old)) ? "[" . join(",", $old) . "]" : "[$old]";
-        } else {
-            if (isset($this->selected[0])) {
-                $this->selected =  ($this->selected[0] != '[') ? "[" . $this->selected . "]" : $this->selected;
-            } else {
-                $this->selected = "[]";
-            }
-        }
-        // dump($this->selected);
+        $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
     public function render()

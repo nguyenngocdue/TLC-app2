@@ -24,20 +24,22 @@
 
     <x-renderer.card title="Comments">
         <form action="" method="GET">
-            @dump($_GET['comment01'] ??[])
+            @dump($_GET['comments'] ??[])
             <x-renderer.card title="Comment 01">
-                allowed_to_delete=1
-                {{-- <x-controls.comment.comment2a :comment="[]" comment01Name="comment01" rowIndex=0 category=6 commentId=10 
-                    commentableType='App\Models\EntityName' commentableId=1 
-                    ownerId=1 positionRendered='Position 01' datetime='2022-01-01 01:02:03' content="Text 01"
-                    allowedToDelete=1
+                    allowed_to_delete=1
+                    <x-controls.comment.comment2a :comment="$dataComment[0]" 
+                        {{-- comment01Name="comment01" rowIndex=0 category=6 commentId=10 
+                        commentableType='App\Models\EntityName' commentableId=1 
+                        ownerId=1 positionRendered='Position 01' datetime='2022-01-01 01:02:03' content="Text 01"
+                        allowedToDelete=1 --}}
+                        />
+                    readonly=1
+                    <x-controls.comment.comment2a :comment="$dataComment[1]" 
+                        {{-- comment01Name="comment01" rowIndex=3 category=6 commentId=13
+                        commentableType='App\Models\EntityName' commentableId=1 
+                        ownerId=4 positionRendered='Position 04' datetime='2022-01-04 01:02:03' content="Text 04"
+                        readonly=1 --}}
                     />
-                    readonly=1
-                    <x-controls.comment.comment2a :comment="[]" comment01Name="comment01" rowIndex=3 category=6 commentId=13
-                    commentableType='App\Models\EntityName' commentableId=1 
-                    ownerId=4 positionRendered='Position 04' datetime='2022-01-04 01:02:03' content="Text 04"
-                    readonly=1
-                    /> --}}
             </x-renderer.card>
             @dump($_GET['comment02'] ??[])
             <x-renderer.card title="Comment 02">

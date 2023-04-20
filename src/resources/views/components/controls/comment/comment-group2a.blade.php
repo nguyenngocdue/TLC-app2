@@ -5,7 +5,6 @@
     @foreach($params as $comment)
         <x-controls.comment.comment2a 
             :comment="$comment" 
-            :properties="$properties"
             :readOnly="$readOnly"
             :debug="$debug" 
             />

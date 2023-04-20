@@ -14,11 +14,10 @@ class Image extends Component
     public function __construct(
         private $src = '/images/helen.jpeg',
         private $href = null,
-        private $w = null,
-        private $h = null,
         private $title = null,
         private $text = null,
         private $class = "",
+        private $spanClass = "w-10 h-10",
     ) {
         //
     }
@@ -30,11 +29,10 @@ class Image extends Component
      */
     public function render()
     {
-        $w = $this->w ? "width='$this->w'" : "";
-        $h = $this->h ? "height='$this->h'" : "";
         $title = $this->title ? "title='$this->title'" : "";
-        $img = "<img $title $w $h class='$this->class object-cover border mr-1' src='$this->src'/>";
+        $img = "<img $title class='$this->class object-cover w-full h-full border mr-1' src='$this->src'/>";
         if ($this->href) $img = "<a class='' target='_blank' href='$this->href'>$img</a>";
+        $img = "<span class='$this->spanClass block'>$img</span>";
         return $img;
     }
 }

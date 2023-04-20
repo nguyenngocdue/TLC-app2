@@ -4,6 +4,7 @@ namespace App\View\Components\Controls\Comment;
 
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Json\Properties;
 use Carbon\Carbon;
 use Illuminate\View\Component;
 
@@ -15,9 +16,9 @@ class Comment2a extends Component
      * @return void
      */
     public function __construct(
-        private $comment,
+        private $comment = null,
         private $debug = false,
-        private $properties = [],
+        // private $properties = [],
         private $readOnly = false,
     ) {
         //
@@ -44,6 +45,7 @@ class Comment2a extends Component
     {
         $name =  $this->comment['owner_id']['display_name'];
         $position = $this->comment['position_rendered']['value'];
+        $category_name = $this->comment['category_name']['value'];
         $created_at = $this->comment['created_at']['value'];
         [$title, $humanReadable] = $this->getTitle($name, $position, $created_at);
 
@@ -53,12 +55,13 @@ class Comment2a extends Component
         $readOnly = $this->readOnly || $differentOwner;
         // dump($readOnly);
         // dump($this->properties);
-        $allowed_to_delete = $this->properties['allowed_to_delete'] == true;
+        $properties = Properties::getFor('comment', $category_name);
+        $allowed_to_delete = $properties['allowed_to_delete'] == true;
         $deletable = !$this->readOnly && $allowed_to_delete && !$differentOwner && !$hasNotCreated;
         // dump($deletable);
 
-        $category = $this->properties['field_name'];
-        $category_id = $this->properties['field_id'];
+        $category = $properties['field_name'];
+        $category_id = $properties['field_id'];
         $legendTooltip = "Category: $category (#$category_id) (#" . $this->comment['id']['value'] . ")";
 
         return view(
@@ -69,7 +72,7 @@ class Comment2a extends Component
                 'input_or_hidden' => $this->debug ? 'input' : 'hidden',
                 "title" => $title,
                 'humanReadable' => $humanReadable,
-                'properties' => $this->properties,
+                'properties' => $properties,
                 'readOnly' => $readOnly,
                 'deletable' => $deletable,
                 'legendTooltip' => $legendTooltip,
