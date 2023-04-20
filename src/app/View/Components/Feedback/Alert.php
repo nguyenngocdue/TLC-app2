@@ -15,7 +15,8 @@ class Alert extends Component
         private $type = "info",
         private $title = null,
         private $message = "[Message] is missing.",
-        private $class = ""
+        private $class = "",
+        private $titleless = false,
     ) {
         //
     }
@@ -52,6 +53,7 @@ class Alert extends Component
                 break;
         }
         $title = ucfirst($title);
-        return view('components.feedback.alert')->with(compact('type', 'title', 'class', 'svg', 'message'));
+        $titleless = $this->titleless;
+        return view('components.feedback.alert')->with(compact('type', 'title', 'class', 'svg', 'message', 'titleless'));
     }
 }
