@@ -7,6 +7,9 @@
     <div class="p-4">
         <div class="flex justify-center">
             @switch($line->control_type_id)
+                @case (1)  {{-- 1 => "text" --}}
+                    <x-controls.insp_chklst.check-point-text :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
+                @break
                 @case (4)  {{-- 4 => "radio" --}}
                     <x-controls.insp_chklst.check-point-option :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
                 @break
