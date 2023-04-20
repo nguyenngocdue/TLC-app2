@@ -27,7 +27,7 @@ class ComponentDemo
             'tableDataHeader' => $this->getTableDataHeader(),
             'tableDataSource' => $tableDataSource,
             'gridDataSource' => $this->getGridData($tableDataSource),
-            'dataComment' => $this->getCommendData(),
+            'dataComment' => [$this->makeComment(0), $this->makeComment(1),],
             'attachmentData' => $this->getAttachmentData(),
             'attachmentData2' => $this->getAttachmentData2(),
             'tagColumns' => $this->getTagColumns(),
