@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 
-class RemindSignOffListener
+class RemindSignOffListener implements ShouldQueue
 {
     /**
      * Create the event listener.
