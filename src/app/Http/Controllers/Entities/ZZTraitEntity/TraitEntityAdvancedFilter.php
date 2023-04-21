@@ -32,7 +32,7 @@ trait TraitEntityAdvancedFilter
     {
         $propsFilters = array_map(fn ($item) => $item['control'], $propsFilters);
         if (!empty($advanceFilters)) {
-            $advanceFilters = array_filter($advanceFilters, fn ($item) => $item);
+            $advanceFilters = array_filter($advanceFilters, fn ($item) => $item !== null);
             $result = [];
             foreach ($advanceFilters as $key => $value) {
                 switch ($propsFilters['_' . $key]) {
@@ -117,7 +117,9 @@ trait TraitEntityAdvancedFilter
                         break;
                     case 'toggle':
                         array_walk($value, function ($value, $key) use ($q) {
-                            $q->where($key, $value);
+                            if ($value !== "null") {
+                                $q->where($key, $value);
+                            }
                         });
                         break;
                     case 'picker_time':
