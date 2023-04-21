@@ -178,6 +178,9 @@ trait TraitEntityAdvancedFilter
                     case 'status':
                     case 'parent_type':
                         array_walk($value, function ($value, $key) use ($q) {
+                            if (!is_array($value)) {
+                                $value = [$value];
+                            }
                             $q->whereIn($key, $value);
                         });
                         break;
