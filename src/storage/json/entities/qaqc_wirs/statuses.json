@@ -2,5 +2,6 @@
     "new",
     "assigned",
     "rejected",
-    "closed"
+    "closed",
+    "not_applicable"
 ]

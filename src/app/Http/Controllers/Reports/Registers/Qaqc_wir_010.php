@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Registers;
 
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
+use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitFunctionsReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Workflow\LibStatuses;
@@ -16,11 +17,13 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
     use TraitDynamicColumnsTableReport;
     use TraitFunctionsReport;
     use TraitModifyDataToExcelReport;
+    use TraitForwardModeReport;
 
     protected $rotate45Width = 500;
     protected $maxH = 80;
     protected  $sub_project_id = 21;
     protected  $prod_routing_id = 2;
+    protected  $mode = '010';
 
 
     public function getSqlStr($modeParams)
@@ -116,8 +119,8 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
         AND term_type='App\\\Models\\\Prod_routing'
         AND m2m.doc_id=wd.id \n";
         $sql  .= isset($modeParams['prod_routing_id']) && !is_null($modeParams['prod_routing_id']) ? 'AND term_id =' . $modeParams["prod_routing_id"] : "";
-        $sqlData = DB::select(DB::raw($sql));
         // dd($sql);
+        $sqlData = DB::select(DB::raw($sql));
         return $sqlData;
     }
 

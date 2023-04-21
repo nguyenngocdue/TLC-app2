@@ -22,6 +22,7 @@ trait TraitDataModesRegister
     {
         return ['mode_option' => [
             '010' => 'WIR Register',
+            '020' => 'WIR Progress',
         ]];
     }
     public function qaqc_ncrs()
