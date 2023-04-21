@@ -69,6 +69,7 @@ class SignOff extends Component
             $signature['user'] = [
                 'id' => $user['id'],
                 'name' => $user['name'],
+                'email' =>  $user['email'],
                 'avatar' => $user->avatar ? $path . $user->avatar->url_thumbnail : "/images/avatar.jpg",
                 'full_name' => $user['full_name'],
                 'position_rendered' => $user['position_rendered'],
@@ -79,6 +80,7 @@ class SignOff extends Component
         $currentUserObject = [
             'id' => $currentUser->id,
             'name' => $currentUser->name,
+            'email' => $currentUser->email,
             'avatar' =>  $currentUser->avatar ? $path . $currentUser->avatar->url_thumbnail : "/images/avatar.jpg",
             'full_name' => $currentUser['full_name'],
             'position_rendered' => $currentUser['position_rendered'],
