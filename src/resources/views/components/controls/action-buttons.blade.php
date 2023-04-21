@@ -31,10 +31,11 @@
                             {!! $buttonInnerHtml !!}
                         </button>
                         @else
-                    <button {{$hasIntermediateScreen ? 'type=button @click=toggleIntermediate("'.$key .'")' : 'type=submit @click=changeStatus("'.$key .'")' }}
+                    <button {{$hasIntermediateScreen ? "@click=toggleIntermediate('$key')" : "@click=changeStatus('$key');" }}
+                            type='{{$hasIntermediateScreen ? "button" : "submit"}}'
                             title="{{ $hasIntermediateScreen ? 'Open an intermediate screen' : $actionButtons[$key]['tooltip']}}"
                             class="{{$classList}} {{$bgColor}} {{$textColor}} {{$borderColor}}  hover:shadow-xl focus:shadow-xl active:shadow-xl"
-                            onClick="this.form.submit(); $('button').prop('disabled',true);" 
+                            {{-- onClick="$('button').prop('disabled',true);"  --}}
                             >
                             {!! $buttonInnerHtml !!}
                     </button>
