@@ -47,11 +47,13 @@ class RemindSignOffNotification extends Notification
         [
             'signable_type' => $signable_type,
             'signable_id' => $signable_id,
+            'requester' => $requester,
         ] = $this->doc;
+        // dump($requester);
         return (new MailMessage)
             ->subject("[ICS/$signable_id] Inspection Checklist - TLC Modular APP")
             ->greeting("Dear $name,")
-            ->line('You have a request to sign off a document.')
+            ->line($requester['name'] . ' have send a request to you to sign off a document.')
             ->line('Please click the button below to open the sign off page.')
             ->action('Sign Off Now', url("/dashboard/$signable_type/$signable_id/edit"))
             ->line('Thank you for using our application!');

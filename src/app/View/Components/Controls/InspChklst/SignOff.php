@@ -68,7 +68,7 @@ class SignOff extends Component
             $user = User::find($signature['owner_id']);
             $signature['user'] = [
                 'id' => $user['id'],
-                // 'name' => $user['name'],
+                'name' => $user['name'],
                 'avatar' => $user->avatar ? $path . $user->avatar->url_thumbnail : "/images/avatar.jpg",
                 'full_name' => $user['full_name'],
                 'position_rendered' => $user['position_rendered'],
@@ -78,6 +78,7 @@ class SignOff extends Component
         }
         $currentUserObject = [
             'id' => $currentUser->id,
+            'name' => $currentUser->name,
             'avatar' =>  $currentUser->avatar ? $path . $currentUser->avatar->url_thumbnail : "/images/avatar.jpg",
             'full_name' => $currentUser['full_name'],
             'position_rendered' => $currentUser['position_rendered'],
@@ -102,6 +103,7 @@ class SignOff extends Component
             'input_or_hidden' => $this->debug ? "text" : "hidden",
             'debug' => $this->debug,
             'alreadySigned' => $alreadySigned,
+
             'remindList' => $remindList,
             'people' => count($remindList) . " " . Str::plural("person"),
             'title' => "Send a friendly email to remind:\n" . join("\n", $people),

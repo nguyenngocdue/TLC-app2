@@ -35,6 +35,7 @@ class RemindSignOffListener implements ShouldQueue
         //
         $ids = $event->{'ids'};
         $doc = $event->{'doc'};
+        // dump($event);
         // dd($data);
         // dd($ids);
         $users = User::whereIn('id', $ids)->get();

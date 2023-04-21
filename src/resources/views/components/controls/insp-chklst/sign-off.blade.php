@@ -62,14 +62,19 @@
 </x-renderer.card>
 
 <script>
-function sendRemindToPeople(uids, signable_type, signable_id) {
-    console.log("Send remind to",uids)
-    const doc = {signable_type, signable_id}
+    function sendRemindToPeople(uids, signable_type, signable_id, cu) {
+    const requester = @json($currentUser);
+    console.log("Send remind to",uids, requester)
+    const doc = {signable_type, signable_id, requester}
     $.ajax({
         type: "POST",
         url:'/api/v1/qaqc/remind_sign_off',
         data: {uids, doc},
-        success: (response)=>console.log(response)
+        success: (response)=>{
+            console.log(response)
+            toastr.success(response.message)
+        },
+        error: ()=>toastr.error("Send emails to Queue failed.")
     })
 }
 </script>
