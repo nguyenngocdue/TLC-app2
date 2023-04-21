@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\BroadcastEvents\BroadcastRemindSignOffEvent;
 use App\Events\CreateNewDocumentEvent;
 use App\Events\EntityCreatedEvent;
 use App\Events\EntityUpdatedEvent;
@@ -9,6 +10,7 @@ use App\Events\SendEmailItemCreated;
 use App\Events\SendMailForInspector;
 use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdateStatusChklstRunEvent;
+use App\Listeners\RemindSignOffListener;
 use App\Listeners\SendCreateNewDocumentNotificationListener;
 use App\Listeners\SendEmailListener;
 use App\Listeners\SendMailForInspectorListener;
@@ -35,6 +37,8 @@ class EventServiceProvider extends ServiceProvider
         UpdatedDocumentEvent::class => [SendUpdatedDocumentNotificationListener::class],
         CreateNewDocumentEvent::class => [SendCreateNewDocumentNotificationListener::class],
         SendMailForInspector::class => [SendMailForInspectorListener::class],
+
+        BroadcastRemindSignOffEvent::class => [RemindSignOffListener::class],
     ];
 
     /**

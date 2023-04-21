@@ -2,18 +2,23 @@
 
 namespace App\View\Components\Reports\Modals;
 
-use App\Models\Sub_project;
-use App\Utils\ClassList;
-use App\View\Components\Reports\ParentTypeParamReport;
+use App\View\Components\Reports\ParentIdParamReports;
+use Illuminate\Support\Facades\DB;
 
-class ParamSubProjectId extends ParentTypeParamReport
+class ParamSubProjectId extends ParentIdParamReports
 {
-    protected function getDataSource()
+    protected $referData = 'project_id';
+    protected function getDataSource($attr_name)
     {
-        $list = Sub_project::get()->toArray();
-        $dataSource = [];
-        usort($list, fn ($a, $b) => $a['name'] <=> $b['name']);
-        foreach ($list as $team) $dataSource[] = ['id' => $team['id'], 'name' => $team['name']];
-        return $dataSource;
+        $sql = "SELECT 
+                        sp.id AS id
+                        ,sp.name AS name
+                        ,sp.status AS sp_status
+                        ,sp.project_id AS $attr_name
+                        FROM sub_projects sp
+                        ORDER BY sp.name
+                    ";
+        $result = DB::select($sql);
+        return $result;
     }
 }
