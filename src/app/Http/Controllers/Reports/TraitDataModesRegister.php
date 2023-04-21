@@ -24,4 +24,10 @@ trait TraitDataModesRegister
             '010' => 'WIR Register',
         ]];
     }
+    public function qaqc_ncrs()
+    {
+        return ['mode_option' => [
+            '010' => 'KPI',
+        ]];
+    }
 }
