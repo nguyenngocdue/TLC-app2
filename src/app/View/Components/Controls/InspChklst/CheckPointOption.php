@@ -27,8 +27,13 @@ class CheckPointOption extends Component
      */
     public function render()
     {
-        $options = Qaqc_insp_control_value::where('qaqc_insp_control_group_id', $this->line->getControlGroup->id)->get();
-        $options = $options->pluck('name', 'id',);
+        $controlGroup = $this->line->getControlGroup;
+        if ($controlGroup) {
+            $options = Qaqc_insp_control_value::where('qaqc_insp_control_group_id', $controlGroup->id)->get();
+            $options = $options->pluck('name', 'id',);
+        } else {
+            return "CONTROL GROUP ID IS NULL";
+        }
 
         return view(
             'components.controls.insp-chklst.check-point-option',
