@@ -161,7 +161,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $filteredData = array_filter($items, function ($item) use ($prodOrders) {
             return !in_array($item->prod_order_id, $prodOrders);
         });
-        $items = $filteredData;
+        // $items = $filteredData;
         // dd($items);
 
         $sheetsDesc = $this->transformSheetsDesc($modeParams);
