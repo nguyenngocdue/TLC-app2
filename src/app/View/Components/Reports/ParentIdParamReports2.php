@@ -4,6 +4,7 @@ namespace App\View\Components\Reports;
 
 
 use App\Utils\ClassList;
+use Illuminate\Support\Arr;
 use Illuminate\View\Component;
 
 abstract class ParentIdParamReports2 extends Component
@@ -21,16 +22,7 @@ abstract class ParentIdParamReports2 extends Component
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
     ) {
-        $old = old($name);
-        if ($old) {
-            $this->selected = (is_array($old)) ? "[" . join(",", $old) . "]" : "[$old]";
-        } else {
-            if (isset($this->selected[0])) {
-                $this->selected =  ($this->selected[0] != '[') ? "[" . $this->selected . "]" : $this->selected;
-            } else {
-                $this->selected = "[]";
-            }
-        }
+        $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
     private function renderJS($tableName, $objectTypeStr, $objectIdStr)
     {

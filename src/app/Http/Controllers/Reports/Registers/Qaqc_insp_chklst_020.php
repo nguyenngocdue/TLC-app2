@@ -184,12 +184,6 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             $dataSource[$key] = $item + $sheetsDesc;
         });
         // dd($dataSource);
-
-
-
-
-
-
         return collect($dataSource);
     }
 

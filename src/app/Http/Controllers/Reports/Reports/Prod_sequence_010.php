@@ -21,6 +21,9 @@ class Prod_sequence_010 extends  Report_ParentReportController
     protected  $prod_routing_id = 6;
     protected $rotate45Width = 400;
 
+    private $x = 'sub_project_id';
+    private $y = 'prod_order_id';
+    private $z = 'prod_routing_id';
 
     public function getSqlStr($modeParams)
     {
@@ -31,9 +34,9 @@ class Prod_sequence_010 extends  Report_ParentReportController
         ,ROUND(SUM(pr.worker_number * TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60) / SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) ,2) AS workers
         FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl
         WHERE 1 = 1";
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
-        if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = '{{prod_routing_id}}'";
-        if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
+        if (isset($modeParams[$this->x])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
+        if (isset($modeParams[$this->y])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
+        if (isset($modeParams[$this->z])) $sql .= "\n AND po.prod_routing_id = '{{prod_routing_id}}'";
         $sql .= "\n
         AND ps.prod_order_id = po.id
         AND sp.id = po.sub_project_id
@@ -44,9 +47,20 @@ class Prod_sequence_010 extends  Report_ParentReportController
         return $sql;
     }
 
+    function get_variable_name($var, $scope = null)
+    {
+        if (null === $scope) {
+            $scope = $GLOBALS;
+        }
+        $tmp = $var;
+        $var = '__unique_var_name__' . mt_rand();
+        $name = array_search($var, $scope, true);
+        $var = $tmp;
+        return $name;
+    }
+
     public function getTableColumns($dataSource, $modeParams)
     {
-        // dd($dataSource);
         $firstCols = [
             [
                 "title" => "Sub Project",
@@ -71,15 +85,15 @@ class Prod_sequence_010 extends  Report_ParentReportController
         return [
             [
                 'title' => 'Sub Project',
-                'dataIndex' => 'sub_project_id',
+                'dataIndex' => $this->x,
             ],
             [
                 'title' => 'Prod Order',
-                'dataIndex' => 'prod_order_id',
+                'dataIndex' => $this->y,
             ],
             [
                 'title' => 'Prod Routing',
-                'dataIndex' => 'prod_routing_id',
+                'dataIndex' => $this->z,
             ],
 
         ];
@@ -118,14 +132,11 @@ class Prod_sequence_010 extends  Report_ParentReportController
 
     protected function getDefaultValueModeParams($modeParams, $request)
     {
-        $x = 'sub_project_id';
-        $y = 'prod_routing_id';
-        $z = 'prod_order_id';
         $isNullModeParams = Report::isNullModeParams($modeParams);
         if ($isNullModeParams) {
-            $modeParams[$x] = $this->sub_project_id;
-            $modeParams[$y] = $this->prod_routing_id;
-            $modeParams[$z] = $this->prod_order_id;
+            $modeParams[$this->x] = $this->sub_project_id;
+            $modeParams[$this->y] = $this->prod_order_id;
+            $modeParams[$this->z] = $this->prod_routing_id;
         }
         return $modeParams;
     }
