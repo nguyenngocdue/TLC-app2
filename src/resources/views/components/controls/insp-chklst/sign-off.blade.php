@@ -71,10 +71,13 @@
         url:'/api/v1/qaqc/remind_sign_off',
         data: {uids, doc},
         success: (response)=>{
-            console.log(response)
+            // console.log(response)
             toastr.success(response.message)
         },
-        error: ()=>toastr.error("Send emails to Queue failed.")
+        error: (response)=>{
+            // console.log(response)
+            toastr.error(response.responseJSON.message, "Send emails to Queue failed.")
+        }
     })
 }
 </script>

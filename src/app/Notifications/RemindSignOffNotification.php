@@ -51,6 +51,9 @@ class RemindSignOffNotification extends Notification
         ] = $this->doc;
         // dump($requester);
         return (new MailMessage)
+            ->cc($requester['email'])
+            ->bcc(env('MAIL_ARCHIVE_BCC'))
+
             ->subject("[ICS/$signable_id] Inspection Checklist - TLC Modular APP")
             ->greeting("Dear $name,")
             ->line($requester['name'] . ' have send a request to you to sign off a document.')
