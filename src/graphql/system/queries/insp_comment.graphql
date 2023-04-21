@@ -1,0 +1,51 @@
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    insp_comment: [InspComment!]! @all @guard
+    insp_comments(id: ID @eq): InspComment @find @guard
+}
+type InspComment {
+    id: ID!
+    content: String
+    position_rendered: String
+    owner_id: String
+    commentable_id: String
+    commentable_type: String
+    category: String
+    created_at: DateTime
+    updated_at: DateTime
+    getOwnerId: User @belongsTo
+}
+
+input CreateInspCommentInput {
+    id: ID!
+    content: String
+    position_rendered: String
+    owner_id: String
+    commentable_id: String
+    commentable_type: String
+    category: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+input UpdateInspCommentInput {
+    content: String
+    position_rendered: String
+    owner_id: String
+    commentable_id: String
+    commentable_type: String
+    category: String
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+extend type Mutation {
+    createInspComment(input: CreateInspCommentInput! @spread): InspComment!
+        @guard
+        @create
+    updateInspComment(input: UpdateInspCommentInput! @spread): InspComment
+        @guard
+        @update
+    deleteInspComment(id: ID!): InspComment @guard @delete
+}

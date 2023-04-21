@@ -49,7 +49,7 @@
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
     <script src="{{ asset('js/signature_pad@4.0.0.umd.min.js') }}"></script>
     {{-- Socket IO must before laravel-echo --}}
-    <script src="/socket.io/socket.io.js"></script>
+    {{-- <script src="/socket.io/socket.io.js"></script> --}}
 
     {{-- <script src="{{ asset('/js/laravel-echo.js') }}"></script> --}}
     <script src="{{ asset('js/qrcode@1.0.0.min.js') }}"></script>

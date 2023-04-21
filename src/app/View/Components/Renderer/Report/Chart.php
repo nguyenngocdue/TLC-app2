@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Report;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Chart extends Component
@@ -15,6 +16,7 @@ class Chart extends Component
         private $meta = [],
         private $metric = [],
         private $key = "",
+        private $infoDataQuery = [],
     ) {
         //
     }
@@ -26,12 +28,24 @@ class Chart extends Component
      */
     public function render()
     {
+        $metric = $this->metric;
+        $meta = $this->meta;
+        $infoDataQuery = $this->infoDataQuery;
+        $result = [];
+        foreach ($metric as $value) {
+            $type = $infoDataQuery['table_a'];
+            $filed = $infoDataQuery['key_a'];
+            $routeDefault = route($type . '.index');
+            $href = $routeDefault . '?_entity=' . $type . '&' . $filed . '%5B%5D=' . $value->metric_id . '&action=updateAdvanceFilter';
+            $result[] = $href;
+        }
+        $meta['href'] = '[' . join(", ", array_map(fn ($item) =>  "'" . $item . "'", $result)) . ']';
         return view(
             'components.renderer.report.chart',
             [
                 'key' => $this->key,
-                'meta' => $this->meta,
-                'metric' => $this->metric,
+                'meta' => $meta,
+                'metric' => $metric,
             ]
         );
     }
