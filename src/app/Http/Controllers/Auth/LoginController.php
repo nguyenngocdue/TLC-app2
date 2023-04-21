@@ -118,9 +118,9 @@ class LoginController extends Controller
         if ($response = $this->loggedOut($request)) {
             return $response;
         }
-
-        return $request->wantsJson()
-            ? new JsonResponse([], 204)
-            : redirect('/');
+        // return $request->wantsJson()
+        //     ? new JsonResponse([], 204)
+        //     : redirect('/');
+        return redirect('/');
     }
 }
