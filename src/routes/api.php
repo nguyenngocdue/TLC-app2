@@ -88,11 +88,19 @@ Route::group([
         Route::get('notificationsRender', [NotificationsController::class, 'notificationsRender']);
     });
 });
+Route::group(
+    [
+        'prefix' => 'v1/qaqc',
+        // 'middleware' => 'auth'
+    ],
+    function () {
+        Route::post("remind_sign_off", [App\Http\Controllers\Api\v1\qaqc\RemindSignOffController::class, 'remind']);
+    }
+);
 Route::group([
     'prefix' => 'v1/hr',
     'middleware' => 'throttle:600,1'
 ], function () {
-    // Route::get('overtime_request_line', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours']);
     Route::post('overtime_request_line2', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours2']);
 });
 Route::group([

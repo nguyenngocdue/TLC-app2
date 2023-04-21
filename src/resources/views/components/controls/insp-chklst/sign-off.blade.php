@@ -8,7 +8,12 @@
                 <x-controls.has-data-source.dropdown2 type={{$type}} name='getMonitors1()' :selected="$selected" multiple={{true}} />
             </div>
             <div class="col-span-12 md:col-span-3">
-                <x-renderer.button title='{{$title}}' icon="fa-duotone fa-paper-plane" class="w-full h-full bg-lime-200">Remind {{$people}}</x-renderer.button>
+                <x-renderer.button 
+                    title='{{$title}}' 
+                    icon="fa-duotone fa-paper-plane" 
+                    class="w-full h-full bg-lime-200"
+                    onClick="sendRemindToPeople([{{join(',', array_keys( $remindList))}}], '{{$type}}', {{$signableId}})"
+                    >Remind {{$people}}</x-renderer.button>
             </div>
         </div>
         
@@ -55,3 +60,16 @@
         </div>
     </div>
 </x-renderer.card>
+
+<script>
+function sendRemindToPeople(uids, signable_type, signable_id) {
+    console.log("Send remind to",uids)
+    const doc = {signable_type, signable_id}
+    $.ajax({
+        type: "POST",
+        url:'/api/v1/qaqc/remind_sign_off',
+        data: {uids, doc},
+        success: (response)=>console.log(response)
+    })
+}
+</script>

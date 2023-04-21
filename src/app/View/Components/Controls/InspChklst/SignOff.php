@@ -44,9 +44,12 @@ class SignOff extends Component
         // dump($signed);
         $signedArr =  $signed->toArray();
         $unsigned = $monitors1->filter(fn ($item) => !in_array($item->id, $signedArr));
-        $unsigned = $unsigned->pluck('email', 'name');
+        $result = [];
+        foreach ($unsigned as $person) {
+            $result[$person->id] = $person->name . " - " . $person->email;
+        }
 
-        return $unsigned;
+        return $result;
     }
 
     /**
