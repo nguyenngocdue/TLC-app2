@@ -14,34 +14,58 @@ var c = {}
 @endonce
 
 <script>
-var key = '{{$key}}'
-c[key]={}
-c[key]['data'] = {
-  labels: {!! $meta['labels'] !!},
-  datasets: [
-    {
-      label:'',
-      data: {!! $meta['numbers'] !!},
-      backgroundColor: Object.values(COLORS),
-    }
-  ]
-};
-c[key]['config'] = {
-  type: '{{$chartType}}',
-  data: c[key]['data'],
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'bottom',
-      },
-      title: {
-        display: false,
-        text: 'Chart.js Doughnut Chart'
+  var key = '{{$key}}'
+  c[key]={}
+  c[key]['element'] = document.getElementById('{{$key}}');
+  c[key]['data'] = {
+    labels: {!! $meta['labels'] !!},
+    datasets: [
+      {
+        label:'',
+        data: {!! $meta['numbers'] !!},
+        backgroundColor: Object.values(COLORS),
+        custom: {
+          extraData: {!! $meta['href'] !!}
+        }
       }
-    }
-  },
-};
-c[key]['element'] = document.getElementById('{{$key}}');
+    ]
+  };
+  c[key]['config'] = {
+    type: '{{$chartType}}',
+    data: c[key]['data'],
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+        },
+        title: {
+          display: false,
+          text: 'Chart.js Doughnut Chart'
+        }
+      },
+      onHover: (event ,elements) =>{
+        if(elements.length == 1){
+          event.native.target.style.cursor = 'pointer';
+        }
+        if(elements.length == 0){
+          event.native.target.style.cursor = 'default';
+        }
+
+      },
+      onClick:  (event ,elements) => {
+        if (elements.length) {
+          var element = elements[0];
+          var index = element.index;
+          var datasetIndex = element.datasetIndex; 
+          var hrefRedirect = c['{{$key}}']['config'].data.datasets[datasetIndex].custom.extraData[index];
+          window.open(hrefRedirect);
+        }
+      }
+    },
+  };
+  
+
+
 new Chart(c[key]['element'], c[key]['config'])
 </script>

@@ -22,43 +22,43 @@
                 <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                 @endif
                 {{-- Invisible anchor for scrolling when users click on validation fail message --}}
-                <div class="truncate">
+                <div class="truncate" title={{$columnName}}>
                     <label for={{$columnName}} class="text-gray-900 dark:text-gray-300 text-base font-normal" >{{$label}}</label>
                 </div>
                 @switch ($control)
                 @case('picker_time')
-                <x-advanced-filter.picker-time3 :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.picker-time3  :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_month')
-                <x-advanced-filter.picker-month3 :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.picker-month3  :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_week')
-                <x-advanced-filter.picker-week3 :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.picker-week3  :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_year')
-                <x-advanced-filter.picker-year3 :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.picker-year3  :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_quarter')
-                <x-advanced-filter.picker-quarter3 :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.picker-quarter3  :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
                 @break
                 @case('picker_date')
                 @case('picker_datetime')
-                <x-advanced-filter.picker-date3 :name="$columnName" :value="$valueControl"/>
+                <x-advanced-filter.picker-date3  :name="$columnName" :value="$valueControl"/>
                 @if(Session::has($columnName))
                     <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
                 @endif
@@ -67,30 +67,30 @@
                 @case('doc_id')
                 @case('parent_id')
                 <div class="mt-1">
-                    <x-advanced-filter.text3 name={{$columnName}} value={{$valueControl}} placeholder="Comma separated numbers are allowed"/>
+                    <x-advanced-filter.text3  name={{$columnName}} value={{$valueControl}} placeholder="Comma separated numbers are allowed"/>
                 </div>
                 @break
                 @case('text')
                 @case('number')
                 @case('textarea')
                 <div class="mt-1">
-                    <x-advanced-filter.text3 name={{$columnName}} value={{$valueControl}}/>
+                    <x-advanced-filter.text3  name={{$columnName}} value={{$valueControl}}/>
                 </div>
                 @break
                 @case('toggle')
-                <x-advanced-filter.toggle3 name={{$columnName}} value={{$valueControl}} />
+                <x-advanced-filter.toggle3  name={{$columnName}} value={{$valueControl}} />
                 @break
                 @case ('dropdown')
                 @case ('radio')
                 @case ('dropdown_multi')
                 @case('checkbox')
-                    <x-advanced-filter.dropdown3 :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
+                    <x-advanced-filter.dropdown3  :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
                 @break
                 @case('status')
                     @php
                         $libStatus = App\Http\Controllers\Workflow\LibStatuses::getFor($type);
                     @endphp
-                    <div class="mt-1">
+                    <div class="mt-1" title={{$control}}>
                         <select id="{{$columnName}}" class="select2-hidden-accessible" multiple="multiple" style="width: 100%;" name="{{$columnName}}[]" tabindex="-1" aria-hidden="true">
                             @foreach($libStatus as $value)
                             <option value="{{$value['name']}}" @selected($valueControl ? in_array($value['name'],$valueControl) : null) >{{$value['title'] ?? $value['name']}}</option>

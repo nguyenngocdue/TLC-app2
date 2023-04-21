@@ -1,18 +1,9 @@
-@if($readOnly)
-<div class="flex justify-center">
-    <label for="{{$name}}" class=" inline-flex relative items-center">
-        <input @checked(old($name)*1==="1" || ! empty(old($name)) || $value !="" && $value*1 !==0) name={{$name}} type="checkbox" value="1" id="{{$name}}" class="sr-only peer" disabled>
-        <input type="hidden" @checked(old($name)*1==="1" || ! empty(old($name)) || $value !="" && $value*1 !==0) name={{$name}} value="1" id="{{$name}}" class="sr-only peer">
-        <div class="{{$classList}}"></div>
-    </label>
+<div class="mt-1">
+<select id={{$name}} name={{$name}} component="advancefilter/dropdown" class='{{$classList}} py-2.5'>
+    @foreach($dataSource as $key => $value)
+        <option value={{$value}} @selected($value == $selected ? true : false)>
+            {{$key}}
+        </option>
+    @endforeach
+</select>
 </div>
-
-@else
-<div class="flex justify-center">
-    <label for="{{$name}}" class=" inline-flex relative items-center cursor-pointer">
-        <input @checked(old($name)*1==="1" || ! empty(old($name)) || $value !="" && $value*1 !==0) name={{$name}} type="checkbox" value="1" id="{{$name}}" class="sr-only peer">
-        <div class="{{$classList}}"></div>
-    </label>
-</div>
-
-@endif

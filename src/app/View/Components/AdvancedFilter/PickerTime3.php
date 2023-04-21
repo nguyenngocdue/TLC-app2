@@ -13,6 +13,7 @@ class PickerTime3 extends Component
      * @return void
      */
     public function __construct(
+        private $control = '',
         private $name = '',
         private $value = '',
     ) {
@@ -27,6 +28,7 @@ class PickerTime3 extends Component
     public function render()
     {
         return view('components.advanced-filter.picker-time3', [
+            'control' => $this->control,
             'name' => $this->name,
             'value' => $this->value,
             'classListInputGroupText' => ClassList::ADV_FLT_INPUT_GROUP_TEXT,

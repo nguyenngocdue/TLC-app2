@@ -10,20 +10,22 @@ class Toggle3 extends Component
     public function __construct(
         private $name,
         private $value,
-        private $readOnly = false,
     ) {
     }
 
     public function render()
     {
-        $name = $this->name;
-        $value = $this->value;
-        $readOnly = $this->readOnly;
-        return view('components.controls.toggle2', [
-            'name' => $name,
-            'value' => $value,
-            'readOnly' => $readOnly,
-            'classList' => ClassList::TOGGLE,
+        $dataSource = [
+            '' => "null",
+            'True' => 1,
+            'False' => 0,
+        ];
+        // dd($this->value);
+        return view('components.advanced-filter.toggle3', [
+            'name' => $this->name,
+            'selected' => $this->value,
+            'dataSource' => $dataSource,
+            'classList' => ClassList::DROPDOWN,
         ]);
     }
 }

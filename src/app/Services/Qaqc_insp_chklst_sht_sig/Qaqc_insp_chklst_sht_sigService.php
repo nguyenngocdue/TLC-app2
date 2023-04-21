@@ -32,7 +32,7 @@ class Qaqc_insp_chklst_sht_sigService extends BaseService implements Qaqc_insp_c
     {
         $sig = $this->qaqcInspChklstShtSigRepository->find($id);
         if ($sig->owner_id == auth()->user()->id) {
-            $this->repository->delete($id);
+            $this->qaqcInspChklstShtSigRepository->delete($id);
             return true;
         }
         return false;
