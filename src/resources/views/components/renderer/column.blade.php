@@ -8,13 +8,13 @@ foreach($json as $item){
     if(!isset($item->$rendererParam)) {
         // dump('l1'.$rendererParam);
         if($rendererParam !== 'name'){
-            $result[] = $rendererParam." is missing";
+            $result[] = "Renderer View All Param [".$rendererParam."] is missing";
+            continue;
         }else{
             $value = "";
             // $value = "Nameless #".($id); //<< This will cause eye noises
         }
     }else {
-        // dump('l2');
         $value = $item->$rendererParam;
     }
     $result [] = "<span title='#{$id}'>".$value."</span>";

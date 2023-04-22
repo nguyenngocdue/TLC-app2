@@ -10,7 +10,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     protected $table = "qaqc_insp_chklst_shts";
 
     public $eloquentParams = [
-        "getRuns" => ["hasMany", Qaqc_insp_chklst_run::class, "qaqc_insp_chklst_sht_id"], // version 1
+        // "getRuns" => ["hasMany", Qaqc_insp_chklst_run::class, "qaqc_insp_chklst_sht_id"], // version 1
         "getLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_sht_id"],
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
         "getTmplSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, 'qaqc_insp_tmpl_sht_id'],
@@ -23,16 +23,16 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
-    public function getRuns()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        $relation = $this->{$p[0]}($p[1], $p[2]);
-        $relation
-            ->getQuery()
-            ->orderBy('created_at', 'DESC')
-            ->toSql();
-        return $relation;
-    } // version 1
+    // public function getRuns()
+    // {
+    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     $relation = $this->{$p[0]}($p[1], $p[2]);
+    //     $relation
+    //         ->getQuery()
+    //         ->orderBy('created_at', 'DESC')
+    //         ->toSql();
+    //     return $relation;
+    // } // version 1
 
     public function getLines()
     {
@@ -92,7 +92,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
             ['dataIndex' => 'name'],
             ['dataIndex' => 'description'],
             ['dataIndex' => 'qaqc_insp_chklst_id'],
-            ['dataIndex' => 'qaqc_insp_tmpl_sht_id'],
+            ['dataIndex' => 'qaqc_insp_tmpl_sht_id', 'rendererParam' => 'description'],
             ['dataIndex' => 'status'],
         ];
     }

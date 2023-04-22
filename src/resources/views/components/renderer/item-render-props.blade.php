@@ -43,14 +43,25 @@
                 <div class='col-start-1 {{$classColSpanLabel}}  {{$prop['new_line'] === 'true' ? "text-left" : "text-right" }} '>
                     @if(!$hiddenLabel)
                     <label class='text-gray-700 dark:text-gray-300  px-3 block text-base' title='{{$title}}'>
+                        @if($control == 'relationship_renderer') 
+                            @php
+                                $subModel = ($item->eloquentParams[$prop['columnName']][1]);
+                                $subTable = (new($subModel))->getTable();
+                                $href = "/dashboard/$subTable";
+                            @endphp
+                            <a href="{{$href}}">
+                        @endif
                         {{$label}}
+                        @if($control == 'relationship_renderer') 
+                            </a>
                         @endif
-                        {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
-                        @if(!$hiddenLabel)
+                    @endif
+                    {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
+                    @if(!$hiddenLabel)
                         <br />
-                        @endif
-                        <span class="flex justify-end">{!!$iconJson!!}</span>
-                        @if(!$hiddenLabel)
+                    @endif
+                    <span class="flex justify-end">{!!$iconJson!!}</span>
+                    @if(!$hiddenLabel)
                         <i>{{$labelExtra}}</i>
                     </label>
                     @endif

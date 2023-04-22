@@ -25,7 +25,7 @@ class Qaqc_insp_tmpl_line extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    
+
     public function getGroup()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -54,26 +54,12 @@ class Qaqc_insp_tmpl_line extends ModelExtended
     {
         return [
             ['dataIndex' => 'id'],
-            // ['dataIndex' => 'getTemplate', 'title' => "Template", 'renderer' => "column", "rendererParam" => "description"],
-            ['dataIndex' => 'qaqc_insp_tmpl_sht_id', 'title' => "Sheet", "rendererParam" => "description"],
-            ['dataIndex' => 'qaqc_insp_group_id', "title" => "Group", "rendererParam" => "description"],
-            ['dataIndex' => 'control_type_id', "title" => "Control Type",],
-            ['dataIndex' => 'qaqc_insp_control_group_id', "title" => "Control Group",],
+            ['dataIndex' => 'qaqc_insp_tmpl_sht_id', "rendererParam" => "description"],
+            ['dataIndex' => 'qaqc_insp_group_id', "rendererParam" => "description"],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'description'],
+            ['dataIndex' => 'control_type_id',],
+            ['dataIndex' => 'qaqc_insp_control_group_id',],
         ];
     }
-    // public function getManyLineParams()
-    // {
-    //     return [
-    //         ['dataIndex' => 'id', "renderer" => "id", "align" => "center", "type" => "qaqc_insp_tmpl_lines"],
-    //         ['dataIndex' => 'getTemplate', 'title' => "Template", 'renderer' => "column", "rendererParam" => "description"],
-    //         ['dataIndex' => 'getSheet', 'title' => "Sheet", 'renderer' => "column", "rendererParam" => "description"],
-    //         ['dataIndex' => 'getGroup', "title" => "Group", 'renderer' => "column", "rendererParam" => "description"],
-    //         ['dataIndex' => 'getControlType', "title" => "Control Type", 'renderer' => "column", "rendererParam" => "name"],
-    //         ['dataIndex' => 'getControlGroup', "title" => "Control Group", 'renderer' => "column", "rendererParam" => "name"],
-    //         ['dataIndex' => 'name'],
-    //         ['dataIndex' => 'description'],
-    //     ];
-    // }
 }

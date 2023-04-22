@@ -155,8 +155,9 @@
         "",
         "hour",
         "item",
-        "person",
         "line",
+        "person",
+        "signature",
         "team"
     ],
     "ignore_duplicatable": [

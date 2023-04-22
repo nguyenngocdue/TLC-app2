@@ -13,7 +13,9 @@ trait TraitTableColumnRO
             if (isset($column['no_print']) && $column['no_print']) continue;
             $newColumn = $column;
             if (!isset($sp['props']["_" . $column['dataIndex']])) {
-                dd("Column [" . $column['dataIndex'] . "] not found in SuperProps of " . $tableName . ". Pls double check your ManageProps screen.");
+                dump("Column [" . $column['dataIndex'] . "] not found in SuperProps of " . $tableName . ". Pls double check your ManageProps screen.");
+                $result[] = $newColumn;
+                continue;
             }
             $prop = $sp['props']["_" . $column['dataIndex']];
             $newColumn['title'] = $column['title'] ?? $prop['label']; //. " <br/>" . $prop['control'];
@@ -30,7 +32,13 @@ trait TraitTableColumnRO
                 case 'checkbox':
                     $dataIndex = $prop['relationships']['control_name_function'];
                     $newColumn['dataIndex'] = $dataIndex;
-                    $newColumn['renderer'] = 'column';
+                    $newColumn['renderer'] = $column['renderer'] ?? 'column';
+                    $newColumn['rendererParam'] = $column['rendererParam'] ?? 'name';
+                    break;
+                case 'relationship_renderer':
+                    $dataIndex = $prop['relationships']['control_name_function'];
+                    $newColumn['dataIndex'] = $dataIndex;
+                    $newColumn['renderer'] = 'agg_count';
                     $newColumn['rendererParam'] = $column['rendererParam'] ?? 'name';
                     break;
                 case 'status':
