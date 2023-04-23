@@ -26,7 +26,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
     <div class="px-4">
         <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}" />
         <x-controls.header-alert-validation :strProps="$allProps" />
-        <x-renderer.test-status-and-accessible type={{$type}} renderId={{$id}} status={{$status}} action={{$action}} :dryRunToken="$dryRunToken" :statuses="$statuses" />
+        <x-renderer.test-status-and-accessible :item="$item" type={{$type}} renderId={{$id}} status={{$status}} action={{$action}} :dryRunToken="$dryRunToken" :statuses="$statuses" />
         <x-controls.status-visibility-checker :propsOfMainPage="$propsOfMainPage" :allProps="$allProps"/>
         <form class="w-full mb-8 mt-2" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
             @csrf

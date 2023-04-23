@@ -7,6 +7,7 @@ use App\BigThink\HasCheckbox;
 use App\BigThink\HasStatus;
 use App\BigThink\TraitMenuTitle;
 use App\BigThink\TraitMetaForChart;
+use App\BigThink\TraitModelExtended;
 use App\BigThink\TraitMorphManyByFieldName;
 use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
@@ -37,6 +38,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     use TraitMenuTitle;
     use TraitMorphManyByFieldName;
     use TraitOptimisticLocking;
+    use TraitModelExtended;
 
     use HasAttachments;
     use HasStatus;
@@ -234,10 +236,5 @@ class User extends Authenticatable implements LdapAuthenticatable
             'last_name' => $this->last_name,
             'email' => $this->email,
         ];
-    }
-
-    public static function getTableName()
-    {
-        return (new static())->getTable();
     }
 }
