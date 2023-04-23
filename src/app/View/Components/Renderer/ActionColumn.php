@@ -30,7 +30,7 @@ class ActionColumn extends Component
             $urlDuplicate = route($type . '_dp', $id) ?? '';
             $urlDestroy = route($type . '.destroy', $id) ?? '';
             return "
-            <script>obj$id={urlDuplicate : '$urlDuplicate', urlDestroy:'$urlDestroy'}</script>
+            <script>obj$id={urlDuplicate : '$urlDuplicate', urlDestroy:'$urlDestroy', id: '$id'}</script>
             <div>
                 <x-renderer.button size='xs' value='$name' type='secondary' onClick='actionDuplicated(obj$id)' ><i class='fa fa-copy'></i></x-renderer.button>
                 <x-renderer.button size='xs' value='$name' type='danger' onClick='actionDeleted(obj$id)' ><i class='fa fa-trash'></i></x-renderer.button>
