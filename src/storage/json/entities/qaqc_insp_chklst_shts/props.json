@@ -227,11 +227,11 @@
         "duplicatable": "",
         "new_line": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getSignOff()": {
+        "name": "_getSignOff()",
+        "column_name": "getSignOff()",
         "column_type": "oracy_prop",
-        "label": "Monitors",
+        "label": "Norminated Approvers",
         "control": "dropdown_multi",
         "align": "",
         "col_span": "",

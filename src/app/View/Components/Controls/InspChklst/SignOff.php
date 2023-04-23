@@ -36,20 +36,27 @@ class SignOff extends Component
         return false;
     }
 
-    function getRemindList($signatures)
+    function getRemindList($norminatedApprovers, $signatures)
     {
-        $monitors1 = $this->item->getMonitors1();
-        // dump($monitors1);
         $signed = $signatures->map(fn ($s) => $s['owner_id']);
         // dump($signed);
         $signedArr =  $signed->toArray();
-        $unsigned = $monitors1->filter(fn ($item) => !in_array($item->id, $signedArr));
+        $unsigned = $norminatedApprovers->filter(fn ($item) => !in_array($item->id, $signedArr));
         $result = [];
         foreach ($unsigned as $person) {
             $result[$person->id] = $person->name . " - " . $person->email;
         }
 
         return $result;
+    }
+
+    function isRequestedToSign($norminatedApprovers, $currentUser)
+    {
+        // dump($norminatedApprovers);
+        foreach ($norminatedApprovers as $approver) {
+            if ($approver->id == $currentUser->id) return true;
+        }
+        return false;
     }
 
     /**
@@ -59,8 +66,8 @@ class SignOff extends Component
      */
     public function render()
     {
-        $selectedMonitors = $this->item->getMonitors1();
-        $selectedStr = "[" . join(",", $selectedMonitors->pluck('id')->toArray()) . ']';
+        $norminatedApprovers = $this->item->getSignOff();
+        $selectedStr = "[" . join(",", $norminatedApprovers->pluck('id')->toArray()) . ']';
         $signatures = $this->signatures;
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $currentUser = CurrentUser::get();
@@ -87,7 +94,7 @@ class SignOff extends Component
             'timestamp' => null,
         ];
         // dd($currentUser);
-        $remindList = $this->getRemindList($signatures);
+        $remindList = $this->getRemindList($norminatedApprovers, $signatures);
         // dump($remindList);
         $people = [];
         $index = 0;
@@ -96,6 +103,7 @@ class SignOff extends Component
         }
 
         $alreadySigned = $this->alreadySigned($signatures, $currentUser);
+        $isRequestedToSign0 = $this->isRequestedToSign($norminatedApprovers, $currentUser);
         return view('components.controls.insp-chklst.sign-off', [
             'signatures' => $this->signatures,
             'type' => $this->type,
@@ -105,6 +113,7 @@ class SignOff extends Component
             'input_or_hidden' => $this->debug ? "text" : "hidden",
             'debug' => $this->debug,
             'alreadySigned' => $alreadySigned,
+            'isRequestedToSign0' => $isRequestedToSign0,
 
             'remindList' => $remindList,
             'people' => count($remindList) . " " . Str::plural("person"),

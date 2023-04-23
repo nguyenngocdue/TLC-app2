@@ -20,7 +20,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     ];
 
     public $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
+        "getSignOff()" => ["getCheckedByField", User::class],
     ];
 
     // public function getRuns()
@@ -79,7 +79,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         $relation = $tmp->belongsTo(Prod_order::class, 'prod_order_id');
         return $relation;
     }
-    public function getMonitors1()
+    public function getSignOff()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

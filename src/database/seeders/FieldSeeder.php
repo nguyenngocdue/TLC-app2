@@ -73,6 +73,9 @@ class FieldSeeder extends Seeder
             'comment_insp_rejected_reason' => 51,
             'comment_approver_decision' => 52,
             'comment_inspector_decision' => 53,
+
+            'getSignOff' => 61,
+            'getDefSignOff' => 71,
         ];
     }
     /**
