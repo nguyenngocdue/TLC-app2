@@ -11,7 +11,10 @@
                     <x-controls.insp_chklst.check-point-text :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
                 @break
                 @case (4)  {{-- 4 => "radio" --}}
-                    <x-controls.insp_chklst.check-point-option :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
+                    <div>
+                        <x-controls.insp_chklst.check-point-option :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
+                        <x-controls.insp_chklst.check-point-create-ncr-on-hold :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
+                    </div>
                 @break
                 @case (7) {{-- 7 => "signature" --}}
                     <x-controls.insp_chklst.check-point-signature :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>

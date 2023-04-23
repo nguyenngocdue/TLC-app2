@@ -97,28 +97,32 @@ class Qaqc_insp_chklst_line extends ModelExtended
 
     public function getProject()
     {
-        $tmp = $this->getRun->getSheet->getChklst->prodOrder->subProject;
+        $tmp = $this->getSheet->getChklst->prodOrder->subProject;
+        // $tmp = $this->getRun->getSheet->getChklst->prodOrder->subProject;
         $relation = $tmp->belongsTo(Project::class, 'project_id');
         return $relation;
     }
 
     public function getSubProject()
     {
-        $tmp = $this->getRun->getSheet->getChklst->prodOrder;
+        $tmp = $this->getSheet->getChklst->prodOrder;
+        // $tmp = $this->getRun->getSheet->getChklst->prodOrder;
         $relation = $tmp->belongsTo(Sub_project::class, 'sub_project_id');
         return $relation;
     }
 
     public function getProdRouting()
     {
-        $tmp = $this->getRun->getSheet->getChklst->prodOrder;
+        $tmp = $this->getSheet->getChklst->prodOrder;
+        // $tmp = $this->getRun->getSheet->getChklst->prodOrder;
         $relation = $tmp->belongsTo(Prod_routing::class, 'prod_routing_id');
         return $relation;
     }
 
     public function getProdOrder()
     {
-        $tmp = $this->getRun->getSheet->getChklst;
+        $tmp = $this->getSheet->getChklst;
+        // $tmp = $this->getRun->getSheet->getChklst;
         $relation = $tmp->belongsTo(Prod_order::class, 'prod_order_id');
         return $relation;
     }
