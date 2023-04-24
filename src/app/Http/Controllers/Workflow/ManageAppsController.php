@@ -67,10 +67,10 @@ class ManageAppsController extends AbstractManageLibController
                 'renderer' => 'dropdown',
                 'editable' => true,
                 "cbbDataSource" => [
-                    'props',
-                    'checklist',
-                    'checklist-sheet',
-                    'esg',
+                    'props-renderer',
+                    'checklist-renderer',
+                    'checklist-sheet-renderer',
+                    'esg-renderer',
                 ],
             ],
             [
@@ -78,11 +78,11 @@ class ManageAppsController extends AbstractManageLibController
                 'renderer' => 'dropdown',
                 'editable' => true,
                 "cbbDataSource" => [
-                    'props',
-                    'checklist',
-                    'checklist-sheet',
-                    'esg',
-                    'qr-app',
+                    'props-renderer',
+                    'checklist-renderer',
+                    'checklist-sheet-renderer',
+                    'esg-renderer',
+                    'qr-app-renderer',
                 ],
             ],
             [
