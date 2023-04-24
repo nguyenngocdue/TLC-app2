@@ -7,6 +7,7 @@ use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitFunctionsReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
+use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\Report;
 use Illuminate\Support\Collection;
@@ -18,6 +19,7 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
     use TraitFunctionsReport;
     use TraitModifyDataToExcelReport;
     use TraitForwardModeReport;
+    use TraitSQLDataSourceParamReport;
 
     // protected $rotate45Width = 500;
     protected $maxH = 80;
@@ -75,7 +77,8 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
                             AND po.sub_project_id = sp.id
                             #AND po.id = 247";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
-        if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
+        // if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
+        if (isset($modeParams['prod_order_id'])) $sql = $this->sqlMultiSelectProdOrders($sql, $modeParams);
         $sql .= "\n ) AS potb
                             LEFT JOIN qaqc_wirs wir ON wir.sub_project_id = potb.sub_project_id 
                                                         AND wir.prod_order_id = potb.prod_order_id 
@@ -92,8 +95,10 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
                            WHERE 1 = 1
                            AND prlst.pr_id = countStatus.prod_routing_id;";
 
+        // dd($sql);
         return $sql;
     }
+
 
     protected function getTableColumns($dataSource, $modeParams)
     {
@@ -110,22 +115,23 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
                 "align" => "center",
             ],
             [
-                "title" => "Percent Completion (%)",
+                "title" => "WIR Completion (%)",
                 "dataIndex" => "percent_completion",
-                "align" => "center",
+                "align" => "right",
             ],
             [
-                "title" => "Not Yet Created WIR (%)",
+                "title" => "WIR Non Completion (%)",
                 "dataIndex" => "percent_wir_not_create",
-                "align" => "center",
+                "align" => "right",
             ],
         ];
         $plural = 'qaqc_wirs';
         $statuses = LibStatuses::getFor($plural);
         $statusNames = array_keys($statuses);
         $columns2 = array_map(fn ($item) => [
-            'title' => ucfirst($item),
-            'dataIndex' => 'percent_' . $item
+            'title' => Report::makeTitle($item) . '(%)',
+            'dataIndex' => 'percent_' . $item,
+            'align' => 'right',
         ], $statusNames);
 
 
@@ -145,11 +151,30 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
             [
                 'title' => 'Prod Order',
                 'dataIndex' => 'prod_order_id',
+                'allowClear' => true,
+                'multiple' => true
             ]
         ];
     }
 
+    protected function transformDataSource($dataSource, $modeParams)
+    {
+        // dd($dataSource);
+        return $dataSource;
+    }
 
+    protected function changeValueData($dataSource)
+    {
+        $dataSource = $dataSource->ToArray() ?? $dataSource;
+        array_walk($dataSource, function ($value) {
+            $value->prod_order_name = (object)[
+                'value' => $value->prod_order_name,
+                'cell_title' => 'ID: ' . $value->prod_order_id,
+            ];
+        });
+        // dd($dataSource[0]);
+        return collect($dataSource);
+    }
 
     protected function getDefaultValueModeParams($modeParams, $request)
     {
@@ -163,12 +188,5 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
         }
         // dd($modeParams);
         return $modeParams;
-    }
-
-
-    protected function transformDataSource($dataSource, $modeParams)
-    {
-        // dd($dataSource);
-        return $dataSource;
     }
 }

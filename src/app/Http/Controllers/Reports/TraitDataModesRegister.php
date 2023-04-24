@@ -22,13 +22,13 @@ trait TraitDataModesRegister
     {
         return ['mode_option' => [
             '010' => 'WIR Register',
-            '020' => 'WIR Progress',
+            '020' => 'WIR Detail Progress',
         ]];
     }
     public function qaqc_ncrs()
     {
         return ['mode_option' => [
-            '010' => 'KPI',
+            '010' => 'NCR Progress',
         ]];
     }
 }
