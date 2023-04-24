@@ -28,11 +28,9 @@ class ParentType3 extends Component
      */
     public function render()
     {
-        $dataSource = $this->getAllTypeMorphMany();
-        return view('components.controls.parent-type2', [
-            'dataSource' => $dataSource,
-            'name' =>  $this->name,
-            'valueSelected' => $this->valueSelected,
-        ]);
+        $type = $this->type;
+        $name = $this->name;
+        $selected = $this->valueSelected;
+        return "<x-controls.parent_type2 type='$type' name='$name' selected='$selected'/>";
     }
 }

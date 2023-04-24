@@ -106,9 +106,9 @@
                             });
                     </script>
                 @break
-                {{-- @case('parent_type')
+                @case('parent_type')
                 <x-advanced-filter.parent-type3 :type="$type" :name="$columnName" :valueSelected="$valueControl"/>
-                @break --}}
+                @break
                 @default
                 <x-feedback.alert type="warning" title="Control" message="[{{$control}}] ???" />
                 @break

@@ -2,7 +2,10 @@ scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 extend type Query {
-    sub_projects: [Sub_project!]! @all @guard
+    sub_projects: [Sub_project!]!
+        @all
+        @guard
+        @orderBy(column: "name", direction: ASC)
     sub_project(id: ID @eq): Sub_project @find @guard
 }
 
