@@ -15,6 +15,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_name": {
@@ -24,7 +25,7 @@
         "label": "Production Priority No",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -33,6 +34,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_slug": {
@@ -42,7 +44,7 @@
         "label": "Slug",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -51,6 +53,7 @@
         "hidden_print": "true",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_status": {
@@ -69,6 +72,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_production_name": {
@@ -78,7 +82,7 @@
         "label": "Production Name",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -87,6 +91,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_compliance_name": {
@@ -96,7 +101,7 @@
         "label": "Compliance Name",
         "control": "text",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -105,6 +110,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_description": {
@@ -123,6 +129,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_quantity": {
@@ -132,7 +139,7 @@
         "label": "Quantity",
         "control": "number",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -141,16 +148,17 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_started_at": {
         "name": "_started_at",
         "column_name": "started_at",
         "column_type": "datetime",
-        "label": "Started At",
+        "label": "Actual Started At",
         "control": "picker_datetime",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -159,6 +167,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_sub_project_id": {
@@ -168,7 +177,7 @@
         "label": "Sub Project",
         "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -177,42 +186,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
-        "new_line": ""
-    },
-    "_meta_type": {
-        "name": "_meta_type",
-        "column_name": "meta_type",
-        "column_type": "string",
-        "label": "Meta Type",
-        "control": "parent_type",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "true",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "new_line": ""
-    },
-    "_meta_id": {
-        "name": "_meta_id",
-        "column_name": "meta_id",
-        "column_type": "bigint",
-        "label": "Meta ID",
-        "control": "parent_id",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "true",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_prod_routing_id": {
@@ -222,7 +196,7 @@
         "label": "Prod Routing",
         "control": "dropdown",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -231,6 +205,45 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_meta_type": {
+        "name": "_meta_type",
+        "column_name": "meta_type",
+        "column_type": "string",
+        "label": "Meta Type",
+        "control": "parent_type",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_meta_id": {
+        "name": "_meta_id",
+        "column_name": "meta_id",
+        "column_type": "bigint",
+        "label": "Meta ID",
+        "control": "parent_id",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_created_at": {
@@ -240,7 +253,7 @@
         "label": "Created At",
         "control": "picker_datetime",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -249,6 +262,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_updated_at": {
@@ -258,7 +272,7 @@
         "label": "Updated At",
         "control": "picker_datetime",
         "align": "",
-        "col_span": "",
+        "col_span": "6",
         "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
@@ -267,6 +281,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_prodSequences": {
@@ -285,6 +300,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_qaqcInspChklsts": {
@@ -303,6 +319,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_getMeta": {
@@ -321,6 +338,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_owner_id": {
@@ -339,6 +357,7 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     }
 }

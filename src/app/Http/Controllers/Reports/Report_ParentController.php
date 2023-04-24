@@ -32,7 +32,7 @@ abstract class Report_ParentController extends Controller
     protected $groupBy = false;
     protected $mode = '010';
     protected $groupByLength = 7;
-    protected $maxH = 400;
+    protected $maxH = null;
 
     public function getType()
     {

@@ -31,4 +31,13 @@ trait TraitSQLDataSourceParamReport
         $sqlData = DB::select(DB::raw($sql));
         return $sqlData;
     }
+
+    function sqlMultiSelectProdOrders($sql, $modeParams, $field = 'prod_order_id')
+    {
+        $x = $modeParams[$field];
+        $con = str_replace(['[', ']'], ['(', ')'], json_encode($x));
+        $sql .= "\n AND po.id IN " . $con;
+
+        return $sql;
+    }
 }

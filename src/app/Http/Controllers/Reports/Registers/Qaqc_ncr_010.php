@@ -18,7 +18,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
     use TraitModifyDataToExcelReport;
 
     protected $rotate45Width = 500;
-    protected $maxH = 80;
+    protected $maxH = 40;
     protected  $prod_routing_id = 2;
 
 

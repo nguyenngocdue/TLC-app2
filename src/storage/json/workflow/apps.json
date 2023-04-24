@@ -380,7 +380,8 @@
         "nickname": "ics",
         "doc_id_format_column": null,
         "status": null,
-        "icon": null
+        "icon": null,
+        "disallowed_direct_creation": "true"
     },
     "qaqc_insp_chklst_line": {
         "name": "qaqc_insp_chklst_line",

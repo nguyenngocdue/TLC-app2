@@ -6,7 +6,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "acct_manager_nz": {
         "name": "acct_manager_nz",
@@ -15,7 +16,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "acct_member": {
         "name": "acct_member",
@@ -24,7 +26,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "acct_member_nz": {
         "name": "acct_member_nz",
@@ -33,7 +36,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "admin": {
         "name": "admin",
@@ -42,7 +46,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "bd_manager": {
         "name": "bd_manager",
@@ -51,7 +56,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "bd_member": {
         "name": "bd_member",
@@ -60,7 +66,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "cpl_manager_nz": {
         "name": "cpl_manager_nz",
@@ -69,7 +76,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "cpl_member": {
         "name": "cpl_member",
@@ -78,7 +86,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "dc_ho": {
         "name": "dc_ho",
@@ -87,7 +96,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "dc_manager": {
         "name": "dc_manager",
@@ -96,7 +106,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "dc_ws": {
         "name": "dc_ws",
@@ -105,7 +116,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "des_manager": {
         "name": "des_manager",
@@ -114,7 +126,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "des_member": {
         "name": "des_member",
@@ -123,7 +136,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "dir": {
         "name": "dir",
@@ -132,7 +146,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "dir_nz": {
         "name": "dir_nz",
@@ -141,7 +156,18 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
+    },
+    "external_inspector": {
+        "name": "external_inspector",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": "",
+        "not_applicable": ""
     },
     "fac_admin": {
         "name": "fac_admin",
@@ -150,7 +176,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "fin_member_nz": {
         "name": "fin_member_nz",
@@ -159,7 +186,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "guest": {
         "name": "guest",
@@ -168,7 +196,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "hr_manager": {
         "name": "hr_manager",
@@ -177,7 +206,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "hr_member": {
         "name": "hr_member",
@@ -186,7 +216,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "hr_member_nz": {
         "name": "hr_member_nz",
@@ -195,7 +226,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "hse_manager": {
         "name": "hse_manager",
@@ -204,7 +236,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "hse_member": {
         "name": "hse_member",
@@ -213,7 +246,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "it_manager": {
         "name": "it_manager",
@@ -222,7 +256,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "it_member": {
         "name": "it_member",
@@ -231,7 +266,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "mgr_asst_nz": {
         "name": "mgr_asst_nz",
@@ -240,7 +276,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "newcomer": {
         "name": "newcomer",
@@ -249,7 +286,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "pln_admin": {
         "name": "pln_admin",
@@ -258,7 +296,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "proc_manager": {
         "name": "proc_manager",
@@ -267,7 +306,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "proc_member": {
         "name": "proc_member",
@@ -276,7 +316,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "proc_member_nz": {
         "name": "proc_member_nz",
@@ -285,7 +326,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "prod_manager": {
         "name": "prod_manager",
@@ -294,7 +336,8 @@
         "new": "true",
         "assigned": "",
         "rejected": "true",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "prod_manager_nz": {
         "name": "prod_manager_nz",
@@ -303,7 +346,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "prod_member": {
         "name": "prod_member",
@@ -312,7 +356,8 @@
         "new": "true",
         "assigned": "",
         "rejected": "true",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "prod_member_nz": {
         "name": "prod_member_nz",
@@ -321,7 +366,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "proj_manager": {
         "name": "proj_manager",
@@ -330,7 +376,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
@@ -339,7 +386,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "proj_member": {
         "name": "proj_member",
@@ -348,7 +396,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
@@ -357,7 +406,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "qaqc_manager": {
         "name": "qaqc_manager",
@@ -366,7 +416,8 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "qaqc_member": {
         "name": "qaqc_member",
@@ -375,7 +426,8 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "qs_manager": {
         "name": "qs_manager",
@@ -384,7 +436,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "qs_member": {
         "name": "qs_member",
@@ -393,7 +446,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "qs_member_nz": {
         "name": "qs_member_nz",
@@ -402,7 +456,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "supreme_manage": {
         "name": "supreme_manage",
@@ -411,7 +466,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "whs_manager": {
         "name": "whs_manager",
@@ -420,7 +476,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "whs_member": {
         "name": "whs_member",
@@ -429,7 +486,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "worker": {
         "name": "worker",
@@ -438,6 +496,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     }
 }

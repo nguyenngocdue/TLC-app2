@@ -9,11 +9,19 @@ class FieldSeeder extends Seeder
 {
     public static function getIdFromFieldName($fieldName)
     {
-        return Field::where('name', $fieldName)->firstOrFail()->id;
+        try {
+            return Field::where('name', $fieldName)->firstOrFail()->id;
+        } catch (\Exception $e) {
+            abort(404, "Cant find in Field table the name [" . $fieldName . "]");
+        }
     }
     public static function getNameFromFieldId($fieldId)
     {
-        return Field::where('id', $fieldId)->firstOrFail()->name;
+        try {
+            return Field::where('id', $fieldId)->firstOrFail()->name;
+        } catch (\Exception $e) {
+            abort(404, "Cant find in Field table the id [" . $fieldId . "]");
+        }
     }
 
     private static function dataSource()

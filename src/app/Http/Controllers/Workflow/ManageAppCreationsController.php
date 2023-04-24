@@ -9,6 +9,7 @@ class ManageAppCreationsController extends AbstractManageLibController
     protected $title = "Manage App Creations";
     protected $libraryClass = LibAppCreations::class;
     protected $route = "manageAppCreations";
+    protected $allowedCreateNew = false;
 
     protected function getColumns()
     {

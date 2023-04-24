@@ -31,6 +31,22 @@
         "on_hold": "",
         "approved": ""
     },
+    "_prod_order_id": {
+        "name": "_prod_order_id",
+        "column_name": "prod_order_id",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "approved": "true"
+    },
+    "_getSheets": {
+        "name": "_getSheets",
+        "column_name": "getSheets",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "approved": "true"
+    },
     "_progress": {
         "name": "_progress",
         "column_name": "progress",
@@ -42,18 +58,10 @@
     "_qaqc_insp_tmpl_id": {
         "name": "_qaqc_insp_tmpl_id",
         "column_name": "qaqc_insp_tmpl_id",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "approved": ""
-    },
-    "_prod_order_id": {
-        "name": "_prod_order_id",
-        "column_name": "prod_order_id",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "approved": ""
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "approved": "true"
     },
     "_consent_number": {
         "name": "_consent_number",
@@ -94,13 +102,5 @@
         "cancelled": "",
         "on_hold": "",
         "approved": ""
-    },
-    "_getSheets": {
-        "name": "_getSheets",
-        "column_name": "getSheets",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "approved": "true"
     }
 }
