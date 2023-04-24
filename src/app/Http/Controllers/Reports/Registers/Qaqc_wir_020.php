@@ -93,7 +93,8 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
                                         AND m2m.doc_id=wd.id ) AS prtb
                                         GROUP BY prtb.pr_id, pr_id ) AS prlst
                            WHERE 1 = 1
-                           AND prlst.pr_id = countStatus.prod_routing_id;";
+                           AND prlst.pr_id = countStatus.prod_routing_id
+                           ORDER BY prod_order_name;";
 
         // dd($sql);
         return $sql;
