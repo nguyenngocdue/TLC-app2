@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\SuperProps;
 
-trait TraitEntityCRUDShow
+trait TraitEntityCRUDShowProps
 {
-	public function show($id)
+	public function showProps($id)
 	{
 		$blackList = ['z_divider', 'z_page_break'];
 		$props = SuperProps::getFor($this->type)['props'];

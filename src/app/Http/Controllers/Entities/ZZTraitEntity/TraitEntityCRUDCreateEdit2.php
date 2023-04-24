@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Http\Controllers\Workflow\LibApps;
 use App\Providers\Support\TraitSupportPermissionGate;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\DefaultValues;
@@ -37,7 +38,6 @@ trait TraitEntityCRUDCreateEdit2
 			'props' => $props,
 			'item' => (object)[],
 			'defaultValues' => DefaultValues::getAllOf($this->type),
-			// 'realtimes' => Realtimes::getAllOf($this->type),
 			'isCheckColumnStatus' => $isCheckColumnStatus,
 			'type' => $this->type,
 			'action' => __FUNCTION__,
@@ -52,6 +52,7 @@ trait TraitEntityCRUDCreateEdit2
 			'listeners4' => $this->getListeners4($tableBluePrint),
 			'filters4' => $this->getFilters4($tableBluePrint),
 			'disallowed' => $disallowed,
+			'app' => LibApps::getFor($this->type),
 		]);
 	}
 
@@ -71,12 +72,12 @@ trait TraitEntityCRUDCreateEdit2
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$isCheckColumnStatus = Schema::hasColumn(Str::plural($this->type), 'status');
+
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
 			'props' => $props,
 			'item' => $original,
 			'defaultValues' => DefaultValues::getAllOf($this->type),
-			// 'realtimes' => Realtimes::getAllOf($this->type),
 			'values' => $values,
 			'status' => $status,
 			'dryRunToken' => Hash::make($valueCreateDryToken),
@@ -92,6 +93,7 @@ trait TraitEntityCRUDCreateEdit2
 			'listeners4' => $this->getListeners4($tableBluePrint),
 			'filters4' => $this->getFilters4($tableBluePrint),
 			'disallowed' => false,
+			'app' => LibApps::getFor($this->type),
 		]);
 	}
 }

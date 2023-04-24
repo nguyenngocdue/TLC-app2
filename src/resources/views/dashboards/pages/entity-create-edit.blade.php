@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
 @php
-$user = auth()->user();
-$editType = Str::plural($type);
-$id = $action === "edit" ? $values->id : "";
-$status = $status ?? $values->status ?? null;
-$ownerId = $values->owner_id ?? null;
-$allProps = $superProps['props'];
-[$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$isCheckColumnStatus,$ownerId);
-$propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
+    $user = auth()->user();
+    $editType = Str::plural($type);
+    $id = ($action === "edit") ? $values->id : "";
+    $status = $status ?? $values->status ?? null;
+    $ownerId = $values->owner_id ?? null;
+    $allProps = $superProps['props'];
+    [$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$isCheckColumnStatus,$ownerId);
+    $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
 @endphp
+
 @section('topTitle', $topTitle)
 @section('title', $title )
 @section('status', $action === "edit" ? $status : null)
@@ -32,12 +33,21 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
             @csrf
             <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
             @method($action === "create" ? 'POST' : 'PUT')
-            @if($type != 'qaqc_insp_chklst_shts')
+
+            @switch($app['edit_renderer'])
+                @case ('props-renderer')
                     <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
-            @else
+                @break
+                @case ('checklist-sheet-renderer')
                     <x-controls.insp-chklst.item-render-check-sheet id={{$id}} :item="$item" :type="$type"/>
-                {{-- <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} /> --}}
-            @endif
+                @break
+                @case ('esg-sheet-renderer')
+                    <x-feedback.alert type="warning" message="{{$app['edit_renderer']}} in entity-create-edit need to be implemented." />
+                @break
+                @default
+                    <x-feedback.alert type="error" message="Unknown how to render [{{$app['edit_renderer']}}] in entity-create-edit." />
+                @break
+            @endswitch
             @foreach($propsIntermediate as $key => $props)
                 @php $propsOfIntermediatePage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues, $status, $type); @endphp
                 <x-renderer.editable.modal-intermediate key={{$key}} action={{$action}} type={{$type}} status={{$status}} id={{$id}} modelPath={{$modelPath}} :actionButtons="$actionButtons" :props="$props" :item="$item" :dataSource="$propsOfIntermediatePage"  />

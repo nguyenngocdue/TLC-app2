@@ -68,9 +68,9 @@ class ManageAppsController extends AbstractManageLibController
                 'editable' => true,
                 "cbbDataSource" => [
                     'props-renderer',
-                    'checklist-renderer',
+                    // 'checklist-renderer',
                     'checklist-sheet-renderer',
-                    'esg-renderer',
+                    'esg-sheet-renderer',
                 ],
             ],
             [
@@ -81,7 +81,7 @@ class ManageAppsController extends AbstractManageLibController
                     'props-renderer',
                     'checklist-renderer',
                     'checklist-sheet-renderer',
-                    'esg-renderer',
+                    'esg-sheet-renderer',
                     'qr-app-renderer',
                 ],
             ],

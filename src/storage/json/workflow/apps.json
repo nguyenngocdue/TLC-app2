@@ -450,7 +450,7 @@
         "nickname": "ics",
         "doc_id_format_column": null,
         "status": null,
-        "edit_renderer": "checklist-renderer",
+        "edit_renderer": "props-renderer",
         "show_renderer": "checklist-renderer",
         "icon": null,
         "disallowed_direct_creation": "true"
@@ -527,7 +527,7 @@
         "nickname": "itpl",
         "doc_id_format_column": null,
         "status": null,
-        "edit_renderer": "checklist-renderer",
+        "edit_renderer": "props-renderer",
         "show_renderer": "checklist-renderer",
         "icon": null
     },

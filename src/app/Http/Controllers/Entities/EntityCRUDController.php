@@ -5,19 +5,26 @@ namespace App\Http\Controllers\Entities;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDCreateEdit2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDDestroy;
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShow;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowChklstSht;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowChklst;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowProps;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowQRApp;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStoreUpdate2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
+use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\Support\Facades\App;
 
 class EntityCRUDController extends Controller
 {
-	use TraitEntityCRUDShow;
+	use TraitEntityCRUDShowProps;
 	use TraitEntityCRUDShowQRApp;
+	use TraitEntityCRUDShowChklst;
+	use TraitEntityCRUDShowChklstSht;
+
 	use TraitEntityCRUDCreateEdit2;
 	use TraitEntityCRUDStoreUpdate2;
+
 	use TraitEntityCRUDDestroy;
 	use TraitEntityDynamicType;
 
@@ -53,5 +60,23 @@ class EntityCRUDController extends Controller
 	public function getType()
 	{
 		return $this->type;
+	}
+
+	public function show($id_or_slug)
+	{
+		$app = LibApps::getFor($this->type);
+		$show_renderer = $app['show_renderer'];
+		switch ($show_renderer) {
+			case 'checklist-renderer':
+				return $this->showChklst($id_or_slug);
+			case 'checklist-sheet-renderer':
+				return $this->showChklstSht($id_or_slug);
+			case 'props-renderer':
+				return $this->showProps($id_or_slug);
+			case 'qr-app-renderer':
+				return $this->showQRApp($id_or_slug);
+			default:
+				dump("Unknown how to render $show_renderer.");
+		}
 	}
 }

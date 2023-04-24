@@ -124,11 +124,6 @@
         "system_permission",
         "dashboard"
     ],
-    "qr_code_apps": [
-        "pj_modules",
-        "pj_shipments",
-        "pj_units"
-    ],
     "assignees": [
         "assignee_1",
         "assignee_2",

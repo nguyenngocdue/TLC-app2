@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 $entities = Entities::getAll();
-$qrCodeApps = JsonControls::getQrCodeApps();
+// $qrCodeApps = JsonControls::getQrCodeApps();
 Auth::routes();
 Route::group([
     'middleware' => ['auth', 'impersonate',]
@@ -47,7 +47,7 @@ Route::group([
             Route::get("{$entityName}_dp/{id}", [ViewAllInvokerController::class, "duplicate"])->name("{$entityName}_dp");
             Route::post("{$entityName}_dp", [ViewAllInvokerController::class, "duplicateMultiple"])->name("{$entityName}_dp.duplicateMultiple");
             Route::get("{$entityName}_ep", [ViewAllInvokerController::class, "exportCSV"])->name("{$entityName}_ep.exportCSV");
-            Route::get("{$entityName}_qr", [ViewAllInvokerController::class, "showQRCode"])->name("{$entityName}_qr.showQRCode");
+            Route::get("{$entityName}_qr", [ViewAllInvokerController::class, "showQRList6"])->name("{$entityName}_qr.showQRList6");
             Route::resource("{$entityName}", EntityCRUDController::class)->only('create', 'store', 'edit', 'update', 'show', 'destroy');
             Route::delete("{$entityName}", [EntityCRUDController::class, "destroyMultiple"])->name("{$entityName}.destroyMultiple");
         }
@@ -184,6 +184,7 @@ Route::resource('utils/parser', ParserController::class)->only('index', 'store')
 
 Route::group([
     'prefix' => 'dashboard/workflow',
+    'middleware' => ['auth'],
 ], function () {
     Route::resource('manageStatuses', ManageStatusesController::class)->only('index', 'store', 'create');
     Route::resource('manageWidgets', ManageWidgetsController::class)->only('index', 'store', 'create');
@@ -192,13 +193,13 @@ Route::group([
 });
 Route::get('components', [ComponentDemo::class, 'index']);
 Route::get('redis', [RedisController::class, 'index']);
-Route::group([
-    'prefix' => 'app'
-], function () use ($qrCodeApps) {
-    foreach ($qrCodeApps as $qrCodeApp) {
-        Route::get("{$qrCodeApp}/{slug}", [EntityCRUDController::class, "showQRApp"])->name("{$qrCodeApp}.showQRApp");
-    }
-});
+// Route::group([
+//     'prefix' => 'app'
+// ], function () use ($qrCodeApps) {
+//     foreach ($qrCodeApps as $qrCodeApp) {
+//         Route::get("{$qrCodeApp}/{slug}", [EntityCRUDController::class, "showQRApp"])->name("{$qrCodeApp}.showQRApp");
+//     }
+// });
 
 //This is for back compatible with TLC App 1, QR Code scannings
 Route::get('/modular/{slug}',  fn ($slug) => redirect('app/pj_modules/' . $slug));

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\Json\SuperProps;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 trait TraitEntityShowQRList6
 {
-	public function showQRCode()
+	public function showQRList6()
 	{
 		[, $dataSource] = $this->normalizeDataSourceAndColumnsFollowAdvanceFilter();
 		$plural = Str::plural($this->type);
