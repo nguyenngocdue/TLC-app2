@@ -9,6 +9,7 @@ type Qaqc_insp_chklst_sht {
     id: ID!
     name: String!
     description: String!
+    progress: String
     slug: String!
     qaqc_insp_chklst_id: ID!
     created_at: DateTime
