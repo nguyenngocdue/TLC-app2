@@ -35,7 +35,7 @@ class CheckPointSignature extends Component
             'full_name' => $inspector->full_name,
             'position_rendered' => $inspector->position_rendered,
             'timestamp' => DateTimeConcern::convertForLoading("picker_datetime", $this->line->created_at),
-            'avatar' => $path . $inspector->avatar->url_thumbnail,
+            'avatar' => $inspector->avatar ? $path . $inspector->avatar->url_thumbnail : "/images/avatar.jpg",
         ];
         return view('components.controls.insp-chklst.check-point-signature', [
             'table01Name' => $this->table01Name,
