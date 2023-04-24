@@ -12,8 +12,7 @@ trait TraitSupportSignOff
     private function getDataSource($id)
     {
         $chklstSht = Qaqc_insp_chklst_sht::findOrFail($id);
-        $runLatest = $chklstSht->getRuns->first();
-        $runLines = $runLatest->getLines;
+        $runLines = $chklstSht->getLines;
         return [$runLines, $chklstSht];
     }
     public function getTableColumns()
@@ -22,12 +21,12 @@ trait TraitSupportSignOff
             [
                 "title" => 'Description',
                 "dataIndex" => "description",
-                'width' => 500,
+                'width' => 300,
             ],
             [
                 "dataIndex" => "response_type",
                 "align" => "center",
-                'width' => 350,
+                'width' => 600,
             ],
         ];
     }
@@ -44,40 +43,26 @@ trait TraitSupportSignOff
         $controlGroup = $value->getControlGroup->name ?? null;
         $str = '';
         if (!is_null($controlGroup)) {
-            $str .= "<tr title='Chklst Run ID: {$value->getRun->id}\nChklst Line ID: {$value->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($value) . "</tr>";
+            $str .= "<tr title='Chklst Line ID: {$value->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($value) . "</tr>";
             $str .= $this->createStrHtmlAttachment($value);
             $str .=  $this->createStrHtmlComment($value);
         } else {
             $valueSignature = $value->value;
-            $signatureId = $value->id;
-            $type = 'qaqc_insp_chklst_sht';
-            $action = route($type . '.sign_off.update', $signatureId);
             $inspectorId = $value->inspector_id;
-            $qaqcInspChklstShtId = $value->getRun->qaqc_insp_chklst_sht_id;
-            $actionQaqcInspChklstSht = route($type . '.sign_off.index', $qaqcInspChklstShtId);
             $inspectorName = null;
             if ($inspectorId) {
                 $inspectorName = User::findOrFail($inspectorId)->full_name;
             }
             $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $value->updated_at);
             $str = Blade::render(
-                "<form action='$action' method='POST'>
-                @method('PUT')
-                @csrf
-                <div class='flex justify-center'><x-controls.signature2 name='signature' value='$valueSignature'/></div>
-                <div class='text-right mr-10 mt-1'>
-                    @if('$inspectorName')
-                        <p class='font-medium'>$inspectorName</p>
-                        <p>$updatedAt</p>
-                    @endif 
+                "<x-controls.signature2 name='signature' value='$valueSignature'/>
                 </div>
-                <div class='flex justify-between no-print'>
-                    <x-renderer.button htmlType='button' click=toggleListingTable($qaqcInspChklstShtId) type='secondary' class='ml-10'>Request</x-renderer.button>
-                    <x-renderer.button htmlType='submit' type='secondary' class='mr-10'>Submit</x-renderer.button>
-                    </div>
-                    </form>
-                <x-modals.modal-add-inspector-from-list modalId='$qaqcInspChklstShtId' type='$type' action='$actionQaqcInspChklstSht' />
-                    ",
+                <div class='text-right mr-10 mt-1'>
+                @if('$inspectorName')
+                    <p class='font-medium'>$inspectorName</p>
+                    <p>$updatedAt</p>
+                @endif 
+                ",
             );
         }
         return $str;
