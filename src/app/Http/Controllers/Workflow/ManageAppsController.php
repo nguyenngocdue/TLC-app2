@@ -63,6 +63,29 @@ class ManageAppsController extends AbstractManageLibController
                 'cbbDataSource' => ['', 'dev', 'beta'],
             ],
             [
+                'dataIndex' => 'edit_renderer',
+                'renderer' => 'dropdown',
+                'editable' => true,
+                "cbbDataSource" => [
+                    'props',
+                    'checklist',
+                    'checklist-sheet',
+                    'esg',
+                ],
+            ],
+            [
+                'dataIndex' => 'show_renderer',
+                'renderer' => 'dropdown',
+                'editable' => true,
+                "cbbDataSource" => [
+                    'props',
+                    'checklist',
+                    'checklist-sheet',
+                    'esg',
+                    'qr-app',
+                ],
+            ],
+            [
                 'dataIndex' => 'apply_approval_tree',
                 'renderer' => 'checkbox',
                 'editable' => true,

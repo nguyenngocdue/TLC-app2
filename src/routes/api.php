@@ -96,6 +96,7 @@ Route::group(
     ],
     function () {
         Route::post("remind_sign_off", [App\Http\Controllers\Api\v1\qaqc\RemindSignOffController::class, 'remind']);
+        Route::post("clone_chklst_from_tmpl", [App\Http\Controllers\Api\v1\qaqc\CloneChklstFromTmpl::class, 'clone']);
     }
 );
 Route::group([

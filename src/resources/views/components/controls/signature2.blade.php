@@ -1,7 +1,7 @@
 {{-- https://github.com/szimek/signature_pad --}}
 @php $w=340; $h=140; /* ORI 220 x 90*/ @endphp 
 @if($value_decoded !== '')
-    <div id="div1{{$name}}" class="relative border border-gray-300 rounded-md w-[{{$w}}px] h-[{{$h}}px]">
+    <div id="div1{{$name}}" class="relative border border-gray-300 rounded-md w-[340px] h-[140px]">
         @if($updatable)
             <button type="button" id="btnReset1_{{$count}}" class="no-print w-10 h-10 top-1 right-2 absolute">
                 <i class="text-red-700 fa-solid fa-xmark cursor-pointer text-lg"></i>

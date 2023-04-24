@@ -145,7 +145,7 @@
         "hidden_edit": "true",
         "hidden_label": "",
         "hidden_filter": "true",
-        "hidden_print": "",
+        "hidden_print": "true",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",

@@ -7,6 +7,8 @@
         "nickname": "att",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": "<i class=\"fa-regular fa-paperclip\"><\/i>"
     },
@@ -18,6 +20,8 @@
         "nickname": "cmt",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": "<i class=\"fa-duotone fa-comments\"><\/i>"
     },
@@ -29,6 +33,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -40,6 +46,8 @@
         "nickname": "db",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null
     },
     "department": {
@@ -50,6 +58,8 @@
         "nickname": "dpm",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": "<i class=\"fa-regular fa-sitemap\"><\/i>"
     },
     "erp_routing_link": {
@@ -60,6 +70,8 @@
         "nickname": "erl",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": "<i class=\"fa-duotone fa-calendar-days\"><\/i>"
     },
     "field": {
@@ -70,6 +82,8 @@
         "nickname": "fld",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -81,6 +95,8 @@
         "nickname": "otr",
         "doc_id_format_column": null,
         "status": "dev",
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null,
         "apply_approval_tree": "true"
     },
@@ -92,6 +108,8 @@
         "nickname": "otrl",
         "doc_id_format_column": null,
         "status": "dev",
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null,
         "apply_approval_tree": "true"
@@ -104,6 +122,8 @@
         "nickname": "hca",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null
     },
     "hse_incident_report": {
@@ -114,6 +134,8 @@
         "nickname": "hir",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null
     },
     "manageAppCreations": {
@@ -124,6 +146,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -135,6 +159,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -146,6 +172,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -157,6 +185,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -168,6 +198,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -179,6 +211,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "qr-app",
         "icon": null
     },
     "pj_pod": {
@@ -189,6 +223,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null
     },
     "pj_shipment": {
@@ -199,6 +235,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "qr-app",
         "icon": null
     },
     "pj_staircase": {
@@ -209,6 +247,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null
     },
     "pj_unit": {
@@ -219,6 +259,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "qr-app",
         "icon": null
     },
     "post": {
@@ -229,6 +271,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -240,6 +284,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -251,6 +297,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -262,6 +310,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -273,6 +323,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -284,6 +336,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null
     },
     "prod_routing": {
@@ -294,6 +348,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -305,6 +361,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -316,6 +374,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -327,6 +387,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -338,6 +400,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -349,6 +413,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null
     },
     "public_holiday": {
@@ -359,6 +425,8 @@
         "nickname": "ph",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -370,6 +438,8 @@
         "nickname": "car",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null
     },
     "qaqc_insp_chklst": {
@@ -380,6 +450,8 @@
         "nickname": "ics",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "checklist",
+        "show_renderer": "checklist",
         "icon": null,
         "disallowed_direct_creation": "true"
     },
@@ -391,6 +463,8 @@
         "nickname": "icsl",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -402,6 +476,8 @@
         "nickname": "icss",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "checklist-sheet",
+        "show_renderer": "checklist-sheet",
         "icon": null
     },
     "qaqc_insp_control_group": {
@@ -412,6 +488,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -423,6 +501,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -434,6 +514,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -445,6 +527,8 @@
         "nickname": "itpl",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "checklist",
+        "show_renderer": "checklist",
         "icon": null
     },
     "qaqc_insp_tmpl_line": {
@@ -455,6 +539,8 @@
         "nickname": "itpll",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -466,6 +552,8 @@
         "nickname": "itpls",
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "checklist-sheet",
+        "show_renderer": "checklist-sheet",
         "icon": null
     },
     "qaqc_insp_value": {
@@ -476,6 +564,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -487,6 +577,8 @@
         "nickname": "mir",
         "doc_id_format_column": "sub_project_id",
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null
     },
     "qaqc_ncr": {
@@ -497,6 +589,8 @@
         "nickname": "ncr",
         "doc_id_format_column": "sub_project_id",
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null,
         "disallowed_direct_creation": "true"
     },
@@ -508,6 +602,8 @@
         "nickname": "wir",
         "doc_id_format_column": "sub_project_id",
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null,
         "disallowed_direct_creation": "true"
     },
@@ -519,6 +615,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null
     },
     "role_sets": {
@@ -529,6 +627,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -540,6 +640,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -551,6 +653,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -562,6 +666,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -573,6 +679,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -584,6 +692,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null
     },
     "term": {
@@ -594,6 +704,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -605,6 +717,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -616,6 +730,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -627,6 +743,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -638,6 +756,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -649,6 +769,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -660,6 +782,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -671,6 +795,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -682,6 +808,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -693,6 +821,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -704,6 +834,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -715,6 +847,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -726,6 +860,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -737,6 +873,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -748,6 +886,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -759,6 +899,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -770,6 +912,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -781,6 +925,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -792,6 +938,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -803,6 +951,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -814,6 +964,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -825,6 +977,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -836,6 +990,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null
     },
     "zunit_test_08": {
@@ -846,6 +1002,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "icon": null,
         "apply_approval_tree": "true"
     },
@@ -857,6 +1015,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -868,6 +1028,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -879,6 +1041,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -890,6 +1054,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -901,6 +1067,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -912,6 +1080,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     },
@@ -923,6 +1093,8 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
+        "edit_renderer": "props",
+        "show_renderer": "props",
         "hidden": "true",
         "icon": null
     }

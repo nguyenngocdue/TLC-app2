@@ -7,6 +7,9 @@
                     value="{{$line->value}}"
                />
           </div>
-          <x-controls.insp-chklst.name-position :user="$user" />
+          {{-- When user hasnt signed yet --}}
+          @if($user) 
+               <x-controls.insp-chklst.name-position :user="$user" />
+          @endif
      </div>
 </div>

@@ -38,6 +38,7 @@ return new class extends Migration
             $table->unsignedBigInteger('defect_severity')->nullable();
             $table->unsignedBigInteger('defect_report_type')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
+            $table->unsignedBigInteger('assignee_2')->nullable();
             $table->unsignedBigInteger('owner_id');
             $table->string('status')->nullable();
             $table->dateTime('closed_at')->nullable();
