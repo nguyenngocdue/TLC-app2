@@ -16,6 +16,7 @@ class CheckPointOption extends Component
         private $line,
         private $table01Name,
         private $rowIndex,
+        private $debug,
     ) {
         //
     }
@@ -35,6 +36,17 @@ class CheckPointOption extends Component
             return "CONTROL GROUP ID IS NULL";
         }
 
+        $class = [
+            1 => 'peer-checked:bg-green-300 peer-checked:text-green-700',
+            2 => 'peer-checked:bg-pink-300 peer-checked:text-pink-700',
+            3 => 'peer-checked:bg-gray-300 peer-checked:text-gray-700',
+            4 => 'peer-checked:bg-orange-300 peer-checked:text-orange-700',
+            5 => 'peer-checked:bg-green-300 peer-checked:text-green-700',
+            6 => 'peer-checked:bg-pink-300 peer-checked:text-pink-700',
+            7 => 'peer-checked:bg-gray-300 peer-checked:text-gray-700',
+            8 => 'peer-checked:bg-orange-300 peer-checked:text-orange-700',
+        ];
+
         return view(
             'components.controls.insp-chklst.check-point-option',
             [
@@ -42,6 +54,7 @@ class CheckPointOption extends Component
                 'options' => $options,
                 'table01Name' => $this->table01Name,
                 'rowIndex' => $this->rowIndex,
+                'class' => $class,
             ]
         );
     }

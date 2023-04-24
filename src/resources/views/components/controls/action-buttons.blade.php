@@ -1,4 +1,4 @@
-<div class="flex justify-end dark:bg-gray-800 px-5">
+<div class="flex justify-end rounded-lg dark:bg-gray-800 px-5">
     <div id="divActionButtons" class="my-5">
         @if($buttonSave)
             @php $btnText = $action=='edit' ? 'Save' : 'Create New' @endphp

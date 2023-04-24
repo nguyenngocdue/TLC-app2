@@ -13,8 +13,14 @@ class Qaqc_insp_chklst_sht_sig extends ModelExtended
 
     public $eloquentParams = [
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "getSheet" => ["belongsTo", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_sht_id"],
     ];
     public function getOwnerId()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getSheet()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -25,9 +31,10 @@ class Qaqc_insp_chklst_sht_sig extends ModelExtended
     {
         return [
             ['dataIndex' => 'id',],
+            ['dataIndex' => 'qaqc_insp_chklst_sht_id', "rendererParam" => 'description'],
             ['dataIndex' => 'value'],
-            ['dataIndex' => 'owner_id'],
-            ['dataIndex' => 'qaqc_insp_chklst_sht_id'],
+            ['dataIndex' => 'owner_id', 'renderer' => 'avatar_user'],
+            ['dataIndex' => 'created_at'],
         ];
     }
 }

@@ -46,9 +46,12 @@ trait TraitSupportEntityCRUDCreateEdit2
         foreach ($props as $index => $prop) {
             $table01Name = "table" . str_pad($index + 1, 2, 0, STR_PAD_LEFT);
             $name = $prop['name'];
-            // dump($name);
-            // dump($this->superProps['props'][$name]);
-            $result[$table01Name] = Str::singular($this->getSuperProps()['props'][$name]['relationships']['table']);
+            $relationships = $this->getSuperProps()['props'][$name]['relationships'];
+            if (isset($relationships['table'])) {
+                $result[$table01Name] = Str::singular($relationships['table']);
+            } else {
+                dump("Cannot find table of [$name] in relationship screen of {$this->type}.");
+            }
         }
         // dump($result);
         return $result;

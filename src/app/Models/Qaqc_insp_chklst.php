@@ -6,8 +6,10 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_insp_chklst extends ModelExtended
 {
-    protected $fillable = ["id", "prod_order_id", "name", "description", "owner_id", "slug", 
-    "consent_number", "qaqc_insp_tmpl_id", "progress", "owner_id"];
+    protected $fillable = [
+        "id", "prod_order_id", "name", "description", "owner_id", "slug",
+        "consent_number", "qaqc_insp_tmpl_id", "progress", "owner_id"
+    ];
     protected $table = "qaqc_insp_chklsts";
 
     public $eloquentParams = [
@@ -41,15 +43,15 @@ class Qaqc_insp_chklst extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    
+
     public function getManyLineParams()
     {
         return [
             ["dataIndex" => "id"],
             ["dataIndex" => "name"],
-            ["dataIndex" => "progress"],
             ["dataIndex" => "prod_order_id"],
             ["dataIndex" => "qaqc_insp_tmpl_id"],
+            ["dataIndex" => "progress"],
             // ["dataIndex" => "owner_id"],
         ];
     }

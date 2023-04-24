@@ -535,8 +535,7 @@ const documentReadyDropdown2 = ({ id, selectedJson, table, allowClear = false })
     // console.log(selectedArray)
     // table = "{{$table}}"
     dataSourceDropdown = k[table]
-    if (dataSourceDropdown === undefined)
-        console.error('key ' + table + ' not found in k[]')
+    if (dataSourceDropdown === undefined) console.error('key ' + table + ' not found in k[]')
     let attr_to_compare = 'id'
     // for (let i = 0; i < listenersOfDropdown2.length; i++) {
     //     if (listenersOfDropdown2[i].column_name === id) {
@@ -552,11 +551,8 @@ const documentReadyDropdown2 = ({ id, selectedJson, table, allowClear = false })
     $(document).ready(() => {
         if (Array.isArray(listenersOfDropdown2)) {
             listenersOfDropdown2.forEach((listener) => {
-                if (
-                    listener.triggers.includes(id) &&
-                    listener.listen_action === 'reduce'
-                ) {
-                    // console.log("I am a trigger of reduce, I have to trigger myself when form load [id]", )
+                if (listener.triggers.includes(id) && (['reduce', 'assign']).includes(listener.listen_action)) {
+                    // console.log("I am a trigger of reduce/assign, I have to trigger myself when form load [id]",)
                     getEById(id).trigger('change')
                 }
             })

@@ -1,78 +1,53 @@
 const actionDuplicated = (obj) => {
-    // const url = '/' + url + '/' + id
     const url = obj['urlDuplicate']
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes,duplicate it!',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                type: 'get',
-                url: url,
-                success: function (response) {
-                    if (response.success) {
-                        Swal.fire(
-                            'Duplicated Successfully',
-                            response.message,
-                            'success'
-                        )
+    const id = obj['id']
+    Swal.fire(actionConfirmObject([id], "duplicate"))
+        .then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire(actionSuccessObject(response.message, "Duplicated"))
+                            setTimeout(location.reload.bind(location), 500)
+                        } else {
+                            Swal.fire(actionFailObject(response.message, "Dulicate"))
+                            setTimeout(location.reload.bind(location), 500)
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        Swal.fire(actionFailObject(textStatus, "Duplicate"))
                         setTimeout(location.reload.bind(location), 500)
-                    } else {
-                        Swal.fire('Duplicate Fail', response.message, 'warning')
-                        setTimeout(location.reload.bind(location), 1500)
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    Swal.fire('Duplicate Fail', textStatus, 'warning')
-                    setTimeout(location.reload.bind(location), 1500)
-                },
-            })
-        }
-    })
+                    },
+                })
+            }
+        })
 }
 
 const actionDeleted = (obj) => {
     const url = obj['urlDestroy']
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes,delete it!',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                type: 'delete',
-                url: url,
-                success: function (response) {
-                    if (response.success == 'true') {
-                        Swal.fire(
-                            'Deleted Successfully!',
-                            response.message,
-                            'success'
-                        )
+    const id = obj['id']
+    Swal.fire(actionConfirmObject([id], "delete"))
+        .then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'delete',
+                    url: url,
+                    success: function (response) {
+                        if (response.success == 'true') {
+                            Swal.fire(actionSuccessObject(response.message, "Deleted"))
+                            setTimeout(location.reload.bind(location), 500)
+                        } else {
+                            Swal.fire(actionFailObject(response.message, 'Delete'))
+                            setTimeout(location.reload.bind(location), 500)
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        Swal.fire(actionFailObject('Permission denied , please check your permissions!', "Delete"))
                         setTimeout(location.reload.bind(location), 500)
-                    } else {
-                        Swal.fire('Delete Fail', response.message, 'warning')
-                        setTimeout(location.reload.bind(location), 1500)
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    Swal.fire(
-                        'Delete Fail!',
-                        'Permission denied , please check your permissions!',
-                        'warning'
-                    )
-                    setTimeout(location.reload.bind(location), 1500)
-                },
-            })
-        }
-    })
+                    },
+                })
+            }
+        })
 }

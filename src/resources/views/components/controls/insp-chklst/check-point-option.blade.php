@@ -1,17 +1,31 @@
-<div class="grid w-[40rem] grid-cols-4 space-x-2 rounded-xl bg-gray-200 p-2">
-    @php 
-    $class = [
-        1 => 'peer-checked:bg-green-300 peer-checked:text-green-700',
-        2 => 'peer-checked:bg-pink-300 peer-checked:text-pink-700',
-        3 => 'peer-checked:bg-gray-300 peer-checked:text-gray-700',
-        4 => 'peer-checked:bg-orange-300 peer-checked:text-orange-700',
-        5 => 'peer-checked:bg-green-300 peer-checked:text-green-700',
-        6 => 'peer-checked:bg-pink-300 peer-checked:text-pink-700',
-        7 => 'peer-checked:bg-gray-300 peer-checked:text-gray-700',
-        8 => 'peer-checked:bg-orange-300 peer-checked:text-orange-700',
-    ];
+@once
+<script>
+function initClick(lineId, checkedId){
+    // console.log("Clicked on", lineId, checkedId)
+    $("#radio_" + lineId + "_" + checkedId).trigger('click')
+}
 
-    @endphp
+function registerListen(lineId, id){
+    const reRender = ()=>{
+        // console.log("Clicked radio_" + lineId + "_" + id, id)
+        $("#divSubOptionNCR_" + lineId).hide()
+        $("#divSubOptionOnHold_" + lineId).hide()
+        switch(id ){
+            // case 1, 5: break;
+            case 2:
+            case 6: $("#divSubOptionNCR_" + lineId).show(); break;
+            // case 3, 7: break;
+            case 4:
+            case 8: $("#divSubOptionOnHold_" + lineId).show(); break;
+            // default: console.log("Unknown option "+id)
+        }
+    }
+    $("#radio_" + lineId + "_" + id).click(reRender)
+}
+</script>
+@endonce
+
+<div class="grid w-[40rem] grid-cols-4 space-x-2 rounded-xl bg-gray-200 p-2">
     @foreach($options as $id => $option)
         <div>
             <input type="radio" 
@@ -26,5 +40,8 @@
                 title="#{{$id}}"
                 >{{$option}}</label>
         </div>
+        <script>
+            registerListen({{$line->id}}, {{$id}})
+        </script>
     @endforeach
 </div>

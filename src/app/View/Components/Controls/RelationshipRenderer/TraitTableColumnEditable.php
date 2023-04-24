@@ -16,7 +16,9 @@ trait TraitTableColumnEditable
             $newColumn = $column;
             if (!isset($sp['props']["_" . $column['dataIndex']])) {
                 $msg = "Key _" . $column['dataIndex'] . " not found in props.json of $tableName ($table01Name)";
-                dd($msg);
+                dump($msg);
+                $result[] = $newColumn;
+                continue;
             }
             $prop = $sp['props']["_" . $column['dataIndex']];
             // dump($prop);
@@ -64,7 +66,11 @@ trait TraitTableColumnEditable
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = $classListText;
                     $newColumn['type'] = $this->type;
-                    $newColumn['properties']['tableName'] = $prop['relationships']['table'];
+                    if (isset($prop['relationships']['table'])) {
+                        $newColumn['properties']['tableName'] = $prop['relationships']['table'];
+                    } else {
+                        dd("Cant find table of [" . $prop['name'] . "] when making table column.");
+                    }
                     break;
                 case 'textarea':
                     $newColumn['renderer'] = 'textarea4';

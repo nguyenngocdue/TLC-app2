@@ -115,7 +115,7 @@ class RelationshipRenderer2 extends Component
     private function createHref($item, $createSettings, $tableName)
     {
         $itemOriginal = $item->getOriginal();
-        $createLink = route($tableName . ".create");
+
         // dump($createLink);
         $params = [];
         foreach ($createSettings as $key => $valueType) {
@@ -132,10 +132,13 @@ class RelationshipRenderer2 extends Component
             } else {
                 $value = $itemOriginal[$key] ?? '';
             }
-            $params[] = "$key=$value";
+            $params[$key] = $value;
+            // $params[] = "$key=$value";
         }
         // dump($itemOriginal, $createSettings);
-        $result = $createLink . '?' . join("&", $params);
+        $result = route($tableName . ".create", $params);
+        // $result =  route($tableName . ".create");
+        // $result = $result . '?' . join("&", $params);
         return $result;
     }
 

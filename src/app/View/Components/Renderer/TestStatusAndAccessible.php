@@ -21,6 +21,7 @@ class TestStatusAndAccessible extends Component
         private $action,
         private $statuses,
         private $dryRunToken,
+        private $item = null,
     ) {
         //
     }
@@ -46,6 +47,8 @@ class TestStatusAndAccessible extends Component
             'dryRunToken' => $this->dryRunToken,
             'superProps' => $superProps,
             'superWorkflows' => $superWorkflows,
+            'nextItem' => ($this->item instanceof \stdClass) ? null : $this->item->next(),
+            'previousItem' => ($this->item instanceof \stdClass) ? null : $this->item->previous(),
         ]);
     }
 }
