@@ -22,7 +22,7 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
     use TraitSQLDataSourceParamReport;
 
     // protected $rotate45Width = 500;
-    protected $maxH = 80;
+    protected $maxH = 40;
     protected  $sub_project_id = 21;
     protected  $prod_routing_id = 2;
     protected  $mode = '020';
@@ -120,7 +120,7 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
                 "align" => "right",
             ],
             [
-                "title" => "WIR Non Completion (%)",
+                "title" => "Not yet started (%)",
                 "dataIndex" => "percent_wir_not_create",
                 "align" => "right",
             ],
@@ -129,7 +129,7 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
         $statuses = LibStatuses::getFor($plural);
         $statusNames = array_keys($statuses);
         $columns2 = array_map(fn ($item) => [
-            'title' => Report::makeTitle($item) . '(%)',
+            'title' => Report::makeTitle($item) . ' (%)',
             'dataIndex' => 'percent_' . $item,
             'align' => 'right',
         ], $statusNames);

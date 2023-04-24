@@ -4,10 +4,11 @@
         "column_name": "id",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_name": {
@@ -15,10 +16,11 @@
         "column_name": "name",
         "label": "",
         "validation": "required",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_description": {
@@ -26,10 +28,11 @@
         "column_name": "description",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_slug": {
@@ -37,21 +40,11 @@
         "column_name": "slug",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "All_SlugifyByName",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
-    "_progress": {
-        "name": "_progress",
-        "column_name": "progress",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_prod_order_id": {
@@ -59,43 +52,11 @@
         "column_name": "prod_order_id",
         "label": "",
         "validation": "required",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
-    "_consent_number": {
-        "name": "_consent_number",
-        "column_name": "consent_number",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_getSheets": {
@@ -103,10 +64,95 @@
         "column_name": "getSheets",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
+        "control_extra": ""
+    },
+    "_progress": {
+        "name": "_progress",
+        "column_name": "progress",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
         "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_qaqc_insp_tmpl_id": {
+        "name": "_qaqc_insp_tmpl_id",
+        "column_name": "qaqc_insp_tmpl_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_consent_number": {
+        "name": "_consent_number",
+        "column_name": "consent_number",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "All_OwnerId",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
         "control_extra": ""
     }
 }

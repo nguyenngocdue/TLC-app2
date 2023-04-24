@@ -125,7 +125,6 @@
 <span class="max-h-[33rem] "></span>
 <span class="max-h-[34rem] "></span>
 <span class="max-h-[35rem] "></span>
-<span class="max-h-[35rem] "></span>
 <span class="max-h-[36rem] "></span>
 <span class="max-h-[37rem] "></span>
 <span class="max-h-[38rem] "></span>

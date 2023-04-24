@@ -1,7 +1,7 @@
 {
     "new": {
         "name": "new",
-        "label": "Create New",
+        "label": "Set as New",
         "tooltip": ""
     },
     "assigned": {
@@ -17,6 +17,11 @@
     "closed": {
         "name": "closed",
         "label": "Approve",
+        "tooltip": ""
+    },
+    "not_applicable": {
+        "name": "not_applicable",
+        "label": "Set as N\/A",
         "tooltip": ""
     }
 }

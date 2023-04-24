@@ -20,7 +20,7 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
     use TraitForwardModeReport;
 
     protected $rotate45Width = 500;
-    protected $maxH = 80;
+    protected $maxH = 50;
     protected  $sub_project_id = 21;
     protected  $prod_routing_id = 2;
     protected  $mode = '010';

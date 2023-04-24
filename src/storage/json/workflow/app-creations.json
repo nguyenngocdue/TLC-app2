@@ -1,4 +1,9 @@
 {
+    "qaqc_insp_chklst": {
+        "name": "qaqc_insp_chklst",
+        "required_params": "parent_type, parent_id, project_id, sub_project_id, prod_discipline_id",
+        "creation_links": "Prod Order"
+    },
     "qaqc_ncr": {
         "name": "qaqc_ncr",
         "required_params": "parent_type, parent_id, project_id, sub_project_id, prod_discipline_id",

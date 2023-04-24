@@ -5,7 +5,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_slug": {
         "name": "_slug",
@@ -13,7 +14,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "_doc_id": {
         "name": "_doc_id",
@@ -21,7 +23,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_project_id": {
         "name": "_project_id",
@@ -29,7 +32,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_sub_project_id": {
         "name": "_sub_project_id",
@@ -37,7 +41,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_prod_routing_id": {
         "name": "_prod_routing_id",
@@ -45,7 +50,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_prod_order_id": {
         "name": "_prod_order_id",
@@ -53,7 +59,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_prod_discipline_id": {
         "name": "_prod_discipline_id",
@@ -61,7 +68,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_wir_description_id": {
         "name": "_wir_description_id",
@@ -69,7 +77,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_name": {
         "name": "_name",
@@ -77,7 +86,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "_description": {
         "name": "_description",
@@ -85,7 +95,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_priority_id": {
         "name": "_priority_id",
@@ -93,7 +104,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_due_date": {
         "name": "_due_date",
@@ -101,7 +113,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_assignee_1": {
         "name": "_assignee_1",
@@ -109,7 +122,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
@@ -117,7 +131,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -125,7 +140,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_status": {
         "name": "_status",
@@ -133,7 +149,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_closed_at": {
         "name": "_closed_at",
@@ -141,7 +158,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -149,7 +167,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -157,7 +176,8 @@
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "_lock_version": {
         "name": "_lock_version",
@@ -165,7 +185,8 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
@@ -173,7 +194,8 @@
         "new": "",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": ""
     },
     "_comment_inspector_decision": {
         "name": "_comment_inspector_decision",
@@ -181,6 +203,7 @@
         "new": "",
         "assigned": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": ""
     }
 }

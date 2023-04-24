@@ -13,6 +13,10 @@
     </form>
     <br />
     <hr />
-    <x-form.create-new action="{{$route}}/create" />
+    @if($allowedCreateNew)
+        <x-form.create-new action="{{$route}}/create" />
+    @else
+        This screen is not allow to create new directly, please use its parent screen to create intead.
+    @endif
 </div>
 @endsection

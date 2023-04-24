@@ -4,27 +4,39 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": "true"
     },
     "assigned": {
         "name": "assigned",
         "new": "",
         "assigned": "",
         "rejected": "true",
-        "closed": "true"
+        "closed": "true",
+        "not_applicable": ""
     },
     "rejected": {
         "name": "rejected",
         "new": "",
         "assigned": "true",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
     },
     "closed": {
         "name": "closed",
         "new": "",
         "assigned": "",
         "rejected": "",
-        "closed": ""
+        "closed": "",
+        "not_applicable": ""
+    },
+    "not_applicable": {
+        "name": "not_applicable",
+        "new": "true",
+        "assigned": "",
+        "rejected": "",
+        "closed": "",
+        "not_applicable": ""
     }
 }
