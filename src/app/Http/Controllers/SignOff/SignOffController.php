@@ -26,26 +26,26 @@ class SignOffController extends Controller
             'headerDataSource' => $dataSource[1],
         ]);
     }
-    public function update(Request $request, $id)
-    {
-        try {
-            Qaqc_insp_chklst_run_line::findOrFail($id)->update([
-                'value' => $request->input('signature'),
-                'inspector_id' => auth()->user()->id,
-            ]);
-            return redirect()->back();
-        } catch (\Throwable $th) {
-            Toastr::warning($th, 'Update Signature Failed');
-            //throw $th;
-        }
-    }
-    public function sendMail(Request $request)
-    {
-        $id = $request->input('inspector_id');
-        $fields = $request->except('inspector_id', '_token');
-        if ($id) {
-            event(new SendMailForInspector($fields, $id));
-        }
-        return redirect()->back();
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     try {
+    //         Qaqc_insp_chklst_run_line::findOrFail($id)->update([
+    //             'value' => $request->input('signature'),
+    //             'inspector_id' => auth()->user()->id,
+    //         ]);
+    //         return redirect()->back();
+    //     } catch (\Throwable $th) {
+    //         Toastr::warning($th, 'Update Signature Failed');
+    //         //throw $th;
+    //     }
+    // }
+    // public function sendMail(Request $request)
+    // {
+    //     $id = $request->input('inspector_id');
+    //     $fields = $request->except('inspector_id', '_token');
+    //     if ($id) {
+    //         event(new SendMailForInspector($fields, $id));
+    //     }
+    //     return redirect()->back();
+    // }
 }

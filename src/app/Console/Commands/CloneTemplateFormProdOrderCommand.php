@@ -94,7 +94,9 @@ class CloneTemplateFormProdOrderCommand extends Command
             $this->info("Created Qaqc_insp_chklst and cloned qaqc_insp_tmpl_sht successfully");
             return Command::SUCCESS;
         } catch (\Throwable $th) {
-            $this->error("Error $th");
+
+            $this->error($th->getPrevious()->getMessage());
+            // $this->error($th->getMessage());
             return Command::FAILURE;
         }
     }

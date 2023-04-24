@@ -10,7 +10,7 @@ class Qaqc_ncr extends ModelExtended
         "id", "name", "doc_id", "description", "slug", "project_id", "sub_project_id", "status",
         "parent_id", "parent_type", "prod_routing_id", "prod_order_id", "prod_discipline_1_id",
         "prod_discipline_id", "prod_discipline_2_id", "user_team_id", "priority_id", "due_date",
-        "assignee_1", "cause_analysis", "owner_id", "inter_subcon_id", "defect_root_cause_id",
+        "assignee_1", "assignee_2", "cause_analysis", "owner_id", "inter_subcon_id", "defect_root_cause_id",
         "defect_disposition_id", "closed_at", "severity", "report_type",
     ];
     protected $primaryKey = 'id';
