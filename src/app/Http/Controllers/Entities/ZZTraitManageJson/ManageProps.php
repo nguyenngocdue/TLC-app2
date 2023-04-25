@@ -242,14 +242,14 @@ class ManageProps extends Manage_Parent
             // $json['_' . $parent_type]['hidden_view_all'] = 'true';
             $json['_' . $parent_type]['control'] = [
                 'value' => $json['_' . $parent_type]['control'],
-                'cbbDS' => ['parent_type', ''],
+                'cbbDS' => ['parent_type', 'text', ''],
             ];
 
             $parent_id = $parentPairs['parent_id'];
             // $json['_' . $parent_type]['hidden_view_all'] = 'true';
             $json['_' . $parent_id]['control'] = [
                 'value' => $json['_' . $parent_id]['control'],
-                'cbbDS' => ['parent_id', ''],
+                'cbbDS' => ['parent_id', 'text', ''],
             ];
         }
     }

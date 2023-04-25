@@ -28,6 +28,7 @@ class Qaqc_wir extends ModelExtended
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_inspector_decision" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         // "loggable" => ['morphMany', Logger::class, 'loggers', 'loggable_type', 'loggable_id'],
+        "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
     ];
 
     public $oracyParams = [
@@ -46,7 +47,7 @@ class Qaqc_wir extends ModelExtended
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    
+
     public function getProject()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -111,4 +112,10 @@ class Qaqc_wir extends ModelExtended
     //     $p = $this->eloquentParams[__FUNCTION__];
     //     return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     // }
+
+    public function getNcrs()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+    }
 }
