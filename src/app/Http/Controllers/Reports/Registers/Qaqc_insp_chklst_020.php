@@ -39,6 +39,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         ,chklst_shts.qaqc_insp_chklst_id AS chklst_shts_chklst_id
         ,chklst_shts.description AS chklst_shts_desc
         ,chksh.id AS chksh_id
+        ,chksh.progress AS chksh_progress
         ,chklst_shts.status AS chklst_shts_status
 
         FROM (SELECT
@@ -85,6 +86,11 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 "title" => "Prod Order Name",
                 "dataIndex" => "prod_order_name",
                 "align" => "center",
+            ],
+            [
+                "title" => "Progress (%)",
+                "dataIndex" => "chksh_progress",
+                "align" => "right",
             ],
         ];
 

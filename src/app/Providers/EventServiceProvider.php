@@ -8,6 +8,7 @@ use App\Events\EntityCreatedEvent;
 use App\Events\EntityUpdatedEvent;
 use App\Events\SendEmailItemCreated;
 use App\Events\SendMailForInspector;
+use App\Events\UpdateChklstProgressEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdateStatusChklstRunEvent;
 use App\Listeners\RemindSignOffListener;
@@ -16,6 +17,7 @@ use App\Listeners\SendEmailListener;
 use App\Listeners\SendMailForInspectorListener;
 use App\Listeners\SendUpdatedDocumentNotificationListener;
 use App\Listeners\ShouldUpdateFieldsListener;
+use App\Listeners\UpdateChklstProgressFromSheetListener;
 use App\Listeners\UpdatedChklstSheetProgressListener;
 use App\Listeners\UpdateStatusChklstRunListener;
 use Illuminate\Auth\Events\Registered;
@@ -39,10 +41,13 @@ class EventServiceProvider extends ServiceProvider
             SendUpdatedDocumentNotificationListener::class,
             UpdatedChklstSheetProgressListener::class
         ],
+        UpdateChklstProgressEvent::class => [UpdateChklstProgressFromSheetListener::class],
+
         CreateNewDocumentEvent::class => [SendCreateNewDocumentNotificationListener::class],
         SendMailForInspector::class => [SendMailForInspectorListener::class],
 
         BroadcastRemindSignOffEvent::class => [RemindSignOffListener::class],
+
     ];
 
     /**
