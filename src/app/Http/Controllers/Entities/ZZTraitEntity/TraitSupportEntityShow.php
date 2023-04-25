@@ -1,20 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\SignOff\Trait;
+namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\User;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\Support\Facades\Blade;
 
-trait TraitSupportSignOff
+trait TraitSupportEntityShow
 {
-    private function getDataSource($id)
-    {
-        $chklstSht = Qaqc_insp_chklst_sht::findOrFail($id);
-        $runLines = $chklstSht->getLines;
-        return [$runLines, $chklstSht];
-    }
     public function getTableColumns()
     {
         return [
@@ -26,44 +19,63 @@ trait TraitSupportSignOff
             [
                 "dataIndex" => "response_type",
                 "align" => "center",
-                'width' => 600,
+                'width' => 500,
             ],
         ];
     }
-    private function transformDataSource($dataSource)
+    private function transformDataSource($dataSource, $entityShtSigs)
     {
         foreach ($dataSource as &$value) {
             $value['response_type'] = $this->createDataSourceTableRun($value);
             $value['group_description'] = $value->getGroup->description ?? '';
         }
-        return $dataSource->toArray();
+        foreach ($entityShtSigs as &$value) {
+            $value['response_type'] = $this->createDataSourceTableRun($value);
+            $value['group_description'] = 'Third Party  Sign Off';
+        }
+        return array_merge($dataSource->toArray(), $entityShtSigs->toArray());
     }
-    private function transFormLine($value)
+    private function transFormLine($item)
     {
-        $controlGroup = $value->getControlGroup->name ?? null;
+        $controlGroup = $item->getControlGroup->name ?? null;
         $str = '';
         if (!is_null($controlGroup)) {
-            $str .= "<tr title='Chklst Line ID: {$value->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($value) . "</tr>";
-            $str .= $this->createStrHtmlAttachment($value);
-            $str .=  $this->createStrHtmlComment($value);
+            $str .= "<tr title='Chklst Line ID: {$item->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($item) . "</tr>";
+            $str .= $this->createStrHtmlAttachment($item);
+            $str .=  $this->createStrHtmlComment($item);
         } else {
-            $valueSignature = $value->value;
-            $inspectorId = $value->inspector_id;
-            $inspectorName = null;
-            if ($inspectorId) {
-                $inspectorName = User::findOrFail($inspectorId)->full_name;
+            $controlRender = $item->getControlType->name ?? 'signature';
+            switch ($controlRender) {
+                case 'signature':
+                    $valueSignature = $item->value;
+                    $inspectorId = isset($item->getControlType->name) ? $item->inspector_id : $item->owner_id;
+                    $inspectorName = null;
+                    if ($inspectorId) {
+                        $inspectorName = User::findOrFail($inspectorId)->full_name;
+                    }
+                    $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $item->updated_at);
+                    $str = Blade::render(
+                        "<div class='flex justify-center'>
+                                    <div>
+                                    <x-controls.signature2 name='signature' value='$valueSignature' updatable='{{false}}'/>
+                                    <div class='text-right mr-3'>
+                                    @if('$inspectorName')
+                                        <p class='font-medium'>$inspectorName</p>
+                                        <p>$updatedAt</p>
+                                    @endif
+                                    </div> 
+                                    </div> 
+                                </div>
+                                ",
+                    );
+                    break;
+                case 'text':
+                    $str = "<p class='font-medium'>{$item->value}</p>";
+                    break;
+                default:
+                    # code...
+                    break;
             }
-            $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $value->updated_at);
-            $str = Blade::render(
-                "<x-controls.signature2 name='signature' value='$valueSignature'/>
-                </div>
-                <div class='text-right mr-10 mt-1'>
-                @if('$inspectorName')
-                    <p class='font-medium'>$inspectorName</p>
-                    <p>$updatedAt</p>
-                @endif 
-                ",
-            );
         }
         return $str;
     }
@@ -105,13 +117,35 @@ trait TraitSupportSignOff
 
     private function createStrHtmlComment($item)
     {
-        if (!is_null($item->value_comment)) {
-            $td = "<td class='border p-3' colspan = 5 style='width:190px'>{$item->value_comment}</td>";
+        if (isset($item->insp_comments) && !$item->insp_comments->isEmpty()) {
+            $td = "<td class='border p-3' colspan = 5 style='width:190px'>" . $this->formatCommentRender($item->insp_comments) . "</td>";
             return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
         }
-        return "<tr> </tr>";
+        return '';
     }
-    protected function formatAttachmentRender($item)
+    private function formatCommentRender($item)
+    {
+        $strCenter = "";
+        foreach ($item as  $comment) {
+            $ownerComment = $comment->getOwnerId ?? '';
+            $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $comment->updated_at);
+            $ownerRender = Blade::render("<x-renderer.avatar-user timeLine='true'>$ownerComment</x-renderer.avatar-user>");
+            $strCenter .= "<div class='mt-2 border-b'>
+                                $ownerRender
+                                <p class='text-xs font-normal text-center mt-1'>$updatedAt</p>
+                            </div>
+                            <div class='col-span-3 border-b'>
+                                <p class='px-1'>{$comment->content}</p>
+                            </div>
+                            ";
+        }
+        $strHead = "<div class='flex flex-col w-full' >
+                    <div class='grid grid-cols-4 lg:gap-3 md:gap-2 sm:gap-1 '>";
+        $strTail = "</div></div>";
+        return $strHead . $strCenter . $strTail;
+    }
+
+    private function formatAttachmentRender($item)
     {
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $strCenter = "";
@@ -134,7 +168,7 @@ trait TraitSupportSignOff
         $strTail = "</div></div>";
         return $strHead . $strCenter . $strTail;
     }
-    protected function createDataSourceTableRun($value)
+    private function createDataSourceTableRun($value)
     {
         $html = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $this->transFormLine($value) . "</tbody>" . "</table>";
         return $html;

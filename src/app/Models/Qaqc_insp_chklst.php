@@ -43,6 +43,24 @@ class Qaqc_insp_chklst extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public function getProject()
+    {
+        $tmp = $this->prodOrder->subProject;
+        $relation = $tmp->belongsTo(Project::class, 'project_id');
+        return $relation;
+    }
+
+    public function getSubProject()
+    {
+        $tmp = $this->prodOrder;
+        $relation = $tmp->belongsTo(Sub_project::class, 'sub_project_id');
+        return $relation;
+    }
+    public function getProdOrder()
+    {
+        $relation = $this->belongsTo(Prod_order::class, 'prod_order_id');
+        return $relation;
+    }
 
     public function getManyLineParams()
     {
