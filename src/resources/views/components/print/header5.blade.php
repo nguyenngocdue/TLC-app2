@@ -1,7 +1,7 @@
 <div id="{{$id}}" class=" md:scroll-mt-20 sm:py-0 rounded-lg  bg-white  dark:border-gray-600">
     <div class="border-b p-3 font-medium flex items-center justify-between">
         @php
-            $content = $tableOfContents ? 'INSPECTION CHECKLIST': strtoupper($name).' - INSPECTION CHECK SHEET';
+            $content = strtoupper($name);
             $urlCurrent = url()->current();
         @endphp
         @if($tableOfContents)
@@ -37,13 +37,13 @@
             @php
                 $page = $page ? '('. $page .')' : '';
             @endphp
-            <x-renderer.heading level=5>{{$content. $page}}</x-renderer.heading>
+            <x-renderer.heading level=5>{{$content.' '. $page}}</x-renderer.heading>
         </div>
         @endif
     </div>
     @if($tableOfContents)
     <div class="flex flex-1 justify-center border-b">
-        <x-renderer.heading level=5>{{$content}}</x-renderer.heading>
+        <x-renderer.heading level=5>{{strtoupper($nameRenderOfPageInfo)}}</x-renderer.heading>
     </div>
     @endif
     <div class="flex justify-between py-1 px-3">
@@ -104,7 +104,7 @@
     @else
     <div class="border-t py-1 px-3">
         <div class="flex flex-1 justify-center pr-2  font-medium">
-            <span>{{'TABLE OF CONTENTS OF '.strtoupper($name)}}</span>
+            <span>TABLE OF CONTENTS</span>
         </div>
     </div>
     @endif

@@ -11,8 +11,11 @@ class TableOfContents extends Component
      *
      * @return void
      */
-    public function __construct(private $dataSource = [], private $headerDataSource = null, private $type = '')
-    {
+    public function __construct(
+        private $dataSource = [],
+        private $headerDataSource = null,
+        private $type = ''
+    ) {
         //
     }
 
@@ -42,6 +45,18 @@ class TableOfContents extends Component
                 "dataIndex" => "response_type",
                 "align" => "center",
                 'width' => 500,
+            ],
+            [
+                "title" => 'Progress (%)',
+                "dataIndex" => "progress",
+                "align" => "center",
+                'width' => 150,
+            ],
+            [
+                "dataIndex" => "status",
+                "align" => "center",
+                'width' => 150,
+                'renderer' => 'status',
             ],
         ];
     }

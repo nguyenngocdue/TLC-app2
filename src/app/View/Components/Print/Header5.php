@@ -30,6 +30,7 @@ class Header5 extends Component
         $dataSource = $this->dataSource;
         $tableOfContents = $this->tableOfContents;
         $name = $tableOfContents ? $dataSource->name : $dataSource->description;
+        $nameRenderOfPageInfo = $dataSource->getQaqcInspTmpl->name ?? '';
         $projectName = $dataSource->getProject->name ?? '';
         $subProjectName = $dataSource->getSubProject->name ?? '';
         $prodOrderName = $dataSource->getProdOrder->name ?? '';
@@ -37,6 +38,7 @@ class Header5 extends Component
         return view('components.print.header5', [
             'tableOfContents' => $tableOfContents,
             'name' => $name,
+            'nameRenderOfPageInfo' => $nameRenderOfPageInfo,
             'id' => $dataSource->slug,
             'qrId' => $dataSource->id,
             'projectName' => $projectName,
