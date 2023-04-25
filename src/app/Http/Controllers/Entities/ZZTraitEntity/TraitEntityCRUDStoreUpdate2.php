@@ -51,7 +51,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 			$this->makeUpCommentFieldForRequired($request);
 
-			$request->validate($rules);
+			$request->validate($rules, ["date_format" => "The :attribute must be correct datetime format."]);
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
 			if ($request['tableNames'] == 'fakeRequest') {
@@ -132,7 +132,7 @@ trait TraitEntityCRUDStoreUpdate2
 			// dump($request);
 			// dump($rules);
 			// dd();
-			$request->validate($rules);
+			$request->validate($rules, ["date_format" => "The :attribute must be correct datetime format."]);
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
 			if ($isFakeRequest) {

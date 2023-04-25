@@ -1,4 +1,4 @@
-<x-renderer.card class="my-1 border" px="0" py="0">
+<x-renderer.card class="my-1 border bg-white mt-2" px="0" py="0">
     <div class="bg-amber-300 rounded-t p-2">
         <p>Third Party Sign Off</p>
     </div>
@@ -85,7 +85,7 @@
             }
         })
     } else {
-        toastr.warning("There is no nominated approver, nothing sent.")
+        toastr.warning("There is no nominated approver, nothing sent. Maybe you forgot to save the form after inputing some names.")
     }
 }
 </script>

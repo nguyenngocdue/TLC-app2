@@ -13,9 +13,11 @@
 
 <div id="div2{{$name}}" class="{{$value_decoded == '' ? "" : "hidden"}} signature-pad--body">
     <div class="relative border rounded-md border-gray-300">
-        <button type="button" id="btnReset2_{{$count}}" class="w-10 h-10 top-1 right-2 absolute">
-            <i class="text-red-700 fa-solid fa-xmark cursor-pointer text-lg"></i>
-        </button>
+        @if($updatable)
+            <button type="button" id="btnReset2_{{$count}}" class="w-10 h-10 top-1 right-2 absolute">
+                <i class="text-red-700 fa-solid fa-xmark cursor-pointer text-lg"></i>
+            </button>
+        @endif
         <canvas width="{{$w}}" height="{{$h}}" id="canvas_{{$name}}"
          style="touch-action: none; user-select: none;" >
         </canvas>
