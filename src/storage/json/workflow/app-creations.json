@@ -6,7 +6,7 @@
     },
     "qaqc_ncr": {
         "name": "qaqc_ncr",
-        "required_params": "parent_type, parent_id, project_id, sub_project_id, prod_discipline_id",
+        "required_params": "parent_type, parent_id, project_id, sub_project_id",
         "creation_links": "MIR or ICS"
     },
     "qaqc_wir": {
