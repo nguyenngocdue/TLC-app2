@@ -30,7 +30,7 @@ class refreshChklstProgress extends Command
      */
     public function handle()
     {
-        $projectId = $this->input->getOption('projectId');
+        $projectId = $this->input->getOption('subProjectId');
         return event(new UpdateChklstProgressEvent($projectId));
     }
 }
