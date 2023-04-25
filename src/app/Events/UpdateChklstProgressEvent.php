@@ -19,7 +19,7 @@ class UpdateChklstProgressEvent
      *
      * @return void
      */
-    public function __construct(public $idChklst, public $numLineCompletion)
+    public function __construct(public $subProjectId)
     {
         //
     }

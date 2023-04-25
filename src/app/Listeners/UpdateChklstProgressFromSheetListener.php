@@ -48,16 +48,38 @@ class UpdateChklstProgressFromSheetListener
             AND chkl.qaqc_insp_chklst_sht_id =  chks.id";
         $sql .= "\n AND chks.qaqc_insp_chklst_id = " . $idChklst;
         $sql .= "\n GROUP BY sheet_id) AS chkshtb1";
-        // dd($sql);
+        $sqlData = DB::select(DB::raw($sql));
+        return collect($sqlData);
+    }
+
+
+    private  function getIdChklst($subProjectId)
+    {
+        $sql = "SELECT
+        -- sp.id AS sub_project_id
+        -- ,po.id AS prod_order_id
+        -- ,po.name AS prod_order_name
+        chlst.id AS chlst_id
+        FROM  sub_projects sp, prod_orders po, qaqc_insp_chklsts chlst
+        WHERE 1 = 1
+        AND po.sub_project_id = sp.id        
+        AND chlst.prod_order_id = po.id
+        AND sp.id = " . $subProjectId;
         $sqlData = DB::select(DB::raw($sql));
         return collect($sqlData);
     }
 
     public function handle(UpdateChklstProgressEvent $event)
     {
-        $sqlData = $this->calculateProgressFollowingSheets($event->idChklst);
-        $chklst = Qaqc_insp_chklst::find($event->idChklst);
-        $newProgress = $sqlData->toArray()[0]->progress_chklst;
-        $chklst->update(['progress' => $newProgress]);
+        // $event->subProjectId
+        $chklstData = $this->getIdChklst($event->subProjectId)->toArray();
+        $idChklsts = array_column($chklstData, 'chlst_id');
+        // dd($idChklsts);
+        foreach ($idChklsts as $idChklst) {
+            $sqlData = $this->calculateProgressFollowingSheets($idChklst);
+            $chklst = Qaqc_insp_chklst::find($idChklst);
+            $newProgress = $sqlData->toArray()[0]->progress_chklst;
+            $chklst->update(['progress' => $newProgress]);
+        }
     }
 }

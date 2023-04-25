@@ -56,8 +56,8 @@ class UpdatedChklstSheetProgressListener
         $sheets->progress = $percentCompletion;
         $sheets->save();
 
-        // dd($event);
-        $idChklst =  $event->currentValue['qaqc_insp_chklst_id'];
-        event(new UpdateChklstProgressEvent($idChklst, $numLineCompletion));
+        // $idChklst =  $event->currentValue['qaqc_insp_chklst_id'];
+        $subProjectId = $sheets->getSubProject()->pluck('id')->toArray()[0];
+        event(new UpdateChklstProgressEvent($subProjectId));
     }
 }
