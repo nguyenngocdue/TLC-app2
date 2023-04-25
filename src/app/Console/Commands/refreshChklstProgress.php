@@ -13,7 +13,7 @@ class refreshChklstProgress extends Command
      * @var string
      */
     protected $signature = 'nnd:refreshChklstProgress
-    {--projectId= : Project ID}
+    {--subProjectId= : Project ID}
     ';
 
     /**
