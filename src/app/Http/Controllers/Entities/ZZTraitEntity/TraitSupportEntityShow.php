@@ -86,11 +86,35 @@ trait TraitSupportEntityShow
         array_pop($arrayControl);
         $controlValue = $item->getControlValue->name ?? '';
         $circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
-        $checkedIcon = "<i class='fa-solid fa-circle-check px-2'></i>";
+
         $str = "";
         foreach ($arrayControl as $value) {
             if ($controlValue === $value) {
-                $str .= '<td class="border" style="width:50px">' . $checkedIcon . $value . '</td>';
+                switch ($value) {
+                    case in_array($value, ['Yes', 'Pass']):
+                        $checkedIcon = "<i class='fa-solid fa-circle-check px-2 text-green-700'></i>";
+                        $value = "<span class=' text-green-700'>" . $value . "</span>";
+                        $valueRender = "<div class='bg-green-300'>" . $checkedIcon . $value . "</div>";
+                        break;
+                    case in_array($value, ['No', 'Fail']):
+                        $checkedIcon = "<i class='fa-solid fa-circle-check px-2 text-pink-700'></i>";
+                        $value = "<span class=' text-pink-700'>" . $value . "</span>";
+                        $valueRender = "<div class='bg-pink-300'>" . $checkedIcon . $value . "</div>";
+                        break;
+                    case 'NA':
+                        $checkedIcon = "<i class='fa-solid fa-circle-check px-2 text-gray-700'></i>";
+                        $value = "<span class=' text-gray-700'>" . $value . "</span>";
+                        $valueRender = "<div class='bg-gray-300'>" . $checkedIcon . $value . "</div>";
+                        break;
+                    case 'On Hold':
+                        $checkedIcon = "<i class='fa-solid fa-circle-check px-2 text-orange-700'></i>";
+                        $value = "<span class=' text-orange-700'>" . $value . "</span>";
+                        $valueRender = "<div class='bg-orange-300'>" . $checkedIcon . $value . "</div>";
+                        break;
+                    default:
+                        break;
+                }
+                $str .= '<td class="border" style="width:50px">' . $valueRender . '</td>';
             } else {
                 $str .=  '<td class="border" style="width:50px">' . $circleIcon . $value . '</td>';
             }

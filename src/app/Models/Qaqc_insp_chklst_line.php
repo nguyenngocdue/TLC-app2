@@ -48,7 +48,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
     {
         $p = $this->eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category')->orderBy('updated_at');
     }
 
     public function getGroup()
