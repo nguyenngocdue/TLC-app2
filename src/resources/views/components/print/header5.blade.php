@@ -34,7 +34,10 @@
             
         @else
         <div class="flex flex-1 justify-center">
-            <x-renderer.heading level=5>{{$content. ' ('. $page . ')'}}</x-renderer.heading>
+            @php
+                $page = $page ? '('. $page .')' : '';
+            @endphp
+            <x-renderer.heading level=5>{{$content. $page}}</x-renderer.heading>
         </div>
         @endif
     </div>
