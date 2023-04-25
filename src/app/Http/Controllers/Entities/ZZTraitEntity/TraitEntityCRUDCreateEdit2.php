@@ -26,7 +26,9 @@ trait TraitEntityCRUDCreateEdit2
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$isCheckColumnStatus = Schema::hasColumn(Str::plural($this->type), 'status');
 
-		$disallowed = DisallowedDirectCreationChecker::check($this->type);
+		// $disallowed = DisallowedDirectCreationChecker::check($this->type);
+		$disallowed = DisallowedDirectCreationChecker::checkAgainstRequest($request, $this->type);
+		// dd($disallowed);
 		if ($disallowed) {
 			$creationLinks = DisallowedDirectCreationChecker::getCreationLinks($this->type);
 			abort(403, "This document is not allowed to be created directly. Please initiate the creation via $creationLinks.");
