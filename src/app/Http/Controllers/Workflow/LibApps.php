@@ -29,4 +29,17 @@ class LibApps extends AbstractLib
         $item = $allApps[$singular];
         return $item;
     }
+
+    // public static function getByEditRenderer($editRenderer){
+    // }
+
+    public static function getByShowRenderer($showRenderer)
+    {
+        $apps = static::getAll();
+        $result = [];
+        foreach ($apps as $key => $app) {
+            if ($app['show_renderer'] == $showRenderer) $result[] = $key;
+        }
+        return $result;
+    }
 }

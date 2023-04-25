@@ -19,11 +19,9 @@
                 </div>
                 <!-- Modal body -->
                 <div class='overflow-y-scroll p-4'>
-                    <div class="grid grid-cols-12 px-4">
                         {{-- <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}" /> --}}
                         {{-- <x-controls.header-alert-validation :strProps="$props" /> --}}
                         <x-renderer.item-render-props id="{{$id}}" :item="$item" :dataSource="$dataSource" action={{$action}} type={{$type}} modelPath={{$modelPath}} />
-                    </div>
                 </div>
                 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
                     @if(isset($actionButtons[$key]))

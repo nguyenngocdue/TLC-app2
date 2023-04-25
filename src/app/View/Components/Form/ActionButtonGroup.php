@@ -2,7 +2,9 @@
 
 namespace App\View\Components\Form;
 
+use App\Http\Controllers\Workflow\LibApps;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class ActionButtonGroup extends Component
 {
@@ -24,8 +26,12 @@ class ActionButtonGroup extends Component
      */
     public function render()
     {
+        $qrApps = LibApps::getByShowRenderer('qr-app-renderer');
+        // dump($qrApps, $this->type);
+        $showQrList6Button = in_array(Str::singular($this->type), $qrApps);
         return view('components.form.action-button-group', [
             'type' => $this->type,
+            'showQrList6Button' => $showQrList6Button,
         ]);
     }
 }

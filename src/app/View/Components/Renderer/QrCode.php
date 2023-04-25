@@ -2,10 +2,10 @@
 
 namespace App\View\Components\Renderer;
 
-use App\Utils\ConstantSVG;
-use App\Utils\Support\JsonControls;
+use App\Http\Controllers\Workflow\LibApps;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class QrCode extends Component
 {
@@ -31,13 +31,18 @@ class QrCode extends Component
             $id = $data["slot"];
             $type = $data["attributes"]["type"];
             $dataLine = $data["attributes"]["dataLine"];
-            $qrCodeApps = JsonControls::getQrCodeApps();
-            if (in_array($type, $qrCodeApps)) {
-                $slug = $dataLine['slug'] ?? '';
-                [$routeExits, $href] = $this->checkRouteShowUsingIdOrSlug($type, $slug, true);
-            } else {
-                [$routeExits, $href] =  $this->checkRouteShowUsingIdOrSlug($type, $id);
-            }
+            $qrCodeApps = LibApps::getByShowRenderer('qr-app-renderer');
+            // dump($qrCodeApps);
+            // $qrCodeApps = JsonControls::getQrCodeApps();
+            // if (in_array($type, $qrCodeApps)) {
+            //     $slug = $dataLine['slug'] ?? '';
+            //     [$routeExits, $href] = $this->checkRouteShowUsingIdOrSlug($type, $slug, true);
+            // } else {
+            //     [$routeExits, $href] =  $this->checkRouteShowUsingIdOrSlug($type, $id);
+            // }
+            $needToShowSlug = in_array(Str::singular($type), $qrCodeApps);
+            $id_or_slug = $needToShowSlug ?  $dataLine['slug'] : $id;
+            [$routeExits, $href] = $this->checkRouteShowUsingIdOrSlug($type, $id_or_slug);
             // dump($id);
             $color =  $routeExits ? "blue" : "red";
             $icon = "<i class='fa-duotone fa-qrcode'></i>";
@@ -48,9 +53,10 @@ class QrCode extends Component
             return $hyperlink_qr;
         };
     }
-    private function checkRouteShowUsingIdOrSlug($type, $params, $isSlug = false)
+    private function checkRouteShowUsingIdOrSlug($type, $params)
     {
-        $routeName = $isSlug ? "{$type}.showQRApp" : "{$type}.show";
+        // $routeName = $isSlug ? "{$type}.showQRApp" : "{$type}.show";
+        $routeName = "{$type}.show";
         $routeExits =  (Route::has($routeName));
         $href =  $routeExits ? route($routeName, $params) : "#";
         return [$routeExits, $href];

@@ -24,6 +24,11 @@
                 @break
             @endswitch
         </div>
+        {{-- <input  name="{{$table01Name}}[owner_id][{{$rowIndex}}]" 
+                id="{{$table01Name}}[owner_id][{{$rowIndex}}]" 
+                value="{{$line->owner_id}}" 
+                onchange="console.log('{{$line->value}}', {{$line->owner_id}})"
+                /> --}}
         <x-renderer.attachment2 name="table01[insp_photos][{{$rowIndex}}]" :value="$attachments"/>
         <br/>
         <x-controls.comment.comment-group2a category="insp_comments" commentableType="qaqc_insp_chklst_line" commentableId="{{$line->id}}" />
