@@ -85,7 +85,7 @@
             }
         })
     } else {
-        toastr.warning("There is no nominated approver, nothing sent.")
+        toastr.warning("There is no nominated approver, nothing sent. Maybe you forgot to save the form after inputing some names.")
     }
 }
 </script>
