@@ -37,6 +37,9 @@ return new class extends Migration
             $table->unsignedBigInteger('defect_disposition_id')->nullable();
             $table->unsignedBigInteger('defect_severity')->nullable();
             $table->unsignedBigInteger('defect_report_type')->nullable();
+            $table->float('qty_man_power')->nullable();
+            $table->float('hour_per_man')->nullable();
+            $table->float('total_hour')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('assignee_2')->nullable();
             $table->unsignedBigInteger('owner_id');
