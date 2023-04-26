@@ -81,16 +81,20 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
                 "align" => "center",
+                'width' => 850
+
             ],
             [
                 "title" => "Prod Order Name",
                 "dataIndex" => "prod_order_name",
                 "align" => "center",
+                'width' => 800
+
             ],
         ];
         // dd($dataColumn);
         unset($dataColumn['wir_description_id'], $dataColumn['wir_description_name']);
-        $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center", "width" => 100], array_keys($dataColumn));
+        $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center", "width" => 200], array_keys($dataColumn));
         $dataColumn = array_merge($adds, $sqlCol);
         return  $dataColumn;
     }
@@ -105,6 +109,7 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
             [
                 'title' => 'Prod Routing',
                 'dataIndex' => 'prod_routing_id',
+
             ]
         ];
     }
