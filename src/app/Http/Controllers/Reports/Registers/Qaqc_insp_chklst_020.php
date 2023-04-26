@@ -149,7 +149,6 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 
     protected function transformDataSource($dataSource, $modeParams)
     {
-        // dd($dataSource);
         $items = $dataSource->toArray();
 
         $prodOderIds = $modeParams['prod_order_id2'] ?? [0];
@@ -163,10 +162,10 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         }
         // dump($delProdOrder, $modeParams, $chklsts, $chklstType, $items);
         // $prodOrders = array_slice(array_unique(array_column($items, 'prod_order_id')), 0, 10);
-        $prodOrders = $delProdOrder;
-        $filteredData = array_filter($items, function ($item) use ($prodOrders) {
-            return !in_array($item->prod_order_id, $prodOrders);
-        });
+        // $prodOrders = $delProdOrder;
+        // $filteredData = array_filter($items, function ($item) use ($prodOrders) {
+        //     return !in_array($item->prod_order_id, $prodOrders);
+        // });
         // $items = $filteredData;
         // dd($items);
 
@@ -174,13 +173,17 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $transformData = array_map(function ($item) {
             if (!is_null($item->chklst_shts_desc)) {
                 $sheetNameKey = Report::slugName($item->chklst_shts_desc);
-                return (array)$item + [$sheetNameKey => $item->chklst_shts_status];
+                return (array)$item + [$sheetNameKey => [
+                    'status' => $item->chklst_shts_status,
+                    'chklst_shts_id' => $item->chklst_shts_id
+                ]];
             }
             return (array)$item;
         }, $items);
+        // dd($transformData);
         $groupedArray = Report::groupArrayByKey($transformData, 'prod_order_id');
-        $dataSource = Report::mergeArrayValues($groupedArray);
         // dd($groupedArray);
+        $dataSource = Report::mergeArrayValues($groupedArray);
 
         array_walk($dataSource, function ($item, $key) use (&$dataSource, $sheetsDesc) {
             if (!is_null($item['chklst_shts_desc'])) {
@@ -199,24 +202,18 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $statuses = LibStatuses::getFor($plural);
         $items = $dataSource->toArray();
         foreach ($items as $key => $value) {
-            $idx = array_search("chklst_shts_status", array_keys($value));
+            $idx = array_search("chklst_shts_status", array_keys($value)); //  specify range to render items
             $rangeArray = array_slice($value, $idx + 1, count($value) - $idx, true);
             foreach ($rangeArray as $col => $valCol) {
-                // dump(Report::replaceAndUcwords($col));
-                if (isset($statuses[$valCol])) {
-                    $status = $statuses[$valCol];
-                    // dd($value);
-                    $id = Qaqc_insp_chklst_sht::get()
-                        ->where('qaqc_insp_chklst_id', $value['chklst_shts_chklst_id'])
-                        ->where('description', Report::replaceAndUcwords($col))
-                        ->pluck('id')->toArray()[0] ?? "check data of qaqc_insp_chklst_sh";
+                if (is_array($valCol) && isset($statuses[$valCol['status']])) {
+                    $status = $statuses[$valCol['status']];
                     $bgColor = 'bg-' . $status['color'] . '-' . $status['color_index'];
                     $textColor = 'text-' . $status['color'] . '-' . (1000 - $status['color_index']);
                     $value[$col] = (object)[
                         'value' =>  $status["icon"] ?? '<i class="fa-duotone fa-square-question"></i>',
                         'cell_class' => "$bgColor $textColor",
                         'cell_title' => $status['title'],
-                        'cell_href' =>  route($plural . '.edit',  $id),
+                        'cell_href' =>  route($plural . '.edit',  $valCol['chklst_shts_id']),
                     ];
                 } else {
                     $value[$col] = (object)[
@@ -229,7 +226,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             $items[$key] = $value;
             $items[$key]['prod_order_name'] = (object)['value' => $value['prod_order_name'], 'cell_title' => 'ID: ' . $value['prod_order_id']];
         }
-        // dump($items);
+        // dd($items[40]);
         return collect($items);
     }
 
