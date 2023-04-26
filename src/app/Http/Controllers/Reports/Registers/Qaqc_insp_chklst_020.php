@@ -180,9 +180,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             }
             return (array)$item;
         }, $items);
-        // dd($transformData);
         $groupedArray = Report::groupArrayByKey($transformData, 'prod_order_id');
-        // dd($groupedArray);
         $dataSource = Report::mergeArrayValues($groupedArray);
 
         array_walk($dataSource, function ($item, $key) use (&$dataSource, $sheetsDesc) {
@@ -192,7 +190,6 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             }
             $dataSource[$key] = $item + $sheetsDesc;
         });
-        // dd($dataSource);
         return collect($dataSource);
     }
 
@@ -202,7 +199,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $statuses = LibStatuses::getFor($plural);
         $items = $dataSource->toArray();
         foreach ($items as $key => $value) {
-            $idx = array_search("chklst_shts_status", array_keys($value)); //  specify range to render items
+            $idx = array_search("chklst_shts_status", array_keys($value)); //  specify start point to render items
             $rangeArray = array_slice($value, $idx + 1, count($value) - $idx, true);
             foreach ($rangeArray as $col => $valCol) {
                 if (is_array($valCol) && isset($statuses[$valCol['status']])) {
