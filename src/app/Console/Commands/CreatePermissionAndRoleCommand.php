@@ -21,7 +21,7 @@ class CreatePermissionAndRoleCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command create permission and role';
+    protected $description = 'Create all permissions and roles for a new entity type';
 
     /**
      * Execute the console command.
