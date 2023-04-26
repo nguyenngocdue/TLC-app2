@@ -42,6 +42,7 @@ class Table extends Component
     private $bottomLeftControl = null,
     private $bottomCenterControl = null,
     private $bottomRightControl = null,
+    private $tableTrueWidth = false,
   ) {
   }
 
@@ -75,6 +76,7 @@ class Table extends Component
       'header' => $this->header,
       'footer' => $this->footer,
       'colgroup' => $this->makeColGroup($columns),
+      'tableWidth' => $this->tableTrueWidth ? $this->getTableWidth($columns) : "",
       'maxH' => $this->maxH ? "max-h-[{$this->maxH}rem]" : "",
       'tableDebug' => $this->tableDebug,
       'trClassList' => 'border-b bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',

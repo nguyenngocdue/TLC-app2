@@ -33,6 +33,7 @@ abstract class Report_ParentController extends Controller
     protected $mode = '010';
     protected $groupByLength = 7;
     protected $maxH = null;
+    protected $tableTrueWidth = false;
 
     public function getType()
     {
@@ -205,7 +206,8 @@ abstract class Report_ParentController extends Controller
             'modeColumns' => $this->modeColumns(),
             'paramColumns' => $this->getParamColumns(),
             'legendColors' => $this->getColorLegends(),
-            'getSettingParams' => $this->getSettingParamsReport()
+            'getSettingParams' => $this->getSettingParamsReport(),
+            'tableTrueWidth' => $this->tableTrueWidth,
         ]);
     }
     protected function modifyDataToExportCSV($dataSource)
