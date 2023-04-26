@@ -27,6 +27,7 @@ class Qaqc_ncr extends ModelExtended
         "getUserTeam" => ['belongsTo', User_team::class, "user_team_id"],
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
         'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
+        'getAssignee2' => ["belongsTo", User::class, 'assignee_2'],
         "getInterSubcon" => ["belongsTo", Term::class, 'inter_subcon_id'],
         "getDefectRootCause" => ["belongsTo", Term::class, 'defect_root_cause_id'],
         "getDefectDisposition" => ["belongsTo", Term::class, 'defect_disposition_id'],
@@ -116,6 +117,12 @@ class Qaqc_ncr extends ModelExtended
     }
 
     public function getAssignee1()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getAssignee2()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
