@@ -30,7 +30,14 @@ class refreshChklstProgress extends Command
      */
     public function handle()
     {
-        $projectId = $this->input->getOption('subProjectId');
-        return event(new UpdateChklstProgressEvent($projectId));
+        try {
+            $projectId = $this->input->getOption('subProjectId');
+            $event = event(new UpdateChklstProgressEvent($projectId));
+            if ($event) $this->info('The progress of Inspection Checklists have been successfully updated!');
+            return Command::SUCCESS;
+        } catch (\Exception $e) {
+            $this->error('Something went wrong!');
+            $this->line("Could you check your command following the instructions: \n php artisan nnd:refreshChklstProgress --subProjectId=[...]");
+        }
     }
 }

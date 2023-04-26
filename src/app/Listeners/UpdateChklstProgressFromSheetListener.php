@@ -7,6 +7,7 @@ use App\Models\Qaqc_insp_chklst;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Console\Command;
 
 class UpdateChklstProgressFromSheetListener
 {
@@ -81,5 +82,6 @@ class UpdateChklstProgressFromSheetListener
             $newProgress = $sqlData->toArray()[0]->progress_chklst;
             $chklst->update(['progress' => $newProgress]);
         }
+        return true;
     }
 }
