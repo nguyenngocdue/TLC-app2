@@ -28,9 +28,15 @@ class ParentType3 extends Component
      */
     public function render()
     {
-        $type = $this->type;
-        $name = $this->name;
-        $selected = $this->valueSelected;
-        return "<x-controls.parent_type2 type='$type' name='$name' selected='$selected'/>";
+        return view('components.advanced-filter.dropdown3', [
+            'dataSource' => $this->getDataSource(),
+            'name' =>  $this->name,
+            'valueSelected' => $this->valueSelected,
+        ]);
+    }
+
+    private function getDataSource()
+    {
+        return $this->getAllTypeMorphMany();
     }
 }

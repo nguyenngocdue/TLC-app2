@@ -11,7 +11,6 @@ use App\Http\Controllers\Notifications\NotificationsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RedisController;
 use App\Http\Controllers\Reports\ReportIndexController;
-// use App\Http\Controllers\SignOff\SignOffController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Utils\MyCompany;
 use App\Http\Controllers\Utils\ParserController;
@@ -23,7 +22,6 @@ use App\Http\Controllers\Workflow\ManageAppsController;
 use App\Http\Controllers\Workflow\ManageStatusesController;
 use App\Http\Controllers\Workflow\ManageWidgetsController;
 use App\Utils\Support\Entities;
-use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -51,7 +49,6 @@ Route::group([
             Route::resource("{$entityName}", EntityCRUDController::class)->only('create', 'store', 'edit', 'update', 'show', 'destroy');
             Route::delete("{$entityName}", [EntityCRUDController::class, "destroyMultiple"])->name("{$entityName}.destroyMultiple");
         }
-        // dd();
         // Route::resource('/upload/upload_add', App\Http\Controllers\UploadFileController::class);
         // Route::get('/upload/{id}/download', [App\Http\Controllers\UploadFileController::class, 'download'])->name('upload_add.download');
     });

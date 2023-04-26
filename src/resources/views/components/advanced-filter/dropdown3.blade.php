@@ -2,7 +2,7 @@
 <div class="mt-1">
     <select id="{{$name}}" class="select2-hidden-accessible" multiple="multiple" style="width: 100%;" name="{{$name}}[]" tabindex="-1" aria-hidden="true">
         @foreach($dataSource as $value)
-        <option value="{{$value->id}}" @selected($valueSelected ? in_array($value->id,$valueSelected) : null) >{{$value->name ?? $value->id}}</option>
+        <option value="{{$value->id ?? $value['id']}}" @selected($valueSelected ? in_array($value->id ?? $value['id'],$valueSelected) : null) >{{$value->name ?? $value['name'] ?? $value->id ?? $value['id']}}</option>
         @endforeach
     </select>
       <script>

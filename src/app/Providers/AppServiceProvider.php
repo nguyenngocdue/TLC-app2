@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Console\Commands\CreateControllerEntity\CreateControllerEntityCreator;
-use App\Console\Commands\CreateTableRelationship\MigrationRelationShipCreator;
 use App\Services\Comment\CommentService;
 use App\Services\Comment\CommentServiceInterface;
 use App\Repositories\Comment\CommentRepository;
@@ -31,6 +29,10 @@ class AppServiceProvider extends ServiceProvider
         // singleton Repositories
         $this->app->singleton(CommentRepositoryInterface::class, CommentRepository::class);
         $this->app->singleton(Qaqc_insp_chklst_sht_sigRepositoryInterface::class, Qaqc_insp_chklst_sht_sigRepository::class);
+
+
+        // register packages
+        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
     }
 
     /**
