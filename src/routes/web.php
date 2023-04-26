@@ -22,12 +22,14 @@ use App\Http\Controllers\Workflow\ManageAppsController;
 use App\Http\Controllers\Workflow\ManageStatusesController;
 use App\Http\Controllers\Workflow\ManageWidgetsController;
 use App\Utils\Support\Entities;
+use App\Utils\System\Timer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
+Timer::startTimeCounter();
 $entities = Entities::getAll();
 // $qrCodeApps = JsonControls::getQrCodeApps();
 Auth::routes();
