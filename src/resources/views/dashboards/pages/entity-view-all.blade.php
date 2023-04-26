@@ -30,9 +30,9 @@
         bottomRightControl="{!! $p !!}"
         />
         
+        <x-elapse />
+        <x-elapse total=1/>
 </div>
-<x-elapse />
-<x-elapse total=1/>
 <br />
 <script src="{{ asset('js/renderprop.js') }}"></script>
 @endsection
