@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="px-4">
+    <x-elapse />
     <div class="justify-end pb-5">
         {{-- <div class='col-span-6'> --}}
             {{-- <x-form.search route="{{ route($type . '.index') }}" title="{{$searchTitle}}" /> --}}
@@ -14,6 +15,7 @@
         {{-- </div> --}}
     </div>
     <x-renderer.advanced-filter :type="$type" :valueAdvanceFilters="$valueAdvanceFilters"/>
+    <x-elapse />
     @php 
     $abt = "<x-form.action-button-group type='$type' />"; 
     $route = route('updateUserSettings');
@@ -29,6 +31,8 @@
         />
         
 </div>
+<x-elapse />
+<x-elapse total=1/>
 <br />
 <script src="{{ asset('js/renderprop.js') }}"></script>
 @endsection
