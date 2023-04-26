@@ -4,13 +4,16 @@ namespace App\Listeners;
 
 use App\Events\UpdateChklstProgressEvent;
 use App\Models\Qaqc_insp_chklst;
+use App\Models\Sub_project;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Command;
 
-class UpdateChklstProgressFromSheetListener
+class UpdateChklstProgressFromSheetListener implements ShouldQueue
 {
+    use Queueable;
     /**
      * Create the event listener.
      *
@@ -31,7 +34,7 @@ class UpdateChklstProgressFromSheetListener
 
 
 
-    private function calculateProgressFollowingSheets($idChklst)
+    private function calculateProgressOfSheets($idChklst)
     {
         $sql = "SELECT
         SUM(count_line_in_sheet) AS total_line
@@ -56,32 +59,44 @@ class UpdateChklstProgressFromSheetListener
 
     private  function getIdChklst($subProjectId)
     {
-        $sql = "SELECT
-        -- sp.id AS sub_project_id
-        -- ,po.id AS prod_order_id
-        -- ,po.name AS prod_order_name
-        chlst.id AS chlst_id
-        FROM  sub_projects sp, prod_orders po, qaqc_insp_chklsts chlst
-        WHERE 1 = 1
-        AND po.sub_project_id = sp.id        
-        AND chlst.prod_order_id = po.id
-        AND sp.id = " . $subProjectId;
-        $sqlData = DB::select(DB::raw($sql));
-        return collect($sqlData);
+        $prodOrder = Sub_project::find($subProjectId)->prodOrders;
+        $result = [];
+        foreach ($prodOrder as $po) {
+            foreach ($po->qaqcInspChklsts as $chklst) {
+                $result[] = $chklst->id;
+            }
+        }
+        return $result;
+        // $sql = "SELECT
+        // -- sp.id AS sub_project_id
+        // -- ,po.id AS prod_order_id
+        // -- ,po.name AS prod_order_name
+        // chlst.id AS chlst_id
+        // FROM  sub_projects sp, prod_orders po, qaqc_insp_chklsts chlst
+        // WHERE 1 = 1
+        // AND po.sub_project_id = sp.id        
+        // AND chlst.prod_order_id = po.id
+        // AND sp.id = " . $subProjectId;
+        // $sqlData = DB::select(DB::raw($sql));
+        // return collect($sqlData);
     }
 
     public function handle(UpdateChklstProgressEvent $event)
     {
         // $event->subProjectId
-        $chklstData = $this->getIdChklst($event->subProjectId)->toArray();
-        $idChklsts = array_column($chklstData, 'chlst_id');
+        $ids = $this->getIdChklst($event->subProjectId);
+        // dump($ids);
+        // $ids = $this->getIdChklst($event->subProjectId)->toArray();
+        // $idChklsts = array_column($ids, 'chlst_id');
         // dd($idChklsts);
-        foreach ($idChklsts as $idChklst) {
-            $sqlData = $this->calculateProgressFollowingSheets($idChklst);
+        $success = 0;
+        foreach ($ids as $idChklst) {
             $chklst = Qaqc_insp_chklst::find($idChklst);
+            $sqlData = $this->calculateProgressOfSheets($idChklst);
             $newProgress = $sqlData->toArray()[0]->progress_chklst;
-            $chklst->update(['progress' => $newProgress]);
+            if ($chklst->update(['progress' => $newProgress])) $success++;
         }
-        return true;
+        $count = count($ids);
+        return [$success, $count];
     }
 }

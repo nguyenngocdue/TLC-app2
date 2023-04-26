@@ -32,7 +32,7 @@ class UpdatedChklstSheetProgressListener
     {
         $sheetId = $event->currentValue['id'];
         $sheets = Qaqc_insp_chklst_sht::find($sheetId);
-        $sheetLines = $sheets->getLines()->get()->ToArray();
+        $sheetLines = $sheets->getLines()->get()->toArray();
 
         $numLineCompletion = count($sheetLines);
         foreach (array_values($sheetLines) as $value) {
@@ -52,7 +52,7 @@ class UpdatedChklstSheetProgressListener
             }
         }
         $percentCompletion = round(($numLineCompletion / count($sheetLines)) * 100, 2);
-        Log::info($numLineCompletion . '/' . count($sheetLines));
+        // Log::info($numLineCompletion . '/' . count($sheetLines));
         $sheets->progress = $percentCompletion;
         $sheets->save();
 
