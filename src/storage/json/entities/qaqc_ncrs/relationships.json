@@ -219,8 +219,8 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "radio",
-        "filter_columns": "",
-        "filter_values": "",
+        "filter_columns": "field_id",
+        "filter_values": "141",
         "radio_checkbox_colspan": ""
     },
     "_getReportType": {
@@ -233,8 +233,8 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "radio",
-        "filter_columns": "",
-        "filter_values": "",
+        "filter_columns": "field_id",
+        "filter_values": "142",
         "radio_checkbox_colspan": ""
     },
     "_getMonitors1()": {
