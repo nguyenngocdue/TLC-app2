@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Workflow\LibApps;
 use App\Http\Controllers\Workflow\LibWidgets;
 use App\Utils\Support\DBTable;
 use Illuminate\Support\Arr;
@@ -22,20 +23,17 @@ class DashboardController extends Controller
         return "dashboard";
     }
 
-    private function a($widget)
+    private function a(&$widget)
     {
+        $widget['params'] = (array) json_decode($widget['params']);
         $fn = $widget['fn'];
-        $table_a = $widget['table_a'];
-        $table_b = $widget['table_b'];
-        // $key_a = $widget['key_a'];
-        // $key_b = $widget['key_b'];
-        // $global_filter = $widget['global_filter'];
+        $table_a = $widget['params']['table_a'];
         $model_a = DBTable::fromNameToModel($table_a);
-        $model_b = DBTable::fromNameToModel($table_b);
-        $meta_and_metric = $model_a->getMetaForChart($fn, $widget);
+        $meta_and_metric = $model_a->getMetaForChart($fn, $widget, $widget['params']);
+        $app = LibApps::getAll();
         return [
-            "title_a" => $model_a->getMenuTitle(),
-            "title_b" => $model_b->getMenuTitle(),
+            "title_a" => $app[$widget["section_title"]]['title'],
+            "title_b" => $app[$widget["widget_title"]]['title'],
             "meta" => $meta_and_metric['meta'],
             "metric" => $meta_and_metric['metric'],
             "chartType" => $meta_and_metric['chartType'],
@@ -53,7 +51,8 @@ class DashboardController extends Controller
         $allWidgets = array_map(fn ($widget) => array_merge($this->a($widget), $widget), $allWidgets);
         $allWidgets = array_filter($allWidgets, fn ($widget) => !$widget['hidden']);
         // dump($allWidgets);
-        $allWidgetGroups = Arr::groupByToChildren($allWidgets, 'table_a');
+        $allWidgetGroups = Arr::groupByToChildren($allWidgets, 'title_a');
+        // dump($allWidgetGroups);
         return view(
             'dashboards.dashboard',
             [
