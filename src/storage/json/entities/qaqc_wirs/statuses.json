@@ -3,5 +3,6 @@
     "assigned",
     "rejected",
     "closed",
-    "not_applicable"
+    "not_applicable",
+    "in_progress"
 ]
