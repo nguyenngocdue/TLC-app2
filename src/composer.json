@@ -27,6 +27,7 @@
         "php": "^8.0.2",
         "beyondcode/laravel-websockets": "^1.14",
         "brian2694/laravel-toastr": "^5.57",
+        "darkaonline/l5-swagger": "^8.5",
         "directorytree/ldaprecord-laravel": "^2.5.6",
         "doctrine/dbal": "^3.4",
         "fortune/font-beauty": "@dev",
@@ -47,7 +48,7 @@
         "ndc/spatie-custom": "@dev",
         "nuwave/lighthouse": "^5.61",
         "predis/predis": "^2.1",
-        "pusher/pusher-php-server": "^7.2",
+        "pusher/pusher-php-server": "7.0.2",
         "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {
