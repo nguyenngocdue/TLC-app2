@@ -3,7 +3,12 @@
 @endphp
 @if($readOnly)
     @php
-    $label = DB::table($table)->whereIn('id',$selectedDecode)->pluck($nameless ? 'id':'name');
+    if(str_starts_with($table, "morph_to")){
+        $label = $selectedDecode;
+    }else {
+        $nameless = $nameless ?? false;
+        $label = DB::table($table)->whereIn('id',$selectedDecode)->pluck($nameless ? 'id':'name');
+    }
     @endphp
     @if($multipleStr)
         <span class="select2 select2-container select2-container--default w-full">
