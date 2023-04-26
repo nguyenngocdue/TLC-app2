@@ -38,26 +38,26 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_slug": {
         "name": "_slug",
@@ -79,8 +79,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_parent_id": {
@@ -91,8 +91,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_project_id": {
@@ -103,8 +103,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_sub_project_id": {
@@ -115,8 +115,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_prod_routing_id": {
@@ -151,8 +151,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_prod_discipline_1_id": {
@@ -163,8 +163,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_prod_discipline_2_id": {
@@ -175,8 +175,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_user_team_id": {
@@ -187,8 +187,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_inter_subcon_id": {
@@ -199,8 +199,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_priority_id": {
@@ -211,8 +211,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_due_date": {
@@ -223,8 +223,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_closed_at": {
@@ -247,8 +247,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_defect_disposition_id": {
@@ -259,33 +259,33 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_defect_severity": {
         "name": "_defect_severity",
         "column_name": "defect_severity",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_defect_report_type": {
         "name": "_defect_report_type",
         "column_name": "defect_report_type",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_getQaqcCars": {
         "name": "_getQaqcCars",
@@ -295,21 +295,33 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
         "new": "",
         "assigned": "",
         "assign_rejected": "",
-        "resolved": "",
+        "resolved": "true",
         "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
@@ -338,14 +350,14 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_created_at": {
         "name": "_created_at",

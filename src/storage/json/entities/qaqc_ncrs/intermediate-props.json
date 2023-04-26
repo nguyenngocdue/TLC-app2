@@ -311,6 +311,18 @@
         "inspection_rejected": "",
         "closed": ""
     },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "inspected",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "inspected",
+        "closed": ""
+    },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",

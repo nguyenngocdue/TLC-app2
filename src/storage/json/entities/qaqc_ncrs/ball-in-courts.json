@@ -1,7 +1,7 @@
 {
     "new": {
         "name": "new",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "creator",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "assigned": {
@@ -11,12 +11,12 @@
     },
     "assign_rejected": {
         "name": "assign_rejected",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "creator",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "resolved": {
         "name": "resolved",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "creator",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "rejected": {
@@ -26,7 +26,7 @@
     },
     "inspected": {
         "name": "inspected",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "assignee_2",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "inspection_rejected": {
