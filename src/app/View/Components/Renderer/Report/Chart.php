@@ -16,7 +16,7 @@ class Chart extends Component
         private $meta = [],
         private $metric = [],
         private $key = "",
-        private $infoDataQuery = [],
+        private $widgetParams = [],
     ) {
         //
     }
@@ -30,11 +30,11 @@ class Chart extends Component
     {
         $metric = $this->metric;
         $meta = $this->meta;
-        $infoDataQuery = $this->infoDataQuery;
+        $widgetParams = $this->widgetParams;
         $result = [];
         foreach ($metric as $value) {
-            $type = $infoDataQuery['table_a'];
-            $filed = $infoDataQuery['key_a'];
+            $type = $widgetParams['table_a'];
+            $filed = $widgetParams['key_a'];
             $routeDefault = route($type . '.index');
             $href = $routeDefault . '?_entity=' . $type . '&' . $filed . '%5B%5D=' . $value->metric_id . '&action=updateAdvanceFilter';
             $result[] = $href;

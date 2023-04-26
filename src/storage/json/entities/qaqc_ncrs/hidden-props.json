@@ -7,8 +7,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_getParent": {
@@ -311,6 +311,18 @@
         "inspection_rejected": "",
         "closed": ""
     },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
@@ -343,8 +355,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "_created_at": {

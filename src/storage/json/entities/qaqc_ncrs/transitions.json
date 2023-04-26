@@ -39,7 +39,7 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "true",
-        "inspected": "",
+        "inspected": "true",
         "inspection_rejected": "",
         "closed": ""
     },
@@ -62,8 +62,8 @@
         "resolved": "",
         "rejected": "",
         "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "inspection_rejected": {
         "name": "inspection_rejected",
@@ -72,7 +72,7 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "inspected": "",
+        "inspected": "true",
         "inspection_rejected": "",
         "closed": ""
     },

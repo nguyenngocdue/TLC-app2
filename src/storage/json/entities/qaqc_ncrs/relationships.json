@@ -139,6 +139,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getAssignee2": {
+        "name": "_getAssignee2",
+        "relationship": "belongsTo",
+        "control_name": "assignee_2",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getInterSubcon": {
         "name": "_getInterSubcon",
         "relationship": "belongsTo",
@@ -204,7 +218,7 @@
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown",
+        "control": "radio",
         "filter_columns": "field_id",
         "filter_values": "141",
         "radio_checkbox_colspan": ""
@@ -218,7 +232,7 @@
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown",
+        "control": "radio",
         "filter_columns": "field_id",
         "filter_values": "142",
         "radio_checkbox_colspan": ""

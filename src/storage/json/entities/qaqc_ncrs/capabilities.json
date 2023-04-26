@@ -8,8 +8,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "acct_manager_nz": {
@@ -21,8 +21,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "acct_member": {
@@ -34,8 +34,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "acct_member_nz": {
@@ -47,8 +47,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "admin": {
@@ -60,8 +60,8 @@
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "pending_verification": "true",
-        "verification_rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": "true"
     },
     "bd_manager": {
@@ -73,8 +73,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "bd_member": {
@@ -86,8 +86,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "cpl_manager_nz": {
@@ -99,8 +99,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "cpl_member": {
@@ -112,8 +112,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "dc_ho": {
@@ -125,8 +125,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "dc_manager": {
@@ -138,8 +138,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "dc_ws": {
@@ -151,8 +151,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "des_manager": {
@@ -160,12 +160,12 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "assign_rejected": "",
         "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "des_member": {
@@ -173,12 +173,12 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "assign_rejected": "",
         "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "dir": {
@@ -190,8 +190,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "dir_nz": {
@@ -203,8 +203,21 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "external_inspector": {
+        "name": "external_inspector",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "fac_admin": {
@@ -216,8 +229,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "fin_member_nz": {
@@ -229,8 +242,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "guest": {
@@ -242,8 +255,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "hr_manager": {
@@ -255,8 +268,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "hr_member": {
@@ -268,8 +281,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "hr_member_nz": {
@@ -281,8 +294,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "hse_manager": {
@@ -294,8 +307,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "hse_member": {
@@ -307,8 +320,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "it_manager": {
@@ -320,8 +333,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "it_member": {
@@ -333,8 +346,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "mgr_asst_nz": {
@@ -346,8 +359,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "newcomer": {
@@ -359,8 +372,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "pln_admin": {
@@ -372,8 +385,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proc_manager": {
@@ -381,12 +394,12 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "assign_rejected": "",
         "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proc_member": {
@@ -394,12 +407,12 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "assign_rejected": "",
         "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proc_member_nz": {
@@ -411,8 +424,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "prod_manager": {
@@ -420,12 +433,12 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "assign_rejected": "",
         "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "prod_manager_nz": {
@@ -437,8 +450,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "prod_member": {
@@ -446,12 +459,12 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "assign_rejected": "",
         "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "prod_member_nz": {
@@ -463,8 +476,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proj_manager": {
@@ -472,12 +485,12 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "assign_rejected": "",
         "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proj_manager_nz": {
@@ -489,8 +502,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proj_member": {
@@ -498,12 +511,12 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "assign_rejected": "",
         "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "proj_member_nz": {
@@ -515,34 +528,34 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "qaqc_manager": {
         "name": "qaqc_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
+        "new": "true",
         "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
+        "assign_rejected": "true",
+        "resolved": "true",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": ""
     },
     "qaqc_member": {
         "name": "qaqc_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
+        "new": "true",
         "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
+        "assign_rejected": "true",
+        "resolved": "true",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "true",
         "closed": ""
     },
     "qs_manager": {
@@ -554,8 +567,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "qs_member": {
@@ -567,8 +580,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "qs_member_nz": {
@@ -580,21 +593,21 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "supreme_manage": {
         "name": "supreme_manage",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": ""
     },
     "whs_manager": {
@@ -602,12 +615,12 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "assign_rejected": "",
         "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "whs_member": {
@@ -615,12 +628,12 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "assign_rejected": "",
         "resolved": "",
-        "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "worker": {
@@ -632,8 +645,8 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     }
 }
