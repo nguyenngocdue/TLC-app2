@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityListenDataSource;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitSupportEntityCRUDCreateEdit2;
-use App\Models\User;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\DefaultValues;
-use App\Utils\Support\Json\SuperProps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;

@@ -2,16 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Qaqc_insp_chklst_run;
-use App\Models\Qaqc_insp_chklst_sht;
-use App\Models\User;
-use App\Utils\Support\Tree\BuildTree;
-use App\Utils\System\Timer;
-use Illuminate\Contracts\Hashing\Hasher;
-use Illuminate\Hashing\AbstractHasher;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+
 
 class WelcomeController extends Controller
 {
