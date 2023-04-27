@@ -9,7 +9,7 @@
 <script>
         $('[id="'+"{{$name}}"+'"]').select2({
             placeholder: "Please select..."
-            , allowClear: true
+            , allowClear: false
             // , templateResult: select2FormatState
         });
 </script>
