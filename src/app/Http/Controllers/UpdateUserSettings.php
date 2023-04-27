@@ -32,7 +32,46 @@ class UpdateUserSettings extends Controller
     private function updateFilter($request, $settings)
     {
         [$type, $valueRequest] = $this->formatRequestValue($request);
+        $settings[$type][Constant::VIEW_ALL]['current_filter'] = 'advance_filter';
         $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = $valueRequest;
+        return $settings;
+    }
+    private function updateBasicFilter($request, $settings)
+    {
+        $chooseBasicFilter = $request->input('choose_basic_filter');
+        [$type,] = $this->formatRequestValue($request);
+        if ($chooseBasicFilter || !empty($chooseBasicFilter)) {
+            $settings[$type][Constant::VIEW_ALL]['current_filter'] = 'basic_filter';
+            $settings[$type][Constant::VIEW_ALL]['choose_basic_filters'] = $chooseBasicFilter;
+            $valueRequest = $settings[$type][Constant::VIEW_ALL]['basic_filters'][$chooseBasicFilter];
+            $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = $valueRequest;
+            return $settings;
+        }
+        $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = [];
+        return $settings;
+    }
+    private function saveBasicFilter($request, $settings)
+    {
+        $nameFilter = $request->input('basic_filter');
+        [$type, $valueRequest] = $this->formatRequestValue($request);
+        $settings[$type][Constant::VIEW_ALL]['current_filter'] = 'advance_filter';
+        $settings[$type][Constant::VIEW_ALL]['basic_filters'][$nameFilter] = $valueRequest;
+        return $settings;
+    }
+    private function updateRefreshPage($request, $settings)
+    {
+        [$type,] = $this->formatRequestValue($request);
+        $value = $settings[$type][Constant::VIEW_ALL]['refresh_page'] ?? null;
+        $settings[$type][Constant::VIEW_ALL]['refresh_page'] = !$value;
+        return $settings;
+    }
+    private function deletedBasicFilter($request, $settings)
+    {
+        $nameFilter = $request->input('choose_basic_filter');
+        [$type,] = $this->formatRequestValue($request);
+        unset($settings[$type][Constant::VIEW_ALL]['choose_basic_filters']);
+        unset($settings[$type][Constant::VIEW_ALL]['basic_filters'][$nameFilter]);
+        $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = [];
         return $settings;
     }
     private function clearFilter($request, $settings)
@@ -56,7 +95,7 @@ class UpdateUserSettings extends Controller
         foreach ($superProps as $key => $value) {
             $result[substr($key, 1)] = $value['control'];
         }
-        $arrayFlip = ['_method', '_token', '_entity', 'action'];
+        $arrayFlip = ['_method', '_token', '_entity', 'action', 'basic_filter', 'choose_basic_filter'];
         foreach ($all as $key => $value) {
             if (isset($result[$key]))
                 switch ($result[$key]) {
@@ -157,6 +196,18 @@ class UpdateUserSettings extends Controller
                 break;
             case 'updateGear':
                 $settings = $this->updateGear($request, $settings);
+                break;
+            case 'updateRefreshPage':
+                $settings = $this->updateRefreshPage($request, $settings);
+                break;
+            case 'saveBasicFilter':
+                $settings = $this->saveBasicFilter($request, $settings);
+                break;
+            case 'deletedBasicFilter':
+                $settings = $this->deletedBasicFilter($request, $settings);
+                break;
+            case 'updateBasicFilter':
+                $settings = $this->updateBasicFilter($request, $settings);
                 break;
             case 'updateAdvanceFilter':
                 $settings = $this->updateFilter($request, $settings);

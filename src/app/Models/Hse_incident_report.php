@@ -39,6 +39,7 @@ class Hse_incident_report extends ModelExtended
         "activityLeadToIssue()" => ["getCheckedByField", Term::class],
         "immediateCause()" => ["getCheckedByField", Term::class],
         "issueRootCause()" => ["getCheckedByField", Term::class],
+        "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
     public function attachment_1()
@@ -138,6 +139,12 @@ class Hse_incident_report extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function issueRootCause()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    public function getMonitors1()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

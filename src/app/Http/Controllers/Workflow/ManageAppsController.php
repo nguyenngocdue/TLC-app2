@@ -105,6 +105,12 @@ class ManageAppsController extends AbstractManageLibController
                 'editable' => true,
             ],
             [
+                'dataIndex' => "show_in_my_view",
+                "renderer"  => 'checkbox',
+                'align' => 'center',
+                'editable' => true,
+            ],
+            [
                 'dataIndex' => 'icon',
                 'renderer' => 'text4',
                 'editable' => true,

@@ -21,7 +21,11 @@ trait TraitViewAllFunctions
         $perPage = $settings[$type][Constant::VIEW_ALL]['per_page'] ?? 20;
         $columnLimit = $settings[$type][Constant::VIEW_ALL]['columns'] ?? null;
         $advancedFilter = $settings[$type][Constant::VIEW_ALL]['advanced_filters'] ?? null;
-        return [$perPage, $columnLimit, $advancedFilter];
+        $basicFilter = $settings[$type][Constant::VIEW_ALL]['basic_filters'] ?? null;
+        $chooseBasicFilter = $settings[$type][Constant::VIEW_ALL]['choose_basic_filters'] ?? null;
+        $currentFilter = $settings[$type][Constant::VIEW_ALL]['current_filter'] ?? null;
+        $refreshPage = $settings[$type][Constant::VIEW_ALL]['refresh_page'] ?? null;
+        return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter];
     }
 
     private function getDataSource($advanceFilters = null)

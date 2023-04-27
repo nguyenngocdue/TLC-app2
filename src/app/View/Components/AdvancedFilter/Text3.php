@@ -14,6 +14,7 @@ class Text3 extends Component
         private $placeholder = 'Type here...',
         private $icon = null,
         private $readOnly = false,
+        private $onKeyPress = null,
     ) {
     }
 
@@ -24,13 +25,14 @@ class Text3 extends Component
         $placeholder = $this->placeholder;
         $icon = $this->icon;
         $readOnly = $this->readOnly;
-        return view('components.controls.text2', [
+        return view('components.advanced-filter.text3', [
             'name' => $name,
             'value' => $value,
             'placeholder' => $placeholder,
             'icon' => $icon,
             'readOnly' => $readOnly,
             'classList' => ClassList::TEXT,
+            'onKeyPress' => $this->onKeyPress,
         ]);
     }
 }

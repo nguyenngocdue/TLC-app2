@@ -928,6 +928,9 @@ video {
 .h-1\.5 {
   height: 0.375rem;
 }
+.h-1\/2 {
+  height: 50%;
+}
 .h-10 {
   height: 2.5rem;
 }

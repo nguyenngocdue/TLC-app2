@@ -215,12 +215,15 @@ class ViewAllController extends Controller
 
     public function index(Request $request)
     {
-        // dd($request->input());
+        $basicFilter = $request->input('basic_filter');
+        if ($basicFilter || !empty($basicFilter)) {
+            (new UpdateUserSettings())($request);
+        }
         if (!$request->input('page') && !empty($request->input())) {
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
         }
-        [$perPage, $columnLimit, $advanceFilters] = $this->getUserSettings();
+        [$perPage, $columnLimit, $advanceFilters, $currentFilter, $refreshPage] = $this->getUserSettings();
         // Log::info($columnLimit);
         $type = Str::plural($this->type);
         $columns = $this->getColumns($type, $columnLimit);
@@ -232,9 +235,11 @@ class ViewAllController extends Controller
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'perPage' => $perPage,
             'valueAdvanceFilters' => $advanceFilters,
+            'refreshPage' => $refreshPage,
             'type' => $type,
             'columns' => $columns,
             'dataSource' => $dataSource,
+            'currentFilter' => $currentFilter,
             'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
         ]);
     }
