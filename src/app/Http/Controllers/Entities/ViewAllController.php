@@ -223,7 +223,7 @@ class ViewAllController extends Controller
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
         }
-        [$perPage, $columnLimit, $advanceFilters, $currentFilter] = $this->getUserSettings();
+        [$perPage, $columnLimit, $advanceFilters, $currentFilter, $refreshPage] = $this->getUserSettings();
         // Log::info($columnLimit);
         $type = Str::plural($this->type);
         $columns = $this->getColumns($type, $columnLimit);
@@ -235,6 +235,7 @@ class ViewAllController extends Controller
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'perPage' => $perPage,
             'valueAdvanceFilters' => $advanceFilters,
+            'refreshPage' => $refreshPage,
             'type' => $type,
             'columns' => $columns,
             'dataSource' => $dataSource,

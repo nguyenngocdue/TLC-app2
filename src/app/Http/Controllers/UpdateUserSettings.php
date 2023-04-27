@@ -58,6 +58,13 @@ class UpdateUserSettings extends Controller
         $settings[$type][Constant::VIEW_ALL]['basic_filters'][$nameFilter] = $valueRequest;
         return $settings;
     }
+    private function updateRefreshPage($request, $settings)
+    {
+        [$type,] = $this->formatRequestValue($request);
+        $value = $settings[$type][Constant::VIEW_ALL]['refresh_page'] ?? null;
+        $settings[$type][Constant::VIEW_ALL]['refresh_page'] = !$value;
+        return $settings;
+    }
     private function deletedBasicFilter($request, $settings)
     {
         $nameFilter = $request->input('choose_basic_filter');
@@ -189,6 +196,9 @@ class UpdateUserSettings extends Controller
                 break;
             case 'updateGear':
                 $settings = $this->updateGear($request, $settings);
+                break;
+            case 'updateRefreshPage':
+                $settings = $this->updateRefreshPage($request, $settings);
                 break;
             case 'saveBasicFilter':
                 $settings = $this->saveBasicFilter($request, $settings);
