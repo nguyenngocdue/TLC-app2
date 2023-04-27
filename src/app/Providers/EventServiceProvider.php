@@ -18,7 +18,7 @@ use App\Listeners\SendMailForInspectorListener;
 use App\Listeners\SendUpdatedDocumentNotificationListener;
 use App\Listeners\ShouldUpdateFieldsListener;
 use App\Listeners\UpdateChklstProgressFromSheetListener;
-use App\Listeners\UpdatedChklstSheetProgressListener;
+use App\Listeners\UpdateChklstSheetProgressListener;
 use App\Listeners\UpdateStatusChklstRunListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -39,7 +39,7 @@ class EventServiceProvider extends ServiceProvider
         UpdateStatusChklstRunEvent::class => [UpdateStatusChklstRunListener::class],
         UpdatedDocumentEvent::class => [
             SendUpdatedDocumentNotificationListener::class,
-            UpdatedChklstSheetProgressListener::class
+            UpdateChklstSheetProgressListener::class
         ],
         UpdateChklstProgressEvent::class => [UpdateChklstProgressFromSheetListener::class],
 

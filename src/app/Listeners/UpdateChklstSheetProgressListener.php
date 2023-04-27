@@ -4,13 +4,10 @@ namespace App\Listeners;
 
 use App\Events\UpdateChklstProgressEvent;
 use App\Events\UpdatedDocumentEvent;
-use App\Events\UpdatedProgressEvent;
 use App\Models\Qaqc_insp_chklst_sht;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Log;
+use App\Utils\Support\CurrentRoute;
 
-class UpdatedChklstSheetProgressListener
+class UpdateChklstSheetProgressListener
 {
     /**
      * Create the event listener.
@@ -30,6 +27,7 @@ class UpdatedChklstSheetProgressListener
      */
     public function handle(UpdatedDocumentEvent $event)
     {
+        if (CurrentRoute::getTypeSingular() !== 'qaqc_insp_chklst_sht') return false;
         $sheetId = $event->currentValue['id'];
         $sheets = Qaqc_insp_chklst_sht::find($sheetId);
         $sheetLines = $sheets->getLines()->get()->toArray();
