@@ -116,7 +116,7 @@ class FileController extends Controller
             foreach ($filesUpload as $key => $files) {
                 try {
                     foreach ($files as $file) {
-                        $fileName = AttachmentName::customizeSlugData($file,  $attachments);
+                        $fileName = AttachmentName::slugifyImageName($file,  $attachments);
                         $imageFileType = pathinfo($fileName, PATHINFO_EXTENSION);
                         $dt = Carbon::now('Asia/Ho_Chi_Minh');
                         $path = env('MEDIA_ROOT_FOLDER', 'media') . '/' . $dt->format('Y') . '/' . $dt->format('m') . '/';
