@@ -20,6 +20,9 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
     protected $rotate45Width = 300;
     protected  $sub_project_id = 21;
 
+    protected $tableTrueWidth = true;
+    protected $maxH = 50;
+
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT tb.*,
@@ -92,11 +95,8 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
             $array[] = (array)$value;
         }
         $dataSource = $array;
-
-
         $flattenData = array_merge(...$dataSource);
         $idx = array_search("sheet_status", array_keys($flattenData));
-
         $dataColumn = array_slice($flattenData, $idx + 1, count($flattenData) - $idx, true);
         ksort($dataColumn);
 
@@ -104,14 +104,17 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
             [
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
-                "align" => "center"
+                "align" => "center",
+                "width" => 150
             ],
             [
+                "title" => "Prod Order",
                 "dataIndex" => "prod_name",
-                "align" => "center"
+                "align" => "center",
+                "width" => 150
             ]
         ];
-        $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center"], array_keys($dataColumn));
+        $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center", "width" => 40], array_keys($dataColumn));
         $dataColumn = array_merge($adds, $sqlCol);
         return  $dataColumn;
     }

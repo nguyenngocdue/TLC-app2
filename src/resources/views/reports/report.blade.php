@@ -24,6 +24,7 @@
     <x-reports.utility-report routeName='$routeName' ";
     @endphp
     {{-- <x-renderer.tag>Top Center</x-renderer.tag> --}}
-    <x-renderer.table topCenterControl=" {!!$tc!!}" showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource" rotate45Width={{$rotate45Width}} />
+    <x-renderer.table 
+        topCenterControl=" {!!$tc!!}" showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource" rotate45Width={{$rotate45Width}} maxH="{{$maxH}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
     @endsection
 </div>

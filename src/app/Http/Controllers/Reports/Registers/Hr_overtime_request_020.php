@@ -20,6 +20,7 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
 
     protected $groupBy = 'ot_date';
     protected $mode = '020';
+    protected $maxH = 50;
 
     public function getSqlStr($modeParams)
     {
