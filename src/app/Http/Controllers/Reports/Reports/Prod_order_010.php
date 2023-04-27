@@ -50,6 +50,7 @@ class Prod_order_010 extends Report_ParentReportController
         return [
             [
                 "dataIndex" => "sub_project_name",
+                "align" => "center",
             ],
             [
                 "title" => 'Prod Order ID',
@@ -57,11 +58,11 @@ class Prod_order_010 extends Report_ParentReportController
                 "renderer" => "id",
                 "align" => "center",
                 "type" => "prod_orders",
-
             ],
             [
                 "title" => 'Prod Order Name',
                 "dataIndex" => "po_name",
+                "align" => "center",
             ],
             [
                 "dataIndex" => "total_hours",
