@@ -23,6 +23,7 @@ class SqlForeignKey
                 AND $global_filter
                 AND b.$key_b=a.$key_a
             GROUP BY $key_a
+            ORDER BY metric_count DESC
             ";
         return $sql;
     }

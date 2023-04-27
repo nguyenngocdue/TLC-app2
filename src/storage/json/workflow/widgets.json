@@ -22,8 +22,8 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlTest",
-        "section_title": "qaqc_insp_chklst_line",
-        "widget_title": "qaqc_insp_tmpl_line",
+        "section_title": "qaqc_insp_chklst",
+        "widget_title": "qaqc_insp_tmpl",
         "params": "{\"table_a\":\"qaqc_insp_chklsts\", \"table_b\":\"qaqc_insp_tmpls\", \"key_a\":\"qaqc_insp_tmpl_id\", \"key_b\":\"id\"}"
     },
     "users_1": {

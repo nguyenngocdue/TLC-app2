@@ -50,7 +50,6 @@ trait TraitMetaForChart
     {
         $className = "App\\Http\\Controllers\\Reports\\Widgets\\$sqlClassName";
         $sql = (new $className)($params);
-        $sql .= " ORDER BY metric_count DESC";
         $result = DB::select($sql);
         $result = $this->makeOthers($result);
 
