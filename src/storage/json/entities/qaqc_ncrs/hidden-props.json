@@ -299,6 +299,42 @@
         "inspection_rejected": "",
         "closed": ""
     },
+    "_qty_man_power": {
+        "name": "_qty_man_power",
+        "column_name": "qty_man_power",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_hour_per_man": {
+        "name": "_hour_per_man",
+        "column_name": "hour_per_man",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_total_hour": {
+        "name": "_total_hour",
+        "column_name": "total_hour",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
