@@ -6,7 +6,7 @@
         "fn": "SqlProgress",
         "section_title": "qaqc_insp_chklst",
         "widget_title": "by Progress of Checklist (N17)",
-        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_b\":\"prod_orders\", \"key_b\":\"sub_project_id\", \"att_metric_name\" :\"status\",\"global_filter\":\"a.id = 21\" }"
+        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"global_filter\":\"sp.id = 21\" }"
     },
     "chklst_sht_02": {
         "name": "chklst_sht_02",
@@ -15,7 +15,7 @@
         "fn": "SqlProgress",
         "section_title": "qaqc_insp_chklst",
         "widget_title": "by Progress of Checklist (N18)",
-        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_b\":\"prod_orders\", \"key_b\":\"sub_project_id\", \"att_metric_name\" :\"status\",\"global_filter\":\"a.id = 82\" }"
+        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"global_filter\":\"sp.id = 82\" }"
     },
     "production_order_01": {
         "name": "production_order_01",
@@ -34,6 +34,24 @@
         "section_title": "qaqc_wir",
         "widget_title": "by Status",
         "params": "{\"table_a\":\"qaqc_wirs\", \"att_metric_name\":\"status\"}"
+    },
+    "qaqc_wirs_02": {
+        "name": "qaqc_wirs_02",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": "SqlStatus",
+        "section_title": "qaqc_wir",
+        "widget_title": "by Status (N17)",
+        "params": "{\"table_a\":\"qaqc_wirs\", \"att_metric_name\":\"status\", \"global_filter\":\"a.sub_project_id = 21\"}"
+    },
+    "qaqc_wirs_03": {
+        "name": "qaqc_wirs_03",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": "SqlStatus",
+        "section_title": "qaqc_wir",
+        "widget_title": "by Status (N18)",
+        "params": "{\"table_a\":\"qaqc_wirs\", \"att_metric_name\":\"status\", \"global_filter\":\"a.sub_project_id = 82\"}"
     },
     "subProject_Order_01": {
         "name": "subProject_Order_01",

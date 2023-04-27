@@ -7,7 +7,9 @@ use Illuminate\Support\Str;
 class SqlProgress
 {
     public function __invoke($params)
+
     {
+        $global_filter = $params['global_filter'] ?? "1=1";
         $sql = "SELECT
                     ROW_NUMBER() OVER (ORDER BY sp.id ) AS metric_id,
                     CASE
@@ -19,8 +21,8 @@ class SqlProgress
                     END AS metric_name,
                     COUNT(*) AS metric_count
                     FROM sub_projects sp, prod_orders po, qaqc_insp_chklsts chlst
-                        WHERE sp.id = po.sub_project_id
-                            AND sp.id = 82
+                        WHERE sp.id = po.sub_project_id    
+                            AND $global_filter
                             AND po.id = chlst.prod_order_id
                         GROUP BY metric_name
                         ORDER BY metric_name
