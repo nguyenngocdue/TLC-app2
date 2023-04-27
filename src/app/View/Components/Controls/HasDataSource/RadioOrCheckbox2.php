@@ -36,7 +36,7 @@ class RadioOrCheckbox2 extends Component
             'id' => $id,
             'selected' => $this->selected,
             'multiple' => $this->multiple ? true : false,
-            'classList' => ClassList::RADIO_CHECKBOX,
+            'classList' => ClassList::RADIO_CHECKBOX . ($this->readOnly ? ' readonly ' : ''),
             'table' => $table,
             'span' => $span,
             'readOnly' => $this->readOnly,

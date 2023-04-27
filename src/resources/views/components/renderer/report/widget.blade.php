@@ -1,10 +1,3 @@
-@props(['title', 'figure'])
-
-@php
-    $title = $title ?? "Untitled";
-    $figure = $figure ?? "???";
-@endphp
-
 <div class="shadow-xs flex items-center bg-gray-100 rounded-lg p-4 dark:bg-gray-900 ">
   <div class="mr-4 rounded-full bg-orange-100 p-3 text-orange-500 dark:bg-orange-500 dark:text-orange-100">
     <i class="fa-duotone fa-stars"></i>

@@ -159,6 +159,16 @@
         "on_hold": "",
         "closed": ""
     },
+    "external_inspector": {
+        "name": "external_inspector",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
     "fac_admin": {
         "name": "fac_admin",
         "name_rendered": "",

@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Formula;
 
-use App\Helpers\Helper;
+use App\Utils\Support\SlugifyName;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -21,7 +21,7 @@ class All_SlugifyByName
     {
         $value = Str::slug($value);
         $slugList = $this->getListOfSlugFromDB($type, $id);
-        $result = Helper::slugNameToBeSaved($value, $slugList);
+        $result = SlugifyName::slugNameToBeSaved($value, $slugList);
         return $result;
     }
 }

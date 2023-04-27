@@ -12,9 +12,9 @@ class Column extends Component
      * @return void
      */
     public function __construct(
+        private $cell,
         private $rendererParam = '',
         private $name = '',
-        private $cell,
     ) {
     }
 

@@ -12,6 +12,7 @@ class Qaqc_ncr extends ModelExtended
         "prod_discipline_id", "prod_discipline_2_id", "user_team_id", "priority_id", "due_date",
         "assignee_1", "assignee_2", "cause_analysis", "owner_id", "inter_subcon_id", "defect_root_cause_id",
         "defect_disposition_id", "closed_at", "severity", "report_type",
+        "qty_man_power", "hour_per_man", "total_hour",
     ];
     protected $primaryKey = 'id';
     protected $table = "qaqc_ncrs";
@@ -27,6 +28,7 @@ class Qaqc_ncr extends ModelExtended
         "getUserTeam" => ['belongsTo', User_team::class, "user_team_id"],
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
         'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
+        'getAssignee2' => ["belongsTo", User::class, 'assignee_2'],
         "getInterSubcon" => ["belongsTo", Term::class, 'inter_subcon_id'],
         "getDefectRootCause" => ["belongsTo", Term::class, 'defect_root_cause_id'],
         "getDefectDisposition" => ["belongsTo", Term::class, 'defect_disposition_id'],
@@ -35,6 +37,11 @@ class Qaqc_ncr extends ModelExtended
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
         "getSeverity" => ["belongsTo", Term::class, 'defect_severity'],
         "getReportType" => ["belongsTo", Term::class, 'defect_report_type'],
+
+        "attachment_defect_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "attachment_defect_pdfs" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "attachment_corrective_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "attachment_corrective_pdfs" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public $oracyParams = [
@@ -121,6 +128,12 @@ class Qaqc_ncr extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getAssignee2()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
     public function getInterSubcon()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -167,5 +180,30 @@ class Qaqc_ncr extends ModelExtended
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function attachment_defect_photos()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function attachment_defect_pdfs()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function attachment_corrective_photos()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function attachment_corrective_pdfs()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 }

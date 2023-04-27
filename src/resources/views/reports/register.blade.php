@@ -24,6 +24,6 @@
     $tc = "<x-renderer.tag>Top Center</x-renderer.tag> ";
     @endphp
     {{-- <x-renderer.tag>Top Center</x-renderer.tag> --}}
-    <x-renderer.table topCenterControl="{!!$tc!!}" :columns="$tableColumns" :dataSource="$tableDataSource" showNo={{true}} maxH="{{$maxH}}" rotate45Width={{$rotate45Width}} groupBy="{{$groupBy}}" groupByLength="{{$groupByLength}}" />
+    <x-renderer.table topCenterControl="{!!$tc!!}" :columns="$tableColumns" :dataSource="$tableDataSource" showNo={{true}} maxH="{{$maxH}}" rotate45Width={{$rotate45Width}} groupBy="{{$groupBy}}" groupByLength="{{$groupByLength}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
 </div>
 @endsection

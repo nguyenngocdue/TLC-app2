@@ -21,13 +21,12 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
     use TraitModifyDataToExcelReport;
     use TraitForwardModeReport;
     use HasStatus;
-
-
     protected $rotate45Width = 300;
     protected  $sub_project_id = 82;
     protected  $prod_routing_id = 6;
     protected $mode = '020';
     protected $checksheet_type_id = 1;
+    protected $maxH = 50;
 
     public function getSqlStr($modeParams)
     {
@@ -81,16 +80,19 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
                 "align" => "center",
+                "width" => 60,
             ],
             [
                 "title" => "Prod Order Name",
                 "dataIndex" => "prod_order_name",
                 "align" => "center",
+                "width" => 60,
             ],
             [
                 "title" => "Progress (%)",
                 "dataIndex" => "chksh_progress",
                 "align" => "right",
+                "width" => 30,
             ],
         ];
 
@@ -100,6 +102,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             $dataColumn2[] = [
                 "dataIndex" => $value,
                 "align" => "center",
+                "width" => 40,
             ];
         }
         $dataColumn = array_merge($dataColumn1, $dataColumn2);
@@ -180,9 +183,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             }
             return (array)$item;
         }, $items);
-        // dd($transformData);
         $groupedArray = Report::groupArrayByKey($transformData, 'prod_order_id');
-        // dd($groupedArray);
         $dataSource = Report::mergeArrayValues($groupedArray);
 
         array_walk($dataSource, function ($item, $key) use (&$dataSource, $sheetsDesc) {
@@ -192,7 +193,6 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             }
             $dataSource[$key] = $item + $sheetsDesc;
         });
-        // dd($dataSource);
         return collect($dataSource);
     }
 
@@ -202,7 +202,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $statuses = LibStatuses::getFor($plural);
         $items = $dataSource->toArray();
         foreach ($items as $key => $value) {
-            $idx = array_search("chklst_shts_status", array_keys($value)); //  specify range to render items
+            $idx = array_search("chklst_shts_status", array_keys($value)); //  specify start point to render items
             $rangeArray = array_slice($value, $idx + 1, count($value) - $idx, true);
             foreach ($rangeArray as $col => $valCol) {
                 if (is_array($valCol) && isset($statuses[$valCol['status']])) {

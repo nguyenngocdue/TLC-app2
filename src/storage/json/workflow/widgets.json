@@ -3,99 +3,90 @@
         "name": "prod_8",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "sqlForeignKey",
-        "table_a": "prod_orders",
-        "table_b": "sub_projects",
-        "key_a": "sub_project_id",
-        "key_b": "id",
-        "global_filter": null
+        "fn": "SqlForeignKey",
+        "section_title": "prod_order",
+        "widget_title": "sub_project",
+        "params": "{\"table_a\":\"prod_orders\", \"table_b\":\"sub_projects\", \"key_a\":\"sub_project_id\", \"key_b\":\"id\"}"
     },
     "prod_9": {
         "name": "prod_9",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "sqlForeignKey",
-        "table_a": "prod_orders",
-        "table_b": "prod_routings",
-        "key_a": "prod_routing_id",
-        "key_b": "id",
-        "global_filter": null
+        "fn": "SqlForeignKey",
+        "section_title": "prod_order",
+        "widget_title": "prod_routing_detail",
+        "params": "{\"table_a\":\"prod_orders\", \"table_b\":\"prod_routings\", \"key_a\":\"prod_routing_id\", \"key_b\":\"id\"}"
+    },
+    "qaqc_1": {
+        "name": "qaqc_1",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": "SqlTest",
+        "section_title": "qaqc_insp_chklst",
+        "widget_title": "qaqc_insp_tmpl",
+        "params": "{\"table_a\":\"qaqc_insp_chklsts\", \"table_b\":\"qaqc_insp_tmpls\", \"key_a\":\"qaqc_insp_tmpl_id\", \"key_b\":\"id\"}"
     },
     "users_1": {
         "name": "users_1",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "sqlForeignKey",
-        "table_a": "users",
-        "table_b": "workplaces",
-        "key_a": "workplace",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
+        "fn": "SqlForeignKey",
+        "section_title": "user",
+        "widget_title": "workplace",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \r\n\"global_filter\":\"a.resigned != true\"\r\n}"
     },
     "users_2": {
         "name": "users_2",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "sqlForeignKey",
-        "table_a": "users",
-        "table_b": "user_categories",
-        "key_a": "category",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
+        "fn": "SqlForeignKey",
+        "section_title": "user",
+        "widget_title": "user_category",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"user_categories\", \"key_a\":\"category\", \"key_b\":\"id\",\r\n\"global_filter\":\"a.resigned != true\"\r\n}"
     },
     "users_3": {
         "name": "users_3",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "sqlForeignKey",
-        "table_a": "users",
-        "table_b": "user_types",
-        "key_a": "user_type",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
+        "fn": "SqlForeignKey",
+        "section_title": "user",
+        "widget_title": "user_type",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"user_types\", \"key_a\":\"user_type\", \"key_b\":\"id\",\r\n\"global_filter\":\"a.resigned != true\"\r\n}"
     },
     "users_4": {
         "name": "users_4",
         "hidden": "true",
         "chart_type": "doughnut",
-        "fn": "sqlForeignKey",
-        "table_a": "users",
-        "table_b": "user_position1s",
-        "key_a": "position_1",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
+        "fn": "SqlForeignKey",
+        "section_title": "user",
+        "widget_title": "user_position1",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"user_position1s\", \"key_a\":\"position_1\", \"key_b\":\"id\",\r\n\"global_filter\":\"a.resigned != true\"\r\n}"
     },
     "users_5": {
         "name": "users_5",
         "hidden": "true",
         "chart_type": "doughnut",
-        "fn": "sqlForeignKey",
-        "table_a": "users",
-        "table_b": "user_position2s",
-        "key_a": "position_2",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
+        "fn": "SqlForeignKey",
+        "section_title": "user",
+        "widget_title": "user_position2",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"user_position2s\", \"key_a\":\"position_2\", \"key_b\":\"id\",\r\n\"global_filter\":\"a.resigned != true\"\r\n}"
     },
     "users_6": {
         "name": "users_6",
         "hidden": "true",
         "chart_type": "doughnut",
-        "fn": "sqlForeignKey",
-        "table_a": "users",
-        "table_b": "user_disciplines",
-        "key_a": "discipline",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
+        "fn": "SqlForeignKey",
+        "section_title": "user",
+        "widget_title": "user_position3",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"user_disciplines\", \"key_a\":\"discipline\", \"key_b\":\"id\",\r\n\"global_filter\":\"a.resigned != true\"\r\n}"
     },
     "users_7": {
         "name": "users_7",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "sqlForeignKey",
-        "table_a": "users",
-        "table_b": "departments",
-        "key_a": "department",
-        "key_b": "id",
-        "global_filter": "a.resigned != true"
+        "fn": "SqlForeignKey",
+        "section_title": "user",
+        "widget_title": "department",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"departments\", \"key_a\":\"department\", \"key_b\":\"id\",\r\n\"global_filter\":\"a.resigned != true\"\r\n}"
     }
 }

@@ -76,7 +76,7 @@ class UploadService2
                 ]);
                 $files = $files['toBeUploaded'];
                 foreach ($files as $file) {
-                    $fileName = AttachmentName::customizeSlugData($file, $attachmentRows);
+                    $fileName = AttachmentName::slugifyImageName($file, $attachmentRows);
                     $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
                     $fileNameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
                     $mimeType = $file->getMimeType();

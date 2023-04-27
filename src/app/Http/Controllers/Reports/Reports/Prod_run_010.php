@@ -17,6 +17,8 @@ class Prod_run_010 extends  Report_ParentReportController
     use TraitForwardModeReport;
 
     protected  $sub_project_id = 21;
+    protected $maxH = 50;
+
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT prlTb.*
@@ -89,13 +91,13 @@ class Prod_run_010 extends  Report_ParentReportController
             [
                 "dataIndex" => "sub_project_name",
                 "align" => "center",
-                'width' => "100"
+                'width' => 100,
             ],
             [
                 'title' => 'Prod Order Name',
                 "dataIndex" => "po_name",
                 "align" => "center",
-                'width' => "100"
+                'width' => 100,
             ],
             // [
             //     "dataIndex" => "prod_routing_link_name",
@@ -113,49 +115,49 @@ class Prod_run_010 extends  Report_ParentReportController
                 'title' => 'Date',
                 "dataIndex" => "prod_run_date",
                 "align" => "center",
-                'width' => "100"
+                'width' => 100,
             ],
             [
                 'title' => 'Workers',
                 "dataIndex" => "prod_run_worker_number",
                 "align" => 'right',
-                'width' => "100"
+                'width' => 100,
             ],
             [
                 'title' => 'Prod Run Start Time (hours)',
                 "dataIndex" => "prod_run_start",
                 "align" => "center",
-                'width' => "100"
+                'width' => 100,
             ],
             [
                 'title' => 'Prod Run End Time (hours)',
                 "dataIndex" => "prod_run_end",
                 "align" => "center",
-                'width' => "100"
+                'width' => 100,
             ],
             [
                 'title' => 'Duration (hours)',
                 "dataIndex" => "prod_run_duration",
                 "align" => "center",
-                'width' => "100"
+                'width' => 100,
             ],
             [
                 'title' => 'Total Prod Time (minute)',
                 "dataIndex" => "sum_production_time_minutes",
                 "align" => 'right',
-                'width' => "100"
+                'width' => 100,
             ],
             [
                 'title' => 'Total Prod Time (hours)',
                 "dataIndex" => "sum_production_time_hours",
                 "align" => 'right',
-                'width' => "100"
+                'width' => 100,
             ],
             [
                 "title" => "Total Workers",
                 "dataIndex" => "total_worker",
                 "align" => 'right',
-                'width' => "100"
+                'width' => 100,
             ],
 
 

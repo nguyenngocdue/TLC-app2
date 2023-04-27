@@ -21,7 +21,7 @@ class RefreshChklstProgressCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Refresh checklist progresses base on all subsequence sheets progresses.';
+    protected $description = 'Refresh checklist progresses base on all subsequence sheets progresses';
 
     /**
      * Execute the console command.

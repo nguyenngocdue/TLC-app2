@@ -21,10 +21,10 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
 
     protected $rotate45Width = 500;
     protected $maxH = 50;
-    protected  $sub_project_id = 21;
-    protected  $prod_routing_id = 2;
-    protected  $mode = '010';
-
+    protected $sub_project_id = 21;
+    protected $prod_routing_id = 2;
+    protected $mode = '010';
+    protected $tableTrueWidth = true;
 
     public function getSqlStr($modeParams)
     {
@@ -81,16 +81,20 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
                 "align" => "center",
+                'width' => 100
+
             ],
             [
                 "title" => "Prod Order Name",
                 "dataIndex" => "prod_order_name",
                 "align" => "center",
+                'width' => 100
+
             ],
         ];
         // dd($dataColumn);
         unset($dataColumn['wir_description_id'], $dataColumn['wir_description_name']);
-        $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center", "width" => 100], array_keys($dataColumn));
+        $sqlCol =  array_map(fn ($item) => ["dataIndex" => $item, "align" => "center", "width" => 40], array_keys($dataColumn));
         $dataColumn = array_merge($adds, $sqlCol);
         return  $dataColumn;
     }
@@ -105,6 +109,7 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
             [
                 'title' => 'Prod Routing',
                 'dataIndex' => 'prod_routing_id',
+
             ]
         ];
     }
@@ -153,18 +158,22 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
 
         $transformData = array_map(function ($item) use ($entityStatuses) {
             $color = "bg-red-500";
+            $docId = str_pad($item['wir_doc_id'], 4, 0, STR_PAD_LEFT);
+            $icon = "";
             if (isset($entityStatuses[$item['wir_status']])) {
                 $status = $entityStatuses[$item['wir_status']];
                 $bgColor = "bg-{$status['color']}-{$status['color_index']}";
                 $textColor = "text-{$status['color']}-" . (1000 - $status['color_index']);
                 $color = "$bgColor $textColor";
+                if (!is_null($item['wir_doc_id'])) {
+                    $icon = $status['icon'];
+                }
             }
             // dd($item);
-            $docId = str_pad($item['wir_doc_id'], 4, 0, STR_PAD_LEFT);
             // $hrefEdit = route('qaqc_wirs.edit', $item['wir_id']);
             $hrefEdit = is_null($item['wir_id']) ? "" : route('qaqc_wirs.edit', $item['wir_id']);
             $htmlRender = (object)[
-                'value' => $docId,
+                'value' => $icon ?? '<i class="fa-duotone fa-square-question"></i>',
                 'cell_title' => $item['wir_description_name'],
                 'cell_href' => $hrefEdit,
                 'cell_class' => $color,
@@ -182,6 +191,7 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
             $wirDescName =  is_null($item['wir_description_name']) ? [] : [Report::slugName($item['wir_description_name']) => $htmlRender];
             return (array)$item + $wirDescName;
         }, array_values($items));
+        // dd($transformData);
 
         // group by prod_order_id
         $prodGroup = Report::groupArrayByKey($transformData, 'prod_order_id');

@@ -32,7 +32,7 @@
         "title": "Assigned",
         "color": "amber",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-thumbs-up\"><\/i>"
     },
     "cancelled": {
         "name": "cancelled",
@@ -46,7 +46,7 @@
         "title": "Closed",
         "color": "neutral",
         "color_index": "300",
-        "icon": null
+        "icon": "<i class=\"fa-regular fa-screwdriver-wrench\"><\/i>"
     },
     "concept": {
         "name": "concept",

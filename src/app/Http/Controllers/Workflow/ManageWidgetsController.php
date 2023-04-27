@@ -10,20 +10,37 @@ class ManageWidgetsController extends AbstractManageLibController
 
     protected function getColumns()
     {
+        $apps0 = LibApps::getAll();
+        $apps = [
+            [
+                'title' => '',
+                'value' => null,
+            ]
+        ];
+        foreach ($apps0 as $key => $app) {
+            $apps[] = [
+                'title' => $app['title'],
+                'value' => $key,
+            ];
+        }
+        // dump($apps);
         return   [
             [
                 "dataIndex" => "action",
                 "align" => "center",
+                "width" => 10,
             ],
             [
                 'dataIndex' => "name",
                 "renderer"  => 'read-only-text4',
                 'editable' => true,
+                "width" => 100,
             ],
             [
                 'dataIndex' => "hidden",
                 "renderer"  => 'dropdown',
                 'editable' => true,
+                "width" => 100,
             ],
             [
                 'dataIndex' => "chart_type",
@@ -31,38 +48,42 @@ class ManageWidgetsController extends AbstractManageLibController
                 'editable' => true,
                 'cbbDataSource' => ['', 'line', 'bar', 'pie', 'doughnut'],
                 'sortBy' => 'value',
+                "width" => 100,
             ],
             [
                 'dataIndex' => "fn",
                 'renderer' => 'dropdown',
                 'editable' => true,
-                'cbbDataSource' => ['', 'sqlForeignKey'],
+                "width" => 100,
+                'cbbDataSource' => [
+                    '',
+                    'SqlForeignKey',
+                    'SqlTest',
+
+                ],
                 "properties" => ['strFn' => 'same'],
             ],
             [
-                'dataIndex' => "table_a",
-                'renderer' => 'text4',
+                'dataIndex' => "section_title",
+                'renderer' => 'dropdown',
                 'editable' => true,
+                'cbbDataSource' => $apps,
+                'sortBy' => 'title',
+                "width" => 100,
             ],
             [
-                'dataIndex' => "table_b",
-                'renderer' => 'text4',
+                'dataIndex' => "widget_title",
+                'renderer' => 'dropdown',
                 'editable' => true,
+                'cbbDataSource' => $apps,
+                'sortBy' => 'title',
+                "width" => 100,
             ],
             [
-                'dataIndex' => "key_a",
-                'renderer' => 'text4',
+                'dataIndex' => "params",
+                'renderer' => 'textarea4',
                 'editable' => true,
-            ],
-            [
-                'dataIndex' => "key_b",
-                'renderer' => 'text4',
-                'editable' => true,
-            ],
-            [
-                'dataIndex' => "global_filter",
-                'renderer' => 'text4',
-                'editable' => true,
+                "width" => 500,
             ],
         ];
     }

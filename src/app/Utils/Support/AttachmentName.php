@@ -60,7 +60,7 @@ class AttachmentName
         return [$baseName, $maxNumber];
     }
 
-    public static function customizeSlugData($file, $tempMedia)
+    public static function slugifyImageName($file, $tempMedia)
     {
         $fileName =  $file->getClientOriginalName();
         $extensionFile = $file->getClientOriginalExtension();

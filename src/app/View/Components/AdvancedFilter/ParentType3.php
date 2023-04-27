@@ -14,9 +14,9 @@ class ParentType3 extends Component
      * @return void
      */
     public function __construct(
+        private $type,
         private $name = '',
         private $valueSelected = null,
-        private $type,
     ) {
         //
     }

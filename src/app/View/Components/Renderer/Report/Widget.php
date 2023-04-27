@@ -11,8 +11,10 @@ class Widget extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $title = "Untitled",
+        private $figure = "???",
+    ) {
         //
     }
 
@@ -25,6 +27,10 @@ class Widget extends Component
     {
         return view(
             'components.renderer.report.widget',
+            [
+                'title' => $this->title,
+                'figure' => $this->figure,
+            ]
         );
     }
 }

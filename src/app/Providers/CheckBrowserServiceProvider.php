@@ -28,7 +28,7 @@ class CheckBrowserServiceProvider extends ServiceProvider
         $this->registerPolicies();
         $httpBrowser = $_SERVER['HTTP_USER_AGENT'] ?? '';
         if (preg_match('/Edg/i', $httpBrowser)) {
-            abort(403, 'The app doesn\'t support this browser yet');
+            // abort(403, 'The app doesn\'t support this browser yet');
         }
     }
 }

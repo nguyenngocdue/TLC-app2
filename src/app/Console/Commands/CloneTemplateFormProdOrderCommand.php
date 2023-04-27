@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
-use App\Console\Commands\Traits\CloneRunTrait;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_chklst_line;
@@ -14,7 +13,7 @@ use Illuminate\Console\Command;
 
 class CloneTemplateFormProdOrderCommand extends Command
 {
-    use CloneRunTrait;
+    // use CloneRunTrait;
     use TraitEntityFormula;
 
     protected $type;
@@ -33,7 +32,7 @@ class CloneTemplateFormProdOrderCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Create a new Checklist by cloning a template, all subsequence Sheets and Lines';
 
     /**
      * Execute the console command.
@@ -60,13 +59,14 @@ class CloneTemplateFormProdOrderCommand extends Command
             return Command::FAILURE;
         }
         try {
-            $qaqcInspChklst = Qaqc_insp_chklst::create([
+            $insertedItem = $qaqcInspChklst = Qaqc_insp_chklst::create([
                 'prod_order_id' => $prodOrderId,
                 'name' => $prodOrder->name,
                 'slug' => (new All_SlugifyByName())($prodOrder->name, 'qaqc_insp_chklst', ''),
                 'owner_id' => $ownerId,
                 'qaqc_insp_tmpl_id' => $inspTmplId,
             ]);
+            $insertedId = $insertedItem->id;
             $qaqcInspTmplSheets = $qaqcInspTmpl->getSheets;
             if (count($qaqcInspTmplSheets) > 0) {
                 foreach ($qaqcInspTmplSheets as $qaqcInspTmplSheet) {
@@ -91,7 +91,7 @@ class CloneTemplateFormProdOrderCommand extends Command
                     }
                 }
             }
-            $this->info("Created Qaqc_insp_chklst and cloned qaqc_insp_tmpl_sht successfully");
+            $this->info("Created Qaqc_insp_chklst and cloned qaqc_insp_tmpl_sht successfully: #$insertedId (" . $insertedItem->slug . ")");
             return Command::SUCCESS;
         } catch (\Throwable $th) {
 

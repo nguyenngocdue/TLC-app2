@@ -7,6 +7,20 @@ use Illuminate\Support\Str;
 trait TableTraitColumns
 {
     use TableTraitCommon;
+    private function getTableWidth($columns)
+    {
+        $result = 0;
+        foreach ($columns as $column) {
+            if ($this->isInvisible($column)) continue;
+            if (empty($column)) continue;
+            if (isset($column['width']) && $column['width'] != '') {
+                $w = $column['width'];
+                $result += $w;
+            }
+        }
+        return "width:" . $result . "px;";
+    }
+
     private function makeColGroup($columns)
     {
         $result = [];

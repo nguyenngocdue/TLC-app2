@@ -81,43 +81,43 @@ class Prod_sequence_050 extends Report_ParentReportController
             ],
             [
                 "dataIndex" => "total_order",
-                "align" => "center",
+                "align" => "right",
                 "width" => "300",
             ],
             [
                 "title" => "Total UOM",
                 "dataIndex" => "sum_total_uom",
-                "align" => "center",
+                "align" => "right",
                 "width" => "300",
             ],
             [
                 "title" => "Total UoM Man-Hours",
                 "dataIndex" => "total_uom_man_hours_total",
-                "align" => "center",
+                "align" => "right",
                 "width" => "300",
             ],
             [
                 "title" => "Min",
                 "dataIndex" => "total_min",
-                "align" => "center",
+                "align" => "right",
                 "width" => "300",
             ],
             [
                 "title" => "Average Min",
                 "dataIndex" => "total_min_sequence",
-                "align" => "center",
+                "align" => "right",
                 "width" => "300",
             ],
             [
                 "title" => "Average Hours",
                 "dataIndex" => "total_hours_sequence",
-                "align" => "center",
+                "align" => "right",
                 "width" => "300",
             ],
             [
                 "title" => "Average Days",
                 "dataIndex" => "total_day_sequence",
-                "align" => "center",
+                "align" => "right",
                 "width" => "300",
             ]
         ];

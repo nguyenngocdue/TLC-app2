@@ -28,7 +28,7 @@
                 </div>
                 @endif
                 <div class="table-wrp block {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t":"rounded-t-lg"}}">
-                    <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm' style="table-layout: auto">
+                    <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm' style="table-layout: auto; {{$tableWidth}}">
                         <colgroup>
                             {!! $colgroup !!}
                         </colgroup>

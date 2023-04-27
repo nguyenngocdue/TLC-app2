@@ -241,17 +241,4 @@ class ViewAllController extends Controller
             'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
         ]);
     }
-
-
-    public function destroy($id)
-    {
-        // try {
-        //     $model = $this->typeModel;
-        //     $data = App::make($model)->find($id);
-        //     $data->delete();
-        //     return response()->json(['message' => 'Delete Item Successfully'], 200);
-        // } catch (\Throwable $th) {
-        //     return response()->json(['message' => $th], 404);
-        // }
-    }
 }

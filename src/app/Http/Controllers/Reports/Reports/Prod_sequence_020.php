@@ -25,6 +25,7 @@ class Prod_sequence_020 extends Report_ParentReportController
     protected  $prod_routing_id = 6;
 
     protected $rotate45Width = 400;
+    protected $tableTrueWidth = true;
     public function getSqlStr($modeParams)
     {
         $sql = "SELECT 
@@ -57,17 +58,18 @@ class Prod_sequence_020 extends Report_ParentReportController
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
                 "align" => "center",
-                "width" => "500",
+                "width" => 100,
 
             ],
             [
                 "title" => "Prod Name",
                 "dataIndex" => "po_name",
                 "align" => "center",
-                "width" => "500",
+                "width" => 100,
             ]
         ];
-        $sqlDataCol = $this->createTableColumns($dataSource, 'total_man_hours');
+        $sqlDataCol = $this->createTableColumns($dataSource, 'total_man_hours', [], 'right', 50);
+
         return  array_merge($firstCols, $sqlDataCol);
     }
 
