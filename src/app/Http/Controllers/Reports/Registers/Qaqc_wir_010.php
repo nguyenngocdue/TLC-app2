@@ -81,14 +81,14 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
                 "align" => "center",
-                'width' => 150
+                'width' => 100
 
             ],
             [
                 "title" => "Prod Order Name",
                 "dataIndex" => "prod_order_name",
                 "align" => "center",
-                'width' => 150
+                'width' => 100
 
             ],
         ];

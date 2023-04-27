@@ -15,6 +15,8 @@ class Prod_order_010 extends Report_ParentReportController
     use TraitForwardModeReport;
 
     protected  $sub_project_id = 21;
+    protected $maxH = 50;
+
     public function getSqlStr($modeParams)
     {
         // Log::info($modeParams);

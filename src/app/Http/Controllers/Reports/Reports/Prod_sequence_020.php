@@ -58,14 +58,14 @@ class Prod_sequence_020 extends Report_ParentReportController
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
                 "align" => "center",
-                "width" => 150,
+                "width" => 100,
 
             ],
             [
                 "title" => "Prod Name",
                 "dataIndex" => "po_name",
                 "align" => "center",
-                "width" => 150,
+                "width" => 100,
             ]
         ];
         $sqlDataCol = $this->createTableColumns($dataSource, 'total_man_hours', [], 'right', 50);
