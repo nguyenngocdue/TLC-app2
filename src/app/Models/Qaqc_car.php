@@ -19,6 +19,10 @@ class Qaqc_car extends ModelExtended
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
     ];
 
+    public $oracyParams = [
+        "getMonitors1()" => ["getCheckedByField", User::class],
+    ];
+
     public function getQaqcNcr()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -35,6 +39,12 @@ class Qaqc_car extends ModelExtended
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getMonitors1()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
     public function getManyLineParams()

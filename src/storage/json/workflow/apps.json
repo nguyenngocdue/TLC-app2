@@ -98,7 +98,8 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "icon": null,
-        "apply_approval_tree": "true"
+        "apply_approval_tree": "true",
+        "show_in_my_view": "true"
     },
     "hr_overtime_request_line": {
         "name": "hr_overtime_request_line",
@@ -124,7 +125,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": null,
+        "show_in_my_view": "true"
     },
     "hse_incident_report": {
         "name": "hse_incident_report",
@@ -136,7 +138,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": null,
+        "show_in_my_view": "true"
     },
     "manageAppCreations": {
         "name": "manageAppCreations",
@@ -440,7 +443,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": null,
+        "show_in_my_view": "true"
     },
     "qaqc_insp_chklst": {
         "name": "qaqc_insp_chklst",
@@ -579,7 +583,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": null,
+        "show_in_my_view": "true"
     },
     "qaqc_ncr": {
         "name": "qaqc_ncr",
@@ -592,6 +597,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "icon": null,
+        "show_in_my_view": "true",
         "disallowed_direct_creation": "true"
     },
     "qaqc_wir": {
@@ -605,6 +611,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "icon": null,
+        "show_in_my_view": "true",
         "disallowed_direct_creation": "true"
     },
     "reportIndex": {
