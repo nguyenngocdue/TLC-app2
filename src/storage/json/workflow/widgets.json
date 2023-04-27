@@ -1,4 +1,13 @@
 {
+    "chklst_sht_01": {
+        "name": "chklst_sht_01",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": "SqlProgress",
+        "section_title": "prod_order",
+        "widget_title": "erp_routing_link",
+        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_b\":\"prod_orders\", \"key_b\":\"sub_project_id\", \"att_metric_name\" :\"status\",\"global_filter\":\"a.id = 21\" }"
+    },
     "production_order_01": {
         "name": "production_order_01",
         "hidden": null,

@@ -8,7 +8,7 @@ class SqlStatus
 {
     public function __invoke($params)
     {
-        dump($params);
+        // dump($params);
         $table_a = $params['table_a'];
         $table_b = $params['table_b'] ?? null;
         $key_a = $params['key_a'] ?? null;
@@ -32,7 +32,7 @@ class SqlStatus
                             $f1
                         GROUP BY metric_name
                         ORDER BY metric_count DESC";
-        dump($sql);
+        // dump($sql);
         return $sql;
     }
 }
