@@ -215,7 +215,10 @@ class ViewAllController extends Controller
 
     public function index(Request $request)
     {
-        // dd($request->input());
+        $basicFilter = $request->input('basic_filter');
+        if ($basicFilter || !empty($basicFilter)) {
+            (new UpdateUserSettings())($request);
+        }
         if (!$request->input('page') && !empty($request->input())) {
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
