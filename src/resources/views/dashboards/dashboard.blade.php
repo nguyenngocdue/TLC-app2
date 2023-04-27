@@ -6,8 +6,11 @@
 @section('content')
 
 <div class="px-4">
-    {{-- <x-dashboards.my-view-groups /> --}}
+    <x-elapse />
+    <x-dashboards.my-view-groups />
     <x-dashboards.widget-groups />
+    <x-elapse />
+    <x-elapse total=1/>
 </div>
 
 @endsection
