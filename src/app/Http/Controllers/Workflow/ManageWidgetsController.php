@@ -59,6 +59,7 @@ class ManageWidgetsController extends AbstractManageLibController
                     '',
                     'SqlForeignKey',
                     'SqlTest',
+                    'SqlStatus',
 
                 ],
                 "properties" => ['strFn' => 'same'],

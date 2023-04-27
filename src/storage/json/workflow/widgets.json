@@ -1,30 +1,39 @@
 {
-    "prod_8": {
-        "name": "prod_8",
+    "production_order_01": {
+        "name": "production_order_01",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlForeignKey",
+        "fn": "SqlStatus",
+        "section_title": "prod_order",
+        "widget_title": "qaqc_insp_chklst",
+        "params": "{\"table_a\":\"prod_orders\", \"att_metric_name\":\"status\"}"
+    },
+    "qaqc_wirs_01": {
+        "name": "qaqc_wirs_01",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": "SqlStatus",
+        "section_title": "prod_order",
+        "widget_title": "wir_description",
+        "params": "{\"table_a\":\"qaqc_wirs\", \"att_metric_name\":\"status\"}"
+    },
+    "subProject_Order_01": {
+        "name": "subProject_Order_01",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": "SqlStatus",
         "section_title": "prod_order",
         "widget_title": "sub_project",
-        "params": "{\"table_a\":\"prod_orders\", \"table_b\":\"sub_projects\", \"key_a\":\"sub_project_id\", \"key_b\":\"id\"}"
+        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_b\":\"prod_orders\", \"key_b\":\"sub_project_id\", \"att_metric_name\" :\"status\",\"global_filter\":\"a.id = 21\" }"
     },
-    "prod_9": {
-        "name": "prod_9",
+    "subProject_Order_02": {
+        "name": "subProject_Order_02",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlForeignKey",
+        "fn": "SqlStatus",
         "section_title": "prod_order",
-        "widget_title": "prod_routing_detail",
-        "params": "{\"table_a\":\"prod_orders\", \"table_b\":\"prod_routings\", \"key_a\":\"prod_routing_id\", \"key_b\":\"id\"}"
-    },
-    "qaqc_1": {
-        "name": "qaqc_1",
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlTest",
-        "section_title": "qaqc_insp_chklst",
-        "widget_title": "qaqc_insp_tmpl",
-        "params": "{\"table_a\":\"qaqc_insp_chklsts\", \"table_b\":\"qaqc_insp_tmpls\", \"key_a\":\"qaqc_insp_tmpl_id\", \"key_b\":\"id\"}"
+        "widget_title": "project",
+        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_b\":\"prod_orders\", \"key_b\":\"sub_project_id\", \"att_metric_name\" :\"status\",\"global_filter\":\"a.id = 82\" }"
     },
     "users_1": {
         "name": "users_1",
