@@ -36,7 +36,6 @@ class Dropdown2 extends Component
         $name = $this->multiple ? $this->name . "[]" : $this->name;
 
         $nameless = (new (Str::modelPathFrom($table)))->nameless;
-
         $params = [
             'name' => $name,
             'id' => $id,

@@ -223,7 +223,7 @@ class ViewAllController extends Controller
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
         }
-        [$perPage, $columnLimit, $advanceFilters] = $this->getUserSettings();
+        [$perPage, $columnLimit, $advanceFilters, $currentFilter] = $this->getUserSettings();
         // Log::info($columnLimit);
         $type = Str::plural($this->type);
         $columns = $this->getColumns($type, $columnLimit);
@@ -238,6 +238,7 @@ class ViewAllController extends Controller
             'type' => $type,
             'columns' => $columns,
             'dataSource' => $dataSource,
+            'currentFilter' => $currentFilter,
             'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
         ]);
     }

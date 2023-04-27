@@ -165,6 +165,12 @@ return [
         /*
          * Package Service Providers...
          */
+        L5Swagger\L5SwaggerServiceProvider::class,
+        Ndc\SpatieCustom\RoleServiceProvider::class,
+        Ndc\SpatieCustom\PermissionServiceProvider::class,
+        Brian2694\Toastr\ToastrServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        // Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -182,11 +188,6 @@ return [
         App\Providers\CurrentUserFacadeProvider::class,
         App\Providers\PermissionEditServiceProvider::class,
         App\Providers\PermissionDeleteServiceProvider::class,
-        Brian2694\Toastr\ToastrServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        // Spatie\Permission\PermissionServiceProvider::class,
-        Ndc\SpatieCustom\RoleServiceProvider::class,
-        Ndc\SpatieCustom\PermissionServiceProvider::class,
         App\Providers\MigrationsServiceProvider::class,
     ],
 

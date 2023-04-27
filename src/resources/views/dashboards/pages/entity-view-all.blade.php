@@ -14,7 +14,7 @@
             {{-- <x-form.per-page type="{{$type}}" route="{{ route('updateUserSettings') }}" perPage="{{$perPage}}" /> --}}
         {{-- </div> --}}
     </div>
-    <x-renderer.advanced-filter :type="$type" :valueAdvanceFilters="$valueAdvanceFilters"/>
+    <x-renderer.advanced-filter currentFilter="{{$currentFilter}}" :type="$type" :valueAdvanceFilters="$valueAdvanceFilters"/>
     <x-elapse />
     @php 
     $abt = "<x-form.action-button-group type='$type' />"; 

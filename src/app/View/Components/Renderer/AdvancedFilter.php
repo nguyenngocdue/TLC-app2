@@ -14,8 +14,11 @@ class AdvancedFilter extends Component
      *
      * @return void
      */
-    public function __construct(private $type = "", private $valueAdvanceFilters = null)
-    {
+    public function __construct(
+        private $type = "",
+        private $valueAdvanceFilters = null,
+        private $currentFilter = null
+    ) {
         //
     }
 
@@ -35,6 +38,7 @@ class AdvancedFilter extends Component
             'type' => $this->type,
             'props' => $propsFilters,
             'valueAdvanceFilters' => $this->valueAdvanceFilters,
+            'currentFilter' => $this->currentFilter,
         ]);
     }
 }
