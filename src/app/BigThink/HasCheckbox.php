@@ -12,11 +12,47 @@ use Illuminate\Support\Facades\Log;
 
 trait HasCheckbox
 {
+    static $fieldDB = null;
+    static function getFieldDb()
+    {
+        if (is_null(static::$fieldDB)) {
+            static::$fieldDB = Field::all();
+        }
+        return static::$fieldDB;
+    }
+
+    static $fieldCache = [];
+    static function getFieldBy($key0, $value)
+    {
+        $db = static::getFieldDb();
+        $key = "{$key0}_{$value}";
+        if (!isset(static::$fieldCache[$key])) {
+            foreach ($db as $line) {
+                if ($line->{$key0} == $value) {
+                    // dump($line);
+                    static::$fieldCache[$key] = $line;
+                    break;
+                }
+            }
+        }
+        return static::$fieldCache[$key] ?? null;
+    }
+
+
     function guessFieldId($fieldNameOrId)
     {
         if (is_numeric($fieldNameOrId)) return [$fieldNameOrId, false];
-        $fieldId = Field::where('name', $fieldNameOrId)->first();
-        $fieldIdReversed = Field::where('reversed_name', $fieldNameOrId)->first();
+        // dump(static::getFieldDb());
+        // dump(static::getFieldBy("name", 'getMonitors1'));
+        //156 query, 860ms (20/page)
+        //721 query, 5662ms (100/page)
+        // $fieldId = Field::where('name', $fieldNameOrId)->first();
+        // $fieldIdReversed = Field::where('reversed_name', $fieldNameOrId)->first();
+        //117 query, 780ms (20/page)
+        //522 query, 4096ms (100/page)
+        $fieldId = static::getFieldBy('name', $fieldNameOrId);
+        $fieldIdReversed = static::getFieldBy('reversed_name', $fieldNameOrId);
+
         // dump($fieldId, $fieldIdReversed);
         if ($fieldId) return [$fieldId->id, false];
         if ($fieldIdReversed) return [$fieldIdReversed->id, true];

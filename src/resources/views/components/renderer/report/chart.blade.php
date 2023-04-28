@@ -44,24 +44,24 @@ var c = {}
           text: 'Chart.js Doughnut Chart'
         }
       },
-      onHover: (event ,elements) =>{
-        if(elements.length == 1){
-          event.native.target.style.cursor = 'pointer';
-        }
-        if(elements.length == 0){
-          event.native.target.style.cursor = 'default';
-        }
+      // onHover: (event ,elements) =>{
+      //   if(elements.length == 1){
+      //     event.native.target.style.cursor = 'pointer';
+      //   }
+      //   if(elements.length == 0){
+      //     event.native.target.style.cursor = 'default';
+      //   }
 
-      },
-      onClick:  (event ,elements) => {
-        if (elements.length) {
-          var element = elements[0];
-          var index = element.index;
-          var datasetIndex = element.datasetIndex; 
-          var hrefRedirect = c['{{$key}}']['config'].data.datasets[datasetIndex].custom.extraData[index];
-          window.open(hrefRedirect);
-        }
-      }
+      // },
+      // onClick:  (event ,elements) => {
+      //   if (elements.length) {
+      //     var element = elements[0];
+      //     var index = element.index;
+      //     var datasetIndex = element.datasetIndex; 
+      //     var hrefRedirect = c['{{$key}}']['config'].data.datasets[datasetIndex].custom.extraData[index];
+      //     window.open(hrefRedirect);
+      //   }
+      // }
     },
   };
   
