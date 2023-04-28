@@ -123,7 +123,7 @@
         "fn": "SqlStatus",
         "section_title": "qaqc_insp_control_group",
         "widget_title": "by Discipline (N17)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"prod_discipline_id\", \"table_b\":\"terms\", \"key_b\":\"id\" , \"sub_project_id\":21, \"att_metric_name\":\"name\"}"
+        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"prod_discipline_id\", \"table_b\":\"prod_disciplines\", \"key_b\":\"id\" , \"sub_project_id\":21, \"att_metric_name\":\"name\"}"
     },
     "qaqc_ncr_04": {
         "name": "qaqc_ncr_04",
@@ -132,7 +132,7 @@
         "fn": "SqlStatus",
         "section_title": "qaqc_insp_control_group",
         "widget_title": "by Discipline (N18)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"prod_discipline_id\", \"table_b\":\"terms\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
+        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"prod_discipline_id\", \"table_b\":\"prod_disciplines\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
     },
     "qaqc_ncr_05": {
         "name": "qaqc_ncr_05",
@@ -177,7 +177,7 @@
         "fn": "SqlStatus",
         "section_title": "qaqc_insp_control_group",
         "widget_title": "by Assignee (N17)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"terms\", \"key_b\":\"id\" , \"sub_project_id\":21, \"att_metric_name\":\"name\"}"
+        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":21, \"att_metric_name\":\"name\"}"
     },
     "qaqc_ncr_10": {
         "name": "qaqc_ncr_10",
@@ -186,7 +186,7 @@
         "fn": "SqlStatus",
         "section_title": "qaqc_insp_control_group",
         "widget_title": "by Assignee (N18)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"terms\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
+        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
     },
     "qaqc_wir_01": {
         "name": "qaqc_wir_01",
@@ -195,7 +195,7 @@
         "fn": "SqlStatus",
         "section_title": "wir_description",
         "widget_title": "by Assignee (N17)",
-        "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"terms\", \"key_b\":\"id\" , \"sub_project_id\":21, \"att_metric_name\":\"name\"}"
+        "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":21, \"att_metric_name\":\"name\"}"
     },
     "qaqc_wir_02": {
         "name": "qaqc_wir_02",
@@ -204,7 +204,7 @@
         "fn": "SqlStatus",
         "section_title": "wir_description",
         "widget_title": "by Assignee (N18)",
-        "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"terms\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
+        "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
     },
     "qaqc_wir_03": {
         "name": "qaqc_wir_03",
