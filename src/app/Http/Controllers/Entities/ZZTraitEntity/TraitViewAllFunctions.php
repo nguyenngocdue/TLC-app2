@@ -7,6 +7,7 @@ use App\Providers\Support\TraitSupportPermissionGate;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait TraitViewAllFunctions
@@ -34,24 +35,33 @@ trait TraitViewAllFunctions
         $advanceFilters = $this->distributeFilter($advanceFilters, $propsFilters);
         $model = $this->typeModel;
         $search = request('search');
-        $relation = App::make($model)::search($search);
+        $instance = App::make($model);
+        $eloquentParams = $instance->eloquentParams;
+        $eagerLoadParams = array_keys(array_filter($eloquentParams, fn ($item) => in_array($item[0], ['belongsTo', 'hasMany'])));
+        $relation = $instance->search($search);
+
         if (!CurrentUser::isAdmin()) {
             $isUseTree = $this->isUseTree($this->type);
             if ($isUseTree) {
                 $ids = $this->getListOwnerIds(auth()->user());
                 $result = $relation
-                    ->query(function ($q) use ($ids, $advanceFilters, $propsFilters) {
+                    ->query(function ($q) use ($ids, $advanceFilters, $propsFilters, $eagerLoadParams) {
                         $q->whereIn('owner_id', $ids);
                         $this->queryAdvancedFilter($q, $advanceFilters, $propsFilters);
-                        return $q->orderBy('updated_at', 'desc');
+                        return $q
+                            ->with($eagerLoadParams)
+                            ->orderBy('updated_at', 'desc');
                     });
                 return $result;
             }
         }
         $result = $relation
-            ->query(function ($q) use ($advanceFilters, $propsFilters) {
+            ->query(function ($q) use ($advanceFilters, $propsFilters, $eagerLoadParams) {
                 $this->queryAdvancedFilter($q, $advanceFilters, $propsFilters);
-                return $q->orderBy('updated_at', 'desc');
+
+                return $q
+                    ->with($eagerLoadParams)
+                    ->orderBy('updated_at', 'desc');
             });
         return $result;
     }

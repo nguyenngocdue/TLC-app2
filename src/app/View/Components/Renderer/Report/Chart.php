@@ -34,7 +34,7 @@ class Chart extends Component
         $result = [];
         foreach ($metric as $value) {
             $type = $widgetParams['table_a'];
-            $filed = $widgetParams['key_a'];
+            $filed = $widgetParams['key_a'] ?? null;
             $routeDefault = route($type . '.index');
             $href = $routeDefault . '?_entity=' . $type . '&' . $filed . '%5B%5D=' . $value->metric_id . '&action=updateAdvanceFilter';
             $result[] = $href;

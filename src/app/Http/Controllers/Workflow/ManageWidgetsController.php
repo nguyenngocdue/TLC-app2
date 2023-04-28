@@ -58,7 +58,10 @@ class ManageWidgetsController extends AbstractManageLibController
                 'cbbDataSource' => [
                     '',
                     'SqlForeignKey',
+                    'SqlForeignKey_Routing',
                     'SqlTest',
+                    'SqlStatus',
+                    'SqlProgress',
 
                 ],
                 "properties" => ['strFn' => 'same'],
@@ -73,11 +76,9 @@ class ManageWidgetsController extends AbstractManageLibController
             ],
             [
                 'dataIndex' => "widget_title",
-                'renderer' => 'dropdown',
+                'renderer' => 'text4',
                 'editable' => true,
-                'cbbDataSource' => $apps,
-                'sortBy' => 'title',
-                "width" => 100,
+                "width" => 250,
             ],
             [
                 'dataIndex' => "params",

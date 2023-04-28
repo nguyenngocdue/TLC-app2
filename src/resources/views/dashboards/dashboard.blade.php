@@ -9,6 +9,8 @@
     <x-dashboards.bookmark-group />
     {{-- <x-dashboards.my-view-groups /> --}}
     <x-dashboards.widget-groups />
+    <x-elapse />
+    <x-elapse total=1/>
 </div>
 
 @endsection

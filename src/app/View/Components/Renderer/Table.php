@@ -28,6 +28,7 @@ class Table extends Component
     private $header = "",
     private $footer = "",
     private $maxH = 40,
+    // private $minH = 40,
     //Editable MODE
     private $model = null,
     // private $editable = false,
@@ -78,6 +79,7 @@ class Table extends Component
       'colgroup' => $this->makeColGroup($columns),
       'tableWidth' => $this->tableTrueWidth ? $this->getTableWidth($columns) : "",
       'maxH' => $this->maxH ? "max-h-[{$this->maxH}rem]" : "",
+      // 'minH' => $this->minH ? "min-h-[{$this->minH}rem]" : "",
       'tableDebug' => $this->tableDebug,
       'trClassList' => 'border-b bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
       'noCss' => $this->noCss,

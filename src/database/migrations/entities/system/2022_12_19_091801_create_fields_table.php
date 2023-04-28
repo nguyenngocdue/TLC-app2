@@ -16,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('fields', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->text('reversed_name')->nullable();
+            $table->string('name');
+            $table->string('reversed_name')->nullable();
             $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

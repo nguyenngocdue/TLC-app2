@@ -1,0 +1,77 @@
+HasCheckbox 
+Cache table Field to ram by singleton:
+    HR_OTR
+        Before:
+            156 query, 1500ms (20/page)
+            721 query, 8039ms (100/page)
+        After:
+            117 query, 1427ms (20/page)     + 4.89% Faster
+            522 query, 7350ms (100/page)    + 8.57% Faster
+Index pair of column (doc_type + doc_id) / (term_type + term_id)
+    HR_OTR
+        Before:
+            156 query, 1552ms (20/page)
+            721 query, 8838ms (100/page)
+        After:
+            158 query, 846ms (20/page)      + 45.49% Faster
+            721 query, 4605ms (100/page)    + 47.90% Faster
+
+Eager load in Model:
+    HR_OTR ('getWorkplace', 'getAssignee1', 'getHrOtLines', 'getOwnerId')
+        Before:
+            156 query, 1545ms (20/page)
+            723 query, 7773ms (100/page)
+        After:
+            86 query, 1326ms (20/page)      + 14.17% Faster
+            329 query, 6589ms (100/page)    + 15.23% Faster
+
+Eager load in ViewAll getDataSource:
+    HR_OTR ('getWorkplace', 'getAssignee1', 'getHrOtLines', 'getOwnerId')
+        Before:
+            156 query, 1545ms (20/page)
+            723 query, 7773ms (100/page)
+        After:
+            80 query, 1307ms (20/page)      + 15.40% Faster
+            329 query, 6627ms (100/page)    + 14.74% Faster
+    NCR 
+        Before:
+            221 query, 1228ms (20/page)
+            1010 query, 9529ms (100/page)
+        After:(belongsTo, hasMany)
+            81 query, 1107ms (20/page)      + 9.85% Faster
+            329 query, 6591ms (100/page)    + 30.83% Faster
+        After:(belongsTo)
+            78 query, 900ms (20/page)      + 26.7% Faster
+            206 query, 4886ms (100/page)    + 48.7% Faster
+
+StrDB Cache Project and sub project to ram:
+    NCR:
+        Before:
+            221 query, 1228ms (20/page)
+            1010 query, 9529ms (100/page)
+        After:
+            202 query, 1174ms (20/page)      + 4.40% Faster
+            911 query, 7032ms (100/page)    + 26.20% Faster
+
+TraitTableRows:
+Cache eloquent to ram by singleton:
+    $rawData = $dataLineObj->$dataIndex ?? "";
+    to
+    $rawData = static::getEloquent($dataLineObj, $dataIndex);
+    ==> Does not work, same latency
+
+Applying 4 optimizations:
+    HR_OTR
+        Before:
+            156 query, 1545ms (20/page)
+            723 query, 7773ms (100/page)
+        After:
+            62 query, 736ms (20/page)      + 52.36% Faster
+            227 query, 4411ms (100/page)    + 43.25% Faster
+    NCR:
+        Before:
+            60 query, 1006ms (20/page)
+            1010 query, 9529ms (100/page)
+        After:
+            59 query, 924ms (20/page)     + 8.15% Faster
+            107 query, 4355ms (100/page)    + 54.29% Faster

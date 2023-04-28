@@ -20,7 +20,7 @@ class WidgetGroups extends Component
         //
     }
 
-    private function a(&$widget)
+    private function makeDataSource(&$widget)
     {
         $widget['params'] = (array) json_decode($widget['params']);
         $fn = $widget['fn'];
@@ -28,14 +28,17 @@ class WidgetGroups extends Component
         $model_a = DBTable::fromNameToModel($table_a);
         $meta_and_metric = $model_a->getMetaForChart($fn, $widget, $widget['params']);
         $app = LibApps::getAll();
-        return [
+        $result = [
             "title_a" => $app[$widget["section_title"]]['title'],
-            "title_b" => $app[$widget["widget_title"]]['title'],
+            "title_b" => $widget["widget_title"],
+            // "title_b" => $app[$widget["widget_title"]]['title'],
             "meta" => $meta_and_metric['meta'],
             "metric" => $meta_and_metric['metric'],
             "chartType" => $meta_and_metric['chartType'],
             "hidden" => $meta_and_metric['hidden'],
         ];
+        // dump($result);
+        return $result;
     }
 
     /**
@@ -46,7 +49,7 @@ class WidgetGroups extends Component
     public function render()
     {
         $allWidgets = LibWidgets::getAll();
-        $allWidgets = array_map(fn ($widget) => array_merge($this->a($widget), $widget), $allWidgets);
+        $allWidgets = array_map(fn ($widget) => array_merge($this->makeDataSource($widget), $widget), $allWidgets);
         $allWidgets = array_filter($allWidgets, fn ($widget) => !$widget['hidden']);
         // dump($allWidgets);
         $allWidgetGroups = Arr::groupByToChildren($allWidgets, 'title_a');

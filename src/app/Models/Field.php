@@ -6,9 +6,8 @@ use App\BigThink\ModelExtended;
 
 class Field extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'description', 'slug'];
+    protected $fillable = ['id', 'name', 'reversed_name', 'description', 'slug'];
     protected $table = "fields";
 
     public $eloquentParams = [];
-
 }
