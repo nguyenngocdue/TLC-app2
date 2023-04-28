@@ -22,9 +22,10 @@ class SqlForeignKey
             WHERE 1=1
                 AND $global_filter
                 AND b.$key_b=a.$key_a
-            GROUP BY $key_a
+            GROUP BY metric_name, metric_id
             ORDER BY metric_count DESC
             ";
+        // dd($sql);
         return $sql;
     }
 }
