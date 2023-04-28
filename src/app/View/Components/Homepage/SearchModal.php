@@ -27,10 +27,11 @@ class SearchModal extends Component
      */
     public function render()
     {
-        $allApps = LibApps::getAll();
+        $allApps = LibApps::getAllShowBookmark();
         return view('components.homepage.search-modal', [
             'allApps' => array_values($allApps),
-            'currentUserIsAdmin' => CurrentUser::isAdmin()
+            'currentUserIsAdmin' => CurrentUser::isAdmin(),
+            'route' => route('updateBookmark')
         ]);;
     }
 }

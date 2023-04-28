@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Workflow;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -19,6 +20,20 @@ class LibApps extends AbstractLib
             $app['href'] = Route::has($route) ? route($route) /*. "#Found:" . $route*/ : "#RouteNotFound:$route";
         }
         return $result;
+    }
+
+    public static function getAllShowBookmark()
+    {
+        $allApps = static::getAll();
+        $bookmarkSettings = CurrentUser::bookmark();
+        array_walk($allApps, function (&$value, $key) use ($bookmarkSettings) {
+            if (in_array($key, $bookmarkSettings)) {
+                $value['bookmark'] = true;
+            } else {
+                $value['bookmark'] = false;
+            }
+        });
+        return $allApps;
     }
 
     public static function getFor($entityType)

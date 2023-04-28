@@ -6,6 +6,7 @@
 @section('content')
 
 <div class="px-4">
+    <x-dashboards.bookmark-group />
     {{-- <x-dashboards.my-view-groups /> --}}
     <x-dashboards.widget-groups />
 </div>
