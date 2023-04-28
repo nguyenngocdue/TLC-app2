@@ -37,7 +37,7 @@ trait TraitViewAllFunctions
         $search = request('search');
         $instance = App::make($model);
         $eloquentParams = $instance->eloquentParams;
-        $eagerLoadParams = array_keys(array_filter($eloquentParams, fn ($item) => in_array($item[0], ['belongsTo', 'has_Many'])));
+        $eagerLoadParams = array_keys(array_filter($eloquentParams, fn ($item) => in_array($item[0], ['belongsTo', 'hasMany'])));
         $relation = $instance->search($search);
 
         if (!CurrentUser::isAdmin()) {
