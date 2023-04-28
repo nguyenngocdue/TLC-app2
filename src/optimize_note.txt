@@ -1,0 +1,17 @@
+HasCheckbox 
+Cache table Field to ram by singleton:
+    HR_OTR
+        Before:
+            156 query, 860ms (20/page)
+            721 query, 5662ms (100/page)
+        After:
+            117 query, 780ms (20/page)      + 9.30% Faster
+            522 query, 4096ms (100/page)    + 2.77% Faster
+Index pair of column (doc_type + doc_id) / (term_type + term_id)
+    HR_OTR
+        Before:
+            117 query, 1744ms (20/page)
+            522 query, 7661ms (100/page)
+        After:
+            117 query, 833ms (20/page)      + 52.24% Faster
+            522 query, 4229ms (100/page)    + 44.89% Faster
