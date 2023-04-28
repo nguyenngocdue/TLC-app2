@@ -2,10 +2,20 @@
 
 namespace App\View\Components\AdvancedFilter;
 
+use App\Models\User;
 use Illuminate\View\Component;
 
 class Dropdown3 extends Component
 {
+    static $singleton = null;
+    static function singletonCache()
+    {
+        if (is_null(static::$singleton)) {
+            static::$singleton = User::all();
+        }
+        return static::$singleton;
+    }
+
     /**
      * Create a new component instance.
      *
@@ -43,14 +53,18 @@ class Dropdown3 extends Component
                     $arrayQuery[$value] = $filterValues[$key];
                 }
             }
-            $dataSource = (new $params[1])::where(function ($q) use ($arrayQuery) {
+            $dataSource = ($params[1])::where(function ($q) use ($arrayQuery) {
                 foreach ($arrayQuery as $key => $value) {
                     is_array($value) ? $q->whereIn($key, $value) : $q->where($key, $value);
                 }
                 return $q;
             })->get();
         } else {
-            $dataSource = (new $params[1])::all();
+            if ($params[1] == 'App\Models\User') {
+                $dataSource = static::singletonCache();
+            } else {
+                $dataSource = ($params[1])::all();
+            }
         }
         return view('components.advanced-filter.dropdown3', [
             'dataSource' => $dataSource,
