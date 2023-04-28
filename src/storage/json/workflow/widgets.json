@@ -221,15 +221,6 @@
         "chart_type": "doughnut",
         "fn": "SqlStatus",
         "section_title": "wir_description",
-        "widget_title": "by Status (N17)",
-        "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"sub_project_id\":21, \"att_metric_name\":\"status\"}"
-    },
-    "qaqc_wir_05": {
-        "name": "qaqc_wir_05",
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "wir_description",
         "widget_title": "by Status (N18)",
         "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"sub_project_id\":82, \"att_metric_name\":\"status\"}"
     },
