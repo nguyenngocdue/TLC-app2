@@ -53,6 +53,15 @@
         "widget_title": "by Progress of Checklist (Shipping Delivery Checksheet for Container - N18)",
         "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_c\":\"qaqc_insp_chklsts\", \"key_c\":\"prod_order_id\" , \"sub_project_id\":82, \"qaqc_insp_tmpl_id\" : 3}"
     },
+    "prod_order_00": {
+        "name": "prod_order_00",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": "SqlStatus",
+        "section_title": "prod_order",
+        "widget_title": "by Status (All Project)",
+        "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"att_metric_name\":\"status\"}"
+    },
     "prod_order_01": {
         "name": "prod_order_01",
         "hidden": null,
@@ -89,21 +98,12 @@
         "widget_title": "by Routing (N18)",
         "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"prod_routing_id\", \"table_b\":\"prod_routings\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
     },
-    "prod_order_05": {
-        "name": "prod_order_05",
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "prod_order",
-        "widget_title": "by Status (All Project)",
-        "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"att_metric_name\":\"status\"}"
-    },
     "qaqc_ncr_01": {
         "name": "qaqc_ncr_01",
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "qaqc_insp_control_group",
+        "section_title": "qaqc_ncr",
         "widget_title": "by Report Type (N17)",
         "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"defect_report_type\", \"table_b\":\"terms\", \"key_b\":\"id\" , \"sub_project_id\":21, \"att_metric_name\":\"name\"}"
     },
@@ -112,7 +112,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "qaqc_insp_control_group",
+        "section_title": "qaqc_ncr",
         "widget_title": "by Report Type (N18)",
         "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"defect_report_type\", \"table_b\":\"terms\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
     },
@@ -121,7 +121,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "qaqc_insp_control_group",
+        "section_title": "qaqc_ncr",
         "widget_title": "by Discipline (N17)",
         "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"prod_discipline_id\", \"table_b\":\"prod_disciplines\", \"key_b\":\"id\" , \"sub_project_id\":21, \"att_metric_name\":\"name\"}"
     },
@@ -130,7 +130,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "qaqc_insp_control_group",
+        "section_title": "qaqc_ncr",
         "widget_title": "by Discipline (N18)",
         "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"prod_discipline_id\", \"table_b\":\"prod_disciplines\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
     },
@@ -139,7 +139,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "qaqc_insp_control_group",
+        "section_title": "qaqc_ncr",
         "widget_title": "by Status (N17)",
         "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"sub_project_id\":21, \"att_metric_name\":\"status\"}"
     },
@@ -148,7 +148,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "qaqc_insp_control_group",
+        "section_title": "qaqc_ncr",
         "widget_title": "by Status (N18)",
         "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"sub_project_id\":82, \"att_metric_name\":\"status\"}"
     },
@@ -157,7 +157,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "qaqc_insp_control_group",
+        "section_title": "qaqc_ncr",
         "widget_title": "by Owner ID (N17)",
         "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"owner_id\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":21, \"att_metric_name\":\"name\", \"global_filter\":\"b.resigned != true\"}"
     },
@@ -166,7 +166,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "qaqc_insp_control_group",
+        "section_title": "qaqc_ncr",
         "widget_title": "by Owner ID (N18)",
         "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"owner_id\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\", \"global_filter\":\"b.resigned != true\"}"
     },
@@ -175,7 +175,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "qaqc_insp_control_group",
+        "section_title": "qaqc_ncr",
         "widget_title": "by Assignee (N17)",
         "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":21, \"att_metric_name\":\"name\"}"
     },
@@ -184,7 +184,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "qaqc_insp_control_group",
+        "section_title": "qaqc_ncr",
         "widget_title": "by Assignee (N18)",
         "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
     },
@@ -193,7 +193,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "wir_description",
+        "section_title": "qaqc_wir",
         "widget_title": "by Assignee (N17)",
         "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":21, \"att_metric_name\":\"name\"}"
     },
@@ -202,7 +202,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "wir_description",
+        "section_title": "qaqc_wir",
         "widget_title": "by Assignee (N18)",
         "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
     },
@@ -211,7 +211,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "wir_description",
+        "section_title": "qaqc_wir",
         "widget_title": "by Status (N17)",
         "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"sub_project_id\":21, \"att_metric_name\":\"status\"}"
     },
@@ -220,7 +220,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlStatus",
-        "section_title": "wir_description",
+        "section_title": "qaqc_wir",
         "widget_title": "by Status (N18)",
         "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"sub_project_id\":82, \"att_metric_name\":\"status\"}"
     },
@@ -253,7 +253,7 @@
     },
     "users_4": {
         "name": "users_4",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "doughnut",
         "fn": "SqlForeignKey",
         "section_title": "user",
@@ -262,7 +262,7 @@
     },
     "users_5": {
         "name": "users_5",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "doughnut",
         "fn": "SqlForeignKey",
         "section_title": "user",
@@ -271,7 +271,7 @@
     },
     "users_6": {
         "name": "users_6",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "doughnut",
         "fn": "SqlForeignKey",
         "section_title": "user",
