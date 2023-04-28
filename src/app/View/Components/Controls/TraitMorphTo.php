@@ -34,9 +34,13 @@ trait TraitMorphTo
             $modelPath = Str::modelPathFrom($entity);
             $dummy = new ($modelPath);
             // dump($modelPath);
-            foreach ($dummy->eloquentParams as $params) {
+            foreach ($dummy->eloquentParams as $key => $params) {
                 if ($params[0] === 'morphMany' && $params[1] == $myModelPath) {
-                    $result[$entity] = ['id' => $modelPath, 'name' => Str::appTitle($entity)];
+                    $result[$entity] = [
+                        'id' => $modelPath,
+                        'name' => Str::appTitle($entity),
+                        'fn' => $key,
+                    ];
                 }
             }
         }
