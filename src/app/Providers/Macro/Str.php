@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\Workflow\LibApps;
-use App\Models\Project;
-use App\Models\Sub_project;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
@@ -72,38 +69,7 @@ Str::macro('getEntityNameFromModelPath', function ($modelPaths) {
     $str =  str_replace('\\', '/', $modelPaths);
     return basename($str);
 });
-Str::macro('markDocId', function ($dataSource, $type = null) {
-    if (!$type) {
-        $type = $dataSource->getTable();
-    }
-    $docId = $dataSource['doc_id'] ?? '';
-    $libAppsData = LibApps::getFor($type);
-    $docIdName = '';
-    if ($nameColumnDocIDFormat = $libAppsData['doc_id_format_column']) {
-        $organizationName = env('ORGANIZATION_NAME', 'TLC');
-        $entityNickName = strtoupper($libAppsData['nickname']);
-        switch ($nameColumnDocIDFormat) {
-            case 'project_id':
-                $nameProjectOrSubProject = Project::find($dataSource['project_id'])->name
-                    ?? $dataSource['project_id'] ?? '';
-                break;
-            case 'sub_project_id':
-                $nameProjectOrSubProject = Sub_project::find($dataSource['sub_project_id'])->name
-                    ?? $dataSource['sub_project_id'] ?? '';
-                break;
-            default:
-                break;
-        }
-        $result = [
-            $organizationName,
-            $nameProjectOrSubProject,
-            $entityNickName,
-            sprintf('%04d', $docId)
-        ];
-        $docIdName = implode('-', $result);
-    }
-    return $docIdName;
-});
+
 Str::macro('getPickerPlaceholder', function ($control) {
     switch ($control) {
         case "picker_datetime":

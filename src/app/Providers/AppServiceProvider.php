@@ -10,6 +10,7 @@ use App\Repositories\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigRepository
 use App\Repositories\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigRepositoryInterface;
 use App\Services\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigService;
 use App\Services\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigServiceInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -52,9 +53,11 @@ class AppServiceProvider extends ServiceProvider
         //     ->give(function ($app) {
         //         return $app->basePath('stubs');
         //     });
-
+        // Model::preventLazyLoading(!app()->isProduction());
 
         include_once(__DIR__ . "/Macro/Str.php");
+        include_once(__DIR__ . "/Macro/StrDb.php");
+
         include_once(__DIR__ . "/Macro/Arr.php");
         include_once(__DIR__ . "/Macro/App.php");
     }

@@ -44,12 +44,8 @@ trait HasCheckbox
         if (is_numeric($fieldNameOrId)) return [$fieldNameOrId, false];
         // dump(static::getFieldDb());
         // dump(static::getFieldBy("name", 'getMonitors1'));
-        //156 query, 860ms (20/page)
-        //721 query, 5662ms (100/page)
         // $fieldId = Field::where('name', $fieldNameOrId)->first();
         // $fieldIdReversed = Field::where('reversed_name', $fieldNameOrId)->first();
-        //117 query, 780ms (20/page)
-        //522 query, 4096ms (100/page)
         $fieldId = static::getFieldBy('name', $fieldNameOrId);
         $fieldIdReversed = static::getFieldBy('reversed_name', $fieldNameOrId);
 
