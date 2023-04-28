@@ -517,6 +517,9 @@ video {
 .pointer-events-none {
   pointer-events: none;
 }
+.visible {
+  visibility: visible;
+}
 .invisible {
   visibility: hidden;
 }
@@ -805,6 +808,9 @@ video {
 .mb-8 {
   margin-bottom: 2rem;
 }
+.mb-auto {
+  margin-bottom: auto;
+}
 .ml-1 {
   margin-left: 0.25rem;
 }
@@ -1083,12 +1089,6 @@ video {
 }
 .min-h-screen {
   min-height: 100vh;
-}
-.min-h-\[20rem\] {
-  min-height: 20rem;
-}
-.min-h-\[40rem\] {
-  min-height: 40rem;
 }
 .w-1 {
   width: 0.25rem;
@@ -5646,6 +5646,10 @@ video {
   .\32xl\:mx-\[500px\] {
     margin-left: 500px;
     margin-right: 500px;
+  }
+
+  .\32xl\:grid-cols-10 {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
   }
 
   .\32xl\:grid-cols-5 {
