@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Models\Qaqc_insp_chklst_line;
+use App\Models\Qaqc_mir;
 use App\Providers\Support\TraitSupportPermissionGate;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\View\Components\Controls\TraitMorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -14,6 +18,7 @@ trait TraitViewAllFunctions
 {
     use TraitEntityAdvancedFilter;
     use TraitSupportPermissionGate;
+    use TraitMorphTo;
 
     private function getUserSettings()
     {
@@ -29,6 +34,38 @@ trait TraitViewAllFunctions
         return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter];
     }
 
+    private function getEagerLoadParams($eloquentParams, $instance)
+    {
+        $eagerLoadParams = array_keys(array_filter($eloquentParams, fn ($item) => in_array($item[0], ['belongsTo', 'hasMany'])));
+        // dump($eagerLoadParams);
+
+        // $x = $this->getAllTypeMorphMany();
+        // dump($x);
+        // $morphManyArray = array_map(fn ($item) => [$item['id'] => [$item['fn']]], $x);
+        // dump($morphManyArray);
+
+        // $paramsOfMorph = array_filter($eloquentParams, fn ($item) => in_array($item[0], ['morphTo']));
+        // // dump($paramsOfMorph);
+        // $keys = array_keys($paramsOfMorph);
+        // dump($keys);
+        // foreach ($keys as $key) {
+        //     $eagerLoadParams[$key] = function (MorphTo $morphTo) use ($morphManyArray) {
+        //         $morphTo->morphWith($morphManyArray);
+        //     };
+        // }
+
+        // $eagerLoadParams['getParent'] = function (MorphTo $morphTo) {
+        //     $morphTo->morphWith([
+        //         Qaqc_wir::class => ['getNcrs'],
+        //         Qaqc_mir::class => ['getNcrs'],
+        //         Qaqc_insp_chklst_line::class => ['getNcrs'],
+        //     ]);
+        // };
+        // dump($eagerLoadParams);
+
+        return $eagerLoadParams;
+    }
+
     private function getDataSource($advanceFilters = null)
     {
         $propsFilters = $this->advanceFilter();
@@ -37,7 +74,8 @@ trait TraitViewAllFunctions
         $search = request('search');
         $instance = App::make($model);
         $eloquentParams = $instance->eloquentParams;
-        $eagerLoadParams = array_keys(array_filter($eloquentParams, fn ($item) => in_array($item[0], ['belongsTo', 'hasMany'])));
+        $eagerLoadParams = $this->getEagerLoadParams($eloquentParams, $instance);
+
         $relation = $instance->search($search);
 
         if (!CurrentUser::isAdmin()) {

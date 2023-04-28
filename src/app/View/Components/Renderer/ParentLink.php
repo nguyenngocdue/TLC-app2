@@ -29,8 +29,8 @@ class ParentLink extends Component
     public function render()
     {
         $dataLine = $this->dataLine;
-        $ableStr = $this->column['dataIndex'] ?? $this->column;
-        $item = $dataLine->$ableStr;
+        $strAble = $this->column['dataIndex'] ?? $this->column;
+        $item = $dataLine->$strAble;
         if (!is_null($item)) {
             if (method_exists($item, 'getTable')) {
                 $table = $item->getTable();
