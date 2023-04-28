@@ -19,7 +19,9 @@ class StrDb
         }
 
         $id = $dataSource[$key];
-        $result = static::$singleton[$modelPath][$id];
+        // dump($id);
+        // dump(static::$singleton[$modelPath]);
+        $result = static::$singleton[$modelPath][$id] ?? $dataSource[$key] ?? '';
         // Log::info(static::$singleton[$modelPath]);
         // Log::info($result);
         return $result;

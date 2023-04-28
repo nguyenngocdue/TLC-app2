@@ -75,3 +75,10 @@ Applying 4 optimizations:
         After:
             59 query, 924ms (20/page)     + 8.15% Faster
             107 query, 4355ms (100/page)    + 54.29% Faster
+
+Cache users table to ram for dropdown3
+    NCR:
+        Before:
+            4 query, 383ms
+        After:
+            1 query, 249ms               +34.99 %faster
