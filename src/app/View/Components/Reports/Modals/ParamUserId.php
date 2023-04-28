@@ -10,7 +10,7 @@ class ParamUserId extends ParentTypeParamReport
 {
     protected function getDataSource()
     {
-        $list = User::get()->toArray();
+        $list = User::get()->Where('show_on_beta', 0)->toArray();
         $dataSource = [];
         usort($list, fn ($a, $b) => $a['name'] <=> $b['name']);
         foreach ($list as $team) $dataSource[] = ['id' => $team['id'], 'name' => $team['name']];
