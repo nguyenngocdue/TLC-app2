@@ -4,14 +4,14 @@ let allApps = {}
 let currentUserIsAdmin = null
 let apps = []
 
-const renderHtml = (apps) => {
+const renderHtml = (apps, url) => {
     dataContainer.innerHTML = ``
     let resultHtml = ``
     for (const property in apps) {
         const subPackage = property
         let html = ``
         apps[property].forEach((app) => {
-            // console.log(app)
+            const isBookmark = app.bookmark ? 'text-blue-500' : 'text-gray-300'
             const status = capitalize(app.status ?? '')
             const isAdmin =
                 app.hidden == 'true'
@@ -22,15 +22,22 @@ const renderHtml = (apps) => {
                 : ''
             const { package_rendered } = app
             html += `<li>
-                        <a href="${app.href
-                }" class="flex items-center p-2 text-xs font-medium text-gray-700 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                        <div class='flex p-2 text-xs font-medium  text-gray-700 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
+                        <a href="${app.href}" class="flex flex-1 items-center ">
                             ${app.icon ?? "<i class='fa-light fa-file'></i>"}
-                            <span class="flex-1 ml-3 whitespace-nowrap">${app.title
-                }</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">${
+                                app.title
+                            }</span>
                             ${isAdmin}
                             ${statusHtml}
                             <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${package_rendered}</span>
-                        </a>
+                            </a>
+                            <button id='bookmark_${
+                                app.name
+                            }' onclick="bookmarkSearchModal('${
+                app.name
+            }','${url}')" class='px-2 text-base ${isBookmark}'><i class="fa-solid fa-bookmark"></i></button>
+                        </div>
                     </li>`
         })
         resultHtml += `<div>
@@ -59,9 +66,9 @@ function capitalize(str) {
     const str2 = arr.join(' ')
     return str2
 }
-function render(value) {
+function render(value, url) {
     apps = groupBySubPackage(value)
-    renderHtml(apps)
+    renderHtml(apps, url)
 }
 function matchRegex(valueSearch, app) {
     const formatText = valueSearch.replaceAll(' ', '.*')
@@ -84,5 +91,27 @@ function filterAllAppCheckAdmin(arr) {
             return !app.hidden
         }
         return true
+    })
+}
+
+function bookmarkSearchModal(entity, url) {
+    $.ajax({
+        type: 'put',
+        url: url,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        },
+        data: { entity: entity },
+        success: function (response) {
+            if (response.success) {
+                toastr.success(response.message, 'Bookmark')
+                $(`[id="bookmark_${entity}"]`).toggleClass(
+                    'text-blue-500 text-gray-300'
+                )
+            } else {
+                toastr.warning(response.message, 'Bookmark')
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {},
     })
 }

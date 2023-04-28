@@ -75,4 +75,10 @@ class CurrentUser
     {
         return self::get()->id;
     }
+    public static function bookmark()
+    {
+        $settings = self::getSettings();
+        $bookmarkSettings = $settings['bookmark_search'] ?? [];
+        return $bookmarkSettings;
+    }
 }

@@ -37,12 +37,13 @@
         searchInput = document.querySelector("[data-search]")
         searchInput.focus()
         allApps = (@json($allApps))
+        url = (@json($route))
         currentUserIsAdmin = (@json($currentUserIsAdmin))
-        render(filterAllAppCheckAdmin(allApps))
+        render(filterAllAppCheckAdmin(allApps),url)
         searchInput.addEventListener("input",(e)=>{
             const value = e.target.value.toLowerCase();
             if(value.length == 0){
-                render(filterAllAppCheckAdmin(allApps))
+                render(filterAllAppCheckAdmin(allApps),url)
             }else{
                 apps = allApps.filter(app => {
                     if(!currentUserIsAdmin){
@@ -50,7 +51,7 @@
                     }
                     return matchRegex(value,app)
                 })
-                render(apps)
+                render(apps,url)
             }
         })
     </script>

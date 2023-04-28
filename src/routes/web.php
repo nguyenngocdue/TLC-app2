@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppMenuController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Entities\EntityCRUDController;
@@ -164,6 +165,7 @@ Route::group([
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboards.index');
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
+    Route::put('updateBookmark', [BookmarkController::class, 'updateBookmark'])->name('updateBookmark');
     Route::get('impersonate/user/{id}', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
     Route::get('app-menu', [AppMenuController::class, 'index']);
     Route::get('my-company', [MyCompany::class, 'index']);
