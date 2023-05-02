@@ -528,10 +528,13 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
     }
 }
 
-const documentReadyDropdown2 = ({ id, selectedJson, table, allowClear = false }) => {
+const documentReadyDropdown2 = (params) => {
+    // console.log(params)
+    const { id, selectedJson, table, allowClear = false, action } = params
+
     // selectedJson = '{!! $selected !!}'
-    selectedJson = selectedJson.replace(/\\/g, '\\\\') //<< Replace \ to \\ EG. ["App\Models\Qaqc_mir"] to ["App\\Models\\Qaqc_mir"]
-    const selectedArray = JSON.parse(selectedJson)
+    const selectedJson1 = selectedJson.replace(/\\/g, '\\\\') //<< Replace \ to \\ EG. ["App\Models\Qaqc_mir"] to ["App\\Models\\Qaqc_mir"]
+    const selectedArray = JSON.parse(selectedJson1)
     // console.log(selectedArray)
     // table = "{{$table}}"
     dataSourceDropdown = k[table]
@@ -551,7 +554,8 @@ const documentReadyDropdown2 = ({ id, selectedJson, table, allowClear = false })
     $(document).ready(() => {
         if (Array.isArray(listenersOfDropdown2)) {
             listenersOfDropdown2.forEach((listener) => {
-                if (listener.triggers.includes(id) && (['reduce', 'assign']).includes(listener.listen_action)) {
+                const list = (action === 'create') ? ['reduce', 'assign'] : ['reduce',/* 'assign'*/] //<< without assign, keep value from DB
+                if (listener.triggers.includes(id) && (list).includes(listener.listen_action)) {
                     // console.log("I am a trigger of reduce/assign, I have to trigger myself when form load [id]",)
                     getEById(id).trigger('change')
                 }

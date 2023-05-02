@@ -19,6 +19,7 @@ class Dropdown2 extends Component
         private $readOnly = false,
         private $saveOnChange = false,
         private $allowClear = false,
+        private $action = null,
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
@@ -47,6 +48,7 @@ class Dropdown2 extends Component
             'saveOnChange' => $this->saveOnChange,
             'allowClear' => $this->allowClear,
             'nameless' => $nameless,
+            'action' => $this->action,
         ];
         // dump($params);
         return view('components.controls.has-data-source.dropdown2', $params);

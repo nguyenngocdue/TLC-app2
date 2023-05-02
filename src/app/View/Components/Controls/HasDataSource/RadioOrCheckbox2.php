@@ -18,6 +18,7 @@ class RadioOrCheckbox2 extends Component
         private $multiple = false,
         private $readOnly = false,
         private $saveOnChange = false,
+        private $action = null,
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
@@ -41,6 +42,7 @@ class RadioOrCheckbox2 extends Component
             'span' => $span,
             'readOnly' => $this->readOnly,
             'saveOnChange' => $this->saveOnChange,
+            'action' => $this->action,
         ];
 
         return view('components.controls.has-data-source.radio-or-checkbox2', $params);

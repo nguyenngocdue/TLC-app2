@@ -8,7 +8,12 @@
     class='{{$classList}}'
 ></div>
 <script>
-    params2 = {id: '{{$id}}',selectedJson: '{!! $selected !!}',table: "{{$table}}" }
+    params2 = {
+        id: '{{$id}}'
+        , selectedJson: '{!! $selected !!}'
+        , table: "{{$table}}" 
+        , action: "{{$action ?? 'create'}}"
+    }
     documentReadyDropdown2(params2)
 
 </script>
