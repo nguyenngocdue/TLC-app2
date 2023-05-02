@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Utils\System\Api\ResponseObject;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +22,7 @@ class BookmarkController extends Controller
                 return ResponseObject::responseSuccess(
                     null,
                     [],
-                    'Add bookmark search modal successfully!'
+                    'Item is added to bookmark successfully!'
                 );
             }
             $value = $settings['bookmark_search'];
@@ -35,13 +34,13 @@ class BookmarkController extends Controller
                 return ResponseObject::responseSuccess(
                     null,
                     [],
-                    'Add bookmark search modal successfully!'
+                    'Item is added to bookmark successfully!'
                 );
             }
             return ResponseObject::responseSuccess(
                 null,
                 [],
-                'Remove bookmark search modal successfully!'
+                'Item is removed from bookmark successfully!'
             );
         }
         return ResponseObject::responseFail(

@@ -34,9 +34,9 @@ trait TraitViewAllFunctions
         return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter];
     }
 
-    private function getEagerLoadParams($eloquentParams, $instance)
+    private function getEagerLoadParams($eloquentParams)
     {
-        $eagerLoadParams = array_keys(array_filter($eloquentParams, fn ($item) => in_array($item[0], ['belongsTo', 'hasMany'])));
+        $eagerLoadParams = array_keys(array_filter($eloquentParams, fn ($item) => in_array($item[0], ['belongsTo', 'hasMany', 'morphMany', 'morphTo'])));
         // dump($eagerLoadParams);
 
         // $x = $this->getAllTypeMorphMany();
@@ -74,7 +74,7 @@ trait TraitViewAllFunctions
         $search = request('search');
         $instance = App::make($model);
         $eloquentParams = $instance->eloquentParams;
-        $eagerLoadParams = $this->getEagerLoadParams($eloquentParams, $instance);
+        $eagerLoadParams = $this->getEagerLoadParams($eloquentParams);
 
         $relation = $instance->search($search);
 
@@ -101,6 +101,7 @@ trait TraitViewAllFunctions
                     ->with($eagerLoadParams)
                     ->orderBy('updated_at', 'desc');
             });
+        // dump($result);
         return $result;
     }
 }
