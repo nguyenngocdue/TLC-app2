@@ -12,15 +12,15 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement("CREATE OR REPLACE VIEW view_user_avatar AS
-        (
+        DB::statement("CREATE VIEW view_user_avatar AS
+        
             SELECT u.id AS u_id, att.id AS att_id, att.url_thumbnail
                 FROM users u 
                     LEFT JOIN attachments att ON (
                         u.id=att.object_id 
                         AND att.object_type='App\\\\Models\\\\User'
                     )
-        )");
+        ");
     }
 
     /**
