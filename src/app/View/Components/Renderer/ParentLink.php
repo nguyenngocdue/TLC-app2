@@ -39,10 +39,10 @@ class ParentLink extends Component
             $parent = $relations[$modelPath];
             $parentTable = $parent->getTable();
             $parentId = $parent->id;
-            $idStr = Str::makeId($parentId);
+            // $idStr = Str::makeId($parentId);
             $href = route($parentTable . ".edit", $parentId);
             $name = $parent->name;
-            return "<p class='p-2'><a class='text-blue-500' href='$href' title='$idStr ($parentTable)'>$name</a></p>";
+            return "<p class='p-2'><a class='text-blue-500' href='$href' title='$name'>$parentTable/$parentId</a></p>";
         }
         // dump($this->column);
         // dump($dataLine->getParent()->get());

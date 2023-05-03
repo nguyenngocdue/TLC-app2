@@ -59,6 +59,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qaqc_insp_chklst_run_lines');
+        Schema::dropIfExists('qaqc_insp_chklst_lines');
     }
 };

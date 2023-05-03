@@ -22,6 +22,6 @@ Route::group([
         Route::resource('setrolesets', App\Http\Controllers\Admin\AdminSetRoleSetController::class);
         Route::post('setrolesets/syncrolesets', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'store2'])->name('setrolesets.store2');
 
-        Route::resource('permissions2', App\Http\Controllers\Permission\Permission::class);
+        // Route::resource('permissions2', App\Http\Controllers\Permission\Permission::class);
     });
 });
