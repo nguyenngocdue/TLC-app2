@@ -17,15 +17,19 @@ class BlueprintExtended extends Blueprint
         $this->timestamp('closed_at')->nullable();
     }
 
-    function appendCommonFields()
+    function appendCommonFields($ownerId = true)
     {
         $this->string('status')->nullable();
-        $this->unsignedBigInteger('owner_id');
+        if ($ownerId) {
+            $this->unsignedBigInteger('owner_id');
+        }
 
-        $this->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        $this->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        // $this->timestamp('closed_at')->nullable();
+        $this->timestamp('created_at')->useCurrent();
+        $this->timestamp('updated_at')->useCurrentOnUpdate();
+        // $this->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+        // $this->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+        // $this->timestamp('closed_at')->nullable();
 
         $this->unsignedBigInteger('deleted_by')->nullable();
         $this->softDeletes();
