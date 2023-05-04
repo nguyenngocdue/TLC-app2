@@ -27,9 +27,10 @@ class WidgetGroups extends Component
         $table_a = $widget['params']['table_a'];
         $model_a = DBTable::fromNameToModel($table_a);
         $meta_and_metric = $model_a->getMetaForChart($fn, $widget, $widget['params']);
-        $app = LibApps::getAll();
+        // $app = LibApps::getAll();
         $result = [
-            "title_a" => $app[$widget["section_title"]]['title'],
+            "title_a" => $widget["section_title"],
+            // "title_a" => $app[$widget["section_title"]]['title'],
             "title_b" => $widget["widget_title"],
             // "title_b" => $app[$widget["widget_title"]]['title'],
             "meta" => $meta_and_metric['meta'],
