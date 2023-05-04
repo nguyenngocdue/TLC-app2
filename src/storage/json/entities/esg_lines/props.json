@@ -94,25 +94,6 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_year": {
-        "name": "_year",
-        "column_name": "year",
-        "column_type": "date",
-        "label": "Year",
-        "control": "picker_year",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "duplicatable": "",
-        "new_line": ""
-    },
     "_unit": {
         "name": "_unit",
         "column_name": "unit",

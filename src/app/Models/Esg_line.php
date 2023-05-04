@@ -10,7 +10,7 @@ class Esg_line extends ModelExtended
         "id", "esg_metric_type_id", "esg_metric_type_1_id", "esg_metric_type_2_id", "unit", "factor",
         "esg_sheet_id",
         "m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "m09", "m10", "m11", "m12",
-        "year", "ytd", "remark", "owner_id", "status", "order_no",
+        "ytd", "remark", "owner_id", "status", "order_no",
     ];
     protected $table = "esg_lines";
     public $nameless = true;
@@ -62,7 +62,7 @@ class Esg_line extends ModelExtended
             ['dataIndex' => 'esg_metric_type_1_id'],
             ['dataIndex' => 'esg_metric_type_2_id'],
 
-            ['dataIndex' => 'year', 'cloneable' => true],
+            // ['dataIndex' => 'year', 'cloneable' => true],
             ['dataIndex' => 'unit'],
             ['dataIndex' => 'factor'],
 

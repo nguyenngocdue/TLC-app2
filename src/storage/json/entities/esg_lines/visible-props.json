@@ -24,11 +24,6 @@
         "column_name": "esg_metric_type_2_id",
         "new": "true"
     },
-    "_year": {
-        "name": "_year",
-        "column_name": "year",
-        "new": "true"
-    },
     "_unit": {
         "name": "_unit",
         "column_name": "unit",
@@ -138,5 +133,10 @@
         "name": "_deleted_at",
         "column_name": "deleted_at",
         "new": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": ""
     }
 }
