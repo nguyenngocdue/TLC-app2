@@ -33,6 +33,7 @@ class UpdateUserSettings extends Controller
     {
         [$type, $valueRequest] = $this->formatRequestValue($request);
         $settings[$type][Constant::VIEW_ALL]['current_filter'] = 'advance_filter';
+        $settings[$type][Constant::VIEW_ALL]['choose_basic_filters'] = null;
         $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = $valueRequest;
         return $settings;
     }
@@ -59,7 +60,9 @@ class UpdateUserSettings extends Controller
         $nameFilter = $request->input('basic_filter');
         [$type, $valueRequest] = $this->formatRequestValue($request);
         $settings[$type][Constant::VIEW_ALL]['current_filter'] = 'advance_filter';
+        $settings[$type][Constant::VIEW_ALL]['choose_basic_filters'] = $nameFilter;
         $settings[$type][Constant::VIEW_ALL]['basic_filters'][$nameFilter] = $valueRequest;
+        $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = $valueRequest;
         return $settings;
     }
     private function updateRefreshPage($request, $settings)
@@ -69,9 +72,9 @@ class UpdateUserSettings extends Controller
         $settings[$type][Constant::VIEW_ALL]['refresh_page'] = !$value;
         return $settings;
     }
-    private function deletedBasicFilter($request, $settings)
+    private function deletedBasicFilter($request, $settings, $nameFilterInput = 'choose_basic_filter')
     {
-        $nameFilter = $request->input('choose_basic_filter');
+        $nameFilter = $request->input($nameFilterInput);
         [$type,] = $this->formatRequestValue($request);
         unset($settings[$type][Constant::VIEW_ALL]['choose_basic_filters']);
         unset($settings[$type][Constant::VIEW_ALL]['basic_filters'][$nameFilter]);
@@ -81,7 +84,9 @@ class UpdateUserSettings extends Controller
     private function clearFilter($request, $settings)
     {
         [$type,] = $this->formatRequestValue($request);
-        unset($settings[$type]);
+        unset($settings[$type][Constant::VIEW_ALL]['choose_basic_filters']);
+        unset($settings[$type][Constant::VIEW_ALL]['advanced_filters']);
+        $settings[$type][Constant::VIEW_ALL]['current_filter'] = 'advance_filter';
         return $settings;
     }
     private function formatRequestValue($request)
@@ -209,6 +214,9 @@ class UpdateUserSettings extends Controller
                 break;
             case 'deletedBasicFilter':
                 $settings = $this->deletedBasicFilter($request, $settings);
+                break;
+            case 'deletedBasicFilter2':
+                $settings = $this->deletedBasicFilter($request, $settings, 'basic_filter_delete');
                 break;
             case 'updateBasicFilter':
                 $settings = $this->updateBasicFilter($request, $settings);
