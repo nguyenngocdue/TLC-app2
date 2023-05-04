@@ -38,7 +38,7 @@
                         <x-advanced-filter.text3  name="basic_filter" value="" placeholder='Basic filter name...' onKeyPress="onKeyPress(event)"/>
                         <x-renderer.button type="secondary" click="saveBasicFilter()" class="ml-2"><i class="fa-solid fa-floppy-disk"></i></x-renderer.button>
                     </div>
-                    <div class="w-full max-h-52 overflow-y-auto mt-2 text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <div style="height: {{$maxH}}" class="w-full overflow-y-auto mt-2 text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         @foreach($basicFilter as $value)
                         <button value="{{$value}}" @click='updateBasicFilter2()' name="choose_basic_filter" class="relative {{$valueBasicFilter == $value ? 'text-blue-700' : ''}} inline-flex items-center w-full px-4 py-2 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
                             @if($valueBasicFilter == $value)
