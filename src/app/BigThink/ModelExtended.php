@@ -41,4 +41,16 @@ class ModelExtended extends Model
             // 'slug' => $this->slug,
         ];
     }
+
+    function getOwnerId()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    function getDeleteBy()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 }

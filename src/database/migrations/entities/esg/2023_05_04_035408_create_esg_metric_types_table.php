@@ -21,7 +21,8 @@ return new class extends Migration
 
         $schema->create('esg_metric_types', function (BlueprintExtended $table) {
             $table->id();
-            $table->unsignedBigInteger('description')->nullable();
+            $table->string('name');
+            $table->text('description')->nullable();
             $table->appendCommonFields();
         });
     }

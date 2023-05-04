@@ -35,21 +35,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_esg_metric_type_id": {
-        "name": "_esg_metric_type_id",
-        "column_name": "esg_metric_type_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getEsgMetricType2": {
-        "name": "_getEsgMetricType2",
-        "column_name": "getEsgMetricType2",
+    "_esg_metric_type_1_id": {
+        "name": "_esg_metric_type_1_id",
+        "column_name": "esg_metric_type_1_id",
         "label": "",
         "validation": "",
         "validation_regex": "",

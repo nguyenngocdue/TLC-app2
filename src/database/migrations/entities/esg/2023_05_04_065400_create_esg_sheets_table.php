@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->unsignedInteger('year');
-            $table->boolean('available');
-            $table->string('type');
+            // $table->boolean('available');
+            // $table->string('type');
             $table->appendCommonFields();
         });
     }

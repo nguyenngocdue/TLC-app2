@@ -15,7 +15,7 @@
         "name": "_name",
         "column_name": "name",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -26,6 +26,18 @@
     "_description": {
         "name": "_description",
         "column_name": "description",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getEsgMetricType1s": {
+        "name": "_getEsgMetricType1s",
+        "column_name": "getEsgMetricType1s",
         "label": "",
         "validation": "",
         "validation_regex": "",

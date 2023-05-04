@@ -21,10 +21,11 @@ return new class extends Migration
 
         $schema->create('esg_lines', function (BlueprintExtended $table) {
             $table->id();
-            $table->unsignedBigInteger('type_parent_1');
-            $table->unsignedBigInteger('type_parent_2');
-            $table->unsignedBigInteger('type_id');
-            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('esg_sheet_id');
+            $table->unsignedBigInteger('esg_metric_type_id');
+            $table->unsignedBigInteger('esg_metric_type_1_id');
+            $table->unsignedBigInteger('esg_metric_type_2_id');
+            $table->unsignedInteger('year');
             $table->unsignedBigInteger('unit');
             $table->float('factor');
             $table->float('m01')->nullable();
@@ -39,7 +40,6 @@ return new class extends Migration
             $table->float('m10')->nullable();
             $table->float('m11')->nullable();
             $table->float('m12')->nullable();
-            $table->unsignedInteger('year');
             $table->float('ytd');
             $table->text('remark')->nullable();
             $table->appendCommonFields();
