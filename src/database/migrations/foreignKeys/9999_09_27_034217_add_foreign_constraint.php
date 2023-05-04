@@ -229,11 +229,11 @@ return new class extends Migration
         });
 
         //************** ESG **************/
-        Schema::table('esg_metric_type_01s', function (Blueprint $table) {
+        Schema::table('esg_metric_type_1s', function (Blueprint $table) {
             $table->foreign('esg_metric_type_id')->references('id')->on('esg_metric_types');
         });
-        Schema::table('esg_metric_type_02s', function (Blueprint $table) {
-            $table->foreign('esg_metric_type_1_id')->references('id')->on('esg_metric_type_01s');
+        Schema::table('esg_metric_type_2s', function (Blueprint $table) {
+            $table->foreign('esg_metric_type_1_id')->references('id')->on('esg_metric_type_1s');
         });
     }
 
