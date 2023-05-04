@@ -43,85 +43,88 @@ class ViewAllController extends Controller
     {
         return date('Y-m-d', strtotime(str_replace('/', '-', $time)));
     }
+
+    private function createObject($prop, $type)
+    {
+        $output = [
+            'title' => $prop['label'],
+            'dataIndex' => $prop['column_name'],
+        ];
+        $output['width'] = (isset($prop['width']) && $prop['width']) ? $prop['width'] : 100;
+
+        switch ($prop['control']) {
+            case 'id':
+                $output['renderer'] = 'id';
+                $output['align'] = 'center';
+                $output['type'] = $type;
+                break;
+            case 'qr_code':
+                $output['renderer'] = 'qr-code';
+                $output['align'] = 'center';
+                $output['type'] = $type;
+                $output['width'] = 10;
+                break;
+            case 'action_column':
+                $output['renderer'] = 'action_column';
+                $output['align'] = 'center';
+                $output['type'] = $type;
+                $output['width'] = 10;
+                break;
+            case 'checkbox_column':
+                $output['renderer'] = 'checkbox_column';
+                $output['align'] = 'center';
+                $output['type'] = $type;
+                $output['width'] = 10;
+                break;
+            case 'toggle':
+                $output['renderer'] = "toggle";
+                $output['align'] = "center";
+                break;
+            case "number":
+                $output['align'] = "right";
+                break;
+            case "picker_time":
+            case "picker_month":
+            case "picker_date":
+            case "picker_week":
+            case "picker_quarter":
+            case "picker_year":
+            case "picker_datetime":
+                $output['renderer'] = "date-time";
+                $output['align'] = "center";
+                $output['rendererParam'] = $prop['control'];
+                break;
+            case "text":
+            case "textarea":
+                $output['renderer'] = "text";
+                break;
+            case "status":
+                $output['renderer'] = "status";
+                $output['align'] = 'center';
+                break;
+            case "thumbnail":
+                $output['renderer'] = "thumbnail";
+                break;
+            case "hyperlink":
+                $output['renderer'] = "hyper-link";
+                $output['align'] = 'center';
+                break;
+            case "doc_id":
+                $output['renderer'] = 'doc-id';
+                $output['align'] = 'center';
+                // $output['attributes']['id'] = 'id';
+                $output['attributes']['type'] = 'type';
+                break;
+            default:
+                break;
+        }
+
+        return $output;
+    }
+
     private function getColumns($type, $columnLimit)
     {
-        function createObject($prop, $type)
-        {
-            $output = [
-                'title' => $prop['label'],
-                'dataIndex' => $prop['column_name'],
-            ];
-            $output['width'] = (isset($prop['width']) && $prop['width']) ? $prop['width'] : 100;
 
-            switch ($prop['control']) {
-                case 'id':
-                    $output['renderer'] = 'id';
-                    $output['align'] = 'center';
-                    $output['type'] = $type;
-                    break;
-                case 'qr_code':
-                    $output['renderer'] = 'qr-code';
-                    $output['align'] = 'center';
-                    $output['type'] = $type;
-                    $output['width'] = 10;
-                    break;
-                case 'action_column':
-                    $output['renderer'] = 'action_column';
-                    $output['align'] = 'center';
-                    $output['type'] = $type;
-                    $output['width'] = 10;
-                    break;
-                case 'checkbox_column':
-                    $output['renderer'] = 'checkbox_column';
-                    $output['align'] = 'center';
-                    $output['type'] = $type;
-                    $output['width'] = 10;
-                    break;
-                case 'toggle':
-                    $output['renderer'] = "toggle";
-                    $output['align'] = "center";
-                    break;
-                case "number":
-                    $output['align'] = "right";
-                    break;
-                case "picker_time":
-                case "picker_month":
-                case "picker_date":
-                case "picker_week":
-                case "picker_quarter":
-                case "picker_year":
-                case "picker_datetime":
-                    $output['renderer'] = "date-time";
-                    $output['align'] = "center";
-                    $output['rendererParam'] = $prop['control'];
-                    break;
-                case "text":
-                case "textarea":
-                    $output['renderer'] = "text";
-                    break;
-                case "status":
-                    $output['renderer'] = "status";
-                    $output['align'] = 'center';
-                    break;
-                case "thumbnail":
-                    $output['renderer'] = "thumbnail";
-                    break;
-                case "hyperlink":
-                    $output['renderer'] = "hyper-link";
-                    $output['align'] = 'center';
-                    break;
-                case "doc_id":
-                    $output['renderer'] = 'doc-id';
-                    $output['align'] = 'center';
-                    // $output['attributes']['id'] = 'id';
-                    $output['attributes']['type'] = 'type';
-                    break;
-                default:
-                    break;
-            }
-
-            return $output;
-        }
 
         $props = Props::getAllOf($type);
         $props = array_filter($props, fn ($prop) => !$prop['hidden_view_all']);
@@ -149,7 +152,7 @@ class ViewAllController extends Controller
             ];
             array_splice($props, 0, 0, [$checkboxColumn, $actionColumn]);
         }
-        $result = array_values(array_map(fn ($prop) => createObject($prop, $type), $props));
+        $result = array_values(array_map(fn ($prop) => $this->createObject($prop, $type), $props));
         return $result;
     }
 

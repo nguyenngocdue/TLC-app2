@@ -104,7 +104,7 @@ trait HasRoleSets
         if ($model->exists) {
             $this->roleSets()->sync($roleSets, false);
             $model->load('roleSets');
-            error_log($model->load('roleSets'));
+            // error_log($model->load('roleSets'));
         } else {
 
             $class = \get_class($model);

@@ -12,8 +12,8 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement("CREATE OR REPLACE VIEW view_full_prod_sequence AS
-        (
+        DB::statement("CREATE VIEW view_full_prod_sequence AS
+        
             SELECT 
                 view_prl.*, 
                 ps.id ps_id,
@@ -29,7 +29,7 @@ return new class extends Migration
                 AND po_id = ps.prod_order_id
                 AND prl_id = ps.prod_routing_link_id
             ORDER BY `po_id` ASC
-        )");
+        ");
     }
 
     /**

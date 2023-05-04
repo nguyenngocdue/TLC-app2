@@ -17,7 +17,7 @@
                             <span class="sr-only">Close modal</span>
                         </button>
                     </div>
-                    <input type="search" id="search" data-search class="block w-full p-3 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required>
+                    <input type="search" autocomplete="off" id="search" data-search class="block w-full p-3 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required>
                 </div>
                 <!-- Modal body -->
                 <div class="px-6 overflow-y-auto h-[500px] sm:h-[600px]" data-container>

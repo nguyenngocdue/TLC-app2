@@ -62,7 +62,7 @@ Route::group([
         Route::post('upload_file', [App\Http\Controllers\Api\v1\FileController::class, 'upload']);
         Route::post('delete_file', [App\Http\Controllers\Api\v1\FileController::class, 'delete']);
         Route::post('edit_file', [App\Http\Controllers\Api\v1\FileController::class, 'edit']);
-        Route::post('submit_form', [App\Http\Controllers\Api\v1\qaqc\SubmitFormAndUploadFileController::class, 'submitAndUploadFile']);
+        // Route::post('submit_form', [App\Http\Controllers\Api\v1\qaqc\SubmitFormAndUploadFileController::class, 'submitAndUploadFile']);
         Route::post('submit_form2', [App\Http\Controllers\Api\v1\qaqc\SubmitFormAndUploadFileController::class, 'submit2AndUploadFile']);
         Route::get('qaqc_insp_chklst_line/{id}', [App\Http\Controllers\Api\v1\qaqc\CommentApiController::class, 'getAll']);
         Route::post('comment', [App\Http\Controllers\Api\v1\qaqc\CommentApiController::class, 'store']);

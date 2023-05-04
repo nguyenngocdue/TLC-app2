@@ -3,6 +3,7 @@
 namespace App\BigThink;
 
 use App\Models\Field;
+use Database\Seeders\FieldSeeder;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
@@ -12,33 +13,6 @@ use Illuminate\Support\Facades\Log;
 
 trait HasCheckbox
 {
-    static $fieldDB = null;
-    static function getFieldDb()
-    {
-        if (is_null(static::$fieldDB)) {
-            static::$fieldDB = Field::all();
-        }
-        return static::$fieldDB;
-    }
-
-    static $fieldCache = [];
-    static function getFieldBy($key0, $value)
-    {
-        $db = static::getFieldDb();
-        $key = "{$key0}_{$value}";
-        if (!isset(static::$fieldCache[$key])) {
-            foreach ($db as $line) {
-                if ($line->{$key0} == $value) {
-                    // dump($line);
-                    static::$fieldCache[$key] = $line;
-                    break;
-                }
-            }
-        }
-        return static::$fieldCache[$key] ?? null;
-    }
-
-
     function guessFieldId($fieldNameOrId)
     {
         if (is_numeric($fieldNameOrId)) return [$fieldNameOrId, false];
@@ -46,8 +20,8 @@ trait HasCheckbox
         // dump(static::getFieldBy("name", 'getMonitors1'));
         // $fieldId = Field::where('name', $fieldNameOrId)->first();
         // $fieldIdReversed = Field::where('reversed_name', $fieldNameOrId)->first();
-        $fieldId = static::getFieldBy('name', $fieldNameOrId);
-        $fieldIdReversed = static::getFieldBy('reversed_name', $fieldNameOrId);
+        $fieldId = FieldSeeder::getFieldBy('name', $fieldNameOrId);
+        $fieldIdReversed = FieldSeeder::getFieldBy('reversed_name', $fieldNameOrId);
 
         // dump($fieldId, $fieldIdReversed);
         if ($fieldId) return [$fieldId->id, false];

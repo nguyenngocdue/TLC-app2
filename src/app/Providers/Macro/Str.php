@@ -43,9 +43,9 @@ Str::macro('parseArray', function (?string $values) {
     return array_map(fn ($s) => trim($s), $array);
 });
 
-Str::macro('modelToPretty', function (string $string) {
-    return Str::headline(App::make($string)->getTable());
-});
+// Str::macro('modelToPretty', function (string $string) {
+//     return Str::headline(App::make($string)->getTable());
+// });
 Str::macro('same', function (string $string) {
     return $string;
 });
@@ -65,10 +65,10 @@ Str::macro('limitWords', function (string $str, $count, $maxLen = 50) {
     return $str;
 });
 
-Str::macro('getEntityNameFromModelPath', function ($modelPaths) {
-    $str =  str_replace('\\', '/', $modelPaths);
-    return basename($str);
-});
+// Str::macro('getEntityNameFromModelPath', function ($modelPaths) {
+//     $str =  str_replace('\\', '/', $modelPaths);
+//     return basename($str);
+// });
 
 Str::macro('getPickerPlaceholder', function ($control) {
     switch ($control) {

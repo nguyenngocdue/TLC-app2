@@ -25,18 +25,15 @@ const renderHtml = (apps, url) => {
                         <div class='flex p-2 text-xs font-medium  text-gray-700 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
                         <a href="${app.href}" class="flex flex-1 items-center ">
                             ${app.icon ?? "<i class='fa-light fa-file'></i>"}
-                            <span class="flex-1 ml-3 whitespace-nowrap">${
-                                app.title
-                            }</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">${app.title
+                }</span>
                             ${isAdmin}
                             ${statusHtml}
                             <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${package_rendered}</span>
                             </a>
-                            <button id='bookmark_${
-                                app.name
-                            }' onclick="bookmarkSearchModal('${
-                app.name
-            }','${url}')" class='px-2 text-base ${isBookmark}'><i class="fa-solid fa-bookmark"></i></button>
+                            <button tabIndex=-1 id='bookmark_${app.name
+                }' onclick="bookmarkSearchModal('${app.name
+                }','${url}')" class='px-2 text-base ${isBookmark}'><i class="fa-solid fa-bookmark"></i></button>
                         </div>
                     </li>`
         })
@@ -112,6 +109,6 @@ function bookmarkSearchModal(entity, url) {
                 toastr.warning(response.message, 'Bookmark')
             }
         },
-        error: function (jqXHR, textStatus, errorThrown) {},
+        error: function (jqXHR, textStatus, errorThrown) { },
     })
 }

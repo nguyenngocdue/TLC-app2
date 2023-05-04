@@ -110,11 +110,11 @@
                                 @endif
                             @break
                             @case ('dropdown')
-                            <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
+                            <x-controls.has-data-source.dropdown2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
                             @case ('radio')
-                            <x-controls.has-data-source.radio-or-checkbox2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
+                            <x-controls.has-data-source.radio-or-checkbox2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
                             @case ('dropdown_multi')
@@ -122,12 +122,12 @@
                                 {{$item->getRoleSet[0]->name}}
                                 <x-renderer.button href="/dashboard/admin/setrolesets/{{$id}}/edit" target="_blank">Edit RoleSet in popup</x-renderer.button>
                                 @else
-                                <x-controls.has-data-source.dropdown2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
+                                <x-controls.has-data-source.dropdown2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
                                 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                                 @endif
                             @break
                             @case('checkbox')
-                            <x-controls.has-data-source.radio-or-checkbox2 type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}}/>
+                            <x-controls.has-data-source.radio-or-checkbox2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}}/>
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
                             @case('picker_time')
