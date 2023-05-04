@@ -3,12 +3,14 @@
 namespace App\View\Components\Renderer;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
 class AdvancedFilter extends Component
 {
     use TraitEntityAdvancedFilter;
+    use TraitViewAllFunctions;
     /**
      * Create a new component instance.
      *
@@ -30,6 +32,7 @@ class AdvancedFilter extends Component
     public function render()
     {
         $propsFilters = $this->advanceFilter();
+        [,,,,, $basicFilter, $chooseBasicFilter] = $this->getUserSettings();
         // $valueAdvanceFilters = array_map(function ($item) {
         //     dump($item);
         //     return $item;
@@ -38,7 +41,9 @@ class AdvancedFilter extends Component
             'type' => $this->type,
             'props' => $propsFilters,
             'valueAdvanceFilters' => $this->valueAdvanceFilters,
+            'valueBasicFilter' => $chooseBasicFilter,
             'currentFilter' => $this->currentFilter,
+            'basicFilter' => array_keys($basicFilter) ?? [],
         ]);
     }
 }
