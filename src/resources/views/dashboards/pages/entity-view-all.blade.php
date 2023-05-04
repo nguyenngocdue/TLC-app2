@@ -4,7 +4,7 @@
 @section('title', "View All" )
 
 @section('content')
-<div class="px-4">
+<div class="px-4 mt-2">
     <x-elapse />
     <div class="justify-end pb-5">
         {{-- <div class='col-span-6'> --}}

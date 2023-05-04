@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Utils\ClassList;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\SuperProps;
+use Illuminate\Support\Str;
 
 trait TraitEntityCRUDShowProps
 {
+	use TraitGetOptionPrint;
 	public function showProps($id)
 	{
 		$blackList = ['z_divider', 'z_page_break'];
@@ -59,9 +62,12 @@ trait TraitEntityCRUDShowProps
 			'propsTree' => array_values($node),
 			'dataSource' => $dataSource,
 			'type' => $this->type,
+			'typePlural' => Str::plural($this->type),
 			'showId' => $id,
 			'modelPath' => $this->data,
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
+			'classListOptionPrint' => ClassList::DROPDOWN,
+			'valueOptionPrint' => $this->getValueOptionPrint(),
 		]);
 	}
 }

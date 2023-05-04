@@ -24,7 +24,7 @@
         listenersOfDropdown4s = @json($listeners4);
         filtersOfDropdown4s = @json($filters4);
     </script>
-    <div class="px-4">
+    <div class="px-4 mt-2">
         <x-elapse />
         <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}" />
         <x-controls.header-alert-validation :strProps="$allProps" />
