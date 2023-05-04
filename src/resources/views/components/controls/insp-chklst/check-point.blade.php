@@ -11,7 +11,7 @@
                     <x-controls.insp_chklst.check-point-text :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
                 @break
                 @case (4)  {{-- 4 => "radio" --}}
-                    <div>
+                    <div class="w-full">
                         <x-controls.insp_chklst.check-point-option :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
                         <x-controls.insp_chklst.check-point-create-ncr-on-hold :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
                     </div>

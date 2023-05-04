@@ -25,7 +25,7 @@ function registerListen(lineId, id){
 </script>
 @endonce
 
-<div class="grid w-[40rem] grid-cols-4 space-x-2 rounded-xl bg-gray-200 p-2">
+<div class="grid w-full grid-cols-4 space-x-2 rounded-xl bg-gray-200 p-2">
     @foreach($options as $id => $option)
         <div>
             <input type="radio" 

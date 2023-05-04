@@ -113,7 +113,7 @@
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "(not-yet)Wir_NameRendered",
+        "formula": "Wir_NameRendered",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
