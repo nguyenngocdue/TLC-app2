@@ -220,7 +220,8 @@ class RelationshipRenderer2 extends Component
                     $href = $this->createHref($this->item, $createSettings, $tableName);
                 }
                 // dump($itemOriginal);
-                return view('components.controls.many-line-params', [
+                $view = $editable ? 'many-line-params-editable' : 'many-line-params-ro';
+                return view('components.controls.' . $view, [
                     'readOnly' => $this->readOnly,
                     'table01ROName' => $this->table01Name . "RO",
                     'readOnlyColumns' => $roColumns,
@@ -252,6 +253,8 @@ class RelationshipRenderer2 extends Component
                     // 'createSettings' => $createSettings,
                     'btnCmdSettings' => $btnCmdSettings,
                     'href' => $href,
+                    'showNo' => true,
+                    'showNoR' => false,
                 ]);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";

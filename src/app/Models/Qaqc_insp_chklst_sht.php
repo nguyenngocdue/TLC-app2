@@ -6,7 +6,10 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_insp_chklst_sht extends ModelExtended
 {
-    protected $fillable = ["id", "name", "description", "slug", "qaqc_insp_chklst_id", "qaqc_insp_tmpl_sht_id", "owner_id"];
+    protected $fillable = [
+        "id", "name", "description", "slug", "qaqc_insp_chklst_id", "qaqc_insp_tmpl_sht_id", "owner_id",
+        'progress', 'status',
+    ];
     protected $table = "qaqc_insp_chklst_shts";
 
     public $eloquentParams = [

@@ -1,17 +1,3 @@
-@php $showNo = true; $showNoR = false; @endphp
-@if(!$editable)
-    <x-renderer.table tableName="{{$table01ROName}}" :columns="$readOnlyColumns" :dataSource="$dataSource" showNo="{{$showNo?1:0}}" footer="{{$tableFooter}}" noCss="{{$noCss}}" />
-    
-    @if(!$readOnly)
-        @if($createANewForm)
-            <x-renderer.button type='success' href='{!!$href!!}' >Create a new {{strtoupper( Str::singular($tableName))}}</x-renderer.button>
-        @endif
-
-        @if(!empty($btnCmdSettings) && $btnCmdSettings['btnCloneFromInspTmpl'])
-            <x-renderer.button type='success' >Clone From Inspection Template</x-renderer.button>
-        @endif
-    @endif
-@else
 <x-renderer.table tableName="{{$table01Name}}" :columns="$editableColumns" :dataHeader="$dataSource2ndThead" :dataSource="$dataSourceWithOld" showNo="{{$showNo?1:0}}" showNoR="{{$showNoR?1:0}}" footer="{{$tableFooter}}" maxH={{false}} tableDebug={{$tableDebug}} />
 <script>
     editableColumns['{{$table01Name}}'] = @json($editableColumns);
@@ -75,5 +61,3 @@
     <input class="bg-gray-200" readonly title="entityProjectId" id="entityProjectId" value="{{$entityProjectId}}" type="{{$tableDebugTextHidden}}" />
     <input class="bg-gray-200" readonly title="entitySubProjectId" id="entitySubProjectId" value="{{$entitySubProjectId}}" type="{{$tableDebugTextHidden}}" />
 @endonce
-
-@endif

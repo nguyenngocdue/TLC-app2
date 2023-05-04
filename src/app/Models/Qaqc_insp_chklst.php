@@ -8,7 +8,8 @@ class Qaqc_insp_chklst extends ModelExtended
 {
     protected $fillable = [
         "id", "prod_order_id", "name", "description", "owner_id", "slug",
-        "consent_number", "qaqc_insp_tmpl_id", "progress", "owner_id"
+        "consent_number", "qaqc_insp_tmpl_id", "progress", "owner_id",
+        'status',
     ];
     protected $table = "qaqc_insp_chklsts";
 
@@ -70,7 +71,7 @@ class Qaqc_insp_chklst extends ModelExtended
             ["dataIndex" => "prod_order_id"],
             ["dataIndex" => "qaqc_insp_tmpl_id"],
             ["dataIndex" => "progress"],
-            // ["dataIndex" => "owner_id"],
+            ["dataIndex" => "status"],
         ];
     }
 }

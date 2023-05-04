@@ -106,7 +106,8 @@ class Button extends Component
                 $className = "px-2.5 py-2 ";
                 break;
         }
-        $classList = ClassList::BUTTON;
+        $classList = ClassList::BUTTON . " disabled:opacity-50";
+
         $className = $this->outline ? $this->getClassOutline($className, $this->block, $classList) : $this->getClass($className, $this->block, $classList);
         return view('components.renderer.button', [
             // 'label' => $this->label,
