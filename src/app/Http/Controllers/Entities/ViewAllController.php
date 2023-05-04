@@ -236,7 +236,7 @@ class ViewAllController extends Controller
         $this->attachRendererIntoColumn($columns);
         // $searchableArray = App::make($this->typeModel)->toSearchableArray();
         $app = LibApps::getFor($this->type);
-        $tableTrueWidth = $app['view_all_absolute_table_width'] ?? false;
+        $tableTrueWidth = !($app['hidden'] ?? false);
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'perPage' => $perPage,
