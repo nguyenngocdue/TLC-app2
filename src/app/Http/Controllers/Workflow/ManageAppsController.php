@@ -91,6 +91,12 @@ class ManageAppsController extends AbstractManageLibController
                 'editable' => true,
                 'align' => 'center',
             ],
+            // [
+            //     'dataIndex' => 'view_all_absolute_table_width',
+            //     'renderer' => 'checkbox',
+            //     'editable' => true,
+            //     'align' => 'center',
+            // ],
             [
                 'dataIndex' => "hidden",
                 "renderer"  => 'checkbox',

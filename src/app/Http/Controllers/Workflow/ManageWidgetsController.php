@@ -68,11 +68,9 @@ class ManageWidgetsController extends AbstractManageLibController
             ],
             [
                 'dataIndex' => "section_title",
-                'renderer' => 'dropdown',
+                'renderer' => 'text4',
                 'editable' => true,
-                'cbbDataSource' => $apps,
-                'sortBy' => 'title',
-                "width" => 100,
+                "width" => 150,
             ],
             [
                 'dataIndex' => "widget_title",

@@ -7,6 +7,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\UpdateUserSettings;
+use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
@@ -233,7 +234,9 @@ class ViewAllController extends Controller
         $dataSource = $this->getDataSource($advanceFilters)->paginate($perPage);
         $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
         $this->attachRendererIntoColumn($columns);
-        $searchableArray = App::make($this->typeModel)->toSearchableArray();
+        // $searchableArray = App::make($this->typeModel)->toSearchableArray();
+        $app = LibApps::getFor($this->type);
+        $tableTrueWidth = !($app['hidden'] ?? false);
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'perPage' => $perPage,
@@ -243,7 +246,8 @@ class ViewAllController extends Controller
             'columns' => $columns,
             'dataSource' => $dataSource,
             'currentFilter' => $currentFilter,
-            'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
+            // 'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
+            'tableTrueWidth' => $tableTrueWidth,
         ]);
     }
 }

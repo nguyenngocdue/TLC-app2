@@ -13,7 +13,6 @@ class Parameter3Report extends Component
      */
     public function __construct(
         private $itemsSelected = [],
-        private $dataSource = [],
         private $hiddenItems = [],
         private $columns = [],
         private $routeName = '',
@@ -29,7 +28,6 @@ class Parameter3Report extends Component
         // dd($this->itemsSelected);
         return view('components.reports.parameter3-report', [
             'itemsSelected' => $this->itemsSelected,
-            'dataSource' => $this->dataSource,
             'hiddenItems' => $this->hiddenItems,
             'routeName' => $this->routeName,
             'entity' => $this->entity,
