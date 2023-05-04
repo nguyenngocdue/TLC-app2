@@ -999,6 +999,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
         "icon": null
     },
     "zunit_test_08": {
@@ -1011,6 +1012,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
         "icon": null,
         "apply_approval_tree": "true"
     },
