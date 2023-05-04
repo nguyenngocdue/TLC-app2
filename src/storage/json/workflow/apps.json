@@ -60,6 +60,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
         "icon": "<i class=\"fa-regular fa-sitemap\"><\/i>"
     },
     "erp_routing_link": {
@@ -74,6 +75,19 @@
         "show_renderer": "props-renderer",
         "icon": "<i class=\"fa-duotone fa-calendar-days\"><\/i>"
     },
+    "esg_line": {
+        "name": "esg_line",
+        "package": "compliance",
+        "sub_package": "esg",
+        "title": "Esg Line",
+        "nickname": "esgl",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "icon": null
+    },
     "esg_metric_type": {
         "name": "esg_metric_type",
         "package": "compliance",
@@ -84,6 +98,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
         "icon": null
     },
     "esg_metric_type_1": {
@@ -96,6 +111,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
         "icon": null
     },
     "esg_metric_type_2": {
@@ -104,6 +120,19 @@
         "sub_package": "esg",
         "title": "Esg Metric Type 2",
         "nickname": "esgm2",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "icon": null
+    },
+    "esg_sheet": {
+        "name": "esg_sheet",
+        "package": "compliance",
+        "sub_package": "esg",
+        "title": "Esg Sheet",
+        "nickname": "esg",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
