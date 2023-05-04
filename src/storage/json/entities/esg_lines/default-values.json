@@ -59,18 +59,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_year": {
-        "name": "_year",
-        "column_name": "year",
-        "label": "",
-        "validation": "required",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_unit": {
         "name": "_unit",
         "column_name": "unit",
@@ -326,6 +314,18 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "label": "",
         "validation": "",
         "validation_regex": "",
