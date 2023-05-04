@@ -5,8 +5,8 @@
         "chart_type": "doughnut",
         "fn": "SqlProgress",
         "section_title": "Inspection Checklists",
-        "widget_title": "by Progress of Checklist (All Templates - N17)",
-        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_c\":\"qaqc_insp_chklsts\", \"key_c\":\"prod_order_id\" , \"sub_project_id\":21}"
+        "widget_title": "by Progress of Checklist (N17)",
+        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_c\":\"qaqc_insp_chklsts\", \"key_c\":\"prod_order_id\" , \"sub_project_id\":21, \"qaqc_insp_tmpl_id\" : 1 }"
     },
     "chklst_02": {
         "name": "chklst_02",
@@ -14,8 +14,8 @@
         "chart_type": "doughnut",
         "fn": "SqlProgress",
         "section_title": "Inspection Checklists",
-        "widget_title": "by Progress of Checklist (All Templates - N18)",
-        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_c\":\"qaqc_insp_chklsts\", \"key_c\":\"prod_order_id\" , \"sub_project_id\":82}"
+        "widget_title": "by Progress of Checklist (N18)",
+        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_c\":\"qaqc_insp_chklsts\", \"key_c\":\"prod_order_id\" , \"sub_project_id\":82, \"qaqc_insp_tmpl_id\" : 1}"
     },
     "chklst_03": {
         "name": "chklst_03",
