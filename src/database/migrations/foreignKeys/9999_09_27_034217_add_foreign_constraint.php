@@ -190,10 +190,10 @@ return new class extends Migration
         Schema::table('qaqc_insp_chklst_sht_sigs', function (Blueprint $table) {
             $table->foreign('qaqc_insp_chklst_sht_id')->references('id')->on('qaqc_insp_chklst_shts');
         });
-        Schema::table('qaqc_insp_chklst_runs', function (Blueprint $table) {
-            $table->foreign('qaqc_insp_chklst_sht_id')->references('id')->on('qaqc_insp_chklst_shts');
-            $table->foreign('owner_id')->references('id')->on('users');
-        }); // version 1 
+        // Schema::table('qaqc_insp_chklst_runs', function (Blueprint $table) {
+        //     $table->foreign('qaqc_insp_chklst_sht_id')->references('id')->on('qaqc_insp_chklst_shts');
+        //     $table->foreign('owner_id')->references('id')->on('users');
+        // }); // version 1 
         Schema::table('qaqc_mirs', function (Blueprint $table) {
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('sub_project_id')->references('id')->on('sub_projects');
@@ -226,6 +226,14 @@ return new class extends Migration
         });
         Schema::table('qaqc_cars', function (Blueprint $table) {
             $table->foreign('responsible_person')->references('id')->on('users');
+        });
+
+        //************** ESG **************/
+        Schema::table('esg_metric_type_01s', function (Blueprint $table) {
+            $table->foreign('esg_metric_type_id')->references('id')->on('esg_metric_types');
+        });
+        Schema::table('esg_metric_type_02s', function (Blueprint $table) {
+            $table->foreign('esg_metric_type_1_id')->references('id')->on('esg_metric_type_01s');
         });
     }
 
