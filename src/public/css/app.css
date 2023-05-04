@@ -5530,6 +5530,10 @@ video {
     grid-column: span 6 / span 6;
   }
 
+  .lg\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
   .lg\:mx-10 {
     margin-left: 2.5rem;
     margin-right: 2.5rem;
@@ -5552,6 +5556,10 @@ video {
 
   .lg\:mr-32 {
     margin-right: 8rem;
+  }
+
+  .lg\:mt-1 {
+    margin-top: 0.25rem;
   }
 
   .lg\:flex {

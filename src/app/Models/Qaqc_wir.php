@@ -10,7 +10,8 @@ class Qaqc_wir extends ModelExtended
     protected $fillable = [
         "id", "name", "doc_id", "description", "slug", "project_id", "sub_project_id", "prod_routing_id", "status",
         "prod_discipline_id", "pj_level_id", "pj_module_type_id", "prod_order_id", "priority_id", "due_date",
-        "assignee_1", "wir_description_id", "owner_id", "lock_version", "closed_at"
+        "assignee_1", "wir_description_id", "owner_id", "closed_at",
+        "qc_total", "qc_accepted", "qc_remaining", "qc_rejected",
     ];
     protected $table = "qaqc_wirs";
     protected $primaryKey = 'id';
@@ -27,7 +28,6 @@ class Qaqc_wir extends ModelExtended
         "getOwnerId" => ["belongsTo", User::class, "owner_id"],
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_inspector_decision" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-        // "loggable" => ['morphMany', Logger::class, 'loggers', 'loggable_type', 'loggable_id'],
         "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
     ];
 

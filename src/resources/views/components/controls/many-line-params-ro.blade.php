@@ -6,27 +6,42 @@
     @endif
 
     @if(!empty($btnCmdSettings) && $btnCmdSettings['CallCommandButtonList'])
-        @dump($btnCmdSettings)
+        {{-- @dump($btnCmdSettings) --}}
         <script>
-            function create(params, button){
-                button.disabled=true
+            function create(params){
+                // button.disabled=true
                 const {title, url, inspTmplId,ownerId,prodOrderId} = params
                 const data = {inspTmplId, ownerId, prodOrderId}
+                toastr.info("Creating a new document by cloning a template...")
                 $.ajax({
                     type: "POST",
                     url,
                     data,
-                    success: ()=>console.log(111),
-                    error: ()=>console.log(222),
+                    success: ()=>{
+                        toastr.success("Created successfully.")
+                        location.reload()
+                    },
+                    error: ()=> {
+                        console.log("Failed")
+                    },
                 })
             }
         </script>
+        @php
+            $templates = [];
+            foreach($dataSource as $line){
+                $templates[$line->getQaqcInspTmpl->id] = 1;
+            }
+            $templates = array_keys($templates);
+            // dump($templates);
+        @endphp
         @foreach($btnCmdSettings['CallCommandButtonList'] as $button)
             @php
+                if(in_array($button['inspTmplId'], $templates)) continue;
                 $button['ownerId'] = $userId;
                 $button['prodOrderId'] = $entityId;
             @endphp
-            <x-renderer.button onClick="create({{json_encode($button)}}, this)" type='success' >{{$button['title']}}</x-renderer.button>
+            <x-renderer.button onClick="create({{json_encode($button)}});this.disabled=true;" type='success' >{{$button['title']}}</x-renderer.button>
         @endforeach
     @endif
 @endif
