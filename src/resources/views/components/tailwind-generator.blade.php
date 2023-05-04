@@ -76,6 +76,16 @@
 <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-blue-600">Tailwind Elements</h5>
 <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">Tailwind Elements</h6>
 <!-- FOR BUTTON -->
+<button class="disabled:opacity-0"></button>
+<button class="disabled:opacity-10"></button>
+<button class="disabled:opacity-20"></button>
+<button class="disabled:opacity-30"></button>
+<button class="disabled:opacity-40"></button>
+<button class="disabled:opacity-50"></button>
+<button class="disabled:opacity-60"></button>
+<button class="disabled:opacity-70"></button>
+<button class="disabled:opacity-80"></button>
+<button class="disabled:opacity-90"></button>
 <div class="my-1 px-1.5 py-1 ">
     <button type="button" class="inline-block px-2.5 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Primary</button>
 

@@ -59,12 +59,15 @@ class CloneTemplateFormProdOrderCommand extends Command
             return Command::FAILURE;
         }
         try {
+            $shortName = $qaqcInspTmpl->description;
             $insertedItem = $qaqcInspChklst = Qaqc_insp_chklst::create([
                 'prod_order_id' => $prodOrderId,
-                'name' => $prodOrder->name,
+                'name' => "Checklist of " . $prodOrder->name . " ($shortName)",
                 'slug' => (new All_SlugifyByName())($prodOrder->name, 'qaqc_insp_chklst', ''),
                 'owner_id' => $ownerId,
                 'qaqc_insp_tmpl_id' => $inspTmplId,
+                'status' => 'in_progress',
+                'progress' => 0,
             ]);
             $insertedId = $insertedItem->id;
             $qaqcInspTmplSheets = $qaqcInspTmpl->getSheets;
@@ -77,6 +80,8 @@ class CloneTemplateFormProdOrderCommand extends Command
                         'qaqc_insp_chklst_id' => $qaqcInspChklst->id,
                         'qaqc_insp_tmpl_sht_id' => $qaqcInspTmplSheet->id,
                         'owner_id' => $ownerId,
+                        'status' => 'in_progress',
+                        'progress' => 0,
                     ]);
                     foreach ($qaqcInspTmplSheet->getLines as $qaqcInspTmplLine) {
                         Qaqc_insp_chklst_line::create([

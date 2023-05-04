@@ -1027,6 +1027,10 @@ video {
 .h-full {
   height: 100%;
 }
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
 .max-h-0 {
   max-height: 0px;
 }
@@ -1071,6 +1075,9 @@ video {
 }
 .max-h-\[50rem\] {
   max-height: 50rem;
+}
+.max-h-52 {
+  max-height: 13rem;
 }
 .min-h-\[1100px\] {
   min-height: 1100px;
@@ -4831,6 +4838,33 @@ video {
 .disabled\:opacity-40:disabled {
   opacity: 0.4;
 }
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
+}
+.disabled\:opacity-0:disabled {
+  opacity: 0;
+}
+.disabled\:opacity-10:disabled {
+  opacity: 0.1;
+}
+.disabled\:opacity-20:disabled {
+  opacity: 0.2;
+}
+.disabled\:opacity-30:disabled {
+  opacity: 0.3;
+}
+.disabled\:opacity-60:disabled {
+  opacity: 0.6;
+}
+.disabled\:opacity-70:disabled {
+  opacity: 0.7;
+}
+.disabled\:opacity-80:disabled {
+  opacity: 0.8;
+}
+.disabled\:opacity-90:disabled {
+  opacity: 0.9;
+}
 .group\/item:hover .group-hover\/item\:visible {
   visibility: visible;
 }
@@ -5147,6 +5181,11 @@ video {
     margin-bottom: 2rem;
   }
 
+  .sm\:my-12 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
   .sm\:mt-auto {
     margin-top: auto;
   }
@@ -5333,6 +5372,16 @@ video {
     margin-bottom: 2.5rem;
   }
 
+  .md\:mx-16 {
+    margin-left: 4rem;
+    margin-right: 4rem;
+  }
+
+  .md\:my-48 {
+    margin-top: 12rem;
+    margin-bottom: 12rem;
+  }
+
   .md\:mb-3 {
     margin-bottom: 0.75rem;
   }
@@ -5363,6 +5412,10 @@ video {
 
   .md\:h-screen {
     height: 100vh;
+  }
+
+  .md\:h-\[500px\] {
+    height: 500px;
   }
 
   .md\:w-3\/4 {
