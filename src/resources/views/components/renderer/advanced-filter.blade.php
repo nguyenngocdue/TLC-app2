@@ -8,10 +8,12 @@
                     <label for="" class=" flex items-center justify-center text-gray-700 text-lg font-bold dark:text-white h-full">Basic Filter</label>
                 </div>
                 <div class="flex h-full">
-                    <x-advanced-filter.choose-basic-filter3 name="choose_basic_filter" type="{{$type}}" />
+                    <div class="w-48">
+                        <x-advanced-filter.choose-basic-filter3 name="choose_basic_filter" type="{{$type}}" />
+                    </div>
                     <x-renderer.button htmlType="submit" type="secondary" name="action" value="updateBasicFilter" class="ml-2"><i class="fa-regular fa-filter"></i></x-renderer.button>
                     <x-renderer.button type="danger" click="deletedBasicFilter()" class="mx-2"><i class="fa-solid fa-trash"></i></x-renderer.button>
-                    <button type="button" class="pl-2 text-2xl border-l" @click="toogleAdvanceFilter()">
+                    <button type="button" class="pl-2 text-2xl text-gray-500 border-l" @click="toogleAdvanceFilter()">
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                 </div>
@@ -27,7 +29,7 @@
             <div class="flex h-10">
                 <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
                 <div class="flex">
-                    <button type="button" class="pl-2 text-2xl border-l" @click="toogleAdvanceFilter()">
+                    <button type="button" class="pl-2 text-2xl text-gray-500 border-l" @click="toogleAdvanceFilter()">
                         <i class="fa-solid fa-chevron-up"></i>
                     </button>
                 </div>
@@ -38,20 +40,28 @@
                         <label for='' class="text-gray-900 dark:text-gray-300 text-base font-normal" >Basic Filter</label>
                     </div>
                     <div class="flex ">
-                        <x-advanced-filter.text3  name="basic_filter" value="" placeholder='Name and save your filters here...' onKeyPress="onKeyPress(event)"/>
+                        <x-advanced-filter.text3  name="basic_filter" value="{{$valueBasicFilter}}" placeholder='Name and save your filters here...' onKeyPress="onKeyPress(event)"/>
                         <x-renderer.button type="secondary" click="saveBasicFilter()" class="ml-2"><i class="fa-solid fa-floppy-disk"></i></x-renderer.button>
                     </div>
                     @empty(!$basicFilter)
+                            
                     <div style="height: {{$maxH}}" class="w-full overflow-y-auto mt-2 text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         @foreach($basicFilter as $value)
-                        <button value="{{$value}}" @click='updateBasicFilter2()' name="choose_basic_filter" class="relative {{$valueBasicFilter == $value ? 'text-blue-700' : ''}} inline-flex items-center w-full px-4 py-2 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-                            @if($valueBasicFilter == $value)
-                            <i class="fa-solid fa-check mr-2"></i>
-                            @else
-                            <i class="fa-solid fa-plus mr-2"></i>
-                            @endif
-                            {{$value}}
-                        </button>
+                        <div  class="relative {{$valueBasicFilter == $value ? 'text-blue-700' : ''}} inline-flex text-left justify-between items-center w-full px-4 py-1 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
+                            <button value="{{$value}}" @click='updateBasicFilter2()' name="choose_basic_filter" class="truncate">
+                                @if($valueBasicFilter == $value)
+                                <i class="fa-solid fa-check mr-2"></i>
+                                @else
+                                <i class="fa-solid fa-plus mr-2"></i>
+                                @endif
+                                <span>
+                                    {{$value}}
+                                </span>
+                            </button>
+                            <button @click='deletedBasicFilter2("{{$value}}")' class="px-2 py-1">
+                                <i class="text-red-500 fa-solid fa-trash"></i>
+                            </button>
+                        </div>
                         @endforeach
                     </div>
                     @endempty
@@ -199,6 +209,11 @@
         }
         function deletedBasicFilter(){
             $('[id="'+"{{$type}}"+'"]').append('<input type="hidden" name="action" value="deletedBasicFilter">')
+            $('[id="'+"{{$type}}"+'"]').submit()
+        }
+        function deletedBasicFilter2(value){
+            $('[id="'+"{{$type}}"+'"]').append(`<input type="hidden" name="basic_filter_delete" value="${value}">`)
+            $('[id="'+"{{$type}}"+'"]').append('<input type="hidden" name="action" value="deletedBasicFilter2">')
             $('[id="'+"{{$type}}"+'"]').submit()
         }
         function toogleAdvanceFilter(){
