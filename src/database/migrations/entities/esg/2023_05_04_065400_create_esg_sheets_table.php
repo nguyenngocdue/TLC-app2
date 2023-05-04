@@ -22,8 +22,8 @@ return new class extends Migration
         $schema->create('esg_sheets', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->unsignedInteger('year');
+            $table->string('description')->nullable();
+            $table->date('year');
             // $table->boolean('available');
             // $table->string('type');
             $table->appendCommonFields();

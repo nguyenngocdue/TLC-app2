@@ -59,7 +59,7 @@
     "_year": {
         "name": "_year",
         "column_name": "year",
-        "column_type": "integer",
+        "column_type": "date",
         "label": "Year",
         "control": "picker_year",
         "align": "",
@@ -188,5 +188,24 @@
         "save_on_change": "",
         "duplicatable": "",
         "new_line": ""
+    },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "column_type": "eloquent_prop",
+        "label": "ESG Lines",
+        "control": "relationship_renderer",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "true"
     }
 }

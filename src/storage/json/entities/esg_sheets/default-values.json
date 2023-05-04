@@ -39,7 +39,7 @@
         "name": "_year",
         "column_name": "year",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
