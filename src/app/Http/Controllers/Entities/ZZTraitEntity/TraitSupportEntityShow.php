@@ -153,7 +153,7 @@ trait TraitSupportEntityShow
         foreach ($item as  $comment) {
             $ownerComment = $comment->getOwnerId ?? '';
             $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $comment->updated_at);
-            $ownerRender = Blade::render("<x-renderer.avatar-user timeLine='true'>$ownerComment</x-renderer.avatar-user>");
+            $ownerRender = Blade::render("<x-renderer.avatar-user verticalLayout='true'>$ownerComment</x-renderer.avatar-user>");
             $strCenter .= "<div class='mt-2 border-b'>
                                 $ownerRender
                                 <p class='text-xs font-normal text-center mt-1'>$updatedAt</p>

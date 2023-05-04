@@ -12,7 +12,7 @@
 @case('entity_status')
     <div class="flex items-center relative">
         <div class="ml-20 hidden md:block w-64">
-            <x-renderer.avatar-user timeLine="true">{!!$user!!}</x-renderer.avatar-user>
+            <x-renderer.avatar-user verticalLayout="true">{!!$user!!}</x-renderer.avatar-user>
         </div>
         <div class="border-r-2 border-gray-200 absolute h-full left-60 top-2 z-10">
             <i class="fa-sharp fa-solid fa-circle-dot -top-1 -left-[7px] absolute text-blue-600"></i>
@@ -32,7 +32,7 @@
     @case('comment')
     <div class="flex items-center relative">
         <div class="ml-20 hidden md:block w-64">
-            <x-renderer.avatar-user timeLine="true">{!!$userComment!!}</x-renderer.avatar-user>
+            <x-renderer.avatar-user verticalLayout="true">{!!$userComment!!}</x-renderer.avatar-user>
         </div>
         <div class="border-r-2 border-gray-200 absolute h-full left-60 top-2 z-10">
             <i class="fa-sharp fa-solid fa-circle-dot -top-1 -left-[7px] absolute text-blue-600"></i>

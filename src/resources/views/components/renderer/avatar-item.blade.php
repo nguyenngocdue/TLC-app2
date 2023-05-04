@@ -4,7 +4,7 @@ $bgGray = $gray ? "bg-gray-300": "";
 $textGray = $gray ? "text-gray-600" : "";
 @endphp
 
-@if($timeLine)
+@if($verticalLayout)
     <div class="flex justify-center">
         <div class="w-12 h-12">
             <img class="object-cover w-full h-full rounded-full" src="{{$avatar}}" alt="" loading="lazy">

@@ -2,7 +2,10 @@
 <script>
 function initClick(lineId, checkedId){
     // console.log("Clicked on", lineId, checkedId)
-    $("#radio_" + lineId + "_" + checkedId).trigger('click')
+    if(checkedId !== undefined){
+        const target = "#radio_" + lineId + "_" + checkedId
+        $(target).trigger('click')
+    }
 }
 
 function registerListen(lineId, id){

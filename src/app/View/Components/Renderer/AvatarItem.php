@@ -17,7 +17,7 @@ class AvatarItem extends Component
         private $avatar = "",
         private $href = "",
         private $gray = false,
-        private $timeLine = false,
+        private $verticalLayout = false,
     ) {
         //
     }
@@ -35,7 +35,7 @@ class AvatarItem extends Component
             'avatar' => $this->avatar,
             'href' => $this->href,
             'gray' => $this->gray,
-            'timeLine' => $this->timeLine,
+            'verticalLayout' => $this->verticalLayout,
         ]);
     }
 }
