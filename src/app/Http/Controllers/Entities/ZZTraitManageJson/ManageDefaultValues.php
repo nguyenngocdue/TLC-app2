@@ -55,7 +55,7 @@ class ManageDefaultValues extends Manage_Parent
                     'All_ClosedAt',
                     'User_PositionRendered',
                     'Duplicate_Status',
-                    '(not-yet)Wir_NameRendered',
+                    'Wir_NameRendered',
                     '(not-yet)format_production',
                     '(not-yet)format_compliance',
                 ],
