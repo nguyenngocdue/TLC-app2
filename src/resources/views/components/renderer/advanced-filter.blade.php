@@ -32,12 +32,16 @@
                     </button>
                 </div>
             </div>
-            <div class="grid lg:grid-cols-6 lg:gap-2 md:grid-cols-4 md:gap-4 sm:grid-cols-2 sm:gap-10 h-fit">
-                <div class="h-auto">
-                    <div class="flex">
-                        <x-advanced-filter.text3  name="basic_filter" value="" placeholder='Basic filter name...' onKeyPress="onKeyPress(event)"/>
+            <div class="grid lg:grid-cols-6 lg:gap-2 md:grid-cols-4 md:gap-4 sm:grid-cols-2 sm:gap-10">
+                <div class="h-auto lg:col-span-1 col-span-5">
+                    <div class="lg:mt-1">
+                        <label for='' class="text-gray-900 dark:text-gray-300 text-base font-normal" >Basic Filter</label>
+                    </div>
+                    <div class="flex ">
+                        <x-advanced-filter.text3  name="basic_filter" value="" placeholder='Name and save your filters here...' onKeyPress="onKeyPress(event)"/>
                         <x-renderer.button type="secondary" click="saveBasicFilter()" class="ml-2"><i class="fa-solid fa-floppy-disk"></i></x-renderer.button>
                     </div>
+                    @empty(!$basicFilter)
                     <div style="height: {{$maxH}}" class="w-full overflow-y-auto mt-2 text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         @foreach($basicFilter as $value)
                         <button value="{{$value}}" @click='updateBasicFilter2()' name="choose_basic_filter" class="relative {{$valueBasicFilter == $value ? 'text-blue-700' : ''}} inline-flex items-center w-full px-4 py-2 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
@@ -50,8 +54,10 @@
                         </button>
                         @endforeach
                     </div>
+                    @endempty
+                    
                 </div>
-                <div class="col-span-5">
+                <div class="col-span-5 border-l pl-2">
                     <div class="grid lg:grid-cols-5 lg:gap-2 md:grid-cols-3 md:gap-4 sm:grid-cols-1 sm:gap-10">
                     @foreach($props as $key => $value)
                         <div>

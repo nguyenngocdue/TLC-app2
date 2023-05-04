@@ -38,7 +38,7 @@ class AdvancedFilter extends Component
         //     return $item;
         // }, $this->valueAdvanceFilters);
         $count = count($propsFilters) ?? 0;
-        $maxH = round($count / 4) * 4 . 'rem';
+        $maxH = round($count / 4) * 3.7 . 'rem';
         return view('components.renderer.advanced-filter', [
             'type' => $this->type,
             'props' => $propsFilters,
