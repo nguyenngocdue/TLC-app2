@@ -8,10 +8,12 @@
                     <label for="" class=" flex items-center justify-center text-gray-700 text-lg font-bold dark:text-white h-full">Basic Filter</label>
                 </div>
                 <div class="flex h-full">
-                    <x-advanced-filter.choose-basic-filter3 name="choose_basic_filter" type="{{$type}}" />
+                    <div class="w-48">
+                        <x-advanced-filter.choose-basic-filter3 name="choose_basic_filter" type="{{$type}}" />
+                    </div>
                     <x-renderer.button htmlType="submit" type="secondary" name="action" value="updateBasicFilter" class="ml-2"><i class="fa-regular fa-filter"></i></x-renderer.button>
                     <x-renderer.button type="danger" click="deletedBasicFilter()" class="mx-2"><i class="fa-solid fa-trash"></i></x-renderer.button>
-                    <button type="button" class="pl-2 text-2xl border-l" @click="toogleAdvanceFilter()">
+                    <button type="button" class="pl-2 text-2xl text-gray-500 border-l" @click="toogleAdvanceFilter()">
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                 </div>
@@ -27,7 +29,7 @@
             <div class="flex h-10">
                 <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
                 <div class="flex">
-                    <button type="button" class="pl-2 text-2xl border-l" @click="toogleAdvanceFilter()">
+                    <button type="button" class="pl-2 text-2xl text-gray-500 border-l" @click="toogleAdvanceFilter()">
                         <i class="fa-solid fa-chevron-up"></i>
                     </button>
                 </div>
