@@ -75,6 +75,25 @@
         "duplicatable": "",
         "new_line": ""
     },
+    "_factor": {
+        "name": "_factor",
+        "column_name": "factor",
+        "column_type": "float",
+        "label": "Factor",
+        "control": "number",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
     "_status": {
         "name": "_status",
         "column_name": "status",

@@ -17,6 +17,10 @@ return [
         ],
     ],
 
+    'esg_sheets' => [
+        'esg_lines' => [],
+    ],
+
     'zunit_test_06s' => [
         'prod_discipline_1s' => [],
     ],
