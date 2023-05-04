@@ -36,12 +36,12 @@ class UpdateUserSettings extends Controller
         $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = $valueRequest;
         return $settings;
     }
-    private function updateBasicFilter($request, $settings)
+    private function updateBasicFilter($request, $settings, $filter = 'basic_filter')
     {
         $chooseBasicFilter = $request->input('choose_basic_filter');
         [$type,] = $this->formatRequestValue($request);
         if ($chooseBasicFilter || !empty($chooseBasicFilter)) {
-            $settings[$type][Constant::VIEW_ALL]['current_filter'] = 'basic_filter';
+            $settings[$type][Constant::VIEW_ALL]['current_filter'] = $filter;
             $settings[$type][Constant::VIEW_ALL]['choose_basic_filters'] = $chooseBasicFilter;
             $valueRequest = $settings[$type][Constant::VIEW_ALL]['basic_filters'][$chooseBasicFilter];
             $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = $valueRequest;
@@ -49,6 +49,10 @@ class UpdateUserSettings extends Controller
         }
         $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = [];
         return $settings;
+    }
+    private function updateBasicFilter2($request, $settings)
+    {
+        return $this->updateBasicFilter($request, $settings, 'advance_filter');
     }
     private function saveBasicFilter($request, $settings)
     {
@@ -208,6 +212,9 @@ class UpdateUserSettings extends Controller
                 break;
             case 'updateBasicFilter':
                 $settings = $this->updateBasicFilter($request, $settings);
+                break;
+            case 'updateBasicFilter2':
+                $settings = $this->updateBasicFilter2($request, $settings);
                 break;
             case 'updateAdvanceFilter':
                 $settings = $this->updateFilter($request, $settings);
