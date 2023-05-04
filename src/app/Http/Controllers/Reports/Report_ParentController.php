@@ -116,11 +116,6 @@ abstract class Report_ParentController extends Controller
         return $modeParams;
     }
 
-    public function getDataForModeControl($dataSource)
-    {
-        return $dataSource;
-    }
-
     protected function getColorLegends()
     {
         return [];
@@ -179,9 +174,7 @@ abstract class Report_ParentController extends Controller
         // Execute the query
         $time = microtime(true) - $start;
         // dump($time);
-        $dataModeControl = $this->getDataForModeControl($this->getDataSource([]));
         $viewName = CurrentPathInfo::getViewName($request);
-
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
         // dd($dataModeControl);
 
@@ -197,7 +190,6 @@ abstract class Report_ParentController extends Controller
             'tableColumns' => $tableColumns,
             'tableDataSource' => $dataSource,
             'currentUserId' => $currentUserId,
-            'dataModeControl' => $dataModeControl,
             'groupBy' => $this->groupBy,
             'modeOptions' => $this->$entity(),
             'rotate45Width' => $this->rotate45Width,

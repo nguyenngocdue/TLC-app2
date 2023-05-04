@@ -16,15 +16,15 @@ trait TraitDataModesDocument
         ]];
     }
 
-    public function getDataForModeControl($dataSource = [])
-    {
-        $subProjects = ['sub_project' => Sub_project::get()->pluck('name', 'id')->toArray()];
-        $prod_orders  = ['prod_order' =>  Prod_order::get()->pluck('name', 'id')->toArray()];
-        $insp_tmpls = ['qaqc_insp_tmpl' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
-        $insp_chklsts = ['insp_chklst' => Qaqc_insp_chklst::get()->pluck('name', 'id')->toArray()];
-        $run_option = ['run_option' => ['View only last run', 'View all runs']];
-        return array_merge($subProjects, $prod_orders, $insp_tmpls, $insp_chklsts, $run_option);
-    }
+    // public function getDataForModeControl($dataSource = [])
+    // {
+    //     $subProjects = ['sub_project' => Sub_project::get()->pluck('name', 'id')->toArray()];
+    //     $prod_orders  = ['prod_order' =>  Prod_order::get()->pluck('name', 'id')->toArray()];
+    //     $insp_tmpls = ['qaqc_insp_tmpl' => Qaqc_insp_tmpl::get()->pluck('name', 'id')->toArray()];
+    //     $insp_chklsts = ['insp_chklst' => Qaqc_insp_chklst::get()->pluck('name', 'id')->toArray()];
+    //     $run_option = ['run_option' => ['View only last run', 'View all runs']];
+    //     return array_merge($subProjects, $prod_orders, $insp_tmpls, $insp_chklsts, $run_option);
+    // }
 
     public function getSettingParamsReport()
     {
