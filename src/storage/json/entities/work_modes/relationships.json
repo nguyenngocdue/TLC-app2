@@ -1,15 +1,1 @@
-{
-    "_getHrOtLines": {
-        "name": "_getHrOtLines",
-        "relationship": "hasMany",
-        "control_name": "getHrOtLines",
-        "renderer_view_all": "agg_count",
-        "renderer_view_all_param": "",
-        "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
-        "control": "relationship_renderer",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    }
-}
+[]

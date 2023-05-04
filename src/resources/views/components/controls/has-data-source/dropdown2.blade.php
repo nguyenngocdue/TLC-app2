@@ -45,6 +45,7 @@
             , selectedJson: '{!! $selected !!}'
             , table: "{{$table}}"
             , allowClear: {{$allowClear ?'true':'false'}}
+            , action: "{{$action ?? 'create'}}"
         }
         documentReadyDropdown2(params2)
 

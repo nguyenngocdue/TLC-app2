@@ -1,7 +1,7 @@
 <?php
 
+use App\BigThink\BlueprintExtended;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
@@ -14,16 +14,32 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prod_user_runs', function (Blueprint $table) {
+        $schema = DB::connection()->getSchemaBuilder();
+        $schema->blueprintResolver(function ($table, $callback) {
+            return new BlueprintExtended($table, $callback);
+        });
+
+        $schema->create('prod_user_runs', function (BlueprintExtended $table) {
             $table->unsignedBigInteger('prod_run_id');
             $table->unsignedBigInteger('user_id');
             $table->primary(['prod_run_id', 'user_id']);
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
+
+            $table->appendCommonFields();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('prod_run_id')->references('id')->on('prod_runs')->onDelete('cascade')->onUpdate('cascade');
         });
+        // Schema::create('prod_user_runs', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('prod_run_id');
+        //     $table->unsignedBigInteger('user_id');
+        //     $table->primary(['prod_run_id', 'user_id']);
+        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+
+        //     $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+        //     $table->foreign('prod_run_id')->references('id')->on('prod_runs')->onDelete('cascade')->onUpdate('cascade');
+        // });
     }
 
     /**

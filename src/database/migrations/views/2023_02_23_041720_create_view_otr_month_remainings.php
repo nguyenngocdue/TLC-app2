@@ -12,8 +12,8 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement("CREATE OR REPLACE VIEW view_otr_month_remainings AS
-        (
+        DB::statement("CREATE VIEW view_otr_month_remainings AS
+        
             SELECT 
                 'idless' AS id,
                 -- 'nameless' AS name,
@@ -25,7 +25,7 @@ return new class extends Migration
             FROM `hr_overtime_request_lines`
             GROUP BY `year_month0`, user_id
             ORDER BY `year_month0`, user_id
-        )");
+        ");
     }
 
     /**

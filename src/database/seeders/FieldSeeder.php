@@ -4,23 +4,58 @@ namespace Database\Seeders;
 
 use App\Models\Field;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 
 class FieldSeeder extends Seeder
 {
+    static $fieldDB = null;
+    static function getFieldDb()
+    {
+        if (is_null(static::$fieldDB)) {
+            static::$fieldDB = Field::all();
+        }
+        return static::$fieldDB;
+    }
+
+    static $fieldCache = [];
+    static function getFieldBy($key0, $value)
+    {
+        $db = static::getFieldDb();
+        $key = "{$key0}_{$value}";
+        if (!isset(static::$fieldCache[$key])) {
+            foreach ($db as $line) {
+                if ($line->{$key0} == $value) {
+                    // dump($line);
+                    static::$fieldCache[$key] = $line;
+                    break;
+                }
+            }
+        }
+        return static::$fieldCache[$key] ?? null;
+    }
+
     public static function getIdFromFieldName($fieldName)
     {
         try {
-            return Field::where('name', $fieldName)->firstOrFail()->id;
+            $line = static::getFieldBy('name', $fieldName);
+            if (!$line) Log::info("$fieldName is not found in Field Table.");
+            return $line ? $line->id : null;
+            // return Field::where('name', $fieldName)->firstOrFail()->id;
         } catch (\Exception $e) {
             abort(404, "Cant find in Field table the name [" . $fieldName . "]");
+            // dd($e);
         }
     }
     public static function getNameFromFieldId($fieldId)
     {
         try {
-            return Field::where('id', $fieldId)->firstOrFail()->name;
+            $line = static::getFieldBy('id', $fieldId);
+            if (!$line) Log::info("#$fieldId is not found in Field Table.");
+            return $line ? $line->id : null;
+            // return Field::where('id', $fieldId)->firstOrFail()->name;
         } catch (\Exception $e) {
             abort(404, "Cant find in Field table the id [" . $fieldId . "]");
+            // dd($e);
         }
     }
 

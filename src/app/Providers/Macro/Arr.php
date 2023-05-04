@@ -31,9 +31,11 @@ Arr::macro('groupBy', function ($arr, $col1, $col2 = null) {
 });
 Arr::macro('median', function ($arr, $greater = 1) {
     if ($arr) {
+        if (sizeof($arr) == 0) return 0;
         if (sizeof($arr) == 1) return $arr[0];
         $arr = array_filter($arr, fn ($item) => $item > $greater);
         $count = count($arr);
+        if ($count == 0) return 0;
         sort($arr);
         $mid = floor(($count - 1) / 2);
         return ($arr[$mid] + $arr[$mid + 1 - $count % 2]) / 2;

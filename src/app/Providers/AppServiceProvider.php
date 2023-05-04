@@ -54,6 +54,7 @@ class AppServiceProvider extends ServiceProvider
         //         return $app->basePath('stubs');
         //     });
         // Model::preventLazyLoading(!app()->isProduction());
+        Model::preventLazyLoading(env("DISABLED_LAZY_LOAD"));
 
         include_once(__DIR__ . "/Macro/Str.php");
         include_once(__DIR__ . "/Macro/StrDb.php");

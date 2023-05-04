@@ -7,7 +7,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Attachment;
 use App\Models\Qaqc_insp_chklst_line;
-use App\Models\Qaqc_insp_chklst_run_line;
+// use App\Models\Qaqc_insp_chklst_run_line;
 use App\Models\Qaqc_insp_chklst_run;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Utils\Support\AttachmentName;
@@ -20,80 +20,80 @@ use Intervention\Image\Facades\Image;
 
 class SubmitFormAndUploadFileController extends Controller
 {
-    use CloneRunTrait;
+    // use CloneRunTrait;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function submitAndUploadFile(Request $request)
-    {
-        try {
-            $transactionId = $request->transactionId;
-            $ownerId = $request->ownerId;
-            $progress = $request->progress;
-            $status = $request->status;
-            $sheetId = $request->sheetId;
-            $name = $request->name;
-            $description = $request->description;
-            $controlGroupId = $request->controlGroupId;
-            $controlTypeId = $request->controlTypeId;
-            $controlValueId = $request->controlValueId;
-            $groupId = $request->groupId;
-            $value = $request->value;
-            $valueComment = $request->valueComment;
-            if (in_array($controlValueId, ['4', '8'])) {
-                $valueOnHold = $request->valueOnHold;
-            } else {
-                $valueOnHold = null;
-            }
-            if (!(cache('transactionId') === $transactionId)) {
-                cache(['transactionId' => $transactionId], 10);
-                $qaqcInspChklstRun = Qaqc_insp_chklst_run::create([
-                    'owner_id' => $ownerId,
-                    'qaqc_insp_chklst_sht_id' => $sheetId,
-                    'progress' => $progress,
-                    'status' => $status,
-                ]);
-                cache(['qaqcInspChklstRunId' => $qaqcInspChklstRun->id], 10);
-                $qaqcInspChklstLine = Qaqc_insp_chklst_run_line::create([
-                    'name' => $name,
-                    'description' => $description,
-                    'control_type_id' => $controlTypeId,
-                    'value' => $value,
-                    'value_comment' => $valueComment,
-                    'value_on_hold' => $valueOnHold,
-                    'qaqc_insp_group_id' => $groupId,
-                    'qaqc_insp_chklst_run_id' => $qaqcInspChklstRun->id,
-                    'qaqc_insp_control_value_id' => $controlValueId,
-                    'qaqc_insp_control_group_id' => $controlGroupId,
-                    'owner_id' => $ownerId,
-                ]);
-                $this->uploadFile($request, $ownerId, $qaqcInspChklstLine->id);
-            } else {
-                $qaqcRunId = cache('qaqcInspChklstRunId');
-                $qaqcInspChklstLine = Qaqc_insp_chklst_run_line::create([
-                    'name' => $name,
-                    'description' => $description,
-                    'control_type_id' => $controlTypeId,
-                    'value' => $value,
-                    'value_comment' => $valueComment,
-                    'value_on_hold' => $valueOnHold,
-                    'qaqc_insp_group_id' => $groupId,
-                    'qaqc_insp_chklst_run_id' => $qaqcRunId,
-                    'qaqc_insp_control_value_id' => $controlValueId,
-                    'qaqc_insp_control_group_id' => $controlGroupId,
-                    'owner_id' => $ownerId,
-                ]);
-                $this->uploadFile($request, $ownerId, $qaqcInspChklstLine->id);
-            }
+    // public function submitAndUploadFile(Request $request)
+    // {
+    //     try {
+    //         $transactionId = $request->transactionId;
+    //         $ownerId = $request->ownerId;
+    //         $progress = $request->progress;
+    //         $status = $request->status;
+    //         $sheetId = $request->sheetId;
+    //         $name = $request->name;
+    //         $description = $request->description;
+    //         $controlGroupId = $request->controlGroupId;
+    //         $controlTypeId = $request->controlTypeId;
+    //         $controlValueId = $request->controlValueId;
+    //         $groupId = $request->groupId;
+    //         $value = $request->value;
+    //         $valueComment = $request->valueComment;
+    //         if (in_array($controlValueId, ['4', '8'])) {
+    //             $valueOnHold = $request->valueOnHold;
+    //         } else {
+    //             $valueOnHold = null;
+    //         }
+    //         if (!(cache('transactionId') === $transactionId)) {
+    //             cache(['transactionId' => $transactionId], 10);
+    //             $qaqcInspChklstRun = Qaqc_insp_chklst_run::create([
+    //                 'owner_id' => $ownerId,
+    //                 'qaqc_insp_chklst_sht_id' => $sheetId,
+    //                 'progress' => $progress,
+    //                 'status' => $status,
+    //             ]);
+    //             cache(['qaqcInspChklstRunId' => $qaqcInspChklstRun->id], 10);
+    //             $qaqcInspChklstLine = Qaqc_insp_chklst_run_line::create([
+    //                 'name' => $name,
+    //                 'description' => $description,
+    //                 'control_type_id' => $controlTypeId,
+    //                 'value' => $value,
+    //                 'value_comment' => $valueComment,
+    //                 'value_on_hold' => $valueOnHold,
+    //                 'qaqc_insp_group_id' => $groupId,
+    //                 'qaqc_insp_chklst_run_id' => $qaqcInspChklstRun->id,
+    //                 'qaqc_insp_control_value_id' => $controlValueId,
+    //                 'qaqc_insp_control_group_id' => $controlGroupId,
+    //                 'owner_id' => $ownerId,
+    //             ]);
+    //             $this->uploadFile($request, $ownerId, $qaqcInspChklstLine->id);
+    //         } else {
+    //             $qaqcRunId = cache('qaqcInspChklstRunId');
+    //             $qaqcInspChklstLine = Qaqc_insp_chklst_run_line::create([
+    //                 'name' => $name,
+    //                 'description' => $description,
+    //                 'control_type_id' => $controlTypeId,
+    //                 'value' => $value,
+    //                 'value_comment' => $valueComment,
+    //                 'value_on_hold' => $valueOnHold,
+    //                 'qaqc_insp_group_id' => $groupId,
+    //                 'qaqc_insp_chklst_run_id' => $qaqcRunId,
+    //                 'qaqc_insp_control_value_id' => $controlValueId,
+    //                 'qaqc_insp_control_group_id' => $controlGroupId,
+    //                 'owner_id' => $ownerId,
+    //             ]);
+    //             $this->uploadFile($request, $ownerId, $qaqcInspChklstLine->id);
+    //         }
 
-            return response()->json('Successfully');
-        } catch (\Throwable $th) {
-            Log::error($th);
-            return response()->json($th);
-        }
-    }
+    //         return response()->json('Successfully');
+    //     } catch (\Throwable $th) {
+    //         Log::error($th);
+    //         return response()->json($th);
+    //     }
+    // }
     public function submit2AndUploadFile(Request $request)
     {
         try {

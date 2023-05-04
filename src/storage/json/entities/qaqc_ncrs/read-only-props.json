@@ -275,6 +275,54 @@
         "inspection_rejected": "true",
         "closed": "true"
     },
+    "_attachment_defect_photos": {
+        "name": "_attachment_defect_photos",
+        "column_name": "attachment_defect_photos",
+        "new": "",
+        "assigned": "true",
+        "assign_rejected": "",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_attachment_defect_pdfs": {
+        "name": "_attachment_defect_pdfs",
+        "column_name": "attachment_defect_pdfs",
+        "new": "",
+        "assigned": "true",
+        "assign_rejected": "",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_attachment_corrective_photos": {
+        "name": "_attachment_corrective_photos",
+        "column_name": "attachment_corrective_photos",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": "true"
+    },
+    "_attachment_corrective_pdfs": {
+        "name": "_attachment_corrective_pdfs",
+        "column_name": "attachment_corrective_pdfs",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": "true"
+    },
     "_defect_report_type": {
         "name": "_defect_report_type",
         "column_name": "defect_report_type",

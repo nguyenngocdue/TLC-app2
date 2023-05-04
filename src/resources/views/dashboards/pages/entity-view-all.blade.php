@@ -30,6 +30,7 @@
         topRightControl="{!! $p !!}"
         bottomLeftControl="{!! $am !!}"
         bottomRightControl="{!! $p !!}"
+        tableTrueWidth={{true}}
         />
         
         <x-elapse />

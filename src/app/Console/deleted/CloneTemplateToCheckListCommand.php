@@ -3,11 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Models\Qaqc_insp_chklst;
-use App\Models\Qaqc_insp_chklst_run_line;
+// use App\Models\Qaqc_insp_chklst_run_line;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
 use App\Console\Commands\Traits\CloneRunTrait;
-use App\Models\Qaqc_insp_chklst_run;
+// use App\Models\Qaqc_insp_chklst_run;
 use App\View\Components\Formula\All_SlugifyByName;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
