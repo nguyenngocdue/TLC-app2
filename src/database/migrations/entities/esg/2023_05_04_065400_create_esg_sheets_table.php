@@ -19,9 +19,13 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('esg_metric_types', function (BlueprintExtended $table) {
+        $schema->create('esg_sheets', function (BlueprintExtended $table) {
             $table->id();
-            $table->unsignedBigInteger('description')->nullable();
+            $table->string('name');
+            $table->string('description');
+            $table->unsignedInteger('year');
+            $table->boolean('available');
+            $table->string('type');
             $table->appendCommonFields();
         });
     }
@@ -33,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('esg_metric_types');
+        Schema::dropIfExists('esg_sheets');
     }
 };

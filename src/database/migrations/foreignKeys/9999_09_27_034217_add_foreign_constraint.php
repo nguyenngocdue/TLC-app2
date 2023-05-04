@@ -235,6 +235,13 @@ return new class extends Migration
         Schema::table('esg_metric_type_2s', function (Blueprint $table) {
             $table->foreign('esg_metric_type_1_id')->references('id')->on('esg_metric_type_1s');
         });
+        Schema::table('esg_lines', function (Blueprint $table) {
+            $table->foreign('type_parent_1')->references('id')->on('esg_metric_type_1s');
+            $table->foreign('type_parent_2')->references('id')->on('esg_metric_type_2s');
+            $table->foreign('type_id')->references('id')->on('esg_metric_types');
+            $table->foreign('parent_id')->references('id')->on('esg_sheets');
+            $table->foreign('unit')->references('id')->on('terms');
+        });
     }
 
     /**
