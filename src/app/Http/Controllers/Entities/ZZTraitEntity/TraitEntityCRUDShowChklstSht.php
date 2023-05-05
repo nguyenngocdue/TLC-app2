@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Utils\ClassList;
 use App\Utils\Support\CurrentRoute;
+use Illuminate\Support\Str;
 
 trait TraitEntityCRUDShowChklstSht
 {
     use TraitSupportEntityShow;
+    use TraitGetOptionPrint;
 
     public function showChklstSht($id)
     {
@@ -20,7 +23,10 @@ trait TraitEntityCRUDShowChklstSht
             'tableDataSource' => $tableDataSource,
             'headerDataSource' => $entity,
             'type' => $this->type,
+            'typePlural' => Str::plural($this->type),
             'topTitle' => CurrentRoute::getTitleOf($this->type),
+            'classListOptionPrint' => ClassList::DROPDOWN,
+            'valueOptionPrint' => $this->getValueOptionPrint(),
         ]);
     }
 }
