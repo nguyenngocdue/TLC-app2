@@ -152,3 +152,5 @@
 <br />
 @endroleset
 @endif
+
+<x-elapse title="All table columns: " duration="{{array_sum($timeElapse)}}" />
