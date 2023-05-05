@@ -81,7 +81,8 @@ trait TableTraitColumns
         foreach ($columns as $key => $column) {
             if (empty($column)) continue;
             if (!$this->isInvisible($column)) {
-                $elapse = $timeElapse[$column['dataIndex']];
+                $dataIndex = $column['dataIndex'];
+                $elapse = $timeElapse[$dataIndex] ?? 0;
                 $columnsRendered[] = $this->makeTh($column, $key == sizeof($columns) - 1, $elapse);
             }
         }
