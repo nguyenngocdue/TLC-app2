@@ -22,7 +22,7 @@ class Sub_project extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1]);
     }
-    
+
     public function getProject()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -33,5 +33,13 @@ class Sub_project extends ModelExtended
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    function getManyLineParams()
+    {
+        return [
+            ['dataIndex' => 'id'],
+            ['dataIndex' => 'name'],
+        ];
     }
 }

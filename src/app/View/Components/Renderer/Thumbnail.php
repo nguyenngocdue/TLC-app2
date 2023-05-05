@@ -16,6 +16,7 @@ class Thumbnail extends Component
     public function __construct(
         private $cell,
         private $column,
+        private $dataLine,
     ) {
         //
     }
@@ -28,30 +29,33 @@ class Thumbnail extends Component
     public function render()
     {
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
-        // dd($this->cell);
-        $renderAnonymousAvatar = false;
-        $anonymousUrl = "/images/avatar.jpg";
-        if (Str::contains($this->cell, "No dataIndex for",)) {
-            if ($this->column['dataIndex'] === 'avatar') {
-                $renderAnonymousAvatar = true;
-            } else {
-                return ""; //<<Render no image when no URL found
-            }
-        }
 
-        $json = json_decode($this->cell);
-        if ($renderAnonymousAvatar) {
-            $url_thumbnail =  $anonymousUrl;
-            $url_media = $anonymousUrl;
+        $dataIndex = $this->column['dataIndex'];
+        $cell = $this->dataLine->$dataIndex;
+
+        // $renderAnonymousAvatar = false;
+        // if (Str::contains($this->cell, "No dataIndex for",)) {
+        //     if ($this->column['dataIndex'] === 'avatar') {
+        //         $renderAnonymousAvatar = true;
+        //     } else {
+        //         return ""; //<<Render no image when no URL found
+        //     }
+        // }
+
+        // $cell = json_decode($this->cell);
+        // if ($renderAnonymousAvatar) {
+        if (is_null($cell)) {
+            $url_thumbnail = "/images/avatar.jpg";
+            $url_media = "/images/avatar.jpg";
             $component = "thumbnail_anonymous";
             $href = "";
             $title = "No avatar found";
-        } elseif (is_object($json)) {
-            $url_thumbnail = $path . $json->url_thumbnail;
-            $url_media = $path .  $json->url_media;
+        } elseif (is_object($cell)) {
+            $url_thumbnail = $path . $cell->url_thumbnail;
+            $url_media = $path .  $cell->url_media;
             $component = "thumbnail_object";
             $href =  "href='{$url_media}'";
-            $title =  $json->filename;
+            $title =  $cell->filename;
         } else {
             $url_thumbnail = $path . $this->cell;
             $url_media = $path .  $this->cell;

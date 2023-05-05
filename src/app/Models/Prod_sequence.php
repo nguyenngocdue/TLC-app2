@@ -65,15 +65,18 @@ class Prod_sequence extends ModelExtended
 
     public function prodRoutingDetails()
     {
-        $prodOrder = $this->prodOrder;
-        $prod_routing_id = $prodOrder->prod_routing_id;
         $p = $this->eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3]);
-        $sql = $relation
-            ->getQuery()
-            ->where('prod_routing_id', $prod_routing_id)
-            ->toSql();
-        // Log::info($sql);
+        $prodOrder = $this->prodOrder;
+        if ($prodOrder) {
+            $prod_routing_id = $prodOrder->prod_routing_id;
+            $sql = $relation
+                ->getQuery()
+                ->where('prod_routing_id', $prod_routing_id)
+                ->toSql();
+            // Log::info($sql);
+            return $relation;
+        }
         return $relation;
     }
 
