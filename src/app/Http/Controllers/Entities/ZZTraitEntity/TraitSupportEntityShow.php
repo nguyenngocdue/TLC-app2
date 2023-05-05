@@ -29,9 +29,13 @@ trait TraitSupportEntityShow
             $value['response_type'] = $this->createDataSourceTableRun($value);
             $value['group_description'] = $value->getGroup->description ?? '';
         }
-        foreach ($entityShtSigs as &$value) {
-            $value['response_type'] = $this->createDataSourceTableRun($value);
-            $value['group_description'] = 'Third Party  Sign Off';
+        if ($entityShtSigs) {
+            foreach ($entityShtSigs as &$value) {
+                $value['response_type'] = $this->createDataSourceTableRun($value);
+                $value['group_description'] = 'Third Party  Sign Off';
+            }
+        } else {
+            $entityShtSigs = collect();
         }
         return array_merge($dataSource->toArray(), $entityShtSigs->toArray());
     }

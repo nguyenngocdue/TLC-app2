@@ -31,9 +31,10 @@ class ItemRenderCheckSheet extends Component
         $lines = $this->item->getLines;
         // $lines = $this->item->getRuns[0]->getLines;
         $chklst = $this->item->getChklst;
-        $prodOrder = $chklst->prodOrder;
-        $sub_project = $prodOrder->subProject;
-        $project = $sub_project->getProject;
+
+        $prodOrder = is_null($chklst) ? null : $chklst->prodOrder;
+        $sub_project = is_null($prodOrder) ? null : $prodOrder->subProject;
+        $project = is_null($sub_project) ? null : $sub_project->getProject;
         // dump($chklst);
         $signatures = $this->item->getShtSigs;
         $status = $this->item->status ? $this->item->status : 'in_progress';
