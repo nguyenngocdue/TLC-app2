@@ -98,8 +98,11 @@ trait TableTraitApplyRender
                 //$cell is ['value', 'cbbDS'] format
             }
         }
-
-        $params = ['column' => $column, 'dataLine' => $dataLineObj, 'cell' => $cell,];
+        //<< As Blade:render will auto convert $cell to htmlspecialchars, so the cell have to send a clone of itself
+        //<< Then next time when the same cell is used in different columns, it is still the object, not &quote string.
+        // $cell =  is_object($cell) ? clone $cell : $cell;
+        $cell =  is_object($cell) ? "Take data[slot] instead." : $cell;
+        $params = ['column' => $column, 'dataLine' => $dataLineObj, 'cell' => $cell];
         if ($isDropdown) $params['cbbDataSource'] = $cbbDataSource;
         $blade = Blade::render($output, $params);
         return $blade;
