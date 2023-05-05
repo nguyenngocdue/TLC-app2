@@ -54,6 +54,7 @@
         "agg_date_range",
         "avatar_user",
         "column",
+        "column_link",
         "parent_link",
         "thumbnails"
     ],
