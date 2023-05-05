@@ -18,6 +18,7 @@ class AvatarItem extends Component
         private $href = "",
         private $gray = false,
         private $verticalLayout = false,
+        private $tooltip = '',
     ) {
         //
     }
@@ -36,6 +37,7 @@ class AvatarItem extends Component
             'href' => $this->href,
             'gray' => $this->gray,
             'verticalLayout' => $this->verticalLayout,
+            'tooltip' => $this->tooltip,
         ]);
     }
 }

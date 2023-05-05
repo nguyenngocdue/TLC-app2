@@ -49,7 +49,7 @@ class ColumnLink extends Component
             } else {
                 $value = $item->$rendererParam;
             }
-            $result[] = "<a title='#{$id}' href='$route'>" . $value . "</a>";
+            $result[] = "<a title='#{$id}' href='$route' class='hover:bg-blue-200 rounded p-1'>" . $value . "</a>";
         }
         return "<p class='p-2'>" . join(", ", $result) . "</p>";
         // dump($this->column);
