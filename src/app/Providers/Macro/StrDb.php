@@ -40,7 +40,7 @@ Str::macro('markDocId', function ($dataSource, $type = null) {
     $libAppsData = LibApps::getFor($type);
     $docIdName = '';
     if ($nameColumnDocIDFormat = $libAppsData['doc_id_format_column']) {
-        $organizationName = env('ORGANIZATION_NAME', 'TLC');
+        $organizationName = config("company.short_name");
         $entityNickName = strtoupper($libAppsData['nickname']);
         switch ($nameColumnDocIDFormat) {
             case 'project_id':

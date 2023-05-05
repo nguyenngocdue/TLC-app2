@@ -15,7 +15,7 @@ $name = $sheetDesc
                 <span>Project:</span>
             </div>
             <div class="flex flex-col">
-                <span>TLC Modular</span>
+                <span>{{config("company.name")}}</span>
                 <span>{{isset($dataSource['project_name']) ? $dataSource['project_name'] : "" }}</span>
             </div>
         </div>

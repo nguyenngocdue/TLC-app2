@@ -54,7 +54,7 @@ class RemindSignOffNotification extends Notification
             ->cc($requester['email'])
             ->bcc(env('MAIL_ARCHIVE_BCC'))
 
-            ->subject("[ICS/$signable_id] Inspection Checklist - TLC Modular APP")
+            ->subject("[ICS/$signable_id] Inspection Checklist - " . config("company.name") . " APP")
             ->greeting("Dear $name,")
             ->line($requester['name'] . ' have send a request to you to sign off a document.')
             ->line('Please click the button below to open the sign off page.')

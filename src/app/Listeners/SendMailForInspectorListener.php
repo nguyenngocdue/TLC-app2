@@ -53,11 +53,11 @@ class SendMailForInspectorListener
         $libApps = LibApps::getFor($type);
         $nickNameEntity = strtoupper($libApps['nickname'] ?? $type);
         $titleEntity = $libApps['title'];
-        $subjectMail = '[' . $nickNameEntity . '/' . $id . '] ' .  ' - ' . $titleEntity . ' - ' . 'TLC Modular APP';
+        $subjectMail = '[' . $nickNameEntity . '/' . $id . '] ' .  ' - ' . $titleEntity . ' - ' . config("company.name") . ' APP';
         return $subjectMail;
     }
     private function getMailBcc()
     {
-        return env('MAIL_ARCHIVE_BCC', 'info@gamil.com');
+        return env('MAIL_ARCHIVE_BCC', 'info@gmail.com');
     }
 }

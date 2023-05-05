@@ -316,7 +316,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         $libApps = LibApps::getFor($type);
         $nickNameEntity = strtoupper($libApps['nickname'] ?? $type);
         $titleEntity = $libApps['title'];
-        $subjectMail = '[' . $nickNameEntity . '/' . $id . '] ' .  ' - ' . $titleEntity . ' - ' . 'TLC Modular APP';
+        $subjectMail = '[' . $nickNameEntity . '/' . $id . '] ' .  ' - ' . $titleEntity . ' - ' . config("company.name") . ' Modular APP';
         return [$href, $subjectMail];
     }
     private function getMailCc($type, $creator, $monitorsCurrent, $assigneeOldBallInCourt = null)
