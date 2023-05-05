@@ -31,7 +31,8 @@ trait TraitViewAllFunctions
         $chooseBasicFilter = $settings[$type][Constant::VIEW_ALL]['choose_basic_filters'] ?? null;
         $currentFilter = $settings[$type][Constant::VIEW_ALL]['current_filter'] ?? null;
         $refreshPage = $settings[$type][Constant::VIEW_ALL]['refresh_page'] ?? null;
-        return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter];
+        $optionPrint = $settings[$type][Constant::VIEW_ALL]['option_print_layout'] ?? null;
+        return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter, $optionPrint];
     }
 
     private function getEagerLoadParams($eloquentParams)

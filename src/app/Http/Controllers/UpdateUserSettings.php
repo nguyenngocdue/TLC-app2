@@ -23,6 +23,16 @@ class UpdateUserSettings extends Controller
         return $settings;
     }
 
+    private function updateOptionPrintLayout($request, $settings)
+    {
+        $value = $request->input('option_print_layout');
+        if (in_array($value, ['portrait', 'landscape'])) {
+            $type = $request->input("_entity");
+            $settings[$type][Constant::VIEW_ALL]['option_print_layout'] = $value;
+        }
+        return $settings;
+    }
+
     private function updateGear($request, $settings)
     {
         [$type, $toBeInserted] = $this->formatRequestValue($request);
@@ -50,10 +60,6 @@ class UpdateUserSettings extends Controller
         }
         $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = [];
         return $settings;
-    }
-    private function updateBasicFilter2($request, $settings)
-    {
-        return $this->updateBasicFilter($request, $settings, 'advance_filter');
     }
     private function saveBasicFilter($request, $settings)
     {
@@ -222,13 +228,16 @@ class UpdateUserSettings extends Controller
                 $settings = $this->updateBasicFilter($request, $settings);
                 break;
             case 'updateBasicFilter2':
-                $settings = $this->updateBasicFilter2($request, $settings);
+                $settings = $this->updateBasicFilter($request, $settings, 'advance_filter');
                 break;
             case 'updateAdvanceFilter':
                 $settings = $this->updateFilter($request, $settings);
                 break;
             case 'clearAdvanceFilter':
                 $settings = $this->clearFilter($request, $settings);
+                break;
+            case 'updateOptionPrintLayout':
+                $settings = $this->updateOptionPrintLayout($request, $settings);
                 break;
                 //report 
             case 'updateReportRegisters':
