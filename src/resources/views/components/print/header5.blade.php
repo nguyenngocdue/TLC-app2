@@ -1,5 +1,5 @@
-<div id="{{$id}}" class=" md:scroll-mt-20 sm:py-0 rounded-lg  bg-white  dark:border-gray-600">
-    <div class="border-b p-3 font-medium flex items-center justify-between">
+<div id="{{$id}}" class=" md:scroll-mt-20 sm:py-0 rounded-lg bg-white dark:border-gray-600">
+    <div class="border-b p-0 font-medium flex items-center justify-between">
         @php
             $content = strtoupper($name);
             $urlCurrent = url()->current();

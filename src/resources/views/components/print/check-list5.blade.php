@@ -2,16 +2,33 @@
 @section('topTitle', $topTitle)
 @section('title', 'Sign Off')
 @section('content')
-<div class="flex justify-center">
+<x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/>
+@php
+        switch ($valueOptionPrint) {
+            case 'landscape':
+            $layout = 'w-[1415px] min-h-[1000px]';
+            break;
+            case 'portrait':
+            default:
+                $layout = 'w-[1000px] min-h-[1415px]';
+                break;
+        }
+@endphp
+<div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-        <div class="w-[1000px] min-h-[1415px] items-center bg-white box-border p-8">
+        <div class="{{$layout}} items-center bg-white box-border p-8">
                 <x-print.table-of-contents :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
+                @php
+                    $count = count($tableDataSource) ?? 0;
+                @endphp
                 @foreach($tableDataSource as $key => $value)
                 <x-print.header5 :dataSource="$headerDataSource[$key]" page='{{$key+1}}' />
                 <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$value" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
+                @if(($key + 1) != $count)
                 <x-renderer.page-break />
+                @endif
                 @endforeach
-            </div>
+        </div>
     </div>
 </div>
 @endsection
