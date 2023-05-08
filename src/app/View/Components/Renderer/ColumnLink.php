@@ -27,10 +27,18 @@ class ColumnLink extends Component
     {
         if ($this->rendererParam === '') return "renderer_param ?";
         $rendererParam = $this->rendererParam;
+        $result = [];
 
         $dataIndex = $this->column['dataIndex'];
-        $dataSource = $this->dataLine->$dataIndex;
+        if (str_contains($dataIndex, "()")) {
+            $dataIndex = substr($dataIndex, 0, strlen($dataIndex) - 2);
+            $dataSource = $this->dataLine->{$dataIndex}();
+        } else {
+            $dataSource = $this->dataLine->$dataIndex;
+        }
+        // dump($dataIndex);
         // dump($dataSource);
+        // if (is_null($dataSource)) return;
         foreach ($dataSource as $item) {
             $table = $item->getTable();
             $route = route($table . ".edit", $item->id);
@@ -49,7 +57,7 @@ class ColumnLink extends Component
             } else {
                 $value = $item->$rendererParam;
             }
-            $result[] = "<a title='#{$id}' href='$route' class='hover:bg-blue-200 rounded p-1'>" . $value . "</a>";
+            $result[] = "<a title='#{$id}' href='$route' class='hover:bg-blue-200 rounded p-1 whitespace-nowrap'>" . $value . "</a>";
         }
         return "<p class='p-2'>" . join(", ", $result) . "</p>";
         // dump($this->column);

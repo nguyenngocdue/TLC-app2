@@ -60,10 +60,14 @@ class Dropdown3 extends Component
                 return $q;
             })->get();
         } else {
-            if ($params[1] == 'App\Models\User') {
-                $dataSource = static::singletonCache();
+            if (isset($params[1])) {
+                if ($params[1] == 'App\Models\User') {
+                    $dataSource = static::singletonCache();
+                } else {
+                    $dataSource = ($params[1])::all();
+                }
             } else {
-                $dataSource = ($params[1])::all();
+                $dataSource = collect();
             }
         }
         return view('components.advanced-filter.dropdown3', [

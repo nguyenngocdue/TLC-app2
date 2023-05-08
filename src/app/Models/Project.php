@@ -12,16 +12,21 @@ class Project extends ModelExtended
     protected $table = 'projects';
 
     public $eloquentParams = [
-        // "prodOrders" => ['hasMany', Prod_order::class],
         "getSubProjects" => ['hasMany', Sub_project::class, "project_id"],
         "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+
     ];
 
-    // public function prodOrders()
-    // {
-    //     $p = $this->eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1]);
-    // }
+    public $oracyParams = [
+        "getTeamMembers()" => ['getCheckedByField', User::class],
+    ];
+
+    public function getTeamMembers()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
     public function getSubProjects()
     {
         $p = $this->eloquentParams[__FUNCTION__];
