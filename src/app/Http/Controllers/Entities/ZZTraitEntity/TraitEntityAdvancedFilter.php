@@ -187,18 +187,22 @@ trait TraitEntityAdvancedFilter
                     case 'dropdown_multi':
                         array_walk($value, function ($value, $key) use ($q, $propsFilters) {
                             $relationship = $propsFilters['_' . $key]['relationships'];
-                            $oracyParams = $relationship['oracyParams'];
-                            $field = $key;
-                            $fieldId = DB::table('fields')->where('name', str_replace('()', '', $field))->value('id');
-                            $collectionFilter = DB::table('many_to_many')->where('field_id', $fieldId)
-                                ->where('term_type', $oracyParams[1])
-                                ->where('doc_type', $this->typeModel)
-                                ->whereIn('term_id', $value)
-                                ->get();
-                            $valueFilter = $collectionFilter->map(function ($item) {
-                                return $item->doc_id;
-                            })->toArray();
-                            $q->whereIn('id', $valueFilter);
+                            if (isset($relationship['oracyParams'])) {
+                                $oracyParams = $relationship['oracyParams'];
+                                $field = $key;
+                                $fieldId = DB::table('fields')->where('name', str_replace('()', '', $field))->value('id');
+                                $collectionFilter = DB::table('many_to_many')->where('field_id', $fieldId)
+                                    ->where('term_type', $oracyParams[1])
+                                    ->where('doc_type', $this->typeModel)
+                                    ->whereIn('term_id', $value)
+                                    ->get();
+                                $valueFilter = $collectionFilter->map(function ($item) {
+                                    return $item->doc_id;
+                                })->toArray();
+                                $q->whereIn('id', $valueFilter);
+                            } else {
+                                dump("Can not find oracyParams of $key, cancelled the criteria during filter.");
+                            }
                         });
                         break;
                     default:
