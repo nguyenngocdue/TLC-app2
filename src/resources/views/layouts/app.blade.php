@@ -21,7 +21,6 @@
         {{-- <x-homepage.sidebar2 /> --}}
         <div class="flex flex-col flex-1 w-full">
             <x-homepage.navbar2 />
-            <x-elapse title="Nav bar: " />
             @auth
             <main class="mt-16 m1b-8 w-full flex-grow dark:bg-gray-700 no-print">
                 <div class="w-full h-18 no-print">
@@ -49,7 +48,6 @@
                 <div class="mt-16 mb-8 no-print">
                 </div>
             @endguest
-            <x-elapse title="Title bar: "/>
             <div id="print-pdf-document"  class="w-full min-h-screen MUST-NOT-HAVE-X-PADDING-MARGIN-FOR-PRINT-PAGE">
                 @yield('content')
             </div>
