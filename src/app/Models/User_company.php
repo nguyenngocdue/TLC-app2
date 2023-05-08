@@ -11,6 +11,9 @@ class User_company extends ModelExtended
 
     public $eloquentParams = [
         "getUsers" => ['hasMany', User::class, 'company'],
+
+        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getDeleteBy" => ['belongsTo', User::class, 'deleted_by'],
     ];
 
     public function getUsers()
