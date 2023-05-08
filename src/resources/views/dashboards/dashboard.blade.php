@@ -6,7 +6,9 @@
 @section('content')
 
 <div class="px-4">
+    <x-elapse />
     <x-dashboards.bookmark-group />
+    <x-elapse />
     <x-dashboards.my-view-groups />
     <x-dashboards.widget-groups />
     <x-elapse />
