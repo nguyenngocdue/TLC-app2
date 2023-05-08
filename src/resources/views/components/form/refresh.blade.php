@@ -5,7 +5,7 @@
     @php
         $valueType = $valueRefresh ? 'refresh' : '';
     @endphp
-    <x-renderer.button id="button_refresh" htmlType="button" onClick="updateRefreshPage()" type='{{$valueType}}'><i class="fa-sharp fa-light fa-rotate-right"></i> Refresh (60)</x-renderer.button>
+    <x-renderer.button id="button_refresh" htmlType="button" onClick="updateRefreshPage()" type='{{$valueType}}' class="bg-blue-500"><i class="fa-sharp fa-light fa-rotate-right"></i> Refresh (60)</x-renderer.button>
 </form>
 @if($valueRefresh)
 <script>

@@ -21,6 +21,7 @@
         
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="{{ asset('js/bootstrap.js') }}"></script> --}}
     <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/select2/js/select2.full.min.js')}}"></script>
     <script src="{{ asset('AdminLTE/plugins/moment/moment.min.js')}}"></script>

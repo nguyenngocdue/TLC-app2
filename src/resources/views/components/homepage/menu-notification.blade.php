@@ -15,7 +15,7 @@
        .listen('.BroadcastNotificationEvent', (data) => {
         $.ajax({
             method: "GET",
-            url: "/api/v1/system/notifications",
+            url: "/system/notifications",
             dataType: "json",
             success: (response) => {
                 var unreadNotifications = response['meta']['unread'];
@@ -49,7 +49,7 @@
         $(document).ready(function () {
         $.ajax({
             method: "GET",
-            url: "/api/v1/system/notificationsRender",
+            url: "/system/notificationsRender",
             dataType: "json",
             success: (response) => {
                 var component = response['hits'];

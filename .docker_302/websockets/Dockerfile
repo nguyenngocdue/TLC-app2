@@ -29,13 +29,7 @@ RUN docker-php-ext-install gd && \
 
 RUN docker-php-ext-install pcntl
 
-COPY ./configs/php.ini /usr/local/etc/php/
-
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-
-
-COPY ./supervisord.conf /etc/supervisord.conf
-COPY ./supervisor.d /etc/supervisor.d
 
 RUN addgroup -g 1000 ndcgp
 RUN adduser -D -u 1000 ndc -G ndcgp
@@ -43,15 +37,8 @@ RUN adduser -D -u 1000 ndc -G ndcgp
 RUN chown -R ndc:ndcgp /var/www/app
 USER ndc
 
-# RUN usermod -u 1000 www-data
-
-# RUN chown -R www-data:www-data .
-
-# ENV ENABLE_CRONTAB 1
-# ENV ENABLE_HORIZON 1
-# COPY ./docker-entrypoint.sh /var/www/app/docker-entrypoint.sh
-# RUN chmod +x /var/www/app/docker-entrypoint.sh
-# ENTRYPOINT ["sh", "/var/www/app/docker-entrypoint.sh"]
-
-# CMD ["supervisord -n -c /etc/supervisord.conf"]
 RUN rm -rf /var/cache/apk/*
+
+EXPOSE 6001
+
+CMD ["php", "artisan", "websockets:serve"]
