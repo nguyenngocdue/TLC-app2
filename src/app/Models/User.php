@@ -154,6 +154,11 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public function getCompany()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
     public function positionPres()
     {
         $p = $this->eloquentParams[__FUNCTION__];
