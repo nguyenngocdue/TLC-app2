@@ -48,7 +48,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-gauge-high\"><\/i>"
     },
     "department": {
         "name": "department",
@@ -159,10 +159,10 @@
         "title": "HR Overtime Requests",
         "nickname": "otr",
         "doc_id_format_column": null,
-        "status": "dev",
+        "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
+        "icon": "<i class=\"fa-solid fa-user-clock\"><\/i>",
         "apply_approval_tree": "true",
         "show_in_my_view": "true"
     },
@@ -173,7 +173,7 @@
         "title": "HR Overtime Request Lines",
         "nickname": "otrl",
         "doc_id_format_column": null,
-        "status": "dev",
+        "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
@@ -190,7 +190,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
+        "icon": "<i class=\"fa-solid fa-badge-check\"><\/i>",
         "show_in_my_view": "true"
     },
     "hse_incident_report": {
@@ -203,7 +203,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
+        "icon": "<i class=\"fa-solid fa-user-injured\"><\/i>",
         "show_in_my_view": "true"
     },
     "manageAppCreations": {
@@ -217,7 +217,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>"
     },
     "manageApps": {
         "name": "manageApps",
@@ -230,7 +230,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
     },
     "manageStatuses": {
         "name": "manageStatuses",
@@ -243,7 +243,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
-        "icon": null
+        "icon": "<i class=\"fa-regular fa-bars-progress\"><\/i>"
     },
     "manageWidgets": {
         "name": "manageWidgets",
@@ -256,7 +256,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
-        "icon": null
+        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
     },
     "permissions": {
         "name": "permissions",
@@ -281,7 +281,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "qr-app-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-container-storage\"><\/i>"
     },
     "pj_pod": {
         "name": "pj_pod",
@@ -293,7 +293,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-sink\"><\/i>"
     },
     "pj_shipment": {
         "name": "pj_shipment",
@@ -305,7 +305,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "qr-app-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-ship\"><\/i>"
     },
     "pj_staircase": {
         "name": "pj_staircase",
@@ -317,7 +317,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-regular fa-circle-sort-up\"><\/i>"
     },
     "pj_unit": {
         "name": "pj_unit",
@@ -329,7 +329,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "qr-app-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-house\"><\/i>"
     },
     "post": {
         "name": "post",
@@ -406,7 +406,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-sharp fa-solid fa-bags-shopping\"><\/i>"
     },
     "prod_routing": {
         "name": "prod_routing",
@@ -483,7 +483,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-city\"><\/i>"
     },
     "public_holiday": {
         "name": "public_holiday",
@@ -508,7 +508,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
+        "icon": "<i class=\"fa-solid fa-square-check\"><\/i>",
         "show_in_my_view": "true"
     },
     "qaqc_insp_chklst": {
@@ -521,7 +521,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-renderer",
-        "icon": null,
+        "icon": "<i class=\"fa-solid fa-list-check\"><\/i>",
         "disallowed_direct_creation": "true"
     },
     "qaqc_insp_chklst_line": {
@@ -547,7 +547,7 @@
         "status": null,
         "edit_renderer": "checklist-sheet-renderer",
         "show_renderer": "checklist-sheet-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>"
     },
     "qaqc_insp_control_group": {
         "name": "qaqc_insp_control_group",
@@ -598,7 +598,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-list-ul\"><\/i>"
     },
     "qaqc_insp_tmpl_line": {
         "name": "qaqc_insp_tmpl_line",
@@ -623,7 +623,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-sheet-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>"
     },
     "qaqc_insp_value": {
         "name": "qaqc_insp_value",
@@ -648,7 +648,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
+        "icon": "<i class=\"fa-solid fa-warehouse-full\"><\/i>",
         "show_in_my_view": "true"
     },
     "qaqc_ncr": {
@@ -661,7 +661,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
+        "icon": "<i class=\"fa-solid fa-sensor-triangle-exclamation\"><\/i>",
         "show_in_my_view": "true",
         "disallowed_direct_creation": "true"
     },
@@ -675,7 +675,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
+        "icon": "<i class=\"fa-sharp fa-solid fa-clipboard-list-check\"><\/i>",
         "show_in_my_view": "true",
         "disallowed_direct_creation": "true"
     },
@@ -689,7 +689,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-sharp fa-solid fa-file-chart-pie\"><\/i>"
     },
     "role_sets": {
         "name": "role_sets",
@@ -766,7 +766,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-hotel\"><\/i>"
     },
     "term": {
         "name": "term",
