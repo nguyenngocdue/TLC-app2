@@ -106,5 +106,17 @@
         "closed": "true",
         "cancelled": "true",
         "on_hold": "true"
+    },
+    "_getTeamMembers()": {
+        "name": "_getTeamMembers()",
+        "column_name": "getTeamMembers()",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
     }
 }

@@ -63,15 +63,4 @@ class Prod_routing_detail extends ModelExtended
             ["dataIndex" => 'target_man_hours'],
         ];
     }
-    // public function getManyLineParams()
-    // {
-    //     return [
-    //         ['dataIndex' => 'prodRouting', "renderer" => 'column', 'rendererParam' => 'name'],
-    //         ['dataIndex' => 'prodRoutingLink', "renderer" => 'column', 'rendererParam' => 'name'],
-    //         ['dataIndex' => 'erpRoutingLink', "renderer" => 'column', 'rendererParam' => 'name'],
-    //         ['dataIndex' => 'wirDescription', "renderer" => 'column', 'rendererParam' => 'name'],
-    //         ["dataIndex" => 'target_hours'],
-    //         ["dataIndex" => 'target_man_hours'],
-    //     ];
-    // }
 }

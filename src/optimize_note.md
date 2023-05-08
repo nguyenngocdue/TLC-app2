@@ -82,3 +82,11 @@ Cache users table to ram for dropdown3
             4 query, 383ms
         After:
             1 query, 249ms               +34.99 %faster
+
+Cache avatar to ram for user->avatar, 
+    HR OTR:
+        Before: (50/page)
+            268 query, 2871 ms
+        After: (50/page)
+            188 query, 2526 ms             +12% faster
+            108 query, 2324 ms              +19% faster

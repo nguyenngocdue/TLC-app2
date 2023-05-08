@@ -25,7 +25,7 @@ trait TraitSupportNotification
         $libApps = LibApps::getFor($type);
         $nickNameEntity = strtoupper($libApps['nickname'] ?? $type);
         $titleEntity = $libApps['title'];
-        $subjectMail = '[' . $nickNameEntity . '/' . $id . '] ' . $nameUserCreated . ' - ' . $titleEntity . ' - ' . 'TLC Modular APP';
+        $subjectMail = '[' . $nickNameEntity . '/' . $id . '] ' . $nameUserCreated . ' - ' . $titleEntity . ' - ' . config("company.name") . ' APP';
         return (new MailMessage)
             ->subject($subjectMail)
             ->greeting('Dear ' . $nameUserCreated . ',')

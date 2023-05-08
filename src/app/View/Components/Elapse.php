@@ -15,6 +15,8 @@ class Elapse extends Component
      */
     public function __construct(
         private $total = false,
+        private $duration = null,
+        private $title = '',
     ) {
         //
     }
@@ -29,16 +31,22 @@ class Elapse extends Component
         $isAdmin  = CurrentUser::isAdmin();
         if (!$isAdmin) return "";
         $value = "";
-        if (!env("SHOW_ELAPSE")) return;
-        // if (!env("SHOW_ELAPSE")) {
-        //     if (!in_array(CurrentUser::id(), [35, 38])) return;
-        // }
-
-        if ($this->total) {
-            $value =  "Total: " . Timer::getTimeElapse();
-        } else {
-            $value = Timer::getTimeElapseFromLastAccess();
+        // if (!env("SHOW_ELAPSE")) return;
+        if (!env("SHOW_ELAPSE")) {
+            // 35: Vo Van Thuc - Software Tester
+            // 38: Fortune Truong - Project Manager
+            if (!in_array(CurrentUser::id(), [35, 38])) return;
         }
-        return '<div class="w-full py-1 m-1 rounded text-center bg-orange-300"><i class="fa-duotone fa-clock"></i> ' .  $value . "ms</div>";
+
+        if ($this->duration) {
+            $value = $this->duration;
+        } else {
+            if ($this->total) {
+                $value =  "Total: " . Timer::getTimeElapse();
+            } else {
+                $value = Timer::getTimeElapseFromLastAccess();
+            }
+        }
+        return '<div class="w-full py-1 m-1 rounded text-center bg-orange-300"><i class="fa-duotone fa-clock"></i> ' . $this->title .  $value . "ms</div>";
     }
 }

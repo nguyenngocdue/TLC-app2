@@ -2,6 +2,7 @@
 
 namespace App\Utils\Support;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Ndc\SpatieCustom\Exceptions\UnauthorizedException;
 
@@ -67,7 +68,8 @@ class CurrentUser
             )->collapse()->all();
         return $permissions;
     }
-    public static function get()
+
+    public static function get(): User
     {
         return Auth::user();
     }

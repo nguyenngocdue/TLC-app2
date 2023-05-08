@@ -30,7 +30,7 @@ class SendMailInspector extends Mailable implements ShouldQueue
     public function build()
     {
         $data = $this->data;
-        $appName = env('APP_NAME', 'TLC');
+        $appName = config("company.name");
         return $this->subject($data['subject'])->view('mails.mail-send-inspector', [
             'appName' => $appName,
             'name' => $data['name'],

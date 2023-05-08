@@ -119,7 +119,7 @@
                             @break
                             @case ('dropdown_multi')
                             @if($columnName == 'getRoleSet')
-                                {{$item->getRoleSet[0]->name}}
+                                {{isset($item->getRoleSet) ? $item->getRoleSet[0]->name : ""}}
                                 <x-renderer.button href="/dashboard/admin/setrolesets/{{$id}}/edit" target="_blank">Edit RoleSet in popup</x-renderer.button>
                                 @else
                                 <x-controls.has-data-source.dropdown2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />

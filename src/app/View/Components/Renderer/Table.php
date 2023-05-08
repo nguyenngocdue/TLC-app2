@@ -63,6 +63,7 @@ class Table extends Component
     $columns = $this->hideColumns($columns);
     $dataSource = $this->dataSource;
     $hasPaging = (is_object($dataSource) && method_exists($dataSource, 'links') && !empty($dataSource));
+    $tr_td = $this->makeTrTd($columns, $dataSource, $this->tableDebug, $this->tableName);
 
     return view("components.renderer.table", [
       'tableName' => $this->tableName,
@@ -70,8 +71,8 @@ class Table extends Component
       'dataSource' => $dataSource,
       'headerRendered' => $this->makeTable2ndThead($columns, $this->dataHeader),
       'headerTop' => $this->headerTop,
-      'columnsRendered' => $this->getColumnRendered($columns),
-      'tr_td' => $this->makeTrTd($columns, $dataSource, $this->tableDebug, $this->tableName),
+      'columnsRendered' => $this->getColumnRendered($columns, $this->timeElapse),
+      'tr_td' => $tr_td,
       'showing' => $hasPaging ? $dataSource->appends($this->request->toArray())->links('dashboards.pagination.showing') : "",
       'pagination' => $hasPaging ? $dataSource->links('dashboards.pagination.pagination') : "",
       'header' => $this->header,

@@ -34,6 +34,7 @@ return new class extends Migration
             $table->unsignedBigInteger("user_type")->nullable();
             $table->unsignedBigInteger("workplace")->nullable();
             $table->unsignedBigInteger("category")->nullable();
+            $table->unsignedBigInteger("company")->nullable();
             $table->date("date_of_birth")->nullable();
             $table->date("first_date")->nullable();
             $table->date("last_date")->nullable();

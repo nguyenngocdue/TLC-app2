@@ -1,5 +1,5 @@
 <div component="check-point-create-ncr-on-hold">
-    @if(count($relatedNcrs))
+    @if($relatedNcrs && count($relatedNcrs))
         <div id="divRelatedNCRs"> 
             Related NCR(s):
             @foreach($relatedNcrs as $ncr)

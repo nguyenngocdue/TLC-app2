@@ -29,7 +29,7 @@
     },
     "min_io": {
         "title": "MinIO",
-        "href": "https://qaqc.tlcmodular.com",
+        "href": "https://console.tlcmodular.com",
         "icon_fa": "fa-duotone fa-images"
     },
     "redis-insight": {

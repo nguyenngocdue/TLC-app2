@@ -63,6 +63,6 @@ class ParentLink extends Component
         //         return;
         //     }
         // }
-        return "<div class='px-2'>NO PARENT FOUND</div>";
+        return "<div class='px-2'>NO PARENT</div>";
     }
 }

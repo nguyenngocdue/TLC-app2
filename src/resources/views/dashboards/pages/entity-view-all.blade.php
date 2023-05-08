@@ -5,17 +5,10 @@
 
 @section('content')
 <div class="px-4 mt-2">
-    <x-elapse />
-    <div class="justify-end pb-5">
-        {{-- <div class='col-span-6'> --}}
-            {{-- <x-form.search route="{{ route($type . '.index') }}" title="{{$searchTitle}}" /> --}}
-        {{-- </div> --}}
-        {{-- <div class='col-span-6 justify-end'> --}}
-            {{-- <x-form.per-page type="{{$type}}" route="{{ route('updateUserSettings') }}" perPage="{{$perPage}}" /> --}}
-        {{-- </div> --}}
-    </div>
+    <x-elapse title="Bootrap: " duration="{{$frameworkTook}}"/>   
+    <x-elapse title="ViewAllController: "/>   
     <x-renderer.advanced-filter currentFilter="{{$currentFilter}}" :type="$type" :valueAdvanceFilters="$valueAdvanceFilters"/>
-    <x-elapse />
+    <x-elapse title="Advanced filter: "/>
     @php 
     $abt = "<x-form.action-button-group type='$type' />"; 
     $route = route('updateUserSettings');
@@ -33,7 +26,7 @@
         tableTrueWidth={{$tableTrueWidth}}
         />
         
-        <x-elapse />
+        <x-elapse title="Table overhead (without columns): "/>
         <x-elapse total=1/>
 </div>
 <br />

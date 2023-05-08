@@ -19,27 +19,18 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('qaqc_insp_tmpl_lines', function (BlueprintExtended $table) {
+        $schema->create('user_companies', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('name');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('control_type_id')->nullable();
-            $table->unsignedBigInteger('qaqc_insp_tmpl_sht_id');
-            $table->unsignedBigInteger('qaqc_insp_group_id')->nullable();
-            $table->unsignedBigInteger('qaqc_insp_control_group_id')->nullable();
-
-            $table->orderable();
+            $table->string('slug')->unique();
             $table->appendCommonFields();
         });
-        // Schema::create('qaqc_insp_tmpl_lines', function (Blueprint $table) {
+        // Schema::create('user_companies', function (Blueprint $table) {
         //     $table->id();
         //     $table->string('name');
         //     $table->text('description')->nullable();
-        //     $table->unsignedBigInteger('control_type_id');
-        //     $table->unsignedBigInteger('qaqc_insp_tmpl_sht_id');
-        //     $table->unsignedBigInteger('qaqc_insp_group_id');
-        //     $table->unsignedBigInteger('qaqc_insp_control_group_id')->nullable();
-        //     $table->unsignedBigInteger('owner_id');
+        //     $table->string('slug')->unique();
         //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
@@ -53,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qaqc_insp_tmpl_lines');
+        Schema::dropIfExists('user_companies');
     }
 };

@@ -69,15 +69,16 @@ class SignOff extends Component
         $norminatedApprovers = $this->item->getSignOff();
         $selectedStr = "[" . join(",", $norminatedApprovers->pluck('id')->toArray()) . ']';
         $signatures = $this->signatures;
-        $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+        // $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $currentUser = CurrentUser::get();
         foreach ($signatures as &$signature) {
-            $user = User::find($signature['owner_id']);
+            $user = User::findFromCache($signature['owner_id']);
             $signature['user'] = [
                 'id' => $user['id'],
                 'name' => $user['name'],
                 'email' =>  $user['email'],
-                'avatar' => $user->avatar ? $path . $user->avatar->url_thumbnail : "/images/avatar.jpg",
+                'avatar' => $user->getAvatarThumbnailUrl(),
+                // 'avatar' => $user->avatar ? $path . $user->avatar->url_thumbnail : "/images/avatar.jpg",
                 'full_name' => $user['full_name'],
                 'position_rendered' => $user['position_rendered'],
                 'timestamp' => DateTimeConcern::convertForLoading("picker_datetime", $signature['created_at']),
@@ -88,7 +89,8 @@ class SignOff extends Component
             'id' => $currentUser->id,
             'name' => $currentUser->name,
             'email' => $currentUser->email,
-            'avatar' =>  $currentUser->avatar ? $path . $currentUser->avatar->url_thumbnail : "/images/avatar.jpg",
+            'avatar' =>  $currentUser->getAvatarThumbnailUrl(),
+            // 'avatar' =>  $currentUser->avatar ? $path . $currentUser->avatar->url_thumbnail : "/images/avatar.jpg",
             'full_name' => $currentUser['full_name'],
             'position_rendered' => $currentUser['position_rendered'],
             'timestamp' => null,

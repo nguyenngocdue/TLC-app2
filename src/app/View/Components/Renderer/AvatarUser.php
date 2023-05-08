@@ -29,17 +29,20 @@ class AvatarUser extends Component
             $slot =  json_decode($data['slot']);
             $avatar = null;
             $cuId = CurrentUser::id();
+            $user = null;
             if (isset($slot->{'id'})) {
-                $model = ($cuId == $slot->{'id'}) ? CurrentUser::get() : User::find($slot->{'id'});
-                $avatar = $model->avatar;
-                if ($avatar) $avatar = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $avatar->url_thumbnail;
+                $user = ($cuId == $slot->{'id'}) ? CurrentUser::get() : User::findFromCache($slot->{'id'});
+                // $avatar = $user->avatar;
+                // if ($avatar) $avatar = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $avatar->url_thumbnail;
+                $avatar = $user->getAvatarThumbnailUrl();
             }
             $title = $slot->{'name'} ?? '';
             $description = $slot->{'position_rendered'} ?? '';
             $href = $slot->{'href'} ?? '';
             $gray = $slot->{'resigned'} ?? '';
             $verticalLayout = $this->verticalLayout;
-            return "<x-renderer.avatar-item title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
+            $tooltip = ($user) ? ($user->resigned ? "This person resigned on " . $user->last_date : "") : "";
+            return "<x-renderer.avatar-item tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
         };
     }
 }

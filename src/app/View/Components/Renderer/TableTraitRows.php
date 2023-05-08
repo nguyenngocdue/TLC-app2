@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Utils\System\Timer;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use ReflectionClass;
@@ -9,6 +10,7 @@ use ReflectionClass;
 trait TableTraitRows
 {
     use TableTraitApplyRender;
+    public $timeElapse = [];
 
     private function smartGetItems($dataSource)
     {
@@ -36,6 +38,7 @@ trait TableTraitRows
             $renderer = $column['renderer'] ?? false;
             $columnName = $column['column_name'] ?? $column['dataIndex'];
             $name = isset($column['dataIndex']) ? "{$this->tableName}[$columnName][$dataLineIndex]" : "";
+
             $rawData = null;
             switch ($renderer) {
                 case  'no.':
@@ -93,6 +96,9 @@ trait TableTraitRows
             $td .= "</td>";
 
             $tds[] = $td;
+
+            if (!isset($this->timeElapse[$columnName])) $this->timeElapse[$columnName] = 0;
+            $this->timeElapse[$columnName] += Timer::getTimeElapseFromLastAccess();
         }
         return $tds;
     }

@@ -31,7 +31,9 @@ class FieldSeeder extends Seeder
                 }
             }
         }
-        return static::$fieldCache[$key] ?? null;
+        $result = static::$fieldCache[$key] ?? null;
+        // if (is_null($result)) dd("[" . $value . "] has not been found in table Field.");
+        return $result;
     }
 
     public static function getIdFromFieldName($fieldName)

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\BigThink\HasAttachments;
+use App\BigThink\HasCachedAvatar;
 use App\BigThink\HasCheckbox;
 use App\BigThink\HasStatus;
 use App\BigThink\TraitMenuTitle;
@@ -41,6 +42,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     use TraitModelExtended;
 
     use HasAttachments;
+    use HasCachedAvatar;
     use HasStatus;
     use HasCheckbox;
 
@@ -91,6 +93,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
         "getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
         "userTypes" => ['belongsTo', User_type::class, 'user_type'],
+        "getCompany" => ['belongsTo', User_company::class, 'company'],
         "categories" => ['belongsTo', User_category::class, 'category'],
         "positionPres" => ['belongsTo', User_position_pre::class, 'position_prefix'],
         "position1" => ['belongsTo', User_position1::class, 'position_1'],
@@ -147,6 +150,11 @@ class User extends Authenticatable implements LdapAuthenticatable
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function categories()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getCompany()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -237,5 +245,16 @@ class User extends Authenticatable implements LdapAuthenticatable
             'last_name' => $this->last_name,
             'email' => $this->email,
         ];
+    }
+
+    static $userDbSingleton = [];
+    //Override Model find
+    public static function findFromCache($id)
+    {
+        // return parent::find($id);
+        if (!isset(static::$userDbSingleton[$id])) {
+            static::$userDbSingleton[$id] = static::find($id);
+        }
+        return static::$userDbSingleton[$id];
     }
 }

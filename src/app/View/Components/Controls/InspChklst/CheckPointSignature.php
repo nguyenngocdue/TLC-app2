@@ -28,15 +28,16 @@ class CheckPointSignature extends Component
      */
     public function render()
     {
-        $inspector = User::find($this->line->inspector_id);
-        $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+        $inspector = User::findFromCache($this->line->inspector_id);
+        // $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         if ($inspector) {
             $inspector = [
                 'id' => $inspector->id,
                 'full_name' => $inspector->full_name,
                 'position_rendered' => $inspector->position_rendered,
                 'timestamp' => DateTimeConcern::convertForLoading("picker_datetime", $this->line->created_at),
-                'avatar' => $inspector->avatar ? $path . $inspector->avatar->url_thumbnail : "/images/avatar.jpg",
+                'avatar' => $inspector->getAvatarThumbnailUrl(),
+                // 'avatar' => $inspector->avatar ? $path . $inspector->avatar->url_thumbnail : "/images/avatar.jpg",
             ];
         }
         // dump($inspector);

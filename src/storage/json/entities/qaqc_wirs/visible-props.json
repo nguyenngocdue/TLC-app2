@@ -26,6 +26,15 @@
         "closed": "true",
         "not_applicable": "true"
     },
+    "_getNcrs": {
+        "name": "_getNcrs",
+        "column_name": "getNcrs",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": "",
+        "not_applicable": ""
+    },
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
@@ -98,6 +107,42 @@
         "closed": "true",
         "not_applicable": "true"
     },
+    "_qc_total": {
+        "name": "_qc_total",
+        "column_name": "qc_total",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
+    },
+    "_qc_accepted": {
+        "name": "_qc_accepted",
+        "column_name": "qc_accepted",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
+    },
+    "_qc_remaining": {
+        "name": "_qc_remaining",
+        "column_name": "qc_remaining",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
+    },
+    "_qc_rejected": {
+        "name": "_qc_rejected",
+        "column_name": "qc_rejected",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
+    },
     "_priority_id": {
         "name": "_priority_id",
         "column_name": "priority_id",
@@ -116,6 +161,15 @@
         "closed": "true",
         "not_applicable": "true"
     },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
+    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -128,15 +182,6 @@
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "closed": "true",
-        "not_applicable": "true"
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
         "new": "true",
         "assigned": "true",
         "rejected": "true",

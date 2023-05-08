@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Str;
 
 trait TableTraitColumns
@@ -38,7 +39,7 @@ trait TableTraitColumns
         return join("", $result);
     }
 
-    private function makeTh($column, $isLastColumn)
+    private function makeTh($column, $isLastColumn, $elapse)
     {
         $renderer = $column['renderer'] ?? "_no_renderer_";
         // $rendererUnit = $column['rendererUnit'] ?? "_no_unit_";
@@ -51,11 +52,13 @@ trait TableTraitColumns
         $tooltip .= "+ DataIndex: $dataIndex\n";
         $tooltip .= "+ ColumnName: $columnName\n";
         $tooltip .= "+ Renderer: $renderer\n";
-        // $tooltip .= "+ RendererUnit: $rendererUnit\n";
-        $tooltip .= "+ Width: $width";
+        $tooltip .= "+ Width: $width\n";
+        $tooltip .= "+ Took: {$elapse}ms";
+
         $styleStr = $this->getStyleStr($column);
         $iconJson = $columnType === 'json' ? '<br/><i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
         if ($columnType === 'json') $title .= $iconJson;
+        if (env('SHOW_ELAPSE') || (in_array(CurrentUser::id(), [35, 38]))) $title .= "<br/><span title='Elapse time'>({$elapse}ms)</span>";
         $rotate45Width = $this->rotate45Width;
         $rotate45Height = ($this->rotate45Width) ? $rotate45Width - 100 : false;
         $classTh = ($this->rotate45Width) ? "rotated-title-th h-[{$rotate45Height}px]" : "";
@@ -73,12 +76,16 @@ trait TableTraitColumns
         return $th;
     }
 
-    private function getColumnRendered($columns)
+    private function getColumnRendered($columns, $timeElapse)
     {
         $columnsRendered = [];
         foreach ($columns as $key => $column) {
             if (empty($column)) continue;
-            if (!$this->isInvisible($column)) $columnsRendered[] = $this->makeTh($column, $key == sizeof($columns) - 1);
+            if (!$this->isInvisible($column)) {
+                $dataIndex = $column['dataIndex'];
+                $elapse = $timeElapse[$dataIndex] ?? 0;
+                $columnsRendered[] = $this->makeTh($column, $key == sizeof($columns) - 1, $elapse);
+            }
         }
         $columnsRendered = join("", $columnsRendered);
         return $columnsRendered;

@@ -54,7 +54,7 @@
                     <span>Project Name:</span>
                 </div>
                 <div class="flex flex-col font-light text-base">
-                    <span>TLC Modular</span>
+                    <span>{{config("company.name")}}</span>
                     <span>{{$projectName}}</span>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                     <span>Prod Order Name:</span>
                 </div>
                 <div class="flex flex-col font-light text-base">
-                    <span>TLC Modular</span>
+                    <span>{{config("company.name")}}</span>
                     <span>{{$projectName}}</span>
                     <span>{{$subProjectName}}</span>
                     <span>{{$prodOrderName}}</span>
