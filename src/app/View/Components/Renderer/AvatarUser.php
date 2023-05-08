@@ -31,9 +31,10 @@ class AvatarUser extends Component
             $cuId = CurrentUser::id();
             $user = null;
             if (isset($slot->{'id'})) {
-                $user = ($cuId == $slot->{'id'}) ? CurrentUser::get() : User::find($slot->{'id'});
-                $avatar = $user->avatar;
-                if ($avatar) $avatar = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $avatar->url_thumbnail;
+                $user = ($cuId == $slot->{'id'}) ? CurrentUser::get() : User::findFromCache($slot->{'id'});
+                // $avatar = $user->avatar;
+                // if ($avatar) $avatar = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $avatar->url_thumbnail;
+                $avatar = $user->getAvatarThumbnailUrl();
             }
             $title = $slot->{'name'} ?? '';
             $description = $slot->{'position_rendered'} ?? '';

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\BigThink\HasAttachments;
+use App\BigThink\HasCachedAvatar;
 use App\BigThink\HasCheckbox;
 use App\BigThink\HasStatus;
 use App\BigThink\TraitMenuTitle;
@@ -41,6 +42,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     use TraitModelExtended;
 
     use HasAttachments;
+    use HasCachedAvatar;
     use HasStatus;
     use HasCheckbox;
 
@@ -237,5 +239,16 @@ class User extends Authenticatable implements LdapAuthenticatable
             'last_name' => $this->last_name,
             'email' => $this->email,
         ];
+    }
+
+    static $userDbSingleton = [];
+    //Override Model find
+    public static function findFromCache($id)
+    {
+        // return parent::find($id);
+        if (!isset(static::$userDbSingleton[$id])) {
+            static::$userDbSingleton[$id] = static::find($id);
+        }
+        return static::$userDbSingleton[$id];
     }
 }

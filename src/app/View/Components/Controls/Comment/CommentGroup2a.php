@@ -60,19 +60,20 @@ class CommentGroup2a extends Component
 
     function createDataSource($comments, $commentableType, $commentableId, $category, $category_id)
     {
-        $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+        // $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $counter = static::$counter;
         $index = 0;
         $currentUser = CurrentUser::get();
         $params = [];
         foreach ($comments as $comment) {
-            $user = User::find($comment->owner_id);
+            $user = User::findFromCache($comment->owner_id);
             $item = $this->getAnEmptyLine($counter, $index);
             $item['id']['value'] = $comment->id;
             $item['position_rendered']['value'] = $comment->position_rendered;
             $item['owner_id']['value'] = $comment->owner_id;
             $item['owner_id']['display_name'] = $user->name;
-            $item['owner_id']['avatar'] = $user->avatar ? $path . $user->avatar->url_thumbnail : "/images/avatar.jpg";
+            $item['owner_id']['avatar'] = $user->getAvatarThumbnailUrl();
+            // $item['owner_id']['avatar'] = $user->avatar ? $path . $user->avatar->url_thumbnail : "/images/avatar.jpg";
             $item['created_at']['value'] = $comment->created_at;
             $item['content']['value'] = $comment->content;
 
@@ -92,7 +93,8 @@ class CommentGroup2a extends Component
             $item['position_rendered']['value'] = $user->position_rendered;
             $item['owner_id']['value'] = $user->id;
             $item['owner_id']['display_name'] = $user->name;
-            $item['owner_id']['avatar'] =  $user->avatar ? $path . $user->avatar->url_thumbnail : "/images/avatar.jpg";
+            $item['owner_id']['avatar'] =  $user->getAvatarThumbnailUrl();
+            // $item['owner_id']['avatar'] =  $user->avatar ? $path . $user->avatar->url_thumbnail : "/images/avatar.jpg";
             $item['created_at']['value'] = date(Constant::FORMAT_DATETIME_MYSQL);
             $item['content']['value'] = $oldValue;
 
