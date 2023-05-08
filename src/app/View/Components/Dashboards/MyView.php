@@ -36,7 +36,7 @@ class MyView extends Component
     {
         $result = [];
 
-        $docs = $openingDocs->where('owner_id', $uid)->get();
+        $docs = $openingDocs->where('owner_id', $uid)->orderBy('updated_at', 'desc')->get();
         foreach ($docs as $doc) {
             $this->makeUpLinks($app, $doc);
             $result[] = $doc;
@@ -46,7 +46,7 @@ class MyView extends Component
 
     private function assigned_to_me($appKey, $app, $openingDocs, $uid, $statuses)
     {
-        $docs = $openingDocs->get();
+        $docs = $openingDocs->orderBy('updated_at', 'desc')->get();
         $result = [];
         foreach ($docs as $doc) {
             if (isset($statuses[$doc->status])) {
