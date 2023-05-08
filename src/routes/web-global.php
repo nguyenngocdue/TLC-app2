@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminSetRoleSetController;
-use App\Http\Controllers\Api\v1\System\NotificationsController;
+use App\Http\Controllers\Api\v1\System\NotificationsController as SystemNotificationsController;
 use App\Http\Controllers\AppMenuController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Notifications\NotificationsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Utils\MyCompany;
@@ -28,4 +29,6 @@ Route::group([
     // Route::get('gitpull202', fn () => Log::info("WebHook Called"));
     Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications.index');
     Route::get('notifications/{type}/{id}/{idNotification}', [NotificationsController::class, 'markAsRead'])->name('notifications.markAsRead');
+    Route::get('system/notifications', [SystemNotificationsController::class, 'notifications']);
+    Route::get('system/notificationsRender', [SystemNotificationsController::class, 'notificationsRender']);
 });

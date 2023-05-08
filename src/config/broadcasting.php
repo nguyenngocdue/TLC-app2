@@ -37,16 +37,18 @@ return [
                 "cluster" => env("PUSHER_APP_CLUSTER"),
                 "useTLS" => true,
                 'encrypted' => true,
-                'host' => 'php',
-                'port' => 6001,
+                'host' =>  env("LARAVEL_WEBSOCKETS_HOST", "127.0.0.1"),
+                'port' => env("LARAVEL_WEBSOCKETS_PORT", 6001),
                 'scheme' => 'https',
                 'debug' => true,
+                'client_options' => [
+                    'verify' => false, // to disable TLS checks
+                ],
                 'curl_options' => [
                     CURLOPT_SSL_VERIFYHOST => 0,
                     CURLOPT_SSL_VERIFYPEER => 0,
                 ]
             ],
-            "client_options" => [],
         ],
 
         "ably" => [

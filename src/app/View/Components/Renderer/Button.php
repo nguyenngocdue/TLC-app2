@@ -56,7 +56,7 @@ class Button extends Component
             case "link":
                 return $defaultClass . "bg-transparent text-blue-600 hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-200";
             case "refresh":
-                return $defaultClass . "bg-gray-300 text-gray-700 shadow-md hover:bg-gray-400 hover:shadow-lg focus:bg-gray-400 focus:shadow-lg active:bg-gray-500 active:shadow-lg";
+                return $defaultClass . "bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-600 focus:shadow-lg active:bg-gray-600 active:shadow-lg";
             case "light":
             default:
                 return $defaultClass . "bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg active:bg-gray-400 active:shadow-lg";
