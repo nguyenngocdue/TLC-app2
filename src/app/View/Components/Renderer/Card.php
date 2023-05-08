@@ -17,6 +17,7 @@ class Card extends Component
         private $px = 4,
         private $py = 4,
         private $tooltip = "",
+        private $icon = null,
     ) {
     }
 
@@ -27,7 +28,6 @@ class Card extends Component
      */
     public function render()
     {
-
         // return view("components.renderer.card", ['title' => 'title', 'description' => 'desc']);
         return function (array $data) {
             $items = isset($data['attributes']["items"]) ? join("", $data['attributes']["items"]) : $data["slot"];
@@ -36,7 +36,14 @@ class Card extends Component
             $class = $this->class;
             $result = "<fieldset id='$this->idHtml' component='renderer/card' 
                 class='$class break-normal min-w-0 px-{$this->px} py-{$this->py} dark:bg-gray-800 dark:border-gray-600 rounded-lg shadow-xs'>";
-            if ($title) $result .= "<legend title='$this->tooltip'><h4 class='px-2 font-medium text-gray-600 dark:text-gray-300'>$title</h4></legend>";
+            if ($title) {
+                $result .= "<legend title='$this->tooltip'>";
+                $result .=  "<h4 class='px-2 font-medium text-gray-600 dark:text-gray-300'>";
+                $result .= $this->icon ? "<i class='$this->icon'></i> " : "";
+                $result .= $title;
+                $result .= "</h4>";
+                $result .= "</legend>";
+            }
             if ($description) $result .= $description;
             $result .= "<p class='text-gray-600 dark:text-gray-300 break-keep'>";
             $result .= $items;

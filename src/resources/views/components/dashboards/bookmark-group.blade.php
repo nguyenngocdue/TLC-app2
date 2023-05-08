@@ -1,4 +1,4 @@
-<x-renderer.card title="Bookmarks">
+<x-renderer.card title="Bookmarks" icon="fa-duotone fa-bookmark">
     <div class="flex">
         <div class="grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-6 md:gap-4 2xl:grid-cols-10">
             @foreach($arrayBookmarkFirst as $value)
