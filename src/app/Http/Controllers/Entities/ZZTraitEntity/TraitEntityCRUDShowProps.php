@@ -58,7 +58,7 @@ trait TraitEntityCRUDShowProps
 				}
 			}
 		}
-		return view('dashboards.pages.entity-show', [
+		return view('dashboards.pages.entity-show-props', [
 			'propsTree' => array_values($node),
 			'dataSource' => $dataSource,
 			'type' => $this->type,

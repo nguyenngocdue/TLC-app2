@@ -21,12 +21,14 @@ return new class extends Migration
 
         $schema->create('qaqc_insp_tmpl_lines', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('control_type_id');
+            $table->unsignedBigInteger('control_type_id')->nullable();
             $table->unsignedBigInteger('qaqc_insp_tmpl_sht_id');
-            $table->unsignedBigInteger('qaqc_insp_group_id');
+            $table->unsignedBigInteger('qaqc_insp_group_id')->nullable();
             $table->unsignedBigInteger('qaqc_insp_control_group_id')->nullable();
+
+            $table->orderable();
             $table->appendCommonFields();
         });
         // Schema::create('qaqc_insp_tmpl_lines', function (Blueprint $table) {

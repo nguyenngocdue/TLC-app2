@@ -7,8 +7,9 @@ use App\BigThink\ModelExtended;
 class Qaqc_insp_tmpl_line extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "control_type_id", "qaqc_insp_tmpl_run_id",
-        "qaqc_insp_group_id", "qaqc_insp_control_group_id", "owner_id"
+        "id", "name", "description", "control_type_id",
+        "qaqc_insp_group_id", "qaqc_insp_control_group_id", "owner_id", "qaqc_insp_tmpl_sht_id",
+        "order_no"
     ];
     protected $table = "qaqc_insp_tmpl_lines";
 
@@ -53,9 +54,10 @@ class Qaqc_insp_tmpl_line extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id'],
-            ['dataIndex' => 'qaqc_insp_tmpl_sht_id', "rendererParam" => "description"],
-            ['dataIndex' => 'qaqc_insp_group_id', "rendererParam" => "description"],
+            ['dataIndex' => 'order_no', 'invisible' => true, 'no_print' => true],
+            ['dataIndex' => 'id', 'invisible' => true,],
+            ['dataIndex' => 'qaqc_insp_tmpl_sht_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'qaqc_insp_group_id',],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'description'],
             ['dataIndex' => 'control_type_id',],
