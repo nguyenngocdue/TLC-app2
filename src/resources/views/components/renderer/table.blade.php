@@ -153,4 +153,4 @@
 @endroleset
 @endif
 
-<x-elapse title="All table columns: " duration="{{array_sum($timeElapse)}}" />
+<x-elapse title="Table all columns: " duration="{{array_sum($timeElapse)}}" />

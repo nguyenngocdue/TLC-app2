@@ -13,6 +13,7 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\Relationships;
+use App\Utils\System\Timer;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -29,8 +30,11 @@ class ViewAllController extends Controller
     protected $typeModel = '';
     protected $permissionMiddleware;
 
+    private $frameworkTook = 0;
+
     public function __construct()
     {
+        $this->frameworkTook = Timer::getTimeElapseFromLastAccess();
         $this->assignDynamicTypeViewAll();
         $this->middleware("permission:{$this->permissionMiddleware['read']}")->only('index');
     }
@@ -248,6 +252,7 @@ class ViewAllController extends Controller
             'currentFilter' => $currentFilter,
             // 'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
             'tableTrueWidth' => $tableTrueWidth,
+            'frameworkTook' => $this->frameworkTook,
         ]);
     }
 }
