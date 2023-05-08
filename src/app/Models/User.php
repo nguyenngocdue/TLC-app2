@@ -93,6 +93,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
         "getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
         "userTypes" => ['belongsTo', User_type::class, 'user_type'],
+        "getCompany" => ['belongsTo', User_company::class, 'company'],
         "categories" => ['belongsTo', User_category::class, 'category'],
         "positionPres" => ['belongsTo', User_position_pre::class, 'position_prefix'],
         "position1" => ['belongsTo', User_position1::class, 'position_1'],
