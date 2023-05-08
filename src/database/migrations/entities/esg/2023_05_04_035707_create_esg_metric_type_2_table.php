@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('esg_metric_type_1_id');
+            $table->unsignedBigInteger('unit')->nullable();
             $table->float('factor')->nullable();
             $table->appendCommonFields();
         });

@@ -40,6 +40,7 @@ class Sub_project extends ModelExtended
         return [
             ['dataIndex' => 'id'],
             ['dataIndex' => 'name'],
+            ['dataIndex' => 'description'],
         ];
     }
 }
