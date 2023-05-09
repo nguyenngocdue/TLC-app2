@@ -19,6 +19,7 @@ Route::group([
             $singular = Str::singular($entityName);
             $ucfirstName = Str::ucfirst($singular);
             Route::group([
+                //Production cant open WIR Register, therefore cant create WIR Register
                 // 'middleware' => "role:READ-WRITE-DATA-" . Str::upper($entityName) . "|ADMIN-DATA-" . Str::upper($entityName),
             ], function () use ($singular, $ucfirstName) {
                 for ($i = 10; $i <= 50; $i += 10) {

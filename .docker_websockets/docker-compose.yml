@@ -12,7 +12,7 @@ services:
     environment:
       - NGINX_APP_HOST=${APP_DOMAIN_NAME}
     ports:
-      - "35002:6001"
+      - "36102:6001"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ../.docker_configs/certs:/etc/nginx/certs
