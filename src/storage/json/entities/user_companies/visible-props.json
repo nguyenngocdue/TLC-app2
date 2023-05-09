@@ -1,0 +1,57 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "active": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "active": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "active": "true"
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "active": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "active": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "active": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "active": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "active": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "active": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "active": ""
+    },
+    "_getUsers": {
+        "name": "_getUsers",
+        "column_name": "getUsers",
+        "active": "true"
+    }
+}

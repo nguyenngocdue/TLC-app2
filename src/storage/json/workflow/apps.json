@@ -73,7 +73,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-duotone fa-calendar-days\"><\/i>"
+        "icon": "<i class=\"fa-solid fa-conveyor-belt-boxes\"><\/i>"
     },
     "esg_line": {
         "name": "esg_line",
@@ -137,7 +137,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>"
     },
     "field": {
         "name": "field",
@@ -799,6 +799,19 @@
         "package": "system",
         "sub_package": "user",
         "title": "User Categories",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "icon": null
+    },
+    "user_company": {
+        "name": "user_company",
+        "package": "system",
+        "sub_package": "user",
+        "title": "Companies",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
