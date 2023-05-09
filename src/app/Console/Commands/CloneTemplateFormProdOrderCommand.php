@@ -96,7 +96,8 @@ class CloneTemplateFormProdOrderCommand extends Command
                     }
                 }
             }
-            $this->info("Created Qaqc_insp_chklst and cloned qaqc_insp_tmpl_sht successfully: #$insertedId (" . $insertedItem->slug . ")");
+            //<<This id will be use to redirect, please don't add more text into it.
+            $this->info($insertedId);
             return Command::SUCCESS;
         } catch (\Throwable $th) {
 

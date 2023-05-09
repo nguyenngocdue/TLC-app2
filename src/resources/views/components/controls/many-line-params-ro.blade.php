@@ -17,9 +17,11 @@
                     type: "POST",
                     url,
                     data,
-                    success: ()=>{
-                        toastr.success("Created successfully.")
-                        location.reload()
+                    success: (response)=>{
+                        // console.log(response)
+                        const {href} =  response
+                        toastr.success("Created successfully. Opening the new document...")
+                        location.href = href
                     },
                     error: ()=> {
                         console.log("Failed")
