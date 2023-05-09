@@ -11,10 +11,11 @@
             <x-renderer.card title="Test Status" py="1" >
                 <div class="mb-1">
                     @foreach($statuses as $key => $value)
-                        @php $colorIndex =$value['color_index'];  @endphp
-                        <span class="bg-{{$value['color']}}-{{$colorIndex}} text-{{$value['color']}}-{{1000-$colorIndex}} whitespace-nowrap rounded hover:bg-blue-400 font-medium text-xs px-2 py-1 leading-tight ml-1">
-                            <a href="{{route($type.'.edit',$renderId)}}?status={{$value['name']}}&dryrun_token={{$dryRunToken}}">{{$value['title']}}</a>
-                        </span>
+                        @php
+                            $colorIndex =$value['color_index'];  
+                            $href = route($type.'.edit',$renderId)."?status=".$value['name']."&dryrun_token=".$dryRunToken;
+                        @endphp
+                        <x-renderer.status href="{!!$href!!}">{{$value['name']}}</x-renderer.status>
                     @endforeach
                 </div>
             </x-renderer.card>
