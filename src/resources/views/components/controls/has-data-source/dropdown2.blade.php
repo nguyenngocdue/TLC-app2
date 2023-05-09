@@ -27,7 +27,7 @@
             </span>
         </span>
     @else
-        @dump($labels)
+        {{-- @dump($labels) --}}
         @php 
             $title = is_array($labels) ? $labels[0] : $labels->first();
         @endphp
