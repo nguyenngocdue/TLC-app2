@@ -33,6 +33,16 @@ trait TraitSupportEntityCRUDCreateEdit2
         return $result;
     }
 
+    private function getDefaultValue($props)
+    {
+        $result = [];
+        foreach ($props as $prop) {
+            $dv = $prop['default-values']['default_value'] ?? false;
+            $result[$prop['column_name']] = $dv;
+        }
+        return $result;
+    }
+
     private function makeTableBluePrint($props)
     {
         $props = array_values(array_filter($props, fn ($prop) => $prop['control'] == 'relationship_renderer'));

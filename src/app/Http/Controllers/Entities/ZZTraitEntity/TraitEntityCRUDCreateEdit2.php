@@ -22,9 +22,8 @@ trait TraitEntityCRUDCreateEdit2
 	{
 		$superProps = $this->getSuperProps();
 		$props = $superProps['props'];
-		// $defaultValues = [];
-		// $values =  (object) array_merge($defaultValues, $request->input(), $this->loadValueOfOrphanAttachments($props));
-		$values =  (object) array_merge($request->input(), $this->loadValueOfOrphanAttachments($props));
+		$defaultValues = $this->getDefaultValue($props);
+		$values =  (object) array_merge($defaultValues, $request->input(), $this->loadValueOfOrphanAttachments($props));
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$hasStatusColumn = Schema::hasColumn(Str::plural($this->type), 'status');
