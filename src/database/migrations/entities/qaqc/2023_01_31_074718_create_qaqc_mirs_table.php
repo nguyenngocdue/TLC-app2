@@ -29,9 +29,10 @@ return new class extends Migration
             $table->unsignedBigInteger('sub_project_id')->nullable();
             $table->unsignedBigInteger('prod_discipline_id')->nullable();
             $table->unsignedBigInteger('priority_id')->nullable();
-            $table->dateTime('due_date')->nullable();
+            // $table->dateTime('due_date')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('inspected_by')->nullable();
+            $table->hasDueDate();
             $table->closable();
             $table->appendCommonFields();
         });

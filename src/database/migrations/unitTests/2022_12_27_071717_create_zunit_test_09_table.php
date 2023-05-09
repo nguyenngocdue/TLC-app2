@@ -44,7 +44,7 @@ return new class extends Migration
             $table->string('user_position_1')->nullable();
 
             $table->unsignedBigInteger('priority_id')->nullable();
-            $table->dateTime('due_date')->nullable();
+            // $table->dateTime('due_date')->nullable();
 
             $table->integer('total')->nullable();
             $table->integer('accepted')->nullable();
@@ -64,6 +64,8 @@ return new class extends Migration
             $table->bigInteger('time_3')->nullable();
 
             $table->unsignedBigInteger('parent_id')->nullable();
+
+            $table->hasDueDate();
             $table->orderable();
             $table->appendCommonFields();
         });

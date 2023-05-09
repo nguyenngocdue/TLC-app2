@@ -37,7 +37,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_team_id')->nullable();
             $table->unsignedBigInteger('inter_subcon_id')->nullable();
             $table->unsignedBigInteger('priority_id')->nullable();
-            $table->dateTime('due_date')->nullable();
+            // $table->dateTime('due_date')->nullable();
             $table->unsignedBigInteger('defect_root_cause_id')->nullable();
             $table->unsignedBigInteger('defect_disposition_id')->nullable();
             $table->unsignedBigInteger('defect_severity')->nullable();
@@ -47,6 +47,7 @@ return new class extends Migration
             $table->float('total_hour')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('assignee_2')->nullable();
+            $table->hasDueDate();
             $table->closable();
             $table->appendCommonFields();
         });

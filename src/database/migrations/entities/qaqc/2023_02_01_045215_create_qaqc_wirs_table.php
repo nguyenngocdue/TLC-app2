@@ -32,12 +32,13 @@ return new class extends Migration
             $table->unsignedBigInteger('prod_discipline_id')->nullable();
             $table->unsignedBigInteger('wir_description_id')->nullable();
             $table->unsignedBigInteger('priority_id')->nullable();
-            $table->dateTime('due_date')->nullable();
+            // $table->dateTime('due_date')->nullable();
             $table->unsignedInteger('qc_total')->nullable();
             $table->unsignedInteger('qc_accepted')->nullable();
             $table->unsignedInteger('qc_remaining')->nullable();
             $table->unsignedInteger('qc_rejected')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
+            $table->hasDueDate();
             $table->closable();
             $table->appendCommonFields();
         });

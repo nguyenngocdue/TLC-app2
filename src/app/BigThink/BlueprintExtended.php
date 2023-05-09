@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class BlueprintExtended extends Blueprint
 {
+    function hasDueDate()
+    {
+        $this->dateTime('due_date')->nullable();
+    }
+
     function orderable()
     {
         $this->unsignedInteger('order_no')->nullable();
