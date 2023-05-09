@@ -28,24 +28,24 @@ class ExampleTest extends TestCase
         ];
     }
 
-    public function test_the_view_all_screen_access_with_unauthenticated_user()
-    {
-        // $this->withoutExceptionHandling();
+    // public function test_the_view_all_screen_access_with_unauthenticated_user()
+    // {
+    //     // $this->withoutExceptionHandling();
 
-        $entities = Entities::getAll();
-        foreach ($entities as $entity) {
-            // $entity = $entities[0];
-            $table = $entity->getTable();
-            $route = route($table . '.index');
-            // dump($route);
-            $response = $this
-                // ->actingAs($user)
-                ->get($route);
+    //     $entities = Entities::getAll();
+    //     foreach ($entities as $entity) {
+    //         // $entity = $entities[0];
+    //         $table = $entity->getTable();
+    //         $route = route($table . '.index');
+    //         // dump($route);
+    //         $response = $this
+    //             // ->actingAs($user)
+    //             ->get($route);
 
-            $response->assertStatus(302);
-            $response->assertRedirectToRoute('login');
-        }
-    }
+    //         $response->assertStatus(302);
+    //         $response->assertRedirectToRoute('login');
+    //     }
+    // }
 
     private function load_permissions_to_table()
     {

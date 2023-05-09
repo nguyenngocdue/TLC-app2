@@ -30,7 +30,7 @@ class BlueprintExtended extends Blueprint
         }
 
         $this->timestamp('created_at')->useCurrent();
-        $this->timestamp('updated_at')->useCurrentOnUpdate();
+        $this->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         // $this->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         // $this->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
