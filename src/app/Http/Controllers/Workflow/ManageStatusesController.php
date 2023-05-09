@@ -44,11 +44,17 @@ class ManageStatusesController extends AbstractManageLibController
                 'renderer' => 'text4',
                 'editable' => true,
             ],
+            // [
+            //     'dataIndex' => "rendered",
+            //     'renderer' => 'formatter4',
+            //     'align' => 'center',
+            //     'formatterName' => 'statusColorRendered',
+            // ],
             [
-                'dataIndex' => "rendered",
-                'renderer' => 'formatter4',
+                'dataIndex' => "name",
+                'renderer' => 'status',
                 'align' => 'center',
-                'formatterName' => 'statusColorRendered',
+                // 'formatterName' => 'statusColorRendered',
             ],
         ];
     }
