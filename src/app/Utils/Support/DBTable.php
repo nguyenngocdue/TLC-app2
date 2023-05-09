@@ -50,12 +50,30 @@ class DBTable
     private static function getColumnNamesExpensive($tableName)
     {
         $tableName = Str::plural($tableName);
-        $data = DB::select("Select COLUMN_NAME from information_schema.COLUMNS where TABLE_SCHEMA = '" . env('DB_DATABASE', "laravel") . "' and TABLE_NAME = '" . $tableName . "' ORDER BY ORDINAL_POSITION ASC");
-        $result = [];
-        foreach ($data as $value) {
-            $var = array_values((array)$value);
-            array_push($result, ...$var);
-        }
-        return $result;
+        $columns = DB::select("SHOW COLUMNS FROM $tableName");
+        // dump($columns);
+        $names = array_map(fn ($c) => $c->Field, $columns);
+        return $names;
     }
+
+    // private static function getColumnTypesExpensive($tableName)
+    // {
+    //     $tableName = Str::plural($tableName);
+    //     $columns = DB::select("SHOW COLUMNS FROM $tableName");
+    //     // dump($columns);
+    //     $names = array_map(fn ($c) => $c->Type, $columns);
+    //     return $names;
+    // }
+
+    // private static function getColumnNamesExpensiveOLD($tableName)
+    // {
+    //     $tableName = Str::plural($tableName);
+    //     $data = DB::select("Select COLUMN_NAME from information_schema.COLUMNS where TABLE_SCHEMA = '" . env('DB_DATABASE', "laravel") . "' and TABLE_NAME = '" . $tableName . "' ORDER BY ORDINAL_POSITION ASC");
+    //     $result = [];
+    //     foreach ($data as $value) {
+    //         $var = array_values((array)$value);
+    //         array_push($result, ...$var);
+    //     }
+    //     return $result;
+    // }
 }
