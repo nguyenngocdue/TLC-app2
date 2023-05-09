@@ -16,7 +16,7 @@
                 <span class="select2-selection select2-selection--multiple {{$readOnly ? 'readonly' : ''}}">
                     <ul class="select2-selection__rendered">
                         @forelse($labels as $key => $value)
-                        <input type="hidden" id="{{$id}}" name="{{$name}}" value="{{$value}}" class='{{$classList}} {{$readOnly ? 'readonly' : ''}}' {{$readOnly ? 'readonly' : ''}} />
+                        <input type="hidden" id="{{$id}}" name="{{$name}}" value="{{$key}}" class='{{$classList}} {{$readOnly ? 'readonly' : ''}}' {{$readOnly ? 'readonly' : ''}} />
                         <li title="#{{$key}}" class="select2-selection__choice">{{$value}}</li>
                         @empty
                         <div class="p-3"></div>

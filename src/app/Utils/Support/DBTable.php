@@ -41,7 +41,7 @@ class DBTable
 
     public static function getColumnNames($tableName)
     {
-        if (!isset(static::$singletonNames[$tableName]) || !static::$singletonNames[$tableName]) {
+        if (!isset(static::$singletonNames[$tableName]) /*|| !static::$singletonNames[$tableName]*/) {
             static::$singletonNames[$tableName] = static::getColumnNamesExpensive($tableName);
         }
         return static::$singletonNames[$tableName];
