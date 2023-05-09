@@ -30,7 +30,7 @@
                                     @yield('title', 'Untitled')
                                 </x-renderer.heading>
                                 @if(isset($type))
-                                    <div class="ml-1"><x-renderer.status>@yield('status', 'NULL')</x-renderer.status></div>
+                                    <div class="ml-1"><x-renderer.status>@yield('status', '')</x-renderer.status></div>
                                 @endif
                         </div>
                         <ul class="w-full lg:w-1/2">
