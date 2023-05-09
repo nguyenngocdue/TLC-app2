@@ -25,15 +25,13 @@
             <main class="mt-16 m1b-8 w-full flex-grow dark:bg-gray-700 no-print">
                 <div class="w-full h-18 no-print">
                     <div class="no-print flex bg-white dark:bg-gray-800 flex-wrap items-center justify-between h-full text-purple-600 dark:text-purple-300">
-                        <div class="w-full lg:w-1/2 lg:px-6 sm:px-2 md:px-4 flex">
-                            <x-renderer.heading level=4>
-                                @yield('title', 'Untitled')
-                            </x-renderer.heading>
-                            @if(isset($type))
-                            <x-renderer.heading-status :type="$type">
-                                @yield('status', 'Untitled')
-                            </x-renderer.heading-status>
-                            @endif
+                        <div class="w-full lg:w-1/2 lg:px-6 sm:px-2 md:px-4 flex items-center">
+                                <x-renderer.heading level=4>
+                                    @yield('title', 'Untitled')
+                                </x-renderer.heading>
+                                @if(isset($type))
+                                    <div class="ml-1"><x-renderer.status>@yield('status', 'NULL')</x-renderer.status></div>
+                                @endif
                         </div>
                         <ul class="w-full lg:w-1/2">
                             <li class="relative">
