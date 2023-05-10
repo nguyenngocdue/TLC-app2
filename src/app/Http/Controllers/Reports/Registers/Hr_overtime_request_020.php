@@ -96,7 +96,7 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
                 "width" => 200,
             ],
             [
-                "title" => "HR Overtime Request",
+                "title" => "OT ID",
                 "dataIndex" => "hr_overtime_request_id",
                 "align" => "center",
                 "width" => 150,
