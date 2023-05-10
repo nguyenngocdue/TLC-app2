@@ -105,9 +105,9 @@
         "proj_member_nz": "",
         "qs_member_nz": ""
     },
-    "_ot_purpose": {
-        "name": "_ot_purpose",
-        "column_name": "ot_purpose",
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",

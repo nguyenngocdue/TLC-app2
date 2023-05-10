@@ -23,9 +23,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_ot_purpose": {
-        "name": "_ot_purpose",
-        "column_name": "ot_purpose",
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "label": "",
         "validation": "",
         "validation_regex": "",

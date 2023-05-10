@@ -37,9 +37,9 @@
         "duplicatable": "true",
         "new_line": ""
     },
-    "_ot_purpose": {
-        "name": "_ot_purpose",
-        "column_name": "ot_purpose",
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "column_type": "string",
         "label": "Purpose",
         "control": "textarea",

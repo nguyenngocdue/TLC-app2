@@ -15,9 +15,9 @@
         "rejected": "true",
         "approved": "true"
     },
-    "_ot_purpose": {
-        "name": "_ot_purpose",
-        "column_name": "ot_purpose",
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
