@@ -6,6 +6,7 @@ use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
+use App\Http\Controllers\Reports\TraitUserCompanyTree;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentPathInfo;
 use DateTime;
@@ -17,6 +18,7 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
     use TraitDynamicColumnsTableReport;
     use TraitSQLDataSourceParamReport;
     use TraitModifyDataToExcelReport;
+    use TraitUserCompanyTree;
 
     protected $groupBy = 'ot_date';
     protected $mode = '020';
@@ -200,6 +202,7 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
+        $dataSource = $this->getDataByCompanyTree($dataSource);
         foreach ($dataSource as $key => $value) {
             $dataSource[$key]->employee_id = (object)[
                 'value' => $value->employee_id,
