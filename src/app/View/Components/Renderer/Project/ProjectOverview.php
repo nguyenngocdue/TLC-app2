@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer\Project;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class ProjectOverview extends Component
 {
@@ -11,8 +12,11 @@ class ProjectOverview extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $table = 'projects',
+        private $id = 1,
+        private $function = 'getProjectMembers',
+    ) {
         //
     }
 
@@ -23,6 +27,10 @@ class ProjectOverview extends Component
      */
     public function render()
     {
-        return view('components.renderer.project.project-overview');
+        $modelPath = Str::modelPathFrom($this->table);
+        $project = $modelPath::find($this->id);
+        return view('components.renderer.project.project-overview', [
+            'project' => $project,
+        ]);
     }
 }

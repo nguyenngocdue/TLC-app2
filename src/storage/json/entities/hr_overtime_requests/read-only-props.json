@@ -15,9 +15,9 @@
         "rejected": "",
         "approved": "true"
     },
-    "_ot_purpose": {
-        "name": "_ot_purpose",
-        "column_name": "ot_purpose",
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "new": "",
         "pending_approval": "true",
         "rejected": "",
@@ -29,6 +29,14 @@
         "new": "",
         "pending_approval": "true",
         "rejected": "",
+        "approved": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
         "approved": "true"
     },
     "_owner_id": {
@@ -55,13 +63,13 @@
         "rejected": "",
         "approved": "true"
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "true",
-        "pending_approval": "true",
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
+        "new": "",
+        "pending_approval": "",
         "rejected": "true",
-        "approved": "true"
+        "approved": ""
     },
     "_created_at": {
         "name": "_created_at",

@@ -21,15 +21,15 @@ return new class extends Migration
 
         $schema->create('hr_overtime_requests', function (BlueprintExtended $table) {
             $table->id();
+            $table->string("name")->nullable();
             $table->unsignedBigInteger("workplace_id");
-            $table->string("ot_purpose")->nullable();
             $table->unsignedBigInteger('assignee_1');
             $table->appendCommonFields();
         });
         // Schema::create('hr_overtime_requests', function (Blueprint $table) {
         //     $table->id();
         //     $table->unsignedBigInteger("workplace_id");
-        //     $table->string("ot_purpose")->nullable();
+        //     $table->string("name")->nullable();
         //     $table->unsignedBigInteger('assignee_1');
         //     $table->unsignedBigInteger('owner_id');
         //     $table->string('status')->nullable();

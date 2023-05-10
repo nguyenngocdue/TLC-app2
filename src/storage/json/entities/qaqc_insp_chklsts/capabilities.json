@@ -381,9 +381,9 @@
         "name": "qaqc_member",
         "name_rendered": "",
         "toggle": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
         "approved": ""
     },
     "qs_manager": {

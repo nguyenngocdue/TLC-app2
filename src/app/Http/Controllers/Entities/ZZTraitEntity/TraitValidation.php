@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\Json\SuperWorkflows;
 use App\Utils\Support\WorkflowFields;
 use Illuminate\Support\MessageBag;
@@ -29,7 +28,7 @@ trait TraitValidation
         return $newValidation;
     }
 
-    private function getListOfTableToIgnoreRequired($action)
+    private function getListOfTableNameToIgnoreRequired($action)
     {
         $result = [];
         if ($action === 'store') {
@@ -43,18 +42,10 @@ trait TraitValidation
         return $result;
     }
 
-    private function getValidationRules($oldStatus, $newStatus, $action)
+    private function getPropsInIntermediateScreen($oldStatus, $newStatus)
     {
-        if ($oldStatus == '') $oldStatus = WorkflowFields::getNewFromDefinitions($this->type);
-
-
-        $rules = [];
         $sp = $this->superProps;
-        // dump($this->type);
         $intermediate = $sp["intermediate"];
-        // dump($oldStatus);
-        // dump($sp['statuses']);
-
         //In case comment is a fakeRequest, it wont have next status
         $transitions = isset($sp['statuses'][$oldStatus]) ? $sp['statuses'][$oldStatus]['transitions'] : [];
         //Remove the current transition
@@ -63,51 +54,92 @@ trait TraitValidation
         // dump($sp);
         // dump($intermediate);
 
-        $toBeRemovedProps = [];
+        $result = [];
         foreach ($transitions as $statusName) {
             if (isset($intermediate[$oldStatus][$statusName])) {
                 $tmp = $intermediate[$oldStatus][$statusName];
-                $toBeRemovedProps = [...$toBeRemovedProps, ...$tmp];
+                $result = [...$result, ...$tmp];
             }
         }
-        // dump($toBeRemovedProps);
+        // dump($result);
+        return $result;
+    }
+
+    private function getValidationInDefaultValuesScreen($prop)
+    {
+        $result = [];
+        if (isset($prop['default-values']['validation'])) {
+            $commonValidations = $prop['default-values']['validation'];
+            if (strlen($commonValidations)) $result = explode("|", $commonValidations);
+
+            $regexValidations = $prop['default-values']['validation_regex'] ?? "";
+            if ($regexValidations) $result[] = "regex:" . $regexValidations;
+        }
+        return $result;
+    }
+
+    private function getVisibleProps($hasStatusColumn, $workflows, $oldStatus)
+    {
+        $result = [];
+        if ($hasStatusColumn) {
+            $result = $workflows[$oldStatus]['visible'];
+        } else {
+            $props =  $this->superProps['props'];
+            $array = array_filter($props, fn ($prop) => $prop["hidden_edit"] !== 'true');
+            $result = array_keys($array);
+        }
+        // dump($result);
+        return $result;
+    }
+
+    private function getRules($hasStatusColumn, $workflows, $oldStatus)
+    {
+        $result = [];
+        if ($hasStatusColumn) {
+            $requiredProps = $workflows[$oldStatus]['required'];
+            foreach ($requiredProps as $propName) {
+                $propObject = $this->superProps['props'][$propName];
+                $otherValidationRules = $this->getValidationInDefaultValuesScreen($propObject);
+                $result[$propName] = [...$otherValidationRules, 'required'];
+            }
+            foreach ($result as &$prop) $prop = array_unique($prop);
+        } else {
+            foreach ($this->superProps['props'] as $prop) {
+                $rules = $this->getValidationInDefaultValuesScreen($prop);
+                if (!empty($rules)) $result[$prop['name']] = $rules;
+            }
+        }
+        // dump($result);
+        return $result;
+    }
+
+    private function getValidationRules($oldStatus, $newStatus, $action)
+    {
+        if ($oldStatus == '') $oldStatus = WorkflowFields::getNewFromDefinitions($this->type);
+
+        //When user click "Save" button, no intermediate prop will need to be considered
+        $propsInIntermediateScreen = $this->getPropsInIntermediateScreen($oldStatus, $newStatus);
+        $listOfTableNameToIgnoreRequired = $this->getListOfTableNameToIgnoreRequired($action);
 
         $workflows = SuperWorkflows::getFor($this->type)['workflows'];
-        if (!isset($workflows[$oldStatus])) return [];
-        $visibleProps = $workflows[$oldStatus]['visible'];
-        $requiredProps = $workflows[$oldStatus]['required'];
-        //In case there are props in the intermediate screen, remove them
+        $hasStatusColumn = isset($workflows[$oldStatus]);
+        $visibleProps = $this->getVisibleProps($hasStatusColumn, $workflows, $oldStatus);
+        $requiredProps = $this->getRules($hasStatusColumn, $workflows, $oldStatus);
+
+        // dump($propsInIntermediateScreen);
+        // dump($listOfTableNameToIgnoreRequired);
+        // dump($visibleProps);
         // dump($requiredProps);
-        $requiredProps = array_diff($requiredProps, $toBeRemovedProps);
 
-
-        $listOfTableToIgnoreRequired = $this->getListOfTableToIgnoreRequired($action);
-
-        foreach ($this->superProps['props'] as $prop) {
-            if (!in_array($prop['name'], $visibleProps)) continue;
-            if (in_array($prop['name'], $listOfTableToIgnoreRequired)) continue;
-            //Validations in the Default Value Screen
-            if (isset($prop['default-values']['validation'])) {
-                $commonValidations = $prop['default-values']['validation'];
-                $regexValidations = $prop['default-values']['validation_regex'] ?? "";
-                $rules[$prop['column_name']] = explode("|", $commonValidations);
-                if ($regexValidations) $rules[$prop['column_name']][] = "regex:" . $regexValidations;
-            }
-            //Validation in the Required screen
-            if (in_array('_' . $prop['column_name'], $requiredProps)) $rules[$prop['column_name']][] = 'required';
+        $result = [];
+        foreach ($requiredProps as $propName => $rule) {
+            if (!in_array($propName, $visibleProps)) continue;
+            if (in_array($propName, $propsInIntermediateScreen)) continue;
+            if (in_array($propName, $listOfTableNameToIgnoreRequired)) continue;
+            $column_name  = substr($propName, 1);
+            $result[$column_name] = $rule;
         }
-
-        foreach ($rules as &$rule) {
-            $rule = array_filter($rule, fn ($i) => $i);
-            $rule = array_unique($rule);
-            $rule = array_values($rule);
-        }
-        $rules = array_filter($rules, fn ($i) => !empty($i));
-        // dd("getValidationRules", $rules);
-        // $this->dump1("getValidationRules", $rules, __LINE__);
-        // dump("$oldStatus to $newStatus");
-        // dump($rules);
-        // dd();
-        return $rules;
+        // dump($result);
+        return $result;
     }
 }

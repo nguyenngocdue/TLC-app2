@@ -15,7 +15,7 @@
         "name": "_name",
         "column_name": "name",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",

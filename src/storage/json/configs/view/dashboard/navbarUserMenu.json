@@ -18,6 +18,11 @@
         "href": "/components",
         "icon_fa": "fa-brands fa-elementor"
     },
+    "database": {
+        "title": "Database Summary",
+        "href": "/database-summary",
+        "icon_fa": "fa-duotone fa-table"
+    },
     "my_company": {
         "title": "My Company Tree",
         "href": "/my-company",

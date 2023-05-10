@@ -91,7 +91,9 @@ trait TraitEntityFieldHandler2
             if ($prop['control'] === 'textarea' && $prop['column_type'] === 'json') {
                 $column_name = $prop['column_name'];
                 $text = $dataSource[$column_name];
-                $dataSource[$column_name] = /*json_decode*/ (preg_replace("/\r|\n/", "", $text));
+                //<<json_decode here is required, because in create-edit screen, 
+                //<<the empty array [] will be reckon as "[]", and therefore the user will not be able to load/save userSettings.
+                $dataSource[$column_name] = json_decode(preg_replace("/\r|\n/", "", $text));
             }
         }
         return $dataSource;

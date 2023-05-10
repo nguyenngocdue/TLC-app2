@@ -34,7 +34,7 @@ class AggSum extends Component
             $sum = 0;
             foreach ($json as $line) {
                 if (!isset($line->$column)) {
-                    return "<x-renderer.tag title='Column not found' color='red'>" . $column . "</x-renderer.tag>";
+                    return "<div class='text-center'><x-renderer.tag title='Column not found' color='red'>" . $column . "</x-renderer.tag></div>";
                 } else {
                     $sum += $line->$column;
                 }

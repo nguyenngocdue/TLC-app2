@@ -13,10 +13,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getTeamMembers()": {
-        "name": "_getTeamMembers()",
+    "_getProjectMembers()": {
+        "name": "_getProjectMembers()",
         "relationship": "getCheckedByField",
-        "control_name": "getTeamMembers()",
+        "control_name": "getProjectMembers()",
         "renderer_view_all": "column_link",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

@@ -79,6 +79,7 @@ class ManageAppsController extends AbstractManageLibController
                 'editable' => true,
                 "cbbDataSource" => [
                     'props-renderer',
+                    'project-renderer',
                     'checklist-renderer',
                     'checklist-sheet-renderer',
                     'esg-sheet-renderer',

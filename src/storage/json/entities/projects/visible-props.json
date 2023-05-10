@@ -107,9 +107,9 @@
         "cancelled": "true",
         "on_hold": "true"
     },
-    "_getTeamMembers()": {
-        "name": "_getTeamMembers()",
-        "column_name": "getTeamMembers()",
+    "_getProjectMembers()": {
+        "name": "_getProjectMembers()",
+        "column_name": "getProjectMembers()",
         "concept": "true",
         "design": "true",
         "timesheet_only": "true",
