@@ -33,6 +33,7 @@ class Button extends Component
         private $disabled = false,
     ) {
         // dd($this->type);
+        // dump($this->size);
     }
 
     private function getClass($className, $block, $classList)
@@ -105,6 +106,12 @@ class Button extends Component
             default:
             case 'sm':
                 $className = "px-2.5 py-2 ";
+                break;
+            case 'md':
+                $className = "px-3 py-2.5 ";
+                break;
+            case 'lg':
+                $className = "px-4 py-3 ";
                 break;
         }
         $classList = ClassList::BUTTON . " disabled:opacity-50";

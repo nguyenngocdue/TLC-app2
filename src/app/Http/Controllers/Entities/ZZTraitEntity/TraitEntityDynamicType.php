@@ -8,6 +8,16 @@ use Illuminate\Support\Str;
 
 trait TraitEntityDynamicType
 {
+    private function makePermissionMiddleware($tableName)
+    {
+        return [
+            'read' => "read-$tableName",
+            'create' => "create-$tableName",
+            'edit' => "edit-$tableName|edit-others-$tableName",
+            'delete' => "delete-$tableName|delete-others-$tableName"
+        ];
+    }
+
     private function assignDynamicTypeViewAll()
     {
         $routeName = Request::route() ? Request::route()->getName() : "attachment.index";
@@ -16,12 +26,13 @@ trait TraitEntityDynamicType
 
         $this->type = $singular;
         $this->typeModel = Str::modelPathFrom($tableName);
-        $this->permissionMiddleware = [
-            'read' => "read-$tableName",
-            'create' => "create-$tableName",
-            'edit' => "edit-$tableName|edit-others-$tableName",
-            'delete' => "delete-$tableName|delete-others-$tableName"
-        ];
+        $this->permissionMiddleware = $this->makePermissionMiddleware($tableName);
+        // $this->permissionMiddleware = [
+        //     'read' => "read-$tableName",
+        //     'create' => "create-$tableName",
+        //     'edit' => "edit-$tableName|edit-others-$tableName",
+        //     'delete' => "delete-$tableName|delete-others-$tableName"
+        // ];
     }
 
     private function assignDynamicTypeViewAllQrList6()
@@ -32,12 +43,13 @@ trait TraitEntityDynamicType
 
         $this->type = $singular;
         $this->typeModel = Str::modelPathFrom($tableName);
-        $this->permissionMiddleware = [
-            'read' => "read-$tableName",
-            'create' => "create-$tableName",
-            'edit' => "edit-$tableName|edit-others-$tableName",
-            'delete' => "delete-$tableName|delete-others-$tableName"
-        ];
+        $this->permissionMiddleware = $this->makePermissionMiddleware($tableName);
+        // $this->permissionMiddleware = [
+        //     'read' => "read-$tableName",
+        //     'create' => "create-$tableName",
+        //     'edit' => "edit-$tableName|edit-others-$tableName",
+        //     'delete' => "delete-$tableName|delete-others-$tableName"
+        // ];
     }
 
     private function assignDynamicTypeCreateEdit()
@@ -48,12 +60,13 @@ trait TraitEntityDynamicType
 
         $this->type = $singular;
         $this->data = Str::modelPathFrom($tableName);
-        $this->permissionMiddleware = [
-            'read' => "read-$tableName",
-            'create' => "create-$tableName",
-            'edit' => "edit-$tableName|edit-others-$tableName",
-            'delete' => "delete-$tableName|delete-others-$tableName"
-        ];
+        $this->permissionMiddleware = $this->makePermissionMiddleware($tableName);
+        // $this->permissionMiddleware = [
+        //     'read' => "read-$tableName",
+        //     'create' => "create-$tableName",
+        //     'edit' => "edit-$tableName|edit-others-$tableName",
+        //     'delete' => "delete-$tableName|delete-others-$tableName"
+        // ];
 
         // dump($this->type);
         // dump($this->typeModel);
@@ -88,12 +101,13 @@ trait TraitEntityDynamicType
         $this->type = $singular;
         $this->typeModel = Str::modelPathFrom($tableName);
         $tableName = Str::plural($tableName);
-        $this->permissionMiddleware = [
-            'read' => "read-$tableName",
-            'create' => "create-$tableName",
-            'edit' => "edit-$tableName|edit-others-$tableName",
-            'delete' => "delete-$tableName|delete-others-$tableName"
-        ];
+        $this->permissionMiddleware = $this->makePermissionMiddleware($tableName);
+        // $this->permissionMiddleware = [
+        //     'read' => "read-$tableName",
+        //     'create' => "create-$tableName",
+        //     'edit' => "edit-$tableName|edit-others-$tableName",
+        //     'delete' => "delete-$tableName|delete-others-$tableName"
+        // ];
     }
 
     private function assignDynamicTypeManual($tableName)
@@ -103,12 +117,13 @@ trait TraitEntityDynamicType
 
         $this->type = $singular;
         $this->data = Str::modelPathFrom($tableName);
-        $this->permissionMiddleware = [
-            'read' => "read-$tableName",
-            'create' => "create-$tableName",
-            'edit' => "edit-$tableName|edit-others-$tableName",
-            'delete' => "delete-$tableName|delete-others-$tableName"
-        ];
+        $this->permissionMiddleware = $this->makePermissionMiddleware($tableName);
+        // $this->permissionMiddleware = [
+        //     'read' => "read-$tableName",
+        //     'create' => "create-$tableName",
+        //     'edit' => "edit-$tableName|edit-others-$tableName",
+        //     'delete' => "delete-$tableName|delete-others-$tableName"
+        // ];
 
         // dump($this->type);
         // dump($this->typeModel);

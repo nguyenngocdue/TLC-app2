@@ -40,6 +40,7 @@ services:
   minio1:
     <<: *minio-common
     hostname: minio1
+    container_name: minio_data1
     volumes:
       # - /var/www/minio/data1-1:/data1
       - /mnt/data/minio/data1-1:/data1
@@ -72,6 +73,7 @@ services:
     image: nginx:1.19.2-alpine
     hostname: nginx
     restart: unless-stopped
+    container_name: minio_nginx
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ../.docker_configs/certs:/etc/nginx/certs

@@ -27,6 +27,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getCompany": {
+        "name": "_getCompany",
+        "relationship": "belongsTo",
+        "control_name": "company",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_categories": {
         "name": "_categories",
         "relationship": "belongsTo",
@@ -232,7 +246,7 @@
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "relationship_renderer",
+        "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

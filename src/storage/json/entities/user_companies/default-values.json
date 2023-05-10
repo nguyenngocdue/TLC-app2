@@ -18,115 +18,55 @@
         "validation": "required",
         "validation_regex": "",
         "formula": "",
-        "default_value": "Default name",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
-    "_text1": {
-        "name": "_text1",
-        "column_name": "text1",
-        "label": "",
-        "validation": "required",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "Default Title",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_text2": {
-        "name": "_text2",
-        "column_name": "text2",
-        "label": "",
-        "validation": "required",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "Default Description",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_text4": {
-        "name": "_text4",
-        "column_name": "text4",
-        "label": "",
-        "validation": "required|json",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "[]",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_text3": {
-        "name": "_text3",
-        "column_name": "text3",
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
         "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "123",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
-    "_boolean1": {
-        "name": "_boolean1",
-        "column_name": "boolean1",
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "",
-        "default_value": "1",
+        "formula": "All_SlugifyByName",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
-    "_radio1": {
-        "name": "_radio1",
-        "column_name": "radio1",
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
         "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "5",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
-    "_dropdown1": {
-        "name": "_dropdown1",
-        "column_name": "dropdown1",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "6",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_checkboxZut1()": {
-        "name": "_checkboxZut1()",
-        "column_name": "checkboxZut1()",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "5,6",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_dropdownMultiZut1()": {
-        "name": "_dropdownMultiZut1()",
-        "column_name": "dropdownMultiZut1()",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "1,2,3",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -155,9 +95,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_parent_id": {
-        "name": "_parent_id",
-        "column_name": "parent_id",
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -167,9 +107,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -179,9 +119,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_signature": {
-        "name": "_signature",
-        "column_name": "signature",
+    "_getUsers": {
+        "name": "_getUsers",
+        "column_name": "getUsers",
         "label": "",
         "validation": "",
         "validation_regex": "",

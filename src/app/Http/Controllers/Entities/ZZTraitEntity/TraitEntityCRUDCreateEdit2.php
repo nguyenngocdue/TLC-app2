@@ -22,14 +22,13 @@ trait TraitEntityCRUDCreateEdit2
 	{
 		$superProps = $this->getSuperProps();
 		$props = $superProps['props'];
-		$values =  (object) array_merge($request->input(), $this->loadValueOfOrphanAttachments($props));
+		$defaultValues = $this->getDefaultValue($props);
+		$values =  (object) array_merge($defaultValues, $request->input(), $this->loadValueOfOrphanAttachments($props));
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
-		$isCheckColumnStatus = Schema::hasColumn(Str::plural($this->type), 'status');
+		$hasStatusColumn = Schema::hasColumn(Str::plural($this->type), 'status');
 
-		// $disallowed = DisallowedDirectCreationChecker::check($this->type);
 		$disallowed = DisallowedDirectCreationChecker::checkAgainstRequest($request, $this->type);
-		// dd($disallowed);
 		if ($disallowed) {
 			$creationLinks = DisallowedDirectCreationChecker::getCreationLinks($this->type);
 			abort(403, "Please create via $creationLinks.");
@@ -40,7 +39,7 @@ trait TraitEntityCRUDCreateEdit2
 			'props' => $props,
 			'item' => (object)[],
 			'defaultValues' => DefaultValues::getAllOf($this->type),
-			'isCheckColumnStatus' => $isCheckColumnStatus,
+			'hasStatusColumn' => $hasStatusColumn,
 			'type' => $this->type,
 			'action' => __FUNCTION__,
 			'modelPath' => $this->data,
@@ -73,7 +72,7 @@ trait TraitEntityCRUDCreateEdit2
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($original, $props);
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
-		$isCheckColumnStatus = Schema::hasColumn(Str::plural($this->type), 'status');
+		$hasStatusColumn = Schema::hasColumn(Str::plural($this->type), 'status');
 
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
@@ -83,7 +82,7 @@ trait TraitEntityCRUDCreateEdit2
 			'values' => $values,
 			'status' => $status,
 			'dryRunToken' => Hash::make($valueCreateDryToken),
-			'isCheckColumnStatus' => $isCheckColumnStatus,
+			'hasStatusColumn' => $hasStatusColumn,
 			'type' => Str::plural($this->type),
 			'action' => __FUNCTION__,
 			'modelPath' => $this->data,

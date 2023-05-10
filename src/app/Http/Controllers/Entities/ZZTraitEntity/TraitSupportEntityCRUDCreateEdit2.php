@@ -24,17 +24,22 @@ trait TraitSupportEntityCRUDCreateEdit2
     }
     private function checkDryRunToken($dryRunTokenRequest, $value)
     {
-        if ($dryRunTokenRequest) {
-            if (!Hash::check($value, $dryRunTokenRequest)) {
-                abort(403, 'Forbidden');
-            }
-        }
+        if ($dryRunTokenRequest && !Hash::check($value, $dryRunTokenRequest)) abort(403, 'Your dryrun token is invalid');
     }
-
 
     private function getSuperProps()
     {
         $result = SuperProps::getFor($this->type);
+        return $result;
+    }
+
+    private function getDefaultValue($props)
+    {
+        $result = [];
+        foreach ($props as $prop) {
+            $dv = $prop['default-values']['default_value'] ?? false;
+            $result[$prop['column_name']] = $dv;
+        }
         return $result;
     }
 

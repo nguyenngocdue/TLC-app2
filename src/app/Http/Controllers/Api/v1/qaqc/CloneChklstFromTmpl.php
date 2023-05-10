@@ -22,11 +22,16 @@ class CloneChklstFromTmpl extends Controller
         // dump($params);
 
         $result = Artisan::call("ndc:createAndClone", $params);
-        $message = $result ?  Artisan::output() : "Cloned successfully.";
+        $response = ['code' => $result ? 404 : 200];
+        if ($result) {
+            $response['message'] = Artisan::output();
+        } else {
+            $id = trim(Artisan::output());
+            // $response['insertedId'] = $id;
+            $response['href'] = route("qaqc_insp_chklsts.edit", $id);
+            $response['message'] = "Cloned successfully.";
+        }
 
-        return [
-            'code' => $result ? 404 : 200,
-            'message' => $message,
-        ];
+        return $response;
     }
 }
