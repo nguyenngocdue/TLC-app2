@@ -66,8 +66,6 @@ const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
     const constraintsValues = triggers.map((trigger) => getEById(makeIdFrom(table01Name, trigger, rowIndex)).val())
     if (debugListener) console.log(triggers, constraintsValues)
 
-
-
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
         // console.log("value", constraintsValues[i], value, !value)
@@ -470,7 +468,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
         // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
         , templateResult: select2FormatState
     });
-    // theDropdown.trigger("change")
+    if (dataSource.length === 1) theDropdown.trigger("change")
 }
 
 const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table }) => {

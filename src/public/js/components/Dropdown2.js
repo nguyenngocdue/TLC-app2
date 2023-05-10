@@ -471,6 +471,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             templateResult: select2FormatState,
             // , disabled: true
         })
+        if (dataSource.length === 1) getEById(id).trigger('change')
     } else if (control_type == 'radio_or_checkbox') {
         // const control = getEById(id)
         // const isMultiple = control[0].hasAttribute("multiple")
