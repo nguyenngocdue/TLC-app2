@@ -77,18 +77,20 @@ services:
     command: mysqld --log-bin-trust-function-creators=1
     networks:
       - laravel302
-  # websockets:
-  #   container_name: laravel302_websockets
-  #   build:
-  #     context: ./websockets
-  #     dockerfile: Dockerfile
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ../src:/var/www/app
-  #   ports:
-  #     - "6001:6001"
-  #   networks:
-  #     - laravel302
+  websockets:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["php", "artisan", "websockets:serve"]
+    container_name: laravel302_websockets
+    restart: unless-stopped
+    working_dir: /var/www/app
+    volumes:
+      - ../src:/var/www/app
+    ports:
+      - "6001:6001"
+    networks:
+      - laravel302
   php:
     build:
       context: .
