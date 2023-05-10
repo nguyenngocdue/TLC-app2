@@ -1,3 +1,3 @@
-<div>
-    <!-- Breathing in, I calm body and mind. Breathing out, I smile. - Thich Nhat Hanh -->
-</div>
+<x-renderer.card title="Project Milestones" class="bg-white border" icon="fa-sharp fa-regular fa-users" >
+    {{-- <x-renderer.table showNo=1 :columns="$columns" :dataSource="$dataSource" /> --}}
+</x-renderer.card>

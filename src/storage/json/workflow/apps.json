@@ -482,7 +482,7 @@
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
+        "show_renderer": "project-renderer",
         "icon": "<i class=\"fa-solid fa-city\"><\/i>"
     },
     "public_holiday": {

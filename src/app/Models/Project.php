@@ -18,10 +18,10 @@ class Project extends ModelExtended
     ];
 
     public $oracyParams = [
-        "getTeamMembers()" => ['getCheckedByField', User::class],
+        "getProjectMembers()" => ['getCheckedByField', User::class],
     ];
 
-    public function getTeamMembers()
+    public function getProjectMembers()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

@@ -7,6 +7,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDCreateEdit2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDDestroy;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowChklstSht;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowChklst;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowProject;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowProps;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowQRApp;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStoreUpdate2;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\App;
 class EntityCRUDController extends Controller
 {
 	use TraitEntityCRUDShowProps;
+	use TraitEntityCRUDShowProject;
 	use TraitEntityCRUDShowQRApp;
 	use TraitEntityCRUDShowChklst;
 	use TraitEntityCRUDShowChklstSht;
@@ -67,6 +69,8 @@ class EntityCRUDController extends Controller
 		$app = LibApps::getFor($this->type);
 		$show_renderer = $app['show_renderer'];
 		switch ($show_renderer) {
+			case 'project-renderer':
+				return $this->showProject($id_or_slug);
 			case 'checklist-renderer':
 				return $this->showChklst($id_or_slug);
 			case 'checklist-sheet-renderer':

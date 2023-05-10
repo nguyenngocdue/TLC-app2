@@ -3,5 +3,5 @@
 @section('title', '')
 
 @section('content')
-    <x-renderer.table :columns="$columns" :dataSource="$dataSource"  />
+    <x-renderer.table :columns="$columns" :dataSource="$dataSource" showNo={{true}}  />
 @endsection

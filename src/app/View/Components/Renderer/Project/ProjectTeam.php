@@ -15,9 +15,27 @@ class ProjectTeam extends Component
     public function __construct(
         private $table = 'projects',
         private $id = 1,
-        private $function = 'getTeamMembers',
+        private $function = 'getProjectMembers',
     ) {
         //
+    }
+
+    private function getColumns()
+    {
+        return [
+            [
+                'dataIndex' => 'avatar',
+                'renderer' => 'thumbnail'
+            ],
+            ['dataIndex' => 'name',],
+            ['dataIndex' => 'company'],
+            [
+                'dataIndex' => 'position_rendered',
+                'title' => 'Position',
+            ],
+            ['dataIndex' => 'phone', 'title' => 'Mobile'],
+            ['dataIndex' => 'email'],
+        ];
     }
 
     /**
@@ -29,9 +47,14 @@ class ProjectTeam extends Component
     {
         $modelPath = Str::modelPathFrom($this->table);
         $project = $modelPath::find($this->id);
-        dump($project);
         $dataSource = $project->{$this->function}();
-        dump($dataSource);
-        return view('components.renderer.project.project-team');
+        return view(
+            'components.renderer.project.project-team',
+            [
+                'project' => $project,
+                'columns' => $this->getColumns(),
+                'dataSource' => $dataSource,
+            ]
+        );
     }
 }
