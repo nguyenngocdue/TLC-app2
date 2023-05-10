@@ -10,9 +10,17 @@ trait TraitUserCompanyTree
 {
     protected function getDataByCompanyTree()
     {
-        $currentUser = CurrentUser::get();
-        [$viewport_uids, $leaf_uids] = [$currentUser['viewport_uids'], $currentUser['leaf_uids']];
-        $treeData = BuildTree::getTreeByOptions(CurrentUser::id(), $viewport_uids, $leaf_uids, false, true);
+        if (CurrentUser::isAdmin()) {
+            $uid = null;
+            $viewport_uids = "";
+            $leaf_uids  = "";
+        } else {
+            $uid = CurrentUser::id();
+            $currentUser = CurrentUser::get();
+            [$viewport_uids, $leaf_uids] = [$currentUser['viewport_uids'], $currentUser['leaf_uids']];
+        }
+        $treeData = BuildTree::getTreeByOptions($uid, $viewport_uids, $leaf_uids, false, true);
+        // dump(count($treeData));
         return $treeData;
     }
 }
