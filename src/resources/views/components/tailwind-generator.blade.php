@@ -76,7 +76,7 @@
 <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-blue-600">Tailwind Elements</h5>
 <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">Tailwind Elements</h6>
 <!-- FOR BUTTON -->
-<button class="disabled:opacity-0"></button>
+<button class="disabled:opacity-0 cursor-not-allowed"></button>
 <button class="disabled:opacity-10"></button>
 <button class="disabled:opacity-20"></button>
 <button class="disabled:opacity-30"></button>

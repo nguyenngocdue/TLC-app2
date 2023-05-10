@@ -117,7 +117,7 @@ class Button extends Component
         $classList = ClassList::BUTTON . " disabled:opacity-50";
 
         $className = $this->outline ? $this->getClassOutline($className, $this->block, $classList) : $this->getClass($className, $this->block, $classList);
-        $className = $this->disabled ? $className . " opacity-50 cursor-not-allowed" : $className;
+        $className = $this->disabled ? $className . " cursor-not-allowed " : $className;
         return view('components.renderer.button', [
             // 'label' => $this->label,
             'className' => $className . " " . $this->class,
