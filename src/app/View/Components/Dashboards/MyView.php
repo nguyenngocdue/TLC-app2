@@ -19,8 +19,19 @@ class MyView extends Component
     public function __construct(
         private $title = "Untitled",
         private $viewType = null,
+        private $projectId = null,
     ) {
         //
+    }
+
+    private function getAppsHaveProjectColumn()
+    {
+        return [
+            'pj_shipment',
+            'qaqc_mir',
+            'qaqc_ncr',
+            'qaqc_wir',
+        ];
     }
 
     private function makeUpLinks($app, $doc)
@@ -35,8 +46,12 @@ class MyView extends Component
     private function created_by_me($appKey, $app, $openingDocs, $uid)
     {
         $result = [];
+        $docs = $openingDocs
+            ->where('owner_id', $uid)
+            ->orderBy('updated_at', 'desc');
+        // dump($docs->toSql());
+        $docs = $docs->get();
 
-        $docs = $openingDocs->where('owner_id', $uid)->orderBy('updated_at', 'desc')->get();
         foreach ($docs as $doc) {
             $this->makeUpLinks($app, $doc);
             $result[] = $doc;
@@ -117,7 +132,16 @@ class MyView extends Component
             // if (!isset($sp["settings"]['definitions']['closed'])) dump("Definition of closed has not been set for $appKey");
             $closed = $sp["settings"]['definitions']['closed'] ?? ['closed'];
             $modelPath = Str::modelPathFrom($appKey);
+
             $openingDocs = $modelPath::whereNotIn('status', $closed);
+            $hasProjectIdColumn = in_array($appKey, $this->getAppsHaveProjectColumn());
+            if ($this->projectId) {
+                if ($hasProjectIdColumn) {
+                    $openingDocs = $openingDocs->where('project_id', $this->projectId);
+                } else {
+                    continue;
+                }
+            }
             // dump($appKey . " - " . $openingDocs->count());
             $statuses = $sp['statuses'];
             switch ($viewType) {
@@ -170,10 +194,26 @@ class MyView extends Component
                 'align' => 'center',
                 'width' => 100,
             ],
+            [
+                'dataIndex' => 'due_date',
+                'renderer' => 'date-time',
+                'align' => 'center',
+                'width' => 100,
+            ],
         ];
+        if (CurrentUser::isAdmin()) {
+            $columns[] =
+                [
+                    'dataIndex' => 'project_id',
+                    'title' => 'Project ID<br/><i class="fa-duotone fa-eye"></i>',
+                    'align' => 'center',
+                    'width' => 100,
+                ];
+        }
         // $dataSource = [];
         $dataSource = $this->makeDataSource($this->viewType);
         // if (isset($dataSource[0])) dump($dataSource[0]);
+
         return view('components.dashboards.my-view', [
             'title' => $this->title,
             'columns' => $columns,

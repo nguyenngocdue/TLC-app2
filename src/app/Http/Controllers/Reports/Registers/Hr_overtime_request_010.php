@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Reports\Registers;
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
+use App\Http\Controllers\Reports\TraitUserCompanyTree;
+use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Support\Str;
 
 class Hr_overtime_request_010 extends Report_ParentRegisterController
@@ -13,6 +17,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
     use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
     use TraitModifyDataToExcelReport;
+    use TraitUserCompanyTree;
 
     protected $groupBy = 'name_render';
     protected $groupByLength = 1;
@@ -20,6 +25,13 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
 
     public function getSqlStr($modeParams)
     {
+
+
+        $treeData = $this->getDataByCompanyTree();
+        $userIds = array_column($treeData, 'id');
+        if (!count($userIds)) return "";
+        $strUserIds = '(' . implode(',', $userIds) . ')';
+
         $sql = "SELECT 
         wpus.name AS user_workplace,
         tb3.*,
@@ -50,8 +62,9 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
                     hr_overtime_requests otr, 
                     user_categories uscate
                 WHERE 1 = 1
-                    AND otline.user_id = us.id
-                    AND otline.hr_overtime_request_id = otr.id
+                    AND otline.user_id = us.id";
+        if (count($userIds)) $sql .= "\n AND otline.user_id IN $strUserIds";
+        $sql .= "\n AND otline.hr_overtime_request_id = otr.id
                     AND uscate.id = us.category
                     AND otline.hr_overtime_request_id = otr.id
                     AND otr.status LIKE 'approved'";
@@ -251,6 +264,8 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
+
+        // $dataSource = $this->getDataByCompanyTree($dataSource);
         $type = Str::singular($this->getType());
         foreach ($dataSource as $key => $value) {
 

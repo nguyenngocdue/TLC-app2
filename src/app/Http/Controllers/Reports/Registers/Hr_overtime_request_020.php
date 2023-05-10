@@ -6,6 +6,7 @@ use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
+use App\Http\Controllers\Reports\TraitUserCompanyTree;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentPathInfo;
 use DateTime;
@@ -17,6 +18,7 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
     use TraitDynamicColumnsTableReport;
     use TraitSQLDataSourceParamReport;
     use TraitModifyDataToExcelReport;
+    use TraitUserCompanyTree;
 
     protected $groupBy = 'ot_date';
     protected $mode = '020';
@@ -24,6 +26,11 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
 
     public function getSqlStr($modeParams)
     {
+        $treeData = $this->getDataByCompanyTree();
+        $userIds = array_column($treeData, 'id');
+        if (!count($userIds)) return "";
+        $strUserIds = '(' . implode(',', $userIds) . ')';
+
         $pickerDate =  isset($modeParams['picker_date']) ? $modeParams['picker_date'] : '';
         // dd($fromDate);
         $sql = "SELECT 	uswp.name workplace_name,tb1.*
@@ -60,6 +67,7 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
             $sql .= "\n AND otline.ot_date >= '$fromDate'
             AND otline.ot_date <= '$toDate'";
         }
+        if (count($userIds)) $sql .= "\n AND otline.user_id IN $strUserIds";
         $sql .= "\n AND otline.sub_project_id = sp.id
                     AND otr.id = otline.hr_overtime_request_id
                     AND otr.status LIKE 'approved'
