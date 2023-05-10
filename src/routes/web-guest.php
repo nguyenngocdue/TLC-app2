@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
+use App\Http\Controllers\Dev\DatabaseSummaryController;
 use App\Http\Controllers\RedisController;
 use App\Http\Controllers\Utils\ParserController;
 use App\Http\Controllers\WelcomeCanhController;
@@ -17,4 +18,5 @@ Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index
 Route::resource('utils/parser', ParserController::class)->only('index', 'store');
 
 Route::get('components', [ComponentDemo::class, 'index']);
+Route::get('database-summary', [DatabaseSummaryController::class, 'index']);
 Route::get('redis', [RedisController::class, 'index']);
