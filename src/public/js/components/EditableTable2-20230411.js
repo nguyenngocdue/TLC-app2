@@ -203,15 +203,16 @@ const trashEditableTable = (params) => {
     const value = getCellValueByName(tableId, '[DESTROY_THIS_LINE]', rowIndex) === 'true'
     const isDeleted = !value;
     setCellValueByName(tableId, '[DESTROY_THIS_LINE]', rowIndex, isDeleted)
-    // console.log(button.firstChild)
+    const icon_i_tag = button.firstChild
+    console.log(button, icon_i_tag)
     if (isDeleted) {
         tr.classList.add('bg-pink-400')
-        button.firstChild.classList.remove('fa-trash')
-        button.firstChild.classList.add('fa-trash-undo')
+        icon_i_tag.classList.remove('fa-trash')
+        icon_i_tag.classList.add('fa-trash-undo')
     } else {
         tr.classList.remove('bg-pink-400')
-        button.firstChild.classList.add('fa-trash')
-        button.firstChild.classList.remove('fa-trash-undo')
+        icon_i_tag.classList.add('fa-trash')
+        icon_i_tag.classList.remove('fa-trash-undo')
     }
 }
 
