@@ -60,7 +60,7 @@ abstract class Report_ParentController extends Controller
     protected function getDataSource($modeParams)
     {
         $sql = $this->getSql($modeParams);
-        if (is_null($sql)) return collect();
+        if (is_null($sql) || !$sql) return collect();
         $sqlData = DB::select(DB::raw($sql));
         $collection = collect($sqlData);
         return $collection;

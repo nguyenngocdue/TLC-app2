@@ -26,6 +26,11 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
 
     public function getSqlStr($modeParams)
     {
+        $treeData = $this->getDataByCompanyTree();
+        $userIds = array_column($treeData, 'id');
+        if (!count($userIds)) return "";
+        $strUserIds = '(' . implode(',', $userIds) . ')';
+
         $pickerDate =  isset($modeParams['picker_date']) ? $modeParams['picker_date'] : '';
         // dd($fromDate);
         $sql = "SELECT 	uswp.name workplace_name,tb1.*
@@ -62,6 +67,7 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
             $sql .= "\n AND otline.ot_date >= '$fromDate'
             AND otline.ot_date <= '$toDate'";
         }
+        if (count($userIds)) $sql .= "\n AND otline.user_id IN $strUserIds";
         $sql .= "\n AND otline.sub_project_id = sp.id
                     AND otr.id = otline.hr_overtime_request_id
                     AND otr.status LIKE 'approved'
@@ -202,7 +208,6 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
-        $dataSource = $this->getDataByCompanyTree($dataSource);
         foreach ($dataSource as $key => $value) {
             $dataSource[$key]->employee_id = (object)[
                 'value' => $value->employee_id,
