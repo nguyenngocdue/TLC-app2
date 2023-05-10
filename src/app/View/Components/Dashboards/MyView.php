@@ -46,7 +46,10 @@ class MyView extends Component
 
     private function assigned_to_me($appKey, $app, $openingDocs, $uid, $statuses)
     {
-        $docs = $openingDocs->orderBy('updated_at', 'desc')->get();
+        $docs = $openingDocs
+            ->where('status', '!=', 'new')
+            ->orderBy('updated_at', 'desc')
+            ->get();
         $result = [];
         foreach ($docs as $doc) {
             if (isset($statuses[$doc->status])) {
@@ -68,40 +71,40 @@ class MyView extends Component
         return $result;
     }
 
-    private function monitored_by_me($appKey, $app, $openingDocs, $uid, $statuses)
-    {
-        $docs = $openingDocs->get();
-        $result = [];
-        // dump("monitored_by_me");
-        // dump($docs->count());
-        foreach ($docs as $doc) {
-            if (isset($statuses[$doc->status])) {
-                $status = $statuses[$doc->status];
-                // $assignee = $status['ball-in-courts']['ball-in-court-assignee'];
-                $monitors_1_to_9 = $status['ball-in-courts']['ball-in-court-monitors'];
-                $monitors_1_to_9 = $monitors_1_to_9 ? $monitors_1_to_9 : "getMonitors1()";
-                // dump($doc->id, $monitors_1_to_9);
-                if (strlen($monitors_1_to_9) > 0) {
-                    $fn = substr($monitors_1_to_9, 0, strlen($monitors_1_to_9) - 2);
-                    // dump($fn);
-                    if (method_exists($doc, $fn)) {
-                        // dump("$doc->id $fn");
-                        $monitors = $doc->$fn()->pluck('id')->toArray();
-                        // dump($monitors);
-                        // dump($doc->id . ": ($fn) " . $uid . " in [" . join(", ", $monitors) . "]");
+    // private function monitored_by_me($appKey, $app, $openingDocs, $uid, $statuses)
+    // {
+    //     $docs = $openingDocs->get();
+    //     $result = [];
+    //     // dump("monitored_by_me");
+    //     // dump($docs->count());
+    //     foreach ($docs as $doc) {
+    //         if (isset($statuses[$doc->status])) {
+    //             $status = $statuses[$doc->status];
+    //             // $assignee = $status['ball-in-courts']['ball-in-court-assignee'];
+    //             $monitors_1_to_9 = $status['ball-in-courts']['ball-in-court-monitors'];
+    //             $monitors_1_to_9 = $monitors_1_to_9 ? $monitors_1_to_9 : "getMonitors1()";
+    //             // dump($doc->id, $monitors_1_to_9);
+    //             if (strlen($monitors_1_to_9) > 0) {
+    //                 $fn = substr($monitors_1_to_9, 0, strlen($monitors_1_to_9) - 2);
+    //                 // dump($fn);
+    //                 if (method_exists($doc, $fn)) {
+    //                     // dump("$doc->id $fn");
+    //                     $monitors = $doc->$fn()->pluck('id')->toArray();
+    //                     // dump($monitors);
+    //                     // dump($doc->id . ": ($fn) " . $uid . " in [" . join(", ", $monitors) . "]");
 
-                        if (in_array($uid, $monitors)) $result[] = $doc;
-                    } else {
-                        dump("$appKey -> $fn does not exist.");
-                        break;
-                    }
-                }
-            } else {
-                dump("Status " . $doc->status . " of $appKey#" . $doc->id . " is not in the available statuses.");
-            }
-        }
-        return $result;
-    }
+    //                     if (in_array($uid, $monitors)) $result[] = $doc;
+    //                 } else {
+    //                     dump("$appKey -> $fn does not exist.");
+    //                     break;
+    //                 }
+    //             }
+    //         } else {
+    //             dump("Status " . $doc->status . " of $appKey#" . $doc->id . " is not in the available statuses.");
+    //         }
+    //     }
+    //     return $result;
+    // }
 
     private function makeDataSource($viewType)
     {
@@ -124,9 +127,9 @@ class MyView extends Component
                 case "created_by_me":
                     $items =  $this->created_by_me($appKey, $app, $openingDocs, $uid,);
                     break;
-                case "monitored_by_me":
-                    $items =  $this->monitored_by_me($appKey, $app, $openingDocs, $uid, $statuses);
-                    break;
+                    // case "monitored_by_me":
+                    //     $items =  $this->monitored_by_me($appKey, $app, $openingDocs, $uid, $statuses);
+                    //     break;
                 default:
                     dd("Unknown how to render $viewType");
                     break;
