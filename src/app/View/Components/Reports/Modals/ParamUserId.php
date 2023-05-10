@@ -11,7 +11,6 @@ use App\View\Components\Reports\ParentTypeParamReport;
 
 class ParamUserId extends ParentTypeParamReport
 {
-    use TraitUserCompanyTree;
 
     protected function getDataSource()
     {
