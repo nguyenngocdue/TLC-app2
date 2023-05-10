@@ -63,7 +63,7 @@ trait TableTraitColumns
         $rotate45Height = ($this->rotate45Width) ? $rotate45Width - 100 : false;
         $classTh = ($this->rotate45Width) ? "rotated-title-th h-[{$rotate45Height}px]" : "";
         $classDiv = ($this->rotate45Width) ? "rotated-title-div text-right w-[{$rotate45Width}px]" : "";
-        $borderRight = $isLastColumn ? "" : "border border-r-2 border-t-0";
+        $borderRight = $isLastColumn ? "" : "border1 border-r";
         $borderRight = ($this->rotate45Width) ? "" : $borderRight;
         $tinyText = $this->noCss ? "text-xs" : "";
         $th = "";

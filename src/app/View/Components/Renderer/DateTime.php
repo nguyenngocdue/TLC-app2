@@ -13,8 +13,11 @@ class DateTime extends Component
      *
      * @return void
      */
-    public function __construct(private $column, private $rendererParam, private $dataLine)
-    {
+    public function __construct(
+        private $column,
+        private $dataLine,
+        private $rendererParam = 'picker_datetime',
+    ) {
         // Log::info($column);
         // Log::info($rendererParam);
         // Log::info($dataLine);
