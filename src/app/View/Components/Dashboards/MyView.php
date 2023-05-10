@@ -36,7 +36,8 @@ class MyView extends Component
 
     private function makeUpLinks($app, $doc)
     {
-        $doc->doc_type = "<a class='text-blue-700' href='{$app['href']}'>{$app['title']}</a>";
+        // $doc->doc_type = $app['title'];
+        $doc->doc_type = "<a class='text-blue-700 cursor-pointer' title='" . $app['title'] . "' href='{$app['href']}'>" . Str::upper($app['nickname']) . "</a>";
         $idText = Str::makeId($doc->id);
         $idHref = route(Str::plural($app['name']) . ".edit", $doc->id);
         $doc->id_link = "<a class='text-blue-700' href='$idHref'>$idText</a>";
@@ -214,10 +215,14 @@ class MyView extends Component
         $dataSource = $this->makeDataSource($this->viewType);
         // if (isset($dataSource[0])) dump($dataSource[0]);
 
+        if ($this->viewType === "assigned_to_me") $icon = "fa-duotone fa-inbox-in";
+        if ($this->viewType === "created_by_me") $icon = "fa-duotone fa-inbox-out";
+
         return view('components.dashboards.my-view', [
             'title' => $this->title,
             'columns' => $columns,
             'dataSource' => $dataSource,
+            'icon' => $icon,
         ]);
     }
 }

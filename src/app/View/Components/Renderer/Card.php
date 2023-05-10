@@ -39,7 +39,7 @@ class Card extends Component
             if ($title) {
                 $result .= "<legend title='$this->tooltip'>";
                 $result .=  "<h4 class='px-2 font-medium text-gray-600 dark:text-gray-300'>";
-                $result .= $this->icon ? "<i class='$this->icon text-blue-800 '></i> " : "";
+                $result .= $this->icon ? "<i class='$this->icon text-blue-800 pr-2 rounded'></i>" : "";
                 $result .= $title;
                 $result .= "</h4>";
                 $result .= "</legend>";
