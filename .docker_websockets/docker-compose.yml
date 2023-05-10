@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
     tty: true
     environment:
-      - NGINX_APP_HOST=${APP_DOMAIN_NAME}
+      - NGINX_WEBSOCKET_HOST=${WEBSOCKET_DOMAIN_NAME}
     ports:
       - "36102:6001"
     volumes:
@@ -36,6 +36,8 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     working_dir: /var/www/html
+    expose:
+      - "6001:6001"
     volumes:
       - ../src:/var/www/html
     networks:

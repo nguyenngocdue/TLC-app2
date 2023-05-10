@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 class BuildTree
 {
     protected static $key = 'my_company';
+    protected static $fillableUser = ['id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned', 'show_on_beta'];
+    protected static $fillableUserDiscipline = ['id', 'name', 'def_assignee'];
     private static function buildTree(array &$elements, $parentId = 0)
     {
         $branch = [];
@@ -37,19 +39,19 @@ class BuildTree
     }
     private static function getDataUsers()
     {
-        $queryUsers =  DB::table('users')->select('id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned', 'show_on_beta')->get()->toArray();
+        $queryUsers =  DB::table('users')->select(static::$fillableUser)->get()->toArray();
 
         return static::arrayGenKey($queryUsers);
     }
     private static function getLeafs($ids)
     {
-        $queryUsers =  DB::table('users')->whereIn('id', $ids)->select('id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned', 'show_on_beta')->get()->toArray();
+        $queryUsers =  DB::table('users')->whereIn('id', $ids)->select(static::$fillableUser)->get()->toArray();
 
         return static::arrayGenKey($queryUsers);
     }
     private static function getDataDisciplines()
     {
-        $queryUserDisciplines = DB::table('user_disciplines')->select('id', 'name', 'def_assignee')->get()->toArray();
+        $queryUserDisciplines = DB::table('user_disciplines')->select(static::$fillableUserDiscipline)->get()->toArray();
 
         return static::arrayGenKey($queryUserDisciplines);
     }
