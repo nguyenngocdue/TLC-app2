@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Reports\Registers;
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
+use App\Http\Controllers\Reports\TraitUserCompanyTree;
+use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Support\Str;
 
 class Hr_overtime_request_010 extends Report_ParentRegisterController
@@ -13,6 +17,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
     use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
     use TraitModifyDataToExcelReport;
+    use TraitUserCompanyTree;
 
     protected $groupBy = 'name_render';
     protected $groupByLength = 1;
@@ -251,6 +256,8 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
 
     protected function enrichDataSource($dataSource, $modeParams)
     {
+
+        $dataSource = $this->getDataByCompanyTree($dataSource);
         $type = Str::singular($this->getType());
         foreach ($dataSource as $key => $value) {
 

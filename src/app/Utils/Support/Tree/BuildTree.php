@@ -37,13 +37,13 @@ class BuildTree
     }
     private static function getDataUsers()
     {
-        $queryUsers =  DB::table('users')->select('id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned')->get()->toArray();
+        $queryUsers =  DB::table('users')->select('id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned', 'show_on_beta')->get()->toArray();
 
         return static::arrayGenKey($queryUsers);
     }
     private static function getLeafs($ids)
     {
-        $queryUsers =  DB::table('users')->whereIn('id', $ids)->select('id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned')->get()->toArray();
+        $queryUsers =  DB::table('users')->whereIn('id', $ids)->select('id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned', 'show_on_beta')->get()->toArray();
 
         return static::arrayGenKey($queryUsers);
     }
