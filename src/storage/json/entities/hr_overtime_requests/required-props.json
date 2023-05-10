@@ -31,6 +31,14 @@
         "rejected": "true",
         "approved": "true"
     },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -55,13 +63,13 @@
         "rejected": "",
         "approved": ""
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "true",
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
+        "new": "",
         "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
+        "rejected": "",
+        "approved": ""
     },
     "_created_at": {
         "name": "_created_at",
