@@ -27,7 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('esg_metric_type_2_id')->nullable();
             // $table->date('year')->nullable();
             $table->unsignedBigInteger('unit')->nullable();
-            $table->float('factor')->nullable();
+            $table->decimal('factor', 10, 4)->nullable();
             $table->float('m01')->nullable();
             $table->float('m02')->nullable();
             $table->float('m03')->nullable();
