@@ -151,6 +151,25 @@
         "duplicatable": "true",
         "new_line": ""
     },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
+        "column_type": "eloquent_prop",
+        "label": "Rejected Reason",
+        "control": "comment",
+        "align": "",
+        "col_span": "",
+        "width": "100",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "true",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
