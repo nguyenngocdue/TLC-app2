@@ -12,6 +12,7 @@ use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
 use App\Models\Qaqc_insp_tmpl_sht;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 use Illuminate\Support\Str;
 
@@ -96,15 +97,15 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 "width" => 60,
             ],
             [
-                "title" => "Progress (%)",
-                "dataIndex" => "chksh_progress",
-                "align" => "right",
+                "title" => "Create New",
+                "dataIndex" => "check_list",
+                "align" => "center",
                 "width" => 30,
             ],
             [
-                "title" => "Check List (create new)",
-                "dataIndex" => "check_list",
-                "align" => "center",
+                "title" => "Progress (%)",
+                "dataIndex" => "chksh_progress",
+                "align" => "right",
                 "width" => 30,
             ],
         ];
@@ -216,6 +217,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $plural = 'qaqc_insp_chklst_shts';
         $statuses = LibStatuses::getFor($plural);
         $items = $dataSource->toArray();
+        $cuid = CurrentUser::id();
         foreach ($items as $key => $value) {
             $idx = array_search("chklst_shts_status", array_keys($value)); //  specify start point to render items
             $rangeArray = array_slice($value, $idx + 1, count($value) - $idx, true);
@@ -241,15 +243,19 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             $items[$key] = $value;
             $items[$key]['prod_order_name'] = (object)['value' => $value['prod_order_name'], 'cell_title' => 'ID: ' . $value['prod_order_id']];
             if (is_null($value['chklst_shts_id'])) {
+                $prodOrder = $value['prod_order_id'];
+                $tmplId = 199;
+                $tmplDescription = "AAA";
                 $items[$key]['check_list'] = (object)[
-                    'value' => '<i class="fa-regular fa-circle-plus "></i>',
-                    'cell_href' => 'Not Link'
+                    'value' => '<i class="fa-regular fa-circle-plus text-green-800"></i>',
+                    'cell_href' => 'javascript:create(' . $tmplId . ',' . $prodOrder . ',' . $cuid . ');',
                 ];
             }
         }
         // dd($items[40]);
         return collect($items);
     }
+
 
 
     protected function getDefaultValueModeParams($modeParams, $request)
@@ -264,5 +270,31 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             $modeParams[$z] = $this->checksheet_type_id;
         }
         return $modeParams;
+    }
+
+    protected function getJS()
+    {
+        return "<script>function create(tmplId, prodOrderId, ownerId){
+            const url = '/api/v1/qaqc/clone_chklst_from_tmpl'
+            
+            console.log(tmplId, prodOrderId, ownerId)
+
+                const data = {tmplId, ownerId, prodOrderId}
+                toastr.info('Creating a new document by cloning a template...')
+                $.ajax({
+                    type: 'POST',
+                    url,
+                    data,
+                    success: (response)=>{
+                        // console.log(response)
+                        const {href} =  response
+                        toastr.success('Created successfully. Opening the new document...')
+                        location.href = href
+                    },
+                    error: ()=> {
+                        console.log('Failed')
+                    },
+                })
+        }</script>";
     }
 }

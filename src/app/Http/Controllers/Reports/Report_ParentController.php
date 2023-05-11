@@ -178,6 +178,8 @@ abstract class Report_ParentController extends Controller
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
         // dd($dataModeControl);
 
+        echo $this->getJS();
+
         return view('reports.' . $viewName, [
             'maxH' => $this->maxH,
             'entity' => $entity,
@@ -243,5 +245,10 @@ abstract class Report_ParentController extends Controller
             // Log::info($array);
         };
         return response()->stream($callback, 200, $headers);
+    }
+
+    protected function getJS()
+    {
+        return "";
     }
 }
