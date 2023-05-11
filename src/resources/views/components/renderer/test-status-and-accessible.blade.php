@@ -20,7 +20,7 @@
                 </div>
             </x-renderer.card>
         </div>
-        <div class="col-span-12 md:col-span-3 lg:col-span-5 w-full">
+        <div class="col-span-12 md:col-span-3 lg:col-span-5 w-full overflow-scroll max-h-60">
             <x-renderer.card title="Accessible" py="1">
                 <div class="mb-1">
                     @isset($statuses[$status])

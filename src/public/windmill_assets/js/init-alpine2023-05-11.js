@@ -72,13 +72,13 @@ function data() {
             this.isSettingMenuOpen = false
         },
         ///////////////TO BE OBSOLETE////////////////////
-        isListingTableOpen: {},
-        toggleListingTable(type) {
-            this.isListingTableOpen[type] = !this.isListingTableOpen[type]
-        },
-        closeListingTable(type) {
-            this.isListingTableOpen[type] = false
-        },
+        // isListingTableOpen: {},
+        // toggleListingTable(type) {
+        //     this.isListingTableOpen[type] = !this.isListingTableOpen[type]
+        // },
+        // closeListingTable(type) {
+        //     this.isListingTableOpen[type] = false
+        // },
         ///////////////////////////////////
         isModalOpening: {},
         toggleModal(type) {

@@ -17,7 +17,7 @@
     <div>
         <x-renderer.button id="btnAddANewLine_{{$table01Name}}" type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
         @if( isset($tableSettings['showBtnAddFromAList']) && $tableSettings['showBtnAddFromAList'])
-            <x-renderer.button id="btnAddFromAList_{{$table01Name}}" click="toggleListingTable('{{$table01Name}}')" keydown="closeListingTable('{{$table01Name}}')" type="success" title="Add from a list">Add From A List</x-renderer.button>
+            <x-renderer.button id="btnAddFromAList_{{$table01Name}}" click="toggleModal('{{$table01Name}}')" keydown="closeModal('{{$table01Name}}')" type="success" title="Add from a list">Add From A List</x-renderer.button>
             <x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />
         @endif
     </div>
