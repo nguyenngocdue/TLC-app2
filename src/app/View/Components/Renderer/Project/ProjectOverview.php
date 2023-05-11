@@ -26,16 +26,30 @@ class ProjectOverview extends Component
 
     private function getColumns()
     {
+        $progressTitle = [
+            "<div class='p-2 m-1 rounded bg-red-500'></div>Overdue",
+            "<div class='p-2 m-1 rounded bg-yellow-500'></div>In 7 days",
+            "<div class='p-2 m-1 rounded bg-green-500'></div>More than 7 days",
+        ];
         return [
             ['dataIndex' => "doc_type"],
-            ['dataIndex' => "progress", 'renderer' => 'progress-bar'],
+            [
+                'dataIndex' => "progress",
+                'renderer' => 'progress-bar',
+                'title' => "<div class='flex justify-center items-center'>" . join(" ", $progressTitle) . "</div>",
+                'width' => '50%',
+            ],
             ['dataIndex' => "total_open", 'align' => 'center'],
         ];
     }
 
     function groupByDueDate($dataSource)
     {
-        $result = [];
+        $result = [
+            "overdue" => ['items' => []],
+            "in_one_week" => ['items' => []],
+            "more_than_one_week" => ['items' => []],
+        ];
         foreach ($dataSource as $line) {
             $dueDate = Carbon::createFromFormat(Constant::FORMAT_DATETIME_MYSQL, $line->due_date);
             $diffFromToday = $dueDate->diffInDays(now(), false);
@@ -50,17 +64,21 @@ class ProjectOverview extends Component
     {
         foreach ($dataSource as $key => &$value) {
             $count = count($value['items']);
+            $ids  = join(",", array_map(fn ($i) => $i['id'], $value['items']));
             $value['label'] = $count;
             $value['percent'] = round(100 * $count / $size, 2) . "%";
             switch ($key) {
                 case 'in_one_week':
                     $value['color'] = "yellow";
+                    $value['href'] = "#$ids";
                     break;
                 case 'more_than_one_week':
                     $value['color'] = "green";
+                    $value['href'] = "#$ids";
                     break;
                 case 'overdue':
                     $value['color'] = "red";
+                    $value['href'] = "#$ids";
                     break;
             }
         }
