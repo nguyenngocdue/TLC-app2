@@ -6,8 +6,6 @@ use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
-use App\Models\Qaqc_insp_tmpl;
-use App\Models\Sub_project;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Log;
 
@@ -199,7 +197,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
 
         $groupedArray = Report::groupArrayByKey($enrichData, 'prod_id');
         $result = Report::mergeArrayValues($groupedArray);
-        $data = $this->changeValueData($result);
+        $data = $this->changeValueData($result, $modeParams);
         return collect($data);
     }
 

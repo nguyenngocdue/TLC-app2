@@ -9,12 +9,9 @@ use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Qaqc_insp_chklst;
-use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
-use App\Models\Qaqc_insp_tmpl_sht;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
-use Illuminate\Support\Str;
 
 class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 {
@@ -95,7 +92,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             [
                 "title" => "Compliance Name",
                 "dataIndex" => "prod_compliance_name",
-                "align" => "center",
+                // "align" => "center",
                 "width" => 60,
             ],
             [
@@ -220,6 +217,9 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $statuses = LibStatuses::getFor($plural);
         $items = $dataSource->toArray();
         $cuid = CurrentUser::id();
+        $inspTmplId = $modeParams['checksheet_type_id'];
+        $tmplDescription = Qaqc_insp_tmpl::where('id', $inspTmplId)->pluck('description')->first();
+
         foreach ($items as $key => $value) {
             $idx = array_search("chklst_shts_status", array_keys($value)); //  specify start point to render items
             $rangeArray = array_slice($value, $idx + 1, count($value) - $idx, true);
@@ -246,19 +246,16 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             $items[$key]['prod_order_name'] = (object)['value' => $value['prod_order_name'], 'cell_title' => 'ID: ' . $value['prod_order_id']];
             if (is_null($value['chklst_shts_id'])) {
                 $prodOrder = $value['prod_order_id'];
-                $tmplId = $modeParams['checksheet_type_id'];
-                $tmplDescription = Qaqc_insp_tmpl::where('id', $tmplId)->pluck('description')->first();
+
                 $items[$key]['check_list'] = (object)[
                     'value' => '<i class="fa-regular fa-circle-plus text-green-800"></i>',
-                    'cell_href' => 'javascript:create(' . $tmplId . ',' . $prodOrder . ',' . $cuid . ');',
+                    'cell_href' => 'javascript:create(' . $inspTmplId . ',' . $prodOrder . ',' . $cuid . ',"' . $tmplDescription . '");',
                 ];
             }
         }
         // dd($items[40]);
         return collect($items);
     }
-
-
 
     protected function getDefaultValueModeParams($modeParams, $request)
     {
@@ -276,12 +273,12 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 
     protected function getJS()
     {
-        return "<script>function create(tmplId, prodOrderId, ownerId){
+        return "<script>function create(inspTmplId, prodOrderId, ownerId){
             const url = '/api/v1/qaqc/clone_chklst_from_tmpl'
             
-            console.log(tmplId, prodOrderId, ownerId)
+            console.log(inspTmplId, prodOrderId, ownerId)
 
-                const data = {tmplId, ownerId, prodOrderId}
+                const data = {inspTmplId, ownerId, prodOrderId}
                 toastr.info('Creating a new document by cloning a template...')
                 $.ajax({
                     type: 'POST',
