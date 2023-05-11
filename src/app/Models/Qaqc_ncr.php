@@ -14,8 +14,8 @@ class Qaqc_ncr extends ModelExtended
         "defect_disposition_id", "closed_at", "severity", "report_type",
         "qty_man_power", "hour_per_man", "total_hour",
     ];
-    protected $primaryKey = 'id';
     protected $table = "qaqc_ncrs";
+    public $hasDueDate = true;
 
     public $eloquentParams = [
         "getProject" => ['belongsTo', Project::class, "project_id"],

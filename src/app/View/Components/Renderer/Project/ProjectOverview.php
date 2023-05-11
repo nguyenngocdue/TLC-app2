@@ -3,6 +3,9 @@
 namespace App\View\Components\Renderer\Project;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Utils\Constant;
+use App\Utils\Support\Json\SuperDefinitions;
+use Carbon\Carbon;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -25,9 +28,55 @@ class ProjectOverview extends Component
     {
         return [
             ['dataIndex' => "doc_type"],
-            ['dataIndex' => "progress"],
-            ['dataIndex' => "total_open"],
+            ['dataIndex' => "progress", 'renderer' => 'progress-bar'],
+            ['dataIndex' => "total_open", 'align' => 'center'],
         ];
+    }
+
+    function groupByDueDate($dataSource)
+    {
+        $result = [];
+        foreach ($dataSource as $line) {
+            $dueDate = Carbon::createFromFormat(Constant::FORMAT_DATETIME_MYSQL, $line->due_date);
+            $diffFromToday = $dueDate->diffInDays(now(), false);
+            $dueDateType = ($diffFromToday > 0) ? "overdue" : ($diffFromToday > -7 ? "in_one_week" : "more_than_one_week");
+            $result[$dueDateType]['items'][] = $line; //->due_date . " " . $diffFromToday;
+        }
+        // dump($result);
+        return $result;
+    }
+
+    function convertToProgressbar($dataSource, $size)
+    {
+        foreach ($dataSource as $key => &$value) {
+            $count = count($value['items']);
+            $value['label'] = $count;
+            $value['percent'] = round(100 * $count / $size, 2) . "%";
+            switch ($key) {
+                case 'in_one_week':
+                    $value['color'] = "yellow";
+                    break;
+                case 'more_than_one_week':
+                    $value['color'] = "green";
+                    break;
+                case 'overdue':
+                    $value['color'] = "red";
+                    break;
+            }
+        }
+        return $dataSource;
+    }
+
+    function makeDataSource($modelPath, $closedArray)
+    {
+        $items = $modelPath::query();
+        $items = $items->where('project_id', $this->id);
+        $items = $items->whereNotIn('status', $closedArray);
+        $items = $items->get();
+        $size = count($items);
+        $dataSource = $this->groupByDueDate($items);
+        $dataSource = $this->convertToProgressbar($dataSource, $size);
+        return [$dataSource, $size];
     }
 
     private function getDataSource()
@@ -38,10 +87,15 @@ class ProjectOverview extends Component
         $result = [];
         foreach ($apps as $appKey => $app) {
             // dump($app);
+            $modelPath = Str::modelPathFrom($appKey);
+            $model = new ($modelPath);
+            if (!$model->hasDueDate) continue;
+            $closedArray = SuperDefinitions::getClosedOf($appKey);
+            [$dataSource, $size] = $this->makeDataSource($modelPath, $closedArray);
             $item =   [
                 'doc_type' => "<a class='text-blue-700 cursor-pointer' title='" . $app['title'] . "' href='{$app['href']}'>" . Str::upper($app['nickname']) . "</a>",
-                'progress' => 'b',
-                'total_open' => 'total_open',
+                'progress' => $dataSource,
+                'total_open' => $size,
             ];
             $result[] = $item;
         }

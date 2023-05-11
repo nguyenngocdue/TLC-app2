@@ -10,6 +10,7 @@ class ComponentDemo
     use TraitDemoTableData;
     use TraitDemoTagData;
     use TraitDemoTabData;
+    use TraitDemoProgressBar;
     use TraitDemoModeControl;
 
     function getType()
@@ -38,6 +39,7 @@ class ComponentDemo
             'itemsSelected' => $this->getItemsSelected(),
             'tableDataSourceForRegister' => $this->getDataSourceForRegister(),
             'tableColumnsForRegister' => $this->getColumnsForRegister(),
+            'dataSourceProgressBar' => $this->getDataSourceProgressBar(),
         ]);
     }
 }
