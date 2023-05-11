@@ -37,8 +37,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         ,chklst_shts.id AS chklst_shts_id
         ,chklst_shts.qaqc_insp_chklst_id AS chklst_shts_chklst_id
         ,chklst_shts.description AS chklst_shts_desc
-        ,chksh.id AS chksh_id
-        ,chksh.progress AS chksh_progress
+        ,chklst.id AS chklst_id
+        ,chklst.progress AS chklst_progress
         ,chklst_shts.status AS chklst_shts_status
 
         FROM (SELECT
@@ -49,6 +49,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         ,po.id AS prod_order_id
         ,po.name AS prod_order_name
         ,pr.id AS prod_routing_id
+        ,po.compliance_name AS prod_compliance_name
         ,pr.name AS prod_routing_name
         FROM projects pj, sub_projects sp, prod_orders po, prod_routings pr
         WHERE 1 = 1
@@ -63,10 +64,10 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             $sql .= "\n AND po.id IN " . $con;
         }
         $sql .= "\n ) AS po_tb
-              LEFT JOIN qaqc_insp_chklsts chksh ON chksh.prod_order_id = po_tb.prod_order_id ";
-        if (isset($modeParams['checksheet_type_id'])) $sql .= " AND chksh.qaqc_insp_tmpl_id = '{{checksheet_type_id}}'";
-        $sql .= "\n LEFT JOIN qaqc_insp_chklst_shts chklst_shts ON chksh.id = chklst_shts.qaqc_insp_chklst_id
-              LEFT JOIN qaqc_insp_tmpls tmpl ON tmpl.id = chksh.qaqc_insp_tmpl_id
+              LEFT JOIN qaqc_insp_chklsts chklst ON chklst.prod_order_id = po_tb.prod_order_id ";
+        if (isset($modeParams['checksheet_type_id'])) $sql .= " AND chklst.qaqc_insp_tmpl_id = '{{checksheet_type_id}}'";
+        $sql .= "\n LEFT JOIN qaqc_insp_chklst_shts chklst_shts ON chklst.id = chklst_shts.qaqc_insp_chklst_id
+              LEFT JOIN qaqc_insp_tmpls tmpl ON tmpl.id = chklst.qaqc_insp_tmpl_id
               LEFT JOIN qaqc_insp_tmpl_shts tmplsh ON tmplsh.id =  chklst_shts.qaqc_insp_tmpl_sht_id AND tmpl.id = tmplsh.qaqc_insp_tmpl_id
               ORDER BY prod_order_name";
 
@@ -89,9 +90,21 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 "width" => 60,
             ],
             [
+                "title" => "Compliance Name",
+                "dataIndex" => "prod_compliance_name",
+                "align" => "center",
+                "width" => 60,
+            ],
+            [
                 "title" => "Progress (%)",
                 "dataIndex" => "chksh_progress",
                 "align" => "right",
+                "width" => 30,
+            ],
+            [
+                "title" => "Check List (create new)",
+                "dataIndex" => "check_list",
+                "align" => "center",
                 "width" => 30,
             ],
         ];
@@ -132,6 +145,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 'allowClear' => true,
                 'multiple' => true
             ],
+
         ];
     }
 
@@ -152,6 +166,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 
     protected function transformDataSource($dataSource, $modeParams)
     {
+        // dd($dataSource);
         $items = $dataSource->toArray();
 
         $prodOderIds = $modeParams['prod_order_id2'] ?? [0];
@@ -225,6 +240,12 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             }
             $items[$key] = $value;
             $items[$key]['prod_order_name'] = (object)['value' => $value['prod_order_name'], 'cell_title' => 'ID: ' . $value['prod_order_id']];
+            if (is_null($value['chklst_shts_id'])) {
+                $items[$key]['check_list'] = (object)[
+                    'value' => '<i class="fa-regular fa-circle-plus "></i>',
+                    'cell_href' => 'Not Link'
+                ];
+            }
         }
         // dd($items[40]);
         return collect($items);
