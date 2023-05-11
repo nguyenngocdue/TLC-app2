@@ -27,8 +27,8 @@
         "on_hold": "",
         "approved": "true"
     },
-    "post_closed": {
-        "name": "post_closed",
+    "post-closed": {
+        "name": "post-closed",
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",

@@ -47,8 +47,8 @@
         "pending_ack": "",
         "active": ""
     },
-    "post_closed": {
-        "name": "post_closed",
+    "post-closed": {
+        "name": "post-closed",
         "new": "",
         "pending_endorsed": "",
         "endorse_rejected": "",

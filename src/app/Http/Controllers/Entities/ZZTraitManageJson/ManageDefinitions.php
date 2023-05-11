@@ -60,8 +60,8 @@ class ManageDefinitions extends Manage_Parent
                 'rowDescription' => 'Hide save button (Ignore due date, set closed_at_gmt)',
             ],
             [
-                'description' => '(not-yet) Status to which a new document is post_closed',
-                'name' => 'post_closed',
+                'description' => '(not-yet) Status to which a new document is post-closed',
+                'name' => 'post-closed',
                 'rowDescription' => 'Stop rt_la_remaining from realtime',
             ],
         ];

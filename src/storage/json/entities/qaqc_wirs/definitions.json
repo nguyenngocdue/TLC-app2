@@ -27,8 +27,8 @@
         "rejected": "",
         "closed": "true"
     },
-    "post_closed": {
-        "name": "post_closed",
+    "post-closed": {
+        "name": "post-closed",
         "new": "",
         "assigned": "",
         "rejected": "",

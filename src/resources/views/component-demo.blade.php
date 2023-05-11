@@ -15,10 +15,10 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#static">Static</a></li>
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#data_display">Data Display</a></li>
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#data_entry">Data Entry</a></li>
-        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t {{$activeClass}}"><a href="#attachments">Attachments / Comments</a></li>
+        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#attachments">Attachments / Comments</a></li>
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#editable_tables">Editable Tables</a></li>
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#navigation">Navigation</a></li>
-        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#feedbacks">Feedbacks</a></li>
+        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t {{$activeClass}}"><a href="#feedbacks">Feedbacks</a></li>
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#listeners">Listeners</a></li>
         <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#modecontrols">Mode Controls</a></li>
     </ul>
@@ -40,7 +40,7 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         <div id="data_entry" class="p-4 hidden">
             <x-demo.demo-data-entry :dropdownCell="$dropdownCell" />
         </div>
-        <div id="attachments" class="p-4 ">
+        <div id="attachments" class="p-4 hidden">
             <x-demo.demo-attachment-comment :attachmentData="$attachmentData" :attachmentData2="$attachmentData2" :dataComment="$dataComment" />
         </div>
         <div id="editable_tables" class="p-4 hidden">
@@ -49,8 +49,8 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         <div id="navigation" class="p-4 hidden">
             <x-demo.demo-navigation :tabData1="$tabData1" :tabData2="$tabData2" />
         </div>
-        <div id="feedbacks" class="p-4 hidden">
-            <x-demo.demo-feedback />
+        <div id="feedbacks" class="p-4 hidden1">
+            <x-demo.demo-feedback :dataSourceProgressBar="$dataSourceProgressBar"/>
         </div>
         <div id="listeners" class="p-4 hidden">
             <x-demo.demo-listener :dataSource="$dataSource" :itemsSelected="$itemsSelected" />

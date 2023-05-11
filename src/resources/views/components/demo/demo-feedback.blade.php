@@ -9,9 +9,11 @@
         Empty attributes:
         <x-feedback.alert />
     </x-renderer.card>
+    <x-renderer.card title="Progress Bars">
+        <x-renderer.progress-bar :dataSource="$dataSourceProgressBar"/>
+    </x-renderer.card>
     <x-renderer.card title="Modals">
-        <div class="mb-8 grid gap-6 md:grid-cols-2 xl:grid-cols-2">
-
+        <div class="mb-8 grid gap-6 md:grid-cols-4 xl:grid-cols-4">
             <button @click="openModal('modal1')" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                 Open Modal 1
             </button>

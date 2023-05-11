@@ -1,31 +1,33 @@
 <div class="grid gap-6 mb-8 md:grid-cols-2 ">
     <x-renderer.card title="Avatars">
-        Avatar Item
-        <div class="grid gap-6 mb-8 md:grid-cols-2 ">
-            <div>
-                AvatarItem with Attributes
-                <x-renderer.avatar-item title="Steve Jobs" description="Software Engineer" href="http://www.google.com" avatar="/images/helen.jpeg"></x-renderer.avatar-item>
+        <x-renderer.card title="Avatar Item">
+            <div class="grid gap-6 mb-8 md:grid-cols-2 ">
+                <div>
+                    AvatarItem with Attributes
+                    <x-renderer.avatar-item title="Steve Jobs" description="Software Engineer" href="http://www.google.com" avatar="/images/helen.jpeg"></x-renderer.avatar-item>
+                </div>
+                <div>
+                    AvatarItem with gray= { { true } }
+                    <x-renderer.avatar-item title="Alan Turing" description="Software Engineer" href="http://www.google.com" avatar="/images/hans.jpeg" gray='true'></x-renderer.avatar-item>
+                </div>
+                <div>
+                    Empty attribute
+                    <x-renderer.avatar-item></x-renderer.avatar-item>
+                </div>
             </div>
-            <div>
-                AvatarItem with gray= { { true } }
-                <x-renderer.avatar-item title="Alan Turing" description="Software Engineer" href="http://www.google.com" avatar="/images/hans.jpeg" gray='true'></x-renderer.avatar-item>
+        </x-renderer.card>
+        <x-renderer.card title="Avatar User"> 
+            <div class="grid gap-6 mb-8 md:grid-cols-2 ">
+                <div>
+                    AvatarUser with Slot
+                    <x-renderer.avatar-user>{!!Auth::user()!!}</x-renderer.avatar-user>
+                </div>
+                <div>
+                    Empty attribute
+                    <x-renderer.avatar-user></x-renderer.avatar-user>
+                </div>
             </div>
-            <div>
-                Empty attribute
-                <x-renderer.avatar-item></x-renderer.avatar-item>
-            </div>
-        </div>
-        AvatarUser
-        <div class="grid gap-6 mb-8 md:grid-cols-2 ">
-            <div>
-                AvatarUser with Slot
-                <x-renderer.avatar-user>{!!Auth::user()!!}</x-renderer.avatar-user>
-            </div>
-            <div>
-                Empty attribute
-                <x-renderer.avatar-user></x-renderer.avatar-user>
-            </div>
-        </div>
+        </x-renderer.card>
     </x-renderer.card>
     <x-renderer.card title="Descriptions">
         {{-- <x-renderer.description-group control='111' :prop="['a','b']" :items="['a','b']" />

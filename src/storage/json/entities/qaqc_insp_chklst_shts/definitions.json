@@ -27,8 +27,8 @@
         "pending_verification": "",
         "approved": "true"
     },
-    "post_closed": {
-        "name": "post_closed",
+    "post-closed": {
+        "name": "post-closed",
         "in_progress": "",
         "inspected": "",
         "pending_verification": "",

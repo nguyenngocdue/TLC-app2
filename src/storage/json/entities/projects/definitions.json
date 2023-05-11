@@ -43,8 +43,8 @@
         "cancelled": "",
         "on_hold": ""
     },
-    "post_closed": {
-        "name": "post_closed",
+    "post-closed": {
+        "name": "post-closed",
         "concept": "",
         "design": "",
         "timesheet_only": "",
