@@ -1,18 +1,19 @@
 <?php
 
-namespace App\View\Components\Feedback;
+namespace App\View\Components\Modals;
 
 use Illuminate\View\Component;
 
-class Modal extends Component
+class ModalEmpty extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(private $type, private $title)
-    {
+    public function __construct(
+        private $modalId,
+    ) {
         //
     }
 
@@ -23,9 +24,9 @@ class Modal extends Component
      */
     public function render()
     {
-        return view('components.feedback.modal', [
-            'type' => $this->type,
-            'title' => $this->title,
-        ]);
+        return view(
+            'components.modals.modal-empty',
+            ['modalId' => $this->modalId]
+        );
     }
 }

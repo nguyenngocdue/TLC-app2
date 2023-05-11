@@ -13,23 +13,12 @@
         <x-renderer.progress-bar :dataSource="$dataSourceProgressBar"/>
     </x-renderer.card>
     <x-renderer.card title="Modals">
-        <div class="mb-8 grid gap-6 md:grid-cols-4 xl:grid-cols-4">
-            <button @click="openModal('modal1')" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                Open Modal 1
-            </button>
-            <button @click="openModal('modal2')" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                Open Modal 2
-            </button>
-            <x-feedback.modal1 id="modal1" title="Hello 1" content="What is this" />
-            <x-feedback.modal1 id="modal2" title="Hello 2" content="I am good" />
-            <button @click="openModal('modal3')" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                Open Modal Extended 3
-            </button>
-            <button @click="openModal('modal4')" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                Open Modal Extended 4
-            </button>
-            <x-feedback.modal-extended id="modal3" title="Hello 3" content="What is this" />
-            <x-feedback.modal-extended id="modal4" title="Hello 4" content="I am good" />
+        <div class="mb-8 grid gap-6">
+            <x-renderer.button type="success" 
+                click="openModal('modal-empty-123')"
+                keydown="closeModal('modal-empty-123')"
+                >Open An Empty Modal </x-renderer.button>
+            <x-modals.modal-empty modalId="modal-empty-123" />
         </div>
     </x-renderer.card>
     <x-renderer.card title="Popover">
