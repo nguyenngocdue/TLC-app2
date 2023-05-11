@@ -135,7 +135,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         ];
     }
 
-    protected function changeValueData($dataSource)
+    protected function changeValueData($dataSource, $modeParams)
     {
 
         foreach ($dataSource as $key => $value) {

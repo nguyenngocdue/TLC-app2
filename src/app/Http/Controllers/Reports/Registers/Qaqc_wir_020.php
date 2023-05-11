@@ -164,7 +164,7 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
         return $dataSource;
     }
 
-    protected function changeValueData($dataSource)
+    protected function changeValueData($dataSource, $modeParams)
     {
         $dataSource = $dataSource->ToArray() ?? $dataSource;
         array_walk($dataSource, function ($value) {

@@ -76,7 +76,7 @@ abstract class Report_ParentController extends Controller
         return $dataSource;
     }
 
-    protected function changeValueData($dataSource)
+    protected function changeValueData($dataSource, $modeParams)
     {
         return $dataSource;
     }
@@ -165,7 +165,7 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
         $start = microtime(true);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
-        $dataSource = $this->changeValueData($dataSource);
+        $dataSource = $this->changeValueData($dataSource, $modeParams);
         $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);

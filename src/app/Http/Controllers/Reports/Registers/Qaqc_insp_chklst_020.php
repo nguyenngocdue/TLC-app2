@@ -35,6 +35,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $sql = "SELECT 
         po_tb.*
         ,tmplsh.description AS tmplsh_desc
+        ,tmpl.description AS tmpl_chklst_desc
+        ,tmpl.id AS tmpl_chklst_id
         ,chklst_shts.id AS chklst_shts_id
         ,chklst_shts.qaqc_insp_chklst_id AS chklst_shts_chklst_id
         ,chklst_shts.description AS chklst_shts_desc
@@ -212,7 +214,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         return collect($dataSource);
     }
 
-    protected function changeValueData($dataSource)
+    protected function changeValueData($dataSource, $modeParams)
     {
         $plural = 'qaqc_insp_chklst_shts';
         $statuses = LibStatuses::getFor($plural);
@@ -244,8 +246,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             $items[$key]['prod_order_name'] = (object)['value' => $value['prod_order_name'], 'cell_title' => 'ID: ' . $value['prod_order_id']];
             if (is_null($value['chklst_shts_id'])) {
                 $prodOrder = $value['prod_order_id'];
-                $tmplId = 199;
-                $tmplDescription = "AAA";
+                $tmplId = $modeParams['checksheet_type_id'];
+                $tmplDescription = Qaqc_insp_tmpl::where('id', $tmplId)->pluck('description')->first();
                 $items[$key]['check_list'] = (object)[
                     'value' => '<i class="fa-regular fa-circle-plus text-green-800"></i>',
                     'cell_href' => 'javascript:create(' . $tmplId . ',' . $prodOrder . ',' . $cuid . ');',
