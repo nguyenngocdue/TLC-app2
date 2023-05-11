@@ -27,7 +27,7 @@ trait TraitUserCompanyTree
                 if (!$value->show_on_beta) $data[] = $value;
             }
         } else {
-            return $treeData;
+            $data = $treeData;
         }
         return $data;
     }

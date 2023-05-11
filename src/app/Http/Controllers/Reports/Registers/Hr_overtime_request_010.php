@@ -59,10 +59,9 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
         if (!CurrentUser::isAdmin()) {
             $treeData = $this->getDataByCompanyTree();
             $userIds = array_column($treeData, 'id');
-            if (count($userIds)) {
-                $strUserIds = '(' . implode(',', $userIds) . ')';
-                $sql .= "\n AND otline.user_id IN $strUserIds";
-            }
+            if (!count($userIds)) return "";
+            $strUserIds = '(' . implode(',', $userIds) . ')';
+            $sql .= "\n AND otline.user_id IN $strUserIds";
         }
         $sql .= "\n AND otline.hr_overtime_request_id = otr.id
                     AND uscate.id = us.category

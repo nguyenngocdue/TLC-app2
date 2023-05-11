@@ -105,7 +105,7 @@ class Breadcrumb extends Component
                 $links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
                 break;
             case 'edit':
-                $links[] = ['href' => route($type . '.show', $id), 'title' => 'Print Mode', 'icon' => '<i class="fa-duotone fa-print"></i>'];
+                $links[] = ['href' => route($type . '.show', $id), 'title' => 'View Mode', 'icon' => '<i class="fa-duotone fa-browser"></i>'];
                 break;
             default:
                 break;
