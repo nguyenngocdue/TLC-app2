@@ -11,8 +11,9 @@ class ModalOverDueDocuments extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $modalId,
+    ) {
         //
     }
 
@@ -23,6 +24,11 @@ class ModalOverDueDocuments extends Component
      */
     public function render()
     {
-        return view('components.modals.modal-over-due-documents');
+        return view(
+            'components.modals.modal-over-due-documents',
+            [
+                'modalId' => $this->modalId,
+            ]
+        );
     }
 }

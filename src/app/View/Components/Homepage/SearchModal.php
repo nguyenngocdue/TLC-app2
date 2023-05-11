@@ -15,8 +15,9 @@ class SearchModal extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $modalId,
+    ) {
         //
     }
 
@@ -31,7 +32,8 @@ class SearchModal extends Component
         return view('components.homepage.search-modal', [
             'allApps' => array_values($allApps),
             'currentUserIsAdmin' => CurrentUser::isAdmin(),
-            'route' => route('updateBookmark')
+            'route' => route('updateBookmark'),
+            'modalId' => $this->modalId,
         ]);;
     }
 }

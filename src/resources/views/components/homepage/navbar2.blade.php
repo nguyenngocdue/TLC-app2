@@ -21,7 +21,7 @@
         </div> --}}
         <ul class="flex items-center flex-shrink-0 space-x-6">
             <li class="flex" title="Hot Key: Alt + Q">
-                <x-homepage.search-modal/>
+                <x-homepage.search-modal modalId="modal-search-app"/>
             </li>
             @if(env('APP_ENV') === 'local')
             <li class="flex">

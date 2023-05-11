@@ -7672,6 +7672,10 @@ video {
     height: 100vh;
   }
 
+  .md\:h-\[600px\] {
+    height: 600px;
+  }
+
   .md\:w-3\/4 {
     width: 75%;
   }

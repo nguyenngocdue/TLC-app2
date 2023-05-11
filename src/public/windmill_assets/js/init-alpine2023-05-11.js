@@ -54,15 +54,15 @@ function data() {
             this.isBroadcastNotificationOpen = false
         },
         ///////////////////////////////////
-        isSearchMenuOpen: false,
-        toggleSearchMenu() {
-            this.isSearchMenuOpen = !this.isSearchMenuOpen
-        },
-        closeSearchMenu() {
-            this.isSearchMenuOpen = false
-            //Using remove event listener file search-modal.blade.php
-            searchInput.removeEventListener('input', () => { })
-        },
+        // isSearchMenuOpen: false,
+        // toggleSearchMenu() {
+        //     this.isSearchMenuOpen = !this.isSearchMenuOpen
+        // },
+        // closeSearchMenu() {
+        //     this.isSearchMenuOpen = false
+        //     //Using remove event listener file search-modal.blade.php
+        //     searchInput.removeEventListener('input', () => { })
+        // },
         ///////////////////////////////////
         isSettingMenuOpen: false,
         toggleSettingMenu() {
