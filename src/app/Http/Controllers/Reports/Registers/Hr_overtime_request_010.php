@@ -25,11 +25,6 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
 
     public function getSqlStr($modeParams)
     {
-        $treeData = $this->getDataByCompanyTree();
-        $userIds = array_column($treeData, 'id');
-        // if (!count($userIds)) return "";
-        $strUserIds = '(' . implode(',', $userIds) . ')';
-
         $sql = "SELECT 
         wpus.name AS user_workplace,
         tb3.*,
@@ -61,7 +56,14 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
                     user_categories uscate
                 WHERE 1 = 1
                     AND otline.user_id = us.id";
-        if (count($userIds) && !CurrentUser::isAdmin()) $sql .= "\n AND otline.user_id IN $strUserIds";
+        if (!CurrentUser::isAdmin()) {
+            $treeData = $this->getDataByCompanyTree();
+            $userIds = array_column($treeData, 'id');
+            if (count($userIds)) {
+                $strUserIds = '(' . implode(',', $userIds) . ')';
+                $sql .= "\n AND otline.user_id IN $strUserIds";
+            }
+        }
         $sql .= "\n AND otline.hr_overtime_request_id = otr.id
                     AND uscate.id = us.category
                     AND otline.hr_overtime_request_id = otr.id

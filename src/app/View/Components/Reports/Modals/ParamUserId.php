@@ -17,13 +17,7 @@ class ParamUserId extends ParentTypeParamReport
         $treeData = $this->getDataByCompanyTree();
         $dataSource = [];
         foreach ($treeData as $value) {
-            if (app()->isProduction()) {
-                if (!$value->show_on_beta) {
-                    $dataSource[] = ['id' => $value->id, 'name' => $value->name];
-                }
-            } else {
-                $dataSource[] = ['id' => $value->id, 'name' => $value->name];
-            }
+            $dataSource[] = ['id' => $value->id, 'name' => $value->name];
         }
         return $dataSource;
 
