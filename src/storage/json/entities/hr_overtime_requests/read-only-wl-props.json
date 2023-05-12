@@ -161,9 +161,9 @@
         "qs_member_nz": "",
         "external_inspector": ""
     },
-    "_getHrOtLines": {
-        "name": "_getHrOtLines",
-        "column_name": "getHrOtLines",
+    "_getHROTRLines": {
+        "name": "_getHROTRLines",
+        "column_name": "getHROTRLines",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
