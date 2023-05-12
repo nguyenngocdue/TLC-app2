@@ -22,7 +22,7 @@ class Prod_sequence extends ModelExtended
         "prodOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],
         "prodRuns" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
         "prodRoutingLinks" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
-        "prodRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
+        "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
         "getOwner" => ['belongsTo', User::class, 'owner_id'],
         "getUomId" => ["belongsTo", Term::class, 'uom_id'],
     ];
@@ -57,13 +57,13 @@ class Prod_sequence extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    // public function prodRoutingDetails()
+    // public function getProdRoutingDetails()
     // {
     //     $p = $this->eloquentParams[__FUNCTION__];
     //     return $this->{$p[0]}($p[1], $p[2], $p[3]);
     // }
 
-    public function prodRoutingDetails()
+    public function getProdRoutingDetails()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3]);
@@ -113,8 +113,8 @@ class Prod_sequence extends ModelExtended
 
     //         ["dataIndex" => "total_hours", "align" => "right"],
     //         ["dataIndex" => "total_man_hours", "title" => "Total ManHours", "align" => "right"],
-    //         ["dataIndex" => "prodRoutingDetails", "title" => "Target Hours", "align" => "right", "renderer" => "column", "rendererParam" => "target_hours"],
-    //         ["dataIndex" => "prodRoutingDetails", "title" => "Target ManHours (*)", "align" => "right", "renderer" => "column", "rendererParam" => "target_man_hours"],
+    //         ["dataIndex" => "getProdRoutingDetails", "title" => "Target Hours", "align" => "right", "renderer" => "column", "rendererParam" => "target_hours"],
+    //         ["dataIndex" => "getProdRoutingDetails", "title" => "Target ManHours (*)", "align" => "right", "renderer" => "column", "rendererParam" => "target_man_hours"],
     //         ["dataIndex" => "status", "renderer" => "status", "align" => "center"],
     //     ];
     // }

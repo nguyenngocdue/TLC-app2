@@ -129,9 +129,9 @@
         "obsolete": "true",
         "in_progress": "true"
     },
-    "_prodRoutingDetails": {
-        "name": "_prodRoutingDetails",
-        "column_name": "prodRoutingDetails",
+    "_getProdRoutingDetails": {
+        "name": "_getProdRoutingDetails",
+        "column_name": "getProdRoutingDetails",
         "new": "true",
         "on_hold": "true",
         "finished": "true",

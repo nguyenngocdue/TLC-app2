@@ -197,9 +197,9 @@
         "save_on_change": "",
         "new_line": ""
     },
-    "_prodRoutingDetails": {
-        "name": "_prodRoutingDetails",
-        "column_name": "prodRoutingDetails",
+    "_getProdRoutingDetails": {
+        "name": "_getProdRoutingDetails",
+        "column_name": "getProdRoutingDetails",
         "column_type": "eloquent_prop",
         "label": "Production Routing Detail",
         "control": "relationship_renderer",

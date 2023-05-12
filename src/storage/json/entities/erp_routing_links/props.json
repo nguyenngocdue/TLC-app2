@@ -94,9 +94,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_prodRoutingDetails": {
-        "name": "_prodRoutingDetails",
-        "column_name": "prodRoutingDetails",
+    "_getProdRoutingDetails": {
+        "name": "_getProdRoutingDetails",
+        "column_name": "getProdRoutingDetails",
         "column_type": "eloquent_prop",
         "label": "Routing Details",
         "control": "relationship_renderer",

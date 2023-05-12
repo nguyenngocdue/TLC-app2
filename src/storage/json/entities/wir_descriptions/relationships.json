@@ -64,10 +64,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_prodRoutingDetails": {
-        "name": "_prodRoutingDetails",
+    "_getProdRoutingDetails": {
+        "name": "_getProdRoutingDetails",
         "relationship": "hasMany",
-        "control_name": "prodRoutingDetails",
+        "control_name": "getProdRoutingDetails",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",

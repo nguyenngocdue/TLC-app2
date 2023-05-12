@@ -688,9 +688,9 @@
         "proj_member_nz": "",
         "qs_member_nz": ""
     },
-    "_prodRoutingDetails": {
-        "name": "_prodRoutingDetails",
-        "column_name": "prodRoutingDetails",
+    "_getProdRoutingDetails": {
+        "name": "_getProdRoutingDetails",
+        "column_name": "getProdRoutingDetails",
         "admin": "true",
         "acct_manager": "",
         "acct_member": "",

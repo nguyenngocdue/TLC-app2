@@ -131,9 +131,9 @@
         "default_value": "",
         "control_extra": ""
     },
-    "_prodRoutingDetails": {
-        "name": "_prodRoutingDetails",
-        "column_name": "prodRoutingDetails",
+    "_getProdRoutingDetails": {
+        "name": "_getProdRoutingDetails",
+        "column_name": "getProdRoutingDetails",
         "label": "",
         "validation": "",
         "formula": "",

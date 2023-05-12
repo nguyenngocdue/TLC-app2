@@ -10,7 +10,7 @@ class Wir_description extends ModelExtended
     protected $table = "wir_descriptions";
 
     public $eloquentParams = [
-        "prodRoutingDetails" => ["hasMany", Prod_routing_detail::class, "wir_description_id"],
+        "getProdRoutingDetails" => ["hasMany", Prod_routing_detail::class, "wir_description_id"],
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
         "getOwner" => ["belongsTo", User::class, "owner_id"],
@@ -21,7 +21,7 @@ class Wir_description extends ModelExtended
         "getRoutings()" => ["getCheckedByField", Prod_routing::class],
     ];
 
-    public function prodRoutingDetails()
+    public function getProdRoutingDetails()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
