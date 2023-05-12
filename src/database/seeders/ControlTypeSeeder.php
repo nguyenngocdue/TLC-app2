@@ -15,12 +15,12 @@ class ControlTypeSeeder extends Seeder
     public function run()
     {
         //
-        Control_type::create(['name' => 'text', 'slug' => 'text']);
-        Control_type::create(['name' => 'textarea', 'slug' => 'textarea']);
-        Control_type::create(['name' => 'checkbox', 'slug' => 'checkbox']);
-        Control_type::create(['name' => 'radio', 'slug' => 'radio']);
-        Control_type::create(['name' => 'datetime', 'slug' => 'datetime']);
-        Control_type::create(['name' => 'dropdown', 'slug' => 'dropdown']);
-        Control_type::create(['name' => 'signature', 'slug' => 'signature']);
+        Control_type::create(['name' => 'text', 'owner_id' => 1, 'slug' => 'text']);
+        Control_type::create(['name' => 'textarea', 'owner_id' => 1, 'slug' => 'textarea']);
+        Control_type::create(['name' => 'checkbox', 'owner_id' => 1, 'slug' => 'checkbox']);
+        Control_type::create(['name' => 'radio', 'owner_id' => 1, 'slug' => 'radio']);
+        Control_type::create(['name' => 'datetime', 'owner_id' => 1, 'slug' => 'datetime']);
+        Control_type::create(['name' => 'dropdown', 'owner_id' => 1, 'slug' => 'dropdown']);
+        Control_type::create(['name' => 'signature', 'owner_id' => 1, 'slug' => 'signature']);
     }
 }

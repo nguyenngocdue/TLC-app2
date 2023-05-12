@@ -1,7 +1,7 @@
 @php
-    use App\Utils\Support\CurrentRoute;
-    $viewAll = CurrentRoute::getTypePlural();
-    $routeSrc = Route::has($viewAll.".index") ?  route($viewAll.".index") : "#NotFound:".$viewAll.".index";
+use App\Utils\Support\CurrentRoute;
+$viewAll = CurrentRoute::getTypePlural();
+$routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFound:".$viewAll.".index";
 @endphp
 
 <header class="no-print fixed w-full z-20 py-4 bg-white shadow-md dark:bg-gray-800">
@@ -21,7 +21,10 @@
         </div> --}}
         <ul class="flex items-center flex-shrink-0 space-x-6">
             <li class="flex" title="Hot Key: Alt + Q">
-                <x-homepage.search-modal modalId="modal-search-app"/>
+                <x-homepage.search-modal modalId="modal-search-app" />
+            </li>
+            <li class="flex" title="Project Manufacturing and Construction Site">
+                <x-homepage.menu-project-mf-and-cs></x-homepage.menu-project-mf-and-cs>
             </li>
             @if(env('APP_ENV') === 'local')
             <li class="flex">
@@ -39,6 +42,6 @@
             </li>
         </ul>
         @endauth
-        
+
     </div>
 </header>

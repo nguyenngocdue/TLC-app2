@@ -131,7 +131,10 @@ class FieldSeeder extends Seeder
     public function run()
     {
         foreach (self::dataSource() as $key => $id) {
-            Field::create(['id' => $id, 'name' => $key, 'slug' => $key]);
+            Field::create([
+                'id' => $id, 'name' => $key, 'owner_id' => 1,
+                'slug' => $key
+            ]);
         }
     }
 }
