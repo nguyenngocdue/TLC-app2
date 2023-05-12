@@ -38,10 +38,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_routingLink": {
-        "name": "_routingLink",
+    "_getProdRoutingLink": {
+        "name": "_getProdRoutingLink",
         "relationship": "hasMany",
-        "control_name": "routingLink",
+        "control_name": "getProdRoutingLink",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",

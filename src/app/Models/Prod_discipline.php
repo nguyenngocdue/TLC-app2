@@ -11,7 +11,7 @@ class Prod_discipline extends ModelExtended
     protected $table = 'prod_disciplines';
 
     public $eloquentParams = [
-        "routingLink" => ['hasMany', Prod_routing_link::class, 'prod_discipline_id'],
+        "getProdRoutingLink" => ['hasMany', Prod_routing_link::class, 'prod_discipline_id'],
         "getDiscipline1s" => ['hasMany', Prod_discipline_1::class, 'prod_discipline_id'],
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
         "getErpRoutingLinks" => ['hasMany', Erp_routing_link::class, 'prod_discipline_id'],
@@ -23,7 +23,7 @@ class Prod_discipline extends ModelExtended
         "getDefMonitors1()" => ["getCheckedByField", User::class],
     ];
 
-    public function routingLink()
+    public function getProdRoutingLink()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

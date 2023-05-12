@@ -98,9 +98,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_routingLink": {
-        "name": "_routingLink",
-        "column_name": "routingLink",
+    "_getProdRoutingLink": {
+        "name": "_getProdRoutingLink",
+        "column_name": "getProdRoutingLink",
         "label": "",
         "validation": "",
         "formula": "",

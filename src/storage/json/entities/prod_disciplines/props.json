@@ -161,9 +161,9 @@
         "save_on_change": "",
         "new_line": ""
     },
-    "_routingLink": {
-        "name": "_routingLink",
-        "column_name": "routingLink",
+    "_getProdRoutingLink": {
+        "name": "_getProdRoutingLink",
+        "column_name": "getProdRoutingLink",
         "column_type": "eloquent_prop",
         "label": "Routing Links",
         "control": "relationship_renderer",
