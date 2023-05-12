@@ -854,9 +854,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_posts": {
-        "name": "_posts",
-        "column_name": "posts",
+    "_getPosts": {
+        "name": "_getPosts",
+        "column_name": "getPosts",
         "column_type": "eloquent_prop",
         "label": "Posts",
         "control": "relationship_renderer",

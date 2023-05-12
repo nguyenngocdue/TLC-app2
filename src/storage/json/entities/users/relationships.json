@@ -181,10 +181,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_posts": {
-        "name": "_posts",
+    "_getPosts": {
+        "name": "_getPosts",
         "relationship": "hasMany",
-        "control_name": "posts",
+        "control_name": "getPosts",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

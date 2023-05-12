@@ -90,7 +90,7 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     public $eloquentParams = [
         "getAvatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
-        "posts" => ['hasMany', Post::class, 'owner_id', 'id'],
+        "getPosts" => ['hasMany', Post::class, 'owner_id', 'id'],
         "getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
         "userTypes" => ['belongsTo', User_type::class, 'user_type'],
         "getCompany" => ['belongsTo', User_company::class, 'company'],
@@ -134,7 +134,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->latestOfMany();
     }
-    public function posts()
+    public function getPosts()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
