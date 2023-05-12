@@ -97,8 +97,8 @@ class Qaqc_insp_chklst_line extends ModelExtended
 
     public function getProject()
     {
-        $tmp = $this->getSheet->getChklst->prodOrder->subProject;
-        // $tmp = $this->getRun->getSheet->getChklst->prodOrder->subProject;
+        $tmp = $this->getSheet->getChklst->prodOrder->getSubProject;
+        // $tmp = $this->getRun->getSheet->getChklst->prodOrder->getSubProject;
         $relation = $tmp->belongsTo(Project::class, 'project_id');
         return $relation;
     }

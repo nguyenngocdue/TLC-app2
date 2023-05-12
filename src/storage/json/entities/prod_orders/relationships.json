@@ -1,6 +1,6 @@
 {
-    "_subProject": {
-        "name": "_subProject",
+    "_getSubProject": {
+        "name": "_getSubProject",
         "relationship": "belongsTo",
         "control_name": "sub_project_id",
         "renderer_view_all": "column",

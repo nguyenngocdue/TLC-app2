@@ -27,14 +27,14 @@ class ItemRenderCheckSheet extends Component
      */
     public function render()
     {
-        // getRun->getSheet->getChklst->prodOrder->subProject
+        // getRun->getSheet->getChklst->prodOrder->getSubProject
         $lines = $this->item->getLines;
         // $lines = $this->item->getRuns[0]->getLines;
         $chklst = $this->item->getChklst;
 
         $prodOrder = is_null($chklst) ? null : $chklst->prodOrder;
-        $sub_project = is_null($prodOrder) ? null : $prodOrder->subProject;
-        $project = is_null($sub_project) ? null : $sub_project->getProject;
+        $subProject = is_null($prodOrder) ? null : $prodOrder->getSubProject;
+        $project = is_null($subProject) ? null : $subProject->getProject;
         // dump($chklst);
         $signatures = $this->item->getShtSigs;
         $status = $this->item->status ? $this->item->status : 'in_progress';
@@ -44,7 +44,7 @@ class ItemRenderCheckSheet extends Component
                 'chklst' => $chklst,
                 'item' => $this->item,
                 'lines' => $lines,
-                'subProject' => $sub_project,
+                'subProject' => $subProject,
                 'project' => $project,
                 'status' => $status,
                 'signatures' => $signatures,
