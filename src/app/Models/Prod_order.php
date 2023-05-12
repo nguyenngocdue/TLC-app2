@@ -10,7 +10,7 @@ class Prod_order extends ModelExtended
         "id", "slug", "name", "status", "production_name", "compliance_name", "description", "quantity",
         "sub_project_id", "prod_routing_id", "status", "meta_type", "meta_id", "owner_id"
     ];
-    protected $primaryKey = 'id';
+
     protected $table = 'prod_orders';
 
     public $eloquentParams = [

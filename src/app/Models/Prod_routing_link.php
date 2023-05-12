@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Prod_routing_link extends ModelExtended
 {
     protected $fillable = ["id", "name", "parent", "description", "slug", 'prod_discipline_id', 'owner_id'];
-    protected $primaryKey = 'id';
+
     protected $table = 'prod_routing_links';
 
     public $eloquentParams = [

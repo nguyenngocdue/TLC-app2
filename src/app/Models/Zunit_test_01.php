@@ -20,7 +20,7 @@ class Zunit_test_01 extends ModelExtended
         "order_no",
         "signature",
     ];
-    protected $primaryKey = 'id';
+
     protected $table = 'zunit_test_01s';
 
     public $eloquentParams = [

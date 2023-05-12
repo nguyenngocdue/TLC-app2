@@ -21,7 +21,6 @@ class Attachment extends ModelExtended
         'object_id',
         'object_type',
     ];
-    protected $primaryKey = 'id';
     protected $table = 'attachments';
     public $nameless = true;
 

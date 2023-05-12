@@ -11,7 +11,7 @@ class Project extends ModelExtended
 
     public $timestamps = false;
     protected $fillable = ["id", "name", "description", "slug", "status", "owner_id"];
-    protected $primaryKey = 'id';
+
     protected $table = 'projects';
 
     public $eloquentParams = [

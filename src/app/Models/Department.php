@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Department extends ModelExtended
 {
     protected $fillable = ["name", "description", "head_of_department", "slug"];
-    protected $primaryKey = 'id';
+
     protected $table = 'departments';
 
     public $eloquentParams = [

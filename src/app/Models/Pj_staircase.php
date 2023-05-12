@@ -11,7 +11,7 @@ class Pj_staircase extends ModelExtended
         "id", "name", "description", "slug", "pj_building_id", "pj_level_id", "pj_module_type_id",
         "pj_name_id", "pj_character_id", "pj_shipment_id", "owner_id"
     ];
-    protected $primaryKey = 'id';
+
     protected $table = 'pj_staircases';
 
     public $eloquentParams = [

@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Logger extends ModelExtended
 {
     protected $fillable = ["loggable_type", "loggable_id", "type", "key", "old_value", "old_text", "new_value", "new_text", "user_id"];
-    protected $primaryKey = 'id';
+
     protected $table = 'loggers';
 
     public $eloquentParams = [

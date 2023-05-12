@@ -8,7 +8,7 @@ class Pj_pod extends ModelExtended
 {
     public $timestamps = false;
     protected $fillable = ["id", "name", "description", "slug", "pj_module_id", "pj_pod_type_id", "pj_shipment_id", "owner_id"];
-    protected $primaryKey = 'id';
+
     protected $table = 'pj_pods';
 
     public $eloquentParams = [

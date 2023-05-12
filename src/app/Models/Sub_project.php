@@ -8,7 +8,7 @@ class Sub_project extends ModelExtended
 {
     public $timestamps = false;
     protected $fillable = ["id", "name", "description", "slug", "status", "project_id", "owner_id"];
-    protected $primaryKey = 'id';
+
     protected $table = 'sub_projects';
 
     public $eloquentParams = [

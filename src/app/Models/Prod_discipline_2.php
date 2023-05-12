@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Prod_discipline_2 extends ModelExtended
 {
     public $fillable = ["id", "name", "description", "slug", "prod_discipline_1", "owner_id"];
-    protected $primaryKey = 'id';
+
     protected $table = 'prod_discipline_2s';
 
     public $eloquentParams = [

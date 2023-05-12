@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class User_time_keep_type extends ModelExtended
 {
     protected $fillable = ["name", "description", "slug"];
-    protected $primaryKey = 'id';
+
     protected $table = 'user_time_keep_types';
 
     public $eloquentParams = [

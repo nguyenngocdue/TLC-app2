@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class User_position1 extends ModelExtended
 {
     protected $fillable = ["name", "description", "slug"];
-    protected $primaryKey = 'id';
+
     protected $table = 'user_position1s';
 
     public $eloquentParams = [

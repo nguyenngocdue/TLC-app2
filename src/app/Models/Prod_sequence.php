@@ -13,7 +13,7 @@ class Prod_sequence extends ModelExtended
         "expected_start_at", "expected_finish_at",
         "priority", "uom_id", "total_uom", "owner_id"
     ];
-    protected $primaryKey = 'id';
+
     protected $table = 'prod_sequences';
     public $nameless = true;
 

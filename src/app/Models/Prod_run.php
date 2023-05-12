@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Prod_run extends ModelExtended
 {
     protected $fillable = ["prod_sequence_id", "date", "start", "end", "owner_id"];
-    protected $primaryKey = 'id';
+
     protected $table = 'prod_runs';
     public $nameless = true;
 

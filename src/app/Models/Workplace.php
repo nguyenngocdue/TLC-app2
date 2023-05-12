@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Workplace extends ModelExtended
 {
     protected $fillable = ["name", "description", "standard_working_hour", "def_assignee", "slug"];
-    protected $primaryKey = 'id';
+
     protected $table = 'workplaces';
 
     public $eloquentParams = [

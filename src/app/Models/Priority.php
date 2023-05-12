@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Priority extends ModelExtended
 {
     protected $fillable = ["name", "description", "slug", "duration", "field_id", "owner_id"];
-    protected $primaryKey = 'id';
+
     protected $table = 'priorities';
 
     public $eloquentParams = [

@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Post extends ModelExtended
 {
     protected $fillable = ["name", "content", "owner_id"];
-    protected $primaryKey = 'id';
+
     protected $table = 'posts';
 
     public $eloquentParams = [

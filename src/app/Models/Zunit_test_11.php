@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Zunit_test_11 extends ModelExtended
 {
     protected $fillable = ['id', 'name', 'description'];
-    protected $primaryKey = 'id';
+
     protected $table = 'zunit_test_11s';
 
     public $eloquentParams = [

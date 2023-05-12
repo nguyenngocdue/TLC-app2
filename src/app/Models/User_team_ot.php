@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class User_team_ot extends ModelExtended
 {
     protected $fillable = ["name", "description", "slug", "status", "owner_id"];
-    protected $primaryKey = 'id';
+
     protected $table = 'user_team_ots';
 
     public $eloquentParams = [
