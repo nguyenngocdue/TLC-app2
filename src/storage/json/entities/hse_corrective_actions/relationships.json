@@ -41,8 +41,8 @@
         "filter_values": "134",
         "radio_checkbox_colspan": ""
     },
-    "_getAssignee": {
-        "name": "_getAssignee",
+    "_getAssignee1": {
+        "name": "_getAssignee1",
         "relationship": "belongsTo",
         "control_name": "assignee_1",
         "renderer_view_all": "avatar_user",

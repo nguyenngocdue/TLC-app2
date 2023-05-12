@@ -16,7 +16,7 @@ class Hse_corrective_action extends ModelExtended
         'getHseIncidentReport' => ['belongsTo', Hse_incident_report::class, 'hse_incident_report_id'],
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
         'getPriority' => ['belongsTo', Priority::class, 'priority_id'],
-        'getAssignee' => ['belongsTo', User::class, 'assignee_1'],
+        'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         'getUnsafeActionType' => ['belongsTo', Term::class, 'unsafe_action_type_id'],
         "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
@@ -45,7 +45,7 @@ class Hse_corrective_action extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getAssignee()
+    public function getAssignee1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
