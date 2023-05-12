@@ -62,7 +62,7 @@ class UpdateChklstProgressFromSheetListener implements ShouldQueue
         $prodOrder = Sub_project::find($subProjectId)->prodOrders;
         $result = [];
         foreach ($prodOrder as $po) {
-            foreach ($po->qaqcInspChklsts as $chklst) {
+            foreach ($po->getQaqcInspChklsts as $chklst) {
                 $result[] = $chklst->id;
             }
         }

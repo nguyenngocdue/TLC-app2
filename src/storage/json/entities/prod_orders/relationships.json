@@ -51,10 +51,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_qaqcInspChklsts": {
-        "name": "_qaqcInspChklsts",
+    "_getQaqcInspChklsts": {
+        "name": "_getQaqcInspChklsts",
         "relationship": "hasMany",
-        "control_name": "qaqcInspChklsts",
+        "control_name": "getQaqcInspChklsts",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",

@@ -143,9 +143,9 @@
         "finished": "",
         "cancelled": ""
     },
-    "_qaqcInspChklsts": {
-        "name": "_qaqcInspChklsts",
-        "column_name": "qaqcInspChklsts",
+    "_getQaqcInspChklsts": {
+        "name": "_getQaqcInspChklsts",
+        "column_name": "getQaqcInspChklsts",
         "new": "",
         "in_progress": "",
         "on_hold": "",

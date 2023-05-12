@@ -284,9 +284,9 @@
         "duplicatable": "",
         "new_line": "true"
     },
-    "_qaqcInspChklsts": {
-        "name": "_qaqcInspChklsts",
-        "column_name": "qaqcInspChklsts",
+    "_getQaqcInspChklsts": {
+        "name": "_getQaqcInspChklsts",
+        "column_name": "getQaqcInspChklsts",
         "column_type": "eloquent_prop",
         "label": "Inspection Checklists",
         "control": "relationship_renderer",
