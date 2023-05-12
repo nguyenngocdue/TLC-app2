@@ -38,8 +38,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_wirDescription": {
-        "name": "_wirDescription",
+    "_getWirDescription": {
+        "name": "_getWirDescription",
         "relationship": "belongsTo",
         "control_name": "wir_description_id",
         "renderer_view_all": "column",
