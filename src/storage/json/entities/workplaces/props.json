@@ -175,9 +175,9 @@
         "hidden_print": "",
         "new_line": "true"
     },
-    "_getHrOvertimeRequests": {
-        "name": "_getHrOvertimeRequests",
-        "column_name": "getHrOvertimeRequests",
+    "_getHROTRs": {
+        "name": "_getHROTRs",
+        "column_name": "getHROTRs",
         "column_type": "eloquent_prop",
         "label": "Overtime Request",
         "control": "relationship_renderer",

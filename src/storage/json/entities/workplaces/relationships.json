@@ -51,10 +51,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getHrOvertimeRequests": {
-        "name": "_getHrOvertimeRequests",
+    "_getHROTRs": {
+        "name": "_getHROTRs",
         "relationship": "hasMany",
-        "control_name": "getHrOvertimeRequests",
+        "control_name": "getHROTRs",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",
