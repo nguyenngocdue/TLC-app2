@@ -11,9 +11,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_avatar": {
-        "name": "_avatar",
-        "column_name": "avatar",
+    "_getAvatar": {
+        "name": "_getAvatar",
+        "column_name": "getAvatar",
         "label": "",
         "validation": "",
         "validation_regex": "",

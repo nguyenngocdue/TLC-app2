@@ -18,9 +18,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_avatar": {
-        "name": "_avatar",
-        "column_name": "avatar",
+    "_getAvatar": {
+        "name": "_getAvatar",
+        "column_name": "getAvatar",
         "column_type": "eloquent_prop",
         "label": "Avatar",
         "control": "thumbnail",

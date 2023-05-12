@@ -23,7 +23,7 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
             <li class="flex" title="Hot Key: Alt + Q">
                 <x-homepage.search-modal modalId="modal-search-app" />
             </li>
-            <li class="flex" title="Project Manufacturing and Construction Site">
+            <li class="flex" title="Projects">
                 <x-homepage.menu-project-mf-and-cs></x-homepage.menu-project-mf-and-cs>
             </li>
             @if(env('APP_ENV') === 'local')

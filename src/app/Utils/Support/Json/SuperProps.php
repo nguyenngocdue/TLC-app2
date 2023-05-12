@@ -106,44 +106,12 @@ class SuperProps
     {
         $allProps = Props::getAllOf($type);
         $result = [];
-        // $commentP =  Properties::getAllOf('comment');
-        // $attachmentP =  Properties::getAllOf('attachment');
-
         foreach ($allProps as $propName => $prop) {
             $control =  $prop['control'];
             if (in_array($control, ['comment', 'attachment'])) {
                 $result[$propName] = Properties::getFor($control, $propName);
             }
-            // if ($control == 'comment') {
-            //     $result[$propName] = Properties::getFor('comment', $propName);
-            // }
-            // if ($control == 'attachment') {
-            //     $result[$propName] = Properties::getFor('attachment', $propName);
-            // }
         }
-
-        // foreach ($allProps as $propName => $prop) {
-        // $control =  $prop['control'];
-        //     if (in_array($control, ['attachment'])) {
-        //         if (!isset($attachmentP[$propName])) {
-        //             $attachmentP[$propName] = [
-        //                 'max_file_count' => 10,
-        //                 'max_file_size' => 10,
-        //                 'allowed_file_types' => 'only_images',
-        //             ];
-        //             // Toastr::error("Please create $propName in attachment property screen 4652");
-        //         }
-        //         $result[$propName] = $attachmentP[$propName];
-        //     }
-        //     if (in_array($control, ['comment'])) {
-        //         if (!isset($commentP[$propName])) {
-        //             Toastr::error("Please create $propName in comment property screen 4651");
-        //         } else {
-        //             $result[$propName] = $commentP[$propName];
-        //         }
-        //     }
-        // }
-
         // dump($result);
         return $result;
     }

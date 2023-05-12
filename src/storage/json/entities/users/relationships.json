@@ -223,10 +223,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_avatar": {
-        "name": "_avatar",
+    "_getAvatar": {
+        "name": "_getAvatar",
         "relationship": "morphOne",
-        "control_name": "avatar",
+        "control_name": "getAvatar",
         "renderer_view_all": "column",
         "renderer_view_all_param": "url_thumbnail",
         "renderer_view_all_unit": "",

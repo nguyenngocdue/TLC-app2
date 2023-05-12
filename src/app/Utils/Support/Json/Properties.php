@@ -42,7 +42,10 @@ class Properties extends JsonGetSet
     public static function getFor($type, $category)
     {
         $all = static::getAllOf($type);
-        if (!isset($all['_' . $category])) {
+        // dump($all, $category);
+        // dump(isset($all[$category]));
+        //Remove the "_" as attachment doesn't need one, how about comment?
+        if (!isset($all[$category])) {
             switch ($type) {
                 case 'comment':
                     $property = [
@@ -60,7 +63,7 @@ class Properties extends JsonGetSet
                     break;
             }
         } else {
-            $property = $all['_' . $category];
+            $property = $all[$category];
         }
         return $property;
     }
