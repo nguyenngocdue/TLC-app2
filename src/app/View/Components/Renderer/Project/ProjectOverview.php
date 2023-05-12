@@ -115,9 +115,34 @@ class ProjectOverview extends Component
                 'progress' => $dataSource,
                 'total_open' => $size,
             ];
-            $result[] = $item;
+            $result[$appKey] = $item;
         }
 
+        return $result;
+    }
+
+    private function makeModalParams($dataSource)
+    {
+        // dump($dataSource);
+        $result = [];
+        foreach ($dataSource as $docType => $docTypeArray) {
+            foreach (array_keys($docTypeArray['progress']) as $dueType) {
+                $items = $docTypeArray['progress'][$dueType]['items'];
+                if (empty($items)) continue;
+                $result[] = [
+                    'docType' => $docType,
+                    'dueType' => $dueType,
+                    'ids' => array_map(fn ($i) => $i->id, $items),
+                    // 'items' => array_map(fn ($i) => [
+                    //     'id' => $i->id,
+                    //     'name' => $i->name,
+                    //     'status' => $i->status,
+                    //     'bic' => ($bic = $i->getCurrentBicId()) ? User::findFromCache($bic)->name : null,
+                    //     'due_date' => $i->due_date,
+                    // ], $items),
+                ];
+            }
+        }
         return $result;
     }
 
@@ -130,11 +155,15 @@ class ProjectOverview extends Component
     {
         $modelPath = Str::modelPathFrom($this->table);
         $project = $modelPath::find($this->id);
+        $dataSource = $this->getDataSource();
+        $modalParams = $this->makeModalParams($dataSource);
+        // dump($modalParams);
 
         return view('components.renderer.project.project-overview', [
             'project' => $project,
             'columns' => $this->getColumns(),
-            'dataSource' => $this->getDataSource(),
+            'dataSource' => $dataSource,
+            'modalParams' => $modalParams,
         ]);
     }
 }

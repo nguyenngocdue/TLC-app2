@@ -4,6 +4,7 @@ namespace App\BigThink;
 
 use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
+use App\Utils\Support\Json\SuperProps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -52,5 +53,40 @@ class ModelExtended extends Model
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    function getCurrentBicId()
+    {
+        $tableName = $this->getTableName();
+        $sp = SuperProps::getFor($tableName);
+        $statuses = $sp['statuses'];
+        $result = null;
+        if (isset($statuses[$this->status])) {
+            $status = $statuses[$this->status];
+            $assignee_1_to_9 = $status['ball-in-courts']['ball-in-court-assignee'];
+            $assignee_1_to_9 = $assignee_1_to_9 == 'creator' ? 'owner_id' : $assignee_1_to_9;
+            // dump($assignee_1_to_9);
+            $result = $this->{$assignee_1_to_9};
+        }
+        return $result;
+    }
+
+    /* This method will be very slow */
+    function getCurrentMonitorIds()
+    {
+        $tableName = $this->getTableName();
+        $sp = SuperProps::getFor($tableName);
+        $statuses = $sp['statuses'];
+        $result = [];
+        if (isset($statuses[$this->status])) {
+            $status = $statuses[$this->status];
+            $monitors_1_to_9 = $status['ball-in-courts']['ball-in-court-monitors'];
+            $monitors_1_to_9 = $monitors_1_to_9 ? $monitors_1_to_9 : "getMonitors1()";
+            if (strlen($monitors_1_to_9) > 0) {
+                $fn = substr($monitors_1_to_9, 0, strlen($monitors_1_to_9) - 2);
+                if (method_exists($this, $fn)) $result = $this->$fn()->pluck('id')->toArray();
+            }
+        }
+        return $result;
     }
 }

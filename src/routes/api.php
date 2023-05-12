@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Timer::startTimeCounter();
-Memory::startMemory();
+Memory::startMemoryCounter();
 Route::group([
     'prefix' => 'v1/auth',
 ], function () {
@@ -125,5 +125,18 @@ Route::group([
         $tableName = Str::plural(lcfirst($entityName));
         Route::post("{$tableName}_storeEmpty", [EntityCRUDControllerForApi::class, 'storeEmpty'])->name($tableName . ".storeEmpty");
         Route::post("{$tableName}_updateShort", [EntityCRUDControllerForApi::class, 'updateShort'])->name($tableName . ".updateShort");
+    }
+});
+Route::group([
+    'prefix' => 'v1/entity',
+    'middleware' => 'throttle:600,1'
+], function () {
+    foreach ([
+        'Qaqc_mir',
+        'Qaqc_ncr',
+        'Qaqc_wir',
+    ] as $entityName) {
+        $tableName = Str::plural(lcfirst($entityName), 1);
+        Route::post("{$tableName}_renderTable", [EntityCRUDControllerForApi::class, 'renderTable'])->name($tableName . ".renderTable");
     }
 });

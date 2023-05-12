@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Utils\Support\Json\SuperDefinitions;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\Json\SuperWorkflows;
 use Illuminate\Support\Facades\Log;
@@ -15,21 +16,22 @@ class WorkflowFields
         $roleSet = CurrentUser::getRoleSet();
         return SuperWorkflows::getFor(self::$type, $roleSet);
     }
-    public static function getNewFromDefinitions($type)
-    {
-        $superProps = SuperProps::getFor($type);
-        $definitions = $superProps['settings']['definitions'] ?? [];
-        if (empty($definitions)) {
-            $status = 'new';
-        } else {
-            $def = array_values($definitions);
-            $status = array_shift($def)[0];
-        }
-        return $status;
-    }
+    // public static function getNewFromDefinitions($type)
+    // {
+    //     $superProps = SuperProps::getFor($type);
+    //     $definitions = $superProps['settings']['definitions'] ?? [];
+    //     if (empty($definitions)) {
+    //         $status = 'new';
+    //     } else {
+    //         $def = array_values($definitions);
+    //         $status = array_shift($def)[0];
+    //     }
+    //     return $status;
+    // }
     private static function getStatusFollowDefinitions($status)
     {
-        if (!$status) $status = self::getNewFromDefinitions(static::$type);
+        if (!$status) $status = SuperDefinitions::getNewOf(static::$type);
+        // if (!$status) $status = self::getNewFromDefinitions(static::$type);
         return $status;
     }
     private static function getPropsIntermediate($intermediate, $status, &$props)

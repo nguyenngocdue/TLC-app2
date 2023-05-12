@@ -7,7 +7,7 @@ class Memory
     private static $memoryStart = 0;
     private static $memoryLast = 0;
 
-    public static function startMemory()
+    public static function startMemoryCounter()
     {
         self::$memoryStart = memory_get_usage();
     }

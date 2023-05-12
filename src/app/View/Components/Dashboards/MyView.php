@@ -4,6 +4,7 @@ namespace App\View\Components\Dashboards;
 
 use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Json\SuperDefinitions;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
@@ -69,12 +70,13 @@ class MyView extends Component
         $result = [];
         foreach ($docs as $doc) {
             if (isset($statuses[$doc->status])) {
-                $status = $statuses[$doc->status];
-                $assignee_1_to_9 = $status['ball-in-courts']['ball-in-court-assignee'];
-                // $monitors = $status['ball-in-courts']['ball-in-court-monitors'];
-                $assignee_1_to_9 = $assignee_1_to_9 == 'creator' ? 'owner_id' : $assignee_1_to_9;
-                $assignee = $doc->{$assignee_1_to_9};
-                // dump($doc->id . ": ($assignee_1_to_9) " . $assignee . " == " . $uid);
+                $assignee = $doc->getCurrentBicId();
+                // $status = $statuses[$doc->status];
+                // $assignee_1_to_9 = $status['ball-in-courts']['ball-in-court-assignee'];
+                // // $monitors = $status['ball-in-courts']['ball-in-court-monitors'];
+                // $assignee_1_to_9 = $assignee_1_to_9 == 'creator' ? 'owner_id' : $assignee_1_to_9;
+                // $assignee = $doc->{$assignee_1_to_9};
+                // // dump($doc->id . ": ($assignee_1_to_9) " . $assignee . " == " . $uid);
 
                 if ($assignee == $uid) {
                     $this->makeUpLinks($app, $doc);
@@ -131,7 +133,8 @@ class MyView extends Component
         foreach ($apps as $appKey => $app) {
             $sp = SuperProps::getFor($appKey);
             // if (!isset($sp["settings"]['definitions']['closed'])) dump("Definition of closed has not been set for $appKey");
-            $closed = $sp["settings"]['definitions']['closed'] ?? ['closed'];
+            // $closed = $sp["settings"]['definitions']['closed'] ?? ['closed'];
+            $closed = SuperDefinitions::getClosedOf($appKey);
             $modelPath = Str::modelPathFrom($appKey);
 
             $openingDocs = $modelPath::whereNotIn('status', $closed);

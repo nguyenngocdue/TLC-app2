@@ -73,4 +73,12 @@ class EntityCRUDControllerForApi extends Controller
 			"Updated " . sizeof($result) . " lines",
 		);
 	}
+
+	public function renderTable(Request $request)
+	{
+		$result = "<b>Hello</b>";
+		return ResponseObject::responseSuccess(
+			$result,
+		);
+	}
 }

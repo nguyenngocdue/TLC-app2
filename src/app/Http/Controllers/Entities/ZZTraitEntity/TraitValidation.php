@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Utils\Support\Json\SuperDefinitions;
 use App\Utils\Support\Json\SuperWorkflows;
-use App\Utils\Support\WorkflowFields;
 use Illuminate\Support\MessageBag;
 
 trait TraitValidation
@@ -115,7 +115,8 @@ trait TraitValidation
 
     private function getValidationRules($oldStatus, $newStatus, $action)
     {
-        if ($oldStatus == '') $oldStatus = WorkflowFields::getNewFromDefinitions($this->type);
+        if ($oldStatus == '') $oldStatus = SuperDefinitions::getNewOf($this->type);
+        // if ($oldStatus == '') $oldStatus = WorkflowFields::getNewFromDefinitions($this->type);
 
         //When user click "Save" button, no intermediate prop will need to be considered
         $propsInIntermediateScreen = $this->getPropsInIntermediateScreen($oldStatus, $newStatus);

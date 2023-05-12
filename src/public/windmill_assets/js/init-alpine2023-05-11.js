@@ -81,11 +81,15 @@ function data() {
         // },
         ///////////////////////////////////
         isModalOpening: {},
-        toggleModal(type) {
+        modalParams: {},
+        toggleModal(type, params = null) {
             this.isModalOpening[type] = !this.isModalOpening[type]
+            this.modalParams[type] = params
+            // console.log(type, this.modalParams[type])
         },
         closeModal(type) {
             this.isModalOpening[type] = false
+            delete (this.modalParams[type])
         },
         ///////////////////////////
         isIntermediateOpen: {},
