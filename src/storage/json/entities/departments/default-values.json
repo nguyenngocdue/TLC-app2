@@ -83,9 +83,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_Users_Count": {
-        "name": "_Users_Count",
-        "column_name": "Users_Count",
+    "_getMembers": {
+        "name": "_getMembers",
+        "column_name": "getMembers",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -95,9 +95,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_Users_Count2": {
-        "name": "_Users_Count2",
-        "column_name": "Users_Count2",
+    "_getMembers2": {
+        "name": "_getMembers2",
+        "column_name": "getMembers2",
         "label": "",
         "validation": "",
         "validation_regex": "",

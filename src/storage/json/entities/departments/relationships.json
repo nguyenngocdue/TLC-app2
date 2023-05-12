@@ -1,6 +1,6 @@
 {
-    "_user": {
-        "name": "_user",
+    "_getHOD": {
+        "name": "_getHOD",
         "relationship": "belongsTo",
         "control_name": "head_of_department",
         "renderer_view_all": "avatar_user",
@@ -13,10 +13,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_Users_Count": {
-        "name": "_Users_Count",
+    "_getMembers": {
+        "name": "_getMembers",
         "relationship": "hasMany",
-        "control_name": "Users_Count",
+        "control_name": "getMembers",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "person",
@@ -27,10 +27,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_Users_Count2": {
-        "name": "_Users_Count2",
+    "_getMembers2": {
+        "name": "_getMembers2",
         "relationship": "hasMany",
-        "control_name": "Users_Count2",
+        "control_name": "getMembers2",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

@@ -132,9 +132,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_Users_Count": {
-        "name": "_Users_Count",
-        "column_name": "Users_Count",
+    "_getMembers": {
+        "name": "_getMembers",
+        "column_name": "getMembers",
         "column_type": "eloquent_prop",
         "label": "User count",
         "control": "relationship_renderer",
@@ -151,9 +151,9 @@
         "duplicatable": "",
         "new_line": "true"
     },
-    "_Users_Count2": {
-        "name": "_Users_Count2",
-        "column_name": "Users_Count2",
+    "_getMembers2": {
+        "name": "_getMembers2",
+        "column_name": "getMembers2",
         "column_type": "eloquent_prop",
         "label": "User count 2",
         "control": "relationship_renderer",

@@ -11,24 +11,24 @@ class Department extends ModelExtended
     protected $table = 'departments';
 
     public $eloquentParams = [
-        "user" => ['belongsTo', User::class, 'head_of_department'],
-        "Users_Count" => ['hasMany', User::class, 'department'],
-        "Users_Count2" => ['hasMany', User::class, 'department'],
+        "getHOD" => ['belongsTo', User::class, 'head_of_department'],
+        "getMembers" => ['hasMany', User::class, 'department'],
+        "getMembers2" => ['hasMany', User::class, 'department'],
     ];
 
-    public function user()
+    public function getHOD()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function Users_Count()
+    public function getMembers()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function Users_Count2()
+    public function getMembers2()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
