@@ -14,14 +14,14 @@ class Prod_routing_detail extends ModelExtended
     public $nameless = true;
 
     public $eloquentParams = [
-        "prodRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
+        "getProdRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
         "prodRoutingLink" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
         "erpRoutingLink" => ['belongsTo', Erp_routing_link::class, 'erp_routing_link_id'],
         "wirDescription" => ['belongsTo', Wir_description::class, 'wir_description_id'],
         "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
-    public function prodRouting()
+    public function getProdRouting()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
