@@ -5,17 +5,16 @@
     <x-modals.modal-over-due-documents modalId="{{$modalId}}"></x-modals.modal-over-due-documents>
     @foreach($modalParams as $params)
         {{-- @dump($params) --}}
+        @php $key = $params['docType']."_".$params['dueType']; @endphp
         <script>
-            const {{$params['docType']."_".$params['dueType']}} = @json($params);
+            const {{$key}} = @json($params);
+            $('#progress_'+'{{$key}}').click(()=>$('#btnHidden_'+'{{$key}}').click())
             // console.log({{$params['docType']."_".$params['dueType']}})
         </script>
-        <x-renderer.button keydown="closeModal('{{$modalId}}')" click="toggleModal('{{$modalId}}',{{$params['docType'].'_'.$params['dueType']}})">
-            Open {{$params['docType']."_".$params['dueType']}}
+        <x-renderer.button class="hidden" id="btnHidden_{{$key}}" keydown="closeModal('{{$modalId}}')" click="toggleModal('{{$modalId}}',{{$key}})">
+            Open {{$key}}
         </x-renderer.button>
     @endforeach
-    
-    <x-modals.modal-empty modalId="{{$modalId}}E"></x-modals.modal-empty>
-    <x-renderer.button keydown="closeModal('{{$modalId}}E')"  click="toggleModal('{{$modalId}}E')">Open E</x-renderer.button>
 </x-renderer.card>
 
 <script>

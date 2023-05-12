@@ -69,13 +69,14 @@ class CurrentUser
         return $permissions;
     }
 
-    public static function get(): User
+    public static function get(): ?User
     {
         return Auth::user();
     }
     public static function id()
     {
-        return self::get()->id;
+        $cu = self::get();
+        return $cu ? $cu->id : null;
     }
     public static function bookmark()
     {

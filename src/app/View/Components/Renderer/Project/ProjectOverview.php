@@ -60,32 +60,30 @@ class ProjectOverview extends Component
         return $result;
     }
 
-    function convertToProgressbar($dataSource, $size)
+    function convertToProgressbar($dataSource, $appKey, $size)
     {
         foreach ($dataSource as $key => &$value) {
             $count = count($value['items']);
-            $ids  = join(",", array_map(fn ($i) => $i['id'], $value['items']));
             $value['label'] = $count;
+            $value['id'] = $appKey . "_" . $key;
+            $value['classList'] = "cursor-pointer";
             $value['percent'] = round(100 * $count / $size, 2) . "%";
             switch ($key) {
                 case 'in_one_week':
                     $value['color'] = "yellow";
-                    $value['href'] = "#$ids";
                     break;
                 case 'more_than_one_week':
                     $value['color'] = "green";
-                    $value['href'] = "#$ids";
                     break;
                 case 'overdue':
                     $value['color'] = "red";
-                    $value['href'] = "#$ids";
                     break;
             }
         }
         return $dataSource;
     }
 
-    function makeDataSource($modelPath, $closedArray)
+    function makeDataSource($appKey, $modelPath, $closedArray)
     {
         $items = $modelPath::query();
         $items = $items->where('project_id', $this->id);
@@ -93,7 +91,7 @@ class ProjectOverview extends Component
         $items = $items->get();
         $size = count($items);
         $dataSource = $this->groupByDueDate($items);
-        $dataSource = $this->convertToProgressbar($dataSource, $size);
+        $dataSource = $this->convertToProgressbar($dataSource, $appKey, $size);
         return [$dataSource, $size];
     }
 
@@ -109,7 +107,7 @@ class ProjectOverview extends Component
             $model = new ($modelPath);
             if (!$model->hasDueDate) continue;
             $closedArray = SuperDefinitions::getClosedOf($appKey);
-            [$dataSource, $size] = $this->makeDataSource($modelPath, $closedArray);
+            [$dataSource, $size] = $this->makeDataSource($appKey, $modelPath, $closedArray);
             $item =   [
                 'doc_type' => "<a class='text-blue-700 cursor-pointer' title='" . $app['title'] . "' href='{$app['href']}'>" . Str::upper($app['nickname']) . "</a>",
                 'progress' => $dataSource,
@@ -129,17 +127,12 @@ class ProjectOverview extends Component
             foreach (array_keys($docTypeArray['progress']) as $dueType) {
                 $items = $docTypeArray['progress'][$dueType]['items'];
                 if (empty($items)) continue;
+                $ids = array_map(fn ($i) => $i->id, $items);
                 $result[] = [
                     'docType' => $docType,
                     'dueType' => $dueType,
-                    'ids' => array_map(fn ($i) => $i->id, $items),
-                    // 'items' => array_map(fn ($i) => [
-                    //     'id' => $i->id,
-                    //     'name' => $i->name,
-                    //     'status' => $i->status,
-                    //     'bic' => ($bic = $i->getCurrentBicId()) ? User::findFromCache($bic)->name : null,
-                    //     'due_date' => $i->due_date,
-                    // ], $items),
+                    'ids' => $ids,
+                    'count' => count($ids),
                 ];
             }
         }
