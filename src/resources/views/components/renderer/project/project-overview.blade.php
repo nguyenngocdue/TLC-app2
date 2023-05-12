@@ -1,5 +1,5 @@
 @php $modalId = "modal-over-due-documents"; @endphp
-<x-renderer.card title="Project Milestones" class="bg-white border" icon="fa-sharp fa-regular fa-users" >
+<x-renderer.card title="Project Milestones" class="bg-white border" icon="fa-regular fa-bars-progress" >
     <x-renderer.table showNo=1 :columns="$columns" :dataSource="$dataSource" />
     
     <x-modals.modal-over-due-documents modalId="{{$modalId}}"></x-modals.modal-over-due-documents>
@@ -9,7 +9,6 @@
         <script>
             const {{$key}} = @json($params);
             $('#progress_'+'{{$key}}').click(()=>$('#btnHidden_'+'{{$key}}').click())
-            // console.log({{$params['docType']."_".$params['dueType']}})
         </script>
         <x-renderer.button class="hidden" id="btnHidden_{{$key}}" keydown="closeModal('{{$modalId}}')" click="toggleModal('{{$modalId}}',{{$key}})">
             Open {{$key}}

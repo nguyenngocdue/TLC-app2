@@ -62,6 +62,7 @@ class ProjectOverview extends Component
 
     function convertToProgressbar($dataSource, $appKey, $size)
     {
+        if ($size == 0) return [];
         foreach ($dataSource as $key => &$value) {
             $count = count($value['items']);
             $value['label'] = $count;
