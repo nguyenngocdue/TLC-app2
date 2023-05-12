@@ -46,7 +46,7 @@ class RefreshPOCommand extends Command
 
     private function makeData(Prod_order $po, Prod_routing $pr, $started_at)
     {
-        $prodSequence = $po->prodSequences()->orderBy('priority')->orderBy('prod_routing_link_id')->get();
+        $prodSequence = $po->getProdSequences()->orderBy('priority')->orderBy('prod_routing_link_id')->get();
         $prodRoutingDetail = $pr->getProdRoutingDetails()->orderBy('priority')->orderBy('prod_routing_link_id')->get();
         $prod_routing_id = $po->prod_routing_id;
         $indexer = $this->index($prodSequence, $prodRoutingDetail, $prod_routing_id);
@@ -91,7 +91,7 @@ class RefreshPOCommand extends Command
         $this->info("Production Order name: " . $po->name . ", start at: " . $started_at);
         $this->info("Production Routing name: " . $pr->name);
 
-        $createdProdSequence = $po->prodSequences()->orderBy('priority')->orderBy('prod_routing_link_id')->get();
+        $createdProdSequence = $po->getProdSequences()->orderBy('priority')->orderBy('prod_routing_link_id')->get();
         $currentIds = $createdProdSequence->pluck('priority', 'prod_routing_link_id',)->toArray();
         // var_dump($createdProdSequence);
         // var_dump($currentIds);

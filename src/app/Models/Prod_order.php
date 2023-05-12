@@ -14,7 +14,7 @@ class Prod_order extends ModelExtended
     protected $table = 'prod_orders';
 
     public $eloquentParams = [
-        "prodSequences" => ['hasMany', Prod_sequence::class, 'prod_order_id'],
+        "getProdSequences" => ['hasMany', Prod_sequence::class, 'prod_order_id'],
         "subProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "prodRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
         "qaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'prod_order_id'],
@@ -41,7 +41,7 @@ class Prod_order extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function prodSequences()
+    public function getProdSequences()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

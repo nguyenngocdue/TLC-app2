@@ -69,10 +69,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_prodSequences": {
-        "name": "_prodSequences",
+    "_getProdSequences": {
+        "name": "_getProdSequences",
         "relationship": "hasManyThrough",
-        "control_name": "prodSequences",
+        "control_name": "getProdSequences",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

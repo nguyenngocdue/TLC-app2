@@ -134,9 +134,9 @@
         "finished": "",
         "cancelled": ""
     },
-    "_prodSequences": {
-        "name": "_prodSequences",
-        "column_name": "prodSequences",
+    "_getProdSequences": {
+        "name": "_getProdSequences",
+        "column_name": "getProdSequences",
         "new": "",
         "in_progress": "",
         "on_hold": "",
