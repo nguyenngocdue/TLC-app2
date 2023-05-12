@@ -1,6 +1,6 @@
 {
-    "_discipline": {
-        "name": "_discipline",
+    "_getDiscipline": {
+        "name": "_getDiscipline",
         "relationship": "belongsTo",
         "control_name": "prod_discipline_id",
         "renderer_view_all": "column",
