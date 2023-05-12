@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Log;
 
 class Prod_sequence extends ModelExtended
 {
-    public $timestamps = true;
     protected $fillable = [
         "prod_order_id", "prod_routing_link_id",
         "status", "total_hours", "total_man_hours",

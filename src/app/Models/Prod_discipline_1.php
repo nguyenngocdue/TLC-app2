@@ -9,7 +9,6 @@ class Prod_discipline_1 extends ModelExtended
     public $fillable = ["id", "name", "description", "slug", "def_assignee", "prod_discipline_id", "owner_id"];
     protected $primaryKey = 'id';
     protected $table = 'prod_discipline_1s';
-    public $timestamps = true;
 
     public $eloquentParams = [
         "getDiscipline2" => ['hasMany', Prod_discipline_2::class, 'prod_discipline_1_id'],

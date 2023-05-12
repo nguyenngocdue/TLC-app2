@@ -6,7 +6,6 @@ use App\BigThink\ModelExtended;
 
 class Prod_routing extends ModelExtended
 {
-    public $timestamps = true;
     protected $fillable = ["name", "description", "slug", "owner_id"];
     protected $primaryKey = 'id';
     protected $table = 'prod_routings';
