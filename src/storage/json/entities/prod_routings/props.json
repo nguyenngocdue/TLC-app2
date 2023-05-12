@@ -132,9 +132,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_prodRoutingLinks": {
-        "name": "_prodRoutingLinks",
-        "column_name": "prodRoutingLinks",
+    "_getProdRoutingLinks": {
+        "name": "_getProdRoutingLinks",
+        "column_name": "getProdRoutingLinks",
         "column_type": "eloquent_prop",
         "label": "Routing Links",
         "control": "relationship_renderer",

@@ -11,7 +11,7 @@ class Prod_routing extends ModelExtended
     protected $table = 'prod_routings';
 
     public $eloquentParams = [
-        "prodRoutingLinks" => ['belongsToMany', Prod_routing_link::class, 'prod_routing_details', 'prod_routing_id', 'prod_routing_link_id'],
+        "getProdRoutingLinks" => ['belongsToMany', Prod_routing_link::class, 'prod_routing_details', 'prod_routing_id', 'prod_routing_link_id'],
         "prodOrders" => ['hasMany', Prod_order::class],
         "getProdSequences" => ["hasManyThrough", Prod_sequence::class, Prod_order::class],
         "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, 'prod_routing_id'],
@@ -22,7 +22,7 @@ class Prod_routing extends ModelExtended
         "getWirDescriptions()" => ["getCheckedByField", Wir_description::class],
     ];
 
-    public function prodRoutingLinks()
+    public function getProdRoutingLinks()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);

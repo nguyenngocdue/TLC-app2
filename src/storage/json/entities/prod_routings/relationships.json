@@ -13,10 +13,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_prodRoutingLinks": {
-        "name": "_prodRoutingLinks",
+    "_getProdRoutingLinks": {
+        "name": "_getProdRoutingLinks",
         "relationship": "belongsToMany",
-        "control_name": "prodRoutingLinks",
+        "control_name": "getProdRoutingLinks",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
