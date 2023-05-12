@@ -16,7 +16,7 @@ class Prod_routing extends ModelExtended
         "prodOrders" => ['hasMany', Prod_order::class],
         "prodSequences" => ["hasManyThrough", Prod_sequence::class, Prod_order::class],
         "prodRoutingDetails" => ['hasMany', Prod_routing_detail::class, 'prod_routing_id'],
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public $oracyParams = [
@@ -47,7 +47,7 @@ class Prod_routing extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

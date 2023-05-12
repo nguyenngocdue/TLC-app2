@@ -16,7 +16,7 @@ class Qaqc_car extends ModelExtended
     public $eloquentParams = [
         "getQaqcNcr" => ['belongsTo', Qaqc_ncr::class, 'qaqc_ncr_id'],
         "getResponsiblePerson" => ['belongsTo', User::class, 'responsible_person'],
-        "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "getOwner" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public $oracyParams = [
@@ -35,7 +35,7 @@ class Qaqc_car extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

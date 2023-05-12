@@ -11,18 +11,18 @@ class User_team_ot extends ModelExtended
     protected $table = 'user_team_ots';
 
     public $eloquentParams = [
-        "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "getOwner" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public $oracyParams = [
         "getOtMembers()" => ["getCheckedByField", User::class],
     ];
 
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
-    }  
+    }
     public function getOtMembers()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];

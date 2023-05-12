@@ -35,7 +35,7 @@ class Qaqc_mir extends ModelExtended
         "attachment_mir_material_inspection_photo" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_mir_pdf_attached" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
-        "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "getOwner" => ["belongsTo", User::class, "owner_id"],
 
         "comment_asm_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_insp_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
@@ -191,7 +191,7 @@ class Qaqc_mir extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
 
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

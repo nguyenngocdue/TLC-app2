@@ -22,7 +22,7 @@ class Term extends ModelExtended
 
     public $eloquentParams = [
         'getField' => ['belongsTo', Field::class, 'field_id'],
-        "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "getOwner" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public function getField()
@@ -31,7 +31,7 @@ class Term extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

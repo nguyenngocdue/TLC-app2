@@ -7,8 +7,10 @@ use App\BigThink\ModelExtended;
 class Pj_staircase extends ModelExtended
 {
     public $timestamps = false;
-    protected $fillable = ["id", "name", "description", "slug", "pj_building_id", "pj_level_id", "pj_module_type_id",
-     "pj_name_id", "pj_character_id", "pj_shipment_id", "owner_id"];
+    protected $fillable = [
+        "id", "name", "description", "slug", "pj_building_id", "pj_level_id", "pj_module_type_id",
+        "pj_name_id", "pj_character_id", "pj_shipment_id", "owner_id"
+    ];
     protected $primaryKey = 'id';
     protected $table = 'pj_staircases';
 
@@ -20,7 +22,7 @@ class Pj_staircase extends ModelExtended
         'getPjCharacter' => ['belongsTo', Term::class, 'pj_character_id'],
         "getProdOrders" => ['morphMany', Prod_order::class, 'meta', 'meta_type', 'meta_id'],
         'getPjShipment' => ['belongsTo', Pj_shipment::class, 'pj_shipment_id'],
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getPjBuilding()
@@ -32,7 +34,7 @@ class Pj_staircase extends ModelExtended
     public function getProdOrders()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2],$p[3],$p[4]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
 
     public function getPjLevel()
@@ -60,7 +62,7 @@ class Pj_staircase extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

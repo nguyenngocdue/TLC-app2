@@ -17,7 +17,7 @@ class Project extends ModelExtended
     public $eloquentParams = [
         "getAvatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "getSubProjects" => ['hasMany', Sub_project::class, "project_id"],
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
 
         "featured_image" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
     ];
@@ -44,7 +44,7 @@ class Project extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

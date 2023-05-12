@@ -195,8 +195,8 @@
         "filter_values": "118",
         "radio_checkbox_colspan": "3"
     },
-    "_getOwnerId": {
-        "name": "_getOwnerId",
+    "_getOwner": {
+        "name": "_getOwner",
         "relationship": "belongsTo",
         "control_name": "owner_id",
         "renderer_view_all": "column",

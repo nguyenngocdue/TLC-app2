@@ -21,7 +21,7 @@ class Hr_overtime_request_line extends ModelExtended
         "getUserID" => ['belongsTo', User::class, 'user_id'],
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getWorkMode" => ['belongsTo', Work_mode::class, 'work_mode_id'],
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getHROvertimeRequest()
@@ -30,7 +30,7 @@ class Hr_overtime_request_line extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

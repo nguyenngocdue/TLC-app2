@@ -43,7 +43,7 @@ class ModelExtended extends Model
         ];
     }
 
-    function getOwnerId()
+    function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

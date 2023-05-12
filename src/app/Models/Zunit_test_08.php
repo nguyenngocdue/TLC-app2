@@ -26,7 +26,7 @@ class Zunit_test_08 extends ModelExtended
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "getAssignee1" => ["belongsTo", User::class, 'assignee_1'],
         "getAssignee2" => ["belongsTo", User::class, 'assignee_2'],
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function comment_rejected_reason()
@@ -47,7 +47,7 @@ class Zunit_test_08 extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

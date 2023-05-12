@@ -13,7 +13,7 @@ class Esg_metric_type_1 extends ModelExtended
         "getEsgMetricType" => ['belongsTo', Esg_metric_type::class, 'esg_metric_type_id'],
         "getEsgMetricType2" => ['hasMany', Esg_metric_type_2::class, 'esg_metric_type_1_id'],
 
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
         "getDeleteBy" => ['belongsTo', User::class, 'deleted_by'],
     ];
     public function getEsgMetricType()

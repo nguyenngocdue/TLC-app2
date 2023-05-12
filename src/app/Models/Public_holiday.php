@@ -11,7 +11,7 @@ class Public_holiday extends ModelExtended
 
     public $eloquentParams = [
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getWorkplace()
@@ -20,12 +20,12 @@ class Public_holiday extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    
+
     public function getManyLineParams()
     {
         return [

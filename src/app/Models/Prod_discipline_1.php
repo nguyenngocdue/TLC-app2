@@ -15,7 +15,7 @@ class Prod_discipline_1 extends ModelExtended
         "getDiscipline2" => ['hasMany', Prod_discipline_2::class, 'prod_discipline_1_id'],
         "getDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public $oracyParams = [
@@ -42,7 +42,7 @@ class Prod_discipline_1 extends ModelExtended
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

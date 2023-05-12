@@ -14,7 +14,7 @@ class Pj_unit extends ModelExtended
     public $eloquentParams = [
         'getPjSellType' => ['belongsTo', Term::class, 'pj_sell_type_id'],
         "getPjModules" => ['hasMany', Pj_module::class, "pj_unit_id"],
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getPjSellType()
@@ -27,7 +27,7 @@ class Pj_unit extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

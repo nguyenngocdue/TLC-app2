@@ -12,7 +12,7 @@ class Erp_routing_link extends ModelExtended
     public $eloquentParams = [
         "prodRoutingDetails" => ["hasMany", Prod_routing_detail::class, "erp_routing_link_id"],
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function prodRoutingDetails()
@@ -27,7 +27,7 @@ class Erp_routing_link extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

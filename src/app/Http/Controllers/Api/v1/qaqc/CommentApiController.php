@@ -105,8 +105,8 @@ class CommentApiController extends Controller
             $comments = Qaqc_insp_chklst_line::findOrFail($id)->insp_comments;
             $commentsArray = $comments->toArray();
             foreach ($comments as $key => $comment) {
-                $nameOwnerId = $comment->getOwnerId->name;
-                $urlAvatar = $comment->getOwnerId->getAvatar->url_thumbnail ?? '';
+                $nameOwnerId = $comment->getOwner->name;
+                $urlAvatar = $comment->getOwner->getAvatar->url_thumbnail ?? '';
                 $commentsArray[$key]['avatar'] = $urlAvatar;
                 $commentsArray[$key]['name_owner'] = $nameOwnerId;
             }

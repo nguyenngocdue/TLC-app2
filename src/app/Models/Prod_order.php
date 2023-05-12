@@ -20,7 +20,7 @@ class Prod_order extends ModelExtended
         "prodRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
         "qaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'prod_order_id'],
         "getMeta" => ['morphTo', Prod_order::class, 'meta_type', 'meta_id'],
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
 
     ];
 
@@ -53,7 +53,7 @@ class Prod_order extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

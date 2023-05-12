@@ -34,7 +34,7 @@ class Qaqc_ncr extends ModelExtended
         "getDefectDisposition" => ["belongsTo", Term::class, 'defect_disposition_id'],
         "getParent" => ['morphTo', Qaqc_ncr::class, 'parent_type', 'parent_id'],
         'getQaqcCars' => ['hasMany', Qaqc_car::class, 'qaqc_ncr_id'],
-        "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "getOwner" => ["belongsTo", User::class, "owner_id"],
         "getSeverity" => ["belongsTo", Term::class, 'defect_severity'],
         "getReportType" => ["belongsTo", Term::class, 'defect_report_type'],
 
@@ -164,7 +164,7 @@ class Qaqc_ncr extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

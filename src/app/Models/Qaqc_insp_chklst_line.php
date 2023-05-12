@@ -24,7 +24,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
         // "getProdRouting" => ["morphMany", Prod_routing::class, "complex"],
         // "getProdOrder" => ["morphMany", Prod_order::class, "complex"],
         "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
-        "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "getOwner" => ["belongsTo", User::class, "owner_id"],
         "getInspector" => ["belongsTo", User::class, "inspector_id"],
         "insp_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "insp_comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
@@ -83,7 +83,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
 
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

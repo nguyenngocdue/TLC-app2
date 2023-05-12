@@ -13,7 +13,7 @@ class Prod_discipline_2 extends ModelExtended
 
     public $eloquentParams = [
         "getDiscipline1" => ['belongsTo', Prod_discipline_1::class, 'prod_discipline_1_id'],
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getDiscipline1()
@@ -21,7 +21,7 @@ class Prod_discipline_2 extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -17,7 +17,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         "getLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_sht_id"],
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
         "getTmplSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, 'qaqc_insp_tmpl_sht_id'],
-        "getOwnerId" => ["belongsTo", User::class, "owner_id"],
+        "getOwner" => ["belongsTo", User::class, "owner_id"],
         "getShtSigs" => ["hasMany", Qaqc_insp_chklst_sht_sig::class, "qaqc_insp_chklst_sht_id"],
 
     ];
@@ -58,7 +58,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

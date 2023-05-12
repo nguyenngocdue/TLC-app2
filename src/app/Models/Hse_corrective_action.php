@@ -18,7 +18,7 @@ class Hse_corrective_action extends ModelExtended
         'getPriority' => ['belongsTo', Priority::class, 'priority_id'],
         'getAssignee' => ['belongsTo', User::class, 'assignee_1'],
         'getUnsafeActionType' => ['belongsTo', Term::class, 'unsafe_action_type_id'],
-        "getOwnerId" => ['belongsTo', User::class, 'owner_id'],
+        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public $oracyParams = [
@@ -40,7 +40,7 @@ class Hse_corrective_action extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getOwnerId()
+    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
