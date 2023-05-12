@@ -12,7 +12,7 @@ class User_discipline extends ModelExtended
 
     public $eloquentParams = [
         "user" => ['hasMany', User::class, 'discipline', 'id'],
-        "getAssignee" => ["belongsTo", User::class, 'def_assignee'],
+        "getDefAssignee" => ["belongsTo", User::class, 'def_assignee'],
     ];
 
     public $oracyParams = [
@@ -24,7 +24,7 @@ class User_discipline extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getAssignee()
+    public function getDefAssignee()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

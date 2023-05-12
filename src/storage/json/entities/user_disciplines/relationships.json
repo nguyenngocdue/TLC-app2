@@ -11,8 +11,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getAssignee": {
-        "name": "_getAssignee",
+    "_getDefAssignee": {
+        "name": "_getDefAssignee",
         "relationship": "belongsTo",
         "control_name": "def_assignee",
         "renderer_view_all": "column",

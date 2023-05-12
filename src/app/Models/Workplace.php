@@ -12,7 +12,7 @@ class Workplace extends ModelExtended
 
     public $eloquentParams = [
         "user" => ['hasMany', User::class, 'workplace'],
-        "getAssignee" => ["belongsTo", User::class, 'def_assignee'],
+        "getDefAssignee" => ["belongsTo", User::class, 'def_assignee'],
         "getPublicHolidays" => ["hasMany", Public_holiday::class, 'workplace_id'],
         "getHROTRs" => ["hasMany", Hr_overtime_request::class, 'workplace_id'],
     ];
@@ -26,7 +26,7 @@ class Workplace extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getAssignee()
+    public function getDefAssignee()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
