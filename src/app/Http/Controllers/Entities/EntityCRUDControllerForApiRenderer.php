@@ -38,10 +38,10 @@ class EntityCRUDControllerForApiRenderer extends Controller
 		if ($ids) $ids = explode(",", $ids);
 
 		$columns = [
-			['dataIndex' => 'id', 'renderer' => 'id', 'type' => Str::plural($docType), 'align' => 'center', 'width' => 100],
+			['dataIndex' => 'id', 'renderer' => 'id', 'type' => Str::plural($docType), /*'align' => 'center',*/ 'width' => 100],
 			['dataIndex' => 'id', 'renderer' => 'qr-code', 'title' => 'QR Code', 'type' => Str::plural($docType), 'align' => 'center', 'width' => 60,],
-			['dataIndex' => 'name', 'title' => 'Title', 'width' => 500],
-			['dataIndex' => 'ball_in_court', 'width' => 200],
+			['dataIndex' => 'name', 'title' => 'Title', 'width' => 500, 'align' => 'left'],
+			['dataIndex' => 'ball_in_court', 'width' => 200, 'align' => 'left'],
 			['dataIndex' => 'status', 'renderer' => 'status', 'align' => 'center', 'width' => 150],
 			['dataIndex' => 'due_date', 'renderer' => 'date_time', 'width' => 170],
 		];

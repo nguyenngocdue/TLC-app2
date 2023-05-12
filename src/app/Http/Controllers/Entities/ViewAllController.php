@@ -241,7 +241,7 @@ class ViewAllController extends Controller
         // $searchableArray = App::make($this->typeModel)->toSearchableArray();
         $app = LibApps::getFor($this->type);
         $tableTrueWidth = !($app['hidden'] ?? false);
-        if (app()->isProduction()) $tableTrueWidth = false;
+        if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'perPage' => $perPage,
