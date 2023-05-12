@@ -25,8 +25,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_erpRoutingLink": {
-        "name": "_erpRoutingLink",
+    "_getErpRoutingLink": {
+        "name": "_getErpRoutingLink",
         "relationship": "belongsTo",
         "control_name": "erp_routing_link_id",
         "renderer_view_all": "column",
