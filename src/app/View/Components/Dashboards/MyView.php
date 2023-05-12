@@ -205,15 +205,15 @@ class MyView extends Component
                 'width' => 100,
             ],
         ];
-        if (CurrentUser::isAdmin()) {
-            $columns[] =
-                [
-                    'dataIndex' => 'project_id',
-                    'title' => 'Project ID<br/><i class="fa-duotone fa-eye"></i>',
-                    'align' => 'center',
-                    'width' => 100,
-                ];
-        }
+        // if (CurrentUser::isAdmin()) {
+        //     $columns[] =
+        //         [
+        //             'dataIndex' => 'project_id',
+        //             'title' => 'Project ID<br/><i class="fa-duotone fa-eye"></i>',
+        //             'align' => 'center',
+        //             'width' => 100,
+        //         ];
+        // }
         // $dataSource = [];
         $dataSource = $this->makeDataSource($this->viewType);
         // if (isset($dataSource[0])) dump($dataSource[0]);

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\v1\System\NotificationsController;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApi;
+use App\Http\Controllers\Entities\EntityCRUDControllerForApiRenderer;
 use App\Utils\System\Memory;
 use App\Utils\System\Timer;
 use Illuminate\Support\Str;
@@ -137,6 +138,6 @@ Route::group([
         'Qaqc_wir',
     ] as $entityName) {
         $tableName = Str::plural(lcfirst($entityName), 1);
-        Route::post("{$tableName}_renderTable", [EntityCRUDControllerForApi::class, 'renderTable'])->name($tableName . ".renderTable");
+        Route::post("{$tableName}_renderTable", [EntityCRUDControllerForApiRenderer::class, 'renderTable'])->name($tableName . ".renderTable");
     }
 });
