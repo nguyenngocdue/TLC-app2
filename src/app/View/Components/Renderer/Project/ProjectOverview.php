@@ -5,6 +5,7 @@ namespace App\View\Components\Renderer\Project;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Constant;
 use App\Utils\Support\Json\SuperDefinitions;
+use App\Utils\Support\JsonControls;
 use Carbon\Carbon;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
@@ -105,8 +106,7 @@ class ProjectOverview extends Component
         foreach ($apps as $appKey => $app) {
             // dump($app);
             $modelPath = Str::modelPathFrom($appKey);
-            $model = new ($modelPath);
-            if (!$model->hasDueDate) continue;
+            if (!in_array($appKey, JsonControls::getAppsHaveDueDateColumn())) continue;
             $closedArray = SuperDefinitions::getClosedOf($appKey);
             [$dataSource, $size] = $this->makeDataSource($appKey, $modelPath, $closedArray);
             $item =   [

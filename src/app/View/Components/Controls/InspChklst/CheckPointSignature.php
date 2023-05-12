@@ -37,7 +37,6 @@ class CheckPointSignature extends Component
                 'position_rendered' => $inspector->position_rendered,
                 'timestamp' => DateTimeConcern::convertForLoading("picker_datetime", $this->line->created_at),
                 'avatar' => $inspector->getAvatarThumbnailUrl(),
-                // 'avatar' => $inspector->avatar ? $path . $inspector->avatar->url_thumbnail : "/images/avatar.jpg",
             ];
         }
         // dump($inspector);

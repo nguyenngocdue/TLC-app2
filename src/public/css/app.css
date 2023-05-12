@@ -629,6 +629,9 @@ video {
 .bottom-0 {
   bottom: 0px;
 }
+.right-80 {
+  right: 20rem;
+}
 .z-0 {
   z-index: 0;
 }
@@ -1110,6 +1113,9 @@ video {
 }
 .max-h-\[50rem\] {
   max-height: 50rem;
+}
+.max-h-96 {
+  max-height: 24rem;
 }
 .min-h-\[1000px\] {
   min-height: 1000px;

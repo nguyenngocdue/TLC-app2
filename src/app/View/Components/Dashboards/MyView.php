@@ -6,6 +6,7 @@ use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperDefinitions;
 use App\Utils\Support\Json\SuperProps;
+use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
@@ -23,16 +24,6 @@ class MyView extends Component
         private $projectId = null,
     ) {
         //
-    }
-
-    private function getAppsHaveProjectColumn()
-    {
-        return [
-            'pj_shipment',
-            'qaqc_mir',
-            'qaqc_ncr',
-            'qaqc_wir',
-        ];
     }
 
     private function makeUpLinks($app, $doc)
@@ -138,7 +129,7 @@ class MyView extends Component
             $modelPath = Str::modelPathFrom($appKey);
 
             $openingDocs = $modelPath::whereNotIn('status', $closed);
-            $hasProjectIdColumn = in_array($appKey, $this->getAppsHaveProjectColumn());
+            $hasProjectIdColumn = in_array($appKey, JsonControls::getAppsHaveProjectColumn());
             if ($this->projectId) {
                 if ($hasProjectIdColumn) {
                     $openingDocs = $openingDocs->where('project_id', $this->projectId);
@@ -182,10 +173,11 @@ class MyView extends Component
                 'dataIndex' => 'id_link',
                 'title' => "ID",
                 'width' => 100,
+                'align' => 'center',
             ],
             [
                 'dataIndex' => 'doc_type',
-                'width' => 300,
+                'width' => 100,
             ],
             [
                 'dataIndex' => 'name',

@@ -30,7 +30,7 @@ class ResponseObject
 
     public static function responseTokenAndUser($token = null, $userDefault = null, $user = null, $message = '', $code = 200)
     {
-        $urlAvatar = $userDefault->avatar->url_thumbnail ?? '';
+        $urlAvatar = $userDefault->getAvatar->url_thumbnail ?? '';
         $userDefault = $userDefault->toArray();
         $userDefault['avatar'] = $urlAvatar;
         return response()->json([

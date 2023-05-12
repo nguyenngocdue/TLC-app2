@@ -106,7 +106,7 @@ class CommentApiController extends Controller
             $commentsArray = $comments->toArray();
             foreach ($comments as $key => $comment) {
                 $nameOwnerId = $comment->getOwnerId->name;
-                $urlAvatar = $comment->getOwnerId->avatar->url_thumbnail ?? '';
+                $urlAvatar = $comment->getOwnerId->getAvatar->url_thumbnail ?? '';
                 $commentsArray[$key]['avatar'] = $urlAvatar;
                 $commentsArray[$key]['name_owner'] = $nameOwnerId;
             }
