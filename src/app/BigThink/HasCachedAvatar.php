@@ -11,7 +11,7 @@ trait HasCachedAvatar
     {
         $id = $this->id;
         if (!isset(static::$userAvatarSingleton[$id])) {
-            $avatar = $this->avatar;
+            $avatar = $this->getAvatar;
             if ($avatar) $avatar = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $avatar->url_thumbnail;
             else $avatar = "/images/avatar.jpg";
             static::$userAvatarSingleton[$id] = $avatar;

@@ -38,4 +38,9 @@ class Project extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
+    public static function getAllProjectByCondition()
+    {
+        return self::whereIn('status', ['manufacturing', 'construction_site'])->get();
+    }
 }

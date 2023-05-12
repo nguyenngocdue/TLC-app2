@@ -46,6 +46,14 @@ function data() {
             this.isProfileMenuOpen = false
         },
         ///////////////////////////////////
+        isProjectMenuOpen: false,
+        toggleProjectMenu() {
+            this.isProjectMenuOpen = !this.isProjectMenuOpen
+        },
+        closeProjectMenu() {
+            this.isProjectMenuOpen = false
+        },
+        ///////////////////////////////////
         isBroadcastNotificationOpen: false,
         toggleBroadcastNotification() {
             this.isBroadcastNotificationOpen = !this.isBroadcastNotificationOpen

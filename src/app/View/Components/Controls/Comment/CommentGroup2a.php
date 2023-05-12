@@ -73,7 +73,6 @@ class CommentGroup2a extends Component
             $item['owner_id']['value'] = $comment->owner_id;
             $item['owner_id']['display_name'] = $user->name;
             $item['owner_id']['avatar'] = $user->getAvatarThumbnailUrl();
-            // $item['owner_id']['avatar'] = $user->avatar ? $path . $user->avatar->url_thumbnail : "/images/avatar.jpg";
             $item['created_at']['value'] = $comment->created_at;
             $item['content']['value'] = $comment->content;
 
@@ -94,7 +93,6 @@ class CommentGroup2a extends Component
             $item['owner_id']['value'] = $user->id;
             $item['owner_id']['display_name'] = $user->name;
             $item['owner_id']['avatar'] =  $user->getAvatarThumbnailUrl();
-            // $item['owner_id']['avatar'] =  $user->avatar ? $path . $user->avatar->url_thumbnail : "/images/avatar.jpg";
             $item['created_at']['value'] = date(Constant::FORMAT_DATETIME_MYSQL);
             $item['content']['value'] = $oldValue;
 
