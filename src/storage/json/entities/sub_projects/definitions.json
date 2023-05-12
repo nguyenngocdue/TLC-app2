@@ -1,0 +1,57 @@
+{
+    "new": {
+        "name": "new",
+        "concept": "true",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "read-only": {
+        "name": "read-only",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "hide-save-btn": {
+        "name": "hide-save-btn",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "closed": {
+        "name": "closed",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "post-closed": {
+        "name": "post-closed",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    }
+}
