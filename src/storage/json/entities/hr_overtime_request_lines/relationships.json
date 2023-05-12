@@ -13,8 +13,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getUserID": {
-        "name": "_getUserID",
+    "_getUser": {
+        "name": "_getUser",
         "relationship": "belongsTo",
         "control_name": "user_id",
         "renderer_view_all": "column",

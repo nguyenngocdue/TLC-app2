@@ -18,7 +18,7 @@ class Hr_overtime_request_line extends ModelExtended
 
     public $eloquentParams = [
         "getHROTR" => ['belongsTo', Hr_overtime_request::class, 'hr_overtime_request_id'],
-        "getUserID" => ['belongsTo', User::class, 'user_id'],
+        "getUser" => ['belongsTo', User::class, 'user_id'],
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getWorkMode" => ['belongsTo', Work_mode::class, 'work_mode_id'],
         "getOwner" => ['belongsTo', User::class, 'owner_id'],
@@ -36,7 +36,7 @@ class Hr_overtime_request_line extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getUserID()
+    public function getUser()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

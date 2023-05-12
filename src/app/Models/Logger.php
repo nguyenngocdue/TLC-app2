@@ -11,10 +11,10 @@ class Logger extends ModelExtended
     protected $table = 'loggers';
 
     public $eloquentParams = [
-        "getUserId" => ['belongsTo', User::class, 'user_id'],
+        "getUser" => ['belongsTo', User::class, 'user_id'],
         "loggable" => ['morphTo', Logger::class, 'loggable_type', 'loggable_id'],
     ];
-    public function getUserId()
+    public function getUser()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
