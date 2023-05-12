@@ -76,9 +76,9 @@
         "default_value": "",
         "control_extra": ""
     },
-    "_prodRoutings": {
-        "name": "_prodRoutings",
-        "column_name": "prodRoutings",
+    "_getProdRoutings": {
+        "name": "_getProdRoutings",
+        "column_name": "getProdRoutings",
         "label": "",
         "validation": "",
         "formula": "",

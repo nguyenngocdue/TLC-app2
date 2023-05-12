@@ -25,10 +25,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_prodRoutings": {
-        "name": "_prodRoutings",
+    "_getProdRoutings": {
+        "name": "_getProdRoutings",
         "relationship": "belongsToMany",
-        "control_name": "prodRoutings",
+        "control_name": "getProdRoutings",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_lines",

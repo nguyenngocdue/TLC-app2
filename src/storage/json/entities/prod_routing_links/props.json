@@ -127,9 +127,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_prodRoutings": {
-        "name": "_prodRoutings",
-        "column_name": "prodRoutings",
+    "_getProdRoutings": {
+        "name": "_getProdRoutings",
+        "column_name": "getProdRoutings",
         "column_type": "eloquent_prop",
         "label": "Production Routings",
         "control": "relationship_renderer",
