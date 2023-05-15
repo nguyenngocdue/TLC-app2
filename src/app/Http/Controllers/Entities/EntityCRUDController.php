@@ -13,6 +13,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowQRApp;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStoreUpdate2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Workflow\LibApps;
+use App\Http\Services\UploadService2;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\Support\Facades\App;
 
@@ -55,7 +56,7 @@ class EntityCRUDController extends Controller
 
 	private function postConstruct()
 	{
-		$this->uploadService2 = App::make('App\Http\Services\UploadService2');
+		$this->uploadService2 = new UploadService2($this->data);
 		$this->superProps = SuperProps::getFor($this->type);
 	}
 

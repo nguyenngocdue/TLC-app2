@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\v1\System\NotificationsController;
+use App\Http\Controllers\Api\v1\System\VersionController;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApi;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApiRenderer;
 use App\Utils\System\Memory;
@@ -83,6 +84,7 @@ Route::group([
 Route::group([
     'prefix' => 'v1/system',
 ], function () {
+    Route::get('app_version', [VersionController::class, 'version']);
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], function () {
