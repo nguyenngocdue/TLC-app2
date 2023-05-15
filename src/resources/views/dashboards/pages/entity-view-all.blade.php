@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
-@section('title', "View All" )
+@section('title', $title )
 
 @section('content')
 <div class="px-4 mt-2">
@@ -12,8 +12,13 @@
     @php 
     $abt = "<x-form.action-button-group type='$type' />"; 
     $route = route('updateUserSettings');
+    $routeRestore = route($type.'.trashed');
     $p = "<x-form.per-page type='$type' route='$route' perPage='$perPage' />";
-    $topL = "<x-form.refresh type='$type' route='$route' valueRefresh='$refreshPage'/>";
+    $topL = "<div class='flex'>" . ($trashed ? "" : "<form class='mr-1'>
+                    <x-renderer.button type='success' href='$routeRestore'><i class='fa-light fa-trash-can-arrow-up'></i> Restore</x-renderer.button>
+                </form>"  )."
+                <x-form.refresh type='$type' route='$route' valueRefresh='$refreshPage'/>
+            </div>";
     if($trashed){
         $am = "<x-form.action-multiple type='$type' restore='true'/>";
     }else{

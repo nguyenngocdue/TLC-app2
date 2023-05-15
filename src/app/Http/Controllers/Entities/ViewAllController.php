@@ -69,6 +69,12 @@ class ViewAllController extends Controller
                 $output['type'] = $type;
                 $output['width'] = 10;
                 break;
+            case 'avatar':
+                $output['renderer'] = 'avatar_user';
+                $output['align'] = 'center';
+                $output['type'] = $type;
+                $output['width'] = 10;
+                break;
             case 'action_column':
                 $output['renderer'] = 'action_column';
                 $output['align'] = 'center';
@@ -149,7 +155,19 @@ class ViewAllController extends Controller
             'column_name' => 'id',
             'control' => 'qr_code',
         ];
-        array_splice($props, 1, 0, [$qrCodeColumn]);
+        $trashInfoColumn = $trash ? [
+            [
+                'label' => "Deleted By",
+                'column_name' => 'deleted_by',
+                'control' => 'avatar',
+            ],
+            [
+                'label' => "Deleted At",
+                'column_name' => 'deleted_at',
+                'control' => 'picker_datetime',
+            ]
+        ] : [];
+        array_splice($props, 1, 0, [$qrCodeColumn, ...$trashInfoColumn]);
         if (App::isTesting() || App::isLocal() || CurrentUser::isAdmin()) {
             if ($trash) {
                 $actionColumn = [
@@ -259,6 +277,7 @@ class ViewAllController extends Controller
         if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
+            'title' => 'View All',
             'perPage' => $perPage,
             'valueAdvanceFilters' => $advanceFilters,
             'refreshPage' => $refreshPage,
@@ -295,6 +314,7 @@ class ViewAllController extends Controller
         if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
+            'title' => 'View Trash',
             'perPage' => $perPage,
             'valueAdvanceFilters' => $advanceFilters,
             'refreshPage' => $refreshPage,

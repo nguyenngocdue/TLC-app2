@@ -67,13 +67,13 @@ const actionDeleted = (obj) => {
                 type: 'delete',
                 url: url,
                 success: function (response) {
-                    if (response.success == 'true') {
+                    if (response.success) {
                         Swal.fire(
                             actionSuccessObject(response.message, 'Deleted')
                         )
                         setTimeout(location.reload.bind(location), 500)
                     } else {
-                        Swal.fire(actionFailObject(response.message, 'Delete'))
+                        Swal.fire(actionFailObject(response.message, 'Deleted'))
                         setTimeout(location.reload.bind(location), 500)
                     }
                 },
