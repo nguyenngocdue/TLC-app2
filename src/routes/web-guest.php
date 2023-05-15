@@ -17,6 +17,6 @@ Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index
 
 Route::resource('utils/parser', ParserController::class)->only('index', 'store');
 
-Route::get('components', [ComponentDemo::class, 'index']);
-Route::get('database-summary', [DatabaseSummaryController::class, 'index']);
+Route::get('components', [ComponentDemo::class, 'index'])->name("components.index");
+Route::get('database-summary', [DatabaseSummaryController::class, 'index'])->name("database-summary.index");
 Route::get('redis', [RedisController::class, 'index']);

@@ -17,14 +17,14 @@ use Illuminate\Support\Facades\Log;
 Route::group([
     'middleware' => ['auth']
 ], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboards.index');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::put('updateBookmark', [BookmarkController::class, 'updateBookmark'])->name('updateBookmark');
     Route::get('impersonate/user/{id}', [AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
     // Route::get('app-menu', [AppMenuController::class, 'index']);
-    Route::get('my-company', [MyCompany::class, 'index']);
+    Route::get('my-company', [MyCompany::class, 'index'])->name("my-company.index");
     Route::get('reset', fn () => (new UpdateUserSettings())(new Request(['action' => 'resetAllSettings']), '/'));
     // Route::get('gitpull202', fn () => Log::info("WebHook Called"));
     Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications.index');

@@ -8,6 +8,11 @@ use Illuminate\Support\Str;
 
 class CurrentRoute
 {
+    public static function getName()
+    {
+        return Route::currentRouteName();
+    }
+
     public static function getTypeSingular()
     {
         $type = Route::current()->getController()->getType();

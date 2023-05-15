@@ -44,14 +44,14 @@ class Properties extends JsonGetSet
         $all = static::getAllOf($type);
         // dump($all, $category);
         // dump(isset($all[$category]));
-        //Remove the "_" as attachment doesn't need one, how about comment?
+        if ($type == 'comment' && $category[0] != '_') $category = "_" . $category;
         if (!isset($all[$category])) {
             switch ($type) {
                 case 'comment':
                     $property = [
                         'allowed_to_delete' => false,
-                        // 'force_comment_once' => false,
                     ];
+                    dump("Property for comment [$category] not found.");
                     break;
 
                 case 'attachment':
