@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Helpers\Helper;
 use App\Models\Attachment;
+use App\Models\Field;
 use App\Utils\Constant;
 use App\Utils\Support\AttachmentName;
 use App\Utils\Support\Json\Properties;
@@ -15,6 +16,11 @@ use Intervention\Image\Facades\Image;
 
 class UploadService2
 {
+    protected $model;
+    public function __construct($model)
+    {
+        $this->model = $model;
+    }
     public function destroy($toBeDeletedIds)
     {
         try {
@@ -51,6 +57,11 @@ class UploadService2
         }
         return $result;
     }
+    private function countFileUploadByCondition($fieldName)
+    {
+        $fieldId = Field::where('name', $fieldName)->first()->id;
+        return Attachment::where('object_type', $this->model)->where('category', $fieldId)->get()->count() ?? 0;
+    }
     public function store($request)
     {
         $thumbnailW = 150;
@@ -68,42 +79,48 @@ class UploadService2
                 $nameValidate = $fieldName . '.toBeUploaded';
                 $maxFileSize = $property['max_file_size'] * 1024;
                 $maxFileCount = $property['max_file_count'];
+                $fileUploadCount = $this->countFileUploadByCondition($fieldName);
+                $fileUploadRemainingCount = $maxFileCount - $fileUploadCount;
                 $allowedFileTypes = $property['allowed_file_types'];
                 $allowedFileTypes = $this->getAllowedFileTypes($allowedFileTypes);
                 $request->validate([
-                    $nameValidate => 'array|max:' . $maxFileCount,
+                    $nameValidate => 'array|max:' . $fileUploadRemainingCount,
                     $nameValidate . '.*' => 'file|' . $allowedFileTypes . '|max:' . $maxFileSize,
                 ]);
                 $files = $files['toBeUploaded'];
                 foreach ($files as $file) {
-                    $fileName = AttachmentName::slugifyImageName($file, $attachmentRows);
-                    $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
-                    $fileNameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
-                    $mimeType = $file->getMimeType();
-                    $imagePath = $path . $fileName;
+                    if (!$file->getClientOriginalExtension()) {
+                        Toastr::warning('File without extension cannot be uploaded!', 'Upload File Warning');
+                    } else {
+                        $fileName = AttachmentName::slugifyImageName($file, $attachmentRows);
+                        $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                        $fileNameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
+                        $mimeType = $file->getMimeType();
+                        $imagePath = $path . $fileName;
 
-                    Storage::disk('s3')->put($imagePath, file_get_contents($file), 'public');
-                    // Log::info($fileName);
-                    //Only crunch if the attachment is a photo
-                    if (in_array($fileExt, $allowedExts)) {
-                        $thumbnailImage = Image::make($file);
-                        $thumbnailImage->fit($thumbnailW, $thumbnailH);
-                        $resource = $thumbnailImage->stream();
-                        $thumbnailFileName = $fileNameWithoutExt . "-{$thumbnailW}x{$thumbnailH}." . $fileExt;
-                        $thumbnailPath = $path . $thumbnailFileName;
-                        Storage::disk('s3')->put($thumbnailPath, $resource->__toString(), 'public');
+                        Storage::disk('s3')->put($imagePath, file_get_contents($file), 'public');
+                        // Log::info($fileName);
+                        //Only crunch if the attachment is a photo
+                        if (in_array($fileExt, $allowedExts)) {
+                            $thumbnailImage = Image::make($file);
+                            $thumbnailImage->fit($thumbnailW, $thumbnailH);
+                            $resource = $thumbnailImage->stream();
+                            $thumbnailFileName = $fileNameWithoutExt . "-{$thumbnailW}x{$thumbnailH}." . $fileExt;
+                            $thumbnailPath = $path . $thumbnailFileName;
+                            Storage::disk('s3')->put($thumbnailPath, $resource->__toString(), 'public');
+                        }
+                        // dd($fields[$fieldName);
+                        array_push($attachmentRows, [
+                            'url_thumbnail' => isset($thumbnailPath) ? $thumbnailPath : "",
+                            'url_media' => $imagePath,
+                            'url_folder' => $path,
+                            'filename' => basename($imagePath),
+                            'extension' => $fileExt,
+                            'category' => $fields[$fieldName],
+                            'owner_id' =>  (int)Auth::user()->id,
+                            'mime_type' => $mimeType,
+                        ]);
                     }
-                    // dd($fields[$fieldName);
-                    array_push($attachmentRows, [
-                        'url_thumbnail' => isset($thumbnailPath) ? $thumbnailPath : "",
-                        'url_media' => $imagePath,
-                        'url_folder' => $path,
-                        'filename' => basename($imagePath),
-                        'extension' => $fileExt,
-                        'category' => $fields[$fieldName],
-                        'owner_id' =>  (int)Auth::user()->id,
-                        'mime_type' => $mimeType,
-                    ]);
                 }
             }
 

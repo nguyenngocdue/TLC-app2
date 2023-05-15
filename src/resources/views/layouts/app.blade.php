@@ -1,6 +1,32 @@
 <!DOCTYPE html>
+<script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('js/toastr.min.js') }}"></script>
 <script>
     function check() {
+        $.ajax({
+            type: 'get',
+            url: 'api/v1/system/app_version',
+                    success: function (response) {
+                        if (response.success) {
+                            const versionServer = response.hits
+                            if (window.localStorage.getItem('version')) {
+                                const versionLocal = window.localStorage.getItem('version')
+                                if(versionLocal != versionServer){
+                                    window.localStorage.setItem('version',versionServer)
+                                    $('#content-app').hide();
+                                    $('#loading-animation').show();
+                                    setTimeout(() => {
+                                        location.reload(true);
+                                    }, 1);
+                                }
+                            }else{
+                                window.localStorage.setItem('version',versionServer)
+                            }
+                        } 
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+        },
+     })
         if (window.localStorage.getItem('dark')) {
             return JSON.parse(window.localStorage.getItem('dark'))
         }
@@ -17,7 +43,11 @@
 @include("layouts/head")
 
 <body >
-    <div  class="bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div id="loading-animation" class="w-full h-screen justify-center items-center flex text-5xl" style="display: none">
+        <i class="fa-duotone fa-spinner fa-spin text-green-500"></i>
+        <span class="text-lg ml-2 text-green-500">Update Version</span>
+    </div>
+    <div id="content-app"  class="bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         {{-- <x-homepage.sidebar2 /> --}}
         <div class="flex flex-col flex-1 w-full">
             <x-homepage.navbar2 />

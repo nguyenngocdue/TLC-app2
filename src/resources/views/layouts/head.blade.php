@@ -22,7 +22,7 @@
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     {{-- <script src="{{ asset('js/bootstrap.js') }}"></script> --}}
-    <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('AdminLTE/plugins/select2/js/select2.full.min.js')}}"></script>
     <script src="{{ asset('AdminLTE/plugins/moment/moment.min.js')}}"></script>
     <script src="{{ asset('AdminLTE/plugins/inputmask/min/jquery.inputmask.bundle.min.js')}}"></script>
@@ -46,7 +46,7 @@
     <script src="{{ asset('js/components/SearchModal.js') }}"></script>
     <script src="{{ asset('js/components/KeyArrowTable.js') }}"></script>
     <script src="{{ asset('js/applayout.js') }}"></script>
-    <script src="{{ asset('js/toastr.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/toastr.min.js') }}"></script> --}}
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
     <script src="{{ asset('js/signature_pad@4.0.0.umd.min.js') }}"></script>
     {{-- Socket IO must before laravel-echo --}}
