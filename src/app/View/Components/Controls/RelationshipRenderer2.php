@@ -142,6 +142,26 @@ class RelationshipRenderer2 extends Component
         return $result;
     }
 
+    private function loadColumnsFromRendererEditParam($props, $instance, $lineModelPath, $tableName)
+    {
+        $tableFooter = "";
+        $fn = $props['relationships']['renderer_edit_param'];
+        //Most of the time, it would be getManyLineParams
+        if (!method_exists($instance, $fn)) {
+            $tableFooter = "Function $fn() not found in $lineModelPath";
+            $fn = '';
+        }
+        $defaultColumns = [
+            ["dataIndex" => 'id', "renderer" => "id", "type" => $tableName, "align" => "center"],
+        ];
+        if (!$instance->nameless) $defaultColumns[] = ["dataIndex" => 'name',];
+        $columns = ($fn === '')
+            ? $defaultColumns
+            : $instance->$fn();
+
+        return [$tableFooter, $columns,];
+    }
+
     public function render()
     {
         $colName = $this->colName;
@@ -171,19 +191,7 @@ class RelationshipRenderer2 extends Component
         $tableSettings = $editable ? $this->tablesInEditableMode[$this->type][$tableName] : [];
         $showAll = ($renderer_edit === "many_icons" || ($renderer_edit === "many_lines" && $editable));
 
-        $tableFooter = "";
-        $fn = $props['relationships']['renderer_edit_param'];
-        if (!method_exists($instance, $fn)) {
-            $tableFooter = "Function $fn() not found in $lineModelPath";
-            $fn = '';
-        }
-        $defaultColumns = [
-            ["dataIndex" => 'id', "renderer" => "id", "type" => $tableName, "align" => "center"],
-        ];
-        if (!$instance->nameless) $defaultColumns[] = ["dataIndex" => 'name',];
-        $columns = ($fn === '')
-            ? $defaultColumns
-            : $instance->$fn();
+        [$tableFooter, $columns,] = $this->loadColumnsFromRendererEditParam($props, $instance, $lineModelPath, $tableName);
 
         $row = $modelPath::find($id);
         $isOrderable = $row ? $this->isTableOrderable($row, $colName, $columns) : false;

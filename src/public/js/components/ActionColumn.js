@@ -80,7 +80,7 @@ const actionDeleted = (obj) => {
                 error: function (jqXHR, textStatus, errorThrown) {
                     Swal.fire(
                         actionFailObject(
-                            'Permission denied , please check your permissions!',
+                            jqXHR.responseJSON.message,
                             'Delete'
                         )
                     )
