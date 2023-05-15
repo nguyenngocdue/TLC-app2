@@ -19,6 +19,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('owner_id');
             $table->string('route_name');
+            $table->string('entity_name');
+            $table->string('entity_id')->nullable();
             $table->string('env');
             $table->unsignedInteger('took');
             $table->string('url');
@@ -29,6 +31,8 @@ return new class extends Migration
             $table->index('url');
             $table->index('route_name');
             $table->index('took');
+            $table->index('entity_name');
+            $table->index('entity_id');
         });
     }
 
@@ -39,6 +43,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logger_access');
+        $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
+        Schema::connection($connection)->dropIfExists('logger_access');
     }
 };
