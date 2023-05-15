@@ -23,9 +23,6 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
             <li class="flex" title="Hot Key: Alt + Q">
                 <x-homepage.search-modal modalId="modal-search-app" />
             </li>
-            <li class="flex" title="Projects">
-                <x-homepage.menu-project-mf-and-cs></x-homepage.menu-project-mf-and-cs>
-            </li>
             @if(env('APP_ENV') === 'local')
             <li class="flex">
                 <x-homepage.theme-toggle></x-homepage.theme-toggle>
@@ -37,6 +34,9 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
                 <x-homepage.menu-notification></x-homepage.menu-notification>
             </li>
             @endif
+            <li class="flex" title="Projects">
+                <x-homepage.menu-project-mf-and-cs></x-homepage.menu-project-mf-and-cs>
+            </li>
             <li class="relative">
                 <x-homepage.menu-profile></x-homepage.menu-profile>
             </li>
