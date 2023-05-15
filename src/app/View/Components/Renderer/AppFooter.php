@@ -25,7 +25,8 @@ class AppFooter extends Component
         $cuId = CurrentUser::id();
         $took = Timer::getTimeElapse();
         $routeName = CurrentRoute::getName();
-        DB::connection("telescope")->table('logger_access')->insert([
+        $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
+        DB::connection($connection)->table('logger_access')->insert([
             'owner_id' => $cuId,
             'took' => $took,
             'route_name' => $routeName,

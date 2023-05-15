@@ -14,7 +14,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::connection('telescope')->create('logger_access', function (Blueprint $table) {
+        $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
+        Schema::connection($connection)->create('logger_access', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('owner_id');
             $table->string('route_name');
