@@ -63,3 +63,5 @@
 </script>
 
 </html>
+
+<x-renderer.app-footer />
