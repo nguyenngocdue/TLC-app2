@@ -65,6 +65,7 @@ class Prod_order extends ModelExtended
             ['dataIndex' => 'production_name'],
             ['dataIndex' => 'compliance_name'],
             ['dataIndex' => 'prod_routing_id'],
+            ['dataIndex' => 'status'],
             // ['dataIndex' => 'getMeta', 'rendererParam' => "id"],
         ];
     }
