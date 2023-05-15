@@ -26,7 +26,7 @@ class Prod_order extends ModelExtended
     public function getSubProject()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1]);
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getMeta()

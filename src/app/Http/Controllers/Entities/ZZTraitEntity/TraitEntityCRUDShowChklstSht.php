@@ -14,7 +14,7 @@ trait TraitEntityCRUDShowChklstSht
     public function showChklstSht($id)
     {
         $entity = ($this->data)::findOrFail($id);
-        $entityLines = $entity->getLines;
+        $entityLines = $entity->getLines->sortBy('order_no');
         $entityShtSigs = $entity->getShtSigs;
         // dd($a);
         $tableDataSource = $this->transformDataSource($entityLines, $entityShtSigs);

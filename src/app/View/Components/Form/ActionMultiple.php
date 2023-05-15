@@ -15,6 +15,7 @@ class ActionMultiple extends Component
      */
     public function __construct(
         private $type = null,
+        private $restore = false,
     ) {
         //
     }
@@ -29,6 +30,7 @@ class ActionMultiple extends Component
         if (App::isTesting() || App::isLocal() || CurrentUser::isAdmin()) {
             return view('components.form.action-multiple', [
                 'type' => $this->type,
+                'restore' => $this->restore,
             ]);
         }
         return '';

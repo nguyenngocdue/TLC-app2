@@ -18,7 +18,7 @@ type Prod_routing {
     slug: String!
     created_at: DateTime
     updated_at: DateTime
-    prodRoutingLinks: [Prod_routing_link!]! @belongsToMany
+    getProdRoutingLinks: [Prod_routing_link!]! @belongsToMany
     prodOrders: [Prod_order!]! @hasMany
     pivot: Prod_routing_linkProd_routingPivot
 }

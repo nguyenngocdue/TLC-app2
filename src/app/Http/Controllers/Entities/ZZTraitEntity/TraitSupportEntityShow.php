@@ -13,7 +13,7 @@ trait TraitSupportEntityShow
         return [
             [
                 "title" => 'Description',
-                "dataIndex" => "description",
+                "dataIndex" => "name",
                 'width' => 300,
             ],
             [
@@ -27,7 +27,7 @@ trait TraitSupportEntityShow
     {
         foreach ($dataSource as &$value) {
             $value['response_type'] = $this->createDataSourceTableRun($value);
-            $value['group_description'] = $value->getGroup->description ?? '';
+            $value['group_description'] = $value->getGroup->name ?? '';
         }
         if ($entityShtSigs) {
             foreach ($entityShtSigs as &$value) {

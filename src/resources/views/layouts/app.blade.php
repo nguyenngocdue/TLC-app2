@@ -3,9 +3,11 @@
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 <script>
     function check() {
+        const host = window.location.hostname
+        const url = 'https://' + host + '/api/v1/system/app_version'
         $.ajax({
             type: 'get',
-            url: 'api/v1/system/app_version',
+            url:  url,
                     success: function (response) {
                         if (response.success) {
                             const versionServer = response.hits

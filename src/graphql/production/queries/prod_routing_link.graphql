@@ -14,7 +14,7 @@ type Prod_routing_link {
     slug: String!
     created_at: DateTime
     updated_at: DateTime
-    prodRoutings: [Prod_routing!]! @belongsToMany
+    getProdRoutings: [Prod_routing!]! @belongsToMany
     prodSequence: [Prod_sequence!]! @hasMany
     discipline: Prod_discipline! @belongsTo
 }

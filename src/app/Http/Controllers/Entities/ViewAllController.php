@@ -75,6 +75,12 @@ class ViewAllController extends Controller
                 $output['type'] = $type;
                 $output['width'] = 10;
                 break;
+            case 'restore_column':
+                $output['renderer'] = 'restore_column';
+                $output['align'] = 'center';
+                $output['type'] = $type;
+                $output['width'] = 10;
+                break;
             case 'checkbox_column':
                 $output['renderer'] = 'checkbox_column';
                 $output['align'] = 'center';
@@ -127,7 +133,7 @@ class ViewAllController extends Controller
         return $output;
     }
 
-    private function getColumns($type, $columnLimit)
+    private function getColumns($type, $columnLimit, $trash = false)
     {
 
 
@@ -145,11 +151,20 @@ class ViewAllController extends Controller
         ];
         array_splice($props, 1, 0, [$qrCodeColumn]);
         if (App::isTesting() || App::isLocal() || CurrentUser::isAdmin()) {
-            $actionColumn = [
-                'label' => "Action",
-                'column_name' => 'id',
-                'control' => 'action_column',
-            ];
+            if ($trash) {
+                $actionColumn = [
+                    'label' => "Action",
+                    'column_name' => 'id',
+                    'control' => 'restore_column',
+                ];
+            } else {
+                $actionColumn = [
+                    'label' => "Action",
+                    'column_name' => 'id',
+                    'control' => 'action_column',
+                ];
+            }
+
             $checkboxColumn = [
                 'label' => "",
                 'column_name' => 'id',
@@ -254,6 +269,43 @@ class ViewAllController extends Controller
             // 'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
             'tableTrueWidth' => $tableTrueWidth,
             'frameworkTook' => $this->frameworkTook,
+            'trashed' => false,
+        ]);
+    }
+    public function indexTrashed(Request $request)
+    {
+        $basicFilter = $request->input('basic_filter');
+        if ($basicFilter || !empty($basicFilter)) {
+            (new UpdateUserSettings())($request);
+        }
+        if (!$request->input('page') && !empty($request->input())) {
+            (new UpdateUserSettings())($request);
+            return redirect($request->getPathInfo());
+        }
+        [$perPage, $columnLimit, $advanceFilters, $currentFilter, $refreshPage] = $this->getUserSettings();
+        // Log::info($columnLimit);
+        $type = Str::plural($this->type);
+        $columns = $this->getColumns($type, $columnLimit, true);
+        $dataSource = $this->getDataSource($advanceFilters, true)->paginate($perPage);
+        $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
+        $this->attachRendererIntoColumn($columns);
+        // $searchableArray = App::make($this->typeModel)->toSearchableArray();
+        $app = LibApps::getFor($this->type);
+        $tableTrueWidth = !($app['hidden'] ?? false);
+        if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
+        return view('dashboards.pages.entity-view-all', [
+            'topTitle' => CurrentRoute::getTitleOf($this->type),
+            'perPage' => $perPage,
+            'valueAdvanceFilters' => $advanceFilters,
+            'refreshPage' => $refreshPage,
+            'type' => $type,
+            'columns' => $columns,
+            'dataSource' => $dataSource,
+            'currentFilter' => $currentFilter,
+            // 'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
+            'tableTrueWidth' => $tableTrueWidth,
+            'frameworkTook' => $this->frameworkTook,
+            'trashed' => true,
         ]);
     }
 }
