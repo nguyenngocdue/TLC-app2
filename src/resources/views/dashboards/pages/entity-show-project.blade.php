@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('topTitle', 'Project')
+@section('topTitle', 'Projects')
 @section('title', "Overview of ".$project->name )
 
 @section('content')
