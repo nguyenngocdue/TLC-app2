@@ -1,4 +1,4 @@
-<x-renderer.button title="Screen Settings" click="toggleSettingMenu" keydown="closeSettingMenu" accesskey="s">
+<x-renderer.button type="secondary" outline=true title="Screen Settings" click="toggleSettingMenu" keydown="closeSettingMenu" accesskey="s">
     <i class="fa-duotone fa-gear"></i>
 </x-renderer.button>
   <template x-if="isSettingMenuOpen">

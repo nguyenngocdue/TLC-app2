@@ -13,12 +13,13 @@
     $abt = "<x-form.action-button-group type='$type' />"; 
     $route = route('updateUserSettings');
     $routeRestore = $trashed ? route($type.'.index') : route($type.'.trashed');
-    $nameButtonHref = $trashed ?"View All" : "Recycle Bin";
-    $iconButtonHref = $trashed ?"<i class='fa-solid fa-table-cells'></i>" : "<i class='fa-solid fa-trash'></i>";
+    $nameButtonHref = $trashed ? "View All" : "Recycle Bin";
+    $iconButtonHref = $trashed ? "<i class='fa-solid fa-table-cells'></i>" : "<i class='fa-solid fa-trash'></i>";
+    $btnType = $trashed ?  "secondary" : "danger";
     $p = "<x-form.per-page type='$type' route='$route' perPage='$perPage' />";
     $topL = "<div class='flex'>
                 <form class='mr-1'>
-                    <x-renderer.button type='secondary' href='$routeRestore'>$iconButtonHref $nameButtonHref</x-renderer.button>
+                    <x-renderer.button outline=true type='$btnType' href='$routeRestore'>$iconButtonHref $nameButtonHref</x-renderer.button>
                 </form>
                 <x-form.refresh type='$type' route='$route' valueRefresh='$refreshPage'/>
             </div>";
