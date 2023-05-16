@@ -57,7 +57,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "category", "date_of_birth", "first_date", "last_date", "title", "position_prefix", "position_1",
         "position_2", "position_3", "position_rendered", "discipline", "department", "show_on_beta",
         "resigned", "viewport_uids", "leaf_uids", 'email_verified_at', "email", "password",
-        "settings", "provider", "user_id_passport", "user_pin",
+        "settings", "provider", "user_id_passport", "user_pin", "company",
     ];
     /**
      * The attributes that should be hidden for serialization.
