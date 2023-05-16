@@ -102,7 +102,7 @@ class ViewAllInvokerController extends Controller
             );
         } catch (\Throwable $th) {
             return ResponseObject::responseFail(
-                "Duplicate document fail,please check setting duplicatable!",
+                $th->getPrevious()->getMessage(),
             );
         }
 
