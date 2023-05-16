@@ -38,7 +38,7 @@ trait SoftDeletesWithDeletedBy
         $query = $this->setKeysForSaveQuery($this->newModelQuery());
 
         $time = $this->freshTimestamp();
-        $id = Auth::id();
+        $id = $this->deleteById();
 
         $columns = [$this->getDeletedAtColumn() => $this->fromDateTime($time)];
         $columns = [$this->getDeletedByColumn() => $id];
