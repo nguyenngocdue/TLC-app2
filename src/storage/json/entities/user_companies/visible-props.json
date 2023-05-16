@@ -27,7 +27,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "active": "true"
+        "active": ""
     },
     "_created_at": {
         "name": "_created_at",
