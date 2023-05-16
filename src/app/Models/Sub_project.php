@@ -17,6 +17,16 @@ class Sub_project extends ModelExtended
         "getOwner" => ["belongsTo", User::class, "owner_id"],
     ];
 
+    public $oracyParams = [
+        "getProjectMembers()" => ['getCheckedByField', User::class],
+    ];
+
+    public function getProjectMembers()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
     public function prodOrders()
     {
         $p = $this->eloquentParams[__FUNCTION__];

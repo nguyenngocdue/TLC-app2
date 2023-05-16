@@ -18,7 +18,7 @@ class ProjectOverview extends Component
      * @return void
      */
     public function __construct(
-        private $table = 'projects',
+        private $table,
         private $id = 1,
         private $function = 'getProjectMembers',
     ) {
@@ -87,9 +87,11 @@ class ProjectOverview extends Component
 
     function makeDataSource($appKey, $modelPath, $closedArray)
     {
+        $id_column = ($this->table == 'projects') ? "project_id" : "sub_project_id";
         $items = $modelPath::query();
-        $items = $items->where('project_id', $this->id);
+        $items = $items->where($id_column, $this->id);
         $items = $items->whereNotIn('status', $closedArray);
+        // dump($items->toSql());
         $items = $items->get();
         $size = count($items);
         $dataSource = $this->groupByDueDate($items);
