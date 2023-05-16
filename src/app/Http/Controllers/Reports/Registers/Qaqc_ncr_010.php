@@ -68,6 +68,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND ncr.sub_project_id = '{{sub_project_id}}'";
         $sql .= "\n AND mir.id = ncr.parent_id
                                             AND ncr.sub_project_id = sp.id
+                                            AND ncr.sub_project_id = mir.sub_project_id
                                             AND ncr.parent_type = 'App\\\Models\\\Qaqc_mir'
                                             AND DATE_FORMAT(ncr.created_at, '%Y-%m') = DATE_FORMAT(mir.created_at, '%Y-%m')
                                         GROUP BY ncr.created_at, ncr.closed_at, ncr.status, ncr.id,ids_mir_has_ncr, ids_mir
@@ -87,7 +88,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
 
             ],
             [
-                "title" => "Year-Month",
+                "title" => "Month",
                 "dataIndex" => "year_month_open_mir",
                 "align" => "center",
                 'width' => 100
@@ -115,7 +116,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
 
             ],
             [
-                "title" => "MIR - NCRs (Closed Ratio,%)",
+                "title" => "MIR - NCRs (Closed Ratio) (%)",
                 "dataIndex" => "closed_ratio_ncr",
                 "align" => "center",
                 'width' => 100
@@ -129,30 +130,36 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
 
             ],
             [
-                "title" => "MIR - NCRs (Open Ratio, %)",
+                "title" => "MIR - NCRs (Open Ratio) (%)",
                 "dataIndex" => "open_ratio_ncr",
                 "align" => "center",
                 'width' => 100
 
             ],
-            [
-                "dataIndex" => "ids_open_ncr",
-                "align" => "center",
-                'width' => 200
+            // [
+            //     "dataIndex" => "mir_ids",
+            //     "align" => "center",
+            //     'width' => 100
 
-            ],
-            [
-                "dataIndex" => "all_year_month_ncr",
-                "align" => "center",
-                'width' => 300
+            // ],
+            // [
+            //     "dataIndex" => "ids_open_ncr",
+            //     "align" => "center",
+            //     'width' => 200
 
-            ],
-            [
-                "dataIndex" => "ncr_status",
-                "align" => "center",
-                'width' => 300
+            // ],
+            // [
+            //     "dataIndex" => "all_year_month_ncr",
+            //     "align" => "center",
+            //     'width' => 300
 
-            ],
+            // ],
+            // [
+            //     "dataIndex" => "ncr_status",
+            //     "align" => "center",
+            //     'width' => 300
+
+            // ],
             [
                 "title" => "MIR - NCRs (Open of previous months)",
                 "dataIndex" => "previous_months_open_ncr",
@@ -181,6 +188,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
             [
                 'title' => 'Sub Project',
                 'dataIndex' => 'sub_project_id',
+                'allowClear' => false,
             ]
         ];
     }
@@ -289,8 +297,8 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
         $str2 = "<table class='table-auto whitespace-no-wrap w-full text-sm'>
                     <thead class='sticky z-0 top-0 text-center bg-gray-50'>
                     <tr>
-                        <th>Year-Month</th>
-                        <th>NCRs Quantity</th>
+                        <th>Month</th>
+                        <th>NCRs QTT</th>
                     </tr>
                     </thead>
                     <tbody class='divide-y bg-white dark:divide-gray-700 dark:bg-gray-800'>
