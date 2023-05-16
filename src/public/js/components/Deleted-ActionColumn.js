@@ -14,7 +14,7 @@ const actionDuplicated = (obj) => {
                         setTimeout(location.reload.bind(location), 500)
                     } else {
                         Swal.fire(
-                            actionFailObject(response.message, 'Dulicate')
+                            actionFailObject(response.message, 'Duplicated')
                         )
                         setTimeout(location.reload.bind(location), 500)
                     }
