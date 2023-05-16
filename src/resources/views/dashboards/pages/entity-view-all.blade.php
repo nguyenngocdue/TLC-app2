@@ -12,18 +12,17 @@
     @php 
     $abt = "<x-form.action-button-group type='$type' />"; 
     $route = route('updateUserSettings');
-    $routeRestore = route($type.'.trashed');
+    $routeRestore = $trashed ? route($type.'.index') : route($type.'.trashed');
+    $nameButtonHref = $trashed ?"View All" : "Recycle Bin";
+    $iconButtonHref = $trashed ?"<i class='fa-solid fa-table-cells'></i>" : "<i class='fa-solid fa-trash'></i>";
     $p = "<x-form.per-page type='$type' route='$route' perPage='$perPage' />";
-    $topL = "<div class='flex'>" . ($trashed ? "" : "<form class='mr-1'>
-                    <x-renderer.button type='success' href='$routeRestore'><i class='fa-light fa-trash-can-arrow-up'></i> Restore</x-renderer.button>
-                </form>"  )."
+    $topL = "<div class='flex'>
+                <form class='mr-1'>
+                    <x-renderer.button type='secondary' href='$routeRestore'>$iconButtonHref $nameButtonHref</x-renderer.button>
+                </form>
                 <x-form.refresh type='$type' route='$route' valueRefresh='$refreshPage'/>
             </div>";
-    if($trashed){
-        $am = "<x-form.action-multiple type='$type' restore='true'/>";
-    }else{
-        $am = "<x-form.action-multiple type='$type'/>";
-    }
+    $am = $trashed ? "<x-form.action-multiple type='$type' restore='true'/>" : "<x-form.action-multiple type='$type'/>";
     @endphp
     <x-renderer.table showNo="true" :columns="$columns" :dataSource="$dataSource" 
         showPaginationTop="true"
@@ -34,7 +33,6 @@
         bottomRightControl="{!! $p !!}"
         tableTrueWidth={{$tableTrueWidth}}
         />
-        
         <x-elapse title="Table overhead (without columns): "/>
         <x-elapse total=1/>
 </div>

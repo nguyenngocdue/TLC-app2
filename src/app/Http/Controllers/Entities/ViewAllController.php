@@ -155,40 +155,36 @@ class ViewAllController extends Controller
             'column_name' => 'id',
             'control' => 'qr_code',
         ];
-        $trashInfoColumn = $trash ? [
-            [
-                'label' => "Deleted By",
-                'column_name' => 'deleted_by',
-                'control' => 'avatar',
-            ],
-            [
-                'label' => "Deleted At",
-                'column_name' => 'deleted_at',
-                'control' => 'picker_datetime',
-            ]
-        ] : [];
-        array_splice($props, 1, 0, [$qrCodeColumn, ...$trashInfoColumn]);
+        array_splice($props, 1, 0, [$qrCodeColumn]);
         if (App::isTesting() || App::isLocal() || CurrentUser::isAdmin()) {
-            if ($trash) {
-                $actionColumn = [
-                    'label' => "Action",
-                    'column_name' => 'id',
-                    'control' => 'restore_column',
-                ];
-            } else {
-                $actionColumn = [
-                    'label' => "Action",
-                    'column_name' => 'id',
-                    'control' => 'action_column',
-                ];
-            }
+            $trashInfoColumn = $trash ? [
+                [
+                    'label' => "Deleted By",
+                    'column_name' => 'deleted_by',
+                    'control' => 'avatar',
+                ],
+                [
+                    'label' => "Deleted At",
+                    'column_name' => 'deleted_at',
+                    'control' => 'picker_datetime',
+                ]
+            ] : [];
+            $actionColumn = $trash ? [
+                'label' => "Action",
+                'column_name' => 'id',
+                'control' => 'restore_column',
+            ] : [
+                'label' => "Action",
+                'column_name' => 'id',
+                'control' => 'action_column',
+            ];
 
             $checkboxColumn = [
                 'label' => "",
                 'column_name' => 'id',
                 'control' => 'checkbox_column',
             ];
-            array_splice($props, 0, 0, [$checkboxColumn, $actionColumn]);
+            array_splice($props, 0, 0, [$checkboxColumn, $actionColumn, ...$trashInfoColumn]);
         }
         $result = array_values(array_map(fn ($prop) => $this->createObject($prop, $type), $props));
         return $result;
