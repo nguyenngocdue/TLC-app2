@@ -54,6 +54,14 @@ function data() {
             this.isProjectMenuOpen = false
         },
         ///////////////////////////////////
+        isMenuAppsOpen: false,
+        toggleMenuApps() {
+            this.isMenuAppsOpen = !this.isMenuAppsOpen
+        },
+        closeMenuApps() {
+            this.isMenuAppsOpen = false
+        },
+        ///////////////////////////////////
         isBroadcastNotificationOpen: false,
         toggleBroadcastNotification() {
             this.isBroadcastNotificationOpen = !this.isBroadcastNotificationOpen
@@ -97,7 +105,7 @@ function data() {
         },
         closeModal(type) {
             this.isModalOpening[type] = false
-            delete (this.modalParams[type])
+            delete this.modalParams[type]
         },
         ///////////////////////////
         isIntermediateOpen: {},

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Workflow\LibApps;
 use App\Models\User;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
@@ -14,14 +15,15 @@ class BookmarkController extends Controller
         $entity = $request->input('entity');
         if ($entity) {
             $user = User::find(Auth::id());
+            $dataEntity = LibApps::getAllShowBookmark()[$entity];
             $settings = $user->settings;
             if (!isset($settings['bookmark_search'])) {
                 $settings['bookmark_search'] = [$entity];
                 $user->settings = $settings;
                 $user->update();
                 return ResponseObject::responseSuccess(
-                    null,
-                    [],
+                    'add',
+                    [$dataEntity],
                     'Item is added to bookmark successfully!'
                 );
             }
@@ -32,14 +34,14 @@ class BookmarkController extends Controller
             $user->update();
             if ($key === false) {
                 return ResponseObject::responseSuccess(
-                    null,
-                    [],
+                    'add',
+                    [$dataEntity],
                     'Item is added to bookmark successfully!'
                 );
             }
             return ResponseObject::responseSuccess(
-                null,
-                [],
+                'remove',
+                [$dataEntity],
                 'Item is removed from bookmark successfully!'
             );
         }

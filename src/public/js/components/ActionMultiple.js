@@ -35,6 +35,47 @@ const actionNotFoundObject = (action) => ({
     icon: 'warning',
 })
 
+const ajaxSendRequest = (type = 'get', url, strIds, func = 'Duplicated') => {
+    $.ajax({
+        type: type,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        },
+        url: url,
+        data: 'ids=' + strIds,
+        success: function (response) {
+            if (response.success) {
+                if (response.hits.length > 0) {
+                    var duplicateSuccess =
+                        response.hits.length > 0 ? response.hits : 'empty'
+                    var message = `Document ID(s): ${duplicateSuccess}`
+                    Swal.fire(actionSuccessObject(message, func)).then(() =>
+                        setTimeout(location.reload.bind(location), 500)
+                    )
+                }
+                if (response.meta[0].length > 0) {
+                    var duplicateFail =
+                        response.meta[0].length > 0 ? response.meta[0] : 'empty'
+                    var message = `Document ID: ${duplicateFail}. Please check setting and permission!`
+                    Swal.fire(actionFailObject(message, func)).then(() =>
+                        setTimeout(location.reload.bind(location), 500)
+                    )
+                }
+            } else {
+                Swal.fire(actionFailObject(response.message, func)).then(() =>
+                    setTimeout(location.reload.bind(location), 500)
+                )
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR)
+            Swal.fire(actionFailObject(jqXHR.responseJSON.message, func)).then(
+                () => setTimeout(location.reload.bind(location), 500)
+            )
+        },
+    })
+}
+
 const actionDuplicateMultiple = (type, url) => {
     var checkedValues = []
     queryStr = "input:checkbox[name='" + type + "[]']"
@@ -49,76 +90,6 @@ const actionDuplicateMultiple = (type, url) => {
         Swal.fire(actionConfirmObject(checkedValues, 'duplicate')).then(
             (result) => {
                 if (result.isConfirmed) {
-                    $.ajax({
-                        type: 'post',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            ),
-                        },
-                        url: url,
-                        data: 'ids=' + strIds,
-                        success: function (response) {
-                            if (response.success) {
-                                if (response.hits.length > 0) {
-                                    var duplicateSuccess =
-                                        response.hits.length > 0
-                                            ? response.hits
-                                            : 'empty'
-                                    var message = `Document ID(s): ${duplicateSuccess}`
-                                    Swal.fire(
-                                        actionSuccessObject(
-                                            message,
-                                            'Duplicated'
-                                        )
-                                    ).then(() =>
-                                        setTimeout(
-                                            location.reload.bind(location),
-                                            500
-                                        )
-                                    )
-                                }
-                                if (response.meta[0].length > 0) {
-                                    var duplicateFail =
-                                        response.meta[0].length > 0
-                                            ? response.meta[0]
-                                            : 'empty'
-                                    var message = `Document ID: ${duplicateFail}. Please check setting and permission!`
-                                    Swal.fire(
-                                        actionFailObject(message, 'Duplicate')
-                                    ).then(() =>
-                                        setTimeout(
-                                            location.reload.bind(location),
-                                            500
-                                        )
-                                    )
-                                }
-                            } else {
-                                Swal.fire(
-                                    actionFailObject(
-                                        response.message,
-                                        'Duplicate'
-                                    )
-                                ).then(() =>
-                                    setTimeout(
-                                        location.reload.bind(location),
-                                        500
-                                    )
-                                )
-                            }
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            console.log(jqXHR)
-                            Swal.fire(
-                                actionFailObject(
-                                    'Permission denied, please check your permissions!',
-                                    'Duplicate'
-                                )
-                            ).then(() =>
-                                setTimeout(location.reload.bind(location), 500)
-                            )
-                        },
-                    })
                 }
             }
         )

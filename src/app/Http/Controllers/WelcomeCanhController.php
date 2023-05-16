@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Controllers\Workflow\LibApps;
+use App\Models\Zunit_test_03;
 
 class WelcomeCanhController extends Controller
 {
@@ -10,6 +11,7 @@ class WelcomeCanhController extends Controller
     {
         // dump(ini_get("curl.cainfo"));
         // dump(Storage::disk('s3')->put('dinhcanh.txt', 'NgoDinhCanh', 'public'));
+        dd(Zunit_test_03::withTrashed()->restore());
         return view(
             'welcome',
             []

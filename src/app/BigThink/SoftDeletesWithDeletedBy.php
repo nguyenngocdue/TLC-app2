@@ -11,45 +11,95 @@ trait SoftDeletesWithDeletedBy
 {
     use SoftDeletes;
 
-    protected static $disableCustomSoftDelete = false;
-    public static function bootCustomSoftDeletes()
+
+
+    /**
+     * Boot the soft deleting trait for a model.
+     *
+     * @return void
+     */
+    public static function bootSoftDeletes()
     {
-        static::addGlobalScope('custom_soft_delete', function (Builder $builder) {
-            if (static::isCustomSoftDeleteEnabled()) {
-                $builder->withTrashed();
-            }
-        });
+        static::addGlobalScope(new SoftDeletingScopeCustom);
     }
 
-    public function delete()
+    public function deleteById()
     {
-        $this->{$this->getDeletedAtColumn()} = $this->freshTimestamp();
-        $this->{$this->getDeletedByColumn()} = Auth::id();
-        $this->save();
+        return Auth::id();
     }
 
-    public static function isCustomSoftDeleteEnabled()
+    /**
+     * Perform the actual delete query on this model instance.
+     *
+     * @return void
+     */
+    protected function runSoftDelete()
     {
-        return static::isCustomSoftDeleteEnabled() || !static::isCustomSoftDeleteDisabled();
-    }
+        $query = $this->setKeysForSaveQuery($this->newModelQuery());
 
-    public static function isCustomSoftDeleteDisabled()
-    {
-        return isset(static::$disableCustomSoftDelete) && static::$disableCustomSoftDelete;
-    }
+        $time = $this->freshTimestamp();
+        $id = Auth::id();
 
-    public static function disableCustomSoftDelete()
-    {
-        static::$disableCustomSoftDelete = true;
-    }
+        $columns = [$this->getDeletedAtColumn() => $this->fromDateTime($time)];
+        $columns = [$this->getDeletedByColumn() => $id];
 
-    public static function enableCustomSoftDelete()
+        $this->{$this->getDeletedAtColumn()} = $time;
+        $this->{$this->getDeletedByColumn()} = $id;
+
+        if ($this->usesTimestamps() && !is_null($this->getUpdatedAtColumn())) {
+            $this->{$this->getUpdatedAtColumn()} = $time;
+            $this->{$this->getDeletedByColumn()} = $id;
+
+            $columns[$this->getUpdatedAtColumn()] = $this->fromDateTime($time);
+            $columns[$this->getDeletedByColumn()] = $id;
+        }
+
+        $query->update($columns);
+
+        $this->syncOriginalAttributes(array_keys($columns));
+
+        $this->fireModelEvent('trashed', false);
+    }
+    /**
+     * Restore a soft-deleted model instance.
+     *
+     * @return bool
+     */
+    public function restore()
     {
-        static::$disableCustomSoftDelete = false;
+        // If the restoring event does not return false, we will proceed with this
+        // restore operation. Otherwise, we bail out so the developer will stop
+        // the restore totally. We will clear the deleted timestamp and save.
+        if ($this->fireModelEvent('restoring') === false) {
+            return false;
+        }
+
+        $this->{$this->getDeletedAtColumn()} = null;
+        $this->{$this->getDeletedByColumn()} = null;
+
+        // Once we have saved the model, we will fire the "restored" event so this
+        // developer will do anything they need to after a restore operation is
+        // totally finished. Then we will return the result of the save call.
+        $this->exists = true;
+
+        $result = $this->save();
+
+        $this->fireModelEvent('restored', false);
+
+        return $result;
     }
 
     public function getDeletedByColumn()
     {
         return defined('static::DELETED_BY') ? static::DELETED_BY : 'deleted_by';
+    }
+    /**
+     * Get the fully qualified "deleted at" column.
+     *
+     * @return string
+     */
+    public function getQualifiedDeletedByColumn()
+    {
+        return $this->qualifyColumn($this->getDeletedByColumn());
     }
 }

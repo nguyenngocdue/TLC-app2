@@ -13,13 +13,18 @@ class LibApps extends AbstractLib
     private static $singleton = null;
     public static function getAll()
     {
+        $permissions = CurrentUser::getPermissions();
         if (!isset(static::$singleton)) {
-            $result = parent::getAll();
-            foreach ($result as &$app) {
-                $app['package_rendered'] = isset($app['package']) ? Str::appTitle($app['package']) : "unknown package";
-                $app['sub_package_rendered'] = isset($app['sub_package']) ? Str::appTitle($app['sub_package']) : "unknown sub_package";
-                $route = Str::plural($app['name']) . ".index";
-                $app['href'] = Route::has($route) ? route($route) : "#RouteNotFound:$route";
+            $lipApps = parent::getAll();
+            $result = [];
+            foreach ($lipApps as $key => &$app) {
+                if (CurrentUser::isAdmin() || in_array('read-' . Str::plural($key), $permissions)) {
+                    $app['package_rendered'] = isset($app['package']) ? Str::appTitle($app['package']) : "unknown package";
+                    $app['sub_package_rendered'] = isset($app['sub_package']) ? Str::appTitle($app['sub_package']) : "unknown sub_package";
+                    $route = Str::plural($app['name']) . ".index";
+                    $app['href'] = Route::has($route) ? route($route) : "#RouteNotFound:$route";
+                    $result[$key] = $app;
+                }
             }
             static::$singleton = $result;
         }
@@ -38,6 +43,13 @@ class LibApps extends AbstractLib
             }
         });
         return $allApps;
+    }
+    public static function getAllNavbarBookmark()
+    {
+        return array_filter(static::getAllShowBookmark(), function ($item) {
+            $isHiddenNavbar = $item['hidden_navbar'] ?? false;
+            return !$isHiddenNavbar;
+        });
     }
 
     public static function getFor($entityType)

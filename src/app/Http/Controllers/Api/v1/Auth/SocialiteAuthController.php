@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api\v1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Utils\TraitCreateUserSocialite;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
 
 
 class SocialiteAuthController extends Controller
 {
+    use TraitCreateUserSocialite;
 
     public function redirectToGoogle()
     {
@@ -29,17 +31,6 @@ class SocialiteAuthController extends Controller
 
     protected function _registerAndLoginUser($data)
     {
-        $user = User::updateOrCreate(
-            [
-                'first_name' => (string)$data->user['family_name'],
-                'last_name' => (string)$data->user['given_name'],
-                'provider' => (string)('google'),
-                'name' => (string)$data->name,
-                'full_name' => (string)$data->name,
-                'email' => (string)$data->email,
-                'settings' => []
-            ]
-        );
-        return $user;
+        return $this->registerUser($data);
     }
 }

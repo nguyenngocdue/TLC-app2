@@ -78,7 +78,7 @@ Route::group([
 Route::group([
     'prefix' => 'v1/login',
 ], function () {
-    Route::get('google', [App\Http\Controllers\Api\v1\Auth\SocialiteAuthController::class, 'redirectToGoogle']);
+    Route::get('google', [App\Http\Controllers\Api\v1\Auth\SocialiteAuthController::class, 'redirectToGoogle'])->name('google_auth');
     Route::get('google/callback', [App\Http\Controllers\Api\v1\Auth\SocialiteAuthController::class, 'handleGoogleCallback']);
 });
 Route::group([

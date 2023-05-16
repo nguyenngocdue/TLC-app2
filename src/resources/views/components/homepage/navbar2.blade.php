@@ -10,12 +10,17 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
         <x-homepage.logo />
         @auth
         <div class="flex flex-1 lg:mr-32 ml-5">
+            <div class="mr-5">
+                <x-homepage.menu-apps></x-homepage.menu-apps>
+            </div>
             <b class="text-xl font-semibold">
                 <a href="{{$routeSrc}}" class="hover:underline">
                     @yield('topTitle', 'Untitled')
                 </a>
             </b>
+            
         </div>
+        
         {{-- <div class="flex justify-center flex-1 lg:mr-32">            
             <x-homepage.search-input></x-homepage.search-input>
         </div> --}}
