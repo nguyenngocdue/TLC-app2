@@ -152,7 +152,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
     protected function filterSheetFromProdRouting($modeParams)
     {
         $checksheet_type_id = $modeParams['checksheet_type_id'] ?? $this->checksheet_type_id;
-        $sheets = Qaqc_insp_tmpl::find($checksheet_type_id)->getSheets->pluck('description', 'id')->ToArray();
+        $sheets = Qaqc_insp_tmpl::find($checksheet_type_id)->getSheets->pluck('name', 'id')->ToArray();
         return $sheets;
     }
 
@@ -178,14 +178,6 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 $delProdOrder[] = $poId;
             }
         }
-        // dump($delProdOrder, $modeParams, $chklsts, $chklstType, $items);
-        // $prodOrders = array_slice(array_unique(array_column($items, 'prod_order_id')), 0, 10);
-        // $prodOrders = $delProdOrder;
-        // $filteredData = array_filter($items, function ($item) use ($prodOrders) {
-        //     return !in_array($item->prod_order_id, $prodOrders);
-        // });
-        // $items = $filteredData;
-        // dd($items);
 
         $sheetsDesc = $this->transformSheetsDesc($modeParams);
         $transformData = array_map(function ($item) {
@@ -218,7 +210,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $items = $dataSource->toArray();
         $cuid = CurrentUser::id();
         $inspTmplId = $modeParams['checksheet_type_id'];
-        $tmplDescription = Qaqc_insp_tmpl::where('id', $inspTmplId)->pluck('description')->first();
+        $tmplName = Qaqc_insp_tmpl::where('id', $inspTmplId)->pluck('name')->first();
 
         foreach ($items as $key => $value) {
             $idx = array_search("chklst_shts_status", array_keys($value)); //  specify start point to render items
@@ -249,7 +241,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 
                 $items[$key]['check_list'] = (object)[
                     'value' => '<i class="fa-regular fa-circle-plus text-green-800"></i>',
-                    'cell_href' => 'javascript:create(' . $inspTmplId . ',' . $prodOrder . ',' . $cuid . ',"' . $tmplDescription . '");',
+                    'cell_href' => 'javascript:create(' . $inspTmplId . ',' . $prodOrder . ',' . $cuid . ',"' . $tmplName . '");',
                 ];
             }
         }
