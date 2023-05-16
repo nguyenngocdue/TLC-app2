@@ -51,6 +51,7 @@ abstract class AbstractManageLibController extends Controller
 
     public function index()
     {
+        if (app()->isProduction()) abort(403, "All Manage Lib Screens are not available on production.");
         return view("dashboards.pages.manage-library", [
             'columns' => $this->getColumns(),
             'dataSource' => $this->getDataSource(),
