@@ -535,7 +535,7 @@
         "name": "_assignee_1",
         "column_name": "assignee_1",
         "column_type": "bigint",
-        "label": "Assignee To",
+        "label": "Assignee",
         "control": "dropdown",
         "align": "",
         "col_span": "6",

@@ -25,7 +25,7 @@ trait TraitEntityCRUDDestroy
             );
         } catch (\Throwable $th) {
             return ResponseObject::responseFail(
-                "Delete document fail!",
+                $th->getPrevious()->getMessage(),
             );
         }
     }
