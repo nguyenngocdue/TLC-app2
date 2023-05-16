@@ -13,7 +13,7 @@ class Esg_sheet extends ModelExtended
         "getLines" => ["hasMany", Esg_line::class, "esg_sheet_id"],
 
         "getOwner" => ['belongsTo', User::class, 'owner_id'],
-        "getDeleteBy" => ['belongsTo', User::class, 'deleted_by'],
+        "getDeletedBy" => ['belongsTo', User::class, 'deleted_by'],
     ];
 
     public function getLines()

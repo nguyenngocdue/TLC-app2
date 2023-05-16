@@ -27,8 +27,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getDeleteBy": {
-        "name": "_getDeleteBy",
+    "_getDeletedBy": {
+        "name": "_getDeletedBy",
         "relationship": "belongsTo",
         "control_name": "deleted_by",
         "renderer_view_all": "avatar_user",

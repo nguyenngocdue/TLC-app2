@@ -12,7 +12,7 @@ class Esg_metric_type extends ModelExtended
     public $eloquentParams = [
         "getEsgMetricType1s" => ['hasMany', Esg_metric_type_1::class, 'esg_metric_type_id'],
         "getOwner" => ['belongsTo', User::class, 'owner_id'],
-        "getDeleteBy" => ['belongsTo', User::class, 'deleted_by'],
+        "getDeletedBy" => ['belongsTo', User::class, 'deleted_by'],
     ];
 
     public function getEsgMetricType1s()

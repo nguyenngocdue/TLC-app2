@@ -13,7 +13,7 @@ class User_company extends ModelExtended
         "getUsers" => ['hasMany', User::class, 'company'],
 
         "getOwner" => ['belongsTo', User::class, 'owner_id'],
-        "getDeleteBy" => ['belongsTo', User::class, 'deleted_by'],
+        "getDeletedBy" => ['belongsTo', User::class, 'deleted_by'],
     ];
 
     public function getUsers()

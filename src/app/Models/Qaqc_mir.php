@@ -36,6 +36,7 @@ class Qaqc_mir extends ModelExtended
         "attachment_mir_pdf_attached" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
         "getOwner" => ["belongsTo", User::class, "owner_id"],
+        "getDeletedBy" => ["belongsTo", User::class, "deleted_by"],
 
         "comment_asm_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_insp_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],

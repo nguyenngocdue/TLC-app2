@@ -29,8 +29,12 @@ class ModelExtended extends Model
     use TraitMorphManyByFieldName;
 
     use TraitModelExtended;
+    use SoftDeletesWithDeletedBy;
 
-    public $eloquentParams = [];
+    public $eloquentParams = [
+        // "getOwner" => ["belongsTo", User::class, "owner_id"],
+        // "getDeletedBy" => ["belongsTo", User::class, "deleted_by"],
+    ];
     public $oracyParams = [];
 
     public function toSearchableArray()
@@ -49,7 +53,7 @@ class ModelExtended extends Model
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    function getDeleteBy()
+    function getDeletedBy()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
