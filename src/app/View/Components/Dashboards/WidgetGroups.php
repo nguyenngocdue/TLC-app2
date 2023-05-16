@@ -15,8 +15,10 @@ class WidgetGroups extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $table = null,
+        private $projectId = null,
+    ) {
         //
     }
 
@@ -57,6 +59,8 @@ class WidgetGroups extends Component
 
         return view('components.dashboards.widget-groups', [
             'allWidgetGroups' => $allWidgetGroups,
+            'table' => $this->table,
+            'projectId' => $this->projectId,
         ]);
     }
 }

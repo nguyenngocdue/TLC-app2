@@ -11,8 +11,13 @@
     @endif
     <x-renderer.project.project-overview table="{{$table}}" id="{{$projectId}}"></x-renderer.project.project-overview>
     <x-dashboards.my-view-groups table="{{$table}}" projectId="{{$projectId}}" />
-    {{-- <x-dashboards.widget-groups projectId="5"/> --}}
-    {{-- <x-dashboards.widget-groups subProjectId="21"/> --}}
-    {{-- <x-dashboards.widget-groups subProjectId="82"/> --}}
+    {{-- <div class="grid grid-cols-12 gap-3">
+        <x-renderer.project.project-overview title="Production Orders by Routings" table="{{$table}}" id="{{$projectId}}"></x-renderer.project.project-overview>
+        <x-renderer.project.project-overview title="NCRs by Routings" table="{{$table}}" id="{{$projectId}}"></x-renderer.project.project-overview>
+        <x-renderer.project.project-overview title="NCRs by Disciplines" table="{{$table}}" id="{{$projectId}}"></x-renderer.project.project-overview>
+        <x-renderer.project.project-overview title="MIRs by Disciplines" table="{{$table}}" id="{{$projectId}}"></x-renderer.project.project-overview>
+        <x-renderer.project.project-overview title="WIRs by Disciplines" table="{{$table}}" id="{{$projectId}}"></x-renderer.project.project-overview>
+    </div> --}}
+    <x-dashboards.widget-groups table="{{$table}}" projectId="{{$projectId}}"/>
 </div>
 @endsection

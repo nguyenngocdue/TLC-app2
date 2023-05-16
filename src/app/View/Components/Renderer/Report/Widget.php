@@ -14,6 +14,8 @@ class Widget extends Component
     public function __construct(
         private $title = "Untitled",
         private $figure = "???",
+        private $table = null,
+        private $projectId = null,
     ) {
         //
     }
@@ -25,6 +27,10 @@ class Widget extends Component
      */
     public function render()
     {
+        if (app()->isLocal()) {
+            dump($this->table);
+            dump($this->projectId);
+        }
         return view(
             'components.renderer.report.widget',
             [
