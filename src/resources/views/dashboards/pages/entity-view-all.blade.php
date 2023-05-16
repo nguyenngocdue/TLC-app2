@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
-@section('title', "View All" )
+@section('title', $title )
 
 @section('content')
 <div class="px-4 mt-2">
@@ -12,9 +12,17 @@
     @php 
     $abt = "<x-form.action-button-group type='$type' />"; 
     $route = route('updateUserSettings');
+    $routeRestore = $trashed ? route($type.'.index') : route($type.'.trashed');
+    $nameButtonHref = $trashed ?"View All" : "Recycle Bin";
+    $iconButtonHref = $trashed ?"<i class='fa-solid fa-table-cells'></i>" : "<i class='fa-solid fa-trash'></i>";
     $p = "<x-form.per-page type='$type' route='$route' perPage='$perPage' />";
-    $topL = "<x-form.refresh type='$type' route='$route' valueRefresh='$refreshPage'/>";
-    $am = "<x-form.action-multiple type='$type'/>";
+    $topL = "<div class='flex'>
+                <form class='mr-1'>
+                    <x-renderer.button type='secondary' href='$routeRestore'>$iconButtonHref $nameButtonHref</x-renderer.button>
+                </form>
+                <x-form.refresh type='$type' route='$route' valueRefresh='$refreshPage'/>
+            </div>";
+    $am = $trashed ? "<x-form.action-multiple type='$type' restore='true'/>" : "<x-form.action-multiple type='$type'/>";
     @endphp
     <x-renderer.table showNo="true" :columns="$columns" :dataSource="$dataSource" 
         showPaginationTop="true"
@@ -25,7 +33,6 @@
         bottomRightControl="{!! $p !!}"
         tableTrueWidth={{$tableTrueWidth}}
         />
-        
         <x-elapse title="Table overhead (without columns): "/>
         <x-elapse total=1/>
 </div>

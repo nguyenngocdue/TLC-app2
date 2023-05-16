@@ -35,9 +35,9 @@ trait TraitSupportPermissionGate
     {
         return auth()->user()->roleSets[0]->hasPermissionTo($permission);
     }
-    private function checkPermissionUsingGate($id, $action = 'edit')
+    private function checkPermissionUsingGate($id, $action = 'edit', $restore = false)
     {
-        $model = $this->data::findOrFail($id);
+        $model = $restore ? $this->data::withTrashed()->findOrFail($id) : $this->data::findOrFail($id);
         $isTree = $this->useTree($model);
         $permissions = $this->permissionMiddleware[$action];
         $permissions = is_array($permissions) ? $permissions : explode('|', $permissions);
@@ -63,7 +63,7 @@ trait TraitSupportPermissionGate
         }
         return false;
     }
-    private function checkPermissionUsingGateForDeleteMultiple($ids, $action = 'delete')
+    private function checkPermissionUsingGateForDeleteMultiple($ids, $action = 'delete', $restore = false)
     {
         $permissions = $this->permissionMiddleware[$action];
         $permissions = is_array($permissions) ? $permissions : explode('|', $permissions);
@@ -72,7 +72,7 @@ trait TraitSupportPermissionGate
             return $arrFail;
         }
         foreach ($ids as $id) {
-            $model = $this->data::findOrFail($id);
+            $model = $restore ? $this->data::withTrashed()->findOrFail($id) : $this->data::findOrFail($id);
             $isTree = $this->useTree($model);
             [$delete, $deleteOther] = $this->useTreeForPermissionTheLine($isTree, $permissions, $model);
             if (!($delete || $deleteOther)) $arrFail[] = $id;

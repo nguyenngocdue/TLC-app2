@@ -25,7 +25,7 @@ trait TraitEntityCRUDDestroy
             );
         } catch (\Throwable $th) {
             return ResponseObject::responseFail(
-                "Delete document fail!",
+                $th->getPrevious()->getMessage(),
             );
         }
     }
@@ -48,6 +48,43 @@ trait TraitEntityCRUDDestroy
         } catch (\Throwable $th) {
             return ResponseObject::responseFail(
                 "Delete document fail!",
+            );
+        }
+    }
+    public function restore($id)
+    {
+        $theLine = $this->checkPermissionUsingGate($id, 'delete', true);
+        try {
+            $theLine->restore();
+            return ResponseObject::responseSuccess(
+                null,
+                [],
+                "Restore document successfully!",
+            );
+        } catch (\Throwable $th) {
+            return ResponseObject::responseFail(
+                "Restore document fail!",
+            );
+        }
+    }
+    public function restoreMultiple(Request $request)
+    {
+        try {
+            $strIds = $request->ids;
+            $ids = explode(',', $strIds) ?? [];
+            $arrFail = $this->checkPermissionUsingGateForDeleteMultiple($ids, 'delete', true);
+            $arrRestore = array_diff($ids, $arrFail);
+            //$roleSet = CurrentUser::getRoleSet();
+            //dd(SuperWorkflows::getFor($this->type, $roleSet));
+            $this->data::withTrashed()->whereIn('id', $arrRestore)->restore();
+            return ResponseObject::responseSuccess(
+                $arrRestore,
+                [$arrFail],
+                "Restore document successfully!",
+            );
+        } catch (\Throwable $th) {
+            return ResponseObject::responseFail(
+                "Restore document fail!",
             );
         }
     }

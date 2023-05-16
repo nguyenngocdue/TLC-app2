@@ -3,9 +3,11 @@
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 <script>
     function check() {
+        const host = window.location.hostname
+        const url = 'https://' + host + '/api/v1/system/app_version'
         $.ajax({
             type: 'get',
-            url: 'api/v1/system/app_version',
+            url:  url,
                     success: function (response) {
                         if (response.success) {
                             const versionServer = response.hits
@@ -45,7 +47,7 @@
 <body >
     <div id="loading-animation" class="w-full h-screen justify-center items-center flex text-5xl" style="display: none">
         <i class="fa-duotone fa-spinner fa-spin text-green-500"></i>
-        <span class="text-lg ml-2 text-green-500">Update Version</span>
+        <span class="text-lg ml-2 text-green-500">Updating to new version</span>
     </div>
     <div id="content-app"  class="bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         {{-- <x-homepage.sidebar2 /> --}}

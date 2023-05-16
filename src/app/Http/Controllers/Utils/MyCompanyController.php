@@ -9,7 +9,7 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Http\Request;
 
-class MyCompany extends Controller
+class MyCompanyController extends Controller
 {
     public function getType()
     {

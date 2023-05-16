@@ -19,10 +19,9 @@ type Prod_order {
     prod_routing_id: Int
     created_at: DateTime
     updated_at: DateTime
-    subProject: Sub_project! @belongsTo
-    prodRouting: Prod_routing! @belongsTo
-    prodRuns: [Prod_run!]! @hasMany
-    qaqcInspChklsts: [Qaqc_insp_chklst!]! @hasMany
+    getSubProject: Sub_project! @belongsTo
+    getProdRouting: Prod_routing! @belongsTo
+    getQaqcInspChklsts: [Qaqc_insp_chklst!]! @hasMany
 }
 
 input CreateProdOrderInput {

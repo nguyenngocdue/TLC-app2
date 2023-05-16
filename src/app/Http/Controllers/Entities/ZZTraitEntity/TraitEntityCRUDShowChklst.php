@@ -15,7 +15,7 @@ trait TraitEntityCRUDShowChklst
         $entity = ($this->data)::findOrFail($id);
         $entityShts = $entity->getSheets;
         foreach ($entityShts as $value) {
-            $tableDataSource[] = $this->transformDataSource($value->getLines, $value->getShtSigs);
+            $tableDataSource[] = $this->transformDataSource($value->getLines->sortBy('order_no'), $value->getShtSigs);
         }
         return view('components.print.check-list5', [
             'tableColumns' => $this->getTableColumns(),

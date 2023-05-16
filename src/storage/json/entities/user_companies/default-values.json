@@ -65,7 +65,7 @@
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "",
+        "formula": "All_OwnerId",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",

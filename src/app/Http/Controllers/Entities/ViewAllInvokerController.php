@@ -96,6 +96,7 @@ class ViewAllInvokerController extends Controller
             );
         }
     }
+
     public function duplicateMultiple(Request $request)
     {
         try {

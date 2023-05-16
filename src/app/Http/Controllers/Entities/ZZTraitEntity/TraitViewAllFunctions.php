@@ -67,7 +67,7 @@ trait TraitViewAllFunctions
         return $eagerLoadParams;
     }
 
-    private function getDataSource($advanceFilters = null)
+    private function getDataSource($advanceFilters = null, $trash = false)
     {
         $propsFilters = $this->advanceFilter();
         $advanceFilters = $this->distributeFilter($advanceFilters, $propsFilters);
@@ -78,13 +78,15 @@ trait TraitViewAllFunctions
         $eagerLoadParams = $this->getEagerLoadParams($eloquentParams);
 
         $relation = $instance->search($search);
-
         if (!CurrentUser::isAdmin()) {
             $isUseTree = $this->isUseTree($this->type);
             if ($isUseTree) {
                 $ids = $this->getListOwnerIds(auth()->user());
                 $result = $relation
-                    ->query(function ($q) use ($ids, $advanceFilters, $propsFilters, $eagerLoadParams) {
+                    ->query(function ($q) use ($ids, $advanceFilters, $propsFilters, $eagerLoadParams, $trash) {
+                        if ($trash) {
+                            $q->onlyTrashed();
+                        }
                         $q->whereIn('owner_id', $ids);
                         $this->queryAdvancedFilter($q, $advanceFilters, $propsFilters);
                         return $q
@@ -95,14 +97,15 @@ trait TraitViewAllFunctions
             }
         }
         $result = $relation
-            ->query(function ($q) use ($advanceFilters, $propsFilters, $eagerLoadParams) {
+            ->query(function ($q) use ($advanceFilters, $propsFilters, $eagerLoadParams, $trash) {
+                if ($trash) {
+                    $q->onlyTrashed();
+                }
                 $this->queryAdvancedFilter($q, $advanceFilters, $propsFilters);
-
                 return $q
                     ->with($eagerLoadParams)
                     ->orderBy('updated_at', 'desc');
             });
-        // dump($result);
         return $result;
     }
 }
