@@ -106,6 +106,13 @@ class ManageAppsController extends AbstractManageLibController
                 'title' => "Hidden For non-admin Users",
             ],
             [
+                'dataIndex' => "hidden_navbar",
+                "renderer"  => 'checkbox',
+                'align' => 'center',
+                'editable' => true,
+                'title' => "Hidden In Navbar Menu",
+            ],
+            [
                 'dataIndex' => "disallowed_direct_creation",
                 "renderer"  => 'checkbox',
                 'align' => 'center',

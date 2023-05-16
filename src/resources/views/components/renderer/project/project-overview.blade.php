@@ -1,5 +1,5 @@
 @php $modalId = "modal-over-due-documents"; @endphp
-<x-renderer.card title="Project Milestones" class="bg-white border" icon="fa-regular fa-bars-progress" >
+<x-renderer.card title="{{$title}}" class="bg-white border" icon="fa-regular fa-bars-progress" >
     <x-renderer.table showNo=1 :columns="$columns" :dataSource="$dataSource" />
     
     <x-modals.modal-over-due-documents modalId="{{$modalId}}"></x-modals.modal-over-due-documents>
@@ -15,6 +15,3 @@
         </x-renderer.button>
     @endforeach
 </x-renderer.card>
-
-<script>
-</script>

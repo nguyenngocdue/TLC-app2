@@ -1,14 +1,16 @@
 @extends('layouts.app')
 
-@section('topTitle', 'Projects')
+@section('topTitle', $appName)
 @section('title', "Overview of ".$project->name )
 
 @section('content')
 <div class="p-5">
     <x-elapse title="Bootstrap: "/>
-    <x-renderer.project.project-team table="projects" id="{{$projectId}}"></x-renderer.project.project-team>
-    <x-renderer.project.project-overview id="{{$projectId}}"></x-renderer.project.project-overview>
-    <x-dashboards.my-view-groups projectId="{{$projectId}}" />
+    @if($table == 'projects')
+    <x-renderer.project.project-team table="{{$table}}" id="{{$projectId}}"></x-renderer.project.project-team>
+    @endif
+    <x-renderer.project.project-overview table="{{$table}}" id="{{$projectId}}"></x-renderer.project.project-overview>
+    <x-dashboards.my-view-groups table="{{$table}}" projectId="{{$projectId}}" />
     {{-- <x-dashboards.widget-groups projectId="5"/> --}}
     {{-- <x-dashboards.widget-groups subProjectId="21"/> --}}
     {{-- <x-dashboards.widget-groups subProjectId="82"/> --}}
