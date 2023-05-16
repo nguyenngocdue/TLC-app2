@@ -10,6 +10,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-regular fa-paperclip\"><\/i>"
     },
     "comment": {
@@ -23,6 +24,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-duotone fa-comments\"><\/i>"
     },
     "control_type": {
@@ -36,6 +38,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "dashboard": {
@@ -48,6 +51,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-gauge-high\"><\/i>"
     },
     "department": {
@@ -61,6 +65,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-regular fa-sitemap\"><\/i>"
     },
     "erp_routing_link": {
@@ -73,6 +78,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-conveyor-belt-boxes\"><\/i>"
     },
     "esg_line": {
@@ -86,6 +92,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "esg_metric_type": {
@@ -99,6 +106,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "esg_metric_type_1": {
@@ -112,6 +120,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "esg_metric_type_2": {
@@ -125,6 +134,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "esg_sheet": {
@@ -150,6 +160,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "hr_overtime_request": {
@@ -177,6 +188,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null,
         "apply_approval_tree": "true"
     },
@@ -217,6 +229,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>"
     },
     "manageApps": {
@@ -230,6 +243,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
     },
     "manageStatuses": {
@@ -243,6 +257,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-regular fa-bars-progress\"><\/i>"
     },
     "manageWidgets": {
@@ -256,6 +271,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
     },
     "permissions": {
@@ -269,6 +285,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "pj_module": {
@@ -342,6 +359,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "priority": {
@@ -355,6 +373,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "prod_discipline": {
@@ -368,6 +387,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "prod_discipline_1": {
@@ -381,6 +401,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "prod_discipline_2": {
@@ -394,6 +415,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "prod_order": {
@@ -419,6 +441,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "prod_routing_detail": {
@@ -432,6 +455,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "prod_routing_link": {
@@ -445,6 +469,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "prod_run": {
@@ -458,6 +483,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "prod_sequence": {
@@ -471,6 +497,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "project": {
@@ -496,6 +523,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "qaqc_car": {
@@ -535,6 +563,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "qaqc_insp_chklst_sht": {
@@ -547,6 +576,7 @@
         "status": null,
         "edit_renderer": "checklist-sheet-renderer",
         "show_renderer": "checklist-sheet-renderer",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>"
     },
     "qaqc_insp_control_group": {
@@ -560,6 +590,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "qaqc_insp_control_value": {
@@ -573,6 +604,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "qaqc_insp_group": {
@@ -586,6 +618,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "qaqc_insp_tmpl": {
@@ -611,6 +644,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "qaqc_insp_tmpl_sht": {
@@ -623,6 +657,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-sheet-renderer",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>"
     },
     "qaqc_insp_value": {
@@ -636,6 +671,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "qaqc_mir": {
@@ -689,6 +725,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-sharp fa-solid fa-file-chart-pie\"><\/i>"
     },
     "role_sets": {
@@ -702,6 +739,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "roles": {
@@ -715,6 +753,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "setpermissions": {
@@ -728,6 +767,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "setroles": {
@@ -741,6 +781,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "setrolesets": {
@@ -754,6 +795,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "sub_project": {
@@ -779,6 +821,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "user": {
@@ -792,6 +835,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "user_category": {
@@ -805,6 +849,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "user_company": {
@@ -818,6 +863,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "user_discipline": {
@@ -831,6 +877,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "user_position1": {
@@ -844,6 +891,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "user_position2": {
@@ -857,6 +905,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "user_position3": {
@@ -870,6 +919,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "user_position_pre": {
@@ -883,6 +933,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "user_team": {
@@ -896,6 +947,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "user_team_ot": {
@@ -909,6 +961,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "user_time_keep_type": {
@@ -922,6 +975,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "user_type": {
@@ -935,6 +989,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "wir_description": {
@@ -948,6 +1003,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "work_area": {
@@ -961,6 +1017,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "work_mode": {
@@ -974,6 +1031,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "workplace": {
@@ -987,6 +1045,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_01": {
@@ -1000,6 +1059,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_02": {
@@ -1013,6 +1073,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_03": {
@@ -1026,6 +1087,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_04": {
@@ -1039,6 +1101,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_05": {
@@ -1052,6 +1115,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_06": {
@@ -1065,6 +1129,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_07": {
@@ -1078,6 +1143,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_08": {
@@ -1091,6 +1157,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null,
         "apply_approval_tree": "true"
     },
@@ -1105,6 +1172,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_10": {
@@ -1118,6 +1186,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_11": {
@@ -1131,6 +1200,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_12": {
@@ -1144,6 +1214,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_13": {
@@ -1157,6 +1228,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_15": {
@@ -1170,6 +1242,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "zunit_test_19": {
@@ -1183,6 +1256,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     }
 }
