@@ -170,6 +170,12 @@
         "qaqc_ncr",
         "qaqc_wir"
     ],
+    "apps_have_sub_project_column": [
+        "pj_shipment",
+        "qaqc_mir",
+        "qaqc_ncr",
+        "qaqc_wir"
+    ],
     "apps_have_due_date_column": [
         "qaqc_mir",
         "qaqc_ncr",

@@ -91,6 +91,10 @@ class JsonControls
     {
         return self::getAll()['apps_have_project_column'];
     }
+    public static function getAppsHaveSubProjectColumn()
+    {
+        return self::getAll()['apps_have_sub_project_column'];
+    }
     public static function getAppsHaveDueDateColumn()
     {
         return self::getAll()['apps_have_due_date_column'];

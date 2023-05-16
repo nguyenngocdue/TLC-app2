@@ -19,8 +19,8 @@ class ProjectOverview extends Component
      */
     public function __construct(
         private $table,
+        private $title = "Outstanding Tasks",
         private $id = 1,
-        private $function = 'getProjectMembers',
     ) {
         //
     }
@@ -160,6 +160,7 @@ class ProjectOverview extends Component
             'columns' => $this->getColumns(),
             'dataSource' => $dataSource,
             'modalParams' => $modalParams,
+            'title' => $this->title,
         ]);
     }
 }

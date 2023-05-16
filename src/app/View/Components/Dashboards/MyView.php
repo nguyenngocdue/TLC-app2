@@ -22,6 +22,7 @@ class MyView extends Component
         private $title = "Untitled",
         private $viewType = null,
         private $projectId = null,
+        private $table = null,
     ) {
         //
     }
@@ -62,13 +63,6 @@ class MyView extends Component
         foreach ($docs as $doc) {
             if (isset($statuses[$doc->status])) {
                 $assignee = $doc->getCurrentBicId();
-                // $status = $statuses[$doc->status];
-                // $assignee_1_to_9 = $status['ball-in-courts']['ball-in-court-assignee'];
-                // // $monitors = $status['ball-in-courts']['ball-in-court-monitors'];
-                // $assignee_1_to_9 = $assignee_1_to_9 == 'creator' ? 'owner_id' : $assignee_1_to_9;
-                // $assignee = $doc->{$assignee_1_to_9};
-                // // dump($doc->id . ": ($assignee_1_to_9) " . $assignee . " == " . $uid);
-
                 if ($assignee == $uid) {
                     $this->makeUpLinks($app, $doc);
                     $result[] = $doc;
@@ -80,41 +74,6 @@ class MyView extends Component
         return $result;
     }
 
-    // private function monitored_by_me($appKey, $app, $openingDocs, $uid, $statuses)
-    // {
-    //     $docs = $openingDocs->get();
-    //     $result = [];
-    //     // dump("monitored_by_me");
-    //     // dump($docs->count());
-    //     foreach ($docs as $doc) {
-    //         if (isset($statuses[$doc->status])) {
-    //             $status = $statuses[$doc->status];
-    //             // $assignee = $status['ball-in-courts']['ball-in-court-assignee'];
-    //             $monitors_1_to_9 = $status['ball-in-courts']['ball-in-court-monitors'];
-    //             $monitors_1_to_9 = $monitors_1_to_9 ? $monitors_1_to_9 : "getMonitors1()";
-    //             // dump($doc->id, $monitors_1_to_9);
-    //             if (strlen($monitors_1_to_9) > 0) {
-    //                 $fn = substr($monitors_1_to_9, 0, strlen($monitors_1_to_9) - 2);
-    //                 // dump($fn);
-    //                 if (method_exists($doc, $fn)) {
-    //                     // dump("$doc->id $fn");
-    //                     $monitors = $doc->$fn()->pluck('id')->toArray();
-    //                     // dump($monitors);
-    //                     // dump($doc->id . ": ($fn) " . $uid . " in [" . join(", ", $monitors) . "]");
-
-    //                     if (in_array($uid, $monitors)) $result[] = $doc;
-    //                 } else {
-    //                     dump("$appKey -> $fn does not exist.");
-    //                     break;
-    //                 }
-    //             }
-    //         } else {
-    //             dump("Status " . $doc->status . " of $appKey#" . $doc->id . " is not in the available statuses.");
-    //         }
-    //     }
-    //     return $result;
-    // }
-
     private function makeDataSource($viewType)
     {
         $apps = LibApps::getAll();
@@ -123,16 +82,16 @@ class MyView extends Component
         $result = [];
         foreach ($apps as $appKey => $app) {
             $sp = SuperProps::getFor($appKey);
-            // if (!isset($sp["settings"]['definitions']['closed'])) dump("Definition of closed has not been set for $appKey");
-            // $closed = $sp["settings"]['definitions']['closed'] ?? ['closed'];
             $closed = SuperDefinitions::getClosedOf($appKey);
             $modelPath = Str::modelPathFrom($appKey);
 
             $openingDocs = $modelPath::whereNotIn('status', $closed);
-            $hasProjectIdColumn = in_array($appKey, JsonControls::getAppsHaveProjectColumn());
             if ($this->projectId) {
+                $allowedApps = $this->table == "projects" ? JsonControls::getAppsHaveProjectColumn() : JsonControls::getAppsHaveSubProjectColumn();
+                $hasProjectIdColumn = in_array($appKey, $allowedApps);
                 if ($hasProjectIdColumn) {
-                    $openingDocs = $openingDocs->where('project_id', $this->projectId);
+                    $id_column = $this->table == "projects" ? 'project_id' : 'sub_project_id';
+                    $openingDocs = $openingDocs->where($id_column, $this->projectId);
                 } else {
                     continue;
                 }
@@ -146,9 +105,6 @@ class MyView extends Component
                 case "created_by_me":
                     $items =  $this->created_by_me($appKey, $app, $openingDocs, $uid,);
                     break;
-                    // case "monitored_by_me":
-                    //     $items =  $this->monitored_by_me($appKey, $app, $openingDocs, $uid, $statuses);
-                    //     break;
                 default:
                     dd("Unknown how to render $viewType");
                     break;
@@ -206,7 +162,6 @@ class MyView extends Component
         //             'width' => 100,
         //         ];
         // }
-        // $dataSource = [];
         $dataSource = $this->makeDataSource($this->viewType);
         // if (isset($dataSource[0])) dump($dataSource[0]);
 
