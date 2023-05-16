@@ -68,35 +68,6 @@ class ViewAllInvokerController extends Controller
         };
         return response()->stream($callback, 200, $headers);
     }
-    public function duplicate($id)
-    {
-        $theLine = $this->typeModel::findOrFail($id)->toArray();
-        if (!$theLine) {
-            return ResponseObject::responseFail(
-                "Document doesn't exits!",
-            );
-        }
-        $settingDuplicatable = $this->getSettingDuplicatable();
-        try {
-            foreach ($settingDuplicatable as $key => $value) {
-                if (!$value) {
-                    $theLine[substr($key, 1)] = null;
-                }
-            };
-            $theLine = $this->applyFormula($theLine, 'store');
-            $this->typeModel::create($theLine);
-            return ResponseObject::responseSuccess(
-                null,
-                [],
-                "Duplicate document successfully!",
-            );
-        } catch (\Throwable $th) {
-            return ResponseObject::responseFail(
-                "Duplicate document fail,please check setting duplicatable!",
-            );
-        }
-    }
-
     public function duplicateMultiple(Request $request)
     {
         try {

@@ -12,10 +12,10 @@
             Select All
     </x-renderer.button>
     @if($restore)
-    <x-renderer.button size='xs' type='success' onClick="actionRestoreMultiple('{{$type}}','{{$urlRestore}}')" class="mx-1" ><i class='fa-light fa-trash-can-arrow-up'></i> Restore</x-renderer.button>
+    <x-renderer.button size='xs' type='success' onClick="actionMultiple('{{$type}}','{{$urlRestore}}','restored')" class="mx-1" ><i class='fa-light fa-trash-can-arrow-up'></i> Restore</x-renderer.button>
     @else
-    <x-renderer.button size='xs' type='secondary' onClick="actionDuplicateMultiple('{{$type}}','{{$urlDuplicate}}')" class="mx-1" ><i class='fa fa-copy'></i> Duplicate</x-renderer.button>
-    <x-renderer.button size='xs' type='danger' onClick="actionDeletedMultiple('{{$type}}','{{$urlDestroy}}')" ><i class='fa fa-trash'></i> Delete</x-renderer.button>
+    <x-renderer.button size='xs' type='secondary' onClick="actionMultiple('{{$type}}','{{$urlDuplicate}}','duplicated')" class="mx-1" ><i class='fa fa-copy'></i> Duplicate</x-renderer.button>
+    <x-renderer.button size='xs' type='danger' onClick="actionMultiple('{{$type}}','{{$urlDestroy}}','deleted')" ><i class='fa fa-trash'></i> Delete</x-renderer.button>
     @endif
 </div>
 @endif

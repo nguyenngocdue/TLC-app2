@@ -79,10 +79,7 @@ const actionDeleted = (obj) => {
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     Swal.fire(
-                        actionFailObject(
-                            jqXHR.responseJSON.message,
-                            'Delete'
-                        )
+                        actionFailObject(jqXHR.responseJSON.message, 'Delete')
                     )
                     setTimeout(location.reload.bind(location), 500)
                 },

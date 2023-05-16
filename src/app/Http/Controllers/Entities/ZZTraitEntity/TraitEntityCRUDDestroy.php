@@ -12,23 +12,23 @@ use Illuminate\Support\Facades\Gate;
 trait TraitEntityCRUDDestroy
 {
     use TraitSupportPermissionGate;
-    public function destroy($id)
-    {
-        //check permission using gate
-        $theLine = $this->checkPermissionUsingGate($id, 'delete');
-        try {
-            $theLine->delete();
-            return ResponseObject::responseSuccess(
-                null,
-                [],
-                "Deleted document successfully!",
-            );
-        } catch (\Throwable $th) {
-            return ResponseObject::responseFail(
-                $th->getPrevious()->getMessage(),
-            );
-        }
-    }
+    // public function destroy($id)
+    // {
+    //     //check permission using gate
+    //     $theLine = $this->checkPermissionUsingGate($id, 'delete');
+    //     try {
+    //         $theLine->delete();
+    //         return ResponseObject::responseSuccess(
+    //             null,
+    //             [],
+    //             "Deleted document successfully!",
+    //         );
+    //     } catch (\Throwable $th) {
+    //         return ResponseObject::responseFail(
+    //             $th->getPrevious()->getMessage(),
+    //         );
+    //     }
+    // }
     public function destroyMultiple(Request $request)
     {
         try {
@@ -51,22 +51,7 @@ trait TraitEntityCRUDDestroy
             );
         }
     }
-    public function restore($id)
-    {
-        $theLine = $this->checkPermissionUsingGate($id, 'delete', true);
-        try {
-            $theLine->restore();
-            return ResponseObject::responseSuccess(
-                null,
-                [],
-                "Restore document successfully!",
-            );
-        } catch (\Throwable $th) {
-            return ResponseObject::responseFail(
-                "Restore document fail!",
-            );
-        }
-    }
+
     public function restoreMultiple(Request $request)
     {
         try {

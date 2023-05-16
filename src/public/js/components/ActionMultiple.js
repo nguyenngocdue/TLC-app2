@@ -35,7 +35,7 @@ const actionNotFoundObject = (action) => ({
     icon: 'warning',
 })
 
-const ajaxSendRequest = (type = 'get', url, strIds, func = 'Duplicated') => {
+const ajaxSendRequest = (type = 'get', url, strIds, name = 'Duplicated') => {
     $.ajax({
         type: type,
         headers: {
@@ -49,7 +49,7 @@ const ajaxSendRequest = (type = 'get', url, strIds, func = 'Duplicated') => {
                     var duplicateSuccess =
                         response.hits.length > 0 ? response.hits : 'empty'
                     var message = `Document ID(s): ${duplicateSuccess}`
-                    Swal.fire(actionSuccessObject(message, func)).then(() =>
+                    Swal.fire(actionSuccessObject(message, name)).then(() =>
                         setTimeout(location.reload.bind(location), 500)
                     )
                 }
@@ -57,26 +57,25 @@ const ajaxSendRequest = (type = 'get', url, strIds, func = 'Duplicated') => {
                     var duplicateFail =
                         response.meta[0].length > 0 ? response.meta[0] : 'empty'
                     var message = `Document ID: ${duplicateFail}. Please check setting and permission!`
-                    Swal.fire(actionFailObject(message, func)).then(() =>
+                    Swal.fire(actionFailObject(message, name)).then(() =>
                         setTimeout(location.reload.bind(location), 500)
                     )
                 }
             } else {
-                Swal.fire(actionFailObject(response.message, func)).then(() =>
+                Swal.fire(actionFailObject(response.message, name)).then(() =>
                     setTimeout(location.reload.bind(location), 500)
                 )
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR)
-            Swal.fire(actionFailObject(jqXHR.responseJSON.message, func)).then(
+            Swal.fire(actionFailObject(jqXHR.responseJSON.message, name)).then(
                 () => setTimeout(location.reload.bind(location), 500)
             )
         },
     })
 }
 
-const actionDuplicateMultiple = (type, url) => {
+const getCheckedValues = (type) => {
     var checkedValues = []
     queryStr = "input:checkbox[name='" + type + "[]']"
     $(queryStr).each(function () {
@@ -84,191 +83,52 @@ const actionDuplicateMultiple = (type, url) => {
             checkedValues.push($(this).val())
         }
     })
-    checkedValues = checkedValues.filter(($item) => $item !== 'none')
-    if (checkedValues.length > 0) {
-        var strIds = checkedValues.join(',') ?? ''
-        Swal.fire(actionConfirmObject(checkedValues, 'duplicate')).then(
-            (result) => {
-                if (result.isConfirmed) {
-                }
-            }
-        )
-    } else {
-        Swal.fire(actionNotFoundObject('duplication'))
-    }
+    return checkedValues.filter(($item) => $item !== 'none')
 }
 
-const actionRestoreMultiple = (type, url) => {
-    var checkedValues = []
-    queryStr = "input:checkbox[name='" + type + "[]']"
-    $(queryStr).each(function () {
-        if ($(this).prop('checked')) {
-            checkedValues.push($(this).val())
-        }
-    })
-    checkedValues = checkedValues.filter(($item) => $item !== 'none')
-    if (checkedValues.length > 0) {
-        var strIds = checkedValues.join(',') ?? ''
-        Swal.fire(actionConfirmObject(checkedValues, 'Restore')).then(
-            (result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: 'post',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            ),
-                        },
-                        url: url,
-                        data: 'ids=' + strIds,
-                        success: function (response) {
-                            if (response.success) {
-                                if (response.hits.length > 0) {
-                                    var restoreSuccess =
-                                        response.hits.length > 0
-                                            ? response.hits
-                                            : 'empty'
-                                    var message = `Document ID(s): ${restoreSuccess}`
-                                    Swal.fire(
-                                        actionSuccessObject(message, 'Restored')
-                                    ).then(() =>
-                                        setTimeout(
-                                            location.reload.bind(location),
-                                            500
-                                        )
-                                    )
-                                }
-                                if (response.meta[0].length > 0) {
-                                    var restoreFail =
-                                        response.meta[0].length > 0
-                                            ? response.meta[0]
-                                            : 'empty'
-                                    var message = `Document ID: ${restoreFail}. Please check setting and permission!`
-                                    Swal.fire(
-                                        actionFailObject(message, 'Restore')
-                                    ).then(() =>
-                                        setTimeout(
-                                            location.reload.bind(location),
-                                            500
-                                        )
-                                    )
-                                }
-                            } else {
-                                Swal.fire(
-                                    actionFailObject(
-                                        response.message,
-                                        'Restore'
-                                    )
-                                ).then(() =>
-                                    setTimeout(
-                                        location.reload.bind(location),
-                                        500
-                                    )
-                                )
-                            }
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            console.log(jqXHR)
-                            Swal.fire(
-                                actionFailObject(
-                                    'Permission denied, please check your permissions!',
-                                    'Restore'
-                                )
-                            ).then(() =>
-                                setTimeout(location.reload.bind(location), 500)
-                            )
-                        },
-                    })
-                }
-            }
-        )
-    } else {
-        Swal.fire(actionNotFoundObject('restore'))
+const actionMultiple = (
+    type,
+    url,
+    actionFunc = 'duplicated',
+    checkedValues = []
+) => {
+    switch (actionFunc) {
+        case 'deleted':
+            method = 'delete'
+            nameConfirm = 'delete'
+            nameSendRequest = 'Deleted'
+            nameNotFound = 'deletion'
+            break
+        case 'restored':
+            method = 'post'
+            nameConfirm = 'restore'
+            nameSendRequest = 'Restored'
+            nameNotFound = 'restoration'
+            break
+        default:
+            method = 'post'
+            nameConfirm = 'duplicate'
+            nameSendRequest = 'Duplicated'
+            nameNotFound = 'duplication'
+            break
     }
-}
-
-const actionDeletedMultiple = (type, url) => {
-    var checkedValues = []
-    queryStr = "input:checkbox[name='" + type + "[]']"
-    $(queryStr).each(function () {
-        if ($(this).prop('checked')) {
-            checkedValues.push($(this).val())
-        }
-    })
-    checkedValues = checkedValues.filter(($item) => $item !== 'none')
+    if (checkedValues.length == 0) {
+        checkedValues = getCheckedValues(type)
+    }
+    if (typeof checkedValues === 'string') {
+        checkedValues = [checkedValues]
+    }
     if (checkedValues.length > 0) {
         var strIds = checkedValues.join(',') ?? ''
-        Swal.fire(actionConfirmObject(checkedValues, 'delete')).then(
+
+        Swal.fire(actionConfirmObject(checkedValues, nameConfirm)).then(
             (result) => {
                 if (result.isConfirmed) {
-                    $.ajax({
-                        type: 'delete',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            ),
-                        },
-                        url: url,
-                        data: 'ids=' + strIds,
-                        success: function (response) {
-                            if (response.success) {
-                                if (response.hits.length > 0) {
-                                    var deleteSuccess =
-                                        response.hits.length > 0
-                                            ? response.hits
-                                            : 'empty'
-                                    var message = `Document ID(s): ${deleteSuccess}`
-                                    Swal.fire(
-                                        actionSuccessObject(message, 'Deleted')
-                                    ).then(() =>
-                                        setTimeout(
-                                            location.reload.bind(location),
-                                            500
-                                        )
-                                    )
-                                }
-                                if (response.meta[0].length > 0) {
-                                    var deleteFail =
-                                        response.meta[0].length > 0
-                                            ? response.meta[0]
-                                            : 'empty'
-                                    var message = `Document ID(s): ${deleteFail}. Please check settings and permissions!`
-                                    Swal.fire(
-                                        actionFailObject(message, 'Delete')
-                                    ).then(() =>
-                                        setTimeout(
-                                            location.reload.bind(location),
-                                            500
-                                        )
-                                    )
-                                }
-                            } else {
-                                Swal.fire(
-                                    actionFailObject(response.message, 'Delete')
-                                ).then(() =>
-                                    setTimeout(
-                                        location.reload.bind(location),
-                                        500
-                                    )
-                                )
-                            }
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            console.log(jqXHR)
-                            Swal.fire(
-                                actionFailObject(
-                                    'Permission denied, please check your permissions!',
-                                    'Delete'
-                                )
-                            ).then(() =>
-                                setTimeout(location.reload.bind(location), 500)
-                            )
-                        },
-                    })
+                    ajaxSendRequest(method, url, strIds, nameSendRequest)
                 }
             }
         )
     } else {
-        Swal.fire(actionNotFoundObject('deletion'))
+        Swal.fire(actionNotFoundObject(nameNotFound))
     }
 }

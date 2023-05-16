@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
 class RestoreColumn extends Component
@@ -27,13 +28,19 @@ class RestoreColumn extends Component
             $type = $data['attributes']['type'];
             $name = $data['attributes']['name'];
             $id = $id = $data["slot"];
-            $urlRestore = route($type . '.restore', $id) ?? '';
-            return "
-            <script>obj$id={urlRestore : '$urlRestore', id: '$id'}</script>
-            <div>
-                <x-renderer.button size='xs' value='$name' type='success' onClick='actionRestored(obj$id)' ><i class='fa-light fa-trash-can-arrow-up'></i></x-renderer.button>
-            </div>
-            ";
+            $urlRestore = route($type . '.restoreMultiple') ?? '';
+            $str = '<div>
+                        <x-renderer.button size="xs" value="{{$name}}" type="success"  onClick="actionMultiple(\'{{$type}}\',\'{{$urlRestore}}\',\'restored\',\'{{$id}}\')"><i class="fa-light fa-trash-can-arrow-up"></i></x-renderer.button>
+                    </div>';
+            return Blade::render(
+                $str,
+                [
+                    'name' => $name,
+                    'type' => $type,
+                    'urlRestore' => $urlRestore,
+                    'id' => $id,
+                ]
+            );
         };
     }
 }
