@@ -284,7 +284,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
             $dataSource[$key]->remaining_allowed_ot_hours_year = $reAllowedOTHoursYear;
 
             // dd($dataSource[0]);
-            $hrefForward = route('dashboard') . "/reports/register-" . $type . "/020" . $param;
+            $hrefForward =  "/reports/register-" . $type . "/020" . $param;
             $dataSource[$key]->total_overtime_hours = (object)[
                 'value' => $value->total_overtime_hours,
                 'cell_href' => $hrefForward,
