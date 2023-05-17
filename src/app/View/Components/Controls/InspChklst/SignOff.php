@@ -116,7 +116,7 @@ class SignOff extends Component
             'isRequestedToSign0' => $isRequestedToSign0,
 
             'remindList' => $remindList,
-            'people' => count($remindList) . " " . Str::plural("person"),
+            // 'people' => count($remindList) . " " . Str::plural("person"),
             'title' => "Send a friendly email to remind:\n" . join("\n", $people),
         ]);
     }
