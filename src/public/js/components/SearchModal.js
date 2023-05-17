@@ -23,7 +23,6 @@ const renderHtml = (apps, url, topDrawer) => {
                     <i class="fa-light fa-circle-plus"></i>
                 </a>`
                     : ''
-                const { package_rendered } = app
                 htmlTopDrawer += `
                 <li>
                     <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>

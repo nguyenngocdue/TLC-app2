@@ -273,7 +273,7 @@ class ViewAllController extends Controller
         if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
-            'title' => 'View All',
+            'title' => $trashed ? 'View Trash' : 'View All',
             'perPage' => $perPage,
             'valueAdvanceFilters' => $advanceFilters,
             'refreshPage' => $refreshPage,
