@@ -12,21 +12,11 @@
     @php 
     $abt = "<x-form.action-button-group type='$type' />"; 
     $route = route('updateUserSettings');
-    $routeRestore = $trashed ? route($type.'.index') : route($type.'.trashed');
-    $nameButtonHref = $trashed ? "View All" : "Recycle Bin";
-    $iconButtonHref = $trashed ? "<i class='fa-solid fa-table-cells'></i>" : "<i class='fa-solid fa-trash'></i>";
-    $btnType = $trashed ?  "secondary" : "danger";
-    $p = "<x-form.per-page type='$type' route='$route' perPage='$perPage' />";
-    $button = "";
-    if(app()->isLocal() || app()->isTesting()){
-        $button = "<form class='mr-1'>
-                        <x-renderer.button outline=true type='$btnType' href='$routeRestore'>$iconButtonHref $nameButtonHref</x-renderer.button>
-                    </form>";
-    }
-    $topL = "<div class='flex'>".
-                        $button.
-                    "<x-form.refresh type='$type' route='$route' valueRefresh='$refreshPage'/>
-                </div>";
+    $p = "<x-form.per-page type='$type' route='$route' perPage='$perPage'/>";
+    $topL = "<div class='flex'>
+                <x-form.action-recycle-bin type='$type' trashed='$trashed'/>
+                <x-form.refresh type='$type' route='$route' valueRefresh='$refreshPage'/>
+            </div>";
     $am = $trashed ? "<x-form.action-multiple type='$type' restore='true'/>" : "<x-form.action-multiple type='$type'/>";
     @endphp
     <x-renderer.table showNo="true" :columns="$columns" :dataSource="$dataSource" 
