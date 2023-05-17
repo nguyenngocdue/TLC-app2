@@ -6,11 +6,7 @@ use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitFunctionsReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
-use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\Report;
-use DateTime;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 
 class Qaqc_ncr_020 extends Report_ParentRegisterController
 {
