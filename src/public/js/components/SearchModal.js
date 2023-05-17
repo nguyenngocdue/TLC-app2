@@ -1,53 +1,110 @@
 let dataContainer = null
+let dataTopDrawer = null
 let searchInput = null
 let allApps = {}
+let allAppsTopDrawer = {}
 let currentUserIsAdmin = null
 let apps = []
+let appsTopDrawer = []
 
-const renderHtml = (apps, url) => {
-    dataContainer.innerHTML = ``
-    let resultHtml = ``
-    for (const property in apps) {
-        const subPackage = property
-        let html = ``
-        apps[property].forEach((app) => {
-            const isBookmark = app.bookmark ? 'text-blue-500' : 'text-gray-300'
-            const status = capitalize(app.status ?? '')
-            const isAdmin =
-                app.hidden == 'true'
-                    ? '<i class="fa-duotone fa-eye text-blue-500"></i>'
-                    : ''
-            const statusHtml = status
-                ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>`
-                : ''
-            const { package_rendered } = app
-            html += `<li>
-                        <div class='flex p-2 text-xs font-medium  text-gray-700 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
-                        <a href="${app.href}" class="flex flex-1 items-center ">
+const renderHtml = (apps, url, topDrawer) => {
+    if (topDrawer) {
+        dataTopDrawer.innerHTML = ``
+        let resultHtmlTopDrawer = ``
+        for (const property in apps) {
+            const subPackage = property
+            let htmlTopDrawer = ``
+            apps[property].forEach((app) => {
+                const isBookmark = app.bookmark
+                    ? 'text-blue-700'
+                    : 'text-gray-300'
+                const { package_rendered } = app
+                htmlTopDrawer += `
+                <li>
+                    <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
+                        <button tabIndex=-1 id='bookmark_${
+                            app.name
+                        }' onclick="bookmarkSearchModal('${
+                    app.name
+                }','${url}')" class='px-2 text-base ${isBookmark}'>
+                        <i class="fa-duotone fa-star">
+                        </i></button>
+                        <a href="${
+                            app.href
+                        }" class="flex flex-1 px-2 items-center ">
                             ${app.icon ?? "<i class='fa-light fa-file'></i>"}
-                            <span class="flex-1 ml-3 whitespace-nowrap">${
-                                app.title
-                            }</span>
-                            ${isAdmin}
-                            ${statusHtml}
-                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${package_rendered}</span>
-                            </a>
-                            <button tabIndex=-1 id='bookmark_${
-                                app.name
-                            }' onclick="bookmarkSearchModal('${
-                app.name
-            }','${url}')" class='px-2 text-base ${isBookmark}'><i class="fa-solid fa-bookmark"></i></button>
-                        </div>
-                    </li>`
-        })
-        resultHtml += `<div>
-                        <p class="py-2 text-sm font-medium text-gray-900 dark:text-gray-300">${subPackage}</p>
-                            <ul class="space-y-1">
-                                ${html}
-                            </ul>
-                        </div>`
+                                <span class="flex-1 ml-3 whitespace-nowrap">${
+                                    app.title
+                                }</span>
+                        </a>
+                        <a href="${
+                            app.href_create
+                        }" class="flex flex-1 items-center text-orange-400">
+                            <i class="fa-light fa-circle-plus"></i>
+                        </a>
+                    </div>
+                </li>`
+            })
+            resultHtmlTopDrawer += `<div class='px-2'>
+                                <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${subPackage}</p>
+                                    <ul class="space-y-1">
+                                        ${htmlTopDrawer}
+                                    </ul>
+                                </div>`
+        }
+        dataTopDrawer.innerHTML += resultHtmlTopDrawer
+    } else {
+        dataContainer.innerHTML = ``
+        let resultHtml = ``
+        for (const property in apps) {
+            const subPackage = property
+            let html = ``
+            apps[property].forEach((app) => {
+                const isBookmark = app.bookmark
+                    ? 'text-blue-500'
+                    : 'text-gray-300'
+                const status = capitalize(app.status ?? '')
+                const isAdmin =
+                    app.hidden == 'true'
+                        ? '<i class="fa-duotone fa-eye text-blue-500"></i>'
+                        : ''
+                const statusHtml = status
+                    ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>`
+                    : ''
+                const { package_rendered } = app
+                html += `<li>
+                                <div class='flex p-2 text-xs font-medium  text-gray-700 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
+                                <a href="${
+                                    app.href
+                                }" class="flex flex-1 items-center ">
+                                    ${
+                                        app.icon ??
+                                        "<i class='fa-light fa-file'></i>"
+                                    }
+                                    <span class="flex-1 ml-3 whitespace-nowrap">${
+                                        app.title
+                                    }</span>
+                                    ${isAdmin}
+                                    ${statusHtml}
+                                    <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${package_rendered}</span>
+                                    </a>
+                                    <button tabIndex=-1 id='bookmark_${
+                                        app.name
+                                    }' onclick="bookmarkSearchModal('${
+                    app.name
+                }','${url}')" class='px-2 text-base ${isBookmark}'><i class="fa-solid fa-bookmark"></i></button>
+                                </div>
+                            </li>`
+            })
+            resultHtml += `<div>
+                                <p class="py-2 text-sm font-medium text-gray-900 dark:text-gray-300">${subPackage}</p>
+                                    <ul class="space-y-1">
+                                        ${html}
+                                    </ul>
+                                </div>`
+        }
+        dataContainer.innerHTML += resultHtml
     }
-    dataContainer.innerHTML += resultHtml
 }
 function groupBySubPackage(arr) {
     const result = arr.reduce((group, product) => {
@@ -69,6 +126,10 @@ function capitalize(str) {
 function render(value, url) {
     apps = groupBySubPackage(value)
     renderHtml(apps, url)
+}
+function renderTopDrawer(value, url) {
+    appsTopDrawer = groupBySubPackage(value)
+    renderHtml(appsTopDrawer, url, true)
 }
 function matchRegex(valueSearch, app) {
     const formatText = valueSearch.replaceAll(' ', '.*')
@@ -117,8 +178,8 @@ function bookmarkSearchModal(entity, url) {
                     )
                 } else {
                     $(`#${data['name']}`).remove()
+                    // toastr.warning(response.message, 'Bookmark')
                 }
-                toastr.warning(response.message, 'Bookmark')
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {},
