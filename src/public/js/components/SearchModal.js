@@ -16,8 +16,13 @@ const renderHtml = (apps, url, topDrawer) => {
             let htmlTopDrawer = ``
             apps[property].forEach((app) => {
                 const isBookmark = app.bookmark
-                    ? 'text-blue-700'
+                    ? 'text-blue-500'
                     : 'text-gray-300'
+                const isCreate = app.href_create
+                    ? `<a href="${app.href_create}" class="flex flex-1 items-center text-orange-400">
+                    <i class="fa-light fa-circle-plus"></i>
+                </a>`
+                    : ''
                 const { package_rendered } = app
                 htmlTopDrawer += `
                 <li>
@@ -27,8 +32,7 @@ const renderHtml = (apps, url, topDrawer) => {
                         }' onclick="bookmarkSearchModal('${
                     app.name
                 }','${url}')" class='px-2 text-base ${isBookmark}'>
-                        <i class="fa-duotone fa-star">
-                        </i></button>
+                <i class="fa-solid fa-bookmark"></i></button>
                         <a href="${
                             app.href
                         }" class="flex flex-1 px-2 items-center ">
@@ -37,11 +41,8 @@ const renderHtml = (apps, url, topDrawer) => {
                                     app.title
                                 }</span>
                         </a>
-                        <a href="${
-                            app.href_create
-                        }" class="flex flex-1 items-center text-orange-400">
-                            <i class="fa-light fa-circle-plus"></i>
-                        </a>
+                        ${isCreate}
+                        
                     </div>
                 </li>`
             })
