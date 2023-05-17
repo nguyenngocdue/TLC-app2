@@ -11,7 +11,7 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
         @auth
         <div class="flex flex-1 lg:mr-32 ml-5">
             <div class="mr-5">
-                <x-homepage.menu-apps></x-homepage.menu-apps>
+                <x-homepage.top-drawer></x-homepage.top-drawer>
             </div>
             <b class="text-xl font-semibold">
                 <a href="{{$routeSrc}}" class="hover:underline">

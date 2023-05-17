@@ -121,7 +121,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$theRow = $this->data::find($id);
 			$oldStatus = $theRow['status'];
 			$newStatus = $request['status'];
-			$rules = $this->getValidationRules($oldStatus, $newStatus, __FUNCTION__);
+			$rules = $this->getValidationRules($oldStatus, $newStatus, __FUNCTION__, $isFakeRequest);
 			// if ($request['tableNames'] == 'fakeRequest') Log::info($rules);
 			// if ($request['tableNames'] !== 'fakeRequest') {
 			if (!$isFakeRequest) {

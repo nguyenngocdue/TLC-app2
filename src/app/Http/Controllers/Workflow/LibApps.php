@@ -22,7 +22,9 @@ class LibApps extends AbstractLib
                     $app['package_rendered'] = isset($app['package']) ? Str::appTitle($app['package']) : "unknown package";
                     $app['sub_package_rendered'] = isset($app['sub_package']) ? Str::appTitle($app['sub_package']) : "unknown sub_package";
                     $route = Str::plural($app['name']) . ".index";
+                    $routeCreate = Str::plural($app['name']) . ".create";
                     $app['href'] = Route::has($route) ? route($route) : "#RouteNotFound:$route";
+                    $app['href_create'] = Route::has($routeCreate) ? route($routeCreate) : "#RouteNotFound:$routeCreate";
                     $result[$key] = $app;
                 }
             }
