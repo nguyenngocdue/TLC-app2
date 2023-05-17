@@ -95,25 +95,20 @@ trait TraitValidation
     private function getRules($hasStatusColumn, $workflows, $oldStatus)
     {
         $result = [];
-        if ($hasStatusColumn) {
-            $requiredProps = $workflows[$oldStatus]['required'];
-            foreach ($requiredProps as $propName) {
-                $propObject = $this->superProps['props'][$propName];
-                $otherValidationRules = $this->getValidationInDefaultValuesScreen($propObject);
-                $result[$propName] = [...$otherValidationRules, 'required'];
-            }
-            foreach ($result as &$prop) $prop = array_unique($prop);
-        } else {
-            foreach ($this->superProps['props'] as $prop) {
-                $rules = $this->getValidationInDefaultValuesScreen($prop);
-                if (!empty($rules)) $result[$prop['name']] = $rules;
-            }
+        $requiredProps = $hasStatusColumn ? $workflows[$oldStatus]['required'] : [];
+        foreach ($this->superProps['props'] as $prop) {
+            $propName = $prop['name'];
+            $rules = $this->getValidationInDefaultValuesScreen($prop);
+            // dump($propName, $rules);
+            if (in_array($propName, $requiredProps))  $rules[] = 'required';
+            // dump($result[$propName]);
+            if (!empty($rules)) $result[$propName] = $rules;
         }
         // dump($result);
         return $result;
     }
 
-    private function getValidationRules($oldStatus, $newStatus, $action)
+    private function getValidationRules($oldStatus, $newStatus, $action, $isFakeRequest = false)
     {
         if ($oldStatus == '') $oldStatus = SuperDefinitions::getNewOf($this->type);
         // if ($oldStatus == '') $oldStatus = WorkflowFields::getNewFromDefinitions($this->type);
@@ -127,10 +122,12 @@ trait TraitValidation
         $visibleProps = $this->getVisibleProps($hasStatusColumn, $workflows, $oldStatus);
         $requiredProps = $this->getRules($hasStatusColumn, $workflows, $oldStatus);
 
+        // if ($isFakeRequest) {
         // dump($propsInIntermediateScreen);
         // dump($listOfTableNameToIgnoreRequired);
         // dump($visibleProps);
         // dump($requiredProps);
+        // }
 
         $result = [];
         foreach ($requiredProps as $propName => $rule) {

@@ -310,6 +310,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-sink\"><\/i>"
     },
     "pj_shipment": {
@@ -322,6 +323,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "qr-app-renderer",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-ship\"><\/i>"
     },
     "pj_staircase": {
@@ -334,6 +336,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-regular fa-circle-sort-up\"><\/i>"
     },
     "pj_unit": {
@@ -346,6 +349,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "qr-app-renderer",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-house\"><\/i>"
     },
     "post": {
@@ -631,6 +635,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-renderer",
+        "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-list-ul\"><\/i>"
     },
     "qaqc_insp_tmpl_line": {

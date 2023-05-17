@@ -8,7 +8,7 @@ use App\Http\Controllers\Reports\TraitFunctionsReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Utils\Support\Report;
 
-class Qaqc_ncr_010 extends Report_ParentRegisterController
+class Qaqc_ncr_020 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
     use TraitFunctionsReport;
@@ -31,7 +31,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
                 ,GROUP_CONCAT(mir.id) AS mir_ids
                 ,DATE_FORMAT(mir.created_at, '%Y-%m') AS year_month_open_mir
                 ,COUNT(DATE_FORMAT(mir.created_at, '%Y-%m')) AS num_open_mir
-                FROM  sub_projects sp, qaqc_mirs mir
+                FROM  sub_projects sp, qaqc_wirs mir
                 WHERE 1 = 1";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
         $sql .= "\n AND sp.id = mir.sub_project_id
@@ -59,7 +59,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
                                             mir.id AS ids_mir,
                                             IF(DATE_FORMAT(ncr.created_at, '%Y-%m') = DATE_FORMAT(ncr.closed_at, '%Y-%m') AND ncr.status = 'closed', 'closed', 'Open') AS ncr_closed,
                                             ncr.status AS ncr_status
-                                        FROM qaqc_ncrs ncr, sub_projects sp, qaqc_mirs mir
+                                        FROM qaqc_ncrs ncr, sub_projects sp, qaqc_wirs mir
                                         WHERE 1 = 1";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND ncr.sub_project_id = '{{sub_project_id}}'";
         $sql .= "\n AND mir.id = ncr.parent_id
@@ -91,42 +91,42 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
 
             ],
             [
-                "title" => "MIR Requests",
+                "title" => "WIR Requests",
                 "dataIndex" => "num_open_mir",
                 "align" => "center",
                 'width' => 100
 
             ],
             [
-                "title" => "Total MIR - NCRs",
+                "title" => "Total WIR - NCRs",
                 "dataIndex" => "total_open_ncr",
                 "align" => "center",
                 'width' => 100
 
             ],
             [
-                "title" => "MIR - NCRs (Open)",
+                "title" => "WIR - NCRs (Open)",
                 "dataIndex" => "num_surplus_ncr",
                 "align" => "center",
                 'width' => 100
 
             ],
             [
-                "title" => "MIR - NCRs (Open Ratio) (%)",
+                "title" => "WIR - NCRs (Open Ratio) (%)",
                 "dataIndex" => "open_ratio_ncr",
                 "align" => "center",
                 'width' => 100
 
             ],
             [
-                "title" => "MIR - NCRs (Closed)",
+                "title" => "WIR - NCRs (Closed)",
                 "dataIndex" => "num_closed_ncr",
                 "align" => "center",
                 'width' => 100
 
             ],
             [
-                "title" => "MIR - NCRs (Closed Ratio) (%)",
+                "title" => "WIR - NCRs (Closed Ratio) (%)",
                 "dataIndex" => "closed_ratio_ncr",
                 "align" => "center",
                 'width' => 100
@@ -158,13 +158,13 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
 
             // ],
             [
-                "title" => "MIR - NCRs (Open of previous months)",
+                "title" => "WIR - NCRs (Open of previous months)",
                 "dataIndex" => "previous_months_open_ncr",
                 "align" => "center",
                 'width' => 300
             ],
             [
-                "title" => "MIR - NCRs (Closed of previous months)",
+                "title" => "WIR - NCRs (Closed of previous months)",
                 "dataIndex" => "previous_months_closed_ncr",
                 "align" => "center",
                 'width' => 300
