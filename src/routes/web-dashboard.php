@@ -21,8 +21,6 @@ Route::group([
             Route::resource("{$entityName}", EntityCRUDController::class)->only('create', 'store', 'edit', 'update', 'show', 'destroy');
             Route::delete("{$entityName}", [EntityCRUDController::class, "destroyMultiple"])->name("{$entityName}.destroyMultiple");
 
-            Route::get("{$entityName}_dp/{id}", [ViewAllInvokerController::class, "duplicate"])->name("{$entityName}_dp");
-            Route::get("{$entityName}_rs/{id}", [EntityCRUDController::class, "restore"])->name("{$entityName}.restore");
             Route::post("{$entityName}_rs", [EntityCRUDController::class, "restoreMultiple"])->name("{$entityName}.restoreMultiple");
             Route::post("{$entityName}_dp", [ViewAllInvokerController::class, "duplicateMultiple"])->name("{$entityName}_dp.duplicateMultiple");
             Route::get("{$entityName}_ep", [ViewAllInvokerController::class, "exportCSV"])->name("{$entityName}_ep.exportCSV");
