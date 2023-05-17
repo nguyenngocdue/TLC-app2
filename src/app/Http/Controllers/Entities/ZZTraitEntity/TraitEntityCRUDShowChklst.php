@@ -17,6 +17,7 @@ trait TraitEntityCRUDShowChklst
         foreach ($entityShts as $value) {
             $tableDataSource[] = $this->transformDataSource($value->getLines->sortBy('order_no'), $value->getShtSigs);
         }
+        $valueOptionPrint = $this->getValueOptionPrint();
         return view('components.print.check-list5', [
             'tableColumns' => $this->getTableColumns(),
             'tableDataSource' => $tableDataSource,
@@ -26,7 +27,8 @@ trait TraitEntityCRUDShowChklst
             'typePlural' => Str::plural($this->type),
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'classListOptionPrint' => ClassList::DROPDOWN,
-            'valueOptionPrint' => $this->getValueOptionPrint(),
+            'valueOptionPrint' => $valueOptionPrint,
+            'layout' => $this->getLayoutPrint($valueOptionPrint, 'check-list')
         ]);
     }
 }
