@@ -41,6 +41,34 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_qc_remaining": {
+        "name": "_qc_remaining",
+        "column_name": "qc_remaining",
+        "listen_action": "expression",
+        "triggers": "qc_total,qc_accepted,qc_rejected",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "Math.round((qc_total - qc_accepted - qc_rejected)*100)\/100",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_qc_rejected": {
+        "name": "_qc_rejected",
+        "column_name": "qc_rejected",
+        "listen_action": "expression",
+        "triggers": "qc_total,qc_accepted,qc_remaining",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "Math.round((qc_total - qc_accepted - qc_remaining)*100)\/100",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
@@ -125,6 +153,20 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_getNcrs": {
+        "name": "_getNcrs",
+        "column_name": "getNcrs",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
@@ -184,6 +226,34 @@
     "_description": {
         "name": "_description",
         "column_name": "description",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_qc_total": {
+        "name": "_qc_total",
+        "column_name": "qc_total",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_qc_accepted": {
+        "name": "_qc_accepted",
+        "column_name": "qc_accepted",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
