@@ -295,7 +295,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
                     <thead class='sticky z-0 top-0 text-center bg-gray-50'>
                     <tr>
                         <th>Month</th>
-                        <th>NCRs QTT</th>
+                        <th>NCRs Qty</th>
                     </tr>
                     </thead>
                     <tbody class='divide-y bg-white dark:divide-gray-700 dark:bg-gray-800'>
