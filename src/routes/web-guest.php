@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\NewTrade;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\Dev\DatabaseSummaryController;
 use App\Http\Controllers\RedisController;
@@ -24,3 +25,6 @@ Route::get('redis', [RedisController::class, 'index']);
 
 Route::get('login/google', [App\Http\Controllers\Auth\SocialiteAuthController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('login/google/callback', [App\Http\Controllers\Auth\SocialiteAuthController::class, 'handleGoogleCallback']);
+Route::get('test-websocket', function () {
+    broadcast(new NewTrade('hello'));
+});
