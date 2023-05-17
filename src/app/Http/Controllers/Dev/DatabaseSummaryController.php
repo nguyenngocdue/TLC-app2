@@ -21,8 +21,8 @@ class DatabaseSummaryController extends Controller
         $columns = [];
         $dataSource = [];
         foreach ($entities as $entity) {
-            // dump($entity->getTable());
             $tableName = $entity->getTable();
+            if (str_starts_with($tableName, "view_")) continue;
             $tableColumns = DBTable::getColumnNames($tableName);
             $dataSource[$tableName]['tableName'] = $tableName;
             foreach ($tableColumns as $column) {

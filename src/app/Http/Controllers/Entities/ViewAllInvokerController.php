@@ -8,12 +8,9 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityShowQRList6;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
-use App\Utils\Support\Json\Definitions;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use PDO;
 
 class ViewAllInvokerController extends Controller
 {
@@ -68,35 +65,6 @@ class ViewAllInvokerController extends Controller
         };
         return response()->stream($callback, 200, $headers);
     }
-    public function duplicate($id)
-    {
-        $theLine = $this->typeModel::findOrFail($id)->toArray();
-        if (!$theLine) {
-            return ResponseObject::responseFail(
-                "Document doesn't exits!",
-            );
-        }
-        $settingDuplicatable = $this->getSettingDuplicatable();
-        try {
-            foreach ($settingDuplicatable as $key => $value) {
-                if (!$value) {
-                    $theLine[substr($key, 1)] = null;
-                }
-            };
-            $theLine = $this->applyFormula($theLine, 'store');
-            $this->typeModel::create($theLine);
-            return ResponseObject::responseSuccess(
-                null,
-                [],
-                "Duplicate document successfully!",
-            );
-        } catch (\Throwable $th) {
-            return ResponseObject::responseFail(
-                "Duplicate document fail,please check setting duplicatable!",
-            );
-        }
-    }
-
     public function duplicateMultiple(Request $request)
     {
         try {
@@ -131,7 +99,7 @@ class ViewAllInvokerController extends Controller
             );
         } catch (\Throwable $th) {
             return ResponseObject::responseFail(
-                "Duplicate document fail,please check setting duplicatable!",
+                $th->getPrevious()->getMessage(),
             );
         }
 

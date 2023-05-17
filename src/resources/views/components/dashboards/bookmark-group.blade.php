@@ -7,24 +7,24 @@
                 {{$value['title']}} </a>
             @endforeach
             @foreach($arrayBookmarkSecond as $value)
-            <a id="{{$value['name']}}" href="{{$value['href']}}" title="{{$value['title']}}" class="{{$classList}} toogle-bookmark hidden">
+            <a id="{{$value['name']}}" href="{{$value['href']}}" title="{{$value['title']}}" class="{{$classList}} toggle-bookmark hidden">
                 {{$value['title']}} </a>
             @endforeach
         </div>
         @if($isShowMore)
-            <button type="button" id='toogle_more' class="flex justify-end mb-auto ml-auto px-2 border rounded-md text-blue-600 hover:bg-gray-200" @click="toogleMore()">
+            <button type="button" id='toggle_more' class="flex justify-end mb-auto ml-auto px-2 border rounded-md text-blue-600 hover:bg-gray-200" @click="toggleMore()">
                 <i class="fa-solid fa-chevron-down"></i>
             </button>
         @endif
     </div>
 </x-renderer.card>
 <script>
-    function toogleMore(){
-        $('.toogle-bookmark').toggle();
-        if($('.toogle-bookmark').is(':visible')){
-            $('#toogle_more').html('<i class="fa-solid fa-chevron-up"></i>');
+    function toggleMore(){
+        $('.toggle-bookmark').toggle();
+        if($('.toggle-bookmark').is(':visible')){
+            $('#toggle_more').html('<i class="fa-solid fa-chevron-up"></i>');
         }else{
-            $('#toogle_more').html('<i class="fa-solid fa-chevron-down"></i>');
+            $('#toggle_more').html('<i class="fa-solid fa-chevron-down"></i>');
         }
     }
 </script>

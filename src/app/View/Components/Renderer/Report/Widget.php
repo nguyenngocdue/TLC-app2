@@ -28,8 +28,8 @@ class Widget extends Component
     public function render()
     {
         if (app()->isLocal()) {
-            dump($this->table);
-            dump($this->projectId);
+            // dump($this->table);
+            // dump($this->projectId);
         }
         return view(
             'components.renderer.report.widget',

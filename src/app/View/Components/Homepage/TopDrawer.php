@@ -2,9 +2,10 @@
 
 namespace App\View\Components\Homepage;
 
+use App\Http\Controllers\Workflow\LibApps;
 use Illuminate\View\Component;
 
-class MenuApps extends Component
+class TopDrawer extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +24,10 @@ class MenuApps extends Component
      */
     public function render()
     {
-        return view('components.homepage.menu-apps');
+        $allApps = LibApps::getAllNavbarBookmark();
+        return view('components.homepage.top-drawer', [
+            'allApps' => array_values($allApps),
+            'route' => route('updateBookmark'),
+        ]);
     }
 }

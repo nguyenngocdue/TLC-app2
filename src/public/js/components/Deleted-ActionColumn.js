@@ -14,7 +14,7 @@ const actionDuplicated = (obj) => {
                         setTimeout(location.reload.bind(location), 500)
                     } else {
                         Swal.fire(
-                            actionFailObject(response.message, 'Dulicate')
+                            actionFailObject(response.message, 'Duplicated')
                         )
                         setTimeout(location.reload.bind(location), 500)
                     }
@@ -79,10 +79,7 @@ const actionDeleted = (obj) => {
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     Swal.fire(
-                        actionFailObject(
-                            jqXHR.responseJSON.message,
-                            'Delete'
-                        )
+                        actionFailObject(jqXHR.responseJSON.message, 'Delete')
                     )
                     setTimeout(location.reload.bind(location), 500)
                 },

@@ -54,12 +54,12 @@ function data() {
             this.isProjectMenuOpen = false
         },
         ///////////////////////////////////
-        isMenuAppsOpen: false,
-        toggleMenuApps() {
-            this.isMenuAppsOpen = !this.isMenuAppsOpen
+        isTopDrawerOpen: false,
+        toggleTopDrawer() {
+            this.isTopDrawerOpen = !this.isTopDrawerOpen
         },
-        closeMenuApps() {
-            this.isMenuAppsOpen = false
+        closeTopDrawer() {
+            this.isTopDrawerOpen = false
         },
         ///////////////////////////////////
         isBroadcastNotificationOpen: false,
