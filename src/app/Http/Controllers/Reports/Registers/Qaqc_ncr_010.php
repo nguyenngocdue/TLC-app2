@@ -109,20 +109,6 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
 
             ],
             [
-                "title" => "MIR - NCRs (Closed)",
-                "dataIndex" => "num_closed_ncr",
-                "align" => "center",
-                'width' => 100
-
-            ],
-            [
-                "title" => "MIR - NCRs (Closed Ratio) (%)",
-                "dataIndex" => "closed_ratio_ncr",
-                "align" => "center",
-                'width' => 100
-
-            ],
-            [
                 "title" => "MIR - NCRs (Open)",
                 "dataIndex" => "num_surplus_ncr",
                 "align" => "center",
@@ -136,6 +122,21 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
                 'width' => 100
 
             ],
+            [
+                "title" => "MIR - NCRs (Closed)",
+                "dataIndex" => "num_closed_ncr",
+                "align" => "center",
+                'width' => 100
+
+            ],
+            [
+                "title" => "MIR - NCRs (Closed Ratio) (%)",
+                "dataIndex" => "closed_ratio_ncr",
+                "align" => "center",
+                'width' => 100
+
+            ],
+
             // [
             //     "dataIndex" => "mir_ids",
             //     "align" => "center",
