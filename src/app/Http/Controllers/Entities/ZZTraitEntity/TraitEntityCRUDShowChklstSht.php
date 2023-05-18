@@ -16,8 +16,8 @@ trait TraitEntityCRUDShowChklstSht
         $entity = ($this->data)::findOrFail($id);
         $entityLines = $entity->getLines->sortBy('order_no');
         $entityShtSigs = $entity->getShtSigs;
-        // dd($a);
         $tableDataSource = $this->transformDataSource($entityLines, $entityShtSigs);
+        $valueOptionPrint = $this->getValueOptionPrint();
         return view('components.print.check-sheet5', [
             'tableColumns' => $this->getTableColumns(),
             'tableDataSource' => $tableDataSource,
@@ -26,7 +26,8 @@ trait TraitEntityCRUDShowChklstSht
             'typePlural' => Str::plural($this->type),
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'classListOptionPrint' => ClassList::DROPDOWN,
-            'valueOptionPrint' => $this->getValueOptionPrint(),
+            'valueOptionPrint' => $valueOptionPrint,
+            'layout' => $this->getLayoutPrint($valueOptionPrint, 'check-sheet')
         ]);
     }
 }

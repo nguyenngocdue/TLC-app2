@@ -8,6 +8,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\LibApps;
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
@@ -250,7 +251,31 @@ class ViewAllController extends Controller
         }
     }
 
-    public function index(Request $request)
+    private function getTabPane($advanceFilters)
+    {
+        // dump($advanceFilters);
+
+        $currentStatus = isset($advanceFilters['status']) ? $advanceFilters['status'][0] : 'true';
+        $statuses = LibStatuses::getFor($this->type);
+        $tableName = Str::plural($this->type);
+        $dataSource = [
+            'all' => [
+                'href' => '?action=updateAdvanceFilter&_entity=' . $tableName,
+                'title' => "<x-renderer.status>All</x-renderer.status>",
+                'active' => $currentStatus == 'true',
+            ]
+        ];
+        foreach ($statuses as $statusKey => $status) {
+            $dataSource[$statusKey] = [
+                'href' => '?action=updateAdvanceFilter&_entity=' . $tableName . "&status%5B%5D=$statusKey",
+                'title' => "<x-renderer.status>" . $statusKey . "</x-renderer.status>",
+                'active' => $currentStatus == $statusKey,
+            ];
+        }
+        return $dataSource;
+    }
+
+    public function index(Request $request, $trashed = false)
     {
         $basicFilter = $request->input('basic_filter');
         if ($basicFilter || !empty($basicFilter)) {
@@ -263,8 +288,8 @@ class ViewAllController extends Controller
         [$perPage, $columnLimit, $advanceFilters, $currentFilter, $refreshPage] = $this->getUserSettings();
         // Log::info($columnLimit);
         $type = Str::plural($this->type);
-        $columns = $this->getColumns($type, $columnLimit);
-        $dataSource = $this->getDataSource($advanceFilters)->paginate($perPage);
+        $columns = $this->getColumns($type, $columnLimit, $trashed);
+        $dataSource = $this->getDataSource($advanceFilters, $trashed)->paginate($perPage);
         $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
         $this->attachRendererIntoColumn($columns);
         // $searchableArray = App::make($this->typeModel)->toSearchableArray();
@@ -273,7 +298,7 @@ class ViewAllController extends Controller
         if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
-            'title' => 'View All',
+            'title' => $trashed ? 'View Trash' : 'View All',
             'perPage' => $perPage,
             'valueAdvanceFilters' => $advanceFilters,
             'refreshPage' => $refreshPage,
@@ -284,44 +309,12 @@ class ViewAllController extends Controller
             // 'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
             'tableTrueWidth' => $tableTrueWidth,
             'frameworkTook' => $this->frameworkTook,
-            'trashed' => false,
+            'trashed' => $trashed,
+            'tabPane' => $this->getTabPane($advanceFilters),
         ]);
     }
     public function indexTrashed(Request $request)
     {
-        $basicFilter = $request->input('basic_filter');
-        if ($basicFilter || !empty($basicFilter)) {
-            (new UpdateUserSettings())($request);
-        }
-        if (!$request->input('page') && !empty($request->input())) {
-            (new UpdateUserSettings())($request);
-            return redirect($request->getPathInfo());
-        }
-        [$perPage, $columnLimit, $advanceFilters, $currentFilter, $refreshPage] = $this->getUserSettings();
-        // Log::info($columnLimit);
-        $type = Str::plural($this->type);
-        $columns = $this->getColumns($type, $columnLimit, true);
-        $dataSource = $this->getDataSource($advanceFilters, true)->paginate($perPage);
-        $this->attachEloquentNameIntoColumn($columns); //<< This must be before attachRendererIntoColumn
-        $this->attachRendererIntoColumn($columns);
-        // $searchableArray = App::make($this->typeModel)->toSearchableArray();
-        $app = LibApps::getFor($this->type);
-        $tableTrueWidth = !($app['hidden'] ?? false);
-        if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
-        return view('dashboards.pages.entity-view-all', [
-            'topTitle' => CurrentRoute::getTitleOf($this->type),
-            'title' => 'View Trash',
-            'perPage' => $perPage,
-            'valueAdvanceFilters' => $advanceFilters,
-            'refreshPage' => $refreshPage,
-            'type' => $type,
-            'columns' => $columns,
-            'dataSource' => $dataSource,
-            'currentFilter' => $currentFilter,
-            // 'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
-            'tableTrueWidth' => $tableTrueWidth,
-            'frameworkTook' => $this->frameworkTook,
-            'trashed' => true,
-        ]);
+        return $this->index($request, true);
     }
 }

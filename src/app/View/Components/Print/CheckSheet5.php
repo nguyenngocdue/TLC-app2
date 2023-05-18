@@ -2,13 +2,13 @@
 
 namespace App\View\Components\Print;
 
-use App\Http\Controllers\SignOff\Trait\TraitSupportSignOff;
+// use App\Http\Controllers\SignOff\Trait\TraitSupportSignOff;
 use App\Models\Qaqc_insp_chklst_sht;
 use Illuminate\View\Component;
 
 class CheckSheet5 extends Component
 {
-    use TraitSupportSignOff;
+    // use TraitSupportSignOff;
     /**
      * Create a new component instance.
      *
@@ -27,13 +27,13 @@ class CheckSheet5 extends Component
     public function render()
     {
 
-        $dataSource = $this->getDataSource($this->id);
-        $tableDataSource = $this->transformDataSource($dataSource[0]);
-        return view('components.print.check-sheet5', [
-            'tableColumns' => $this->getTableColumns(),
-            'tableDataSource' => $tableDataSource,
-            'headerDataSource' => $dataSource[1],
-        ]);
+        // $dataSource = $this->getDataSource($this->id);
+        // $tableDataSource = $this->transformDataSource($dataSource[0]);
+        // return view('components.print.check-sheet5', [
+        //     'tableColumns' => $this->getTableColumns(),
+        //     'tableDataSource' => $tableDataSource,
+        //     'headerDataSource' => $dataSource[1],
+        // ]);
     }
     private function getDataSource($id)
     {

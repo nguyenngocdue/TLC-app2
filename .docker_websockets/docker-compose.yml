@@ -36,7 +36,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     working_dir: /var/www/html
-    expose:
+    ports:
       - "6001:6001"
     volumes:
       - ../src:/var/www/html

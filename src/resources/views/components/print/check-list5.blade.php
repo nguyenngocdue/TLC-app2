@@ -3,17 +3,6 @@
 @section('title', 'Sign Off')
 @section('content')
 <x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/>
-@php
-        switch ($valueOptionPrint) {
-            case 'landscape':
-            $layout = 'w-[1414px] min-h-[1000px]';
-            break;
-            case 'portrait':
-            default:
-                $layout = 'w-[1000px] min-h-[1405px]';
-                break;
-        }
-@endphp
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">

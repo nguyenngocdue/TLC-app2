@@ -13,7 +13,7 @@
                     icon="fa-duotone fa-paper-plane" 
                     class="w-full h-full bg-lime-200"
                     onClick="sendRemindToPeople([{{join(',', array_keys( $remindList))}}], '{{$type}}', {{$signableId}})"
-                    >Remind {{$people}}</x-renderer.button>
+                    >Request to sign off</x-renderer.button>
             </div>
         </div>
         

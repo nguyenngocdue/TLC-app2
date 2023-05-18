@@ -8,10 +8,11 @@ class Hse_incident_report extends ModelExtended
 {
     protected $fillable = [
         'incident_doc_type_id', 'incident_doc_sub_type_id',
-        'id', 'name', 'work_area_id', 'issue_datetime', 'injured_person', 'line_manager', 'owner_id',
+        'id', 'name', 'work_area_id', 'issue_datetime', 'injured_person',  'injured_staff_id', 'line_manager', 'owner_id',
         'number_injured_person', 'number_involved_person', 'issue_description',
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
-        'lost_days', 'status'
+        'lost_days', 'status', 'injured_staff_position', 'manager_staff_id', 'manager_staff_position',
+        'owner_staff_id', 'owner_staff_position',
     ];
     protected $table = "hse_incident_reports";
     public $nameless = true;
@@ -20,7 +21,7 @@ class Hse_incident_report extends ModelExtended
         "comment_by_clinic" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_by_line_manager" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_by_general_manager" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-        'getInjuredPerson' => ["belongsTo", User::class, 'injured_person'],
+        'getInjuredPerson' => ["belongsTo", User::class, 'injured_staff_id'],
         'getLineManager' => ["belongsTo", User::class, 'line_manager'],
         'getOwner' => ["belongsTo", User::class, 'owner_id'],
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],

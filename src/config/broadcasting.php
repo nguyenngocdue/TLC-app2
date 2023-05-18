@@ -41,9 +41,6 @@ return [
                 'port' => env("LARAVEL_WEBSOCKETS_PORT", 6001),
                 'scheme' => 'https',
                 'debug' => true,
-                // 'client_options' => [
-                //     'verify' => false, // to disable TLS checks
-                // ],
                 'curl_options' => [
                     CURLOPT_SSL_VERIFYHOST => 0,
                     CURLOPT_SSL_VERIFYPEER => 0,

@@ -8,7 +8,7 @@ use App\Http\Controllers\Reports\TraitFunctionsReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Utils\Support\Report;
 
-class Qaqc_ncr_010 extends Report_ParentRegisterController
+class Qaqc_ncr_020 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
     use TraitFunctionsReport;
@@ -35,7 +35,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
                 ,GROUP_CONCAT(mir.id) AS mir_ids
                 ,DATE_FORMAT(mir.created_at, '%Y-%m') AS year_month_open_mir
                 ,COUNT(DATE_FORMAT(mir.created_at, '%Y-%m')) AS num_open_mir
-                FROM  sub_projects sp, qaqc_mirs mir
+                FROM  sub_projects sp, qaqc_wirs mir
                 WHERE 1 = 1";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
         $sql .= "\n AND sp.id = mir.sub_project_id

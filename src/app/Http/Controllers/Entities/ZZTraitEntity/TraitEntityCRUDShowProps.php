@@ -58,6 +58,7 @@ trait TraitEntityCRUDShowProps
 				}
 			}
 		}
+		$valueOptionPrint = $this->getValueOptionPrint();
 		return view('dashboards.pages.entity-show-props', [
 			'propsTree' => array_values($node),
 			'dataSource' => $dataSource,
@@ -67,7 +68,8 @@ trait TraitEntityCRUDShowProps
 			'modelPath' => $this->data,
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
 			'classListOptionPrint' => ClassList::DROPDOWN,
-			'valueOptionPrint' => $this->getValueOptionPrint(),
+			'valueOptionPrint' => $valueOptionPrint,
+			'layout' => $this->getLayoutPrint($valueOptionPrint),
 		]);
 	}
 }
