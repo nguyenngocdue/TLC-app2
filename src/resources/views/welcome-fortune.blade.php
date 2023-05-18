@@ -4,7 +4,8 @@
 
 @section('content')
 <div>
-    <x-renderer.project.project-team></x-renderer.project.project-team>
-    <x-renderer.project.project-overview></x-renderer.project.project-overview>
+    <x-renderer.card class="m-4  bg-white" px=0 py=0>
+        <x-renderer.tab-pane activeTab="new" :dataSource="$dataSource"></x-renderer.tab-pane>
+    </x-renderer.card>
 </div>
 @endsection
