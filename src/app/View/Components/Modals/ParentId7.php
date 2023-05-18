@@ -69,7 +69,7 @@ class ParentId7 extends Component
      */
     public function render()
     {
-        dump("Selected: '" . $this->selected . "'");
+        // dump("Selected: '" . $this->selected . "'");
         $tableName = "modal_" . $this->name;
         $params = [
             'name' => $this->name,

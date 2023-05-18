@@ -202,59 +202,6 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
         ];
     }
 
-
-    protected function transformDataSource($dataSource, $modeParams)
-    {
-        // dd($dataSource);
-        return collect($dataSource);
-    }
-
-    protected function changeValueData($dataSource, $modeParams)
-    {
-        $monthYears = [];
-        foreach ($dataSource as $key => $value) {
-            #if (is_null($value->ncr_status)) continue;
-            $data = [];
-            $data['ncr_status'] = $value->ncr_status;
-            $data['all_year_month_ncr'] = $value->all_year_month_ncr;
-            $data['ids_open_ncr'] = $value->ids_open_ncr;
-            $monthYears[$value->year_month_open_mir] = $data;
-        }
-        $dataNcrs = [];
-        $savedIdsNcrClosed = [];
-        foreach (array_reverse($monthYears) as $item => $value) {
-            [$idsNcrClosed, $idsNcrOpen] = $this->groupData($monthYears, $item);
-            if (count($savedIdsNcrClosed)) {
-                foreach (array_keys($idsNcrClosed) as $key) {
-                    if (in_array($key, $savedIdsNcrClosed)) {
-                        unset($idsNcrClosed[$key]);
-                    }
-                }
-            }
-            $dataNcrs[$item]['open_status'] = $idsNcrOpen;
-            $dataNcrs[$item]['closed_status'] = $idsNcrClosed;
-            $savedIdsNcrClosed = array_merge($savedIdsNcrClosed, array_keys($idsNcrClosed));
-        };
-
-        foreach ($dataSource as $key => $value) {
-            $dt = $dataNcrs[$value->year_month_open_mir] ?? [];
-            if (isset($dt['open_status'])) {
-                $dataSource[$key]->previous_months_open_ncr = (object)[
-                    'value' => $this->createTable($dt['open_status'], 'Open') ?? ""
-                ];
-            }
-            // dump($dt);
-            if (isset($dt['closed_status'])) {
-                $dataSource[$key]->previous_months_closed_ncr = (object)[
-                    'value' => $this->createTable($dt['closed_status'], 'Closed') ?? ""
-                ];
-            };
-        }
-        return collect($dataSource);
-    }
-
-
-
     private function combineValuesInArrayByKey($data, $item)
     {
         $keysToCombine = [
@@ -268,15 +215,16 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
             $date1 = strtotime($item);
             $date2 = strtotime($key);
             if ($date1 > $date2) {
-                foreach ($keysToCombine as $combineKey) {
+                array_walk($keysToCombine, function ($combineKey) use (&$combinedValues, $value) {
                     $combinedValues[$combineKey] .= $value[$combineKey] . ',';
-                }
+                });
             }
         }
 
         $combinedValues = array_map(fn ($item) => trim($item, ','), $combinedValues);
         return $combinedValues;
     }
+
     private function groupData($data, $month)
     {
         $combinedData = $this->combineValuesInArrayByKey($data, $month);
@@ -301,31 +249,82 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
 
     private function createTable($data, $title)
     {
-        // dump($data);
-
         if (empty($data)) return "";
-        $str1 = "";
+        $tableRows = "";
         foreach ($data as $day => $ids) {
             $count = count($ids);
-            $str1 .= "
+            $tableRows .= "
                 <tr>
                     <td>{$day}</td>
                     <td>{$count}</td>
                 </tr>";
         }
-        $str2 = "<table class='table-auto whitespace-no-wrap w-full text-sm'>
+        $table = "<table class='table-auto whitespace-no-wrap w-full text-sm'>
                     <thead class='sticky z-0 top-0 text-center bg-gray-50'>
-                    <tr>
-                        <th>Month</th>
-                        <th>NCRs Qty</th>
-                    </tr>
+                        <tr>
+                            <th>Month</th>
+                            <th>NCRs Qty</th>
+                        </tr>
                     </thead>
                     <tbody class='divide-y bg-white dark:divide-gray-700 dark:bg-gray-800'>
-                        {$str1}
+                        {$tableRows}
                     </tbody>
                 </table>";
-        // dump($str1);
-        return $str2;
+
+        return $table;
+    }
+
+    protected function transformDataSource($dataSource, $modeParams)
+    {
+        // dd($dataSource);
+        return collect($dataSource);
+    }
+
+    protected function changeValueData($dataSource, $modeParams)
+    {
+        $monthYears = [];
+        foreach ($dataSource as $key => $value) {
+            $data = [
+                'ncr_status' => $value->ncr_status,
+                'all_year_month_ncr' => $value->all_year_month_ncr,
+                'ids_open_ncr' => $value->ids_open_ncr
+            ];
+            $monthYears[$value->year_month_open_mir] = $data;
+        }
+        $dataNcrs = [];
+        $savedIdsNcrClosed = [];
+        foreach (array_reverse($monthYears) as $item => $value) {
+            [$idsNcrClosed, $idsNcrOpen] = $this->groupData($monthYears, $item);
+            $idsNcrClosed = array_diff_key($idsNcrClosed, array_flip($savedIdsNcrClosed));
+            $dataNcrs[$item] = [
+                'open_status' => $idsNcrOpen,
+                'closed_status' => $idsNcrClosed
+            ];
+            $savedIdsNcrClosed = array_merge($savedIdsNcrClosed, array_keys($idsNcrClosed));
+        }
+
+        foreach ($dataSource as $key => $value) {
+            $dt = $dataNcrs[$value->year_month_open_mir] ?? [];
+            if (isset($dt['open_status'])) {
+                $dataSource[$key]->previous_months_open_ncr = (object) [
+                    'value' => $this->createTable($dt['open_status'], 'Open') ?? ""
+                ];
+            }
+            if (isset($dt['closed_status'])) {
+                $dataSource[$key]->previous_months_closed_ncr = (object) [
+                    'value' => $this->createTable($dt['closed_status'], 'Closed') ?? ""
+                ];
+            }
+            $dataSource[$key]->total_open_ncr = (object) [
+                'value' => $value->total_open_ncr,
+                'cell_title' => 'Ids: ' . $value->ids_open_ncr
+            ];
+            $dataSource[$key]->num_open_mir = (object) [
+                'value' => $value->num_open_mir,
+                'cell_title' => 'Ids: ' . $value->mir_ids
+            ];
+        }
+        return collect($dataSource);
     }
 
     protected function getDefaultValueModeParams($modeParams, $request)
