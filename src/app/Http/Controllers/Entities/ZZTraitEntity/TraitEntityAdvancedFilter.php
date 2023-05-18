@@ -177,7 +177,9 @@ trait TraitEntityAdvancedFilter
                             if (!is_array($value)) {
                                 $value = [$value];
                             }
-                            $q->whereIn($key, $value);
+                            if (!in_array(null, $value)) {
+                                $q->whereIn($key, $value);
+                            }
                         });
                         break;
                     case 'dropdown_multi':
