@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Models\Prod_order;
 use App\Models\User;
-use App\Models\Wir_description;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\DefaultValues;
 use App\View\Components\Formula\All_ClosedAt;
@@ -12,6 +10,7 @@ use App\View\Components\Formula\All_ConcatNameWith123;
 use App\View\Components\Formula\All_DocId;
 use App\View\Components\Formula\All_SlugifyByName;
 use App\View\Components\Formula\Duplicate_Status;
+use App\View\Components\Formula\NCR_Report_Type;
 use App\View\Components\Formula\User_PositionRendered;
 use App\View\Components\Formula\Wir_NameRendered;
 
@@ -61,14 +60,17 @@ trait TraitEntityFormula
                 case "Duplicate_Status":
                     $value = (new Duplicate_Status())($type);
                     break;
-
                 case "Wir_NameRendered":
                     $value = (new Wir_NameRendered())($item);
+                    break;
+                case "NCR_Report_Type":
+                    $value = (new NCR_Report_Type())($item);
                     break;
                 default:
                     $value = "";
                     break;
             }
+            // dd($item);
             $item[$prop['column_name']] = $value;
         }
         return $item;
