@@ -70,6 +70,7 @@
                 <div class="col-span-5 border-l pl-2">
                     <div class="grid lg:grid-cols-5 lg:gap-2 md:grid-cols-3 md:gap-4 sm:grid-cols-1 sm:gap-10">
                     @foreach($props as $key => $value)
+                        {{-- @php if($key=='_status') continue; @endphp --}}
                         <div>
                         @php
                         $label = $value['label'];

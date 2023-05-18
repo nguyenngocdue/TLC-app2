@@ -26,9 +26,9 @@ class TabPane extends Component
      */
     public function render()
     {
-        foreach ($this->dataSource as $tabKey => &$tab) {
+        foreach ($this->dataSource as &$tab) {
             if (!isset($tab['class'])) $tab['class'] = "";
-            if ($tabKey === $this->activeTab) {
+            if ($tab['active'] ?? false) {
                 $tab['class'] .= " bg-white -mb-px";
             } else {
                 $tab['class'] .= " bg-gray-200";

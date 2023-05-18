@@ -9,6 +9,7 @@
     <x-elapse title="ViewAllController: "/>   
     <x-renderer.advanced-filter currentFilter="{{$currentFilter}}" :type="$type" :valueAdvanceFilters="$valueAdvanceFilters"/>
     <x-elapse title="Advanced filter: "/>
+    <x-renderer.tab-pane :dataSource="$tabPane">
     @php 
     // $abt = "<x-form.action-button-group type='$type' />"; 
     $route = route('updateUserSettings');
@@ -20,17 +21,23 @@
             </div>";
     $actionMultipleGroup = $trashed ? "<x-form.action-multiple type='$type' restore='true'/>" : "<x-form.action-multiple type='$type'/>";
     @endphp
-    <x-renderer.table showNo="true" :columns="$columns" :dataSource="$dataSource" 
-        showPaginationTop="true"
-        topLeftControl="{!! $actionButtonGroup !!}"
-        topRightControl="{!! $perPage !!}"
-        bottomLeftControl="{!! $actionMultipleGroup !!}"
-        bottomRightControl="{!! $perPage !!}"
-        tableTrueWidth={{$tableTrueWidth}}
-        />
-        <x-elapse title="Table overhead (without columns): "/>
-        <x-elapse total=1/>
+    <div class="p-2 bg-white">
+        <x-renderer.table 
+            showNo="true" 
+            :columns="$columns" 
+            :dataSource="$dataSource" 
+            showPaginationTop="true"
+            topLeftControl="{!! $actionButtonGroup !!}"
+            topRightControl="{!! $perPage !!}"
+            bottomLeftControl="{!! $actionMultipleGroup !!}"
+            bottomRightControl="{!! $perPage !!}"
+            tableTrueWidth={{$tableTrueWidth}}
+            />
+            <x-elapse title="Table overhead (without columns): "/>
+            <x-elapse total=1/>
+        </div>
+    </x-renderer.tab-pane>
 </div>
-<br />
+<br class=":" />
 <script src="{{ asset('js/renderprop.js') }}"></script>
 @endsection
