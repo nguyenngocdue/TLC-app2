@@ -15,6 +15,7 @@ class ManageCapabilities extends Manage_Parent
     protected $viewName = "dashboards.pages.manage-capability";
     protected $routeKey = "_cpb";
     protected $jsonGetSet = Capabilities::class;
+    protected $headerTop = 20;
 
     protected $showToggleColumn = true;
 

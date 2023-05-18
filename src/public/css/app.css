@@ -629,6 +629,21 @@ video {
 .top-\[50\%\] {
   top: 50%;
 }
+.top-24 {
+  top: 6rem;
+}
+.top-28 {
+  top: 7rem;
+}
+.top-32 {
+  top: 8rem;
+}
+.top-36 {
+  top: 9rem;
+}
+.top-40 {
+  top: 10rem;
+}
 .z-0 {
   z-index: 0;
 }

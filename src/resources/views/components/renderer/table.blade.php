@@ -33,7 +33,7 @@
                             {!! $colgroup !!}
                         </colgroup>
                         <thead class="sticky z-10 top-0">
-                            <tr class="{{$trClassList}}">
+                            <tr class="{{$trClassList}} h-{{$headerTop}}">
                                 {!! $columnsRendered !!}
                             </tr>
                         </thead>
