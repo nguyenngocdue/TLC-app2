@@ -261,7 +261,7 @@ class ViewAllController extends Controller
         $dataSource = [
             'all' => [
                 'href' => '?action=updateAdvanceFilter&_entity=' . $tableName,
-                'title' => 'All',
+                'title' => "<x-renderer.status>All</x-renderer.status>",
                 'active' => $currentStatus == 'true',
             ]
         ];
