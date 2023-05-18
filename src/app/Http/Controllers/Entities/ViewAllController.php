@@ -255,14 +255,14 @@ class ViewAllController extends Controller
     {
         // dump($advanceFilters);
 
-        $currentStatus = isset($advanceFilters['status']) ? $advanceFilters['status'][0] : "";
+        $currentStatus = isset($advanceFilters['status']) ? $advanceFilters['status'][0] : 'true';
         $statuses = LibStatuses::getFor($this->type);
         $tableName = Str::plural($this->type);
         $dataSource = [
             'all' => [
-                'href' => '?action=updateAdvanceFilter&_entity=' . $tableName . "&status%5B%5D=&",
+                'href' => '?action=updateAdvanceFilter&_entity=' . $tableName,
                 'title' => 'All',
-                'active' => is_null($currentStatus),
+                'active' => $currentStatus == 'true',
             ]
         ];
         foreach ($statuses as $statusKey => $status) {
@@ -296,7 +296,6 @@ class ViewAllController extends Controller
         $app = LibApps::getFor($this->type);
         $tableTrueWidth = !($app['hidden'] ?? false);
         if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
-
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'title' => $trashed ? 'View Trash' : 'View All',
