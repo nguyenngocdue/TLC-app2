@@ -99,7 +99,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 "width" => 60,
             ],
             [
-                "title" => "Create New",
+                "title" => "Action",
                 "dataIndex" => "check_list",
                 "align" => "center",
                 "width" => 30,
@@ -253,8 +253,13 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 $prodOrder = $value['prod_order_id'];
 
                 $items[$key]['check_list'] = (object)[
-                    'value' => '<i class="fa-regular fa-circle-plus text-green-800"></i>',
+                    'value' => '<i class="fa-regular fa-circle-plus text-green-800"></i> ',
                     'cell_href' => 'javascript:create(' . $inspTmplId . ',' . $prodOrder . ',' . $cuid . ',"' . $tmplName . '");',
+                ];
+            } else {
+                $items[$key]['check_list'] = (object)[
+                    'value' => '<i class="fa-solid fa-folder-open text-green-800"></i>',
+                    'cell_href' => route($this->getType() . '.edit', $value['chklst_id']),
                 ];
             }
         }
@@ -300,5 +305,21 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                     },
                 })
         }</script>";
+    }
+
+    protected function modifyDataToExportCSV($dataSource)
+    {
+        $data = $dataSource->toArray();
+        array_walk($data, function ($items, $key) use (&$data) {
+            foreach ($items as $field => $value) {
+                if (isset($value['status'])) {
+                    $data[$key][$field] = Report::makeTitle($value['status']);
+                } else {
+                    $data[$key][$field] = $value;
+                }
+            };
+            $data[$key]['check_list'] = $items['chklst_id'] ? 'Yes' : 'No';
+        });
+        return $data;
     }
 }
