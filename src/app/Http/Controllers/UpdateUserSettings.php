@@ -51,7 +51,7 @@ class UpdateUserSettings extends Controller
     {
         [$type, $valueRequest] = $this->formatRequestValue($request);
         $valueColumnNeedChange = array_keys($valueRequest) ?? [];
-        $valueAdvanceFilter = $settings[$type][Constant::VIEW_ALL]['advanced_filters'];
+        $valueAdvanceFilter = $settings[$type][Constant::VIEW_ALL]['advanced_filters'] ?? [];
         foreach ($valueColumnNeedChange as $key) {
             $valueAdvanceFilter[$key] = $valueRequest[$key];
         }
