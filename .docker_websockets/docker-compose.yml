@@ -26,7 +26,7 @@ services:
       - REDIS_PASSWORD=password
       - REDIS_REPLICATION_mode=master
     ports:
-      - "6379"
+      - "6379:6379"
     networks:
       - ws
   # websockets:
