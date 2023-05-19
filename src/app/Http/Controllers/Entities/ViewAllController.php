@@ -8,6 +8,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\LibApps;
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
@@ -250,6 +251,28 @@ class ViewAllController extends Controller
         }
     }
 
+    private function getTabPane($advanceFilters)
+    {
+        $currentStatus = isset($advanceFilters['status']) ? $advanceFilters['status'][0] : '';
+        $statuses = LibStatuses::getFor($this->type);
+        $tableName = Str::plural($this->type);
+        $dataSource = [
+            'all' => [
+                'href' => '?action=updateValueAdvanceFilter&_entity=' . $tableName . "&status%5B%5D=&",
+                'title' => "<x-renderer.status>All</x-renderer.status>",
+                'active' => is_null($currentStatus),
+            ]
+        ];
+        foreach ($statuses as $statusKey => $status) {
+            $dataSource[$statusKey] = [
+                'href' => '?action=updateValueAdvanceFilter&_entity=' . $tableName . "&status%5B%5D=$statusKey",
+                'title' => "<x-renderer.status>" . $statusKey . "</x-renderer.status>",
+                'active' => $currentStatus == $statusKey,
+            ];
+        }
+        return $dataSource;
+    }
+
     public function index(Request $request, $trashed = false)
     {
         $basicFilter = $request->input('basic_filter');
@@ -285,6 +308,7 @@ class ViewAllController extends Controller
             'tableTrueWidth' => $tableTrueWidth,
             'frameworkTook' => $this->frameworkTook,
             'trashed' => $trashed,
+            'tabPane' => $this->getTabPane($advanceFilters),
         ]);
     }
     public function indexTrashed(Request $request)

@@ -87,10 +87,9 @@
         {!! Toastr::message() !!}
 </body>
 <script>
-    Echo.channel('trades')
+    window.Echo.channel('trades')
         .listen('NewTrade', (e) => {
             console.log(e.trade);
-            // document.getElementById('latest_trade_user').innerText = e.trade;
         })
 </script>
 

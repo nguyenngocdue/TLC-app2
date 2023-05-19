@@ -16,16 +16,12 @@ trait TraitEntityAdvancedFilter
         $blackList = ['attachment', 'comment', 'relationship_renderer', 'thumbnail', 'parent_link'];
         $supperProps = SuperProps::getFor($type ?? $this->type);
         $propsFilters = array_filter($supperProps['props'], function ($item) use ($blackList) {
-            if ($item['column_type'] === "static") {
-                return false;
-            } else {
-                if (in_array($item['control'], $blackList)) return false;
-                else {
-                    if ($item['hidden_filter'] === 'true') return false;
-                }
-            }
+            if ($item['column_type'] === "static") return false;
+            if (in_array($item['control'], $blackList)) return false;
+            if ($item['hidden_filter'] === 'true') return false;
             return true;
         });
+        // dump($propsFilters);
         return $propsFilters;
     }
     private function distributeFilter($advanceFilters, $propsFilters)
@@ -181,7 +177,9 @@ trait TraitEntityAdvancedFilter
                             if (!is_array($value)) {
                                 $value = [$value];
                             }
-                            $q->whereIn($key, $value);
+                            if (!in_array(null, $value)) {
+                                $q->whereIn($key, $value);
+                            }
                         });
                         break;
                     case 'dropdown_multi':

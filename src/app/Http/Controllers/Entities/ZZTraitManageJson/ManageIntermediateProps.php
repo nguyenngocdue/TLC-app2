@@ -85,7 +85,7 @@ class ManageIntermediateProps extends Manage_Parent
                         $cbbDS[] = "";
                         foreach ($visibleProp as $k => $v) {
                             if ($v === 'true' && $k !== $status) {
-                                if ($transitionProps[$status][$k] == 'true') {
+                                if (isset($transitionProps[$status]) && $transitionProps[$status][$k] == 'true') {
                                     $cbbDS[] = $k;
                                 }
                             }
