@@ -6,12 +6,14 @@ use App\BigThink\HasStatus;
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\TraitLegendReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_tmpl;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 {
@@ -19,6 +21,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
     use TraitModifyDataToExcelReport;
     use TraitForwardModeReport;
     use HasStatus;
+    use TraitLegendReport;
     protected $rotate45Width = 300;
     protected  $sub_project_id = 82;
     protected  $prod_routing_id = 6;
@@ -147,6 +150,17 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             ],
 
         ];
+    }
+
+    protected function getColorLegends()
+    {
+        $plural = 'qaqc_insp_chklst_shts';
+        $statuses = LibStatuses::getFor($plural);
+        $legendData = [
+            'title' => 'The legend for the icons',
+            'dataSource' => $statuses
+        ];
+        return $this->createLegendData($legendData);
     }
 
     protected function filterSheetFromProdRouting($modeParams)
