@@ -12,7 +12,7 @@ services:
     environment:
       - NGINX_WEBSOCKET_HOST=${WEBSOCKET_DOMAIN_NAME}
     ports:
-      - "36102:6001"
+      - "36102:6002"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ../.docker_configs/certs:/etc/nginx/certs
