@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports\Registers;
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\TraitLegendReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Reports\TraitUserCompanyTree;
@@ -18,6 +19,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
     use TraitForwardModeReport;
     use TraitModifyDataToExcelReport;
     use TraitUserCompanyTree;
+    use TraitLegendReport;
 
     protected $groupBy = 'name_render';
     protected $groupByLength = 1;
@@ -250,15 +252,39 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
 
     protected function getColorLegends()
     {
-        return [
-            'remaining_allowed_OT_hours_legend' => [
-                'bg-red-400' => '< 0%',
-                'bg-pink-400' => '0% to < 25%',
-                'bg-orange-300' => '25% to < 50%',
-                'bg-yellow-400' => '50% to < 75%',
-                'bg-green-400' => '>= 75%',
+        $statuses = [
+            [
+                'color' => 'red',
+                'color_index' => '400',
+                'title' => '< 0%',
+            ],
+            [
+                'color' => 'pink',
+                'color_index' => '400',
+                'title' => '0% to < 25%',
+            ],
+            [
+                'color' => 'orange',
+                'color_index' => '400',
+                'title' => '25% to < 50%',
+            ],
+            [
+                'color' => 'yellow',
+                'color_index' => '400',
+                'title' => '50% to < 75%',
+            ],
+            [
+                'color' => 'green',
+                'color_index' => '400',
+                'title' => '>= 75%',
             ]
         ];
+
+        $legendData = [
+            'title' => 'Remaining Allowed OT Hours Legend',
+            'dataSource' => $statuses
+        ];
+        return $this->createLegendData($legendData);
     }
 
     protected function enrichDataSource($dataSource, $modeParams)

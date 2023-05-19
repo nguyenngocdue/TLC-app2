@@ -56,6 +56,7 @@ class ManageDefaultValues extends Manage_Parent
                     'User_PositionRendered',
                     'Duplicate_Status',
                     'Wir_NameRendered',
+                    'NCR_Report_Type',
                     '(not-yet)format_production',
                     '(not-yet)format_compliance',
                 ],
