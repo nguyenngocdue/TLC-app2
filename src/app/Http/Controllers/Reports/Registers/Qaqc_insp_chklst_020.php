@@ -106,7 +106,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             ],
             [
                 "title" => "Progress (%)",
-                "dataIndex" => "chksh_progress",
+                "dataIndex" => "chklst_progress",
                 "align" => "right",
                 "width" => 30,
             ],
@@ -180,9 +180,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 
     protected function transformDataSource($dataSource, $modeParams)
     {
-        // dd($dataSource);
         $items = $dataSource->toArray();
-
         $prodOderIds = $modeParams['prod_order_id2'] ?? [0];
         $chklsts = Qaqc_insp_chklst::whereIn('prod_order_id', $prodOderIds)->pluck('qaqc_insp_tmpl_id', 'prod_order_id')->ToArray();
         $chklstType = $modeParams['checksheet_type_id'] ?? '';
