@@ -47,6 +47,19 @@ class UpdateUserSettings extends Controller
         $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = $valueRequest;
         return $settings;
     }
+    private function updateValueAdvanceFilter($request, $settings)
+    {
+        [$type, $valueRequest] = $this->formatRequestValue($request);
+        $valueColumnNeedChange = array_keys($valueRequest) ?? [];
+        $valueAdvanceFilter = $settings[$type][Constant::VIEW_ALL]['advanced_filters'] ?? [];
+        foreach ($valueColumnNeedChange as $key) {
+            $valueAdvanceFilter[$key] = $valueRequest[$key];
+        }
+        $settings[$type][Constant::VIEW_ALL]['current_filter'] = 'advance_filter';
+        $settings[$type][Constant::VIEW_ALL]['choose_basic_filters'] = null;
+        $settings[$type][Constant::VIEW_ALL]['advanced_filters'] = $valueAdvanceFilter;
+        return $settings;
+    }
     private function updateBasicFilter($request, $settings, $filter = 'basic_filter')
     {
         $chooseBasicFilter = $request->input('choose_basic_filter');
@@ -257,6 +270,9 @@ class UpdateUserSettings extends Controller
                 break;
             case 'updatePerPageDocuments':
                 $settings = $this->updatePerPageReports($request, $settings);
+                break;
+            case 'updateValueAdvanceFilter':
+                $settings = $this->updateValueAdvanceFilter($request, $settings);
                 break;
             case 'resetAllSettings':
                 $settings = [];

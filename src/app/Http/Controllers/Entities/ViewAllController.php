@@ -253,21 +253,19 @@ class ViewAllController extends Controller
 
     private function getTabPane($advanceFilters)
     {
-        // dump($advanceFilters);
-
-        $currentStatus = isset($advanceFilters['status']) ? $advanceFilters['status'][0] : 'true';
+        $currentStatus = isset($advanceFilters['status']) ? $advanceFilters['status'][0] : '';
         $statuses = LibStatuses::getFor($this->type);
         $tableName = Str::plural($this->type);
         $dataSource = [
             'all' => [
-                'href' => '?action=updateAdvanceFilter&_entity=' . $tableName,
+                'href' => '?action=updateValueAdvanceFilter&_entity=' . $tableName . "&status%5B%5D=&",
                 'title' => "<x-renderer.status>All</x-renderer.status>",
-                'active' => $currentStatus == 'true',
+                'active' => is_null($currentStatus),
             ]
         ];
         foreach ($statuses as $statusKey => $status) {
             $dataSource[$statusKey] = [
-                'href' => '?action=updateAdvanceFilter&_entity=' . $tableName . "&status%5B%5D=$statusKey",
+                'href' => '?action=updateValueAdvanceFilter&_entity=' . $tableName . "&status%5B%5D=$statusKey",
                 'title' => "<x-renderer.status>" . $statusKey . "</x-renderer.status>",
                 'active' => $currentStatus == $statusKey,
             ];
