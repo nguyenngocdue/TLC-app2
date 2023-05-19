@@ -47,11 +47,8 @@ services:
     container_name: websockets_soketi
     restart: unless-stopped
     environment:
-      - SOKETI_DEBUG='${DEBUG:-1}'
-      - DEFAULT_APP_ID='${PUSHER_APP_ID:-tlc-id}'
-      - DEFAULT_APP_KEY='${PUSHER_APP_KEY:-tlc-key}'
-      - DEFAULT_APP_SECRET='${PUSHER_APP_SECRET:-tlc-secret}'
-      - DEFAULT_APP_ENABLE_CLIENT_MESSAGES=${DEFAULT_APP_ENABLE_CLIENT_MESSAGES:-false}
+      SOKETI_DEBUG: "1"
+      SOKETI_METRICS_SERVER_PORT: "9601"
     ports:
       - "${SOKETI_PORT:-6001}:6001"
       - "${SOKETI_METRICS_SERVER_PORT:-9601}:9601"
