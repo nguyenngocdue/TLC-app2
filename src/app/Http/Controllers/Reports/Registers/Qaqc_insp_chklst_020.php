@@ -157,7 +157,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $plural = 'qaqc_insp_chklst_shts';
         $statuses = LibStatuses::getFor($plural);
         $legendData = [
-            'title' => 'The legend for the icons',
+            'legend_title' => 'The legend for the icons',
+            'legend_col' => 6,
             'dataSource' => $statuses
         ];
         return $this->createLegendData($legendData);
