@@ -12,8 +12,8 @@ use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
-use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\Relationships;
+use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Timer;
 use Exception;
 use Illuminate\Http\Request;
@@ -142,9 +142,7 @@ class ViewAllController extends Controller
 
     private function getColumns($type, $columnLimit, $trash = false)
     {
-
-
-        $props = Props::getAllOf($type);
+        $props = SuperProps::getFor($type)['props'];
         $props = array_filter($props, fn ($prop) => !$prop['hidden_view_all']);
         $props = array_filter($props, fn ($prop) => $prop['column_type'] !== 'static');
         if ($columnLimit) {
