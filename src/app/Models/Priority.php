@@ -12,15 +12,9 @@ class Priority extends ModelExtended
 
     public $eloquentParams = [
         "getField" => ['belongsTo', Field::class, 'field_id'],
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getField()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -11,16 +11,9 @@ class Public_holiday extends ModelExtended
 
     public $eloquentParams = [
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getWorkplace()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

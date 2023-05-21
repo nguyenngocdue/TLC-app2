@@ -17,16 +17,7 @@ class Zunit_test_03 extends ModelExtended
 
     protected $table = 'zunit_test_03s';
 
-    public $eloquentParams = [
-        // "getOwner" => ["belongsTo", User::class, "owner_id"],
-        "getDeletedBy" => ["belongsTo", User::class, "deleted_by"],
-    ];
-
-    public function getDeletedBy()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
+    public $eloquentParams = [];
 
     public function getManyLineParams()
     {

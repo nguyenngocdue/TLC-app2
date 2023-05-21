@@ -21,9 +21,6 @@ class Esg_line extends ModelExtended
         "getEsgMetricType1" => ['belongsTo', Esg_metric_type_1::class, 'esg_metric_type_1_id'],
         "getEsgMetricType2" => ['belongsTo', Esg_metric_type_2::class, 'esg_metric_type_2_id'],
         "getUnit" => ['belongsTo', Term::class, 'unit'],
-
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
-        "getDeletedBy" => ['belongsTo', User::class, 'deleted_by'],
     ];
     public function getEsgSheet()
     {

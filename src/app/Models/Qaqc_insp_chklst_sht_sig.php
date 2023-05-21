@@ -12,14 +12,8 @@ class Qaqc_insp_chklst_sht_sig extends ModelExtended
     public $nameless = true;
 
     public $eloquentParams = [
-        "getOwner" => ["belongsTo", User::class, "owner_id"],
         "getSheet" => ["belongsTo", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_sht_id"],
     ];
-    public function getOwner()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
     public function getSheet()
     {
         $p = $this->eloquentParams[__FUNCTION__];

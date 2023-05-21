@@ -25,7 +25,6 @@ class Qaqc_wir extends ModelExtended
         "getWirDescription" => ['belongsTo', Wir_description::class, "wir_description_id"],
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
         'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
-        "getOwner" => ["belongsTo", User::class, "owner_id"],
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_inspector_decision" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
@@ -101,17 +100,6 @@ class Qaqc_wir extends ModelExtended
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-
-    public function getOwner()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    // public function loggable()
-    // {
-    //     $p = $this->eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-    // }
 
     public function getNcrs()
     {

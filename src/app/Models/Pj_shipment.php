@@ -15,7 +15,6 @@ class Pj_shipment extends ModelExtended
         "getPjModules" => ['hasMany', Pj_module::class, "pj_shipment_id"],
         "getProject" => ['belongsTo', Project::class, "project_id"],
         "getSubProject" => ['belongsTo', Sub_project::class, "sub_project_id"],
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getPjModules()
@@ -29,11 +28,6 @@ class Pj_shipment extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getSubProject()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

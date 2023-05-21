@@ -18,7 +18,6 @@ class Prod_routing_detail extends ModelExtended
         "getProdRoutingLink" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
         "getErpRoutingLink" => ['belongsTo', Erp_routing_link::class, 'erp_routing_link_id'],
         "getWirDescription" => ['belongsTo', Wir_description::class, 'wir_description_id'],
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getProdRouting()
@@ -40,12 +39,6 @@ class Prod_routing_detail extends ModelExtended
     }
 
     public function getWirDescription()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

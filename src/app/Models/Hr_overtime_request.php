@@ -14,7 +14,6 @@ class Hr_overtime_request extends ModelExtended
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
         "getAssignee1" => ["belongsTo", User::class, 'assignee_1'],
         'getHROTRLines' => ['hasMany', Hr_overtime_request_line::class, 'hr_overtime_request_id'],
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
 
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
@@ -30,12 +29,6 @@ class Hr_overtime_request extends ModelExtended
     }
 
     public function getAssignee1()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
