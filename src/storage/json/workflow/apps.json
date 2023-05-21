@@ -861,7 +861,7 @@
         "name": "user_company",
         "package": "system",
         "sub_package": "user",
-        "title": "Companies",
+        "title": "User Companies",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
