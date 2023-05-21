@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
+use App\Http\Controllers\Utils\TraitManagePropColumns;
+use App\Http\Controllers\Workflow\LibStandardProps;
 use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\Props;
 use App\Utils\Support\DBTable;
@@ -14,139 +16,11 @@ use Illuminate\Support\Str;
 class ManageProps extends Manage_Parent
 {
     use TraitPropAndRelationship;
+    use TraitManagePropColumns;
+
     protected $viewName = "dashboards.pages.manage-prop";
     protected $routeKey = "_prp";
     protected $jsonGetSet = Props::class;
-
-    protected function getColumns()
-    {
-        $controls = JsonControls::getControls();
-        return [
-            [
-                "dataIndex" => "action",
-                "align" => "center",
-            ],
-            [
-                "dataIndex" => "move_to",
-                "align" => "center",
-                "renderer" => "text4",
-                "editable" => true,
-                "width" => 10,
-            ],
-            [
-                "dataIndex" => "name",
-                "renderer" => "read-only-text4",
-                "editable" => true,
-            ],
-            [
-                "dataIndex" => "column_name",
-                "renderer" => "read-only-text4",
-                "editable" => true,
-            ],
-            [
-                "dataIndex" => "column_type",
-                "renderer" => "read-only-text4",
-                "editable" => true,
-            ],
-            [
-                "dataIndex" => "label",
-                "renderer" => "text4",
-                "editable" => true,
-            ],
-            [
-                "dataIndex" => "control",
-                "editable" => true,
-                "renderer" => "dropdown",
-                "cbbDataSource" => $controls,
-            ],
-            [
-                "dataIndex" => "align",
-                'title' => "Align (Static Only)",
-                "editable" => true,
-                "renderer" => "dropdown",
-                "cbbDataSource" => [''],
-            ],
-            [
-                "dataIndex" => "col_span",
-                "editable" => true,
-                "renderer" => "number4",
-                'width' => 10,
-                'properties' => ['placeholder' => 12],
-            ],
-            [
-                "dataIndex" => "width",
-                "editable" => true,
-                "renderer" => "number4",
-                'width' => 10,
-                'title' => "Width (px)",
-                'properties' => ['placeholder' => 100],
-            ],
-            [
-                "dataIndex" => "hidden_view_all",
-                "align" => "center",
-                "editable" => true,
-                "renderer" => "checkbox",
-                'width' => 10,
-            ],
-            [
-                "dataIndex" => "hidden_edit",
-                "align" => "center",
-                "editable" => true,
-                "renderer" => "checkbox",
-                'width' => 10,
-            ],
-            [
-                "dataIndex" => "hidden_label",
-                "align" => "center",
-                "editable" => true,
-                "renderer" => "checkbox",
-                'width' => 10,
-            ],
-            [
-                "dataIndex" => "hidden_filter",
-                "align" => "center",
-                "editable" => true,
-                "renderer" => "checkbox",
-                'width' => 10,
-            ],
-            [
-                "dataIndex" => "hidden_print",
-                "align" => "center",
-                "editable" => true,
-                "renderer" => "checkbox",
-                'width' => 10,
-            ],
-            [
-                "dataIndex" => "read_only",
-                "align" => "center",
-                "editable" => true,
-                "renderer" => "checkbox",
-                'width' => 10,
-            ],
-            [
-                "dataIndex" => "save_on_change",
-                "align" => "center",
-                "editable" => true,
-                "renderer" => "checkbox",
-                'width' => 10,
-            ],
-            [
-                "title" => "Dupli-catable",
-                "dataIndex" => "duplicatable",
-                "align" => "center",
-                "editable" => true,
-                "renderer" => "checkbox",
-                'width' => 10,
-            ],
-            [
-                "dataIndex" => "new_line",
-                "align" => "center",
-                "editable" => true,
-                "renderer" => "checkbox",
-                'width' => 10,
-            ],
-        ];
-    }
 
     private function makeBlankDefaultObject()
     {
@@ -263,9 +137,15 @@ class ManageProps extends Manage_Parent
         $this->renewColumn($json, $result, 'column_type');
         [$toBeGreen, $toBeRed] = $this->addGreenAndRedColor($result, $json);
 
+        // $standardConfigKeys = array_keys(config("standardProps"));
+        $standardConfigKeys = array_keys(LibStandardProps::getAll());
+        // dump($standardConfig);
+        foreach ($json as &$line) if (in_array($line['name'], $standardConfigKeys)) $line['row_color'] = 'gray';
+
         foreach (array_keys($toBeGreen) as $key) $json[$key]['row_color'] = "green";
         foreach (array_keys($toBeRed) as $key) $json[$key]['row_color'] = "red";
         foreach ($json as &$line) if (isset($line['column_type']) && $line['column_type'] === 'static') $line['row_color'] = "amber";
+
 
         foreach ($result as $key => $rows) {
             foreach ($rows as $column => $value) {

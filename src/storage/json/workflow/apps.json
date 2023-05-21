@@ -274,6 +274,20 @@
         "hidden_navbar": "true",
         "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
     },
+    "manageStandardProps": {
+        "name": "manageStandardProps",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Standard Props",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
+    },
     "permissions": {
         "name": "permissions",
         "package": "system",
