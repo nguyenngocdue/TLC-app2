@@ -13,13 +13,13 @@ class AccessLoggerController extends Controller
 {
     function __invoke()
     {
-        if (!env('ACCESS_LOGGER')) return;
+        if (!env('ACCESS_LOGGER_ENABLED')) return;
         $cuId = CurrentUser::id();
         $routeName = CurrentRoute::getName();
         $entityName = CurrentRoute::getTypeSingular();
         $entityId = CurrentRoute::getEntityId($entityName);
-        $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
         $took = Timer::getTimeElapse();
+        $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
         DB::connection($connection)->table('logger_access')->insert([
             'owner_id' => $cuId,
             'took' => $took,
