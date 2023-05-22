@@ -26,19 +26,5 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
-    },
-    "_getUsers": {
-        "name": "_getUsers",
-        "relationship": "hasMany",
-        "control_name": "getUsers",
-        "renderer_view_all": "agg_count",
-        "renderer_view_all_param": "",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "many_icons",
-        "renderer_edit_param": "getManyIconParams",
-        "control": "relationship_renderer",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
     }
 }
