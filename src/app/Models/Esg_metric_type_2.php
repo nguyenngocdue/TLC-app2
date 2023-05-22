@@ -11,11 +11,15 @@ class Esg_metric_type_2 extends ModelExtended
 
     public $eloquentParams = [
         "getEsgMetricType1" => ['belongsTo', Esg_metric_type_1::class, 'esg_metric_type_1_id'],
-
         "getUnit" => ['belongsTo', Term::class, 'unit'],
     ];
 
     public function getEsgMetricType1()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getUnit()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
