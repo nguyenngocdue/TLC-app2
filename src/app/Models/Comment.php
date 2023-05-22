@@ -15,9 +15,10 @@ class Comment extends ModelExtended
     public $nameless = true;
 
     public $eloquentParams = [
-        "commentable" => ['morphTo', Comment::class, 'commentable_type', 'commentable_id'],
         "getCategory" => ['belongsTo', Field::class, 'category'],
         "comment_attachment" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+
+        "commentable" => ['morphTo', Comment::class, 'commentable_type', 'commentable_id'],
     ];
 
     public function comment_attachment()

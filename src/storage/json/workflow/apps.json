@@ -246,6 +246,20 @@
         "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
     },
+    "manageStandardProps": {
+        "name": "manageStandardProps",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Standard Props",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
+    },
     "manageStatuses": {
         "name": "manageStatuses",
         "package": "system",
@@ -265,20 +279,6 @@
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Widgets",
-        "nickname": null,
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
-    },
-    "manageStandardProps": {
-        "name": "manageStandardProps",
-        "package": "system",
-        "sub_package": "system_configuration",
-        "title": "Manage Standard Props",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
@@ -514,8 +514,6 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "hidden": "true",
-        "hidden_navbar": "true",
         "icon": null
     },
     "project": {
@@ -696,7 +694,7 @@
     "qaqc_mir": {
         "name": "qaqc_mir",
         "package": "project_management",
-        "sub_package": "quality",
+        "sub_package": "warehouse",
         "title": "Material Inspection Requests",
         "nickname": "mir",
         "doc_id_format_column": "sub_project_id",
@@ -723,7 +721,7 @@
     "qaqc_wir": {
         "name": "qaqc_wir",
         "package": "project_management",
-        "sub_package": "quality",
+        "sub_package": "production",
         "title": "Work Inspection Requests",
         "nickname": "wir",
         "doc_id_format_column": "sub_project_id",

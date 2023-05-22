@@ -22,12 +22,10 @@ class BlueprintExtended extends Blueprint
         $this->timestamp('closed_at')->nullable();
     }
 
-    function appendCommonFields($ownerId = true)
+    function appendCommonFields()
     {
         $this->string('status')->nullable();
-        if ($ownerId) {
-            $this->unsignedBigInteger('owner_id');
-        }
+        $this->unsignedBigInteger('owner_id');
 
         $this->timestamp('created_at')->useCurrent();
         $this->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
