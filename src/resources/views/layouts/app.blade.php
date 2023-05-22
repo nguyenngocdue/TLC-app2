@@ -87,7 +87,7 @@
         {!! Toastr::message() !!}
 </body>
 <script>
-    Echo.channel('test')
+    window.Echo.channel('test')
         .listen('Test', (e) => {
             console.log(e);
         })
