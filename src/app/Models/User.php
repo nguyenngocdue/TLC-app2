@@ -6,6 +6,7 @@ use App\BigThink\HasAttachments;
 use App\BigThink\HasCachedAvatar;
 use App\BigThink\HasCheckbox;
 use App\BigThink\HasStatus;
+use App\BigThink\SoftDeletesWithDeletedBy;
 use App\BigThink\TraitMenuTitle;
 use App\BigThink\TraitMetaForChart;
 use App\BigThink\TraitModelExtended;
@@ -40,6 +41,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     use TraitMorphManyByFieldName;
     use TraitOptimisticLocking;
     use TraitModelExtended;
+    use SoftDeletesWithDeletedBy;
 
     use HasAttachments;
     use HasCachedAvatar;
