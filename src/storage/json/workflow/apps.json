@@ -246,11 +246,11 @@
         "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
     },
-    "manageStandardProps": {
-        "name": "manageStandardProps",
+    "manageStandardDefaultValues": {
+        "name": "manageStandardDefaultValues",
         "package": "system",
         "sub_package": "system_configuration",
-        "title": "Manage Standard Props",
+        "title": "Manage Standard Default Values",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
@@ -260,11 +260,11 @@
         "hidden_navbar": "true",
         "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
     },
-    "manageStandardDefaultValues": {
-        "name": "manageStandardDefaultValues",
+    "manageStandardProps": {
+        "name": "manageStandardProps",
         "package": "system",
         "sub_package": "system_configuration",
-        "title": "Manage Standard Default Values",
+        "title": "Manage Standard Props",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
