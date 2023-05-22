@@ -41,10 +41,10 @@ trait TraitEntityFormula
                         $value = "";
                         break;
                     }
-                    $position_pres = ($user->positionPres) ? $user->positionPres->name : "";
-                    $position_1 = ($user->position1) ? $user->position1->name : "";
-                    $position_2 = ($user->position2) ? $user->position2->name : "";
-                    $position_3 = ($user->position3) ? $user->position3->name : "";
+                    $position_pres = ($user->getPositionPrefix) ? $user->getPositionPrefix->name : "";
+                    $position_1 = ($user->getPosition1) ? $user->getPosition1->name : "";
+                    $position_2 = ($user->getPosition2) ? $user->getPosition2->name : "";
+                    $position_3 = ($user->getPosition3) ? $user->getPosition3->name : "";
                     $value = (new User_PositionRendered())($position_pres, $position_1, $position_2, $position_3);
                     break;
                 case "All_OwnerId":

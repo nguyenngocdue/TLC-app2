@@ -93,24 +93,27 @@ class User extends Authenticatable implements LdapAuthenticatable
     public $eloquentParams = [
         "getAvatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "getPosts" => ['hasMany', Post::class, 'owner_id', 'id'],
-        "getWorkplaces" => ['belongsTo', Workplace::class, 'workplace'],
-        "userTypes" => ['belongsTo', User_type::class, 'user_type'],
-        "getCompany" => ['belongsTo', User_company::class, 'company'],
-        "categories" => ['belongsTo', User_category::class, 'category'],
-        "positionPres" => ['belongsTo', User_position_pre::class, 'position_prefix'],
-        "position1" => ['belongsTo', User_position1::class, 'position_1'],
-        "position2" => ['belongsTo', User_position2::class, 'position_2'],
-        "position3" => ['belongsTo', User_position3::class, 'position_3'],
-        "disciplines" => ['belongsTo', User_discipline::class, 'discipline'],
-        "departments" => ['belongsTo', Department::class, 'department'],
-        "time_keep_types" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
-        "productionRuns" => ['belongsToMany', Prod_run::class, 'prod_user_runs', 'user_id', 'prod_run_id'],
-        "getQaqcInspChklsts" => ['belongsTo', Qaqc_insp_chklst::class, 'owner_id'],
+        "getWorkplace" => ['belongsTo', Workplace::class, 'workplace'],
+        "getUserType" => ['belongsTo', User_type::class, 'user_type'],
+        "getUserCompany" => ['belongsTo', User_company::class, 'company'],
+        "getUserCat" => ['belongsTo', User_category::class, 'category'],
+        "getPositionPrefix" => ['belongsTo', User_position_pre::class, 'position_prefix'],
+        "getPosition1" => ['belongsTo', User_position1::class, 'position_1'],
+        "getPosition2" => ['belongsTo', User_position2::class, 'position_2'],
+        "getPosition3" => ['belongsTo', User_position3::class, 'position_3'],
+        "getUserDiscipline" => ['belongsTo', User_discipline::class, 'discipline'],
+        "getUserDepartment" => ['belongsTo', Department::class, 'department'],
+        "getTimeKeepType" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
         "getRoleSet" => ['morphToMany', Role_set::class, 'model', 'model_has_role_sets'],
+        // "productionRuns" => ['belongsToMany', Prod_run::class, 'prod_user_runs', 'user_id', 'prod_run_id'],
+        // "getQaqcInspChklsts" => ['belongsTo', Qaqc_insp_chklst::class, 'owner_id'],
         //This line is for ParentType to load,
         //Otherwise in User screen, the thumbnail will lost its value
         "attachment" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
         "featured_image" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
+
+        "getOwner" =>  ["belongsTo", User::class, "owner_id"],
+        "getDeletedBy" =>  ["belongsTo", User::class, "deleted_by"],
     ];
 
     public $oracyParams = [
@@ -141,57 +144,57 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
-    public function getWorkplaces()
+    public function getWorkplace()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function userTypes()
+    public function getUserType()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function categories()
+    public function getUserCat()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getCompany()
+    public function getUserCompany()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function positionPres()
+    public function getPositionPrefix()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function position1()
+    public function getPosition1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function position2()
+    public function getPosition2()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function position3()
+    public function getPosition3()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function disciplines()
+    public function getUserDiscipline()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function departments()
+    public function getUserDepartment()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function time_keep_types()
+    public function getTimeKeepType()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -202,21 +205,32 @@ class User extends Authenticatable implements LdapAuthenticatable
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    public function productionRuns()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('user_id');
-    }
+    // public function productionRuns()
+    // {
+    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('user_id');
+    // }
 
-    public function getQaqcInspChklsts()
+    // public function getQaqcInspChklsts()
+    // {
+    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
+    // public static function getAllInspector()
+    // {
+    //     $disciplineInspector = 23;
+    //     return self::where('discipline', $disciplineInspector)->where('resigned', 0)->get();
+    // }
+    function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public static function getAllInspector()
+
+    function getDeletedBy()
     {
-        $disciplineInspector = 23;
-        return self::where('discipline', $disciplineInspector)->where('resigned', 0)->get();
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getManyIconParams()
     {

@@ -835,25 +835,6 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_productionRuns": {
-        "name": "_productionRuns",
-        "column_name": "productionRuns",
-        "column_type": "eloquent_prop",
-        "label": "Prod Runs",
-        "control": "relationship_renderer",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "true",
-        "hidden_edit": "true",
-        "hidden_label": "",
-        "hidden_filter": "true",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "duplicatable": "",
-        "new_line": ""
-    },
     "_attachment": {
         "name": "_attachment",
         "column_name": "attachment",

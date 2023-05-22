@@ -866,7 +866,6 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
-        "hidden_navbar": "true",
         "icon": null
     },
     "user_category": {
