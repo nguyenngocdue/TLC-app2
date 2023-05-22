@@ -1,7 +1,12 @@
 {
+    "new": {
+        "name": "new",
+        "label": "Create New",
+        "tooltip": ""
+    },
     "in_progress": {
         "name": "in_progress",
-        "label": "Chang to In Progress",
+        "label": "Change to In Progress",
         "tooltip": ""
     },
     "not_applicable": {
@@ -9,29 +14,24 @@
         "label": "Change to N\/A",
         "tooltip": ""
     },
-    "on_hold": {
-        "name": "on_hold",
-        "label": "Change to On Hold",
-        "tooltip": ""
-    },
     "passed": {
         "name": "passed",
-        "label": "Ready for Internal Sign Off",
+        "label": "Ready for TLC Sign Off",
         "tooltip": ""
     },
     "inspected": {
         "name": "inspected",
-        "label": "Finish Internal Inspection",
+        "label": "Finish TLC Sign Off",
         "tooltip": ""
     },
     "pending_approval": {
         "name": "pending_approval",
-        "label": "Ready for External Approvals",
+        "label": "Ready for Third Party Sign Off",
         "tooltip": ""
     },
     "rejected": {
         "name": "rejected",
-        "label": "Reject",
+        "label": "Reject Sign Off",
         "tooltip": ""
     },
     "approved": {
