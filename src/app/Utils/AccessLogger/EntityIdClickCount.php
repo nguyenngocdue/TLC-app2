@@ -4,7 +4,7 @@ namespace App\Utils\AccessLogger;
 
 use Illuminate\Support\Facades\DB;
 
-class EntityClickCount
+class EntityIdClickCount
 {
     function __invoke($entityName)
     {
