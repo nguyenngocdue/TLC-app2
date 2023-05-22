@@ -13,6 +13,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getDeletedBy": {
+        "name": "_getDeletedBy",
+        "relationship": "belongsTo",
+        "control_name": "deleted_by",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getProjectMembers()": {
         "name": "_getProjectMembers()",
         "relationship": "getCheckedByField",
@@ -64,7 +78,7 @@
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "attachment",
+        "control": "thumbnail",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
