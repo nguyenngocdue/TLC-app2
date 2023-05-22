@@ -11,9 +11,10 @@ class Prod_discipline extends ModelExtended
     protected $table = 'prod_disciplines';
 
     public $eloquentParams = [
+        "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
+
         "getProdRoutingLink" => ['hasMany', Prod_routing_link::class, 'prod_discipline_id'],
         "getDiscipline1s" => ['hasMany', Prod_discipline_1::class, 'prod_discipline_id'],
-        "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
         "getErpRoutingLinks" => ['hasMany', Erp_routing_link::class, 'prod_discipline_id'],
         "getWirDescriptions" => ['hasMany', Wir_description::class, 'prod_discipline_id'],
     ];

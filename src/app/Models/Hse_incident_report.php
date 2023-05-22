@@ -18,17 +18,19 @@ class Hse_incident_report extends ModelExtended
     public $nameless = true;
 
     public $eloquentParams = [
+        'getInjuredPerson' => ["belongsTo", User::class, 'injured_person'],
+        'getLineManager' => ["belongsTo", User::class, 'line_manager'],
+        'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
+        "getDocType" => ['belongsTo', Term::class, 'incident_doc_type_id'],
+        "getDocSubType" => ['belongsTo', Term::class, 'incident_doc_sub_type_id'],
+
+        'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],
+
         "comment_by_clinic" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_by_line_manager" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_by_general_manager" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-        'getInjuredPerson' => ["belongsTo", User::class, 'injured_staff_id'],
-        'getLineManager' => ["belongsTo", User::class, 'line_manager'],
-        'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
-        'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],
         "attachment_1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_2" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
-        "getDocType" => ['belongsTo', Term::class, 'incident_doc_type_id'],
-        "getDocSubType" => ['belongsTo', Term::class, 'incident_doc_sub_type_id'],
     ];
 
     public $oracyParams = [

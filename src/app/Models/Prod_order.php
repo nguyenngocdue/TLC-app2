@@ -14,10 +14,12 @@ class Prod_order extends ModelExtended
     protected $table = 'prod_orders';
 
     public $eloquentParams = [
-        "getProdSequences" => ['hasMany', Prod_sequence::class, 'prod_order_id'],
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getProdRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
+
+        "getProdSequences" => ['hasMany', Prod_sequence::class, 'prod_order_id'],
         "getQaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'prod_order_id'],
+
         "getMeta" => ['morphTo', Prod_order::class, 'meta_type', 'meta_id'],
     ];
 

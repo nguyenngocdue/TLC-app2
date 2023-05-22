@@ -11,10 +11,12 @@ class Prod_routing extends ModelExtended
     protected $table = 'prod_routings';
 
     public $eloquentParams = [
-        "getProdRoutingLinks" => ['belongsToMany', Prod_routing_link::class, 'prod_routing_details', 'prod_routing_id', 'prod_routing_link_id'],
         "prodOrders" => ['hasMany', Prod_order::class],
-        "getProdSequences" => ["hasManyThrough", Prod_sequence::class, Prod_order::class],
         "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, 'prod_routing_id'],
+
+        "getProdSequences" => ["hasManyThrough", Prod_sequence::class, Prod_order::class],
+
+        "getProdRoutingLinks" => ['belongsToMany', Prod_routing_link::class, 'prod_routing_details', 'prod_routing_id', 'prod_routing_link_id'],
     ];
 
     public $oracyParams = [

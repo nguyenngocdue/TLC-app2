@@ -11,8 +11,9 @@ class Workplace extends ModelExtended
     protected $table = 'workplaces';
 
     public $eloquentParams = [
-        "getUsers" => ['hasMany', User::class, 'workplace'],
         "getDefAssignee" => ["belongsTo", User::class, 'def_assignee'],
+
+        "getUsers" => ['hasMany', User::class, 'workplace'],
         "getPublicHolidays" => ["hasMany", Public_holiday::class, 'workplace_id'],
         "getHROTRs" => ["hasMany", Hr_overtime_request::class, 'workplace_id'],
     ];

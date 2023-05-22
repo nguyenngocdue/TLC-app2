@@ -2,13 +2,13 @@
     "_getInjuredPerson": {
         "name": "_getInjuredPerson",
         "relationship": "belongsTo",
-        "control_name": "injured_staff_id",
+        "control_name": "injured_person",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "text",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -92,7 +92,7 @@
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown",
+        "control": "",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

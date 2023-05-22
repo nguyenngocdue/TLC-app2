@@ -19,10 +19,11 @@ class Prod_sequence extends ModelExtended
 
     public $eloquentParams = [
         "prodOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],
-        "prodRuns" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
         "getProdRoutingLinks" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
-        "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
         "getUomId" => ["belongsTo", Term::class, 'uom_id'],
+
+        "prodRuns" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
+        "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
     ];
 
     public function prodOrder()

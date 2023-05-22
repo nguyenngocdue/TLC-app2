@@ -10,8 +10,8 @@ class Qaqc_insp_control_value extends ModelExtended
     protected $table = "qaqc_insp_control_values";
 
     public $eloquentParams = [
-        "getValues" => ["hasMany", Qaqc_insp_value::class, "qaqc_insp_control_value_id"],
         "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],
+        "getValues" => ["hasMany", Qaqc_insp_value::class, "qaqc_insp_control_value_id"],
     ];
 
     public function getValues()

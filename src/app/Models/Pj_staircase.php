@@ -20,8 +20,9 @@ class Pj_staircase extends ModelExtended
         'getPjType' => ['belongsTo', Term::class, 'pj_module_type_id'],
         'getPjName' => ['belongsTo', Term::class, 'pj_name_id'],
         'getPjCharacter' => ['belongsTo', Term::class, 'pj_character_id'],
-        "getProdOrders" => ['morphMany', Prod_order::class, 'meta', 'meta_type', 'meta_id'],
         'getPjShipment' => ['belongsTo', Pj_shipment::class, 'pj_shipment_id'],
+
+        "getProdOrders" => ['morphMany', Prod_order::class, 'meta', 'meta_type', 'meta_id'],
     ];
 
     public function getPjBuilding()

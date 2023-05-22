@@ -92,7 +92,6 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     public $eloquentParams = [
         "getAvatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
-        "getPosts" => ['hasMany', Post::class, 'owner_id', 'id'],
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace'],
         "getUserType" => ['belongsTo', User_type::class, 'user_type'],
         "getUserCompany" => ['belongsTo', User_company::class, 'company'],
@@ -104,6 +103,11 @@ class User extends Authenticatable implements LdapAuthenticatable
         "getUserDiscipline" => ['belongsTo', User_discipline::class, 'discipline'],
         "getUserDepartment" => ['belongsTo', Department::class, 'department'],
         "getTimeKeepType" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
+        "getOwner" =>  ["belongsTo", User::class, "owner_id"],
+        "getDeletedBy" =>  ["belongsTo", User::class, "deleted_by"],
+
+        "getPosts" => ['hasMany', Post::class, 'owner_id', 'id'],
+
         "getRoleSet" => ['morphToMany', Role_set::class, 'model', 'model_has_role_sets'],
         // "productionRuns" => ['belongsToMany', Prod_run::class, 'prod_user_runs', 'user_id', 'prod_run_id'],
         // "getQaqcInspChklsts" => ['belongsTo', Qaqc_insp_chklst::class, 'owner_id'],
@@ -111,9 +115,6 @@ class User extends Authenticatable implements LdapAuthenticatable
         //Otherwise in User screen, the thumbnail will lost its value
         "attachment" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
         "featured_image" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
-
-        "getOwner" =>  ["belongsTo", User::class, "owner_id"],
-        "getDeletedBy" =>  ["belongsTo", User::class, "deleted_by"],
     ];
 
     public $oracyParams = [

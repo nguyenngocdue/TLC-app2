@@ -12,8 +12,8 @@ class Sub_project extends ModelExtended
     protected $table = 'sub_projects';
 
     public $eloquentParams = [
-        "prodOrders" => ['hasMany', Prod_order::class],
         "getProject" => ['belongsTo', Project::class, "project_id"],
+        "prodOrders" => ['hasMany', Prod_order::class],
     ];
 
     public $oracyParams = [

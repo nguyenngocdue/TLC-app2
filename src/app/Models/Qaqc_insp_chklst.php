@@ -15,8 +15,9 @@ class Qaqc_insp_chklst extends ModelExtended
 
     public $eloquentParams = [
         "prodOrder" => ["belongsTo", Prod_order::class, "prod_order_id"],
-        "getSheets" => ["hasMany", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_id"],
         "getQaqcInspTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, "qaqc_insp_tmpl_id"],
+
+        "getSheets" => ["hasMany", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_id"],
     ];
 
     public function prodOrder()

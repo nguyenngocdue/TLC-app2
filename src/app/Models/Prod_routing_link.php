@@ -11,9 +11,11 @@ class Prod_routing_link extends ModelExtended
     protected $table = 'prod_routing_links';
 
     public $eloquentParams = [
-        "getProdRoutings" => ['belongsToMany', Prod_routing::class, 'prod_routing_details', 'prod_routing_link_id', 'prod_routing_id'],
-        "prodSequence" => ['hasMany', Prod_sequence::class, 'prod_routing_link_id'],
         "getDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
+
+        "prodSequence" => ['hasMany', Prod_sequence::class, 'prod_routing_link_id'],
+
+        "getProdRoutings" => ['belongsToMany', Prod_routing::class, 'prod_routing_details', 'prod_routing_link_id', 'prod_routing_id'],
     ];
 
     public function getProdRoutings()
