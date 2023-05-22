@@ -48,10 +48,6 @@
     {{-- <script src="{{ asset('js/toastr.min.js') }}"></script> --}}
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
     <script src="{{ asset('js/signature_pad@4.0.0.umd.min.js') }}"></script>
-    {{-- Socket IO must before laravel-echo --}}
-    {{-- <script src="/socket.io/socket.io.js"></script> --}}
-
-    {{-- <script src="{{ asset('/js/laravel-echo.js') }}"></script> --}}
     <script src="{{ asset('js/qrcode@1.0.0.min.js') }}"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <script src="{{ asset('js/html2pdf@0.10.1.bundle.min.js') }}"></script>
