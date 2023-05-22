@@ -2,10 +2,9 @@
 
 namespace App\View\Components\Formula;
 
-use App\Utils\Support\Json\Definitions;
 use App\Utils\Support\Json\SuperDefinitions;
 
-class Duplicate_Status
+class All_DuplicateStatus
 {
     public function __invoke($type)
     {

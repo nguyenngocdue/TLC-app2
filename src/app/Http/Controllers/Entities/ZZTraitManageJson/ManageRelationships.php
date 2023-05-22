@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
+use App\Http\Controllers\Utils\TraitManageRelationshipColumns;
 use App\Utils\Support\Json\Props;
-use App\Utils\Support\JsonControls;
 use App\Utils\Support\Json\Relationships;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
@@ -11,86 +11,11 @@ use Illuminate\Support\Facades\Log;
 class ManageRelationships extends Manage_Parent
 {
     use TraitPropAndRelationship;
+    use TraitManageRelationshipColumns;
 
     protected $viewName = "dashboards.pages.manage-relationship";
     protected $routeKey = "_rls";
     protected $jsonGetSet = Relationships::class;
-
-    protected function getColumns()
-    {
-        $viewAllControls = JsonControls::getRendererViewAll();
-        $editControls = JsonControls::getRendererEdit();
-        return [
-            [
-                "dataIndex" => "action",
-                "align" => "center",
-            ],
-            [
-                "dataIndex" => "name",
-                "renderer" => "read-only-text4",
-                "editable" => true,
-            ],
-            [
-                "dataIndex" => "relationship",
-                "renderer" => "read-only-text4",
-                "editable" => true,
-            ],
-            [
-                "dataIndex" => "control_name",
-                "renderer" => "read-only-text4",
-                "editable" => true,
-            ],
-            [
-                "dataIndex" => "renderer_view_all",
-                "editable" => true,
-                "renderer" => "dropdown",
-                "cbbDataSource" => $viewAllControls,
-            ],
-            [
-                "dataIndex" => "renderer_view_all_param",
-                "editable" => true,
-                "renderer" => "text4",
-            ],
-            [
-                "dataIndex" => "renderer_view_all_unit",
-                "editable" => true,
-                "renderer" => "dropdown",
-                "cbbDataSource" => JsonControls::getParamUnits(),
-            ],
-            [
-                "dataIndex" => "renderer_edit",
-                "editable" => true,
-                "renderer" => "dropdown",
-                "cbbDataSource" => $editControls,
-            ],
-            [
-                "dataIndex" => "renderer_edit_param",
-                "editable" => true,
-                "renderer" => "text4",
-            ],
-            [
-                "dataIndex" => "control",
-                "editable" => true,
-                "renderer" => "read-only-text4",
-            ],
-            [
-                "dataIndex" => "filter_columns",
-                "editable" => true,
-                "renderer" => "text4",
-            ],
-            [
-                "dataIndex" => "filter_values",
-                "editable" => true,
-                "renderer" => "text4",
-            ],
-            [
-                "dataIndex" => "radio_checkbox_colspan",
-                "editable" => true,
-                "renderer" => "number4",
-                'properties' => ['placeholder' => 4],
-            ],
-        ];
-    }
 
     private function makeBlankDefaultObject()
     {

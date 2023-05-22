@@ -58,7 +58,7 @@ return new class extends Migration
             $table->string("time_zone")->nullable();
             $table->json("settings");
             $table->rememberToken();
-            $table->appendCommonFields(false);
+            $table->appendCommonFields();
         });
         // Schema::create("users", function (Blueprint $table) {
         //     $table->id();

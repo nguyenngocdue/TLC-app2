@@ -2,6 +2,7 @@
 
 namespace App\Utils\Support\Json;
 
+use App\Http\Controllers\Workflow\LibStandardDefaultValues;
 use App\Http\Controllers\Workflow\LibStandardProps;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\CacheToRamForThisSection;
@@ -53,10 +54,18 @@ class SuperProps
         return $result;
     }
 
-    private static function attachJson($external_name, &$allProps, $externals)
+    private static function attachJson($external_name, &$allProps, $toBeAttached, $standardConfig = [])
     {
         foreach (array_keys($allProps) as $column_name) $allProps[$column_name][$external_name] = [];
-        foreach ($externals as $column_name => $value) {
+        $keys = array_keys($toBeAttached);
+        foreach ($standardConfig as $key => $value) {
+            if (in_array($key, $keys)) {
+                foreach ($value as $k => $v) {
+                    if (!is_null($v)) $toBeAttached[$key][$k] = $value[$k];
+                }
+            }
+        }
+        foreach ($toBeAttached as $column_name => $value) {
             // dump($column_name);
             if (isset($allProps[$column_name])) {
                 foreach ($value as $k => $v) {
@@ -64,11 +73,12 @@ class SuperProps
                     $allProps[$column_name][$external_name][$k] = $v;
                 }
             } else {
-                // dump($externals);
+                // dump($toBeAttached);
                 dump("Orphan json attributes found in " . static::$type . "\\" . $external_name . ".json\\" . $column_name . " when constructing SuperProps");
                 static::$result['problems']["orphan_$external_name"][] = "Column name not found $column_name - $external_name" . ($value['name'] ?? "Unknown value_name");
             }
         }
+        // dump($allProps);
     }
 
     private static function makeCheckbox($dataSource)
@@ -160,7 +170,8 @@ class SuperProps
             }
         }
         // static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
-        static::attachJson("default-values", $allProps, DefaultValues::getAllOf($type));
+        $standardDefaultValues = LibStandardDefaultValues::getAll();
+        static::attachJson("default-values", $allProps, DefaultValues::getAllOf($type), $standardDefaultValues);
         // static::attachJson("realtimes", $allProps, Realtimes::getAllOf($type));
         static::attachJson("relationships", $allProps, static::makeRelationshipObject($type));
         static::attachJson("properties", $allProps, static::attachProperty($type));

@@ -85,6 +85,7 @@
                             @php $placeholder="https://www.google.com"; @endphp
                             @case('text')
                             @case('thumbnail')
+                            @case('parent_id')
                             <x-controls.text2 name={{$columnName}} value={{$value}} placeholder="{{$placeholder}}" readOnly={{$readOnly}} />
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
@@ -178,9 +179,9 @@
                             @case('parent_type')
                             <x-controls.parent_type2 type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}}/>
                             @break
-                            @case('parent_id')
-                            <x-controls.parent_id2 type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}}/>
-                            @break
+                            {{-- @case('parent_id') --}}
+                            {{-- <x-controls.parent_id2 type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}}/> --}}
+                            {{-- @break --}}
 
                             @case('parent_link')
                             <x-feedback.alert type="warning" title="Warning" message="{{$control}} suppose to show in View All screen only, please do not show in Edit screen." />

@@ -259,14 +259,16 @@ class ViewAllController extends Controller
             'all' => [
                 'href' => "?action=$action&_entity=" . $tableName . "&status%5B%5D=&",
                 'title' => "<x-renderer.tag>All</x-renderer.tag>",
-                'active' => is_null($currentStatus),
+                'active' => true, //is_null($currentStatus),
             ]
         ];
         foreach ($statuses as $statusKey => $status) {
+            $isActive = $currentStatus == $statusKey;
+            if ($isActive) $dataSource['all']['active'] = false;
             $dataSource[$statusKey] = [
                 'href' => "?action=$action&_entity=" . $tableName . "&status%5B%5D=$statusKey",
                 'title' => "<x-renderer.status>" . $statusKey . "</x-renderer.status>",
-                'active' => $currentStatus == $statusKey,
+                'active' => $isActive,
             ];
         }
         return $dataSource;
