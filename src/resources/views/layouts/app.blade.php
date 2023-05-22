@@ -88,7 +88,7 @@
 </body>
 <script>
     window.Echo.channel('test')
-        .listen('Test', (e) => {
+        .listen('.Test', (e) => {
             console.log(e);
         })
 </script>
