@@ -69,6 +69,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getInspector": {
+        "name": "_getInspector",
+        "relationship": "belongsTo",
+        "control_name": "inspector_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getOwner": {
         "name": "_getOwner",
         "relationship": "belongsTo",
@@ -83,16 +97,16 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getInspector": {
-        "name": "_getInspector",
+    "_getDeletedBy": {
+        "name": "_getDeletedBy",
         "relationship": "belongsTo",
-        "control_name": "inspector_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "control_name": "deleted_by",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown",
+        "control": "",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

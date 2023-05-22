@@ -24,8 +24,8 @@ class BlueprintExtended extends Blueprint
 
     function appendCommonFields()
     {
-        $this->string('status')->nullable();
         $this->unsignedBigInteger('owner_id');
+        $this->string('status')->nullable();
 
         $this->timestamp('created_at')->useCurrent();
         $this->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

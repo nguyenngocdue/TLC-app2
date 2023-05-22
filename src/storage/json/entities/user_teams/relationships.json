@@ -26,19 +26,5 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "relationship": "hasMany",
-        "control_name": "getLines",
-        "renderer_view_all": "agg_sum",
-        "renderer_view_all_param": "ytd",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
-        "control": "relationship_renderer",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
     }
 }
