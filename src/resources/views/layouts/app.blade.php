@@ -87,12 +87,11 @@
         {!! Toastr::message() !!}
 </body>
 <script>
-    window.Echo.channel('trades')
-        .listen('NewTrade', (e) => {
-            console.log(e.trade);
+    window.Echo.channel('test')
+        .listen('Test', (e) => {
+            console.log(e);
         })
 </script>
-
 </html>
 
 <x-renderer.app-footer />
