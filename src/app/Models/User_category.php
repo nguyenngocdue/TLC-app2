@@ -11,10 +11,10 @@ class User_category extends ModelExtended
     protected $table = 'user_categories';
 
     public $eloquentParams = [
-        "user" => ['hasMany', User::class, 'category', 'id'],
+        "getUsers" => ['hasMany', User::class, 'category', 'id'],
     ];
 
-    public function user()
+    public function getUsers()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

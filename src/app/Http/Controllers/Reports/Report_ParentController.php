@@ -214,11 +214,10 @@ abstract class Report_ParentController extends Controller
         $entity = CurrentPathInfo::getEntityReport($request, '_ep');
         $modeParams = $this->getModeParams($request, '_ep');
         $dataSource = $this->getDataSource($modeParams);
-        // dd($modeParams, $dataSource);
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
-        // dd($dataSource);
         $dataSource = $this->modifyDataToExportCSV($dataSource);
+        // dd($modeParams, $dataSource);
         [$columnKeys, $columnNames] = $this->makeColumns($dataSource, $modeParams);
         $rows = $this->makeRowsFollowColumns($dataSource, $columnKeys);
         $fileName = $entity . '_' . date('d:m:Y H:i:s') . '.csv';
@@ -230,7 +229,6 @@ abstract class Report_ParentController extends Controller
             "Expires"             => "0"
         );
         $columnKeys = array_combine($columnKeys, $columnKeys);
-        // dd($columnNames, $columnKeys, $rows);
         $callback = function () use ($rows, $columnKeys, $columnNames) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columnNames);

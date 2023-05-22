@@ -18,7 +18,6 @@ class Qaqc_insp_tmpl_line extends ModelExtended
         "getSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, "qaqc_insp_tmpl_sht_id"],
         "getControlType" => ["belongsTo", Control_type::class, "control_type_id"],
         "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],
-        "getOwner" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public function getSheet()
@@ -40,12 +39,6 @@ class Qaqc_insp_tmpl_line extends ModelExtended
     }
 
     public function getControlGroup()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

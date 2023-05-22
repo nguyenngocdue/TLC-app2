@@ -25,16 +25,9 @@ class Attachment extends ModelExtended
     public $nameless = true;
 
     public $eloquentParams = [
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
         "getCategory" => ['belongsTo', Field::class, 'category'],
         "attachable" => ['morphTo', Attachment::class, 'object_type', 'object_id'],
     ];
-
-    public function getOwner()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
 
     public function getCategory()
     {

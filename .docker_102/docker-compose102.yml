@@ -77,23 +77,6 @@ services:
       MYSQL_PASSWORD: DLTedTfrVzYbrYv9
     networks:
       - laravel102
-
-  websocket:
-    container_name: laravel102_websocket
-    build:
-      context: ./laravel-echo-server
-      dockerfile: Dockerfile
-    volumes:
-      - ../src/.env:/var/www/websocket/.env
-    restart: unless-stopped
-
-    ports:
-      - "6001"
-    depends_on:
-      - nginx
-      - redis
-    networks:
-      - laravel102
   php:
     build:
       context: .

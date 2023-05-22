@@ -12,7 +12,6 @@ class Qaqc_insp_group extends ModelExtended
     public $eloquentParams = [
         "getTemplateLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_group_id"],
         // "getChklstLines" => ["hasMany", Qaqc_insp_chklst_run_line::class, "qaqc_insp_group_id"],
-        "getOwner" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public function getTemplateLines()
@@ -26,10 +25,4 @@ class Qaqc_insp_group extends ModelExtended
     //     $p = $this->eloquentParams[__FUNCTION__];
     //     return $this->{$p[0]}($p[1], $p[2]);
     // }
-
-    public function getOwner()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
 }

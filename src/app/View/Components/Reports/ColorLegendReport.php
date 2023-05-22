@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Reports;
 
+use App\Utils\Support\Report;
 use Illuminate\View\Component;
 
 class ColorLegendReport extends Component
@@ -19,8 +20,10 @@ class ColorLegendReport extends Component
 
     public function render()
     {
+        $titleLegend = Report::replaceAndUcwords(array_key_first($this->dataSource));
         return view('components.reports.color-legend-report', [
-            'dataSource' => $this->dataSource
+            'titleLegend' => $titleLegend,
+            'dataRender' => array_pop($this->dataSource)
         ]);
     }
 }

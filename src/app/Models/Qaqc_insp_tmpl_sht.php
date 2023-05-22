@@ -12,7 +12,6 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
     public $eloquentParams = [
         "getTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, 'qaqc_insp_tmpl_id'],
         "getLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_tmpl_sht_id"],
-        "getOwner" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public function getLines()
@@ -22,12 +21,6 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
     }
 
     public function getTmpl()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

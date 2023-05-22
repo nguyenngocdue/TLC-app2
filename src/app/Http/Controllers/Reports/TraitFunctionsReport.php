@@ -27,6 +27,7 @@ trait TraitFunctionsReport
     }
     protected function makeRowsFollowColumns($dataSource, $columnKeys)
     {
+        // dd($dataSource, $columnKeys);
         try {
             $rows = [];
             $columnKeys = array_combine($columnKeys, $columnKeys);

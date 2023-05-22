@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\AccessLogger\EntityIdClickCount;
+use App\Utils\AccessLogger\EntityNameClickCount;
 use Illuminate\Http\Request;
 
 class WelcomeFortuneController extends Controller
@@ -14,16 +15,12 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        $statuses = LibStatuses::getFor('hr_overtime_request');
-        $dataSource = [
-            'all' => ['href' => '', 'title' => 'All']
-        ];
-        foreach ($statuses as $statusKey => $status) {
-            $dataSource[$statusKey] = [
-                'href' => '#',
-                'title' => "<x-renderer.status>" . $statusKey . "</x-renderer.status>",
-            ];
-        }
+        $db = (new EntityIdClickCount)('project');
+        dump($db);
+        $db = (new EntityNameClickCount)(560);
+        dump($db);
+
+        $dataSource = [];
 
         return view("welcome-fortune", [
             'dataSource' => $dataSource,

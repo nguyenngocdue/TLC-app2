@@ -23,7 +23,6 @@ class Hse_incident_report extends ModelExtended
         "comment_by_general_manager" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         'getInjuredPerson' => ["belongsTo", User::class, 'injured_staff_id'],
         'getLineManager' => ["belongsTo", User::class, 'line_manager'],
-        'getOwner' => ["belongsTo", User::class, 'owner_id'],
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
         'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],
         "attachment_1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
@@ -79,11 +78,6 @@ class Hse_incident_report extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getLineManager()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

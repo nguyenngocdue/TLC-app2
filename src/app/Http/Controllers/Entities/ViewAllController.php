@@ -12,8 +12,8 @@ use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
-use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\Relationships;
+use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Timer;
 use Exception;
 use Illuminate\Http\Request;
@@ -142,9 +142,7 @@ class ViewAllController extends Controller
 
     private function getColumns($type, $columnLimit, $trash = false)
     {
-
-
-        $props = Props::getAllOf($type);
+        $props = SuperProps::getFor($type)['props'];
         $props = array_filter($props, fn ($prop) => !$prop['hidden_view_all']);
         $props = array_filter($props, fn ($prop) => $prop['column_type'] !== 'static');
         if ($columnLimit) {
@@ -256,16 +254,17 @@ class ViewAllController extends Controller
         $currentStatus = isset($advanceFilters['status']) ? $advanceFilters['status'][0] : '';
         $statuses = LibStatuses::getFor($this->type);
         $tableName = Str::plural($this->type);
+        $action = "updateValueAdvanceFilter";
         $dataSource = [
             'all' => [
-                'href' => '?action=updateValueAdvanceFilter&_entity=' . $tableName . "&status%5B%5D=&",
-                'title' => "<x-renderer.status>All</x-renderer.status>",
+                'href' => "?action=$action&_entity=" . $tableName . "&status%5B%5D=&",
+                'title' => "<x-renderer.tag>All</x-renderer.tag>",
                 'active' => is_null($currentStatus),
             ]
         ];
         foreach ($statuses as $statusKey => $status) {
             $dataSource[$statusKey] = [
-                'href' => '?action=updateValueAdvanceFilter&_entity=' . $tableName . "&status%5B%5D=$statusKey",
+                'href' => "?action=$action&_entity=" . $tableName . "&status%5B%5D=$statusKey",
                 'title' => "<x-renderer.status>" . $statusKey . "</x-renderer.status>",
                 'active' => $currentStatus == $statusKey,
             ];

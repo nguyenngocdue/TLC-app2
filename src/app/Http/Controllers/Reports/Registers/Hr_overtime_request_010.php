@@ -281,8 +281,9 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
         ];
 
         $legendData = [
-            'title' => 'Remaining Allowed OT Hours Legend',
-            'dataSource' => $statuses
+            'legend_title' => 'Remaining Allowed OT Hours Legend',
+            'dataSource' => $statuses,
+            'legend_col' => 5
         ];
         return $this->createLegendData($legendData);
     }

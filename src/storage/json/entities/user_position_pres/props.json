@@ -89,9 +89,9 @@
         "hidden_print": "",
         "new_line": ""
     },
-    "_user": {
-        "name": "_user",
-        "column_name": "user",
+    "_getUsers": {
+        "name": "_getUsers",
+        "column_name": "getUsers",
         "column_type": "eloquent_prop",
         "label": "Users",
         "control": "relationship_renderer",

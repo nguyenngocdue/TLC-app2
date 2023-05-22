@@ -14,7 +14,6 @@ class Prod_routing_link extends ModelExtended
         "getProdRoutings" => ['belongsToMany', Prod_routing::class, 'prod_routing_details', 'prod_routing_link_id', 'prod_routing_id'],
         "prodSequence" => ['hasMany', Prod_sequence::class, 'prod_routing_link_id'],
         "getDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getProdRoutings()
@@ -30,12 +29,6 @@ class Prod_routing_link extends ModelExtended
     }
 
     public function getDiscipline()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

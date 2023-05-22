@@ -11,7 +11,7 @@ class Workplace extends ModelExtended
     protected $table = 'workplaces';
 
     public $eloquentParams = [
-        "user" => ['hasMany', User::class, 'workplace'],
+        "getUsers" => ['hasMany', User::class, 'workplace'],
         "getDefAssignee" => ["belongsTo", User::class, 'def_assignee'],
         "getPublicHolidays" => ["hasMany", Public_holiday::class, 'workplace_id'],
         "getHROTRs" => ["hasMany", Hr_overtime_request::class, 'workplace_id'],
@@ -20,8 +20,7 @@ class Workplace extends ModelExtended
         "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
-
-    public function user()
+    public function getUsers()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

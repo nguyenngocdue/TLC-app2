@@ -1,8 +1,8 @@
 {
-    "_user": {
-        "name": "_user",
+    "_getUsers": {
+        "name": "_getUsers",
         "relationship": "hasMany",
-        "control_name": "user",
+        "control_name": "getUsers",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_edit": "many_icons",
