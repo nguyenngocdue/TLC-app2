@@ -18,15 +18,15 @@ class Prod_sequence extends ModelExtended
     public $nameless = true;
 
     public $eloquentParams = [
-        "prodOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],
+        "getProdOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],
         "getProdRoutingLinks" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
         "getUomId" => ["belongsTo", Term::class, 'uom_id'],
 
-        "prodRuns" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
+        "getProdRuns" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
         "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
     ];
 
-    public function prodOrder()
+    public function getProdOrder()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -44,7 +44,7 @@ class Prod_sequence extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function prodRuns()
+    public function getProdRuns()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -60,7 +60,7 @@ class Prod_sequence extends ModelExtended
     {
         $p = $this->eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3]);
-        $prodOrder = $this->prodOrder;
+        $prodOrder = $this->getProdOrder;
         if ($prodOrder) {
             $prod_routing_id = $prodOrder->prod_routing_id;
             $sql = $relation

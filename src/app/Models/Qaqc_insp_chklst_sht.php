@@ -60,14 +60,14 @@ class Qaqc_insp_chklst_sht extends ModelExtended
 
     public function getProject()
     {
-        $tmp = $this->getChklst->prodOrder->getSubProject;
+        $tmp = $this->getChklst->getProdOrder->getSubProject;
         $relation = $tmp->belongsTo(Project::class, 'project_id');
         return $relation;
     }
 
     public function getSubProject()
     {
-        $tmp = $this->getChklst->prodOrder;
+        $tmp = $this->getChklst->getProdOrder;
         $relation = $tmp->belongsTo(Sub_project::class, 'sub_project_id');
         return $relation;
     }

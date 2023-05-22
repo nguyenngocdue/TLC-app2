@@ -1,6 +1,6 @@
 {
-    "_prodSequence": {
-        "name": "_prodSequence",
+    "_getProdSequence": {
+        "name": "_getProdSequence",
         "relationship": "belongsTo",
         "control_name": "prod_sequence_id",
         "renderer_view_all": "column",
@@ -41,10 +41,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_users": {
-        "name": "_users",
+    "_getUsers": {
+        "name": "_getUsers",
         "relationship": "belongsToMany",
-        "control_name": "users",
+        "control_name": "getUsers",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

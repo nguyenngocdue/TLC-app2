@@ -15,7 +15,7 @@ type Prod_run {
     status: String!
     created_at: DateTime
     updated_at: DateTime
-    users: [User!]! @belongsToMany
+    getUsers: [User!]! @belongsToMany
     prodRun: Prod_run! @belongsTo
 }
 

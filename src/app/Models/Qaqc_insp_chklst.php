@@ -14,13 +14,13 @@ class Qaqc_insp_chklst extends ModelExtended
     protected $table = "qaqc_insp_chklsts";
 
     public $eloquentParams = [
-        "prodOrder" => ["belongsTo", Prod_order::class, "prod_order_id"],
+        "getProdOrder" => ["belongsTo", Prod_order::class, "prod_order_id"],
         "getQaqcInspTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, "qaqc_insp_tmpl_id"],
 
         "getSheets" => ["hasMany", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_id"],
     ];
 
-    public function prodOrder()
+    public function getProdOrder()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -40,20 +40,15 @@ class Qaqc_insp_chklst extends ModelExtended
 
     public function getProject()
     {
-        $tmp = $this->prodOrder->getSubProject;
+        $tmp = $this->getProdOrder->getSubProject;
         $relation = $tmp->belongsTo(Project::class, 'project_id');
         return $relation;
     }
 
     public function getSubProject()
     {
-        $tmp = $this->prodOrder;
+        $tmp = $this->getProdOrder;
         $relation = $tmp->belongsTo(Sub_project::class, 'sub_project_id');
-        return $relation;
-    }
-    public function getProdOrder()
-    {
-        $relation = $this->belongsTo(Prod_order::class, 'prod_order_id');
         return $relation;
     }
 

@@ -19,7 +19,7 @@ type Prod_routing {
     created_at: DateTime
     updated_at: DateTime
     getProdRoutingLinks: [Prod_routing_link!]! @belongsToMany
-    prodOrders: [Prod_order!]! @hasMany
+    getProdOrders: [Prod_order!]! @hasMany
     pivot: Prod_routing_linkProd_routingPivot
 }
 

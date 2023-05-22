@@ -55,10 +55,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": "12"
     },
-    "_prodOrders": {
-        "name": "_prodOrders",
+    "_getProdOrders": {
+        "name": "_getProdOrders",
         "relationship": "hasMany",
-        "control_name": "prodOrders",
+        "control_name": "getProdOrders",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

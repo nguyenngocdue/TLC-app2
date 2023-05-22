@@ -120,9 +120,9 @@
         "default_value": "",
         "control_extra": ""
     },
-    "_prodRuns": {
-        "name": "_prodRuns",
-        "column_name": "prodRuns",
+    "_getProdRuns": {
+        "name": "_getProdRuns",
+        "column_name": "getProdRuns",
         "label": "",
         "validation": "",
         "formula": "",

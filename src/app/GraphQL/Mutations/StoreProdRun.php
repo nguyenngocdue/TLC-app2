@@ -26,7 +26,7 @@ final class StoreProdRun
                 "updated_at" => $args["updated_at"] ?? null,
             ]);
             if (is_array($args['user_ids'])) {
-                $prodRun->users()->attach($args['user_ids']);
+                $prodRun->getUsers()->attach($args['user_ids']);
             }
             event(new ProdSequenceUpdatedEvent());
             return [

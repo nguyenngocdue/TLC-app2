@@ -113,9 +113,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_prodOrders": {
-        "name": "_prodOrders",
-        "column_name": "prodOrders",
+    "_getProdOrders": {
+        "name": "_getProdOrders",
+        "column_name": "getProdOrders",
         "column_type": "eloquent_prop",
         "label": "Prod Orders",
         "control": "relationship_renderer",

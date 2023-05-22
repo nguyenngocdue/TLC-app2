@@ -635,9 +635,9 @@
         "proj_member_nz": "",
         "qs_member_nz": ""
     },
-    "_prodRuns": {
-        "name": "_prodRuns",
-        "column_name": "prodRuns",
+    "_getProdRuns": {
+        "name": "_getProdRuns",
+        "column_name": "getProdRuns",
         "admin": "true",
         "acct_manager": "",
         "acct_member": "",

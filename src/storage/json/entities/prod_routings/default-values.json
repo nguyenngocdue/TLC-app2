@@ -95,9 +95,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_prodOrders": {
-        "name": "_prodOrders",
-        "column_name": "prodOrders",
+    "_getProdOrders": {
+        "name": "_getProdOrders",
+        "column_name": "getProdOrders",
         "label": "",
         "validation": "",
         "validation_regex": "",

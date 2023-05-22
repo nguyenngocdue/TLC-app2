@@ -132,9 +132,9 @@
         "duplicatable": "",
         "new_line": "true"
     },
-    "_prodSequence": {
-        "name": "_prodSequence",
-        "column_name": "prodSequence",
+    "_getProdSequences": {
+        "name": "_getProdSequences",
+        "column_name": "getProdSequences",
         "column_type": "eloquent_prop",
         "label": "Production Sequences",
         "control": "relationship_renderer",

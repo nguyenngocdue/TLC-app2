@@ -170,9 +170,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_prodRuns": {
-        "name": "_prodRuns",
-        "column_name": "prodRuns",
+    "_getProdRuns": {
+        "name": "_getProdRuns",
+        "column_name": "getProdRuns",
         "column_type": "eloquent_prop",
         "label": "Production Runs",
         "control": "relationship_renderer",

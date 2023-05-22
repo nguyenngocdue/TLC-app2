@@ -11,7 +11,7 @@ class Prod_routing extends ModelExtended
     protected $table = 'prod_routings';
 
     public $eloquentParams = [
-        "prodOrders" => ['hasMany', Prod_order::class],
+        "getProdOrders" => ['hasMany', Prod_order::class],
         "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, 'prod_routing_id'],
 
         "getProdSequences" => ["hasManyThrough", Prod_sequence::class, Prod_order::class],
@@ -29,7 +29,7 @@ class Prod_routing extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
 
-    public function prodOrders()
+    public function getProdOrders()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1]);

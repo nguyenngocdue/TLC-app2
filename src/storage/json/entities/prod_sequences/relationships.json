@@ -69,10 +69,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_prodRuns": {
-        "name": "_prodRuns",
+    "_getProdRuns": {
+        "name": "_getProdRuns",
         "relationship": "hasMany",
-        "control_name": "prodRuns",
+        "control_name": "getProdRuns",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
