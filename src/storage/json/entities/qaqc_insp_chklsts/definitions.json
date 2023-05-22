@@ -1,37 +1,37 @@
 {
     "new": {
         "name": "new",
-        "in_progress": "true",
+        "new": "true",
+        "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "read-only": {
         "name": "read-only",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": "true"
     },
     "hide-save-btn": {
         "name": "hide-save-btn",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": "true"
     },
     "closed": {
         "name": "closed",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": "true"
     },
     "post-closed": {
         "name": "post-closed",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     }
 }

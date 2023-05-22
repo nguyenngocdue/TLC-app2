@@ -1,4 +1,9 @@
 {
+    "new": {
+        "name": "new",
+        "ball-in-court-assignee": "creator",
+        "ball-in-court-monitors": "getMonitors1()"
+    },
     "in_progress": {
         "name": "in_progress",
         "ball-in-court-assignee": "creator",
@@ -6,12 +11,7 @@
     },
     "not_applicable": {
         "name": "not_applicable",
-        "ball-in-court-assignee": "creator",
-        "ball-in-court-monitors": "getMonitors1()"
-    },
-    "on_hold": {
-        "name": "on_hold",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "assignee_1",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "passed": {

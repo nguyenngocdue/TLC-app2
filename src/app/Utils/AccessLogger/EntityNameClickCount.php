@@ -4,16 +4,16 @@ namespace App\Utils\AccessLogger;
 
 use Illuminate\Support\Facades\DB;
 
-class EntityClickCount
+class EntityNameClickCount
 {
-    function __invoke($entityName)
+    function __invoke($owner_id)
     {
         $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
         $data = DB::connection($connection)
             ->select("SELECT * 
-            FROM view_logger_access_entity 
+            FROM view_logger_access_entity_name 
             WHERE 
-                entity_name ='$entityName'
+                owner_id ='$owner_id'
             ");
         if (!app()->isLocal()) {
             $allClick = 0;

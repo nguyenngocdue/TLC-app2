@@ -3,434 +3,650 @@
         "name": "_id",
         "column_name": "id",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_h1a": {
         "name": "_h1a",
         "column_name": "h1a",
         "new": "true",
         "active": "true",
-        "approval_rejected": ""
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
         "new": "true",
-        "active": "",
-        "approval_rejected": "true"
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_work_area_id": {
         "name": "_work_area_id",
         "column_name": "work_area_id",
         "new": "true",
         "active": "true",
-        "approval_rejected": ""
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_issue_datetime": {
         "name": "_issue_datetime",
         "column_name": "issue_datetime",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_injured_person": {
         "name": "_injured_person",
         "column_name": "injured_person",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_injured_staff_id": {
         "name": "_injured_staff_id",
         "column_name": "injured_staff_id",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_injured_staff_position": {
         "name": "_injured_staff_position",
         "column_name": "injured_staff_position",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_line_manager": {
         "name": "_line_manager",
         "column_name": "line_manager",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_manager_staff_id": {
         "name": "_manager_staff_id",
         "column_name": "manager_staff_id",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_manager_staff_position": {
         "name": "_manager_staff_position",
         "column_name": "manager_staff_position",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_owner_staff_id": {
         "name": "_owner_staff_id",
         "column_name": "owner_staff_id",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_owner_staff_position": {
         "name": "_owner_staff_position",
         "column_name": "owner_staff_position",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_incident_doc_type_id": {
         "name": "_incident_doc_type_id",
         "column_name": "incident_doc_type_id",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_incident_doc_sub_type_id": {
         "name": "_incident_doc_sub_type_id",
         "column_name": "incident_doc_sub_type_id",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_number_injured_person": {
         "name": "_number_injured_person",
         "column_name": "number_injured_person",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_number_involved_person": {
         "name": "_number_involved_person",
         "column_name": "number_involved_person",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_divider1": {
         "name": "_divider1",
         "column_name": "divider1",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_h1b": {
         "name": "_h1b",
         "column_name": "h1b",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_issue_description": {
         "name": "_issue_description",
         "column_name": "issue_description",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_attachment_1": {
         "name": "_attachment_1",
         "column_name": "attachment_1",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_divider2": {
         "name": "_divider2",
         "column_name": "divider2",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_h2b": {
         "name": "_h2b",
         "column_name": "h2b",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_accident_book_entry": {
         "name": "_accident_book_entry",
         "column_name": "accident_book_entry",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_lost_days": {
         "name": "_lost_days",
         "column_name": "lost_days",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_time_in_hospital": {
         "name": "_time_in_hospital",
         "column_name": "time_in_hospital",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_time_out_hospital": {
         "name": "_time_out_hospital",
         "column_name": "time_out_hospital",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_divider3": {
         "name": "_divider3",
         "column_name": "divider3",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_h8b": {
         "name": "_h8b",
         "column_name": "h8b",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_mainAffectedPart()": {
         "name": "_mainAffectedPart()",
         "column_name": "mainAffectedPart()",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_natureOfInjury()": {
         "name": "_natureOfInjury()",
         "column_name": "natureOfInjury()",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_treatmentInstruction()": {
         "name": "_treatmentInstruction()",
         "column_name": "treatmentInstruction()",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_comment_by_clinic": {
         "name": "_comment_by_clinic",
         "column_name": "comment_by_clinic",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_divider8": {
         "name": "_divider8",
         "column_name": "divider8",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_h2a": {
         "name": "_h2a",
         "column_name": "h2a",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_causeOfIssue()": {
         "name": "_causeOfIssue()",
         "column_name": "causeOfIssue()",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_divider4": {
         "name": "_divider4",
         "column_name": "divider4",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_h3b": {
         "name": "_h3b",
         "column_name": "h3b",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_activityLeadToIssue()": {
         "name": "_activityLeadToIssue()",
         "column_name": "activityLeadToIssue()",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_divider5": {
         "name": "_divider5",
         "column_name": "divider5",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_h4b": {
         "name": "_h4b",
         "column_name": "h4b",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_immediateCause()": {
         "name": "_immediateCause()",
         "column_name": "immediateCause()",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_divider6": {
         "name": "_divider6",
         "column_name": "divider6",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_h5b": {
         "name": "_h5b",
         "column_name": "h5b",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_issueRootCause()": {
         "name": "_issueRootCause()",
         "column_name": "issueRootCause()",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_divider7": {
         "name": "_divider7",
         "column_name": "divider7",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_h6b": {
         "name": "_h6b",
         "column_name": "h6b",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_investigation_finding": {
         "name": "_investigation_finding",
         "column_name": "investigation_finding",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_attachment_2": {
         "name": "_attachment_2",
         "column_name": "attachment_2",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_divider9": {
         "name": "_divider9",
         "column_name": "divider9",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_h7b": {
         "name": "_h7b",
         "column_name": "h7b",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_getCorrectiveActions": {
         "name": "_getCorrectiveActions",
         "column_name": "getCorrectiveActions",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_divider10": {
         "name": "_divider10",
         "column_name": "divider10",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_h3a": {
         "name": "_h3a",
         "column_name": "h3a",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_comment_by_line_manager": {
         "name": "_comment_by_line_manager",
         "column_name": "comment_by_line_manager",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_divider11": {
         "name": "_divider11",
         "column_name": "divider11",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_h4a": {
         "name": "_h4a",
         "column_name": "h4a",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_comment_by_general_manager": {
         "name": "_comment_by_general_manager",
         "column_name": "comment_by_general_manager",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
         "new": "true",
-        "active": "",
-        "approval_rejected": ""
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "true",
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "active": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "closed": "true"
     }
 }

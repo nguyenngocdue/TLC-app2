@@ -1,37 +1,57 @@
 {
     "new": {
         "name": "new",
-        "in_progress": "true",
+        "new": "true",
+        "in_progress": "",
+        "not_applicable": "",
+        "passed": "",
         "inspected": "",
-        "pending_verification": "",
+        "pending_approval": "",
+        "rejected": "",
         "approved": ""
     },
     "read-only": {
         "name": "read-only",
+        "new": "",
         "in_progress": "",
+        "not_applicable": "",
+        "passed": "",
         "inspected": "",
-        "pending_verification": "",
+        "pending_approval": "",
+        "rejected": "",
         "approved": "true"
     },
     "hide-save-btn": {
         "name": "hide-save-btn",
+        "new": "",
         "in_progress": "",
+        "not_applicable": "",
+        "passed": "",
         "inspected": "",
-        "pending_verification": "",
+        "pending_approval": "",
+        "rejected": "",
         "approved": "true"
     },
     "closed": {
         "name": "closed",
+        "new": "",
         "in_progress": "",
+        "not_applicable": "",
+        "passed": "",
         "inspected": "",
-        "pending_verification": "",
+        "pending_approval": "",
+        "rejected": "",
         "approved": "true"
     },
     "post-closed": {
         "name": "post-closed",
+        "new": "",
         "in_progress": "",
+        "not_applicable": "",
+        "passed": "",
         "inspected": "",
-        "pending_verification": "",
+        "pending_approval": "",
+        "rejected": "",
         "approved": ""
     }
 }

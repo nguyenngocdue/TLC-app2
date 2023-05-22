@@ -2,6 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
@@ -14,6 +15,7 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
@@ -26,6 +28,7 @@
     "_description": {
         "name": "_description",
         "column_name": "description",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
@@ -38,6 +41,7 @@
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
@@ -50,6 +54,7 @@
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
         "column_name": "qaqc_insp_chklst_id",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
@@ -62,6 +67,7 @@
     "_qaqc_insp_tmpl_sht_id": {
         "name": "_qaqc_insp_tmpl_sht_id",
         "column_name": "qaqc_insp_tmpl_sht_id",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
@@ -74,6 +80,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
@@ -86,6 +93,7 @@
     "_progress": {
         "name": "_progress",
         "column_name": "progress",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
@@ -98,6 +106,7 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
@@ -110,6 +119,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
@@ -122,6 +132,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
@@ -134,6 +145,7 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
@@ -143,9 +155,49 @@
         "rejected": "",
         "approved": ""
     },
-    "_getRuns": {
-        "name": "_getRuns",
-        "column_name": "getRuns",
+    "_getSignOff()": {
+        "name": "_getSignOff()",
+        "column_name": "getSignOff()",
+        "new": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "on_hold": "",
+        "passed": "",
+        "inspected": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_getShtSigs": {
+        "name": "_getShtSigs",
+        "column_name": "getShtSigs",
+        "new": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "on_hold": "",
+        "passed": "",
+        "inspected": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "on_hold": "",
+        "passed": "",
+        "inspected": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
         "in_progress": "",
         "not_applicable": "",
         "on_hold": "",
