@@ -9,7 +9,5 @@ class Control_type extends ModelExtended
     protected $fillable = ['id', 'name', 'description', 'slug'];
     protected $table = "control_types";
 
-    public $eloquentParams = [
-    ];
+    public $eloquentParams = [];
 }
-

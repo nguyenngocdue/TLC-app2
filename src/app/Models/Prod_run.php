@@ -14,7 +14,6 @@ class Prod_run extends ModelExtended
     public $eloquentParams = [
         "users" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_run_id', 'user_id'],
         "prodSequence" => ['belongsTo', Prod_sequence::class, 'prod_sequence_id'],
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function users()
@@ -24,12 +23,6 @@ class Prod_run extends ModelExtended
     }
 
     public function prodSequence()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

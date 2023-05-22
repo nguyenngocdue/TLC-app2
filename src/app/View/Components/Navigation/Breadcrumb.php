@@ -37,9 +37,10 @@ class Breadcrumb extends Component
         $singular = CurrentRoute::getTypeSingular();
         $blackList = [
             'dashboard',
-            'manageApp',
             'admin_permission',
+            'manageApp',
             'manageAppCreation',
+            'manageStandardProp',
             'manageStatus',
             'manageWidget',
             'reportIndex',

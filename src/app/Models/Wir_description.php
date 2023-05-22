@@ -13,7 +13,6 @@ class Wir_description extends ModelExtended
         "getProdRoutingDetails" => ["hasMany", Prod_routing_detail::class, "wir_description_id"],
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
-        "getOwner" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public $oracyParams = [
@@ -22,12 +21,6 @@ class Wir_description extends ModelExtended
     ];
 
     public function getProdRoutingDetails()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

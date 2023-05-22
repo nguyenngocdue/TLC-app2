@@ -16,7 +16,6 @@ class Comment extends ModelExtended
 
     public $eloquentParams = [
         "commentable" => ['morphTo', Comment::class, 'commentable_type', 'commentable_id'],
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
         "getCategory" => ['belongsTo', Field::class, 'category'],
         "comment_attachment" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
@@ -26,12 +25,6 @@ class Comment extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
-    }
-
-    public function getOwner()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getCategory()

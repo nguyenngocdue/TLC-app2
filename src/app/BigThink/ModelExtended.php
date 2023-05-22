@@ -2,6 +2,7 @@
 
 namespace App\BigThink;
 
+use App\Models\User;
 use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use App\Utils\Support\Json\SuperProps;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
-class ModelExtended extends Model
+abstract class ModelExtended extends Model
 {
     use Searchable;
     use Notifiable;
@@ -31,11 +32,15 @@ class ModelExtended extends Model
     use TraitModelExtended;
     use SoftDeletesWithDeletedBy;
 
-    public $eloquentParams = [
-        // "getOwner" => ["belongsTo", User::class, "owner_id"],
-        // "getDeletedBy" => ["belongsTo", User::class, "deleted_by"],
-    ];
+    public $eloquentParams = [];
     public $oracyParams = [];
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->eloquentParams['getOwner'] =  ["belongsTo", User::class, "owner_id"];
+        $this->eloquentParams['getDeletedBy'] =  ["belongsTo", User::class, "deleted_by"];
+    }
 
     public function toSearchableArray()
     {

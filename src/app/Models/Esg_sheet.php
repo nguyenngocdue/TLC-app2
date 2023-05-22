@@ -11,9 +11,6 @@ class Esg_sheet extends ModelExtended
 
     public $eloquentParams = [
         "getLines" => ["hasMany", Esg_line::class, "esg_sheet_id"],
-
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
-        "getDeletedBy" => ['belongsTo', User::class, 'deleted_by'],
     ];
 
     public function getLines()

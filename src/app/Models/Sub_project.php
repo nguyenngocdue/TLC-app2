@@ -14,7 +14,6 @@ class Sub_project extends ModelExtended
     public $eloquentParams = [
         "prodOrders" => ['hasMany', Prod_order::class],
         "getProject" => ['belongsTo', Project::class, "project_id"],
-        "getOwner" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public $oracyParams = [
@@ -34,12 +33,6 @@ class Sub_project extends ModelExtended
     }
 
     public function getProject()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

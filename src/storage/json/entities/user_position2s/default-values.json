@@ -65,9 +65,9 @@
         "default_value": "",
         "control_extra": ""
     },
-    "_user": {
-        "name": "_user",
-        "column_name": "user",
+    "_getUsers": {
+        "name": "_getUsers",
+        "column_name": "getUsers",
         "label": "",
         "validation": "",
         "formula": "",

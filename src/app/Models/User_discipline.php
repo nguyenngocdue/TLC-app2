@@ -11,7 +11,7 @@ class User_discipline extends ModelExtended
     protected $table = 'user_disciplines';
 
     public $eloquentParams = [
-        "user" => ['hasMany', User::class, 'discipline', 'id'],
+        "getUsers" => ['hasMany', User::class, 'discipline', 'id'],
         "getDefAssignee" => ["belongsTo", User::class, 'def_assignee'],
     ];
 
@@ -19,7 +19,7 @@ class User_discipline extends ModelExtended
         "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
-    public function user()
+    public function getUsers()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

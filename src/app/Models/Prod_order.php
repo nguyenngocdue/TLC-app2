@@ -19,8 +19,6 @@ class Prod_order extends ModelExtended
         "getProdRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
         "getQaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'prod_order_id'],
         "getMeta" => ['morphTo', Prod_order::class, 'meta_type', 'meta_id'],
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
-
     ];
 
     public function getSubProject()
@@ -48,11 +46,6 @@ class Prod_order extends ModelExtended
     }
 
     public function getQaqcInspChklsts()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

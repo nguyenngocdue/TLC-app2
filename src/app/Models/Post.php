@@ -10,13 +10,5 @@ class Post extends ModelExtended
 
     protected $table = 'posts';
 
-    public $eloquentParams = [
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
-    ];
-
-    public function getOwner()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
+    public $eloquentParams = [];
 }

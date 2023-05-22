@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\AccessLogger;
+use App\Utils\AccessLogger\EntityClickCount;
 use Illuminate\Http\Request;
+use Nuwave\Lighthouse\Support\Http\Middleware\AcceptJson;
 
 class WelcomeFortuneController extends Controller
 {
@@ -14,16 +17,9 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        $statuses = LibStatuses::getFor('hr_overtime_request');
-        $dataSource = [
-            'all' => ['href' => '', 'title' => 'All']
-        ];
-        foreach ($statuses as $statusKey => $status) {
-            $dataSource[$statusKey] = [
-                'href' => '#',
-                'title' => "<x-renderer.status>" . $statusKey . "</x-renderer.status>",
-            ];
-        }
+        $db = (new EntityClickCount)('project');
+        dump($db);
+        $dataSource = [];
 
         return view("welcome-fortune", [
             'dataSource' => $dataSource,

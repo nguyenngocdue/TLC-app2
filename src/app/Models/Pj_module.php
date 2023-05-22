@@ -24,7 +24,6 @@ class Pj_module extends ModelExtended
         'getPjShipment' => ['belongsTo', Pj_shipment::class, 'pj_shipment_id'],
         "getProdOrders" => ['morphMany', Prod_order::class, 'meta', 'meta_type', 'meta_id'],
         'getPjPods' => ['hasMany', Pj_pod::class, 'pj_module_id'],
-        "getOwner" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getPjBuilding()
@@ -71,11 +70,6 @@ class Pj_module extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getPjShipment()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

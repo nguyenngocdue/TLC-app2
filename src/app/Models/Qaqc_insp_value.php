@@ -11,16 +11,9 @@ class Qaqc_insp_value extends ModelExtended
 
     public $eloquentParams = [
         "getControlValue" => ["belongsTo", Qaqc_insp_control_value::class, 'qaqc_insp_control_value_id'],
-        "getOwner" => ["belongsTo", User::class, "owner_id"],
     ];
 
     public function getControlValue()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-
-    public function getOwner()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

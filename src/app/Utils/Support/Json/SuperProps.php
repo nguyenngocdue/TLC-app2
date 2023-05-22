@@ -2,13 +2,11 @@
 
 namespace App\Utils\Support\Json;
 
+use App\Http\Controllers\Workflow\LibStandardProps;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\CacheToRamForThisSection;
 use App\Utils\Support\JsonControls;
-use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class SuperProps
@@ -116,9 +114,42 @@ class SuperProps
         return $result;
     }
 
+    private static function overrideStandardConfig(&$allProps)
+    {
+        // $standardConfig = config("standardProps");
+        // dump($standardConfig);
+        $standardConfig = LibStandardProps::getAll();
+        //
+        foreach ($standardConfig as $propKey => $value) {
+            $dummy = [
+                "hidden_view_all" => '',
+                "hidden_edit" => '',
+                "hidden_label" => '',
+                "hidden_filter" => '',
+                "hidden_print" => '',
+                "read_only" => '',
+                "save_on_change" => '',
+                "duplicatable" => '',
+                "new_line" => '',
+
+                "width" => 100,
+                "col_span" => 12,
+                "control" => 'unknown',
+                "column_type" => 'unknown',
+                "column_name" => 'unknown',
+                "label" => 'unknown',
+            ];
+            foreach ($value as $k => $v) $dummy[$k] = $v;
+            $allProps[$propKey] = $dummy;
+        }
+        // dd($allProps);
+    }
+
     private static function readProps($type)
     {
         $allProps = Props::getAllOf($type);
+        static::overrideStandardConfig($allProps);
+        // dump($allProps);
         foreach ($allProps as &$prop) {
             $prop['width'] = $prop['width'] ? $prop['width'] : 100;
             $prop['col_span'] = $prop['col_span'] ? $prop['col_span'] : 12;

@@ -11,10 +11,10 @@ class User_type extends ModelExtended
     protected $table = 'user_types';
 
     public $eloquentParams = [
-        "user" => ['hasMany', User::class, 'user_type', 'id'],
+        "getUsers" => ['hasMany', User::class, 'user_type', 'id'],
     ];
 
-    public function user()
+    public function getUsers()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
