@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 Str::macro('appTitle', function (string $s) {
-    $exceptionOfKeepingSingular = ['qaqc', 'hse', 'kpi', 'esg', 'hr', 'scm'];
+    $exceptionOfKeepingSingular = ['quality', 'hse', 'kpi', 'esg', 'hr', 'scm'];
     $s = in_array($s, $exceptionOfKeepingSingular) ? $s : Str::plural($s);
     $s = Str::headline($s);
 

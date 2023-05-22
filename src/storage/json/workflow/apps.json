@@ -547,7 +547,7 @@
     "qaqc_car": {
         "name": "qaqc_car",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Corrective Action Registers",
         "nickname": "car",
         "doc_id_format_column": null,
@@ -560,7 +560,7 @@
     "qaqc_insp_chklst": {
         "name": "qaqc_insp_chklst",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Inspection Checklists",
         "nickname": "ics",
         "doc_id_format_column": null,
@@ -573,7 +573,7 @@
     "qaqc_insp_chklst_line": {
         "name": "qaqc_insp_chklst_line",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Inspection Checklist Lines",
         "nickname": "icsl",
         "doc_id_format_column": null,
@@ -587,7 +587,7 @@
     "qaqc_insp_chklst_sht": {
         "name": "qaqc_insp_chklst_sht",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Inspection Checklist Sheets",
         "nickname": "icss",
         "doc_id_format_column": null,
@@ -600,7 +600,7 @@
     "qaqc_insp_control_group": {
         "name": "qaqc_insp_control_group",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "QAQC Insp Control Groups",
         "nickname": null,
         "doc_id_format_column": null,
@@ -614,7 +614,7 @@
     "qaqc_insp_control_value": {
         "name": "qaqc_insp_control_value",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "QAQC Insp Control Values",
         "nickname": null,
         "doc_id_format_column": null,
@@ -628,7 +628,7 @@
     "qaqc_insp_group": {
         "name": "qaqc_insp_group",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "QAQC Insp Groups",
         "nickname": null,
         "doc_id_format_column": null,
@@ -642,7 +642,7 @@
     "qaqc_insp_tmpl": {
         "name": "qaqc_insp_tmpl",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Inspection Templates",
         "nickname": "itpl",
         "doc_id_format_column": null,
@@ -655,7 +655,7 @@
     "qaqc_insp_tmpl_line": {
         "name": "qaqc_insp_tmpl_line",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Inspection Template Lines",
         "nickname": "itpll",
         "doc_id_format_column": null,
@@ -669,7 +669,7 @@
     "qaqc_insp_tmpl_sht": {
         "name": "qaqc_insp_tmpl_sht",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Inspection Template Sheets",
         "nickname": "itpls",
         "doc_id_format_column": null,
@@ -682,7 +682,7 @@
     "qaqc_insp_value": {
         "name": "qaqc_insp_value",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "QAQC Insp Values",
         "nickname": null,
         "doc_id_format_column": null,
@@ -696,7 +696,7 @@
     "qaqc_mir": {
         "name": "qaqc_mir",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Material Inspection Requests",
         "nickname": "mir",
         "doc_id_format_column": "sub_project_id",
@@ -709,7 +709,7 @@
     "qaqc_ncr": {
         "name": "qaqc_ncr",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Non Conformance Reports",
         "nickname": "ncr",
         "doc_id_format_column": "sub_project_id",
@@ -723,7 +723,7 @@
     "qaqc_wir": {
         "name": "qaqc_wir",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Work Inspection Requests",
         "nickname": "wir",
         "doc_id_format_column": "sub_project_id",
