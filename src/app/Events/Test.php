@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewTrade implements ShouldBroadcast
+class Test implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,10 +19,14 @@ class NewTrade implements ShouldBroadcast
      *
      * @return void
      */
-    public $trade;
-    public function __construct($trade)
+    public function __construct()
     {
-        $this->trade = $trade;
+    }
+    public function broadcastWith()
+    {
+        return [
+            'name' => 'Dinh Canh'
+        ];
     }
 
     /**
@@ -32,6 +36,6 @@ class NewTrade implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('trades');
+        return new Channel('test');
     }
 }
