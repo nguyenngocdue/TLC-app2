@@ -41,6 +41,7 @@ class Breadcrumb extends Component
             'manageApp',
             'manageAppCreation',
             'manageStandardProp',
+            'manageStandardDefaultValue',
             'manageStatus',
             'manageWidget',
             'reportIndex',

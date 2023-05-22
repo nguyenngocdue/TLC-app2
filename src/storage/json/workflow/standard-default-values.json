@@ -1,0 +1,57 @@
+{
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "validation": null,
+        "validation_regex": null,
+        "formula": "All_ClosedAt",
+        "default_value": null,
+        "label_extra": null,
+        "placeholder": null,
+        "control_extra": null
+    },
+    "_doc_id": {
+        "name": "_doc_id",
+        "column_name": "doc_id",
+        "validation": null,
+        "validation_regex": null,
+        "formula": "All_DocId",
+        "default_value": null,
+        "label_extra": null,
+        "placeholder": null,
+        "control_extra": null
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "validation": null,
+        "validation_regex": null,
+        "formula": "All_OwnerId",
+        "default_value": null,
+        "label_extra": null,
+        "placeholder": null,
+        "control_extra": null
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "validation": null,
+        "validation_regex": null,
+        "formula": "All_SlugifyByName",
+        "default_value": null,
+        "label_extra": null,
+        "placeholder": null,
+        "control_extra": null
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "validation": null,
+        "validation_regex": null,
+        "formula": "All_DuplicateStatus",
+        "default_value": null,
+        "label_extra": null,
+        "placeholder": null,
+        "control_extra": null
+    }
+}
