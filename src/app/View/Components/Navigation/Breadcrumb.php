@@ -113,6 +113,7 @@ class Breadcrumb extends Component
                 break;
         }
         $links[] = ['href' => route($type . '.index'), 'title' => 'View All', 'icon' => '<i class="fa-solid fa-table-cells"></i>'];
+        $links[] = ['href' => route($type . '.trashed'), 'title' => 'View Trash', 'icon' => '<i class="fa-solid fa-trash"></i>'];
         if (!$disallowedDirectCreationChecker) $links[] = ['href' => route($type . '.create'), 'title' => 'Add New', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];
         if (!empty($allReports)) $links[] = ['type' => 'report', 'title' => 'View Report', 'dataSource' => $allReports, 'icon' => '<i class="fa-regular fa-file-chart-column"></i>'];
         if ($isAdmin) {

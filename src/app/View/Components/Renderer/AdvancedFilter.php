@@ -33,10 +33,6 @@ class AdvancedFilter extends Component
     {
         $propsFilters = $this->advanceFilter();
         [,,,,, $basicFilter, $chooseBasicFilter] = $this->getUserSettings();
-        // $valueAdvanceFilters = array_map(function ($item) {
-        //     dump($item);
-        //     return $item;
-        // }, $this->valueAdvanceFilters);
         $count = count($propsFilters) ?? 0;
         $maxH = round($count / 4) * 3.7 . 'rem';
         return view('components.renderer.advanced-filter', [

@@ -15,7 +15,6 @@
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$type' route='$route' perPage='$perPage'/>";
         $actionButtonGroup = "<div class='flex'>
-                    <x-form.action-recycle-bin type='$type' trashed='$trashed'/>
                     <x-form.refresh type='$type' route='$route' valueRefresh='$refreshPage'/>
                     <x-form.action-button-group type='$type' />
                 </div>";
