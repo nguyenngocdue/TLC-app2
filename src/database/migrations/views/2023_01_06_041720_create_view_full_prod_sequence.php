@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement("CREATE VIEW view_full_prod_sequence AS
+        DB::statement("CREATE OR REPLACE VIEW view_full_prod_sequence AS
         
             SELECT 
                 view_prl.*, 
