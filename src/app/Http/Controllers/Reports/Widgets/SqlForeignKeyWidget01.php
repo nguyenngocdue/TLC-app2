@@ -30,7 +30,7 @@ class SqlForeignKeyWidget01
         $att_name = $params['att_metric_name'];
         $metric_name_table = $table_b ? 'b' : 'a';
 
-        // cons
+        // conditions
         $con = "";
         $model_a = DBTable::fromNameToModel($table_a);
         $fillable = $model_a->getFillable();
@@ -55,6 +55,8 @@ class SqlForeignKeyWidget01
             default:
                 break;
         }
+        //private conditions
+        $qaqc_insp_tmpl_id = ($x = $params['qaqc_insp_tmpl_id'] ?? "") ? "AND b.qaqc_insp_tmpl_id = $x " : "";
 
         $sql = " SELECT 
                         ROW_NUMBER() OVER (ORDER BY metric_count DESC) AS metric_id,
@@ -67,6 +69,7 @@ class SqlForeignKeyWidget01
                                 FROM $wd_tb $table_a a $table_b
                                 WHERE $global_filter
                                         $con
+                                        $qaqc_insp_tmpl_id #qaqc_insp_chklsts
                             GROUP BY metric_name ) tb
                             ORDER BY metric_id";
         // dump($params, $sql);

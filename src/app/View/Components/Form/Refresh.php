@@ -32,6 +32,7 @@ class Refresh extends Component
             'route' => $this->route,
             'class' => $this->class,
             'valueRefresh' => $this->valueRefresh,
+            'timeout' => 300,
         ]);
     }
 }
