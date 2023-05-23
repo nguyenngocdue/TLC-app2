@@ -88,5 +88,68 @@
         "section_title": "Work Inspection Requests",
         "widget_title": "by Status",
         "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\",\"key_a2\":\"status\", \"att_metric_name\":\"status\"}"
+    },
+    "users_1": {
+        "name": "users_1",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": "SqlForeignKey",
+        "section_title": "Users",
+        "widget_title": "by Workplace",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \r\n\"global_filter\":\"a.resigned != true\"\r\n}"
+    },
+    "users_2": {
+        "name": "users_2",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": "SqlForeignKey",
+        "section_title": "Users",
+        "widget_title": "by Category",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"user_categories\", \"key_a\":\"category\", \"key_b\":\"id\",\r\n\"global_filter\":\"a.resigned != true\"\r\n}"
+    },
+    "users_3": {
+        "name": "users_3",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": "SqlForeignKey",
+        "section_title": "Users",
+        "widget_title": "by Type",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"user_types\", \"key_a\":\"user_type\", \"key_b\":\"id\",\r\n\"global_filter\":\"a.resigned != true\"\r\n}"
+    },
+    "users_4": {
+        "name": "users_4",
+        "hidden": "true",
+        "chart_type": "doughnut",
+        "fn": "SqlForeignKey",
+        "section_title": "Users",
+        "widget_title": "by Position 1",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"user_position1s\", \"key_a\":\"position_1\", \"key_b\":\"id\",\r\n\"global_filter\":\"a.resigned != true\"\r\n}"
+    },
+    "users_5": {
+        "name": "users_5",
+        "hidden": "true",
+        "chart_type": "doughnut",
+        "fn": "SqlForeignKey",
+        "section_title": "Users",
+        "widget_title": "by Position 2",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"user_position2s\", \"key_a\":\"position_2\", \"key_b\":\"id\",\r\n\"global_filter\":\"a.resigned != true\"\r\n}"
+    },
+    "users_6": {
+        "name": "users_6",
+        "hidden": "true",
+        "chart_type": "doughnut",
+        "fn": "SqlForeignKey",
+        "section_title": "Users",
+        "widget_title": "by Position 3",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"user_disciplines\", \"key_a\":\"discipline\", \"key_b\":\"id\",\r\n\"global_filter\":\"a.resigned != true\"\r\n}"
+    },
+    "users_7": {
+        "name": "users_7",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": "SqlForeignKey",
+        "section_title": "Users",
+        "widget_title": "by Department",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"departments\", \"key_a\":\"department\", \"key_b\":\"id\",\r\n\"global_filter\":\"a.resigned != true\"\r\n}"
     }
 }
