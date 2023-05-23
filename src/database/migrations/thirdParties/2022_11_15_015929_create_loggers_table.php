@@ -1,7 +1,7 @@
 <?php
 
+use App\BigThink\BlueprintExtended;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
@@ -14,7 +14,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('loggers', function (Blueprint $table) {
+        $schema = DB::connection()->getSchemaBuilder();
+        $schema->blueprintResolver(function ($table, $callback) {
+            return new BlueprintExtended($table, $callback);
+        });
+
+        $schema->create('loggers', function (BlueprintExtended $table) {
             $table->id();
             $table->string('loggable_type');
             $table->unsignedBigInteger('loggable_id');
@@ -25,10 +30,23 @@ return new class extends Migration
             $table->text('new_value')->nullable();
             $table->text('new_text')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+            $table->appendCommonFields();
         });
+        // Schema::create('loggers', function (BlueprintExtended $table) {
+        //     $table->id();
+        //     $table->string('loggable_type');
+        //     $table->unsignedBigInteger('loggable_id');
+        //     $table->text('type');
+        //     $table->text('key');
+        //     $table->text('old_value')->nullable();
+        //     $table->text('old_text')->nullable();
+        //     $table->text('new_value')->nullable();
+        //     $table->text('new_text')->nullable();
+        //     $table->unsignedBigInteger('user_id');
+        //     // $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+        // });
     }
 
     /**

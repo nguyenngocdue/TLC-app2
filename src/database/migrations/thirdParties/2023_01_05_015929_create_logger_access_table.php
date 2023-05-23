@@ -14,6 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!env('ACCESS_LOGGER_ENABLED')) return;
         $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
         Schema::connection($connection)->create('logger_access', function (Blueprint $table) {
             $table->id();
@@ -43,6 +44,7 @@ return new class extends Migration
      */
     public function down()
     {
+        if (!env('ACCESS_LOGGER_ENABLED')) return;
         $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
         Schema::connection($connection)->dropIfExists('logger_access');
     }

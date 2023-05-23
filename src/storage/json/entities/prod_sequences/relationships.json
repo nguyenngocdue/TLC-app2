@@ -1,10 +1,10 @@
 {
-    "_prodOrder": {
-        "name": "_prodOrder",
+    "_getProdOrder": {
+        "name": "_getProdOrder",
         "relationship": "belongsTo",
         "control_name": "prod_order_id",
         "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "renderer_view_all_param": "production_name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",

@@ -1,6 +1,6 @@
 {
-    "_prodOrder": {
-        "name": "_prodOrder",
+    "_getProdOrder": {
+        "name": "_getProdOrder",
         "relationship": "belongsTo",
         "control_name": "prod_order_id",
         "renderer_view_all": "column",

@@ -12,6 +12,7 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!env('ACCESS_LOGGER_ENABLED')) return;
         $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
         DB::connection($connection)->statement("CREATE VIEW view_logger_access_entity_id AS
         
@@ -34,6 +35,7 @@ return new class extends Migration
      */
     public function down()
     {
+        if (!env('ACCESS_LOGGER_ENABLED')) return;
         $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
         DB::connection($connection)->statement('DROP VIEW IF EXISTS view_logger_access_entity_id');
     }

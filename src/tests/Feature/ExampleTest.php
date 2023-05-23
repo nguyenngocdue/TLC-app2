@@ -16,6 +16,20 @@ class ExampleTest extends TestCase
 {
     use RefreshDatabase;
 
+    private function getEntities()
+    {
+        $all = Entities::getAll();
+        $result = [];
+        foreach ($all as $entity) {
+            $table = $entity->getTable();
+            // dump($table);
+            if (!str_starts_with($table, 'qaqc')) continue;
+            $result[] = $entity;
+        }
+        // dump($result);
+        return $result;
+    }
+
     private function getUser()
     {
         return [
@@ -25,6 +39,7 @@ class ExampleTest extends TestCase
             'first_name' => 'Fortune',
             'last_name' => 'Truong',
             'settings' => "[]",
+            'owner_id' => 0,
         ];
     }
 
@@ -49,7 +64,7 @@ class ExampleTest extends TestCase
 
     private function load_permissions_to_table()
     {
-        $entities = Entities::getAll();
+        $entities = $this->getEntities();
         $permissions = [];
         foreach ($entities as $index => $entity) {
             $table = $entity->getTable();
@@ -67,7 +82,7 @@ class ExampleTest extends TestCase
 
     private function load_permissions_to_role()
     {
-        $entities = Entities::getAll();
+        $entities = $this->getEntities();
         $keysArray = [];
         $permissionIndex = 1;
         $roleIndex = 1;
@@ -100,7 +115,7 @@ class ExampleTest extends TestCase
 
     private function load_roles_to_roleset()
     {
-        $entities = Entities::getAll();
+        $entities = $this->getEntities();
         $rolesArray = [];
         $roleIndex = 1;
         foreach ($entities as $entity) {
@@ -119,7 +134,7 @@ class ExampleTest extends TestCase
 
     private function load_permission_to_admin()
     {
-        $entities = Entities::getAll();
+        $entities = $this->getEntities();
         $roleset = Role_set::create(['name' => 'admin', 'guard_name' => 'web']);
         $key1sArray = [];
         foreach ($entities as $index => $entity) {
@@ -135,7 +150,7 @@ class ExampleTest extends TestCase
             }
 
             $role->givePermissionTo($keysArray);
-            dump("$index -> $table");
+            dump("$index giving permission to -> $table");
         }
         // $sql = "INSERT INTO permissions(name, guard_name) VALUES";
         // $sql .= join(",", $permissions);
@@ -156,15 +171,27 @@ class ExampleTest extends TestCase
         $user = User::create($this->getUser());
         $user->assignRoleset('admin');
 
-        $entities = Entities::getAll();
+        $entities = $this->getEntities();
+        // foreach ($entities as $entity) {
+        //     // $entity = $entities[0];
+        //     $table = $entity->getTable();
+        //     $route = route($table . '.index');
+        //     dump("Accessing to " . $route);
+        //     $response = $this
+        //         ->actingAs($user)
+        //         ->get($route);
+
+        //     $response->assertStatus(200);
+        // }
+
         foreach ($entities as $entity) {
             // $entity = $entities[0];
             $table = $entity->getTable();
-            $route = route($table . '.index');
-            // dump("ROUTE", $route);
+            $route = route($table . '.create');
+            dump("Creating a new " . $route);
             $response = $this
                 ->actingAs($user)
-                ->get($route);
+                ->put($route, []);
 
             $response->assertStatus(200);
         }

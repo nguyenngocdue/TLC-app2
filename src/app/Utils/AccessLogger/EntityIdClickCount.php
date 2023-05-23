@@ -8,6 +8,7 @@ class EntityIdClickCount
 {
     function __invoke($entityName)
     {
+        if (!env('ACCESS_LOGGER_ENABLED')) return;
         $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
         $data = DB::connection($connection)
             ->select("SELECT * 
