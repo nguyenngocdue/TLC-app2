@@ -79,7 +79,8 @@ trait TraitEntityEditableTable
                     if (isset($line['id']) && !is_null($line['id'])) {
                         if (isset($line['DESTROY_THIS_LINE']) && ('true' == $line["DESTROY_THIS_LINE"])) {
                             // dump("Delete");
-                            $destroySuccess = $controller->destroy($line['id']);
+                            $destroyRequest = new Request(['ids' => $line['id']]);
+                            $destroySuccess = $controller->destroyMultiple($destroyRequest);
                             // $destroySuccess = $controller->destroy($fakeRequest, $line['id']);
                             //Not necessary because it will be deleted when mapping with the next lines
                             if ($destroySuccess) {

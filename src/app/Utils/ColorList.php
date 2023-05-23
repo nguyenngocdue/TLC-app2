@@ -10,7 +10,7 @@ class ColorList
     {
         $value = $hours / $max * 100;
         switch (true) {
-            case $value <= 0:
+            case $value < 0:
                 return 'bg-red-600';
             case $value <= 25:
                 return 'bg-pink-400';
