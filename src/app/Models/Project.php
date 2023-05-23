@@ -15,8 +15,9 @@ class Project extends ModelExtended
     protected $table = 'projects';
 
     public $eloquentParams = [
-        "getAvatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "getSubProjects" => ['hasMany', Sub_project::class, "project_id"],
+
+        "getAvatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
 
         "featured_image" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
     ];

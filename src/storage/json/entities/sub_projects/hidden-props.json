@@ -107,9 +107,9 @@
         "cancelled": "",
         "timesheet_only": ""
     },
-    "_prodOrders": {
-        "name": "_prodOrders",
-        "column_name": "prodOrders",
+    "_getProdOrders": {
+        "name": "_getProdOrders",
+        "column_name": "getProdOrders",
         "concept": "",
         "design": "",
         "manufacturing": "",

@@ -1,6 +1,6 @@
 {
-    "_getWorkplaces": {
-        "name": "_getWorkplaces",
+    "_getWorkplace": {
+        "name": "_getWorkplace",
         "relationship": "belongsTo",
         "control_name": "workplace",
         "renderer_view_all": "column",
@@ -13,8 +13,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_userTypes": {
-        "name": "_userTypes",
+    "_getUserType": {
+        "name": "_getUserType",
         "relationship": "belongsTo",
         "control_name": "user_type",
         "renderer_view_all": "column",
@@ -27,8 +27,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getCompany": {
-        "name": "_getCompany",
+    "_getUserCompany": {
+        "name": "_getUserCompany",
         "relationship": "belongsTo",
         "control_name": "company",
         "renderer_view_all": "column",
@@ -41,8 +41,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_categories": {
-        "name": "_categories",
+    "_getUserCat": {
+        "name": "_getUserCat",
         "relationship": "belongsTo",
         "control_name": "category",
         "renderer_view_all": "column",
@@ -55,8 +55,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_positionPres": {
-        "name": "_positionPres",
+    "_getPositionPrefix": {
+        "name": "_getPositionPrefix",
         "relationship": "belongsTo",
         "control_name": "position_prefix",
         "renderer_view_all": "column",
@@ -69,8 +69,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_position1": {
-        "name": "_position1",
+    "_getPosition1": {
+        "name": "_getPosition1",
         "relationship": "belongsTo",
         "control_name": "position_1",
         "renderer_view_all": "column",
@@ -83,8 +83,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_position2": {
-        "name": "_position2",
+    "_getPosition2": {
+        "name": "_getPosition2",
         "relationship": "belongsTo",
         "control_name": "position_2",
         "renderer_view_all": "column",
@@ -97,8 +97,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_position3": {
-        "name": "_position3",
+    "_getPosition3": {
+        "name": "_getPosition3",
         "relationship": "belongsTo",
         "control_name": "position_3",
         "renderer_view_all": "column",
@@ -111,8 +111,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_disciplines": {
-        "name": "_disciplines",
+    "_getUserDiscipline": {
+        "name": "_getUserDiscipline",
         "relationship": "belongsTo",
         "control_name": "discipline",
         "renderer_view_all": "column",
@@ -125,8 +125,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_departments": {
-        "name": "_departments",
+    "_getUserDepartment": {
+        "name": "_getUserDepartment",
         "relationship": "belongsTo",
         "control_name": "department",
         "renderer_view_all": "column",
@@ -139,8 +139,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_time_keep_types": {
-        "name": "_time_keep_types",
+    "_getTimeKeepType": {
+        "name": "_getTimeKeepType",
         "relationship": "belongsTo",
         "control_name": "time_keeping_type",
         "renderer_view_all": "column",
@@ -153,16 +153,30 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_productionRuns": {
-        "name": "_productionRuns",
-        "relationship": "belongsToMany",
-        "control_name": "productionRuns",
-        "renderer_view_all": "agg_count",
+    "_getOwner": {
+        "name": "_getOwner",
+        "relationship": "belongsTo",
+        "control_name": "owner_id",
+        "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "relationship_renderer",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getDeletedBy": {
+        "name": "_getDeletedBy",
+        "relationship": "belongsTo",
+        "control_name": "deleted_by",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

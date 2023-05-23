@@ -81,74 +81,6 @@
         "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-conveyor-belt-boxes\"><\/i>"
     },
-    "esg_line": {
-        "name": "esg_line",
-        "package": "compliance",
-        "sub_package": "esg",
-        "title": "GHG Line",
-        "nickname": "ghgl",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
-    },
-    "esg_metric_type": {
-        "name": "esg_metric_type",
-        "package": "compliance",
-        "sub_package": "esg",
-        "title": "GHG Metric Type",
-        "nickname": "ghg",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
-    },
-    "esg_metric_type_1": {
-        "name": "esg_metric_type_1",
-        "package": "compliance",
-        "sub_package": "esg",
-        "title": "GHG Metric Type 1",
-        "nickname": "ghg1",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
-    },
-    "esg_metric_type_2": {
-        "name": "esg_metric_type_2",
-        "package": "compliance",
-        "sub_package": "esg",
-        "title": "GHG Metric Type 2",
-        "nickname": "ghg2",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
-    },
-    "esg_sheet": {
-        "name": "esg_sheet",
-        "package": "compliance",
-        "sub_package": "esg",
-        "title": "GHG Sheet",
-        "nickname": "ghgs",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>"
-    },
     "field": {
         "name": "field",
         "package": "system",
@@ -162,6 +94,74 @@
         "hidden": "true",
         "hidden_navbar": "true",
         "icon": null
+    },
+    "ghg_line": {
+        "name": "ghg_line",
+        "package": "compliance",
+        "sub_package": "esg",
+        "title": "GHG Line",
+        "nickname": "ghgl",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": null
+    },
+    "ghg_metric_type": {
+        "name": "ghg_metric_type",
+        "package": "compliance",
+        "sub_package": "esg",
+        "title": "GHG Metric Type",
+        "nickname": "ghg",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": null
+    },
+    "ghg_metric_type_1": {
+        "name": "ghg_metric_type_1",
+        "package": "compliance",
+        "sub_package": "esg",
+        "title": "GHG Metric Type 1",
+        "nickname": "ghg1",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": null
+    },
+    "ghg_metric_type_2": {
+        "name": "ghg_metric_type_2",
+        "package": "compliance",
+        "sub_package": "esg",
+        "title": "GHG Metric Type 2",
+        "nickname": "ghg2",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": null
+    },
+    "ghg_sheet": {
+        "name": "ghg_sheet",
+        "package": "compliance",
+        "sub_package": "esg",
+        "title": "GHG Sheet",
+        "nickname": "ghgs",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>"
     },
     "hr_overtime_request": {
         "name": "hr_overtime_request",
@@ -246,6 +246,34 @@
         "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
     },
+    "manageStandardDefaultValues": {
+        "name": "manageStandardDefaultValues",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Standard Default Values",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
+    },
+    "manageStandardProps": {
+        "name": "manageStandardProps",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Standard Props",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
+    },
     "manageStatuses": {
         "name": "manageStatuses",
         "package": "system",
@@ -265,20 +293,6 @@
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Widgets",
-        "nickname": null,
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
-    },
-    "manageStandardProps": {
-        "name": "manageStandardProps",
-        "package": "system",
-        "sub_package": "system_configuration",
-        "title": "Manage Standard Props",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
@@ -514,8 +528,6 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "hidden": "true",
-        "hidden_navbar": "true",
         "icon": null
     },
     "project": {
@@ -547,7 +559,7 @@
     "qaqc_car": {
         "name": "qaqc_car",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Corrective Action Registers",
         "nickname": "car",
         "doc_id_format_column": null,
@@ -560,7 +572,7 @@
     "qaqc_insp_chklst": {
         "name": "qaqc_insp_chklst",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Inspection Checklists",
         "nickname": "ics",
         "doc_id_format_column": null,
@@ -573,7 +585,7 @@
     "qaqc_insp_chklst_line": {
         "name": "qaqc_insp_chklst_line",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Inspection Checklist Lines",
         "nickname": "icsl",
         "doc_id_format_column": null,
@@ -587,7 +599,7 @@
     "qaqc_insp_chklst_sht": {
         "name": "qaqc_insp_chklst_sht",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Inspection Checklist Sheets",
         "nickname": "icss",
         "doc_id_format_column": null,
@@ -600,7 +612,7 @@
     "qaqc_insp_control_group": {
         "name": "qaqc_insp_control_group",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "QAQC Insp Control Groups",
         "nickname": null,
         "doc_id_format_column": null,
@@ -614,7 +626,7 @@
     "qaqc_insp_control_value": {
         "name": "qaqc_insp_control_value",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "QAQC Insp Control Values",
         "nickname": null,
         "doc_id_format_column": null,
@@ -628,7 +640,7 @@
     "qaqc_insp_group": {
         "name": "qaqc_insp_group",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "QAQC Insp Groups",
         "nickname": null,
         "doc_id_format_column": null,
@@ -642,7 +654,7 @@
     "qaqc_insp_tmpl": {
         "name": "qaqc_insp_tmpl",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Inspection Templates",
         "nickname": "itpl",
         "doc_id_format_column": null,
@@ -655,7 +667,7 @@
     "qaqc_insp_tmpl_line": {
         "name": "qaqc_insp_tmpl_line",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Inspection Template Lines",
         "nickname": "itpll",
         "doc_id_format_column": null,
@@ -669,7 +681,7 @@
     "qaqc_insp_tmpl_sht": {
         "name": "qaqc_insp_tmpl_sht",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Inspection Template Sheets",
         "nickname": "itpls",
         "doc_id_format_column": null,
@@ -682,7 +694,7 @@
     "qaqc_insp_value": {
         "name": "qaqc_insp_value",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "QAQC Insp Values",
         "nickname": null,
         "doc_id_format_column": null,
@@ -696,7 +708,7 @@
     "qaqc_mir": {
         "name": "qaqc_mir",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "warehouse",
         "title": "Material Inspection Requests",
         "nickname": "mir",
         "doc_id_format_column": "sub_project_id",
@@ -709,7 +721,7 @@
     "qaqc_ncr": {
         "name": "qaqc_ncr",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "quality",
         "title": "Non Conformance Reports",
         "nickname": "ncr",
         "doc_id_format_column": "sub_project_id",
@@ -723,7 +735,7 @@
     "qaqc_wir": {
         "name": "qaqc_wir",
         "package": "project_management",
-        "sub_package": "qaqc",
+        "sub_package": "production",
         "title": "Work Inspection Requests",
         "nickname": "wir",
         "doc_id_format_column": "sub_project_id",
@@ -854,7 +866,6 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden": "true",
-        "hidden_navbar": "true",
         "icon": null
     },
     "user_category": {

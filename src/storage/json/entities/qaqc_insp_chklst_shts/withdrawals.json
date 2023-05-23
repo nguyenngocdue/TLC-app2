@@ -1,0 +1,34 @@
+{
+    "new": {
+        "name": "new",
+        "withdraw_to": ""
+    },
+    "in_progress": {
+        "name": "in_progress",
+        "withdraw_to": ""
+    },
+    "not_applicable": {
+        "name": "not_applicable",
+        "withdraw_to": ""
+    },
+    "passed": {
+        "name": "passed",
+        "withdraw_to": ""
+    },
+    "inspected": {
+        "name": "inspected",
+        "withdraw_to": ""
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "withdraw_to": ""
+    },
+    "rejected": {
+        "name": "rejected",
+        "withdraw_to": ""
+    },
+    "approved": {
+        "name": "approved",
+        "withdraw_to": ""
+    }
+}

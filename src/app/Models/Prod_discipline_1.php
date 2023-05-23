@@ -11,9 +11,10 @@ class Prod_discipline_1 extends ModelExtended
     protected $table = 'prod_discipline_1s';
 
     public $eloquentParams = [
-        "getDiscipline2" => ['hasMany', Prod_discipline_2::class, 'prod_discipline_1_id'],
         "getDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
+
+        "getDiscipline2" => ['hasMany', Prod_discipline_2::class, 'prod_discipline_1_id'],
     ];
 
     public $oracyParams = [

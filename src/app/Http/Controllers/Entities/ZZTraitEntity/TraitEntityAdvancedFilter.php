@@ -31,7 +31,8 @@ trait TraitEntityAdvancedFilter
             $advanceFilters = array_filter($advanceFilters, fn ($item) => $item !== null);
             $result = [];
             foreach ($advanceFilters as $key => $value) {
-                switch ($propsFilters['_' . $key]) {
+                $control = $propsFilters['_' . $key] ?? '';
+                switch ($control) {
                     case 'id':
                         $result['id'][$key] = $value;
                         break;

@@ -13,6 +13,7 @@ class Pj_unit extends ModelExtended
 
     public $eloquentParams = [
         'getPjSellType' => ['belongsTo', Term::class, 'pj_sell_type_id'],
+
         "getPjModules" => ['hasMany', Pj_module::class, "pj_unit_id"],
     ];
 

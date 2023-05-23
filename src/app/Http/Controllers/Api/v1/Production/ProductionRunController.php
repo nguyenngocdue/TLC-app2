@@ -26,7 +26,7 @@ class ProductionRunController extends Controller
             $prodSequenceFirst = Prod_sequence::where('prod_order_id', $prod_order_id)->where('prod_routing_link_id', $prod_routing_link_id)->first();
             $users = User::orderBy('id', 'DESC')->get();
             $skills = User::orderBy('staff_position', 'DESC')->distinct()->get(['staff_position']);
-            $prodRuns = Prod_sequence::find($prodSequenceFirst->id)->productionRuns()->get();
+            $prodRuns = Prod_sequence::find($prodSequenceFirst->id)->getProdRuns()->get();
             $lastId = Prod_run::orderBy('id', 'DESC')->first();
             $timeNow = Carbon::now()->format('H:i:s');
             return ResponseObject::responseSuccess([

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Workflow\LibStatuses;
-use App\Utils\AccessLogger;
-use App\Utils\AccessLogger\EntityClickCount;
+use App\Utils\AccessLogger\EntityIdClickCount;
+use App\Utils\AccessLogger\EntityNameClickCount;
 use Illuminate\Http\Request;
-use Nuwave\Lighthouse\Support\Http\Middleware\AcceptJson;
 
 class WelcomeFortuneController extends Controller
 {
@@ -17,8 +15,11 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        $db = (new EntityClickCount)('project');
+        $db = (new EntityIdClickCount)('project');
         dump($db);
+        $db = (new EntityNameClickCount)(560);
+        dump($db);
+
         $dataSource = [];
 
         return view("welcome-fortune", [

@@ -12,9 +12,10 @@ class Pj_shipment extends ModelExtended
     protected $table = 'pj_shipments';
 
     public $eloquentParams = [
-        "getPjModules" => ['hasMany', Pj_module::class, "pj_shipment_id"],
         "getProject" => ['belongsTo', Project::class, "project_id"],
         "getSubProject" => ['belongsTo', Sub_project::class, "sub_project_id"],
+
+        "getPjModules" => ['hasMany', Pj_module::class, "pj_shipment_id"],
     ];
 
     public function getPjModules()

@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\Workflow\ManageAppCreationsController;
 use App\Http\Controllers\Workflow\ManageAppsController;
+use App\Http\Controllers\Workflow\ManageStandardDefaultValuesController;
+use App\Http\Controllers\Workflow\ManageStandardPropsController;
 use App\Http\Controllers\Workflow\ManageStatusesController;
 use App\Http\Controllers\Workflow\ManageWidgetsController;
-use App\Http\Controllers\Workflow\ManageStandardPropsController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -16,4 +17,5 @@ Route::group([
     Route::resource('manageApps', ManageAppsController::class)->only('index', 'store', 'create');
     Route::resource('manageAppCreations', ManageAppCreationsController::class)->only('index', 'store');
     Route::resource('manageStandardProps', ManageStandardPropsController::class)->only('index', 'store', 'create');
+    Route::resource('manageStandardDefaultValues', ManageStandardDefaultValuesController::class)->only('index', 'store', 'create');
 });

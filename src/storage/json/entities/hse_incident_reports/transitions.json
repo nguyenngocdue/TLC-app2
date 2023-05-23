@@ -1,0 +1,72 @@
+{
+    "new": {
+        "name": "new",
+        "new": "",
+        "active": "true",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "active": {
+        "name": "active",
+        "new": "",
+        "active": "",
+        "pending_ack": "true",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "pending_ack": {
+        "name": "pending_ack",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "pending_review": {
+        "name": "pending_review",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": "true"
+    },
+    "review_rejected": {
+        "name": "review_rejected",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "pending_verification": {
+        "name": "pending_verification",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "closed": {
+        "name": "closed",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    }
+}

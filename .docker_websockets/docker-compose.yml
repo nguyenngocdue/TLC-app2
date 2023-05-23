@@ -29,19 +29,6 @@ services:
       - "6379:6379"
     networks:
       - ws
-  # websockets:
-  #   container_name: websockets
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   restart: unless-stopped
-  #   working_dir: /var/www/html
-  #   ports:
-  #     - "${WEBSOCKETS_PORT:-6001}:6001"
-  #   volumes:
-  #     - ../src:/var/www/html
-  #   networks:
-  #     - ws
   soketi:
     image: "quay.io/soketi/soketi:latest-16-alpine"
     container_name: websockets_soketi
@@ -49,15 +36,15 @@ services:
     environment:
       SOKETI_DEBUG: "1"
       SOKETI_METRICS_SERVER_PORT: "9601"
-      SOKETI_DB_REDIS_HOST: "127.0.0.1"
-      SOKETI_DB_REDIS_PORT: "6379"
-      SOKETI_DB_REDIS_DB: "0"
-      # SOKETI_SSL_CERT: "/path/to/ssl/public.crt"
-      # SOKETI_SSL_KEY: "/path/to/ssl/private.key"
+      SOKETI_DEFAULT_APP_ID: "tlc-id"
+      SOKETI_DEFAULT_APP_KEY: "tlc-key"
+      SOKETI_DEFAULT_APP_SECRET: "tlc-secret"
+      SOKETI_SSL_CERT: "/path/to/certs/public.crt"
+      SOKETI_SSL_KEY: "/path/to/certs/private.key"
+    volumes:
+      - ../.docker_configs/certs:/path/to/certs
     ports:
       - "${SOKETI_PORT:-6001}:6001"
       - "${SOKETI_METRICS_SERVER_PORT:-9601}:9601"
-    # volumes:
-    #   - ../.docker_configs/certs:/path/to/ssl/
     networks:
       - ws

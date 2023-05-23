@@ -19,9 +19,9 @@ type Prod_sequence {
     total_man_hours: Float
     created_at: DateTime
     updated_at: DateTime
-    prodOrder: Prod_order! @belongsTo
+    getProdOrder: Prod_order! @belongsTo
     prodRoutingLinks: Prod_routing_link! @belongsTo
-    prodRuns: [Prod_run!]! @hasMany
+    getProdRuns: [Prod_run!]! @hasMany
 }
 
 input CreateProdSequenceInput {

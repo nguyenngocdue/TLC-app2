@@ -70,7 +70,7 @@ class ManageAppsController extends AbstractManageLibController
                     'props-renderer',
                     // 'checklist-renderer',
                     'checklist-sheet-renderer',
-                    'esg-sheet-renderer',
+                    'ghg-sheet-renderer',
                 ],
             ],
             [
@@ -82,7 +82,7 @@ class ManageAppsController extends AbstractManageLibController
                     'project-renderer',
                     'checklist-renderer',
                     'checklist-sheet-renderer',
-                    'esg-sheet-renderer',
+                    'ghg-sheet-renderer',
                     'qr-app-renderer',
                 ],
             ],

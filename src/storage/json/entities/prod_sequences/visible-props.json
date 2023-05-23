@@ -119,9 +119,9 @@
         "obsolete": "true",
         "in_progress": "true"
     },
-    "_prodRuns": {
-        "name": "_prodRuns",
-        "column_name": "prodRuns",
+    "_getProdRuns": {
+        "name": "_getProdRuns",
+        "column_name": "getProdRuns",
         "new": "true",
         "on_hold": "true",
         "finished": "true",

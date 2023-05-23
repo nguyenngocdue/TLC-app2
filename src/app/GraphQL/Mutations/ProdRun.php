@@ -17,7 +17,7 @@ final class ProdRun
     public function __invoke($_, array $args)
     {
         try {
-            $prodRun = Prod_sequence::where('prod_order_id', $args['prod_order_id'])->where('prod_routing_link_id', $args['prod_routing_link_id'])->get();
+            // $prodRun = Prod_sequence::where('prod_order_id', $args['prod_order_id'])->where('prod_routing_link_id', $args['prod_routing_link_id'])->get();
             $prodRunFirst = Prod_sequence::where('prod_order_id', $args['prod_order_id'])->where('prod_routing_link_id', $args['prod_routing_link_id'])->first();
             $users = User::orderBy('id', 'DESC')->get();
             $skills = User::orderBy('position_rendered', 'DESC')->distinct()->get(['position_rendered']);

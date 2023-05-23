@@ -20,6 +20,7 @@ class Qaqc_mir extends ModelExtended
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
         'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
         'getInspector' => ["belongsTo", User::class, 'inspected_by'],
+
         "attachment_mir_po" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_mir_delivery_docket" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_mir_invoice" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
@@ -34,11 +35,12 @@ class Qaqc_mir extends ModelExtended
         "attachment_mir_technical_data_sheet" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_mir_material_inspection_photo" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_mir_pdf_attached" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
-        "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
 
         "comment_asm_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_insp_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_inspector_decision" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+
+        "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
     ];
 
     public $oracyParams = [

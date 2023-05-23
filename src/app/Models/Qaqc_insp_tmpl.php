@@ -10,8 +10,9 @@ class Qaqc_insp_tmpl extends ModelExtended
     protected $table = "qaqc_insp_tmpls";
 
     public $eloquentParams = [
-        "getSheets" => ["hasMany", Qaqc_insp_tmpl_sht::class, "qaqc_insp_tmpl_id"],
         "getProdRouting" => ["belongsTo", Prod_routing::class, "prod_routing_id"],
+
+        "getSheets" => ["hasMany", Qaqc_insp_tmpl_sht::class, "qaqc_insp_tmpl_id"],
         "getQaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'qaqc_insp_tmpl_id'],
     ];
 

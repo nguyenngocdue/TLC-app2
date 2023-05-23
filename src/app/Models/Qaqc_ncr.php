@@ -32,10 +32,12 @@ class Qaqc_ncr extends ModelExtended
         "getInterSubcon" => ["belongsTo", Term::class, 'inter_subcon_id'],
         "getDefectRootCause" => ["belongsTo", Term::class, 'defect_root_cause_id'],
         "getDefectDisposition" => ["belongsTo", Term::class, 'defect_disposition_id'],
-        "getParent" => ['morphTo', Qaqc_ncr::class, 'parent_type', 'parent_id'],
-        'getQaqcCars' => ['hasMany', Qaqc_car::class, 'qaqc_ncr_id'],
         "getSeverity" => ["belongsTo", Term::class, 'defect_severity'],
         "getReportType" => ["belongsTo", Term::class, 'defect_report_type'],
+
+        'getQaqcCars' => ['hasMany', Qaqc_car::class, 'qaqc_ncr_id'],
+
+        "getParent" => ['morphTo', Qaqc_ncr::class, 'parent_type', 'parent_id'],
 
         "attachment_defect_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_defect_pdfs" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],

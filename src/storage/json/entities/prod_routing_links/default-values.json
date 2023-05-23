@@ -87,9 +87,9 @@
         "default_value": "",
         "control_extra": ""
     },
-    "_prodSequence": {
-        "name": "_prodSequence",
-        "column_name": "prodSequence",
+    "_getProdSequences": {
+        "name": "_getProdSequences",
+        "column_name": "getProdSequences",
         "label": "",
         "validation": "",
         "formula": "",

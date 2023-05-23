@@ -22,11 +22,11 @@ final class DuplicateProdRun
             $newProdLine->end = null;
             $newProdLine->save();
             $userIds = [];
-            foreach ($prodLine->users as $user) {
+            foreach ($prodLine->getUsers as $user) {
                 array_push($userIds, $user->id);
             }
             if (!empty($userIds)) {
-                $newProdLine->users()->attach($userIds);
+                $newProdLine->getUsers()->attach($userIds);
             }
             return [
                 'id' => $newProdLine->id,

@@ -3,450 +3,450 @@
         "name": "acct_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "acct_manager_nz": {
         "name": "acct_manager_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "acct_member": {
         "name": "acct_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "acct_member_nz": {
         "name": "acct_member_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "admin": {
         "name": "admin",
         "name_rendered": "",
         "toggle": "",
+        "new": "true",
         "in_progress": "true",
         "cancelled": "true",
-        "on_hold": "true",
         "approved": "true"
     },
     "bd_manager": {
         "name": "bd_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "bd_member": {
         "name": "bd_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "cpl_manager_nz": {
         "name": "cpl_manager_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "cpl_member": {
         "name": "cpl_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "dc_ho": {
         "name": "dc_ho",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "dc_manager": {
         "name": "dc_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "dc_ws": {
         "name": "dc_ws",
         "name_rendered": "",
         "toggle": "",
+        "new": "true",
         "in_progress": "true",
         "cancelled": "true",
-        "on_hold": "true",
         "approved": ""
     },
     "des_manager": {
         "name": "des_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "des_member": {
         "name": "des_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "dir": {
         "name": "dir",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "dir_nz": {
         "name": "dir_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "external_inspector": {
         "name": "external_inspector",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "fac_admin": {
         "name": "fac_admin",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "fin_member_nz": {
         "name": "fin_member_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "guest": {
         "name": "guest",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "hr_manager": {
         "name": "hr_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "hr_member": {
         "name": "hr_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "hr_member_nz": {
         "name": "hr_member_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "hse_manager": {
         "name": "hse_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "hse_member": {
         "name": "hse_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "it_manager": {
         "name": "it_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "it_member": {
         "name": "it_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "mgr_asst_nz": {
         "name": "mgr_asst_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "newcomer": {
         "name": "newcomer",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "pln_admin": {
         "name": "pln_admin",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "proc_manager": {
         "name": "proc_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "proc_member": {
         "name": "proc_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "proc_member_nz": {
         "name": "proc_member_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "prod_manager": {
         "name": "prod_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "prod_manager_nz": {
         "name": "prod_manager_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "prod_member": {
         "name": "prod_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "prod_member_nz": {
         "name": "prod_member_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "proj_manager": {
         "name": "proj_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "proj_member": {
         "name": "proj_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "qaqc_manager": {
         "name": "qaqc_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "true",
         "in_progress": "true",
         "cancelled": "true",
-        "on_hold": "true",
         "approved": ""
     },
     "qaqc_member": {
         "name": "qaqc_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
-        "on_hold": "true",
         "approved": ""
     },
     "qs_manager": {
         "name": "qs_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "qs_member": {
         "name": "qs_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "qs_member_nz": {
         "name": "qs_member_nz",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "supreme_manage": {
         "name": "supreme_manage",
         "name_rendered": "",
         "toggle": "",
+        "new": "true",
         "in_progress": "true",
         "cancelled": "true",
-        "on_hold": "true",
         "approved": ""
     },
     "whs_manager": {
         "name": "whs_manager",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "whs_member": {
         "name": "whs_member",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     },
     "worker": {
         "name": "worker",
         "name_rendered": "",
         "toggle": "",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
-        "on_hold": "",
         "approved": ""
     }
 }

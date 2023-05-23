@@ -14,9 +14,10 @@ class Qaqc_insp_chklst_sht extends ModelExtended
 
     public $eloquentParams = [
         // "getRuns" => ["hasMany", Qaqc_insp_chklst_run::class, "qaqc_insp_chklst_sht_id"], // version 1
-        "getLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_sht_id"],
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
         "getTmplSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, 'qaqc_insp_tmpl_sht_id'],
+
+        "getLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_sht_id"],
         "getShtSigs" => ["hasMany", Qaqc_insp_chklst_sht_sig::class, "qaqc_insp_chklst_sht_id"],
 
     ];
@@ -59,14 +60,14 @@ class Qaqc_insp_chklst_sht extends ModelExtended
 
     public function getProject()
     {
-        $tmp = $this->getChklst->prodOrder->getSubProject;
+        $tmp = $this->getChklst->getProdOrder->getSubProject;
         $relation = $tmp->belongsTo(Project::class, 'project_id');
         return $relation;
     }
 
     public function getSubProject()
     {
-        $tmp = $this->getChklst->prodOrder;
+        $tmp = $this->getChklst->getProdOrder;
         $relation = $tmp->belongsTo(Sub_project::class, 'sub_project_id');
         return $relation;
     }

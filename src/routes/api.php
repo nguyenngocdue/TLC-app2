@@ -118,7 +118,7 @@ Route::group([
         'Qaqc_insp_tmpl_line',
         'Hr_overtime_request_line',
         'Hse_corrective_action',
-        'Esg_line',
+        'Ghg_line',
         'Zunit_test_01',
         'Zunit_test_02',
         'Zunit_test_03',

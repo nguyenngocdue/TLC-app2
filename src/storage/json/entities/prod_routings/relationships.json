@@ -13,6 +13,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getDeletedBy": {
+        "name": "_getDeletedBy",
+        "relationship": "belongsTo",
+        "control_name": "deleted_by",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getProdRoutingLinks": {
         "name": "_getProdRoutingLinks",
         "relationship": "belongsToMany",
@@ -41,10 +55,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": "12"
     },
-    "_prodOrders": {
-        "name": "_prodOrders",
+    "_getProdOrders": {
+        "name": "_getProdOrders",
         "relationship": "hasMany",
-        "control_name": "prodOrders",
+        "control_name": "getProdOrders",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

@@ -12,17 +12,17 @@ class Prod_run extends ModelExtended
     public $nameless = true;
 
     public $eloquentParams = [
-        "users" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_run_id', 'user_id'],
-        "prodSequence" => ['belongsTo', Prod_sequence::class, 'prod_sequence_id'],
+        "getProdSequence" => ['belongsTo', Prod_sequence::class, 'prod_sequence_id'],
+        "getUsers" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_run_id', 'user_id'],
     ];
 
-    public function users()
+    public function getUsers()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('user_id');
     }
 
-    public function prodSequence()
+    public function getProdSequence()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -1,4 +1,9 @@
 {
+    "new": {
+        "name": "new",
+        "label": "Create New",
+        "tooltip": ""
+    },
     "in_progress": {
         "name": "in_progress",
         "label": "Change to In Progress",
@@ -7,11 +12,6 @@
     "cancelled": {
         "name": "cancelled",
         "label": "Change to Cancel",
-        "tooltip": ""
-    },
-    "on_hold": {
-        "name": "on_hold",
-        "label": "Change to On Hold",
         "tooltip": ""
     },
     "approved": {

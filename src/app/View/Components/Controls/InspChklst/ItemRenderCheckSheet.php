@@ -27,12 +27,12 @@ class ItemRenderCheckSheet extends Component
      */
     public function render()
     {
-        // getRun->getSheet->getChklst->prodOrder->getSubProject
+        // getRun->getSheet->getChklst->getProdOrder->getSubProject
         $lines = $this->item->getLines;
         // $lines = $this->item->getRuns[0]->getLines;
         $chklst = $this->item->getChklst;
 
-        $prodOrder = is_null($chklst) ? null : $chklst->prodOrder;
+        $prodOrder = is_null($chklst) ? null : $chklst->getProdOrder;
         $subProject = is_null($prodOrder) ? null : $prodOrder->getSubProject;
         $project = is_null($subProject) ? null : $subProject->getProject;
         // dump($chklst);

@@ -1,10 +1,10 @@
 {
-    "_prodOrder": {
-        "name": "_prodOrder",
+    "_getProdOrder": {
+        "name": "_getProdOrder",
         "relationship": "belongsTo",
         "control_name": "prod_order_id",
         "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "renderer_view_all_param": "production_name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
@@ -17,20 +17,6 @@
         "name": "_getProdRoutingLinks",
         "relationship": "belongsTo",
         "control_name": "prod_routing_link_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "dropdown",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_getOwner": {
-        "name": "_getOwner",
-        "relationship": "belongsTo",
-        "control_name": "owner_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
@@ -55,10 +41,38 @@
         "filter_values": "140",
         "radio_checkbox_colspan": ""
     },
-    "_prodRuns": {
-        "name": "_prodRuns",
+    "_getOwner": {
+        "name": "_getOwner",
+        "relationship": "belongsTo",
+        "control_name": "owner_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getDeletedBy": {
+        "name": "_getDeletedBy",
+        "relationship": "belongsTo",
+        "control_name": "deleted_by",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getProdRuns": {
+        "name": "_getProdRuns",
         "relationship": "hasMany",
-        "control_name": "prodRuns",
+        "control_name": "getProdRuns",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

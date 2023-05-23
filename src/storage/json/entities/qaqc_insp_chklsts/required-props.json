@@ -1,0 +1,106 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_prod_order_id": {
+        "name": "_prod_order_id",
+        "column_name": "prod_order_id",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_qaqc_insp_tmpl_id": {
+        "name": "_qaqc_insp_tmpl_id",
+        "column_name": "qaqc_insp_tmpl_id",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_getSheets": {
+        "name": "_getSheets",
+        "column_name": "getSheets",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_progress": {
+        "name": "_progress",
+        "column_name": "progress",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_consent_number": {
+        "name": "_consent_number",
+        "column_name": "consent_number",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    }
+}

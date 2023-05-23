@@ -9,7 +9,7 @@ use App\View\Components\Formula\All_ClosedAt;
 use App\View\Components\Formula\All_ConcatNameWith123;
 use App\View\Components\Formula\All_DocId;
 use App\View\Components\Formula\All_SlugifyByName;
-use App\View\Components\Formula\Duplicate_Status;
+use App\View\Components\Formula\All_DuplicateStatus;
 use App\View\Components\Formula\NCR_Report_Type;
 use App\View\Components\Formula\User_PositionRendered;
 use App\View\Components\Formula\Wir_NameRendered;
@@ -41,10 +41,10 @@ trait TraitEntityFormula
                         $value = "";
                         break;
                     }
-                    $position_pres = ($user->positionPres) ? $user->positionPres->name : "";
-                    $position_1 = ($user->position1) ? $user->position1->name : "";
-                    $position_2 = ($user->position2) ? $user->position2->name : "";
-                    $position_3 = ($user->position3) ? $user->position3->name : "";
+                    $position_pres = ($user->getPositionPrefix) ? $user->getPositionPrefix->name : "";
+                    $position_1 = ($user->getPosition1) ? $user->getPosition1->name : "";
+                    $position_2 = ($user->getPosition2) ? $user->getPosition2->name : "";
+                    $position_3 = ($user->getPosition3) ? $user->getPosition3->name : "";
                     $value = (new User_PositionRendered())($position_pres, $position_1, $position_2, $position_3);
                     break;
                 case "All_OwnerId":
@@ -57,8 +57,8 @@ trait TraitEntityFormula
                 case "All_ClosedAt":
                     $value = (new All_ClosedAt())($status, $type);
                     break;
-                case "Duplicate_Status":
-                    $value = (new Duplicate_Status())($type);
+                case "All_DuplicateStatus":
+                    $value = (new All_DuplicateStatus())($type);
                     break;
                 case "Wir_NameRendered":
                     $value = (new Wir_NameRendered())($item);

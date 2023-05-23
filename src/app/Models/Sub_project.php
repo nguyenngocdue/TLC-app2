@@ -12,8 +12,8 @@ class Sub_project extends ModelExtended
     protected $table = 'sub_projects';
 
     public $eloquentParams = [
-        "prodOrders" => ['hasMany', Prod_order::class],
         "getProject" => ['belongsTo', Project::class, "project_id"],
+        "getProdOrders" => ['hasMany', Prod_order::class],
     ];
 
     public $oracyParams = [
@@ -26,7 +26,7 @@ class Sub_project extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    public function prodOrders()
+    public function getProdOrders()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1]);

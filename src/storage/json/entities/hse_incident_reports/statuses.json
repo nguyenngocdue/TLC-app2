@@ -1,6 +1,9 @@
 [
     "new",
     "active",
-    "approval_rejected",
+    "pending_ack",
+    "pending_review",
+    "review_rejected",
+    "pending_verification",
     "closed"
 ]

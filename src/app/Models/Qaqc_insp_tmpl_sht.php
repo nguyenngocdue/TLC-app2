@@ -11,6 +11,7 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
 
     public $eloquentParams = [
         "getTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, 'qaqc_insp_tmpl_id'],
+
         "getLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_tmpl_sht_id"],
     ];
 

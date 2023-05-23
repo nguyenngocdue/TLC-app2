@@ -19,12 +19,13 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],
         "getControlValue" => ["belongsTo", Qaqc_insp_control_value::class, "qaqc_insp_control_value_id"],
         "getControlType" => ["belongsTo", Control_type::class, "control_type_id"],
+        "getInspector" => ["belongsTo", User::class, "inspector_id"],
+
         // "getProject" => ["morphMany", Project::class, "complex"],
         // "getSubProject" => ["morphMany", Sub_Project::class, "complex"],
         // "getProdRouting" => ["morphMany", Prod_routing::class, "complex"],
         // "getProdOrder" => ["morphMany", Prod_order::class, "complex"],
         "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
-        "getInspector" => ["belongsTo", User::class, "inspector_id"],
         "insp_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "insp_comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
@@ -90,24 +91,24 @@ class Qaqc_insp_chklst_line extends ModelExtended
 
     public function getProject()
     {
-        $tmp = $this->getSheet->getChklst->prodOrder->getSubProject;
-        // $tmp = $this->getRun->getSheet->getChklst->prodOrder->getSubProject;
+        $tmp = $this->getSheet->getChklst->getProdOrder->getSubProject;
+        // $tmp = $this->getRun->getSheet->getChklst->getProdOrder->getSubProject;
         $relation = $tmp->belongsTo(Project::class, 'project_id');
         return $relation;
     }
 
     public function getSubProject()
     {
-        $tmp = $this->getSheet->getChklst->prodOrder;
-        // $tmp = $this->getRun->getSheet->getChklst->prodOrder;
+        $tmp = $this->getSheet->getChklst->getProdOrder;
+        // $tmp = $this->getRun->getSheet->getChklst->getProdOrder;
         $relation = $tmp->belongsTo(Sub_project::class, 'sub_project_id');
         return $relation;
     }
 
     public function getProdRouting()
     {
-        $tmp = $this->getSheet->getChklst->prodOrder;
-        // $tmp = $this->getRun->getSheet->getChklst->prodOrder;
+        $tmp = $this->getSheet->getChklst->getProdOrder;
+        // $tmp = $this->getRun->getSheet->getChklst->getProdOrder;
         $relation = $tmp->belongsTo(Prod_routing::class, 'prod_routing_id');
         return $relation;
     }
