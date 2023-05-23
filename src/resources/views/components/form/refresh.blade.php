@@ -5,11 +5,16 @@
     @php
         $valueType = $valueRefresh ? 'refresh' : '';
     @endphp
-    <x-renderer.button id="button_refresh" htmlType="button" onClick="updateRefreshPage()" type='{{$valueType}}' class="bg-blue-500 mr-1"><i class="fa-sharp fa-light fa-rotate-right"></i> Refresh (60)</x-renderer.button>
+    <x-renderer.button 
+        title="Toggle automatic refresh every {{$timeout}} seconds."
+        id="button_refresh" icon="fa-sharp fa-light fa-rotate-right" 
+        htmlType="button" onClick="updateRefreshPage()" 
+        type='{{$valueType}}' class="bg-blue-500 mr-1"
+        >Refresh ({{$timeout}})</x-renderer.button>
 </form>
 @if($valueRefresh)
 <script>
-    let count = 60;
+    let count = {{$timeout}};
     const countdownInterval = setInterval(function() {
       count--;
       document.getElementById('button_refresh').innerHTML = '<i class="fa-sharp fa-light fa-rotate-right"></i> Refresh (' + count + ')';
