@@ -28,9 +28,6 @@ class WidgetGroups extends Component
         $widget['params']['table_widget'] = $this->table;
         $widget['params']['check_id'] = $this->projectId;
 
-        if (!$this->projectId && !$this->table) {
-            $widget['widget_title'] = $widget['widget_title'] . " (All projects)";
-        }
         $widget[''] = $this->projectId;
         $fn = $widget['fn'];
         $table_a = $widget['params']['table_a'];
