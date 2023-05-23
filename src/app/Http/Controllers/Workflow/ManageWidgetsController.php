@@ -58,10 +58,9 @@ class ManageWidgetsController extends AbstractManageLibController
                 'cbbDataSource' => [
                     '',
                     'SqlForeignKey',
-                    'SqlForeignKey_Routing',
+                    'SqlForeignKeyWidget01',
                     'SqlTest',
                     'SqlStatus',
-                    'SqlProgress',
 
                 ],
                 "properties" => ['strFn' => 'same'],

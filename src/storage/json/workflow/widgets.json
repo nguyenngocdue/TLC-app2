@@ -1,232 +1,97 @@
 {
-    "chklst_01": {
+    "chklst": {
         "name": "chklst_01",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlProgress",
+        "fn": "SqlForeignKeyWidget01",
         "section_title": "Inspection Checklists",
-        "widget_title": "by Progress of Checklist (N17)",
-        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_c\":\"qaqc_insp_chklsts\", \"key_c\":\"prod_order_id\" , \"sub_project_id\":21, \"qaqc_insp_tmpl_id\" : 1}"
+        "widget_title": "by Status",
+        "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"id\",\r\n\"table_b\":\"qaqc_insp_chklsts\",\"key_b1\":\"prod_order_id\", \"att_metric_name\":\"status\"}"
     },
-    "chklst_02": {
-        "name": "chklst_02",
+    "prod_order_status": {
+        "name": "prod_order_status",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlProgress",
-        "section_title": "Inspection Checklists",
-        "widget_title": "by Progress of Checklist (N18)",
-        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_c\":\"qaqc_insp_chklsts\", \"key_c\":\"prod_order_id\" , \"sub_project_id\":82, \"qaqc_insp_tmpl_id\" : 1}"
-    },
-    "chklst_03": {
-        "name": "chklst_03",
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlProgress",
-        "section_title": "Shipping Delivery Checksheet for Module",
-        "widget_title": "by Progress (N17)",
-        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_c\":\"qaqc_insp_chklsts\", \"key_c\":\"prod_order_id\" , \"sub_project_id\":21, \"qaqc_insp_tmpl_id\" : 2}"
-    },
-    "chklst_04": {
-        "name": "chklst_04",
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlProgress",
-        "section_title": "Shipping Delivery Checksheet for Module",
-        "widget_title": "by Progress (N18)",
-        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_c\":\"qaqc_insp_chklsts\", \"key_c\":\"prod_order_id\" , \"sub_project_id\":82, \"qaqc_insp_tmpl_id\" : 2}"
-    },
-    "chklst_05": {
-        "name": "chklst_05",
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlProgress",
-        "section_title": "Shipping Delivery Checksheet for Container",
-        "widget_title": "by Progress (N17)",
-        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_c\":\"qaqc_insp_chklsts\", \"key_c\":\"prod_order_id\" , \"sub_project_id\":21, \"qaqc_insp_tmpl_id\" : 3}"
-    },
-    "chklst_06": {
-        "name": "chklst_06",
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlProgress",
-        "section_title": "Shipping Delivery Checksheet for Container",
-        "widget_title": "by Progress (N18)",
-        "params": "{\"table_a\":\"sub_projects\", \"key_a\":\"id\", \"table_c\":\"qaqc_insp_chklsts\", \"key_c\":\"prod_order_id\" , \"sub_project_id\":82, \"qaqc_insp_tmpl_id\" : 3}"
-    },
-    "prod_order_00": {
-        "name": "prod_order_00",
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
+        "fn": "SqlForeignKeyWidget01",
         "section_title": "Production Orders",
-        "widget_title": "by Status (All Project)",
-        "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"att_metric_name\":\"status\"}"
+        "widget_title": "by Status",
+        "params": "{\"table_a\":\"prod_orders\",\"key_a1\":\"sub_project_id\",\r\n\"att_metric_name\":\"status\"}"
     },
-    "prod_order_01": {
-        "name": "prod_order_01",
-        "hidden": "true",
+    "prod_order_routing": {
+        "name": "prod_order_routing",
+        "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlStatus",
+        "fn": "SqlForeignKeyWidget01",
         "section_title": "Production Orders",
-        "widget_title": "by Status (N17)",
-        "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"sub_project_id\":21, \"att_metric_name\":\"status\"}"
+        "widget_title": "by Routing",
+        "params": "{\"table_a\":\"prod_orders\",\"key_a1\":\"sub_project_id\",\"key_a2\":\"prod_routing_id\",\r\n\"table_b\":\"prod_routings\" ,\"key_b1\":\"id\", \"att_metric_name\":\"name\"}"
     },
-    "prod_order_02": {
-        "name": "prod_order_02",
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "Production Orders",
-        "widget_title": "by Status (N18)",
-        "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"sub_project_id\":82, \"att_metric_name\":\"status\"}"
-    },
-    "prod_order_03": {
-        "name": "prod_order_03",
+    "qaqc_ncr_report_type": {
+        "name": "qaqc_ncr_report_type",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "Production Orders",
-        "widget_title": "by Routing (All Project)",
-        "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"prod_routing_id\", \"table_b\":\"prod_routings\", \"key_b\":\"id\" , \"att_metric_name\":\"name\"}"
+        "fn": "SqlForeignKeyWidget01",
+        "section_title": "Non Conformance Reports",
+        "widget_title": "by Report Type",
+        "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"defect_report_type\", \"table_b\":\"terms\", \"key_b1\":\"id\" ,  \"att_metric_name\":\"name\"}"
     },
-    "prod_order_04": {
-        "name": "prod_order_04",
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "Production Orders",
-        "widget_title": "by Routing (N18)",
-        "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"prod_routing_id\", \"table_b\":\"prod_routings\", \"key_b\":\"id\" , \"sub_project_id\":21, \"att_metric_name\":\"name\"}"
-    },
-    "qaqc_ncr_01": {
-        "name": "qaqc_ncr_01",
+    "qaqc_ncr_discipline": {
+        "name": "qaqc_ncr_discipline",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlStatus",
+        "fn": "SqlForeignKeyWidget01",
         "section_title": "Non Conformance Reports",
-        "widget_title": "by Report Type (All Project)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"defect_report_type\", \"table_b\":\"terms\", \"key_b\":\"id\" ,  \"att_metric_name\":\"name\"}"
+        "widget_title": "by Discipline",
+        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"prod_discipline_id\", \"table_b\":\"prod_disciplines\", \"key_b1\":\"id\" ,  \"att_metric_name\":\"name\"}"
     },
-    "qaqc_ncr_02": {
-        "name": "qaqc_ncr_02",
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "Non Conformance Reports",
-        "widget_title": "by Report Type (N18)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"defect_report_type\", \"table_b\":\"terms\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
-    },
-    "qaqc_ncr_03": {
-        "name": "qaqc_ncr_03",
+    "qaqc_ncr_status": {
+        "name": "qaqc_ncr_status",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlStatus",
+        "fn": "SqlForeignKeyWidget01",
         "section_title": "Non Conformance Reports",
-        "widget_title": "by Discipline (All Project)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"prod_discipline_id\", \"table_b\":\"prod_disciplines\", \"key_b\":\"id\" ,  \"att_metric_name\":\"name\"}"
+        "widget_title": "by Status",
+        "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"status\", \"att_metric_name\":\"status\"}"
     },
-    "qaqc_ncr_04": {
-        "name": "qaqc_ncr_04",
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "Non Conformance Reports",
-        "widget_title": "by Discipline (N18)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"prod_discipline_id\", \"table_b\":\"prod_disciplines\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
-    },
-    "qaqc_ncr_05": {
-        "name": "qaqc_ncr_05",
+    "qaqc_ncr_owner_id": {
+        "name": "qaqc_ncr_owner_id",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlStatus",
+        "fn": "SqlForeignKeyWidget01",
         "section_title": "Non Conformance Reports",
-        "widget_title": "by Status (All Project)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"att_metric_name\":\"status\"}"
+        "widget_title": "by Owner ID",
+        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"owner_id\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name\", \"global_filter\":\"b.resigned != true\"}"
     },
-    "qaqc_ncr_06": {
-        "name": "qaqc_ncr_06",
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "Non Conformance Reports",
-        "widget_title": "by Status (N18)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"sub_project_id\":82, \"att_metric_name\":\"status\"}"
-    },
-    "qaqc_ncr_07": {
-        "name": "qaqc_ncr_07",
+    "qaqc_ncr_assignee": {
+        "name": "qaqc_ncr_assignee",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlStatus",
+        "fn": "SqlForeignKeyWidget01",
         "section_title": "Non Conformance Reports",
-        "widget_title": "by Owner ID (All Project)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"owner_id\", \"table_b\":\"users\", \"key_b\":\"id\" , \"att_metric_name\":\"name\", \"global_filter\":\"b.resigned != true\"}"
+        "widget_title": "by Assignee",
+        "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"assignee_1\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name\"}"
     },
-    "qaqc_ncr_08": {
-        "name": "qaqc_ncr_08",
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "Non Conformance Reports",
-        "widget_title": "by Owner ID (N18)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"owner_id\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\", \"global_filter\":\"b.resigned != true\"}"
-    },
-    "qaqc_ncr_09": {
-        "name": "qaqc_ncr_09",
+    "qaqc_wir_assignee": {
+        "name": "qaqc_wir_assignee",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "Non Conformance Reports",
-        "widget_title": "by Assignee (All Project)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b\":\"id\" , \"att_metric_name\":\"name\"}"
-    },
-    "qaqc_ncr_10": {
-        "name": "qaqc_ncr_10",
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "Non Conformance Reports",
-        "widget_title": "by Assignee (N18)",
-        "params": "{\"table_a\":\"qaqc_ncrs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
-    },
-    "qaqc_wir_01": {
-        "name": "qaqc_wir_01",
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
+        "fn": "SqlForeignKeyWidget01",
         "section_title": "Work Inspection Requests",
-        "widget_title": "by Assignee (All Project)",
-        "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b\":\"id\" , \"att_metric_name\":\"name\"}"
+        "widget_title": "by Assignee",
+        "params": "{\"table_a\":\"qaqc_wirs\",\"key_a1\":\"assignee_1\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name\"}"
     },
-    "qaqc_wir_02": {
-        "name": "qaqc_wir_02",
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "Work Inspection Requests",
-        "widget_title": "by Assignee (N18)",
-        "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b\":\"id\" , \"sub_project_id\":82, \"att_metric_name\":\"name\"}"
-    },
-    "qaqc_wir_03": {
-        "name": "qaqc_wir_03",
+    "qaqc_wir_status": {
+        "name": "qaqc_wir_status",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlStatus",
+        "fn": "SqlForeignKeyWidget01",
         "section_title": "Work Inspection Requests",
-        "widget_title": "by Status (All Project)",
-        "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"att_metric_name\":\"status\"}"
-    },
-    "qaqc_wir_04": {
-        "name": "qaqc_wir_04",
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlStatus",
-        "section_title": "Work Inspection Requests",
-        "widget_title": "by Status (N18)",
-        "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"sub_project_id\":82, \"att_metric_name\":\"status\"}"
+        "widget_title": "by Status",
+        "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"status\", \"att_metric_name\":\"status\"}"
     },
     "users_1": {
         "name": "users_1",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "doughnut",
         "fn": "SqlForeignKey",
         "section_title": "Users",
@@ -235,7 +100,7 @@
     },
     "users_2": {
         "name": "users_2",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "doughnut",
         "fn": "SqlForeignKey",
         "section_title": "Users",
@@ -244,7 +109,7 @@
     },
     "users_3": {
         "name": "users_3",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "doughnut",
         "fn": "SqlForeignKey",
         "section_title": "Users",
@@ -280,7 +145,7 @@
     },
     "users_7": {
         "name": "users_7",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "doughnut",
         "fn": "SqlForeignKey",
         "section_title": "Users",

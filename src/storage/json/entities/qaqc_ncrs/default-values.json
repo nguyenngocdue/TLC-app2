@@ -263,6 +263,30 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_defect_severity": {
+        "name": "_defect_severity",
+        "column_name": "defect_severity",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_defect_report_type": {
+        "name": "_defect_report_type",
+        "column_name": "defect_report_type",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "NCR_Report_Type",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_getQaqcCars": {
         "name": "_getQaqcCars",
         "column_name": "getQaqcCars",
@@ -275,9 +299,57 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_qty_man_power": {
+        "name": "_qty_man_power",
+        "column_name": "qty_man_power",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_hour_per_man": {
+        "name": "_hour_per_man",
+        "column_name": "hour_per_man",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_total_hour": {
+        "name": "_total_hour",
+        "column_name": "total_hour",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -338,6 +410,54 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_attachment_defect_photos": {
+        "name": "_attachment_defect_photos",
+        "column_name": "attachment_defect_photos",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_attachment_defect_pdfs": {
+        "name": "_attachment_defect_pdfs",
+        "column_name": "attachment_defect_pdfs",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_attachment_corrective_photos": {
+        "name": "_attachment_corrective_photos",
+        "column_name": "attachment_corrective_photos",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_attachment_corrective_pdfs": {
+        "name": "_attachment_corrective_pdfs",
+        "column_name": "attachment_corrective_pdfs",
         "label": "",
         "validation": "",
         "validation_regex": "",
