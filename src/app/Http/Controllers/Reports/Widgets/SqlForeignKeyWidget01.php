@@ -15,7 +15,8 @@ class SqlForeignKeyWidget01
 
         $wd_tb = $table_widget;
         if ($table_widget === 'projects') $wd_tb = 'projects, sub_projects,';
-        if ($table_widget === 'sub_projects') $wd_tb = 'sub_projects,';
+        // if ($table_widget === 'sub_projects') $wd_tb = 'sub_projects,';
+        if ($table_widget === 'sub_projects') $wd_tb = '';
 
 
         $key_a1 = $params['key_a1'] ?? 'id';
@@ -40,13 +41,13 @@ class SqlForeignKeyWidget01
                     $con .= "AND a.project_id = $check_id";
                 } else {
                     $con .= "AND $table_widget.id = sub_projects.project_id
-                     #AND a.$key_a1 = sub_projects.id
+                     AND a.$key_a1 = sub_projects.id
                      AND $table_widget.id = $check_id";
                 }
                 $table_b ? $con .= "\n AND a.$key_a2 = b.$key_b1" : "";
                 break;
             case 'sub_projects':
-                $con = "\n AND a.sub_project_id = $check_id";
+                $con = "\n AND a.$key_a1 = $check_id";
                 $table_b ? $con .= "\n AND a.$key_a2 = b.$key_b1" : "";
                 break;
             case null:
