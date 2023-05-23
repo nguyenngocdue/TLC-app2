@@ -25,6 +25,13 @@ class WidgetGroups extends Component
     private function makeDataSource(&$widget)
     {
         $widget['params'] = (array) json_decode($widget['params']);
+        $widget['params']['table_widget'] = $this->table;
+        $widget['params']['check_id'] = $this->projectId;
+
+        if (!$this->projectId && !$this->table) {
+            $widget['widget_title'] = $widget['widget_title'] . " (All projects)";
+        }
+        $widget[''] = $this->projectId;
         $fn = $widget['fn'];
         $table_a = $widget['params']['table_a'];
         $model_a = DBTable::fromNameToModel($table_a);
@@ -52,6 +59,7 @@ class WidgetGroups extends Component
     public function render()
     {
         $allWidgets = LibWidgets::getAll();
+        // dump($allWidgets);
         $allWidgets = array_map(fn ($widget) => array_merge($this->makeDataSource($widget), $widget), $allWidgets);
         $allWidgets = array_filter($allWidgets, fn ($widget) => !$widget['hidden']);
         // dump($allWidgets);
