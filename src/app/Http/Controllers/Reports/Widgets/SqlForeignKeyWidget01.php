@@ -36,7 +36,6 @@ class SqlForeignKeyWidget01
         $fillable = $model_a->getFillable();
         switch ($table_widget) {
             case 'projects':
-                // dump($fillable['project_id']);
                 if (isset($fillable['project_id']) && isset($fillable['sub_project_id'])) {
                     $con .= "AND a.project_id = $check_id";
                 } else {
