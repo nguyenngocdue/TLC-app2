@@ -84,9 +84,13 @@
                         <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                         @endif
                         {{-- Invisible anchor for scrolling when users click on validation fail message --}}
-                        <div class="truncate" title={{$columnName}}>
-                            <label for={{$columnName}} class="text-gray-900 dark:text-gray-300 text-base font-normal" >{{$label}}</label>
-                        </div>
+                        
+                        @if($control == 'status' && ($valueControl[0]))
+                        @else
+                            <div class="truncate" title={{$columnName}}>
+                                <label for={{$columnName}} class="text-gray-900 dark:text-gray-300 text-base font-normal" >{{$label}}</label>
+                            </div>
+                        @endif
                         @switch ($control)
                         @case('picker_time')
                         <x-advanced-filter.picker-time3  :name="$columnName" :value="$valueControl"/>
@@ -149,8 +153,9 @@
                             <x-advanced-filter.dropdown3  :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
                         @break
                         @case('status')
+                        @if(!$valueControl[0] || count($valueControl) > 1)
                             @php
-                                $libStatus = App\Http\Controllers\Workflow\LibStatuses::getFor($type);
+                            $libStatus = App\Http\Controllers\Workflow\LibStatuses::getFor($type);
                             @endphp
                             <div class="mt-1" title={{$control}}>
                                 <select id="{{$columnName}}" class="select2-hidden-accessible" multiple="multiple" style="width: 100%;" name="{{$columnName}}[]" tabindex="-1" aria-hidden="true">
@@ -159,7 +164,6 @@
                                     @endforeach
                                 </select>
                             </div>
-                            
                             <script>
                                     $('[id="'+"{{$columnName}}"+'"]').select2({
                                         placeholder: "Please select..."
@@ -167,6 +171,8 @@
                                         , templateResult: select2FormatState
                                     });
                             </script>
+                        @endif
+                            
                         @break
                         @case('parent_type')
                         <x-advanced-filter.parent-type3 :type="$type" :name="$columnName" :valueSelected="$valueControl"/>

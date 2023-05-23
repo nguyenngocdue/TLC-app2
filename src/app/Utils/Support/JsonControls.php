@@ -99,4 +99,8 @@ class JsonControls
     {
         return self::getAll()['apps_have_due_date_column'];
     }
+    public static function getViewAllTabTaxonomy()
+    {
+        return self::getAll()['view_all_tab_taxonomy'];
+    }
 }

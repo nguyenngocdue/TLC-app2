@@ -34,9 +34,9 @@ class Description5 extends Component
         $prop = $this->prop;
         $columnName = $prop['column_name'];
         $content = $dataSource[$columnName];
-        $id = $dataSource['id'];
-        $label = $prop['label'];
-        $control = $prop['control'];
+        $id = $dataSource['id'] ?? '';
+        $label = $prop['label'] ?? '';
+        $control = $prop['control'] ?? '';
         switch ($control) {
             case 'status':
                 $libStatus = LibStatuses::getFor($this->type);
