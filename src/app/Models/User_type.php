@@ -9,6 +9,7 @@ class User_type extends ModelExtended
     protected $fillable = ["name", "description", "slug"];
 
     protected $table = 'user_types';
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getUsers" => ['hasMany', User::class, 'user_type', 'id'],

@@ -12,6 +12,7 @@ class Qaqc_insp_tmpl_line extends ModelExtended
         "order_no"
     ];
     protected $table = "qaqc_insp_tmpl_lines";
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getGroup" => ["belongsTo", Qaqc_insp_group::class, "qaqc_insp_group_id"],

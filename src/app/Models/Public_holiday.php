@@ -8,6 +8,7 @@ class Public_holiday extends ModelExtended
 {
     protected $fillable = ['id', 'name', 'year', 'workplace_id', 'ph_date', 'ph_hours', 'owner_id'];
     protected $table = "public_holidays";
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],

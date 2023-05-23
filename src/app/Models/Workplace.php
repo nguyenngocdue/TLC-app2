@@ -9,6 +9,7 @@ class Workplace extends ModelExtended
     protected $fillable = ["name", "description", "standard_working_hour", "def_assignee", "slug"];
 
     protected $table = 'workplaces';
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getDefAssignee" => ["belongsTo", User::class, 'def_assignee'],

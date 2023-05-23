@@ -12,6 +12,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "qaqc_insp_control_value_id", "qaqc_insp_control_group_id", "owner_id", "inspector_id"
     ];
     protected $table = "qaqc_insp_chklst_lines";
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getGroup" => ["belongsTo", Qaqc_insp_group::class, "qaqc_insp_group_id"],

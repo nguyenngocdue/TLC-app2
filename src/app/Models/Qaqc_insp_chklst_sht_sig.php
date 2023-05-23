@@ -10,6 +10,7 @@ class Qaqc_insp_chklst_sht_sig extends ModelExtended
     protected $table = "qaqc_insp_chklst_sht_sigs";
 
     public $nameless = true;
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getSheet" => ["belongsTo", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_sht_id"],

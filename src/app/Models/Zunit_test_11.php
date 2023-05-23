@@ -9,6 +9,7 @@ class Zunit_test_11 extends ModelExtended
     protected $fillable = ['id', 'name', 'description'];
 
     protected $table = 'zunit_test_11s';
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getUT1" => ['hasMany', Zunit_test_01::class, 'parent_id'],

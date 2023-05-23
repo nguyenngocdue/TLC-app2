@@ -12,6 +12,7 @@ class Prod_routing_detail extends ModelExtended
     ];
     protected $table = "prod_routing_details";
     public $nameless = true;
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getProdRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],

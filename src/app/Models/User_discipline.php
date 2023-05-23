@@ -9,6 +9,7 @@ class User_discipline extends ModelExtended
     protected $fillable = ["name", "description", "def_assignee", "slug"];
 
     protected $table = 'user_disciplines';
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getUsers" => ['hasMany', User::class, 'discipline', 'id'],

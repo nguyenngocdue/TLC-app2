@@ -9,6 +9,7 @@ class Prod_routing_link extends ModelExtended
     protected $fillable = ["id", "name", "parent", "description", "slug", 'prod_discipline_id', 'owner_id'];
 
     protected $table = 'prod_routing_links';
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],

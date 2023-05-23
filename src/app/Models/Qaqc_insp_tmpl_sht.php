@@ -8,6 +8,7 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "slug", "qaqc_insp_tmpl_id", "owner_id"];
     protected $table = "qaqc_insp_tmpl_shts";
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, 'qaqc_insp_tmpl_id'],

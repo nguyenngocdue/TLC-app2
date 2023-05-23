@@ -69,6 +69,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     protected $hidden = ["password", "remember_token"];
 
     protected $touches = [];
+    protected static $statusless = true;
 
     /**
      * The attributes that should be cast.

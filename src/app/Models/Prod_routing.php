@@ -9,6 +9,7 @@ class Prod_routing extends ModelExtended
     protected $fillable = ["name", "description", "slug", "owner_id"];
 
     protected $table = 'prod_routings';
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getProdOrders" => ['hasMany', Prod_order::class],

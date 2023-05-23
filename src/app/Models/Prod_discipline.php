@@ -9,6 +9,7 @@ class Prod_discipline extends ModelExtended
     public $fillable = ["id", "name", "description", "slug", "def_assignee", "owner_id"];
 
     protected $table = 'prod_disciplines';
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
