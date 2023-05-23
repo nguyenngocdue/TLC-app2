@@ -12,7 +12,7 @@
         "hidden_edit": "",
         "hidden_label": "",
         "hidden_filter": "",
-        "hidden_print": "",
+        "hidden_print": "true",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",

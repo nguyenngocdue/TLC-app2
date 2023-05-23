@@ -58,6 +58,7 @@
         "col_span": "12",
         "width": "100",
         "hidden_edit": "true",
+        "hidden_print": "true",
         "read_only": "true"
     },
     "_order_no": {
