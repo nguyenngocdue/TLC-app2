@@ -251,23 +251,30 @@ class ViewAllController extends Controller
 
     private function getTabPane($advanceFilters)
     {
-        $currentStatus = isset($advanceFilters['status']) ? $advanceFilters['status'][0] : '';
-        $statuses = LibStatuses::getFor($this->type);
+        $currentStatus = isset($advanceFilters['status']) ? $advanceFilters['status'] : '';
+        $dataTaxonomy = [];
+        switch (JsonControls::getViewAllTabTaxonomy()) {
+            case 'status':
+                $dataTaxonomy = LibStatuses::getFor($this->type);
+                break;
+            default:
+                break;
+        }
         $tableName = Str::plural($this->type);
         $action = "updateValueAdvanceFilter";
         $dataSource = [
             'all' => [
                 'href' => "?action=$action&_entity=" . $tableName . "&status%5B%5D=&",
                 'title' => "<x-renderer.tag>All</x-renderer.tag>",
-                'active' => true, //is_null($currentStatus),
+                'active' => true,
             ]
         ];
-        foreach ($statuses as $statusKey => $status) {
-            $isActive = $currentStatus == $statusKey;
+        foreach ($dataTaxonomy as $key => $value) {
+            $isActive = (count($currentStatus) == 1) && ($currentStatus[0] == $key);
             if ($isActive) $dataSource['all']['active'] = false;
-            $dataSource[$statusKey] = [
-                'href' => "?action=$action&_entity=" . $tableName . "&status%5B%5D=$statusKey",
-                'title' => "<x-renderer.status>" . $statusKey . "</x-renderer.status>",
+            $dataSource[$key] = [
+                'href' => "?action=$action&_entity=" . $tableName . "&status%5B%5D=$key",
+                'title' => "<x-renderer.status>" . $key . "</x-renderer.status>",
                 'active' => $isActive,
             ];
         }
