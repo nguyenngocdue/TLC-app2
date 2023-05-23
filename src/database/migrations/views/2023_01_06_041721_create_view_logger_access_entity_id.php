@@ -14,7 +14,7 @@ return new class extends Migration
     {
         if (!env('ACCESS_LOGGER_ENABLED')) return;
         $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
-        DB::connection($connection)->statement("CREATE VIEW view_logger_access_entity_id AS
+        DB::connection($connection)->statement("CREATE OR REPLACE VIEW view_logger_access_entity_id AS
         
         SELECT entity_name, entity_id, count(*) click_count
             FROM `logger_access` 

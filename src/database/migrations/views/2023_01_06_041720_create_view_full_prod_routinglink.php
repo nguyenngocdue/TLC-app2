@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement("CREATE VIEW view_full_prod_routing_link AS
+        DB::statement("CREATE OR REPLACE VIEW view_full_prod_routing_link AS
         
             SELECT 
                 po.id po_id, 

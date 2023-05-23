@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement("CREATE VIEW view_otr_year_remainings AS
+        DB::statement("CREATE OR REPLACE VIEW view_otr_year_remainings AS
         
             SELECT 
                 'idless' AS id,

@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class User_time_keep_type extends ModelExtended
 {
-    protected $fillable = ["name", "description", "slug"];
+    protected $fillable = ["name", "description", "slug", 'owner_id'];
 
     protected $table = 'user_time_keep_types';
 

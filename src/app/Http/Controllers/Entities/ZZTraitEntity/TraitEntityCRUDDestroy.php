@@ -23,9 +23,9 @@ trait TraitEntityCRUDDestroy
                 [$arrFail],
                 "Delete document successfully!",
             );
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             return ResponseObject::responseFail(
-                $th->getPrevious()->getMessage(),
+                $e->getMessage(),
             );
         }
     }
@@ -43,9 +43,9 @@ trait TraitEntityCRUDDestroy
                 [$arrFail],
                 "Restore document successfully!",
             );
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             return ResponseObject::responseFail(
-                $th->getPrevious()->getMessage(),
+                $e->getMessage(),
             );
         }
     }

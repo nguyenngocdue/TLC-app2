@@ -2,10 +2,16 @@
 
 namespace Tests\Feature;
 
+use App\Models\Field;
 use App\Models\Permission;
+use App\Models\Priority;
+use App\Models\Prod_discipline;
+use App\Models\Project;
 use App\Models\Role;
 use App\Models\Role_set;
+use App\Models\Sub_project;
 use App\Models\User;
+use App\Models\User_time_keep_type;
 use App\Utils\Support\Entities;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -23,8 +29,10 @@ class ExampleTest extends TestCase
         foreach ($all as $entity) {
             $table = $entity->getTable();
             // dump($table);
-            if (!str_starts_with($table, 'qaqc')) continue;
-            $result[] = $entity;
+            // if (!str_starts_with($table, 'qaqc')) continue;
+            if (in_array($table, ['qaqc_mirs'])) {
+                $result[] = $entity;
+            }
         }
         // dump($result);
         return $result;
@@ -40,6 +48,7 @@ class ExampleTest extends TestCase
             'last_name' => 'Truong',
             'settings' => "[]",
             'owner_id' => 0,
+            'time_keeping_type' => 1,
         ];
     }
 
@@ -159,7 +168,33 @@ class ExampleTest extends TestCase
         $roleset->giveRoleTo($key1sArray);
     }
 
-    public function test_the_view_all_screen_access_with_authenticated_user()
+    // public function test_the_view_all_screen_access_with_authenticated_user()
+    // {
+    //     $this->withoutExceptionHandling();
+    //     // $this->load_permissions_to_table();
+    //     // $this->load_permissions_to_role();
+    //     // $this->load_roles_to_roleset();
+    //     // dd();
+    //     $this->load_permission_to_admin();
+    //     // app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+    //     $user = User::create($this->getUser());
+    //     $user->assignRoleset('admin');
+
+    //     $entities = $this->getEntities();
+    //     foreach ($entities as $entity) {
+    //         // $entity = $entities[0];
+    //         $table = $entity->getTable();
+    //         $route = route($table . '.index');
+    //         dump("Accessing to " . $route);
+    //         $response = $this
+    //             ->actingAs($user)
+    //             ->get($route);
+
+    //         $response->assertStatus(200);
+    //     }
+    // }
+
+    public function test_the_store_access_with_authenticated_user()
     {
         $this->withoutExceptionHandling();
         // $this->load_permissions_to_table();
@@ -168,32 +203,31 @@ class ExampleTest extends TestCase
         // dd();
         $this->load_permission_to_admin();
         // app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+        User_time_keep_type::create(['name' => 'tsw', 'slug' => 'tsw', 'owner_id' => 1,]);
+        Prod_discipline::create(['name' => 'aaa', 'slug' => 'aaa', 'owner_id' => 1,]);
+        Field::create(['name' => 'aaa', 'slug' => 'aaa', 'owner_id' => 1,]);
+        Priority::create(['name' => 'ppp', 'slug' => 'ppp', 'owner_id' => 1, 'duration' => 10, 'field_id' => 1]);
+        Project::create(['id' => 1, 'name' => 'Project 001', 'slug' => 'project-001', 'owner_id' => 1,]);
+        Sub_project::create(['id' => 1, 'name' => 'sub_project_001', 'slug' => 'sub-project-001', 'owner_id' => 1,],);
+
         $user = User::create($this->getUser());
         $user->assignRoleset('admin');
 
-        $entities = $this->getEntities();
-        // foreach ($entities as $entity) {
-        //     // $entity = $entities[0];
-        //     $table = $entity->getTable();
-        //     $route = route($table . '.index');
-        //     dump("Accessing to " . $route);
-        //     $response = $this
-        //         ->actingAs($user)
-        //         ->get($route);
+        $mirs = [
+            [
+                'project_id' => 1,
+                'sub_project_id' => 1,
+                'prod_discipline_id' => 1,
 
-        //     $response->assertStatus(200);
-        // }
-
-        foreach ($entities as $entity) {
-            // $entity = $entities[0];
-            $table = $entity->getTable();
-            $route = route($table . '.create');
-            dump("Creating a new " . $route);
-            $response = $this
-                ->actingAs($user)
-                ->put($route, []);
-
-            $response->assertStatus(200);
-        }
+                'name' => 'mir 001',
+                'priority_id' => 1,
+                'due_date' => '20/12/2023 11:12',
+                'assignee_1' => 1,
+            ],
+        ];
+        $route = route('qaqc_mirs.store');
+        $response  = $this->actingAs($user)->post($route, $mirs[0]);
+        $response->assertStatus(302);
+        $response->assertRedirectToRoute('qaqc_mirs.edit', ['qaqc_mir' => 1]);
     }
 }
