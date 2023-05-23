@@ -8,6 +8,7 @@ class Qaqc_insp_group extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "slug", "owner_id"];
     protected $table = "qaqc_insp_groups";
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getTemplateLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_group_id"],

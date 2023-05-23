@@ -8,6 +8,7 @@ class Qaqc_insp_value extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "slug", "owner_id"];
     protected $table = "qaqc_insp_values";
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getControlValue" => ["belongsTo", Qaqc_insp_control_value::class, 'qaqc_insp_control_value_id'],

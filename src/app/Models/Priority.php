@@ -9,6 +9,7 @@ class Priority extends ModelExtended
     protected $fillable = ["name", "description", "slug", "duration", "field_id", "owner_id"];
 
     protected $table = 'priorities';
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getField" => ['belongsTo', Field::class, 'field_id'],

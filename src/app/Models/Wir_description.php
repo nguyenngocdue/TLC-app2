@@ -8,6 +8,7 @@ class Wir_description extends ModelExtended
 {
     protected $fillable = ["name", "description", "slug", "prod_discipline_id", "def_assignee", "owner_id"];
     protected $table = "wir_descriptions";
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],

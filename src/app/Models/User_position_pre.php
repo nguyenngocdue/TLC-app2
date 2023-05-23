@@ -9,6 +9,7 @@ class User_position_pre extends ModelExtended
     protected $fillable = ["name", "description", "slug"];
 
     protected $table = 'user_position_pres';
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getUsers" => ['hasMany', User::class, 'position_prefix', 'id'],

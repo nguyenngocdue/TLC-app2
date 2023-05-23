@@ -23,6 +23,7 @@ class Attachment extends ModelExtended
     ];
     protected $table = 'attachments';
     public $nameless = true;
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getCategory" => ['belongsTo', Field::class, 'category'],

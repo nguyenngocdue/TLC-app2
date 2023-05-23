@@ -9,6 +9,7 @@ class Zunit_test_10 extends ModelExtended
     protected $fillable = ['id', 'name'];
 
     protected $table = 'zunit_test_10s';
+    protected static $statusless = true;
 
     public $eloquentParams = [
         'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],

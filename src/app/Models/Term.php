@@ -19,6 +19,7 @@ class Term extends ModelExtended
         'owner_id'
     ];
     protected $table = "terms";
+    protected static $statusless = true;
 
     public $eloquentParams = [
         'getField' => ['belongsTo', Field::class, 'field_id'],

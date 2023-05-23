@@ -8,4 +8,5 @@ class Work_area extends ModelExtended
 {
     protected $fillable = ['id', 'name', 'description', 'slug'];
     protected $table = "work_areas";
+    protected static $statusless = true;
 }

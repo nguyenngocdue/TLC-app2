@@ -9,6 +9,7 @@ class Department extends ModelExtended
     protected $fillable = ["name", "description", "head_of_department", "slug"];
 
     protected $table = 'departments';
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getHOD" => ['belongsTo', User::class, 'head_of_department'],

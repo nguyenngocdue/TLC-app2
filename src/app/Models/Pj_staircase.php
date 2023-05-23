@@ -13,6 +13,7 @@ class Pj_staircase extends ModelExtended
     ];
 
     protected $table = 'pj_staircases';
+    protected static $statusless = true;
 
     public $eloquentParams = [
         'getPjBuilding' => ['belongsTo', Term::class, 'pj_building_id'],

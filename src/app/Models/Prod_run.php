@@ -10,6 +10,7 @@ class Prod_run extends ModelExtended
 
     protected $table = 'prod_runs';
     public $nameless = true;
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getProdSequence" => ['belongsTo', Prod_sequence::class, 'prod_sequence_id'],

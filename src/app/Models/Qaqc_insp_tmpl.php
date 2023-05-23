@@ -8,6 +8,7 @@ class Qaqc_insp_tmpl extends ModelExtended
 {
     protected $fillable = ["id", "prod_routing_id", "name", "description", "slug", "owner_id"];
     protected $table = "qaqc_insp_tmpls";
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getProdRouting" => ["belongsTo", Prod_routing::class, "prod_routing_id"],

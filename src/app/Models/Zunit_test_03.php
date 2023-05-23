@@ -16,6 +16,7 @@ class Zunit_test_03 extends ModelExtended
     ];
 
     protected $table = 'zunit_test_03s';
+    protected static $statusless = true;
 
     public $eloquentParams = [];
 

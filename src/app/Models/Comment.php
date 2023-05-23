@@ -13,6 +13,7 @@ class Comment extends ModelExtended
     protected $table = "comments";
 
     public $nameless = true;
+    protected static $statusless = true;
 
     public $eloquentParams = [
         "getCategory" => ['belongsTo', Field::class, 'category'],
