@@ -7,6 +7,7 @@ use App\Providers\Support\TraitSupportPermissionGate;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\DefaultValues;
 use App\View\Components\Controls\DisallowedDirectCreationChecker;
+use App\View\Components\Formula\All_DocId;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
@@ -73,13 +74,15 @@ trait TraitEntityCRUDCreateEdit2
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$hasStatusColumn = Schema::hasColumn(Str::plural($this->type), 'status');
-
+		$hasDocID = All_DocId::getAllEntityHasDocId($this->type);
+		$docId = $hasDocID ? Str::markDocId($this->data::find($id)) : null;
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
 			'props' => $props,
 			'item' => $original,
 			'defaultValues' => DefaultValues::getAllOf($this->type),
 			'values' => $values,
+			'docId' => $docId,
 			'status' => $status,
 			'dryRunToken' => Hash::make($valueCreateDryToken),
 			'hasStatusColumn' => $hasStatusColumn,

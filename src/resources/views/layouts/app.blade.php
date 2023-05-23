@@ -64,6 +64,9 @@
                                 @if(isset($type))
                                     <div class="ml-1"><x-renderer.status>@yield('status', '')</x-renderer.status></div>
                                 @endif
+                                <div class="px-2 text-black">
+                                    @yield('docId','')
+                                </div>
                         </div>
                         <ul class="w-full lg:w-1/2">
                             <li class="relative">

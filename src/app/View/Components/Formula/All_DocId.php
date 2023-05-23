@@ -12,8 +12,7 @@ class All_DocId
 {
     public function __invoke($item, $type)
     {
-        $libAppsData = LibApps::getFor($type);
-        $nameColumnDocIDFormat = $libAppsData['doc_id_format_column'];
+        $nameColumnDocIDFormat = self::getAllEntityHasDocId($type);
         if (!$nameColumnDocIDFormat) {
             Toastr::warning('Please set value "Doc Id Format Column" in ManageApps', 'Warning Settings Formula');
         }
@@ -21,5 +20,12 @@ class All_DocId
         $maxDocID = DB::table($tableName)->where($nameColumnDocIDFormat, $item[$nameColumnDocIDFormat])->max('doc_id');
         $result = $maxDocID + 1;
         return $result;
+    }
+
+    public static function getAllEntityHasDocId($type)
+    {
+        $libAppsData = LibApps::getFor($type);
+        $nameColumnDocIDFormat = $libAppsData['doc_id_format_column'];
+        return $nameColumnDocIDFormat;
     }
 }

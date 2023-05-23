@@ -84,8 +84,7 @@
                         <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                         @endif
                         {{-- Invisible anchor for scrolling when users click on validation fail message --}}
-                        
-                        @if($control == 'status' && ($valueControl[0]))
+                        @if(($control == 'status') && ($valueControl))
                         @else
                             <div class="truncate" title={{$columnName}}>
                                 <label for={{$columnName}} class="text-gray-900 dark:text-gray-300 text-base font-normal" >{{$label}}</label>
@@ -153,7 +152,7 @@
                             <x-advanced-filter.dropdown3  :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
                         @break
                         @case('status')
-                        @if(!$valueControl[0] || count($valueControl) > 1)
+                        @if(!$valueControl || !$valueControl[0] || count($valueControl) > 1)
                             @php
                             $libStatus = App\Http\Controllers\Workflow\LibStatuses::getFor($type);
                             @endphp

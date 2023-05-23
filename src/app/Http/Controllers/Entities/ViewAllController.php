@@ -269,14 +269,16 @@ class ViewAllController extends Controller
                 'active' => true,
             ]
         ];
-        foreach ($dataTaxonomy as $key => $value) {
-            $isActive = (count($currentStatus) == 1) && ($currentStatus[0] == $key);
-            if ($isActive) $dataSource['all']['active'] = false;
-            $dataSource[$key] = [
-                'href' => "?action=$action&_entity=" . $tableName . "&status%5B%5D=$key",
-                'title' => "<x-renderer.status>" . $key . "</x-renderer.status>",
-                'active' => $isActive,
-            ];
+        if (!($this->typeModel)::isStatusless()) {
+            foreach ($dataTaxonomy as $key => $value) {
+                $isActive = ($currentStatus && count($currentStatus) == 1) && ($currentStatus[0] == $key);
+                if ($isActive) $dataSource['all']['active'] = false;
+                $dataSource[$key] = [
+                    'href' => "?action=$action&_entity=" . $tableName . "&status%5B%5D=$key",
+                    'title' => "<x-renderer.status>" . $key . "</x-renderer.status>",
+                    'active' => $isActive,
+                ];
+            }
         }
         return $dataSource;
     }

@@ -15,6 +15,7 @@
 @section('topTitle', $topTitle)
 @section('title', $title )
 @section('status', $action === "edit" ? $status : null)
+@section('docId', $docId)
 @section('content')
     <script>
         k = @json($listenerDataSource);
