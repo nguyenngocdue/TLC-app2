@@ -229,17 +229,17 @@ return new class extends Migration
         });
 
         //************** ESG **************/
-        Schema::table('esg_metric_type_1s', function (Blueprint $table) {
-            $table->foreign('esg_metric_type_id')->references('id')->on('esg_metric_types');
+        Schema::table('ghg_metric_type_1s', function (Blueprint $table) {
+            $table->foreign('ghg_metric_type_id')->references('id')->on('ghg_metric_types');
         });
-        Schema::table('esg_metric_type_2s', function (Blueprint $table) {
-            $table->foreign('esg_metric_type_1_id')->references('id')->on('esg_metric_type_1s');
+        Schema::table('ghg_metric_type_2s', function (Blueprint $table) {
+            $table->foreign('ghg_metric_type_1_id')->references('id')->on('ghg_metric_type_1s');
         });
-        Schema::table('esg_lines', function (Blueprint $table) {
-            $table->foreign('esg_metric_type_1_id')->references('id')->on('esg_metric_type_1s');
-            $table->foreign('esg_metric_type_2_id')->references('id')->on('esg_metric_type_2s');
-            $table->foreign('esg_metric_type_id')->references('id')->on('esg_metric_types');
-            $table->foreign('esg_sheet_id')->references('id')->on('esg_sheets');
+        Schema::table('ghg_lines', function (Blueprint $table) {
+            $table->foreign('ghg_metric_type_1_id')->references('id')->on('ghg_metric_type_1s');
+            $table->foreign('ghg_metric_type_2_id')->references('id')->on('ghg_metric_type_2s');
+            $table->foreign('ghg_metric_type_id')->references('id')->on('ghg_metric_types');
+            $table->foreign('ghg_sheet_id')->references('id')->on('ghg_sheets');
             $table->foreign('unit')->references('id')->on('terms');
         });
     }

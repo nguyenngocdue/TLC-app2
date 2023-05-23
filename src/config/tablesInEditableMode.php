@@ -20,8 +20,8 @@ return [
         ],
     ],
 
-    'esg_sheets' => [
-        'esg_lines' => [],
+    'ghg_sheets' => [
+        'ghg_lines' => [],
     ],
 
     'zunit_test_06s' => [

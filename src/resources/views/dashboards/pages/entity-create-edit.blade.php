@@ -44,7 +44,7 @@
                 @case ('checklist-sheet-renderer')
                     <x-controls.insp-chklst.item-render-check-sheet id={{$id}} :item="$item" :type="$type"/>
                 @break
-                @case ('esg-sheet-renderer')
+                @case ('ghg-sheet-renderer')
                     <x-feedback.alert type="warning" message="{{$app['edit_renderer']}} in entity-create-edit need to be implemented." />
                 @break
                 @default
