@@ -18,6 +18,7 @@ class AdvancedFilter extends Component
      */
     public function __construct(
         private $type = "",
+        private $typeModel = "",
         private $valueAdvanceFilters = null,
         private $currentFilter = null
     ) {
@@ -31,7 +32,7 @@ class AdvancedFilter extends Component
      */
     public function render()
     {
-        $propsFilters = $this->advanceFilter();
+        $propsFilters = $this->propsFilterCheckStatusless();
         [,,,,, $basicFilter, $chooseBasicFilter] = $this->getUserSettings();
         $count = count($propsFilters) ?? 0;
         $maxH = round($count / 4) * 3.7 . 'rem';

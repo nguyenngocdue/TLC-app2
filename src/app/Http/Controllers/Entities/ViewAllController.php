@@ -311,6 +311,7 @@ class ViewAllController extends Controller
             'valueAdvanceFilters' => $advanceFilters,
             'refreshPage' => $refreshPage,
             'type' => $type,
+            'typeModel' => $this->typeModel,
             'columns' => $columns,
             'dataSource' => $dataSource,
             'currentFilter' => $currentFilter,

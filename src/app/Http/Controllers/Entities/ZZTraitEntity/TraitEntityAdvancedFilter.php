@@ -24,6 +24,18 @@ trait TraitEntityAdvancedFilter
         // dump($propsFilters);
         return $propsFilters;
     }
+    private function propsFilterCheckStatusless()
+    {
+        $propsFilters = $this->advanceFilter();
+        if ($this->typeModel) {
+            $isStatusless = ($this->typeModel)::isStatusless();
+            if ($isStatusless) {
+                unset($propsFilters['_status']);
+            }
+        }
+        return $propsFilters;
+    }
+
     private function distributeFilter($advanceFilters, $propsFilters)
     {
         $propsFilters = array_map(fn ($item) => $item['control'], $propsFilters);
