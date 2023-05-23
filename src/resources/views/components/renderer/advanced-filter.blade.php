@@ -85,7 +85,6 @@
                         @endif
                         {{-- Invisible anchor for scrolling when users click on validation fail message --}}
                         @if(($control == 'status') && ($valueControl && ($valueControl[0])))
-                            
                         @else
                             <div class="truncate" title={{$columnName}}>
                                 <label for={{$columnName}} class="text-gray-900 dark:text-gray-300 text-base font-normal" >{{$label}}</label>

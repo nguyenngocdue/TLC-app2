@@ -12,8 +12,9 @@ const renderHtml = (apps, url, topDrawer) => {
         dataTopDrawer.innerHTML = ``
         let resultHtmlTopDrawer = ``
         for (const property in apps) {
-            const subPackage = property
+            const package = property
             let htmlTopDrawer = ``
+            console.log(apps)
             apps[property].forEach((app) => {
                 const isBookmark = app.bookmark
                     ? 'text-blue-500'
@@ -46,9 +47,9 @@ const renderHtml = (apps, url, topDrawer) => {
                 </li>`
             })
             resultHtmlTopDrawer += `<div class='px-2'>
-                                <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${subPackage}</p>
+                                <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${package}</p>
                                     <ul class="space-y-1">
-                                        ${htmlTopDrawer}
+                                       ${htmlTopDrawer}
                                     </ul>
                                 </div>`
         }
@@ -57,6 +58,7 @@ const renderHtml = (apps, url, topDrawer) => {
         dataContainer.innerHTML = ``
         let resultHtml = ``
         for (const property in apps) {
+            console.log(property)
             const subPackage = property
             let html = ``
             apps[property].forEach((app) => {
@@ -115,6 +117,30 @@ function groupBySubPackage(arr) {
     }, {})
     return result
 }
+function groupByFil(arr, filGroup) {
+    const result = arr.reduce((group, product) => {
+        const groupKey = product[filGroup]
+        group[groupKey] = group[groupKey] ?? []
+        group[groupKey].push(product)
+        return group
+    }, {})
+    return result
+}
+function groupByFilHasSubFill(arr, filGroup, subFilGroup) {
+    const result = arr.reduce((group, product) => {
+        const groupKey = product[filGroup]
+        const subGroupKey = product[subFilGroup]
+        if (!group[groupKey]) {
+            group[groupKey] = []
+        }
+        if (!group[groupKey][subGroupKey]) {
+            group[groupKey][subGroupKey] = []
+        }
+        group[groupKey][subGroupKey].push(product)
+        return group
+    }, {})
+    return result
+}
 function capitalize(str) {
     const arr = str.split('_')
     for (var i = 0; i < arr.length; i++) {
@@ -124,11 +150,15 @@ function capitalize(str) {
     return str2
 }
 function render(value, url) {
-    apps = groupBySubPackage(value)
+    apps = groupByFil(value, 'sub_package_rendered')
     renderHtml(apps, url)
 }
 function renderTopDrawer(value, url) {
-    appsTopDrawer = groupBySubPackage(value)
+    appsTopDrawer = groupByFilHasSubFill(
+        value,
+        'package_rendered',
+        'sub_package_rendered'
+    )
     renderHtml(appsTopDrawer, url, true)
 }
 function matchRegex(valueSearch, app) {
