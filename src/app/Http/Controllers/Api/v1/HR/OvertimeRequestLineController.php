@@ -47,6 +47,7 @@ class OvertimeRequestLineController extends Controller
                     AND user_id=$user_id
                     -- AND substr(ot_date, 1, 4)='$year0'
                     AND ot_date BETWEEN '$begin_date_of_year' AND '$end_date_of_year'
+                    AND deleted_at IS NOT NULL
                     $idCmp
                 GROUP BY user_id, year0) AS year0
                 LEFT JOIN
@@ -60,6 +61,7 @@ class OvertimeRequestLineController extends Controller
                     AND user_id=$user_id
                     -- AND substr(ot_date, 1, 7)='$year_month0'
                     AND ot_date BETWEEN '$begin_date_of_month' AND '$end_date_of_month'
+                    AND deleted_at IS NOT NULL
                     $idCmp
                 GROUP BY user_id, year_month0) AS month0
                 ON (month0.user_id = year0.user_id)
