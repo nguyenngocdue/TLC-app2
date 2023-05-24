@@ -16,7 +16,7 @@ class Button extends Component
         private $size = 'sm',
         private $id = '',
         private $name = '',
-        private $type = "light",
+        private $type = "default",
         private $outline = false,
         private $htmlType = 'button',
         private $value = '',
@@ -42,26 +42,25 @@ class Button extends Component
         $defaultClass = "$className $classList $block text-{$this->size} border-2" . " ";
         switch ($this->type) {
             case "primary":
-                return $defaultClass . "border-purple-600 bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg active:bg-purple-800 active:shadow-lg";
+                return $defaultClass . "border-purple-600 bg-purple-600 text-white hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg active:bg-purple-800 active:shadow-lg";
             case "secondary":
-                return $defaultClass . "border-blue-600 bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg active:bg-blue-800 active:shadow-lg";
+                return $defaultClass . "border-blue-600 bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg active:bg-blue-800 active:shadow-lg";
             case "success":
-                return $defaultClass . "border-green-500 bg-green-500 text-white shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg active:bg-green-700 active:shadow-lg";
+                return $defaultClass . "border-green-500 bg-green-500 text-white hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg active:bg-green-700 active:shadow-lg";
             case "danger":
-                return $defaultClass . "border-red-600 bg-red-600 text-white shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg active:bg-red-800 active:shadow-lg";
+                return $defaultClass . "border-red-600 bg-red-600 text-white hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg active:bg-red-800 active:shadow-lg";
             case "warning":
-                return $defaultClass . "border-yellow-500 bg-yellow-500 text-white shadow-md hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg active:bg-yellow-700 active:shadow-lg";
+                return $defaultClass . "border-yellow-500 bg-yellow-500 text-white hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg active:bg-yellow-700 active:shadow-lg";
             case "info":
-                return $defaultClass . "border-blue-400 bg-blue-400 text-white shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg active:bg-blue-600 active:shadow-lg";
+                return $defaultClass . "border-blue-400 bg-blue-400 text-white hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg active:bg-blue-600 active:shadow-lg";
             case "dark":
-                return $defaultClass . "border-gray-800 bg-gray-800 text-white shadow-md hover:bg-gray-900 hover:shadow-lg focus:bg-gray-900 focus:shadow-lg active:bg-gray-900 active:shadow-lg";
+                return $defaultClass . "border-gray-800 bg-gray-800 text-white hover:bg-gray-900 hover:shadow-lg focus:bg-gray-900 focus:shadow-lg active:bg-gray-900 active:shadow-lg";
             case "link":
                 return $defaultClass . "bg-transparent text-blue-600 hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-200";
             case "refresh":
-                return $defaultClass . "border-blue-600 bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-600 focus:shadow-lg active:bg-gray-600 active:shadow-lg";
-            case "light":
+                return $defaultClass . "border-blue-600 bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg focus:bg-blue-600 focus:shadow-lg active:bg-gray-600 active:shadow-lg";
             default:
-                return $defaultClass . "border-gray-200 bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg active:bg-gray-400 active:shadow-lg";
+                return $defaultClass . "border-gray-200 bg-gray-200 text-gray-700 hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg active:bg-gray-400 active:shadow-lg";
         }
     }
 
@@ -86,7 +85,6 @@ class Button extends Component
                 return $defaultClass . "border-gray-800 text-gray-800";
             case "refresh":
                 return $defaultClass . "border-gray-200 text-gray-200";
-            case "light":
             default:
                 return $defaultClass . "border-gray-200 text-gray-200";
         }
