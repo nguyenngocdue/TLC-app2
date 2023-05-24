@@ -16,6 +16,7 @@ class Zunit_test_02 extends ModelExtended
 
         'parent_id',
         'order_no',
+        'owner_id',
     ];
     protected $table = "zunit_test_02s";
     protected static $statusless = true;

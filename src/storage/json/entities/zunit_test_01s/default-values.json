@@ -131,6 +131,42 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_parent_id": {
+        "name": "_parent_id",
+        "column_name": "parent_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_signature": {
+        "name": "_signature",
+        "column_name": "signature",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -155,18 +191,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_parent_id": {
-        "name": "_parent_id",
-        "column_name": "parent_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
@@ -179,9 +203,21 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_signature": {
-        "name": "_signature",
-        "column_name": "signature",
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
         "label": "",
         "validation": "",
         "validation_regex": "",

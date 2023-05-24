@@ -49,6 +49,7 @@ class Zunit_test_09 extends ModelExtended
 
         'parent_id',
         "order_no",
+        'owner_id',
     ];
     protected $table = "zunit_test_09s";
     public $hasDueDate = true;
