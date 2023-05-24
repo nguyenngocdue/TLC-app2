@@ -69,6 +69,20 @@
         "filter_values": "109",
         "radio_checkbox_colspan": ""
     },
+    "_getInjuredStaffCat": {
+        "name": "_getInjuredStaffCat",
+        "relationship": "belongsTo",
+        "control_name": "injured_staff_cat",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getOwner": {
         "name": "_getOwner",
         "relationship": "belongsTo",
@@ -265,10 +279,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_attachment_1": {
-        "name": "_attachment_1",
+    "_attachment_hse_incident_doc": {
+        "name": "_attachment_hse_incident_doc",
         "relationship": "morphMany",
-        "control_name": "attachment_1",
+        "control_name": "attachment_hse_incident_doc",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
@@ -279,15 +293,29 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_attachment_2": {
-        "name": "_attachment_2",
+    "_attachment_hse_witness": {
+        "name": "_attachment_hse_witness",
         "relationship": "morphMany",
-        "control_name": "attachment_2",
+        "control_name": "attachment_hse_witness",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
+        "control": "attachment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_attachment_hse_hr_decision": {
+        "name": "_attachment_hse_hr_decision",
+        "relationship": "morphMany",
+        "control_name": "attachment_hse_hr_decision",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
         "control": "attachment",
         "filter_columns": "",
         "filter_values": "",

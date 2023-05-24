@@ -51,8 +51,8 @@ const getSecondsFromTime = (hms) => {
             return +a[0] * 60 * 60 + +a[1] * 60 + +a[2]
     }
 }
-const getDaysFromDate = (dmy) =>
-    moment(dmy, 'DD/MM/YYYY').diff(moment('1970-01-01'), 'days')
+const getDaysFromDateSlash = (dmy) => moment(dmy, 'DD/MM/YYYY').diff(moment('1970-01-01'), 'days')
+const getDaysFromDateDash = (dmy) => moment(dmy, 'YYYY-MM-DD').diff(moment('1970-01-01'), 'days')
 const getValueOfEById = (id) => {
     const isMultipleOfE = getIsMultipleOfE(id)
     const controlType = getControlTypeOfE(id)
@@ -313,17 +313,21 @@ const onChangeDropdown2Expression = (listener) => {
             continue
         let varValue = getEById(varName).val() || 0
         if (varValue && isNaN(varValue)) {
-            if (varValue.includes(':') && varValue.includes('/')) {
+            const includedHour = varValue.includes(':')
+            const includedDateSlash = varValue.includes('/')
+            const includedDateDash = varValue.includes('-')
+            if (includedHour && includedDateSlash) {
                 const datetime = varValue.split(' ')
                 const date = datetime[0]
                 const time = datetime[1]
-                varValue =
-                    getDaysFromDate(date) * 24 * 3600 + getSecondsFromTime(time)
+                varValue = getDaysFromDateSlash(date) * 24 * 3600 + getSecondsFromTime(time)
             } else {
-                if (varValue.includes(':')) {
+                if (includedHour) {
                     varValue = getSecondsFromTime(varValue)
-                } else if (varValue.includes('/')) {
-                    varValue = getDaysFromDate(varValue)
+                } else if (includedDateSlash) {
+                    varValue = getDaysFromDateSlash(varValue) * 24 * 3600
+                } else if (includedDateDash) {
+                    varValue = getDaysFromDateDash(varValue) * 24 * 3600
                 }
             }
             if (debugListener) console.log(varName, varValue)

@@ -37,6 +37,14 @@ return new class extends Migration
             $table->double('number_injured_person');
             $table->double('number_involved_person');
             $table->text('issue_description');
+
+            $table->date('first_date');
+            $table->float('employed_duration_in_year');
+            $table->unsignedBigInteger('injured_staff_cat');
+            $table->string('injured_staff_cat_desc');
+            $table->string('loss_value')->nullable();
+            $table->boolean('need_to_transfer_position')->nullable();
+
             $table->boolean('accident_book_entry')->nullable();
             $table->dateTime('time_in_hospital')->nullable();
             $table->dateTime('time_out_hospital')->nullable();
