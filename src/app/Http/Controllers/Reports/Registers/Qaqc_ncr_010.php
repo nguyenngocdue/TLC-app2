@@ -16,6 +16,9 @@ use App\Utils\Support\Report;
     protected $project_id = 5;
     protected $sub_project_id = 82;
     protected $targetTable="qaqc_mirs";
+    protected $titleTable = "MIR";
+    protected $maxH = 50;
+
     
     public function getSqlStr($modeParams)
     {
@@ -52,7 +55,7 @@ use App\Utils\Support\Report;
                                         GROUP_CONCAT(year_month_open_ncr) AS all_year_month_ncr,
                                     
                                         GROUP_CONCAT(ids_mir) AS ids_mir,
-                                        GROUP_CONCAT(ncr_status) AS ncr_status ,
+                                        GROUP_CONCAT(ncr_closed) AS real_ncr_status ,
                                         COALESCE(COUNT(year_month_open_ncr), 0) AS _total_open_ncr,
                                         COUNT(CASE WHEN ncr_closed = 'closed' THEN 1 END) AS _num_closed_ncr,
                                         COALESCE((COUNT(year_month_open_ncr) - COUNT(CASE WHEN ncr_closed = 'closed' THEN 1 END)), 0) AS _num_surplus_ncr
@@ -109,42 +112,42 @@ use App\Utils\Support\Report;
 
             ],
             [
-                "title" => "MIR Requests",
+                "title" => "$this->titleTable Requests",
                 "dataIndex" => "num_open_mir",
                 "align" => "center",
                 'width' => 100
 
             ],
             [
-                "title" => "Total MIR - NCRs",
+                "title" => "Total $this->titleTable - NCRs",
                 "dataIndex" => "total_open_ncr",
                 "align" => "center",
                 'width' => 100
 
             ],
             [
-                "title" => "MIR - NCRs (Open)",
+                "title" => "$this->titleTable - NCRs (Open)",
                 "dataIndex" => "num_surplus_ncr",
                 "align" => "center",
                 'width' => 100
 
             ],
             [
-                "title" => "MIR - NCRs (Open Ratio) (%)",
+                "title" => "$this->titleTable - NCRs (Open Ratio) (%)",
                 "dataIndex" => "open_ratio_ncr",
                 "align" => "center",
                 'width' => 100
 
             ],
             [
-                "title" => "MIR - NCRs (Closed)",
+                "title" => "$this->titleTable - NCRs (Closed)",
                 "dataIndex" => "num_closed_ncr",
                 "align" => "center",
                 'width' => 100
 
             ],
             [
-                "title" => "MIR - NCRs (Closed Ratio) (%)",
+                "title" => "$this->titleTable - NCRs (Closed Ratio) (%)",
                 "dataIndex" => "closed_ratio_ncr",
                 "align" => "center",
                 'width' => 100
@@ -170,19 +173,19 @@ use App\Utils\Support\Report;
 
             // ],
             // [
-            //     "dataIndex" => "ncr_status",
+            //     "dataIndex" => "real_ncr_status",
             //     "align" => "center",
             //     'width' => 300
 
             // ],
             [
-                "title" => "MIR - NCRs (Open of previous months)",
+                "title" => "$this->titleTable - NCRs (Open of previous months)",
                 "dataIndex" => "previous_months_open_ncr",
                 "align" => "center",
                 'width' => 300
             ],
             [
-                "title" => "MIR - NCRs (Closed of previous months)",
+                "title" => "$this->titleTable - NCRs (Closed of previous months)",
                 "dataIndex" => "previous_months_closed_ncr",
                 "align" => "center",
                 'width' => 300
@@ -291,7 +294,7 @@ use App\Utils\Support\Report;
         $monthYears = [];
         foreach ($dataSource as $key => $value) {
             $data = [
-                'ncr_status' => $value->ncr_status,
+                'ncr_status' => $value->real_ncr_status,
                 'all_year_month_ncr' => $value->all_year_month_ncr,
                 'ids_open_ncr' => $value->ids_open_ncr
             ];
