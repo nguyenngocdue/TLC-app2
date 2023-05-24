@@ -42,6 +42,7 @@ trait TraitEntityCRUDCreateEdit2
 			'defaultValues' => DefaultValues::getAllOf($this->type),
 			'hasStatusColumn' => $hasStatusColumn,
 			'type' => $this->type,
+			'docId' => null,
 			'action' => __FUNCTION__,
 			'modelPath' => $this->data,
 			'values' => $values,
@@ -75,7 +76,7 @@ trait TraitEntityCRUDCreateEdit2
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$hasStatusColumn = Schema::hasColumn(Str::plural($this->type), 'status');
 		$hasDocID = All_DocId::getAllEntityHasDocId($this->type);
-		$docId = $hasDocID ? Str::markDocId($this->data::find($id)) : '';
+		$docId = $hasDocID ? Str::markDocId($this->data::find($id)) : null;
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
 			'props' => $props,
