@@ -8,23 +8,28 @@ class Hse_incident_report extends ModelExtended
 {
     protected $fillable = [
         'incident_doc_type_id', 'incident_doc_sub_type_id',
-        'id', 'name', 'work_area_id', 'issue_datetime', 'injured_person',  'injured_staff_id', 'line_manager', 'owner_id',
+        'id', 'name', 'work_area_id', 'issue_datetime',
+        'injured_person',  'injured_staff_id', 'assignee_1', 'assignee_2', 'assignee_3', 'owner_id',
         'number_injured_person', 'number_involved_person', 'issue_description',
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
         'lost_days', 'status', 'injured_staff_position', 'manager_staff_id', 'manager_staff_position',
         'owner_staff_id', 'owner_staff_position',
-        'first_date', 'employed_duration_in_year', 'injured_staff_cat', 'injured_staff_cat_desc', 'loss_value', 'need_to_transfer_position'
+        'first_date', 'employed_duration_in_year', 'injured_staff_cat', 'injured_staff_cat_desc',
+        'injured_staff_discipline', 'loss_value', 'need_to_transfer_position'
     ];
     protected $table = "hse_incident_reports";
     public $nameless = true;
 
     public $eloquentParams = [
         'getInjuredPerson' => ["belongsTo", User::class, 'injured_person'],
-        'getLineManager' => ["belongsTo", User::class, 'line_manager'],
+        'getLineManager' => ["belongsTo", User::class, 'assignee_1'],
+        'getFactoryManager' => ["belongsTo", User::class, 'assignee_2'],
+        'getHseManager' => ["belongsTo", User::class, 'assignee_3'],
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
         "getDocType" => ['belongsTo', Term::class, 'incident_doc_type_id'],
         "getDocSubType" => ['belongsTo', Term::class, 'incident_doc_sub_type_id'],
         "getInjuredStaffCat" => ['belongsTo', User_category::class, 'injured_staff_cat'],
+        "getInjuredStaffDiscipline" => ['belongsTo', User_discipline::class, 'injured_staff_discipline'],
 
         'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],
 
@@ -93,7 +98,22 @@ class Hse_incident_report extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public function getInjuredStaffDiscipline()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
     public function getLineManager()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getFactoryManager()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getHseManager()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

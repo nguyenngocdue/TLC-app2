@@ -20,7 +20,7 @@
                     $borderColor = "border border-".$button['color']."-".(1000-$button['color_index']);
                     $bgActiveColor = "bg-".$button['color']."-".($button['color_index'] + 100);
 
-                    $classList = "border-opacity-20 px-2.5 py-2 inline-block font-medium text-sm leading-tight rounded focus:outline-transparent ";
+                    $classList = "border-opacity-20 border-2 px-2.5 py-2 inline-block font-medium text-sm leading-tight rounded focus:outline-transparent ";
                 @endphp
                 @if($isClosingOwnDoc)
                     <button type="button" 
@@ -34,7 +34,7 @@
                     <button {{$hasIntermediateScreen ? "@click=toggleIntermediate('$key')" : "@click=changeStatus('$key');" }}
                             type='{{$hasIntermediateScreen ? "button" : "submit"}}'
                             title="{{ $hasIntermediateScreen ? 'Open an intermediate screen' : $actionButtons[$key]['tooltip']}}"
-                            class="{{$classList}} {{$bgColor}} {{$textColor}} {{$borderColor}}  hover:shadow-xl focus:shadow-xl active:shadow-xl"
+                            class="{{$classList}} {{$bgColor}} {{$textColor}} {{$borderColor}} hover:shadow-xl focus:shadow-xl active:shadow-xl"
                             {{-- onClick="$('button').prop('disabled',true);"  --}}
                             >
                             {!! $buttonInnerHtml !!}

@@ -1,0 +1,37 @@
+{
+    "new": {
+        "name": "new",
+        "label": "Create New",
+        "tooltip": ""
+    },
+    "active": {
+        "name": "active",
+        "label": "Inform Issue",
+        "tooltip": ""
+    },
+    "pending_ack": {
+        "name": "pending_ack",
+        "label": "Request to Line Manager",
+        "tooltip": ""
+    },
+    "pending_review": {
+        "name": "pending_review",
+        "label": "Request to Factory Manager",
+        "tooltip": ""
+    },
+    "review_rejected": {
+        "name": "review_rejected",
+        "label": "Rejected Review",
+        "tooltip": ""
+    },
+    "pending_verification": {
+        "name": "pending_verification",
+        "label": "Request to HSE Manager",
+        "tooltip": ""
+    },
+    "closed": {
+        "name": "closed",
+        "label": "Closed",
+        "tooltip": ""
+    }
+}

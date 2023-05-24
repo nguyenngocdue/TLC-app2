@@ -51,7 +51,7 @@
         "name": "_issue_datetime",
         "column_name": "issue_datetime",
         "label": "",
-        "validation": "required",
+        "validation": "required|date_format:d\/m\/Y H:i",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -119,6 +119,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_injured_staff_cat_desc": {
+        "name": "_injured_staff_cat_desc",
+        "column_name": "injured_staff_cat_desc",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_employed_duration_in_year": {
         "name": "_employed_duration_in_year",
         "column_name": "employed_duration_in_year",
@@ -131,9 +143,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_line_manager": {
-        "name": "_line_manager",
-        "column_name": "line_manager",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "label": "",
         "validation": "required",
         "validation_regex": "",
@@ -220,6 +232,18 @@
         "column_name": "incident_doc_sub_type_id",
         "label": "",
         "validation": "required",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_loss_value": {
+        "name": "_loss_value",
+        "column_name": "loss_value",
+        "label": "",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -363,7 +387,7 @@
         "name": "_time_in_hospital",
         "column_name": "time_in_hospital",
         "label": "",
-        "validation": "",
+        "validation": "nullable|date_format:d\/m\/Y H:i",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -374,6 +398,30 @@
     "_time_out_hospital": {
         "name": "_time_out_hospital",
         "column_name": "time_out_hospital",
+        "label": "",
+        "validation": "nullable|date_format:d\/m\/Y H:i",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_need_to_transfer_position": {
+        "name": "_need_to_transfer_position",
+        "column_name": "need_to_transfer_position",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_attachment_hse_hr_decision": {
+        "name": "_attachment_hse_hr_decision",
+        "column_name": "attachment_hse_hr_decision",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -806,42 +854,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_loss_value": {
-        "name": "_loss_value",
-        "column_name": "loss_value",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_need_to_transfer_position": {
-        "name": "_need_to_transfer_position",
-        "column_name": "need_to_transfer_position",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_attachment_hse_hr_decision": {
-        "name": "_attachment_hse_hr_decision",
-        "column_name": "attachment_hse_hr_decision",
         "label": "",
         "validation": "",
         "validation_regex": "",
