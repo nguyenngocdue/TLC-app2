@@ -37,7 +37,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
     FROM (SELECT 
         sub_project,prod_id,prod_name, sub_project_name
         ,tmpl_sheet_id
-        ,tmpl_sheet_description
+        ,tmpl_sheet_name
         ,sheet_id
         ,max_run_id
         ,GROUP_CONCAT(DISTINCT cv.name) AS sheet_status_combine
@@ -45,7 +45,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         FROM (SELECT
             sub_project,prod_id, prod_name, sub_project_name
             ,tmpl_sheet_id
-            ,tmpl_sheet_description
+            ,tmpl_sheet_name
             ,sheet_id
             ,MAX(rs.id) AS max_run_id
         FROM (SELECT
@@ -53,7 +53,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
              ,sub_project_name
              ,prod_id
              ,prod_name
-            ,tmpl_sheet_description
+            ,tmpl_sheet_name
             ,tmpl_sheet_id
             ,csh.id AS sheet_id
             ,csh.description AS sheet_description
@@ -65,10 +65,15 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
                     ,prod.name AS prod_name
                     ,tmpl.id AS template_id
                     ,tmplsh.id AS tmpl_sheet_id
-                    ,tmplsh.description AS tmpl_sheet_description
+                    ,tmplsh.name AS tmpl_sheet_name
                     , chlst.id AS check_list_id
                     FROM sub_projects sp, prod_orders prod, qaqc_insp_chklsts chlst, qaqc_insp_tmpls tmpl, qaqc_insp_tmpl_shts tmplsh
-                    WHERE 1 = 1";
+                    WHERE 1 = 1
+                            AND sp.deleted_by IS  NULL
+                            AND prod.deleted_by IS NULL
+                            AND chlst.deleted_by IS NULL
+                            AND tmpl.deleted_by IS NULL
+                            AND tmplsh.deleted_by IS NULL";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
         if (isset($modeParams['checksheet_type_id'])) $sql .= "\n AND chlst.qaqc_insp_tmpl_id = '{{checksheet_type_id}}'";
         $sql .= "\n AND sp.id = prod.sub_project_id
@@ -78,7 +83,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
                  ) AS temptb
               LEFT JOIN qaqc_insp_chklst_shts csh ON temptb.tmpl_sheet_id = csh.qaqc_insp_tmpl_sht_id AND csh.qaqc_insp_chklst_id  = temptb.check_list_id) AS chklst_shts
               LEFT JOIN qaqc_insp_chklst_runs rs ON rs.qaqc_insp_chklst_sht_id = chklst_shts.sheet_id
-              GROUP BY chklst_shts.sheet_id, tmpl_sheet_id, tmpl_sheet_description, prod_id ) AS maxRuntb
+              GROUP BY chklst_shts.sheet_id, tmpl_sheet_id, tmpl_sheet_name, prod_id ) AS maxRuntb
     
         LEFT JOIN qaqc_insp_chklst_run_lines lr ON lr.qaqc_insp_chklst_run_id = max_run_id
         LEFT JOIN qaqc_insp_control_values cv ON cv.id = lr.qaqc_insp_control_value_id
@@ -123,12 +128,12 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
             [
                 'title' => 'Sub Project',
                 'dataIndex' => 'sub_project_id',
-                'allowClear' => true
+                // 'allowClear' => true
             ],
             [
                 'title' => 'Checklist Type',
                 'dataIndex' => 'checksheet_type_id',
-                'allowClear' => true
+                // 'allowClear' => true
             ]
         ];
     }
@@ -192,7 +197,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         if ($isNullParams) return collect([]);
 
         $enrichData = array_map(function ($item) {
-            return (array)$item + [Report::slugName($item->tmpl_sheet_description) => $item->sheet_status];
+            return (array)$item + [Report::slugName($item->tmpl_sheet_name) => $item->sheet_status];
         }, $dataSource->ToArray());
 
         $groupedArray = Report::groupArrayByKey($enrichData, 'prod_id');

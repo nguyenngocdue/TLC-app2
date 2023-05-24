@@ -18,6 +18,7 @@ class ParamProdOrderId extends ParentIdParamReports
                     ,po.sub_project_id AS $attr_name
                     ,po.prod_routing_id AS po_prod_routing_id
                     FROM prod_orders po
+                    WHERE po.deleted_by IS NULL
                     ORDER BY po.name
                 ";
         $result = DB::select($sql);

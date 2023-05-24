@@ -22,7 +22,6 @@ abstract class Report_ParentController extends Controller
     use TraitModeParamsReport;
 
     use TraitDataModesReport;
-    use TraitDataModesDocument;
 
     use TraitFunctionsReport;
     abstract protected function getSqlStr($modeParams);
@@ -200,7 +199,6 @@ abstract class Report_ParentController extends Controller
             'modeColumns' => $this->modeColumns(),
             'paramColumns' => $this->getParamColumns(),
             'legendColors' => $this->getColorLegends(),
-            'getSettingParams' => $this->getSettingParamsReport(),
             'tableTrueWidth' => $this->tableTrueWidth,
         ]);
     }

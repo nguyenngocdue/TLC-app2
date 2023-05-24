@@ -6,7 +6,6 @@ use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
-use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
 use App\Utils\Support\Report;
 
 class Prod_sequence_030 extends Report_ParentReportController
@@ -14,7 +13,6 @@ class Prod_sequence_030 extends Report_ParentReportController
 {
     use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
-    use TraitSQLDataSourceParamReport;
     use TraitModifyDataToExcelReport;
 
     protected $mode = '030';
@@ -34,7 +32,13 @@ class Prod_sequence_030 extends Report_ParentReportController
        ,terms.name AS term_name
        ,ps.total_uom AS total_uom
         FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl, terms
-        WHERE 1 = 1";
+        WHERE 1 = 1
+            AND sp.deleted_by IS NULL
+            AND po.deleted_by IS NULL
+            AND ps.deleted_by IS NULL
+            AND pr.deleted_by IS NULL
+            AND prl.deleted_by IS NULL
+            AND terms.deleted_by IS NULL";
         if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
         if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = '{{prod_routing_id}}'";

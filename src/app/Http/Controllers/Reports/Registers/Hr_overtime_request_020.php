@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Reports\Registers;
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
-use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
 use App\Http\Controllers\Reports\TraitUserCompanyTree;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentPathInfo;
@@ -17,7 +16,6 @@ use Illuminate\Support\Str;
 class Hr_overtime_request_020 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
-    use TraitSQLDataSourceParamReport;
     use TraitModifyDataToExcelReport;
     use TraitUserCompanyTree;
 
@@ -54,7 +52,13 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
         ,otline.year_remaining_hours year_remaining_hours
 
         FROM hr_overtime_request_lines otline, sub_projects sp, users us, hr_overtime_requests otr, work_modes wm, workplaces wp
-        WHERE 1 = 1";
+        WHERE 1 = 1
+                AND otline.deleted_by IS  NULL
+                AND sp.deleted_by IS NULL
+                AND us.deleted_by IS NULL
+                AND otr.deleted_by IS NULL
+                AND wm.deleted_by IS NULL
+        ";
         if (isset($modeParams['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
         if ($pickerDate) {
             $fromDate = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', substr($pickerDate, 0, 10)))->format('Y-m-d');

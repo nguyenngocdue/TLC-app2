@@ -15,7 +15,10 @@ class ParamOtWorkplaceId extends ParentTypeParamReport
                     otr.id AS id,
                     wp.name AS name
                     FROM hr_overtime_requests otr, workplaces wp
-                    WHERE otr.id = wp.id";
+                    WHERE 1 = 1
+                        AND otr.id = wp.id
+                        AND otr.deleted_by IS NULL
+                        AND wp.deleted_by IS NULL";
         $dataSource = DB::select($sql);
         return $dataSource;
     }

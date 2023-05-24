@@ -7,10 +7,11 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\DB;
 
-trait TraitSQLDataSourceParamReport
+trait delete_TraitSQLDataSourceParamReport
 {
     function getDataProdRouting()
     {
+        dd(123);
         $sql = "
             SELECT
                 prodr.id AS prod_routing_id

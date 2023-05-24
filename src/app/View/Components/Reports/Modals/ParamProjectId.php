@@ -9,7 +9,7 @@ class ParamProjectId extends ParentTypeParamReport
 {
     protected function getDataSource()
     {
-        $list = Project::get()->toArray();
+        $list = Project::where('deleted_by', NULL)->get()->toArray();
         $dataSource = [];
         usort($list, fn ($a, $b) => $a['name'] <=> $b['name']);
         foreach ($list as $team) $dataSource[] = ['id' => $team['id'], 'name' => $team['name']];

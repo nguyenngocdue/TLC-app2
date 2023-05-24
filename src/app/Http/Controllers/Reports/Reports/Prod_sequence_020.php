@@ -6,14 +6,12 @@ use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
-use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
 use App\Utils\Support\Report;
 
 class Prod_sequence_020 extends Report_ParentReportController
 
 {
     use TraitForwardModeReport;
-    use TraitSQLDataSourceParamReport;
     use TraitDynamicColumnsTableReport;
     use TraitModifyDataToExcelReport;
 
@@ -36,7 +34,13 @@ class Prod_sequence_020 extends Report_ParentReportController
        ,ROUND((SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))/60, 0)) * ROUND(SUM(pr.worker_number),2))/60, 2) AS total_man_hours
        #,ps.total_man_hours AS ref_total_man_hours 
         FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl
-        WHERE   1 = 1";
+        WHERE   1 = 1
+        AND sp.deleted_by IS NULL
+            AND sp.deleted_by IS NULL
+            AND po.deleted_by IS NULL
+            AND ps.deleted_by IS NULL
+            AND pr.deleted_by IS NULL
+            AND prl.deleted_by IS NULL";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
         if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = '{{prod_routing_id}}'";
         if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";

@@ -18,8 +18,8 @@ class ParamProdOrderId2 extends ParentIdParamReports2
                     ,po.status AS po_status
                     ,po.sub_project_id AS $this->referData
                     ,po.prod_routing_id AS $this->referData1
-                
                     FROM prod_orders po
+                    WHERE po.deleted_by IS NULL
                     ORDER BY po.name
                 ";
         $result = DB::select($sql);

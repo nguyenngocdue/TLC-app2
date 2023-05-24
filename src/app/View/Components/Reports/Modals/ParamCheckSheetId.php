@@ -18,6 +18,7 @@ class ParamCheckSheetId extends ParentIdParamReports
                     ,chklst.prod_order_id AS $attr_name
                     ,chklst.qaqc_insp_tmpl_id AS chkls_qaqc_insp_tmpl_id
                     FROM qaqc_insp_chklsts chklst
+                    WHERE chklst.deleted_by IS NULL
                     ORDER BY chklst.name
                 ";
         $result = DB::select($sql);

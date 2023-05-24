@@ -36,7 +36,9 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
                 ,DATE_FORMAT(mir.created_at, '%Y-%m') AS year_month_open_mir
                 ,COUNT(DATE_FORMAT(mir.created_at, '%Y-%m')) AS num_open_mir
                 FROM  sub_projects sp, qaqc_mirs mir
-                WHERE 1 = 1";
+                WHERE 1 = 1
+                    AND sp.deleted_by IS  NULL
+                    AND mir.deleted_by IS NULL";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
         $sql .= "\n AND sp.id = mir.sub_project_id
                     GROUP BY year_month_open_mir) AS mirtb
@@ -64,7 +66,10 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
                                             IF(DATE_FORMAT(ncr.created_at, '%Y-%m') = DATE_FORMAT(ncr.closed_at, '%Y-%m') AND ncr.status = 'closed', 'closed', 'Open') AS ncr_closed,
                                             ncr.status AS ncr_status
                                         FROM qaqc_ncrs ncr, sub_projects sp, qaqc_mirs mir
-                                        WHERE 1 = 1";
+                                        WHERE 1 = 1
+                                            AND ncr.deleted_by IS NULL
+                                            AND sp.deleted_by IS  NULL
+                                            AND mir.deleted_by IS NULL";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND ncr.sub_project_id = '{{sub_project_id}}'";
         $sql .= "\n  AND mir.id = ncr.parent_id
                     AND ncr.sub_project_id = sp.id

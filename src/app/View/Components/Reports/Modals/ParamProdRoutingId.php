@@ -18,8 +18,11 @@ class ParamProdRoutingId extends ParentIdParamReports
                 sp.id AS $attr_name
                 FROM sub_projects sp, prod_orders po, prod_routings pr
                 WHERE 1 = 1
-                AND sp.id = po.sub_project_id
-                AND po.prod_routing_id = pr.id
+                    AND sp.deleted_by IS NULL
+                    AND po.deleted_by IS NULL
+                    AND pr.deleted_by IS NULL
+                    AND sp.id = po.sub_project_id
+                    AND po.prod_routing_id = pr.id
                 GROUP BY pr.id, pr.name, sp.id
                 ORDER BY name ";
         $result = DB::select($sql);

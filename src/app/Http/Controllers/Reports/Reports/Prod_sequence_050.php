@@ -6,7 +6,6 @@ use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
-use App\Http\Controllers\Reports\TraitSQLDataSourceParamReport;
 use App\Utils\Support\Report;
 
 class Prod_sequence_050 extends Report_ParentReportController
@@ -14,7 +13,6 @@ class Prod_sequence_050 extends Report_ParentReportController
 {
     use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
-    use TraitSQLDataSourceParamReport;
     use TraitModifyDataToExcelReport;
 
     protected $mode = '050';
@@ -47,7 +45,12 @@ class Prod_sequence_050 extends Report_ParentReportController
                   ,GROUP_CONCAT(distinct po.name SEPARATOR ', ') AS  po_names
                 ,(SUM(TIME_TO_SEC(TIMEDIFF(pr.end,pr.start))) * SUM(pr.worker_number)) *  ps.total_uom AS sum_man_mins_X_total_uom
                     FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_runs pr, prod_routing_links prl
-                    WHERE 1 = 1";
+                    WHERE 1 = 1
+                        AND sp.deleted_by IS NULL
+                        AND po.deleted_by IS NULL
+                        AND ps.deleted_by IS NULL
+                        AND pr.deleted_by IS NULL
+                        AND prl.deleted_by IS NULL";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id =" . $modeParams['sub_project_id'];
         if (!isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id =" . $this->sub_project_id;
         if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = '{{prod_routing_id}}'";
