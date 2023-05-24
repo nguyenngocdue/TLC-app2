@@ -75,7 +75,7 @@ trait TraitEntityCRUDCreateEdit2
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$hasStatusColumn = Schema::hasColumn(Str::plural($this->type), 'status');
 		$hasDocID = All_DocId::getAllEntityHasDocId($this->type);
-		$docId = $hasDocID ? Str::markDocId($this->data::find($id)) : null;
+		$docId = $hasDocID ? Str::markDocId($this->data::find($id)) : '';
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
 			'props' => $props,
