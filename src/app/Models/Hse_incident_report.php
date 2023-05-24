@@ -13,6 +13,7 @@ class Hse_incident_report extends ModelExtended
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
         'lost_days', 'status', 'injured_staff_position', 'manager_staff_id', 'manager_staff_position',
         'owner_staff_id', 'owner_staff_position',
+        'first_date', 'employed_duration_in_year', 'injured_staff_cat', 'injured_staff_cat_desc', 'loss_value', 'need_to_transfer_position'
     ];
     protected $table = "hse_incident_reports";
     public $nameless = true;
@@ -23,14 +24,16 @@ class Hse_incident_report extends ModelExtended
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
         "getDocType" => ['belongsTo', Term::class, 'incident_doc_type_id'],
         "getDocSubType" => ['belongsTo', Term::class, 'incident_doc_sub_type_id'],
+        "getInjuredStaffCat" => ['belongsTo', User_category::class, 'injured_staff_cat'],
 
         'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],
 
         "comment_by_clinic" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_by_line_manager" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_by_general_manager" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-        "attachment_1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
-        "attachment_2" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "attachment_hse_incident_doc" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "attachment_hse_witness" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "attachment_hse_hr_decision" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public $oracyParams = [
@@ -44,13 +47,19 @@ class Hse_incident_report extends ModelExtended
         "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
-    public function attachment_1()
+    public function attachment_hse_incident_doc()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    public function attachment_2()
+    public function attachment_hse_witness()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function attachment_hse_hr_decision()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
@@ -75,6 +84,11 @@ class Hse_incident_report extends ModelExtended
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
     public function getInjuredPerson()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getInjuredStaffCat()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -37,7 +37,7 @@ class SuperWorkflows
         $s1 = sizeof($whiteList);
         if ($s0 != $s1) {
             if (!empty($whiteList)) {
-                dump("Warning: Number of props in $name ($s0) and $name ($s1) WhiteList are different");
+                dump("Warning: Number of props in $name ($s0) and $name WhiteList ($s1) are different");
             }
         }
         foreach (array_keys($props) as $propName) {

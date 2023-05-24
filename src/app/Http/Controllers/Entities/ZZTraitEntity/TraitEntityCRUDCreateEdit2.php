@@ -42,6 +42,7 @@ trait TraitEntityCRUDCreateEdit2
 			'defaultValues' => DefaultValues::getAllOf($this->type),
 			'hasStatusColumn' => $hasStatusColumn,
 			'type' => $this->type,
+			'docId' => null,
 			'action' => __FUNCTION__,
 			'modelPath' => $this->data,
 			'values' => $values,

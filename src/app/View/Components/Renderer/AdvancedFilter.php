@@ -20,7 +20,8 @@ class AdvancedFilter extends Component
         private $type = "",
         private $typeModel = "",
         private $valueAdvanceFilters = null,
-        private $currentFilter = null
+        private $currentFilter = null,
+        private $trashed = "",
     ) {
         //
     }
@@ -36,6 +37,7 @@ class AdvancedFilter extends Component
         [,,,,, $basicFilter, $chooseBasicFilter] = $this->getUserSettings();
         $count = count($propsFilters) ?? 0;
         $maxH = round($count / 4) * 3.7 . 'rem';
+        $route = $this->trashed ? route($this->type . '.trashed') : route($this->type . '.index');
         return view('components.renderer.advanced-filter', [
             'type' => $this->type,
             'props' => $propsFilters,
@@ -44,6 +46,7 @@ class AdvancedFilter extends Component
             'currentFilter' => $this->currentFilter,
             'basicFilter' => array_keys($basicFilter) ?? [],
             'maxH' => $maxH,
+            'route' => $route,
         ]);
     }
 }

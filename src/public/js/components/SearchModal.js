@@ -12,43 +12,56 @@ const renderHtml = (apps, url, topDrawer) => {
         dataTopDrawer.innerHTML = ``
         let resultHtmlTopDrawer = ``
         for (const property in apps) {
-            const subPackage = property
-            let htmlTopDrawer = ``
-            apps[property].forEach((app) => {
-                const isBookmark = app.bookmark
-                    ? 'text-blue-500'
-                    : 'text-gray-300'
-                const isCreate = app.href_create
-                    ? `<a href="${app.href_create}" class="flex flex-1 items-center text-orange-400">
-                    <i class="fa-light fa-circle-plus"></i>
-                </a>`
-                    : ''
-                htmlTopDrawer += `
-                <li>
-                    <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
-                        <button tabIndex=-1 id='bookmark_${
-                            app.name
-                        }' onclick="bookmarkSearchModal('${
-                    app.name
-                }','${url}')" class='px-2 text-base ${isBookmark}'>
-                <i class="fa-solid fa-bookmark"></i></button>
-                        <a href="${
-                            app.href
-                        }" class="flex flex-1 px-2 items-center ">
-                            ${app.icon ?? "<i class='fa-light fa-file'></i>"}
-                                <span class="flex-1 ml-3 whitespace-nowrap">${
-                                    app.title
-                                }</span>
-                        </a>
-                        ${isCreate}
-                        
-                    </div>
-                </li>`
-            })
-            resultHtmlTopDrawer += `<div class='px-2'>
-                                <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${subPackage}</p>
+            const package = property
+            let html = ``
+            for (const value in apps[property]) {
+                let htmlTopDrawer = ``
+                const sub_package = value
+                apps[property][value].forEach((app) => {
+                    const isBookmark = app.bookmark
+                        ? 'text-blue-500'
+                        : 'text-gray-300'
+                    const isCreate = app.href_create
+                        ? `<a href="${app.href_create}" class="flex flex-1 items-center text-orange-400">
+                        <i class="fa-light fa-circle-plus"></i>
+                    </a>`
+                        : ''
+                    htmlTopDrawer += `
+                    <li>
+                        <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
+                            <button tabIndex=-1 id='bookmark_${
+                                app.name
+                            }' onclick="bookmarkSearchModal('${
+                        app.name
+                    }','${url}')" class='px-2 text-base ${isBookmark}'>
+                    <i class="fa-solid fa-bookmark"></i></button>
+                            <a href="${
+                                app.href
+                            }" class="flex flex-1 px-2 items-center ">
+                                ${
+                                    app.icon ??
+                                    "<i class='fa-light fa-file'></i>"
+                                }
+                                    <span class="flex-1 ml-3 whitespace-nowrap">${
+                                        app.title
+                                    }</span>
+                            </a>
+                            ${isCreate}
+                            
+                        </div>
+                    </li>`
+                })
+                html += `<li class='px-2'>
+                                <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${sub_package}</p>
                                     <ul class="space-y-1">
-                                        ${htmlTopDrawer}
+                                       ${htmlTopDrawer}
+                                    </ul>
+                                </li>`
+            }
+            resultHtmlTopDrawer += `<div class='px-2'>
+                                <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${package}</p>
+                                    <ul class="grid grid-rows-2 grid-flow-col">
+                                       ${html}
                                     </ul>
                                 </div>`
         }
@@ -115,6 +128,30 @@ function groupBySubPackage(arr) {
     }, {})
     return result
 }
+function groupByFil(arr, filGroup) {
+    const result = arr.reduce((group, product) => {
+        const groupKey = product[filGroup]
+        group[groupKey] = group[groupKey] ?? []
+        group[groupKey].push(product)
+        return group
+    }, {})
+    return result
+}
+function groupByFilHasSubFill(arr, filGroup, subFilGroup) {
+    const result = arr.reduce((group, product) => {
+        const groupKey = product[filGroup]
+        const subGroupKey = product[subFilGroup]
+        if (!group[groupKey]) {
+            group[groupKey] = []
+        }
+        if (!group[groupKey][subGroupKey]) {
+            group[groupKey][subGroupKey] = []
+        }
+        group[groupKey][subGroupKey].push(product)
+        return group
+    }, {})
+    return result
+}
 function capitalize(str) {
     const arr = str.split('_')
     for (var i = 0; i < arr.length; i++) {
@@ -124,11 +161,15 @@ function capitalize(str) {
     return str2
 }
 function render(value, url) {
-    apps = groupBySubPackage(value)
+    apps = groupByFil(value, 'sub_package_rendered')
     renderHtml(apps, url)
 }
 function renderTopDrawer(value, url) {
-    appsTopDrawer = groupBySubPackage(value)
+    appsTopDrawer = groupByFilHasSubFill(
+        value,
+        'package_rendered',
+        'sub_package_rendered'
+    )
     renderHtml(appsTopDrawer, url, true)
 }
 function matchRegex(valueSearch, app) {
