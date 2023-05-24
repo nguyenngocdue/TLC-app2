@@ -9,6 +9,14 @@ use Ndc\SpatieCustom\Exceptions\UnauthorizedException;
 
 class CurrentUser
 {
+    static $singleton = null;
+    static function singletonCache($userAuth = null)
+    {
+        if (is_null(static::$singleton)) {
+            static::$singleton = static::getPermissionsCache($userAuth);
+        }
+        return static::$singleton;
+    }
     public static function getSettings()
     {
         return Auth::user()->settings;
@@ -60,7 +68,7 @@ class CurrentUser
         }
         return $roles;
     }
-    public static function getPermissions($userAuth = null)
+    public static function getPermissionsCache($userAuth = null)
     {
         $permissions = static::getRoles($userAuth, false);
         $ids = join(',', $permissions->pluck('id')->toArray());
@@ -71,11 +79,11 @@ class CurrentUser
             ON permissions.id = role_has_permissions.permission_id 
             WHERE role_has_permissions.role_id IN ($ids)"
         );
-        // $permissions = static::getRoles($userAuth, false)->map(
-        //     fn ($role) => $role->permissions
-        //         ->pluck('name')->toArray()
-        // )->collapse()->all();
         return $permissions;
+    }
+    public static function getPermissions($userAuth = null)
+    {
+        return static::singletonCache($userAuth);
     }
 
     public static function get(): ?User

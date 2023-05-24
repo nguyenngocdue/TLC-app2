@@ -25,20 +25,16 @@ class MenuProjectMfAndCs extends Component
      */
     public function render()
     {
-        $db = (new EntityIdClickCount)('project');
-        $abc = collect($db)->pluck('entity_id')->toArray();
+        $data = (new EntityIdClickCount)('project');
+        $entitiesIds = collect($data)->pluck('entity_id')->toArray();
         $allProjectMFandCS = Project::getAllProjectByCondition()->map(function ($item) {
             $href = route('projects.show', $item->id) ?? '';
             $item['href'] = $href;
             return $item;
         });
-        [$recent, $project] = $allProjectMFandCS->partition(function ($item) use ($abc) {
-            return array_search($item->id, $abc) !== false;
+        [$recent, $project] = $allProjectMFandCS->partition(function ($item) use ($entitiesIds) {
+            return array_search($item->id, $entitiesIds) !== false;
         });
-
-        // ->sortBy(function ($value) use ($abc) {
-        //     return array_flip($abc)[$value->id] ?? PHP_INT_MAX;
-        // });
         return view('components.homepage.menu-project-mf-and-cs', [
             'recent' => $recent,
             'projects' => $project,
