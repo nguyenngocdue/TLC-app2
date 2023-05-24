@@ -1,5 +1,5 @@
 
-    <form id="{{$type}}" action="{{route($type . '.index')}}" method="GET">
+    <form id="{{$type}}" action="{{$route}}" method="GET">
         <input type="hidden" name="_entity" value="{{$type}}">
         <div id="modal_basic_filter" class="rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 px-3 py-1 
         {{$currentFilter == 'basic_filter' ? '' : 'hidden'}}">
