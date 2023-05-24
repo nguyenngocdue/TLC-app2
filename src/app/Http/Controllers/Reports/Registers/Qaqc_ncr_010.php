@@ -8,17 +8,18 @@ use App\Http\Controllers\Reports\TraitFunctionsReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Utils\Support\Report;
 
-class Qaqc_ncr_010 extends Report_ParentRegisterController
+ class Qaqc_ncr_010 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
     use TraitFunctionsReport;
     use TraitModifyDataToExcelReport;
-
     protected $project_id = 5;
     protected $sub_project_id = 82;
-
+    protected $targetTable="qaqc_mirs";
+    
     public function getSqlStr($modeParams)
     {
+
         $sql = "SELECT 
             mirtb.*,
             tb2.*,
@@ -35,7 +36,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
                 ,GROUP_CONCAT(mir.id) AS mir_ids
                 ,DATE_FORMAT(mir.created_at, '%Y-%m') AS year_month_open_mir
                 ,COUNT(DATE_FORMAT(mir.created_at, '%Y-%m')) AS num_open_mir
-                FROM  sub_projects sp, qaqc_mirs mir
+                FROM  sub_projects sp, $this->targetTable mir
                 WHERE 1 = 1
                     AND sp.deleted_at IS  NULL
                     AND mir.deleted_at IS NULL";
@@ -345,4 +346,6 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
         // dd($modeParams);
         return $modeParams;
     }
+
+
 }
