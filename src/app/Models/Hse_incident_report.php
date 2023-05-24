@@ -9,7 +9,7 @@ class Hse_incident_report extends ModelExtended
     protected $fillable = [
         'incident_doc_type_id', 'incident_doc_sub_type_id',
         'id', 'name', 'work_area_id', 'issue_datetime',
-        'injured_person',  'injured_staff_id', 'assignee_1', 'owner_id',
+        'injured_person',  'injured_staff_id', 'assignee_1', 'assignee_2', 'assignee_3', 'owner_id',
         'number_injured_person', 'number_involved_person', 'issue_description',
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
         'lost_days', 'status', 'injured_staff_position', 'manager_staff_id', 'manager_staff_position',
@@ -23,6 +23,8 @@ class Hse_incident_report extends ModelExtended
     public $eloquentParams = [
         'getInjuredPerson' => ["belongsTo", User::class, 'injured_person'],
         'getLineManager' => ["belongsTo", User::class, 'assignee_1'],
+        'getFactoryManager' => ["belongsTo", User::class, 'assignee_2'],
+        'getHseManager' => ["belongsTo", User::class, 'assignee_3'],
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
         "getDocType" => ['belongsTo', Term::class, 'incident_doc_type_id'],
         "getDocSubType" => ['belongsTo', Term::class, 'incident_doc_sub_type_id'],
@@ -102,6 +104,16 @@ class Hse_incident_report extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getLineManager()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getFactoryManager()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getHseManager()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

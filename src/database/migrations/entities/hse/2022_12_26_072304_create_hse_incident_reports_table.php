@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('injured_staff_id');
             $table->string('injured_staff_position');
             $table->unsignedBigInteger('assignee_1');
+            $table->unsignedBigInteger('assignee_2')->nullable();
+            $table->unsignedBigInteger('assignee_3')->nullable();
             $table->string('manager_staff_id');
             $table->string('manager_staff_position');
             $table->string('owner_staff_id');
