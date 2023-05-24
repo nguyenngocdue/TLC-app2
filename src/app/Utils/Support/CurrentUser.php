@@ -4,6 +4,7 @@ namespace App\Utils\Support;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Ndc\SpatieCustom\Exceptions\UnauthorizedException;
 
 class CurrentUser
@@ -55,17 +56,25 @@ class CurrentUser
         $userAuth = static::checkLoginUser($userAuth);
         $roles = $userAuth->getRolesViaRoleSets();
         if ($getCollectionRole) {
-            return $roles->map(fn ($item) => $item->name)->all();
+            return $roles->pluck('name');
         }
         return $roles;
     }
     public static function getPermissions($userAuth = null)
     {
-        $permissions = static::getRoles($userAuth, false)
-            ->map(
-                fn ($role) => $role->permissions
-                    ->map(fn ($item) => $item->name)->toArray()
-            )->collapse()->all();
+        $permissions = static::getRoles($userAuth, false);
+        $ids = join(',', $permissions->pluck('id')->toArray());
+        $permissions = DB::select(
+            "SELECT role_has_permissions.role_id AS pivot_role_id, 
+            role_has_permissions.permission_id AS pivot_permission_id  
+            FROM permissions INNER JOIN role_has_permissions 
+            ON permissions.id = role_has_permissions.permission_id 
+            WHERE role_has_permissions.role_id IN ($ids)"
+        );
+        // $permissions = static::getRoles($userAuth, false)->map(
+        //     fn ($role) => $role->permissions
+        //         ->pluck('name')->toArray()
+        // )->collapse()->all();
         return $permissions;
     }
 

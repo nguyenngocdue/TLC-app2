@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Utils\AccessLogger\EntityIdClickCount;
 use App\Utils\AccessLogger\EntityNameClickCount;
 use Illuminate\Http\Request;

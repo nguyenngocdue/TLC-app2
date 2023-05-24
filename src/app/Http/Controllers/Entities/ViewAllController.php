@@ -9,6 +9,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\ENV;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
@@ -155,7 +156,7 @@ class ViewAllController extends Controller
             'control' => 'qr_code',
         ];
         array_splice($props, 1, 0, [$qrCodeColumn]);
-        if (App::isTesting() || App::isLocal() || CurrentUser::isAdmin()) {
+        if (ENV::present()) {
             $trashInfoColumn = $trash ? [
                 [
                     'label' => "Deleted By",
