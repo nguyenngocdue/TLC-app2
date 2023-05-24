@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Zunit_test_10 extends ModelExtended
 {
-    protected $fillable = ['id', 'name'];
+    protected $fillable = ['id', 'name', 'owner_id',];
 
     protected $table = 'zunit_test_10s';
     protected static $statusless = true;
@@ -37,12 +37,17 @@ class Zunit_test_10 extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public function getUT1()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
     public function getUT2()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getUT1()
+    public function getUT3()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

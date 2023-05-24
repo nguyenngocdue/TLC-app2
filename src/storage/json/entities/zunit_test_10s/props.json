@@ -3,8 +3,8 @@
         "name": "_id",
         "column_name": "id",
         "column_type": "bigint",
-        "label": "ID",
-        "control": "id",
+        "label": "",
+        "control": "",
         "align": "",
         "col_span": "",
         "width": "",
@@ -13,6 +13,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_name": {
@@ -29,22 +32,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "new_line": ""
-    },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
-        "column_type": "text",
-        "label": "Description",
-        "control": "textarea",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_getCorrectiveActions": {
@@ -61,6 +51,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_getUT1": {
@@ -77,6 +70,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_getDiscipline1": {
@@ -93,6 +89,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_getUT9Reduce11": {
@@ -109,6 +108,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_getUT9Reduce1111": {
@@ -125,6 +127,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_getUT9Assign": {
@@ -141,6 +146,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_getUT9Dot": {
@@ -157,6 +165,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_getUT9DateOffset": {
@@ -173,6 +184,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_getUT9Expression": {
@@ -189,6 +203,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_getUT9ExpressionDateTime": {
@@ -205,6 +222,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_getUT2": {
@@ -221,7 +241,29 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "column_type": "bigint",
+        "label": "Creator",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "true",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
     },
     "_getUT3": {
         "name": "_getUT3",
@@ -237,38 +279,85 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
         "column_type": "datetime",
-        "label": "Created At",
-        "control": "picker_datetime",
+        "label": "",
+        "control": "",
         "align": "",
         "col_span": "",
         "width": "",
-        "hidden_view_all": "true",
+        "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
         "column_type": "datetime",
-        "label": "Updated At",
-        "control": "picker_datetime",
+        "label": "",
+        "control": "",
         "align": "",
         "col_span": "",
         "width": "",
-        "hidden_view_all": "true",
+        "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "column_type": "bigint",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "column_type": "datetime",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     }
 }

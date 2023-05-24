@@ -3,8 +3,8 @@
         "name": "_id",
         "column_name": "id",
         "column_type": "bigint",
-        "label": "ID",
-        "control": "id",
+        "label": "",
+        "control": "",
         "align": "",
         "col_span": "",
         "width": "",
@@ -13,6 +13,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_name": {
@@ -29,6 +32,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_parent_id": {
@@ -45,6 +51,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_break1": {
@@ -61,6 +70,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_h1": {
@@ -77,6 +89,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_department_2": {
@@ -93,6 +108,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_user_2": {
@@ -109,6 +127,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_category_id": {
@@ -125,6 +146,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_user_3": {
@@ -141,6 +165,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_break2": {
@@ -157,6 +184,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_h2": {
@@ -173,6 +203,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_project_1": {
@@ -189,6 +222,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_sub_project_1": {
@@ -205,6 +241,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_prod_routing_1": {
@@ -221,6 +260,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_prod_order_1": {
@@ -237,6 +279,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_break3": {
@@ -253,6 +298,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_h3": {
@@ -269,6 +317,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_prod_discipline_1": {
@@ -285,6 +336,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_assignee_1": {
@@ -301,6 +355,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_dropdownMonitorsZut9()": {
@@ -317,6 +374,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_break4": {
@@ -333,6 +393,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_h4": {
@@ -349,6 +412,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_department_1": {
@@ -365,6 +431,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_user_1": {
@@ -381,6 +450,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_user_4": {
@@ -397,6 +469,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_user_position_1": {
@@ -413,6 +488,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_break5": {
@@ -429,38 +507,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "new_line": ""
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "column_type": "datetime",
-        "label": "Created_at",
-        "control": "picker_datetime",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "true",
-        "hidden_edit": "true",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "new_line": ""
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "column_type": "datetime",
-        "label": "Updated_at",
-        "control": "picker_datetime",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "true",
-        "hidden_edit": "true",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_h5": {
@@ -477,6 +526,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_priority_id": {
@@ -493,6 +545,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_due_date": {
@@ -509,22 +564,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "new_line": ""
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
-        "column_type": "integer",
-        "label": "Order No",
-        "control": "number",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "true",
-        "hidden_edit": "true",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_break6": {
@@ -541,6 +583,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_h6": {
@@ -557,6 +602,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_total": {
@@ -573,6 +621,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_accepted": {
@@ -589,6 +640,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_rejected": {
@@ -605,6 +659,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_remaining": {
@@ -621,6 +678,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_break7": {
@@ -637,6 +697,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_h7": {
@@ -653,6 +716,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": ""
     },
     "_datetime_1": {
@@ -669,6 +735,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_datetime_2": {
@@ -685,6 +754,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_datetime_3": {
@@ -701,6 +773,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_date_1": {
@@ -717,6 +792,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_date_2": {
@@ -733,6 +811,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_date_3": {
@@ -749,6 +830,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_time_1": {
@@ -765,6 +849,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_time_2": {
@@ -781,6 +868,9 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
     },
     "_time_3": {
@@ -797,6 +887,161 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
         "new_line": "true"
+    },
+    "_ot_date_1": {
+        "name": "_ot_date_1",
+        "column_name": "ot_date_1",
+        "column_type": "date",
+        "label": "OT Date",
+        "control": "picker_date",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_remaining_hours": {
+        "name": "_remaining_hours",
+        "column_name": "remaining_hours",
+        "column_type": "float",
+        "label": "Remaining Hours",
+        "control": "number",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "column_type": "bigint",
+        "label": "Creator",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "true",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "column_type": "bigint",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "column_type": "datetime",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "column_type": "datetime",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "column_type": "datetime",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "column_type": "integer",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
     }
 }

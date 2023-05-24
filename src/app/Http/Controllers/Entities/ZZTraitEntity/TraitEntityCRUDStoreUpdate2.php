@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -30,6 +29,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function store(Request $request)
 	{
+		// dd(SuperProps::getFor($this->type));
 		// dd($request->input());
 		$this->reArrangeComments($request);
 
@@ -39,7 +39,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->deleteAttachments($props['attachment'], $request);
 			//Uploading attachments has to run before form validation
 			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
 		try {
@@ -71,7 +71,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->processComments($request, $objectId);
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
 		$toastrResult = [];
@@ -80,7 +80,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		try {
 			$this->handleStatus($theRow, $newStatus);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
 		}
 		if ($request['tableNames'] === 'fakeRequest') {
@@ -97,6 +97,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function update(Request $request, $id)
 	{
+		// dd(SuperProps::getFor($this->type));
 		// dump($this->type);
 		// dd($request->input());
 		// dump($request->files);
@@ -113,7 +114,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->deleteAttachments($props['attachment'], $request);
 			//Uploading attachments has to run before form validation
 			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
 		try {
@@ -156,7 +157,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->processSignatures($request);
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
 
@@ -168,7 +169,7 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			//If all tables are created or updated, change the status of the item
 			if ($lineResult) $this->handleStatus($theRow, $newStatus);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
 		}
 		if ($isFakeRequest) {

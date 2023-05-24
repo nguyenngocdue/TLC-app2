@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
-use App\Utils\Support\Json\DefaultValues;
+use App\Utils\Support\Json\SuperProps;
 use App\View\Components\Formula\All_ClosedAt;
 use App\View\Components\Formula\All_ConcatNameWith123;
 use App\View\Components\Formula\All_DocId;
@@ -19,10 +19,20 @@ trait TraitEntityFormula
     private function applyFormula($item, $action, $status = null)
     {
         $type = $this->type;
-        $defaultValues = DefaultValues::getAllOf($type);
-        foreach ($defaultValues as $prop) {
+        $sp = SuperProps::getFor($type)['props'];
+        $defaultValues = [];
+        foreach ($sp as $propName => $prop) {
+            if (isset($prop['default-values']['formula']) && $prop['default-values']['formula']) {
+                $key = substr($propName, 1);
+                $defaultValues[$key] = $prop['default-values'];
+            }
+        }
+        // $defaultValues = DefaultValues::getAllOf($type);
+        // dd($defaultValues);
+        foreach ($defaultValues as $propName => $prop) {
             if ($prop['formula'] === '') continue;
             if (in_array($prop['formula'], ['All_OwnerId', 'All_DocId',]) && $action == 'update') continue;
+
             switch ($prop['formula']) {
                 case "All_ConcatNameWith123":
                     $name = $item['name'] ?? "";
@@ -71,7 +81,7 @@ trait TraitEntityFormula
                     break;
             }
             // dd($item);
-            $item[$prop['column_name']] = $value;
+            $item[$propName] = $value;
         }
         return $item;
     }

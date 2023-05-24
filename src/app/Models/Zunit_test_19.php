@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Zunit_test_19 extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'description'];
+    protected $fillable = ['id', 'name', 'description', 'owner_id',];
 
     protected $table = 'zunit_test_19s';
     protected static $statusless = true;
