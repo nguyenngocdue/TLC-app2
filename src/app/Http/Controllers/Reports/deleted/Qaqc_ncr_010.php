@@ -7,19 +7,20 @@ use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitFunctionsReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Utils\Support\Report;
+use Illuminate\Support\Facades\Log;
 
- class Qaqc_ncr_010 extends Report_ParentRegisterController
+class Qaqc_ncr_010 extends Report_ParentRegisterController
 {
     use TraitDynamicColumnsTableReport;
     use TraitFunctionsReport;
     use TraitModifyDataToExcelReport;
     protected $project_id = 5;
     protected $sub_project_id = 82;
-    protected $targetTable="qaqc_mirs";
+    protected $targetTable = "qaqc_mirs";
     protected $titleTable = "MIR";
-    protected $maxH = 50;
+    protected $maxH = 45;
 
-    
+
     public function getSqlStr($modeParams)
     {
 
@@ -349,6 +350,4 @@ use App\Utils\Support\Report;
         // dd($modeParams);
         return $modeParams;
     }
-
-
 }

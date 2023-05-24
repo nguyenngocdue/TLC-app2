@@ -27,7 +27,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
     protected  $prod_routing_id = 6;
     protected $mode = '020';
     protected $checksheet_type_id = 1;
-    protected $maxH = 50;
+    protected $maxH = 45;
 
     public function getSqlStr($modeParams)
     {
@@ -161,8 +161,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $plural = 'qaqc_insp_chklst_shts';
         $statuses = LibStatuses::getFor($plural);
         $legendData = [
-            'legend_title' => 'The legend for the icons',
-            'legend_col' => 6,
+            'legend_title' => 'Status Icon Legend',
+            'legend_col' => 8,
             'dataSource' => $statuses
         ];
         return $this->createLegendData($legendData);

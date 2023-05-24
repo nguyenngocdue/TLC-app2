@@ -55,6 +55,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": "12"
     },
+    "_getChklstTmpls()": {
+        "name": "_getChklstTmpls()",
+        "relationship": "getCheckedByField",
+        "control_name": "getChklstTmpls()",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getProdOrders": {
         "name": "_getProdOrders",
         "relationship": "hasMany",
