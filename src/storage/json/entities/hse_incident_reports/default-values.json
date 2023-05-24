@@ -95,9 +95,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_injured_staff_department": {
-        "name": "_injured_staff_department",
-        "column_name": "injured_staff_department",
+    "_injured_staff_cat": {
+        "name": "_injured_staff_cat",
+        "column_name": "injured_staff_cat",
         "label": "",
         "validation": "",
         "validation_regex": "",

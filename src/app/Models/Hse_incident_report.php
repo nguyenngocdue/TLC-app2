@@ -13,7 +13,7 @@ class Hse_incident_report extends ModelExtended
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
         'lost_days', 'status', 'injured_staff_position', 'manager_staff_id', 'manager_staff_position',
         'owner_staff_id', 'owner_staff_position',
-        'first_date', 'employed_duration_in_year', 'injured_staff_department', 'loss_value', 'need_to_transfer_position'
+        'first_date', 'employed_duration_in_year', 'injured_staff_cat', 'injured_staff_cat_desc', 'loss_value', 'need_to_transfer_position'
     ];
     protected $table = "hse_incident_reports";
     public $nameless = true;
@@ -24,7 +24,7 @@ class Hse_incident_report extends ModelExtended
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
         "getDocType" => ['belongsTo', Term::class, 'incident_doc_type_id'],
         "getDocSubType" => ['belongsTo', Term::class, 'incident_doc_sub_type_id'],
-        "getInjuredStaffDepartment" => ['belongsTo', Department::class, 'injured_staff_department'],
+        "getInjuredStaffCat" => ['belongsTo', User_category::class, 'injured_staff_cat'],
 
         'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],
 
@@ -88,7 +88,7 @@ class Hse_incident_report extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getInjuredStaffDepartment()
+    public function getInjuredStaffCat()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

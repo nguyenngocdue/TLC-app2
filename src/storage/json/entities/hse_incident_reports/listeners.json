@@ -27,13 +27,27 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_injured_staff_department": {
-        "name": "_injured_staff_department",
-        "column_name": "injured_staff_department",
+    "_injured_staff_cat": {
+        "name": "_injured_staff_cat",
+        "column_name": "injured_staff_cat",
         "listen_action": "dot",
         "triggers": "injured_person",
         "listen_to_fields": "injured_person",
-        "listen_to_attrs": "department",
+        "listen_to_attrs": "category",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_injured_staff_cat_desc": {
+        "name": "_injured_staff_cat_desc",
+        "column_name": "injured_staff_cat_desc",
+        "listen_action": "dot",
+        "triggers": "injured_staff_cat",
+        "listen_to_fields": "injured_staff_cat",
+        "listen_to_attrs": "description",
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
@@ -115,7 +129,7 @@
         "name": "_employed_duration_in_year",
         "column_name": "employed_duration_in_year",
         "listen_action": "expression",
-        "triggers": "injured_person, issue_datetime",
+        "triggers": "injured_person,issue_datetime",
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "attrs_to_compare": "",
@@ -307,9 +321,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_attachment_1": {
-        "name": "_attachment_1",
-        "column_name": "attachment_1",
+    "_attachment_hse_incident_doc": {
+        "name": "_attachment_hse_incident_doc",
+        "column_name": "attachment_hse_incident_doc",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -503,9 +517,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_attachment_2": {
-        "name": "_attachment_2",
-        "column_name": "attachment_2",
+    "_attachment_hse_witness": {
+        "name": "_attachment_hse_witness",
+        "column_name": "attachment_hse_witness",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -646,6 +660,20 @@
     "_need_to_transfer_position": {
         "name": "_need_to_transfer_position",
         "column_name": "need_to_transfer_position",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_attachment_hse_hr_decision": {
+        "name": "_attachment_hse_hr_decision",
+        "column_name": "attachment_hse_hr_decision",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

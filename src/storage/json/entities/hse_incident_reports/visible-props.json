@@ -87,15 +87,26 @@
         "pending_verification": "",
         "closed": "true"
     },
-    "_injured_staff_department": {
-        "name": "_injured_staff_department",
-        "column_name": "injured_staff_department",
+    "_injured_staff_cat": {
+        "name": "_injured_staff_cat",
+        "column_name": "injured_staff_cat",
         "new": "true",
         "active": "true",
         "pending_ack": "true",
         "pending_review": "true",
-        "review_rejected": "true",
-        "pending_verification": "true",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": "true"
+    },
+    "_injured_staff_cat_desc": {
+        "name": "_injured_staff_cat_desc",
+        "column_name": "injured_staff_cat_desc",
+        "new": "true",
+        "active": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_verification": "",
         "closed": "true"
     },
     "_first_date": {
@@ -105,8 +116,8 @@
         "active": "true",
         "pending_ack": "true",
         "pending_review": "true",
-        "review_rejected": "true",
-        "pending_verification": "true",
+        "review_rejected": "",
+        "pending_verification": "",
         "closed": "true"
     },
     "_employed_duration_in_year": {
@@ -116,8 +127,8 @@
         "active": "true",
         "pending_ack": "true",
         "pending_review": "true",
-        "review_rejected": "true",
-        "pending_verification": "true",
+        "review_rejected": "",
+        "pending_verification": "",
         "closed": "true"
     },
     "_line_manager": {

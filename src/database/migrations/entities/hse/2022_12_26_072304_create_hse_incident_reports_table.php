@@ -40,7 +40,8 @@ return new class extends Migration
 
             $table->date('first_date');
             $table->float('employed_duration_in_year');
-            $table->unsignedBigInteger('injured_staff_department');
+            $table->unsignedBigInteger('injured_staff_cat');
+            $table->string('injured_staff_cat_desc');
             $table->string('loss_value')->nullable();
             $table->boolean('need_to_transfer_position')->nullable();
 

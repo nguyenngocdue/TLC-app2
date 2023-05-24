@@ -69,10 +69,10 @@
         "filter_values": "109",
         "radio_checkbox_colspan": ""
     },
-    "_getInjuredStaffDepartment": {
-        "name": "_getInjuredStaffDepartment",
+    "_getInjuredStaffCat": {
+        "name": "_getInjuredStaffCat",
         "relationship": "belongsTo",
-        "control_name": "injured_staff_department",
+        "control_name": "injured_staff_cat",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
