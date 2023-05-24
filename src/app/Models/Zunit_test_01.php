@@ -19,6 +19,7 @@ class Zunit_test_01 extends ModelExtended
         "parent_id",
         "order_no",
         "signature",
+        'owner_id',
     ];
 
     protected $table = 'zunit_test_01s';

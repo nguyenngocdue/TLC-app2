@@ -103,7 +103,7 @@ trait TraitEntityEditableTable
                         }
                     } else {
                         if (isset($line['DESTROY_THIS_LINE']) && $line["DESTROY_THIS_LINE"] == true) {
-                            //Ignore this case
+                            //Ignore this case, as it contains no code
                         } else {
                             // dump("Insert");
                             $insertedId = $controller->store($fakeRequest);

@@ -1,56 +1,26 @@
 {
     "new": {
         "name": "new",
+        "new": "true",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "read-only": {
+        "name": "read-only",
         "new": "",
-        "active": "true",
+        "active": "",
         "pending_ack": "",
         "pending_review": "",
         "review_rejected": "",
         "pending_verification": "",
-        "closed": ""
+        "closed": "true"
     },
-    "active": {
-        "name": "active",
-        "new": "",
-        "active": "",
-        "pending_ack": "true",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_verification": "",
-        "closed": ""
-    },
-    "pending_ack": {
-        "name": "pending_ack",
-        "new": "",
-        "active": "",
-        "pending_ack": "",
-        "pending_review": "true",
-        "review_rejected": "",
-        "pending_verification": "",
-        "closed": ""
-    },
-    "pending_review": {
-        "name": "pending_review",
-        "new": "",
-        "active": "",
-        "pending_ack": "",
-        "pending_review": "",
-        "review_rejected": "true",
-        "pending_verification": "true",
-        "closed": ""
-    },
-    "review_rejected": {
-        "name": "review_rejected",
-        "new": "",
-        "active": "",
-        "pending_ack": "",
-        "pending_review": "true",
-        "review_rejected": "",
-        "pending_verification": "",
-        "closed": ""
-    },
-    "pending_verification": {
-        "name": "pending_verification",
+    "hide-save-btn": {
+        "name": "hide-save-btn",
         "new": "",
         "active": "",
         "pending_ack": "",
@@ -61,6 +31,16 @@
     },
     "closed": {
         "name": "closed",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": "true"
+    },
+    "post-closed": {
+        "name": "post-closed",
         "new": "",
         "active": "",
         "pending_ack": "",

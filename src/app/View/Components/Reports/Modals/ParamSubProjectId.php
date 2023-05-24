@@ -16,7 +16,7 @@ class ParamSubProjectId extends ParentIdParamReports
                         ,sp.status AS sp_status
                         ,sp.project_id AS $attr_name
                         FROM sub_projects sp
-                        WHERE sp.deleted_by IS NULL
+                        WHERE sp.deleted_at IS NULL
                         ORDER BY sp.name
                     ";
         $result = DB::select($sql);

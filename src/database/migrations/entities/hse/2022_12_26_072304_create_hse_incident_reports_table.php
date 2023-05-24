@@ -29,7 +29,9 @@ return new class extends Migration
             $table->unsignedBigInteger('injured_person');
             $table->string('injured_staff_id');
             $table->string('injured_staff_position');
-            $table->unsignedBigInteger('line_manager');
+            $table->unsignedBigInteger('assignee_1');
+            $table->unsignedBigInteger('assignee_2')->nullable();
+            $table->unsignedBigInteger('assignee_3')->nullable();
             $table->string('manager_staff_id');
             $table->string('manager_staff_position');
             $table->string('owner_staff_id');
@@ -42,6 +44,7 @@ return new class extends Migration
             $table->float('employed_duration_in_year');
             $table->unsignedBigInteger('injured_staff_cat');
             $table->string('injured_staff_cat_desc');
+            $table->unsignedBigInteger('injured_staff_discipline');
             $table->string('loss_value')->nullable();
             $table->boolean('need_to_transfer_position')->nullable();
 
@@ -63,7 +66,7 @@ return new class extends Migration
         //     $table->unsignedBigInteger('injured_person');
         //     $table->string('injured_staff_id');
         //     $table->string('injured_staff_position');
-        //     $table->unsignedBigInteger('line_manager');
+        //     $table->unsignedBigInteger('assignee_1');
         //     $table->string('manager_staff_id');
         //     $table->string('manager_staff_position');
         //     $table->unsignedBigInteger('owner_id');

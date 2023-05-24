@@ -31,44 +31,44 @@
     <x-renderer.card title="Buttons">
         <x-renderer.button type="primary">Primary</x-renderer.button>
             <x-renderer.button type="secondary">secondary</x-renderer.button>
-            <x-renderer.button type="default">default</x-renderer.button>
             <x-renderer.button type="success">success</x-renderer.button>
             <x-renderer.button type="danger">danger</x-renderer.button>
             <x-renderer.button type="warning">warning</x-renderer.button>
             <x-renderer.button type="info">info</x-renderer.button>
             <x-renderer.button type="dark">dark</x-renderer.button>
             <x-renderer.button type="link">link</x-renderer.button>
+            <x-renderer.button type="default">default</x-renderer.button>
             <br />
             <br />
             <x-renderer.button outline=true type="primary">Primary</x-renderer.button>
             <x-renderer.button outline=true type="secondary">secondary</x-renderer.button>
-            <x-renderer.button outline=true type="default">default</x-renderer.button>
             <x-renderer.button outline=true type="success">success</x-renderer.button>
             <x-renderer.button outline=true type="danger">danger</x-renderer.button>
             <x-renderer.button outline=true type="warning">warning</x-renderer.button>
             <x-renderer.button outline=true type="info">info</x-renderer.button>
             <x-renderer.button outline=true type="dark">dark</x-renderer.button>
+            <x-renderer.button outline=true type="default">default</x-renderer.button>
             <br />
             <br />
             <x-renderer.button size="xs" type="primary">Primary</x-renderer.button>
             <x-renderer.button size="xs" type="secondary">secondary</x-renderer.button>
-            <x-renderer.button size="xs" type="default">default</x-renderer.button>
             <x-renderer.button size="xs" type="success">success</x-renderer.button>
             <x-renderer.button size="xs" type="danger">danger</x-renderer.button>
             <x-renderer.button size="xs" type="warning">warning</x-renderer.button>
             <x-renderer.button size="xs" type="info">info</x-renderer.button>
             <x-renderer.button size="xs" type="dark">dark</x-renderer.button>
             <x-renderer.button size="xs" type="link">link</x-renderer.button>
+            <x-renderer.button size="xs" type="default">default</x-renderer.button>
             <br />
             <br />
             <x-renderer.button size="xs" outline=true type="primary">Primary</x-renderer.button>
             <x-renderer.button size="xs" outline=true type="secondary">secondary</x-renderer.button>
-            <x-renderer.button size="xs" outline=true type="default">default</x-renderer.button>
             <x-renderer.button size="xs" outline=true type="success">success</x-renderer.button>
             <x-renderer.button size="xs" outline=true type="danger">danger</x-renderer.button>
             <x-renderer.button size="xs" outline=true type="warning">warning</x-renderer.button>
             <x-renderer.button size="xs" outline=true type="info">info</x-renderer.button>
             <x-renderer.button size="xs" outline=true type="dark">dark</x-renderer.button>
+            <x-renderer.button size="xs" outline=true type="default">default</x-renderer.button>
     </x-renderer.card>
     <x-renderer.card title="Statuses">
         Status

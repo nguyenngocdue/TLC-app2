@@ -83,7 +83,7 @@
         "name": "_owner_id",
         "column_name": "owner_id",
         "column_type": "bigint",
-        "label": "Owner ID",
+        "label": "Creator",
         "control": "dropdown",
         "align": "",
         "col_span": "",

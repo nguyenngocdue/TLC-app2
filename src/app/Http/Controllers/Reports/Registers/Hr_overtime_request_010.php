@@ -57,10 +57,10 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
                     hr_overtime_requests otr, 
                     user_categories uscate
                 WHERE 1 = 1
-                    AND us.deleted_by IS  NULL
-                	AND otline.deleted_by IS NULL
-                	AND otr.deleted_by IS NULL
-                	AND uscate.deleted_by IS NULL
+                    AND us.deleted_at IS  NULL
+                	AND otline.deleted_at IS NULL
+                	AND otr.deleted_at IS NULL
+                	AND uscate.deleted_at IS NULL
                     AND otline.user_id = us.id";
         if (!CurrentUser::isAdmin()) {
             $treeData = $this->getDataByCompanyTree();

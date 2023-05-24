@@ -12,7 +12,7 @@ class ParamMonth extends ParentTypeParamReport
     {
         $sql = "SELECT DISTINCT(SUBSTR(otline.ot_date, 1, 7)) AS year_months
         FROM hr_overtime_request_lines otline
-        WHERE otline.deleted_by IS NULL
+        WHERE otline.deleted_at IS NULL
         ORDER BY year_months DESC";
         $sqlData = DB::select(DB::raw($sql));
         $dataSource = [];

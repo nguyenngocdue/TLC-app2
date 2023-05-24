@@ -39,6 +39,30 @@
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
+    "_attachment_hse_hr_decision": {
+        "name": "_attachment_hse_hr_decision",
+        "field_id": "150",
+        "field_name": "attachment_hse_hr_decision",
+        "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media"
+    },
+    "_attachment_hse_incident_doc": {
+        "name": "_attachment_hse_incident_doc",
+        "field_id": "148",
+        "field_name": "attachment_hse_incident_doc",
+        "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported"
+    },
+    "_attachment_hse_witness": {
+        "name": "_attachment_hse_witness",
+        "field_id": "149",
+        "field_name": "attachment_hse_witness",
+        "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported"
+    },
     "_attachment_mir_conformity_certificate": {
         "name": "_attachment_mir_conformity_certificate",
         "field_id": "126",

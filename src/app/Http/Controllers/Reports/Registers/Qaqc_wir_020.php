@@ -69,9 +69,9 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
                         ,po.prod_routing_id AS prod_routing_id
                         FROM projects pr, sub_projects sp, prod_orders po
                         WHERE 1 = 1
-                            AND pr.deleted_by IS NULL
-                            AND sp.deleted_by IS  NULL
-                            AND po.deleted_by IS NULL
+                            AND pr.deleted_at IS NULL
+                            AND sp.deleted_at IS  NULL
+                            AND po.deleted_at IS NULL
                             AND pr.id = sp.project_id
                             AND po.sub_project_id = sp.id
                             #AND po.id = 247";

@@ -229,6 +229,7 @@ class RelationshipRenderer2 extends Component
                 }
                 // dump($itemOriginal);
                 $view = $editable ? 'many-line-params-editable' : 'many-line-params-ro';
+                if ($this->readOnly) $view = 'many-line-params-ro';
                 return view('components.controls.' . $view, [
                     'readOnly' => $this->readOnly,
                     'table01ROName' => $this->table01Name . "RO",

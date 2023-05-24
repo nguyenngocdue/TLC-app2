@@ -56,10 +56,10 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         ,pr.name AS prod_routing_name
         FROM projects pj, sub_projects sp, prod_orders po, prod_routings pr
         WHERE 1 = 1
-            AND pj.deleted_by IS NULL
-            AND sp.deleted_by IS  NULL
-            AND po.deleted_by IS NULL
-            AND pr.deleted_by IS NULL
+            AND pj.deleted_at IS NULL
+            AND sp.deleted_at IS  NULL
+            AND po.deleted_at IS NULL
+            AND pr.deleted_at IS NULL
             AND pj.id = sp.project_id
             AND po.sub_project_id = sp.id
             AND pr.id = po.prod_routing_id";

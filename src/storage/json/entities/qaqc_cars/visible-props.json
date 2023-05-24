@@ -62,6 +62,15 @@
         "on_hold": "",
         "closed": ""
     },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -70,6 +79,15 @@
         "cancelled": "",
         "on_hold": "",
         "closed": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -89,13 +107,22 @@
         "on_hold": "",
         "closed": ""
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
     }
 }

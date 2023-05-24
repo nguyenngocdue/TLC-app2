@@ -85,15 +85,19 @@ trait TraitEntityFieldHandler2
         return $dataSource;
     }
 
-    private function handleTextArea($dataSource)
+    private function handleTextArea($dataSource, $action)
     {
         foreach ($this->superProps['props'] as $prop) {
             if ($prop['control'] === 'textarea' && $prop['column_type'] === 'json') {
                 $column_name = $prop['column_name'];
                 $text = $dataSource[$column_name];
-                //<<json_decode here is required, because in create-edit screen, 
+                //<<json_decode here is not required in store as Array to Str exception will be thrown
+                //<<json_decode here is required in update, because in create-edit screen, 
                 //<<the empty array [] will be reckon as "[]", and therefore the user will not be able to load/save userSettings.
-                $dataSource[$column_name] = json_decode(preg_replace("/\r|\n/", "", $text));
+
+                $value = preg_replace("/\r|\n/", "", $text);
+                $value = ($action == 'store') ? $value : json_decode($value);
+                $dataSource[$column_name] = $value;
             }
         }
         return $dataSource;
@@ -128,7 +132,7 @@ trait TraitEntityFieldHandler2
         $this->dump1("Before handleFields", $dataSource, __LINE__);
         $dataSource = $this->applyFormula($dataSource, $action, $status);
         $dataSource = $this->handleToggle($dataSource);
-        $dataSource = $this->handleTextArea($dataSource);
+        $dataSource = $this->handleTextArea($dataSource, $action);
         $this->dump1("After handleFields", $dataSource, __LINE__);
         return $dataSource;
     }
