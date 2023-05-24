@@ -77,7 +77,7 @@
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
         "section_title": "Non Conformance Reports",
-        "widget_title": "by Owner ID",
+        "widget_title": "by Creator",
         "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"sub_project_id\", \"key_a2\":\"owner_id\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name\", \"global_filter\":\"b.resigned != true\"}"
     },
     "qaqc_ncr_report_type": {
