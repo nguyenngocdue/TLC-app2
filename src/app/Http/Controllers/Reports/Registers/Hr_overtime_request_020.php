@@ -53,11 +53,11 @@ class Hr_overtime_request_020 extends Report_ParentRegisterController
 
         FROM hr_overtime_request_lines otline, sub_projects sp, users us, hr_overtime_requests otr, work_modes wm, workplaces wp
         WHERE 1 = 1
-                AND otline.deleted_by IS  NULL
-                AND sp.deleted_by IS NULL
-                AND us.deleted_by IS NULL
-                AND otr.deleted_by IS NULL
-                AND wm.deleted_by IS NULL
+                AND otline.deleted_at IS  NULL
+                AND sp.deleted_at IS NULL
+                AND us.deleted_at IS NULL
+                AND otr.deleted_at IS NULL
+                AND wm.deleted_at IS NULL
         ";
         if (isset($modeParams['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
         if ($pickerDate) {

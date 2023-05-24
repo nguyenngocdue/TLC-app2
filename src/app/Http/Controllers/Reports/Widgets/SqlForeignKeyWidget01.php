@@ -57,6 +57,9 @@ class SqlForeignKeyWidget01
         }
         //private conditions
         $qaqc_insp_tmpl_id = ($x = $params['qaqc_insp_tmpl_id'] ?? "") ? "AND b.qaqc_insp_tmpl_id = $x " : "";
+        $table_widget_deleted_at  = $wd_tb ? "AND projects.deleted_at IS NULL \n AND sub_projects.deleted_at IS NULL":"";
+        $table_a_deleted_at  = "AND a.deleted_at IS NULL ";
+        $table_b_deleted_at  = $table_b ? "AND b.deleted_at IS NULL ":"";
 
         $sql = " SELECT 
                         ROW_NUMBER() OVER (ORDER BY metric_count DESC) AS metric_id,
@@ -70,6 +73,9 @@ class SqlForeignKeyWidget01
                                 WHERE $global_filter
                                         $con
                                         $qaqc_insp_tmpl_id #qaqc_insp_chklsts
+                                        $table_widget_deleted_at
+                                        $table_a_deleted_at
+                                        $table_b_deleted_at
                             GROUP BY metric_name ) tb
                             ORDER BY metric_id";
         // dump($params, $sql);
