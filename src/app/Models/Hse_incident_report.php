@@ -8,7 +8,8 @@ class Hse_incident_report extends ModelExtended
 {
     protected $fillable = [
         'incident_doc_type_id', 'incident_doc_sub_type_id',
-        'id', 'name', 'work_area_id', 'issue_datetime', 'injured_person',  'injured_staff_id', 'line_manager', 'owner_id',
+        'id', 'name', 'work_area_id', 'issue_datetime',
+        'injured_person',  'injured_staff_id', 'assignee_1', 'owner_id',
         'number_injured_person', 'number_involved_person', 'issue_description',
         'accident_book_entry', 'time_in_hospital', 'time_out_hospital', 'investigation_finding',
         'lost_days', 'status', 'injured_staff_position', 'manager_staff_id', 'manager_staff_position',
@@ -21,7 +22,7 @@ class Hse_incident_report extends ModelExtended
 
     public $eloquentParams = [
         'getInjuredPerson' => ["belongsTo", User::class, 'injured_person'],
-        'getLineManager' => ["belongsTo", User::class, 'line_manager'],
+        'getLineManager' => ["belongsTo", User::class, 'assignee_1'],
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
         "getDocType" => ['belongsTo', Term::class, 'incident_doc_type_id'],
         "getDocSubType" => ['belongsTo', Term::class, 'incident_doc_sub_type_id'],

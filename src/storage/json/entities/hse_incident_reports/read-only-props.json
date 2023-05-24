@@ -131,9 +131,9 @@
         "pending_verification": "true",
         "closed": "true"
     },
-    "_line_manager": {
-        "name": "_line_manager",
-        "column_name": "line_manager",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "new": "",
         "active": "",
         "pending_ack": "true",

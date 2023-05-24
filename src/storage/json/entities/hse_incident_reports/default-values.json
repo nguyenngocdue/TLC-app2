@@ -143,9 +143,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_line_manager": {
-        "name": "_line_manager",
-        "column_name": "line_manager",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "label": "",
         "validation": "required",
         "validation_regex": "",

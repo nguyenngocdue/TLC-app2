@@ -16,7 +16,7 @@
     "_getLineManager": {
         "name": "_getLineManager",
         "relationship": "belongsTo",
-        "control_name": "line_manager",
+        "control_name": "assignee_1",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

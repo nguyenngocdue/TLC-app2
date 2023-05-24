@@ -29,7 +29,7 @@ return new class extends Migration
             $table->unsignedBigInteger('injured_person');
             $table->string('injured_staff_id');
             $table->string('injured_staff_position');
-            $table->unsignedBigInteger('line_manager');
+            $table->unsignedBigInteger('assignee_1');
             $table->string('manager_staff_id');
             $table->string('manager_staff_position');
             $table->string('owner_staff_id');
@@ -64,7 +64,7 @@ return new class extends Migration
         //     $table->unsignedBigInteger('injured_person');
         //     $table->string('injured_staff_id');
         //     $table->string('injured_staff_position');
-        //     $table->unsignedBigInteger('line_manager');
+        //     $table->unsignedBigInteger('assignee_1');
         //     $table->string('manager_staff_id');
         //     $table->string('manager_staff_position');
         //     $table->unsignedBigInteger('owner_id');
