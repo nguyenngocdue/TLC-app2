@@ -46,9 +46,9 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
                 ,pr.name AS prod_routing_name
                 FROM  sub_projects sp, prod_orders po, prod_routings pr
                     WHERE 1 = 1
-                        AND sp.deleted_by IS  NULL
-                        AND po.deleted_by IS NULL
-                        AND pr.deleted_by IS NULL
+                        AND sp.deleted_at IS  NULL
+                        AND po.deleted_at IS NULL
+                        AND pr.deleted_at IS NULL
                         AND sp.id = po.sub_project_id
                         AND po.prod_routing_id = pr.id
                         AND pr.id = po.prod_routing_id";
@@ -123,7 +123,7 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
         $sql = "SELECT wd.id as wir_description_id, wd.name AS wir_description_name
         FROM many_to_many m2m, wir_descriptions wd
         WHERE 1 =1
-        AND wd.deleted_by IS NULL
+        AND wd.deleted_at IS NULL
         AND doc_type='App\\\Models\\\Wir_description'
         AND term_type='App\\\Models\\\Prod_routing'
         AND m2m.doc_id=wd.id \n";

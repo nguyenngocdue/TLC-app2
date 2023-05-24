@@ -69,11 +69,11 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
                     , chlst.id AS check_list_id
                     FROM sub_projects sp, prod_orders prod, qaqc_insp_chklsts chlst, qaqc_insp_tmpls tmpl, qaqc_insp_tmpl_shts tmplsh
                     WHERE 1 = 1
-                            AND sp.deleted_by IS  NULL
-                            AND prod.deleted_by IS NULL
-                            AND chlst.deleted_by IS NULL
-                            AND tmpl.deleted_by IS NULL
-                            AND tmplsh.deleted_by IS NULL";
+                            AND sp.deleted_at IS  NULL
+                            AND prod.deleted_at IS NULL
+                            AND chlst.deleted_at IS NULL
+                            AND tmpl.deleted_at IS NULL
+                            AND tmplsh.deleted_at IS NULL";
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
         if (isset($modeParams['checksheet_type_id'])) $sql .= "\n AND chlst.qaqc_insp_tmpl_id = '{{checksheet_type_id}}'";
         $sql .= "\n AND sp.id = prod.sub_project_id

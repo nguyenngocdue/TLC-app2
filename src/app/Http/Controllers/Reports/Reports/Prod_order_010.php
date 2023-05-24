@@ -39,10 +39,10 @@ class Prod_order_010 extends Report_ParentReportController
                     LEFT JOIN prod_sequences ps ON po.id = ps.prod_order_id
                     LEFT JOIN sub_projects sp ON sp.id = po.sub_project_id
                     WHERE 1 = 1 \n
-                        AND sp.deleted_by IS  NULL
-                        AND po.deleted_by IS NULL
-                        AND prd.deleted_by IS NULL
-                        AND ps.deleted_by IS NULL
+                        AND sp.deleted_at IS  NULL
+                        AND po.deleted_at IS NULL
+                        AND prd.deleted_at IS NULL
+                        AND ps.deleted_at IS NULL
                     ";
         if (empty($modeParams)) $sql  .= "AND po.sub_project_id =" . $this->sub_project_id;
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}' \n";

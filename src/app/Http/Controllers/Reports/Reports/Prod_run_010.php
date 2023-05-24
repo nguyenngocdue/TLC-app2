@@ -44,10 +44,10 @@ class Prod_run_010 extends  Report_ParentReportController
         FROM  sub_projects sp, prod_orders po, prod_sequences ps, prod_routing_links prl
         WHERE 1 = 1
             AND sp.id = po.sub_project_id
-            AND sp.deleted_by IS  NULL
-            AND po.deleted_by IS NULL
-            AND ps.deleted_by IS NULL
-            AND prl.deleted_by IS NULL";
+            AND sp.deleted_at IS  NULL
+            AND po.deleted_at IS NULL
+            AND ps.deleted_at IS NULL
+            AND prl.deleted_at IS NULL";
         if (empty($modeParams)) $sql  .= "\n AND po.sub_project_id =" . $this->sub_project_id;
         if (isset($modeParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}' \n";
         if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'\n ";

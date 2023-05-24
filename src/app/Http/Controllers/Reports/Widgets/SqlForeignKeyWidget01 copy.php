@@ -9,14 +9,15 @@ class SqlForeignKeyWidget01
 {
     public function __invoke($params)
     {
+        dd(132);
         $table_widget = $params['table_widget'];
         $table_a = $params['table_a'];
         $table_b = ($params['table_b'] ?? "") ? ', ' . $params['table_b'] . ' b' : '';
 
-        $wd_tb = $table_widget;
-        if ($table_widget === 'projects') $wd_tb = 'projects, sub_projects,';
-        // if ($table_widget === 'sub_projects') $wd_tb = 'sub_projects,';
-        if ($table_widget === 'sub_projects') $wd_tb = '';
+        $table_widget = $table_widget;
+        if ($table_widget === 'projects') $table_widget = 'projects pr, sub_projects sp,';
+        // if ($table_widget === 'sub_projects') $table_widget = 'sub_projects,';
+        if ($table_widget === 'sub_projects') $table_widget = '';
 
 
         $key_a1 = $params['key_a1'] ?? 'id';
@@ -39,8 +40,8 @@ class SqlForeignKeyWidget01
                 if (isset($fillable['project_id']) && isset($fillable['sub_project_id'])) {
                     $con .= "AND a.project_id = $check_id";
                 } else {
-                    $con .= "AND $table_widget.id = sub_projects.project_id
-                     AND a.$key_a1 = sub_projects.id
+                    $con .= "AND $table_widget.id = sp.project_id
+                     AND a.$key_a1 = sp.id
                      AND $table_widget.id = $check_id";
                 }
                 $table_b ? $con .= "\n AND a.$key_a2 = b.$key_b1" : "";
@@ -57,9 +58,11 @@ class SqlForeignKeyWidget01
         }
         //private conditions
         $qaqc_insp_tmpl_id = ($x = $params['qaqc_insp_tmpl_id'] ?? "") ? "AND b.qaqc_insp_tmpl_id = $x " : "";
-        $table_widget_deleted_at  = $wd_tb ? "AND projects.deleted_at IS NULL \n AND sub_projects.deleted_at IS NULL":"";
+        $table_widget_deleted_at  = $table_widget ? "AND pr.deleted_at IS NULL AND sp.deleted_at IS NULL":"";
         $table_a_deleted_at  = "AND a.deleted_at IS NULL ";
         $table_b_deleted_at  = $table_b ? "AND b.deleted_at IS NULL ":"";
+
+        dd($table_widget,/* $table_b, $params['table_b'] */ );
 
         $sql = " SELECT 
                         ROW_NUMBER() OVER (ORDER BY metric_count DESC) AS metric_id,
@@ -69,13 +72,13 @@ class SqlForeignKeyWidget01
                                 SELECT 
                                     $metric_name_table.$att_name AS metric_name, 
                                     COUNT($metric_name_table.id) AS metric_count 
-                                FROM $wd_tb $table_a a $table_b
+                                FROM $table_widget $table_a a $table_b
                                 WHERE $global_filter
                                         $con
                                         $qaqc_insp_tmpl_id #qaqc_insp_chklsts
-                                        $table_widget_deleted_at
-                                        $table_a_deleted_at
-                                        $table_b_deleted_at
+                                        -- $table_widget_deleted_at
+                                        -- $table_a_deleted_at
+                                        -- $table_b_deleted_at
                             GROUP BY metric_name ) tb
                             ORDER BY metric_id";
         // dump($params, $sql);
