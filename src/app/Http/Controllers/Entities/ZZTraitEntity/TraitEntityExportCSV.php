@@ -85,10 +85,25 @@ trait TraitEntityExportCSV
                     $result[] = join(',', $dataAttachment);
                     break;
                 case "relationship_renderer":
-                    switch ($column['relationships']['relationship']) {
+                    $relationships = $column['relationships'];
+                    switch ($relationships['relationship']) {
                         case 'hasMany':
                         case 'morphMany':
-                            $result[] = count($dataLine[$column['column_name']]);
+                            switch ($relationships['renderer_view_all']) {
+                                case 'agg_date_range':
+                                    $collection = $dataLine->{$relationships['control_name_function']};
+                                    $maxDate = $collection->max($relationships['renderer_view_all_param']);
+                                    $minDate = $collection->min($relationships['renderer_view_all_param']);
+                                    if ($maxDate === $minDate) $result[] = $maxDate;
+                                    else $result[] = $minDate . ' to ' . $maxDate;
+                                    break;
+                                case 'agg_sum':
+                                    $result[] = $dataLine->sum($relationships['renderer_view_all_param']);
+                                case 'agg_count':
+                                default:
+                                    $result[] = count($dataLine[$column['column_name']]);
+                                    break;
+                            }
                             break;
                         default:
                             break;
