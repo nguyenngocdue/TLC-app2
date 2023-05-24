@@ -1,5 +1,5 @@
 
-    <form id="{{$type}}" action="{{route($type . '.index')}}" method="GET">
+    <form id="{{$type}}" action="{{$route}}" method="GET">
         <input type="hidden" name="_entity" value="{{$type}}">
         <div id="modal_basic_filter" class="rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 px-3 py-1 
         {{$currentFilter == 'basic_filter' ? '' : 'hidden'}}">
@@ -68,7 +68,7 @@
                     
                 </div>
                 <div class="col-span-5 border-l pl-2">
-                    <div class="grid lg:grid-cols-5 lg:gap-2 md:grid-cols-3 md:gap-4 sm:grid-cols-1 sm:gap-10">
+                    <div class="grid lg:grid-cols-5 lg:gap-1 md:grid-cols-3 md:gap-2 sm:grid-cols-1 sm:gap-5">
                     @foreach($props as $key => $value)
                         {{-- @php if($key=='_status') continue; @endphp --}}
                         <div>
@@ -87,7 +87,7 @@
                         @if(($control == 'status') && ($valueControl && ($valueControl[0])))
                         @else
                             <div class="truncate" title={{$columnName}}>
-                                <label for={{$columnName}} class="text-gray-900 dark:text-gray-300 text-base font-normal" >{{$label}}</label>
+                                <label for={{$columnName}} class="ml-1 text-gray-900 dark:text-gray-300 text-sm font-normal" >{{$label}}</label>
                             </div>
                         @endif
                         @switch ($control)
@@ -131,16 +131,12 @@
                         @case('id')
                         @case('doc_id')
                         @case('parent_id')
-                        <div class="mt-1">
-                            <x-advanced-filter.text3  name={{$columnName}} value={{$valueControl}} placeholder="Comma separated numbers are allowed"/>
-                        </div>
+                        <x-advanced-filter.text3  name={{$columnName}} value={{$valueControl}} placeholder="Comma separated numbers are allowed"/>
                         @break
                         @case('text')
                         @case('number')
                         @case('textarea')
-                        <div class="mt-1">
                             <x-advanced-filter.text3  name={{$columnName}} value={{$valueControl}}/>
-                        </div>
                         @break
                         @case('toggle')
                         <x-advanced-filter.toggle3  name={{$columnName}} value={{$valueControl}} />
@@ -156,7 +152,7 @@
                             @php
                             $libStatus = App\Http\Controllers\Workflow\LibStatuses::getFor($type);
                             @endphp
-                            <div class="mt-1" title={{$control}}>
+                            <div class="select2-short" title={{$control}}>
                                 <select id="{{$columnName}}" class="select2-hidden-accessible" multiple="multiple" style="width: 100%;" name="{{$columnName}}[]" tabindex="-1" aria-hidden="true">
                                     @foreach($libStatus as $value)
                                     <option value="{{$value['name']}}" @selected($valueControl ? in_array($value['name'],$valueControl) : null) >{{$value['title'] ?? $value['name']}}</option>

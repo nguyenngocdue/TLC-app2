@@ -29,8 +29,8 @@ class PickerQuarter3 extends Component
         return view('components.advanced-filter.picker-quarter3', [
             'name' => $this->name,
             'value' => $this->value,
-            'classListInputGroupText' => ClassList::ADV_FLT_INPUT_GROUP_TEXT,
-            'classListFormInput' => ClassList::ADV_FLT_FORM_INPUT,
+            'classListInputGroupText' => ClassList::ADV_FLT_INPUT_GROUP_TEXT3,
+            'classListFormInput' => ClassList::ADV_FLT_FORM_INPUT3,
         ]);
     }
 }
