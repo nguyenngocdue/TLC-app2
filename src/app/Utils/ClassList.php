@@ -5,6 +5,7 @@ namespace App\Utils;
 class ClassList
 {
     const TEXT     = "(CLASSLIST-TEXT)     block w-full text-gray-700 rounded-md border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm focus:border-1 focus:border-blue-600 dark:focus:border-blue-600 focus:outline-none px-2 py-2 h-[42px] (END-OF-CLASSLIST)";
+    const TEXT3     = "(CLASSLIST-TEXT3)     block w-full text-gray-700 rounded-md border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm focus:border-1 focus:border-blue-600 dark:focus:border-blue-600 focus:outline-none px-2 py-2 h-[38px] (END-OF-CLASSLIST)";
     const TEXTAREA = "(CLASSLIST-TEXTAREA) block w-full text-gray-700 rounded-md border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm focus:border-1 focus:border-blue-600 dark:focus:border-blue-600 focus:outline-none px-2 py-2 (END-OF-CLASSLIST)";
     const DROPDOWN = "(CLASSLIST-DROPDOWN) block w-full text-gray-700 rounded-md border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm focus:border-1 focus:border-blue-600 dark:focus:border-blue-600 focus:outline-none px-2 py-2 (END-OF-CLASSLIST)";
 
@@ -14,6 +15,8 @@ class ClassList
     const BUTTON = "(CLASSLIST-BUTTON) font-medium leading-tight rounded transition duration-150 ease-in-out focus:ring-0 focus:outline-n1one (END-OF-CLASSLIST)";
 
     const ADV_FLT_INPUT_GROUP_TEXT = "input-group-text border border-gray-300 text-gray-900 rounded-md p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input";
+    const ADV_FLT_INPUT_GROUP_TEXT3 = "input-group-text border border-gray-300 text-gray-900 rounded-md p-1.5 dark:placeholder-gray-400 block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input";
     const ADV_FLT_FORM_INPUT = "form-control float-right bg-white border border-gray-300 text-gray-900 rounded-md p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input";
+    const ADV_FLT_FORM_INPUT3 = "form-control float-right bg-white border border-gray-300 text-gray-900 rounded-md p-1.5 dark:placeholder-gray-400 block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input";
     const BUTTON2 = "(CLASSLIST-BUTTON2) px-2.5 py-2  inline-block  font-medium text-sm leading-tight rounded focus:ring-0 transition duration-150 ease-in-out bg-purple-600 text-white shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none active:bg-purple-800 active:shadow-lg";
 }

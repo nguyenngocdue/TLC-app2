@@ -31,7 +31,7 @@ class Text3 extends Component
             'placeholder' => $placeholder,
             'icon' => $icon,
             'readOnly' => $readOnly,
-            'classList' => ClassList::TEXT,
+            'classList' => ClassList::TEXT3,
             'onKeyPress' => $this->onKeyPress,
         ]);
     }
