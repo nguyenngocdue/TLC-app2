@@ -11,7 +11,7 @@
                     <x-renderer.avatar-item title="Alan Turing" description="Software Engineer" href="http://www.google.com" avatar="/images/hans.jpeg" gray='true'></x-renderer.avatar-item>
                 </div>
                 <div>
-                    Empty attribute
+                    Empty attribute (expected No Name with an anonymous avatar)
                     <x-renderer.avatar-item></x-renderer.avatar-item>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                     <x-renderer.avatar-user>{!!Auth::user()!!}</x-renderer.avatar-user>
                 </div>
                 <div>
-                    Empty attribute
+                    Empty attribute (expected blank)
                     <x-renderer.avatar-user></x-renderer.avatar-user>
                 </div>
             </div>

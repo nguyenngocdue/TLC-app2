@@ -34,6 +34,7 @@ class AvatarUser extends Component
                 $user = ($cuId == $slot->{'id'}) ? CurrentUser::get() : User::findFromCache($slot->{'id'});
                 $avatar = $user->getAvatarThumbnailUrl();
             }
+            if (is_null($user)) return "";
             $title = $slot->{'name'} ?? '';
             $description = $slot->{'position_rendered'} ?? '';
             $href = $slot->{'href'} ?? '';
