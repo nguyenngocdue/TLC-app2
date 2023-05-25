@@ -1,4 +1,4 @@
-<x-renderer.card style="border-gray-300 rounded-lg" px="2" py="1">
+<x-renderer.card style="border-gray-300 rounded-lg px-2 py-1">
     @if(!count($comments) && $readOnly)
         <div>(None)</div>
     @endif

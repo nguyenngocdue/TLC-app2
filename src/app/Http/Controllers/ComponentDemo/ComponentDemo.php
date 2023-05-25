@@ -18,10 +18,26 @@ class ComponentDemo
         return "dashboard";
     }
 
+    private function getTabPaneDataSource()
+    {
+        return [
+            'static' => ['href' => "#static", 'title' => "Static", 'active' => true,],
+            'data_display' => ['href' => "#data_display", 'title' => "Data Display", 'active' => false,],
+            'data_entry' => ['href' => "#data_entry", 'title' => "Data Entry", 'active' => false,],
+            'attachments' => ['href' => "#attachments", 'title' => "Attachments", 'active' => false,],
+            'editable_tables' => ['href' => "#editable_tables", 'title' => "Editable Tables", 'active' => false,],
+            'navigation' => ['href' => "#navigation", 'title' => "Navigation", 'active' => false,],
+            'feedbacks' => ['href' => "#feedbacks", 'title' => "Feedback", 'active' => false,],
+            'listeners' => ['href' => "#listeners", 'title' => "Listeners", 'active' => false,],
+            'modecontrols' => ['href' => "#modecontrols", 'title' => "Mode Controls", 'active' => false,],
+        ];
+    }
+
     public function index()
     {
         $tableDataSource = $this->getTableDataSource();
         return view('component-demo', [
+            'tabPaneDataSource' => $this->getTabPaneDataSource(),
             'dropdownCell' => ["value" => "b", "cbbDS" => ["", "a", "b", "c"]],
             'tableColumns' => $this->getTableColumns(),
             'tableEditableColumns' => $this->getTableEditableColumns(),

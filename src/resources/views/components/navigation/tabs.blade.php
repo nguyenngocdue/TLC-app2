@@ -22,7 +22,7 @@
     </div>
 </div>
 
-@once
+{{-- @once
 <script type="text/javascript">
 const initTab = (tabId) => {
     let tabsContainer = document.querySelector("#tabs-" + tabId);
@@ -45,4 +45,4 @@ const initTab = (tabId) => {
 </script>
 @endonce
 
-<script>initTab('{{$tabId}}');</script>
+<script>initTab('{{$tabId}}');</script> --}}

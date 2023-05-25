@@ -75,6 +75,25 @@
         "duplicatable": "",
         "new_line": ""
     },
+    "_getChklstTmpls()": {
+        "name": "_getChklstTmpls()",
+        "column_name": "getChklstTmpls()",
+        "column_type": "oracy_prop",
+        "label": "Available Checklist Templates",
+        "control": "dropdown_multi",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",

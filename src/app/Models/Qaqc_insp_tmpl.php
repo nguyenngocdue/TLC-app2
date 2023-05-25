@@ -17,6 +17,10 @@ class Qaqc_insp_tmpl extends ModelExtended
         "getQaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'qaqc_insp_tmpl_id'],
     ];
 
+    public $oracyParams = [
+        "getProdRoutings()" => ["getCheckedByField", Prod_routing::class],
+    ];
+
     public function getSheets()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -33,5 +37,11 @@ class Qaqc_insp_tmpl extends ModelExtended
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getProdRoutings()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

@@ -18,6 +18,8 @@ class Hse_corrective_action extends ModelExtended
         'getPriority' => ['belongsTo', Priority::class, 'priority_id'],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         'getUnsafeActionType' => ['belongsTo', Term::class, 'unsafe_action_type_id'],
+
+        "attachment_hse_car" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public $oracyParams = [
