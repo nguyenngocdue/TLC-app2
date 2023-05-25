@@ -9,7 +9,7 @@
     <x-elapse title="ViewAllController: "/>   
     <x-renderer.advanced-filter trashed="{{$trashed}}" currentFilter="{{$currentFilter}}" type="{{$type}}" typeModel="{{$typeModel}}" :valueAdvanceFilters="$valueAdvanceFilters"/>
     <x-elapse title="Advanced filter: "/>
-    <x-renderer.tab-pane :dataSource="$tabPane">
+    <x-renderer.tab-pane :tabs="$tabPane">
         @php 
         // $abt = "<x-form.action-button-group type='$type' />"; 
         $route = route('updateUserSettings');
