@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Reports\Modals;
 
-
+use App\Models\Prod_routing;
 use App\View\Components\Reports\ParentIdParamReports;
 use Illuminate\Support\Facades\DB;
 
@@ -26,6 +26,13 @@ class ParamProdRoutingId extends ParentIdParamReports
                 GROUP BY pr.id, pr.name, sp.id
                 ORDER BY name ";
         $result = DB::select($sql);
+        // foreach ($result as &$line) {
+        //     $line->checklist_type_parent_ids = Prod_routing::find($line->id)->getChklstTmpls()->pluck('id')->toArray();
+        // }
+        // $result = [
+        //     ['id' => 1, 'name' => 'Testing V1', $attr_name => [7, 8, 9, 21]],
+        //     ['id' => 2, 'name' => 'Testing V2', $attr_name => [21, 82]],
+        // ];
         // dump($result);
         return $result;
     }

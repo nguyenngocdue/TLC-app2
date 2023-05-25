@@ -155,7 +155,7 @@ class ViewAllController extends Controller
             'control' => 'qr_code',
         ];
         array_splice($props, 1, 0, [$qrCodeColumn]);
-        if (App::isTesting() || App::isLocal() || CurrentUser::isAdmin()) {
+        if (app()->present()) {
             $trashInfoColumn = $trash ? [
                 [
                     'label' => "Deleted By",

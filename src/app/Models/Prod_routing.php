@@ -22,6 +22,7 @@ class Prod_routing extends ModelExtended
 
     public $oracyParams = [
         "getWirDescriptions()" => ["getCheckedByField", Wir_description::class],
+        "getChklstTmpls()" => ["getCheckedByField", Qaqc_insp_tmpl::class],
     ];
 
     public function getProdRoutingLinks()
@@ -49,6 +50,12 @@ class Prod_routing extends ModelExtended
     }
 
     public function getWirDescriptions()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    public function getChklstTmpls()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

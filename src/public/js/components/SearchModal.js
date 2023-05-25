@@ -26,6 +26,9 @@ const renderHtml = (apps, url, topDrawer) => {
                         <i class="fa-light fa-circle-plus"></i>
                     </a>`
                         : ''
+                    const count = app.click_count
+                        ? `<span class="inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${app.click_count}</span>`
+                        : ''
                     htmlTopDrawer += `
                     <li>
                         <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
@@ -46,6 +49,7 @@ const renderHtml = (apps, url, topDrawer) => {
                                         app.title
                                     }</span>
                             </a>
+                            ${count}
                             ${isCreate}
                             
                         </div>

@@ -3,6 +3,7 @@
 namespace App\View\Components\Homepage;
 
 use App\Models\Project;
+use App\Utils\AccessLogger\EntityIdClickCount;
 use Illuminate\View\Component;
 
 class MenuProjectMfAndCs extends Component
@@ -24,13 +25,19 @@ class MenuProjectMfAndCs extends Component
      */
     public function render()
     {
+        $data = (new EntityIdClickCount)('project');
+        $entitiesIds = collect($data)->pluck('entity_id')->toArray();
         $allProjectMFandCS = Project::getAllProjectByCondition()->map(function ($item) {
             $href = route('projects.show', $item->id) ?? '';
             $item['href'] = $href;
             return $item;
         });
+        [$recent, $project] = $allProjectMFandCS->partition(function ($item) use ($entitiesIds) {
+            return array_search($item->id, $entitiesIds) !== false;
+        });
         return view('components.homepage.menu-project-mf-and-cs', [
-            'projects' => $allProjectMFandCS,
+            'recent' => $recent,
+            'projects' => $project,
         ]);
     }
 }

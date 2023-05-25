@@ -41,6 +41,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getProdRoutings()": {
+        "name": "_getProdRoutings()",
+        "relationship": "getCheckedByField",
+        "control_name": "getProdRoutings()",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getSheets": {
         "name": "_getSheets",
         "relationship": "hasMany",

@@ -8,7 +8,7 @@
 @if($status && !($action === 'create'))
     <div class="w-full mb-4 p-2 bg-white rounded-lg dark:bg-gray-800 grid grid-cols-12 gap-2 no-print">
         <div class="col-span-12 md:col-span-5 lg:col-span-3">
-            <x-renderer.card title="Test Status" py="1" >
+            <x-renderer.card class="py-1" title="Test Status" >
                 <div class="mb-1">
                     @foreach($statuses as $key => $value)
                         @php
@@ -34,7 +34,7 @@
             </x-renderer.card>
         </div>
         <div class="col-span-12 md:col-span-2 lg:col-span-2 w-full">
-            <x-renderer.card title="Quick Navigation" py="1">
+            <x-renderer.card class="py-1" title="Quick Navigation">
                 <div class="mb-1 text-center">
                     @if($previousItem)
                         <x-renderer.button title="Previous Record" href="{{route($type.'.edit',$previousItem->id)}}" icon="fa-duotone fa-backward" >#{{$previousItem->id}}</x-renderer.button>
@@ -46,7 +46,7 @@
             </x-renderer.card>
         </div>
         <div class="col-span-12 md:col-span-2 lg:col-span-2 w-full">
-            <x-renderer.card title="Console.log()" py="1">
+            <x-renderer.card title="Console.log()" class="py-1">
                 <div class="mb-1 text-center">
                    <x-renderer.button size="xs" onClick="console.log(superProps)">Super-Props</x-renderer.button>
                    <x-renderer.button size="xs" onClick="console.log(superWorkflows)">Super-Workflows</x-renderer.button>

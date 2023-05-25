@@ -3,6 +3,7 @@
 namespace App\View\Components\Homepage;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Utils\BookmarkTraits\TraitFormatBookmarkEntities;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Arr;
 use Illuminate\View\Component;
@@ -10,6 +11,7 @@ use Illuminate\Support\Str;
 
 class SearchModal extends Component
 {
+    use TraitFormatBookmarkEntities;
     /**
      * Create a new component instance.
      *
@@ -28,7 +30,7 @@ class SearchModal extends Component
      */
     public function render()
     {
-        $allApps = LibApps::getAllShowBookmark();
+        $allApps = $this->getDataSource(LibApps::getAllShowBookmark());
         return view('components.homepage.search-modal', [
             'allApps' => array_values($allApps),
             'currentUserIsAdmin' => CurrentUser::isAdmin(),

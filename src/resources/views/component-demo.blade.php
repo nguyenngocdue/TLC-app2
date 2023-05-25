@@ -9,20 +9,8 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
 
 <x-renderer.heading level=3 align='center'><a href="/components">Components</a></x-renderer.heading>
 
-<x-renderer.card class="mx-5">
-    <!-- Tabs -->
-    <ul id="tabs-e07ff0dbf9a2afd616aca8e7a85921e2" class="inline-flex pt-2 px-1 w-full border-b">
-        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#static">Static</a></li>
-        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#data_display">Data Display</a></li>
-        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#data_entry">Data Entry</a></li>
-        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#attachments">Attachments / Comments</a></li>
-        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#editable_tables">Editable Tables</a></li>
-        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#navigation">Navigation</a></li>
-        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t {{$activeClass}}"><a href="#feedbacks">Feedbacks</a></li>
-        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#listeners">Listeners</a></li>
-        <li class="px-4 text-gray-800 font-semibold py-2 rounded-t "><a href="#modecontrols">Mode Controls</a></li>
-    </ul>
-
+<!-- Tabs -->
+<x-renderer.tab-pane class="mx-2" id="e07ff0dbf9a2afd616aca8e7a85921e2" :tabs="$tabPaneDataSource">
     <!-- Tab Contents -->
     <div id="tab-contents-e07ff0dbf9a2afd616aca8e7a85921e2">
         <div id="static" class="p-4 hidden">
@@ -35,7 +23,7 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
                     :tableDataHeader="$tableDataHeader"
                     :tableDataSourceForRegister="$tableDataSourceForRegister"
                     :tableColumnsForRegister="$tableColumnsForRegister"
-                     />
+                    />
         </div>
         <div id="data_entry" class="p-4 hidden">
             <x-demo.demo-data-entry :dropdownCell="$dropdownCell" />
@@ -49,17 +37,17 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         <div id="navigation" class="p-4 hidden">
             <x-demo.demo-navigation :tabData1="$tabData1" :tabData2="$tabData2" />
         </div>
-        <div id="feedbacks" class="p-4 hidden1">
+        <div id="feedbacks" class="p-4 hidden">
             <x-demo.demo-feedback :dataSourceProgressBar="$dataSourceProgressBar"/>
         </div>
-        <div id="listeners" class="p-4 hidden">
+        <div id="listeners" class="p-4 hidden1">
             <x-demo.demo-listener :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
         </div>
         <div id="modecontrols" class="p-4 hidden">
             <x-demo.demo-modes-control :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
         </div>
     </div>
-</x-renderer.card>
+</x-renderer.tab-pane>
 
 @once
 <script type="text/javascript">
@@ -73,6 +61,7 @@ const initTab = (tabId) => {
             let tabContents = document.querySelector("#tab-contents-" + tabId);
             for (let i = 0; i < tabContents.children.length; i++) {
                 tabTogglers[i].parentElement.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+                tabTogglers[i].parentElement.classList.add("bg-gray-200");
                 tabContents.children[i].classList.remove("hidden");
                 if ("#" + tabContents.children[i].id === tabName) continue;
                 tabContents.children[i].classList.add("hidden");

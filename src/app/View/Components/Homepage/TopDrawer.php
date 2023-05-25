@@ -3,10 +3,15 @@
 namespace App\View\Components\Homepage;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Utils\AccessLogger\EntityIdClickCount;
+use App\Utils\AccessLogger\EntityNameClickCount;
+use App\Utils\BookmarkTraits\TraitFormatBookmarkEntities;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class TopDrawer extends Component
 {
+    use TraitFormatBookmarkEntities;
     /**
      * Create a new component instance.
      *
@@ -24,7 +29,7 @@ class TopDrawer extends Component
      */
     public function render()
     {
-        $allApps = LibApps::getAllNavbarBookmark();
+        $allApps = $this->getDataSource(LibApps::getAllNavbarBookmark());
         return view('components.homepage.top-drawer', [
             'allApps' => array_values($allApps),
             'route' => route('updateBookmark'),

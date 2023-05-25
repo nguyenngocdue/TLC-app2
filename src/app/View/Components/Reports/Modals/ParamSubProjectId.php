@@ -12,6 +12,7 @@ class ParamSubProjectId extends ParentIdParamReports
     {
         $sql = "SELECT 
                         sp.id AS id
+                        ,sp.description
                         ,sp.name AS name
                         ,sp.status AS sp_status
                         ,sp.project_id AS $attr_name

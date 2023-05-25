@@ -1,4 +1,4 @@
-<x-renderer.card class="my-1 border mt-2 bg-white"  px="0" py="0">
+<x-renderer.card class="my-1 border mt-2 bg-white p-0">
     <div class="bg-gray-300 rounded-t p-2">
         <p title="{{$line->name}} - #{{$line->id}}">{{$line->description}}</p>
     </div>

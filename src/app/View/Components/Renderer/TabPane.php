@@ -12,9 +12,10 @@ class TabPane extends Component
      * @return void
      */
     public function __construct(
-        private $dataSource = [],
+        private $tabs = [],
         private $id = '',
         private $activeTab = '',
+        private $class = '',
     ) {
         //
     }
@@ -26,7 +27,7 @@ class TabPane extends Component
      */
     public function render()
     {
-        foreach ($this->dataSource as &$tab) {
+        foreach ($this->tabs as &$tab) {
             if (!isset($tab['class'])) $tab['class'] = "";
             if ($tab['active'] ?? false) {
                 $tab['class'] .= " bg-white -mb-px";
@@ -35,8 +36,9 @@ class TabPane extends Component
             }
         }
         return view('components.renderer.tab-pane', [
-            'dataSource' => $this->dataSource,
+            'tabs' => $this->tabs,
             'id' => $this->id,
+            'class' => $this->class,
         ]);
     }
 }
