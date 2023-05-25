@@ -15,6 +15,7 @@ class TabPane extends Component
         private $dataSource = [],
         private $id = '',
         private $activeTab = '',
+        private $class = '',
     ) {
         //
     }
@@ -37,6 +38,7 @@ class TabPane extends Component
         return view('components.renderer.tab-pane', [
             'dataSource' => $this->dataSource,
             'id' => $this->id,
+            'class' => $this->class,
         ]);
     }
 }
