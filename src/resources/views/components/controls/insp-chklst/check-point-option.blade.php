@@ -25,6 +25,21 @@ function registerListen(lineId, id){
     }
     $("#radio_" + lineId + "_" + id).click(reRender)
 }
+    var objIds = {}; 
+    function updateIdsOfFail(id, name) {
+        if (!Object.keys(objIds).includes(name)) {
+            objIds[name] = []
+            objIds[name].push(id)
+        } else {
+            if (objIds[name].includes(id)) {
+                const index = objIds[name].indexOf(id);
+                objIds[name].splice(index, 1)
+            } else {
+                objIds[name].push(id)
+            }
+        }
+        document.getElementById(name).value = objIds[name]
+    }
 </script>
 @endonce
 
@@ -38,9 +53,13 @@ function registerListen(lineId, id){
                     @checked($line->{"qaqc_insp_control_value_id"}==$id)  
                     value="{{$id}}"
                     />
+                    @if(in_array($option, ['No','Fail']))
+                    <input id="radio_{{$line->id}}_hidden" name="{{$table01Name}}[control_fail_current_session_ids][{{$rowIndex}}]" type="hidden">
+                    @endif
             <label for="radio_{{$line->id}}_{{$id}}" 
                 class="{{$class[$id] ?? $class[1]}} block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
                 title="#{{$id}}"
+                onclick="updateIdsOfFail({{$line->id}}, 'radio_{{$line->id}}_hidden')"
                 >{{$option}}</label>
         </div>
         <script>

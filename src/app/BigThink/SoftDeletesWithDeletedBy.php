@@ -39,21 +39,16 @@ trait SoftDeletesWithDeletedBy
 
         $time = $this->freshTimestamp();
         $id = $this->deleteById();
-
         $columns = [$this->getDeletedAtColumn() => $this->fromDateTime($time)];
-        $columns = [$this->getDeletedByColumn() => $id];
+        $columns[$this->getDeletedByColumn()] =  $id;
 
         $this->{$this->getDeletedAtColumn()} = $time;
         $this->{$this->getDeletedByColumn()} = $id;
 
         if ($this->usesTimestamps() && !is_null($this->getUpdatedAtColumn())) {
             $this->{$this->getUpdatedAtColumn()} = $time;
-            $this->{$this->getDeletedByColumn()} = $id;
-
             $columns[$this->getUpdatedAtColumn()] = $this->fromDateTime($time);
-            $columns[$this->getDeletedByColumn()] = $id;
         }
-
         $query->update($columns);
 
         $this->syncOriginalAttributes(array_keys($columns));
