@@ -83,10 +83,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getHROTRs": {
-        "name": "_getHROTRs",
+    "_getHrOtrs": {
+        "name": "_getHrOtrs",
         "relationship": "hasMany",
-        "control_name": "getHROTRs",
+        "control_name": "getHrOtrs",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

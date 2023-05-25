@@ -1,4 +1,18 @@
 {
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "listen_action": "assign",
+        "triggers": "injured_staff_discipline",
+        "listen_to_fields": "injured_staff_discipline",
+        "listen_to_attrs": "def_assignee",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_injured_staff_id": {
         "name": "_injured_staff_id",
         "column_name": "injured_staff_id",
@@ -41,6 +55,20 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_first_date": {
+        "name": "_first_date",
+        "column_name": "first_date",
+        "listen_action": "dot",
+        "triggers": "injured_person",
+        "listen_to_fields": "injured_person",
+        "listen_to_attrs": "first_date",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_injured_staff_cat_desc": {
         "name": "_injured_staff_cat_desc",
         "column_name": "injured_staff_cat_desc",
@@ -55,13 +83,13 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_first_date": {
-        "name": "_first_date",
-        "column_name": "first_date",
+    "_injured_staff_discipline": {
+        "name": "_injured_staff_discipline",
+        "column_name": "injured_staff_discipline",
         "listen_action": "dot",
         "triggers": "injured_person",
         "listen_to_fields": "injured_person",
-        "listen_to_attrs": "first_date",
+        "listen_to_attrs": "discipline",
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
@@ -223,20 +251,6 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -254,6 +268,20 @@
     "_incident_doc_type_id": {
         "name": "_incident_doc_type_id",
         "column_name": "incident_doc_type_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_loss_value": {
+        "name": "_loss_value",
+        "column_name": "loss_value",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -380,6 +408,34 @@
     "_time_out_hospital": {
         "name": "_time_out_hospital",
         "column_name": "time_out_hospital",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_need_to_transfer_position": {
+        "name": "_need_to_transfer_position",
+        "column_name": "need_to_transfer_position",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_attachment_hse_hr_decision": {
+        "name": "_attachment_hse_hr_decision",
+        "column_name": "attachment_hse_hr_decision",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -559,9 +615,37 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_comment_by_general_manager": {
         "name": "_comment_by_general_manager",
         "column_name": "comment_by_general_manager",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_assignee_3": {
+        "name": "_assignee_3",
+        "column_name": "assignee_3",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -632,48 +716,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_loss_value": {
-        "name": "_loss_value",
-        "column_name": "loss_value",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_need_to_transfer_position": {
-        "name": "_need_to_transfer_position",
-        "column_name": "need_to_transfer_position",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_attachment_hse_hr_decision": {
-        "name": "_attachment_hse_hr_decision",
-        "column_name": "attachment_hse_hr_decision",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

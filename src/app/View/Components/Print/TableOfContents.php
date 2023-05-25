@@ -62,6 +62,6 @@ class TableOfContents extends Component
     }
     private function createDataSource($item)
     {
-        return "<a href='#{$item->slug}' class='text-blue-500'>{$item->description}</a>";
+        return "<a href='#{$item->slug}' class='text-blue-500'>{$item->name}</a>";
     }
 }

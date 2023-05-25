@@ -56,9 +56,9 @@
         "duplicatable": "true",
         "new_line": ""
     },
-    "_getHROTRLines": {
-        "name": "_getHROTRLines",
-        "column_name": "getHROTRLines",
+    "_getHrOtrLines": {
+        "name": "_getHrOtrLines",
+        "column_name": "getHrOtrLines",
         "column_type": "eloquent_prop",
         "label": "Overtime Details",
         "control": "relationship_renderer",

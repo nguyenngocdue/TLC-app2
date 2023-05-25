@@ -214,7 +214,7 @@ class RelationshipRenderer2 extends Component
                 }
                 //remakeOrderNoColumn MUST before attach Action Column
                 $dataSourceWithOld = $this->remakeOrderNoColumn($dataSourceWithOld);
-                $dataSourceWithOld = $this->attachActionColumn($this->table01Name, $dataSourceWithOld, $isOrderable);
+                $dataSourceWithOld = $this->attachActionColumn($this->table01Name, $dataSourceWithOld, $isOrderable, $this->readOnly);
                 // dump($dataSourceWithOld);
                 // dump($dataSource);
                 // $tableName = $lineModelPath::getTableName();
@@ -229,7 +229,13 @@ class RelationshipRenderer2 extends Component
                 }
                 // dump($itemOriginal);
                 $view = $editable ? 'many-line-params-editable' : 'many-line-params-ro';
-                if ($this->readOnly) $view = 'many-line-params-ro';
+                $dataSource2ndThead = $this->readOnly ? null : $this->makeEditable2ndThead($editableColumns, $this->table01Name);
+                if ($this->readOnly) {
+                    array_shift($editableColumns);
+                    foreach ($editableColumns as &$column) {
+                        $column['properties']['readOnly'] = true;
+                    }
+                }
                 return view('components.controls.' . $view, [
                     'readOnly' => $this->readOnly,
                     'table01ROName' => $this->table01Name . "RO",
@@ -239,7 +245,7 @@ class RelationshipRenderer2 extends Component
                     'isOrderable' => $isOrderable,
                     'table01Name' => $this->table01Name,
                     'editableColumns' => $editableColumns,
-                    'dataSource2ndThead' => $this->makeEditable2ndThead($editableColumns, $this->table01Name),
+                    'dataSource2ndThead' => $dataSource2ndThead,
                     'dataSourceWithOld' => $dataSourceWithOld,
 
                     'tableFooter' => $tableFooter,

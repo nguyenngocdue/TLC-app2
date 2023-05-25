@@ -56,6 +56,7 @@ trait TraitTableColumnEditable
                     $newColumn['renderer'] = 'dropdown';
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = $classListText;
+                    $newColumn['align'] = 'center';
                     break;
                 case 'dropdown':
                 case 'dropdown_multi':

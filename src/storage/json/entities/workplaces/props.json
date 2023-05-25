@@ -170,9 +170,9 @@
         "duplicatable": "",
         "new_line": "true"
     },
-    "_getHROTRs": {
-        "name": "_getHROTRs",
-        "column_name": "getHROTRs",
+    "_getHrOtrs": {
+        "name": "_getHrOtrs",
+        "column_name": "getHrOtrs",
         "column_type": "eloquent_prop",
         "label": "Overtime Request",
         "control": "relationship_renderer",

@@ -4,16 +4,14 @@
         "name": "_created_at",
         "column_name": "created_at",
         "column_type": "datetime",
-        "label": "Created At 1",
+        "label": "Created At",
         "control": "picker_datetime",
         "align": null,
         "col_span": "6",
         "width": "100",
         "hidden_view_all": "true",
         "hidden_edit": "true",
-        "hidden_filter": "true",
-        "hidden_print": "true",
-        "read_only": "true"
+        "hidden_filter": "true"
     },
     "_deleted_at": {
         "move_to": null,
@@ -28,8 +26,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "true",
         "hidden_filter": "true",
-        "hidden_print": "true",
-        "read_only": "true"
+        "hidden_print": "true"
     },
     "_deleted_by": {
         "move_to": null,
@@ -44,8 +41,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "true",
         "hidden_filter": "true",
-        "hidden_print": "true",
-        "read_only": "true"
+        "hidden_print": "true"
     },
     "_id": {
         "move_to": null,
@@ -58,8 +54,7 @@
         "col_span": "12",
         "width": "100",
         "hidden_edit": "true",
-        "hidden_print": "true",
-        "read_only": "true"
+        "hidden_print": "true"
     },
     "_order_no": {
         "move_to": null,
@@ -74,8 +69,7 @@
         "hidden_view_all": "true",
         "hidden_edit": "true",
         "hidden_filter": "true",
-        "hidden_print": "true",
-        "read_only": "true"
+        "hidden_print": "true"
     },
     "_status": {
         "move_to": null,
@@ -85,11 +79,9 @@
         "label": "Status",
         "control": "status",
         "align": null,
-        "col_span": "12",
+        "col_span": "6",
         "width": "100",
-        "hidden_edit": "true",
-        "hidden_print": "true",
-        "read_only": "true"
+        "hidden_edit": "true"
     },
     "_updated_at": {
         "move_to": null,
@@ -104,7 +96,6 @@
         "hidden_view_all": "true",
         "hidden_edit": "true",
         "hidden_filter": "true",
-        "hidden_print": "true",
-        "read_only": "true"
+        "hidden_print": "true"
     }
 }

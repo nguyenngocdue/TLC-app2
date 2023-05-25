@@ -117,8 +117,9 @@ trait TraitTableEditableDataSourceWithOld
         }
     }
 
-    private function attachActionColumn($table01Name, $dataSource, $isOrderable)
+    private function attachActionColumn($table01Name, $dataSource, $isOrderable, $readOnly)
     {
+        if ($readOnly) return $dataSource;
         // dump($dataSource);
         foreach ($dataSource as $rowIndex => &$row) {
             $id = $row->order_no;
