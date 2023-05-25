@@ -1,6 +1,6 @@
-@if($readOnly)
+{{-- @if($readOnly)
 <div class="p-2">{{$cell??$slot}}</div>
-@endif
+@endif --}}
 <input
     @readonly($readOnly)
     component="editable/text4"
@@ -9,7 +9,7 @@
     value="{{$cell??$slot}}"
     type="text"
     placeholder="{{$placeholder}}" 
-    class="{{$classList}} {{$readOnly?"readonly":""}} {{$readOnly?"hidden":""}} "
+    class="{{$classList}} {{$readOnly?"readonly":""}} {{$readOnly?"hidden1":""}} "
     >
 <script>
     $("[id='{{$name}}']").on('change', function(e, batchLength){
