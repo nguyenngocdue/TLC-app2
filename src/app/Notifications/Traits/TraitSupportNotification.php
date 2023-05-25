@@ -10,8 +10,6 @@ use Illuminate\Support\Str;
 
 trait TraitSupportNotification
 {
-
-
     private function sendMailCreate($data, $notifiable, $create = true)
     {
         $currentValue = $data['currentValue'];
@@ -19,7 +17,7 @@ trait TraitSupportNotification
         $id = $currentValue['id'];
         $typePlural = Str::plural($type);
         $routeName = "{$typePlural}.edit";
-        $routeExits =  (Route::has($routeName));
+        $routeExits = (Route::has($routeName));
         $href =  $routeExits ? route($routeName, $id) : "#";
         $nameUserCreated = $notifiable['name'];
         $libApps = LibApps::getFor($type);

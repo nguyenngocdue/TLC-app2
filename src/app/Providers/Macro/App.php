@@ -1,5 +1,6 @@
 <?php
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\App;
 
 App::macro('isTesting', function () {
@@ -7,4 +8,8 @@ App::macro('isTesting', function () {
 });
 App::macro('isProduction', function () {
     return env('APP_ENV') == "production";
+});
+
+App::macro('present', function () {
+    return App::isTesting() || App::isLocal() || CurrentUser::isAdmin();
 });
