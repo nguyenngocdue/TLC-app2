@@ -79,7 +79,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
         $sql .= "\n  AND mir.id = ncr.parent_id
                     AND ncr.sub_project_id = sp.id
                     AND ncr.sub_project_id = mir.sub_project_id
-                    AND ncr.parent_type = 'App\\\Models\\\Qaqc_mir'
+                    AND ncr.parent_type = 'App\\\Models\\\\$this->parentType'
                     AND DATE_FORMAT(ncr.created_at, '%Y-%m') = DATE_FORMAT(mir.created_at, '%Y-%m')
                 GROUP BY
                     ncr.created_at,
@@ -161,12 +161,12 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
             //     'width' => 100
 
             // ],
-            // [
-            //     "dataIndex" => "ids_open_ncr",
-            //     "align" => "center",
-            //     'width' => 200
+            [
+                "dataIndex" => "ids_open_ncr",
+                "align" => "center",
+                'width' => 200
 
-            // ],
+            ],
             // [
             //     "dataIndex" => "all_year_month_ncr",
             //     "align" => "center",
@@ -203,6 +203,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
             [
                 'title' => 'Project',
                 'dataIndex' => 'project_id',
+                'allowClear' => false,
             ],
             [
                 'title' => 'Sub Project',

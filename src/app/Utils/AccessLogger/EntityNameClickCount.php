@@ -8,7 +8,7 @@ class EntityNameClickCount
 {
     function __invoke($owner_id)
     {
-        if (!env('ACCESS_LOGGER_ENABLED')) return;
+        if (!env('ACCESS_LOGGER_ENABLED')) return [];
         $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
         $data = DB::connection($connection)
             ->select("SELECT * 

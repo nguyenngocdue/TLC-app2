@@ -56,7 +56,6 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
             dump('Send Mail And Notifications will not work.');
             return;
         }
-        $this->insertLogger($previousValue, $currentValue, $userCurrentId, $classType);
         $listAssignees = JsonControls::getAssignees();
         $listMonitors = JsonControls::getMonitors();
         foreach ($currentValue as $key => $value) {
@@ -150,22 +149,6 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
                     $this->sendMail($user, $type, $key, $previousValue, $currentValue);
                 }
             }
-        }
-    }
-    private function insertLogger($previousValue, $currentValue, $userId, $classType)
-    {
-        // dd($currentValue);
-        if ($previousValue['status'] !== $currentValue['status']) {
-            Logger::create([
-                'loggable_type' => $classType,
-                'loggable_id' => $currentValue['id'],
-                'type' => 'updated_field',
-                'key' => 'entity_status',
-                'old_value' => $previousValue['status'],
-                'new_value' => $currentValue['status'],
-                'user_id' => $userId,
-                'created_at' => $currentValue['updated_at'],
-            ]);
         }
     }
     private function sendNotificationAndMail($user, $type, $key, $previousValue, $currentValue)

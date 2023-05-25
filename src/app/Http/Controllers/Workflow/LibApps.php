@@ -11,7 +11,8 @@ class LibApps extends AbstractLib
     protected static $key = "apps";
 
     private static $singleton = null;
-    public static function getAll()
+
+    public static function getAllByPermission()
     {
         $permissions = CurrentUser::getPermissions();
         if (!isset(static::$singleton)) {
@@ -34,6 +35,17 @@ class LibApps extends AbstractLib
         }
         return static::$singleton;
     }
+    public static function getAll()
+    {
+        $result = parent::getAll();
+        foreach ($result as &$app) {
+            $app['package_rendered'] = isset($app['package']) ? Str::appTitle($app['package']) : "unknown package";
+            $app['sub_package_rendered'] = isset($app['sub_package']) ? Str::appTitle($app['sub_package']) : "unknown sub_package";
+            $route = Str::plural($app['name']) . ".index";
+            $app['href'] = Route::has($route) ? route($route) /*. "#Found:" . $route*/ : "#RouteNotFound:$route";
+        }
+        return $result;
+    }
     private static function checkEntityHasPermission($type, $entity, $permissions)
     {
         return in_array($type . '-' . Str::plural($entity), $permissions);
@@ -41,7 +53,7 @@ class LibApps extends AbstractLib
 
     public static function getAllShowBookmark()
     {
-        $allApps = static::getAll();
+        $allApps = static::getAllByPermission();
         $bookmarkSettings = CurrentUser::bookmark();
         array_walk($allApps, function (&$value, $key) use ($bookmarkSettings) {
             if (in_array($key, $bookmarkSettings)) {

@@ -10,7 +10,7 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
 <x-renderer.heading level=3 align='center'><a href="/components">Components</a></x-renderer.heading>
 
 <!-- Tabs -->
-<x-renderer.tab-pane class="mx-2 aaaa" id="e07ff0dbf9a2afd616aca8e7a85921e2" :dataSource="$tabPaneDataSource">
+<x-renderer.tab-pane class="mx-2" id="e07ff0dbf9a2afd616aca8e7a85921e2" :tabs="$tabPaneDataSource">
     <!-- Tab Contents -->
     <div id="tab-contents-e07ff0dbf9a2afd616aca8e7a85921e2">
         <div id="static" class="p-4 hidden">
@@ -37,10 +37,10 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         <div id="navigation" class="p-4 hidden">
             <x-demo.demo-navigation :tabData1="$tabData1" :tabData2="$tabData2" />
         </div>
-        <div id="feedbacks" class="p-4 hidden1">
+        <div id="feedbacks" class="p-4 hidden">
             <x-demo.demo-feedback :dataSourceProgressBar="$dataSourceProgressBar"/>
         </div>
-        <div id="listeners" class="p-4 hidden">
+        <div id="listeners" class="p-4 hidden1">
             <x-demo.demo-listener :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
         </div>
         <div id="modecontrols" class="p-4 hidden">
@@ -61,6 +61,7 @@ const initTab = (tabId) => {
             let tabContents = document.querySelector("#tab-contents-" + tabId);
             for (let i = 0; i < tabContents.children.length; i++) {
                 tabTogglers[i].parentElement.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+                tabTogglers[i].parentElement.classList.add("bg-gray-200");
                 tabContents.children[i].classList.remove("hidden");
                 if ("#" + tabContents.children[i].id === tabName) continue;
                 tabContents.children[i].classList.add("hidden");
