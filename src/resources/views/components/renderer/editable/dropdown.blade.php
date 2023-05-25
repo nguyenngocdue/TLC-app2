@@ -1,8 +1,13 @@
+@if($readOnly)
+@php
+echo Blade::render("<x-renderer.status>".$selected."</x-renderer.status>");
+@endphp
+@endif
 <select 
     id="{{$name}}" 
     name="{{$name}}" 
     component="editable/dropdown"
-    class="{{$classList}}">
+    class="{{$classList}} {{$readOnly?"hidden":""}}">
     @foreach($cbbDataSource as $line)
     <option 
         title="{{$line['value']}}" 
