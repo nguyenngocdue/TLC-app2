@@ -16,7 +16,7 @@ class Workplace extends ModelExtended
 
         "getUsers" => ['hasMany', User::class, 'workplace'],
         "getPublicHolidays" => ["hasMany", Public_holiday::class, 'workplace_id'],
-        "getHROTRs" => ["hasMany", Hr_overtime_request::class, 'workplace_id'],
+        "getHrOtrs" => ["hasMany", Hr_overtime_request::class, 'workplace_id'],
     ];
     public $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
@@ -37,7 +37,7 @@ class Workplace extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getHROTRs()
+    public function getHrOtrs()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

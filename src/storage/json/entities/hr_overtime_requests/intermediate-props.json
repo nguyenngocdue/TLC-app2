@@ -23,9 +23,9 @@
         "rejected": "",
         "approved": ""
     },
-    "_getHROTRLines": {
-        "name": "_getHROTRLines",
-        "column_name": "getHROTRLines",
+    "_getHrOtrLines": {
+        "name": "_getHrOtrLines",
+        "column_name": "getHrOtrLines",
         "new": "",
         "pending_approval": "",
         "rejected": "",
