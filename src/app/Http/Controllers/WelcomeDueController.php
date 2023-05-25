@@ -17,7 +17,7 @@ class WelcomeDueController extends Controller
     {
 
         $tree = BuildTree::getTreeByOptions(2, '', '', false, true);
-        dump($tree, 13);
+        // dump($tree, 13);
 
         return view("welcome-due", [
             // ''

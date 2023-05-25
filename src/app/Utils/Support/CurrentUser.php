@@ -68,7 +68,7 @@ class CurrentUser
         }
         return $roles;
     }
-    public static function getPermissionsCache($userAuth = null)
+    private static function getPermissionsCache($userAuth = null)
     {
         $permissions = static::getRoles($userAuth, false);
         $ids = join(',', $permissions->pluck('id')->toArray());
