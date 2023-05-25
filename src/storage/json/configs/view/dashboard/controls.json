@@ -58,7 +58,11 @@
         "parent_link",
         "thumbnails"
     ],
-    "renderer_edit": ["", "many_icons", "many_lines"],
+    "renderer_edit": [
+        "",
+        "many_icons",
+        "many_lines"
+    ],
     "manage_prop_eloquents": [
         "belongsToMany",
         "hasMany",
@@ -79,8 +83,12 @@
         "belongsTo",
         "morphToMany"
     ],
-    "manage_prop_oracies": ["getCheckedByField"],
-    "view_all_oracies": ["getCheckedByField"],
+    "manage_prop_oracies": [
+        "getCheckedByField"
+    ],
+    "view_all_oracies": [
+        "getCheckedByField"
+    ],
     "packages": [
         "",
         "hr_&_admin",
@@ -139,7 +147,16 @@
         "getMonitors8()",
         "getMonitors9()"
     ],
-    "param_units": ["", "hour", "item", "line", "person", "signature", "team"],
+    "param_units": [
+        "",
+        "hour",
+        "item",
+        "line",
+        "person",
+        "signature",
+        "team",
+        "sheet"
+    ],
     "ignore_duplicatable": [
         "id",
         "owner_id",
