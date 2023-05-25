@@ -2,9 +2,6 @@
 
 namespace App\View\Components\Form;
 
-use App\Utils\ENV;
-use App\Utils\Support\CurrentUser;
-use Illuminate\Support\Facades\App;
 use Illuminate\View\Component;
 
 class ActionMultiple extends Component
@@ -28,7 +25,7 @@ class ActionMultiple extends Component
      */
     public function render()
     {
-        if (ENV::present()) {
+        if (app()->present()) {
             return view('components.form.action-multiple', [
                 'type' => $this->type,
                 'restore' => $this->restore,
