@@ -16,6 +16,7 @@ use App\Utils\Support\Report;
     protected $project_id = 5;
     protected $sub_project_id = 82;
     protected $targetTable="qaqc_mirs";
+    protected $parentType="Qaqc_mir";
     protected $titleTable = "MIR";
     protected $maxH = 50;
 
@@ -78,7 +79,7 @@ use App\Utils\Support\Report;
         $sql .= "\n  AND mir.id = ncr.parent_id
                     AND ncr.sub_project_id = sp.id
                     AND ncr.sub_project_id = mir.sub_project_id
-                    AND ncr.parent_type = 'App\\\Models\\\Qaqc_mir'
+                    AND ncr.parent_type = 'App\\\Models\\\\$this->parentType'
                     AND DATE_FORMAT(ncr.created_at, '%Y-%m') = DATE_FORMAT(mir.created_at, '%Y-%m')
                 GROUP BY
                     ncr.created_at,
@@ -160,12 +161,12 @@ use App\Utils\Support\Report;
             //     'width' => 100
 
             // ],
-            // [
-            //     "dataIndex" => "ids_open_ncr",
-            //     "align" => "center",
-            //     'width' => 200
+            [
+                "dataIndex" => "ids_open_ncr",
+                "align" => "center",
+                'width' => 200
 
-            // ],
+            ],
             // [
             //     "dataIndex" => "all_year_month_ncr",
             //     "align" => "center",
@@ -202,6 +203,7 @@ use App\Utils\Support\Report;
             [
                 'title' => 'Project',
                 'dataIndex' => 'project_id',
+                'allowClear' => false,
             ],
             [
                 'title' => 'Sub Project',
