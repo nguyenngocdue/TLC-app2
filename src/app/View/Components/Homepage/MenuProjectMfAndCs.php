@@ -32,7 +32,9 @@ class MenuProjectMfAndCs extends Component
             $item['href'] = $href;
             return $item;
         });
-        [$recent, $project] = $allProjectMFandCS->partition(function ($item) use ($entitiesIds) {
+        [$recent, $project] = $allProjectMFandCS->sortBy(function ($item) use ($entitiesIds) {
+            return array_search($item->id, $entitiesIds);
+        })->partition(function ($item) use ($entitiesIds) {
             return array_search($item->id, $entitiesIds) !== false;
         });
         return view('components.homepage.menu-project-mf-and-cs', [
