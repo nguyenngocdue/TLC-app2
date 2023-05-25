@@ -37,10 +37,10 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         <div id="navigation" class="p-4 hidden">
             <x-demo.demo-navigation :tabData1="$tabData1" :tabData2="$tabData2" />
         </div>
-        <div id="feedbacks" class="p-4 hidden1">
+        <div id="feedbacks" class="p-4 hidden">
             <x-demo.demo-feedback :dataSourceProgressBar="$dataSourceProgressBar"/>
         </div>
-        <div id="listeners" class="p-4 hidden">
+        <div id="listeners" class="p-4 hidden1">
             <x-demo.demo-listener :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
         </div>
         <div id="modecontrols" class="p-4 hidden">
