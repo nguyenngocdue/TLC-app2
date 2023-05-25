@@ -143,6 +143,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_injured_staff_discipline": {
+        "name": "_injured_staff_discipline",
+        "column_name": "injured_staff_discipline",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -767,6 +779,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "16",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_divider11": {
         "name": "_divider11",
         "column_name": "divider11",
@@ -799,6 +823,18 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_assignee_3": {
+        "name": "_assignee_3",
+        "column_name": "assignee_3",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "191",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""

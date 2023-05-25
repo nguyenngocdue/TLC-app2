@@ -131,6 +131,17 @@
         "pending_verification": "",
         "closed": ""
     },
+    "_injured_staff_discipline": {
+        "name": "_injured_staff_discipline",
+        "column_name": "injured_staff_discipline",
+        "new": "true",
+        "active": "true",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "review_rejected": "true",
+        "pending_verification": "true",
+        "closed": "true"
+    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -703,6 +714,17 @@
         "pending_verification": "",
         "closed": ""
     },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "new": "true",
+        "active": "true",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
     "_divider11": {
         "name": "_divider11",
         "column_name": "divider11",
@@ -733,6 +755,17 @@
         "pending_ack": "true",
         "pending_review": "",
         "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "_assignee_3": {
+        "name": "_assignee_3",
+        "column_name": "assignee_3",
+        "new": "true",
+        "active": "true",
+        "pending_ack": "true",
+        "pending_review": "",
+        "review_rejected": "true",
         "pending_verification": "",
         "closed": ""
     },
