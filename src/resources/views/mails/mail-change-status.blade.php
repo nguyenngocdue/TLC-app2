@@ -344,7 +344,7 @@
                                         <td class="content-cell" >
                                             <h1 style="box-sizing:border-box; color:#3d4852; font-size:18px; font-weight:bold; margin-top:0; text-align:left">Dear {{$name}},</h1>
                                             <p style="box-sizing:border-box; font-size:16px; line-height:1.5em; margin-top:0; text-align:left">
-                                                This document change status <span class="p-1" style="background-color: aqua; border-radius: 0.5rem">{{$oldStatus}}</span> to <span class="p-1" style="background-color: aquamarine; border-radius: 0.5rem">{{$newStatus}}</span>.
+                                                This document change status <span class="p-1" style="background-color: {{$colorOldStatus}}; border-radius: 0.5rem">{{$oldStatus}}</span> to <span class="p-1" style="background-color: {{$colorNewStatus}}; border-radius: 0.5rem">{{$newStatus}}</span>.
                                             </p>
                                             @if($changeAssignee)
                                             <p style="box-sizing:border-box; font-size:16px; line-height:1.5em; margin-top:0; text-align:left">

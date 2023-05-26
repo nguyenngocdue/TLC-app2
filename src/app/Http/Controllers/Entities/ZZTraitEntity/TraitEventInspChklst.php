@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Events\InspChklstEvent;
 use App\Models\Qaqc_insp_chklst_line;
 use App\Models\Qaqc_insp_chklst_sht;
 use Illuminate\Http\Request;
@@ -23,10 +24,23 @@ trait TraitEventInspChklst
             });
             $commentOwnerIds = array_column($dataCommentCreate, 'owner_id');
             if (!empty($failIds) || !empty($commentOwnerIds)) {
-                $ids = array_unique(array_merge([(string)Auth::id()], $commentOwnerIds));
+                $currentUserId = (string)Auth::id();
+                $ids = array_unique(array_merge([$currentUserId], $commentOwnerIds));
                 if (!empty(array_intersect($ids, $signOffIds))) {
-                    $qaqcInspChklstLine = Qaqc_insp_chklst_line::whereIn('id', $failIds)->get();
-                    dd(123);
+                    $data['owner_id'] = $currentUserId;
+                    if (!empty($failIds)) {
+                        $qaqcInspChklstLineData = Qaqc_insp_chklst_line::whereIn('id', $failIds)->select('name', 'qaqc_insp_control_value_id')->get()->toArray();
+                        $data['no_or_fail'] = $qaqcInspChklstLineData;
+                    }
+                    if (!empty($dataCommentCreate)) {
+                        $dataCommentCreate = array_map(function ($item) {
+                            $result = ($item['commentable_type'])::findOrFail($item['commentable_id'])->toArray()['name'];
+                            $item['content_line_name'] = $result;
+                            return $item;
+                        }, $dataCommentCreate);
+                        $data['comment'] = $dataCommentCreate;
+                    }
+                    event(new InspChklstEvent($data, $id, $this->type));
                 }
             }
         }
