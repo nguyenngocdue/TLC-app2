@@ -41,7 +41,6 @@ abstract class ParentIdParamReports2 extends Component
                 'triggers' => [$this->referData, $this->referData1],
             ],
         ];
-        // dump($listenersOfDropdown2);
         $str = "";
         $str .= "<script>";
         $str .= " k = {...k, ..." . json_encode($k) . "};";
