@@ -52,7 +52,7 @@
         "renderer_edit_param": "",
         "control": "dropdown_multi",
         "filter_columns": "field_id",
-        "filter_values": "101",
+        "filter_values": "139",
         "radio_checkbox_colspan": ""
     }
 }
