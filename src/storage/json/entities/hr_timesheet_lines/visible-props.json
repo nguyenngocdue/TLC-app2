@@ -1,0 +1,97 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true"
+    },
+    "_hr_timesheet_id": {
+        "name": "_hr_timesheet_id",
+        "column_name": "hr_timesheet_id",
+        "new": "true"
+    },
+    "_ts_date": {
+        "name": "_ts_date",
+        "column_name": "ts_date",
+        "new": "true"
+    },
+    "_ts_hour": {
+        "name": "_ts_hour",
+        "column_name": "ts_hour",
+        "new": "true"
+    },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "new": "true"
+    },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "new": "true"
+    },
+    "_lod_id": {
+        "name": "_lod_id",
+        "column_name": "lod_id",
+        "new": "true"
+    },
+    "_discipline_id": {
+        "name": "_discipline_id",
+        "column_name": "discipline_id",
+        "new": "true"
+    },
+    "_task_id": {
+        "name": "_task_id",
+        "column_name": "task_id",
+        "new": "true"
+    },
+    "_sub_task_id": {
+        "name": "_sub_task_id",
+        "column_name": "sub_task_id",
+        "new": "true"
+    },
+    "_work_mode_id": {
+        "name": "_work_mode_id",
+        "column_name": "work_mode_id",
+        "new": "true"
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
+        "new": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true"
+    }
+}
