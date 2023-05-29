@@ -41,9 +41,9 @@ abstract class ModelExtended extends Model
         return static::$statusless;
     }
 
-    public function __construct()
+    public function __construct(array $attributes = [])
     {
-        parent::__construct();
+        parent::__construct($attributes);
         $this->eloquentParams['getOwner'] =  ["belongsTo", User::class, "owner_id"];
         $this->eloquentParams['getDeletedBy'] =  ["belongsTo", User::class, "deleted_by"];
     }
