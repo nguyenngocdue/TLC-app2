@@ -31,6 +31,7 @@ class MigrationsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom($path . "entities/global");
         $this->loadMigrationsFrom($path . "entities/user");
         $this->loadMigrationsFrom($path . "entities/production");
+        $this->loadMigrationsFrom($path . "entities/project");
         $this->loadMigrationsFrom($path . "entities/qaqc");
         $this->loadMigrationsFrom($path . "entities/hse");
         $this->loadMigrationsFrom($path . "entities/esg");
