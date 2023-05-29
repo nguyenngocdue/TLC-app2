@@ -17,7 +17,7 @@ class ParamProdRoutingId extends ParentIdParamReports2
         $sql = "SELECT
                 pr.id AS id,
                 pr.name AS name,
-                GROUP_CONCAT(DISTINCT(sp.id)) AS sup_pro_id
+                GROUP_CONCAT(DISTINCT(sp.id)) AS sub_project_id
                 FROM sub_projects sp, prod_orders po, prod_routings pr
                 WHERE 1 = 1
                     AND sp.deleted_by IS NULL
@@ -32,7 +32,7 @@ class ParamProdRoutingId extends ParentIdParamReports2
         $subProjectKeyName = $this->referData;
         $qaqcTmplKeyName = $this->referData1;
         foreach ($result as &$line) {
-            $sup_project_ids = array_map('intval',explode(",",$line->sup_pro_id));
+            $sup_project_ids = array_map('intval',explode(",",$line->sub_project_id));
             $line->$subProjectKeyName= $sup_project_ids;
             $line->$qaqcTmplKeyName= Prod_routing::find($line->id)->getChklstTmpls()->pluck('id')->toArray();
         }
