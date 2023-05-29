@@ -43,7 +43,7 @@ class AggSum extends Component
             $count = sizeof($json);
             if ($count === 0) return "";
             $avg = round($sum / $count, 2);
-            $unit = Str::plural($unit, round($avg));
+            $unit = Str::plural($unit, round($sum));
             return "<div class='text-center'><x-renderer.tag title='Count: $count\nAVG: $avg'>$sum $unit</x-renderer.tag></div>";
         };
     }
