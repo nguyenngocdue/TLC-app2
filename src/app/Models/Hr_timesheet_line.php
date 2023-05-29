@@ -80,12 +80,14 @@ class Hr_timesheet_line extends ModelExtended
             ['dataIndex' => 'owner_id', 'title' => 'Full Name', 'value_as_user_id' => true, 'cloneable' => !true],
 
             ['dataIndex' => 'ts_date', 'cloneable' => true],
-            ['dataIndex' => 'ts_hour', 'cloneable' => true],
             ['dataIndex' => 'project_id', 'cloneable' => true],
             ['dataIndex' => 'sub_project_id', 'cloneable' => true],
+            ['dataIndex' => 'lod_id', 'cloneable' => true],
+            ['dataIndex' => 'discipline_id', 'cloneable' => true],
             ['dataIndex' => 'task_id', 'cloneable' => true],
             ['dataIndex' => 'sub_task_id', 'cloneable' => true],
             ['dataIndex' => 'work_mode_id', 'cloneable' => true, 'no_print' => true],
+            ['dataIndex' => 'ts_hour', 'cloneable' => true],
             ['dataIndex' => 'remark', 'cloneable' => true],
             ['dataIndex' => 'status', 'cloneable' => true, 'no_print' => true, 'invisible' => true],
         ];

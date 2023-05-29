@@ -24,6 +24,16 @@
         "column_name": "owner_id",
         "new": "true"
     },
+    "_getLods()": {
+        "name": "_getLods()",
+        "column_name": "getLods()",
+        "new": "true"
+    },
+    "_getDisciplines()": {
+        "name": "_getDisciplines()",
+        "column_name": "getDisciplines()",
+        "new": "true"
+    },
     "_status": {
         "name": "_status",
         "column_name": "status",

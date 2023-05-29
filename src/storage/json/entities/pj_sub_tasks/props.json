@@ -56,12 +56,12 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_task_id": {
-        "name": "_task_id",
-        "column_name": "task_id",
-        "column_type": "bigint",
-        "label": "Parent Task",
-        "control": "dropdown",
+    "_getParentTasks()": {
+        "name": "_getParentTasks()",
+        "column_name": "getParentTasks()",
+        "column_type": "oracy_prop",
+        "label": "Parent Tasks",
+        "control": "dropdown_multi",
         "align": "",
         "col_span": "",
         "width": "",
