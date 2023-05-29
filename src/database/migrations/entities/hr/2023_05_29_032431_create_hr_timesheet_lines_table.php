@@ -1,0 +1,51 @@
+<?php
+
+use App\BigThink\BlueprintExtended;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        $schema = DB::connection()->getSchemaBuilder();
+        $schema->blueprintResolver(function ($table, $callback) {
+            return new BlueprintExtended($table, $callback);
+        });
+
+        $schema->create('hr_timesheet_lines', function (BlueprintExtended $table) {
+            $table->id();
+            $table->unsignedBigInteger("hr_timesheet_id");
+            // $table->unsignedBigInteger("user_id")->nullable();
+            $table->date("ts_date")->nullable();
+            $table->float("ts_hour")->nullable();
+            $table->unsignedBigInteger("project_id")->nullable();
+            $table->unsignedBigInteger("sub_project_id")->nullable();
+            $table->unsignedBigInteger("lod_id")->nullable();
+            $table->unsignedBigInteger("discipline_id")->nullable();
+            $table->unsignedBigInteger("task_id")->nullable();
+            $table->unsignedBigInteger("sub_task_id")->nullable();
+
+            $table->unsignedBigInteger("work_mode_id")->nullable();
+            $table->text("remark")->nullable();
+            $table->orderable();
+            $table->appendCommonFields();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('hr_timesheet_lines');
+    }
+};

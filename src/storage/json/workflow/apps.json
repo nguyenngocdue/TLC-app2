@@ -192,6 +192,35 @@
         "icon": null,
         "apply_approval_tree": "true"
     },
+    "hr_timesheet": {
+        "name": "hr_timesheet",
+        "package": "hr_&_admin",
+        "sub_package": "hr_admin",
+        "title": "Hr Timesheet",
+        "nickname": "ts",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null,
+        "apply_approval_tree": "true",
+        "show_in_my_view": "true"
+    },
+    "hr_timesheet_line": {
+        "name": "hr_timesheet_line",
+        "package": "hr_&_admin",
+        "sub_package": "hr_admin",
+        "title": "Hr Timesheet Line",
+        "nickname": "tsl",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": null,
+        "apply_approval_tree": "true"
+    },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
         "package": "compliance",
@@ -366,6 +395,34 @@
         "show_renderer": "props-renderer",
         "hidden_navbar": "true",
         "icon": "<i class=\"fa-regular fa-circle-sort-up\"><\/i>"
+    },
+    "pj_sub_task": {
+        "name": "pj_sub_task",
+        "package": "hr_&_admin",
+        "sub_package": "project_management",
+        "title": "Sub Tasks",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": null
+    },
+    "pj_task": {
+        "name": "pj_task",
+        "package": "hr_&_admin",
+        "sub_package": "project_management",
+        "title": "Tasks",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": null
     },
     "pj_unit": {
         "name": "pj_unit",

@@ -19,6 +19,12 @@ return [
             'showBtnRecalculate' => 1,
         ],
     ],
+    'hr_timesheets' => [
+        'hr_timesheet_lines' => [
+            // 'showBtnAddFromAList' => 1,
+            // 'showBtnRecalculate' => 1,
+        ],
+    ],
 
     'ghg_sheets' => [
         'ghg_lines' => [],
