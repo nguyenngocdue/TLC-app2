@@ -1,3 +1,6 @@
+{{-- @if($readOnly)
+<div class="p-2">{{$cell??$slot}}</div>
+@endif --}}
 <input
     @readonly($readOnly)
     component="editable/number4"
@@ -7,8 +10,7 @@
     step='any' 
     type="number"
     placeholder="{{$placeholder}}" 
-    class="{{$classList}} {{$bgColor}}"
-    {{-- onChange="{!! $onChange !!};changeBgColor(this,'{{$table01Name}}')" --}}
+    class="{{$classList}} {{$bgColor}} {{$readOnly?"hidden1":""}}"
     >
 <script>
     $("[id='{{$name}}']").on('change', function(e, batchLength){

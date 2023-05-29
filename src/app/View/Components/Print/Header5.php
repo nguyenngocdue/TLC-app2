@@ -29,7 +29,7 @@ class Header5 extends Component
     {
         $dataSource = $this->dataSource;
         $tableOfContents = $this->tableOfContents;
-        $name = $tableOfContents ? $dataSource->name : $dataSource->description;
+        $name = $tableOfContents ? $dataSource->name : $dataSource->name;
         $nameRenderOfPageInfo = $dataSource->getQaqcInspTmpl->name ?? '';
         $projectName = $dataSource->getProject->name ?? '';
         $subProjectName = $dataSource->getSubProject->name ?? '';

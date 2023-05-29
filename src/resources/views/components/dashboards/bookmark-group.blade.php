@@ -1,7 +1,7 @@
-@php $classList = "p-1 border border-gray-200 text-left w-40 rounded text-blue-500 hover:text-gray-200 hover:bg-blue-500" @endphp
+@php $classList = "p-1 border border-gray-200 text-left 1w-40 rounded text-blue-500 hover:text-gray-200 hover:bg-blue-500" @endphp
 <x-renderer.card title="Bookmarks" icon="fa-duotone fa-bookmark">
     <div class="flex">
-        <div id="list-bookmark" class="grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-6 md:gap-4 2xl:grid-cols-10">
+        <div id="list-bookmark" class="gap-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-10">
             @foreach($arrayBookmarkFirst as $value)
             <a id="{{$value['name']}}" href="{{$value['href']}}" title="{{$value['title']}}" class="{{$classList}} block">
                 {{$value['title']}} </a>

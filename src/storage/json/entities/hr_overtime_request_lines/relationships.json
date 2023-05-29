@@ -1,6 +1,6 @@
 {
-    "_getHROTR": {
-        "name": "_getHROTR",
+    "_getHrOtr": {
+        "name": "_getHrOtr",
         "relationship": "belongsTo",
         "control_name": "hr_overtime_request_id",
         "renderer_view_all": "column",

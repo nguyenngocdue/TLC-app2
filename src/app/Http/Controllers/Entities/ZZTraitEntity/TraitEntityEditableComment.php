@@ -28,7 +28,6 @@ trait TraitEntityEditableComment
     {
         $comments = $request->input('comments');
         if (is_null($comments)) return;
-
         foreach ($comments as $line) {
             if (is_null($line['id']) && is_null($line['content'])) continue;
             // dump($line);
@@ -40,7 +39,6 @@ trait TraitEntityEditableComment
                 Comment::create($line);
             } else { //Update or Delete
                 $comment = Comment::find($line['id']);
-                // dump($line);
                 if (isset($line['toBeDeleted']) && $line['toBeDeleted'] !== 'false') {
                     // Log::info("Deleted " . $line['id']);
                     $comment->delete();

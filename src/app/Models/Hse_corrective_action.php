@@ -18,13 +18,18 @@ class Hse_corrective_action extends ModelExtended
         'getPriority' => ['belongsTo', Priority::class, 'priority_id'],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         'getUnsafeActionType' => ['belongsTo', Term::class, 'unsafe_action_type_id'],
-
         "attachment_hse_car" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
     ];
+    public function attachment_hse_car()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
 
     public function getHseIncidentReport()
     {

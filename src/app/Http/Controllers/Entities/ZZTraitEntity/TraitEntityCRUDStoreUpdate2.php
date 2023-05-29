@@ -18,6 +18,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitEntityEditableSignature;
 	use TraitValidation;
 	use TraitSendNotificationAndMail;
+	use TraitEventInspChklst;
 
 	private $debugForStoreUpdate = false;
 
@@ -155,6 +156,8 @@ trait TraitEntityCRUDStoreUpdate2
 			if ($uploadedIds) {
 				$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
 			}
+			//Fire the event "Send Mail give Monitors No and Comment"
+			$this->eventInspChklst($request, $id);
 			$this->processComments($request);
 			$this->processSignatures($request);
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
@@ -181,6 +184,7 @@ trait TraitEntityCRUDStoreUpdate2
 		// if ($this->debugForStoreUpdate) 
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
+
 		//Fire the event "Updated New Document"
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $this->type, $newStatus, $this->data);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));

@@ -21,6 +21,7 @@ class Dropdown extends Component
         private $sortBy = false,
         private $strFn = false,
         private $cell = null,
+        private $readOnly = false,
     ) {
     }
 
@@ -69,6 +70,7 @@ class Dropdown extends Component
             'cbbDataSource' => $dataSource,
             'selected' => $this->selected,
             'classList' => ClassList::DROPDOWN,
+            'readOnly' => $this->readOnly,
         ]);
     }
 }

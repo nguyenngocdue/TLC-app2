@@ -161,7 +161,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
                 'previousValue' => $previousValue,
             ]
         ));
-        broadcast(new BroadcastNotificationEvent(auth()->user()));
+        // broadcast(new BroadcastNotificationEvent(auth()->user()));
         $isDefinitionNew = $this->isDefinitionNew($currentValue);
         if (!$isDefinitionNew) {
             $this->sendMail($user, $type, $key, $previousValue, $currentValue);

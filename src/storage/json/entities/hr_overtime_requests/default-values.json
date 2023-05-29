@@ -35,9 +35,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getHROTRLines": {
-        "name": "_getHROTRLines",
-        "column_name": "getHROTRLines",
+    "_getHrOtrLines": {
+        "name": "_getHrOtrLines",
+        "column_name": "getHrOtrLines",
         "label": "",
         "validation": "required",
         "validation_regex": "",

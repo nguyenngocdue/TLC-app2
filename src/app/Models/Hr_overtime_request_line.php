@@ -17,13 +17,13 @@ class Hr_overtime_request_line extends ModelExtended
     public $nameless = true;
 
     public $eloquentParams = [
-        "getHROTR" => ['belongsTo', Hr_overtime_request::class, 'hr_overtime_request_id'],
+        "getHrOtr" => ['belongsTo', Hr_overtime_request::class, 'hr_overtime_request_id'],
         "getUser" => ['belongsTo', User::class, 'user_id'],
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getWorkMode" => ['belongsTo', Work_mode::class, 'work_mode_id'],
     ];
 
-    public function getHROTR()
+    public function getHrOtr()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

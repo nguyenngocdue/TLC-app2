@@ -41,6 +41,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "relationship": "getCheckedByField",
+        "control_name": "getMonitors1()",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getLines": {
         "name": "_getLines",
         "relationship": "hasMany",

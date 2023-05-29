@@ -25,6 +25,10 @@ class Zunit_test_01 extends ModelExtended
     protected $table = 'zunit_test_01s';
     protected static $statusless = true;
 
+    protected $casts = [
+        "text4" => "array"
+    ];
+
     public $eloquentParams = [
         "workplaceDropDown1" => ['belongsTo', Workplace::class, 'dropdown1'],
         "workplaceRadio1" => ['belongsTo', Workplace::class, 'radio1'],
