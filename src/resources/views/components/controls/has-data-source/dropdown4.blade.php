@@ -20,6 +20,7 @@
         $(document).ready(()=>{
             const params = {id:'{{$id}}', table01Name: '{{$table01Name}}', selectedJson: '{!! $selected !!}', table: '{{$table}}'}
             documentReadyDropdown4(params)
+            // console.log("Document ready dropdown4")
         })
     </script>
 @endif

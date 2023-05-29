@@ -24,6 +24,12 @@
 
     @if( isset($tableSettings['showBtnRecalculate']) && $tableSettings['showBtnRecalculate'])
         <x-renderer.button type="secondary" onClick="refreshCalculation('{{$table01Name}}')"><i class="fa-solid fa-calculator"></i> Recalculate</x-renderer.button>
+        <script>
+            $(document).ready(()=>{
+                // console.log("Recalculate")
+                refreshCalculation('{{$table01Name}}')
+            })
+        </script>
     @endif
 </div>
 
