@@ -75,6 +75,25 @@
         "duplicatable": "true",
         "new_line": "true"
     },
+    "_getHrOtrLines1": {
+        "name": "_getHrOtrLines1",
+        "column_name": "getHrOtrLines1",
+        "column_type": "eloquent_prop",
+        "label": "Total Hours",
+        "control": "relationship_renderer",
+        "align": "",
+        "col_span": "",
+        "width": "150",
+        "hidden_view_all": "",
+        "hidden_edit": "true",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",

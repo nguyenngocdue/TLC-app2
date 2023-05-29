@@ -83,6 +83,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getHrOtrLines1": {
+        "name": "_getHrOtrLines1",
+        "relationship": "hasMany",
+        "control_name": "getHrOtrLines1",
+        "renderer_view_all": "agg_sum",
+        "renderer_view_all_param": "total_time",
+        "renderer_view_all_unit": "hour",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "relationship": "morphMany",
