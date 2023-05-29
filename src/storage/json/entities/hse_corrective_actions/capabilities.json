@@ -233,21 +233,21 @@
         "name": "hse_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "closed": ""
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
     },
     "hse_member": {
         "name": "hse_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "closed": ""
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
     },
     "it_manager": {
         "name": "it_manager",
