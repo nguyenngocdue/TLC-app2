@@ -7,10 +7,10 @@ use Illuminate\Support\Str;
 
 trait TraitEntityCRUDShowProject
 {
-	public function showProject($id)
+	public function showProject($id, $trashed)
 	{
 		$modelPath = Str::modelPathFrom($this->type);
-		$project = $modelPath::find($id);
+		$project = $trashed ? $modelPath::withTrashed()->find($id) : $modelPath::find($id);
 		$appName = LibApps::getFor($this->type)['title'];
 		return view('dashboards.pages.entity-show-project', [
 			'projectId' => $id,

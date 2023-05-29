@@ -8,10 +8,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 trait TraitEntityCRUDShowQRApp
 {
-	public function showQRApp($slug)
+	public function showQRApp($slug, $trashed)
 	{
 		$modelCurrent = new ($this->data);
-		$dataSource = $modelCurrent::where('slug', $slug)->first();
+		$dataSource = $trashed ? $modelCurrent::withTrashed()->where('slug', $slug)->first() : $modelCurrent::where('slug', $slug)->first();
 		if (!$dataSource) {
 			throw new NotFoundHttpException();
 		}

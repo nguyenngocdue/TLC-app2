@@ -4,7 +4,6 @@
 @section('title', "Show" )
 
 @section('content')
-{{-- @dd($dataSource) --}}
 <x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/>
 @php
         switch ($valueOptionPrint) {

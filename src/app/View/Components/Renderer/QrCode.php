@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Utils\Support\CurrentRoute;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
@@ -56,7 +57,7 @@ class QrCode extends Component
     private function checkRouteShowUsingIdOrSlug($type, $params)
     {
         // $routeName = $isSlug ? "{$type}.showQRApp" : "{$type}.show";
-        $routeName = "{$type}.show";
+        $routeName = CurrentRoute::getCurrentIsTrashed() ? "{$type}.showTrashed" : "{$type}.show";
         $routeExits =  (Route::has($routeName));
         $href =  $routeExits ? route($routeName, $params) : "#";
         return [$routeExits, $href];

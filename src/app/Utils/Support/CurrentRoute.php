@@ -67,4 +67,9 @@ class CurrentRoute
         $str = $parserStr[Count($parserStr) - 1];
         return substr($str, 0, strpos($str, '@'));
     }
+    public static function getCurrentIsTrashed()
+    {
+        $result = Route::current()->action['controller'];
+        return substr($result, strpos($result, '@') + 1) === 'indexTrashed';
+    }
 }

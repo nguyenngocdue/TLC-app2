@@ -65,23 +65,27 @@ class EntityCRUDController extends Controller
 		return $this->type;
 	}
 
-	public function show($id_or_slug)
+	public function show($id_or_slug, $trashed = false)
 	{
 		$app = LibApps::getFor($this->type);
 		$show_renderer = $app['show_renderer'];
 		switch ($show_renderer) {
 			case 'project-renderer':
-				return $this->showProject($id_or_slug);
+				return $this->showProject($id_or_slug, $trashed);
 			case 'checklist-renderer':
-				return $this->showChklst($id_or_slug);
+				return $this->showChklst($id_or_slug, $trashed);
 			case 'checklist-sheet-renderer':
-				return $this->showChklstSht($id_or_slug);
+				return $this->showChklstSht($id_or_slug, $trashed);
 			case 'props-renderer':
-				return $this->showProps($id_or_slug);
+				return $this->showProps($id_or_slug, $trashed);
 			case 'qr-app-renderer':
-				return $this->showQRApp($id_or_slug);
+				return $this->showQRApp($id_or_slug, $trashed);
 			default:
 				dump("Unknown how to render $show_renderer.");
 		}
+	}
+	public function showTrashed($id_or_slug)
+	{
+		$this->show($id_or_slug, true);
 	}
 }

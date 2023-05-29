@@ -11,9 +11,9 @@ trait TraitEntityCRUDShowChklstSht
     use TraitSupportEntityShow;
     use TraitGetOptionPrint;
 
-    public function showChklstSht($id)
+    public function showChklstSht($id, $trashed)
     {
-        $entity = ($this->data)::findOrFail($id);
+        $entity = $trashed ? ($this->data)::withTrashed()->findOrFail($id) : ($this->data)::findOrFail($id);
         $entityLines = $entity->getLines->sortBy('order_no');
         $entityShtSigs = $entity->getShtSigs;
         $tableDataSource = $this->transformDataSource($entityLines, $entityShtSigs);

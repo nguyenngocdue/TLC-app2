@@ -10,9 +10,9 @@ trait TraitEntityCRUDShowChklst
 {
     use TraitSupportEntityShow;
     use TraitGetOptionPrint;
-    public function showChklst($id)
+    public function showChklst($id, $trashed)
     {
-        $entity = ($this->data)::findOrFail($id);
+        $entity = $trashed ? ($this->data)::withTrashed()->findOrFail($id) : ($this->data)::findOrFail($id);;
         $entityShts = $entity->getSheets;
         foreach ($entityShts as $value) {
             $tableDataSource[] = $this->transformDataSource($value->getLines->sortBy('order_no'), $value->getShtSigs);

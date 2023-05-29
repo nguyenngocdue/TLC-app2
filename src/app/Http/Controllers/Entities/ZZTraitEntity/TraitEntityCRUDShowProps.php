@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 trait TraitEntityCRUDShowProps
 {
 	use TraitGetOptionPrint;
-	public function showProps($id)
+	public function showProps($id, $trashed)
 	{
 		$blackList = ['z_divider', 'z_page_break'];
 		$props = SuperProps::getFor($this->type)['props'];
@@ -35,10 +35,8 @@ trait TraitEntityCRUDShowProps
 				}
 			}
 		}
-		$modelCurrent = new ($this->data);
 		$dataSource = [];
-		$dataModelCurrent = $modelCurrent::findOrFail($id);
-
+		$dataModelCurrent = $trashed ? ($this->data)::onlyTrashed()->findOrFail($id) : ($this->data)::findOrFail($id);
 		foreach ($props as $key => $prop) {
 			if ($prop['column_type'] !== 'static') {
 				if (empty($prop['relationships'])) {
@@ -59,7 +57,7 @@ trait TraitEntityCRUDShowProps
 			}
 		}
 		$valueOptionPrint = $this->getValueOptionPrint();
-		return view('dashboards.pages.entity-show-props', [
+		$params =  [
 			'propsTree' => array_values($node),
 			'dataSource' => $dataSource,
 			'type' => $this->type,
@@ -70,6 +68,7 @@ trait TraitEntityCRUDShowProps
 			'classListOptionPrint' => ClassList::DROPDOWN,
 			'valueOptionPrint' => $valueOptionPrint,
 			'layout' => $this->getLayoutPrint($valueOptionPrint),
-		]);
+		];
+		return view('dashboards.pages.entity-show-props', $params);
 	}
 }

@@ -16,8 +16,10 @@ Route::group([
         $entities = Entities::getAll();
         foreach ($entities as $entity) {
             $entityName = Str::getEntityName($entity);
+            $entitySingular = Str::singular($entityName);
             Route::resource("{$entityName}", ViewAllController::class)->only('index');
             Route::get("{$entityName}_trashed", [ViewAllController::class, 'indexTrashed'])->name("{$entityName}.trashed");
+            Route::get("{$entityName}_trashed/{{$entitySingular}}", [EntityCRUDController::class, 'showTrashed'])->name("{$entityName}.showTrashed");
             Route::resource("{$entityName}", EntityCRUDController::class)->only('create', 'store', 'edit', 'update', 'show', 'destroy');
             Route::delete("{$entityName}", [EntityCRUDController::class, "destroyMultiple"])->name("{$entityName}.destroyMultiple");
 

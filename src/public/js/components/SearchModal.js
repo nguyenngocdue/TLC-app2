@@ -12,12 +12,16 @@ const renderHtml = (apps, url, topDrawer) => {
         dataTopDrawer.innerHTML = ``
         let resultHtmlTopDrawer = ``
         for (const property in apps) {
+            let totalPackage = 0
             const package = property
             let html = ``
             for (const value in apps[property]) {
                 let htmlTopDrawer = ``
                 const sub_package = value
+                let total = 0
                 apps[property][value].forEach((app) => {
+                    total += app.click_count ? app.click_count : 0
+                    const status = capitalize(app.status ?? '')
                     const isBookmark = app.bookmark
                         ? 'text-blue-500'
                         : 'text-gray-300'
@@ -28,6 +32,9 @@ const renderHtml = (apps, url, topDrawer) => {
                         : ''
                     const count = app.click_count
                         ? `<span class="inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${app.click_count}</span>`
+                        : ''
+                    const statusHtml = status
+                        ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>`
                         : ''
                     htmlTopDrawer += `
                     <li>
@@ -48,6 +55,7 @@ const renderHtml = (apps, url, topDrawer) => {
                                     <span class="flex-1 ml-3 whitespace-nowrap">${
                                         app.title
                                     }</span>
+                                    ${statusHtml}
                             </a>
                             ${count}
                             ${isCreate}
@@ -55,15 +63,22 @@ const renderHtml = (apps, url, topDrawer) => {
                         </div>
                     </li>`
                 })
+                totalPackage += total
+                const totalHtml = total
+                    ? '<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${total}</span>'
+                    : ''
                 html += `<li class='px-2'>
-                                <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${sub_package}</p>
+                                <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${sub_package} ${totalHtml}</p>
                                     <ul class="space-y-1">
                                        ${htmlTopDrawer}
                                     </ul>
                                 </li>`
             }
+            const totalPackageHtml = totalPackage
+                ? '<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${totalPackage}</span>'
+                : ''
             resultHtmlTopDrawer += `<div class='px-2'>
-                                <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${package}</p>
+                                    <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${package} ${totalPackageHtml}</p>
                                     <ul class="grid grid-rows-2 grid-flow-col">
                                        ${html}
                                     </ul>
@@ -143,6 +158,7 @@ function groupByFil(arr, filGroup) {
 }
 function groupByFilHasSubFill(arr, filGroup, subFilGroup) {
     const result = arr.reduce((group, product) => {
+        console.log(group, product)
         const groupKey = product[filGroup]
         const subGroupKey = product[subFilGroup]
         if (!group[groupKey]) {
