@@ -65,7 +65,7 @@ const renderHtml = (apps, url, topDrawer) => {
                 })
                 totalPackage += total
                 const totalHtml = total
-                    ? '<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${total}</span>'
+                    ? `<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${total}</span>`
                     : ''
                 html += `<li class='px-2'>
                                 <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${sub_package} ${totalHtml}</p>
@@ -75,7 +75,7 @@ const renderHtml = (apps, url, topDrawer) => {
                                 </li>`
             }
             const totalPackageHtml = totalPackage
-                ? '<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${totalPackage}</span>'
+                ? `<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${totalPackage}</span>`
                 : ''
             resultHtmlTopDrawer += `<div class='px-2'>
                                     <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${package} ${totalPackageHtml}</p>

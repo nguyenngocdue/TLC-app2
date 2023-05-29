@@ -1,4 +1,3 @@
-@if(app()->isLocal() || app()->isTesting() )
 @php
     $idInput = $type.'_checkbox_all';
     $nameInput = $type. '[]';
@@ -18,4 +17,3 @@
     <x-renderer.button size='xs' type='danger' onClick="actionMultiple('{{$type}}','{{$urlDestroy}}','deleted')" ><i class='fa fa-trash'></i> Delete</x-renderer.button>
     @endif
 </div>
-@endif
