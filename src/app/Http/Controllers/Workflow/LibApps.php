@@ -12,10 +12,13 @@ class LibApps extends AbstractLib
 
     private static $singleton = null;
 
+    private static $singleton_permission = null;
+
+
     public static function getAllByPermission()
     {
         $permissions = CurrentUser::getPermissions();
-        if (!isset(static::$singleton)) {
+        if (!isset(static::$singleton_permission)) {
             $lipApps = parent::getAll();
             $result = [];
             foreach ($lipApps as $key => &$app) {
@@ -31,20 +34,23 @@ class LibApps extends AbstractLib
                     $result[$key] = $app;
                 }
             }
-            static::$singleton = $result;
+            static::$singleton_permission = $result;
         }
-        return static::$singleton;
+        return static::$singleton_permission;
     }
     public static function getAll()
     {
         $result = parent::getAll();
-        foreach ($result as &$app) {
-            $app['package_rendered'] = isset($app['package']) ? Str::appTitle($app['package']) : "unknown package";
-            $app['sub_package_rendered'] = isset($app['sub_package']) ? Str::appTitle($app['sub_package']) : "unknown sub_package";
-            $route = Str::plural($app['name']) . ".index";
-            $app['href'] = Route::has($route) ? route($route) /*. "#Found:" . $route*/ : "#RouteNotFound:$route";
+        if (!isset(static::$singleton)) {
+            foreach ($result as &$app) {
+                $app['package_rendered'] = isset($app['package']) ? Str::appTitle($app['package']) : "unknown package";
+                $app['sub_package_rendered'] = isset($app['sub_package']) ? Str::appTitle($app['sub_package']) : "unknown sub_package";
+                $route = Str::plural($app['name']) . ".index";
+                $app['href'] = Route::has($route) ? route($route) /*. "#Found:" . $route*/ : "#RouteNotFound:$route";
+            }
+            static::$singleton = $result;
         }
-        return $result;
+        return static::$singleton;
     }
     private static function checkEntityHasPermission($type, $entity, $permissions)
     {

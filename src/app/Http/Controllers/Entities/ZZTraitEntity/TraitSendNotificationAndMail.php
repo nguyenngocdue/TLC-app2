@@ -12,10 +12,9 @@ use Illuminate\Support\Facades\Auth;
 
 trait TraitSendNotificationAndMail
 {
-    private function eventCreatedNotificationAndMail($fields, $id, $status, $type, $classType)
+    private function eventCreatedNotificationAndMail($fields, $id, $status, $type, $classType, $toastrResult)
     {
-        // dd($fields);
-        if ($status) {
+        if ($status && empty($toastrResult)) {
             $fields = $this->addEntityType($fields, 'id', $id);
             $fields = $this->addEntityType($fields, 'status', $status);
             try {
@@ -27,9 +26,9 @@ trait TraitSendNotificationAndMail
             }
         }
     }
-    private function eventUpdatedNotificationAndMail($previousValue, $fields, $type, $status, $classType)
+    private function eventUpdatedNotificationAndMail($previousValue, $fields, $type, $status, $classType, $toastrResult)
     {
-        if ($status) {
+        if ($status && empty($toastrResult)) {
             try {
                 $previousValue = $this->addEntityType($previousValue, 'entity_type', $type);
                 $currentValue = $this->addEntityType($fields, 'entity_type', $type);

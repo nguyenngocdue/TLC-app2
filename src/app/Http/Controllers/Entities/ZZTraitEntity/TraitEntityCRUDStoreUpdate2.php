@@ -94,7 +94,7 @@ trait TraitEntityCRUDStoreUpdate2
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Created New Document"
-		$this->eventCreatedNotificationAndMail($theRow->getAttributes(), $theRow->id, $newStatus, $this->type, $this->data);
+		$this->eventCreatedNotificationAndMail($theRow->getAttributes(), $theRow->id, $newStatus, $this->type, $this->data, $toastrResult);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
@@ -184,9 +184,8 @@ trait TraitEntityCRUDStoreUpdate2
 		// if ($this->debugForStoreUpdate) 
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
-
 		//Fire the event "Updated New Document"
-		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $this->type, $newStatus, $this->data);
+		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $this->type, $newStatus, $this->data, $toastrResult);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 }

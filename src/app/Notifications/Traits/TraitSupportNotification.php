@@ -3,6 +3,7 @@
 namespace App\Notifications\Traits;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Mail\SendMailCreateNew;
 use App\Models\User;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Route;
@@ -18,17 +19,17 @@ trait TraitSupportNotification
         $typePlural = Str::plural($type);
         $routeName = "{$typePlural}.edit";
         $routeExits = (Route::has($routeName));
-        $href =  $routeExits ? route($routeName, $id) : "#";
+        $url =  $routeExits ? route($routeName, $id) : "#";
         $nameUserCreated = $notifiable['name'];
         $libApps = LibApps::getFor($type);
         $nickNameEntity = strtoupper($libApps['nickname'] ?? $type);
         $titleEntity = $libApps['title'];
         $subjectMail = '[' . $nickNameEntity . '/' . $id . '] ' . $nameUserCreated . ' - ' . $titleEntity . ' - ' . config("company.name") . ' APP';
-        return (new MailMessage)
+        return (new SendMailCreateNew([
+            'name' => $nameUserCreated,
+            'url' => $url,
+        ]))
             ->subject($subjectMail)
-            ->greeting('Dear ' . $nameUserCreated . ',')
-            ->line('This document has been created by ' . $nameUserCreated . '.')
-            ->action('View Document', url($href))
-            ->line('Thank you for using our application!');
+            ->bcc(env('MAIL_ARCHIVE_BCC', 'info@gamil.com'));
     }
 }
