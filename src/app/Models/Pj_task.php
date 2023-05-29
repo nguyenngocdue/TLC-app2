@@ -6,17 +6,26 @@ use App\BigThink\ModelExtended;
 
 class Pj_task extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'description', 'status'];
+    protected $fillable = ['id', 'name', 'description', 'status', 'owner_id'];
 
     protected static $statusless = true;
 
-    public $eloquentParams = [
-        'getDiscipline' => ['belongsTo', User_discipline::class, 'discipline_id'],
+    public $eloquentParams = [];
+
+    public $oracyParams = [
+        "getDisciplines()" => ["getCheckedByField", User_discipline::class],
+        "getLods()" => ["getCheckedByField", Term::class],
     ];
 
-    public function getDiscipline()
+    public function getDisciplines()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    public function getLods()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

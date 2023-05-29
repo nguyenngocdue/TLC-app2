@@ -6,17 +6,17 @@ use App\BigThink\ModelExtended;
 
 class Pj_sub_task extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'description', 'status'];
+    protected $fillable = ['id', 'name', 'description', 'status', 'owner_id'];
 
     protected static $statusless = true;
 
-    public $eloquentParams = [
-        'getTask' => ['belongsTo', Pj_task::class, 'task_id'],
+    public $oracyParams = [
+        "getParentTasks()" => ["getCheckedByField", Pj_task::class],
     ];
 
-    public function getTask()
+    public function getParentTasks()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

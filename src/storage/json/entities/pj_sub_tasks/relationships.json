@@ -1,18 +1,4 @@
 {
-    "_getTask": {
-        "name": "_getTask",
-        "relationship": "belongsTo",
-        "control_name": "task_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "dropdown",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_getOwner": {
         "name": "_getOwner",
         "relationship": "belongsTo",
@@ -37,6 +23,20 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getParentTasks()": {
+        "name": "_getParentTasks()",
+        "relationship": "getCheckedByField",
+        "control_name": "getParentTasks()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
