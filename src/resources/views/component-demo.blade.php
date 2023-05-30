@@ -10,13 +10,14 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
 <x-renderer.heading level=3 align='center'><a href="/components">Components</a></x-renderer.heading>
 
 <!-- Tabs -->
+<div class="bg-gray-100 h-screen">
 <x-renderer.tab-pane class="mx-2" id="e07ff0dbf9a2afd616aca8e7a85921e2" :tabs="$tabPaneDataSource">
     <!-- Tab Contents -->
     <div id="tab-contents-e07ff0dbf9a2afd616aca8e7a85921e2">
-        <div id="static" class="p-4 hidden">
+        <div id="static" class="bg-white p-4 hidden">
             <x-demo.demo-static :tagColumns="$tagColumns" :tagDataSource="$tagDataSource" :gridDataSource="$gridDataSource" />
         </div>
-        <div id="data_display" class="p-4 hidden">
+        <div id="data_display" class="bg-white p-4 hidden">
             <x-demo.demo-data-display 
                     :tableColumns="$tableColumns" 
                     :tableDataSource="$tableDataSource" 
@@ -25,29 +26,30 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
                     :tableColumnsForRegister="$tableColumnsForRegister"
                     />
         </div>
-        <div id="data_entry" class="p-4 hidden">
+        <div id="data_entry" class="bg-white p-4 hidden">
             <x-demo.demo-data-entry :dropdownCell="$dropdownCell" />
         </div>
-        <div id="attachments" class="p-4 hidden">
+        <div id="attachments" class="bg-white p-4 hidden">
             <x-demo.demo-attachment-comment :attachmentData="$attachmentData" :attachmentData2="$attachmentData2" :dataComment="$dataComment" />
         </div>
-        <div id="editable_tables" class="p-4 hidden">
+        <div id="editable_tables" class="bg-white p-4 hidden">
             <x-demo.demo-data-table :tableEditableColumns="$tableEditableColumns" :tableDataSource="$tableDataSource" />
         </div>
-        <div id="navigation" class="p-4 hidden">
+        <div id="navigation" class="bg-white p-4 hidden">
             <x-demo.demo-navigation :tabData1="$tabData1" :tabData2="$tabData2" />
         </div>
-        <div id="feedbacks" class="p-4 hidden">
+        <div id="feedbacks" class="bg-white p-4 hidden ">
             <x-demo.demo-feedback :dataSourceProgressBar="$dataSourceProgressBar"/>
         </div>
-        <div id="listeners" class="p-4 hidden1">
+        <div id="listeners" class="bg-white p-4 hidden1">
             <x-demo.demo-listener :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
         </div>
-        <div id="modecontrols" class="p-4 hidden">
+        <div id="modecontrols" class="bg-white p-4 hidden">
             <x-demo.demo-modes-control :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
         </div>
     </div>
 </x-renderer.tab-pane>
+</div>
 
 @once
 <script type="text/javascript">
@@ -64,6 +66,7 @@ const initTab = (tabId) => {
                 tabTogglers[i].parentElement.classList.add("bg-gray-200");
                 tabContents.children[i].classList.remove("hidden");
                 if ("#" + tabContents.children[i].id === tabName) continue;
+                //Hide all children of other tabs
                 tabContents.children[i].classList.add("hidden");
             }
             e.target.parentElement.classList.add("border-t", "border-r", "border-l", "-mb-px", "bg-white");
