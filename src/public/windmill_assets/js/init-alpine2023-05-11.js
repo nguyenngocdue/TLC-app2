@@ -1,4 +1,4 @@
-function data() {
+function alpineData() {
     function getThemeFromLocalStorage() {
         // if user already changed the theme, use it
         if (window.localStorage.getItem('dark')) {

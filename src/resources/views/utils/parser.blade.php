@@ -1,4 +1,4 @@
-@extends('layouts.applean')
+@extends('layouts.applearn')
 @section('content')
 
 <form method="post" >

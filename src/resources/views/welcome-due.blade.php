@@ -1,4 +1,4 @@
-@extends('layouts.applean')
+@extends('layouts.applearn')
 
 <!-- component -->
 <!-- This is an example component -->

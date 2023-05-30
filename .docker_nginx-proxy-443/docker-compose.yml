@@ -8,5 +8,6 @@ services:
       - "443:443" # wp ----> wordpress
     volumes:
       - ./log:/var/log/nginx
+      - ../.docker_configs/certs:/etc/ssl/certs
 networks:
   webserver:

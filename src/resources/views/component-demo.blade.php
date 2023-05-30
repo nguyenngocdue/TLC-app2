@@ -1,4 +1,4 @@
-@extends('layouts.applean')
+@extends('layouts.applearn')
 @section('topTitle', 'Component Demo')
 
 @section('content')

@@ -1,4 +1,4 @@
-@extends('layouts.applean')
+@extends('layouts.applearn')
 @section('content')
 <div class="pt-12">
     <h1 class="mb-5 text-center text-lg font-semibold text-black sm:text-2xl md:text-3xl lg:text-4xl">Live anywhere</h1>
