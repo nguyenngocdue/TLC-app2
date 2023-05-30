@@ -1,4 +1,18 @@
 {
+    "_getUser": {
+        "name": "_getUser",
+        "relationship": "belongsTo",
+        "control_name": "user_id",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getWorkMode": {
         "name": "_getWorkMode",
         "relationship": "belongsTo",

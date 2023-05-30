@@ -19,6 +19,11 @@
         "column_name": "timesheetable",
         "new": ""
     },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
+        "new": "true"
+    },
     "_ts_date": {
         "name": "_ts_date",
         "column_name": "ts_date",

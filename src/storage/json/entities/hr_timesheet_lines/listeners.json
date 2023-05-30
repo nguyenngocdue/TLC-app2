@@ -41,6 +41,20 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_task_id": {
+        "name": "_task_id",
+        "column_name": "task_id",
+        "listen_action": "reduce",
+        "triggers": "lod_id, discipline_id",
+        "listen_to_fields": "task_id, task_id",
+        "listen_to_attrs": "getLods(), getDisciplines()",
+        "attrs_to_compare": "id",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_sub_task_id": {
         "name": "_sub_task_id",
         "column_name": "sub_task_id",
@@ -111,6 +125,20 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_ts_date": {
         "name": "_ts_date",
         "column_name": "ts_date",
@@ -156,20 +184,6 @@
     "_discipline_id": {
         "name": "_discipline_id",
         "column_name": "discipline_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_task_id": {
-        "name": "_task_id",
-        "column_name": "task_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

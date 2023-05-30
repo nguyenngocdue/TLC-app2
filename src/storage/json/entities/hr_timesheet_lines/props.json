@@ -75,6 +75,25 @@
         "duplicatable": "",
         "new_line": ""
     },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
+        "column_type": "bigint",
+        "label": "Full Name",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "",
+        "width": "150",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "true",
+        "save_on_change": "true",
+        "duplicatable": "",
+        "new_line": ""
+    },
     "_ts_date": {
         "name": "_ts_date",
         "column_name": "ts_date",
