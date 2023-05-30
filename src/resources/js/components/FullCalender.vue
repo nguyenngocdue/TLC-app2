@@ -19,7 +19,7 @@ export default {
                 plugins: [dayGrid, timeGrid, list, multiMonth, interaction],
                 initialView: 'dayGridMonth',
                 headerToolbar: {
-                    left: 'prev, next today',
+                    left: 'prev next today',
                     center: 'title',
                     right: 'timeGridDay,timeGridWeek,dayGridMonth,multiMonthYear,listWeek',
                 },
