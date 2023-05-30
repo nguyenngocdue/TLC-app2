@@ -58,6 +58,7 @@ class Sub_project extends ModelExtended
             ['dataIndex' => 'id'],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'description'],
+            ['dataIndex' => 'status'],
         ];
     }
 }
