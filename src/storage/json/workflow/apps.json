@@ -192,20 +192,6 @@
         "icon": null,
         "apply_approval_tree": "true"
     },
-    "hr_timesheet": {
-        "name": "hr_timesheet",
-        "package": "hr_&_admin",
-        "sub_package": "hr_admin",
-        "title": "Hr Timesheet",
-        "nickname": "ts",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "icon": null,
-        "apply_approval_tree": "true",
-        "show_in_my_view": "true"
-    },
     "hr_timesheet_line": {
         "name": "hr_timesheet_line",
         "package": "hr_&_admin",
@@ -220,6 +206,34 @@
         "hidden_navbar": "true",
         "icon": null,
         "apply_approval_tree": "true"
+    },
+    "hr_timesheet_officer": {
+        "name": "hr_timesheet_officer",
+        "package": "hr_&_admin",
+        "sub_package": "hr_admin",
+        "title": "Timesheet Office Staff",
+        "nickname": "tso",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
+        "apply_approval_tree": "true",
+        "show_in_my_view": "true"
+    },
+    "hr_timesheet_worker": {
+        "name": "hr_timesheet_worker",
+        "package": "hr_&_admin",
+        "sub_package": "hr_admin",
+        "title": "Timesheet Workers",
+        "nickname": "tsw",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null,
+        "apply_approval_tree": "true",
+        "show_in_my_view": "true"
     },
     "hse_corrective_action": {
         "name": "hse_corrective_action",

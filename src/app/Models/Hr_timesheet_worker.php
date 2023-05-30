@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\BigThink\ModelExtended;
 
-class Hr_timesheet extends ModelExtended
+class Hr_timesheet_worker extends ModelExtended
 {
     protected $fillable = ['id', 'name', 'week', 'team_id', 'assignee_1',  'owner_id', 'status'];
     public $nameless = true;
@@ -12,7 +12,7 @@ class Hr_timesheet extends ModelExtended
     public $eloquentParams = [
         "getAssignee1" => ["belongsTo", User::class, 'assignee_1'],
         'getUserTeam' => ['belongsTo', User_team_ot::class, 'team_id'],
-        'getHrTsLines' => ['hasMany', Hr_timesheet_line::class, 'hr_timesheet_id'],
+        'getHrTsLines' => ['morphMany', Hr_timesheet_line::class, 'timesheetable', 'timesheetable_type', 'timesheetable_id'],
 
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];

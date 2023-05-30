@@ -4,10 +4,20 @@
         "column_name": "id",
         "new": "true"
     },
-    "_hr_timesheet_id": {
-        "name": "_hr_timesheet_id",
-        "column_name": "hr_timesheet_id",
+    "_timesheetable_type": {
+        "name": "_timesheetable_type",
+        "column_name": "timesheetable_type",
         "new": "true"
+    },
+    "_timesheetable_id": {
+        "name": "_timesheetable_id",
+        "column_name": "timesheetable_id",
+        "new": "true"
+    },
+    "_timesheetable": {
+        "name": "_timesheetable",
+        "column_name": "timesheetable",
+        "new": ""
     },
     "_ts_date": {
         "name": "_ts_date",

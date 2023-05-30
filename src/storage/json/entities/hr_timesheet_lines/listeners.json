@@ -41,20 +41,6 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_hr_timesheet_id": {
-        "name": "_hr_timesheet_id",
-        "column_name": "hr_timesheet_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
     "_ts_date": {
         "name": "_ts_date",
         "column_name": "ts_date",

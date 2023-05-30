@@ -19,7 +19,13 @@ return [
             'showBtnRecalculate' => 1,
         ],
     ],
-    'hr_timesheets' => [
+    'hr_timesheet_officers' => [
+        'hr_timesheet_lines' => [
+            // 'showBtnAddFromAList' => 1,
+            // 'showBtnRecalculate' => 1,
+        ],
+    ],
+    'hr_timesheet_workers' => [
         'hr_timesheet_lines' => [
             // 'showBtnAddFromAList' => 1,
             // 'showBtnRecalculate' => 1,

@@ -1,18 +1,4 @@
 {
-    "_getHrTs": {
-        "name": "_getHrTs",
-        "relationship": "belongsTo",
-        "control_name": "hr_timesheet_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "text",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_getWorkMode": {
         "name": "_getWorkMode",
         "relationship": "belongsTo",
@@ -130,6 +116,20 @@
         "relationship": "belongsTo",
         "control_name": "deleted_by",
         "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_timesheetable": {
+        "name": "_timesheetable",
+        "relationship": "morphTo",
+        "control_name": "timesheetable",
+        "renderer_view_all": "parent_link",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",

@@ -19,7 +19,7 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('hr_timesheets', function (BlueprintExtended $table) {
+        $schema->create('hr_timesheet_workers', function (BlueprintExtended $table) {
             $table->id();
             $table->date("week");
             $table->unsignedBigInteger("team_id")->nullable();
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hr_timesheets');
+        Schema::dropIfExists('hr_timesheet_workers');
     }
 };
