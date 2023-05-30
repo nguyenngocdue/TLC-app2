@@ -41,6 +41,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getRouting": {
+        "name": "_getRouting",
+        "relationship": "belongsTo",
+        "control_name": "prod_routing_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getTask": {
         "name": "_getTask",
         "relationship": "belongsTo",
@@ -94,7 +108,7 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "field_id",
-        "filter_values": "10",
+        "filter_values": "139",
         "radio_checkbox_colspan": ""
     },
     "_getOwner": {
@@ -134,7 +148,7 @@
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "",
+        "control": "parent_link",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

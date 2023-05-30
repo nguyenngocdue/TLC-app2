@@ -151,6 +151,25 @@
         "duplicatable": "",
         "new_line": ""
     },
+    "_prod_routing_id": {
+        "name": "_prod_routing_id",
+        "column_name": "prod_routing_id",
+        "column_type": "bigint",
+        "label": "Routing",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
     "_lod_id": {
         "name": "_lod_id",
         "column_name": "lod_id",

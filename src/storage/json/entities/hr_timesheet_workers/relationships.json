@@ -63,7 +63,7 @@
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
+        "renderer_edit_param": "getManyLineParams_Workers",
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->float("ts_hour")->nullable();
             $table->unsignedBigInteger("project_id")->nullable();
             $table->unsignedBigInteger("sub_project_id")->nullable();
+            $table->unsignedBigInteger("prod_routing_id")->nullable();
             $table->unsignedBigInteger("lod_id")->nullable();
             $table->unsignedBigInteger("discipline_id")->nullable();
             $table->unsignedBigInteger("task_id")->nullable();
