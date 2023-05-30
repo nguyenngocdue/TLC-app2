@@ -3,7 +3,7 @@
 @section('title', "Approval Tree")
 @section('content')
 
-<x-renderer.card title="" class="mx-5 w-1/2 mt-4">
+<x-renderer.card title="" class="border p-2 mx-5 w-1/2 mt-4">
     <form>
         <div class="grid grid-cols-12 w-full">
             <div class="col-span-4 text-right px-2">

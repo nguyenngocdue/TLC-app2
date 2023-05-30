@@ -28,6 +28,11 @@
         "href": "/my-company",
         "icon_fa": "fa-duotone fa-folder-tree"
     },
+    "serializeParser": {
+        "title": "Serialize Parser",
+        "href": "/utils/parser",
+        "icon_fa": "fa-duotone fa-brackets-curly"
+    },
     "hr1": {
         "title": "External",
         "href": "-"

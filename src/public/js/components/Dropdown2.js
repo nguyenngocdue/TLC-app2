@@ -153,7 +153,7 @@ const onChangeDropdown2Reduce = (listener) => {
         attrs_to_compare,
     } = listener
     let dataSource = k[table_name]
-    if (debugListener) console.log('dataSource in k', dataSource)
+    if (debugListener) console.log('dataSource in k of', table_name, dataSource)
 
     const constraintsValues = triggers.map((trigger) =>
         getValueOfEById(trigger)

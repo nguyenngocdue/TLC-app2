@@ -23,13 +23,13 @@ class ParserController extends Controller
                     echo "$id";
                     echo "\t";
                     echo "$value";
-                    echo "\n";
+                    echo "<br/>\n";
                 }
             } else {
                 echo "$id";
                 echo "\t";
                 echo "";
-                echo "\n";
+                echo "<br/>\n";
             }
             // echo "\n";
         }

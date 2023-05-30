@@ -21,12 +21,14 @@ return new class extends Migration
 
         $schema->create('hr_timesheet_lines', function (BlueprintExtended $table) {
             $table->id();
-            $table->unsignedBigInteger("hr_timesheet_id");
-            // $table->unsignedBigInteger("user_id")->nullable();
+            $table->string("timesheetable_type")->nullable();
+            $table->unsignedBigInteger("timesheetable_id")->nullable();
+            $table->unsignedBigInteger("user_id")->nullable();
             $table->date("ts_date")->nullable();
             $table->float("ts_hour")->nullable();
             $table->unsignedBigInteger("project_id")->nullable();
             $table->unsignedBigInteger("sub_project_id")->nullable();
+            $table->unsignedBigInteger("prod_routing_id")->nullable();
             $table->unsignedBigInteger("lod_id")->nullable();
             $table->unsignedBigInteger("discipline_id")->nullable();
             $table->unsignedBigInteger("task_id")->nullable();

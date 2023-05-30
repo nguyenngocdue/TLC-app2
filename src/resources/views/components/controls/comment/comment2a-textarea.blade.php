@@ -1,4 +1,4 @@
-<x-renderer.card title="{{$title}}" class="bg-gray-100 px-2 py-0">
+<x-renderer.card title="{{$title}}" class="border bg-gray-100 px-2 py-0">
     <textarea 
         @readonly($readOnly) 
         rows="2" 

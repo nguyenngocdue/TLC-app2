@@ -47,9 +47,9 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",
@@ -59,9 +59,69 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_getProdOrders": {
+        "name": "_getProdOrders",
+        "column_name": "getProdOrders",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_getProjectMembers()": {
+        "name": "_getProjectMembers()",
+        "column_name": "getProjectMembers()",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_lod_id": {
+        "name": "_lod_id",
+        "column_name": "lod_id",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_getProdRoutings()": {
+        "name": "_getProdRoutings()",
+        "column_name": "getProdRoutings()",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",
@@ -95,28 +155,28 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_project_id": {
-        "name": "_project_id",
-        "column_name": "project_id",
-        "concept": "true",
-        "design": "true",
-        "manufacturing": "true",
-        "construction_site": "true",
-        "finished": "true",
-        "on_hold": "true",
-        "cancelled": "true",
-        "timesheet_only": "true"
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
     },
-    "_getProdOrders": {
-        "name": "_getProdOrders",
-        "column_name": "getProdOrders",
-        "concept": "true",
-        "design": "true",
-        "manufacturing": "true",
-        "construction_site": "true",
-        "finished": "true",
-        "on_hold": "true",
-        "cancelled": "true",
-        "timesheet_only": "true"
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
     }
 }

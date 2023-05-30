@@ -1,14 +1,14 @@
 {
-    "_getHrTs": {
-        "name": "_getHrTs",
+    "_getUser": {
+        "name": "_getUser",
         "relationship": "belongsTo",
-        "control_name": "hr_timesheet_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "control_name": "user_id",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "text",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
@@ -45,6 +45,20 @@
         "name": "_getSubProject",
         "relationship": "belongsTo",
         "control_name": "sub_project_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getRouting": {
+        "name": "_getRouting",
+        "relationship": "belongsTo",
+        "control_name": "prod_routing_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
@@ -108,7 +122,7 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "field_id",
-        "filter_values": "10",
+        "filter_values": "139",
         "radio_checkbox_colspan": ""
     },
     "_getOwner": {
@@ -135,6 +149,20 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_timesheetable": {
+        "name": "_timesheetable",
+        "relationship": "morphTo",
+        "control_name": "timesheetable",
+        "renderer_view_all": "parent_link",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "parent_link",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->unsignedBigInteger('project_id')->nullable();
+            $table->unsignedBigInteger('lod_id')->nullable();
             $table->appendCommonFields();
         });
         // Schema::create('sub_projects', function (Blueprint $table) {
