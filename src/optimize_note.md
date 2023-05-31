@@ -101,3 +101,6 @@ Don't query $modelPath::find($row['id']); 3.51s (1140 query, 3248 models)
 Cache to ram DB::table('many_to_many')->where: 2.81s (745 query, 3248 models)
 Query many_to_many 2 condition => only query one condition and cluster cache the results: 2.16s (286 query, 3248 models)
 $model::whereIn => query and cache whole table => 1.57s (42 query, 1752 models)
+
+OTR View All 1.38s (68 query, 2031 models)
+Cache avatar table to ram: 1.32s, (46 query, 2013 models)

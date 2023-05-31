@@ -40,7 +40,7 @@ class AvatarUser extends Component
             $href = $slot->{'href'} ?? '';
             $gray = $slot->{'resigned'} ?? '';
             $verticalLayout = $this->verticalLayout;
-            $tooltip = ($user) ? ($user->resigned ? "This person resigned on " . $user->last_date : "") : "";
+            $tooltip = ($user) ? ($user->resigned ? "This person resigned on " . $user->last_date : "") . " (#$user->id)" : "";
             return "<x-renderer.avatar-item tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
         };
     }
