@@ -2,7 +2,7 @@
 @section('topTitle', 'Welcome')
 @section('title', '')
 @section('content')
-<div class="p-10 bg-white" id="app">
+<div class="px-5 bg-white" id="app">
   <full-calender></full-calender>
 </div>
 <script src="{{ mix('js/app.js') }}" ></script>

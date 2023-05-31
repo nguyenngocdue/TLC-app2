@@ -6,18 +6,19 @@ import list from '@fullcalendar/list'
 import timeGrid from '@fullcalendar/timegrid'
 import multiMonth from '@fullcalendar/multimonth'
 import interaction from '@fullcalendar/interaction'
-
-const id = ref(10)
+import SideBarCalender from './SideBarCalender.vue'
 
 export default {
     components: {
         FullCalendar,
+        SideBarCalender,
     },
     data() {
         return {
             calendarOptions: {
+                height: 850,
                 plugins: [dayGrid, timeGrid, list, multiMonth, interaction],
-                initialView: 'dayGridMonth',
+                initialView: 'timeGridWeek',
                 headerToolbar: {
                     left: 'prev next today',
                     center: 'title',
@@ -90,26 +91,25 @@ export default {
             this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
         },
         handleDateSelect(arg) {
-            id.value++
             let cal = arg.view.calendar
             cal.unselect() // clear date selection
             cal.addEvent({
-                id: `${id.value}`,
-                title: `New Event ${id.value}`,
+                title: `No title`,
                 start: arg.startStr,
                 end: arg.endStr,
                 allDay: arg.allDay,
             })
         },
-        handleEventClick(clickInfo) {
+        handleEventClick(arg) {
             if (
                 confirm(
-                    `Are you sure you want to delete the event '${clickInfo.event.title}'`
+                    `Are you sure you want to delete the event '${arg.event.title}'`
                 )
             ) {
-                clickInfo.event.remove()
+                arg.event.remove()
             }
         },
+
         handleEvents(events) {
             this.currentEvents = events
         },
@@ -117,5 +117,12 @@ export default {
 }
 </script>
 <template>
-    <FullCalendar :options="calendarOptions" />
+    <div class="grid grid-cols-7">
+        <div class="col-span-1">
+            <SideBarCalender></SideBarCalender>
+        </div>
+        <div class="col-span-6">
+            <FullCalendar :options="calendarOptions" />
+        </div>
+    </div>
 </template>
