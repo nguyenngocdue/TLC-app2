@@ -3,4 +3,4 @@
     <x-calendar.sidebar-filter />
     <x-calendar.sidebar-task />  
 </div>
-{{-- <draggable-calendar>Task1</draggable-calendar> --}}
+<draggable-calendar>Task1</draggable-calendar>

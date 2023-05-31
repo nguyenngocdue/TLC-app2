@@ -88,7 +88,7 @@ trait HasCheckbox
                 $result[] = static::$singleton01[$key][$id];
             }
         }
-        $result = new Collection($result);
+        $result = collect($result);
 
 
         // dump($result);
@@ -115,11 +115,11 @@ trait HasCheckbox
             }
             foreach ($result0 as $line) {
                 $subKey_i = $leftId . "_" . $line->{$leftId};
-                static::$singleton02[$key][$subKey_i] = new Collection(static::$singleton02[$key][$subKey_i]);
+                static::$singleton02[$key][$subKey_i] = collect(static::$singleton02[$key][$subKey_i]);
             }
         }
         $subKey = $leftId . "_" . $thisId;
-        $result = static::$singleton02[$key][$subKey] ?? new Collection([]);
+        $result = static::$singleton02[$key][$subKey] ?? collect([]);
         return $result;
 
         // $key = $leftType . "_" . $thisClass . "_" . $leftId . "_" . $thisId;
@@ -134,7 +134,7 @@ trait HasCheckbox
     {
         $result = [];
         foreach ($dataSource as $value) $result[$value->{$rightType}][] = $value->{$rightId};
-        foreach ($result as &$line) $line = (new Collection($line))->sort();
+        foreach ($result as &$line) $line = (collect($line))->sort();
         return $result;
     }
     function groupIdsByModel($dataSource,  $rightType, $rightId, $leftKey)
@@ -157,7 +157,7 @@ trait HasCheckbox
         $result0 = static::getManyToMany($leftType, $this::class, $leftId, $this->id);
         // $result0 = DB::table('many_to_many')->where($leftType, $this::class)->where($leftId, $this->id)->get();
         // dump($result0);
-        if ($result0->count() == 0) return new Collection([]);
+        if ($result0->count() == 0) return collect([]);
         $leftKey = $leftType . "-" . $this::class . "-" . $leftId . "-" . $this->id;
         $modelPathArray = $this->groupIdsByModel($result0,  $rightType, $rightId, $leftKey);
         // $ids0 = $result0->pluck($rightId)->sort();
@@ -192,7 +192,7 @@ trait HasCheckbox
             }
         }
 
-        $result = new Collection($result);
+        $result = collect($result);
         return $result;
     }
 
