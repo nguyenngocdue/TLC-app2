@@ -1,5 +1,5 @@
 <x-renderer.card title="Tasks">
-    Task 1
-    Task 2
-    Task 3
+    <li>Task 1</li>
+        <li>Task 2</li>
+            <li>Task 3</li>
 </x-renderer.card>

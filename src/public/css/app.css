@@ -8008,6 +8008,18 @@ video {
 }
 @media (min-width: 1280px) {
 
+  .xl\:col-span-6 {
+    grid-column: span 6 / span 6;
+  }
+
+  .xl\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
+  .xl\:col-span-8 {
+    grid-column: span 8 / span 8;
+  }
+
   .xl\:mx-16 {
     margin-left: 4rem;
     margin-right: 4rem;
