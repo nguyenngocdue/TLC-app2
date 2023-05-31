@@ -46,20 +46,128 @@ trait HasCheckbox
         return !$reversedDirection ? ['doc_type', 'doc_id', 'term_type', 'term_id'] : ['term_type', 'term_id', 'doc_type', 'doc_id'];
     }
 
+    private static $singleton01 = [];
+    private static $warnings01 = [];
+    private static function getWhereIn($model, $modelPath, $column_name, $ids0)
+    {
+        $key = $modelPath . "_" . $column_name;
+
+        //Cache database table to singleton01
+        if (!isset(static::$singleton01[$key])) {
+            $result0 = $model::get();
+            foreach ($result0 as $line) {
+                static::$singleton01[$key][$line->id] = $line;
+            }
+        }
+
+        // $result = [];
+        // $subKey = $ids0->join(",");
+        // if (!isset(static::$singleton01[$key][$subKey])) {
+        //     foreach ($ids0 as $id) {
+        //         if (!isset(static::$singleton01[$key][$id])) {
+        //             if (!isset(static::$warnings01["{$id}_{$key}"])) {
+        //                 static::$warnings01["{$id}_{$key}"] = true;
+        //                 dump("Cannot find #$id for $key when run getWhereIn");
+        //             }
+        //         } else {
+        //             $result[] = static::$singleton01[$key][$id];
+        //         }
+        //     }
+        //     $result = collect($result);
+        //     static::$singleton01[$key][$subKey] = $result;
+        // }
+        // $result = static::$singleton01[$key][$subKey];
+
+
+        $result = [];
+        foreach ($ids0 as $id) {
+            if (!isset(static::$singleton01[$key][$id])) {
+                if (!isset(static::$warnings01["{$id}_{$key}"])) {
+                    static::$warnings01["{$id}_{$key}"] = true;
+                    dump("Cannot find #$id for $key when run getWhereIn");
+                }
+            } else {
+                $result[] = static::$singleton01[$key][$id];
+            }
+        }
+        $result = collect($result);
+
+
+        // dump($result);
+        // $key = $modelPath . "_" . $column_name . "_" . $ids0->join(",");
+        // if (!isset(static::$singleton01[$key])) {
+        //     static::$singleton01[$key] = $model::whereIn('id', $ids0)->get();
+        // }
+        // $result = static::$singleton01[$key];
+        return $result;
+    }
+
+    private static $singleton02 = [];
+    private static $count = 0;
+    private static function getManyToMany($leftType, $thisClass, $leftId, $thisId)
+    {
+        $key = $leftType . "_" . $thisClass;
+        if (!isset(static::$singleton02[$key])) {
+            $result0 = DB::table('many_to_many')->where($leftType, $thisClass)->get();
+            foreach ($result0 as $line) {
+                $subKey_i = $leftId . "_" . $line->{$leftId};
+                static::$singleton02[$key][$subKey_i][] = $line;
+            }
+            foreach ($result0 as $line) {
+                $subKey_i = $leftId . "_" . $line->{$leftId};
+                static::$singleton02[$key][$subKey_i] = collect(static::$singleton02[$key][$subKey_i]);
+            }
+        }
+        $subKey = $leftId . "_" . $thisId;
+        return static::$singleton02[$key][$subKey] ?? collect([]);
+
+        // $key = $leftType . "_" . $thisClass . "_" . $leftId . "_" . $thisId;
+        // if (!isset(static::$singleton02[$key])) {
+        //     static::$singleton02[$key] = DB::table('many_to_many')->where($leftType, $thisClass)->where($leftId, $thisId)->get();
+        // }
+        // return static::$singleton02[$key];
+    }
+
+    private static $singleton03 = [];
+    private function groupIdsByModelExpensive($dataSource, $rightType, $rightId, $leftKey = null)
+    {
+        $result = [];
+        foreach ($dataSource as $value) $result[$value->{$rightType}][] = $value->{$rightId};
+        foreach ($result as &$line) $line = collect($line)->sort();
+        return $result;
+    }
+    function groupIdsByModel($dataSource,  $rightType, $rightId, $leftKey)
+    {
+        $result = [];
+        if (!isset(static::$singleton03[$leftKey])) {
+            $result = $this->groupIdsByModelExpensive($dataSource, $rightType, $rightId);
+            static::$singleton03[$leftKey] = $result;
+        }
+        $result = static::$singleton03[$leftKey];
+        return $result;
+    }
+
     function getChecked($reversedDirection = false)
     {
         // dd($this->id);
         [$leftType, $leftId, $rightType, $rightId] = $this->getFieldSet($reversedDirection);
+        // dump($leftType . ":" . $this::class . " " . $leftId . ":" . $this->id . " " . $rightType . " " . $rightId . " " . $reversedDirection);
 
-        $result0 = DB::table('many_to_many')->where($leftType, $this::class)->where($leftId, $this->id)->get();
+        $result0 = static::getManyToMany($leftType, $this::class, $leftId, $this->id);
+        // $result0 = DB::table('many_to_many')->where($leftType, $this::class)->where($leftId, $this->id)->get();
+        // dump($result0);
         if ($result0->count() == 0) return new Collection([]);
-
-        $ids0 = $result0->pluck($rightId);
-        $modelPaths0 = $result0->pluck($rightType)->unique();
-        foreach ($modelPaths0 as $modelPath) {
+        $leftKey = $leftType . "-" . $this::class . "-" . $leftId . "-" . $this->id;
+        $modelPathArray = $this->groupIdsByModel($result0,  $rightType, $rightId, $leftKey);
+        // $ids0 = $result0->pluck($rightId)->sort();
+        // $modelPaths0 = $result0->pluck($rightType)->unique();
+        // dump($modelPaths0->join(",") . " --> " . $ids0->join(","));
+        foreach ($modelPathArray as $modelPath => $ids0) {
+            // foreach ($modelPaths0 as $modelPath) {
             if (class_exists($modelPath)) {
                 $model = App::make($modelPath);
-                $tmp[$modelPath] = $model::whereIn('id', $ids0)->get();
+                $tmp[$modelPath] = static::getWhereIn($model, $modelPath, 'id', $ids0);
+                // $tmp[$modelPath] = $model::whereIn('id', $ids0)->get();
                 $resultInverted0[$modelPath] = Arr::keyBy($tmp[$modelPath], 'id');
             } else {
                 dump("Class [$modelPath] does not exist, please double check [$rightType] in [many_to_many] table.");

@@ -94,3 +94,10 @@ After: (50/page)
 CurrentUser::getPermissions()
 Before: 300 ms
 After: 1.56 ms
+
+Timesheet line: 7.54s (3295 query, 12497 models)
+Cache to ram $model::whereIn('id', $ids0)->get(): 5.43s (2012 query, 4314 models)
+Don't query $modelPath::find($row['id']); 3.51s (1140 query, 3248 models)
+Cache to ram DB::table('many_to_many')->where: 2.81s (745 query, 3248 models)
+Query many_to_many 2 condition => only query one condition and cluster cache the results: 2.16s (286 query, 3248 models)
+$model::whereIn => query and cache whole table => 1.57s (42 query, 1752 models)
