@@ -88,7 +88,7 @@ trait HasCheckbox
                 $result[] = static::$singleton01[$key][$id];
             }
         }
-        $result = collect($result);
+        $result = new Collection($result);
 
 
         // dump($result);
@@ -115,11 +115,11 @@ trait HasCheckbox
             }
             foreach ($result0 as $line) {
                 $subKey_i = $leftId . "_" . $line->{$leftId};
-                static::$singleton02[$key][$subKey_i] = collect(static::$singleton02[$key][$subKey_i]);
+                static::$singleton02[$key][$subKey_i] = new Collection(static::$singleton02[$key][$subKey_i]);
             }
         }
         $subKey = $leftId . "_" . $thisId;
-        $result = static::$singleton02[$key][$subKey] ?? collect([]);
+        $result = static::$singleton02[$key][$subKey] ?? new Collection([]);
         return $result;
 
         // $key = $leftType . "_" . $thisClass . "_" . $leftId . "_" . $thisId;
@@ -134,7 +134,7 @@ trait HasCheckbox
     {
         $result = [];
         foreach ($dataSource as $value) $result[$value->{$rightType}][] = $value->{$rightId};
-        foreach ($result as &$line) $line = collect($line)->sort();
+        foreach ($result as &$line) $line = (new Collection($line))->sort();
         return $result;
     }
     function groupIdsByModel($dataSource,  $rightType, $rightId, $leftKey)
@@ -192,7 +192,7 @@ trait HasCheckbox
             }
         }
 
-        $result = collect($result);
+        $result = new Collection($result);
         return $result;
     }
 
