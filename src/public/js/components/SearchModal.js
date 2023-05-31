@@ -1,8 +1,8 @@
 let dataContainer = null
 let dataTopDrawer = null
 let searchInput = null
-let allApps = {}
-let allAppsTopDrawer = {}
+let allApps = null
+let allAppsTopDrawer = null
 let currentUserIsAdmin = null
 let apps = []
 let appsTopDrawer = []
@@ -158,7 +158,6 @@ function groupByFil(arr, filGroup) {
 }
 function groupByFilHasSubFill(arr, filGroup, subFilGroup) {
     const result = arr.reduce((group, product) => {
-        console.log(group, product)
         const groupKey = product[filGroup]
         const subGroupKey = product[subFilGroup]
         if (!group[groupKey]) {
@@ -232,14 +231,43 @@ function bookmarkSearchModal(entity, url) {
                 )
                 var data = response.meta[0]
                 if (response.hits == 'add') {
-                    $('#list-bookmark').append(
-                        `<a id="${data['name']}" href="${data['href']}" title="${data['title']}" class="p-1 border border-gray-200 text-left w-40 rounded text-blue-500 hover:text-gray-200 hover:bg-blue-500 toggle-bookmark hidden">
+                    console.log($('[id="list-bookmark"]'))
+                    $('[id="list-bookmark"]').append(
+                        `<a id="${data['name']}" href="${data['href']}" title="${data['title']}" 
+                        class="p-1 border border-gray-200 text-left w-40 rounded text-blue-500 hover:text-gray-200 hover:bg-blue-500 toggle-bookmark">
                         ${data['title']} 
                         </a>`
                     )
+                    if (allApps) {
+                        allApps.forEach((app) => {
+                            if (app['name'] === entity) {
+                                app['bookmark'] = true
+                            }
+                        })
+                    }
+                    if (allAppsTopDrawer) {
+                        allAppsTopDrawer.forEach((app) => {
+                            if (app['name'] === entity) {
+                                app['bookmark'] = true
+                            }
+                        })
+                    }
                 } else {
                     $(`#${data['name']}`).remove()
-                    // toastr.warning(response.message, 'Bookmark')
+                    if (allApps) {
+                        allApps.forEach((app) => {
+                            if (app['name'] === entity) {
+                                app['bookmark'] = false
+                            }
+                        })
+                    }
+                    if (allAppsTopDrawer) {
+                        allAppsTopDrawer.forEach((app) => {
+                            if (app['name'] === entity) {
+                                app['bookmark'] = false
+                            }
+                        })
+                    }
                 }
             }
         },
