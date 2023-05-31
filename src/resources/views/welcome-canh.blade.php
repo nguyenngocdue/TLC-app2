@@ -5,10 +5,10 @@
 <div class="px-5 bg-white" id="app">
   <div class="grid grid-cols-7">
       <div class="col-span-1">
-        <x-calender.sidebar-calender></x-calender.sidebar-calender>
+        <x-calendar.sidebar-calendar></x-calendar.sidebar-calendar>
       </div>
       <div class="col-span-6">
-        <full-calender></full-calender>
+        <full-calendar></full-calendar>
       </div>
   </div>
 </div>

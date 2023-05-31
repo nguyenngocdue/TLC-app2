@@ -7,13 +7,13 @@
 require('./bootstrap')
 
 import { createApp } from 'vue'
-import FullCalender from './components/FullCalender'
+import FullCalendar from './components/FullCalendar'
 import Draggable from './components/Draggable'
 
 const app = createApp({})
 
-app.component('full-calender', FullCalender)
-app.component('draggable-calender', Draggable)
+app.component('full-calendar', FullCalendar)
+app.component('draggable-calendar', Draggable)
 
 app.mount('#app')
 

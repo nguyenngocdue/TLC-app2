@@ -1,18 +1,7 @@
-<template>
-    <Draggable>
-        <slot></slot>
-    </Draggable>
-</template>
+<template></template>
 <script>
 import { Draggable as Dra } from '@fullcalendar/interaction'
-export default {
-    components: {
-        Draggable,
-    },
-    data() {
-        return {}
-    },
-}
+export default {}
 </script>
 
 <style></style>
