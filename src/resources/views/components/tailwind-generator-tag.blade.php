@@ -1,6 +1,7 @@
 {{-- https://docs.google.com/spreadsheets/d/18sJBnPXZQxes2m6WG1ZsUE6VK1zg4RnYzmHkHch9gT4/edit?usp=sharing --}}
 
 {{-- FOR TAG 100--}}
+<span class='border-slate-100 text-slate-100 bg-slate-100 hover:border-slate-100 hover:text-slate-100 hover:bg-slate-100'></span>
 <span class='border-zinc-100 text-zinc-100 bg-zinc-100 hover:border-zinc-100 hover:text-zinc-100 hover:bg-zinc-100'></span>
 <span class='border-neutral-100 text-neutral-100 bg-neutral-100 hover:border-neutral-100 hover:text-neutral-100 hover:bg-neutral-100'></span>
 <span class='border-stone-100 text-stone-100 bg-stone-100 hover:border-stone-100 hover:text-stone-100 hover:bg-stone-100'></span>
@@ -24,7 +25,7 @@
 <span class='border-gray-100 text-gray-100 bg-gray-100 hover:border-gray-100 hover:text-gray-100 hover:bg-gray-100'></span>
 
 {{-- FOR TAG 200--}}
-<span class='border-slate-200 text-slate-200 bg-slate-200 hover:border-slate-200 hover:text-slate-200 hover:bg-slate-200'></span>
+<span class='border-slate-100 text-slate-200 bg-slate-200 hover:border-slate-200 hover:text-slate-200 hover:bg-slate-200'></span>
 <span class='border-zinc-200 text-zinc-200 bg-zinc-200 hover:border-zinc-200 hover:text-zinc-200 hover:bg-zinc-200'></span>
 <span class='border-neutral-200 text-neutral-200 bg-neutral-200 hover:border-neutral-200 hover:text-neutral-200 hover:bg-neutral-200'></span>
 <span class='border-stone-200 text-stone-200 bg-stone-200 hover:border-stone-200 hover:text-stone-200 hover:bg-stone-200'></span>

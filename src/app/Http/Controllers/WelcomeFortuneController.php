@@ -16,10 +16,10 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        $db = (new EntityIdClickCount)('project');
-        dump($db);
-        $db = (new EntityNameClickCount)(560);
-        dump($db);
+        // $db = (new EntityIdClickCount)('project');
+        // dump($db);
+        // $db = (new EntityNameClickCount)(560);
+        // dump($db);
 
         $dataSource = [];
 
