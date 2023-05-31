@@ -3,11 +3,11 @@
 @section('title', '')
 @section('content')
 <div class="px-5 bg-white" id="app">
-  <div class="grid grid-cols-7">
+  <div class="grid grid-cols-6">
       <div class="col-span-1">
         <x-calendar.sidebar-calendar></x-calendar.sidebar-calendar>
       </div>
-      <div class="col-span-6">
+      <div class="col-span-5">
         <full-calendar></full-calendar>
       </div>
   </div>
