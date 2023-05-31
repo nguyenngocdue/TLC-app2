@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 class EntityNameClickCount
 {
-    function __invoke($owner_id)
+    function entityNameClickCountExpensive($owner_id)
     {
         if (!env('ACCESS_LOGGER_ENABLED')) return [];
         $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
@@ -23,5 +23,15 @@ class EntityNameClickCount
             if ($allClick < 100) return []; //<< Incase too little click, data will not be reliable
         }
         return $data;
+    }
+
+    static $singleton = [];
+
+    function __invoke($owner_id)
+    {
+        if (!isset(static::$singleton[$owner_id])) {
+            static::$singleton[$owner_id] = $this->entityNameClickCountExpensive($owner_id);
+        }
+        return static::$singleton[$owner_id];
     }
 }
