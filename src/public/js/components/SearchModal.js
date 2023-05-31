@@ -234,7 +234,7 @@ function bookmarkSearchModal(entity, url) {
                     console.log($('[id="list-bookmark"]'))
                     $('[id="list-bookmark"]').append(
                         `<a id="${data['name']}" href="${data['href']}" title="${data['title']}" 
-                        class="p-1 border border-gray-200 text-left w-40 rounded text-blue-500 hover:text-gray-200 hover:bg-blue-500 toggle-bookmark">
+                        class="p-1 border border-gray-200 text-left 1w-40 rounded text-blue-500 hover:text-gray-200 hover:bg-blue-500 block toggle-bookmark">
                         ${data['title']} 
                         </a>`
                     )
