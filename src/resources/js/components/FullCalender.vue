@@ -1,5 +1,4 @@
 <script>
-import { ref } from 'vue'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGrid from '@fullcalendar/daygrid'
 import list from '@fullcalendar/list'

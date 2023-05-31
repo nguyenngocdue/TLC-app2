@@ -1,0 +1,8 @@
+<div class="w-full">
+    <div>Calender Mini</div>
+    <div>Filter</div>
+    <div>
+        Tasks
+        <draggable-calender>Task1</draggable-calender>
+    </div>
+</div>

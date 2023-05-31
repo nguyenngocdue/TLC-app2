@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Calender;
+namespace App\View\Components\Calendar;
 
 use Illuminate\View\Component;
 
-class SidebarCalender extends Component
+class SidebarCalendar extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class SidebarCalender extends Component
      */
     public function render()
     {
-        return view('components.calender.sidebar-calender');
+        return view('components.calendar.sidebar-calendar');
     }
 }

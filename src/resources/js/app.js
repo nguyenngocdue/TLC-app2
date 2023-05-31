@@ -8,10 +8,12 @@ require('./bootstrap')
 
 import { createApp } from 'vue'
 import FullCalender from './components/FullCalender'
+import Draggable from './components/Draggable'
 
 const app = createApp({})
 
 app.component('full-calender', FullCalender)
+app.component('draggable-calender', Draggable)
 
 app.mount('#app')
 
