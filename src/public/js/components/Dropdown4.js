@@ -446,7 +446,7 @@ const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, batchLength 
 }
 
 const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
-    // console.log("reloadDataToDropdown4", id, dataSource, table01Name, selected)
+    // console.log("reloadDataToDropdown4", id, dataSource.length, table01Name, selected)
     // console.log(table01Name, id, selected)
     if (dataSource === undefined) return;
     const theDropdown = getEById(id)
@@ -473,7 +473,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
         // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
         , templateResult: select2FormatState
     });
-    if (dataSource.length === 1) theDropdown.trigger("change")
+    if (dataSource.length === 1) theDropdown.trigger('change')
 }
 
 const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table }) => {
@@ -491,12 +491,15 @@ const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table }) => {
     selectedJson = JSON.parse(selectedJson)
     dataSourceDropdown = k[table];
     if (dataSourceDropdown === undefined) console.error("Key " + table + " not found in k[]");
+    //This will load all line without reduce
     reloadDataToDropdown4(id, dataSourceDropdown, table01Name, selectedJson)
-    listenersOfDropdown4s[table01Name].forEach((listener) => {
-        const fieldName = getFieldNameInTable01FormatJS(id, table01Name)
-        if (listener.triggers.includes(fieldName) && listener.listen_action === 'reduce') {
-            // console.log("I am a trigger of reduce, I have to trigger myself when form load ",id )
-            getEById(id).trigger('change')
-        }
+    $(document).ready(() => {
+        listenersOfDropdown4s[table01Name].forEach((listener) => {
+            const fieldName = getFieldNameInTable01FormatJS(id, table01Name)
+            if (listener.triggers.includes(fieldName) && listener.listen_action === 'reduce') {
+                // console.log("I am a trigger of reduce, I have to trigger myself when form load ", id)
+                getEById(id).trigger('change')
+            }
+        })
     })
 }

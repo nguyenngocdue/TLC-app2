@@ -435,15 +435,16 @@ const onChangeDropdown2 = (name) => {
 }
 
 const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected, allowClear = false) => {
+    // const debugListener = true
     const control_type = getControlTypeOfE(id)
-    // console.log(id, attr_to_compare)
-    // console.log("reloadDataToDropdown2", id, control_type, dataSource.length, selected)
+    if (debugListener) console.log(id, attr_to_compare)
+    if (debugListener) console.log("reloadDataToDropdown2", id, control_type, dataSource.length, selected)
     if (dataSource === undefined) return
     getEById(id).empty()
 
     let options = []
     dataSource = filterDropdown2(id, dataSource)
-    // console.log("Loading dataSource after filterDropdown2", id, selected, dataSource.length)
+    if (debugListener) console.log("Loading dataSource after filterDropdown2", id, selected, dataSource.length)
     // console.log(selected)
 
     if (control_type === 'dropdown') {
@@ -466,7 +467,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         }
         options.unshift("<option value=''></option>")
         getEById(id).append(options)
-        // console.log("Appended", id, 'with options has', options.length, 'items')
+        if (debugListener) console.log("Appended", id, 'with options has', options.length, 'items')
 
         getEById(id).select2({
             placeholder: 'Please select...',

@@ -52,6 +52,7 @@
             , action: "{{$action ?? 'create'}}"
         }
         documentReadyDropdown2(params2)
+        // console.log("Document ready dropdown2")
 
     </script>
 @endif
