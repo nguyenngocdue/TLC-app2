@@ -182,7 +182,8 @@ trait TraitEntityListenDataSource
                     $fn_no_parenthesis = substr($fn, 0, strlen($fn) - 2); //Remove ()
 
                     foreach ($result[$table] as &$row) {
-                        $model = new $modelPath(['id' => $row['id']]);
+                        $model = new $modelPath(); //<<new $modelPath(['id' => $row['id']) doesn't work;
+                        $model->id = $row['id'];
                         // $model = $modelPath::find($row['id']);
                         $row[$fn] = $model->getCheckedByField($fn_no_parenthesis)->pluck('id')->toArray();
                     }

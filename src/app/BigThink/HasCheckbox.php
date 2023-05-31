@@ -2,9 +2,7 @@
 
 namespace App\BigThink;
 
-use App\Models\Field;
 use Database\Seeders\FieldSeeder;
-use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
@@ -108,7 +106,9 @@ trait HasCheckbox
     {
         $key = $leftType . "_" . $thisClass;
         if (!isset(static::$singleton02[$key])) {
-            $result0 = DB::table('many_to_many')->where($leftType, $thisClass)->get();
+            $sql = DB::table('many_to_many')->where($leftType, $thisClass);
+            $result0 = $sql->get();
+            // Log::info($sql->toSql());
             foreach ($result0 as $line) {
                 $subKey_i = $leftId . "_" . $line->{$leftId};
                 static::$singleton02[$key][$subKey_i][] = $line;
@@ -119,7 +119,8 @@ trait HasCheckbox
             }
         }
         $subKey = $leftId . "_" . $thisId;
-        return static::$singleton02[$key][$subKey] ?? collect([]);
+        $result = static::$singleton02[$key][$subKey] ?? collect([]);
+        return $result;
 
         // $key = $leftType . "_" . $thisClass . "_" . $leftId . "_" . $thisId;
         // if (!isset(static::$singleton02[$key])) {
