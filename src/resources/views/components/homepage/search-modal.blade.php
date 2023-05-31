@@ -31,6 +31,7 @@
     searchInput = document.querySelector("[data-search]")
     searchInput.focus()
     allApps = allApps == null ? (@json($allApps)) : allApps
+    allAppsTopDrawer = allAppsTopDrawer == null ? (@json($allAppsTopDrawer)) : allAppsTopDrawer
     url = (@json($route))
     currentUserIsAdmin = (@json($currentUserIsAdmin))
     render(filterAllAppCheckAdmin(allApps),url)

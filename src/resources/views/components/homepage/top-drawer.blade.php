@@ -20,7 +20,8 @@
     </ul>
     <script>
         dataTopDrawer = document.querySelector("[data-top-drawer]")
-        allAppsTopDrawer = allAppsTopDrawer == null ? (@json($allApps)) : allAppsTopDrawer
+        allApps = allApps == null ? (@json($allApps)) : allApps
+        allAppsTopDrawer = allAppsTopDrawer == null ? (@json($allAppsTopDrawer)) : allAppsTopDrawer
         url = (@json($route))
         renderTopDrawer(filterAllAppCheckAdmin(allAppsTopDrawer),url)
     </script>
