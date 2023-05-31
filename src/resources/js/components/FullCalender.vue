@@ -6,12 +6,10 @@ import list from '@fullcalendar/list'
 import timeGrid from '@fullcalendar/timegrid'
 import multiMonth from '@fullcalendar/multimonth'
 import interaction from '@fullcalendar/interaction'
-import SideBarCalender from './SideBarCalender.vue'
 
 export default {
     components: {
         FullCalendar,
-        SideBarCalender,
     },
     data() {
         return {
@@ -117,12 +115,5 @@ export default {
 }
 </script>
 <template>
-    <div class="grid grid-cols-7">
-        <div class="col-span-1">
-            <SideBarCalender></SideBarCalender>
-        </div>
-        <div class="col-span-6">
-            <FullCalendar :options="calendarOptions" />
-        </div>
-    </div>
+    <FullCalendar :options="calendarOptions" />
 </template>
