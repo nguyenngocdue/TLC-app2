@@ -17,6 +17,7 @@ class SidebarFilterProject extends Component
      */
     public function __construct(
         private $name,
+        private $tableName,
         private $selected = "",
         private $multiple = false,
         // private $type,
@@ -29,7 +30,7 @@ class SidebarFilterProject extends Component
 
     private function getDataSource()
     {
-        return Project::all();
+        return Project::select('id', 'name', 'description')->get();
     }
 
     private function renderJS($tableName)
@@ -50,7 +51,7 @@ class SidebarFilterProject extends Component
      */
     public function render()
     {
-        $tableName = "modal_" . $this->name;
+        $tableName = $this->tableName;
         $params = [
             'name' => $this->name,
             'id' => $this->name,

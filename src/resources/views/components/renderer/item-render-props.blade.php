@@ -112,7 +112,6 @@
                             @break
                             @case ('dropdown')
                             <x-controls.has-data-source.dropdown2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
-                            @dump($action, $type, $columnName, $value)
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
                             @case ('radio')

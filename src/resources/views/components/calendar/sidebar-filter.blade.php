@@ -8,15 +8,15 @@
         </div> --}}
         <div class="col-span-12 2xl:col-span-5">Project</div>
         <div class="col-span-12 2xl:col-span-7">
-            <x-calendar.sidebar-filter-project name="modal_project" selected="5"/>
+            <x-calendar.sidebar-filter-project tableName="projects" name="project_id" selected="5"/>
         </div>
         <div class="col-span-12 2xl:col-span-5">Sub Project</div>
         <div class="col-span-12 2xl:col-span-7">
-            <x-calendar.sidebar-filter-sub-project name="modal_sub_project" selected="82"/>
+            <x-calendar.sidebar-filter-sub-project tableName="sub_projects" name="sub_project_id" selected="82"/>
         </div>
         <div class="col-span-12 2xl:col-span-5">LOD</div> 
         <div class="col-span-12 2xl:col-span-7">
-            {{-- <x-controls.has-data-source.dropdown2 action="edit" type="hr_timesheet_lines" name="project_id" selected="5" /> --}}
+            {{-- <x-calendar.sidebar-filter-lod name="modal_lod" /> --}}
         </div>
     </div>
 </x-renderer.card>

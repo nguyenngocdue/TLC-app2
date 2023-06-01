@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityListenDataSource;
 use App\Models\Sub_project;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
@@ -9,6 +10,7 @@ use Illuminate\Support\Arr;
 
 class SidebarFilterSubProject extends Component
 {
+    use TraitEntityListenDataSource;
     /**
      * Create a new component instance.
      *
@@ -16,6 +18,7 @@ class SidebarFilterSubProject extends Component
      */
     public function __construct(
         private $name,
+        private $tableName,
         private $selected = "",
         private $multiple = false,
         private $readOnly = false,
@@ -25,32 +28,21 @@ class SidebarFilterSubProject extends Component
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
-    private function getDataSource($attr_name)
+    private function getDataSource()
     {
         $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')->get();
-        foreach ($dataSource as &$line) {
-            $line->{$attr_name} = $line->project_id;
-        }
         return $dataSource;
     }
 
-
-    private function renderJS($tableName, $objectTypeStr, $objectIdStr)
+    private function renderJS($tableName)
     {
-        $attr_name = $tableName . '_parent_fake_id';
-        $k = [$tableName => $this->getDataSource($attr_name),];
-        $listenersOfDropdown2 = [
-            [
-                'listen_action' => 'reduce',
-                'column_name' => $objectIdStr,
-                'listen_to_attrs' => [$attr_name],
-                'listen_to_fields' => [$objectIdStr],
-                'listen_to_tables' => [$tableName],
-                'table_name' => $tableName,
-                // 'attrs_to_compare' => ['id'],
-                'triggers' => [$objectTypeStr],
-            ],
-        ];
+        $k = [$tableName => $this->getDataSource(),];
+
+        $a = $this->getListeners2('hr_timesheet_line');
+        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == 'sub_project_id'));
+        $listenersOfDropdown2 = [$a[0]];
+        // dump($listenersOfDropdown2);
+
         $str = "\n";
         $str .= "<script>";
         $str .= " k = {...k, ..." . json_encode($k) . "};";
@@ -68,7 +60,7 @@ class SidebarFilterSubProject extends Component
     public function render()
     {
         // dump("Selected: '" . $this->selected . "'");
-        $tableName = "modal_" . $this->name;
+        $tableName =  $this->tableName;
         $params = [
             'name' => $this->name,
             'id' => $this->name,
@@ -81,7 +73,7 @@ class SidebarFilterSubProject extends Component
             'multiple' => $this->multiple ? true : false,
             'allowClear' => $this->allowClear,
         ];
-        $this->renderJS($tableName, 'modal_project', $this->name);
+        $this->renderJS($tableName);
         // dump($params);
         return view('components.controls.has-data-source.' . $this->control, $params);
     }
