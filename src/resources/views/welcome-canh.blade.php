@@ -8,7 +8,7 @@
         <x-calendar.sidebar-calendar></x-calendar.sidebar-calendar>
       </div>
       <div class="col-span-5">
-        <full-calendar></full-calendar>
+        <x-calendar.full-calendar></x-calendar.full-calendar>
       </div>
   </div>
 </div>

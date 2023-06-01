@@ -12,10 +12,10 @@ import Draggable from './components/Draggable'
 
 const app = createApp({})
 
-app.component('full-calendar', FullCalendar)
-app.component('draggable-calendar', Draggable)
+// app.component('full-calendar', FullCalendar)
+// app.component('draggable-calendar', Draggable)
 
-app.mount('#app')
+// app.mount('#app')
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
