@@ -1,5 +1,7 @@
 <x-renderer.card title="Tasks">
-    <li>Task 1</li>
+    <ul id="external-events">
+        <li>Task 1</li>
         <li>Task 2</li>
-            <li>Task 3</li>
+        <li>Task 3</li>
+    </ul>
 </x-renderer.card>
