@@ -8,6 +8,21 @@ module.exports = {
     ],
     theme: {
         extend: {
+            screens: {
+                // 'sm': '640px',
+                // 'md': '768px',
+                // 'lg': '1024px',
+                // 'xl': '1280px',
+                '2xl': '1536px',
+                '3xl': '1920px',
+                '4xl': '2304px',
+                // '5xl': '2688px',
+                // '6xl': '3072px',
+                // '7xl': '3456px',
+                // '8xl': '3840px',
+            },
+        },
+        extend: {
             colors: {
                 primary: {
                     50: '#eff6ff',

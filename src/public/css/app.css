@@ -1438,9 +1438,6 @@ video {
 .grid-cols-6 {
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
-.grid-cols-7 {
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-}
 .grid-rows-1 {
   grid-template-rows: repeat(1, minmax(0, 1fr));
 }
@@ -8008,18 +8005,6 @@ video {
 }
 @media (min-width: 1280px) {
 
-  .xl\:col-span-6 {
-    grid-column: span 6 / span 6;
-  }
-
-  .xl\:col-span-4 {
-    grid-column: span 4 / span 4;
-  }
-
-  .xl\:col-span-8 {
-    grid-column: span 8 / span 8;
-  }
-
   .xl\:mx-16 {
     margin-left: 4rem;
     margin-right: 4rem;
@@ -8048,6 +8033,14 @@ video {
   }
 }
 @media (min-width: 1536px) {
+
+  .\32xl\:col-span-5 {
+    grid-column: span 5 / span 5;
+  }
+
+  .\32xl\:col-span-7 {
+    grid-column: span 7 / span 7;
+  }
 
   .\32xl\:mx-20 {
     margin-left: 5rem;

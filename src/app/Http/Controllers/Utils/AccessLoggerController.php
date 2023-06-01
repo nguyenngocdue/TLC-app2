@@ -15,6 +15,7 @@ class AccessLoggerController extends Controller
     {
         if (!env('ACCESS_LOGGER_ENABLED')) return;
         $cuId = CurrentUser::id();
+        if (is_null($cuId)) return; //<<User has not logged in yet
         $routeName = CurrentRoute::getName();
         $entityName = CurrentRoute::getTypeSingular();
         $entityId = CurrentRoute::getEntityId($entityName);
