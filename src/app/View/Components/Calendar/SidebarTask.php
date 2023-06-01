@@ -23,7 +23,8 @@ class SidebarTask extends Component
         private $multiple = true,
         private $readOnly = false,
         // private $control = 'dropdown2',
-        private $control = 'radio-or-checkbox2',
+        private $control = 'draggable-event2',
+        // private $control = 'radio-or-checkbox2',
         private $allowClear = false,
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));

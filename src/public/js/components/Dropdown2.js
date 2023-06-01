@@ -529,6 +529,59 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             options.push(option)
         }
         getEById(id).append(options)
+    } else if (control_type === 'draggable_event') {
+        // const control = getEById(id)
+        // const isMultiple = control[0].hasAttribute("multiple")
+        const isMultiple = getIsMultipleOfE(id)
+        const radio_or_checkbox = isMultiple ? 'checkbox' : 'radio'
+        const control_name = isMultiple ? id + '[]' : id
+        const colSpan = getColSpanOfE(id)
+        const readOnly = getReadOnlyOfE(id)
+        // console.log(attr_to_compare)
+        console.log("Here ne Canh", dataSource)
+        for (let i = 0; i < dataSource.length; i++) {
+            let item = dataSource[i]
+            const itemId = item[attr_to_compare]
+            selectedStr = dataSource.length === 1 ? 'checked' : (dumbIncludes2(selected, itemId) ? 'checked' : '')
+            // console.log(selected, itemId, selectedStr)
+            // console.log(readOnly)
+            readonly = readOnly ? 'onclick="return false;"' : ''
+            // console.log(item)
+            const title = item['description'] + ' (#' + itemId + ')'
+            const bgColor = item['bgColor'] || ''
+            option =
+                '<div class="items-center bg-white-50 flex align-center rounded-md '
+                + bgColor + ' '
+                + colSpan + ' '
+                + '" '
+                + 'item_name="' + item['name'] + '" '
+                + 'item_description="' + item['description'] + '" '
+                + '">'
+            const cursor = item['disabled'] ? 'cursor-not-allowed' : 'cursor-pointer'
+            const inputBg = item['disabled'] ? 'bg-gray-300' : ''
+            option += '<label class="truncate px-1 ' + cursor + ' rounded-md hover:bg-gray-100 w-full h-full" title="' + title + '">'
+            option += "<div class='flex align-middle'>"
+            option +=
+                '<input ' +
+                (item['disabled'] ? "disabled " : "") +
+                readonly + ' ' +
+                'class="w-3.5 h-3.5 mr-1 mt-0.5 ' + inputBg + ' ' + cursor + '" '
+                + 'type="' + radio_or_checkbox + '" '
+                + 'name="' + control_name + '" '
+                + 'value="' + itemId + '" '
+                + selectedStr + ' '
+                + '>'
+            if (item['avatar']) option += ' ' + '<img class="w-10 h-10 mr-1 rounded" src="' + item['avatar'] + '" />'
+            option += '<div>'
+            option += ' ' + item['name'] + "AAA"
+            if (item['subtitle']) option += "<br/>" + item['subtitle']
+            option += '</div>'
+            option += "</div>"
+            option += '</label>'
+            option += '</div>'
+            options.push(option)
+        }
+        getEById(id).append(options)
     } else {
         console.error('Unknown control_type', control_type)
     }
