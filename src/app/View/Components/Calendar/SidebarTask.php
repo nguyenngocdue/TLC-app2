@@ -2,18 +2,59 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityListenDataSource;
+use App\Models\Pj_task;
+use App\Utils\ClassList;
 use Illuminate\View\Component;
+use Illuminate\Support\Arr;
 
 class SidebarTask extends Component
 {
+    use TraitEntityListenDataSource;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(
+        private $name,
+        private $tableName,
+        private $selected = "",
+        private $multiple = true,
+        private $readOnly = false,
+        // private $control = 'dropdown2',
+        private $control = 'radio-or-checkbox2',
+        private $allowClear = false,
+    ) {
+        $this->selected = Arr::normalizeSelected($this->selected, old($name));
+    }
+
+    private function getDataSource()
     {
-        //
+        // $field_id = FieldSeeder::getIdFromFieldName('getLods');
+        $dataSource = Pj_task::select('id', 'name', 'description')->get();
+        foreach ($dataSource as &$line) {
+            $line->{"getDisciplines()"} = $line->getDisciplines()->pluck('id');
+            $line->{"getLods()"} = $line->getLods()->pluck('id');
+        }
+        return $dataSource;
+    }
+
+    private function renderJS($tableName)
+    {
+        $k = [$tableName => $this->getDataSource(),];
+
+        $a = $this->getListeners2('hr_timesheet_line');
+        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $this->name));
+        $listenersOfDropdown2 = [$a[0]];
+
+        $str = "\n";
+        $str .= "<script>";
+        $str .= " k = {...k, ..." . json_encode($k) . "};";
+        $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";
+        $str .= "</script>";
+        $str .= "\n";
+        echo $str;
     }
 
     /**
@@ -23,6 +64,22 @@ class SidebarTask extends Component
      */
     public function render()
     {
-        return view('components.calendar.sidebar-task');
+        // dump("Selected: '" . $this->selected . "'");
+        $tableName =  $this->tableName;
+        $params = [
+            'name' => $this->name,
+            'id' => $this->name,
+            'selected' => $this->selected,
+            'multipleStr' => $this->multiple ? "multiple" : "",
+            'table' => $tableName,
+            'readOnly' => $this->readOnly,
+            'classList' => ClassList::DROPDOWN,
+            // 'entity' => $this->type,
+            'multiple' => $this->multiple ? true : false,
+            'allowClear' => $this->allowClear,
+        ];
+        $this->renderJS($tableName);
+        // dump($params);
+        return view('components.controls.has-data-source.' . $this->control, $params);
     }
 }

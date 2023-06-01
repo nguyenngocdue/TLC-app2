@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class SidebarFilter extends Component
@@ -23,6 +24,10 @@ class SidebarFilter extends Component
      */
     public function render()
     {
-        return view('components.calendar.sidebar-filter');
+        $user = CurrentUser::get();
+        $discipline = ($user) ? $user->discipline : null;
+        return view('components.calendar.sidebar-filter', [
+            'discipline' => $discipline,
+        ]);
     }
 }

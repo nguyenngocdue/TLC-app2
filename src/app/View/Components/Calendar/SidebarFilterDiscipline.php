@@ -3,12 +3,12 @@
 namespace App\View\Components\Calendar;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityListenDataSource;
-use App\Models\Sub_project;
+use App\Models\User_discipline;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class SidebarFilterSubProject extends Component
+class SidebarFilterDiscipline extends Component
 {
     use TraitEntityListenDataSource;
     /**
@@ -30,23 +30,16 @@ class SidebarFilterSubProject extends Component
 
     private function getDataSource()
     {
-        $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')->get();
+        $dataSource = User_discipline::select('id', 'name', 'description')->get();
         return $dataSource;
     }
 
     private function renderJS($tableName)
     {
         $k = [$tableName => $this->getDataSource(),];
-
-        $a = $this->getListeners2('hr_timesheet_line');
-        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $this->name));
-        $listenersOfDropdown2 = [$a[0]];
-        // dump($listenersOfDropdown2);
-
         $str = "\n";
         $str .= "<script>";
         $str .= " k = {...k, ..." . json_encode($k) . "};";
-        $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";
         $str .= "</script>";
         $str .= "\n";
         echo $str;

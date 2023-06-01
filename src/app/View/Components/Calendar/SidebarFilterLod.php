@@ -41,7 +41,7 @@ class SidebarFilterLod extends Component
         $k = [$tableName => $this->getDataSource(),];
 
         $a = $this->getListeners2('hr_timesheet_line');
-        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == 'lod_id'));
+        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $this->name));
         $listenersOfDropdown2 = [$a[0]];
         // dump($listenersOfDropdown2);
 
