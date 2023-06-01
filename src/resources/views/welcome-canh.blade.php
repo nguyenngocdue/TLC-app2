@@ -21,7 +21,7 @@ Parent: <x-modals.parent-type7 name='modal_ot_team' selected1='1003-a' allowClea
       <x-calendar.sidebar-calendar></x-calendar.sidebar-calendar>
       </div>
       <div class="col-span-5">
-        <full-calendar></full-calendar>
+        <x-calendar.full-calendar></x-calendar.full-calendar>
       </div>
   </div>
 </div>
