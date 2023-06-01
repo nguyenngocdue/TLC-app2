@@ -6,11 +6,11 @@
 
 require('./bootstrap')
 
-import { createApp } from 'vue'
-import FullCalendar from './components/FullCalendar'
-import Draggable from './components/Draggable'
+// import { createApp } from 'vue'
+// import FullCalendar from './components/FullCalendar'
+// import Draggable from './components/Draggable'
 
-const app = createApp({})
+// const app = createApp({})
 
 // app.component('full-calendar', FullCalendar)
 // app.component('draggable-calendar', Draggable)

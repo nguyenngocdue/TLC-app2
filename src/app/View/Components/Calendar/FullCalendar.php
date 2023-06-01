@@ -23,6 +23,8 @@ class FullCalendar extends Component
      */
     public function render()
     {
-        return view('components.calendar.full-calendar');
+        return view('components.calendar.full-calendar', [
+            'modalId' => 'calendar001'
+        ]);
     }
 }

@@ -13,9 +13,12 @@ const select2FormatState = (state) =>
     !state.id
         ? state.text
         : $(
-            `<div class="flex justify-between px-1"><span>${state.text
-            }</span><pre>   </pre><span>${isNaN(state.id) ? state.id : makeId(state.id)}</span></div>`
-        )
+              `<div class="flex justify-between px-1"><span>${
+                  state.text
+              }</span><pre>   </pre><span>${
+                  isNaN(state.id) ? state.id : makeId(state.id)
+              }</span></div>`
+          )
 const getEById = (id) => $("[id='" + id + "']")
 const dumbIncludes2 = (array, item) => {
     for (let i = 0; i < array.length; i++) {
@@ -51,15 +54,17 @@ const getSecondsFromTime = (hms) => {
             return +a[0] * 60 * 60 + +a[1] * 60 + +a[2]
     }
 }
-const getDaysFromDateSlash = (dmy) => moment(dmy, 'DD/MM/YYYY').diff(moment('1970-01-01'), 'days')
-const getDaysFromDateDash = (dmy) => moment(dmy, 'YYYY-MM-DD').diff(moment('1970-01-01'), 'days')
+const getDaysFromDateSlash = (dmy) =>
+    moment(dmy, 'DD/MM/YYYY').diff(moment('1970-01-01'), 'days')
+const getDaysFromDateDash = (dmy) =>
+    moment(dmy, 'YYYY-MM-DD').diff(moment('1970-01-01'), 'days')
 const getValueOfEById = (id) => {
     const isMultipleOfE = getIsMultipleOfE(id)
     const controlType = getControlTypeOfE(id)
     // console.log(id, isMultipleOfE, controlType)
     if (controlType === 'radio_or_checkbox') {
         const control = isMultipleOfE ? 'checkbox' : 'radio'
-        const name = isMultipleOfE ? id + "[]" : id
+        const name = isMultipleOfE ? id + '[]' : id
         const controlName = 'input:' + control + "[name='" + name + "']:checked"
         let value = []
         if (isMultipleOfE) {
@@ -160,8 +165,6 @@ const onChangeDropdown2Reduce = (listener) => {
     )
     if (debugListener) console.log(triggers, constraintsValues)
 
-
-
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
         //console.log("value", constraintsValues[i], value, !value)
@@ -204,7 +207,13 @@ const onChangeDropdown2Reduce = (listener) => {
     // console.log(attrs_to_compare)
     const allowClear = getAllowClear(column_name)
     // console.log(allowClear)
-    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, lastSelected, allowClear)
+    reloadDataToDropdown2(
+        column_name,
+        attrs_to_compare,
+        dataSource,
+        lastSelected,
+        allowClear
+    )
 }
 const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
@@ -320,7 +329,9 @@ const onChangeDropdown2Expression = (listener) => {
                 const datetime = varValue.split(' ')
                 const date = datetime[0]
                 const time = datetime[1]
-                varValue = getDaysFromDateSlash(date) * 24 * 3600 + getSecondsFromTime(time)
+                varValue =
+                    getDaysFromDateSlash(date) * 24 * 3600 +
+                    getSecondsFromTime(time)
             } else {
                 if (includedHour) {
                     varValue = getSecondsFromTime(varValue)
@@ -345,8 +356,12 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
     // const debugListener = true
     if (debugListener) console.log('AjaxRequestScalar', listener)
     const { triggers, expression: url } = listener
-    const { ajax_response_attribute, ajax_form_attributes, ajax_item_attributes, ajax_default_values } =
-        listener
+    const {
+        ajax_response_attribute,
+        ajax_form_attributes,
+        ajax_item_attributes,
+        ajax_default_values,
+    } = listener
 
     let enoughParams = true
     const data = {}
@@ -372,15 +387,33 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
                 for (let i = 0; i < ajax_form_attributes.length; i++) {
                     if (hits_0 === undefined) {
                         value = ajax_default_values[i]
-                        if (debugListener) console.log('Response empty', ajax_response_attribute, '- assigning default value', ajax_default_values[i])
+                        if (debugListener)
+                            console.log(
+                                'Response empty',
+                                ajax_response_attribute,
+                                '- assigning default value',
+                                ajax_default_values[i]
+                            )
                     } else if (hits_0[ajax_item_attributes[i]] === undefined) {
                         value = ajax_default_values[i]
-                        if (debugListener) console.log('Requested column', ajax_item_attributes[i], 'not found, assigning default value', ajax_default_values[i])
+                        if (debugListener)
+                            console.log(
+                                'Requested column',
+                                ajax_item_attributes[i],
+                                'not found, assigning default value',
+                                ajax_default_values[i]
+                            )
                     } else {
                         value = hits_0[ajax_item_attributes[i]]
                     }
                     const toBeAssigned = ajax_form_attributes[i]
-                    if (debugListener) console.log('Assigning', toBeAssigned, 'with value', value)
+                    if (debugListener)
+                        console.log(
+                            'Assigning',
+                            toBeAssigned,
+                            'with value',
+                            value
+                        )
                     getEById(toBeAssigned).val(value)
                     getEById(toBeAssigned).trigger('change')
                 }
@@ -427,32 +460,62 @@ const onChangeDropdown2 = (name) => {
                     //Do nothing, this is an action of table
                     break
                 default:
-                    console.error('Unknown listen_action', listen_action, 'of', name)
+                    console.error(
+                        'Unknown listen_action',
+                        listen_action,
+                        'of',
+                        name
+                    )
                     break
             }
         }
     }
 }
 
-const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected, allowClear = false) => {
+const reloadDataToDropdown2 = (
+    id,
+    attr_to_compare = 'id',
+    dataSource,
+    selected,
+    allowClear = false
+) => {
     // const debugListener = true
     const control_type = getControlTypeOfE(id)
     if (debugListener) console.log(id, attr_to_compare)
-    if (debugListener) console.log("reloadDataToDropdown2", id, control_type, dataSource.length, selected)
+    if (debugListener)
+        console.log(
+            'reloadDataToDropdown2',
+            id,
+            control_type,
+            dataSource.length,
+            selected
+        )
     if (dataSource === undefined) return
     getEById(id).empty()
 
     let options = []
     dataSource = filterDropdown2(id, dataSource)
-    if (debugListener) console.log("Loading dataSource after filterDropdown2", id, selected, dataSource.length)
+    if (debugListener)
+        console.log(
+            'Loading dataSource after filterDropdown2',
+            id,
+            selected,
+            dataSource.length
+        )
     // console.log(selected)
 
     if (control_type === 'dropdown') {
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
-            selectedStr = dataSource.length === 1 ? 'selected' : dumbIncludes2(selected, item.id) ? 'selected' : ''
+            selectedStr =
+                dataSource.length === 1
+                    ? 'selected'
+                    : dumbIncludes2(selected, item.id)
+                    ? 'selected'
+                    : ''
             // console.log(id, selected, item.id, selectedStr)
-            const title = item.description || (isNaN(item.id) ? item.id : makeId(item.id))
+            const title =
+                item.description || (isNaN(item.id) ? item.id : makeId(item.id))
             option =
                 "<option value='" +
                 item.id +
@@ -467,7 +530,14 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         }
         options.unshift("<option value=''></option>")
         getEById(id).append(options)
-        if (debugListener) console.log("Appended", id, 'with options has', options.length, 'items')
+        if (debugListener)
+            console.log(
+                'Appended',
+                id,
+                'with options has',
+                options.length,
+                'items'
+            )
 
         getEById(id).select2({
             placeholder: 'Please select...',
@@ -489,7 +559,12 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
-            selectedStr = dataSource.length === 1 ? 'checked' : (dumbIncludes2(selected, itemId) ? 'checked' : '')
+            selectedStr =
+                dataSource.length === 1
+                    ? 'checked'
+                    : dumbIncludes2(selected, itemId)
+                    ? 'checked'
+                    : ''
             // console.log(selected, itemId, selectedStr)
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
@@ -497,33 +572,63 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             const title = item['description'] + ' (#' + itemId + ')'
             const bgColor = item['bgColor'] || ''
             option =
-                '<div class="items-center bg-white-50 flex align-center rounded-md '
-                + bgColor + ' '
-                + colSpan + ' '
-                + '" '
-                + 'item_name="' + item['name'] + '" '
-                + 'item_description="' + item['description'] + '" '
-                + '">'
-            const cursor = item['disabled'] ? 'cursor-not-allowed' : 'cursor-pointer'
+                '<div class="items-center bg-white-50 flex align-center rounded-md ' +
+                bgColor +
+                ' ' +
+                colSpan +
+                ' ' +
+                '" ' +
+                'item_name="' +
+                item['name'] +
+                '" ' +
+                'item_description="' +
+                item['description'] +
+                '" ' +
+                '">'
+            const cursor = item['disabled']
+                ? 'cursor-not-allowed'
+                : 'cursor-pointer'
             const inputBg = item['disabled'] ? 'bg-gray-300' : ''
-            option += '<label class="truncate px-1 ' + cursor + ' rounded-md hover:bg-gray-100 w-full h-full" title="' + title + '">'
+            option +=
+                '<label class="truncate px-1 ' +
+                cursor +
+                ' rounded-md hover:bg-gray-100 w-full h-full" title="' +
+                title +
+                '">'
             option += "<div class='flex align-middle'>"
             option +=
                 '<input ' +
-                (item['disabled'] ? "disabled " : "") +
-                readonly + ' ' +
-                'class="w-3.5 h-3.5 mr-1 mt-0.5 ' + inputBg + ' ' + cursor + '" '
-                + 'type="' + radio_or_checkbox + '" '
-                + 'name="' + control_name + '" '
-                + 'value="' + itemId + '" '
-                + selectedStr + ' '
-                + '>'
-            if (item['avatar']) option += ' ' + '<img class="w-10 h-10 mr-1 rounded" src="' + item['avatar'] + '" />'
+                (item['disabled'] ? 'disabled ' : '') +
+                readonly +
+                ' ' +
+                'class="w-3.5 h-3.5 mr-1 mt-0.5 ' +
+                inputBg +
+                ' ' +
+                cursor +
+                '" ' +
+                'type="' +
+                radio_or_checkbox +
+                '" ' +
+                'name="' +
+                control_name +
+                '" ' +
+                'value="' +
+                itemId +
+                '" ' +
+                selectedStr +
+                ' ' +
+                '>'
+            if (item['avatar'])
+                option +=
+                    ' ' +
+                    '<img class="w-10 h-10 mr-1 rounded" src="' +
+                    item['avatar'] +
+                    '" />'
             option += '<div>'
             option += ' ' + item['name']
-            if (item['subtitle']) option += "<br/>" + item['subtitle']
+            if (item['subtitle']) option += '<br/>' + item['subtitle']
             option += '</div>'
-            option += "</div>"
+            option += '</div>'
             option += '</label>'
             option += '</div>'
             options.push(option)
@@ -538,11 +643,16 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         const colSpan = getColSpanOfE(id)
         const readOnly = getReadOnlyOfE(id)
         // console.log(attr_to_compare)
-        console.log("Here ne Canh", dataSource)
+        // console.log('Here ne Canh', dataSource)
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
-            selectedStr = dataSource.length === 1 ? 'checked' : (dumbIncludes2(selected, itemId) ? 'checked' : '')
+            selectedStr =
+                dataSource.length === 1
+                    ? 'checked'
+                    : dumbIncludes2(selected, itemId)
+                    ? 'checked'
+                    : ''
             // console.log(selected, itemId, selectedStr)
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
@@ -550,37 +660,64 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             const title = item['description'] + ' (#' + itemId + ')'
             const bgColor = item['bgColor'] || ''
             option =
-                '<div class="items-center bg-white-50 flex align-center rounded-md '
-                + bgColor + ' '
-                + colSpan + ' '
-                + '" '
-                + 'item_name="' + item['name'] + '" '
-                + 'item_description="' + item['description'] + '" '
-                + '">'
-            const cursor = item['disabled'] ? 'cursor-not-allowed' : 'cursor-pointer'
-            const inputBg = item['disabled'] ? 'bg-gray-300' : ''
-            option += '<label class="truncate px-1 ' + cursor + ' rounded-md hover:bg-gray-100 w-full h-full" title="' + title + '">'
-            option += "<div class='flex align-middle'>"
-            option +=
-                '<input ' +
-                (item['disabled'] ? "disabled " : "") +
-                readonly + ' ' +
-                'class="w-3.5 h-3.5 mr-1 mt-0.5 ' + inputBg + ' ' + cursor + '" '
-                + 'type="' + radio_or_checkbox + '" '
-                + 'name="' + control_name + '" '
-                + 'value="' + itemId + '" '
-                + selectedStr + ' '
-                + '>'
-            if (item['avatar']) option += ' ' + '<img class="w-10 h-10 mr-1 rounded" src="' + item['avatar'] + '" />'
-            option += '<div>'
-            option += ' ' + item['name'] + "AAA"
-            if (item['subtitle']) option += "<br/>" + item['subtitle']
+                '<div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event cursor-pointer my-1 px-2 py-0.5' +
+                bgColor +
+                ' ' +
+                colSpan +
+                ' ' +
+                '" ' +
+                'item_name="' +
+                item['name'] +
+                '" ' +
+                'item_description="' +
+                item['description'] +
+                '" ' +
+                '">'
+            // const cursor = item['disabled']
+            //     ? 'cursor-not-allowed'
+            //     : 'cursor-pointer'
+            // const inputBg = item['disabled'] ? 'bg-gray-300' : ''
+            // option +=
+            //     '<label class="truncate px-1 ' +
+            //     cursor +
+            //     ' rounded-md hover:bg-gray-100 w-full h-full" title="' +
+            //     title +
+            //     '">'
+            // option += "<div class='flex align-middle'>"
+            // option +=
+            //     '<input ' +
+            //     (item['disabled'] ? 'disabled ' : '') +
+            //     readonly +
+            //     ' ' +
+            //     'class="w-3.5 h-3.5 mr-1 mt-0.5 ' +
+            //     inputBg +
+            //     ' ' +
+            //     cursor +
+            //     '" ' +
+            //     'type="' +
+            //     radio_or_checkbox +
+            //     '" ' +
+            //     'name="' +
+            //     control_name +
+            //     '" ' +
+            //     'value="' +
+            //     itemId +
+            //     '" ' +
+            //     selectedStr +
+            //     ' ' +
+            //     '>'
+            option += '<div id="' + itemId + '" class="fc-event-main">'
+            option += ' ' + item['name']
+            if (item['subtitle']) option += '<br/>' + item['subtitle']
             option += '</div>'
-            option += "</div>"
-            option += '</label>'
+            // option += '</div>'
+            // option += '</label>'
             option += '</div>'
             options.push(option)
         }
+        options.push(
+            "<p><input type='checkbox' class='hidden' id='drop-remove' /></p>"
+        )
         getEById(id).append(options)
     } else {
         console.error('Unknown control_type', control_type)
@@ -597,7 +734,8 @@ const documentReadyDropdown2 = (params) => {
     // console.log(selectedArray)
     // table = "{{$table}}"
     dataSourceDropdown = k[table]
-    if (dataSourceDropdown === undefined) console.error('key ' + table + ' not found in k[]')
+    if (dataSourceDropdown === undefined)
+        console.error('key ' + table + ' not found in k[]')
     let attr_to_compare = 'id'
     // for (let i = 0; i < listenersOfDropdown2.length; i++) {
     //     if (listenersOfDropdown2[i].column_name === id) {
@@ -608,13 +746,25 @@ const documentReadyDropdown2 = (params) => {
     // }
     // console.log(id, listenersOfDropdown2, attr_to_compare, dataSourceDropdown)
     // console.log(id, attr_to_compare, dataSourceDropdown, selectedJson)
-    reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedArray, allowClear)
+    reloadDataToDropdown2(
+        id,
+        attr_to_compare,
+        dataSourceDropdown,
+        selectedArray,
+        allowClear
+    )
 
     $(document).ready(() => {
         if (Array.isArray(listenersOfDropdown2)) {
             listenersOfDropdown2.forEach((listener) => {
-                const list = (action === 'create') ? ['reduce', 'assign'] : ['reduce',/* 'assign'*/] //<< without assign, keep value from DB
-                if (listener.triggers.includes(id) && (list).includes(listener.listen_action)) {
+                const list =
+                    action === 'create'
+                        ? ['reduce', 'assign']
+                        : ['reduce' /* 'assign'*/] //<< without assign, keep value from DB
+                if (
+                    listener.triggers.includes(id) &&
+                    list.includes(listener.listen_action)
+                ) {
                     // console.log("I am a trigger of reduce/assign, I have to trigger myself when form load [id]",)
                     getEById(id).trigger('change')
                 }

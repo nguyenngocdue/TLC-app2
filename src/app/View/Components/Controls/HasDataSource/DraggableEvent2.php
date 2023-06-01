@@ -7,7 +7,7 @@ use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class RadioOrCheckbox2 extends Component
+class DraggableEvent2 extends Component
 {
     // use HasDataSource;
     public function __construct(
@@ -45,6 +45,6 @@ class RadioOrCheckbox2 extends Component
             'action' => $this->action,
         ];
 
-        return view('components.controls.has-data-source.radio-or-checkbox2', $params);
+        return view('components.controls.has-data-source.draggable-event2', $params);
     }
 }
