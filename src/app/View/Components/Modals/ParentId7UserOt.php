@@ -118,7 +118,7 @@ class ParentId7UserOt extends Component
                 'triggers' => [$objectTypeStr],
             ],
         ];
-        $str = "";
+        $str = "\n";
         $str .= "<script>";
         $str .= " k = {...k, ..." . json_encode($k) . "};";
         $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";

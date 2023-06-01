@@ -38,7 +38,7 @@ class ParentType7 extends Component
     private function renderJS($tableName)
     {
         $k = [$tableName => $this->getDataSource(),];
-        $str = "";
+        $str = "\n";
         $str .= "<script>";
         $str .= " k = {...k, ..." . json_encode($k) . "};";
         $str .= "</script>";

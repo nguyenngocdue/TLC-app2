@@ -39,7 +39,7 @@ class ParentType7UserOt extends Component
     private function renderJS($tableName, $dataSource)
     {
         $k = [$tableName => $dataSource,];
-        $str = "";
+        $str = "\n";
         $str .= "<script>";
         $str .= " k = {...k, ..." . json_encode($k) . "};";
         $str .= "</script>";
