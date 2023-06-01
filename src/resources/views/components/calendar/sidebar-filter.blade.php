@@ -16,7 +16,7 @@
         </div>
         <div class="col-span-12 2xl:col-span-5">LOD</div> 
         <div class="col-span-12 2xl:col-span-7">
-            {{-- <x-calendar.sidebar-filter-lod name="modal_lod" /> --}}
+            <x-calendar.sidebar-filter-lod tableName="terms" name="lod_id" />
         </div>
     </div>
 </x-renderer.card>
