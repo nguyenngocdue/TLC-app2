@@ -106,6 +106,7 @@
                             var dateTime = info.dateStr
                             var draggedElDiv = info.draggedEl
                             var taskId = draggedElDiv.children[0].getAttribute('id')
+                            console.log(lodId);
                             var data = {
                                 "project_id" : projectId,
                                 "sub_project_id": subProjectId,
