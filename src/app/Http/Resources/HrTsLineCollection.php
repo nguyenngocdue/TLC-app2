@@ -23,6 +23,7 @@ class HrTsLineCollection extends ResourceCollection
                     'title' => Pj_task::findOrFail($item->task_id)->name,
                     'start' => $this->formatTimestampFromDBtoJS($item->start_time),
                     'end' => $this->calTimestampEndFromStartTimeAndDuration($item->start_time, $item->duration_in_min),
+                    'id' => $item->id,
                     'user_id' => $item->user_id,
                     'project_id' => $item->project_id,
                     'sub_project_id' => $item->sub_project_id,

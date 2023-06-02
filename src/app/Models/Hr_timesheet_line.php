@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Hr_timesheet_line extends ModelExtended
 {
     protected $fillable = [
-        'timesheetable_type', 'timesheetable_id', 'ts_date', 'ts_hour', 'project_id', 'sub_project_id',
+        'timesheetable_type', 'timesheetable_id', 'start_time', 'duration_in_min', 'ts_date', 'ts_hour', 'project_id', 'sub_project_id',
         'discipline_id', 'task_id', 'sub_task_id', 'work_mode_id', 'owner_id',
         'order_no', 'id', 'remark', 'status', 'lod_id', 'prod_routing_id', 'user_id'
     ];

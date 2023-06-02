@@ -22,7 +22,10 @@ class WelcomeCanhController extends Controller
 
         return view(
             'welcome-canh',
-            ['hrTsLines' => 1]
+            [
+                'timesheetableType' => Hr_timesheet_officer::class,
+                'timesheetableId' => 1,
+            ]
         );
     }
 }

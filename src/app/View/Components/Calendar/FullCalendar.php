@@ -11,8 +11,10 @@ class FullCalendar extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $timesheetableType,
+        private $timesheetableId,
+    ) {
         //
     }
 
@@ -24,7 +26,9 @@ class FullCalendar extends Component
     public function render()
     {
         return view('components.calendar.full-calendar', [
-            'modalId' => 'calendar001'
+            'modalId' => 'calendar001',
+            'timesheetableType' => $this->timesheetableType,
+            'timesheetableId' => $this->timesheetableId,
         ]);
     }
 }

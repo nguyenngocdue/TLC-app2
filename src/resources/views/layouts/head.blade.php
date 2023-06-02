@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('css/select2-canh.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2-due.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tlc2.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/fullcalendar.bundle.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/plugin.bundle.css') }}"> 
         
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     {{-- <script src="{{ asset('js/bootstrap.js') }}"></script> --}}

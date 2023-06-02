@@ -6,7 +6,6 @@ use App\Models\Qaqc_insp_chklst_line;
 use App\Models\User;
 use App\Repositories\Comment\CommentRepositoryInterface;
 use App\Services\BaseService;
-use App\Services\Comment\CommentServiceInterface;
 
 class CommentService extends BaseService implements CommentServiceInterface
 {

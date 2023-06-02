@@ -107,7 +107,7 @@ Route::group([
     'middleware' => 'throttle:600,1'
 ], function () {
     Route::post('overtime_request_line2', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours2']);
-    Route::get('timesheet_staff/{id}', [App\Http\Controllers\Api\v1\HR\TimeSheetStaffController::class, 'index']);
+    Route::resource('timesheet_staff', App\Http\Controllers\Api\v1\HR\TimesheetStaffController::class);
 });
 Route::group([
     'prefix' => 'v1/entity',

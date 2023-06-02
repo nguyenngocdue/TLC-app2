@@ -1,0 +1,223 @@
+@charset "UTF-8";
+.draggable {
+    transition: opacity 0.3s ease;
+    outline: none !important;
+}
+.draggable.draggable-mirror {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    border: 2px dashed var(--kt-gray-300) !important;
+    border-radius: 0.95rem;
+}
+.draggable.draggable--original {
+    opacity: 0 !important;
+}
+.draggable.draggable-source--is-dragging.draggable--over {
+    opacity: 0 !important;
+}
+.draggable .draggable-handle {
+    cursor: move;
+}
+
+body {
+    --fc-event-border-color: var(--kt-primary);
+    --fc-event-bg-color: var(--kt-primary);
+    --fc-event-text-color: var(--kt-primary-inverse);
+}
+
+.fc {
+    --fc-border-color: var(--kt-gray-200);
+    --fc-page-bg-color: #ffffff;
+    --fc-small-font-size: 0.95rem;
+    --fc-highlight-color: var(--kt-light);
+    --fc-bg-event-opacity: 0.3;
+    --fc-neutral-bg-color: var(--kt-light);
+    --fc-today-bg-color: var(--kt--success-light);
+    --fc-now-indicator-color: var(--kt-danger);
+    --fc-list-event-hover-bg-color: var(--kt-light);
+    --fc-button-text-color: var(--kt-gray-600);
+    --fc-button-bg-color: var(--kt-gray-100);
+    --fc-button-border-color: var(--kt-gray-100);
+    --fc-button-hover-bg-color: var(--kt-gray-100);
+    --fc-button-hover-border-color: var(--kt-gray-100);
+    --fc-button-active-bg-color: var(--kt-gray-200);
+    --fc-button-active-border-color: var(--kt-gray-200);
+}
+.fc table {
+    font-size: 1rem;
+}
+.fc .fc-button {
+    padding: 0.75rem 1.25rem;
+    box-shadow: none !important;
+    border: 0 !important;
+    border-radius: 0.95rem;
+    vertical-align: middle;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.fc .fc-button-primary {
+    margin: 0;
+}
+.fc .fc-button-primary .fc-icon {
+    font-size: 1.35rem;
+    margin-bottom: 0.15rem;
+}
+.fc .fc-button-primary:not(:disabled):not(.fc-button-active):focus,
+.fc .fc-button-primary:not(:disabled):not(.fc-button-active):hover,
+.fc .fc-button-primary:not(:disabled):not(.fc-button-active):active {
+    color: var(--kt-gray-900);
+}
+.fc .fc-button-primary:not(:disabled):not(.fc-button-active):focus .fc-icon,
+.fc .fc-button-primary:not(:disabled):not(.fc-button-active):hover .fc-icon,
+.fc .fc-button-primary:not(:disabled):not(.fc-button-active):active .fc-icon {
+    color: var(--kt-gray-900);
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+    color: var(--kt-gray-900);
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active .fc-icon {
+    color: var(--kt-gray-900);
+}
+.fc .fc-button-group .fc-button {
+    margin: 0 !important;
+}
+.fc .fc-toolbar-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--kt-gray-800);
+}
+.fc .fc-col-header-cell {
+    padding: 0.75rem 0.5rem;
+}
+.fc .fc-col-header-cell .fc-col-header-cell-cushion {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--kt-gray-800);
+}
+.fc .fc-scrollgrid {
+    border-radius: 0.95rem;
+}
+.fc .fc-scrollgrid thead > tr td:first-child {
+    border-top-left-radius: 0.95rem;
+}
+.fc .fc-scrollgrid thead > tr td:last-child {
+    border-top-right-radius: 0.95rem;
+}
+.fc .fc-scrollgrid tbody > tr:last-child td:first-child {
+    border-bottom-left-radius: 0.95rem;
+}
+.fc .fc-scrollgrid tbody > tr:last-child td:last-child {
+    border-bottom-right-radius: 0.95rem;
+}
+.fc .fc-daygrid-event {
+    margin-top: 3px;
+}
+.fc .fc-daygrid-dot-event .fc-event-title,
+.fc .fc-daygrid-dot-event .fc-event-time,
+.fc .fc-daygrid-block-event .fc-event-title,
+.fc .fc-daygrid-block-event .fc-event-time {
+    padding: 0.25rem 0.25rem;
+}
+.fc .fc-daygrid-day-number {
+    color: var(--kt-gray-800);
+}
+.fc .fc-daygrid-dot-event {
+    background-color: var(--kt-light);
+    color: var(--kt-gray-600);
+}
+.fc .fc-daygrid-dot-event .fc-event-title {
+    font-weight: 500;
+}
+.fc .fc-daygrid-dot-event:hover,
+.fc .fc-daygrid-dot-event.fc-event-mirror {
+    background-color: var(--kt-light);
+    color: var(--kt-primary);
+}
+.fc .fc-daygrid-event-dot {
+    margin-left: 0.5rem;
+    margin-right: 0.1rem;
+}
+.fc .fc-popover {
+    border: 0 !important;
+    background-color: var(--kt-tooltip-bg);
+    box-shadow: var(--kt-dropdown-box-shadow);
+    border-radius: 0.95rem;
+}
+.fc .fc-popover .fc-popover-header {
+    border-top-left-radius: 0.95rem;
+    border-top-right-radius: 0.95rem;
+    padding: 0.65rem 0.75rem;
+    background-color: var(--kt-tooltip-bg);
+}
+.fc .fc-popover .fc-popover-header .fc-popover-title {
+    color: var(--kt-gray-800);
+    font-size: 1rem;
+    font-weight: 500;
+}
+.fc .fc-popover .fc-popover-header .fc-popover-close {
+    font-size: 1rem;
+    color: var(--kt-gray-600);
+}
+.fc .fc-popover .fc-popover-header .fc-popover-close:hover {
+    color: var(--kt-primary);
+}
+.fc .fc-popover .fc-popover-body {
+    padding: 0.5rem 0.75rem 0.75rem 0.75rem;
+}
+.fc .fc-daygrid-more-link {
+    font-weight: 500;
+}
+.fc .fc-timegrid-slot {
+    height: 2rem;
+    font-size: 0.95rem;
+}
+.fc .fc-list-day-cushion,
+.fc .fc-list-table td {
+    padding: 0.85rem 1.15rem;
+}
+.fc .fc-list-day-text,
+.fc .fc-list-day-side-text {
+    font-size: 1.1rem;
+    color: var(--kt-gray-900);
+    font-weight: 600;
+}
+.fc .fc-list,
+.fc .fc-list-table {
+    border-radius: 0.95rem;
+}
+.fc .fc-list {
+    overflow: hidden;
+    position: relative;
+}
+.fc .fc-timegrid-axis {
+    padding-left: 0rem;
+    padding-right: 0;
+}
+.fc .fc-timegrid-event .fc-event-main {
+    padding: 0.25rem 0.25rem;
+}
+.fc .fc-timegrid-now-indicator-arrow {
+    margin-top: -1px;
+}
+
+.fc-h-event {
+    font-weight: 400;
+}
+
+@media (max-width: 767.98px) {
+    .fc .fc-header-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .fc .fc-header-toolbar .fc-toolbar-chunk:nth-child(1),
+    .fc .fc-header-toolbar .fc-toolbar-chunk:nth-child(3) {
+        order: 2;
+    }
+    .fc .fc-header-toolbar .fc-toolbar-chunk:nth-child(2) {
+        order: 1;
+    }
+    .fc .fc-header-toolbar .fc-toolbar-chunk:nth-child(2),
+    .fc .fc-header-toolbar .fc-toolbar-chunk:nth-child(1) {
+        margin-bottom: 1rem;
+    }
+}

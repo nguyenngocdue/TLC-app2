@@ -6,8 +6,12 @@ use App\Services\Comment\CommentService;
 use App\Services\Comment\CommentServiceInterface;
 use App\Repositories\Comment\CommentRepository;
 use App\Repositories\Comment\CommentRepositoryInterface;
+use App\Repositories\Hr_timesheet_line\Hr_timesheet_lineRepository;
+use App\Repositories\Hr_timesheet_line\Hr_timesheet_lineRepositoryInterface;
 use App\Repositories\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigRepository;
 use App\Repositories\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigRepositoryInterface;
+use App\Services\Hr_timesheet_line\Hr_timesheet_lineService;
+use App\Services\Hr_timesheet_line\Hr_timesheet_lineServiceInterface;
 use App\Services\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigService;
 use App\Services\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigServiceInterface;
 use Illuminate\Database\Eloquent\Model;
@@ -25,11 +29,13 @@ class AppServiceProvider extends ServiceProvider
         // singleton Services
         $this->app->singleton(CommentServiceInterface::class, CommentService::class);
         $this->app->singleton(Qaqc_insp_chklst_sht_sigServiceInterface::class, Qaqc_insp_chklst_sht_sigService::class);
+        $this->app->singleton(Hr_timesheet_lineServiceInterface::class, Hr_timesheet_lineService::class);
 
 
         // singleton Repositories
         $this->app->singleton(CommentRepositoryInterface::class, CommentRepository::class);
         $this->app->singleton(Qaqc_insp_chklst_sht_sigRepositoryInterface::class, Qaqc_insp_chklst_sht_sigRepository::class);
+        $this->app->singleton(Hr_timesheet_lineRepositoryInterface::class, Hr_timesheet_lineRepository::class);
 
 
         // register packages
