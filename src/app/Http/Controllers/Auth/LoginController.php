@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Utils\System\GetSetCookie;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -88,6 +89,8 @@ class LoginController extends Controller
             if (Auth::user()) {
                 $timezone = Auth::user()->time_zone;
                 GetSetCookie::setCookieForever('time_zone', $timezone);
+                $token = Auth::user()->createToken('tlc_token')->plainTextToken;
+                GetSetCookie::setCookieForever('tlc_token', $token);
             }
             return $this->sendLoginResponse($request);
         }
@@ -108,6 +111,9 @@ class LoginController extends Controller
     {
         if (GetSetCookie::hasCookie('time_zone')) {
             GetSetCookie::forgetCookie('time_zone');
+        }
+        if (GetSetCookie::hasCookie('tlc_token')) {
+            GetSetCookie::forgetCookie('tlc_token');
         }
         $this->guard()->logout();
 

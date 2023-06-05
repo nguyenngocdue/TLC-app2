@@ -23,7 +23,7 @@ class HrTsLineStoreResource extends JsonResource
             'timesheetable_id' => $request->timesheetable_id,
             'start_time' => $this->formatTimestampFromJStoDB($request->date_time),
             'duration_in_min' => $this->isFormatJsDateTime($request->date_time) ? 60 : null,
-            'user_id' => CurrentUser::id() ?? 1,
+            'user_id' => CurrentUser::id() ?? null,
             'project_id' => $request->project_id,
             'sub_project_id' => $request->sub_project_id,
             'prod_routing_id' => $request->prod_routing_id,
@@ -33,7 +33,7 @@ class HrTsLineStoreResource extends JsonResource
             'sub_task_id' => $request->sub_task_id,
             'work_mode_id' => $request->work_mode_id,
             'remark' => $request->remark,
-            'owner_id' => CurrentUser::id() ?? 1,
+            'owner_id' => CurrentUser::id() ?? null,
             'status' => $request->status ?? 'new',
         ];
     }

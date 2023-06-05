@@ -1,57 +1,34 @@
 <div id='calendar'></div>
-<div id="{{$modalId}}" class="hidden fixed flex z-10 items-center justify-center">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <!-- Modal header -->
-                <div class="items-center justify-between p-2 border-b rounded-t dark:border-gray-600">
-                    <div class="flex">
-                        <h3 class="text-lg justify-center font-semibold text-gray-900 dark:text-white">
-                            Task: 
-                        </h3>
-                        <button type="button" onclick="closeModalEvent()" class="text-gray-900 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="large-modal">
-                            <i class="fa-sharp fa-solid fa-xmark w-6 h-6 text-base"></i>
-                            <span class="sr-only">Close modal</span>
-                        </button>
-                    </div>
-                </div>
-                <!-- Modal body -->
-                <div class="px-6 overflow-y-auto w-96 h-96" data-container>
-                    
-                </div>
-                <!-- Modal footer -->
-                <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
-                    <x-renderer.button click="onclick='closeModalEvent()'">Cancel</x-renderer.button>
-                    <x-renderer.button class="mx-2" type='success'>Save</x-renderer.button>
-                </div> 
-            </div>
-</div>
-<div id="modal-click-right" class="hidden fixed flex z-10 items-center justify-center">
-    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <button onclick="deleteEvent(this)" value="" class="delete-button inline-flex items-center w-full px-5 py-2 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
-            <span>Delete</span>
-            <i class="ml-2 fa fa-trash"></i>
-        </button>
-    </div>
-</div>
-<script >
+<x-calendar.modal-click modalId="{{$modalId}}"/>
+<x-calendar.modal-click-right />
+<script type="text/javascript">
     const modalId = @json($modalId);
+    const id = 1;
     const modal = $(`#`+modalId);
     const modalClickRight = $(`#modal-click-right`);
+    const modalTitleTaskValue = $(`#title_task_value`);
+    const modalSubTask = $(`#sub_task_id`);
+    const modalWorkMode = $(`#work_mode_id`);
+    const modalRemark = $(`#remark`);
     const timesheetableType = @json($timesheetableType);
     const timesheetableId = @json($timesheetableId);
-    let events = []
+    const apiUrl = @json($apiUrl);
+    const token = @json($token);
+    modalContainer = document.querySelector("[modal-container]");
+    let events = [];
     $(document).click(function(event) {
         var target = $(event.target);
         if (!target.is("#modal-click-right") && !target.closest("#modal-click-right").length) {
             modalClickRight.addClass("hidden");
         }
     });
-    callApiGetEvents(1); 
-    function callApiGetEvents(id){
+    callApiGetEvents(id,apiUrl);
+    function callApiGetEvents(id,url){
             $.ajax({
             type: 'get',
-            url: `https://dev2.tlcmodular.com/api/v1/hr/timesheet_staff/${id}`,
+            url: `${url}/${id}`,
             headers: {
+                'Authorization': 'Bearer ' + token,
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             },
             success: function (response) {
@@ -72,7 +49,7 @@
                     });
                     var calendar = new Calendar(calendarEl, {
                         headerToolbar: {
-                        left: 'prev,next today',
+                        left:'today',     //'prev,next today',
                         center: 'title',
                         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                         },
@@ -81,18 +58,36 @@
                         aspectRatio: 1.5,
                         initialView: 'timeGridWeek',
                         locale: 'en',
+                        firstDay: 1,
                         theme: 'sandstone',
                         weekNumbers: true,
                         editable: true,
                         droppable: true,
                         events: events,
                         eventClick: function(info){
+                            //indentify location modal
                             var {clientX , clientY} = info.jsEvent;
                             var modalTop = clientY / 2;
                             var modalLeft = clientX;
-                            modal.css({ top: modalTop, left: modalLeft }).removeClass('hidden')
+                            modal.css({ top: modalTop, left: modalLeft }).removeClass('hidden');
+                            //handle modal
+                            handleUpdateModalEvent(info);
+                            //extended value render modal
+                            var extendedProps = info.event._def.extendedProps;
+                            var subTaskId = extendedProps.sub_task_id;
+                            var workModeId =    extendedProps.work_mode_id;
+                            var remarkValue = extendedProps.remark;
+                            //render modal trigger
+                            modalTitleTaskValue.text(`Task : ${info.event.title}`);
+                            modalSubTask.val(subTaskId);
+                            modalSubTask.trigger('change');
+                            modalWorkMode.val(workModeId);
+                            modalWorkMode.trigger('change');
+                            modalRemark.val(remarkValue);
+
                         },
                         eventDidMount: function(info) {
+                            //handle click mouse right
                             info.el.addEventListener('contextmenu', function(e) {
                             e.preventDefault();
                             handleContextMenu(info);
@@ -103,10 +98,9 @@
                             var subProjectId = document.getElementById('sub_project_id').value;
                             var lodId = document.getElementById('lod_id').value;
                             var disciplineId = document.getElementById('discipline_id').value;
-                            var dateTime = info.dateStr
-                            var draggedElDiv = info.draggedEl
-                            var taskId = draggedElDiv.children[0].getAttribute('id')
-                            console.log(lodId);
+                            var dateTime = info.dateStr;
+                            var draggedElDiv = info.draggedEl;
+                            var taskId = draggedElDiv.children[0].getAttribute('id');
                             var data = {
                                 "project_id" : projectId,
                                 "sub_project_id": subProjectId,
@@ -117,19 +111,16 @@
                                 "timesheetable_type": timesheetableType,
                                 "timesheetable_id": timesheetableId
                             }
-                            const url = 'https://dev2.tlcmodular.com/api/v1/hr/timesheet_staff'
-                            callApi('post',url,data,info,function() {
-                                window.location.reload();
-                            })
+                            callApi('post',url,data,info,callback());
                         },
                         eventDrop: function(info) {
-                            eventUpdateCalendar(info)
+                            eventUpdateCalendar(info);
                         },
                         eventResize: function(info) {
-                            eventUpdateCalendar(info)
+                            eventUpdateCalendar(info);
                         }
                     })
-                    calendar.render()
+                    calendar.render();
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {},
@@ -139,34 +130,54 @@
         var rect = info.el.getBoundingClientRect();
         var x = rect.top;
         var y = rect.left + 200;
-        modalClickRight.css({ top: x, left: y }).removeClass('hidden')
+        modalClickRight.css({ top: x, left: y }).removeClass('hidden');
         var deleteButton = modalClickRight.find('.delete-button');
         deleteButton.attr('value', info.event.id);
     }
     function closeModalEvent(){
-        modal.addClass('hidden')
+        modal.addClass('hidden');
+    }
+    function handleUpdateModalEvent(info) {
+        var updateModalButton = modal.find('.update-modal-button');
+        updateModalButton.attr('value', info.event.id);
+    }
+    function updateModalEvent(button){
+        var timesheetLineId = button.value;
+        var data = {
+            'sub_task_id' : modalSubTask.val(),
+            'work_mode_id': modalWorkMode.val(),
+            'remark': modalRemark.val(),
+        }
+        const url = `${apiUrl}/${timesheetLineId}`;
+        if(timesheetLineId){
+            callApi('patch',url,data,null,callback());
+        }else{
+            toastr.warning(`Please check Timesheet line ID in the modal is nullable or empty`);
+        }
+    }
+    function callback(){
+        window.location.reload();
     }
     function deleteEvent(button){
         var timesheetLineId = button.value;
-        var url = `https://dev2.tlcmodular.com/api/v1/hr/timesheet_staff/${timesheetLineId}`
-        callApi('delete',url,null,null,function() {
-            window.location.reload();
-        });
+        var url = `${apiUrl}/${timesheetLineId}`;
+        callApi('delete',url,null,null,callback());
     }
     function callApi(type = 'get', url ,data = [] ,info = null, callback){
         $.ajax({
             type: type,
             url: url,
             headers: {
+                'Authorization': 'Bearer ' + token,
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             },
             data : data,
             success: (response) =>{
-                if(response){
+                if(response.success){
                     if(callback){
-                        callback()
+                        callback();
                     }
-                    toastr.success(response.message)
+                    toastr.success(response.message);
                 }
             },
             error: (jqXHR, textStatus, errorThrown) => {
@@ -184,13 +195,15 @@
         return data;
     }
     function eventUpdateCalendar(info){
-        var timesheetLineId = info.event.id
-        var data = dataUpdate(info)
-        const url = `https://dev2.tlcmodular.com/api/v1/hr/timesheet_staff/${timesheetLineId}`
+        var timesheetLineId = info.event.id;
+        var data = dataUpdate(info);
+        const url = `${apiUrl}/${timesheetLineId}`;
         if(timesheetLineId){
-            callApi('put',url,data,info)
+            callApi('patch',url,data,info);
         }else{
             info.revert();
         }
     }
 </script>
+
+

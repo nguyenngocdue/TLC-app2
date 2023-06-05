@@ -19,7 +19,7 @@ class HrTsLineUpdateResource extends JsonResource
         return [
             'timesheetable_type' => $request->timesheetable_type,
             'timesheetable_id' => $request->timesheetable_id,
-            'start_time' => $this->formatTimestampFromJStoDB($request->start_time),
+            'start_time' => $request->start_time ? $this->formatTimestampFromJStoDB($request->start_time) : null,
             'duration_in_min' => $this->calDurationFromStartTimeAndEndTime($request->start_time, $request->end_time),
             'user_id' => $request->user_id,
             'project_id' => $request->project_id,

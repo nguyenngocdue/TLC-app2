@@ -104,10 +104,16 @@ Route::group(
 );
 Route::group([
     'prefix' => 'v1/hr',
-    'middleware' => 'throttle:600,1'
+    'middleware' => ['auth:sanctum', 'throttle:600,1'],
+], function () {
+    Route::resource('timesheet_staff', App\Http\Controllers\Api\v1\HR\TimeSheetOfficerController::class);
+    Route::resource('timesheet_worker', App\Http\Controllers\Api\v1\HR\TimeSheetWorkerController::class);
+});
+Route::group([
+    'prefix' => 'v1/hr',
+    'middleware' => 'throttle:600,1',
 ], function () {
     Route::post('overtime_request_line2', [App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController::class, 'getRemainingHours2']);
-    Route::resource('timesheet_staff', App\Http\Controllers\Api\v1\HR\TimesheetStaffController::class);
 });
 Route::group([
     'prefix' => 'v1/entity',

@@ -10,7 +10,7 @@
       <x-calendar.sidebar-calendar></x-calendar.sidebar-calendar>
       </div>
       <div class="col-span-5">
-        <x-calendar.full-calendar timesheetableType="{{$timesheetableType}}" timesheetableId="{{$timesheetableId}}"></x-calendar.full-calendar>
+        <x-calendar.full-calendar timesheetableType="{{$timesheetableType}}" timesheetableId="{{$timesheetableId}}" apiUrl="{{$apiUrl}}"></x-calendar.full-calendar>
       </div>
   </div>
 </div>

@@ -1,3 +1,4 @@
+let modalContainer = null
 let dataContainer = null
 let dataTopDrawer = null
 let searchInput = null

@@ -3,34 +3,48 @@
 namespace App\Http\Controllers\Api\v1\HR;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TimesheetStaffRequest;
-use App\Http\Resources\HrTsLineCollection;
 use App\Http\Resources\HrTsLineStoreResource;
 use App\Http\Resources\HrTsLineUpdateResource;
-use App\Models\Hr_timesheet_officer;
+use App\Models\Hr_timesheet_line;
 use App\Services\Hr_timesheet_line\Hr_timesheet_lineServiceInterface;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class TimesheetStaffController extends Controller
+abstract class TimesheetController extends Controller
 {
     public $timesheetLineService;
     public function __construct(Hr_timesheet_lineServiceInterface $timesheetLineService)
     {
         $this->timesheetLineService = $timesheetLineService;
     }
-    public function show(Request $request, $id)
-    {
-        $hrTsLines = Hr_timesheet_officer::findOrFail($id)->getHrTsLines;
-        return new HrTsLineCollection($hrTsLines);
-    }
+    /**
+     * abstract function show return data (all Timesheet line by model Hr_timesheet_officer or Hr_timesheet_worker)
+     *
+     * @param Request $request
+     * @param mixed $id
+     * @return void
+     */
+    abstract protected function show(Request $request, $id);
+    /**
+     * Create new Timesheet Line document
+     *
+     * @param Request $request
+     * @return void
+     */
     public function store(Request $request)
     {
         $resource = new HrTsLineStoreResource($request);
         $data = $resource->toArray($request);
         try {
             $timesheetLine = $this->timesheetLineService->create($data);
+            // $this->eventCreatedNotificationAndMail(
+            //     $timesheetLine->getAttributes(),
+            //     $timesheetLine->id,
+            //     'new',
+            //     $this->type,
+            //     Hr_timesheet_line::class,
+            //     []
+            // );
             return ResponseObject::responseSuccess(
                 $timesheetLine,
                 [],
@@ -42,7 +56,13 @@ class TimesheetStaffController extends Controller
             );
         }
     }
-
+    /**
+     * Update fields give Timesheet Line by document id
+     *
+     * @param Request $request
+     * @param mixed $id
+     * @return void
+     */
     public function update(Request $request, $id)
     {
         $resource = new HrTsLineUpdateResource($request);
@@ -61,7 +81,12 @@ class TimesheetStaffController extends Controller
             );
         }
     }
-
+    /**
+     * Delete Timesheet Line by document id
+     *
+     * @param mixed $id
+     * @return void
+     */
     public function destroy($id)
     {
         try {

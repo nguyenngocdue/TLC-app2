@@ -1,0 +1,37 @@
+@props(['modalId'])
+<div id="{{$modalId}}" class="hidden fixed flex z-10 items-center justify-center">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div class="items-center justify-between p-2 border-b rounded-t dark:border-gray-600">
+            <div class="flex">
+                <h3 class="text-lg justify-center font-semibold text-gray-900 dark:text-white" id="title_task_value">
+                    Task: 
+                </h3>
+                <button type="button" onclick="closeModalEvent()" class="text-gray-900 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="large-modal">
+                    <i class="fa-sharp fa-solid fa-xmark w-6 h-6 text-base"></i>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+        </div>
+        <!-- Modal body -->
+        <div class="px-6 overflow-y-auto w-96 h-96" modal-container>
+            <div class="grid grid-cols-12">
+                <div class="col-span-12 mt-2">
+                    Sub task: <x-calendar.modal-filter-sub-task tableName="pj_sub_tasks" name="sub_task_id"></x-calendar.modal-filter-sub-task>
+                </div>
+                <div class="col-span-12">
+                    Work mode: <x-calendar.modal-filter-work-mode tableName="work_modes" name="work_mode_id"></x-calendar.modal-filter-work-mode>
+                </div>
+                <div class="col-span-12">
+                    Remark: <x-controls.text2 name="remark" value="" placeholder="Remark reason"/>
+                </div>
+            </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
+            <x-renderer.button onClick="closeModalEvent()">Cancel</x-renderer.button>
+            <x-renderer.button onClick="updateModalEvent(this)" class="mx-2 update-modal-button" type='success'>Save</x-renderer.button>
+        </div> 
+    </div>
+</div>

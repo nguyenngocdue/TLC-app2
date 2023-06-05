@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Utils\System\GetSetCookie;
 use Illuminate\View\Component;
 
 class FullCalendar extends Component
@@ -14,6 +15,7 @@ class FullCalendar extends Component
     public function __construct(
         private $timesheetableType,
         private $timesheetableId,
+        private $apiUrl,
     ) {
         //
     }
@@ -25,10 +27,16 @@ class FullCalendar extends Component
      */
     public function render()
     {
+        $token = '';
+        if (GetSetCookie::hasCookie('tlc_token')) {
+            $token = GetSetCookie::getCookie('tlc_token');
+        }
         return view('components.calendar.full-calendar', [
             'modalId' => 'calendar001',
             'timesheetableType' => $this->timesheetableType,
             'timesheetableId' => $this->timesheetableId,
+            'apiUrl' => $this->apiUrl,
+            'token' => $token,
         ]);
     }
 }
