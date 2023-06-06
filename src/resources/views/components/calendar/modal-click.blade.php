@@ -1,7 +1,7 @@
 @props(['modalId'])
 <div id="{{$modalId}}" class="hidden fixed flex z-10 items-center justify-center">
     <!-- Modal content -->
-    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+    <div class="relative bg-white rounded-lg shadow-lg border-[1.5px] dark:bg-gray-700">
         <!-- Modal header -->
         <div class="items-center justify-between p-2 border-b rounded-t dark:border-gray-600">
             <div class="flex">
@@ -28,7 +28,7 @@
                     Work mode: <x-calendar.modal-filter-work-mode tableName="work_modes" name="work_mode_id"/>
                 </div>
                 <div class="col-span-12">
-                    Remark: <x-controls.text2 name="remark" value="" placeholder="Remark reason"/>
+                    Remark: <x-controls.textarea2 name="remark" value="" />
                 </div>
             </div>
         </div>

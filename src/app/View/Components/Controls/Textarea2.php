@@ -10,7 +10,7 @@ class Textarea2 extends Component
     public function __construct(
         private $name,
         private $value,
-        private $colType,
+        private $colType = '',
         private $readOnly = false,
     ) {
     }

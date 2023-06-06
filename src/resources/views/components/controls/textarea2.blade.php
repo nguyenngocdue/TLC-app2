@@ -1,4 +1,5 @@
 <textarea 
+    id="{{$name}}" 
     name="{{$name}}" 
     rows="5" 
     component="controls/textarea2"

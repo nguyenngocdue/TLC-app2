@@ -32,7 +32,7 @@ class HrTsLineStoreResource extends JsonResource
             'discipline_id' => $request->discipline_id,
             'task_id' => $request->task_id,
             'sub_task_id' => $request->sub_task_id,
-            'work_mode_id' => $request->work_mode_id,
+            'work_mode_id' => $request->work_mode_id ?? 2,
             'remark' => $request->remark,
             'owner_id' => CurrentUser::id() ?? null,
             'status' => $request->status ?? 'new',
