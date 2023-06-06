@@ -12,8 +12,8 @@
         <div class="col-span-12 2xl:col-span-7">
             <x-calendar.sidebar-filter-lod tableName="terms" name="lod_id" typeToLoadListener="hr_timesheet_line" selected="228"/>
         </div>
-        <div class="col-span-12 2xl:col-span-5 text-right pr-2">Discipline</div> 
-        <div class="col-span-12 2xl:col-span-7">
+        <div class="hidden col-span-12 2xl:col-span-5 text-right pr-2">Discipline</div> 
+        <div class="hidden col-span-12 2xl:col-span-7">
             <x-calendar.sidebar-filter-discipline tableName="user_disciplines" name="discipline_id" typeToLoadListener="hr_timesheet_line" selected="{{$discipline}}"/>
         </div>
     </div>

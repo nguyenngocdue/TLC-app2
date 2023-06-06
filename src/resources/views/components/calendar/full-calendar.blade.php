@@ -56,6 +56,7 @@
                         center: 'title',
                         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                         },
+                        // initialDate: '2023-06-15',
                         height: 850,
                         contentHeight: 830,
                         aspectRatio: 1.5,
