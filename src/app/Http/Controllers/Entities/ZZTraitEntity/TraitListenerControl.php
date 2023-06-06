@@ -18,28 +18,44 @@ trait TraitListenerControl
         $str .= "</script>";
         $str .= "\n";
         echo $str;
-        if (isset($this->typeToLoadListener) && !is_null($this->typeToLoadListener)) {
-            $this->renderJSForListener($this->typeToLoadListener);
-        }
+        $this->renderJSForListener();
     }
 
-    private function renderJSForListener($typeToLoadListener)
+    private function getListenersOfDropdown2()
     {
-        $a = $this->getListeners2($typeToLoadListener);
+        $a = $this->getListeners2($this->typeToLoadListener);
         $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $this->name));
         $listenersOfDropdown2 = [$a[0]];
-        // dump($listenersOfDropdown2);
+        return $listenersOfDropdown2;
+    }
 
-        $str = "\n";
-        $str .= "<script>";
-        $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";
-        $str .= "</script>";
-        $str .= "\n";
-        echo $str;
+    private function renderJSForListener()
+    {
+        if (isset($this->typeToLoadListener) && !is_null($this->typeToLoadListener)) {
+            $listenersOfDropdown2 = $this->getListenersOfDropdown2();
+
+            $str = "\n";
+            $str .= "<script>";
+            $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";
+            $str .= "</script>";
+            $str .= "\n";
+            echo $str;
+        }
     }
 
     private function getParamsForHasDataSource()
     {
+        switch ($this->control) {
+            case "radio-or-checkbox2":
+                $classList = ClassList::RADIO_CHECKBOX;
+                break;
+            case "dropdown2":
+                $classList = ClassList::DROPDOWN;
+                break;
+            default:
+                $classList = "border border-gray-200 rounded (Unknown-classList-of-$this->control)";
+                break;
+        }
         return  [
             'name' => $this->name,
             'id' => $this->name,
@@ -47,7 +63,7 @@ trait TraitListenerControl
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $this->tableName,
             'readOnly' => $this->readOnly,
-            'classList' => ClassList::DROPDOWN,
+            'classList' => $classList,
             'multiple' => $this->multiple ? true : false,
             'allowClear' => $this->allowClear,
         ];

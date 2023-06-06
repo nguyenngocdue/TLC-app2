@@ -9,7 +9,6 @@ use Illuminate\Support\Arr;
 
 class SidebarFilterProject extends Component
 {
-    // use TraitMorphTo;
     use TraitListenerControl;
     /**
      * Create a new component instance.
@@ -21,7 +20,7 @@ class SidebarFilterProject extends Component
         private $tableName,
         private $selected = "",
         private $multiple = false,
-        // private $type,
+        private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $readOnly = false,
         private $allowClear = false,
     ) {

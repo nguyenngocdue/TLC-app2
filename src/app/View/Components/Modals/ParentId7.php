@@ -2,13 +2,13 @@
 
 namespace App\View\Components\Modals;
 
-use App\Utils\ClassList;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
 class ParentId7 extends Component
 {
-    // use TraitMorphTo;
+    use TraitListenerControl;
     /**
      * Create a new component instance.
      *
@@ -16,50 +16,42 @@ class ParentId7 extends Component
      */
     public function __construct(
         private $name,
+        private $tableName,
         private $selected = "",
         private $multiple = false,
-        // private $type,
         private $readOnly = false,
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
+        private $typeToLoadListener = 'any_thing_but_not_null',
+
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
-    private function getDataSource($attr_name)
+    private function getDataSource()
     {
         return [
-            ['id' => 2001, 'name' => 'B001', $attr_name => 1001],
-            ['id' => 2002, 'name' => 'B002', $attr_name => 1002],
-            ['id' => 2003, 'name' => 'B003', $attr_name => [1001, '1003-a']],
+            ['id' => 2001, 'name' => 'B001', 'ot_team_id' => 1001],
+            ['id' => 2002, 'name' => 'B002', 'ot_team_id' => 1002],
+            ['id' => 2003, 'name' => 'B003', 'ot_team_id' => [1001, '1003-a']],
         ];
         // return $this->getAllIdMorphMany($attr_name);
     }
 
-
-    private function renderJS($tableName, $objectTypeStr, $objectIdStr)
+    private function getListenersOfDropdown2()
     {
-        $attr_name = $tableName . '_parent_fake_id';
-        $k = [$tableName => $this->getDataSource($attr_name),];
-        $listenersOfDropdown2 = [
+        return [
             [
                 'listen_action' => 'reduce',
-                'column_name' => $objectIdStr,
-                'listen_to_attrs' => [$attr_name],
-                'listen_to_fields' => [$objectIdStr],
-                'listen_to_tables' => [$tableName],
-                'table_name' => $tableName,
+                'column_name' => $this->name,
+                'listen_to_attrs' => ['ot_team_id'],
+                'listen_to_fields' => [$this->name],
+                'listen_to_tables' => [$this->tableName],
+                'table_name' => $this->tableName,
                 // 'attrs_to_compare' => ['id'],
-                'triggers' => [$objectTypeStr],
+                'triggers' => ['ot_team_id'],
             ],
         ];
-        $str = "\n";
-        $str .= "<script>";
-        $str .= " k = {...k, ..." . json_encode($k) . "};";
-        $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";
-        $str .= "</script>";
-        $str .= "\n";
-        echo $str;
     }
 
     /**
@@ -69,21 +61,8 @@ class ParentId7 extends Component
      */
     public function render()
     {
-        // dump("Selected: '" . $this->selected . "'");
-        $tableName = "modal_" . $this->name;
-        $params = [
-            'name' => $this->name,
-            'id' => $this->name,
-            'selected' => $this->selected,
-            'multipleStr' => $this->multiple ? "multiple" : "",
-            'table' => $tableName,
-            'readOnly' => $this->readOnly,
-            'classList' => ClassList::DROPDOWN,
-            // 'entity' => $this->type,
-            'multiple' => $this->multiple ? true : false,
-            'allowClear' => $this->allowClear,
-        ];
-        $this->renderJS($tableName, 'modal_ot_team', $this->name);
+        $this->renderJSForK($this->tableName); //, 'modal_ot_team', $this->name);
+        $params = $this->getParamsForHasDataSource();
         // dump($params);
         return view('components.controls.has-data-source.' . $this->control, $params);
     }
