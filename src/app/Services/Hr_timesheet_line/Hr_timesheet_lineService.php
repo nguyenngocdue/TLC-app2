@@ -12,6 +12,10 @@ class Hr_timesheet_lineService extends BaseService implements Hr_timesheet_lineS
     {
         $this->hrTimesheetLineRepository = $hrTimesheetLineRepository;
     }
+    public function find($id)
+    {
+        return $this->hrTimesheetLineRepository->find($id);
+    }
     public function create($request)
     {
         return $this->hrTimesheetLineRepository->create($request);

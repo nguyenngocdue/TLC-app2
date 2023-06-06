@@ -3,11 +3,11 @@
 namespace App\Http\Resources;
 
 use App\Utils\Support\Calculator;
+use App\Utils\Support\DateTimeConcern;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class HrTsLineUpdateResource extends JsonResource
 {
-    use Calculator;
     /**
      * Transform the resource into an array.
      *
@@ -19,8 +19,8 @@ class HrTsLineUpdateResource extends JsonResource
         return [
             'timesheetable_type' => $request->timesheetable_type,
             'timesheetable_id' => $request->timesheetable_id,
-            'start_time' => $request->start_time ? $this->formatTimestampFromJStoDB($request->start_time) : null,
-            'duration_in_min' => $this->calDurationFromStartTimeAndEndTime($request->start_time, $request->end_time),
+            'start_time' => $request->start_time ? DateTimeConcern::formatTimestampFromJStoDB($request->start_time) : null,
+            'duration_in_min' => DateTimeConcern::calDurationFromStartTimeAndEndTime($request->start_time, $request->end_time),
             'user_id' => $request->user_id,
             'project_id' => $request->project_id,
             'sub_project_id' => $request->sub_project_id,
