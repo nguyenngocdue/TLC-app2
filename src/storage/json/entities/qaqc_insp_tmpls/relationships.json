@@ -1,18 +1,4 @@
 {
-    "_getProdRouting": {
-        "name": "_getProdRouting",
-        "relationship": "belongsTo",
-        "control_name": "prod_routing_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "dropdown",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_getOwner": {
         "name": "_getOwner",
         "relationship": "belongsTo",
@@ -41,10 +27,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getProdRoutings()": {
-        "name": "_getProdRoutings()",
+    "_getProdRoutingsOfInspTmpl()": {
+        "name": "_getProdRoutingsOfInspTmpl()",
         "relationship": "getCheckedByField",
-        "control_name": "getProdRoutings()",
+        "control_name": "getProdRoutingsOfInspTmpl()",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

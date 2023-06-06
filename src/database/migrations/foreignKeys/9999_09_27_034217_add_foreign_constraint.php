@@ -141,7 +141,7 @@ return new class extends Migration
 
         //************** QAQC INSP MODULE **************/
         Schema::table('qaqc_insp_tmpls', function (Blueprint $table) {
-            $table->foreign('prod_routing_id')->references('id')->on('prod_routings');
+            // $table->foreign('prod_routing_id')->references('id')->on('prod_routings');
         });
         Schema::table('qaqc_insp_tmpl_lines', function (Blueprint $table) {
             // $table->foreign('qaqc_insp_tmpl_id')->references('id')->on('qaqc_insp_tmpls')->onDelete('cascade')->onUpdate('cascade');

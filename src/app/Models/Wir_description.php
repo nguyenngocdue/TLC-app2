@@ -19,7 +19,7 @@ class Wir_description extends ModelExtended
 
     public $oracyParams = [
         "getDefMonitors1()" => ["getCheckedByField", User::class],
-        "getRoutings()" => ["getCheckedByField", Prod_routing::class],
+        "getProdRoutingsOfWirDescription()" => ["getCheckedByField", Prod_routing::class],
     ];
 
     public function getProdRoutingDetails()
@@ -46,7 +46,7 @@ class Wir_description extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    public function getRoutings()
+    public function getProdRoutingsOfWirDescription()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

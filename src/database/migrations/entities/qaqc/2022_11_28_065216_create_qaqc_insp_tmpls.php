@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('prod_routing_id');
+            // $table->unsignedBigInteger('prod_routing_id');
             $table->appendCommonFields();
         });
         // Schema::create('qaqc_insp_tmpls', function (Blueprint $table) {

@@ -26,6 +26,8 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id")->nullable();
             $table->date("ts_date")->nullable();
             $table->float("ts_hour")->nullable();
+            $table->dateTime("start_time")->nullable();
+            $table->float("duration_in_min")->nullable();
             $table->unsignedBigInteger("project_id")->nullable();
             $table->unsignedBigInteger("sub_project_id")->nullable();
             $table->unsignedBigInteger("prod_routing_id")->nullable();

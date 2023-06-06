@@ -103,7 +103,7 @@
         "listen_action": "reduce",
         "triggers": "prod_discipline_id,prod_routing_id",
         "listen_to_fields": "wir_description_id,wir_description_id",
-        "listen_to_attrs": "prod_discipline_id,getRoutings()",
+        "listen_to_attrs": "prod_discipline_id,getProdRoutingsOfWirDescription()",
         "attrs_to_compare": "id",
         "expression": "",
         "ajax_response_attribute": "",
