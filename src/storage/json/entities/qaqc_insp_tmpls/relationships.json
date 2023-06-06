@@ -41,10 +41,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getProdRoutings()": {
-        "name": "_getProdRoutings()",
+    "_getProdRoutingsOfInspTmpl()": {
+        "name": "_getProdRoutingsOfInspTmpl()",
         "relationship": "getCheckedByField",
-        "control_name": "getProdRoutings()",
+        "control_name": "getProdRoutingsOfInspTmpl()",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

@@ -107,9 +107,9 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_getProdRoutings()": {
-        "name": "_getProdRoutings()",
-        "column_name": "getProdRoutings()",
+    "_getProdRoutingsOfSubProject()": {
+        "name": "_getProdRoutingsOfSubProject()",
+        "column_name": "getProdRoutingsOfSubProject()",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",

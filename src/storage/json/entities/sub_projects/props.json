@@ -170,9 +170,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_getProdRoutings()": {
-        "name": "_getProdRoutings()",
-        "column_name": "getProdRoutings()",
+    "_getProdRoutingsOfSubProject()": {
+        "name": "_getProdRoutingsOfSubProject()",
+        "column_name": "getProdRoutingsOfSubProject()",
         "column_type": "oracy_prop",
         "label": "Available Routings",
         "control": "dropdown_multi",

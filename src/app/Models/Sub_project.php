@@ -19,7 +19,7 @@ class Sub_project extends ModelExtended
 
     public $oracyParams = [
         "getProjectMembers()" => ['getCheckedByField', User::class],
-        "getProdRoutings()" => ['getCheckedByField', Prod_routing::class],
+        "getProdRoutingsOfSubProject()" => ['getCheckedByField', Prod_routing::class],
     ];
 
     public function getProjectMembers()
@@ -28,7 +28,7 @@ class Sub_project extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    public function getProdRoutings()
+    public function getProdRoutingsOfSubProject()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

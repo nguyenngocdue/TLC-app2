@@ -69,10 +69,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getRoutings()": {
-        "name": "_getRoutings()",
+    "_getProdRoutingsOfWirDescription()": {
+        "name": "_getProdRoutingsOfWirDescription()",
         "relationship": "getCheckedByField",
-        "control_name": "getRoutings()",
+        "control_name": "getProdRoutingsOfWirDescription()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

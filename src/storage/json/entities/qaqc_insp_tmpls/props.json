@@ -94,9 +94,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_getProdRoutings()": {
-        "name": "_getProdRoutings()",
-        "column_name": "getProdRoutings()",
+    "_getProdRoutingsOfInspTmpl()": {
+        "name": "_getProdRoutingsOfInspTmpl()",
+        "column_name": "getProdRoutingsOfInspTmpl()",
         "column_type": "oracy_prop",
         "label": "Prod Routings",
         "control": "dropdown_multi",

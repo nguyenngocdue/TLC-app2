@@ -69,10 +69,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getProdRoutings()": {
-        "name": "_getProdRoutings()",
+    "_getProdRoutingsOfSubProject()": {
+        "name": "_getProdRoutingsOfSubProject()",
         "relationship": "getCheckedByField",
-        "control_name": "getProdRoutings()",
+        "control_name": "getProdRoutingsOfSubProject()",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

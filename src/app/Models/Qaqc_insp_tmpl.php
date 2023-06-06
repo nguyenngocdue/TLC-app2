@@ -18,7 +18,7 @@ class Qaqc_insp_tmpl extends ModelExtended
     ];
 
     public $oracyParams = [
-        "getProdRoutings()" => ["getCheckedByField", Prod_routing::class],
+        "getProdRoutingsOfInspTmpl()" => ["getCheckedByField", Prod_routing::class],
     ];
 
     public function getSheets()
@@ -39,7 +39,7 @@ class Qaqc_insp_tmpl extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getProdRoutings()
+    public function getProdRoutingsOfInspTmpl()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('reversed_name')->nullable();
             $table->text('description')->nullable();
-            $table->string('slug')->unique();
+            // $table->string('slug')->unique(); //<<Very annoying
             $table->appendCommonFields();
         });
         // Schema::create('fields', function (Blueprint $table) {

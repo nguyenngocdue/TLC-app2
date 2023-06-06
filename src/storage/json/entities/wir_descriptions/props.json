@@ -132,9 +132,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_getRoutings()": {
-        "name": "_getRoutings()",
-        "column_name": "getRoutings()",
+    "_getProdRoutingsOfWirDescription()": {
+        "name": "_getProdRoutingsOfWirDescription()",
+        "column_name": "getProdRoutingsOfWirDescription()",
         "column_type": "oracy_prop",
         "label": "Routings",
         "control": "dropdown_multi",
