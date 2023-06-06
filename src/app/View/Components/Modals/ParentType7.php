@@ -2,13 +2,13 @@
 
 namespace App\View\Components\Modals;
 
-use App\Utils\ClassList;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
 class ParentType7 extends Component
 {
-    // use TraitMorphTo;
+    use TraitListenerControl;
     /**
      * Create a new component instance.
      *
@@ -16,13 +16,14 @@ class ParentType7 extends Component
      */
     public function __construct(
         private $name,
+        private $tableName,
         private $selected = "",
         private $multiple = false,
-        // private $type,
         private $readOnly = false,
+        private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
+        private $typeToLoadListener = null,
     ) {
-        // if (old($name)) $this->selected = old($name);
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
@@ -35,17 +36,6 @@ class ParentType7 extends Component
         ];
     }
 
-    private function renderJS($tableName)
-    {
-        $k = [$tableName => $this->getDataSource(),];
-        $str = "\n";
-        $str .= "<script>";
-        $str .= " k = {...k, ..." . json_encode($k) . "};";
-        $str .= "</script>";
-        $str .= "\n";
-        echo $str;
-    }
-
     /**
      * Get the view / contents that represent the component.
      *
@@ -53,20 +43,8 @@ class ParentType7 extends Component
      */
     public function render()
     {
-        $tableName = "modal_" . $this->name;
-        $params = [
-            'name' => $this->name,
-            'id' => $this->name,
-            'selected' => $this->selected,
-            // 'selected' => json_encode([$this->selected]),
-            'multipleStr' => $this->multiple ? "multiple" : "",
-            'table' => $tableName,
-            'readOnly' => $this->readOnly,
-            'classList' => ClassList::DROPDOWN,
-            // 'entity' => $this->type,
-            'allowClear' => $this->allowClear,
-        ];
-        $this->renderJS($tableName);
+        $this->renderJSForK();
+        $params = $this->getParamsForHasDataSource();
         // dump($params);
         return view('components.controls.has-data-source.dropdown2', $params);
     }

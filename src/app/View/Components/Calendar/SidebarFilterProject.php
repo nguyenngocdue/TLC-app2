@@ -2,14 +2,14 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Project;
-use App\Utils\ClassList;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
 class SidebarFilterProject extends Component
 {
-    // use TraitMorphTo;
+    use TraitListenerControl;
     /**
      * Create a new component instance.
      *
@@ -20,7 +20,7 @@ class SidebarFilterProject extends Component
         private $tableName,
         private $selected = "",
         private $multiple = false,
-        // private $type,
+        private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $readOnly = false,
         private $allowClear = false,
     ) {
@@ -33,17 +33,6 @@ class SidebarFilterProject extends Component
         return Project::select('id', 'name', 'description')->get();
     }
 
-    private function renderJS($tableName)
-    {
-        $k = [$tableName => $this->getDataSource(),];
-        $str = "\n";
-        $str .= "<script>";
-        $str .= " k = {...k, ..." . json_encode($k) . "};";
-        $str .= "</script>";
-        $str .= "\n";
-        echo $str;
-    }
-
     /**
      * Get the view / contents that represent the component.
      *
@@ -51,20 +40,8 @@ class SidebarFilterProject extends Component
      */
     public function render()
     {
-        $tableName = $this->tableName;
-        $params = [
-            'name' => $this->name,
-            'id' => $this->name,
-            'selected' => $this->selected,
-            // 'selected' => json_encode([$this->selected]),
-            'multipleStr' => $this->multiple ? "multiple" : "",
-            'table' => $tableName,
-            'readOnly' => $this->readOnly,
-            'classList' => ClassList::DROPDOWN,
-            // 'entity' => $this->type,
-            'allowClear' => $this->allowClear,
-        ];
-        $this->renderJS($tableName);
+        $this->renderJSForK();
+        $params = $this->getParamsForHasDataSource();
         // dump($params);
         return view('components.controls.has-data-source.dropdown2', $params);
     }
