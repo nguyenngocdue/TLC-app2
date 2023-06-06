@@ -63,6 +63,7 @@ class ParentId7 extends Component
     {
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
+        $params['span'] = 12;
         // dump($params);
         return view('components.controls.has-data-source.' . $this->control, $params);
     }
