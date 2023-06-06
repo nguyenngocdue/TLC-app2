@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1\HR;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\HrTsLineStoreResource;
 use App\Http\Resources\HrTsLineUpdateResource;
+use App\Http\Resources\TimesheetLineResource;
 use App\Models\Hr_timesheet_line;
 use App\Services\Hr_timesheet_line\Hr_timesheet_lineServiceInterface;
 use App\Utils\System\Api\ResponseObject;
@@ -37,19 +38,7 @@ abstract class TimesheetController extends Controller
         $data = $resource->toArray($request);
         try {
             $timesheetLine = $this->timesheetLineService->create($data);
-            // $this->eventCreatedNotificationAndMail(
-            //     $timesheetLine->getAttributes(),
-            //     $timesheetLine->id,
-            //     'new',
-            //     $this->type,
-            //     Hr_timesheet_line::class,
-            //     []
-            // );
-            return ResponseObject::responseSuccess(
-                $timesheetLine,
-                [],
-                'Created timesheet line successfully'
-            );
+            return new TimesheetLineResource($timesheetLine);
         } catch (\Throwable $th) {
             return ResponseObject::responseFail(
                 $th->getMessage(),
@@ -70,11 +59,7 @@ abstract class TimesheetController extends Controller
         $data = array_filter($data, fn ($item) => $item);
         try {
             $this->timesheetLineService->update($id, $data);
-            return ResponseObject::responseSuccess(
-                null,
-                [],
-                'Updated timesheet line ' . $id . ' successfully'
-            );
+            return new TimesheetLineResource($this->timesheetLineService->find($id));
         } catch (\Throwable $th) {
             return ResponseObject::responseFail(
                 $th->getMessage(),

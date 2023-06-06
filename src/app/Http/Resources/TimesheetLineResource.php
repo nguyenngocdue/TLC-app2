@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Resources;
+
+use App\Models\Pj_task;
+use App\Utils\Support\Calculator;
+use App\Utils\Support\DateTimeConcern;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class TimesheetLineResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     */
+    public function toArray($request)
+    {
+        return [
+            'title' => Pj_task::findOrFail($this->task_id)->name,
+            'start' => $this->start_time ? DateTimeConcern::formatTimestampFromDBtoJS($this->start_time) : null,
+            'end' => $this->start_time ? DateTimeConcern::calTimestampEndFromStartTimeAndDuration($this->start_time, $this->duration_in_min) : null,
+            'allDay' => ($this->duration_in_min >= 60 * 8) ? true : false,
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'project_id' => $this->project_id,
+            'sub_project_id' => $this->sub_project_id,
+            'prod_routing_id' => $this->prod_routing_id,
+            'lod_id' => $this->lod_id,
+            'discipline_id' => $this->discipline_id,
+            'task_id' => $this->task_id,
+            'sub_task_id' => $this->sub_task_id,
+            'work_mode_id' => $this->work_mode_id,
+            'remark' => $this->remark,
+            'owner_id' => $this->owner_id,
+            'status' => $this->status,
+        ];
+    }
+}

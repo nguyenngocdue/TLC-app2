@@ -4,11 +4,11 @@ namespace App\Http\Resources;
 
 use App\Models\Pj_task;
 use App\Utils\Support\Calculator;
+use App\Utils\Support\DateTimeConcern;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class HrTsLineCollection extends ResourceCollection
 {
-    use Calculator;
     /**
      * Transform the resource collection into an array.
      *
@@ -21,8 +21,9 @@ class HrTsLineCollection extends ResourceCollection
             'data' => $this->collection->map(function ($item) {
                 return [
                     'title' => Pj_task::findOrFail($item->task_id)->name,
-                    'start' => $this->formatTimestampFromDBtoJS($item->start_time),
-                    'end' => $this->calTimestampEndFromStartTimeAndDuration($item->start_time, $item->duration_in_min),
+                    'start' => $item->start_time ? DateTimeConcern::formatTimestampFromDBtoJS($item->start_time) : null,
+                    'end' => $item->start_time ? DateTimeConcern::calTimestampEndFromStartTimeAndDuration($item->start_time, $item->duration_in_min) : null,
+                    'allDay' => ($item->duration_in_min >= 480) ? true : false,
                     'id' => $item->id,
                     'user_id' => $item->user_id,
                     'project_id' => $item->project_id,
