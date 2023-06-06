@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Modals;
 
-use App\Utils\ClassList;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Utils\ColorList;
 use App\Utils\Constant;
 use Database\Seeders\FieldSeeder;
@@ -13,7 +13,7 @@ use Illuminate\Support\Arr;
 
 class ParentId7UserOt extends Component
 {
-    // use TraitMorphTo;
+    use TraitListenerControl;
     /**
      * Create a new component instance.
      *
@@ -21,19 +21,19 @@ class ParentId7UserOt extends Component
      */
     public function __construct(
         private $name,
+        private $tableName,
         private $selected = "",
         private $multiple = false,
-        // private $type,
         private $readOnly = false,
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
+        private $typeToLoadListener = 'any_thing_but_not_null',
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
-        // if (old($name)) $this->selected = 1 * old($name);
-        // dump($this->selected);
     }
 
-    private function getDataSource($attr_name)
+    //modal_ot_user2_parent_fake_id
+    private function getDataSource()
     {
         $fieldId = FieldSeeder::getIdFromFieldName('getOtMembers');
         // dump($fieldId);
@@ -44,7 +44,7 @@ class ParentId7UserOt extends Component
                     u.id AS id, 
                     u.name AS name, 
                     u.employeeid AS description, 
-                    ut.id AS $attr_name,
+                    ut.id AS 'ot_team_id',
                     vua.url_thumbnail AS avatar,
                     vmrmn.month_remaining_hours AS month_remaining_hours,
                     vyrmn.year_remaining_hours AS year_remaining_hours
@@ -101,30 +101,20 @@ class ParentId7UserOt extends Component
         return $result;
     }
 
-
-    private function renderJS($tableName, $objectTypeStr, $objectIdStr)
+    private function getListenersOfDropdown2()
     {
-        $attr_name = $tableName . '_parent_fake_id';
-        $k = [$tableName => $this->getDataSource($attr_name),];
-        $listenersOfDropdown2 = [
+        return [
             [
                 'listen_action' => 'reduce',
-                'column_name' => $objectIdStr,
-                'listen_to_attrs' => [$attr_name],
-                'listen_to_fields' => [$objectIdStr],
-                'listen_to_tables' => [$tableName],
-                'table_name' => $tableName,
+                'column_name' => $this->name,
+                'listen_to_attrs' => ['ot_team_id'],
+                'listen_to_fields' => [$this->name],
+                'listen_to_tables' => [$this->tableName],
+                'table_name' => $this->tableName,
                 // 'attrs_to_compare' => ['id'],
-                'triggers' => [$objectTypeStr],
+                'triggers' => ['ot_team_id'],
             ],
         ];
-        $str = "\n";
-        $str .= "<script>";
-        $str .= " k = {...k, ..." . json_encode($k) . "};";
-        $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";
-        $str .= "</script>";
-        $str .= "\n";
-        echo $str;
     }
 
     /**
@@ -134,26 +124,9 @@ class ParentId7UserOt extends Component
      */
     public function render()
     {
-        $tableName = "modal_" . $this->name;
-        $classList = ClassList::DROPDOWN;
-        if ($this->control == 'radio-or-checkbox2') {
-            $classList = ClassList::RADIO_CHECKBOX;
-        }
-        $params = [
-            'name' => $this->name,
-            'id' => $this->name,
-            'selected' => $this->selected,
-            // 'selected' => json_encode([is_numeric($this->selected) ? $this->selected * 1 : $this->selected]),
-            'multipleStr' => $this->multiple ? "multiple" : "",
-            'table' => $tableName,
-            'readOnly' => $this->readOnly,
-            'classList' => $classList,
-            // 'entity' => $this->type,
-            'multiple' => $this->multiple ? true : false,
-            'span' => 3,
-            'allowClear' => $this->allowClear,
-        ];
-        $this->renderJS($tableName, 'ot_team', $this->name);
+        $params = $this->getParamsForHasDataSource();
+        $params['span'] = 3;
+        $this->renderJSForK();
         // dump($params);
         return view('components.controls.has-data-source.' . $this->control, $params);
     }

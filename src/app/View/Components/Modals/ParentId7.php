@@ -61,7 +61,7 @@ class ParentId7 extends Component
      */
     public function render()
     {
-        $this->renderJSForK($this->tableName); //, 'modal_ot_team', $this->name);
+        $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
         // dump($params);
         return view('components.controls.has-data-source.' . $this->control, $params);
