@@ -6,7 +6,7 @@
         <div class="items-center justify-between p-2 border-b rounded-t dark:border-gray-600">
             <div class="flex">
                 <h3 class="text-lg justify-center font-semibold text-gray-900 dark:text-white" id="title_task_value">
-                    Task: 
+                    Task:
                 </h3>
                 <button type="button" onclick="closeModalEvent()" class="text-gray-900 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="large-modal">
                     <i class="fa-sharp fa-solid fa-xmark w-6 h-6 text-base"></i>
@@ -18,10 +18,14 @@
         <div class="px-6 overflow-y-auto w-96 h-96" modal-container>
             <div class="grid grid-cols-12">
                 <div class="col-span-12 mt-2">
-                    Sub task: <x-calendar.modal-filter-sub-task tableName="pj_sub_tasks" name="sub_task_id"></x-calendar.modal-filter-sub-task>
+                    {{-- Task: <x-calendar.modal-filter-task tableName="pj_tasks" name="task_id_1" typeToLoadListener="hr_timesheet_line" /> --}}
+                    <input name="task_id_1" id="task_id_1" onchange="onChangeDropdown2('task_id_1')" type="hidden" />
+                </div>
+                <div class="col-span-12 mt-2">
+                    Sub task: <x-calendar.modal-filter-sub-task tableName="pj_sub_tasks" name="sub_task_id" typeToLoadListener="hr_timesheet_line"/>
                 </div>
                 <div class="col-span-12">
-                    Work mode: <x-calendar.modal-filter-work-mode tableName="work_modes" name="work_mode_id"></x-calendar.modal-filter-work-mode>
+                    Work mode: <x-calendar.modal-filter-work-mode tableName="work_modes" name="work_mode_id"/>
                 </div>
                 <div class="col-span-12">
                     Remark: <x-controls.text2 name="remark" value="" placeholder="Remark reason"/>

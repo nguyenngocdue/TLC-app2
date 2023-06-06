@@ -10,6 +10,7 @@
     const checkbox = document.getElementById('drop-remove');
     const modalClickRight = $(`#modal-click-right`);
     const modalTitleTaskValue = $(`#title_task_value`);
+    const modalTask = $(`#task_id_1`);
     const modalSubTask = $(`#sub_task_id`);
     const modalWorkMode = $(`#work_mode_id`);
     const modalRemark = $(`#remark`);
@@ -76,11 +77,14 @@
                             handleUpdateModalEvent(info);
                             //extended value render modal
                             var extendedProps = info.event._def.extendedProps;
+                            var taskId = extendedProps.task_id;
                             var subTaskId = extendedProps.sub_task_id;
                             var workModeId =    extendedProps.work_mode_id;
                             var remarkValue = extendedProps.remark;
                             //render modal trigger
-                            modalTitleTaskValue.text(`Task : ${info.event.title}`);
+                            modalTitleTaskValue.text(`Task: ${info.event.title}`);
+                            modalTask.val(taskId)
+                            modalTask.trigger('change');
                             modalSubTask.val(subTaskId);
                             modalSubTask.trigger('change');
                             modalWorkMode.val(workModeId);

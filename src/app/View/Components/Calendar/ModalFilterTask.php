@@ -3,11 +3,11 @@
 namespace App\View\Components\Calendar;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
-use App\Models\Pj_sub_task;
+use App\Models\Pj_task;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class ModalFilterSubTask extends Component
+class ModalFilterTask extends Component
 {
     use TraitListenerControl;
     /**
@@ -30,9 +30,10 @@ class ModalFilterSubTask extends Component
 
     private function getDataSource()
     {
-        $dataSource = Pj_sub_task::select('id', 'name', 'description')->get();
+        $dataSource = Pj_task::select('id', 'name', 'description')->get();
         foreach ($dataSource as &$line) {
-            $line->{"getParentTasks()"} = $line->getParentTasks()->pluck('id');
+            $line->{"getDisciplines()"} = $line->getDisciplines()->pluck('id');
+            $line->{"getLods()"} = $line->getLods()->pluck('id');
         }
         return $dataSource;
     }
@@ -40,8 +41,7 @@ class ModalFilterSubTask extends Component
     private function getListenersOfDropdown2()
     {
         $a = $this->getListeners2($this->typeToLoadListener);
-        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $this->name));
-        foreach ($a[0]["triggers"] as &$x) $x .= "_1";
+        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] . "_1" == $this->name));
         $listenersOfDropdown2 = [$a[0]];
         return $listenersOfDropdown2;
     }
