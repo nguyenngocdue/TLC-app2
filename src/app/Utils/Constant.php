@@ -37,4 +37,7 @@ class Constant
     const NAME_LOCK_COLUMN = 'lock_version';
 
     const NAME_LOCK_COLUMN_DEFAULT = 'updated_at';
+
+
+    const TIME_DEFAULT_ALLDAY = 480;
 }

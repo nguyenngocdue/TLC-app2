@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Utils\Constant;
 use App\Utils\Support\Calculator;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
@@ -22,7 +23,7 @@ class HrTsLineStoreResource extends JsonResource
             'timesheetable_type' => $request->timesheetable_type,
             'timesheetable_id' => $request->timesheetable_id,
             'start_time' => $request->date_time ? DateTimeConcern::formatTimestampFromJStoDB($request->date_time) : null,
-            'duration_in_min' => $request->all_day ? 60 * 8 : (DateTimeConcern::isFormatJsDateTime($request->date_time) ? 60 : null),
+            'duration_in_min' => $request->all_day ? Constant::TIME_DEFAULT_ALLDAY : (DateTimeConcern::isFormatJsDateTime($request->date_time) ? 60 : null),
             'user_id' => CurrentUser::id() ?? null,
             'project_id' => $request->project_id,
             'sub_project_id' => $request->sub_project_id,

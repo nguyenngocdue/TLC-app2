@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Pj_task;
+use App\Utils\Constant;
 use App\Utils\Support\Calculator;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -23,7 +24,7 @@ class HrTsLineCollection extends ResourceCollection
                     'title' => Pj_task::findOrFail($item->task_id)->name,
                     'start' => $item->start_time ? DateTimeConcern::formatTimestampFromDBtoJS($item->start_time) : null,
                     'end' => $item->start_time ? DateTimeConcern::calTimestampEndFromStartTimeAndDuration($item->start_time, $item->duration_in_min) : null,
-                    'allDay' => ($item->duration_in_min >= 480) ? true : false,
+                    'allDay' => ($item->duration_in_min >= Constant::TIME_DEFAULT_ALLDAY) ? true : false,
                     'id' => $item->id,
                     'user_id' => $item->user_id,
                     'project_id' => $item->project_id,

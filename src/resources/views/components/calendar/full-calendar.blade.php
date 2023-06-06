@@ -22,7 +22,8 @@
     let events = [];
     $(document).click(function(event) {
         var target = $(event.target);
-        if (!target.is("#modal-click-right") && !target.closest("#modal-click-right").length) {
+        console.log(target);
+        if (!target.is("#modal-click-right")) {
             modalClickRight.addClass("hidden");
         }
     });
@@ -40,7 +41,6 @@
                     events = response.data
                     var Calendar = FullCalendar.Calendar;
                     var Draggable = FullCalendar.Interaction.Draggable;
-                    console.log(events);
                     new Draggable(containerEl, {
                     itemSelector: '.fc-event',
                     eventData: function(eventEl) {
@@ -67,7 +67,6 @@
                         droppable: true,
                         events: events,
                         eventClick: function(info){
-                            console.log(info);
                             //indentify location modal
                             var {clientX , clientY} = info.jsEvent;
                             var modalTop = clientY / 2;
