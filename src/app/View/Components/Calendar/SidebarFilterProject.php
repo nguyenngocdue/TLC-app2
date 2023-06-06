@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Project;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
@@ -10,6 +11,7 @@ use Illuminate\Support\Arr;
 class SidebarFilterProject extends Component
 {
     // use TraitMorphTo;
+    use TraitListenerControl;
     /**
      * Create a new component instance.
      *
@@ -33,17 +35,6 @@ class SidebarFilterProject extends Component
         return Project::select('id', 'name', 'description')->get();
     }
 
-    private function renderJS($tableName)
-    {
-        $k = [$tableName => $this->getDataSource(),];
-        $str = "\n";
-        $str .= "<script>";
-        $str .= " k = {...k, ..." . json_encode($k) . "};";
-        $str .= "</script>";
-        $str .= "\n";
-        echo $str;
-    }
-
     /**
      * Get the view / contents that represent the component.
      *
@@ -64,7 +55,7 @@ class SidebarFilterProject extends Component
             // 'entity' => $this->type,
             'allowClear' => $this->allowClear,
         ];
-        $this->renderJS($tableName);
+        $this->renderJSForK($tableName);
         // dump($params);
         return view('components.controls.has-data-source.dropdown2', $params);
     }

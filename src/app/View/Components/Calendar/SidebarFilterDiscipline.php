@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityListenDataSource;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\User_discipline;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
@@ -10,7 +10,7 @@ use Illuminate\Support\Arr;
 
 class SidebarFilterDiscipline extends Component
 {
-    use TraitEntityListenDataSource;
+    use TraitListenerControl;
     /**
      * Create a new component instance.
      *
@@ -34,17 +34,6 @@ class SidebarFilterDiscipline extends Component
         return $dataSource;
     }
 
-    private function renderJS($tableName)
-    {
-        $k = [$tableName => $this->getDataSource(),];
-        $str = "\n";
-        $str .= "<script>";
-        $str .= " k = {...k, ..." . json_encode($k) . "};";
-        $str .= "</script>";
-        $str .= "\n";
-        echo $str;
-    }
-
     /**
      * Get the view / contents that represent the component.
      *
@@ -66,7 +55,7 @@ class SidebarFilterDiscipline extends Component
             'multiple' => $this->multiple ? true : false,
             'allowClear' => $this->allowClear,
         ];
-        $this->renderJS($tableName);
+        $this->renderJSForK($tableName);
         // dump($params);
         return view('components.controls.has-data-source.' . $this->control, $params);
     }

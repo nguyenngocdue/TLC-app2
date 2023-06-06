@@ -2,16 +2,15 @@
 
 namespace App\View\Components\Calendar;
 
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityListenDataSource;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Pj_sub_task;
-use App\Models\Sub_project;
 use App\Utils\ClassList;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
 class ModalFilterSubTask extends Component
 {
-    use TraitEntityListenDataSource;
+    use TraitListenerControl;
     /**
      * Create a new component instance.
      *
@@ -25,6 +24,7 @@ class ModalFilterSubTask extends Component
         private $readOnly = false,
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
+        private $typeToLoadListener = null,
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
@@ -33,24 +33,6 @@ class ModalFilterSubTask extends Component
     {
         $dataSource = Pj_sub_task::select('id', 'name', 'description')->get();
         return $dataSource;
-    }
-
-    private function renderJS($tableName)
-    {
-        $k = [$tableName => $this->getDataSource(),];
-
-        $a = $this->getListeners2('hr_timesheet_line');
-        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $this->name));
-        $listenersOfDropdown2 = [$a[0]];
-        // dump($listenersOfDropdown2);
-
-        $str = "\n";
-        $str .= "<script>";
-        $str .= " k = {...k, ..." . json_encode($k) . "};";
-        $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";
-        $str .= "</script>";
-        $str .= "\n";
-        echo $str;
     }
 
     /**
@@ -74,7 +56,7 @@ class ModalFilterSubTask extends Component
             'multiple' => $this->multiple ? true : false,
             'allowClear' => $this->allowClear,
         ];
-        $this->renderJS($tableName);
+        $this->renderJSForK($tableName);
         // dump($params);
         return view('components.controls.has-data-source.' . $this->control, $params);
     }
