@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Utils\ClassList;
+
 trait TraitListenerControl
 {
     use TraitEntityListenDataSource;
 
-    private function renderJSForK($tableName)
+    private function renderJSForK()
     {
+        $tableName = $this->tableName;
         $k = [$tableName => $this->getDataSource(),];
         $str = "\n";
         $str .= "<script>";
@@ -33,5 +36,20 @@ trait TraitListenerControl
         $str .= "</script>";
         $str .= "\n";
         echo $str;
+    }
+
+    private function getParamsForHasDataSource()
+    {
+        return  [
+            'name' => $this->name,
+            'id' => $this->name,
+            'selected' => $this->selected,
+            'multipleStr' => $this->multiple ? "multiple" : "",
+            'table' => $this->tableName,
+            'readOnly' => $this->readOnly,
+            'classList' => ClassList::DROPDOWN,
+            'multiple' => $this->multiple ? true : false,
+            'allowClear' => $this->allowClear,
+        ];
     }
 }
