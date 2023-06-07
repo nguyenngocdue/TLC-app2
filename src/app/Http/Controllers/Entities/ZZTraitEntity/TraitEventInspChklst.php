@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 trait TraitEventInspChklst
 {
-    private function eventInspChklst(Request $request, $id)
+    private function fireEventInspChklst(Request $request, $id)
     {
         $signOffIds = $request->input('getSignOff()');
         if ($this->data === Qaqc_insp_chklst_sht::class && $signOffIds) {

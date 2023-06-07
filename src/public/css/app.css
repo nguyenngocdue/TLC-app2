@@ -1636,9 +1636,6 @@ video {
 .border-2 {
   border-width: 2px;
 }
-.border-\[1px\] {
-  border-width: 1px;
-}
 .border-\[1\.5px\] {
   border-width: 1.5px;
 }

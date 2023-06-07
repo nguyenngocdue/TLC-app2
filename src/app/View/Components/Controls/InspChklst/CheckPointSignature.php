@@ -28,23 +28,24 @@ class CheckPointSignature extends Component
      */
     public function render()
     {
-        $inspector = User::findFromCache($this->line->inspector_id);
+        $uid = $this->line->inspector_id;
+        $user = User::findFromCache($uid);
         // $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
-        if ($inspector) {
-            $inspector = [
-                'id' => $inspector->id,
-                'full_name' => $inspector->full_name,
-                'position_rendered' => $inspector->position_rendered,
+        if ($user) {
+            $user = [
+                'id' => $user->id,
+                'full_name' => $user->full_name,
+                'position_rendered' => $user->position_rendered,
                 'timestamp' => DateTimeConcern::convertForLoading("picker_datetime", $this->line->created_at),
-                'avatar' => $inspector->getAvatarThumbnailUrl(),
+                'avatar' => $user->getAvatarThumbnailUrl(),
             ];
         }
-        // dump($inspector);
+        // dump($user);
         return view('components.controls.insp-chklst.check-point-signature', [
             'table01Name' => $this->table01Name,
             'rowIndex' => $this->rowIndex,
             'line' => $this->line,
-            'user' => $inspector,
+            'user' => $user,
         ]);
     }
 }

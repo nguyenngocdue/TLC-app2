@@ -7,41 +7,17 @@
         "rejected": "",
         "approved": ""
     },
-    "_workplace_id": {
-        "name": "_workplace_id",
-        "column_name": "workplace_id",
+    "_week": {
+        "name": "_week",
+        "column_name": "week",
         "new": "",
         "pending_approval": "",
         "rejected": "",
         "approved": ""
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
-        "new": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
-    },
-    "_getHrOtrLines": {
-        "name": "_getHrOtrLines",
-        "column_name": "getHrOtrLines",
-        "new": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
-    },
-    "_getHrOtrLines1": {
-        "name": "_getHrOtrLines1",
-        "column_name": "getHrOtrLines1",
-        "new": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_team_id": {
+        "name": "_team_id",
+        "column_name": "team_id",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -55,19 +31,11 @@
         "rejected": "",
         "approved": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "new": "",
         "pending_approval": "",
-        "rejected": "",
-        "approved": ""
-    },
-    "_comment_rejected_reason": {
-        "name": "_comment_rejected_reason",
-        "column_name": "comment_rejected_reason",
-        "new": "",
-        "pending_approval": "rejected",
         "rejected": "",
         "approved": ""
     },
@@ -108,6 +76,22 @@
         "column_name": "deleted_at",
         "new": "",
         "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_getHrTsLines": {
+        "name": "_getHrTsLines",
+        "column_name": "getHrTsLines",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
+        "new": "",
+        "pending_approval": "rejected",
         "rejected": "",
         "approved": ""
     }

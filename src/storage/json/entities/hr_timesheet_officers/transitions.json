@@ -1,0 +1,30 @@
+{
+    "new": {
+        "name": "new",
+        "new": "",
+        "pending_approval": "true",
+        "rejected": "",
+        "approved": ""
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "true",
+        "approved": "true"
+    },
+    "rejected": {
+        "name": "rejected",
+        "new": "",
+        "pending_approval": "true",
+        "rejected": "",
+        "approved": ""
+    },
+    "approved": {
+        "name": "approved",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    }
+}

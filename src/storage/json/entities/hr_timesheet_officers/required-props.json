@@ -2,10 +2,10 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
     },
     "_week": {
         "name": "_week",
@@ -50,49 +50,49 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
     },
     "_getHrTsLines": {
         "name": "_getHrTsLines",
         "column_name": "getHrTsLines",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
     }
 }
