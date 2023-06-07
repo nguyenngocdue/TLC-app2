@@ -1,6 +1,6 @@
 <x-renderer.card class="border my-1 mt-2 bg-white p-0">
     <div class="bg-gray-300 rounded-t p-2">
-        <p title="{{$line->name}} - #{{$line->id}}">{{$line->description}}</p>
+        <p title="{{$line->description}} - #{{$line->id}}">{{$line->name}}</p>
     </div>
     <input type="{{$debug?"text":"hidden"}}" name="{{$table01Name}}[id][{{$rowIndex}}]" value="{{$line->id}}" >
 

@@ -4,10 +4,11 @@
         "column_name": "id",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_name": {
@@ -15,10 +16,11 @@
         "column_name": "name",
         "label": "",
         "validation": "required",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_description": {
@@ -26,10 +28,11 @@
         "column_name": "description",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_def_assignee": {
@@ -37,10 +40,11 @@
         "column_name": "def_assignee",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_getMonitors1()": {
@@ -48,10 +52,11 @@
         "column_name": "getMonitors1()",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_slug": {
@@ -59,32 +64,11 @@
         "column_name": "slug",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "All_SlugifyByName",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_getUsers": {
@@ -92,10 +76,71 @@
         "column_name": "getUsers",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
+        "control_extra": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
         "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
         "control_extra": ""
     }
 }

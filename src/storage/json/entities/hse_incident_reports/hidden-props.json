@@ -720,7 +720,7 @@
         "new": "true",
         "active": "true",
         "pending_ack": "",
-        "pending_review": "",
+        "pending_review": "true",
         "review_rejected": "",
         "pending_verification": "",
         "closed": ""
@@ -766,7 +766,7 @@
         "pending_ack": "true",
         "pending_review": "",
         "review_rejected": "true",
-        "pending_verification": "",
+        "pending_verification": "true",
         "closed": ""
     },
     "_status": {

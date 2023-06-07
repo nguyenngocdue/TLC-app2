@@ -4,9 +4,10 @@
     @if($createANewForm)
         <x-renderer.button type='success' href='{!!$href!!}' >Create a new {{strtoupper( Str::singular($tableName))}}</x-renderer.button>
     @endif
+@endif
 
+{{-- @if(!$readOnly)
     @if(!empty($btnCmdSettings) && $btnCmdSettings['CallCommandButtonList'])
-        {{-- @dump($btnCmdSettings) --}}
         <script>
             function create(params){
                 // button.disabled=true
@@ -46,4 +47,4 @@
             <x-renderer.button onClick="create({{json_encode($button)}});this.disabled=true;" type='success' >{{$button['title']}}</x-renderer.button>
         @endforeach
     @endif
-@endif
+@endif --}}

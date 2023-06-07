@@ -4,7 +4,7 @@
         "new": "",
         "in_progress": "true",
         "not_applicable": "true",
-        "passed": "true",
+        "passed": "",
         "inspected": "",
         "pending_approval": "",
         "rejected": "",
@@ -12,6 +12,17 @@
     },
     "in_progress": {
         "name": "in_progress",
+        "new": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "passed": "true",
+        "inspected": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "not_applicable": {
+        "name": "not_applicable",
         "new": "true",
         "in_progress": "",
         "not_applicable": "",
@@ -21,20 +32,9 @@
         "rejected": "",
         "approved": ""
     },
-    "not_applicable": {
-        "name": "not_applicable",
-        "new": "true",
-        "in_progress": "true",
-        "not_applicable": "",
-        "passed": "",
-        "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
-    },
     "passed": {
         "name": "passed",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "",
         "passed": "",

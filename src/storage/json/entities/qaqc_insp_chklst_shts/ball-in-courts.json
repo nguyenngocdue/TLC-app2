@@ -11,7 +11,7 @@
     },
     "not_applicable": {
         "name": "not_applicable",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "creator",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "passed": {
@@ -36,7 +36,7 @@
     },
     "approved": {
         "name": "approved",
-        "ball-in-court-assignee": "assignee_3",
+        "ball-in-court-assignee": "assignee_2",
         "ball-in-court-monitors": "getMonitors1()"
     }
 }

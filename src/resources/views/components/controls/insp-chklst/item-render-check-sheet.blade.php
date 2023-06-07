@@ -1,7 +1,7 @@
 <div class="px-4 flex justify-center ">
     <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
         <x-renderer.heading level=5>
-            <span title="Checklist Sheet #{{$item->id}}">{{$item->description}}</span>
+            <span title="Checklist Sheet #{{$item->id}} ({{$item->description}})">{{$item->name}}</span>
         </x-renderer.heading>
         @if($project)
             <span title="Project #{{$project->id}}">{{$project->name}}</span>
