@@ -15,19 +15,18 @@ class ParamProdRoutingId extends ParentIdParamReports2
     protected function getDataSource($attr_name)
     {
 
-        $prodRoutings = Prod_routing::whereNull('deleted_by')->pluck('name', 'id')->toArray();
+        $prodRoutings = Prod_routing::whereNull('deleted_by')->get();
         $result = [];
-        foreach ($prodRoutings as $key => $value){
-            $prdRoutings = Prod_routing::find($key)->getSubProjects()->pluck('id')->toArray();
-            $chklstTmpls = Prod_routing::find($key)->getChklstTmpls()->pluck('id')->toArray();
+        foreach ($prodRoutings as $routing){
+            $subProjectIds = $routing->getSubProjects()->pluck('id')->toArray();
+            $chklstTmplIds = $routing->getChklstTmpls()->pluck('id')->toArray();
             $array = (object)[];
-            $array->id = $key;
-            $array->name = $value;
-            $array->{$this->referData} = $prdRoutings;
-            $array->{$this->referData1} = $chklstTmpls;
+            $array->id = $routing->id;
+            $array->name = $routing->name;
+            $array->{$this->referData} = $subProjectIds;
+            $array->{$this->referData1} = $chklstTmplIds;
             $result[] = $array;
         };
-        // dump($result);
         return $result;
     }
 }

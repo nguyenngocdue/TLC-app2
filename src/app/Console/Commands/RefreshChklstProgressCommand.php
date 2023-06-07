@@ -36,10 +36,7 @@ class RefreshChklstProgressCommand extends Command
                 $this->error('subProjectId is missing.');
                 return Command::FAILURE;
             }
-            $event = event(new UpdateChklstProgressEvent($subProjectId));
-            // dump($event);
-            $result = $event[0][0] . "/" . $event[0][1];
-            if ($event) $this->info("The progress of Inspection Checklists have been successfully updated: $result");
+            event(new UpdateChklstProgressEvent($subProjectId));
             return Command::SUCCESS;
         } catch (\Exception $e) {
             $this->error($e->getMessage());
