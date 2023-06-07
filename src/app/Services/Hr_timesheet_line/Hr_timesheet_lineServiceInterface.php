@@ -6,4 +6,5 @@ use App\Services\BaseServiceInterface;
 
 interface Hr_timesheet_lineServiceInterface extends BaseServiceInterface
 {
+    public function duplicate($id);
 }

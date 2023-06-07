@@ -19,8 +19,10 @@ class HrTsLineUpdateResource extends JsonResource
         return [
             'timesheetable_type' => $request->timesheetable_type,
             'timesheetable_id' => $request->timesheetable_id,
-            'start_time' => $request->start_time ? DateTimeConcern::formatTimestampFromJStoDB($request->start_time) : null,
-            'duration_in_min' => DateTimeConcern::calDurationFromStartTimeAndEndTime($request->start_time, $request->end_time),
+            'start_time' => $request->time_type ? DateTimeConcern::setTime($request->time_type, $request->start_time)
+                : ($request->start_time ? DateTimeConcern::formatTimestampFromJStoDB($request->start_time) : null),
+            'duration_in_min' => $request->time_type ? DateTimeConcern::setDuration($request->time_type) :
+                DateTimeConcern::calDurationFromStartTimeAndEndTime($request->start_time, $request->end_time),
             'user_id' => $request->user_id,
             'project_id' => $request->project_id,
             'sub_project_id' => $request->sub_project_id,

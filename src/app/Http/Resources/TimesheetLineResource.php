@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Pj_task;
 use App\Utils\Constant;
-use App\Utils\Support\Calculator;
+use App\Utils\Support\Calendar;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,9 +20,10 @@ class TimesheetLineResource extends JsonResource
     {
         return [
             'title' => Pj_task::findOrFail($this->task_id)->name,
+            'title' => Calendar::renderTitle($this),
             'start' => $this->start_time ? DateTimeConcern::formatTimestampFromDBtoJS($this->start_time) : null,
             'end' => $this->start_time ? DateTimeConcern::calTimestampEndFromStartTimeAndDuration($this->start_time, $this->duration_in_min) : null,
-            'allDay' => ($this->duration_in_min >= Constant::TIME_DEFAULT_ALLDAY) ? true : false,
+            // 'allDay' => ($this->duration_in_min >= Constant::TIME_DEFAULT_ALLDAY) ? true : false,
             'id' => $this->id,
             'user_id' => $this->user_id,
             'project_id' => $this->project_id,
@@ -33,6 +34,7 @@ class TimesheetLineResource extends JsonResource
             'task_id' => $this->task_id,
             'sub_task_id' => $this->sub_task_id,
             'work_mode_id' => $this->work_mode_id,
+            'color' => Calendar::setColorByWorkModeId($this->work_mode_id),
             'remark' => $this->remark,
             'owner_id' => $this->owner_id,
             'status' => $this->status,

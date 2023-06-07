@@ -4,6 +4,7 @@ namespace App\Utils\Support;
 
 use App\Utils\Constant;
 use Carbon\Carbon;
+use DateTime;
 
 class DateTimeConcern
 {
@@ -235,6 +236,30 @@ class DateTimeConcern
         return $utcDate->toDateTimeString();
     }
     /**
+     * Convert timestamps from javascript format (Full Calendar) to database format
+     *
+     * @param mixed $timestamp
+     * @return string
+     */
+    public static function formatTimestampStartForMorning($timestamp)
+    {
+        $dateTime = new DateTime($timestamp);
+        $dateTime->setTime(8, 0, 0);
+        return self::formatTimestampFromJStoDB($dateTime->format("Y-m-d\TH:i:sP"));
+    }
+    /**
+     * Convert timestamps from javascript format (Full Calendar) to database format
+     *
+     * @param mixed $timestamp
+     * @return string
+     */
+    public static function formatTimestampStartForAfternoon($timestamp)
+    {
+        $dateTime = new DateTime($timestamp);
+        $dateTime->setTime(13, 0, 0);
+        return self::formatTimestampFromJStoDB($dateTime->format("Y-m-d\TH:i:sP"));
+    }
+    /**
      * Calculate duration based on start time and end time  
      *
      * @param mixed $startTime
@@ -270,5 +295,28 @@ class DateTimeConcern
     public static function isFormatJsDateTime($timestamp)
     {
         return date_create_from_format("Y-m-d\TH:i:sP", $timestamp);
+    }
+
+    public static function setTime($timeType, $startTime)
+    {
+        switch ($timeType) {
+            case 'morning':
+                return self::formatTimestampStartForMorning($startTime);
+            case 'afternoon':
+                return self::formatTimestampStartForAfternoon($startTime);
+            default:
+                return self::formatTimestampFromJStoDB($startTime);
+        }
+    }
+    public static function setDuration($timeType)
+    {
+        switch ($timeType) {
+            case 'morning':
+                return Constant::TIME_DEFAULT_MORNING;
+            case 'afternoon':
+                return Constant::TIME_DEFAULT_AFTERNOON;
+            default:
+                return 60;
+        }
     }
 }
